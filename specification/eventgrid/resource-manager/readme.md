@@ -37,24 +37,6 @@ These settings apply only when `--tag=package-2025-02` is specified on the comma
 input-file:
 - Microsoft.EventGrid/stable/2025-02-15/EventGrid.json
 
-
-suppressions:
-  - code: LRO_RESPONSE_HEADER
-    reason: This is false positive as all the delete operations that were flagged are already part of previous GA version. When trying to add the header, it was flagged as breaking change. 
-    from: EventGrid.json
-
-  - code:  PatchBodyParametersSchema
-    reason: This is false positive as all the flagged operations are already part of previous GA version and cannot be changed.
-    from: EventGrid.json
-
-  - code:  GuidUsage
-    reason: This is false positive as all the flagged properties that are already part of previous GA version and cannot be changed.
-    from: EventGrid.json
-
-  - code:  PathContainsResourceType
-    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
-    from: EventGrid.json
-
 ```
 
 ### Tag: package-2024-12-preview
