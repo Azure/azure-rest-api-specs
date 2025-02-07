@@ -37,6 +37,8 @@ interface SessionHostManagementUpdateStatuses {
   /**
    * Get a SessionHostManagementUpdateStatus.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
+  @OpenAPI.operationId("SessionHostManagementUpdateStatus_Get")
   get is ArmResourceRead<SessionHostManagementUpdateStatus>;
 }
 

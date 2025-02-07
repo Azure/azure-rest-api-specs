@@ -56,6 +56,11 @@ using Microsoft.DesktopVirtualization;
 @@clientName(SessionHostManagements.createOrUpdate::parameters.resource,
   "sessionHostManagement"
 );
+
+@@clientName(SessionHostConfigurations.createOrUpdate::parameters.resource,
+  "sessionHostConfiguration"
+);
+
 @@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
   "^[-\\w\\._,\\(\\)]+$"
 );

@@ -2922,6 +2922,7 @@ model SessionHostManagementPatch {
 /**
  * SessionHostConfiguration properties that can be patched.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
 model SessionHostConfigurationPatch {
   /**
    * Detailed properties for SessionHostConfiguration
