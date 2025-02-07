@@ -135,15 +135,13 @@ extends:
               versionSpec: $(PythonVersion)
 
           - script: |
-              cd $(SpecRepoDirectory)/eng/tools/gen-sdk
-              npm ci
-            displayName: 'Run npm ci'
-
-          - script: |
               npm install -g @azure-tools/spec-gen-sdk@$(SpecGenSdkVersion)
             displayName: 'Install spec-gen-sdk'
 
           - script: |
+              cd $(SpecRepoDirectory)/eng/tools/gen-sdk
+              npm ci
+              npm run build
               node $(SpecRepoDirectory)/eng/tools/gen-sdk/cmd/gen-sdk.js \
                 --scp $(SpecRepoDirectory) \
                 --sdp $(SdkRepoDirectory) \
@@ -151,10 +149,9 @@ extends:
                 --lang $(SdkRepoName) \
                 --commit $(SpecRepoCommit) \
                 --tr $true \
-                --rm $(RunMode)
+                --rm ${{ parameters.RunMode }}
             displayName: 'Run spec-gen-sdk'
 
           - pwsh: |
               Write-Host "##vso[task.uploadsummary]$(System.DefaultWorkingDirectory)/out/logs/generation-summary.md"
             displayName: 'Upload generation summary'
-
