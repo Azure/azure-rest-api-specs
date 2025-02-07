@@ -50,10 +50,9 @@ interface ControlSessionHostUpdate {
    * Initiates a hostpool update or schedule an update for the future.
    */
   @action("controlSessionHostUpdate")
-  post is ArmResourceActionAsync<
+  post is ArmResourceActionNoResponseContentAsync<
     SessionHostManagement,
-    HostPoolUpdateControlParameter,
-    ArmAcceptedLroResponse<"Successfully controlled hostpool update.">
+    HostPoolUpdateControlParameter
   >;
 }
 
