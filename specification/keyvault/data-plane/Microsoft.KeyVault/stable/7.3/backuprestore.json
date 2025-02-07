@@ -95,6 +95,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a full backup": {
+            "$ref": "./examples/FullBackup-example.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -129,6 +134,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of a full backup operation": {
+            "$ref": "./examples/FullBackup-pending-example.json"
           }
         }
       }
@@ -183,6 +193,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Restores all key versions of a given key": {
+            "$ref": "./examples/SelectiveRestore-example.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -232,6 +247,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Restore all key materials from a previously stored Azure Blob Storage backup": {
+            "$ref": "./examples/FullRestore-example.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -267,6 +287,11 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get the status of restore operation": {
+            "$ref": "./examples/Restore-pending-example.json"
+          }
         }
       }
     }
@@ -300,6 +325,11 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of a selective restore operation": {
+            "$ref": "./examples/SelectiveRestore-pending-example.json"
           }
         }
       }
