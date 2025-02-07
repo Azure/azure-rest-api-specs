@@ -5,6 +5,8 @@ import { getLabelActionImpl } from "../src/arm-auto-signoff-preview.js";
 import * as changedFiles from "../src/changed-files.js";
 import * as git from "../src/git.js";
 
+// TODO: Test each step in the check in the order of implementation, to simplify tests and also ensure we don't call extra APIs early
+
 vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
   "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
 ]);
@@ -18,7 +20,6 @@ describe("getLabelActionImpl", () => {
     await expect(getLabelActionImpl({})).rejects.toThrow();
   });
 
-  // TODO: Add parameters for
   it.each([
     {
       labels: [],
