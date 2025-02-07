@@ -890,6 +890,14 @@
         "encryption": {
           "$ref": "#/definitions/EncryptionProperties",
           "description": "All encryption configuration for a resource."
+        },
+        "enableSharedKeyAccess": {
+          "type": "boolean",
+          "description": "Indicates whether shared key access is enabled for this server."
+        },
+        "enablePrivateKeyAccess": {
+          "type": "boolean",
+          "description": "Indicates whether private key access is enabled for this server."
         }
       },
       "description": "The properties that can be provided when updating FluidRelayServer resource"
@@ -906,6 +914,14 @@
           "$ref": "#/definitions/FluidRelayEndpoints",
           "description": "The Fluid Relay Service endpoints for this server.",
           "readOnly": true
+        },
+        "enableSharedKeyAccess": {
+          "type": "boolean",
+          "description": "Indicates whether shared key access is enabled for this server."
+        },
+        "enablePrivateKeyAccess": {
+          "type": "boolean",
+          "description": "Indicates whether private key access is enabled for this server."
         },
         "provisioningState": {
           "enum": [
