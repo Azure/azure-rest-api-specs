@@ -49,7 +49,7 @@ interface AdministrationOperations {
   service: Microsoft.LoadTestService,
 })
 interface TestRunOperations {
-  @clientName("BeginTestRun", "python")
+  @clientName("_begin_test_run", "python")
   createOrUpdateTestRun is LoadTestRun.createOrUpdateTestRun;
   createOrUpdateAppComponents is LoadTestRun.createOrUpdateAppComponents;
   createOrUpdateServerMetricsConfig is LoadTestRun.createOrUpdateServerMetricsConfig;
@@ -70,7 +70,7 @@ interface TestRunOperations {
   @clientName("stopTestRun", "javascript,python,java,csharp,go")
   stop is LoadTestRun.stop;
 
-  @clientName("BeginTestProfileRun", "python")
+  @clientName("_begin_test_profile_run", "python")
   createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
   deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
   getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
