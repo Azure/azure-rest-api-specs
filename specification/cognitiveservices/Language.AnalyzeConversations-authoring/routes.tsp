@@ -45,7 +45,7 @@ op  assignDeploymentResources is Foundations.LongRunningOperation<
        * The new project resources info.
        */
       @body
-      body: AnalyzeConversationAuthoringAssignDeploymentResourcesOptions;
+      details: AnalyzeConversationAuthoringAssignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -75,7 +75,7 @@ op  unassignDeploymentResources is Foundations.LongRunningOperation<
        * The info for the deployment resources to be deleted.
        */
       @body
-      body: AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions;
+      details: AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -163,7 +163,7 @@ op  swapDeployments is Foundations.LongRunningOperation<
        * The job object to swap two deployments.
        */
       @body
-      body: AnalyzeConversationAuthoringSwapDeploymentsOptions;
+      details: AnalyzeConversationAuthoringSwapDeploymentsOptions;
     },
     AcceptedResponse,
     {},
@@ -202,7 +202,7 @@ op  deployProject is Foundations.LongRunningOperation<
        * The new deployment info.
        */
       @body
-      body: AnalyzeConversationAuthoringCreateDeploymentOptions;
+      details: AnalyzeConversationAuthoringCreateDeploymentOptions;
     },
     AcceptedResponse,
     {},
@@ -265,7 +265,7 @@ op  deleteDeployment is Foundations.LongRunningOperation<
        * The options for deleting the deployment.
        */
       @body
-      body: AnalyzeConversationAuthoringDeleteDeploymentOptions;
+      details: AnalyzeConversationAuthoringDeleteDeploymentOptions;
     },
     AcceptedResponse,
     {},
@@ -319,7 +319,7 @@ op  createProject is Foundations.ResourceOperation<
       contentType: "application/merge-patch+json";
 
       /** The request body */
-      @bodyRoot body: AnalyzeConversationAuthoringCreateProjectOptions;
+      @bodyRoot details: AnalyzeConversationAuthoringCreateProjectOptions;
     },
     Foundations.ResourceCreatedOrOkResponse<AnalyzeConversationAuthoringProjectMetadata>,
     {},
@@ -447,7 +447,7 @@ op  `import` is Foundations.LongRunningOperation<
        * The project data to import.
        */
       @body
-      body: AnalyzeConversationAuthoringExportedProject;
+      exportedProject: AnalyzeConversationAuthoringExportedProject;
     },
     AcceptedResponse,
     {},
@@ -500,7 +500,7 @@ op  copyProject is Foundations.LongRunningOperation<
        * The copy project info.
        */
       @body
-      body: AnalyzeConversationAuthoringCopiedProjectOptions;
+      details: AnalyzeConversationAuthoringCopiedProjectOptions;
     },
     AcceptedResponse,
     {},
@@ -537,7 +537,7 @@ op  train is Foundations.LongRunningOperation<
        * The training input parameters.
        */
       @body
-      body: AnalyzeConversationAuthoringTrainingJobOptions;
+      details: AnalyzeConversationAuthoringTrainingJobOptions;
     },
     AcceptedResponse,
     {},
@@ -642,7 +642,7 @@ op  evaluateModel is Foundations.LongRunningOperation<
        * The training input parameters.
        */
       @body
-      body: AnalyzeConversationAuthoringEvaluationOptions;
+      details: AnalyzeConversationAuthoringEvaluationOptions;
     },
     AcceptedResponse,
     {},
@@ -807,7 +807,7 @@ op  createOrUpdateExportedModel is Foundations.LongRunningOperation<
        * The exported model info.
        */
       @body
-      body: ExportedModelOptions;
+      details: ExportedModelOptions;
     },
     AcceptedResponse,
     {},
