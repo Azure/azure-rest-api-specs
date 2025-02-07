@@ -1365,7 +1365,9 @@
         }
       },
       "required": [
-        "segmentCount"
+        "segmentCount",
+        "message",
+        "receivedTimestamp"
       ]
     },
     "AcsRecordingFileStatusUpdatedEventData": {
@@ -1958,7 +1960,12 @@
           "description": "The identity of SMS message receiver",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "from",
+        "to"
+      ]
     },
     "AcsSmsDeliveryAttemptProperties": {
       "description": "Schema for details of a delivery attempt",

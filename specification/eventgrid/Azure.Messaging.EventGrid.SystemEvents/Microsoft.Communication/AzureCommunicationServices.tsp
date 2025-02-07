@@ -216,7 +216,7 @@ model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   /** The SMS content */
-  message?: string;
+  message: string;
 
   /** The time at which the SMS was received */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -1009,13 +1009,13 @@ model AcsChatThreadParticipantProperties {
 /** Schema of common properties of all SMS events */
 model AcsSmsEventBaseProperties {
   /** The identity of the SMS message */
-  messageId?: string;
+  messageId: string;
 
   /** The identity of SMS message sender */
-  from?: string;
+  from: string;
 
   /** The identity of SMS message receiver */
-  to?: string;
+  to: string;
 }
 
 /** Schema for details of a delivery attempt */
