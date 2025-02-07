@@ -31,6 +31,7 @@ model SessionHostConfiguration
   ...ResourceSkuProperty;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Service doesn't allow delete"
 @armResourceOperations
 interface SessionHostConfigurations {
   /**
@@ -47,6 +48,11 @@ interface SessionHostConfigurations {
     SessionHostConfiguration,
     SessionHostConfigurationPatch
   >;
+
+  /**
+   * Create or update a SessionHostConfiguration.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SessionHostConfiguration>;
 
   /**
    * List SessionHostConfigurations.

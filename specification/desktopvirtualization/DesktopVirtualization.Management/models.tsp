@@ -1769,7 +1769,7 @@ model ActiveSessionHostConfigurationProperties {
   /**
    * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
    */
-  customConfigurationScriptUrl: string;
+  customConfigurationScriptUrl?: url;
 
   /**
    * Image configurations of the HostPool.

@@ -2961,6 +2961,63 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default": {
+      "put": {
+        "operationId": "SessionHostConfigurations_CreateOrUpdate",
+        "tags": [
+          "SessionHostConfigurations"
+        ],
+        "description": "Create or update a SessionHostConfiguration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SessionHostConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'SessionHostConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SessionHostConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "patch": {
         "operationId": "SessionHostConfigurations_Update",
         "tags": [
@@ -5881,6 +5938,7 @@
         },
         "customConfigurationScriptUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning."
         },
         "imageInfo": {
@@ -5914,7 +5972,6 @@
         "networkInfo",
         "vmSizeId",
         "diskInfo",
-        "customConfigurationScriptUrl",
         "imageInfo",
         "domainInfo",
         "securityInfo",
