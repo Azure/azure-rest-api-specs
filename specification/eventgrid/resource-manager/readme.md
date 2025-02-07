@@ -37,7 +37,6 @@ These settings apply only when `--tag=package-2025-02` is specified on the comma
 input-file:
 - Microsoft.EventGrid/stable/2025-02-15/EventGrid.json
 
-
 suppressions:
   - code:  PatchBodyParametersSchema
     reason: This is false positive as all the flagged operations are already part of previous GA version and cannot be changed.
@@ -83,7 +82,6 @@ suppressions:
     reason: This is false positive as all the flagged properties that are already part of previous GA version and cannot be changed.
     from: EventGrid.json
     where: $.definitions["VerifiedPartnerProperties.properties.partnerRegistrationImmutableId"].format
-
 ```
 
 ### Tag: package-2024-12-preview
