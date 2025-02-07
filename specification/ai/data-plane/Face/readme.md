@@ -4,11 +4,11 @@
 
 Configuration for generating Face SDK.
 
-The current release is `v1.2-preview.1`.
+The current release is `v1.2`.
 
 ``` yaml
 
-tag: v1.2-preview.1
+tag: v1.2
 add-credentials: true
 openapi-type: data-plane
 ```
