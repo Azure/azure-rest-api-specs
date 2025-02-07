@@ -49,9 +49,14 @@ jobs:
             .github
 
       - name: Update Labels
-        uses: ./.github/actions/update-labels
+        uses: actions/github-script@v7
+        env:
+          OWNER: ${{ inputs.owner }}
+          REPO: ${{ inputs.repo }}
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+          RUN_ID: ${{ inputs.run_id }}
         with:
-          owner: ${{ inputs.owner }}
-          repo: ${{ inputs.repo }}
-          issue_number: ${{ inputs.issue_number }}
-          run_id: ${{ inputs.run_id }}
+          script: |
+            const { default: updateLabels } =
+              await import('${{ github.workspace }}/.github/workflows/src/update-labels.js');
+            await updateLabels({ github, context, core });
