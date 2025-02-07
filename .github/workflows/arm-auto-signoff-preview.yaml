@@ -54,6 +54,6 @@ jobs:
           HEAD_SHA: ${{ inputs.head_sha }}
         with:
           script: |
-            const { default: armAutoSignoffPreview } =
+            const { default: getLabelAction } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff-preview.js');
-            await armAutoSignoffPreview({ github, context, core });
+            return await getLabelAction({ github, context, core });
