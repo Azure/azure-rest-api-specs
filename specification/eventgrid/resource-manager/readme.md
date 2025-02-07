@@ -39,19 +39,44 @@ input-file:
 
 suppressions:
   - code:  PatchBodyParametersSchema
-    reason: This is false positive as all the flagged operations are already part of previous GA version and cannot be changed.
+    reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.definitions["DomainUpdateParameters"].format
+    where: $.definitions["DomainUpdateParameterProperties"].properties.publicNetworkAccess
 
   - code:  PatchBodyParametersSchema
-    reason: This is false positive as all the flagged operations are already part of previous GA version and cannot be changed.
+    reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.definitions["SubscriptionUpdateParameters"].format
+    where: $.definitions["TopicUpdateParameterProperties"].properties.publicNetworkAccess
 
   - code:  PatchBodyParametersSchema
-    reason: This is false positive as all the flagged operations are already part of previous GA version and cannot be changed.
+    reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.definitions["EventSubscriptionUpdateParameters"].format
+    where: $.definitions["PartnerNamespaceUpdateParameterProperties"].properties.publicNetworkAccess
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["SubscriptionUpdateParametersProperties"].properties.deliveryConfiguration.push.destination.properties.endpointType
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["EventSubscriptionDestination"].properties.endpointType
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["DeadLetterDestination"].properties.endpointType
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as all this property is not directly included in the update parameter properties. It is only included if RetryPolicy is added which is optional.
+    from: EventGrid.json
+    where: $.definitions["RetryPolicy"].properties.eventTimeToLiveInMinutes
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as all this property is not directly included in the update parameter properties. It is only included if RetryPolicy is added which is optional.
+    from: EventGrid.json
+    where: $.definitions["RetryPolicy"].properties.maxDeliveryAttempts
 
   - code:  PathContainsResourceType
     reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
@@ -66,22 +91,22 @@ suppressions:
   - code:  GuidUsage
     reason: This is false positive as all the flagged properties that are already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.definitions["Partner.properties.partnerRegistrationImmutableId"].format
+    where: $.definitions["Partner"].properties.partnerRegistrationImmutableId
                 
   - code:  GuidUsage
     reason: This is false positive as all the flagged properties that are already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.definitions["PartnerRegistrationProperties.properties.partnerRegistrationImmutableId"].format
+    where: $.definitions["PartnerRegistrationProperties"].properties.partnerRegistrationImmutableId
                 
   - code:  GuidUsage
     reason: This is false positive as all the flagged properties that are already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.definitions["PartnerTopicProperties.properties.partnerRegistrationImmutableId"].format
+    where: $.definitions["PartnerTopicProperties"].properties.partnerRegistrationImmutableId
                 
   - code:  GuidUsage
     reason: This is false positive as all the flagged properties that are already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.definitions["VerifiedPartnerProperties.properties.partnerRegistrationImmutableId"].format
+    where: $.definitions["VerifiedPartnerProperties"].properties.partnerRegistrationImmutableId
 ```
 
 ### Tag: package-2024-12-preview
