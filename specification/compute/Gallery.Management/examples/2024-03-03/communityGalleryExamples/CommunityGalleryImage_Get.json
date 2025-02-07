@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2024-03-03",
+    "galleryImageName": "myGalleryImageName",
+    "location": "myLocation",
+    "publicGalleryName": "publicGalleryName",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryImageName",
+        "type": "Microsoft.Compute/locations/communityGalleryImage",
+        "identifier": {
+          "uniqueId": "/CommunityGalleries/publicGalleryName/Images/myGalleryImageName"
+        },
+        "location": "myLocation",
+        "properties": {
+          "artifactTags": {
+            "ShareTag-CommunityGallery": "CommunityGallery"
+          },
+          "disclaimer": "https://test-uri.com",
+          "eula": "https://test-uri.com",
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "offer": "myOfferName",
+            "publisher": "myPublisherName",
+            "sku": "mySkuName"
+          },
+          "osState": "Generalized",
+          "osType": "Windows",
+          "privacyStatementUri": "https://test-uri.com"
+        }
+      }
+    }
+  },
+  "operationId": "CommunityGalleryImages_Get",
+  "title": "Get a community gallery image."
+}

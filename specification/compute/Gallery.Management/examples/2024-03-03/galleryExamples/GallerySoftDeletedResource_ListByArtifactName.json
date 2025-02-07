@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2024-03-03",
+    "artifactName": "myGalleryImageName",
+    "artifactType": "images",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://svchost:99/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/softDeletedArtifactTypes/images/artifacts/myGalleryImageName/versions?$skiptoken={token}/Subscriptions/{subscriptionId}/ResourceGroups/myResourceGroup/galleries/myGalleryName/softDeletedArtifactTypes/images/artifacts/myGalleryImageName/versions/myGalleryImageVersionName",
+        "value": [
+          {
+            "name": "1.0.0",
+            "type": "Microsoft.Compute/galleries/softDeletedArtifactTypes/artifacts/versions",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/softDeletedArtifactTypes/Images/artifacts/myGalleryImageName/versions/1.0.0",
+            "location": "West US",
+            "properties": {
+              "resourceArmId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/images/myGalleryImageName/versions/1.0.0",
+              "softDeletedArtifactType": "Images",
+              "softDeletedTime": "2024-10-17T13:01:05+00:00"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SoftDeletedResource_ListByArtifactName",
+  "title": "List soft-deleted resources of an artifact in the gallery."
+}

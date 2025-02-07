@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2024-03-03",
+    "gallery": {
+      "location": "West US",
+      "properties": {
+        "description": "This is the gallery description."
+      }
+    },
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryName",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery",
+        "location": "West US",
+        "properties": {
+          "description": "This is the gallery description.",
+          "identifier": {
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
+          },
+          "provisioningState": "Updating"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myGalleryName",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery",
+        "location": "West US",
+        "properties": {
+          "description": "This is the gallery description.",
+          "identifier": {
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
+          },
+          "provisioningState": "Creating"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myGalleryName",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery",
+        "location": "West US",
+        "properties": {
+          "description": "This is the gallery description.",
+          "identifier": {
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
+          },
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  },
+  "operationId": "Galleries_CreateOrUpdate",
+  "title": "Create or update a simple gallery."
+}

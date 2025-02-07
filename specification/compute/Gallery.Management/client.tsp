@@ -8,16 +8,22 @@ using Microsoft.Compute;
 @@flattenProperty(GalleryUpdate.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryImageUpdate.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryImageVersionUpdate.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryApplicationUpdate.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryApplicationVersionUpdate.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryImageUpdate.properties);
+@@flattenProperty(GallerySoftDeletedResource.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryImageVersionUpdate.properties);
+@@flattenProperty(GalleryInVMAccessControlProfileVersionUpdate.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PirSharedGalleryResource.identifier);
@@ -25,45 +31,61 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PirCommunityGalleryResource.identifier);
 
-@@clientName(Galleries.share::parameters.body, "sharingUpdate");
-@@clientName(Galleries.update::parameters.properties, "gallery");
 @@clientName(Galleries.createOrUpdate::parameters.resource, "gallery");
-
+@@clientName(Galleries.update::parameters.properties, "gallery");
+@@clientName(Galleries.gallerySharingProfileUpdate::parameters.body,
+  "sharingUpdate"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Gallery.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryApplication.properties);
-@@clientName(GalleryApplications.update::parameters.properties,
-  "galleryApplication"
-);
-@@clientName(GalleryApplications.createOrUpdate::parameters.resource,
-  "galleryApplication"
-);
-
-@@clientName(GalleryApplicationVersions.update::parameters.properties,
-  "galleryApplicationVersion"
-);
-@@clientName(GalleryApplicationVersions.createOrUpdate::parameters.resource,
-  "galleryApplicationVersion"
-);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryApplicationVersion.properties);
-
-@@clientName(GalleryImages.update::parameters.properties, "galleryImage");
 @@clientName(GalleryImages.createOrUpdate::parameters.resource, "galleryImage");
+@@clientName(GalleryImages.update::parameters.properties, "galleryImage");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryImage.properties);
 
-@@clientName(GalleryImageVersions.update::parameters.properties,
+@@clientName(GalleryImageVersions.createOrUpdate::parameters.resource,
   "galleryImageVersion"
 );
-@@clientName(GalleryImageVersions.createOrUpdate::parameters.resource,
+@@clientName(GalleryImageVersions.update::parameters.properties,
   "galleryImageVersion"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryImageVersion.properties);
+
+@@clientName(GalleryApplications.createOrUpdate::parameters.resource,
+  "galleryApplication"
+);
+@@clientName(GalleryApplications.update::parameters.properties,
+  "galleryApplication"
+);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryApplication.properties);
+
+@@clientName(GalleryApplicationVersions.createOrUpdate::parameters.resource,
+  "galleryApplicationVersion"
+);
+@@clientName(GalleryApplicationVersions.update::parameters.properties,
+  "galleryApplicationVersion"
+);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryApplicationVersion.properties);
+
+@@clientName(GalleryInVMAccessControlProfiles.createOrUpdate::parameters.resource,
+  "galleryInVMAccessControlProfile"
+);
+@@clientName(GalleryInVMAccessControlProfiles.update::parameters.properties,
+  "galleryInVMAccessControlProfile"
+);
+
+@@clientName(GalleryInVMAccessControlProfileVersions.createOrUpdate::parameters.resource,
+  "galleryInVMAccessControlProfileVersion"
+);
+@@clientName(GalleryInVMAccessControlProfileVersions.update::parameters.properties,
+  "galleryInVMAccessControlProfileVersion"
+);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryInVMAccessControlProfileVersion.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SharedGallery.properties);

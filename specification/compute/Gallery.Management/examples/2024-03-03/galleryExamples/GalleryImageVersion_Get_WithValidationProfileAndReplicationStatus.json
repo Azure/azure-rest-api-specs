@@ -1,0 +1,137 @@
+{
+  "parameters": {
+    "$expand": "ValidationProfile,ReplicationStatus",
+    "api-version": "2024-03-03",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImageVersionName": "1.0.0",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "1.0.0",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/locations/westus/Galleries/myGalleryName/Images/myGalleryImageName/Versions/1.0.0",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "publishingProfile": {
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "replicaCount": 1,
+            "storageAccountType": "Standard_LRS",
+            "targetRegions": [
+              {
+                "name": "West US",
+                "encryption": {
+                  "dataDiskImages": [
+                    {
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet",
+                      "lun": 0
+                    },
+                    {
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet",
+                      "lun": 1
+                    }
+                  ],
+                  "osDiskImage": {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                  }
+                },
+                "excludeFromLatest": false,
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS"
+              },
+              {
+                "name": "East US",
+                "excludeFromLatest": false,
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_LRS"
+              }
+            ]
+          },
+          "replicationStatus": {
+            "aggregatedState": "Completed",
+            "summary": [
+              {
+                "progress": 100,
+                "region": "West US",
+                "state": "Completed",
+                "details": ""
+              },
+              {
+                "progress": 100,
+                "region": "East US",
+                "state": "Completed",
+                "details": ""
+              }
+            ]
+          },
+          "safetyProfile": {
+            "allowDeletionOfReplicatedLocations": false,
+            "policyViolations": [
+              {
+                "category": "ImageFlaggedUnsafe",
+                "details": "This is the policy violation details."
+              }
+            ],
+            "reportedForPolicyViolation": true
+          },
+          "storageProfile": {
+            "dataDiskImages": [
+              {
+                "hostCaching": "None",
+                "lun": 1,
+                "sizeInGB": 10
+              }
+            ],
+            "osDiskImage": {
+              "hostCaching": "ReadOnly",
+              "sizeInGB": 10
+            },
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+            }
+          },
+          "validationsProfile": {
+            "executedValidations": [
+              {
+                "type": "LinuxSecurityBaseline",
+                "executionTime": "2018-01-01T00:00:00Z",
+                "status": "Failed",
+                "version": "beta"
+              },
+              {
+                "type": "AzCertify",
+                "executionTime": "2018-01-01T00:00:00Z",
+                "status": "Succeeded",
+                "version": "10.0.4"
+              }
+            ],
+            "platformAttributes": [
+              {
+                "name": "source_image_publisher",
+                "value": "publishValue"
+              },
+              {
+                "name": "source_image_offer",
+                "value": "OfferValue"
+              },
+              {
+                "name": "source_image_sku",
+                "value": "SkuValue"
+              },
+              {
+                "name": "source_image_version",
+                "value": "1.0.0"
+              }
+            ],
+            "validationEtag": "2018-01-01T00:00:00Z"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "GalleryImageVersions_Get",
+  "title": "Get a gallery image version with validation profile and replication status."
+}
