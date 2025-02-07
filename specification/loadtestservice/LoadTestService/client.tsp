@@ -79,8 +79,8 @@ interface TestRunOperations {
 }
 
 @@clientName(TestRunOperations.createOrUpdateTestRun,
-  "_begin_test_run",
+  "_BeginTestRun",
   "python");
 @@clientName(TestRunOperations.createOrUpdateTestProfileRun,
-    "_begin_test_profile_run",
+    "StartTestProfileRun",
     "python");
