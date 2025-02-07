@@ -1181,32 +1181,27 @@
         "adminDistricts": {
           "description": "adminDistrict array.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/AdminDistrict"
           }
         },
         "distanceInMeters": {
           "description": "Length In Meters property",
-          "type": "number",
-          "readOnly": true
+          "type": "number"
         },
         "durationInSeconds": {
           "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
           "format": "int64",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "durationTrafficInSeconds": {
           "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
           "format": "int64",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "tollDistanceInMeters": {
           "description": "The total distance, measured in meters, along the route that includes toll roads.",
-          "type": "number",
-          "readOnly": true
+          "type": "number"
         }
       }
     },
@@ -1486,8 +1481,7 @@
         },
         "compassDirection": {
           "description": "The direction of travel associated with a maneuver on a route, such as south or southwest. `Note`: Only supported for driving travelMode.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "steps": {
           "description": "Steps between two consecutive maneuver points.",
@@ -1534,31 +1528,26 @@
         "signs": {
           "description": "Signage text for the route. There may be more than one sign value.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "type": "string"
           }
         },
         "towardsRoadName": {
           "description": "The name of the street that the route goes towards in the first `ManeuverPoint`.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "exitIdentifier": {
           "description": "The name or number of the exit associated with this route step.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "distanceInMeters": {
           "description": "The physical distance in meters covered by this route step.",
-          "type": "number",
-          "readOnly": true
+          "type": "number"
         },
         "durationInSeconds": {
           "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance`.",
           "format": "int64",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "travelMode": {
           "$ref": "#/definitions/RoutePathTravelModeEnum"
@@ -1580,7 +1569,6 @@
             "names": {
               "description": "A street, highway or intersection where the maneuver occurs. If the maneuver is complex, there may be more than one name field in the details collection. The name field may also have no value. This can occur if the name is not known or if a street, highway or intersection does not have a name.",
               "type": "array",
-              "readOnly": true,
               "items": {
                 "type": "string"
               }
@@ -1609,25 +1597,21 @@
           "properties": {
             "resourceId": {
               "description": "A unique ID for the resource.",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "distanceInMeters": {
               "description": "The physical distance in meters covered by the entire route.",
-              "type": "number",
-              "readOnly": true
+              "type": "number"
             },
             "durationInSeconds": {
               "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
               "format": "int64",
-              "type": "integer",
-              "readOnly": true
+              "type": "integer"
             },
             "durationTrafficInSeconds": {
               "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
               "format": "int64",
-              "type": "integer",
-              "readOnly": true
+              "type": "integer"
             },
             "trafficDataUsed": {
               "$ref": "#/definitions/TrafficDataUsedEnum"
@@ -1638,14 +1622,12 @@
             "departureAt": {
               "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
               "type": "string",
-              "format": "date-time",
-              "readOnly": true
+              "format": "date-time"
             },
             "arrivalAt": {
               "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
               "type": "string",
-              "format": "date-time",
-              "readOnly": true
+              "format": "date-time"
             },
             "legs": {
               "description": "An array of route Legs. Check route Leg object description for more information.",
@@ -1657,7 +1639,6 @@
             "optimizedWaypoints": {
               "description": "Optimized sequence of waypoints. It shows the index from the user provided waypoint sequence for the original and optimized lists.",
               "type": "array",
-              "readOnly": true,
               "items": {
                 "$ref": "#/definitions/OptimizedWaypoint"
               }
@@ -1682,7 +1663,6 @@
     "FeaturePropertiesTypeEnum": {
       "description": "Output type.",
       "type": "string",
-      "readOnly": true,
       "enum": [
         "ManeuverPoint",
         "Waypoint",
@@ -1741,30 +1721,25 @@
       "properties": {
         "longName": {
           "description": "The long name of an address, such as Washington.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "distanceInMeters": {
           "description": "The total distance traveled in meters within the administrative district.",
-          "type": "number",
-          "readOnly": true
+          "type": "number"
         },
         "durationInSeconds": {
           "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
           "format": "int64",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "durationTrafficInSeconds": {
           "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
           "format": "int64",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "tollDistanceInMeters": {
           "description": "The total distance, measured in meters, along the route that includes toll roads.",
-          "type": "number",
-          "readOnly": true
+          "type": "number"
         }
       }
     },
@@ -1775,45 +1750,38 @@
       "properties": {
         "description": {
           "description": "A short description of the route.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "routePathRange": {
           "$ref": "#/definitions/RoutePathRange"
         },
         "distanceInMeters": {
           "description": "The physical distance in meters covered by a route Leg.",
-          "type": "number",
-          "readOnly": true
+          "type": "number"
         },
         "durationInSeconds": {
           "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
           "format": "int64",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "durationTrafficInSeconds": {
           "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
           "format": "int64",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "departureAt": {
           "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         },
         "arrivalAt": {
           "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         },
         "subLegs": {
           "description": "Information about a segments of the route Leg defined by the route Leg waypoints and any intermediate via-waypoints. For example, if the route Leg has two via-waypoints in addition to start and end waypoints, there would be three (3) route sub-legs.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/SubLeg"
           }
@@ -1834,20 +1802,17 @@
         },
         "distanceInMeters": {
           "description": "The physical distance in meters covered by the sub-leg.",
-          "type": "number",
-          "readOnly": true
+          "type": "number"
         },
         "durationInSeconds": {
           "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
           "format": "int64",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "durationTrafficInSeconds": {
           "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
           "format": "int64",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         }
       }
     },
@@ -1858,7 +1823,6 @@
         "range": {
           "description": "Refers to the range covered by a specific Leg of a route or path.",
           "type": "array",
-          "readOnly": true,
           "maximum": 2,
           "maxItems": 2,
           "items": {
@@ -1881,14 +1845,12 @@
         "pointIndex": {
           "description": "Index of a point within a specific Leg.",
           "format": "int64",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         }
       }
     },
     "LegIndex": {
       "description": "The route Leg index is a sequential number assigned to each Leg of the route to help identify and distinguish between different segments of the route.",
-      "readOnly": true,
       "format": "int64",
       "type": "integer"
     },
@@ -1898,13 +1860,11 @@
       "properties": {
         "hintType": {
           "description": "hint type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "text": {
           "description": "hint text.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -1915,17 +1875,14 @@
       "properties": {
         "compassDegrees": {
           "description": "The direction in degrees. `Note`: Only supported for driving travelMode.",
-          "readOnly": true,
           "type": "number"
         },
         "maneuverType": {
-          "readOnly": true,
           "$ref": "#/definitions/ManeuverTypeEnum"
         },
         "names": {
           "description": "A street, highway or intersection where the maneuver occurs. If the maneuver is complex, there may be more than one name field in the details collection. The name field may also have no value. This can occur if the name is not known or if a street, highway or intersection does not have a name.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "type": "string"
           }
@@ -1934,7 +1891,6 @@
           "$ref": "#/definitions/RoutePathRange"
         },
         "roadType": {
-          "readOnly": true,
           "$ref": "#/definitions/RoadTypeEnum"
         }
       }
@@ -1942,7 +1898,6 @@
     "ManeuverTypeEnum": {
       "description": "The type of maneuver described in this detailed collection. The ManeuverType provides information for a portion of the maneuver specified by the corresponding instruction. For example, the maneuverType of an instruction may specify TurnLeftThenTurnRight, while the associated detail items may provide specifics about the TurnLeft and TurnRight maneuvers",
       "type": "string",
-      "readOnly": true,
       "enum": [
         "ArriveFinish",
         "ArriveIntermediate",
@@ -2459,7 +2414,6 @@
     "SideOfStreetEnum": {
       "description": "The side of the street where the destination is found based on the arrival direction. This field applies to the last maneuverPoint only.",
       "type": "string",
-      "readOnly": true,
       "enum": [
         "Left",
         "Right",
@@ -2490,7 +2444,6 @@
     "DrivingSideEnum": {
       "description": "Indicates left-hand vs. right-hand side driving at the point of the maneuver. `Note`: Only supported for truck travelMode.",
       "type": "string",
-      "readOnly": true,
       "enum": [
         "Left",
         "Right"
@@ -2502,12 +2455,12 @@
           {
             "value": "Left",
             "name": "Left",
-            "description": "Left."
+            "description": "Left-hand side driving."
           },
           {
             "value": "Right",
             "name": "Right",
-            "description": "Right."
+            "description": "Right-hand side driving."
           }
         ]
       }
@@ -2599,13 +2552,11 @@
         },
         "text": {
           "description": "The plain text description of the instruction.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "formattedText": {
           "description": "The formatted text description of the instruction.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "hints": {
           "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element and a route step can contain more than one hint. `Note`: Only supported for driving travelMode",
@@ -3092,14 +3043,12 @@
         "inputIndex": {
           "description": "Way point index provided by the user.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "optimizedIndex": {
           "description": "Optimized way point index from the system.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         }
       }
     },
@@ -3423,32 +3372,27 @@
         "departureAt": {
           "description": "The estimated departure time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used. If departAt or arriveAt is `any`, then departureAt is absent.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         },
         "arrivalAt": {
           "description": "The estimated arrival time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used. If departAt or arriveAt is any, then departureAt is absent.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         },
         "distanceInMeters": {
           "description": "Length In Meters property",
           "type": "number",
-          "format": "double",
-          "readOnly": true
+          "format": "double"
         },
         "durationInSeconds": {
           "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
           "format": "int64",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "durationTrafficInSeconds": {
           "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
           "format": "int64",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "error": {
           "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
