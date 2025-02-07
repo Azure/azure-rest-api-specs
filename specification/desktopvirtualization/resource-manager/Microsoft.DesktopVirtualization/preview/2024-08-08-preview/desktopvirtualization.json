@@ -2125,7 +2125,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages": {
       "get": {
-        "operationId": "MsixPackages_List",
+        "operationId": "MSIXPackages_List",
         "tags": [
           "MSIXPackages"
         ],
@@ -2188,6 +2188,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "MSIXPackage_List": {
+            "$ref": "./examples/MSIXPackages_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2195,7 +2200,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages/{msixPackageFullName}": {
       "get": {
-        "operationId": "MsixPackages_Get",
+        "operationId": "MSIXPackages_Get",
         "tags": [
           "MSIXPackages"
         ],
@@ -2243,6 +2248,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "MSIXPackage_Get": {
+            "$ref": "./examples/MSIXPackages_Get.json"
           }
         }
       },

@@ -39,6 +39,8 @@ interface MSIXPackages {
   /**
    * Get a msixpackage.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
+  @OpenAPI.operationId("MSIXPackages_Get")
   get is ArmResourceRead<
     MSIXPackage,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
@@ -73,6 +75,8 @@ interface MSIXPackages {
   /**
    * List MSIX packages in hostpool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
+  @OpenAPI.operationId("MSIXPackages_List")
   list is ArmResourceListByParent<
     MSIXPackage,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
