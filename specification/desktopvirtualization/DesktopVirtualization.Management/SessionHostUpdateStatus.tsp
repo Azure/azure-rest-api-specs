@@ -21,6 +21,7 @@ model SessionHostManagementUpdateStatus
   ...ResourceNameParameter<
     Resource = SessionHostManagementUpdateStatus,
     KeyName = "SessionHostUpdateStatuses",
+    SegmentName = "sessionHostUpdateStatuses",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
   ...ManagedServiceIdentityProperty;

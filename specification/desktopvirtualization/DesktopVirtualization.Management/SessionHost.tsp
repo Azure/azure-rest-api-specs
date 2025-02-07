@@ -94,6 +94,8 @@ interface SessionHosts {
     },
     Response = SessionHostList
   >;
+
+  retryProvisioning is ArmResourceActionNoContentSync<SessionHost, void>;
 }
 
 @@maxLength(SessionHost.name, 48);
