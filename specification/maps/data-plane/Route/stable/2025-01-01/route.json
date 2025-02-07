@@ -1635,13 +1635,13 @@
             "trafficCongestion": {
               "$ref": "#/definitions/TrafficCongestionEnum"
             },
-            "departureTime": {
+            "departureAt": {
               "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
               "type": "string",
               "format": "date-time",
               "readOnly": true
             },
-            "arrivalTime": {
+            "arrivalAt": {
               "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
               "type": "string",
               "format": "date-time",
@@ -1798,13 +1798,13 @@
           "type": "integer",
           "readOnly": true
         },
-        "departureTime": {
+        "departureAt": {
           "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
-        "arrivalTime": {
+        "arrivalAt": {
           "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
           "type": "string",
           "format": "date-time",
@@ -3420,14 +3420,14 @@
           "type": "integer",
           "format": "int32"
         },
-        "departureTime": {
-          "description": "The estimated departure time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used. If departAt or arriveAt is `any`, then departureTime is absent.",
+        "departureAt": {
+          "description": "The estimated departure time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used. If departAt or arriveAt is `any`, then departureAt is absent.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
-        "arrivalTime": {
-          "description": "The estimated arrival time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used. If departAt or arriveAt is any, then departureTime is absent.",
+        "arrivalAt": {
+          "description": "The estimated arrival time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used. If departAt or arriveAt is any, then departureAt is absent.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
@@ -3509,12 +3509,12 @@
             }
           }
         },
-        "createdDateTime": {
+        "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "Timestamp when the operation was created."
         },
-        "lastActionDateTime": {
+        "lastActionAt": {
           "type": "string",
           "format": "date-time",
           "description": "Timestamp when the operation status was updated."
