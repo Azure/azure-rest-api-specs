@@ -5206,6 +5206,14 @@
         "recoveryPointProperties": {
           "description": "Properties of Recovery Point",
           "$ref": "#/definitions/RecoveryPointProperties"
+        },
+        "recoveryPointTierDetails": {
+          "description": "Recovery point tier information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformation"
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "AzureFileShareRecoveryPoint"
@@ -9290,7 +9298,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
-          "description": "The uri to fetch the next page of resources. Call ListNext() fetches next page of resources.",
+          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200.",
           "type": "string"
         }
       }
