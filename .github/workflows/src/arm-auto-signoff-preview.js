@@ -4,7 +4,7 @@ import path from "path";
 import { extractInputs } from "../../src/context.js";
 import { LabelAction } from "../../src/label.js";
 import { getChangedSwaggerFiles } from "./changed-files.js";
-import { execRoot } from "./exec.js";
+import { lsTree } from "./git.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -52,10 +52,7 @@ export async function getLabelActionImpl({
   github,
   core,
 }) {
-  const incrementalChangesToExistingRP =
-    await incrementalChangesToExistingResourceProvider(core);
-
-  if (!incrementalChangesToExistingRP) {
+  if (!(await incrementalChangesToExistingResourceProvider(core))) {
     return LabelAction.Remove;
   }
 
@@ -100,14 +97,14 @@ export async function getLabelActionImpl({
   const swaggerLintDiff =
     swaggerLintDiffs.length === 1 ? swaggerLintDiffs[0] : undefined;
 
-  // No-op if check is missing or not completed, to prevent frequent remove/add label as checks re-run
   if (swaggerLintDiff && swaggerLintDiff.status === "completed") {
     return swaggerLintDiff.conclusion === "success"
       ? LabelAction.Add
       : LabelAction.Remove;
+  } else {
+    // No-op if check is missing or not completed, to prevent frequent remove/add label as checks re-run
+    return LabelAction.None;
   }
-
-  return LabelAction.None;
 }
 
 /**
@@ -164,10 +161,10 @@ async function specFolderExistsInTargetBranch(file, core) {
   const specDir = path.dirname(path.dirname(path.dirname(file)));
   core.info(`specDir: ${specDir}`);
 
-  const lsTree = await execRoot(`git ls-tree HEAD^ ${specDir}`, core);
+  const resultString = await lsTree("HEAD^", specDir, core);
 
   // Command "git ls-tree" returns a nonempty string if the folder exists in the target branch
-  const result = Boolean(lsTree);
+  const result = Boolean(resultString);
   core.info(`returning: ${result}`);
   return result;
 }
