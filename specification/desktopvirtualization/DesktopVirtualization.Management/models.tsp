@@ -3044,8 +3044,7 @@ model HostPoolPatch extends Resource {
   /**
    * tags to be updated
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags is a valid record"
-  tags?: Record<string>;
+  tags?: string[];
 
   /**
    * HostPool properties that can be patched.
