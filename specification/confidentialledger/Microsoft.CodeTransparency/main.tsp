@@ -136,7 +136,7 @@ op getCodeTransparencyVersion is Foundations.Operation<
 @post
 @sharedRoute
 @route("/entries")
-op createEntry is Foundations.Operation<
+op createEntryDeprecated is Foundations.Operation<
   SignedStatement,
   CreateEntryResult,
   ServiceTraits
@@ -148,7 +148,7 @@ op createEntry is Foundations.Operation<
 @post
 @sharedRoute
 @route("/entries")
-op createEntryChanged is Foundations.Operation<
+op createEntry is Foundations.Operation<
   SignedStatement,
   CreateEntryCreated | CreateEntryPending,
   ServiceTraits,
@@ -181,7 +181,7 @@ op listEntryStatuses is Foundations.Operation<
 @doc("Get signed statement with or without receipt embedded in its unprotected header")
 @sharedRoute
 @route("/entries/{entryId}")
-op getEntry is Foundations.Operation<
+op getEntryDeprecated is Foundations.Operation<
   EmbedReceiptParameter,
   SignedStatement | TransparentStatement,
   ServiceTraits
@@ -192,7 +192,7 @@ op getEntry is Foundations.Operation<
 @doc("Get signed statement with or without receipt embedded in its unprotected header")
 @sharedRoute
 @route("/entries/{entryId}")
-op getEntryChanged is Foundations.Operation<
+op getEntry is Foundations.Operation<
   EmbedReceiptParameter,
   SignedStatement | TransparentStatement,
   ServiceTraits,
@@ -204,7 +204,7 @@ op getEntryChanged is Foundations.Operation<
 @doc("Get the receipt of an entry given a specific entry id.")
 @sharedRoute
 @route("/entries/{entryId}/receipt")
-op getEntryReceipt is Foundations.Operation<
+op getEntryReceiptDeprecated is Foundations.Operation<
   EntryIdParameter,
   ReceiptEntry,
   ServiceTraits
@@ -215,7 +215,7 @@ op getEntryReceipt is Foundations.Operation<
 @doc("Get the receipt of an entry given a specific entry id.")
 @sharedRoute
 @route("/entries/{entryId}/receipt")
-op getEntryReceiptChanged is Foundations.Operation<
+op getEntryReceipt is Foundations.Operation<
   EntryIdParameter,
   ReceiptEntry,
   ServiceTraits,

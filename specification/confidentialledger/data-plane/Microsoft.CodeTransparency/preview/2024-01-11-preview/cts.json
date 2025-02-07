@@ -125,7 +125,7 @@
     },
     "/entries": {
       "post": {
-        "operationId": "CreateEntry",
+        "operationId": "CreateEntryDeprecated",
         "description": "Post an entry to be registered on the CodeTransparency instance (deprecated)",
         "consumes": [
           "application/cose"
@@ -157,17 +157,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "CreateEntry": {
-            "$ref": "./examples/CreateEntry.json"
-          }
         }
       }
     },
     "/entries/{entryId}": {
       "get": {
-        "operationId": "GetEntry",
+        "operationId": "GetEntryDeprecated",
         "description": "Get signed statement with or without receipt embedded in its unprotected header",
         "produces": [
           "application/cose",
@@ -203,17 +198,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "GetEntry": {
-            "$ref": "./examples/GetEntry.json"
-          }
         }
       }
     },
     "/entries/{entryId}/receipt": {
       "get": {
-        "operationId": "GetEntryReceipt",
+        "operationId": "GetEntryReceiptDeprecated",
         "description": "Get the receipt of an entry given a specific entry id.",
         "produces": [
           "application/cbor",
@@ -245,11 +235,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetEntryReceipt": {
-            "$ref": "./examples/GetEntryReceipt.json"
           }
         }
       }
