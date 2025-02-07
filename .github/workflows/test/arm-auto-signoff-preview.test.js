@@ -2,22 +2,23 @@ import { describe, expect, it, vi } from "vitest";
 import { LabelAction } from "../../src/label.js";
 import { createMockCore, createMockGithub } from "../../test/mocks.js";
 import { getLabelActionImpl } from "../src/arm-auto-signoff-preview.js";
-import { getChangedSwaggerFiles } from "../src/changed-files.js";
-import { lsTree } from "../src/git.js";
+import * as changedFiles from "../src/changed-files.js";
+import * as git from "../src/git.js";
 
-vi.mock("../src/changed-files.js", () => ({
-  getChangedSwaggerFiles: vi.fn().mockResolvedValue([]),
-}));
+vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
+  "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
+]);
 
-vi.mock("../src/git.js", () => ({
-  lsTree: vi.fn().mockResolvedValue(""),
-}));
+vi.spyOn(git, "lsTree").mockResolvedValue(
+  "040000 tree abc123 specification/contosowidgetmanager",
+);
 
 describe("getLabelActionImpl", () => {
   it("rejects if inputs null", async () => {
     await expect(getLabelActionImpl({})).rejects.toThrow();
   });
 
+  // TODO: Add parameters for
   it.each([
     {
       labels: [],
@@ -27,14 +28,6 @@ describe("getLabelActionImpl", () => {
       swaggerLintDiffConclusion: "failed",
     },
   ])("removes label (%s)", async ({ labels, swaggerLintDiffConclusion }) => {
-    getChangedSwaggerFiles.mockResolvedValue([
-      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
-    ]);
-
-    lsTree.mockResolvedValue(
-      "040000 tree abc123 specification/contosowidgetmanager",
-    );
-
     const core = createMockCore();
 
     const github = createMockGithub();
@@ -77,14 +70,6 @@ describe("getLabelActionImpl", () => {
       swaggerLintDiffStatus: "in_progress",
     },
   ])("no-ops (%s)", async ({ labels, swaggerLintDiffStatus }) => {
-    getChangedSwaggerFiles.mockResolvedValue([
-      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
-    ]);
-
-    lsTree.mockResolvedValue(
-      "040000 tree abc123 specification/contosowidgetmanager",
-    );
-
     const core = createMockCore();
 
     const github = createMockGithub();
@@ -130,14 +115,6 @@ describe("getLabelActionImpl", () => {
       ],
     },
   ])("adds label (%s)", async ({ labels }) => {
-    getChangedSwaggerFiles.mockResolvedValue([
-      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
-    ]);
-
-    lsTree.mockResolvedValue(
-      "040000 tree abc123 specification/contosowidgetmanager",
-    );
-
     const core = createMockCore();
 
     const github = createMockGithub();
