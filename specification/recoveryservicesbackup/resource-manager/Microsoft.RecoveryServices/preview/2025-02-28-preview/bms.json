@@ -9183,7 +9183,7 @@
         },
         "threatInfo": {
           "description": "Recovery point threat information.",
-          "type": "object",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/ThreatInfo"
           },
@@ -9839,16 +9839,19 @@
       "properties": {
         "threatTitle": {
           "description": "Threat Subject",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "threatDescription": {
           "description": "Threat Description",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "lastUpdatedTime": {
           "format": "date-time",
           "description": "Timestamp when the last (latest)theat information was sent",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "threatState": {
           "description": "Threat Status Types",
@@ -9867,16 +9870,19 @@
         "threatStartTime": {
           "format": "date-time",
           "description": "Start timestamp of the threat",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "threatEndTime": {
           "format": "date-time",
           "description": "End timestamp of the threat",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "threatURI": {
           "description": "threat details link",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "threatSeverity": {
           "description": "Threat Severity Types",
