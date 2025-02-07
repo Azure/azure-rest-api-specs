@@ -37,6 +37,53 @@ These settings apply only when `--tag=package-2025-02` is specified on the comma
 input-file:
 - Microsoft.EventGrid/stable/2025-02-15/EventGrid.json
 
+
+suppressions:
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as all the flagged operations are already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["DomainUpdateParameters"].format
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as all the flagged operations are already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["SubscriptionUpdateParameters"].format
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as all the flagged operations are already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["EventSubscriptionUpdateParameters"].format
+
+  - code:  PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections"]
+
+  - code:  PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}"]
+                
+  - code:  GuidUsage
+    reason: This is false positive as all the flagged properties that are already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["Partner.properties.partnerRegistrationImmutableId"].format
+                
+  - code:  GuidUsage
+    reason: This is false positive as all the flagged properties that are already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["PartnerRegistrationProperties.properties.partnerRegistrationImmutableId"].format
+                
+  - code:  GuidUsage
+    reason: This is false positive as all the flagged properties that are already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["PartnerTopicProperties.properties.partnerRegistrationImmutableId"].format
+                
+  - code:  GuidUsage
+    reason: This is false positive as all the flagged properties that are already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["VerifiedPartnerProperties.properties.partnerRegistrationImmutableId"].format
+
 ```
 
 ### Tag: package-2024-12-preview
