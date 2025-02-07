@@ -2369,7 +2369,12 @@
           "format": "int32",
           "description": "Number of segments whose delivery failed"
         }
-      }
+      },
+      "required": [
+        "timestamp",
+        "segmentsSucceeded",
+        "segmentsFailed"
+      ]
     },
     "AcsSmsDeliveryReportReceivedEventData": {
       "type": "object",
@@ -2402,7 +2407,10 @@
         }
       },
       "required": [
-        "deliveryAttempts"
+        "deliveryAttempts",
+        "deliveryStatus",
+        "deliveryStatusDetails",
+        "receivedTimestamp"
       ],
       "allOf": [
         {
