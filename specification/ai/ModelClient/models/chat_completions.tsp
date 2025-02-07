@@ -531,7 +531,7 @@ model FunctionDefinition {
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
   @doc("The parameters the function accepts, described as a JSON Schema object.")
-  parameters?: Record<unknown>;
+  parameters?: unknown;
 }
 
 @doc("""
