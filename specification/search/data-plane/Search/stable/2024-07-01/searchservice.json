@@ -2129,6 +2129,36 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey"
     },
+    "CommonGramTokenFilter": {
+      "type": "object",
+      "description": "Construct bigrams for frequently occurring terms while indexing. Single terms\nare still indexed too, with bigrams overlaid. This token filter is implemented\nusing Apache Lucene.",
+      "properties": {
+        "commonWords": {
+          "type": "array",
+          "description": "The set of common words.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ignoreCase": {
+          "type": "boolean",
+          "description": "A value indicating whether common words matching will be case insensitive.\nDefault is false."
+        },
+        "queryMode": {
+          "type": "boolean",
+          "description": "A value that indicates whether the token filter is in query mode. When in query\nmode, the token filter generates bigrams and then removes common words and\nsingle terms followed by a common word. Default is false."
+        }
+      },
+      "required": [
+        "commonWords"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TokenFilter"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.CommonGramTokenFilter"
+    },
     "ConditionalSkill": {
       "type": "object",
       "description": "A skill that enables scenarios that require a Boolean operation to determine\nthe data to assign to an output.",

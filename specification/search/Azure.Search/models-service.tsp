@@ -7066,36 +7066,36 @@ model CjkBigramTokenFilter extends TokenFilter {
   `@odata.type`: "#Microsoft.Azure.Search.CjkBigramTokenFilter";
 }
 
-// /**
-//  * Construct bigrams for frequently occurring terms while indexing. Single terms
-//  * are still indexed too, with bigrams overlaid. This token filter is implemented
-//  * using Apache Lucene.
-//  */
-// model CommonGramTokenFilter extends TokenFilter {
-//   /**
-//    * The set of common words.
-//    */
-//   commonWords: string[];
+/**
+ * Construct bigrams for frequently occurring terms while indexing. Single terms
+ * are still indexed too, with bigrams overlaid. This token filter is implemented
+ * using Apache Lucene.
+ */
+model CommonGramTokenFilter extends TokenFilter {
+  /**
+   * The set of common words.
+   */
+  commonWords: string[];
 
-//   /**
-//    * A value indicating whether common words matching will be case insensitive.
-//    * Default is false.
-//    */
-//   ignoreCase?: boolean;
+  /**
+   * A value indicating whether common words matching will be case insensitive.
+   * Default is false.
+   */
+  ignoreCase?: boolean;
 
-//   /**
-//    * A value that indicates whether the token filter is in query mode. When in query
-//    * mode, the token filter generates bigrams and then removes common words and
-//    * single terms followed by a common word. Default is false.
-//    */
-//   queryMode?: boolean;
+  /**
+   * A value that indicates whether the token filter is in query mode. When in query
+   * mode, the token filter generates bigrams and then removes common words and
+   * single terms followed by a common word. Default is false.
+   */
+  queryMode?: boolean;
 
-//   /**
-//    * A URI fragment specifying the type of token filter.
-//    */
-//   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-//   `@odata.type`: "#Microsoft.Azure.Search.CommonGramTokenFilter";
-// }
+  /**
+   * A URI fragment specifying the type of token filter.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Azure.Search.CommonGramTokenFilter";
+}
 
 /**
  * Decomposes compound words found in many Germanic languages. This token filter
