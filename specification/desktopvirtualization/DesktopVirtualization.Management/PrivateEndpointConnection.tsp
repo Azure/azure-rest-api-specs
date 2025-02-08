@@ -35,26 +35,6 @@ alias PrivateEndpointParameter = {
   privateEndpointConnectionName: string;
 };
 
-alias PrivateEndpointListParameter = {
-  /**
-   * The number of items to return per page
-   */
-  @query
-  pageSize?: int32;
-
-  /**
-   * Indicates whether the collection is descending.
-   */
-  @query
-  isDescending?: boolean;
-
-  /**
-   * The number of items to skip before starting to return items.
-   */
-  @query
-  initialSkip?: int32;
-};
-
 @armResourceOperations
 interface HostPoolOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -74,15 +54,9 @@ interface CustomPrivateEndpointConnection {
   getByHostPool is HostPoolOps.Read<PrivateEndpointConnections>;
   updateByHostPool is HostPoolOps.CreateOrUpdateSync<PrivateEndpointConnections>;
   deleteByHostPool is HostPoolOps.DeleteSync<PrivateEndpointConnections>;
-  listByHostPool is HostPoolOps.List<
-    PrivateEndpointConnections,
-    Parameters = PrivateEndpointListParameter
-  >;
+  listByHostPool is HostPoolOps.List<PrivateEndpointConnections>;
   getByWorkspace is WorkspaceOps.Read<PrivateEndpointConnections>;
   updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<PrivateEndpointConnections>;
   deleteByWorkspace is WorkspaceOps.DeleteSync<PrivateEndpointConnections>;
-  listByWorkspace is WorkspaceOps.List<
-    PrivateEndpointConnections,
-    Parameters = PrivateEndpointListParameter
-  >;
+  listByWorkspace is WorkspaceOps.List<PrivateEndpointConnections>;
 }

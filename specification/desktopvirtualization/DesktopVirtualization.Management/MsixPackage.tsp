@@ -25,12 +25,6 @@ model MSIXPackage
     SegmentName = "msixPackages",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
-  ...ManagedServiceIdentityProperty;
-  ...etagProperty;
-  ...ResourceKindProperty;
-  ...ManagedByProperty;
-  ...ResourcePlanProperty;
-  ...ResourceSkuProperty;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"

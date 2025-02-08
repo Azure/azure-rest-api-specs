@@ -1499,7 +1499,7 @@ model CustomInfoProperties {
   /**
    * The resource ID of the image.
    */
-  imageResourceId: Azure.Core.armResourceIdentifier;
+  resourceId: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -1509,7 +1509,7 @@ model CustomInfoPatchProperties {
   /**
    * The resource ID of the image.
    */
-  imageResourceId?: Azure.Core.armResourceIdentifier;
+  resourceId?: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -1654,18 +1654,18 @@ model SecurityInfoProperties {
   /**
    * The security type used by virtual machine in hostpool session host. Default is Standard.
    */
-  type: SecurityType = SecurityType.Standard;
+  type?: SecurityType = SecurityType.Standard;
 
   /**
    * Whether to use secureBoot on the virtual machine.
    */
-  secureBootEnabled: boolean;
+  secureBootEnabled?: boolean;
 
   /**
    * Whether to use vTPM on the virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "vTPM is acronym in service"
-  vTPMEnabled: boolean;
+  vTPMEnabled?: boolean;
 }
 
 /**
@@ -1675,7 +1675,7 @@ model SecurityInfoPatchProperties {
   /**
    * The security type used by virtual machine in hostpool session host. Default is Standard.
    */
-  type: SecurityType;
+  type?: SecurityType;
 
   /**
    * Whether to use secureBoot on the virtual machine.
@@ -3927,7 +3927,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampUpStartVMOnConnect?: SetStartVMOnConnect;
+  rampUpStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
 
   /**
    * Action to be taken after a user disconnect during the ramp up period.
@@ -3960,7 +3960,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  peakStartVMOnConnect?: SetStartVMOnConnect;
+  peakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
 
   /**
    * Action to be taken after a user disconnect during the peak period.
@@ -3993,7 +3993,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampDownStartVMOnConnect?: SetStartVMOnConnect;
+  rampDownStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
 
   /**
    * Action to be taken after a user disconnect during the ramp down period.
@@ -4073,6 +4073,116 @@ model ScalingPlanPooledScheduleList
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model ScalingPlanPooledScheduleProperties {
+  /**
+   * Name of the ScalingPlanPooledSchedule
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Service already uses this property"
+  name?: string;
+
+  /**
+   * Set of days of the week on which this schedule is active.
+   */
+  daysOfWeek?: DayOfWeek[];
+
+  /**
+   * Starting time for ramp up period.
+   */
+  rampUpStartTime?: Time;
+
+  /**
+   * Load balancing algorithm for ramp up period.
+   */
+  rampUpLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+
+  /**
+   * Minimum host percentage for ramp up period.
+   */
+  @maxValue(100)
+  @minValue(0)
+  rampUpMinimumHostsPct?: int32;
+
+  /**
+   * Capacity threshold for ramp up period.
+   */
+  @maxValue(100)
+  @minValue(1)
+  rampUpCapacityThresholdPct?: int32;
+
+  /**
+   * Starting time for peak period.
+   */
+  peakStartTime?: Time;
+
+  /**
+   * Load balancing algorithm for peak period.
+   */
+  peakLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+
+  /**
+   * Starting time for ramp down period.
+   */
+  rampDownStartTime?: Time;
+
+  /**
+   * Load balancing algorithm for ramp down period.
+   */
+  rampDownLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+
+  /**
+   * Minimum host percentage for ramp down period.
+   */
+  @maxValue(100)
+  @minValue(0)
+  rampDownMinimumHostsPct?: int32;
+
+  /**
+   * Capacity threshold for ramp down period.
+   */
+  @maxValue(100)
+  @minValue(1)
+  rampDownCapacityThresholdPct?: int32;
+
+  /**
+   * Should users be logged off forcefully from hosts.
+   */
+  rampDownForceLogoffUsers?: boolean;
+
+  /**
+   * Specifies when to stop hosts during ramp down period.
+   */
+  rampDownStopHostsWhen?: StopHostsWhen;
+
+  /**
+   * Number of minutes to wait to stop hosts during ramp down period.
+   */
+  rampDownWaitTimeMinutes?: int32;
+
+  /**
+   * Notification message for users during ramp down period.
+   */
+  rampDownNotificationMessage?: string;
+
+  /**
+   * Starting time for off-peak period.
+   */
+  offPeakStartTime?: Time;
+
+  /**
+   * Load balancing algorithm for off-peak period.
+   */
+  offPeakLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+}
+
+/**
+ * A ScalingPlanPooledSchedule that can be patched.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
+model ScalingPlanPooledSchedulePatchProperties {
+  /**
+   * Name of the ScalingPlanPooledSchedule
+   */
+  name?: string;
+
   /**
    * Set of days of the week on which this schedule is active.
    */
@@ -4176,7 +4286,7 @@ model ScalingPlanPooledSchedulePatch extends Resource {
   /**
    * Detailed properties for ScalingPlanPooledSchedule
    */
-  properties?: ScalingPlanPooledScheduleProperties;
+  properties?: ScalingPlanPooledSchedulePatchProperties;
 }
 
 /**

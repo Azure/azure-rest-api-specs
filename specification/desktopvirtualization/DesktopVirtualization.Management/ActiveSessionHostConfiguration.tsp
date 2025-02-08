@@ -46,20 +46,7 @@ interface ActiveSessionHostConfigurations {
   listByHostPool is ArmResourceActionSync<
     HostPool,
     void,
-    ActiveSessionHostConfigurationList,
-    Parameters = {
-      /**
-       * Number of items per page.
-       */
-      @query("pageSize")
-      pageSize?: int32;
-
-      /**
-       * Indicates whether the collection is descending.
-       */
-      @query("isDescending")
-      isDescending?: boolean;
-    }
+    ActiveSessionHostConfigurationList
   >;
 }
 
