@@ -1,5 +1,7 @@
 // @ts-check
 
+// TODO: Attempt to eliminate duplicate code
+
 import { dirname } from "path";
 import { extractInputs } from "../../src/context.js";
 import { LabelAction } from "../../src/label.js";
