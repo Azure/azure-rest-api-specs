@@ -16,10 +16,10 @@ namespace Microsoft.DesktopVirtualization;
  */
 @parentResource(SessionHostManagement)
 @singleton("default")
-model SessionHostManagementUpdateStatus
-  is Azure.ResourceManager.ProxyResource<SessionHostManagementUpdateStatusProperties> {
+model SessionHostManagementUpdateStatusModel
+  is Azure.ResourceManager.ProxyResource<SessionHostManagementUpdateStatus> {
   ...ResourceNameParameter<
-    Resource = SessionHostManagementUpdateStatus,
+    Resource = SessionHostManagementUpdateStatusModel,
     KeyName = "SessionHostUpdateStatuses",
     SegmentName = "sessionHostUpdateStatuses",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
@@ -39,14 +39,14 @@ interface SessionHostManagementUpdateStatuses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
   @OpenAPI.operationId("SessionHostManagementUpdateStatus_Get")
-  get is ArmResourceRead<SessionHostManagementUpdateStatus>;
+  get is ArmResourceRead<SessionHostManagementUpdateStatusModel>;
 }
 
-@@maxLength(SessionHostManagementUpdateStatus.name, 24);
-@@minLength(SessionHostManagementUpdateStatus.name, 3);
-@@doc(SessionHostManagementUpdateStatus.name,
+@@maxLength(SessionHostManagementUpdateStatusModel.name, 24);
+@@minLength(SessionHostManagementUpdateStatusModel.name, 3);
+@@doc(SessionHostManagementUpdateStatusModel.name,
   "The name of the SessionHostManagementUpdateStatus"
 );
-@@doc(SessionHostManagementUpdateStatus.properties,
+@@doc(SessionHostManagementUpdateStatusModel.properties,
   "Detailed properties for SessionHostManagementUpdateStatus"
 );

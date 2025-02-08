@@ -43,16 +43,16 @@ alias PrivateEndpointListParameter = {
   pageSize?: int32;
 
   /**
-   * The number of items to skip before starting to return items.
-   */
-  @query
-  initialSkip?: int32;
-
-  /**
    * Indicates whether the collection is descending.
    */
   @query
   isDescending?: boolean;
+
+  /**
+   * The number of items to skip before starting to return items.
+   */
+  @query
+  initialSkip?: int32;
 };
 
 @armResourceOperations

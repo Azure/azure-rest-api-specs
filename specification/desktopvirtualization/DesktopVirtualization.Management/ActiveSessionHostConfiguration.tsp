@@ -59,12 +59,6 @@ interface ActiveSessionHostConfigurations {
        */
       @query("isDescending")
       isDescending?: boolean;
-
-      /**
-       * Initial number of items to skip.
-       */
-      @query("initialSkip")
-      initialSkip?: int32;
     }
   >;
 }

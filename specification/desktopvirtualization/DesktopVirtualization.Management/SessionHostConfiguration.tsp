@@ -23,12 +23,6 @@ model SessionHostConfiguration
     KeyName = "SessionHostConfigurations",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
-  ...ManagedServiceIdentityProperty;
-  ...etagProperty;
-  ...ResourceKindProperty;
-  ...ManagedByProperty;
-  ...ResourcePlanProperty;
-  ...ResourceSkuProperty;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Service doesn't allow delete"
@@ -43,7 +37,7 @@ interface SessionHostConfigurations {
    * Update a SessionHostConfiguration.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchAsync<
     SessionHostConfiguration,
     SessionHostConfigurationPatch
   >;
@@ -70,12 +64,6 @@ interface SessionHostConfigurations {
        */
       @query("isDescending")
       isDescending?: boolean;
-
-      /**
-       * Initial number of items to skip.
-       */
-      @query("initialSkip")
-      initialSkip?: int32;
     },
     Response = SessionHostConfigurationList
   >;

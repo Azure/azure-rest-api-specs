@@ -570,6 +570,8 @@ union ScalingHostPoolType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "There are no more days of the week"
 union ScalingScheduleDaysOfWeekItem {
+  string,
+
   /** Day of Week Sunday */
   Sunday: "Sunday",
 
@@ -1402,7 +1404,7 @@ model NetworkInfoProperties {
   /**
    * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
    */
-  securityGroupId: string;
+  securityGroupId: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -1417,7 +1419,7 @@ model NetworkInfoPatchProperties {
   /**
    * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
    */
-  securityGroupId?: string;
+  securityGroupId?: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -1607,7 +1609,7 @@ model DomainInfoPatchProperties {
   /**
    * Active directory info. Only one should be populated based on the join type.
    */
-  activeDirectoryInfo?: ActiveDirectoryInfoProperties;
+  activeDirectoryInfo?: ActiveDirectoryInfoPatchProperties;
 }
 
 /**
@@ -1637,12 +1639,12 @@ model ImageInfoPatchProperties {
   /**
    * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
    */
-  marketplaceInfo?: MarketplaceInfoProperties;
+  marketplaceInfo?: MarketplaceInfoPatchProperties;
 
   /**
    * The values to uniquely identify a custom image. Only one should be populated based on the image type.
    */
-  customInfo?: CustomInfoProperties;
+  customInfo?: CustomInfoPatchProperties;
 }
 
 /**
@@ -1820,24 +1822,24 @@ model HostPoolUpdateConfigurationProperties {
   /**
    * Whether not to save original disk. False by default.
    */
-  deleteOriginalVm: boolean = false;
+  deleteOriginalVm?: boolean;
 
   /**
    * The maximum number of virtual machines to be removed during hostpool update.
    */
   @minValue(1)
-  maxVmsRemoved?: int32;
+  maxVmsRemoved: int32;
 
   /**
    * Grace period before logging off users in minutes.
    */
-  logOffDelayMinutes?: int32;
+  logOffDelayMinutes: int32;
 
   /**
    * Log off message sent to user for logoff. Default value is an empty string.
    */
   @maxLength(260)
-  logOffMessage: string = "";
+  logOffMessage?: string = "";
 }
 
 /**
@@ -3252,7 +3254,7 @@ model MSIXImageURI {
   /**
    * URI to Image
    */
-  uri?: string;
+  uri?: url;
 }
 
 /**
@@ -3354,7 +3356,6 @@ model ExpandMSIXImageProperties {
   /**
    * Date certificate expires, found in the appxmanifest.xml.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   certificateExpiry?: utcDateTime;
 }
 
@@ -3365,7 +3366,7 @@ model ImportPackageInfoRequest {
   /**
    * URI to Image
    */
-  path?: string;
+  path?: url;
 
   /**
    * Possible device architectures that an app attach package can be configured for
@@ -3397,7 +3398,6 @@ model RegistrationTokenMinimal {
   /**
    * Expiration time of registration token.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTime?: utcDateTime;
 
   /**
@@ -3550,7 +3550,7 @@ model SessionHostProperties {
    * The last time update was completed.
    */
   @visibility("read")
-  lastSessionHostUpdateTime?: string;
+  lastSessionHostUpdateTime?: utcDateTime;
 
   /**
    * List of SessionHostHealthCheckReports
@@ -3603,7 +3603,6 @@ model SessionHostHealthCheckFailureDetails {
    * The timestamp of the last update.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastHealthCheckDateTime?: utcDateTime;
 }
 
@@ -4256,9 +4255,9 @@ model SessionHostConfigurationPatchProperties {
  * The current status of the session host update async operation.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model SessionHostManagementUpdateStatusProperties {
+model SessionHostManagementUpdateStatus {
   /**
-   * Fully qualified ID for the async operation.
+   * The Log Analytics.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Not supported by service"
   id?: string;
@@ -4300,13 +4299,13 @@ model SessionHostManagementUpdateStatusProperties {
    * The custom properties of the SessionHost Update Status.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Not supported by service"
-  properties?: SessionHostManagementUpdateStatusCustomProperties;
+  properties?: SessionHostManagementUpdateStatusProperties;
 }
 
 /**
  * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
  */
-model SessionHostManagementUpdateStatusCustomProperties {
+model SessionHostManagementUpdateStatusProperties {
   /**
    * The Log Analytics.
    */
@@ -4325,7 +4324,7 @@ model SessionHostManagementUpdateStatusCustomProperties {
   /**
    * SessionHostManagement properties used for the operation.
    */
-  sessionHostManagement?: SessionHostManagementProperties;
+  sessionHostManagement?: SessionHostManagement;
 }
 
 /**

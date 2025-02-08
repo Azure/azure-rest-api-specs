@@ -1864,14 +1864,6 @@
             "description": "Indicates whether the collection is descending.",
             "required": false,
             "type": "boolean"
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "description": "Initial number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "responses": {
@@ -2483,19 +2475,19 @@
             "format": "int32"
           },
           {
+            "name": "isDescending",
+            "in": "query",
+            "description": "Indicates whether the collection is descending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "initialSkip",
             "in": "query",
             "description": "The number of items to skip before starting to return items.",
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "description": "Indicates whether the collection is descending.",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "responses": {
@@ -2941,14 +2933,6 @@
             "description": "Indicates whether the collection is descending.",
             "required": false,
             "type": "boolean"
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "description": "Initial number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "responses": {
@@ -3128,6 +3112,20 @@
               "$ref": "#/definitions/SessionHostConfiguration"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3139,7 +3137,11 @@
           "SessionHostConfigurations_Update": {
             "$ref": "./examples/SessionHostConfigurations_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements": {
@@ -3526,7 +3528,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SessionHostManagementUpdateStatus"
+              "$ref": "#/definitions/SessionHostManagementUpdateStatusModel"
             }
           },
           "default": {
@@ -5554,19 +5556,19 @@
             "format": "int32"
           },
           {
+            "name": "isDescending",
+            "in": "query",
+            "description": "Indicates whether the collection is descending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "initialSkip",
             "in": "query",
             "description": "The number of items to skip before starting to return items.",
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "description": "Indicates whether the collection is descending.",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "responses": {
@@ -5829,6 +5831,16 @@
     }
   },
   "definitions": {
+    "ActiveDirectoryInfoPatchProperties": {
+      "type": "object",
+      "description": "Active directory info. Only one should be populated based on the join type",
+      "properties": {
+        "domainCredentials": {
+          "$ref": "#/definitions/KeyVaultCredentialPatchProperties",
+          "description": "Credentials needed to create the virtual machine."
+        }
+      }
+    },
     "ActiveDirectoryInfoProperties": {
       "type": "object",
       "description": "Active directory info. Only one should be populated based on the join type.",
@@ -6804,6 +6816,17 @@
         ]
       }
     },
+    "CustomInfoPatchProperties": {
+      "type": "object",
+      "description": "Custom image information.",
+      "properties": {
+        "imageResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the image."
+        }
+      }
+    },
     "CustomInfoProperties": {
       "type": "object",
       "description": "Custom image information.",
@@ -7047,7 +7070,7 @@
       "description": "Domain configurations of session hosts.",
       "properties": {
         "activeDirectoryInfo": {
-          "$ref": "#/definitions/ActiveDirectoryInfoProperties",
+          "$ref": "#/definitions/ActiveDirectoryInfoPatchProperties",
           "description": "Active directory info. Only one should be populated based on the join type."
         }
       }
@@ -7764,8 +7787,7 @@
       "properties": {
         "deleteOriginalVm": {
           "type": "boolean",
-          "description": "Whether not to save original disk. False by default.",
-          "default": false
+          "description": "Whether not to save original disk. False by default."
         },
         "maxVmsRemoved": {
           "type": "integer",
@@ -7786,8 +7808,8 @@
         }
       },
       "required": [
-        "deleteOriginalVm",
-        "logOffMessage"
+        "maxVmsRemoved",
+        "logOffDelayMinutes"
       ]
     },
     "HostPoolUpdateControlParameter": {
@@ -7849,11 +7871,11 @@
       "description": "Image configurations of session host in a HostPool",
       "properties": {
         "marketplaceInfo": {
-          "$ref": "#/definitions/MarketplaceInfoProperties",
+          "$ref": "#/definitions/MarketplaceInfoPatchProperties",
           "description": "The values to uniquely identify a marketplace image. Only one should be populated based on the image type."
         },
         "customInfo": {
-          "$ref": "#/definitions/CustomInfoProperties",
+          "$ref": "#/definitions/CustomInfoPatchProperties",
           "description": "The values to uniquely identify a custom image. Only one should be populated based on the image type."
         }
       }
@@ -7909,6 +7931,7 @@
       "properties": {
         "path": {
           "type": "string",
+          "format": "uri",
           "description": "URI to Image"
         },
         "packageArchitecture": {
@@ -8019,6 +8042,7 @@
       "properties": {
         "uri": {
           "type": "string",
+          "format": "uri",
           "description": "URI to Image"
         }
       }
@@ -8303,6 +8327,28 @@
         ]
       }
     },
+    "MarketplaceInfoPatchProperties": {
+      "type": "object",
+      "description": "Marketplace image information.",
+      "properties": {
+        "offer": {
+          "type": "string",
+          "description": "The offer of the image."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the image."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The SKU of the image."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "The version of the image."
+        }
+      }
+    },
     "MarketplaceInfoProperties": {
       "type": "object",
       "description": "Marketplace image information.",
@@ -8342,6 +8388,7 @@
         },
         "securityGroupId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG)."
         }
       }
@@ -8357,6 +8404,7 @@
         },
         "securityGroupId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG)."
         }
       },
@@ -9849,7 +9897,7 @@
       ],
       "x-ms-enum": {
         "name": "ScalingScheduleDaysOfWeekItem",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Sunday",
@@ -10112,36 +10160,6 @@
           "$ref": "#/definitions/SessionHostConfigurationProperties",
           "description": "Detailed properties for SessionHostConfiguration",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
-        },
-        "plan": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
-          "description": "Details of the resource plan."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [
@@ -10450,36 +10468,6 @@
           "$ref": "#/definitions/SessionHostManagementProperties",
           "description": "Detailed properties for SessionHostManagement",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
-        },
-        "plan": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
-          "description": "Details of the resource plan."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [
@@ -10584,10 +10572,56 @@
     },
     "SessionHostManagementUpdateStatus": {
       "type": "object",
+      "description": "The current status of the session host update async operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Log Analytics."
+        },
+        "name": {
+          "type": "string",
+          "description": "\"Name of the async operation.\""
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled"
+        },
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Percent of the operation that is complete.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "\"The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "If present, details of the operation error."
+        },
+        "properties": {
+          "$ref": "#/definitions/SessionHostManagementUpdateStatusProperties",
+          "description": "The custom properties of the SessionHost Update Status."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "SessionHostManagementUpdateStatusModel": {
+      "type": "object",
       "description": "Schema for SessionHostManagementUpdateStatus properties.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SessionHostManagementUpdateStatusProperties",
+          "$ref": "#/definitions/SessionHostManagementUpdateStatus",
           "description": "Detailed properties for SessionHostManagementUpdateStatus",
           "x-ms-client-flatten": true
         },
@@ -10628,7 +10662,7 @@
         }
       ]
     },
-    "SessionHostManagementUpdateStatusCustomProperties": {
+    "SessionHostManagementUpdateStatusProperties": {
       "type": "object",
       "description": "Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.",
       "properties": {
@@ -10646,56 +10680,10 @@
           "description": "The timestamp that the update is scheduled for."
         },
         "sessionHostManagement": {
-          "$ref": "#/definitions/SessionHostManagementProperties",
+          "$ref": "#/definitions/SessionHostManagement",
           "description": "SessionHostManagement properties used for the operation."
         }
       }
-    },
-    "SessionHostManagementUpdateStatusProperties": {
-      "type": "object",
-      "description": "The current status of the session host update async operation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified ID for the async operation."
-        },
-        "name": {
-          "type": "string",
-          "description": "\"Name of the async operation.\""
-        },
-        "status": {
-          "$ref": "#/definitions/Status",
-          "description": "Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled"
-        },
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Percent of the operation that is complete.",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "\"The start time of the operation."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the operation."
-        },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "If present, details of the operation error."
-        },
-        "properties": {
-          "$ref": "#/definitions/SessionHostManagementUpdateStatusCustomProperties",
-          "description": "The custom properties of the SessionHost Update Status."
-        }
-      },
-      "required": [
-        "status"
-      ]
     },
     "SessionHostPatch": {
       "type": "object",
@@ -10809,6 +10797,7 @@
         },
         "lastSessionHostUpdateTime": {
           "type": "string",
+          "format": "date-time",
           "description": "The last time update was completed.",
           "readOnly": true
         },
