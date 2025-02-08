@@ -1,7 +1,5 @@
 // @ts-check
 
-// TODO: Attempt to eliminate duplicate code
-
 import { readFile } from "fs/promises";
 import { dirname, join } from "path";
 import { extractInputs } from "../../src/context.js";

@@ -6,6 +6,8 @@ import { getLabelActionImpl } from "../src/arm-auto-signoff-preview.js";
 import * as changedFiles from "../src/changed-files.js";
 import * as git from "../src/git.js";
 
+// TODO: Attempt to eliminate duplicate code
+
 vi.mock("fs/promises", async () => {
   const memfs = await import("memfs");
   return {
