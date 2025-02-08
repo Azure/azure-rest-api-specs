@@ -1743,7 +1743,8 @@ model ActiveSessionHostConfigurationProperties {
   /**
    * Hashtable that lists key/value pair tags to apply to the VMs
    */
-  vmTags: string[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Already implemented with Record"
+  vmTags: Record<string>;
 
   /**
    * The Location for the session host to be created in. It will default to the location of the hostpool if not provided.
@@ -4098,7 +4099,8 @@ model SessionHostConfigurationProperties {
   /**
    * Hashtable that lists key/value pair tags to apply to the VMs
    */
-  vmTags?: string[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Already implemented with Record"
+  vmTags?: Record<string>;
 
   /**
    * The Location for the session host to be created in. It will default to the location of the hostpool if not provided
@@ -4180,7 +4182,8 @@ model SessionHostConfigurationPatchProperties {
   /**
    * Hashtable that lists key/value pair tags to apply to the VMs
    */
-  vmTags?: string[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Already implemented with Record"
+  vmTags?: Record<string>;
 
   /**
    * The Location for the session host to be created in. It will default to the location of the hostpool if not provided
