@@ -1,10 +1,8 @@
 import "@azure-tools/typespec-client-generator-core";
-import "./main.tsp";
-import "./connections/client.tsp";
-import "./agents/client.tsp";
-import "./evaluations/client.tsp";
-import "./telemetry/client.tsp";
+import "./projects.tsp";
 
 using Azure.ClientGenerator.Core;
+
+namespace Azure.AI.Projects;
 
 @@clientName(Azure.AI.Projects, "AIProjectClient");
