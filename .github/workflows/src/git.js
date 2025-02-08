@@ -1,6 +1,6 @@
 // @ts-check
 
-import { execRoot } from "./exec";
+import { execRoot } from "./exec.js";
 
 /**
  * @param {string} treeIsh
