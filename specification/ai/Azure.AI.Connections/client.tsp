@@ -11,9 +11,15 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.AI.Connections.getConnectionWithSecrets, Access.internal);
 @@access(Azure.AI.Connections.GetConnectionResponse, Access.internal);
 @@access(Azure.AI.Connections.InternalConnectionProperties, Access.internal);
-@@access(Azure.AI.Connections.InternalConnectionPropertiesApiKeyAuth, Access.internal);
-@@access(Azure.AI.Connections.InternalConnectionPropertiesAADAuth, Access.internal);
-@@access(Azure.AI.Connections.InternalConnectionPropertiesSASAuth, Access.internal);
+@@access(Azure.AI.Connections.InternalConnectionPropertiesApiKeyAuth,
+  Access.internal
+);
+@@access(Azure.AI.Connections.InternalConnectionPropertiesAADAuth,
+  Access.internal
+);
+@@access(Azure.AI.Connections.InternalConnectionPropertiesSASAuth,
+  Access.internal
+);
 @@access(Azure.AI.Connections.CredentialsApiKeyAuth, Access.internal);
 @@access(Azure.AI.Connections.CredentialsSASAuth, Access.internal);
 
