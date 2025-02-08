@@ -3054,6 +3054,17 @@
             "description": "Resource 'SessionHostConfiguration' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/SessionHostConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -3067,7 +3078,11 @@
           "SessionHostConfigurations_Create": {
             "$ref": "./examples/SessionHostConfigurations_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "SessionHostConfigurations_Update",
@@ -3528,7 +3543,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SessionHostManagementUpdateStatusModel"
+              "$ref": "#/definitions/SessionHostManagementUpdateStatus"
             }
           },
           "default": {
@@ -5836,7 +5851,7 @@
       "description": "Active directory info. Only one should be populated based on the join type",
       "properties": {
         "domainCredentials": {
-          "$ref": "#/definitions/KeyVaultCredentialPatchProperties",
+          "$ref": "#/definitions/KeyVaultCredentialsPatchProperties",
           "description": "Credentials needed to create the virtual machine."
         }
       }
@@ -5846,7 +5861,7 @@
       "description": "Active directory info. Only one should be populated based on the join type.",
       "properties": {
         "domainCredentials": {
-          "$ref": "#/definitions/KeyVaultCredentialProperties",
+          "$ref": "#/definitions/KeyVaultCredentialsProperties",
           "description": "Credentials needed to create the virtual machine."
         },
         "ouPath": {
@@ -5860,8 +5875,7 @@
       },
       "required": [
         "domainCredentials",
-        "ouPath",
-        "domainName"
+        "ouPath"
       ]
     },
     "ActiveSessionHostConfiguration": {
@@ -6004,7 +6018,7 @@
           "description": "Security information."
         },
         "vmAdminCredentials": {
-          "$ref": "#/definitions/KeyVaultCredentialProperties",
+          "$ref": "#/definitions/KeyVaultCredentialsProperties",
           "description": "Local Admin credentials for session hosts."
         },
         "bootDiagnosticsInfo": {
@@ -6303,6 +6317,7 @@
         },
         "packageLookbackUrl": {
           "type": "string",
+          "format": "uri",
           "description": "Lookback url to third party control plane, is null for native app attach packages"
         },
         "customData": {
@@ -6345,6 +6360,7 @@
         },
         "packageLookbackUrl": {
           "type": "string",
+          "format": "uri",
           "description": "Lookback url to third party control plane, is null for native app attach packages"
         },
         "customData": {
@@ -6780,11 +6796,7 @@
           "format": "uri",
           "description": "Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used."
         }
-      },
-      "required": [
-        "enabled",
-        "storageUri"
-      ]
+      }
     },
     "CommandLineSetting": {
       "type": "string",
@@ -7431,9 +7443,9 @@
       "description": "HostPool properties that can be patched.",
       "properties": {
         "tags": {
-          "type": "array",
+          "type": "object",
           "description": "tags to be updated",
-          "items": {
+          "additionalProperties": {
             "type": "string"
           }
         },
@@ -7964,7 +7976,7 @@
         ]
       }
     },
-    "KeyVaultCredentialPatchProperties": {
+    "KeyVaultCredentialsPatchProperties": {
       "type": "object",
       "description": "Credentials kept in the keyvault.",
       "properties": {
@@ -7980,7 +7992,7 @@
         }
       }
     },
-    "KeyVaultCredentialProperties": {
+    "KeyVaultCredentialsProperties": {
       "type": "object",
       "description": "Credentials kept in the keyvault.",
       "properties": {
@@ -9321,8 +9333,137 @@
       "description": "ScalingPlanPersonalSchedule properties that can be patched.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ScalingPlanPersonalScheduleProperties",
+          "$ref": "#/definitions/ScalingPlanPersonalSchedulePatchProperties",
           "description": "Detailed properties for ScalingPlanPersonalSchedule"
+        }
+      }
+    },
+    "ScalingPlanPersonalSchedulePatchProperties": {
+      "type": "object",
+      "description": "ScalingPlanPersonalSchedule properties that can be patched.",
+      "properties": {
+        "daysOfWeek": {
+          "type": "array",
+          "description": "Set of days of the week on which this schedule is active.",
+          "items": {
+            "$ref": "#/definitions/DayOfWeek"
+          }
+        },
+        "rampUpStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for ramp up period."
+        },
+        "rampUpAutoStartHosts": {
+          "$ref": "#/definitions/StartupBehavior",
+          "description": "The desired startup behavior during the ramp up period for personal vms in the hostpool."
+        },
+        "rampUpStartVMOnConnect": {
+          "$ref": "#/definitions/SetStartVMOnConnect",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually."
+        },
+        "rampUpActionOnDisconnect": {
+          "$ref": "#/definitions/SessionHandlingOperation",
+          "description": "Action to be taken after a user disconnect during the ramp up period."
+        },
+        "rampUpMinutesToWaitOnDisconnect": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp up period.",
+          "minimum": 0
+        },
+        "rampUpActionOnLogoff": {
+          "$ref": "#/definitions/SessionHandlingOperation",
+          "description": "Action to be taken after a logoff during the ramp up period."
+        },
+        "rampUpMinutesToWaitOnLogoff": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp up period.",
+          "minimum": 0
+        },
+        "peakStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for peak period."
+        },
+        "peakStartVMOnConnect": {
+          "$ref": "#/definitions/SetStartVMOnConnect",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the peak phase."
+        },
+        "peakActionOnDisconnect": {
+          "$ref": "#/definitions/SessionHandlingOperation",
+          "description": "Action to be taken after a user disconnect during the peak period."
+        },
+        "peakMinutesToWaitOnDisconnect": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the peak period.",
+          "minimum": 0
+        },
+        "peakActionOnLogoff": {
+          "$ref": "#/definitions/SessionHandlingOperation",
+          "description": "Action to be taken after a logoff during the peak period."
+        },
+        "peakMinutesToWaitOnLogoff": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the peak period.",
+          "minimum": 0
+        },
+        "rampDownStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for ramp down period."
+        },
+        "rampDownStartVMOnConnect": {
+          "$ref": "#/definitions/SetStartVMOnConnect",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp down phase."
+        },
+        "rampDownActionOnDisconnect": {
+          "$ref": "#/definitions/SessionHandlingOperation",
+          "description": "Action to be taken after a user disconnect during the ramp down period."
+        },
+        "rampDownMinutesToWaitOnDisconnect": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp down period.",
+          "minimum": 0
+        },
+        "rampDownActionOnLogoff": {
+          "$ref": "#/definitions/SessionHandlingOperation",
+          "description": "Action to be taken after a logoff during the ramp down period."
+        },
+        "rampDownMinutesToWaitOnLogoff": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp down period.",
+          "minimum": 0
+        },
+        "offPeakStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for off-peak period."
+        },
+        "offPeakStartVMOnConnect": {
+          "$ref": "#/definitions/SetStartVMOnConnect",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the off-peak phase."
+        },
+        "offPeakActionOnDisconnect": {
+          "$ref": "#/definitions/SessionHandlingOperation",
+          "description": "Action to be taken after a user disconnect during the off-peak period."
+        },
+        "offPeakMinutesToWaitOnDisconnect": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the off-peak period.",
+          "minimum": 0
+        },
+        "offPeakActionOnLogoff": {
+          "$ref": "#/definitions/SessionHandlingOperation",
+          "description": "Action to be taken after a logoff during the off-peak period."
+        },
+        "offPeakMinutesToWaitOnLogoff": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period.",
+          "minimum": 0
         }
       }
     },
@@ -10266,7 +10407,7 @@
           "description": "Security Information"
         },
         "vmAdminCredentials": {
-          "$ref": "#/definitions/KeyVaultCredentialPatchProperties",
+          "$ref": "#/definitions/KeyVaultCredentialsPatchProperties",
           "description": "Local Admin credentials for session hosts.\""
         },
         "bootDiagnosticsInfo": {
@@ -10353,7 +10494,7 @@
           "description": "Security Information"
         },
         "vmAdminCredentials": {
-          "$ref": "#/definitions/KeyVaultCredentialProperties",
+          "$ref": "#/definitions/KeyVaultCredentialsProperties",
           "description": "Local Admin credentials for session hosts.\""
         },
         "bootDiagnosticsInfo": {
@@ -10572,56 +10713,10 @@
     },
     "SessionHostManagementUpdateStatus": {
       "type": "object",
-      "description": "The current status of the session host update async operation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The Log Analytics."
-        },
-        "name": {
-          "type": "string",
-          "description": "\"Name of the async operation.\""
-        },
-        "status": {
-          "$ref": "#/definitions/Status",
-          "description": "Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled"
-        },
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Percent of the operation that is complete.",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "\"The start time of the operation."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the operation."
-        },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "If present, details of the operation error."
-        },
-        "properties": {
-          "$ref": "#/definitions/SessionHostManagementUpdateStatusProperties",
-          "description": "The custom properties of the SessionHost Update Status."
-        }
-      },
-      "required": [
-        "status"
-      ]
-    },
-    "SessionHostManagementUpdateStatusModel": {
-      "type": "object",
       "description": "Schema for SessionHostManagementUpdateStatus properties.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SessionHostManagementUpdateStatus",
+          "$ref": "#/definitions/SessionHostManagementUpdateStatusProperties",
           "description": "Detailed properties for SessionHostManagementUpdateStatus",
           "x-ms-client-flatten": true
         },
@@ -10662,7 +10757,7 @@
         }
       ]
     },
-    "SessionHostManagementUpdateStatusProperties": {
+    "SessionHostManagementUpdateStatusCustomProperties": {
       "type": "object",
       "description": "Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.",
       "properties": {
@@ -10684,6 +10779,52 @@
           "description": "SessionHostManagement properties used for the operation."
         }
       }
+    },
+    "SessionHostManagementUpdateStatusProperties": {
+      "type": "object",
+      "description": "The current status of the session host update async operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Log Analytics."
+        },
+        "name": {
+          "type": "string",
+          "description": "\"Name of the async operation.\""
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled"
+        },
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Percent of the operation that is complete.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "\"The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "If present, details of the operation error."
+        },
+        "properties": {
+          "$ref": "#/definitions/SessionHostManagementUpdateStatusCustomProperties",
+          "description": "The custom properties of the SessionHost Update Status."
+        }
+      },
+      "required": [
+        "status"
+      ]
     },
     "SessionHostPatch": {
       "type": "object",
@@ -10858,6 +10999,30 @@
             "name": "UserProfileDiskMounted",
             "value": "UserProfileDiskMounted",
             "description": "Session has mounted user profile disk"
+          }
+        ]
+      }
+    },
+    "SetStartVMOnConnect": {
+      "type": "string",
+      "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "SetStartVMOnConnect",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Start VM on Connect is enabled"
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually"
           }
         ]
       }

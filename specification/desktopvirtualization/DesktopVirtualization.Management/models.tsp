@@ -1204,7 +1204,7 @@ model AppAttachPackageProperties {
   /**
    * Lookback url to third party control plane, is null for native app attach packages
    */
-  packageLookbackUrl?: string;
+  packageLookbackUrl?: url;
 
   /**
    * Field that can be populated with custom data and filtered on in list GET calls
@@ -1515,7 +1515,7 @@ model CustomInfoPatchProperties {
 /**
  * Credentials kept in the keyvault.
  */
-model KeyVaultCredentialProperties {
+model KeyVaultCredentialsProperties {
   /**
    * The uri to access the secret that the username is stored in.
    */
@@ -1530,7 +1530,7 @@ model KeyVaultCredentialProperties {
 /**
  * Credentials kept in the keyvault.
  */
-model KeyVaultCredentialPatchProperties {
+model KeyVaultCredentialsPatchProperties {
   /**
    * The uri to access the secret that the username is stored in.
    */
@@ -1549,7 +1549,7 @@ model ActiveDirectoryInfoProperties {
   /**
    * Credentials needed to create the virtual machine.
    */
-  domainCredentials: KeyVaultCredentialProperties;
+  domainCredentials: KeyVaultCredentialsProperties;
 
   /**
    * The organizational unit(OU) path.
@@ -1559,7 +1559,7 @@ model ActiveDirectoryInfoProperties {
   /**
    * The domain a virtual machine connected to a hostpool will join.
    */
-  domainName: string;
+  domainName?: string;
 }
 
 /**
@@ -1569,7 +1569,7 @@ model ActiveDirectoryInfoPatchProperties {
   /**
    * Credentials needed to create the virtual machine.
    */
-  domainCredentials?: KeyVaultCredentialPatchProperties;
+  domainCredentials?: KeyVaultCredentialsPatchProperties;
 }
 
 /**
@@ -1696,12 +1696,12 @@ model BootDiagnosticsInfoProperties {
   /**
    * Whether boot diagnostics should be enabled on the Virtual Machine.
    */
-  enabled: boolean;
+  enabled?: boolean;
 
   /**
    * Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used.
    */
-  storageUri: url;
+  storageUri?: url;
 }
 
 /**
@@ -1807,7 +1807,7 @@ model ActiveSessionHostConfigurationProperties {
   /**
    * Local Admin credentials for session hosts.
    */
-  vmAdminCredentials: KeyVaultCredentialProperties;
+  vmAdminCredentials: KeyVaultCredentialsProperties;
 
   /**
    * Boot Diagnostics information.
@@ -2674,7 +2674,7 @@ model AppAttachPackagePatchProperties {
   /**
    * Lookback url to third party control plane, is null for native app attach packages
    */
-  packageLookbackUrl?: string;
+  packageLookbackUrl?: url;
 
   /**
    * Field that can be populated with custom data and filtered on in list GET calls
@@ -3062,7 +3062,8 @@ model HostPoolPatch extends Resource {
   /**
    * tags to be updated
    */
-  tags?: string[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags are a valid record"
+  tags?: Record<string>;
 
   /**
    * HostPool properties that can be patched.
@@ -3905,12 +3906,160 @@ model ScalingPlanPersonalScheduleProperties {
 /**
  * ScalingPlanPersonalSchedule properties that can be patched.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
+model ScalingPlanPersonalSchedulePatchProperties {
+  /**
+   * Set of days of the week on which this schedule is active.
+   */
+  daysOfWeek?: DayOfWeek[];
+
+  /**
+   * Starting time for ramp up period.
+   */
+  rampUpStartTime?: Time;
+
+  /**
+   * The desired startup behavior during the ramp up period for personal vms in the hostpool.
+   */
+  rampUpAutoStartHosts?: StartupBehavior;
+
+  /**
+   * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
+  rampUpStartVMOnConnect?: SetStartVMOnConnect;
+
+  /**
+   * Action to be taken after a user disconnect during the ramp up period.
+   */
+  rampUpActionOnDisconnect?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp up period.
+   */
+  @minValue(0)
+  rampUpMinutesToWaitOnDisconnect?: int32;
+
+  /**
+   * Action to be taken after a logoff during the ramp up period.
+   */
+  rampUpActionOnLogoff?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp up period.
+   */
+  @minValue(0)
+  rampUpMinutesToWaitOnLogoff?: int32;
+
+  /**
+   * Starting time for peak period.
+   */
+  peakStartTime?: Time;
+
+  /**
+   * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
+  peakStartVMOnConnect?: SetStartVMOnConnect;
+
+  /**
+   * Action to be taken after a user disconnect during the peak period.
+   */
+  peakActionOnDisconnect?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the peak period.
+   */
+  @minValue(0)
+  peakMinutesToWaitOnDisconnect?: int32;
+
+  /**
+   * Action to be taken after a logoff during the peak period.
+   */
+  peakActionOnLogoff?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user logs off during the peak period.
+   */
+  @minValue(0)
+  peakMinutesToWaitOnLogoff?: int32;
+
+  /**
+   * Starting time for ramp down period.
+   */
+  rampDownStartTime?: Time;
+
+  /**
+   * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
+  rampDownStartVMOnConnect?: SetStartVMOnConnect;
+
+  /**
+   * Action to be taken after a user disconnect during the ramp down period.
+   */
+  rampDownActionOnDisconnect?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp down period.
+   */
+  @minValue(0)
+  rampDownMinutesToWaitOnDisconnect?: int32;
+
+  /**
+   * Action to be taken after a logoff during the ramp down period.
+   */
+  rampDownActionOnLogoff?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp down period.
+   */
+  @minValue(0)
+  rampDownMinutesToWaitOnLogoff?: int32;
+
+  /**
+   * Starting time for off-peak period.
+   */
+  offPeakStartTime?: Time;
+
+  /**
+   * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
+  offPeakStartVMOnConnect?: SetStartVMOnConnect;
+
+  /**
+   * Action to be taken after a user disconnect during the off-peak period.
+   */
+  offPeakActionOnDisconnect?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the off-peak period.
+   */
+  @minValue(0)
+  offPeakMinutesToWaitOnDisconnect?: int32;
+
+  /**
+   * Action to be taken after a logoff during the off-peak period.
+   */
+  offPeakActionOnLogoff?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period.
+   */
+  @minValue(0)
+  offPeakMinutesToWaitOnLogoff?: int32;
+}
+
+/**
+ * ScalingPlanPersonalSchedule properties that can be patched.
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
 model ScalingPlanPersonalSchedulePatch {
   /**
    * Detailed properties for ScalingPlanPersonalSchedule
    */
-  properties?: ScalingPlanPersonalScheduleProperties;
+  properties?: ScalingPlanPersonalSchedulePatchProperties;
 }
 
 /**
@@ -4160,7 +4309,7 @@ model SessionHostConfigurationProperties {
   /**
    * Local Admin credentials for session hosts."
    */
-  vmAdminCredentials: KeyVaultCredentialProperties;
+  vmAdminCredentials: KeyVaultCredentialsProperties;
 
   /**
    * Boot Diagnostics Information
@@ -4243,7 +4392,7 @@ model SessionHostConfigurationPatchProperties {
   /**
    * Local Admin credentials for session hosts."
    */
-  vmAdminCredentials?: KeyVaultCredentialPatchProperties;
+  vmAdminCredentials?: KeyVaultCredentialsPatchProperties;
 
   /**
    * Boot Diagnostics Information
@@ -4255,7 +4404,7 @@ model SessionHostConfigurationPatchProperties {
  * The current status of the session host update async operation.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model SessionHostManagementUpdateStatus {
+model SessionHostManagementUpdateStatusProperties {
   /**
    * The Log Analytics.
    */
@@ -4299,13 +4448,13 @@ model SessionHostManagementUpdateStatus {
    * The custom properties of the SessionHost Update Status.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Not supported by service"
-  properties?: SessionHostManagementUpdateStatusProperties;
+  properties?: SessionHostManagementUpdateStatusCustomProperties;
 }
 
 /**
  * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
  */
-model SessionHostManagementUpdateStatusProperties {
+model SessionHostManagementUpdateStatusCustomProperties {
   /**
    * The Log Analytics.
    */

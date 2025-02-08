@@ -45,7 +45,7 @@ interface SessionHostConfigurations {
   /**
    * Create or update a SessionHostConfiguration.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<SessionHostConfiguration>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SessionHostConfiguration>;
 
   /**
    * List SessionHostConfigurations.
