@@ -2,7 +2,8 @@
 
 // TODO: Attempt to eliminate duplicate code
 
-import { dirname } from "path";
+import { readFile } from "fs/promises";
+import { dirname, join } from "path";
 import { extractInputs } from "../../src/context.js";
 import { LabelAction } from "../../src/label.js";
 import { getChangedSwaggerFiles } from "./changed-files.js";
@@ -54,7 +55,38 @@ export async function getLabelActionImpl({
   github,
   core,
 }) {
-  if (!(await incrementalChangesToExistingResourceProvider(core))) {
+  const changedSwaggerFiles = await getChangedSwaggerFiles(
+    core,
+    "HEAD^",
+    "HEAD",
+    "",
+  );
+  const changedRmSwaggerFiles = changedSwaggerFiles.filter((f) =>
+    f.includes("/resource-manager/"),
+  );
+  core.info(
+    `Changed files containing path '/resource-manager/': ${changedRmSwaggerFiles}`,
+  );
+
+  if (changedRmSwaggerFiles.length == 0) {
+    core.info(
+      "No changes to swagger files containing path '/resource-manager/'",
+    );
+    return LabelAction.Remove;
+  }
+
+  // if (
+  //   !(await incrementalChangesToExistingResourceProvider(
+  //     changedRmSwaggerFiles,
+  //     core,
+  //   ))
+  // ) {
+  //   return LabelAction.Remove;
+  // }
+
+  if (
+    !(await incrementalChangesToExistingTypeSpec(changedRmSwaggerFiles, core))
+  ) {
     return LabelAction.Remove;
   }
 
@@ -110,63 +142,104 @@ export async function getLabelActionImpl({
 }
 
 /**
+ * @param {string[]} changedRmSwaggerFiles
  * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @returns {Promise<boolean>} True if PR contains changes to existing RPs, and no new RPs
+ * @returns {Promise<boolean>} True if PR is making incremental changes to an existing TypeSpec RP.  False if PR changes handwritten swagger or is a conversion to TypeSpec.
  */
-async function incrementalChangesToExistingResourceProvider(core) {
-  core.info("incrementalChangesToExistingResourceProvider()");
+async function incrementalChangesToExistingTypeSpec(
+  changedRmSwaggerFiles,
+  core,
+) {
+  core.info("incrementalChangesToExistingTypeSpec()");
 
-  const changedSwaggerFiles = await getChangedSwaggerFiles(
-    core,
-    "HEAD^",
-    "HEAD",
-    "",
+  // If any changed file is not typespec-generated, return false
+  for (const file of changedRmSwaggerFiles) {
+    const swagger = await readFile(
+      join(process.env.GITHUB_WORKSPACE || "", file),
+      { encoding: "utf8" },
+    );
+
+    const swaggerObj = JSON.parse(swagger);
+
+    if (!swaggerObj["info"]?.["x-typespec-generated"]) {
+      core.info(`File "${file}" does not contain "info.x-typespec-generated"`);
+      return false;
+    }
+  }
+
+  const changedSpecDirs = new Set(
+    changedRmSwaggerFiles.map((f) => dirname(dirname(dirname(f)))),
   );
-  const changedRmFiles = changedSwaggerFiles.filter((f) =>
-    f.includes("/resource-manager/"),
-  );
+
+  // If any changed dir did not exist in the base branch, it cannot be an existing TypeSpec spec, so return false
+  for (const changedSpecDir in changedSpecDirs) {
+    const resultString = await lsTree("HEAD^", changedSpecDir, core);
+
+    // Command "git ls-tree" returns an nempty string if the folder did not exist in the base branch
+    if (!resultString) {
+      return false;
+    }
+  }
+
+  // If any changed dir did not contain at least one typespec-generated swagger file in the base branch,
+  // this appears to be a TypeSpec conversion, so return false;
+  for (const changedSpecDir in changedSpecDirs) {
+    const resultString = await lsTree("HEAD^", changedSpecDir, core);
+
+    // Command "git ls-tree" returns an nempty string if the folder did not exist in the base branch
+    if (!resultString) {
+      return false;
+    }
+  }
 
   core.info(
-    `Changed files containing path '/resource-manager/': ${changedRmFiles}`,
+    "Appears to contain only incremental changes to an existing TypeSpec RP",
   );
-
-  if (changedRmFiles.length == 0) {
-    core.info(
-      "No changes to swagger files containing path '/resource-manager/'",
-    );
-    return false;
-  } else {
-    for (const file of changedRmFiles) {
-      if (!(await specFolderExistsInBaseBranch(file, core))) {
-        core.info(`Appears to add a new RP: ${file}`);
-        return false;
-      }
-    }
-    core.info("Appears to change an existing RPs, but adds no new RPs");
-    return true;
-  }
+  return true;
 }
 
-/**
- * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @param {string} file
- * @returns {Promise<boolean>} True if the spec folder exists in the base branch
- */
-async function specFolderExistsInBaseBranch(file, core) {
-  core.info(`specFolderExistsInBaseBranch("${file}")`);
+// /**
+//  * @param {string[]} changedRmSwaggerFiles
+//  * @param {import('github-script').AsyncFunctionArguments['core']} core
+//  * @returns {Promise<boolean>} True if PR contains changes to existing RPs, and no new RPs
+//  */
+// async function incrementalChangesToExistingResourceProvider(
+//   changedRmSwaggerFiles,
+//   core,
+// ) {
+//   core.info("incrementalChangesToExistingResourceProvider()");
 
-  // Example1: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json
-  // Example2: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/contosoGroup1/preview/2021-10-01-preview/contoso.json
+//   for (const file of changedRmSwaggerFiles) {
+//     if (!(await specFolderExistsInBaseBranch(file, core))) {
+//       core.info(`Appears to add a new RP: ${file}`);
+//       return false;
+//     }
+//   }
 
-  // Example1: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso
-  // Example2: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/contosoGroup1
-  const specDir = dirname(dirname(dirname(file)));
-  core.info(`specDir: ${specDir}`);
+//   core.info("Appears to change existing RPs, but adds no new RPs");
+//   return true;
+// }
 
-  const resultString = await lsTree("HEAD^", specDir, core);
+// /**
+//  * @param {import('github-script').AsyncFunctionArguments['core']} core
+//  * @param {string} file
+//  * @returns {Promise<boolean>} True if the spec folder exists in the base branch
+//  */
+// async function specFolderExistsInBaseBranch(file, core) {
+//   core.info(`specFolderExistsInBaseBranch("${file}")`);
 
-  // Command "git ls-tree" returns a nonempty string if the folder exists in the base branch
-  const result = Boolean(resultString);
-  core.info(`returning: ${result}`);
-  return result;
-}
+//   // Example1: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json
+//   // Example2: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/contosoGroup1/preview/2021-10-01-preview/contoso.json
+
+//   // Example1: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso
+//   // Example2: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/contosoGroup1
+//   const specDir = dirname(dirname(dirname(file)));
+//   core.info(`specDir: ${specDir}`);
+
+//   const resultString = await lsTree("HEAD^", specDir, core);
+
+//   // Command "git ls-tree" returns a nonempty string if the folder exists in the base branch
+//   const result = Boolean(resultString);
+//   core.info(`returning: ${result}`);
+//   return result;
+// }
