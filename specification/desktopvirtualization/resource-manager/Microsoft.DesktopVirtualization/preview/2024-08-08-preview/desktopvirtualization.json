@@ -6931,6 +6931,19 @@
         ]
       }
     },
+    "DiskInfoPatchProperties": {
+      "type": "object",
+      "description": "Disk information.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DiskType",
+          "description": "The disk type used by virtual machine in hostpool session host."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "DiskInfoProperties": {
       "type": "object",
       "description": "Disk information.",
@@ -6972,6 +6985,16 @@
             "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
           }
         ]
+      }
+    },
+    "DomainInfoPatchProperties": {
+      "type": "object",
+      "description": "Domain configurations of session hosts.",
+      "properties": {
+        "activeDirectoryInfo": {
+          "$ref": "#/definitions/ActiveDirectoryInfoProperties",
+          "description": "Active directory info. Only one should be populated based on the join type."
+        }
       }
     },
     "DomainInfoProperties": {
@@ -7678,11 +7701,7 @@
           "description": "Log off message sent to user for logoff. Default value is an empty string.",
           "maxLength": 260
         }
-      },
-      "required": [
-        "deleteOriginalVm",
-        "logOffMessage"
-      ]
+      }
     },
     "HostPoolUpdateConfigurationProperties": {
       "type": "object",
@@ -7768,6 +7787,20 @@
             "description": "Allows Clients to be accessed from the public network"
           }
         ]
+      }
+    },
+    "ImageInfoPatchProperties": {
+      "type": "object",
+      "description": "Image configurations of session host in a HostPool",
+      "properties": {
+        "marketplaceInfo": {
+          "$ref": "#/definitions/MarketplaceInfoProperties",
+          "description": "The values to uniquely identify a marketplace image. Only one should be populated based on the image type."
+        },
+        "customInfo": {
+          "$ref": "#/definitions/CustomInfoProperties",
+          "description": "The values to uniquely identify a custom image. Only one should be populated based on the image type."
+        }
       }
     },
     "ImageInfoProperties": {
@@ -8226,6 +8259,21 @@
         "sku",
         "exactVersion"
       ]
+    },
+    "NetworkInfoPatchProperties": {
+      "type": "object",
+      "description": "Network information.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the subnet."
+        },
+        "securityGroupId": {
+          "type": "string",
+          "description": "The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG)."
+        }
+      }
     },
     "NetworkInfoProperties": {
       "type": "object",
@@ -9770,6 +9818,27 @@
         ]
       }
     },
+    "SecurityInfoPatchProperties": {
+      "type": "object",
+      "description": "Security Information.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SecurityType",
+          "description": "The security type used by virtual machine in hostpool session host. Default is Standard."
+        },
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Whether to use secureBoot on the virtual machine."
+        },
+        "vTPMEnabled": {
+          "type": "boolean",
+          "description": "Whether to use vTPM on the virtual machine."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "SecurityInfoProperties": {
       "type": "object",
       "description": "Security Information.",
@@ -9819,6 +9888,36 @@
         "secureBootEnabled",
         "vTPMEnabled"
       ]
+    },
+    "SecurityType": {
+      "type": "string",
+      "description": "The security type used by virtual machine in hostpool session host. Default is Standard.",
+      "enum": [
+        "Standard",
+        "TrustedLaunch",
+        "ConfidentialVM"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard security protocol. No additional parameters"
+          },
+          {
+            "name": "TrustedLaunch",
+            "value": "TrustedLaunch",
+            "description": "TrustedLaunch allows for secure boot and vTPM"
+          },
+          {
+            "name": "ConfidentialVM",
+            "value": "ConfidentialVM",
+            "description": "Confidential Virtual Machine security protocol"
+          }
+        ]
+      }
     },
     "SendMessage": {
       "type": "object",
@@ -10049,7 +10148,7 @@
           }
         },
         "networkInfo": {
-          "$ref": "#/definitions/NetworkInfoProperties",
+          "$ref": "#/definitions/NetworkInfoPatchProperties",
           "description": "Network information."
         },
         "vmSizeId": {
@@ -10057,7 +10156,7 @@
           "description": "The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6"
         },
         "diskInfo": {
-          "$ref": "#/definitions/DiskInfoProperties",
+          "$ref": "#/definitions/DiskInfoPatchProperties",
           "description": "Disk Information"
         },
         "customConfigurationScriptUrl": {
@@ -10066,15 +10165,15 @@
           "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning."
         },
         "imageInfo": {
-          "$ref": "#/definitions/ImageInfoProperties",
+          "$ref": "#/definitions/ImageInfoPatchProperties",
           "description": "Image configurations of HostPool."
         },
         "domainInfo": {
-          "$ref": "#/definitions/DomainInfoProperties",
+          "$ref": "#/definitions/DomainInfoPatchProperties",
           "description": "Domain configurations of session hosts."
         },
         "securityInfo": {
-          "$ref": "#/definitions/SecurityInfoProperties",
+          "$ref": "#/definitions/SecurityInfoPatchProperties",
           "description": "Security Information"
         },
         "vmAdminCredentials": {

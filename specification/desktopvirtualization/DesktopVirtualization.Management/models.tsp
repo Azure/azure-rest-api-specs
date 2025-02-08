@@ -1417,7 +1417,7 @@ model NetworkInfoPatchProperties {
   /**
    * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
    */
-  securityGroupId: string;
+  securityGroupId?: string;
 }
 
 /**
@@ -1472,22 +1472,22 @@ model MarketplaceInfoPatchProperties {
   /**
    * The offer of the image.
    */
-  offer: string;
+  offer?: string;
 
   /**
    * The publisher of the image.
    */
-  publisher: string;
+  publisher?: string;
 
   /**
    * The SKU of the image.
    */
-  sku: string;
+  sku?: string;
 
   /**
    * The version of the image.
    */
-  exactVersion: string;
+  exactVersion?: string;
 }
 
 /**
@@ -1507,7 +1507,7 @@ model CustomInfoPatchProperties {
   /**
    * The resource ID of the image.
    */
-  imageResourceId: Azure.Core.armResourceIdentifier;
+  imageResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -1567,7 +1567,7 @@ model ActiveDirectoryInfoPatchProperties {
   /**
    * Credentials needed to create the virtual machine.
    */
-  domainCredentials: KeyVaultCredentialPatchProperties;
+  domainCredentials?: KeyVaultCredentialPatchProperties;
 }
 
 /**
@@ -1631,6 +1631,21 @@ model ImageInfoProperties {
 }
 
 /**
+ * Image configurations of session host in a HostPool
+ */
+model ImageInfoPatchProperties {
+  /**
+   * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
+   */
+  marketplaceInfo?: MarketplaceInfoProperties;
+
+  /**
+   * The values to uniquely identify a custom image. Only one should be populated based on the image type.
+   */
+  customInfo?: CustomInfoProperties;
+}
+
+/**
  * Security Information.
  */
 model SecurityInfoProperties {
@@ -1663,13 +1678,13 @@ model SecurityInfoPatchProperties {
   /**
    * Whether to use secureBoot on the virtual machine.
    */
-  secureBootEnabled: boolean;
+  secureBootEnabled?: boolean;
 
   /**
    * Whether to use vTPM on the virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "vTPM is an acronym used by service"
-  vTPMEnabled: boolean;
+  vTPMEnabled?: boolean;
 }
 
 /**
@@ -1831,7 +1846,7 @@ model HostPoolUpdateConfigurationPatchProperties {
   /**
    * Whether not to save original disk. False by default.
    */
-  deleteOriginalVm: boolean;
+  deleteOriginalVm?: boolean;
 
   /**
    * The maximum number of virtual machines to be removed during hostpool update.
@@ -1848,7 +1863,7 @@ model HostPoolUpdateConfigurationPatchProperties {
    * Log off message sent to user for logoff. Default value is an empty string.
    */
   @maxLength(260)
-  logOffMessage: string;
+  logOffMessage?: string;
 }
 
 /**
@@ -4191,7 +4206,7 @@ model SessionHostConfigurationPatchProperties {
   /**
    * Network information.
    */
-  networkInfo?: NetworkInfoProperties;
+  networkInfo?: NetworkInfoPatchProperties;
 
   /**
    * The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6
@@ -4201,7 +4216,7 @@ model SessionHostConfigurationPatchProperties {
   /**
    * Disk Information
    */
-  diskInfo?: DiskInfoProperties;
+  diskInfo?: DiskInfoPatchProperties;
 
   /**
    * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
@@ -4211,17 +4226,17 @@ model SessionHostConfigurationPatchProperties {
   /**
    * Image configurations of HostPool.
    */
-  imageInfo?: ImageInfoProperties;
+  imageInfo?: ImageInfoPatchProperties;
 
   /**
    * Domain configurations of session hosts.
    */
-  domainInfo?: DomainInfoProperties;
+  domainInfo?: DomainInfoPatchProperties;
 
   /**
    * Security Information
    */
-  securityInfo?: SecurityInfoProperties;
+  securityInfo?: SecurityInfoPatchProperties;
 
   /**
    * Local Admin credentials for session hosts."
