@@ -18,7 +18,7 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.AI.CredentialsSASAuth, Access.internal);
 
 // The SDK has a hand-written public EndpointProperties class, with two properties of the type below.
-// Need to explicilty mention them as "public" here, because otherwise they would not be made public
+// Need to explicitly mention them as "public" here, because otherwise they would not be made public
 // since the auto-generated operations that use them are marked as internal above.
 @@access(Azure.AI.AuthenticationType, Access.public);
 @@access(Azure.AI.ConnectionType, Access.public);

@@ -16,7 +16,7 @@ namespace Azure.AI.Projects;
 
 alias ServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &
-  NoConditionalRequests; // NoRetryRequests supresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
+  NoConditionalRequests; // NoRetryRequests suppresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
 
 alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
