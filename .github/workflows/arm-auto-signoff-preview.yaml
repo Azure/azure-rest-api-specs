@@ -1,13 +1,20 @@
 name: ARM Auto Signoff (Preview)
 
 on:
+  check_suite:
+    # Depends on check_run status, so must re-evaluate whenever a check_suite is completed.
+    # Could instead trigger on check_run events, but I think this is unnecessarily noisy.
+    types: [completed]
   pull_request:
     types:
+      # Depends on labels, so must re-evaluate whenever a label is manually added or removed.
       - labeled
       - unlabeled
+      # Depends on changed files and check_run status, so must re-evaluate whenever either could change
       - opened
       - reopened
       - synchronize
+  # For manual testing
   workflow_dispatch:
     inputs:
       owner:
@@ -65,4 +72,5 @@ jobs:
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMAutoSignoffPreview"
+          # Convert "add/remove" to "true/false"
           value: "${{ steps.get-label-action.outputs.result == 'add' }}"
