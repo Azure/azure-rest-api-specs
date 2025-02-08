@@ -1412,7 +1412,7 @@ model NetworkInfoPatchProperties {
   /**
    * The resource ID of the subnet.
    */
-  subnetId: Azure.Core.armResourceIdentifier;
+  subnetId?: Azure.Core.armResourceIdentifier;
 
   /**
    * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
@@ -4181,7 +4181,7 @@ model SessionHostConfigurationPatchProperties {
    * The prefix that should be associated with session host names
    */
   @maxLength(11)
-  vmNamePrefix: string;
+  vmNamePrefix?: string;
 
   /**
    * Value for availability zones to be used by the session host. Should be from [1,2,3].
@@ -4191,17 +4191,17 @@ model SessionHostConfigurationPatchProperties {
   /**
    * Network information.
    */
-  networkInfo: NetworkInfoProperties;
+  networkInfo?: NetworkInfoProperties;
 
   /**
    * The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6
    */
-  vmSizeId: string;
+  vmSizeId?: string;
 
   /**
    * Disk Information
    */
-  diskInfo: DiskInfoProperties;
+  diskInfo?: DiskInfoProperties;
 
   /**
    * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
@@ -4211,12 +4211,12 @@ model SessionHostConfigurationPatchProperties {
   /**
    * Image configurations of HostPool.
    */
-  imageInfo: ImageInfoProperties;
+  imageInfo?: ImageInfoProperties;
 
   /**
    * Domain configurations of session hosts.
    */
-  domainInfo: DomainInfoProperties;
+  domainInfo?: DomainInfoProperties;
 
   /**
    * Security Information
@@ -4226,7 +4226,7 @@ model SessionHostConfigurationPatchProperties {
   /**
    * Local Admin credentials for session hosts."
    */
-  vmAdminCredentials: KeyVaultCredentialProperties;
+  vmAdminCredentials?: KeyVaultCredentialProperties;
 
   /**
    * Boot Diagnostics Information
