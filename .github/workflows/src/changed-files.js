@@ -55,7 +55,7 @@ async function getChangedFilesImpl(command, core) {
 
   core.info("Changed Files:");
   for (const file in files) {
-    core.info(`  $file`);
+    core.info(`  ${file}`);
   }
   core.info("");
 
