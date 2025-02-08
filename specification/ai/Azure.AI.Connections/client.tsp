@@ -9,16 +9,16 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.AI.Connections.listConnections, Access.internal);
 @@access(Azure.AI.Connections.getConnection, Access.internal);
 @@access(Azure.AI.Connections.getConnectionWithSecrets, Access.internal);
-@@access(Azure.AI.GetConnectionResponse, Access.internal);
-@@access(Azure.AI.InternalConnectionProperties, Access.internal);
-@@access(Azure.AI.InternalConnectionPropertiesApiKeyAuth, Access.internal);
-@@access(Azure.AI.InternalConnectionPropertiesAADAuth, Access.internal);
-@@access(Azure.AI.InternalConnectionPropertiesSASAuth, Access.internal);
-@@access(Azure.AI.CredentialsApiKeyAuth, Access.internal);
-@@access(Azure.AI.CredentialsSASAuth, Access.internal);
+@@access(Azure.AI.Connections.GetConnectionResponse, Access.internal);
+@@access(Azure.AI.Connections.InternalConnectionProperties, Access.internal);
+@@access(Azure.AI.Connections.InternalConnectionPropertiesApiKeyAuth, Access.internal);
+@@access(Azure.AI.Connections.InternalConnectionPropertiesAADAuth, Access.internal);
+@@access(Azure.AI.Connections.InternalConnectionPropertiesSASAuth, Access.internal);
+@@access(Azure.AI.Connections.CredentialsApiKeyAuth, Access.internal);
+@@access(Azure.AI.Connections.CredentialsSASAuth, Access.internal);
 
 // The SDK has a hand-written public EndpointProperties class, with two properties of the type below.
 // Need to explicitly mention them as "public" here, because otherwise they would not be made public
 // since the auto-generated operations that use them are marked as internal above.
-@@access(Azure.AI.AuthenticationType, Access.public);
-@@access(Azure.AI.ConnectionType, Access.public);
+@@access(Azure.AI.Connections.AuthenticationType, Access.public);
+@@access(Azure.AI.Connections.ConnectionType, Access.public);
