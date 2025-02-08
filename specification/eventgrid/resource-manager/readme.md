@@ -39,34 +39,69 @@ input-file:
 
 suppressions:
   - code:  PatchBodyParametersSchema
-    reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
+    reason: This is false positive as this property is already part of previous GA version and cannot be changed.
     from: EventGrid.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}"].patch.parameters[3].schema.properties.properties
 
   - code:  PatchBodyParametersSchema
-    reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
+    reason: This is false positive as this property is already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.definitions["TopicUpdateParameterProperties"].properties.publicNetworkAccess
+    where: $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[2].schema.properties.deadLetterDestination
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive this property is already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[2].schema.properties.deadLetterWithResourceIdentity
 
   - code:  PatchBodyParametersSchema
     reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.definitions["PartnerNamespaceUpdateParameterProperties"].properties.publicNetworkAccess
+    where: $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[2].schema.properties.deliveryWithResourceIdentity
 
   - code:  PatchBodyParametersSchema
-    reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
+    reason: This is false positive as this property is already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.definitions["SubscriptionUpdateParametersProperties"].properties.deliveryConfiguration.push.destination.properties.endpointType
+    where: $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[2].schema.properties.destination
 
   - code:  PatchBodyParametersSchema
-    reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
+    reason: This is false positive as this property is already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.definitions["EventSubscriptionDestination"].properties.endpointType
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deadLetterDestination
 
   - code:  PatchBodyParametersSchema
-    reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
+    reason: This is false positive as this property is already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.definitions["DeadLetterDestination"].properties.endpointType
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deadLetterWithResourceIdentity
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as this property is already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deliveryWithResourceIdentity
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as this property is already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.destination
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as this property is already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema.properties.deadLetterDestination
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as this property is already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema.properties.deadLetterWithResourceIdentity
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as this property is already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema.properties.deliveryWithResourceIdentity
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as this property is already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema.properties.destination
 
   - code:  PatchBodyParametersSchema
     reason: This is false positive as all this property is not directly included in the update parameter properties. It is only included if RetryPolicy is added which is optional.
