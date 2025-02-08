@@ -329,6 +329,38 @@ model HashValue {
 }
 
 /**
+ * The extended location type. Allowed values: 'CustomLocation', 'EdgeZone'
+ */
+union ExtendedLocationType {
+  string,
+
+  /**
+   * The custom location extended location type.
+   */
+  CustomLocation: "CustomLocation",
+
+  /**
+   * The edge zone extended location type.
+   */
+  EdgeZone: "EdgeZone",
+}
+
+/**
+ * The extended location.
+ */
+model ExtendedLocation {
+  /**
+   * The extended location type.
+   */
+  type?: ExtendedLocationType;
+
+  /**
+   *  The extended location name.
+   */
+  name?: string;
+}
+
+/**
  * Device Update update account properties.
  */
 model UpdateAccountProperties {
