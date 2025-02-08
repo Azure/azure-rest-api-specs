@@ -5,47 +5,66 @@ import { getLabelActionImpl } from "../src/arm-auto-signoff-preview.js";
 import * as changedFiles from "../src/changed-files.js";
 import * as git from "../src/git.js";
 
-// TODO: Test each step in the check in the order of implementation, to simplify tests and also ensure we don't call extra APIs early
-
-vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
-  "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
-]);
-
-vi.spyOn(git, "lsTree").mockResolvedValue(
-  "040000 tree abc123 specification/contosowidgetmanager",
-);
+const core = createMockCore();
 
 describe("getLabelActionImpl", () => {
   it("rejects if inputs null", async () => {
     await expect(getLabelActionImpl({})).rejects.toThrow();
   });
 
+  it("removes label if no changed RM files", async () => {
+    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
+      "/specification/contosowidgetmanager/data-plane/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
+    ]);
+
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: null,
+        core: core,
+      }),
+    ).resolves.toBe(LabelAction.Remove);
+  });
+
+  it("removes label if changed files add a new RP", async () => {
+    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
+      "/specification/contosowidgetmanager2/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
+    ]);
+
+    // "git ls-tree" returns "" if the spec folder doesn't exist in the base branch
+    vi.spyOn(git, "lsTree").mockResolvedValue("");
+
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: null,
+        core: core,
+      }),
+    ).resolves.toBe(LabelAction.Remove);
+  });
+
   it.each([
-    {
-      labels: [],
-    },
-    {
-      labels: ["ARMReview", "ARMBestPractices"],
-      swaggerLintDiffConclusion: "failed",
-    },
-  ])("removes label (%s)", async ({ labels, swaggerLintDiffConclusion }) => {
-    const core = createMockCore();
+    { labels: [] },
+    { labels: ["ARMReview", "NotReadyForARMReview"] },
+    { labels: ["ARMReview", "SuppressionReviewRequired"] },
+  ])("removes label if not all labels match ($labels)", async ({ labels }) => {
+    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
+      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
+    ]);
+
+    vi.spyOn(git, "lsTree").mockResolvedValue(
+      "040000 tree abc123 specification/contosowidgetmanager",
+    );
 
     const github = createMockGithub();
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: labels.map((name) => ({ name })),
-    });
-
-    github.rest.checks.listForRef.mockResolvedValue({
-      data: {
-        check_runs: [
-          {
-            name: "Swagger LintDiff",
-            status: "completed",
-            conclusion: swaggerLintDiffConclusion || "success",
-          },
-        ],
-      },
     });
 
     await expect(
@@ -58,72 +77,27 @@ describe("getLabelActionImpl", () => {
         core: core,
       }),
     ).resolves.toBe(LabelAction.Remove);
+
+    expect(github.rest.issues.listLabelsOnIssue).toBeCalledWith({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+    });
   });
 
-  it.each([
-    {
-      labels: ["ARMReview", "ARMBestPractices"],
-      // Represents "no check named 'Swagger LintDiff' found"
-      swaggerLintDiffStatus: null,
-    },
-    {
-      labels: ["ARMReview", "ARMBestPractices"],
-      swaggerLintDiffStatus: "in_progress",
-    },
-  ])("no-ops (%s)", async ({ labels, swaggerLintDiffStatus }) => {
-    const core = createMockCore();
+  it("adds label if check succeeded", async () => {
+    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
+      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
+    ]);
+
+    vi.spyOn(git, "lsTree").mockResolvedValue(
+      "040000 tree abc123 specification/contosowidgetmanager",
+    );
 
     const github = createMockGithub();
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-      data: labels.map((name) => ({ name })),
+      data: [{ name: "ARMReview" }],
     });
-
-    github.rest.checks.listForRef.mockResolvedValue({
-      data: {
-        check_runs: swaggerLintDiffStatus
-          ? [
-              {
-                name: "Swagger LintDiff",
-                status: swaggerLintDiffStatus,
-              },
-            ]
-          : [],
-      },
-    });
-
-    await expect(
-      getLabelActionImpl({
-        owner: "TestOwner",
-        repo: "TestRepo",
-        issue_number: 123,
-        head_sha: "abc123",
-        github: github,
-        core: core,
-      }),
-    ).resolves.toBe(LabelAction.None);
-  });
-
-  it.each([
-    {
-      labels: ["ARMReview", "ARMBestPractices"],
-    },
-    {
-      labels: [
-        "ARMReview",
-        "ARMBestPractices",
-        "SuppressionReviewRequired",
-        "Suppression-Approved",
-      ],
-    },
-  ])("adds label (%s)", async ({ labels }) => {
-    const core = createMockCore();
-
-    const github = createMockGithub();
-
-    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-      data: labels.map((name) => ({ name })),
-    });
-
     github.rest.checks.listForRef.mockResolvedValue({
       data: {
         check_runs: [
@@ -146,6 +120,120 @@ describe("getLabelActionImpl", () => {
         core: core,
       }),
     ).resolves.toBe(LabelAction.Add);
+
+    expect(github.rest.issues.listLabelsOnIssue).toBeCalledWith({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+    });
+
+    expect(github.rest.checks.listForRef).toBeCalledWith({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      ref: "abc123",
+    });
+  });
+
+  it("removes label if check failed", async () => {
+    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
+      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
+    ]);
+
+    vi.spyOn(git, "lsTree").mockResolvedValue(
+      "040000 tree abc123 specification/contosowidgetmanager",
+    );
+
+    const github = createMockGithub();
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "ARMReview" }],
+    });
+    github.rest.checks.listForRef.mockResolvedValue({
+      data: {
+        check_runs: [
+          {
+            name: "Swagger LintDiff",
+            status: "completed",
+            conclusion: "failure",
+          },
+        ],
+      },
+    });
+
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).resolves.toBe(LabelAction.Remove);
+
+    expect(github.rest.issues.listLabelsOnIssue).toBeCalledWith({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+    });
+
+    expect(github.rest.checks.listForRef).toBeCalledWith({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      ref: "abc123",
+    });
+  });
+
+  it("no-ops if check not found or not completed", async () => {
+    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
+      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
+    ]);
+
+    vi.spyOn(git, "lsTree").mockResolvedValue(
+      "040000 tree abc123 specification/contosowidgetmanager",
+    );
+
+    const github = createMockGithub();
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "ARMReview" }],
+    });
+
+    github.rest.checks.listForRef.mockResolvedValue({
+      data: {
+        check_runs: [],
+      },
+    });
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).resolves.toBe(LabelAction.None);
+
+    github.rest.checks.listForRef.mockResolvedValue({
+      data: {
+        check_runs: [
+          {
+            name: "Swagger LintDiff",
+            status: "in_progress",
+            conclusion: null,
+          },
+        ],
+      },
+    });
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).resolves.toBe(LabelAction.None);
 
     expect(github.rest.issues.listLabelsOnIssue).toBeCalledWith({
       owner: "TestOwner",
