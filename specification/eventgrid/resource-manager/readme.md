@@ -66,6 +66,11 @@ suppressions:
   - code:  PatchBodyParametersSchema
     reason: This is false positive as this property is already part of previous GA version and cannot be changed.
     from: EventGrid.json
+    where: $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[2].schema.properties.retryPolicy
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as this property is already part of previous GA version and cannot be changed.
+    from: EventGrid.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deadLetterDestination
 
   - code:  PatchBodyParametersSchema
@@ -149,14 +154,29 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema.properties.properties
 
   - code:  PatchBodyParametersSchema
-    reason: This is false positive as all this property is not directly included in the update parameter properties. It is only included if RetryPolicy is added which is optional.
+    reason: This is false positive as this property will not be present by default. Only when used, this property will be required.
     from: EventGrid.json
-    where: $.definitions["RetryPolicy"].properties.eventTimeToLiveInMinutes
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.retryPolicy
 
   - code:  PatchBodyParametersSchema
-    reason: This is false positive as all this property is not directly included in the update parameter properties. It is only included if RetryPolicy is added which is optional.
+    reason: This is false positive as this property will not be present by default. Only when used, this property will be required.
     from: EventGrid.json
-    where: $.definitions["RetryPolicy"].properties.maxDeliveryAttempts
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.retryPolicy
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as this property will not be present by default. Only when used, this property will be required.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.retryPolicy
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as this property will not be present by default. Only when used, this property will be required.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.retryPolicy
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as this property will not be present by default. Only when used, this property will be required.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.retryPolicy
 
   - code:  PathContainsResourceType
     reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
