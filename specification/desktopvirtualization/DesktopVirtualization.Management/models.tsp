@@ -1532,12 +1532,12 @@ model KeyVaultCredentialPatchProperties {
   /**
    * The uri to access the secret that the username is stored in.
    */
-  usernameKeyVaultSecretUri: url;
+  usernameKeyVaultSecretUri?: url;
 
   /**
    * The uri to access the secret that the password is stored in.
    */
-  passwordKeyVaultSecretUri: url;
+  passwordKeyVaultSecretUri?: url;
 }
 
 /**
@@ -1709,12 +1709,12 @@ model BootDiagnosticsInfoPatchProperties {
   /**
    * Whether boot diagnostics should be enabled on the Virtual Machine.
    */
-  enabled: boolean;
+  enabled?: boolean;
 
   /**
    * Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used.
    */
-  storageUri: url;
+  storageUri?: url;
 }
 
 /**
@@ -1894,7 +1894,7 @@ model SessionHostManagementPatchProperties {
   /**
    * Parameters for a hostpool update.
    */
-  update: HostPoolUpdateConfigurationProperties;
+  update?: HostPoolUpdateConfigurationPatchProperties;
 }
 /**
  * List of ApplicationGroup definitions.
@@ -4241,12 +4241,12 @@ model SessionHostConfigurationPatchProperties {
   /**
    * Local Admin credentials for session hosts."
    */
-  vmAdminCredentials?: KeyVaultCredentialProperties;
+  vmAdminCredentials?: KeyVaultCredentialPatchProperties;
 
   /**
    * Boot Diagnostics Information
    */
-  bootDiagnosticsInfo?: BootDiagnosticsInfoProperties;
+  bootDiagnosticsInfo?: BootDiagnosticsInfoPatchProperties;
 }
 
 /**
