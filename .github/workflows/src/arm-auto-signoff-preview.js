@@ -170,7 +170,7 @@ async function incrementalChangesToExistingTypeSpec(
   );
 
   // If any changed dir did not exist in the base branch, it cannot be an existing TypeSpec spec, so return false
-  for (const changedSpecDir in changedSpecDirs) {
+  for (const changedSpecDir of changedSpecDirs) {
     const resultString = await lsTree("HEAD^", changedSpecDir, core);
 
     // Command "git ls-tree" returns an nempty string if the folder did not exist in the base branch
@@ -181,7 +181,7 @@ async function incrementalChangesToExistingTypeSpec(
 
   // If any changed dir did not contain at least one typespec-generated swagger file in the base branch,
   // this appears to be a TypeSpec conversion, so return false;
-  for (const changedSpecDir in changedSpecDirs) {
+  for (const changedSpecDir of changedSpecDirs) {
     const resultString = await lsTree("HEAD^", changedSpecDir, core);
 
     // Command "git ls-tree" returns an nempty string if the folder did not exist in the base branch
