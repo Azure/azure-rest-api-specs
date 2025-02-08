@@ -6700,6 +6700,21 @@
         "mdmProviderGuid"
       ]
     },
+    "BootDiagnosticsInfoPatchProperties": {
+      "type": "object",
+      "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether boot diagnostics should be enabled on the Virtual Machine."
+        },
+        "storageUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used."
+        }
+      }
+    },
     "BootDiagnosticsInfoProperties": {
       "type": "object",
       "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor",
@@ -7884,6 +7899,22 @@
             "description": "Using microsoft azure active directory."
           }
         ]
+      }
+    },
+    "KeyVaultCredentialPatchProperties": {
+      "type": "object",
+      "description": "Credentials kept in the keyvault.",
+      "properties": {
+        "usernameKeyVaultSecretUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The uri to access the secret that the username is stored in."
+        },
+        "passwordKeyVaultSecretUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The uri to access the secret that the password is stored in."
+        }
       }
     },
     "KeyVaultCredentialProperties": {
@@ -10177,11 +10208,11 @@
           "description": "Security Information"
         },
         "vmAdminCredentials": {
-          "$ref": "#/definitions/KeyVaultCredentialProperties",
+          "$ref": "#/definitions/KeyVaultCredentialPatchProperties",
           "description": "Local Admin credentials for session hosts.\""
         },
         "bootDiagnosticsInfo": {
-          "$ref": "#/definitions/BootDiagnosticsInfoProperties",
+          "$ref": "#/definitions/BootDiagnosticsInfoPatchProperties",
           "description": "Boot Diagnostics Information"
         }
       }
@@ -10488,13 +10519,10 @@
           "description": "Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true."
         },
         "update": {
-          "$ref": "#/definitions/HostPoolUpdateConfigurationProperties",
+          "$ref": "#/definitions/HostPoolUpdateConfigurationPatchProperties",
           "description": "Parameters for a hostpool update."
         }
-      },
-      "required": [
-        "update"
-      ]
+      }
     },
     "SessionHostManagementProperties": {
       "type": "object",
