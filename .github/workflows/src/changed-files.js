@@ -54,7 +54,7 @@ async function getChangedFilesImpl(command, core) {
   const files = result.trim().split("\n");
 
   core.info("Changed Files:");
-  for (const file in files) {
+  for (const file of files) {
     core.info(`  ${file}`);
   }
   core.info("");
