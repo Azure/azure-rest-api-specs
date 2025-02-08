@@ -288,14 +288,15 @@ op  listDeploymentResources is languageOperations.ResourceList<
 
 }
 
-interface ConversationAuthoringProjects {
-  /**
+ /**
    * Lists the existing projects.
    */
 op listProjects is languageOperations.ResourceList<
     AnalyzeConversationAuthoringProjectMetadata,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
+
+interface ConversationAuthoringProjects {
 
   /**
    * Gets the details of a project.
