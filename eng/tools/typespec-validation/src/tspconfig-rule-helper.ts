@@ -53,9 +53,7 @@ abstract class TspconfigRuleBase implements Rule {
     return { shouldSkip: false, skipResult: { success: true } };
   }
 
-  protected validate(_: any): RuleResult {
-    return { success: true, stdOutput: `Nothing to validate.` };
-  }
+  protected abstract validate(config: any): RuleResult;
 
   protected validateValue(
     actual: string | boolean | undefined,
