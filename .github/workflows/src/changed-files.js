@@ -5,18 +5,18 @@ import { execRoot } from "./exec.js";
 /**
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} [baseCommitish] Defaults to "HEAD^".
- * @param {string} [targetCommitish] Defaults to "HEAD".
+ * @param {string} [headCommitish] Defaults to "HEAD".
  * @param {string} [diffFilter] Defaults to "d".
  * @returns {Promise<string[]>}
  */
 export async function getChangedFiles(
   core,
   baseCommitish = "HEAD^",
-  targetCommitish = "HEAD",
+  headCommitish = "HEAD",
   diffFilter = "d",
 ) {
   return await getChangedFilesImpl(
-    `Get-ChangedFiles ${baseCommitish} ${targetCommitish} ${diffFilter}"`,
+    `Get-ChangedFiles ${baseCommitish} ${headCommitish} ${diffFilter}"`,
     core,
   );
 }
@@ -24,18 +24,18 @@ export async function getChangedFiles(
 /**
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} [baseCommitish] Defaults to "HEAD^".
- * @param {string} [targetCommitish] Defaults to "HEAD".
+ * @param {string} [headCommitish] Defaults to "HEAD".
  * @param {string} [diffFilter] Defaults to "d".
  * @returns {Promise<string[]>}
  */
 export async function getChangedSwaggerFiles(
   core,
   baseCommitish = "HEAD^",
-  targetCommitish = "HEAD",
+  headCommitish = "HEAD",
   diffFilter = "d",
 ) {
   return await getChangedFilesImpl(
-    `Get-ChangedSwaggerFiles(Get-ChangedFiles ${baseCommitish} ${targetCommitish} ${diffFilter})`,
+    `Get-ChangedSwaggerFiles(Get-ChangedFiles ${baseCommitish} ${headCommitish} ${diffFilter})`,
     core,
   );
 }
