@@ -81,7 +81,7 @@ union SecurityType {
   Standard: "Standard",
 
   /**
-   * TrustedLaunch allows for secure boot and vTPM
+   * TrustedLaunch allows for secure boot and vTpm
    */
   TrustedLaunch: "TrustedLaunch",
 
@@ -1032,15 +1032,43 @@ union SessionHandlingOperation {
 /**
  * Day of the week.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "There is no need for an extensible enum for Days of the Week"
-enum DayOfWeek {
-  Monday,
-  Tuesday,
-  Wednesday,
-  Thursday,
-  Friday,
-  Saturday,
-  Sunday,
+union DaysOfWeek {
+  string,
+
+  /**
+   * Day of the week.
+   */
+  Monday: "Monday",
+
+  /**
+   * Day of the week.
+   */
+  Tuesday: "Tuesday",
+
+  /**
+   * Day of the week.
+   */
+  Wednesday: "Wednesday",
+
+  /**
+   * Day of the week.
+   */
+  Thursday: "Thursday",
+
+  /**
+   * Day of the week.
+   */
+  Friday: "Friday",
+
+  /**
+   * Day of the week.
+   */
+  Saturday: "Saturday",
+
+  /**
+   * Day of the week.
+   */
+  Sunday: "Sunday",
 }
 
 /**
@@ -1662,10 +1690,10 @@ model SecurityInfoProperties {
   secureBootEnabled?: boolean;
 
   /**
-   * Whether to use vTPM on the virtual machine.
+   * Whether to use vTpm on the virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "vTPM is acronym in service"
-  vTPMEnabled?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "vTpm is acronym in service"
+  vTpmEnabled?: boolean;
 }
 
 /**
@@ -1683,10 +1711,10 @@ model SecurityInfoPatchProperties {
   secureBootEnabled?: boolean;
 
   /**
-   * Whether to use vTPM on the virtual machine.
+   * Whether to use vTpm on the virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "vTPM is an acronym used by service"
-  vTPMEnabled?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "vTpm is an acronym used by service"
+  vTpmEnabled?: boolean;
 }
 
 /**
@@ -2316,7 +2344,7 @@ model MaintenanceWindowProperties {
   /**
    * Day of the week.
    */
-  dayOfWeek?: DayOfWeek;
+  dayOfWeek?: DaysOfWeek;
 }
 
 /**
@@ -3244,7 +3272,7 @@ model MaintenanceWindowPatchProperties {
   /**
    * Day of the week.
    */
-  dayOfWeek?: DayOfWeek;
+  dayOfWeek?: DaysOfWeek;
 }
 
 /**
@@ -3763,7 +3791,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DayOfWeek[];
+  daysOfWeek?: DaysOfWeek[];
 
   /**
    * Starting time for ramp up period.
@@ -3911,7 +3939,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DayOfWeek[];
+  daysOfWeek?: DaysOfWeek[];
 
   /**
    * Starting time for ramp up period.
@@ -4026,7 +4054,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  offPeakStartVMOnConnect?: SetStartVMOnConnect;
+  offPeakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
 
   /**
    * Action to be taken after a user disconnect during the off-peak period.
@@ -4082,7 +4110,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DayOfWeek[];
+  daysOfWeek?: DaysOfWeek[];
 
   /**
    * Starting time for ramp up period.
@@ -4186,7 +4214,7 @@ model ScalingPlanPooledSchedulePatchProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DayOfWeek[];
+  daysOfWeek?: DaysOfWeek[];
 
   /**
    * Starting time for ramp up period.

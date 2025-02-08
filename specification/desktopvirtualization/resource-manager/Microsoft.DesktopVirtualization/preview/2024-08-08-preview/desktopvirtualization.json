@@ -6754,7 +6754,7 @@
         "resourceId"
       ]
     },
-    "DayOfWeek": {
+    "DaysOfWeek": {
       "type": "string",
       "description": "Day of the week.",
       "enum": [
@@ -6767,8 +6767,45 @@
         "Sunday"
       ],
       "x-ms-enum": {
-        "name": "DayOfWeek",
-        "modelAsString": false
+        "name": "DaysOfWeek",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Monday",
+            "value": "Monday",
+            "description": "Day of the week."
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday",
+            "description": "Day of the week."
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday",
+            "description": "Day of the week."
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday",
+            "description": "Day of the week."
+          },
+          {
+            "name": "Friday",
+            "value": "Friday",
+            "description": "Day of the week."
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday",
+            "description": "Day of the week."
+          },
+          {
+            "name": "Sunday",
+            "value": "Sunday",
+            "description": "Day of the week."
+          }
+        ]
       }
     },
     "Desktop": {
@@ -8160,7 +8197,7 @@
           "description": "The update start hour of the day. (0 - 23)"
         },
         "dayOfWeek": {
-          "$ref": "#/definitions/DayOfWeek",
+          "$ref": "#/definitions/DaysOfWeek",
           "description": "Day of the week."
         }
       }
@@ -8175,7 +8212,7 @@
           "description": "The update start hour of the day. (0 - 23)"
         },
         "dayOfWeek": {
-          "$ref": "#/definitions/DayOfWeek",
+          "$ref": "#/definitions/DaysOfWeek",
           "description": "Day of the week."
         }
       }
@@ -9187,7 +9224,7 @@
           "type": "array",
           "description": "Set of days of the week on which this schedule is active.",
           "items": {
-            "$ref": "#/definitions/DayOfWeek"
+            "$ref": "#/definitions/DaysOfWeek"
           }
         },
         "rampUpStartTime": {
@@ -9346,8 +9383,29 @@
           "description": "Starting time for off-peak period."
         },
         "offPeakStartVMOnConnect": {
-          "$ref": "#/definitions/SetStartVMOnConnect",
-          "description": "The desired configuration of Start VM On Connect for the hostpool during the off-peak phase."
+          "type": "string",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.",
+          "default": "Enable",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SetStartVMOnConnect",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Start VM on Connect is enabled"
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually"
+              }
+            ]
+          }
         },
         "offPeakActionOnDisconnect": {
           "$ref": "#/definitions/SessionHandlingOperation",
@@ -9379,7 +9437,7 @@
           "type": "array",
           "description": "Set of days of the week on which this schedule is active.",
           "items": {
-            "$ref": "#/definitions/DayOfWeek"
+            "$ref": "#/definitions/DaysOfWeek"
           }
         },
         "rampUpStartTime": {
@@ -9651,7 +9709,7 @@
           "type": "array",
           "description": "Set of days of the week on which this schedule is active.",
           "items": {
-            "$ref": "#/definitions/DayOfWeek"
+            "$ref": "#/definitions/DaysOfWeek"
           }
         },
         "rampUpStartTime": {
@@ -9745,7 +9803,7 @@
           "type": "array",
           "description": "Set of days of the week on which this schedule is active.",
           "items": {
-            "$ref": "#/definitions/DayOfWeek"
+            "$ref": "#/definitions/DaysOfWeek"
           }
         },
         "rampUpStartTime": {
@@ -10062,9 +10120,9 @@
           "type": "boolean",
           "description": "Whether to use secureBoot on the virtual machine."
         },
-        "vTPMEnabled": {
+        "vTpmEnabled": {
           "type": "boolean",
-          "description": "Whether to use vTPM on the virtual machine."
+          "description": "Whether to use vTpm on the virtual machine."
         }
       }
     },
@@ -10093,7 +10151,7 @@
               {
                 "name": "TrustedLaunch",
                 "value": "TrustedLaunch",
-                "description": "TrustedLaunch allows for secure boot and vTPM"
+                "description": "TrustedLaunch allows for secure boot and vTpm"
               },
               {
                 "name": "ConfidentialVM",
@@ -10107,9 +10165,9 @@
           "type": "boolean",
           "description": "Whether to use secureBoot on the virtual machine."
         },
-        "vTPMEnabled": {
+        "vTpmEnabled": {
           "type": "boolean",
-          "description": "Whether to use vTPM on the virtual machine."
+          "description": "Whether to use vTpm on the virtual machine."
         }
       }
     },
@@ -10133,7 +10191,7 @@
           {
             "name": "TrustedLaunch",
             "value": "TrustedLaunch",
-            "description": "TrustedLaunch allows for secure boot and vTPM"
+            "description": "TrustedLaunch allows for secure boot and vTpm"
           },
           {
             "name": "ConfidentialVM",
@@ -10963,30 +11021,6 @@
             "name": "UserProfileDiskMounted",
             "value": "UserProfileDiskMounted",
             "description": "Session has mounted user profile disk"
-          }
-        ]
-      }
-    },
-    "SetStartVMOnConnect": {
-      "type": "string",
-      "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.",
-      "enum": [
-        "Enable",
-        "Disable"
-      ],
-      "x-ms-enum": {
-        "name": "SetStartVMOnConnect",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enable",
-            "value": "Enable",
-            "description": "Start VM on Connect is enabled"
-          },
-          {
-            "name": "Disable",
-            "value": "Disable",
-            "description": "Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually"
           }
         ]
       }
