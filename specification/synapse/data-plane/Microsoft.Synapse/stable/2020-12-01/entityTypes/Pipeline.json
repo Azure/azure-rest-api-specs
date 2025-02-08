@@ -2881,6 +2881,36 @@
         }
       }
     },
+    "TeradataSink": {
+      "description": "A copy activity Teradata sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "importSettings": {
+          "$ref": "#/definitions/TeradataImportCommand",
+          "description": "Teradata import settings."
+        }
+      }
+    },
+    "TeradataImportCommand": {
+      "description": "Teradata import command settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImportSettings"
+        }
+      ],
+      "properties": {
+        "additionalFormatOptions": {
+          "type": "object",
+          "description": "Additional format options for Teradata Copy Command. The format options only applies to direct copy from CSV source. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"timeFormat\": \"HHhMImSSs\" }"
+        }
+      }
+    },
     "WebSource": {
       "description": "A copy activity source for web page table.",
       "type": "object",
