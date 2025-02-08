@@ -1449,7 +1449,7 @@ model NetworkInfoProperties {
   /**
    * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
    */
-  securityGroupId: Azure.Core.armResourceIdentifier;
+  securityGroupId: string;
 }
 
 /**
@@ -1464,7 +1464,7 @@ model NetworkInfoPatchProperties {
   /**
    * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
    */
-  securityGroupId?: Azure.Core.armResourceIdentifier;
+  securityGroupId?: string;
 }
 
 /**
