@@ -6,7 +6,7 @@ import { parse as yamlParse } from "yaml";
 
 type ExpectedValueType = string | boolean | RegExp;
 
-class TspconfigRuleBase implements Rule {
+abstract class TspconfigRuleBase implements Rule {
   name: string;
   description: string;
 
