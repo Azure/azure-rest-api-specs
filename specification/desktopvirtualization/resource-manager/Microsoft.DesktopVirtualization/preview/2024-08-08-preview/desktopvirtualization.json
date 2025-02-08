@@ -3528,6 +3528,16 @@
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "vmPath",
+            "in": "query",
+            "description": "The path to the VM.",
+            "required": false,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 1092,
+            "pattern": "^[A-Z][a-z][0-9][@./-_ ]*$"
           }
         ],
         "responses": {
@@ -7491,6 +7501,10 @@
         "relayUDP": {
           "$ref": "#/definitions/RelayUDP",
           "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections"
+        },
+        "managementType": {
+          "$ref": "#/definitions/ManagementType",
+          "description": "The type of management for this hostpool, Automated or Standard. The default value is Automated."
         }
       }
     },
@@ -7625,6 +7639,10 @@
         "relayUDP": {
           "$ref": "#/definitions/RelayUDP",
           "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections"
+        },
+        "managementType": {
+          "$ref": "#/definitions/ManagementType",
+          "description": "The type of management for this hostpool, Automated or Standard. The default value is Automated."
         }
       },
       "required": [
@@ -8243,6 +8261,30 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "UDP will not attempt this connection type when making connections"
+          }
+        ]
+      }
+    },
+    "ManagementType": {
+      "type": "string",
+      "description": "The type of management for the hostpool",
+      "enum": [
+        "Automated",
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "ManagementType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Automated",
+            "value": "Automated",
+            "description": "Automated management of the hostpool"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard management of the hostpool"
           }
         ]
       }

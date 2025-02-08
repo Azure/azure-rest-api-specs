@@ -91,6 +91,15 @@ interface SessionHosts {
        */
       @query("initialSkip")
       initialSkip?: int32;
+
+      /**
+       * The path to the VM.
+       */
+      @query("vmPath")
+      @maxLength(1092)
+      @minLength(3)
+      @pattern("^[A-Z][a-z][0-9][@./-_ ]*$")
+      vmPath?: string;
     },
     Response = SessionHostList
   >;

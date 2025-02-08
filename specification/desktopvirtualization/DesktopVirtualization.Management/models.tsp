@@ -11,6 +11,23 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.DesktopVirtualization;
 
 /**
+ * The type of management for the hostpool
+ */
+union ManagementType {
+  string,
+
+  /**
+   * Automated management of the hostpool
+   */
+  Automated: "Automated",
+
+  /**
+   * Standard management of the hostpool
+   */
+  Standard: "Standard",
+}
+
+/**
  * Action types for controlling hostpool update.
  */
 union HostPoolUpdateAction {
@@ -2284,6 +2301,11 @@ model HostPoolProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   relayUDP?: RelayUDP;
+
+  /**
+   * The type of management for this hostpool, Automated or Standard. The default value is Automated.
+   */
+  managementType?: ManagementType;
 }
 
 /**
@@ -3217,6 +3239,11 @@ model HostPoolPatchProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   relayUDP?: RelayUDP;
+
+  /**
+   * The type of management for this hostpool, Automated or Standard. The default value is Automated.
+   */
+  managementType?: ManagementType;
 }
 
 /**
