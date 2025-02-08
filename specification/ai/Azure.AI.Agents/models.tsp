@@ -7,7 +7,7 @@ import "./main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Agents;
 
 @doc("Represents an agent that can call the model and use tools.")
 model Agent {

@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 
 using Azure.Core;
 
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Agents;
 
 /**
  * Creates a new message on a specified thread.

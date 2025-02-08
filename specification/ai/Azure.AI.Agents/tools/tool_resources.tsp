@@ -6,7 +6,7 @@ import "../vector_stores/common/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Agents;
 
 //
 // Response objects

@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Agents;
 
 /**
  * Returns a list of vector store files.

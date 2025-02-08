@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Azure.AI.Projects;
+namespace Azure.AI.Evaluations;
 
 @doc("Metadata pertaining to creation and last modification of the resource.")
 model SystemData {

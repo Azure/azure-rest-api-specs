@@ -11,8 +11,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-// namespace Azure.AI.Projects.Evaluations;
-namespace Azure.AI.Projects;
+namespace Azure.AI.Evaluations;
 
 alias ServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &

@@ -2,7 +2,7 @@ import "@typespec/versioning";
 
 import "../tools/models.tsp";
 
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Agents;
 
 using TypeSpec.Versioning;
 

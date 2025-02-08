@@ -4,7 +4,7 @@ import "@typespec/versioning";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Agents;
 
 /** Options to configure a vector store static chunking strategy. */
 model VectorStoreStaticChunkingStrategyOptions {

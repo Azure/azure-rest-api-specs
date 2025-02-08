@@ -7,6 +7,7 @@ parameters:
       - "specification/ai/Azure.AI.Connections"
       - "specification/ai/Azure.AI.Evaluations"
       - "specification/ai/Azure.AI.Telemetry"
+    default: ""
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -35,8 +36,8 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-ts":
     package-dir: "ai-projects"
-    generateTest: true
-    generateMetadata: false
+    generateTest: false
+    generateMetadata: true
     packageDetails:
       name: "@azure/ai-projects"
     flavor: azure
