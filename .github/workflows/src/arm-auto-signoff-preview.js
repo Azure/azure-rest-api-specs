@@ -135,7 +135,7 @@ async function incrementalChangesToExistingResourceProvider(core) {
     return false;
   } else {
     for (const file of changedRmFiles) {
-      if (!(await specFolderExistsInTargetBranch(file, core))) {
+      if (!(await specFolderExistsInBaseBranch(file, core))) {
         core.info(`Appears to add a new RP: ${file}`);
         return false;
       }
@@ -148,10 +148,10 @@ async function incrementalChangesToExistingResourceProvider(core) {
 /**
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} file
- * @returns {Promise<boolean>} True if the spec folder exists in the target branch
+ * @returns {Promise<boolean>} True if the spec folder exists in the base branch
  */
-async function specFolderExistsInTargetBranch(file, core) {
-  core.info(`specFolderExistsInTargetBranch("${file}")`);
+async function specFolderExistsInBaseBranch(file, core) {
+  core.info(`specFolderExistsInBaseBranch("${file}")`);
 
   // Example1: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json
   // Example2: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/contosoGroup1/preview/2021-10-01-preview/contoso.json
@@ -163,7 +163,7 @@ async function specFolderExistsInTargetBranch(file, core) {
 
   const resultString = await lsTree("HEAD^", specDir, core);
 
-  // Command "git ls-tree" returns a nonempty string if the folder exists in the target branch
+  // Command "git ls-tree" returns a nonempty string if the folder exists in the base branch
   const result = Boolean(resultString);
   core.info(`returning: ${result}`);
   return result;
