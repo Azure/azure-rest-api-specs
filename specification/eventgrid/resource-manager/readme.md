@@ -41,7 +41,7 @@ suppressions:
   - code:  PatchBodyParametersSchema
     reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
     from: EventGrid.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}",].patch.parameters[3].schema.properties.properties
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}"].patch.parameters[3].schema.properties.properties
 
   - code:  PatchBodyParametersSchema
     reason: This is false positive as all this property is already part of previous GA version and cannot be changed.
