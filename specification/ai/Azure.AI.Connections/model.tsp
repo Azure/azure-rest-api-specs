@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Azure.AI.Projects;
+namespace Azure.AI.Connections;
 
 @doc("Response from the Workspace - Get operation")
 model GetWorkspaceResponse {

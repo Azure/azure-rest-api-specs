@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Agents;
 
 /**
  * Creates a new agent.

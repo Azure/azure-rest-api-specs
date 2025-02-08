@@ -2,7 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-namespace Azure.AI.Projects.Agents {
+namespace Azure.AI.Agents {
   // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
   // operation that exposes the underlying data directly.
   @@clientName(AgentDeletionStatus, "InternalAgentDeletionStatus", "csharp");

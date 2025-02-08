@@ -2,7 +2,7 @@ import "@typespec/versioning";
 import "./common/models.tsp";
 import "./tools/models.tsp";
 import "./tools/tool_resources.tsp";
-import "../main.tsp";
+import "./main.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
