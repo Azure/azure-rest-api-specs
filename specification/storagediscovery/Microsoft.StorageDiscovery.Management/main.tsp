@@ -39,7 +39,7 @@ model StorageDiscoveryWorkspaceProperties {
 
   @doc("The state of storage discovery workspace")
   @added(ApiVersion.v2025_03_01_preview)
-  enabled: boolean;
+  workspaceState: WorkspaceState;
 
   @doc("The state of storage discovery data export")
   @madeOptional(ApiVersion.v2025_03_01_preview)
@@ -82,6 +82,18 @@ model StorageDiscoveryWorkspaceProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ResourceProvisioningState;
+}
+
+@doc("The state of storage discovery workspace")
+@added(ApiVersion.v2025_03_01_preview)
+union WorkspaceState {
+  @doc("Enabled")
+  Enabled: "Enabled",
+
+  @doc("Disabled")
+  Disabled: "Disabled",
+
+  string,
 }
 
 @doc("The state of storage discovery data export")

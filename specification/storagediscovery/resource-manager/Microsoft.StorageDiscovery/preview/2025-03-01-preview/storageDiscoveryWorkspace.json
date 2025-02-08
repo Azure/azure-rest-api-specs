@@ -589,8 +589,8 @@
           "$ref": "#/definitions/StorageDiscoverySku",
           "description": "The storage discovery sku."
         },
-        "enabled": {
-          "type": "boolean",
+        "workspaceState": {
+          "$ref": "#/definitions/WorkspaceState",
           "description": "The state of storage discovery workspace"
         },
         "exportState": {
@@ -644,7 +644,7 @@
       },
       "required": [
         "sku",
-        "enabled",
+        "workspaceState",
         "discoveryScopeLevels",
         "discoveryScopes"
       ]
@@ -657,8 +657,8 @@
           "$ref": "#/definitions/StorageDiscoverySku",
           "description": "The storage discovery sku."
         },
-        "enabled": {
-          "type": "boolean",
+        "workspaceState": {
+          "$ref": "#/definitions/WorkspaceState",
           "description": "The state of storage discovery workspace"
         },
         "exportState": {
@@ -720,6 +720,30 @@
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
+    },
+    "WorkspaceState": {
+      "type": "string",
+      "description": "The state of storage discovery workspace",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
     }
   },
   "parameters": {}
