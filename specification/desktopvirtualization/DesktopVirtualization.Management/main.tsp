@@ -42,7 +42,7 @@ using TypeSpec.Versioning;
   title: "Desktop Virtualization API Client",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.DesktopVirtualization;
 
 /**
