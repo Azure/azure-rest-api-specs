@@ -76,9 +76,9 @@ export async function updateLabelsImpl({
 
       if (key.startsWith("label-")) {
         const name = key.substring("label-".length);
-        if (value === "true" || value === "add") {
+        if (value === "true") {
           labelsToAdd.push(name);
-        } else if (value === "false" || value === "remove") {
+        } else if (value === "false") {
           labelsToRemove.push(name);
         } else {
           throw new Error(
