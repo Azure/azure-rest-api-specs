@@ -315,7 +315,7 @@ directive:
     reason: Not a mandatory check
   - suppress: LroErrorContent
     from: namespaces.json
-    reason: Not a mandatory check
+    reason: Suppress it for now to avoid breaking change because it is referenced by many files. 
 
   - suppress: LroLocationHeader
     from: Clusters-preview.json
