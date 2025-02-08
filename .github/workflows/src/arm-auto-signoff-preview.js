@@ -1,6 +1,6 @@
 // @ts-check
 
-import path from "path";
+import { dirname } from "path";
 import { extractInputs } from "../../src/context.js";
 import { LabelAction } from "../../src/label.js";
 import { getChangedSwaggerFiles } from "./changed-files.js";
@@ -158,7 +158,7 @@ async function specFolderExistsInTargetBranch(file, core) {
 
   // Example1: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso
   // Example2: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/contosoGroup1
-  const specDir = path.dirname(path.dirname(path.dirname(file)));
+  const specDir = dirname(dirname(dirname(file)));
   core.info(`specDir: ${specDir}`);
 
   const resultString = await lsTree("HEAD^", specDir, core);
