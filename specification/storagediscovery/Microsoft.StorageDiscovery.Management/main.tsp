@@ -87,10 +87,10 @@ model StorageDiscoveryWorkspaceProperties {
 @doc("The state of storage discovery workspace")
 @added(ApiVersion.v2025_03_01_preview)
 union WorkspaceState {
-  @doc("Enabled")
+  @doc("Workspace is Enabled")
   Enabled: "Enabled",
 
-  @doc("Disabled")
+  @doc("Workspace is Disabled")
   Disabled: "Disabled",
 
   string,
