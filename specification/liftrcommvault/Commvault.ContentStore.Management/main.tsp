@@ -680,7 +680,7 @@ model ProtectedItem is ProxyResource<ProtectedItemProperties> {
 model ProtectedItemProperties {
   @doc("The Name of the commvault protected item")
   @visibility("read")
-  resourceName: "string";
+  resourceName: string;
 
   @doc("The Commvault Protected Item backup time")
   @visibility("read")

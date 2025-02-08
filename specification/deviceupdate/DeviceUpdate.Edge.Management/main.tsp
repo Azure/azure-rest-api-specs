@@ -18,10 +18,11 @@ import "./Update.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.Versioning;
+
 /**
  * Microsoft Device Update resource provider.
  */
