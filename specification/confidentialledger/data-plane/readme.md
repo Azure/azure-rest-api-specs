@@ -18,6 +18,24 @@ openapi-type: data-plane
 
 ## Configuration
 
+### Basic Information
+These are the global settings for the Autonomous Development Platform (ADP) API.
+
+```yaml
+tag: package-2022-08-13
+openapi-type: data-plane
+```
+
+### Tag: package-2022-08-13
+
+These settings apply only when `--tag=package-2022-08-13` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08-13'
+input-file:
+  - Microsoft.ConfidentialLedger/stable/2022-08-13/confidentialledger.json
+```
+
+
 ### Tag: package-0.1-preview-ledger
 
 These settings apply only when `--tag=package-0.1-preview-ledger` is specified on the command line.
