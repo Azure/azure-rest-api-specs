@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "./models.tsp";
+import "./models/project.tsp";
+import "./models/common.tsp";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-client-generator-core";
@@ -18,21 +19,344 @@ alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
 
-alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
+alias languageOperations = ResourceOperations<ServiceTraits, Foundations.ErrorResponse>;
 
-interface AnalyzeConversationAuthoring {
-  /**
+     /**
+   * Lists the deployments belonging to a project.
+   */
+op  listDeployments is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringProjectDeployment,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+ /**
    * Lists the existing projects.
    */
-  listProjects is languageOperations.ResourceList<
+op listProjects is languageOperations.ResourceList<
     AnalyzeConversationAuthoringProjectMetadata,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
+/**
+   * Lists the supported languages for the given project type.
+   */
+op  listSupportedLanguages is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringSupportedLanguage,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      ProjectKindQueryParameter>
+  >;
+
+/**
+   * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
+   */
+  @added(Versions.v2023_04_15_preview)
+ op listAssignedResourceDeployments is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+/**
+   * Lists the deployments resources assigned to the project.
+   */
+  @added(Versions.v2023_04_15_preview)
+op  listDeploymentResources is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringAssignedDeploymentResource,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+/**
+   * Lists the supported prebuilt entities that can be used while creating composed entities.
+   */
+op  listSupportedPrebuiltEntities is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringPrebuiltEntity,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      SupportedPrebuiltEntitiesQueryParameter>
+  >;
+
+/**
+   * Lists the support training config version for a given project type.
+   */
+ op listTrainingConfigVersions is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringTrainingConfigVersion,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      ProjectKindQueryParameter>
+  >;
+
+/**
+   * Lists the non-expired training jobs created for a project.
+   */
+op  listTrainingJobs is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringTrainingJobState,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+/**
+   * Lists the trained models belonging to a project.
+   */
+ op listTrainedModels is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringProjectTrainedModel,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+/**
+   * Lists the exported models belonging to a project.
+   */
+  @added(Versions.v2024_11_15_preview)
+ op listExportedModels is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringExportedTrainedModel,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+interface ConversationAuthoringDeployments {
+
+  /**
+   * Swaps two existing deployments with each other.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/:swap")
+  @post
+  @pollingOperation(ConversationAuthoringDeployments.getSwapDeploymentsStatus)
+op  swapDeployments is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The job object to swap two deployments.
+       */
+      @body
+      details: AnalyzeConversationAuthoringSwapDeploymentsOptions;
+    },
+    AcceptedResponse,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+  /**
+   * Gets the details of a deployment.
+   */
+  @get
+op  getDeployment is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectDeployment>;
+
+/**
+   * Creates a new deployment or replaces an existing one.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
+  @put
+  @pollingOperation(ConversationAuthoringDeployments.getDeploymentStatus)
+op  deployProject is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The name of the specific deployment of the project to use.
+       */
+      @path
+      deploymentName: string;
+
+      /**
+       * The new deployment info.
+       */
+      @body
+      details: AnalyzeConversationAuthoringCreateDeploymentOptions;
+    },
+    AcceptedResponse,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+  /**
+   * Deletes a project deployment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
+  @delete
+  @pollingOperation(ConversationAuthoringDeployments.getDeploymentStatus)
+op  deleteDeployment is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The name of the specific deployment of the project to use.
+       */
+      @path
+      deploymentName: string;
+    },
+    AcceptedResponse,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+  /**
+   * Deletes a project deployment from the specified assigned resources.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
+  @post
+  @pollingOperation(
+    ConversationAuthoringDeployments.getDeploymentDeleteFromResourcesStatus
+  )
+  @added(Versions.v2023_04_15_preview)
+ op deleteDeploymentFromResources is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The name of the specific deployment of the project to use.
+       */
+      @path
+      deploymentName: string;
+
+      /**
+       * The options for deleting the deployment.
+       */
+      @body
+      details: AnalyzeConversationAuthoringDeleteDeploymentOptions;
+    },
+    AcceptedResponse,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+  /**
+   * Gets the status of an existing delete deployment from specific resources job.
+   */
+  @added(Versions.v2023_04_15_preview)
+op  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState>;
+
+  /**
+   * Gets the status of an existing deployment job.
+   */
+ op getDeploymentStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentJobState>;
+
+  /**
+   * Gets the status of an existing swap deployment job.
+   */
+op  getSwapDeploymentsStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringSwapDeploymentsJobState>;
+
+/**
+   * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
+  @post
+  @pollingOperation(
+    ConversationAuthoringDeployments.getAssignDeploymentResourcesStatus
+  )
+  @added(Versions.v2023_04_15_preview)
+op  assignDeploymentResources is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The new project resources info.
+       */
+      @body
+      details: AnalyzeConversationAuthoringAssignDeploymentResourcesOptions;
+    },
+    AcceptedResponse,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+/**
+   * Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
+  @post
+  @pollingOperation(
+    ConversationAuthoringDeployments.getUnassignDeploymentResourcesStatus
+  )
+  @added(Versions.v2023_04_15_preview)
+op  unassignDeploymentResources is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The info for the deployment resources to be deleted.
+       */
+      @body
+      details: AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions;
+    },
+    AcceptedResponse,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+   /**
+   * Gets the status of an existing assign deployment resources job.
+   */
+  @added(Versions.v2023_04_15_preview)
+op  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
+    
+/**
+   * Gets the status of an existing unassign deployment resources job.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
+  @get
+  @added(Versions.v2023_04_15_preview)
+op  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The job ID.
+       */
+      @path
+      jobId: string;
+    },
+    AnalyzeConversationAuthoringDeploymentResourcesJobState,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+}
+
+
+
+interface ConversationAuthoringProjects {
+
   /**
    * Gets the details of a project.
    */
-  getProject is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectMetadata>;
+ op getProject is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectMetadata>;
 
   /**
    * Creates a new project or updates an existing one.
@@ -41,7 +365,7 @@ interface AnalyzeConversationAuthoring {
   @createsOrUpdatesResource(AnalyzeConversationAuthoringProjectMetadata)
   @parameterVisibility
   @patch
-  createProject is Foundations.ResourceOperation<
+op  createProject is Foundations.ResourceOperation<
     AnalyzeConversationAuthoringProjectMetadata,
     {
       @doc("This request has a JSON Merge Patch body.")
@@ -49,11 +373,11 @@ interface AnalyzeConversationAuthoring {
       contentType: "application/merge-patch+json";
 
       /** The request body */
-      @bodyRoot body: AnalyzeConversationAuthoringCreateProjectOptions;
+      @bodyRoot details: AnalyzeConversationAuthoringCreateProjectOptions;
     },
     Foundations.ResourceCreatedOrOkResponse<AnalyzeConversationAuthoringProjectMetadata>,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -62,8 +386,8 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}")
   @delete
-  @pollingOperation(AnalyzeConversationAuthoring.getProjectDeletionStatus)
-  deleteProject is Foundations.LongRunningOperation<
+  @pollingOperation(ConversationAuthoringProjects.getProjectDeletionStatus)
+op  deleteProject is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -74,49 +398,25 @@ interface AnalyzeConversationAuthoring {
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
-
-  /**
-   * Generates a copy project operation authorization to the current target Azure resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
-  @post
-  @added(Versions.v2023_04_15_preview)
-  @actionSeparator("/:")
-  @action("authorize-copy")
-  copyProjectAuthorization is languageOperations.ResourceAction<
-    AnalyzeConversationAuthoringProjectMetadata,
-    AnalyzeConversationAuthoringCopyAuthorizationOptions,
-    AnalyzeConversationAuthoringCopyProjectOptions
-  >;
-
-  /**
-   * Copies an existing project to another Azure resource.
+/**
+   * Gets the status for a project deletion job.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
-  @post
-  @pollingOperation(AnalyzeConversationAuthoring.getCopyProjectStatus)
-  @added(Versions.v2023_04_15_preview)
-  copyProject is Foundations.LongRunningOperation<
+  @route("/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}")
+  @get
+op  getProjectDeletionStatus is Azure.Core.Foundations.Operation<
     {
       /**
-       * The name of the project to use.
+       * The job ID.
        */
-      @maxLength(100)
       @path
-      projectName: string;
-
-      /**
-       * The copy project info.
-       */
-      @body
-      body: AnalyzeConversationAuthoringCopyProjectOptions;
+      jobId: string;
     },
-    AcceptedResponse,
+    AnalyzeConversationAuthoringProjectDeletionJobState,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -125,8 +425,8 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:export")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getExportStatus)
-  export is Foundations.LongRunningOperation<
+  @pollingOperation(ConversationAuthoringProjects.getExportStatus)
+op  export is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -162,7 +462,7 @@ interface AnalyzeConversationAuthoring {
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -171,8 +471,8 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:import")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getImportStatus)
-  `import` is Foundations.LongRunningOperation<
+  @pollingOperation(ConversationAuthoringProjects.getImportStatus)
+op  `import` is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -192,21 +492,80 @@ interface AnalyzeConversationAuthoring {
        * The project data to import.
        */
       @body
-      body: AnalyzeConversationAuthoringExportedProject;
+      exportedProject: AnalyzeConversationAuthoringExportedProject;
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
+/**
+   * Gets the status of an export job. Once job completes, returns the project metadata, and assets.
+   */
+ op getExportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportProjectJobState>;
+
   /**
+   * Gets the status for an import.
+   */
+op  getImportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringImportProjectJobState>;
+
+  /**
+   * Generates a copy project operation authorization to the current target Azure resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @post
+  @added(Versions.v2023_04_15_preview)
+  @actionSeparator("/:")
+  @action("authorize-copy")
+  @clientName("AuthorizeProjectCopy", "csharp")
+op  copyProjectAuthorization is languageOperations.ResourceAction<
+    AnalyzeConversationAuthoringProjectMetadata,
+    AnalyzeConversationAuthoringCopyAuthorizationOptions,
+    AnalyzeConversationAuthoringCopiedProjectOptions
+  >;
+
+/**
+   * Copies an existing project to another Azure resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
+  @post
+  @pollingOperation(ConversationAuthoringProjects.getCopyProjectStatus)
+  @added(Versions.v2023_04_15_preview)
+op  copyProject is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The copy project info.
+       */
+      @body
+      details: AnalyzeConversationAuthoringCopiedProjectOptions;
+    },
+    AcceptedResponse,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+/**
+   * Gets the status of an existing copy project job.
+   */
+  @added(Versions.v2023_04_15_preview)
+op  getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopiedProjectJobState>;
+
+/**
    * Triggers a training job for a project.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:train")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getTrainingStatus)
-  train is Foundations.LongRunningOperation<
+  @pollingOperation(ConversationAuthoringProjects.getTrainingStatus)
+op  train is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -219,35 +578,26 @@ interface AnalyzeConversationAuthoring {
        * The training input parameters.
        */
       @body
-      body: AnalyzeConversationAuthoringTrainingJobOptions;
+      details: AnalyzeConversationAuthoringTrainingJobOptions;
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
-   * Gets the status of an existing copy project job.
+   * Gets the status for a training job.
    */
-  @added(Versions.v2023_04_15_preview)
-  getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopyProjectJobState>;
+op  getTrainingStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringTrainingJobState>;
 
   /**
-   * Lists the deployments belonging to a project.
-   */
-  listDeployments is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringProjectDeployment,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-
-  /**
-   * Swaps two existing deployments with each other.
+   * Triggers a cancellation for a running training job.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/:swap")
+  @route("/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getSwapDeploymentsStatus)
-  swapDeployments is Foundations.LongRunningOperation<
+  @pollingOperation(ConversationAuthoringProjects.getTrainingStatus)
+ op cancelTrainingJob is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -257,161 +607,29 @@ interface AnalyzeConversationAuthoring {
       projectName: string;
 
       /**
-       * The job object to swap two deployments.
+       * The job ID.
        */
-      @body
-      body: AnalyzeConversationAuthoringSwapDeploymentsOptions;
+      @path
+      jobId: string;
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
+} 
 
-  /**
-   * Gets the details of a deployment.
-   */
-  @get
-  getDeployment is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectDeployment>;
-
-  /**
-   * Creates a new deployment or replaces an existing one.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
-  @put
-  @pollingOperation(AnalyzeConversationAuthoring.getDeploymentStatus)
-  deployProject is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The name of the specific deployment of the project to use.
-       */
-      @path
-      deploymentName: string;
-
-      /**
-       * The new deployment info.
-       */
-      @body
-      body: AnalyzeConversationAuthoringCreateDeploymentOptions;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
-
-  /**
-   * Deletes a project deployment.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
-  @delete
-  @pollingOperation(AnalyzeConversationAuthoring.getDeploymentStatus)
-  deleteDeployment is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The name of the specific deployment of the project to use.
-       */
-      @path
-      deploymentName: string;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
-
-  /**
-   * Deletes a project deployment from the specified assigned resources.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
-  @post
-  @pollingOperation(
-    AnalyzeConversationAuthoring.getDeploymentDeleteFromResourcesStatus
-  )
-  @added(Versions.v2023_04_15_preview)
-  deleteDeploymentFromResources is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The name of the specific deployment of the project to use.
-       */
-      @path
-      deploymentName: string;
-
-      /**
-       * The options for deleting the deployment.
-       */
-      @body
-      body: AnalyzeConversationAuthoringDeleteDeploymentOptions;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
-
-  /**
-   * Gets the status of an existing delete deployment from specific resources job.
-   */
-  @added(Versions.v2023_04_15_preview)
-  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState>;
-
-  /**
-   * Gets the status of an existing deployment job.
-   */
-  getDeploymentStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentJobState>;
-
-  /**
-   * Gets the status of an existing swap deployment job.
-   */
-  getSwapDeploymentsStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringSwapDeploymentsJobState>;
-
-  /**
-   * Gets the status of an export job. Once job completes, returns the project metadata, and assets.
-   */
-  getExportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportProjectJobState>;
-
-  /**
-   * Gets the status for an import.
-   */
-  getImportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringImportProjectJobState>;
-
-  /**
-   * Lists the trained models belonging to a project.
-   */
-  listTrainedModels is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringProjectTrainedModel,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+interface ConversationAuthoringModels {
+   
 
   /**
    * Gets the details of a trained model.
    */
-  getTrainedModel is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectTrainedModel>;
+op  getTrainedModel is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectTrainedModel>;
 
   /**
    * Deletes an existing trained model.
    */
-  deleteTrainedModel is languageOperations.ResourceDelete<AnalyzeConversationAuthoringProjectTrainedModel>;
+ op deleteTrainedModel is languageOperations.ResourceDelete<AnalyzeConversationAuthoringProjectTrainedModel>;
 
   /**
    * Triggers evaluation operation on a trained model.
@@ -419,9 +637,9 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getEvaluationStatus)
+  @pollingOperation(ConversationAuthoringModels.getEvaluationStatus)
   @added(Versions.v2023_04_15_preview)
-  evaluateModel is Foundations.LongRunningOperation<
+op  evaluateModel is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -440,21 +658,21 @@ interface AnalyzeConversationAuthoring {
        * The training input parameters.
        */
       @body
-      body: AnalyzeConversationAuthoringEvaluationOptions;
+      details: AnalyzeConversationAuthoringEvaluationOptions;
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
-  /**
+/**
    * Restores the snapshot of this trained model to be the current working directory of the project.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getLoadSnapshotStatus)
-  loadSnapshot is Foundations.LongRunningOperation<
+  @pollingOperation(ConversationAuthoringModels.getLoadSnapshotStatus)
+op  loadSnapshot is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -471,20 +689,19 @@ interface AnalyzeConversationAuthoring {
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
-
-  /**
+/**
    * Gets the status for an evaluation job.
    */
   @added(Versions.v2023_04_15_preview)
-  getEvaluationStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringEvaluationJobState>;
+ op getEvaluationStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringEvaluationJobState>;
 
   /**
    * Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-  getModelEvaluationResults is languageOperations.ResourceList<
+op  getModelEvaluationResults is languageOperations.ResourceList<
     AnalyzeConversationAuthoringUtteranceEvaluationResult,
     ListQueryParametersTrait<StandardListQueryParameters &
       StringIndexTypeQueryParameter>
@@ -496,7 +713,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
   @get
-  getModelEvaluationSummary is Foundations.Operation<
+op  getModelEvaluationSummary is Foundations.Operation<
     {
       /**
        * The name of the project to use.
@@ -513,350 +730,29 @@ interface AnalyzeConversationAuthoring {
     },
     AnalyzeConversationAuthoringEvaluationSummary,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
    * Gets the status for loading a snapshot.
    */
-  getLoadSnapshotStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringLoadSnapshotJobState>;
+op  getLoadSnapshotStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringLoadSnapshotJobState>;
 
-  /**
-   * Lists the deployments resources assigned to the project.
-   */
-  @added(Versions.v2023_04_15_preview)
-  listDeploymentResources is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringAssignedDeploymentResource,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-
-  /**
-   * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
-  @post
-  @pollingOperation(
-    AnalyzeConversationAuthoring.getAssignDeploymentResourcesStatus
-  )
-  @added(Versions.v2023_04_15_preview)
-  assignDeploymentResources is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The new project resources info.
-       */
-      @body
-      body: AnalyzeConversationAuthoringAssignDeploymentResourcesOptions;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
-
-  /**
-   * Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
-  @post
-  @pollingOperation(
-    AnalyzeConversationAuthoring.getUnassignDeploymentResourcesStatus
-  )
-  @added(Versions.v2023_04_15_preview)
-  unassignDeploymentResources is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The info for the deployment resources to be deleted.
-       */
-      @body
-      body: AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
-
-  /**
-   * Gets the status of an existing assign deployment resources job.
-   */
-  @added(Versions.v2023_04_15_preview)
-  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
-
-  /**
-   * Gets the status of an existing unassign deployment resources job.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
-  @get
-  @added(Versions.v2023_04_15_preview)
-  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    AnalyzeConversationAuthoringDeploymentResourcesJobState,
-    {},
-    ErrorResponse
-  >;
-
-  /**
-   * Lists the non-expired training jobs created for a project.
-   */
-  listTrainingJobs is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringTrainingJobState,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-
-  /**
-   * Gets the status for a training job.
-   */
-  getTrainingStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringTrainingJobState>;
-
-  /**
-   * Triggers a cancellation for a running training job.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel")
-  @post
-  @pollingOperation(AnalyzeConversationAuthoring.getTrainingStatus)
-  cancelTrainingJob is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
-
-  /**
-   * Gets the status for a project deletion job.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}")
-  @get
-  getProjectDeletionStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    AnalyzeConversationAuthoringProjectDeletionJobState,
-    {},
-    ErrorResponse
-  >;
-
-  /**
-   * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-  @route("/authoring/analyze-conversations/projects/global/deployments/resources")
-  @get
-  @added(Versions.v2023_04_15_preview)
-  listAssignedResourceDeployments is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata,
-    {},
-    ErrorResponse
-  >;
-
-  /**
-   * Lists the supported languages for the given project type.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/global/languages")
-  @get
-  getSupportedLanguages is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The project kind.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style"
-      @query("projectKind")
-      ProjectKind: ProjectKind;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    AnalyzeConversationAuthoringSupportedLanguages,
-    {},
-    ErrorResponse
-  >;
-
-  /**
-   * Lists the supported prebuilt entities that can be used while creating composed entities.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/global/prebuilt-entities")
-  @get
-  getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
-       */
-      @query("language")
-      language?: string;
-
-      /**
-       * Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.
-       */
-      @query("multilingual")
-      multilingual?: string;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    AnalyzeConversationAuthoringPrebuiltEntities,
-    {},
-    ErrorResponse
-  >;
-
-  /**
-   * Lists the support training config version for a given project type.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-  @route("/authoring/analyze-conversations/projects/global/training-config-versions")
-  @get
-  listTrainingConfigVersions is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The project kind.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style"
-      @query("projectKind")
-      ProjectKind: ProjectKind;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    AnalyzeConversationAuthoringTrainingConfigVersions,
-    {},
-    ErrorResponse
-  >;
-
-  /**
+/**
    * Gets the details of an exported model.
    */
   @added(Versions.v2024_11_15_preview)
-  getExportedModel is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedTrainedModel>;
-  /**
-   * Lists the exported models belonging to a project.
-   */
-  @added(Versions.v2024_11_15_preview)
-  listExportedModels is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringExportedTrainedModel,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+ op getExportedModel is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedTrainedModel>;
+  
   /**
    * Deletes an existing exported model.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
-  @pollingOperation(AnalyzeConversationAuthoring.getExportedModelJobStatus)
+  @pollingOperation(ConversationAuthoringModels.getExportedModelJobStatus)
   @added(Versions.v2024_11_15_preview)
-  deleteExportedModel is Foundations.LongRunningOperation<
+op  deleteExportedModel is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -872,7 +768,7 @@ interface AnalyzeConversationAuthoring {
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
   /**
    * Creates a new exported model or replaces an existing one.
@@ -880,9 +776,9 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
   @put
-  @pollingOperation(AnalyzeConversationAuthoring.getExportedModelJobStatus)
+  @pollingOperation(ConversationAuthoringModels.getExportedModelJobStatus)
   @added(Versions.v2024_11_15_preview)
-  createOrUpdateExportedModel is Foundations.LongRunningOperation<
+op  createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -900,15 +796,16 @@ interface AnalyzeConversationAuthoring {
        * The exported model info.
        */
       @body
-      body: ExportedModelOptions;
+      details: ExportedModelOptions;
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
   /**
    * Gets the status for an existing job to create or update an exported model.
    */
   @added(Versions.v2024_11_15_preview)
-  getExportedModelJobStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedModelJobState>;
+op  getExportedModelJobStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedModelJobState>;
 }
+
