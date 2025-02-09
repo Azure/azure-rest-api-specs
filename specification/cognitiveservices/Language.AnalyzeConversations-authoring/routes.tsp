@@ -82,6 +82,31 @@ op  listSupportedPrebuiltEntities is languageOperations.ResourceList<
       ProjectKindQueryParameter>
   >;
 
+/**
+   * Lists the non-expired training jobs created for a project.
+   */
+op  listTrainingJobs is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringTrainingJobState,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+/**
+   * Lists the trained models belonging to a project.
+   */
+ op listTrainedModels is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringProjectTrainedModel,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+/**
+   * Lists the exported models belonging to a project.
+   */
+  @added(Versions.v2024_11_15_preview)
+ op listExportedModels is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringExportedTrainedModel,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
 interface ConversationAuthoringDeployments {
 
   /**
@@ -560,14 +585,6 @@ op  train is Foundations.LongRunningOperation<
     Foundations.ErrorResponse
   >;
 
-/**
-   * Lists the non-expired training jobs created for a project.
-   */
-op  listTrainingJobs is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringTrainingJobState,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-
   /**
    * Gets the status for a training job.
    */
@@ -602,13 +619,7 @@ op  getTrainingStatus is languageOperations.ResourceRead<AnalyzeConversationAuth
 } 
 
 interface ConversationAuthoringModels {
-   /**
-   * Lists the trained models belonging to a project.
-   */
- op listTrainedModels is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringProjectTrainedModel,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+   
 
   /**
    * Gets the details of a trained model.
@@ -732,14 +743,7 @@ op  getLoadSnapshotStatus is languageOperations.ResourceRead<AnalyzeConversation
    */
   @added(Versions.v2024_11_15_preview)
  op getExportedModel is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedTrainedModel>;
-  /**
-   * Lists the exported models belonging to a project.
-   */
-  @added(Versions.v2024_11_15_preview)
- op listExportedModels is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringExportedTrainedModel,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+  
   /**
    * Deletes an existing exported model.
    */
