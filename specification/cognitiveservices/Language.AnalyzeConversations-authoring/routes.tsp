@@ -296,6 +296,15 @@ op listProjects is languageOperations.ResourceList<
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
+/**
+   * Lists the supported languages for the given project type.
+   */
+op  listSupportedLanguages is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringSupportedLanguage,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      ProjectKindQueryParameter>
+  >;
+
 interface ConversationAuthoringProjects {
 
   /**
@@ -362,15 +371,6 @@ op  getProjectDeletionStatus is Azure.Core.Foundations.Operation<
     AnalyzeConversationAuthoringProjectDeletionJobState,
     {},
     Foundations.ErrorResponse
-  >;
-
-/**
-   * Lists the supported languages for the given project type.
-   */
-op  listSupportedLanguages is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringSupportedLanguage,
-    ListQueryParametersTrait<StandardListQueryParameters &
-      ProjectKindQueryParameter>
   >;
 
   /**
