@@ -21,7 +21,6 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias languageOperations = ResourceOperations<ServiceTraits, Foundations.ErrorResponse>;
 
-interface ConversationAuthoringDeployments {
      /**
    * Lists the deployments belonging to a project.
    */
@@ -29,6 +28,61 @@ op  listDeployments is languageOperations.ResourceList<
     AnalyzeConversationAuthoringProjectDeployment,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
+
+ /**
+   * Lists the existing projects.
+   */
+op listProjects is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringProjectMetadata,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+/**
+   * Lists the supported languages for the given project type.
+   */
+op  listSupportedLanguages is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringSupportedLanguage,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      ProjectKindQueryParameter>
+  >;
+
+/**
+   * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
+   */
+  @added(Versions.v2023_04_15_preview)
+ op listAssignedResourceDeployments is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+/**
+   * Lists the deployments resources assigned to the project.
+   */
+  @added(Versions.v2023_04_15_preview)
+op  listDeploymentResources is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringAssignedDeploymentResource,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+/**
+   * Lists the supported prebuilt entities that can be used while creating composed entities.
+   */
+op  listSupportedPrebuiltEntities is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringPrebuiltEntity,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      SupportedPrebuiltEntitiesQueryParameter>
+  >;
+
+/**
+   * Lists the support training config version for a given project type.
+   */
+ op listTrainingConfigVersions is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringTrainingConfigVersion,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      ProjectKindQueryParameter>
+  >;
+
+interface ConversationAuthoringDeployments {
 
   /**
    * Swaps two existing deployments with each other.
@@ -268,42 +322,9 @@ op  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     Foundations.ErrorResponse
   >;
 
-/**
-   * Lists the deployments resources assigned to the project.
-   */
-  @added(Versions.v2023_04_15_preview)
-op  listDeploymentResources is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringAssignedDeploymentResource,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-
-/**
-   * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
-   */
-  @added(Versions.v2023_04_15_preview)
- op listAssignedResourceDeployments is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-
 }
 
- /**
-   * Lists the existing projects.
-   */
-op listProjects is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringProjectMetadata,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
 
-/**
-   * Lists the supported languages for the given project type.
-   */
-op  listSupportedLanguages is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringSupportedLanguage,
-    ListQueryParametersTrait<StandardListQueryParameters &
-      ProjectKindQueryParameter>
-  >;
 
 interface ConversationAuthoringProjects {
 
@@ -577,24 +598,6 @@ op  getTrainingStatus is languageOperations.ResourceRead<AnalyzeConversationAuth
     AcceptedResponse,
     {},
     Foundations.ErrorResponse
-  >;
-
-/**
-   * Lists the support training config version for a given project type.
-   */
- op listTrainingConfigVersions is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringTrainingConfigVersion,
-    ListQueryParametersTrait<StandardListQueryParameters &
-      ProjectKindQueryParameter>
-  >;
-
-/**
-   * Lists the supported prebuilt entities that can be used while creating composed entities.
-   */
-op  listSupportedPrebuiltEntities is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringPrebuiltEntity,
-    ListQueryParametersTrait<StandardListQueryParameters &
-      SupportedPrebuiltEntitiesQueryParameter>
   >;
 } 
 
