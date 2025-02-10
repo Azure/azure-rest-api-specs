@@ -291,7 +291,7 @@
       ]
     },
     "LakeHouseLocation": {
-      "description": "The location of Microsoft Fabric LakeHouse Files dataset.",
+      "description": "The location of Microsoft Fabric Lakehouse Files dataset.",
       "type": "object",
       "allOf": [
         {
@@ -3712,8 +3712,8 @@
       }
     },
     "LakeHouseTableDataset": {
-      "x-ms-discriminator-value": "LakeHouseTable",
-      "description": "Microsoft Fabric LakeHouse Table.",
+      "x-ms-discriminator-value": "LakehouseTable",
+      "description": "Microsoft Fabric Lakehouse Table.",
       "type": "object",
       "allOf": [
         {
@@ -3722,25 +3722,25 @@
       ],
       "properties": {
         "typeProperties": {
-          "description": "Microsoft Fabric LakeHouse Table dataset properties.",
+          "description": "Microsoft Fabric Lakehouse Table dataset properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LakeHouseTableDatasetTypeProperties"
         }
       }
     },
     "LakeHouseTableDatasetTypeProperties": {
-      "description": "Microsoft Fabric LakeHouse Table dataset properties.",
+      "description": "Microsoft Fabric Lakehouse Table dataset properties.",
       "type": "object",
       "properties": {
         "schema": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The schema name of Microsoft Fabric LakeHouse Table. Type: string (or Expression with resultType string)."
+          "description": "The schema name of Microsoft Fabric Lakehouse Table. Type: string (or Expression with resultType string)."
         },
         "table": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The name of Microsoft Fabric LakeHouse Table. Type: string (or Expression with resultType string)."
+          "description": "The name of Microsoft Fabric Lakehouse Table. Type: string (or Expression with resultType string)."
         }
       }
     },
