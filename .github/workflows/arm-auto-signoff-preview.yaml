@@ -1,10 +1,11 @@
 name: ARM Auto Signoff (Preview)
 
 on:
-  check_suite:
-    # Depends on check_run status, so must re-evaluate whenever a check_suite is completed.
-    # Could instead trigger on check_run events, but I think this is unnecessarily noisy.
-    types: [completed]
+  # TODO: Re-enable once we figure out how to find the PR number from a check_suite:completed event from a fork PR
+  # check_suite:
+  #   Depends on check_run status, so must re-evaluate whenever a check_suite is completed.
+  #   Could instead trigger on check_run events, but I think this is unnecessarily noisy.
+  #   types: [completed]
   pull_request:
     types:
       # Depends on labels, so must re-evaluate whenever a label is manually added or removed.
