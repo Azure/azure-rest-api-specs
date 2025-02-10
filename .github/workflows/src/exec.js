@@ -16,8 +16,8 @@ export async function execRoot(command, core) {
     cwd: process.env.GITHUB_WORKSPACE,
   });
 
-  core.info(`stdout: '${result.stdout}'`);
-  core.info(`stderr: '${result.stderr}'`);
+  core.debug(`stdout: '${result.stdout}'`);
+  core.debug(`stderr: '${result.stderr}'`);
 
   return result.stdout;
 }
