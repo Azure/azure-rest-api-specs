@@ -1,4 +1,5 @@
 import { vol } from "memfs";
+import { join } from "path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { LabelAction } from "../../src/label.js";
 import { createMockCore, createMockGithub } from "../../test/mocks.js";
@@ -283,7 +284,10 @@ function mockContosoTspSwagger() {
     "getChangedResourceManagerSwaggerFiles",
   ).mockResolvedValue([swaggerPath]);
 
-  vol.fromJSON({ [swaggerPath]: swaggerTypeSpecGenerated });
+  vol.fromJSON({
+    [join(process.env.GITHUB_WORKSPACE || "", swaggerPath)]:
+      swaggerTypeSpecGenerated,
+  });
 
   vi.spyOn(git, "lsTree").mockImplementation(
     async (_treeIsh, _path, _core, options) => {
