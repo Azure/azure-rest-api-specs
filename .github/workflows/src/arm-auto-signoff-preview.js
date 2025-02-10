@@ -168,7 +168,10 @@ async function incrementalChangesToExistingTypeSpec(
     const specRmSwaggerFilesBaseBranch = specFilesBaseBranch
       .split("\n")
       .filter(
-        (file) => file.includes("/resource-manager/") && file.endsWith(".json"),
+        (file) =>
+          file.includes("/resource-manager/") &&
+          !file.includes("/examples/") &&
+          file.endsWith(".json"),
       );
 
     if (specRmSwaggerFilesBaseBranch.length === 0) {
