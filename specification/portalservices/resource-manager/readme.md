@@ -27,7 +27,16 @@ These are the global settings for the portal.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-04-01-preview
+tag: package-2024-04-01
+```
+
+### Tag: package-2024-04-01
+
+These settings apply only when `--tag=package-2024-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-01'
+input-file:
+  - Microsoft.PortalServices/copilotSettings/stable/2024-04-01/copilotSettings.json
 ```
 
 ### Tag: package-2024-04-01-preview
