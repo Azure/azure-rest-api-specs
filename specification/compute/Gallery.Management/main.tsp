@@ -27,6 +27,7 @@ import "./SharedGalleryImageVersion.tsp";
 import "./CommunityGallery.tsp";
 import "./CommunityGalleryImage.tsp";
 import "./CommunityGalleryImageVersion.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
