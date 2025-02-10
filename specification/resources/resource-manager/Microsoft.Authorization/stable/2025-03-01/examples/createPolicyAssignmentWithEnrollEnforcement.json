@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "policyAssignmentName": "EnforceNamingEnroll",
+    "api-version": "2025-03-01",
+    "parameters": {
+      "properties": {
+        "displayName": "Enforce resource naming rules",
+        "description": "Force resource names to begin with given DeptA and end with -LC",
+        "metadata": {
+          "assignedBy": "Special Someone"
+        },
+        "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+        "parameters": {
+          "prefix": {
+            "value": "DeptA"
+          },
+          "suffix": {
+            "value": "-LC"
+          }
+        },
+        "enforcementMode": "Enroll"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "properties": {
+          "displayName": "Enforce resource naming rules",
+          "description": "Force resource names to begin with given DeptA and end with -LC",
+          "metadata": {
+            "assignedBy": "Special Someone"
+          },
+          "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+          "definitionVersion": "1.*.*",
+          "notScopes": [],
+          "parameters": {
+            "prefix": {
+              "value": "DeptA"
+            },
+            "suffix": {
+              "value": "-LC"
+            }
+          },
+          "enforcementMode": "Enroll",
+          "scope": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+          "instanceId": "f2b3c4d5-e6f7-8a9b-0c1d-2e3f4a5b6c7d"
+        },
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyAssignments/EnforceNamingEnroll",
+        "type": "Microsoft.Authorization/policyAssignments",
+        "name": "EnforceNamingEnroll"
+      }
+    }
+  }
+}
