@@ -110,6 +110,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List galleries in a subscription.": {
+            "$ref": "./examples/galleryExamples/Gallery_ListBySubscription.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -153,6 +158,11 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a community gallery.": {
+            "$ref": "./examples/communityGalleryExamples/CommunityGallery_Get.json"
+          }
         }
       }
     },
@@ -193,6 +203,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List community gallery images.": {
+            "$ref": "./examples/communityGalleryExamples/CommunityGalleryImage_List.json"
           }
         },
         "x-ms-pageable": {
@@ -245,6 +260,11 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a community gallery image.": {
+            "$ref": "./examples/communityGalleryExamples/CommunityGalleryImage_Get.json"
+          }
         }
       }
     },
@@ -292,6 +312,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List community gallery image versions.": {
+            "$ref": "./examples/communityGalleryExamples/CommunityGalleryImageVersion_List.json"
           }
         },
         "x-ms-pageable": {
@@ -351,6 +376,11 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a community gallery image version.": {
+            "$ref": "./examples/communityGalleryExamples/CommunityGalleryImageVersion_Get.json"
+          }
         }
       }
     },
@@ -406,6 +436,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List shared galleries.": {
+            "$ref": "./examples/sharedGalleryExamples/SharedGallery_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -448,6 +483,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a shared gallery.": {
+            "$ref": "./examples/sharedGalleryExamples/SharedGallery_Get.json"
           }
         }
       }
@@ -511,6 +551,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List shared gallery images.": {
+            "$ref": "./examples/sharedGalleryExamples/SharedGalleryImages_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -560,6 +605,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a shared gallery image.": {
+            "$ref": "./examples/sharedGalleryExamples/SharedGalleryImage_Get.json"
           }
         }
       }
@@ -630,6 +680,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List shared gallery image versions.": {
+            "$ref": "./examples/sharedGalleryExamples/SharedGalleryImageVersions_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -687,6 +742,11 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a shared gallery image version.": {
+            "$ref": "./examples/sharedGalleryExamples/SharedGalleryImageVersion_Get.json"
+          }
         }
       }
     },
@@ -720,6 +780,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List galleries in a resource group.": {
+            "$ref": "./examples/galleryExamples/Gallery_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -805,6 +870,23 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a community gallery.": {
+            "$ref": "./examples/galleryExamples/CommunityGallery_Get.json"
+          },
+          "Get a gallery with expand sharingProfile groups.": {
+            "$ref": "./examples/galleryExamples/Gallery_Get_WithExpandSharingProfileGroups.json"
+          },
+          "Get a gallery with select permissions.": {
+            "$ref": "./examples/galleryExamples/Gallery_Get_WithSelectPermissions.json"
+          },
+          "Get a gallery with system-assigned and user-assigned managed identities.": {
+            "$ref": "./examples/galleryExamples/Gallery_Get_WithManagedIdentity.json"
+          },
+          "Get a gallery.": {
+            "$ref": "./examples/galleryExamples/Gallery_Get.json"
+          }
         }
       },
       "put": {
@@ -831,7 +913,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "gallery",
             "in": "body",
             "description": "Parameters supplied to the create or update Shared Image Gallery operation.",
             "required": true,
@@ -888,6 +970,23 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a community gallery.": {
+            "$ref": "./examples/galleryExamples/CommunityGallery_Create.json"
+          },
+          "Create or update a simple gallery with sharing profile.": {
+            "$ref": "./examples/galleryExamples/Gallery_Create_WithSharingProfile.json"
+          },
+          "Create or update a simple gallery with soft deletion enabled.": {
+            "$ref": "./examples/galleryExamples/Gallery_Create_SoftDeletionEnabled.json"
+          },
+          "Create or update a simple gallery with system-assigned and user-assigned managed identities.": {
+            "$ref": "./examples/galleryExamples/Gallery_Create_WithManagedIdentity.json"
+          },
+          "Create or update a simple gallery.": {
+            "$ref": "./examples/galleryExamples/Gallery_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -917,7 +1016,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "gallery",
             "in": "body",
             "description": "Parameters supplied to the update Shared Image Gallery operation.",
             "required": true,
@@ -938,6 +1037,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update a simple gallery.": {
+            "$ref": "./examples/galleryExamples/Gallery_Update.json"
           }
         }
       },
@@ -991,6 +1095,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a gallery.": {
+            "$ref": "./examples/galleryExamples/Gallery_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1054,6 +1163,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List soft-deleted resources of an artifact in the gallery.": {
+            "$ref": "./examples/galleryExamples/GallerySoftDeletedResource_ListByArtifactName.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1096,6 +1210,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery Applications in a gallery.": {
+            "$ref": "./examples/galleryExamples/GalleryApplication_ListByGallery.json"
           }
         },
         "x-ms-pageable": {
@@ -1148,6 +1267,11 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a gallery Application.": {
+            "$ref": "./examples/galleryExamples/GalleryApplication_Get.json"
+          }
         }
       },
       "put": {
@@ -1181,7 +1305,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "galleryApplication",
             "in": "body",
             "description": "Parameters supplied to the create or update gallery Application operation.",
             "required": true,
@@ -1238,6 +1362,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a simple gallery Application.": {
+            "$ref": "./examples/galleryExamples/GalleryApplication_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1274,7 +1403,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "galleryApplication",
             "in": "body",
             "description": "Parameters supplied to the update gallery Application operation.",
             "required": true,
@@ -1295,6 +1424,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update a simple gallery Application.": {
+            "$ref": "./examples/galleryExamples/GalleryApplication_Update.json"
           }
         }
       },
@@ -1357,6 +1491,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a gallery Application.": {
+            "$ref": "./examples/galleryExamples/GalleryApplication_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1407,6 +1546,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery Application Versions in a gallery Application Definition.": {
+            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_ListByGalleryApplication.json"
           }
         },
         "x-ms-pageable": {
@@ -1491,6 +1635,14 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a gallery Application Version with replication status.": {
+            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Get_WithReplicationStatus.json"
+          },
+          "Get a gallery Application Version.": {
+            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Get.json"
+          }
         }
       },
       "put": {
@@ -1531,7 +1683,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "galleryApplicationVersion",
             "in": "body",
             "description": "Parameters supplied to the create or update gallery Application Version operation.",
             "required": true,
@@ -1588,6 +1740,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a simple gallery Application Version.": {
+            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1631,7 +1788,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "galleryApplicationVersion",
             "in": "body",
             "description": "Parameters supplied to the update gallery Application Version operation.",
             "required": true,
@@ -1652,6 +1809,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update a simple gallery Application Version.": {
+            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Update.json"
           }
         }
       },
@@ -1721,6 +1883,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a gallery Application Version.": {
+            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1764,6 +1931,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery images in a gallery.": {
+            "$ref": "./examples/galleryExamples/GalleryImage_ListByGallery.json"
           }
         },
         "x-ms-pageable": {
@@ -1816,6 +1988,11 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a gallery image.": {
+            "$ref": "./examples/galleryExamples/GalleryImage_Get.json"
+          }
         }
       },
       "put": {
@@ -1849,7 +2026,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "galleryImage",
             "in": "body",
             "description": "Parameters supplied to the create or update gallery image operation.",
             "required": true,
@@ -1906,6 +2083,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a simple gallery image.": {
+            "$ref": "./examples/galleryExamples/GalleryImage_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1942,7 +2124,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "galleryImage",
             "in": "body",
             "description": "Parameters supplied to the update gallery image operation.",
             "required": true,
@@ -1963,6 +2145,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update a gallery image feature.": {
+            "$ref": "./examples/galleryExamples/GalleryImage_UpdateFeatures.json"
+          },
+          "Update a simple gallery image.": {
+            "$ref": "./examples/galleryExamples/GalleryImage_Update.json"
           }
         }
       },
@@ -2025,6 +2215,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a gallery image.": {
+            "$ref": "./examples/galleryExamples/GalleryImage_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2075,6 +2270,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery image versions in a gallery image definition.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_ListByGalleryImage.json"
           }
         },
         "x-ms-pageable": {
@@ -2159,6 +2359,26 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a gallery image version with replication status.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithReplicationStatus.json"
+          },
+          "Get a gallery image version with snapshots as a source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithSnapshotsAsSource.json"
+          },
+          "Get a gallery image version with validation profile and replication status.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithValidationProfileAndReplicationStatus.json"
+          },
+          "Get a gallery image version with validation profile.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithValidationProfile.json"
+          },
+          "Get a gallery image version with vhd as a source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithVhdAsSource.json"
+          },
+          "Get a gallery image version.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get.json"
+          }
         }
       },
       "put": {
@@ -2199,7 +2419,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "galleryImageVersion",
             "in": "body",
             "description": "Parameters supplied to the create or update gallery image version operation.",
             "required": true,
@@ -2256,6 +2476,38 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a simple Gallery Image Version using VM as source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVmAsSource.json"
+          },
+          "Create or update a simple Gallery Image Version using community gallery image as source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithCommunityImageVersionAsSource.json"
+          },
+          "Create or update a simple Gallery Image Version using managed image as source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create.json"
+          },
+          "Create or update a simple Gallery Image Version using shallow replication mode.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithShallowReplicationMode.json"
+          },
+          "Create or update a simple Gallery Image Version using shared image as source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithImageVersionAsSource.json"
+          },
+          "Create or update a simple Gallery Image Version using snapshots as a source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithSnapshotsAsSource.json"
+          },
+          "Create or update a simple Gallery Image Version using vhd as a source with custom UEFI keys.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVHD_UefiSettings.json"
+          },
+          "Create or update a simple Gallery Image Version using vhd as a source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVHD.json"
+          },
+          "Create or update a simple Gallery Image Version with Direct Drive replicas": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithAdditionalReplicaSets.json"
+          },
+          "Create or update a simple gallery image version with target extended locations specified.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithTargetExtendedLocations.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2299,7 +2551,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "galleryImageVersion",
             "in": "body",
             "description": "Parameters supplied to the update gallery image version operation.",
             "required": true,
@@ -2320,6 +2572,17 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Restore a Soft Deleted Gallery Image Version": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Update_RestoreSoftDeleted.json"
+          },
+          "Update a simple Gallery Image Version (Managed Image as source).": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Update.json"
+          },
+          "Update a simple Gallery Image Version without source id.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Update_WithoutSourceId.json"
           }
         }
       },
@@ -2389,6 +2652,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a gallery image version.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2432,6 +2700,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery inVMAccessControlProfiles in a gallery.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfile_ListByGallery.json"
           }
         },
         "x-ms-pageable": {
@@ -2484,6 +2757,11 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a gallery inVMAccessControlProfile.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfile_Get.json"
+          }
         }
       },
       "put": {
@@ -2517,7 +2795,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "galleryInVMAccessControlProfile",
             "in": "body",
             "description": "Parameters supplied to the create or update gallery inVMAccessControlProfile operation.",
             "required": true,
@@ -2557,6 +2835,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a gallery inVMAccessControlProfile.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfile_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2593,7 +2876,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "galleryInVMAccessControlProfile",
             "in": "body",
             "description": "Parameters supplied to the update gallery inVMAccessControlProfile operation.",
             "required": true,
@@ -2614,6 +2897,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update a gallery inVMAccessControlProfile.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfile_Update.json"
           }
         }
       },
@@ -2673,6 +2961,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a gallery inVMAccessControlProfile.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfile_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2723,6 +3016,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery inVMAccessControlProfile versions in a gallery inVMAccessControlProfile.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_ListByGalleryInVMAccessControlProfile.json"
           }
         },
         "x-ms-pageable": {
@@ -2782,6 +3080,11 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a gallery inVMAccessControlProfile version.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_Get.json"
+          }
         }
       },
       "put": {
@@ -2822,7 +3125,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "galleryInVMAccessControlProfileVersion",
             "in": "body",
             "description": "Parameters supplied to the create or update gallery inVMAccessControlProfile version operation.",
             "required": true,
@@ -2860,6 +3163,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Gallery InVMAccessControlProfile Version.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2905,7 +3213,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "galleryInVMAccessControlProfileVersion",
             "in": "body",
             "description": "Parameters supplied to the update gallery inVMAccessControlProfile version operation.",
             "required": true,
@@ -2926,6 +3234,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update a Gallery InVMAccessControlProfile Version.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_Update.json"
           }
         }
       },
@@ -2992,6 +3305,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a gallery inVMAccessControlProfile version.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3023,7 +3341,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "sharingUpdate",
             "in": "body",
             "description": "Parameters supplied to the update gallery sharing profile.",
             "required": true,
@@ -3058,6 +3376,17 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Add sharing id to the sharing profile of a gallery.": {
+            "$ref": "./examples/galleryExamples/Gallery_AddToSharingProfile.json"
+          },
+          "reset sharing profile of a gallery.": {
+            "$ref": "./examples/galleryExamples/Gallery_ResetSharingProfile.json"
+          },
+          "share a gallery to community.": {
+            "$ref": "./examples/galleryExamples/Gallery_EnableCommunityGallery.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3325,7 +3654,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CommunityGalleryProperties",
-          "description": "Describes the properties of a community gallery."
+          "description": "Describes the properties of a community gallery.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3350,7 +3680,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CommunityGalleryImageProperties",
-          "description": "Describes the properties of a gallery image definition."
+          "description": "Describes the properties of a gallery image definition.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3482,7 +3813,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CommunityGalleryImageVersionProperties",
-          "description": "Describes the properties of a gallery image version."
+          "description": "Describes the properties of a gallery image version.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -5625,7 +5957,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SharedGalleryProperties",
-          "description": "Specifies the properties of a shared gallery"
+          "description": "Specifies the properties of a shared gallery",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -5712,7 +6045,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SharedGalleryImageProperties",
-          "description": "Describes the properties of a gallery image definition."
+          "description": "Describes the properties of a gallery image definition.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -5822,7 +6156,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SharedGalleryImageVersionProperties",
-          "description": "Describes the properties of a gallery image version."
+          "description": "Describes the properties of a gallery image version.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
