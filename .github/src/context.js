@@ -42,9 +42,12 @@ export async function extractInputs(github, context, core) {
       issue_number: NaN,
       run_id: NaN,
     };
-  } else if (context.eventName === "check_suite") {
+  } else if (
+    context.eventName === "check_suite" &&
+    context.payload.action === "completed"
+  ) {
     const payload =
-      /** @type {import("@octokit/webhooks-types").CheckSuiteEvent} */ (
+      /** @type {import("@octokit/webhooks-types").CheckSuiteCompletedEvent} */ (
         context.payload
       );
 
