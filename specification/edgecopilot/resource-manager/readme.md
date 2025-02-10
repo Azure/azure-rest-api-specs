@@ -77,3 +77,8 @@ See configuration in [readme.python.md](./readme.python.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## CSharp
+
+See configuration in [readme.csharp.md](./readme.csharp.md)
+
