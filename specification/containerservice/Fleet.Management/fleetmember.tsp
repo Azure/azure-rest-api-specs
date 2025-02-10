@@ -67,6 +67,7 @@ model FleetMemberProperties {
 
   @added(Versions.v2025_03_01)
   @doc("The labels to be persisted on the fleet member.")
+  @extension("x-ms-identifiers", ["key", "value"])
   labels?: Label[];
 }
 
