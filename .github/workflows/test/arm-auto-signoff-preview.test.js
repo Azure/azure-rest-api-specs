@@ -50,7 +50,7 @@ describe("getLabelActionImpl", () => {
     ).resolves.toBe(LabelAction.Remove);
   });
 
-  it("removes label if a change file is not typespec-generated", async () => {
+  it("removes label if a changed file is not typespec-generated", async () => {
     const swaggerPath =
       "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
@@ -59,7 +59,9 @@ describe("getLabelActionImpl", () => {
       "getChangedResourceManagerSwaggerFiles",
     ).mockResolvedValue([swaggerPath]);
 
-    vol.fromJSON({ [swaggerPath]: '"foo"' });
+    vol.fromJSON({
+      [join(process.env.GITHUB_WORKSPACE || "", swaggerPath)]: '"foo"',
+    });
 
     await expect(
       getLabelActionImpl({
@@ -82,7 +84,10 @@ describe("getLabelActionImpl", () => {
       "getChangedResourceManagerSwaggerFiles",
     ).mockResolvedValue([swaggerPath]);
 
-    vol.fromJSON({ [swaggerPath]: swaggerTypeSpecGenerated });
+    vol.fromJSON({
+      [join(process.env.GITHUB_WORKSPACE || "", swaggerPath)]:
+        swaggerTypeSpecGenerated,
+    });
 
     // "git ls-tree" returns "" if the spec folder doesn't exist in the base branch
     vi.spyOn(git, "lsTree").mockResolvedValue("");
