@@ -30,7 +30,6 @@ batch:
   - tag: package-2022-06-preview
 ```
 
-
 ### Tag: package-2024-05-preview and java
 
 These settings apply only when `--tag=package-2024-05-preview` is specified on the command line.
