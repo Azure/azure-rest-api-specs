@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2021-03-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "workloadName": "MyJBossApp",
+    "WorkloadResource": {
+      "location": "westus",
+      "properties": {
+        "workloadType": "Jboss",
+        "description": "My test JBoss application",
+        "migrationAgentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.WorkloadBuilder/migrationAgents/wbma-appliance"
+      },
+      "tags": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "properties": {
+          "workloadType": "Jboss",
+          "description": "My Jboss workload",
+          "migrationAgentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.WorkloadBuilder/migrationAgents/wbma-appliance",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.WorkloadBuilder/Workloads/MyJBossApp",
+        "name": "MyJBossApp",
+        "type": "Microsoft.WorkloadBuilder/workloads",
+        "tags": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "operationId": "LandingZonesConfigurations_Get",
+  "title": "LandingZonesConfigurations_Get_0",
+  "parameters": {
+    "api-version": "2024-03-31-preview",
+    "name": "LandingZoneConfiguration"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/providers/Microsoft.Sovereign/landingzoneconfigurations/LandingZoneConfiguration",
+        "name": "LandingZoneConfiguration",
+        "type": "Microsoft.Sovereign/landingzoneconfigurations",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "authoringStatus": "Authoring",
+          "ddosProtectionCreationOption": "Yes",
+          "logAnalyticsWorkspaceCreationOption": "No",
+          "firewallCreationOption": "Standard",
+          "logRetentionInDays": 540,
+          "hubNetworkCidrBlock": "10.20.255.0/24",
+          "azureBastionCreationOption": "Yes",
+          "existingDdosProtectionId": null,
+          "existingLogAnalyticsWorkspaceId": null,
+          "tags": [
+            {
+              "name": "tag1",
+              "value": "do"
+            },
+            {
+              "name": "tag2",
+              "value": "do"
+            }
+          ],
+          "firewallSubnetCidrBlock": "10.20.255.0/24",
+          "gatewaySubnetCidrBlock": "10.20.255.0/24",
+          "existingAzureBastionId": null,
+          "azureBastionSubnetCidrBlock": "10.20.255.0/24",
+          "landingZonesMgChildren": [
+            {
+              "policyInitiativesAssignmentProperties": [
+                {
+                  "policyInitiativeId": "c138fd1a-e08f-4318-9490-d11ef2c2f9c1",
+                  "assignmentParameters": {}
+                }
+              ],
+              "name": "Corp"
+            }
+          ],
+          "topLevelMgMetadata": {
+            "policyInitiativesAssignmentProperties": [
+              {
+                "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/0a2ebd47-3fb9-4735-a006-b7f31ddadd9f",
+                "assignmentParameters": {
+                  "Effect": "Audit"
+                }
+              }
+            ]
+          },
+          "landingZonesMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "platformMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "platformManagementMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "platformConnectivityMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "platformIdentityMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "decommissionedMgMetadata": {
+            "policyInitiativesAssignmentProperties": [],
+            "create": false
+          },
+          "sandboxMgMetadata": {
+            "policyInitiativesAssignmentProperties": [],
+            "create": true
+          }
+        }
+      }
+    }
+  }
+}

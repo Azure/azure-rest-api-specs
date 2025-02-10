@@ -1,0 +1,453 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Solution",
+    "description": "The Microsoft.Symphony Rest API spec.",
+    "version": "2023-05-22-preview",
+    "x-ms-code-generation-settings": {
+      "name": "SymphonyClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Symphony/solutions/{solutionsName}": {
+      "get": {
+        "operationId": "solutions_Get",
+        "description": "Gets the properties of the specified solution.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/solutionsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the solutions resource.",
+            "schema": {
+              "$ref": "#/definitions/solution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "solutions_Get": {
+            "$ref": "./examples/solutions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "solutions_CreateOrUpdate",
+        "description": "Creates or updates the solutions resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/solutionsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "solutions",
+            "in": "body",
+            "required": true,
+            "description": "The solution resource definition.",
+            "schema": {
+              "$ref": "#/definitions/solution"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the solutions resource.",
+            "schema": {
+              "$ref": "#/definitions/solution"
+            }
+          },
+          "201": {
+            "description": "Creates the solutions resource.",
+            "schema": {
+              "$ref": "#/definitions/solution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "solutions_CreateOrUpdate": {
+            "$ref": "./examples/solutions_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "solutions_Delete",
+        "description": "Deletes the solutions resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/solutionsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the solutions resource."
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "solutions_Delete": {
+            "$ref": "./examples/solutions_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "solutions_Update",
+        "description": "Updates the solutions resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/solutionsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "solutions",
+            "in": "body",
+            "required": true,
+            "description": "The solution properties to update.",
+            "schema": {
+              "$ref": "#/definitions/solutionPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the solutions resource.",
+            "schema": {
+              "$ref": "#/definitions/solution"
+            }
+          },
+          "201": {
+            "description": "Updates the solutions resource.",
+            "schema": {
+              "$ref": "#/definitions/solution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "solutions_Update": {
+            "$ref": "./examples/solutions_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Symphony/solutions": {
+      "get": {
+        "operationId": "solutions_ListByResourceGroup",
+        "description": "Lists all the solutions under the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all solutions under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/solutionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "solutions_ListByResourceGroup": {
+            "$ref": "./examples/solutions_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Symphony/solutions": {
+      "get": {
+        "operationId": "solutions_ListBySubscription",
+        "description": "Lists all the solutions under the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all solutions under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/solutionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "solutions_ListBySubscription": {
+            "$ref": "./examples/solutions_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Symphony/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Solution REST API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "solutionProperties": {
+      "description": "Properties of a solution resource.",
+      "type": "object",
+      "properties": {
+        "components": {
+          "x-ms-client-flatten": true,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "type"
+            ],
+            "description": "Defines a desired runtime component",
+            "properties": {
+              "dependencies": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "name": {
+                "type": "string"
+              },
+              "properties": {
+                "x-kubernetes-preserve-unknown-fields": "true"
+              },
+              "type": {
+                "type": "string"
+              }
+            }
+          },
+          "properties": {
+            "items": {
+              "x-ms-client-flatten": true,
+              "type": "object",
+              "required": [
+                "name",
+                "type"
+              ],
+              "description": "Defines a desired runtime component",
+              "properties": {
+                "dependencies": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "properties": {
+                  "x-kubernetes-preserve-unknown-fields": "true"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "solution": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/solutionProperties"
+        },
+        "extendedLocation": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      },
+      "description": "The solutions resource definition."
+    },
+    "solutionPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The solutions resource patch definition."
+    },
+    "solutionListResult": {
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "description": "List of solution resources returned.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/solution"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "solutionsNameParameter": {
+      "name": "solutionsName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the solution.",
+      "maxLength": 64,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2020-02-01-preview",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "fpProfile1",
+            "type": "Microsoft.FootprintMonitoring/profiles",
+            "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/profiles/fpProfile1",
+            "location": "westus2",
+            "properties": {
+              "description": "Footprint profile test 1",
+              "coldPathSamplingPercentageRate": 100,
+              "experiments": [
+                {
+                  "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/profiles/fpProfile1/experiments/fpExp1"
+                }
+              ],
+              "measurementCount": 3,
+              "measurementEndpoints": [
+                {
+                  "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/profiles/fpProfile1/measurementEndpoints/endpoint1"
+                }
+              ],
+              "profileId": "7242119c753249d79dbbe22921d8c5fa",
+              "provisioningState": "Succeeded",
+              "reportingEndpoints": [
+                "fp.msedge.net/r.gif",
+                "odinvzc.azureedge.net/apc/trans.gif"
+              ],
+              "scriptUri": "http://fp.msedge.net/conf/v2/7242119c753249d79dbbe22921d8c5fa/fpconfig.min.json",
+              "startDelayMilliseconds": 5000
+            },
+            "tags": {
+              "key1": "value1",
+              "key2": "value2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "profiles_ListBySubscription",
+  "title": "List all Footprint profiles under a subscription."
+}

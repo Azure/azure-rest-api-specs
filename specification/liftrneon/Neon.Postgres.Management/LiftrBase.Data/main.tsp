@@ -15,7 +15,7 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
-  v1_preview: "2024-08-01-preview",
+  v1_preview: "2024-12-22-preview",
 }
 
 @doc("Properties specific to Data Organization resource")
@@ -30,7 +30,7 @@ model PartnerOrganizationProperties {
   organizationId?: string;
 
   @doc("Organization name in partner's system")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
+  @pattern("^\\S.{0,62}\\S$|^\\S$")
   @minLength(1)
   @maxLength(50)
   organizationName: string;

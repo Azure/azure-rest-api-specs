@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01-privatepreview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "projectName": "{projectName}",
+    "environmentName": "{environmentName}",
+    "body": {
+      "properties": {
+        "description": "Personal Dev Environment",
+        "environmentType": "DevTest",
+        "templateUri": "https://raw.githubusercontent.com/contoso/webhelpcenter/master/environments/composition-template.json",
+        "deploymentParameters": {
+          "app_name": "mydevApi"
+        }
+      },
+      "location": "centralus",
+      "tags": {
+        "Role": "Development",
+        "Tech": "NetCore",
+        "ProjectType": "WebApi"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/devcenters/Contoso/projects/{projectName}/environments/{environmentName}",
+        "name": "{environmentName}",
+        "type": "Microsoft.Fidalgo/devcenters/projects/environments",
+        "properties": {
+          "description": "Personal Dev Environment",
+          "environmentType": "DevTest",
+          "templateUri": "https://raw.githubusercontent.com/contoso/webhelpcenter/master/environments/composition-template.json",
+          "deploymentParameters": {
+            "app_name": "mydevApi"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:00:36.993Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+        },
+        "location": "centralus",
+        "tags": {
+          "Role": "Development",
+          "Tech": "NetCore",
+          "ProjectType": "WebApi"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/devcenters/Contoso/projects/{projectName}/environments/{environmentName}",
+        "name": "{environmentName}",
+        "type": "Microsoft.Fidalgo/devcenters/projects/environments",
+        "properties": {
+          "description": "Personal Dev Environment",
+          "environmentType": "DevTest",
+          "templateUri": "https://raw.githubusercontent.com/contoso/webhelpcenter/master/environments/composition-template.json",
+          "deploymentParameters": {
+            "location": "southeastasia",
+            "app_name": "mydevApi"
+          },
+          "provisioningState": "Creating"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:00:36.993Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+        },
+        "location": "centralus",
+        "tags": {
+          "Role": "Development",
+          "Tech": "NetCore",
+          "ProjectType": "WebApi"
+        }
+      }
+    }
+  }
+}

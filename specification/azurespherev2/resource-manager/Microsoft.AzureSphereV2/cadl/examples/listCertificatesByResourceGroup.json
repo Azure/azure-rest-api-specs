@@ -1,0 +1,29 @@
+{
+  "operationId": "Certificates_ListByCatalog",
+  "title": "Certificates_ListByCatalog",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "api-version": "2022-09-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "description": "List of Catalog certificates by catalog in a resource group.",
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphereV2/catalogs/MyCatalog1/certificates/CertificateSerialNumber1",
+            "name": "CertificateSerialNumber1",
+            "type": "Microsoft.AzureSphereV2/catalogs/certificates",
+            "properties": {
+              "certificate": "ABase64EncodedCertificate",
+              "notBefore": "2022-06-23T21:25:37.258",
+              "notAfter": "2022-07-23T21:25:37.258"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

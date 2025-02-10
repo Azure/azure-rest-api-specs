@@ -1,0 +1,414 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this API specification will be used to manage Edge Virtual Networks attached to a particular packet core instance",
+    "version": "2024-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/packetCoreDataPlanes/{packetCoreDataPlaneName}/edgeVirtualNetworks/{edgeVirtualNetworkName}": {
+      "delete": {
+        "tags": [
+          "EdgeVirtualNetwork"
+        ],
+        "operationId": "EdgeVirtualNetworks_Delete",
+        "description": "Deletes the specified Edge Virtual Network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/EdgeVirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Edge Virtual Network": {
+            "$ref": "./examples/EdgeVirtualNetworkDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "EdgeVirtualNetwork"
+        ],
+        "operationId": "EdgeVirtualNetworks_Get",
+        "description": "Gets information about the specified Edge Virtual Network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/EdgeVirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting Edge Virtual Network resource.",
+            "schema": {
+              "$ref": "#/definitions/EdgeVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Edge Virtual Network": {
+            "$ref": "./examples/EdgeVirtualNetworkGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EdgeVirtualNetwork"
+        ],
+        "operationId": "EdgeVirtualNetworks_CreateOrUpdate",
+        "description": "Creates or updates an Edge Virtual Network .",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/EdgeVirtualNetworkNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeVirtualNetwork"
+            },
+            "description": "Parameters supplied to the create or update Edge Virtual Network operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Edge Virtual Network resource.",
+            "schema": {
+              "$ref": "#/definitions/EdgeVirtualNetwork"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Edge Virtual Network resource.",
+            "schema": {
+              "$ref": "#/definitions/EdgeVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Edge Virtual Network": {
+            "$ref": "./examples/EdgeVirtualNetworkCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "EdgeVirtualNetwork"
+        ],
+        "operationId": "EdgeVirtualNetworks_Update",
+        "description": "Update Edge Virtual Network resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/EdgeVirtualNetworkNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to patch Edge Virtual Network tags."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Edge Virtual Network resource.",
+            "schema": {
+              "$ref": "#/definitions/EdgeVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Edge Virtual Network": {
+            "$ref": "./examples/EdgeVirtualNetworkUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/packetCoreDataPlanes/{packetCoreDataPlaneName}/edgeVirtualNetworks": {
+      "get": {
+        "tags": [
+          "EdgeVirtualNetworks"
+        ],
+        "operationId": "EdgeVirtualNetworks_ListByPacketCoreDataPlane",
+        "description": "Lists all the Edge Virtual Networks in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Edge Virtual Network resources.",
+            "schema": {
+              "$ref": "#/definitions/EdgeVirtualNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Edge Virtual Networks in resource group": {
+            "$ref": "./examples/EdgeVirtualNetworkListByPacketCoreDataPlane.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EdgeSubnet": {
+      "description": "Edge Subnet Properties",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+          "maxLength": 64,
+          "description": "The name of the subnet."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeSubnetPrefix"
+          },
+          "minItems": 1,
+          "x-ms-identifiers": [],
+          "description": "List of address prefixes for the subnet."
+        },
+        "networkSecurityGroup": {
+          "$ref": "./common.json#/definitions/EdgeNetworkSecurityGroupResourceId",
+          "description": "The reference to the NetworkSecurityGroup resource."
+        }
+      },
+      "required": [
+        "name",
+        "addressPrefixes"
+      ]
+    },
+    "EdgeVirtualNetwork": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EdgeVirtualNetworkPropertiesFormat",
+          "description": "Edge Subnet properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Edge Virtual Network resource."
+    },
+    "EdgeVirtualNetworkPropertiesFormat": {
+      "description": "Edge Virtual Network Properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Edge Virtual Network resource."
+        },
+        "subnets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeSubnet"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "A list of edge subnets in a Virtual Network."
+        },
+        "defaultRouteInterface": {
+          "description": "Default interface to which traffic is routed from this Virtual Network",
+          "$ref": "./common.json#/definitions/EdgeNetworkInterface"
+        }
+      }
+    },
+    "EdgeVirtualNetworkListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeVirtualNetwork"
+          },
+          "description": "A list of Edge Virtual Networks in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for Edge Virtual Network API service call."
+    },
+    "EdgeSubnetPrefix": {
+      "type": "object",
+      "properties": {
+        "ipv4Prefix": {
+          "$ref": "./ts29571.json#/definitions/Ipv4AddrMask"
+        }
+      },
+      "description": "Edge Subnet IP Prefix"
+    }
+  }
+}

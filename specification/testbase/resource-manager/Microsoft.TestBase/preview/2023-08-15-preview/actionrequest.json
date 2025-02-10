@@ -1,0 +1,322 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Test Base",
+    "description": "Restful APIs for Test Base Action Requests.",
+    "version": "2023-08-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/actionRequests/{actionRequestName}": {
+      "put": {
+        "tags": [
+          "Test Base Action Requests"
+        ],
+        "operationId": "ActionRequests_Put",
+        "description": "Create (submit) an action request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ActionRequestName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "actionRequest",
+            "schema": {
+              "$ref": "#/definitions/ActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded to create (submit) an action request.",
+            "schema": {
+              "$ref": "#/definitions/ActionRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ActionRequestPut": {
+            "$ref": "./examples/ActionRequestPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Test Base Action Requests"
+        ],
+        "operationId": "ActionRequests_Delete",
+        "description": "Delete (revoke) an action request. Only requests in review can be deleted.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ActionRequestName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded to delete the specified action request."
+          },
+          "204": {
+            "description": "Succeeded to delete the specified action request."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ActionRequestDelete": {
+            "$ref": "./examples/ActionRequestDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/actionRequests": {
+      "get": {
+        "tags": [
+          "Test Base Action Requests"
+        ],
+        "operationId": "ActionRequests_List",
+        "description": "List all action requests under the specified test base account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RequestTypeFilter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TopFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded to list all action requests under the specified test base account.",
+            "schema": {
+              "$ref": "#/definitions/ActionRequests"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ActionRequestList": {
+            "$ref": "./examples/ActionRequestList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActionRequests": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActionRequest"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "ActionRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ActionRequestProperties",
+          "x-ms-client-flatten": true,
+          "description": "Test Base Draft Package properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ActionRequestProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "./testbase.json#/definitions/ProvisioningState"
+        },
+        "requestType": {
+          "$ref": "#/definitions/RequestTypes"
+        },
+        "preReleaseAccessRequestSpec": {
+          "$ref": "#/definitions/PreReleaseAccessRequestSpec"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "InReview",
+            "Approved",
+            "Declined"
+          ],
+          "x-ms-enum": {
+            "name": "requestStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "requestType"
+      ]
+    },
+    "RequestTypes": {
+      "type": "string",
+      "enum": [
+        "PreReleaseAccess"
+      ],
+      "x-ms-enum": {
+        "name": "requestTypes",
+        "modelAsString": true
+      }
+    },
+    "PreReleaseAccessRequestSpec": {
+      "type": "object",
+      "properties": {
+        "organizationName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "engagements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "MVI",
+              "MVP",
+              "SUVP",
+              "MAPP",
+              "Other"
+            ],
+            "x-ms-enum": {
+              "name": "engagements",
+              "modelAsString": true
+            }
+          }
+        },
+        "streetAddress": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "stateOrProvince": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "countryAndRegion": {
+          "type": "string"
+        },
+        "companyWebsite": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ActionRequestName": {
+      "name": "actionRequestName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RequestTypeFilter": {
+      "name": "requestType",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

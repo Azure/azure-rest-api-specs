@@ -1,0 +1,602 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure CIS FRP",
+    "version": "2023-08-22-preview",
+    "description": "dscm Certificate Service",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "DsmsCertificate"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureCis/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations DsmsCertificate": {
+            "$ref": "./examples/DsmsCertificate_Operations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/dsmsCertificates": {
+      "get": {
+        "operationId": "DsmsCertificate_ListBySubscription",
+        "tags": [
+          "DsmsCertificate"
+        ],
+        "description": "List DsmsCertificateResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsCertificateResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription dsmsCertificate": {
+            "$ref": "./examples/DsmsCertificate_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dsmsCertificates": {
+      "get": {
+        "operationId": "DsmsCertificate_ListByResourceGroup",
+        "tags": [
+          "DsmsCertificate"
+        ],
+        "description": "List DsmsCertificateResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsCertificateResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup dsmsCertificate": {
+            "$ref": "./examples/DsmsCertificate_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dsmsCertificates/{resourceName}": {
+      "get": {
+        "operationId": "DsmsCertificate_Get",
+        "tags": [
+          "DsmsCertificate"
+        ],
+        "description": "Get a DsmsCertificateResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsCertificateResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get dsmsCertificate": {
+            "$ref": "./examples/DsmsCertificate_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DsmsCertificate_CreateOrUpdate",
+        "tags": [
+          "DsmsCertificate"
+        ],
+        "description": "Create a DsmsCertificateResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DsmsCertificateResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DsmsCertificateResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DsmsCertificateResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'DsmsCertificateResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DsmsCertificateResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create dsmsCertificate": {
+            "$ref": "./examples/DsmsCertificate_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Allowlist": {
+      "type": "object",
+      "description": "Defines the allowlist element for a secret.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AllowlistType",
+          "description": "Gets or sets the type of the allowlist."
+        },
+        "values": {
+          "type": "string",
+          "description": "Gets or sets the values of the allowlist. A list of values are separated by semicolon."
+        }
+      },
+      "required": [
+        "type",
+        "values"
+      ]
+    },
+    "AllowlistType": {
+      "type": "string",
+      "description": "Allowlist Type",
+      "enum": [
+        "ServiceID",
+        "SubscriptionID",
+        "DnsDomain",
+        "ServiceTreeID"
+      ],
+      "x-ms-enum": {
+        "name": "AllowlistType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceID",
+            "value": "ServiceID",
+            "description": "Allowlisting a service"
+          },
+          {
+            "name": "SubscriptionID",
+            "value": "SubscriptionID",
+            "description": "Allowlisting subscription ID for creating storage account objects"
+          },
+          {
+            "name": "DnsDomain",
+            "value": "DnsDomain",
+            "description": "Allowlisting a DNS domain for creating chained certificates"
+          },
+          {
+            "name": "ServiceTreeID",
+            "value": "ServiceTreeID",
+            "description": "Allowlisting a service tree ID"
+          }
+        ]
+      }
+    },
+    "Allowlists": {
+      "type": "object",
+      "description": "Defines the array of allowlists for a secret",
+      "properties": {
+        "elements": {
+          "type": "array",
+          "description": "Allowlist elements",
+          "items": {
+            "$ref": "#/definitions/Allowlist"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "elements"
+      ]
+    },
+    "CaType": {
+      "type": "string",
+      "description": "CA type",
+      "enum": [
+        "SSLAdmin",
+        "AME"
+      ],
+      "x-ms-enum": {
+        "name": "CaType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SSLAdmin",
+            "value": "SSLAdmin",
+            "description": "SSLAdmin CA"
+          },
+          {
+            "name": "AME",
+            "value": "AME",
+            "description": "AME CA"
+          }
+        ]
+      }
+    },
+    "CertificateProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted State"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "CertificateType": {
+      "type": "string",
+      "description": "Certificate Type",
+      "enum": [
+        "Chained",
+        "SelfSigned"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Chained",
+            "value": "Chained",
+            "description": "Chained certificate"
+          },
+          {
+            "name": "SelfSigned",
+            "value": "SelfSigned",
+            "description": "Self-signed certificate"
+          }
+        ]
+      }
+    },
+    "DsmsCertificateProperties": {
+      "type": "object",
+      "description": "sslAdminCertificateDsms properties",
+      "properties": {
+        "certificateName": {
+          "type": "string",
+          "description": "Name of the certificate"
+        },
+        "certificateType": {
+          "$ref": "#/definitions/CertificateType",
+          "description": "Certificate type, Chained or SelfSigned"
+        },
+        "rootPath": {
+          "type": "string",
+          "description": "Root path of the certificate"
+        },
+        "dsmsDns": {
+          "type": "string",
+          "description": "Define in which region of dSMS to provision the storage account, such as global-dsms.dsms.%(HostNameSuffix), uswest-dsms.dsms.%(HostNameSuffix). This is used only when provision storage account in non-home-dsms endpoint."
+        },
+        "allowlists": {
+          "$ref": "#/definitions/Allowlists",
+          "description": "Certificate allowlist in dSMS."
+        },
+        "replicationScope": {
+          "$ref": "#/definitions/ReplicationScope",
+          "description": "Certificate Replication in dSMS."
+        },
+        "subjectName": {
+          "type": "string",
+          "description": "Certificate Subject name, e.g. \"CN=DsmsEv2Extension\" or \"CN=ev2-dsms.dsms.core.azure-test.net\""
+        },
+        "subjectAlternativeName": {
+          "type": "string",
+          "description": "Certificate Subject Alternate Name, e.g. \"DNS=ev2-dsms.dsms.core.azure-test.net\""
+        },
+        "caName": {
+          "$ref": "#/definitions/CaType",
+          "description": "CA to use, \"SSLAdmin\" or \"AME\""
+        },
+        "validDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Valid days of this certificate (Self-signed certificates only)"
+        },
+        "selfSigningMethod": {
+          "type": "string",
+          "description": "Enable CA signing (Self-signed certificates only)",
+          "enum": [
+            "CertificateAuthority",
+            "SelfSigned"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/CertificateProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "certificateName",
+        "certificateType",
+        "rootPath",
+        "subjectName"
+      ]
+    },
+    "DsmsCertificateResource": {
+      "type": "object",
+      "description": "dsmsCertificate Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DsmsCertificateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DsmsCertificateResourceListResult": {
+      "type": "object",
+      "description": "The response of a DsmsCertificateResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DsmsCertificateResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DsmsCertificateResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ReplicationScope": {
+      "type": "object",
+      "description": "Defines where the secret should be replicated to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ReplicationType",
+          "description": "Replication Type"
+        },
+        "regions": {
+          "type": "string",
+          "description": "The regions the secret will be replicated to (Applicable when the type of replication is SpecifiedDsmsRegions). Regions are separated by semicolon."
+        }
+      },
+      "required": [
+        "type",
+        "regions"
+      ]
+    },
+    "ReplicationType": {
+      "type": "string",
+      "description": "Replication Type",
+      "enum": [
+        "Local",
+        "AllDsmsRegions",
+        "SpecifiedDsmsRegions"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Local",
+            "value": "Local",
+            "description": "This secret is not replicated to other dSMS instance"
+          },
+          {
+            "name": "AllDsmsRegions",
+            "value": "AllDsmsRegions",
+            "description": "This secret can be replicated to all dSMS instances"
+          },
+          {
+            "name": "SpecifiedDsmsRegions",
+            "value": "SpecifiedDsmsRegions",
+            "description": "This secret can only be replicated to the specified dSMS instances"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

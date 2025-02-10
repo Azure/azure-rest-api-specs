@@ -1,0 +1,55 @@
+{
+  "operationId": "KdbInsightsEnterprise_Update",
+  "title": "KdbInsightsEnterprise_Update_4",
+  "parameters": {
+    "api-version": "2022-11-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "apiTest-uukzdc",
+    "kdbInsightsEnterpriseName": "kdblufscy",
+    "properties": {}
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/apiTest-uukzdc/providers/Microsoft.KX/kdbInsightsEnterprise/kdblufscy",
+        "name": "kdblufscy",
+        "type": "Microsoft.KX/kdbInsightsEnterprise",
+        "location": "west us",
+        "tags": {},
+        "systemData": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "uiUsername": "kdbuser01",
+          "emailAddress": "kdbuser01@email.com",
+          "systemNodePoolVmSize": "Standard_D2d_v4",
+          "userNodePoolVmSize": "Standard_D8ds_v4",
+          "isRookCeph": true,
+          "securityMonitoringEnabled": true,
+          "isPremiumStorageEnabled": false,
+          "readWriteManyStorageClass": "azurefile-premium-kxi-nfs",
+          "rtStorageClass": "managed-csi",
+          "readWriteOnceStorageClass": "managed-csi",
+          "isNotificationsOn": true,
+          "clientNotificationAddress": "kdbuser01@email.com",
+          "vnetAddressSpace": "10.0.0.6/16",
+          "isAuthorizedIpRanges": true,
+          "authorizedIpRanges": "255.255.255.255",
+          "aksContainerInsightsRetentionDays": 50,
+          "aksLogRetentionDays": 50,
+          "aksMetricsRetentionDays": 50,
+          "managedResourceGroupConfiguration": {
+            "name": "managedRG",
+            "location": "eastus"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": 60,
+        "Location": "https://management.azure.com/providers/Microsoft.KX/locations/westus/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d"
+      }
+    }
+  }
+}

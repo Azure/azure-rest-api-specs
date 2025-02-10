@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2022-12-31-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "testrg",
+    "microServiceName": "ContosoMicroservice",
+    "body": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.CleanRoom/Microservices/ContosoMicroservice",
+        "name": "ContosoMicroservice",
+        "type": "Microsoft.CleanRoom/Microservices",
+        "location": "northeurope",
+        "properties": {
+          "cleanRoomId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.CleanRoom/Cleanrooms/ContosoCleanroom",
+          "specification": {
+            "sandboxConfiguration": {
+              "scenario": "None"
+            },
+            "networkAddressType": "Public",
+            "networkAddress": "20.101.201.77",
+            "port": {
+              "port": 80,
+              "protocol": "TCP"
+            },
+            "applicationContainers": [],
+            "privilegedContainers": [
+              {
+                "name": "helloworld",
+                "image": "docker.io/constoso/sample_helloworld",
+                "command": [],
+                "ports": [
+                  {
+                    "port": 80,
+                    "protocol": "TCP"
+                  }
+                ],
+                "environmentVariables": {},
+                "resourceRequirement": {
+                  "requests": {
+                    "cpu": 1,
+                    "memoryInGb": 2
+                  },
+                  "limits": null
+                }
+              }
+            ],
+            "instanceCount": 1
+          },
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  }
+}

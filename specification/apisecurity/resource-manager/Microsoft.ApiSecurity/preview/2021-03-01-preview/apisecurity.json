@@ -1,0 +1,759 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "apisecurity",
+    "version": "2021-03-01-preview",
+    "description": "Description of the new service."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.ApiSecurity/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "description": "Lists the operations available from this provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ApiSecurity/defenderSettings": {
+      "get": {
+        "tags": [
+          "DefenderSettings"
+        ],
+        "operationId": "DefenderSettings_Get",
+        "description": "Get list pf defender settings.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DefenderSettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefenderSettings_Get_MaximumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Get_MaximumSet_Gen.json"
+          },
+          "DefenderSettings_Get_MinimumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ApiSecurity/defenderSettings/default": {
+      "get": {
+        "tags": [
+          "DefenderSettings"
+        ],
+        "operationId": "DefenderSetting_Get",
+        "description": "Get a defender setting.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DefenderSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefenderSetting_Get_MaximumSet_Gen": {
+            "$ref": "./examples/DefenderSetting_Get_MaximumSet_Gen.json"
+          },
+          "DefenderSetting_Get_MinimumSet_Gen": {
+            "$ref": "./examples/DefenderSetting_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DefenderSettings"
+        ],
+        "operationId": "DefenderSettings_Create",
+        "description": "Creates a defender setting.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Indicates an existing resource was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/DefenderSetting"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the defender setting.",
+            "schema": {
+              "$ref": "#/definitions/DefenderSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DefenderSettings_Create_MaximumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Create_MaximumSet_Gen.json"
+          },
+          "DefenderSettings_Create_MinimumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DefenderSettings"
+        ],
+        "operationId": "DefenderSettings_Update",
+        "description": "Updates a defender setting.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DefenderSetting"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DefenderSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DefenderSettings_Patch_MaximumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Patch_MaximumSet_Gen.json"
+          },
+          "DefenderSettings_Update_MaximumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Update_MaximumSet_Gen.json"
+          },
+          "DefenderSettings_Update_MinimumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DefenderSettings"
+        ],
+        "operationId": "DefenderSettings_Delete",
+        "description": "Deletes a defender setting.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DefenderSettings_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Delete_MaximumSet_Gen.json"
+          },
+          "DefenderSettings_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/DefenderSettings_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/collections": {
+      "get": {
+        "tags": [
+          "ApiSecurityCollection"
+        ],
+        "operationId": "ApiSecurityCollections_List",
+        "description": "Get collections.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of records of the collection output."
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The number of collection output needs to be skipped."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Collections_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Collections_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/collections/{collectionName}": {
+      "get": {
+        "tags": [
+          "ApiSecurityCollection"
+        ],
+        "operationId": "ApiSecurityCollections_Get",
+        "description": "Get a specific collection by name",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "collectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "name of the collection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CollectionDocument"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CollectionByName_Get_MaximumSet_Gen": {
+            "$ref": "./examples/CollectionByName_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/collections/{collectionId}/collectiondetails": {
+      "get": {
+        "tags": [
+          "ApiSecurityCollectionDetails"
+        ],
+        "operationId": "ApiSecurityCollectionDetails_List",
+        "description": "Get collection details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The collectionId of the collection details output."
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of records of the collection output."
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The number of collection output needs to be skipped.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionDetailList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApiSecurityCollectionDetails_List_MaximumSet_Gen": {
+            "$ref": "./examples/ApiSecurityCollectionDetails_List_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiSecurity/collections/{collectionId}/collectiondetails/{collectionDetailsResourceName}": {
+      "get": {
+        "tags": [
+          "ApiSecurityCollectionDetails"
+        ],
+        "operationId": "ApiSecurityCollectionDetails_Get",
+        "description": "Get a specific collection detail by name",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the collection."
+          },
+          {
+            "name": "collectionDetailsResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "resource name of the collection detail."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CollectionDetailsDocument"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiSecurityCollectionDetails_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ApiSecurityCollectionDetails_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DefenderSetting": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The defender setting ID."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The defender setting name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The defender setting type."
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "description": "Defender Settings",
+      "x-ms-azure-resource": true
+    },
+    "DefenderSettingList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DefenderSetting"
+          },
+          "description": "Result of the List DefenderSetting operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of DefenderSetting."
+        }
+      },
+      "description": "The response of the List DefenderSetting operation"
+    },
+    "ApiCollectionList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionDocument"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results."
+        }
+      }
+    },
+    "CollectionDocument": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CollectionDocumentProperties",
+          "description": "The collection documents properties."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        }
+      },
+      "description": "collections",
+      "x-ms-azure-resource": true
+    },
+    "CollectionDocumentProperties": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The accountId."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The subscriptionId."
+        },
+        "collectionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The collectionId."
+        },
+        "collectionName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The collectionName."
+        },
+        "userFriendlyCollectionName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The userFriendlyCollectionName."
+        },
+        "uriPath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The uriPath."
+        },
+        "hostingEnvironment": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The hostingEnvironment."
+        },
+        "numberOfInactiveApiEndpoints": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The numberOfInactiveApiEndpoints."
+        },
+        "numberOfTotalApiEndpoints": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The numberOfTotalApiEndpoints."
+        },
+        "apiDocumentationFound": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "The apiDocumentationFound."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioningState."
+        }
+      },
+      "description": "The collection documents properties."
+    },
+    "ApiCollectionDetailList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionDetailsDocument"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next link of the collection details."
+        }
+      }
+    },
+    "CollectionDetailsDocument": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CollectionDetailsDocumentProperties",
+          "description": "The collection details document properties."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        }
+      },
+      "description": "collection details",
+      "x-ms-azure-resource": true
+    },
+    "CollectionDetailsDocumentProperties": {
+      "type": "object",
+      "properties": {
+        "endPoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The endPoint."
+        },
+        "httpMethod": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The httpMethod."
+        },
+        "discoveryDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "triggerDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endpointType": {
+          "$ref": "#/definitions/EndpointTypes"
+        },
+        "isEndpointActive": {
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioningState."
+        }
+      }
+    },
+    "EndpointTypes": {
+      "type": "string",
+      "enum": [
+        "API",
+        "UndocumentedApi"
+      ],
+      "x-ms-enum": {
+        "name": "endpointTypes",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

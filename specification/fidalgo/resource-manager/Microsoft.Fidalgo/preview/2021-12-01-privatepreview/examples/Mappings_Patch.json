@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-privatepreview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso",
+    "mappingName": "{mappingName}",
+    "body": {
+      "properties": {
+        "mappedSubscriptionId": "/subscriptions/57a221ae-b5e9-4bea-be0a-e86e5f9317cc"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/devcenters/Contoso/projects/{projectName}/mappings/{mappingName}",
+        "name": "{mappingName}",
+        "type": "Microsoft.Fidalgo/devcenters/projects/Mappings",
+        "properties": {
+          "environmentType": "DevTest",
+          "mappedSubscriptionId": "/subscriptions/57a221ae-b5e9-4bea-be0a-e86e5f9317cc",
+          "projectId": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/projects/{projectName}"
+        },
+        "systemData": {
+          "createdBy": "User1@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:24:24.818Z",
+          "lastModifiedBy": "User1@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+        }
+      }
+    }
+  }
+}

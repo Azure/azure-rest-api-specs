@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2022-08-01-preview",
-    "title": "DevCenterClient",
+    "title": "DevCenter",
     "description": "DevCenter Management API"
   },
   "host": "management.azure.com",
@@ -1657,7 +1657,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Catalogs_Sync": {
@@ -3475,11 +3475,6 @@
         },
         "status": {
           "description": "Provisioning state of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceId": {
-          "description": "The id of the resource.",
           "type": "string",
           "readOnly": true
         },

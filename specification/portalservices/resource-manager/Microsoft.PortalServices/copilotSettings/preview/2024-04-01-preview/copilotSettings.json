@@ -284,6 +284,16 @@
         "accessControlEnabled"
       ]
     },
+    "CopilotSettingsPropertiesUpdate": {
+      "type": "object",
+      "description": "The Copilot Settings properties.",
+      "properties": {
+        "accessControlEnabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if role-based access control is enabled for copilot in this tenant."
+        }
+      }
+    },
     "CopilotSettingsResource": {
       "type": "object",
       "description": "The copilot settings tenant resource definition.",
@@ -302,24 +312,19 @@
     },
     "CopilotSettingsResourceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the CopilotSettingsResource.",
+      "description": "The copilot settings tenant resource definition.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CopilotSettingsResourceUpdateProperties",
+          "$ref": "#/definitions/CopilotSettingsPropertiesUpdate",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
-      }
-    },
-    "CopilotSettingsResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the CopilotSettingsResource.",
-      "properties": {
-        "accessControlEnabled": {
-          "type": "boolean",
-          "description": "Boolean indicating if role-based access control is enabled for copilot in this tenant."
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      }
+      ]
     }
   },
   "parameters": {}

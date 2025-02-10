@@ -1,0 +1,1719 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AzureCloudMetadata management service",
+    "version": "2024-05-01-preview",
+    "description": "Microsoft.AzureCloudMetadata Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Clouds"
+    },
+    {
+      "name": "Geographies"
+    },
+    {
+      "name": "Regions"
+    },
+    {
+      "name": "AvailabilityZones"
+    },
+    {
+      "name": "DataCenters"
+    },
+    {
+      "name": "Clusters"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureCloudMetadata/availabilityZones": {
+      "get": {
+        "operationId": "AvailabilityZones_ListByTenant",
+        "tags": [
+          "AvailabilityZones"
+        ],
+        "description": "List AvailabilityZone resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilityZoneListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailabilityZones_ListByTenant": {
+            "$ref": "./examples/AvailabilityZones_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/availabilityZones/{zoneName}": {
+      "get": {
+        "operationId": "AvailabilityZones_Get",
+        "tags": [
+          "AvailabilityZones"
+        ],
+        "description": "Get a AvailabilityZone",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "description": "The AvailabilityZone name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]{2,20}-AZ[0-9]{2}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilityZone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailabilityZones_Get": {
+            "$ref": "./examples/AvailabilityZones_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/clouds": {
+      "get": {
+        "operationId": "Clouds_ListByTenant",
+        "tags": [
+          "Clouds"
+        ],
+        "description": "List Cloud resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_ListByTenant": {
+            "$ref": "./examples/Clouds_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}": {
+      "get": {
+        "operationId": "Clouds_Get",
+        "tags": [
+          "Clouds"
+        ],
+        "description": "Get a Cloud",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The cloud name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cloud"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_Get": {
+            "$ref": "./examples/Clouds_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/datacenters": {
+      "get": {
+        "operationId": "DataCenters_ListByCloud",
+        "tags": [
+          "DataCenters"
+        ],
+        "description": "List DataCenter resources by Cloud",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The cloud name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataCenterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataCenters_ListByCloud": {
+            "$ref": "./examples/DataCenters_ListByCloud.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/datacenters/{datacenterName}": {
+      "get": {
+        "operationId": "DataCenters_Get",
+        "tags": [
+          "DataCenters"
+        ],
+        "description": "Get a DataCenter",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The cloud name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z-]{3,24}$"
+          },
+          {
+            "name": "datacenterName",
+            "in": "path",
+            "description": "The DataCenter name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{2,5}[0-9]{0,3}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataCenter"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataCenters_Get": {
+            "$ref": "./examples/DataCenters_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/clusters": {
+      "get": {
+        "operationId": "Clusters_ListByTenant",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "List Cluster resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_ListByTenant": {
+            "$ref": "./examples/Clusters_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/clusters/{clusterName}": {
+      "get": {
+        "operationId": "Clusters_Get",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Get a Cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The Cluster Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{2,25}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_Get": {
+            "$ref": "./examples/Clusters_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/geographies": {
+      "get": {
+        "operationId": "Geographies_ListByTenant",
+        "tags": [
+          "Geographies"
+        ],
+        "description": "List Geography resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GeographyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Geographies_ListByTenant": {
+            "$ref": "./examples/Geographies_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/geographies/{geographyShortId}": {
+      "get": {
+        "operationId": "Geographies_Get",
+        "tags": [
+          "Geographies"
+        ],
+        "description": "Get a Geography",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "geographyShortId",
+            "in": "path",
+            "description": "The geography short id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z-]{2,5}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Geography"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Geographies_Get": {
+            "$ref": "./examples/Geographies_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/regions": {
+      "get": {
+        "operationId": "Regions_ListByTenant",
+        "tags": [
+          "Regions"
+        ],
+        "description": "List Region resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Regions_ListByTenant": {
+            "$ref": "./examples/Regions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/regions/{regionName}": {
+      "get": {
+        "operationId": "Regions_Get",
+        "tags": [
+          "Regions"
+        ],
+        "description": "Get a Region",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "regionName",
+            "in": "path",
+            "description": "The region name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Region"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Regions_Get": {
+            "$ref": "./examples/Regions_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AZException": {
+      "type": "string",
+      "description": "Valid AvailabilityZone Exceptions.",
+      "enum": [
+        "Isolation",
+        "Latency"
+      ],
+      "x-ms-enum": {
+        "name": "AZException",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Isolation",
+            "value": "Isolation",
+            "description": "The Datacenter has an Isolation exception to its parent availability zone."
+          },
+          {
+            "name": "Latency",
+            "value": "Latency",
+            "description": "The Datacenter has a Latency exception to its parent availability zone."
+          }
+        ]
+      }
+    },
+    "AvailabilityProperties": {
+      "type": "object",
+      "description": "Availability details.",
+      "properties": {
+        "guid": {
+          "type": "string",
+          "description": "Guid of the resource."
+        },
+        "shortId": {
+          "type": "string",
+          "description": "Short id of the resource",
+          "pattern": "^[a-zA-Z-]{2,6}$"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the resource",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "state": {
+          "$ref": "#/definitions/AvailabilityZoneState",
+          "description": "State of the AvailabilityZone."
+        },
+        "pfClusters": {
+          "type": "array",
+          "description": "List of PilotFish Clusters of the AvailabilityZone.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "artifactDatacenters": {
+          "type": "array",
+          "description": "List of artifact datacenters of the AvailabilityZone.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "regionResourceId": {
+          "type": "string",
+          "description": "Resource Id of parent"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "guid",
+        "index",
+        "state",
+        "pfClusters",
+        "artifactDatacenters",
+        "regionResourceId"
+      ]
+    },
+    "AvailabilityZone": {
+      "type": "object",
+      "description": "Availability resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvailabilityProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AvailabilityZoneListResult": {
+      "type": "object",
+      "description": "The response of a AvailabilityZone list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AvailabilityZone items on this page",
+          "items": {
+            "$ref": "#/definitions/AvailabilityZone"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AvailabilityZoneState": {
+      "type": "string",
+      "description": "The valid states availabilityZone.",
+      "enum": [
+        "Proposed",
+        "Approved",
+        "On Hold",
+        "Buildout",
+        "Production SLA",
+        "Decommissioning",
+        "Retired",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "AvailabilityZoneState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Proposed",
+            "value": "Proposed",
+            "description": "The resource is being proposed"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The resource is approved"
+          },
+          {
+            "name": "OnHold",
+            "value": "On Hold",
+            "description": "The resource is on hold"
+          },
+          {
+            "name": "Buildout",
+            "value": "Buildout",
+            "description": "The resource is in buildout"
+          },
+          {
+            "name": "ProductionSLA",
+            "value": "Production SLA",
+            "description": "The resource is ready in production with a Service-Level agreement"
+          },
+          {
+            "name": "Decommissioning",
+            "value": "Decommissioning",
+            "description": "The resource is in decommissioning"
+          },
+          {
+            "name": "Retired",
+            "value": "Retired",
+            "description": "The resource is retired"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The resource is cancelled"
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Cloud": {
+      "type": "object",
+      "description": "Cloud resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CloudListResult": {
+      "type": "object",
+      "description": "The response of a Cloud list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Cloud items on this page",
+          "items": {
+            "$ref": "#/definitions/Cloud"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudProperties": {
+      "type": "object",
+      "description": "Cloud details.",
+      "properties": {
+        "guid": {
+          "type": "string",
+          "description": "Guid of the resource."
+        },
+        "shortId": {
+          "type": "string",
+          "description": "Short id of the resource",
+          "pattern": "^[a-zA-Z-]{2,6}$"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the resource",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "environmentType": {
+          "$ref": "#/definitions/EnvironmentType",
+          "description": "Environment type of cloud."
+        },
+        "state": {
+          "$ref": "#/definitions/CloudState",
+          "description": "State of cloud."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "guid",
+        "index",
+        "environmentType",
+        "state"
+      ]
+    },
+    "CloudState": {
+      "type": "string",
+      "description": "The valid state of cloud.",
+      "enum": [
+        "Proposed",
+        "Approved",
+        "On Hold",
+        "Buildout",
+        "Production SLA",
+        "Decommissioning",
+        "Retired",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "CloudState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Proposed",
+            "value": "Proposed",
+            "description": "The resource is being proposed"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The resource is approved"
+          },
+          {
+            "name": "OnHold",
+            "value": "On Hold",
+            "description": "The resource is on hold"
+          },
+          {
+            "name": "Buildout",
+            "value": "Buildout",
+            "description": "The resource is in buildout"
+          },
+          {
+            "name": "ProductionSLA",
+            "value": "Production SLA",
+            "description": "The resource is ready in production with a Service-Level agreement"
+          },
+          {
+            "name": "Decommissioning",
+            "value": "Decommissioning",
+            "description": "The resource is in decommissioning"
+          },
+          {
+            "name": "Retired",
+            "value": "Retired",
+            "description": "The resource is retired"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The resource is cancelled"
+          }
+        ]
+      }
+    },
+    "Cluster": {
+      "type": "object",
+      "description": "Cluster resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterListResult": {
+      "type": "object",
+      "description": "The response of a Cluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Cluster items on this page",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterProperties": {
+      "type": "object",
+      "description": "Cluster details.",
+      "properties": {
+        "fabricCommonName": {
+          "type": "string",
+          "description": "FabricCommonName of the Cluster."
+        },
+        "ipList": {
+          "type": "array",
+          "description": "Ip List of the Cluster.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataCenterResourceId": {
+          "type": "string",
+          "description": "Resource Id of parent DataCenter."
+        },
+        "ufcTenantName": {
+          "type": "string",
+          "description": "Unified Fabric container Tenant Name of the the Cluster."
+        },
+        "azExceptions": {
+          "type": "array",
+          "description": "AvailabilityZone Exceptions of the Cluster.",
+          "items": {
+            "$ref": "#/definitions/AZException"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "fabricCommonName",
+        "ipList",
+        "dataCenterResourceId"
+      ]
+    },
+    "DataCenter": {
+      "type": "object",
+      "description": "DataCenter resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataCenterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataCenterListResult": {
+      "type": "object",
+      "description": "The response of a DataCenter list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataCenter items on this page",
+          "items": {
+            "$ref": "#/definitions/DataCenter"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataCenterProperties": {
+      "type": "object",
+      "description": "DataCenter details.",
+      "properties": {
+        "guid": {
+          "type": "string",
+          "description": "Guid of the resource."
+        },
+        "shortId": {
+          "type": "string",
+          "description": "Short id of the resource",
+          "pattern": "^[a-zA-Z-]{2,6}$"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the resource",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "state": {
+          "$ref": "#/definitions/DataCenterState",
+          "description": "State of the DataCenter."
+        },
+        "tenants": {
+          "type": "array",
+          "description": "Tenant of the DataCenter.",
+          "items": {
+            "$ref": "#/definitions/Tenant"
+          }
+        },
+        "regionResourceId": {
+          "type": "string",
+          "description": "Resource Id of parent region."
+        },
+        "availabilityZoneResourceId": {
+          "type": "string",
+          "description": "Resource Id of parent availabilityZone."
+        },
+        "physicalDatacenterId": {
+          "type": "string",
+          "description": "Name of the PhysicalDatacenter of the DataCenter."
+        },
+        "commonName": {
+          "type": "string",
+          "description": "Common name of the DataCenter."
+        },
+        "azExceptions": {
+          "type": "array",
+          "description": "AvailabilityZone Exceptions of the DataCenter.",
+          "items": {
+            "$ref": "#/definitions/AZException"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "guid",
+        "index",
+        "state",
+        "tenants",
+        "regionResourceId"
+      ]
+    },
+    "DataCenterState": {
+      "type": "string",
+      "description": "Valid Datacenter State.",
+      "enum": [
+        "Proposed",
+        "Approved",
+        "Cancelled",
+        "On Hold",
+        "Buildout",
+        "Production SLA",
+        "Decommissioning",
+        "Retired",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "DataCenterState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Proposed",
+            "value": "Proposed",
+            "description": "The Datacenter is Proposed."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The Datacenter is Approved."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The Datacenter is Cancelled."
+          },
+          {
+            "name": "OnHold",
+            "value": "On Hold",
+            "description": "The Datacenter is On Hold."
+          },
+          {
+            "name": "Buildout",
+            "value": "Buildout",
+            "description": "The Datacenter is Buildout."
+          },
+          {
+            "name": "ProductionSLA",
+            "value": "Production SLA",
+            "description": "The Datacenter is ready in production with a Service-Level agreement."
+          },
+          {
+            "name": "Decommissioning",
+            "value": "Decommissioning",
+            "description": "The Datacenter is Decommissioning."
+          },
+          {
+            "name": "Retired",
+            "value": "Retired",
+            "description": "The Datacenter is Retired."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The Datacenter state is Unknown."
+          }
+        ]
+      }
+    },
+    "EnvironmentType": {
+      "type": "string",
+      "description": "The cloud environment type.",
+      "enum": [
+        "Public",
+        "Sovereign",
+        "Airgapped"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Public",
+            "value": "Public",
+            "description": "This is a Public cloud"
+          },
+          {
+            "name": "Sovereign",
+            "value": "Sovereign",
+            "description": "This is a Sovereign cloud"
+          },
+          {
+            "name": "Airgapped",
+            "value": "Airgapped",
+            "description": "This is an Airgapped cloud"
+          }
+        ]
+      }
+    },
+    "Geography": {
+      "type": "object",
+      "description": "Geography resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GeographyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GeographyListResult": {
+      "type": "object",
+      "description": "The response of a Geography list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Geography items on this page",
+          "items": {
+            "$ref": "#/definitions/Geography"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GeographyProperties": {
+      "type": "object",
+      "description": "Geography details.",
+      "properties": {
+        "guid": {
+          "type": "string",
+          "description": "Guid of the resource."
+        },
+        "shortId": {
+          "type": "string",
+          "description": "Short id of the resource",
+          "pattern": "^[a-zA-Z-]{2,6}$"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the resource",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Name of geography."
+        },
+        "state": {
+          "$ref": "#/definitions/GeographyState",
+          "description": "State of geography."
+        },
+        "cloudResourceId": {
+          "type": "string",
+          "description": "Resource Id of parent cloud."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "guid",
+        "index",
+        "fullName",
+        "state",
+        "cloudResourceId"
+      ]
+    },
+    "GeographyState": {
+      "type": "string",
+      "description": "The valid state of geography.",
+      "enum": [
+        "Proposed",
+        "Approved",
+        "On Hold",
+        "Buildout",
+        "Production SLA",
+        "Decommissioning",
+        "Retired",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "GeographyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Proposed",
+            "value": "Proposed",
+            "description": "The resource is being proposed"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The resource is approved"
+          },
+          {
+            "name": "OnHold",
+            "value": "On Hold",
+            "description": "The resource is on hold"
+          },
+          {
+            "name": "Buildout",
+            "value": "Buildout",
+            "description": "The resource is in buildout"
+          },
+          {
+            "name": "ProductionSLA",
+            "value": "Production SLA",
+            "description": "The resource is ready in production with a Service-Level agreement"
+          },
+          {
+            "name": "Decommissioning",
+            "value": "Decommissioning",
+            "description": "The resource is in decommissioning"
+          },
+          {
+            "name": "Retired",
+            "value": "Retired",
+            "description": "The resource is retired"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The resource is cancelled"
+          }
+        ]
+      }
+    },
+    "Region": {
+      "type": "object",
+      "description": "Region resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RegionListResult": {
+      "type": "object",
+      "description": "The response of a Region list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Region items on this page",
+          "items": {
+            "$ref": "#/definitions/Region"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RegionProperties": {
+      "type": "object",
+      "description": "Region details.",
+      "properties": {
+        "guid": {
+          "type": "string",
+          "description": "Guid of the resource."
+        },
+        "shortId": {
+          "type": "string",
+          "description": "Short id of the resource",
+          "pattern": "^[a-zA-Z-]{2,6}$"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the resource",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of region"
+        },
+        "regionType": {
+          "$ref": "#/definitions/RegionType",
+          "description": "Type of region"
+        },
+        "state": {
+          "$ref": "#/definitions/RegionState",
+          "description": "State of region."
+        },
+        "armLocation": {
+          "type": "string",
+          "description": "Arm location of region."
+        },
+        "availabilityZoneSupport": {
+          "$ref": "#/definitions/ZoneSupportState",
+          "description": "Availability zone support state of region."
+        },
+        "supportedCustomerWorkloads": {
+          "type": "string",
+          "description": "Supported customer workloads of region."
+        },
+        "billingRegionName": {
+          "type": "string",
+          "description": "Billing region name of region."
+        },
+        "buildoutArmFeatureFlag": {
+          "type": "string",
+          "description": "Buildout arm feature flag of region."
+        },
+        "customerArmFeatureFlag": {
+          "type": "string",
+          "description": "Customer arm feature flag of region."
+        },
+        "pairRegionIds": {
+          "type": "string",
+          "description": "Id of paired region of region."
+        },
+        "recoveryRegionGuid": {
+          "type": "string",
+          "description": "Recovery region guid of region."
+        },
+        "rdfeId": {
+          "type": "string",
+          "description": "rdfe Id of region."
+        },
+        "dataBoundary": {
+          "type": "string",
+          "description": "Data boundary of region."
+        },
+        "crpServiceAccount": {
+          "type": "string",
+          "description": "Crp service account of region."
+        },
+        "dstsDns": {
+          "type": "string",
+          "description": "Dsts Dns of region."
+        },
+        "defaultBillingPolicy": {
+          "type": "string",
+          "description": "Default billing policy of region."
+        },
+        "defaultOfferType": {
+          "type": "string",
+          "description": "Default offer type of region."
+        },
+        "dnsServers": {
+          "type": "string",
+          "description": "Dns servers of region."
+        },
+        "rnmDnsName": {
+          "type": "string",
+          "description": "Rnm Dns name of region."
+        },
+        "geographyResourceId": {
+          "type": "string",
+          "description": "Resource id of region's parent geography."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "guid",
+        "index",
+        "friendlyName",
+        "regionType",
+        "state",
+        "armLocation",
+        "availabilityZoneSupport",
+        "supportedCustomerWorkloads",
+        "billingRegionName",
+        "geographyResourceId"
+      ]
+    },
+    "RegionState": {
+      "type": "string",
+      "description": "The region state.",
+      "enum": [
+        "Proposed",
+        "Approved",
+        "Ring 0 Complete",
+        "Buildout",
+        "Production SLA",
+        "Decommissioning",
+        "Retired",
+        "Cancelled",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "RegionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Proposed",
+            "value": "Proposed",
+            "description": "The region is being proposed"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The region is approved"
+          },
+          {
+            "name": "Ring0Complete",
+            "value": "Ring 0 Complete",
+            "description": "The region is on ring 0 complete"
+          },
+          {
+            "name": "Buildout",
+            "value": "Buildout",
+            "description": "The region is in buildout"
+          },
+          {
+            "name": "ProductionSLA",
+            "value": "Production SLA",
+            "description": "The region is in production SLA"
+          },
+          {
+            "name": "Decommissioning",
+            "value": "Decommissioning",
+            "description": "The region is decommissioning"
+          },
+          {
+            "name": "Retired",
+            "value": "Retired",
+            "description": "The region is retired"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The region is cancelled"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The region state is unknown"
+          }
+        ]
+      }
+    },
+    "RegionType": {
+      "type": "string",
+      "description": "The region type.",
+      "enum": [
+        "Hero",
+        "Hub",
+        "Micro",
+        "Satellite",
+        "AI_Reserve",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "RegionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hero",
+            "value": "Hero",
+            "description": "A hero region"
+          },
+          {
+            "name": "Hub",
+            "value": "Hub",
+            "description": "A hub region"
+          },
+          {
+            "name": "Micro",
+            "value": "Micro",
+            "description": "A micro region"
+          },
+          {
+            "name": "Satellite",
+            "value": "Satellite",
+            "description": "A satellite region"
+          },
+          {
+            "name": "AIReserve",
+            "value": "AI_Reserve",
+            "description": "A AI region"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Region type is unknown"
+          }
+        ]
+      }
+    },
+    "Tenant": {
+      "type": "string",
+      "description": "Valid tenants for DataCenters.",
+      "enum": [
+        "Azure",
+        "PilotFish",
+        "Exchange",
+        "Office365",
+        "Bing",
+        "RNG",
+        "AZNG",
+        "OneFleetEdge"
+      ],
+      "x-ms-enum": {
+        "name": "Tenant",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "The Tenant type is Azure."
+          },
+          {
+            "name": "PilotFish",
+            "value": "PilotFish",
+            "description": "The Tenant type is PilotFish."
+          },
+          {
+            "name": "Exchange",
+            "value": "Exchange",
+            "description": "The Tenant type is Exchange."
+          },
+          {
+            "name": "Office365",
+            "value": "Office365",
+            "description": "The Tenant type is Office365."
+          },
+          {
+            "name": "Bing",
+            "value": "Bing",
+            "description": "The Tenant type is Bing."
+          },
+          {
+            "name": "RNG",
+            "value": "RNG",
+            "description": "The Tenant type is Region Network Gateway."
+          },
+          {
+            "name": "AZNG",
+            "value": "AZNG",
+            "description": "The Tenant type is Availability Zone Network Gateway."
+          },
+          {
+            "name": "OneFleetEdge",
+            "value": "OneFleetEdge",
+            "description": "The Tenant type is OneFleetEdge."
+          }
+        ]
+      }
+    },
+    "ZoneSupportState": {
+      "type": "string",
+      "description": "The region's zone support state.",
+      "enum": [
+        "No Plan",
+        "Proposed",
+        "Approved",
+        "On Hold",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "ZoneSupportState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoPlan",
+            "value": "No Plan",
+            "description": "Zone support state is no plan."
+          },
+          {
+            "name": "Proposed",
+            "value": "Proposed",
+            "description": "Zone support state is proposed."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "Zone support state is approved."
+          },
+          {
+            "name": "OnHold",
+            "value": "On Hold",
+            "description": "Zone support state is on hold."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Zone support state is cancelled."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

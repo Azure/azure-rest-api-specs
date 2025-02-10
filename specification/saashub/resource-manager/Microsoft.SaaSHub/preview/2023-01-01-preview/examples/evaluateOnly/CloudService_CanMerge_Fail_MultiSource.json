@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "CloudServiceResourceName": "targetResourceName",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "parameters": {
+      "sourceResources": [
+        {
+          "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/sourceResourceName1",
+          "quantity": 10
+        },
+        {
+          "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/targetResourceName",
+          "quantity": 5
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "InvalidRequestBody",
+        "reason": "Currently only supports single source resource",
+        "additionalInfo": null
+      }
+    }
+  }
+}

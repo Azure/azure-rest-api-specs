@@ -1,0 +1,185 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-08-01-privatepreview",
+    "title": "Fidalgo",
+    "description": "Project Fidalgo Management API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "TrackedResourceUpdate": {
+      "description": "Base tracked resource type for PATCH updates",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "$ref": "#/definitions/Tags",
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      }
+    },
+    "Tags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ],
+      "description": "Resource tags."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error body",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Fidalgo service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Fidalgo service."
+    },
+    "Sku": {
+      "description": "The resource model definition representing SKU",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU."
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Free",
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          },
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource.",
+      "readOnly": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Unique identifier of the Azure subscription. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the resource group within the Azure subscription.",
+      "x-ms-parameter-location": "method"
+    },
+    "ProjectNameParameter": {
+      "name": "projectName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the project.",
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "$top",
+      "in": "query",
+      "description": "The maximum number of resources to return from the operation. Example: '$top=10'.",
+      "type": "integer",
+      "format": "int32",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

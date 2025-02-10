@@ -1,0 +1,298 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+@armProviderNamespace
+@service({
+  title: "Microsoft.WhiteBoxCadlProvider",
+  version: "2021-08-01-preview",
+})
+@versionedDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+namespace Microsoft.WhiteBoxCadlProvider;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+@doc("A WhiteBoxCadlProviderProviderHub resource")
+model WhiteBoxResource is TrackedResource<WhiteBoxResourceProperties> {
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @key("whiteBoxResourceName")
+  @segment("whiteBoxResources")
+  @doc("Name.")
+  @path
+  @visibility("read")
+  name: string;
+}
+
+@doc("The status of the current operation.")
+enum ProvisioningState {
+  Succeeded,
+  Failed,
+  Canceled,
+  Provisioning,
+  Updating,
+  Deleting,
+  Accepted,
+}
+
+@doc("SKU Allowed Values.")
+enum Sku {
+  S0,
+  S1,
+  S2,
+  S3,
+  S4,
+  S5,
+}
+
+@doc("Details of the WhiteBoxCadlProvider WhiteBoxResource.")
+model WhiteBoxResourceProperties {
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+
+  @doc("Customer Hosted Version.")
+  @visibility("read", "create", "update")
+  version?: float32 = 1.0;
+
+  @doc("Customer Hosted SKU")
+  @visibility("read", "create", "update")
+  sku: Sku;
+
+  @visibility("read", "create")
+  @doc("Profile of SQL Resource created.")
+  sqlProfile: SqlProfile;
+
+  @visibility("read", "create")
+  @doc("Profile of Synapse Resource created.")
+  synapseProfile: SynapseProfile;
+
+  @visibility("read", "create")
+  @doc("Profile of M365 Resources.")
+  m365Profile: M365Profile;
+
+  @visibility("read", "create")
+  @doc("Profile of APIM Created.")
+  apimProfile: ApimProfile;
+
+  @visibility("read")
+  @doc("Profile of AKS Created.")
+  aksProfile?: AksProfile;
+
+  @visibility("read")
+  @doc("Profile of Firewall Policy Created.")
+  firewallPolicyProfile?: FirewallPolicyProfile;
+
+  @visibility("read")
+  @doc("Profile of Firewall Created.")
+  firewallProfile?: FirewallProfile;
+
+  @visibility("read")
+  @doc("Profile of AppGateway Created.")
+  appGatewayProfile?: AppGatewayProfile;
+
+  @visibility("read")
+  @doc("Profile of Bastion Created.")
+  bastionProfile?: BastionProfile;
+
+  @visibility("read")
+  @doc("Profile of Datafactory Created.")
+  datafactoryProfile?: DatafactoryProfile;
+
+  @visibility("read")
+  @doc("Profile of Storage Created.")
+  storageProfile?: StorageProfile;
+
+  @visibility("read")
+  @doc("Profile of KeyVault Created.")
+  keyVaultProfile?: KeyVaultProfile;
+
+  @visibility("read")
+  @doc("Profile of LogAnalytics Created.")
+  logAnalyticsProfile?: LogAnalyticsProfile;
+
+  @visibility("read")
+  @doc("Profile of Vnet Created.")
+  vnetProfile?: VnetProfile;
+}
+
+@doc("The properties related to SQL Resource")
+model SqlProfile {
+  @doc("The administrator password of the SQL logical server.")
+  @visibility("create")
+  administratorLoginPassword: string;
+
+  @doc("Resource Id of SQL Database")
+  @visibility("read")
+  id?: string;
+
+  @doc("Assigned Managed Identity Id")
+  @visibility("read")
+  miId?: string;
+}
+
+@doc("The properties related to Synapse Resource")
+model SynapseProfile {
+  @doc("Synapse Administrator Login")
+  @visibility("read", "create")
+  synapseAdminLogin: string;
+
+  @doc("Synapse Administrator Tenant")
+  @visibility("read", "create")
+  synapseAdminTenant: string;
+
+  @doc("Synapse Administrator SID")
+  @visibility("read", "create")
+  synapseAdminSID: string;
+
+  @doc("Resource Id of Spark Pool")
+  @visibility("read")
+  sparkPoolId?: string;
+}
+
+@doc("The properties related to M365 Resources")
+model M365Profile {
+  @doc("Power Platform Administrator User Name.")
+  @visibility("read", "create")
+  adminUserName: string;
+
+  @doc("Power Platform Administrator Password.")
+  @visibility("create")
+  adminPassword: string;
+
+  @doc("Power Platform Access Policy User Id.")
+  @visibility("read", "create")
+  accessPolicyUserId: string;
+
+  @doc("Power Platform Access Target Tenant Id.")
+  @visibility("read", "create")
+  targetTenantId: string;
+
+  @doc("Power Platform Helpdesk User Name.")
+  @visibility("read", "create")
+  helpDeskUserName: string;
+
+  @doc("Power Platform Helpdesk User Password.")
+  @visibility("read", "create")
+  helpDeskUserPswd: string;
+
+  @doc("Power Platform Target Environment.")
+  @visibility("read", "create")
+  targetEnvironment: string;
+
+  @doc("Power Platform SQL Connection Id.")
+  @visibility("read", "create")
+  sqlConnectionId: string;
+
+  @doc("Power Platform One Drive Connection Id.")
+  @visibility("read", "create")
+  oneDriveConnectionId: string;
+
+  @doc("Power Platform Teams Connection Id.")
+  @visibility("read", "create")
+  teamsConnectionId: string;
+}
+
+@doc("The properties related to APIM Resource")
+model ApimProfile {
+  @doc("Name of publisher.")
+  @visibility("read", "create")
+  publisherName: string;
+
+  @doc("Publisher Email.")
+  @visibility("read", "create")
+  publisherEmail: string;
+
+  @doc("Resource Id of APIM resource.")
+  @visibility("read")
+  id?: string;
+}
+
+@doc("The profile of AKS Resource")
+model AksProfile {
+  @doc("Resource Id of AKS resource.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Resource Id of Assigned Managed Identity.")
+  @visibility("read")
+  miId?: string;
+}
+
+@doc("The profile of Firewall Policy")
+model FirewallPolicyProfile {
+  @doc("Resource Id of Firewall Policy.")
+  @visibility("read")
+  id?: string;
+}
+
+@doc("The profile of Firewall")
+model FirewallProfile {
+  @doc("Resource Id of Firewall.")
+  @visibility("read")
+  id?: string;
+}
+
+@doc("The profile of AppGateway")
+model AppGatewayProfile {
+  @doc("Resource Id of AppGateway.")
+  @visibility("read")
+  id?: string;
+}
+
+@doc("The profile of Bastion")
+model BastionProfile {
+  @doc("Resource Id of Bastion.")
+  @visibility("read")
+  id?: string;
+}
+
+@doc("The profile of Datafactory")
+model DatafactoryProfile {
+  @doc("Resource Id of Datafactory.")
+  @visibility("read")
+  id?: string;
+}
+
+@doc("The profile of Storage")
+model StorageProfile {
+  @doc("Resource Id of Storage.")
+  @visibility("read")
+  id?: string;
+}
+
+@doc("The profile of KeyVault")
+model KeyVaultProfile {
+  @doc("Resource Id of Keyvault.")
+  @visibility("read")
+  id?: string;
+}
+
+@doc("The profile of LogAnalytics")
+model LogAnalyticsProfile {
+  @doc("Resource Id of LogAnalytics.")
+  @visibility("read")
+  id?: string;
+}
+
+@doc("The profile of Vnet")
+model VnetProfile {
+  @doc("Resource Id of Vnet.")
+  @visibility("read")
+  id?: string;
+}
+
+@armResourceOperations(WhiteBoxResource)
+interface WhiteBoxResources extends Azure.ResourceManager.Operations {
+  get is ArmResourceRead<WhiteBoxResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<WhiteBoxResource>;
+  update is ArmResourcePatchAsync<WhiteBoxResource, WhiteBoxResourceProperties>;
+  delete is ArmResourceDeleteSync<WhiteBoxResource>;
+  listByResourceGroup is ArmResourceListByParent<WhiteBoxResource>;
+  listBySubscription is ArmListBySubscription<WhiteBoxResource>;
+}

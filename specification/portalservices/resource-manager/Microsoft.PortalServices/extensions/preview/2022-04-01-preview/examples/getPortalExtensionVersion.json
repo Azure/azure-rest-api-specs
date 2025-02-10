@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "portalExtensionName": "storage",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "versionName": "sometextname"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/sometextFeature",
+        "name": "sometextFeature",
+        "type": "Microsoft.PortalServices/extensions/versions",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "source": {
+            "kind": "BuildArtifactUri",
+            "value": "https://someuri/someBuildArtifact/1.2.3.4.zip?sas"
+          },
+          "version": "1.2.3.4"
+        }
+      }
+    }
+  }
+}

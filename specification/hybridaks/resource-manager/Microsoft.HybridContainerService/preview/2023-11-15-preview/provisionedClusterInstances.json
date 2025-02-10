@@ -567,11 +567,6 @@
           },
           "202": {
             "description": "Updates the agent pool in the provisionedClusterInstances resource.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/agentPool"
             }
@@ -1775,7 +1770,7 @@
               "type": "array",
               "description": "List of supported Kubernetes versions",
               "items": {
-                "$ref": "#/definitions/KubernetesVersionProperties"
+                "$ref": "#/definitions/KubernetesVersionProfileProperties"
               },
               "x-ms-identifiers": []
             }
@@ -1783,7 +1778,7 @@
         }
       }
     },
-    "KubernetesVersionProperties": {
+    "KubernetesVersionProfileProperties": {
       "type": "object",
       "description": "Kubernetes version profile for given major.minor release",
       "properties": {
@@ -1866,7 +1861,19 @@
           }
         },
         "osSku": {
-          "$ref": "#/definitions/OSSKU"
+          "type": "string",
+          "description": "The particular KubernetesVersion's Image's OS SKU (CBLMariner, Windows, Windows2022)",
+          "readOnly": true,
+          "enum": [
+            "CBLMariner",
+            "Windows2019",
+            "Windows2022"
+          ],
+          "default": "CBLMariner",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "osSku"
+          }
         },
         "ready": {
           "type": "boolean",
@@ -1936,7 +1943,7 @@
               "type": "array",
               "description": "Array of HybridAKS Support VM Skus",
               "items": {
-                "$ref": "#/definitions/VmSkuProperties"
+                "$ref": "#/definitions/VmSkuProfileProperties"
               },
               "x-ms-identifiers": []
             }
@@ -1944,7 +1951,7 @@
         }
       }
     },
-    "VmSkuProperties": {
+    "VmSkuProfileProperties": {
       "type": "object",
       "description": "The profile for supported VM skus",
       "readOnly": true,
