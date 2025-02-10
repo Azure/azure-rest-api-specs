@@ -105,10 +105,10 @@ model LandingZoneConfigurationResourceProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   platformMgChildren?: PlatformManagementGroupProperties[];
 
-  @doc("The default naming convention applied to all resources for this landing zone configuration.")
+  @doc("The default naming convention applied to all resources for this landing zone configuration. Example - {DeploymentPrefix}-Contoso-{ResourceTypeAbbreviation}{DeploymentSuffix}-{Environment}-testing")
   namingConventionFormula?: string;
 
-  @doc("The custom naming convention applied to specific resource types for this landing zone configuration, which overrides the default naming convention for those resource types.")
+  @doc("The custom naming convention applied to specific resource types for this landing zone configuration, which overrides the default naming convention for those resource types. Example - 'customNamingConvention': [{'resourceType': 'azureFirewalls', 'formula': '{DeploymentPrefix}-afwl-{DeploymentSuffix}'}]")
   @OpenAPI.extension("x-ms-identifiers", [])
   customNamingConvention?: CustomNamingConvention[];
 }
@@ -385,7 +385,7 @@ model CreateLandingZoneConfigurationCopyResponse {
   ]>;
 }
 
-@doc("The details for the custom naming convention override for a specific resource type..")
+@doc("The details for the custom naming convention override for a specific resource type.")
 @added(Versions.Preview20250227)
 model CustomNamingConvention {
   @doc("The type of the resource.")
