@@ -11,25 +11,24 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
+
 /**
  * Schema for SessionHostManagementUpdateStatus properties.
  */
+//TODO: Talk with reviewer, dont need ResourceName defined in OperationStatusResult AND ResourceNameParameter
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Composition over inheritance"
 @parentResource(SessionHostManagement)
 @singleton("default")
 model SessionHostManagementUpdateStatus
-  is Azure.ResourceManager.ProxyResource<SessionHostManagementUpdateStatusProperties> {
+  extends Azure.ResourceManager.CommonTypes.OperationStatusResult {
   ...ResourceNameParameter<
     Resource = SessionHostManagementUpdateStatus,
-    KeyName = "SessionHostUpdateStatuses",
     SegmentName = "sessionHostUpdateStatuses",
+    KeyName = "sessionHostUpdateStatuses",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
-  ...ManagedServiceIdentityProperty;
-  ...etagProperty;
-  ...ResourceKindProperty;
-  ...ManagedByProperty;
-  ...ResourcePlanProperty;
-  ...ResourceSkuProperty;
+  ...StatusProperty;
+  ...UpdateStatusProperty;
 }
 
 @armResourceOperations
@@ -38,15 +37,6 @@ interface SessionHostManagementUpdateStatuses {
    * Get a SessionHostManagementUpdateStatus.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
-  @OpenAPI.operationId("SessionHostManagementUpdateStatus_Get")
+  @OpenAPI.operationId("SessionHostManagementsUpdateStatus_Get")
   get is ArmResourceRead<SessionHostManagementUpdateStatus>;
 }
-
-@@maxLength(SessionHostManagementUpdateStatus.name, 24);
-@@minLength(SessionHostManagementUpdateStatus.name, 3);
-@@doc(SessionHostManagementUpdateStatus.name,
-  "The name of the SessionHostManagementUpdateStatus"
-);
-@@doc(SessionHostManagementUpdateStatus.properties,
-  "Detailed properties for SessionHostManagementUpdateStatus"
-);

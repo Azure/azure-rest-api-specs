@@ -4573,56 +4573,6 @@ model SessionHostManagementUpdateStatusProperties {
   /**
    * The Log Analytics.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Not supported by service"
-  id?: string;
-
-  /**
-   * "Name of the async operation."
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Not supported by service"
-  name?: string;
-
-  /**
-   * Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled
-   */
-  status: Status;
-
-  /**
-   * Percent of the operation that is complete.
-   */
-  @minValue(0)
-  @maxValue(100)
-  percentComplete?: int32;
-
-  /**
-   * "The start time of the operation.
-   */
-  startTime?: utcDateTime;
-
-  /**
-   * The end time of the operation.
-   */
-  endTime?: utcDateTime;
-
-  /**
-   * If present, details of the operation error.
-   */
-  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
-
-  /**
-   * The custom properties of the SessionHost Update Status.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Not supported by service"
-  properties?: SessionHostManagementUpdateStatusCustomProperties;
-}
-
-/**
- * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
- */
-model SessionHostManagementUpdateStatusCustomProperties {
-  /**
-   * The Log Analytics.
-   */
   correlationId?: string;
 
   /**
@@ -4792,4 +4742,26 @@ model etagProperty {
   @doc("If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")
   @visibility("read")
   etag?: string;
+}
+
+/**
+ * Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "It is a valid property"
+model StatusProperty {
+  /**
+   * Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled
+   */
+  status: Status;
+}
+
+/**
+ * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "It is a valid property"
+model UpdateStatusProperty {
+  /**
+   * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
+   */
+  properties?: SessionHostManagementUpdateStatusProperties;
 }

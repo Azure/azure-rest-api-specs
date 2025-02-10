@@ -3437,7 +3437,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/sessionHostUpdateStatuses/default": {
       "get": {
-        "operationId": "SessionHostManagementUpdateStatus_Get",
+        "operationId": "SessionHostManagementsUpdateStatus_Get",
         "tags": [
           "SessionHostManagementUpdateStatuses"
         ],
@@ -10777,51 +10777,33 @@
       "type": "object",
       "description": "Schema for SessionHostManagementUpdateStatus properties.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SessionHostManagementUpdateStatus",
+          "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled"
+        },
         "properties": {
           "$ref": "#/definitions/SessionHostManagementUpdateStatusProperties",
-          "description": "Detailed properties for SessionHostManagementUpdateStatus",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
-        },
-        "plan": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
-          "description": "Details of the resource plan."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Properties bag to hold custom RP properties for sessionHostManagement Update Statuses."
         }
       },
+      "required": [
+        "name",
+        "status"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
         }
       ]
     },
-    "SessionHostManagementUpdateStatusCustomProperties": {
+    "SessionHostManagementUpdateStatusProperties": {
       "type": "object",
-      "description": "Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.",
+      "description": "The current status of the session host update async operation.",
       "properties": {
         "correlationId": {
           "type": "string",
@@ -10841,52 +10823,6 @@
           "description": "SessionHostManagement properties used for the operation."
         }
       }
-    },
-    "SessionHostManagementUpdateStatusProperties": {
-      "type": "object",
-      "description": "The current status of the session host update async operation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The Log Analytics."
-        },
-        "name": {
-          "type": "string",
-          "description": "\"Name of the async operation.\""
-        },
-        "status": {
-          "$ref": "#/definitions/Status",
-          "description": "Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled"
-        },
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Percent of the operation that is complete.",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "\"The start time of the operation."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the operation."
-        },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "If present, details of the operation error."
-        },
-        "properties": {
-          "$ref": "#/definitions/SessionHostManagementUpdateStatusCustomProperties",
-          "description": "The custom properties of the SessionHost Update Status."
-        }
-      },
-      "required": [
-        "status"
-      ]
     },
     "SessionHostPatch": {
       "type": "object",
