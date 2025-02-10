@@ -21,5 +21,5 @@ export async function lsTree(treeIsh, path, core, options = "") {
  * @returns {Promise<string>}
  */
 export async function show(treeIsh, path, core, options = "") {
-  return await execRoot(`git show ${options} ${treeIsh} ${path}`, core);
+  return await execRoot(`git show ${options} ${treeIsh}:${path}`, core);
 }
