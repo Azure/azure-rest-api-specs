@@ -38,16 +38,6 @@ These settings apply only when `--tag=package-2024-09-20` is specified on the co
 input-file:
   - Microsoft.HealthDataAIServices/stable/2024-09-20/openapi.json
 ```
-
-### Tag: package-2024-02-28-preview
-
-These settings apply only when `--tag=package-2024-02-28-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-02-28-preview'
-input-file:
-  - Microsoft.HealthDataAIServices/preview/2024-02-28-preview/openapi.json
-```
-
 ---
 
 # Code Generation
