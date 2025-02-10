@@ -5,7 +5,7 @@ import { dirname, join } from "path";
 import { extractInputs } from "../../src/context.js";
 import { LabelAction } from "../../src/label.js";
 import { getChangedSwaggerFiles } from "./changed-files.js";
-import { lsTree } from "./git.js";
+import { lsTree, show } from "./git.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -169,25 +169,43 @@ async function incrementalChangesToExistingTypeSpec(
     changedRmSwaggerFiles.map((f) => dirname(dirname(dirname(f)))),
   );
 
-  // If any changed dir did not exist in the base branch, it cannot be an existing TypeSpec spec, so return false
   for (const changedSpecDir of changedSpecDirs) {
-    const resultString = await lsTree("HEAD^", changedSpecDir, core);
+    const specFilesBaseBranch = await lsTree(
+      "HEAD^",
+      changedSpecDir,
+      core,
+      "-r --name-only",
+    );
 
-    // Command "git ls-tree" returns an nempty string if the folder did not exist in the base branch
-    if (!resultString) {
+    // Filter files to only include RM *.json files
+    const specRmSwaggerFilesBaseBranch = specFilesBaseBranch
+      .split("\n")
+      .filter(
+        (file) => file.includes("/resource-manager/") && file.endsWith(".json"),
+      );
+
+    if (specRmSwaggerFilesBaseBranch.length === 0) {
+      core.info(
+        `Spec folder '${changedSpecDir}' in base branch does not exist or contains no swagger files`,
+      );
       return false;
     }
-  }
 
-  // If any changed dir did not contain at least one typespec-generated swagger file in the base branch,
-  // this appears to be a TypeSpec conversion, so return false;
-  for (const changedSpecDir of changedSpecDirs) {
-    const resultString = await lsTree("HEAD^", changedSpecDir, core);
-
-    // Command "git ls-tree" returns an nempty string if the folder did not exist in the base branch
-    if (!resultString) {
-      return false;
+    for (const file in specRmSwaggerFilesBaseBranch) {
+      const baseSwagger = await show("HEAD^", file, core);
+      const baseSwaggerObj = JSON.parse(baseSwagger);
+      if (baseSwaggerObj["info"]?.["x-typespec-generated"]) {
+        core.info(
+          `Spec folder '${changedSpecDir}' in base branch contains typespec-generated swagger: '${file}'`,
+        );
+        continue;
+      }
     }
+
+    core.info(
+      `Spec folder '${changedSpecDir}' in base branch contains does not contain any typespec-generated swagger.  PR may be a TypeSpec conversion.`,
+    );
+    return false;
   }
 
   core.info(
