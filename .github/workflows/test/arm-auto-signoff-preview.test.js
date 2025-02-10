@@ -128,49 +128,6 @@ describe("getLabelActionImpl", () => {
     });
   });
 
-  it("adds label if check succeeded", async () => {
-    mockContosoTspSwagger();
-
-    const github = createMockGithub();
-    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-      data: [{ name: "ARMReview" }],
-    });
-    github.rest.checks.listForRef.mockResolvedValue({
-      data: {
-        check_runs: [
-          {
-            name: "Swagger LintDiff",
-            status: "completed",
-            conclusion: "success",
-          },
-        ],
-      },
-    });
-
-    await expect(
-      getLabelActionImpl({
-        owner: "TestOwner",
-        repo: "TestRepo",
-        issue_number: 123,
-        head_sha: "abc123",
-        github: github,
-        core: core,
-      }),
-    ).resolves.toBe(LabelAction.Add);
-
-    expect(github.rest.issues.listLabelsOnIssue).toBeCalledWith({
-      owner: "TestOwner",
-      repo: "TestRepo",
-      issue_number: 123,
-    });
-
-    expect(github.rest.checks.listForRef).toBeCalledWith({
-      owner: "TestOwner",
-      repo: "TestRepo",
-      ref: "abc123",
-    });
-  });
-
   it("removes label if check failed", async () => {
     mockContosoTspSwagger();
 
@@ -259,6 +216,49 @@ describe("getLabelActionImpl", () => {
         core: core,
       }),
     ).resolves.toBe(LabelAction.None);
+
+    expect(github.rest.issues.listLabelsOnIssue).toBeCalledWith({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+    });
+
+    expect(github.rest.checks.listForRef).toBeCalledWith({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      ref: "abc123",
+    });
+  });
+
+  it("adds label if incremental tsp, labels match, and check succeeded", async () => {
+    mockContosoTspSwagger();
+
+    const github = createMockGithub();
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "ARMReview" }],
+    });
+    github.rest.checks.listForRef.mockResolvedValue({
+      data: {
+        check_runs: [
+          {
+            name: "Swagger LintDiff",
+            status: "completed",
+            conclusion: "success",
+          },
+        ],
+      },
+    });
+
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).resolves.toBe(LabelAction.Add);
 
     expect(github.rest.issues.listLabelsOnIssue).toBeCalledWith({
       owner: "TestOwner",
