@@ -110,14 +110,15 @@ union DataExportState {
 @doc("Storage Discovery Sku")
 @renamedFrom(ApiVersion.v2025_03_01_preview, "StorageDiscoveryTier")
 union StorageDiscoverySku {
+  @doc("Free Sku")
+  @renamedFrom(ApiVersion.v2025_03_01_preview, "Basic")
+  Free: "Free",
+
   @doc("Standard Sku")
   Standard: "Standard",
 
   @doc("Premium Sku")
   Premium: "Premium",
-
-  @doc("Basic Sku")
-  Basic: "Basic",
 
   string,
 }

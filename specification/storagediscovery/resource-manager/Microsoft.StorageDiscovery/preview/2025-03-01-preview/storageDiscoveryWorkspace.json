@@ -519,14 +519,19 @@
       "type": "string",
       "description": "Storage Discovery Sku",
       "enum": [
+        "Free",
         "Standard",
-        "Premium",
-        "Basic"
+        "Premium"
       ],
       "x-ms-enum": {
         "name": "StorageDiscoverySku",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "Free Sku"
+          },
           {
             "name": "Standard",
             "value": "Standard",
@@ -536,11 +541,6 @@
             "name": "Premium",
             "value": "Premium",
             "description": "Premium Sku"
-          },
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "Basic Sku"
           }
         ]
       }
