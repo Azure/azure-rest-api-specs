@@ -1,5 +1,3 @@
-import "@typespec/versioning";
-using TypeSpec.Versioning;
 /** Describes the schema of the Azure Key Vault events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.CertificateNewVersionCreated event. */
@@ -75,12 +73,10 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** Not before date of the object that triggered this event */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     NBF: float32;
 
     /** The expiration date of the object that triggered this event */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     EXP: float32;
   };
 }

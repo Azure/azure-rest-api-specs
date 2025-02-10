@@ -1,13 +1,9 @@
-import "@typespec/versioning";
-using TypeSpec.Versioning;
-
 /** Describes the schema of the Azure HealthcareApis events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
   // model HealthcareFhirResourceType is string {}
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event. */
   model HealthcareFhirResourceCreatedEventData {
     /** Type of HL7 FHIR resource. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceType: HealthcareFhirResourceType;
 
     /** Domain name of FHIR account for this resource. */
@@ -17,14 +13,12 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceFhirId: string;
 
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceVersionId: int64;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event. */
   model HealthcareFhirResourceUpdatedEventData {
     /** Type of HL7 FHIR resource. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceType: HealthcareFhirResourceType;
 
     /** Domain name of FHIR account for this resource. */
@@ -34,14 +28,12 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceFhirId: string;
 
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceVersionId: int64;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event. */
   model HealthcareFhirResourceDeletedEventData {
     /** Type of HL7 FHIR resource. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceType: HealthcareFhirResourceType;
 
     /** Domain name of FHIR account for this resource. */
@@ -51,7 +43,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceFhirId: string;
 
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceVersionId: int64;
   }
 
@@ -73,7 +64,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     serviceHostName: string;
 
     /** Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     sequenceNumber: int64;
   }
 
@@ -95,7 +85,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     serviceHostName: string;
 
     /** Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     sequenceNumber: int64;
   }
 
@@ -117,7 +106,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     serviceHostName: string;
 
     /** Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     sequenceNumber: int64;
   }
 
