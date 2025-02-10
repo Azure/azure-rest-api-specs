@@ -209,7 +209,7 @@ async function incrementalChangesToExistingTypeSpec(
 
     if (!containsTypespecGeneratedSwagger) {
       core.info(
-        `Spec folder '${changedSpecDir}' in base branch contains does not contain any typespec-generated swagger.  PR may be a TypeSpec conversion.`,
+        `Spec folder '${changedSpecDir}' in base branch does not contain any typespec-generated swagger.  PR may be a TypeSpec conversion.`,
       );
       return false;
     }
