@@ -23,14 +23,6 @@ model PrivateEndpointConnection
     SegmentName = "privateEndpointConnections",
     NamePattern = ""
   >;
-
-  /**
-   * private endpoint connection Id
-   */
-  #suppress "azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
-  //FIXME: Review string vs Azure.Core.armResourceIdentifier in V3 reference
-  id?: Azure.Core.armResourceIdentifier;
 }
 
 @armResourceOperations

@@ -21,7 +21,7 @@ interface ResourceSkus {
   @get
   @action("skus")
   @autoRoute
-  list is ArmProviderActionAsync<
+  list is ArmProviderActionSync<
     Response = ResourceSkusResult,
     Scope = SubscriptionActionScope,
     Parameters = {
