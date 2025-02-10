@@ -39,7 +39,7 @@ interface ConversationManagementClient
     listMessages is Azure.Communication.MessagesService.ConversationMessagesOperations.listMessages;
     addParticipants is Azure.Communication.MessagesService.ConversationMessagesOperations.addParticipants;
     removeParticipants is Azure.Communication.MessagesService.ConversationMessagesOperations.removeParticipants;
-    analyze is Azure.Communication.MessagesService.ConversationMessagesOperations.analyze;
+    analyzeConversation is Azure.Communication.MessagesService.ConversationMessagesOperations.analyzeConversation;
   }
 
 @added(Azure.Communication.MessagesService.Versions.c2025_03_01_Preview)
