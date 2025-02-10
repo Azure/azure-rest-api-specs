@@ -120,7 +120,7 @@ model NotificationContent {
   @doc("The native external platform user identifiers of the recipient.")
   to: string[];
 
-  @doc("The type discriminator describing a notification type.")
+  @doc("The type discriminator describing a message type.")
   kind: CommunicationMessageKind;
 }
 
@@ -172,7 +172,7 @@ model ImageNotificationContent extends NotificationContent {
 @added(Versions.c2024_08_30)
 @doc("A request to send a document notification.")
 model DocumentNotificationContent extends NotificationContent {
-  @doc("Message notification type is image.")
+  @doc("Message notification type is document.")
   kind: CommunicationMessageKind.document;
 
   @doc("Optional text content.")
@@ -187,7 +187,7 @@ model DocumentNotificationContent extends NotificationContent {
 @added(Versions.c2024_08_30)
 @doc("A request to send a video notification.")
 model VideoNotificationContent extends NotificationContent {
-  @doc("Message notification type is image.")
+  @doc("Message notification type is video.")
   kind: CommunicationMessageKind.video;
 
   @doc("Optional text content.")
@@ -437,10 +437,36 @@ model MessageTemplateItem {
   kind: CommunicationMessagesChannel;
 }
 
-alias ListTemplatesQueryParams = ListQueryParametersTrait<{
+alias CommonListParams = {
   @doc("Number of objects to return per page.")
   @query
   maxpagesize?: int32;
+};
+
+alias ListTemplatesQueryParams = ListQueryParametersTrait<{
+  ...CommonListParams;
+}>;
+
+alias ListConversationsQueryParams = 
+ListQueryParametersTrait<{
+  ...CommonListParams;
+  
+  @query 
+  @doc("The participant user ID")
+  participantId?: string;
+  
+  @query 
+  @doc("The id of channel")
+  channelId?: uuid;
+}>;
+
+alias ListConversationMessagesQueryParams = 
+ListQueryParametersTrait<{
+  ...CommonListParams;
+  
+  @query 
+  @doc("The participant user ID")
+  participantId?: string;
 }>;
 
 @doc("Notification messages send request body.")
@@ -448,6 +474,315 @@ model NotificationMessagesSendRequestBody {
   @doc("Details of the message to send.")
   @bodyRoot
   body: NotificationContent;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("The options of the outbound delivery strategy for messages sent by emplyees in a conversation.")
+union OutboundDeliveryStrategyKind {
+  string,
+
+  @doc("Delivery strategy for internal only.")
+  internalOnly: "internalOnly",
+
+  @doc("Delivery strategy for all participants.")
+  allParticipants: "allParticipants",
+}
+
+@clientName("ConversationMessage", "csharp")
+@added(Versions.c2025_03_01_Preview)
+@doc("Details of a message.")
+model Message {
+  @doc("Content of the message.")
+  content: string;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@discriminator("kind")
+@resource("participants") // participants add/remove
+@parentResource(Conversation)
+@doc("Advanced Messaging conversation participant.")
+model Participant {
+  @key("participantId")
+  @visibility("read")
+  @doc("Participant Identifier.")
+  id: string; // 8:acs:xxx
+
+  @doc("Participant display name.")
+  displayName?: string;
+
+  @doc("The type discriminator describing a participant type.")
+  kind: ParticipantKind;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Internal conversation participant.")
+model InternalParticipant extends Participant {
+  @doc("Participant type is internal.")
+  kind: ParticipantKind.internal;
+
+  @doc("The internal platform identifiers for the participant.")
+  contact: Contact;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("External conversation participant.")
+model ExternalParticipant extends Participant {
+  @doc("Participant type is external.")
+  kind: ParticipantKind.external;
+
+  @doc("List of external platform identifiers for the participant.")
+  contacts: Contact[];
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("The type of a participant in a threaded conversation.")
+union ParticipantKind {
+  string,
+
+  @doc("A participant internal to Azure Communication Services.")
+  internal: "internal",
+
+  @doc("A participant on other platforms")
+  external: "External",
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Request payload for sending a conversation message.")
+model SendConversationMessageRequest {
+  @doc("Details of a send conversation message request.")
+  request: ConversationMessageContent;
+
+  @doc("The options of the outbound delivery strategy for messages sent by emplyees in a conversation.\r\nSupports internalOnly, allChannels.")
+  outboundDeliveryStrategy?: OutboundDeliveryStrategyKind;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Result of the send conversation message operation.")
+model SendConversationMessageResult {
+  @doc("A server-generated Advanced Messaging conversation message id.")
+  messageId: string;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@resource("messages/conversations")
+@doc("A conversation.")
+model Conversation {
+  @key("conversationId")
+  @visibility("read") // this model is only used as a parameter
+  @doc("The conversation ID.")
+  id: string;
+
+  @doc("The conversation topic.")
+  topic?: string;
+
+  @doc("List of delivery channel IDs.")
+  deliveryChannelIds?: string[];
+
+  @doc("Outbound delivery strategy for the conversation.")
+  outboundDeliveryStrategy?: OutboundDeliveryStrategyKind;
+
+  @doc("List of participants involved in the conversation.")
+  participants?: Participant[];
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Conversation message send request body.")
+model ConversationMessagesSendRequestBody {
+  @doc("Details of the conversation message to send.")
+  @bodyRoot
+  body: SendConversationMessageRequest;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Add participants to a conversation request body.")
+model AddParticipantsRequestBody {
+  @doc("Details of the payload for adding participants to a conversation.")
+  @bodyRoot
+  body: AddParticipantsRequest;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Remove participants request body.")
+model RemoveParticipantsRequestBody {
+  @doc("Details of the request body for removing participants from a conversation.")
+  @bodyRoot
+  body: RemoveParticipantsRequest;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Response for the add participants operation.")
+model AddParticipantsResult {
+  @doc("List of Ids with Errors if failed to be added")
+  invalidParticipants: ParticipantsResult[];
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Response for the remove participants operation.")
+model RemoveParticipantsResult {
+  @doc("List of Ids with Errors if failed to be added")
+  invalidParticipants: ParticipantsResult[];
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Response for the remove participants operation.")
+model ParticipantsResult {
+  @doc("Participant User Id.")
+  id: string;
+
+  @doc("Error of the participant operation.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@resource("messages")
+@parentResource(Conversation)
+@doc("The conversation message as returned from the service.")
+model ConversationMessageItem {
+  @key("messageId")
+  @visibility("read")
+  @doc("Message ID.")
+  id: string;
+
+  @doc("Message sequence ID.")
+  sequenceId?: int64;
+
+  @doc("Payload of a threaded conversation message.")
+  message: ConversationMessageContent;
+
+  @doc("The display name of the message sender.")
+  senderDisplayName?: string;
+
+  @doc("The communication identifier of the message sender.")
+  senderCommunicationIdentifier: string;
+
+  @doc("Timestamp when the message is sent.")
+  createdOn: utcDateTime;
+}
+
+@clientName("ConversationContact", "csharp")
+@discriminator("kind")
+@added(Versions.c2025_03_01_Preview)
+@doc("Details of an external platform contact.")
+model Contact {
+  @doc("External platform identifier.")
+  id: string;
+
+  @doc("Type of message platform (e.g., WhatsApp).")
+  kind: MessagePlatformKind;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Communication Contact.")
+model CommunicationContact extends Contact
+{
+  @doc("Contact type is communication.")
+  kind: MessagePlatformKind.communication;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Bot Contact.")
+model BotContact extends Contact
+{
+  @doc("Contact type is bot.")
+  kind: MessagePlatformKind.bot;
+
+  @doc("Bot App Id of the Bot Contact.")
+  botAppId: string;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("WhatsApp Contact.")
+model WhatsAppContact extends Contact
+{
+  @doc("Contact type is whatsApp.")
+  kind: MessagePlatformKind.whatsApp;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Defines the type of message platform.")
+union MessagePlatformKind {
+  string,
+
+  @doc("Azure Communication platform.")
+  communication: "communication",
+
+  @doc("Bot platform.")
+  bot: "bot",
+
+  @doc("WhatsApp platform.")
+  whatsApp: "whatsApp",
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Request payload for adding participants to a conversation.")
+model AddParticipantsRequest {
+  @doc("List of participants to add.")
+  participants: Participant[];
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Request payload for removing participants from a conversation.")
+model RemoveParticipantsRequest {
+  @key
+  @visibility("read")
+  @doc("The participant IDs to remove.")
+  participantIds: string[];
+}
+
+@doc("Result of the get conversation messages AI Analysis operation.")
+model GetConversationMessagesAnalysisResult {
+  @doc("The AI summary of the conversation messages.")
+  summary: string;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@discriminator("kind")
+@withoutOmittedProperties("to"|"channelRegistrationId")
+@doc("Details of the conversation message content.")
+model ConversationMessageContent {
+  ...NotificationContent
+}
+
+@added(Versions.c2025_03_01_Preview)
+@withoutOmittedProperties("to"|"channelRegistrationId")
+@doc("A request to send a text conversation message.")
+model TextConversationMessageContent extends ConversationMessageContent {
+  ...TextNotificationContent
+}
+
+@added(Versions.c2025_03_01_Preview)
+@withoutOmittedProperties("to"|"channelRegistrationId")
+@doc("A request to send an image conversation message.")
+model ImageConversationMessageContent extends ConversationMessageContent {
+  ...ImageNotificationContent
+}
+
+@added(Versions.c2025_03_01_Preview)
+@withoutOmittedProperties("to"|"channelRegistrationId")
+@doc("A request to send a document conversation message.")
+model DocumentConversationMessageContent extends ConversationMessageContent {
+  ...DocumentNotificationContent
+}
+
+@added(Versions.c2025_03_01_Preview)
+@withoutOmittedProperties("to"|"channelRegistrationId")
+@doc("A request to send a video conversation message.")
+model VideoConversationMessageContent extends ConversationMessageContent {
+  ...VideoNotificationContent
+}
+
+@added(Versions.c2025_03_01_Preview)
+@withoutOmittedProperties("to"|"channelRegistrationId")
+@doc("A request to send an audio conversation message.")
+model AudioConversationMessageContent  extends ConversationMessageContent {
+  ...AudioNotificationContent
+}
+
+@added(Versions.c2025_03_01_Preview)
+@withoutOmittedProperties("to"|"channelRegistrationId")
+@doc("A request to send a template conversation message.")
+model TemplateConversationMessageContent extends ConversationMessageContent {
+  ...TemplateNotificationContent
 }
 
 @doc("Azure Communication Messages Versions")
@@ -459,4 +794,8 @@ enum Versions {
   @doc("Azure Communication Messages 2024-08-30 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_08_30: "2024-08-30",
+
+  @doc("Azure Communication Messages 2025-03-01-preview api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2025_03_01_Preview: "2025-03-01-preview",
 }
