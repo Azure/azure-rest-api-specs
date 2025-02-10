@@ -4,7 +4,7 @@ import { readFile } from "fs/promises";
 import { dirname, join } from "path";
 import { extractInputs } from "../../src/context.js";
 import { LabelAction } from "../../src/label.js";
-import { getChangedSwaggerFiles } from "./changed-files.js";
+import { getChangedResourceManagerSwaggerFiles } from "./changed-files.js";
 import { lsTree, show } from "./git.js";
 
 /**
@@ -53,17 +53,11 @@ export async function getLabelActionImpl({
   github,
   core,
 }) {
-  const changedSwaggerFiles = await getChangedSwaggerFiles(
+  const changedRmSwaggerFiles = await getChangedResourceManagerSwaggerFiles(
     core,
     "HEAD^",
     "HEAD",
     "",
-  );
-  const changedRmSwaggerFiles = changedSwaggerFiles.filter((f) =>
-    f.includes("/resource-manager/"),
-  );
-  core.info(
-    `Changed files containing path '/resource-manager/': ${changedRmSwaggerFiles}`,
   );
 
   if (changedRmSwaggerFiles.length == 0) {
