@@ -52,7 +52,13 @@ union Platform {
 interface Connectors {
   get is ArmResourceRead<Connector>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Connector>;
-  update is ArmResourcePatchSync<Connector, ConnectorProperties>;
+  update is ArmCustomPatchSync<
+    Connector,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Connector,
+      ConnectorProperties
+    >
+  >;
   delete is ArmResourceDeleteSync<Connector>;
   listBySubscription is ArmListBySubscription<Connector>;
 }
