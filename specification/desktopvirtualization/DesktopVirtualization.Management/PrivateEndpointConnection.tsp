@@ -19,12 +19,6 @@ namespace Microsoft.DesktopVirtualization;
 model PrivateEndpointConnections
   is Azure.ResourceManager.TrackedResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<Resource = PrivateEndpointConnections>;
-  ...ManagedServiceIdentityProperty;
-  ...etagProperty;
-  ...ResourceKindProperty;
-  ...ManagedByProperty;
-  ...ResourcePlanProperty;
-  ...ResourceSkuProperty;
 }
 
 alias PrivateEndpointParameter = {
