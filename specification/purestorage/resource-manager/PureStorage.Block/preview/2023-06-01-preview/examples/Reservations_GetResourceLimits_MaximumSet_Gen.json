@@ -1,0 +1,55 @@
+{
+  "title": "Reservations_GetResourceLimits",
+  "operationId": "Reservations_GetResourceLimits",
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "subscriptionId": "07E1061E-4AE7-4A44-BBCB-9FBAF2AFDB38",
+    "resourceGroupName": "rgpurestorage",
+    "reservationName": "sasasa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "storagePool": {
+          "provisionedBandwidthMbPerSec": {
+            "min": 3,
+            "max": 40
+          },
+          "provisionedIops": {
+            "min": 7,
+            "max": 41
+          },
+          "physicalAvailabilityZones": [
+            "1"
+          ]
+        },
+        "volume": {
+          "provisionedSize": {
+            "min": 7,
+            "max": 24
+          }
+        },
+        "protectionPolicy": {
+          "retention": {
+            "min": 17,
+            "max": 42
+          },
+          "frequency": {
+            "min": 2,
+            "max": 26
+          }
+        },
+        "performancePolicy": {
+          "iopsLimit": {
+            "min": 17,
+            "max": 43
+          },
+          "bandwidthLimit": {
+            "min": 17,
+            "max": 44
+          }
+        }
+      }
+    }
+  }
+}

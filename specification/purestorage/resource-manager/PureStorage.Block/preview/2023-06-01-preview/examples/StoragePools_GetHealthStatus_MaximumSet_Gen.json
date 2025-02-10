@@ -1,0 +1,42 @@
+{
+  "title": "StoragePools_GetHealthStatus",
+  "operationId": "StoragePools_GetHealthStatus",
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "subscriptionId": "07E1061E-4AE7-4A44-BBCB-9FBAF2AFDB38",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "Trer"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "health": {
+          "usedCapacityPercentage": 13,
+          "bandwidthUsage": {
+            "current": 21,
+            "provisioned": 25,
+            "max": 28
+          },
+          "iopsUsage": {
+            "current": 10,
+            "provisioned": 23,
+            "max": 9
+          },
+          "space": {
+            "totalUsed": 8,
+            "unique": 22,
+            "snapshots": 24,
+            "shared": 14
+          },
+          "dataReductionRatio": 1
+        },
+        "alerts": [
+          {
+            "level": "info",
+            "message": "gnalbyqgcydphzesrwlgmdavxhdg"
+          }
+        ]
+      }
+    }
+  }
+}
