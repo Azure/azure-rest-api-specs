@@ -162,7 +162,7 @@
             "format": "int32"
           },
           {
-            "name": "participant",
+            "name": "participantId",
             "in": "query",
             "description": "The participant user ID",
             "required": false,
@@ -209,6 +209,89 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "ConversationManagementOperations_CreateConversation",
+        "tags": [
+          "ConversationManagement"
+        ],
+        "description": "Creates a new conversation. This is only for create operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Conversation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of Conversation"
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
         }
       }
     },
@@ -262,12 +345,12 @@
           }
         }
       },
-      "put": {
-        "operationId": "ConversationManagementOperations_Create",
+      "delete": {
+        "operationId": "ConversationManagementOperations_DeleteConversation",
         "tags": [
           "ConversationManagement"
         ],
-        "description": "Creates a new conversation. This is only for create operation.",
+        "description": "Deletes a specific conversation.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -287,60 +370,11 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Conversation"
-            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Conversation"
-            },
-            "headers": {
-              "Repeatability-Result": {
-                "type": "string",
-                "description": "Indicates whether the repeatable request was accepted or rejected.",
-                "enum": [
-                  "accepted",
-                  "rejected"
-                ],
-                "x-ms-enum": {
-                  "name": "RepeatabilityResult",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "accepted",
-                      "value": "accepted",
-                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
-                    },
-                    {
-                      "name": "rejected",
-                      "value": "rejected",
-                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
-                    }
-                  ]
-                }
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/Conversation"
-            },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
               "Repeatability-Result": {
                 "type": "string",
@@ -468,7 +502,7 @@
     },
     "/messages/conversations/{conversationId}:analyze": {
       "post": {
-        "operationId": "ConversationMessagesOperations_Analyze",
+        "operationId": "ConversationMessagesOperations_AnalyzeConversation",
         "tags": [
           "ConversationMessages"
         ],
@@ -574,7 +608,7 @@
             "format": "int32"
           },
           {
-            "name": "participant",
+            "name": "participantId",
             "in": "query",
             "description": "The participant user ID",
             "required": false,
@@ -618,7 +652,7 @@
     },
     "/messages/conversations/{conversationId}/messages:send": {
       "post": {
-        "operationId": "ConversationMessagesOperations_Send",
+        "operationId": "ConversationMessagesOperations_SendMessage",
         "tags": [
           "ConversationMessages"
         ],
@@ -1264,7 +1298,7 @@
       "type": "object",
       "description": "A conversation.",
       "properties": {
-        "conversationId": {
+        "id": {
           "type": "string",
           "description": "The conversation ID.",
           "readOnly": true
@@ -1293,7 +1327,7 @@
         }
       },
       "required": [
-        "conversationId"
+        "id"
       ]
     },
     "ConversationMessageContent": {
@@ -1314,6 +1348,11 @@
       "type": "object",
       "description": "The conversation message as returned from the service.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Message ID.",
+          "readOnly": true
+        },
         "sequenceId": {
           "type": "integer",
           "format": "int64",
@@ -1338,6 +1377,7 @@
         }
       },
       "required": [
+        "id",
         "message",
         "senderCommunicationIdentifier",
         "createdOn"
@@ -1985,8 +2025,7 @@
           "description": "The Conversation items on this page",
           "items": {
             "$ref": "#/definitions/Conversation"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2007,8 +2046,7 @@
           "description": "The ConversationMessageItem items on this page",
           "items": {
             "$ref": "#/definitions/ConversationMessageItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",

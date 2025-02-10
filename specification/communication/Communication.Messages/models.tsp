@@ -453,7 +453,7 @@ ListQueryParametersTrait<{
   
   @query 
   @doc("The participant user ID")
-  participant?: string;
+  participantId?: string;
   
   @query 
   @doc("The id of channel")
@@ -466,7 +466,7 @@ ListQueryParametersTrait<{
   
   @query 
   @doc("The participant user ID")
-  participant?: string;
+  participantId?: string;
 }>;
 
 @doc("Notification messages send request body.")
@@ -502,7 +502,7 @@ model Message {
 @parentResource(Conversation)
 @doc("Advanced Messaging conversation participant.")
 model Participant {
-  @key
+  @key("participantId")
   @visibility("read")
   @doc("Participant Identifier.")
   id: string; // 8:acs:xxx
@@ -567,10 +567,10 @@ model SendConversationMessageResult {
 @resource("messages/conversations")
 @doc("A conversation.")
 model Conversation {
-  @key
+  @key("conversationId")
   @visibility("read") // this model is only used as a parameter
   @doc("The conversation ID.")
-  conversationId: string;
+  id: string;
 
   @doc("The conversation topic.")
   topic?: string;
@@ -638,10 +638,10 @@ model ParticipantsResult {
 @parentResource(Conversation)
 @doc("The conversation message as returned from the service.")
 model ConversationMessageItem {
-  @key
-  @visibility("none")
+  @key("messageId")
+  @visibility("read")
   @doc("Message ID.")
-  messageId: string;
+  id: string;
 
   @doc("Message sequence ID.")
   sequenceId?: int64;
