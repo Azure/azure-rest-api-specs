@@ -43,6 +43,12 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v4_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v4_preview: "2024-10-01-preview",
+
+  @doc("Version 5 preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v5_preview)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v5_preview: "2024-11-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -54,7 +60,7 @@ alias Reservation = LiftrBase.Storage.Reservation<ReservationProperties>;
 @armResourceOperations
 interface Reservations
   extends LiftrBase.Storage.Reservations<Reservation, ReservationProperties> {
-  @doc("Limits used for creation of resources.")
+  @doc("Limits constraining certain resource properties.")
   @armResourceAction(Reservation)
   @action("getResourceLimits")
   @post
@@ -86,11 +92,133 @@ interface Reservations
     "Resource Operation accepted",
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
+
+  @added(Versions.v5_preview)
+  @doc("Provides various statistics about resources billed via given reservation.")
+  @armResourceAction(Reservation)
+  @action("getBillingStatus")
+  @post
+  getBillingStatus(
+    ...ResourceInstanceParameters<Reservation>,
+  ): ArmResponse<ReservationBillingStatus> | ErrorResponse;
+
+  @added(Versions.v5_preview)
+  @doc("Provides a summarized report along with actions for resources billed via given reservation")
+  @armResourceAction(Reservation)
+  @action("getBillingReport")
+  @post
+  getBillingReport(
+    ...ResourceInstanceParameters<Reservation>,
+  ): ArmResponse<ReservationBillingUsageReport> | ErrorResponse;
 }
 
-@doc("Storage Pool resource type.")
+@added(Versions.v5_preview)
+@doc("Represents a billing usage report, including overall status and detailed properties")
+model ReservationBillingUsageReport {
+  @doc("Latest formatted billing report for this reservation")
+  timestamp: string;
+
+  @doc("A list of detailed billing usage properties")
+  @extension("x-ms-identifiers", [])
+  billingUsageProperties: BillingUsageProperty[];
+
+  @doc("Overall status message of the billing usage report")
+  overallStatusMessage: string;
+}
+
+@added(Versions.v5_preview)
+@doc("Represents an individual billing usage property")
+model BillingUsageProperty {
+  @doc("Unique identifier for the billing usage property")
+  propertyId: string;
+
+  @doc("Name of the billing usage property")
+  propertyName: string;
+
+  @doc("Current value of the billing usage property")
+  currentValue: string;
+
+  @doc("Previous value of the billing usage property")
+  previousValue?: string;
+
+  @doc("Severity level of the usage")
+  severity: UsageSeverity;
+
+  @doc("Status message for the billing usage against a property")
+  statusMessage?: string;
+
+  @doc("Optional list of sub-properties providing additional details")
+  @extension("x-ms-identifiers", [])
+  subProperties?: BillingUsageProperty[];
+}
+
+@added(Versions.v5_preview)
+@doc("Severity levels for billing usage properties")
+union UsageSeverity {
+  @doc("Indicates an alert condition")
+  ALERT: "alert",
+
+  @doc("Provides informational details")
+  INFORMATION: "information",
+
+  @doc("Indicates a warning condition")
+  WARNING: "warning",
+
+  @doc("Indicates no severity")
+  NONE: "none",
+
+  string,
+}
+
+@added(Versions.v5_preview)
+@doc("Latest billing status for this reservation")
+model ReservationBillingStatus {
+  @doc("Timestamp for the latest update of this billing status, in RFC 3339 format")
+  timestamp: string;
+
+  @doc("Total used capacity as reported by associated storage pools. In bytes")
+  totalUsedCapacityReported: int64;
+
+  @doc("How many associated storage pools reported low data reduction ratio (DRR)")
+  lowDrrPoolCount: int32;
+
+  @doc("Weighted average of the data-reduction ratio for all associated pools")
+  drrWeightedAverage: float64;
+
+  @doc("The sum of total used capacity for all pools with low DRR, if the DRR penalty applies. In bytes")
+  totalNonReducibleReported: int64;
+
+  @doc("Extra capacity added because of low DRR storage pools; In bytes")
+  extraUsedCapacityNonReducible: int64;
+
+  @doc("Extra capacity added when rounding up low-usage pools to 30TiB. In bytes")
+  extraUsedCapacityLowUsageRounding: int64;
+
+  @doc("Extra capacity discounted due to plan forgiving some low-DRR usage. In bytes")
+  extraUsedCapacityNonReduciblePlanDiscount: int64;
+
+  @doc("Total used capacity actually billed. In bytes")
+  totalUsedCapacityBilled: int64;
+
+  @doc("Total used capacity included in plan. In bytes")
+  totalUsedCapacityIncludedPlan: int64;
+
+  @doc("Total used capacity reported at on-demand price. In bytes")
+  totalUsedCapacityOverage: int64;
+
+  @doc("The sum of all performance settings across the pools under this reservation. In MB per second")
+  totalPerformanceReported: int64;
+
+  @doc("Total performance amount included in plan. In bytes per second")
+  totalPerformanceIncludedPlan: int64;
+
+  @doc("Total performance amount reported at on-demand price. In MB per second")
+  totalPerformanceOverage: int64;
+}
+
+@doc("Storage pool resource")
 model StoragePool is TrackedResource<StoragePoolProperties> {
-  @doc("Name of the Storage Pool.")
+  @doc("Name of the storage pool")
   @segment("storagePools")
   @key("storagePoolName")
   @visibility("read")
@@ -103,59 +231,59 @@ model StoragePool is TrackedResource<StoragePoolProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
-@doc("Properties of a Storage Pool resource.")
+@doc("Properties of a storage pool")
 model StoragePoolProperties {
-  @doc("ID of StoragePool in Pure Storage systems.")
+  @doc("Pure Storage's internal ID of the storage pool")
   @visibility("read")
   storagePoolInternalId?: string;
 
-  @doc("Azure Availability Zone the Pool is located in.")
+  @doc("Azure Availability Zone the Pool is located in")
   @visibility("read", "create")
   availabilityZone: string;
 
-  @doc("Full Azure Resource ID of the Virtual Network subnet to make the Pool visible in.")
+  @doc("Network properties of the storage pool")
   @visibility("read", "create")
   vnetInjection: VnetInjection;
 
-  @doc("How long a deleted object is kept before eradication (time in seconds).")
+  @doc("How long a destroyed object is kept before being eradicated, in seconds")
   @visibility("read")
   dataRetentionPeriod?: int64;
 
-  @doc("Total bandwidth provisioned for the pool (in MB/s).")
+  @doc("Total bandwidth provisioned for the pool, in MB/s")
   provisionedBandwidthMbPerSec: int64;
 
-  @doc("Total IOPS provisioned for the pool (in MB/s).")
+  @doc("Total I/O operations per second (IOPS) provisioned for the pool")
   @visibility("read")
   provisionedIops?: int64;
 
-  @doc("Presented if avsEnabled is true.")
+  @doc("AVS connection state summary")
   @visibility("read")
   avs?: AzureVmwareService;
 
-  @doc("Provisioning state of the resource.")
+  @doc("Provisioning state of the resource")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  @doc("Resource id of the reservation resource. The RP should make sure this is a valid resource before allowing StoragePool creation to continue.")
+  @doc("Azure resource ID of the Pure Storage Cloud service (reservation resource) this storage pool belongs to")
   @visibility("create", "read")
   reservationResourceId: string;
 }
 
-@doc("Describes Virtual Network Subnet the Pool is visible in.")
+@doc("Network in which the storage pool will be made available")
 model VnetInjection {
-  @doc("Full Azure Resource ID of the Virtual Network subnet to inject pool in.")
+  @doc("Azure resource ID of the Virtual Network subnet where the storage pool will be connected")
   subnetId: string;
 
-  @doc("Full Azure Resource ID of the Virtual Network to inject pool in.")
+  @doc("Azure resource ID of the Virtual Network in which the subnet is located")
   vnetId: string;
 }
 
-@doc("Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.")
+@doc("Connected AVS status")
 model AzureVmwareService {
-  @doc("if true, VASA support is enabled and the AVS configuration parameters below may be passed to change the current password. if false, VASA support will be disabled (but previous password configuration is not lost).")
+  @doc("If true, an AVS SDDC is successfully connected to the storage pool")
   avsEnabled: boolean;
 
-  @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
+  @doc("Azure resource ID of the AVS SDDC the storage pool is connected to")
   sddcResourceId?: string;
 
   @removed(Versions.v4_preview)
@@ -165,8 +293,11 @@ model AzureVmwareService {
 
 @armResourceOperations
 interface StoragePools {
+  @doc("Get a storage pool")
   get is ArmResourceRead<StoragePool>;
+  @doc("Create a storage pool")
   create is ArmResourceCreateOrUpdateAsync<StoragePool>;
+  @doc("Update a storage pool")
   update is ArmCustomPatchAsync<
     StoragePool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -174,11 +305,14 @@ interface StoragePools {
       StoragePoolProperties
     >
   >;
+  @doc("Delete a storage pool")
   delete is ArmResourceDeleteWithoutOkAsync<StoragePool>;
+  @doc("List storage pools by resource group")
   listByResourceGroup is ArmResourceListByParent<StoragePool>;
+  @doc("List storage pools by Azure subscription ID")
   listBySubscription is ArmListBySubscription<StoragePool>;
 
-  @doc("Lists health metadata for specific Storage Pool.")
+  @doc("Retrieve health metrics of a storage pool")
   @armResourceAction(StoragePool)
   @action("getHealthStatus")
   @post
@@ -196,7 +330,7 @@ interface StoragePools {
   ): ArmResponse<AvsDetails> | ErrorResponse;
 
   @added(Versions.v3_preview)
-  @doc("Returns the information about the on-going connection of the storage pool to AVS")
+  @doc("Returns current information about an on-going connection to an AVS instance")
   @armResourceAction(StoragePool)
   @action("getAvsConnection")
   @post
@@ -239,7 +373,7 @@ interface StoragePools {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @added(Versions.v3_preview)
-  @doc("Enables the AVS connection support for a specific Storage Pool")
+  @doc("Initiate a connection between the storage pool and a specified AVS SDDC resource")
   @armResourceAction(StoragePool)
   @action("enableAvsConnection")
   @extension("x-ms-long-running-operation", true)
@@ -253,7 +387,7 @@ interface StoragePools {
   enableAvsConnection(
     ...ResourceInstanceParameters<StoragePool>,
 
-    @doc("Storage pool enable Avs connection properties")
+    @doc("Storage pool EnableAvsConnection properties")
     @body
     properties: StoragePoolEnableAvsConnectionPost,
   ): ArmAcceptedLroResponse<
@@ -283,7 +417,7 @@ interface StoragePools {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @added(Versions.v3_preview)
-  @doc("Disables the AVS connection support for a specific Storage Pool")
+  @doc("Disable the existing AVS connection")
   @armResourceAction(StoragePool)
   @action("disableAvsConnection")
   @extension("x-ms-long-running-operation", true)
@@ -323,7 +457,7 @@ interface StoragePools {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @added(Versions.v3_preview)
-  @doc("Finalize the AVS connection for a specific Storage Pool")
+  @doc("Finalize an already started AVS connection to a specific AVS SDDC")
   @armResourceAction(StoragePool)
   @action("finalizeAvsConnection")
   @extension("x-ms-long-running-operation", true)
@@ -337,7 +471,7 @@ interface StoragePools {
   finalizeAvsConnection(
     ...ResourceInstanceParameters<StoragePool>,
 
-    @doc("Storage pool finalize Avs connection properties")
+    @doc("Storage pool FinalizeAvsConnection properties")
     @body
     properties: StoragePoolFinalizeAvsConnectionPost,
   ): ArmAcceptedLroResponse<
@@ -347,7 +481,7 @@ interface StoragePools {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @added(Versions.v3_preview)
-  @doc("Make sure that all steps necessary to enable this storage pool to be connected to the AVS instance are fully working, and fix them if not")
+  @doc("Test and repair, if needed, all configuration elements of the storage pool connection to the AVS instance")
   @armResourceAction(StoragePool)
   @action("repairAvsConnection")
   @extension("x-ms-long-running-operation", true)
@@ -430,63 +564,54 @@ interface StoragePools {
   > | ErrorResponse;
 }
 
-@doc("Limits used for creation of resources.")
+@doc("Limits constraining certain resource properties")
 model LimitDetails {
-  @doc("Limits used for Storage Pool")
+  @doc("Limits used for storage pool resources")
   storagePool: StoragePoolLimits;
 
-  @doc("Limits used for Volumes")
+  @doc("Limits used for volume resources")
   volume: VolumeLimits;
 
-  @doc("Limits used for Protection Policies")
+  @doc("internal")
   protectionPolicy: ProtectionPolicyLimits;
 
-  @doc("Limits used for Performance Policies")
+  @doc("internal")
   performancePolicy: PerformancePolicyLimits;
 }
 
-@doc("Limits used for Storage Pool")
+@doc("Limits used for storage pool creation")
 model StoragePoolLimits {
-  @doc("Total bandwidth provisioned by customer across all volumes (in MB/s)")
+  @doc("Allowed provisioned bandwidth range for a storage pool, in MB/s")
   provisionedBandwidthMbPerSec: RangeLimits;
 
-  @doc("Range allowed for the provisioned IOPS of a StoragePool (in I/O operation per second).")
+  @doc("Allowed provisioned IOPS range for a storage pool, as a number of operations")
   provisionedIops: RangeLimits;
 
-  @doc("The list of physical availability zones in the region in which StoragePools can be deployed.")
+  @doc("List of physical availability zones in the region in which storage pools can be deployed; some Azure regions do not support the necessary resources in all availability zones")
   physicalAvailabilityZones: string[];
 }
-@doc("Limits used for Volumes")
+@doc("Limits used for volumes")
 model VolumeLimits {
-  @doc("Provisioned size of the volume, that is, how large the volume can grow (in GB).")
+  @doc("Provisioned size limits for a volume, in bytes")
   provisionedSize: RangeLimits;
 }
 
-@doc("Limits used for Protection Policies")
+@doc("internal")
 model ProtectionPolicyLimits {
-  @doc("How often snapshots are taken (in seconds).")
+  @doc("internal")
   frequency: RangeLimits;
 
-  @doc("How long snapshots are kept (in seconds).")
+  @doc("internal")
   retention: RangeLimits;
 }
 
-@doc("Limits used for Performance Policies")
+@doc("internal")
 model PerformancePolicyLimits {
-  @doc("How often snapshots are taken (in IOPS).")
+  @doc("internal")
   iopsLimit: RangeLimits;
 
-  @doc("How long snapshots are taken (in MB/s).")
+  @doc("internal")
   bandwidthLimit: RangeLimits;
-}
-
-@doc("Minimum and maximum values for a range.")
-model RangeLimits {
-  @doc("Minimum value for the range.")
-  min: int64;
-
-  @doc("Maximum value for the range.")
-  max: int64;
 }
 
 @removed(Versions.v4_preview)
@@ -511,6 +636,7 @@ model AvsDetails {
   vSpherePlugin?: VspherePlugin;
 }
 
+@removed(Versions.v4_preview)
 @doc("vSphere plugin configuration properties")
 model VspherePlugin {
   @doc("URL for registration of vSphere plugin")
@@ -535,6 +661,7 @@ model VspherePlugin {
   certificate: string;
 }
 
+@removed(Versions.v4_preview)
 @doc("vSphere configuration properties")
 model Vsphere {
   @doc("Resource id pointing at the AVS SDDC the pool is configured with")
@@ -544,6 +671,7 @@ model Vsphere {
   vSphereIp: string;
 }
 
+@removed(Versions.v4_preview)
 @doc("AVS (Azure VMware Solution) related properties.")
 model Avs {
   @doc("Username for VMware VASA service login.")
@@ -557,6 +685,7 @@ model Avs {
   vasaIscsiEndpoints: VasaIscsiEndpoints[];
 }
 
+@removed(Versions.v4_preview)
 @doc("iSCSI endpoint and IQN.")
 model VasaIscsiEndpoints {
   @doc("IP address of the iSCSI endpoint.")
@@ -569,72 +698,81 @@ model VasaIscsiEndpoints {
   iqn: string;
 }
 
-@doc("Health metadata reported for a given resource.")
+@doc("Minimum and maximum values for a property")
+model RangeLimits {
+  @doc("Minimum value of the property")
+  min: int64;
+
+  @doc("Maximum value of the property")
+  max: int64;
+}
+
+@doc("Health information for a storage pool")
 model HealthResponse {
-  @doc("Health metrics reported for a given resource.")
+  @doc("Health metrics")
   health: HealthDetails;
 
-  @doc("Array of health alerts for a given pool.")
+  @doc("List of health alerts")
   @extension("x-ms-identifiers", [])
   alerts: Alert[];
 }
 
-@doc("Health metrics reported for a given resource.")
+@doc("Health metrics for a storage pool")
 model HealthDetails {
-  @doc("How full the pool is right now, in %, compared to the maximum size it can grow to.")
+  @doc("How full the pool is right now, in %, compared to the maximum size it can grow to; estimated based on current usage and data reduction ratio")
   usedCapacityPercentage: float64;
 
-  @doc("Bandwidth usage metrics reported for a given resource.")
+  @doc("Bandwidth usage metrics")
   bandwidthUsage: BandwidthUsage;
 
-  @doc("IOPS usage metrics reported for a given resource.")
+  @doc("IOPS usage metrics")
   iopsUsage: IopsUsage;
 
-  @doc("Contains properties related to used Flash space.")
+  @doc("Storage space usage")
   space: Space;
 
   @doc("Data reduction ratio achieved on this pool")
   dataReductionRatio: float64;
 
   @added(Versions.v3_preview)
-  @doc("The estimated maximum capacity of the pool. Measured in bytes.")
+  @doc("Estimated maximum capacity of the pool, in bytes, based on current usage and data reduction ratio")
   estimatedMaxCapacity: int64;
 }
 
-@doc("Bandwidth usage metrics reported for a given resource.")
+@doc("Bandwidth usage metrics")
 model BandwidthUsage {
-  @doc("The number of bytes written and read per second. Max over 10 mins.")
+  @doc("Number of bytes written and read per second (maximum value over the last 10 minutes)")
   current: int64;
 
-  @doc("Bandwidth rating of the currently provisioned SKU in bytes per second.")
+  @doc("Bandwidth value currently provisioned for the storage pool, in MB/s")
   provisioned: int64;
 
-  @doc("Bandwidth rating of the highest available SKU in bytes per second.")
+  @doc("Maximum bandwidth value that can be provisioned for the storage pool")
   max: int64;
 }
 
-@doc("IOPS usage metrics reported for a given resource.")
+@doc("IOPS usage metrics")
 model IopsUsage {
-  @doc("The number of operations per second. Max over 10 mins.")
+  @doc("Current number of IOPS (maximum value over the last 10 minutes)")
   current: int64;
 
-  @doc("IOPS rating of the currently provisioned SKU.")
+  @doc("IOPS value currently provisioned for the storage pool")
   provisioned: int64;
 
-  @doc("IOPS rating of the highest available SKU.")
+  @doc("Maximum IOPS value that can be provisioned for the storage pool")
   max: int64;
 }
 
-@doc("Health alerts for a given pool.")
+@doc("Health alerts")
 model Alert {
-  @doc("The severity level of the alert.")
+  @doc("Severity level")
   level: AlertLevel;
 
-  @doc("A short description of the alert.")
+  @doc("A short description of the alert")
   message: string;
 }
 
-@doc("The severity level of the alert.")
+@doc("Severity level of the alert")
 union AlertLevel {
   /** Information level */
   Info: "info",
@@ -660,22 +798,22 @@ model StoragePoolEnableAvs {
 }
 
 @added(Versions.v3_preview)
-@doc("Explicit service initialization payload, with no encoding or signing; may be null if completed is true, or if serviceInitializationHandleEnc is not null")
+@doc("Initialization handle used to configure the AVS SDDC to communicate with the storage pool")
 model ServiceInitializationHandle {
-  @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
+  @doc("Azure resource ID of the AVS SDDC the pool is connecting to")
   sddcResourceId?: string;
 
-  @doc("Service account username")
+  @doc("Requested service account username")
   serviceAccountUsername?: string;
 }
 
 @added(Versions.v3_preview)
-@doc("Information about the connection of the storage pool to AVS")
+@doc("Transient information about an on-going connection to an AVS instance")
 model AvsConnection {
   @doc("Indicates whether service initialization is complete")
   serviceInitializationCompleted: boolean;
 
-  @doc("Encoded service account credentials alongside connection information, encrypted with the ephemeral public key")
+  @doc("Encoded service account credentials alongside connection information")
   serviceInitializationHandleEnc?: string;
 
   @doc("Explicit service account credentials")
@@ -683,27 +821,27 @@ model AvsConnection {
 }
 
 @added(Versions.v3_preview)
-@doc("The status of the storage pool connection to AVS")
+@doc("Status of storage pool / AVS connection")
 model AvsStatus {
-  @doc("If true, a sequence of enable/finalize has been completed successfully, and disable hasn't been called successfully since.")
+  @doc("If true, an AVS connection has been successfully completed")
   avsEnabled: boolean;
 
-  @doc("Human-readable current connection status")
+  @doc("Human-readable current AVS connection status")
   currentConnectionStatus: string;
 
-  @doc("Resource id pointing at the AVS SDDC the pool is configured with")
+  @doc("Azure resource ID of the AVS SDDC the pool is connected to")
   sddcResourceId?: string;
 }
 
 @added(Versions.v3_preview)
-@doc("Storage Pool enable AVS Connection")
+@doc("EnableAvsConnection payload information")
 model StoragePoolEnableAvsConnectionPost {
-  @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
+  @doc("Azure resource ID of the AVS SDDC to connect to")
   sddcResourceId: string;
 }
 
 @added(Versions.v3_preview)
-@doc("Explicit service account credentials")
+@doc("Explicit service initialization data")
 model ServiceInitializationData {
   @doc("Service account username")
   serviceAccountUsername?: string;
@@ -712,20 +850,20 @@ model ServiceInitializationData {
   @secret
   serviceAccountPassword?: string;
 
-  @doc("Storage Pool Vsphere IP")
+  @doc("AVS instance's vSphere IP address")
   vSphereIp?: string;
 
-  @doc("Storage Pool Vsphere Certificate")
+  @doc("AVS instance's vSphere certificate")
   vSphereCertificate?: string;
 }
 
 @added(Versions.v3_preview)
-@doc("Storage Pool finalize AVS Connection")
+@doc("FinalizeAvsConnection payload information, either encoded or explicit")
 model StoragePoolFinalizeAvsConnectionPost {
-  @doc("Encoded service account credentials alongside connection information, encrypted with the ephemeral public key")
+  @doc("Encoded AVS connection information")
   serviceInitializationDataEnc?: string;
 
-  @doc("Explicit service account credentials")
+  @doc("Explicit AVS connection information")
   serviceInitializationData?: ServiceInitializationData;
 }
 
@@ -739,10 +877,10 @@ model StoragePoolEnableVspherePlugin {
   vSphereCertThumbprint?: string;
 }
 
-@doc("The AVS Storage Container resource type.")
+@doc("AVS storage container resource type, representing a VMware storage container in a storage pool, which can be associated to and mounted as a datastore")
 @parentResource(StoragePool)
 model AvsStorageContainer is ProxyResource<AvsStorageContainerProperties> {
-  @doc("The name of the storage container.")
+  @doc("Name of the storage container")
   @segment("avsStorageContainers")
   @key("storageContainerName")
   @visibility("read")
@@ -751,9 +889,9 @@ model AvsStorageContainer is ProxyResource<AvsStorageContainerProperties> {
   name: string;
 }
 
-@doc("The properties of an AVS Storage Container resource.")
+@doc("AVS storage container properties")
 model AvsStorageContainerProperties {
-  @doc("Contains properties related to used Flash space")
+  @doc("Storage space usage")
   @visibility("read")
   space?: Space;
 
@@ -761,31 +899,32 @@ model AvsStorageContainerProperties {
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
   @visibility("read")
   @madeOptional(Versions.v3_preview)
+  @removed(Versions.v5_preview)
   storageName?: string;
 
   @added(Versions.v3_preview)
-  @doc("Name of the storage container.")
+  @doc("Name of the storage container")
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
   @visibility("read")
   resourceName: string;
 
   @removed(Versions.v4_preview)
-  @doc("Provisioning state of the resource.")
+  @doc("Provisioning state of the resource")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 
-  @doc("Maximum amount of bytes that can be provisioned in this storage container. It must be a multiple of 512. Each time a volume is provisioned in this container, its provisionedSize will be counted against the provisionLimit and the provisioning will fail if it goes over (minimum: 1048576 (1Mi), maximum: 4503599627370496 (4Pi)). By default it is unrestricted.")
+  @doc("Maximum amount of bytes that can be provisioned in this storage container; it must be a multiple of 512; each time a volume is provisioned in this container, its provisionedSize will be counted against the provisionLimit and the provisioning will fail if it goes over (minimum: 1048576 (1MiB), maximum: 4503599627370496 (4PiB)); by default it is unrestricted")
   @visibility("create", "update", "read")
   provisionedLimit?: int64;
 
   @added(Versions.v4_preview)
-  @doc("Current VMware datastore associate with this storage container")
-  @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
+  @doc("VMware datastore associated with this storage container (if any)")
+  @pattern("(^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9])?$")
   @visibility("read")
   datastore?: string;
 
   @added(Versions.v4_preview)
-  @doc("Indicates whether the datastore is mounted in the VMware")
+  @doc("Whether the datastore is mounted in VMware or not")
   @visibility("read")
   mounted?: boolean;
 }
@@ -794,7 +933,9 @@ model AvsStorageContainerProperties {
 interface AvsStorageContainers {
   @removed(Versions.v4_preview)
   create is ArmResourceCreateOrUpdateAsync<AvsStorageContainer>;
+  @doc("Get an AVS storage container")
   get is ArmResourceRead<AvsStorageContainer>;
+  @doc("Delete an AVS storage container")
   delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainer>;
   @removed(Versions.v4_preview)
   update is ArmCustomPatchAsync<
@@ -804,10 +945,11 @@ interface AvsStorageContainers {
       AvsStorageContainerProperties
     >
   >;
+  @doc("List AVS storage containers by storage pool")
   listByStoragePool is ArmResourceListByParent<AvsStorageContainer>;
 }
 
-@doc("The AVS Storage Container Volume resource type.")
+@doc("A volume contained in an AVS storage container")
 @parentResource(AvsStorageContainer)
 model AvsStorageContainerVolume is ProxyResource<VolumeProperties> {
   /** Id of Storage Container Volume */
@@ -818,27 +960,29 @@ model AvsStorageContainerVolume is ProxyResource<VolumeProperties> {
     NamePattern = "^[a-fA-F0-9\\-]{1,64}$"
   >;
 }
-@@doc(AvsStorageContainerVolume.name, "Id of Storage Container Volume.");
+@@doc(AvsStorageContainerVolume.name,
+  "ID of the volume in the storage container"
+);
 
-@doc("Volume properties.")
+@doc("Volume properties")
 model VolumeProperties {
-  @doc("Pure Storage's internal Id for the StoragePool.")
+  @doc("Pure Storage's internal ID for the storage pool containing the volume")
   @visibility("read")
   storagePoolInternalId?: string;
 
-  @doc("Resource Id for the StoragePool.")
+  @doc("Azure Resource ID of the storage pool containing this volume")
   @visibility("read")
   storagePoolResourceId?: string;
 
-  @doc("Pure Storage's internal Id for the Volume.")
+  @doc("Pure Storage's internal ID for the volume")
   @visibility("read")
   volumeInternalId?: string;
 
-  @doc("Human readable name for that Volume.")
+  @doc("Human-readable name of the volume")
   @visibility("read")
   displayName?: string;
 
-  @doc("Contains properties related to used Flash space")
+  @doc("Storage space usage")
   @visibility("read")
   space?: Space;
 
@@ -847,7 +991,7 @@ model VolumeProperties {
   @visibility("read")
   performancePolicy?: VolumePerformancePolicy;
 
-  @doc("Shows if Resource is destroyed and when eradication will happen.")
+  @doc("Volume's soft-deletion state")
   @visibility("read", "update")
   softDeletion: SoftDeletion;
 
@@ -856,19 +1000,19 @@ model VolumeProperties {
   @visibility("read")
   consistencyGroup?: VolumeConsistencyGroup;
 
-  @doc("RFC 3339 Timestamp when Volume was created.")
+  @doc("Volume creation date, as an RFC 3339 timestamp")
   @visibility("read")
   createdTimestamp?: string;
 
-  @doc("Provisioned size of the volume, that is, how large the volume can grow. In bytes.")
+  @doc("Currently provisioned size of the volume, in bytes")
   @visibility("read")
   provisionedSize?: int64;
 
-  @doc("Which system is responsible for the lifecycle of that Volume.")
+  @doc("Specify which control plane handles the lifecycle of the volume")
   @visibility("read")
   volumeType?: VolumeType;
 
-  @doc("AVS details.")
+  @doc("AVS-specific volume information")
   @visibility("read")
   avs?: AvsDiskDetails;
 
@@ -877,7 +1021,7 @@ model VolumeProperties {
   @visibility("read")
   azure?: AzureProperties;
 
-  @doc("Provisioning state of the resource.")
+  @doc("Provisioning state of the resource")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 }
@@ -889,13 +1033,13 @@ model VolumePerformancePolicy {
   policyResourceId: string;
 }
 
-@doc("Shows if Resource is destroyed and when eradication will happen.")
+@doc("Soft-deletion state")
 model SoftDeletion {
-  @doc("Shows if Resource is destroyed.")
+  @doc("If false, the resource is active; if true, the resource has been destroyed; resources can be soft-deleted by setting destroyed to true, and recovered by setting it to false")
   @visibility("read", "update")
   destroyed: boolean;
 
-  @doc("Timestamp when Resource will be eradicated. Present only if `destroyed` is true.")
+  @doc("Date at which the resource will be eradicated and impossible to recover, as an RFC 3339 timestamp; invalid if destroyed is false;")
   @visibility("read")
   eradicationTimestamp?: string;
 
@@ -912,42 +1056,43 @@ model VolumeConsistencyGroup {
   consistencyGroupId: string;
 }
 
-@doc("Volume types.")
+@doc("Specify which control plane handles the lifecycle of the volume")
 union VolumeType {
   /** Azure Volume Type */
   @removed(Versions.v4_preview)
   Azure: "azure",
 
-  /** AVS Volume Type */
+  /** AVS/VMware */
   AVS: "avs",
 
   string,
 }
 
-@doc("AVS disk details.")
+@doc("AVS disk/volume information")
 model AvsDiskDetails {
-  @doc("Id of the disk.")
+  @doc("VMware ID of the disk/volume")
   diskId: string;
 
-  @doc("Name of the disk.")
+  @doc("VMware name of the disk/volume")
   diskName: string;
 
-  @doc("Name of the top-level folder in which the Volume is located.")
+  @doc("Name of the top-level folder in the datastore that contains the disk/volume")
   folder: string;
 
-  @doc("VMware id assigned to the volume.")
+  @doc("VMware ID assigned to the disk/volume")
   avsVmInternalId: string;
 
-  @doc("Resource id of the avs vm.")
+  @doc("Azure resource ID of the AVS VM connected to this disk/volume")
   avsVmResourceId: string;
 
-  @doc("Name of the avs vm.")
+  @doc("Name of the AVS VM connected to this disk/volume")
   avsVmName: string;
 
-  @doc("Resource id of AVS storage container")
+  @doc("Azure resource ID of the AVS storage container containing this disk/volume")
   avsStorageContainerResourceId: string;
 }
 
+@removed(Versions.v5_preview)
 @doc("Azure Volume Group assigned to the volume.")
 model AzureProperties {
   @doc("Azure Volume Group ID assigned to the volume.")
@@ -956,6 +1101,7 @@ model AzureProperties {
 
 @armResourceOperations
 interface AvsStorageContainerVolumes {
+  @doc("Update a volume in an AVS storage container")
   update is ArmCustomPatchAsync<
     AvsStorageContainerVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -963,12 +1109,16 @@ interface AvsStorageContainerVolumes {
       VolumeProperties
     >
   >;
+  @doc("Get a volume in an AVS storage container")
   get is ArmResourceRead<AvsStorageContainerVolume>;
+  @doc("Delete a volume in an AVS storage container")
   delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainerVolume>;
+  @doc("List volumes in an AVS storage container")
   listByAvsStorageContainer is ArmResourceListByParent<AvsStorageContainerVolume>;
 }
 
 @parentResource(StoragePool)
+@doc("AVS VM resource type, representing all the volumes associated to an AVS VM as defined by VMware")
 model AvsVm is ProxyResource<AvsVmProperties> {
   /** Id of AVS VM */
   ...ResourceNameParameter<
@@ -978,35 +1128,35 @@ model AvsVm is ProxyResource<AvsVmProperties> {
     NamePattern = "^[a-fA-F0-9\\-]{1,64}$"
   >;
 }
-@@doc(AvsVm.name, "Id of AVS VM.");
+@@doc(AvsVm.name, "ID of the AVS VM");
 
-@doc("AVS VM properties.")
+@doc("AVS VM properties")
 model AvsVmProperties {
-  @doc("Pure Storage's internal Id for the StoragePool.")
+  @doc("Pure Storage's internal ID for the storage pool")
   @visibility("read")
   storagePoolInternalId?: string;
 
-  @doc("Resource Id for the StoragePool.")
+  @doc("Azure resource ID of the storage pool")
   @visibility("read")
   storagePoolResourceId?: string;
 
-  @doc("Name to use in UI for this AVS VM.")
+  @doc("Human-readable name of the AVS VM")
   @visibility("read")
   displayName?: string;
 
-  @doc("Timestamp when AVS VM was created")
+  @doc("Date at which the AVS VM was created, as an RFC 3339 timestamp")
   @visibility("read")
   createdTimestamp?: string;
 
-  @doc("Shows if Resource is destroyed and when eradication will happen.")
+  @doc("AVS VM's soft-deletion state")
   @visibility("read", "update")
   softDeletion?: SoftDeletion;
 
-  @doc("Which system is responsible for the lifecycle of that Volume.")
+  @doc("Specify which control plane handles the lifecycle of the volume container")
   @visibility("read")
   volumeContainerType?: VolumeContainerType;
 
-  @doc("AVS VM details.")
+  @doc("AVS VM details")
   @visibility("read")
   avs?: AvsVmDetails;
 
@@ -1019,51 +1169,51 @@ model AvsVmProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@doc("Contains properties related to used Flash space")
+@doc("Storage space usage")
 model Space {
-  @doc("The total space used by customer data. Measured in bytes")
+  @doc("Total space occupied by customer data (i.e., being billed for), in bytes")
   totalUsed: int64;
 
-  @doc("The unique physical space occupied by customer data. Unique physical space does not include shared space or snapshots. Measured in bytes.")
+  @doc("Unique space occupied by customer data, in bytes; for a volume, this is the amount of storage that would be freed by deleting the volume, since snapshot and shared data would be kept")
   unique: int64;
 
-  @doc("The physical space occupied by data unique to one or more snapshots. Measured in bytes.")
+  @doc("Space occupied by data unique to one or more snapshots, in bytes")
   snapshots: int64;
 
-  @doc("The physical space occupied by duplicated data, meaning that the space is shared with other volumes and snapshots as a result of data deduplication. Measured in bytes.")
+  @doc("Space occupied by duplicated data, meaning data shared with other volumes and snapshots as a result of data deduplication, in bytes")
   shared: int64;
 }
 
-@doc("AVS VM details.")
+@doc("AVS VM details")
 model AvsVmDetails {
-  @doc("VMware VM id using this set of volumes.")
+  @doc("ID of the AVS VM using this set of volumes")
   vmId: string;
 
-  @doc("VMware VM name using this set of volumes.")
+  @doc("Name of the VMware VM using this set of volumes")
   vmName: string;
 
-  @doc("VMware VM type using this set of volumes.")
+  @doc("Type of the VMware VM using this set of volumes")
   vmType: VmType;
 
-  @doc("Pure Storage's internal Id for this AVS VM.")
+  @doc("Pure Storage's internal ID for this AVS VM")
   avsVmInternalId: string;
 }
 
-@doc("VM types.")
+@doc("AVS VM storage types")
 union VmType {
-  /** vvol Vm Type */
+  /** VM using vVols as underlying storage */
   vVol: "vvol",
 
   string,
 }
 
-@doc("Volume container types.")
+@doc("Specify which control plane handles the lifecycle of the volume container")
 union VolumeContainerType {
   /** Azure Volume Container Type */
   @removed(Versions.v4_preview)
   Azure: "azure",
 
-  /** AVS Volume Container Type */
+  /** AVS/VMware */
   AVS: "avs",
 
   string,
@@ -1071,6 +1221,7 @@ union VolumeContainerType {
 
 @armResourceOperations
 interface AvsVms {
+  @doc("Update an AVS VM")
   update is ArmCustomPatchAsync<
     AvsVm,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -1078,12 +1229,15 @@ interface AvsVms {
       AvsVmProperties
     >
   >;
+  @doc("Get an AVS VM")
   get is ArmResourceRead<AvsVm>;
+  @doc("Delete an AVS VM")
   delete is ArmResourceDeleteWithoutOkAsync<AvsVm>;
+  @doc("List AVS VMs by storage pool")
   listByStoragePool is ArmResourceListByParent<AvsVm>;
 }
 
-@doc("The AVS VM Volume resource type.")
+@doc("Any volume associated to a particular AVS VM")
 @parentResource(AvsVm)
 model AvsVmVolume is ProxyResource<VolumeProperties> {
   /** Id of AVS VM Volume */
@@ -1094,10 +1248,11 @@ model AvsVmVolume is ProxyResource<VolumeProperties> {
     NamePattern = "^[a-fA-F0-9\\-]{1,64}$"
   >;
 }
-@@doc(AvsVmVolume.name, "Id of AVS VM Volume.");
+@@doc(AvsVmVolume.name, "ID of the volume in the AVS VM");
 
 @armResourceOperations
 interface AvsVmVolumes {
+  @doc("Update a volume in an AVS VM")
   update is ArmCustomPatchAsync<
     AvsVmVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -1105,7 +1260,10 @@ interface AvsVmVolumes {
       VolumeProperties
     >
   >;
+  @doc("Get a volume in an AVS VM")
   get is ArmResourceRead<AvsVmVolume>;
+  @doc("Delete a volume in an AVS VM")
   delete is ArmResourceDeleteWithoutOkAsync<AvsVmVolume>;
+  @doc("List volumes in an AVS VM")
   listByAvsVm is ArmResourceListByParent<AvsVmVolume>;
 }

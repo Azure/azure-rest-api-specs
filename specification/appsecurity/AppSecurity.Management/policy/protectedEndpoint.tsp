@@ -36,27 +36,4 @@ model FrontDoorProtectedEndpoint extends ProtectedEndpoint {
   endpointType: EndpointType.FrontDoor;
 }
 
-scalar ProtectedEndpointId
-  extends Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Network/applicationGateways",
-    },
-    {
-      type: "Microsoft.Network/applicationGateways/httpListeners",
-    },
-    {
-      type: "Microsoft.Network/applicationGateways/requestRoutingRules",
-    },
-    {
-      type: "Microsoft.Cdn/profiles",
-    },
-    {
-      type: "Microsoft.Cdn/profiles/afdEndpoints",
-    },
-    {
-      type: "Microsoft.Cdn/profiles/afdEndpoints/customDomains",
-    },
-    {
-      type: "Microsoft.Cdn/profiles/afdEndpoints/routes",
-    }
-  ]>;
+scalar ProtectedEndpointId extends Azure.Core.armResourceIdentifier;

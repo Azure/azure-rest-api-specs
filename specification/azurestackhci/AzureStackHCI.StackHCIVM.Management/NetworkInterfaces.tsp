@@ -40,14 +40,14 @@ interface NetworkInterfaces {
 
   @doc("The operation to update a network interface.")
   @parameterVisibility
-  @removed(Versions.v2024_10_01_preview)
+  @removed(Versions.v2025_02_01_preview)
   @sharedRoute
-  @renamedFrom(Versions.v2024_10_01_preview, "update")
+  @renamedFrom(Versions.v2025_02_01_preview, "update")
   updateOld is ArmCustomPatchAsync<NetworkInterface>;
 
   @doc("The operation to update a network interface.")
   @parameterVisibility
-  @added(Versions.v2024_10_01_preview)
+  @added(Versions.v2025_02_01_preview)
   @sharedRoute
   update is ArmCustomPatchAsync<
     NetworkInterface,
