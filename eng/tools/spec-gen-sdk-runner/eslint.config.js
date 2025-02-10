@@ -65,10 +65,14 @@ const config = tseslint.config(
       // Note: this originates from [strict]
       // https://typescript-eslint.io/rules/no-non-null-assertion
       "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/restrict-template-expressions": "off",
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "@typescript-eslint/no-unsafe-argument": "off",
 
       // We want more flexibility with file names.
       // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/filename-case.md
       "unicorn/filename-case": "off",
+      "unicorn/prefer-ternary": "off",
 
       // We prefer to have explicitly import at the top of the file, even if the same element is exported again,
       // which we do in index.ts files.
