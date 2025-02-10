@@ -5797,36 +5797,6 @@
           "$ref": "#/definitions/ActiveSessionHostConfigurationProperties",
           "description": "Detailed properties for ActiveSessionHostConfiguration",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
-        },
-        "plan": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
-          "description": "Details of the resource plan."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [
@@ -7501,10 +7471,6 @@
         "relayUDP": {
           "$ref": "#/definitions/RelayUDP",
           "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections"
-        },
-        "managementType": {
-          "$ref": "#/definitions/ManagementType",
-          "description": "The type of management for this hostpool, Automated or Standard. The default value is Automated."
         }
       }
     },
@@ -10297,36 +10263,6 @@
           "$ref": "#/definitions/SessionHostProperties",
           "description": "Detailed properties for SessionHost",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
-        },
-        "plan": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
-          "description": "Details of the resource plan."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [
@@ -10777,6 +10713,79 @@
         "update"
       ]
     },
+    "SessionHostManagementUpdateOperationStatus": {
+      "type": "string",
+      "description": "Operation status for SessionHostManagementUpdate.",
+      "enum": [
+        "Error",
+        "Scheduled",
+        "UpdatingSessionHosts",
+        "ValidatingSessionHostUpdate",
+        "Paused",
+        "Pausing",
+        "Cancelling",
+        "Succeeded",
+        "Failed",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "SessionHostManagementUpdateOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "The operation has an error."
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "The operation is scheduled."
+          },
+          {
+            "name": "UpdatingSessionHosts",
+            "value": "UpdatingSessionHosts",
+            "description": "The operation is currently updating Session Hosts."
+          },
+          {
+            "name": "ValidatingSessionHostUpdate",
+            "value": "ValidatingSessionHostUpdate",
+            "description": "The operation is validating the update."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "The operation is paused."
+          },
+          {
+            "name": "Pausing",
+            "value": "Pausing",
+            "description": "The operation is pausing."
+          },
+          {
+            "name": "Cancelling",
+            "value": "Cancelling",
+            "description": "Canceling the operation."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The operation is canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "SessionHostManagementUpdateStatus": {
       "type": "object",
       "description": "Schema for SessionHostManagementUpdateStatus properties.",
@@ -10787,7 +10796,7 @@
           "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
         },
         "status": {
-          "$ref": "#/definitions/Status",
+          "$ref": "#/definitions/SessionHostManagementUpdateOperationStatus",
           "description": "Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled"
         },
         "properties": {
@@ -11305,36 +11314,6 @@
           "$ref": "#/definitions/UserSessionProperties",
           "description": "Detailed properties for UserSession",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
-        },
-        "plan": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
-          "description": "Details of the resource plan."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [

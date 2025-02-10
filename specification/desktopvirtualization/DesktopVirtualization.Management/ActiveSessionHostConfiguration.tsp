@@ -23,12 +23,6 @@ model ActiveSessionHostConfiguration
     SegmentName = "activeSessionHostConfigurations",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
-  ...ManagedServiceIdentityProperty;
-  ...etagProperty;
-  ...ResourceKindProperty;
-  ...ManagedByProperty;
-  ...ResourcePlanProperty;
-  ...ResourceSkuProperty;
 }
 
 @armResourceOperations

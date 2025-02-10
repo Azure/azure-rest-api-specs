@@ -744,6 +744,63 @@ union AppAttachPackageArchitectures {
 }
 
 /**
+ * Operation status for SessionHostManagementUpdate.
+ */
+union SessionHostManagementUpdateOperationStatus {
+  string,
+
+  /**
+   * The operation has an error.
+   */
+  Error: "Error",
+
+  /**
+   * The operation is scheduled.
+   */
+  Scheduled: "Scheduled",
+
+  /**
+   * The operation is currently updating Session Hosts.
+   */
+  UpdatingSessionHosts: "UpdatingSessionHosts",
+
+  /**
+   * The operation is validating the update.
+   */
+  ValidatingSessionHostUpdate: "ValidatingSessionHostUpdate",
+
+  /**
+   * The operation is paused.
+   */
+  Paused: "Paused",
+
+  /**
+   * The operation is pausing.
+   */
+  Pausing: "Pausing",
+
+  /**
+   * Canceling the operation.
+   */
+  Cancelling: "Cancelling",
+
+  /**
+   * The operation succeeded.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The operation failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * The operation is canceled
+   */
+  Cancelled: "Cancelled",
+}
+
+/**
  * Status for a SessionHost.
  */
 union Status {
@@ -3244,11 +3301,6 @@ model HostPoolPatchProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   relayUDP?: RelayUDP;
-
-  /**
-   * The type of management for this hostpool, Automated or Standard. The default value is Automated.
-   */
-  managementType?: ManagementType;
 }
 
 /**
@@ -4763,7 +4815,7 @@ model StatusProperty {
   /**
    * Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled
    */
-  status: Status;
+  status: SessionHostManagementUpdateOperationStatus;
 }
 
 /**
