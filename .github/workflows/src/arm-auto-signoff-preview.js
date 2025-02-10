@@ -67,15 +67,6 @@ export async function getLabelActionImpl({
     return LabelAction.Remove;
   }
 
-  // if (
-  //   !(await incrementalChangesToExistingResourceProvider(
-  //     changedRmSwaggerFiles,
-  //     core,
-  //   ))
-  // ) {
-  //   return LabelAction.Remove;
-  // }
-
   if (
     !(await incrementalChangesToExistingTypeSpec(changedRmSwaggerFiles, core))
   ) {
@@ -212,49 +203,3 @@ async function incrementalChangesToExistingTypeSpec(
   );
   return true;
 }
-
-// /**
-//  * @param {string[]} changedRmSwaggerFiles
-//  * @param {import('github-script').AsyncFunctionArguments['core']} core
-//  * @returns {Promise<boolean>} True if PR contains changes to existing RPs, and no new RPs
-//  */
-// async function incrementalChangesToExistingResourceProvider(
-//   changedRmSwaggerFiles,
-//   core,
-// ) {
-//   core.info("incrementalChangesToExistingResourceProvider()");
-
-//   for (const file of changedRmSwaggerFiles) {
-//     if (!(await specFolderExistsInBaseBranch(file, core))) {
-//       core.info(`Appears to add a new RP: ${file}`);
-//       return false;
-//     }
-//   }
-
-//   core.info("Appears to change existing RPs, but adds no new RPs");
-//   return true;
-// }
-
-// /**
-//  * @param {import('github-script').AsyncFunctionArguments['core']} core
-//  * @param {string} file
-//  * @returns {Promise<boolean>} True if the spec folder exists in the base branch
-//  */
-// async function specFolderExistsInBaseBranch(file, core) {
-//   core.info(`specFolderExistsInBaseBranch("${file}")`);
-
-//   // Example1: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json
-//   // Example2: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/contosoGroup1/preview/2021-10-01-preview/contoso.json
-
-//   // Example1: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso
-//   // Example2: specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/contosoGroup1
-//   const specDir = dirname(dirname(dirname(file)));
-//   core.info(`specDir: ${specDir}`);
-
-//   const resultString = await lsTree("HEAD^", specDir, core);
-
-//   // Command "git ls-tree" returns a nonempty string if the folder exists in the base branch
-//   const result = Boolean(resultString);
-//   core.info(`returning: ${result}`);
-//   return result;
-// }
