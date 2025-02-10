@@ -34,6 +34,16 @@ scalar ClusterResourceId
     }
   ]>;
 
+@added(Versions.v2025_03_01)
+@doc("Represents label object for a fleet member.")
+model Label {
+  @doc("Key for a fleet member label.")
+  key: string;
+
+  @doc("Value for a fleet member label.")
+  value: string;
+}
+
 @doc("A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.")
 model FleetMemberProperties {
   // adding a response header in the model currently impacts the model used in the List result model.
@@ -54,6 +64,10 @@ model FleetMemberProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: FleetMemberProvisioningState;
+
+  @added(Versions.v2025_03_01)
+  @doc("The labels to be persisted on the fleet member.")
+  labels?: Label[];
 }
 
 @lroStatus
