@@ -7838,6 +7838,10 @@
       "type": "object",
       "description": "Image configurations of session host in a HostPool",
       "properties": {
+        "type": {
+          "$ref": "#/definitions/ImageType",
+          "description": "The type of image session hosts use in the hostpool."
+        },
         "marketplaceInfo": {
           "$ref": "#/definitions/MarketplaceInfoPatchProperties",
           "description": "The values to uniquely identify a marketplace image. Only one should be populated based on the image type."
@@ -10938,6 +10942,11 @@
           "type": "string",
           "format": "date-time",
           "description": "The last time update was completed.",
+          "readOnly": true
+        },
+        "sessionHostConfiguration": {
+          "type": "string",
+          "description": "SessionHostConfiguration version reference at the time the update is initiated, in the format of date time. Example: 2024-04-26T04:56:45Z",
           "readOnly": true
         },
         "sessionHostHealthCheckResults": {

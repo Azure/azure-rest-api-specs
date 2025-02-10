@@ -1682,6 +1682,11 @@ model ImageInfoProperties {
  */
 model ImageInfoPatchProperties {
   /**
+   * The type of image session hosts use in the hostpool.
+   */
+  type?: ImageType;
+
+  /**
    * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
    */
   marketplaceInfo?: MarketplaceInfoPatchProperties;
@@ -3607,6 +3612,12 @@ model SessionHostProperties {
    */
   @visibility("read")
   lastSessionHostUpdateTime?: utcDateTime;
+
+  /**
+   * SessionHostConfiguration version reference at the time the update is initiated, in the format of date time. Example: 2024-04-26T04:56:45Z
+   */
+  @visibility("read")
+  sessionHostConfiguration?: string;
 
   /**
    * List of SessionHostHealthCheckReports
