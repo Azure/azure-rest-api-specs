@@ -12,7 +12,7 @@ namespace Microsoft.EdgeManagement;
 /**
  * Type of message. Can only be 'text' or 'action'.
  */
-union Type {
+union type {
   /**
    * Custom type.
    */
@@ -32,7 +32,7 @@ union Type {
 /**
  * Sub-type of message.
  */
-union Subtype {
+union subtype {
   /**
    * Custom sub-type.
    */
@@ -52,7 +52,7 @@ union Subtype {
 /**
  * Role of message. Can be 'system', 'assistant', or 'user'.
  */
-union Role {
+union role {
   /**
    * Custom role.
    */
@@ -118,17 +118,17 @@ model ChatMessage {
    * Type of message. Can only be 'text' or 'action'.
    */
   @encodedName("application/json", "type")
-  messageType?: Type = Type.text;
+  messageType?: type = type.text;
 
   /**
    * Sub-type of message.
    */
-  subType?: Subtype = Subtype.default;
+  subType?: subtype = subtype.default;
 
   /**
    * Role of message. Can be 'system', 'assistant', or 'user'.
    */
-  role?: Role = Role.user;
+  role?: role = role.user;
 
   /**
    * Message content from user or assistant.
