@@ -2418,7 +2418,26 @@
             "provisioningState": {
               "readOnly": true,
               "type": "string",
-              "description": "The provisioning state of the container group. This only appears in the response."
+              "description": "The provisioning state of the container group. This only appears in the response.",
+              "enum": [
+                "NotSpecified",
+                "Accepted",
+                "Pending",
+                "Updating",
+                "Creating",
+                "Repairing",
+                "Unhealthy",
+                "Failed",
+                "Canceled",
+                "Succeeded"
+                "Deleting",
+                "NotAccessible",
+                "PreProvisioned"
+              ],
+              "x-ms-enum": {
+                "name": "ContainerGroupProvisioningState",
+                "modelAsString": true
+              }
             },
             "containers": {
               "type": "array",
