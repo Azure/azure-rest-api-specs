@@ -101,6 +101,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 // In Python we hand-write the 4 input message classes, so we make them internal here.
 // The base class ChatRequestMessage has to have the same access as the derived classes,
 // so we make it internal as well. However the Python code will make it public again without changes.
+@@access(AI.Model.ChatCompletionsOptions, Access.internal, "python");
 @@access(AI.Model.ChatRequestMessage, Access.internal, "python");
 @@access(AI.Model.ChatRequestAssistantMessage, Access.internal, "python");
 @@access(AI.Model.ChatRequestSystemMessage, Access.internal, "python");
