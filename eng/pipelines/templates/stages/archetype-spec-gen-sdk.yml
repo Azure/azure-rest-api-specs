@@ -191,10 +191,8 @@ extends:
               echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
               echo "Generated SDK Information : $sdk_gen_info"
 
-              cd $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner
-              npm ci
-              npm run build
               cd $(SpecRepoDirectory)
+              npm ci
               node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
                 --scp $(SpecRepoDirectory) \
                 --sdp $(SdkRepoDirectory) \
