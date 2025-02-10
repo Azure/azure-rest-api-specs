@@ -13,15 +13,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.EdgeManagement;
 
-/**
- * Use ChatWrapper to define the body name
- */
-model ChatWrapper {
-@doc("The chat request body")
-  @body
-  chatRequest: ChatRequest
-}
-
 @armResourceOperations
 interface Edge {
   /**
@@ -29,7 +20,7 @@ interface Edge {
    */
   @autoRoute
   chat is ArmProviderActionSync<
-    Request = ChatWrapper,
+    Request = ChatRequest,
     Response = ChatResponse,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
