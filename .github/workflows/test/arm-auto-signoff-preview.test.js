@@ -6,8 +6,6 @@ import { getLabelActionImpl } from "../src/arm-auto-signoff-preview.js";
 import * as changedFiles from "../src/changed-files.js";
 import * as git from "../src/git.js";
 
-// TODO: Attempt to eliminate duplicate code
-
 vi.mock("fs/promises", async () => {
   const memfs = await import("memfs");
   return {
@@ -105,29 +103,7 @@ describe("getLabelActionImpl", () => {
     { labels: ["ARMReview", "NotReadyForARMReview"] },
     { labels: ["ARMReview", "SuppressionReviewRequired"] },
   ])("removes label if not all labels match ($labels)", async ({ labels }) => {
-    const swaggerPath =
-      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
-
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
-
-    vol.fromJSON({ [swaggerPath]: swaggerTypeSpecGenerated });
-
-    vi.spyOn(git, "lsTree").mockImplementation(
-      async (_treeIsh, _path, _core, options) => {
-        return options?.includes("-r --name-only")
-          ? swaggerPath.substring(1)
-          : "040000 tree abc123 specification/contosowidgetmanager";
-      },
-    );
-
-    vi.spyOn(git, "show").mockImplementation(async (_treeIsh, _path, _core) => {
-      return swaggerTypeSpecGenerated;
-    });
-
-    vol.fromJSON({ [swaggerPath]: swaggerTypeSpecGenerated });
+    mockContosoTspSwagger();
 
     const github = createMockGithub();
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
@@ -153,19 +129,7 @@ describe("getLabelActionImpl", () => {
   });
 
   it("adds label if check succeeded", async () => {
-    const swaggerPath =
-      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
-
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
-
-    vi.spyOn(git, "lsTree").mockResolvedValue(
-      "040000 tree abc123 specification/contosowidgetmanager",
-    );
-
-    vol.fromJSON({ [swaggerPath]: swaggerTypeSpecGenerated });
+    mockContosoTspSwagger();
 
     const github = createMockGithub();
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
@@ -208,19 +172,7 @@ describe("getLabelActionImpl", () => {
   });
 
   it("removes label if check failed", async () => {
-    const swaggerPath =
-      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
-
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
-
-    vi.spyOn(git, "lsTree").mockResolvedValue(
-      "040000 tree abc123 specification/contosowidgetmanager",
-    );
-
-    vol.fromJSON({ [swaggerPath]: swaggerTypeSpecGenerated });
+    mockContosoTspSwagger();
 
     const github = createMockGithub();
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
@@ -263,19 +215,7 @@ describe("getLabelActionImpl", () => {
   });
 
   it("no-ops if check not found or not completed", async () => {
-    const swaggerPath =
-      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
-
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
-
-    vi.spyOn(git, "lsTree").mockResolvedValue(
-      "040000 tree abc123 specification/contosowidgetmanager",
-    );
-
-    vol.fromJSON({ [swaggerPath]: swaggerTypeSpecGenerated });
+    mockContosoTspSwagger();
 
     const github = createMockGithub();
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
@@ -333,3 +273,27 @@ describe("getLabelActionImpl", () => {
     });
   });
 });
+
+function mockContosoTspSwagger() {
+  const swaggerPath =
+    "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
+
+  vi.spyOn(
+    changedFiles,
+    "getChangedResourceManagerSwaggerFiles",
+  ).mockResolvedValue([swaggerPath]);
+
+  vol.fromJSON({ [swaggerPath]: swaggerTypeSpecGenerated });
+
+  vi.spyOn(git, "lsTree").mockImplementation(
+    async (_treeIsh, _path, _core, options) => {
+      return options?.includes("-r --name-only")
+        ? swaggerPath.substring(1)
+        : "040000 tree abc123 specification/contosowidgetmanager";
+    },
+  );
+
+  vi.spyOn(git, "show").mockImplementation(async (_treeIsh, _path, _core) => {
+    return swaggerTypeSpecGenerated;
+  });
+}
