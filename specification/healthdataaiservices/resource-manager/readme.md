@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2024-09-20` is specified on the co
 input-file:
   - Microsoft.HealthDataAIServices/stable/2024-09-20/openapi.json
 ```
+
 ---
 
 # Code Generation
