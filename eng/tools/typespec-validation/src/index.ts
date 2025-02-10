@@ -1,4 +1,6 @@
-import { parseArgs, ParseArgsConfig } from "node:util";
+import { ParseArgsConfig, parseArgs } from "node:util";
+import { Suppression, getSuppressions } from "suppressions";
+
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
 import { FlavorAzureRule } from "./rules/flavor-azure.js";
@@ -6,8 +8,9 @@ import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
+import { TspConfigCommonAzServiceDirMatchPatternRule } from "./rules/tspconfig-common-az-service-dir-match-pattern.js";
+import { TspConfigJavaAzPackageDirectoryRule } from "./rules/tspconfig-az-java-package-dir-match-pattern.js";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
-import { getSuppressions, Suppression } from "suppressions";
 
 export async function main() {
   const host = new TsvRunnerHost();
@@ -47,6 +50,9 @@ export async function main() {
     new LinterRulesetRule(),
     new CompileRule(),
     new FormatRule(),
+    new TspConfigCommonAzServiceDirMatchPatternRule(),
+    new TspConfigJavaAzPackageDirectoryRule(),
+    // TODO: add more tspconfig rules here
   ];
   let success = true;
   for (let i = 0; i < rules.length; i++) {
