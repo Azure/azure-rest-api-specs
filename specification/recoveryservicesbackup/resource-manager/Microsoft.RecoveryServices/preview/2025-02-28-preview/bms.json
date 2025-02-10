@@ -1759,6 +1759,86 @@
             "$ref": "./examples/AzureIaasVm/RecoveryPoints_Get.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "RecoveryPoints"
+        ],
+        "description": "UpdateRecoveryPoint to update recovery point for given RecoveryPointID.",
+        "operationId": "RecoveryPoints_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with backed up item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Container name associated with backed up item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Backed up item name whose backup data needs to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recoveryPointId",
+            "in": "path",
+            "description": "RecoveryPointID represents the backed up data to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateRecoveryPointRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Azure Vm Recovery Point Details": {
+            "$ref": "./examples/Common/RecoveryPoints_Update.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/restore": {
@@ -9338,6 +9418,37 @@
         }
       }
     },
+    "PatchRecoveryPointPropertiesInput": {
+      "description": "Recovery Point Properties Contract for Update Recovery Point API.",
+      "type": "object",
+      "properties": {
+        "expiryTime": {
+          "format": "date-time",
+          "description": "Expiry time of Recovery Point in UTC.",
+          "type": "string"
+        }
+      }
+    },
+    "PatchRecoveryPointInput": {
+      "description": "Recovery Point Contract for Update Recovery Point API.",
+      "type": "object",
+      "properties": {
+        "recoveryPointProperties": {
+          "description": "Properties of Recovery Point",
+          "$ref": "#/definitions/PatchRecoveryPointPropertiesInput"
+        }
+      }
+    },
+    "UpdateRecoveryPointRequest": {
+      "description": "Patch Request content to update recovery point for given RecoveryPointId",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PatchRecoveryPointInput",
+          "description": "Resource properties."
+        }
+      }
+    },
     "Resource": {
       "description": "ARM Resource.",
       "type": "object",
@@ -9849,7 +9960,7 @@
         },
         "lastUpdatedTime": {
           "format": "date-time",
-          "description": "Timestamp when the last (latest)theat information was sent",
+          "description": "Timestamp when the last (latest)threat information was sent",
           "type": "string",
           "readOnly": true
         },
@@ -10774,6 +10885,16 @@
         }
       ],
       "x-ms-discriminator-value": "HanaHSRContainer"
+    },
+    "AzureVmWorkloadSAPHanaScaleoutProtectableItem": {
+      "description": "Azure VM workload-specific protectable item representing HANA scale out.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
+        }
+      ],
+      "x-ms-discriminator-value": "HanaScaleoutContainer"
     },
     "AzureVmWorkloadSAPHanaSystemWorkloadItem": {
       "description": "Azure VM workload-specific workload item representing SAP HANA System.",
@@ -11843,7 +11964,8 @@
             "SQLAGWorkLoadContainer",
             "StorageContainer",
             "GenericContainer",
-            "HanaHSRContainer"
+            "HanaHSRContainer",
+            "HanaScaleoutContainer"
           ],
           "type": "string",
           "x-ms-enum": {
