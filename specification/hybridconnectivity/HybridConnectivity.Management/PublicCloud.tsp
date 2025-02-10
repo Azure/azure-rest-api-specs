@@ -11,23 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "This is defined in other swagger file - hybridconnectivity.json"
-@armProviderNamespace
-@armCommonTypesVersion(CommonTypes.Versions.v5)
-@versioned(Versions)
-@service({
-  title: "Hybrid Connectivity Management API",
-})
-@doc("REST API for public clouds.")
 namespace Microsoft.HybridConnectivity;
-
-@doc("Hybrid Connectivity Management service version.")
-enum Versions {
-  @doc("Version 2024-12-01")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_12_01: "2024-12-01",
-}
 
 //---------------------------------------------- Models ----------------------------------------------
 
