@@ -48,10 +48,6 @@ jobs:
         with:
           # Required to determine files changed in PR
           fetch-depth: 2
-          # TODO: Temporary to improve perf while iterating
-          sparse-checkout: |
-            .github
-            eng
 
       # Output is "none" for no-op, "add" to add label, and "remove" to remove label
       - id: get-label-action
