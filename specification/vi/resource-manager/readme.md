@@ -51,7 +51,7 @@ These are the global settings for the adp.
 title: ViManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01
+tag: package-2025-01
 ```
 
 ### Tag: package-2024-09-23-preview
