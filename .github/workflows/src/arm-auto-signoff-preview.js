@@ -154,6 +154,7 @@ async function incrementalChangesToExistingTypeSpec(
     changedRmSwaggerFiles.map((f) => dirname(dirname(dirname(f)))),
   );
 
+  // Ensure that each changed spec dir contained at least one typespec-generated swagger in the base commitish
   for (const changedSpecDir of changedSpecDirs) {
     // TODO: Create helper to list RM specs in a given commitish
     const specFilesBaseBranch = await lsTree(
@@ -199,7 +200,7 @@ async function incrementalChangesToExistingTypeSpec(
   }
 
   core.info(
-    "Appears to contain only incremental changes to an existing TypeSpec RP",
+    "Appears to contain only incremental changes to existing TypeSpec RP(s)",
   );
   return true;
 }
