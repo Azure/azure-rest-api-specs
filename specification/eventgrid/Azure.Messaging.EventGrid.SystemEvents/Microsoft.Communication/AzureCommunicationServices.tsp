@@ -1025,9 +1025,11 @@ model AcsSmsDeliveryAttemptProperties {
   timestamp: utcDateTime;
 
   /** Number of segments that were successfully delivered */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   segmentsSucceeded: int32;
 
   /** Number of segments whose delivery failed */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   segmentsFailed: int32;
 }
 
