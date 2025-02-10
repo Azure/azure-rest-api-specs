@@ -59,8 +59,8 @@ export async function getChangedResourceManagerSwaggerFiles(
     "HEAD",
     "",
   );
-  const changedResourceManagerSwaggerFiles = changedSwaggerFiles.filter((f) =>
-    f.includes("/resource-manager/"),
+  const changedResourceManagerSwaggerFiles = changedSwaggerFiles.filter(
+    (f) => f.includes("/resource-manager/") && !f.includes("/examples/"),
   );
   core.info(
     `Changed files containing path '/resource-manager/': ${changedResourceManagerSwaggerFiles}`,
