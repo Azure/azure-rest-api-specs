@@ -21,28 +21,34 @@ union EmbeddingInputType {
 }
 
 @doc("""
-  The format of the embeddings result.
-  Returns a 422 error if the model doesn't support the value or parameter.
+  Specifies the types of embeddings to generate. Compressed embeddings types like `uint8`, `int8`, `ubinary` and 
+  `binary`, may reduce storage costs without sacrificing the integrity of the data. Returns a 422 error if the
+  model doesn't support the value or parameter. Read the model's documentation to know the values supported by
+  the your model.
   """)
 union EmbeddingEncodingFormat {
   string,
 
-  @doc("Base64")
+  @doc("""
+    Get back binary representation of the embeddings encoded as Base64 string. OpenAI Python library retrieves 
+    embeddings from the API as encoded binary data, rather than using intermediate decimal representations as is 
+    usually done.
+    """)
   base64: "base64",
 
-  @doc("Binary")
+  @doc("Get back signed binary embeddings")
   binary: "binary",
 
-  @doc("Floating point")
+  @doc("Get back full precision embeddings")
   float: "float",
 
-  @doc("Signed 8-bit integer")
+  @doc("Get back signed int8 embeddings")
   int8: "int8",
 
-  @doc("Unsigned binary")
+  @doc("Get back unsigned binary embeddings")
   ubinary: "ubinary",
 
-  @doc("Unsigned 8-bit integer")
+  @doc("Get back unsigned int8 embeddings")
   uint8: "uint8",
 }
 

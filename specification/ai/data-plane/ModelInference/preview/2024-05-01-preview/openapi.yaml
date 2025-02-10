@@ -633,20 +633,29 @@ components:
       type: object
       required:
         - type
-        - input_audio
+        - audio_url
       properties:
         type:
           type: string
           enum:
-            - input_audio
-          description: "The discriminated object type: always 'input_audio' for this type."
-        input_audio:
+            - audio_url
+          description: "The discriminated object type: always 'image_url' for this type."
+        audio_url:
           allOf:
-            - $ref: '#/components/schemas/ChatMessageInputAudio'
-          description: The details of the input audio.
+            - $ref: '#/components/schemas/ChatMessageAudioUrl'
+          description: An internet location, which must be accessible to the model, from which the audio may be retrieved.
       allOf:
         - $ref: '#/components/schemas/ChatMessageContentItem'
-      description: A structured chat content item containing an audio content.
+      description: A structured chat content item containing an audio reference.
+    ChatMessageAudioUrl:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: The URL of the audio.
+      description: An internet location from which the model may retrieve an audio.
     ChatMessageContentItem:
       type: object
       required:
@@ -660,7 +669,8 @@ components:
         mapping:
           text: '#/components/schemas/ChatMessageTextContentItem'
           image_url: '#/components/schemas/ChatMessageImageContentItem'
-          input_audio: '#/components/schemas/ChatMessageAudioContentItem'
+          audio_url: '#/components/schemas/ChatMessageAudioContentItem'
+          input_audio: '#/components/schemas/ChatMessageInputAudioContentItem'
       description: An abstract representation of a structured content item within a chat message.
     ChatMessageImageContentItem:
       type: object
@@ -718,6 +728,24 @@ components:
             - $ref: '#/components/schemas/AudioContentFormat'
           description: The audio format of the audio content.
       description: The details of an audio chat message content part.
+    ChatMessageInputAudioContentItem:
+      type: object
+      required:
+        - type
+        - format
+      properties:
+        type:
+          type: string
+          enum:
+            - input_audio
+          description: "The discriminated object type: always 'input_audio' for this type."
+        format:
+          allOf:
+            - $ref: '#/components/schemas/AudioContentFormat'
+          description: The audio format of the audio reference.
+      allOf:
+        - $ref: '#/components/schemas/ChatMessageContentItem'
+      description: A structured chat content item containing an audio content.
     ChatMessageTextContentItem:
       type: object
       required:
@@ -880,6 +908,7 @@ components:
         - type: string
           enum:
             - system
+            - developer
             - user
             - assistant
             - tool
@@ -952,8 +981,10 @@ components:
             - ubinary
             - uint8
       description: |-
-        The format of the embeddings result.
-        Returns a 422 error if the model doesn't support the value or parameter.
+        Specifies the types of embeddings to generate. Compressed embeddings types like `uint8`, `int8`, `ubinary` and 
+        `binary`, may reduce storage costs without sacrificing the integrity of the data. Returns a 422 error if the
+        model doesn't support the value or parameter. Read the model's documentation to know the values supported by
+        the your model.
     EmbeddingInputType:
       anyOf:
         - type: string

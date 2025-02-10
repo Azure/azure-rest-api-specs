@@ -858,23 +858,36 @@
     },
     "ChatMessageAudioContentItem": {
       "type": "object",
-      "description": "A structured chat content item containing an audio content.",
+      "description": "A structured chat content item containing an audio reference.",
       "properties": {
-        "input_audio": {
-          "$ref": "#/definitions/ChatMessageInputAudio",
-          "description": "The details of the input audio.",
-          "x-ms-client-name": "inputAudio"
+        "audio_url": {
+          "$ref": "#/definitions/ChatMessageAudioUrl",
+          "description": "An internet location, which must be accessible to the model, from which the audio may be retrieved.",
+          "x-ms-client-name": "audioUrl"
         }
       },
       "required": [
-        "input_audio"
+        "audio_url"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/ChatMessageContentItem"
         }
       ],
-      "x-ms-discriminator-value": "input_audio"
+      "x-ms-discriminator-value": "audio_url"
+    },
+    "ChatMessageAudioUrl": {
+      "type": "object",
+      "description": "An internet location from which the model may retrieve an audio.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the audio."
+        }
+      },
+      "required": [
+        "url"
+      ]
     },
     "ChatMessageContentItem": {
       "type": "object",
@@ -974,6 +987,25 @@
         "data",
         "format"
       ]
+    },
+    "ChatMessageInputAudioContentItem": {
+      "type": "object",
+      "description": "A structured chat content item containing an audio content.",
+      "properties": {
+        "format": {
+          "$ref": "#/definitions/AudioContentFormat",
+          "description": "The audio format of the audio reference."
+        }
+      },
+      "required": [
+        "format"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio"
     },
     "ChatMessageTextContentItem": {
       "type": "object",
@@ -1146,6 +1178,7 @@
       "description": "A description of the intended purpose of a message within a chat completions interaction.",
       "enum": [
         "system",
+        "developer",
         "user",
         "assistant",
         "tool"
@@ -1158,6 +1191,11 @@
             "name": "system",
             "value": "system",
             "description": "The role that instructs or sets the behavior of the assistant."
+          },
+          {
+            "name": "developer",
+            "value": "developer",
+            "description": "The role that provides instructions to the model prioritized ahead of user messages."
           },
           {
             "name": "user",
@@ -1269,7 +1307,7 @@
     },
     "EmbeddingEncodingFormat": {
       "type": "string",
-      "description": "The format of the embeddings result.\nReturns a 422 error if the model doesn't support the value or parameter.",
+      "description": "Specifies the types of embeddings to generate. Compressed embeddings types like `uint8`, `int8`, `ubinary` and \n`binary`, may reduce storage costs without sacrificing the integrity of the data. Returns a 422 error if the\nmodel doesn't support the value or parameter. Read the model's documentation to know the values supported by\nthe your model.",
       "enum": [
         "base64",
         "binary",
@@ -1285,32 +1323,32 @@
           {
             "name": "base64",
             "value": "base64",
-            "description": "Base64"
+            "description": "Get back binary representation of the embeddings encoded as Base64 string. OpenAI Python library retrieves \nembeddings from the API as encoded binary data, rather than using intermediate decimal representations as is \nusually done."
           },
           {
             "name": "binary",
             "value": "binary",
-            "description": "Binary"
+            "description": "Get back signed binary embeddings"
           },
           {
             "name": "float",
             "value": "float",
-            "description": "Floating point"
+            "description": "Get back full precision embeddings"
           },
           {
             "name": "int8",
             "value": "int8",
-            "description": "Signed 8-bit integer"
+            "description": "Get back signed int8 embeddings"
           },
           {
             "name": "ubinary",
             "value": "ubinary",
-            "description": "Unsigned binary"
+            "description": "Get back unsigned binary embeddings"
           },
           {
             "name": "uint8",
             "value": "uint8",
-            "description": "Unsigned 8-bit integer"
+            "description": "Get back unsigned int8 embeddings"
           }
         ]
       }

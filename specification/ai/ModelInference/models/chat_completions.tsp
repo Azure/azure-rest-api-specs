@@ -276,6 +276,9 @@ union ChatRole {
   @doc("The role that instructs or sets the behavior of the assistant.")
   system: "system",
 
+  @doc("The role that provides instructions to the model prioritized ahead of user messages.")
+  developer: "developer",
+
   @doc("The role that provides input for chat completions.")
   user: "user",
 
@@ -665,14 +668,29 @@ union ChatMessageImageDetailLevel {
   high: "high",
 }
 
-@doc("A structured chat content item containing an audio content.")
+@doc("A structured chat content item containing an audio reference.")
 model ChatMessageAudioContentItem extends ChatMessageContentItem {
+  @doc("The discriminated object type: always 'image_url' for this type.")
+  type: "audio_url";
+
+  @doc("An internet location, which must be accessible to the model, from which the audio may be retrieved.")
+  @encodedName("application/json", "audio_url")
+  audioUrl: ChatMessageAudioUrl;
+}
+
+@doc("An internet location from which the model may retrieve an audio.")
+model ChatMessageAudioUrl {
+  @doc("The URL of the audio.")
+  url: string;
+}
+
+@doc("A structured chat content item containing an audio content.")
+model ChatMessageInputAudioContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'input_audio' for this type.")
   type: "input_audio";
 
-  @doc("The details of the input audio.")
-  @encodedName("application/json", "input_audio")
-  inputAudio: ChatMessageInputAudio;
+  @doc("The audio format of the audio reference.")
+  format: AudioContentFormat;
 }
 
 @doc("The details of an audio chat message content part.")
