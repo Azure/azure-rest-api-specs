@@ -1,0 +1,140 @@
+{
+  "title": "Pools_CreateOrUpdate",
+  "operationId": "Pools_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-01-21",
+    "subscriptionId": "a2e95d27-c161-4b61-bda4-11512c14c2c2",
+    "resourceGroupName": "rg",
+    "poolName": "pool",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "maximumConcurrency": 10,
+        "devCenterProjectResourceId": "/subscriptions/222e81d0-cf38-4dab-baa5-289bf16baaa4/resourceGroups/rg-1es-devcenter/providers/Microsoft.DevCenter/projects/1ES",
+        "organizationProfile": {
+          "kind": "AzureDevOps",
+          "organizations": [
+            {
+              "url": "https://mseng.visualstudio.com",
+              "openAccess": true
+            }
+          ]
+        },
+        "agentProfile": {
+          "kind": "Stateless"
+        },
+        "fabricProfile": {
+          "kind": "Vmss",
+          "sku": {
+            "name": "Standard_D4ads_v5"
+          },
+          "images": [
+            {
+              "resourceId": "/MicrosoftWindowsServer/WindowsServer/2019-Datacenter/latest",
+              "ephemeralType": "Automatic"
+            }
+          ],
+          "osProfile": {
+            "secretsManagementSettings": {
+              "certificateStoreName": "Root",
+              "observedCertificates": [
+                "https://abc.vault.azure.net/secrets/one"
+              ],
+              "keyExportable": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "maximumConcurrency": 10,
+          "devCenterProjectResourceId": "/subscriptions/222e81d0-cf38-4dab-baa5-289bf16baaa4/resourceGroups/rg-1es-devcenter/providers/Microsoft.DevCenter/projects/1ES",
+          "organizationProfile": {
+            "kind": "AzureDevOps",
+            "organizations": [
+              {
+                "url": "https://mseng.visualstudio.com"
+              }
+            ]
+          },
+          "agentProfile": {
+            "kind": "Stateless"
+          },
+          "fabricProfile": {
+            "kind": "Vmss",
+            "sku": {
+              "name": "Standard_D4ads_v5"
+            },
+            "images": [
+              {
+                "resourceId": "/MicrosoftWindowsServer/WindowsServer/2019-Datacenter/latest"
+              }
+            ],
+            "osProfile": {
+              "secretsManagementSettings": {
+                "certificateStoreName": "Root",
+                "observedCertificates": [
+                  "https://abc.vault.azure.net/secrets/one"
+                ],
+                "keyExportable": false
+              }
+            }
+          }
+        },
+        "id": "/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/rg/providers/Microsoft.DevOpsInfrastructure/Pools/pool",
+        "location": "eastus"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "maximumConcurrency": 10,
+          "devCenterProjectResourceId": "/subscriptions/222e81d0-cf38-4dab-baa5-289bf16baaa4/resourceGroups/rg-1es-devcenter/providers/Microsoft.DevCenter/projects/1ES",
+          "organizationProfile": {
+            "kind": "AzureDevOps",
+            "organizations": [
+              {
+                "url": "https://mseng.visualstudio.com"
+              }
+            ]
+          },
+          "agentProfile": {
+            "kind": "Stateless"
+          },
+          "fabricProfile": {
+            "kind": "Vmss",
+            "sku": {
+              "name": "Standard_D4ads_v5"
+            },
+            "images": [
+              {
+                "resourceId": "/MicrosoftWindowsServer/WindowsServer/2019-Datacenter/latest"
+              }
+            ],
+            "osProfile": {
+              "secretsManagementSettings": {
+                "certificateStoreName": "Root",
+                "observedCertificates": [
+                  "https://abc.vault.azure.net/secrets/one"
+                ],
+                "keyExportable": false
+              }
+            }
+          }
+        },
+        "id": "/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/rg/providers/Microsoft.DevOpsInfrastructure/Pools/pool",
+        "location": "eastus"
+      }
+    }
+  }
+}
