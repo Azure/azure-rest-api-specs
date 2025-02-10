@@ -93,7 +93,7 @@ interface EndpointResources {
       /**
        * Object of type ListCredentialsRequest
        */
-      @bodyRoot ListCredentialsRequest?: ListCredentialsRequest;
+      @body ListCredentialsRequest?: ListCredentialsRequest;
     },
     EndpointAccessResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters,
@@ -120,7 +120,7 @@ interface EndpointResources {
       /**
        * Object of type ListIngressGatewayCredentialsRequest
        */
-      @bodyRoot
+      @body
       ListIngressGatewayCredentialsRequest?: ListIngressGatewayCredentialsRequest;
     },
     IngressGatewayResource,
