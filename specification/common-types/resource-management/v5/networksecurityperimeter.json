@@ -23,7 +23,10 @@
     "AccessRuleDirection": {
       "type": "string",
       "description": "Direction of Access Rule",
-      "enum": ["Inbound", "Outbound"],
+      "enum": [
+        "Inbound",
+        "Outbound"
+      ],
       "x-ms-enum": {
         "name": "AccessRuleDirection",
         "modelAsString": true,
@@ -159,7 +162,10 @@
         "location": {
           "type": "string",
           "description": "Location of the network security perimeter",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -226,7 +232,15 @@
     "NetworkSecurityPerimeterConfigurationProvisioningState": {
       "type": "string",
       "description": "Provisioning state of a network security perimeter configuration that is being created or updated.",
-      "enum": ["Succeeded", "Creating", "Updating", "Deleting", "Accepted", "Failed", "Canceled"],
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Failed",
+        "Canceled"
+      ],
       "x-ms-enum": {
         "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
         "modelAsString": true,
@@ -281,7 +295,9 @@
           "items": {
             "$ref": "#/definitions/AccessRule"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "diagnosticSettingsVersion": {
           "type": "integer",
@@ -355,7 +371,11 @@
     "PublicNetworkAccess": {
       "type": "string",
       "description": "Allow, disallow, or let network security perimeter configuration control public network access to the protected resource. Value is optional but if passed in, it must be 'Enabled', 'Disabled' or 'SecuredByPerimeter'.",
-      "enum": ["Enabled", "Disabled", "SecuredByPerimeter"],
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "SecuredByPerimeter"
+      ],
       "x-ms-enum": {
         "name": "PublicNetworkAccess",
         "modelAsString": true,
@@ -394,7 +414,11 @@
     "ResourceAssociationAccessMode": {
       "type": "string",
       "description": "Access mode of the resource association",
-      "enum": ["Enforced", "Learning", "Audit"],
+      "enum": [
+        "Enforced",
+        "Learning",
+        "Audit"
+      ],
       "x-ms-enum": {
         "name": "ResourceAssociationAccessMode",
         "modelAsString": true,
@@ -420,7 +444,10 @@
     "Severity": {
       "type": "string",
       "description": "Severity of the issue.",
-      "enum": ["Warning", "Error"],
+      "enum": [
+        "Warning",
+        "Error"
+      ],
       "x-ms-enum": {
         "name": "Severity",
         "modelAsString": true,
