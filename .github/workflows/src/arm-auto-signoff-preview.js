@@ -164,6 +164,7 @@ async function incrementalChangesToExistingTypeSpec(
   );
 
   for (const changedSpecDir of changedSpecDirs) {
+    // TODO: Create helper to list RM specs in a given commitish
     const specFilesBaseBranch = await lsTree(
       "HEAD^",
       changedSpecDir,
@@ -185,6 +186,7 @@ async function incrementalChangesToExistingTypeSpec(
       return false;
     }
 
+    let containsTypespecGeneratedSwagger = false;
     for (const file in specRmSwaggerFilesBaseBranch) {
       const baseSwagger = await show("HEAD^", file, core);
       const baseSwaggerObj = JSON.parse(baseSwagger);
@@ -192,14 +194,17 @@ async function incrementalChangesToExistingTypeSpec(
         core.info(
           `Spec folder '${changedSpecDir}' in base branch contains typespec-generated swagger: '${file}'`,
         );
+        containsTypespecGeneratedSwagger = true;
         continue;
       }
     }
 
-    core.info(
-      `Spec folder '${changedSpecDir}' in base branch contains does not contain any typespec-generated swagger.  PR may be a TypeSpec conversion.`,
-    );
-    return false;
+    if (!containsTypespecGeneratedSwagger) {
+      core.info(
+        `Spec folder '${changedSpecDir}' in base branch contains does not contain any typespec-generated swagger.  PR may be a TypeSpec conversion.`,
+      );
+      return false;
+    }
   }
 
   core.info(

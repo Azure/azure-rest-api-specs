@@ -34,9 +34,10 @@ describe("getLabelActionImpl", () => {
   });
 
   it("removes label if no changed RM files", async () => {
-    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
-      "/specification/contosowidgetmanager/data-plane/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
-    ]);
+    vi.spyOn(
+      changedFiles,
+      "getChangedResourceManagerSwaggerFiles",
+    ).mockResolvedValue([]);
 
     await expect(
       getLabelActionImpl({
@@ -54,9 +55,10 @@ describe("getLabelActionImpl", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
-      swaggerPath,
-    ]);
+    vi.spyOn(
+      changedFiles,
+      "getChangedResourceManagerSwaggerFiles",
+    ).mockResolvedValue([swaggerPath]);
 
     vol.fromJSON({ [swaggerPath]: '"foo"' });
 
@@ -76,9 +78,10 @@ describe("getLabelActionImpl", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager2/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
-      swaggerPath,
-    ]);
+    vi.spyOn(
+      changedFiles,
+      "getChangedResourceManagerSwaggerFiles",
+    ).mockResolvedValue([swaggerPath]);
 
     vol.fromJSON({ [swaggerPath]: swaggerTypeSpecGenerated });
 
@@ -105,14 +108,24 @@ describe("getLabelActionImpl", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
-      swaggerPath,
-    ]);
+    vi.spyOn(
+      changedFiles,
+      "getChangedResourceManagerSwaggerFiles",
+    ).mockResolvedValue([swaggerPath]);
 
-    // TODO: Handle ls-tree and "ls-tree -r --name-only"
-    vi.spyOn(git, "lsTree").mockResolvedValue(
-      "040000 tree abc123 specification/contosowidgetmanager",
+    vol.fromJSON({ [swaggerPath]: swaggerTypeSpecGenerated });
+
+    vi.spyOn(git, "lsTree").mockImplementation(
+      async (_treeIsh, _path, _core, options) => {
+        return options?.includes("-r --name-only")
+          ? swaggerPath.substring(1)
+          : "040000 tree abc123 specification/contosowidgetmanager";
+      },
     );
+
+    vi.spyOn(git, "show").mockImplementation(async (_treeIsh, _path, _core) => {
+      return swaggerTypeSpecGenerated;
+    });
 
     vol.fromJSON({ [swaggerPath]: swaggerTypeSpecGenerated });
 
@@ -143,9 +156,10 @@ describe("getLabelActionImpl", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
-      swaggerPath,
-    ]);
+    vi.spyOn(
+      changedFiles,
+      "getChangedResourceManagerSwaggerFiles",
+    ).mockResolvedValue([swaggerPath]);
 
     vi.spyOn(git, "lsTree").mockResolvedValue(
       "040000 tree abc123 specification/contosowidgetmanager",
@@ -197,9 +211,10 @@ describe("getLabelActionImpl", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
-      swaggerPath,
-    ]);
+    vi.spyOn(
+      changedFiles,
+      "getChangedResourceManagerSwaggerFiles",
+    ).mockResolvedValue([swaggerPath]);
 
     vi.spyOn(git, "lsTree").mockResolvedValue(
       "040000 tree abc123 specification/contosowidgetmanager",
@@ -251,9 +266,10 @@ describe("getLabelActionImpl", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(changedFiles, "getChangedSwaggerFiles").mockResolvedValue([
-      swaggerPath,
-    ]);
+    vi.spyOn(
+      changedFiles,
+      "getChangedResourceManagerSwaggerFiles",
+    ).mockResolvedValue([swaggerPath]);
 
     vi.spyOn(git, "lsTree").mockResolvedValue(
       "040000 tree abc123 specification/contosowidgetmanager",
