@@ -146,7 +146,7 @@ union JsonWebKeyEncryptionAlgorithm {
   string,
 
   /**
-   * RSAES using Optimal Asymmetric Encryption Padding (OAEP), as described in https://tools.ietf.org/html/rfc3447, with the default parameters specified by RFC 3447 in Section A.2.1. Those default parameters are using a hash function of SHA-1 and a mask generation function of MGF1 with SHA-1.
+   * [Not recommended] RSAES using Optimal Asymmetric Encryption Padding (OAEP), as described in https://tools.ietf.org/html/rfc3447, with the default parameters specified by RFC 3447 in Section A.2.1. Those default parameters are using a hash function of SHA-1 and a mask generation function of MGF1 with SHA-1. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_OAEP, which is included solely for backwards compatibility. RSA_OAEP utilizes SHA1, which has known collision problems.
    */
   RSA_OAEP: "RSA-OAEP",
 
@@ -155,7 +155,7 @@ union JsonWebKeyEncryptionAlgorithm {
    */
   RSA_OAEP256: "RSA-OAEP-256",
 
-  /** RSAES-PKCS1-V1_5 key encryption, as described in https://tools.ietf.org/html/rfc3447. */
+  /** [Not recommended] RSAES-PKCS1-V1_5 key encryption, as described in https://tools.ietf.org/html/rfc3447. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_1_5, which is included solely for backwards compatibility. Cryptographic standards no longer consider RSA with the PKCS#1 v1.5 padding scheme secure for encryption. */
   RSA1_5: "RSA1_5",
 
   /** 128-bit AES-GCM. */
@@ -195,11 +195,11 @@ union JsonWebKeyEncryptionAlgorithm {
   A256_CBCPAD: "A256CBCPAD",
 
   /** CKM AES key wrap. */
-  @added(KeyVault.Versions.`v7.6_preview.1`)
+  @added(KeyVault.Versions.`v7.6_preview.2`)
   CKM_AES_KEY_WRAP: "CKM_AES_KEY_WRAP",
 
   /** CKM AES key wrap with padding. */
-  @added(KeyVault.Versions.`v7.6_preview.1`)
+  @added(KeyVault.Versions.`v7.6_preview.2`)
   CKM_AES_KEY_WRAP_PAD: "CKM_AES_KEY_WRAP_PAD",
 }
 
@@ -238,6 +238,24 @@ union JsonWebKeySignatureAlgorithm {
    * RSASSA-PKCS1-v1_5 using SHA-512, as described in https://tools.ietf.org/html/rfc7518
    */
   RS512: "RS512",
+
+  /**
+   * HMAC using SHA-256, as described in  https://tools.ietf.org/html/rfc7518
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  HS256: "HS256",
+
+  /**
+   * HMAC using SHA-384, as described in https://tools.ietf.org/html/rfc7518
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  HS384: "HS384",
+
+  /**
+   * HMAC using SHA-512, as described in https://tools.ietf.org/html/rfc7518
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  HS512: "HS512",
 
   /**
    * Reserved
@@ -376,6 +394,41 @@ model KeyAttributes {
    */
   @visibility("read")
   hsmPlatform?: string;
+
+  /**
+   * The key or key version attestation information.
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  attestation?: KeyAttestation;
+}
+
+/**
+ * The key attestation information.
+ */
+@added(KeyVault.Versions.`v7.6_preview.2`)
+model KeyAttestation {
+  /**
+   * A base64url-encoded string containing certificates in PEM format, used for attestation validation.
+   */
+  @encode("base64url")
+  certificatePemFile?: bytes;
+
+  /**
+   * The attestation blob bytes encoded as base64url string corresponding to a private key.
+   */
+  @encode("base64url")
+  privateKeyAttestation?: bytes;
+
+  /**
+   * The attestation blob bytes encoded as base64url string corresponding to a public key in case of asymmetric key.
+   */
+  @encode("base64url")
+  publicKeyAttestation?: bytes;
+
+  /**
+   * The version of the attestation.
+   */
+  version?: string;
 }
 
 /**
