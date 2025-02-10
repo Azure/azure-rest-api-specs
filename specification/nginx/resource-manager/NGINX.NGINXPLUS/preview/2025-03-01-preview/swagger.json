@@ -1315,7 +1315,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicyListResponse"
+              "$ref": "#/definitions/NginxDeploymentDefaultWafPolicyListResponse"
             }
           },
           "default": {
@@ -1391,83 +1391,6 @@
         "x-ms-examples": {
           "WafPolicy_List": {
             "$ref": "./examples/WafPolicy_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/analyzeWafPolicy": {
-      "post": {
-        "tags": [
-          "NginxWafPolicy"
-        ],
-        "summary": "Analyze an NGINX Waf Policy without applying it to the NGINXaaS deployment.",
-        "operationId": "WafPolicy_Analysis",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "The Id of subscription",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "The name of resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "The name of targeted Nginx deployment",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "wafPolicyName",
-            "description": "The name of Waf Policy",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "The Nginx Waf Policy",
-            "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicyAnalysisCreateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicyAnalysisResponse"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WafPolicy_Analysis": {
-            "$ref": "./examples/WafPolicy_Analysis.json"
           }
         }
       }
@@ -2645,20 +2568,6 @@
         }
       }
     },
-    "NginxDeploymentWafPolicyAnalysisCreateRequest": {
-      "type": "object",
-      "properties": {
-        "content": {
-          "format": "byte",
-          "type": "string",
-          "readOnly": true
-        },
-        "filepath": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "NginxDeploymentWafPolicyAnalysisData": {
       "type": "object",
       "properties": {
@@ -2668,18 +2577,6 @@
             "$ref": "#/definitions/NginxDeploymentWafPolicyError"
           },
           "readOnly": true
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyAnalysisResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "readOnly": true
-        },
-        "data": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyAnalysisData"
         }
       }
     },
@@ -2700,7 +2597,16 @@
       }
     },
     "NginxDeploymentWafPolicyApplyingStatusCode": {
-      "type": "object"
+      "type": "string",
+      "example": "Applying",
+      "description": "Machine readable code indicating the applying status code of a WAF Policy.",
+      "enum": [
+        "NotApplied",
+        "Applying",
+        "Succeeded",
+        "Failed",
+        "Removing"
+      ]
     },
     "NginxDeploymentWafPolicyCompilingStatus": {
       "type": "object",
@@ -2719,7 +2625,15 @@
       }
     },
     "NginxDeploymentWafPolicyCompilingStatusCode": {
-      "type": "object"
+      "type": "string",
+      "example": "InProgress",
+      "description": "Machine readable code indicating the compilation status of a WAF Policy.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Succeeded",
+        "Failed"
+      ]
     },
     "NginxDeploymentWafPolicyError": {
       "type": "object",
@@ -2738,13 +2652,27 @@
         }
       }
     },
+    "NginxDeploymentDefaultWafPolicyListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxDeploymentDefaultWafPolicyProperties"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
     "NginxDeploymentWafPolicyListResponse": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NginxDeploymentWafPolicy"
+            "$ref": "#/definitions/NginxDeploymentWafPolicyMetadataProperties"
           }
         },
         "nextLink": {
@@ -2775,8 +2703,48 @@
         }
       }
     },
+    "NginxDeploymentWafPolicyMetadataProperties": {
+      "type": "object",
+      "properties": {
+        "filepath": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/NginxDeploymentWafPolicyProvisioningState"
+        },
+        "compilingState": {
+          "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatus"
+        },
+        "applyingState": {
+          "$ref": "#/definitions/NginxDeploymentWafPolicyApplyingStatus"
+        }
+      }
+    },
+    "NginxDeploymentDefaultWafPolicyProperties": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "format": "byte",
+          "type": "string",
+          "readOnly": true
+        },
+        "filepath": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "NginxDeploymentWafPolicyProvisioningState": {
-      "type": "object"
+      "type": "string",
+      "example": "Succeeded",
+      "description": "Machine readable code indicating the provisioning state of a WAF Policy.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "InProgress",
+        "Deleting"
+      ]
     }
   },
   "parameters": {
