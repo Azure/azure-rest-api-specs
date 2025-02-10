@@ -23,7 +23,7 @@ These are the global settings for the containerstorage.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-10-01-preview-break-lintdiff
+tag: package-2021-10-01-preview
 ```
 
 ### Tag: package-2021-10-01-preview
