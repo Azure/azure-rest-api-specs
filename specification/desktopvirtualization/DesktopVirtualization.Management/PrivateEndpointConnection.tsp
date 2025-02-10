@@ -17,7 +17,7 @@ namespace Microsoft.DesktopVirtualization;
  * The Private Endpoint Connection resource.
  */
 model PrivateEndpointConnections
-  is Azure.ResourceManager.TrackedResource<PrivateEndpointConnectionProperties> {
+  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<Resource = PrivateEndpointConnections>;
 }
 
