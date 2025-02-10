@@ -82,6 +82,8 @@ export async function getLabelActionImpl({
     })
   ).data.map((label) => label.name);
 
+  core.info(`Labels: ${labels}`);
+
   // TODO: Also require label "ARMBestPracticesAcknowledgement"
   const allLabelsMatch =
     labels.includes("ARMReview") &&
@@ -90,6 +92,7 @@ export async function getLabelActionImpl({
       labels.includes("Suppression-Approved"));
 
   if (!allLabelsMatch) {
+    core.info("Labels do not meet requirement for auto-signoff");
     return LabelAction.Remove;
   }
 
@@ -114,12 +117,21 @@ export async function getLabelActionImpl({
   const swaggerLintDiff =
     swaggerLintDiffs.length === 1 ? swaggerLintDiffs[0] : undefined;
 
+  core.info(
+    `Swagger LintDiff: Status='${swaggerLintDiff?.status}', Conclusion='${swaggerLintDiff?.conclusion}'`,
+  );
+
   if (swaggerLintDiff && swaggerLintDiff.status === "completed") {
-    return swaggerLintDiff.conclusion === "success"
-      ? LabelAction.Add
-      : LabelAction.Remove;
+    if (swaggerLintDiff.conclusion === "success") {
+      core.info("All requirements met for auto-signoff");
+      return LabelAction.Add;
+    } else {
+      core.info("Swagger LintDiff did not succeed");
+      return LabelAction.Remove;
+    }
   } else {
     // No-op if check is missing or not completed, to prevent frequent remove/add label as checks re-run
+    core.info("Swagger LintDiff is in-progress");
     return LabelAction.None;
   }
 }
