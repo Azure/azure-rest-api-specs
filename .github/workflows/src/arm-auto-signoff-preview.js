@@ -179,7 +179,8 @@ async function incrementalChangesToExistingTypeSpec(
     }
 
     let containsTypespecGeneratedSwagger = false;
-    for (const file in specRmSwaggerFilesBaseBranch) {
+    // TODO: Add lint rule to prevent using "for...in" instead of "for...of"
+    for (const file of specRmSwaggerFilesBaseBranch) {
       const baseSwagger = await show("HEAD^", file, core);
       const baseSwaggerObj = JSON.parse(baseSwagger);
       if (baseSwaggerObj["info"]?.["x-typespec-generated"]) {
