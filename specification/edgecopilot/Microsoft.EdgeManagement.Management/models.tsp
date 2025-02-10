@@ -139,7 +139,7 @@ model ChatMessage {
 /**
  * Chat response schema. Contains reply messages from chatbot.
  */
-model ChatResponse {
+model ChatResult {
   /**
    * Session Id of current chat.
    */

@@ -21,7 +21,7 @@ interface Edge {
   @autoRoute
   chat is ArmProviderActionSync<
     Request = ChatRequest,
-    Response = ChatResponse,
+    Response = ChatResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
