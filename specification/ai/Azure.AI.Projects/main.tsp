@@ -2,7 +2,9 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./routes.tsp";
+import "./connections/routes.tsp";
+import "./evaluations/routes.tsp";
+import "./telemetry/routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -45,7 +47,7 @@ namespace Azure.AI {
   }
 )
 @versioned(Versions)
-namespace Azure.AI.Evaluations {
+namespace Azure.AI.Projects {
   @doc("Azure AI API versions")
   enum Versions {
     @doc("Azure AI API version 2024-07-01-preview.")

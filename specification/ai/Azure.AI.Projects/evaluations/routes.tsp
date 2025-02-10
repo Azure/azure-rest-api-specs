@@ -2,7 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./models.tsp";
+import "./model.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -11,11 +11,12 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace Azure.AI.Evaluations;
+// namespace Azure.AI.Projects.Evaluations;
+namespace Azure.AI.Projects;
 
 alias ServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &
-  NoConditionalRequests; // NoRetryRequests suppresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
+  NoConditionalRequests; // NoRetryRequests supresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
 
 alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 

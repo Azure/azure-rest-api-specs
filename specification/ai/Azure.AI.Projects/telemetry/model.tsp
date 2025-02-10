@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Azure.AI.Telemetry;
+namespace Azure.AI.Projects;
 
 @doc("Response from getting properties of the Application Insights resource")
 model GetAppInsightsResponse {

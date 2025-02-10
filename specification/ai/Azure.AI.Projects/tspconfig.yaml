@@ -1,13 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/ai"
-  "dependencies":
-    "additionalDirectories":
-      - "specification/ai/Azure.AI.Agents/"
-      - "specification/ai/Azure.AI.Connections"
-      - "specification/ai/Azure.AI.Evaluations"
-      - "specification/ai/Azure.AI.Telemetry"
-    default: ""
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -36,8 +29,8 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-ts":
     package-dir: "ai-projects"
-    generateTest: false
-    generateMetadata: true
+    generateTest: true
+    generateMetadata: false
     packageDetails:
       name: "@azure/ai-projects"
     flavor: azure

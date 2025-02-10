@@ -2,7 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./models.tsp";
+import "./model.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace Azure.AI.Telemetry;
+namespace Azure.AI.Projects.Telemetry;
 
 /*
  See https://learn.microsoft.com/en-us/rest/api/azureml/workspaces/get?view=rest-azureml-2024-07-01-preview
