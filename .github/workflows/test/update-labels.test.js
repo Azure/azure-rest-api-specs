@@ -1,5 +1,5 @@
-import { describe, expect, it, vi } from "vitest";
-import { createMockCore } from "../../test/mocks.js";
+import { describe, expect, it } from "vitest";
+import { createMockCore, createMockGithub } from "../../test/mocks.js";
 import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
 
 describe("updateLabels", () => {
@@ -297,19 +297,3 @@ describe("updateLabelsImpl", () => {
     },
   );
 });
-
-function createMockGithub() {
-  return {
-    rest: {
-      actions: {
-        listWorkflowRunArtifacts: vi
-          .fn()
-          .mockResolvedValue({ data: { artifacts: [] } }),
-      },
-      issues: {
-        addLabels: vi.fn(),
-        removeLabel: vi.fn(),
-      },
-    },
-  };
-}

@@ -60,9 +60,9 @@ export async function extractInputs(github, context, core) {
       // empty for non-fork PRs.
       issue_number = pull_requests[0].number;
     } else {
-      // For fork PRs, we must call an API in the head repository to get the PR number in the target repository
+      // For fork PRs, we must call an API in the head repository to get the PR number in the base repository
 
-      // Owner and repo for the PR head (at least one should differ from target for fork PRs)
+      // Owner and repo for the PR head (at least one should differ from base for fork PRs)
       const head_owner = payload.workflow_run.head_repository.owner.login;
       const head_repo = payload.workflow_run.head_repository.name;
       const head_sha = payload.workflow_run.head_sha;
