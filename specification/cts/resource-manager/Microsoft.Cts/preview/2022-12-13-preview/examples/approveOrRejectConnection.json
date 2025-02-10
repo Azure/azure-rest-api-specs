@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "pipelineName": "testPipeline",
+    "resourceGroupName": "testRG",
+    "api-version": "2022-12-13-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "connection": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Cts/connections/testConnection",
+      "statusReason": "Example reason"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "http://management.azure.com/subscriptions/12345/providers/Microsoft.Cts/locations/eastUS?api-version=2022-12-13-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Cts/connections/testConnection",
+        "type": "Microsoft.Cts/connections",
+        "location": "East US",
+        "properties": {
+          "pipeline": "testdc",
+          "justification": "justification",
+          "connectionTypes": [
+            "Streaming"
+          ],
+          "requirementId": "id"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Cts/connections/testConnection",
+        "type": "Microsoft.Cts/connections",
+        "location": "East US",
+        "properties": {
+          "pipeline": "testdc",
+          "justification": "justification",
+          "connectionTypes": [
+            "Streaming"
+          ],
+          "requirementId": "id"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "title": "Update Windows Image Tag",
+  "operationId": "WindowsImages_Update",
+  "parameters": {
+    "subscriptionId": "e12d9eff-5d52-4dc4-b4a0-a0c285c01e2e",
+    "resourceGroupName": "myResourceGroup",
+    "imageName": "myImage",
+    "api-version": "2024-08-22-preview",
+    "properties": {
+      "tags": {
+        "new-tag": "new-value"
+      },
+      "properties": {
+        "distribute": [
+          {
+            "type": "ManagedImage",
+            "runOutputName": "image_it_pir_1",
+            "galleryImageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+            "artifactTags": {
+              "tagName": "value"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.WindowsImageBuilder/WindowsImages/myImage",
+        "name": "myImage",
+        "location": "westus",
+        "type": "Microsoft.WindowsImageBuilder/WindowsImages",
+        "tags": {
+          "new-tag": "new-value"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "source": {
+            "os": "Windows server 2022",
+            "edition": "Server Data Center",
+            "arch": "amd64fre",
+            "language": "en-us",
+            "size": 30,
+            "generation": "Gen1",
+            "trigger": true,
+            "type": "MediaFactoryImage"
+          },
+          "customize": [
+            {
+              "type": "Shell",
+              "name": "Shell customization example",
+              "scriptUri": "https://example.com/path/to/script.sh"
+            }
+          ],
+          "distribute": [
+            {
+              "type": "ManagedImage",
+              "runOutputName": "image_it_pir_1",
+              "galleryImageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+              "artifactTags": {
+                "tagName": "value"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.WindowsImageBuilder/locations/{location}/operations/{operation-id}?api-version=2024-08-22-preview"
+      }
+    }
+  }
+}

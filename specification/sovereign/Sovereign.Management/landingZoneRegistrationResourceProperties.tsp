@@ -4,7 +4,7 @@ using Azure.Core;
 
 namespace Microsoft.Sovereign;
 
-@added(Versions.Preview20250227)
+@added(Versions.Preview20241031)
 @doc("The properties of landing zone registration resource type.")
 model LandingZoneRegistrationResourceProperties {
   @visibility("read")
@@ -25,7 +25,4 @@ model LandingZoneRegistrationResourceProperties {
       type: "Microsoft.Sovereign/landingZoneAccounts/landingZoneConfigurations";
     }
   ]>;
-
-  @doc("The managed identity to be tied to this landing zone registration")
-  managedIdentity: ManagedIdentityProperties;
 }

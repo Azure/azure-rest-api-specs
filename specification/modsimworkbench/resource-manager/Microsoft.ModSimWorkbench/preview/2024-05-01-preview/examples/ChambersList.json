@@ -1,0 +1,58 @@
+{
+  "title": "Chambers_List",
+  "operationId": "Chambers_List",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2024-05-01-preview",
+    "workbenchName": "test-workbench"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber-name",
+            "type": "Microsoft.ModSimWorkbench/workbenches/chambers",
+            "location": "Central US",
+            "sku": {
+              "name": "Standard",
+              "tier": "Standard"
+            },
+            "properties": {
+              "licenseServices": {
+                "cadence": {
+                  "enable": true,
+                  "lmhostId": [
+                    "000d3a6f40a1"
+                  ]
+                },
+                "ansys": {
+                  "enable": true,
+                  "lmhostId": [
+                    "000d3a6f40a1"
+                  ]
+                },
+                "siemens": {
+                  "enable": true,
+                  "lmhostId": [
+                    "000d3a6f40a1"
+                  ]
+                },
+                "synopsys": {
+                  "enable": true,
+                  "vmUuid": [
+                    "AA31075F-AFEB-0442-B40A-9AAE5D3C2830"
+                  ]
+                }
+              },
+              "provisioningState": "Processing",
+              "dataPipelineInboundPath": "/mount/dataPipeline/datain",
+              "dataPipelineOutboundPath": "/mount/dataPipeline/dataout"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -30,11 +30,6 @@ openapi-subtype: rpaas
 tag: package-2023-11-13-preview
 ```
 
-``` yaml
-modelerfour:
-  flatten-models: false
-```
-
 ### Tag: package-2019-11-04-preview
 
 These settings apply only when `--tag=package-2019-11-04-preview` is specified on the command line.
@@ -73,7 +68,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-powershell
@@ -94,17 +89,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.operation.properties.isDataAction
-    from: quantum.json
-    reason: 'This property is really a boolean, there are no plans to have more than two values in the future.'
-  - suppress: AvoidNestedProperties
-    where: $.definitions.ProviderDescription.properties.properties
-    from: quantum.json
-    reason: We don't have end customers making direct API calls and this is a breaking change for our existing clients.
-```

@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testConfigurationGroupValue",
+            "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/configurationGroupValues/testConfigurationGroupValue",
+            "type": "Microsoft.HybridNetwork/configurationGroupValues",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "location": "westUs2",
+            "properties": {
+              "configurationGroupValueSchemaReference": {
+                "id": "/subscriptions/2e6a1160-c68f-4298-b9fe-c510912f8b3a/resourcegroups/BTrg1/providers/microsoft.hybridnetwork/publishers/BTGroup/configurationGroupSchemas/interconnectgroupsSchema"
+              },
+              "configurationValue": "\"interconnect-groups\": {\r\n            \"stripe-one\": {\r\n              \"name\": \"Stripe one\",\r\n              \"international-interconnects\": [\r\n                \"france\",\r\n                \"germany\"\r\n              ],\r\n              \"domestic-interconnects\": [\r\n                \"bristol\",\r\n                \"edinburgh\"\r\n              ]\r\n            },\r\n            \"stripe-two\": {\r\n              \"name\": \"Stripe two\",\r\n              \"international-interconnects\": [\r\n                \"germany\",\r\n                \"italy\"\r\n              ],\r\n              \"domestic-interconnects\": [\r\n                \"edinburgh\",\r\n                \"york\"\r\n              ]\r\n            }\r\n          },\r\n          \"interconnect-group-assignments\": {\r\n            \"ssc-one\": {\r\n              \"ssc\": \"SSC 1\",\r\n              \"interconnects\": \"stripe-one\"\r\n            },\r\n            \"ssc-two\": {\r\n              \"ssc\": \"SSC 2\",\r\n              \"interconnects\": \"stripe-two\"\r\n            }\r\n          }"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

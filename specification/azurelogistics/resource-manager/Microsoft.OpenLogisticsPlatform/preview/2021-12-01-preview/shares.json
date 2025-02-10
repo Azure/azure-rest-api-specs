@@ -1,0 +1,464 @@
+{
+  "x-generator": "NSwag v13.2.5.0 (NJsonSchema v10.1.7.0 (Newtonsoft.Json v12.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "OSCPControlPlaneServiceAPI",
+    "description": "REST APIs for OSCP Control Plane Service",
+    "version": "2021-12-01-preview"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/workspaces/{workspaceName}/shares/{shareName}": {
+      "get": {
+        "tags": [
+          "Share"
+        ],
+        "operationId": "Share_Get",
+        "x-ms-examples": {
+          "Share Get": {
+            "$ref": "./examples/Share_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ShareNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Share"
+        ],
+        "operationId": "Share_Put",
+        "x-ms-examples": {
+          "Share Put": {
+            "$ref": "./examples/Share_Put.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ShareNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "share",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          },
+          "449": {
+            "description": "A concurrent create/update/delete operation is ongoing for this share. Please retry later.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false
+      },
+      "patch": {
+        "tags": [
+          "Share"
+        ],
+        "description": "Update share details.",
+        "operationId": "Share_Update",
+        "x-ms-examples": {
+          "Share Update": {
+            "$ref": "./examples/Share_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ShareNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "share",
+            "description": "Update share details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          },
+          "449": {
+            "description": "A concurrent create/update/delete operation is ongoing for this share. Please retry later.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Share"
+        ],
+        "operationId": "Share_Delete",
+        "x-ms-examples": {
+          "Share_Delete": {
+            "$ref": "./examples/Share_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ShareNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "449": {
+            "description": "A concurrent create/update/delete operation is ongoing for this share. Please retry later.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/workspaces/{workspaceName}/shares/": {
+      "get": {
+        "tags": [
+          "Share"
+        ],
+        "operationId": "Share_List",
+        "x-ms-examples": {
+          "Share_List": {
+            "$ref": "./examples/Share_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ShareList"
+            }
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ShareProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Accepted",
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ]
+    },
+    "ShareState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The state of the share",
+      "enum": [
+        "Pending",
+        "RetryToCreateOrDelete",
+        "Redeemed",
+        "Rejected"
+      ]
+    },
+    "AttributeMatchingScheme": {
+      "type": "string",
+      "description": "The attribute matching scheme of the share",
+      "enum": [
+        "ANYOFANY",
+        "ALLOFANY"
+      ]
+    },
+    "Share": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "targetTenantId": {
+              "type": "string",
+              "readOnly": false,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "description": {
+              "type": "string",
+              "readOnly": false
+            },
+            "provisioningState": {
+              "description": "The provisioning state of the resource.",
+              "readOnly": true,
+              "$ref": "#/definitions/ShareProvisioningState"
+            },
+            "shareState": {
+              "$ref": "#/definitions/ShareState"
+            },
+            "shareId": {
+              "type": "string",
+              "readOnly": true
+            },
+            "accessAssignments": {
+              "type": "array",
+              "description": "Gets or sets the accessAssignments",
+              "items": {
+                "$ref": "#/definitions/AccessAssignment"
+              }
+            }
+          }
+        }
+      }
+    },
+    "AccessAssignment": {
+      "type": "object",
+      "properties": {
+        "actionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attributeConditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttributeCondition"
+          }
+        }
+      }
+    },
+    "AttributeCondition": {
+      "type": "object",
+      "required": [
+        "attributeMatchingScheme"
+      ],
+      "properties": {
+        "attributeName": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attributeMatchingScheme": {
+          "$ref": "#/definitions/AttributeMatchingScheme"
+        }
+      }
+    },
+    "ShareList": {
+      "description": "The list of workspace resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of workspace resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of workspaces.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Share"
+          }
+        }
+      }
+    },
+    "UnavailableReason": {
+      "type": "string",
+      "enum": [
+        "None",
+        "InvalidName",
+        "SubscriptionIsDisabled",
+        "NameInUse",
+        "NameInLockdown",
+        "TooManyNamespaceInCurrentSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "UnavailableReason",
+        "modelAsString": false
+      },
+      "description": "Specifies the reason for the unavailability of the service."
+    }
+  },
+  "parameters": {
+    "WorkspaceNameParameter": {
+      "type": "string",
+      "name": "workspaceName",
+      "description": "The name of resource. This is the name of your Azure Supply Chain Service's workspace.",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ShareNameParameter": {
+      "type": "string",
+      "name": "shareName",
+      "description": "The name of resource. This is the name of your Azure Supply Chain Service's workspace.",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

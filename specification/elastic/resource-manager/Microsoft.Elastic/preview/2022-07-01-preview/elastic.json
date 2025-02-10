@@ -19,7 +19,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Microsoft Entra ID OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -1080,11 +1080,11 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Success"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
@@ -1094,9 +1094,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "createAndAssociateIPFilter_Create": {
             "$ref": "./examples/IPTrafficFilter_Create.json"
@@ -1147,11 +1144,11 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Success"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
@@ -1161,9 +1158,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "createAndAssociatePLFilter_Create": {
             "$ref": "./examples/PrivateLinkTrafficFilters_Create.json"
@@ -1203,7 +1197,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
@@ -1213,9 +1207,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "AssociateTrafficFilter_Associate": {
             "$ref": "./examples/AssociateTrafficFilter_Update.json"
@@ -1303,7 +1294,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
@@ -1313,9 +1304,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "DetachTrafficFilter_Update": {
             "$ref": "./examples/DetachTrafficFilters_Update.json"
@@ -1605,7 +1593,7 @@
         },
         "business": {
           "description": "Business of the company",
-          "maxLength": 64,
+          "maxLength": 50,
           "type": "string"
         },
         "employeesNumber": {
@@ -1615,12 +1603,12 @@
         },
         "state": {
           "description": "State of the company location.",
-          "maxLength": 64,
+          "maxLength": 50,
           "type": "string"
         },
         "country": {
           "description": "Country of the company location.",
-          "maxLength": 64,
+          "maxLength": 50,
           "type": "string"
         }
       }
@@ -1641,7 +1629,7 @@
         },
         "companyName": {
           "description": "Company name of the user",
-          "maxLength": 64,
+          "maxLength": 50,
           "type": "string"
         },
         "emailAddress": {
@@ -2271,7 +2259,8 @@
         "2020-07-01",
         "2021-09-01-preview",
         "2021-10-01-preview",
-        "2022-05-05-preview"
+        "2022-05-05-preview",
+        "2022-07-01-preview"
       ],
       "x-ms-enum": {
         "modelAsString": true,

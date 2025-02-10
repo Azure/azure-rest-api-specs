@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2023-02-15-preview",
+    "parameters": {
+      "resourceIds": [
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "evaluationEndTime": "2022-03-04T05:10:00.000Z",
+          "quickAssessments": [
+            {
+              "description": "Protect your storage accounts from potential threats using virtual network rules as a preferred method instead of IP-based filtering. Disabling IP-based filtering prevents public IPs from accessing your storage accounts.",
+              "displayName": "Storage accounts should restrict network access using virtual network rules",
+              "remediationLink": "Protect your storage accounts from potential threats using virtual network rules as a preferred method instead of IP-based filtering. Disabling IP-based filtering prevents public IPs from accessing your storage accounts.",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.storage/storageaccounts/storettas3iw2megtcarm",
+              "resourceStatus": "Healthy",
+              "responsibilityId": "/providers/microsoft.authorization/policydefinitions/2a1a9cdf-e04d-429a-8416-3bfb72a1b26f",
+              "timestamp": "2022-03-04T05:00:00.000Z"
+            },
+            {
+              "description": "",
+              "displayName": "Secure transfer to storage accounts should be enabled",
+              "remediationLink": "",
+              "resourceId": "/subscriptions/0000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.storage/storageaccounts/storettas3iw2megtcarm",
+              "resourceStatus": "Unhealthy",
+              "responsibilityId": "/providers/Microsoft.Authorization/policyDefinitions/404c3081-a854-4457-ae30-26a93ef643f9",
+              "timestamp": "2022-03-04T05:00:00.000Z"
+            }
+          ],
+          "resourceIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.storage/storageaccounts/storettas3iw2megtcarm"
+          ],
+          "triggerTime": "2022-03-04T05:00:00.000Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationStatuses/{operationId}",
+        "Location": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationResults/{operationId}"
+      }
+    }
+  }
+}

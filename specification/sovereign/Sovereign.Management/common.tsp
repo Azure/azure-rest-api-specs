@@ -12,11 +12,21 @@ namespace Microsoft.Sovereign;
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("Preview version.")
+  Preview20230928: "2023-09-28-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("Second preview version.")
+  Preview20240331: "2024-03-31-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("Public preview version.")
-  Preview20250227: "2025-02-27-preview",
+  Preview20241031: "2024-10-31-preview",
 }
 
-@added(Versions.Preview20250227)
+@added(Versions.Preview20241031)
 @doc("The custom provisioning state.")
 union provisioningState {
   ResourceProvisioningState,

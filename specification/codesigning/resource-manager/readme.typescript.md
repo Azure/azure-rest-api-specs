@@ -6,9 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-trustedsigning"
-  output-folder: "$(typescript-sdks-folder)/sdk/trustedsigning/arm-trustedsigning"
-  payload-flattening-threshold: 1
-  clear-output-folder: true
+  package-name: "@azure/arm-codesigning"
+  output-folder: "$(typescript-sdks-folder)/sdk/codesigning/arm-codesigning"
   generate-metadata: true
 ```

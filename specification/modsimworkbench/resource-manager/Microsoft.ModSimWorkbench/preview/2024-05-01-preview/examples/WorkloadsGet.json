@@ -1,0 +1,31 @@
+{
+  "operationId": "Workloads_Get",
+  "title": "Workloads_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2024-05-01-preview",
+    "workbenchName": "test-workbench",
+    "chamberName": "test-chamber",
+    "workloadName": "test-workload"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-workload",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench1/chambers/test-chamber1/workloads/test-workload",
+        "type": "Microsoft.ModSimWorkbench/workbenches/chambers/workloads",
+        "location": "Central US",
+        "zones": [
+          "1"
+        ],
+        "properties": {
+          "provisioningState": "Succeeded",
+          "edaType": "Semiconductor",
+          "restartAt": "2023-03-01T08:00:00Z",
+          "vmSize": "Standard_D4d_v4"
+        }
+      }
+    }
+  }
+}

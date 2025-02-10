@@ -1,0 +1,32 @@
+{
+  "operationId": "Sims_BulkDelete",
+  "title": "Bulk delete SIMs from a SIM group",
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testResourceGroupName",
+    "simGroupName": "testSimGroup",
+    "body": {
+      "sims": [
+        "testSim",
+        "testSim2"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation",
+        "name": "testOperation",
+        "status": "Succeeded",
+        "startTime": "2021-08-19T03:36:07.000Z",
+        "endTime": "2021-08-19T03:38:07.000Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2024-05-01-preview"
+      }
+    }
+  }
+}

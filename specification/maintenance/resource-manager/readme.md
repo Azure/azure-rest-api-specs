@@ -26,106 +26,18 @@ These are the global settings for the Azure Maintenance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-10
+openapi-subtype: providerHub
+tag: package-preview-2024-02
 ```
 
 
-### Tag: package-preview-2023-10
+### Tag: package-preview-2024-02
 
-These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+```yaml $(tag) == 'package-preview-2024-02'
 input-file:
-  - Microsoft.Maintenance/preview/2023-10-01-preview/Maintenance.json
-```
-### Tag: package-preview-2023-09
-
-These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-09'
-input-file:
-  - Microsoft.Maintenance/preview/2023-09-01-preview/Maintenance.json
-```
-
-### Tag: package-2023-04
-
-These settings apply only when `--tag=package-2023-04` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-04'
-input-file:
-  - Microsoft.Maintenance/stable/2023-04-01/Maintenance.json
-```
-
-### Tag: package-preview-2022-11
-
-These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2022-11'
-input-file:
-  - Microsoft.Maintenance/preview/2022-11-01-preview/Maintenance.json
-```
-
-### Tag: package-preview-2022-07
-
-These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2022-07'
-input-file:
-  - Microsoft.Maintenance/preview/2022-07-01-preview/Maintenance.json
-```
-
-### Tag: package-preview-2021-09
-
-These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-09'
-input-file:
-  - Microsoft.Maintenance/preview/2021-09-01-preview/Maintenance.json
-```
-
-### Tag: package-2021-05
-
-These settings apply only when `--tag=package-2021-05` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-05'
-input-file:
-  - Microsoft.Maintenance/stable/2021-05-01/Maintenance.json
-```
-
-### Tag: package-preview-2021-04
-
-These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-04'
-input-file:
-  - Microsoft.Maintenance/preview/2021-04-01-preview/Maintenance.json
-```
-
-### Tag: package-preview-2020-07
-
-These settings apply only when `--tag=package-preview-2020-07` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2020-07'
-input-file:
-  - Microsoft.Maintenance/preview/2020-07-01-preview/Maintenance.json
-```
-
-### Tag: package-2020-04
-
-These settings apply only when `--tag=package-2020-04` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-04'
-input-file:
-- Microsoft.Maintenance/stable/2020-04-01/Maintenance.json
-```
-
-### Tag: package-2018-06-preview
-
-These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-06-preview'
-input-file:
-- Microsoft.Maintenance/preview/2018-06-01-preview/Maintenance.json
+  - Microsoft.Maintenance/preview/2024-02-01-preview/maintenance.json
 ```
 
 ---
@@ -147,6 +59,21 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
+## C#
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.Maintenance
+  payload-flattening-threshold: 1
+  output-folder: $(csharp-sdks-folder)/maintenance/Microsoft.Azure.Management.Maintenance/src/Generated/
+  clear-output-folder: true
+```
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
@@ -163,34 +90,73 @@ See configuration in [readme.java.md](./readme.java.md)
 
 ``` yaml
 directive:
-  - suppress: PathForPutOperation
-    from: maintenance.json
-    reason: False postive. ConfigurationAssignments is proxy resource.
-  - suppress: DeleteResponseBodyEmpty
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: PathContainsResourceType
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: PathContainsResourceType
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: TrackedResourcePatchOperation
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: SubscriptionsAndResourceGroupCasing
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: UnSupportedPatchProperties
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: PathResourceProviderNamePascalCase
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
-    from: maintenance.json
-    reason: False positive. ConfigurationAssignments is proxy resource at subscription/resourceGroup level.
   - suppress: ResourceNameRestriction
     from: maintenance.json
     reason: Maintenance RP accept any string, no special restriction required.
+  - suppress: DeleteResponseBodyEmpty
+    reason: Suppression warning to avoid breaking changes
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].delete.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].delete.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/maintenanceConfigurations/{resourceName}"].delete.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].delete.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].delete.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/orchestrationPreferences/{resourceId}"].delete.responses["200"].schema
+  - suppress: TrackedResourcePatchOperation
+    reason: Suppression warning to avoid breaking changes
+    where:
+      - $.definitions.ConfigurationAssignment
+      - $.definitions.MaintenanceConfiguration
+  - suppress: UnSupportedPatchProperties
+    reason: Suppression warning to avoid breaking changes
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/maintenanceConfigurations/{resourceName}"].patch.parameters[3]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].patch.parameters[2]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].patch.parameters[3]
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    reason: False positive. ConfigurationAssignments is proxy resource at subscription/resourceGroup level.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"].put
+  - suppress: PathForTrackedResourceTypes
+    reason: False positive, Applicable for tracked resource only configurationAssignments is proxy resource.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/{resourceName}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}"]
+  - suppress: EvenSegmentedPathForPutOperation
+    reason: Suppression warning to avoid breaking changes.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default"]
+  - suppress: PatchBodyParametersSchema
+    reason: False positive.
+    from: maintenance.json
+    # this is only needed here, but for some reason the LintDiff doesn't pick up this `where` clause and the error is not 
+    # suppressed; tried it with `.schema` at the end of the jsonPath as well, no luck;
+    # where:
+    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/maintenanceConfigurations/{resourceName}"].patch.parameters[3]
+  - suppress: PutResponseCodes
+    reason: OrchestrationPreference is not a long running operation.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/orchestrationPreferences/{resourceId}"].put
+  - suppress: AvoidAdditionalProperties
+    from: maintenance.json
+    reason: AdditionalProperties are used to model an IDictionary (https://msazure.visualstudio.com/One/_git/OneDeploy-SMD?path=/src/MRP/MRP.Contract/Resources/MaintenanceConfiguration.cs&version=GBmaster&_a=contents).
+  - suppress: AllTrackedResourcesMustHaveDelete
+    reason: False positive, we have delete (https://github.com/Azure/azure-rest-api-specs-pr/blob/043378d4edb4e33305af27a24bd32b93ca99a9c5/specification/maintenance/resource-manager/Microsoft.Maintenance/preview/2024-02-01-preview/maintenance.json#L1253)
+    where:
+      - $.definitions.MaintenanceConfiguration
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: Has "allOf" [{"$ref" "#/definitions/Resource"}]; Other resources aren’t throwing this error even though they include the same line.
+    where:
+      - $.definitions.OrchestrationPreference
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: maintenance.json
+    reason: Suppression warning to avoid breaking changes.
+  - suppress: OperationsApiSchemaUsesCommonTypes
+    reason: Suppression warning to avoid breaking changes.
+    where:
+      - $.paths["/providers/Microsoft.Maintenance/operations"].get.responses["200"].schema.$ref
 ```

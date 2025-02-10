@@ -27,12 +27,26 @@ These are the global settings for the Migration Discovery for SAP.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-10
+tag: package-preview-2024-06
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-preview-2024-06
+
+These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-06'
+input-file:
+  - preview/2024-06-01-preview/SAPDiscoverySites.json
+  - ../operations/preview/2024-06-01-preview/operations.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: SAPDiscoverySites.json
+    reason:  This API is inaccessible from end user and is there for purposes to make sure service can make patch calls for updating properties.
 ```
 
 ### Tag: package-preview-2023-10
@@ -44,9 +58,6 @@ input-file:
   - preview/2023-10-01-preview/SAPDiscoverySites.json
   - ../operations/preview/2023-10-01-preview/operations.json
 suppressions:
-  - code: DeleteResponseCodes
-    from: SAPDiscoverySites.json
-    reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
   - code: PatchBodyParametersSchema
     from: SAPDiscoverySites.json
     reason:  This API is inaccessible from end user and is there for purposes to make sure service can make patch calls for updating properties.

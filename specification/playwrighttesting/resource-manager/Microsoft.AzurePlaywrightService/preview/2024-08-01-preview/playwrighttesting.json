@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft AzurePlaywrightService Management API",
     "version": "2024-08-01-preview",
-    "description": "Microsoft.AzurePlaywrightService Resource Provider Management API.",
+    "description": "Microsoft.AzurePlaywrightService Resource Provider management API.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -225,7 +225,7 @@
         "tags": [
           "Quotas"
         ],
-        "description": "Get subscription quota by name.",
+        "description": "Get quota by name.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -428,6 +428,10 @@
               "$ref": "#/definitions/Account"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -653,7 +657,7 @@
           {
             "name": "quotaName",
             "in": "path",
-            "description": "The Playwright service account quota name.",
+            "description": "The quota name.",
             "required": true,
             "type": "string",
             "enum": [
@@ -703,12 +707,11 @@
   "definitions": {
     "Account": {
       "type": "object",
-      "description": "A Playwright service account resource.",
+      "description": "An account resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AccountProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -719,7 +722,7 @@
     },
     "AccountFreeTrialProperties": {
       "type": "object",
-      "description": "The Playwright service account quota resource free-trial properties.",
+      "description": "The free-trial properties for an account.",
       "properties": {
         "createdAt": {
           "type": "string",
@@ -785,7 +788,7 @@
     },
     "AccountProperties": {
       "type": "object",
-      "description": "Account resource properties.",
+      "description": "Account properties.",
       "properties": {
         "dashboardUri": {
           "type": "string",
@@ -902,12 +905,11 @@
     },
     "AccountQuota": {
       "type": "object",
-      "description": "A quota resource for a Playwright service account.",
+      "description": "A quota resource for an account.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AccountQuotaProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -939,11 +941,11 @@
     },
     "AccountQuotaProperties": {
       "type": "object",
-      "description": "The Playwright service account quota resource properties.",
+      "description": "Quota properties for an account.",
       "properties": {
         "freeTrial": {
           "$ref": "#/definitions/AccountFreeTrialProperties",
-          "description": "The Playwright service account quota resource free-trial properties."
+          "description": "The free-trial quota."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -965,8 +967,7 @@
         },
         "properties": {
           "$ref": "#/definitions/AccountUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -1018,11 +1019,11 @@
     },
     "FreeTrialProperties": {
       "type": "object",
-      "description": "The subscription quota resource free-trial properties.",
+      "description": "The free-trial properties.",
       "properties": {
         "accountId": {
           "type": "string",
-          "description": "The Playwright service account id.",
+          "description": "The playwright account id.",
           "readOnly": true
         },
         "state": {
@@ -1141,17 +1142,17 @@
           {
             "name": "Creating",
             "value": "Creating",
-            "description": "Creation in progress.."
+            "description": "Creation in progress"
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Deletion in progress.."
+            "description": "Deletion in progress"
           },
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "Change accepted for processing.."
+            "description": "Change accepted for processing"
           }
         ]
       },
@@ -1159,12 +1160,11 @@
     },
     "Quota": {
       "type": "object",
-      "description": "A subscription quota resource.",
+      "description": "A quota resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/QuotaProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1196,11 +1196,11 @@
     },
     "QuotaProperties": {
       "type": "object",
-      "description": "The subscription quota resource properties.",
+      "description": "Quota properties.",
       "properties": {
         "freeTrial": {
           "$ref": "#/definitions/FreeTrialProperties",
-          "description": "The subscription quota resource free-trial properties."
+          "description": "The free-trial quota."
         },
         "offeringType": {
           "$ref": "#/definitions/OfferingType",

@@ -1,0 +1,380 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myAccount"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutions/mySolution",
+            "name": "mySolution",
+            "type": "Microsoft.AzurePercept/accounts/solutions",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "parameters": [
+                {
+                  "name": "param1",
+                  "type": "string",
+                  "description": "some descriptions",
+                  "stringDefault": "mcr.microsoft.com/media/video-analyzer:1"
+                },
+                {
+                  "name": "param2",
+                  "type": "string",
+                  "description": "some descriptions",
+                  "stringDefault": "mcr.microsoft.com/azure-cognitive-services/vision/spatial-analysis:1.5.3"
+                },
+                {
+                  "name": "arrayParam",
+                  "type": "array",
+                  "description": "some descriptions",
+                  "arrayDefault": [
+                    {
+                      "a1": "a2",
+                      "b1": "b2"
+                    },
+                    {
+                      "b1": "b2",
+                      "c1": "c2"
+                    }
+                  ]
+                }
+              ],
+              "components": [
+                {
+                  "componentType": "IoTEdgeModule",
+                  "componentName": "avaedge",
+                  "capabilities": {},
+                  "configurations": {
+                    "edgeAgent.properties.desired": {
+                      "settings": {
+                        "image": "[parameters('param1')]",
+                        "createOptions": "{\"HostConfig\":{\"LogConfig\":{\"Type\":\"\",\"Config\":{\"max-size\":\"10m\",\"max-file\":\"10\"}},\"Binds\":[\"/var/media/:/var/media/\",\"/var/lib/videoanalyzer/:/var/lib/videoanalyzer\"],\"IpcMode\":\"host\",\"ShmSize\":1536870912}}"
+                      },
+                      "type": "docker",
+                      "version": "1.1",
+                      "status": "running",
+                      "restartPolicy": "always"
+                    },
+                    "properties.desired": {
+                      "applicationDataDirectory": "/var/lib/videoanalyzer",
+                      "diagnosticsEventsOutputName": "diagnostics",
+                      "operationalEventsOutputName": "operational",
+                      "logCategories": "application,events",
+                      "debugLogsDirectory": "/tmp/logs",
+                      "logLevel": "information",
+                      "allowUnsecuredEndpoints": true,
+                      "telemetryOptOut": false,
+                      "provisioningToken": "[listAvaPvsnToken()]"
+                    }
+                  }
+                },
+                {
+                  "componentType": "IoTEdgeModule",
+                  "componentName": "spatialanalysis",
+                  "capabilities": {
+                    "fabric.accelerator": [
+                      {
+                        "gpu": "Nvidia.T4"
+                      }
+                    ]
+                  },
+                  "configurations": {
+                    "edgeAgent.properties.desired": {
+                      "settings": {
+                        "image": "[parameters('param2')]",
+                        "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"50051/tcp\":[{\"HostPort\":\"50051\"}]},\"IpcMode\":\"host\",\"Binds\":[\"/tmp/.X11-unix:/tmp/.X11-unix\"],\"Runtime\":\"nvidia\",\"ShmSize\":536870912,\"LogConfig\":{\"Type\":\"json-file\",\"Config\":{\"max-size\":\"10m\",\"max-file\":\"200\"}}}}"
+                      },
+                      "type": "docker",
+                      "version": "1.0",
+                      "env": {
+                        "DISPLAY": {
+                          "value": ":0"
+                        },
+                        "ARCHON_SHARED_BUFFER_LIMIT": {
+                          "value": "377487360"
+                        },
+                        "ARCHON_LOG_LEVEL": {
+                          "value": "info"
+                        },
+                        "QT_X11_NO_MITSHM": {
+                          "value": "1"
+                        },
+                        "OMP_WAIT_POLICY": {
+                          "value": "PASSIVE"
+                        },
+                        "EULA": {
+                          "value": "accept"
+                        },
+                        "ARCHON_TELEMETRY_IOTHUB": {
+                          "value": "true"
+                        },
+                        "LAUNCHER_TYPE": {
+                          "value": "avaBackend"
+                        },
+                        "ARCHON_GRAPH_READY_TIMEOUT": {
+                          "value": "600"
+                        },
+                        "BILLING": {
+                          "value": "[listCvBillUrl()]"
+                        },
+                        "APIKEY": {
+                          "value": "[listCvApiKey()]"
+                        }
+                      },
+                      "status": "running",
+                      "restartPolicy": "always"
+                    }
+                  }
+                },
+                {
+                  "componentType": "IoTEdgeModule",
+                  "componentName": "CustomModule",
+                  "capabilities": {},
+                  "configurations": {
+                    "edgeAgent.properties.desired": {
+                      "settings": {
+                        "image": "myacr1.azurecr.io/custommodule:dev",
+                        "createOptions": "{\"HostConfig\":{\"LogConfig\":{\"Type\":\"\",\"Config\":{\"max-size\":\"10m\",\"max-file\":\"10\"}},\"IpcMode\":\"host\",\"ShmSize\":1536870912}}"
+                      },
+                      "type": "docker",
+                      "version": "1.1",
+                      "status": "running",
+                      "restartPolicy": "always",
+                      "env": {
+                        "DISPLAY": {
+                          "value": ":0"
+                        }
+                      }
+                    },
+                    "properties.desired": {
+                      "diagnosticsEventsOutputName": "diagnostics",
+                      "operationalEventsOutputName": "operational",
+                      "logCategories": "application,events",
+                      "debugLogsDirectory": "/tmp/logs",
+                      "logLevel": "information",
+                      "allowUnsecuredEndpoints": true,
+                      "telemetryOptOut": false
+                    }
+                  }
+                }
+              ],
+              "routes": {
+                "sensorToFilter": {
+                  "route": "FROM /messages/modules/SimulatedTemperatureSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/filtermodule/inputs/input1\")",
+                  "priority": 0,
+                  "timeToLiveSecs": 1800
+                },
+                "filterToIoTHub": {
+                  "route": "FROM /messages/modules/filtermodule/outputs/output1 INTO $upstream",
+                  "priority": 1,
+                  "timeToLiveSecs": 1800
+                }
+              },
+              "targetConfig": {
+                "perceptAgentConfigs": {
+                  "appInsightsConnectionStr": "[listAppInsightsConnString()]",
+                  "enableAzureMonitor": true,
+                  "logLevel": "Debug"
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutions/myOtherSolution",
+            "name": "myOtherSolution",
+            "type": "Microsoft.AzurePercept/accounts/solutions",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "parameters": [
+                {
+                  "name": "param1",
+                  "type": "string",
+                  "description": "some descriptions",
+                  "stringDefault": "mcr.microsoft.com/media/video-analyzer:1"
+                },
+                {
+                  "name": "param2",
+                  "type": "string",
+                  "description": "some descriptions",
+                  "stringDefault": "mcr.microsoft.com/azure-cognitive-services/vision/spatial-analysis:1.5.3"
+                },
+                {
+                  "name": "arrayParam",
+                  "type": "array",
+                  "description": "some descriptions",
+                  "arrayDefault": [
+                    {
+                      "a1": "a2",
+                      "b1": "b2"
+                    },
+                    {
+                      "b1": "b2",
+                      "c1": "c2"
+                    }
+                  ]
+                }
+              ],
+              "components": [
+                {
+                  "componentType": "IoTEdgeModule",
+                  "componentName": "avaedge",
+                  "capabilities": {},
+                  "configurations": {
+                    "edgeAgent.properties.desired": {
+                      "settings": {
+                        "image": "[parameters('param1')]",
+                        "createOptions": "{\"HostConfig\":{\"LogConfig\":{\"Type\":\"\",\"Config\":{\"max-size\":\"10m\",\"max-file\":\"10\"}},\"Binds\":[\"/var/media/:/var/media/\",\"/var/lib/videoanalyzer/:/var/lib/videoanalyzer\"],\"IpcMode\":\"host\",\"ShmSize\":1536870912}}"
+                      },
+                      "type": "docker",
+                      "version": "1.1",
+                      "status": "running",
+                      "restartPolicy": "always"
+                    },
+                    "properties.desired": {
+                      "applicationDataDirectory": "/var/lib/videoanalyzer",
+                      "diagnosticsEventsOutputName": "diagnostics",
+                      "operationalEventsOutputName": "operational",
+                      "logCategories": "application,events",
+                      "debugLogsDirectory": "/tmp/logs",
+                      "logLevel": "information",
+                      "allowUnsecuredEndpoints": true,
+                      "telemetryOptOut": false,
+                      "provisioningToken": "[listAvaPvsnToken()]"
+                    }
+                  }
+                },
+                {
+                  "componentType": "IoTEdgeModule",
+                  "componentName": "spatialanalysis",
+                  "capabilities": {
+                    "fabric.accelerator": [
+                      {
+                        "gpu": "Nvidia.T4"
+                      }
+                    ]
+                  },
+                  "configurations": {
+                    "edgeAgent.properties.desired": {
+                      "settings": {
+                        "image": "[parameters('param2')]",
+                        "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"50051/tcp\":[{\"HostPort\":\"50051\"}]},\"IpcMode\":\"host\",\"Binds\":[\"/tmp/.X11-unix:/tmp/.X11-unix\"],\"Runtime\":\"nvidia\",\"ShmSize\":536870912,\"LogConfig\":{\"Type\":\"json-file\",\"Config\":{\"max-size\":\"10m\",\"max-file\":\"200\"}}}}"
+                      },
+                      "type": "docker",
+                      "version": "1.0",
+                      "env": {
+                        "DISPLAY": {
+                          "value": ":0"
+                        },
+                        "ARCHON_SHARED_BUFFER_LIMIT": {
+                          "value": "377487360"
+                        },
+                        "ARCHON_LOG_LEVEL": {
+                          "value": "info"
+                        },
+                        "QT_X11_NO_MITSHM": {
+                          "value": "1"
+                        },
+                        "OMP_WAIT_POLICY": {
+                          "value": "PASSIVE"
+                        },
+                        "EULA": {
+                          "value": "accept"
+                        },
+                        "ARCHON_TELEMETRY_IOTHUB": {
+                          "value": "true"
+                        },
+                        "LAUNCHER_TYPE": {
+                          "value": "avaBackend"
+                        },
+                        "ARCHON_GRAPH_READY_TIMEOUT": {
+                          "value": "600"
+                        },
+                        "BILLING": {
+                          "value": "[listCvBillUrl()]"
+                        },
+                        "APIKEY": {
+                          "value": "[listCvApiKey()]"
+                        }
+                      },
+                      "status": "running",
+                      "restartPolicy": "always"
+                    }
+                  }
+                },
+                {
+                  "componentType": "IoTEdgeModule",
+                  "componentName": "CustomModule",
+                  "capabilities": {},
+                  "configurations": {
+                    "edgeAgent.properties.desired": {
+                      "settings": {
+                        "image": "myacr1.azurecr.io/custommodule:dev",
+                        "createOptions": "{\"HostConfig\":{\"LogConfig\":{\"Type\":\"\",\"Config\":{\"max-size\":\"10m\",\"max-file\":\"10\"}},\"IpcMode\":\"host\",\"ShmSize\":1536870912}}"
+                      },
+                      "type": "docker",
+                      "version": "1.1",
+                      "status": "running",
+                      "restartPolicy": "always",
+                      "env": {
+                        "DISPLAY": {
+                          "value": ":0"
+                        }
+                      }
+                    },
+                    "properties.desired": {
+                      "diagnosticsEventsOutputName": "diagnostics",
+                      "operationalEventsOutputName": "operational",
+                      "logCategories": "application,events",
+                      "debugLogsDirectory": "/tmp/logs",
+                      "logLevel": "information",
+                      "allowUnsecuredEndpoints": true,
+                      "telemetryOptOut": false
+                    }
+                  }
+                }
+              ],
+              "routes": {
+                "sensorToFilter": {
+                  "route": "FROM /messages/modules/SimulatedTemperatureSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/filtermodule/inputs/input1\")",
+                  "priority": 0,
+                  "timeToLiveSecs": 1800
+                },
+                "filterToIoTHub": {
+                  "route": "FROM /messages/modules/filtermodule/outputs/output1 INTO $upstream",
+                  "priority": 1,
+                  "timeToLiveSecs": 1800
+                }
+              },
+              "targetConfig": {
+                "perceptAgentConfigs": {
+                  "appInsightsConnectionStr": "[listAppInsightsConnString()]",
+                  "enableAzureMonitor": true,
+                  "logLevel": "Debug"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

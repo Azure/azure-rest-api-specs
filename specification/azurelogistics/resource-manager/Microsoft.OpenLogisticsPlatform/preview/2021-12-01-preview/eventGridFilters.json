@@ -1,0 +1,521 @@
+{
+  "x-generator": "NSwag v13.2.5.0 (NJsonSchema v10.1.7.0 (Newtonsoft.Json v12.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "OSCPControlPlaneServiceAPI",
+    "description": "REST APIs for OSCP Control Plane Service",
+    "version": "2021-12-01-preview"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/workspaces/{workspaceName}/eventGridFilters/{eventGridFilterName}": {
+      "get": {
+        "tags": [
+          "EventGridFilter"
+        ],
+        "operationId": "EventGridWorkspaceFilter_Get",
+        "x-ms-examples": {
+          "EventGridFilter Get": {
+            "$ref": "./examples/EventGridWorkspaceFilter_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "workspaces.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventGridFilterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilter"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EventGridFilter"
+        ],
+        "operationId": "EventGridWorkspaceFilter_Put",
+        "x-ms-examples": {
+          "EventGridFilter Put": {
+            "$ref": "./examples/EventGridWorkspaceFilter_Put.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "workspaces.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventGridFilterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "eventGridFilter",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventGridFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilter"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false
+      },
+      "delete": {
+        "tags": [
+          "EventGridFilter"
+        ],
+        "operationId": "EventGridWorkspaceFilter_Delete",
+        "x-ms-examples": {
+          "EventGridFilter Delete": {
+            "$ref": "./examples/EventGridWorkspaceFilter_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "workspaces.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventGridFilterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/workspaces/{workspaceName}/eventGridFilters": {
+      "get": {
+        "tags": [
+          "EventGridFilter"
+        ],
+        "operationId": "EventGridWorkspaceFilter_List",
+        "x-ms-examples": {
+          "EventGridFilter List": {
+            "$ref": "./examples/EventGridWorkspaceFilter_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "workspaces.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterList"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/applicationManagers/{applicationManagerName}/eventGridFilters/{eventGridFilterName}": {
+      "get": {
+        "tags": [
+          "EventGridFilter"
+        ],
+        "operationId": "EventGridApplicationManagerFilter_Get",
+        "x-ms-examples": {
+          "EventGridFilter Get": {
+            "$ref": "./examples/EventGridApplicationManagerFilter_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "applicationManagers.json#/parameters/ApplicationManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventGridFilterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilter"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EventGridFilter"
+        ],
+        "operationId": "EventGridApplicationManagerFilter_Put",
+        "x-ms-examples": {
+          "EventGridFilter Put": {
+            "$ref": "./examples/EventGridApplicationManagerFilter_Put.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "applicationManagers.json#/parameters/ApplicationManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventGridFilterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "eventGridFilter",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventGridFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilter"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false
+      },
+      "delete": {
+        "tags": [
+          "EventGridFilter"
+        ],
+        "operationId": "EventGridApplicationManagerFilter_Delete",
+        "x-ms-examples": {
+          "EventGridFilter Delete": {
+            "$ref": "./examples/EventGridApplicationManagerFilter_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "applicationManagers.json#/parameters/ApplicationManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventGridFilterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/applicationManagers/{applicationManagerName}/eventGridFilters": {
+      "get": {
+        "tags": [
+          "EventGridFilter"
+        ],
+        "operationId": "EventGridApplicationManagerFilter_List",
+        "x-ms-examples": {
+          "EventGridFilter List": {
+            "$ref": "./examples/EventGridApplicationManagerFilter_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "applicationManagers.json#/parameters/ApplicationManagerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterList"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EventGridFilter": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "filter": {
+              "$ref": "#/definitions/Filter"
+            },
+            "subscriberIdentityInfo": {
+              "$ref": "#/definitions/SubscriberIdentityInfo"
+            },
+            "provisioningState": {
+              "description": "The provisioning state of the resource.",
+              "readOnly": true,
+              "$ref": "#/definitions/EventGridFilterProvisioningState"
+            }
+          }
+        }
+      }
+    },
+    "Filter": {
+      "type": "object",
+      "description": "Configuration of the EventGrid filter",
+      "properties": {
+        "subjectBeginsWith": {
+          "description": "Filter configuration: Removes all events with a subject that does not start with this string",
+          "type": "string"
+        },
+        "subjectEndsWith": {
+          "description": "Filter configuration: Removes all events with a subject that does not end with this string",
+          "type": "string"
+        },
+        "includedEventTypes": {
+          "description": "Event types subscribed",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SubscriberIdentityInfo": {
+      "type": "object",
+      "properties": {
+        "clientPrincipalId": {
+          "type": "string"
+        },
+        "clientObjectId": {
+          "type": "string"
+        },
+        "clientTenantId": {
+          "type": "string"
+        },
+        "clientApplicationId": {
+          "type": "string"
+        },
+        "clientAuthorizationSource": {
+          "type": "string"
+        }
+      }
+    },
+    "EventGridFilterList": {
+      "description": "The list of event grid filter resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of event grid filter resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of event grid filters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventGridFilter"
+          }
+        }
+      }
+    },
+    "EventGridFilterProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "EventGridFilterNameParameter": {
+      "type": "string",
+      "name": "eventGridFilterName",
+      "description": "The name of resource. This is the name of your Azure Supply Chain Service's workspace.",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

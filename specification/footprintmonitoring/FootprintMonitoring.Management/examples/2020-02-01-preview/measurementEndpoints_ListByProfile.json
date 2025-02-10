@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2020-02-01-preview",
+    "profileName": "fpProfile1",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "",
+        "value": [
+          {
+            "name": "endpoint1",
+            "type": "Microsoft.FootprintMonitoring/profiles/measurementEndpoints",
+            "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/profiles/fpProfile1/measurementEndpoints/endpoint1",
+            "properties": {
+              "coldPathSamplingPercentageRateOverride": 100,
+              "conditions": [
+                {
+                  "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/profiles/fpProfile1/measurementEndpoints/endpoint1/conditions/condition0"
+                }
+              ],
+              "endTimeUTC": null,
+              "endpoint": "wst.contoso.com",
+              "endpointId": "d075a93bd13e491b91cde7f3a8ecfe16",
+              "experimentId": null,
+              "hotPathSamplingPercentageRate": 0,
+              "measurementType": 2,
+              "metadata": "",
+              "objectPath": "/trans.gif",
+              "startTimeUTC": null,
+              "warmPathSamplingPercentageRate": 100,
+              "weight": 10
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "measurementEndpoints_ListByProfile",
+  "title": "List all the measurement endpoints under a Footprint profile."
+}

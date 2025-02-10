@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01-privatepreview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso",
+    "body": {
+      "tags": {
+        "CostCode": "12345"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/devcenters/Contoso",
+        "name": "Contoso",
+        "type": "Microsoft.Fidalgo/devcenters",
+        "tags": {
+          "CostCode": "12345"
+        },
+        "location": "centralus",
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-11T22:00:08.896Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-11T22:00:10.896Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/devcenters/Contoso",
+        "name": "Contoso",
+        "type": "Microsoft.Fidalgo/devcenters",
+        "tags": {
+          "CostCode": "12345"
+        },
+        "location": "centralus",
+        "properties": {
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-11T22:00:08.896Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-11T22:00:10.896Z"
+        }
+      }
+    }
+  }
+}

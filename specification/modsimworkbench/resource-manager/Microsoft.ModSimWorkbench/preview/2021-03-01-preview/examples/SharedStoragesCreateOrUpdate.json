@@ -1,0 +1,72 @@
+{
+  "title": "SharedStorages_CreateOrUpdate",
+  "operationId": "SharedStorages_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2021-03-01-preview",
+    "workbenchName": "test-workbench",
+    "sharedStorageName": "test-storage",
+    "resource": {
+      "location": "Central US",
+      "properties": {
+        "capacityAllocated": 4,
+        "performanceTier": "Standard",
+        "chambers": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber1"
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber2"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-storage",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/sharedStorages/test-storage",
+        "type": "Microsoft.ModSimWorkbench/workbenches/sharedStorages",
+        "location": "Central US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "capacityAllocated": 4,
+          "performanceTier": "Standard",
+          "capacityUsed": 2,
+          "chambers": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber1"
+            },
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber2"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-storage",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/sharedStorages/test-storage",
+        "type": "Microsoft.ModSimWorkbench/workbenches/sharedStorages",
+        "location": "Central US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "capacityAllocated": 4,
+          "performanceTier": "Standard",
+          "capacityUsed": 2,
+          "chambers": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber1"
+            },
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber2"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

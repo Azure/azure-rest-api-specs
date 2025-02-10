@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "$skipToken": "1",
+    "$top": "100",
+    "api-version": "2024-12-15-preview",
+    "offerGuid": "00000000-0000-0000-0000-000000000001",
+    "reportCreatorTenantId": "00000000-0000-0000-0000-000000000000",
+    "reportName": "testReportName",
+    "snapshotName": "snapshotName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/reports/testReportName/snapshots/snapshotName/controls?api-version=2024-12-15-preview&skipToken=1&top=100",
+        "value": [
+          {
+            "name": "Operational_Security_75",
+            "type": "Microsoft.AppComplianceAutomation/reports/snapshots/controls",
+            "id": "/provider/Microsoft.AppComplianceAutomation/reports/testReportName/snapshots/testSnapshot/controls/Operational_Security_75",
+            "properties": {
+              "controlDescription": "Provide demonstrable evidence that all member of the incident response team have completed annual training or a table top exercise",
+              "controlDescriptionHyperLink": "https://aka.ms/acat/m365cert/operational/control73",
+              "controlFullName": "Provide demonstrable evidence that all member of the incident response team have completed annual training or a table top exercise",
+              "controlId": "Operational_Security_75",
+              "controlName": "Provide demonstrable evidence that all member of the incident response team have completed annual training or a table top exercise",
+              "controlStatus": "Passed",
+              "responsibilities": [
+                {
+                  "evidenceFiles": [
+                    "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/reports/reportABC/fileName?api-version=2024-12-15-preview"
+                  ],
+                  "failedResourceCount": 0,
+                  "guidance": "Please upload the screen capture file to ACAT service.",
+                  "justification": "Here is my evidence files",
+                  "recommendationList": [
+                    {
+                      "recommendationId": "failed_reason_1",
+                      "recommendationShortName": "Invalid TLS Config",
+                      "recommendationSolutions": [
+                        {
+                          "isRecommendSolution": "true",
+                          "recommendationSolutionContent": "Setting minimal TLS version to 1.2 improves security by ensuring your SQL Managed Instance can only be accessed from clients using TLS 1.2. Using versions of TLS less than 1.2 is not recommended since they have well documented security vulnerabilities",
+                          "recommendationSolutionIndex": "1"
+                        }
+                      ]
+                    },
+                    {
+                      "recommendationId": "failed_reason_2",
+                      "recommendationShortName": "Invalid AWS TLS Config",
+                      "recommendationSolutions": [
+                        {
+                          "isRecommendSolution": "true",
+                          "recommendationSolutionContent": "Open the AWS related service, and set its TLS version to 1.2 or higher version.",
+                          "recommendationSolutionIndex": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "resourceList": [
+                    {
+                      "recommendationIds": [
+                        "failed_reason_1"
+                      ],
+                      "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService",
+                      "resourceOrigin": "Azure",
+                      "resourceStatus": "Unhealthy",
+                      "resourceStatusChangeDate": "2023-01-12T16:17:20.150Z",
+                      "resourceType": "Microsoft.SignalRService/SignalR"
+                    },
+                    {
+                      "accountId": "000000000000",
+                      "recommendationIds": [
+                        "failed_reason_2"
+                      ],
+                      "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/acat-aws/providers/microsoft.security/securityconnectors/acatawsconnector/securityentitydata/aws-iam-user-testuser",
+                      "resourceOrigin": "AWS",
+                      "resourceStatus": "Unhealthy",
+                      "resourceStatusChangeDate": "2023-01-12T16:17:20.150Z",
+                      "resourceType": "iam.user"
+                    }
+                  ],
+                  "responsibilityDescription": "Restrict access to the Kubernetes Service Management API by granting API access only to IP addresses in specific ranges. It is recommended to limit access to authorized IP ranges to ensure that only applications from allowed networks can access the cluster.",
+                  "responsibilityEnvironment": "Azure",
+                  "responsibilityId": "authorized_ip_ranges_should_be_defined_on_kubernetes_services",
+                  "responsibilitySeverity": "High",
+                  "responsibilityStatus": "Passed",
+                  "responsibilityTitle": "Authorized IP ranges should be defined on Kubernetes Services",
+                  "responsibilityType": "Automated",
+                  "totalResourceCount": 1
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2021-05-14T22:34:55.4499903Z",
+              "createdBy": "00000000-0000-0000-0000-000000000000",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-05-14T22:34:55.4499903Z",
+              "lastModifiedBy": "00000000-0000-0000-0000-000000000000",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Control_List",
+  "title": "Control_List"
+}

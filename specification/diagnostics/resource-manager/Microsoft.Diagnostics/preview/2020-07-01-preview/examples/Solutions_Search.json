@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2020-07-01-preview",
+    "scope": "subscriptions/mySubscription",
+    "DiscoverRequest": {
+      "sapIds": [
+        "c334a302-aa5c-e950-5656-755d0e981c7e"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "solutionId": "DefaultApolloReport_c334a302-aa5c-e950-5656-755d0e981c7e",
+            "solutionType": "Apollo",
+            "description": "This is a default apollo definition. Returned when no definition is found for the input parameters.",
+            "targetKeywords": null,
+            "requiredParameterSets": null
+          },
+          {
+            "solutionId": "AzureKBSearch",
+            "solutionType": "AzureKB",
+            "description": "Use the Solution id to invoke the AzureKB search giving your problem search text.",
+            "targetKeywords": [
+              "AzureKB"
+            ],
+            "requiredParameterSets": [
+              [
+                "SearchText",
+                "Top",
+                "SearchTypes"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

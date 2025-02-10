@@ -1,0 +1,40 @@
+{
+  "title": "GooglePubSubSourceConnector Get",
+  "operationId": "ConnectorOperations_Get",
+  "parameters": {
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "resourceGroupName": "abcd",
+    "api-version": "2024-05-01-preview",
+    "name": "googlePubSubSourceConnector1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/abcd/providers/Microsoft.MessagingConnectors/connectors/googlePubSubSourceConnector1",
+        "name": "googlePubSubSourceConnector1",
+        "type": "Microsoft.MessagingConnectors/connector",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "connectorProperties": {
+            "connectorType": "GooglePubSubSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "JsonConverter",
+            "projectId": "projectId1",
+            "subscriptionName": "subscriptionName1",
+            "connectorState": "Running"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

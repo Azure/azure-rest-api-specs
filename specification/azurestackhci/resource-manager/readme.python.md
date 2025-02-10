@@ -11,7 +11,13 @@ namespace: azure.mgmt.azurestackhci
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
-``` yaml $(python)
+
+```yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/azurestackhci/azure-mgmt-azurestackhci/azure/mgmt/azurestackhci
+```
+
+```yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
 ```

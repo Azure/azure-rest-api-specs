@@ -1,0 +1,485 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EnergyDataPlatform Management Service APIs",
+    "description": "EnergyDataPlatform Management Rest API spec.",
+    "version": "2022-11-28-preview"
+  },
+  "host": "management.azure.com",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.EnergyDataPlatform/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists the available operations of Microsoft.EnergyDataPlatform services resource provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EnergyDataPlatform/energyServices": {
+      "get": {
+        "tags": [
+          "UserRPEnergyService"
+        ],
+        "operationId": "EnergyServices_ListBySubscription",
+        "description": "Lists a collection of Energy services resources under the given Azure Subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnergyServiceList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "EnergyDataPlatform_ListBySubscription": {
+            "$ref": "./examples/EnergyDataPlatform_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnergyDataPlatform/energyServices": {
+      "get": {
+        "tags": [
+          "UserRPEnergyService"
+        ],
+        "operationId": "EnergyServices_ListByResourceGroup",
+        "description": "List Energy services resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnergyServiceList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "EnergyDataPlatform_ListByResourceGroup": {
+            "$ref": "./examples/EnergyDataPlatform_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnergyDataPlatform/energyServices/{energyServiceName}": {
+      "get": {
+        "tags": [
+          "UserRPEnergyService"
+        ],
+        "description": "Returns Energy services resource for a given name.",
+        "operationId": "EnergyServices_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnergyService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyDataPlatform_Get": {
+            "$ref": "./examples/EnergyDataPlatform_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UserRPEnergyService"
+        ],
+        "description": "Method that gets called if subscribed for ResourceCreationBegin trigger.",
+        "operationId": "EnergyServices_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body.",
+            "schema": {
+              "description": "Request body.",
+              "$ref": "#/definitions/EnergyService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Energy services resource created.",
+            "schema": {
+              "$ref": "#/definitions/EnergyService"
+            }
+          },
+          "201": {
+            "description": "The Energy services resource will be created asynchronously",
+            "schema": {
+              "$ref": "#/definitions/EnergyService"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyDataPlatform_Create": {
+            "$ref": "./examples/EnergyDataPlatform_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "EnergyServices_Update",
+        "description": "Method that gets called if subscribed for Resource Patching or Update.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EnergyResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the Energy services resource.",
+            "schema": {
+              "$ref": "#/definitions/EnergyService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyDataPlatform_Update": {
+            "$ref": "./examples/EnergyDataPlatform_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes Energy services resource",
+        "operationId": "EnergyServices_Delete",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "The Energy services resource will be deleted asynchronously"
+          },
+          "204": {
+            "description": "Returned when the operation returns no content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyDataPlatform_Delete": {
+            "$ref": "./examples/EnergyDataPlatform_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataPartitionNames": {
+      "type": "object",
+      "description": "The list of Energy services resource's Data Partition Names.",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ManagedRGConfiguration": {
+      "description": "Managed resource group configuration",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name"
+        },
+        "location": {
+          "type": "string",
+          "description": "Managed resource group location"
+        }
+      }
+    },
+    "EnergyServiceList": {
+      "description": "The list of Energy services resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Energy services resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Energy services resources.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/EnergyService"
+          }
+        }
+      }
+    },
+    "EnergyResourceUpdate": {
+      "description": "The resource model definition used for updating a tracked ARM resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "type": "object",
+      "description": "Properties to configure Settings Blade",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Client Id or the app id used for authentication"
+        },
+        "dataPartitionNames": {
+          "type": "array",
+          "description": "List of data partitions to be created",
+          "items": {
+            "$ref": "#/definitions/DataPartitionNames"
+          },
+          "x-ms-identifiers": []
+        },
+        "clusterSize": {
+          "enum": [
+            "CostOptimised",
+            "Standard",
+            "HighSpec"
+          ],
+          "type": "string",
+          "description": "Size of the cluster to be used",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EnergyServiceProperties": {
+      "type": "object",
+      "description": "Properties for the EnergyService",
+      "properties": {
+        "provisioningState": {
+          "description": "State of the resource to be provisioned",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "settings": {
+          "type": "object",
+          "description": "Properties to configure network blade",
+          "$ref": "#/definitions/Settings"
+        },
+        "managedResourceGroupConfiguration": {
+          "description": "Managed resource group configuration",
+          "$ref": "#/definitions/ManagedRGConfiguration"
+        }
+      }
+    },
+    "EnergyService": {
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "description": "Definition of the energy service",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "description": "ETag",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/EnergyServiceProperties"
+        }
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "parameters": {
+    "resourceNameParameter": {
+      "name": "energyServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource name.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

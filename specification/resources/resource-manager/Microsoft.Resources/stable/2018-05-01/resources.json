@@ -1394,7 +1394,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "The number of results to return. If null is passed, returns all resources."
+            "description": "The number of results to return. If null is passed, returns all resource groups."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1470,8 +1470,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation.",
-            "x-ms-api-version": false
+            "description": "The API version to use for the operation."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1538,8 +1537,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation.",
-            "x-ms-api-version": false
+            "description": "The API version to use for the operation."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1610,8 +1608,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation.",
-            "x-ms-api-version": false
+            "description": "The API version to use for the operation."
           },
           {
             "name": "parameters",
@@ -1697,8 +1694,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation.",
-            "x-ms-api-version": false
+            "description": "The API version to use for the operation."
           },
           {
             "name": "parameters",
@@ -1778,8 +1774,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation.",
-            "x-ms-api-version": false
+            "description": "The API version to use for the operation."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1816,8 +1811,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation.",
-            "x-ms-api-version": false
+            "description": "The API version to use for the operation."
           }
         ],
         "responses": {
@@ -1849,8 +1843,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation.",
-            "x-ms-api-version": false
+            "description": "The API version to use for the operation."
           }
         ],
         "responses": {
@@ -1886,8 +1879,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation.",
-            "x-ms-api-version": false
+            "description": "The API version to use for the operation."
           },
           {
             "name": "parameters",
@@ -1938,8 +1930,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation.",
-            "x-ms-api-version": false
+            "description": "The API version to use for the operation."
           },
           {
             "name": "parameters",
@@ -1984,8 +1975,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation.",
-            "x-ms-api-version": false
+            "description": "The API version to use for the operation."
           }
         ],
         "responses": {
@@ -2662,12 +2652,6 @@
           },
           "description": "The API version."
         },
-        "zoneMappings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ZoneMapping"
-          }
-        },
         "properties": {
           "type": "object",
           "additionalProperties": {
@@ -2818,11 +2802,6 @@
         "onErrorDeployment": {
           "$ref": "#/definitions/OnErrorDeploymentExtended",
           "description": "The deployment on error behavior."
-        },
-        "error": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
-          "description": "The deployment error."
         }
       },
       "description": "Deployment properties with additional details."
@@ -3577,20 +3556,6 @@
         "templateHash": {
           "type": "string",
           "description": "The template hash."
-        }
-      }
-    },
-    "ZoneMapping": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The location of the zone mapping."
-        },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     }

@@ -1,0 +1,61 @@
+{
+  "operationId": "Workloads_CreateOrUpdate",
+  "title": "Workloads_CreateOrUpdate",
+  "parameters": {
+    "location": "Central US",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2024-05-01-preview",
+    "workbenchName": "test-workbench",
+    "chamberName": "test-chamber",
+    "workloadName": "test-workload",
+    "resource": {
+      "zones": [
+        "2"
+      ],
+      "location": "Central US",
+      "properties": {
+        "edaType": "Semiconductor",
+        "vmSize": "Standard_D4d_v4"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-workload",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/test-chamber/workloads/test-workload",
+        "type": "Microsoft.ModSimWorkbench/workbenches/chambers/workloads",
+        "location": "Central US",
+        "zones": [
+          "2"
+        ],
+        "properties": {
+          "provisioningState": "Succeeded",
+          "edaType": "Semiconductor",
+          "vmSize": "Standard_D4d_v4"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2021-10-01&operationResultResponseType=Location",
+        "x-ms-async-operation-timeout": "PT30M"
+      },
+      "body": {
+        "name": "test-workload",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/test-chamber/workloads/test-workload",
+        "type": "Microsoft.ModSimWorkbench/workbenches/chambers/workloads",
+        "location": "Central US",
+        "zones": [
+          "2"
+        ],
+        "properties": {
+          "provisioningState": "Succeeded",
+          "vmSize": "Standard_D4d_v4",
+          "edaType": "Semiconductor"
+        }
+      }
+    }
+  }
+}

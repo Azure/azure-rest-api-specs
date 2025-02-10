@@ -19,7 +19,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Microsoft Entra ID OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -83,11 +83,6 @@
         "operationId": "Operations_List",
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
         ],
         "responses": {
           "200": {
@@ -966,7 +961,7 @@
         "tags": [
           "SubAccount"
         ],
-        "summary": "Delete a sub account resource. This delete operation can take upto 10 minutes to complete.",
+        "summary": "Delete a sub account resource.",
         "operationId": "SubAccount_Delete",
         "produces": [
           "application/json"
