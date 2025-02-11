@@ -57,6 +57,10 @@ tag: package-resources-2024-03
 tag: package-resources-2024-07
 ```
 
+``` yaml $(package-resources)
+tag: package-resources-2024-11
+```
+
 ``` yaml $(package-subscriptions)
 tag: package-subscriptions-2022-12
 ```
@@ -221,6 +225,15 @@ These settings apply only when `--tag=package-resources-2024-07` is specified on
 ``` yaml $(tag) == 'package-resources-2024-07'
 input-file:
   - Microsoft.Resources/stable/2024-07-01/resources.json
+```
+
+### Tag: package-resources-2024-11
+
+These settings apply only when `--tag=package-resources-2024-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2024-11'
+input-file:
+  - Microsoft.Resources/stable/2024-11-01/resources.json
 ```
 
 ### Tag: package-2022-12
@@ -1301,7 +1314,7 @@ directive:
     reason: The resource is managed in a management group level (instead of inside a resource group)
   - suppress: TopLevelResourcesListBySubscription
     from: changes.json
-    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios.
   - from: changes.json
     suppress: OperationsAPIImplementation
     where: $.paths
@@ -1312,7 +1325,7 @@ directive:
     reason: 'Duplicate Operations API causes generation issues'
   - suppress: TopLevelResourcesListBySubscription
     from: snapshots.json
-    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios.
   - suppress: RequiredReadOnlySystemData
     from: changes.json
     reason: System Metadata from a change resource perspective is irrelevant
@@ -1599,6 +1612,9 @@ directive:
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: policyAssignments.json
     reason: "Policy assignments can have a manged identity associated with them. This requires a location."
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: resources.json
+    reason: "The deployments resource type is ProxyOnly."
 ```
 
 ---
@@ -1612,7 +1628,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

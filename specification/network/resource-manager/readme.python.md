@@ -19,3 +19,14 @@ only-path-and-body-params-positional: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network
 ```
+
+``` yaml $(python)
+directive:
+  - from: swagger-document
+    where: $
+    transform: $.host = "management.azure.com"
+  
+  - from: swagger-document
+    where: $
+    transform: $.schemes = ["https"]
+```
