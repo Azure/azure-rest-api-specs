@@ -4,188 +4,445 @@ import "./main.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
-using Search;
 
-@TypeSpec.Versioning.useDependency(Search.Versions.v2024_07_01)
+@TypeSpec.Versioning.useDependency(Azure.Search.Documents.Versions.v2024_07_01)
 namespace Customizations;
 
-@@access(VectorSearchAlgorithmKind, Access.public);
-@@usage(VectorSearchAlgorithmKind, Usage.input);
-@@access(VectorSearchVectorizerKind, Access.public);
-@@usage(VectorSearchVectorizerKind, Usage.input);
-@@clientName(VectorQuery.k, "kNearestNeighbors");
-@@clientName(SearchDocumentsResult.value, "results");
-@@clientName(SearchRequest.count, "includeTotalResultCount");
-@@clientName(SearchRequest.highlight, "highlightFields");
-@@clientName(SearchRequest.search, "searchText");
-@@clientName(SearchRequest.orderby, "orderBy");
-@@clientName(SuggestDocumentsResult.value, "results");
-@@clientName(SuggestRequest.fuzzy, "useFuzzyMatching");
-@@clientName(SuggestRequest.orderby, "orderBy");
-@@clientName(SuggestRequest.search, "searchText");
-@@clientName(IndexBatch.value, "actions");
-@@clientName(IndexDocumentsResult.value, "results");
-@@clientName(IndexingResult.status, "succeeded");
-@@clientName(AutocompleteResult.value, "results");
-@@clientName(AutocompleteRequest.search, "searchText");
-@@clientName(AutocompleteRequest.fuzzy, "useFuzzyMatching");
-@@clientName(ListDataSourcesResult.value, "dataSources");
-@@clientName(SearchResourceEncryptionKey.keyVaultKeyName, "keyName");
-@@clientName(SearchResourceEncryptionKey.keyVaultKeyVersion, "keyVersion");
-@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri");
-@@clientName(SearchIndexer.disabled, "isDisabled");
-@@clientName(ListIndexersResult.value, "indexers");
-@@clientName(IndexerExecutionResult.itemsProcessed, "itemCount");
-@@clientName(IndexerExecutionResult.itemsFailed, "failedItemCount");
-@@clientName(SearchIndexerSkillset.cognitiveServices,
+@@access(Azure.Search.Documents.Indexes.VectorSearchAlgorithmKind,
+  Access.public
+);
+@@usage(Azure.Search.Documents.Indexes.VectorSearchAlgorithmKind, Usage.input);
+@@access(Azure.Search.Documents.Indexes.VectorSearchVectorizerKind,
+  Access.public
+);
+@@usage(Azure.Search.Documents.Indexes.VectorSearchVectorizerKind, Usage.input);
+@@clientName(Azure.Search.Documents.VectorQuery.k, "kNearestNeighbors");
+@@clientName(Azure.Search.Documents.SearchDocumentsResult.value, "results");
+@@clientName(Azure.Search.Documents.SearchRequest.count,
+  "includeTotalResultCount"
+);
+@@clientName(Azure.Search.Documents.SearchRequest.highlight, "highlightFields");
+@@clientName(Azure.Search.Documents.SearchRequest.search, "searchText");
+@@clientName(Azure.Search.Documents.SearchRequest.orderby, "orderBy");
+@@clientName(Azure.Search.Documents.SuggestDocumentsResult.value, "results");
+@@clientName(Azure.Search.Documents.SuggestRequest.fuzzy, "useFuzzyMatching");
+@@clientName(Azure.Search.Documents.SuggestRequest.orderby, "orderBy");
+@@clientName(Azure.Search.Documents.SuggestRequest.search, "searchText");
+@@clientName(Azure.Search.Documents.IndexBatch.value, "actions");
+@@clientName(Azure.Search.Documents.IndexDocumentsResult.value, "results");
+@@clientName(Azure.Search.Documents.IndexingResult.status, "succeeded");
+@@clientName(Azure.Search.Documents.AutocompleteResult.value, "results");
+@@clientName(Azure.Search.Documents.AutocompleteRequest.search, "searchText");
+@@clientName(Azure.Search.Documents.AutocompleteRequest.fuzzy,
+  "useFuzzyMatching"
+);
+@@clientName(Azure.Search.Documents.Indexes.ListDataSourcesResult.value,
+  "dataSources"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchResourceEncryptionKey.keyVaultKeyName,
+  "keyName"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchResourceEncryptionKey.keyVaultKeyVersion,
+  "keyVersion"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchResourceEncryptionKey.keyVaultUri,
+  "vaultUri"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchIndexer.disabled,
+  "isDisabled"
+);
+@@clientName(Azure.Search.Documents.Indexes.ListIndexersResult.value,
+  "indexers"
+);
+@@clientName(Azure.Search.Documents.Indexes.IndexerExecutionResult.itemsProcessed,
+  "itemCount"
+);
+@@clientName(Azure.Search.Documents.Indexes.IndexerExecutionResult.itemsFailed,
+  "failedItemCount"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchIndexerSkillset.cognitiveServices,
   "cognitiveServicesAccount"
 );
-@@clientName(SearchIndexerSkillset.indexProjections, "indexProjection");
-@@clientName(ListSkillsetsResult.value, "skillsets");
-@@clientName(ListSynonymMapsResult.value, "synonymMaps");
-@@clientName(SearchIndex.semantic, "semanticSearch");
-@@clientName(SearchField.dimensions, "vectorSearchDimensions");
-@@clientName(SearchField.vectorSearchProfile, "vectorSearchProfileName");
-@@clientName(SearchField.vectorEncoding, "vectorEncodingFormat");
-@@clientName(ScoringProfile.text, "textWeights");
-@@clientName(SemanticSearch.defaultConfiguration, "defaultConfigurationName");
-@@clientName(SemanticPrioritizedFields.prioritizedContentFields,
+@@clientName(Azure.Search.Documents.Indexes.SearchIndexerSkillset.indexProjections,
+  "indexProjection"
+);
+@@clientName(Azure.Search.Documents.Indexes.ListSkillsetsResult.value,
+  "skillsets"
+);
+@@clientName(Azure.Search.Documents.Indexes.ListSynonymMapsResult.value,
+  "synonymMaps"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchIndex.semantic,
+  "semanticSearch"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchField.dimensions,
+  "vectorSearchDimensions"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchField.vectorSearchProfile,
+  "vectorSearchProfileName"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchField.vectorEncoding,
+  "vectorEncodingFormat"
+);
+@@clientName(Azure.Search.Documents.Indexes.ScoringProfile.text, "textWeights");
+@@clientName(Azure.Search.Documents.Indexes.SemanticSearch.defaultConfiguration,
+  "defaultConfigurationName"
+);
+@@clientName(Azure.Search.Documents.Indexes.SemanticPrioritizedFields.prioritizedContentFields,
   "contentFields"
 );
-@@clientName(SemanticPrioritizedFields.prioritizedKeywordsFields,
+@@clientName(Azure.Search.Documents.Indexes.SemanticPrioritizedFields.prioritizedKeywordsFields,
   "keywordsFields"
 );
-@@clientName(VectorSearchProfile.algorithm, "algorithmConfigurationName");
-@@clientName(VectorSearchProfile.vectorizer, "vectorizerName");
-@@clientName(VectorSearchProfile.compression, "compressionName");
-@@clientName(VectorSearchVectorizer.name, "vectorizerName");
-@@clientName(VectorSearchCompression.name, "compressionName");
-@@clientName(ListIndexesResult.value, "indexes");
-@@clientName(SearchServiceCounters.documentCount, "documentCounter");
-@@clientName(SearchServiceCounters.indexesCount, "indexCounter");
-@@clientName(SearchServiceCounters.indexersCount, "indexerCounter");
-@@clientName(SearchServiceCounters.dataSourcesCount, "dataSourceCounter");
-@@clientName(SearchServiceCounters.storageSize, "storageSizeCounter");
-@@clientName(SearchServiceCounters.synonymMaps, "synonymMapCounter");
-@@clientName(SearchServiceCounters.skillsetCount, "skillsetCounter");
-@@clientName(SearchServiceCounters.vectorIndexSize, "vectorIndexSizeCounter");
-@@clientName(SearchServiceLimits.maxStoragePerIndex,
+@@clientName(Azure.Search.Documents.Indexes.VectorSearchProfile.algorithm,
+  "algorithmConfigurationName"
+);
+@@clientName(Azure.Search.Documents.Indexes.VectorSearchProfile.vectorizer,
+  "vectorizerName"
+);
+@@clientName(Azure.Search.Documents.Indexes.VectorSearchProfile.compression,
+  "compressionName"
+);
+@@clientName(Azure.Search.Documents.Indexes.VectorSearchVectorizer.name,
+  "vectorizerName"
+);
+@@clientName(Azure.Search.Documents.Indexes.VectorSearchCompression.name,
+  "compressionName"
+);
+@@clientName(Azure.Search.Documents.Indexes.ListIndexesResult.value, "indexes");
+@@clientName(Azure.Search.Documents.Indexes.SearchServiceCounters.documentCount,
+  "documentCounter"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchServiceCounters.indexesCount,
+  "indexCounter"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchServiceCounters.indexersCount,
+  "indexerCounter"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchServiceCounters.dataSourcesCount,
+  "dataSourceCounter"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchServiceCounters.storageSize,
+  "storageSizeCounter"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchServiceCounters.synonymMaps,
+  "synonymMapCounter"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchServiceCounters.skillsetCount,
+  "skillsetCounter"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchServiceCounters.vectorIndexSize,
+  "vectorIndexSizeCounter"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchServiceLimits.maxStoragePerIndex,
   "maxStoragePerIndexInBytes"
 );
-@@clientName(PatternAnalyzer.lowercase, "lowerCaseTerms");
-@@clientName(PathHierarchyTokenizerV2.reverse, "reverseTokenOrder");
-@@clientName(PathHierarchyTokenizerV2.skip, "numberOfTokensToSkip");
-@@clientName(CommonGramTokenFilter.queryMode, "useQueryMode");
-@@clientName(KeepTokenFilter.keepWordsCase, "lowerCaseKeepWords");
-@@clientName(LengthTokenFilter.min, "minLength");
-@@clientName(LengthTokenFilter.max, "maxLength");
-@@clientName(PhoneticTokenFilter.replace, "replaceOriginalTokens");
-@@clientName(StopwordsTokenFilter.removeTrailing, "removeTrailingStopWords");
-@@clientName(HnswAlgorithmConfiguration.hnswParameters, "parameters");
-@@clientName(ExhaustiveKnnAlgorithmConfiguration.exhaustiveKnnParameters,
+@@clientName(Azure.Search.Documents.Indexes.PatternAnalyzer.lowercase,
+  "lowerCaseTerms"
+);
+@@clientName(Azure.Search.Documents.Indexes.PathHierarchyTokenizerV2.reverse,
+  "reverseTokenOrder"
+);
+@@clientName(Azure.Search.Documents.Indexes.PathHierarchyTokenizerV2.skip,
+  "numberOfTokensToSkip"
+);
+@@clientName(Azure.Search.Documents.Indexes.CommonGramTokenFilter.queryMode,
+  "useQueryMode"
+);
+@@clientName(Azure.Search.Documents.Indexes.KeepTokenFilter.keepWordsCase,
+  "lowerCaseKeepWords"
+);
+@@clientName(Azure.Search.Documents.Indexes.LengthTokenFilter.min, "minLength");
+@@clientName(Azure.Search.Documents.Indexes.LengthTokenFilter.max, "maxLength");
+@@clientName(Azure.Search.Documents.Indexes.PhoneticTokenFilter.replace,
+  "replaceOriginalTokens"
+);
+@@clientName(Azure.Search.Documents.Indexes.StopwordsTokenFilter.removeTrailing,
+  "removeTrailingStopWords"
+);
+@@clientName(Azure.Search.Documents.Indexes.HnswAlgorithmConfiguration.hnswParameters,
   "parameters"
 );
-@@clientName(ScalarQuantizationCompression.scalarQuantizationParameters,
+@@clientName(Azure.Search.Documents.Indexes.ExhaustiveKnnAlgorithmConfiguration.exhaustiveKnnParameters,
   "parameters"
 );
-@@clientName(AzureOpenAIVectorizer.azureOpenAIParameters, "parameters");
-@@clientName(AzureOpenAIVectorizerParameters.resourceUri, "resourceUrl");
-@@clientName(AzureOpenAIVectorizerParameters.deploymentId, "deploymentName");
-@@clientName(WebApiVectorizer.customWebApiParameters, "webApiParameters");
-@@clientName(WebApiVectorizerParameters.uri, "url");
-@@clientName(SearchIndexerDataUserAssignedIdentity.userAssignedIdentity,
+@@clientName(Azure.Search.Documents.Indexes.ScalarQuantizationCompression.scalarQuantizationParameters,
+  "parameters"
+);
+@@clientName(Azure.Search.Documents.Indexes.AzureOpenAIVectorizer.azureOpenAIParameters,
+  "parameters"
+);
+@@clientName(Azure.Search.Documents.Indexes.AzureOpenAIVectorizerParameters.resourceUri,
+  "resourceUrl"
+);
+@@clientName(Azure.Search.Documents.Indexes.AzureOpenAIVectorizerParameters.deploymentId,
+  "deploymentName"
+);
+@@clientName(Azure.Search.Documents.Indexes.WebApiVectorizer.customWebApiParameters,
+  "webApiParameters"
+);
+@@clientName(Azure.Search.Documents.Indexes.WebApiVectorizerParameters.uri,
+  "url"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchIndexerDataUserAssignedIdentity.userAssignedIdentity,
   "resourceId"
 );
-@@clientName(DistanceScoringFunction.distance, "parameters");
-@@clientName(FreshnessScoringFunction.freshness, "parameters");
-@@clientName(MagnitudeScoringFunction.magnitude, "parameters");
-@@clientName(MagnitudeScoringParameters.constantBoostBeyondRange,
+@@clientName(Azure.Search.Documents.Indexes.DistanceScoringFunction.distance,
+  "parameters"
+);
+@@clientName(Azure.Search.Documents.Indexes.FreshnessScoringFunction.freshness,
+  "parameters"
+);
+@@clientName(Azure.Search.Documents.Indexes.MagnitudeScoringFunction.magnitude,
+  "parameters"
+);
+@@clientName(Azure.Search.Documents.Indexes.MagnitudeScoringParameters.constantBoostBeyondRange,
   "shouldBoostBeyondRangeByConstant"
 );
-@@clientName(TagScoringFunction.tag, "parameters");
-@@clientName(OcrSkill.detectOrientation, "shouldDetectOrientation");
-@@clientName(PIIDetectionSkill.maskingCharacter, "mask");
-@@clientName(DataChangeDetectionPolicy.`@odata.type`, "odataType");
-@@clientName(DataDeletionDetectionPolicy.`@odata.type`, "odataType");
-@@clientName(SearchIndexerSkill.`@odata.type`, "odataType");
-@@clientName(CognitiveServicesAccount.`@odata.type`, "odataType");
-@@clientName(LexicalAnalyzer.`@odata.type`, "odataType");
-@@clientName(LexicalTokenizer.`@odata.type`, "odataType");
-@@clientName(TokenFilter.`@odata.type`, "odataType");
-@@clientName(CharFilter.`@odata.type`, "odataType");
-@@clientName(SimilarityAlgorithm.`@odata.type`, "odataType");
-@@clientName(CustomAnalyzer.`@odata.type`, "odataType");
-@@clientName(PatternAnalyzer.`@odata.type`, "odataType");
-@@clientName(LuceneStandardAnalyzer.`@odata.type`, "odataType");
-@@clientName(StopAnalyzer.`@odata.type`, "odataType");
-@@clientName(ClassicTokenizer.`@odata.type`, "odataType");
-@@clientName(EdgeNGramTokenizer.`@odata.type`, "odataType");
-// @@clientName(KeywordTokenizer.`@odata.type`, "odataType");
-@@clientName(KeywordTokenizerV2.`@odata.type`, "odataType");
-@@clientName(MicrosoftLanguageTokenizer.`@odata.type`, "odataType");
-@@clientName(MicrosoftLanguageStemmingTokenizer.`@odata.type`, "odataType");
-@@clientName(NGramTokenizer.`@odata.type`, "odataType");
-@@clientName(PatternTokenizer.`@odata.type`, "odataType");
-// @@clientName(LuceneStandardTokenizer.`@odata.type`, "odataType");
-@@clientName(LuceneStandardTokenizerV2.`@odata.type`, "odataType");
-@@clientName(UaxUrlEmailTokenizer.`@odata.type`, "odataType");
-@@clientName(AsciiFoldingTokenFilter.`@odata.type`, "odataType");
-@@clientName(CjkBigramTokenFilter.`@odata.type`, "odataType");
-@@clientName(CommonGramTokenFilter.`@odata.type`, "odataType");
-@@clientName(DictionaryDecompounderTokenFilter.`@odata.type`, "odataType");
-// @@clientName(EdgeNGramTokenFilter.`@odata.type`, "odataType");
-@@clientName(EdgeNGramTokenFilterV2.`@odata.type`, "odataType");
-@@clientName(ElisionTokenFilter.`@odata.type`, "odataType");
-@@clientName(KeepTokenFilter.`@odata.type`, "odataType");
-@@clientName(KeywordMarkerTokenFilter.`@odata.type`, "odataType");
-@@clientName(LengthTokenFilter.`@odata.type`, "odataType");
-@@clientName(LimitTokenFilter.`@odata.type`, "odataType");
-// @@clientName(NGramTokenFilter.`@odata.type`, "odataType");
-@@clientName(NGramTokenFilterV2.`@odata.type`, "odataType");
-@@clientName(PatternCaptureTokenFilter.`@odata.type`, "odataType");
-@@clientName(PatternReplaceTokenFilter.`@odata.type`, "odataType");
-@@clientName(PhoneticTokenFilter.`@odata.type`, "odataType");
-@@clientName(ShingleTokenFilter.`@odata.type`, "odataType");
-@@clientName(SnowballTokenFilter.`@odata.type`, "odataType");
-@@clientName(StemmerTokenFilter.`@odata.type`, "odataType");
-@@clientName(StemmerOverrideTokenFilter.`@odata.type`, "odataType");
-@@clientName(StopwordsTokenFilter.`@odata.type`, "odataType");
-@@clientName(SynonymTokenFilter.`@odata.type`, "odataType");
-@@clientName(TruncateTokenFilter.`@odata.type`, "odataType");
-@@clientName(UniqueTokenFilter.`@odata.type`, "odataType");
-@@clientName(WordDelimiterTokenFilter.`@odata.type`, "odataType");
-@@clientName(MappingCharFilter.`@odata.type`, "odataType");
-@@clientName(PatternReplaceCharFilter.`@odata.type`, "odataType");
-@@clientName(ClassicSimilarityAlgorithm.`@odata.type`, "odataType");
-@@clientName(BM25SimilarityAlgorithm.`@odata.type`, "odataType");
-@@clientName(SearchIndexerDataIdentity.`@odata.type`, "odataType");
-@@clientName(SearchIndexerDataNoneIdentity.`@odata.type`, "odataType");
-@@clientName(SearchIndexerDataUserAssignedIdentity.`@odata.type`, "odataType");
-@@clientName(HighWaterMarkChangeDetectionPolicy.`@odata.type`, "odataType");
-@@clientName(SqlIntegratedChangeTrackingPolicy.`@odata.type`, "odataType");
-@@clientName(SoftDeleteColumnDeletionDetectionPolicy.`@odata.type`,
+@@clientName(Azure.Search.Documents.Indexes.TagScoringFunction.tag,
+  "parameters"
+);
+@@clientName(Azure.Search.Documents.Indexes.OcrSkill.detectOrientation,
+  "shouldDetectOrientation"
+);
+@@clientName(Azure.Search.Documents.Indexes.PIIDetectionSkill.maskingCharacter,
+  "mask"
+);
+@@clientName(Azure.Search.Documents.Indexes.DataChangeDetectionPolicy.`@odata.type`,
   "odataType"
 );
-@@clientName(DefaultCognitiveServicesAccount.`@odata.type`, "odataType");
-@@clientName(CognitiveServicesAccountKey.`@odata.type`, "odataType");
-@@clientName(ConditionalSkill.`@odata.type`, "odataType");
-@@clientName(KeyPhraseExtractionSkill.`@odata.type`, "odataType");
-@@clientName(OcrSkill.`@odata.type`, "odataType");
-@@clientName(ImageAnalysisSkill.`@odata.type`, "odataType");
-@@clientName(LanguageDetectionSkill.`@odata.type`, "odataType");
-@@clientName(ShaperSkill.`@odata.type`, "odataType");
-@@clientName(MergeSkill.`@odata.type`, "odataType");
-@@clientName(EntityRecognitionSkill.`@odata.type`, "odataType");
-@@clientName(SentimentSkill.`@odata.type`, "odataType");
-@@clientName(SentimentSkillV3.`@odata.type`, "odataType");
-@@clientName(EntityLinkingSkill.`@odata.type`, "odataType");
-@@clientName(EntityRecognitionSkillV3.`@odata.type`, "odataType");
-@@clientName(EntityRecognitionSkill.`@odata.type`, "odataType");
-@@clientName(PIIDetectionSkill.`@odata.type`, "odataType");
-@@clientName(SplitSkill.`@odata.type`, "odataType");
-@@clientName(CustomEntityLookupSkill.`@odata.type`, "odataType");
-@@clientName(TextTranslationSkill.`@odata.type`, "odataType");
-@@clientName(DocumentExtractionSkill.`@odata.type`, "odataType");
-@@clientName(WebApiSkill.`@odata.type`, "odataType");
-@@clientName(AzureOpenAIEmbeddingSkill.`@odata.type`, "odataType");
-@@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odataType");
+@@clientName(Azure.Search.Documents.Indexes.DataDeletionDetectionPolicy.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchIndexerSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.CognitiveServicesAccount.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.LexicalAnalyzer.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.LexicalTokenizer.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.TokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.CharFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.SimilarityAlgorithm.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.CustomAnalyzer.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.PatternAnalyzer.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.LuceneStandardAnalyzer.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.StopAnalyzer.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.ClassicTokenizer.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.EdgeNGramTokenizer.`@odata.type`,
+  "odataType"
+);
+// @@clientName(Azure.Search.Documents.Indexes.KeywordTokenizer.`@odata.type`, "odataType");
+@@clientName(Azure.Search.Documents.Indexes.KeywordTokenizerV2.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.MicrosoftLanguageTokenizer.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.MicrosoftLanguageStemmingTokenizer.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.NGramTokenizer.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.PatternTokenizer.`@odata.type`,
+  "odataType"
+);
+// @@clientName(Azure.Search.Documents.Indexes.LuceneStandardTokenizer.`@odata.type`, "odataType");
+@@clientName(Azure.Search.Documents.Indexes.LuceneStandardTokenizerV2.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.UaxUrlEmailTokenizer.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.AsciiFoldingTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.CjkBigramTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.CommonGramTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.DictionaryDecompounderTokenFilter.`@odata.type`,
+  "odataType"
+);
+// @@clientName(Azure.Search.Documents.Indexes.EdgeNGramTokenFilter.`@odata.type`, "odataType");
+@@clientName(Azure.Search.Documents.Indexes.EdgeNGramTokenFilterV2.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.ElisionTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.KeepTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.KeywordMarkerTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.LengthTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.LimitTokenFilter.`@odata.type`,
+  "odataType"
+);
+// @@clientName(Azure.Search.Documents.Indexes.NGramTokenFilter.`@odata.type`, "odataType");
+@@clientName(Azure.Search.Documents.Indexes.NGramTokenFilterV2.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.PatternCaptureTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.PatternReplaceTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.PhoneticTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.ShingleTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.SnowballTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.StemmerTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.StemmerOverrideTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.StopwordsTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.SynonymTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.TruncateTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.UniqueTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.WordDelimiterTokenFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.MappingCharFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.PatternReplaceCharFilter.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.ClassicSimilarityAlgorithm.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.BM25SimilarityAlgorithm.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchIndexerDataIdentity.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchIndexerDataNoneIdentity.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.SearchIndexerDataUserAssignedIdentity.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.HighWaterMarkChangeDetectionPolicy.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.SqlIntegratedChangeTrackingPolicy.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.SoftDeleteColumnDeletionDetectionPolicy.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.DefaultCognitiveServicesAccount.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.CognitiveServicesAccountKey.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.ConditionalSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.KeyPhraseExtractionSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.OcrSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.ImageAnalysisSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.LanguageDetectionSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.ShaperSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.MergeSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.EntityRecognitionSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.SentimentSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.SentimentSkillV3.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.EntityLinkingSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.EntityRecognitionSkillV3.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.EntityRecognitionSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.PIIDetectionSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.SplitSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.CustomEntityLookupSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.TextTranslationSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.DocumentExtractionSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.WebApiSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.AzureOpenAIEmbeddingSkill.`@odata.type`,
+  "odataType"
+);
+@@clientName(Azure.Search.Documents.Indexes.PathHierarchyTokenizerV2.`@odata.type`,
+  "odataType"
+);

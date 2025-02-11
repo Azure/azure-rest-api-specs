@@ -29,7 +29,7 @@ using TypeSpec.Versioning;
   title: "Azure AI Search",
 })
 @versioned(Versions)
-namespace Search;
+namespace Azure.Search.Documents;
 
 /**
  * The available API versions.
