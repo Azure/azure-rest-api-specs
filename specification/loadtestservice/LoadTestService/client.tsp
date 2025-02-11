@@ -24,6 +24,8 @@ namespace Customizations;
 // Suggestion to rename enums containing PF acronym since its not well known
 @@clientName(PFAction, "PassFailAction", "csharp,java");
 @@clientName(PFAgFunc, "PassFailAggregationFunction", "csharp,java");
+@@clientName(PFResult, "PassFailResult", "csharp,java");
+@@clientName(PFTestResult, "PassFailTestResult", "csharp,java");
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
