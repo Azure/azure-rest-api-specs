@@ -6977,7 +6977,7 @@
       "description": "Domain configurations of session hosts.",
       "properties": {
         "joinType": {
-          "$ref": "#/definitions/JoinType",
+          "$ref": "#/definitions/DomainJoinType",
           "description": "The type of domain join done by the virtual machine."
         },
         "activeDirectoryInfo": {
@@ -6992,6 +6992,30 @@
       "required": [
         "joinType"
       ]
+    },
+    "DomainJoinType": {
+      "type": "string",
+      "description": "The type of domain join done by the virtual machine.",
+      "enum": [
+        "ActiveDirectory",
+        "AzureActiveDirectory"
+      ],
+      "x-ms-enum": {
+        "name": "DomainJoinType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ActiveDirectory",
+            "value": "ActiveDirectory",
+            "description": "Using microsoft active directory."
+          },
+          {
+            "name": "AzureActiveDirectory",
+            "value": "AzureActiveDirectory",
+            "description": "Using microsoft azure active directory."
+          }
+        ]
+      }
     },
     "ExpandMSIXImage": {
       "type": "object",
@@ -7742,7 +7766,7 @@
       "description": "Image configurations of session host in a HostPool",
       "properties": {
         "type": {
-          "$ref": "#/definitions/ImageType",
+          "$ref": "#/definitions/imageType",
           "description": "The type of image session hosts use in the hostpool."
         },
         "marketplaceInfo": {
@@ -7760,7 +7784,7 @@
       "description": "Image configurations of session host in a HostPool",
       "properties": {
         "type": {
-          "$ref": "#/definitions/ImageType",
+          "$ref": "#/definitions/imageType",
           "description": "The type of image session hosts use in the hostpool."
         },
         "marketplaceInfo": {
@@ -7776,30 +7800,6 @@
         "type"
       ]
     },
-    "ImageType": {
-      "type": "string",
-      "description": "The type of image session hosts use in the hostpool.",
-      "enum": [
-        "Marketplace",
-        "Custom"
-      ],
-      "x-ms-enum": {
-        "name": "ImageType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Marketplace",
-            "value": "Marketplace",
-            "description": "Using default marketplace images offered by Azure Marketplace."
-          },
-          {
-            "name": "Custom",
-            "value": "Custom",
-            "description": "Using a custom image."
-          }
-        ]
-      }
-    },
     "ImportPackageInfoRequest": {
       "type": "object",
       "description": "Information to import app attach package",
@@ -7813,30 +7813,6 @@
           "$ref": "#/definitions/AppAttachPackageArchitectures",
           "description": "Possible device architectures that an app attach package can be configured for"
         }
-      }
-    },
-    "JoinType": {
-      "type": "string",
-      "description": "The type of domain join done by the virtual machine.",
-      "enum": [
-        "ActiveDirectory",
-        "AzureActiveDirectory"
-      ],
-      "x-ms-enum": {
-        "name": "JoinType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ActiveDirectory",
-            "value": "ActiveDirectory",
-            "description": "Using microsoft active directory."
-          },
-          {
-            "name": "AzureActiveDirectory",
-            "value": "AzureActiveDirectory",
-            "description": "Using microsoft azure active directory."
-          }
-        ]
       }
     },
     "KeyVaultCredentialsPatchProperties": {
@@ -11445,6 +11421,30 @@
             "name": "DoNotFail",
             "value": "DoNotFail",
             "description": "Health Check will not report failure"
+          }
+        ]
+      }
+    },
+    "imageType": {
+      "type": "string",
+      "description": "The type of image session hosts use in the hostpool.",
+      "enum": [
+        "Marketplace",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "imageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Marketplace",
+            "value": "Marketplace",
+            "description": "Using default marketplace images offered by Azure Marketplace."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Using a custom image."
           }
         ]
       }

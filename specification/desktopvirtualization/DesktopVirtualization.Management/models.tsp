@@ -111,7 +111,7 @@ union VirtualMachineSecurityType {
 /**
  * The type of domain join done by the virtual machine.
  */
-union JoinType {
+union DomainJoinType {
   string,
 
   /**
@@ -128,7 +128,7 @@ union JoinType {
 /**
  * The type of image session hosts use in the hostpool.
  */
-union ImageType {
+union imageType {
   string,
 
   /**
@@ -1691,7 +1691,7 @@ model DomainInfoProperties {
   /**
    * The type of domain join done by the virtual machine.
    */
-  joinType: JoinType;
+  joinType: DomainJoinType;
 
   /**
    * Active directory info. Only one should be populated based on the join type.
@@ -1721,7 +1721,7 @@ model ImageInfoProperties {
   /**
    * The type of image session hosts use in the hostpool.
    */
-  type: ImageType;
+  type: imageType;
 
   /**
    * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
@@ -1741,7 +1741,7 @@ model ImageInfoPatchProperties {
   /**
    * The type of image session hosts use in the hostpool.
    */
-  type?: ImageType;
+  type?: imageType;
 
   /**
    * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
