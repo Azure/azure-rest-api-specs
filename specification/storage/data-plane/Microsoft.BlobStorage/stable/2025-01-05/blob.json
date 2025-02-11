@@ -3742,7 +3742,7 @@
     "/{containerName}?comp=lease&restype=container&acquire": {
       "put": {
         "operationId": "Container_AcquireLease",
-        "description": "[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite",
+        "description": "The Acquire Lease operation requests a new lease on a container. The lease lock duration can be 15 to 60 seconds, or can be infinite.",
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3853,7 +3853,7 @@
     "/{containerName}?comp=lease&restype=container&release": {
       "put": {
         "operationId": "Container_ReleaseLease",
-        "description": "[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite",
+        "description": "The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the container.",
         "parameters": [
           {
             "name": "x-ms-version",
@@ -3951,7 +3951,7 @@
     "/{containerName}?comp=lease&restype=container&renew": {
       "put": {
         "operationId": "Container_RenewLease",
-        "description": "[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite",
+        "description": "The Renew Lease operation renews an existing lease.",
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4053,7 +4053,7 @@
     "/{containerName}?comp=lease&restype=container&break": {
       "put": {
         "operationId": "Container_BreakLease",
-        "description": "[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite",
+        "description": "The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired.",
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4161,7 +4161,7 @@
     "/{containerName}?comp=lease&restype=container&change": {
       "put": {
         "operationId": "Container_ChangeLease",
-        "description": "[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite",
+        "description": "The Change Lease operation is used to change the ID of an existing lease.",
         "parameters": [
           {
             "name": "x-ms-version",
@@ -4271,7 +4271,7 @@
     "/{containerName}?restype=container&comp=list&flat": {
       "get": {
         "operationId": "Container_ListBlobFlatSegment",
-        "description": "[Update] The List Blobs operation returns a list of the blobs under the specified container",
+        "description": "The List Blobs operation returns a list of the blobs under the specified container.",
         "produces": [
           "application/xml",
           "application/json"
@@ -4443,7 +4443,7 @@
     "/{containerName}?restype=container&comp=list&hierarchy": {
       "get": {
         "operationId": "Container_ListBlobHierarchySegment",
-        "description": "[Update] The List Blobs operation returns a list of the blobs under the specified container",
+        "description": "The List Blobs operation returns a list of the blobs under the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system.",
         "produces": [
           "application/xml",
           "application/json"
@@ -5611,7 +5611,7 @@
     "/{containerName}/{blob}?comp=lease&acquire": {
       "put": {
         "operationId": "Blob_AcquireLease",
-        "description": "[Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations.",
+        "description": "The Acquire Lease operation requests a new lease on a blob. The lease lock duration can be 15 to 60 seconds, or can be infinite.",
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5734,7 +5734,7 @@
     "/{containerName}/{blob}?comp=lease&release": {
       "put": {
         "operationId": "Blob_ReleaseLease",
-        "description": "[Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations.",
+        "description": "The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the blob.",
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5844,7 +5844,7 @@
     "/{containerName}/{blob}?comp=lease&renew": {
       "put": {
         "operationId": "Blob_RenewLease",
-        "description": "[Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations.",
+        "description": "The Renew Lease operation renews an existing lease.",
         "parameters": [
           {
             "name": "x-ms-version",
@@ -5958,7 +5958,7 @@
     "/{containerName}/{blob}?comp=lease&change": {
       "put": {
         "operationId": "Blob_ChangeLease",
-        "description": "[Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations.",
+        "description": "The Change Lease operation is used to change the ID of an existing lease.",
         "parameters": [
           {
             "name": "x-ms-version",
@@ -6080,7 +6080,7 @@
     "/{containerName}/{blob}?comp=lease&break": {
       "put": {
         "operationId": "Blob_BreakLease",
-        "description": "[Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations.",
+        "description": "The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired.",
         "parameters": [
           {
             "name": "x-ms-version",
@@ -8286,6 +8286,19 @@
             "x-ms-client-name": "legalHold"
           },
           {
+            "name": "x-ms-blob-type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PageBlob"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "blobType"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -10175,6 +10188,19 @@
             "x-ms-client-name": "legalHold"
           },
           {
+            "name": "x-ms-blob-type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "AppendBlob"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "blobType"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -11296,6 +11322,19 @@
             "x-ms-client-name": "structuredContentLength"
           },
           {
+            "name": "x-ms-blob-type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "BlockBlob"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "blobType"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -11760,6 +11799,19 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "copySourceTags"
+          },
+          {
+            "name": "x-ms-blob-type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "BlockBlob"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "blobType"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"

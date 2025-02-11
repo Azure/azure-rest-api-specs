@@ -1386,6 +1386,9 @@ interface PageBlob {
       ...ImmutabilityPolicyExpiryParameter;
       ...ImmutabilityPolicyModeParameter;
       ...LegalHoldOptionalParameter;
+
+      @header("x-ms-blob-type")
+      blobType: "PageBlob";
     },
     {
       @statusCode statusCode: 201;
@@ -1651,6 +1654,9 @@ interface AppendBlob {
       ...ImmutabilityPolicyExpiryParameter;
       ...ImmutabilityPolicyModeParameter;
       ...LegalHoldOptionalParameter;
+
+      @header("x-ms-blob-type")
+      blobType: "AppendBlob";
     },
     {
       @statusCode statusCode: 201;
@@ -1822,6 +1828,9 @@ interface BlockBlob {
       ...ContentCrc64Parameter;
       ...StructuredBodyPut;
       ...StructuredContentLengthParameter;
+
+      @header("x-ms-blob-type")
+      blobType: "BlockBlob";
     },
     {
       @statusCode statusCode: 201;
@@ -1877,6 +1886,9 @@ interface BlockBlob {
       ...CopySourceBlobPropertiesParameter;
       ...CopySourceAuthorizationParameter;
       ...CopySourceTagsParameter;
+
+      @header("x-ms-blob-type")
+      blobType: "BlockBlob";
     },
     {
       @statusCode statusCode: 201;
