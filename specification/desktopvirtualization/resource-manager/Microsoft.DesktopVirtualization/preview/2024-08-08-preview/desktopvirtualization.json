@@ -641,12 +641,11 @@
             "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
           },
           {
-            "name": "$force",
+            "name": "force",
             "in": "query",
             "description": "Allows force delete",
             "required": false,
-            "type": "boolean",
-            "x-ms-client-name": "force"
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -6154,7 +6153,7 @@
           "description": "Date certificate expires, found in the appxmanifest.xml."
         },
         "isPackageTimestamped": {
-          "$ref": "#/definitions/PackageTimestamped",
+          "$ref": "#/definitions/packageTimestamped",
           "description": "Is package timestamped so it can ignore the certificate expiry date"
         }
       }
@@ -6224,7 +6223,7 @@
           "description": "URL path to certificate name located in keyVault"
         },
         "failHealthCheckOnStagingFailure": {
-          "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
+          "$ref": "#/definitions/failHealthCheckOnStagingFailure",
           "description": "Parameter indicating how the health check should behave if this package fails staging"
         },
         "packageLookbackUrl": {
@@ -6263,7 +6262,7 @@
           "description": "URL path to certificate name located in keyVault"
         },
         "failHealthCheckOnStagingFailure": {
-          "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
+          "$ref": "#/definitions/failHealthCheckOnStagingFailure",
           "description": "Parameter indicating how the health check should behave if this package fails staging"
         },
         "packageOwnerName": {
@@ -6767,22 +6766,6 @@
     },
     "DayOfWeek": {
       "type": "string",
-      "enum": [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      "x-ms-enum": {
-        "name": "DayOfWeek",
-        "modelAsString": false
-      }
-    },
-    "DaysOfWeek": {
-      "type": "string",
       "description": "Day of the week. Modeled as string",
       "enum": [
         "Monday",
@@ -6794,7 +6777,7 @@
         "Sunday"
       ],
       "x-ms-enum": {
-        "name": "DaysOfWeek",
+        "name": "DayOfWeek",
         "modelAsString": true,
         "values": [
           {
@@ -7154,36 +7137,6 @@
           "format": "date-time",
           "description": "Date certificate expires, found in the appxmanifest.xml."
         }
-      }
-    },
-    "FailHealthCheckOnStagingFailureEnum": {
-      "type": "string",
-      "description": "Parameter indicating how the health check should behave if this package fails staging",
-      "enum": [
-        "Unhealthy",
-        "NeedsAssistance",
-        "DoNotFail"
-      ],
-      "x-ms-enum": {
-        "name": "FailHealthCheckOnStagingFailureEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unhealthy",
-            "value": "Unhealthy",
-            "description": "Health Check will report unhealthy"
-          },
-          {
-            "name": "NeedsAssistance",
-            "value": "NeedsAssistance",
-            "description": "Health Check will report NeedsAssistance"
-          },
-          {
-            "name": "DoNotFail",
-            "value": "DoNotFail",
-            "description": "Health Check will not report failure"
-          }
-        ]
       }
     },
     "HealthCheckName": {
@@ -8353,30 +8306,6 @@
         }
       }
     },
-    "PackageTimestamped": {
-      "type": "string",
-      "description": "Is package timestamped so it can ignore the certificate expiry date",
-      "enum": [
-        "Timestamped",
-        "NotTimestamped"
-      ],
-      "x-ms-enum": {
-        "name": "PackageTimestamped",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Timestamped",
-            "value": "Timestamped",
-            "description": "Package is timestamped"
-          },
-          {
-            "name": "NotTimestamped",
-            "value": "NotTimestamped",
-            "description": "Package is not timestamped, use certificate expiry date"
-          }
-        ]
-      }
-    },
     "PersonalDesktopAssignmentType": {
       "type": "string",
       "description": "PersonalDesktopAssignment type for HostPool.",
@@ -9212,11 +9141,8 @@
       "description": "ScalingPlanPersonalSchedule properties that can be patched.",
       "properties": {
         "daysOfWeek": {
-          "type": "array",
-          "description": "Set of days of the week on which this schedule is active.",
-          "items": {
-            "$ref": "#/definitions/DaysOfWeek"
-          }
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "Set of days of the week on which this schedule is active."
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -9425,11 +9351,8 @@
       "description": "A ScalingPlanPersonalSchedule.",
       "properties": {
         "daysOfWeek": {
-          "type": "array",
-          "description": "Set of days of the week on which this schedule is active.",
-          "items": {
-            "$ref": "#/definitions/DaysOfWeek"
-          }
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "Set of days of the week on which this schedule is active."
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -9697,11 +9620,8 @@
           "description": "Name of the ScalingPlanPooledSchedule"
         },
         "daysOfWeek": {
-          "type": "array",
-          "description": "Set of days of the week on which this schedule is active.",
-          "items": {
-            "$ref": "#/definitions/DaysOfWeek"
-          }
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "Set of days of the week on which this schedule is active."
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -9791,11 +9711,8 @@
           "description": "Name of the ScalingPlanPooledSchedule"
         },
         "daysOfWeek": {
-          "type": "array",
-          "description": "Set of days of the week on which this schedule is active.",
-          "items": {
-            "$ref": "#/definitions/DaysOfWeek"
-          }
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "Set of days of the week on which this schedule is active."
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -10104,7 +10021,7 @@
       "description": "Security Information.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/SecurityType",
+          "$ref": "#/definitions/VirtualMachineSecurityType",
           "description": "The security type used by virtual machine in hostpool session host. Default is Standard."
         },
         "secureBootEnabled": {
@@ -10131,7 +10048,7 @@
             "ConfidentialVM"
           ],
           "x-ms-enum": {
-            "name": "SecurityType",
+            "name": "VirtualMachineSecurityType",
             "modelAsString": true,
             "values": [
               {
@@ -10160,36 +10077,6 @@
           "type": "boolean",
           "description": "Whether to use vTpm on the virtual machine."
         }
-      }
-    },
-    "SecurityType": {
-      "type": "string",
-      "description": "The security type used by virtual machine in hostpool session host. Default is Standard.",
-      "enum": [
-        "Standard",
-        "TrustedLaunch",
-        "ConfidentialVM"
-      ],
-      "x-ms-enum": {
-        "name": "SecurityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard security protocol. No additional parameters"
-          },
-          {
-            "name": "TrustedLaunch",
-            "value": "TrustedLaunch",
-            "description": "TrustedLaunch allows for secure boot and vTpm"
-          },
-          {
-            "name": "ConfidentialVM",
-            "value": "ConfidentialVM",
-            "description": "Confidential Virtual Machine security protocol"
-          }
-        ]
       }
     },
     "SendMessage": {
@@ -11350,6 +11237,36 @@
         }
       }
     },
+    "VirtualMachineSecurityType": {
+      "type": "string",
+      "description": "The security type used by virtual machine in hostpool session host. Default is Standard.",
+      "enum": [
+        "Standard",
+        "TrustedLaunch",
+        "ConfidentialVM"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachineSecurityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard security protocol. No additional parameters"
+          },
+          {
+            "name": "TrustedLaunch",
+            "value": "TrustedLaunch",
+            "description": "TrustedLaunch allows for secure boot and vTpm"
+          },
+          {
+            "name": "ConfidentialVM",
+            "value": "ConfidentialVM",
+            "description": "Confidential Virtual Machine security protocol"
+          }
+        ]
+      }
+    },
     "Workspace": {
       "type": "object",
       "description": "Represents a Workspace definition.",
@@ -11500,6 +11417,60 @@
           },
           "readOnly": true
         }
+      }
+    },
+    "failHealthCheckOnStagingFailure": {
+      "type": "string",
+      "description": "Parameter indicating how the health check should behave if this package fails staging",
+      "enum": [
+        "Unhealthy",
+        "NeedsAssistance",
+        "DoNotFail"
+      ],
+      "x-ms-enum": {
+        "name": "failHealthCheckOnStagingFailure",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "Health Check will report unhealthy"
+          },
+          {
+            "name": "NeedsAssistance",
+            "value": "NeedsAssistance",
+            "description": "Health Check will report NeedsAssistance"
+          },
+          {
+            "name": "DoNotFail",
+            "value": "DoNotFail",
+            "description": "Health Check will not report failure"
+          }
+        ]
+      }
+    },
+    "packageTimestamped": {
+      "type": "string",
+      "description": "Is package timestamped so it can ignore the certificate expiry date",
+      "enum": [
+        "Timestamped",
+        "NotTimestamped"
+      ],
+      "x-ms-enum": {
+        "name": "packageTimestamped",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Timestamped",
+            "value": "Timestamped",
+            "description": "Package is timestamped"
+          },
+          {
+            "name": "NotTimestamped",
+            "value": "NotTimestamped",
+            "description": "Package is not timestamped, use certificate expiry date"
+          }
+        ]
       }
     }
   },

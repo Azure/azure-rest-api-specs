@@ -89,7 +89,7 @@ union ProvisioningStateSHC {
 /**
  * The security type used by virtual machine in hostpool session host. Default is Standard.
  */
-union SecurityType {
+union VirtualMachineSecurityType {
   string,
 
   /**
@@ -193,7 +193,7 @@ union ProvisioningState {
 /**
  * Is package timestamped so it can ignore the certificate expiry date
  */
-union PackageTimestamped {
+union packageTimestamped {
   string,
 
   /**
@@ -210,7 +210,7 @@ union PackageTimestamped {
 /**
  * Parameter indicating how the health check should behave if this package fails staging
  */
-union FailHealthCheckOnStagingFailureEnum {
+union failHealthCheckOnStagingFailure {
   string,
 
   /**
@@ -1106,7 +1106,7 @@ union SessionHandlingOperation {
 /**
  * Day of the week. Modeled as string
  */
-union DaysOfWeek {
+union DayOfWeek {
   string,
 
   /**
@@ -1143,17 +1143,6 @@ union DaysOfWeek {
    * Day of the week.
    */
   Sunday: "Sunday",
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Days are not extensible"
-enum DayOfWeek {
-  Sunday,
-  Monday,
-  Tuesday,
-  Wednesday,
-  Thursday,
-  Friday,
-  Saturday,
 }
 
 /**
@@ -1307,7 +1296,7 @@ model AppAttachPackageProperties {
   /**
    * Parameter indicating how the health check should behave if this package fails staging
    */
-  failHealthCheckOnStagingFailure?: FailHealthCheckOnStagingFailureEnum;
+  failHealthCheckOnStagingFailure?: failHealthCheckOnStagingFailure;
 
   /**
    * Specific name of package owner, is "AppAttach" for native app attach packages
@@ -1410,7 +1399,7 @@ model AppAttachPackageInfoProperties {
   /**
    * Is package timestamped so it can ignore the certificate expiry date
    */
-  isPackageTimestamped?: PackageTimestamped;
+  isPackageTimestamped?: packageTimestamped;
 }
 
 /**
@@ -1772,7 +1761,7 @@ model SecurityInfoProperties {
   /**
    * The security type used by virtual machine in hostpool session host. Default is Standard.
    */
-  type?: SecurityType = SecurityType.Standard;
+  type?: VirtualMachineSecurityType = VirtualMachineSecurityType.Standard;
 
   /**
    * Whether to use secureBoot on the virtual machine.
@@ -1793,7 +1782,7 @@ model SecurityInfoPatchProperties {
   /**
    * The security type used by virtual machine in hostpool session host. Default is Standard.
    */
-  type?: SecurityType;
+  type?: VirtualMachineSecurityType;
 
   /**
    * Whether to use secureBoot on the virtual machine.
@@ -2792,7 +2781,7 @@ model AppAttachPackagePatchProperties {
   /**
    * Parameter indicating how the health check should behave if this package fails staging
    */
-  failHealthCheckOnStagingFailure?: FailHealthCheckOnStagingFailureEnum;
+  failHealthCheckOnStagingFailure?: failHealthCheckOnStagingFailure;
 
   /**
    * Lookback url to third party control plane, is null for native app attach packages
@@ -3892,7 +3881,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DaysOfWeek[];
+  daysOfWeek?: DayOfWeek;
 
   /**
    * Starting time for ramp up period.
@@ -4040,7 +4029,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DaysOfWeek[];
+  daysOfWeek?: DayOfWeek;
 
   /**
    * Starting time for ramp up period.
@@ -4211,7 +4200,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DaysOfWeek[];
+  daysOfWeek?: DayOfWeek;
 
   /**
    * Starting time for ramp up period.
@@ -4315,7 +4304,7 @@ model ScalingPlanPooledSchedulePatchProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DaysOfWeek[];
+  daysOfWeek?: DayOfWeek;
 
   /**
    * Starting time for ramp up period.

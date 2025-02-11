@@ -50,7 +50,7 @@ interface AppAttachPackages {
       /**
        * Allows force delete
        */
-      @query("$force")
+      @query("force")
       force?: boolean;
     }
   >;
