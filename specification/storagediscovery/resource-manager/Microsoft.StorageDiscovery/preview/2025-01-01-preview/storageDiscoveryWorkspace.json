@@ -439,7 +439,7 @@
           {
             "name": "Running",
             "value": "Running",
-            "description": "Data export is running continuously."
+            "description": "Data export is running continuously"
           }
         ]
       }
@@ -499,30 +499,30 @@
     },
     "StorageDiscoveryTier": {
       "type": "string",
-      "description": "Storage Discovery Tier",
+      "description": "Storage Discovery Sku",
       "enum": [
+        "Basic",
         "Standard",
-        "Premium",
-        "Basic"
+        "Premium"
       ],
       "x-ms-enum": {
         "name": "StorageDiscoveryTier",
         "modelAsString": true,
         "values": [
           {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic Sku"
+          },
+          {
             "name": "Standard",
             "value": "Standard",
-            "description": "Standard Tier"
+            "description": "Standard Sku"
           },
           {
             "name": "Premium",
             "value": "Premium",
-            "description": "Premium Tier"
-          },
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "Basic Tier"
+            "description": "Premium Sku"
           }
         ]
       }
@@ -565,11 +565,11 @@
     },
     "StorageDiscoveryWorkspaceProperties": {
       "type": "object",
-      "description": "Storage Discovery Workspace Properties.",
+      "description": "Storage Discovery Workspace Properties",
       "properties": {
         "tier": {
           "$ref": "#/definitions/StorageDiscoveryTier",
-          "description": "The storage discovery tier."
+          "description": "The storage discovery sku."
         },
         "exportState": {
           "$ref": "#/definitions/DataExportState",
@@ -577,28 +577,16 @@
         },
         "description": {
           "type": "string",
-          "description": "The description of the storage discovery workspace."
+          "description": "The description of the storage discovery workspace"
         },
         "storageEstateViewLevel": {
           "type": "string",
           "format": "arm-id",
-          "description": "The view level storage discovery data estate",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Storage/storageAccounts",
-                "scopes": [
-                  "tenant",
-                  "subscription",
-                  "resourceGroup"
-                ]
-              }
-            ]
-          }
+          "description": "The view level storage discovery data estate"
         },
         "storageCollections": {
           "type": "array",
-          "description": "The storage discovery resource collections",
+          "description": "The storage discovery resource collections.",
           "items": {
             "$ref": "#/definitions/StorageDiscoveryCollection"
           },
@@ -621,11 +609,11 @@
     },
     "StorageDiscoveryWorkspacePropertiesUpdate": {
       "type": "object",
-      "description": "Storage Discovery Workspace Properties.",
+      "description": "Storage Discovery Workspace Properties",
       "properties": {
         "tier": {
           "$ref": "#/definitions/StorageDiscoveryTier",
-          "description": "The storage discovery tier."
+          "description": "The storage discovery sku."
         },
         "exportState": {
           "$ref": "#/definitions/DataExportState",
@@ -633,28 +621,16 @@
         },
         "description": {
           "type": "string",
-          "description": "The description of the storage discovery workspace."
+          "description": "The description of the storage discovery workspace"
         },
         "storageEstateViewLevel": {
           "type": "string",
           "format": "arm-id",
-          "description": "The view level storage discovery data estate",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Storage/storageAccounts",
-                "scopes": [
-                  "tenant",
-                  "subscription",
-                  "resourceGroup"
-                ]
-              }
-            ]
-          }
+          "description": "The view level storage discovery data estate"
         },
         "storageCollections": {
           "type": "array",
-          "description": "The storage discovery resource collections",
+          "description": "The storage discovery resource collections.",
           "items": {
             "$ref": "#/definitions/StorageDiscoveryCollection"
           },

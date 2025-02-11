@@ -439,14 +439,14 @@
           {
             "name": "Running",
             "value": "Running",
-            "description": "Data export is running continuously."
+            "description": "Data export is running continuously"
           }
         ]
       }
     },
     "StorageDiscoveryDestination": {
       "type": "object",
-      "description": "Destinations for storage discovery data.",
+      "description": "Destinations for storage discovery data",
       "properties": {
         "storageAccountArmId": {
           "type": "string",
@@ -468,7 +468,7 @@
       "properties": {
         "locations": {
           "type": "array",
-          "description": "The storage account locations to filter.",
+          "description": "The storage account locations to filter",
           "items": {
             "type": "string"
           }
@@ -530,30 +530,30 @@
     },
     "StorageDiscoveryTier": {
       "type": "string",
-      "description": "Storage Discovery Tier",
+      "description": "Storage Discovery Sku",
       "enum": [
+        "Basic",
         "Standard",
-        "Premium",
-        "Basic"
+        "Premium"
       ],
       "x-ms-enum": {
         "name": "StorageDiscoveryTier",
         "modelAsString": true,
         "values": [
           {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic Sku"
+          },
+          {
             "name": "Standard",
             "value": "Standard",
-            "description": "Standard Tier"
+            "description": "Standard Sku"
           },
           {
             "name": "Premium",
             "value": "Premium",
-            "description": "Premium Tier"
-          },
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "Basic Tier"
+            "description": "Premium Sku"
           }
         ]
       }
@@ -596,11 +596,11 @@
     },
     "StorageDiscoveryWorkspaceProperties": {
       "type": "object",
-      "description": "Storage Discovery Workspace Properties.",
+      "description": "Storage Discovery Workspace Properties",
       "properties": {
         "tier": {
           "$ref": "#/definitions/StorageDiscoveryTier",
-          "description": "The storage discovery tier."
+          "description": "The storage discovery sku."
         },
         "exportState": {
           "$ref": "#/definitions/DataExportState",
@@ -608,7 +608,7 @@
         },
         "description": {
           "type": "string",
-          "description": "The description of the storage discovery workspace."
+          "description": "The description of the storage discovery workspace"
         },
         "scopes": {
           "type": "array",
@@ -622,7 +622,7 @@
         },
         "destinations": {
           "$ref": "#/definitions/StorageDiscoveryDestination",
-          "description": "The destinations to which the storage workspace rule sends data."
+          "description": "The destinations to which the storage workspace sends data"
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -639,11 +639,11 @@
     },
     "StorageDiscoveryWorkspacePropertiesUpdate": {
       "type": "object",
-      "description": "Storage Discovery Workspace Properties.",
+      "description": "Storage Discovery Workspace Properties",
       "properties": {
         "tier": {
           "$ref": "#/definitions/StorageDiscoveryTier",
-          "description": "The storage discovery tier."
+          "description": "The storage discovery sku."
         },
         "exportState": {
           "$ref": "#/definitions/DataExportState",
@@ -651,7 +651,7 @@
         },
         "description": {
           "type": "string",
-          "description": "The description of the storage discovery workspace."
+          "description": "The description of the storage discovery workspace"
         },
         "scopes": {
           "type": "array",
@@ -665,7 +665,7 @@
         },
         "destinations": {
           "$ref": "#/definitions/StorageDiscoveryDestination",
-          "description": "The destinations to which the storage workspace rule sends data."
+          "description": "The destinations to which the storage workspace sends data"
         }
       }
     },
