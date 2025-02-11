@@ -4177,6 +4177,31 @@
           "type": "string",
           "description": "The filesystem name of connected storage account.",
           "readOnly": false
+        },
+        "storageMonitorConfiguration": {
+          "description": "The configuration for monitoring changes in the specified storage account.",
+          "$ref": "#/definitions/StorageMonitorConfiguration"
+        }
+      }
+    },
+    "StorageMonitorConfiguration": {
+      "description": "The configuration for monitoring changes in a connected storage.",
+      "type": "object",
+      "properties": {
+        "namespaceResourceId": {
+          "type": "string",
+          "description": "The resource id of the Azure Event Grid Namespace.",
+          "readOnly": false
+        },
+        "topicName": {
+          "type": "string",
+          "description": "The name of the namespace topic within the specified namespace.",
+          "readOnly": false
+        },
+        "eventSubscriptionName": {
+          "type": "string",
+          "description": "The name of the event subscription associated with the given namespace topic that contains storage events.",
+          "readOnly": false
         }
       }
     },
