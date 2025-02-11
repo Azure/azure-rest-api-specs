@@ -35,32 +35,11 @@ interface FleetTiers {
   /**
    * Creates or updates a tier.
    */
-  @removed(Versions.v2025_02_01_preview)
-  @sharedRoute
-  @renamedFrom(Versions.v2025_02_01_preview, "createOrUpdate")
-  createOrUpdateOld is ArmResourceCreateOrReplaceSync<FleetTier>;
-
-  /**
-   * Creates or updates a tier.
-   */
-  @added(Versions.v2025_02_01_preview)
-  @sharedRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FleetTier>;
 
   /**
    * Updates a tier.
    */
-  @removed(Versions.v2025_02_01_preview)
-  @sharedRoute
-  @renamedFrom(Versions.v2025_02_01_preview, "update")
-  @parameterVisibility
-  updateOld is ArmResourcePatchSync<FleetTier, FleetTier>;
-
-  /**
-   * Updates a tier.
-   */
-  @added(Versions.v2025_02_01_preview)
-  @sharedRoute
   @parameterVisibility
   update is ArmCustomPatchAsync<FleetTier, FleetTier>;
 
