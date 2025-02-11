@@ -70,6 +70,82 @@ describe("extractInputs", () => {
     });
   });
 
+  it("check_suite:completed (same repo)", async () => {
+    const context = {
+      eventName: "check_suite",
+      payload: {
+        action: "completed",
+        check_suite: {
+          head_sha: "abc123",
+          pull_requests: [{ number: 123 }],
+        },
+        repository: {
+          name: "TestRepoName",
+          owner: {
+            login: "TestRepoOwnerLogin",
+          },
+        },
+      },
+    };
+
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "abc123",
+      issue_number: 123,
+      run_id: NaN,
+    });
+  });
+
+  it("check_suite:completed (fork repo)", async () => {
+    const context = {
+      eventName: "check_suite",
+      payload: {
+        action: "completed",
+        check_suite: {
+          head_sha: "abc123",
+          pull_requests: null,
+        },
+        repository: {
+          name: "TestRepoName",
+          owner: {
+            login: "TestRepoOwnerLogin",
+          },
+        },
+      },
+    };
+
+    const github = {
+      rest: {
+        repos: {
+          listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
+            data: [{ number: 123 }],
+          }),
+        },
+      },
+    };
+
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "abc123",
+      issue_number: 123,
+      run_id: NaN,
+    });
+
+    expect(
+      github.rest.repos.listPullRequestsAssociatedWithCommit,
+    ).toHaveBeenCalledWith({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      commit_sha: "abc123",
+    });
+  });
+
   it("workflow_run:unsupported_action", async () => {
     const context = {
       eventName: "workflow_run",
