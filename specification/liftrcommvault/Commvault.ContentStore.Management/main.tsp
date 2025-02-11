@@ -784,6 +784,10 @@ model RestoreProtectionItemRequest {
   @visibility("read", "create")
   restoreType?: RestoreType;
 
+  @doc("Time to restore")
+  @visibility("read", "create")
+  toTime?: string;
+
   @doc("The vm destination details of the VM.")
   @visibility("read", "create")
   vmDestinationInfo: VmDestinationInfo;
