@@ -29,7 +29,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
   // Read the execution report to determine if the generation was successful
   const executionReportPath = path.join(
     commandInput.workingFolder,
-    `${commandInput.sdkRepoName}_tmp/executionReport.json`
+    `${commandInput.sdkRepoName}_tmp/execution-report.json`,
   );
   try {
     const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
@@ -94,7 +94,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
     // Read the execution report to determine if the generation was successful
     const executionReportPath = path.join(
       commandInput.workingFolder,
-      `${commandInput.sdkRepoName}_tmp/executionReport.json`
+      `${commandInput.sdkRepoName}_tmp/execution-report.json`,
     );
     try {
       const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
@@ -117,7 +117,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
     } catch (error) {
       logMessage(
         `Error reading execution report at ${executionReportPath}:${error}`,
-        LogLevel.Error
+        LogLevel.Error,
       );
       statusCode = 1;
     }
@@ -164,14 +164,14 @@ function parseArguments(): SpecGenSdkCmdInput {
   // Get the arguments passed to the script
   const args: string[] = process.argv.slice(2);
   const localSpecRepoPath: string = path.resolve(
-    getArgumentValue(args, "--scp", path.join(__dirname, "..", ".."))
+    getArgumentValue(args, "--scp", path.join(__dirname, "..", "..")),
   );
   const sdkRepoName: string = getArgumentValue(args, "--lang", "azure-sdk-for-net");
   const localSdkRepoPath: string = path.resolve(
-    getArgumentValue(args, "--sdp", path.join(localSpecRepoPath, "..", sdkRepoName))
+    getArgumentValue(args, "--sdp", path.join(localSpecRepoPath, "..", sdkRepoName)),
   );
   const workingFolder: string = path.resolve(
-    getArgumentValue(args, "--wf", path.join(localSpecRepoPath, ".."))
+    getArgumentValue(args, "--wf", path.join(localSpecRepoPath, "..")),
   );
   return {
     workingFolder,
@@ -209,7 +209,7 @@ function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): string[] {
     "-c",
     commandInput.specCommitSha,
     "-t",
-    commandInput.isTriggeredByPipeline
+    commandInput.isTriggeredByPipeline,
   );
   if (commandInput.specRepoHttpsUrl) {
     specGenSdkCommand.push("--spec-repo-url", commandInput.specRepoHttpsUrl);
@@ -244,7 +244,7 @@ function getSpecPaths(runMode: string, specRepoPath: string): string[] {
     case "all-specs": {
       specConfigPaths.push(
         ...getAllTypeSpecPaths(specRepoPath),
-        ...findReadmeFiles(path.join(specRepoPath, "specification"))
+        ...findReadmeFiles(path.join(specRepoPath, "specification")),
       );
       break;
     }
