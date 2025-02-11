@@ -71,6 +71,18 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(UserSessions.sendMessage::parameters.body, "sendMessage");
 
+@@clientName(HostPools.update::parameters.properties, "hostPool");
+
+@@clientName(SessionHostConfigurations.update::parameters.properties,
+  "sessionHostConfiguration"
+);
+
+@@clientName(SessionHostManagements.update::parameters.properties,
+  "sessionHostManagement"
+);
+
+@@clientName(SessionHosts.update::parameters.properties, "sessionHost");
+
 @@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
   "^[-\\w\\._,\\(\\)]+$"
 );
