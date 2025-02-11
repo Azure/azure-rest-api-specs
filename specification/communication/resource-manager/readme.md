@@ -35,7 +35,7 @@ tag: package-preview-2025-01-25
 
 These settings apply only when `--tag=package-preview-2025-01-25-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-01-25-preview'
+```yaml $(tag) == 'package-preview-2025-01-25'
 input-file:
   - Microsoft.Communication/preview/2025-01-25-preview/CommunicationServices.json
   - Microsoft.Communication/preview/2025-01-25-preview/Locations.json
