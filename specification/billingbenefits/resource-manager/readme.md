@@ -56,32 +56,51 @@ directive:
     from: billingbenefits.json
   - suppress: TenantLevelAPIsNotAllowed
     from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrderAliases/{savingsPlanOrderAliasName}"]
   - suppress: ParametersInPointGet
     from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}"].get.parameters
+  - suppress: ParametersInPointGet
+    from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].get.parameters
   - suppress: GetCollectionOnlyHasValueAndNextLink
     from: billingbenefits.json
-  - suppress: ParametersInPointGet
-    from: billingbenefits.json
-  - suppress: LroExtension
-    from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
   - suppress: PatchResponseCodes
     from: billingbenefits.json
-  - suppress: XMSLongRunningOperationProperty
-    from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].patch
   - suppress: NoErrorCodeResponses
     from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].patch.responses["404"]
   - suppress: PathForTrackedResourceTypes
     from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/reservationOrderAliases/{reservationOrderAliasName}"]
   - suppress:  PutRequestResponseSchemeArm
     from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/reservationOrderAliases/{reservationOrderAliasName}"].put
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: billingbenefits.json
+    reason: False-positive. Tags property exists.
+    where: $.paths["/providers/Microsoft.BillingBenefits/reservationOrderAliases/{reservationOrderAliasName}"].put
   - suppress: AvoidAdditionalProperties
     from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.definitions.SavingsPlanModelListResult.properties
   - suppress: AllTrackedResourcesMustHaveDelete
     from: billingbenefits.json
+    reason: False-positive. ReservationOrderAliasResponse is a type defintion that does not require a delete operation.
+    where: $.definitions.ReservationOrderAliasResponse
   - suppress: PatchIdentityProperty
-    from : billingbenefits.json
+    from: billingbenefits.json
+    reason: False-positive. Identity property is never defined on the model.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/discounts/{discountName}"].patch.parameters[4]
 ```
 
 ### Tag: package-preview-2024-11-01-preview
