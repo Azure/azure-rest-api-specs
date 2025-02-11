@@ -29,6 +29,32 @@ export async function extractInputs(github, context, core) {
       issue_number: payload.pull_request.number,
       run_id: NaN,
     };
+  } else if (
+    context.eventName === "issue_comment" &&
+    context.payload.action === "edited"
+  ) {
+    const payload =
+      /** @type {import("@octokit/webhooks-types").IssueCommentEditedEvent} */ (
+        context.payload
+      );
+
+    const owner = payload.repository.owner.login;
+    const repo = payload.repository.name;
+    const issue_number = payload.issue.number;
+
+    const { data: pr } = await github.rest.pulls.get({
+      owner: owner,
+      repo: repo,
+      pull_number: issue_number,
+    });
+
+    inputs = {
+      owner: owner,
+      repo: repo,
+      head_sha: pr.head.sha,
+      issue_number: issue_number,
+      run_id: NaN,
+    };
   } else if (context.eventName === "workflow_dispatch") {
     const payload =
       /** @type {import("@octokit/webhooks-types").WorkflowDispatchEvent} */ (
