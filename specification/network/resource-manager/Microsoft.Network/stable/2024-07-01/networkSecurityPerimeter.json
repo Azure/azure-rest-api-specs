@@ -305,9 +305,9 @@
       ],
       "get": {
         "tags": [
-          "NspProfiles"
+          "NetworkSecurityPerimeterProfiles"
         ],
-        "operationId": "NspProfiles_Get",
+        "operationId": "NetworkSecurityPerimeterProfiles_Get",
         "description": "Gets the specified NSP profile.",
         "responses": {
           "200": {
@@ -331,9 +331,9 @@
       },
       "put": {
         "tags": [
-          "NspProfiles"
+          "NetworkSecurityPerimeterProfiles"
         ],
-        "operationId": "NspProfiles_CreateOrUpdate",
+        "operationId": "NetworkSecurityPerimeterProfiles_CreateOrUpdate",
         "description": "Creates or updates a network profile.",
         "parameters": [
           {
@@ -374,9 +374,9 @@
       },
       "delete": {
         "tags": [
-          "NspProfiles"
+          "NetworkSecurityPerimeterProfiles"
         ],
-        "operationId": "NspProfiles_Delete",
+        "operationId": "NetworkSecurityPerimeterProfiles_Delete",
         "description": "Deletes an NSP profile.",
         "responses": {
           "200": {
@@ -402,9 +402,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles": {
       "get": {
         "tags": [
-          "NspProfiles"
+          "NetworkSecurityPerimeterProfiles"
         ],
-        "operationId": "NspProfiles_List",
+        "operationId": "NetworkSecurityPerimeterProfiles_List",
         "description": "Lists the NSP profiles in the specified network security perimeter.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -473,9 +473,9 @@
       ],
       "get": {
         "tags": [
-          "NspAccessRules"
+          "NetworkSecurityPerimeterAccessRules"
         ],
-        "operationId": "NspAccessRules_Get",
+        "operationId": "NetworkSecurityPerimeterAccessRules_Get",
         "description": "Gets the specified NSP access rule by name.",
         "responses": {
           "200": {
@@ -499,9 +499,9 @@
       },
       "put": {
         "tags": [
-          "NspAccessRules"
+          "NetworkSecurityPerimeterAccessRules"
         ],
-        "operationId": "NspAccessRules_CreateOrUpdate",
+        "operationId": "NetworkSecurityPerimeterAccessRules_CreateOrUpdate",
         "description": "Creates or updates a network access rule.",
         "parameters": [
           {
@@ -542,9 +542,9 @@
       },
       "delete": {
         "tags": [
-          "NspAccessRules"
+          "NetworkSecurityPerimeterAccessRules"
         ],
-        "operationId": "NspAccessRules_Delete",
+        "operationId": "NNetworkSecurityPerimeterAccessRules_Delete",
         "description": "Deletes an NSP access rule.",
         "responses": {
           "200": {
@@ -570,9 +570,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules": {
       "get": {
         "tags": [
-          "NspAccessRules"
+          "NetworkSecurityPerimeterAccessRules"
         ],
-        "operationId": "NspAccessRules_List",
+        "operationId": "NetworkSecurityPerimeterAccessRules_List",
         "description": "Lists the NSP access rules in the specified NSP profile.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -641,9 +641,9 @@
       ],
       "get": {
         "tags": [
-          "NspAssociations"
+          "NetworkSecurityPerimeterAssociations"
         ],
-        "operationId": "NspAssociations_Get",
+        "operationId": "NetworkSecurityPerimeterAssociations_Get",
         "description": "Gets the specified NSP association by name.",
         "responses": {
           "200": {
@@ -667,9 +667,9 @@
       },
       "put": {
         "tags": [
-          "NspAssociations"
+          "NetworkSecurityPerimeterAssociations"
         ],
-        "operationId": "NspAssociations_CreateOrUpdate",
+        "operationId": "NetworkSecurityPerimeterAssociations_CreateOrUpdate",
         "description": "Creates or updates a NSP resource association.",
         "parameters": [
           {
@@ -723,9 +723,9 @@
       },
       "delete": {
         "tags": [
-          "NspAssociations"
+          "NetworkSecurityPerimeterAssociations"
         ],
-        "operationId": "NspAssociations_Delete",
+        "operationId": "NetworkSecurityPerimeterAssociations_Delete",
         "description": "Deletes an NSP association resource.",
         "responses": {
           "200": {
@@ -761,9 +761,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations": {
       "get": {
         "tags": [
-          "NspAssociations"
+          "NetworkSecurityPerimeterAssociations"
         ],
-        "operationId": "NspAssociations_List",
+        "operationId": "NetworkSecurityPerimeterAssociations_List",
         "description": "Lists the NSP resource associations.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -829,9 +829,9 @@
       ],
       "post": {
         "tags": [
-          "NspAssociationReconcile"
+          "NetworkSecurityPerimeterAssociations"
         ],
-        "operationId": "NspAssociationReconcile_Post",
+        "operationId": "NetworkSecurityPerimeterAssociations_Post",
         "description": "Reconcile NSP association",
         "parameters": [
           {
@@ -867,7 +867,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes": {
       "get": {
-        "operationId": "PerimeterAssociableResourceTypes_List",
+        "tags": [
+          "NetworkSecurityPerimeterAssociableResourceTypes"
+        ],
+        "operationId": "NetworkSecurityPerimeterAssociableResourceTypes_List",
         "description": "Gets the list of resources that are onboarded with NSP. These resources can be associated with a network security perimeter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -927,9 +930,9 @@
       ],
       "post": {
         "tags": [
-          "NspAccessRulesReconcile"
+          "NetworkSecurityPerimeterAccessRules"
         ],
-        "operationId": "NspAccessRulesReconcile_Post",
+        "operationId": "NetworkSecurityPerimeterAccessRules_Reconcile",
         "description": "Reconcile NSP access rules",
         "parameters": [
           {
@@ -983,9 +986,9 @@
       ],
       "get": {
         "tags": [
-          "NspLinks"
+          "NetworkSecurityPerimeterLinks"
         ],
-        "operationId": "NspLinks_Get",
+        "operationId": "NetworkSecurityPerimeterLinks_Get",
         "description": "Gets the specified NSP link resource.",
         "responses": {
           "200": {
@@ -1009,9 +1012,9 @@
       },
       "put": {
         "tags": [
-          "NspLinks"
+          "NetworkSecurityPerimeterLinks"
         ],
-        "operationId": "NspLinks_CreateOrUpdate",
+        "operationId": "NetworkSecurityPerimeterLinks_CreateOrUpdate",
         "description": "Creates or updates NSP link resource.",
         "parameters": [
           {
@@ -1052,9 +1055,9 @@
       },
       "delete": {
         "tags": [
-          "NspLinks"
+          "NetworkSecurityPerimeterLinks"
         ],
-        "operationId": "NspLinks_Delete",
+        "operationId": "NetworkSecurityPerimeterLinks_Delete",
         "description": "Deletes an NSP Link resource.",
         "responses": {
           "200": {
@@ -1093,9 +1096,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links": {
       "get": {
         "tags": [
-          "NspLinks"
+          "NetworkSecurityPerimeterLinks"
         ],
-        "operationId": "NspLinks_List",
+        "operationId": "NetworkSecurityPerimeterLinks_List",
         "description": "Lists the NSP Link resources in the specified network security perimeter.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1161,9 +1164,9 @@
       ],
       "get": {
         "tags": [
-          "NspLinkReferences"
+          "NetworkSecurityPerimeterLinkReferences"
         ],
-        "operationId": "NspLinkReferences_Get",
+        "operationId": "NNetworkSecurityPerimeterLinkReferences_Get",
         "description": "Gets the specified NSP linkReference resource.",
         "responses": {
           "200": {
@@ -1187,9 +1190,9 @@
       },
       "delete": {
         "tags": [
-          "NspLinkReferences"
+          "NetworkSecurityPerimeterLinkReferences"
         ],
-        "operationId": "NspLinkReferences_Delete",
+        "operationId": "NNetworkSecurityPerimeterLinkReferences_Delete",
         "description": "Deletes an NSP LinkReference resource.",
         "responses": {
           "200": {
@@ -1228,9 +1231,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences": {
       "get": {
         "tags": [
-          "NspLinkReferences"
+          "NetworkSecurityPerimeterLinkReferences"
         ],
-        "operationId": "NspLinkReferences_List",
+        "operationId": "NetworkSecurityPerimeterLinkReferences_List",
         "description": "Lists the NSP LinkReference resources in the specified network security perimeter.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1296,9 +1299,9 @@
       ],
       "get": {
         "tags": [
-          "NspLoggingConfiguration"
+          "NetworkSecurityPerimeterLoggingConfigurations"
         ],
-        "operationId": "NspLoggingConfiguration_Get",
+        "operationId": "NetworkSecurityPerimeterLoggingConfigurations_Get",
         "description": "Gets the NSP logging configuration.",
         "responses": {
           "200": {
@@ -1322,9 +1325,9 @@
       },
       "put": {
         "tags": [
-          "NspLoggingConfiguration"
+          "NetworkSecurityPerimeterLoggingConfigurations"
         ],
-        "operationId": "NspLoggingConfiguration_CreateOrUpdate",
+        "operationId": "NetworkSecurityPerimeterLoggingConfigurations_CreateOrUpdate",
         "description": "Creates or updates NSP logging configuration.",
         "parameters": [
           {
@@ -1365,9 +1368,9 @@
       },
       "delete": {
         "tags": [
-          "NspLoggingConfiguration"
+          "NetworkSecurityPerimeterLoggingConfigurations"
         ],
-        "operationId": "NspLoggingConfiguration_Delete",
+        "operationId": "NetworkSecurityPerimeterLoggingConfigurations_Delete",
         "description": "Deletes an NSP Logging configuration.",
         "responses": {
           "200": {
@@ -1407,9 +1410,9 @@
       ],
       "get": {
         "tags": [
-          "NspLoggingConfiguration"
+          "NetworkSecurityPerimeterLoggingConfigurations"
         ],
-        "operationId": "NspLoggingConfigurations_List",
+        "operationId": "NetworkSecurityPerimeterLoggingConfigurations_List",
         "description": "Lists the NSP logging configuration.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1452,9 +1455,9 @@
       ],
       "get": {
         "tags": [
-          "NspOperationStatus"
+          "NetworkSecurityPerimeterOperationStatuses"
         ],
-        "operationId": "NspOperationStatus_Get",
+        "operationId": "NetworkSecurityPerimeterOperationStatuses_Get",
         "description": "Gets the operation status for the given operation id.",
         "responses": {
           "200": {
