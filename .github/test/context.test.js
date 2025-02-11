@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { extractInputs } from "../src/context.js";
-import { createMockCore } from "./mocks.js";
+import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("extractInputs", () => {
   it("unsupported_event", async () => {
@@ -43,6 +43,45 @@ describe("extractInputs", () => {
       head_sha: "abc123",
       issue_number: 123,
       run_id: NaN,
+    });
+  });
+
+  it("issue_comment:edited", async () => {
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: { head: { sha: "abc123" } },
+    });
+
+    const context = {
+      eventName: "issue_comment",
+      payload: {
+        action: "edited",
+        repository: {
+          name: "TestRepoName",
+          owner: {
+            login: "TestRepoOwnerLogin",
+          },
+        },
+        issue: {
+          number: 123,
+        },
+      },
+    };
+
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "abc123",
+      issue_number: 123,
+      run_id: NaN,
+    });
+
+    expect(github.rest.pulls.get).toHaveBeenCalledWith({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      pull_number: 123,
     });
   });
 
