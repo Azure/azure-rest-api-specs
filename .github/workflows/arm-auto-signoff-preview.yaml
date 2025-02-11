@@ -1,0 +1,75 @@
+name: ARM Auto Signoff (Preview)
+
+on:
+  # TODO: Re-enable once we figure out how to find the PR number from a check_suite:completed event from a fork PR
+  # check_suite:
+  #   Depends on check_run status, so must re-evaluate whenever a check_suite is completed.
+  #   Could instead trigger on check_run events, but I think this is unnecessarily noisy.
+  #   types: [completed]
+  pull_request:
+    types:
+      # Depends on labels, so must re-evaluate whenever a label is manually added or removed.
+      - labeled
+      - unlabeled
+      # Depends on changed files and check_run status, so must re-evaluate whenever either could change
+      - opened
+      - reopened
+      - synchronize
+  # For manual testing
+  workflow_dispatch:
+    inputs:
+      owner:
+        description: The account owner of the repository. The name is not case sensitive.
+        required: true
+        type: string
+      repo:
+        description: The name of the repository without the .git extension. The name is not case sensitive.
+        required: true
+        type: string
+      issue_number:
+        description: The number of the pull request.
+        required: true
+        type: string
+      head_sha:
+        description: The SHA of the commit.
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  arm-auto-signoff-preview:
+    name: ARM Auto Signoff (Preview)
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Required to determine files changed in PR
+          fetch-depth: 2
+
+      # Output is "none" for no-op, "add" to add label, and "remove" to remove label
+      - id: get-label-action
+        name: ARM Auto Signoff (Preview)
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const { default: getLabelAction } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff-preview.js');
+            return await getLabelAction({ github, context, core });
+        env:
+          OWNER: ${{ inputs.owner }}
+          REPO: ${{ inputs.repo }}
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+          HEAD_SHA: ${{ inputs.head_sha }}
+
+      - if: ${{ steps.get-label-action.outputs.result == 'add' || steps.get-label-action.outputs.result == 'remove' }}
+        name: Upload artifact with results
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMAutoSignoffPreview"
+          # Convert "add/remove" to "true/false"
+          value: "${{ steps.get-label-action.outputs.result == 'add' }}"
