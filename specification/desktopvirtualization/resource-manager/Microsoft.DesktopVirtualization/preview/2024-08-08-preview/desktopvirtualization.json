@@ -8307,10 +8307,7 @@
           "type": "string",
           "description": "The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG)."
         }
-      },
-      "required": [
-        "securityGroupId"
-      ]
+      }
     },
     "PackageTimestamped": {
       "type": "string",
@@ -10730,11 +10727,6 @@
       "type": "object",
       "description": "Schema for SessionHostManagementUpdateStatus properties.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the SessionHostManagementUpdateStatus",
-          "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-        },
         "status": {
           "$ref": "#/definitions/SessionHostManagementUpdateOperationStatus",
           "description": "Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled"
@@ -10745,7 +10737,6 @@
         }
       },
       "required": [
-        "name",
         "status"
       ],
       "allOf": [

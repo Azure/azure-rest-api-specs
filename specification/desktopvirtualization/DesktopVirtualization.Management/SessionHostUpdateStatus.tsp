@@ -15,18 +15,11 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for SessionHostManagementUpdateStatus properties.
  */
-//TODO: Talk with reviewer, dont need ResourceName defined in OperationStatusResult AND ResourceNameParameter
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Composition over inheritance"
 @parentResource(SessionHostManagement)
 @singleton("default")
 model SessionHostManagementUpdateStatus
   extends Azure.ResourceManager.CommonTypes.OperationStatusResult {
-  ...ResourceNameParameter<
-    Resource = SessionHostManagementUpdateStatus,
-    SegmentName = "sessionHostUpdateStatuses",
-    KeyName = "sessionHostUpdateStatuses",
-    NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
-  >;
   ...StatusProperty;
   ...UpdateStatusProperty;
 }
@@ -38,5 +31,7 @@ interface SessionHostManagementUpdateStatuses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
   @OpenAPI.operationId("SessionHostManagementsUpdateStatus_Get")
+  @get
+  @action("sessionHostUpdateStatuses/default")
   get is ArmResourceRead<SessionHostManagementUpdateStatus>;
 }

@@ -1506,7 +1506,7 @@ model NetworkInfoProperties {
   /**
    * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
    */
-  securityGroupId: string;
+  securityGroupId?: string;
 }
 
 /**
