@@ -1,4 +1,3 @@
-import { Rule } from "./rule.js";
 import { RuleResult } from "./rule-result.js";
 import { TsvHost } from "./tsv-host.js";
 import { join } from "path";
@@ -7,39 +6,16 @@ import { parse as yamlParse } from "yaml";
 export type ExpectedValueType = string | boolean | RegExp;
 export type SkipResult = { shouldSkip: boolean; reason?: string };
 
-abstract class TspconfigSubRuleBase implements Rule {
-  name: string;
-  description: string;
-
+export abstract class TspconfigSubRuleBase {
   protected keyToValidate: string;
   protected expectedValue: ExpectedValueType;
 
-  constructor(
-    ruleName: string,
-    description: string,
-    keyToValidate: string,
-    expectedValue: ExpectedValueType,
-  ) {
-    this.name = ruleName;
-    this.description = description;
+  constructor(keyToValidate: string, expectedValue: ExpectedValueType) {
     this.keyToValidate = keyToValidate;
     this.expectedValue = expectedValue;
   }
 
-  public async execute(host?: TsvHost, folder?: string): Promise<RuleResult> {
-    if (!host) {
-      return this.createFailedResult(
-        `Internal error: no host defined, this rule can't be executed.`,
-        "Please contact the tool owner.",
-      );
-    }
-
-    if (!folder) {
-      return this.createFailedResult(
-        `No folder defined, this rule can't be executed.`,
-        "Please add folder in suppression file.",
-      );
-    }
+  public async execute(host: TsvHost, folder: string): Promise<RuleResult> {
     const tspconfigExists = await host.checkFileExists(join(folder, "tspconfig.yaml"));
     if (!tspconfigExists)
       return this.createFailedResult(
@@ -62,7 +38,7 @@ abstract class TspconfigSubRuleBase implements Rule {
     if (shouldSkip)
       return {
         success: true,
-        stdOutput: `[${this.name}]: validation skipped. ${reason}`,
+        stdOutput: `Validation skipped. ${reason}`,
       };
     return this.validate(config);
   }
@@ -89,7 +65,6 @@ abstract class TspconfigSubRuleBase implements Rule {
     }
   }
 
-  // NOTE: to avoid huge impact on all sdk automation, since there's no single rules suppress mechanism, we will keep the success as true
   protected createFailedResult(error: string, action: string): RuleResult {
     return {
       success: false,
@@ -99,72 +74,61 @@ abstract class TspconfigSubRuleBase implements Rule {
 }
 
 export class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
-  constructor(
-    ruleName: string,
-    description: string,
-    keyToValidate: string,
-    expectedValue: ExpectedValueType,
-  ) {
-    super(ruleName, description, keyToValidate, expectedValue);
+  constructor(keyToValidate: string, expectedValue: ExpectedValueType) {
+    super(keyToValidate, expectedValue);
   }
 
   protected validate(config: any): RuleResult {
     const parameter = config?.parameters?.[this.keyToValidate]?.default;
-    if (!parameter)
+    if (parameter === undefined)
       return this.createFailedResult(
         `Failed to find "parameters.${this.keyToValidate}.default"`,
         `Please add "parameters.${this.keyToValidate}.default"`,
       );
 
-    if (this.expectedValue instanceof RegExp) {
-      if (!this.validateValue(parameter, this.expectedValue))
-        return this.createFailedResult(
-          `The value of parameters.${this.keyToValidate}.default "${parameter}" does not match "${this.expectedValue}"`,
-          `Please update the value of "parameters.${this.keyToValidate}.default" to match "${this.expectedValue}".`,
-        );
-    }
+    if (!this.validateValue(parameter, this.expectedValue))
+      return this.createFailedResult(
+        `The value of parameters.${this.keyToValidate}.default "${parameter}" does not match "${this.expectedValue}"`,
+        `Please update the value of "parameters.${this.keyToValidate}.default" to match "${this.expectedValue}".`,
+      );
 
-    return { success: true, stdOutput: `[${this.name}]: validation passed.` };
+    return { success: true };
   }
 }
 
 export class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
   private emitterName: string;
 
-  constructor(
-    ruleName: string,
-    description: string,
-    emitterName: string,
-    keyToValidate: string,
-    expectedValue: ExpectedValueType,
-  ) {
-    super(ruleName, description, keyToValidate, expectedValue);
+  constructor(emitterName: string, keyToValidate: string, expectedValue: ExpectedValueType) {
+    super(keyToValidate, expectedValue);
     this.emitterName = emitterName;
   }
 
   protected validate(config: any): RuleResult {
-    const emitterOptions = config?.options?.[this.emitterName];
-    if (!emitterOptions)
-      return this.createFailedResult(
-        `Failed to find "options.@${this.emitterName}"`,
-        `Please add "options.@${this.emitterName}"`,
-      );
-
-    const value = emitterOptions[this.keyToValidate];
-    if (!value)
-      return this.createFailedResult(
-        `Failed to find "options.@${this.emitterName}.${this.keyToValidate}"`,
-        `Please add "options.@${this.emitterName}.${this.keyToValidate}"`,
-      );
-
-    if (this.expectedValue instanceof RegExp) {
-      if (!this.validateValue(value, this.expectedValue))
+    let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
+    for (const segment of this.keyToValidate.split(".")) {
+      if (option && typeof option === "object" && !Array.isArray(option) && segment in option)
+        option = option![segment];
+      else
         return this.createFailedResult(
-          `The value of options.@${this.emitterName}.${this.keyToValidate} "${value}" does not match "${this.expectedValue}"`,
-          `Please update the value of "options.@${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}".`,
+          `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+          `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
         );
     }
 
-    return { success: true, stdOutput: `- [${this.name}]: validation passed.` };
+    if (option === undefined)
+      return this.createFailedResult(
+        `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+        `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
+      );
+
+    const actualValue = option as unknown as undefined | string | boolean;
+    if (!this.validateValue(actualValue, this.expectedValue))
+      return this.createFailedResult(
+        `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}"`,
+        `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}"`,
+      );
+
+    return { success: true };
   }
 }
