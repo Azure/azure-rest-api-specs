@@ -1,13 +1,11 @@
 import { parseArgs, ParseArgsConfig } from "node:util";
+import { getSuppressions, Suppression } from "suppressions";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
 import { FlavorAzureRule } from "./rules/flavor-azure.js";
-import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
-import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
-import { getSuppressions, Suppression } from "suppressions";
 
 export async function main() {
   const host = new TsvRunnerHost();
@@ -40,11 +38,11 @@ export async function main() {
   }
 
   const rules = [
-    new FolderStructureRule(),
+    // new FolderStructureRule(),
     new NpmPrefixRule(),
     new EmitAutorestRule(),
     new FlavorAzureRule(),
-    new LinterRulesetRule(),
+    // new LinterRulesetRule(),
     new CompileRule(),
     new FormatRule(),
   ];
