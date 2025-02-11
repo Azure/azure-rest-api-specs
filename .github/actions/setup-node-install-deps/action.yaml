@@ -3,14 +3,14 @@ description: Uses specified Node version and installs dependencies (typically us
 
 inputs:
   node-version:
-    description: 'Node version to use'
+    description: "Node version to use"
     default: 22.x
   install-command:
-    description: 'Command to install dependencies'
-    default: 'npm ci'
+    description: "Command to install dependencies"
+    default: "npm ci"
   working-directory:
-    description: 'Working directory'
-    default: '.'
+    description: "Working directory"
+    default: "."
 
 runs:
   using: "composite"
@@ -19,6 +19,15 @@ runs:
     - uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
+
+    - name: Regenerate package-lock.json with latest "next" versions
+      run: |
+        rm package-lock.json
+        npm install --package-lock-only
+        echo "::group::echo package-lock.json"
+        cat package-lock.json
+        echo "::endgroup::"
+      shell: bash
 
     - run: |
         echo "::group::$INSTALL_COMMAND"
