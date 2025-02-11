@@ -12,3 +12,7 @@ using Azure.ClientGenerator.Core;
   "DeviceRegistryManagementClient",
   "java"
 );
+@@clientName(Microsoft.DeviceRegistry,
+  "DeviceRegistryManagementClient",
+  "javascript"
+);
