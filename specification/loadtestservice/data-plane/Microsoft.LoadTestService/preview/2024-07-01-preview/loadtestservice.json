@@ -2649,7 +2649,7 @@
         ]
       }
     },
-    "CreateByTypes": {
+    "CreatedByType": {
       "type": "string",
       "description": "The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).",
       "enum": [
@@ -2657,7 +2657,7 @@
         "ScheduledTrigger"
       ],
       "x-ms-enum": {
-        "name": "CreateByTypes",
+        "name": "CreatedByType",
         "modelAsString": true,
         "values": [
           {
@@ -2929,8 +2929,7 @@
         }
       },
       "required": [
-        "instanceMemoryMB",
-        "httpConcurrency"
+        "instanceMemoryMB"
       ]
     },
     "FunctionFlexConsumptionResourceConfigurationCreateOrUpdate": {
@@ -5357,7 +5356,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/CreateByTypes",
+          "$ref": "#/definitions/CreatedByType",
           "description": "The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc)."
         },
         "createdDateTime": {
@@ -5518,7 +5517,7 @@
           "description": "Enable or disable debug level logging. True if debug logs are enabled for the test run. False otherwise"
         },
         "createdByType": {
-          "$ref": "#/definitions/CreateByTypes",
+          "$ref": "#/definitions/CreatedByType",
           "description": "The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc)."
         }
       }

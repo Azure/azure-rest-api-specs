@@ -90,7 +90,7 @@ model FunctionFlexConsumptionResourceConfiguration {
   instanceMemoryMB: int64;
 
   @doc("HTTP Concurrency for the function app.")
-  httpConcurrency: int64;
+  httpConcurrency?: int64;
 }
 
 @doc("Details of a particular test run for a test profile run.")
