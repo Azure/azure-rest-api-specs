@@ -44,7 +44,16 @@ interface AppAttachPackages {
   /**
    * Remove an App Attach Package.
    */
-  delete is ArmResourceDeleteSync<AppAttachPackage>;
+  delete is ArmResourceDeleteSync<
+    AppAttachPackage,
+    Parameters = {
+      /**
+       * Allows force delete
+       */
+      @query("$force")
+      force?: boolean;
+    }
+  >;
 
   /**
    * List App Attach packages in resource group.

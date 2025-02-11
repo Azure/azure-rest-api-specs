@@ -48,7 +48,28 @@ interface CustomPrivateEndpointConnection {
   getByHostPool is HostPoolOps.Read<PrivateEndpointConnections>;
   updateByHostPool is HostPoolOps.CreateOrUpdateSync<PrivateEndpointConnections>;
   deleteByHostPool is HostPoolOps.DeleteSync<PrivateEndpointConnections>;
-  listByHostPool is HostPoolOps.List<PrivateEndpointConnections>;
+  listByHostPool is HostPoolOps.List<
+    PrivateEndpointConnections,
+    Parameters = {
+      /**
+       * Number of items per page.
+       */
+      @query("pageSize")
+      pageSize?: int32;
+
+      /**
+       * Indicates whether the collection is descending.
+       */
+      @query("isDescending")
+      isDescending?: boolean;
+
+      /**
+       * Initial number of items to skip.
+       */
+      @query("initialSkip")
+      initialSkip?: int32;
+    }
+  >;
   getByWorkspace is WorkspaceOps.Read<PrivateEndpointConnections>;
   updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<PrivateEndpointConnections>;
   deleteByWorkspace is WorkspaceOps.DeleteSync<PrivateEndpointConnections>;

@@ -639,6 +639,14 @@
             "minLength": 3,
             "maxLength": 100,
             "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
+          },
+          {
+            "name": "$force",
+            "in": "query",
+            "description": "Allows force delete",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "force"
           }
         ],
         "responses": {
@@ -2450,6 +2458,29 @@
             "minLength": 3,
             "maxLength": 64,
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "description": "Indicates whether the collection is descending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "description": "Initial number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
