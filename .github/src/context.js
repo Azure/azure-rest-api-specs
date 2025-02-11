@@ -29,6 +29,32 @@ export async function extractInputs(github, context, core) {
       issue_number: payload.pull_request.number,
       run_id: NaN,
     };
+  } else if (
+    context.eventName === "issue_comment" &&
+    context.payload.action === "edited"
+  ) {
+    const payload =
+      /** @type {import("@octokit/webhooks-types").IssueCommentEditedEvent} */ (
+        context.payload
+      );
+
+    const owner = payload.repository.owner.login;
+    const repo = payload.repository.name;
+    const issue_number = payload.issue.number;
+
+    const { data: pr } = await github.rest.pulls.get({
+      owner: owner,
+      repo: repo,
+      pull_number: issue_number,
+    });
+
+    inputs = {
+      owner: owner,
+      repo: repo,
+      head_sha: pr.head.sha,
+      issue_number: issue_number,
+      run_id: NaN,
+    };
   } else if (context.eventName === "workflow_dispatch") {
     const payload =
       /** @type {import("@octokit/webhooks-types").WorkflowDispatchEvent} */ (
@@ -42,59 +68,6 @@ export async function extractInputs(github, context, core) {
       issue_number: NaN,
       run_id: NaN,
     };
-  } else if (
-    context.eventName === "check_suite" &&
-    context.payload.action === "completed"
-  ) {
-    const payload =
-      /** @type {import("@octokit/webhooks-types").CheckSuiteCompletedEvent} */ (
-        context.payload
-      );
-
-    const owner = payload.repository.owner.login;
-    const repo = payload.repository.name;
-    const head_sha = payload.check_suite.head_sha;
-
-    let issue_number;
-
-    const pull_requests = payload.check_suite.pull_requests;
-    if (pull_requests && pull_requests.length > 0) {
-      // For non-fork PRs, we should be able to extract the PR number from the payload, which avoids an
-      // unnecessary API call.  The listPullRequestsAssociatedWithCommit() API also seems to return
-      // empty for non-fork PRs.
-      issue_number = pull_requests[0].number;
-    } else {
-      // For fork PRs, we must call an API in the base repository to get the PR number
-      core.info(
-        `listPullRequestsAssociatedWithCommit(${owner}, ${repo}, ${head_sha})`,
-      );
-      const { data: pullRequests } =
-        await github.rest.repos.listPullRequestsAssociatedWithCommit({
-          owner: owner,
-          repo: repo,
-          commit_sha: head_sha,
-        });
-
-      if (pullRequests.length === 1) {
-        issue_number = pullRequests[0].number;
-      } else {
-        throw new Error(
-          `Unexpected number of pull requests associated with commit '${head_sha}'. Expected: '1'. Actual '${pullRequests.length}'.`,
-        );
-      }
-    }
-
-    const inputs = {
-      owner: owner,
-      repo: repo,
-      head_sha: head_sha,
-      issue_number: issue_number,
-      run_id: NaN,
-    };
-
-    core.info(`inputs: ${JSON.stringify(inputs)}`);
-
-    return inputs;
   } else if (
     context.eventName === "workflow_run" &&
     context.payload.action === "completed"
