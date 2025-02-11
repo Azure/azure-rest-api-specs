@@ -41,7 +41,8 @@ jobs:
     name: ARM Auto Signoff (Preview)
 
     # pull_request:labeled - filter to only the input and output labels
-    # issue_comment:edited - filter to only PR comments containing "next steps to merge"
+    # issue_comment:edited - filter to only PR comments containing "next steps to merge",
+    #   a signal that "Swagger LintDiff" status may have changed
     if: |
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'pull_request' &&
