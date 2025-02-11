@@ -83,6 +83,18 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(SessionHosts.update::parameters.properties, "sessionHost");
 
+@@clientName(ScalingPlans.update::parameters.properties, "scalingPlan");
+
+@@clientName(ScalingPlanPersonalSchedules.update::parameters.properties,
+  "scalingPlanSchedule"
+);
+
+@@clientName(ScalingPlanPooledSchedules.update::parameters.properties,
+  "scalingPlanSchedule"
+);
+
+@@clientName(Workspaces.update::parameters.properties, "workspace");
+
 @@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
   "^[-\\w\\._,\\(\\)]+$"
 );
