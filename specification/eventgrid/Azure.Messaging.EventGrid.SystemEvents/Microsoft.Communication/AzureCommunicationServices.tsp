@@ -1117,7 +1117,6 @@ union CommunicationIdentifierModelKind {
   /** Microsoft Teams Application */
   "microsoftTeamsApp",
 
-
   string,
 }
 
@@ -1334,7 +1333,7 @@ union AcsMessageChannelKind {
 /** Message delivery status */
 union AcsMessageDeliveryStatus {
   /** Read */
-  Read:"read",
+  Read: "read",
 
   /** Delivered */
   Delivered: "delivered",
