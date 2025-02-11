@@ -222,62 +222,19 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Conversation"
+              "$ref": "#/definitions/CreateConversationRequest"
             }
           }
         ],
         "responses": {
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of Conversation"
-              },
-              "Repeatability-Result": {
-                "type": "string",
-                "description": "Indicates whether the repeatable request was accepted or rejected.",
-                "enum": [
-                  "accepted",
-                  "rejected"
-                ],
-                "x-ms-enum": {
-                  "name": "RepeatabilityResult",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "accepted",
-                      "value": "accepted",
-                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
-                    },
-                    {
-                      "name": "rejected",
-                      "value": "rejected",
-                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
-                    }
-                  ]
-                }
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
+            "schema": {
+              "$ref": "#/definitions/Conversation"
             }
           },
           "default": {
@@ -1383,6 +1340,26 @@
         "createdOn"
       ]
     },
+    "CreateConversationRequest": {
+      "type": "object",
+      "description": "Request payload for creating a conversation.",
+      "properties": {
+        "conversation": {
+          "$ref": "#/definitions/Conversation",
+          "description": "The conversation details.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "initialMessage": {
+          "$ref": "#/definitions/Message",
+          "description": "An intial message within the conversation."
+        }
+      },
+      "required": [
+        "conversation"
+      ]
+    },
     "DocumentConversationMessageContent": {
       "type": "object",
       "description": "A request to send a document conversation message.",
@@ -1564,6 +1541,19 @@
         }
       ],
       "x-ms-discriminator-value": "image_v0"
+    },
+    "Message": {
+      "type": "object",
+      "description": "Details of a message.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Content of the message."
+        }
+      },
+      "required": [
+        "content"
+      ]
     },
     "MessagePlatformKind": {
       "type": "string",

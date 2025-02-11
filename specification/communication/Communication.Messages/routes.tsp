@@ -50,8 +50,13 @@ interface StreamOperations {
 interface ConversationManagementOperations {
   @tag("ConversationManagement")
   @doc("Creates a new conversation. This is only for create operation.")
+  @createsResource(Conversation)
   @added(Versions.c2025_03_01_Preview)
-  createConversation is Operations.ResourceCreateWithServiceProvidedName<Conversation>;
+  createConversation is Foundations.ResourceCollectionOperation<
+    Conversation,
+    CreateConversationRequest,
+    CreatedResponse & Conversation
+  >;
 
   @tag("ConversationManagement")
   @doc("Gets the details of a specific conversation.")
@@ -68,10 +73,10 @@ interface ConversationManagementOperations {
   @added(Versions.c2025_03_01_Preview)
   @action("terminate")
   terminateConversation is Operations.ResourceAction<
-  Conversation,
-  {},
-  OkResponse
->;
+    Conversation,
+    {},
+    OkResponse
+  >;
 }
 
 @added(Versions.c2025_03_01_Preview)

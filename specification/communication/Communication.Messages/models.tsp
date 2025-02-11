@@ -565,6 +565,26 @@ model SendConversationMessageResult {
 
 @added(Versions.c2025_03_01_Preview)
 @resource("messages/conversations")
+@doc("Request payload for creating a conversation.")
+model CreateConversationRequest {
+  @key
+  @visibility("create")
+  @doc("The conversation details.")
+  conversation: Conversation;
+
+  @doc("An intial message within the conversation.")
+  initialMessage?: Message;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Response for the create conversation operation.")
+model CreateConversationResult {
+  @doc("Server-generated conversation ID.")
+  id: string;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@resource("messages/conversations")
 @doc("A conversation.")
 model Conversation {
   @key("conversationId")
@@ -578,9 +598,11 @@ model Conversation {
   @doc("List of delivery channel IDs.")
   deliveryChannelIds?: string[];
 
+  @added(Versions.c2025_03_01_Preview)
   @doc("Outbound delivery strategy for the conversation.")
   outboundDeliveryStrategy?: OutboundDeliveryStrategyKind;
-
+  
+  @added(Versions.c2025_03_01_Preview)
   @doc("List of participants involved in the conversation.")
   participants?: Participant[];
 }
