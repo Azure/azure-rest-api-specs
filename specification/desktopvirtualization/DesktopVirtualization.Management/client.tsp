@@ -61,6 +61,16 @@ using Microsoft.DesktopVirtualization;
   "sessionHostConfiguration"
 );
 
+@@clientName(InitiateSessionHostUpdate.post::parameters.body,
+  "updateSessionHostsRequestBody"
+);
+
+@@clientName(Applications.update::parameters.properties, "application");
+
+@@clientName(Desktops.update::parameters.properties, "desktop");
+
+@@clientName(UserSessions.sendMessage::parameters.body, "sendMessage");
+
 @@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
   "^[-\\w\\._,\\(\\)]+$"
 );
