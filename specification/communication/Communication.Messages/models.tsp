@@ -601,7 +601,7 @@ model Conversation {
   @added(Versions.c2025_03_01_Preview)
   @doc("Outbound delivery strategy for the conversation.")
   outboundDeliveryStrategy?: OutboundDeliveryStrategyKind;
-  
+
   @added(Versions.c2025_03_01_Preview)
   @doc("List of participants involved in the conversation.")
   participants?: Participant[];
@@ -745,8 +745,6 @@ model AddParticipantsRequest {
 @added(Versions.c2025_03_01_Preview)
 @doc("Request payload for removing participants from a conversation.")
 model RemoveParticipantsRequest {
-  @key
-  @visibility("read")
   @doc("The participant IDs to remove.")
   participantIds: string[];
 }
