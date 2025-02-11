@@ -144,7 +144,7 @@ union ImageType {
 /**
  * The disk type used by virtual machine in hostpool session host.
  */
-union DiskType {
+union VirtualMachineDiskType {
   string,
 
   /**
@@ -1531,7 +1531,7 @@ model DiskInfoProperties {
   /**
    * The disk type used by virtual machine in hostpool session host.
    */
-  type: DiskType;
+  type: VirtualMachineDiskType;
 }
 
 /**
@@ -1541,7 +1541,7 @@ model DiskInfoPatchProperties {
   /**
    * The disk type used by virtual machine in hostpool session host.
    */
-  type?: DiskType;
+  type?: VirtualMachineDiskType;
 }
 
 /**

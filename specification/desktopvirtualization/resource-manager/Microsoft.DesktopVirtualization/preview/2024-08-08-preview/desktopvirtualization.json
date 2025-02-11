@@ -6944,7 +6944,7 @@
       "description": "Disk information.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/DiskType",
+          "$ref": "#/definitions/VirtualMachineDiskType",
           "description": "The disk type used by virtual machine in hostpool session host."
         }
       }
@@ -6954,43 +6954,13 @@
       "description": "Disk information.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/DiskType",
+          "$ref": "#/definitions/VirtualMachineDiskType",
           "description": "The disk type used by virtual machine in hostpool session host."
         }
       },
       "required": [
         "type"
       ]
-    },
-    "DiskType": {
-      "type": "string",
-      "description": "The disk type used by virtual machine in hostpool session host.",
-      "enum": [
-        "Standard_LRS",
-        "Premium_LRS",
-        "StandardSSD_LRS"
-      ],
-      "x-ms-enum": {
-        "name": "DiskType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Standard_LRS",
-            "value": "Standard_LRS",
-            "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
-          },
-          {
-            "name": "Premium_LRS",
-            "value": "Premium_LRS",
-            "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
-          },
-          {
-            "name": "StandardSSD_LRS",
-            "value": "StandardSSD_LRS",
-            "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
-          }
-        ]
-      }
     },
     "DomainInfoPatchProperties": {
       "type": "object",
@@ -11235,6 +11205,36 @@
           "format": "date-time",
           "description": "The timestamp of the user session create."
         }
+      }
+    },
+    "VirtualMachineDiskType": {
+      "type": "string",
+      "description": "The disk type used by virtual machine in hostpool session host.",
+      "enum": [
+        "Standard_LRS",
+        "Premium_LRS",
+        "StandardSSD_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachineDiskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard_LRS",
+            "value": "Standard_LRS",
+            "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
+          },
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
+          },
+          {
+            "name": "StandardSSD_LRS",
+            "value": "StandardSSD_LRS",
+            "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
+          }
+        ]
       }
     },
     "VirtualMachineSecurityType": {
