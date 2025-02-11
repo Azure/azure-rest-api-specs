@@ -867,10 +867,10 @@ union AcsRouterLabelOperator {
 /** Router Worker Selector State */
 union AcsRouterWorkerSelectorState {
   /** Router Worker Selector State Active */
-  Active: "active",
+  "active",
 
   /** Router Worker Selector State Expired */
-  Expired: "expired",
+  "expired",
 
   string,
 }
@@ -1114,6 +1114,10 @@ union CommunicationIdentifierModelKind {
   /** Microsoft Teams User */
   "microsoftTeamsUser",
 
+  /** Microsoft Teams Application */
+  "microsoftTeamsApp",
+
+
   string,
 }
 
@@ -1330,22 +1334,22 @@ union AcsMessageChannelKind {
 /** Message delivery status */
 union AcsMessageDeliveryStatus {
   /** Read */
-  "read",
+  Read:"read",
 
   /** Delivered */
-  "delivered",
+  Delivered: "delivered",
 
   /** Failed */
-  "failed",
+  Failed: "failed",
 
   /** Sent */
-  "sent",
+  Sent: "sent",
 
   /** Warning */
-  "warning",
+  Warning: "warning",
 
   /** Unknown */
-  "unknown",
+  Unknown: "unknown",
 
   string,
 }
