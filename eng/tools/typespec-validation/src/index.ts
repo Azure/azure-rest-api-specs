@@ -8,8 +8,7 @@ import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
-import { TspConfigCommonAzServiceDirMatchPatternRule } from "./rules/tspconfig-common-az-service-dir-match-pattern.js";
-import { TspConfigJavaAzPackageDirectoryRule } from "./rules/tspconfig-az-java-package-dir-match-pattern.js";
+import { SdkTspConfigValidation } from "./rules/sdk-tspconfig-validation.js";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
 
 export async function main() {
@@ -50,9 +49,7 @@ export async function main() {
     new LinterRulesetRule(),
     new CompileRule(),
     new FormatRule(),
-    new TspConfigCommonAzServiceDirMatchPatternRule(),
-    new TspConfigJavaAzPackageDirectoryRule(),
-    // TODO: add more tspconfig rules here
+    new SdkTspConfigValidation(),
   ];
   let success = true;
   for (let i = 0; i < rules.length; i++) {

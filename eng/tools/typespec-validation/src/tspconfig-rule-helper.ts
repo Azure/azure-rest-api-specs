@@ -4,9 +4,10 @@ import { TsvHost } from "./tsv-host.js";
 import { join } from "path";
 import { parse as yamlParse } from "yaml";
 
-type ExpectedValueType = string | boolean | RegExp;
+export type ExpectedValueType = string | boolean | RegExp;
+export type SkipResult = { shouldSkip: boolean; reason?: string };
 
-abstract class TspconfigRuleBase implements Rule {
+abstract class TspconfigSubRuleBase implements Rule {
   name: string;
   description: string;
 
@@ -25,7 +26,20 @@ abstract class TspconfigRuleBase implements Rule {
     this.expectedValue = expectedValue;
   }
 
-  public async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  public async execute(host?: TsvHost, folder?: string): Promise<RuleResult> {
+    if (!host) {
+      return this.createFailedResult(
+        `Internal error: no host defined, this rule can't be executed.`,
+        "Please contact the tool owner.",
+      );
+    }
+
+    if (!folder) {
+      return this.createFailedResult(
+        `No folder defined, this rule can't be executed.`,
+        "Please add folder in suppression file.",
+      );
+    }
     const tspconfigExists = await host.checkFileExists(join(folder, "tspconfig.yaml"));
     if (!tspconfigExists)
       return this.createFailedResult(
@@ -44,13 +58,17 @@ abstract class TspconfigRuleBase implements Rule {
       );
     }
 
-    const { shouldSkip, skipResult } = this.skip(config);
-    if (shouldSkip) return skipResult;
+    const { shouldSkip, reason } = this.skip(config, folder);
+    if (shouldSkip)
+      return {
+        success: true,
+        stdOutput: `[${this.name}]: validation skipped. ${reason}`,
+      };
     return this.validate(config);
   }
 
-  protected skip(_: any): { shouldSkip: boolean; skipResult: RuleResult } {
-    return { shouldSkip: false, skipResult: { success: true } };
+  protected skip(_config: any, _folder: string): SkipResult {
+    return { shouldSkip: false };
   }
 
   protected abstract validate(config: any): RuleResult;
@@ -74,13 +92,13 @@ abstract class TspconfigRuleBase implements Rule {
   // NOTE: to avoid huge impact on all sdk automation, since there's no single rules suppress mechanism, we will keep the success as true
   protected createFailedResult(error: string, action: string): RuleResult {
     return {
-      success: true,
-      stdOutput: `[${this.name}]: ${error}. ${this.description} ${action}.`,
+      success: false,
+      errorOutput: `- ${error}. ${action}.`,
     };
   }
 }
 
-export class TspconfigParameterRuleBase extends TspconfigRuleBase {
+export class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
   constructor(
     ruleName: string,
     description: string,
@@ -110,7 +128,7 @@ export class TspconfigParameterRuleBase extends TspconfigRuleBase {
   }
 }
 
-export class TspconfigEmitterOptionsRuleBase extends TspconfigRuleBase {
+export class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
   private emitterName: string;
 
   constructor(
@@ -147,6 +165,6 @@ export class TspconfigEmitterOptionsRuleBase extends TspconfigRuleBase {
         );
     }
 
-    return { success: true, stdOutput: `[${this.name}]: validation passed.` };
+    return { success: true, stdOutput: `- [${this.name}]: validation passed.` };
   }
 }
