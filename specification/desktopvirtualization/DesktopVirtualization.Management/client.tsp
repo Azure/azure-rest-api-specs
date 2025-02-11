@@ -103,6 +103,8 @@ using Microsoft.DesktopVirtualization;
   "applicationGroup"
 );
 
+@@clientName(MSIXPackages.createOrUpdate::parameters.resource, "msixPackage");
+
 @@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
   "^[-\\w\\._,\\(\\)]+$"
 );
