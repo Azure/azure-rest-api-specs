@@ -1,7 +1,7 @@
 import { describe, it } from "vitest";
 
 import {
-  SdkTspConfigValidation,
+  SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
   TspConfigTsMgmtModularGenerateMetadataTrueSubRule,
   TspConfigTsMgmtModularHierarchyClientFalseSubRule,
@@ -407,7 +407,7 @@ describe("tspconfig", function () {
       return file === join(c.folder, "tspconfig.yaml");
     };
     host.readTspConfig = async (_folder: string) => c.tspconfigContent;
-    const rule = new SdkTspConfigValidation(c.subRules);
+    const rule = new SdkTspConfigValidationRule(c.subRules);
     const result = await rule.execute(host, c.folder);
     strictEqual(result.success, true);
     if (c.success)

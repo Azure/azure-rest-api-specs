@@ -8,7 +8,7 @@ import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
-import { SdkTspConfigValidation } from "./rules/sdk-tspconfig-validation.js";
+import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
 
 export async function main() {
@@ -49,7 +49,7 @@ export async function main() {
     new LinterRulesetRule(),
     new CompileRule(),
     new FormatRule(),
-    new SdkTspConfigValidation(),
+    new SdkTspConfigValidationRule(),
   ];
   let success = true;
   for (let i = 0; i < rules.length; i++) {

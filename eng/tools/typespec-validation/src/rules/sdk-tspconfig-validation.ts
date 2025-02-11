@@ -273,7 +273,7 @@ export const defaultRules = [
   new TspConfigCsharpMgmtPackageDirectorySubRule(),
 ];
 
-export class SdkTspConfigValidation implements Rule {
+export class SdkTspConfigValidationRule implements Rule {
   private rules: TspconfigSubRuleBase[] = [];
   name = "SdkTspConfigValidation";
   description = "Validate the SDK tspconfig.yaml file";
