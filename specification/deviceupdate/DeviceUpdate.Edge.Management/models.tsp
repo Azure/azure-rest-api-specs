@@ -71,6 +71,12 @@ union SKU {
    * Standard SKU
    */
   Standard: "Standard",
+
+  /**
+   * StandardCache SKU
+   */
+  @added(Versions.v2025_04_01_preview)
+  StandardCache: "StandardCache",
 }
 
 /**
@@ -127,6 +133,23 @@ union DeviceType {
    * All device types supported by Device Update service.
    */
   AllDeviceTypes: "AllDeviceTypes",
+}
+
+/**
+ * The scope of the enrollment
+ */
+union ScopeType {
+  string,
+
+  /**
+   * Subscription scope
+   */
+  Subscription: "Subscription",
+
+  /**
+   * Resource group scope
+   */
+  ResourceGroup: "ResourceGroup",
 }
 
 /**
@@ -279,6 +302,65 @@ union StepType {
 }
 
 /**
+ * Hash algorithm
+ */
+union HashAlgorithm {
+  string,
+
+  /**
+   * Hash algorithm type
+   */
+  sha256: "sha256",
+}
+
+/**
+ * Hash value
+ */
+model HashValue {
+  /**
+   * Hash algorithm
+   */
+  algorithm: HashAlgorithm;
+
+  /**
+   * Hash value
+   */
+  value: string;
+}
+
+/**
+ * The extended location type. Allowed values: 'CustomLocation', 'EdgeZone'
+ */
+union ExtendedLocationType {
+  string,
+
+  /**
+   * The custom location extended location type.
+   */
+  CustomLocation: "CustomLocation",
+
+  /**
+   * The edge zone extended location type.
+   */
+  EdgeZone: "EdgeZone",
+}
+
+/**
+ * The extended location.
+ */
+model ExtendedLocation {
+  /**
+   * The extended location type.
+   */
+  type?: ExtendedLocationType;
+
+  /**
+   *  The extended location name.
+   */
+  name?: string;
+}
+
+/**
  * Device Update update account properties.
  */
 model UpdateAccountProperties {
@@ -328,6 +410,19 @@ model UpdateAccountProperties {
    * User assigned managed identity used for device enrollment and broker communication.
    */
   serviceManagedIdentityResourceId: string;
+
+  /**
+   * Device enrollment scopes
+   */
+  @added(Versions.v2025_04_01_preview)
+  @OpenAPI.extension("x-ms-identifiers", [])
+  deviceEnrollmentScopes?: DeviceEnrollmentScope[];
+
+  /**
+   * The cache storage account resource id used to import content.
+   */
+  @added(Versions.v2025_04_01_preview)
+  cacheStorageResourceId?: string;
 }
 
 /**
@@ -381,6 +476,41 @@ model MqttBroker {
 }
 
 /**
+ * The DeviceEnrollmentScope
+ */
+model DeviceEnrollmentScope {
+  /**
+   * Subscription or resource group used for device enrollment.
+   */
+  scopeId: string;
+
+  /**
+   * The scope type
+   */
+  scopeType: ScopeType = ScopeType.Subscription;
+
+  /**
+   * The cache information
+   */
+  cache?: Cache;
+}
+
+/**
+ * The Cache information
+ */
+model Cache {
+  /**
+   * The Arc extension resource id
+   */
+  arcExtensionResourceId: string;
+
+  /**
+   * The cache download url
+   */
+  cacheDownloadEndpoint: string;
+}
+
+/**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
 model Resource {
@@ -409,8 +539,10 @@ model Resource {
   systemData?: SystemData;
 }
 
+@removed(Versions.v2025_04_01_preview)
 model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+
 /**
  * Request payload used to update an existing Update Account.
  */
@@ -418,11 +550,13 @@ model UpdateAccountUpdate is TagUpdate {
   /**
    * The type of identity used for the resource.
    */
-  identity?: ManagedServiceIdentityUpdate;
+  @typeChangedFrom(Versions.v2025_04_01_preview, ManagedServiceIdentityUpdate)
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 
   /**
    * The geo-location where the resource lives
    */
+  @removed(Versions.v2025_04_01_preview)
   location?: string;
 }
 
@@ -1047,7 +1181,17 @@ model ImportManifestMetadata {
    * A JSON object containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
-  hashes: Record<string>;
+  @removed(Versions.v2025_04_01_preview)
+  @renamedFrom(Versions.v2025_04_01_preview, "hashes")
+  hashesOld: Record<string>;
+
+  /**
+   * An array containing the hash(es) of the file. At least one item is required containing SHA256 hash algorithm and the value being the hash of the file calculated using that algorithm.
+   */
+  @added(Versions.v2025_04_01_preview)
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @minItems(1)
+  hashes: HashValue[];
 }
 
 /**
@@ -1241,7 +1385,17 @@ model UpdateFileBase {
    * Mapping of hashing algorithm to base64 encoded hash values.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
-  hashes: Record<string>;
+  @removed(Versions.v2025_04_01_preview)
+  @renamedFrom(Versions.v2025_04_01_preview, "hashes")
+  hashesOld: Record<string>;
+
+  /**
+   * Mapping of hashing algorithm to base64 encoded hash values.
+   */
+  @added(Versions.v2025_04_01_preview)
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @minItems(1)
+  hashes: HashValue[];
 
   /**
    * File MIME type.

@@ -35,6 +35,10 @@ model ConnectorProperties {
   @doc("Test connection to backing data source before creating the storage connector.")
   testConnection?: boolean = false;
 
+  @visibility("create")
+  @doc("The source of the backing data source.")
+  dataSourceType: DataSourceType;
+
   @doc("Information about how to communicate with and authenticate to the backing data store.")
   source: Source;
 
