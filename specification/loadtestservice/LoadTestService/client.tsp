@@ -14,6 +14,13 @@ namespace Customizations;
 @@clientName(MetricDimensionsRequest.metricname, "metric_name", "python");
 @@clientName(MetricDimensionsRequest.timespan, "time_interval", "python");
 
+// Suggestion to rename TimeGrain to more user-friendly names
+@@clientName(TimeGrain.PT5S, "FiveSeconds", "csharp,java");
+@@clientName(TimeGrain.PT10S, "TenSeconds", "csharp,java");
+@@clientName(TimeGrain.PT1M, "OneMinute", "csharp,java");
+@@clientName(TimeGrain.PT5M, "FiveMinutes", "csharp,java");
+@@clientName(TimeGrain.PT1H, "OneHour", "csharp,java");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
