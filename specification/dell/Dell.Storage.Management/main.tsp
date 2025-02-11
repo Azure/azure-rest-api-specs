@@ -37,7 +37,7 @@ enum Versions {
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2_preview: "2024-08-28-preview",
+  v2_preview: "2025-02-11-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

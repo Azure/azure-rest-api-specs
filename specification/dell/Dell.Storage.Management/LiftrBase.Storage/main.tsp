@@ -19,7 +19,7 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @useDependency(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2_preview: "2024-08-28-preview",
+  v2_preview: "2025-02-11-preview",
 }
 
 /**
@@ -68,6 +68,11 @@ model FileSystemResourceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is the correct name"
   privateIPs?: string[];
+
+  /**
+   * DellReferenceNumber of the resource
+   */
+  dellReferenceNumber: string;
 }
 
 /**
