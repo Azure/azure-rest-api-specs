@@ -891,13 +891,31 @@
           "$ref": "#/definitions/EncryptionProperties",
           "description": "All encryption configuration for a resource."
         },
-        "enableSharedKeyAccess": {
-          "type": "boolean",
-          "description": "Indicates whether shared key access is enabled for this server."
+        "sharedKeyAccess": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "description": "Indicates whether shared key access is enabled for this server.",
+          "title": "SharedKeyAccess",
+          "x-ms-enum": {
+            "name": "SharedKeyAccess",
+            "modelAsString": true
+          }
         },
-        "enablePrivateKeyAccess": {
-          "type": "boolean",
-          "description": "Indicates whether private key access is enabled for this server."
+        "privateKeyAccess": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "description": "Indicates whether private key access is enabled for this server.",
+          "title": "PrivateKeyAccess",
+          "x-ms-enum": {
+            "name": "PrivateKeyAccess",
+            "modelAsString": true
+          }
         }
       },
       "description": "The properties that can be provided when updating FluidRelayServer resource"
@@ -915,13 +933,31 @@
           "description": "The Fluid Relay Service endpoints for this server.",
           "readOnly": true
         },
-        "enableSharedKeyAccess": {
-          "type": "boolean",
-          "description": "Indicates whether shared key access is enabled for this server."
+        "sharedKeyAccess": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "description": "Indicates whether shared key access is enabled for this server.",
+          "title": "SharedKeyAccess",
+          "x-ms-enum": {
+            "name": "SharedKeyAccess",
+            "modelAsString": true
+          }
         },
-        "enablePrivateKeyAccess": {
-          "type": "boolean",
-          "description": "Indicates whether private key access is enabled for this server."
+        "privateKeyAccess": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "description": "Indicates whether private key access is enabled for this server.",
+          "title": "PrivateKeyAccess",
+          "x-ms-enum": {
+            "name": "PrivateKeyAccess",
+            "modelAsString": true
+          }
         },
         "provisioningState": {
           "enum": [
