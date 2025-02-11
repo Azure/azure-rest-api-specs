@@ -21,6 +21,10 @@ namespace Customizations;
 @@clientName(TimeGrain.PT5M, "FiveMinutes", "csharp,java");
 @@clientName(TimeGrain.PT1H, "OneHour", "csharp,java");
 
+// Suggestion to rename enums containing PF acronym since its not well known
+@@clientName(PFAction, "PassFailAction", "csharp,java");
+@@clientName(PFAgFunc, "PassFailAggregationFunction", "csharp,java");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
