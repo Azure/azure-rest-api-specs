@@ -51,11 +51,7 @@ alias ServiceTraits = SupportsClientRequestId;
 @route("/.well-known/transparency-configuration")
 @get
 op getTransparencyConfigCbor is Foundations.Operation<
-  {
-    @doc("Accept header")
-    @header
-    accept: "application/cbor";
-  },
+  AcceptCborHeader,
   TransparencyConfigurationCbor,
   ServiceTraits,
   CborServerErrors
@@ -68,11 +64,7 @@ op getTransparencyConfigCbor is Foundations.Operation<
 @route("/.well-known/transparency-configuration")
 @get
 op getTransparencyConfigJson is Foundations.Operation<
-  {
-    @doc("Accept header")
-    @header
-    accept: "application/json";
-  },
+  AcceptJsonHeader,
   TransparencyConfigurationJson,
   ServiceTraits,
   JsonServerErrors
@@ -182,18 +174,19 @@ op listEntryStatuses is Foundations.Operation<
 @sharedRoute
 @route("/entries/{entryId}")
 op getEntryDeprecated is Foundations.Operation<
-  EmbedReceiptParameter,
+  EntryIdParameter & EmbedReceiptParameter,
   SignedStatement | TransparentStatement,
   ServiceTraits
 >;
 
+// uses explicit accept header to not generate such parameter in .net sdk
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
 @doc("Get signed statement with or without receipt embedded in its unprotected header")
 @sharedRoute
 @route("/entries/{entryId}")
 op getEntry is Foundations.Operation<
-  EmbedReceiptParameter,
+  EntryIdParameter & EmbedReceiptParameter & AcceptCoseHeader,
   SignedStatement | TransparentStatement,
   ServiceTraits,
   AnyCborError
@@ -371,13 +364,32 @@ model EntryIdParameter {
   entryId: string;
 }
 
+@doc("Accept application/cose header")
+model AcceptCoseHeader {
+  @doc("Accept header")
+  @header
+  accept: "application/cose";
+}
+
+@doc("Accept application/cbor header")
+model AcceptCborHeader {
+  @doc("Accept header")
+  @header
+  accept: "application/cbor";
+}
+
+@doc("Accept application/json header")
+model AcceptJsonHeader {
+  @doc("Accept header")
+  @header
+  accept: "application/json";
+}
+
 @doc("The EmbedReceipt parameter.")
 model EmbedReceiptParameter {
   @doc("Embed a receipt as part of the response")
   @query
   embedReceipt?: boolean = false;
-
-  ...EntryIdParameter;
 }
 
 @doc("Range of transactions for historical queries")

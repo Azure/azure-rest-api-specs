@@ -47,17 +47,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/cbor"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
+            "$ref": "#/parameters/AcceptCborHeader"
           }
         ],
         "responses": {
@@ -242,10 +232,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/EmbedReceiptParameter.embedReceipt"
+            "$ref": "#/parameters/EntryIdParameter"
           },
           {
-            "$ref": "#/parameters/EntryIdParameter"
+            "$ref": "#/parameters/EmbedReceiptParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCoseHeader"
           }
         ],
         "responses": {
@@ -595,17 +588,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/json"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
+            "$ref": "#/parameters/AcceptJsonHeader"
           }
         ],
         "responses": {
@@ -1110,6 +1093,48 @@
     }
   },
   "parameters": {
+    "AcceptCborHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/cbor"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AcceptCoseHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/cose"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AcceptJsonHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/json"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -1120,7 +1145,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "EmbedReceiptParameter.embedReceipt": {
+    "EmbedReceiptParameter": {
       "name": "embedReceipt",
       "in": "query",
       "description": "Embed a receipt as part of the response",

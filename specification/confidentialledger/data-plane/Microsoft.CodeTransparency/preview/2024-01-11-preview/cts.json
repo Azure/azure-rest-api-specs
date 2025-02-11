@@ -178,10 +178,10 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/EmbedReceiptParameter.embedReceipt"
+            "$ref": "#/parameters/EntryIdParameter"
           },
           {
-            "$ref": "#/parameters/EntryIdParameter"
+            "$ref": "#/parameters/EmbedReceiptParameter"
           }
         ],
         "responses": {
@@ -483,6 +483,18 @@
     }
   },
   "definitions": {
+    "AcceptCborHeader": {
+      "type": "object",
+      "description": "Accept application/cbor header"
+    },
+    "AcceptCoseHeader": {
+      "type": "object",
+      "description": "Accept application/cose header"
+    },
+    "AcceptJsonHeader": {
+      "type": "object",
+      "description": "Accept application/json header"
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -1005,7 +1017,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "EmbedReceiptParameter.embedReceipt": {
+    "EmbedReceiptParameter": {
       "name": "embedReceipt",
       "in": "query",
       "description": "Embed a receipt as part of the response",
