@@ -631,12 +631,12 @@ union ChatMessageImageDetailLevel {
   high: "high",
 }
 
-@doc("A structured chat content item for audio content passed as a url pointer.")
+@doc("A structured chat content item for audio content passed as a url.")
 model ChatMessageAudioUrlContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'audio_url' for this type.")
   type: "audio_url";
 
-  @doc("The details of the audio url pointer.")
+  @doc("The details of the audio url.")
   @encodedName("application/json", "audio_url")
   audioUrl: ChatMessageInputAudioUrl;
 }
@@ -651,7 +651,7 @@ model ChatMessageAudioDataContentItem extends ChatMessageContentItem {
   inputAudio: ChatMessageInputAudio;
 }
 
-@doc("The details of the audio url pointer.")
+@doc("The details of the audio url.")
 model ChatMessageInputAudioUrl {
   @doc("The URL of the audio content.")
   url: string;
