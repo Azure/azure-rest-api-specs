@@ -449,7 +449,6 @@ These settings apply only when `--tag=package-2024-03-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2024-03-01-only'
 input-file:
-  - Microsoft.Compute/custom-common-types/commonTypes.json
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2024-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json
