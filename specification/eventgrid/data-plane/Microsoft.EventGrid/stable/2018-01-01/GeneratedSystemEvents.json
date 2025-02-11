@@ -682,9 +682,13 @@
           "type": "string",
           "description": "The recipient Email Address"
         },
+        "internetMessageId": {
+          "type": "string",
+          "description": "The Internet Message Id of the email that has been sent"
+        },
         "messageId": {
           "type": "string",
-          "description": "The Id of the email been sent"
+          "description": "The Id of the email that has been sent"
         },
         "status": {
           "$ref": "#/definitions/AcsEmailDeliveryReportStatus",
@@ -701,6 +705,9 @@
         }
       },
       "required": [
+        "sender",
+        "recipient",
+        "internetMessageId",
         "deliveryStatusDetails"
       ]
     },
@@ -759,6 +766,10 @@
         "statusMessage": {
           "type": "string",
           "description": "Detailed status message"
+        },
+        "recipientMailServerHostName": {
+          "type": "string",
+          "description": "Recipient mail server host name"
         }
       }
     },
@@ -2429,8 +2440,16 @@
           "type": "string",
           "format": "date-time",
           "description": "The time at which the SMS was received"
+        },
+        "segmentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of segments in the message"
         }
       },
+      "required": [
+        "segmentCount"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsSmsEventBaseProperties"
@@ -3371,8 +3390,10 @@
         }
       },
       "required": [
-        "target",
-        "connectedRegistry"
+        "id",
+        "action",
+        "location",
+        "target"
       ]
     },
     "ContainerRegistryArtifactEventTarget": {
@@ -3408,7 +3429,11 @@
           "type": "string",
           "description": "The version of the artifact."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "repository"
+      ]
     },
     "ContainerRegistryChartDeletedEventData": {
       "type": "object",
@@ -3446,7 +3471,10 @@
           "type": "string",
           "description": "The name of the connected registry that generated this event."
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "ContainerRegistryEventData": {
       "type": "object",
@@ -3491,11 +3519,10 @@
         }
       },
       "required": [
-        "target",
-        "request",
-        "actor",
-        "source",
-        "connectedRegistry"
+        "id",
+        "action",
+        "location",
+        "target"
       ]
     },
     "ContainerRegistryEventRequest": {
@@ -3522,7 +3549,12 @@
           "type": "string",
           "description": "The user agent header of the request."
         }
-      }
+      },
+      "required": [
+        "id",
+        "host",
+        "method"
+      ]
     },
     "ContainerRegistryEventSource": {
       "type": "object",
@@ -3572,7 +3604,11 @@
           "type": "string",
           "description": "The tag name."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "repository"
+      ]
     },
     "ContainerRegistryImageDeletedEventData": {
       "type": "object",
@@ -6147,7 +6183,9 @@
         }
       },
       "required": [
-        "geometries"
+        "expiredGeofenceGeometryId",
+        "geometries",
+        "invalidPeriodGeofenceGeometryId"
       ]
     },
     "MapsGeofenceExitedEventData": {
@@ -6190,7 +6228,11 @@
           "type": "string",
           "description": "The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API."
         }
-      }
+      },
+      "required": [
+        "deviceId",
+        "geometryId"
+      ]
     },
     "MapsGeofenceResultEventData": {
       "type": "object",
@@ -6905,7 +6947,12 @@
           "type": "string",
           "description": "the type of the resource for which the event is being emitted"
         }
-      }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
     },
     "ResourceNotificationsResourceDeletedEventData": {
       "type": "object",
@@ -6979,8 +7026,9 @@
         }
       },
       "required": [
-        "tags",
-        "properties"
+        "id",
+        "name",
+        "type"
       ]
     },
     "ResourceNotificationsResourceUpdatedEventData": {
@@ -7004,7 +7052,8 @@
       },
       "required": [
         "resourceInfo",
-        "operationalInfo"
+        "operationalInfo",
+        "apiVersion"
       ]
     },
     "ResourceWriteCancelEventData": {
@@ -7366,7 +7415,11 @@
           "type": "string",
           "description": "The user Id of connected client connection."
         }
-      }
+      },
+      "required": [
+        "hubName",
+        "connectionId"
+      ]
     },
     "SignalRServiceClientConnectionDisconnectedEventData": {
       "type": "object",
@@ -7393,7 +7446,11 @@
           "type": "string",
           "description": "The message of error that cause the client connection disconnected."
         }
-      }
+      },
+      "required": [
+        "hubName",
+        "connectionId"
+      ]
     },
     "StampKind": {
       "type": "string",
