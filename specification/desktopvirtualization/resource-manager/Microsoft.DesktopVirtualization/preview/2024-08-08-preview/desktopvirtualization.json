@@ -9102,8 +9102,11 @@
       "description": "ScalingPlanPersonalSchedule properties that can be patched.",
       "properties": {
         "daysOfWeek": {
-          "$ref": "#/definitions/DayOfWeek",
-          "description": "Set of days of the week on which this schedule is active."
+          "type": "array",
+          "description": "Set of days of the week on which this schedule is active.",
+          "items": {
+            "$ref": "#/definitions/ScalingScheduleDaysOfWeekItem"
+          }
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -9312,8 +9315,11 @@
       "description": "A ScalingPlanPersonalSchedule.",
       "properties": {
         "daysOfWeek": {
-          "$ref": "#/definitions/DayOfWeek",
-          "description": "Set of days of the week on which this schedule is active."
+          "type": "array",
+          "description": "Set of days of the week on which this schedule is active.",
+          "items": {
+            "$ref": "#/definitions/ScalingScheduleDaysOfWeekItem"
+          }
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -9581,8 +9587,11 @@
           "description": "Name of the ScalingPlanPooledSchedule"
         },
         "daysOfWeek": {
-          "$ref": "#/definitions/DayOfWeek",
-          "description": "Set of days of the week on which this schedule is active."
+          "type": "array",
+          "description": "Set of days of the week on which this schedule is active.",
+          "items": {
+            "$ref": "#/definitions/ScalingScheduleDaysOfWeekItem"
+          }
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -9672,8 +9681,11 @@
           "description": "Name of the ScalingPlanPooledSchedule"
         },
         "daysOfWeek": {
-          "$ref": "#/definitions/DayOfWeek",
-          "description": "Set of days of the week on which this schedule is active."
+          "type": "array",
+          "description": "Set of days of the week on which this schedule is active.",
+          "items": {
+            "$ref": "#/definitions/ScalingScheduleDaysOfWeekItem"
+          }
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",

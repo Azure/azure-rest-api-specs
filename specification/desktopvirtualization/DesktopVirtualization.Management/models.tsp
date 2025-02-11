@@ -3881,7 +3881,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DayOfWeek;
+  daysOfWeek?: ScalingScheduleDaysOfWeekItem[];
 
   /**
    * Starting time for ramp up period.
@@ -4029,7 +4029,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DayOfWeek;
+  daysOfWeek?: ScalingScheduleDaysOfWeekItem[];
 
   /**
    * Starting time for ramp up period.
@@ -4200,7 +4200,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DayOfWeek;
+  daysOfWeek?: ScalingScheduleDaysOfWeekItem[];
 
   /**
    * Starting time for ramp up period.
@@ -4304,7 +4304,7 @@ model ScalingPlanPooledSchedulePatchProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DayOfWeek;
+  daysOfWeek?: ScalingScheduleDaysOfWeekItem[];
 
   /**
    * Starting time for ramp up period.
