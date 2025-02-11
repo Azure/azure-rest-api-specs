@@ -260,7 +260,7 @@ union TestKind {
 
 @added(APIVersions.v2024_07_01_preview)
 @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
-union CreateByTypes {
+union CreatedByType {
   string,
   @doc("Entity was created by a user.") "User",
   @doc("Entity was created by a scheduled trigger.") "ScheduledTrigger",
@@ -819,7 +819,7 @@ model TestRun {
 
   @added(APIVersions.v2024_07_01_preview)
   @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
-  createdByType?: CreateByTypes;
+  createdByType?: CreatedByType;
 
   ...SystemMetaData;
 }
