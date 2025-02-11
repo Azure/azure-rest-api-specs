@@ -1104,7 +1104,7 @@ union SessionHandlingOperation {
 }
 
 /**
- * Day of the week.
+ * Day of the week. Modeled as string
  */
 union DaysOfWeek {
   string,
@@ -1143,6 +1143,17 @@ union DaysOfWeek {
    * Day of the week.
    */
   Sunday: "Sunday",
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Days are not extensible"
+enum DayOfWeek {
+  Sunday,
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
 }
 
 /**
@@ -1541,7 +1552,7 @@ model DiskInfoPatchProperties {
   /**
    * The disk type used by virtual machine in hostpool session host.
    */
-  type: DiskType;
+  type?: DiskType;
 }
 
 /**
@@ -2428,7 +2439,7 @@ model MaintenanceWindowProperties {
   /**
    * Day of the week.
    */
-  dayOfWeek?: DaysOfWeek;
+  dayOfWeek?: DayOfWeek;
 }
 
 /**
@@ -3356,7 +3367,7 @@ model MaintenanceWindowPatchProperties {
   /**
    * Day of the week.
    */
-  dayOfWeek?: DaysOfWeek;
+  dayOfWeek?: DayOfWeek;
 }
 
 /**

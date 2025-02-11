@@ -96,7 +96,7 @@ using Microsoft.DesktopVirtualization;
 @@clientName(Workspaces.update::parameters.properties, "workspace");
 
 @@clientName(AppAttachPackages.update::parameters.properties,
-  "appAttachPackage"
+  "appAttachPackagePatch"
 );
 
 @@clientName(ApplicationGroups.update::parameters.properties,

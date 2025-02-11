@@ -585,7 +585,7 @@
             "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
           },
           {
-            "name": "appAttachPackage",
+            "name": "appAttachPackagePatch",
             "in": "body",
             "description": "Object containing App Attach Package definition.",
             "required": true,
@@ -6734,9 +6734,25 @@
         "resourceId"
       ]
     },
+    "DayOfWeek": {
+      "type": "string",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "DayOfWeek",
+        "modelAsString": false
+      }
+    },
     "DaysOfWeek": {
       "type": "string",
-      "description": "Day of the week.",
+      "description": "Day of the week. Modeled as string",
       "enum": [
         "Monday",
         "Tuesday",
@@ -6917,10 +6933,7 @@
           "$ref": "#/definitions/DiskType",
           "description": "The disk type used by virtual machine in hostpool session host."
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
     "DiskInfoProperties": {
       "type": "object",
@@ -8155,7 +8168,7 @@
           "description": "The update start hour of the day. (0 - 23)"
         },
         "dayOfWeek": {
-          "$ref": "#/definitions/DaysOfWeek",
+          "$ref": "#/definitions/DayOfWeek",
           "description": "Day of the week."
         }
       }
@@ -8170,7 +8183,7 @@
           "description": "The update start hour of the day. (0 - 23)"
         },
         "dayOfWeek": {
-          "$ref": "#/definitions/DaysOfWeek",
+          "$ref": "#/definitions/DayOfWeek",
           "description": "Day of the week."
         }
       }
