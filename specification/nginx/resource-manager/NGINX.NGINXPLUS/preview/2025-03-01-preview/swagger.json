@@ -1278,7 +1278,7 @@
           "NginxWafPolicy"
         ],
         "summary": "Get the Nginx Waf Policy of given Nginx deployment",
-        "operationId": "DefaultWafPolicy_Get",
+        "operationId": "DefaultWafPolicy_List",
         "produces": [
           "application/json"
         ],
@@ -1326,8 +1326,8 @@
           }
         },
         "x-ms-examples": {
-          "DefaultWafPolicy_Get": {
-            "$ref": "./examples/DefaultWafPolicy_Get.json"
+          "DefaultWafPolicy_List": {
+            "$ref": "./examples/DefaultWafPolicy_List.json"
           }
         }
       }
@@ -2635,7 +2635,11 @@
         "Succeeded",
         "Failed",
         "Removing"
-      ]
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "NginxDeploymentWafPolicyApplyingStatusCode"
+      }
     },
     "NginxDeploymentWafPolicyCompilingStatus": {
       "type": "object",
@@ -2662,7 +2666,11 @@
         "InProgress",
         "Succeeded",
         "Failed"
-      ]
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "NginxDeploymentWafPolicyCompilingStatusCode"
+      }
     },
     "NginxDeploymentWafPolicyError": {
       "type": "object",
