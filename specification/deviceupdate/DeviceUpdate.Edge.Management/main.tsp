@@ -15,6 +15,8 @@ import "./Agent.tsp";
 import "./Deployment.tsp";
 import "./DeviceClass.tsp";
 import "./Update.tsp";
+import "./Group.tsp";
+import "./Subgroup.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -57,4 +59,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_04_01_preview: "2025-04-01-preview",
+
+  /**
+   * The 2025-05-01-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_05_01_preview: "2025-05-01-preview",
 }

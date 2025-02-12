@@ -695,6 +695,12 @@ model AgentProperties {
    * This is the device UUID for this agent
    */
   deviceUuid: string;
+
+  /**
+   * This is the ID of the group of this agent
+   */
+  @added(Versions.v2025_05_01_preview)
+  groupId?: string;
 }
 
 /**
