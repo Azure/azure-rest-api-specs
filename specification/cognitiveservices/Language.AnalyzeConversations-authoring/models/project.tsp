@@ -40,22 +40,26 @@ model AnalyzeConversationAuthoringProjectMetadata {
   /**
    * Represents the project creation datetime.
    */
-  createdOn: utcDateTime;
+  @clientName("createdOn", "csharp")
+  createdDateTime: utcDateTime;
 
   /**
    * Represents the project creation datetime.
    */
-  lastModifiedOn: utcDateTime;
+  @clientName("lastModifiedOn", "csharp")
+  lastModifiedDateTime: utcDateTime;
 
   /**
    * Represents the project last trained datetime.
    */
-  lastTrainedOn?: utcDateTime;
+  @clientName("lastTrainedOn", "csharp")
+  lastTrainedDateTime?: utcDateTime;
 
   /**
    * Represents the project last deployed datetime.
    */
-  lastDeployedOn?: utcDateTime;
+  @clientName("lastDeployedOn", "csharp")
+  lastDeployedDateTime?: utcDateTime;
 
   /**
    * Represents the project kind.
@@ -357,17 +361,20 @@ model AnalyzeConversationAuthoringJobState {
   /**
    * The creation date time of the job.
    */
-  createdOn: utcDateTime;
+  @clientName("createdOn", "csharp")
+  createdDateTime: utcDateTime;
 
   /**
    * The last date time the job was updated.
    */
-  lastUpdatedOn: utcDateTime;
+  @clientName("lastUpdatedOn", "csharp")
+  lastUpdatedDateTime: utcDateTime;
 
   /**
    * The expiration date time of the job.
    */
-  expiresOn?: utcDateTime;
+  @clientName("expiresOn", "csharp")
+  expirationDateTime?: utcDateTime;
 
   /**
    * The job status.
