@@ -67,6 +67,9 @@
           "description": "The time at which the message was deleted"
         }
       },
+      "required": [
+        "deleteTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
@@ -83,6 +86,9 @@
           "description": "The time at which the message was deleted"
         }
       },
+      "required": [
+        "deleteTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
@@ -111,7 +117,8 @@
         }
       },
       "required": [
-        "metadata"
+        "metadata",
+        "editTime"
       ],
       "allOf": [
         {
@@ -141,7 +148,8 @@
         }
       },
       "required": [
-        "metadata"
+        "metadata",
+        "editTime"
       ],
       "allOf": [
         {
@@ -181,7 +189,8 @@
         }
       },
       "required": [
-        "senderCommunicationIdentifier"
+        "senderCommunicationIdentifier",
+        "composeTime"
       ],
       "allOf": [
         {
@@ -221,7 +230,8 @@
         }
       },
       "required": [
-        "senderCommunicationIdentifier"
+        "senderCommunicationIdentifier",
+        "composeTime"
       ],
       "allOf": [
         {
@@ -303,6 +313,7 @@
         }
       },
       "required": [
+        "time",
         "addedByCommunicationIdentifier",
         "participantAdded"
       ],
@@ -331,6 +342,7 @@
         }
       },
       "required": [
+        "time",
         "addedByCommunicationIdentifier",
         "participantAdded"
       ],
@@ -364,6 +376,7 @@
         }
       },
       "required": [
+        "time",
         "removedByCommunicationIdentifier",
         "participantRemoved"
       ],
@@ -392,6 +405,7 @@
         }
       },
       "required": [
+        "time",
         "removedByCommunicationIdentifier",
         "participantRemoved"
       ],
@@ -498,7 +512,8 @@
         }
       },
       "required": [
-        "deletedByCommunicationIdentifier"
+        "deletedByCommunicationIdentifier",
+        "deleteTime"
       ],
       "allOf": [
         {
@@ -521,6 +536,9 @@
           "description": "The version of the thread"
         }
       },
+      "required": [
+        "createTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatEventBaseProperties"
@@ -542,6 +560,9 @@
           "description": "The version of the thread"
         }
       },
+      "required": [
+        "createTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
@@ -601,6 +622,7 @@
       },
       "required": [
         "editedByCommunicationIdentifier",
+        "editTime",
         "properties",
         "metadata"
       ],
@@ -638,6 +660,7 @@
       },
       "required": [
         "editedByCommunicationIdentifier",
+        "editTime",
         "metadata",
         "properties"
       ],
@@ -662,7 +685,8 @@
         }
       },
       "required": [
-        "deletedByCommunicationIdentifier"
+        "deletedByCommunicationIdentifier",
+        "deleteTime"
       ],
       "allOf": [
         {
@@ -708,7 +732,9 @@
         "sender",
         "recipient",
         "internetMessageId",
-        "deliveryStatusDetails"
+        "status",
+        "deliveryStatusDetails",
+        "deliveryAttemptTimestamp"
       ]
     },
     "AcsEmailDeliveryReportStatus": {
@@ -807,7 +833,11 @@
           "description": "The type of engagement user have with email",
           "x-ms-client-name": "engagement"
         }
-      }
+      },
+      "required": [
+        "userActionTimestamp",
+        "engagementType"
+      ]
     },
     "AcsIncomingCallCustomContext": {
       "type": "object",
@@ -1035,6 +1065,10 @@
           "x-ms-client-name": "channelKind"
         }
       },
+      "required": [
+        "status",
+        "channelType"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsMessageEventData"
@@ -1064,6 +1098,7 @@
         }
       },
       "required": [
+        "receivedTimeStamp",
         "error"
       ]
     },
@@ -1101,6 +1136,7 @@
         }
       },
       "required": [
+        "type",
         "buttonReply",
         "listReply"
       ]
@@ -1259,7 +1295,11 @@
         }
       },
       "required": [
-        "recordingStorageInfo"
+        "recordingStorageInfo",
+        "recordingStartTime",
+        "recordingContentType",
+        "recordingChannelType",
+        "recordingFormatType"
       ]
     },
     "AcsRecordingStorageInfoProperties": {
@@ -1607,7 +1647,9 @@
         }
       },
       "required": [
+        "jobStatus",
         "requestedWorkerSelectors",
+        "scheduledOn",
         "unavailableForMatching"
       ],
       "allOf": [
@@ -1653,7 +1695,8 @@
       },
       "required": [
         "expiredAttachedWorkerSelectors",
-        "expiredRequestedWorkerSelectors"
+        "expiredRequestedWorkerSelectors",
+        "scheduledOn"
       ],
       "allOf": [
         {
@@ -1802,6 +1845,7 @@
       "required": [
         "expiredAttachedWorkerSelectors",
         "expiredRequestedWorkerSelectors",
+        "scheduledOn",
         "unavailableForMatching"
       ],
       "allOf": [
@@ -2153,6 +2197,8 @@
       },
       "required": [
         "workerLabels",
+        "offeredOn",
+        "expiresOn",
         "workerTags",
         "jobLabels",
         "jobTags"
@@ -2264,8 +2310,11 @@
         }
       },
       "required": [
+        "labelOperator",
         "value",
-        "ttlSeconds"
+        "ttlSeconds",
+        "state",
+        "expirationTime"
       ]
     },
     "AcsRouterWorkerSelectorState": {
@@ -2369,7 +2418,10 @@
           "format": "int32",
           "description": "Number of segments whose delivery failed"
         }
-      }
+      },
+      "required": [
+        "timestamp"
+      ]
     },
     "AcsSmsDeliveryReportReceivedEventData": {
       "type": "object",
@@ -2402,7 +2454,8 @@
         }
       },
       "required": [
-        "deliveryAttempts"
+        "deliveryAttempts",
+        "receivedTimestamp"
       ],
       "allOf": [
         {
@@ -2448,6 +2501,7 @@
         }
       },
       "required": [
+        "receivedTimestamp",
         "segmentCount"
       ],
       "allOf": [
@@ -2948,7 +3002,10 @@
           "$ref": "#/definitions/AppAction",
           "description": "Type of action of the operation."
         }
-      }
+      },
+      "required": [
+        "action"
+      ]
     },
     "AppServicePlanAction": {
       "type": "string",
@@ -2984,7 +3041,12 @@
           "$ref": "#/definitions/AsyncStatus",
           "description": "Asynchronous operation status of the operation on the app service plan."
         }
-      }
+      },
+      "required": [
+        "stampKind",
+        "action",
+        "status"
+      ]
     },
     "AsyncStatus": {
       "type": "string",
@@ -3286,6 +3348,7 @@
         }
       },
       "required": [
+        "kind",
         "communicationUser",
         "phoneNumber",
         "microsoftTeamsUser",
@@ -3373,6 +3436,7 @@
       },
       "required": [
         "id",
+        "timestamp",
         "action",
         "location",
         "target"
@@ -3502,6 +3566,7 @@
       },
       "required": [
         "id",
+        "timestamp",
         "action",
         "location",
         "target"
@@ -3716,7 +3781,9 @@
         }
       },
       "required": [
-        "serialNumber"
+        "serialNumber",
+        "stageName",
+        "stageTime"
       ]
     },
     "DataBoxCopyStartedEventData": {
@@ -3738,7 +3805,9 @@
         }
       },
       "required": [
-        "serialNumber"
+        "serialNumber",
+        "stageName",
+        "stageTime"
       ]
     },
     "DataBoxOrderCompletedEventData": {
@@ -3760,7 +3829,9 @@
         }
       },
       "required": [
-        "serialNumber"
+        "serialNumber",
+        "stageName",
+        "stageTime"
       ]
     },
     "DataBoxStageName": {
@@ -3939,6 +4010,7 @@
       },
       "required": [
         "authenticationType",
+        "cloudToDeviceMessageCount",
         "connectionState",
         "deviceId",
         "etag",
@@ -3946,6 +4018,7 @@
         "properties",
         "status",
         "statusUpdateTime",
+        "version",
         "x509Thumbprint"
       ]
     },
@@ -4016,7 +4089,8 @@
         }
       },
       "required": [
-        "metadata"
+        "metadata",
+        "version"
       ]
     },
     "EventGridMQTTClientCreatedOrUpdatedEventData": {
@@ -4046,6 +4120,9 @@
         }
       },
       "required": [
+        "state",
+        "createdOn",
+        "updatedOn",
         "attributes"
       ],
       "allOf": [
@@ -4179,7 +4256,8 @@
         }
       },
       "required": [
-        "clientSessionName"
+        "clientSessionName",
+        "sequenceNumber"
       ],
       "allOf": [
         {
@@ -4206,7 +4284,9 @@
         }
       },
       "required": [
-        "clientSessionName"
+        "clientSessionName",
+        "sequenceNumber",
+        "disconnectionReason"
       ],
       "allOf": [
         {
@@ -4285,7 +4365,11 @@
           "format": "date-time",
           "description": "The last time from the queue."
         }
-      }
+      },
+      "required": [
+        "firstEnqueueTime",
+        "lastEnqueueTime"
+      ]
     },
     "HealthcareDicomImageCreatedEventData": {
       "type": "object",
@@ -4322,7 +4406,8 @@
         "imageStudyInstanceUid",
         "imageSeriesInstanceUid",
         "imageSopInstanceUid",
-        "serviceHostName"
+        "serviceHostName",
+        "sequenceNumber"
       ]
     },
     "HealthcareDicomImageDeletedEventData": {
@@ -4360,7 +4445,8 @@
         "imageStudyInstanceUid",
         "imageSeriesInstanceUid",
         "imageSopInstanceUid",
-        "serviceHostName"
+        "serviceHostName",
+        "sequenceNumber"
       ]
     },
     "HealthcareDicomImageUpdatedEventData": {
@@ -4398,7 +4484,8 @@
         "imageStudyInstanceUid",
         "imageSeriesInstanceUid",
         "imageSopInstanceUid",
-        "serviceHostName"
+        "serviceHostName",
+        "sequenceNumber"
       ]
     },
     "HealthcareFhirResourceCreatedEventData": {
@@ -4428,8 +4515,10 @@
         }
       },
       "required": [
+        "resourceType",
         "resourceFhirAccount",
-        "resourceFhirId"
+        "resourceFhirId",
+        "resourceVersionId"
       ]
     },
     "HealthcareFhirResourceDeletedEventData": {
@@ -4459,8 +4548,10 @@
         }
       },
       "required": [
+        "resourceType",
         "resourceFhirAccount",
-        "resourceFhirId"
+        "resourceFhirId",
+        "resourceVersionId"
       ]
     },
     "HealthcareFhirResourceType": {
@@ -5468,8 +5559,10 @@
         }
       },
       "required": [
+        "resourceType",
         "resourceFhirAccount",
-        "resourceFhirId"
+        "resourceFhirId",
+        "resourceVersionId"
       ]
     },
     "IotHubDeviceConnectedEventData": {
@@ -5557,7 +5650,9 @@
         "VaultName",
         "ObjectType",
         "ObjectName",
-        "Version"
+        "Version",
+        "NBF",
+        "EXP"
       ]
     },
     "KeyVaultCertificateExpiredEventData": {
@@ -5600,7 +5695,9 @@
         "VaultName",
         "ObjectType",
         "ObjectName",
-        "Version"
+        "Version",
+        "NBF",
+        "EXP"
       ]
     },
     "KeyVaultCertificateNearExpiryEventData": {
@@ -5643,7 +5740,9 @@
         "VaultName",
         "ObjectType",
         "ObjectName",
-        "Version"
+        "Version",
+        "NBF",
+        "EXP"
       ]
     },
     "KeyVaultCertificateNewVersionCreatedEventData": {
@@ -5686,7 +5785,9 @@
         "VaultName",
         "ObjectType",
         "ObjectName",
-        "Version"
+        "Version",
+        "NBF",
+        "EXP"
       ]
     },
     "KeyVaultKeyExpiredEventData": {
@@ -5729,7 +5830,9 @@
         "VaultName",
         "ObjectType",
         "ObjectName",
-        "Version"
+        "Version",
+        "NBF",
+        "EXP"
       ]
     },
     "KeyVaultKeyNearExpiryEventData": {
@@ -5772,7 +5875,9 @@
         "VaultName",
         "ObjectType",
         "ObjectName",
-        "Version"
+        "Version",
+        "NBF",
+        "EXP"
       ]
     },
     "KeyVaultKeyNewVersionCreatedEventData": {
@@ -5815,7 +5920,9 @@
         "VaultName",
         "ObjectType",
         "ObjectName",
-        "Version"
+        "Version",
+        "NBF",
+        "EXP"
       ]
     },
     "KeyVaultSecretExpiredEventData": {
@@ -5858,7 +5965,9 @@
         "VaultName",
         "ObjectType",
         "ObjectName",
-        "Version"
+        "Version",
+        "NBF",
+        "EXP"
       ]
     },
     "KeyVaultSecretNearExpiryEventData": {
@@ -5901,7 +6010,9 @@
         "VaultName",
         "ObjectType",
         "ObjectName",
-        "Version"
+        "Version",
+        "NBF",
+        "EXP"
       ]
     },
     "KeyVaultSecretNewVersionCreatedEventData": {
@@ -5944,7 +6055,9 @@
         "VaultName",
         "ObjectType",
         "ObjectName",
-        "Version"
+        "Version",
+        "NBF",
+        "EXP"
       ]
     },
     "MachineLearningServicesDatasetDriftDetectedEventData": {
@@ -5986,7 +6099,11 @@
           "format": "date-time",
           "description": "The end time of the target dataset time series that resulted in drift detection."
         }
-      }
+      },
+      "required": [
+        "startTime",
+        "endTime"
+      ]
     },
     "MachineLearningServicesModelDeployedEventData": {
       "type": "object",
@@ -6167,7 +6284,8 @@
       "required": [
         "expiredGeofenceGeometryId",
         "geometries",
-        "invalidPeriodGeofenceGeometryId"
+        "invalidPeriodGeofenceGeometryId",
+        "isEventPublished"
       ]
     },
     "MapsGeofenceExitedEventData": {
@@ -6213,7 +6331,10 @@
       },
       "required": [
         "deviceId",
-        "geometryId"
+        "distance",
+        "geometryId",
+        "nearestLat",
+        "nearestLon"
       ]
     },
     "MapsGeofenceResultEventData": {
@@ -6239,7 +6360,8 @@
         }
       },
       "required": [
-        "appId"
+        "appId",
+        "cloud"
       ]
     },
     "MicrosoftTeamsUserIdentifierModel": {
@@ -6260,7 +6382,8 @@
         }
       },
       "required": [
-        "userId"
+        "userId",
+        "cloud"
       ]
     },
     "PhoneNumberIdentifierModel": {
@@ -6311,6 +6434,7 @@
         }
       },
       "required": [
+        "timestamp",
         "policyAssignmentId",
         "policyDefinitionId",
         "policyDefinitionReferenceId",
@@ -6354,6 +6478,7 @@
         }
       },
       "required": [
+        "timestamp",
         "policyAssignmentId",
         "policyDefinitionId",
         "policyDefinitionReferenceId",
@@ -6397,6 +6522,7 @@
         }
       },
       "required": [
+        "timestamp",
         "policyAssignmentId",
         "policyDefinitionId",
         "policyDefinitionReferenceId",
@@ -6911,7 +7037,10 @@
           "format": "date-time",
           "description": "Date and Time when resource was updated"
         }
-      }
+      },
+      "required": [
+        "resourceEventTime"
+      ]
     },
     "ResourceNotificationsResourceDeletedDetails": {
       "type": "object",
@@ -7399,6 +7528,7 @@
         }
       },
       "required": [
+        "timestamp",
         "hubName",
         "connectionId"
       ]
@@ -7430,6 +7560,7 @@
         }
       },
       "required": [
+        "timestamp",
         "hubName",
         "connectionId"
       ]
@@ -7701,7 +7832,10 @@
           "type": "string",
           "description": "The blob URL for manifest file for inventory run."
         }
-      }
+      },
+      "required": [
+        "scheduleDateTime"
+      ]
     },
     "StorageBlobRenamedEventData": {
       "type": "object",
@@ -8062,6 +8196,8 @@
         }
       },
       "required": [
+        "status",
+        "completedDateTime",
         "summaryReportBlobUrl"
       ]
     },
@@ -8103,7 +8239,10 @@
           "type": "string",
           "description": "The execution id for a storage task."
         }
-      }
+      },
+      "required": [
+        "queuedDateTime"
+      ]
     },
     "StorageTaskCompletedEventData": {
       "type": "object",
@@ -8133,6 +8272,8 @@
         }
       },
       "required": [
+        "status",
+        "completedDateTime",
         "summaryReportBlobUrl"
       ]
     },
@@ -8173,7 +8314,10 @@
           "type": "string",
           "description": "The execution id for a storage task."
         }
-      }
+      },
+      "required": [
+        "queuedDateTime"
+      ]
     },
     "SubscriptionDeletedEventData": {
       "type": "object",
