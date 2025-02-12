@@ -299,6 +299,28 @@
         }
       ]
     },
+    "AcsChatTypingIndicationEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndication event.",
+      "properties": {
+        "senderCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the sender"
+        },
+        "senderDisplayName": {
+          "type": "string",
+          "description": "The display name of the sender"
+        }
+      },
+      "required": [
+        "senderCommunicationIdentifier"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
+        }
+      ]
+    },
     "AcsChatMessageReceivedInThreadEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",

@@ -26,6 +26,12 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsChatAzureBotCommandEventData,
   Access.public
 );
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatTypingIndicationEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatTypingIndicationEventData,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedInThreadEventData,
   Usage.output
 );

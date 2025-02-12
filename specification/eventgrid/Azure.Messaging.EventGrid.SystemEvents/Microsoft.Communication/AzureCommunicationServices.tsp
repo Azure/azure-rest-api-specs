@@ -50,6 +50,19 @@ model AcsChatAzureBotCommandEventData
   ...AcsChatMessageBaseEventData;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndication event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsChatTypingIndicationEventData
+  extends AcsChatEventInThreadBaseProperties {
+  /** The communication identifier of the sender */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  senderCommunicationIdentifier: CommunicationIdentifierModel;
+
+  /** The display name of the sender */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  senderDisplayName?: string;
+}
+
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageReceivedInThreadEventData
