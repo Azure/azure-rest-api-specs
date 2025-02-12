@@ -508,7 +508,14 @@ model RegionalConfiguration {
   @doc("""
       The number of engine instances to execute load test in specified region. Supported values are in range of 1-400.
     """)
-  engineInstances: int32;
+  @madeOptional(APIVersions.v2025_03_01_preview)
+  engineInstances?: int32;
+
+  @doc("""
+      The percentage of load to be distributed in specified region. Supported values are in range of 1-100.
+    """)
+  @added(APIVersions.v2025_03_01_preview)
+  loadPercentage?: int32;
 
   @doc("""
     Azure region name.
