@@ -108,6 +108,16 @@ model ChatContext {
    */
   @OpenAPI.extension("x-ms-identifiers", [])
   resourceIds?: Azure.Core.armResourceIdentifier[];
+
+    /**
+   * The start time of the issue that needs troubleshoot.
+   */
+  startTime: utcDateTime;
+
+  /**
+   * The end time of the issue that needs troubleshoot.
+   */
+  endTime: utcDateTime;
 }
 
 /**

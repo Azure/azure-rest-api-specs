@@ -150,10 +150,22 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
           "x-ms-identifiers": []
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the issue that needs troubleshoot."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the issue that needs troubleshoot."
         }
       },
       "required": [
-        "bladeId"
+        "bladeId",
+        "startTime",
+        "endTime"
       ]
     },
     "ChatMessage": {
