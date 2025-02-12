@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models/GroupProperties.tsp";
 import "./UpdateAccount.tsp";
 
@@ -11,12 +12,15 @@ using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
+@versioned(Versions)
 namespace Microsoft.DeviceUpdate;
 /**
  * Device Update Group details.
  */
 @parentResource(UpdateAccount)
+@added(Versions.v2025_05_01_preview)
 model Group is Azure.ResourceManager.TrackedResource<GroupProperties> {
   ...ResourceNameParameter<
     Resource = Group,
@@ -26,6 +30,7 @@ model Group is Azure.ResourceManager.TrackedResource<GroupProperties> {
   >;
 }
 
+@added(Versions.v2025_05_01_preview)
 @armResourceOperations
 interface Groups {
   /**

@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./Group.tsp";
 import "./models/SubgroupProperties.tsp";
 
@@ -11,12 +12,15 @@ using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
+@versioned(Versions)
 namespace Microsoft.DeviceUpdate;
 /**
  * Device Update Subgroup details.
  */
 @parentResource(Group)
+@added(Versions.v2025_05_01_preview)
 model Subgroup is Azure.ResourceManager.TrackedResource<SubgroupProperties> {
   ...ResourceNameParameter<
     Resource = Subgroup,
@@ -26,6 +30,7 @@ model Subgroup is Azure.ResourceManager.TrackedResource<SubgroupProperties> {
   >;
 }
 
+@added(Versions.v2025_05_01_preview)
 @armResourceOperations
 interface Subgroups {
   /**
