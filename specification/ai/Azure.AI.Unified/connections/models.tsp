@@ -15,7 +15,6 @@ using Azure.Core.Traits;
 namespace Azure.AI.Unified;
 
 @doc("Response from the listSecrets operation")
-@discriminator("authType")
 model Connection {
   @doc("A unique identifier for the connection")
   id: string;
@@ -59,44 +58,6 @@ enum AuthenticationType {
   SAS: "SAS",
 }
 
-@doc("Connection properties for connections with API key authentication")
-model ApiKeyConnection extends Connection {
-  @doc("Authentication type of the connection target")
-  authType: AuthenticationType.apiKey;
-
-  @doc("Credentials will only be present for authType=ApiKey")
-  credentials: CredentialsApiKeyAuth;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("Connection properties for connections with AAD authentication (aka `Entra ID passthrough`)")
-model EntraIDConnection extends Connection {
-  @doc("Authentication type of the connection target")
-  authType: AuthenticationType.entraId;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("Connection properties for connections with SAS authentication")
-model SASConnection extends Connection {
-  @doc("Authentication type of the connection target")
-  authType: AuthenticationType.SAS;
-
-  @doc("Credentials will only be present for authType=ApiKey")
-  credentials: CredentialsSASAuth;
-}
-
-@doc("The credentials needed for API key authentication")
-model CredentialsApiKeyAuth {
-  @doc("The API key")
-  key: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("The credentials needed for Shared Access Signatures (SAS) authentication")
-model CredentialsSASAuth {
-  @doc("The Shared Access Signatures (SAS) token")
-  SAS: string;
-}
 
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType
 #suppress "@azure-tools/typespec-azure-core/no-enum"
