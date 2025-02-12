@@ -92,6 +92,11 @@ model ChatRequest {
    * User message schema. Contains input message from user.
    */
   userMessage: ChatMessage;
+
+  /**
+   * Language of the chat.
+   */
+  language?: string;
 }
 
 /**
