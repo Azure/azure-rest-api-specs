@@ -152,20 +152,20 @@
             "type": "string"
           },
           {
-            "name": "Sync-Token",
-            "in": "header",
-            "description": "Used to guarantee real-time consistency between requests.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "syncToken"
-          },
-          {
             "name": "After",
             "in": "query",
             "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "after"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "Accept-Datetime",
@@ -515,7 +515,7 @@
           {
             "name": "snapshot",
             "in": "query",
-            "description": "A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.",
+            "description": "A filter used get key-values for a snapshot. The value should be the name of\nthe snapshot. Not valid when used with 'key' and 'label' filters.",
             "required": false,
             "type": "string"
           },
@@ -713,6 +713,9 @@
             "x-ms-client-name": "ifNoneMatch"
           },
           {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
             "name": "tags",
             "in": "query",
             "description": "A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering",
@@ -722,9 +725,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -2413,7 +2413,8 @@
             "in": "path",
             "description": "The name of the key-value snapshot to update.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
             "name": "Sync-Token",
@@ -2502,7 +2503,8 @@
             "in": "path",
             "description": "The name of the key-value snapshot to check.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
             "name": "Sync-Token",
