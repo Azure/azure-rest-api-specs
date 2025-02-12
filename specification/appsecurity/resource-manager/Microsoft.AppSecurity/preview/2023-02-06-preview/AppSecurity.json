@@ -564,6 +564,93 @@
     }
   },
   "definitions": {
+    "AnomalyScoringActionType": {
+      "type": "string",
+      "description": "Defines the set of supported actions that can be triggered when anomaly scoring exceeds the threshold.",
+      "enum": [
+        "Allow",
+        "Block",
+        "Log"
+      ],
+      "x-ms-enum": {
+        "name": "AnomalyScoringActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow the request"
+          },
+          {
+            "name": "Block",
+            "value": "Block",
+            "description": "Block the request"
+          },
+          {
+            "name": "Log",
+            "value": "Log",
+            "description": "Log the request and allow it"
+          }
+        ]
+      }
+    },
+    "AnomalyScoringDefaultConfiguration": {
+      "type": "object",
+      "description": "Defines default configuration for anomaly scoring mode.",
+      "properties": {
+        "defaultThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default threshold for anomaly scoring. If anomaly scoring is enabled, this value determines the threshold score. When the calculated score exceeds this value, the specified anomaly scoring action will be applied.",
+          "readOnly": true
+        },
+        "defaultAction": {
+          "$ref": "#/definitions/AnomalyScoringActionType",
+          "description": "The default action to be triggered when the anomaly scoring threshold is exceeded. This action defines how the system responds to detected anomalies.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "defaultThreshold",
+        "defaultAction"
+      ]
+    },
+    "AnomalyScoringSeverity": {
+      "type": "string",
+      "description": "The set of supported severity levels for anomaly scoring, representing the importance and impact of a rule match.",
+      "enum": [
+        "Critical",
+        "Error",
+        "Warning",
+        "Notice"
+      ],
+      "x-ms-enum": {
+        "name": "AnomalyScoringSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Critical",
+            "value": "Critical",
+            "description": "Represents a critical severity level. Indicates severe anomalies that require immediate attention and contribute significantly to the anomaly score."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Represents an error severity level. Indicates significant issues that need prompt resolution and contribute notably to the anomaly score."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Represents a warning severity level. Indicates potential issues that should be monitored and contribute moderately to the anomaly score."
+          },
+          {
+            "name": "Notice",
+            "value": "Notice",
+            "description": "Represents a notice severity level. Indicates minor issues or informational messages that contribute minimally to the anomaly score."
+          }
+        ]
+      }
+    },
     "AppProtectAssociation": {
       "type": "object",
       "description": "AppProtect association definition",
@@ -1411,6 +1498,11 @@
           "$ref": "#/definitions/ManagedRuleActionType",
           "description": "Describes the default action to be applied when the managed rule matches.",
           "readOnly": true
+        },
+        "defaultAnomalyScoringSeverity": {
+          "$ref": "#/definitions/AnomalyScoringSeverity",
+          "description": "The default severity level assigned to a rule in anomaly scoring mode. Required for managed rules that support the anomaly scoring action type. When a rule matches, this severity value is added to the total anomaly score.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1537,9 +1629,10 @@
             "$ref": "#/definitions/ManagedRuleActionType"
           }
         },
-        "defaultAction": {
-          "$ref": "#/definitions/ManagedRuleActionType",
-          "description": "Define the default action for the rule set."
+        "anomalyScoring": {
+          "$ref": "#/definitions/AnomalyScoringDefaultConfiguration",
+          "description": "Describes the anomaly scoring default configuration, where it is a supported action.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1547,8 +1640,7 @@
         "ruleSetVersion",
         "ruleGroups",
         "pillarType",
-        "supportedActions",
-        "defaultAction"
+        "supportedActions"
       ]
     },
     "ManagedRuleSetId": {
@@ -2038,32 +2130,7 @@
     "ProtectedEndpointId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.Network/applicationGateways"
-          },
-          {
-            "type": "Microsoft.Network/applicationGateways/httpListeners"
-          },
-          {
-            "type": "Microsoft.Network/applicationGateways/requestRoutingRules"
-          },
-          {
-            "type": "Microsoft.Cdn/profiles"
-          },
-          {
-            "type": "Microsoft.Cdn/profiles/afdEndpoints"
-          },
-          {
-            "type": "Microsoft.Cdn/profiles/afdEndpoints/customDomains"
-          },
-          {
-            "type": "Microsoft.Cdn/profiles/afdEndpoints/routes"
-          }
-        ]
-      }
+      "description": "A type definition that refers the id to an Azure Resource Manager resource."
     },
     "ProvisioningState": {
       "type": "string",

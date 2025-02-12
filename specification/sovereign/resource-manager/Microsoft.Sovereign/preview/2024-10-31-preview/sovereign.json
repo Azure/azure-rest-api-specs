@@ -1640,6 +1640,79 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sovereign/landingZoneAccounts/{landingZoneAccountName}/landingZoneRegistrations/{landingZoneRegistrationName}/drift": {
+      "post": {
+        "operationId": "LandingZoneRegistrationOperations_Drift",
+        "tags": [
+          "LandingZoneRegistrationOperations"
+        ],
+        "description": "Compute drift for landing zone registration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "landingZoneAccountName",
+            "in": "path",
+            "description": "The parent landing zone account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "landingZoneRegistrationName",
+            "in": "path",
+            "description": "The name of the Landing Zone Registration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DriftResponseArray"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZoneRegistrationOperations_Drift": {
+            "$ref": "./examples/LandingZoneRegistrationOperations_Drift.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -1986,6 +2059,105 @@
           "description": "When set to false, this management group will not be created. The default value is false."
         }
       }
+    },
+    "DriftResponseArray": {
+      "type": "object",
+      "description": "The JSON response of the drift API call.",
+      "properties": {
+        "reportRuntime": {
+          "type": "string",
+          "description": "The time when the drift analysis was run."
+        },
+        "landingZoneAccountId": {
+          "type": "string",
+          "description": "The resource id of landing zone account, landing zone registration is part of."
+        },
+        "landingZoneRegistrationId": {
+          "type": "string",
+          "description": "The resource id of landing zone registration where drift operation was triggered from."
+        },
+        "landingZoneConfigurationId": {
+          "type": "string",
+          "description": "The resource id of the associated landing zone configuration."
+        },
+        "managementGroupId": {
+          "type": "string",
+          "description": "The resource id of the associated management group id."
+        },
+        "totalEvaluatedRules": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of drift rules."
+        },
+        "totalAnalyzedItems": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of items analyzed."
+        },
+        "totalDriftedItems": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of drifted items."
+        },
+        "driftedItems": {
+          "type": "array",
+          "description": "Array of Drift JSON response.",
+          "items": {
+            "$ref": "#/definitions/DriftedItems"
+          },
+          "x-ms-identifiers": [
+            "ruleName",
+            "category",
+            "priority",
+            "detail",
+            "identifier"
+          ]
+        }
+      },
+      "required": [
+        "reportRuntime",
+        "landingZoneAccountId",
+        "landingZoneRegistrationId",
+        "landingZoneConfigurationId",
+        "managementGroupId",
+        "totalEvaluatedRules",
+        "totalAnalyzedItems",
+        "totalDriftedItems",
+        "driftedItems"
+      ]
+    },
+    "DriftedItems": {
+      "type": "object",
+      "description": "Structure of each JSON object for Drift API call.",
+      "properties": {
+        "ruleName": {
+          "type": "string",
+          "description": "The name of the affected rule."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the rule."
+        },
+        "priority": {
+          "type": "string",
+          "description": "The severity of the drift."
+        },
+        "detail": {
+          "type": "string",
+          "description": "The details of the rule."
+        },
+        "identifier": {
+          "type": "string",
+          "description": "The identifier of the item."
+        }
+      },
+      "required": [
+        "ruleName",
+        "category",
+        "priority",
+        "detail",
+        "identifier"
+      ]
     },
     "FileFormat": {
       "type": "string",

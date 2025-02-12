@@ -850,11 +850,11 @@ model NetworkSecurityGroupProperties {
 
   @doc("The observed state of Network Security Group")
   @visibility("read")
-  @added(Versions.v2024_10_01_preview)
+  @added(Versions.v2025_02_01_preview)
   status?: NetworkSecurityGroupStatus;
 }
 
-@added(Versions.v2024_10_01_preview)
+@added(Versions.v2025_02_01_preview)
 @doc("The observed state of network security group")
 model NetworkSecurityGroupStatus {
   @doc("NetworkSecurityGroup provisioning error code")
@@ -867,7 +867,7 @@ model NetworkSecurityGroupStatus {
   provisioningStatus?: NetworkSecurityGroupStatusProvisioningStatus;
 }
 
-@added(Versions.v2024_10_01_preview)
+@added(Versions.v2025_02_01_preview)
 @doc("network security group provisioning status")
 model NetworkSecurityGroupStatusProvisioningStatus {
   @doc("The ID of the operation performed on the network security group")
@@ -1146,16 +1146,19 @@ model NetworkInterfacesUpdateRequest {
   @doc("Resource tags")
   tags?: Record<string>;
 
-  @added(Versions.v2024_10_01_preview)
+  @added(Versions.v2025_02_01_preview)
   @doc("Defines the resource properties for the update.")
   properties?: NetworkInterfacesUpdateProperties;
 }
 
-@added(Versions.v2024_10_01_preview)
+@added(Versions.v2025_02_01_preview)
 @doc("Defines the resource properties for the update.")
 model NetworkInterfacesUpdateProperties {
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @doc("DNS Settings for the interface")
+  dnsSettings?: InterfaceDNSSettings;
 }
 
 @doc("Tags object for patch operations.")
@@ -1352,9 +1355,6 @@ model VirtualHardDisksUpdateProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is a short form."
   @doc("Size of the disk in GB")
   diskSizeGB?: int64;
-
-  @doc("Boolean for enabling dynamic sizing on the virtual hard disk")
-  dynamic?: boolean;
 }
 
 @added(Versions.v2024_05_01_preview)

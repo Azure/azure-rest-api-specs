@@ -24,7 +24,7 @@ namespace Commvault.ContentStore;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(LiftrBase.Versions.v2024_08_27)
+  @useDependency(LiftrBase.Versions.v1_preview)
   v1_preview: "2024-10-01-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -55,7 +55,11 @@ interface CloudAccounts {
 }
 
 @doc("Properties specific to Commvault Cloud Account resource")
-model CloudAccountProperties is BaseResourceProperties;
+model CloudAccountProperties is BaseResourceProperties {
+  @doc("SSO URL for the Commvault Cloud Account")
+  @visibility("read")
+  ssoUrl?: string;
+}
 
 @doc("A Commvault Storage Resource")
 @parentResource(CloudAccount)
@@ -262,6 +266,25 @@ model Schedule {
   @doc("Frequency of Retention")
   frequency?: Frequency;
 
+  @doc("Interval of Retention")
+  runsEvery?: int32;
+
+  @doc("Week of the month")
+  weekOfMonth?: WeekOfMonth;
+
+  @doc("Day of the week")
+  dayOfWeek?: DayOfWeek;
+
+  @doc("Month of the year")
+  monthOfYear?: MonthOfYear;
+
+  @doc("Day of the month")
+  dayOfMonth?: int32;
+
+  @doc("Weekly Days List")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  weeklyDays?: WeeklyDays[];
+
   @doc("Time of Retention")
   time?: string; //should have zone info as well
 
@@ -310,6 +333,128 @@ union Frequency {
 
   @doc("Minutes backups")
   Minutes: "minutes",
+
+  string,
+}
+
+@doc("The Week of Month Enum")
+union WeekOfMonth {
+  @doc("First Week")
+  First: "FIRST",
+
+  @doc("Second Week")
+  Second: "SECOND",
+
+  @doc("Third Week")
+  Third: "THIRD",
+
+  @doc("Fourth Week")
+  Fourth: "FOURTH",
+
+  @doc("LAST Week")
+  Last: "LAST",
+
+  string,
+}
+
+@doc("The Day of Week Enum")
+union DayOfWeek {
+  @doc("First Day of the Week")
+  Sunday: "SUNDAY",
+
+  @doc("Second Day of the Week")
+  Monday: "MONDAY",
+
+  @doc("Third Day of the Week")
+  Tuesday: "TUESDAY",
+
+  @doc("Fourth Day of the Week")
+  Wednesday: "WEDNESDAY",
+
+  @doc("Fifth Day of the Week")
+  Thursday: "THURSDAY",
+
+  @doc("Sixth Day of the Week")
+  Friday: "FRIDAY",
+
+  @doc("Seventh Day of the Week")
+  Saturday: "SATURDAY",
+
+  @doc("Any Day of the week")
+  Day: "DAY",
+
+  @doc("Weekday Identifier")
+  Weekday: "WEEKDAY",
+
+  @doc("Weekend Identifier")
+  WeekendDays: "WEEKEND_DAYS",
+
+  string,
+}
+
+@doc("The Month of Year Enum")
+union MonthOfYear {
+  @doc("First Month of the Year")
+  January: "JANUARY",
+
+  @doc("Second Month of the Year")
+  February: "FEBRUARY",
+
+  @doc("Third Month of the Year")
+  March: "MARCH",
+
+  @doc("Fourth Month of the Year")
+  April: "APRIL",
+
+  @doc("Fifth Month of the Year")
+  May: "MAY",
+
+  @doc("Sixth Month of the Year")
+  June: "JUNE",
+
+  @doc("Seventh Month of the Year")
+  July: "JULY",
+
+  @doc("Eighth Month of the Year")
+  August: "AUGUST",
+
+  @doc("Ninth Month of the Year")
+  September: "SEPTEMBER",
+
+  @doc("Tenth Month of the Year")
+  October: "OCTOBER",
+
+  @doc("Eleventh Month of the Year")
+  November: "NOVEMBER",
+
+  @doc("Twelfth Month of the Year")
+  December: "DECEMBER",
+
+  string,
+}
+
+@doc("To represent the days of the week in Weekly type")
+union WeeklyDays {
+  @doc("First Day of the Week")
+  Sunday: "SUNDAY",
+
+  @doc("Second Day of the Week")
+  Monday: "MONDAY",
+
+  @doc("Third Day of the Week")
+  Tuesday: "TUESDAY",
+
+  @doc("Fourth Day of the Week")
+  Wednesday: "WEDNESDAY",
+
+  @doc("Fifth Day of the Week")
+  Thursday: "THURSDAY",
+
+  @doc("Sixth Day of the Week")
+  Friday: "FRIDAY",
+
+  @doc("Seventh Day of the Week")
+  Saturday: "SATURDAY",
 
   string,
 }
@@ -367,9 +512,6 @@ model ProtectionGroupProperties {
   @doc("The Commvault Protection Group backup time")
   @visibility("read")
   lastBackUpTime: int64;
-
-  @doc("Details of the user.")
-  user: UserDetails;
 
   @doc("Provisioning state of the resource.")
   @visibility("read")
@@ -538,7 +680,7 @@ model ProtectedItem is ProxyResource<ProtectedItemProperties> {
 model ProtectedItemProperties {
   @doc("The Name of the commvault protected item")
   @visibility("read")
-  resourceName: "string";
+  resourceName: string;
 
   @doc("The Commvault Protected Item backup time")
   @visibility("read")
@@ -551,6 +693,109 @@ model ProtectedItemProperties {
   @doc("The location of the protected item")
   @visibility("read")
   location: string;
+
+  @doc("The GUID of VM")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$")
+  @visibility("read")
+  vmGuid: string;
+}
+
+@doc("Types of Restore Supported")
+union RestoreType {
+  @doc("Azure In place Restore")
+  None: "NONE",
+
+  @doc("Azure Out of Place")
+  VirtualMachine: "VIRTUAL_MACHINE",
+
+  @doc("Azure Attach disk restore to existing VM")
+  DiskAttach: "DISK_ATTACH",
+
+  string,
+}
+
+@doc("The properties of VMTag for Restore Request")
+model VmTag {
+  @doc("The name of VM tag.")
+  name: string;
+
+  @doc("The value of VM tag.")
+  value: string;
+}
+
+@doc("The properties of information of a VM")
+model VmInfo {
+  @doc("The GUID of VM to be restored.")
+  @visibility("read", "create")
+  sourceVmGuid: string;
+
+  @doc("The storage account to be used for restore.")
+  @visibility("read", "create")
+  storageAccountId: string;
+
+  @doc("The identifier to check if VM needs to be powered on.")
+  @visibility("read", "create")
+  powerOnVmAfterRestore?: boolean;
+
+  @doc("The name of the VM.")
+  @visibility("read", "create")
+  name?: string;
+
+  @doc("The resource group of the VM.")
+  @visibility("read", "create")
+  resourceGroup?: string;
+
+  @doc("The region of the VM.")
+  @visibility("read", "create")
+  region?: string;
+
+  @doc("The network Id of the VM.")
+  @visibility("read", "create")
+  networkId?: string;
+
+  @doc("The subnet Id of the VM.")
+  @visibility("read", "create")
+  subnetId?: string;
+
+  @doc("The identifier to check if to attach and swap disk of the VM.")
+  @visibility("read", "create")
+  attachAndSwapOsDisk?: boolean;
+
+  @doc("The GUID of target VM used in DISK ATTACH.")
+  @visibility("read", "create")
+  targetVmGuid?: string;
+
+  @doc("The vmTag of the VM.")
+  @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  vmtag?: VmTag[];
+}
+
+@doc("The properties of VmDestinationInfo")
+model VmDestinationInfo {
+  @doc("List of information on VMs")
+  @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  vmInfoList: VmInfo[];
+}
+
+@doc("The properties of RestoreProtectionItemRequest")
+model RestoreProtectionItemRequest {
+  @doc("Check whether inplace or out of place restore.")
+  @visibility("read", "create")
+  inPlaceRestore: boolean;
+
+  @doc("Type of Restore")
+  @visibility("read", "create")
+  restoreType?: RestoreType;
+
+  @doc("Time to restore")
+  @visibility("read", "create")
+  toTime?: string;
+
+  @doc("The vm destination details of the VM.")
+  @visibility("read", "create")
+  vmDestinationInfo: VmDestinationInfo;
 }
 
 @armResourceOperations
@@ -565,6 +810,18 @@ interface ProtectedItems {
   getRestorePoints(
     ...ResourceInstanceParameters<ProtectedItem>,
   ): ArmResponse<RestorePoints> | ErrorResponse;
+
+  @doc("Restore resource for a protected item.")
+  @armResourceAction(ProtectedItem)
+  @action("restore")
+  @post
+  restore(
+    ...ResourceInstanceParameters<ProtectedItem>,
+
+    @bodyRoot
+    @doc("The body type of the operation request.")
+    request: RestoreProtectionItemRequest,
+  ): ArmResponse<RestoreProtectionItemResponse> | ErrorResponse;
 }
 
 @doc("Restore points of a Protected Item")
@@ -572,4 +829,15 @@ model RestorePoints {
   @doc("The Commvault Protected Item Restore points")
   @visibility("read")
   restoreTimes: int64[];
+}
+
+@doc("Restore resource response for a Protected Item")
+model RestoreProtectionItemResponse {
+  @doc("The Commvault response for taskId")
+  @visibility("read")
+  taskId: int32;
+
+  @doc("The jobIds returned from Commvault.")
+  @visibility("read")
+  jobIds: string[];
 }

@@ -77,6 +77,14 @@ model L2IsolationDomainPatchProperties {
   @doc("Extended VLAN status.")
   @added(Versions.v2024_06_15_preview)
   extendedVlan?: ExtendedVlan;
+
+  @added(Versions.v2024_06_15_preview)
+  @doc("ARM Resource ID of the networkToNetworkInterconnectId of the L2 ISD resource.")
+  networkToNetworkInterconnectId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkFabrics/networkToNetworkInterconnects";
+    }
+  ]>;
 }
 
 @doc("Extended VLAN status.")

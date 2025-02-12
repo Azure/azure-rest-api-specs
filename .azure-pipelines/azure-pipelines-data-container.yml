@@ -7,8 +7,8 @@ schedules:
   always: true
 
 pool:
-  name: azsdk-pool-mms-ubuntu-2204-general
-  vmImage: 'Ubuntu-22.04'
+  name: azsdk-pool-x64
+  demands: ImageOverride -equals ubuntu-22.04
 
 variables:
   IMAGE_TAG_PREFIX: $[format('1.0.{0:HHm}', pipeline.startTime)]

@@ -26,7 +26,7 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(LiftrBase.Versions.v1_preview)
+  @useDependency(LiftrBase.Versions.v2_preview)
   v2024_09_18_preview: "2024-09-18-preview",
 }
 
@@ -59,6 +59,9 @@ model PartnerProperties {
   region: Region;
 
   @doc("The subdomain of the instance")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]*$")
+  @minLength(1)
+  @maxLength(30)
   subdomain: string;
 }
 
@@ -68,6 +71,9 @@ model PartnerProperties {
 model InstanceProperties is BaseResourceProperties {
   @doc("partner properties")
   partnerProperties?: PartnerProperties;
+
+  @doc("Single sign-on properties")
+  singleSignOnProperties?: SingleSignOnPropertiesV2;
 }
 
 model InstanceResource
