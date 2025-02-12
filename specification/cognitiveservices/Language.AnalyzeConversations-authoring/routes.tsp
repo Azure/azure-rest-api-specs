@@ -129,7 +129,8 @@ op  swapDeployments is Foundations.LongRunningOperation<
        * The job object to swap two deployments.
        */
       @body
-      details: AnalyzeConversationAuthoringSwapDeploymentsOptions;
+      @clientName("details","csharp")
+      body: AnalyzeConversationAuthoringSwapDeploymentsOptions;
     },
     AcceptedResponse,
     {},
@@ -168,7 +169,8 @@ op  deployProject is Foundations.LongRunningOperation<
        * The new deployment info.
        */
       @body
-      details: AnalyzeConversationAuthoringCreateDeploymentOptions;
+      @clientName("details","csharp")
+      body: AnalyzeConversationAuthoringCreateDeploymentOptions;
     },
     AcceptedResponse,
     {},
@@ -231,7 +233,8 @@ op  deleteDeployment is Foundations.LongRunningOperation<
        * The options for deleting the deployment.
        */
       @body
-      details: AnalyzeConversationAuthoringDeleteDeploymentOptions;
+      @clientName("details","csharp")
+      body: AnalyzeConversationAuthoringDeleteDeploymentOptions;
     },
     AcceptedResponse,
     {},
@@ -277,7 +280,8 @@ op  assignDeploymentResources is Foundations.LongRunningOperation<
        * The new project resources info.
        */
       @body
-      details: AnalyzeConversationAuthoringAssignDeploymentResourcesOptions;
+      @clientName("details","csharp")
+      body: AnalyzeConversationAuthoringAssignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -307,7 +311,8 @@ op  unassignDeploymentResources is Foundations.LongRunningOperation<
        * The info for the deployment resources to be deleted.
        */
       @body
-      details: AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions;
+      @clientName("details","csharp")
+      body: AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -373,7 +378,8 @@ op  createProject is Foundations.ResourceOperation<
       contentType: "application/merge-patch+json";
 
       /** The request body */
-      @bodyRoot details: AnalyzeConversationAuthoringCreateProjectOptions;
+      @clientName("details","csharp")
+      @bodyRoot body: AnalyzeConversationAuthoringCreateProjectOptions;
     },
     Foundations.ResourceCreatedOrOkResponse<AnalyzeConversationAuthoringProjectMetadata>,
     {},
@@ -545,7 +551,8 @@ op  copyProject is Foundations.LongRunningOperation<
        * The copy project info.
        */
       @body
-      details: AnalyzeConversationAuthoringCopiedProjectOptions;
+      @clientName("details","csharp")
+      body: AnalyzeConversationAuthoringCopiedProjectOptions;
     },
     AcceptedResponse,
     {},
@@ -578,7 +585,8 @@ op  train is Foundations.LongRunningOperation<
        * The training input parameters.
        */
       @body
-      details: AnalyzeConversationAuthoringTrainingJobOptions;
+      @clientName("details","csharp")
+      body: AnalyzeConversationAuthoringTrainingJobOptions;
     },
     AcceptedResponse,
     {},
@@ -658,7 +666,8 @@ op  evaluateModel is Foundations.LongRunningOperation<
        * The training input parameters.
        */
       @body
-      details: AnalyzeConversationAuthoringEvaluationOptions;
+      @clientName("details","csharp")
+      body: AnalyzeConversationAuthoringEvaluationOptions;
     },
     AcceptedResponse,
     {},
@@ -796,7 +805,8 @@ op  createOrUpdateExportedModel is Foundations.LongRunningOperation<
        * The exported model info.
        */
       @body
-      details: ExportedModelOptions;
+      @clientName("details","csharp")
+      body: ExportedModelOptions;
     },
     AcceptedResponse,
     {},
