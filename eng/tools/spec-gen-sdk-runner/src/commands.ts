@@ -34,7 +34,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
   try {
     const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const executionResult = executionReport.packages[0]?.result;
+    const executionResult = executionReport.executionResult;
     logMessage(`Execution Result:${executionResult}`);
   } catch (error) {
     logMessage(`Error reading execution report at ${executionReportPath}:${error}`, LogLevel.Error);
@@ -58,9 +58,9 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
   // Prepare variables
   let statusCode = 0;
   let markdownContent = "\n";
-  let failedContent = `## Specs Failed in Generation\n`;
-  let succeededContent = `## Specs Succeeded in Generation\n`;
-  let undefinedContent = `## Specs disabled for this language emitter\n`;
+  let failedContent = `## Spec Failures in the Generation Process\n`;
+  let succeededContent = `## Successful Specs in the Generation Process\n`;
+  let undefinedContent = `## Disabled Specs in the Generation Process\n`;
   let failedCount = 0;
   let undefinedCount = 0;
   let succeededCount = 0;
@@ -93,7 +93,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
     try {
       const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      const executionResult = executionReport.packages[0]?.result;
+      const executionResult = executionReport.executionResult;
       logMessage(`Execution Result:${executionResult}`);
 
       if (executionResult === "succeeded") {
@@ -124,10 +124,12 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
   if (succeededCount > 0) {
     markdownContent += `${succeededContent}\n`;
   }
-  markdownContent += `## Total Specs Failed\n ${failedCount}\n`;
-  markdownContent += `## Total Specs Undefined this Language Emitter\n ${undefinedCount}\n`;
-  markdownContent += `## Total Specs Succeeded\n ${succeededCount}\n`;
-  markdownContent += `## Total Specs\n ${specConfigPaths.length}\n\n`;
+  markdownContent += failedCount ? `## Total Failed Specs\n ${failedCount}\n` : "";
+  markdownContent += undefinedCount
+    ? `## Total Disabled Specs in the Configuration\n ${undefinedCount}\n`
+    : "";
+  markdownContent += succeededCount ? `## Total Successful Specs\n ${succeededCount}\n` : "";
+  markdownContent += `## Total Specs Count\n ${specConfigPaths.length}\n\n`;
 
   // Write the markdown content to a file
   const markdownFilePath = path.join(commandInput.workingFolder, "out/logs/generation-summary.md");
