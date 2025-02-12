@@ -498,7 +498,8 @@ op  `import` is Foundations.LongRunningOperation<
        * The project data to import.
        */
       @body
-      exportedProject: AnalyzeConversationAuthoringExportedProject;
+      @clientName("exportedProject", "csharp")
+      body: AnalyzeConversationAuthoringExportedProject;
     },
     AcceptedResponse,
     {},

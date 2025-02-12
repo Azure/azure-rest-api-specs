@@ -430,16 +430,19 @@ model AnalyzeConversationAuthoringProjectDeployment {
   /**
    * Represents deployment last trained time.
    */
-  lastTrainedOn: utcDateTime;
+  @clientName("lastTrainedOn", "csharp")
+  lastTrainedDateTime: utcDateTime;
 
   /**
    * Represents deployment last deployed time.
    */
-  lastDeployedOn: utcDateTime;
+  @clientName("lastDeployedOn", "csharp")
+  lastDeployedDateTime: utcDateTime;
 
   /**
    * Represents deployment expiration date in the runtime.
    */
+  @clientName("deploymentExpiredOn", "csharp")
   deploymentExpirationDate: plainDate;
 
   /**

@@ -536,7 +536,7 @@
             "x-ms-client-name": "ExportedProjectFormat"
           },
           {
-            "name": "exportedProject",
+            "name": "body",
             "in": "body",
             "description": "The project data to import.",
             "required": true,
@@ -4409,12 +4409,12 @@
           "type": "string",
           "description": "Represents deployment modelId."
         },
-        "lastTrainedOn": {
+        "lastTrainedDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "Represents deployment last trained time."
         },
-        "lastDeployedOn": {
+        "lastDeployedDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "Represents deployment last deployed time."
@@ -4440,8 +4440,8 @@
       "required": [
         "deploymentName",
         "modelId",
-        "lastTrainedOn",
-        "lastDeployedOn",
+        "lastTrainedDateTime",
+        "lastDeployedDateTime",
         "deploymentExpirationDate",
         "modelTrainingConfigVersion",
         "assignedResources"
