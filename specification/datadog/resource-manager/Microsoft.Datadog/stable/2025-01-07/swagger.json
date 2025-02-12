@@ -1539,12 +1539,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/billingConfiguration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/resubscribe": {
       "post": {
         "tags": [
           "Resubscribe"
         ],
-        "summary": "Resubscribe the Datadog Organization.",
+        "summary": "Resubscribe to the Datadog Organization.",
         "operationId": "Organizations_Resubscribe",
         "consumes": [
           "application/json"
@@ -2481,7 +2481,7 @@
         "sku": {
           "$ref": "#/definitions/ResourceSku"
         },
-        "marketplaceAzureSubscriptionId": {
+        "azureSubscriptionId": {
           "description": "Newly selected Azure Subscription Id in which the new Marketplace subscription will be created for Resubscribe",
           "type": "string"
         },

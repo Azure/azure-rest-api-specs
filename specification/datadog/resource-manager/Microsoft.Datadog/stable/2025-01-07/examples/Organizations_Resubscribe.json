@@ -8,7 +8,7 @@
       "sku": {
         "name": "planName"
       },
-      "marketplaceAzureSubscriptionId": "subscriptionId",
+      "azureSubscriptionId": "subscriptionId",
       "marketplaceResourceGroup": "resourceGroup"
     }
   },
@@ -24,6 +24,7 @@
         "properties": {
           "provisioningState": "Succeeded",
           "monitoringStatus": "Enabled",
+          "marketplaceSubscriptionStatus": "Active",
           "datadogOrganizationProperties": {
             "name": "myOrg",
             "id": "myOrg123",
@@ -42,7 +43,7 @@
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/resourceGroup/providers/Microsoft.Datadog/monitor/monitorname/billingConfiguration?api-version=2025-01-07"
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/resourceGroup/providers/Microsoft.Datadog/monitor/monitorname/resubscribe?api-version=2025-01-07"
       }
     }
   }
