@@ -2,49 +2,29 @@
   "swagger": "2.0",
   "info": {
     "title": "Common types",
-<<<<<<< HEAD
     "version": "v4"
-=======
-    "version": "4.0"
->>>>>>> main
   },
   "paths": {},
   "definitions": {
     "PrivateEndpoint": {
       "type": "object",
-<<<<<<< HEAD
       "description": "The Private Endpoint resource.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
           "description": "The resource identifier for private endpoint",
-=======
-      "description": "The private endpoint resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ARM identifier for private endpoint.",
->>>>>>> main
           "readOnly": true
         }
       }
     },
     "PrivateEndpointConnection": {
       "type": "object",
-<<<<<<< HEAD
       "description": "The private endpoint connection resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "The private endpoint connection properties",
-=======
-      "description": "The private endpoint connection resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
->>>>>>> main
           "x-ms-client-flatten": true
         }
       },
@@ -56,23 +36,15 @@
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
-<<<<<<< HEAD
       "description": "List of private endpoint connections associated with the specified resource before version v6.\n\nThis model represents the standard `PrivateEndpointConnectionResourceListResult` envelope for versions v3, v4, and v5. It has been deprecated for v6 and beyond.\n\nNote: This is only intended for use with versions before v6. Do not use this if you are already on CommonTypes.Version.v6 or beyond.\n\nIf you are migrating to v6 or above, use `PrivateEndpointConnectionResourceListResult` directly.",
-=======
-      "description": "List of private endpoint connections associated with the specified resource.",
->>>>>>> main
       "properties": {
         "value": {
           "type": "array",
           "description": "Array of private endpoint connections.",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-<<<<<<< HEAD
           },
           "x-ms-identifiers": []
-=======
-          }
->>>>>>> main
         }
       }
     },
@@ -105,7 +77,6 @@
       "required": [
         "privateLinkServiceConnectionState"
       ]
-<<<<<<< HEAD
     },
     "PrivateEndpointConnectionProvisioningState": {
       "type": "string",
@@ -246,109 +217,6 @@
           "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }
       }
-=======
-    },
-    "PrivateEndpointConnectionProvisioningState": {
-      "type": "string",
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Deleting",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true
-      },
-      "readOnly": true
-    },
-    "PrivateEndpointServiceConnectionStatus": {
-      "type": "string",
-      "description": "The private endpoint connection status.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true
-      }
-    },
-    "PrivateLinkResource": {
-      "type": "object",
-      "description": "A private link resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../v4/types.json#/definitions/Resource"
-        }
-      ]
-    },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "A list of private link resources.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private link resources",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        }
-      }
-    },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "description": "Properties of a private link resource.",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "The private link resource group id.",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "type": "array",
-          "description": "The private link resource required member names.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "description": "The private link resource private link DNS zone name.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "type": "object",
-      "description": "A collection of information about the state of the connection between service consumer and provider.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
-        },
-        "description": {
-          "type": "string",
-          "description": "The reason for approval/rejection of the connection."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "A message indicating if changes on the service provider require any updates on the consumer."
-        }
-      }
->>>>>>> main
     }
   },
   "parameters": {
