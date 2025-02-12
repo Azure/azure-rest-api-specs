@@ -559,7 +559,8 @@ model AnalyzeConversationAuthoringExportProjectJobState {
   /**
    * The URL to use in order to download the exported project.
    */
-  resultUri?: string;
+  @clientName("resultUri", "csharp")
+  resultUrl?: string;
 }
 
 /**
@@ -610,7 +611,8 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
   /**
    * The last trained date time of the model.
    */
-  lastTrainedOn: utcDateTime;
+  @clientName("lastTrainedOn", "csharp")
+  lastTrainedDateTime: utcDateTime;
 
   /**
    * The duration of the model's last training request in seconds.
