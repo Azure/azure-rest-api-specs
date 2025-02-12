@@ -1106,43 +1106,15 @@ union SessionHandlingOperation {
 /**
  * Day of the week. Modeled as string
  */
-union DayOfWeek {
-  string,
-
-  /**
-   * Day of the week.
-   */
-  Monday: "Monday",
-
-  /**
-   * Day of the week.
-   */
-  Tuesday: "Tuesday",
-
-  /**
-   * Day of the week.
-   */
-  Wednesday: "Wednesday",
-
-  /**
-   * Day of the week.
-   */
-  Thursday: "Thursday",
-
-  /**
-   * Day of the week.
-   */
-  Friday: "Friday",
-
-  /**
-   * Day of the week.
-   */
-  Saturday: "Saturday",
-
-  /**
-   * Day of the week.
-   */
-  Sunday: "Sunday",
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
+enum DayOfWeek {
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday,
 }
 
 /**
