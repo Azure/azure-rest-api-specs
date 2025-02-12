@@ -9,6 +9,7 @@ using Storage.Blob;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API"
 @clientName("ServiceClient")
+@clientNamespace("Azure.Storage.Blob")
 namespace Customizations {
   interface ServiceClient extends Service {}
 
@@ -19,8 +20,9 @@ namespace Customizations {
   namespace ContainerClient {
     interface ContainerClient extends Container {}
 
+    @clientNamespace("Azure.Storage.Blob")
     namespace BlobClient {
-      interface BlobClient extends Blob {}
+      interface BlobClient extends Storage.Blob.Blob {}
     }
   }
 }
