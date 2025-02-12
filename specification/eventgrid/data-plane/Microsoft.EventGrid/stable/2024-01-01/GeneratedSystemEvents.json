@@ -1099,7 +1099,8 @@
       },
       "required": [
         "from",
-        "to"
+        "to",
+        "receivedTimeStamp"
       ]
     },
     "AcsMessageInteractiveButtonReplyContent": {
@@ -1134,7 +1135,10 @@
           "$ref": "#/definitions/AcsMessageInteractiveListReplyContent",
           "description": "The Message Sent when a customer selects an item from a list"
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "AcsMessageInteractiveListReplyContent": {
       "type": "object",
@@ -1161,24 +1165,24 @@
       "properties": {
         "mimeType": {
           "type": "string",
-          "description": "The MIME type of the file this media represents"
+          "description": "Required. The MIME type of the file this media represents"
         },
         "id": {
           "type": "string",
-          "description": "The media identifier",
+          "description": "Required. The media identifier",
           "x-ms-client-name": "mediaId"
         },
         "fileName": {
           "type": "string",
-          "description": "The filename of the underlying media file as specified when uploaded"
+          "description": "Optional. The filename of the underlying media file as specified when uploaded"
         },
         "caption": {
           "type": "string",
-          "description": "The caption for the media object, if supported and provided"
+          "description": "Optional. The caption for the media object, if supported and provided"
         },
         "animated": {
           "type": "boolean",
-          "description": "Set to true if the sticker is animated; false otherwise."
+          "description": "Optional. Set to true if the sticker is animated; false otherwise."
         }
       },
       "required": [
@@ -1192,11 +1196,11 @@
       "properties": {
         "messageId": {
           "type": "string",
-          "description": "WhatsApp message ID of message you want to apply the emoji to. "
+          "description": "Required. WhatsApp message ID of the message that the emoji is applied to"
         },
         "emoji": {
           "type": "string",
-          "description": "Unicode escape sequence of the emoji. "
+          "description": "Optional. Unicode escape sequence of the emoji."
         }
       },
       "required": [
@@ -1209,41 +1213,41 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "The message content"
+          "description": "Optional. The message content"
         },
         "messageId": {
           "type": "string",
-          "description": "Message ID. Format is Guid as string."
+          "description": "Optional. Message ID. Format is Guid as string."
         },
         "channelType": {
           "$ref": "#/definitions/AcsMessageChannelKind",
-          "description": "The message channel type",
+          "description": "Required. The message channel type",
           "x-ms-client-name": "channelKind"
         },
         "messageType": {
           "type": "string",
-          "description": "WhatsApp Message Type"
+          "description": "Required. Whatsapp message type"
         },
         "media": {
           "$ref": "#/definitions/AcsMessageMediaContent",
-          "description": "The received message media content",
+          "description": "Optional. The received message media content",
           "x-ms-client-name": "mediaContent"
         },
         "reaction": {
           "$ref": "#/definitions/AcsMessageReactionContent",
-          "description": "The received message reaction content"
+          "description": "Optional. The received message reaction content"
         },
         "context": {
           "$ref": "#/definitions/AcsMessageContext",
-          "description": "The received message context"
+          "description": "Optional. The received message context"
         },
         "button": {
           "$ref": "#/definitions/AcsMessageButtonContent",
-          "description": "The received message button content"
+          "description": "Optional. The received message button content"
         },
         "interactive": {
           "$ref": "#/definitions/AcsMessageInteractiveContent",
-          "description": "The received message interactive content",
+          "description": "Optional. The received message interactive content",
           "x-ms-client-name": "interactiveContent"
         }
       },
