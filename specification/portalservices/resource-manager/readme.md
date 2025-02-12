@@ -37,6 +37,13 @@ These settings apply only when `--tag=package-2024-04-01` is specified on the co
 ```yaml $(tag) == 'package-2024-04-01'
 input-file:
   - Microsoft.PortalServices/copilotSettings/stable/2024-04-01/copilotSettings.json
+suppressions:
+  - code: TenantLevelAPIsNotAllowed
+    reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @tenantResource, and has received exception sign-off approval by PAS team and ARM team.
+    from:
+      - copilotSettings.json
+    where:
+      - $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
 ```
 
 ### Tag: package-2024-04-01-preview
