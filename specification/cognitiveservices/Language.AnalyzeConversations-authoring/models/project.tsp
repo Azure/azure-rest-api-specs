@@ -840,7 +840,7 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
   /**
    * Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.
    */
-  confusionMatrix: Record<Record<AnalyzeConversationAuthoringConfusionMatrixCell>>;
+  confusionMatrix: Record<AnalyzeConversationAuthoringConfusionMatrixRow>;
 
   /**
    * Represents the entities evaluation summary.
@@ -877,6 +877,12 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
    */
   macroRecall: float32;
 }
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("AnalyzeConversationConfusionMatrixRow", "csharp")
+model AnalyzeConversationAuthoringConfusionMatrixRow
+  is Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
+
 
 /**
  * Represents a cell in a confusion matrix.
@@ -943,7 +949,7 @@ model AnalyzeConversationAuthoringIntentsEvaluationSummary {
   /**
    * Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted.
    */
-  confusionMatrix: Record<Record<AnalyzeConversationAuthoringConfusionMatrixCell>>;
+  confusionMatrix: Record<AnalyzeConversationAuthoringConfusionMatrixRow>;
 
   /**
    * Represents the intents evaluation summary.

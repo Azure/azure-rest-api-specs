@@ -2599,6 +2599,12 @@
         "rawValue"
       ]
     },
+    "AnalyzeConversationAuthoringConfusionMatrixRow": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixCell"
+      }
+    },
     "AnalyzeConversationAuthoringConversationExportedEntity": {
       "type": "object",
       "description": "Represents an entity with its components.",
@@ -3088,10 +3094,7 @@
           "type": "object",
           "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.",
           "additionalProperties": {
-            "additionalProperties": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixCell"
-            },
-            "type": "object"
+            "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixRow"
           }
         },
         "entities": {
@@ -3768,10 +3771,7 @@
           "type": "object",
           "description": "Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted.",
           "additionalProperties": {
-            "additionalProperties": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixCell"
-            },
-            "type": "object"
+            "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixRow"
           }
         },
         "intents": {
