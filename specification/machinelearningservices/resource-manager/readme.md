@@ -82,6 +82,7 @@ suppressions:
       - $.definitions.FineTuningJob.properties.outputs
       - $.definitions.SparkJob.properties.conf
       - $.definitions.SparkJob.properties.environmentVariables
+      - $.definitions.DiagnoseRequestProperties.properties.requiredResourceProviders
   - code: PatchBodyParametersSchema
     reason: Suppress as instructed, this patch is for a abstract class and the type-discriminator needs to be required.
     where:
@@ -106,6 +107,8 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
   - code: PostResponseCodes
     reason: This API is intend to align with Cognitive service API which has the same behavior https://github.com/Azure/azure-rest-api-specs/blob/efa7e41b82e82359fc76c0cda1856eb6e44448ec/specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/preview/2024-04-01-preview/cognitiveservices.json#L2717.
     where:
@@ -119,6 +122,7 @@ suppressions:
     reason: Existing property in previous GA version.
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+      - $.definitions.ManagedResourceGroupAssignedIdentities.properties.principalId.format
   - code: AvoidAdditionalProperties
     reason: Existing API behavior in 2024-10-01-preview.
     where:
@@ -129,6 +133,23 @@ suppressions:
       - $.definitions.ManagedOnlineEndpointResourceProperties.properties.traffic
       - $.definitions.ServerlessEndpointInferenceEndpoint.properties.headers
       - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+  - code: ParametersSchemaAsTypeObject
+    reason: Existing API parameter with type array instaed of type object.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/customServices"].post.parameters[5].schema.type
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/updateDataMounts"].post.parameters[5].schema.type
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems"].post.parameters[6].schema.type
+  - code: SecurityDefinitionsStructure
+    reason: Exist in swagger, not sure why complain
+  - code: ProvisioningStateMustBeReadOnly
+    reason: ProvisioningState are readonly here, nothing to fix here.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].get.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].put.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}"].get.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.responses.200.schema
+
 ```
 
 ### Tag: package-2024-10
