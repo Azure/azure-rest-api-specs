@@ -171,7 +171,7 @@ extends:
               if [ "${{ parameters.ConfigType }}" = "TypeSpec" ]; then
                 optional_params="$optional_params --tsp-config-relative-path ${{ parameters.ConfigPath }}"
                 sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
-              else
+              elif [ "${{ parameters.ConfigType }}" = "OpenAPI" ]; then
                 optional_params="$optional_params --readme-relative-path ${{ parameters.ConfigPath }}"
                 sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
               fi

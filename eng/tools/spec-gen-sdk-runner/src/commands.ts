@@ -7,7 +7,7 @@ import {
   runSpecGenSdkCommand,
   getAllTypeSpecPaths,
 } from "./utils.js";
-import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
+import { LogLevel, logMessage, vsoAddAttachment } from "./log.js";
 import { SpecGenSdkCmdInput } from "./types.js";
 
 export async function generateSdkForSingleSpec(): Promise<number> {
@@ -36,12 +36,6 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const executionResult = executionReport.packages[0]?.result;
     logMessage(`Execution Result:${executionResult}`);
-
-    if (executionResult === undefined) {
-      vsoLogIssue(`Language emitter is disabled for ${specConfigPath}`, "warning");
-    } else if (executionResult !== "succeeded") {
-      vsoLogIssue(`Generation ${executionResult} for ${specConfigPath}`, "error");
-    }
   } catch (error) {
     logMessage(`Error reading execution report at ${executionReportPath}:${error}`, LogLevel.Error);
     statusCode = 1;
@@ -108,11 +102,9 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       } else if (executionResult === undefined) {
         undefinedContent += `${specConfigPath},`;
         undefinedCount++;
-        vsoLogIssue(`Language emitter is disabled for ${specConfigPath}`, "warning");
       } else {
         failedContent += `${specConfigPath},`;
         failedCount++;
-        vsoLogIssue(`Generation failed for ${specConfigPath}`, "error");
       }
     } catch (error) {
       logMessage(
