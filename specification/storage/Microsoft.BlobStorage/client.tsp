@@ -5,19 +5,37 @@ using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 using Storage.Blob;
 
-namespace Customizations;
+// namespace Customizations;
 
-/** Parameters to be added in client constructors */
-model BlobServiceClientParameters {
-  ...ContainerNamePathParameter;
-  ...BlobPathParameter;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API"
+@clientName("ServiceClient")
+namespace Customizations {
+  interface ServiceClient extends Service {}
+
+  @clientNamespace("Azure.Storage.Blob")
+  @clientInitialization({
+    initializedBy: InitializedBy.parent | InitializedBy.individually,
+  })
+  namespace ContainerClient {
+    interface ContainerClient extends Container {}
+
+    namespace BlobClient {
+      interface BlobClient extends Blob {}
+    }
+  }
 }
 
-@@clientInitialization(Storage.Blob.Blob, BlobServiceClientParameters);
-@@clientInitialization(Storage.Blob.AppendBlob, BlobServiceClientParameters);
-@@clientInitialization(Storage.Blob.BlockBlob, BlobServiceClientParameters);
-@@clientInitialization(Storage.Blob.PageBlob, BlobServiceClientParameters);
-@@clientInitialization(Storage.Blob.Container, ContainerNamePathParameter);
+// /** Parameters to be added in client constructors */
+// model BlobServiceClientParameters {
+//   ...ContainerNamePathParameter;
+//   ...BlobPathParameter;
+// }
+
+// @@clientInitialization(Storage.Blob.Blob, BlobServiceClientParameters);
+// @@clientInitialization(Storage.Blob.AppendBlob, BlobServiceClientParameters);
+// @@clientInitialization(Storage.Blob.BlockBlob, BlobServiceClientParameters);
+// @@clientInitialization(Storage.Blob.PageBlob, BlobServiceClientParameters);
+// @@clientInitialization(Storage.Blob.Container, ContainerNamePathParameter);
 
 @@clientName(ContainerProperties.denyEncryptionScopeOverride,
   "PreventEncryptionScopeOverride"
