@@ -586,7 +586,7 @@ union ScalingHostPoolType {
  * Days of Week that the Scaling Schedule is active.
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "There are no more days of the week"
-union ScalingScheduleDaysOfWeekItem {
+union DaysOfWeek {
   string,
 
   /** Day of Week Sunday */
@@ -2566,7 +2566,7 @@ model ScalingSchedule {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: ScalingScheduleDaysOfWeekItem[];
+  daysOfWeek?: DaysOfWeek[];
 
   /**
    * Starting time for ramp up period.
@@ -3881,7 +3881,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: ScalingScheduleDaysOfWeekItem[];
+  daysOfWeek?: DaysOfWeek[];
 
   /**
    * Starting time for ramp up period.
@@ -4029,7 +4029,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: ScalingScheduleDaysOfWeekItem[];
+  daysOfWeek?: DaysOfWeek[];
 
   /**
    * Starting time for ramp up period.
@@ -4200,7 +4200,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: ScalingScheduleDaysOfWeekItem[];
+  daysOfWeek?: DaysOfWeek[];
 
   /**
    * Starting time for ramp up period.
@@ -4304,7 +4304,7 @@ model ScalingPlanPooledSchedulePatchProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: ScalingScheduleDaysOfWeekItem[];
+  daysOfWeek?: DaysOfWeek[];
 
   /**
    * Starting time for ramp up period.
