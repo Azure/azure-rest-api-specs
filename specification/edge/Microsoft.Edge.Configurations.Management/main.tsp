@@ -11,6 +11,7 @@ import "./DynamicConfigurationVersion.tsp";
 import "./NetworkConfiguration.tsp";
 import "./SecurityConfiguration.tsp";
 import "./TimeServerConfiguration.tsp";
+import "./ProvisioningConfigurations.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

@@ -74,5 +74,5 @@ model ProxyConfiguration {
   port: int32;
 
   @doc("Bypass urls from proxy")
-  bypassUrls: url[];
+  bypassUrls?: url[];
 }
