@@ -1443,8 +1443,9 @@ interface PageBlob {
       ...ImmutabilityPolicyModeParameter;
       ...LegalHoldOptionalParameter;
 
+      /** The type of the blob. */
       @header("x-ms-blob-type")
-      blobType: "PageBlob";
+      blobType: BlobType.PageBlob;
     },
     {
       @statusCode statusCode: 201;
@@ -1772,8 +1773,9 @@ interface AppendBlob {
       ...ImmutabilityPolicyModeParameter;
       ...LegalHoldOptionalParameter;
 
+      /** The type of the blob. */
       @header("x-ms-blob-type")
-      blobType: "AppendBlob";
+      blobType: BlobType.AppendBlob;
     },
     {
       @statusCode statusCode: 201;
@@ -1946,8 +1948,9 @@ interface BlockBlob {
       ...StructuredBodyPut;
       ...StructuredContentLengthParameter;
 
+      /** The type of the blob. */
       @header("x-ms-blob-type")
-      blobType: "BlockBlob";
+      blobType: BlobType.BlockBlob;
     },
     {
       @statusCode statusCode: 201;
@@ -2004,8 +2007,9 @@ interface BlockBlob {
       ...CopySourceAuthorizationParameter;
       ...CopySourceTagsParameter;
 
+      /** The type of the blob. */
       @header("x-ms-blob-type")
-      blobType: "BlockBlob";
+      blobType: BlobType.BlockBlob;
     },
     {
       @statusCode statusCode: 201;
