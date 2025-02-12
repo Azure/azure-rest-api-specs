@@ -2410,6 +2410,24 @@
         }
       ]
     },
+    "FleetMemberLabel": {
+      "type": "object",
+      "description": "Represents label object for a fleet member.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key for a fleet member label."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value for a fleet member label."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
     "FleetMemberListResult": {
       "type": "object",
       "description": "The response of a FleetMember list operation.",
@@ -2459,7 +2477,7 @@
           "type": "array",
           "description": "The labels to be persisted on the fleet member.",
           "items": {
-            "$ref": "#/definitions/Label"
+            "$ref": "#/definitions/FleetMemberLabel"
           },
           "x-ms-identifiers": [
             "key",
@@ -2546,7 +2564,7 @@
           "type": "array",
           "description": "The labels to be persisted on the fleet member.",
           "items": {
-            "$ref": "#/definitions/Label"
+            "$ref": "#/definitions/FleetMemberLabel"
           },
           "x-ms-identifiers": [
             "key",
@@ -2746,24 +2764,6 @@
     },
     "KubernetesVersion": {
       "type": "string"
-    },
-    "Label": {
-      "type": "object",
-      "description": "Represents label object for a fleet member.",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Key for a fleet member label."
-        },
-        "value": {
-          "type": "string",
-          "description": "Value for a fleet member label."
-        }
-      },
-      "required": [
-        "key",
-        "value"
-      ]
     },
     "ManagedClusterUpdate": {
       "type": "object",
