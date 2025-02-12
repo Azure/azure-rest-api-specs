@@ -164,7 +164,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully retrieved the API Key",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
             }
@@ -209,7 +209,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully listed the Deployment's API Keys",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentApiKeyListResponse"
             }
@@ -264,7 +264,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successully retrieved the Certificate",
             "schema": {
               "$ref": "#/definitions/NginxCertificate"
             }
@@ -325,13 +325,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successully upserted the Certificate",
             "schema": {
               "$ref": "#/definitions/NginxCertificate"
             }
           },
           "201": {
-            "description": "Success",
+            "description": "Certificate upsert accepted for provisioning",
             "schema": {
               "$ref": "#/definitions/NginxCertificate"
             }
@@ -385,13 +385,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Successully deleted the certificate"
           },
           "202": {
-            "description": "Success"
+            "description": "Certificate deletion accepted"
           },
           "204": {
-            "description": "Success"
+            "description": "Successfully deleted the certificate"
           },
           "default": {
             "description": "Default error response.",
@@ -434,7 +434,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully listed the deployment's certificates",
             "schema": {
               "$ref": "#/definitions/NginxCertificateListResponse"
             }
@@ -482,7 +482,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully retrieved the deployment's configurations",
             "schema": {
               "$ref": "#/definitions/NginxConfigurationListResponse"
             }
@@ -537,7 +537,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully retrieved the deployment's configuration",
             "schema": {
               "$ref": "#/definitions/NginxConfigurationResponse"
             }
@@ -598,13 +598,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successully upserted the configuration",
             "schema": {
               "$ref": "#/definitions/NginxConfigurationResponse"
             }
           },
           "201": {
-            "description": "Success",
+            "description": "Configuration upsert accepted for provisioning",
             "schema": {
               "$ref": "#/definitions/NginxConfigurationResponse"
             }
@@ -658,13 +658,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Configuration successfully deleted"
           },
           "202": {
-            "description": "Success"
+            "description": "Configuration deletion accepted"
           },
           "204": {
-            "description": "Success"
+            "description": "Configuration successfully deleted"
           },
           "default": {
             "description": "Default error response.",
@@ -726,7 +726,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Analysis complete",
+            "description": "Successfully completed configuration analysis",
             "schema": {
               "$ref": "#/definitions/AnalysisResult"
             }
@@ -771,7 +771,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully retrieved the deployment",
             "schema": {
               "$ref": "#/definitions/NginxDeployment"
             }
@@ -827,13 +827,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully upserted the deployment",
             "schema": {
               "$ref": "#/definitions/NginxDeployment"
             }
           },
           "201": {
-            "description": "Success",
+            "description": "Deployment upsert accepted for provisioning",
             "schema": {
               "$ref": "#/definitions/NginxDeployment"
             }
@@ -890,13 +890,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Deployment PATCH successful",
             "schema": {
               "$ref": "#/definitions/NginxDeployment"
             }
           },
           "201": {
-            "description": "Success",
+            "description": "Deployment PATCH accepted",
             "schema": {
               "$ref": "#/definitions/NginxDeployment"
             }
@@ -943,13 +943,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Deployment successfully deleted"
           },
           "202": {
-            "description": "Success"
+            "description": "Deployment deletion accepted"
           },
           "204": {
-            "description": "Success"
+            "description": "Deployment successfully deleted"
           },
           "default": {
             "description": "Default error response.",
@@ -986,7 +986,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully listed all deployments under the subscription",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentListResponse"
             }
@@ -1031,7 +1031,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully listed all deployments under the resource group",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentListResponse"
             }
@@ -1065,18 +1065,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "The Id of subscription",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "The name of resource group",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -1093,15 +1085,12 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully retrieved the custom Waf Policy",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentWafPolicy"
             }
@@ -1133,18 +1122,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "The Id of subscription",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "The name of resource group",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -1161,10 +1142,7 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -1177,13 +1155,24 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully upserted the custom Waf Policy",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentWafPolicy"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Custom Waf Policy upsert accepted for provisioning",
+            "headers": {
+              "Retry-After": {
+                "description": "Number of seconds to wait before retrying or until the operation is likely to complete",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Operation-Location": {
+                "description": "The URL to poll for the status of this asynchronous operation",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/NginxDeploymentWafPolicy"
             }
@@ -1196,6 +1185,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "WafPolicy_Create": {
             "$ref": "./examples/WafPolicy_Create.json"
@@ -1213,18 +1205,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "The Id of subscription",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "The name of resource group",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -1241,21 +1225,29 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Successfully deleted the custom Waf Policy"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Custom Waf Policy deletion accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "Number of seconds to wait before retrying or until the operation is likely to complete",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Operation-Location": {
+                "description": "The URL to poll for the status of this asynchronous operation",
+                "type": "string"
+              }
+            }
           },
           "204": {
-            "description": "No Content"
+            "description": "Successfully deleted the custom Waf Policy"
           },
           "default": {
             "description": "Default error response.",
@@ -1284,18 +1276,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "The Id of subscription",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "The name of resource group",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -1305,15 +1289,12 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully listed the deployment's default Waf policies",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentDefaultWafPolicyListResponse"
             }
@@ -1344,18 +1325,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "The Id of subscription",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "The name of resource group",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -1365,15 +1338,12 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully listed all deployment's custom Waf policies",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentWafPolicyListResponse"
             }
@@ -1573,7 +1543,12 @@
           "$ref": "#/definitions/NginxCertificateProperties"
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
@@ -2061,7 +2036,12 @@
           "$ref": "#/definitions/ResourceSku"
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
@@ -2117,7 +2097,12 @@
           "$ref": "#/definitions/ResourceSku"
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         },
         "properties": {
           "$ref": "#/definitions/NginxDeploymentUpdateProperties"
@@ -2564,7 +2549,12 @@
           }
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         }
       }
     },
@@ -2593,19 +2583,12 @@
           }
         },
         "location": {
-          "type": "string"
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyAnalysisData": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NginxDeploymentWafPolicyError"
-          },
-          "readOnly": true
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         }
       }
     },
@@ -2617,11 +2600,13 @@
         },
         "displayStatus": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "A readable string of the current status, and sometimes have the reason for the current state."
         },
         "time": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The date and time in UTC the current applying status was set."
         }
       }
     },
@@ -2638,7 +2623,29 @@
       ],
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "NginxDeploymentWafPolicyApplyingStatusCode"
+        "name": "NginxDeploymentWafPolicyApplyingStatusCode",
+        "values": [
+          {
+            "value": "NotApplied",
+            "description": "The policy is not referenced in the nginx config and not applied."
+          },
+          {
+            "value": "Applying",
+            "description": "The policy is referenced in the nginx config and is applying."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The policy is referenced in the nginx config and that config has been successfully applied."
+          },
+          {
+            "value": "Failed",
+            "description": "The policy is referenced in the nginx config and that config failed to apply."
+          },
+          {
+            "value": "Removing",
+            "description": "The policy is now not referenced in the nginx config and its being removed from the applied nginx config."
+          }
+        ]
       }
     },
     "NginxDeploymentWafPolicyCompilingStatus": {
@@ -2649,11 +2656,13 @@
         },
         "displayStatus": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "A readable string of the current status, and sometimes have the reason for the current state. If the CompilingStatus is Failed the Display Status will be The waf Policy failed to compile."
         },
         "time": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The date and time the policy was compiled in UTC."
         }
       }
     },
@@ -2669,24 +2678,25 @@
       ],
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "NginxDeploymentWafPolicyCompilingStatusCode"
-      }
-    },
-    "NginxDeploymentWafPolicyError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true
-        },
-        "field": {
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true
-        }
+        "name": "NginxDeploymentWafPolicyCompilingStatusCode",
+        "values": [
+          {
+            "value": "NotStarted",
+            "description": "The compilation of the custom waf policy has not started"
+          },
+          {
+            "value": "InProgress",
+            "description": "The compilation of the custom waf policy is in progress"
+          },
+          {
+            "value": "Succeeded",
+            "description": "The compilation of the custom waf policy is completed successfully and can now be referenced in the nginx config."
+          },
+          {
+            "value": "Failed",
+            "description": "The compilation of the custom waf policy failed."
+          }
+        ]
       }
     },
     "NginxDeploymentDefaultWafPolicyListResponse": {
