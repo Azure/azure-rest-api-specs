@@ -39,6 +39,6 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   enum ServiceApiVersions {
     v2018_01_01: "2018-01-01",
-    v2024_01_01: "2024-01-01"
+    v2024_01_01: "2024-01-01",
   }
 }
