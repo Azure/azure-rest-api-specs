@@ -1,0 +1,2374 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure API for OffAzure Inventory",
+    "description": "The Microsoft.OffAzureInventory Rest API spec.",
+    "version": "2025-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureInventory/PGSQLSites/{siteName}": {
+      "get": {
+        "tags": ["PGSQLSites"],
+        "operationId": "PGSQLSites_Get",
+        "summary": "Implements PGSQLSites GET method.",
+        "description": "Gets the PGSQLSites resource.",
+        "x-ms-examples": {
+          "PGSQLSites_Get": {
+            "$ref": "./examples/PGSQLSites_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the PGSQLSites resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["PGSQLSites"],
+        "operationId": "PGSQLSites_CreateOrUpdate",
+        "summary": "Implements PGSQLSites PUT method.",
+        "description": "Puts the PGSQLSites resource.",
+        "x-ms-examples": {
+          "PGSQLSites_Create": {
+            "$ref": "./examples/PGSQLSites_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The machines to add to the assessment",
+            "schema": {
+              "$ref": "#/definitions/PGSQLSite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated PGSQLSite resource",
+            "schema": {
+              "$ref": "#/definitions/PGSQLSite"
+            }
+          },
+          "201": {
+            "description": "Created PGSQLSite resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": ["PGSQLSites"],
+        "operationId": "PGSQLSites_Delete",
+        "summary": "Implements PGSQLSites DELETE method.",
+        "description": "Deletes the PGSQLSites resource.",
+        "x-ms-examples": {
+          "PGSQLSites_Delete": {
+            "$ref": "./examples/PGSQLSites_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the PGSQLSites resource."
+          },
+          "204": {
+            "description": "The PGSQLSites resource is already deleted or not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["PGSQLSites"],
+        "operationId": "PGSQLSites_Update",
+        "summary": "Implements PGSQLSites PATCH method.",
+        "description": "Patch the PGSQLSites resource.",
+        "x-ms-examples": {
+          "PGSQLSites_Update": {
+            "$ref": "./examples/PGSQLSites_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Clouds patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PGSQLSitesResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the PGSQLSites resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLSite"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureInventory/PGSQLSites/{siteName}/refresh": {
+      "post": {
+        "tags": ["PGSQLSites"],
+        "operationId": "PGSQLSites_TriggerRefresh",
+        "summary": "Implements Refresh POST method.",
+        "description": "Trigger Refresh Refresh action",
+        "x-ms-examples": {
+          "PGSQLSites_TriggerRefresh": {
+            "$ref": "./examples/PGSQLSites_TriggerRefresh.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureInventory/PGSQLSites": {
+      "get": {
+        "tags": ["PGSQLSites"],
+        "operationId": "PGSQLSites_ListByResourceGroup",
+        "summary": "Implements PGSQLSites GET method in a resource group.",
+        "description": "Lits the PGSQLSites resource in a resource group.",
+        "x-ms-examples": {
+          "PGSQLSites_ListByResourceGroup": {
+            "$ref": "./examples/PGSQLSites_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the PGSQLSites resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLSiteList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzureInventory/PGSQLSites": {
+      "get": {
+        "tags": ["PGSQLSites"],
+        "operationId": "PGSQLSites_ListBySubscription",
+        "summary": "Implements PGSQLSites GET method in a subscription.",
+        "description": "Lists the PGSQLSites resource in a subscription.",
+        "x-ms-examples": {
+          "PGSQLSites_ListBySubscription": {
+            "$ref": "./examples/PGSQLSites_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the PGSQLSites resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLSiteList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureInventory/PGSQLSites/{siteName}/PGSQLInstances/{instanceName}": {
+      "get": {
+        "tags": ["PGSQLInstances"],
+        "operationId": "PGSQLInstances_Get",
+        "summary": "Implements PGSQLInstances GET method.",
+        "description": "Gets the PGSQLInstances resource.",
+        "x-ms-examples": {
+          "PGSQLInstances_Get": {
+            "$ref": "./examples/PGSQLInstances_Get_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the PGSQLInstances resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["PGSQLInstances"],
+        "operationId": "PGSQLInstances_CreateOrUpdate",
+        "summary": "Implements PGSQLInstances PUT method.",
+        "description": "Puts the PGSQLInstances resource.",
+        "x-ms-examples": {
+          "PGSQLInstances_Create": {
+            "$ref": "./examples/PGSQLInstances_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The machines to add to the assessment",
+            "schema": {
+              "$ref": "#/definitions/PGSQLInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update PGSQLInstance resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLInstance"
+            }
+          },
+          "201": {
+            "description": "Created PGSQLInstance resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["PGSQLInstances"],
+        "operationId": "PGSQLInstances_Delete",
+        "summary": "Implements PGSQLInstances DELETE method.",
+        "description": "Deletes the PGSQLInstances resource.",
+        "x-ms-examples": {
+          "PGSQLInstances_Delete": {
+            "$ref": "./examples/PGSQLInstances_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the PGSQLInstances resource."
+          },
+          "204": {
+            "description": "The PGSQLInstance resource is already deleted or not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["PGSQLInstances"],
+        "operationId": "PGSQLInstances_Update",
+        "summary": "Implements PGSQLInstances PATCH method.",
+        "description": "Patch the PGSQLInstances resource.",
+        "x-ms-examples": {
+          "PGSQLInstances_Update": {
+            "$ref": "./examples/PGSQLInstances_Update_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Clouds patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PGSQLInstanceResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the PGSQLInstances resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLInstance"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureInventory/PGSQLSites/{siteName}/PGSQLInstances": {
+      "get": {
+        "tags": ["PGSQLInstances"],
+        "operationId": "PGSQLInstances_ListBySite",
+        "summary": "Implements PGSQLInstances GET method.",
+        "description": "Lists the PGSQLInstances resource in PGSQLSites.",
+        "x-ms-examples": {
+          "PGSQLInstances_ListBySite": {
+            "$ref": "./examples/PGSQLInstances_ListBySite_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the PGSQLInstances resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLInstanceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureInventory/PGSQLSites/{siteName}/PGSQLDatabases/{databaseName}": {
+      "get": {
+        "tags": ["PGSQLDatabases"],
+        "operationId": "PGSQLDatabases_Get",
+        "summary": "Implements PGSQLDatabases GET method.",
+        "description": "Gets the PGSQLDatabases resource.",
+        "x-ms-examples": {
+          "PGSQLDatabases_Get": {
+            "$ref": "./examples/PGSQLDatabases_Get_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the PGSQLDatabases resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLDatabase"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["PGSQLDatabases"],
+        "operationId": "PGSQLDatabases_CreateOrUpdate",
+        "summary": "Implements PGSQLDatabases PUT method.",
+        "description": "Puts the PGSQLDatabases resource.",
+        "x-ms-examples": {
+          "PGSQLInstances_Create": {
+            "$ref": "./examples/PGSQLDatabases_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The machines to add to the assessment",
+            "schema": {
+              "$ref": "#/definitions/PGSQLDatabase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update PGSQLDatabase resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLDatabase"
+            }
+          },
+          "201": {
+            "description": "Created PGSQLDatabase resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLDatabase"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["PGSQLDatabases"],
+        "operationId": "PGSQLDatabases_Delete",
+        "summary": "Implements PGSQLDatabases DELETE method.",
+        "description": "Deletes the PGSQLDatabases resource.",
+        "x-ms-examples": {
+          "PGSQLInstances_Delete": {
+            "$ref": "./examples/PGSQLDatabases_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the PGSQLDatabases resource."
+          },
+          "204": {
+            "description": "The PGSQLDatabase resource is already deleted or not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["PGSQLDatabases"],
+        "operationId": "PGSQLDatabases_Update",
+        "summary": "Implements PGSQLDatabases PATCH method.",
+        "description": "Patch the PGSQLDatabases resource.",
+        "x-ms-examples": {
+          "PGSQLInstances_Update": {
+            "$ref": "./examples/PGSQLDatabases_Update_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Clouds patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PGSQLInstanceResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the PGSQLInstances resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLInstance"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureInventory/PGSQLSites/{siteName}/PGSQLDatabases": {
+      "get": {
+        "tags": ["PGSQLDatabases"],
+        "operationId": "PGSQLDatabases_ListBySite",
+        "summary": "Implements PGSQLInstances GET method.",
+        "description": "Lists the PGSQLInstances resource in PGSQLSites.",
+        "x-ms-examples": {
+          "PGSQLDatabases_ListBySite": {
+            "$ref": "./examples/PGSQLDatabases_ListBySite_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the PGSQLInstances resource.",
+            "schema": {
+              "$ref": "#/definitions/PGSQLDatabaseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureInventory/PGSQLSites/{siteName}/agents/{agentName}": {
+      "get": {
+        "tags": ["Agents"],
+        "operationId": "Agents_Get",
+        "summary": "Implements Agents GET method.",
+        "description": "Gets the Agents resource.",
+        "x-ms-examples": {
+          "Agents_Get": {
+            "$ref": "./examples/Agents_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the Agents resource.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Agents"],
+        "operationId": "Agents_CreateOrUpdate",
+        "summary": "Implements Agents PUT method.",
+        "description": "Puts the Agents resource.",
+        "x-ms-examples": {
+          "Agents_Create": {
+            "$ref": "./examples/Agents_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The request body for creating or updating agent.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Agent resource",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "201": {
+            "description": "Created Agent resource.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": ["Agents"],
+        "operationId": "Agents_Delete",
+        "summary": "Implements Agents DELETE method.",
+        "description": "Deletes the Agents resource.",
+        "x-ms-examples": {
+          "Agents_Delete": {
+            "$ref": "./examples/Agents_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The Agent resource is already deleted or not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": ["Agents"],
+        "operationId": "Agents_Update",
+        "summary": "Implements Agents PATCH method.",
+        "description": "Patch the Agents resource.",
+        "x-ms-examples": {
+          "Agents_Update": {
+            "$ref": "./examples/Agents_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Agents patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the Agent resource.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureInventory/PGSQLSites/{siteName}/agents": {
+      "get": {
+        "tags": ["Agents"],
+        "operationId": "Agents_ListBySite",
+        "summary": "Implements Agents GET method.",
+        "description": "Lists the Agents resource in PGSQLSites.",
+        "x-ms-examples": {
+          "Agents_ListBySite": {
+            "$ref": "./examples/Agents_ListBySite.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the Agents resource.",
+            "schema": {
+              "$ref": "#/definitions/AgentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureInventory/PGSQLSites/{siteName}/agents/{agentName}/refresh": {
+      "post": {
+        "tags": ["Agents"],
+        "operationId": "Agents_TriggerRefresh",
+        "summary": "Implements Refresh POST method.",
+        "description": "Trigger Refresh Refresh action",
+        "x-ms-examples": {
+          "Agents_TriggerRefresh": {
+            "$ref": "./examples/Agents_TriggerRefresh.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/providers/Microsoft.OffAzureInventory/operations": {
+      "get": {
+        "tags": ["Operations"],
+        "operationId": "Operations_List",
+        "description": "Returns list of all operations.",
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The extended location for off-azure resources.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      }
+    },
+    "PGSQLSiteList": {
+      "type": "object",
+      "description": "List of Sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Sites.",
+          "items": {
+            "$ref": "#/definitions/PGSQLSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "PGSQLInstanceList": {
+      "type": "object",
+      "description": "List of Servers.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Servers.",
+          "items": {
+            "$ref": "#/definitions/PGSQLInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "PGSQLDatabaseList": {
+      "type": "object",
+      "description": "List of Databases.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Databases.",
+          "items": {
+            "$ref": "#/definitions/PGSQLDatabase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "PGSQLSite": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/PGSQLSiteProperties"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": ["properties"],
+      "description": "The PGSQLSite resource definition."
+    },
+    "PGSQLSiteProperties": {
+      "type": "object",
+      "description": "PGSQL Site properties",
+      "properties": {
+        "masterSiteId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OffAzure/masterSites"
+              }
+            ]
+          },
+          "description": "The mapped master Site Id."
+        },
+        "migrateProjectId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/migrateProjects"
+              }
+            ]
+          },
+          "description": "The mapped migrate project Id."
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": ["masterSiteId", "migrateProjectId"]
+    },
+    "PGSQLInstance": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/PGSQLInstanceProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": ["properties"],
+      "description": "The PGSQLInstance resource definition."
+    },
+    "PGSQLInstanceProperties": {
+      "type": "object",
+      "description": "PGSQL Server properties",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "The Server IP/host name."
+        },
+        "hostIp": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Server IP/host name."
+        },
+        "machineId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OffAzure/serverSites/machines"
+              }
+            ]
+          },
+          "description": "discovery Machine Id"
+        },
+        "portNumber": {
+          "type": "string",
+          "description": "PGSQL Server port number"
+        },
+        "pgsqlVersion": {
+          "type": "string",
+          "description": "The pgsql server version."
+        },
+        "numberOfDatabase": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of database."
+        },
+        "supportStatus": {
+          "type": "boolean",
+          "description": "pgsql version support status."
+        },
+        "edition": {
+          "$ref": "#/definitions/Edition",
+          "description": "PGSQL instance edition."
+        },
+        "endOfSupportDate": {
+          "description": "Time when pgsql instance version support end.",
+          "type": "string",
+          "format": "date"
+        },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource labels."
+        },
+        "collations": {
+          "description": "The list of collations in the database.",
+          "type": "array",
+          "items": {
+            "description": "The collation",
+            "$ref": "#/definitions/Collation"
+          }
+        },
+        "serverParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary of server parameters for the instance",
+          "readOnly": true
+        },
+        "tableSpaces": {
+          "type": "array",
+          "description": "List of tablespaces in the instance.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nonDefaultTableSpaces": {
+          "type": "array",
+          "description": "List of non-default tablespaces in the instance.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageSizeInMb": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets storage size of PGSQL instance."
+        },
+        "maxConnections": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of connections allowed in the instance"
+        }
+      },
+      "required": ["hostName", "portNumber"]
+    },
+    "Error": {
+      "type": "object",
+      "description": "Defines the error.",
+      "properties": {
+        "id": {
+          "description": "The error ID.",
+          "type": "string"
+        },
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "summaryMessage": {
+          "description": "The summarized error message.",
+          "type": "string"
+        },
+        "runAsAccountId": {
+          "description": "The account ID used to login.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The detailed error message.",
+          "type": "string"
+        },
+        "possibleCause": {
+          "description": "The error possible cause.",
+          "type": "string"
+        },
+        "recommendedAction": {
+          "description": "Gets description of the checkpoint.",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Gets description of the severity.",
+          "type": "string"
+        },
+        "updatedTimeStamp": {
+          "description": "Time when this error was last updated.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "PGSQLInstanceResourcePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PGSQLInstanceProperties",
+          "description": "The PGSQLInstance resource definition."
+        }
+      },
+      "description": "Object containing tags updates for patch operations."
+    },
+    "PGSQLSitesResourcePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PGSQLSiteProperties",
+          "description": "The PGSQLSites resource definition."
+        }
+      },
+      "description": "Object containing tags updates for patch operations."
+    },
+    "AgentList": {
+      "type": "object",
+      "description": "List of Agents.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Agents.",
+          "items": {
+            "$ref": "#/definitions/Agent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "Agent": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/AgentProperties"
+        }
+      },
+      "required": ["properties"],
+      "description": "The Agent resource definition."
+    },
+    "AgentProperties": {
+      "type": "object",
+      "description": "Agent properties",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "x-ms-mutability": ["read", "create"],
+          "$ref": "#/definitions/AgentSpnProperties",
+          "description": "Service principal identity details used by agent for communication to the service."
+        },
+        "migrateApplianceName": {
+          "x-ms-mutability": ["read", "create"],
+          "type": "string",
+          "description": "Name of the appliance on which agent is running."
+        },
+        "healthDetails": {
+          "$ref": "#/definitions/AgentHealthProperties",
+          "description": "Health details of the agent."
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": ["servicePrincipalIdentityDetails", "migrateApplianceName"]
+    },
+    "AgentResourcePatch": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AgentResourcePatchProperties",
+          "description": "The Agent properties resource definition."
+        }
+      },
+      "description": "Object containing tags updates for patch operations."
+    },
+    "AgentResourcePatchProperties": {
+      "type": "object",
+      "description": "Agent resource patch properties",
+      "properties": {
+        "healthDetails": {
+          "$ref": "#/definitions/AgentHealthProperties",
+          "description": "Health details of the agent."
+        }
+      }
+    },
+    "AgentSpnProperties": {
+      "description": "Class for agent spn properties.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "Tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "applicationId": {
+          "description": "Application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "Object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        }
+      }
+    },
+    "AgentHealthProperties": {
+      "description": "Class for agent health properties.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version of the agent.",
+          "type": "string"
+        },
+        "lastHeartBeatUtc": {
+          "format": "date-time",
+          "description": "Last heartbeat time of the agent in UTC.",
+          "type": "string"
+        }
+      }
+    },
+    "Collation": {
+      "description": "Represents a Collation in PostgreSQL.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the collation.",
+          "type": "string"
+        },
+        "locale": {
+          "description": "The locale of the collation.",
+          "type": "string"
+        },
+        "collationProvider": {
+          "$ref": "#/definitions/CollationProvider",
+          "description": "The provider of the collation."
+        },
+        "isDeterministic": {
+          "type": "boolean",
+          "description": "A value indicating whether the collation is deterministic."
+        }
+      }
+    },
+    "Extension": {
+      "description": "Represents an Extension (e.g., PostGIS, pgcrypto).",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the extension.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the extension.",
+          "type": "string"
+        }
+      }
+    },
+    "PGSQLDatabase": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/PGSQLDatabaseProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": ["properties"],
+      "description": "The PGSQLDatabase resource definition."
+    },
+    "PGSQLDatabaseProperties": {
+      "type": "object",
+      "description": "PGSQL Database properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The database name."
+        },
+        "owner": {
+          "type": "string",
+          "description": "The database owner name."
+        },
+        "encoding": {
+          "$ref": "#/definitions/Encoding",
+          "description": "PGSQL database encoding."
+        },
+        "collations": {
+          "description": "The list of collations in the database.",
+          "type": "array",
+          "items": {
+            "description": "The collation",
+            "$ref": "#/definitions/Collation"
+          }
+        },
+        "extensions": {
+          "description": "The list of extensions in the database.",
+          "type": "array",
+          "items": {
+            "description": "The extension",
+            "$ref": "#/definitions/Extension"
+          }
+        },
+        "languages": {
+          "type": "array",
+          "description": "List of languages in the database.",
+          "items": {
+            "description": "The extension",
+            "$ref": "#/definitions/Language"
+          }
+        },
+        "hasTablesWithOids ": {
+          "type": "boolean",
+          "description": "Whether tables with oid's exists in the database."
+        },
+        "hasCustomDataTypes  ": {
+          "type": "boolean",
+          "description": "Whether the database has custom data types."
+        },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource labels."
+        }
+      },
+      "required": ["hostName", "portNumber"]
+    },
+    "Edition": {
+      "type": "string",
+      "description": "Represents the Edition of the PostgreSQL instance.",
+      "enum": ["Unknown", "Community", "Enterprise"],
+      "x-ms-enum": {
+        "name": "Edition",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown edition."
+          },
+          {
+            "name": "Community",
+            "value": "Community",
+            "description": "Community edition."
+          },
+          {
+            "name": "Enterprise",
+            "value": "Enterprise",
+            "description": "Enterprise edition."
+          }
+        ]
+      }
+    },
+    "CollationProvider": {
+      "type": "string",
+      "description": "Represents the Collation Provider for PostgreSQL.",
+      "enum": ["UNKNOWN", "DEFAULT", "LIBC", "ICU"],
+      "x-ms-enum": {
+        "name": "CollationProvider",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UNKNOWN",
+            "value": "UNKNOWN",
+            "description": "UNKNOWN collation provider."
+          },
+          {
+            "name": "DEFAULT",
+            "value": "DEFAULT",
+            "description": "DEFAULT collation provider."
+          },
+          {
+            "name": "LIBC",
+            "value": "LIBC",
+            "description": "LIBC collation provider."
+          },
+          {
+            "name": "ICU",
+            "value": "ICU",
+            "description": "ICU collation provider."
+          }
+        ]
+      }
+    },
+    "Language": {
+      "type": "string",
+      "description": "Represents the Language supported by PostgreSQL. https://wiki.postgresql.org/wiki/PL_Matrix.",
+      "enum": [
+        "UNKNOWN",
+        "SQL",
+        "PLPGSQL",
+        "PLPERL",
+        "PLDOTNET",
+        "PLHASKELL",
+        "PLLOLCODE",
+        "PLPYTHON",
+        "PLLUA",
+        "PLR",
+        "PLJAVA",
+        "PLV8",
+        "PLTCL",
+        "PLSH",
+        "PLPHP",
+        "PLRUBY",
+        "PLJAVASCRIPT",
+        "PLCOFFEE",
+        "PLRUST",
+        "PLSCHEME",
+        "PLXSLT"
+      ],
+      "x-ms-enum": {
+        "name": "Language",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UNKNOWN",
+            "value": "UNKNOWN",
+            "description": "UNKNOWN edition."
+          },
+          {
+            "name": "SQL",
+            "value": "SQL",
+            "description": "SQL edition."
+          },
+          {
+            "name": "PLPGSQL",
+            "value": "PLPGSQL",
+            "description": "PLPGSQL edition."
+          },
+          {
+            "name": "PLPERL",
+            "value": "PLPERL",
+            "description": "PLPERL edition."
+          },
+          {
+            "name": "PLDOTNET",
+            "value": "PLDOTNET",
+            "description": "PLDOTNET edition."
+          },
+          {
+            "name": "PLHASKELL",
+            "value": "PLHASKELL",
+            "description": "PLHASKELL edition."
+          },
+          {
+            "name": "PLLOLCODE",
+            "value": "PLLOLCODE",
+            "description": "PLLOLCODE edition."
+          },
+          {
+            "name": "PLPYTHON",
+            "value": "PLPYTHON",
+            "description": "PLPYTHON edition."
+          },
+          {
+            "name": "PLLUA",
+            "value": "PLLUA",
+            "description": "PLLUA edition."
+          },
+          {
+            "name": "PLR",
+            "value": "PLR",
+            "description": "PLR edition."
+          },
+          {
+            "name": "PLJAVA",
+            "value": "PLJAVA",
+            "description": "PLJAVA edition."
+          },
+          {
+            "name": "PLV8",
+            "value": "PLV8",
+            "description": "PLV8 edition."
+          },
+          {
+            "name": "PLTCL",
+            "value": "PLTCL",
+            "description": "PLTCL edition."
+          },
+          {
+            "name": "PLSH",
+            "value": "PLSH",
+            "description": "PLSH edition."
+          },
+          {
+            "name": "PLPHP",
+            "value": "PLPHP",
+            "description": "PLPHP edition."
+          },
+          {
+            "name": "PLRUBY",
+            "value": "PLRUBY",
+            "description": "PLRUBY edition."
+          },
+          {
+            "name": "PLJAVASCRIPT",
+            "value": "PLJAVASCRIPT",
+            "description": "PLJAVASCRIPT edition."
+          },
+          {
+            "name": "PLCOFFEE",
+            "value": "PLCOFFEE",
+            "description": "PLCOFFEE edition."
+          },
+          {
+            "name": "PLRUST",
+            "value": "PLRUST",
+            "description": "PLRUST edition."
+          },
+          {
+            "name": "PLSCHEME",
+            "value": "PLSCHEME",
+            "description": "PLSCHEME edition."
+          },
+          {
+            "name": "PLXSLT",
+            "value": "PLXSLT",
+            "description": "PLXSLT edition."
+          }
+        ]
+      }
+    },
+    "Encoding": {
+      "type": "string",
+      "description": "Represents the supported character sets in PostgreSQL.",
+      "enum": [
+        "BIG5",
+        "EUC_CN",
+        "EUC_JP",
+        "EUC_JIS_2004",
+        "EUC_KR",
+        "EUC_TW",
+        "GB18030",
+        "GBK",
+        "ISO_8859_5",
+        "ISO_8859_6",
+        "ISO_8859_7",
+        "ISO_8859_8",
+        "JOHAB",
+        "KOI8R",
+        "KOI8U",
+        "LATIN1",
+        "LATIN2",
+        "LATIN3",
+        "LATIN4",
+        "LATIN5",
+        "LATIN6",
+        "LATIN7",
+        "LATIN8",
+        "LATIN9",
+        "LATIN10",
+        "MULE_INTERNAL",
+        "SJIS",
+        "SHIFT_JIS_2004",
+        "SQL_ASCII",
+        "UHC",
+        "UTF8",
+        "WIN866",
+        "WIN874",
+        "WIN1250",
+        "WIN1251",
+        "WIN1252",
+        "WIN1253",
+        "WIN1254",
+        "WIN1255",
+        "WIN1256",
+        "WIN1257",
+        "WIN1258"
+      ],
+      "x-ms-enum": {
+        "name": "Encoding",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BIG5",
+            "value": "BIG5",
+            "description": "Big Five character set for Traditional Chinese."
+          },
+          {
+            "name": "EUC_CN",
+            "value": "EUC_CN",
+            "description": "Extended UNIX Code-CN (for Simplified Chinese)."
+          },
+          {
+            "name": "EUC_JP",
+            "value": "EUC_JP",
+            "description": "Extended UNIX Code-JP (for Japanese)."
+          },
+          {
+            "name": "EUC_JIS_2004",
+            "value": "EUC_JIS_2004",
+            "description": "Extended UNIX Code-JP supporting JIS X 0213."
+          },
+          {
+            "name": "EUC_KR",
+            "value": "EUC_KR",
+            "description": "Extended UNIX Code-KR (for Korean)."
+          },
+          {
+            "name": "EUC_TW",
+            "value": "EUC_TW",
+            "description": "Extended UNIX Code-TW (for Traditional Chinese)."
+          },
+          {
+            "name": "GB18030",
+            "value": "GB18030",
+            "description": "GB18030, the official character set of China."
+          },
+          {
+            "name": "GBK",
+            "value": "GBK",
+            "description": "GBK, an extension of GB2312 used in China."
+          },
+          {
+            "name": "ISO_8859_5",
+            "value": "ISO_8859_5",
+            "description": "ISO 8859-5, used for Cyrillic script."
+          },
+          {
+            "name": "ISO_8859_6",
+            "value": "ISO_8859_6",
+            "description": "ISO 8859-6, used for Arabic script."
+          },
+          {
+            "name": "ISO_8859_7",
+            "value": "ISO_8859_7",
+            "description": "ISO 8859-7, used for Greek script."
+          },
+          {
+            "name": "ISO_8859_8",
+            "value": "ISO_8859_8",
+            "description": "ISO 8859-8, used for Hebrew script."
+          },
+          {
+            "name": "JOHAB",
+            "value": "JOHAB",
+            "description": "JOHAB, a South Korean character encoding."
+          },
+          {
+            "name": "KOI8R",
+            "value": "KOI8R",
+            "description": "KOI8-R, used for Russian language."
+          },
+          {
+            "name": "KOI8U",
+            "value": "KOI8U",
+            "description": "KOI8-U, an extension of KOI8-R for Ukrainian."
+          },
+          {
+            "name": "LATIN1",
+            "value": "LATIN1",
+            "description": "ISO 8859-1, also known as Latin-1."
+          },
+          {
+            "name": "LATIN2",
+            "value": "LATIN2",
+            "description": "ISO 8859-2, also known as Latin-2, used for Central European languages."
+          },
+          {
+            "name": "LATIN3",
+            "value": "LATIN3",
+            "description": "ISO 8859-3, also known as Latin-3."
+          },
+          {
+            "name": "LATIN4",
+            "value": "LATIN4",
+            "description": "ISO 8859-4, also known as Latin-4."
+          },
+          {
+            "name": "LATIN5",
+            "value": "LATIN5",
+            "description": "ISO 8859-9, also known as Latin-5 (Turkish)."
+          },
+          {
+            "name": "LATIN6",
+            "value": "LATIN6",
+            "description": "ISO 8859-10, also known as Latin-6."
+          },
+          {
+            "name": "LATIN7",
+            "value": "LATIN7",
+            "description": "ISO 8859-13, also known as Latin-7 (Baltic languages)."
+          },
+          {
+            "name": "LATIN8",
+            "value": "LATIN8",
+            "description": "ISO 8859-14, also known as Latin-8 (Celtic languages)."
+          },
+          {
+            "name": "LATIN9",
+            "value": "LATIN9",
+            "description": "ISO 8859-15, also known as Latin-9."
+          },
+          {
+            "name": "LATIN10",
+            "value": "LATIN10",
+            "description": "ISO 8859-16, also known as Latin-10."
+          },
+          {
+            "name": "MULE_INTERNAL",
+            "value": "MULE_INTERNAL",
+            "description": "Mule internal encoding (deprecated)."
+          },
+          {
+            "name": "SJIS",
+            "value": "SJIS",
+            "description": "Shift JIS encoding for Japanese."
+          },
+          {
+            "name": "SHIFT_JIS_2004",
+            "value": "SHIFT_JIS_2004",
+            "description": "Shift JIS encoding with JIS X 0213 support."
+          },
+          {
+            "name": "SQL_ASCII",
+            "value": "SQL_ASCII",
+            "description": "SQL_ASCII encoding (no specific character encoding)."
+          },
+          {
+            "name": "UHC",
+            "value": "UHC",
+            "description": "Unified Hangul Code for Korean."
+          },
+          {
+            "name": "UTF8",
+            "value": "UTF8",
+            "description": "UTF-8 encoding, the most widely used Unicode format."
+          },
+          {
+            "name": "WIN866",
+            "value": "WIN866",
+            "description": "Windows CP866, used for Russian language."
+          },
+          {
+            "name": "WIN874",
+            "value": "WIN874",
+            "description": "Windows CP874, used for Thai language."
+          },
+          {
+            "name": "WIN1250",
+            "value": "WIN1250",
+            "description": "Windows CP1250, used for Central European languages."
+          },
+          {
+            "name": "WIN1251",
+            "value": "WIN1251",
+            "description": "Windows CP1251, used for Cyrillic script."
+          },
+          {
+            "name": "WIN1252",
+            "value": "WIN1252",
+            "description": "Windows CP1252, used in Western Europe (similar to Latin-1)."
+          },
+          {
+            "name": "WIN1253",
+            "value": "WIN1253",
+            "description": "Windows CP1253, used for Greek."
+          },
+          {
+            "name": "WIN1254",
+            "value": "WIN1254",
+            "description": "Windows CP1254, used for Turkish."
+          },
+          {
+            "name": "WIN1255",
+            "value": "WIN1255",
+            "description": "Windows CP1255, used for Hebrew."
+          },
+          {
+            "name": "WIN1256",
+            "value": "WIN1256",
+            "description": "Windows CP1256, used for Arabic."
+          },
+          {
+            "name": "WIN1257",
+            "value": "WIN1257",
+            "description": "Windows CP1257, used for Baltic languages."
+          },
+          {
+            "name": "WIN1258",
+            "value": "WIN1258",
+            "description": "Windows CP1258, used for Vietnamese."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "SiteNameParameter": {
+      "name": "siteName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of Site"
+    },
+    "InstanceNameParameter": {
+      "name": "instanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of Instance"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of Database"
+    },
+    "AgentNameParameter": {
+      "name": "agentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of agent"
+    }
+  }
+}
