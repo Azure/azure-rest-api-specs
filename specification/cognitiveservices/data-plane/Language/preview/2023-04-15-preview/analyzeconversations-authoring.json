@@ -2499,7 +2499,7 @@
       "type": "object",
       "description": "Represents the options for assigning Azure resources to a project.",
       "properties": {
-        "metadata": {
+        "resourcesMetadata": {
           "type": "array",
           "description": "Represents the metadata for the resources to be assigned.",
           "items": {
@@ -2509,14 +2509,14 @@
         }
       },
       "required": [
-        "metadata"
+        "resourcesMetadata"
       ]
     },
     "AnalyzeConversationAuthoringAssignedDeploymentResource": {
       "type": "object",
       "description": "Represents the assigned deployment resource.",
       "properties": {
-        "resourceId": {
+        "azureResourceId": {
           "type": "string",
           "description": "The resource ID.",
           "readOnly": true
@@ -2527,7 +2527,7 @@
         }
       },
       "required": [
-        "resourceId",
+        "azureResourceId",
         "region"
       ]
     },
@@ -2539,7 +2539,7 @@
           "type": "string",
           "description": "Represents the deployment name."
         },
-        "lastDeployedOn": {
+        "lastDeployedDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "Represents deployment last deployed time."
@@ -2552,7 +2552,7 @@
       },
       "required": [
         "deploymentName",
-        "lastDeployedOn",
+        "lastDeployedDateTime",
         "deploymentExpirationDate"
       ]
     },
@@ -3196,7 +3196,7 @@
     "AnalyzeConversationAuthoringEvaluationJobResult": {
       "type": "object",
       "properties": {
-        "evaluationDetails": {
+        "evaluationOptions": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringEvaluationOptions",
           "description": "Represents the options used running the evaluation."
         },
@@ -3215,7 +3215,7 @@
         }
       },
       "required": [
-        "evaluationDetails",
+        "evaluationOptions",
         "modelLabel",
         "trainingConfigVersion",
         "percentComplete"

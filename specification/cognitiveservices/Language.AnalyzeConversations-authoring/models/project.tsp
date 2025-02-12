@@ -622,6 +622,7 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
   /**
    * The model expiration date.
    */
+  @clientName("modelExpiredOn", "csharp")
   modelExpirationDate: plainDate;
 
   /**
@@ -656,7 +657,8 @@ model AnalyzeConversationAuthoringEvaluationJobResult {
   /**
    * Represents the options used running the evaluation.
    */
-  evaluationDetails: AnalyzeConversationAuthoringEvaluationOptions;
+  @clientName("evaluationDetails", "csharp")
+  evaluationOptions: AnalyzeConversationAuthoringEvaluationOptions;
 
   /**
    * Represents trained model label.
@@ -1060,7 +1062,8 @@ model AnalyzeConversationAuthoringAssignedDeploymentResource {
    */
   @key
   @visibility("read")
-  resourceId: string;
+  @clientName("resourceId", "csharp")
+  azureResourceId: string;
 
   /**
    * The resource region.
@@ -1077,7 +1080,8 @@ model AnalyzeConversationAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
    */
-  metadata: AnalyzeConversationAuthoringResourceMetadata[];
+  @clientName("metadata", "csharp")
+  resourcesMetadata: AnalyzeConversationAuthoringResourceMetadata[];
 }
 
 /**
@@ -1279,7 +1283,8 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents deployment last deployed time.
    */
-  lastDeployedOn: utcDateTime;
+  @clientName("lastDeployedOn", "csharp")
+  lastDeployedDateTime: utcDateTime;
 
   /**
    * Represents deployment expiration date in the runtime.
@@ -1853,16 +1858,19 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
   /**
    * The last trained date time of the model.
    */
-  lastTrainedOn: utcDateTime;
+  @clientName("lastTrainedOn", "csharp")
+  lastTrainedDateTime: utcDateTime;
 
   /**
    * The last exported date time of the model.
    */
-  lastExportedModelOn: utcDateTime;
+  @clientName("lastExportedModelOn", "csharp")
+  lastExportedModelDateTime: utcDateTime;
 
   /**
    * The model expiration date.
    */
+  @clientName("modelExpiredOn", "csharp")
   modelExpirationDate: plainDate;
 
   /**
