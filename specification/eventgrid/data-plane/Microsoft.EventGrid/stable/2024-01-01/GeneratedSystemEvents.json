@@ -40,7 +40,8 @@
         }
       },
       "required": [
-        "recipientCommunicationIdentifier"
+        "recipientCommunicationIdentifier",
+        "threadId"
       ]
     },
     "AcsChatEventInThreadBaseProperties": {
@@ -55,7 +56,10 @@
           "type": "string",
           "description": "The chat thread id"
         }
-      }
+      },
+      "required": [
+        "threadId"
+      ]
     },
     "AcsChatMessageDeletedEventData": {
       "type": "object",
@@ -117,7 +121,7 @@
         }
       },
       "required": [
-        "metadata",
+        "messageBody",
         "editTime"
       ],
       "allOf": [
@@ -148,7 +152,7 @@
         }
       },
       "required": [
-        "metadata",
+        "messageBody",
         "editTime"
       ],
       "allOf": [
@@ -190,7 +194,10 @@
       },
       "required": [
         "senderCommunicationIdentifier",
-        "composeTime"
+        "composeTime",
+        "messageId",
+        "type",
+        "version"
       ],
       "allOf": [
         {
@@ -231,7 +238,10 @@
       },
       "required": [
         "senderCommunicationIdentifier",
-        "composeTime"
+        "composeTime",
+        "messageId",
+        "type",
+        "version"
       ],
       "allOf": [
         {
@@ -256,7 +266,7 @@
         }
       },
       "required": [
-        "metadata"
+        "messageBody"
       ],
       "allOf": [
         {
@@ -281,7 +291,7 @@
         }
       },
       "required": [
-        "metadata"
+        "messageBody"
       ],
       "allOf": [
         {
@@ -447,7 +457,6 @@
       "required": [
         "createdByCommunicationIdentifier",
         "properties",
-        "metadata",
         "participants"
       ],
       "allOf": [
@@ -488,7 +497,6 @@
       "required": [
         "createdByCommunicationIdentifier",
         "properties",
-        "metadata",
         "participants"
       ],
       "allOf": [
@@ -590,8 +598,7 @@
         }
       },
       "required": [
-        "participantCommunicationIdentifier",
-        "metadata"
+        "participantCommunicationIdentifier"
       ]
     },
     "AcsChatThreadPropertiesUpdatedEventData": {
@@ -661,7 +668,6 @@
       "required": [
         "editedByCommunicationIdentifier",
         "editTime",
-        "metadata",
         "properties"
       ],
       "allOf": [
@@ -3348,11 +3354,7 @@
         }
       },
       "required": [
-        "kind",
-        "communicationUser",
-        "phoneNumber",
-        "microsoftTeamsUser",
-        "microsoftTeamsApp"
+        "communicationUser"
       ]
     },
     "CommunicationIdentifierModelKind": {
