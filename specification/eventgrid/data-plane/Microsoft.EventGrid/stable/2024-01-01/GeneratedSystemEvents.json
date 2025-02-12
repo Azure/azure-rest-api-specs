@@ -1389,7 +1389,10 @@
           "type": "string",
           "description": "Router Event Channel ID"
         }
-      }
+      },
+      "required": [
+        "jobId"
+      ]
     },
     "AcsRouterJobCancelledEventData": {
       "type": "object",
@@ -1603,7 +1606,8 @@
       },
       "required": [
         "attachedWorkerSelectors",
-        "requestedWorkerSelectors"
+        "requestedWorkerSelectors",
+        "priority"
       ],
       "allOf": [
         {
@@ -1696,7 +1700,8 @@
       "required": [
         "expiredAttachedWorkerSelectors",
         "expiredRequestedWorkerSelectors",
-        "scheduledOn"
+        "scheduledOn",
+        "priority"
       ],
       "allOf": [
         {
@@ -1846,7 +1851,8 @@
         "expiredAttachedWorkerSelectors",
         "expiredRequestedWorkerSelectors",
         "scheduledOn",
-        "unavailableForMatching"
+        "unavailableForMatching",
+        "priority"
       ],
       "allOf": [
         {
