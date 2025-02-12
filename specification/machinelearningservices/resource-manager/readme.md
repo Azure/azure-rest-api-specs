@@ -134,7 +134,7 @@ suppressions:
       - $.definitions.ServerlessEndpointInferenceEndpoint.properties.headers
       - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
   - code: ParametersSchemaAsTypeObject
-    reason: Existing API parameter with type array instaed of type object.
+    reason: Existing API parameter with type array.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/customServices"].post.parameters[5].schema.type
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/updateDataMounts"].post.parameters[5].schema.type
