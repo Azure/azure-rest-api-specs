@@ -680,7 +680,7 @@ model ProtectedItem is ProxyResource<ProtectedItemProperties> {
 model ProtectedItemProperties {
   @doc("The Name of the commvault protected item")
   @visibility("read")
-  resourceName: "string";
+  resourceName: string;
 
   @doc("The Commvault Protected Item backup time")
   @visibility("read")
@@ -693,6 +693,11 @@ model ProtectedItemProperties {
   @doc("The location of the protected item")
   @visibility("read")
   location: string;
+
+  @doc("The GUID of VM")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$")
+  @visibility("read")
+  vmGuid: string;
 }
 
 @doc("Types of Restore Supported")
@@ -783,6 +788,10 @@ model RestoreProtectionItemRequest {
   @doc("Type of Restore")
   @visibility("read", "create")
   restoreType?: RestoreType;
+
+  @doc("Time to restore")
+  @visibility("read", "create")
+  toTime?: string;
 
   @doc("The vm destination details of the VM.")
   @visibility("read", "create")

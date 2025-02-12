@@ -2520,12 +2520,6 @@
         "resourceName": {
           "type": "string",
           "description": "The Name of the commvault protected item",
-          "enum": [
-            "string"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
           "readOnly": true
         },
         "lastBackUpTime": {
@@ -2543,13 +2537,20 @@
           "type": "string",
           "description": "The location of the protected item",
           "readOnly": true
+        },
+        "vmGuid": {
+          "type": "string",
+          "description": "The GUID of VM",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+          "readOnly": true
         }
       },
       "required": [
         "resourceName",
         "lastBackUpTime",
         "resourceGroup",
-        "location"
+        "location",
+        "vmGuid"
       ]
     },
     "ProtectionGroup": {
@@ -2792,6 +2793,14 @@
         "restoreType": {
           "$ref": "#/definitions/RestoreType",
           "description": "Type of Restore",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "toTime": {
+          "type": "string",
+          "description": "Time to restore",
           "x-ms-mutability": [
             "read",
             "create"

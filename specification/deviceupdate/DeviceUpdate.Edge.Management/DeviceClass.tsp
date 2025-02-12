@@ -6,11 +6,11 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./UpdateAccount.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Rest;
 
 namespace Microsoft.DeviceUpdate;
 /**
