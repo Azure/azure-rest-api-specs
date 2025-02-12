@@ -29,7 +29,7 @@ title: HDInsightManagementClient
 description: HDInsight Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2024-08-preview
+tag: package-2025-01-preview
 ```
 
 ### Suppression
@@ -108,6 +108,67 @@ directive:
 directive:
   - suppress: R4007 # to suppress (DefaultErrorResponseSchema)
     reason: Update the default error response to a new format would be a braking change for service.
+```
+### Tag: package-2025-01-preview
+
+These settings apply only when `--tag=package-2025-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-preview'
+input-file:
+  - Microsoft.HDInsight/preview/2025-01-15-preview/applications.json
+  - Microsoft.HDInsight/preview/2025-01-15-preview/cluster.json
+  - Microsoft.HDInsight/preview/2025-01-15-preview/configurations.json
+  - Microsoft.HDInsight/preview/2025-01-15-preview/extensions.json
+  - Microsoft.HDInsight/preview/2025-01-15-preview/locations.json
+  - Microsoft.HDInsight/preview/2025-01-15-preview/operations.json
+  - Microsoft.HDInsight/preview/2025-01-15-preview/privateEndpointConnections.json
+  - Microsoft.HDInsight/preview/2025-01-15-preview/privateLinkResources.json
+  - Microsoft.HDInsight/preview/2025-01-15-preview/scriptActions.json
+  - Microsoft.HDInsight/preview/2025-01-15-preview/virtualMachines.json
+
+suppressions:
+  - code: EvenSegmentedPathForPutOperation
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: PathForNestedResource
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: PutGetPatchResponseSchema
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: ResourceNameRestriction
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: PutRequestResponseSchemeArm
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: PutResponseCodes
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code:  ResponseSchemaSpecifiedForSuccessStatusCode
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: DefaultErrorResponseSchema
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: LroErrorContent
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: LroStatusCodesReturnTypeSchema
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: LroLocationHeader
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: XmsPageableForListCalls
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
+  - code: DeleteResponseCodes
+    from: extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
 ```
 
 ### Tag: package-2024-08-preview
