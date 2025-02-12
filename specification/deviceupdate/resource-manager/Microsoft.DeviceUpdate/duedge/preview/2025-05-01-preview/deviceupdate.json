@@ -3021,6 +3021,14 @@
         "properties": {
           "$ref": "#/definitions/ActiveDeploymentProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Edge location of the ActiveDeployment.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -3134,6 +3142,14 @@
         "properties": {
           "$ref": "#/definitions/AgentProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Edge location of the Agent.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -3934,6 +3950,44 @@
         }
       }
     },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The extended location.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      }
+    },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The extended location type. Allowed values: 'CustomLocation', 'EdgeZone'",
+      "enum": [
+        "CustomLocation",
+        "EdgeZone"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CustomLocation",
+            "value": "CustomLocation",
+            "description": "The custom location extended location type."
+          },
+          {
+            "name": "EdgeZone",
+            "value": "EdgeZone",
+            "description": "The edge zone extended location type."
+          }
+        ]
+      }
+    },
     "FileImportMetadata": {
       "type": "object",
       "description": "Metadata describing an update file.",
@@ -4553,6 +4607,14 @@
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Edge location of the UpdateAccount.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
