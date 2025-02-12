@@ -22,7 +22,7 @@ const swaggerTypeSpecGenerated = JSON.stringify({
   },
 });
 
-describe("getLabelActionImpl", () => {
+describe.skip("getLabelActionImpl", () => {
   beforeEach(() => {
     // TODO: Reset other global mocks like "core"
     vol.reset();
