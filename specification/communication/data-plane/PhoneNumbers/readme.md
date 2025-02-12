@@ -28,7 +28,7 @@ These are the global settings for the communicationservices.
 openapi-type: data-plane
 tag: package-phonenumber-2025-04-01
 ```
-### Tag: package-phonenumber-2025-02-11
+### Tag: package-phonenumber-2025-04-01
 These settings apply only when `--tag=package-phonenumber-2025-04-01` is specified on the command line.
 
 ```yaml $(tag) == 'package-phonenumber-2025-04-01'
