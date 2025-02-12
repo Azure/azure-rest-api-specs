@@ -1186,7 +1186,8 @@ model AnalyzeConversationAuthoringTrainingJobResult {
   /**
    * Represents the estimated end date time for training and evaluation.
    */
-  estimatedEndOn?: utcDateTime;
+  @clientName("estimatedEndOn", "csharp")
+  estimatedEndDateTime?: utcDateTime;
 }
 
 /**
@@ -1202,12 +1203,14 @@ model AnalyzeConversationAuthoringSubTrainingJobState {
   /**
    * Represents the start date time.
    */
-  startedOn?: utcDateTime;
+  @clientName("startedOn", "csharp")
+  startDateTime?: utcDateTime;
 
   /**
    * Represents the end date time.
    */
-  endedOn?: utcDateTime;
+  @clientName("endedOn", "csharp")
+  endDateTime?: utcDateTime;
 
   /**
    * Represents the status of the sub-operation.
