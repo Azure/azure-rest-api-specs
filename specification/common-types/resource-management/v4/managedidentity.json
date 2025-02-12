@@ -2,11 +2,16 @@
   "swagger": "2.0",
   "info": {
     "title": "Common types",
+<<<<<<< HEAD
     "version": "v4"
+=======
+    "version": "4.0"
+>>>>>>> main
   },
   "paths": {},
   "definitions": {
     "ManagedServiceIdentity": {
+<<<<<<< HEAD
       "type": "object",
       "description": "Managed service identity (system assigned and/or user assigned identities)",
       "properties": {
@@ -77,6 +82,10 @@
     "SystemAssignedServiceIdentity": {
       "type": "object",
       "description": "Managed service identity (either system assigned, or none)",
+=======
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+>>>>>>> main
       "properties": {
         "principalId": {
           "type": "string",
@@ -99,14 +108,23 @@
         "type"
       ]
     },
+<<<<<<< HEAD
     "SystemAssignedServiceIdentityType": {
       "type": "string",
       "description": "Type of managed service identity (either system assigned, or none).",
+=======
+    "ManagedServiceIdentityType": {
+      "type": "string",
+      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
+>>>>>>> main
       "enum": [
         "None",
-        "SystemAssigned"
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
       ],
       "x-ms-enum": {
+<<<<<<< HEAD
         "name": "SystemAssignedServiceIdentityType",
         "modelAsString": true,
         "values": [
@@ -139,6 +157,15 @@
     "UserAssignedIdentity": {
       "type": "object",
       "description": "User assigned identity properties",
+=======
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true
+      }
+    },
+    "SystemAssignedServiceIdentity": {
+      "type": "object",
+      "description": "Managed service identity (either system assigned, or none)",
+>>>>>>> main
       "properties": {
         "clientId": {
           "type": "string",
@@ -149,9 +176,65 @@
         "principalId": {
           "type": "string",
           "format": "uuid",
+<<<<<<< HEAD
           "description": "The principal ID of the assigned identity.",
           "readOnly": true
         }
+=======
+          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/SystemAssignedServiceIdentityType"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "SystemAssignedServiceIdentityType": {
+      "type": "string",
+      "description": "Type of managed service identity (either system assigned, or none).",
+      "enum": [
+        "None",
+        "SystemAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "SystemAssignedServiceIdentityType",
+        "modelAsString": true
+      }
+    },
+    "UserAssignedIdentities": {
+      "type": "object",
+      "title": "User-Assigned Identities",
+      "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedIdentity"
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "User assigned identity properties",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The principal ID of the assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The client ID of the assigned identity.",
+          "readOnly": true
+        }
+>>>>>>> main
       }
     }
   }

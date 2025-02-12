@@ -282,6 +282,15 @@ input-file:
   - Microsoft.Insights/preview/2024-02-01-preview/deletedWorkbooks_API.json
 ```
 
+### Tag: package-2024-02-01-preview-only
+
+These settings apply only when `--tag=package-2024-02-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02-01-preview-only'
+input-file:
+  - Microsoft.Insights/preview/2024-02-01-preview/deletedWorkbooks_API.json
+```
+
 ### Tag: package-2024-04-25-only
 
 These settings apply only when `--tag=package-2024-04-25-only` is specified on the command line.
@@ -352,6 +361,15 @@ input-file:
   - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
+```
+
+### Tag: package-2023-06-01-python-only
+
+These settings apply only when `--tag=package-2023-06-01-python-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06-01-python-only'
+input-file:
+  - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
 ```
 
 ### Tag: package-2022-12-09-only

@@ -27,12 +27,12 @@ namespace Microsoft.Sovereign;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The Landing zone account parent resource type.")
+@doc("The Landing zone account resource type. A Landing zone account is the container for configuring, deploying and managing multiple landing zones.")
 @added(Versions.Preview20250227)
 @resource("landingZoneAccounts")
 model LandingZoneAccountResource
   is TrackedResource<LandingZoneAccountResourceProperties> {
-  @doc("The parent landing zone account")
+  @doc("The landing zone account.")
   @segment("landingZoneAccounts")
   @key("landingZoneAccountName")
   @pattern("^[a-zA-Z0-9-]{3,64}$")
@@ -46,20 +46,20 @@ model LandingZoneAccountResource
 @armResourceOperations(LandingZoneAccountResource)
 @added(Versions.Preview20250227)
 interface LandingZoneAccountOperations {
-  @doc("Gets the landing zone account.")
+  @doc("Get a landing zone account.")
   get is ArmResourceRead<LandingZoneAccountResource>;
-  @doc("Creates the landing zone account.")
+  @doc("Create a landing zone account.")
   create is ArmResourceCreateOrReplaceAsync<LandingZoneAccountResource>;
-  @doc("Updates the landing zone account.")
+  @doc("Update a landing zone account.")
   update is ArmResourcePatchAsync<
     LandingZoneAccountResource,
     LandingZoneAccountResourceProperties
   >;
-  @doc("Deletes the landing zone account.")
+  @doc("Deletes a landing zone account.")
   delete is ArmResourceDeleteWithoutOkAsync<LandingZoneAccountResource>;
-  @doc("Lists the landing zone accounts within a resource group.")
+  @doc("List the landing zone accounts within a resource group.")
   listByResourceGroup is ArmResourceListByParent<LandingZoneAccountResource>;
-  @doc("Lists the landing zone accounts within a subscription.")
+  @doc("List the landing zone accounts within a subscription.")
   listBySubscription is ArmListBySubscription<LandingZoneAccountResource>;
 }
 
@@ -80,24 +80,24 @@ model LandingZoneConfigurationResource
 @added(Versions.Preview20250227)
 @armResourceOperations(LandingZoneConfigurationResource)
 interface LandingZoneConfigurationOperations {
-  @doc("Gets the landing zone configuration.")
+  @doc("Get a landing zone configuration.")
   get is ArmResourceRead<LandingZoneConfigurationResource>;
-  @doc("Creates the landing zone configuration.")
+  @doc("Create a landing zone configuration.")
   create is ArmResourceCreateOrReplaceAsync<LandingZoneConfigurationResource>;
-  @doc("Updates the landing zone configuration.")
+  @doc("Update a landing zone configuration.")
   update is ArmResourcePatchAsync<
     LandingZoneConfigurationResource,
     LandingZoneConfigurationResourceProperties
   >;
-  @doc("Deletes the landing zone configuration.")
+  @doc("Delete a landing zone configuration.")
   delete is ArmResourceDeleteWithoutOkAsync<LandingZoneConfigurationResource>;
-  @doc("Lists the landing zone configurations within a resource group.")
+  @doc("List the landing zone configurations within a resource group.")
   listByResourceGroup is ArmResourceListByParent<LandingZoneConfigurationResource>;
-  @doc("Lists the landing zone configurations within a subscription.")
+  @doc("List the landing zone configurations within a subscription.")
   listBySubscription is ArmListBySubscription<LandingZoneConfigurationResource>;
 
   @action("generateLandingZone")
-  @doc("Generate the landing zone.")
+  @doc("Generate infrastructure as code (IaC) for a landing zone deployment.")
   @added(Versions.Preview20250227)
   @armResourceAction(LandingZoneConfigurationResource)
   generateLandingZone is ArmResourceActionAsync<
@@ -107,7 +107,7 @@ interface LandingZoneConfigurationOperations {
   >;
 
   @action("updateAuthoringStatus")
-  @doc("Provides a mechanism to update the authoring status.")
+  @doc("Update the authoring status on a landing zone configuration.")
   @added(Versions.Preview20250227)
   @armResourceAction(LandingZoneConfigurationResource)
   updateAuthoringStatus is ArmResourceActionAsync<
@@ -117,7 +117,7 @@ interface LandingZoneConfigurationOperations {
   >;
 
   @action("createCopy")
-  @doc("Provides a mechanism to create a copy of the landing zone configuration.")
+  @doc("Create a duplicate of the landing zone configuration.")
   @added(Versions.Preview20250227)
   @armResourceAction(LandingZoneConfigurationResource)
   createCopy is ArmResourceActionAsync<
@@ -131,10 +131,10 @@ interface LandingZoneConfigurationOperations {
 @parentResource(LandingZoneAccountResource)
 @added(Versions.Preview20250227)
 @resource("landingZoneRegistrations")
-@doc("The Landing Zone registration resource type")
+@doc("The Landing zone registration resource type.")
 model LandingZoneRegistrationResource
   is ProxyResource<LandingZoneRegistrationResourceProperties> {
-  @doc("The name of the Landing Zone Registration resource.")
+  @doc("The name of the landing zone registration resource.")
   @pattern("^[a-zA-Z0-9-]{3,64}$")
   @key("landingZoneRegistrationName")
   @segment("landingZoneRegistrations")
@@ -145,19 +145,19 @@ model LandingZoneRegistrationResource
 @added(Versions.Preview20250227)
 @armResourceOperations(LandingZoneRegistrationResource)
 interface LandingZoneRegistrationOperations {
-  @doc("Gets the landing zone registration.")
+  @doc("Get a landing zone registration.")
   get is ArmResourceRead<LandingZoneRegistrationResource>;
-  @doc("Creates the landing zone registration.")
+  @doc("Create a landing zone registration.")
   create is ArmResourceCreateOrReplaceAsync<LandingZoneRegistrationResource>;
-  @doc("Updates the landing zone registration.")
+  @doc("Update a landing zone registration.")
   update is ArmResourcePatchAsync<
     LandingZoneRegistrationResource,
     LandingZoneRegistrationResourceProperties
   >;
-  @doc("Deletes the landing zone registration.")
+  @doc("Delete a landing zone registration.")
   delete is ArmResourceDeleteSync<LandingZoneRegistrationResource>;
-  @doc("Lists the landing zone registrations within a resource group.")
+  @doc("List the landing zone registrations within a resource group.")
   listByResourceGroup is ArmResourceListByParent<LandingZoneRegistrationResource>;
-  @doc("Lists the landing zone registrations within a subscription.")
+  @doc("List the landing zone registrations within a subscription.")
   listBySubscription is ArmListBySubscription<LandingZoneRegistrationResource>;
 }
