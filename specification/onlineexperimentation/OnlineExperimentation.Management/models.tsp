@@ -56,6 +56,12 @@ model OnlineExperimentWorkspaceProperties {
    * The encryption configuration for the online experiment workspace resource.
    */
   encryption?: ResourceEncryptionConfiguration;
+
+  /**
+   * The data plane endpoint for the online experiment workspace resource.
+   */
+  @visibility("read")
+  endpoint?: url;
 }
 
 /**
