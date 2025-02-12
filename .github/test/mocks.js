@@ -14,8 +14,11 @@ export function createMockGithub() {
       },
       issues: {
         addLabels: vi.fn(),
-        listLabelsOnIssue: vi.fn().mockRejectedValue({ data: [] }),
+        listLabelsOnIssue: vi.fn().mockResolvedValue({ data: [] }),
         removeLabel: vi.fn(),
+      },
+      pulls: {
+        get: vi.fn(),
       },
     },
   };
