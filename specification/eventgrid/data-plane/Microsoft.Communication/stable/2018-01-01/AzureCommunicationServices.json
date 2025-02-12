@@ -911,6 +911,28 @@
         }
       }
     },
+    "AcsChatAzureBotCommandEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "AcsChatMessageReceivedInThreadEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
       "allOf": [

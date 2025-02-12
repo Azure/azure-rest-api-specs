@@ -43,6 +43,13 @@ model AcsChatMessageReceivedEventData
   ...AcsChatMessageBaseEventData;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatAzureBotCommand event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsChatAzureBotCommandEventData
+  extends AcsChatMessageEventInThreadBaseProperties {
+  ...AcsChatMessageBaseEventData;
+}
+
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageReceivedInThreadEventData
