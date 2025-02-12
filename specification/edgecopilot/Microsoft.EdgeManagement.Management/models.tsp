@@ -94,7 +94,7 @@ model ChatRequest {
   userMessage: ChatMessage;
 
   /**
-   * Language of the chat.
+   * Language of the portal user setting.
    */
   language?: string;
 }
