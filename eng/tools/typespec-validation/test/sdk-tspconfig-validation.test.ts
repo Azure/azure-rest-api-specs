@@ -26,12 +26,12 @@ import {
   TspConfigCsharpAzNamespaceEqualStringSubRule,
   TspConfigCsharpAzClearOutputFolderTrueSubRule,
   TspConfigCsharpMgmtPackageDirectorySubRule,
+  TspconfigSubRuleBase,
 } from "../src/rules/sdk-tspconfig-validation.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { join } from "path";
 import { strictEqual } from "node:assert";
 import { stringify } from "yaml";
-import { TspconfigSubRuleBase } from "../src/tspconfig-rule-helper.js";
 
 export function createParameterExample(...pairs: { key: string; value: string | boolean | {} }[]) {
   const obj: Record<string, any> = { parameters: {} };
