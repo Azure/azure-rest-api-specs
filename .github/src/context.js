@@ -77,6 +77,15 @@ export async function extractInputs(github, context, core) {
         context.payload
       );
 
+    // Later code only works if the trigger WF was itself triggered on pull_request, which sets head_sha correctly
+    // If trigger WF was itself triggered by something like issue_comment, the trigger event contains no reference to either the issue number
+    // or SHA of the original PR, so we will need to pass it ourselves via an artifact (which is secure since these triggers only run on main).
+    if (payload.workflow_run.event != "pull_request") {
+      throw new Error(
+        `Context '${context.eventName}:${context.payload.action}' with 'workflow_run.event=${payload.workflow_run.event} is not yet supported.`,
+      );
+    }
+
     let issue_number;
 
     const pull_requests = payload.workflow_run.pull_requests;
