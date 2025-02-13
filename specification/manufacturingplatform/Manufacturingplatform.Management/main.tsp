@@ -76,27 +76,26 @@ union ProvisioningState {
 
 @doc("The current state of the resource")
 @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
-union ResourceState{
-	string,
+union ResourceState {
+  string,
 
-	/** Resource is in active state */
-	Active: "Active",
+  /** Resource is in active state */
+  Active: "Active",
 
-	/** Resource is in inactive state */
-	Inactive: "Inactive",
+  /** Resource is in inactive state */
+  Inactive: "Inactive",
 }
 
 @doc("The redundancy state of the resource")
 @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
-union RedundancyState{
-	string,
+union RedundancyState {
+  string,
 
-	/** Resource is zone redundant */
-	Zonal: "Zonal",
+  /** Resource is zone redundant */
+  Zonal: "Zonal",
 
-	/** Resource is not zone redundant */
-	None: "None",
-
+  /** Resource is not zone redundant */
+  None: "None",
 }
 
 @doc("Details of the ManufacturingPlatform MdsResource.")
