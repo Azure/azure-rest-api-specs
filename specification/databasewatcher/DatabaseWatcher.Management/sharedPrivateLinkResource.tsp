@@ -35,7 +35,7 @@ model SharedPrivateLinkResource
 
 @doc("The generic properties of a Shared Private Link resource.")
 model SharedPrivateLinkResourceProperties {
-  @doc("The resource id of the resource the shared private link resource is for.")
+  @doc("The resource ID of the resource the shared private link resource is for.")
   privateLinkResourceId: Azure.Core.armResourceIdentifier;
 
   @doc("The group id from the provider of resource the shared private link resource is for.")

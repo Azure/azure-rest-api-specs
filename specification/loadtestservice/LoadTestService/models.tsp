@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
+using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -1102,6 +1103,7 @@ model DimensionValue {
 }
 
 @doc("Metrics dimension values.")
+@pagedResult
 model DimensionValueList {
   @doc("The dimension name")
   @visibility("read")
@@ -1109,9 +1111,11 @@ model DimensionValueList {
   name?: string;
 
   @doc("The dimension value")
+  @items
   value?: string[];
 
   @doc("Link for the next set of values in case of paginated results, if applicable.")
+  @nextLink
   nextLink?: ResourceLocation<DimensionValueList>;
 }
 

@@ -1,0 +1,40 @@
+{
+  "title": "minimum set chat completion",
+  "operationId": "GetChatCompletions",
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Explain Riemann's conjecture"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "kgousajxgzyhugvqekuswuqbk",
+        "object": "chat.completion",
+        "created": 1234567890,
+        "model": "my-model-name",
+        "usage": {
+          "prompt_tokens": 205,
+          "completion_tokens": 5,
+          "total_tokens": 210
+        },
+        "choices": [
+          {
+            "index": 0,
+            "finish_reason": "stop",
+            "message": {
+              "role": "assistant",
+              "content": "The Riemann Conjecture is a deep mathematical conjecture around prime numbers and how they can be predicted. It was first published in Riemann's groundbreaking 1859 paper. The conjecture states that the Riemann zeta function has its zeros only at the negative even integers and complex numbers with real part 1/21. Many consider it to be the most important unsolved problem in pure mathematics. The Riemann hypothesis is a way to predict the probability that numbers in a certain range are prime that was also devised by German mathematician Bernhard Riemann in 18594"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

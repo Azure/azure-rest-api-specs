@@ -44,3 +44,14 @@ options:
     module-version: "0.0.1"
     emitter-output-dir: "{project-root}"
     slice-elements-byval: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{project-root}"
+    namespace: com.azure.messaging.eventgrid
+    models-subpackage: systemevents
+    package-dir: azure-messaging-eventgrid-systemevents
+    customization-class: customization/src/main/java/EventGridSystemEventsCustomization.java
+    custom-types-subpackage: implementation.models
+    custom-types: AcsRouterCommunicationError,AcsMessageChannelEventError
+    flavor: azure
+    dev-options:
+      loglevel: info

@@ -13,11 +13,17 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/deviceregistry.json"
     use-read-only-status-schema: true
     omit-unreachable-types: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.DeviceRegistry"
+    flavor: azure
+    clear-output-folder: true
+    use-write-core: true
+    namespace: "{package-dir}"
+    api-version: "2024-09-01-preview"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-deviceregistry"
     flavor: "azure"
     service-name: "Device Registry"
-    api-version: "2024-09-01-preview"
   "@azure-tools/typespec-ts":
     azureSdkForJs: true
     isModularLibrary: true
@@ -37,6 +43,16 @@ options:
     generate-test: true
     generate-sample: true
     api-version: "2024-09-01-preview"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/deviceregistry"
+    package-dir: "armdeviceregistry"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

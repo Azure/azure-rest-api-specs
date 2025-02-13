@@ -308,3 +308,10 @@ These settings apply only when `--tag=release_2024_12_01_preview` is specified o
 ``` yaml $(tag) == 'release_2024_12_01_preview'
 input-file: preview/2024-12-01-preview/inference.json
 ```
+
+## AzureOpenAI 2025-01-01-preview
+These settings apply only when `--tag=release_2025_01_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2025_01_01_preview'
+input-file: preview/2025-01-01-preview/inference.json
+```
