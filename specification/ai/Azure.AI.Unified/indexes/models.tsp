@@ -39,8 +39,11 @@ model AssetVersion {
 
 @doc("Index resource Definition")
 model Index is AssetVersion {
-  @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
-  storageUri: string;
+  @doc("Index configuration")
+  indexConfiguration: IndexConfiguration;
+
+  @doc("Embedding configuration")
+  embeddingConfiguration: EmbeddingConfiguration;
 }
 
 @doc("Paged collection of IndexVersion items.")
@@ -56,11 +59,46 @@ model PagedIndex {
   nextLink?: ResourceLocation<Index>;
 }
 
-@doc("Next version definition.")
-model VersionInfo {
-  @doc("Next version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.")
-  nextVersion?: int64;
 
-  @doc("Current latest version of the resource.")
-  latestVersion: string;
+@doc("Index configuration class")
+model IndexConfiguration {
+  @doc("Connection id of indexing service")
+  connectionId: string;
+
+  @doc("Name of index")
+  indexName: string;
+
+  @doc("Vector store id")
+  vectorStoreId: string;
+
+  @doc("Type of index")
+  indexType: IndexType
+}
+
+@doc("Embedding configuration class")
+model EmbeddingConfiguration {
+  @doc("Connection id to embedding model")
+  connectionId: string;
+
+  @doc("Deployment name of embedding model")
+  deploymentName: string;
+
+  @doc("Dimension")
+  dimension: int64;
+
+  @doc("Embedding field")
+  embeddingField: string;
+}
+
+union IndexType {
+  string,
+
+  @doc("Azure search")
+  azureSearch: "AzureSearch",
+
+  @doc("CosmosDB")
+  cosmosDB: "CosmosDB",
+
+  @doc("Managed Azure Search")
+  managedAzureSearch: "ManagedAzureSearch",
 }

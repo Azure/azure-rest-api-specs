@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace Azure.AI.Unified.Model;
+namespace Azure.AI.Unified;
 
 interface ModelContainers {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
