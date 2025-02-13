@@ -28,7 +28,7 @@ These are the global settings for the communicationservices.
 openapi-type: data-plane
 tag: package-rooms-2025-02-28-preview
 input-file:
-  - stable/2025-02-28-preview/communicationservicesrooms.json
+  - preview/2025-02-28-preview/communicationservicesrooms.json
 ```
 
 ### Tag: package-rooms-2025-02-28-preview
