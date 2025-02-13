@@ -11,6 +11,6 @@ model ProcessorCollection {
   logicalProcessorCount: int32;
 
   @doc("The processors of the server")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", ["processorName"])
   processors: Processor[];
 }

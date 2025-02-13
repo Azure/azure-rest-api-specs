@@ -1,5 +1,7 @@
 import "./Port.tsp";
 
+using OpenAPI;
+
 @doc("Information about a network device")
 model NetDevice {
   @doc("Id of network device")
@@ -27,5 +29,6 @@ model NetDevice {
   netDeviceMacs: string[];
 
   @doc("Information of individual ports on network device")
+  @extension("x-ms-identifiers", ["portId"])
   ports: Port[];
 }

@@ -3079,20 +3079,20 @@
       "type": "object",
       "description": "The request body model of an assign POST call",
       "properties": {
-        "pool": {
+        "poolResourceId": {
           "$ref": "#/definitions/PoolResourceId",
-          "description": "The pool to assign this Labserver to"
+          "description": "The pool Azure Resource Id to assign this Labserver to"
         }
       },
       "required": [
-        "pool"
+        "poolResourceId"
       ]
     },
     "Drive": {
       "type": "object",
       "description": "Information regarding individual Disk Drives",
       "properties": {
-        "id": {
+        "diskId": {
           "type": "string",
           "description": "The Id of the disk drive"
         },
@@ -3153,7 +3153,10 @@
           "description": "Information about individual disk drives",
           "items": {
             "$ref": "#/definitions/Drive"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
         }
       },
       "required": [
@@ -3502,9 +3505,9 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "pool": {
+        "poolResourceId": {
           "$ref": "#/definitions/PoolResourceId",
-          "description": "The pool this server is assigned to",
+          "description": "The Pool Azure Resource this server is assigned to",
           "readOnly": true
         },
         "management": {
@@ -3579,11 +3582,6 @@
           "description": "The current status of the GoalState",
           "readOnly": true
         },
-        "status": {
-          "type": "string",
-          "description": "The status of the LabServer",
-          "readOnly": true
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -3609,24 +3607,6 @@
           "$ref": "#/definitions/System",
           "description": "LabServer Inventory Information",
           "readOnly": true
-        },
-        "banner": {
-          "type": "string",
-          "description": "LabServer banner. Temporary field during development.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "nickname": {
-          "type": "string",
-          "description": "LabServer nickname. Temporary field during development.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         },
         "physicalLocation": {
           "type": "string",
@@ -3688,24 +3668,6 @@
       "type": "object",
       "description": "The updatable properties of the LabServerV1.",
       "properties": {
-        "banner": {
-          "type": "string",
-          "description": "LabServer banner. Temporary field during development.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "nickname": {
-          "type": "string",
-          "description": "LabServer nickname. Temporary field during development.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "availableForReservationState": {
           "$ref": "#/definitions/LabResourceAvailableForReservationState",
           "description": "LabServer availability for reservation.",
@@ -3909,7 +3871,7 @@
           "type": "string",
           "description": "Name of the memory module"
         },
-        "location": {
+        "moduleLocation": {
           "type": "string",
           "description": "Location of the memory module"
         },
@@ -3947,7 +3909,7 @@
       "type": "object",
       "description": "Information about a network device",
       "properties": {
-        "id": {
+        "netDeviceId": {
           "type": "string",
           "description": "Id of network device"
         },
@@ -3988,11 +3950,14 @@
           "description": "Information of individual ports on network device",
           "items": {
             "$ref": "#/definitions/Port"
-          }
+          },
+          "x-ms-identifiers": [
+            "portId"
+          ]
         }
       },
       "required": [
-        "id",
+        "netDeviceId",
         "portCount",
         "netDeviceMacs",
         "ports"
@@ -4014,7 +3979,10 @@
           "description": "Information about the individual network devices of the server",
           "items": {
             "$ref": "#/definitions/NetDevice"
-          }
+          },
+          "x-ms-identifiers": [
+            "netDeviceId"
+          ]
         }
       }
     },
@@ -4242,7 +4210,7 @@
       "type": "object",
       "description": "Information regarding an individual port",
       "properties": {
-        "id": {
+        "portId": {
           "type": "string",
           "description": "Id of port"
         },
@@ -4268,7 +4236,7 @@
         }
       },
       "required": [
-        "id",
+        "portId",
         "linkSpeedMbps"
       ]
     },
@@ -4318,7 +4286,7 @@
       "type": "object",
       "description": "Information regarding the processor of the server",
       "properties": {
-        "name": {
+        "processorName": {
           "type": "string",
           "description": "The processor name"
         },
@@ -4390,7 +4358,7 @@
             "$ref": "#/definitions/Processor"
           },
           "x-ms-identifiers": [
-            "name"
+            "processorName"
           ]
         }
       },
@@ -4930,7 +4898,7 @@
           "type": "string",
           "description": "The model of the drive"
         },
-        "type": {
+        "driveType": {
           "$ref": "#/definitions/DriveType",
           "description": "The type of the drive"
         },
@@ -5057,6 +5025,7 @@
         },
         "userPasswordKeyVaultUri": {
           "type": "string",
+          "format": "uri",
           "description": "Keyvault Uri for the password of the account credential to authenticate to the server.",
           "x-ms-mutability": [
             "read",
@@ -5130,6 +5099,7 @@
         },
         "userPasswordKeyVaultUri": {
           "type": "string",
+          "format": "uri",
           "description": "Keyvault Uri for the password of the account credential to authenticate to the server.",
           "x-ms-mutability": [
             "read",
