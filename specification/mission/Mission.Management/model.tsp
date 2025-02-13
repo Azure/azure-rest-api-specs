@@ -201,7 +201,7 @@ interface Workload {
   update is ArmResourcePatchAsync<WorkloadResource, WorkloadProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteAsync<WorkloadResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<WorkloadResource>;
   listByEnclaveResource is ArmResourceListByParent<WorkloadResource>;
   listBySubscription is ArmListBySubscription<WorkloadResource>;
 }
@@ -219,7 +219,7 @@ interface Endpoint {
   update is ArmResourcePatchAsync<EndpointResource, EndpointProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteAsync<EndpointResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<EndpointResource>;
   listByEnclaveResource is ArmResourceListByParent<EndpointResource>;
   listBySubscription is ArmListBySubscription<EndpointResource>;
 }
@@ -237,7 +237,7 @@ interface VirtualEnclave {
   update is ArmResourcePatchAsync<EnclaveResource, VirtualEnclaveProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteAsync<EnclaveResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<EnclaveResource>;
   listByResourceGroup is ArmResourceListByParent<EnclaveResource>;
   listBySubscription is ArmListBySubscription<EnclaveResource>;
 
@@ -286,7 +286,7 @@ interface Community {
   update is ArmResourcePatchAsync<CommunityResource, CommunityProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteAsync<CommunityResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<CommunityResource>;
   listByResourceGroup is ArmResourceListByParent<CommunityResource>;
   listBySubscription is ArmListBySubscription<CommunityResource>;
 
@@ -341,7 +341,7 @@ interface InternalConnections {
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteAsync<InternalConnection>;
+  delete is ArmResourceDeleteWithoutOkAsync<InternalConnection>;
   listByResourceGroup is ArmResourceListByParent<InternalConnection>;
   listBySubscription is ArmListBySubscription<InternalConnection>;
 }
@@ -360,7 +360,7 @@ interface TransitHub {
   update is ArmResourcePatchAsync<TransitHubResource, TransitHubProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteAsync<TransitHubResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<TransitHubResource>;
   listByCommunityResource is ArmResourceListByParent<TransitHubResource>;
   listBySubscription is ArmListBySubscription<TransitHubResource>;
 }
@@ -382,7 +382,7 @@ interface EnclaveConnection {
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteAsync<EnclaveConnectionResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<EnclaveConnectionResource>;
   listByResourceGroup is ArmResourceListByParent<EnclaveConnectionResource>;
   listBySubscription is ArmListBySubscription<EnclaveConnectionResource>;
 
@@ -421,7 +421,7 @@ interface EnclaveEndpoints {
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteAsync<EnclaveEndpointResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<EnclaveEndpointResource>;
   listByEnclaveResource is ArmResourceListByParent<EnclaveEndpointResource>;
   listBySubscription is ArmListBySubscription<EnclaveEndpointResource>;
 
@@ -460,7 +460,7 @@ interface CommunityEndpoints {
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteAsync<CommunityEndpointResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<CommunityEndpointResource>;
   listByCommunityResource is ArmResourceListByParent<CommunityEndpointResource>;
   listBySubscription is ArmListBySubscription<CommunityEndpointResource>;
 
@@ -498,7 +498,7 @@ interface ExternalConnections {
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteAsync<ExternalConnection>;
+  delete is ArmResourceDeleteWithoutOkAsync<ExternalConnection>;
   listByResourceGroup is ArmResourceListByParent<ExternalConnection>;
   listBySubscription is ArmListBySubscription<ExternalConnection>;
 }
