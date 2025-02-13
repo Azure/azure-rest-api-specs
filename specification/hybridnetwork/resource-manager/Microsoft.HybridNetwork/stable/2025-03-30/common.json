@@ -441,16 +441,20 @@
     "CancelInformation": {
       "type": "object",
       "description": "Cancels an ongoing long-running operation, only Put is supported now",
+      "required": [
+        "siteNetworkServiceReference"
+      ],
       "properties": {
         "siteNetworkServiceReference": {
           "$ref": "#/definitions/ReferencedResource",
           "description": "The ARM id of the siteNetworkService resource.",
-          "required": true
+          "required": [
+            "id"
+          ]
         },
         "operation": {
           "description": "The type of long-running operation the user wants to cancel, such as 'Put'.",
-          "$ref": "#/definitions/operation",
-          "required": false
+          "$ref": "#/definitions/operation"
         }
       }
     }
