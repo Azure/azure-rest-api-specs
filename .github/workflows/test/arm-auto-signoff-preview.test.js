@@ -1,9 +1,41 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { LabelAction } from "../../src/label.js";
-import { createMockCore, createMockGithub } from "../../test/mocks.js";
+import {
+  createMockCore,
+  createMockGithub as createMockGithubBase,
+} from "../../test/mocks.js";
 import { getLabelActionImpl } from "../src/arm-auto-signoff-preview.js";
 
 const core = createMockCore();
+
+/**
+ * @param {Object} param0
+ * @param {boolean} param0.incrementalTypespec
+ */
+function createMockGithub({ incrementalTypespec }) {
+  const github = createMockGithubBase();
+
+  github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+    data: {
+      workflow_runs: [
+        {
+          name: "ARM Incremental Typespec (Preview)",
+          id: 456,
+          status: "completed",
+          conclusion: "success",
+        },
+      ],
+    },
+  });
+
+  github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+    data: {
+      artifacts: [{ name: `incremental-typespec=${incrementalTypespec}` }],
+    },
+  });
+
+  return github;
+}
 
 describe("getLabelActionImpl", () => {
   it("rejects if inputs null", async () => {
@@ -11,22 +43,7 @@ describe("getLabelActionImpl", () => {
   });
 
   it("removes label if not incremental typespec", async () => {
-    const github = createMockGithub();
-    github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
-      data: {
-        workflow_runs: [
-          {
-            name: "ARM Incremental Typespec (Preview)",
-            id: 456,
-            status: "completed",
-            conclusion: "success",
-          },
-        ],
-      },
-    });
-    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-      data: { artifacts: [{ name: "incremental-typespec=false" }] },
-    });
+    const github = createMockGithub({ incrementalTypespec: false });
 
     await expect(
       getLabelActionImpl({
@@ -45,9 +62,8 @@ describe("getLabelActionImpl", () => {
     { labels: ["ARMReview", "NotReadyForARMReview"] },
     { labels: ["ARMReview", "SuppressionReviewRequired"] },
   ])("removes label if not all labels match ($labels)", async ({ labels }) => {
-    mockContosoTspSwagger();
+    const github = createMockGithub({ incrementalTypespec: true });
 
-    const github = createMockGithub();
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: labels.map((name) => ({ name })),
     });
@@ -71,9 +87,8 @@ describe("getLabelActionImpl", () => {
   });
 
   it("removes label if check failed", async () => {
-    mockContosoTspSwagger();
+    const github = createMockGithub({ incrementalTypespec: true });
 
-    const github = createMockGithub();
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: [{ name: "ARMReview" }],
     });
@@ -114,9 +129,8 @@ describe("getLabelActionImpl", () => {
   });
 
   it("no-ops if check not found or not completed", async () => {
-    mockContosoTspSwagger();
+    const github = createMockGithub({ incrementalTypespec: true });
 
-    const github = createMockGithub();
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: [{ name: "ARMReview" }],
     });
@@ -173,9 +187,8 @@ describe("getLabelActionImpl", () => {
   });
 
   it("adds label if incremental tsp, labels match, and check succeeded", async () => {
-    mockContosoTspSwagger();
+    const github = createMockGithub({ incrementalTypespec: true });
 
-    const github = createMockGithub();
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: [{ name: "ARMReview" }],
     });
@@ -215,30 +228,3 @@ describe("getLabelActionImpl", () => {
     });
   });
 });
-
-function mockContosoTspSwagger() {
-  const swaggerPath =
-    "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
-
-  vi.spyOn(
-    changedFiles,
-    "getChangedResourceManagerSwaggerFiles",
-  ).mockResolvedValue([swaggerPath]);
-
-  vol.fromJSON({
-    [join(process.env.GITHUB_WORKSPACE || "", swaggerPath)]:
-      swaggerTypeSpecGenerated,
-  });
-
-  vi.spyOn(git, "lsTree").mockImplementation(
-    async (_treeIsh, _path, _core, options) => {
-      return options?.includes("-r --name-only")
-        ? swaggerPath.substring(1)
-        : "040000 tree abc123 specification/contosowidgetmanager";
-    },
-  );
-
-  vi.spyOn(git, "show").mockImplementation(async (_treeIsh, _path, _core) => {
-    return swaggerTypeSpecGenerated;
-  });
-}
