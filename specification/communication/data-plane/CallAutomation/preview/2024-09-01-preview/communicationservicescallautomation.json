@@ -1667,6 +1667,70 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}/participants:moveParticipantToCall": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Add a participant to the call.",
+        "description": "Add a participant to the call.",
+        "operationId": "CallConnection_MoveParticipant",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "moveParticipantRequest",
+            "in": "body",
+            "description": "The move participants request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveParticipantRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
+            "type": "string",
+            "format": "date-time-rfc1123"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the move participant request and will begin processing it. You will receive either MoveParticipantSucceeded or MoveParticipantFailed event at your specified callback URI to update you on the status of the request.",
+            "schema": {
+              "$ref": "#/definitions/MoveParticipantResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallConnection_MoveParticipant": {
+            "$ref": "./examples/CallConnection_MoveParticipant.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/participants/{participantRawId}": {
       "get": {
         "tags": [
@@ -3502,6 +3566,50 @@
         }
       }
     },
+    "MoveParticipantRequest": {
+      "description": "The request payload for moving participant to the call.",
+      "required": [
+        "targetParticipant",
+        "fromCall"
+      ],
+      "type": "object",
+      "properties": {
+        "targetParticipant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The participant to Move."
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        },
+        "fromCall": {
+          "description": "The CallConnectionId for the call you want to move the participant from",
+          "type": "string"
+        }
+      }
+    },
+    "MoveParticipantResponse": {
+      "description": "The response payload for moving participants to the call.",
+      "type": "object",
+      "properties": {
+        "participant": {
+          "$ref": "#/definitions/CallParticipant",
+          "description": "List of current participants in the call."
+        },
+        "operationContext": {
+          "description": "The operation context provided by client.",
+          "type": "string"
+        },
+        "fromCall": {
+          "description": "The CallConnectionId for the call you want to move the participant from",
+          "type": "string"
+        }
+      }
+    },
     "RecordingContentType": {
       "description": "The content type of call recording.",
       "enum": [
@@ -4319,6 +4427,78 @@
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "MoveParticipantSucceeded": {
+      "description": "Moving the participant successfully event.",
+      "type": "object",
+      "properties": {
+        "fromCall": {
+          "description": "The CallConnectionId for the call you want to move the participant from",
+          "type": "string"
+        },
+        "newIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The identifier to use in the target call, it will be a new identifier if the same identifier is in the target call, otherwise it will be the same as original communicationIdentifier"
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "participant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participant"
+        }
+      }
+    },
+    "MoveParticipantFailed": {
+      "description": "Moving the participant failed event.",
+      "type": "object",
+      "properties": {
+        "fromCall": {
+          "description": "The CallConnectionId for the call you want to move the participant from",
+          "type": "string"
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "participant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participant"
         }
       }
     },
