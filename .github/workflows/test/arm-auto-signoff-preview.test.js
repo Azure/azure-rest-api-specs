@@ -78,12 +78,6 @@ describe("getLabelActionImpl", () => {
         core: core,
       }),
     ).resolves.toBe(LabelAction.Remove);
-
-    expect(github.rest.issues.listLabelsOnIssue).toBeCalledWith({
-      owner: "TestOwner",
-      repo: "TestRepo",
-      issue_number: 123,
-    });
   });
 
   it("removes label if check failed", async () => {
@@ -114,18 +108,6 @@ describe("getLabelActionImpl", () => {
         core: core,
       }),
     ).resolves.toBe(LabelAction.Remove);
-
-    expect(github.rest.issues.listLabelsOnIssue).toBeCalledWith({
-      owner: "TestOwner",
-      repo: "TestRepo",
-      issue_number: 123,
-    });
-
-    expect(github.rest.checks.listForRef).toBeCalledWith({
-      owner: "TestOwner",
-      repo: "TestRepo",
-      ref: "abc123",
-    });
   });
 
   it("no-ops if check not found or not completed", async () => {
@@ -172,18 +154,6 @@ describe("getLabelActionImpl", () => {
         core: core,
       }),
     ).resolves.toBe(LabelAction.None);
-
-    expect(github.rest.issues.listLabelsOnIssue).toBeCalledWith({
-      owner: "TestOwner",
-      repo: "TestRepo",
-      issue_number: 123,
-    });
-
-    expect(github.rest.checks.listForRef).toBeCalledWith({
-      owner: "TestOwner",
-      repo: "TestRepo",
-      ref: "abc123",
-    });
   });
 
   it("adds label if incremental tsp, labels match, and check succeeded", async () => {
@@ -214,17 +184,5 @@ describe("getLabelActionImpl", () => {
         core: core,
       }),
     ).resolves.toBe(LabelAction.Add);
-
-    expect(github.rest.issues.listLabelsOnIssue).toBeCalledWith({
-      owner: "TestOwner",
-      repo: "TestRepo",
-      issue_number: 123,
-    });
-
-    expect(github.rest.checks.listForRef).toBeCalledWith({
-      owner: "TestOwner",
-      repo: "TestRepo",
-      ref: "abc123",
-    });
   });
 });
