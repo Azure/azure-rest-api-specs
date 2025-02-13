@@ -247,7 +247,7 @@ model MdsResourceProperties {
   @visibility("read", "update")
   resourceState?: ResourceState;
 
-  @doc("Flag for toggling Zone redundancy for resources")
+  @doc("Zone redundancy state for resources")
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @visibility("read", "create")
   redundancyState?: RedundancyState;
