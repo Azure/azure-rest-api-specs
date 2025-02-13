@@ -99,6 +99,7 @@ export async function getLabelActionImpl({
       core.info("Spec is not an incremental change to an existing TypeSpec RP");
       return LabelAction.Remove;
     } else if (artifactNames.includes("incremental-typespec=true")) {
+      core.info("Spec is an incremental change to an existing TypeSpec RP");
       // Continue checking other requirements
     } else {
       // If workflow succeeded, it should have one workflow or the other
