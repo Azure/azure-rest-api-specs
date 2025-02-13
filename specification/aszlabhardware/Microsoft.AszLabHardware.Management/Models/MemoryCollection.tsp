@@ -11,6 +11,6 @@ model MemoryCollection {
   totalSystemMemoryGiB: int64;
 
   @doc("Information of individual memory modules")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", ["moduleName"])
   memoryModules: MemoryModule[];
 }

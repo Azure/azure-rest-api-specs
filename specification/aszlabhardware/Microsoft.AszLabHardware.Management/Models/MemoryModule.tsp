@@ -1,7 +1,7 @@
 @doc("Information about the individual memory modules of the server")
 model MemoryModule {
   @doc("Name of the memory module")
-  name?: string;
+  moduleName?: string;
 
   @doc("Location of the memory module")
   moduleLocation?: string;
