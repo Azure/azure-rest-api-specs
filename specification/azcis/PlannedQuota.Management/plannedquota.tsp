@@ -89,6 +89,7 @@ model PropertyBinding {
 }
 
 @doc("plannedQuota Resource")
+@subscriptionResource
 model PlannedQuotaResource
   is ProxyResource<PlannedQuotaResourceProperties> { // this can be TrackedResource based on resourcetype
   @doc("The name of resource.")
@@ -110,7 +111,6 @@ interface PlannedQuota {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   listBySubscription is ArmListBySubscription<PlannedQuotaResource>;
-  listByResourceGroup is ArmResourceListByParent<PlannedQuotaResource>;
   get is ArmResourceRead<PlannedQuotaResource>;
 }
 
