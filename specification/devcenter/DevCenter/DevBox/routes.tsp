@@ -443,7 +443,11 @@ interface DevBoxes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
-  @doc("Captures a manual snapshot of the Dev Box.")
+  @doc("""
+    Captures a manual snapshot of the Dev Box. 
+    Upon completion, a snapshotId will be generated. 
+    To retrieve all snapshots and their corresponding IDs, use the list snapshots endpoint.
+    """)
   @added(APIVersions.v2024_10_01_preview)
   @pollingOperation(OperationStatuses.get)
   @action("captureSnapshot")
