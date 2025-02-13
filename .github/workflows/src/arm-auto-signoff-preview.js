@@ -1,11 +1,7 @@
 // @ts-check
 
-import { readFile } from "fs/promises";
-import { dirname, join } from "path";
 import { extractInputs } from "../../src/context.js";
 import { LabelAction } from "../../src/label.js";
-import { getChangedResourceManagerSwaggerFiles } from "./changed-files.js";
-import { lsTree, show } from "./git.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -53,24 +49,62 @@ export async function getLabelActionImpl({
   github,
   core,
 }) {
-  const changedRmSwaggerFiles = await getChangedResourceManagerSwaggerFiles(
-    core,
-    "HEAD^",
-    "HEAD",
-    "",
+  const workflowRuns = await github.rest.actions.listWorkflowRunsForRepo({
+    owner,
+    repo,
+    event: "pull_request",
+    status: "completed",
+    per_page: 100,
+    head_sha,
+  });
+
+  core.info("Workflow Runs:");
+  workflowRuns.data.workflow_runs.forEach((wf) => {
+    core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
+  });
+
+  const wfName = "ARM Incremental Typespec (Preview)";
+  const incrementalTspRuns = workflowRuns.data.workflow_runs.filter(
+    (wf) => wf.name == wfName,
   );
 
-  if (changedRmSwaggerFiles.length == 0) {
+  if (incrementalTspRuns.length == 0) {
     core.info(
-      "No changes to swagger files containing path '/resource-manager/'",
+      `Found no completed runs for workflow '${wfName}'.  May still be in-progress.`,
     );
-    return LabelAction.Remove;
-  }
+    return LabelAction.None;
+  } else if (incrementalTspRuns.length > 1) {
+    throw `Unexpected number of runs for workflow '${wfName}': ${incrementalTspRuns.length}`;
+  } else {
+    const run = incrementalTspRuns[0];
 
-  if (
-    !(await incrementalChangesToExistingTypeSpec(changedRmSwaggerFiles, core))
-  ) {
-    return LabelAction.Remove;
+    if (run.conclusion != "success") {
+      core.info(
+        `Run for workflow '${wfName}' did not succeed: '${run.conclusion}'`,
+      );
+      return LabelAction.Remove;
+    }
+
+    const artifactNames = (
+      await github.rest.actions.listWorkflowRunArtifacts({
+        owner,
+        repo,
+        run_id: run.id,
+      })
+    ).data.artifacts.map((a) => a.name);
+
+    core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
+
+    if (artifactNames.includes("incremental-typespec=false")) {
+      core.info("Spec is not an incremental change to an existing TypeSpec RP");
+      return LabelAction.Remove;
+    } else if (artifactNames.includes("incremental-typespec=true")) {
+      core.info("Spec is an incremental change to an existing TypeSpec RP");
+      // Continue checking other requirements
+    } else {
+      // If workflow succeeded, it should have one workflow or the other
+      throw `Workflow artifacts did not contain 'incremental-typespec': ${JSON.stringify(artifactNames)}`;
+    }
   }
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
@@ -89,7 +123,7 @@ export async function getLabelActionImpl({
     labels.includes("ARMReview") &&
     !labels.includes("NotReadyForARMReview") &&
     (!labels.includes("SuppressionReviewRequired") ||
-      labels.includes("Suppression-Approved"));
+      labels.includes("Approved-Suppression"));
 
   if (!allLabelsMatch) {
     core.info("Labels do not meet requirement for auto-signoff");
@@ -134,89 +168,4 @@ export async function getLabelActionImpl({
     core.info("Swagger LintDiff is in-progress");
     return LabelAction.None;
   }
-}
-
-/**
- * @param {string[]} changedRmSwaggerFiles
- * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @returns {Promise<boolean>} True if PR is making incremental changes to an existing TypeSpec RP.  False if PR changes handwritten swagger or is a conversion to TypeSpec.
- */
-async function incrementalChangesToExistingTypeSpec(
-  changedRmSwaggerFiles,
-  core,
-) {
-  core.info("incrementalChangesToExistingTypeSpec()");
-
-  // If any changed file is not typespec-generated, return false
-  for (const file of changedRmSwaggerFiles) {
-    const swagger = await readFile(
-      join(process.env.GITHUB_WORKSPACE || "", file),
-      { encoding: "utf8" },
-    );
-
-    const swaggerObj = JSON.parse(swagger);
-
-    if (!swaggerObj["info"]?.["x-typespec-generated"]) {
-      core.info(`File "${file}" does not contain "info.x-typespec-generated"`);
-      return false;
-    }
-  }
-
-  const changedSpecDirs = new Set(
-    changedRmSwaggerFiles.map((f) => dirname(dirname(dirname(f)))),
-  );
-
-  // Ensure that each changed spec dir contained at least one typespec-generated swagger in the base commitish
-  for (const changedSpecDir of changedSpecDirs) {
-    // TODO: Create helper to list RM specs in a given commitish
-    const specFilesBaseBranch = await lsTree(
-      "HEAD^",
-      changedSpecDir,
-      core,
-      "-r --name-only",
-    );
-
-    // Filter files to only include RM *.json files
-    const specRmSwaggerFilesBaseBranch = specFilesBaseBranch
-      .split("\n")
-      .filter(
-        (file) =>
-          file.includes("/resource-manager/") &&
-          !file.includes("/examples/") &&
-          file.endsWith(".json"),
-      );
-
-    if (specRmSwaggerFilesBaseBranch.length === 0) {
-      core.info(
-        `Spec folder '${changedSpecDir}' in base branch does not exist or contains no swagger files`,
-      );
-      return false;
-    }
-
-    let containsTypespecGeneratedSwagger = false;
-    // TODO: Add lint rule to prevent using "for...in" instead of "for...of"
-    for (const file of specRmSwaggerFilesBaseBranch) {
-      const baseSwagger = await show("HEAD^", file, core);
-      const baseSwaggerObj = JSON.parse(baseSwagger);
-      if (baseSwaggerObj["info"]?.["x-typespec-generated"]) {
-        core.info(
-          `Spec folder '${changedSpecDir}' in base branch contains typespec-generated swagger: '${file}'`,
-        );
-        containsTypespecGeneratedSwagger = true;
-        continue;
-      }
-    }
-
-    if (!containsTypespecGeneratedSwagger) {
-      core.info(
-        `Spec folder '${changedSpecDir}' in base branch does not contain any typespec-generated swagger.  PR may be a TypeSpec conversion.`,
-      );
-      return false;
-    }
-  }
-
-  core.info(
-    "Appears to contain only incremental changes to existing TypeSpec RP(s)",
-  );
-  return true;
 }
