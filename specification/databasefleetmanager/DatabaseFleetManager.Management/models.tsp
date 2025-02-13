@@ -68,22 +68,6 @@ union ZoneRedundancy {
 }
 
 /**
- * SQL user type of the authorized principal. Extra: Database user, Sever: Server user, Default: Server admin
- */
-union SQLUserType {
-  string,
-
-  /** Server admin. */
-  Default: "Default",
-
-  /** Database user.. */
-  Extra: "Extra",
-
-  /** Server user. */
-  Server: "Server",
-}
-
-/**
  * Create mode. Available options: Default - Create a database. Copy - Copy the source database (source database name must be specified) PointInTimeRestore - Create a database by restoring source database from a point in time (source database name and restore from time must be specified)
  */
 union DatabaseCreateMode {
@@ -110,53 +94,6 @@ union IdentityType {
 
   /** User assigned identity. */
   UserAssigned: "UserAssigned",
-}
-
-/**
- * A database fleet manager authorized principal properties.
- */
-model AuthorizedPrincipalProperties {
-  /**
-   * Application Id of the authorized principal.
-   */
-  @visibility("read", "create")
-  applicationId?: uuid;
-
-  /**
-   * Object Id of the authorized principal.
-   */
-  @visibility("read", "create")
-  objectId?: uuid;
-
-  /**
-   * Tenant Id of the authorized principal.
-   */
-  @visibility("read", "create")
-  tenantId?: uuid;
-
-  /**
-   * Principal type of the authorized principal.
-   */
-  @visibility("read", "create")
-  principalType?: PrincipalType;
-
-  /**
-   * SQL user type of the authorized principal. Extra: Database user, Sever: Server user, Default: Server admin
-   */
-  @visibility("read", "create")
-  sqlUserType?: SQLUserType;
-
-  /**
-   * Role assigned to the authorized principal.
-   */
-  @visibility("read", "create")
-  role?: string;
-
-  /**
-   * Provisioning state.
-   */
-  @visibility("read")
-  provisioningState?: AzureProvisioningState;
 }
 
 /**
