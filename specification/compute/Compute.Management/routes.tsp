@@ -546,17 +546,13 @@ interface VirtualMachineRunCommandsOperations {
   @get
   @action("runCommands")
   list is ComputeProviderActionSync<
-    Response = RunCommandListResult,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      ...LocationParameter;
-
-      /**
-       * Accept header
-       */
+    Response = RunCommandListResult & {
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
       @header
-      accept: "application/json, text/json";
-    }
+      contentType: "application/json" | "text/json";
+    },
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter
   >;
   /**
    * Gets specific run command for a subscription in a location.
@@ -576,13 +572,11 @@ interface VirtualMachineRunCommandsOperations {
     commandId: string,
 
     ...SubscriptionIdParameter,
-
-    /**
-     * Accept header
-     */
+  ): ArmResponse<RunCommandDocument & {
+    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
     @header
-    accept: "application/json, text/json",
-  ): ArmResponse<RunCommandDocument> | CloudError;
+    contentType: "application/json" | "text/json";
+  }> | CloudError;
 }
 
 @@doc(LogAnalyticsOperations.exportRequestRateByInterval::parameters.body,

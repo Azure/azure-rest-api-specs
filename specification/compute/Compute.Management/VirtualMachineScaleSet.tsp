@@ -13,43 +13,48 @@ namespace Microsoft.Compute;
 /**
  * Describes a Virtual Machine Scale Set.
  */
-model VirtualMachineScaleSet
-  is Azure.ResourceManager.TrackedResource<VirtualMachineScaleSetProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
+@Azure.ResourceManager.Private.armResourceInternal(VirtualMachineScaleSetProperties)
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachineScaleSet extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = VirtualMachineScaleSet,
     KeyName = "vmScaleSetName",
     SegmentName = "virtualMachineScaleSets",
     NamePattern = ""
   >;
-
+  
   /**
    * The virtual machine scale set sku.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: Sku;
 
   /**
    * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   plan?: Plan;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: VirtualMachineScaleSetProperties;
 
   /**
    * The identity of the virtual machine scale set, if configured.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: VirtualMachineScaleSetIdentity;
 
-  /**
-   * The virtual machine scale set zones.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  zones?: string[];
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
 
   /**
    * The extended location of the Virtual Machine Scale Set.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 
   /**

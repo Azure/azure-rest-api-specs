@@ -106,9 +106,10 @@ interface DedicatedHosts {
   restart is ComputeResourceActionAsyncBase<
     DedicatedHost,
     void,
-    Response = ArmResponse<DedicatedHost> &
+    Response = OkResponse &
       ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DedicatedHost>
   >;
 }
 

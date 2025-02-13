@@ -64,7 +64,7 @@ interface GalleryApplicationVersions {
   update is ArmCustomPatchAsync<
     GalleryApplicationVersion,
     PatchModel = GalleryApplicationVersionUpdate,
-    Response = ArmResponse<GalleryApplicationVersion>
+    Response = ArmResponse<GalleryApplicationVersion> & ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

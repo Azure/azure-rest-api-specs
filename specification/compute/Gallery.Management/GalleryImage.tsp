@@ -55,7 +55,7 @@ interface GalleryImages {
   update is ArmCustomPatchAsync<
     GalleryImage,
     PatchModel = GalleryImageUpdate,
-    Response = ArmResponse<GalleryImage>
+    Response = ArmResponse<GalleryImage> & ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

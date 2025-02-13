@@ -73,7 +73,7 @@ interface Galleries {
   update is ArmCustomPatchAsync<
     Gallery,
     PatchModel = GalleryUpdate,
-    Response = ArmResponse<Gallery>
+    Response = ArmResponse<Gallery> & ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
