@@ -1435,7 +1435,7 @@
           {
             "name": "flush",
             "in": "query",
-            "description": "Valid only for append calls. This parameter allows the caller to flush during an append call. Default value is \"false\" , if \"true\" the data will be flushed with the append call. Note that when using flush=true, the following headers are not supported - \"x-ms-cache-control\", \"x-ms-content-encoding\", \"x-ms-content-type\", \"x-ms-content-language\", \"x-ms-content-md5\", \"x-ms-content-disposition\". To set these headers during flush, please use action=flush. Note that \"Last-Modified\" time will be set with the flush operation.",
+            "description": "Valid only for append calls. This parameter allows the caller to flush during an append call. Default value is \"false\" , if \"true\" the data will be flushed with the append call. Note that when using flush=true, the following headers are not supported - \"x-ms-cache-control\", \"x-ms-content-encoding\", \"x-ms-content-type\", \"x-ms-content-language\", \"x-ms-content-md5\", \"x-ms-content-disposition\". To set these headers during flush, please use action=flush. Note that the \"Last-Modified\" time will be set during the flush operation from the backend, but the request itself may be complete before the \"Last-Modified\" time indicates. To know when the request is complete, you can follow the completion time of the flush request.",
             "required": false,
             "type": "boolean"
           },
