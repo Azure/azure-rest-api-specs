@@ -123,7 +123,7 @@ export async function getLabelActionImpl({
     labels.includes("ARMReview") &&
     !labels.includes("NotReadyForARMReview") &&
     (!labels.includes("SuppressionReviewRequired") ||
-      labels.includes("Suppression-Approved"));
+      labels.includes("Approved-Suppression"));
 
   if (!allLabelsMatch) {
     core.info("Labels do not meet requirement for auto-signoff");
