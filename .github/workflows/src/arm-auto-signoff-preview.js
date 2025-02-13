@@ -58,8 +58,6 @@ export async function getLabelActionImpl({
     head_sha,
   });
 
-  github.rest.actions.cancelWorkflowRun({ owner: 1 });
-
   core.info("Workflow Runs:");
   workflowRuns.data.workflow_runs.forEach((wf) => {
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
