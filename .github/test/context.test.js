@@ -128,6 +128,7 @@ describe("extractInputs", () => {
       payload: {
         action: "completed",
         workflow_run: {
+          event: "pull_request",
           head_sha: "abc123",
           id: 456,
           repository: {
@@ -160,6 +161,7 @@ describe("extractInputs", () => {
         payload: {
           action: "completed",
           workflow_run: {
+            event: "pull_request",
             head_repository: {
               name: "TestRepoName",
               owner: {
