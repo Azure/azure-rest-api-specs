@@ -5,7 +5,7 @@ import { LabelAction } from "../../src/label.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
- * @returns {Promise<LabelAction>}
+ * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
  */
 export default async function getLabelAction({ github, context, core }) {
   let owner = process.env.OWNER || "";
@@ -39,7 +39,7 @@ export default async function getLabelAction({ github, context, core }) {
  * @param {string} params.head_sha
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
- * @returns {Promise<LabelAction>}
+ * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
  */
 export async function getLabelActionImpl({
   owner,
@@ -49,6 +49,21 @@ export async function getLabelActionImpl({
   github,
   core,
 }) {
+  const labelActions = {
+    [LabelAction.None]: {
+      labelAction: LabelAction.None,
+      issueNumber: issue_number,
+    },
+    [LabelAction.Add]: {
+      labelAction: LabelAction.Add,
+      issueNumber: issue_number,
+    },
+    [LabelAction.Remove]: {
+      labelAction: LabelAction.Remove,
+      issueNumber: issue_number,
+    },
+  };
+
   const workflowRuns = await github.rest.actions.listWorkflowRunsForRepo({
     owner,
     repo,
@@ -72,7 +87,7 @@ export async function getLabelActionImpl({
     core.info(
       `Found no completed runs for workflow '${wfName}'.  May still be in-progress.`,
     );
-    return LabelAction.None;
+    return labelActions[LabelAction.None];
   } else if (incrementalTspRuns.length > 1) {
     throw `Unexpected number of runs for workflow '${wfName}': ${incrementalTspRuns.length}`;
   } else {
@@ -82,7 +97,7 @@ export async function getLabelActionImpl({
       core.info(
         `Run for workflow '${wfName}' did not succeed: '${run.conclusion}'`,
       );
-      return LabelAction.Remove;
+      return labelActions[LabelAction.Remove];
     }
 
     const artifactNames = (
@@ -97,7 +112,7 @@ export async function getLabelActionImpl({
 
     if (artifactNames.includes("incremental-typespec=false")) {
       core.info("Spec is not an incremental change to an existing TypeSpec RP");
-      return LabelAction.Remove;
+      return labelActions[LabelAction.Remove];
     } else if (artifactNames.includes("incremental-typespec=true")) {
       core.info("Spec is an incremental change to an existing TypeSpec RP");
       // Continue checking other requirements
@@ -127,7 +142,7 @@ export async function getLabelActionImpl({
 
   if (!allLabelsMatch) {
     core.info("Labels do not meet requirement for auto-signoff");
-    return LabelAction.Remove;
+    return labelActions[LabelAction.Remove];
   }
 
   const checkRuns = (
@@ -158,14 +173,14 @@ export async function getLabelActionImpl({
   if (swaggerLintDiff && swaggerLintDiff.status === "completed") {
     if (swaggerLintDiff.conclusion === "success") {
       core.info("All requirements met for auto-signoff");
-      return LabelAction.Add;
+      return labelActions[LabelAction.Add];
     } else {
       core.info("Swagger LintDiff did not succeed");
-      return LabelAction.Remove;
+      return labelActions[LabelAction.Remove];
     }
   } else {
     // No-op if check is missing or not completed, to prevent frequent remove/add label as checks re-run
     core.info("Swagger LintDiff is in-progress");
-    return LabelAction.None;
+    return labelActions[LabelAction.None];
   }
 }
