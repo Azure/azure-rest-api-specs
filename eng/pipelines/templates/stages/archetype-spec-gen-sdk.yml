@@ -177,7 +177,7 @@ extends:
               fi
 
               if [ "$(Build.Reason)" = "PullRequest" ]; then
-                optional_params="$optional_params --pr-number=$(System.PullRequest.PullRequestNumber)"
+                optional_params="$optional_params --pr-number $(System.PullRequest.PullRequestNumber)"
                 specPrUrl="${{ parameters.SpecRepoUrl }}/pull/$(System.PullRequest.PullRequestNumber)"
                 sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl"
               fi
