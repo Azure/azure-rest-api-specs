@@ -318,7 +318,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/siteNetworkServices/{siteNetworkServiceName}/cancelOperation": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/siteNetworkServices/cancelOperation": {
       "post": {
         "tags": [
           "SiteNetworkServices"
@@ -336,16 +336,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SiteNetworkServiceNameParameter"
-          },
-          {
             "name": "parameters",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
-              "$ref": "./common.json#/definitions/CancelOperationType"
+              "$ref": "./common.json#/definitions/CancelInformation"
             },
-            "description": "The type of long-running operation the user wants to cancel, such as 'Put'."
+            "description": "The SiteNetworkService detail and an optional operation which defaults to 'Put'."
           }
         ],
         "responses": {
