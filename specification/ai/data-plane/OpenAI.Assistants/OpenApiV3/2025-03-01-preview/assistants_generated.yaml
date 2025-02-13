@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Azure OpenAI
   description: Azure OpenAI APIs for Assistants.
-  version: 2024-05-01-preview
+  version: 2025-03-01-preview
 tags: []
 paths:
   /assistants:
@@ -1037,6 +1037,10 @@ paths:
                   minItems: 1
                   maxItems: 500
                   description: A list of File IDs that the vector store should use. Useful for tools like `file_search` that can access files.
+                chunking_strategy:
+                  allOf:
+                    - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+                  description: The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.
               required:
                 - file_ids
   /vector_stores/{vectorStoreId}/file_batches/{batchId}:
@@ -1286,6 +1290,10 @@ paths:
                 file_id:
                   type: string
                   description: A File ID that the vector store should use. Useful for tools like `file_search` that can access files.
+                chunking_strategy:
+                  allOf:
+                    - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+                  description: The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.
               required:
                 - file_id
   /vector_stores/{vectorStoreId}/files/{fileId}:
@@ -1746,6 +1754,10 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           nullable: true
           description: The overridden list of enabled tools the assistant should use to run the thread.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
+          default: true
         tool_resources:
           type: object
           allOf:
@@ -1848,6 +1860,7 @@ components:
       type: object
       required:
         - file_ids
+        - chunking_strategy
       properties:
         file_ids:
           type: array
@@ -1855,6 +1868,10 @@ components:
             type: string
           maxItems: 10000
           description: A list of file IDs to add to the vector store. There can be a maximum of 10000 files in a vector store.
+        chunking_strategy:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+          description: The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
         metadata:
           type: object
           additionalProperties:
@@ -1896,6 +1913,10 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           nullable: true
           description: The overridden list of enabled tools that the assistant should use to run the thread.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
+          default: true
         stream:
           type: boolean
           description: |-
@@ -2055,9 +2076,26 @@ components:
           enum:
             - file_search
           description: The object type, which is always 'file_search'.
+        file_search:
+          allOf:
+            - $ref: '#/components/schemas/FileSearchToolDefinitionDetails'
+          description: Options overrides for the file search tool.
       allOf:
         - $ref: '#/components/schemas/ToolDefinition'
       description: The input definition information for a file search tool as used to configure an assistant.
+    FileSearchToolDefinitionDetails:
+      type: object
+      properties:
+        max_num_results:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 50
+          description: |-
+            The maximum number of results the file search tool should output. The default is 20 for gpt-4* models and 5 for gpt-3.5-turbo. This number should be between 1 and 50 inclusive.
+
+            Note that the file search tool may output fewer than `max_num_results` results. See the file search tool documentation for more information.
+      description: Options overrides for the file search tool.
     FileSearchToolResource:
       type: object
       properties:
@@ -2375,6 +2413,16 @@ components:
       allOf:
         - $ref: '#/components/schemas/MessageDeltaTextAnnotation'
       description: Represents a streamed file path annotation applied to a streaming text content part.
+    MessageDeltaTextUrlCitationDetails:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL where the citation is from.
+        title:
+          type: string
+          description: The title of the URL.
+      description: A representation of the URL used for the text citation.
     MessageImageFileContent:
       type: object
       required:
@@ -3584,6 +3632,7 @@ components:
         - max_completion_tokens
         - truncation_strategy
         - tool_choice
+        - parallel_tool_calls
         - response_format
         - metadata
       properties:
@@ -3702,6 +3751,9 @@ components:
             - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
           nullable: true
           description: Controls whether or not and which tool is called by the model.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
         response_format:
           allOf:
             - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
@@ -3972,6 +4024,78 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: A vector store is a collection of processed files can be used by the `file_search` tool.
+    VectorStoreAutoChunkingStrategyRequest:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - auto
+          description: The object type, which is always 'auto'.
+      allOf:
+        - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+      description: The default strategy. This strategy currently uses a max_chunk_size_tokens of 800 and chunk_overlap_tokens of 400.
+    VectorStoreAutoChunkingStrategyResponse:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - other
+          description: The object type, which is always 'other'.
+      allOf:
+        - $ref: '#/components/schemas/VectorStoreChunkingStrategyResponse'
+      description: This is returned when the chunking strategy is unknown. Typically, this is because the file was indexed before the chunking_strategy concept was introduced in the API.
+    VectorStoreChunkingStrategyRequest:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequestType'
+          description: The object type.
+      discriminator:
+        propertyName: type
+        mapping:
+          auto: '#/components/schemas/VectorStoreAutoChunkingStrategyRequest'
+          static: '#/components/schemas/VectorStoreStaticChunkingStrategyRequest'
+      description: An abstract representation of a vector store chunking strategy configuration.
+    VectorStoreChunkingStrategyRequestType:
+      anyOf:
+        - type: string
+          enum:
+            - auto
+            - static
+        - type: string
+      description: Type of chunking strategy
+    VectorStoreChunkingStrategyResponse:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyResponseType'
+          description: The object type.
+      discriminator:
+        propertyName: type
+        mapping:
+          other: '#/components/schemas/VectorStoreAutoChunkingStrategyResponse'
+          static: '#/components/schemas/VectorStoreStaticChunkingStrategyResponse'
+      description: An abstract representation of a vector store chunking strategy configuration.
+    VectorStoreChunkingStrategyResponseType:
+      anyOf:
+        - type: string
+          enum:
+            - other
+            - static
+        - type: string
+      description: Type of chunking strategy
     VectorStoreDeletionStatus:
       type: object
       required:
@@ -4025,6 +4149,7 @@ components:
         - vector_store_id
         - status
         - last_error
+        - chunking_strategy
       properties:
         id:
           type: string
@@ -4057,6 +4182,10 @@ components:
             - $ref: '#/components/schemas/VectorStoreFileError'
           nullable: true
           description: The last error associated with this vector store file. Will be `null` if there are no errors.
+        chunking_strategy:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyResponse'
+          description: The strategy used to chunk the file.
       description: Description of a file attached to a vector store.
     VectorStoreFileBatch:
       type: object
@@ -4211,6 +4340,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VectorStoreExpirationPolicy'
           description: Details on when this vector store expires
+        chunking_strategy:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+          description: The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. Only applicable if file_ids is non-empty.
         metadata:
           type: object
           additionalProperties:
@@ -4218,6 +4351,61 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: Request object for creating a vector store.
+    VectorStoreStaticChunkingStrategyOptions:
+      type: object
+      required:
+        - max_chunk_size_tokens
+        - chunk_overlap_tokens
+      properties:
+        max_chunk_size_tokens:
+          type: integer
+          format: int32
+          minimum: 100
+          maximum: 4096
+          description: The maximum number of tokens in each chunk. The default value is 800. The minimum value is 100 and the maximum value is 4096.
+        chunk_overlap_tokens:
+          type: integer
+          format: int32
+          description: |-
+            The number of tokens that overlap between chunks. The default value is 400.
+            Note that the overlap must not exceed half of max_chunk_size_tokens.     *
+      description: Options to configure a vector store static chunking strategy.
+    VectorStoreStaticChunkingStrategyRequest:
+      type: object
+      required:
+        - type
+        - static
+      properties:
+        type:
+          type: string
+          enum:
+            - static
+          description: The object type, which is always 'static'.
+        static:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreStaticChunkingStrategyOptions'
+          description: The options for the static chunking strategy.
+      allOf:
+        - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+      description: A statically configured chunking strategy.
+    VectorStoreStaticChunkingStrategyResponse:
+      type: object
+      required:
+        - type
+        - static
+      properties:
+        type:
+          type: string
+          enum:
+            - static
+          description: The object type, which is always 'static'.
+        static:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreStaticChunkingStrategyOptions'
+          description: The options for the static chunking strategy.
+      allOf:
+        - $ref: '#/components/schemas/VectorStoreChunkingStrategyResponse'
+      description: A statically configured chunking strategy.
     VectorStoreStatus:
       anyOf:
         - type: string
