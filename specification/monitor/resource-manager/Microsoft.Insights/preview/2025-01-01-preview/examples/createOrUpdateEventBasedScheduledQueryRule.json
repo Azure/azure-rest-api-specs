@@ -6,7 +6,7 @@
     "api-version": "2025-01-01-preview",
     "parameters": {
       "location": "eastus",
-      "kind": "EventLogAlert",
+      "kind": "SimpleLogAlert",
       "properties": {
         "description": "Performance rule",
         "severity": 4,
@@ -21,6 +21,7 @@
             }
           ]
         },
+        "autoMitigate": false,
         "actions": {
           "actionGroups": [
             "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
@@ -47,7 +48,7 @@
         "name": "perf",
         "type": "microsoft.insights/scheduledqueryrules",
         "location": "eastus",
-        "kind": "EventLogAlert",
+        "kind": "SimpleLogAlert",
         "tags": {},
         "properties": {
           "description": "Performance rule",
@@ -63,6 +64,7 @@
               }
             ]
           },
+          "autoMitigate": false,
           "actions": {
             "actionGroups": [
               "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
@@ -89,7 +91,7 @@
         "name": "perf",
         "type": "microsoft.insights/scheduledqueryrules",
         "location": "eastus",
-        "kind": "EventLogAlert",
+        "kind": "SimpleLogAlert",
         "tags": {},
         "properties": {
           "description": "Performance rule",
@@ -105,6 +107,7 @@
               }
             ]
           },
+          "autoMitigate": false,
           "actions": {
             "actionGroups": [
               "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"

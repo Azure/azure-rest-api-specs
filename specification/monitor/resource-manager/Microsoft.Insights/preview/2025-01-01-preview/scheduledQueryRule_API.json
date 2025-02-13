@@ -452,12 +452,12 @@
         },
         "autoMitigate": {
           "type": "boolean",
-          "description": "The flag that indicates whether the alert should be automatically resolved or not. The default is true. Relevant only for rules of the kind LogAlert."
+          "description": "The flag that indicates whether the alert should be automatically resolved or not. The default is true. Relevant only for rules of kinds LogAlert and SimpleLogAlert."
         },
         "resolveConfiguration": {
           "type": "object",
           "$ref": "#/definitions/RuleResolveConfiguration",
-          "description": "Defines the configuration for resolving fired alerts. Relevant only for rules of the kind LogAlert."
+          "description": "Defines the configuration for resolving fired alerts. Relevant only for rules of kinds LogAlert and SimpleLogAlert."
         }
       },
       "description": "scheduled query rule Definition"
@@ -513,7 +513,7 @@
           "description": "Indicates the type of scheduled query rule. The default is LogAlert.",
           "enum": [
             "LogAlert",
-            "EventLogAlert",
+            "SimpleLogAlert",
             "LogToMetric"
           ],
           "x-ms-enum": {
@@ -673,7 +673,7 @@
         },
         "alertSensitivity": {
           "type": "string",
-          "description": "The extent of deviation required to trigger an alert. Allowed values are 'Low', 'Medium' and 'High'. This will affect how tight the threshold is to the metric series pattern. Relevant and required only for dynamic threshold rules of the kind LogAlert."
+          "description": "The extent of deviation required to trigger an alert. Allowed values are 'Low', 'Medium' and 'High'. This will affect how tight the threshold is to the metric series pattern. Relevant only for dynamic threshold rules of the kind LogAlert."
         },
         "ignoreDataBefore": {
           "type": "string",
@@ -701,6 +701,11 @@
         "metricName": {
           "type": "string",
           "description": "The name of the metric to be sent. Relevant and required only for rules of the kind LogToMetric."
+        },
+        "minRecurrenceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The minimum results count that should be found for triggering an alert. Relevant only for rules of the kind SimpleLogAlert."
         }
       }
     },
