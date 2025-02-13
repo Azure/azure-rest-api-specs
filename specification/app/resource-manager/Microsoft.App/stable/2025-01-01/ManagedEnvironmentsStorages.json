@@ -110,8 +110,11 @@
           }
         },
         "x-ms-examples": {
-          "get a environments storage properties by subscription": {
+          "get a environments storage": {
             "$ref": "./examples/ManagedEnvironmentsStorages_Get.json"
+          },
+          "get a environments storage for NFS Azure file": {
+            "$ref": "./examples/ManagedEnvironmentsStorages_Get_NfsAzureFile.json"
           }
         }
       },
@@ -173,6 +176,9 @@
         "x-ms-examples": {
           "Create or update environments storage": {
             "$ref": "./examples/ManagedEnvironmentsStorages_CreateOrUpdate.json"
+          },
+          "Create or update environments storage for NFS Azure file": {
+            "$ref": "./examples/ManagedEnvironmentsStorages_CreateOrUpdate_NfsAzureFile.json"
           }
         }
       },
@@ -252,7 +258,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -263,6 +269,10 @@
             "azureFile": {
               "$ref": "./CommonDefinitions.json#/definitions/AzureFileProperties",
               "description": "Azure file properties"
+            },
+            "nfsAzureFile": {
+              "$ref": "./CommonDefinitions.json#/definitions/NfsAzureFileProperties",
+              "description": "NFS Azure file properties"
             }
           }
         }
@@ -288,4 +298,3 @@
     }
   ]
 }
-

@@ -15,6 +15,7 @@
         "location": "East US",
         "properties": {
           "provisioningState": "Succeeded",
+          "runningStatus": "Running",
           "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "workloadProfileName": "My-GP-01",
           "latestRevisionFqdn": "testcontainerapp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
@@ -75,6 +76,11 @@
               "logLevel": "debug",
               "enableApiLogging": true
             },
+            "runtime": {
+              "java": {
+                "enableMetrics": true
+              }
+            },
             "maxInactiveRevisions": 10,
             "service": {
               "type": "redis"
@@ -88,7 +94,19 @@
                 "resources": {
                   "cpu": 0.5,
                   "memory": "1Gi"
-                }
+                },
+                "volumeMounts": [
+                  {
+                    "volumeName": "azurefile",
+                    "mountPath": "/mnt/path1",
+                    "subPath": "subPath1"
+                  },
+                  {
+                    "volumeName": "nfsazurefile",
+                    "mountPath": "/mnt/path2",
+                    "subPath": "subPath2"
+                  }
+                ]
               }
             ],
             "initContainers": [
@@ -104,6 +122,8 @@
             "scale": {
               "minReplicas": 1,
               "maxReplicas": 5,
+              "cooldownPeriod": 350,
+              "pollingInterval": 35,
               "rules": [
                 {
                   "name": "httpscalingrule",
@@ -112,6 +132,18 @@
                       "concurrentRequests": "50"
                     }
                   }
+                },
+                {
+                  "name": "servicebus",
+                  "custom": {
+                    "type": "azure-servicebus",
+                    "metadata": {
+                      "queueName": "myqueue",
+                      "namespace": "mynamespace",
+                      "messageCount": "5"
+                    },
+                    "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+                  }
                 }
               ]
             },
@@ -119,6 +151,18 @@
               {
                 "serviceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/service",
                 "name": "service"
+              }
+            ],
+            "volumes": [
+              {
+                "name": "azurefile",
+                "storageType": "AzureFile",
+                "storageName": "storage"
+              },
+              {
+                "name": "nfsazurefile",
+                "storageType": "NfsAzureFile",
+                "storageName": "nfsStorage"
               }
             ]
           },
@@ -129,4 +173,3 @@
     "404": {}
   }
 }
-

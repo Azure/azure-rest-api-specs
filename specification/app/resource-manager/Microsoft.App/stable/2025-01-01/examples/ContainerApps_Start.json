@@ -15,6 +15,7 @@
         "location": "East US",
         "properties": {
           "provisioningState": "Succeeded",
+          "runningStatus": "Running",
           "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "workloadProfileName": "My-GP-01",
           "latestRevisionFqdn": "testcontainerapp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
@@ -72,6 +73,11 @@
               "logLevel": "debug",
               "enableApiLogging": true
             },
+            "runtime": {
+              "java": {
+                "enableMetrics": true
+              }
+            },
             "maxInactiveRevisions": 10
           },
           "template": {
@@ -98,6 +104,8 @@
             "scale": {
               "minReplicas": 1,
               "maxReplicas": 5,
+              "cooldownPeriod": 350,
+              "pollingInterval": 35,
               "rules": [
                 {
                   "name": "httpscalingrule",
@@ -121,4 +129,3 @@
     }
   }
 }
-

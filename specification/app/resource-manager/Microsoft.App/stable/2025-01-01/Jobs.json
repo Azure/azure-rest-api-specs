@@ -750,7 +750,7 @@
       "description": "Container App Job",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -970,6 +970,10 @@
           "items": {
             "$ref": "./CommonDefinitions.json#/definitions/ScaleRuleAuth"
           }
+        },
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity.",
+          "type": "string"
         }
       }
     },
@@ -1197,4 +1201,3 @@
     }
   ]
 }
-

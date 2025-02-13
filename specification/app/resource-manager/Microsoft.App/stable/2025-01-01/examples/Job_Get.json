@@ -33,7 +33,19 @@
                 "resources": {
                   "cpu": 0.5,
                   "memory": "1Gi"
-                }
+                },
+                "volumeMounts": [
+                  {
+                    "volumeName": "azurefile",
+                    "mountPath": "/mnt/path1",
+                    "subPath": "subPath1"
+                  },
+                  {
+                    "volumeName": "nfsazurefile",
+                    "mountPath": "/mnt/path2",
+                    "subPath": "subPath2"
+                  }
+                ]
               }
             ],
             "initContainers": [
@@ -45,6 +57,18 @@
                   "memory": "1Gi"
                 }
               }
+            ],
+            "volumes": [
+              {
+                "name": "azurefile",
+                "storageType": "AzureFile",
+                "storageName": "storage"
+              },
+              {
+                "name": "nfsazurefile",
+                "storageType": "NfsAzureFile",
+                "storageName": "nfsStorage"
+              }
             ]
           }
         }
@@ -52,4 +76,3 @@
     }
   }
 }
-

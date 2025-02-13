@@ -649,6 +649,10 @@
           "$ref": "#/definitions/Dapr",
           "description": "Dapr configuration for the Container App."
         },
+        "runtime": {
+          "$ref": "#/definitions/Runtime",
+          "description": "App runtime configuration for the Container App."
+        },
         "maxInactiveRevisions": {
           "format": "int32",
           "description": "Optional. Max inactive revisions a Container App can have.",
@@ -665,7 +669,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -703,6 +707,44 @@
               "x-ms-enum": {
                 "name": "ContainerAppProvisioningState",
                 "modelAsString": true
+              }
+            },
+            "runningStatus": {
+              "description": "Running status of the Container App.",
+              "enum": [
+                "Progressing",
+                "Running",
+                "Stopped",
+                "Suspended",
+                "Ready"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ContainerAppRunningStatus",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Progressing",
+                    "description": "Container App is transitioning between Stopped and Running states."
+                  },
+                  {
+                    "value": "Running",
+                    "description": "Container App is in Running state."
+                  },
+                  {
+                    "value": "Stopped",
+                    "description": "Container App is in Stopped state."
+                  },
+                  {
+                    "value": "Suspended",
+                    "description": "Container App Job is in Suspended state."
+                  },
+                  {
+                    "value": "Ready",
+                    "description": "Container App Job is in Ready state."
+                  }
+                ]
               }
             },
             "managedEnvironmentId": {
@@ -850,6 +892,22 @@
         "enableApiLogging": {
           "description": "Enables API logging for the Dapr sidecar",
           "type": "boolean"
+        }
+      }
+    },
+    "Runtime": {
+      "description": "Container App Runtime configuration.",
+      "type": "object",
+      "properties": {
+        "java": {
+          "description": "Java app configuration",
+          "type": "object",
+          "properties": {
+            "enableMetrics": {
+              "description": "Enable jmx core metrics for the java app",
+              "type": "boolean"
+            }
+          }
         }
       }
     },
@@ -1337,7 +1395,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1395,4 +1453,3 @@
     }
   ]
 }
-

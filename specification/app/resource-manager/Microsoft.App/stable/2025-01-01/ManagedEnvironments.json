@@ -476,6 +476,9 @@
         "x-ms-examples": {
           "Create or Update Certificate": {
             "$ref": "./examples/Certificate_CreateOrUpdate.json"
+          },
+          "Create or Update Certificate using Managed Identity": {
+            "$ref": "./examples/Certificate_CreateOrUpdate_FromKeyVault.json"
           }
         }
       },
@@ -1141,13 +1144,17 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
         "kind": {
           "type": "string",
           "description": "Kind of the Environment."
+        },
+        "identity": {
+          "description": "Managed identities for the Managed Environment to interact with other Azure services without maintaining any secrets or credentials in code.",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "description": "Managed environment resource specific properties",
@@ -1326,7 +1333,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1384,7 +1391,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1452,4 +1459,3 @@
     }
   ]
 }
-
