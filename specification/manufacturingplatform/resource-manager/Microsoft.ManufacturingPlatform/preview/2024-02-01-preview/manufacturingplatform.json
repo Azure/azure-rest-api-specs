@@ -1080,15 +1080,15 @@
           ]
         },
         "resourceState": {
-          "type": "string",
+          "$ref": "#/definitions/ResourceState",
           "description": "State of the resource",
           "x-ms-mutability": [
             "read",
             "update"
           ]
         },
-        "isZoneRedundant": {
-          "type": "boolean",
+        "redundancyState": {
+          "$ref": "#/definitions/RedundancyState",
           "description": "Flag for toggling Zone redundancy for resources",
           "x-ms-mutability": [
             "read",
@@ -1213,7 +1213,7 @@
           ]
         },
         "resourceState": {
-          "type": "string",
+          "$ref": "#/definitions/ResourceState",
           "description": "State of the resource",
           "x-ms-mutability": [
             "read",
@@ -1394,6 +1394,54 @@
           "description": "Resource Id of Azure Redis Cache Resource",
           "readOnly": true
         }
+      }
+    },
+    "RedundancyState": {
+      "type": "string",
+      "description": "The redundancy state of the resource",
+      "enum": [
+        "Zonal",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "RedundancyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Zonal",
+            "value": "Zonal",
+            "description": "Resource is zone redundant"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Resource is not zone redundant"
+          }
+        ]
+      }
+    },
+    "ResourceState": {
+      "type": "string",
+      "description": "The current state of the resource",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Resource is in active state"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Resource is in inactive state"
+          }
+        ]
       }
     },
     "StorageProfile": {
