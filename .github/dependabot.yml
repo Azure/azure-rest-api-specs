@@ -12,8 +12,6 @@ updates:
       # Updated manually to align with repo microsoft/typespec
       - dependency-name: "typescript"
       - dependency-name: "prettier"
-      # Updated manually by the Liftr team
-      - dependency-name: "@azure-tools/typespec-liftr-base"
       # minimatch@9 is the last version to support Node 18
       - dependency-name: "minimatch"
         versions: [">= 10.0.0"]
@@ -26,6 +24,10 @@ updates:
       openapi-to-typespec:
         patterns:
           - "@autorest/openapi-to-typespec"
+      # Ships separately from other typespec packages
+      typespec-liftr-base:
+        patterns:
+          - "@azure-tools/typespec-liftr-base"
       typespec:
         patterns:
           - "*typespec*"
