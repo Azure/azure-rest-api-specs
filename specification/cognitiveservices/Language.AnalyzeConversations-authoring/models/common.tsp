@@ -96,10 +96,9 @@ union StringIndexType {
    * The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript.
    */
   Utf16CodeUnit: "Utf16CodeUnit",
-  
-  Utf8CodeUnit: "Utf8CodeUnit",
 
-  Utf32CodeUnit: "Utf32CodeUnit"
+  Utf8CodeUnit: "Utf8CodeUnit",
+  Utf32CodeUnit: "Utf32CodeUnit",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -118,7 +117,6 @@ union ExportedProjectFormat {
    */
   Luis: "Luis",
 }
-
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationAuthoringTrainingMode", "csharp")

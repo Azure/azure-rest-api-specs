@@ -703,29 +703,27 @@ model StringIndexTypeQueryParameter {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SupportedPrebuiltEntitiesQueryParameter {
-      
-      /**
-       * The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
-       */
-      @query("language")
-      language?: string;
+  /**
+   * The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
+   */
+  @query("language")
+  language?: string;
 
-      /**
-       * Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.
-       */
-      @query("multilingual")
-      multilingual?: string;
+  /**
+   * Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.
+   */
+  @query("multilingual")
+  multilingual?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model ProjectKindQueryParameter {
-      
-      /**
-       * The project kind.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style"
-      @query("projectKind")
-      ProjectKind: ProjectKind;
+  /**
+   * The project kind.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @query("projectKind")
+  ProjectKind: ProjectKind;
 }
 
 /**
@@ -882,7 +880,6 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
 @clientName("AnalyzeConversationConfusionMatrixRow", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrixRow
   is Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
-
 
 /**
  * Represents a cell in a confusion matrix.
