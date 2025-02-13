@@ -2456,15 +2456,11 @@
           "readOnly": true
         },
         "labels": {
-          "type": "array",
-          "description": "The labels to be persisted on the fleet member.",
-          "items": {
-            "$ref": "#/definitions/Label"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
+          "type": "object",
+          "description": "The labels for the fleet member",
+          "additionalProperties": {
+            "$ref": "#/definitions/LabelValue"
+          }
         }
       },
       "required": [
@@ -2543,15 +2539,11 @@
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
         },
         "labels": {
-          "type": "array",
-          "description": "The labels to be persisted on the fleet member.",
-          "items": {
-            "$ref": "#/definitions/Label"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
+          "type": "object",
+          "description": "The labels for the fleet member",
+          "additionalProperties": {
+            "$ref": "#/definitions/LabelValue"
+          }
         }
       }
     },
@@ -2747,23 +2739,8 @@
     "KubernetesVersion": {
       "type": "string"
     },
-    "Label": {
-      "type": "object",
-      "description": "Represents label object.",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Key for a label."
-        },
-        "value": {
-          "type": "string",
-          "description": "Value for a label."
-        }
-      },
-      "required": [
-        "key",
-        "value"
-      ]
+    "LabelValue": {
+      "type": "string"
     },
     "ManagedClusterUpdate": {
       "type": "object",

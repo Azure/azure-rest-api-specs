@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "./helpers.tsp";
-import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -10,6 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
+scalar LabelValue extends string;
 
 @doc("A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.")
 @resource("members")
@@ -57,9 +57,9 @@ model FleetMemberProperties {
   provisioningState?: FleetMemberProvisioningState;
 
   @added(Versions.v2025_03_01)
-  @doc("The labels to be persisted on the fleet member.")
-  @extension("x-ms-identifiers", ["key", "value"])
-  labels?: Label[];
+  @doc("The labels for the fleet member")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
+  labels?: Record<LabelValue>;
 }
 
 @lroStatus
