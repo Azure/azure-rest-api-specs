@@ -27,12 +27,13 @@ parameters:
 extends:
   template: /eng/pipelines/templates/stages/1es-redirect.yml
   parameters:
+    Use1ESOfficial: false
     stages:
     - stage: Build
       displayName: 'SDK Generation'
       jobs:
       - job:
-
+        timeoutInMinutes: 300
         variables:
           - template: /eng/pipelines/templates/variables/image.yml
           - name: NodeVersion
