@@ -41,7 +41,6 @@ interface Fleetspaces {
    * Modifies a fleetspace resource.
    */
   @parameterVisibility
-  @added(Versions.v2025_02_01_preview)
   update is ArmCustomPatchAsync<Fleetspace, Fleetspace>;
 
   /**
