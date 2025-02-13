@@ -92,6 +92,9 @@ export async function getLabelActionImpl({
         run_id: run.id,
       })
     ).data.artifacts.map((a) => a.name);
+
+    core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
+
     if (artifactNames.includes("incremental-typespec=false")) {
       core.info("Spec is not an incremental change to an existing TypeSpec RP");
       return LabelAction.Remove;
