@@ -78,7 +78,7 @@ model EnclaveVirtualNetwork {
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   allowSubnetCommunication?: boolean;
 
-  @added(Microsoft.Mission.Versions.v2024_01_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Connect to Azure Services (True or False).")
   connectToAzureServices?: boolean;
 }
@@ -89,7 +89,7 @@ model EnclaveDefaultSettings {
   keyVaultResourceId?: KeyVaultResourceId;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2024_01_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Log Analytics Resource Id.")
   logAnalyticsResourceId?: LogAnalyticsResourceId;
 
@@ -97,12 +97,12 @@ model EnclaveDefaultSettings {
   storageAccountResourceId?: StorageAccountResourceId;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
-  @added(Microsoft.Mission.Versions.v2024_01_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Log Analytics Resource Ids.")
   logAnalyticsResourceIdCollection?: LogAnalyticsResourceId[];
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
-  @added(Microsoft.Mission.Versions.v2024_01_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Diagnostic Destination.")
   diagnosticDestination?: DiagnosticDestination;
 }
@@ -134,7 +134,7 @@ model MaintenanceModeConfiguration {
 @doc("Virtual Enclave Resource properties")
 model VirtualEnclaveProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Virtual Enclave Description.")
   description?: string;
 
@@ -145,7 +145,7 @@ model VirtualEnclaveProperties {
   @doc("Virtual Network.")
   enclaveVirtualNetwork: EnclaveVirtualNetwork;
 
-  @added(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @visibility("read")
   @doc("Enclave Address Spaces")
   enclaveAddressSpaces?: EnclaveAddressSpaces;
@@ -160,8 +160,8 @@ model VirtualEnclaveProperties {
   resourceCollection?: string[];
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @added(Microsoft.Mission.Versions.v2023_08_01_preview)
-  @madeOptional(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  @madeOptional(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Managed resource group configuration.")
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 

@@ -43,11 +43,11 @@ union EndpointProtocol {
 @doc("EndpointRule Properties")
 model EndpointRule {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Endpoint Rule Id.")
   id?: string;
 
-  @added(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Endpoint Rule Name.")
   name?: string;
 
@@ -64,7 +64,7 @@ model EndpointRule {
 @doc("Endpoint Resource properties")
 model EndpointProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Endpoint Description.")
   description?: string;
 

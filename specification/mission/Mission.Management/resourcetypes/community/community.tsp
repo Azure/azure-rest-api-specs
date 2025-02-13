@@ -17,7 +17,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Mission;
 
 #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-@removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+@removed(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("EnclaveListItem Properties")
 model EnclaveListItem {
   @doc("virtual enclave name.")
@@ -163,7 +163,7 @@ model ApprovalSettings {
 @doc("Community Resource Properties")
 model CommunityProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Community Description.")
   description?: string;
 
@@ -181,19 +181,19 @@ model CommunityProperties {
   resourceCollection?: string[];
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of virtual enclaves that a community contains.")
   virtualEnclaveList?: EnclaveListItem[];
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Dictionary of virtual enclaves that a community contains.")
   virtualEnclaveCollection?: Record<EnclaveListItem>;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @added(Microsoft.Mission.Versions.v2023_08_01_preview)
-  @madeOptional(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  @madeOptional(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Managed resource group configuration.")
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 

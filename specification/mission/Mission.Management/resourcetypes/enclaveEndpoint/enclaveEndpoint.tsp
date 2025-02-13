@@ -41,7 +41,7 @@ union EnclaveEndpointProtocol {
 }
 
 #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-@removed(Microsoft.Mission.Versions.v2023_11_01_preview)
+@removed(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Enclave Endpoint Rule Properties")
 model EnclaveEndpointRule {
   @doc("Endpoint Rule Name.")
@@ -66,18 +66,18 @@ model EnclaveEndpointDestinationRule is EndpointRuleBase {
 @doc("Enclave Endpoint Resource properties")
 model EnclaveEndpointProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
-  @added(Microsoft.Mission.Versions.v2023_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @extension("x-ms-identifiers", [])
   @doc("Enclave Endpoint Rule Collection.")
   ruleCollection: EnclaveEndpointDestinationRule[];
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2023_11_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @extension("x-ms-identifiers", ["name"])
   @doc("Endpoint Rule Collection.")
   endpointRuleCollection?: EnclaveEndpointRule[];
 
-  @added(Microsoft.Mission.Versions.v2024_01_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of resource ids created by community endpoint.")
   resourceCollection?: string[];
 

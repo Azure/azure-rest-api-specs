@@ -128,7 +128,7 @@ model ExternalConnection is TrackedResource<ExternalConnectionProperties> {
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("TransitHub Model Resource")
 @parentResource(CommunityResource)
 model TransitHubResource is TrackedResource<TransitHubProperties> {
@@ -140,7 +140,7 @@ model TransitHubResource is TrackedResource<TransitHubProperties> {
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("EnclaveConnection Model Resource")
 model EnclaveConnectionResource
   is TrackedResource<EnclaveConnectionProperties> {
@@ -152,7 +152,7 @@ model EnclaveConnectionResource
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("EnclaveEndpoint Model Resource")
 @parentResource(EnclaveResource)
 model EnclaveEndpointResource is TrackedResource<EnclaveEndpointProperties> {
@@ -164,7 +164,7 @@ model EnclaveEndpointResource is TrackedResource<EnclaveEndpointProperties> {
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("CommunityEndpoint Model Resource")
 @parentResource(CommunityResource)
 model CommunityEndpointResource
@@ -245,7 +245,7 @@ interface VirtualEnclave {
   @doc("Checks that the IP Address Space to be allocated for this Virtual Enclave is available.")
   @armResourceAction(EnclaveResource)
   @post
-  @added(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   checkAddressSpaceAvailability(
     ...ResourceInstanceParameters<EnclaveResource>,
@@ -346,7 +346,7 @@ interface InternalConnections {
   listBySubscription is ArmListBySubscription<InternalConnection>;
 }
 
-@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("TransitHub Interface")
 @armResourceOperations
 interface TransitHub {
@@ -365,7 +365,7 @@ interface TransitHub {
   listBySubscription is ArmListBySubscription<TransitHubResource>;
 }
 
-@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Enclave Connection Interface")
 @armResourceOperations
 interface EnclaveConnection {
@@ -404,7 +404,7 @@ interface EnclaveConnection {
   >;
 }
 
-@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Enclave Endpoint Interface")
 @armResourceOperations
 interface EnclaveEndpoints {
@@ -443,7 +443,7 @@ interface EnclaveEndpoints {
   >;
 }
 
-@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Community Endpoint Interface")
 @armResourceOperations
 interface CommunityEndpoints {

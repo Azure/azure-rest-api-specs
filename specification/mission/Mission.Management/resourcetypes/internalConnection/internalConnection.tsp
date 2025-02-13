@@ -28,15 +28,15 @@ union InternalConnectionType {
 
 @doc("Specifies the state of the internalConnection.")
 union InternalConnectionState {
-  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("InternalConnectionState Type Pending")
   Pending: "Pending",
 
-  @added(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("InternalConnectionState Type Pending Approval")
   PendingApproval: "PendingApproval",
 
-  @added(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("InternalConnectionState Type Pending Update")
   PendingUpdate: "PendingUpdate",
 
@@ -46,7 +46,7 @@ union InternalConnectionState {
   @doc("InternalConnectionState Type Active")
   Active: "Active",
 
-  @added(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("InternalConnectionState Type Failed")
   Failed: "Failed",
 

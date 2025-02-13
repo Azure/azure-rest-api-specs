@@ -64,7 +64,7 @@ union DestinationType {
 }
 
 #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-@removed(Microsoft.Mission.Versions.v2023_11_01_preview)
+@removed(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Base type for destination rules.")
 model DestinationRule {
   @doc("Destination Rule Name.")
@@ -101,18 +101,18 @@ model CommunityEndpointDestinationRule is EndpointRuleBase {
 @doc("Community Endpoint Resource properties")
 model CommunityEndpointProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
-  @added(Microsoft.Mission.Versions.v2023_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @extension("x-ms-identifiers", [])
   @doc("Community Endpoint Rule Collection.")
   ruleCollection: CommunityEndpointDestinationRule[];
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2023_11_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @extension("x-ms-identifiers", ["name"])
   @doc("Destination Rule Collection.")
   destinationRuleCollection: DestinationRule[];
 
-  @added(Microsoft.Mission.Versions.v2024_01_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of resource ids created by community endpoint.")
   resourceCollection?: string[];
 

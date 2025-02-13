@@ -18,17 +18,17 @@ namespace Microsoft.Mission;
 @doc("Workload Resource properties")
 model WorkloadProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Workload Description.")
   description?: string;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Virtual Enclave Resource Id.")
   enclaveResourceId?: VirtualEnclaveResourceId;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2023_11_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Managed Resource Groups.")
   managedResourceGroups?: string[];
 
@@ -37,7 +37,7 @@ model WorkloadProperties {
   provisioningState?: ProvisioningState;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @added(Microsoft.Mission.Versions.v2023_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Managed resource group configuration.")
   managedResourceGroupConfiguration: ManagedResourceGroupConfiguration;
