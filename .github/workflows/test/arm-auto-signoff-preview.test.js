@@ -1,66 +1,31 @@
-import { vol } from "memfs";
-import { join } from "path";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { LabelAction } from "../../src/label.js";
 import { createMockCore, createMockGithub } from "../../test/mocks.js";
 import { getLabelActionImpl } from "../src/arm-auto-signoff-preview.js";
-import * as changedFiles from "../src/changed-files.js";
-import * as git from "../src/git.js";
-
-vi.mock("fs/promises", async () => {
-  const memfs = await import("memfs");
-  return {
-    ...memfs.fs.promises,
-  };
-});
 
 const core = createMockCore();
 
-const swaggerTypeSpecGenerated = JSON.stringify({
-  info: {
-    "x-typespec-generated": [{ emitter: "@azure-tools/typespec-autorest" }],
-  },
-});
-
-describe.skip("getLabelActionImpl", () => {
-  beforeEach(() => {
-    // TODO: Reset other global mocks like "core"
-    vol.reset();
-  });
-
+describe("getLabelActionImpl", () => {
   it("rejects if inputs null", async () => {
     await expect(getLabelActionImpl({})).rejects.toThrow();
   });
 
-  it("removes label if no changed RM files", async () => {
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([]);
-
-    await expect(
-      getLabelActionImpl({
-        owner: "TestOwner",
-        repo: "TestRepo",
-        issue_number: 123,
-        head_sha: "abc123",
-        github: null,
-        core: core,
-      }),
-    ).resolves.toBe(LabelAction.Remove);
-  });
-
-  it("removes label if a changed file is not typespec-generated", async () => {
-    const swaggerPath =
-      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
-
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
-
-    vol.fromJSON({
-      [join(process.env.GITHUB_WORKSPACE || "", swaggerPath)]: '"foo"',
+  it("removes label if not incremental typespec", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+      data: {
+        workflow_runs: [
+          {
+            name: "ARM Incremental Typespec (Preview)",
+            id: 456,
+            status: "completed",
+            conclusion: "success",
+          },
+        ],
+      },
+    });
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [{ name: "incremental-typespec=false" }] },
     });
 
     await expect(
@@ -69,36 +34,7 @@ describe.skip("getLabelActionImpl", () => {
         repo: "TestRepo",
         issue_number: 123,
         head_sha: "abc123",
-        github: null,
-        core: core,
-      }),
-    ).resolves.toBe(LabelAction.Remove);
-  });
-
-  it("removes label if changed files add a new RP", async () => {
-    const swaggerPath =
-      "/specification/contosowidgetmanager2/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
-
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
-
-    vol.fromJSON({
-      [join(process.env.GITHUB_WORKSPACE || "", swaggerPath)]:
-        swaggerTypeSpecGenerated,
-    });
-
-    // "git ls-tree" returns "" if the spec folder doesn't exist in the base branch
-    vi.spyOn(git, "lsTree").mockResolvedValue("");
-
-    await expect(
-      getLabelActionImpl({
-        owner: "TestOwner",
-        repo: "TestRepo",
-        issue_number: 123,
-        head_sha: "abc123",
-        github: null,
+        github: github,
         core: core,
       }),
     ).resolves.toBe(LabelAction.Remove);
