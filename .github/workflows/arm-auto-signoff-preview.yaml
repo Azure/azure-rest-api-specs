@@ -48,6 +48,7 @@ jobs:
     #   a signal that "Swagger LintDiff" status may have changed
     if: |
       github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'workflow_run' ||
       (github.event_name == 'pull_request' &&
        (github.event.action == 'labeled' ||
         github.event.action == 'unlabeled') &&
