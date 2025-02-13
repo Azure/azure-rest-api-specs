@@ -31,15 +31,13 @@ on:
         type: number
 
 permissions:
+  actions: read
   contents: read
+  pull-requests: write
 
 jobs:
   update-labels:
     name: Update Labels
-
-    permissions:
-      contents: read
-      pull-requests: write
 
     runs-on: ubuntu-24.04
 
