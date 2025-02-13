@@ -36,31 +36,11 @@ interface FirewallRules {
   /**
    * Creates or updates a firewall rule.
    */
-  @removed(Versions.v2025_02_01_preview)
-  @sharedRoute
-  @renamedFrom(Versions.v2025_02_01_preview, "createOrUpdate")
-  createOrUpdateOld is ArmResourceCreateOrReplaceSync<FirewallRule>;
-
-  /**
-   * Creates or updates a firewall rule.
-   */
-  @added(Versions.v2025_02_01_preview)
-  @sharedRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FirewallRule>;
 
   /**
    * Deletes a firewall rule.
    */
-  @removed(Versions.v2025_02_01_preview)
-  @sharedRoute
-  @renamedFrom(Versions.v2025_02_01_preview, "delete")
-  deleteOld is ArmResourceDeleteSync<FirewallRule>;
-
-  /**
-   * Deletes a firewall rule.
-   */
-  @added(Versions.v2025_02_01_preview)
-  @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<FirewallRule>;
 
   /**
