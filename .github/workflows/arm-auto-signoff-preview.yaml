@@ -63,7 +63,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           # Only needs .github folder for automation, not the files in the PR (analyzed in a separate workflow)
-          # Also, if the trigger is "issue_comment" or "workflow_run", it's risky to clone the PR branch due to elevated permissions
           sparse-checkout: |
             .github
 
