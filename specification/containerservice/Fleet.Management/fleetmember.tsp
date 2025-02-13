@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "./helpers.tsp";
+import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -34,16 +35,6 @@ scalar ClusterResourceId
     }
   ]>;
 
-@added(Versions.v2025_03_01)
-@doc("Represents label object for a fleet member.")
-model FleetMemberLabel {
-  @doc("Key for a fleet member label.")
-  key: string;
-
-  @doc("Value for a fleet member label.")
-  value: string;
-}
-
 @doc("A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.")
 model FleetMemberProperties {
   // adding a response header in the model currently impacts the model used in the List result model.
@@ -68,7 +59,7 @@ model FleetMemberProperties {
   @added(Versions.v2025_03_01)
   @doc("The labels to be persisted on the fleet member.")
   @extension("x-ms-identifiers", ["key", "value"])
-  labels?: FleetMemberLabel[];
+  labels?: Label[];
 }
 
 @lroStatus
