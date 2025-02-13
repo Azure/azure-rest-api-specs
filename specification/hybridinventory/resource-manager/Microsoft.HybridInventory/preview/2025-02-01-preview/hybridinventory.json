@@ -1418,7 +1418,8 @@
           "description": "discovery Machine Id"
         },
         "portNumber": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "PGSQL Server port number"
         },
         "pgsqlVersion": {
@@ -1431,7 +1432,7 @@
           "description": "The number of database."
         },
         "supportStatus": {
-          "type": "boolean",
+          "$ref": "#/definitions/SupportStatus",
           "description": "pgsql version support status."
         },
         "edition": {
@@ -1467,13 +1468,6 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
-        },
-        "labels": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource labels."
         },
         "collations": {
           "description": "The list of collations in the database.",
@@ -1866,6 +1860,32 @@
           },
           "description": "Resource labels."
         }
+      }
+    },
+    "SupportStatus": {
+      "type": "string",
+      "description": "Represents the Support status of the PostgreSQL instance.",
+      "enum": ["OutOfSupport", "Extended", "Mainstream"],
+      "x-ms-enum": {
+        "name": "SupportStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OutOfSupport",
+            "value": "OutOfSupport",
+            "description": "OutOfSupport support status."
+          },
+          {
+            "name": "Extended",
+            "value": "Extended",
+            "description": "Extended support status."
+          },
+          {
+            "name": "Mainstream",
+            "value": "Mainstream",
+            "description": "Mainstream support status."
+          }
+        ]
       }
     },
     "Edition": {
