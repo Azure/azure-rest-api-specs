@@ -25,10 +25,6 @@ model LabServerV1Properties {
   resourceManager?: ResourceManager;
 
   @visibility("read")
-  @doc("The status of the LabServer")
-  status?: string;
-
-  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
@@ -43,14 +39,6 @@ model LabServerV1Properties {
   @visibility("read")
   @doc("LabServer Inventory Information")
   inventory?: System;
-
-  @visibility("create", "update", "read")
-  @doc("LabServer banner. Temporary field during development.")
-  banner?: string;
-
-  @visibility("create", "update", "read")
-  @doc("LabServer nickname. Temporary field during development.")
-  nickname?: string;
 
   @visibility("read")
   @doc("Physical location of the LabServer.")

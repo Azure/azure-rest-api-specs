@@ -4,7 +4,7 @@ model MemoryModule {
   name?: string;
 
   @doc("Location of the memory module")
-  location?: string;
+  moduleLocation?: string;
 
   @doc("Manufacturer of the memory module")
   manufacturer?: string;

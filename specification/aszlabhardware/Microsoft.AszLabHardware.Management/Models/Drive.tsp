@@ -1,7 +1,7 @@
 @doc("Information regarding individual Disk Drives")
 model Drive {
   @doc("The Id of the disk drive")
-  id?: string;
+  diskId?: string;
 
   @doc("Description of the disk drive")
   description?: string;

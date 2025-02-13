@@ -21,7 +21,7 @@ model ServerHardwareDrive {
   `model`?: string;
 
   @doc("The type of the drive")
-  type?: DriveType;
+  driveType?: DriveType;
 
   @doc("The total capacity of the drive")
   capacityGb?: int32;

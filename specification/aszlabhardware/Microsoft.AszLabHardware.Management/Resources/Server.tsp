@@ -34,7 +34,7 @@ model ServerProperties {
 
   @visibility("read", "update", "create")
   @doc("Keyvault Uri for the password of the account credential to authenticate to the server.")
-  userPasswordKeyVaultUri?: string;
+  userPasswordKeyVaultUri?: url;
 
   @visibility("read")
   @doc("Server association with LabServer status.")

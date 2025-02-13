@@ -1,7 +1,7 @@
 @doc("Information regarding the processor of the server")
 model Processor {
   @doc("The processor name")
-  name?: string;
+  processorName?: string;
 
   @doc("The processor manufacturer")
   manufacturer?: string;

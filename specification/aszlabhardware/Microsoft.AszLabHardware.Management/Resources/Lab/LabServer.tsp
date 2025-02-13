@@ -31,8 +31,8 @@ model LabServerProperties {
   provisioningState?: ProvisioningState;
 
   @visibility("read")
-  @doc("The pool this server is assigned to")
-  pool?: PoolResourceId;
+  @doc("The Pool Azure Resource this server is assigned to")
+  poolResourceId?: PoolResourceId;
 
   @visibility("create", "read")
   @doc("Server management information bag")
@@ -74,8 +74,8 @@ union MaintenanceStatus {
 
 @doc("The request body model of an assign POST call")
 model AssignRequestBody {
-  @doc("The pool to assign this Labserver to")
-  pool: PoolResourceId;
+  @doc("The pool Azure Resource Id to assign this Labserver to")
+  poolResourceId: PoolResourceId;
 }
 
 @doc("The commands relating to power state")
