@@ -149,7 +149,7 @@ model SecurityPolicyProperties {
 
   /** Ip Access Policy of the Traffic Controller Security Policy */
   @added(Versions.v2025_03_01_preview)
-  ipAccessPolicy?: IpAccessPolicy;
+  ipAccessRulesPolicy?: IpAccessRulesPolicy;
 
   /** Provisioning State of Traffic Controller SecurityPolicy Resource */
   @visibility("read")
@@ -176,9 +176,10 @@ model WafPolicy {
 
 /** Ip Access Policy */
 @added(Versions.v2025_03_01_preview)
-model IpAccessPolicy {
+model IpAccessRulesPolicy {
   /** Ip Access Policy Rules List */
   @OpenAPI.extension("x-ms-identifiers", [])
+  @maxItems(100)
   rules?: IpAccessRule[];
 }
 /** Ip Access Policy Rules */
@@ -187,10 +188,12 @@ model IpAccessRule {
   /** Name of the Ip Access Rule */
   name: string;
 
-  /** Priority of the Ip Access Rule */
-  priority: int64;
+  /** The priority of the rule. The value can be between 1 and 400. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule. */
+  @minValue(1)
+  @maxValue(400)
+  priority: int32;
 
-  /** Source Address Prefixed Applied by the Rule */
+  /** Source Address Prefixed Applied by the Rule. Asterisk '*' can also be used to match all source IPs. */
   sourceAddressPrefixes: string[];
 
   /** Action of the Rule */

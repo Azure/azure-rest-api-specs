@@ -1547,20 +1547,6 @@
         }
       }
     },
-    "IpAccessPolicy": {
-      "type": "object",
-      "description": "Ip Access Policy",
-      "properties": {
-        "rules": {
-          "type": "array",
-          "description": "Ip Access Policy Rules List",
-          "items": {
-            "$ref": "#/definitions/IpAccessRule"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "IpAccessRule": {
       "type": "object",
       "description": "Ip Access Policy Rules",
@@ -1571,12 +1557,14 @@
         },
         "priority": {
           "type": "integer",
-          "format": "int64",
-          "description": "Priority of the Ip Access Rule"
+          "format": "int32",
+          "description": "The priority of the rule. The value can be between 1 and 400. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.",
+          "minimum": 1,
+          "maximum": 400
         },
         "sourceAddressPrefixes": {
           "type": "array",
-          "description": "Source Address Prefixed Applied by the Rule",
+          "description": "Source Address Prefixed Applied by the Rule. Asterisk '*' can also be used to match all source IPs.",
           "items": {
             "type": "string"
           }
@@ -1615,6 +1603,21 @@
             "description": "Deny Source Ip Prefixes"
           }
         ]
+      }
+    },
+    "IpAccessRulesPolicy": {
+      "type": "object",
+      "description": "Ip Access Policy",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "description": "Ip Access Policy Rules List",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/IpAccessRule"
+          },
+          "x-ms-identifiers": []
+        }
       }
     },
     "PolicyType": {
@@ -1779,8 +1782,8 @@
           "$ref": "#/definitions/WafPolicy",
           "description": "Web Application Firewall Policy of the Traffic Controller Security Policy"
         },
-        "ipAccessPolicy": {
-          "$ref": "#/definitions/IpAccessPolicy",
+        "ipAccessRulesPolicy": {
+          "$ref": "#/definitions/IpAccessRulesPolicy",
           "description": "Ip Access Policy of the Traffic Controller Security Policy"
         },
         "provisioningState": {
@@ -1816,8 +1819,8 @@
           "$ref": "#/definitions/WafPolicyUpdate",
           "description": "Web Application Firewall Policy of the Traffic Controller Security Policy"
         },
-        "ipAccessPolicy": {
-          "$ref": "#/definitions/IpAccessPolicy",
+        "ipAccessRulesPolicy": {
+          "$ref": "#/definitions/IpAccessRulesPolicy",
           "description": "Ip Access Policy of the Traffic Controller Security Policy"
         }
       }
