@@ -9,10 +9,9 @@ on:
       # Depends on labels, so must re-evaluate whenever a relevant label is manually added or removed.
       - labeled
       - unlabeled
-      # Depends on changed files and check_run status, so must re-evaluate whenever either could change
-      - opened
-      - reopened
-      - synchronize
+  workflow_run:
+    workflows: ["ARM Incremental Typespec (Preview)"]
+    types: [completed]
   # For manual testing
   workflow_dispatch:
     inputs:
@@ -34,6 +33,7 @@ on:
         type: string
 
 permissions:
+  actions: read
   checks: read
   contents: read
   issues: read
@@ -48,17 +48,15 @@ jobs:
     #   a signal that "Swagger LintDiff" status may have changed
     if: |
       github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'workflow_run' ||
       (github.event_name == 'pull_request' &&
-       ((github.event.action == 'opened' ||
-         github.event.action == 'reopened' ||
-         github.event.action == 'synchronize') ||
-        ((github.event.action == 'labeled' ||
-          github.event.action == 'unlabeled') &&
-         (github.event.label.name == 'ARMReview' ||
-          github.event.label.name == 'NotReadyForARMReview' ||
-          github.event.label.name == 'SuppressionReviewRequired' ||
-          github.event.label.name == 'Suppression-Approved' ||
-          github.event.label.name == 'ARMAutoSignOffPreview')))) ||
+       (github.event.action == 'labeled' ||
+        github.event.action == 'unlabeled') &&
+       (github.event.label.name == 'ARMReview' ||
+        github.event.label.name == 'NotReadyForARMReview' ||
+        github.event.label.name == 'SuppressionReviewRequired' ||
+        github.event.label.name == 'Approved-Suppression' ||
+        github.event.label.name == 'ARMAutoSignOffPreview')) ||
       (github.event_name == 'issue_comment' &&
        github.event.issue.pull_request &&
        contains(github.event.comment.body, 'next steps to merge'))
@@ -68,8 +66,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # Required to determine files changed in PR
-          fetch-depth: 2
+          # Only needs .github folder for automation, not the files in the PR (analyzed in a separate workflow)
+          sparse-checkout: |
+            .github
 
       # Output is "none" for no-op, "add" to add label, and "remove" to remove label
       - id: get-label-action
