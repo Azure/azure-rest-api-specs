@@ -26,7 +26,7 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(LiftrBase.Versions.v1_preview)
+  @useDependency(LiftrBase.Versions.v2_preview)
   v2024_10_22_preview: "2024-10-22-preview",
 }
 
