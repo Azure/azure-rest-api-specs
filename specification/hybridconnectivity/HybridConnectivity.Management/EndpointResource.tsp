@@ -23,6 +23,39 @@ model EndpointResource
   >;
 }
 
+/**
+ * @dev A long-running resource action.
+ * @template Resource The resource being acted upon
+ * @template Request The request model for the action
+ * @template Response The response model for the action
+ * @template BaseParameters Optional. Allows overriding the parameters for the operation
+ * @template Parameters Optional. Additional parameters after the path parameters
+ * @template Error Optional. The error response, if non-standard.
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
+@returnsDoc("Azure operation completed successfully.")
+@autoRoute
+@armResourceAction(Resource)
+@post
+op ArmResourceActionSync<
+  Resource extends Azure.ResourceManager.Foundations.Resource,
+  Request extends TypeSpec.Reflection.Model | void,
+  Response extends TypeSpec.Reflection.Model | void,
+  BaseParameters extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
+  Parameters extends {} = {},
+  Error extends {} = ErrorResponse,
+  RequestBody extends {} = {
+    @doc("The content of the action request")
+    @bodyRoot
+    body: Request;
+  }
+>(
+  ...ResourceInstanceParameters<Resource, BaseParameters>,
+  ...Parameters,
+  ...RequestBody,
+): Response | Error;
+
 @armResourceOperations
 interface EndpointResources {
   /**
@@ -89,12 +122,7 @@ interface EndpointResources {
   @operationId("Endpoints_ListCredentials")
   listCredentials is ArmResourceActionSync<
     EndpointResource,
-    {
-      /**
-       * Object of type ListCredentialsRequest
-       */
-      @body ListCredentialsRequest?: ListCredentialsRequest;
-    },
+    ListCredentialsRequest,
     EndpointAccessResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
@@ -105,6 +133,12 @@ interface EndpointResources {
       @minValue(600)
       @query("expiresin")
       expiresin?: int64 = 10800;
+    },
+    RequestBody = {
+      /**
+       * Object of type ListCredentialsRequest
+       */
+      @body ListCredentialsRequest?: ListCredentialsRequest;
     }
   >;
 
@@ -116,13 +150,7 @@ interface EndpointResources {
   @operationId("Endpoints_ListIngressGatewayCredentials")
   listIngressGatewayCredentials is ArmResourceActionSync<
     EndpointResource,
-    {
-      /**
-       * Object of type ListIngressGatewayCredentialsRequest
-       */
-      @body
-      ListIngressGatewayCredentialsRequest?: ListIngressGatewayCredentialsRequest;
-    },
+    ListIngressGatewayCredentialsRequest,
     IngressGatewayResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
@@ -133,6 +161,13 @@ interface EndpointResources {
       @minValue(600)
       @query("expiresin")
       expiresin?: int64 = 10800;
+    },
+    RequestBody = {
+      /**
+       * Object of type ListIngressGatewayCredentialsRequest
+       */
+      @body
+      ListIngressGatewayCredentialsRequest?: ListIngressGatewayCredentialsRequest;
     }
   >;
 
@@ -141,7 +176,7 @@ interface EndpointResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Endpoints_ListManagedProxyDetails")
-  listManagedProxyDetails is ArmResourceActionSync<
+  listManagedProxyDetails is Azure.ResourceManager.ArmResourceActionSync<
     EndpointResource,
     ManagedProxyRequest,
     ManagedProxyResource,
