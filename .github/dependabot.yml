@@ -1,28 +1,50 @@
 version: 2
 updates:
-- package-ecosystem: "npm"
-  directories:
-  - "/"
-  - "/eng/tools/**"
-  schedule:
-    interval: "daily"
-  ignore:
-  # Updated manually to align with minimum supported Node version
-  - dependency-name: "@types/node"
-  # Updated manually to align with repo microsoft/typespec
-  - dependency-name: "typescript"
-  - dependency-name: "prettier"
-  # Updated manually by the Liftr team
-  - dependency-name: "@azure-tools/typespec-liftr-base"
-  # minimatch@9 is the last version to support Node 18
-  - dependency-name: "minimatch"
-    versions: [ ">= 10.0.0"]
-  groups:
-    typespec:
-      patterns:
-      - "*typespec*"
-    eslint:
-      patterns:
-      - "*eslint*"
-  # Leave the constraint if the original constraint allows the new version, otherwise, bump the constraint.
-  versioning-strategy: increase-if-necessary
+  - package-ecosystem: "npm"
+    directories:
+      - "/"
+      - "/eng/tools/**"
+    schedule:
+      interval: "daily"
+    ignore:
+      # Updated manually to align with minimum supported Node version
+      - dependency-name: "@types/node"
+      # Updated manually to align with repo microsoft/typespec
+      - dependency-name: "typescript"
+      - dependency-name: "prettier"
+      # Updated manually by the Liftr team
+      - dependency-name: "@azure-tools/typespec-liftr-base"
+      # minimatch@9 is the last version to support Node 18
+      - dependency-name: "minimatch"
+        versions: [">= 10.0.0"]
+    groups:
+      # Ships separately from other typespec packages
+      typespec-client-generator-cli:
+        patterns:
+          - "@azure-tools/typespec-client-generator-cli"
+      # Ships separately from other typespec packages
+      openapi-to-typespec:
+        patterns:
+          - "@autorest/openapi-to-typespec"
+      typespec:
+        patterns:
+          - "*typespec*"
+      eslint:
+        patterns:
+          - "*eslint*"
+    # Leave the constraint if the original constraint allows the new version, otherwise, bump the constraint.
+    versioning-strategy: increase-if-necessary
+  - package-ecosystem: "npm"
+    directories:
+      - "/.github/"
+    schedule:
+      interval: "daily"
+    ignore:
+      # Updated manually to align with minimum supported Node version
+      - dependency-name: "@types/node"
+      # Updated manually to align with repo microsoft/typespec
+      - dependency-name: "prettier"
+      # Points to "github:actions/github-script" since package isn't published to npmjs
+      - dependency-name: "@types/github-script"
+    # Leave the constraint if the original constraint allows the new version, otherwise, bump the constraint.
+    versioning-strategy: increase-if-necessary
