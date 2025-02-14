@@ -144,50 +144,6 @@
                 "targetName": "markdown_document"
               }
             ]
-          },
-          {
-            "@odata.type": "#Microsoft.Skills.Custom.ChatCompletionSkill",
-            "name": "chatCompletionSkill",
-            "context": "/document/normalized_images/*",
-            "uri": "https://azs-grok-aoai.openai.azure.com/openai/deployments/azs-grok-gpt-4o/chat/completions",
-            "httpMethod": "POST",
-            "timeout": "PT30S",
-            "batchSize": 1000,
-            "degreeOfParallelism": 5,
-            "inputs": [
-              {
-                "name": "text",
-                "source": "/document/content",
-                "inputs": []
-              },
-              {
-                "name": "systemMessage",
-                "source": "/document/system_message",
-                "inputs": []
-              },
-              {
-                "name": "userMessage",
-                "source": "/document/user_message",
-                "inputs": []
-              },
-              {
-                "name": "image",
-                "source": "/document/normalized_images/*",
-                "inputs": []
-              },
-              {
-                "name": "imageDetail",
-                "source": "/document/detail",
-                "inputs": []
-              }
-            ],
-            "outputs": [
-              {
-                "name": "responseJsonSchema",
-                "targetName": "responseJsonSchema"
-              }
-            ],
-            "httpHeaders": {}
           }
         ],
         "encryptionKey": {
