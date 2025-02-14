@@ -1196,7 +1196,15 @@
         },
         "mode": {
           "type": "string",
-          "description": "Specifies the mode that ProxyAgent will execute on. Warning: this property has been deprecated, please specify 'mode' under each hostendpoint setting."
+          "description": "Specifies the mode that ProxyAgent will execute on. Warning: this property has been deprecated, please specify 'mode' under particular hostendpoint setting.",
+          "enum": [
+            "Audit",
+            "Enforce"
+          ],
+          "x-ms-enum": {
+            "name": "Mode",
+            "modelAsString": true
+          }
         },
         "keyIncarnationId": {
           "type": "integer",
