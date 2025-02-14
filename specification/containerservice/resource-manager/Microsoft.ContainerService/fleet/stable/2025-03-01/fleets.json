@@ -799,6 +799,89 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/autoUpgradeProfiles/{autoUpgradeProfileName}/generate": {
+      "post": {
+        "operationId": "AutoUpgradeProfile_Generate",
+        "tags": [
+          "AutoUpgradeProfile"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "StartUpdateRun",
+            "in": "header",
+            "description": "Whether to start the update run after it is created in the generate operation. Empty value indicates that update run will not be started.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "startUpdateRun"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "autoUpgradeProfileName",
+            "in": "path",
+            "description": "The name of the AutoUpgradeProfile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenerateResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "If-Match": {
+                "type": "string",
+                "description": "The request should only proceed if an entity matches this string."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/listCredentials": {
       "post": {
         "operationId": "Fleets_ListCredentials",
@@ -2921,6 +3004,32 @@
           }
         ]
       }
+    },
+    "GenerateResponse": {
+      "type": "object",
+      "description": "GenerateResponse is the response of a generate request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the generated update run."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "GenerateUpdateRunRequest": {
+      "type": "object",
+      "description": "GenerateUpdateRunsRequest is the HTTP body of a generate updateruns request.",
+      "properties": {
+        "updateSpecification": {
+          "$ref": "#/definitions/ManagedClusterUpdate",
+          "description": "The update spec that will be applied to managed clusters when generating update runs."
+        }
+      },
+      "required": [
+        "updateSpecification"
+      ]
     },
     "KubernetesVersion": {
       "type": "string"
