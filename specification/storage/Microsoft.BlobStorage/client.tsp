@@ -25,9 +25,41 @@ model BlobServiceClientParameters {
   ...BlobPathParameter;
 }
 
+@@clientNamespace(Storage.Blob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.AppendBlob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs");
+
 @@clientName(Storage.Blob, "ServiceClient");
-@@clientInitialization(Storage.Blob.Blob, {parameters: BlobServiceClientParameters, initializedBy: InitializedBy.parent | InitializedBy.individually});
-@@clientInitialization(Storage.Blob.Container, {parameters: ContainerNamePathParameter, initializedBy: InitializedBy.parent | InitializedBy.individually});
-@@clientInitialization(Storage.Blob.AppendBlob, {parameters: BlobServiceClientParameters, initializedBy: InitializedBy.parent | InitializedBy.individually});
-@@clientInitialization(Storage.Blob.BlockBlob, {parameters: BlobServiceClientParameters, initializedBy: InitializedBy.parent | InitializedBy.individually});
-@@clientInitialization(Storage.Blob.PageBlob, {parameters: BlobServiceClientParameters, initializedBy: InitializedBy.parent | InitializedBy.individually});
+@@clientInitialization(Storage.Blob.Blob,
+  {
+    parameters: BlobServiceClientParameters,
+    initializedBy: InitializedBy.parent | InitializedBy.individually,
+  }
+);
+@@clientInitialization(Storage.Blob.Container,
+  {
+    parameters: ContainerNamePathParameter,
+    initializedBy: InitializedBy.parent | InitializedBy.individually,
+  }
+);
+@@clientInitialization(Storage.Blob.AppendBlob,
+  {
+    parameters: BlobServiceClientParameters,
+    initializedBy: InitializedBy.parent | InitializedBy.individually,
+  }
+);
+@@clientInitialization(Storage.Blob.BlockBlob,
+  {
+    parameters: BlobServiceClientParameters,
+    initializedBy: InitializedBy.parent | InitializedBy.individually,
+  }
+);
+@@clientInitialization(Storage.Blob.PageBlob,
+  {
+    parameters: BlobServiceClientParameters,
+    initializedBy: InitializedBy.parent | InitializedBy.individually,
+  }
+);
