@@ -1840,7 +1840,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:captureSnapshot": {
       "post": {
         "operationId": "DevBoxes_CaptureSnapshot",
-        "description": "Captures a manual snapshot of the Dev Box.",
+        "description": "Captures a manual snapshot of the Dev Box. \nUpon completion, a snapshotId will be generated. \nTo retrieve all snapshots and their corresponding IDs, use the list snapshots endpoint.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4280,7 +4280,9 @@
           "maximum": 100
         },
         "properties": {
-          "description": "Custom operation properties, populated only for a successful operation."
+          "type": "object",
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "additionalProperties": {}
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -5890,7 +5892,9 @@
           "maximum": 100
         },
         "properties": {
-          "description": "Custom operation properties, populated only for a successful operation."
+          "type": "object",
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "additionalProperties": {}
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
