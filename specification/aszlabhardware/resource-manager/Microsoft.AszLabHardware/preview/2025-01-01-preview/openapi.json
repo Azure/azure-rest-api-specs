@@ -3217,6 +3217,30 @@
         }
       }
     },
+    "IntegratedGraphics": {
+      "type": "string",
+      "description": "Integrated Graphics capability of the processor",
+      "enum": [
+        "IntegratedGraphics",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "IntegratedGraphics",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IntegratedGraphics",
+            "value": "IntegratedGraphics",
+            "description": "Processor has integrated graphics"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Processor does not have integrated graphics"
+          }
+        ]
+      }
+    },
     "InventoryLocalAccount": {
       "type": "object",
       "description": "Inventory local account",
@@ -4974,8 +4998,8 @@
           "description": "The number of threads"
         },
         "integratedGraphics": {
-          "type": "boolean",
-          "description": "Whether processor has dedicated IGPU"
+          "$ref": "#/definitions/IntegratedGraphics",
+          "description": "Processor's dedicated IGPU capabilities"
         }
       }
     },
