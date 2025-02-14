@@ -2336,72 +2336,6 @@
         }
       }
     },
-    "PFAgFunc": {
-      "type": "string",
-      "description": "Aggregation functions for pass/fail criteria.",
-      "enum": [
-        "count",
-        "percentage",
-        "avg",
-        "p50",
-        "p90",
-        "p95",
-        "p99",
-        "min",
-        "max"
-      ],
-      "x-ms-enum": {
-        "name": "PFAgFunc",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "count",
-            "value": "count",
-            "description": "Criteria applies for count value."
-          },
-          {
-            "name": "percentage",
-            "value": "percentage",
-            "description": "Criteria applies for given percentage value."
-          },
-          {
-            "name": "avg",
-            "value": "avg",
-            "description": "Criteria applies for avg value."
-          },
-          {
-            "name": "p50",
-            "value": "p50",
-            "description": "Criteria applies for 50th percentile value."
-          },
-          {
-            "name": "p90",
-            "value": "p90",
-            "description": "Criteria applies for 90th percentile value."
-          },
-          {
-            "name": "p95",
-            "value": "p95",
-            "description": "Criteria applies for 95th percentile value."
-          },
-          {
-            "name": "p99",
-            "value": "p99",
-            "description": "Criteria applies for 99th percentile value."
-          },
-          {
-            "name": "min",
-            "value": "min",
-            "description": "Criteria applies for minimum value."
-          },
-          {
-            "name": "max",
-            "value": "max",
-            "description": "Criteria applies for maximum value."
-          }
-        ]
-      }
-    },
     "PFMetrics": {
       "type": "string",
       "description": "Metrics for pass/fail criteria.",
@@ -2440,66 +2374,6 @@
             "name": "requests_per_sec",
             "value": "requests_per_sec",
             "description": "Pass fail criteria for request per second."
-          }
-        ]
-      }
-    },
-    "PFResult": {
-      "type": "string",
-      "description": "Pass/fail criteria result.",
-      "enum": [
-        "passed",
-        "undetermined",
-        "failed"
-      ],
-      "x-ms-enum": {
-        "name": "PFResult",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "passed",
-            "value": "passed",
-            "description": "Given pass fail criteria metric has passed."
-          },
-          {
-            "name": "undetermined",
-            "value": "undetermined",
-            "description": "Given pass fail criteria metric couldn't determine."
-          },
-          {
-            "name": "failed",
-            "value": "failed",
-            "description": "Given pass fail criteria metric has failed."
-          }
-        ]
-      }
-    },
-    "PFTestResult": {
-      "type": "string",
-      "description": "Test result based on pass/fail criteria.",
-      "enum": [
-        "PASSED",
-        "NOT_APPLICABLE",
-        "FAILED"
-      ],
-      "x-ms-enum": {
-        "name": "PFTestResult",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "PASSED",
-            "value": "PASSED",
-            "description": "Pass/fail criteria has passed."
-          },
-          {
-            "name": "NOT_APPLICABLE",
-            "value": "NOT_APPLICABLE",
-            "description": "Pass/fail criteria is not applicable."
-          },
-          {
-            "name": "FAILED",
-            "value": "FAILED",
-            "description": "Pass/fail criteria has failed."
           }
         ]
       }
@@ -2570,6 +2444,72 @@
         "value"
       ]
     },
+    "PassFailAggregationFunction": {
+      "type": "string",
+      "description": "Aggregation functions for pass/fail criteria.",
+      "enum": [
+        "count",
+        "percentage",
+        "avg",
+        "p50",
+        "p90",
+        "p95",
+        "p99",
+        "min",
+        "max"
+      ],
+      "x-ms-enum": {
+        "name": "PassFailAggregationFunction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "count",
+            "value": "count",
+            "description": "Criteria applies for count value."
+          },
+          {
+            "name": "percentage",
+            "value": "percentage",
+            "description": "Criteria applies for given percentage value."
+          },
+          {
+            "name": "avg",
+            "value": "avg",
+            "description": "Criteria applies for avg value."
+          },
+          {
+            "name": "p50",
+            "value": "p50",
+            "description": "Criteria applies for 50th percentile value."
+          },
+          {
+            "name": "p90",
+            "value": "p90",
+            "description": "Criteria applies for 90th percentile value."
+          },
+          {
+            "name": "p95",
+            "value": "p95",
+            "description": "Criteria applies for 95th percentile value."
+          },
+          {
+            "name": "p99",
+            "value": "p99",
+            "description": "Criteria applies for 99th percentile value."
+          },
+          {
+            "name": "min",
+            "value": "min",
+            "description": "Criteria applies for minimum value."
+          },
+          {
+            "name": "max",
+            "value": "max",
+            "description": "Criteria applies for maximum value."
+          }
+        ]
+      }
+    },
     "PassFailCriteria": {
       "type": "object",
       "description": "Pass fail criteria for a test.",
@@ -2592,7 +2532,7 @@
           "description": "The client metric on which the criteria should be applied."
         },
         "aggregate": {
-          "$ref": "#/definitions/PFAgFunc",
+          "$ref": "#/definitions/PassFailAggregationFunction",
           "description": "The aggregation function to be applied on the client metric. Allowed functions\n- ‘percentage’ - for error metric , ‘avg’, percentiles like ‘p50’, ‘p90’, & so on, ‘min’,\n‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,\n‘count’ - for requests"
         },
         "condition": {
@@ -2617,7 +2557,7 @@
             "stop"
           ],
           "x-ms-enum": {
-            "name": "PFAction",
+            "name": "PassFailAction",
             "modelAsString": true,
             "values": [
               {
@@ -2640,10 +2580,70 @@
           "readOnly": true
         },
         "result": {
-          "$ref": "#/definitions/PFResult",
+          "$ref": "#/definitions/PassFailResult",
           "description": "Outcome of the test run.",
           "readOnly": true
         }
+      }
+    },
+    "PassFailResult": {
+      "type": "string",
+      "description": "Pass/fail criteria result.",
+      "enum": [
+        "passed",
+        "undetermined",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "PassFailResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "passed",
+            "value": "passed",
+            "description": "Given pass fail criteria metric has passed."
+          },
+          {
+            "name": "undetermined",
+            "value": "undetermined",
+            "description": "Given pass fail criteria metric couldn't determine."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "Given pass fail criteria metric has failed."
+          }
+        ]
+      }
+    },
+    "PassFailTestResult": {
+      "type": "string",
+      "description": "Test result based on pass/fail criteria.",
+      "enum": [
+        "PASSED",
+        "NOT_APPLICABLE",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "PassFailTestResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PASSED",
+            "value": "PASSED",
+            "description": "Pass/fail criteria has passed."
+          },
+          {
+            "name": "NOT_APPLICABLE",
+            "value": "NOT_APPLICABLE",
+            "description": "Pass/fail criteria is not applicable."
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "Pass/fail criteria has failed."
+          }
+        ]
       }
     },
     "RegionalConfiguration": {
@@ -3307,7 +3307,7 @@
           "readOnly": true
         },
         "testResult": {
-          "$ref": "#/definitions/PFTestResult",
+          "$ref": "#/definitions/PassFailTestResult",
           "description": "Test result for pass/Fail criteria used during the test run.",
           "readOnly": true
         },

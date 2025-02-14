@@ -23,7 +23,7 @@ union PFMetrics {
 }
 
 @doc("Aggregation functions for pass/fail criteria.")
-union PFAgFunc {
+union PassFailAggregationFunction {
   string,
   @doc("Criteria applies for count value.") "count",
   @doc("Criteria applies for given percentage value.") "percentage",
@@ -64,7 +64,7 @@ union PFAgFunc {
 }
 
 @doc("Action to take on failure of pass/fail criteria.")
-union PFAction {
+union PassFailAction {
   string,
 
   @doc("Test will continue to run even if pass fail metric criteria metric gets failed.")
@@ -75,7 +75,7 @@ union PFAction {
 }
 
 @doc("Pass/fail criteria result.")
-union PFResult {
+union PassFailResult {
   string,
   @doc("Given pass fail criteria metric has passed.") "passed",
   @doc("Given pass fail criteria metric couldn't determine.") "undetermined",
@@ -143,7 +143,7 @@ union FileStatus {
 }
 
 @doc("Test result based on pass/fail criteria.")
-union PFTestResult {
+union PassFailTestResult {
   string,
   @doc("Pass/fail criteria has passed.") "PASSED",
   @doc("Pass/fail criteria is not applicable.") "NOT_APPLICABLE",
@@ -381,7 +381,7 @@ model PassFailMetric {
     ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
     ‘count’ - for requests
     """)
-  aggregate?: PFAgFunc;
+  aggregate?: PassFailAggregationFunction;
 
   @doc("The comparison operator. Supported types ‘>’, ‘<’ ")
   condition?: string;
@@ -396,7 +396,7 @@ model PassFailMetric {
   value?: float64;
 
   @doc("Action taken after the threshold is met. Default is ‘continue’.")
-  action?: PFAction = PFAction.continue;
+  action?: PassFailAction = PassFailAction.continue;
 
   @doc("The actual value of the client metric for the test run.")
   @visibility("read")
@@ -404,7 +404,7 @@ model PassFailMetric {
 
   @doc("Outcome of the test run.")
   @visibility("read")
-  result?: PFResult;
+  result?: PassFailResult;
 }
 
 @doc("Pass fail server metric")
@@ -428,7 +428,7 @@ model PassFailServerMetric {
   value: float64;
 
   @doc("Action taken after the threshold is met. Default is ‘continue’.")
-  action?: PFAction = PFAction.continue;
+  action?: PassFailAction = PassFailAction.continue;
 
   @doc("The actual value of the server metric ")
   @visibility("read")
@@ -436,7 +436,7 @@ model PassFailServerMetric {
 
   @doc("Outcome of the test run.")
   @visibility("read")
-  result?: PFResult;
+  result?: PassFailResult;
 }
 
 @doc("Secret")
@@ -745,7 +745,7 @@ model TestRun {
 
   @doc("Test result for pass/Fail criteria used during the test run.")
   @visibility("read")
-  testResult?: PFTestResult;
+  testResult?: PassFailTestResult;
 
   @doc("Number of virtual users, for which test has been run.")
   @visibility("read")
