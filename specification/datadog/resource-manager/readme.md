@@ -31,6 +31,15 @@ openapi-subtype: rpaas
 tag: package-2024-03
 ```
 
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01'
+input-file:
+  - Microsoft.Datadog/stable/2025-01-07/swagger.json
+  ```
+
 ### Tag: package-2024-03
 
 These settings apply only when `--tag=package-2024-03` is specified on the command line.
