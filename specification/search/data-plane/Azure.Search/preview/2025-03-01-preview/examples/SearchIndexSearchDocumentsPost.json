@@ -9,7 +9,8 @@
     "searchRequest": {
       "count": true,
       "facets": [
-        "ownerId"
+        "ownerId",
+        "price,metric:sum,default:10"
       ],
       "filter": "category eq 'purple' or category eq 'pink'",
       "highlight": "category",
@@ -89,6 +90,11 @@
             {
               "count": 3,
               "value": "benny"
+            }
+          ],
+          "price": [
+            {
+              "sum": 320.0
             }
           ]
         },

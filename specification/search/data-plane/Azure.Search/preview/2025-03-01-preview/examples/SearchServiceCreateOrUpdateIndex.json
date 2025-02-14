@@ -106,6 +106,14 @@
           "sortable": true,
           "facetable": true,
           "analyzer": "en.lucene"
+        },
+        {
+          "name": "price",
+          "type": "Edm.Double",
+          "retrievable": true,
+          "filterable": true,
+          "sortable": true,
+          "facetable": true
         }
       ],
       "scoringProfiles": [
@@ -221,7 +229,8 @@
                   "fieldName": "ownerId"
                 }
               ]
-            }
+            },
+            "flightingOptIn": true
           }
         ]
       },
@@ -506,6 +515,18 @@
             "facetable": true,
             "key": false,
             "analyzer": "en.lucene",
+            "synonymMaps": []
+          },
+          {
+            "name": "price",
+            "type": "Edm.Double",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
             "synonymMaps": []
           }
         ],
@@ -916,6 +937,18 @@
             "facetable": true,
             "key": false,
             "analyzer": "en.lucene",
+            "synonymMaps": []
+          },
+          {
+            "name": "price",
+            "type": "Edm.Double",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
             "synonymMaps": []
           }
         ],
