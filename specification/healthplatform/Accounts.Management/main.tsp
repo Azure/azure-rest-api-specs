@@ -50,6 +50,9 @@ model Account is TrackedResource<AccountProperties> {
 interface Accounts {
   get is ArmResourceRead<Account>;
   list is ArmResourceListByParent<Account>;
+  create is ArmResourceCreateOrReplaceSync<Account>;
+  update is ArmResourcePatchSync<Account, AccountProperties>;
+  delete is ArmResourceDeleteSync<Account>;
 }
 
 /** The provisioning state of a resource. */
