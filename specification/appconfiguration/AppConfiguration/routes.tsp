@@ -121,6 +121,11 @@ op getKeyValue is Foundations.ResourceOperation<
     ...IfMatchHeader;
     ...IfNoneMatchHeader;
     ...ClientRequestIdHeader;
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
+    ...TagsQueryParam<"""
+      A filter used to query by tags. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """>;
   },
   Body<KeyValue> &
     RequestIdResponseHeader &
@@ -200,6 +205,11 @@ op checkKeyValue is AppConfigOperation<
     ...IfMatchHeader;
     ...IfNoneMatchHeader;
     ...SelectQueryParam<KeyValueFields>;
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
+    ...TagsQueryParam<"""
+      A filter used to query by tags. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """>;
   },
   OkResponse & AppConfigResponseHeaders
 >;
