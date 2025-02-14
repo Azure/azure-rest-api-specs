@@ -464,6 +464,10 @@ model ResourceBase {
 
   @doc("Tag dictionary. Tags can be added, removed, and updated.")
   tags?: Record<string>;
+
+  @doc("System data of the resource")
+  @visibility("read")
+  systemData?: SystemData;
 }
 
 @doc("Publishing destination registry asset information")

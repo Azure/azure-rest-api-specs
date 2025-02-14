@@ -88,45 +88,4 @@ interface Indexes {
     },
     PagedIndex
   >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-  @doc("Get latest version of the Index. Latest is defined by most recent created by date.")
-  @route("/indexes/{name}")
-  @get
-  getLatest is Azure.Core.Foundations.Operation<
-    {
-      @doc("Name of the index.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-      @maxLength(254)
-      @path
-      name: string;
-    },
-    Index
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-  @doc("Get next Index version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.")
-  @route("/indexes/{name}:getNextVersion")
-  @post
-  getNextVersion is Azure.Core.Foundations.Operation<
-    {
-      @doc("Name of the index.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-      @maxLength(254)
-      @path
-      name: string;
-    },
-    VersionInfo
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-  @doc("List the latest version of each index. Latest is defined by most recent created by date.")
-  @route("/indexes")
-  @get
-  listLatest is Azure.Core.Foundations.Operation<
-    {
-      ...StandardListQueryParameters;
-    },
-    PagedIndex
-  >;
 }

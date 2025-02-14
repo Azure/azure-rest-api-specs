@@ -16,74 +16,42 @@ using Azure.Core.Traits;
 namespace Azure.AI.Unified;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@doc("Model Container Definition")
-model ModelContainer extends AssetContainer {
-  @doc("Provisioning state for the model container.")
+@doc("Model Deployment Definition")
+model Model extends ResourceBase {
+  @doc("Name of the specific model that is deployed")
   @visibility("read")
-  provisioningState?: AssetProvisioningState;
+  modelName: string;
+
+  @doc("Name of the model publisher")
+  @visibility("read")
+  modelPublisher: string;
+
+  @doc("Model format")
+  @visibility("read")
+  modelFormat: string;
+
+  @doc("Sku of the model deployment")
+  @visibility("read")
+  sku: Sku;
 }
+
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@doc("Model Version Definition")
-model ModelVersion extends AssetBase {
-  @doc("Mapping of model flavors to their properties.")
-  flavors?: Record<FlavorData>;
+@doc("Sku information")
+model Sku {
+  @doc("Sku capacity")
+  capacity: int64;
 
-  @doc("Name of the training job which produced this model.")
-  jobName?: string;
+  @doc("Sku family")
+  family: string;
 
-  @doc("The storage format for this entity. Used for NCD.")
-  modelType?: string;
+  @doc("Sku name")
+  name: string;
 
-  @doc("The URI path to the model contents.")
-  modelUri?: string;
+  @doc("Sku size")
+  size: string;
 
-  @doc("Provisioning state for the model version.")
-  @visibility("read")
-  provisioningState: AssetProvisioningState;
-
-  @doc("Stage in the model lifecycle assigned to this model.")
-  stage?: string;
+  @doc("Sku tier")
+  tier: string;
 }
 
-@doc("Paged collection of ModelVersion items.")
-@pagedResult
-model PagedModelVersion {
-  @doc("The list of model versions.")
-  @extension("x-ms-identifiers", [])
-  @items
-  value: ModelVersion[];
-
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: ResourceLocation<ModelVersion>;
-}
-
-@doc("Asset Provisioning State Definition")
-union AssetProvisioningState {
-  string,
-
-  @doc("The operation succeeded.")
-  Succeeded: "Succeeded",
-
-  @doc("The operation failed.")
-  Failed: "Failed",
-
-  @doc("The operation was canceled.")
-  Canceled: "Canceled",
-
-  @doc("The operation is creating.")
-  Creating: "Creating",
-
-  @doc("The operation is updating.")
-  Updating: "Updating",
-
-  @doc("The operation is deleting.")
-  Deleting: "Deleting",
-}
-
-@doc("Flavor Data Definition")
-model FlavorData {
-  @doc("Model flavor-specific data.")
-  data?: Record<string>;
-}

@@ -4,7 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "../credentials/models.tsp"
+import "../credentials/models.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -18,18 +18,23 @@ namespace Azure.AI.Unified;
 @doc("Response from the listSecrets operation")
 model Connection {
   @doc("A unique identifier for the connection")
+  @visibility("read")
   id: string;
 
   @doc("The name of the resource")
+  @visibility("read")
   name: string;
 
   @doc("Credential used to connect to the external resource.")
+  @visibility("read")
   credentials: BaseCredential;
 
   @doc("Category of the connection")
+  @visibility("read")
   category: ConnectionType;
 
   @doc("The connection URL to be used for this service")
+  @visibility("read")
   target: string;
 }
 

@@ -13,9 +13,9 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Unified;
 
-interface ModelContainers {
+interface Models {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get a model container.")
+  @doc("Get a deployed model.")
   @route("/models/{name}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -26,81 +26,17 @@ interface ModelContainers {
       @path
       name: string;
     },
-    ModelContainer
+    Model
   >;
-}
 
-interface ModelVersions {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("List model versions.")
-  @route("/models/{name}/versions")
+  @doc("List all deployed models in the project.")
+  @route("/models")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      @doc("Name of the model container.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-      @maxLength(254)
-      @path
-      name: string;
-
-      @doc("$skip")
-      @query("$skip")
-      $skip?: string;
-
-      @doc("$orderBy")
-      @query("$orderBy")
-      $orderBy?: string;
-
-      @doc("$top")
-      @query("$top")
-      $top?: int32;
-
-      @doc("Model version")
-      @query("version")
-      version?: string;
-
-      @doc("Model description")
-      @query("description")
-      description?: string;
-
-      @doc("Number of initial results to skip.")
-      @query("offset")
-      offset?: int32;
-
-      @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2")
-      @query("tags")
-      tags?: string;
-
-      @doc("Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2")
-      @query("properties")
-      properties?: string;
-
-      @doc("Name of the feed.")
-      @query("feed")
-      feed?: string;
-
-      @doc("View type for including/excluding (for example) archived entities.")
-      @query("listViewType")
-      listViewType?: ListViewType;
+      ...StandardListQueryParameters;
     },
-    PagedModelVersion
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get a model version.")
-  @route("/models/{name}/versions/{version}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      @doc("Name of the model version.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-      @maxLength(254)
-      @path
-      name: string;
-
-      @doc("Model version")
-      version: string;
-    },
-    ModelVersion
+    Model
   >;
 }
