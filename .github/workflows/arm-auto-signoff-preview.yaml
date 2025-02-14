@@ -98,6 +98,9 @@ jobs:
           value: "${{ steps.get-label-action.outputs.labelAction == 'add' }}"
 
       # Required for consumers to identify the PR associated with this workflow run
+      # Output can be trusted, because it was uploaded from a workflow that is trusted,
+      # because "issue_comment" and "workflow_run" only trigger on workflows in the default branch.
+      # Consumers should verify the "event_name" before attempting to extract from the artifact name
       - if: ${{ github.event_name == 'issue_comment' || github.event_name == 'workflow_run' }}
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
