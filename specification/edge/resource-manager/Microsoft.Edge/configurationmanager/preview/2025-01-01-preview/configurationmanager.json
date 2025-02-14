@@ -104,6 +104,9 @@
     },
     {
       "name": "Contexts"
+    },
+    {
+      "name": "SiteReferences"
     }
   ],
   "paths": {
@@ -1362,7 +1365,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 61,
-            "pattern": "^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
           }
         ],
         "responses": {
@@ -1409,7 +1412,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 61,
-            "pattern": "^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
           },
           {
             "name": "resource",
@@ -1486,7 +1489,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 61,
-            "pattern": "^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
           },
           {
             "name": "properties",
@@ -1560,7 +1563,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 61,
-            "pattern": "^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
           }
         ],
         "responses": {
@@ -1591,6 +1594,352 @@
         "x-ms-examples": {
           "Contexts_Delete_MaximumSet": {
             "$ref": "./examples/Contexts_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/contexts/{contextName}/siteReferences": {
+      "get": {
+        "operationId": "SiteReferences_ListByContext",
+        "tags": [
+          "SiteReferences"
+        ],
+        "description": "List Site Reference Resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "contextName",
+            "in": "path",
+            "description": "The name of the Context.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteReferenceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteReferences_ListByContext_MaximumSet": {
+            "$ref": "./examples/SiteReferences_ListByContext_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/contexts/{contextName}/siteReferences/{siteReferenceName}": {
+      "get": {
+        "operationId": "SiteReferences_Get",
+        "tags": [
+          "SiteReferences"
+        ],
+        "description": "Get Site Reference Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "contextName",
+            "in": "path",
+            "description": "The name of the Context.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+          },
+          {
+            "name": "siteReferenceName",
+            "in": "path",
+            "description": "The name of the SiteReference",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteReference"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteReferences_Get_MaximumSet": {
+            "$ref": "./examples/SiteReferences_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SiteReferences_CreateOrUpdate",
+        "tags": [
+          "SiteReferences"
+        ],
+        "description": "Get Site Reference Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "contextName",
+            "in": "path",
+            "description": "The name of the Context.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+          },
+          {
+            "name": "siteReferenceName",
+            "in": "path",
+            "description": "The name of the SiteReference",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteReference"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SiteReference' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SiteReference"
+            }
+          },
+          "201": {
+            "description": "Resource 'SiteReference' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SiteReference"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteReferences_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/SiteReferences_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SiteReferences_Update",
+        "tags": [
+          "SiteReferences"
+        ],
+        "description": "Get Site Reference Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "contextName",
+            "in": "path",
+            "description": "The name of the Context.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+          },
+          {
+            "name": "siteReferenceName",
+            "in": "path",
+            "description": "The name of the SiteReference",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteReferenceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteReference"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteReferences_Update_MaximumSet": {
+            "$ref": "./examples/SiteReferences_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SiteReferences_Delete",
+        "tags": [
+          "SiteReferences"
+        ],
+        "description": "Get Site Reference Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "contextName",
+            "in": "path",
+            "description": "The name of the Context.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+          },
+          {
+            "name": "siteReferenceName",
+            "in": "path",
+            "description": "The name of the SiteReference",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteReferences_Delete_MaximumSet": {
+            "$ref": "./examples/SiteReferences_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8498,6 +8847,85 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SchemaVersionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SiteReference": {
+      "type": "object",
+      "description": "Site Reference Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SiteReferenceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SiteReferenceListResult": {
+      "type": "object",
+      "description": "The response of a SiteReference list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SiteReference items on this page",
+          "items": {
+            "$ref": "#/definitions/SiteReference"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SiteReferenceProperties": {
+      "type": "object",
+      "description": "Site Reference Properties",
+      "properties": {
+        "siteId": {
+          "type": "string",
+          "description": "Azure Resource ID for Site"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "siteId"
+      ]
+    },
+    "SiteReferencePropertiesUpdate": {
+      "type": "object",
+      "description": "Site Reference Properties",
+      "properties": {
+        "siteId": {
+          "type": "string",
+          "description": "Azure Resource ID for Site"
+        }
+      }
+    },
+    "SiteReferenceUpdate": {
+      "type": "object",
+      "description": "Site Reference Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SiteReferencePropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
       },
