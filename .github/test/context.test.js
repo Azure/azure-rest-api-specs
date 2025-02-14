@@ -122,7 +122,7 @@ describe("extractInputs", () => {
     ).rejects.toThrow();
   });
 
-  it("workflow_run:completed (same repo)", async () => {
+  it("workflow_run:completed:pull_request (same repo)", async () => {
     const context = {
       eventName: "workflow_run",
       payload: {
@@ -154,7 +154,7 @@ describe("extractInputs", () => {
   });
 
   it.each([0, 1, 2])(
-    "workflow_run:completed (fork repo, %s PRs)",
+    "workflow_run:completed:pull_request (fork repo, %s PRs)",
     async (numPullRequests) => {
       const context = {
         eventName: "workflow_run",
@@ -216,4 +216,69 @@ describe("extractInputs", () => {
       });
     },
   );
+
+  it("workflow_run:completed:workflow_run", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [{ name: "issue-number=123" }] },
+    });
+
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          event: "workflow_run",
+          head_sha: "abc123",
+          id: 456,
+          repository: {
+            name: "TestRepoName",
+            owner: {
+              login: "TestRepoOwnerLogin",
+            },
+          },
+        },
+      },
+    };
+
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "abc123",
+      issue_number: 123,
+      run_id: 456,
+    });
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [{ name: "issue-number=not-a-number" }] },
+    });
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).rejects.toThrow(/invalid issue-number/i);
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [] },
+    });
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).rejects.toThrow(/could not find/i);
+  });
+
+  it("workflow_run:completed:unsupported", async () => {
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          event: "unsupported",
+        },
+      },
+    };
+
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).rejects.toThrow();
+  });
 });
