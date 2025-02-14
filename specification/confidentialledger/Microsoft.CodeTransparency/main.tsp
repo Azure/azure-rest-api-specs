@@ -27,11 +27,6 @@ namespace Microsoft.CodeTransparency;
 
 @doc("The Microsoft.CodeTransparency service versions.")
 enum Versions {
-  #deprecated "Use next version"
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2024-01-11-preview version of the Microsoft.CodeTransparency service.")
-  `2024-01-11-preview`,
-
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2025-01-31-preview version of the Microsoft.CodeTransparency service.")
   `2025-01-31-preview`,
@@ -83,20 +78,6 @@ op getPublicKeys is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@removed(Versions.`2025-01-31-preview`)
-@doc("Get service parameters (deprecated)")
-@route("/parameters")
-@get
-op getParameters is Foundations.Operation<{}, ParametersResult, ServiceTraits>;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@removed(Versions.`2025-01-31-preview`)
-@doc("Get the DID configuration file (deprecated)")
-@route("/.well-known/did.json")
-@get
-op getDidConfig is Foundations.Operation<{}, DidDocument, ServiceTraits>;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get CodeTransparency configuration information.")
 @route("/configuration")
 @get
@@ -123,18 +104,6 @@ op getCodeTransparencyVersion is Foundations.Operation<
 // -----------------------------------------------------------------
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@removed(Versions.`2025-01-31-preview`)
-@doc("Post an entry to be registered on the CodeTransparency instance (deprecated)")
-@post
-@sharedRoute
-@route("/entries")
-op createEntryDeprecated is Foundations.Operation<
-  SignedStatement,
-  CreateEntryResult,
-  ServiceTraits
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
 @doc("Post an entry to be registered on the CodeTransparency instance, see IETF SCITT draft")
 @post
@@ -145,38 +114,6 @@ op createEntry is Foundations.Operation<
   CreateEntryCreated | CreateEntryPending,
   ServiceTraits,
   AnyCborError
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@removed(Versions.`2025-01-31-preview`)
-@doc("Get the status the entry operation (deprecated)")
-@route("/operations/{operationId}")
-op getEntryStatus is Foundations.Operation<
-  OperationIdParameter,
-  GetOperationResult,
-  ServiceTraits
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@removed(Versions.`2025-01-31-preview`)
-@doc("Get the status of all entries operations (deprecated)")
-@route("/operations")
-op listEntryStatuses is Foundations.Operation<
-  {},
-  ListOperationResult,
-  ServiceTraits
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@removed(Versions.`2025-01-31-preview`)
-@doc("Get signed statement with or without receipt embedded in its unprotected header")
-@sharedRoute
-@route("/entries/{entryId}")
-op getEntryDeprecated is Foundations.Operation<
-  EntryIdParameter & EmbedReceiptParameter,
-  SignedStatement | TransparentStatement,
-  ServiceTraits
 >;
 
 // uses explicit accept header to not generate such parameter in .net sdk
@@ -190,17 +127,6 @@ op getEntry is Foundations.Operation<
   SignedStatement | TransparentStatement,
   ServiceTraits,
   AnyCborError
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@removed(Versions.`2025-01-31-preview`)
-@doc("Get the receipt of an entry given a specific entry id.")
-@sharedRoute
-@route("/entries/{entryId}/receipt")
-op getEntryReceiptDeprecated is Foundations.Operation<
-  EntryIdParameter,
-  ReceiptEntry,
-  ServiceTraits
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -239,30 +165,6 @@ op listEntryIds is Foundations.Operation<
 // -----------------------------------------------------------------
 // Service models
 // -----------------------------------------------------------------
-
-@removed(Versions.`2025-01-31-preview`)
-@doc("The Response body of the service parameters")
-model ParametersResult {
-  @doc("Service certificate used in TLS and for receipt verification")
-  serviceCertificate: string;
-
-  @doc("Service identifier")
-  serviceId: string;
-
-  @doc("Signature algorithm used in receipts")
-  signatureAlgorithm: string;
-
-  @doc("Tree algorithm used in receipts")
-  treeAlgorithm: string;
-}
-
-@removed(Versions.`2025-01-31-preview`)
-@doc("Response of entry submission containing the operationId.")
-model CreateEntryResult {
-  @doc("String representing the operation id submitted")
-  @pattern("^[0-9]+\\.[0-9]+$")
-  operationId: string;
-}
 
 @added(Versions.`2025-01-31-preview`)
 @doc("Response of entry submission if the response can be served immediately, see IETF SCITT draft")
@@ -328,11 +230,6 @@ model TransparentStatement {
 
 @doc("A ledger receipt, see IETF SCITT draft")
 model ReceiptEntry {
-  @doc("The MIME content type for receipt is application/cbor.")
-  @removed(Versions.`2025-01-31-preview`)
-  @header("Content-Type")
-  contentTypeCbor: "application/cbor";
-
   @doc("The MIME content type for receipt is application/cose.")
   @added(Versions.`2025-01-31-preview`)
   @header("Content-Type")
@@ -405,51 +302,6 @@ model TransactionsRange {
   to?: int64;
 }
 
-@removed(Versions.`2025-01-31-preview`)
-@doc("The OperationId parameter.")
-model OperationIdParameter {
-  @doc("ID of the operation to retrieve.")
-  @pattern("^[0-9]+\\.[0-9]+$")
-  @path
-  operationId: string;
-}
-
-@removed(Versions.`2025-01-31-preview`)
-@doc("The Response body of the ListOperations API")
-model ListOperationResult {
-  @doc("List of operations")
-  operations: GetOperationResult[];
-}
-
-@removed(Versions.`2025-01-31-preview`)
-@doc("The Response body of the GetOperationId API.")
-model GetOperationResult {
-  @doc("ID of the transaction. Only if status is Succeeded.")
-  @pattern("^[0-9]+\\.[0-9]+$")
-  entryId?: string;
-
-  @doc("Error in json format. Only if Status is Failed.")
-  @lroErrorResult
-  error?: string;
-
-  @doc("OperationId")
-  @pattern("^[0-9]+\\.[0-9]+$")
-  operationId: string;
-
-  @doc("Status of the operation.")
-  status: OperationStatus;
-}
-
-@removed(Versions.`2025-01-31-preview`)
-@doc("Possible statuses of the operation.")
-@lroStatus
-union OperationStatus {
-  string,
-  @doc("Operation is still running.") "running",
-  @lroFailed @doc("Operation failed.") "failed",
-  @lroSucceeded @doc("Operation succeeded.") "succeeded",
-}
-
 @added(Versions.`2025-01-31-preview`)
 @doc("Transparency configuration, see IETF SCITT draft.")
 model TransparencyConfigurationCbor {
@@ -476,40 +328,6 @@ model TransparencyConfigurationJson {
   @doc("Location of the JWKS document")
   @example("https://transparency.example/jwks")
   jwksUri: string;
-}
-
-@removed(Versions.`2025-01-31-preview`)
-@doc("A DID issuer")
-model DidIssuer {
-  @doc("String representing a DID issuer.")
-  @path
-  issuer: string;
-}
-
-@removed(Versions.`2025-01-31-preview`)
-@doc("A DID document")
-model DidDocument {
-  @doc("String representing a DID issuer.")
-  id: string;
-
-  @doc("List of public keys used for receipt endorsement verification.")
-  assertionMethod: DidDocumentKey[];
-}
-
-@removed(Versions.`2025-01-31-preview`)
-@doc("A DID document key")
-model DidDocumentKey {
-  @doc("Key identifier.")
-  id: string;
-
-  @doc("Key controller - similar to DID issuer.")
-  controller: string;
-
-  @doc("Key type.")
-  type: "JsonWebKey2020";
-
-  @doc("Serialized public key in JWK format.")
-  publicKeyJwk: JsonWebKey;
 }
 
 @added(Versions.`2025-01-31-preview`)
@@ -576,11 +394,6 @@ model JsonWebKey {
 
 @doc("The Response body of the Version API.")
 model VersionResult {
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
-  @removed(Versions.`2025-01-31-preview`)
-  @doc("Version of the CodeTransparency service")
-  scitt_version: string;
-
   @added(Versions.`2025-01-31-preview`)
   @doc("Version of the CodeTransparency service")
   version: string;
@@ -593,19 +406,10 @@ model CodeTransparencyConfiguration {
 
   @doc("Authentication configuration")
   authentication?: CodeTransparencyConfigurationAuthentication;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
-  @removed(Versions.`2025-01-31-preview`)
-  @doc("Issuer used in receipts")
-  service_identifier?: string;
 }
 
 @doc("Configuration of CCF authentication.")
 model CodeTransparencyConfigurationAuthentication {
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
-  @removed(Versions.`2025-01-31-preview`)
-  @doc("Disable API authentication and rely on signed statement verification only")
-  allow_unauthenticated: boolean;
 
   @added(Versions.`2025-01-31-preview`)
   @doc("Disable API authentication and rely on signed statement verification only")
@@ -617,10 +421,6 @@ model CodeTransparencyConfigurationAuthentication {
 
 @doc("Configuration of JWT claims")
 model CodeTransparencyConfigurationAuthenticationJwt {
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
-  @removed(Versions.`2025-01-31-preview`)
-  @doc("Claims that must be present in the JWT")
-  required_claims: Record<string>;
 
   @added(Versions.`2025-01-31-preview`)
   @doc("Claims that must be present in the JWT")
@@ -629,16 +429,6 @@ model CodeTransparencyConfigurationAuthenticationJwt {
 
 @doc("Policy configuration listing accepted algorithms and the the policy script")
 model CodeTransparencyConfigurationPolicy {
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
-  @removed(Versions.`2025-01-31-preview`)
-  @doc("Accepted COSE signature algorithms when verifying signed statements")
-  accepted_algorithms?: string[];
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
-  @removed(Versions.`2025-01-31-preview`)
-  @doc("Accepted COSE signature did:web issuers when verifying signed statements")
-  accepted_did_issuers?: string[];
-
   @added(Versions.`2025-01-31-preview`)
   @doc("Accepted COSE signature algorithms when verifying signed statements")
   acceptedAlgorithms?: string[];
