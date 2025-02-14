@@ -2722,6 +2722,18 @@
         ]
       }
     },
+    "AutoUpgradeProfileId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "AutoUpgradeProfileId is the id of an auto upgrade profile resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/fleets/updateRuns"
+          }
+        ]
+      }
+    },
     "KubernetesVersion": {
       "type": "string"
     },
@@ -3104,6 +3116,11 @@
         "status": {
           "$ref": "#/definitions/UpdateRunStatus",
           "description": "The status of the UpdateRun.",
+          "readOnly": true
+        },
+        "autoUpgradeProfileId": {
+          "$ref": "#/definitions/AutoUpgradeProfileId",
+          "description": "AutoUpgradeProfileId is the id of an auto upgrade profile resource.",
           "readOnly": true
         }
       },
