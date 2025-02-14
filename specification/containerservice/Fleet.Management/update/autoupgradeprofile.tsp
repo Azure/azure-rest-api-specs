@@ -160,3 +160,44 @@ union AutoUpgradeLastTriggerStatus {
   @doc("The last AutoUpgrade trigger failed.")
   Failed: "Failed",
 }
+
+@added(Versions.v2025_03_01)
+@armResourceOperations
+interface AutoUpgradeProfileOperations {
+  generateUpdateRuns is Azure.ResourceManager.ArmResourceActionSync<
+    AutoUpgradeProfile,
+    GenerateUpdateRunRequest,
+    AutoUpgradeProfile,
+    BaseParameters<AutoUpgradeProfile> & IfMatchParameters<AutoUpgradeProfile> 
+  >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
+  @useFinalStateVia("azure-async-operation")
+  generate is Azure.ResourceManager.ArmResourceActionAsync<
+      AutoUpgradeProfile,
+      void,
+      GenerateResponse,
+      BaseParameters<AutoUpgradeProfile> & {
+        @header("StartUpdateRun")
+        @doc("Whether to start the update run after it is created in the generate operation. Empty value indicates that update run will not be started.")
+        startUpdateRun?: string;
+      },
+      LroHeaders = ArmAsyncOperationHeader
+      & ArmLroLocationHeader
+      & IfMatchParameters<AutoUpgradeProfile>
+    >;
+}
+
+@added(Versions.v2025_03_01)
+@doc("GenerateUpdateRunsRequest is the HTTP body of a generate updateruns request.")
+model GenerateUpdateRunRequest {
+  @doc("The update spec that will be applied to managed clusters when generating update runs.")
+  updateSpecification: ManagedClusterUpdate;
+}
+
+@added(Versions.v2025_03_01)
+@doc("GenerateResponse is the response of a generate request.")
+model GenerateResponse {
+  @doc("ID of the generated update run.")
+  id: string;
+}
