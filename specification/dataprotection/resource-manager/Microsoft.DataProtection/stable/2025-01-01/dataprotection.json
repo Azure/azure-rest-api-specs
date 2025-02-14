@@ -5154,6 +5154,29 @@
       },
       "x-ms-discriminator-value": "BlobBackupDatasourceParameters"
     },
+    "AdlsBlobBackupDatasourceParameters": {
+      "description": "Parameters to be used during configuration of backup of azure data lake storage account blobs",
+      "required": [
+        "containersList",
+        "objectType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobBackupDatasourceParameters"
+        }
+      ],
+      "properties": {
+        "containersList": {
+          "description": "List of containers to be backed up during configuration of backup of azure data lake storage account blobs",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "AdlsBlobBackupDatasourceParameters"
+    },
     "AzureRetentionRule": {
       "allOf": [
         {
