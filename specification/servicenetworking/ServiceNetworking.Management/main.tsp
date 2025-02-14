@@ -49,11 +49,30 @@ model Frontend is TrackedResource<FrontendProperties> {
   name: string;
 }
 
+/** SecurityPolicyConfigurations of Frontend. */
+@added(Versions.v2025_03_01_preview)
+model FrontendSecurityPolicyConfigurations {
+  /** Contains reference to a IpAccessRules-type security policy that is applied at the Traffic Controller level. */
+  ipAccessRulesSecurityPolicy?: IpAccessRulesSecurityPolicy;
+}
+
+/** IpAccessRules Security Policy */
+@added(Versions.v2025_03_01_preview)
+model IpAccessRulesSecurityPolicy {
+  /** Resource ID of the Ip Access Rules Security Policy */
+  id: string;
+}
+
 /** Frontend Properties. */
 model FrontendProperties {
   /** The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend. */
   @visibility("read")
   fqdn?: string;
+
+  /** Frontend Security Policy Configuration */
+  @added(Versions.v2025_03_01_preview)
+  @OpenAPI.extension("x-ms-identifiers", [])
+  securityPolicyConfigurations?: FrontendSecurityPolicyConfigurations;
 
   /** Provisioning State of Traffic Controller Frontend Resource */
   @visibility("read")
@@ -144,10 +163,10 @@ model SecurityPolicyProperties {
   @visibility("read")
   policyType?: PolicyType;
 
-  /** Web Application Firewall Policy of the Traffic Controller Security Policy */
+  /** Web Application Firewall Policy of the Traffic Controller Security Policy. If this property is set then ipAccessRulesPolicy property cannot be set. */
   wafPolicy?: WafPolicy;
 
-  /** Ip Access Policy of the Traffic Controller Security Policy */
+  /** Ip Access Policy of the Traffic Controller Security Policy. If this property is set then wafPolicy property cannot be set. */
   @added(Versions.v2025_03_01_preview)
   ipAccessRulesPolicy?: IpAccessRulesPolicy;
 
@@ -190,7 +209,7 @@ model IpAccessRule {
 
   /** The priority of the rule. The value can be between 1 and 400. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule. */
   @minValue(1)
-  @maxValue(400)
+  @maxValue(500)
   priority: int32;
 
   /** Source Address Prefixed Applied by the Rule. Asterisk '*' can also be used to match all source IPs. */
