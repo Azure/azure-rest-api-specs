@@ -6,8 +6,6 @@ using Versioning;
 using Azure.ClientGenerator.Core;
 using Storage.Blob;
 
-// namespace Customizations;
-
 @@clientName(ContainerProperties.denyEncryptionScopeOverride,
   "PreventEncryptionScopeOverride"
 );
@@ -38,6 +36,7 @@ namespace ServiceClient {
   @clientNamespace("Azure.Storage.Blob")
   @clientInitialization({
     initializedBy: InitializedBy.parent | InitializedBy.individually,
+    parameters: ContainerNamePathParameter,
   })
   namespace ContainerClient {
     op create is Container.create;
@@ -58,4 +57,3 @@ namespace ServiceClient {
 // @@clientInitialization(Storage.Blob.AppendBlob, BlobServiceClientParameters);
 // @@clientInitialization(Storage.Blob.BlockBlob, BlobServiceClientParameters);
 // @@clientInitialization(Storage.Blob.PageBlob, BlobServiceClientParameters);
-// @@clientInitialization(Storage.Blob.Container, ContainerNamePathParameter);
