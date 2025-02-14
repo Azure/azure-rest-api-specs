@@ -1,0 +1,45 @@
+{
+  "operationId": "Agents_Update",
+  "parameters": {
+    "agentName": "testAgentName",
+    "api-version": "2024-12-30-preview",
+    "body": {
+      "properties": {
+        "healthDetails": {
+          "lastHeartBeatUtc": "2023-08-21T04:59:22.847Z"
+        }
+      }
+    },
+    "resourceGroupName": "testrg",
+    "siteName": "testSite",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Agents_Update",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testAgentName",
+        "type": "Microsoft.MySQLDiscovery/MySQLSites/agents",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.MySQLDiscovery/MySQLSites/testSite/agents/testAgentName",
+        "properties": {
+          "healthDetails": {
+            "lastHeartBeatUtc": "2023-08-21T04:59:22.847Z",
+            "version": "1.0.0.1"
+          },
+          "migrateApplianceName": "testappliance",
+          "provisioningState": "Succeeded",
+          "servicePrincipalIdentityDetails": {
+            "applicationId": "tspgrujepxyxuprkqvfuqbbjrweeqa",
+            "objectId": "tqrjngpgxnnto",
+            "tenantId": "vesmyhu"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
