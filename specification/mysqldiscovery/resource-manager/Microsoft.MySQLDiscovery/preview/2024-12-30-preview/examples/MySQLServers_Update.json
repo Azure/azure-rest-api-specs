@@ -1,33 +1,33 @@
 {
   "parameters": {
     "api-version": "2024-12-30-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "siteName": "testSite",
+    "serverName": "testDatabaseName",
     "body": {
       "tags": {
         "tag1": "value1",
         "tag2": "value2"
       }
-    },
-    "resourceGroupName": "testrg",
-    "serverName": "testDatabaseName",
-    "siteName": "testSite",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.MySQLDiscovery/MySQLSites/testSite/MySQLServers/testServerName",
         "name": "testServerName",
         "type": "Microsoft.MySQLDiscovery/MySQLSites/MySQLServers",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.MySQLDiscovery/MySQLSites/testSite/MySQLServers/testServerName",
         "properties": {
-          "edition": "Community",
           "hostName": "test.mysql.server",
           "machineId": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourcegroups/demoRG/providers/Microsoft.OffAzure/serverSites/xxx/machines/xxx",
+          "portNumber": "3306",
           "mysqlVersion": "8.0",
           "numberOfDatabase": 16,
-          "portNumber": "3306",
-          "provisioningState": "Succeeded",
+          "supportStatus": "Mainstream",
+          "edition": "Community",
           "supportEndIn": "2021-04-01",
-          "supportStatus": "Mainstream"
+          "provisioningState": "Succeeded"
         }
       }
     },
@@ -36,7 +36,5 @@
         "location": "https://contoso.com/operationstatus"
       }
     }
-  },
-  "operationId": "MySQLServers_Update",
-  "title": "MySQLServers_Update"
+  }
 }
