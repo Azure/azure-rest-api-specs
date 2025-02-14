@@ -21,6 +21,13 @@ namespace Customizations;
 @@clientName(TimeGrain.PT5M, "FiveMinutes", "csharp,java");
 @@clientName(TimeGrain.PT1H, "OneHour", "csharp,java");
 
+// Suggestion to avoid `Type` as a property name since it can get confused with the `Type` keyword
+@@clientName(Secret.type, "SecretKind", "csharp");
+@@clientName(CertificateMetadata.type, "CertificateKind", "csharp");
+
+// Suggestion to rename Enum Members for more clarity
+@@clientName(CertificateType.AKV_CERT_URI, "KeyVaultCertificateUri", "csharp,java");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({

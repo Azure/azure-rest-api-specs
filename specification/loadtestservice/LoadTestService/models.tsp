@@ -85,8 +85,11 @@ union PassFailResult {
 @doc("Types of secrets supported.")
 union SecretType {
   string,
-  @doc("If the secret is stored in an Azure Key Vault.") "AKV_SECRET_URI",
-  @doc("If the secret value provided as plain text.") "SECRET_VALUE",
+  @doc("If the secret is stored in an Azure Key Vault.")
+  AKV_SECRET_URI: "AKV_SECRET_URI",
+
+  @doc("If the secret value provided as plain text.")
+  SECRET_VALUE: "SECRET_VALUE",
 }
 
 @doc("Managed identity type.")
@@ -103,7 +106,8 @@ union ManagedIdentityType {
 @doc("Types of certificates supported.")
 union CertificateType {
   string,
-  @doc("If the certificate is stored in an Azure Key Vault.") "AKV_CERT_URI",
+  @doc("If the certificate is stored in an Azure Key Vault.")
+  AKV_CERT_URI: "AKV_CERT_URI",
 }
 
 @doc("Types of file supported.")
@@ -1006,7 +1010,7 @@ model MetricDefinitionCollection {
 @doc("Metric definition")
 model MetricDefinition {
   @doc("List of dimensions")
-  dimensions?: NameAndDesc[];
+  dimensions?: NameAndDescription[];
 
   @doc("The metric description")
   description?: string;
@@ -1034,7 +1038,7 @@ model MetricDefinition {
 }
 
 @doc("The name and description")
-model NameAndDesc {
+model NameAndDescription {
   @doc("The description")
   description?: string;
 
