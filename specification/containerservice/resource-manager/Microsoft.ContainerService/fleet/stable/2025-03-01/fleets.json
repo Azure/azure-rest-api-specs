@@ -2454,6 +2454,13 @@
           "$ref": "#/definitions/FleetMemberProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "labels": {
+          "type": "object",
+          "description": "The labels for the fleet member.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -2530,6 +2537,13 @@
           "minLength": 1,
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "labels": {
+          "type": "object",
+          "description": "The labels for the fleet member.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
