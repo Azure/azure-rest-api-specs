@@ -8,14 +8,20 @@ export function createMockGithub() {
         listWorkflowRunArtifacts: vi
           .fn()
           .mockResolvedValue({ data: { artifacts: [] } }),
+        listWorkflowRunsForRepo: vi
+          .fn()
+          .mockResolvedValue({ data: { workflow_runs: [] } }),
       },
       checks: {
         listForRef: vi.fn().mockResolvedValue({ data: { check_runs: [] } }),
       },
       issues: {
         addLabels: vi.fn(),
-        listLabelsOnIssue: vi.fn().mockRejectedValue({ data: [] }),
+        listLabelsOnIssue: vi.fn().mockResolvedValue({ data: [] }),
         removeLabel: vi.fn(),
+      },
+      pulls: {
+        get: vi.fn(),
       },
     },
   };
