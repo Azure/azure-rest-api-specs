@@ -120,7 +120,7 @@ export async function extractInputs(github, context, core) {
       payload.workflow_run.event === "issue_comment" ||
       payload.workflow_run.event == "workflow_run"
     ) {
-      // Attempt to extract issue number from artifact.  This can be considered trusted, because it was uploaded from a workflow that is trusted,
+      // Attempt to extract issue number from artifact.  This can be trusted, because it was uploaded from a workflow that is trusted,
       // because "issue_comment" and "workflow_run" only trigger on workflows in the default branch.
       const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
         owner: payload.workflow_run.repository.owner.login,
