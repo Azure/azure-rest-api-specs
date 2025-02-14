@@ -182,7 +182,8 @@ alias FileResponseHeaders = {
 
   @header("Content-Length")
   @doc("The length of the file.")
-  contentLength: string;
+  @encode(string)
+  contentLength: int64;
 
   ...BatchEtagResponseHeaders;
 
