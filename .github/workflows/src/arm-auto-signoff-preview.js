@@ -77,6 +77,8 @@ export async function getLabelActionImpl({
     },
   );
 
+  core.info(JSON.stringify(workflowRuns));
+
   core.info("Workflow Runs:");
   workflowRuns.workflow_runs.forEach((wf) => {
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
