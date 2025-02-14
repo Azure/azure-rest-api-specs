@@ -91,6 +91,8 @@ batch:
   - multiapiscript-changes: true
   - tag: package-databoundaries-2024-08
   - multiapiscript-databoundaries: true
+  - tag: package-bicep-2023-11
+  - multiapiscript-bicep: true
 ```
 
 ```yaml $(multiapiscript-changes)
@@ -195,6 +197,15 @@ title: DataBoundaryMgmtClient
 package-name: azure-mgmt-resource#databoundaries
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/databoundaries
+perform-load: false
+clear-output-folder: false
+```
+
+```yaml $(multiapiscript-bicep)
+title: BicepMgmtClient
+package-name: azure-mgmt-resource#bicep
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/bicep
 perform-load: false
 clear-output-folder: false
 ```
@@ -787,6 +798,17 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 default-api-version: "2024-03-01"
 namespace: azure.mgmt.resource.deploymentstacks.v2024_03_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentstacks/v2024_03_01
+```
+
+### Tag: package-bicep-2023-11 and python
+
+These settings apply only when `--tag=package-bicep-2023-11` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-bicep-2023-11'
+default-api-version: "2023-11-01"
+namespace: azure.mgmt.resource.bicep.v2023_11_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/bicep/v2023_11_01
 ```
 
 ``` yaml $(python)
