@@ -20,7 +20,12 @@ using Storage.Blob;
 @@clientName(BlobPropertiesInternal.immutabilityPolicyUntilDate,
   "ImmutabilityPolicyExpiresOn"
 );
-
+  
+/** Parameters to be added in client constructors */
+model BlobServiceClientParameters {
+  ...ContainerNamePathParameter;
+  ...BlobPathParameter;
+}
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API"
 @useDependency(Storage.Blob.Versions.v2025_01_05)
@@ -41,6 +46,7 @@ namespace ServiceClient {
 
   @clientInitialization({
     initializedBy: InitializedBy.parent | InitializedBy.individually,
+    parameters: BlobServiceClientParameters,
   })
   @clientNamespace("Azure.Storage.Blob")
   namespace BlobClient {
@@ -49,13 +55,6 @@ namespace ServiceClient {
   }
 }
 
-// /** Parameters to be added in client constructors */
-// model BlobServiceClientParameters {
-//   ...ContainerNamePathParameter;
-//   ...BlobPathParameter;
-// }
-
-// @@clientInitialization(Storage.Blob.Blob, BlobServiceClientParameters);
 // @@clientInitialization(Storage.Blob.AppendBlob, BlobServiceClientParameters);
 // @@clientInitialization(Storage.Blob.BlockBlob, BlobServiceClientParameters);
 // @@clientInitialization(Storage.Blob.PageBlob, BlobServiceClientParameters);
