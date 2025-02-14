@@ -21,7 +21,7 @@ model EdgeMachineJob
     Resource = EdgeMachineJob,
     KeyName = "jobsName",
     SegmentName = "jobs",
-    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+    NamePattern = "^[a-zA-Z0-9-]{3,63}$"
   >;
 }
 
@@ -73,6 +73,10 @@ model EdgeMachineJobProperties {
   @doc("Status of Edge device job.")
   @visibility("read")
   status?: JobStatus;
+
+  @doc("error details.")
+  @visibility("read")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @doc("Job Type supported.")
