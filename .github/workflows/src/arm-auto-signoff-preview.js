@@ -1,6 +1,7 @@
 // @ts-check
 
 import { extractInputs } from "../../src/context.js";
+import { PER_PAGE_MAX } from "../../src/github.js";
 import { LabelAction } from "../../src/label.js";
 
 /**
@@ -64,22 +65,25 @@ export async function getLabelActionImpl({
     },
   };
 
-  const workflowRuns = await github.rest.actions.listWorkflowRunsForRepo({
-    owner,
-    repo,
-    event: "pull_request",
-    status: "completed",
-    per_page: 100,
-    head_sha,
-  });
+  const workflowRuns = await github.paginate(
+    github.rest.actions.listWorkflowRunsForRepo,
+    {
+      owner,
+      repo,
+      event: "pull_request",
+      status: "completed",
+      head_sha,
+      per_page: PER_PAGE_MAX,
+    },
+  );
 
   core.info("Workflow Runs:");
-  workflowRuns.data.workflow_runs.forEach((wf) => {
+  workflowRuns.workflow_runs.forEach((wf) => {
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
   const wfName = "ARM Incremental Typespec (Preview)";
-  const incrementalTspRuns = workflowRuns.data.workflow_runs.filter(
+  const incrementalTspRuns = workflowRuns.workflow_runs.filter(
     (wf) => wf.name == wfName,
   );
 
@@ -101,12 +105,13 @@ export async function getLabelActionImpl({
     }
 
     const artifactNames = (
-      await github.rest.actions.listWorkflowRunArtifacts({
+      await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
         owner,
         repo,
         run_id: run.id,
+        per_page: PER_PAGE_MAX,
       })
-    ).data.artifacts.map((a) => a.name);
+    ).artifacts.map((a) => a.name);
 
     core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
@@ -124,12 +129,13 @@ export async function getLabelActionImpl({
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = (
-    await github.rest.issues.listLabelsOnIssue({
+    await github.paginate(github.rest.issues.listLabelsOnIssue, {
       owner: owner,
       repo: repo,
       issue_number: issue_number,
+      per_page: PER_PAGE_MAX,
     })
-  ).data.map((label) => label.name);
+  ).map((label) => label.name);
 
   core.info(`Labels: ${labels}`);
 
@@ -146,12 +152,13 @@ export async function getLabelActionImpl({
   }
 
   const checkRuns = (
-    await github.rest.checks.listForRef({
+    await github.paginate(github.rest.checks.listForRef, {
       owner: owner,
       repo: repo,
       ref: head_sha,
+      per_page: PER_PAGE_MAX,
     })
-  ).data.check_runs;
+  ).check_runs;
 
   const swaggerLintDiffs = checkRuns.filter(
     (run) => run.name === "Swagger LintDiff",

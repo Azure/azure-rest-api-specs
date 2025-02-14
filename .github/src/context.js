@@ -1,5 +1,7 @@
 // @ts-check
 
+import { PER_PAGE_MAX } from "./github.js";
+
 /**
  * Extracts inputs from context based on event name and properties.
  * run_id is only defined for "workflow_run:completed" events.
@@ -101,12 +103,15 @@ export async function extractInputs(github, context, core) {
         core.info(
           `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
         );
-        const { data: pullRequests } =
-          await github.rest.repos.listPullRequestsAssociatedWithCommit({
+        const pullRequests = await github.paginate(
+          github.rest.repos.listPullRequestsAssociatedWithCommit,
+          {
             owner: head_owner,
             repo: head_repo,
             commit_sha: head_sha,
-          });
+            per_page: PER_PAGE_MAX,
+          },
+        );
 
         if (pullRequests.length === 1) {
           issue_number = pullRequests[0].number;
@@ -122,13 +127,17 @@ export async function extractInputs(github, context, core) {
     ) {
       // Attempt to extract issue number from artifact.  This can be trusted, because it was uploaded from a workflow that is trusted,
       // because "issue_comment" and "workflow_run" only trigger on workflows in the default branch.
-      const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-        owner: payload.workflow_run.repository.owner.login,
-        repo: payload.workflow_run.repository.name,
-        run_id: payload.workflow_run.id,
-      });
+      const artifacts = await github.paginate(
+        github.rest.actions.listWorkflowRunArtifacts,
+        {
+          owner: payload.workflow_run.repository.owner.login,
+          repo: payload.workflow_run.repository.name,
+          run_id: payload.workflow_run.id,
+          per_page: PER_PAGE_MAX,
+        },
+      );
 
-      const artifactNames = artifacts.data.artifacts.map((a) => a.name);
+      const artifactNames = artifacts.artifacts.map((a) => a.name);
 
       core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { PER_PAGE_MAX } from "../../src/github.js";
 import { createMockCore, createMockGithub } from "../../test/mocks.js";
 import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
 
@@ -35,6 +36,7 @@ describe("updateLabels", () => {
       owner: "TestRepoOwnerLoginEnv",
       repo: "TestRepoNameEnv",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "TestRepoOwnerLoginEnv",
@@ -84,6 +86,7 @@ describe("updateLabels", () => {
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "TestRepoOwnerLogin",
@@ -141,6 +144,7 @@ describe("updateLabels", () => {
       owner: "TestRepoOwnerLoginEnv",
       repo: "TestRepoNameEnv",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "TestRepoOwnerLoginEnv",
@@ -202,6 +206,7 @@ describe("updateLabelsImpl", () => {
       owner: "owner",
       repo: "repo",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "owner",
@@ -251,6 +256,7 @@ describe("updateLabelsImpl", () => {
       owner: "owner",
       repo: "repo",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
 
     // Ensure no labels are added or removed if any are invalid
@@ -288,6 +294,7 @@ describe("updateLabelsImpl", () => {
         owner: "owner",
         repo: "repo",
         run_id: 456,
+        per_page: PER_PAGE_MAX,
       });
       expect(github.rest.issues.addLabels).toBeCalledTimes(0);
       expect(github.rest.issues.removeLabel).toBeCalledWith({

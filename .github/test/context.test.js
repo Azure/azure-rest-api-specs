@@ -1,5 +1,6 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { extractInputs } from "../src/context.js";
+import { PER_PAGE_MAX } from "../src/github.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("extractInputs", () => {
@@ -181,18 +182,15 @@ describe("extractInputs", () => {
         },
       };
 
-      const github = {
-        rest: {
-          repos: {
-            listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
-              data: [{ number: 123 }, { number: 124 }].slice(
-                0,
-                numPullRequests,
-              ),
-            }),
-          },
+      const github = createMockGithub();
+      github.rest.repos.listPullRequestsAssociatedWithCommit.mockImplementation(
+        async (args) => {
+          console.log(JSON.stringify(args));
+          return {
+            data: [{ number: 123 }, { number: 124 }].slice(0, numPullRequests),
+          };
         },
-      };
+      );
 
       const inputsPromise = extractInputs(github, context, createMockCore());
       if (numPullRequests === 1) {
@@ -213,6 +211,7 @@ describe("extractInputs", () => {
         owner: "TestRepoOwnerLoginFork",
         repo: "TestRepoName",
         commit_sha: "abc123",
+        per_page: PER_PAGE_MAX,
       });
     },
   );
