@@ -66,6 +66,10 @@ model AutoUpgradeProfileProperties {
     By default, this is set to False.
     """)
   disabled?: boolean;
+
+  @doc("The status of the auto upgrade profile.")
+  @added(Versions.v2025_03_01)
+  autoUpgradeProfileStatus?: AutoUpgradeProfileStatus;
 }
 
 @doc("Configuration of how auto upgrade will be run.")
@@ -123,4 +127,36 @@ interface AutoUpgradeProfiles {
   >;
 
   listByFleet is ArmResourceListByParent<AutoUpgradeProfile>;
+}
+
+@doc("AutoUpgradeProfileStatus is the status of an auto upgrade profile.")
+@added(Versions.v2025_03_01)
+model AutoUpgradeProfileStatus {
+  @doc("The time of the last attempt to automatically create and start an UpdateRun as triggered by the release of new versions.")
+  @visibility("read")
+  lastTriggeredAt?: utcDateTime;
+
+  @doc("The status of the last AutoUpgrade trigger.")
+  @visibility("read")
+  lastTriggerStatus?: AutoUpgradeLastTriggerStatus;
+
+  @doc("The error details of the last trigger.")
+  @visibility("read")
+  lastTriggerError?: Azure.ResourceManager.Foundations.ErrorDetail; // https://github.com/Azure/azure-rest-api-specs/blob/1de0b5315d62e1b40052bad2c9a2f2c89d84ff0f/specification/common-types/resource-management/v5/types.json#L260
+
+  @doc("The target Kubernetes version or node image versions of the last trigger.")
+  @visibility("read")
+  lastTriggerUpgradeVersions?: string[];
+}
+
+@doc("AutoUpgradeLastTriggerStatus is the status of the last AutoUpgrade trigger (attempt to automatically create and start UpdateRun when there are new released versions) of an auto upgrade profile.")
+@added(Versions.v2025_03_01)
+union AutoUpgradeLastTriggerStatus {
+  string,
+
+  @doc("The last AutoUpgrade trigger was succeeded.")
+  Succeeded: "Succeeded",
+
+  @doc("The last AutoUpgrade trigger failed.")
+  Failed: "Failed",
 }
