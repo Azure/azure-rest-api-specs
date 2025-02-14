@@ -28,7 +28,7 @@ These are the global settings for the Datadog API.
 title: DatadogManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-03
+tag: package-2025-01
 ```
 
 ### Tag: package-2025-01
