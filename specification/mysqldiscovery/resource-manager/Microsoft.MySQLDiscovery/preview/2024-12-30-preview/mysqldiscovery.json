@@ -41,6 +41,9 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
       "name": "MySQLSites"
     },
     {
@@ -57,6 +60,37 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.MySqlDiscovery/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MySqlDiscovery/MySQLSites": {
       "get": {
         "operationId": "MySqlSites_ListBySubscription",
@@ -1505,11 +1539,13 @@
         "values": [
           {
             "name": "Community",
-            "value": "Community"
+            "value": "Community",
+            "description": "Community  mysql server edition."
           },
           {
             "name": "Enterprise",
-            "value": "Enterprise"
+            "value": "Enterprise",
+            "description": "Enterprise  mysql server edition."
           }
         ]
       }
@@ -1895,31 +1931,38 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "Unknown  Provisioning State."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Succeeded  Provisioning State."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Failed  Provisioning State."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Canceled  Provisioning State."
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "Creating  Provisioning State."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "Deleting  Provisioning State."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "Updating  Provisioning State."
           }
         ]
       },
@@ -2007,15 +2050,18 @@
         "values": [
           {
             "name": "OutOfSupport",
-            "value": "OutOfSupport"
+            "value": "OutOfSupport",
+            "description": "OutOfSupport  Support Status."
           },
           {
             "name": "Extended",
-            "value": "Extended"
+            "value": "Extended",
+            "description": "Extended  Support Status."
           },
           {
             "name": "Mainstream",
-            "value": "Mainstream"
+            "value": "Mainstream",
+            "description": "Mainstream  Support Status."
           }
         ]
       }

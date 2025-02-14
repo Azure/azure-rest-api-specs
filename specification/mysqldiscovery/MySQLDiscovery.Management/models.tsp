@@ -15,12 +15,19 @@ namespace Microsoft.MySqlDiscovery;
  */
 union ProvisioningState {
   string,
+  /** Unknown  Provisioning State. */
   Unknown: "Unknown",
+  /** Succeeded  Provisioning State. */
   Succeeded: "Succeeded",
+  /** Failed  Provisioning State. */
   Failed: "Failed",
+  /** Canceled  Provisioning State. */
   Canceled: "Canceled",
+  /** Creating  Provisioning State. */
   Creating: "Creating",
+  /** Deleting  Provisioning State. */
   Deleting: "Deleting",
+  /** Updating  Provisioning State. */
   Updating: "Updating",
 }
 
@@ -29,8 +36,11 @@ union ProvisioningState {
  */
 union SupportStatus {
   string,
+  /** OutOfSupport  Support Status. */
   OutOfSupport: "OutOfSupport",
+  /** Extended  Support Status. */
   Extended: "Extended",
+  /** Mainstream  Support Status. */
   Mainstream: "Mainstream",
 }
 
@@ -39,13 +49,16 @@ union SupportStatus {
  */
 union Edition {
   string,
+  /** Community  mysql server edition. */
   Community: "Community",
+  /** Enterprise  mysql server edition. */
   Enterprise: "Enterprise",
 }
 
 /**
  * MySQL Site properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 model MySQLSiteProperties {
   /**
    * The mapped master Site Id.
@@ -68,6 +81,7 @@ model MySQLSiteProperties {
   /**
    * Gets or sets the provisioning state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing api"
   provisioningState?: ProvisioningState;
 }
 
@@ -118,10 +132,12 @@ model Resource {
 /**
  * Object containing tags updates for patch operations.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 model MySQLSitesResourcePatch {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   tags?: Record<string>;
 
   /**
@@ -133,11 +149,13 @@ model MySQLSitesResourcePatch {
 /**
  * List of Sites.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 model MySQLSiteList is Azure.Core.Page<MySQLSite>;
 
 /**
  * MySQL Server properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 model MySQLServerProperties {
   /**
    * The Server IP/host name.
@@ -196,11 +214,13 @@ model MySQLServerProperties {
   /**
    * Gets or sets the provisioning state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing api"
   provisioningState?: ProvisioningState;
 
   /**
    * Resource labels.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   labels?: Record<string>;
 }
 
@@ -258,10 +278,12 @@ model Error {
 /**
  * Object containing tags updates for patch operations.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 model MySQLServerResourcePatch {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   tags?: Record<string>;
 
   /**
@@ -273,6 +295,7 @@ model MySQLServerResourcePatch {
 /**
  * List of Servers.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 model MySQLServerList is Azure.Core.Page<MySQLServer>;
 
 /**
@@ -292,6 +315,7 @@ model SummariesProperties {
   /**
    * Gets or sets the provisioning state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing api"
   provisioningState?: ProvisioningState;
 }
 
@@ -317,6 +341,7 @@ model ErrorSummariesProperties {
   /**
    * Gets or sets the provisioning state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing api"
   provisioningState?: ProvisioningState;
 }
 

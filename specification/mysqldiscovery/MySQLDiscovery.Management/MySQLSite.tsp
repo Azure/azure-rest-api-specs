@@ -13,6 +13,7 @@ namespace Microsoft.MySqlDiscovery;
 /**
  * The MySQLSite resource definition.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 model MySQLSite
   is Azure.ResourceManager.TrackedResource<MySQLSiteProperties, false> {
   ...ResourceNameParameter<
@@ -25,9 +26,11 @@ model MySQLSite
   /**
    * The extended location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing api"
   extendedLocation?: ExtendedLocation;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 @armResourceOperations
 interface MySQLSites {
   /**
@@ -73,6 +76,7 @@ interface MySQLSites {
   /**
    * Trigger Refresh Refresh action
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing api"
   @action("refresh")
   triggerRefresh is ArmResourceActionAsync<MySQLSite, void, void>;
 }
