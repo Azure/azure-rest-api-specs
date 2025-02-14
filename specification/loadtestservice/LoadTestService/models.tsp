@@ -137,7 +137,7 @@ union FileType {
 }
 
 @doc("File status.")
-union FileStatus {
+union FileValidationStatus {
   string,
   @doc("File is not validated.") "NOT_VALIDATED",
   @doc("File is validated.") "VALIDATION_SUCCESS",
@@ -155,7 +155,7 @@ union PassFailTestResult {
 }
 
 @doc("Test run status.")
-union Status {
+union TestRunStatus {
   string,
   @doc("Test run request is accepted.") "ACCEPTED",
   @doc("Test run is not yet started.") "NOTSTARTED",
@@ -590,7 +590,7 @@ model FileInfo {
 
   @doc("Validation status of the file")
   @visibility("read")
-  validationStatus?: FileStatus;
+  validationStatus?: FileValidationStatus;
 
   @doc("Validation failure error details")
   @visibility("read")
@@ -771,7 +771,7 @@ model TestRun {
 
   @doc("The test run status.")
   @visibility("read")
-  status?: Status;
+  status?: TestRunStatus;
 
   @doc("The test run start DateTime(RFC 3339 literal format).")
   @visibility("read")

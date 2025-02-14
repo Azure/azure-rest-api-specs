@@ -2495,48 +2495,6 @@
         }
       }
     },
-    "FileStatus": {
-      "type": "string",
-      "description": "File status.",
-      "enum": [
-        "NOT_VALIDATED",
-        "VALIDATION_SUCCESS",
-        "VALIDATION_FAILURE",
-        "VALIDATION_INITIATED",
-        "VALIDATION_NOT_REQUIRED"
-      ],
-      "x-ms-enum": {
-        "name": "FileStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NOT_VALIDATED",
-            "value": "NOT_VALIDATED",
-            "description": "File is not validated."
-          },
-          {
-            "name": "VALIDATION_SUCCESS",
-            "value": "VALIDATION_SUCCESS",
-            "description": "File is validated."
-          },
-          {
-            "name": "VALIDATION_FAILURE",
-            "value": "VALIDATION_FAILURE",
-            "description": "File validation is failed."
-          },
-          {
-            "name": "VALIDATION_INITIATED",
-            "value": "VALIDATION_INITIATED",
-            "description": "File validation is in progress."
-          },
-          {
-            "name": "VALIDATION_NOT_REQUIRED",
-            "value": "VALIDATION_NOT_REQUIRED",
-            "description": "Validation is not required."
-          }
-        ]
-      }
-    },
     "FileType": {
       "type": "string",
       "description": "Types of file supported.",
@@ -2581,6 +2539,48 @@
             "name": "TEST_SCRIPT",
             "value": "TEST_SCRIPT",
             "description": "If the file is a test script."
+          }
+        ]
+      }
+    },
+    "FileValidationStatus": {
+      "type": "string",
+      "description": "File status.",
+      "enum": [
+        "NOT_VALIDATED",
+        "VALIDATION_SUCCESS",
+        "VALIDATION_FAILURE",
+        "VALIDATION_INITIATED",
+        "VALIDATION_NOT_REQUIRED"
+      ],
+      "x-ms-enum": {
+        "name": "FileValidationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NOT_VALIDATED",
+            "value": "NOT_VALIDATED",
+            "description": "File is not validated."
+          },
+          {
+            "name": "VALIDATION_SUCCESS",
+            "value": "VALIDATION_SUCCESS",
+            "description": "File is validated."
+          },
+          {
+            "name": "VALIDATION_FAILURE",
+            "value": "VALIDATION_FAILURE",
+            "description": "File validation is failed."
+          },
+          {
+            "name": "VALIDATION_INITIATED",
+            "value": "VALIDATION_INITIATED",
+            "description": "File validation is in progress."
+          },
+          {
+            "name": "VALIDATION_NOT_REQUIRED",
+            "value": "VALIDATION_NOT_REQUIRED",
+            "description": "Validation is not required."
           }
         ]
       }
@@ -3554,114 +3554,6 @@
         ]
       }
     },
-    "Status": {
-      "type": "string",
-      "description": "Test run status.",
-      "enum": [
-        "ACCEPTED",
-        "NOTSTARTED",
-        "PROVISIONING",
-        "PROVISIONED",
-        "CONFIGURING",
-        "CONFIGURED",
-        "EXECUTING",
-        "EXECUTED",
-        "DEPROVISIONING",
-        "DEPROVISIONED",
-        "DONE",
-        "CANCELLING",
-        "CANCELLED",
-        "FAILED",
-        "VALIDATION_SUCCESS",
-        "VALIDATION_FAILURE"
-      ],
-      "x-ms-enum": {
-        "name": "Status",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ACCEPTED",
-            "value": "ACCEPTED",
-            "description": "Test run request is accepted."
-          },
-          {
-            "name": "NOTSTARTED",
-            "value": "NOTSTARTED",
-            "description": "Test run is not yet started."
-          },
-          {
-            "name": "PROVISIONING",
-            "value": "PROVISIONING",
-            "description": "Test run is provisioning."
-          },
-          {
-            "name": "PROVISIONED",
-            "value": "PROVISIONED",
-            "description": "Test run is provisioned."
-          },
-          {
-            "name": "CONFIGURING",
-            "value": "CONFIGURING",
-            "description": "Test run is getting configured."
-          },
-          {
-            "name": "CONFIGURED",
-            "value": "CONFIGURED",
-            "description": "Test run configuration is done."
-          },
-          {
-            "name": "EXECUTING",
-            "value": "EXECUTING",
-            "description": "Test run has started executing."
-          },
-          {
-            "name": "EXECUTED",
-            "value": "EXECUTED",
-            "description": "Test run execution is completed."
-          },
-          {
-            "name": "DEPROVISIONING",
-            "value": "DEPROVISIONING",
-            "description": "Test run is getting deprovisioned."
-          },
-          {
-            "name": "DEPROVISIONED",
-            "value": "DEPROVISIONED",
-            "description": "Test run is deprovisioned."
-          },
-          {
-            "name": "DONE",
-            "value": "DONE",
-            "description": "Test run is completed."
-          },
-          {
-            "name": "CANCELLING",
-            "value": "CANCELLING",
-            "description": "Test run is being cancelled."
-          },
-          {
-            "name": "CANCELLED",
-            "value": "CANCELLED",
-            "description": "Test run request is cancelled."
-          },
-          {
-            "name": "FAILED",
-            "value": "FAILED",
-            "description": "Test run request is failed."
-          },
-          {
-            "name": "VALIDATION_SUCCESS",
-            "value": "VALIDATION_SUCCESS",
-            "description": "Test run JMX file is validated."
-          },
-          {
-            "name": "VALIDATION_FAILURE",
-            "value": "VALIDATION_FAILURE",
-            "description": "Test run JMX file validation is failed."
-          }
-        ]
-      }
-    },
     "TargetResourceConfigurations": {
       "type": "object",
       "description": "Configurations of a target resource. This varies with the kind of resource.",
@@ -3960,7 +3852,7 @@
           "readOnly": true
         },
         "validationStatus": {
-          "$ref": "#/definitions/FileStatus",
+          "$ref": "#/definitions/FileValidationStatus",
           "description": "Validation status of the file",
           "readOnly": true
         },
@@ -4470,7 +4362,7 @@
           "maxLength": 100
         },
         "status": {
-          "$ref": "#/definitions/Status",
+          "$ref": "#/definitions/TestRunStatus",
           "description": "The test run status.",
           "readOnly": true
         },
@@ -4690,7 +4582,7 @@
       "description": "Details of a particular test run for a test profile run.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/Status",
+          "$ref": "#/definitions/TestRunStatus",
           "description": "Status of the test run."
         },
         "configurationId": {
@@ -4737,7 +4629,7 @@
           "readOnly": true
         },
         "validationStatus": {
-          "$ref": "#/definitions/FileStatus",
+          "$ref": "#/definitions/FileValidationStatus",
           "description": "Validation status of the file",
           "readOnly": true
         },
@@ -4971,6 +4863,114 @@
           "description": "Send network bytes.",
           "readOnly": true
         }
+      }
+    },
+    "TestRunStatus": {
+      "type": "string",
+      "description": "Test run status.",
+      "enum": [
+        "ACCEPTED",
+        "NOTSTARTED",
+        "PROVISIONING",
+        "PROVISIONED",
+        "CONFIGURING",
+        "CONFIGURED",
+        "EXECUTING",
+        "EXECUTED",
+        "DEPROVISIONING",
+        "DEPROVISIONED",
+        "DONE",
+        "CANCELLING",
+        "CANCELLED",
+        "FAILED",
+        "VALIDATION_SUCCESS",
+        "VALIDATION_FAILURE"
+      ],
+      "x-ms-enum": {
+        "name": "TestRunStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ACCEPTED",
+            "value": "ACCEPTED",
+            "description": "Test run request is accepted."
+          },
+          {
+            "name": "NOTSTARTED",
+            "value": "NOTSTARTED",
+            "description": "Test run is not yet started."
+          },
+          {
+            "name": "PROVISIONING",
+            "value": "PROVISIONING",
+            "description": "Test run is provisioning."
+          },
+          {
+            "name": "PROVISIONED",
+            "value": "PROVISIONED",
+            "description": "Test run is provisioned."
+          },
+          {
+            "name": "CONFIGURING",
+            "value": "CONFIGURING",
+            "description": "Test run is getting configured."
+          },
+          {
+            "name": "CONFIGURED",
+            "value": "CONFIGURED",
+            "description": "Test run configuration is done."
+          },
+          {
+            "name": "EXECUTING",
+            "value": "EXECUTING",
+            "description": "Test run has started executing."
+          },
+          {
+            "name": "EXECUTED",
+            "value": "EXECUTED",
+            "description": "Test run execution is completed."
+          },
+          {
+            "name": "DEPROVISIONING",
+            "value": "DEPROVISIONING",
+            "description": "Test run is getting deprovisioned."
+          },
+          {
+            "name": "DEPROVISIONED",
+            "value": "DEPROVISIONED",
+            "description": "Test run is deprovisioned."
+          },
+          {
+            "name": "DONE",
+            "value": "DONE",
+            "description": "Test run is completed."
+          },
+          {
+            "name": "CANCELLING",
+            "value": "CANCELLING",
+            "description": "Test run is being cancelled."
+          },
+          {
+            "name": "CANCELLED",
+            "value": "CANCELLED",
+            "description": "Test run request is cancelled."
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "Test run request is failed."
+          },
+          {
+            "name": "VALIDATION_SUCCESS",
+            "value": "VALIDATION_SUCCESS",
+            "description": "Test run JMX file is validated."
+          },
+          {
+            "name": "VALIDATION_FAILURE",
+            "value": "VALIDATION_FAILURE",
+            "description": "Test run JMX file validation is failed."
+          }
+        ]
       }
     },
     "TestServerMetricConfig": {

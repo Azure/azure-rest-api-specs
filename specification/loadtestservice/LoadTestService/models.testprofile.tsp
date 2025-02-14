@@ -97,7 +97,7 @@ model FunctionFlexConsumptionResourceConfiguration {
 @added(APIVersions.v2024_05_01_preview)
 model TestRunDetail {
   @doc("Status of the test run.")
-  status: Status;
+  status: TestRunStatus;
 
   @doc("ID of the configuration on which the test ran.")
   configurationId: string;
