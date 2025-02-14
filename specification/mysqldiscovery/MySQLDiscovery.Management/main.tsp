@@ -5,7 +5,7 @@
  *   isFullCompatible: false
  *   guessResourceKey: false
  * Version: 0.10.9
- * Date: 2025-02-14T08:23:29.634Z
+ * Date: 2025-02-14T08:36:50.456Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -34,7 +34,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
-namespace Microsoft.MySQLDiscovery;
+namespace Microsoft.MySqlDiscovery;
 
 /**
  * The available API versions.

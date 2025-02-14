@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.MySQLDiscovery;
+namespace Microsoft.MySqlDiscovery;
 
 /**
  * Gets or sets the provisioning state.
