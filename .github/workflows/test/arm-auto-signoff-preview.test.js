@@ -54,7 +54,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toBe(LabelAction.Remove);
+    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
   });
 
   it.each([
@@ -77,7 +77,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toBe(LabelAction.Remove);
+    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
   });
 
   it("removes label if check failed", async () => {
@@ -107,7 +107,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toBe(LabelAction.Remove);
+    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
   });
 
   it("no-ops if check not found or not completed", async () => {
@@ -131,7 +131,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toBe(LabelAction.None);
+    ).resolves.toEqual({ labelAction: LabelAction.None, issueNumber: 123 });
 
     github.rest.checks.listForRef.mockResolvedValue({
       data: {
@@ -153,7 +153,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toBe(LabelAction.None);
+    ).resolves.toEqual({ labelAction: LabelAction.None, issueNumber: 123 });
   });
 
   it("adds label if incremental tsp, labels match, and check succeeded", async () => {
@@ -183,6 +183,6 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toBe(LabelAction.Add);
+    ).resolves.toEqual({ labelAction: LabelAction.Add, issueNumber: 123 });
   });
 });
