@@ -95,4 +95,12 @@ jobs:
         with:
           name: "ARMAutoSignoffPreview"
           # Convert "add/remove" to "true/false"
-          value: "${{ steps.get-label-action.outputs.result == 'add' }}"
+          value: "${{ steps.get-label-action.outputs.labelAction == 'add' }}"
+
+      # Required for consumers to identify the PR associated with this workflow run
+      - if: ${{ github.event_name == 'issue_comment' || github.event_name == 'workflow_run' }}
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "issue-number"
+          value: ${{ steps.get-label-action.outputs.issueNumber }}
