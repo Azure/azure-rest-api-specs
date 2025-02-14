@@ -183,6 +183,6 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.Adda, issueNumber: 123 });
+    ).resolves.toEqual({ labelAction: LabelAction.Add, issueNumber: 123 });
   });
 });
