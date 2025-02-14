@@ -9,7 +9,6 @@ using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
-scalar LabelValue extends string;
 
 @doc("A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.")
 @resource("members")
@@ -59,7 +58,7 @@ model FleetMemberProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
   @added(Versions.v2025_03_01)
   @doc("The labels for the fleet member.")
-  labels?: Record<LabelValue>;
+  labels?: Record<string>;
 }
 
 @lroStatus
