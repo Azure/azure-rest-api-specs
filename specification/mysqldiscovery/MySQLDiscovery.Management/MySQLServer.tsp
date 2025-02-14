@@ -14,7 +14,6 @@ namespace Microsoft.MySqlDiscovery;
 /**
  * The MySQLServer resource definition.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 @parentResource(MySQLSite)
 model MySQLServer
   is Azure.ResourceManager.ProxyResource<MySQLServerProperties, false> {
@@ -28,12 +27,9 @@ model MySQLServer
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing api"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 @armResourceOperations
 interface MySQLServers {
   /**

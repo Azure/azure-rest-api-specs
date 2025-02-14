@@ -15,19 +15,40 @@ namespace Microsoft.MySqlDiscovery;
  */
 union ProvisioningState {
   string,
-  /** Unknown  Provisioning State. */
+
+  /**
+   * Unknown  Provisioning State.
+   */
   Unknown: "Unknown",
-  /** Succeeded  Provisioning State. */
+
+  /**
+   * Succeeded  Provisioning State.
+   */
   Succeeded: "Succeeded",
-  /** Failed  Provisioning State. */
+
+  /**
+   * Failed  Provisioning State.
+   */
   Failed: "Failed",
-  /** Canceled  Provisioning State. */
+
+  /**
+   * Canceled  Provisioning State.
+   */
   Canceled: "Canceled",
-  /** Creating  Provisioning State. */
+
+  /**
+   * Creating  Provisioning State.
+   */
   Creating: "Creating",
-  /** Deleting  Provisioning State. */
+
+  /**
+   * Deleting  Provisioning State.
+   */
   Deleting: "Deleting",
-  /** Updating  Provisioning State. */
+
+  /**
+   * Updating  Provisioning State.
+   */
   Updating: "Updating",
 }
 
@@ -36,11 +57,20 @@ union ProvisioningState {
  */
 union SupportStatus {
   string,
-  /** OutOfSupport  Support Status. */
+
+  /**
+   * OutOfSupport  Support Status.
+   */
   OutOfSupport: "OutOfSupport",
-  /** Extended  Support Status. */
+
+  /**
+   * Extended  Support Status.
+   */
   Extended: "Extended",
-  /** Mainstream  Support Status. */
+
+  /**
+   * Mainstream  Support Status.
+   */
   Mainstream: "Mainstream",
 }
 
@@ -49,16 +79,26 @@ union SupportStatus {
  */
 union Edition {
   string,
-  /** Community  mysql server edition. */
+
+  /**
+   * Community  mysql server edition.
+   */
   Community: "Community",
-  /** Enterprise  mysql server edition. */
+
+  /**
+   * Enterprise  mysql server edition.
+   */
   Enterprise: "Enterprise",
 }
 
 /**
+ * List of Sites.
+ */
+model MySQLSiteList is Azure.Core.Page<MySQLSite>;
+
+/**
  * MySQL Site properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 model MySQLSiteProperties {
   /**
    * The mapped master Site Id.
@@ -81,7 +121,7 @@ model MySQLSiteProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing api"
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -132,12 +172,10 @@ model Resource {
 /**
  * Object containing tags updates for patch operations.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 model MySQLSitesResourcePatch {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   tags?: Record<string>;
 
   /**
@@ -147,15 +185,13 @@ model MySQLSitesResourcePatch {
 }
 
 /**
- * List of Sites.
+ * List of Servers.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
-model MySQLSiteList is Azure.Core.Page<MySQLSite>;
+model MySQLServerList is Azure.Core.Page<MySQLServer>;
 
 /**
  * MySQL Server properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 model MySQLServerProperties {
   /**
    * The Server IP/host name.
@@ -214,13 +250,12 @@ model MySQLServerProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing api"
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   /**
    * Resource labels.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   labels?: Record<string>;
 }
 
@@ -278,12 +313,10 @@ model Error {
 /**
  * Object containing tags updates for patch operations.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
 model MySQLServerResourcePatch {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   tags?: Record<string>;
 
   /**
@@ -293,62 +326,9 @@ model MySQLServerResourcePatch {
 }
 
 /**
- * List of Servers.
+ * List of Agents.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing api"
-model MySQLServerList is Azure.Core.Page<MySQLServer>;
-
-/**
- * Summaries properties
- */
-model SummariesProperties {
-  /**
-   * The number of discovered server.
-   */
-  discoveredServers?: int64;
-
-  /**
-   * The list of errors.
-   */
-  errors?: Error[];
-
-  /**
-   * Gets or sets the provisioning state.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing api"
-  provisioningState?: ProvisioningState;
-}
-
-/**
- * List of Summaries.
- */
-model SummaryList is Azure.Core.Page<Summary>;
-
-/**
- * Error summaries properties
- */
-model ErrorSummariesProperties {
-  /**
-   * The number of affected objects.
-   */
-  affectedObjectsCount?: int64;
-
-  /**
-   * The list of errors.
-   */
-  errors?: Error[];
-
-  /**
-   * Gets or sets the provisioning state.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing api"
-  provisioningState?: ProvisioningState;
-}
-
-/**
- * List of ErrorSummaries.
- */
-model ErrorSummaryList is Azure.Core.Page<ErrorSummary>;
+model AgentList is Azure.Core.Page<Agent>;
 
 /**
  * Agent properties
@@ -435,6 +415,53 @@ model AgentResourcePatchProperties {
 }
 
 /**
- * List of Agents.
+ * List of ErrorSummaries.
  */
-model AgentList is Azure.Core.Page<Agent>;
+model ErrorSummaryList is Azure.Core.Page<ErrorSummary>;
+
+/**
+ * Error summaries properties
+ */
+model ErrorSummariesProperties {
+  /**
+   * The number of affected objects.
+   */
+  affectedObjectsCount?: int64;
+
+  /**
+   * The list of errors.
+   */
+  errors?: Error[];
+
+  /**
+   * Gets or sets the provisioning state.
+   */
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * List of Summaries.
+ */
+model SummaryList is Azure.Core.Page<Summary>;
+
+/**
+ * Summaries properties
+ */
+model SummariesProperties {
+  /**
+   * The number of discovered server.
+   */
+  discoveredServers?: int64;
+
+  /**
+   * The list of errors.
+   */
+  errors?: Error[];
+
+  /**
+   * Gets or sets the provisioning state.
+   */
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}

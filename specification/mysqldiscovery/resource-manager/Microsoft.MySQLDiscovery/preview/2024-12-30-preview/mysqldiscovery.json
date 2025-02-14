@@ -50,13 +50,13 @@
       "name": "MySQLServers"
     },
     {
-      "name": "Summaries"
+      "name": "Agents"
     },
     {
       "name": "ErrorSummaries"
     },
     {
-      "name": "Agents"
+      "name": "Summaries"
     }
   ],
   "paths": {
@@ -1096,7 +1096,7 @@
             }
           },
           "204": {
-            "description": "Azure operation completed successfully."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1271,7 +1271,7 @@
             }
           },
           "204": {
-            "description": "Azure operation completed successfully."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1611,7 +1611,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets or sets the provisioning state."
+          "description": "Gets or sets the provisioning state.",
+          "readOnly": true
         }
       }
     },
@@ -1783,7 +1784,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets or sets the provisioning state."
+          "description": "Gets or sets the provisioning state.",
+          "readOnly": true
         },
         "labels": {
           "type": "object",
@@ -1888,7 +1890,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets or sets the provisioning state."
+          "description": "Gets or sets the provisioning state.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1986,7 +1989,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets or sets the provisioning state."
+          "description": "Gets or sets the provisioning state.",
+          "readOnly": true
         }
       }
     },
@@ -2065,6 +2069,10 @@
           }
         ]
       }
+    },
+    "TypeSpec.Http.NoContentResponse": {
+      "type": "object",
+      "description": "There is no content to send for this request, but the headers may be useful."
     }
   },
   "parameters": {}
