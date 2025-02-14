@@ -30,10 +30,10 @@ interface Connections {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get credentials for a connection by name.")
-  @route("/connections/{name}/listSecrets")
+  @doc("Get connection with secrets by name.")
+  @route("/connections/{name}/getWithSecrets")
   @post
-  post is Azure.Core.Foundations.Operation<
+  getWithSecrets is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the connection.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
