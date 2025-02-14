@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@typespec/versioning";
+import "../credentials/models.tsp"
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -22,8 +23,8 @@ model Connection {
   @doc("The name of the resource")
   name: string;
 
-  @doc("Authentication type of the connection target")
-  authType: AuthenticationType;
+  @doc("Credential used to connect to the external resource.")
+  credentials: BaseCredential;
 
   @doc("Category of the connection")
   category: ConnectionType;
@@ -44,20 +45,6 @@ model PagedConnection {
   @nextLink
   nextLink?: ResourceLocation<Connection>;
 }
-
-#suppress "@azure-tools/typespec-azure-core/no-enum"
-@doc("Authentication type used by Azure AI service to connect to another service")
-enum AuthenticationType {
-  @doc("API Key authentication")
-  apiKey: "ApiKey",
-
-  @doc("Entra ID authentication (formerly known as AAD)")
-  entraId: "AAD",
-
-  @doc("Shared Access Signature (SAS) authentication")
-  SAS: "SAS",
-}
-
 
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType
 #suppress "@azure-tools/typespec-azure-core/no-enum"
