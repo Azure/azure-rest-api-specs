@@ -37,15 +37,15 @@ namespace ServiceClient {
   namespace ContainerClient {
     op create is Container.create;
     op getProperties is Container.getProperties;
+  }
 
-    @clientInitialization({
-      initializedBy: InitializedBy.parent | InitializedBy.individually,
-    })
-    @clientNamespace("Azure.Storage.Blob")
-    namespace BlobClient {
-      op download is Blob.download;
-      op getProperties is Blob.getProperties;
-    }
+  @clientInitialization({
+    initializedBy: InitializedBy.parent | InitializedBy.individually,
+  })
+  @clientNamespace("Azure.Storage.Blob")
+  namespace BlobClient {
+    op download is Blob.download;
+    op getProperties is Blob.getProperties;
   }
 }
 
