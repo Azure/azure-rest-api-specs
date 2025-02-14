@@ -89,13 +89,15 @@ jobs:
           ISSUE_NUMBER: ${{ inputs.issue_number }}
           HEAD_SHA: ${{ inputs.head_sha }}
 
-      - if: ${{ steps.get-label-action.outputs.labelAction == 'add' || steps.get-label-action.outputs.labelAction == 'remove' }}
+      - if: |
+          fromJson(steps.get-label-action.outputs.result).labelAction == 'add' ||
+          fromJson(steps.get-label-action.outputs.result).labelAction == 'remove'
         name: Upload artifact with results
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMAutoSignoffPreview"
           # Convert "add/remove" to "true/false"
-          value: "${{ steps.get-label-action.outputs.labelAction == 'add' }}"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).labelAction == 'add' }}"
 
       # Required for consumers to identify the PR associated with this workflow run
       # Output can be trusted, because it was uploaded from a workflow that is trusted,
@@ -106,4 +108,4 @@ jobs:
         uses: ./.github/actions/add-empty-artifact
         with:
           name: "issue-number"
-          value: ${{ steps.get-label-action.outputs.issueNumber }}
+          value: "${{ fromJson(steps.get-label-action.outputs.result).issueNumber }}"
