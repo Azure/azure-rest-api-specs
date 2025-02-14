@@ -1638,6 +1638,12 @@
             "schema": {
               "$ref": "#/definitions/RecordingStateResponse"
             }
+          },
+          "202": {
+            "description": "The service has accepted the StartCallRecording request and will begin processing it. You will receive either a StartRecordingFailed event or RecordingStateChanged event at your specified callback URI to update you on the status of the request.",
+            "schema": {
+              "$ref": "#/definitions/RecordingStateResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -1844,6 +1850,10 @@
         "mediaStreamingConfiguration": {
           "$ref": "#/definitions/MediaStreamingOptions",
           "description": "Media Streaming Configuration."
+        },
+        "teamsAppSource": {
+          "$ref": "#/definitions/MicrosoftTeamsAppIdentifierModel",
+          "description": "The identifier of the source for creating call with Teams resource account ID."
         }
       }
     },
@@ -2025,11 +2035,11 @@
         }
       }
     },
-    "MicrosoftTeamsUserIdentifierModel": {
-      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
-    },
     "MicrosoftTeamsAppIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
+    },
+    "MicrosoftTeamsUserIdentifierModel": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
     },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
@@ -2159,6 +2169,10 @@
           "description": "The callback uri.",
           "type": "string"
         },
+        "customCallingContext": {
+          "$ref": "#/definitions/CustomCallingContext",
+          "description": "Used by customer to send custom calling context to targets when answering On-Behalf-Of call"
+        },
         "operationContext": {
           "description": "A customer set value used to track the answering of a call.",
           "type": "string"
@@ -2178,6 +2192,26 @@
         "mediaStreamingConfiguration": {
           "$ref": "#/definitions/MediaStreamingOptions",
           "description": "Media Streaming Configuration."
+        }
+      }
+    },
+    "CustomCallingContext": {
+      "description": "The custom calling context which will be sent to the target",
+      "type": "object",
+      "properties": {
+        "voipHeaders": {
+          "description": "Custom calling context VoiP headers",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sipHeaders": {
+          "description": "Custom calling context SIP headers",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2322,26 +2356,6 @@
         "customCallingContext": {
           "$ref": "#/definitions/CustomCallingContext",
           "description": "Used by customer to send custom calling context to targets"
-        }
-      }
-    },
-    "CustomCallingContext": {
-      "description": "The custom calling context which will be sent to the target",
-      "type": "object",
-      "properties": {
-        "voipHeaders": {
-          "description": "Custom calling context VoiP headers",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "sipHeaders": {
-          "description": "Custom calling context SIP headers",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -3174,14 +3188,15 @@
     },
     "StartCallRecordingRequest": {
       "description": "The request payload start for call recording operation with call locator.",
-      "required": [
-        "callLocator"
-      ],
       "type": "object",
       "properties": {
         "callLocator": {
           "$ref": "#/definitions/CallLocator",
-          "description": "The call locator."
+          "description": "The call locator. (Only one of callLocator or callConnectionId to be used)"
+        },
+        "callConnectionId": {
+          "description": "The call connection Id. (Only one of callLocator or callConnectionId to be used)",
+          "type": "string"
         },
         "recordingStateCallbackUri": {
           "description": "The uri to send notifications to.",
@@ -4603,6 +4618,40 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StartRecordingFailed": {
+      "type": "object",
+      "properties": {
+        "recordingId": {
+          "description": "The call recording Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationContext": {
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Result information defines the code, subcode and message",
           "readOnly": true
         },
         "callConnectionId": {
