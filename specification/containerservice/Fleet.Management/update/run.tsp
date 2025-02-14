@@ -43,6 +43,13 @@ scalar FleetUpdateStrategyResourceId
     }
   ]>;
 
+scalar AutoUpgradeProfileId
+extends Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.ContainerService/fleets/updateRuns",
+  }
+]>;
+
 @doc("The properties of the UpdateRun.")
 model UpdateRunProperties {
   @visibility("read")
@@ -79,6 +86,11 @@ model UpdateRunProperties {
   @visibility("read")
   @doc("The status of the UpdateRun.")
   status?: UpdateRunStatus;
+
+  @visibility("read")
+  @doc("AutoUpgradeProfileId is the id of an auto upgrade profile resource.")
+  @added(Versions.v2025_03_01)
+  autoUpgradeProfileId?: AutoUpgradeProfileId;
 }
 
 @doc("The update to be applied to the ManagedClusters.")

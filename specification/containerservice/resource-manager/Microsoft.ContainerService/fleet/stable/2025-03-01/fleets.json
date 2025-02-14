@@ -2163,6 +2163,18 @@
         }
       ]
     },
+    "AutoUpgradeProfileId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/fleets/updateRuns"
+          }
+        ]
+      }
+    },
     "AutoUpgradeProfileListResult": {
       "type": "object",
       "description": "The response of a AutoUpgradeProfile list operation.",
@@ -2718,18 +2730,6 @@
         "allowedResources": [
           {
             "type": "Microsoft.ContainerService/fleets/updateStrategies"
-          }
-        ]
-      }
-    },
-    "AutoUpgradeProfileId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "AutoUpgradeProfileId is the id of an auto upgrade profile resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.ContainerService/fleets/updateRuns"
           }
         ]
       }
