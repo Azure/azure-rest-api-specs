@@ -26,8 +26,8 @@ model BlobServiceClientParameters {
 }
 
 @@clientName(Storage.Blob, "ServiceClient");
-@@clientInitialization(Storage.Blob.Blob, BlobServiceClientParameters);
-@@clientInitialization(Storage.Blob.Container, ContainerNamePathParameter);
-@@clientInitialization(Storage.Blob.AppendBlob, BlobServiceClientParameters);
-@@clientInitialization(Storage.Blob.BlockBlob, BlobServiceClientParameters);
-@@clientInitialization(Storage.Blob.PageBlob, BlobServiceClientParameters);
+@@clientInitialization(Storage.Blob.Blob, {parameters: BlobServiceClientParameters, initializedBy: InitializedBy.parent | InitializedBy.individually});
+@@clientInitialization(Storage.Blob.Container, {parameters: ContainerNamePathParameter, initializedBy: InitializedBy.parent | InitializedBy.individually});
+@@clientInitialization(Storage.Blob.AppendBlob, {parameters: BlobServiceClientParameters, initializedBy: InitializedBy.parent | InitializedBy.individually});
+@@clientInitialization(Storage.Blob.BlockBlob, {parameters: BlobServiceClientParameters, initializedBy: InitializedBy.parent | InitializedBy.individually});
+@@clientInitialization(Storage.Blob.PageBlob, {parameters: BlobServiceClientParameters, initializedBy: InitializedBy.parent | InitializedBy.individually});
