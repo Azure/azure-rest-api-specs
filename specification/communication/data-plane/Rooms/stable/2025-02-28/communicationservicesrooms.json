@@ -385,48 +385,10 @@
   },
   "definitions": {
     "CommunicationError": {
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "message": {
-          "description": "The error message.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "target": {
-          "description": "If applicable, would be used to indicate the property causing the error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Further details about specific errors that led to this error.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationError"
-          }
-        },
-        "innererror": {
-          "$ref": "#/definitions/CommunicationError"
-        }
-      }
+     "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationError"
     },
     "CommunicationErrorResponse": {
-      "required": [
-        "error"
-      ],
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CommunicationError"
-        }
-      }
+     "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
     },
     "CreateRoomRequest": {
       "description": "Request payload for creating new room.",
