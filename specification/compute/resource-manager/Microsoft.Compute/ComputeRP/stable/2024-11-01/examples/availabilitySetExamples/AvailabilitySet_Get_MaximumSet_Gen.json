@@ -12,6 +12,17 @@
         "properties": {
           "platformFaultDomainCount": 2,
           "platformUpdateDomainCount": 20,
+          "virtualMachineScaleSetMigrationInfo": {
+            "defaultVirtualMachineScaleSetInfo": {
+              "defaultVirtualMachineScaleSet": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+              },
+              "constrainedMaximumCapacity": false
+            },
+            "migrateToVirtualMachineScaleSet": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/{vmss-name}"
+            }
+          },
           "virtualMachines": [
             {
               "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
