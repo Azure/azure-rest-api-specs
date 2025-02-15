@@ -8,9 +8,7 @@ using Azure.ClientGenerator.Core;
 using DocumentIntelligence;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(
-  DocumentIntelligence.Versions.v2024_07_31_preview
-)
+@TypeSpec.Versioning.useDependency(DocumentIntelligence.Versions.v2024_11_30)
 namespace ClientCustomizations;
 
 @client({
@@ -21,12 +19,19 @@ interface DocumentIntelligenceClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   analyzeDocument is DocumentModels.analyzeDocument;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  analyzeBatchDocuments is DocumentModels.analyzeBatchDocuments;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getAnalyzeResultPdf is DocumentModels.getAnalyzeResultPdf;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getAnalyzeResultFigure is DocumentModels.getAnalyzeResultFigure;
-
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  deleteAnalyzeResult is DocumentModels.deleteAnalyzeResult;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  analyzeBatchDocuments is DocumentModels.analyzeBatchDocuments;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  listAnalyzeBatchResults is DocumentModels.listAnalyzeBatchResults;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  deleteAnalyzeBatchResult is DocumentModels.deleteAnalyzeBatchResult;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getAnalyzeBatchResult is DocumentModels.getAnalyzeBatchResult;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   classifyDocument is DocumentClassifiers.classifyDocument;
 }
@@ -49,7 +54,7 @@ interface DocumentIntelligenceAdministrationClient {
   deleteModel is DocumentModels.deleteModel;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getResourceInfo is MiscellaneousOperations.getResourceInfo;
+  getResourceDetails is MiscellaneousOperations.getResourceDetails;
   getOperation is MiscellaneousOperations.getOperation;
   listOperations is MiscellaneousOperations.listOperations;
 
@@ -64,26 +69,158 @@ interface DocumentIntelligenceAdministrationClient {
   deleteClassifier is DocumentClassifiers.deleteClassifier;
 }
 
-@@clientName(AnalyzeBatchDocumentsRequest,
-  "AnalyzeBatchDocumentsContent",
-  "csharp"
-);
-@@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentContent", "csharp");
 @@clientName(AuthorizeClassifierCopyRequest,
-  "AuthorizeClassifierCopyContent",
-  "csharp"
+  "AuthorizeClassifierCopyOptions",
+  "java"
 );
-@@clientName(AuthorizeCopyRequest, "AuthorizeCopyContent", "csharp");
 @@clientName(BuildDocumentClassifierRequest,
-  "BuildDocumentClassifierContent",
-  "csharp"
+  "BuildDocumentClassifierOptions",
+  "java"
 );
-@@clientName(BuildDocumentModelRequest, "BuildDocumentModelContent", "csharp");
-@@clientName(ClassifyDocumentRequest, "ClassifyDocumentContent", "csharp");
+@@clientName(BuildDocumentClassifierRequest.docTypes, "documentTypes", "java");
+@@clientName(BuildDocumentModelRequest, "BuildDocumentModelOptions", "java");
+@@clientName(BuildDocumentModelRequest, "BuildDocumentModelOptions", "java");
+@@clientName(ClassifyDocumentRequest, "ClassifyDocumentOptions", "java");
+@@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentOptions", "java");
+@@clientName(AnalyzeBatchDocumentsRequest,
+  "AnalyzeBatchDocumentsOptions",
+  "java"
+);
 @@clientName(ComposeDocumentModelRequest,
-  "ComposeDocumentModelContent",
+  "ComposeDocumentModelOptions",
+  "java"
+);
+@@clientName(AuthorizeCopyRequest, "AuthorizeModelCopyOptions", "java");
+@@clientName(AnalyzeOutputOption, "AnalyzeOutputFormat", "java");
+
+@@clientName(DocumentModelDetails.createdDateTime, "createdOn", "java");
+@@clientName(DocumentModelDetails.docTypes, "documentTypes", "java");
+@@clientName(DocumentModelDetails.expirationDateTime, "expiresOn", "java");
+@@clientName(DocumentModelDetails.modifiedDateTime, "modifiedOn", "java");
+@@clientName(ComposeDocumentModelRequest.docTypes, "documentTypes", "java");
+@@clientName(ModelCopyAuthorization.expirationDateTime, "expiresOn", "java");
+@@clientName(AnalyzedDocument.docType, "documentType", "java");
+@@clientName(DocumentClassifierDetails.createdDateTime, "createdOn", "java");
+@@clientName(DocumentClassifierDetails.docTypes, "documentTypes", "java");
+@@clientName(DocumentClassifierDetails.expirationDateTime, "expiresOn", "java");
+@@clientName(DocumentClassifierDetails.modifiedDateTime, "modifiedOn", "java");
+@@clientName(DocumentIntelligenceOperationDetails.createdDateTime,
+  "createdOn",
+  "java"
+);
+@@clientName(DocumentIntelligenceOperationDetails.lastUpdatedDateTime,
+  "lastUpdatedOn",
+  "java"
+);
+@@clientName(ClassifierCopyAuthorization.expirationDateTime,
+  "expiresOn",
+  "java"
+);
+@@clientName(AnalyzeDocumentRequest.base64Source, "bytesSource", "java");
+@@clientName(ClassifyDocumentRequest.base64Source, "bytesSource", "java");
+@@clientName(AnalyzeOperation.createdDateTime, "createdOn", "java");
+@@clientName(AnalyzeOperation.lastUpdatedDateTime, "lastUpdatedOn", "java");
+@@clientName(AnalyzeBatchOperation.createdDateTime, "createdOn", "java");
+@@clientName(AnalyzeBatchOperation.lastUpdatedDateTime,
+  "lastUpdatedOn",
+  "java"
+);
+
+@@clientName(StringIndexType.utf16CodeUnit, "utf16_CodeUnit", "java");
+@@clientName(DocumentBarcodeKind.QRCode, "QR_Code", "java");
+@@clientName(DocumentBarcodeKind.MicroQRCode, "MICRO_QR_CODE", "java");
+
+@@clientName(DocumentIntelligenceError.innererror, "innerError", "java");
+@@clientName(DocumentIntelligenceInnerError.innererror, "innerError", "java");
+@@clientName(DocumentField.valueArray, "valueList", "java");
+@@clientName(DocumentField.valueObject, "valueMap", "java");
+@@clientName(AnalyzeBatchOperation, "AnalyzeBatchOperationDetails", "java");
+@@clientName(AnalyzeOperation, "AnalyzeOperationDetails", "java");
+@@clientName(AnalyzeBatchOperationDetail, "AnalyzeBatchResultDetails", "java");
+
+@@clientName(AnalyzeBatchDocumentsRequest,
+  "AnalyzeBatchDocumentsOptions",
   "csharp"
 );
+@@clientName(AnalyzeBatchDocumentsRequest.azureBlobSource,
+  "BlobSource",
+  "csharp"
+);
+@@clientName(AnalyzeBatchDocumentsRequest.azureBlobFileListSource,
+  "BlobFileListSource",
+  "csharp"
+);
+@@clientName(AnalyzeBatchDocumentsRequest.resultContainerUrl,
+  "ResultContainerUri",
+  "csharp"
+);
+@@clientName(AnalyzeBatchOperation, "AnalyzeBatchOperationDetails", "csharp");
+@@clientName(AnalyzeBatchOperation.createdDateTime, "CreatedOn", "csharp");
+@@clientName(AnalyzeBatchOperation.lastUpdatedDateTime,
+  "LastUpdatedOn",
+  "csharp"
+);
+@@clientName(AnalyzeBatchOperationDetail,
+  "AnalyzeBatchResultDetails",
+  "csharp"
+);
+@@clientName(AnalyzeBatchOperationDetail.resultUrl, "ResultUri", "csharp");
+@@clientName(AnalyzeBatchOperationDetail.sourceUrl, "SourceUri", "csharp");
+@@clientName(AnalyzedDocument.docType, "DocumentType", "csharp");
+@@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentOptions", "csharp");
+@@clientName(AnalyzeDocumentRequest.base64Source, "BytesSource", "csharp");
+@@clientName(AnalyzeDocumentRequest.urlSource, "UriSource", "csharp");
+@@clientName(AuthorizeClassifierCopyRequest,
+  "AuthorizeClassifierCopyOptions",
+  "csharp"
+);
+@@clientName(AuthorizeCopyRequest, "AuthorizeModelCopyOptions", "csharp");
+@@clientName(AzureBlobContentSource, "BlobContentSource", "csharp");
+@@clientName(AzureBlobContentSource.containerUrl, "ContainerUri", "csharp");
+@@clientName(AzureBlobFileListContentSource,
+  "BlobFileListContentSource",
+  "csharp"
+);
+@@clientName(AzureBlobFileListContentSource.containerUrl,
+  "ContainerUri",
+  "csharp"
+);
+@@clientName(BuildDocumentClassifierRequest,
+  "BuildClassifierOptions",
+  "csharp"
+);
+@@clientName(BuildDocumentClassifierRequest.docTypes,
+  "DocumentTypes",
+  "csharp"
+);
+@@clientName(BuildDocumentModelRequest, "BuildDocumentModelOptions", "csharp");
+@@clientName(BuildDocumentModelRequest.azureBlobSource, "BlobSource", "csharp");
+@@clientName(BuildDocumentModelRequest.azureBlobFileListSource,
+  "BlobFileListSource",
+  "csharp"
+);
+@@clientName(ClassifierCopyAuthorization.expirationDateTime,
+  "ExpiresOn",
+  "csharp"
+);
+@@clientName(ClassifierDocumentTypeDetails.azureBlobSource,
+  "BlobSource",
+  "csharp"
+);
+@@clientName(ClassifierDocumentTypeDetails.azureBlobFileListSource,
+  "BlobFileListSource",
+  "csharp"
+);
+@@clientName(ClassifyDocumentRequest, "ClassifyDocumentOptions", "csharp");
+@@clientName(ClassifyDocumentRequest.base64Source, "BytesSource", "csharp");
+@@clientName(ClassifyDocumentRequest.urlSource, "UriSource", "csharp");
+@@clientName(ComposeDocumentModelRequest, "ComposeModelOptions", "csharp");
+@@clientName(ComposeDocumentModelRequest.docTypes, "DocumentTypes", "csharp");
+@@clientName(ContentSourceKind.azureBlob, "Blob", "csharp");
+@@clientName(ContentSourceKind.azureBlobFileList, "BlobFileList", "csharp");
+@@clientName(ContentSourceKind.base64, "Bytes", "csharp");
+@@clientName(ContentSourceKind.url, "Uri", "csharp");
+@@clientName(DocumentAnalysisFeature.styleFont, "FontStyling", "csharp");
 @@clientName(DocumentBarcodeKind.EAN13, "Ean13", "csharp");
 @@clientName(DocumentBarcodeKind.EAN8, "Ean8", "csharp");
 @@clientName(DocumentBarcodeKind.ITF, "Itf", "csharp");
@@ -93,63 +230,46 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentBarcodeKind.UPCA, "Upca", "csharp");
 @@clientName(DocumentBarcodeKind.UPCE, "Upce", "csharp");
 @@clientName(DocumentClassifierDetails.createdDateTime, "CreatedOn", "csharp");
+@@clientName(DocumentClassifierDetails.docTypes, "DocumentTypes", "csharp");
 @@clientName(DocumentClassifierDetails.expirationDateTime,
   "ExpiresOn",
   "csharp"
 );
+@@clientName(DocumentClassifierDetails.modifiedDateTime,
+  "ModifiedOn",
+  "csharp"
+);
+@@clientName(DocumentField.type, "FieldType", "csharp");
 @@clientName(DocumentField.valueArray, "ValueList", "csharp");
-@@clientName(DocumentField.valueInteger, "ValueLong", "csharp");
+@@clientName(DocumentField.valueInteger, "ValueInt64", "csharp");
 @@clientName(DocumentField.valueNumber, "ValueDouble", "csharp");
-@@clientName(DocumentField.valueObject, "ValueDictionary", "csharp");
+@@clientName(DocumentFieldSchema.type, "FieldType", "csharp");
 @@clientName(DocumentFieldType.array, "List", "csharp");
-@@clientName(DocumentFieldType.integer, "Long", "csharp");
+@@clientName(DocumentFieldType.integer, "Int64", "csharp");
 @@clientName(DocumentFieldType.number, "Double", "csharp");
 @@clientName(DocumentFieldType.object, "Dictionary", "csharp");
+@@clientName(DocumentIntelligenceError.innererror, "InnerError", "csharp");
+@@clientName(DocumentIntelligenceInnerError.innererror, "InnerError", "csharp");
+@@clientName(DocumentIntelligenceOperationDetails.createdDateTime,
+  "CreatedOn",
+  "csharp"
+);
+@@clientName(DocumentIntelligenceOperationDetails.lastUpdatedDateTime,
+  "LastUpdatedOn",
+  "csharp"
+);
+@@clientName(DocumentModelDetails.azureBlobSource, "BlobSource", "csharp");
+@@clientName(DocumentModelDetails.azureBlobFileListSource,
+  "BlobFileListSource",
+  "csharp"
+);
 @@clientName(DocumentModelDetails.createdDateTime, "CreatedOn", "csharp");
+@@clientName(DocumentModelDetails.docTypes, "DocumentTypes", "csharp");
 @@clientName(DocumentModelDetails.expirationDateTime, "ExpiresOn", "csharp");
-@@clientName(FontStyle, "DocumentFontStyle", "csharp");
-@@clientName(FontWeight, "DocumentFontWeight", "csharp");
-@@clientName(OperationDetails.createdDateTime, "CreatedOn", "csharp");
-@@clientName(OperationDetails.lastUpdatedDateTime, "LastUpdatedOn", "csharp");
-
-@@usage(DocumentAnalysisFeature, Usage.output, "csharp");
-@@usage(LengthUnit, Usage.output, "csharp");
-@@usage(DocumentSelectionMarkState, Usage.output, "csharp");
-@@usage(DocumentBarcodeKind, Usage.output, "csharp");
-@@usage(DocumentFormulaKind, Usage.output, "csharp");
-@@usage(ParagraphRole, Usage.output, "csharp");
-@@usage(DocumentTableCellKind, Usage.output, "csharp");
-@@usage(FontStyle, Usage.output, "csharp");
-@@usage(FontWeight, Usage.output, "csharp");
-@@usage(DocumentFieldType, Usage.output, "csharp");
-@@usage(DocumentSignatureType, Usage.output, "csharp");
-@@usage(AnalyzeResult, Usage.output, "csharp");
-@@usage(DocumentPage, Usage.output, "csharp");
-@@usage(DocumentSpan, Usage.output, "csharp");
-@@usage(DocumentWord, Usage.output, "csharp");
-@@usage(DocumentSelectionMark, Usage.output, "csharp");
-@@usage(DocumentLine, Usage.output, "csharp");
-@@usage(DocumentBarcode, Usage.output, "csharp");
-@@usage(DocumentFormula, Usage.output, "csharp");
-@@usage(DocumentParagraph, Usage.output, "csharp");
-@@usage(BoundingRegion, Usage.output, "csharp");
-@@usage(DocumentTable, Usage.output, "csharp");
-@@usage(DocumentTableCell, Usage.output, "csharp");
-@@usage(DocumentFigure, Usage.output, "csharp");
-@@usage(DocumentSection, Usage.output, "csharp");
-@@usage(DocumentCaption, Usage.output, "csharp");
-@@usage(DocumentFootnote, Usage.output, "csharp");
-@@usage(DocumentKeyValuePair, Usage.output, "csharp");
-@@usage(DocumentKeyValueElement, Usage.output, "csharp");
-@@usage(DocumentStyle, Usage.output, "csharp");
-@@usage(DocumentLanguage, Usage.output, "csharp");
-@@usage(Document, Usage.output, "csharp");
-@@usage(DocumentField, Usage.output, "csharp");
-@@usage(CurrencyValue, Usage.output, "csharp");
-@@usage(AddressValue, Usage.output, "csharp");
-@@usage(BuildDocumentModelRequest, Usage.input, "csharp");
-@@usage(ComposeDocumentModelRequest, Usage.input, "csharp");
-@@usage(CopyAuthorization, Usage.input | Usage.output, "csharp");
+@@clientName(DocumentModelDetails.modifiedDateTime, "ModifiedOn", "csharp");
+@@clientName(ModelCopyAuthorization.expirationDateTime, "ExpiresOn", "csharp");
 
 @@clientName(AnalyzeDocumentRequest.base64Source, "bytesSource", "python");
 @@clientName(ClassifyDocumentRequest.base64Source, "bytesSource", "python");
+@@clientName(DocumentFieldSchema.items, "itemsSchema", "python");
+@@clientName(AnalyzeFromStreamRequestParams.input, "body", "python");

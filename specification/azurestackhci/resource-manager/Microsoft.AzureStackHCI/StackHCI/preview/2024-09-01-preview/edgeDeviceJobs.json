@@ -1,0 +1,1150 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AzureStackHCI",
+    "version": "2024-09-01-preview",
+    "description": "A EdgeDevice"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "EdgeDeviceJobs"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs": {
+      "get": {
+        "operationId": "EdgeDeviceJobs_ListByEdgeDevice",
+        "tags": [
+          "EdgeDeviceJobs"
+        ],
+        "description": "List EdgeDeviceJob resources by EdgeDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeDeviceName",
+            "in": "path",
+            "description": "The name of the EdgeDevice",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_ListByEdgeDevice": {
+            "$ref": "./examples/EdgeDeviceJobs_ListByEdgeDevice.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}": {
+      "get": {
+        "operationId": "EdgeDeviceJobs_Get",
+        "tags": [
+          "EdgeDeviceJobs"
+        ],
+        "description": "Get a EdgeDeviceJob",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeDeviceName",
+            "in": "path",
+            "description": "The name of the EdgeDevice",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "jobsName",
+            "in": "path",
+            "description": "Name of EdgeDevice Job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_Get_RemoteSupport": {
+            "$ref": "./examples/EdgeDeviceJobs_Get_RemoteSupport.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EdgeDeviceJobs_CreateOrUpdate",
+        "tags": [
+          "EdgeDeviceJobs"
+        ],
+        "description": "Create a EdgeDeviceJob",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeDeviceName",
+            "in": "path",
+            "description": "The name of the EdgeDevice",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "jobsName",
+            "in": "path",
+            "description": "Name of EdgeDevice Job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EdgeDeviceJob' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceJob"
+            }
+          },
+          "201": {
+            "description": "Resource 'EdgeDeviceJob' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceJob"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_CreateOrUpdate_CollectLog": {
+            "$ref": "./examples/EdgeDeviceJobs_CreateOrUpdate_CollectLog.json"
+          },
+          "EdgeDeviceJobs_CreateOrUpdate_RemoteSupport": {
+            "$ref": "./examples/EdgeDeviceJobs_CreateOrUpdate_RemoteSupport.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeDeviceJobs_Delete",
+        "tags": [
+          "EdgeDeviceJobs"
+        ],
+        "description": "Delete a EdgeDeviceJob",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeDeviceName",
+            "in": "path",
+            "description": "The name of the EdgeDevice",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "jobsName",
+            "in": "path",
+            "description": "Name of EdgeDevice Job",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_Delete": {
+            "$ref": "./examples/EdgeDeviceJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "CollectLogJobProperties": {
+      "type": "object",
+      "description": "Represents the properties of a log collection job.",
+      "properties": {
+        "fromDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "From date for log collection."
+        },
+        "toDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "To date for log collection."
+        },
+        "lastLogGenerated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "To date for log collection.",
+          "readOnly": true
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/LogCollectionReportedProperties",
+          "description": "log collection job reported properties.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "fromDate",
+        "toDate"
+      ]
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "description": "Deployment mode to trigger job.",
+      "enum": [
+        "Validate",
+        "Deploy"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Validate",
+            "value": "Validate",
+            "description": "Validate ECE action deployment for a cluster."
+          },
+          {
+            "name": "Deploy",
+            "value": "Deploy",
+            "description": "Deploy ECE action deployment for a cluster."
+          }
+        ]
+      }
+    },
+    "DeviceLogCollectionStatus": {
+      "type": "string",
+      "description": "Represents the status of a log collection operation.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Failed",
+        "Succeeded",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceLogCollectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Log collection operation has not been initiated."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Indicates that the log collection operation is currently running."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Indicates that the log collection operation has failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Indicates that the log collection operation has completed successfully."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Indicates that the log collection operation has completed successfully."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "EdgeDeviceJob": {
+      "type": "object",
+      "description": "EdgeDevice Jobs resource",
+      "properties": {
+        "kind": {
+          "$ref": "./hciCommon.json#/definitions/EdgeDeviceKind",
+          "description": "Edge Solution type to support polymorphic resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EdgeDeviceJobListResult": {
+      "type": "object",
+      "description": "The response of a EdgeDeviceJob list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeDeviceJob items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeDeviceJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EdgeDeviceJobProperties": {
+      "type": "object",
+      "description": "Edge device job properties",
+      "properties": {
+        "deploymentMode": {
+          "$ref": "#/definitions/DeploymentMode",
+          "description": "Deployment mode to trigger job."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Job provisioning state",
+          "readOnly": true
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Unique, immutable job id.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job started.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job completed.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Edge device job.",
+          "readOnly": true
+        }
+      }
+    },
+    "EdgeDeviceJobType": {
+      "type": "string",
+      "description": "Common Job Types supported.",
+      "enum": [
+        "CollectLog",
+        "RemoteSupport"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeDeviceJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CollectLog",
+            "value": "CollectLog",
+            "description": "Job to collect logs from the device."
+          },
+          {
+            "name": "RemoteSupport",
+            "value": "RemoteSupport",
+            "description": "Job to provide remote support to the device."
+          }
+        ]
+      }
+    },
+    "EdgeSolutionType": {
+      "type": "string",
+      "description": "Edge solution type.",
+      "enum": [
+        "WindowsServer"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeSolutionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WindowsServer",
+            "value": "WindowsServer",
+            "description": "Edge solution for Windows based edge devices."
+          }
+        ]
+      }
+    },
+    "HciCollectLogJobProperties": {
+      "type": "object",
+      "description": "Represents the properties of an HCI Collect Log job.",
+      "properties": {
+        "fromDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "From date for log collection."
+        },
+        "toDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "To date for log collection."
+        },
+        "lastLogGenerated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "To date for log collection.",
+          "readOnly": true
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/LogCollectionReportedProperties",
+          "description": "log collection job reported properties.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "fromDate",
+        "toDate"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/HciEdgeDeviceJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CollectLog"
+    },
+    "HciEdgeDeviceJob": {
+      "type": "object",
+      "description": "Edge device job for Azure Stack HCI solution.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HciEdgeDeviceJobProperties",
+          "description": "HCI Edge device job properties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDeviceJob"
+        }
+      ],
+      "x-ms-discriminator-value": "HCI"
+    },
+    "HciEdgeDeviceJobProperties": {
+      "type": "object",
+      "description": "HCI Edge device job properties",
+      "properties": {
+        "deploymentMode": {
+          "$ref": "#/definitions/DeploymentMode",
+          "description": "Deployment mode to trigger job."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Job provisioning state",
+          "readOnly": true
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Unique, immutable job id.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job started.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job completed.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Edge device job.",
+          "readOnly": true
+        },
+        "jobType": {
+          "$ref": "#/definitions/HciEdgeDeviceJobType",
+          "description": "Job Type to support polymorphic resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "jobType",
+      "required": [
+        "jobType"
+      ]
+    },
+    "HciEdgeDeviceJobType": {
+      "type": "string",
+      "description": "Job Type supported.",
+      "enum": [
+        "CollectLog",
+        "RemoteSupport"
+      ],
+      "x-ms-enum": {
+        "name": "HciEdgeDeviceJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CollectLog",
+            "value": "CollectLog",
+            "description": "Job to collect logs from the device."
+          },
+          {
+            "name": "RemoteSupport",
+            "value": "RemoteSupport",
+            "description": "Job to provide remote support to the device."
+          }
+        ]
+      }
+    },
+    "HciRemoteSupportJobProperties": {
+      "type": "object",
+      "description": "Represents the properties of a remote support job for HCI.",
+      "properties": {
+        "accessLevel": {
+          "$ref": "#/definitions/RemoteSupportAccessLevel",
+          "description": "Remote support access level."
+        },
+        "expirationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Remote support expiration timestamp."
+        },
+        "type": {
+          "$ref": "#/definitions/RemoteSupportType",
+          "description": "Remote support type."
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/RemoteSupportJobReportedProperties",
+          "description": "log collection job reported properties.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "accessLevel",
+        "expirationTimestamp",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/HciEdgeDeviceJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "RemoteSupport"
+    },
+    "JobReportedProperties": {
+      "type": "object",
+      "description": "Reported Properties for job triggered from cloud.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
+          "description": "Deployment status of job.",
+          "readOnly": true
+        }
+      }
+    },
+    "JobStatus": {
+      "type": "string",
+      "description": "Represents the various statuses a job can have throughout its lifecycle.",
+      "enum": [
+        "NotSpecified",
+        "ValidationInProgress",
+        "ValidationSuccess",
+        "ValidationFailed",
+        "DeploymentInProgress",
+        "DeploymentFailed",
+        "DeploymentSuccess",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Paused",
+        "Scheduled"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The job status has not been specified."
+          },
+          {
+            "name": "ValidationInProgress",
+            "value": "ValidationInProgress",
+            "description": "The job is currently undergoing validation."
+          },
+          {
+            "name": "ValidationSuccess",
+            "value": "ValidationSuccess",
+            "description": "The job has successfully passed validation."
+          },
+          {
+            "name": "ValidationFailed",
+            "value": "ValidationFailed",
+            "description": "The job has failed validation."
+          },
+          {
+            "name": "DeploymentInProgress",
+            "value": "DeploymentInProgress",
+            "description": "The job's deployment is currently in progress."
+          },
+          {
+            "name": "DeploymentFailed",
+            "value": "DeploymentFailed",
+            "description": "The job's deployment has failed."
+          },
+          {
+            "name": "DeploymentSuccess",
+            "value": "DeploymentSuccess",
+            "description": "The job has been successfully deployed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The job has succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The job has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The job has been canceled."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "The job is paused."
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "The job is scheduled to run."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "LogCollectionReportedProperties": {
+      "type": "object",
+      "description": "Represents the reported properties of a log collection job.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
+          "description": "Deployment status of job.",
+          "readOnly": true
+        },
+        "logCollectionSessionDetails": {
+          "type": "array",
+          "description": "Details of the log collection session.",
+          "items": {
+            "$ref": "#/definitions/LogCollectionJobSession"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "correlationId"
+          ]
+        }
+      }
+    },
+    "LogCollectionJobSession": {
+      "type": "object",
+      "description": "Represents a session for collecting logs from an edge device.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "description": "The timestamp when log collection started, in ISO 8601 format.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The timestamp when log collection ended, in ISO 8601 format.",
+          "readOnly": true
+        },
+        "timeCollected": {
+          "type": "string",
+          "description": "The total time logs were collected for, in ISO 8601 duration format.",
+          "readOnly": true
+        },
+        "logSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of the collected logs in bytes.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/DeviceLogCollectionStatus",
+          "description": "The status of the log collection session.",
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "A unique identifier for correlating this log collection session with other operations or sessions.",
+          "readOnly": true
+        }
+      }
+    },
+    "LogCollectionStatus": {
+      "type": "string",
+      "description": "Represents the status of a log collection operation.",
+      "enum": [
+        "None",
+        "InProgress",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "LogCollectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Indicates that no log collection operation has been initiated."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Indicates that the log collection operation is currently in progress."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Indicates that the log collection operation has failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Indicates that the log collection operation has completed successfully."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "NotSpecified",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource provision state is not specified"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RemoteSupportAccessLevel": {
+      "type": "string",
+      "description": "Defines the level of remote support access granted.",
+      "enum": [
+        "None",
+        "Diagnostics",
+        "DiagnosticsAndRepair"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportAccessLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No remote support access is granted."
+          },
+          {
+            "name": "Diagnostics",
+            "value": "Diagnostics",
+            "description": "Access is limited to diagnostics information only."
+          },
+          {
+            "name": "DiagnosticsAndRepair",
+            "value": "DiagnosticsAndRepair",
+            "description": "Access includes diagnostics information and the ability to perform repairs."
+          }
+        ]
+      }
+    },
+    "RemoteSupportJobProperties": {
+      "type": "object",
+      "description": "Represents the properties of a remote support job.",
+      "properties": {
+        "accessLevel": {
+          "$ref": "#/definitions/RemoteSupportAccessLevel",
+          "description": "Remote support access level."
+        },
+        "expirationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Remote support expiration timestamp."
+        },
+        "type": {
+          "$ref": "#/definitions/RemoteSupportType",
+          "description": "Remote support type."
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/RemoteSupportJobReportedProperties",
+          "description": "log collection job reported properties.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "accessLevel",
+        "expirationTimestamp",
+        "type"
+      ]
+    },
+    "RemoteSupportJobNodeSettings": {
+      "type": "object",
+      "description": "Represents the settings of a remote support node.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of the remote support node.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the node settings were created, in UTC.",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the node settings were last updated, in UTC.",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "type": "string",
+          "description": "The current connection status of the remote support session.",
+          "readOnly": true
+        },
+        "connectionErrorMessage": {
+          "type": "string",
+          "description": "The error message, if any, from the last connection attempt.",
+          "readOnly": true
+        }
+      }
+    },
+    "RemoteSupportJobReportedProperties": {
+      "type": "object",
+      "description": "Represents the reported properties of a remote support job.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
+          "description": "Validation status of job.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "./hciCommon.json#/definitions/EceActionStatus",
+          "description": "Deployment status of job.",
+          "readOnly": true
+        },
+        "nodeSettings": {
+          "$ref": "#/definitions/RemoteSupportJobNodeSettings",
+          "description": "Optional settings for configuring the node for remote support.",
+          "readOnly": true
+        },
+        "sessionDetails": {
+          "type": "array",
+          "description": "Details of the remote support session.",
+          "items": {
+            "$ref": "#/definitions/RemoteSupportSession"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "sessionId"
+          ]
+        }
+      }
+    },
+    "RemoteSupportSession": {
+      "type": "object",
+      "description": "Represents a remote support session.",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "Unique session Id.",
+          "readOnly": true
+        },
+        "sessionStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the remote support session, in UTC.",
+          "readOnly": true
+        },
+        "sessionEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the remote support session, in UTC.",
+          "readOnly": true
+        },
+        "accessLevel": {
+          "$ref": "#/definitions/RemoteSupportAccessLevel",
+          "description": "The level of access granted during the remote support session.",
+          "readOnly": true
+        },
+        "transcriptLocation": {
+          "type": "string",
+          "description": "The location where the session transcript is stored.",
+          "readOnly": true
+        }
+      }
+    },
+    "RemoteSupportType": {
+      "type": "string",
+      "description": "Defines the type of remote support action to be performed on an edge device.",
+      "enum": [
+        "Enable",
+        "Revoke"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enables remote support for the edge device."
+          },
+          {
+            "name": "Revoke",
+            "value": "Revoke",
+            "description": "Revokes previously granted remote support access for the edge device."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

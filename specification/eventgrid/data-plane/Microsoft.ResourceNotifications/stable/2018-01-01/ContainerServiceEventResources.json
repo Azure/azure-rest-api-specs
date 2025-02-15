@@ -1,0 +1,28 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Container Service events published to Azure Event Grid via Azure Resource Notifications",
+    "description": "Describes the schema of the Container Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "ResourceNotificationsContainerServiceEventResourcesScheduledEventData": {
+      "description": "Schema of the Data property of an event grid event for a Microsoft.ResourceNotifications.ContainerServiceEventResources.ScheduledEventEmitted preview event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceNotificationsResourceUpdatedEventData"
+        }
+      ],
+      "x-ms-examples": {
+        "ResourceNotificationsContainerServiceEventResourcesScheduledEmittedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/ContainerServiceEventResources_ScheduledEventEmitted.json"
+        },
+        "ResourceNotificationsContainerServiceEventResourcesScheduledEventEmittedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/ContainerServiceEventResources_ScheduledEventEmitted.json"
+        }
+      }
+    }
+  }
+}

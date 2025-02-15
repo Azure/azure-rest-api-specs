@@ -1,0 +1,54 @@
+{
+  "title": "Returns a list of vector stores.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "list",
+        "data": [
+          {
+            "id": "vs_abc123",
+            "object": "vector_store",
+            "created_at": 1699061776,
+            "name": "Support FAQ",
+            "usage_bytes": 139920,
+            "status": "in_progress",
+            "file_counts": {
+              "in_progress": 0,
+              "completed": 3,
+              "failed": 0,
+              "cancelled": 0,
+              "total": 3
+            },
+            "last_active_at": 1699061776,
+            "metadata": {}
+          },
+          {
+            "id": "vs_abc456",
+            "object": "vector_store",
+            "created_at": 1699061776,
+            "name": "Support FAQ v2",
+            "usage_bytes": 139920,
+            "status": "in_progress",
+            "file_counts": {
+              "in_progress": 0,
+              "completed": 3,
+              "failed": 0,
+              "cancelled": 0,
+              "total": 3
+            },
+            "last_active_at": 1699061776,
+            "metadata": {}
+          }
+        ],
+        "first_id": "vs_abc123",
+        "last_id": "vs_abc456",
+        "has_more": false
+      }
+    }
+  },
+  "operationId": "ListVectorStores"
+}

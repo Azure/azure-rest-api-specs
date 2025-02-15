@@ -1,0 +1,182 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  clusterName:
+    type: string
+    prefix: clustern
+  databaseName:
+    type: string
+    prefix: database
+  principalAssignmentName:
+    type: string
+    prefix: principa
+  scriptName:
+    type: string
+    prefix: scriptna
+  managedPrivateEndpointName:
+    type: string
+    prefix: managedp
+  dataConnectionName:
+    type: string
+    prefix: dataconn
+  privateEndpointConnectionName:
+    type: string
+    prefix: privatee
+  attachedDatabaseConfigurationName:
+    type: string
+    prefix: attached
+scenarios:
+  - scenario: GeneratedScenario
+    variables:
+      location: westus
+    steps:
+      - operationId: Clusters_CheckNameAvailability
+        exampleFile: ../examples/KustoClustersCheckNameAvailability.json
+      - operationId: AttachedDatabaseConfigurations_CheckNameAvailability
+        exampleFile: >-
+          ../examples/KustoAttachedDatabaseConfigurationCheckNameAvailability.json
+      - operationId: Databases_CheckNameAvailability
+        exampleFile: ../examples/KustoDatabasesCheckNameAvailability.json
+      - operationId: ClusterPrincipalAssignments_CheckNameAvailability
+        exampleFile: ../examples/KustoClusterPrincipalAssignmentsCheckNameAvailability.json
+      - operationId: DataConnections_CheckNameAvailability
+        exampleFile: ../examples/KustoDataConnectionsCheckNameAvailability.json
+      - operationId: DatabasePrincipalAssignments_CheckNameAvailability
+        exampleFile: >-
+          ../examples/KustoDatabasePrincipalAssignmentsCheckNameAvailability.json
+      - operationId: Scripts_CheckNameAvailability
+        exampleFile: ../examples/KustoScriptsCheckNameAvailability.json
+      - operationId: ManagedPrivateEndpoints_CheckNameAvailability
+        exampleFile: ../examples/KustoManagedPrivateEndpointsCheckNameAvailability.json
+      - operationId: Clusters_CreateOrUpdate
+        exampleFile: ../examples/KustoClustersCreateOrUpdate.json
+      - operationId: Clusters_List
+        exampleFile: ../examples/KustoClustersList.json
+      - operationId: Clusters_ListSkus
+        exampleFile: ../examples/KustoClustersListSkus.json
+      - operationId: Clusters_ListByResourceGroup
+        exampleFile: ../examples/KustoClustersListByResourceGroup.json
+      - operationId: Clusters_Get
+        exampleFile: ../examples/KustoClustersGet.json
+      - operationId: Clusters_ListSkusByResource
+        exampleFile: ../examples/KustoClustersListResourceSkus.json
+      - operationId: Clusters_ListOutboundNetworkDependenciesEndpoints
+        exampleFile: ../examples/KustoOutboundNetworkDependenciesList.json
+      - operationId: Clusters_Update
+        exampleFile: ../examples/KustoClustersUpdate.json
+      - operationId: Clusters_ListFollowerDatabases
+        exampleFile: ../examples/KustoClusterListFollowerDatabases.json
+      - operationId: Clusters_ListLanguageExtensions
+        exampleFile: ../examples/KustoClusterListLanguageExtensions.json
+      - operationId: Clusters_DetachFollowerDatabases
+        exampleFile: ../examples/KustoClusterDetachFollowerDatabases.json
+      - operationId: Clusters_DiagnoseVirtualNetwork
+        exampleFile: ../examples/KustoClustersDiagnoseVirtualNetwork.json
+      - operationId: Clusters_AddLanguageExtensions
+        exampleFile: ../examples/KustoClusterAddLanguageExtensions.json
+      - operationId: Clusters_Stop
+        exampleFile: ../examples/KustoClustersStop.json
+      - operationId: Clusters_Start
+        exampleFile: ../examples/KustoClustersStart.json
+      - operationId: Clusters_RemoveLanguageExtensions
+        exampleFile: ../examples/KustoClusterRemoveLanguageExtensions.json
+      - operationId: Databases_CreateOrUpdate
+        exampleFile: ../examples/KustoDatabasesCreateOrUpdate.json
+      - operationId: Databases_ListByCluster
+        exampleFile: ../examples/KustoDatabasesListByCluster.json
+      - operationId: Databases_Get
+        exampleFile: ../examples/KustoDatabasesGet.json
+      - operationId: Databases_Update
+        exampleFile: ../examples/KustoDatabasesUpdate.json
+      - operationId: Databases_ListPrincipals
+        exampleFile: ../examples/KustoDatabaseListPrincipals.json
+      - operationId: Databases_RemovePrincipals
+        exampleFile: ../examples/KustoDatabaseRemovePrincipals.json
+      - operationId: Databases_AddPrincipals
+        exampleFile: ../examples/KustoDatabaseAddPrincipals.json
+      - operationId: Scripts_CreateOrUpdate
+        exampleFile: ../examples/KustoScriptsCreateOrUpdate.json
+      - operationId: Scripts_ListByDatabase
+        exampleFile: ../examples/KustoScriptsListByDatabase.json
+      - operationId: Scripts_Get
+        exampleFile: ../examples/KustoScriptsGet.json
+      - operationId: Scripts_Update
+        exampleFile: ../examples/KustoScriptsUpdate.json
+      - operationId: DataConnections_CreateOrUpdate
+        exampleFile: ../examples/KustoDataConnectionsCreateOrUpdate.json
+      - operationId: DataConnections_ListByDatabase
+        exampleFile: ../examples/KustoDataConnectionsListByDatabase.json
+      - operationId: DataConnections_Get
+        exampleFile: ../examples/KustoDataConnectionsGet.json
+      - operationId: DataConnections_Update
+        exampleFile: ../examples/KustoDataConnectionsUpdate.json
+      - operationId: DataConnections_dataConnectionValidation
+        exampleFile: ../examples/KustoDataConnectionValidationAsync.json
+      - operationId: ManagedPrivateEndpoints_CreateOrUpdate
+        exampleFile: ../examples/KustoManagedPrivateEndpointsCreateOrUpdate.json
+      - operationId: ManagedPrivateEndpoints_List
+        exampleFile: ../examples/KustoManagedPrivateEndpointsList.json
+      - operationId: ManagedPrivateEndpoints_Get
+        exampleFile: ../examples/KustoManagedPrivateEndpointsGet.json
+      - operationId: ManagedPrivateEndpoints_Update
+        exampleFile: ../examples/KustoManagedPrivateEndpointsUpdate.json
+      - operationId: AttachedDatabaseConfigurations_CreateOrUpdate
+        exampleFile: ../examples/KustoAttachedDatabaseConfigurationsCreateOrUpdate.json
+      - operationId: AttachedDatabaseConfigurations_ListByCluster
+        exampleFile: ../examples/KustoAttachedDatabaseConfigurationsListByCluster.json
+      - operationId: AttachedDatabaseConfigurations_Get
+        exampleFile: ../examples/KustoAttachedDatabaseConfigurationsGet.json
+      - operationId: PrivateEndpointConnections_CreateOrUpdate
+        exampleFile: ../examples/KustoPrivateEndpointConnectionsCreateOrUpdate.json
+      - operationId: PrivateEndpointConnections_List
+        exampleFile: ../examples/KustoPrivateEndpointConnectionsList.json
+      - operationId: PrivateEndpointConnections_Get
+        exampleFile: ../examples/KustoPrivateEndpointConnectionsGet.json
+      - operationId: ClusterPrincipalAssignments_CreateOrUpdate
+        exampleFile: ../examples/KustoClusterPrincipalAssignmentsCreateOrUpdate.json
+      - operationId: ClusterPrincipalAssignments_List
+        exampleFile: ../examples/KustoClusterPrincipalAssignmentsList.json
+      - operationId: ClusterPrincipalAssignments_Get
+        exampleFile: ../examples/KustoClusterPrincipalAssignmentsGet.json
+      - operationId: DatabasePrincipalAssignments_CreateOrUpdate
+        exampleFile: ../examples/KustoDatabasePrincipalAssignmentsCreateOrUpdate.json
+      - operationId: DatabasePrincipalAssignments_List
+        exampleFile: ../examples/KustoDatabasePrincipalAssignmentsList.json
+      - operationId: DatabasePrincipalAssignments_Get
+        exampleFile: ../examples/KustoDatabasePrincipalAssignmentsGet.json
+      - operationId: Operations_List
+        exampleFile: ../examples/KustoOperationsList.json
+      - operationId: OperationsResults_Get
+        variables:
+          operationId:
+            type: string
+            prefix: operatio
+        exampleFile: ../examples/KustoOperationResultsGet.json
+      - operationId: Skus_List
+        exampleFile: ../examples/KustoSkus.json
+      - operationId: PrivateLinkResources_List
+        exampleFile: ../examples/KustoPrivateLinkResourcesList.json
+      - operationId: PrivateLinkResources_Get
+        variables:
+          privateLinkResourceName:
+            type: string
+            prefix: privatel
+        exampleFile: ../examples/KustoPrivateLinkResourcesGet.json
+      - operationId: DatabasePrincipalAssignments_Delete
+        exampleFile: ../examples/KustoDatabasePrincipalAssignmentsDelete.json
+      - operationId: ClusterPrincipalAssignments_Delete
+        exampleFile: ../examples/KustoClusterPrincipalAssignmentsDelete.json
+      - operationId: PrivateEndpointConnections_Delete
+        exampleFile: ../examples/KustoPrivateEndpointConnectionsDelete.json
+      - operationId: AttachedDatabaseConfigurations_Delete
+        exampleFile: ../examples/KustoAttachedDatabaseConfigurationsDelete.json
+      - operationId: ManagedPrivateEndpoints_Delete
+        exampleFile: ../examples/KustoManagedPrivateEndpointsDelete.json
+      - operationId: DataConnections_Delete
+        exampleFile: ../examples/KustoDataConnectionsDelete.json
+      - operationId: Scripts_Delete
+        exampleFile: ../examples/KustoScriptsDelete.json
+      - operationId: Databases_Delete
+        exampleFile: ../examples/KustoDatabasesDelete.json
+      - operationId: Clusters_Delete
+        exampleFile: ../examples/KustoClustersDelete.json

@@ -384,6 +384,7 @@ model PortalExtensionCompileFile {
  * The result of contents of the file to compile.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 model PortalExtensionCompileFileResult is Record<unknown>;
 
 /**
@@ -665,6 +666,7 @@ model PortalTenantCompileFileProperties {
  * The contents of the file to compile.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 model PortalTenantCompileFileResult is Record<unknown>;
 
 /**

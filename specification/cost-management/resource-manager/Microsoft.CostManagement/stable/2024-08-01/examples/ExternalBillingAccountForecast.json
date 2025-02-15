@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "externalCloudProviderId": "100",
+    "externalCloudProviderType": "externalBillingAccounts",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2022-08-01T00:00:00+00:00",
+        "to": "2022-08-31T23:59:59+00:00"
+      },
+      "dataset": {
+        "granularity": "Daily",
+        "aggregation": {
+          "totalCost": {
+            "name": "Cost",
+            "function": "Sum"
+          }
+        },
+        "filter": {
+          "and": [
+            {
+              "or": [
+                {
+                  "dimensions": {
+                    "name": "ResourceLocation",
+                    "operator": "In",
+                    "values": [
+                      "East US",
+                      "West Europe"
+                    ]
+                  }
+                },
+                {
+                  "tags": {
+                    "name": "Environment",
+                    "operator": "In",
+                    "values": [
+                      "UAT",
+                      "Prod"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "dimensions": {
+                "name": "ResourceGroup",
+                "operator": "In",
+                "values": [
+                  "API"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.CostManagement/externalBillingAccounts/100/query/6dc7b06a-d90a-4df5-b655-ce6cf1c0814d",
+        "name": "6dc7b06a-d90a-4df5-b655-ce6cf1c0814d",
+        "type": "Microsoft.CostManagement/query",
+        "properties": {
+          "nextLink": null,
+          "columns": [
+            {
+              "name": "PreTaxCost",
+              "type": "Number"
+            },
+            {
+              "name": "CostStatus",
+              "type": "String"
+            },
+            {
+              "name": "Currency",
+              "type": "String"
+            }
+          ],
+          "rows": [
+            [
+              0.0,
+              "Forecast",
+              "USD"
+            ],
+            [
+              30.2572751438,
+              "Forecast",
+              "USD"
+            ],
+            [
+              0.076757602000000022,
+              "Forecast",
+              "USD"
+            ],
+            [
+              50.430964190400012,
+              "Forecast",
+              "USD"
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

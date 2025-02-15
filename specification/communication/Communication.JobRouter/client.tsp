@@ -11,6 +11,7 @@ using TypeSpec.Versioning;
 namespace ClientForAcsJobRouter;
 
 // Your customizations here
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
   name: "JobRouterAdministrationClient",
   service: AzureCommunicationRoutingService,
@@ -66,6 +67,7 @@ interface JobRouterAdministrationRestClient {
   deleteQueue is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteQueue;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
   name: "JobRouterClient",
   service: AzureCommunicationRoutingService,

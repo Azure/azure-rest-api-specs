@@ -32,12 +32,59 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** Enumeration of PII categories to be excluded in the response. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_15_preview)
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
-  /** Character to be used for redaction. Default in '*'. */
-  @added(Versions.v2023_11_15_preview)
+  /** RedactionPolicy to be used on the input. */
+  @added(Versions.v2024_11_15_preview)
+  redactionPolicy?: BaseRedactionPolicy;
+}
+
+/** The abstract base class for RedactionPolicy. */
+@added(Versions.v2024_11_15_preview)
+@discriminator("policyKind")
+model BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind = RedactionPolicyKind.characterMask;
+}
+
+/** Represents the policy of redacting with a redaction character */
+@added(Versions.v2024_11_15_preview)
+model CharacterMaskPolicyType extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.characterMask;
+
+  /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
+}
+
+/** Represents the policy of not redacting found PII. */
+@added(Versions.v2024_11_15_preview)
+model NoMaskPolicyType extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.noMask;
+}
+
+/** Represents the policy of redacting PII with the entity type. */
+@added(Versions.v2024_11_15_preview)
+model EntityMaskPolicyType extends BaseRedactionPolicy {
+  /** The entity OverlapPolicy object kind. */
+  policyKind: RedactionPolicyKind.entityMask;
+}
+
+/** Kinds of redaction policies supported. */
+@added(Versions.v2024_11_15_preview)
+union RedactionPolicyKind {
+  string,
+
+  /** Do not redact detected entities. */
+  noMask: "noMask",
+
+  /** React detected entities with redaction character. */
+  characterMask: "characterMask",
+
+  /** Redact detected entities with entity type. */
+  entityMask: "entityMask",
 }
 
 /** Contains the analyze text PIIEntityRecognition LRO task. */
@@ -65,7 +112,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 model PiiResult is PreBuiltResult {
   /** Response by document */
   @typeChangedFrom(
-    Versions.v2023_11_15_preview,
+    Versions.v2024_11_15_preview,
     Array<PiiEntitiesDocumentResult>
   )
   documents: Array<PiiResultWithDetectedLanguage>;
@@ -82,6 +129,25 @@ union PiiDomain {
   none: "none",
 }
 
+/** Entity object with tags. */
+@added(Versions.v2024_11_15_preview)
+model PiiEntityWithTags is Entity {
+  /** An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected. */
+  type?: string;
+
+  /** List of entity tags. Tags are to express some similarities/affinity between entities. */
+  tags?: Array<EntityTag>;
+
+  /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
+  mask?: string;
+
+  /** Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”. */
+  maskOffset?: int32;
+
+  /** The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”. */
+  maskLength?: int32;
+}
+
 /** Contains the PII results. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiEntitiesDocumentResult is DocumentResult {
@@ -89,7 +155,8 @@ model PiiEntitiesDocumentResult is DocumentResult {
   redactedText: string;
 
   /** Recognized entities in the document. */
-  entities: Array<Entity>;
+  @typeChangedFrom(Versions.v2024_11_15_preview, Array<Entity>)
+  entities: Array<PiiEntityWithTags>;
 }
 
 /** Contains the PII results with detected language. */

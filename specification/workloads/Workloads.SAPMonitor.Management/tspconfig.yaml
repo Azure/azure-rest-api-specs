@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/workloads"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -10,6 +13,23 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/monitors/{version-status}/{version}/monitors.json"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-sapmonitors"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-sapmonitors"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-sapmonitors"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

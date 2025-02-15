@@ -10,6 +10,10 @@ suppressions:
         - Type of `ComputeStartStopSchedule.Cron` has been changed from `*CronTrigger` to `*Cron`
         - Type of `ComputeStartStopSchedule.Recurrence` has been changed from `*RecurrenceTrigger` to `*Recurrence`
         - Type of `ComputeStartStopSchedule.TriggerType` has been changed from `*TriggerType` to `*ComputeTriggerType`
+        - Field `UserCreatedAcrAccount` of struct `AcrDetails` has been removed
+        - Field `UserCreatedStorageAccount` of struct `StorageAccountDetails` has been removed
+        - Struct `UserCreatedAcrAccount` has been removed
+        - Struct `UserCreatedStorageAccount` has been removed
   azure-sdk-for-python:
     - package: 'azure-mgmt-machinelearningservices'
       breaking-changes:
@@ -38,6 +42,57 @@ suppressions:
         - Removed operation group NotebooksOperations
         - Renamed operation WorkspacesOperations.resync_keys to WorkspacesOperations.begin_resync_keys
         - Renamed operation WorkspacesOperations.update to WorkspacesOperations.begin_update
+        - Deleted or renamed model `AzureMachineLearningWorkspaces`
+        - Model `AmlComputeNodesInformation` deleted or renamed its instance variable `compute_type`
+        - Model `ClusterUpdateParameters` deleted or renamed its instance variable `scale_settings`
+        - Model `ErrorResponse` deleted or renamed its instance variable `code`
+        - Model `ErrorResponse` deleted or renamed its instance variable `message`
+        - Model `ErrorResponse` deleted or renamed its instance variable `details`
+        - Model `Resource` deleted or renamed its instance variable `identity`
+        - Model `Resource` deleted or renamed its instance variable `location`
+        - Model `Resource` deleted or renamed its instance variable `tags`
+        - Model `Resource` deleted or renamed its instance variable `sku`
+        - Method `Sku.__init__` removed default value `None` from its parameter `name`
+        - Model `VirtualMachineSizeListResult` deleted or renamed its instance variable `aml_compute`
+        - Model `Workspace` deleted or renamed its instance variable `creation_time`
+        - Deleted or renamed model `AKSProperties`
+        - Deleted or renamed model `ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties`
+        - Deleted or renamed model `ComputeNodesInformation`
+        - Deleted or renamed model `DataLakeAnalyticsProperties`
+        - Deleted or renamed model `Identity`
+        - Deleted or renamed model `KeyVaultProperties`
+        - Deleted or renamed model `MachineLearningServiceError`
+        - Deleted or renamed model `NotebookListCredentialsResult`
+        - Deleted or renamed model `PaginatedWorkspaceConnectionsList`
+        - Deleted or renamed model `ReasonCode`
+        - Deleted or renamed model `ResourceIdentityType`
+        - Deleted or renamed model `ResourceSkuLocationInfo`
+        - Deleted or renamed model `ResourceSkuZoneDetails`
+        - Deleted or renamed model `Restriction`
+        - Deleted or renamed model `SKUCapability`
+        - Deleted or renamed model `ServicePrincipalCredentials`
+        - Deleted or renamed model `SkuSettings`
+        - Deleted or renamed model `SslConfigurationStatus`
+        - Deleted or renamed model `VirtualMachineProperties`
+        - Deleted or renamed model `WorkspaceConnection`
+        - Deleted or renamed model `WorkspaceConnectionDto`
+        - Deleted or renamed model `WorkspaceSku`
+        - Deleted or renamed method `PrivateEndpointConnectionsOperations.begin_delete`
+        - Deleted or renamed method `PrivateEndpointConnectionsOperations.put`
+        - Deleted or renamed method `PrivateLinkResourcesOperations.list_by_workspace`
+        - Method `VirtualMachineSizesOperations.list` deleted or renamed its parameter `compute_type` of kind `positional_or_keyword`
+        - Method `VirtualMachineSizesOperations.list` deleted or renamed its parameter `recommended` of kind `positional_or_keyword`
+        - Method `WorkspaceConnectionsOperations.list` inserted a `positional_or_keyword` parameter `include_all`
+        - Method `WorkspacesOperations.begin_delete` inserted a `positional_or_keyword` parameter `force_to_purge`
+        - Method `WorkspacesOperations.list_by_resource_group` deleted or renamed its parameter `skiptoken` of kind `positional_or_keyword`
+        - Method `WorkspacesOperations.list_by_subscription` deleted or renamed its parameter `skiptoken` of kind `positional_or_keyword`
+        - Deleted or renamed method `WorkspacesOperations.resync_keys`
+        - Deleted or renamed method `WorkspacesOperations.update`
+        - Deleted or renamed model `AzureMachineLearningWorkspacesOperationsMixin`
+        - Deleted or renamed model `MachineLearningComputeOperations`
+        - Deleted or renamed model `NotebooksOperations`
+        - Method `WorkspacesOperations.list_by_subscription` re-ordered its parameters from `['self', 'skiptoken', 'kwargs']` to `['self', 'skip', 'kwargs']`
+        - Method `WorkspacesOperations.list_by_resource_group` re-ordered its parameters from `['self', 'resource_group_name', 'skiptoken', 'kwargs']` to `['self', 'resource_group_name', 'skip', 'kwargs']`
   azure-sdk-for-js:
     - package: '@azure/arm-machinelearning'
       breaking-changes:
@@ -117,3 +172,5 @@ suppressions:
         - Type of parameter cron of interface ComputeStartStopSchedule is changed from CronTrigger to Cron
         - Type of parameter recurrence of interface ComputeStartStopSchedule is changed from RecurrenceTrigger to Recurrence
         - Type of parameter triggerType of interface ComputeStartStopSchedule is changed from TriggerType to ComputeTriggerType
+        - Interface AcrDetails no longer has parameter userCreatedAcrAccount
+        - Interface StorageAccountDetails no longer has parameter userCreatedStorageAccount

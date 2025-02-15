@@ -10,7 +10,7 @@ title: QuotaMgmtClient
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.quota
 package-name: azure-mgmt-quota
-package-version: 1.0.0b2
+package-version: 1.0.0b3
 clear-output-folder: true
 ```
 

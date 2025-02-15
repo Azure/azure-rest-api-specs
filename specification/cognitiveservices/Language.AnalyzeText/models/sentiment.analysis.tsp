@@ -77,7 +77,7 @@ union TokenSentimentValue {
 /** Sentiment analysis results for the input documents. */
 model SentimentResponse is PreBuiltResult {
   /** The sentiment analysis results for each document in the input. */
-  @typeChangedFrom(Versions.v2023_11_15_preview, Array<SentimentDocumentResult>)
+  @typeChangedFrom(Versions.v2024_11_15_preview, Array<SentimentDocumentResult>)
   documents: Array<SentimentDocumentResultWithDetectedLanguage>;
 }
 
@@ -201,79 +201,4 @@ model SentimentLROResult extends AnalyzeTextLROResult {
 
   /** The sentiment analysis results */
   results: SentimentResponse;
-}
-
-/** A document's sentence custom sentiment. */
-@added(Versions.v2023_11_15_preview)
-model CustomSentenceSentiment {
-  /** The sentence text. */
-  text: string;
-
-  /** The predicted Sentiment for the sentence. */
-  sentiment: SentenceSentimentValue;
-
-  /** The sentiment confidence score between 0 and 1 for the sentence for all classes. */
-  confidenceScores: SentimentConfidenceScores;
-
-  /** The target offset from the start of the sentence. */
-  offset: int32;
-
-  /** The length of the target. */
-  length: int32;
-}
-
-/** An object representing the Custom Sentiment Analysis results of each document. */
-@added(Versions.v2023_11_15_preview)
-model CustomSentimentDocumentResult is DocumentResult {
-  /** Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). */
-  sentiment: DocumentSentimentValue;
-
-  /** The sentiment confidence score between 0 and 1 for the sentence for all classes. */
-  confidenceScores: SentimentConfidenceScores;
-
-  /** The document's sentences sentiment. */
-  sentences: Array<CustomSentenceSentiment>;
-}
-
-/** Supported parameters for a Custom Sentiment Analysis task. */
-@added(Versions.v2023_11_15_preview)
-model CustomSentimentAnalysisTaskParameters is CustomTaskParameters {
-  /** Specifies the method used to interpret string offsets. */
-  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
-}
-
-/** Use custom models to ease the process of sentiment analysis from documents like product reviews */
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2023_11_15_preview)
-model CustomSentimentAnalysisLROTask extends AnalyzeTextLROTask {
-  /** Kind of the task. */
-  kind: AnalyzeTextLROTaskKind.CustomSentimentAnalysis;
-
-  /** Custom Sentiment Analysis task parameters. */
-  parameters?: CustomSentimentAnalysisTaskParameters;
-}
-
-/** Custom Sentiment analysis results for the input documents. */
-@added(Versions.v2023_11_15_preview)
-model CustomSentimentAnalysisResult is CustomResult {
-  /** The custom sentiment analysis results for each document in the input. */
-  documents: Array<CustomSentimentAnalysisResultDocument>;
-}
-
-/** Custom Sentiment analysis result for a specific document. */
-@added(Versions.v2023_11_15_preview)
-model CustomSentimentAnalysisResultDocument {
-  ...CustomSentimentDocumentResult;
-  ...DocumentDetectedLanguage;
-}
-
-/** Custom Sentiment Analysis Analyze Text long tunning operation result object. */
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2023_11_15_preview)
-model CustomSentimentAnalysisLROResult extends AnalyzeTextLROResult {
-  /** Kind of the task. */
-  kind: AnalyzeTextLROResultsKind.CustomSentimentAnalysisLROResults;
-
-  /** Results of the task. */
-  results: CustomSentimentAnalysisResult;
 }

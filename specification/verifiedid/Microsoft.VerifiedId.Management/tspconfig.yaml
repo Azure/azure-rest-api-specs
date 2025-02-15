@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/verifiedid"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
@@ -12,3 +15,20 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/verifiedid.json"
     use-read-only-status-schema: true
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-verifiedid"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-verifiedid"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-verifiedid"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true

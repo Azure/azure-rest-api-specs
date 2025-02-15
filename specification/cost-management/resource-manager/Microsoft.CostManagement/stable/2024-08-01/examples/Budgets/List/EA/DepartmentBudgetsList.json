@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "billingAccountId": "123456",
+    "departmentId": "789101",
+    "scope": "providers/Microsoft.Billing/billingAccounts/123456/departments/789101"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/123456/departments/789101/providers/Microsoft.CostManagement/budgets/DepartmentBudget1",
+            "name": "DepartmentBudget1",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157e\"",
+            "properties": {
+              "category": "Cost",
+              "amount": 5000.00,
+              "timeGrain": "Monthly",
+              "timePeriod": {
+                "startDate": "2023-04-01T00:00:00Z",
+                "endDate": "2024-10-31T00:00:00Z"
+              },
+              "currentSpend": {
+                "amount": 3000.00,
+                "unit": "USD"
+              },
+              "notifications": {
+                "Actual_GreaterThanOrEqualTo_60_Percent": {
+                  "enabled": true,
+                  "operator": "GreaterThanOrEqualTo",
+                  "threshold": 60,
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "thresholdType": "Actual"
+                }
+              }
+            }
+          },
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/123456/departments/789101/providers/Microsoft.CostManagement/budgets/DepartmentBudget2",
+            "name": "DepartmentBudget2",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157f\"",
+            "properties": {
+              "category": "Cost",
+              "amount": 8000.00,
+              "timeGrain": "Monthly",
+              "timePeriod": {
+                "startDate": "2023-04-01T00:00:00Z",
+                "endDate": "2024-10-31T00:00:00Z"
+              },
+              "currentSpend": {
+                "amount": 6000.00,
+                "unit": "USD"
+              },
+              "notifications": {
+                "Actual_GreaterThanOrEqualTo_75_Percent": {
+                  "enabled": true,
+                  "operator": "GreaterThanOrEqualTo",
+                  "threshold": 75,
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "thresholdType": "Actual"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

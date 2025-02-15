@@ -1,0 +1,622 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2023-09-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/clusters": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "x-ms-examples": {
+          "ClustersGet": {
+            "$ref": "./examples/ClustersListByResourceGroup.json"
+          }
+        },
+        "operationId": "Clusters_ListByResourceGroup",
+        "description": "Gets Log Analytics clusters in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/clusters": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "x-ms-examples": {
+          "ClustersSubscriptionList": {
+            "$ref": "./examples/ClustersSubscriptionList.json"
+          }
+        },
+        "operationId": "Clusters_List",
+        "description": "Gets the Log Analytics clusters in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/clusters/{clusterName}": {
+      "put": {
+        "tags": [
+          "Clusters"
+        ],
+        "x-ms-examples": {
+          "ClustersCreate": {
+            "$ref": "./examples/ClustersCreate.json"
+          }
+        },
+        "operationId": "Clusters_CreateOrUpdate",
+        "description": "Create or update a Log Analytics cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+            "minLength": 4,
+            "maxLength": 63,
+            "description": "The name of the Log Analytics cluster."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "description": "The parameters required to create or update a Log Analytics cluster."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted response definition."
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Clusters"
+        ],
+        "x-ms-examples": {
+          "ClustersDelete": {
+            "$ref": "./examples/ClustersDelete.json"
+          }
+        },
+        "operationId": "Clusters_Delete",
+        "description": "Deletes a cluster instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Log Analytics Cluster."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted response definition."
+          },
+          "200": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "NoContent response definition."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "x-ms-examples": {
+          "ClustersGet": {
+            "$ref": "./examples/ClustersGet.json"
+          }
+        },
+        "operationId": "Clusters_Get",
+        "description": "Gets a Log Analytics cluster instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Log Analytics Cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Clusters"
+        ],
+        "x-ms-examples": {
+          "ClustersPatch": {
+            "$ref": "./examples/ClustersUpdate.json"
+          }
+        },
+        "operationId": "Clusters_Update",
+        "description": "Updates a Log Analytics cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Log Analytics Cluster."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPatch"
+            },
+            "description": "The parameters required to patch a Log Analytics cluster."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing cluster was successfully updated. Check provisioningStatus to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ClusterProperties": {
+      "type": "object",
+      "properties": {
+        "clusterId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ID associated with the cluster."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the cluster.",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleting",
+            "ProvisioningAccount",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterEntityStatus",
+            "modelAsString": true
+          }
+        },
+        "isDoubleEncryptionEnabled": {
+          "type": "boolean",
+          "description": "Configures whether cluster will use double encryption. This Property can not be modified after cluster creation. Default value is 'true'",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "isAvailabilityZonesEnabled": {
+          "type": "boolean",
+          "description": "Sets whether the cluster will support availability zones. This can be set as true only in regions where Azure Data Explorer support Availability Zones. This Property can not be modified after cluster creation. Default value is 'true' if region supports Availability Zones."
+        },
+        "billingType": {
+          "$ref": "#/definitions/billingType",
+          "description": "The cluster's billing type."
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/keyVaultProperties",
+          "description": "The associated key properties."
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "description": "The last time the cluster was updated.",
+          "readOnly": true
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "The cluster creation time",
+          "readOnly": true
+        },
+        "associatedWorkspaces": {
+          "description": "The list of Log Analytics workspaces associated with the cluster",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssociatedWorkspace"
+          },
+          "x-ms-identifiers": [
+            "workspaceId"
+          ]
+        },
+        "capacityReservationProperties": {
+          "$ref": "#/definitions/CapacityReservationProperties",
+          "description": "Additional properties for capacity reservation"
+        }
+      },
+      "description": "Cluster properties."
+    },
+    "ClusterPatchProperties": {
+      "type": "object",
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/keyVaultProperties",
+          "description": "The associated key properties."
+        },
+        "billingType": {
+          "$ref": "#/definitions/billingType",
+          "description": "The cluster's billing type."
+        }
+      },
+      "description": "Log Analytics cluster patch properties."
+    },
+    "ClusterPatch": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterPatchProperties",
+          "description": "Log Analytics cluster properties."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Resource's identity."
+        },
+        "sku": {
+          "$ref": "#/definitions/ClusterSku",
+          "description": "The sku properties."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      },
+      "description": "The top level Log Analytics cluster resource container.",
+      "x-ms-azure-resource": true
+    },
+    "Cluster": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Resource's identity."
+        },
+        "sku": {
+          "$ref": "#/definitions/ClusterSku",
+          "description": "The sku properties."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "Log Analytics cluster properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The top level Log Analytics cluster resource container."
+    },
+    "ClusterListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of recommendations.",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          },
+          "description": "A list of Log Analytics clusters."
+        }
+      },
+      "description": "The list clusters operation response."
+    },
+    "keyVaultProperties": {
+      "type": "object",
+      "description": "The key vault properties.",
+      "properties": {
+        "keyVaultUri": {
+          "description": "The Key Vault uri which holds they key associated with the Log Analytics cluster.",
+          "type": "string"
+        },
+        "keyName": {
+          "description": "The name of the key associated with the Log Analytics cluster.",
+          "type": "string"
+        },
+        "keyVersion": {
+          "description": "The version of the key associated with the Log Analytics cluster.",
+          "type": "string"
+        },
+        "keyRsaSize": {
+          "description": "Selected key minimum required size.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "billingType": {
+      "type": "string",
+      "readOnly": false,
+      "description": "Configures whether billing will be only on the cluster or each workspace will be billed by its proportional use. This does not change the overall billing, only how it will be distributed. Default value is 'Cluster'",
+      "enum": [
+        "Cluster",
+        "Workspaces"
+      ],
+      "x-ms-enum": {
+        "name": "BillingType",
+        "modelAsString": true
+      }
+    },
+    "ClusterSku": {
+      "type": "object",
+      "description": "The cluster sku definition.",
+      "properties": {
+        "capacity": {
+          "description": "The capacity reservation level in Gigabytes for this cluster.",
+          "type": "integer",
+          "format": "int64",
+          "enum": [
+            100,
+            200,
+            300,
+            400,
+            500,
+            1000,
+            2000,
+            5000,
+            10000,
+            25000,
+            50000
+          ],
+          "x-ms-enum": {
+            "name": "Capacity"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The SKU (tier) of a cluster.",
+          "enum": [
+            "CapacityReservation"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterSkuNameEnum",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AssociatedWorkspace": {
+      "type": "object",
+      "description": "The list of Log Analytics workspaces associated with the cluster.",
+      "properties": {
+        "workspaceId": {
+          "readOnly": true,
+          "format": "uuid",
+          "description": "Associated workspace immutable id.",
+          "type": "string"
+        },
+        "workspaceName": {
+          "readOnly": true,
+          "description": "Associated workspace resource name.",
+          "type": "string"
+        },
+        "resourceId": {
+          "readOnly": true,
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          },
+          "description": "Associated workspace arm resource id, in the form of: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}.",
+          "type": "string"
+        },
+        "associateDate": {
+          "readOnly": true,
+          "description": "The time of workspace association.",
+          "type": "string"
+        }
+      }
+    },
+    "CapacityReservationProperties": {
+      "type": "object",
+      "description": "The Capacity Reservation properties.",
+      "properties": {
+        "lastSkuUpdate": {
+          "readOnly": true,
+          "description": "The last time Sku was updated.",
+          "type": "string"
+        },
+        "minCapacity": {
+          "readOnly": true,
+          "description": "Minimum CapacityReservation value in Gigabytes.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

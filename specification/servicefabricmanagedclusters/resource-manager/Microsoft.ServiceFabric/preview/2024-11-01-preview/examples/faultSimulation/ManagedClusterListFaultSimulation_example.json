@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "api-version": "2024-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "simulationId": "1bb61ba9-8a41-4d73-b5f0-7fc93b1edfe3",
+            "status": "Active",
+            "startTime": "2024-11-21T21:27:55.4452675Z",
+            "endTime": "0001-01-01T00:00:00",
+            "details": {
+              "clusterId": "dd65fb6d-753b-4664-8798-4f077d4a2e18",
+              "operationId": "b7997d2f-1f07-4245-b197-137b196ecaf3",
+              "nodeTypeFaultSimulation": [
+                {
+                  "nodeTypeName": "BE",
+                  "status": "Active",
+                  "operationId": "bff10003-af96-465c-b849-99c18e1f4af6",
+                  "operationStatus": "Succeeded"
+                },
+                {
+                  "nodeTypeName": "FE",
+                  "status": "Active",
+                  "operationId": "6021d3c9-6def-4e9e-b133-d58ac1c3a4cc",
+                  "operationStatus": "Succeeded"
+                }
+              ],
+              "parameters": {
+                "faultKind": "Zone",
+                "force": false,
+                "constraints": {
+                  "expirationTime": "0001-01-01T00:00:00"
+                },
+                "zones": [
+                  "3"
+                ]
+              }
+            }
+          },
+          {
+            "simulationId": "aec13cc2-1d39-4ba6-a1a8-2fc35b00643c",
+            "status": "Done",
+            "startTime": "2024-11-21T18:11:11.3471742Z",
+            "endTime": "2024-11-21T21:24:13.082339Z",
+            "details": {
+              "clusterId": "dd65fb6d-753b-4664-8798-4f077d4a2e18",
+              "operationId": "3e22a9a7-13c1-450b-af5e-2c739b963bdf",
+              "nodeTypeFaultSimulation": [
+                {
+                  "nodeTypeName": "BE",
+                  "status": "Done",
+                  "operationId": "391d0003-0d46-474c-9839-cbc345938704",
+                  "operationStatus": "Succeeded"
+                },
+                {
+                  "nodeTypeName": "FE",
+                  "status": "Done",
+                  "operationId": "cf4ac1d7-e588-491e-9e6f-ce15a17bf389",
+                  "operationStatus": "Succeeded"
+                }
+              ],
+              "parameters": {
+                "faultKind": "Zone",
+                "force": false,
+                "constraints": {
+                  "expirationTime": "0001-01-01T00:00:00"
+                },
+                "zones": [
+                  "2"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

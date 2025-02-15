@@ -1,0 +1,768 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DatabaseMigrationServiceReplicationInstances"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/databaseMigrationServiceReplicationInstances": {
+      "get": {
+        "operationId": "DatabaseMigrationServiceReplicationInstances_ListBySubscription",
+        "tags": [
+          "DatabaseMigrationServiceReplicationInstances"
+        ],
+        "description": "List DatabaseMigrationServiceReplicationInstance resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationServiceReplicationInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseMigrationServiceReplicationInstances_ListBySubscription": {
+            "$ref": "./examples/DatabaseMigrationServiceReplicationInstances_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/databaseMigrationServiceReplicationInstances": {
+      "get": {
+        "operationId": "DatabaseMigrationServiceReplicationInstances_ListByResourceGroup",
+        "tags": [
+          "DatabaseMigrationServiceReplicationInstances"
+        ],
+        "description": "List DatabaseMigrationServiceReplicationInstance resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationServiceReplicationInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseMigrationServiceReplicationInstances_ListByResourceGroup": {
+            "$ref": "./examples/DatabaseMigrationServiceReplicationInstances_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/databaseMigrationServiceReplicationInstances/{name}": {
+      "get": {
+        "operationId": "DatabaseMigrationServiceReplicationInstances_Get",
+        "tags": [
+          "DatabaseMigrationServiceReplicationInstances"
+        ],
+        "description": "Get a DatabaseMigrationServiceReplicationInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of DatabaseMigrationServiceReplicationInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationServiceReplicationInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseMigrationServiceReplicationInstances_Get": {
+            "$ref": "./examples/DatabaseMigrationServiceReplicationInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseMigrationServiceReplicationInstances_CreateOrReplace",
+        "tags": [
+          "DatabaseMigrationServiceReplicationInstances"
+        ],
+        "description": "Create a DatabaseMigrationServiceReplicationInstance. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of DatabaseMigrationServiceReplicationInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationServiceReplicationInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DatabaseMigrationServiceReplicationInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationServiceReplicationInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'DatabaseMigrationServiceReplicationInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationServiceReplicationInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseMigrationServiceReplicationInstances_CreateOrReplace": {
+            "$ref": "./examples/DatabaseMigrationServiceReplicationInstances_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DatabaseMigrationServiceReplicationInstances_Update",
+        "tags": [
+          "DatabaseMigrationServiceReplicationInstances"
+        ],
+        "description": "Update a DatabaseMigrationServiceReplicationInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of DatabaseMigrationServiceReplicationInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationServiceReplicationInstanceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseMigrationServiceReplicationInstance"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseMigrationServiceReplicationInstances_Update": {
+            "$ref": "./examples/DatabaseMigrationServiceReplicationInstances_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DatabaseMigrationServiceReplicationInstances_Delete",
+        "tags": [
+          "DatabaseMigrationServiceReplicationInstances"
+        ],
+        "description": "Delete a DatabaseMigrationServiceReplicationInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of DatabaseMigrationServiceReplicationInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseMigrationServiceReplicationInstances_Delete": {
+            "$ref": "./examples/DatabaseMigrationServiceReplicationInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AvailabilityZone": {
+      "type": "object",
+      "description": "Definition of AvailabilityZone",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "<p>The name of the Availability Zone.</p>"
+        }
+      }
+    },
+    "AwsDatabaseMigrationServiceReplicationInstanceProperties": {
+      "type": "object",
+      "description": "Definition of awsDatabaseMigrationServiceReplicationInstance",
+      "properties": {
+        "allocatedStorage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The amount of storage (in gigabytes) that is allocated for the replication instance.</p>"
+        },
+        "autoMinorVersionUpgrade": {
+          "type": "boolean",
+          "description": "<p>Boolean value indicating if minor version upgrades will be automatically applied to the instance.</p>"
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "<p>The Availability Zone for the instance.</p>"
+        },
+        "dnsNameServers": {
+          "type": "string",
+          "description": "<p>The DNS name servers supported for the replication instance to access your on-premise source or target database.</p>"
+        },
+        "engineVersion": {
+          "type": "string",
+          "description": "<p>The engine version number of the replication instance.</p> <p>If an engine version number is not specified when a replication instance is created, the default is the latest engine version available.</p> <p>When modifying a major engine version of an instance, also set <code>AllowMajorVersionUpgrade</code> to <code>true</code>.</p>"
+        },
+        "freeUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p> The expiration date of the free replication instance that is part of the Free DMS program. </p>"
+        },
+        "instanceCreateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time the replication instance was created.</p>"
+        },
+        "kmsKeyId": {
+          "type": "string",
+          "description": "<p>An KMS key identifier that is used to encrypt the data on the replication instance.</p> <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>"
+        },
+        "multiAZ": {
+          "type": "boolean",
+          "description": "<p> Specifies whether the replication instance is a Multi-AZ deployment. You can't set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
+        },
+        "networkType": {
+          "type": "string",
+          "description": "<p>The type of IP address protocol used by a replication instance, such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.</p>"
+        },
+        "pendingModifiedValues": {
+          "$ref": "#/definitions/ReplicationPendingModifiedValues",
+          "description": "<p>The pending modification values.</p>"
+        },
+        "preferredMaintenanceWindow": {
+          "type": "string",
+          "description": "<p>The maintenance window times for the replication instance. Any pending upgrades to the replication instance are performed during this time.</p>"
+        },
+        "publiclyAccessible": {
+          "type": "boolean",
+          "description": "<p> Specifies the accessibility options for the replication instance. A value of <code>true</code> represents an instance with a public IP address. A value of <code>false</code> represents an instance with a private IP address. The default value is <code>true</code>. </p>"
+        },
+        "replicationInstanceArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the replication instance.</p>"
+        },
+        "replicationInstanceClass": {
+          "type": "string",
+          "description": "<p>The compute and memory capacity of the replication instance as defined for the specified replication instance class. It is a required parameter, although a default value is pre-selected in the DMS console.</p> <p>For more information on the settings and capacities for the available replication instance classes, see <a href='https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth'> Selecting the right DMS replication instance for your migration</a>. </p>"
+        },
+        "replicationInstanceIdentifier": {
+          "type": "string",
+          "description": "<p>The replication instance identifier is a required parameter. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1-63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>"
+        },
+        "replicationInstanceIpv6Addresses": {
+          "type": "array",
+          "description": "<p>One or more IPv6 addresses for the replication instance.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "replicationInstancePrivateIpAddress": {
+          "type": "string",
+          "description": "<p>The private IP address of the replication instance.</p>"
+        },
+        "replicationInstancePrivateIpAddresses": {
+          "type": "array",
+          "description": "<p>One or more private IP addresses for the replication instance.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "replicationInstancePublicIpAddress": {
+          "type": "string",
+          "description": "<p>The public IP address of the replication instance.</p>"
+        },
+        "replicationInstancePublicIpAddresses": {
+          "type": "array",
+          "description": "<p>One or more public IP addresses for the replication instance.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "replicationInstanceStatus": {
+          "type": "string",
+          "description": "<p>The status of the replication instance. The possible return values include:</p> <ul> <li> <p> <code>'available'</code> </p> </li> <li> <p> <code>'creating'</code> </p> </li> <li> <p> <code>'deleted'</code> </p> </li> <li> <p> <code>'deleting'</code> </p> </li> <li> <p> <code>'failed'</code> </p> </li> <li> <p> <code>'modifying'</code> </p> </li> <li> <p> <code>'upgrading'</code> </p> </li> <li> <p> <code>'rebooting'</code> </p> </li> <li> <p> <code>'resetting-master-credentials'</code> </p> </li> <li> <p> <code>'storage-full'</code> </p> </li> <li> <p> <code>'incompatible-credentials'</code> </p> </li> <li> <p> <code>'incompatible-network'</code> </p> </li> <li> <p> <code>'maintenance'</code> </p> </li> </ul>"
+        },
+        "replicationSubnetGroup": {
+          "$ref": "#/definitions/ReplicationSubnetGroup",
+          "description": "<p>The subnet group for the replication instance.</p>"
+        },
+        "secondaryAvailabilityZone": {
+          "type": "string",
+          "description": "<p>The Availability Zone of the standby replication instance in a Multi-AZ deployment.</p>"
+        },
+        "vpcSecurityGroups": {
+          "type": "array",
+          "description": "<p>The VPC security group for the instance.</p>",
+          "items": {
+            "$ref": "#/definitions/VpcSecurityGroupMembership"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DatabaseMigrationServiceReplicationInstance": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseMigrationServiceReplicationInstanceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DatabaseMigrationServiceReplicationInstanceListResult": {
+      "type": "object",
+      "description": "The response of a DatabaseMigrationServiceReplicationInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DatabaseMigrationServiceReplicationInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/DatabaseMigrationServiceReplicationInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DatabaseMigrationServiceReplicationInstanceProperties": {
+      "type": "object",
+      "description": "Definition of DatabaseMigrationServiceReplicationInstance",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsDatabaseMigrationServiceReplicationInstanceProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseMigrationServiceReplicationInstanceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in DatabaseMigrationServiceReplicationInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ReplicationPendingModifiedValues": {
+      "type": "object",
+      "description": "Definition of ReplicationPendingModifiedValues",
+      "properties": {
+        "allocatedStorage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The amount of storage (in gigabytes) that is allocated for the replication instance.</p>"
+        },
+        "engineVersion": {
+          "type": "string",
+          "description": "<p>The engine version number of the replication instance.</p>"
+        },
+        "multiAZ": {
+          "type": "boolean",
+          "description": "<p> Specifies whether the replication instance is a Multi-AZ deployment. You can't set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>"
+        },
+        "networkType": {
+          "type": "string",
+          "description": "<p>The type of IP address protocol used by a replication instance, such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.</p>"
+        },
+        "replicationInstanceClass": {
+          "type": "string",
+          "description": "<p>The compute and memory capacity of the replication instance as defined for the specified replication instance class.</p> <p>For more information on the settings and capacities for the available replication instance classes, see <a href='https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth'> Selecting the right DMS replication instance for your migration</a>. </p>"
+        }
+      }
+    },
+    "ReplicationSubnetGroup": {
+      "type": "object",
+      "description": "Definition of ReplicationSubnetGroup",
+      "properties": {
+        "replicationSubnetGroupDescription": {
+          "type": "string",
+          "description": "<p>A description for the replication subnet group.</p>"
+        },
+        "replicationSubnetGroupIdentifier": {
+          "type": "string",
+          "description": "<p>The identifier of the replication instance subnet group.</p>"
+        },
+        "subnetGroupStatus": {
+          "type": "string",
+          "description": "<p>The status of the subnet group.</p>"
+        },
+        "subnets": {
+          "type": "array",
+          "description": "<p>The subnets that are in the subnet group.</p>",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          },
+          "x-ms-identifiers": []
+        },
+        "supportedNetworkTypes": {
+          "type": "array",
+          "description": "<p>The IP addressing protocol supported by the subnet group. This is used by a replication instance with values such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "vpcId": {
+          "type": "string",
+          "description": "<p>The ID of the VPC.</p>"
+        }
+      }
+    },
+    "Subnet": {
+      "type": "object",
+      "description": "Definition of Subnet",
+      "properties": {
+        "subnetAvailabilityZone": {
+          "$ref": "#/definitions/AvailabilityZone",
+          "description": "<p>The Availability Zone of the subnet.</p>"
+        },
+        "subnetIdentifier": {
+          "type": "string",
+          "description": "<p>The subnet identifier.</p>"
+        },
+        "subnetStatus": {
+          "type": "string",
+          "description": "<p>The status of the subnet.</p>"
+        }
+      }
+    },
+    "VpcSecurityGroupMembership": {
+      "type": "object",
+      "description": "Definition of VpcSecurityGroupMembership",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "<p>The status of the VPC security group.</p>"
+        },
+        "vpcSecurityGroupId": {
+          "type": "string",
+          "description": "<p>The VPC security group ID.</p>"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

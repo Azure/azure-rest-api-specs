@@ -38,6 +38,7 @@ interface LoadTests {
 
   deleteLoadtest is Microsoft.LoadTestService.LoadTests.delete;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" ""
   outboundNetworkDependenciesEndpoints is Microsoft.LoadTestService.LoadTests.outboundNetworkDependenciesEndpoints;
 
   getQuota is Microsoft.LoadTestService.Quotas.get;

@@ -357,6 +357,30 @@ union AttestHealthStatusEnum {
   string,
 }
 
+@added(Versions.v2024_08_01_preview)
+@doc("Defines type of hardware platform from attestation token.")
+union AttestHWPlatformEnum {
+  @doc("AttestHWPlatform is Secure Encrypted Virtualization Secure Nested Paging (SEVSNP)")
+  SEVSNP: "SEVSNP",
+
+  @doc("AttestHWPlatform is unknown")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("Defines type of managed disk security encryption type from attestation token.")
+union AttestDiskSecurityEncryptionTypeEnum {
+  @doc("Disk security encryption type is non-persisted Trusted Platform Module (TPM)")
+  NonPersistedTPM: "NonPersistedTPM",
+
+  @doc("Disk security encryption type is unknown")
+  Unknown: "Unknown",
+
+  string,
+}
+
 @doc("Defines the different types of operations for guest agent.")
 union ProvisioningAction {
   @doc("Install guest agent")
@@ -378,6 +402,15 @@ union OperatingSystemTypes {
 
   @doc("Linux operating system")
   Linux: "Linux",
+
+  string,
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("Encryption type of the managed disk enum.")
+union SecurityEncryptionType {
+  @doc("Non-persisted TPM encryption type")
+  NonPersistedTPM: "NonPersistedTPM",
 
   string,
 }
@@ -430,6 +463,18 @@ model LogicalNetworkArmReference {
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l2Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l3Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/trunkedNetworks";
     }
   ]>;
 }
@@ -501,6 +546,10 @@ model GalleryImageProperties {
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
+  @added(Versions.v2024_08_01_preview)
+  @doc("The credentials used to login to the image repository that has access to the specified image")
+  vmImageRepositoryCredentials?: VmImageRepositoryCredentials;
+
   @doc("This is the gallery image definition identifier.")
   identifier?: GalleryImageIdentifier;
 
@@ -522,6 +571,17 @@ model GalleryImageProperties {
       type: "Microsoft.AzureStackHCI/virtualMachineInstance";
     }
   ]>;
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("The credentials used to login to the image repository that has access to the specified image")
+model VmImageRepositoryCredentials {
+  @doc("Username for accessing image repository")
+  username: string;
+
+  @doc("Password for accessing image repository")
+  @secret
+  password: string;
 }
 
 @doc("This is the gallery image definition identifier.")
@@ -721,7 +781,7 @@ model RouteTableProperties {
 
 @doc("Route - Route resource.")
 model Route {
-  #suppress "deprecated" "Legacy flattend property"
+  #suppress "deprecated" "Legacy flattened property"
   @doc("Properties of the route.")
   @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteProperties;
@@ -787,6 +847,34 @@ model NetworkSecurityGroupProperties {
   @doc("The provisioning state of the network security group resource.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of Network Security Group")
+  @visibility("read")
+  @added(Versions.v2025_02_01_preview)
+  status?: NetworkSecurityGroupStatus;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("The observed state of network security group")
+model NetworkSecurityGroupStatus {
+  @doc("NetworkSecurityGroup provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("network security group provisioning status")
+  provisioningStatus?: NetworkSecurityGroupStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("network security group provisioning status")
+model NetworkSecurityGroupStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the network security group")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the network security group [Succeeded, Failed, InProgress]")
+  status?: Status;
 }
 
 @doc("Security rule resource.")
@@ -834,6 +922,10 @@ model NetworkInterfaceProperties {
 
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
+
+  @added(Versions.v2025_02_01_preview)
+  @doc("Boolean indicating whether this is a existing local network interface or if one should be created.")
+  createFromLocal?: boolean = false;
 
   @doc("Provisioning state of the network interface.")
   @visibility("read")
@@ -1017,6 +1109,20 @@ model NetworkInterfacesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2025_02_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: NetworkInterfacesUpdateProperties;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("Defines the resource properties for the update.")
+model NetworkInterfacesUpdateProperties {
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @doc("DNS Settings for the interface")
+  dnsSettings?: InterfaceDNSSettings;
 }
 
 @doc("Tags object for patch operations.")
@@ -1106,6 +1212,10 @@ model VirtualHardDiskProperties {
   @doc("The format of the actual VHD file [vhd, vhdx]")
   diskFileFormat?: DiskFileFormat;
 
+  @added(Versions.v2025_02_01_preview)
+  @doc("Boolean indicating whether it is an existing local hard disk or if one should be created.")
+  createFromLocal?: boolean = false;
+
   @doc("Provisioning state of the virtual hard disk.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
@@ -1157,6 +1267,16 @@ model VirtualHardDiskDownloadStatus {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
   @doc("The downloaded sized of the virtual hard disk in MB")
   downloadedSizeInMB?: int64;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
+  status?: Status;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The progress of the operation in percentage")
+  @minValue(0)
+  @maxValue(100)
+  progressPercentage?: int64;
 }
 
 @added(Versions.v2024_05_01_preview)
@@ -1168,6 +1288,20 @@ model VirtualHardDiskUploadStatus {
 
   @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
   status?: Status;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The progress of the operation in percentage")
+  @minValue(0)
+  @maxValue(100)
+  progressPercentage?: int64;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("VirtualHardDisk upload error code")
+  errorCode?: string;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("Descriptive upload error message")
+  errorMessage?: string;
 }
 
 @doc("The virtual hard disk resource patch definition.")
@@ -1175,6 +1309,18 @@ model VirtualHardDisksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2025_02_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: VirtualHardDisksUpdateProperties;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("Defines the resource properties for the update.")
+model VirtualHardDisksUpdateProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is a short form."
+  @doc("Size of the disk in GB")
+  diskSizeGB?: int64;
 }
 
 @added(Versions.v2024_05_01_preview)
@@ -1218,6 +1364,10 @@ model VirtualMachineInstanceProperties {
 
   @doc("HTTP Proxy configuration for the VM.")
   httpProxyConfig?: HttpProxyConfiguration;
+
+  @added(Versions.v2025_02_01_preview)
+  @doc("Boolean indicating whether this is an existing local virtual machine or if one should be created.")
+  createFromLocal?: boolean = false;
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
@@ -1349,7 +1499,7 @@ model SshPublicKey {
   @doc("Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys")
   path?: string;
 
-  @doc("SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure]https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).")
+  @doc("SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure]https://learn.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).")
   keyData?: string;
 }
 
@@ -1417,6 +1567,25 @@ model VirtualMachineInstancePropertiesStorageProfileOsDisk
   is VirtualHardDiskArmReference {
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The managed disk parameters.")
+  managedDisk?: VirtualMachineInstanceManagedDiskParameters;
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("The parameters of a managed disk.")
+model VirtualMachineInstanceManagedDiskParameters {
+  @doc("Specifies the security profile for the managed disk.")
+  securityProfile?: VMDiskSecurityProfile;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case."
+@added(Versions.v2024_08_01_preview)
+@doc("Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs")
+model VMDiskSecurityProfile {
+  @doc("Specifies the EncryptionType of the managed disk. It is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob. NOTE: It can be set for only Confidential VMs.")
+  securityEncryptionType?: SecurityEncryptionType;
 }
 
 @doc("HTTP Proxy configuration for the VM.")
@@ -1673,6 +1842,16 @@ model AttestationStatusProperties {
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
+
+  @doc("The hardware platform information from attestation token. This only applies to Confidential VM.")
+  @visibility("read")
+  @added(Versions.v2024_08_01_preview)
+  attestHardwarePlatform?: AttestHWPlatformEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The managed disk security encryption type from attestation token. This only applies to Confidential VM.")
+  @visibility("read")
+  attestDiskSecurityEncryptionType?: AttestDiskSecurityEncryptionTypeEnum;
 }
 
 @doc("Defines the resource properties.")

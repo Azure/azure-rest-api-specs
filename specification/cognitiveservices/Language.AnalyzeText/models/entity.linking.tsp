@@ -47,7 +47,7 @@ model EntityLinkingTaskResult extends AnalyzeTextTaskResult {
 model EntityLinkingResult is PreBuiltResult {
   /** Response by document */
   @typeChangedFrom(
-    Versions.v2023_11_15_preview,
+    Versions.v2024_11_15_preview,
     Array<LinkedEntitiesDocumentResult>
   )
   documents: Array<EntityLinkingResultWithDetectedLanguage>;
@@ -60,7 +60,7 @@ model LinkedEntitiesDocumentResult is DocumentResult {
 }
 
 /** Entity linking document result with auto language detection. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model EntityLinkingResultWithDetectedLanguage {
   ...LinkedEntitiesDocumentResult;
   ...DocumentDetectedLanguage;

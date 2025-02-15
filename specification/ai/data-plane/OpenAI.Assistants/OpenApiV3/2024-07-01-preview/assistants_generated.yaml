@@ -1439,7 +1439,7 @@ components:
             We generally recommend altering this or temperature but not both.
           default: 1
         response_format:
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
           nullable: true
           description: The response format of the tool calls used by this assistant.
@@ -1507,7 +1507,7 @@ components:
             We generally recommend altering this or temperature but not both.
           default: 1
         response_format:
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
           nullable: true
           description: The response format of the tool calls used by this assistant.
@@ -1813,12 +1813,12 @@ components:
           nullable: true
           description: The strategy to use for dropping messages as the context windows moves forward.
         tool_choice:
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
           nullable: true
           description: Controls whether or not and which tool is called by the model.
         response_format:
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
           nullable: true
           description: Specifies the format that the model must output.
@@ -1962,12 +1962,12 @@ components:
           nullable: true
           description: The strategy to use for dropping messages as the context windows moves forward.
         tool_choice:
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
           nullable: true
           description: Controls whether or not and which tool is called by the model.
         response_format:
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
           nullable: true
           description: Specifies the format that the model must output.
@@ -3433,6 +3433,8 @@ components:
         - 2024-02-15-preview
         - 2024-05-01-preview
         - 2024-07-01-preview
+        - 2024-09-01-preview
+        - 2024-10-01-preview
       description: The known set of supported API versions.
     SubmitToolOutputsAction:
       type: object
@@ -3696,7 +3698,7 @@ components:
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
         incomplete_details:
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/IncompleteRunDetails'
           nullable: true
           description: Details on why the run is incomplete. Will be `null` if the run is not incomplete.
@@ -3735,12 +3737,12 @@ components:
           nullable: true
           description: The strategy to use for dropping messages as the context windows moves forward.
         tool_choice:
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
           nullable: true
           description: Controls whether or not and which tool is called by the model.
         response_format:
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
           nullable: true
           description: The response format of the tool calls used in this run.
@@ -3881,7 +3883,7 @@ components:
             We generally recommend altering this or temperature but not both.
           default: 1
         response_format:
-          oneOf:
+          allOf:
             - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
           nullable: true
           description: The response format of the tool calls used by this assistant.

@@ -10,12 +10,12 @@ no-namespace-folders: true
 clear-output-folder: true
 ```
 
-### Tag: package-flexibleserver-2024-06-01-preview and python
+### Tag: package-flexibleserver-2024-10-01-preview and python
 
-These settings apply only when `--tag=package-flexibleserver-2024-06-01-preview --python` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2024-10-01-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-flexibleserver-2024-06-01-preview' && $(python)
+``` yaml $(tag) == 'package-flexibleserver-2024-10-01-preview' && $(python)
 title: MySQLManagementClient
 package-version: 1.0.0b1
 package-name: azure-mgmt-mysqlflexibleservers

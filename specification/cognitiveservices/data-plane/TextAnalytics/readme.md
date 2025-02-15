@@ -7,7 +7,7 @@ Note that the Cognitive Services Language SDK is simply a wrapper on top of the 
 
 
 ## Prerequisites
-You must have a [Cognitive Services API account](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) with **Text Analytics API**.
+You must have a [Cognitive Services API account](https://learn.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) with **Text Analytics API**.
 
 You must also have the [endpoint and access key](../How-tos/text-analytics-how-to-access-key.md) that was generated for you during sign up.
 
@@ -18,7 +18,7 @@ You must also have the [endpoint and access key](../How-tos/text-analytics-how-t
 1. Select the NuGet package and install it.
 
 ## Calling the Text Analytics API using the SDK
-See Text Analytics [Quickstart guide](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/text-analytics-sdk?tabs=version-3&pivots=programming-language-csharp) for detailed instructions on how to use the SDK in your application.
+See Text Analytics [Quickstart guide](https://learn.microsoft.com/azure/cognitive-services/text-analytics/quickstarts/text-analytics-sdk?tabs=version-3&pivots=programming-language-csharp) for detailed instructions on how to use the SDK in your application.
 
 ## Releases
 
@@ -147,7 +147,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
 ```
 
 ## CSharp Settings

@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "billingAccountId": "8099099",
+    "benefitUtilizationSummariesRequest": {
+      "kind": "Reservation",
+      "endDate": "2022-08-31T00:00:00Z",
+      "startDate": "2022-06-01T00:00:00Z",
+      "grain": "Daily"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/8099099/providers/Microsoft.CostManagement/benefitUtilizationSummariesOperationResults/cf9f95c9-af6b-41dd-a622-e6f4fc60c3ee?api-version=2024-08-01",
+        "Retry-After": "60"
+      }
+    },
+    "200": {
+      "body": {
+        "input": {
+          "grain": "Daily",
+          "billingAccountId": "8099099",
+          "kind": "Reservation",
+          "endDate": "2022-08-31T00:00:00Z",
+          "startDate": "2022-06-01T00:00:00Z"
+        },
+        "status": "Complete",
+        "properties": {
+          "reportUrl": "https://storage.blob.core.windows.net/details/20220611/00000000-0000-0000-0000-000000000000?sv=2016-05-31&sr=b&sig=jep8HT2aphfUkyERRZa5LRfd9RPzjXbzB%2F9TNiQ",
+          "secondaryReportUrl": "https://storage-secondary.blob.core.windows.net/details/20220611/00000000-0000-0000-0000-000000000000?sv=2016-05-31&sr=b&sig=jep8HT2aphfUkyERRZa5LRfd9RPzjXbzB%2F9TNiQ",
+          "validUntil": "2022-06-12T02:56:55.5021869Z"
+        }
+      }
+    }
+  }
+}

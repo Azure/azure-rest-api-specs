@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "componentPolicyStatesResource": "latest",
+    "subscriptionId": "e78961ba-36fe-4739-9212-e3031b4c8db7",
+    "api-version": "2024-10-01",
+    "$filter": "policyAssignmentId eq '/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/microsoft.authorization/policyassignments/560050f83dbb4a24974323f8'",
+    "$apply": "groupby((componentType,complianceState),aggregate($count as count))"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/Microsoft.PolicyInsights/componentPolicyStates/$metadata#latest",
+        "@odata.count": 2,
+        "value": [
+          {
+            "componentType": "Certificate",
+            "complianceState": "NonCompliant",
+            "count": 26
+          },
+          {
+            "componentType": "Certificate",
+            "complianceState": "Compliant",
+            "count": 10
+          }
+        ]
+      }
+    }
+  }
+}

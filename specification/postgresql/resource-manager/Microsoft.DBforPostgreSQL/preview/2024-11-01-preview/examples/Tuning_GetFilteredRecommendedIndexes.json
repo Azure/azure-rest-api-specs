@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "serverName": "pgtestrecs",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-11-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "tuningOption": "index",
+    "$recommendationType": "CreateIndex"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "initialRecommendedTime": "2024-10-12T16:31:32.306306Z",
+              "lastRecommendedTime": "2024-10-12T16:31:32.306306Z",
+              "timesRecommended": 1,
+              "improvedQueryIds": [
+                -3775242682326862475,
+                6829938984138799352
+              ],
+              "recommendationReason": "Column \"partsupp\".\"ps_suppkey\" appear in Join On clause(s) in query -3775242682326862475; Column \"partsupp\".\"ps_suppkey\" appear in Join On clause(s) in query 6829938984138799352;",
+              "recommendationType": "CreateIndex",
+              "implementationDetails": {
+                "method": "SQL",
+                "script": "create index concurrently ps_suppkey_idx on public.partsupp(ps_suppkey)"
+              },
+              "analyzedWorkload": {
+                "startTime": "2024-10-12T04:31:12.0633098Z",
+                "endTime": "2024-10-12T16:31:12.0633097Z",
+                "queryCount": 25
+              },
+              "estimatedImpact": [
+                {
+                  "dimensionName": "IndexSize",
+                  "unit": "MB",
+                  "absoluteValue": 15.3671875
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": -3775242682326862475,
+                  "absoluteValue": 99.676684524004528
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": 6829938984138799352,
+                  "absoluteValue": 85.567424368278992
+                }
+              ],
+              "details": {
+                "databaseName": "ecommerce",
+                "schema": "public",
+                "table": "partsupp",
+                "indexType": "BTREE",
+                "indexName": "ps_suppkey_idx",
+                "indexColumns": "\"partsupp\".\"ps_suppkey\""
+              }
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestrecs/tuningOptions/index/recommendations/1",
+            "name": "CreateIndex_ecommerce_public_ps_suppkey_idx",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/tuningOptions/index"
+          },
+          {
+            "properties": {
+              "initialRecommendedTime": "2024-10-12T16:31:32.311471Z",
+              "lastRecommendedTime": "2024-10-12T16:31:32.311471Z",
+              "timesRecommended": 1,
+              "improvedQueryIds": [
+                -3775242682326862475,
+                4735984994430714735
+              ],
+              "recommendationReason": "Column \"partsupp\".\"ps_partkey\" appear in Equal Predicate clause(s) in query -3775242682326862475; Column \"partsupp\".\"ps_partkey\" appear in Join On clause(s) in query 4735984994430714735;",
+              "recommendationType": "CreateIndex",
+              "implementationDetails": {
+                "method": "SQL",
+                "script": "create index concurrently ps_partkey_idx on public.partsupp(ps_partkey)"
+              },
+              "analyzedWorkload": {
+                "startTime": "2024-10-12T04:31:12.0633098Z",
+                "endTime": "2024-10-12T16:31:12.0633097Z",
+                "queryCount": 25
+              },
+              "estimatedImpact": [
+                {
+                  "dimensionName": "IndexSize",
+                  "unit": "MB",
+                  "absoluteValue": 15.3671875
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": -3775242682326862475,
+                  "absoluteValue": 99.676684524004528
+                },
+                {
+                  "dimensionName": "QueryCostImprovement",
+                  "unit": "Percentage",
+                  "queryId": 4735984994430714735,
+                  "absoluteValue": 79.066037124307073
+                }
+              ],
+              "details": {
+                "databaseName": "ecommerce",
+                "schema": "public",
+                "table": "partsupp",
+                "indexType": "BTREE",
+                "indexName": "ps_partkey_idx",
+                "indexColumns": "\"partsupp\".\"ps_partkey\""
+              }
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestrecs/tuningOptions/index/recommendations/2",
+            "name": "CreateIndex_ecommerce_public_ps_partkey_idx",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/tuningOptions/index"
+          }
+        ]
+      }
+    }
+  }
+}

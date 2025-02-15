@@ -39,7 +39,7 @@
           "Metrics"
         ],
         "operationId": "Metrics_List",
-        "description": "**Lists the metric values for a resource**.",
+        "description": "**Lists the metric values for a resource**. This API used the [default ARM throttling limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling).",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -363,7 +363,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The names of the metrics (comma separated) to retrieve.",
+      "description": "The names of the metrics (comma separated) to retrieve. Limit 20 metrics.",
       "x-ms-parameter-location": "method"
     },
     "AggregationsParameter": {
