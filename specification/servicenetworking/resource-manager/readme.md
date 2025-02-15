@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 input-file:
   - Microsoft.ServiceNetworking/preview/2025-03-01-preview/TrafficController.json
 openapi-type: arm
-tag: package-2025-03-01
+tag: package-2025-03-01-preview
 ```
 
 ### Tag: package-2025-01-01
