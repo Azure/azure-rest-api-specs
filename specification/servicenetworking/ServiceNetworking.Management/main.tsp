@@ -213,6 +213,7 @@ model IpAccessRule {
   priority: int32;
 
   /** Source Address Prefixed Applied by the Rule. Asterisk '*' can also be used to match all source IPs. */
+  @maxItems(50)
   sourceAddressPrefixes: string[];
 
   /** Action of the Rule */
