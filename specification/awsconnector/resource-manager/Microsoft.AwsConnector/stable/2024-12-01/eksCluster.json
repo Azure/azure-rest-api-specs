@@ -1,0 +1,1067 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "EksClusters"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.AwsConnector/eksClusters": {
+      "get": {
+        "operationId": "EksClusters_List",
+        "tags": [
+          "EksClusters"
+        ],
+        "description": "List EksCluster resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EksClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EksClusters_List": {
+            "$ref": "./examples/EksClusters_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AwsConnector/eksClusters/default": {
+      "get": {
+        "operationId": "EksClusters_Get",
+        "tags": [
+          "EksClusters"
+        ],
+        "description": "Get a EksCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EksCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EksClusters_Get": {
+            "$ref": "./examples/EksClusters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EksClusters_CreateOrReplace",
+        "tags": [
+          "EksClusters"
+        ],
+        "description": "Create a EksCluster. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EksCluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EksCluster' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EksCluster"
+            }
+          },
+          "201": {
+            "description": "Resource 'EksCluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EksCluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EksClusters_CreateOrReplace": {
+            "$ref": "./examples/EksClusters_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EksClusters_Delete",
+        "tags": [
+          "EksClusters"
+        ],
+        "description": "Delete a EksCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EksClusters_Delete": {
+            "$ref": "./examples/EksClusters_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AccessConfigResponse": {
+      "type": "object",
+      "description": "Definition of AccessConfigResponse",
+      "properties": {
+        "authenticationMode": {
+          "$ref": "#/definitions/AuthenticationModeEnumValue",
+          "description": "<p>The current authentication mode of the cluster.</p>"
+        },
+        "bootstrapClusterCreatorAdminPermissions": {
+          "type": "boolean",
+          "description": "<p>Specifies whether or not the cluster creator IAM principal was set as a cluster admin access entry during cluster creation time.</p>"
+        }
+      }
+    },
+    "AuthenticationMode": {
+      "type": "string",
+      "description": "AuthenticationMode enum",
+      "enum": [
+        "API",
+        "API_AND_CONFIG_MAP",
+        "CONFIG_MAP"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "API",
+            "value": "API",
+            "description": "AuthenticationMode enum API"
+          },
+          {
+            "name": "API_AND_CONFIG_MAP",
+            "value": "API_AND_CONFIG_MAP",
+            "description": "AuthenticationMode enum API_AND_CONFIG_MAP"
+          },
+          {
+            "name": "CONFIG_MAP",
+            "value": "CONFIG_MAP",
+            "description": "AuthenticationMode enum CONFIG_MAP"
+          }
+        ]
+      }
+    },
+    "AuthenticationModeEnumValue": {
+      "type": "object",
+      "description": "Definition of AuthenticationModeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/AuthenticationMode",
+          "description": "Property value"
+        }
+      }
+    },
+    "AwsEksClusterProperties": {
+      "type": "object",
+      "description": "Definition of awsEksCluster",
+      "properties": {
+        "accessConfig": {
+          "$ref": "#/definitions/AccessConfigResponse",
+          "description": "<p>The access configuration for the cluster.</p>"
+        },
+        "arn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the cluster.</p>"
+        },
+        "certificateAuthority": {
+          "$ref": "#/definitions/Certificate",
+          "description": "<p>The <code>certificate-authority-data</code> for your cluster.</p>"
+        },
+        "clientRequestToken": {
+          "type": "string",
+          "description": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+        },
+        "connectorConfig": {
+          "$ref": "#/definitions/ConnectorConfigResponse",
+          "description": "<p>The configuration used to connect to a cluster for registration.</p>"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The Unix epoch timestamp at object creation.</p>"
+        },
+        "encryptionConfig": {
+          "type": "array",
+          "description": "<p>The encryption configuration for the cluster.</p>",
+          "items": {
+            "$ref": "#/definitions/EncryptionConfig"
+          },
+          "x-ms-identifiers": []
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "<p>The endpoint for your Kubernetes API server.</p>"
+        },
+        "health": {
+          "$ref": "#/definitions/ClusterHealth",
+          "description": "<p>An object representing the health of your local Amazon EKS cluster on an Amazon Web Services Outpost. This object isn't available for clusters on the Amazon Web Services cloud.</p>"
+        },
+        "id": {
+          "type": "string",
+          "description": "<p>The ID of your local Amazon EKS cluster on an Amazon Web Services Outpost. This property isn't available for an Amazon EKS cluster on the Amazon Web Services cloud.</p>"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "<p>The identity provider information for the cluster.</p>"
+        },
+        "kubernetesNetworkConfig": {
+          "$ref": "#/definitions/KubernetesNetworkConfigResponse",
+          "description": "<p>The Kubernetes network configuration for the cluster.</p>"
+        },
+        "logging": {
+          "$ref": "#/definitions/Logging",
+          "description": "<p>The logging configuration for your cluster.</p>"
+        },
+        "name": {
+          "type": "string",
+          "description": "<p>The name of your cluster.</p>"
+        },
+        "outpostConfig": {
+          "$ref": "#/definitions/OutpostConfigResponse",
+          "description": "<p>An object representing the configuration of your local Amazon EKS cluster on an Amazon Web Services Outpost. This object isn't available for clusters on the Amazon Web Services cloud.</p>"
+        },
+        "platformVersion": {
+          "type": "string",
+          "description": "<p>The platform version of your Amazon EKS cluster. For more information about clusters deployed on the Amazon Web Services Cloud, see <a href='https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html'>Platform versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>. For more information about local clusters deployed on an Outpost, see <a href='https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-platform-versions.html'>Amazon EKS local cluster platform versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+        },
+        "resourcesVpcConfig": {
+          "$ref": "#/definitions/VpcConfigResponse",
+          "description": "<p>The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href='https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html'>Cluster VPC considerations</a> and <a href='https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html'>Cluster security group considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+        },
+        "roleArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to Amazon Web Services API operations on your behalf.</p>"
+        },
+        "status": {
+          "$ref": "#/definitions/ClusterStatusEnumValue",
+          "description": "<p>The current status of the cluster.</p>"
+        },
+        "tags": {
+          "type": "object",
+          "description": "<p>Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.</p>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "<p>The Kubernetes server version for the cluster.</p>"
+        }
+      }
+    },
+    "Certificate": {
+      "type": "object",
+      "description": "Definition of Certificate",
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "<p>The Base64-encoded certificate data required to communicate with your cluster. Add this to the <code>certificate-authority-data</code> section of the <code>kubeconfig</code> file for your cluster.</p>"
+        }
+      }
+    },
+    "ClusterHealth": {
+      "type": "object",
+      "description": "Definition of ClusterHealth",
+      "properties": {
+        "issues": {
+          "type": "array",
+          "description": "<p>An object representing the health issues of your local Amazon EKS cluster on an Amazon Web Services Outpost.</p>",
+          "items": {
+            "$ref": "#/definitions/ClusterIssue"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClusterIssue": {
+      "type": "object",
+      "description": "Definition of ClusterIssue",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ClusterIssueCodeEnumValue",
+          "description": "<p>The error code of the issue.</p>"
+        },
+        "message": {
+          "type": "string",
+          "description": "<p>A description of the issue.</p>"
+        },
+        "resourceIds": {
+          "type": "array",
+          "description": "<p>The resource IDs that the issue relates to.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClusterIssueCode": {
+      "type": "string",
+      "description": "ClusterIssueCode enum",
+      "enum": [
+        "AccessDenied",
+        "ClusterUnreachable",
+        "ConfigurationConflict",
+        "Ec2SecurityGroupNotFound",
+        "Ec2ServiceNotSubscribed",
+        "Ec2SubnetNotFound",
+        "IamRoleNotFound",
+        "InsufficientFreeAddresses",
+        "InternalFailure",
+        "KmsGrantRevoked",
+        "KmsKeyDisabled",
+        "KmsKeyMarkedForDeletion",
+        "KmsKeyNotFound",
+        "Other",
+        "ResourceLimitExceeded",
+        "ResourceNotFound",
+        "StsRegionalEndpointDisabled",
+        "UnsupportedVersion",
+        "VpcNotFound"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterIssueCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AccessDenied",
+            "value": "AccessDenied",
+            "description": "ClusterIssueCode enum AccessDenied"
+          },
+          {
+            "name": "ClusterUnreachable",
+            "value": "ClusterUnreachable",
+            "description": "ClusterIssueCode enum ClusterUnreachable"
+          },
+          {
+            "name": "ConfigurationConflict",
+            "value": "ConfigurationConflict",
+            "description": "ClusterIssueCode enum ConfigurationConflict"
+          },
+          {
+            "name": "Ec2SecurityGroupNotFound",
+            "value": "Ec2SecurityGroupNotFound",
+            "description": "ClusterIssueCode enum Ec2SecurityGroupNotFound"
+          },
+          {
+            "name": "Ec2ServiceNotSubscribed",
+            "value": "Ec2ServiceNotSubscribed",
+            "description": "ClusterIssueCode enum Ec2ServiceNotSubscribed"
+          },
+          {
+            "name": "Ec2SubnetNotFound",
+            "value": "Ec2SubnetNotFound",
+            "description": "ClusterIssueCode enum Ec2SubnetNotFound"
+          },
+          {
+            "name": "IamRoleNotFound",
+            "value": "IamRoleNotFound",
+            "description": "ClusterIssueCode enum IamRoleNotFound"
+          },
+          {
+            "name": "InsufficientFreeAddresses",
+            "value": "InsufficientFreeAddresses",
+            "description": "ClusterIssueCode enum InsufficientFreeAddresses"
+          },
+          {
+            "name": "InternalFailure",
+            "value": "InternalFailure",
+            "description": "ClusterIssueCode enum InternalFailure"
+          },
+          {
+            "name": "KmsGrantRevoked",
+            "value": "KmsGrantRevoked",
+            "description": "ClusterIssueCode enum KmsGrantRevoked"
+          },
+          {
+            "name": "KmsKeyDisabled",
+            "value": "KmsKeyDisabled",
+            "description": "ClusterIssueCode enum KmsKeyDisabled"
+          },
+          {
+            "name": "KmsKeyMarkedForDeletion",
+            "value": "KmsKeyMarkedForDeletion",
+            "description": "ClusterIssueCode enum KmsKeyMarkedForDeletion"
+          },
+          {
+            "name": "KmsKeyNotFound",
+            "value": "KmsKeyNotFound",
+            "description": "ClusterIssueCode enum KmsKeyNotFound"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "ClusterIssueCode enum Other"
+          },
+          {
+            "name": "ResourceLimitExceeded",
+            "value": "ResourceLimitExceeded",
+            "description": "ClusterIssueCode enum ResourceLimitExceeded"
+          },
+          {
+            "name": "ResourceNotFound",
+            "value": "ResourceNotFound",
+            "description": "ClusterIssueCode enum ResourceNotFound"
+          },
+          {
+            "name": "StsRegionalEndpointDisabled",
+            "value": "StsRegionalEndpointDisabled",
+            "description": "ClusterIssueCode enum StsRegionalEndpointDisabled"
+          },
+          {
+            "name": "UnsupportedVersion",
+            "value": "UnsupportedVersion",
+            "description": "ClusterIssueCode enum UnsupportedVersion"
+          },
+          {
+            "name": "VpcNotFound",
+            "value": "VpcNotFound",
+            "description": "ClusterIssueCode enum VpcNotFound"
+          }
+        ]
+      }
+    },
+    "ClusterIssueCodeEnumValue": {
+      "type": "object",
+      "description": "Definition of ClusterIssueCodeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ClusterIssueCode",
+          "description": "Property value"
+        }
+      }
+    },
+    "ClusterStatus": {
+      "type": "string",
+      "description": "ClusterStatus enum",
+      "enum": [
+        "ACTIVE",
+        "CREATING",
+        "DELETING",
+        "FAILED",
+        "PENDING",
+        "UPDATING"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ACTIVE",
+            "value": "ACTIVE",
+            "description": "ClusterStatus enum ACTIVE"
+          },
+          {
+            "name": "CREATING",
+            "value": "CREATING",
+            "description": "ClusterStatus enum CREATING"
+          },
+          {
+            "name": "DELETING",
+            "value": "DELETING",
+            "description": "ClusterStatus enum DELETING"
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "ClusterStatus enum FAILED"
+          },
+          {
+            "name": "PENDING",
+            "value": "PENDING",
+            "description": "ClusterStatus enum PENDING"
+          },
+          {
+            "name": "UPDATING",
+            "value": "UPDATING",
+            "description": "ClusterStatus enum UPDATING"
+          }
+        ]
+      }
+    },
+    "ClusterStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of ClusterStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ClusterStatus",
+          "description": "Property value"
+        }
+      }
+    },
+    "ConnectorConfigResponse": {
+      "type": "object",
+      "description": "Definition of ConnectorConfigResponse",
+      "properties": {
+        "activationCode": {
+          "type": "string",
+          "description": "<p>A unique code associated with the cluster for registration purposes.</p>"
+        },
+        "activationExpiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The expiration time of the connected cluster. The cluster's YAML file must be applied through the native provider.</p>"
+        },
+        "activationId": {
+          "type": "string",
+          "description": "<p>A unique ID associated with the cluster for registration purposes.</p>"
+        },
+        "provider": {
+          "type": "string",
+          "description": "<p>The cluster's cloud service provider.</p>"
+        },
+        "roleArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the role to communicate with services from the connected Kubernetes cluster.</p>"
+        }
+      }
+    },
+    "ControlPlanePlacementResponse": {
+      "type": "object",
+      "description": "Definition of ControlPlanePlacementResponse",
+      "properties": {
+        "groupName": {
+          "type": "string",
+          "description": "<p>The name of the placement group for the Kubernetes control plane instances.</p>"
+        }
+      }
+    },
+    "EksCluster": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EksClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EksClusterListResult": {
+      "type": "object",
+      "description": "The response of a EksCluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EksCluster items on this page",
+          "items": {
+            "$ref": "#/definitions/EksCluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EksClusterProperties": {
+      "type": "object",
+      "description": "Definition of EksCluster",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsEksClusterProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "EncryptionConfig": {
+      "type": "object",
+      "description": "Definition of EncryptionConfig",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/Provider",
+          "description": "<p>Key Management Service (KMS) key. Either the ARN or the alias can be used.</p>"
+        },
+        "resources": {
+          "type": "array",
+          "description": "<p>Specifies the resources to be encrypted. The only supported value is <code>secrets</code>.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Definition of Identity",
+      "properties": {
+        "oidc": {
+          "$ref": "#/definitions/OIDC",
+          "description": "<p>An object representing the <a href='https://openid.net/connect/'>OpenID Connect</a> identity provider information.</p>"
+        }
+      }
+    },
+    "IpFamily": {
+      "type": "string",
+      "description": "IpFamily enum",
+      "enum": [
+        "ipv4",
+        "ipv6"
+      ],
+      "x-ms-enum": {
+        "name": "IpFamily",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ipv4",
+            "value": "ipv4",
+            "description": "IpFamily enum ipv4"
+          },
+          {
+            "name": "Ipv6",
+            "value": "ipv6",
+            "description": "IpFamily enum ipv6"
+          }
+        ]
+      }
+    },
+    "IpFamilyEnumValue": {
+      "type": "object",
+      "description": "Definition of IpFamilyEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/IpFamily",
+          "description": "Property value"
+        }
+      }
+    },
+    "KubernetesNetworkConfigResponse": {
+      "type": "object",
+      "description": "Definition of KubernetesNetworkConfigResponse",
+      "properties": {
+        "ipFamily": {
+          "$ref": "#/definitions/IpFamilyEnumValue",
+          "description": "<p>The IP family used to assign Kubernetes <code>Pod</code> and <code>Service</code> objects IP addresses. The IP family is always <code>ipv4</code>, unless you have a <code>1.21</code> or later cluster running version <code>1.10.1</code> or later of the Amazon VPC CNI plugin for Kubernetes and specified <code>ipv6</code> when you created the cluster. </p>"
+        },
+        "serviceIpv4Cidr": {
+          "type": "string",
+          "description": "<p>The CIDR block that Kubernetes <code>Pod</code> and <code>Service</code> object IP addresses are assigned from. Kubernetes assigns addresses from an <code>IPv4</code> CIDR block assigned to a subnet that the node is in. If you didn't specify a CIDR block when you created the cluster, then Kubernetes assigns addresses from either the <code>10.100.0.0/16</code> or <code>172.20.0.0/16</code> CIDR blocks. If this was specified, then it was specified when the cluster was created and it can't be changed.</p>"
+        },
+        "serviceIpv6Cidr": {
+          "type": "string",
+          "description": "<p>The CIDR block that Kubernetes pod and service IP addresses are assigned from if you created a 1.21 or later cluster with version 1.10.1 or later of the Amazon VPC CNI add-on and specified <code>ipv6</code> for <b>ipFamily</b> when you created the cluster. Kubernetes assigns service addresses from the unique local address range (<code>fc00::/7</code>) because you can't specify a custom IPv6 CIDR block when you create the cluster.</p>"
+        }
+      }
+    },
+    "LogSetup": {
+      "type": "object",
+      "description": "Definition of LogSetup",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "<p>If a log type is enabled, that log type exports its control plane logs to CloudWatch Logs. If a log type isn't enabled, that log type doesn't export its control plane logs. Each individual log type can be enabled or disabled independently.</p>"
+        },
+        "types": {
+          "type": "array",
+          "description": "<p>The available cluster control plane log types.</p>",
+          "items": {
+            "$ref": "#/definitions/LogType"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LogType": {
+      "type": "string",
+      "description": "LogType enum",
+      "enum": [
+        "api",
+        "audit",
+        "authenticator",
+        "controllerManager",
+        "scheduler"
+      ],
+      "x-ms-enum": {
+        "name": "LogType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Api",
+            "value": "api",
+            "description": "LogType enum api"
+          },
+          {
+            "name": "Audit",
+            "value": "audit",
+            "description": "LogType enum audit"
+          },
+          {
+            "name": "Authenticator",
+            "value": "authenticator",
+            "description": "LogType enum authenticator"
+          },
+          {
+            "name": "ControllerManager",
+            "value": "controllerManager",
+            "description": "LogType enum controllerManager"
+          },
+          {
+            "name": "Scheduler",
+            "value": "scheduler",
+            "description": "LogType enum scheduler"
+          }
+        ]
+      }
+    },
+    "LogTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of LogTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/LogType",
+          "description": "Property value"
+        }
+      }
+    },
+    "Logging": {
+      "type": "object",
+      "description": "Definition of Logging",
+      "properties": {
+        "clusterLogging": {
+          "type": "array",
+          "description": "<p>The cluster control plane logging configuration for your cluster.</p>",
+          "items": {
+            "$ref": "#/definitions/LogSetup"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OIDC": {
+      "type": "object",
+      "description": "Definition of OIDC",
+      "properties": {
+        "issuer": {
+          "type": "string",
+          "description": "<p>The issuer URL for the OIDC identity provider.</p>"
+        }
+      }
+    },
+    "OutpostConfigResponse": {
+      "type": "object",
+      "description": "Definition of OutpostConfigResponse",
+      "properties": {
+        "controlPlaneInstanceType": {
+          "type": "string",
+          "description": "<p>The Amazon EC2 instance type used for the control plane. The instance type is the same for all control plane instances.</p>"
+        },
+        "controlPlanePlacement": {
+          "$ref": "#/definitions/ControlPlanePlacementResponse",
+          "description": "<p>An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href='https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html'>Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+        },
+        "outpostArns": {
+          "type": "array",
+          "description": "<p>The ARN of the Outpost that you specified for use with your local Amazon EKS cluster on Outposts.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Provider": {
+      "type": "object",
+      "description": "Definition of Provider",
+      "properties": {
+        "keyArn": {
+          "type": "string",
+          "description": "<p>Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric and created in the same Amazon Web Services Region as the cluster. If the KMS key was created in a different account, the <a href='https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html'>IAM principal</a> must have access to the KMS key. For more information, see <a href='https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html'>Allowing users in other accounts to use a KMS key</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "VpcConfigResponse": {
+      "type": "object",
+      "description": "Definition of VpcConfigResponse",
+      "properties": {
+        "clusterSecurityGroupId": {
+          "type": "string",
+          "description": "<p>The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.</p>"
+        },
+        "endpointPrivateAccess": {
+          "type": "boolean",
+          "description": "<p>This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate from within your cluster's VPC use the private VPC endpoint instead of traversing the internet. If this value is disabled and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href='https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html'>Amazon EKS cluster endpoint access control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+        },
+        "endpointPublicAccess": {
+          "type": "boolean",
+          "description": "<p>Whether the public API server endpoint is enabled.</p>"
+        },
+        "publicAccessCidrs": {
+          "type": "array",
+          "description": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "securityGroupIds": {
+          "type": "array",
+          "description": "<p>The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your nodes and the Kubernetes control plane.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "subnetIds": {
+          "type": "array",
+          "description": "<p>The subnets associated with your cluster.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "vpcId": {
+          "type": "string",
+          "description": "<p>The VPC associated with your cluster.</p>"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

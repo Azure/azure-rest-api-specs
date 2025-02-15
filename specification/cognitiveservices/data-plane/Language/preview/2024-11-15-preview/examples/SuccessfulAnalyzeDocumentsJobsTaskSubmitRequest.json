@@ -1,0 +1,51 @@
+{
+  "operationId": "AnalyzeDocumentsSubmitJob",
+  "title": "SuccessfulAnalyzeDocumentsJobsTaskSubmitRequest",
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2024-11-15-preview",
+    "Endpoint": "{Endpoint}",
+    "jobId": "{Job ID}",
+    "body": {
+      "displayName": "Redact PII from documents example",
+      "analysisInput": {
+        "documents": [
+          {
+            "id": "1",
+            "language": "en",
+            "source": {
+              "location": "https://myblob.blob.core.windows.net/Container/document.txt",
+              "kind": "AzureBlob"
+            },
+            "target": {
+              "location": "https://myblob.blob.core.windows.net/Container",
+              "kind": "AzureBlob"
+            }
+          }
+        ]
+      },
+      "tasks": [
+        {
+          "kind": "PiiEntityRecognition",
+          "taskName": "Redact PII Task 1",
+          "parameters": {
+            "redactionPolicy": {
+              "policyKind": "entityMask"
+            },
+            "piiCategories": [
+              "Person",
+              "Organization"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/language/analyze-documents/jobs/{jobId}?api-version=2024-11-15-preview"
+      }
+    }
+  }
+}

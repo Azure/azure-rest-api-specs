@@ -72,6 +72,7 @@ namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface SessionOperations {
     /** Open a new session. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     open is CreateOperation<SessionDetails>;
 
     /** Close an existing session. */
@@ -84,11 +85,13 @@ namespace Quantum.Workspace.Operations {
     list is ListOperation<SessionDetails>;
 
     /** List jobs in a session. */
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" ""
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "The nesting of Jobs under a Session makes the auto-generated ID to be Sessions_JobsList, which is not in a Noun_Verb format."
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
       We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
       See https://github.com/Azure/typespec-azure/issues/494
       """
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     @operationId("SessionsJobs_List")
     jobsList is CustomListOperation<
       Resource = JobDetails,

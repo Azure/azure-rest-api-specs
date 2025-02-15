@@ -10,6 +10,7 @@ import "./routes/completions.tsp";
 import "./routes/images.tsp";
 import "./routes/embeddings.tsp";
 import "./routes/files.tsp";
+import "./routes/uploads.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -75,4 +76,13 @@ enum ServiceApiVersions {
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_07_01_Preview: "2024-07-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_08_01_Preview: "2024-08-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_09_01_Preview: "2024-09-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_10_01_Preview: "2024-10-01-preview",
 }

@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "testrg",
+    "targetDbServerName": "testtarget",
+    "migrationName": "testmigration",
+    "migrationMode": "Offline",
+    "parameters": {
+      "properties": {
+        "setupLogicalReplicationOnSourceDbIfNeeded": "True"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
+          "currentStatus": {
+            "state": "InProgress",
+            "error": "",
+            "currentSubStateDetails": {
+              "currentSubState": "PerformingPreRequisiteSteps"
+            }
+          },
+          "sourceDbServerMetadata": {
+            "location": "westus",
+            "version": "10",
+            "storageMb": 1024,
+            "sku": {
+              "name": "B_Gen5_2",
+              "tier": "Basic"
+            }
+          },
+          "targetDbServerMetadata": {
+            "location": "westus",
+            "version": "11",
+            "storageMb": 2048,
+            "sku": {
+              "tier": "GeneralPurpose",
+              "name": "Standard_D4s_v3"
+            }
+          },
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+          "dbsToMigrate": [
+            "db1",
+            "db2",
+            "db3",
+            "db4"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "overwriteDbsInTarget": "False",
+          "migrationWindowStartTimeInUtc": "2021-05-06T16:05:58.895Z",
+          "startDataMigration": "False",
+          "triggerCutover": "False",
+          "migrateRoles": "False"
+        },
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigration",
+        "name": "testmigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    }
+  }
+}
