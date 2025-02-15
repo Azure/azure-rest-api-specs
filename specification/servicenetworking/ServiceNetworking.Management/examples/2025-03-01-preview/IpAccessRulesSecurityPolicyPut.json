@@ -1,0 +1,51 @@
+{
+  "title": "Put IpAccessRules SecurityPolicy",
+  "operationId": "SecurityPoliciesInterface_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "trafficControllerName": "tc1",
+    "securityPolicyName": "sp1",
+    "resource": {
+      "location": "NorthCentralUS",
+      "properties": {
+        "ipAccessRulesPolicy": {
+          "rules": []
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ipAccessRules-0",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/securityPolicies",
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/sample-tc/securityPolicies/ipAccessRules-0",
+        "location": "eastus",
+        "properties": {
+          "policyType": "ipAccessRules",
+          "ipAccessRulesPolicy": {
+            "rules": []
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "ipAccessRules-0",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/securityPolicies",
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/sample-tc/securityPolicies/ipAccessRules-0",
+        "location": "eastus",
+        "properties": {
+          "policyType": "ipAccessRules",
+          "ipAccessRulesPolicy": {
+            "rules": []
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
