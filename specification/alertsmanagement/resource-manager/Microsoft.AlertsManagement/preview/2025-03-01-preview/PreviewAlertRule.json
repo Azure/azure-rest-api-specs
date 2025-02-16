@@ -60,7 +60,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ScheduledQueryRuleResource"
+              "$ref": "#/definitions/LogAlertRuleResource"
             },
             "description": "The alert rule to preview."
           }
@@ -88,36 +88,7 @@
     }
   },
   "definitions": {
-    "Actions": {
-      "type": "object",
-      "description": "Actions to invoke when the alert fires.",
-      "properties": {
-        "actionGroups": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Action Group resource Ids to invoke when the alert fires."
-        },
-        "customProperties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "description": "The dictionary of custom properties to include with the post operation. These data are appended to the alert payload."
-          },
-          "description": "The properties of an alert payload."
-        },
-        "actionProperties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "description": "The dictionary of action properties to include with the post operation. This data customizes the actions."
-          },
-          "description": "The properties of an action properties."
-        }
-      }
-    },
-    "RuleResolveConfiguration": {
+    "LogAlertRuleResolveConfiguration": {
       "type": "object",
       "description": "TBD. Relevant only for rules of the kind LogAlert.",
       "properties": {
@@ -132,7 +103,7 @@
         }
       }
     },
-    "ScheduledQueryRuleProperties": {
+    "LogAlertRuleProperties": {
       "type": "object",
       "properties": {
         "createdWithApiVersion": {
@@ -203,18 +174,13 @@
           "description": "List of resource type of the target resource(s) on which the alert is created/updated. For example if the scope is a resource group and targetResourceTypes is Microsoft.Compute/virtualMachines, then a different alert will be fired for each virtual machine in the resource group which meet the alert criteria. Relevant only for rules of the kind LogAlert"
         },
         "criteria": {
-          "$ref": "#/definitions/ScheduledQueryRuleCriteria",
+          "$ref": "#/definitions/LogAlertRuleCriteria",
           "description": "The rule criteria that defines the conditions of the scheduled query rule."
         },
         "muteActionsDuration": {
           "type": "string",
           "format": "duration",
           "description": "Mute actions for the chosen period of time (in ISO 8601 duration format) after the alert is fired. Relevant only for rules of the kind LogAlert."
-        },
-        "actions": {
-          "type": "object",
-          "$ref": "#/definitions/Actions",
-          "description": "Actions to invoke when the alert fires."
         },
         "isWorkspaceAlertsStorageConfigured": {
           "type": "boolean",
@@ -235,13 +201,13 @@
         },
         "resolveConfiguration": {
           "type": "object",
-          "$ref": "#/definitions/RuleResolveConfiguration",
+          "$ref": "#/definitions/LogAlertRuleResolveConfiguration",
           "description": "Defines the configuration for resolving fired alerts. Relevant only for rules of the kind LogAlert."
         }
       },
       "description": "scheduled query rule Definition"
     },
-    "ScheduledQueryRuleResource": {
+    "LogAlertRuleResource": {
       "type": "object",
       "required": [
         "properties",
@@ -264,7 +230,7 @@
           "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "#/definitions/LogAlertRuleIdentity",
           "description": "The identity of the resource."
         },
         "tags": {
@@ -312,7 +278,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ScheduledQueryRuleProperties",
+          "$ref": "#/definitions/LogAlertRuleProperties",
           "description": "The rule properties of the resource.",
           "required": [
             "enabled",
@@ -324,25 +290,7 @@
       "description": "The scheduled query rule resource.",
       "x-ms-azure-resource": true
     },
-    "ScheduledQueryRuleResourceCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScheduledQueryRuleResource"
-          },
-          "description": "The values for the scheduled query rule resources."
-        },
-        "nextLink": {
-          "description": "Provides the link to retrieve the next set of elements.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "description": "Represents a collection of scheduled query rule resources."
-    },
-    "ScheduledQueryRuleCriteria": {
+    "LogAlertRuleCriteria": {
       "type": "object",
       "description": "The rule criteria that defines the conditions of the scheduled query rule.",
       "properties": {
@@ -350,13 +298,13 @@
           "type": "array",
           "description": "A list of conditions to evaluate against the specified scopes",
           "items": {
-            "$ref": "#/definitions/Condition"
+            "$ref": "#/definitions/LogAlertRuleCondition"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "Condition": {
+    "LogAlertRuleCondition": {
       "type": "object",
       "description": "A condition of the scheduled query rule.",
       "properties": {
@@ -402,7 +350,7 @@
         "dimensions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Dimension"
+            "$ref": "#/definitions/LogAlertRuleDimension"
           },
           "description": "List of Dimensions conditions",
           "x-ms-identifiers": []
@@ -461,7 +409,7 @@
         }
       }
     },
-    "Dimension": {
+    "LogAlertRuleDimension": {
       "type": "object",
       "description": "Dimension splitting and filtering definition",
       "properties": {
@@ -495,7 +443,7 @@
         "values"
       ]
     },
-    "Identity": {
+    "LogAlertRuleIdentity": {
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -524,7 +472,7 @@
           "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/UserIdentityProperties"
+            "$ref": "#/definitions/LogAlertRuleUserIdentityProperties"
           }
         }
       },
@@ -534,7 +482,7 @@
       "type": "object",
       "description": "Identity for the resource."
     },
-    "UserIdentityProperties": {
+    "LogAlertRuleUserIdentityProperties": {
       "type": "object",
       "description": "User assigned identity properties.",
       "properties": {
@@ -566,11 +514,11 @@
       "type": "object",
       "properties": {
         "dimensionCombinations": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionNameAndValue"
           },
-          "description": "A dictionary of dimension names and values."
+          "description": "The list of dimensions for the evaluation."
         },
         "evaluations": {
           "type": "array",
@@ -599,6 +547,10 @@
             "Resolving",
             "Resolved"
           ],
+          "x-ms-enum": {
+            "name": "AlertState",
+            "modelAsString": true
+          },
           "description": "The state of the alert after the evaluation."
         },
         "evaluatedPeriods": {
@@ -644,6 +596,24 @@
         }
       },
       "description": "Details of the evaluated period."
+    },
+    "DimensionNameAndValue": {
+      "type": "object",
+      "description": "Dimension name and value",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the dimension"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
     }
   }
 }
