@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "my-cluster",
+    "extensionTypeName": "my-extension-type",
+    "versionNumber": "v1.3.2",
+    "api-version": "2024-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "description": "Versions for the Extension Type",
+      "body": {
+        "id": "aaaa",
+        "name": "bbbb",
+        "type": "cccc",
+        "properties": {
+          "version": "1.1.0",
+          "unsupportedKubernetesVersions": {
+            "connectedCluster": [
+              {
+                "distributions": [
+                  "AKS"
+                ],
+                "unsupportedVersions": []
+              },
+              {
+                "distributions": [
+                  "GKE"
+                ],
+                "unsupportedVersions": [
+                  ">1.22"
+                ]
+              }
+            ],
+            "appliances": [
+              {
+                "distributions": [
+                  "AKS"
+                ],
+                "unsupportedVersions": [
+                  "1.18..1.21"
+                ]
+              }
+            ],
+            "provisionedCluster": [
+              {
+                "distributions": [
+                  "AKS"
+                ],
+                "unsupportedVersions": []
+              }
+            ],
+            "managedCluster": [
+              {
+                "distributions": [
+                  "AKS"
+                ],
+                "unsupportedVersions": []
+              }
+            ]
+          },
+          "supportedClusterTypes": [
+            "connectedCluster"
+          ]
+        }
+      }
+    }
+  }
+}
