@@ -66,7 +66,9 @@
                   "properties": {
                     "ruleType": {
                       "type": "string",
-                      "enum": ["scheduledQueryRule"]
+                      "enum": [
+                        "scheduledQueryRule"
+                      ]
                     },
                     "bodyParam1": {
                       "$ref": "#/definitions/ScheduledQueryRuleResource"
@@ -100,7 +102,7 @@
       }
     }
   },
- "definitions": {
+  "definitions": {
     "Actions": {
       "type": "object",
       "description": "Actions to invoke when the alert fires.",
@@ -564,7 +566,13 @@
         },
         "alertState": {
           "type": "string",
-          "enum": ["NoAlert", "Fired", "Firing", "Resolving", "Resolved"],
+          "enum": [
+            "NoAlert",
+            "Fired",
+            "Firing",
+            "Resolving",
+            "Resolved"
+          ],
           "description": "The state of the alert after the evaluation."
         },
         "evaluatedPeriods": {
