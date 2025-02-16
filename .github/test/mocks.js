@@ -8,7 +8,7 @@ export function createMockGithub() {
       const data = (await func(params)).data;
 
       // Simulate normalization performed by real impl
-      return data.artifacts || data.workflow_runs || data.check_runs || data;
+      return Array.isArray(data) ? data : data[Object.keys(data)[0]];
     },
     rest: {
       actions: {
