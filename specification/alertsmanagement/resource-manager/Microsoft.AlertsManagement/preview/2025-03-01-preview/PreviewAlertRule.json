@@ -52,7 +52,7 @@
             "name": "lookbackPeriod",
             "in": "query",
             "required": true,
-            "type": "duration",
+            "type": "string",
             "description": "The query parameter that specifies the lookback of the preview."
           },
           {
@@ -60,24 +60,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "oneOf": [
-                {
-                  "type": "object",
-                  "properties": {
-                    "ruleType": {
-                      "type": "string",
-                      "enum": [
-                        "scheduledQueryRule"
-                      ]
-                    },
-                    "bodyParam1": {
-                      "$ref": "#/definitions/ScheduledQueryRuleResource"
-                    }
-                  }
-                }
-              ]
+              "$ref": "#/definitions/ScheduledQueryRuleResource"
             },
-            "description": "The parameters for previewing an alert rule."
+            "description": "The alert rule to preview."
           }
         ],
         "responses": {
