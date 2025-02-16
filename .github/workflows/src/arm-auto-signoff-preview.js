@@ -78,14 +78,12 @@ export async function getLabelActionImpl({
   );
 
   core.info("Workflow Runs:");
-  workflowRuns.workflow_runs.forEach((wf) => {
+  workflowRuns.forEach((wf) => {
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
   const wfName = "ARM Incremental Typespec (Preview)";
-  const incrementalTspRuns = workflowRuns.workflow_runs.filter(
-    (wf) => wf.name == wfName,
-  );
+  const incrementalTspRuns = workflowRuns.filter((wf) => wf.name == wfName);
 
   if (incrementalTspRuns.length == 0) {
     core.info(
@@ -104,14 +102,16 @@ export async function getLabelActionImpl({
       return labelActions[LabelAction.Remove];
     }
 
-    const artifactNames = (
-      await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+    const artifacts = await github.paginate(
+      github.rest.actions.listWorkflowRunArtifacts,
+      {
         owner,
         repo,
         run_id: run.id,
         per_page: PER_PAGE_MAX,
-      })
-    ).artifacts.map((a) => a.name);
+      },
+    );
+    const artifactNames = artifacts.map((a) => a.name);
 
     core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
@@ -128,37 +128,34 @@ export async function getLabelActionImpl({
   }
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
-  const labels = (
-    await github.paginate(github.rest.issues.listLabelsOnIssue, {
-      owner: owner,
-      repo: repo,
-      issue_number: issue_number,
-      per_page: PER_PAGE_MAX,
-    })
-  ).map((label) => label.name);
+  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+    owner: owner,
+    repo: repo,
+    issue_number: issue_number,
+    per_page: PER_PAGE_MAX,
+  });
+  const labelNames = labels.map((label) => label.name);
 
   core.info(`Labels: ${labels}`);
 
   // TODO: Also require label "ARMBestPracticesAcknowledgement"
   const allLabelsMatch =
-    labels.includes("ARMReview") &&
-    !labels.includes("NotReadyForARMReview") &&
-    (!labels.includes("SuppressionReviewRequired") ||
-      labels.includes("Approved-Suppression"));
+    labelNames.includes("ARMReview") &&
+    !labelNames.includes("NotReadyForARMReview") &&
+    (!labelNames.includes("SuppressionReviewRequired") ||
+      labelNames.includes("Approved-Suppression"));
 
   if (!allLabelsMatch) {
     core.info("Labels do not meet requirement for auto-signoff");
     return labelActions[LabelAction.Remove];
   }
 
-  const checkRuns = (
-    await github.paginate(github.rest.checks.listForRef, {
-      owner: owner,
-      repo: repo,
-      ref: head_sha,
-      per_page: PER_PAGE_MAX,
-    })
-  ).check_runs;
+  const checkRuns = await github.paginate(github.rest.checks.listForRef, {
+    owner: owner,
+    repo: repo,
+    ref: head_sha,
+    per_page: PER_PAGE_MAX,
+  });
 
   const swaggerLintDiffs = checkRuns.filter(
     (run) => run.name === "Swagger LintDiff",
