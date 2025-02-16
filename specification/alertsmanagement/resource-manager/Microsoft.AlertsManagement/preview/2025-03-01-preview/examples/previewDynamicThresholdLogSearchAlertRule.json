@@ -46,19 +46,6 @@
           ]
         },
         "muteActionsDuration": "PT30M",
-        "actions": {
-          "actionGroups": [
-            "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
-          ],
-          "actionProperties": {
-            "Icm.TsgId": "https://tsg.url",
-            "Icm.Title": "Custom title in ICM"
-          },
-          "customProperties": {
-            "key11": "value11",
-            "key12": "value12"
-          }
-        },
         "checkWorkspaceAlertsStorageConfigured": true,
         "skipQueryValidation": true
       }
@@ -69,10 +56,16 @@
       "body": {
         "rulePreviewResults": [
           {
-            "dimensionCombinations": {
-              "Region": "West US",
-              "Environment": "Production"
-            },
+            "dimensionCombinations": [
+              {
+                "name": "Region",
+                "value": "West US"
+              },
+              {
+                "name": "Environment",
+                "value": "Production"
+              }
+            ],
             "evaluations": [
               {
                 "evaluationTime": "2025-02-15T10:00:00Z",
