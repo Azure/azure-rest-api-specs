@@ -72,6 +72,9 @@ suppressions:
     - code: ProvisioningStateMustBeReadOnly
       from: dynatrace.json
       reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: PatchBodyParametersSchema
+      from: dynatrace.json
+      reason: Empty object can still be passed, properties are not mandatory for the update schema.
 ```
 
 ### Tag: package-2023-11-24-preview
@@ -237,7 +240,7 @@ directive:
     from:
       - Dynatrace.Observability/preview/2024-04-24-preview/dynatrace.json
     reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
- - suppress: ProvisioningStateMustBeReadOnly
+  - suppress: ProvisioningStateMustBeReadOnly
     from:
       - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
     reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
@@ -253,6 +256,10 @@ directive:
     from:
       - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
     reason: Existing service design behavior. Fixing this causes breaking changes.
+  - suppress: PatchBodyParametersSchema
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: Empty object can still be passed, properties are not mandatory for the update schema.
 ```
 
 ## Go
