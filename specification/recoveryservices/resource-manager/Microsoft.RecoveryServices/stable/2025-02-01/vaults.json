@@ -1311,29 +1311,33 @@
           }
         },
         "sourceScanIdentity": {
-          "$ref": "#/definitions/SourceScanIdentity"
+          "$ref": "#/definitions/AssociatedIdentity"
         }
       }
     },
-    "SourceScanIdentity": {
+    "AssociatedIdentity": {
       "type": "object",
-      "description": "Identity details to be used for source scan operation",
+      "description": "Identity details to be used for an operation",
       "properties": {
-        "identityType": {
+        "operationIdentityType": {
           "enum": [
             "SystemAssigned",
             "UserAssigned"
+          ],
+          "x-enum-descriptions": [
+            "Operation needs to use system assigned identity of the vault.",
+            "Operation needs to use one of the user assigned identities of the vault."
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "IdentityType",
             "modelAsString": true
           },
-          "description": "Identity type that should be used for source scan operation."
+          "description": "Identity type that should be used for an operation."
         },
         "userAssignedIdentity": {
           "type": "string",
-          "description": "User assigned identity to be used for source scan operation if IdentityType is UserAssigned."
+          "description": "User assigned identity to be used for an operation if operationIdentityType is UserAssigned."
         }
       }
     },
