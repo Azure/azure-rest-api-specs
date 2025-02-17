@@ -1845,7 +1845,7 @@
         },
         "dnsZone": {
           "type": "string",
-          "description": "The DNS zone to be included in the DNS name of the shared private link. Value is required for Azure Data Explorer clusters and SQL managed instances. The value to use is the second segment of the host FQDN name of the resource that the shared private link resource is for."
+          "description": "The DNS zone segment to be included in the DNS name of the shared private link. Value is required for Azure Data Explorer clusters and SQL managed instances, and must be omitted for SQL logical servers and key vaults. The value is the second segment of the host FQDN name of the resource that the shared private link resource is for. For example: if the host name is 'adx-cluster-21187695.eastus.kusto.windows.net', then the value is 'eastus'; if the host name is 'sql-mi-23961134.767d5869f605.database.windows.net', then the value is '767d5869f605'."
         },
         "status": {
           "$ref": "#/definitions/SharedPrivateLinkResourceStatus",
@@ -1902,7 +1902,7 @@
     },
     "SqlDbElasticPoolTargetProperties": {
       "type": "object",
-      "description": "The properties specific to elastic pool in Azure SQL Database.",
+      "description": "The properties specific to an elastic pool in Azure SQL Database.",
       "properties": {
         "sqlEpResourceId": {
           "type": "string",
@@ -1947,12 +1947,12 @@
     },
     "SqlDbSingleDatabaseTargetProperties": {
       "type": "object",
-      "description": "The properties specific to single database in Azure SQL Database.",
+      "description": "The properties specific to a database in Azure SQL Database.",
       "properties": {
         "sqlDbResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource ID of an Azure SQL DB single database target.",
+          "description": "The Azure resource ID of an Azure SQL DB database target.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -2131,7 +2131,7 @@
         },
         "connectionServerName": {
           "type": "string",
-          "description": "The server name to use in the connection string when connecting to a target. Port number and instance name must be specified separately.",
+          "description": "The FQDN host name of the server to use in the connection string when connecting to a target. For example, for an Azure SQL logical server in the Azure commercial cloud, the value might be 'sql-logical-server-22092780.database.windows.net'; for an Azure SQL managed instance in the Azure commercial cloud, the value might be 'sql-mi-39441134.767d5869f605.database.windows.net'. Port number and instance name must be specified separately.",
           "maxLength": 200
         },
         "provisioningState": {
