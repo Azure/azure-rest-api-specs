@@ -34,7 +34,6 @@ model SolutionVersionProperties {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
   @doc("App components spec")
-  @visibility("read")
   specification: Record<unknown>;
 
   @doc("Review id of resolved config for this solution version")
@@ -50,7 +49,7 @@ model SolutionVersionProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Solution Version Resource")
+@doc("Solution Version Resource. It has the resolved configuration along with edge specification.")
 @parentResource(Solution)
 @resource("versions")
 model SolutionVersion
@@ -59,7 +58,7 @@ model SolutionVersion
   @doc("Name of the solution version")
   @maxLength(61)
   @minLength(3)
-  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   @path
   @key("solutionVersionName")
   @segment("solutionVersions")
@@ -73,6 +72,15 @@ model SolutionVersion
 interface SolutionVersions {
   @doc("Get a Solution Version Resource")
   get is ArmResourceRead<SolutionVersion>;
+
+  @doc("Create or update a Solution Version Resource")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SolutionVersion>;
+
+  @doc("Update a Solution Version Resource")
+  update is ArmResourcePatchAsync<SolutionVersion, SolutionVersionProperties>;
+
+  @doc("Delete a Solution Version Resource")
+  delete is ArmResourceDeleteWithoutOkAsync<SolutionVersion>;
 
   @doc("List Solution Version Resources")
   listBySolution is ArmResourceListByParent<SolutionVersion>;

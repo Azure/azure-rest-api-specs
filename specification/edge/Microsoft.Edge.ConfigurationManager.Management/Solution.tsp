@@ -22,7 +22,7 @@ namespace Microsoft.Edge;
 model SolutionProperties {
   @doc("Solution template Id")
   @visibility("read")
-  solutionTemplateId: string;
+  solutionTemplateId?: string;
 
   @doc("List of latest revisions for available solution template versions")
   @extension("x-ms-identifiers", [])
@@ -34,13 +34,13 @@ model SolutionProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Solution Resource")
+@doc("Solution Resource attached to a Target")
 @parentResource(Target)
 model Solution is Azure.ResourceManager.ProxyResource<SolutionProperties> {
   @doc("Name of the solution")
   @maxLength(61)
   @minLength(3)
-  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   @path
   @key("solutionName")
   @segment("solutions")
@@ -55,9 +55,15 @@ interface Solutions {
   @doc("Get a Solution resource")
   get is ArmResourceRead<Solution>;
 
-  @doc("List by specified resource group")
-  listByResourceGroup is ArmResourceListByParent<Solution>;
+  @doc("Create or update a Solution Resource")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Solution>;
 
-  @doc("List by subscription")
-  listBySubscription is ArmListBySubscription<Solution>;
+  @doc("Update a Solution Resource")
+  update is ArmResourcePatchAsync<Solution, SolutionProperties>;
+
+  @doc("Delete a Solution Resource")
+  delete is ArmResourceDeleteWithoutOkAsync<Solution>;
+
+  @doc("List Solution resources")
+  listByTarget is ArmResourceListByParent<Solution>;
 }
