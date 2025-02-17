@@ -1,0 +1,272 @@
+{
+  "Resources": {
+    "MysqlSite": [
+      {
+        "Name": "MysqlSite",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}",
+          "Method": "GET",
+          "OperationID": "MysqlSites_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the MysqlSites resource."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}",
+          "Method": "PUT",
+          "OperationID": "MysqlSites_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Puts the MysqlSites resource."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}",
+          "Method": "PATCH",
+          "OperationID": "MysqlSites_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Patch the MysqlSites resource."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}",
+          "Method": "DELETE",
+          "OperationID": "MysqlSites_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the MysqlSites resource."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites",
+            "Method": "GET",
+            "OperationID": "MysqlSites_ListByResourceGroup",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByResourceGroup",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lits the MysqlSites resource in a resource group."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [
+          {
+            "Name": "_",
+            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.MySQLDiscovery/MySQLSites",
+            "Method": "GET",
+            "OperationID": "MysqlSites_ListBySubscription",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListBySubscription",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists the MysqlSites resource in a subscription."
+          }
+        ],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "TriggerRefresh",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/refresh",
+            "Method": "POST",
+            "OperationID": "MysqlSites_TriggerRefresh",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Trigger Refresh Refresh action"
+          }
+        ],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "MysqlSite",
+        "ResourceType": "Microsoft.MySQLDiscovery/MySQLSites",
+        "ResourceKey": "siteName",
+        "ResourceKeySegment": "MySQLSites",
+        "IsTrackedResource": true,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ],
+    "MysqlServer": [
+      {
+        "Name": "MysqlServer",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers/{serverName}",
+          "Method": "GET",
+          "OperationID": "MysqlServers_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the MysqlServers resource."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers/{serverName}",
+          "Method": "PUT",
+          "OperationID": "MysqlServers_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Puts the MysqlServers resource."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers/{serverName}",
+          "Method": "PATCH",
+          "OperationID": "MysqlServers_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Patch the MysqlServers resource."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers/{serverName}",
+          "Method": "DELETE",
+          "OperationID": "MysqlServers_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the MysqlServers resource."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers",
+            "Method": "GET",
+            "OperationID": "MysqlServers_ListBySite",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListBySite",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists the MysqlServers resource in MysqlSites."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "MysqlSite"
+        ],
+        "SwaggerModelName": "MysqlServer",
+        "ResourceType": "Microsoft.MySQLDiscovery/MySQLSites/MySQLServers",
+        "ResourceKey": "serverName",
+        "ResourceKeySegment": "MySQLServers",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ],
+    "ErrorSummary": [
+      {
+        "Name": "ErrorSummary",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/errorSummaries/{errorSummaryName}",
+          "Method": "GET",
+          "OperationID": "ErrorSummaries_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the ErrorSummaries resource."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/errorSummaries",
+            "Method": "GET",
+            "OperationID": "ErrorSummaries_ListBySite",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListBySite",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists the ErrorSummaries resource in MysqlSites."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "MysqlSite"
+        ],
+        "SwaggerModelName": "ErrorSummary",
+        "ResourceType": "Microsoft.MySQLDiscovery/MySQLSites/errorSummaries",
+        "ResourceKey": "errorSummaryName",
+        "ResourceKeySegment": "errorSummaries",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ],
+    "Summary": [
+      {
+        "Name": "Summary",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/summaries/{summaryName}",
+          "Method": "GET",
+          "OperationID": "Summaries_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the Summaries resource."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/summaries",
+            "Method": "GET",
+            "OperationID": "Summaries_ListBySite",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListBySite",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists the Summaries resource in MysqlSites."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "MysqlSite"
+        ],
+        "SwaggerModelName": "Summary",
+        "ResourceType": "Microsoft.MySQLDiscovery/MySQLSites/summaries",
+        "ResourceKey": "summaryName",
+        "ResourceKeySegment": "summaries",
+        "IsTrackedResource": false,
+        "IsTenantResource": false,
+        "IsSubscriptionResource": false,
+        "IsManagementGroupResource": false,
+        "IsExtensionResource": false,
+        "IsSingletonResource": false
+      }
+    ]
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
+}
