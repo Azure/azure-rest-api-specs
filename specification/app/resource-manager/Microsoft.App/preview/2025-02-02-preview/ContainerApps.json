@@ -962,6 +962,38 @@
         "enableApiLogging": {
           "description": "Enables API logging for the Dapr sidecar",
           "type": "boolean"
+        },
+        "appHealth": {
+          "description": "Dapr application health check configuration",
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "description": "Boolean indicating if the health probe is enabled",
+              "type": "boolean"
+            },
+            "path": {
+              "description": "Path for the health probe",
+              "type": "string"
+            },
+            "probeIntervalSeconds": {
+              "description": "Interval for the health probe in seconds",
+              "format": "int32",
+              "type": "integer",
+              "minimum": 1
+            },
+            "probeTimeoutMilliseconds": {
+              "description": "Timeout for the health probe in milliseconds",
+              "format": "int32",
+              "type": "integer",
+              "minimum": 1
+            },
+            "threshold": {
+              "description": "Threshold for the health probe",
+              "format": "int32",
+              "type": "integer",
+              "minimum": 1
+            }
+          }
         }
       }
     },
