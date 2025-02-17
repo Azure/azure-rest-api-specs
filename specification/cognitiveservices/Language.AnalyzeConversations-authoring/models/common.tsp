@@ -176,7 +176,7 @@ union JobStatus {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationAuthoringCompositionMode", "csharp")
 @clientNamespace("Language.Conversations.Authoring.Common")
-union CompositionMode {
+union CompositionSetting {
   string,
 
   /**

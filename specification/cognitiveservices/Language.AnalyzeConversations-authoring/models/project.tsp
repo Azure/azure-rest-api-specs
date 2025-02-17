@@ -1418,7 +1418,8 @@ model AnalyzeConversationAuthoringConversationExportedEntity {
   /**
    * The behavior to follow when the entity's components overlap with each other.
    */
-  compositionMode?: CompositionMode;
+  @clientName("compositionMode", "csharp")
+  compositionSetting?: CompositionSetting;
 
   /**
    * The list component of the entity.
