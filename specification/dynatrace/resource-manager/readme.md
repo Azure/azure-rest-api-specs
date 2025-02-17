@@ -50,6 +50,9 @@ suppressions:
     - code: OperationIdNounVerb
       from: dynatrace.json
       reason: Existing service design behavior. Fixing this causes breaking changes.
+    - code: PatchBodyParametersSchema
+      from: dynatrace.json
+      reason: Empty object can still be passed, properties are not mandatory for the update schema.
 ```
 
 ### Tag: package-2024-04-24-preview
@@ -72,9 +75,6 @@ suppressions:
     - code: ProvisioningStateMustBeReadOnly
       from: dynatrace.json
       reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
-    - code: PatchBodyParametersSchema
-      from: dynatrace.json
-      reason: Empty object can still be passed, properties are not mandatory for the update schema.
 ```
 
 ### Tag: package-2023-11-24-preview
