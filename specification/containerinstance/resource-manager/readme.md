@@ -247,6 +247,13 @@ suppressions:
       - containerInstance.json
     where:
       - $.definitions.SecretReferenceVolume
+  - code: GetCollectionResponseSchema
+    reason: We do not return instanceView property in our ContainerGroups_List operation, however we do return this 
+            property for inidividual Get operations on container groups. 
+    from:
+      - containerInstance.json
+    where:
+      - $.paths["/providers/Microsoft.ContainerInstance/containerGroups/ContainerGroups_List"]
 ```
 
 ---
