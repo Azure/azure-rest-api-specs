@@ -1314,7 +1314,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TestRunServerMetricConfig"
+              "$ref": "#/definitions/TestRunServerMetricsConfiguration"
             }
           },
           "default": {
@@ -1366,7 +1366,7 @@
             "description": "Server metric configuration model.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TestRunServerMetricConfig"
+              "$ref": "#/definitions/TestRunServerMetricsConfiguration"
             }
           }
         ],
@@ -1374,13 +1374,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TestRunServerMetricConfig"
+              "$ref": "#/definitions/TestRunServerMetricsConfiguration"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/TestRunServerMetricConfig"
+              "$ref": "#/definitions/TestRunServerMetricsConfiguration"
             }
           },
           "default": {
@@ -2047,7 +2047,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TestServerMetricConfig"
+              "$ref": "#/definitions/TestServerMetricsConfiguration"
             }
           },
           "default": {
@@ -2099,7 +2099,7 @@
             "description": "Server metric configuration model.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TestServerMetricConfigUpdate"
+              "$ref": "#/definitions/TestServerMetricsConfigurationUpdate"
             }
           }
         ],
@@ -2107,13 +2107,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TestServerMetricConfig"
+              "$ref": "#/definitions/TestServerMetricsConfiguration"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/TestServerMetricConfig"
+              "$ref": "#/definitions/TestServerMetricsConfiguration"
             }
           },
           "default": {
@@ -2354,7 +2354,7 @@
     }
   },
   "definitions": {
-    "AggregationType": {
+    "Aggregation": {
       "type": "string",
       "description": "Aggregation type.",
       "enum": [
@@ -2373,7 +2373,7 @@
         "Percentile9999"
       ],
       "x-ms-enum": {
-        "name": "AggregationType",
+        "name": "Aggregation",
         "modelAsString": true,
         "values": [
           {
@@ -3091,7 +3091,7 @@
           "description": "The namespace the metric belongs to."
         },
         "primaryAggregationType": {
-          "$ref": "#/definitions/AggregationType",
+          "$ref": "#/definitions/Aggregation",
           "description": "The primary aggregation type value defining how to use the values for display."
         },
         "supportedAggregationTypes": {
@@ -5537,7 +5537,7 @@
         }
       }
     },
-    "TestRunServerMetricConfig": {
+    "TestRunServerMetricsConfiguration": {
       "type": "object",
       "description": "Test run server metrics configuration",
       "properties": {
@@ -5810,7 +5810,7 @@
         ]
       }
     },
-    "TestServerMetricConfig": {
+    "TestServerMetricsConfiguration": {
       "type": "object",
       "description": "Test server metrics configuration",
       "properties": {
@@ -5853,7 +5853,7 @@
         "metrics"
       ]
     },
-    "TestServerMetricConfigUpdate": {
+    "TestServerMetricsConfigurationUpdate": {
       "type": "object",
       "description": "Test server metrics configuration",
       "properties": {

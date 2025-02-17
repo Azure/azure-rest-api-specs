@@ -27,6 +27,28 @@ namespace Customizations;
 
 // Suggestion to rename Enum Members for more clarity
 @@clientName(CertificateType.AKV_CERT_URI, "KeyVaultCertificateUri", "csharp,java");
+@@clientName(SecretType.AKV_SECRET_URI, "KeyVaultSecretUri", "csharp,java");
+
+// Suggestion to fix casing for acronyms
+@@clientName(LoadTestConfiguration.splitAllCSVs, "splitAllCsvs", "csharp,java");
+@@clientName(Test.publicIPDisabled, "publicIpDisabled", "csharp,java");
+@@clientName(TestRun.publicIPDisabled, "publicIpDisabled", "csharp,java");
+
+// Suggestion to rename properties in TestRunStatistics for better explaination
+@@clientName(TestRunStatistics.errorPct, "errorPercentage", "csharp,java");
+@@clientName(TestRunStatistics.meanResTime, "meanResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.medianResTime, "medianResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.maxResTime, "maxResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.minResTime, "minResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.pct75ResTime, "percentile75ResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.pct1ResTime, "percentile90ResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.pct2ResTime, "percentile95ResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.pct96ResTime, "percentile96ResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.pct97ResTime, "percentile97ResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.pct98ResTime, "percentile98ResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.pct3ResTime, "percentile99ResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.pct999ResTime, "percentile999ResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.pct9999ResTime, "percentile9999ResponseTime", "csharp,java");
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"

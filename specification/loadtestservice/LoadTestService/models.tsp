@@ -176,7 +176,7 @@ union TestRunStatus {
 }
 
 @doc("Aggregation type.")
-union AggregationType {
+union Aggregation {
   string,
   @doc("Average value.") "Average",
   @doc("Total count.") "Count",
@@ -645,7 +645,7 @@ model AppComponent {
 }
 
 @doc("Test server metrics configuration")
-model TestServerMetricConfig {
+model TestServerMetricsConfiguration {
   @doc("Test identifier")
   @visibility("read")
   testId?: string;
@@ -1022,7 +1022,7 @@ model MetricDefinition {
   `namespace`?: string;
 
   @doc("The primary aggregation type value defining how to use the values for display.")
-  primaryAggregationType?: AggregationType;
+  primaryAggregationType?: Aggregation;
 
   @doc("The collection of what all aggregation types are supported.")
   supportedAggregationTypes?: string[];
@@ -1161,7 +1161,7 @@ model TestRunAppComponents {
 }
 
 @doc("Test run server metrics configuration")
-model TestRunServerMetricConfig {
+model TestRunServerMetricsConfiguration {
   @doc("Test run identifier")
   @visibility("read")
   testRunId?: string;
