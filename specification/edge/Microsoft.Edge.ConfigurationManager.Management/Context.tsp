@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./ProvisioningState.tsp";
+import "./State.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -23,6 +24,9 @@ model Capability {
 
   @doc("Description of Capability")
   description: string;
+
+  @doc("State of resource")
+  state?: ResourceState;
 }
 
 @doc("Hierarchy, to tag Sites / Hierarchy Provider nodes with what they represent")
