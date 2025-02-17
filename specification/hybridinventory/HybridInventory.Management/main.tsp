@@ -46,3 +46,5 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_02_01_preview: "2025-02-01-preview",
 }
+
+interface Operations extends Azure.ResourceManager.Operations {}

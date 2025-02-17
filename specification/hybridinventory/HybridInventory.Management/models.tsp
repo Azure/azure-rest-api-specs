@@ -58,6 +58,19 @@ union ProvisioningState {
   Updating: "Updating",
 }
 
+@doc("Common properties for all azure tracked and proxy resources.")
+model AzureResourceProperties {
+  @doc("The status of the last operation.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Request body for Proxy site refresh action.")
+model ProxySiteRefreshBody {
+  @doc("Gets or sets the appliance name of the agent in the site.")
+  applianceName?: string;
+}
+
 /**
  * Represents the Support status of the PostgreSQL instance.
  */
@@ -466,7 +479,7 @@ model PgsqlSiteList is Azure.Core.Page<PgsqlSite>;
 /**
  * PGSQL Site properties
  */
-model PgsqlSiteProperties {
+model PgsqlSiteProperties is AzureResourceProperties {
   /**
    * The mapped master Site Id.
    */
@@ -486,10 +499,9 @@ model PgsqlSiteProperties {
   ]>;
 
   /**
-   * Gets or sets the provisioning state.
+   * The extended location.
    */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
+  extendedLocation?: ExtendedLocation;
 }
 
 /**
@@ -560,7 +572,7 @@ model PgsqlInstanceList is Azure.Core.Page<PgsqlInstance>;
 /**
  * PGSQL Server properties
  */
-model PgsqlInstanceProperties {
+model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * The Server IP/host name.
    */
@@ -621,12 +633,6 @@ model PgsqlInstanceProperties {
   errorCount?: int64;
 
   /**
-   * Gets or sets the provisioning state.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-
-  /**
    * The list of collations in the database.
    */
   @OpenAPI.extension(
@@ -661,6 +667,12 @@ model PgsqlInstanceProperties {
    * The maximum number of connections allowed in the instance
    */
   maxConnections?: int64;
+
+  /**
+   * Resource tags
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  tags?: Tag[];
 }
 
 /**
@@ -763,11 +775,11 @@ model PgsqlDatabaseList is Azure.Core.Page<PgsqlDatabase>;
 /**
  * PGSQL Database properties
  */
-model PgsqlDatabaseProperties {
+model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * The database name.
    */
-  name?: string;
+  databaseName?: string;
 
   /**
    * PGSQL database encoding.
@@ -817,10 +829,10 @@ model PgsqlDatabaseProperties {
   errors?: Error[];
 
   /**
-   * Gets or sets the provisioning state.
+   * Resource tags
    */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
+  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  tags?: Tag[];
 }
 
 /**
@@ -862,7 +874,7 @@ model AgentList is Azure.Core.Page<Agent>;
 /**
  * Agent properties
  */
-model AgentProperties {
+model AgentProperties is AzureResourceProperties {
   /**
    * Service principal identity details used by agent for communication to the service.
    */
@@ -879,12 +891,6 @@ model AgentProperties {
    * Health details of the agent.
    */
   healthDetails?: AgentHealthProperties;
-
-  /**
-   * Gets or sets the provisioning state.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 }
 
 /**

@@ -21,11 +21,6 @@ model PgsqlSite
     SegmentName = "PGSQLSites",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
-
-  /**
-   * The extended location.
-   */
-  extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations
@@ -73,6 +68,7 @@ interface PgsqlSites {
   /**
    * Trigger Refresh Refresh action
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
   @action("refresh")
   triggerRefresh is ArmResourceActionAsync<PgsqlSite, void, void>;
 }

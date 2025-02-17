@@ -41,6 +41,9 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
       "name": "PgsqlSites"
     },
     {
@@ -54,6 +57,37 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.HybridInventory/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridInventory/PGSQLSites": {
       "get": {
         "operationId": "PgsqlSites_ListBySubscription",
@@ -81,11 +115,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PgsqlSites_ListBySubscription": {
-            "$ref": "./examples/PgsqlSites_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -123,11 +152,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PgsqlSites_ListByResourceGroup": {
-            "$ref": "./examples/PgsqlSites_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -175,11 +199,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PgsqlSites_Get": {
-            "$ref": "./examples/PgsqlSites_Get.json"
           }
         }
       },
@@ -248,11 +267,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PgsqlSites_CreateOrUpdate": {
-            "$ref": "./examples/PgsqlSites_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -324,11 +338,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "PgsqlSites_Update": {
-            "$ref": "./examples/PgsqlSites_Update.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -374,11 +383,6 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "PgsqlSites_Delete": {
-            "$ref": "./examples/PgsqlSites_Delete.json"
-          }
         }
       }
     },
@@ -422,11 +426,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PgsqlInstances_ListBySite": {
-            "$ref": "./examples/PgsqlInstances_ListBySite_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -484,11 +483,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PgsqlInstances_Get": {
-            "$ref": "./examples/PgsqlInstances_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -556,11 +550,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PgsqlInstances_CreateOrUpdate": {
-            "$ref": "./examples/PgsqlInstances_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       },
@@ -638,11 +627,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "PgsqlInstances_Update": {
-            "$ref": "./examples/PgsqlInstances_Update_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -698,11 +682,6 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "PgsqlInstances_Delete": {
-            "$ref": "./examples/PgsqlInstances_Delete_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -756,11 +735,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PgsqlDatabases_ListBySite": {
-            "$ref": "./examples/PgsqlDatabases_ListBySite_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -828,11 +802,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PgsqlDatabases_Get": {
-            "$ref": "./examples/PgsqlDatabases_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -910,11 +879,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PgsqlDatabases_CreateOrUpdate": {
-            "$ref": "./examples/PgsqlDatabases_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       },
@@ -1002,11 +966,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "PgsqlDatabases_Update": {
-            "$ref": "./examples/PgsqlDatabases_Update_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1071,11 +1030,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PgsqlDatabases_Delete": {
-            "$ref": "./examples/PgsqlDatabases_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -1561,11 +1515,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "PgsqlSites_TriggerRefresh": {
-            "$ref": "./examples/PgsqlSites_TriggerRefresh.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1632,6 +1581,11 @@
       "type": "object",
       "description": "Agent properties",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
         "servicePrincipalIdentityDetails": {
           "$ref": "#/definitions/AgentSpnProperties",
           "description": "Service principal identity details used by agent for communication to the service.",
@@ -1651,11 +1605,6 @@
         "healthDetails": {
           "$ref": "#/definitions/AgentHealthProperties",
           "description": "Health details of the agent."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets or sets the provisioning state.",
-          "readOnly": true
         }
       },
       "required": [
@@ -2269,13 +2218,6 @@
         "properties": {
           "$ref": "#/definitions/PgsqlDatabaseProperties",
           "description": "Resource properties."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -2312,7 +2254,12 @@
       "type": "object",
       "description": "PGSQL Database properties",
       "properties": {
-        "name": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "databaseName": {
           "type": "string",
           "description": "The database name."
         },
@@ -2373,10 +2320,16 @@
             "$ref": "#/definitions/Error"
           }
         },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets or sets the provisioning state.",
-          "readOnly": true
+        "tags": {
+          "type": "array",
+          "description": "Resource tags",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": [
+            "key",
+            "value"
+          ]
         }
       }
     },
@@ -2408,13 +2361,6 @@
         "properties": {
           "$ref": "#/definitions/PgsqlInstanceProperties",
           "description": "Resource properties."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -2451,6 +2397,11 @@
       "type": "object",
       "description": "PGSQL Server properties",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
         "hostName": {
           "type": "string",
           "description": "The Server IP/host name."
@@ -2513,11 +2464,6 @@
           "format": "int64",
           "description": "The number of errors."
         },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets or sets the provisioning state.",
-          "readOnly": true
-        },
         "collations": {
           "type": "array",
           "description": "The list of collations in the database.",
@@ -2566,6 +2512,17 @@
           "type": "integer",
           "format": "int64",
           "description": "The maximum number of connections allowed in the instance"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Resource tags",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": [
+            "key",
+            "value"
+          ]
         }
       },
       "required": [
@@ -2601,10 +2558,6 @@
         "properties": {
           "$ref": "#/definitions/PgsqlSiteProperties",
           "description": "Resource properties."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location."
         }
       },
       "required": [
@@ -2641,6 +2594,11 @@
       "type": "object",
       "description": "PGSQL Site properties",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
         "masterSiteId": {
           "type": "string",
           "format": "arm-id",
@@ -2665,10 +2623,9 @@
             ]
           }
         },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets or sets the provisioning state.",
-          "readOnly": true
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
         }
       },
       "required": [

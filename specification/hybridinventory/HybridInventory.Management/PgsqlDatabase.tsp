@@ -23,11 +23,6 @@ model PgsqlDatabase
     SegmentName = "PGSQLDatabases",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
-
-  /**
-   * Resource tags
-   */
-  tags?: Record<string>;
 }
 
 @armResourceOperations
