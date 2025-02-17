@@ -1,0 +1,29 @@
+{
+  "operationId": "EnclaveConnection_ApprovalCallback",
+  "title": "EnclaveConnection_ApprovalCallback",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "73CEECEF-2C30-488E-946F-D20F414D99BA",
+    "resourceGroupName": "rgopenapi",
+    "enclaveConnectionName": "TestMyEnclaveConnection",
+    "body": {
+      "resourceRequestAction": "Create",
+      "approvalStatus": "Approved",
+      "approvalCallbackPayload": "{\n  \"key1\": \"value1\",\n  \"key2\": \"value2\"\n}"
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "message": "Approval state change handled successfully."
+      }
+    },
+    "202": {
+      "description": "Resource operation accepted.",
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      }
+    }
+  }
+}
