@@ -8,47 +8,19 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.MySqlDiscovery;
+namespace Microsoft.MySQLDiscovery;
 
 /**
  * Gets or sets the provisioning state.
  */
 union ProvisioningState {
   string,
-
-  /**
-   * Unknown  Provisioning State.
-   */
   Unknown: "Unknown",
-
-  /**
-   * Succeeded  Provisioning State.
-   */
   Succeeded: "Succeeded",
-
-  /**
-   * Failed  Provisioning State.
-   */
   Failed: "Failed",
-
-  /**
-   * Canceled  Provisioning State.
-   */
   Canceled: "Canceled",
-
-  /**
-   * Creating  Provisioning State.
-   */
   Creating: "Creating",
-
-  /**
-   * Deleting  Provisioning State.
-   */
   Deleting: "Deleting",
-
-  /**
-   * Updating  Provisioning State.
-   */
   Updating: "Updating",
 }
 
@@ -57,20 +29,8 @@ union ProvisioningState {
  */
 union SupportStatus {
   string,
-
-  /**
-   * OutOfSupport  Support Status.
-   */
   OutOfSupport: "OutOfSupport",
-
-  /**
-   * Extended  Support Status.
-   */
   Extended: "Extended",
-
-  /**
-   * Mainstream  Support Status.
-   */
   Mainstream: "Mainstream",
 }
 
@@ -79,22 +39,9 @@ union SupportStatus {
  */
 union Edition {
   string,
-
-  /**
-   * Community  mysql server edition.
-   */
   Community: "Community",
-
-  /**
-   * Enterprise  mysql server edition.
-   */
   Enterprise: "Enterprise",
 }
-
-/**
- * List of Sites.
- */
-model MySQLSiteList is Azure.Core.Page<MySQLSite>;
 
 /**
  * MySQL Site properties
@@ -121,7 +68,6 @@ model MySQLSiteProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -185,9 +131,9 @@ model MySQLSitesResourcePatch {
 }
 
 /**
- * List of Servers.
+ * List of Sites.
  */
-model MySQLServerList is Azure.Core.Page<MySQLServer>;
+model MySQLSiteList is Azure.Core.Page<MySQLSite>;
 
 /**
  * MySQL Server properties
@@ -250,7 +196,6 @@ model MySQLServerProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility("read")
   provisioningState?: ProvisioningState;
 
   /**
@@ -326,124 +271,9 @@ model MySQLServerResourcePatch {
 }
 
 /**
- * List of Agents.
+ * List of Servers.
  */
-model AgentList is Azure.Core.Page<Agent>;
-
-/**
- * Agent properties
- */
-model AgentProperties {
-  /**
-   * Service principal identity details used by agent for communication to the service.
-   */
-  @visibility("read", "create")
-  servicePrincipalIdentityDetails: AgentSpnProperties;
-
-  /**
-   * Name of the appliance on which agent is running.
-   */
-  @visibility("read", "create")
-  migrateApplianceName: string;
-
-  /**
-   * Health details of the agent.
-   */
-  healthDetails?: AgentHealthProperties;
-
-  /**
-   * Gets or sets the provisioning state.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-}
-
-/**
- * Class for agent spn properties.
- */
-model AgentSpnProperties {
-  /**
-   * Tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.
-   */
-  tenantId?: string;
-
-  /**
-   * Application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.
-   */
-  applicationId?: string;
-
-  /**
-   * Object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.
-   */
-  objectId?: string;
-}
-
-/**
- * Class for agent health properties.
- */
-model AgentHealthProperties {
-  /**
-   * Version of the agent.
-   */
-  version?: string;
-
-  /**
-   * Last heartbeat time of the agent in UTC.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastHeartBeatUtc?: utcDateTime;
-}
-
-/**
- * Object containing tags updates for patch operations.
- */
-model AgentResourcePatch {
-  /**
-   * The Agent properties resource definition.
-   */
-  properties?: AgentResourcePatchProperties;
-}
-
-/**
- * Agent resource patch properties
- */
-model AgentResourcePatchProperties {
-  /**
-   * Health details of the agent.
-   */
-  healthDetails?: AgentHealthProperties;
-}
-
-/**
- * List of ErrorSummaries.
- */
-model ErrorSummaryList is Azure.Core.Page<ErrorSummary>;
-
-/**
- * Error summaries properties
- */
-model ErrorSummariesProperties {
-  /**
-   * The number of affected objects.
-   */
-  affectedObjectsCount?: int64;
-
-  /**
-   * The list of errors.
-   */
-  errors?: Error[];
-
-  /**
-   * Gets or sets the provisioning state.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-}
-
-/**
- * List of Summaries.
- */
-model SummaryList is Azure.Core.Page<Summary>;
+model MySQLServerList is Azure.Core.Page<MySQLServer>;
 
 /**
  * Summaries properties
@@ -462,6 +292,35 @@ model SummariesProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility("read")
   provisioningState?: ProvisioningState;
 }
+
+/**
+ * List of Summaries.
+ */
+model SummaryList is Azure.Core.Page<Summary>;
+
+/**
+ * Error summaries properties
+ */
+model ErrorSummariesProperties {
+  /**
+   * The number of affected objects.
+   */
+  affectedObjectsCount?: int64;
+
+  /**
+   * The list of errors.
+   */
+  errors?: Error[];
+
+  /**
+   * Gets or sets the provisioning state.
+   */
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * List of ErrorSummaries.
+ */
+model ErrorSummaryList is Azure.Core.Page<ErrorSummary>;

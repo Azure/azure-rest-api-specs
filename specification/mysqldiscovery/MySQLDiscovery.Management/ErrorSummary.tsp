@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.MySqlDiscovery;
+namespace Microsoft.MySQLDiscovery;
 /**
  * The ErrorSummary resource definition.
  */

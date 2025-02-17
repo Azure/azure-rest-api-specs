@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.MySqlDiscovery;
+namespace Microsoft.MySQLDiscovery;
 /**
  * The MySQLSite resource definition.
  */
@@ -25,7 +25,7 @@ model MySQLSite
   /**
    * The extended location.
    */
-  extendedLocation?: ExtendedLocation;
+  extendedLocation: ExtendedLocation;
 }
 
 @armResourceOperations
@@ -74,7 +74,7 @@ interface MySQLSites {
    * Trigger Refresh Refresh action
    */
   @action("refresh")
-  triggerRefresh is ArmResourceActionAsync<MySQLSite, void, NoContentResponse>;
+  triggerRefresh is ArmResourceActionAsync<MySQLSite, void, void>;
 }
 
 @@maxLength(MySQLSite.name, 63);

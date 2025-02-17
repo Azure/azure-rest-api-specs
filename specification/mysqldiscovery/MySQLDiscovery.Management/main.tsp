@@ -5,7 +5,7 @@
  *   isFullCompatible: false
  *   guessResourceKey: false
  * Version: 0.10.9
- * Date: 2025-02-14T11:05:54.864Z
+ * Date: 2025-02-17T07:31:04.369Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -14,9 +14,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./MySQLSite.tsp";
 import "./MySQLServer.tsp";
-import "./Agent.tsp";
-import "./ErrorSummary.tsp";
 import "./Summary.tsp";
+import "./ErrorSummary.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -34,18 +33,16 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
-namespace Microsoft.MySqlDiscovery;
+namespace Microsoft.MySQLDiscovery;
 
 /**
  * The available API versions.
  */
 enum Versions {
   /**
-   * The 2024-12-30-preview API version.
+   * The 2024-09-30-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_12_30_preview: "2024-12-30-preview",
+  v2024_09_30_preview: "2024-09-30-preview",
 }
-
-interface Operations extends Azure.ResourceManager.Operations {}
