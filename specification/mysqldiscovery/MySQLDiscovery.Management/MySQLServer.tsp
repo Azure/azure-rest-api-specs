@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./MySQLSite.tsp";
+import "./MysqlSite.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -12,64 +12,64 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.MySQLDiscovery;
 /**
- * The MySQLServer resource definition.
+ * The MysqlServer resource definition.
  */
-@parentResource(MySQLSite)
-model MySQLServer
-  is Azure.ResourceManager.ProxyResource<MySQLServerProperties, false> {
+@parentResource(MysqlSite)
+model MysqlServer
+  is Azure.ResourceManager.ProxyResource<MysqlServerProperties, false> {
   ...ResourceNameParameter<
-    Resource = MySQLServer,
+    Resource = MysqlServer,
     KeyName = "serverName",
     SegmentName = "MySQLServers",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
 
   /**
-   * Resource tags
+   * Resource Tags.
    */
-  tags?: Record<string>;
+  tags?: ResourceTagsItem[];
 }
 
 @armResourceOperations
-interface MySQLServers {
+interface MysqlServers {
   /**
-   * Gets the MySQLServers resource.
+   * Gets the MysqlServers resource.
    */
-  get is ArmResourceRead<MySQLServer>;
+  get is ArmResourceRead<MysqlServer>;
 
   /**
-   * Puts the MySQLServers resource.
+   * Puts the MysqlServers resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<MySQLServer>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<MysqlServer>;
 
   /**
-   * Patch the MySQLServers resource.
+   * Patch the MysqlServers resource.
    */
   @parameterVisibility
   update is ArmCustomPatchAsync<
-    MySQLServer,
-    PatchModel = MySQLServerResourcePatch
+    MysqlServer,
+    PatchModel = MysqlServerResourcePatch
   >;
 
   /**
-   * Deletes the MySQLServers resource.
+   * Deletes the MysqlServers resource.
    */
-  delete is ArmResourceDeleteSync<MySQLServer>;
+  delete is ArmResourceDeleteSync<MysqlServer>;
 
   /**
-   * Lists the MySQLServers resource in MySQLSites.
+   * Lists the MysqlServers resource in MysqlSites.
    */
   listBySite is ArmResourceListByParent<
-    MySQLServer,
-    Response = ArmResponse<MySQLServerList>
+    MysqlServer,
+    Response = ArmResponse<MysqlServerList>
   >;
 }
 
-@@maxLength(MySQLServer.name, 63);
-@@minLength(MySQLServer.name, 3);
-@@doc(MySQLServer.name, "The name of Server");
-@@doc(MySQLServer.properties, "Resource properties.");
-@@doc(MySQLServers.createOrUpdate::parameters.resource,
+@@maxLength(MysqlServer.name, 63);
+@@minLength(MysqlServer.name, 3);
+@@doc(MysqlServer.name, "The name of Server");
+@@doc(MysqlServer.properties, "Resource properties.");
+@@doc(MysqlServers.createOrUpdate::parameters.resource,
   "The machines to add to the assessment"
 );
-@@doc(MySQLServers.update::parameters.properties, "Clouds patch payload.");
+@@doc(MysqlServers.update::parameters.properties, "Clouds patch payload.");

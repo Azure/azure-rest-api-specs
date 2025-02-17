@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2024-09-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-09-30-preview'
 input-file:
-  - Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
+  - Microsoft.MysqlDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
 suppressions:
   - code: PathResourceTypeNameCamelCase
     from: mysqldiscovery.json
@@ -44,23 +44,6 @@ suppressions:
     from: mysqldiscovery.json
     reason: ARM team will deliver TagsV2 towards the end of 2024. TagsV2 will support Top-level tags on proxy resources.
 ```
-
-### Tag: package-2023-09-30-preview
-
-These settings apply only when `--tag=package-2023-09-30-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-09-30-preview'
-input-file:
-  - Microsoft.MySQLDiscovery/preview/2023-09-30-preview/mysqldiscovery.json
-suppressions:
-  - code: PathResourceTypeNameCamelCase
-    from: mysqldiscovery.json
-    reason: MySQL is a technical term and cannot follow camel case rule.
-  - code: AvoidAdditionalProperties
-    from: mysqldiscovery.json
-    reason: ARM team will deliver TagsV2 towards the end of 2024. TagsV2 will support Top-level tags on proxy resources.
-```
-
 ---
 
 # Code Generation

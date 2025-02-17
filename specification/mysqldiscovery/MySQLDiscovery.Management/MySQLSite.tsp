@@ -11,12 +11,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.MySQLDiscovery;
 /**
- * The MySQLSite resource definition.
+ * The MysqlSite resource definition.
  */
-model MySQLSite
-  is Azure.ResourceManager.TrackedResource<MySQLSiteProperties, false> {
+model MysqlSite
+  is Azure.ResourceManager.TrackedResource<MysqlSiteProperties, false> {
   ...ResourceNameParameter<
-    Resource = MySQLSite,
+    Resource = MysqlSite,
     KeyName = "siteName",
     SegmentName = "MySQLSites",
     NamePattern = "^[a-zA-Z0-9-]*$"
@@ -29,59 +29,59 @@ model MySQLSite
 }
 
 @armResourceOperations
-interface MySQLSites {
+interface MysqlSites {
   /**
-   * Gets the MySQLSites resource.
+   * Gets the MysqlSites resource.
    */
-  get is ArmResourceRead<MySQLSite>;
+  get is ArmResourceRead<MysqlSite>;
 
   /**
-   * Puts the MySQLSites resource.
+   * Puts the MysqlSites resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<MySQLSite>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<MysqlSite>;
 
   /**
-   * Patch the MySQLSites resource.
+   * Patch the MysqlSites resource.
    */
   @parameterVisibility
   update is ArmCustomPatchAsync<
-    MySQLSite,
-    PatchModel = MySQLSitesResourcePatch
+    MysqlSite,
+    PatchModel = MysqlSitesResourcePatch
   >;
 
   /**
-   * Deletes the MySQLSites resource.
+   * Deletes the MysqlSites resource.
    */
-  delete is ArmResourceDeleteSync<MySQLSite>;
+  delete is ArmResourceDeleteSync<MysqlSite>;
 
   /**
-   * Lits the MySQLSites resource in a resource group.
+   * Lits the MysqlSites resource in a resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
-    MySQLSite,
-    Response = ArmResponse<MySQLSiteList>
+    MysqlSite,
+    Response = ArmResponse<MysqlSiteList>
   >;
 
   /**
-   * Lists the MySQLSites resource in a subscription.
+   * Lists the MysqlSites resource in a subscription.
    */
   listBySubscription is ArmListBySubscription<
-    MySQLSite,
-    Response = ArmResponse<MySQLSiteList>
+    MysqlSite,
+    Response = ArmResponse<MysqlSiteList>
   >;
 
   /**
    * Trigger Refresh Refresh action
    */
   @action("refresh")
-  triggerRefresh is ArmResourceActionAsync<MySQLSite, void, void>;
+  triggerRefresh is ArmResourceActionAsync<MysqlSite, void, OkResponse>;
 }
 
-@@maxLength(MySQLSite.name, 63);
-@@minLength(MySQLSite.name, 3);
-@@doc(MySQLSite.name, "The name of Site");
-@@doc(MySQLSite.properties, "Resource properties.");
-@@doc(MySQLSites.createOrUpdate::parameters.resource,
+@@maxLength(MysqlSite.name, 63);
+@@minLength(MysqlSite.name, 3);
+@@doc(MysqlSite.name, "The name of Site");
+@@doc(MysqlSite.properties, "Resource properties.");
+@@doc(MysqlSites.createOrUpdate::parameters.resource,
   "The machines to add to the assessment"
 );
-@@doc(MySQLSites.update::parameters.properties, "Clouds patch payload.");
+@@doc(MysqlSites.update::parameters.properties, "Clouds patch payload.");

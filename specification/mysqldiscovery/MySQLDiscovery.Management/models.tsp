@@ -15,43 +15,91 @@ namespace Microsoft.MySQLDiscovery;
  */
 union ProvisioningState {
   string,
+
+  /**
+   * Unknown Provisioning State.
+   */
   Unknown: "Unknown",
+
+  /**
+   * Succeeded Provisioning State.
+   */
   Succeeded: "Succeeded",
+
+  /**
+   * Failed Provisioning State.
+   */
   Failed: "Failed",
+
+  /**
+   * Canceled Provisioning State.
+   */
   Canceled: "Canceled",
+
+  /**
+   * Creating Provisioning State.
+   */
   Creating: "Creating",
+
+  /**
+   * Deleting Provisioning State.
+   */
   Deleting: "Deleting",
+
+  /**
+   * Updating Provisioning State.
+   */
   Updating: "Updating",
 }
 
 /**
- * mysql version support status.
+ * Mysql version support status.
  */
 union SupportStatus {
   string,
+
+  /**
+   * OutOfSupport Support Status.
+   */
   OutOfSupport: "OutOfSupport",
+
+  /**
+   * Extended Support Status.
+   */
   Extended: "Extended",
+
+  /**
+   * Mainstream Support Status.
+   */
   Mainstream: "Mainstream",
 }
 
 /**
- * mysql server edition.
+ * Mysql server edition.
  */
 union Edition {
   string,
+
+  /**
+   * Community Edition.
+   */
   Community: "Community",
+
+  /**
+   * Enterprise Edition.
+   */
   Enterprise: "Enterprise",
 }
 
 /**
  * List of Sites.
  */
-model MySQLSiteList is Azure.Core.Page<MySQLSite>;
+model MysqlSiteList is Azure.Core.Page<MysqlSite>;
 
 /**
- * MySQL Site properties
+ * Mysql Site properties
  */
-model MySQLSiteProperties {
+model MysqlSiteProperties {
   /**
    * The mapped master Site Id.
    */
@@ -124,27 +172,42 @@ model Resource {
 /**
  * Object containing tags updates for patch operations.
  */
-model MySQLSitesResourcePatch {
+model MysqlSitesResourcePatch {
   /**
-   * Resource tags.
+   * Resource Tags.
    */
-  tags?: Record<string>;
+  tags?: ResourceTagsItem[];
 
   /**
-   * The MySQLSites resource definition.
+   * The MysqlSites resource definition.
    */
-  properties?: MySQLSiteProperties;
+  properties?: MysqlSiteProperties;
+}
+
+/**
+ * Resource tag
+ */
+model ResourceTagsItem {
+  /**
+   * Resource key
+   */
+  key?: string;
+
+  /**
+   * Resource Value
+   */
+  value?: string;
 }
 
 /**
  * List of Servers.
  */
-model MySQLServerList is Azure.Core.Page<MySQLServer>;
+model MysqlServerList is Azure.Core.Page<MysqlServer>;
 
 /**
- * MySQL Server properties
+ * Mysql Server properties
  */
-model MySQLServerProperties {
+model MysqlServerProperties {
   /**
    * The Server IP/host name.
    */
@@ -165,13 +228,14 @@ model MySQLServerProperties {
   ]>;
 
   /**
-   * MySQL Server port number
+   * Mysql Server port number
    */
   portNumber: string;
 
   /**
-   * The mysql server version.
+   * The Mysql server version.
    */
+  @encodedName("application/json", "MysqlVersion")
   mysqlVersion?: string;
 
   /**
@@ -180,17 +244,17 @@ model MySQLServerProperties {
   numberOfDatabase?: int64;
 
   /**
-   * mysql version support status.
+   * Mysql version support status.
    */
   supportStatus?: SupportStatus;
 
   /**
-   * mysql server edition.
+   * Mysql server edition.
    */
   edition?: Edition;
 
   /**
-   * Time when mysql version support end.
+   * Time when Mysql version support end.
    */
   supportEndIn?: plainDate;
 
@@ -265,16 +329,16 @@ model Error {
 /**
  * Object containing tags updates for patch operations.
  */
-model MySQLServerResourcePatch {
+model MysqlServerResourcePatch {
   /**
-   * Resource tags.
+   * Resource Tags.
    */
-  tags?: Record<string>;
+  tags?: ResourceTagsItem[];
 
   /**
-   * The MySQLServer resource definition.
+   * The MysqlServer resource definition.
    */
-  properties?: MySQLServerProperties;
+  properties?: MysqlServerProperties;
 }
 
 /**

@@ -5,15 +5,15 @@
  *   isFullCompatible: false
  *   guessResourceKey: false
  * Version: 0.10.9
- * Date: 2025-02-17T07:36:07.564Z
+ * Date: 2025-02-17T11:58:18.503Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./MySQLSite.tsp";
-import "./MySQLServer.tsp";
+import "./MysqlSite.tsp";
+import "./MysqlServer.tsp";
 import "./ErrorSummary.tsp";
 import "./Summary.tsp";
 
@@ -24,12 +24,12 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * The Microsoft.MySQLDiscovery Rest API spec.
+ * The Microsoft.MysqlDiscovery Rest API spec.
  */
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
-  title: "Azure API for MySQLDiscovery",
+  title: "Azure API for MysqlDiscovery",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)

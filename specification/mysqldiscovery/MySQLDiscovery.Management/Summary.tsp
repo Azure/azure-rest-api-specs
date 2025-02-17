@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./MySQLSite.tsp";
+import "./MysqlSite.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,7 +14,7 @@ namespace Microsoft.MySQLDiscovery;
 /**
  * The Summary resource definition.
  */
-@parentResource(MySQLSite)
+@parentResource(MysqlSite)
 model Summary
   is Azure.ResourceManager.ProxyResource<SummariesProperties, false> {
   ...ResourceNameParameter<
@@ -25,9 +25,9 @@ model Summary
   >;
 
   /**
-   * Resource tags
+   * Resource Tags.
    */
-  tags?: Record<string>;
+  tags?: ResourceTagsItem[];
 }
 
 @armResourceOperations
@@ -38,7 +38,7 @@ interface Summaries {
   get is ArmResourceRead<Summary>;
 
   /**
-   * Lists the Summaries resource in MySQLSites.
+   * Lists the Summaries resource in MysqlSites.
    */
   listBySite is ArmResourceListByParent<
     Summary,

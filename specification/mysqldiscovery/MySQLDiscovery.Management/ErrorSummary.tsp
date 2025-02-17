@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./MySQLSite.tsp";
+import "./MysqlSite.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,7 +14,7 @@ namespace Microsoft.MySQLDiscovery;
 /**
  * The ErrorSummary resource definition.
  */
-@parentResource(MySQLSite)
+@parentResource(MysqlSite)
 model ErrorSummary
   is Azure.ResourceManager.ProxyResource<ErrorSummariesProperties, false> {
   ...ResourceNameParameter<
@@ -25,9 +25,9 @@ model ErrorSummary
   >;
 
   /**
-   * Resource tags
+   * Resource Tags.
    */
-  tags?: Record<string>;
+  tags?: ResourceTagsItem[];
 }
 
 @armResourceOperations
@@ -38,7 +38,7 @@ interface ErrorSummaries {
   get is ArmResourceRead<ErrorSummary>;
 
   /**
-   * Lists the ErrorSummaries resource in MySQLSites.
+   * Lists the ErrorSummaries resource in MysqlSites.
    */
   listBySite is ArmResourceListByParent<
     ErrorSummary,
