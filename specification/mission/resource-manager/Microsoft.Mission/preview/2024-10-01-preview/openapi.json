@@ -258,7 +258,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApprovalPropertiesUpdate"
+              "$ref": "#/definitions/ApprovalResourceUpdate"
             }
           }
         ],
@@ -1088,7 +1088,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunityProperties"
+              "$ref": "#/definitions/CommunityResourceUpdate"
             }
           }
         ],
@@ -1472,7 +1472,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunityEndpointPropertiesUpdate"
+              "$ref": "#/definitions/CommunityEndpointResourceUpdate"
             }
           }
         ],
@@ -1808,7 +1808,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransitHubProperties"
+              "$ref": "#/definitions/TransitHubResourceUpdate"
             }
           }
         ],
@@ -2112,7 +2112,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnclaveConnectionPropertiesUpdate"
+              "$ref": "#/definitions/EnclaveConnectionResourceUpdate"
             }
           }
         ],
@@ -2556,7 +2556,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExternalConnectionPropertiesUpdate"
+              "$ref": "#/definitions/ExternalConnectionUpdate"
             }
           }
         ],
@@ -2852,7 +2852,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InternalConnectionPropertiesUpdate"
+              "$ref": "#/definitions/InternalConnectionUpdate"
             }
           }
         ],
@@ -3148,7 +3148,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualEnclavePropertiesUpdate"
+              "$ref": "#/definitions/EnclaveResourceUpdate"
             }
           }
         ],
@@ -3476,7 +3476,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnclaveEndpointPropertiesUpdate"
+              "$ref": "#/definitions/EnclaveEndpointResourceUpdate"
             }
           }
         ],
@@ -3812,7 +3812,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EndpointProperties"
+              "$ref": "#/definitions/EndpointResourceUpdate"
             }
           }
         ],
@@ -4148,7 +4148,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkloadProperties"
+              "$ref": "#/definitions/WorkloadResourceUpdate"
             }
           }
         ],
@@ -4502,6 +4502,22 @@
         "value"
       ]
     },
+    "ApprovalResourceUpdate": {
+      "type": "object",
+      "description": "Approval Model Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApprovalPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "ApprovalStatus": {
       "type": "string",
       "description": "Approval Status Enum",
@@ -4554,6 +4570,47 @@
         "approverEntraId",
         "actionPerformed",
         "lastUpdatedAt"
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
       ]
     },
     "CheckAddressSpaceAvailabilityRequest": {
@@ -4775,6 +4832,22 @@
         "value"
       ]
     },
+    "CommunityEndpointResourceUpdate": {
+      "type": "object",
+      "description": "CommunityEndpoint Model Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CommunityEndpointPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "CommunityProperties": {
       "type": "object",
       "description": "Community Resource Properties",
@@ -4873,6 +4946,26 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "CommunityResourceUpdate": {
+      "type": "object",
+      "description": "Community Model Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CommunityProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
       ]
     },
     "DestinationEndpointResourceId": {
@@ -5089,6 +5182,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "EnclaveConnectionResourceUpdate": {
+      "type": "object",
+      "description": "EnclaveConnection Model Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnclaveConnectionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
       ]
     },
     "EnclaveConnectionSourceResourceId": {
@@ -5353,6 +5462,22 @@
         "value"
       ]
     },
+    "EnclaveEndpointResourceUpdate": {
+      "type": "object",
+      "description": "EnclaveEndpoint Model Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnclaveEndpointPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "EnclaveResource": {
       "type": "object",
       "description": "Virtual Enclave Model Resource",
@@ -5392,6 +5517,26 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "EnclaveResourceUpdate": {
+      "type": "object",
+      "description": "Virtual Enclave Model Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualEnclavePropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
       ]
     },
     "EnclaveVirtualNetwork": {
@@ -5581,6 +5726,22 @@
         "value"
       ]
     },
+    "EndpointResourceUpdate": {
+      "type": "object",
+      "description": "Endpoint Model Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "EndpointRule": {
       "type": "object",
       "description": "EndpointRule Properties",
@@ -5749,6 +5910,22 @@
           }
         ]
       }
+    },
+    "ExternalConnectionUpdate": {
+      "type": "object",
+      "description": "Describes an External Connection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExternalConnectionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "GovernedServiceItem": {
       "type": "object",
@@ -6052,6 +6229,22 @@
           }
         ]
       }
+    },
+    "InternalConnectionUpdate": {
+      "type": "object",
+      "description": "Describes an Internal Connection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InternalConnectionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "KeyVaultResourceId": {
       "type": "string",
@@ -6559,6 +6752,22 @@
         "value"
       ]
     },
+    "TransitHubResourceUpdate": {
+      "type": "object",
+      "description": "TransitHub Model Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TransitHubProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "TransitHubState": {
       "type": "string",
       "description": "Specifies the state of the transitHub.",
@@ -6841,6 +7050,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "WorkloadResourceUpdate": {
+      "type": "object",
+      "description": "Workload Model Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkloadProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
       ]
     }
   },

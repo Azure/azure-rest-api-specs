@@ -198,7 +198,7 @@ interface Workload {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  update is ArmCustomPatchAsync<WorkloadResource, WorkloadProperties>;
+  update is ArmResourcePatchAsync<WorkloadResource, WorkloadProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<WorkloadResource>;
@@ -216,7 +216,7 @@ interface Endpoint {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  update is ArmCustomPatchAsync<EndpointResource, EndpointProperties>;
+  update is ArmResourcePatchAsync<EndpointResource, EndpointProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<EndpointResource>;
@@ -234,7 +234,7 @@ interface VirtualEnclave {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  update is ArmCustomPatchAsync<EnclaveResource, VirtualEnclaveProperties>;
+  update is ArmResourcePatchAsync<EnclaveResource, VirtualEnclaveProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<EnclaveResource>;
@@ -283,7 +283,7 @@ interface Community {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  update is ArmCustomPatchAsync<CommunityResource, CommunityProperties>;
+  update is ArmResourcePatchAsync<CommunityResource, CommunityProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<CommunityResource>;
@@ -317,7 +317,7 @@ interface CatalogInterface {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  update is ArmCustomPatchAsync<CatalogResource, CatalogProperties>;
+  update is ArmResourcePatchAsync<CatalogResource, CatalogProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<CatalogResource>;
@@ -335,7 +335,7 @@ interface InternalConnections {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  update is ArmCustomPatchAsync<
+  update is ArmResourcePatchAsync<
     InternalConnection,
     InternalConnectionProperties
   >;
@@ -357,7 +357,7 @@ interface TransitHub {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  update is ArmCustomPatchAsync<TransitHubResource, TransitHubProperties>;
+  update is ArmResourcePatchAsync<TransitHubResource, TransitHubProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<TransitHubResource>;
@@ -376,7 +376,7 @@ interface EnclaveConnection {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  update is ArmCustomPatchAsync<
+  update is ArmResourcePatchAsync<
     EnclaveConnectionResource,
     EnclaveConnectionProperties
   >;
@@ -415,7 +415,7 @@ interface EnclaveEndpoints {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  update is ArmCustomPatchAsync<
+  update is ArmResourcePatchAsync<
     EnclaveEndpointResource,
     EnclaveEndpointProperties
   >;
@@ -454,7 +454,7 @@ interface CommunityEndpoints {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  update is ArmCustomPatchAsync<
+  update is ArmResourcePatchAsync<
     CommunityEndpointResource,
     CommunityEndpointProperties
   >;
@@ -492,7 +492,7 @@ interface ExternalConnections {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  update is ArmCustomPatchAsync<
+  update is ArmResourcePatchAsync<
     ExternalConnection,
     ExternalConnectionProperties
   >;
@@ -515,7 +515,7 @@ interface Approval {
       ArmAsyncOperationHeader
   >;
   listByParent is ArmResourceListByParent<ApprovalResource>;
-  update is ArmCustomPatchAsync<ApprovalResource, ApprovalProperties>;
+  update is ArmResourcePatchAsync<ApprovalResource, ApprovalProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;
   @doc("Upon receiving approval or rejection from approver, this facilitates actions on approval resource")
   @armResourceAction(ApprovalResource)
