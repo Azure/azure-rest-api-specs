@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 /**
@@ -114,6 +115,7 @@ model ExperimentProperties {
   /**
    * Optional customer-managed Storage account where Experiment schema will be stored.
    */
+  @removed(Microsoft.Chaos.Versions.v2025_01_01)
   customerDataStorage?: CustomerDataStorageProperties;
 }
 
