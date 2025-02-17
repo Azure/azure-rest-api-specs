@@ -44,6 +44,11 @@ union Edition {
 }
 
 /**
+ * List of Sites.
+ */
+model MySQLSiteList is Azure.Core.Page<MySQLSite>;
+
+/**
  * MySQL Site properties
  */
 model MySQLSiteProperties {
@@ -68,6 +73,7 @@ model MySQLSiteProperties {
   /**
    * Gets or sets the provisioning state.
    */
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -131,9 +137,9 @@ model MySQLSitesResourcePatch {
 }
 
 /**
- * List of Sites.
+ * List of Servers.
  */
-model MySQLSiteList is Azure.Core.Page<MySQLSite>;
+model MySQLServerList is Azure.Core.Page<MySQLServer>;
 
 /**
  * MySQL Server properties
@@ -196,6 +202,7 @@ model MySQLServerProperties {
   /**
    * Gets or sets the provisioning state.
    */
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   /**
@@ -271,34 +278,9 @@ model MySQLServerResourcePatch {
 }
 
 /**
- * List of Servers.
+ * List of ErrorSummaries.
  */
-model MySQLServerList is Azure.Core.Page<MySQLServer>;
-
-/**
- * Summaries properties
- */
-model SummariesProperties {
-  /**
-   * The number of discovered server.
-   */
-  discoveredServers?: int64;
-
-  /**
-   * The list of errors.
-   */
-  errors?: Error[];
-
-  /**
-   * Gets or sets the provisioning state.
-   */
-  provisioningState?: ProvisioningState;
-}
-
-/**
- * List of Summaries.
- */
-model SummaryList is Azure.Core.Page<Summary>;
+model ErrorSummaryList is Azure.Core.Page<ErrorSummary>;
 
 /**
  * Error summaries properties
@@ -317,10 +299,32 @@ model ErrorSummariesProperties {
   /**
    * Gets or sets the provisioning state.
    */
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
 /**
- * List of ErrorSummaries.
+ * List of Summaries.
  */
-model ErrorSummaryList is Azure.Core.Page<ErrorSummary>;
+model SummaryList is Azure.Core.Page<Summary>;
+
+/**
+ * Summaries properties
+ */
+model SummariesProperties {
+  /**
+   * The number of discovered server.
+   */
+  discoveredServers?: int64;
+
+  /**
+   * The list of errors.
+   */
+  errors?: Error[];
+
+  /**
+   * Gets or sets the provisioning state.
+   */
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}
