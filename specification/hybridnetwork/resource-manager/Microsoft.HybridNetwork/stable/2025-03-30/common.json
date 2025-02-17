@@ -426,7 +426,7 @@
         "modelAsString": true
       }
     },
-    "operation": {
+    "LongRunningOperation": {
       "type": "string",
       "description": "The type of long-running operation the user wants to cancel, such as 'Put'.",
       "enum": [
@@ -434,7 +434,7 @@
         "Put"
       ],
       "x-ms-enum": {
-        "name": "operation",
+        "name": "longRunningOperation",
         "modelAsString": true
       }
     },
@@ -452,9 +452,9 @@
             "id"
           ]
         },
-        "operation": {
+        "longRunningOperation": {
           "description": "The type of long-running operation the user wants to cancel, such as 'Put'.",
-          "$ref": "#/definitions/operation"
+          "$ref": "#/definitions/LongRunningOperation"
         }
       }
     }
