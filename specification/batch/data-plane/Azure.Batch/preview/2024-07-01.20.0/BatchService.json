@@ -15783,7 +15783,8 @@
       "enum": [
         "tasksuccess",
         "taskfailure",
-        "taskcompletion"
+        "taskcompletion",
+        "taskcancelled"
       ],
       "x-ms-enum": {
         "name": "OutputFileUploadCondition",
@@ -15802,6 +15803,11 @@
           {
             "name": "TaskCompletion",
             "value": "taskcompletion",
+            "description": "Upload the file(s) after the Task process exits, no matter what the exit code was."
+          },
+          {
+            "name": "TaskCancelled",
+            "value": "taskcancelled",
             "description": "Upload the file(s) after the Task process exits, no matter what the exit code was."
           }
         ]
