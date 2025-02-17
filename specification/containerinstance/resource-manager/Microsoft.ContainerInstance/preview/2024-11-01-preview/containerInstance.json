@@ -2439,6 +2439,16 @@
                 "modelAsString": true
               }
             },
+            "secretReferences": {
+              "type": "array",
+              "description": "The secret references that will be referenced within the container group.",
+              "items": {
+                "$ref": "#/definitions/SecretReference"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
             "containers": {
               "type": "array",
               "description": "The containers within the container group.",
@@ -2498,6 +2508,30 @@
                 "name"
               ]
             },
+            "instanceView": {
+              "description": "The instance view of the container group. Only valid in response.",
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "events": {
+                  "description": "The events of this container group.",
+                  "readOnly": true,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Event"
+                  },
+                  "x-ms-identifiers": [
+                    "name",
+                    "type"
+                  ]
+                },
+                "state": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "The state of the container group. Only valid in response."
+                }
+              }
+            },
             "diagnostics": {
               "description": "The diagnostic information for a container group.",
               "$ref": "#/definitions/ContainerGroupDiagnostics"
@@ -2548,14 +2582,19 @@
             "priority": {
               "type": "string",
               "description": "The priority of the container group.",
+              "$ref": "#/definitions/Priority",
               "enum": [
                 "Regular",
                 "Spot"
               ],
               "x-ms-enum": {
-                "name": "ContainerGroupPriority",
+                "name": "Priority",
                 "modelAsString": true
               }
+            },
+            "identityAcls": {
+              "description": "The access control levels of the identities.",
+              "$ref": "#/definitions/IdentityAcls"
             }
           },
           "required": [
