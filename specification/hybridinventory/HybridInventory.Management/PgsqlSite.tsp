@@ -39,10 +39,7 @@ interface PgsqlSites {
    * Patch the PGSQLSites resource.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    PgsqlSite,
-    PatchModel = PgsqlSitesResourcePatch
-  >;
+  update is ArmResourcePatchAsync<PgsqlSite, PgsqlSiteProperties>;
 
   /**
    * Deletes the PGSQLSites resource.
@@ -68,9 +65,9 @@ interface PgsqlSites {
   /**
    * Trigger Refresh Refresh action
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
+  //#suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
   @action("refresh")
-  triggerRefresh is ArmResourceActionAsync<PgsqlSite, void, void>;
+  triggerRefresh is ArmResourceActionNoResponseContentAsync<PgsqlSite, void>;
 }
 
 @@maxLength(PgsqlSite.name, 63);

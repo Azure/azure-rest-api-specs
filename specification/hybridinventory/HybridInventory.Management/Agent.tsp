@@ -58,9 +58,9 @@ interface Agents {
   /**
    * Trigger Refresh Refresh action
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
+  // #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
   @action("refresh")
-  triggerRefresh is ArmResourceActionAsync<Agent, void, void>;
+  triggerRefresh is ArmResourceActionNoResponseContentAsync<Agent, void>;
 }
 
 @@maxLength(Agent.name, 63);

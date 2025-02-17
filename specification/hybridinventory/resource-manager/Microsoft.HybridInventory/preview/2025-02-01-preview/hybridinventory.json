@@ -331,7 +331,7 @@
             "description": "Clouds patch payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PgsqlSitesResourcePatch"
+              "$ref": "#/definitions/PgsqlSite"
             }
           }
         ],
@@ -1526,9 +1526,6 @@
               }
             }
           },
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1589,9 +1586,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2722,27 +2716,6 @@
         "masterSiteId",
         "migrateProjectId"
       ]
-    },
-    "PgsqlSitesResourcePatch": {
-      "type": "object",
-      "description": "Object containing tags updates for patch operations.",
-      "properties": {
-        "tags": {
-          "type": "array",
-          "description": "Resource tags.",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/PgsqlSiteProperties",
-          "description": "The PGSQLSites resource definition."
-        }
-      }
     },
     "ProvisioningState": {
       "type": "string",

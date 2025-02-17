@@ -548,21 +548,21 @@ model Resource {
   systemData?: SystemData;
 }
 
-/**
- * Object containing tags updates for patch operations.
- */
-model PgsqlSitesResourcePatch {
-  /**
-   * Resource tags.
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
-  tags?: Tag[];
+// /**
+//  * Object containing tags updates for patch operations.
+//  */
+// model PgsqlSitesResourcePatch {
+//   /**
+//    * Resource tags.
+//    */
+//   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+//   tags?: Tag[];
 
-  /**
-   * The PGSQLSites resource definition.
-   */
-  properties?: PgsqlSiteProperties;
-}
+//   /**
+//    * The PGSQLSites resource definition.
+//    */
+//   properties?: PgsqlSiteProperties;
+// }
 
 /**
  * List of Servers.
