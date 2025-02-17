@@ -32,7 +32,7 @@ using TypeSpec.Versioning;
   title: "Azure API for OffAzure Inventory",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.HybridInventory;
 
 /**
