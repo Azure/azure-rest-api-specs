@@ -23,7 +23,7 @@ union PFMetrics {
 }
 
 @doc("Aggregation functions for pass/fail criteria.")
-union PFAgFunc {
+union PassFailAggregationFunction {
   string,
   @doc("Criteria applies for count value.") "count",
   @doc("Criteria applies for given percentage value.") "percentage",
@@ -64,7 +64,7 @@ union PFAgFunc {
 }
 
 @doc("Action to take on failure of pass/fail criteria.")
-union PFAction {
+union PassFailAction {
   string,
 
   @doc("Test will continue to run even if pass fail metric criteria metric gets failed.")
@@ -75,7 +75,7 @@ union PFAction {
 }
 
 @doc("Pass/fail criteria result.")
-union PFResult {
+union PassFailResult {
   string,
   @doc("Given pass fail criteria metric has passed.") "passed",
   @doc("Given pass fail criteria metric couldn't determine.") "undetermined",
@@ -85,8 +85,11 @@ union PFResult {
 @doc("Types of secrets supported.")
 union SecretType {
   string,
-  @doc("If the secret is stored in an Azure Key Vault.") "AKV_SECRET_URI",
-  @doc("If the secret value provided as plain text.") "SECRET_VALUE",
+  @doc("If the secret is stored in an Azure Key Vault.")
+  AKV_SECRET_URI: "AKV_SECRET_URI",
+
+  @doc("If the secret value provided as plain text.")
+  SECRET_VALUE: "SECRET_VALUE",
 }
 
 @doc("Managed identity type.")
@@ -103,7 +106,8 @@ union ManagedIdentityType {
 @doc("Types of certificates supported.")
 union CertificateType {
   string,
-  @doc("If the certificate is stored in an Azure Key Vault.") "AKV_CERT_URI",
+  @doc("If the certificate is stored in an Azure Key Vault.")
+  AKV_CERT_URI: "AKV_CERT_URI",
 }
 
 @doc("Types of file supported.")
@@ -133,7 +137,7 @@ union FileType {
 }
 
 @doc("File status.")
-union FileStatus {
+union FileValidationStatus {
   string,
   @doc("File is not validated.") "NOT_VALIDATED",
   @doc("File is validated.") "VALIDATION_SUCCESS",
@@ -143,7 +147,7 @@ union FileStatus {
 }
 
 @doc("Test result based on pass/fail criteria.")
-union PFTestResult {
+union PassFailTestResult {
   string,
   @doc("Pass/fail criteria has passed.") "PASSED",
   @doc("Pass/fail criteria is not applicable.") "NOT_APPLICABLE",
@@ -151,7 +155,7 @@ union PFTestResult {
 }
 
 @doc("Test run status.")
-union Status {
+union TestRunStatus {
   string,
   @doc("Test run request is accepted.") "ACCEPTED",
   @doc("Test run is not yet started.") "NOTSTARTED",
@@ -172,7 +176,7 @@ union Status {
 }
 
 @doc("Aggregation type.")
-union AggregationType {
+union Aggregation {
   string,
   @doc("Average value.") "Average",
   @doc("Total count.") "Count",
@@ -260,7 +264,7 @@ union TestKind {
 
 @added(APIVersions.v2024_07_01_preview)
 @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
-union CreateByTypes {
+union CreatedByType {
   string,
   @doc("Entity was created by a user.") "User",
   @doc("Entity was created by a scheduled trigger.") "ScheduledTrigger",
@@ -381,7 +385,7 @@ model PassFailMetric {
     ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
     ‘count’ - for requests
     """)
-  aggregate?: PFAgFunc;
+  aggregate?: PassFailAggregationFunction;
 
   @doc("The comparison operator. Supported types ‘>’, ‘<’ ")
   condition?: string;
@@ -396,7 +400,7 @@ model PassFailMetric {
   value?: float64;
 
   @doc("Action taken after the threshold is met. Default is ‘continue’.")
-  action?: PFAction = PFAction.continue;
+  action?: PassFailAction = PassFailAction.continue;
 
   @doc("The actual value of the client metric for the test run.")
   @visibility("read")
@@ -404,13 +408,13 @@ model PassFailMetric {
 
   @doc("Outcome of the test run.")
   @visibility("read")
-  result?: PFResult;
+  result?: PassFailResult;
 }
 
 @doc("Pass fail server metric")
 model PassFailServerMetric {
   @doc("The resource id of the resource emitting the metric.")
-  resourceId: string;
+  resourceId: armResourceIdentifier;
 
   @doc("The server metric namespace.")
   metricNamespace: string;
@@ -428,7 +432,7 @@ model PassFailServerMetric {
   value: float64;
 
   @doc("Action taken after the threshold is met. Default is ‘continue’.")
-  action?: PFAction = PFAction.continue;
+  action?: PassFailAction = PassFailAction.continue;
 
   @doc("The actual value of the server metric ")
   @visibility("read")
@@ -436,7 +440,7 @@ model PassFailServerMetric {
 
   @doc("Outcome of the test run.")
   @visibility("read")
-  result?: PFResult;
+  result?: PassFailResult;
 }
 
 @doc("Secret")
@@ -515,7 +519,7 @@ model RegionalConfiguration {
     The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
     The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
     """)
-  region: string;
+  region: azureLocation;
 }
 
 @doc("Configuration for quick load test")
@@ -586,7 +590,7 @@ model FileInfo {
 
   @doc("Validation status of the file")
   @visibility("read")
-  validationStatus?: FileStatus;
+  validationStatus?: FileValidationStatus;
 
   @doc("Validation failure error details")
   @visibility("read")
@@ -617,7 +621,7 @@ model AppComponent {
     fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
     """)
   @visibility("read")
-  resourceId: string;
+  resourceId: armResourceIdentifier;
 
   @doc("Azure resource name, required while creating the app component.")
   resourceName: string;
@@ -641,7 +645,7 @@ model AppComponent {
 }
 
 @doc("Test server metrics configuration")
-model TestServerMetricConfig {
+model TestServerMetricsConfiguration {
   @doc("Test identifier")
   @visibility("read")
   testId?: string;
@@ -667,7 +671,7 @@ model ResourceMetric {
   id?: string;
 
   @doc("Azure resource id.")
-  resourceId: string;
+  resourceId: armResourceIdentifier;
 
   @doc("Metric name space.")
   metricNamespace: string;
@@ -745,7 +749,7 @@ model TestRun {
 
   @doc("Test result for pass/Fail criteria used during the test run.")
   @visibility("read")
-  testResult?: PFTestResult;
+  testResult?: PassFailTestResult;
 
   @doc("Number of virtual users, for which test has been run.")
   @visibility("read")
@@ -767,7 +771,7 @@ model TestRun {
 
   @doc("The test run status.")
   @visibility("read")
-  status?: Status;
+  status?: TestRunStatus;
 
   @doc("The test run start DateTime(RFC 3339 literal format).")
   @visibility("read")
@@ -819,7 +823,7 @@ model TestRun {
 
   @added(APIVersions.v2024_07_01_preview)
   @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
-  createdByType?: CreateByTypes;
+  createdByType?: CreatedByType;
 
   ...SystemMetaData;
 }
@@ -1006,7 +1010,7 @@ model MetricDefinitionCollection {
 @doc("Metric definition")
 model MetricDefinition {
   @doc("List of dimensions")
-  dimensions?: NameAndDesc[];
+  dimensions?: NameAndDescription[];
 
   @doc("The metric description")
   description?: string;
@@ -1018,7 +1022,7 @@ model MetricDefinition {
   `namespace`?: string;
 
   @doc("The primary aggregation type value defining how to use the values for display.")
-  primaryAggregationType?: AggregationType;
+  primaryAggregationType?: Aggregation;
 
   @doc("The collection of what all aggregation types are supported.")
   supportedAggregationTypes?: string[];
@@ -1034,7 +1038,7 @@ model MetricDefinition {
 }
 
 @doc("The name and description")
-model NameAndDesc {
+model NameAndDescription {
   @doc("The description")
   description?: string;
 
@@ -1157,7 +1161,7 @@ model TestRunAppComponents {
 }
 
 @doc("Test run server metrics configuration")
-model TestRunServerMetricConfig {
+model TestRunServerMetricsConfiguration {
   @doc("Test run identifier")
   @visibility("read")
   testRunId?: string;
