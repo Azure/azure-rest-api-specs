@@ -167,7 +167,7 @@ directive:
       - RequiredReadOnlyProperties
 ```
 
-### Tag: package-2024-09-01-preview
+### Tag: package-2024-11-01-preview
 
 These settings apply only when `--tag=package-2024-11-01-preview` is specified on the command line.
 
@@ -193,34 +193,6 @@ These settings apply only when `--tag=package-2024-11-searchindex-preview` is sp
 ``` yaml $(tag) == 'package-2024-11-searchindex-preview'
 input-file:
 - preview/2024-11-01-preview/searchindex.json
-```
-
-### Tag: package-2024-09-01-preview
-
-These settings apply only when `--tag=package-2024-09-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-09-01-preview'
-input-file:
-- preview/2024-09-01-preview/searchservice.json
-- preview/2024-09-01-preview/searchindex.json
-```
-
-### Tag: package-2024-09-searchservice-preview
-
-These settings apply only when `--tag=package-2024-09-searchservice-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-09-searchservice-preview'
-input-file:
-- preview/2024-09-01-preview/searchservice.json
-```
-
-### Tag: package-2024-09-searchindex-preview
-
-These settings apply only when `--tag=package-2024-09-searchindex-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-09-searchindex-preview'
-input-file:
-- preview/2024-09-01-preview/searchindex.json
 ```
 
 ### Tag: package-2024-07-01
@@ -249,197 +221,6 @@ These settings apply only when `--tag=package-2024-07-searchindex` is specified 
 ``` yaml $(tag) == 'package-2024-07-searchindex'
 input-file:
 - stable/2024-07-01/searchindex.json
-```
-
-### Tag: package-2024-05-01-preview
-
-These settings apply only when `--tag=package-2024-05-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-05-01-preview'
-input-file:
-- preview/2024-05-01-preview/searchservice.json
-- preview/2024-05-01-preview/searchindex.json
-```
-
-### Tag: package-2024-05-searchservice-preview
-
-These settings apply only when `--tag=package-2024-05-searchservice-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-05-searchservice-preview'
-input-file:
-- preview/2024-05-01-preview/searchservice.json
-```
-
-### Tag: package-2024-05-searchindex-preview
-
-These settings apply only when `--tag=package-2024-05-searchindex-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-05-searchindex-preview'
-input-file:
-- preview/2024-05-01-preview/searchindex.json
-```
-
-### Tag: package-2024-03-01-preview
-
-These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-03-01-preview'
-input-file:
-- preview/2024-03-01-Preview/searchservice.json
-- preview/2024-03-01-Preview/searchindex.json
-```
-
-### Tag: package-2024-03-searchservice-preview
-
-These settings apply only when `--tag=package-2024-03-searchservice-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-03-searchservice-preview'
-input-file:
-- preview/2024-03-01-Preview/searchservice.json
-```
-
-### Tag: package-2024-03-searchindex-preview
-
-These settings apply only when `--tag=package-2024-03-searchindex-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-03-searchindex-preview'
-input-file:
-- preview/2024-03-01-Preview/searchindex.json
-```
-
-### Tag: package-2023-10-01-preview
-
-These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-10-01-preview'
-input-file:
-- preview/2023-10-01-Preview/searchservice.json
-- preview/2023-10-01-Preview/searchindex.json
-```
-
-#### Rename one of SearchError definitions
-
-SearchError is duplicated between two swaggers, rename one of them
-
-``` yaml $(tag) == 'package-2023-10-01-preview'
-directive:
-- from: preview/2023-10-01-Preview/searchservice.json
-  where: $.definitions.SearchError
-  transform: $["x-ms-client-name"] = "SearchServiceError"
-```
-
-### Tag: package-2023-10-searchservice-preview
-
-These settings apply only when `--tag=package-2023-10-searchservice-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-10-searchservice-preview'
-input-file:
-- preview/2023-10-01-Preview/searchservice.json
-```
-
-### Tag: package-2023-10-searchindex-preview
-
-These settings apply only when `--tag=package-2023-10-searchindex-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-10-searchindex-preview'
-input-file:
-- preview/2023-10-01-Preview/searchindex.json
-```
-
-### Tag: package-2023-07-01-preview
-
-These settings apply only when `--tag=package-2023-07-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-07-01-preview'
-input-file:
-- preview/2023-07-01-Preview/searchservice.json
-- preview/2023-07-01-Preview/searchindex.json
-```
-
-#### Rename one of SearchError definitions
-
-SearchError is duplicated between two swaggers, rename one of them
-
-``` yaml $(tag) == 'package-2023-07-01-preview'
-directive:
-- from: preview/2023-07-01-Preview/searchservice.json
-  where: $.definitions.SearchError
-  transform: $["x-ms-client-name"] = "SearchServiceError"
-```
-
-### Tag: package-2023-07-searchservice-preview
-
-These settings apply only when `--tag=package-2023-07-searchservice-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-07-searchservice-preview'
-input-file:
-- preview/2023-07-01-Preview/searchservice.json
-```
-
-### Tag: package-2023-07-searchindex-preview
-
-These settings apply only when `--tag=package-2023-07-searchindex-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-07-searchindex-preview'
-input-file:
-- preview/2023-07-01-Preview/searchindex.json
-```
-
-### Tag: package-2021-04-30-preview
-
-These settings apply only when `--tag=package-2021-04-30-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-04-30-preview'
-input-file:
-- preview/2021-04-30-Preview/searchservice.json
-- preview/2021-04-30-Preview/searchindex.json
-```
-
-#### Rename one of SearchError definitions
-
-SearchError is duplicated between two swaggers, rename one of them
-
-``` yaml $(tag) == 'package-2021-04-30-preview'
-directive:
-- from: preview/2021-04-30-Preview/searchservice.json
-  where: $.definitions.SearchError
-  transform: $["x-ms-client-name"] = "SearchServiceError"
-```
-
-### Tag: package-2021-04-searchservice-preview
-
-These settings apply only when `--tag=package-2021-04-searchservice-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-04-searchservice-preview'
-input-file:
-- preview/2021-04-30-Preview/searchservice.json
-```
-
-### Tag: package-2021-04-searchindex-preview
-
-These settings apply only when `--tag=package-2021-04-searchindex-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-04-searchindex-preview'
-input-file:
-- preview/2021-04-30-Preview/searchindex.json
-```
-
-### Tag: package-2020-06-searchservice-preview
-
-These settings apply only when `--tag=package-2020-06-searchservice-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-06-searchservice-preview'
-input-file:
-- preview/2020-06-30-Preview/searchservice.json
-```
-
-### Tag: package-2020-06-searchindex-preview
-
-These settings apply only when `--tag=package-2020-06-searchindex-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-06-searchindex-preview'
-input-file:
-- preview/2020-06-30-Preview/searchindex.json
 ```
 
 ### Tag: package-2020-06-searchservice
@@ -476,24 +257,6 @@ These settings apply only when `--tag=package-2023-11-searchindex` is specified 
 ``` yaml $(tag) == 'package-2023-11-searchindex'
 input-file:
 - stable/2023-11-01/searchindex.json
-```
-
-### Tag: package-2019-05-searchservice-preview
-
-These settings apply only when `--tag=package-2019-05-searchservice-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-05-searchservice-preview'
-input-file:
-- preview/2019-05-06-preview/searchservice.json
-```
-
-### Tag: package-2019-05-searchindex-preview
-
-These settings apply only when `--tag=package-2019-05-searchindex-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-05-searchindex-preview'
-input-file:
-- preview/2019-05-06-preview/searchindex.json
 ```
 
 ### Tag: package-2019-05-searchservice
@@ -995,22 +758,6 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/preview/2024-05-01-preview/searchservice.json
-  - $(this-folder)/preview/2024-05-01-preview/searchindex.json
-  - $(this-folder)/preview/2024-03-01-Preview/searchservice.json
-  - $(this-folder)/preview/2024-03-01-Preview/searchindex.json
-  - $(this-folder)/preview/2023-10-01-Preview/searchservice.json
-  - $(this-folder)/preview/2023-10-01-Preview/searchindex.json
-  - $(this-folder)/preview/2023-07-01-Preview/searchservice.json
-  - $(this-folder)/preview/2023-07-01-Preview/searchindex.json
-  - $(this-folder)/preview/2021-04-30-Preview/searchservice.json
-  - $(this-folder)/preview/2021-04-30-Preview/searchindex.json
-  - $(this-folder)/preview/2020-06-30-Preview/searchservice.json
-  - $(this-folder)/preview/2020-06-30-Preview/searchindex.json
-  - $(this-folder)/preview/2020-06-30/searchservice.json
-  - $(this-folder)/preview/2020-06-30/searchindex.json
-  - $(this-folder)/preview/2019-05-06-preview/searchservice.json
-  - $(this-folder)/preview/2019-05-06-preview/searchindex.json
   - $(this-folder)/stable/2019-05-06/searchservice.json
   - $(this-folder)/stable/2019-05-06/searchindex.json
 
