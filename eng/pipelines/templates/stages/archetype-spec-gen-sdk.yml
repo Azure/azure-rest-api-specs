@@ -243,20 +243,21 @@ extends:
                 WorkingDirectory: $(SdkRepoDirectory)
                 ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
 
-            - task: PowerShell@2
-              displayName: Create pull request
-              condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
-              inputs:
-                pwsh: true
-                workingDirectory: $(SdkRepoDirectory)
-                filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
-                arguments: >
-                  -RepoOwner "$(SdkRepoOwner)"
-                  -RepoName "$(SdkRepoName)"
-                  -BaseBranch "main"
-                  -PROwner "azure-sdk"
-                  -PRBranch "$(PrBranch)-$(Build.BuildId)"
-                  -AuthToken "$(azuresdk-github-pat)"
-                  -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-                  -PRBody "$(GeneratedSDKInformation)"
-                  -OpenAsDraft $true
+            - ${{ if not(endsWith(variables['SdkRepoName'], '-pr')) }}:
+              - task: PowerShell@2
+                displayName: Create pull request
+                condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+                inputs:
+                  pwsh: true
+                  workingDirectory: $(SdkRepoDirectory)
+                  filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
+                  arguments: >
+                    -RepoOwner "$(SdkRepoOwner)"
+                    -RepoName "$(SdkRepoName)"
+                    -BaseBranch "main"
+                    -PROwner "azure-sdk"
+                    -PRBranch "$(PrBranch)-$(Build.BuildId)"
+                    -AuthToken "$(azuresdk-github-pat)"
+                    -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
+                    -PRBody "$(GeneratedSDKInformation)"
+                    -OpenAsDraft $true
