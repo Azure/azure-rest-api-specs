@@ -214,9 +214,12 @@ async function getAffectedReadmeFiles(changedFiles: string[], repoRoot: string):
   );
 
   // TODO: Case sensitivity??
-  const changedReadmeFiles = changedFilesInSpecDir.filter(
-    async (file) => file.endsWith(`${sep}readme.md`) && (await pathExists(join(repoRoot, file))),
-  );
+  const changedReadmeFiles = [];
+  for (const file of changedFilesInSpecDir) {
+    if (file.endsWith(`${sep}readme.md`) && (await pathExists(join(repoRoot, file)))) {
+      changedReadmeFiles.push(file);
+    }
+  }
 
   // TODO: Case sensitivity??
   const changedSpecFiles = changedFilesInSpecDir.filter((f) =>
