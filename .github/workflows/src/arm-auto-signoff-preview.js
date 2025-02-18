@@ -1,11 +1,12 @@
 // @ts-check
 
 import { extractInputs } from "../../src/context.js";
+import { PER_PAGE_MAX } from "../../src/github.js";
 import { LabelAction } from "../../src/label.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
- * @returns {Promise<LabelAction>}
+ * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
  */
 export default async function getLabelAction({ github, context, core }) {
   let owner = process.env.OWNER || "";
@@ -39,7 +40,7 @@ export default async function getLabelAction({ github, context, core }) {
  * @param {string} params.head_sha
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
- * @returns {Promise<LabelAction>}
+ * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
  */
 export async function getLabelActionImpl({
   owner,
@@ -49,30 +50,46 @@ export async function getLabelActionImpl({
   github,
   core,
 }) {
-  const workflowRuns = await github.rest.actions.listWorkflowRunsForRepo({
-    owner,
-    repo,
-    event: "pull_request",
-    status: "completed",
-    per_page: 100,
-    head_sha,
-  });
+  const labelActions = {
+    [LabelAction.None]: {
+      labelAction: LabelAction.None,
+      issueNumber: issue_number,
+    },
+    [LabelAction.Add]: {
+      labelAction: LabelAction.Add,
+      issueNumber: issue_number,
+    },
+    [LabelAction.Remove]: {
+      labelAction: LabelAction.Remove,
+      issueNumber: issue_number,
+    },
+  };
+
+  const workflowRuns = await github.paginate(
+    github.rest.actions.listWorkflowRunsForRepo,
+    {
+      owner,
+      repo,
+      event: "pull_request",
+      status: "completed",
+      head_sha,
+      per_page: PER_PAGE_MAX,
+    },
+  );
 
   core.info("Workflow Runs:");
-  workflowRuns.data.workflow_runs.forEach((wf) => {
+  workflowRuns.forEach((wf) => {
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
   const wfName = "ARM Incremental Typespec (Preview)";
-  const incrementalTspRuns = workflowRuns.data.workflow_runs.filter(
-    (wf) => wf.name == wfName,
-  );
+  const incrementalTspRuns = workflowRuns.filter((wf) => wf.name == wfName);
 
   if (incrementalTspRuns.length == 0) {
     core.info(
       `Found no completed runs for workflow '${wfName}'.  May still be in-progress.`,
     );
-    return LabelAction.None;
+    return labelActions[LabelAction.None];
   } else if (incrementalTspRuns.length > 1) {
     throw `Unexpected number of runs for workflow '${wfName}': ${incrementalTspRuns.length}`;
   } else {
@@ -82,22 +99,25 @@ export async function getLabelActionImpl({
       core.info(
         `Run for workflow '${wfName}' did not succeed: '${run.conclusion}'`,
       );
-      return LabelAction.Remove;
+      return labelActions[LabelAction.Remove];
     }
 
-    const artifactNames = (
-      await github.rest.actions.listWorkflowRunArtifacts({
+    const artifacts = await github.paginate(
+      github.rest.actions.listWorkflowRunArtifacts,
+      {
         owner,
         repo,
         run_id: run.id,
-      })
-    ).data.artifacts.map((a) => a.name);
+        per_page: PER_PAGE_MAX,
+      },
+    );
+    const artifactNames = artifacts.map((a) => a.name);
 
     core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
     if (artifactNames.includes("incremental-typespec=false")) {
       core.info("Spec is not an incremental change to an existing TypeSpec RP");
-      return LabelAction.Remove;
+      return labelActions[LabelAction.Remove];
     } else if (artifactNames.includes("incremental-typespec=true")) {
       core.info("Spec is an incremental change to an existing TypeSpec RP");
       // Continue checking other requirements
@@ -108,35 +128,34 @@ export async function getLabelActionImpl({
   }
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
-  const labels = (
-    await github.rest.issues.listLabelsOnIssue({
-      owner: owner,
-      repo: repo,
-      issue_number: issue_number,
-    })
-  ).data.map((label) => label.name);
+  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+    owner: owner,
+    repo: repo,
+    issue_number: issue_number,
+    per_page: PER_PAGE_MAX,
+  });
+  const labelNames = labels.map((label) => label.name);
 
   core.info(`Labels: ${labels}`);
 
   // TODO: Also require label "ARMBestPracticesAcknowledgement"
   const allLabelsMatch =
-    labels.includes("ARMReview") &&
-    !labels.includes("NotReadyForARMReview") &&
-    (!labels.includes("SuppressionReviewRequired") ||
-      labels.includes("Approved-Suppression"));
+    labelNames.includes("ARMReview") &&
+    !labelNames.includes("NotReadyForARMReview") &&
+    (!labelNames.includes("SuppressionReviewRequired") ||
+      labelNames.includes("Approved-Suppression"));
 
   if (!allLabelsMatch) {
     core.info("Labels do not meet requirement for auto-signoff");
-    return LabelAction.Remove;
+    return labelActions[LabelAction.Remove];
   }
 
-  const checkRuns = (
-    await github.rest.checks.listForRef({
-      owner: owner,
-      repo: repo,
-      ref: head_sha,
-    })
-  ).data.check_runs;
+  const checkRuns = await github.paginate(github.rest.checks.listForRef, {
+    owner: owner,
+    repo: repo,
+    ref: head_sha,
+    per_page: PER_PAGE_MAX,
+  });
 
   const swaggerLintDiffs = checkRuns.filter(
     (run) => run.name === "Swagger LintDiff",
@@ -158,14 +177,14 @@ export async function getLabelActionImpl({
   if (swaggerLintDiff && swaggerLintDiff.status === "completed") {
     if (swaggerLintDiff.conclusion === "success") {
       core.info("All requirements met for auto-signoff");
-      return LabelAction.Add;
+      return labelActions[LabelAction.Add];
     } else {
       core.info("Swagger LintDiff did not succeed");
-      return LabelAction.Remove;
+      return labelActions[LabelAction.Remove];
     }
   } else {
     // No-op if check is missing or not completed, to prevent frequent remove/add label as checks re-run
     core.info("Swagger LintDiff is in-progress");
-    return LabelAction.None;
+    return labelActions[LabelAction.None];
   }
 }
