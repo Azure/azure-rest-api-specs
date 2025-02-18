@@ -82,7 +82,7 @@ export async function getLabelActionImpl({
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
-  const wfName = "ARM Incremental Typespec (Preview)";
+  const wfName = "ARM Incremental TypeSpec (Preview)";
   const incrementalTspRuns = workflowRuns.filter((wf) => wf.name == wfName);
 
   if (incrementalTspRuns.length == 0) {
@@ -136,7 +136,7 @@ export async function getLabelActionImpl({
   });
   const labelNames = labels.map((label) => label.name);
 
-  core.info(`Labels: ${labels}`);
+  core.info(`Labels: ${labelNames}`);
 
   // TODO: Also require label "ARMBestPracticesAcknowledgement"
   const allLabelsMatch =
