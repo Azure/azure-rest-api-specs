@@ -3681,9 +3681,19 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/ServiceNowV2DatasetTypeProperties"
+        }
+      }
+    },
+    "ServiceNowV2DatasetTypeProperties": {
+      "description": "Properties specific to this dataset type.",
+      "type": "object",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The table name. Type: string (or Expression with resultType string)."
         },
-         "valueType": {
+        "valueType": {
           "description": "Type of value copied from source.",
           "type": "string",
           "enum": [
@@ -3691,7 +3701,7 @@
             "display"
           ],
           "x-ms-enum": {
-            "name": "valueType",
+            "name": "ValueType",
             "modelAsString": true
           }
         }
