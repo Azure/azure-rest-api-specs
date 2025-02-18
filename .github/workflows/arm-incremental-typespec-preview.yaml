@@ -1,6 +1,12 @@
 name: ARM Incremental TypeSpec (Preview)
 
-on: pull_request
+on:
+  pull_request:
+    paths:
+      # Only trigger if PR includes at least one non-example RM swagger
+      # All consumers of workflow must treat "skipped" as equal to "artifact=false"
+      - "**/resource-manager/**/*.json"
+      - "!**/examples/**/*.json"
 
 permissions:
   contents: read
