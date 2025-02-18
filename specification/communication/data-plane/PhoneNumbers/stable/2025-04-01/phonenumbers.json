@@ -2009,6 +2009,7 @@
         },
         "status": {
           "readOnly": true,
+          "description": "Represents the status of the phone number. Possible values include: 'available', 'reserved', 'expired', 'error', 'purchased'.",
           "type": "string",
           "enum": [
             "available",
@@ -2027,19 +2028,22 @@
           "type": "boolean"
         },
         "error": {
+          "$ref": "#/definitions/AvailablePhoneNumberError"
+        }
+      }
+    },
+    "AvailablePhoneNumberError": {
+      "readOnly": true,
+      "type": "object",
+      "description": "If status is error, this will contain the error details.",
+      "properties": {
+        "code": {
           "readOnly": true,
-          "type": "object",
-          "description": "If status is error, this will contain the error details.",
-          "properties": {
-            "code": {
-              "readOnly": true,
-              "type": "string"
-            },
-            "message": {
-              "readOnly": true,
-              "type": "string"
-            }
-          }
+          "type": "string"
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string"
         }
       }
     },
