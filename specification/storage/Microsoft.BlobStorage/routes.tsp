@@ -1834,7 +1834,8 @@ interface AppendBlob {
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
       ...StructuredBodyTypeResponseHeader;
-    }
+    },
+    "application/octet-stream"
   >;
 
   /** The Append Block From URL operation creates a new block to be committed as part of an append blob where the contents are read from a URL. */
