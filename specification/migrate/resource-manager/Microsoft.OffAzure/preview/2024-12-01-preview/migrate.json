@@ -6520,7 +6520,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "description": "Method to validate the SQL inventory before triggering the import process.",
+        "description": "Validates SQL inventory data for format and correctness before attempting import. This is a safer alternative to direct import as it prevents failed imports due to invalid data. The operation performs validation checks first and only proceeds with import if all checks pass.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -6559,7 +6559,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Validation successful and import operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SQLInventoryImportBody"
             }
@@ -16506,36 +16506,36 @@
         },
         "blobSasUri": {
           "type": "string",
-          "description": "Gets or sets the blob SAS Uri of the input import file.",
+          "description": "Gets the blob SAS Uri of the input import file.",
           "x-ms-secret": true
         },
         "jobResult": {
           "$ref": "#/definitions/ImportSqlInventoryJobResult",
-          "description": "Gets or sets the Job Result status."
+          "description": "Gets the Job Result status."
         },
         "numberOfServersImported": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Number of servers imported."
+          "description": "Gets the Number of servers imported."
         },
         "numberOfDatabasesImported": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Number of databases imported."
+          "description": "Gets the Number of databases imported."
         },
         "numberOfAvailabilityGroupsImported": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Number of availability groups imported."
+          "description": "Gets the Number of availability groups imported."
         },
         "blobCreationTimeStamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the Blob creation time stamp."
+          "description": "Gets the Blob creation time stamp."
         },
         "errorSummary": {
           "$ref": "#/definitions/SqlImportJobErrorSummary",
-          "description": "Gets or sets the Job Error Summary."
+          "description": "Gets the Job Error Summary."
         }
       }
     },
@@ -17768,7 +17768,14 @@
         "jobArmId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Gets or sets the job ARM ID."
+          "description": "Gets or sets the job ARM ID.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks"
+              }
+            ]
+          }
         },
         "uri": {
           "type": "string",
@@ -19596,9 +19603,9 @@
       "properties": {
         "errors": {
           "type": "array",
-          "description": "Gets or sets the Job level errors.",
+          "description": "Collection of errors encountered during the SQL import operation",
           "items": {
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           }
         },
         "errorCount": {
