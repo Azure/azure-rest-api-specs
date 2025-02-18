@@ -80,7 +80,7 @@ export default async function incrementalTypespec({ github, context, core }) {
           `Spec folder '${changedSpecDir}' in base branch contains typespec-generated swagger: '${file}'`,
         );
         containsTypespecGeneratedSwagger = true;
-        continue;
+        break;
       }
     }
 
