@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.MySQLDiscovery
-  output-folder: $(csharp-sdks-folder)/mysqldiscovery/management/Microsoft.MySQLDiscovery/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/mysqldiscovery/management/Microsoft.MysqlDiscovery/GeneratedProtocol
 ```
