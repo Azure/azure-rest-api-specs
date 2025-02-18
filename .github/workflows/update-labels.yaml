@@ -31,15 +31,16 @@ on:
         type: number
 
 permissions:
+  actions: read
   contents: read
+  pull-requests: write
 
 jobs:
   update-labels:
     name: Update Labels
 
-    permissions:
-      contents: read
-      pull-requests: write
+    # Only process labels from successful workflows
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     runs-on: ubuntu-24.04
 
