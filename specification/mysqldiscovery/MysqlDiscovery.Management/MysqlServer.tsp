@@ -27,7 +27,7 @@ model MysqlServer
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
   tags?: Tag[];
 }
 
