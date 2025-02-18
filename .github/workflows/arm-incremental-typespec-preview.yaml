@@ -1,0 +1,35 @@
+name: ARM Incremental TypeSpec (Preview)
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  arm-incremental-typespec-preview:
+    name: ARM Incremental TypeSpec (Preview)
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Required to detect changed files in PR
+          fetch-depth: 2
+
+      # Output is "true" if PR contains only incremental changes to an existing TypeSpec RP
+      - id: incremental-typespec
+        name: ARM Incremental TypeSpec (Preview)
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const { default: incrementalTypeSpec } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-incremental-typespec-preview.js');
+            return await incrementalTypeSpec({ github, context, core });
+
+      - name: Upload artifact with results
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "incremental-typespec"
+          value: ${{ steps.incremental-typespec.outputs.result }}
