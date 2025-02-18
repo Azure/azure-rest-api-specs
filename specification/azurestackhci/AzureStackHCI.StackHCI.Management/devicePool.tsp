@@ -20,7 +20,7 @@ model DevicePool
     Resource = DevicePool,
     KeyName = "devicePoolName",
     SegmentName = "devicePools",
-    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+    NamePattern = "^[a-zA-Z0-9-]{3,63}$"
   >;
   ...ManagedServiceIdentityProperty;
 }

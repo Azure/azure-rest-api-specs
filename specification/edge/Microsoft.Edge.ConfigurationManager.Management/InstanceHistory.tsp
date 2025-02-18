@@ -30,10 +30,6 @@ model InstanceHistoryProperties {
   @visibility("read")
   target: Target;
 
-  @doc("Deployment Status of instance")
-  @visibility("read")
-  status?: DeploymentStatus;
-
   @doc("Scope of instance")
   @visibility("read")
   solutionScope?: string;
@@ -41,6 +37,10 @@ model InstanceHistoryProperties {
   @doc("Reconciliation policy of instance")
   @visibility("read")
   reconciliationPolicy?: ReconciliationPolicyProperties;
+
+  @doc("Deployment Status of instance")
+  @visibility("read")
+  status?: DeploymentStatus;
 
   @doc("Deployment timestamp of instance")
   @visibility("read")
@@ -60,7 +60,7 @@ model InstanceHistory
   @doc("Name of the instance history")
   @maxLength(61)
   @minLength(3)
-  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   @path
   @key("instanceHistoryName")
   @segment("instanceHistories")

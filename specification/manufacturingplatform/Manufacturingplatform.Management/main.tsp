@@ -33,7 +33,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A ManufacturingPlatformProviderHub resource")
 model MdsResource is TrackedResource<MdsResourceProperties> {
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,23}$")
   @key("mdsResourceName")
   @segment("manufacturingDataServices")
   @doc("Name.")
@@ -72,6 +72,30 @@ union ProvisioningState {
 
   /** The resource create request has been accepted */
   Accepted: "Accepted",
+}
+
+@doc("The current state of the resource")
+@added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+union ResourceState {
+  string,
+
+  /** Resource is in active state */
+  Active: "Active",
+
+  /** Resource is in inactive state */
+  Inactive: "Inactive",
+}
+
+@doc("The redundancy state of the resource")
+@added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+union RedundancyState {
+  string,
+
+  /** Resource is zone redundant */
+  Zonal: "Zonal",
+
+  /** Resource is not redundant */
+  None: "None",
 }
 
 @doc("Details of the ManufacturingPlatform MdsResource.")
@@ -216,6 +240,16 @@ model MdsResourceProperties {
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @visibility("read", "update")
   denyAssignmentExclusions?: DenyAssignmentExclusion[];
+
+  @doc("State of the resource")
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @visibility("read", "update")
+  resourceState?: ResourceState;
+
+  @doc("Zone redundancy state for resources")
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @visibility("read", "create")
+  redundancyState?: RedundancyState;
 }
 
 @doc("The properties related to Aks Resource")

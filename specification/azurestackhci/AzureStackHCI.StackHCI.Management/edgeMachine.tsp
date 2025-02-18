@@ -19,7 +19,7 @@ model EdgeMachine
     Resource = EdgeMachine,
     KeyName = "edgeMachineName",
     SegmentName = "edgeMachines",
-    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+    NamePattern = "^[a-zA-Z0-9-]{3,63}$"
   >;
   ...ManagedServiceIdentityProperty;
 }
@@ -128,6 +128,46 @@ model EdgeMachineProperties {
   @doc("Reported properties for edge machine.")
   @visibility("read")
   reportedProperties?: ReportedProperties;
+
+  @doc("operation status details for edge machine.")
+  @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  operationDetails?: OperationDetail[];
+
+  @doc("Last time data updated to service.")
+  @visibility("read")
+  lastSyncTimestamp?: utcDateTime;
+}
+
+@doc("operation detail.")
+model OperationDetail {
+  @doc("operation name.")
+  @visibility("read")
+  name?: string;
+
+  @doc("operation id.")
+  @visibility("read")
+  id?: string;
+
+  @doc("operation type.")
+  @visibility("read")
+  type?: string;
+
+  @doc("operation resource id.")
+  @visibility("read")
+  resourceId?: armResourceIdentifier;
+
+  @doc("operation description.")
+  @visibility("read")
+  description?: string;
+
+  @doc("operation status.")
+  @visibility("read")
+  status?: string;
+
+  @doc("error details.")
+  @visibility("read")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 /**
@@ -282,6 +322,10 @@ union ProvisioningState {
 
 @doc("Reported properties for edge machine.")
 model ReportedProperties {
+  @doc("Last time data reported.")
+  @visibility("read")
+  lastUpdated?: utcDateTime;
+
   @doc("Network details for edge machine.")
   @visibility("read")
   networkProfile?: NetworkProfile;

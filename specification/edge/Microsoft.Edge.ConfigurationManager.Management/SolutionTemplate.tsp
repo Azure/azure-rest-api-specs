@@ -28,18 +28,18 @@ model SolutionTemplateProperties {
   capabilities: string[];
 
   @doc("Latest solution template version")
-  latestVersion: string;
-
-  @doc("Is this resource deprecated")
   @visibility("read")
-  isDeprecated?: boolean;
+  latestVersion?: string;
+
+  @doc("State of resource")
+  state?: ResourceState;
 
   @doc("Provisioning state of resource")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("Solution Template Resource")
+@doc("Solution Template Resource. Contains capabilities and operations for creating versions.")
 model SolutionTemplate
   is Azure.ResourceManager.TrackedResource<SolutionTemplateProperties> {
   ...ResourceNameParameter<SolutionTemplate>;
@@ -73,8 +73,11 @@ interface SolutionTemplates {
     SolutionTemplateVersion
   >;
 
-  @doc("Deprecate resource")
-  deprecate is ArmResourceActionNoResponseContentAsync<SolutionTemplate, void>;
+  @doc("Remove Solution Template Version Resource")
+  removeVersion is ArmResourceActionNoResponseContentAsync<
+    SolutionTemplate,
+    VersionParameter
+  >;
 
   @doc("Delete a Solution Template Resource")
   delete is ArmResourceDeleteWithoutOkAsync<SolutionTemplate>;

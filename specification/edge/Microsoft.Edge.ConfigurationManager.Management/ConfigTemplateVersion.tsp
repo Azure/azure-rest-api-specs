@@ -17,9 +17,6 @@ namespace Microsoft.Edge;
 
 @doc("Config Template Version Properties")
 model ConfigTemplateVersionProperties {
-  @doc("Schema of configuration")
-  schema: string;
-
   @doc("Configuration values")
   configurations: string;
 
@@ -43,9 +40,6 @@ model ConfigTemplateVersion is ProxyResource<ConfigTemplateVersionProperties> {
 interface ConfigTemplateVersions {
   @doc("Get a Config Template Version Resource")
   get is ArmResourceRead<ConfigTemplateVersion>;
-
-  @doc("Delete a Config Template Version Resource")
-  delete is ArmResourceDeleteWithoutOkAsync<ConfigTemplateVersion>;
 
   @doc("List Config Template Version Resources")
   listByConfigTemplate is ArmResourceListByParent<ConfigTemplateVersion>;

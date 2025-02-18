@@ -14,6 +14,17 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+@doc("Resource Type State")
+union ResourceState {
+  @doc("Resource is active")
+  active: "active",
+
+  @doc("Resource is inactive")
+  inactive: "inactive",
+
+  string,
+}
+
 @doc("Solution Instance State")
 union State {
   @doc("Solution Instance is in review")
@@ -30,6 +41,9 @@ union State {
 
   @doc("Solution Instance failed to deploy")
   Failed: "Failed",
+
+  @doc("Solution Instance is undeployed")
+  Undeployed: "Undeployed",
 
   string,
 }
