@@ -5,7 +5,7 @@
  *   isFullCompatible: false
  *   guessResourceKey: false
  * Version: 0.10.9
- * Date: 2025-02-18T09:18:48.240Z
+ * Date: 2025-02-18T09:34:38.811Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -32,7 +32,7 @@ using TypeSpec.Versioning;
   title: "Azure API for MysqlDiscovery",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.MySQLDiscovery;
 
 /**
