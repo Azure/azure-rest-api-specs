@@ -26,8 +26,8 @@ model SiteProperties {
     }
   ]>;
 
-  @doc("Key-value pairs for labeling the site resource.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
   labels?: Record<string>;
 
   @doc("Provisioning state of last operation")
@@ -50,8 +50,8 @@ model SiteUpdateProperties {
     }
   ]>;
 
-  @doc("Key-value pairs for labeling the site resource.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
   labels?: Record<string>;
 }
 
