@@ -19,13 +19,13 @@ namespace Microsoft.Edge;
 
 @doc("Instance State")
 union ActiveState {
+  string,
+
   @doc("Instance is active")
-  Active: "Active",
+  active: "active",
 
   @doc("Instance is inactive")
-  Inactive: "Inactive",
-
-  string,
+  inactive: "inactive",
 }
 
 @doc("Defines a state of the reconciliation policy.")
@@ -44,30 +44,25 @@ model ReconciliationPolicyProperties {
   @doc("The state of the ReconciliationPolicy")
   state: ReconciliationState;
 
-  @doc("Policy interval.")
+  @doc("Policy interval")
   interval: string;
 }
 
 @doc("Instance Properties")
 model InstanceProperties {
   @doc("Solution version of instance")
-  @visibility("read")
   solutionVersionId: string;
 
   @doc("Target of instance")
-  @visibility("read")
   targetId: string;
 
   @doc("State of instance")
-  @visibility("read")
   activeState?: ActiveState;
 
   @doc("Reconciliation policy of instance")
-  @visibility("read")
   reconciliationPolicy?: ReconciliationPolicyProperties;
 
   @doc("Scope of instance")
-  @visibility("read")
   solutionScope?: string;
 
   @doc("Status of instance")
@@ -83,14 +78,14 @@ model InstanceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Instance Resource")
+@doc("Instance Resource. Represents a deployment object.")
 @parentResource(Solution)
 model Instance is Azure.ResourceManager.ProxyResource<InstanceProperties> {
   // Name will be set to solution
   @doc("Name of the instance")
   @maxLength(61)
   @minLength(3)
-  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   @path
   @key("instanceName")
   @segment("instances")
@@ -104,6 +99,12 @@ model Instance is Azure.ResourceManager.ProxyResource<InstanceProperties> {
 interface Instances {
   @doc("Get Instance Resource")
   get is ArmResourceRead<Instance>;
+
+  @doc("Create or update Instance Resource")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Instance>;
+
+  @doc("Update an Instance Resource")
+  update is ArmResourcePatchAsync<Instance, InstanceProperties>;
 
   @doc("Delete Instance Resource")
   delete is ArmResourceDeleteWithoutOkAsync<Instance>;

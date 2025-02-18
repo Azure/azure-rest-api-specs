@@ -34,7 +34,7 @@ model TargetTemplateProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Target Template Resource")
+@doc("Target Template Resource, which is a template for creation of Targets")
 model TargetTemplate is TrackedResource<TargetTemplateProperties> {
   ...ResourceNameParameter<TargetTemplate>;
   ...EntityTagProperty;

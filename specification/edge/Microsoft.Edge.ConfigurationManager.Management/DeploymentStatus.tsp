@@ -16,50 +16,50 @@ namespace Microsoft.Edge;
 
 @doc("Component Status")
 model ComponentStatus {
-  @doc("Target name")
-  name: string;
+  @doc("Component name")
+  name?: string;
 
-  @doc("component status")
-  status: string;
+  @doc("Component status")
+  status?: string;
 }
 
 @doc("Target Status")
 model TargetStatus {
   @doc("Target name")
-  name: string;
+  name?: string;
 
-  @doc("target status")
-  status: string;
+  @doc("Target status")
+  status?: string;
 
-  @doc("component statuses")
+  @doc("Component statuses")
   @extension("x-ms-identifiers", [])
-  componentStatuses: ComponentStatus[];
+  componentStatuses?: ComponentStatus[];
 }
 
 @doc("Deployment Status")
 model DeploymentStatus {
   @doc("The lastModified of the Status")
-  lastModified: utcDateTime;
+  lastModified?: utcDateTime;
 
   @doc("Indicates if Instance is deployed")
-  deployed: int32;
+  deployed?: int32;
 
   @doc("The expected running job id")
-  expectedRunningJobId: int32;
+  expectedRunningJobId?: int32;
 
   @doc("The running job id")
-  runningJobId: int32;
+  runningJobId?: int32;
 
   @doc("Deployment status")
-  status: string;
+  status?: string;
 
-  @doc("status details")
-  statusDetails: string;
+  @doc("Status details")
+  statusDetails?: string;
 
-  @doc("deployment Generation")
-  generation: int32;
+  @doc("Deployment Generation")
+  generation?: int32;
 
-  @doc("target resource statuses")
+  @doc("Target resource statuses")
   @extension("x-ms-identifiers", [])
   targetStatuses?: TargetStatus[];
 }
