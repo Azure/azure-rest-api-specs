@@ -375,7 +375,7 @@ union ChatCompletionModality {
 union PredictionContentType {
   string,
 
-  /** . */
+  /** Predicted content is of type content */
   content: "content",
 }
 
