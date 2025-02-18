@@ -42,8 +42,3 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ```yaml $(tag) == 'package-2021-09-01-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2021-09-01-preview/$(namespace)
 ```
-
-``` yaml $(go)
-modelerfour:
-  lenient-model-deduplication: true
-```

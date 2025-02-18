@@ -17,8 +17,3 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/dynatrace/azure-mgmt-dynatrace/azure/mgmt/dynatrace
 ```
-
-``` yaml $(python)
-modelerfour:
-  lenient-model-deduplication: true
-```
