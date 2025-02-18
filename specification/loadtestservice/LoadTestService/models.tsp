@@ -512,9 +512,11 @@ model RegionalConfiguration {
   engineInstances?: int32;
 
   @doc("""
-      The percentage of load to be distributed in specified region. Supported values are in range of 1-100.
+      The percentage of load to be distributed in specified region. Supported values are in range of 1-99.
     """)
   @added(APIVersions.v2025_03_01_preview)
+  @minValue(1)
+  @maxValue(99)
   loadPercentage?: int32;
 
   @doc("""
