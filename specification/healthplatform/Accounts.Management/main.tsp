@@ -20,7 +20,6 @@ namespace Microsoft.HealthPlatform;
 /** API versions */
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2025-02-13-preview`,
 }
@@ -56,6 +55,7 @@ interface Accounts {
 }
 
 /** The provisioning state of a resource. */
+@doc("The status of the current operation.")
 @lroStatus
 union ProvisioningState {
   ResourceProvisioningState,
