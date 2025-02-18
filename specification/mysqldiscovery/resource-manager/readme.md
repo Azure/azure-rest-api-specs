@@ -37,19 +37,22 @@ These settings apply only when `--tag=package-2024-09-30-preview` is specified o
 input-file:
   - Microsoft.MysqlDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
 suppressions:
-  - code: pathresourceprovidernamepascalcase
+  - code: PathResourceProviderNamePascalCase
     from: Microsoft.MysqlDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
     reason: MySQL is a technical term and cannot follow pascal case rule.
-  - code: PathResourceTypeNameCamelCase
-    from: mysqldiscovery.json
-    reason: MySQL is a technical term and cannot follow camel case rule.
-  - code: AvoidAdditionalProperties
-    from: mysqldiscovery.json
-    reason: ARM team will deliver TagsV2 towards the end of 2024. TagsV2 will support Top-level tags on proxy resources.
+
 ```
 ---
 
 # Code Generation
+
+## Suppression
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    from: Microsoft.MysqlDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
+    reason: MySQL is a technical term and cannot follow pascal case rule.
+```
 
 ## Swagger to SDK
 

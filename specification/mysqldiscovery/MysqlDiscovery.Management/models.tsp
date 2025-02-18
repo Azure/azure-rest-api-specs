@@ -273,7 +273,8 @@ model MysqlServerProperties {
   /**
    * Resource labels.
    */
-  labels?: Record<string>;
+  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  labels?: Tag[];
 }
 
 /**

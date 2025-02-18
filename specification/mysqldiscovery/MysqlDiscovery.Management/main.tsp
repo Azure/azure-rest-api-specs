@@ -5,7 +5,7 @@
  *   isFullCompatible: false
  *   guessResourceKey: false
  * Version: 0.10.9
- * Date: 2025-02-18T09:34:38.811Z
+ * Date: 2025-02-18T10:38:56.251Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
