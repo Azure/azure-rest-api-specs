@@ -1,0 +1,44 @@
+name: LintDiff
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  lintdiff:
+    name: LintDiff
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout 'after' state
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          path: after
+
+      - name: Checkout 'before' state
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: before
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+        with:
+          working-directory: eng/tools/lint-diff
+
+      # TODO: This can probably be updated to run directly from JS
+      - name: Get changed files
+        run: |
+          ."./eng/scripts/ChangedFiles-Functions.ps1"
+          Set-Location ./after
+          Get-ChangedFiles | Set-Content -Path ./changed-files.txt
+        shell: pwsh
+
+      - name: Run LintDiff
+        run: |
+          npm exec -- lint-diff --path ../../../../before --changed-files-path ./changed-files.txt > before.json
+          npm exec -- lint-diff --path ../../../../after --changed-files-path ./changed-files.txt > after.json
+          # TODO: npm exec -- summarize-lint-diff 
+        working-directory: eng/tools/lint-diff
