@@ -27,7 +27,8 @@ model MysqlServer
   /**
    * Resource tags
    */
-  tags?: Record<string>;
+  @OpenAPI.extension("x-ms-identifiers", [])
+  tags?: Tag[];
 }
 
 @armResourceOperations

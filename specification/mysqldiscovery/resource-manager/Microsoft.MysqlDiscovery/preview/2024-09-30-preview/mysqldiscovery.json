@@ -41,16 +41,19 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
       "name": "MysqlSites"
     },
     {
       "name": "MysqlServers"
     },
     {
-      "name": "Summaries"
+      "name": "ErrorSummaries"
     },
     {
-      "name": "ErrorSummaries"
+      "name": "Summaries"
     }
   ],
   "paths": {
@@ -1165,11 +1168,15 @@
           "description": "Resource properties."
         },
         "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "array",
+          "description": "Resource tags.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": [
+            "key",
+            "value"
+          ]
         }
       },
       "required": [
@@ -1225,11 +1232,12 @@
           "description": "Resource properties."
         },
         "tags": {
-          "type": "object",
+          "type": "array",
           "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1346,11 +1354,15 @@
       "description": "Object containing tags updates for patch operations.",
       "properties": {
         "tags": {
-          "type": "object",
+          "type": "array",
           "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": [
+            "key",
+            "value"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/MysqlServerProperties",
@@ -1446,11 +1458,15 @@
       "description": "Object containing tags updates for patch operations.",
       "properties": {
         "tags": {
-          "type": "object",
+          "type": "array",
           "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": [
+            "key",
+            "value"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/MysqlSiteProperties",
@@ -1545,11 +1561,15 @@
           "description": "Resource properties."
         },
         "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "array",
+          "description": "Resource tags.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": [
+            "key",
+            "value"
+          ]
         }
       },
       "required": [
@@ -1610,6 +1630,20 @@
             "description": "Mainstream status"
           }
         ]
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Property key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Property value"
+        }
       }
     },
     "TypeSpec.Http.OkResponse": {

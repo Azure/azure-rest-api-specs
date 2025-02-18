@@ -176,12 +176,28 @@ model MysqlSitesResourcePatch {
   /**
    * Resource tags.
    */
-  tags?: Record<string>;
+  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  tags?: Tag[];
 
   /**
    * The MysqlSites resource definition.
    */
   properties?: MysqlSiteProperties;
+}
+
+/**
+ * Definition of Tag
+ */
+model Tag {
+  /**
+   * Property key
+   */
+  key?: string;
+
+  /**
+   * Property value
+   */
+  value?: string;
 }
 
 /**
@@ -318,7 +334,8 @@ model MysqlServerResourcePatch {
   /**
    * Resource tags.
    */
-  tags?: Record<string>;
+  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  tags?: Tag[];
 
   /**
    * The MysqlServer resource definition.

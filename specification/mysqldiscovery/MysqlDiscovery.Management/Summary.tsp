@@ -25,9 +25,10 @@ model Summary
   >;
 
   /**
-   * Resource tags
+   * Resource tags.
    */
-  tags?: Record<string>;
+  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  tags?: Tag[];
 }
 
 @armResourceOperations
