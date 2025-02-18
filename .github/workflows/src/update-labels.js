@@ -1,6 +1,7 @@
 // @ts-check
 
 import { extractInputs } from "../../src/context.js";
+import { PER_PAGE_MAX } from "../../src/github.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -45,13 +46,17 @@ export async function updateLabelsImpl({
   if (run_id) {
     // List artifacts from a single run_id
     core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run_id})`);
-    const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-      owner: owner,
-      repo: repo,
-      run_id: run_id,
-    });
+    const artifacts = await github.paginate(
+      github.rest.actions.listWorkflowRunArtifacts,
+      {
+        owner: owner,
+        repo: repo,
+        run_id: run_id,
+        per_page: PER_PAGE_MAX,
+      },
+    );
 
-    artifactNames = artifacts.data.artifacts.map((a) => a.name);
+    artifactNames = artifacts.map((a) => a.name);
   } else {
     // TODO: List all artifacts of all workflows associated with issue_number
     throw new Error("Required input 'run_id' not found in env or context");

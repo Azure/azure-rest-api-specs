@@ -1,6 +1,7 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { extractInputs } from "../src/context.js";
-import { createMockCore } from "./mocks.js";
+import { PER_PAGE_MAX } from "../src/github.js";
+import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("extractInputs", () => {
   it("unsupported_event", async () => {
@@ -46,6 +47,45 @@ describe("extractInputs", () => {
     });
   });
 
+  it("issue_comment:edited", async () => {
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: { head: { sha: "abc123" } },
+    });
+
+    const context = {
+      eventName: "issue_comment",
+      payload: {
+        action: "edited",
+        repository: {
+          name: "TestRepoName",
+          owner: {
+            login: "TestRepoOwnerLogin",
+          },
+        },
+        issue: {
+          number: 123,
+        },
+      },
+    };
+
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "abc123",
+      issue_number: 123,
+      run_id: NaN,
+    });
+
+    expect(github.rest.pulls.get).toHaveBeenCalledWith({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      pull_number: 123,
+    });
+  });
+
   it("workflow_dispatch", async () => {
     const context = {
       eventName: "workflow_dispatch",
@@ -83,12 +123,13 @@ describe("extractInputs", () => {
     ).rejects.toThrow();
   });
 
-  it("workflow_run:completed (same repo)", async () => {
+  it("workflow_run:completed:pull_request (same repo)", async () => {
     const context = {
       eventName: "workflow_run",
       payload: {
         action: "completed",
         workflow_run: {
+          event: "pull_request",
           head_sha: "abc123",
           id: 456,
           repository: {
@@ -114,13 +155,14 @@ describe("extractInputs", () => {
   });
 
   it.each([0, 1, 2])(
-    "workflow_run:completed (fork repo, %s PRs)",
+    "workflow_run:completed:pull_request (fork repo, %s PRs)",
     async (numPullRequests) => {
       const context = {
         eventName: "workflow_run",
         payload: {
           action: "completed",
           workflow_run: {
+            event: "pull_request",
             head_repository: {
               name: "TestRepoName",
               owner: {
@@ -140,18 +182,15 @@ describe("extractInputs", () => {
         },
       };
 
-      const github = {
-        rest: {
-          repos: {
-            listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
-              data: [{ number: 123 }, { number: 124 }].slice(
-                0,
-                numPullRequests,
-              ),
-            }),
-          },
+      const github = createMockGithub();
+      github.rest.repos.listPullRequestsAssociatedWithCommit.mockImplementation(
+        async (args) => {
+          console.log(JSON.stringify(args));
+          return {
+            data: [{ number: 123 }, { number: 124 }].slice(0, numPullRequests),
+          };
         },
-      };
+      );
 
       const inputsPromise = extractInputs(github, context, createMockCore());
       if (numPullRequests === 1) {
@@ -172,7 +211,73 @@ describe("extractInputs", () => {
         owner: "TestRepoOwnerLoginFork",
         repo: "TestRepoName",
         commit_sha: "abc123",
+        per_page: PER_PAGE_MAX,
       });
     },
   );
+
+  it("workflow_run:completed:workflow_run", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [{ name: "issue-number=123" }] },
+    });
+
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          event: "workflow_run",
+          head_sha: "abc123",
+          id: 456,
+          repository: {
+            name: "TestRepoName",
+            owner: {
+              login: "TestRepoOwnerLogin",
+            },
+          },
+        },
+      },
+    };
+
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "abc123",
+      issue_number: 123,
+      run_id: 456,
+    });
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [{ name: "issue-number=not-a-number" }] },
+    });
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).rejects.toThrow(/invalid issue-number/i);
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [] },
+    });
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).rejects.toThrow(/could not find/i);
+  });
+
+  it("workflow_run:completed:unsupported", async () => {
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          event: "unsupported",
+        },
+      },
+    };
+
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).rejects.toThrow();
+  });
 });
