@@ -1,0 +1,1833 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AI Model Inference",
+    "version": "2024-05-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://ml.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://ml.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/chat/completions": {
+      "post": {
+        "operationId": "GetChatCompletions",
+        "description": "Gets chat completions for the provided chat messages.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data. The method makes a REST API call to the `/chat/completions` route\non the given endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "extra-parameters",
+            "in": "header",
+            "description": "Controls what happens if extra parameters, undefined by the REST API,\nare passed in the JSON request payload.\nThis sets the HTTP request header `extra-parameters`.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "error",
+              "drop",
+              "pass-through"
+            ],
+            "x-ms-enum": {
+              "name": "ExtraParameters",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "error",
+                  "value": "error",
+                  "description": "The service will error if it detected extra parameters in the request payload. This is the service default."
+                },
+                {
+                  "name": "drop",
+                  "value": "drop",
+                  "description": "The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model."
+                },
+                {
+                  "name": "pass_through",
+                  "value": "pass-through",
+                  "description": "The service will pass extra parameters to the back-end AI model."
+                }
+              ]
+            },
+            "x-ms-client-name": "extra_params"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The parameters of the chat completions request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Audio modality chat completion": {
+            "$ref": "./examples/GetChatCompletions_AudioModality_Gen.json"
+          },
+          "maximum set chat completion": {
+            "$ref": "./examples/GetChatCompletions_MaximumSet_Gen.json"
+          },
+          "minimum set chat completion": {
+            "$ref": "./examples/GetChatCompletions_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/embeddings": {
+      "post": {
+        "operationId": "GetEmbeddings",
+        "description": "Return the embedding vectors for given text prompts.\nThe method makes a REST API call to the `/embeddings` route on the given endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "extra-parameters",
+            "in": "header",
+            "description": "Controls what happens if extra parameters, undefined by the REST API,\nare passed in the JSON request payload.\nThis sets the HTTP request header `extra-parameters`.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "error",
+              "drop",
+              "pass-through"
+            ],
+            "x-ms-enum": {
+              "name": "ExtraParameters",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "error",
+                  "value": "error",
+                  "description": "The service will error if it detected extra parameters in the request payload. This is the service default."
+                },
+                {
+                  "name": "drop",
+                  "value": "drop",
+                  "description": "The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model."
+                },
+                {
+                  "name": "pass_through",
+                  "value": "pass-through",
+                  "description": "The service will pass extra parameters to the back-end AI model."
+                }
+              ]
+            },
+            "x-ms-client-name": "extra_params"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The parameters of the embeddings request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmbeddingsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EmbeddingsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "maximum set embeddings": {
+            "$ref": "./examples/GetEmbeddings_MaximumSet_Gen.json"
+          },
+          "minimum set embeddings": {
+            "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/images/embeddings": {
+      "post": {
+        "operationId": "GetImageEmbeddings",
+        "description": "Return the embedding vectors for given images.\nThe method makes a REST API call to the `/images/embeddings` route on the given endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "extra-parameters",
+            "in": "header",
+            "description": "Controls what happens if extra parameters, undefined by the REST API,\nare passed in the JSON request payload.\nThis sets the HTTP request header `extra-parameters`.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "error",
+              "drop",
+              "pass-through"
+            ],
+            "x-ms-enum": {
+              "name": "ExtraParameters",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "error",
+                  "value": "error",
+                  "description": "The service will error if it detected extra parameters in the request payload. This is the service default."
+                },
+                {
+                  "name": "drop",
+                  "value": "drop",
+                  "description": "The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model."
+                },
+                {
+                  "name": "pass_through",
+                  "value": "pass-through",
+                  "description": "The service will pass extra parameters to the back-end AI model."
+                }
+              ]
+            },
+            "x-ms-client-name": "extra_params"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The parameters of the image embeddings request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageEmbeddingsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EmbeddingsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "maximum set image embeddings": {
+            "$ref": "./examples/GetImageEmbeddings_MaximumSet_Gen.json"
+          },
+          "minimum set image embeddings": {
+            "$ref": "./examples/GetImageEmbeddings_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/info": {
+      "get": {
+        "operationId": "GetModelInfo",
+        "description": "Returns information about the AI model.\nThe method makes a REST API call to the `/info` route on the given endpoint.\nThis method will only work when using Serverless API or Managed Compute endpoint.\nIt will not work for GitHub Models endpoint or Azure OpenAI endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModelInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "maximum set model information": {
+            "$ref": "./examples/GetModelInfo_MaximumSet_Gen.json"
+          },
+          "minimum set model information": {
+            "$ref": "./examples/GetModelInfo_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AudioContentFormat": {
+      "type": "string",
+      "description": "A representation of the possible audio formats for audio.",
+      "enum": [
+        "wav",
+        "mp3"
+      ],
+      "x-ms-enum": {
+        "name": "AudioContentFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "wav",
+            "value": "wav",
+            "description": "Specifies audio in WAV format."
+          },
+          {
+            "name": "mp3",
+            "value": "mp3",
+            "description": "Specifies audio in MP3 format."
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "ChatChoice": {
+      "type": "object",
+      "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this chat completions choice."
+        },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "The reason that this chat completions choice completed its generated.",
+          "x-nullable": true
+        },
+        "message": {
+          "$ref": "#/definitions/ChatResponseMessage",
+          "description": "The chat message for a given chat completions prompt."
+        }
+      },
+      "required": [
+        "index",
+        "finish_reason",
+        "message"
+      ]
+    },
+    "ChatCompletions": {
+      "type": "object",
+      "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this chat completions response."
+        },
+        "object": {
+          "type": "string",
+          "description": "The response object type, which is always `chat.completion`.",
+          "enum": [
+            "chat.completion"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model used for the chat completion."
+        },
+        "choices": {
+          "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ChatChoice"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "  Usage information for tokens processed and generated as part of this completions operation."
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "created",
+        "model",
+        "choices",
+        "usage"
+      ]
+    },
+    "ChatCompletionsAudio": {
+      "type": "object",
+      "description": "A representation of the audio generated by the model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "  Unique identifier for the audio response. This value can be used in chat history messages instead of passing \n  the full audio object."
+        },
+        "expires_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) at which the audio piece expires and can't be any longer referenced by its ID in \nmulti-turn conversations.",
+          "x-ms-client-name": "expiresAt"
+        },
+        "data": {
+          "type": "string",
+          "description": "Base64 encoded audio data"
+        },
+        "format": {
+          "$ref": "#/definitions/AudioContentFormat",
+          "description": "The format of the audio content. If format is not provided, it will match the format used in the\ninput audio request."
+        },
+        "transcript": {
+          "type": "string",
+          "description": "The transcript of the audio file."
+        }
+      },
+      "required": [
+        "id",
+        "expires_at",
+        "data",
+        "transcript"
+      ]
+    },
+    "ChatCompletionsModality": {
+      "type": "string",
+      "description": "The modalities that the model is allowed to use for the chat completions response.",
+      "enum": [
+        "text",
+        "audio"
+      ],
+      "x-ms-enum": {
+        "name": "ChatCompletionsModality",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "The model is only allowed to generate text."
+          },
+          {
+            "name": "audio",
+            "value": "audio",
+            "description": "The model is allowed to generate audio."
+          }
+        ]
+      }
+    },
+    "ChatCompletionsNamedToolChoice": {
+      "type": "object",
+      "description": "A tool selection of a specific, named function tool that will limit chat completions to using the named function.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the tool. Currently, only `function` is supported.",
+          "enum": [
+            "function"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "function": {
+          "$ref": "#/definitions/ChatCompletionsNamedToolChoiceFunction",
+          "description": "The function that should be called."
+        }
+      },
+      "required": [
+        "type",
+        "function"
+      ]
+    },
+    "ChatCompletionsNamedToolChoiceFunction": {
+      "type": "object",
+      "description": "A tool selection of a specific, named function tool that will limit chat completions to using the named function.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function that should be called."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ChatCompletionsOptions": {
+      "type": "object",
+      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ChatRequestMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "frequency_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.\nSupported range is [-2, 2].",
+          "default": 0,
+          "minimum": -2,
+          "maximum": 2
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "A value indicating whether chat completions should be streamed for this request."
+        },
+        "presence_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.\nSupported range is [-2, 2].",
+          "default": 0,
+          "minimum": -2,
+          "maximum": 2
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.\nSupported range is [0, 1].",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 1
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.\nSupported range is [0, 1].",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 1
+        },
+        "max_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of tokens to generate.",
+          "minimum": 0
+        },
+        "response_format": {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat",
+          "description": "An object specifying the format that the model must output.\n\nSetting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema.\n\nSetting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\n**Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if `finish_reason=\"length\"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length."
+        },
+        "stop": {
+          "type": "array",
+          "description": "A collection of textual sequences that will end completions generation.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "tools": {
+          "type": "array",
+          "description": "A list of tools the model may request to call. Currently, only functions are supported as a tool. The model\nmay response with a function call request and provide the input arguments in JSON format for that function.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "tool_choice": {
+          "description": "If specified, the model will configure which of the provided tools it can use for the chat completions response.",
+          "x-ms-client-name": "toolChoice"
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed."
+        },
+        "model": {
+          "type": "string",
+          "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
+        },
+        "modalities": {
+          "type": "array",
+          "description": "The modalities that the model is allowed to use for the chat completions response. The default modality\nis `text`. Indicating an unsupported modality combination results in an 422 error.",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsModality"
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": {}
+    },
+    "ChatCompletionsResponseFormat": {
+      "type": "object",
+      "description": "Represents the format that the model must output. Use this to enable JSON mode instead of the default text mode.\nNote that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON\nvia a system or user message.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The response format type to use for chat completions."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ChatCompletionsResponseFormatJsonObject": {
+      "type": "object",
+      "description": "A response format for Chat Completions that restricts responses to emitting valid JSON objects.\nNote that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON\nvia a system or user message.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "json_object"
+    },
+    "ChatCompletionsResponseFormatJsonSchema": {
+      "type": "object",
+      "description": "A response format for Chat Completions that restricts responses to emitting valid JSON objects, with a\nJSON schema specified by the caller.",
+      "properties": {
+        "json_schema": {
+          "$ref": "#/definitions/ChatCompletionsResponseFormatJsonSchemaDefinition",
+          "description": "The definition of the required JSON schema in the response, and associated metadata."
+        }
+      },
+      "required": [
+        "json_schema"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "json_schema"
+    },
+    "ChatCompletionsResponseFormatJsonSchemaDefinition": {
+      "type": "object",
+      "description": "The definition of the required JSON schema in the response, and associated metadata.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The definition of the JSON schema",
+          "additionalProperties": {}
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the response format, used by the AI model to determine how to generate responses in this format."
+        },
+        "strict": {
+          "type": "boolean",
+          "description": "Whether to enable strict schema adherence when generating the output.\nIf set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of\nJSON Schema is supported when `strict` is `true`.",
+          "default": false
+        }
+      },
+      "required": [
+        "name",
+        "schema"
+      ]
+    },
+    "ChatCompletionsResponseFormatText": {
+      "type": "object",
+      "description": "A response format for Chat Completions that emits text responses. This is the default response format.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
+    "ChatCompletionsToolCall": {
+      "type": "object",
+      "description": "A function tool call requested by the AI model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the tool call."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of tool call. Currently, only `function` is supported.",
+          "enum": [
+            "function"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "function": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The details of the function call requested by the AI model."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "function"
+      ]
+    },
+    "ChatCompletionsToolChoicePreset": {
+      "type": "string",
+      "description": "Represents a generic policy for how a chat completions tool may be selected.",
+      "enum": [
+        "auto",
+        "none",
+        "required"
+      ],
+      "x-ms-enum": {
+        "name": "ChatCompletionsToolChoicePreset",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Specifies that the model may either use any of the tools provided in this chat completions request or\ninstead return a standard chat completions response as if no tools were provided."
+          },
+          {
+            "name": "none",
+            "value": "none",
+            "description": "Specifies that the model should not respond with a tool call and should instead provide a standard chat\ncompletions response. Response content may still be influenced by the provided tool definitions."
+          },
+          {
+            "name": "required",
+            "value": "required",
+            "description": "Specifies that the model should respond with a call to one or more tools."
+          }
+        ]
+      }
+    },
+    "ChatCompletionsToolDefinition": {
+      "type": "object",
+      "description": "The definition of a chat completions tool that can call a function.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the tool. Currently, only `function` is supported.",
+          "enum": [
+            "function"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "function": {
+          "$ref": "#/definitions/FunctionDefinition",
+          "description": "The function definition details for the function tool."
+        }
+      },
+      "required": [
+        "type",
+        "function"
+      ]
+    },
+    "ChatMessageAudioContentItem": {
+      "type": "object",
+      "description": "A structured chat content item containing an audio reference.",
+      "properties": {
+        "audio_url": {
+          "$ref": "#/definitions/ChatMessageAudioUrl",
+          "description": "An internet location, which must be accessible to the model, from which the audio may be retrieved.",
+          "x-ms-client-name": "audioUrl"
+        }
+      },
+      "required": [
+        "audio_url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "audio_url"
+    },
+    "ChatMessageAudioUrl": {
+      "type": "object",
+      "description": "An internet location from which the model may retrieve an audio.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the audio."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "ChatMessageContentItem": {
+      "type": "object",
+      "description": "An abstract representation of a structured content item within a chat message.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The discriminated object type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ChatMessageImageContentItem": {
+      "type": "object",
+      "description": "A structured chat content item containing an image reference.",
+      "properties": {
+        "image_url": {
+          "$ref": "#/definitions/ChatMessageImageUrl",
+          "description": "An internet location, which must be accessible to the model,from which the image may be retrieved.",
+          "x-ms-client-name": "imageUrl"
+        }
+      },
+      "required": [
+        "image_url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "image_url"
+    },
+    "ChatMessageImageDetailLevel": {
+      "type": "string",
+      "description": "A representation of the possible image detail levels for image-based chat completions message content.",
+      "enum": [
+        "auto",
+        "low",
+        "high"
+      ],
+      "x-ms-enum": {
+        "name": "ChatMessageImageDetailLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Specifies that the model should determine which detail level to apply using heuristics like image size."
+          },
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Specifies that image evaluation should be constrained to the 'low-res' model that may be faster and consume fewer\ntokens but may also be less accurate for highly detailed images."
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "Specifies that image evaluation should enable the 'high-res' model that may be more accurate for highly detailed\nimages but may also be slower and consume more tokens."
+          }
+        ]
+      }
+    },
+    "ChatMessageImageUrl": {
+      "type": "object",
+      "description": "An internet location from which the model may retrieve an image.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the image."
+        },
+        "detail": {
+          "$ref": "#/definitions/ChatMessageImageDetailLevel",
+          "description": "The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and\naccuracy."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "ChatMessageInputAudio": {
+      "type": "object",
+      "description": "The details of an audio chat message content part.",
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "Base64 encoded audio data"
+        },
+        "format": {
+          "$ref": "#/definitions/AudioContentFormat",
+          "description": "The audio format of the audio content."
+        }
+      },
+      "required": [
+        "data",
+        "format"
+      ]
+    },
+    "ChatMessageInputAudioContentItem": {
+      "type": "object",
+      "description": "A structured chat content item containing an audio content.",
+      "properties": {
+        "format": {
+          "$ref": "#/definitions/AudioContentFormat",
+          "description": "The audio format of the audio reference."
+        }
+      },
+      "required": [
+        "format"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio"
+    },
+    "ChatMessageTextContentItem": {
+      "type": "object",
+      "description": "A structured chat content item containing plain text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The content of the message."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
+    "ChatRequestAssistantMessage": {
+      "type": "object",
+      "description": "A request chat message representing response or action from the assistant.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message."
+        },
+        "tool_calls": {
+          "type": "array",
+          "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        },
+        "audio": {
+          "$ref": "#/definitions/ChatRequestAudioReference",
+          "description": "  The audio generated by a previous response in a multi-turn conversation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
+    },
+    "ChatRequestAudioReference": {
+      "type": "object",
+      "description": "A reference to an audio response generated by the model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "  Unique identifier for the audio response. This value corresponds to the id of a previous audio completion."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ChatRequestMessage": {
+      "type": "object",
+      "description": "An abstract representation of a chat message as provided in a request.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with this message."
+        }
+      },
+      "discriminator": "role",
+      "required": [
+        "role"
+      ]
+    },
+    "ChatRequestSystemMessage": {
+      "type": "object",
+      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The contents of the system message."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "ChatRequestToolMessage": {
+      "type": "object",
+      "description": "A request chat message representing requested output from a configured tool.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message."
+        },
+        "tool_call_id": {
+          "type": "string",
+          "description": "The ID of the tool call resolved by the provided content.",
+          "x-ms-client-name": "toolCallId"
+        }
+      },
+      "required": [
+        "tool_call_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "tool"
+    },
+    "ChatRequestUserMessage": {
+      "type": "object",
+      "description": "A request chat message representing user input to the assistant.",
+      "properties": {
+        "content": {
+          "description": "The contents of the user message, with available input types varying by selected model."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
+    },
+    "ChatResponseMessage": {
+      "type": "object",
+      "description": "A representation of a chat message as received in a response.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with the message."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "tool_calls": {
+          "type": "array",
+          "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        },
+        "audio": {
+          "$ref": "#/definitions/ChatCompletionsAudio",
+          "description": "  The audio generated by the model as a response to the messages if the model is configured to generate audio."
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ]
+    },
+    "ChatRole": {
+      "type": "string",
+      "description": "A description of the intended purpose of a message within a chat completions interaction.",
+      "enum": [
+        "system",
+        "developer",
+        "user",
+        "assistant",
+        "tool"
+      ],
+      "x-ms-enum": {
+        "name": "ChatRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "system",
+            "value": "system",
+            "description": "The role that instructs or sets the behavior of the assistant."
+          },
+          {
+            "name": "developer",
+            "value": "developer",
+            "description": "The role that provides instructions to the model prioritized ahead of user messages."
+          },
+          {
+            "name": "user",
+            "value": "user",
+            "description": "The role that provides input for chat completions."
+          },
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "The role that provides responses to system-instructed, user-prompted input."
+          },
+          {
+            "name": "tool",
+            "value": "tool",
+            "description": "The role that represents extension tool activity within a chat completions operation."
+          }
+        ]
+      }
+    },
+    "CompletionsFinishReason": {
+      "type": "string",
+      "description": "Representation of the manner in which a completions response concluded.",
+      "enum": [
+        "stop",
+        "length",
+        "content_filter",
+        "tool_calls"
+      ],
+      "x-ms-enum": {
+        "name": "CompletionsFinishReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "stopped",
+            "value": "stop",
+            "description": "Completions ended normally and reached its end of token generation."
+          },
+          {
+            "name": "tokenLimitReached",
+            "value": "length",
+            "description": "Completions exhausted available token limits before generation could complete."
+          },
+          {
+            "name": "contentFiltered",
+            "value": "content_filter",
+            "description": "Completions generated a response that was identified as potentially sensitive per content\nmoderation policies."
+          },
+          {
+            "name": "toolCalls",
+            "value": "tool_calls",
+            "description": "Completion ended with the model calling a provided tool for output."
+          }
+        ]
+      }
+    },
+    "CompletionsUsage": {
+      "type": "object",
+      "description": "Representation of the token counts processed for a completions request.\nCounts consider all tokens across prompts, choices, choice alternates, best_of generations, and\nother consumers.",
+      "properties": {
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens generated across all completions emissions."
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens in the provided prompts for the completions request."
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens processed for the completions request and response."
+        },
+        "completion_tokens_details": {
+          "$ref": "#/definitions/CompletionsUsageDetails",
+          "description": "Breakdown of tokens used in a completion."
+        },
+        "prompt_tokens_details": {
+          "$ref": "#/definitions/PromptUsageDetails",
+          "description": "Breakdown of tokens used in the prompt/chat history."
+        }
+      },
+      "required": [
+        "completion_tokens",
+        "prompt_tokens",
+        "total_tokens"
+      ]
+    },
+    "CompletionsUsageDetails": {
+      "type": "object",
+      "description": "A breakdown of tokens used in a completion.",
+      "properties": {
+        "audio_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to audio input."
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens processed for the completions request and response."
+        }
+      },
+      "required": [
+        "audio_tokens",
+        "total_tokens"
+      ]
+    },
+    "EmbeddingEncodingFormat": {
+      "type": "string",
+      "description": "Specifies the types of embeddings to generate. Compressed embeddings types like `uint8`, `int8`, `ubinary` and \n`binary`, may reduce storage costs without sacrificing the integrity of the data. Returns a 422 error if the\nmodel doesn't support the value or parameter. Read the model's documentation to know the values supported by\nthe your model.",
+      "enum": [
+        "base64",
+        "binary",
+        "float",
+        "int8",
+        "ubinary",
+        "uint8"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingEncodingFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "base64",
+            "value": "base64",
+            "description": "Get back binary representation of the embeddings encoded as Base64 string. OpenAI Python library retrieves \nembeddings from the API as encoded binary data, rather than using intermediate decimal representations as is \nusually done."
+          },
+          {
+            "name": "binary",
+            "value": "binary",
+            "description": "Get back signed binary embeddings"
+          },
+          {
+            "name": "float",
+            "value": "float",
+            "description": "Get back full precision embeddings"
+          },
+          {
+            "name": "int8",
+            "value": "int8",
+            "description": "Get back signed int8 embeddings"
+          },
+          {
+            "name": "ubinary",
+            "value": "ubinary",
+            "description": "Get back unsigned binary embeddings"
+          },
+          {
+            "name": "uint8",
+            "value": "uint8",
+            "description": "Get back unsigned int8 embeddings"
+          }
+        ]
+      }
+    },
+    "EmbeddingInputType": {
+      "type": "string",
+      "description": "Represents the input types used for embedding search.",
+      "enum": [
+        "text",
+        "query",
+        "document"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingInputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Indicates the input is a general text input."
+          },
+          {
+            "name": "query",
+            "value": "query",
+            "description": "Indicates the input represents a search query to find the most relevant documents in your vector database."
+          },
+          {
+            "name": "document",
+            "value": "document",
+            "description": "Indicates the input represents a document that is stored in a vector database."
+          }
+        ]
+      }
+    },
+    "EmbeddingItem": {
+      "type": "object",
+      "description": "Representation of a single embeddings relatedness comparison.",
+      "properties": {
+        "embedding": {
+          "type": "array",
+          "description": "List of embedding values for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input. Or a base64 encoded string of the embedding vector.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the prompt to which the EmbeddingItem corresponds."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type of this embeddings item. Will always be `embedding`.",
+          "enum": [
+            "embedding"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "embedding",
+        "index",
+        "object"
+      ]
+    },
+    "EmbeddingsOptions": {
+      "type": "object",
+      "description": "The configuration information for an embeddings request.",
+      "properties": {
+        "input": {
+          "type": "array",
+          "description": "Input text to embed, encoded as a string or array of tokens.\nTo embed multiple inputs in a single request, pass an array\nof strings or array of token arrays.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "encoding_format": {
+          "$ref": "#/definitions/EmbeddingEncodingFormat",
+          "description": "Optional. The desired format for the returned embeddings."
+        },
+        "input_type": {
+          "$ref": "#/definitions/EmbeddingInputType",
+          "description": "Optional. The type of the input.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "model": {
+          "type": "string",
+          "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
+        }
+      },
+      "required": [
+        "input"
+      ],
+      "additionalProperties": {}
+    },
+    "EmbeddingsResult": {
+      "type": "object",
+      "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the embeddings result."
+        },
+        "data": {
+          "type": "array",
+          "description": "Embedding values for the prompts submitted in the request.",
+          "items": {
+            "$ref": "#/definitions/EmbeddingItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/EmbeddingsUsage",
+          "description": "Usage counts for tokens input using the embeddings API."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type of the embeddings result. Will always be `list`.",
+          "enum": [
+            "list"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The model ID used to generate this result."
+        }
+      },
+      "required": [
+        "id",
+        "data",
+        "usage",
+        "object",
+        "model"
+      ]
+    },
+    "EmbeddingsUsage": {
+      "type": "object",
+      "description": "Measurement of the amount of tokens used in this request and response.",
+      "properties": {
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tokens in the request."
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of tokens transacted in this request/response. Should equal the\nnumber of tokens in the request."
+        }
+      },
+      "required": [
+        "prompt_tokens",
+        "total_tokens"
+      ]
+    },
+    "ExtraParameters": {
+      "type": "string",
+      "description": "Controls what happens if extra parameters, undefined by the REST API, are passed in the JSON request payload.",
+      "enum": [
+        "error",
+        "drop",
+        "pass-through"
+      ],
+      "x-ms-enum": {
+        "name": "ExtraParameters",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "error",
+            "value": "error",
+            "description": "The service will error if it detected extra parameters in the request payload. This is the service default."
+          },
+          {
+            "name": "drop",
+            "value": "drop",
+            "description": "The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model."
+          },
+          {
+            "name": "pass_through",
+            "value": "pass-through",
+            "description": "The service will pass extra parameters to the back-end AI model."
+          }
+        ]
+      }
+    },
+    "FunctionCall": {
+      "type": "object",
+      "description": "The name and arguments of a function that should be called, as generated by the model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to call."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments to call the function with, as generated by the model in JSON format.\nNote that the model does not always generate valid JSON, and may hallucinate parameters\nnot defined by your function schema. Validate the arguments in your code before calling\nyour function."
+        }
+      },
+      "required": [
+        "name",
+        "arguments"
+      ]
+    },
+    "FunctionDefinition": {
+      "type": "object",
+      "description": "The definition of a caller-specified function that chat completions may invoke in response to matching user input.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to be called."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The parameters the function accepts, described as a JSON Schema object.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ImageEmbeddingInput": {
+      "type": "object",
+      "description": "Represents an image with optional text.",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "The input image encoded in base64 string as a data URL. Example: `data:image/{format};base64,{data}`."
+        },
+        "text": {
+          "type": "string",
+          "description": "Optional. The text input to feed into the model (like DINO, CLIP).\nReturns a 422 error if the model doesn't support the value or parameter."
+        }
+      },
+      "required": [
+        "image"
+      ]
+    },
+    "ImageEmbeddingsOptions": {
+      "type": "object",
+      "description": "The configuration information for an image embeddings request.",
+      "properties": {
+        "input": {
+          "type": "array",
+          "description": "Input image to embed. To embed multiple inputs in a single request, pass an array.\nThe input must not exceed the max input tokens for the model.",
+          "items": {
+            "$ref": "#/definitions/ImageEmbeddingInput"
+          },
+          "x-ms-identifiers": []
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "encoding_format": {
+          "$ref": "#/definitions/EmbeddingEncodingFormat",
+          "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "input_type": {
+          "$ref": "#/definitions/EmbeddingInputType",
+          "description": "Optional. The type of the input.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "model": {
+          "type": "string",
+          "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
+        }
+      },
+      "required": [
+        "input"
+      ],
+      "additionalProperties": {}
+    },
+    "ModelInfo": {
+      "type": "object",
+      "description": "Represents some basic information about the AI model.",
+      "properties": {
+        "model_name": {
+          "type": "string",
+          "description": "The name of the AI model. For example: `Phi21`"
+        },
+        "model_type": {
+          "$ref": "#/definitions/ModelType",
+          "description": "The type of the AI model. A Unique identifier for the profile."
+        },
+        "model_provider_name": {
+          "type": "string",
+          "description": "The model provider name. For example: `Microsoft Research`"
+        }
+      },
+      "required": [
+        "model_name",
+        "model_type",
+        "model_provider_name"
+      ]
+    },
+    "ModelType": {
+      "type": "string",
+      "description": "The type of AI model",
+      "enum": [
+        "embeddings",
+        "chat-completion"
+      ],
+      "x-ms-enum": {
+        "name": "ModelType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "embeddings",
+            "value": "embeddings",
+            "description": "A model capable of generating embeddings from a text"
+          },
+          {
+            "name": "chat_completion",
+            "value": "chat-completion",
+            "description": "A model capable of taking chat-formatted messages and generate responses"
+          }
+        ]
+      }
+    },
+    "PromptUsageDetails": {
+      "type": "object",
+      "description": "A breakdown of tokens used in the prompt/chat history.",
+      "properties": {
+        "audio_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to audio input."
+        },
+        "cached_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens cached."
+        }
+      },
+      "required": [
+        "audio_tokens",
+        "cached_tokens"
+      ]
+    },
+    "StreamingChatChoiceUpdate": {
+      "type": "object",
+      "description": "Represents an update to a single prompt completion when the service is streaming updates \nusing Server Sent Events (SSE).\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this chat completions choice."
+        },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "The reason that this chat completions choice completed its generated.",
+          "x-nullable": true
+        },
+        "delta": {
+          "$ref": "#/definitions/StreamingChatResponseMessageUpdate",
+          "description": "An update to the chat message for a given chat completions prompt."
+        }
+      },
+      "required": [
+        "index",
+        "finish_reason",
+        "delta"
+      ]
+    },
+    "StreamingChatCompletionsUpdate": {
+      "type": "object",
+      "description": "Represents a response update to a chat completions request, when the service is streaming updates \nusing Server Sent Events (SSE).\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this chat completions response."
+        },
+        "object": {
+          "type": "string",
+          "description": "The response object type, which is always `chat.completion`.",
+          "enum": [
+            "chat.completion"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model used for the chat completion."
+        },
+        "choices": {
+          "type": "array",
+          "description": "An update to the collection of completion choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/StreamingChatChoiceUpdate"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "created",
+        "model",
+        "choices"
+      ]
+    },
+    "StreamingChatResponseMessageUpdate": {
+      "type": "object",
+      "description": "A representation of a chat message update as received in a streaming response.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with the message. If present, should always be 'assistant'"
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the message."
+        },
+        "tool_calls": {
+          "type": "array",
+          "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "items": {
+            "$ref": "#/definitions/StreamingChatResponseToolCallUpdate"
+          },
+          "x-ms-client-name": "toolCalls"
+        }
+      }
+    },
+    "StreamingChatResponseToolCallUpdate": {
+      "type": "object",
+      "description": "An update to the function tool call information requested by the AI model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the tool call."
+        },
+        "function": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "Updates to the function call requested by the AI model."
+        }
+      },
+      "required": [
+        "id",
+        "function"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
