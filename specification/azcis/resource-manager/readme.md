@@ -24,7 +24,6 @@ input-file:
   - Microsoft.AzureCis/preview/2023-08-22-preview/environment.json
   - Microsoft.AzureCis/preview/2023-08-22-preview/genevaActions.json
   - Microsoft.AzureCis/preview/2023-08-22-preview/plannedQuota.json
-  - Microsoft.AzureCis/preview/2023-08-22-preview/pav2.json
 ```
 
 ### Tag: 2023-08-22
@@ -48,7 +47,6 @@ input-file:
   - Microsoft.AzureCis/preview/2024-06-24-preview/dscm.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/environment.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/genevaActions.json
-  - Microsoft.AzureCis/preview/2024-06-24-preview/pav2.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/plannedQuota.json
 ```
 
