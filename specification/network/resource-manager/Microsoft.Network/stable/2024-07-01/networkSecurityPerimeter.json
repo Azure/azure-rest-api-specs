@@ -148,6 +148,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "NetworkSecurityPerimeterDelete": {
             "$ref": "./examples/NetworkSecurityPerimeterDelete.json"
@@ -715,6 +718,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "NspAssociationPut": {
             "$ref": "./examples/NspAssociationPut.json"
@@ -751,6 +757,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "NspAssociationDelete": {
             "$ref": "./examples/NspAssociationDelete.json"
@@ -1522,6 +1531,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "required": true,
           "items": {
             "$ref": "#/definitions/NetworkSecurityPerimeter"
           },
@@ -1604,6 +1614,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "required": true,
           "items": {
             "$ref": "#/definitions/NspProfile"
           },
@@ -1668,6 +1679,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "required": true,
           "items": {
             "$ref": "#/definitions/NspAccessRule"
           },
@@ -1820,6 +1832,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "required": true,
           "items": {
             "$ref": "#/definitions/NspAssociation"
           },
@@ -1908,6 +1921,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "required": true,
           "items": {
             "$ref": "#/definitions/PerimeterAssociableResource"
           },
@@ -2005,6 +2019,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "required": true,
           "items": {
             "$ref": "#/definitions/NspLink"
           },
@@ -2120,6 +2135,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "required": true,
           "items": {
             "$ref": "#/definitions/NspLinkReference"
           },
@@ -2214,7 +2230,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": false,
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspLoggingConfigurationProperties",
           "description": "Properties of the NSP logging configuration."
         }
@@ -2248,6 +2264,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "required": true,
           "items": {
             "$ref": "#/definitions/NspLoggingConfiguration"
           },
