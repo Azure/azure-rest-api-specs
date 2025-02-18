@@ -1,0 +1,39 @@
+parameters:
+  "service-dir":
+    default: "sdk/microsoft.app"
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DynamicSessions.json"
+  "@azure-tools/typespec-python":
+    package-dir: "microsoft-app-dynamicsessions"
+    package-name: "{package-dir}"
+    package-mode: dataplane
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Microsoft.App.DynamicSessions"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "microsoft-app-dynamicsessions-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/microsoft-app-dynamicsessions-rest"
+      description: "Microsoft.App Dynamic Sessions Service"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "microsoft-app-dynamicsessions"
+    namespace: com.microsoft.app.dynamicsessions
+    flavor: azure
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
