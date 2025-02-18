@@ -299,80 +299,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "PgsqlSites_Update",
-        "tags": [
-          "PgsqlSites"
-        ],
-        "description": "Patch the PGSQLSites resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "The name of Site",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "Clouds patch payload.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PgsqlSite"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PgsqlSite"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PgsqlSites_Update_MaximumSet": {
-            "$ref": "./examples/PgsqlSites_Update_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
       "delete": {
         "operationId": "PgsqlSites_Delete",
         "tags": [
@@ -645,7 +571,7 @@
             "description": "Clouds patch payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PgsqlInstanceResourcePatch"
+              "$ref": "#/definitions/PgsqlInstanceResourcePatchProperties"
             }
           }
         ],
@@ -1009,7 +935,7 @@
             "description": "Clouds patch payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PgsqlDatabaseResourcePatch"
+              "$ref": "#/definitions/PgsqlDatabase"
             }
           }
         ],
@@ -2417,27 +2343,6 @@
         }
       }
     },
-    "PgsqlDatabaseResourcePatch": {
-      "type": "object",
-      "description": "Object containing tags updates for patch operations.",
-      "properties": {
-        "tags": {
-          "type": "array",
-          "description": "Resource tags.",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/PgsqlDatabaseProperties",
-          "description": "The PGSQLDatabase resource definition."
-        }
-      }
-    },
     "PgsqlInstance": {
       "type": "object",
       "description": "The PGSQLInstance resource definition.",
@@ -2614,13 +2519,115 @@
         "portNumber"
       ]
     },
-    "PgsqlInstanceResourcePatch": {
+    "PgsqlInstanceResourcePatchProperties": {
       "type": "object",
-      "description": "Object containing tags updates for patch operations.",
+      "description": "PGSQL Server properties",
       "properties": {
+        "hostIp": {
+          "type": "array",
+          "description": "The Server IP/host name.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "machineId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "discovery Machine Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OffAzure/serverSites/machines"
+              }
+            ]
+          }
+        },
+        "pgsqlVersion": {
+          "type": "string",
+          "description": "The pgsql server version."
+        },
+        "numberOfDatabase": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of database."
+        },
+        "supportStatus": {
+          "$ref": "#/definitions/SupportStatus",
+          "description": "pgsql version support status."
+        },
+        "edition": {
+          "$ref": "#/definitions/Edition",
+          "description": "PGSQL instance edition."
+        },
+        "endOfSupportDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Time when pgsql instance version support end."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "collations": {
+          "type": "array",
+          "description": "The list of collations in the database.",
+          "items": {
+            "$ref": "#/definitions/Collation"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "locale",
+            "collationProvider",
+            "isDeterministic"
+          ]
+        },
+        "serverParameters": {
+          "type": "array",
+          "description": "Dictionary of server parameters for the instance",
+          "items": {
+            "$ref": "#/definitions/ServerParameter"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "key",
+            "value"
+          ]
+        },
+        "tableSpaces": {
+          "type": "array",
+          "description": "List of tablespaces in the instance.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nonDefaultTableSpaces": {
+          "type": "array",
+          "description": "List of non-default tablespaces in the instance.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageSizeInMb": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets storage size of PGSQL instance."
+        },
+        "maxConnections": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of connections allowed in the instance"
+        },
         "tags": {
           "type": "array",
-          "description": "Resource tags.",
+          "description": "Resource tags",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -2628,10 +2635,6 @@
             "key",
             "value"
           ]
-        },
-        "properties": {
-          "$ref": "#/definitions/PgsqlInstanceProperties",
-          "description": "The PGSQLInstance resource definition."
         }
       }
     },

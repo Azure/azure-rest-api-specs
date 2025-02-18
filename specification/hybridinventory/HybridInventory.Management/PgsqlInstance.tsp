@@ -43,7 +43,7 @@ interface PgsqlInstances {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     PgsqlInstance,
-    PatchModel = PgsqlInstanceResourcePatch
+    PgsqlInstanceResourcePatchProperties
   >;
 
   /**

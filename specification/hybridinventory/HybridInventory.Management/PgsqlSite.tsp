@@ -35,11 +35,11 @@ interface PgsqlSites {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PgsqlSite>;
 
-  /**
-   * Patch the PGSQLSites resource.
-   */
-  @parameterVisibility
-  update is ArmResourcePatchAsync<PgsqlSite, PgsqlSiteProperties>;
+  // /**
+  //  * Patch the PGSQLSites resource.
+  //  */
+  // @parameterVisibility
+  // update is ArmResourcePatchAsync<PgsqlSite, PgsqlSiteProperties>;
 
   /**
    * Deletes the PGSQLSites resource.
@@ -77,4 +77,4 @@ interface PgsqlSites {
 @@doc(PgsqlSites.createOrUpdate::parameters.resource,
   "The machines to add to the assessment"
 );
-@@doc(PgsqlSites.update::parameters.properties, "Clouds patch payload.");
+// @@doc(PgsqlSites.update::parameters.properties, "Clouds patch payload.");

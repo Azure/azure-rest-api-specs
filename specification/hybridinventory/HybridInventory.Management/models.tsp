@@ -548,21 +548,21 @@ model Resource {
   systemData?: SystemData;
 }
 
-// /**
-//  * Object containing tags updates for patch operations.
-//  */
-// model PgsqlSitesResourcePatch {
-//   /**
-//    * Resource tags.
-//    */
-//   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
-//   tags?: Tag[];
+/**
+ * Object containing tags updates for patch operations.
+ */
+model PgsqlSitesResourcePatch {
+  /**
+   * Resource tags.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  tags?: Tag[];
 
-//   /**
-//    * The PGSQLSites resource definition.
-//    */
-//   properties?: PgsqlSiteProperties;
-// }
+  /**
+   * The PGSQLSites resource definition.
+   */
+  properties?: PgsqlSiteProperties;
+}
 
 /**
  * List of Servers.
@@ -596,6 +596,102 @@ model PgsqlInstanceProperties is AzureResourceProperties {
    * PGSQL Server port number
    */
   portNumber: int64;
+
+  /**
+   * The pgsql server version.
+   */
+  pgsqlVersion?: string;
+
+  /**
+   * The number of database.
+   */
+  numberOfDatabase?: int64;
+
+  /**
+   * pgsql version support status.
+   */
+  supportStatus?: SupportStatus;
+
+  /**
+   * PGSQL instance edition.
+   */
+  edition?: Edition;
+
+  /**
+   * Time when pgsql instance version support end.
+   */
+  endOfSupportDate?: plainDate;
+
+  /**
+   * The list of errors.
+   */
+  errors?: Error[];
+
+  /**
+   * The number of errors.
+   */
+  errorCount?: int64;
+
+  /**
+   * The list of collations in the database.
+   */
+  @OpenAPI.extension(
+    "x-ms-identifiers",
+    ["name", "locale", "collationProvider", "isDeterministic"]
+  )
+  collations?: Collation[];
+
+  /**
+   * Dictionary of server parameters for the instance
+   */
+  @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  serverParameters?: ServerParameter[];
+
+  /**
+   * List of tablespaces in the instance.
+   */
+  tableSpaces?: string[];
+
+  /**
+   * List of non-default tablespaces in the instance.
+   */
+  nonDefaultTableSpaces?: string[];
+
+  /**
+   * Gets or sets storage size of PGSQL instance.
+   */
+  storageSizeInMb?: float32;
+
+  /**
+   * The maximum number of connections allowed in the instance
+   */
+  maxConnections?: int64;
+
+  /**
+   * Resource tags
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  tags?: Tag[];
+}
+
+/**
+ * PGSQL Server properties
+ */
+model PgsqlInstanceResourcePatchProperties {
+  /**
+   * The Server IP/host name.
+   */
+  hostIp?: string[];
+
+  /**
+   * discovery Machine Id
+   */
+  machineId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.OffAzure/serverSites/machines";
+    }
+  ]>;
 
   /**
    * The pgsql server version.
@@ -760,11 +856,6 @@ model PgsqlInstanceResourcePatch {
    */
   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
   tags?: Tag[];
-
-  /**
-   * The PGSQLInstance resource definition.
-   */
-  properties?: PgsqlInstanceProperties;
 }
 
 /**
@@ -855,15 +946,10 @@ model Extension {
  */
 model PgsqlDatabaseResourcePatch {
   /**
-   * Resource tags.
+   * Resource tags
    */
   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
   tags?: Tag[];
-
-  /**
-   * The PGSQLDatabase resource definition.
-   */
-  properties?: PgsqlDatabaseProperties;
 }
 
 /**
