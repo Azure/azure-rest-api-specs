@@ -51,7 +51,7 @@ union ResourceType {
   Database: "Database",
 
   /** Elastic pool resource type. */
-  ElasticPool: "ElasticPool",
+  Pool: "Pool",
 }
 
 /**
@@ -348,10 +348,10 @@ model DestinationTierOverride {
   resourceType: ResourceType;
 
   /**
-   * Destination tier.
+   * Destination tier name.
    */
   @visibility("read", "create")
-  destinationTier: string;
+  tierName: string;
 
   /**
    * Resource name.
