@@ -5,7 +5,7 @@
  *   isFullCompatible: false
  *   guessResourceKey: false
  * Version: 0.10.9
- * Date: 2025-02-18T06:33:40.891Z
+ * Date: 2025-02-18T06:43:21.195Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -46,5 +46,3 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_09_30_preview: "2024-09-30-preview",
 }
-
-interface Operations extends Azure.ResourceManager.Operations {}
