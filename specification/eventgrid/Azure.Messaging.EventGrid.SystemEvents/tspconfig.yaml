@@ -33,12 +33,14 @@ options:
     api-version: "2018-01-01"
   "@azure-tools/typespec-ts":
     generateMetadata: true
-    generateTest: true
+    generateTest: false
     azureSdkForJs: true
-    package-dir: "eventgrid-system-events"
+    experimentalExtensibleEnums: true
+    package-dir: "eventgrid-systemevents"
     packageDetails:
-      name: "@azure/eventgrid-system-events"
+      name: "@azure/eventgrid-systemevents"
     flavor: azure
+    isModularLibrary: true
   "@azure-tools/typespec-go":
     module: "github.com/Azure/azure-sdk-for-go/sdk/messaging/eventgrid/azsystemevents"
     module-version: "0.0.1"
