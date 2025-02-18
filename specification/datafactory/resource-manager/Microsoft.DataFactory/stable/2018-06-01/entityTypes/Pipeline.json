@@ -8574,6 +8574,11 @@
           "required": [
             "logDestination"
           ]
+        },
+        "returnMultistatementResult": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Enable to retrieve result sets from multiple SQL statements and the number of rows affected by the DML statement. Supported connector: SnowflakeV2. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -9175,6 +9180,11 @@
           "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object",
           "x-ms-format": "dfe-bool"
+        },
+        "pageSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Page size for each http request, too large pageSize will caused timeout, default 300,000. Type: integer (or Expression with resultType integer)."
         }
       }
     },

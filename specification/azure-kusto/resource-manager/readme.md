@@ -28,7 +28,19 @@ These are the global settings for the Kusto API.
 title: KustoManagementClient
 description: 'The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.'
 openapi-type: arm
-tag: package-2023-08
+tag: package-2024-04
+```
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.Kusto/stable/2024-04-13/kusto.json
+suppressions:
+  - code: PostResponseCodes
+    from: kusto.json
+    reason: Long-running POST operations have a 200 return code without a schema. Keeping internal consistency within the service APIs.
 ```
 ### Tag: package-2023-08
 
@@ -251,20 +263,6 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Kusto
-  output-folder: $(csharp-sdks-folder)/Kusto/Management.Kusto/Generated
-  clear-output-folder: true
 ```
 
 ## Java

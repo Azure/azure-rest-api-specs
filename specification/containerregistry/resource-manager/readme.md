@@ -26,9 +26,27 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-11-preview
+tag: package-2024-11-preview
 ```
 
+### Tag: package-2024-11-preview-only
+
+These settings apply only when `--tag=package-2024-11-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-preview-only'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2024-11-01-preview/containerregistry.json
+```
+
+### Tag: package-2024-11-preview
+
+These settings apply only when `--tag=package-2024-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2024-11-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
 
 ### Tag: package-2023-11-preview-only
 
@@ -414,25 +432,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_registry']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  # stop the simplifier from making Task conflict:
-  skip-simplifier-on-namespace:
-    - System.Threading.Tasks
-  # last generated using AutoRest.1.0.0-Nightly20170212 with commit 3b0b26b4b6e3bc5e7cf3610b0866d310abb5b814
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ContainerRegistry
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/containerregistry/Microsoft.Azure.Management.ContainerRegistry/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python

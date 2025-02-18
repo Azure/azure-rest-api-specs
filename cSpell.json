@@ -1,9 +1,10 @@
 {
-    "version": "0.1",
+    "version": "0.2",
     "language": "en",
     "words": [
         "authnotrequired",
         "azsdk",
+        "communicationservices",
         "confidentialledger",
         "Creds",
         "fixdate",
@@ -13,6 +14,7 @@
         "subchannel",
         "umls"
     ],
+    "allowCompoundWords": true,
     "dictionaryDefinitions": [
         {
             "name": "custom-words",
@@ -24,9 +26,12 @@
         "teh"
     ],
     "ignorePaths": [
-        "node_modules/**",
         "**/examples/**",
-        "**/package-lock.json"
+        "**/package-lock.json",
+        "cSpell.json",
+        "eng/**",
+        "node_modules/**",
+        "custom-words.txt"
     ],
     "ignoreRegExpList": [
         "v\\d",
@@ -48,6 +53,13 @@
     ],
     "overrides": [
         {
+            "filename": "**/specification/playwrighttesting/**/*",
+            "words": [
+                "microsoftplaywrighttesting",
+                "playwrighttesting"
+            ]
+        },
+        {
             "filename": "**/specification/azurearcdata/resource-manager/Microsoft.AzureArcData/**/*.json",
             "words": [
                 "azurearcdata"
@@ -60,12 +72,6 @@
                 "SSAS",
                 "SSIS",
                 "PBIRS"
-            ]
-        },
-        {
-            "filename": "**/specification/batch/**/*.json",
-            "words": [
-                "TVMs"
             ]
         },
         {
@@ -211,7 +217,8 @@
         {
             "filename": "**/specification/containerinstance/resource-manager/Microsoft.ContainerInstance/preview/**/containerInstance.json",
             "words": [
-                "ngroups"
+                "ngroups",
+                "TransactionOptimized"
             ]
         },
         {
@@ -223,7 +230,9 @@
                 "PDBs",
                 "undrainable",
                 "Undrainable",
-                "acnstls"
+                "acnstls",
+                "kubeletIdentity",
+                "kubeletidentity"
             ]
         },
         {
@@ -327,38 +336,38 @@
             ]
         },
         {
-            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/preview/**/DistributedAvailabilityGroups.json",
+            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/**/DistributedAvailabilityGroups.json",
             "words": [
                 "freemium"
             ]
         },
 		{
-            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/preview/**/ManagedInstances.json",
+            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/**/ManagedInstances.json",
             "words": [
                 "freemium"
             ]
         },
 		{
-            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/preview/**/ServerTrustCertificates.json",
+            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/**/ServerTrustCertificates.json",
             "words": [
                 "freemium"
             ]
         },
 		{
-            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/preview/**/ManagedInstanceDtcs.json",
+            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/**/ManagedInstanceDtcs.json",
             "words": [
                 "msdtcdns",
                 "msdtc's"
             ]
         },
 		{
-            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/preview/**/TimeZones.json",
+            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/**/TimeZones.json",
             "words": [
                 "freemium"
             ]
         },
 		{
-            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/preview/**/ElasticPools.json",
+            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/**/ElasticPools.json",
             "words": [
                 "PRMS"
             ]
@@ -405,6 +414,34 @@
             "filename": "**/specification/keyvault/data-plane/Microsoft.KeyVault/**/keyvault.json",
             "words": [
                 "Regenerte"
+            ]
+        },
+        {
+            "filename": "**/specification/keyvault/resource-manager/readme.go.md",
+            "words": [
+                "modelerfour"
+            ]
+        },
+        {
+            "filename": "**/specification/keyvault/Security.KeyVault.Administration/README.md",
+            "words": [
+                "subservices",
+                "subservice",
+                "renamings",
+                "tspconfig",
+                "backuprestore"
+            ]
+        },
+        {
+            "filename": "**/specification/keyvault/Security.KeyVault.Administration/tspconfig.yaml",
+            "words": [
+                "subpackage"
+            ]
+        },
+        {
+            "filename": "**/specification/keyvault/Security.KeyVault.BackupRestore/tspconfig.yaml",
+            "words": [
+                "backuprestore"
             ]
         },
         {
@@ -471,7 +508,9 @@
             "filename": "**/specification/netapp/**/*.json",
             "words": [
                 "SVMs",
-                "kibibytes"
+                "SVM's",
+                "kibibytes",
+                "transitiontocmk"
             ]
         },
         {
@@ -600,6 +639,12 @@
             ]
         },
         {
+            "filename": "**/specification/cost-management/resource-manager/Microsoft.CostManagement/stable/2024-08-01/costmanagement.pricesheets.json",
+            "words": [
+                "unitofmeasure"
+            ]
+        },
+        {
             "filename": "**/specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/preview/2017-08-21-preview/iotdps.json",
             "words": [
                 "Messsage"
@@ -697,6 +742,18 @@
             "filename": "**/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/IntegrationRuntime.json",
             "words": [
                 "Exprired"
+            ]
+        },
+        {
+            "filename": "**/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json",
+            "words": [
+                "Multistatement"
+            ]
+        },
+        {
+            "filename": "**/specification/synapse/data-plane/Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json",
+            "words": [
+                "Multistatement"
             ]
         },
         {
@@ -975,6 +1032,12 @@
             ]
         },
         {
+            "filename": "**/specification/maps/data-plane/Route/**",
+            "words": [
+                "modelerfour"
+            ]
+        },
+        {
             "filename": "**/specification/communication/data-plane/Chat/**/communicationserviceschat.json",
             "words": [
                 "readreceipts",
@@ -1030,7 +1093,9 @@
         {
             "filename": "**/specification/confluent/resource-manager/Microsoft.Confluent/**/confluent.json",
             "words": [
-                "orgvalidate"
+                "orgvalidate",
+                "AZUREBLOBSOURCE",
+                "AZUREBLOBSINK"
             ]
         },
         {
@@ -1049,6 +1114,12 @@
             ]
         },
         {
+            "filename": "**/specification/recoveryservicesbackup/resource-manager/Microsoft.RecoveryServices/**/bms.json",
+            "words": [
+                "HanaScaleoutContainer"
+            ]
+        },
+        {
             "filename": "**/specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2021-10-15/iotdps.json",
             "words": [
                 "Messsage"
@@ -1057,7 +1128,9 @@
         {
             "filename": "**/specification/postgresql/resource-manager/Microsoft.DBforPostgreSQL/preview/**/*json",
             "words": [
-                "automigration"
+                "automigration",
+                "apsaradb",
+                "supabase"
             ]
         },
         {
@@ -1194,6 +1267,13 @@
             ]
         },
         {
+            "filename": "**/specification/securityinsights/resource-manager/Microsoft.SecurityInsights/stable/**/*.json",
+            "words": [
+                "Criterias",
+                "Mdti"
+            ]
+        },
+        {
             "filename": "**/specification/cognitiveservices/data-plane/AzureOpenAI/inference/preview/**/*.json",
             "words": [
                 "flac",
@@ -1219,7 +1299,8 @@
             "filename": "**/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/**/*.json",
             "words": [
                 "keyvaultkeyuri",
-                "throughputpool"
+                "throughputpool",
+                "dotproduct"
             ]
         },
         {
@@ -1291,6 +1372,13 @@
             ]
         },
         {
+            "filename": "**/specification/batch/Azure.Batch/**/*.tsp",
+            "words": [
+                "upgradingos",
+                "TVMs"
+            ]
+        },
+        {
             "filename": "**/specification/batch/data-plane/Azure.Batch/**/*.json",
             "words": [
                 "upgradingos",
@@ -1300,24 +1388,200 @@
         {
             "filename": "**/specification/awsconnector/resource-manager/Microsoft.AwsConnector/**/*.json",
             "words": [
+                "ABAC",
+                "ACFP",
+                "ACMPCA",
                 "ACUs",
+                "assemblyline",
+                "autoprovision",
+                "Aviv",
+                "AWSACM",
+                "AWSACMPCA",
+                "AWSAPS",
+                "AWSDMS",
+                "AWSEC",
+                "AWSECR",
+                "AWSECS",
+                "AWSEFS",
+                "AWSEKS",
+                "AWSELB",
+                "AWSEMR",
+                "awsfirelens",
+                "AWSFIS",
+                "AWSIAM",
+                "AWSIAMSAML",
+                "AWSIVS",
+                "AWSKMS",
+                "awslogs",
+                "AWSM",
+                "AWSMSK",
+                "AWSQLDB",
                 "AWSRDS",
+                "AWSRDSDB",
+                "AWSRUM",
+                "AWSS",
+                "AWSSES",
+                "AWSSNS",
+                "AWSSQS",
+                "AWSSSM",
+                "awsvpc",
+                "AWSWAF",
+                "AWSX",
+                "binpack",
+                "buildspec",
+                "CFNS",
+                "CMAP",
+                "CMK's",
+                "CODECONNECTIONS",
+                "cooldowns",
+                "credentialspec",
+                "credentialspecdomainless",
+                "credspec",
+                "daxs",
                 "DCERPC",
+                "dd'T'HH",
+                "desync",
+                "diratime",
+                "dirsync",
+                "domainless",
                 "Dsse",
                 "dsse",
+                "Dtest",
+                "Dtestsecret",
                 "dualstack",
+                "EEZNYKUA",
+                "efgyghrtguk",
+                "Elong",
+                "emaccess",
+                "ENCHIPHERMENT",
                 "ENIs",
+                "FARGAT",
                 "Fargate",
+                "FDTNDATAQYW",
+                "Firelens",
+                "firelens",
+                "fluentbit",
+                "FOWNER",
+                "FPGAs",
+                "fpgas",
+                "FSETID",
+                "Fuota",
+                "Gelf",
+                "gelf",
+                "GENEVE",
+                "Geoproximity",
+                "healthcheck",
+                "hostedzone",
+                "hypens",
+                "IJCEXJP",
+                "Ilong",
+                "Inferentia",
+                "instancegroup",
+                "Intlong",
+                "IPAM's",
+                "Ipams",
+                "JDBC",
+                "kadmin",
+                "keytabs",
+                "logentries",
+                "lowercased",
+                "mand",
+                "maxage",
+                "MKNOD",
+                "mknod",
+                "Mlong",
+                "mpol",
+                "mqueue",
+                "mrap",
+                "MSAs",
+                "msgmax",
+                "msgmnb",
+                "msgmni",
+                "multicloud",
                 "multimaster",
+                "multivalue",
+                "Multivalue",
+                "myawslogbucket",
+                "mycluster",
+                "mydomain",
+                "mykeyspace",
+                "mymanaged",
+                "myprefix",
+                "myrepinstance",
+                "myselfmanaged",
+                "mytable",
+                "nfsvers",
+                "Ningxia",
+                "Nlong",
+                "noatime",
                 "nodegroup",
                 "Nodegroups",
+                "nodev",
+                "nodiratime",
+                "NOERROR",
+                "noexec",
+                "nohup",
+                "nomand",
                 "nondefault",
+                "norelatime",
+                "nostrictatime",
+                "nosuid",
+                "Nshort",
+                "oemagent",
                 "ONEZONE",
+                "PACCT",
                 "parallelquery",
+                "Paulo",
+                "Plong",
                 "preconfigures",
+                "PRERELEASED",
+                "PTRACE",
+                "Radeon",
+                "radeon",
+                "RAWIO",
+                "rbind",
+                "RDSCDB",
+                "redrive",
+                "relatime",
+                "resouce",
+                "retrans",
+                "rmid",
+                "Robo",
+                "rprivate",
+                "rshared",
+                "rsize",
+                "rslave",
+                "runbindable",
+                "SETFCAP",
+                "SETPCAP",
+                "shmall",
+                "shmmax",
+                "shmmni",
+                "SIEXAMPLE",
+                "slowquery",
+                "Sqli",
+                "sqli",
+                "sqlserver",
+                "ss'Z",
+                "strictatime",
+                "subdivisioncode",
                 "tierings",
+                "timeo",
+                "ulimits",
+                "Ultrawarm",
+                "ultrawarm",
+                "unbindable",
+                "untagging",
+                "Useds",
                 "VPC's",
-                "wihtin"
+                "webacl",
+                "whitespaces",
+                "wihtin",
+                "workdir",
+                "wsize",
+                "xxdriver",
+                "xxlabel",
+                "xxopt"
             ]
         },
         {
@@ -1348,6 +1612,15 @@
             ]
         },
         {
+            "filename": "**/specification/cognitiveservices/data-plane/Language/**/**/*.json",
+            "words": [
+                "Meitei",
+                "Mtei",
+                "Olck",
+                "Shrd"
+            ]
+        },
+        {
             "filename": "**/specification/sqlvirtualmachine/resource-manager/Microsoft.SqlVirtualMachine/**/*.json",
             "words": [
                 "WUMU",
@@ -1355,7 +1628,7 @@
             ]
         },
         {
-            "filename": "**/specification/riskiq/data-plane/Microsoft.Easm/preview/2024-03-01-preview/easm.json",
+            "filename": "**/specification/riskiq/data-plane/Microsoft.Easm/preview/**/*.json",
             "words": [
                 "Cisa",
                 "cisa",
@@ -1389,6 +1662,12 @@
             ]
         },
         {
+            "filename": "**/specification/liftrpinecone/**/*.json",
+            "words": [
+                "organizationname"
+            ]
+        },
+        {
             "filename": "**/specification/developerhub/resource-manager/Microsoft.DevHub/**/*.json",
             "words": [
                 "iacProfiles",
@@ -1411,6 +1690,25 @@
             "filename": "**/specification/cognitiveservices/data-plane/AzureOpenAI/inference/preview/**/*.json",
             "words": [
                 "rerank"
+            ]
+        },
+        {
+            "filename": "**/specification/ai/data-plane/HealthInsights/stable/**/openapi.json",
+            "words": [
+                "Acrad",
+		        "acrad",
+		        "BIRADS",
+				"mednax",
+				"frax",
+				"extracolonic",
+				"ascvd",
+				"tyrer",
+				"cusick",
+				"agatston",
+				"ceus",
+				"HNPCC",
+				"kellgren",
+				"tonnis"
             ]
         },
         {
@@ -1456,7 +1754,9 @@
             "filename": "**/specification/servicefabricmanagedclusters/resource-manager/Microsoft.ServiceFabric/**/*.json",
             "words": [
                 "sfmc",
-                "sfmc's"
+                "sfmc's",
+                "regionname",
+                "sfmcdomain"
             ]
         },
         {
@@ -1467,9 +1767,93 @@
             ]
         },
         {
+            "filename": "**/specification/terraform/Microsoft.AzureTerraform.Management/**/*.tsp",
+            "words": [
+                "azurerm",
+                "azapi"
+            ]
+        },
+        {
             "filename": "**/specification/deviceregistry/resource-manager/Microsoft.DeviceRegistry/**/*.json",
             "words": [
                 "billables"
+            ]
+        },
+        {
+            "filename": "**/specification/storage/data-plane/Microsoft.FileStorage/**/*.json",
+            "words": [
+                "symboliclink",
+                "hardlink"
+             ]
+        },
+        {
+            "filename": "**/specification/cost-management/resource-manager/Microsoft.CostManagement/stable/2023-09-01/costmanagement.pricesheets.json",
+            "words": [
+                "Unitof"
+            ]
+        },
+        {
+            "filename": "**/specification/cost-management/resource-manager/Microsoft.CostManagement/stable/2023-11-01/costmanagement.pricesheets.json",
+            "words": [
+                "Unitof"
+              ]
+        },
+        {
+        "filename": "**/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/**/*.json",
+            "words": [
+                "SEVSNP"
+            ]
+        },
+        {
+            "filename": "**/specification/connectedcache/resource-manager/Microsoft.ConnectedCache/preview/**/*.json",
+            "words": [
+                "Eflow"
+            ]
+        },
+        {
+            "filename": "**/specification/communication/data-plane/Sms/preview/**/*.json",
+            "words": [
+                "optouts"
+            ]
+        },
+        {
+            "filename": "**/specification/azure-kusto/resource-manager/Microsoft.Kusto/**/*.json",
+            "words": [
+                "webapi",
+                "genevametrics"
+            ]
+        },
+        {
+            "filename": "**/specification/compute/resource-manager/readme.md",
+            "words": [
+                "Cloudservice"
+            ]
+        },
+        {
+            "filename": "**/specification/**/readme.python.md",
+            "words": [
+                "multiapiscript",
+                "modelerfour"
+            ]
+        },
+        {
+            "filename": "**/specification/quota/resource-manager/readme.md",
+            "words": [
+                "groupquota",
+                "modelerfour"
+            ]
+        },
+        {
+            "filename": "**/specification/standbypool/StandbyPool.Management/sdk-suppressions.yaml",
+            "words": [
+                "standbypool"
+            ]
+        },
+        {
+            "filename": "**/specification/liftrpinecone/Pinecone.VectorDb.Management/tspconfig.yaml",
+            "words": [
+                "liftrpinecone",
+                "pineconevectordb"
             ]
         }
     ],
