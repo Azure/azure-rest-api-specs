@@ -34,7 +34,7 @@ model Group is Azure.ResourceManager.TrackedResource<GroupProperties> {
 @armResourceOperations
 interface Groups {
   /**
-   * Returns Groups details.
+   * Returns Group's details.
    */
   get is ArmResourceRead<Group>;
 
@@ -55,7 +55,7 @@ interface Groups {
   delete is ArmResourceDeleteSync<Group>;
 
   /**
-   * Returns subgroups for the given group.
+   * Returns Groups for the given account name.
    */
   listByUpdateAccount is ArmResourceListByParent<Group>;
 }
@@ -67,7 +67,6 @@ interface Groups {
 @@doc(Groups.update::parameters.properties, "Updated tags.");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Groups.create::parameters.resource, "application/json", "group");
 @@clientName(Groups.create::parameters.resource, "group");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"

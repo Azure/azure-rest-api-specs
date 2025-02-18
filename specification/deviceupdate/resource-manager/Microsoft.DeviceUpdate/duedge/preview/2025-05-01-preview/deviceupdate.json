@@ -1951,7 +1951,7 @@
         "tags": [
           "Groups"
         ],
-        "description": "Returns subgroups for the given group.",
+        "description": "Returns Groups for the given account name.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2003,7 +2003,7 @@
         "tags": [
           "Groups"
         ],
-        "description": "Returns Groups details.",
+        "description": "Returns Group's details.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2098,8 +2098,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Group"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -2436,8 +2435,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Subgroup"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -3309,7 +3307,7 @@
         },
         "groupId": {
           "type": "string",
-          "description": "This is the ID of the group of this agent"
+          "description": "This is the ID of the group this agent belongs to, which corresponds to the value of the resource tag with key \"ADUGroup\", if exists."
         }
       },
       "required": [

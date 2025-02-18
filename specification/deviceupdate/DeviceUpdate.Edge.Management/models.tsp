@@ -729,7 +729,7 @@ model AgentProperties {
   deviceUuid: string;
 
   /**
-   * This is the ID of the group of this agent
+   * This is the ID of the group this agent belongs to, which corresponds to the value of the resource tag with key "ADUGroup", if exists.
    */
   @added(Versions.v2025_05_01_preview)
   groupId?: string;

@@ -67,10 +67,6 @@ interface Subgroups {
 @@doc(Subgroups.update::parameters.properties, "Updated tags.");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Subgroups.create::parameters.resource,
-  "application/json",
-  "subgroup"
-);
 @@clientName(Subgroups.create::parameters.resource, "subgroup");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
