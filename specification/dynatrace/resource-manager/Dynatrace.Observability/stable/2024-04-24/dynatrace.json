@@ -2221,7 +2221,7 @@
         "userAssignedIdentities": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
           },
           "description": "The identities assigned to this resource by the user."
         }
@@ -2514,24 +2514,6 @@
         "name": "ManagedIdentityType",
         "modelAsString": true
       }
-    },
-    "UserAssignedIdentity": {
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "The active directory client identifier for this principal."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier for this principal."
-        }
-      },
-      "description": "A managed identity assigned by the user.",
-      "required": [
-        "clientId",
-        "principalId"
-      ]
     },
     "AccountInfo": {
       "type": "object",
