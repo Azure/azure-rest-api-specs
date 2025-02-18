@@ -6456,7 +6456,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "description": "Method to import SQL inventory.",
+        "description": "Initiates SQL inventory import process. This is an asynchronous operation that returns a 202 Accepted response and requires polling for completion status.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -6486,7 +6486,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "Import parameters",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SQLInventoryImportBody"
@@ -6494,18 +6494,25 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SQLInventoryImportBody"
+          "202": {
+            "description": "Import operation accepted. Use operation location URL to monitor status.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to monitor operation status",
+                "type": "string"
+              }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "ImportInventoryExample": {
