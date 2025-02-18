@@ -92,6 +92,11 @@ union Edition {
 }
 
 /**
+ * List of Sites.
+ */
+model MysqlSiteList is Azure.Core.Page<MysqlSite>;
+
+/**
  * Mysql Site properties
  */
 model MysqlSiteProperties {
@@ -180,9 +185,9 @@ model MysqlSitesResourcePatch {
 }
 
 /**
- * List of Sites.
+ * List of Servers.
  */
-model MysqlSiteList is Azure.Core.Page<MysqlSite>;
+model MysqlServerList is Azure.Core.Page<MysqlServer>;
 
 /**
  * Mysql Server properties
@@ -322,35 +327,9 @@ model MysqlServerResourcePatch {
 }
 
 /**
- * List of Servers.
+ * List of ErrorSummaries.
  */
-model MysqlServerList is Azure.Core.Page<MysqlServer>;
-
-/**
- * Summaries properties
- */
-model SummariesProperties {
-  /**
-   * The number of discovered server.
-   */
-  discoveredServers?: int64;
-
-  /**
-   * The list of errors.
-   */
-  errors?: Error[];
-
-  /**
-   * Gets or sets the provisioning state.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-}
-
-/**
- * List of Summaries.
- */
-model SummaryList is Azure.Core.Page<Summary>;
+model ErrorSummaryList is Azure.Core.Page<ErrorSummary>;
 
 /**
  * Error summaries properties
@@ -374,6 +353,27 @@ model ErrorSummariesProperties {
 }
 
 /**
- * List of ErrorSummaries.
+ * List of Summaries.
  */
-model ErrorSummaryList is Azure.Core.Page<ErrorSummary>;
+model SummaryList is Azure.Core.Page<Summary>;
+
+/**
+ * Summaries properties
+ */
+model SummariesProperties {
+  /**
+   * The number of discovered server.
+   */
+  discoveredServers?: int64;
+
+  /**
+   * The list of errors.
+   */
+  errors?: Error[];
+
+  /**
+   * Gets or sets the provisioning state.
+   */
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}

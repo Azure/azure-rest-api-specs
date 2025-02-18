@@ -5,7 +5,7 @@
  *   isFullCompatible: false
  *   guessResourceKey: false
  * Version: 0.10.9
- * Date: 2025-02-18T07:07:09.629Z
+ * Date: 2025-02-18T08:25:47.605Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -14,8 +14,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./MysqlSite.tsp";
 import "./MysqlServer.tsp";
-import "./Summary.tsp";
 import "./ErrorSummary.tsp";
+import "./Summary.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
