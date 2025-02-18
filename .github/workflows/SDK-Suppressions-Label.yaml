@@ -6,13 +6,14 @@ on:
       - main
       - RPSaaSMaster
       - release*
-  
+
+permissions:
+  contents: read
+
 jobs:
   process-sdk-suppressions-labels:
     name: Sdk Suppressions
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,8 +21,8 @@ jobs:
           # Required since "HEAD^" is passed to Get-ChangedFiles
           fetch-depth: 2
 
-      - name: Setup Node and run `npm ci`
-        uses: ./.github/actions/setup-node-npm-ci
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
 
       - name: Get GitHub PullRequest Changed Files
         shell: pwsh
@@ -29,8 +30,11 @@ jobs:
         run: |
           . eng/scripts/ChangedFiles-Functions.ps1
           $changedFiles = @(Get-ChangedFiles)
-          echo "PR Changed files: $changedFiles"
-          Add-Content -Path $env:GITHUB_OUTPUT -Value "changedFiles=$changedFiles"
+          $changedFilesArray = $changedFiles -split ' '
+          $yamlFilesArray = $changedFilesArray | Where-Object { $_ -match 'sdk-suppressions\.yaml$' }
+          $yamlFiles = $yamlFilesArray -join ' '
+          echo "PR Changed sdk-suppressions.yaml files: $yamlFiles"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "changedFiles=$yamlFiles"
 
       - name: Get GitHub PullRequest Context
         uses: actions/github-script@v7
@@ -53,7 +57,7 @@ jobs:
           GITHUB_PULL_REQUEST_LABELS: ${{ steps.fetch-pullRequest-context.outputs.prLabels }}
         run: |
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js HEAD^ HEAD "$GITHUB_PULL_REQUEST_CHANGE_FILES" "$GITHUB_PULL_REQUEST_LABELS"
-          
+
           OUTPUT=$(cat $OUTPUT_FILE)
           echo "Script output labels: $OUTPUT"
 
@@ -71,7 +75,7 @@ jobs:
           done
 
       # No Action or Add/Remove label ​​according to step run-suppressions-script output
-      # e.g. 
+      # e.g.
       #     If the output of the step does not include the BreakingChange-Go-Sdk-Suppression, no action will be taken.
       #     If the step's output is "BreakingChange-Go-Sdk-Suppression='true'", the label "BreakingChange-Go-Sdk-Suppression" will be applied to the PR.
       #     If the step's output is "BreakingChange-Go-Sdk-Suppression='false'", the label "BreakingChange-Go-Sdk-Suppression" will be removed from the PR.
@@ -81,21 +85,21 @@ jobs:
         with:
           name: "BreakingChange-Go-Sdk-Suppression"
           value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Go-Sdk-Suppression == 'true' }}"
-          
+
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results java
         if: ${{ steps.run-suppressions-script.outputs.BreakingChange-Java-Sdk-Suppression }}
         with:
           name: "BreakingChange-Java-Sdk-Suppression"
           value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Java-Sdk-Suppression == 'true' }}"
-          
+
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results js
         if: ${{ steps.run-suppressions-script.outputs.BreakingChange-JavaScript-Sdk-Suppression }}
         with:
           name: "BreakingChange-JavaScript-Sdk-Suppression"
           value: "${{ steps.run-suppressions-script.outputs.BreakingChange-JavaScript-Sdk-Suppression == 'true' }}"
-          
+
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results python
         if: ${{ steps.run-suppressions-script.outputs.BreakingChange-Python-Sdk-Suppression }}

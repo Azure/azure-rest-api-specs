@@ -1314,7 +1314,7 @@ directive:
     reason: The resource is managed in a management group level (instead of inside a resource group)
   - suppress: TopLevelResourcesListBySubscription
     from: changes.json
-    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios.
   - from: changes.json
     suppress: OperationsAPIImplementation
     where: $.paths
@@ -1325,7 +1325,7 @@ directive:
     reason: 'Duplicate Operations API causes generation issues'
   - suppress: TopLevelResourcesListBySubscription
     from: snapshots.json
-    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios.
   - suppress: RequiredReadOnlySystemData
     from: changes.json
     reason: System Metadata from a change resource perspective is irrelevant
@@ -1628,7 +1628,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
