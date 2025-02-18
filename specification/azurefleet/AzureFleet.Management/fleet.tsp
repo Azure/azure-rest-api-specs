@@ -56,7 +56,7 @@ union ProvisioningState {
   string,
   ResourceProvisioningState,
 
-  @doc("Initial creation in progress.")
+  @doc("Initial creation in progress. te")
   Creating: "Creating",
 
   @doc("Update in progress.")
