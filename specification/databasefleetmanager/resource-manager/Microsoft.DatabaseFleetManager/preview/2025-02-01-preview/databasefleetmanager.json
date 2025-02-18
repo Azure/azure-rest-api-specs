@@ -2415,9 +2415,9 @@
             "create"
           ]
         },
-        "destinationTier": {
+        "tierName": {
           "type": "string",
-          "description": "Destination tier.",
+          "description": "Destination tier name.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2434,7 +2434,7 @@
       },
       "required": [
         "resourceType",
-        "destinationTier",
+        "tierName",
         "resourceName"
       ]
     },
@@ -3125,7 +3125,7 @@
       "description": "Resource type of the destination tier override.",
       "enum": [
         "Database",
-        "ElasticPool"
+        "Pool"
       ],
       "x-ms-enum": {
         "name": "ResourceType",
@@ -3137,8 +3137,8 @@
             "description": "Database resource type."
           },
           {
-            "name": "ElasticPool",
-            "value": "ElasticPool",
+            "name": "Pool",
+            "value": "Pool",
             "description": "Elastic pool resource type."
           }
         ]

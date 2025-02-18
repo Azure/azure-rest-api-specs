@@ -189,7 +189,7 @@
             "description": "Name.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
           }
         ],
         "responses": {
@@ -234,7 +234,7 @@
             "description": "Name.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
           },
           {
             "name": "resource",
@@ -309,7 +309,7 @@
             "description": "Name.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
           },
           {
             "name": "properties",
@@ -381,7 +381,7 @@
             "description": "Name.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
           }
         ],
         "responses": {
@@ -443,7 +443,7 @@
             "description": "Name.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
           }
         ],
         "responses": {
@@ -1078,6 +1078,22 @@
             "read",
             "update"
           ]
+        },
+        "resourceState": {
+          "$ref": "#/definitions/ResourceState",
+          "description": "State of the resource",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "redundancyState": {
+          "$ref": "#/definitions/RedundancyState",
+          "description": "Zone redundancy state for resources",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -1191,6 +1207,14 @@
           "items": {
             "$ref": "#/definitions/DenyAssignmentExclusion"
           },
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "resourceState": {
+          "$ref": "#/definitions/ResourceState",
+          "description": "State of the resource",
           "x-ms-mutability": [
             "read",
             "update"
@@ -1370,6 +1394,54 @@
           "description": "Resource Id of Azure Redis Cache Resource",
           "readOnly": true
         }
+      }
+    },
+    "RedundancyState": {
+      "type": "string",
+      "description": "The redundancy state of the resource",
+      "enum": [
+        "Zonal",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "RedundancyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Zonal",
+            "value": "Zonal",
+            "description": "Resource is zone redundant"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Resource is not redundant"
+          }
+        ]
+      }
+    },
+    "ResourceState": {
+      "type": "string",
+      "description": "The current state of the resource",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Resource is in active state"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Resource is in inactive state"
+          }
+        ]
       }
     },
     "StorageProfile": {
