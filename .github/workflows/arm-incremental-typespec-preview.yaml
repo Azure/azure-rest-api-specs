@@ -22,8 +22,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # Required to detect changed files in PR
-          fetch-depth: 2
+          sparse-checkout: |
+            .github
 
       # Output is "true" if PR contains only incremental changes to an existing TypeSpec RP
       - id: incremental-typespec
