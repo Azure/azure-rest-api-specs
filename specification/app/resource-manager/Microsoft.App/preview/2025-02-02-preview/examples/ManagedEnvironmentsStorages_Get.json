@@ -16,7 +16,11 @@
           "azureFile": {
             "accountName": "account1",
             "shareName": "share1",
-            "accessMode": "ReadOnly"
+            "accessMode": "ReadOnly",
+            "accountKeyVaultProperties": {
+              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity",
+              "keyVaultUrl": "https://myvault.vault.azure.net/secrets/mysecret"
+            }
           }
         }
       }
