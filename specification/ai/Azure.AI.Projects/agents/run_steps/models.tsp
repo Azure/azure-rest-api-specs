@@ -19,7 +19,7 @@ model RunStep {
 
   @encodedName("application/json", "assistant_id")
   @doc("The ID of the agent associated with the run step.")
-  assistantId: string;
+  agentId: string;
 
   @encodedName("application/json", "thread_id")
   @doc("The ID of the thread that was run.")

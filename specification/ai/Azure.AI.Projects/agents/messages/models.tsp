@@ -76,7 +76,7 @@ model ThreadMessage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "assistant_id")
   @doc("If applicable, the ID of the agent that authored this message.")
-  assistantId: string | null;
+  agentId: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "run_id")
