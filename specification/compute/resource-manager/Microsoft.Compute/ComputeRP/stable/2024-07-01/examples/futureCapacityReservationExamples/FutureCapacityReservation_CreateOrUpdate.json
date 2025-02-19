@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "capacityReservationGroupName": "myCapacityReservationGroup",
+    "futureReservationName": "myFutureReservation",
+    "api-version": "2024-07-01",
+    "createFutureCapacityReservation": {
+      "location": "eastus",
+      "requests": [
+        {
+          "resources": [
+            {
+              "resourceName": "Standard_DS1_v2",
+              "capacity": 1115,
+              "zones": [ "1" ]
+            }
+          ]
+        }
+      ],
+      "capacityPlanning": {
+        "needByDate": "2023-11-20",
+        "needByDateExtended": "2023-12-20",
+        "minDurationDays": 365
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/futureReservations/myFutureReservation",
+        "name": "myFutureReservation",
+        "type": "Microsoft.Compute/capacityReservationGroups/futureReservations",
+        "location": "eastus",
+        "state": "Provisioning",
+        "requests": [
+          {
+            "resources": [
+              {
+                "resourceName": "Standard_DS1_v2",
+                "capacity": 1115,
+                "zones": [ "1" ]
+              }
+            ]
+          }
+        ],
+        "capacityPlanning": {
+          "needByDate": "2023-11-20",
+          "needByDateExtended": "2023-12-20",
+          "minDurationDays": 365
+        }
+      }
+    }
+  }
+}

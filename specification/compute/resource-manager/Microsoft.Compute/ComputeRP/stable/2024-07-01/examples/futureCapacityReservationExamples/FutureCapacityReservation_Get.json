@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "capacityReservationGroupName": "myCapacityReservationGroup",
+    "futureReservationName": "myFutureReservation",
+    "api-version": "2024-07-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/futureReservations/myFutureReservation",
+        "name": "myFutureReservation",
+        "type": "Microsoft.Compute/capacityReservationGroups/futureReservations",
+        "location": "eastus",
+        "state": "Provisioning",
+        "requests": [
+          {
+            "resources": [
+              {
+                "resourceName": "Standard_DS1_v2",
+                "capacity": 1115,
+                "zones": [ "1" ],
+                "state": "Fulfilled",
+                "reservation": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{CapacityReservationGroupName}/capacityReservations/{futureReservationName}_{resourceName}",
+                  "name": "CapacityReservationName",
+                  "type": "Microsoft.Compute/capacityReservationGroups/capacityReservations",
+                  "“properties”": {
+                    "virtualMachinesAssociated": [
+                      {
+                        "id": "subscriptions/{subId}/resourceGroups/myrg1/providers/Microsoft.Compute/VirtualMachine/myVirtualmachine"
+                      }
+                    ],
+                    "provisioningTime": "2020-06-23 00:00:000",
+                    "provisioningState": "Succeeded"
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "capacityPlanning": {
+          "needByDate": "2023-11-20",
+          "needByDateExtended": "2023-12-20",
+          "minDurationDays": 365
+        }
+      }
+    }
+  }
+}
