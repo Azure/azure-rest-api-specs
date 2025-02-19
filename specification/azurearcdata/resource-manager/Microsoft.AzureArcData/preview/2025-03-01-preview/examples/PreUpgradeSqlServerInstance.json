@@ -12,9 +12,12 @@
           "version": "SQL Server 2012",
           "edition": "Developer",
           "containerResourceId": "Resource id of hosting Arc Machine",
+          "vmId": "12345678-1234-1234-1234-123456789123",
           "createTime": "01/01/2020 01:01:01",
           "patchLevel": "patchlevel",
           "collation": "collation",
+          "isMicrosoftPkiCertTrustConfigured": true,
+          "isDigiCertPkiCertTrustConfigured": true,
           "dbMasterKeyExists": true,
           "isHadrEnabled": true,
           "traceFlags": [
@@ -45,6 +48,16 @@
             "hostNames": [
               "DEV-HOSTNAME1",
               "DEV-HOSTNAME2"
+            ],
+            "hostIPAddresses": [
+              {
+                "ipAddress": "10.20.11.23",
+                "subnetMask": "255.255.255.0"
+              },
+              {
+                "ipAddress": "10.20.11.24",
+                "subnetMask": "255.255.255.0"
+              }
             ]
           },
           "backupPolicy": {
@@ -54,7 +67,8 @@
             "transactionLogBackupMinutes": 30
           },
           "upgradeLockedUntil": "2022-05-05T16:26:33.883Z",
-          "serviceType": "Engine"
+          "serviceType": "Engine",
+          "maxServerMemoryMB": 4096
         },
         "location": "northeurope",
         "systemData": {
@@ -75,4 +89,3 @@
     }
   }
 }
-

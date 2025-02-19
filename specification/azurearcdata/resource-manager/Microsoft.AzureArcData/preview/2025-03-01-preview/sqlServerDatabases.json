@@ -348,6 +348,16 @@
           "format": "float",
           "description": "Size of the database."
         },
+        "logFileSizeMB": {
+          "type": "number",
+          "format": "float",
+          "description": "Total size in MB for the log (ldf) files for this database."
+        },
+        "dataFileSizeMB": {
+          "type": "number",
+          "format": "float",
+          "description": "Total size in MB for the data (mdf and ndf) files for this database."
+        },
         "spaceAvailableMB": {
           "type": "number",
           "format": "float",
@@ -460,6 +470,11 @@
           "description": "The name of the source database associated with create operation of this database.",
           "type": "string",
           "format": "arm-id"
+        },
+        "vmId": {
+          "type": "string",
+          "description": "The unique ID of the hybrid machine that this resource belongs to.",
+          "readOnly": true
         },
         "restorePointInTime": {
           "format": "date-time",
@@ -678,4 +693,3 @@
     }
   }
 }
-

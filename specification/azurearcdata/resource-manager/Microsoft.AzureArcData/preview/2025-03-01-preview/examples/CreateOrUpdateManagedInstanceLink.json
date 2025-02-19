@@ -4,84 +4,69 @@
     "resourceGroupName": "testrg",
     "sqlServerInstanceName": "testSqlServer_INST1",
     "api-version": "2025-03-01-preview",
-    "createAgConfiguration": {
-      "availabilityGroupName": "myNewAg",
-      "replicas": [
-        {
-          "serverInstance": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlServerInstances/testSqlServer_INST1/",
-          "endpointName": "inst1DBMEndpoint",
-          "endpointUrl": "TCP://testSqlServer_INST1.testSqlserverDomain:5022",
-          "endpointConnectLogin": "NT Server\\MSSSQLSERVER",
-          "availabilityMode": "SYNCHRONOUS_COMMIT",
-          "failoverMode": "AUTOMATIC",
-          "seedingMode": "AUTOMATIC",
-          "backupPriority": 50,
-          "secondaryRoleAllowConnections": "ALL",
-          "secondaryRoleReadOnlyRoutingUrl": null,
-          "primaryRoleAllowConnections": "ALL",
-          "primaryRoleReadOnlyRoutingList": null,
-          "sessionTimeout": 10
-        },
-        {
-          "serverInstance": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlServerInstances/testSqlServer_INST2/",
-          "endpointName": "inst2DBMEndpoint",
-          "endpointUrl": "TCP://testSqlServer_INST2.testSqlserverDomain:5022",
-          "endpointConnectLogin": "NT Server\\MSSSQLSERVER",
-          "availabilityMode": "SYNCHRONOUS_COMMIT",
-          "failoverMode": "AUTOMATIC",
-          "seedingMode": "AUTOMATIC",
-          "backupPriority": 50,
-          "secondaryRoleAllowConnections": "ALL",
-          "secondaryRoleReadOnlyRoutingUrl": null,
-          "primaryRoleAllowConnections": "ALL",
-          "primaryRoleReadOnlyRoutingList": null,
-          "sessionTimeout": 10
-        }
-      ],
-      "databases": [
-        "database1",
-        "database2"
-      ],
-      "automatedBackupPreference": "SECONDARY",
-      "failureConditionLevel": 3,
-      "healthCheckTimeout": 30000,
-      "dbFailover": "ON",
-      "dtcSupport": "NONE",
-      "requiredSynchronizedSecondariesToCommit": 0,
-      "clusterType": "WSFC",
-      "listener": {
-        "dnsName": "myNewAgListener",
-        "ipV4AddressesAndMasks": [
+    "createManagedInstanceLinkConfiguration": {
+      "availabilityGroup": {
+        "availabilityGroupName": "myNewAg",
+        "replicas": [
           {
-            "ipAddress": "192.1.168.5",
-            "mask": "255.255.255.0"
-          },
-          {
-            "ipAddress": "10.1.168.5",
-            "mask": "255.255.255.0"
+            "endpointUrl": "TCP://testSqlServer_INST1.testSqlserverDomain:5022",
+            "availabilityMode": "SYNCHRONOUS_COMMIT",
+            "failoverMode": "AUTOMATIC",
+            "seedingMode": "AUTOMATIC",
+            "secondaryRoleAllowConnections": "ALL"
           }
         ],
-        "port": 1433
+        "databases": [
+          "database1"
+        ]
+      },
+      "distributedAvailabilityGroup": {
+        "availabilityGroupName": "myNewDag",
+        "primaryAvailabilityGroup": {
+          "availabilityGroup": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlServerInstances/testSqlServer_INST1/availabilityGroups/testAG1",
+          "listenerUrl": "TCP://testAG1.contoso.com:5022",
+          "availabilityMode": "ASYNCHRONOUS_COMMIT",
+          "failoverMode": "MANUAL",
+          "seedingMode": "AUTOMATIC",
+          "certificateConfiguration": {
+            "certificateName": "myCert"
+          }
+        },
+        "secondaryAvailabilityGroup": {
+          "availabilityGroup": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl",
+          "availabilityMode": "ASYNCHRONOUS_COMMIT",
+          "failoverMode": "NONE",
+          "seedingMode": "AUTOMATIC"
+        }
+      },
+      "miLinkConfiguration": {
+        "instanceAvailabilityGroupName": "testAG2"
       }
     }
   },
   "responses": {
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.AzureArcData/operationResults/id1"
+        "Retry-After": "10",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.AzureArcData/locations/eastus/operationsStatuses/5abb198d-cc4b-46bd-9e6c-e3f0ba22015d?api-version=2025-03-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.AzureArcData/locations/eastus/operationResults/5abb198d-cc4b-46bd-9e6c-e3f0ba22015d?api-version=2025-03-01-preview"
       }
     },
     "200": {
       "body": {
-        "location": "southeastasia",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlServerInstances/testSqlServer_INST1/availabilityGroups/myNewAg",
-        "name": "myNewag",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlServerInstances/testSqlServer_INST1/availabilityGroups/myNewDag",
+        "name": "myNewDag",
         "type": "Microsoft.AzureArcData/sqlServerInstances/availabilityGroups",
         "properties": {
           "availabilityGroupId": "00000000-1111-2222-3333-444444444444",
           "serverName": "testSqlServer",
           "instanceName": "INST1",
-          "vmId": "12345678-1234-1234-1234-123456789123",
+          "info": {
+            "failureConditionLevel": 3,
+            "healthCheckTimeout": 30000,
+            "isDistributed": true
+          },
           "replicas": {
             "value": [
               {
@@ -148,17 +133,6 @@
             "value": [
               {
                 "databaseName": "database1",
-                "replicaName": "testSqlServer\\INST1",
-                "isLocal": true,
-                "isPrimaryReplica": true,
-                "synchronizationStateDescription": "SYNCHRONIZED",
-                "isCommitParticipant": true,
-                "synchronizationHealthDescription": "HEALTHY",
-                "databaseStateDescription": "ONLINE",
-                "isSuspended": false
-              },
-              {
-                "databaseName": "database2",
                 "replicaName": "testSqlServer\\INST1",
                 "isLocal": true,
                 "isPrimaryReplica": true,

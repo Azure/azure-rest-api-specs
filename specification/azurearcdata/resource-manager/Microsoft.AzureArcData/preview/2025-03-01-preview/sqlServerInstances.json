@@ -66,6 +66,11 @@
           "description": "ARM Resource id of the container resource (Azure Arc for Servers).",
           "readOnly": true
         },
+        "vmId": {
+          "type": "string",
+          "description": "The unique ID of the hybrid machine that this resource belongs to.",
+          "readOnly": true
+        },
         "createTime": {
           "type": "string",
           "description": "The time when the resource was created.",
@@ -273,6 +278,26 @@
         "serviceType": {
           "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
           "$ref": "#/definitions/ServiceType"
+        },
+        "maxServerMemoryMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "max server memory (MB) value configured for this instance.",
+          "readOnly": true
+        },
+        "isMicrosoftPkiCertTrustConfigured": {
+          "type": "boolean",
+          "description": "Indicates whether Microsoft PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.",
+          "readOnly": true
+        },
+        "isDigiCertPkiCertTrustConfigured": {
+          "type": "boolean",
+          "description": "Indicates whether DigiCert PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.",
+          "readOnly": true
+        },
+        "authentication": {
+          "description": "Authentication related configuration for the SQL Server Instance.",
+          "$ref": "#/definitions/Authentication"
         }
       }
     },
@@ -317,6 +342,11 @@
         "containerResourceId": {
           "type": "string",
           "description": "ARM Resource id of the container resource (Azure Arc for Servers).",
+          "readOnly": true
+        },
+        "vmId": {
+          "type": "string",
+          "description": "The unique ID of the hybrid machine that this resource belongs to.",
           "readOnly": true
         },
         "createTime": {
@@ -522,6 +552,10 @@
         "serviceType": {
           "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
           "$ref": "#/definitions/ServiceType"
+        },
+        "authentication": {
+          "description": "Authentication related configuration for the SQL Server Instance.",
+          "$ref": "#/definitions/Authentication"
         }
       }
     },
@@ -616,6 +650,30 @@
           "items": {
             "type": "string"
           }
+        },
+        "hostIPAddresses": {
+          "type": "array",
+          "description": "The IP addresses and subnet masks associated with the SQL Failover Cluster Instance on this host.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/hostIPAddressInformation"
+          }
+        }
+      }
+    },
+    "hostIPAddressInformation": {
+      "type": "object",
+      "description": "IP address and subnet mask.",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address",
+          "readOnly": true
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet mask",
+          "readOnly": true
         }
       }
     },
@@ -1341,6 +1399,144 @@
           }
         }
       }
+    },
+    "SqlServerInstanceManagedInstanceLinkAssessmentRequest": {
+      "description": "The MI Link assessment request for the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "azureManagedInstanceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure SQL Managed Instance resource ID to link with the SQL Server instance."
+        },
+        "azureManagedInstanceRole": {
+          "type": "string",
+          "description": "The role of managed instance in a distributed availability group, can be Primary or Secondary.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "azureManagedInstanceRole",
+            "modelAsString": true
+          }
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database to be replicated to the Azure SQL Managed Instance."
+        },
+        "availabilityGroupName": {
+          "type": "string",
+          "description": "The name of the availability group to be used for the database replication."
+        }
+      },
+      "required": [
+        "azureManagedInstanceResourceId",
+        "databaseName",
+        "availabilityGroupName"
+      ]
+    },
+    "SqlServerInstanceManagedInstanceLinkAssessmentResponse": {
+      "description": "The response containing the results of the MI Link assessment.",
+      "type": "object",
+      "properties": {
+        "assessments": {
+          "type": "array",
+          "description": "The list of the results for MI Link assessment.",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceManagedInstanceLinkAssessment"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "SqlServerInstanceManagedInstanceLinkAssessment": {
+      "description": "The status of an individual requirement for MI Link.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the requirement."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the requirement.",
+          "enum": [
+            "SQLServer",
+            "ManagedInstance",
+            "ManagedInstanceCrossValidation",
+            "Dag",
+            "Certificates"
+          ],
+          "x-ms-enum": {
+            "name": "assessmentCategory",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the requirement.",
+          "enum": [
+            "Success",
+            "Warning",
+            "Failure"
+          ],
+          "x-ms-enum": {
+            "name": "assessmentStatus",
+            "modelAsString": true
+          }
+        },
+        "information": {
+          "type": "string",
+          "description": "The information text about requirement."
+        },
+        "additionalInformation": {
+          "type": "string",
+          "description": "Additional details about the check, including any recommended actions."
+        }
+      }
+    },
+    "Authentication": {
+      "description": "Authentication related configuration for the SQL Server Instance.",
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Mode of authentication in SqlServer.",
+          "enum": [
+            "Mixed",
+            "Windows",
+            "Undefined"
+          ],
+          "x-ms-enum": {
+            "name": "mode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Mixed",
+                "description": "Mixed mode authentication for SQL Server which includes windows and SQL Authentication."
+              },
+              {
+                "value": "Windows",
+                "description": "Windows Authentication for SQL Server."
+              },
+              {
+                "value": "Undefined",
+                "description": "Used for scenarios were the mode cannot be determined."
+              }
+            ]
+          }
+        },
+        "sqlServerEntraIdentity": {
+          "type": "array",
+          "description": "Entra Authentication configuration for the SQL Server Instance.",
+          "items": {
+            "$ref": "./common.json#/definitions/EntraAuthentication"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1365,4 +1561,3 @@
     }
   }
 }
-

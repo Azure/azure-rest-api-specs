@@ -32,7 +32,20 @@
         "clientConnection": {
           "enabled": false
         },
-        "serviceType": "Engine"
+        "serviceType": "Engine",
+        "authentication": {
+          "mode": "Windows",
+          "sqlServerEntraIdentity": [
+            {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "identityType": "UserAssignedManagedIdentity"
+            },
+            {
+              "clientId": "",
+              "identityType": "SystemAssignedManagedIdentity"
+            }
+          ]
+        }
       }
     }
   },
@@ -46,6 +59,8 @@
           "createTime": "01/01/2020 01:01:01",
           "patchLevel": "patchlevel",
           "collation": "collation",
+          "isMicrosoftPkiCertTrustConfigured": true,
+          "isDigiCertPkiCertTrustConfigured": true,
           "dbMasterKeyExists": true,
           "isHadrEnabled": true,
           "traceFlags": [
@@ -77,6 +92,16 @@
             "hostNames": [
               "DEV-HOSTNAME1",
               "DEV-HOSTNAME2"
+            ],
+            "hostIPAddresses": [
+              {
+                "ipAddress": "10.20.11.23",
+                "subnetMask": "255.255.255.0"
+              },
+              {
+                "ipAddress": "10.20.11.24",
+                "subnetMask": "255.255.255.0"
+              }
             ]
           },
           "databaseMirroringEndpoint": {
@@ -100,7 +125,20 @@
           "monitoring": {
             "enabled": false
           },
-          "serviceType": "Engine"
+          "serviceType": "Engine",
+          "authentication": {
+            "mode": "Windows",
+            "sqlServerEntraIdentity": [
+              {
+                "clientId": "00000000-1111-2222-3333-444444444444",
+                "identityType": "UserAssignedManagedIdentity"
+              },
+              {
+                "clientId": "",
+                "identityType": "SystemAssignedManagedIdentity"
+              }
+            ]
+          }
         },
         "location": "northeurope",
         "systemData": {
@@ -128,6 +166,8 @@
           "createTime": "01/01/2020 01:01:01",
           "patchLevel": "patchlevel",
           "collation": "collation",
+          "isMicrosoftPkiCertTrustConfigured": true,
+          "isDigiCertPkiCertTrustConfigured": true,
           "dbMasterKeyExists": true,
           "isHadrEnabled": true,
           "traceFlags": [
@@ -177,4 +217,3 @@
     }
   }
 }
-
