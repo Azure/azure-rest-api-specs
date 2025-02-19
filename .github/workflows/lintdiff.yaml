@@ -11,6 +11,13 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
+      - name: Checkout eng
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            eng/
+            .github/
+
       - name: Checkout 'after' state
         uses: actions/checkout@v4
         with:
@@ -24,9 +31,9 @@ jobs:
           path: before
 
       - name: Setup Node and install deps
-        uses: ./.github/actions/setup-node-install-deps
+        uses: .github/actions/setup-node-install-deps
         with:
-          working-directory: after/eng/tools/lint-diff
+          working-directory: eng/tools/lint-diff
 
       # TODO: This can probably be updated to run directly from JS
       - name: Get changed files
