@@ -34,8 +34,8 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
         with:
           working-directory: eng/tools/lint-diff
-          # TODO: this probably needs a package-lock.json
-          install-command: npm i
+          # TODO: this probably needs a package-lock.json and dist or a separate step
+          install-command: npm i && npm run build
 
       # TODO: This can probably be updated to run directly from JS
       - name: Get changed files
