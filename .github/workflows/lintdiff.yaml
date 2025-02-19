@@ -51,6 +51,8 @@ jobs:
 
       - name: Run LintDiff Before
         run: |
+          relpath ../../../../before
+          relpath ../../../../changed-files.txt
           npm exec -- lint-diff --path ../../../../before --changed-files-path ../../../../changed-files.txt --out-file placeholder.txt
         working-directory: eng/tools/lint-diff
 
