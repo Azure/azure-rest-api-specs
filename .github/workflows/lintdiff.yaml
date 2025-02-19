@@ -30,6 +30,8 @@ jobs:
           ref: ${{ github.event.pull_request.base.sha }}
           path: before
 
+      - run: ls -lh
+
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
         with:
