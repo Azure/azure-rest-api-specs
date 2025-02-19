@@ -60,11 +60,7 @@ interface SAPCentralServerInstances {
    */
   start is ArmResourceActionAsync<
     SAPCentralServerInstance,
-    {
-      @doc("SAP Central Services instance start request body.")
-      @body
-      body?: StartRequest;
-    },
+    StartRequest,
     Foundations.OperationStatusResult
   >;
 
@@ -73,11 +69,7 @@ interface SAPCentralServerInstances {
    */
   stop is ArmResourceActionAsync<
     SAPCentralServerInstance,
-    {
-      @doc("SAP Central Services instance stop request body.")
-      @body
-      body?: StopRequest;
-    },
+    StopRequest,
     Foundations.OperationStatusResult
   >;
 }

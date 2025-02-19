@@ -59,11 +59,7 @@ interface SAPDatabaseInstances {
    */
   start is ArmResourceActionAsync<
     SAPDatabaseInstance,
-    {
-      @doc("SAP Database server instance start request body.")
-      @body
-      body?: StartRequest;
-    },
+    StartRequest,
     Foundations.OperationStatusResult
   >;
 
@@ -72,11 +68,7 @@ interface SAPDatabaseInstances {
    */
   stop is ArmResourceActionAsync<
     SAPDatabaseInstance,
-    {
-      @doc("Stop request for the database instance of the SAP system.")
-      @body
-      body?: StopRequest;
-    },
+    StopRequest,
     Foundations.OperationStatusResult
   >;
 }

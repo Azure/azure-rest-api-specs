@@ -60,11 +60,7 @@ interface SAPApplicationServerInstances {
    */
   start is ArmResourceActionAsync<
     SAPApplicationServerInstance,
-    {
-      @doc("SAP Application server instance start request body.")
-      @body
-      body?: StartRequest;
-    },
+    StartRequest,
     Foundations.OperationStatusResult
   >;
 
@@ -73,11 +69,7 @@ interface SAPApplicationServerInstances {
    */
   stop is ArmResourceActionAsync<
     SAPApplicationServerInstance,
-    {
-      @doc("SAP Application server instance stop request body.")
-      @body
-      body?: StopRequest;
-    },
+    StopRequest,
     Foundations.OperationStatusResult
   >;
 }
