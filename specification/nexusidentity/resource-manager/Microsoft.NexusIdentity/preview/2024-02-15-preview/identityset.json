@@ -532,6 +532,15 @@
           "format": "uri",
           "description": "The URL to which the Nexus Identity Service will send notifications."
         },
+         "storageAccountName": {
+          "type": "string",
+          "description": "The storage account in which the data releted to role assignments will be saved for notifications"
+        },
+        "keyVaultUri":{
+         "type": "string",
+         "format":"uri",
+         "description": "The key vault in which keys for encryption and decryption of sensitive data will be stored"
+        },
         "appId": {
           "type": "string",
           "description": "The application Id of Identity Set resource",
@@ -553,7 +562,9 @@
         "scopes",
         "roleDefinitionIds",
         "accessTypes",
-        "notificationUrl"
+        "notificationUrl",
+        "storageAccountName",
+        "keyVaultUri"
       ]
     },
     "IdentitySetResourceUpdate": {
@@ -606,7 +617,16 @@
           "type": "string",
           "format": "uri",
           "description": "The URL to which the Nexus Identity Service will send notifications."
-        }
+        },
+        "storageAccountName": {
+          "type": "string",
+          "description": "The storage account in which the data releted to role assignments will be saved for notifications"
+        },
+          "keyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The key vault in which keys for encryption and decryption of sensitive data will be stored",
+        },
       }
     },
     "ProvisioningState": {
