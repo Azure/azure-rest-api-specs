@@ -1,4 +1,4 @@
-name: LintDiff
+name: LintDiff (preview)
 
 on: pull_request
 
@@ -7,10 +7,17 @@ permissions:
 
 jobs:
   lintdiff:
-    name: LintDiff
+    name: LintDiff (preview)
     runs-on: ubuntu-24.04
 
     steps:
+      - name: Checkout eng
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            eng/
+            .github/
+
       - name: Checkout 'after' state
         uses: actions/checkout@v4
         with:
@@ -27,6 +34,10 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
         with:
           working-directory: eng/tools/lint-diff
+          # TODO: this probably needs a package-lock.json and dist
+          install-command: npm i
+      - run: npm run build
+        working-directory: eng/tools/lint-diff
 
       # TODO: This can probably be updated to run directly from JS
       - name: Get changed files
@@ -34,11 +45,23 @@ jobs:
           ."./eng/scripts/ChangedFiles-Functions.ps1"
           Set-Location ./after
           Get-ChangedFiles | Set-Content -Path ./changed-files.txt
+          Get-Location
+          Get-Content ./changed-files.txt
         shell: pwsh
 
-      - name: Run LintDiff
+      - run: |
+          pwd
+          ls -lh
+
+      - name: Run LintDiff Before
         run: |
-          npm exec -- lint-diff --path ../../../../before --changed-files-path ./changed-files.txt > before.json
-          npm exec -- lint-diff --path ../../../../after --changed-files-path ./changed-files.txt > after.json
+          realpath ../../../before
+          realpath ../../../changed-files.txt
+          npm exec -- lint-diff --path ../../../before --changed-files-path ../../../changed-files.txt --out-file placeholder.txt
+        working-directory: eng/tools/lint-diff
+
+      - name: Run LintDiff After
+        run: |
+          npm exec -- lint-diff --path ../../../../after --changed-files-path ../../../../changed-files.txt --out-file placeholder.txt
           # TODO: npm exec -- summarize-lint-diff 
         working-directory: eng/tools/lint-diff
