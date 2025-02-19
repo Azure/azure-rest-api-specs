@@ -54,6 +54,10 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.StreamingChatChoiceUpdate, Access.public);
 @@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public);
 @@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public);
+@@access(AI.Model.ChatRequestDeveloperMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
 
 // The operators need to be hidden, since we hand-write the public versions of those to
 // 1. Add chat completions streaming (to getChatCompletions operator)

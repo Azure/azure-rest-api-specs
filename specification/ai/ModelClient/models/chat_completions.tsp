@@ -236,6 +236,9 @@ union ChatRole {
 
   @doc("The role that represents extension tool activity within a chat completions operation.")
   tool: "tool",
+
+  @doc("The role that instructs or sets the behavior of the assistant. Some AI models support this role instead of the 'system' role.")
+  developer: "developer",
 }
 
 @doc("""
@@ -365,6 +368,18 @@ model ChatRequestSystemMessage extends ChatRequestMessage {
   role: ChatRole.system;
 
   @doc("The contents of the system message.")
+  content: string;
+}
+
+@doc("""
+  A request chat message containing developer instructions that influence how the model will generate a chat completions
+  response. Some AI models support a developer message instead of a system message.
+  """)
+model ChatRequestDeveloperMessage extends ChatRequestMessage {
+  @doc("The chat role associated with this message, which is always 'developer' for developer messages.")
+  role: ChatRole.developer;
+  
+  @doc("The contents of the developer message.")
   content: string;
 }
 
