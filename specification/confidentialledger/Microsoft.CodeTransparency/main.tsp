@@ -268,7 +268,7 @@ model EntryIdParameter {
 model AcceptCoseOrCborHeader {
   @doc("Accept header")
   @header
-  accept: string | "application/cose" | "application/cbor";
+  accept: "application/cose; application/cbor";
 }
 
 @doc("Accept application/cose header")

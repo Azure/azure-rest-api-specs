@@ -4,29 +4,50 @@
   "parameters": {
     "body": "{binary}",
     "Content-Type": "application/cose",
-    "Accept": "application/cose"
+    "Accept": "application/cose; application/cbor"
   },
   "responses": {
     "201": {
-      "body": ""
+      "headers": {
+        "Content-Type": "application/cose"
+      },
+      "body": "{binary}"
     },
     "202": {
-      "body": ""
+      "headers": {
+        "Content-Type": "application/cbor"
+      },
+      "body": "{binary}"
     },
     "400": {
-      "body": ""
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
     },
     "404": {
-      "body": ""
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
     },
     "429": {
-      "body": ""
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
     },
     "500": {
-      "body": ""
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
     },
     "503": {
-      "body": ""
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
     }
   }
 }
