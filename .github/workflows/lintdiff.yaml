@@ -30,10 +30,6 @@ jobs:
           ref: ${{ github.event.pull_request.base.sha }}
           path: before
 
-      - run: |
-          pwd
-          ls -lh
-
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
         with:
@@ -49,9 +45,13 @@ jobs:
           ."./eng/scripts/ChangedFiles-Functions.ps1"
           Set-Location ./after
           Get-ChangedFiles | Set-Content -Path ../changed-files.txt
-          Resolve-Path (Join-Path (Get-Location) ../ )  
-          Get-Content ../changed-files.txt
+          Get-Location
+          Get-Content /changed-files.txt
         shell: pwsh
+
+      - run: |
+          pwd
+          ls -lh
 
       - name: Run LintDiff Before
         run: |
