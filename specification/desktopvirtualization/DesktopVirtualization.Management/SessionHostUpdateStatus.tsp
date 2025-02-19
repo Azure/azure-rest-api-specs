@@ -39,10 +39,6 @@ model SessionHostManagementUpdateStatus {
   /** If present, details of the operation error. */
   error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 
-  /** Fully qualified ID of the resource against which the original async operation was started. */
-  @visibility("read")
-  resourceId?: Azure.Core.armResourceIdentifier;
-
   ...StatusProperty;
   ...UpdateStatusProperty;
 }
