@@ -27,6 +27,7 @@ namespace Customizations;
 
 // Suggestion to rename Enum Members for more clarity
 @@clientName(CertificateType.AKV_CERT_URI, "KeyVaultCertificateUri", "csharp,java");
+@@clientName(SecretType.AKV_SECRET_URI, "KeyVaultSecretUri", "csharp,java");
 
 // Suggestion to fix casing for acronyms
 @@clientName(LoadTestConfiguration.splitAllCSVs, "splitAllCsvs", "csharp,java");
