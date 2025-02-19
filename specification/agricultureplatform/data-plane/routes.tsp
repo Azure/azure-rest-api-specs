@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace AzureAgFoodPlatformDataPlaneService;
 
@@ -11,6 +13,7 @@ interface CatalogsOperations {
   /**
    * Returns a paginated list of Catalog resources.
    */
+  @operationId("Catalogs_List")
   @route("/catalogs")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -85,6 +88,7 @@ interface CatalogsOperations {
   /**
    * Gets a specified Catalog resource.
    */
+  @operationId("Catalogs_Get")
   @route("/catalogs/{catalogId}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -101,6 +105,7 @@ interface CatalogsOperations {
   /**
    * Creates or updates a Catalog resource.
    */
+  @operationId("Catalogs_CreateOrUpdate")
   @route("/catalogs/{catalogId}")
   @patch
   createOrUpdate is Azure.Core.Foundations.Operation<
@@ -114,7 +119,7 @@ interface CatalogsOperations {
       /**
        * Catalog resource payload to create or update.
        */
-      @body
+      @bodyRoot
       catalog: Catalog;
     },
     Catalog
@@ -123,6 +128,7 @@ interface CatalogsOperations {
   /**
    * Deletes Catalog for given Catalog id.
    */
+  @operationId("Catalogs_Delete")
   @route("/catalogs/{catalogId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -141,6 +147,7 @@ interface CollectionsOperations {
   /**
    * Returns a paginated list of Collection resources.
    */
+  @operationId("Collections_List")
   @route("/catalogs/{catalogId}/collections")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -221,6 +228,7 @@ interface CollectionsOperations {
   /**
    * Gets a specified Collection resource.
    */
+  @operationId("Collections_Get")
   @route("/catalogs/{catalogId}/collections/{collectionId}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -243,6 +251,7 @@ interface CollectionsOperations {
   /**
    * Creates or updates a Collection resource.
    */
+  @operationId("Collections_CreateOrUpdate")
   @route("/catalogs/{catalogId}/collections/{collectionId}")
   @patch
   createOrUpdate is Azure.Core.Foundations.Operation<
@@ -262,7 +271,7 @@ interface CollectionsOperations {
       /**
        * Collection resource payload to create or update.
        */
-      @body
+      @bodyRoot
       collection: Collection;
     },
     Collection
@@ -271,6 +280,7 @@ interface CollectionsOperations {
   /**
    * Deletes Collection for given Collection id.
    */
+  @operationId("Collections_Delete")
   @route("/catalogs/{catalogId}/collections/{collectionId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -295,6 +305,7 @@ interface FileOperations {
   /**
    * Deletes file.
    */
+  @operationId("File_Delete")
   @route("/file:delete")
   @post
   delete is Azure.Core.Foundations.Operation<File, void>;
@@ -302,6 +313,7 @@ interface FileOperations {
   /**
    * Downloads and returns file Stream as response for the given input filePath.
    */
+  @operationId("File_Download")
   @route("/file:download")
   @post
   download is Azure.Core.Foundations.Operation<
@@ -309,7 +321,7 @@ interface FileOperations {
       /**
        * request.
        */
-      @body
+      @bodyRoot
       request: File;
 
       /**
@@ -324,6 +336,7 @@ interface FileOperations {
   /**
    * Uploads a file.
    */
+  @operationId("File_Upload")
   @route("/file:upload")
   @post
   upload is Azure.Core.Foundations.Operation<{}, File>;
@@ -333,6 +346,7 @@ interface ItemsOperations {
   /**
    * Creates or updates a Item resource.
    */
+  @operationId("Items_Create")
   @route("/catalogs/{catalogId}/collections/{collectionId}/items/:create")
   @post
   create is Azure.Core.Foundations.Operation<
@@ -352,7 +366,7 @@ interface ItemsOperations {
       /**
        * Collection resource payload to create or update.
        */
-      @body
+      @bodyRoot
       item: Item;
     },
     Item
@@ -361,6 +375,7 @@ interface ItemsOperations {
   /**
    * Gets a specified Item resource.
    */
+  @operationId("Items_Get")
   @route("/catalogs/{catalogId}/collections/{collectionId}/items/{itemId}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -389,6 +404,7 @@ interface ItemsOperations {
   /**
    * Creates or updates a Item resource.
    */
+  @operationId("Items_CreateOrUpdate")
   @route("/catalogs/{catalogId}/collections/{collectionId}/items/{itemId}")
   @patch
   createOrUpdate is Azure.Core.Foundations.Operation<
@@ -414,7 +430,7 @@ interface ItemsOperations {
       /**
        * Item resource payload to create or update.
        */
-      @body
+      @bodyRoot
       item: Item;
     },
     Item
@@ -423,6 +439,7 @@ interface ItemsOperations {
   /**
    * Deletes Item for given Item id.
    */
+  @operationId("Items_Delete")
   @route("/catalogs/{catalogId}/collections/{collectionId}/items/{itemId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -451,6 +468,7 @@ interface ItemsOperations {
   /**
    * Search for Items across all parties by intersecting geometry.
    */
+  @operationId("Items_GetAllUnderCollection")
   @route("/catalogs/{catalogId}/collections/{collectionId}/items:search")
   @post
   getAllUnderCollection is Azure.Core.Foundations.Operation<
@@ -479,7 +497,7 @@ interface ItemsOperations {
       /**
        * Query filters.
        */
-      @body
+      @bodyRoot
       searchItemQuery: ItemQuery;
     },
     ItemListResponse
@@ -488,6 +506,7 @@ interface ItemsOperations {
   /**
    * Search for Items across all collections.
    */
+  @operationId("Items_SearchAcrossCollection")
   @route("/catalogs/{catalogId}/items:search")
   @post
   searchAcrossCollection is Azure.Core.Foundations.Operation<
@@ -510,7 +529,7 @@ interface ItemsOperations {
       /**
        * Query filters.
        */
-      @body
+      @bodyRoot
       searchItemQuery: CrossCollectionItemSearchQuery;
     },
     ItemListResponse
@@ -521,6 +540,7 @@ interface SatelliteOperations {
   /**
    * Fetches Satellite data.
    */
+  @operationId("Satellite_FetchItems")
   @route("/external/satellite:fetch")
   @post
   fetchItems is Azure.Core.Foundations.Operation<
@@ -545,7 +565,7 @@ interface SatelliteOperations {
       /**
        * Query filters.
        */
-      @body
+      @bodyRoot
       searchItemsQuery: SatelliteFetchRequest;
     },
     SatelliteFetchResponse
@@ -555,6 +575,7 @@ interface SatelliteOperations {
    * Searches for STAC items by collection id, bbox, intersecting geometry, start
    * and end datetime.
    */
+  @operationId("Satellite_SearchItems")
   @route("/external/satellite:stac")
   @post
   searchItems is Azure.Core.Foundations.Operation<
@@ -579,7 +600,7 @@ interface SatelliteOperations {
       /**
        * Request.
        */
-      @body
+      @bodyRoot
       request: SatelliteStacRequest;
     },
     SearchFeaturesResponse
@@ -590,6 +611,7 @@ interface SchemasOperations {
   /**
    * Returns a paginated list of Schema resources.
    */
+  @operationId("Schemas_List")
   @route("/schemas")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -664,6 +686,7 @@ interface SchemasOperations {
   /**
    * Gets a specified Schema resource.
    */
+  @operationId("Schemas_Get")
   @route("/schemas/{schemaId}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -680,6 +703,7 @@ interface SchemasOperations {
   /**
    * Creates or updates a Schema resource.
    */
+  @operationId("Schemas_CreateOrUpdate")
   @route("/schemas/{schemaId}")
   @patch
   createOrUpdate is Azure.Core.Foundations.Operation<
@@ -693,7 +717,7 @@ interface SchemasOperations {
       /**
        * Schema resource payload to create or update.
        */
-      @body
+      @bodyRoot
       schema: Schema;
     },
     Schema
@@ -702,6 +726,7 @@ interface SchemasOperations {
   /**
    * Deletes Schema for given Schema id.
    */
+  @operationId("Schemas_Delete")
   @route("/schemas/{schemaId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -720,6 +745,7 @@ interface SolutionsOperations {
   /**
    * Cancel Solution job Async.
    */
+  @operationId("Solutions_CancelJob")
   @route("/external/solutions:cancel-job")
   @post
   cancelJob is Azure.Core.Foundations.Operation<
@@ -730,6 +756,7 @@ interface SolutionsOperations {
   /**
    * Creates solution job async.
    */
+  @operationId("Solutions_CreateJob")
   @route("/external/solutions:create-job")
   @post
   createJob is Azure.Core.Foundations.Operation<
@@ -740,6 +767,7 @@ interface SolutionsOperations {
   /**
    * Gets solution Data async.
    */
+  @operationId("Solutions_GetData")
   @route("/external/solutions:get-data")
   @post
   getData is Azure.Core.Foundations.Operation<
@@ -750,6 +778,7 @@ interface SolutionsOperations {
   /**
    * Gets Solution get job response async.
    */
+  @operationId("Solutions_GetJob")
   @route("/external/solutions:get-job")
   @post
   getJob is Azure.Core.Foundations.Operation<Solution, SamplePartnerResponse>;
@@ -759,6 +788,7 @@ interface WeatherOperations {
   /**
    * Returns a list of WeatherData.
    */
+  @operationId("Weather_Get")
   @route("/external/weather:fetch")
   @post
   get is Azure.Core.Foundations.Operation<WeatherRequest, WeatherResponse>;

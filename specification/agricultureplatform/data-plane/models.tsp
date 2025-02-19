@@ -685,6 +685,7 @@ model SatelliteFetchRequest {
 /**
  * OAuthClientCredentials for clientId clientSecret auth.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model OAuthClientCredentials extends AuthCredentials {
   /**
    * ClientId associated with the provider.
@@ -1331,6 +1332,7 @@ model WeatherRequest {
 /**
  * Api Key Auth Credentials class for API Key based Auth.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ApiKeyAuthCredentials extends AuthCredentials {
   /**
    * Properties of the key vault.
