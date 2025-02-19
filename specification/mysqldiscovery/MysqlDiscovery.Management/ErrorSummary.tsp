@@ -28,6 +28,7 @@ model ErrorSummary
    * Resource tags.
    */
   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
   tags?: Tag[];
 }
 

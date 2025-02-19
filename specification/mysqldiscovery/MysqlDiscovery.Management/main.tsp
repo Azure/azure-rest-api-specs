@@ -5,7 +5,7 @@
  *   isFullCompatible: false
  *   guessResourceKey: false
  * Version: 0.10.9
- * Date: 2025-02-18T11:11:00.910Z
+ * Date: 2025-02-19T10:20:22.717Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -33,6 +33,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 namespace Microsoft.MySQLDiscovery;
 
 /**
@@ -46,3 +47,5 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_09_30_preview: "2024-09-30-preview",
 }
+
+interface Operations extends Azure.ResourceManager.Operations {}
