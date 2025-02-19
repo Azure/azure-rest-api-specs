@@ -1,4 +1,4 @@
-name: ARM Auto Signoff (Preview)
+name: ARM Auto SignOff (Preview)
 
 on:
   issue_comment:
@@ -10,7 +10,7 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["ARM Incremental Typespec (Preview)"]
+    workflows: ["ARM Incremental TypeSpec (Preview)"]
     types: [completed]
   # For manual testing
   workflow_dispatch:
@@ -41,7 +41,7 @@ permissions:
 
 jobs:
   arm-auto-signoff-preview:
-    name: ARM Auto Signoff (Preview)
+    name: ARM Auto SignOff (Preview)
 
     # pull_request:labeled - filter to only the input and output labels
     # issue_comment:edited - filter to only PR comments containing "next steps to merge",
@@ -76,7 +76,7 @@ jobs:
       #   issueNumber: number
       # }
       - id: get-label-action
-        name: ARM Auto Signoff (Preview)
+        name: ARM Auto SignOff (Preview)
         uses: actions/github-script@v7
         with:
           script: |
@@ -95,7 +95,7 @@ jobs:
         name: Upload artifact with results
         uses: ./.github/actions/add-label-artifact
         with:
-          name: "ARMAutoSignoffPreview"
+          name: "ARMAutoSignOffPreview"
           # Convert "add/remove" to "true/false"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelAction == 'add' }}"
 
