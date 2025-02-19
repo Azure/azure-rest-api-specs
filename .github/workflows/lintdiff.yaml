@@ -45,7 +45,7 @@ jobs:
           ."./eng/scripts/ChangedFiles-Functions.ps1"
           Set-Location ./after
           Get-ChangedFiles | Set-Content -Path ../changed-files.txt
-          Get-Location ../
+          Resolve-Path (Join-Path (Get-Location) ../ )  
           Get-Content ../changed-files.txt
         shell: pwsh
 
