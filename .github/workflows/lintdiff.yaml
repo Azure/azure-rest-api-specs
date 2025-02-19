@@ -40,13 +40,14 @@ jobs:
         working-directory: eng/tools/lint-diff
 
       # TODO: This can probably be updated to run directly from JS
+      # TODO: default workspace is the after/ folder
       - name: Get changed files
         run: |
           ."./eng/scripts/ChangedFiles-Functions.ps1"
           Set-Location ./after
-          Get-ChangedFiles | Set-Content -Path ./changed-files.txt
+          Get-ChangedFiles | Set-Content -Path ../changed-files.txt
           Get-Location
-          Get-Content ./changed-files.txt
+          Get-Content ../changed-files.txt
         shell: pwsh
 
       - run: |
