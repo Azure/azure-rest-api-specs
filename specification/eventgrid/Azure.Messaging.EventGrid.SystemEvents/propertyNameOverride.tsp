@@ -10,6 +10,7 @@ import "./Microsoft.EventGrid/EventGrid.tsp";
 import "./propertyNameOverrideGo.tsp";
 import "./propertyNameOverrideCsharp.tsp";
 import "./propertyNameOverrideJs.tsp";
+import "./propertyNameOverrideJava.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
 
