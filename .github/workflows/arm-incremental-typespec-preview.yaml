@@ -24,6 +24,10 @@ jobs:
         with:
           # Required to detect changed files in PR
           fetch-depth: 2
+          # Check only needs to view contents of changed files as a string, so can use
+          # "git show" on specific files instead of cloning whole repo
+          sparse-checkout: |
+            .github
 
       # Output is "true" if PR contains only incremental changes to an existing TypeSpec RP
       - id: incremental-typespec
