@@ -16,53 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Advisor/metadata/{name}": {
-      "get": {
-        "tags": [
-          "Metadata"
-        ],
-        "summary": "Gets the metadata entity.",
-        "operationId": "RecommendationMetadata_Get",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of metadata entity.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Successfully retrieved metadata entities",
-            "schema": {
-              "$ref": "#/definitions/MetadataEntity"
-            }
-          },
-          "404": {
-            "description": "Client sent unknown metadata name",
-            "schema": {
-              "$ref": "#/definitions/ARMErrorResponseBody"
-            },
-            "x-ms-error-response": true
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetMetadata": {
-            "$ref": "./examples/GetRecommendationMetadataEntity.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Advisor/metadata": {
       "get": {
         "tags": [
