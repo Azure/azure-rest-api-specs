@@ -898,13 +898,11 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * Whether tables with oid's exists in the database.
    */
-  @encodedName("application/json", "hasTablesWithOids ")
   hasTablesWithOids?: boolean;
 
   /**
    * Whether the database has custom data types.
    */
-  @encodedName("application/json", "hasCustomDataTypes  ")
   hasCustomDataTypes?: boolean;
 
   /**
@@ -961,13 +959,11 @@ model PgsqlDatabaseResourcePatchProperties {
   /**
    * Whether tables with oid's exists in the database.
    */
-  @encodedName("application/json", "hasTablesWithOids ")
   hasTablesWithOids?: boolean;
 
   /**
    * Whether the database has custom data types.
    */
-  @encodedName("application/json", "hasCustomDataTypes  ")
   hasCustomDataTypes?: boolean;
 
   /**
