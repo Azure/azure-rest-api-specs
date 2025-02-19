@@ -137,7 +137,7 @@ export async function extractInputs(github, context, core) {
         },
       );
 
-      const artifactNames = artifacts.artifacts.map((a) => a.name);
+      const artifactNames = artifacts.map((a) => a.name);
 
       core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
