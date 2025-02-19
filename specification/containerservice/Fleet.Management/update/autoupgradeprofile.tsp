@@ -132,7 +132,7 @@ interface AutoUpgradeProfiles {
 @doc("AutoUpgradeProfileStatus is the status of an auto upgrade profile.")
 @added(Versions.v2025_03_01)
 model AutoUpgradeProfileStatus {
-  @doc("The time of the last attempt to automatically create and start an UpdateRun as triggered by the release of new versions.")
+  @doc("The UTC time of the last attempt to automatically create and start an UpdateRun as triggered by the release of new versions.")
   @visibility("read")
   lastTriggeredAt?: utcDateTime;
 
