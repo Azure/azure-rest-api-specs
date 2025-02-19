@@ -41,7 +41,7 @@ interface PgsqlInstances {
    * Patch the PGSQLInstances resource.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ArmCustomPatchSync<
     PgsqlInstance,
     PgsqlInstanceResourcePatchProperties
   >;

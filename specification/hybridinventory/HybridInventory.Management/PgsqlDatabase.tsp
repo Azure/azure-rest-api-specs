@@ -41,7 +41,7 @@ interface PgsqlDatabases {
    * Patch the PGSQLDatabases resource.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ArmCustomPatchSync<
     PgsqlDatabase,
     PgsqlDatabaseResourcePatchProperties
   >;

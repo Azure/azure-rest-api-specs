@@ -868,7 +868,7 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * The database name.
    */
-  databaseName?: string;
+  databaseDisplayName?: string;
 
   /**
    * PGSQL database encoding.
@@ -931,7 +931,7 @@ model PgsqlDatabaseResourcePatchProperties {
   /**
    * The database name.
    */
-  databaseName?: string;
+  databaseDisplayName?: string;
 
   /**
    * PGSQL database encoding.
