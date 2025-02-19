@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-01-01",
+    "version": "2023-09-01-preview",
     "title": "AdvisorManagementClient",
     "description": "REST APIs for Azure Advisor"
   },
@@ -549,6 +549,61 @@
             "$ref": "./examples/GetRecommendationDetail.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "PatchRecommendations"
+        ],
+        "description": "Update the tracked properties of a Recommendation.",
+        "operationId": "Recommendations_Patch",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource Manager identifier of the resource to which the tracked recommendation applies.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "description": "The RecommendationId ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trackedProperties",
+            "in": "body",
+            "description": "The properties to update on the recommendation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrackedRecommendationProperties"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully updated recommendation status.",
+            "schema": {
+              "$ref": "#/definitions/ResourceRecommendationBase"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "UpdateTrackedRecommendation": {
+            "$ref": "./examples/UpdateTrackedRecommendation.json"
+          }
+        }
       }
     },
     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}": {
@@ -1030,7 +1085,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1188,7 +1243,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1331,6 +1386,50 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "tracked": {
+          "type": "boolean",
+          "description": "If the Recommendation has Tracking enabled."
+        },
+        "trackedProperties": {
+          "$ref": "#/definitions/TrackedRecommendationProperties",
+          "description": "The properties of a tracked recommendation."
+        },
+        "review": {
+          "description": "The Review that this Recommendation belongs to.",
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "The ARM Resource Id of the Review",
+              "type": "string"
+            },
+            "name": {
+              "description": "The Name of the Review",
+              "type": "string"
+            }
+          }
+        },
+        "resourceWorkload": {
+          "description": "The Workload that this Resource belongs to.",
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "The Id of the Workload",
+              "type": "string"
+            },
+            "name": {
+              "description": "The Name of the Workload",
+              "type": "string"
+            }
+          }
+        },
+        "sourceSystem": {
+          "description": "The Source System that this Recommendation originated from.",
+          "type": "string"
+        },
+        "notes": {
+          "description": "Additional notes for the Recommendation",
+          "type": "string"
         }
       }
     },
@@ -1438,7 +1537,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1672,7 +1771,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1688,6 +1787,65 @@
               "description": "The historic Advisor score data.",
               "$ref": "#/definitions/timeSeriesEntity"
             }
+          }
+        }
+      }
+    },
+    "TrackedRecommendationProperties": {
+      "description": "The tracked properties of a Recommendation",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "The state of the Recommendation",
+          "enum": [
+            "Approved",
+            "Rejected",
+            "Pending",
+            "InProgress",
+            "Postponed",
+            "Dismissed",
+            "Completed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
+        },
+        "postponedTime": {
+          "description": "The time the Recommendation was postponed until.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "description": "The reason the state of the Recommendation was changed.",
+          "enum": [
+            "ExcessiveInvestment",
+            "TooComplex",
+            "AlternativeSolution",
+            "Incompatible",
+            "Unclear",
+            "RiskAccepted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "reason",
+            "modelAsString": true
+          }
+        },
+        "priority": {
+          "description": "The Priority of the Recommendation.",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low",
+            "Informational"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "priority",
+            "modelAsString": true
           }
         }
       }
