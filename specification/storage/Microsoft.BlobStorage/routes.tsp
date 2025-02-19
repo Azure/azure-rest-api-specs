@@ -24,13 +24,14 @@ alias ApiVersionHeader = {
 op StorageOperation<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
-  MediaType extends string = "application/xml",
+  RequestMediaType extends string = "application/xml",
+  ResponseMediaType extends string = "application/xml",
   TError = StorageError
 >(
   /** Content-Type header */
   #suppress "@typespec/http/content-type-ignored" "Template for existing API"
   @header("Content-Type")
-  contentType: MediaType,
+  contentType: RequestMediaType,
 
   ...ApiVersionHeader,
   ...TParams,
@@ -39,7 +40,7 @@ op StorageOperation<
   /** Content-Type header */
   #suppress "@typespec/http/content-type-ignored" "Template for existing API"
   @header("Content-Type")
-  contentType: MediaType;
+  contentType: ResponseMediaType;
 
   ...RequestIdResponseHeader;
   ...ClientRequestIdHeader;
@@ -1303,64 +1304,6 @@ interface Blob {
     }
   >;
 
-  /** The Query operation enables users to select/project on blob data by providing simple query expressions. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-  @post
-  @route("/{containerName}/{blob}?comp=query")
-  query is StorageOperation<
-    {
-      ...ContainerNamePathParameter;
-      ...BlobPathParameter;
-
-      /** The query request */
-      @body
-      queryRequest: QueryRequest;
-
-      ...SnapshotParameter;
-      ...TimeoutParameter;
-      ...LeaseIdOptionalParameter;
-      ...EncryptionKeyParameter;
-      ...EncryptionKeySha256Parameter;
-      ...EncryptionAlgorithmParameter;
-      ...ConditionalRequestHeaders;
-      ...IfTagsParameter;
-    },
-    BodyParameter & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
-      @statusCode statusCode: 200 | 206;
-      ...MetadataHeaders;
-      ...LastModifiedResponseHeader;
-      ...ContentLengthResponseHeader;
-      ...ContentRangeResponseHeader;
-      ...EtagResponseHeader;
-      ...ContentMd5ResponseHeader;
-      ...ContentEncodingResponseParameter;
-      ...CacheControlResponseHeader;
-      ...ContentDispositionResponseHeader;
-      ...ContentLanguageResponseHeader;
-      ...BlobSequenceNumberResponseHeader;
-      ...BlobTypeResponseHeader;
-      ...ContentCrc64ResponseHeader;
-      ...CopyCompletionTimeResponseHeader;
-      ...CopyStatusDescriptionResponseHeader;
-      ...CopyIdResponseHeader;
-      ...CopyProgressResponseHeader;
-      ...CopySourceResponseHeader;
-      ...CopyStatusResponseHeader;
-      ...LeaseDurationHeader;
-      ...LeaseStateResponseHeader;
-      ...LeaseStatusResponseHeader;
-      ...AcceptRangesResponseHeader;
-      ...DateResponseHeader;
-      ...BlobCommittedBlockCountResponseHeader;
-      ...IsServerEncryptedResponseHeader;
-      ...EncryptionKeySha256ResponseHeader;
-      ...EncryptionScopeResponseHeader;
-      ...BlobContentMd5ResponseHeader;
-    }
-  >;
-
   /** The Get Blob Tags operation enables users to get tags on a blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
@@ -2179,5 +2122,65 @@ interface BlockBlob {
       ...BlobContentLengthRequired;
       ...DateResponseHeader;
     }
+  >;
+
+  /** The Query operation enables users to select/project on blob data by providing simple query expressions. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+  @post
+  @route("/{containerName}/{blob}?comp=query")
+  query is StorageOperation<
+    {
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
+
+      /** The query request */
+      @body
+      queryRequest: QueryRequest;
+
+      ...SnapshotParameter;
+      ...TimeoutParameter;
+      ...LeaseIdOptionalParameter;
+      ...EncryptionKeyParameter;
+      ...EncryptionKeySha256Parameter;
+      ...EncryptionAlgorithmParameter;
+      ...ConditionalRequestHeaders;
+      ...IfTagsParameter;
+    },
+    BodyParameter & {
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
+      @statusCode statusCode: 200 | 206;
+      ...MetadataHeaders;
+      ...LastModifiedResponseHeader;
+      ...ContentLengthResponseHeader;
+      ...ContentRangeResponseHeader;
+      ...EtagResponseHeader;
+      ...ContentMd5ResponseHeader;
+      ...ContentEncodingResponseParameter;
+      ...CacheControlResponseHeader;
+      ...ContentDispositionResponseHeader;
+      ...ContentLanguageResponseHeader;
+      ...BlobSequenceNumberResponseHeader;
+      ...BlobTypeResponseHeader;
+      ...ContentCrc64ResponseHeader;
+      ...CopyCompletionTimeResponseHeader;
+      ...CopyStatusDescriptionResponseHeader;
+      ...CopyIdResponseHeader;
+      ...CopyProgressResponseHeader;
+      ...CopySourceResponseHeader;
+      ...CopyStatusResponseHeader;
+      ...LeaseDurationHeader;
+      ...LeaseStateResponseHeader;
+      ...LeaseStatusResponseHeader;
+      ...AcceptRangesResponseHeader;
+      ...DateResponseHeader;
+      ...BlobCommittedBlockCountResponseHeader;
+      ...IsServerEncryptedResponseHeader;
+      ...EncryptionKeySha256ResponseHeader;
+      ...EncryptionScopeResponseHeader;
+      ...BlobContentMd5ResponseHeader;
+    },
+    "application/xml",
+    "application/octet-stream"
   >;
 }
