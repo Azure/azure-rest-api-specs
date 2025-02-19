@@ -35,7 +35,7 @@ jobs:
         with:
           working-directory: eng/tools/lint-diff
           # TODO: this probably needs a package-lock.json and dist or a separate step
-          install-command: npm i && npm run build
+          install-command: npm i; npm run build
 
       # TODO: This can probably be updated to run directly from JS
       - name: Get changed files
