@@ -1004,6 +1004,76 @@
         }
       }
     },
+    "ExceptionEntry": {
+      "required": [
+        "matchVariable",
+        "valueMatchOperator"
+      ],
+      "description": "Adds exception to allow a request when the condition is satisfied.",
+      "type": "object",
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "enum": [
+            "RequestURI",
+            "RemoteAddr",
+            "RequestHeader"
+          ],
+          "description": "The variable on which we evaluate the exception condition",
+          "x-ms-enum": {
+            "name": "ExceptionEntryMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed values for the matchVariable"
+        },
+        "valueMatchOperator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "Contains",
+            "StartsWith",
+            "EndsWith",
+            "IPMatch"
+          ],
+          "x-ms-enum": {
+            "name": "ExceptionEntryValueMatchOperator",
+            "modelAsString": true
+          },
+          "description": "Operates on the allowed values for the matchVariable"
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "Contains",
+            "StartsWith",
+            "EndsWith"
+          ],
+          "description": "When the matchVariable points to a key-value pair (e.g, RequestHeader), this operates on the selector",
+          "x-ms-enum": {
+            "name": "ExceptionEntrySelectorMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string",
+          "description": "When the matchVariable points to a key-value pair (e.g, RequestHeader), this identifies the key."
+        },
+        "exceptionManagedRuleSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExclusionManagedRuleSet"
+          },
+          "description": "The managed rule sets that are associated with the exception."
+        }
+      }
+    },
     "ActionType": {
       "description": "Defines the action to take on rule match.",
       "type": "string",
@@ -1016,6 +1086,20 @@
       ],
       "x-ms-enum": {
         "name": "ActionType",
+        "modelAsString": true
+      }
+    },
+    "SensitivityType": {
+      "description": "Defines the sensitivity for the rule.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "SensitivityType",
         "modelAsString": true
       }
     },
@@ -1069,6 +1153,27 @@
           "x-ms-enum": {
             "name": " scrubbingRuleEntryState",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "ApplicationGatewayForContainersReferenceDefinition": {
+      "type": "object",
+      "description": "Defines an application gateway for containers reference.",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "description": "Resource Id of the application gateway for containers.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ServiceNetworking/trafficControllers"
+              }
+            ]
           }
         }
       }
