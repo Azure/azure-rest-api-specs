@@ -47,6 +47,12 @@ model IdentitySetResourceProperties {
   @doc("The URL to which the Nexus Identity Service will send notifications.")
   notificationUrl: url;
 
+  @doc("The storage account to which data related to role assignments will be stored for notifications")
+  storageAccount: string;
+  
+  @doc("The URI of the keyvault which stores the keys for encryption and decryption of the sensitive client data")
+  keyVaultUri: url;
+
   @doc("The application Id of Identity Set resource")
   @visibility("read")
   appId?: string;
