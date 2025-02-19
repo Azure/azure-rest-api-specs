@@ -27,7 +27,6 @@ using TypeSpec.Versioning;
  * The Microsoft.HybridInventory Rest API spec.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure API for OffAzure Inventory",
 })
