@@ -235,10 +235,7 @@
             "$ref": "#/parameters/EntryIdParameter"
           },
           {
-            "$ref": "#/parameters/EmbedReceiptParameter"
-          },
-          {
-            "$ref": "#/parameters/AcceptCoseHeader"
+            "$ref": "#/parameters/AcceptCoseOrCborHeader"
           }
         ],
         "responses": {
@@ -578,65 +575,15 @@
       }
     }
   },
-  "x-ms-paths": {
-    "/.well-known/transparency-configuration?_overload=getTransparencyConfigJson": {
-      "get": {
-        "operationId": "GetTransparencyConfigJson",
-        "description": "Get the transparency configuration file, see IETF SCITT draft",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AcceptJsonHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TransparencyConfigurationJson"
-            }
-          },
-          "500": {
-            "description": "Server error response",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          },
-          "503": {
-            "description": "Service temporarily unavailable",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "string",
-                "description": "Retry the same request after a suggested number of seconds"
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "GetTransparencyConfigJson": {
-            "$ref": "./examples/GetTransparencyConfigJson.json"
-          }
-        }
-      }
-    }
-  },
   "definitions": {
+    "AcceptCoseHeader": {
+      "type": "object",
+      "description": "Accept application/cose header"
+    },
+    "AcceptJsonHeader": {
+      "type": "object",
+      "description": "Accept application/json header"
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -792,6 +739,17 @@
       "required": [
         "body"
       ]
+    },
+    "EmbedReceiptParameter": {
+      "type": "object",
+      "description": "The EmbedReceipt parameter.",
+      "properties": {
+        "embedReceipt": {
+          "type": "boolean",
+          "description": "Embed a receipt as part of the response",
+          "default": false
+        }
+      }
     },
     "EntryIds": {
       "type": "object",
@@ -1107,31 +1065,18 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "AcceptCoseHeader": {
+    "AcceptCoseOrCborHeader": {
       "name": "accept",
       "in": "header",
       "description": "Accept header",
       "required": true,
       "type": "string",
       "enum": [
-        "application/cose"
+        "application/cose",
+        "application/cbor"
       ],
       "x-ms-enum": {
-        "modelAsString": false
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "AcceptJsonHeader": {
-      "name": "accept",
-      "in": "header",
-      "description": "Accept header",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "application/json"
-      ],
-      "x-ms-enum": {
-        "modelAsString": false
+        "modelAsString": true
       },
       "x-ms-parameter-location": "method"
     },
@@ -1144,15 +1089,6 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
-    },
-    "EmbedReceiptParameter": {
-      "name": "embedReceipt",
-      "in": "query",
-      "description": "Embed a receipt as part of the response",
-      "required": false,
-      "type": "boolean",
-      "default": false,
-      "x-ms-parameter-location": "method"
     },
     "EntryIdParameter": {
       "name": "entryId",

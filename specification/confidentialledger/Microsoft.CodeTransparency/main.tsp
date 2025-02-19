@@ -28,6 +28,7 @@ namespace Microsoft.CodeTransparency;
 @doc("The Microsoft.CodeTransparency service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  // aligns with Feb 4 2025 SCRAPI spec https://github.com/ietf-wg-scitt/draft-ietf-scitt-scrapi/blob/4fafe531c21a3d1241934330bb771f82c64e0827/draft-ietf-scitt-scrapi.md
   @doc("The 2025-01-31-preview version of the Microsoft.CodeTransparency service.")
   `2025-01-31-preview`,
 }
@@ -35,14 +36,9 @@ enum Versions {
 // Additional supported traits by the API.
 alias ServiceTraits = SupportsClientRequestId;
 
-// -----------------------------------------------------------------
-// Service configuration endpoints
-// -----------------------------------------------------------------
-
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
-@doc("Get the transparency configuration file, see IETF SCITT draft")
-@sharedRoute
+@doc("Get the transparency service configuration, mandatory in IETF SCITT draft")
 @route("/.well-known/transparency-configuration")
 @get
 op getTransparencyConfigCbor is Foundations.Operation<
@@ -54,88 +50,44 @@ op getTransparencyConfigCbor is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
-@doc("Get the transparency configuration file, see IETF SCITT draft")
-@sharedRoute
-@route("/.well-known/transparency-configuration")
-@get
-op getTransparencyConfigJson is Foundations.Operation<
-  AcceptJsonHeader,
-  TransparencyConfigurationJson,
-  ServiceTraits,
-  JsonServerErrors
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@added(Versions.`2025-01-31-preview`)
-@doc("Get the public keys used by the service to sign receipts")
+@doc("Get the public keys used by the service to sign receipts, mentioned in IETF SCITT draft as part of jwks_uri implementation")
 @route("/jwks")
-@get
 op getPublicKeys is Foundations.Operation<
   {},
   JwksDocument,
   ServiceTraits,
-  JsonServerErrors
+  AnyCborError
 >;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@doc("Get CodeTransparency configuration information.")
-@route("/configuration")
-@get
-op getCodeTransparencyConfig is Foundations.Operation<
-  {},
-  CodeTransparencyConfiguration,
-  ServiceTraits,
-  JsonServerErrors
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@doc("Get CodeTransparency version information.")
-@route("/version")
-@get
-op getCodeTransparencyVersion is Foundations.Operation<
-  {},
-  VersionResult,
-  ServiceTraits,
-  JsonServerErrors
->;
-
-// -----------------------------------------------------------------
-// Service entry endpoints
-// -----------------------------------------------------------------
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
-@doc("Post an entry to be registered on the CodeTransparency instance, see IETF SCITT draft")
+@doc("Post an entry to be registered on the CodeTransparency instance, mandatory in IETF SCITT draft")
 @post
-@sharedRoute
 @route("/entries")
 op createEntry is Foundations.Operation<
-  SignedStatement,
+  SignedStatement & AcceptCoseOrCborHeader,
   CreateEntryCreated | CreateEntryPending,
   ServiceTraits,
   AnyCborError
 >;
 
-// uses explicit accept header to not generate such parameter in .net sdk
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
-@doc("Get signed statement with or without receipt embedded in its unprotected header")
-@sharedRoute
-@route("/entries/{entryId}")
-op getEntry is Foundations.Operation<
-  EntryIdParameter & EmbedReceiptParameter & AcceptCoseHeader,
-  SignedStatement | TransparentStatement,
+@doc("Get status of the long running registration operation, mandatory in IETF SCITT draft")
+@route("/operations/{operationId}")
+op getOperation is Foundations.Operation<
+  OperationIdParameter & AcceptCborHeader,
+  OperationStatusComplete | OperationStatusPending,
   ServiceTraits,
   AnyCborError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
-@doc("Get the receipt of an entry given a specific entry id.")
-@sharedRoute
-@route("/entries/{entryId}/receipt")
-op getEntryReceipt is Foundations.Operation<
-  EntryIdParameter,
+@doc("Get receipt")
+@route("/entries/{entryId}")
+op getEntry is Foundations.Operation<
+  EntryIdParameter & AcceptCoseHeader,
   ReceiptEntry,
   ServiceTraits,
   AnyCborError
@@ -143,31 +95,17 @@ op getEntryReceipt is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
-@doc("Get the receipt of an entry given a specific entry id.")
+@doc("Get the transparent statement consisting of the signed statement and the receipt embedded in the header")
 @route("/entries/{entryId}/statement")
 op getEntryStatement is Foundations.Operation<
-  EntryIdParameter,
+  EntryIdParameter & AcceptCoseHeader,
   TransparentStatement,
   ServiceTraits,
   AnyCborError
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@doc("Historical query to get a list of entries of a given range")
-@route("/entries/txIds")
-op listEntryIds is Foundations.Operation<
-  TransactionsRange,
-  EntryIds,
-  ServiceTraits,
-  JsonServerErrors
->;
-
-// -----------------------------------------------------------------
-// Service models
-// -----------------------------------------------------------------
-
 @added(Versions.`2025-01-31-preview`)
-@doc("Response of entry submission if the response can be served immediately, see IETF SCITT draft")
+@doc("Response of entry submission if the response can be served immediately, mandatory in IETF SCITT draft")
 model CreateEntryCreated {
   @doc("Status code")
   @statusCode
@@ -177,33 +115,84 @@ model CreateEntryCreated {
   @header("Content-Type")
   contentType: "application/cose";
 
-  @doc("Location of the transparent statement")
+  @doc("Location of the receipt")
   @header("Location")
-  location: string;
+  location?: string;
 
-  @doc("Transparent statement")
+  @doc("Receipt body in COSE format")
   @bodyRoot
   body: bytes;
 }
 
 @added(Versions.`2025-01-31-preview`)
-@doc("Response of entry submission containing the transparent statement id, see IETF SCITT draft")
+@doc("Response of entry submission containing the operation id, mandatory in IETF SCITT draft")
 model CreateEntryPending {
   @doc("Status code")
   @statusCode
   statusCode: 202;
 
-  @doc("Response content is CBOR")
+  @doc("Response content is in CBOR format")
   @header("Content-Type")
   contentType: "application/cbor";
 
-  @doc("Location of the transparent statement")
+  @doc("Location of the operation")
   @header("Location")
-  location: string;
+  location?: string;
 
-  @doc("Response contains the identifier")
+  @doc("Retry-After seconds value to help with polling")
+  @header("Retry-After")
+  retryAfter?: int32;
+
+  // Example map in CBOR would look like
+  // {
+  //   / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190",
+  //   / status /  "Status": "running",
+  // }
+  // Status can be "running" or "succeeded"
+  @doc("Operation status response")
   @bodyRoot
   body: bytes;
+}
+
+@doc("Provides status details for long running operation, mandatory in IETF SCITT draft")
+model OperationStatusComplete {
+  @doc("Response content is in CBOR format")
+  @header("Content-Type")
+  contentType: "application/cbor";
+
+  @doc("Location of the entry")
+  @header("Location")
+  location?: string;
+
+  // A success CBOR structure:
+  // {
+  //   / locator / "EntryID": "67f89d5f0042e3ad42...35a1f190",
+  //   / status /  "Status": "succeeded",
+  // }
+  // Or an error CBOR structure:
+  // {
+  //   / status / "Status": "failed",
+  //   / error /  "Error": {
+  //     / title /         -1: \
+  //             "Bad Signature Algorithm",
+  //     / detail /        -2: \
+  //             "Signed Statement contained a non supported algorithm"
+  //   }
+  // }
+  @doc("Operation status response")
+  @bodyRoot
+  body: bytes;
+}
+
+@doc("Pending reposnse if the operation was not complete, mandatory in IETF SCITT draft")
+model OperationStatusPending {
+  @doc("Location of the operation")
+  @header("Location")
+  location?: string;
+
+  @doc("Retry-After seconds value to help with polling")
+  @header("Retry-After")
+  retryAfter?: int32;
 }
 
 @doc("Signed statement")
@@ -212,6 +201,13 @@ model SignedStatement {
   @header("Content-Type")
   contentType: "application/cose";
 
+  // Example
+  // 18([                            / COSE Sign1         /
+  //   h'a1013822',                  / Protected Header   /
+  //   {},                           / Unprotected Header /
+  //   h'8f4211d....1dffc',          / Payload            /
+  //   h'269cd68f4211dffc...0dcb29c' / Signature          /
+  // ])
   @doc("CoseSign1 signature envelope")
   @bodyRoot
   body: bytes;
@@ -233,23 +229,30 @@ model ReceiptEntry {
   @doc("The MIME content type for receipt is application/cose.")
   @added(Versions.`2025-01-31-preview`)
   @header("Content-Type")
-  contentTypeCose: "application/cose";
+  contentType: "application/cose";
 
-  @doc("A raw CBOR content")
+  @doc("Location of the receipt")
+  @header("Location")
+  location?: string;
+
+  // Example CBOR:
+  // 18([                            / COSE Sign1         /
+  //   h'a1013822',                  / Protected Header   /
+  //   {},                           / Unprotected Header /
+  //   null,                         / Payload            /
+  //   h'269cd68f4211dffc...0dcb29c' / Signature          /
+  // ])
+  @doc("A receipt structure in COSE format")
   @bodyRoot
   body: bytes;
 }
 
-@doc("A List of Entry IDs")
-@pagedResult
-model EntryIds {
-  @doc("List of entry ids")
-  @items
-  transactionIds: string[];
-
-  @doc("Path to the next page of results")
-  @TypeSpec.nextLink
-  nextLink?: string;
+@doc("The OperationId parameter.")
+model OperationIdParameter {
+  @doc("ID of the operation to retrieve.")
+  @path
+  @maxLength(100)
+  operationId: string;
 }
 
 @doc("The EntryId parameter.")
@@ -257,8 +260,14 @@ model EntryIdParameter {
   @doc("ID of the entry to retrieve.")
   @path
   @maxLength(100)
-  @pattern("^[0-9]+\\.[0-9]+$")
   entryId: string;
+}
+
+@doc("Accept application/cose header")
+model AcceptCoseOrCborHeader {
+  @doc("Accept header")
+  @header
+  accept: string | "application/cose" | "application/cbor";
 }
 
 @doc("Accept application/cose header")
@@ -275,33 +284,6 @@ model AcceptCborHeader {
   accept: "application/cbor";
 }
 
-@doc("Accept application/json header")
-model AcceptJsonHeader {
-  @doc("Accept header")
-  @header
-  accept: "application/json";
-}
-
-@doc("The EmbedReceipt parameter.")
-model EmbedReceiptParameter {
-  @doc("Embed a receipt as part of the response")
-  @query
-  embedReceipt?: boolean = false;
-}
-
-@doc("Range of transactions for historical queries")
-model TransactionsRange {
-  @doc("Starting Transaction Id")
-  @query
-  @minValue(0)
-  from?: int64;
-
-  @doc("Ending Transaction Id")
-  @query
-  @minValue(0)
-  to?: int64;
-}
-
 @added(Versions.`2025-01-31-preview`)
 @doc("Transparency configuration, see IETF SCITT draft.")
 model TransparencyConfigurationCbor {
@@ -309,25 +291,14 @@ model TransparencyConfigurationCbor {
   @header
   contentType: "application/cbor";
 
+  // Returns CBOR map:
+  // {
+  //   "issuer": "https://transparency.example",
+  //   "jwks_uri": "https://transparency.example/jwks"
+  // }
   @doc("CBOR content of the configuration object")
   @body
   body: bytes;
-}
-
-@added(Versions.`2025-01-31-preview`)
-@doc("Transparency configuration, see IETF SCITT draft.")
-model TransparencyConfigurationJson {
-  @doc("Content type header")
-  @header
-  contentType: "application/json";
-
-  @doc("Configured issuer string")
-  @example("https://transparency.example")
-  issuer: string;
-
-  @doc("Location of the JWKS document")
-  @example("https://transparency.example/jwks")
-  jwksUri: string;
 }
 
 @added(Versions.`2025-01-31-preview`)
@@ -392,77 +363,22 @@ model JsonWebKey {
   y?: string;
 }
 
-@doc("The Response body of the Version API.")
-model VersionResult {
-  @added(Versions.`2025-01-31-preview`)
-  @doc("Version of the CodeTransparency service")
-  version: string;
-}
-
-@doc("The Response body of the Configuration API.")
-model CodeTransparencyConfiguration {
-  @doc("Policy configuration")
-  policy?: CodeTransparencyConfigurationPolicy;
-
-  @doc("Authentication configuration")
-  authentication?: CodeTransparencyConfigurationAuthentication;
-}
-
-@doc("Configuration of CCF authentication.")
-model CodeTransparencyConfigurationAuthentication {
-
-  @added(Versions.`2025-01-31-preview`)
-  @doc("Disable API authentication and rely on signed statement verification only")
-  allowUnauthenticated: boolean;
-
-  @doc("JWT requirements if authentication is enabled")
-  jwt?: CodeTransparencyConfigurationAuthenticationJwt;
-}
-
-@doc("Configuration of JWT claims")
-model CodeTransparencyConfigurationAuthenticationJwt {
-
-  @added(Versions.`2025-01-31-preview`)
-  @doc("Claims that must be present in the JWT")
-  requiredClaims: Record<string>;
-}
-
-@doc("Policy configuration listing accepted algorithms and the the policy script")
-model CodeTransparencyConfigurationPolicy {
-  @added(Versions.`2025-01-31-preview`)
-  @doc("Accepted COSE signature algorithms when verifying signed statements")
-  acceptedAlgorithms?: string[];
-
-  @added(Versions.`2025-01-31-preview`)
-  @doc("COSE signature verification script in Javascript")
-  policyScript: string;
-}
-
 // -----------------------------------------------------------------
 // Error responses as per IETF draft
 // -----------------------------------------------------------------
 
+// Example CBOR:
+// {
+//   / title /         -1: \
+//           "Operation Not Found",
+//   / detail /        -2: \
+//           "No running operation was found matching the requested ID"
+// }
 alias ConciseProblemDetailsCbor = bytes;
 
 @added(Versions.`2025-01-31-preview`)
-@doc("Not found error response")
-model NotFoundErrorCborResponse {
-  @doc("Status code")
-  @statusCode
-  statusCode: 404;
-
-  @doc("The MIME content type for error is application/concise-problem-details+cbor, see RFC9290")
-  @header
-  contentType: "application/concise-problem-details+cbor";
-
-  @doc("CBOR content of the error object")
-  @body
-  error: ConciseProblemDetailsCbor;
-}
-
-@added(Versions.`2025-01-31-preview`)
 @doc("Validation error response")
-model ValidationErrorCborResponse {
+model Response400Cbor {
   @doc("Status code")
   @statusCode
   statusCode: 400;
@@ -477,8 +393,44 @@ model ValidationErrorCborResponse {
 }
 
 @added(Versions.`2025-01-31-preview`)
+@doc("Not found error response")
+model Response404Cbor {
+  @doc("Status code")
+  @statusCode
+  statusCode: 404;
+
+  @doc("The MIME content type for error is application/concise-problem-details+cbor, see RFC9290")
+  @header
+  contentType: "application/concise-problem-details+cbor";
+
+  @doc("CBOR content of the error object")
+  @body
+  error: ConciseProblemDetailsCbor;
+}
+
+@added(Versions.`2025-01-31-preview`)
+@doc("Not found error response")
+model Response429Cbor {
+  @doc("Status code")
+  @statusCode
+  statusCode: 429;
+
+  @doc("The MIME content type for error is application/concise-problem-details+cbor, see RFC9290")
+  @header
+  contentType: "application/concise-problem-details+cbor";
+
+  @doc("Retry-After seconds value to help with polling")
+  @header("Retry-After")
+  retryAfter?: int32;
+
+  @doc("CBOR content of the error object")
+  @body
+  error: ConciseProblemDetailsCbor;
+}
+
+@added(Versions.`2025-01-31-preview`)
 @doc("Server error response")
-model ServerErrorCborResponse {
+model Response500Cbor {
   @doc("Status code")
   @statusCode
   statusCode: 500;
@@ -494,10 +446,10 @@ model ServerErrorCborResponse {
 
 @added(Versions.`2025-01-31-preview`)
 @doc("Service unavailable error response")
-model ServiceUnavailableErrorCborResponse {
+model Response503Cbor {
   @doc("Retry the same request after a suggested number of seconds")
   @header("Retry-After")
-  retryAfter?: string;
+  retryAfter?: int32;
 
   @doc("Status code")
   @statusCode
@@ -513,80 +465,9 @@ model ServiceUnavailableErrorCborResponse {
 }
 
 alias AnyCborError =
-  | NotFoundErrorCborResponse
-  | ValidationErrorCborResponse
-  | ServerErrorCborResponse
-  | ServiceUnavailableErrorCborResponse;
-alias CborServerErrors = ServerErrorCborResponse | ServiceUnavailableErrorCborResponse;
-
-@doc("Not found error response")
-model NotFoundErrorJsonResponse {
-  @doc("Status code")
-  @statusCode
-  statusCode: 404;
-
-  @doc("Content type header application/json")
-  @header
-  contentType: "application/json";
-
-  @doc("Error response")
-  @bodyRoot
-  error: ErrorResponse;
-}
-
-@doc("Validation error response")
-model ValidationErrorJsonResponse {
-  @doc("Status code")
-  @statusCode
-  statusCode: 400;
-
-  @doc("Content type header application/json")
-  @header
-  contentType: "application/json";
-
-  @doc("Error response")
-  @bodyRoot
-  error: ErrorResponse;
-}
-
-@doc("Server error response")
-model ServerErrorJsonResponse {
-  @doc("Status code")
-  @statusCode
-  statusCode: 500;
-
-  @doc("Content type header application/json")
-  @header
-  contentType: "application/json";
-
-  @doc("Error response")
-  @bodyRoot
-  error: ErrorResponse;
-}
-
-@doc("Service temporarily unavailable")
-@error
-model ServiceUnavailableError {
-  @doc("Retry the same request after a suggested number of seconds")
-  @header("Retry-After")
-  retryAfter?: string;
-
-  @doc("Status code is always 503 when service is unavailable")
-  @statusCode
-  statusCode: 503;
-
-  @doc("Content type header application/json")
-  @header
-  contentType: "application/json";
-
-  @doc("Error response")
-  @bodyRoot
-  error: ErrorResponse;
-}
-
-alias AnyJsonError =
-  | NotFoundErrorJsonResponse
-  | ValidationErrorJsonResponse
-  | ServerErrorJsonResponse
-  | ServiceUnavailableError;
-alias JsonServerErrors = ServerErrorJsonResponse | ServiceUnavailableError;
+  | Response400Cbor
+  | Response404Cbor
+  | Response429Cbor
+  | Response500Cbor
+  | Response503Cbor;
+alias CborServerErrors = Response500Cbor | Response503Cbor;
