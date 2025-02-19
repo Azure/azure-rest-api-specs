@@ -42,6 +42,12 @@ interface PgsqlSites {
   // update is ArmResourcePatchAsync<PgsqlSite, PgsqlSiteProperties>;
 
   /**
+   * Patch the PGSQLSites resource.
+   */
+  @parameterVisibility
+  update is ArmCustomPatchAsync<PgsqlSite, SiteTagsPatch>;
+
+  /**
    * Deletes the PGSQLSites resource.
    */
   delete is ArmResourceDeleteSync<PgsqlSite>;

@@ -299,6 +299,80 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "PgsqlSites_Update",
+        "tags": [
+          "PgsqlSites"
+        ],
+        "description": "Patch the PGSQLSites resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteTagsPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PgsqlSite"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PgsqlSites_Update_MaximumSet": {
+            "$ref": "./examples/PgsqlSites_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "PgsqlSites_Delete",
         "tags": [
@@ -935,7 +1009,7 @@
             "description": "Clouds patch payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PgsqlDatabaseProperties"
+              "$ref": "#/definitions/PgsqlDatabaseResourcePatchProperties"
             }
           }
         ],
@@ -2343,6 +2417,84 @@
         }
       }
     },
+    "PgsqlDatabaseResourcePatchProperties": {
+      "type": "object",
+      "description": "PGSQL Database properties",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The database name."
+        },
+        "encoding": {
+          "$ref": "#/definitions/Encoding",
+          "description": "PGSQL database encoding."
+        },
+        "collations": {
+          "type": "array",
+          "description": "The list of collations in the database.",
+          "items": {
+            "$ref": "#/definitions/Collation"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "locale",
+            "collationProvider",
+            "isDeterministic"
+          ]
+        },
+        "extensions": {
+          "type": "array",
+          "description": "The list of extensions in the database.",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "version"
+          ]
+        },
+        "languages": {
+          "type": "array",
+          "description": "List of languages in the database.",
+          "items": {
+            "$ref": "#/definitions/Language"
+          }
+        },
+        "hasTablesWithOids ": {
+          "type": "boolean",
+          "description": "Whether tables with oid's exists in the database.",
+          "x-ms-client-name": "hasTablesWithOids"
+        },
+        "hasCustomDataTypes  ": {
+          "type": "boolean",
+          "description": "Whether the database has custom data types.",
+          "x-ms-client-name": "hasCustomDataTypes"
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Resource tags",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": [
+            "key",
+            "value"
+          ]
+        }
+      }
+    },
     "PgsqlInstance": {
       "type": "object",
       "description": "The PGSQLInstance resource definition.",
@@ -2774,6 +2926,19 @@
         "value": {
           "type": "string",
           "description": "Property value"
+        }
+      }
+    },
+    "SiteTagsPatch": {
+      "type": "object",
+      "description": "The Site Tags patch resource definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },

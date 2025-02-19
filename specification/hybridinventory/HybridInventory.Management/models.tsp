@@ -28,6 +28,11 @@ model ServerParameter {
   value?: string;
 }
 
+@doc("Base tracked resource type for PATCH updates.")
+model TagsUpdate {
+  ...ArmTagsProperty;
+}
+
 /**
  * Represents the Provisioning State of a resource.
  * Gets or sets the provisioning state.
@@ -1089,4 +1094,9 @@ model AgentResourcePatchProperties {
    * Health details of the agent.
    */
   healthDetails?: AgentHealthProperties;
+}
+
+@doc("The Site Tags patch resource definition.")
+model SiteTagsPatch {
+  ...TagsUpdate;
 }
