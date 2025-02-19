@@ -6,7 +6,10 @@ using TypeSpec.Http;
 
 namespace AI.Model;
 
-alias EmbeddingsOptions = {
+@doc("""
+  The configuration information for an embeddings request.
+  """)
+model EmbeddingsOptions {
   @doc("""
     Input text to embed, encoded as a string or array of tokens.
     To embed multiple inputs in a single request, pass an array
@@ -38,4 +41,4 @@ alias EmbeddingsOptions = {
   `model`?: string;
 
   ...Record<unknown>;
-};
+}

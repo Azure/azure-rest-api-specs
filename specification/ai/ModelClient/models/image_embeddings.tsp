@@ -6,7 +6,10 @@ using TypeSpec.Http;
 
 namespace AI.Model;
 
-alias ImageEmbeddingsOptions = {
+@doc("""
+  The configuration information for an image embeddings request.
+  """)
+model ImageEmbeddingsOptions {
   @doc("""
     Input image to embed. To embed multiple inputs in a single request, pass an array.
     The input must not exceed the max input tokens for the model.
@@ -39,7 +42,7 @@ alias ImageEmbeddingsOptions = {
   `model`?: string;
 
   ...Record<unknown>;
-};
+}
 
 @doc("Represents an image with optional text.")
 model ImageEmbeddingInput {
