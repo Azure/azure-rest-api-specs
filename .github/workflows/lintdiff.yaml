@@ -44,9 +44,9 @@ jobs:
         run: |
           ."./eng/scripts/ChangedFiles-Functions.ps1"
           Set-Location ./after
-          Get-ChangedFiles | Set-Content -Path ./changed-files.txt
-          Get-Location
-          Get-Content ./changed-files.txt
+          Get-ChangedFiles | Set-Content -Path ../changed-files.txt
+          Get-Location ../
+          Get-Content ../changed-files.txt
         shell: pwsh
 
       - name: Run LintDiff Before
