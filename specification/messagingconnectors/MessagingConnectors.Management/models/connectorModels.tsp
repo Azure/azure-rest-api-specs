@@ -15,3 +15,4 @@ import "./connector/mySqlSourceConnector.tsp";
 import "./connector/postgreSqlSourceConnector.tsp";
 import "./connector/sqlServerSourceConnector.tsp";
 import "./connector/solacePubSubSourceConnector.tsp";
+import "./connector/managedAzureMapsWeatherSourceConnector.tsp";

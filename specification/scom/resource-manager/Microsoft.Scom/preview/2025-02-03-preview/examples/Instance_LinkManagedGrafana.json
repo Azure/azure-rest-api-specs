@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2025-02-03-preview",
+    "subscriptionId": "5a87dd7e-200a-4e94-8cd6-a9461de63755",
+    "resourceGroupName": "myResGroup",
+    "instanceName": "myInstance",
+    "body": {
+      "managedGrafanaResourceId": "/subscriptions/amgsubid/resourceGroups/amgrg/providers/Microsoft.Dashboard/grafana/amgname1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "isLinked": true,
+        "managedGrafanaResourceId": "/subscriptions/amgsubid/resourceGroups/amgrg/providers/Microsoft.Dashboard/grafana/amgname1",
+        "grafanaEndpoint": "https://amgname1-hrcqg5hyfufxbkfj.weu.grafana.azure.com"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Scom/locations/WESTUS/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2025-02-03-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.Scom/locations/WESTUS/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2025-02-03-preview"
+      }
+    }
+  }
+}
