@@ -11,6 +11,17 @@ using TypeSpec.OpenAPI;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
+@doc("Enum of the OffsetPolicy for CosmosDB connector")
+union OffsetPolicyForCosmosDB {
+  @doc("use the latest (most recent) source offset")
+  UseLatestSourceOffset: "UseLatestSourceOffset",
+
+  @doc("use the earliest recorded offset")
+  UseEarliestRecordedOffset: "UseEarliestRecordedOffset",
+
+  string,
+}
+
 @doc("Configuration for CosmosDbSourceConnector")
 model CosmosDbSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of CosmosDbSourceConnector")
@@ -34,15 +45,4 @@ model CosmosDbSourceConnectorProperties extends DataSourceProperties {
 
   @doc("useLatestOffset policy")
   offsetPolicy: OffsetPolicyForCosmosDB;
-}
-
-@doc("Enum of the OffsetPolicy for CosmosDB connector")
-union OffsetPolicyForCosmosDB {
-  @doc("use the latest (most recent) source offset")
-  UseLatestSourceOffset: "UseLatestSourceOffset",
-
-  @doc("use the earliest recorded offset")
-  UseEarliestRecordedOffset: "UseEarliestRecordedOffset",
-
-  string,
 }
