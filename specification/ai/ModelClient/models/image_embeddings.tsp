@@ -6,6 +6,9 @@ using TypeSpec.Http;
 
 namespace AI.Model;
 
+@doc("""
+  The configuration information for an image embeddings request.
+  """)
 model ImageEmbeddingsOptions {
   @doc("""
     Input image to embed. To embed multiple inputs in a single request, pass an array.
