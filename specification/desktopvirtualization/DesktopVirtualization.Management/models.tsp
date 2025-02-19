@@ -1813,7 +1813,7 @@ model ActiveSessionHostConfigurationProperties {
    * The timestamp of the last update.
    */
   @visibility("read")
-  version: utcDateTime;
+  version?: utcDateTime;
 
   /**
    * Friendly name to describe this version of the SessionHostConfiguration
