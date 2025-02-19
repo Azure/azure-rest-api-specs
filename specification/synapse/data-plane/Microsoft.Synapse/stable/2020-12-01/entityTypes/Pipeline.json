@@ -3240,24 +3240,24 @@
           "x-ms-format": "dfe-string",
           "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
         },
-        "writeMethod": { 
-          "description": "The write behavior for the operation. Default is Bulk Insert.", 
-          "type": "string", 
-          "enum": [ 
+        "writeMethod": {
+          "description": "The write behavior for the operation. Default is Bulk Insert.",
+          "type": "string",
+          "enum": [
             "BulkInsert",
             "CopyCommand",
-            "Upsert" 
+            "Upsert"
           ]
         },
-        "upsertSettings": { 
-          "description": "Azure Database for PostgreSQL upsert option settings", 
-          "type": "object", 
-          "properties": { 
-            "keys": { 
-            "type": "object", 
-            "x-ms-format": "dfe-list-string", 
-            "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)." 
-            } 
+        "upsertSettings": {
+          "description": "Azure Database for PostgreSQL upsert option settings",
+          "type": "object",
+          "properties": {
+            "keys": {
+              "type": "object",
+              "x-ms-format": "dfe-list-string",
+              "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
+            }
           }
         }
       }
