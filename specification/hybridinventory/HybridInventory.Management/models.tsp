@@ -738,13 +738,6 @@ model PgsqlInstanceResourcePatchProperties {
   collations?: Collation[];
 
   /**
-   * Dictionary of server parameters for the instance
-   */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
-  serverParameters?: ServerParameter[];
-
-  /**
    * List of tablespaces in the instance.
    */
   tableSpaces?: string[];
@@ -927,6 +920,69 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
 }
 
 /**
+ * PGSQL Database properties
+ */
+model PgsqlDatabaseResourcePatchProperties {
+  /**
+   * The database name.
+   */
+  databaseName?: string;
+
+  /**
+   * PGSQL database encoding.
+   */
+  encoding?: Encoding;
+
+  /**
+   * The list of collations in the database.
+   */
+  @OpenAPI.extension(
+    "x-ms-identifiers",
+    ["name", "locale", "collationProvider", "isDeterministic"]
+  )
+  collations?: Collation[];
+
+  /**
+   * The list of extensions in the database.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["name", "version"])
+  extensions?: Extension[];
+
+  /**
+   * List of languages in the database.
+   */
+  languages?: Language[];
+
+  /**
+   * Whether tables with oid's exists in the database.
+   */
+  @encodedName("application/json", "hasTablesWithOids ")
+  hasTablesWithOids?: boolean;
+
+  /**
+   * Whether the database has custom data types.
+   */
+  @encodedName("application/json", "hasCustomDataTypes  ")
+  hasCustomDataTypes?: boolean;
+
+  /**
+   * The number of errors.
+   */
+  errorCount?: int64;
+
+  /**
+   * The list of errors.
+   */
+  errors?: Error[];
+
+  /**
+   * Resource tags
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  tags?: Tag[];
+}
+
+/**
  * Represents an Extension (e.g., PostGIS, pgcrypto).
  */
 model Extension {
@@ -941,16 +997,16 @@ model Extension {
   version?: string;
 }
 
-/**
- * Object containing tags updates for patch operations.
- */
-model PgsqlDatabaseResourcePatch {
-  /**
-   * Resource tags
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
-  tags?: Tag[];
-}
+// /**
+//  * Object containing tags updates for patch operations.
+//  */
+// model PgsqlDatabaseResourcePatch {
+//   /**
+//    * Resource tags
+//    */
+//   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+//   tags?: Tag[];
+// }
 
 /**
  * List of Agents.
