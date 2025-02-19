@@ -3,6 +3,8 @@ import "../../Models/System.tsp";
 import "../../Models/ManagementInformation.tsp";
 import "../../Models/SetAccountRequestBody.tsp";
 import "../../Models/RemoveAccountRequestBody.tsp";
+import "../../Models/ConfigId.tsp";
+import "../../Models/ResetRequestBody.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -30,7 +32,7 @@ model LabServerProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read")
+  @visibility("update", "read")
   @doc("The Pool Azure Resource this server is assigned to")
   poolResourceId?: PoolResourceId;
 
@@ -38,9 +40,17 @@ model LabServerProperties {
   @doc("Server management information bag")
   management: ManagementInformation;
 
+  @visibility("create", "read")
+  @doc("The backing data source for this resource")
+  configId: ConfigId;
+
   @visibility("read")
   @doc("Maintenance status")
   maintenanceStatus: MaintenanceStatus;
+
+  @visibility("update", "read")
+  @doc("Maintenance state")
+  maintenanceState?: MaintenanceState;
 
   @visibility("read")
   @doc("Reservation status")
@@ -78,32 +88,6 @@ model AssignRequestBody {
   poolResourceId: PoolResourceId;
 }
 
-@doc("The commands relating to power state")
-union ResetType {
-  @doc("Gracefully restart server")
-  GracefulRestart: "GracefulRestart",
-
-  @doc("Gracefully shut down server")
-  GracefulShutdown: "GracefulShutdown",
-
-  @doc("Force shut down server")
-  ForceOff: "ForceOff",
-
-  @doc("Turn server on")
-  On: "On",
-
-  @doc("Force restart server")
-  ForceRestart: "ForceRestart",
-
-  string,
-}
-
-@doc("The request body model of a reset POST call")
-model ResetRequestBody {
-  @doc("The enum describing the power state")
-  resetType: ResetType;
-}
-
 @doc("The maintenance state of the server")
 union MaintenanceState {
   @doc("Requires maintenance")
@@ -118,17 +102,12 @@ union MaintenanceState {
   string,
 }
 
-@doc("The request body model for setMaintenanceState POST call")
-model SetMaintenanceStateRequestBody {
-  @doc("The enum describing the maintenance state")
-  maintenanceState: MaintenanceState;
-}
-
 @armResourceOperations
 interface LabServers {
   get is ArmResourceRead<LabServer>;
   listByParent is ArmResourceListByParent<LabServer>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<LabServer>;
+  update is ArmResourcePatchAsync<LabServer, LabServerProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<LabServer>;
 
   @doc("Set BMC account")
@@ -143,24 +122,9 @@ interface LabServers {
     RemoveAccountRequestBody
   >;
 
-  @doc("Assign the server to a pool")
-  assign is ArmResourceActionNoResponseContentAsync<
-    LabServer,
-    AssignRequestBody
-  >;
-
-  @doc("Unassign the server from a pool")
-  unassign is ArmResourceActionNoResponseContentAsync<LabServer, void>;
-
   @doc("Refresh hardware information")
   refresh is ArmResourceActionNoResponseContentAsync<LabServer, void>;
 
   @doc("Power state operations")
   reset is ArmResourceActionNoResponseContentAsync<LabServer, ResetRequestBody>;
-
-  @doc("Request maintenance")
-  setMaintenance is ArmResourceActionNoResponseContentAsync<
-    LabServer,
-    SetMaintenanceStateRequestBody
-  >;
 }

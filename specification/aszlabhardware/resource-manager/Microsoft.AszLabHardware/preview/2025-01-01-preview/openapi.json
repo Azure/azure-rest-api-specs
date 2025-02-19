@@ -787,6 +787,86 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "LabServers_Update",
+        "tags": [
+          "LabServers"
+        ],
+        "description": "Update a LabServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabServerUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabServer"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServers_Update": {
+            "$ref": "./examples/LabServers_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "LabServers_Delete",
         "tags": [
@@ -851,82 +931,6 @@
           },
           "LabServers_Delete_MinimumSet_Gen": {
             "$ref": "./examples/LabServers_Delete_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labs/{labName}/servers/{serverName}/assign": {
-      "post": {
-        "operationId": "LabServers_Assign",
-        "tags": [
-          "LabServers"
-        ],
-        "description": "Assign the server to a pool",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the server",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AssignRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LabServers_Assign": {
-            "$ref": "./examples/LabServers_Assign_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1234,155 +1238,6 @@
           },
           "LabServers_SetAccount_MinimumSet_Gen": {
             "$ref": "./examples/LabServers_SetAccount_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labs/{labName}/servers/{serverName}/setMaintenance": {
-      "post": {
-        "operationId": "LabServers_SetMaintenance",
-        "tags": [
-          "LabServers"
-        ],
-        "description": "Request maintenance",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the server",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SetMaintenanceStateRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LabServers_SetMaintenance": {
-            "$ref": "./examples/LabServers_SetMaintenance_MaximumSet_Gen.json"
-          },
-          "LabServers_SetMaintenance_MinimumSet_Gen": {
-            "$ref": "./examples/LabServers_SetMaintenance_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labs/{labName}/servers/{serverName}/unassign": {
-      "post": {
-        "operationId": "LabServers_Unassign",
-        "tags": [
-          "LabServers"
-        ],
-        "description": "Unassign the server from a pool",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the server",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LabServers_Unassign": {
-            "$ref": "./examples/LabServers_Unassign_MaximumSet_Gen.json"
-          },
-          "LabServers_Unassign_MinimumSet_Gen": {
-            "$ref": "./examples/LabServers_Unassign_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2545,13 +2400,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/reservations/{reservationName}/servers/{serverName}/allowMaintenance": {
+      "post": {
+        "operationId": "ReservationServers_AllowMaintenance",
+        "tags": [
+          "ReservationServers"
+        ],
+        "description": "Allows any requested maintenance on this Server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationServers_AllowMaintenance": {
+            "$ref": "./examples/ReservationServers_AllowMaintenance_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/reservations/{reservationName}/servers/{serverName}/removeAccount": {
       "post": {
         "operationId": "ReservationServers_RemoveAccount",
         "tags": [
           "ReservationServers"
         ],
-        "description": "A long-running resource action.",
+        "description": "Remove BMC account",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2624,13 +2531,89 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/reservations/{reservationName}/servers/{serverName}/reset": {
+      "post": {
+        "operationId": "ReservationServers_Reset",
+        "tags": [
+          "ReservationServers"
+        ],
+        "description": "Power state operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationServers_Reset": {
+            "$ref": "./examples/ReservationServers_Reset_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/reservations/{reservationName}/servers/{serverName}/setAccount": {
       "post": {
         "operationId": "ReservationServers_SetAccount",
         "tags": [
           "ReservationServers"
         ],
-        "description": "A long-running resource action.",
+        "description": "Set BMC account",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3088,6 +3071,15 @@
         "poolResourceId"
       ]
     },
+    "ConfigId": {
+      "type": "object",
+      "x-nullable": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/OneAssetConfigId"
+        }
+      ]
+    },
     "Drive": {
       "type": "object",
       "description": "Information regarding individual Disk Drives",
@@ -3532,7 +3524,10 @@
         "poolResourceId": {
           "$ref": "#/definitions/PoolResourceId",
           "description": "The Pool Azure Resource this server is assigned to",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "management": {
           "$ref": "#/definitions/ManagementInformation",
@@ -3542,10 +3537,26 @@
             "create"
           ]
         },
+        "configId": {
+          "$ref": "#/definitions/ConfigId",
+          "description": "The backing data source for this resource",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "maintenanceStatus": {
           "$ref": "#/definitions/MaintenanceStatus",
           "description": "Maintenance status",
           "readOnly": true
+        },
+        "maintenanceState": {
+          "$ref": "#/definitions/MaintenanceState",
+          "description": "Maintenance state",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "reservationStatus": {
           "$ref": "#/definitions/ReservationStatus",
@@ -3557,8 +3568,46 @@
         "serialNumber",
         "assetTag",
         "management",
+        "configId",
         "maintenanceStatus",
         "reservationStatus"
+      ]
+    },
+    "LabServerPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties",
+      "properties": {
+        "poolResourceId": {
+          "$ref": "#/definitions/PoolResourceId",
+          "description": "The Pool Azure Resource this server is assigned to",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "maintenanceState": {
+          "$ref": "#/definitions/MaintenanceState",
+          "description": "Maintenance state",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      }
+    },
+    "LabServerUpdate": {
+      "type": "object",
+      "description": "Details about the AszLabHardware Lab/Server resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabServerPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "LabServerV1": {
@@ -4009,6 +4058,34 @@
           ]
         }
       }
+    },
+    "OneAssetConfigId": {
+      "type": "object",
+      "description": "The OneAsset id backing a resource",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OneAsset type",
+          "enum": [
+            "OneAsset"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "dataSourceId": {
+          "type": "string",
+          "description": "The data source id",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ]
     },
     "OneAssetPhysicalLocation": {
       "type": "object",
@@ -5144,19 +5221,6 @@
       },
       "required": [
         "localAccount"
-      ]
-    },
-    "SetMaintenanceStateRequestBody": {
-      "type": "object",
-      "description": "The request body model for setMaintenanceState POST call",
-      "properties": {
-        "maintenanceState": {
-          "$ref": "#/definitions/MaintenanceState",
-          "description": "The enum describing the maintenance state"
-        }
-      },
-      "required": [
-        "maintenanceState"
       ]
     },
     "StorageCollection": {

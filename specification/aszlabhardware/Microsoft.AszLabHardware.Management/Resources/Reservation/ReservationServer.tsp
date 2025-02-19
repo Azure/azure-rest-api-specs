@@ -1,5 +1,6 @@
 import "../../Models/SetAccountRequestBody.tsp";
 import "../../Models/RemoveAccountRequestBody.tsp";
+import "../../Models/ResetRequestBody.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -35,12 +36,22 @@ model ReservationServerProperties {
 interface ReservationServers {
   get is ArmResourceRead<ReservationServer>;
   listByParent is ArmResourceListByParent<ReservationServer>;
+
+  @doc("Set BMC account")
   setAccount is ArmResourceActionNoResponseContentAsync<
     ReservationServer,
     SetAccountRequestBody
   >;
+
+  @doc("Remove BMC account")
   removeAccount is ArmResourceActionNoResponseContentAsync<
     ReservationServer,
     RemoveAccountRequestBody
   >;
+
+  @doc("Power state operations")
+  reset is ArmResourceActionNoResponseContentAsync<ReservationServer, ResetRequestBody>;
+
+  @doc("Allows any requested maintenance on this Server")
+  allowMaintenance is ArmResourceActionSync<ReservationServer, void, void>;
 }
