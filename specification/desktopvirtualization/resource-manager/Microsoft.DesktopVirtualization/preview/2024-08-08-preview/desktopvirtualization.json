@@ -1992,7 +1992,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ExpandMSIXImageList"
+              "$ref": "#/definitions/ExpandMsixImageList"
             }
           },
           "default": {
@@ -6209,7 +6209,7 @@
           "type": "array",
           "description": "List of package applications.",
           "items": {
-            "$ref": "#/definitions/MSIXPackageApplications"
+            "$ref": "#/definitions/MsixPackageApplications"
           },
           "x-ms-identifiers": []
         },
@@ -7104,13 +7104,13 @@
         ]
       }
     },
-    "ExpandMSIXImage": {
+    "ExpandMsixImage": {
       "type": "object",
       "description": "Represents the definition of contents retrieved after expanding the MSIX Image.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ExpandMSIXImageProperties",
-          "description": "Detailed properties for ExpandMSIXImage"
+          "$ref": "#/definitions/ExpandMsixImageProperties",
+          "description": "Detailed properties for ExpandMsixImage"
         }
       },
       "allOf": [
@@ -7119,15 +7119,15 @@
         }
       ]
     },
-    "ExpandMSIXImageList": {
+    "ExpandMsixImageList": {
       "type": "object",
       "description": "List of MSIX package properties retrieved from MSIX Image expansion.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ExpandMSIXImage items on this page",
+          "description": "The ExpandMsixImage items on this page",
           "items": {
-            "$ref": "#/definitions/ExpandMSIXImage"
+            "$ref": "#/definitions/ExpandMsixImage"
           }
         },
         "nextLink": {
@@ -7140,7 +7140,7 @@
         "value"
       ]
     },
-    "ExpandMSIXImageProperties": {
+    "ExpandMsixImageProperties": {
       "type": "object",
       "description": "Schema for Expand MSIX Image properties.",
       "properties": {
@@ -7203,7 +7203,7 @@
           "type": "array",
           "description": "List of package applications.",
           "items": {
-            "$ref": "#/definitions/MSIXPackageApplications"
+            "$ref": "#/definitions/MsixPackageApplications"
           },
           "x-ms-identifiers": [
             "appId"
@@ -7893,7 +7893,6 @@
       "properties": {
         "path": {
           "type": "string",
-          "format": "uri",
           "description": "URI to Image"
         },
         "packageArchitecture": {
@@ -8004,42 +8003,6 @@
         }
       ]
     },
-    "MSIXPackageApplications": {
-      "type": "object",
-      "description": "Schema for MSIX Package Application properties.",
-      "properties": {
-        "appId": {
-          "type": "string",
-          "description": "Package Application Id, found in appxmanifest.xml."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of Package Application."
-        },
-        "appUserModelID": {
-          "type": "string",
-          "description": "Used to activate Package Application. Consists of Package Name and ApplicationID. Found in appxmanifest.xml."
-        },
-        "friendlyName": {
-          "type": "string",
-          "description": "User friendly name."
-        },
-        "iconImageName": {
-          "type": "string",
-          "description": "User friendly name."
-        },
-        "rawIcon": {
-          "type": "string",
-          "format": "byte",
-          "description": "the icon a 64 bit string as a byte array."
-        },
-        "rawPng": {
-          "type": "string",
-          "format": "byte",
-          "description": "the icon a 64 bit string as a byte array."
-        }
-      }
-    },
     "MSIXPackageList": {
       "type": "object",
       "description": "List of MSIX Package definitions.",
@@ -8149,7 +8112,7 @@
           "type": "array",
           "description": "List of package applications.",
           "items": {
-            "$ref": "#/definitions/MSIXPackageApplications"
+            "$ref": "#/definitions/MsixPackageApplications"
           },
           "x-ms-identifiers": [
             "appId"
@@ -8290,6 +8253,42 @@
         "sku",
         "exactVersion"
       ]
+    },
+    "MsixPackageApplications": {
+      "type": "object",
+      "description": "Schema for MSIX Package Application properties.",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "Package Application Id, found in appxmanifest.xml."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of Package Application."
+        },
+        "appUserModelID": {
+          "type": "string",
+          "description": "Used to activate Package Application. Consists of Package Name and ApplicationID. Found in appxmanifest.xml."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "User friendly name."
+        },
+        "iconImageName": {
+          "type": "string",
+          "description": "User friendly name."
+        },
+        "rawIcon": {
+          "type": "string",
+          "format": "byte",
+          "description": "the icon a 64 bit string as a byte array."
+        },
+        "rawPng": {
+          "type": "string",
+          "format": "byte",
+          "description": "the icon a 64 bit string as a byte array."
+        }
+      }
     },
     "MsixPackageDependencies": {
       "type": "object",
@@ -10649,6 +10648,42 @@
       "type": "object",
       "description": "Schema for SessionHostManagementUpdateStatus properties.",
       "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ID for the async operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the async operation."
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "Percent of the operation that is complete.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "If present, details of the operation error."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ID of the resource against which the original async operation was started.",
+          "readOnly": true
+        },
         "status": {
           "$ref": "#/definitions/SessionHostManagementUpdateOperationStatus",
           "description": "Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled"
@@ -10660,11 +10695,6 @@
       },
       "required": [
         "status"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
-        }
       ]
     },
     "SessionHostManagementUpdateStatusProperties": {

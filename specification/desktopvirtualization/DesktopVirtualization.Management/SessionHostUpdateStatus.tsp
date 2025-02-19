@@ -18,8 +18,31 @@ namespace Microsoft.DesktopVirtualization;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Composition over inheritance"
 @parentResource(SessionHostManagement)
 @singleton("default")
-model SessionHostManagementUpdateStatus
-  extends Azure.ResourceManager.CommonTypes.OperationStatusResult {
+model SessionHostManagementUpdateStatus {
+  /** Fully qualified ID for the async operation. */
+  id?: Azure.Core.armResourceIdentifier;
+
+  /** Name of the async operation. */
+  name?: string;
+
+  /** Percent of the operation that is complete. */
+  @minValue(0)
+  @maxValue(100)
+  percentComplete?: float64;
+
+  /** The start time of the operation. */
+  startTime?: utcDateTime;
+
+  /** The end time of the operation. */
+  endTime?: utcDateTime;
+
+  /** If present, details of the operation error. */
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+
+  /** Fully qualified ID of the resource against which the original async operation was started. */
+  @visibility("read")
+  resourceId?: Azure.Core.armResourceIdentifier;
+
   ...StatusProperty;
   ...UpdateStatusProperty;
 }

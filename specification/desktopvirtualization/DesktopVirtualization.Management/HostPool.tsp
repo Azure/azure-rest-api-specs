@@ -50,7 +50,7 @@ interface MSIXImages {
    * This action uses incorrect Msix casing intentionally to match the previous APIs.
    */
   @action("expandMsixImage")
-  expand is ArmResourceActionSync<HostPool, MSIXImageURI, ExpandMSIXImageList>;
+  expand is ArmResourceActionSync<HostPool, MSIXImageURI, ExpandMsixImageList>;
 }
 
 @armResourceOperations
