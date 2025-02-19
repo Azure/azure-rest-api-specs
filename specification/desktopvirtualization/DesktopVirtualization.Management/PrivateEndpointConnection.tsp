@@ -16,9 +16,9 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * The Private Endpoint Connection resource.
  */
-model PrivateEndpointConnections
+model PrivateEndpointConnectionWithSystemData
   is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<Resource = PrivateEndpointConnections>;
+  ...ResourceNameParameter<Resource = PrivateEndpointConnectionWithSystemData>;
 }
 
 alias PrivateEndpointParameter = {
@@ -45,11 +45,12 @@ interface WorkspaceOps
 
 @armResourceOperations
 interface CustomPrivateEndpointConnection {
-  getByHostPool is HostPoolOps.Read<PrivateEndpointConnections>;
-  updateByHostPool is HostPoolOps.CreateOrUpdateSync<PrivateEndpointConnections>;
-  deleteByHostPool is HostPoolOps.DeleteSync<PrivateEndpointConnections>;
+  getByHostPool is HostPoolOps.Read<PrivateEndpointConnectionWithSystemData>;
+  updateByHostPool is HostPoolOps.CreateOrUpdateSync<PrivateEndpointConnectionWithSystemData>;
+  deleteByHostPool is HostPoolOps.DeleteSync<PrivateEndpointConnectionWithSystemData>;
+  @segment("privateEndpointConnections")
   listByHostPool is HostPoolOps.List<
-    PrivateEndpointConnections,
+    PrivateEndpointConnectionWithSystemData,
     Parameters = {
       /**
        * Number of items per page.
@@ -68,10 +69,15 @@ interface CustomPrivateEndpointConnection {
        */
       @query("initialSkip")
       initialSkip?: int32;
-    }
+    },
+    Response = PrivateEndpointConnectionListResultWithSystemData
   >;
-  getByWorkspace is WorkspaceOps.Read<PrivateEndpointConnections>;
-  updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<PrivateEndpointConnections>;
-  deleteByWorkspace is WorkspaceOps.DeleteSync<PrivateEndpointConnections>;
-  listByWorkspace is WorkspaceOps.List<PrivateEndpointConnections>;
+  getByWorkspace is WorkspaceOps.Read<PrivateEndpointConnectionWithSystemData>;
+  updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<PrivateEndpointConnectionWithSystemData>;
+  deleteByWorkspace is WorkspaceOps.DeleteSync<PrivateEndpointConnectionWithSystemData>;
+  @segment("privateEndpointConnections")
+  listByWorkspace is WorkspaceOps.List<
+    PrivateEndpointConnectionWithSystemData,
+    Response = PrivateEndpointConnectionListResultWithSystemData
+  >;
 }

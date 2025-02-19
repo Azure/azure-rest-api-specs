@@ -1339,7 +1339,7 @@ model AppAttachPackageInfoProperties {
    * List of package dependencies.
    */
   @OpenAPI.extension("x-ms-identifiers", [])
-  packageDependencies?: MSIXPackageDependencies[];
+  packageDependencies?: MsixPackageDependencies[];
 
   /**
    * Package version found in the appxmanifest.xml.
@@ -1355,7 +1355,7 @@ model AppAttachPackageInfoProperties {
    * List of package applications.
    */
   @OpenAPI.extension("x-ms-identifiers", [])
-  packageApplications?: MSIXPackageApplications[];
+  packageApplications?: MsixPackageApplications[];
 
   /**
    * Certificate name found in the appxmanifest.xml.
@@ -1378,7 +1378,7 @@ model AppAttachPackageInfoProperties {
  * Schema for MSIX Package Dependencies properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model MSIXPackageDependencies {
+model MsixPackageDependencies {
   /**
    * Name of package dependency.
    */
@@ -1399,7 +1399,7 @@ model MSIXPackageDependencies {
  * Schema for MSIX Package Application properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model MSIXPackageApplications {
+model MsixPackageApplications {
   /**
    * Package Application Id, found in appxmanifest.xml.
    */
@@ -3346,26 +3346,26 @@ model MSIXImageURI {
  * List of MSIX package properties retrieved from MSIX Image expansion.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model ExpandMSIXImageList is Azure.Core.Page<ExpandMSIXImage>;
+model ExpandMsixImageList is Azure.Core.Page<ExpandMsixImage>;
 
 /**
  * Represents the definition of contents retrieved after expanding the MSIX Image.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model ExpandMSIXImage extends Resource {
+model ExpandMsixImage extends Resource {
   /**
-   * Detailed properties for ExpandMSIXImage
+   * Detailed properties for ExpandMsixImage
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-  properties?: ExpandMSIXImageProperties;
+  properties?: ExpandMsixImageProperties;
 }
 
 /**
  * Schema for Expand MSIX Image properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model ExpandMSIXImageProperties {
+model ExpandMsixImageProperties {
   /**
    * Alias of MSIX Package.
    */
@@ -3415,7 +3415,7 @@ model ExpandMSIXImageProperties {
    * List of package dependencies.
    */
   @OpenAPI.extension("x-ms-identifiers", ["dependencyName"])
-  packageDependencies?: MSIXPackageDependencies[];
+  packageDependencies?: MsixPackageDependencies[];
 
   /**
    * Package version found in the appxmanifest.xml.
@@ -3431,7 +3431,7 @@ model ExpandMSIXImageProperties {
    * List of package applications.
    */
   @OpenAPI.extension("x-ms-identifiers", ["appId"])
-  packageApplications?: MSIXPackageApplications[];
+  packageApplications?: MsixPackageApplications[];
 
   /**
    * Certificate name found in the appxmanifest.xml.
@@ -3451,7 +3451,7 @@ model ImportPackageInfoRequest {
   /**
    * URI to Image
    */
-  path?: url;
+  path?: string;
 
   /**
    * Possible device architectures that an app attach package can be configured for
@@ -3495,7 +3495,7 @@ model RegistrationTokenMinimal {
  * List of private endpoint connection associated with the specified HostPool
  */
 model PrivateEndpointConnectionListResultWithSystemData
-  is Azure.Core.Page<PrivateEndpointConnections>;
+  is Azure.Core.Page<PrivateEndpointConnectionWithSystemData>;
 
 /**
  * A list of private link resources
@@ -4706,7 +4706,7 @@ model MSIXPackageProperties {
    * List of package dependencies.
    */
   @OpenAPI.extension("x-ms-identifiers", ["dependencyName"])
-  packageDependencies?: MSIXPackageDependencies[];
+  packageDependencies?: MsixPackageDependencies[];
 
   /**
    * Package version found in the appxmanifest.xml.
@@ -4722,7 +4722,7 @@ model MSIXPackageProperties {
    * List of package applications.
    */
   @OpenAPI.extension("x-ms-identifiers", ["appId"])
-  packageApplications?: MSIXPackageApplications[];
+  packageApplications?: MsixPackageApplications[];
 }
 
 /**
