@@ -116,6 +116,8 @@ interface BatchClient {
 );
 
 /* GO OVERRIDES */
+// don't export API for this operation because it retired before the first Go SDK release
+@@access(Azure.Batch.Pools.listPoolUsageMetrics, Access.internal, "go");
 // capitalize initialisms
 @@clientName(Azure.Batch.AutomaticOsUpgradePolicy, "AutomaticOSUpgradePolicy", "go");
 @@clientName(Azure.Batch.AzureBlobFileSystemConfiguration.sasKey, "SASKey", "go");
