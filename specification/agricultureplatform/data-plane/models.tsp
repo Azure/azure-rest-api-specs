@@ -73,6 +73,7 @@ model CatalogListResponse {
 /**
  * Catalog.
  */
+@resource("catalogs")
 model Catalog {
   /**
    * Links for referencing other objects.
@@ -83,7 +84,8 @@ model Catalog {
    * Unique resource ID.
    */
   @visibility("read")
-  id?: string;
+  @key("catalogId")
+  id: string;
 
   /**
    * The ETag value to implement optimistic concurrency.

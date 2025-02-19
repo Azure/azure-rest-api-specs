@@ -47,7 +47,7 @@
   "paths": {
     "/catalogs": {
       "get": {
-        "operationId": "Catalogs_List",
+        "operationId": "CatalogsOperations_Catalogs_List",
         "description": "Returns a paginated list of Catalog resources.",
         "parameters": [
           {
@@ -152,7 +152,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CatalogListResponse"
+              "$ref": "#/definitions/PagedCatalog"
             }
           },
           "default": {
@@ -167,12 +167,15 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/catalogs/{catalogId}": {
       "get": {
-        "operationId": "Catalogs_Get",
+        "operationId": "CatalogsOperations_Catalogs_Get",
         "description": "Gets a specified Catalog resource.",
         "parameters": [
           {
@@ -181,7 +184,7 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Id of the Catalog.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           }
@@ -208,8 +211,11 @@
         }
       },
       "patch": {
-        "operationId": "Catalogs_CreateOrUpdate",
+        "operationId": "CatalogsOperations_Catalogs_CreateOrUpdate",
         "description": "Creates or updates a Catalog resource.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -217,23 +223,29 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Id of the Catalog resource.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "catalog",
+            "name": "resource",
             "in": "body",
-            "description": "Catalog resource payload to create or update.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Catalog"
+              "$ref": "#/definitions/CatalogCreateOrUpdate"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Catalog"
             }
@@ -253,7 +265,7 @@
         }
       },
       "delete": {
-        "operationId": "Catalogs_Delete",
+        "operationId": "CatalogsOperations_Catalogs_Delete",
         "description": "Deletes Catalog for given Catalog id.",
         "parameters": [
           {
@@ -262,7 +274,7 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Id of Catalog to be deleted.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           }
@@ -1769,7 +1781,10 @@
           "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "CatalogCollection": {
       "type": "object",
@@ -1784,6 +1799,46 @@
           "type": "string",
           "description": "Collection Id.",
           "readOnly": true
+        }
+      }
+    },
+    "CatalogCreateOrUpdate": {
+      "type": "object",
+      "description": "Catalog.",
+      "properties": {
+        "links": {
+          "type": "array",
+          "description": "Links for referencing other objects.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the resource.",
+          "maxLength": 100
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the resource.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "name": {
+          "type": "string",
+          "description": "Name to identify resource.",
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "Textual description of the resource.",
+          "maxLength": 500
+        },
+        "properties": {
+          "type": "object",
+          "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "additionalProperties": {}
         }
       }
     },
@@ -2638,6 +2693,27 @@
         {
           "$ref": "#/definitions/AuthCredentials"
         }
+      ]
+    },
+    "PagedCatalog": {
+      "type": "object",
+      "description": "Paged collection of Catalog items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Catalog items on this page",
+          "items": {
+            "$ref": "#/definitions/Catalog"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "Point": {
