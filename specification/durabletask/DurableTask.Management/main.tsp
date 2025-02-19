@@ -27,7 +27,7 @@ enum Versions {
   v2024_10_01_Preview: "2024-10-01-preview",
 }
 
-@doc("A Durable Task Scheduler resource")
+@doc("A Durable Task Scheduler Test resource")
 @added(Versions.v2024_10_01_Preview)
 model Scheduler is Azure.ResourceManager.TrackedResource<SchedulerProperties> {
   ...ResourceNameParameter<
