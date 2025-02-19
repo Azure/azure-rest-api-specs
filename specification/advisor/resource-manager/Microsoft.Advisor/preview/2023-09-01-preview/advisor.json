@@ -577,7 +577,7 @@
             "description": "The properties to update on the recommendation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TrackedRecommendationProperties"
+              "$ref": "#/definitions/TrackedRecommendationPropertiesPayload"
             }
           },
           {
@@ -1786,6 +1786,19 @@
             "timeSeries": {
               "description": "The historic Advisor score data.",
               "$ref": "#/definitions/timeSeriesEntity"
+            }
+          }
+        }
+      }
+    },
+    "TrackedRecommendationPropertiesPayload": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "trackedProperties": {
+              "$ref": "#/definitions/TrackedRecommendationProperties"
             }
           }
         }
