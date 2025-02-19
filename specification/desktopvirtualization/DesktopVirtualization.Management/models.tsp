@@ -1438,35 +1438,6 @@ model MsixPackageApplications {
 }
 
 /**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-   */
-  @visibility("read")
-  id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The name of the resource
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility("read")
-  systemData?: SystemData;
-}
-
-/**
  * Network information.
  */
 model NetworkInfoProperties {
@@ -2407,7 +2378,8 @@ model MaintenanceWindowProperties {
  * The private endpoint connection resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateEndpointConnection extends Resource {
+model PrivateEndpointConnection
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Resource properties.
    */
@@ -2717,7 +2689,7 @@ model WorkspaceProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model AppAttachPackagePatch extends Resource {
+model AppAttachPackagePatch extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * tags to be updated
    */
@@ -2771,7 +2743,7 @@ model AppAttachPackagePatchProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model ApplicationGroupPatch extends Resource {
+model ApplicationGroupPatch extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * tags to be updated
    */
@@ -3065,7 +3037,7 @@ model StartMenuItemList is Azure.Core.Page<StartMenuItem>;
  * Represents a StartMenuItem definition.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model StartMenuItem extends Resource {
+model StartMenuItem extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Detailed properties for StartMenuItem
    */
@@ -3142,7 +3114,7 @@ model HostPoolUpdateControlParameter {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model HostPoolPatch extends Resource {
+model HostPoolPatch extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * tags to be updated
    */
@@ -3353,7 +3325,7 @@ model ExpandMsixImageList is Azure.Core.Page<ExpandMsixImage>;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model ExpandMsixImage extends Resource {
+model ExpandMsixImage extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Detailed properties for ExpandMsixImage
    */
@@ -3506,7 +3478,7 @@ model PrivateLinkResourceListResult is Azure.Core.Page<PrivateLinkResource>;
  * A private link resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateLinkResource extends Resource {
+model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Resource properties.
    */
@@ -3701,7 +3673,7 @@ model SessionHostHealthCheckFailureDetails {
  * SessionHost properties that can be patched.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model SessionHostPatch extends Resource {
+model SessionHostPatch extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Detailed properties for SessionHost
    */
@@ -4372,7 +4344,8 @@ model ScalingPlanPooledSchedulePatchProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model ScalingPlanPooledSchedulePatch extends Resource {
+model ScalingPlanPooledSchedulePatch
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Detailed properties for ScalingPlanPooledSchedule
    */
@@ -4731,7 +4704,7 @@ model MSIXPackageProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model MSIXPackagePatch extends Resource {
+model MSIXPackagePatch extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Detailed properties for MSIX Package
    */
