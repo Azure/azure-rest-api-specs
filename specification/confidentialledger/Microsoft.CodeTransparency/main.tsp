@@ -48,6 +48,7 @@ op getTransparencyConfigCbor is Foundations.Operation<
   CborServerErrors
 >;
 
+#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "cannot assign error to directive to cbor binary responses"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
 @doc("Get the public keys used by the service to sign receipts, mentioned in IETF SCITT draft as part of jwks_uri implementation")
@@ -304,6 +305,10 @@ model TransparencyConfigurationCbor {
 @added(Versions.`2025-01-31-preview`)
 @doc("A JWKS like document")
 model JwksDocument {
+  @doc("Content type header")
+  @header
+  contentType: "application/json";
+
   @doc("List of public keys used for receipt verification.")
   keys: JsonWebKey[];
 }
