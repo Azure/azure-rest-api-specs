@@ -1,7 +1,6 @@
 // @ts-check
 
-import { readFile } from "fs/promises";
-import { dirname, join } from "path";
+import { dirname } from "path";
 import { getChangedResourceManagerSwaggerFiles } from "./changed-files.js";
 import { lsTree, show } from "./git.js";
 
@@ -26,10 +25,7 @@ export default async function incrementalTypeSpec({ github, context, core }) {
 
   // If any changed file is not typespec-generated, return false
   for (const file of changedRmSwaggerFiles) {
-    const swagger = await readFile(
-      join(process.env.GITHUB_WORKSPACE || "", file),
-      { encoding: "utf8" },
-    );
+    const swagger = await show("HEAD", file, core);
 
     const swaggerObj = JSON.parse(swagger);
 
