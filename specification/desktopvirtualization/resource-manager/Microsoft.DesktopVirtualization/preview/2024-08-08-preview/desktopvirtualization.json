@@ -129,7 +129,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/ResourceProviderOperationListResult"
             }
           },
           "default": {
@@ -7972,6 +7972,24 @@
         ]
       }
     },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Specifications of the Log for Azure Monitoring",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the log"
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration of the log"
+        }
+      }
+    },
     "MSIXImageURI": {
       "type": "object",
       "description": "Represents URI referring to MSIX Image",
@@ -8334,6 +8352,16 @@
         "securityGroupId": {
           "type": "string",
           "description": "The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG)."
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Properties of the operation",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specification payload"
         }
       }
     },
@@ -8937,6 +8965,72 @@
           "readOnly": true
         }
       }
+    },
+    "ResourceProviderOperation": {
+      "type": "object",
+      "description": "Supported operation of this resource provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name, in format of {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "$ref": "#/definitions/ResourceProviderOperationDisplay",
+          "description": "Display metadata associated with the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Is a data action."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
+        }
+      }
+    },
+    "ResourceProviderOperationDisplay": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Resource provider: Microsoft Desktop Virtualization."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Type of operation: get, read, delete, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of this operation."
+        }
+      }
+    },
+    "ResourceProviderOperationListResult": {
+      "type": "object",
+      "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ResourceProviderOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SSOSecretType": {
       "type": "string",
@@ -10079,6 +10173,22 @@
         "messageBody": {
           "type": "string",
           "description": "Body of message."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "Service specification payload",
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Log for Azure Monitoring",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
