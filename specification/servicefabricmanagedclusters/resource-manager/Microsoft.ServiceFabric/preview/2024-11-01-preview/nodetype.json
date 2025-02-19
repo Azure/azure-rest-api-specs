@@ -2,30 +2,19 @@
   "swagger": "2.0",
   "info": {
     "title": "ServiceFabricManagementClient",
-    "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2024-11-01-preview"
+    "version": "2024-11-01-preview",
+    "description": "Azure Service Fabric Resource Provider API Client"
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
   ],
   "consumes": [
     "application/json"
   ],
-  "produces": [
-    "application/json"
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "flow": "implicit",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      },
-      "type": "oauth2"
-    }
-  },
   "security": [
     {
       "azure_auth": [
@@ -33,712 +22,24 @@
       ]
     }
   ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/restart": {
-      "post": {
-        "tags": [
-          "NodeType"
-        ],
-        "operationId": "NodeTypes_Restart",
-        "summary": "Restarts one or more nodes on the node type.",
-        "description": "Restarts one or more nodes on the node type. It will disable the fabric nodes, trigger a restart on the VMs and activate the nodes back again.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/nodeTypeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "parameters for restart action.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NodeTypeActionParameters"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "x-ms-examples": {
-          "Restart nodes": {
-            "$ref": "./examples/RestartNodes_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "responses": {
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The URL to get the status of an ongoing long-running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to get the status of a completed long-running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/reimage": {
-      "post": {
-        "tags": [
-          "NodeType"
-        ],
-        "operationId": "NodeTypes_Reimage",
-        "summary": "Reimages one or more nodes on the node type.",
-        "description": "Reimages one or more nodes on the node type. It will disable the fabric nodes, trigger a reimage on the VMs and activate the nodes back again.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/nodeTypeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "parameters for reimage action.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NodeTypeActionParameters"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "x-ms-examples": {
-          "Reimage nodes": {
-            "$ref": "./examples/ReimageNodes_example.json"
-          },
-          "Reimage all nodes by upgrade domain": {
-            "$ref": "./examples/ReimageNodes_UD_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "responses": {
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The URL to get the status of an ongoing long-running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to get the status of a completed long-running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/deleteNode": {
-      "post": {
-        "tags": [
-          "NodeType"
-        ],
-        "operationId": "NodeTypes_DeleteNode",
-        "summary": "Deletes one or more nodes on the node type.",
-        "description": "Deletes one or more nodes on the node type. It will disable the fabric nodes, trigger a delete on the VMs and removes the state from the cluster.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/nodeTypeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "parameters for delete action.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NodeTypeActionParameters"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "x-ms-examples": {
-          "Delete nodes": {
-            "$ref": "./examples/DeleteNodes_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "responses": {
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The URL to get the status of an ongoing long-running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to get the status of a completed long-running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/deallocate": {
-      "post": {
-        "tags": [
-          "NodeType"
-        ],
-        "operationId": "NodeTypes_Deallocate",
-        "summary": "Deallocates one or more nodes on the node type.",
-        "description": "Deallocates one or more nodes on the node type. It will disable the fabric nodes, trigger a shutdown on the VMs and release them from the cluster.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/nodeTypeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "parameters for deallocate action.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NodeTypeActionParameters"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "x-ms-examples": {
-          "Deallocate nodes": {
-            "$ref": "./examples/DeallocateNodes_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "responses": {
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The URL to get the status of an ongoing long-running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to get the status of a completed long-running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/start": {
-      "post": {
-        "tags": [
-          "NodeType"
-        ],
-        "operationId": "NodeTypes_Start",
-        "summary": "Starts one or more nodes on the node type.",
-        "description": "Starts one or more nodes on the node type. It will trigger an allocation of the fabric node if needed and activate them.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/nodeTypeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "parameters for start action.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NodeTypeActionParameters"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "x-ms-examples": {
-          "Start nodes": {
-            "$ref": "./examples/StartNodes_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "responses": {
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The URL to get the status of an ongoing long-running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to get the status of a completed long-running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/redeploy": {
-      "post": {
-        "tags": [
-          "NodeType"
-        ],
-        "operationId": "NodeTypes_Redeploy",
-        "summary": "Redeploys one or more nodes on the node type.",
-        "description": "Redeploys one or more nodes on the node type. It will disable the fabric nodes, trigger a shut down on the VMs, move them to a new node, and power them back on.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/nodeTypeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "parameters for redeploy action.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NodeTypeActionParameters"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "x-ms-examples": {
-          "Redeploy nodes": {
-            "$ref": "./examples/RedeployNodes_example.json"
-          },
-          "Redeploy all nodes by upgrade domain": {
-            "$ref": "./examples/RedeployNodes_UD_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "responses": {
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The URL to get the status of an ongoing long-running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to get the status of a completed long-running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/skus": {
-      "get": {
-        "tags": [
-          "NodeType"
-        ],
-        "operationId": "NodeTypeSkus_List",
-        "summary": "Gets a Service Fabric node type SKUs.",
-        "description": "Get a Service Fabric node type supported SKUs.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/nodeTypeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List a node type SKUs": {
-            "$ref": "./examples/NodeTypeSkusListOperation_example.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NodeTypeListSkuResult"
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/startFaultSimulation": {
-      "post": {
-        "tags": [
-          "NodeType",
-          "FaultSimulation"
-        ],
-        "operationId": "NodeTypes_StartFaultSimulation",
-        "summary": "Starts a fault simulation on the node type.",
-        "description": "Starts a fault simulation on the node type.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/nodeTypeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "parameters describing the fault simulation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FaultSimulationParameters"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "x-ms-examples": {
-          "Start Fault Simulation": {
-            "$ref": "./examples/faultSimulation/NodeTypeStartFaultSimulation_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/FaultSimulation"
-        },
-        "responses": {
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The URL to get the status of an ongoing long-running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to get the status of a completed long-running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/stopFaultSimulation": {
-      "post": {
-        "tags": [
-          "NodeType",
-          "FaultSimulation"
-        ],
-        "operationId": "NodeTypes_StopFaultSimulation",
-        "summary": "Stops a fault simulation on the node type.",
-        "description": "Stops a fault simulation on the node type.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/nodeTypeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "parameter with fault simulation id.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FaultSimulationIdParameters"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "x-ms-examples": {
-          "Stop Fault Simulation": {
-            "$ref": "./examples/faultSimulation/NodeTypeStopFaultSimulation_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/FaultSimulation"
-        },
-        "responses": {
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The URL to get the status of an ongoing long-running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "The URL to get the status of a completed long-running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/getFaultSimulation": {
-      "post": {
-        "tags": [
-          "NodeType",
-          "FaultSimulation"
-        ],
-        "operationId": "NodeTypes_GetFaultSimulation",
-        "summary": "Gets a fault simulation by the simulationId.",
-        "description": "Gets a fault simulation by the simulationId.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/nodeTypeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "parameter with fault simulation id.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FaultSimulationIdParameters"
-            },
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "x-ms-examples": {
-          "Get Fault Simulation": {
-            "$ref": "./examples/faultSimulation/NodeTypeGetFaultSimulation_example.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FaultSimulation"
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/listFaultSimulation": {
-      "post": {
-        "tags": [
-          "NodeType",
-          "FaultSimulation"
-        ],
-        "operationId": "NodeTypes_ListFaultSimulation",
-        "summary": "Gets the list of recent fault simulations for the node type.",
-        "description": "Gets the list of recent fault simulations for the node type.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/nodeTypeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List Fault Simulation": {
-            "$ref": "./examples/faultSimulation/NodeTypeListFaultSimulation_example.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FaultSimulationListResult"
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes": {
       "get": {
         "operationId": "NodeTypes_ListByManagedClusters",
+        "tags": [
+          "NodeType"
+        ],
         "summary": "Gets the list of Node types of the specified managed cluster.",
         "description": "Gets all Node types of the specified managed cluster.",
         "parameters": [
@@ -755,17 +56,6 @@
             "$ref": "#/parameters/api-version"
           }
         ],
-        "tags": [
-          "NodeType"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List node type of the specified managed cluster": {
-            "$ref": "./examples/NodeTypeListOperation_example.json"
-          }
-        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
@@ -779,15 +69,23 @@
               "$ref": "#/definitions/ErrorModel"
             }
           }
+        },
+        "x-ms-examples": {
+          "List node type of the specified managed cluster": {
+            "$ref": "./examples/NodeTypeListOperation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}": {
       "get": {
+        "operationId": "NodeTypes_Get",
         "tags": [
           "NodeType"
         ],
-        "operationId": "NodeTypes_Get",
         "summary": "Gets a Service Fabric node type.",
         "description": "Get a Service Fabric node type of a given managed cluster.",
         "parameters": [
@@ -807,11 +105,6 @@
             "$ref": "#/parameters/api-version"
           }
         ],
-        "x-ms-examples": {
-          "Get a node type": {
-            "$ref": "./examples/NodeTypeGetOperation_example.json"
-          }
-        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
@@ -825,13 +118,18 @@
               "$ref": "#/definitions/ErrorModel"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a node type": {
+            "$ref": "./examples/NodeTypeGetOperation_example.json"
+          }
         }
       },
       "put": {
+        "operationId": "NodeTypes_CreateOrUpdate",
         "tags": [
           "NodeType"
         ],
-        "operationId": "NodeTypes_CreateOrUpdate",
         "summary": "Creates or updates a Service Fabric node type.",
         "description": "Create or update a Service Fabric node type of a given managed cluster.",
         "parameters": [
@@ -861,36 +159,6 @@
             "x-ms-parameter-location": "method"
           }
         ],
-        "x-ms-examples": {
-          "Put a node type with minimum parameters": {
-            "$ref": "./examples/NodeTypePutOperation_example_min.json"
-          },
-          "Put a node type with maximum parameters": {
-            "$ref": "./examples/NodeTypePutOperation_example_max.json"
-          },
-          "Put a node type with auto-scale parameters": {
-            "$ref": "./examples/NodeTypePutOperationAutoScale_example.json"
-          },
-          "Put an stateless node type with temporary disk for service fabric": {
-            "$ref": "./examples/NodeTypePutOperationStateless_example.json"
-          },
-          "Put node type with dedicated hosts": {
-            "$ref": "./examples/NodeTypePutOperationDedicatedHost_example.json"
-          },
-          "Put node type with custom vm image": {
-            "$ref": "./examples/NodeTypePutOperationCustomImage_example.json"
-          },
-          "Put node type with shared galleries custom vm image": {
-            "$ref": "./examples/NodeTypePutOperationCustomSharedGalleriesImage_example.json"
-          },
-          "Put node type with vm image plan ": {
-            "$ref": "./examples/NodeTypePutOperationVmImagePlan_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
@@ -905,12 +173,12 @@
             },
             "headers": {
               "Azure-AsyncOperation": {
-                "description": "The URL to get the status of an ongoing long-running operation.",
-                "type": "string"
+                "type": "string",
+                "description": "The URL to get the status of an ongoing long-running operation."
               },
               "Location": {
-                "description": "The URL to get the status of a completed long-running operation.",
-                "type": "string"
+                "type": "string",
+                "description": "The URL to get the status of a completed long-running operation."
               }
             }
           },
@@ -920,13 +188,43 @@
               "$ref": "#/definitions/ErrorModel"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Put a node type with auto-scale parameters": {
+            "$ref": "./examples/NodeTypePutOperationAutoScale_example.json"
+          },
+          "Put a node type with maximum parameters": {
+            "$ref": "./examples/NodeTypePutOperation_example_max.json"
+          },
+          "Put a node type with minimum parameters": {
+            "$ref": "./examples/NodeTypePutOperation_example_min.json"
+          },
+          "Put an stateless node type with temporary disk for service fabric": {
+            "$ref": "./examples/NodeTypePutOperationStateless_example.json"
+          },
+          "Put node type with custom vm image": {
+            "$ref": "./examples/NodeTypePutOperationCustomImage_example.json"
+          },
+          "Put node type with dedicated hosts": {
+            "$ref": "./examples/NodeTypePutOperationDedicatedHost_example.json"
+          },
+          "Put node type with shared galleries custom vm image": {
+            "$ref": "./examples/NodeTypePutOperationCustomSharedGalleriesImage_example.json"
+          },
+          "Put node type with vm image plan ": {
+            "$ref": "./examples/NodeTypePutOperationVmImagePlan_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "NodeTypes_Update",
         "tags": [
           "NodeType"
         ],
-        "operationId": "NodeTypes_Update",
         "summary": "Update the tags of a node type resource of a given managed cluster.",
         "description": "Update the configuration of a node type of a given managed cluster, only updating tags.",
         "parameters": [
@@ -956,18 +254,6 @@
             "x-ms-parameter-location": "method"
           }
         ],
-        "x-ms-examples": {
-          "Patch a node type": {
-            "$ref": "./examples/NodeTypePatchOperation_example.json"
-          },
-          "Patch a node type while auto-scaling": {
-            "$ref": "./examples/NodeTypePatchOperationAutoScale_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
@@ -979,12 +265,12 @@
             "description": "The request was accepted and the operation will complete asynchronously.",
             "headers": {
               "Azure-AsyncOperation": {
-                "description": "The URL to get the status of an ongoing long-running operation.",
-                "type": "string"
+                "type": "string",
+                "description": "The URL to get the status of an ongoing long-running operation."
               },
               "Location": {
-                "description": "The URL to get the status of a completed long-running operation.",
-                "type": "string"
+                "type": "string",
+                "description": "The URL to get the status of a completed long-running operation."
               }
             }
           },
@@ -994,13 +280,25 @@
               "$ref": "#/definitions/ErrorModel"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Patch a node type": {
+            "$ref": "./examples/NodeTypePatchOperation_example.json"
+          },
+          "Patch a node type while auto-scaling": {
+            "$ref": "./examples/NodeTypePatchOperationAutoScale_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "NodeTypes_Delete",
         "tags": [
           "NodeType"
         ],
-        "operationId": "NodeTypes_Delete",
         "summary": "Deletes a Service Fabric node type.",
         "description": "Delete a Service Fabric node type of a given managed cluster.",
         "parameters": [
@@ -1020,34 +318,25 @@
             "$ref": "#/parameters/api-version"
           }
         ],
-        "x-ms-examples": {
-          "Delete a node type": {
-            "$ref": "./examples/NodeTypeDeleteOperation_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "responses": {
+          "200": {
+            "description": "The operation completed successfully."
+          },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously.",
             "headers": {
               "Azure-AsyncOperation": {
-                "description": "The URL to get the status of an ongoing long-running operation.",
-                "type": "string"
+                "type": "string",
+                "description": "The URL to get the status of an ongoing long-running operation."
               },
               "Location": {
-                "description": "The URL to get the status of a completed long-running operation.",
-                "type": "string"
+                "type": "string",
+                "description": "The URL to get the status of a completed long-running operation."
               }
             }
           },
           "204": {
             "description": "The resource was not found."
-          },
-          "200": {
-            "description": "The operation completed successfully."
           },
           "default": {
             "description": "The detailed error response.",
@@ -1055,17 +344,723 @@
               "$ref": "#/definitions/ErrorModel"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete a node type": {
+            "$ref": "./examples/NodeTypeDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/deallocate": {
+      "post": {
+        "operationId": "NodeTypes_Deallocate",
+        "tags": [
+          "NodeType"
+        ],
+        "summary": "Deallocates one or more nodes on the node type.",
+        "description": "Deallocates one or more nodes on the node type. It will disable the fabric nodes, trigger a shutdown on the VMs and release them from the cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters for deallocate action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeActionParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to get the status of an ongoing long-running operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to get the status of a completed long-running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deallocate nodes": {
+            "$ref": "./examples/DeallocateNodes_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/deleteNode": {
+      "post": {
+        "operationId": "NodeTypes_DeleteNode",
+        "tags": [
+          "NodeType"
+        ],
+        "summary": "Deletes one or more nodes on the node type.",
+        "description": "Deletes one or more nodes on the node type. It will disable the fabric nodes, trigger a delete on the VMs and removes the state from the cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters for delete action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeActionParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to get the status of an ongoing long-running operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to get the status of a completed long-running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete nodes": {
+            "$ref": "./examples/DeleteNodes_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/getFaultSimulation": {
+      "post": {
+        "operationId": "NodeTypes_GetFaultSimulation",
+        "tags": [
+          "NodeType",
+          "FaultSimulation"
+        ],
+        "summary": "Gets a fault simulation by the simulationId.",
+        "description": "Gets a fault simulation by the simulationId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameter with fault simulation id.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FaultSimulationIdParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FaultSimulation"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Fault Simulation": {
+            "$ref": "./examples/faultSimulation/NodeTypeGetFaultSimulation_example.json"
+          }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/listFaultSimulation": {
+      "post": {
+        "operationId": "NodeTypes_ListFaultSimulation",
+        "tags": [
+          "NodeType",
+          "FaultSimulation"
+        ],
+        "summary": "Gets the list of recent fault simulations for the node type.",
+        "description": "Gets the list of recent fault simulations for the node type.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FaultSimulationListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Fault Simulation": {
+            "$ref": "./examples/faultSimulation/NodeTypeListFaultSimulation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/redeploy": {
+      "post": {
+        "operationId": "NodeTypes_Redeploy",
+        "tags": [
+          "NodeType"
+        ],
+        "summary": "Redeploys one or more nodes on the node type.",
+        "description": "Redeploys one or more nodes on the node type. It will disable the fabric nodes, trigger a shut down on the VMs, move them to a new node, and power them back on.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters for redeploy action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeActionParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to get the status of an ongoing long-running operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to get the status of a completed long-running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Redeploy all nodes by upgrade domain": {
+            "$ref": "./examples/RedeployNodes_UD_example.json"
+          },
+          "Redeploy nodes": {
+            "$ref": "./examples/RedeployNodes_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/reimage": {
+      "post": {
+        "operationId": "NodeTypes_Reimage",
+        "tags": [
+          "NodeType"
+        ],
+        "summary": "Reimages one or more nodes on the node type.",
+        "description": "Reimages one or more nodes on the node type. It will disable the fabric nodes, trigger a reimage on the VMs and activate the nodes back again.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters for reimage action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeActionParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to get the status of an ongoing long-running operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to get the status of a completed long-running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reimage all nodes by upgrade domain": {
+            "$ref": "./examples/ReimageNodes_UD_example.json"
+          },
+          "Reimage nodes": {
+            "$ref": "./examples/ReimageNodes_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/restart": {
+      "post": {
+        "operationId": "NodeTypes_Restart",
+        "tags": [
+          "NodeType"
+        ],
+        "summary": "Restarts one or more nodes on the node type.",
+        "description": "Restarts one or more nodes on the node type. It will disable the fabric nodes, trigger a restart on the VMs and activate the nodes back again.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters for restart action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeActionParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to get the status of an ongoing long-running operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to get the status of a completed long-running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restart nodes": {
+            "$ref": "./examples/RestartNodes_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/skus": {
+      "get": {
+        "operationId": "NodeTypeSkus_List",
+        "tags": [
+          "NodeType"
+        ],
+        "summary": "Gets a Service Fabric node type SKUs.",
+        "description": "Get a Service Fabric node type supported SKUs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeTypeListSkuResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List a node type SKUs": {
+            "$ref": "./examples/NodeTypeSkusListOperation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/start": {
+      "post": {
+        "operationId": "NodeTypes_Start",
+        "tags": [
+          "NodeType"
+        ],
+        "summary": "Starts one or more nodes on the node type.",
+        "description": "Starts one or more nodes on the node type. It will trigger an allocation of the fabric node if needed and activate them.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters for start action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeActionParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to get the status of an ongoing long-running operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to get the status of a completed long-running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start nodes": {
+            "$ref": "./examples/StartNodes_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/startFaultSimulation": {
+      "post": {
+        "operationId": "NodeTypes_StartFaultSimulation",
+        "tags": [
+          "NodeType",
+          "FaultSimulation"
+        ],
+        "summary": "Starts a fault simulation on the node type.",
+        "description": "Starts a fault simulation on the node type.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters describing the fault simulation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FaultSimulationParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to get the status of an ongoing long-running operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to get the status of a completed long-running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start Fault Simulation": {
+            "$ref": "./examples/faultSimulation/NodeTypeStartFaultSimulation_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/stopFaultSimulation": {
+      "post": {
+        "operationId": "NodeTypes_StopFaultSimulation",
+        "tags": [
+          "NodeType",
+          "FaultSimulation"
+        ],
+        "summary": "Stops a fault simulation on the node type.",
+        "description": "Stops a fault simulation on the node type.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameter with fault simulation id.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FaultSimulationIdParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to get the status of an ongoing long-running operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to get the status of a completed long-running operation."
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop Fault Simulation": {
+            "$ref": "./examples/faultSimulation/NodeTypeStopFaultSimulation_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
     "AdditionalNetworkInterfaceConfiguration": {
       "type": "object",
-      "required": [
-        "name",
-        "ipConfigurations"
-      ],
+      "description": "Specifies the settings for a network interface to attach to the node type.",
       "properties": {
         "name": {
           "type": "string",
@@ -1081,20 +1076,46 @@
         },
         "ipConfigurations": {
           "type": "array",
+          "description": "Specifies the IP configurations of the network interface.",
           "items": {
             "$ref": "#/definitions/IpConfiguration"
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "description": "Specifies the IP configurations of the network interface."
+          ]
         }
       },
-      "description": "Specifies the settings for a network interface to attach to the node type."
+      "required": [
+        "name",
+        "ipConfigurations"
+      ]
+    },
+    "AvailableOperationDisplay": {
+      "type": "object",
+      "description": "Operation supported by the Service Fabric resource provider",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The name of the provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource on which the operation is performed"
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that can be performed."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description"
+        }
+      }
     },
     "DiskType": {
       "type": "string",
       "description": "Managed data disk type. IOPS and throughput are given by the disk size, to see more information go to https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types.\n",
+      "default": "StandardSSD_LRS",
       "enum": [
         "Standard_LRS",
         "StandardSSD_LRS",
@@ -1103,7 +1124,6 @@
         "StandardSSD_ZRS",
         "Premium_ZRS"
       ],
-      "default": "StandardSSD_LRS",
       "x-ms-enum": {
         "name": "DiskType",
         "modelAsString": true,
@@ -1135,6 +1155,50 @@
         ]
       }
     },
+    "EndpointRangeDescription": {
+      "type": "object",
+      "description": "Port range details",
+      "properties": {
+        "startPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Starting port of a range of ports"
+        },
+        "endPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "End port of a range of ports"
+        }
+      },
+      "required": [
+        "endPort",
+        "startPort"
+      ]
+    },
+    "ErrorModel": {
+      "type": "object",
+      "description": "The structure of the error.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModelError",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorModelError": {
+      "type": "object",
+      "description": "The error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      }
+    },
     "EvictionPolicyType": {
       "type": "string",
       "description": "Specifies the eviction policy for virtual machines in a SPOT node type.",
@@ -1157,8 +1221,190 @@
         ]
       }
     },
+    "FaultKind": {
+      "type": "string",
+      "description": "The kind of fault simulation.",
+      "enum": [
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "FaultKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Zone",
+            "description": "Simulates an availability zone down."
+          }
+        ]
+      }
+    },
+    "FaultSimulation": {
+      "type": "object",
+      "description": "Fault simulation object with status.",
+      "properties": {
+        "simulationId": {
+          "type": "string",
+          "description": "unique identifier for the fault simulation."
+        },
+        "status": {
+          "$ref": "#/definitions/FaultSimulationStatus",
+          "description": "Fault simulation status"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the fault simulation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the fault simulation."
+        },
+        "details": {
+          "$ref": "#/definitions/FaultSimulationDetails",
+          "description": "Fault simulation details"
+        }
+      }
+    },
+    "FaultSimulationConstraints": {
+      "type": "object",
+      "description": "Constraints for Fault Simulation action.",
+      "properties": {
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The absolute expiration timestamp (UTC) after which this fault simulation should be stopped if it's still active."
+        }
+      }
+    },
+    "FaultSimulationDetails": {
+      "type": "object",
+      "description": "Details for Fault Simulation.",
+      "properties": {
+        "clusterId": {
+          "type": "string",
+          "description": "unique identifier for the cluster resource."
+        },
+        "operationId": {
+          "type": "string",
+          "description": "unique identifier for the operation associated with the fault simulation."
+        },
+        "nodeTypeFaultSimulation": {
+          "type": "array",
+          "title": "Node Type Fault Simulation.",
+          "description": "List of node type simulations associated with the cluster fault simulation.",
+          "items": {
+            "$ref": "#/definitions/NodeTypeFaultSimulation"
+          },
+          "x-ms-identifiers": [
+            "nodeTypeName"
+          ]
+        },
+        "parameters": {
+          "$ref": "#/definitions/FaultSimulationParameters",
+          "description": "Fault simulation parameters."
+        }
+      }
+    },
+    "FaultSimulationIdParameters": {
+      "type": "object",
+      "description": "Parameters for Fault Simulation id.",
+      "properties": {
+        "simulationId": {
+          "type": "string",
+          "description": "unique identifier for the fault simulation."
+        }
+      },
+      "required": [
+        "simulationId"
+      ]
+    },
+    "FaultSimulationListResult": {
+      "type": "object",
+      "description": "Fault simulation list results",
+      "properties": {
+        "value": {
+          "type": "array",
+          "title": "fault simulation list value.",
+          "description": "The list of fault simulations.",
+          "items": {
+            "$ref": "#/definitions/FaultSimulation"
+          },
+          "x-ms-identifiers": [
+            "simulationId"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "FaultSimulationParameters": {
+      "type": "object",
+      "description": "Parameters for Fault Simulation action.",
+      "properties": {
+        "faultKind": {
+          "$ref": "#/definitions/FaultKind"
+        },
+        "force": {
+          "type": "boolean",
+          "description": "Force the action to go through without any check on the cluster."
+        },
+        "constraints": {
+          "$ref": "#/definitions/FaultSimulationConstraints"
+        }
+      },
+      "discriminator": "faultKind",
+      "required": [
+        "faultKind"
+      ]
+    },
+    "FaultSimulationStatus": {
+      "type": "string",
+      "description": "Fault simulation status.",
+      "enum": [
+        "Starting",
+        "Active",
+        "Stopping",
+        "Done",
+        "StartFailed",
+        "StopFailed"
+      ],
+      "x-ms-enum": {
+        "name": "FaultSimulationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Starting",
+            "description": "Indicates the fault simulation is starting. The simulation will have this status while the start operation is in progress."
+          },
+          {
+            "value": "Active",
+            "description": "Indicates the fault simulation is active. The simulation will have this status after the start operation has completed successfully."
+          },
+          {
+            "value": "Stopping",
+            "description": "Indicates the fault simulation is stopping. The simulation will have this status while the stop operation is in progress."
+          },
+          {
+            "value": "Done",
+            "description": "Indicates the fault simulation is done. The simulation will have this status after the stop operation has completed successfully."
+          },
+          {
+            "value": "StartFailed",
+            "description": "Indicates the fault simulation has failed on start. The simulation will have this status after the start operation fails."
+          },
+          {
+            "value": "StopFailed",
+            "description": "Indicates the fault simulation has failed on stop. The simulation will have this status after the stop operation fails."
+          }
+        ]
+      }
+    },
     "FrontendConfiguration": {
       "type": "object",
+      "description": "Describes the frontend configurations for the node type.",
       "properties": {
         "ipAddressType": {
           "$ref": "#/definitions/IPAddressType",
@@ -1177,26 +1423,25 @@
         "applicationGatewayBackendAddressPoolId": {
           "type": "string",
           "format": "arm-id",
+          "description": "The resource Id of application gateway backend address pool. The format of the resource Id is '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/applicationGateways/<applicationGatewayName>/backendAddressPools/<backendAddressPoolName>'.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
                 "type": "Microsoft.Network/applicationGateways/backendAddressPools"
               }
             ]
-          },
-          "description": "The resource Id of application gateway backend address pool. The format of the resource Id is '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/applicationGateways/<applicationGatewayName>/backendAddressPools/<backendAddressPoolName>'."
+          }
         }
-      },
-      "description": "Describes the frontend configurations for the node type."
+      }
     },
     "IPAddressType": {
       "type": "string",
       "description": "The IP address type.\n",
+      "default": "IPv4",
       "enum": [
         "IPv4",
         "IPv6"
       ],
-      "default": "IPv4",
       "x-ms-enum": {
         "name": "IPAddressType",
         "modelAsString": true,
@@ -1214,9 +1459,6 @@
     },
     "IpConfiguration": {
       "type": "object",
-      "required": [
-        "name"
-      ],
       "description": "Specifies an IP configuration of the network interface.",
       "properties": {
         "name": {
@@ -1225,24 +1467,24 @@
         },
         "applicationGatewayBackendAddressPools": {
           "type": "array",
+          "description": "Specifies an array of references to backend address pools of application gateways. A node type can reference backend address pools of multiple application gateways. Multiple node types cannot use the same application gateway.",
           "items": {
             "$ref": "#/definitions/SubResource"
-          },
-          "description": "Specifies an array of references to backend address pools of application gateways. A node type can reference backend address pools of multiple application gateways. Multiple node types cannot use the same application gateway."
+          }
         },
         "loadBalancerBackendAddressPools": {
           "type": "array",
+          "description": "Specifies an array of references to backend address pools of load balancers. A node type can reference backend address pools of one public and one internal load balancer. Multiple node types cannot use the same basic sku load balancer.\t",
           "items": {
             "$ref": "#/definitions/SubResource"
-          },
-          "description": "Specifies an array of references to backend address pools of load balancers. A node type can reference backend address pools of one public and one internal load balancer. Multiple node types cannot use the same basic sku load balancer.\t"
+          }
         },
         "loadBalancerInboundNatPools": {
           "type": "array",
+          "description": "Specifies an array of references to inbound Nat pools of the load balancers. A node type can reference inbound nat pools of one public and one internal load balancer. Multiple node types cannot use the same basic sku load balancer.",
           "items": {
             "$ref": "#/definitions/SubResource"
-          },
-          "description": "Specifies an array of references to inbound Nat pools of the load balancers. A node type can reference inbound nat pools of one public and one internal load balancer. Multiple node types cannot use the same basic sku load balancer."
+          }
         },
         "subnet": {
           "$ref": "#/definitions/SubResource",
@@ -1251,11 +1493,11 @@
         "privateIPAddressVersion": {
           "type": "string",
           "description": "Specifies whether the IP configuration's private IP is IPv4 or IPv6. Default is IPv4.",
+          "default": "IPv4",
           "enum": [
             "IPv4",
             "IPv6"
           ],
-          "default": "IPv4",
           "x-ms-enum": {
             "name": "privateIPAddressVersion",
             "modelAsString": true,
@@ -1271,9 +1513,6 @@
         },
         "publicIPAddressConfiguration": {
           "type": "object",
-          "required": [
-            "name"
-          ],
           "description": "The public IP address configuration of the network interface.",
           "properties": {
             "name": {
@@ -1282,20 +1521,20 @@
             },
             "ipTags": {
               "type": "array",
+              "description": "Specifies the list of IP tags associated with the public IP address.",
               "items": {
                 "$ref": "#/definitions/IpTag"
               },
-              "x-ms-identifiers": [],
-              "description": "Specifies the list of IP tags associated with the public IP address."
+              "x-ms-identifiers": []
             },
             "publicIPAddressVersion": {
               "type": "string",
               "description": "Specifies whether the IP configuration's public IP is IPv4 or IPv6. Default is IPv4.",
+              "default": "IPv4",
               "enum": [
                 "IPv4",
                 "IPv6"
               ],
-              "default": "IPv4",
               "x-ms-enum": {
                 "name": "publicIPAddressVersion",
                 "modelAsString": true,
@@ -1309,12 +1548,37 @@
                 ]
               }
             }
-          }
+          },
+          "required": [
+            "name"
+          ]
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "IpTag": {
+      "type": "object",
+      "description": "The IP tag associated with the public IP address.",
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "IP tag type. Example: FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
+        }
+      },
+      "required": [
+        "ipTagType",
+        "tag"
+      ]
     },
     "ManagedProxyResource": {
       "type": "object",
+      "description": "The resource model definition for proxy-only resource.",
       "properties": {
         "id": {
           "type": "string",
@@ -1333,10 +1597,10 @@
         },
         "tags": {
           "type": "object",
+          "description": "Azure resource tags.",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Azure resource tags.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1346,42 +1610,175 @@
           "$ref": "#/definitions/SystemData"
         }
       },
-      "description": "The resource model definition for proxy-only resource.",
       "x-ms-azure-resource": true
+    },
+    "ManagedResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the managed resource.",
+      "enum": [
+        "None",
+        "Creating",
+        "Created",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Deleted",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedResourceProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "NetworkSecurityRule": {
+      "type": "object",
+      "description": "Describes a network security rule.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Network security rule name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Network security rule description."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Network protocol this rule applies to.",
+          "enum": [
+            "http",
+            "https",
+            "tcp",
+            "udp",
+            "icmp",
+            "ah",
+            "esp"
+          ],
+          "x-ms-enum": {
+            "name": "nsgProtocol",
+            "modelAsString": true
+          }
+        },
+        "sourceAddressPrefixes": {
+          "type": "array",
+          "description": "The CIDR or source IP ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddressPrefixes": {
+          "type": "array",
+          "description": "The destination address prefixes. CIDR or destination IP ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "description": "The source port ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "description": "The destination port ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceAddressPrefix": {
+          "type": "string",
+          "description": "The CIDR or source IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from."
+        },
+        "destinationAddressPrefix": {
+          "type": "string",
+          "description": "The destination address prefix. CIDR or destination IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used."
+        },
+        "sourcePortRange": {
+          "type": "string",
+          "description": "The source port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports."
+        },
+        "destinationPortRange": {
+          "type": "string",
+          "description": "he destination port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports."
+        },
+        "access": {
+          "type": "string",
+          "description": "The network traffic is allowed or denied.",
+          "enum": [
+            "allow",
+            "deny"
+          ],
+          "x-ms-enum": {
+            "name": "access",
+            "modelAsString": true
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. The value can be in the range 1000 to 3000. Values outside this range are reserved for Service Fabric ManagerCluster Resource Provider. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.",
+          "minimum": 1000,
+          "maximum": 3000
+        },
+        "direction": {
+          "type": "string",
+          "description": "Network security rule direction.",
+          "enum": [
+            "inbound",
+            "outbound"
+          ],
+          "x-ms-enum": {
+            "name": "direction",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name",
+        "protocol",
+        "access",
+        "priority",
+        "direction"
+      ]
     },
     "NodeType": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ManagedProxyResource"
-        }
-      ],
+      "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/NodeTypeProperties",
-          "description": "The node type properties"
+          "description": "The node type properties",
+          "x-ms-client-flatten": true
         },
         "sku": {
           "$ref": "#/definitions/NodeTypeSku",
           "description": "The node type sku."
         }
       },
-      "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedProxyResource"
+        }
+      ]
     },
     "NodeTypeActionParameters": {
       "type": "object",
+      "description": "Parameters for Node type action. If nodes are not specified on the parameters, the operation will be performed in all nodes of the node type one upgrade domain at a time.",
       "properties": {
         "nodes": {
-          "description": "List of node names from the node type.",
           "type": "array",
+          "description": "List of node names from the node type.",
           "items": {
             "type": "string"
           }
         },
         "force": {
-          "description": "Force the action to go through.",
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Force the action to go through."
         },
         "updateType": {
           "type": "string",
@@ -1405,15 +1802,118 @@
             ]
           }
         }
-      },
-      "description": "Parameters for Node type action. If nodes are not specified on the parameters, the operation will be performed in all nodes of the node type one upgrade domain at a time."
+      }
+    },
+    "NodeTypeAvailableSku": {
+      "type": "object",
+      "description": "Defines the type of sku available for a node type",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of resource the sku applies to.  <br /><br />Value: Microsoft.ServiceFabric/managedClusters/nodeTypes.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/NodeTypeSupportedSku",
+          "description": "The supported SKU for a for node type.",
+          "readOnly": true
+        },
+        "capacity": {
+          "$ref": "#/definitions/NodeTypeSkuCapacity",
+          "description": "Provides information about how the node count can be scaled.",
+          "readOnly": true
+        }
+      }
+    },
+    "NodeTypeFaultSimulation": {
+      "type": "object",
+      "description": "Node type fault simulation object with status.",
+      "properties": {
+        "nodeTypeName": {
+          "type": "string",
+          "description": "Node type name."
+        },
+        "status": {
+          "$ref": "#/definitions/FaultSimulationStatus",
+          "description": "Fault simulation status"
+        },
+        "operationId": {
+          "type": "string",
+          "description": "Current or latest asynchronous operation identifier on the node type."
+        },
+        "operationStatus": {
+          "$ref": "#/definitions/SfmcOperationStatus",
+          "description": "Current or latest asynchronous operation status on the node type"
+        }
+      }
+    },
+    "NodeTypeListResult": {
+      "type": "object",
+      "description": "Node type list results",
+      "properties": {
+        "value": {
+          "type": "array",
+          "title": "node type list value.",
+          "description": "The list of node types.",
+          "items": {
+            "$ref": "#/definitions/NodeType"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "NodeTypeListSkuResult": {
+      "type": "object",
+      "description": "Node type available sku list results",
+      "properties": {
+        "value": {
+          "type": "array",
+          "title": "Node type sku list value.",
+          "description": "The list of available node type SKUs.",
+          "items": {
+            "$ref": "#/definitions/NodeTypeAvailableSku"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "NodeTypeNatConfig": {
+      "type": "object",
+      "description": "Provides information about NAT configuration on the default public Load Balancer for the node type.",
+      "properties": {
+        "backendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The internal port for the NAT configuration.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "frontendPortRangeStart": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port range start for the external endpoint.",
+          "minimum": 1,
+          "maximum": 65534
+        },
+        "frontendPortRangeEnd": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port range end for the external endpoint.",
+          "minimum": 1,
+          "maximum": 65534
+        }
+      }
     },
     "NodeTypeProperties": {
       "type": "object",
-      "required": [
-        "isPrimary",
-        "vmInstanceCount"
-      ],
+      "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster.",
       "properties": {
         "isPrimary": {
           "type": "boolean",
@@ -1437,23 +1937,23 @@
         },
         "dataDiskLetter": {
           "type": "string",
-          "pattern": "^[a-zA-Z]{1}$",
-          "description": "Managed data disk letter. It can not use the reserved letter C or D and it can not change after created."
+          "description": "Managed data disk letter. It can not use the reserved letter C or D and it can not change after created.",
+          "pattern": "^[a-zA-Z]{1}$"
         },
         "placementProperties": {
           "type": "object",
           "description": "The placement tags applied to nodes in the node type, which can be used to indicate where certain services (workload) should run.",
           "additionalProperties": {
-            "type": "string",
-            "description": "Placement tag value"
+            "description": "Placement tag value",
+            "type": "string"
           }
         },
         "capacities": {
           "type": "object",
           "description": "The capacity tags applied to the nodes in the node type, the cluster resource manager uses these tags to understand how much resource a node has.",
           "additionalProperties": {
-            "type": "string",
-            "description": "Capacity tag value"
+            "description": "Capacity tag value",
+            "type": "string"
           }
         },
         "applicationPorts": {
@@ -1522,29 +2022,29 @@
         },
         "frontendConfigurations": {
           "type": "array",
+          "description": "Indicates the node type uses its own frontend configurations instead of the default one for the cluster. This setting can only be specified for non-primary node types and can not be added or removed after the node type is created.",
           "items": {
             "$ref": "#/definitions/FrontendConfiguration"
           },
-          "x-ms-identifiers": [],
-          "description": "Indicates the node type uses its own frontend configurations instead of the default one for the cluster. This setting can only be specified for non-primary node types and can not be added or removed after the node type is created."
+          "x-ms-identifiers": []
         },
         "networkSecurityRules": {
           "type": "array",
+          "description": "The Network Security Rules for this node type. This setting can only be specified for node types that are configured with frontend configurations.",
           "items": {
             "$ref": "#/definitions/NetworkSecurityRule"
           },
-          "x-ms-identifiers": [],
-          "description": "The Network Security Rules for this node type. This setting can only be specified for node types that are configured with frontend configurations."
+          "x-ms-identifiers": []
         },
         "additionalDataDisks": {
           "type": "array",
+          "description": "Additional managed data disks.",
           "items": {
             "$ref": "#/definitions/VmssDataDisk"
           },
           "x-ms-identifiers": [
             "lun"
-          ],
-          "description": "Additional managed data disks."
+          ]
         },
         "enableEncryptionAtHost": {
           "type": "boolean",
@@ -1553,8 +2053,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ManagedResourceProvisioningState",
-          "readOnly": true,
-          "description": "The provisioning state of the node type resource."
+          "description": "The provisioning state of the node type resource.",
+          "readOnly": true
         },
         "enableAcceleratedNetworking": {
           "type": "boolean",
@@ -1574,10 +2074,10 @@
         },
         "zones": {
           "type": "array",
+          "description": "Specifies the availability zones where the node type would span across. If the cluster is not spanning across availability zones, initiates az migration for the cluster.",
           "items": {
             "type": "string"
-          },
-          "description": "Specifies the availability zones where the node type would span across. If the cluster is not spanning across availability zones, initiates az migration for the cluster."
+          }
         },
         "isSpotVM": {
           "type": "boolean",
@@ -1602,6 +2102,7 @@
         "vmImageResourceId": {
           "type": "string",
           "format": "arm-id",
+          "description": "Indicates the resource id of the vm image. This parameter is used for custom vm image.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -1614,27 +2115,26 @@
                 "type": "Microsoft.Compute/galleries/images/versions"
               }
             ]
-          },
-          "description": "Indicates the resource id of the vm image. This parameter is used for custom vm image."
+          }
         },
         "subnetId": {
           "type": "string",
           "format": "arm-id",
+          "description": "Indicates the resource id of the subnet for the node type.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
                 "type": "Microsoft.Network/virtualNetworks/subnets"
               }
             ]
-          },
-          "description": "Indicates the resource id of the subnet for the node type."
+          }
         },
         "vmSetupActions": {
           "type": "array",
+          "description": "Specifies the actions to be performed on the vms before bootstrapping the service fabric runtime.",
           "items": {
             "$ref": "#/definitions/VmSetupAction"
-          },
-          "description": "Specifies the actions to be performed on the vms before bootstrapping the service fabric runtime."
+          }
         },
         "securityType": {
           "type": "string",
@@ -1673,6 +2173,7 @@
         "vmSharedGalleryImageId": {
           "type": "string",
           "format": "arm-id",
+          "description": "Indicates the resource id of the vm shared galleries image. This parameter is used for custom vm image.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -1682,28 +2183,27 @@
                 "type": "Microsoft.Compute/sharedGalleries/images/versions"
               }
             ]
-          },
-          "description": "Indicates the resource id of the vm shared galleries image. This parameter is used for custom vm image."
+          }
         },
         "natGatewayId": {
           "type": "string",
           "format": "arm-id",
+          "description": "Specifies the resource id of a NAT Gateway to attach to the subnet of this node type. Node type must use custom load balancer.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
                 "type": "Microsoft.Network/natGateways"
               }
             ]
-          },
-          "description": "Specifies the resource id of a NAT Gateway to attach to the subnet of this node type. Node type must use custom load balancer."
+          }
         },
         "natConfigurations": {
           "type": "array",
+          "description": "Specifies the NAT configuration on default public Load Balancer for the node type. This is only supported for node types use the default public Load Balancer.",
           "items": {
             "$ref": "#/definitions/NodeTypeNatConfig"
           },
-          "x-ms-identifiers": [],
-          "description": "Specifies the NAT configuration on default public Load Balancer for the node type. This is only supported for node types use the default public Load Balancer."
+          "x-ms-identifiers": []
         },
         "vmImagePlan": {
           "$ref": "#/definitions/VmImagePlan",
@@ -1712,36 +2212,36 @@
         "serviceArtifactReferenceId": {
           "type": "string",
           "format": "arm-id",
+          "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
                 "type": "Microsoft.Compute/galleries/serviceArtifacts/vmArtifactsProfiles"
               }
             ]
-          },
-          "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version."
+          }
         },
         "dscpConfigurationId": {
           "type": "string",
           "format": "arm-id",
+          "description": "Specifies the resource id of the DSCP configuration to apply to the node type network interface.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
                 "type": "Microsoft.Network/dscpConfigurations"
               }
             ]
-          },
-          "description": "Specifies the resource id of the DSCP configuration to apply to the node type network interface."
+          }
         },
         "additionalNetworkInterfaceConfigurations": {
           "type": "array",
+          "description": "Specifies the settings for any additional secondary network interfaces to attach to the node type.",
           "items": {
             "$ref": "#/definitions/AdditionalNetworkInterfaceConfiguration"
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "description": "Specifies the settings for any additional secondary network interfaces to attach to the node type."
+          ]
         },
         "computerNamePrefix": {
           "type": "string",
@@ -1749,84 +2249,23 @@
         },
         "vmApplications": {
           "type": "array",
+          "description": "Specifies the gallery applications that should be made available to the underlying VMSS.",
           "items": {
             "$ref": "#/definitions/VmApplication"
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "description": "Specifies the gallery applications that should be made available to the underlying VMSS."
+          ]
         }
       },
-      "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
-    },
-    "NodeTypeListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "title": "node type list value.",
-          "description": "The list of node types.",
-          "items": {
-            "$ref": "#/definitions/NodeType"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      },
-      "description": "Node type list results"
-    },
-    "NodeTypeNatConfig": {
-      "type": "object",
-      "properties": {
-        "backendPort": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 65535,
-          "description": "The internal port for the NAT configuration."
-        },
-        "frontendPortRangeStart": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 65534,
-          "description": "The port range start for the external endpoint."
-        },
-        "frontendPortRangeEnd": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 65534,
-          "description": "The port range end for the external endpoint."
-        }
-      },
-      "description": "Provides information about NAT configuration on the default public Load Balancer for the node type."
-    },
-    "NodeTypeUpdateParameters": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Node type update parameters",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "sku": {
-          "$ref": "#/definitions/NodeTypeSku",
-          "description": "The node type sku."
-        }
-      },
-      "description": "Node type update request"
+      "required": [
+        "isPrimary",
+        "vmInstanceCount"
+      ]
     },
     "NodeTypeSku": {
       "type": "object",
-      "required": [
-        "capacity"
-      ],
+      "description": "Describes a node type sku.",
       "properties": {
         "name": {
           "type": "string",
@@ -1844,46 +2283,48 @@
           "maximum": 2147483647
         }
       },
-      "description": "Describes a node type sku."
+      "required": [
+        "capacity"
+      ]
     },
     "NodeTypeSkuCapacity": {
       "type": "object",
+      "description": "Provides information about how node type can be scaled.",
       "properties": {
         "minimum": {
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "description": "Lowest permitted node count in a node type."
+          "description": "Lowest permitted node count in a node type.",
+          "readOnly": true
         },
         "maximum": {
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "description": "Highest permitted node count in a node type."
+          "description": "Highest permitted node count in a node type.",
+          "readOnly": true
         },
         "default": {
           "type": "integer",
           "format": "int32",
-          "readOnly": true,
-          "description": "Default node count in a node type."
+          "description": "Default node count in a node type.",
+          "readOnly": true
         },
         "scaleType": {
           "$ref": "#/definitions/NodeTypeSkuScaleType",
-          "readOnly": true,
-          "description": "Node type capacity scale type."
+          "description": "Node type capacity scale type.",
+          "readOnly": true
         }
-      },
-      "description": "Provides information about how node type can be scaled."
+      }
     },
     "NodeTypeSkuScaleType": {
       "type": "string",
       "description": "Node type capacity scale type.\n",
+      "default": "None",
       "enum": [
         "None",
         "Manual",
         "Automatic"
       ],
-      "default": "None",
       "x-ms-enum": {
         "name": "NodeTypeSkuScaleType",
         "modelAsString": true,
@@ -1903,29 +2344,9 @@
         ]
       }
     },
-    "NodeTypeAvailableSku": {
-      "type": "object",
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The type of resource the sku applies to.  <br /><br />Value: Microsoft.ServiceFabric/managedClusters/nodeTypes."
-        },
-        "sku": {
-          "$ref": "#/definitions/NodeTypeSupportedSku",
-          "description": "The supported SKU for a for node type.",
-          "readOnly": true
-        },
-        "capacity": {
-          "$ref": "#/definitions/NodeTypeSkuCapacity",
-          "description": "Provides information about how the node count can be scaled.",
-          "readOnly": true
-        }
-      },
-      "description": "Defines the type of sku available for a node type"
-    },
     "NodeTypeSupportedSku": {
       "type": "object",
+      "description": "Describes a node type supported sku.",
       "properties": {
         "name": {
           "type": "string",
@@ -1937,529 +2358,28 @@
           "description": "Specifies the tier of the node type. <br /><br /> Possible Values:<br /> **Standard**",
           "readOnly": true
         }
-      },
-      "description": "Describes a node type supported sku."
-    },
-    "NodeTypeListSkuResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "title": "Node type sku list value.",
-          "description": "The list of available node type SKUs.",
-          "items": {
-            "$ref": "#/definitions/NodeTypeAvailableSku"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      },
-      "description": "Node type available sku list results"
-    },
-    "SubResource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Azure resource identifier."
-        }
-      },
-      "description": "Azure resource identifier.",
-      "x-ms-azure-resource": true
-    },
-    "VaultCertificate": {
-      "type": "object",
-      "required": [
-        "certificateUrl",
-        "certificateStore"
-      ],
-      "properties": {
-        "certificateUrl": {
-          "type": "string",
-          "description": "This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add)."
-        },
-        "certificateStore": {
-          "type": "string",
-          "description": "For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. <br><br>For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name <UppercaseThumbprint>.crt for the X509 certificate file and <UppercaseThumbprint>.prv for private key. Both of these files are .pem formatted."
-        }
-      },
-      "description": "Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM."
-    },
-    "VaultSecretGroup": {
-      "type": "object",
-      "required": [
-        "sourceVault",
-        "vaultCertificates"
-      ],
-      "properties": {
-        "sourceVault": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The relative URL of the Key Vault containing all of the certificates in VaultCertificates."
-        },
-        "vaultCertificates": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VaultCertificate"
-          },
-          "x-ms-identifiers": [],
-          "description": "The list of key vault references in SourceVault which contain certificates."
-        }
-      },
-      "description": "Specifies set of certificates that should be installed onto the virtual machines."
-    },
-    "VmApplication": {
-      "type": "object",
-      "required": [
-        "packageReferenceId"
-      ],
-      "properties": {
-        "configurationReference": {
-          "format": "uri",
-          "type": "string",
-          "description": "Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided."
-        },
-        "enableAutomaticUpgrade": {
-          "type": "boolean",
-          "description": "If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the underlying VMSS."
-        },
-        "order": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Optional, Specifies the order in which the packages have to be installed."
-        },
-        "packageReferenceId": {
-          "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Compute/galleries/applications/versions"
-              }
-            ]
-          },
-          "description": "Specifies the GalleryApplicationVersion resource id on the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}."
-        },
-        "vmGalleryTags": {
-          "type": "string",
-          "description": "Optional, Specifies a passthrough value for more generic context. Accepts a JSON-formatted string e.g. '{\"Tag1\":\"Value1\",\"Tag2\":\"Value2\"}'."
-        },
-        "treatFailureAsDeploymentFailure": {
-          "type": "boolean",
-          "description": "Optional, If true, any failure for any operation in the VmApplication will fail the deployment."
-        }
-      },
-      "description": "Specifies the gallery application that should be made available to the underlying VMSS."
-    },
-    "VmImagePlan": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The plan ID."
-        },
-        "product": {
-          "type": "string",
-          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
-        },
-        "promotionCode": {
-          "type": "string",
-          "description": "The promotion code."
-        },
-        "publisher": {
-          "type": "string",
-          "description": "The publisher ID."
-        }
-      },
-      "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use. In the Azure portal, find the marketplace image that you want to use and then click Want to deploy programmatically, Get Started ->. Enter any required information and then click Save."
-    },
-    "VmManagedIdentity": {
-      "type": "object",
-      "properties": {
-        "userAssignedIdentities": {
-          "type": "array",
-          "description": "The list of user identities associated with the virtual machine scale set under the node type. Each entry will be an ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "description": "Identities for the virtual machine scale set under the node type."
-    },
-    "VmssDataDisk": {
-      "type": "object",
-      "required": [
-        "lun",
-        "diskSizeGB",
-        "diskType",
-        "diskLetter"
-      ],
-      "properties": {
-        "lun": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM. Lun 0 is reserved for the service fabric data disk."
-        },
-        "diskSizeGB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Disk size for each vm in the node type in GBs."
-        },
-        "diskType": {
-          "$ref": "#/definitions/DiskType",
-          "description": "Managed data disk type. Specifies the storage account type for the managed disk"
-        },
-        "diskLetter": {
-          "type": "string",
-          "pattern": "^[a-zA-Z]{1}$",
-          "description": "Managed data disk letter. It can not use the reserved letter C or D and it can not change after created."
-        }
-      },
-      "description": "Managed data disk description."
-    },
-    "VmSetupAction": {
-      "type": "string",
-      "description": "action to be performed on the vms before bootstrapping the service fabric runtime.",
-      "enum": [
-        "EnableContainers",
-        "EnableHyperV"
-      ],
-      "x-ms-enum": {
-        "name": "VmSetupAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "EnableContainers",
-            "description": "Enable windows containers feature."
-          },
-          {
-            "value": "EnableHyperV",
-            "description": "Enables windows HyperV feature."
-          }
-        ]
       }
     },
-    "VMSSExtension": {
+    "NodeTypeUpdateParameters": {
       "type": "object",
-      "required": [
-        "name",
-        "properties"
-      ],
+      "description": "Node type update request",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the extension."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VMSSExtensionProperties",
-          "description": "Describes the properties of a Virtual Machine Scale Set Extension."
-        }
-      },
-      "description": "Specifies set of extensions that should be installed onto the virtual machines."
-    },
-    "VMSSExtensionProperties": {
-      "type": "object",
-      "required": [
-        "publisher",
-        "type",
-        "typeHandlerVersion"
-      ],
-      "properties": {
-        "publisher": {
-          "type": "string",
-          "description": "The name of the extension handler publisher."
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler."
-        },
-        "autoUpgradeMinorVersion": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
-        },
-        "settings": {
+        "tags": {
           "type": "object",
-          "description": "Json formatted public settings for the extension."
-        },
-        "protectedSettings": {
-          "type": "object",
-          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
-        },
-        "forceUpdateTag": {
-          "type": "string",
-          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
-        },
-        "provisionAfterExtensions": {
-          "type": "array",
-          "items": {
+          "description": "Node type update parameters",
+          "additionalProperties": {
             "type": "string"
-          },
-          "description": "Collection of extension names after which this extension needs to be provisioned."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state, which only appears in the response."
-        },
-        "enableAutomaticUpgrade": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
-        },
-        "setupOrder": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VmssExtensionSetupOrder"
-          },
-          "x-ms-identifiers": [],
-          "description": "Indicates the setup order for the extension."
-        }
-      },
-      "description": "Describes the properties of a Virtual Machine Scale Set Extension."
-    },
-    "VmssExtensionSetupOrder": {
-      "type": "string",
-      "description": "Vm extension setup order.\n",
-      "enum": [
-        "BeforeSFRuntime"
-      ],
-      "x-ms-enum": {
-        "name": "VmssExtensionSetupOrder",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "BeforeSFRuntime",
-            "description": "Indicates that the vm extension should run before the service fabric runtime starts."
           }
-        ]
+        },
+        "sku": {
+          "$ref": "#/definitions/NodeTypeSku",
+          "description": "The node type sku."
+        }
       }
-    },
-    "AvailableOperationDisplay": {
-      "type": "object",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "The name of the provider."
-        },
-        "resource": {
-          "type": "string",
-          "description": "The resource on which the operation is performed"
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that can be performed."
-        },
-        "description": {
-          "type": "string",
-          "description": "Operation description"
-        }
-      },
-      "description": "Operation supported by the Service Fabric resource provider"
-    },
-    "EndpointRangeDescription": {
-      "type": "object",
-      "required": [
-        "endPort",
-        "startPort"
-      ],
-      "properties": {
-        "startPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Starting port of a range of ports"
-        },
-        "endPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "End port of a range of ports"
-        }
-      },
-      "description": "Port range details"
-    },
-    "ErrorModel": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorModelError",
-          "description": "The error details."
-        }
-      },
-      "description": "The structure of the error."
-    },
-    "ErrorModelError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "The error details."
-    },
-    "IpTag": {
-      "type": "object",
-      "required": [
-        "ipTagType",
-        "tag"
-      ],
-      "properties": {
-        "ipTagType": {
-          "type": "string",
-          "description": "IP tag type. Example: FirstPartyUsage."
-        },
-        "tag": {
-          "type": "string",
-          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
-        }
-      },
-      "description": "The IP tag associated with the public IP address."
-    },
-    "ManagedResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of the managed resource.",
-      "enum": [
-        "None",
-        "Creating",
-        "Created",
-        "Updating",
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Deleting",
-        "Deleted",
-        "Other"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedResourceProvisioningState",
-        "modelAsString": true
-      }
-    },
-    "NetworkSecurityRule": {
-      "type": "object",
-      "required": [
-        "name",
-        "protocol",
-        "access",
-        "priority",
-        "direction"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Network security rule name."
-        },
-        "description": {
-          "type": "string",
-          "description": "Network security rule description."
-        },
-        "protocol": {
-          "type": "string",
-          "description": "Network protocol this rule applies to.",
-          "enum": [
-            "http",
-            "https",
-            "tcp",
-            "udp",
-            "icmp",
-            "ah",
-            "esp"
-          ],
-          "x-ms-enum": {
-            "name": "nsgProtocol",
-            "modelAsString": true
-          }
-        },
-        "sourceAddressPrefixes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The CIDR or source IP ranges."
-        },
-        "destinationAddressPrefixes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The destination address prefixes. CIDR or destination IP ranges."
-        },
-        "sourcePortRanges": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The source port ranges."
-        },
-        "destinationPortRanges": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The destination port ranges."
-        },
-        "sourceAddressPrefix": {
-          "type": "string",
-          "description": "The CIDR or source IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from."
-        },
-        "destinationAddressPrefix": {
-          "type": "string",
-          "description": "The destination address prefix. CIDR or destination IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used."
-        },
-        "sourcePortRange": {
-          "type": "string",
-          "description": "The source port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports."
-        },
-        "destinationPortRange": {
-          "type": "string",
-          "description": "he destination port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports."
-        },
-        "access": {
-          "type": "string",
-          "description": "The network traffic is allowed or denied.",
-          "enum": [
-            "allow",
-            "deny"
-          ],
-          "x-ms-enum": {
-            "name": "access",
-            "modelAsString": true
-          }
-        },
-        "priority": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The priority of the rule. The value can be in the range 1000 to 3000. Values outside this range are reserved for Service Fabric ManagerCluster Resource Provider. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.",
-          "minimum": 1000,
-          "maximum": 3000
-        },
-        "direction": {
-          "type": "string",
-          "description": "Network security rule direction.",
-          "enum": [
-            "inbound",
-            "outbound"
-          ],
-          "x-ms-enum": {
-            "name": "direction",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "Describes a network security rule."
     },
     "OperationResult": {
       "type": "object",
+      "description": "Available operation list result",
       "properties": {
         "name": {
           "type": "string",
@@ -2481,8 +2401,7 @@
           "type": "string",
           "description": "The URL to use for getting the next set of results."
         }
-      },
-      "description": "Available operation list result"
+      }
     },
     "SfmcOperationStatus": {
       "type": "string",
@@ -2526,10 +2445,20 @@
         ]
       }
     },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
+    "SubResource": {
       "type": "object",
-      "readOnly": true,
+      "description": "Azure resource identifier.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource identifier."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
       "properties": {
         "createdBy": {
           "type": "string",
@@ -2557,229 +2486,298 @@
           "format": "date-time",
           "description": "The timestamp of resource last modification (UTC)."
         }
+      },
+      "readOnly": true
+    },
+    "VMSSExtension": {
+      "type": "object",
+      "description": "Specifies set of extensions that should be installed onto the virtual machines.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extension."
+        },
+        "properties": {
+          "$ref": "#/definitions/VMSSExtensionProperties",
+          "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "VMSSExtensionProperties": {
+      "type": "object",
+      "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Json formatted public settings for the extension."
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+        },
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "description": "Collection of extension names after which this extension needs to be provisioned.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response.",
+          "readOnly": true
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
+        },
+        "setupOrder": {
+          "type": "array",
+          "description": "Indicates the setup order for the extension.",
+          "items": {
+            "$ref": "#/definitions/VmssExtensionSetupOrder"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "publisher",
+        "type",
+        "typeHandlerVersion"
+      ]
+    },
+    "VaultCertificate": {
+      "type": "object",
+      "description": "Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM.",
+      "properties": {
+        "certificateUrl": {
+          "type": "string",
+          "description": "This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add)."
+        },
+        "certificateStore": {
+          "type": "string",
+          "description": "For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. <br><br>For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name <UppercaseThumbprint>.crt for the X509 certificate file and <UppercaseThumbprint>.prv for private key. Both of these files are .pem formatted."
+        }
+      },
+      "required": [
+        "certificateUrl",
+        "certificateStore"
+      ]
+    },
+    "VaultSecretGroup": {
+      "type": "object",
+      "description": "Specifies set of certificates that should be installed onto the virtual machines.",
+      "properties": {
+        "sourceVault": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The relative URL of the Key Vault containing all of the certificates in VaultCertificates."
+        },
+        "vaultCertificates": {
+          "type": "array",
+          "description": "The list of key vault references in SourceVault which contain certificates.",
+          "items": {
+            "$ref": "#/definitions/VaultCertificate"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "sourceVault",
+        "vaultCertificates"
+      ]
+    },
+    "VmApplication": {
+      "type": "object",
+      "description": "Specifies the gallery application that should be made available to the underlying VMSS.",
+      "properties": {
+        "configurationReference": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided."
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the underlying VMSS."
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional, Specifies the order in which the packages have to be installed."
+        },
+        "packageReferenceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies the GalleryApplicationVersion resource id on the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/galleries/applications/versions"
+              }
+            ]
+          }
+        },
+        "vmGalleryTags": {
+          "type": "string",
+          "description": "Optional, Specifies a passthrough value for more generic context. Accepts a JSON-formatted string e.g. '{\"Tag1\":\"Value1\",\"Tag2\":\"Value2\"}'."
+        },
+        "treatFailureAsDeploymentFailure": {
+          "type": "boolean",
+          "description": "Optional, If true, any failure for any operation in the VmApplication will fail the deployment."
+        }
+      },
+      "required": [
+        "packageReferenceId"
+      ]
+    },
+    "VmImagePlan": {
+      "type": "object",
+      "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use. In the Azure portal, find the marketplace image that you want to use and then click Want to deploy programmatically, Get Started ->. Enter any required information and then click Save.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The plan ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "The promotion code."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher ID."
+        }
       }
     },
-    "FaultKind": {
+    "VmManagedIdentity": {
+      "type": "object",
+      "description": "Identities for the virtual machine scale set under the node type.",
+      "properties": {
+        "userAssignedIdentities": {
+          "type": "array",
+          "description": "The list of user identities associated with the virtual machine scale set under the node type. Each entry will be an ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VmSetupAction": {
       "type": "string",
-      "description": "The kind of fault simulation.",
+      "description": "action to be performed on the vms before bootstrapping the service fabric runtime.",
       "enum": [
-        "Zone"
+        "EnableContainers",
+        "EnableHyperV"
       ],
       "x-ms-enum": {
-        "name": "FaultKind",
+        "name": "VmSetupAction",
         "modelAsString": true,
         "values": [
           {
-            "value": "Zone",
-            "description": "Simulates an availability zone down."
+            "value": "EnableContainers",
+            "description": "Enable windows containers feature."
+          },
+          {
+            "value": "EnableHyperV",
+            "description": "Enables windows HyperV feature."
           }
         ]
       }
     },
-    "FaultSimulation": {
+    "VmssDataDisk": {
       "type": "object",
+      "description": "Managed data disk description.",
       "properties": {
-        "simulationId": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM. Lun 0 is reserved for the service fabric data disk.",
+          "minimum": 1
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Disk size for each vm in the node type in GBs."
+        },
+        "diskType": {
+          "$ref": "#/definitions/DiskType",
+          "description": "Managed data disk type. Specifies the storage account type for the managed disk"
+        },
+        "diskLetter": {
           "type": "string",
-          "description": "unique identifier for the fault simulation."
-        },
-        "status": {
-          "$ref": "#/definitions/FaultSimulationStatus",
-          "description": "Fault simulation status"
-        },
-        "startTime": {
-          "type": "string",
-          "description": "The start time of the fault simulation.",
-          "format": "date-time"
-        },
-        "endTime": {
-          "type": "string",
-          "description": "The end time of the fault simulation.",
-          "format": "date-time"
-        },
-        "details": {
-          "$ref": "#/definitions/FaultSimulationDetails",
-          "description": "Fault simulation details"
+          "description": "Managed data disk letter. It can not use the reserved letter C or D and it can not change after created.",
+          "pattern": "^[a-zA-Z]{1}$"
         }
       },
-      "description": "Fault simulation object with status."
-    },
-    "FaultSimulationConstraints": {
-      "type": "object",
-      "description": "Constraints for Fault Simulation action.",
-      "properties": {
-        "expirationTime": {
-          "type": "string",
-          "description": "The absolute expiration timestamp (UTC) after which this fault simulation should be stopped if it's still active.",
-          "format": "date-time"
-        }
-      }
-    },
-    "FaultSimulationDetails": {
-      "type": "object",
-      "description": "Details for Fault Simulation.",
-      "properties": {
-        "clusterId": {
-          "description": "unique identifier for the cluster resource.",
-          "type": "string"
-        },
-        "operationId": {
-          "description": "unique identifier for the operation associated with the fault simulation.",
-          "type": "string"
-        },
-        "nodeTypeFaultSimulation": {
-          "type": "array",
-          "title": "Node Type Fault Simulation.",
-          "description": "List of node type simulations associated with the cluster fault simulation.",
-          "items": {
-            "$ref": "#/definitions/NodeTypeFaultSimulation"
-          },
-          "x-ms-identifiers": [
-            "nodeTypeName"
-          ]
-        },
-        "parameters": {
-          "$ref": "#/definitions/FaultSimulationParameters",
-          "description": "Fault simulation parameters."
-        }
-      }
-    },
-    "FaultSimulationIdParameters": {
-      "type": "object",
-      "description": "Parameters for Fault Simulation id.",
       "required": [
-        "simulationId"
-      ],
-      "properties": {
-        "simulationId": {
-          "type": "string",
-          "description": "unique identifier for the fault simulation."
-        }
-      }
+        "lun",
+        "diskSizeGB",
+        "diskType",
+        "diskLetter"
+      ]
     },
-    "FaultSimulationListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "title": "fault simulation list value.",
-          "description": "The list of fault simulations.",
-          "items": {
-            "$ref": "#/definitions/FaultSimulation"
-          },
-          "x-ms-identifiers": [
-            "simulationId"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      },
-      "description": "Fault simulation list results"
-    },
-    "FaultSimulationParameters": {
-      "type": "object",
-      "description": "Parameters for Fault Simulation action.",
-      "required": [
-        "faultKind"
-      ],
-      "discriminator": "faultKind",
-      "properties": {
-        "faultKind": {
-          "$ref": "#/definitions/FaultKind"
-        },
-        "force": {
-          "description": "Force the action to go through without any check on the cluster.",
-          "type": "boolean"
-        },
-        "constraints": {
-          "$ref": "#/definitions/FaultSimulationConstraints"
-        }
-      }
-    },
-    "FaultSimulationStatus": {
+    "VmssExtensionSetupOrder": {
       "type": "string",
-      "description": "Fault simulation status.",
+      "description": "Vm extension setup order.\n",
       "enum": [
-        "Starting",
-        "Active",
-        "Stopping",
-        "Done",
-        "StartFailed",
-        "StopFailed"
+        "BeforeSFRuntime"
       ],
       "x-ms-enum": {
-        "name": "FaultSimulationStatus",
+        "name": "VmssExtensionSetupOrder",
         "modelAsString": true,
         "values": [
           {
-            "value": "Starting",
-            "description": "Indicates the fault simulation is starting. The simulation will have this status while the start operation is in progress."
-          },
-          {
-            "value": "Active",
-            "description": "Indicates the fault simulation is active. The simulation will have this status after the start operation has completed successfully."
-          },
-          {
-            "value": "Stopping",
-            "description": "Indicates the fault simulation is stopping. The simulation will have this status while the stop operation is in progress."
-          },
-          {
-            "value": "Done",
-            "description": "Indicates the fault simulation is done. The simulation will have this status after the stop operation has completed successfully."
-          },
-          {
-            "value": "StartFailed",
-            "description": "Indicates the fault simulation has failed on start. The simulation will have this status after the start operation fails."
-          },
-          {
-            "value": "StopFailed",
-            "description": "Indicates the fault simulation has failed on stop. The simulation will have this status after the stop operation fails."
+            "value": "BeforeSFRuntime",
+            "description": "Indicates that the vm extension should run before the service fabric runtime starts."
           }
         ]
       }
-    },
-    "NodeTypeFaultSimulation": {
-      "type": "object",
-      "properties": {
-        "nodeTypeName": {
-          "type": "string",
-          "description": "Node type name."
-        },
-        "status": {
-          "$ref": "#/definitions/FaultSimulationStatus",
-          "description": "Fault simulation status"
-        },
-        "operationId": {
-          "type": "string",
-          "description": "Current or latest asynchronous operation identifier on the node type."
-        },
-        "operationStatus": {
-          "$ref": "#/definitions/SfmcOperationStatus",
-          "description": "Current or latest asynchronous operation status on the node type"
-        }
-      },
-      "description": "Node type fault simulation object with status."
     },
     "ZoneFaultSimulationParameters": {
       "type": "object",
       "description": "Parameters for Zone Fault Simulation action.",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "description": "Indicates the zones of the fault simulation.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/FaultSimulationParameters"
         }
       ],
-      "x-ms-discriminator-value": "Zone",
-      "properties": {
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Indicates the zones of the fault simulation."
-        }
-      }
+      "x-ms-discriminator-value": "Zone"
     }
   },
   "parameters": {
