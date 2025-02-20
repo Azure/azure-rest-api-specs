@@ -187,6 +187,10 @@ model OperationStatusComplete {
 
 @doc("Pending response if the operation was not complete, mandatory in IETF SCITT draft")
 model OperationStatusPending {
+  @doc("Status code")
+  @statusCode
+  statusCode: 202;
+
   @doc("Location of the operation")
   @header("Location")
   location?: string;
