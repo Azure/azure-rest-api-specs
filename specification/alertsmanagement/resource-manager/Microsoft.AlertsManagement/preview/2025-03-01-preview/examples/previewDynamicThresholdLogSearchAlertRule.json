@@ -2,52 +2,54 @@
   "parameters": {
     "subscriptionId": "dd4bfc94-a096-412b-9c43-4bd13e35afbc",
     "api-version": "2025-03-01-preview",
-    "ruleType": "scheduledQueryRules",
-    "lookbackPeriod": "PT1D",
     "parameters": {
-      "location": "eastus",
-      "properties": {
-        "description": "Performance rule",
-        "severity": 4,
-        "enabled": true,
-        "evaluationFrequency": "PT5M",
-        "scopes": [
-          "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
-        ],
-        "windowSize": "PT10M",
-        "criteria": {
-          "allOf": [
-            {
-              "criterionType": "DynamicThresholdCriterion",
-              "query": "Perf | where ObjectName == \"Processor\"",
-              "timeAggregation": "Average",
-              "metricMeasureColumn": "% Processor Time",
-              "resourceIdColumn": "resourceId",
-              "dimensions": [
-                {
-                  "name": "ComputerIp",
-                  "operator": "Exclude",
-                  "values": [
-                    "192.168.1.1"
-                  ]
-                },
-                {
-                  "name": "OSType",
-                  "operator": "Include",
-                  "values": [
-                    "*"
-                  ]
-                }
-              ],
-              "operator": "GreaterOrLessThan",
-              "alertSensitivity": "Medium",
-              "ignoreDataBefore": "2024-06-01T21:00:00.000Z"
-            }
-          ]
-        },
-        "muteActionsDuration": "PT30M",
-        "checkWorkspaceAlertsStorageConfigured": true,
-        "skipQueryValidation": true
+      "ruleType": "scheduledQueryRules",
+      "lookbackPeriod": "PT1D",
+      "alertRule": {
+        "location": "eastus",
+        "properties": {
+          "description": "Performance rule",
+          "severity": 4,
+          "enabled": true,
+          "evaluationFrequency": "PT5M",
+          "scopes": [
+            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+          ],
+          "windowSize": "PT10M",
+          "criteria": {
+            "allOf": [
+              {
+                "criterionType": "DynamicThresholdCriterion",
+                "query": "Perf | where ObjectName == \"Processor\"",
+                "timeAggregation": "Average",
+                "metricMeasureColumn": "% Processor Time",
+                "resourceIdColumn": "resourceId",
+                "dimensions": [
+                  {
+                    "name": "ComputerIp",
+                    "operator": "Exclude",
+                    "values": [
+                      "192.168.1.1"
+                    ]
+                  },
+                  {
+                    "name": "OSType",
+                    "operator": "Include",
+                    "values": [
+                      "*"
+                    ]
+                  }
+                ],
+                "operator": "GreaterOrLessThan",
+                "alertSensitivity": "Medium",
+                "ignoreDataBefore": "2024-06-01T21:00:00.000Z"
+              }
+            ]
+          },
+          "muteActionsDuration": "PT30M",
+          "checkWorkspaceAlertsStorageConfigured": true,
+          "skipQueryValidation": true
+        }
       }
     }
   },

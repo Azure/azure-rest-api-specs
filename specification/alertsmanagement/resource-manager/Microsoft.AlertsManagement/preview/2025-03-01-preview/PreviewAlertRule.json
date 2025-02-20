@@ -42,25 +42,11 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "ruleType",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The query parameter that specifies rule type to be previewed."
-          },
-          {
-            "name": "lookbackPeriod",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The query parameter that specifies the lookback of the preview."
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LogAlertRuleResource"
+              "$ref": "#/definitions/PreviewAlertRuleRequest"
             },
             "description": "The alert rule to preview."
           }
@@ -613,6 +599,28 @@
       "required": [
         "name",
         "value"
+      ]
+    },
+    "PreviewAlertRuleRequest": {
+      "type": "object",
+      "properties": {
+        "ruleType": {
+          "type": "string",
+          "description": "The query parameter that specifies rule type to be previewed."
+        },
+        "lookbackPeriod": {
+          "type": "string",
+          "description": "The query parameter that specifies the lookback of the preview."
+        },
+        "alertRule": {
+          "$ref": "#/definitions/LogAlertRuleResource",
+          "description": "The alert rule to preview."
+        }
+      },
+      "required": [
+        "ruleType",
+        "lookbackPeriod",
+        "alertRule"
       ]
     }
   }
