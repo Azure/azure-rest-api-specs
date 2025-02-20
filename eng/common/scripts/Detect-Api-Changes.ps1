@@ -103,6 +103,8 @@ if (!($FindArtifactForApiReviewFn -and (Test-Path "Function:$FindArtifactForApiR
 
 $responses = @{}
 
+Write-Host "Processing packages in $configFileDir"
+
 $packageProperties = Get-ChildItem -Recurse -Force "$configFileDir" `
   | Where-Object { 
       $_.Extension -eq '.json' -and ($_.FullName.Substring($configFileDir.Length + 1) -notmatch '^_.*?[\\\/]')

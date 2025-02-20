@@ -41,8 +41,8 @@ extends:
             value: '3.13'
           - name: SpecGenSdkVersion
             value: 'latest'
-          - name: SdkArtifactName
-            value: SDK_Artifact
+          - name: PipelineArtifactsName
+            value: 'packages'
 
         pool:
           name: $(LINUXPOOL)
@@ -52,16 +52,6 @@ extends:
         templateContext:
           outputParentDirectory: $(System.DefaultWorkingDirectory)/out
           outputs:
-            - output: pipelineArtifact
-              displayName: Publish SDK artifacts to Pipeline Artifacts
-              condition: and(ne(variables['ValidationResult'], ''), eq(variables['HasSDKArtifact'], 'true'))
-              artifactName: $(sdkArtifactName)
-              targetPath: "$(System.DefaultWorkingDirectory)/out/generatedSdkArtifacts"
-            - output: pipelineArtifact
-              displayName: Publish API View artifacts to Pipeline Artifacts
-              condition: and(ne(variables['ValidationResult'], ''), eq(variables['HasApiViewArtifact'], 'true'))
-              artifactName: $(ArtifactName)
-              targetPath: "$(System.DefaultWorkingDirectory)/out/sdkApiViewArtifacts"
             - output: pipelineArtifact
               displayName: Publish logs to Pipeline Artifacts
               condition: ne(variables['ValidationResult'], '')
@@ -203,6 +193,21 @@ extends:
                 $optional_params
             displayName: 'Generate SDK'
 
+          - task: Powershell@2
+            inputs:
+              filePath: $(SdkRepoDirectory)/eng/common/scripts/Save-Package-Properties.ps1
+              arguments: >
+                -ServiceDirectory $(GeneratedSDK.ServiceName)
+                -OutDirectory $(GeneratedSDK.StagedArtifactsFolder)/PackageInfo
+              pwsh: true
+              workingDirectory: $(SdkRepoDirectory)
+            displayName: Dump Package properties
+
+          - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
+            parameters:
+              ArtifactName: $(PipelineArtifactsName)
+              ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
+              
           - task: PowerShell@2
             displayName: Add label to the spec PR
             condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'add'))
@@ -265,6 +270,6 @@ extends:
           - ${{ if eq(variables['Build.Reason'], 'Manual') }}:
             - template: /eng/common/pipelines/templates/steps/detect-api-changes.yml
               parameters:
-                Artifacts: $(System.DefaultWorkingDirectory)/out/sdkApiViewArtifacts
-                ArtifactName: $(ArtifactName)
+                Artifacts: $(GeneratedSDK.StagedArtifactsFolder)
+                ArtifactName: $(PipelineArtifactsName)
                 RepoRoot: $(SdkRepoDirectory)
