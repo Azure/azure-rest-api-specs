@@ -583,35 +583,6 @@ union ScalingHostPoolType {
 }
 
 /**
- * Days of Week that the Scaling Schedule is active.
- */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "There are no more days of the week"
-union DaysOfWeek {
-  string,
-
-  /** Day of Week Sunday */
-  Sunday: "Sunday",
-
-  /** Day of Week Monday */
-  Monday: "Monday",
-
-  /** Day of Week Tuesday */
-  Tuesday: "Tuesday",
-
-  /** Day of Week Wednesday */
-  Wednesday: "Wednesday",
-
-  /** Day of Week Thursday */
-  Thursday: "Thursday",
-
-  /** Day of Week Friday */
-  Friday: "Friday",
-
-  /** Day of Week Saturday */
-  Saturday: "Saturday",
-}
-
-/**
  * Load balancing algorithm for ramp up period.
  */
 union SessionHostLoadBalancingAlgorithm {
@@ -2510,7 +2481,7 @@ model ScalingSchedule {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DaysOfWeek[];
+  daysOfWeek?: DayOfWeek[];
 
   /**
    * Starting time for ramp up period.
@@ -3825,7 +3796,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DaysOfWeek[];
+  daysOfWeek?: DayOfWeek[];
 
   /**
    * Starting time for ramp up period.
@@ -3973,7 +3944,7 @@ model ScalingPlanPersonalSchedulePatchProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DaysOfWeek[];
+  daysOfWeek?: DayOfWeek[];
 
   /**
    * Starting time for ramp up period.
@@ -4144,7 +4115,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DaysOfWeek[];
+  daysOfWeek?: DayOfWeek[];
 
   /**
    * Starting time for ramp up period.
@@ -4248,7 +4219,7 @@ model ScalingPlanPooledSchedulePatchProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DaysOfWeek[];
+  daysOfWeek?: DayOfWeek[];
 
   /**
    * Starting time for ramp up period.
