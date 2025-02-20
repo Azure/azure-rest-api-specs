@@ -542,7 +542,8 @@ model OptionalLoadTestConfiguration {
   rampUpTime?: int32;
 
   @doc("Test run duration in seconds.")
-  duration?: int32;
+  @encode(DurationKnownEncoding.seconds, int32)
+  duration?: duration;
 }
 
 @doc("The input artifacts for the test.")
