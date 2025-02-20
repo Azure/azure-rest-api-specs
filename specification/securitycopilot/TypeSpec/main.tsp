@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./SkillContext/routes.tsp";
 import "./SkillContext/models.tsp";
+import "./ECSFlightClient/models.tsp"
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -36,6 +37,8 @@ namespace SkillContext;
 enum APIVersion {
     version: "2023-08-01-preview",
 }
+
+namespace ECSFlightClient;
 
 
 
