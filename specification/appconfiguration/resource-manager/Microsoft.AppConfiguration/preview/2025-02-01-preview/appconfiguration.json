@@ -213,8 +213,8 @@
           "ConfigurationStores_Create_With_Data_Plane_Proxy": {
             "$ref": "./examples/ConfigurationStoresCreateWithDataPlaneProxy.json"
           },
-          "ConfigurationStores_Create_With_Telemetry_And_Experimentation": {
-            "$ref": "./examples/ConfigurationStoresCreateWithTelemetryAndExperimentation.json"
+          "ConfigurationStores_Create_With_Telemetry": {
+            "$ref": "./examples/ConfigurationStoresCreateWithTelemetry.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1490,6 +1490,168 @@
           "final-state-via": "azure-async-operation"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/experimentations/{experimentationName}": {
+      "get": {
+        "tags": [
+          "Experimentation"
+        ],
+        "description": "Gets the properties of the experimentation.",
+        "operationId": "Experimentation_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Experimentation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experimentation_Get": {
+            "$ref": "./examples/ConfigurationStoresGetExperimentation.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Experimentation"
+        ],
+        "description": "Creates the experimentation.",
+        "operationId": "Experimentation_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "experimentationCreationParameters",
+            "in": "body",
+            "description": "The parameters for creating the experimentation.",
+            "schema": {
+              "$ref": "#/definitions/Experimentation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Experimentation"
+            }
+          },
+          "201": {
+            "description": "The create request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/Experimentation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experimentation_Create": {
+            "$ref": "./examples/ConfigurationStoresCreateExperimentation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Experimentation"
+        ],
+        "description": "Creates the experimentation.",
+        "operationId": "Experimentation_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experimentation_Delete": {
+            "$ref": "./examples/ConfigurationStoresDeleteExperimentation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
     }
   },
   "definitions": {
@@ -1637,9 +1799,10 @@
           "$ref": "#/definitions/TelemetryProperties",
           "description": "Property specifying the configuration of telemetry for this configuration store"
         },
-        "experimentation": {
-          "$ref": "#/definitions/ExperimentationProperties",
-          "description": "Property specifying the configuration of experimentation for this configuration store"
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "Managed On Behalf Of Configuration.",
+          "readOnly": true
         }
       }
     },
@@ -2846,19 +3009,67 @@
         }
       }
     },
-    "ExperimentationProperties": {
-      "description": "Experimentation settings",
+    "Experimentation": {
+      "description": "The experimentation resource.",
       "type": "object",
       "properties": {
-        "resourceId": {
-          "description": "Resource ID of a resource enabling experimentation",
+        "id": {
+          "description": "The resource ID.",
           "type": "string",
-          "format": "arm-id"
+          "readOnly": true
         },
-        "dataPlaneEndpoint": {
-          "description": "The data plane endpoint of the Split experimentation workspace resource where experimentation data can be retrieved",
+        "name": {
+          "description": "The name of the experimentation.",
           "type": "string",
-          "format": "uri"
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ExperimentationProperties",
+          "description": "All experimentation properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ExperimentationProperties": {
+      "description": "All experimentation properties.",
+      "type": "object",
+      "properties": {
+        "resourceGroupName": {
+          "description": "The name of the managed resource group.",
+          "type": "string"
+        },
+        "onlineExperimentationWorkspaceResourceId": {
+          "description": "The resource ID of the online experimentation workspace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "storageAccountResourceId": {
+          "description": "The resource ID of the storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the experimentation.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     }
@@ -2912,6 +3123,15 @@
       "required": true,
       "type": "string",
       "pattern": "^[^\\x00-\\x1F\\x7F]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "ExperimentationNameParameter":{
+      "name": "experimentationName",
+      "in": "path",
+      "description": "The name of the experimentation.",
+      "required": true,
+      "type": "string",
+      "pattern": "^experimentation$",
       "x-ms-parameter-location": "method"
     }
   },
