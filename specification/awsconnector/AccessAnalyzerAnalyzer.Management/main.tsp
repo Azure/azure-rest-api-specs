@@ -137,18 +137,15 @@ model Tag {
 @doc("Definition of Filter")
 model Filter {
   @doc("Property contains")
-  @identifiers(#[])
   contains?: string[];
 
   @doc("Property eq")
-  @identifiers(#[])
   eq?: string[];
 
   @doc("Property exists")
   exists?: boolean;
 
   @doc("Property neq")
-  @identifiers(#[])
   neq?: string[];
 
   @doc("Property property")

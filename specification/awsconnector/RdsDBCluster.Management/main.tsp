@@ -82,7 +82,6 @@ model AwsRdsDBClusterProperties {
   autoMinorVersionUpgrade?: boolean;
 
   @doc("A list of Availability Zones (AZs) where instances in the DB cluster can be created. For information on AWS Regions and Availability Zones, see Choosing the Regions and Availability Zones in the Amazon Aurora User Guide.")
-  @identifiers(#[])
   availabilityZones?: string[];
 
   @doc("The target backtrack window, in seconds. To disable backtracking, set this value to 0.")
@@ -131,7 +130,6 @@ model AwsRdsDBClusterProperties {
   domainIAMRoleName?: string;
 
   @doc("The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.")
-  @identifiers(#[])
   enableCloudwatchLogsExports?: string[];
 
   @doc("Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.")
@@ -250,7 +248,6 @@ model AwsRdsDBClusterProperties {
   useLatestRestorableTime?: boolean;
 
   @doc("A list of EC2 VPC security groups to associate with this DB cluster.")
-  @identifiers(#[])
   vpcSecurityGroupIds?: string[];
 }
 

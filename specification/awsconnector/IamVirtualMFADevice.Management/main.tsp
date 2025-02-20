@@ -82,7 +82,6 @@ model AwsIamVirtualMFADeviceProperties {
   tags?: Tag[];
 
   @doc("Property users")
-  @identifiers(#[])
   users?: string[];
 
   @doc("Property virtualMfaDeviceName")

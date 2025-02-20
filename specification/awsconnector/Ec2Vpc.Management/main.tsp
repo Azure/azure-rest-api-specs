@@ -75,7 +75,6 @@ model AwsEc2VpcProperties {
   cidrBlock?: string;
 
   @doc("Property cidrBlockAssociations")
-  @identifiers(#[])
   cidrBlockAssociations?: string[];
 
   @doc("Property defaultNetworkAcl")
@@ -100,7 +99,6 @@ model AwsEc2VpcProperties {
   ipv4NetmaskLength?: int32;
 
   @doc("Property ipv6CidrBlocks")
-  @identifiers(#[])
   ipv6CidrBlocks?: string[];
 
   @doc("The tags for the VPC.")

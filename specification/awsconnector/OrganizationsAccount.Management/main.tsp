@@ -90,7 +90,6 @@ model AwsOrganizationsAccountProperties {
   joinedTimestamp?: string;
 
   @doc("List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.")
-  @identifiers(#[])
   parentIds?: string[];
 
   @doc("The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.")

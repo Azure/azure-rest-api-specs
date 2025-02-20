@@ -544,7 +544,7 @@ model GetOverviewStatusResponse {
   /**
    * List of different status items.
    */
-  @idenfiers(#["statusName"])
+  @identifiers(#["statusName"])
   statusList?: StatusItem[];
 }
 
@@ -626,7 +626,6 @@ model TriggerEvaluationProperty {
   /**
    * List of resource ids to be evaluated
    */
-  @identifiers(#["resourceId"])
   resourceIds?: string[];
 
   /**

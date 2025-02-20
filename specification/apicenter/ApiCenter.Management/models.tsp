@@ -263,7 +263,7 @@ model MetadataSchemaProperties {
   schema: string;
 
   @doc("The assignees")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   assignedTo?: MetadataAssignment[];
 }
 
@@ -319,11 +319,11 @@ model ApiProperties {
 
   @doc("The set of external documentation")
   @maxItems(20)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   externalDocumentation?: ExternalDocumentation[];
 
   @doc("The set of contacts")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   contacts?: Contact[];
 
   @doc("The license information for the API.")

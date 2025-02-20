@@ -108,7 +108,6 @@ model FirewallPolicy {
   policyVariables?: RuleVariablesModel;
 
   @doc("Property statefulDefaultActions")
-  @identifiers(#[])
   statefulDefaultActions?: string[];
 
   @doc("Property statefulEngineOptions")
@@ -123,11 +122,9 @@ model FirewallPolicy {
   statelessCustomActions?: CustomAction[];
 
   @doc("Property statelessDefaultActions")
-  @identifiers(#[])
   statelessDefaultActions?: string[];
 
   @doc("Property statelessFragmentDefaultActions")
-  @identifiers(#[])
   statelessFragmentDefaultActions?: string[];
 
   @doc("Property statelessRuleGroupReferences")
@@ -249,7 +246,6 @@ model StatelessRuleGroupReference {
 @doc("Definition of IPSet")
 model IPSet {
   @doc("Property definition")
-  @identifiers(#[])
   definition?: string[];
 }
 

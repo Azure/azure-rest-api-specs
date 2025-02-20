@@ -223,7 +223,6 @@ model DeploymentConfig {
   /**
    * Defines the deployment stages, regions to deploy to for each stage and sequence to rollout to individual stages.
    */
-  @identifiers(#[])
   stageDefinition?: Record<Array<string>>;
 }
 

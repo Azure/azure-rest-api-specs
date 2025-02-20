@@ -222,7 +222,6 @@ model IPSetReference {
 @doc("Definition of IPSet")
 model IPSet {
   @doc("Property definition")
-  @identifiers(#[])
   definition?: string[];
 }
 
@@ -233,7 +232,6 @@ model IPSet {
 @doc("Definition of PortSet")
 model PortSet {
   @doc("Property definition")
-  @identifiers(#[])
   definition?: string[];
 }
 
@@ -247,11 +245,9 @@ model RulesSourceList {
   generatedRulesType?: RulesSourceListGeneratedRulesType;
 
   @doc("Property targetTypes")
-  @identifiers(#[])
   targetTypes?: string[];
 
   @doc("Property targets")
-  @identifiers(#[])
   targets?: string[];
 }
 
@@ -361,7 +357,6 @@ model RuleOption {
   keyword?: string;
 
   @doc("Property settings")
-  @identifiers(#[])
   settings?: string[];
 }
 
@@ -470,7 +465,6 @@ model ActionDefinition {
 @doc("Definition of RuleDefinition")
 model RuleDefinition {
   @doc("Property actions")
-  @identifiers(#[])
   actions?: string[];
 
   @doc("Property matchAttributes")
@@ -503,7 +497,6 @@ model MatchAttributes {
   destinations?: Address[];
 
   @doc("Property protocols")
-  @identifiers(#[])
   protocols?: int32[];
 
   @doc("Property sourcePorts")
@@ -559,11 +552,9 @@ model Address {
 @doc("Definition of TCPFlagField")
 model TCPFlagField {
   @doc("Property flags")
-  @identifiers(#[])
   flags?: string[];
 
   @doc("Property masks")
-  @identifiers(#[])
   masks?: string[];
 }
 

@@ -240,7 +240,6 @@ model EncryptionConfig {
   provider?: Provider;
 
   @doc("<p>Specifies the resources to be encrypted. The only supported value is <code>secrets</code>.</p>")
-  @identifiers(#[])
   resources?: string[];
 }
 
@@ -326,7 +325,6 @@ model OutpostConfigResponse {
   controlPlanePlacement?: ControlPlanePlacementResponse;
 
   @doc("<p>The ARN of the Outpost that you specified for use with your local Amazon EKS cluster on Outposts.</p>")
-  @identifiers(#[])
   outpostArns?: string[];
 }
 
@@ -346,15 +344,12 @@ model VpcConfigResponse {
   endpointPublicAccess?: boolean;
 
   @doc("<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint.</p>")
-  @identifiers(#[])
   publicAccessCidrs?: string[];
 
   @doc("<p>The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your nodes and the Kubernetes control plane.</p>")
-  @identifiers(#[])
   securityGroupIds?: string[];
 
   @doc("<p>The subnets associated with your cluster.</p>")
-  @identifiers(#[])
   subnetIds?: string[];
 
   @doc("<p>The VPC associated with your cluster.</p>")
@@ -384,7 +379,6 @@ model ClusterIssue {
   message?: string;
 
   @doc("<p>The resource IDs that the issue relates to.</p>")
-  @identifiers(#[])
   resourceIds?: string[];
 }
 
@@ -480,7 +474,6 @@ model LogSetup {
   enabled?: boolean;
 
   @doc("<p>The available cluster control plane log types.</p>")
-  @identifiers(#[])
   types?: LogType[];
 }
 

@@ -75,7 +75,6 @@ model AwsApiGatewayRestApiProperties {
   apiKeySourceType?: string;
 
   @doc("The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads.")
-  @identifiers(#[])
   binaryMediaTypes?: string[];
 
   @doc("An OpenAPI specification that defines a set of RESTful APIs in JSON format. For YAML templates, you can also provide the specification in YAML format.")
@@ -151,11 +150,9 @@ model S3Location {
 @doc("Definition of EndpointConfiguration")
 model EndpointConfiguration {
   @doc("A list of endpoint types of an API (RestApi) or its custom domain name (DomainName). For an edge-optimized API and its custom domain name, the endpoint type is ``'EDGE'``. For a regional API and its custom domain name, the endpoint type is ``REGIONAL``. For a private API, the endpoint type is ``PRIVATE``.")
-  @identifiers(#[])
   types?: string[];
 
   @doc("A list of VpcEndpointIds of an API (RestApi) against which to create Route53 ALIASes. It is only supported for ``PRIVATE`` endpoint type.")
-  @identifiers(#[])
   vpcEndpointIds?: string[];
 }
 

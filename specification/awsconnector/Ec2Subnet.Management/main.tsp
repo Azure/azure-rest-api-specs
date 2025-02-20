@@ -99,7 +99,6 @@ model AwsEc2SubnetProperties {
   ipv6CidrBlock?: string;
 
   @doc("The IPv6 network ranges for the subnet, in CIDR notation.")
-  @identifiers(#[])
   ipv6CidrBlocks?: string[];
 
   @doc("An IPv6 IPAM pool ID for the subnet.")

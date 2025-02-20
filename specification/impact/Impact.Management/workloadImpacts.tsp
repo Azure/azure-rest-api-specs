@@ -50,7 +50,6 @@ model WorkloadImpactProperties is ResourceProperties {
   impactDescription?: string;
 
   @doc("The ARM correlation ids, this is important field for control plane related impacts")
-  @identifiers(#[])
   armCorrelationIds?: string[];
 
   @doc("Details about performance issue. Applicable for performance impacts.")

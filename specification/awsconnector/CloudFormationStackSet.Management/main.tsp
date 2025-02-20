@@ -82,7 +82,6 @@ model AwsCloudFormationStackSetProperties {
   callAs?: CallAs;
 
   @doc("In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.")
-  @identifiers(#[])
   capabilities?: string[];
 
   @doc("A description of the stack set. You can use the description to identify the stack set's purpose or other important information.")
@@ -193,7 +192,6 @@ model OperationPreferences {
   regionConcurrencyType?: OperationPreferencesRegionConcurrencyType;
 
   @doc("Property regionOrder")
-  @identifiers(#[])
   regionOrder?: string[];
 }
 
@@ -235,7 +233,6 @@ model StackInstances {
   parameterOverrides?: Parameter[];
 
   @doc("The names of one or more Regions where you want to create stack instances using the specified AWS account(s).")
-  @identifiers(#[])
   regions?: string[];
 }
 
@@ -262,14 +259,12 @@ model DeploymentTargets {
   accountFilterType?: DeploymentTargetsAccountFilterType;
 
   @doc("AWS accounts that you want to create stack instances in the specified Region(s) for.")
-  @identifiers(#[])
   accounts?: string[];
 
   @doc("Returns the value of the AccountsUrl property.")
   accountsUrl?: string;
 
   @doc("The organization root ID or organizational unit (OU) IDs to which StackSets deploys.")
-  @identifiers(#[])
   organizationalUnitIds?: string[];
 }
 

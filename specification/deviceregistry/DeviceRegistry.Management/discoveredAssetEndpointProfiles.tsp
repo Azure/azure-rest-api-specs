@@ -47,7 +47,6 @@ model DiscoveredAssetEndpointProfileProperties {
   additionalConfiguration?: string;
 
   @doc("List of supported authentication methods supported by the target server.")
-  @identifiers(#[])
   supportedAuthenticationMethods?: AuthenticationMethod[];
 
   @doc("Defines the configuration for the connector type that is being used with the endpoint profile.")
