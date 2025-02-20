@@ -2116,7 +2116,7 @@ interface BlockBlob {
       ...LeaseIdOptionalParameter;
       ...IfTagsParameter;
     },
-    BlockLookupList & {
+    BlockList & {
       ...LastModifiedResponseHeader;
       ...EtagResponseHeader;
       ...BlobContentLengthRequired;

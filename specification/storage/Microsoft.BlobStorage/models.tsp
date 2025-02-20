@@ -22,6 +22,28 @@ model StorageError {
 
 /// Models
 
+/** Represents a single block in a block blob. It describes the block's ID and size. */
+model Block {
+  /** The base64 encoded block ID. */
+  @Xml.name("Name")
+  name: string;
+
+  /** The block size in bytes. */
+  @Xml.name("Size")
+  size: int64;
+}
+
+/** Contains the committed and uncommitted blocks in a block blob. */
+model BlockList {
+  /** The list of committed blocks. */
+  @Xml.name("CommittedBlocks")
+  committedBlocks?: Block[];
+
+  /** The list of uncommitted blocks. */
+  @Xml.name("UncommittedBlocks")
+  uncommittedBlocks?: Block[];
+}
+
 /** The Block lookup list. */
 @Xml.name("BlockList")
 model BlockLookupList {
