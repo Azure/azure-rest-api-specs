@@ -500,7 +500,7 @@ model LoadTestConfiguration {
   quickStartTest?: boolean = false;
 
   @doc("Configuration for quick load test")
-  optionalLoadTestConfig?: OptionalLoadTestConfig;
+  optionalLoadTestConfig?: OptionalLoadTestConfiguration;
 
   @added(APIVersions.v2024_03_01_preview)
   @doc("Region distribution configuration for the load test.")
@@ -523,7 +523,7 @@ model RegionalConfiguration {
 }
 
 @doc("Configuration for quick load test")
-model OptionalLoadTestConfig {
+model OptionalLoadTestConfiguration {
   @doc("Test URL. Provide the complete HTTP URL. For example, https://contoso-app.azurewebsites.net/login")
   endpointUrl?: string;
 

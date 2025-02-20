@@ -49,25 +49,25 @@ union TestProfileRunStatus {
   string,
 
   @doc("Test profile run request is accepted.")
-  ACCEPTED: "ACCEPTED",
+  Accepted: "ACCEPTED",
 
   @doc("Test profile run is not yet started.")
-  NOTSTARTED: "NOTSTARTED",
+  NotStarted: "NOTSTARTED",
 
   @doc("Test profile run has started executing.")
-  EXECUTING: "EXECUTING",
+  Executing: "EXECUTING",
 
   @doc("Test profile run has completed successfully.")
-  DONE: "DONE",
+  Done: "DONE",
 
   @doc("Test profile run is being cancelled.")
-  CANCELLING: "CANCELLING",
+  Cancelling: "CANCELLING",
 
   @doc("Test profile run is cancelled.")
-  CANCELLED: "CANCELLED",
+  Cancelled: "CANCELLED",
 
   @doc("Test profile run has failed.")
-  FAILED: "FAILED",
+  Failed: "FAILED",
 }
 
 @doc("Category of Recommendation.")
