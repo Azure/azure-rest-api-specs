@@ -34,12 +34,12 @@ interface MessageTemplateClient
   service: Azure.Communication.MessagesService,
 })
 interface ConversationAdministrationClient
-  extends Azure.Communication.MessagesService.ConversationManagementOperations {
-    listConversations is Azure.Communication.MessagesService.ConversationMessagesOperations.listConversations;
-    listMessages is Azure.Communication.MessagesService.ConversationMessagesOperations.listMessages;
-    addParticipants is Azure.Communication.MessagesService.ConversationMessagesOperations.addParticipants;
-    removeParticipants is Azure.Communication.MessagesService.ConversationMessagesOperations.removeParticipants;
-    analyzeConversation is Azure.Communication.MessagesService.ConversationMessagesOperations.analyzeConversation;
+  extends Azure.Communication.MessagesService.ConversationAdministrationOperations {
+    listConversations is Azure.Communication.MessagesService.ConversationThreadOperations.listConversations;
+    listMessages is Azure.Communication.MessagesService.ConversationThreadOperations.listMessages;
+    addParticipants is Azure.Communication.MessagesService.ConversationThreadOperations.addParticipants;
+    removeParticipants is Azure.Communication.MessagesService.ConversationThreadOperations.removeParticipants;
+    analyzeConversation is Azure.Communication.MessagesService.ConversationThreadOperations.analyzeConversation;
   }
 
 @added(Azure.Communication.MessagesService.Versions.c2025_03_01_Preview)
@@ -48,7 +48,7 @@ interface ConversationAdministrationClient
   service: Azure.Communication.MessagesService,
 })
 interface ConversationThreadClient
-  extends Azure.Communication.MessagesService.ConversationMessagesOperations {}
+  extends Azure.Communication.MessagesService.ConversationThreadOperations {}
 
 @@access(Azure.Communication.MessagesService.MessageDataStream,
   Access.internal

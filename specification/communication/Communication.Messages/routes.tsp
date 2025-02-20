@@ -47,8 +47,8 @@ interface StreamOperations {
 }
 
 @added(Versions.c2025_03_01_Preview)
-interface ConversationManagementOperations {
-  @tag("ConversationManagement")
+interface ConversationAdministrationOperations {
+  @tag("ConversationAdministration")
   @doc("Creates a new conversation. This is only for create operation.")
   @createsResource(Conversation)
   @added(Versions.c2025_03_01_Preview)
@@ -58,17 +58,17 @@ interface ConversationManagementOperations {
     CreatedResponse & Conversation
   >;
 
-  @tag("ConversationManagement")
+  @tag("ConversationAdministration")
   @doc("Gets the details of a specific conversation.")
   @added(Versions.c2025_03_01_Preview)
   getConversation is Operations.ResourceRead<Conversation>;
 
-  @tag("ConversationManagement")
+  @tag("ConversationAdministration")
   @doc("Deletes a specific conversation.")
   @added(Versions.c2025_03_01_Preview)
   deleteConversation is Operations.ResourceDelete<Conversation>;
 
-  @tag("ConversationManagement")
+  @tag("ConversationAdministration")
   @doc("Terminates a specific conversation.")
   @added(Versions.c2025_03_01_Preview)
   @action("terminate")
@@ -80,8 +80,8 @@ interface ConversationManagementOperations {
 }
 
 @added(Versions.c2025_03_01_Preview)
-interface ConversationMessagesOperations {
-  @tag("ConversationMessages")
+interface ConversationThreadOperations {
+  @tag("ConversationThread")
   @doc("Adds participants to a specific conversation.")
   @added(Versions.c2025_03_01_Preview)
   @action("add")
@@ -91,7 +91,7 @@ interface ConversationMessagesOperations {
     Response<207> & AddParticipantsResult
   >;
 
-  @tag("ConversationMessages")
+  @tag("ConversationThread")
   @doc("remove a participant from a conversation")
   @added(Versions.c2025_03_01_Preview)
   @action("remove")
@@ -101,7 +101,7 @@ interface ConversationMessagesOperations {
     Response<207> & RemoveParticipantsResult
   >;
 
-  @tag("ConversationMessages")
+  @tag("ConversationThread")
   @doc("Retrieves list of conversations.")
   @added(Versions.c2025_03_01_Preview)
   listConversations is Operations.ResourceList<
@@ -109,31 +109,31 @@ interface ConversationMessagesOperations {
     ListConversationsQueryParams
   >;
 
-  @tag("ConversationMessages")
+  @tag("ConversationThread")
   @doc("Retrieves list of conversation messages.")
   @added(Versions.c2025_03_01_Preview)
   listMessages is Operations.ResourceList<
     ConversationMessageItem,
-    ListConversationMessagesQueryParams
+    ListConversationThreadQueryParams
   >;
 
-  @tag("ConversationMessages")
+  @tag("ConversationThread")
   @doc("Sends a conversation message from Business to User.")
   @added(Versions.c2025_03_01_Preview)
   @action("send")
   sendMessage is Operations.ResourceCollectionAction<
     ConversationMessageItem,
-    ConversationMessagesSendRequestBody,
+    ConversationThreadSendRequestBody,
     OkResponse & SendConversationMessageResult
   >;
 
-  @tag("ConversationMessages")
+  @tag("ConversationThread")
   @doc("Get AI Analysis of a conversation.")
   @added(Versions.c2025_03_01_Preview)
   @action("analyze")
   analyzeConversation is Operations.ResourceAction<
     Conversation,
     {},
-    OkResponse & GetConversationMessagesAnalysisResult
+    OkResponse & GetConversationThreadAnalysisResult
   >;
 }

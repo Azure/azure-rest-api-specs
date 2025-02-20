@@ -460,7 +460,7 @@ ListQueryParametersTrait<{
   channelId?: uuid;
 }>;
 
-alias ListConversationMessagesQueryParams = 
+alias ListConversationThreadQueryParams = 
 ListQueryParametersTrait<{
   ...CommonListParams;
   
@@ -610,7 +610,7 @@ model Conversation {
 
 @added(Versions.c2025_03_01_Preview)
 @doc("Conversation message send request body.")
-model ConversationMessagesSendRequestBody {
+model ConversationThreadSendRequestBody {
   @doc("Details of the conversation message to send.")
   @bodyRoot
   body: SendConversationMessageOptions;
@@ -751,7 +751,7 @@ model RemoveParticipantsOptions {
 }
 
 @doc("Result of the get conversation messages AI Analysis operation.")
-model GetConversationMessagesAnalysisResult {
+model GetConversationThreadAnalysisResult {
   @doc("The AI summary of the conversation messages.")
   summary: string;
 }

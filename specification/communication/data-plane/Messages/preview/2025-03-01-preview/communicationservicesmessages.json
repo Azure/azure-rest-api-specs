@@ -72,10 +72,10 @@
       "name": "Stream"
     },
     {
-      "name": "ConversationManagement"
+      "name": "ConversationAdministration"
     },
     {
-      "name": "ConversationMessages"
+      "name": "ConversationThread"
     }
   ],
   "paths": {
@@ -144,9 +144,9 @@
     },
     "/messages/conversations": {
       "get": {
-        "operationId": "ConversationMessagesOperations_ListConversations",
+        "operationId": "ConversationThreadOperations_ListConversations",
         "tags": [
-          "ConversationMessages"
+          "ConversationThread"
         ],
         "description": "Retrieves list of conversations.",
         "parameters": [
@@ -212,9 +212,9 @@
         }
       },
       "post": {
-        "operationId": "ConversationManagementOperations_CreateConversation",
+        "operationId": "ConversationAdministrationOperations_CreateConversation",
         "tags": [
-          "ConversationManagement"
+          "ConversationAdministration"
         ],
         "description": "Creates a new conversation. This is only for create operation.",
         "parameters": [
@@ -254,9 +254,9 @@
     },
     "/messages/conversations/{conversationId}": {
       "get": {
-        "operationId": "ConversationManagementOperations_GetConversation",
+        "operationId": "ConversationAdministrationOperations_GetConversation",
         "tags": [
-          "ConversationManagement"
+          "ConversationAdministration"
         ],
         "description": "Gets the details of a specific conversation.",
         "parameters": [
@@ -303,9 +303,9 @@
         }
       },
       "delete": {
-        "operationId": "ConversationManagementOperations_DeleteConversation",
+        "operationId": "ConversationAdministrationOperations_DeleteConversation",
         "tags": [
-          "ConversationManagement"
+          "ConversationAdministration"
         ],
         "description": "Deletes a specific conversation.",
         "parameters": [
@@ -381,9 +381,9 @@
     },
     "/messages/conversations/{conversationId}:terminate": {
       "post": {
-        "operationId": "ConversationManagementOperations_TerminateConversation",
+        "operationId": "ConversationAdministrationOperations_TerminateConversation",
         "tags": [
-          "ConversationManagement"
+          "ConversationAdministration"
         ],
         "description": "Terminates a specific conversation.",
         "parameters": [
@@ -459,9 +459,9 @@
     },
     "/messages/conversations/{conversationId}:analyze": {
       "post": {
-        "operationId": "ConversationMessagesOperations_AnalyzeConversation",
+        "operationId": "ConversationThreadOperations_AnalyzeConversation",
         "tags": [
-          "ConversationMessages"
+          "ConversationThread"
         ],
         "description": "Get AI Analysis of a conversation.",
         "parameters": [
@@ -489,7 +489,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/GetConversationMessagesAnalysisResult"
+              "$ref": "#/definitions/GetConversationThreadAnalysisResult"
             },
             "headers": {
               "Repeatability-Result": {
@@ -540,9 +540,9 @@
     },
     "/messages/conversations/{conversationId}/messages": {
       "get": {
-        "operationId": "ConversationMessagesOperations_ListMessages",
+        "operationId": "ConversationThreadOperations_ListMessages",
         "tags": [
-          "ConversationMessages"
+          "ConversationThread"
         ],
         "description": "Retrieves list of conversation messages.",
         "parameters": [
@@ -609,9 +609,9 @@
     },
     "/messages/conversations/{conversationId}/messages:send": {
       "post": {
-        "operationId": "ConversationMessagesOperations_SendMessage",
+        "operationId": "ConversationThreadOperations_SendMessage",
         "tags": [
-          "ConversationMessages"
+          "ConversationThread"
         ],
         "description": "Sends a conversation message from Business to User.",
         "parameters": [
@@ -635,7 +635,7 @@
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
-            "$ref": "#/parameters/ConversationMessagesSendRequestBody"
+            "$ref": "#/parameters/ConversationThreadSendRequestBody"
           }
         ],
         "responses": {
@@ -693,9 +693,9 @@
     },
     "/messages/conversations/{conversationId}/participants:add": {
       "post": {
-        "operationId": "ConversationMessagesOperations_AddParticipants",
+        "operationId": "ConversationThreadOperations_AddParticipants",
         "tags": [
-          "ConversationMessages"
+          "ConversationThread"
         ],
         "description": "Adds participants to a specific conversation.",
         "parameters": [
@@ -777,9 +777,9 @@
     },
     "/messages/conversations/{conversationId}/participants:remove": {
       "post": {
-        "operationId": "ConversationMessagesOperations_RemoveParticipants",
+        "operationId": "ConversationThreadOperations_RemoveParticipants",
         "tags": [
-          "ConversationMessages"
+          "ConversationThread"
         ],
         "description": "remove a participant from a conversation",
         "parameters": [
@@ -1462,7 +1462,7 @@
       ],
       "x-ms-discriminator-value": "External"
     },
-    "GetConversationMessagesAnalysisResult": {
+    "GetConversationThreadAnalysisResult": {
       "type": "object",
       "description": "Result of the get conversation messages AI Analysis operation.",
       "properties": {
@@ -2513,7 +2513,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "repeatabilityRequestId"
     },
-    "ConversationMessagesSendRequestBody": {
+    "ConversationThreadSendRequestBody": {
       "name": "body",
       "in": "body",
       "description": "Details of the conversation message to send.",
