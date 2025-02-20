@@ -144,7 +144,7 @@ model CreateEntryPending {
   @header("Retry-After")
   retryAfter?: int32;
 
-  // Example map in CBOR would look like
+  // Example CBOR:
   // {
   //   / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190",
   //   / status /  "Status": "running",
@@ -206,12 +206,12 @@ model SignedStatement {
   @header("Content-Type")
   contentType: "application/cose";
 
-  // Example
-  // 18([                            / COSE Sign1         /
-  //   h'a1013822',                  / Protected Header   /
-  //   {},                           / Unprotected Header /
-  //   h'8f4211d....1dffc',          / Payload            /
-  //   h'269cd68f4211dffc...0dcb29c' / Signature          /
+  // Example CBOR:
+  // 18([              / COSE Sign1         /
+  //   h'a101382...',  / Protected Header   /
+  //   {},             / Unprotected Header /
+  //   h'8f4211d...',  / Payload            /
+  //   h'269cd68...'   / Signature          /
   // ])
   @doc("CoseSign1 signature envelope")
   @bodyRoot
@@ -241,11 +241,11 @@ model ReceiptEntry {
   location?: string;
 
   // Example CBOR:
-  // 18([                            / COSE Sign1         /
-  //   h'a1013822',                  / Protected Header   /
-  //   {},                           / Unprotected Header /
-  //   null,                         / Payload            /
-  //   h'269cd68f4211dffc...0dcb29c' / Signature          /
+  // 18([              / COSE Sign1         /
+  //   h'a101382...',  / Protected Header   /
+  //   {},             / Unprotected Header /
+  //   null,           / Payload            /
+  //   h'269cd68...'   / Signature          /
   // ])
   @doc("A receipt structure in COSE format")
   @bodyRoot
@@ -296,7 +296,7 @@ model TransparencyConfigurationCbor {
   @header
   contentType: "application/cbor";
 
-  // Returns CBOR map:
+  // Example CBOR:
   // {
   //   "issuer": "https://transparency.example",
   //   "jwks_uri": "https://transparency.example/jwks"
