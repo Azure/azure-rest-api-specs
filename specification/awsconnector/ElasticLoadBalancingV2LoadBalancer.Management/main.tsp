@@ -112,7 +112,6 @@ model AwsElasticLoadBalancingV2LoadBalancerProperties {
   scheme?: string;
 
   @doc("[Application Load Balancers and Network Load Balancers] The IDs of the security groups for the load balancer.")
-  @identifiers(#[])
   securityGroups?: string[];
 
   @doc("The IDs of the subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings, but not both. [Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets. [Application Load Balancers on Outposts] You must specify one Outpost subnet. [Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones. [Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet if you need static IP addresses for your internet-facing load balancer. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet. For internet-facing load balancer, you can specify one IPv6 address per subnet. [Gateway Load Balancers] You can specify subnets from one or more Availability Zones. You cannot specify Elastic IP addresses for your subnets.")
@@ -120,7 +119,6 @@ model AwsElasticLoadBalancingV2LoadBalancerProperties {
   subnetMappings?: SubnetMapping[];
 
   @doc("The IDs of the subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings, but not both. To specify an Elastic IP address, specify subnet mappings instead of subnets. [Application Load Balancers] You must specify subnets from at least two Availability Zones. [Application Load Balancers on Outposts] You must specify one Outpost subnet. [Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones. [Network Load Balancers] You can specify subnets from one or more Availability Zones. [Gateway Load Balancers] You can specify subnets from one or more Availability Zones.")
-  @identifiers(#[])
   subnets?: string[];
 
   @doc("The tags to assign to the load balancer.")

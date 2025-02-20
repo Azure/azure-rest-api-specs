@@ -450,7 +450,7 @@ model GetOperationErrorsRequest {
 
 @doc("This is the response from a get operations errors request")
 model GetOperationErrorsResponse {
-  @identifiers(#["resourceId"])
+  @identifiers(#["operationId"])
   @doc("An array of operationids and their corresponding errors if any")
   results: Array<OperationErrorsResult>;
 }

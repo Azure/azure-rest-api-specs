@@ -81,7 +81,6 @@ model AwsEc2NetworkInterfaceProperties {
   enablePrimaryIpv6?: boolean;
 
   @doc("A list of security group IDs associated with this network interface.")
-  @identifiers(#[])
   groupSet?: string[];
 
   @doc("Network interface id.")
@@ -128,7 +127,6 @@ model AwsEc2NetworkInterfaceProperties {
   secondaryPrivateIpAddressCount?: int32;
 
   @doc("Returns the secondary private IP addresses of the network interface.")
-  @identifiers(#[])
   secondaryPrivateIpAddresses?: string[];
 
   @doc("Indicates whether traffic to or from the instance is validated.")

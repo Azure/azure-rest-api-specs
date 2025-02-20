@@ -72,7 +72,6 @@ model CloudFormationStackProperties {
 @doc("Definition of awsCloudFormationStack")
 model AwsCloudFormationStackProperties {
   @doc("Property capabilities")
-  @identifiers(#[])
   capabilities?: Capabilities[];
 
   @doc("Property changeSetId")
@@ -94,7 +93,6 @@ model AwsCloudFormationStackProperties {
   lastUpdateTime?: string;
 
   @doc("Property notificationARNs")
-  @identifiers(#[])
   notificationARNs?: string[];
 
   @doc("Property outputs")

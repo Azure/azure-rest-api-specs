@@ -72,7 +72,6 @@ model LambdaFunctionProperties {
 @doc("Definition of awsLambdaFunction")
 model AwsLambdaFunctionProperties {
   @doc("The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is ``x86_64``.")
-  @identifiers(#[])
   architectures?: Architectures[];
 
   @doc("Property arn")
@@ -113,7 +112,6 @@ model AwsLambdaFunctionProperties {
   kmsKeyArn?: string;
 
   @doc("A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add to the function's execution environment. Specify each layer by its ARN, including the version.")
-  @identifiers(#[])
   layers?: string[];
 
   @doc("The function's Amazon CloudWatch Logs configuration settings. The function's Amazon CloudWatch Logs configuration settings.")
@@ -251,11 +249,9 @@ model FileSystemConfig {
 @doc("Definition of ImageConfig")
 model ImageConfig {
   @doc("Specifies parameters that you want to pass in with ENTRYPOINT. You can specify a maximum of 1,500 parameters in the list.")
-  @identifiers(#[])
   command?: string[];
 
   @doc("Specifies the entry point to their application, which is typically the location of the runtime executable. You can specify a maximum of 1,500 string entries in the list.")
-  @identifiers(#[])
   entryPoint?: string[];
 
   @doc("Specifies the working directory. The length of the directory string cannot exceed 1,000 characters.")
@@ -456,11 +452,9 @@ model VpcConfig {
   ipv6AllowedForDualStack?: boolean;
 
   @doc("A list of VPC security group IDs.")
-  @identifiers(#[])
   securityGroupIds?: string[];
 
   @doc("A list of VPC subnet IDs.")
-  @identifiers(#[])
   subnetIds?: string[];
 }
 

@@ -155,7 +155,6 @@ model EventSelector {
   dataResources?: DataResource[];
 
   @doc("An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing 'kms.amazonaws.com'. By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.")
-  @identifiers(#[])
   excludeManagementEventSources?: string[];
 
   @doc("Specify if you want your event selector to include management events for your trail.")
@@ -209,30 +208,24 @@ model Tag {
 @doc("Definition of AdvancedFieldSelector")
 model AdvancedFieldSelector {
   @doc("An operator that includes events that match the last few characters of the event record field specified as the value of Field.")
-  @identifiers(#[])
   endsWith?: string[];
 
   @doc("An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.")
-  @identifiers(#[])
   equals?: string[];
 
   @doc("A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.")
   field?: string;
 
   @doc("An operator that excludes events that match the last few characters of the event record field specified as the value of Field.")
-  @identifiers(#[])
   notEndsWith?: string[];
 
   @doc("An operator that excludes events that match the exact value of the event record field specified as the value of Field.")
-  @identifiers(#[])
   notEquals?: string[];
 
   @doc("An operator that excludes events that match the first few characters of the event record field specified as the value of Field.")
-  @identifiers(#[])
   notStartsWith?: string[];
 
   @doc("An operator that includes events that match the first few characters of the event record field specified as the value of Field.")
-  @identifiers(#[])
   startsWith?: string[];
 }
 
@@ -246,7 +239,6 @@ model DataResource {
   type?: string;
 
   @doc("An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.")
-  @identifiers(#[])
   values?: string[];
 }
 

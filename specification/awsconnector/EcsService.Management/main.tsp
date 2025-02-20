@@ -401,7 +401,6 @@ model ServiceVolumeConfiguration {
 @doc("Definition of DeploymentAlarms")
 model DeploymentAlarms {
   @doc("One or more CloudWatch alarm names. Use a ',' to separate the alarms.")
-  @identifiers(#[])
   alarmNames?: string[];
 
   @doc("Determines whether to use the CloudWatch alarm option in the service deployment process.")
@@ -434,11 +433,9 @@ model AwsVpcConfiguration {
   assignPublicIp?: AwsVpcConfigurationAssignPublicIp;
 
   @doc("The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``AwsVpcConfiguration``.  All specified security groups must be from the same VPC.")
-  @identifiers(#[])
   securityGroups?: string[];
 
   @doc("The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``AwsVpcConfiguration``.  All specified subnets must be from the same VPC.")
-  @identifiers(#[])
   subnets?: string[];
 }
 

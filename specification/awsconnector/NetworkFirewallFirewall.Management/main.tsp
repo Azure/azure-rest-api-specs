@@ -79,7 +79,6 @@ model AwsNetworkFirewallFirewallProperties {
   description?: string;
 
   @doc("Property endpointIds")
-  @identifiers(#[])
   endpointIds?: string[];
 
   @doc("A resource ARN.")

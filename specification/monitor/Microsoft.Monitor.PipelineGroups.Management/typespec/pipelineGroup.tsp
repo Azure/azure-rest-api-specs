@@ -156,7 +156,6 @@ model Service {
   pipelines: Pipeline[];
 
   @doc("Persistence options to all pipelines in the instance.")
-  @identifiers(#[])
   persistence?: PersistenceConfigurations;
 }
 
@@ -170,15 +169,12 @@ model Pipeline {
   type: PipelineType;
 
   @doc("Reference to receivers configured for the pipeline.")
-  @identifiers(#[])
   receivers: string[];
 
   @doc("Reference to processors configured for the pipeline.")
-  @identifiers(#[])
   processors?: string[];
 
   @doc("Reference to exporters configured for the pipeline.")
-  @identifiers(#[])
   exporters: string[];
 }
 

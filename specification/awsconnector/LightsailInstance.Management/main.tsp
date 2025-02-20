@@ -310,11 +310,9 @@ model Port {
   accessType?: string;
 
   @doc("cidr List Aliases")
-  @identifiers(#[])
   cidrListAliases?: string[];
 
   @doc("Property cidrs")
-  @identifiers(#[])
   cidrs?: string[];
 
   @doc("CommonName for Protocol of the Instance.")
@@ -324,7 +322,6 @@ model Port {
   fromPort?: int32;
 
   @doc("IPv6 Cidrs")
-  @identifiers(#[])
   ipv6Cidrs?: string[];
 
   @doc("Port Protocol of the Instance.")

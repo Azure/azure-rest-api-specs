@@ -463,7 +463,7 @@ model ServerlessConfigProperties {
   executionTimeout?: string;
 
   @doc("List of supported serverless informatica regions")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   regions?: RegionsMetadata[];
 }
 

@@ -90,11 +90,9 @@ model AwsLightsailBucketProperties {
   objectVersioning?: boolean;
 
   @doc("An array of strings to specify the AWS account IDs that can access the bucket.")
-  @identifiers(#[])
   readOnlyAccessAccounts?: string[];
 
   @doc("The names of the Lightsail resources for which to set bucket access.")
-  @identifiers(#[])
   resourcesReceivingAccess?: string[];
 
   @doc("An array of key-value pairs to apply to this resource.")
