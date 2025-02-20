@@ -39,6 +39,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 namespace Microsoft.ServiceFabric;
+interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
  * The available API versions.
@@ -47,6 +48,7 @@ enum Versions {
   /**
    * The 2024-11-01-preview API version.
    */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_11_01_preview: "2024-11-01-preview",
