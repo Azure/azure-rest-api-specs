@@ -77,7 +77,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendation metadata.<br>Filter can be applied to properties ['[Category](#category)', '[Control](#control)', 'RetirementDate'] with operators ['eq', 'and', 'le', 'ge'].<br>Example:<br>- $filter=Category eq 'HighAvailability' and Control eq 'ServiceUpgradeAndRetirement' and RetirementDate le 2027-01-01T00:00:00Z",
+            "description": "The filter to apply to the recommendation metadata.<br>Filter can be applied to properties ['[Category](#category)', '[Control](#control)', 'RetirementDate'] with operators ['eq', 'and', 'le', 'ge'].<br>Example:<br>- $filter=recommendationCategory eq 'HighAvailability' and recommendationControl eq 'ServiceUpgradeAndRetirement' and retirementDate ge '2024-01-01' and retirementDate le '2028-01-01'",
             "required": false,
             "type": "string"
           }
@@ -428,7 +428,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', '[Control](#control)', 'RetirementDate'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=Control eq 'ServiceUpgradeAndRetirement' and RetirementDate ge 2024-01-01T00:00:00Z",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', '[Control](#control)', 'RetirementDate'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=Control eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'",
             "required": false,
             "type": "string"
           },
