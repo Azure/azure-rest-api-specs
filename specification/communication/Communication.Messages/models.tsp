@@ -613,7 +613,7 @@ model Conversation {
 model ConversationThreadSendRequestBody {
   @doc("Details of the conversation message to send.")
   @bodyRoot
-  body: SendConversationMessageOptions;
+  options: SendConversationMessageOptions;
 }
 
 @added(Versions.c2025_03_01_Preview)
@@ -621,7 +621,7 @@ model ConversationThreadSendRequestBody {
 model AddParticipantsRequestBody {
   @doc("Details of the payload for adding participants to a conversation.")
   @bodyRoot
-  body: AddParticipantsOptions;
+  options: AddParticipantsOptions;
 }
 
 @added(Versions.c2025_03_01_Preview)
