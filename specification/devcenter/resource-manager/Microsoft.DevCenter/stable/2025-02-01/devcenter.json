@@ -227,9 +227,6 @@
           },
           "DevCenters_CreateWithDisabledManagedNetworks": {
             "$ref": "./examples/DevCenters_CreateWithDisabledManagedNetworks.json"
-          },
-          "DevCenters_CreateWithRestrictedResourceUsage": {
-            "$ref": "./examples/DevCenters_CreateWithRestrictedResourceUsage.json"
           }
         }
       },
@@ -4852,13 +4849,6 @@
         "devBoxProvisioningSettings": {
           "$ref": "#/definitions/DevBoxProvisioningSettings",
           "description": "Settings to be used in the provisioning of all Dev Boxes that belong to this dev center."
-        },
-        "restrictedResourceTypes": {
-          "description": "Indicates the resource types that are restricted from being accessed by a project unless allowed by a project policy.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DevCenterResourceType"
-          }
         }
       }
     },
@@ -5150,7 +5140,27 @@
         "filter": {
           "description": "Optional. When specified, this expression is used to filter the resources.",
           "type": "string"
+        },
+        "action": {
+          "description": "Policy action to be taken on the resources. This is optional, and defaults to allow",
+          "$ref": "#/definitions/PolicyAction"
+        },
+        "resourceType": {
+          "description": "Optional. The resource type being restricted or allowed by a project policy. Used with a given action to restrict or allow access to a resource type.",
+          "$ref": "#/definitions/DevCenterResourceType"
         }
+      }
+    },
+    "PolicyAction": {
+      "description": "Indicates what action to perform for the policy.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PolicyAction",
+        "modelAsString": true
       }
     },
     "ProjectPolicyListResult": {
