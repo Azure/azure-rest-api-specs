@@ -456,3 +456,6 @@ op getOperationDetails is AppConfigOperation<
   },
   OperationDetails
 >;
+
+@@added(AzureAppConfiguration.getKeyValue::parameters.tags, Versions.v2024_09_01);
+@@added(AzureAppConfiguration.checkKeyValue::parameters.tags, Versions.v2024_09_01);
