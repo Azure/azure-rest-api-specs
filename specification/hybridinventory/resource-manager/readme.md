@@ -34,10 +34,6 @@ These settings apply only when `--tag=package-2025-02-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-02-01-preview'
 input-file:
   - Microsoft.HybridInventory/preview/2025-02-01-preview/hybridinventory.json
-suppressions:
-  - code: PathResourceTypeNameCamelCase
-    from: hybridinventory.json
-    reason: HybridInventory is a technical term and cannot follow camel case rule.
 ```
 
 # Code Generation
