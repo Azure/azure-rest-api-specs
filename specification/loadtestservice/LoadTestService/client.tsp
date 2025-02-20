@@ -50,6 +50,10 @@ namespace Customizations;
 @@clientName(TestRunStatistics.pct999ResTime, "percentile999ResponseTime", "csharp,java");
 @@clientName(TestRunStatistics.pct9999ResTime, "percentile9999ResponseTime", "csharp,java");
 
+// Suggestion to rename `Url` to `Uri` for csharp
+@@clientName(FileInfo.url, "uri", "csharp");
+@@clientName(ArtifactsContainerInfo.url, "uri", "csharp");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
