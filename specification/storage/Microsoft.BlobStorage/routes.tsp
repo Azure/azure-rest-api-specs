@@ -924,7 +924,7 @@ interface Blob {
     },
     {
       ...DateResponseHeader;
-      ...ImmutabilityPolicyExpiryResponseHeader;
+      ...ImmutabilityPolicyExpiresOnResponseHeader;
       ...ImmutabilityPolicyModeResponseHeader;
     }
   >;

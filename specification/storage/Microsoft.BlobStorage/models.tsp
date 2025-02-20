@@ -1415,16 +1415,6 @@ alias ImmutabilityPolicyModeResponseHeader = {
   immutabilityPolicyMode: BlobImmutabilityPolicyMode;
 };
 
-/** The immutability policy expiration response header. */
-alias ImmutabilityPolicyExpiryResponseHeader = {
-  /** Indicates the time the immutability policy will expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @encode("rfc7231")
-  @clientName("ImmutabilityPolicyExpiry")
-  @header("x-ms-immutability-policy-until-date")
-  immutabilityPolicyUntilDate: utcDateTime;
-};
-
 /** The blob sequence number response header. */
 alias BlobSequenceNumberResponseHeader = {
   /** The current sequence number for a page blob. This header is not returned for block blobs or append blobs. */
