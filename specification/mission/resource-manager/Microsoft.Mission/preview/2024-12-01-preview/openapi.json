@@ -258,7 +258,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApprovalPropertiesUpdate"
+              "$ref": "#/definitions/ApprovalResource"
             }
           }
         ],
@@ -1088,7 +1088,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunityPropertiesUpdate"
+              "$ref": "#/definitions/CommunityResource"
             }
           }
         ],
@@ -1472,7 +1472,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunityEndpointPropertiesUpdate"
+              "$ref": "#/definitions/CommunityEndpointResource"
             }
           }
         ],
@@ -1972,7 +1972,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransitHubProperties"
+              "$ref": "#/definitions/TransitHubResource"
             }
           }
         ],
@@ -2276,7 +2276,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnclaveConnectionPropertiesUpdate"
+              "$ref": "#/definitions/EnclaveConnectionResource"
             }
           }
         ],
@@ -2720,7 +2720,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExternalConnectionPropertiesUpdate"
+              "$ref": "#/definitions/ExternalConnection"
             }
           }
         ],
@@ -3016,7 +3016,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InternalConnectionPropertiesUpdate"
+              "$ref": "#/definitions/InternalConnection"
             }
           }
         ],
@@ -3312,7 +3312,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualEnclavePropertiesUpdate"
+              "$ref": "#/definitions/EnclaveResource"
             }
           }
         ],
@@ -3788,7 +3788,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnclaveEndpointPropertiesUpdate"
+              "$ref": "#/definitions/EnclaveEndpointResource"
             }
           }
         ],
@@ -4288,7 +4288,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EndpointProperties"
+              "$ref": "#/definitions/EndpointResource"
             }
           }
         ],
@@ -4624,7 +4624,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkloadProperties"
+              "$ref": "#/definitions/WorkloadResource"
             }
           }
         ],
@@ -4920,48 +4920,6 @@
         "requestMetadata"
       ]
     },
-    "ApprovalPropertiesUpdate": {
-      "type": "object",
-      "description": "Approvals Resource Properties",
-      "properties": {
-        "parent1": {
-          "type": "string",
-          "description": "Parameter for optimizing query results"
-        },
-        "parent2": {
-          "type": "string",
-          "description": "Parameter for optimizing query results"
-        },
-        "requestMetadata": {
-          "$ref": "#/definitions/RequestMetadataUpdate",
-          "description": "Request metadata for the approval request."
-        },
-        "approvers": {
-          "type": "array",
-          "description": "List of approvers for the approval request",
-          "items": {
-            "$ref": "#/definitions/Approver"
-          },
-          "x-ms-identifiers": [
-            "approverEntraId"
-          ]
-        },
-        "ticketId": {
-          "type": "string",
-          "description": "Ticket ID for the approval request"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Approval request creation time"
-        },
-        "stateChangedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Approval request state change time, time at which approval request state changed from pending to approved or rejected."
-        }
-      }
-    },
     "ApprovalResource": {
       "type": "object",
       "description": "Approval Model Resource",
@@ -5242,27 +5200,6 @@
         "ruleCollection"
       ]
     },
-    "CommunityEndpointPropertiesUpdate": {
-      "type": "object",
-      "description": "Community Endpoint Resource properties",
-      "properties": {
-        "ruleCollection": {
-          "type": "array",
-          "description": "Community Endpoint Rule Collection.",
-          "items": {
-            "$ref": "#/definitions/CommunityEndpointDestinationRule"
-          },
-          "x-ms-identifiers": []
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by community endpoint.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "CommunityEndpointProtocol": {
       "type": "string",
       "description": "Community Endpoint Protocol Enum",
@@ -5411,56 +5348,6 @@
         },
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfiguration",
-          "description": "Maintenance Mode configuration."
-        }
-      }
-    },
-    "CommunityPropertiesUpdate": {
-      "type": "object",
-      "description": "Community Resource Properties",
-      "properties": {
-        "addressSpace": {
-          "type": "string",
-          "description": "Address Space."
-        },
-        "dnsServers": {
-          "type": "array",
-          "description": "Dns Servers.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by communities.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration."
-        },
-        "governedServiceList": {
-          "type": "array",
-          "description": "List of services governed by a community.",
-          "items": {
-            "$ref": "#/definitions/GovernedServiceItem"
-          }
-        },
-        "communityRoleAssignments": {
-          "type": "array",
-          "description": "Community role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
-        },
-        "approvalSettings": {
-          "$ref": "#/definitions/ApprovalSettings",
-          "description": "Approval requirements for various actions on the community's resources."
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationUpdate",
           "description": "Maintenance Mode configuration."
         }
       }
@@ -5660,43 +5547,6 @@
         "destinationEndpointId"
       ]
     },
-    "EnclaveConnectionPropertiesUpdate": {
-      "type": "object",
-      "description": "Enclave Connection Resource properties",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/EnclaveConnectionState",
-          "description": "The state of the enclaveConnection."
-        },
-        "communityResourceId": {
-          "$ref": "#/definitions/CommunityResourceId",
-          "description": "Community Resource Id."
-        },
-        "sourceResourceId": {
-          "$ref": "#/definitions/EnclaveConnectionSourceResourceId",
-          "description": "Source Resource Id."
-        },
-        "sourceCidr": {
-          "type": "string",
-          "description": "Source CIDR."
-        },
-        "ipGroup": {
-          "$ref": "#/definitions/IPGroupResourceId",
-          "description": "Source IP group Resource Id."
-        },
-        "destinationEndpointId": {
-          "$ref": "#/definitions/DestinationEndpointResourceId",
-          "description": "Destination Endpoint Resource Id."
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids modified by enclave Connections.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "EnclaveConnectionResource": {
       "type": "object",
       "description": "EnclaveConnection Model Resource",
@@ -5882,27 +5732,6 @@
         "ruleCollection"
       ]
     },
-    "EnclaveEndpointPropertiesUpdate": {
-      "type": "object",
-      "description": "Enclave Endpoint Resource properties",
-      "properties": {
-        "ruleCollection": {
-          "type": "array",
-          "description": "Enclave Endpoint Rule Collection.",
-          "items": {
-            "$ref": "#/definitions/EnclaveEndpointDestinationRule"
-          },
-          "x-ms-identifiers": []
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by community endpoint.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "EnclaveEndpointProtocol": {
       "type": "string",
       "description": "Enclave Endpoint Protocol Enum",
@@ -6064,39 +5893,6 @@
       "required": [
         "networkSize"
       ]
-    },
-    "EnclaveVirtualNetworkUpdate": {
-      "type": "object",
-      "description": "Enclave Virtual Network Properties",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Network Name."
-        },
-        "networkSize": {
-          "type": "string",
-          "description": "Network Size."
-        },
-        "customCidrRange": {
-          "type": "string",
-          "description": "Custom CIDR Range."
-        },
-        "subnetConfigurations": {
-          "type": "array",
-          "description": "Subnet Configurations.",
-          "items": {
-            "$ref": "#/definitions/SubnetConfiguration"
-          }
-        },
-        "allowSubnetCommunication": {
-          "type": "boolean",
-          "description": "Allow Subnet Communication."
-        },
-        "connectToAzureServices": {
-          "type": "boolean",
-          "description": "Connect to Azure Services (True or False)."
-        }
-      }
     },
     "EndpointProperties": {
       "type": "object",
@@ -6319,41 +6115,6 @@
         "enclaveIds",
         "externalCidrs"
       ]
-    },
-    "ExternalConnectionPropertiesUpdate": {
-      "type": "object",
-      "description": "Describes the properties of an External Connection.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/ExternalConnectionState",
-          "description": "The state of the externalConnection."
-        },
-        "communityResourceId": {
-          "$ref": "#/definitions/CommunityResourceId",
-          "description": "Community Resource Id."
-        },
-        "enclaveIds": {
-          "type": "array",
-          "description": "The enclaves' resource IDs.",
-          "items": {
-            "$ref": "#/definitions/VirtualEnclaveResourceId"
-          }
-        },
-        "externalCidrs": {
-          "type": "array",
-          "description": "The external CIDR IP addresses.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids modified by externalConnections.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "ExternalConnectionState": {
       "type": "string",
@@ -6578,50 +6339,6 @@
         "sourceCidrs"
       ]
     },
-    "InternalConnectionPropertiesUpdate": {
-      "type": "object",
-      "description": "Describes the properties of an Internal Connection.",
-      "properties": {
-        "connectionType": {
-          "$ref": "#/definitions/InternalConnectionType",
-          "description": "Specifies the type of internal connection. \n Possible values are:\n PrivateLink \n NetworkSecurityGroup"
-        },
-        "state": {
-          "$ref": "#/definitions/InternalConnectionState",
-          "description": "The state of the internalConnection."
-        },
-        "communityResourceId": {
-          "$ref": "#/definitions/CommunityResourceId",
-          "description": "Community Resource Id."
-        },
-        "destinationEnclaveId": {
-          "$ref": "#/definitions/VirtualEnclaveResourceId",
-          "description": "The destination enclave's resource ID."
-        },
-        "destinationEndpointId": {
-          "$ref": "#/definitions/EndpointResourceId",
-          "description": "The destination endpoint's resource ID."
-        },
-        "sourceEnclaveId": {
-          "$ref": "#/definitions/VirtualEnclaveResourceId",
-          "description": "The source enclave's resource ID."
-        },
-        "sourceCidrs": {
-          "type": "array",
-          "description": "The source CIDR IP addresses.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids modified by internalConnections.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "InternalConnectionState": {
       "type": "string",
       "description": "Specifies the state of the internalConnection.",
@@ -6751,43 +6468,6 @@
       "required": [
         "mode"
       ]
-    },
-    "MaintenanceModeConfigurationUpdate": {
-      "type": "object",
-      "description": "Maintenance Mode",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "description": "Current mode of Maintenance Mode Configuration",
-          "enum": [
-            "On",
-            "CanNotDelete",
-            "Off"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
-        },
-        "principals": {
-          "type": "array",
-          "description": "The user, group or service principal object affected by Maintenance Mode",
-          "items": {
-            "$ref": "#/definitions/Principal"
-          }
-        },
-        "justification": {
-          "type": "string",
-          "description": "Justification for entering or exiting Maintenance Mode",
-          "enum": [
-            "Networking",
-            "Governance",
-            "Off"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
-        }
-      }
     },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
@@ -6951,28 +6631,6 @@
       "required": [
         "resourceAction"
       ]
-    },
-    "RequestMetadataUpdate": {
-      "type": "object",
-      "description": "Request Metadata for approvals request.",
-      "properties": {
-        "resourceAction": {
-          "type": "string",
-          "description": "Resource Action of the item being approved or declined."
-        },
-        "approvalStatus": {
-          "$ref": "#/definitions/ApprovalStatus",
-          "description": "Approval status."
-        },
-        "approvalCallbackRoute": {
-          "type": "string",
-          "description": "Route name for the approval callback"
-        },
-        "approvalCallbackPayload": {
-          "type": "string",
-          "description": "Payload to be sent upon any action on approval request"
-        }
-      }
     },
     "RoleAssignmentItem": {
       "type": "object",
@@ -7388,57 +7046,6 @@
         "enclaveVirtualNetwork",
         "communityResourceId"
       ]
-    },
-    "VirtualEnclavePropertiesUpdate": {
-      "type": "object",
-      "description": "Virtual Enclave Resource properties",
-      "properties": {
-        "enclaveVirtualNetwork": {
-          "$ref": "#/definitions/EnclaveVirtualNetworkUpdate",
-          "description": "Virtual Network."
-        },
-        "communityResourceId": {
-          "$ref": "#/definitions/CommunityResourceId",
-          "description": "Community Resource Id."
-        },
-        "enclaveDefaultSettings": {
-          "$ref": "#/definitions/EnclaveDefaultSettings",
-          "description": "Default Settings"
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by Virtual Enclave.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration."
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationUpdate",
-          "description": "Maintenance Mode configuration."
-        },
-        "bastionEnabled": {
-          "type": "boolean",
-          "description": "Deploy Bastion service (True or False)."
-        },
-        "enclaveRoleAssignments": {
-          "type": "array",
-          "description": "Enclave role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
-        },
-        "workloadRoleAssignments": {
-          "type": "array",
-          "description": "Workload role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
-        }
-      }
     },
     "VirtualEnclaveResourceId": {
       "type": "string",
