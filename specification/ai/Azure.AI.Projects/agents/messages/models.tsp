@@ -151,7 +151,7 @@ model MessageTextDetails {
   annotations: MessageTextAnnotation[];
 }
 
-// Annotations, used by text content: "file_citation" | "file_path"
+// Annotations, used by text content: "file_citation" | "file_path" | "url_citation"
 
 @discriminator("type")
 @doc("An abstract representation of an annotation to text thread message content.")
@@ -169,7 +169,7 @@ model MessageTextAnnotation {
 @doc("A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.")
 model MessageTextUrlCitationAnnotation extends MessageTextAnnotation {
   @doc("The object type, which is always 'url_citation'.")
-  type: "file_citation";
+  type: "url_citation";
 
   @encodedName("application/json", "url_citation")
   @doc("The details of the URL citation.")
@@ -387,7 +387,7 @@ model MessageDeltaTextAnnotation {
 @doc("A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.")
 model MessageDeltaTextUrlCitationAnnotation extends MessageDeltaTextAnnotation {
   @doc("The object type, which is always 'url_citation'.")
-  type: "file_citation";
+  type: "url_citation";
 
   @encodedName("application/json", "url_citation")
   @doc("The details of the URL citation.")
