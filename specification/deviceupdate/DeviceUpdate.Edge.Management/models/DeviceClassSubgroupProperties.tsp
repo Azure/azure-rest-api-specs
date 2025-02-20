@@ -14,9 +14,9 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.DeviceUpdate;
 
 /**
- * Device Update Subgroup properties.
+ * Device Update Device Class Subgroup properties.
  */
-model SubgroupProperties {
+model DeviceClassSubgroupProperties {
   /**
    * Provisioning state.
    */
@@ -36,13 +36,13 @@ model SubgroupProperties {
   deviceClassId: string;
 
   /**
-   * Date and time in UTC when the Subgroup was created.
+   * Date and time in UTC when this Subgroup was created.
    */
   @visibility("read")
   createdDateTime: utcDateTime;
 
   /**
-   * The list of deployments for this Subgroup
+   * Active deployment for this Subgroup
    */
   @visibility("read")
   activeDeployment?: ActiveDeployment;

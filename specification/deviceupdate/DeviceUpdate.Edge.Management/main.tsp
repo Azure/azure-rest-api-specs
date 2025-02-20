@@ -16,7 +16,7 @@ import "./Deployment.tsp";
 import "./DeviceClass.tsp";
 import "./Update.tsp";
 import "./Group.tsp";
-import "./Subgroup.tsp";
+import "./DeviceClassSubgroup.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

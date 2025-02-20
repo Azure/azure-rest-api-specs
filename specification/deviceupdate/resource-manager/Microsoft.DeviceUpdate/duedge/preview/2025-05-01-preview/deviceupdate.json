@@ -64,7 +64,7 @@
       "name": "Groups"
     },
     {
-      "name": "Subgroups"
+      "name": "DeviceClassSubgroups"
     }
   ],
   "paths": {
@@ -2254,11 +2254,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/groups/{groupName}/deviceClassSubgroups": {
       "get": {
-        "operationId": "Subgroups_ListByUpdateAccountAndGroup",
+        "operationId": "DeviceClassSubgroups_ListByUpdateAccountAndGroup",
         "tags": [
-          "Subgroups"
+          "DeviceClassSubgroups"
         ],
-        "description": "Returns Subgroups for the given group name.",
+        "description": "Returns Device Class Subgroups for the given group name.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2294,7 +2294,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SubgroupListResult"
+              "$ref": "#/definitions/DeviceClassSubgroupListResult"
             }
           },
           "default": {
@@ -2305,8 +2305,8 @@
           }
         },
         "x-ms-examples": {
-          "Gets list of Subgroups by an Update Account and Group": {
-            "$ref": "./examples/Subgroups_ListByUpdateAccountAndGroup.json"
+          "Gets list of Device Class Subgroups by an Update Account and Group": {
+            "$ref": "./examples/DeviceClassSubgroups_ListByUpdateAccountAndGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2316,11 +2316,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/groups/{groupName}/deviceClassSubgroups/{subgroupName}": {
       "get": {
-        "operationId": "Subgroups_Get",
+        "operationId": "DeviceClassSubgroups_Get",
         "tags": [
-          "Subgroups"
+          "DeviceClassSubgroups"
         ],
-        "description": "Returns Subgroup details.",
+        "description": "Returns Device Class Subgroup details.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2354,7 +2354,7 @@
           {
             "name": "subgroupName",
             "in": "path",
-            "description": "Subgroup Name",
+            "description": "DeviceClassSubgroup Name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2366,7 +2366,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Subgroup"
+              "$ref": "#/definitions/DeviceClassSubgroup"
             }
           },
           "default": {
@@ -2377,17 +2377,17 @@
           }
         },
         "x-ms-examples": {
-          "Get Details of Subgroup": {
-            "$ref": "./examples/Subgroups_Get.json"
+          "Get Details of Device Class Subgroup": {
+            "$ref": "./examples/DeviceClassSubgroups_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "Subgroups_Create",
+        "operationId": "DeviceClassSubgroups_Create",
         "tags": [
-          "Subgroups"
+          "DeviceClassSubgroups"
         ],
-        "description": "Creates or updates a Subgroup.",
+        "description": "Creates or updates a Device Class Subgroup.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2421,7 +2421,7 @@
           {
             "name": "subgroupName",
             "in": "path",
-            "description": "Subgroup Name",
+            "description": "DeviceClassSubgroup Name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2429,26 +2429,26 @@
             "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
           },
           {
-            "name": "subgroup",
+            "name": "deviceclasssubgroup",
             "in": "body",
-            "description": "Subgroup details.",
+            "description": "DeviceClassSubgroup details.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Subgroup"
+              "$ref": "#/definitions/DeviceClassSubgroup"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Subgroup' update operation succeeded",
+            "description": "Resource 'DeviceClassSubgroup' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Subgroup"
+              "$ref": "#/definitions/DeviceClassSubgroup"
             }
           },
           "201": {
-            "description": "Resource 'Subgroup' create operation succeeded",
+            "description": "Resource 'DeviceClassSubgroup' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Subgroup"
+              "$ref": "#/definitions/DeviceClassSubgroup"
             }
           },
           "default": {
@@ -2459,17 +2459,17 @@
           }
         },
         "x-ms-examples": {
-          "Creates or updates Subgroup": {
-            "$ref": "./examples/Subgroups_Create.json"
+          "Creates or updates Device Class Subgroup": {
+            "$ref": "./examples/DeviceClassSubgroups_Create.json"
           }
         }
       },
       "patch": {
-        "operationId": "Subgroups_Update",
+        "operationId": "DeviceClassSubgroups_Update",
         "tags": [
-          "Subgroups"
+          "DeviceClassSubgroups"
         ],
-        "description": "Updates a Subgroup.",
+        "description": "Updates a Device Class Subgroup.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2503,7 +2503,7 @@
           {
             "name": "subgroupName",
             "in": "path",
-            "description": "Subgroup Name",
+            "description": "DeviceClassSubgroup Name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2525,7 +2525,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Subgroup"
+              "$ref": "#/definitions/DeviceClassSubgroup"
             }
           },
           "default": {
@@ -2536,17 +2536,17 @@
           }
         },
         "x-ms-examples": {
-          "Updates Subgroup": {
-            "$ref": "./examples/Subgroups_Update.json"
+          "Updates Device Class Subgroup": {
+            "$ref": "./examples/DeviceClassSubgroups_Update.json"
           }
         }
       },
       "delete": {
-        "operationId": "Subgroups_Delete",
+        "operationId": "DeviceClassSubgroups_Delete",
         "tags": [
-          "Subgroups"
+          "DeviceClassSubgroups"
         ],
-        "description": "Delete Subgroup.",
+        "description": "Delete Device Class Subgroup.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2580,7 +2580,7 @@
           {
             "name": "subgroupName",
             "in": "path",
-            "description": "Subgroup Name",
+            "description": "DeviceClassSubgroup Name",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2603,8 +2603,8 @@
           }
         },
         "x-ms-examples": {
-          "Deletes Subgroup": {
-            "$ref": "./examples/Subgroups_Delete.json"
+          "Deletes Device Class Subgroup": {
+            "$ref": "./examples/DeviceClassSubgroups_Delete.json"
           }
         }
       }
@@ -3701,6 +3701,21 @@
         "deviceClassInfo"
       ]
     },
+    "DeviceClassSubgroup": {
+      "type": "object",
+      "description": "Device Update Device Class Subgroup details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceClassSubgroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
     "DeviceClassSubgroupDeploymentState": {
       "type": "string",
       "description": "Device class subgroup deployment state",
@@ -3782,6 +3797,70 @@
       "required": [
         "deviceClassId",
         "deploymentState"
+      ]
+    },
+    "DeviceClassSubgroupListResult": {
+      "type": "object",
+      "description": "The response of a DeviceClassSubgroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceClassSubgroup items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceClassSubgroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeviceClassSubgroupProperties": {
+      "type": "object",
+      "description": "Device Update Device Class Subgroup properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state.",
+          "readOnly": true
+        },
+        "groupId": {
+          "type": "string",
+          "description": "This is the ID of the parent Group resource",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deviceClassId": {
+          "type": "string",
+          "description": "This is the Device Class ID of this Subgroup",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC when this Subgroup was created.",
+          "readOnly": true
+        },
+        "activeDeployment": {
+          "$ref": "#/definitions/ActiveDeployment",
+          "description": "Active deployment for this Subgroup",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "groupId",
+        "deviceClassId",
+        "createdDateTime"
       ]
     },
     "DeviceClassUpdatableDevices": {
@@ -4493,85 +4572,6 @@
           }
         ]
       }
-    },
-    "Subgroup": {
-      "type": "object",
-      "description": "Device Update Subgroup details.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SubgroupProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "SubgroupListResult": {
-      "type": "object",
-      "description": "The response of a Subgroup list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Subgroup items on this page",
-          "items": {
-            "$ref": "#/definitions/Subgroup"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "SubgroupProperties": {
-      "type": "object",
-      "description": "Device Update Subgroup properties.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state.",
-          "readOnly": true
-        },
-        "groupId": {
-          "type": "string",
-          "description": "This is the ID of the parent Group resource",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "deviceClassId": {
-          "type": "string",
-          "description": "This is the Device Class ID of this Subgroup",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time in UTC when the Subgroup was created.",
-          "readOnly": true
-        },
-        "activeDeployment": {
-          "$ref": "#/definitions/ActiveDeployment",
-          "description": "The list of deployments for this Subgroup",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "groupId",
-        "deviceClassId",
-        "createdDateTime"
-      ]
     },
     "TagUpdate": {
       "type": "object",
