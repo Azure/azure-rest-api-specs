@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
+import "./common.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
@@ -10,187 +11,9 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
+using Language.Conversations.Authoring;
 
 namespace Language.Conversations.Authoring;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union ProjectKind {
-  string,
-
-  /**
-   * A project to build natural language into apps, bots, and IoT devices.
-   */
-  Conversation: "Conversation",
-
-  /**
-   * A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project.
-   */
-  Orchestration: "Orchestration",
-
-  /**
-   * A project to build conversation summarization models which are able to summarize long conversations.
-   */
-  @added(Versions.v2023_04_15_preview)
-  CustomConversationSummarization: "CustomConversationSummarization",
-}
-
-/**
- * Human-readable error code.
- */
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union ErrorCode {
-  string,
-  InvalidRequest: "InvalidRequest",
-  InvalidArgument: "InvalidArgument",
-  Unauthorized: "Unauthorized",
-  Forbidden: "Forbidden",
-  NotFound: "NotFound",
-  ProjectNotFound: "ProjectNotFound",
-  OperationNotFound: "OperationNotFound",
-  AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
-  AzureCognitiveSearchIndexNotFound: "AzureCognitiveSearchIndexNotFound",
-  TooManyRequests: "TooManyRequests",
-  AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
-  AzureCognitiveSearchIndexLimitReached: "AzureCognitiveSearchIndexLimitReached",
-  InternalServerError: "InternalServerError",
-  ServiceUnavailable: "ServiceUnavailable",
-  Timeout: "Timeout",
-  QuotaExceeded: "QuotaExceeded",
-  Conflict: "Conflict",
-  Warning: "Warning",
-}
-
-/**
- * Human-readable error code.
- */
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union InnerErrorCode {
-  string,
-  InvalidRequest: "InvalidRequest",
-  InvalidParameterValue: "InvalidParameterValue",
-  KnowledgeBaseNotFound: "KnowledgeBaseNotFound",
-  AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
-  AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
-  ExtractionFailure: "ExtractionFailure",
-  InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
-  EmptyRequest: "EmptyRequest",
-  MissingInputDocuments: "MissingInputDocuments",
-  InvalidDocument: "InvalidDocument",
-  ModelVersionIncorrect: "ModelVersionIncorrect",
-  InvalidDocumentBatch: "InvalidDocumentBatch",
-  UnsupportedLanguageCode: "UnsupportedLanguageCode",
-  InvalidCountryHint: "InvalidCountryHint",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union ExportedProjectFormat {
-  string,
-
-  /**
-   * Specifies the format for a conversational project.
-   */
-  Conversation: "Conversation",
-
-  /**
-   * Specifies the format for an application that was exported from LUIS.
-   */
-  Luis: "Luis",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("StringIndexType", "csharp")
-union StringIndexType {
-  string,
-
-  /**
-   * The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript.
-   */
-  Utf16CodeUnit: "Utf16CodeUnit",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union TrainingMode {
-  string,
-
-  /**
-   * Trains using fine-tuned neural network transformer models. Can train multilingual projects.
-   */
-  advanced: "advanced",
-
-  /**
-   * Faster training times for quicker iterations.
-   */
-  standard: "standard",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union EvaluationKind {
-  string,
-
-  /**
-   * Split the data into training and test sets according to user-defined percentages.
-   */
-  percentage: "percentage",
-
-  /**
-   * Split the data according to the chosen dataset for every example in the data.
-   */
-  manual: "manual",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-@lroStatus
-union JobStatus {
-  string,
-  notStarted: "notStarted",
-  running: "running",
-
-  @lroSucceeded
-  succeeded: "succeeded",
-
-  @lroFailed
-  failed: "failed",
-
-  @lroCanceled
-  cancelled: "cancelled",
-
-  cancelling: "cancelling",
-  partiallyCompleted: "partiallyCompleted",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union CompositionSetting {
-  string,
-
-  /**
-   * When two or more components are found in the text and overlap, the component with the longest set of characters is returned.
-   */
-  returnLongestOverlap: "returnLongestOverlap",
-
-  /**
-   * All components must overlap at the exact same characters in the text for the entity to return. If one of the defined components is not matched or predicted, the entity will not return.
-   */
-  requireExactOverlap: "requireExactOverlap",
-
-  /**
-   * Every component's match or prediction is returned as a separate instance of the entity.
-   */
-  separateComponents: "separateComponents",
-
-  /**
-   * When two or more components are found in the text and overlap, the components' spans are merged together into one span combining all of them.
-   */
-  combineComponents: "combineComponents",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("OrchestrationTargetProjectKind", "csharp")
-union OrchestrationTargetProjectKind {
-  string,
-  Luis: "Luis",
-  Conversation: "Conversation",
-  QuestionAnswering: "QuestionAnswering",
-}
 
 /**
  * Represents a list of retrieved projects' metadata.
@@ -217,21 +40,25 @@ model AnalyzeConversationAuthoringProjectMetadata {
   /**
    * Represents the project creation datetime.
    */
+  @clientName("createdOn", "csharp")
   createdDateTime: utcDateTime;
 
   /**
    * Represents the project creation datetime.
    */
+  @clientName("lastModifiedOn", "csharp")
   lastModifiedDateTime: utcDateTime;
 
   /**
    * Represents the project last trained datetime.
    */
+  @clientName("lastTrainedOn", "csharp")
   lastTrainedDateTime?: utcDateTime;
 
   /**
    * Represents the project last deployed datetime.
    */
+  @clientName("lastDeployedOn", "csharp")
   lastDeployedDateTime?: utcDateTime;
 
   /**
@@ -292,51 +119,9 @@ model AnalyzeConversationAuthoringProjectSettings {
 }
 
 /**
- * Error response.
- */
-@error
-model ErrorResponse {
-  /**
-   * The error object.
-   */
-  error: Error;
-}
-
-/**
- * The error object.
- */
-@clientName("AuthoringConversationsError", "csharp")
-model Error {
-  /**
-   * One of a server-defined set of error codes.
-   */
-  code: ErrorCode;
-
-  /**
-   * A human-readable representation of the error.
-   */
-  message: string;
-
-  /**
-   * The target of the error.
-   */
-  target?: string;
-
-  /**
-   * An array of details about specific errors that led to this reported error.
-   */
-  details?: Error[];
-
-  /**
-   * An object containing more specific information than the current object about
-   * the error.
-   */
-  innererror?: InnerErrorModel;
-}
-
-/**
  * An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
  */
+@clientName("AnalyzeConversationInnerErrorModel", "csharp")
 model InnerErrorModel {
   /**
    * One of a server-defined set of error codes.
@@ -433,7 +218,7 @@ model AnalyzeConversationAuthoringCopyAuthorizationOptions {
  */
 @added(Versions.v2023_04_15_preview)
 @clientName("CopyProjectDetails", "csharp")
-model AnalyzeConversationAuthoringCopyProjectOptions {
+model AnalyzeConversationAuthoringCopiedProjectOptions {
   /**
    * Represents the project kind.
    */
@@ -488,15 +273,15 @@ model AnalyzeConversationAuthoringExportedProject {
   /**
    * Represents the project assets.
    */
-  assets?: AnalyzeConversationAuthoringExportedProjectAssets;
+  assets?: AnalyzeConversationAuthoringExportedProjectAsset;
 }
 
 /**
  * Represents the assets of an exported project.
  */
 @discriminator("projectKind")
-@clientName("ExportedProjectAssets", "csharp")
-model AnalyzeConversationAuthoringExportedProjectAssets {
+@clientName("ExportedProjectAsset", "csharp")
+model AnalyzeConversationAuthoringExportedProjectAsset {
   /**
    * The type of project containing the assets.
    */
@@ -554,17 +339,17 @@ model AnalyzeConversationAuthoringEvaluationOptions {
  * Represents the state of a copy job.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("CopyProjectJobState", "csharp")
+@clientName("CopyProjectOperationState", "csharp")
 @resource("copy/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
-model AnalyzeConversationAuthoringCopyProjectJobState {
+model AnalyzeConversationAuthoringCopiedProjectJobState {
   ...AnalyzeConversationAuthoringJobState;
 }
 
 /**
  * Represents a job's state.
  */
-@clientName("JobState", "csharp")
+@clientName("ConversationAuthoringOperationState", "csharp")
 model AnalyzeConversationAuthoringJobState {
   /**
    * The job ID.
@@ -576,16 +361,19 @@ model AnalyzeConversationAuthoringJobState {
   /**
    * The creation date time of the job.
    */
+  @clientName("createdOn", "csharp")
   createdDateTime: utcDateTime;
 
   /**
    * The last date time the job was updated.
    */
+  @clientName("lastUpdatedOn", "csharp")
   lastUpdatedDateTime: utcDateTime;
 
   /**
    * The expiration date time of the job.
    */
+  @clientName("expiresOn", "csharp")
   expirationDateTime?: utcDateTime;
 
   /**
@@ -596,28 +384,12 @@ model AnalyzeConversationAuthoringJobState {
   /**
    * The warnings that were encountered while executing the job.
    */
-  warnings?: Warning[];
+  warnings?: Foundations.Error[];
 
   /**
    * The errors encountered while executing the job.
    */
-  errors?: Error[];
-}
-
-/**
- * Represents a warning that was encountered while executing the request.
- */
-@clientName("AuthoringConversationsWarning", "csharp")
-model Warning {
-  /**
-   * The warning code.
-   */
-  code: string;
-
-  /**
-   * The warning message.
-   */
-  message: string;
+  errors?: Foundations.Error[];
 }
 
 /**
@@ -658,16 +430,19 @@ model AnalyzeConversationAuthoringProjectDeployment {
   /**
    * Represents deployment last trained time.
    */
+  @clientName("lastTrainedOn", "csharp")
   lastTrainedDateTime: utcDateTime;
 
   /**
    * Represents deployment last deployed time.
    */
+  @clientName("lastDeployedOn", "csharp")
   lastDeployedDateTime: utcDateTime;
 
   /**
    * Represents deployment expiration date in the runtime.
    */
+  @clientName("deploymentExpiredOn", "csharp")
   deploymentExpirationDate: plainDate;
 
   /**
@@ -729,7 +504,7 @@ model AnalyzeConversationAuthoringDeleteDeploymentOptions {
 /**
  * Represents the state of a deployment job.
  */
-@clientName("DeploymentJobState", "csharp")
+@clientName("DeploymentOperationState", "csharp")
 @parentResource(AnalyzeConversationAuthoringProjectDeployment)
 @resource("jobs")
 model AnalyzeConversationAuthoringDeploymentJobState {
@@ -739,7 +514,7 @@ model AnalyzeConversationAuthoringDeploymentJobState {
 /**
  * Represents the state of an existing delete deployment from specific resources job.
  */
-@clientName("DeploymentDeleteFromResourcesJobState", "csharp")
+@clientName("DeploymentDeleteFromResourcesOperationState", "csharp")
 @parentResource(AnalyzeConversationAuthoringProjectDeployment)
 @resource("delete-from-resources/jobs")
 model AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState {
@@ -749,7 +524,7 @@ model AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState {
 /**
  * Represents the state of a deployment job.
  */
-@clientName("SwapDeploymentsJobState", "csharp")
+@clientName("SwapDeploymentsOperationState", "csharp")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 @resource("deployments/swap/jobs")
 model AnalyzeConversationAuthoringSwapDeploymentsJobState {
@@ -775,7 +550,7 @@ model AnalyzeConversationAuthoringSwapDeploymentsOptions {
 /**
  * Represents the state of an export job.
  */
-@clientName("ExportProjectJobState", "csharp")
+@clientName("ExportProjectOperationState", "csharp")
 @resource("export/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringExportProjectJobState {
@@ -784,13 +559,14 @@ model AnalyzeConversationAuthoringExportProjectJobState {
   /**
    * The URL to use in order to download the exported project.
    */
+  @clientName("resultUri", "csharp")
   resultUrl?: string;
 }
 
 /**
  * Represents the state of an import job.
  */
-@clientName("ImportProjectJobState", "csharp")
+@clientName("ImportProjectOperationState", "csharp")
 @resource("import/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringImportProjectJobState {
@@ -835,6 +611,7 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
   /**
    * The last trained date time of the model.
    */
+  @clientName("lastTrainedOn", "csharp")
   lastTrainedDateTime: utcDateTime;
 
   /**
@@ -845,6 +622,7 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
   /**
    * The model expiration date.
    */
+  @clientName("modelExpiredOn", "csharp")
   modelExpirationDate: plainDate;
 
   /**
@@ -861,7 +639,7 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
 /**
  * Represents the state of a evaluation job.
  */
-@clientName("EvaluationJobState", "csharp")
+@clientName("EvaluationOperationState", "csharp")
 @resource("evaluate/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectTrainedModel)
 model AnalyzeConversationAuthoringEvaluationJobState {
@@ -879,6 +657,7 @@ model AnalyzeConversationAuthoringEvaluationJobResult {
   /**
    * Represents the options used running the evaluation.
    */
+  @clientName("evaluationDetails", "csharp")
   evaluationOptions: AnalyzeConversationAuthoringEvaluationOptions;
 
   /**
@@ -920,6 +699,31 @@ model StringIndexTypeQueryParameter {
    */
   @query("stringIndexType")
   stringIndexType: StringIndexType;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model SupportedPrebuiltEntitiesQueryParameter {
+  /**
+   * The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
+   */
+  @query("language")
+  language?: string;
+
+  /**
+   * Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.
+   */
+  @query("multilingual")
+  multilingual?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model ProjectKindQueryParameter {
+  /**
+   * The project kind.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @query("projectKind")
+  ProjectKind: ProjectKind;
 }
 
 /**
@@ -1026,16 +830,6 @@ model AnalyzeConversationAuthoringEvaluationSummary {
   evaluationOptions?: AnalyzeConversationAuthoringEvaluationOptions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConfusionMatrix", "csharp")
-model AnalyzeConversationAuthoringConfusionMatrix
-  is Record<AnalyzeConversationAuthoringConfusionMatrixRow>;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConfusionMatrixRow", "csharp")
-model AnalyzeConversationAuthoringConfusionMatrixRow
-  is Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
-
 /**
  * Represents the evaluation result summary for the project's entities.
  */
@@ -1044,7 +838,7 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
   /**
    * Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.
    */
-  confusionMatrix: AnalyzeConversationAuthoringConfusionMatrix;
+  confusionMatrix: Record<AnalyzeConversationAuthoringConfusionMatrixRow>;
 
   /**
    * Represents the entities evaluation summary.
@@ -1082,10 +876,15 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
   macroRecall: float32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("AnalyzeConversationConfusionMatrixRow", "csharp")
+model AnalyzeConversationAuthoringConfusionMatrixRow
+  is Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
+
 /**
  * Represents a cell in a confusion matrix.
  */
-@clientName("ConfusionMatrixCell", "csharp")
+@clientName("AnalyzeConversationConfusionMatrixCell", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrixCell {
   /**
    * Represents normalized value in percentages.
@@ -1104,17 +903,17 @@ model AnalyzeConversationAuthoringConfusionMatrixCell {
 @clientName("EntityEvaluationSummary", "csharp")
 model AnalyzeConversationAuthoringEntityEvaluationSummary {
   /**
-   * Represents the model precision
+   * Represents the model F1 score
    */
   f1: float64;
 
   /**
-   * Represents the model recall
+   * Represents the model precision
    */
   precision: float64;
 
   /**
-   * Represents the model F1 score
+   * Represents the model precision
    */
   recall: float64;
 
@@ -1147,7 +946,7 @@ model AnalyzeConversationAuthoringIntentsEvaluationSummary {
   /**
    * Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted.
    */
-  confusionMatrix: AnalyzeConversationAuthoringConfusionMatrix;
+  confusionMatrix: Record<AnalyzeConversationAuthoringConfusionMatrixRow>;
 
   /**
    * Represents the intents evaluation summary.
@@ -1229,7 +1028,7 @@ model AnalyzeConversationAuthoringIntentEvaluationSummary {
 /**
  * Represents the state of loading a snapshot job.
  */
-@clientName("LoadSnapshotJobState", "csharp")
+@clientName("LoadSnapshotOperationState", "csharp")
 @resource("load-snapshot/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectTrainedModel)
 model AnalyzeConversationAuthoringLoadSnapshotJobState {
@@ -1266,6 +1065,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResource {
    */
   @key
   @visibility("read")
+  @clientName("resourceId", "csharp")
   azureResourceId: string;
 
   /**
@@ -1283,6 +1083,7 @@ model AnalyzeConversationAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
    */
+  @clientName("metadata", "csharp")
   resourcesMetadata: AnalyzeConversationAuthoringResourceMetadata[];
 }
 
@@ -1323,7 +1124,7 @@ model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
  * Represents the state of a deployment resources job.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("DeploymentResourcesJobState", "csharp")
+@clientName("DeploymentResourcesOperationState", "csharp")
 @resource("resources/assign/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringDeploymentResourcesJobState {
@@ -1349,7 +1150,7 @@ model AnalyzeConversationAuthoringTrainingJobs {
 /**
  * Represents the state of a training job.
  */
-@clientName("TrainingJobState", "csharp")
+@clientName("TrainingOperationState", "csharp")
 @resource("train/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringTrainingJobState {
@@ -1394,13 +1195,14 @@ model AnalyzeConversationAuthoringTrainingJobResult {
   /**
    * Represents the estimated end date time for training and evaluation.
    */
+  @clientName("estimatedEndOn", "csharp")
   estimatedEndDateTime?: utcDateTime;
 }
 
 /**
  * Represents the detailed state of a training sub-operation.
  */
-@clientName("SubTrainingJobState", "csharp")
+@clientName("SubTrainingOperationState", "csharp")
 model AnalyzeConversationAuthoringSubTrainingJobState {
   /**
    * Represents progress percentage.
@@ -1410,11 +1212,13 @@ model AnalyzeConversationAuthoringSubTrainingJobState {
   /**
    * Represents the start date time.
    */
+  @clientName("startedOn", "csharp")
   startDateTime?: utcDateTime;
 
   /**
    * Represents the end date time.
    */
+  @clientName("endedOn", "csharp")
   endDateTime?: utcDateTime;
 
   /**
@@ -1426,7 +1230,7 @@ model AnalyzeConversationAuthoringSubTrainingJobState {
 /**
  * Represents the state of a project deletion job.
  */
-@clientName("ProjectDeletionJobState", "csharp")
+@clientName("ProjectDeletionOperationState", "csharp")
 model AnalyzeConversationAuthoringProjectDeletionJobState {
   ...AnalyzeConversationAuthoringJobState;
 }
@@ -1453,10 +1257,13 @@ model AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata {
  */
 @added(Versions.v2023_04_15_preview)
 @clientName("AssignedProjectDeploymentsMetadata", "csharp")
+@resource("authoring/analyze-conversations/projects/global/deployments/resources")
 model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
   /**
    * Represents the project name.
    */
+  @key
+  @visibility("read")
   projectName: string;
 
   /**
@@ -1479,11 +1286,13 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents deployment last deployed time.
    */
+  @clientName("lastDeployedOn", "csharp")
   lastDeployedDateTime: utcDateTime;
 
   /**
    * Represents deployment expiration date in the runtime.
    */
+  @clientName("DeploymentExpiresOn", "csharp")
   deploymentExpirationDate: plainDate;
 }
 
@@ -1506,10 +1315,13 @@ model AnalyzeConversationAuthoringSupportedLanguages {
  * Represents a supported language.
  */
 @clientName("SupportedLanguage", "csharp")
+@resource("authoring/analyze-conversations/projects/global/languages")
 model AnalyzeConversationAuthoringSupportedLanguage {
   /**
    * The language name.
    */
+  @key
+  @visibility("read")
   languageName: string;
 
   /**
@@ -1538,10 +1350,13 @@ model AnalyzeConversationAuthoringPrebuiltEntities {
  * Represents a supported prebuilt entity.
  */
 @clientName("PrebuiltEntity", "csharp")
+@resource("authoring/analyze-conversations/projects/global/prebuilt-entities")
 model AnalyzeConversationAuthoringPrebuiltEntity {
   /**
    * The prebuilt entity category.
    */
+  @key
+  @visibility("read")
   category: string;
 
   /**
@@ -1575,10 +1390,13 @@ model AnalyzeConversationAuthoringTrainingConfigVersions {
  * Represents a training config version.
  */
 @clientName("TrainingConfigVersion", "csharp")
+@resource("authoring/analyze-conversations/projects/global/training-config-versions")
 model AnalyzeConversationAuthoringTrainingConfigVersion {
   /**
    * Represents the version of the config.
    */
+  @key
+  @visibility("read")
   trainingConfigVersion: string;
 
   /**
@@ -1600,12 +1418,13 @@ model AnalyzeConversationAuthoringConversationExportedEntity {
   /**
    * The behavior to follow when the entity's components overlap with each other.
    */
+  @clientName("compositionMode", "csharp")
   compositionSetting?: CompositionSetting;
 
   /**
    * The list component of the entity.
    */
-  list?: AnalyzeConversationAuthoringExportedEntityList;
+  entities?: AnalyzeConversationAuthoringExportedEntityList;
 
   /**
    * The prebuilt entities components.
@@ -1723,9 +1542,9 @@ model AnalyzeConversationAuthoringConversationExportedIntent {
 /**
  * Represents the exported assets of a conversational project.
  */
-@clientName("ConversationExportedProjectAssets", "csharp")
-model AnalyzeConversationAuthoringConversationExportedProjectAssets
-  extends AnalyzeConversationAuthoringExportedProjectAssets {
+@clientName("ConversationExportedProjectAsset", "csharp")
+model AnalyzeConversationAuthoringConversationExportedProjectAsset
+  extends AnalyzeConversationAuthoringExportedProjectAsset {
   /**
    * The intents defined in the project.
    */
@@ -1775,7 +1594,24 @@ model AnalyzeConversationAuthoringConversationExportedUtterance {
   /**
    * The dataset for this utterance. Allowed values are 'Train' and 'Test'.
    */
-  dataset?: string;
+  dataset?: DatasetType;
+}
+
+/**
+ * The dataset for this utterance. Allowed values are 'Train' and 'Test'.
+ */
+union DatasetType {
+  string,
+
+  /**
+   * Split the data into training and test sets according to user-defined percentages.
+   */
+  Train: "Train",
+
+  /**
+   * Split the data according to the chosen dataset for every example in the data.
+   */
+  Test: "Test",
 }
 
 /**
@@ -1800,8 +1636,8 @@ model AnalyzeConversationAuthoringExportedUtteranceEntityLabel {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationSummarizationExportedProjectAssets", "csharp")
-model AnalyzeConversationAuthoringConversationSummarizationExportedProjectAssets {
+@clientName("ConversationSummarizationExportedProjectAsset", "csharp")
+model AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset {
   /**
    * Represents the conversations of the project.
    */
@@ -1959,9 +1795,9 @@ model AnalyzeConversationAuthoringOrchestrationExportedIntent {
 /**
  * Represents the assets of an orchestration project.
  */
-@clientName("OrchestrationExportedProjectAssets", "csharp")
-model AnalyzeConversationAuthoringOrchestrationExportedProjectAssets
-  extends AnalyzeConversationAuthoringExportedProjectAssets {
+@clientName("OrchestrationExportedProjectAsset", "csharp")
+model AnalyzeConversationAuthoringOrchestrationExportedProjectAsset
+  extends AnalyzeConversationAuthoringExportedProjectAsset {
   /**
    * Represents the intents of the project.
    */
@@ -2026,16 +1862,19 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
   /**
    * The last trained date time of the model.
    */
+  @clientName("lastTrainedOn", "csharp")
   lastTrainedDateTime: utcDateTime;
 
   /**
    * The last exported date time of the model.
    */
+  @clientName("lastExportedModelOn", "csharp")
   lastExportedModelDateTime: utcDateTime;
 
   /**
    * The model expiration date.
    */
+  @clientName("modelExpiredOn", "csharp")
   modelExpirationDate: plainDate;
 
   /**
@@ -2047,7 +1886,7 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
  * Represents the state of a job to create or updated an exported model.
  */
 @added(Versions.v2024_11_15_preview)
-@clientName("ExportedModelJobState", "csharp")
+@clientName("ExportedModelOperationState", "csharp")
 @resource("jobs")
 @parentResource(AnalyzeConversationAuthoringExportedTrainedModel)
 model AnalyzeConversationAuthoringExportedModelJobState {
