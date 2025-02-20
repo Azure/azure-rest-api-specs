@@ -543,7 +543,7 @@ union ParticipantKind {
   internal: "internal",
 
   @doc("A participant on other platforms")
-  external: "External",
+  external: "external",
 }
 
 @added(Versions.c2025_03_01_Preview)
