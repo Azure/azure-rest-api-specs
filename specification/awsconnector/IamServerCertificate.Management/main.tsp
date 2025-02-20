@@ -90,7 +90,7 @@ model AwsIamServerCertificateProperties {
   serverCertificateName?: string;
 
   @doc("Property tags")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 }
 

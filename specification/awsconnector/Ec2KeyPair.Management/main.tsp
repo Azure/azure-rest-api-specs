@@ -90,7 +90,7 @@ model AwsEc2KeyPairProperties {
   publicKeyMaterial?: string;
 
   @doc("The tags to apply to the key pair.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 }
 

@@ -177,7 +177,7 @@ model CloudExadataInfrastructureProperties {
   estimatedPatchingTime?: EstimatedPatchingTime;
 
   @doc("The list of customer email addresses that receive information from Oracle about the specified OCI Database service resource. Oracle uses these email addresses to send notifications about planned and unplanned software maintenance updates, information about system hardware, and other information needed by administrators. Up to 10 email addresses can be added to the customer contacts for a cloud Exadata infrastructure instance. ")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility("create", "read", "update")
   customerContacts?: CustomerContact[];
 

@@ -79,14 +79,14 @@ model AwsAccessAnalyzerAnalyzerProperties {
   analyzerName?: string;
 
   @doc("Property archiveRules")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   archiveRules?: ArchiveRule[];
 
   @doc("Amazon Resource Name (ARN) of the analyzer")
   arn?: string;
 
   @doc("An array of key-value pairs to apply to this resource.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS or ORGANIZATION_UNUSED_ACCESS")
@@ -110,7 +110,7 @@ model UnusedAccessConfiguration {
 @doc("Definition of ArchiveRule")
 model ArchiveRule {
   @doc("Property filter")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filter?: Filter[];
 
   @doc("The archive rule name")
@@ -137,18 +137,18 @@ model Tag {
 @doc("Definition of Filter")
 model Filter {
   @doc("Property contains")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   contains?: string[];
 
   @doc("Property eq")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   eq?: string[];
 
   @doc("Property exists")
   exists?: boolean;
 
   @doc("Property neq")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   neq?: string[];
 
   @doc("Property property")

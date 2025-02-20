@@ -90,7 +90,7 @@ model AwsMacieAllowListProperties {
   status?: Status;
 
   @doc("A collection of tags associated with a resource")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 }
 
