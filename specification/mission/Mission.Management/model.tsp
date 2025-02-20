@@ -198,6 +198,7 @@ interface Workload {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<WorkloadResource, WorkloadProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -216,6 +217,7 @@ interface Endpoint {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<EndpointResource, EndpointProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -234,6 +236,7 @@ interface VirtualEnclave {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<EnclaveResource, VirtualEnclaveProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -283,6 +286,7 @@ interface Community {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<CommunityResource, CommunityProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -317,6 +321,7 @@ interface CatalogInterface {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<CatalogResource, CatalogProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -335,6 +340,7 @@ interface InternalConnections {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     InternalConnection,
     InternalConnectionProperties
@@ -357,6 +363,7 @@ interface TransitHub {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<TransitHubResource, TransitHubProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -376,6 +383,7 @@ interface EnclaveConnection {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     EnclaveConnectionResource,
     EnclaveConnectionProperties
@@ -415,6 +423,7 @@ interface EnclaveEndpoints {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     EnclaveEndpointResource,
     EnclaveEndpointProperties
@@ -454,6 +463,7 @@ interface CommunityEndpoints {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     CommunityEndpointResource,
     CommunityEndpointProperties
@@ -492,6 +502,7 @@ interface ExternalConnections {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     ExternalConnection,
     ExternalConnectionProperties
@@ -515,6 +526,7 @@ interface Approval {
       ArmAsyncOperationHeader
   >;
   listByParent is ArmResourceListByParent<ApprovalResource>;
+  @parameterVisibility
   update is ArmCustomPatchAsync<ApprovalResource, ApprovalProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;
   @doc("Upon receiving approval or rejection from approver, this facilitates actions on approval resource")
