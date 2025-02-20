@@ -99,15 +99,13 @@ function Get-ImpactedTypespecProjects {
     
     if ($configFilesInTypeSpecProjects) {
       foreach($configFilesInTypeSpecProject in $configFilesInTypeSpecProjects) {
-        $maintsp = Get-ChildItem -Path $($configFilesInTypeSpecProject.Directory.FullName) -File "main.tsp"
-        $clienttsp = Get-ChildItem -Path $($configFilesInTypeSpecProject.Directory.FullName) -File "client.tsp"
-        $entryPointFile = $maintsp ? $maintsp : $clienttsp
+        $entryPointFile = Get-ChildItem -Path $($configFilesInTypeSpecProject.Directory.FullName) -File "main.tsp"
         if ($entryPointFile) {
           Write-Host "Found $($configFilesInTypeSpecProject.Name) and $($entryPointFile.Name) in directory $($configFilesInTypeSpecProject.Directory.FullName)"
           return $configFilesInTypeSpecProject.Directory.FullName
         }
         else {
-          Write-Host "Did not find main.tsp nor client.tsp in directory $($configFilesInTypeSpecProject.Directory.FullName)"
+          Write-Host "Did not find main.tsp in directory $($configFilesInTypeSpecProject.Directory.FullName)"
         }
       }
     }
