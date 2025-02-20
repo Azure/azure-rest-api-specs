@@ -50,20 +50,21 @@ interface ManagedClusterCodeVersionResults {
   /**
    * Gets information about an available Service Fabric cluster code version by environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @operationId("ManagedClusterVersion_GetByEnvironment")
   getByEnvironment is ManagedClusterCodeVersionResultOps.Read<ManagedClusterCodeVersionResult>;
 
   /**
    * Gets all available code versions for Service Fabric cluster resources by environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @operationId("ManagedClusterVersion_ListByEnvironment")
   listByEnvironment is ManagedClusterCodeVersionResultOps.List<
     ManagedClusterCodeVersionResult,
-    Response = OkResponse
+    Response = ManagedClusterCodeVersionListResult
   >;
 }
+
 @armResourceOperations
 interface ManagedClusterVersionOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -93,7 +94,7 @@ interface ManagedClusterVersion {
    */
   list is ManagedClusterVersionOps.List<
     ManagedClusterCodeVersionResult,
-    Response = OkResponse
+    Response = ManagedClusterCodeVersionListResult
   >;
 }
 
@@ -101,3 +102,13 @@ interface ManagedClusterVersion {
 @@doc(ManagedClusterCodeVersionResult.properties,
   "The detail of the Service Fabric runtime version result"
 );
+
+/**
+ * The list results of the Service Fabric runtime versions.
+ */
+model ManagedClusterCodeVersionListResult {
+  /**
+   *  The list results of the Service Fabric runtime versions.
+   */
+  @body body: ManagedClusterCodeVersionResult[];
+}

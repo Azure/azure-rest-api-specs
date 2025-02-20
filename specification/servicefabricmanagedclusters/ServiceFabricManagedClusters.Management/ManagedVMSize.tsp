@@ -13,6 +13,7 @@ namespace Microsoft.ServiceFabric;
 /**
  * Describes a VM Sizes.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well-known abbreviation"
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
 model ManagedVMSize is Azure.ResourceManager.ProxyResource<VMSize> {
@@ -24,26 +25,23 @@ model ManagedVMSize is Azure.ResourceManager.ProxyResource<VMSize> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well-known abbreviation"
 @armResourceOperations
 interface ManagedVMSizes {
   /**
    * Get unsupported vm size for Service Fabric Managed Clusters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @operationId("managedUnsupportedVMSizes_Get")
-  get is ArmResourceRead<
-    ManagedVMSize,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  get is ArmResourceRead<ManagedVMSize>;
 
   /**
    * Get the lists of unsupported vm sizes for Service Fabric Managed Clusters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @operationId("managedUnsupportedVMSizes_List")
   list is ArmResourceListByParent<
     ManagedVMSize,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmResponse<ManagedVMSizesResult>
   >;
 }

@@ -44,7 +44,7 @@
       "name": "ApplicationResources"
     },
     {
-      "name": "ApplicationTypeResources"
+      "name": "ApplicationTypes"
     },
     {
       "name": "ApplicationTypeVersionResources"
@@ -96,7 +96,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The list results of the Service Fabric runtime versions.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ManagedClusterCodeVersionResult"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -270,7 +276,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The list results of the Service Fabric runtime versions.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ManagedClusterCodeVersionResult"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -463,7 +475,7 @@
       "get": {
         "operationId": "ApplicationTypes_List",
         "tags": [
-          "ApplicationTypeResources"
+          "ApplicationTypes"
         ],
         "description": "Gets all application type name resources created or in the process of being created in the Service Fabric managed cluster resource.",
         "parameters": [
@@ -505,7 +517,7 @@
       "get": {
         "operationId": "ApplicationTypes_Get",
         "tags": [
-          "ApplicationTypeResources"
+          "ApplicationTypes"
         ],
         "description": "Get a Service Fabric application type name resource created or in the process of being created in the Service Fabric managed cluster resource.",
         "parameters": [
@@ -549,7 +561,7 @@
       "put": {
         "operationId": "ApplicationTypes_CreateOrUpdate",
         "tags": [
-          "ApplicationTypeResources"
+          "ApplicationTypes"
         ],
         "description": "Create or update a Service Fabric managed application type name resource with the specified name.",
         "parameters": [
@@ -602,7 +614,7 @@
       "patch": {
         "operationId": "ApplicationTypes_Update",
         "tags": [
-          "ApplicationTypeResources"
+          "ApplicationTypes"
         ],
         "description": "Updates the tags of an application type resource of a given managed cluster.",
         "parameters": [
@@ -655,7 +667,7 @@
       "delete": {
         "operationId": "ApplicationTypes_Delete",
         "tags": [
-          "ApplicationTypeResources"
+          "ApplicationTypes"
         ],
         "description": "Delete a Service Fabric managed application type name resource with the specified name.",
         "parameters": [
@@ -677,9 +689,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -2056,9 +2065,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
