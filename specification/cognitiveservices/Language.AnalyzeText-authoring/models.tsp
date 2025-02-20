@@ -147,7 +147,7 @@ union JobStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("TextAnalysisAuthoringSentiment", "csharp")
+@clientName("TextAuthoringSentiment", "csharp")
 union Sentiment {
   string,
   positive: "positive",
