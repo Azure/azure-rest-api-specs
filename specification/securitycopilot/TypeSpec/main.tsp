@@ -3,7 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./SkillContext/routes.tsp";
 import "./SkillContext/models.tsp";
-import "./ECSFlightClient/models.tsp"
+import "./ECSFlightClient/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
