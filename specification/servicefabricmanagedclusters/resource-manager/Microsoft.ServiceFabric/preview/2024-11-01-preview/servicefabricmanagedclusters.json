@@ -41,7 +41,7 @@
   },
   "tags": [
     {
-      "name": "ApplicationResources"
+      "name": "Applications"
     },
     {
       "name": "ApplicationTypes"
@@ -1037,7 +1037,7 @@
       "get": {
         "operationId": "Applications_List",
         "tags": [
-          "ApplicationResources"
+          "Applications"
         ],
         "description": "Gets all managed application resources created or in the process of being created in the Service Fabric cluster resource.",
         "parameters": [
@@ -1079,7 +1079,7 @@
       "get": {
         "operationId": "Applications_Get",
         "tags": [
-          "ApplicationResources"
+          "Applications"
         ],
         "description": "Get a Service Fabric managed application resource created or in the process of being created in the Service Fabric cluster resource.",
         "parameters": [
@@ -1123,7 +1123,7 @@
       "put": {
         "operationId": "Applications_CreateOrUpdate",
         "tags": [
-          "ApplicationResources"
+          "Applications"
         ],
         "description": "Create or update a Service Fabric managed application resource with the specified name.",
         "parameters": [
@@ -1200,7 +1200,7 @@
       "patch": {
         "operationId": "Applications_Update",
         "tags": [
-          "ApplicationResources"
+          "Applications"
         ],
         "description": "Updates the tags of an application resource of a given managed cluster.",
         "parameters": [
@@ -1253,7 +1253,7 @@
       "delete": {
         "operationId": "Applications_Delete",
         "tags": [
-          "ApplicationResources"
+          "Applications"
         ],
         "description": "Delete a Service Fabric managed application resource with the specified name.",
         "parameters": [
@@ -1275,9 +1275,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -1317,7 +1314,7 @@
       "post": {
         "operationId": "Applications_ReadUpgrade",
         "tags": [
-          "ApplicationResources"
+          "Applications"
         ],
         "description": "Get the status of the latest application upgrade. It will query the cluster to find the status of the latest application upgrade.",
         "parameters": [
@@ -1353,9 +1350,6 @@
               }
             }
           },
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1378,7 +1372,7 @@
       "post": {
         "operationId": "Applications_ResumeUpgrade",
         "tags": [
-          "ApplicationResources"
+          "Applications"
         ],
         "description": "Send a request to resume the current application upgrade. This will resume the application upgrade from where it was paused.",
         "parameters": [
@@ -1422,9 +1416,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1763,7 +1754,7 @@
       "post": {
         "operationId": "Applications_StartRollback",
         "tags": [
-          "ApplicationResources"
+          "Applications"
         ],
         "description": "Send a request to start a rollback of the current application upgrade. This will start rolling back the application to the previous version.",
         "parameters": [
@@ -1798,9 +1789,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
