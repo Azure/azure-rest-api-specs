@@ -93,7 +93,7 @@ model AwsEcrImageDetailProperties {
   imageSizeInBytes?: int64;
 
   @doc("<p>The list of tags associated with this image.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   imageTags?: string[];
 
   @doc("<p>The date and time, expressed in standard JavaScript date format, when Amazon ECR recorded the last image pull.</p> <note> <p>Amazon ECR refreshes the last image pull timestamp at least once every 24 hours. For example, if you pull an image once a day then the <code>lastRecordedPullTime</code> timestamp will indicate the exact time that the image was last pulled. However, if you pull an image once an hour, because Amazon ECR refreshes the <code>lastRecordedPullTime</code> timestamp at least once every 24 hours, the result may not be the exact time that the image was last pulled.</p> </note>")

@@ -105,7 +105,7 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   ipAddressType?: string;
 
   @doc("The Amazon Resource Names (ARNs) of the load balancers that route traffic to this target group.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   loadBalancerArns?: string[];
 
   @doc("[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target.")
@@ -124,14 +124,14 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   protocolVersion?: string;
 
   @doc("The tags.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The ARN of the Target Group")
   targetGroupArn?: string;
 
   @doc("The attributes.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   targetGroupAttributes?: TargetGroupAttribute[];
 
   @doc("The full name of the target group.")
@@ -144,7 +144,7 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   targetType?: string;
 
   @doc("The targets.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   targets?: TargetDescription[];
 
   @doc("The number of consecutive health check failures required before considering a target unhealthy.")

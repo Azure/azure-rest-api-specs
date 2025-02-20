@@ -186,8 +186,7 @@ model VirtualMachineScaleSetOSProfile {
    * or the [Azure Key Vault virtual machine extension for
    * Windows](https://learn.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "id exists inside sourceVault"
-  @OpenAPI.extension("x-ms-identifiers", ["sourceVault/id"])
+  @identifier(#["sourceVault/id"])
   secrets?: VaultSecretGroup[];
 
   /**
@@ -236,7 +235,7 @@ model WindowsConfiguration {
    * Specifies additional base-64 encoded XML formatted information that can be
    * included in the Unattend.xml file, which is used by Windows Setup.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   additionalUnattendContent?: AdditionalUnattendContent[];
 
   /**
@@ -360,7 +359,7 @@ model WinRMConfiguration {
   /**
    * The list of Windows Remote Management listeners
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   listeners?: WinRMListener[];
 }
 
@@ -438,7 +437,7 @@ model SshConfiguration {
   /**
    * The list of SSH public keys used to authenticate with linux based VMs.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["path"])
+  @identifier(#["path"])
   publicKeys?: SshPublicKey[];
 }
 
@@ -524,7 +523,7 @@ model VaultSecretGroup {
   /**
    * The list of key vault references in SourceVault which contain certificates.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["certificateUrl"])
+  @identifier(#["certificateUrl"])
   vaultCertificates?: VaultCertificate[];
 }
 
@@ -598,7 +597,7 @@ model VirtualMachineScaleSetStorageProfile {
    * and VHDs for Azure virtual
    * machines](https://learn.microsoft.com/azure/virtual-machines/managed-disks-overview).
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "lun"])
+  @identifiers(#["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
   /**
@@ -921,7 +920,7 @@ model VirtualMachineScaleSetNetworkProfile {
   /**
    * The list of network configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   networkInterfaceConfigurations?: VirtualMachineScaleSetNetworkConfiguration[];
 
   /**
@@ -1150,7 +1149,7 @@ model VirtualMachineScaleSetPublicIPAddressConfigurationProperties {
   /**
    * The list of IP tags associated with the public IP address.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   ipTags?: VirtualMachineScaleSetIpTag[];
 
   /**
@@ -1572,7 +1571,7 @@ model ApplicationProfile {
   /**
    * Specifies the gallery applications that should be made available to the VM/VMSS
    */
-  @OpenAPI.extension("x-ms-identifiers", ["packageReferenceId"])
+  @identifiers(#["packageReferenceId"])
   galleryApplications?: VMGalleryApplication[];
 }
 

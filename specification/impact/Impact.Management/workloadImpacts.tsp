@@ -50,11 +50,11 @@ model WorkloadImpactProperties is ResourceProperties {
   impactDescription?: string;
 
   @doc("The ARM correlation ids, this is important field for control plane related impacts")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   armCorrelationIds?: string[];
 
   @doc("Details about performance issue. Applicable for performance impacts.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   performance?: Performance[];
 
   @doc("Details about connectivity issue. Applicable when root resource causing the issue is not identified. For example, when a VM is impacted due to a network issue, the impacted resource is identified as the VM, but the root cause is the network. In such cases, the connectivity field will have the details about the network issue")

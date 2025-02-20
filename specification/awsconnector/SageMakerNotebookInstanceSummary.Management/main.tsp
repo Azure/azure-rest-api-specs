@@ -80,7 +80,7 @@ model SageMakerNotebookInstanceSummaryProperties {
 @doc("Definition of awsSageMakerNotebookInstanceSummary")
 model AwsSageMakerNotebookInstanceSummaryProperties {
   @doc("<p>An array of up to three Git repositories associated with the notebook instance. These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in <a href='https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html'>Amazon Web Services CodeCommit</a> or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance. For more information, see <a href='https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html'>Associating Git Repositories with SageMaker Notebook Instances</a>.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   additionalCodeRepositories?: string[];
 
   @doc("<p>A timestamp that shows when the notebook instance was created.</p>")

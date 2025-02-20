@@ -206,7 +206,7 @@ model KafkaTopicMapProperties {
   partitionStrategy?: KafkaPartitionStrategy = KafkaPartitionStrategy.default;
 
   @doc("The route details for Kafka connector.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   routes: KafkaRoutes[];
 
   @visibility("read")
