@@ -20,14 +20,6 @@ model GroupProperties {
   /**
    * Provisioning state.
    */
-  @removed(Versions.v2024_10_01_preview)
-  @renamedFrom(Versions.v2024_10_01_preview, "provisioningState")
-  provisioningStateOld?: ProvisioningState;
-
-  /**
-   * Provisioning state.
-   */
-  @added(Versions.v2024_10_01_preview)
   @visibility("read")
   provisioningState?: ProvisioningState;
 
@@ -40,12 +32,13 @@ model GroupProperties {
   /**
    * This is the Type of the Group
    */
+  @visibility("read", "create")
   groupType: GroupType;
 
   /**
    * Date and time in UTC when the Group was created.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @visibility("read")
   createdDateTime: utcDateTime;
 }
 

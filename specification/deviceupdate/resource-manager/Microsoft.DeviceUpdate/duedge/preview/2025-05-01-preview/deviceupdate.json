@@ -4059,12 +4059,17 @@
         },
         "groupType": {
           "$ref": "#/definitions/GroupType",
-          "description": "This is the Type of the Group"
+          "description": "This is the Type of the Group",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time in UTC when the Group was created."
+          "description": "Date and time in UTC when the Group was created.",
+          "readOnly": true
         }
       },
       "required": [
@@ -4536,7 +4541,7 @@
         },
         "groupId": {
           "type": "string",
-          "description": "This is the ID of the Group",
+          "description": "This is the ID of the parent Group resource",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4544,20 +4549,22 @@
         },
         "deviceClassId": {
           "type": "string",
-          "description": "This is the Device Class ID of the Subgroup"
+          "description": "This is the Device Class ID of this Subgroup",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time in UTC when the Subgroup was created."
+          "description": "Date and time in UTC when the Subgroup was created.",
+          "readOnly": true
         },
-        "activeDeployments": {
-          "type": "array",
+        "activeDeployment": {
+          "$ref": "#/definitions/ActiveDeployment",
           "description": "The list of deployments for this Subgroup",
-          "items": {
-            "$ref": "#/definitions/ActiveDeployment"
-          },
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [

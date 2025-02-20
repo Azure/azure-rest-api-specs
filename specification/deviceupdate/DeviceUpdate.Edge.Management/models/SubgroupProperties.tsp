@@ -20,37 +20,30 @@ model SubgroupProperties {
   /**
    * Provisioning state.
    */
-  @removed(Versions.v2024_10_01_preview)
-  @renamedFrom(Versions.v2024_10_01_preview, "provisioningState")
-  provisioningStateOld?: ProvisioningState;
-
-  /**
-   * Provisioning state.
-   */
-  @added(Versions.v2024_10_01_preview)
   @visibility("read")
   provisioningState?: ProvisioningState;
 
   /**
-   * This is the ID of the Group
+   * This is the ID of the parent Group resource
    */
   @visibility("read", "create")
   groupId: string;
 
   /**
-   * This is the Device Class ID of the Subgroup
+   * This is the Device Class ID of this Subgroup
    */
+  @visibility("read", "create")
   deviceClassId: string;
 
   /**
    * Date and time in UTC when the Subgroup was created.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @visibility("read")
   createdDateTime: utcDateTime;
 
   /**
    * The list of deployments for this Subgroup
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
-  activeDeployments?: ActiveDeployment[];
+  @visibility("read")
+  activeDeployment?: ActiveDeployment;
 }
