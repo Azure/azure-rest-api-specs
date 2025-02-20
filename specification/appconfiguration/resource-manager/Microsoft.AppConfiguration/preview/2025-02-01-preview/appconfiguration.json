@@ -1600,8 +1600,8 @@
         "tags": [
           "Experimentation"
         ],
-        "description": "Creates the experimentation.",
-        "operationId": "Experimentation_Create",
+        "description": "Deletes the experimentation.",
+        "operationId": "Experimentation_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -1967,10 +1967,6 @@
         "telemetry": {
           "$ref": "#/definitions/TelemetryProperties",
           "description": "Property specifying the configuration of telemetry to update for this configuration store"
-        },
-        "experimentation": {
-          "$ref": "#/definitions/ExperimentationProperties",
-          "description": "Property specifying the configuration of experimentation to update for this configuration store"
         }
       }
     },
@@ -2851,6 +2847,7 @@
         "id": {
           "description": "The resource ID.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "name": {
