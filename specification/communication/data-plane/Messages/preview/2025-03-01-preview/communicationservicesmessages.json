@@ -99,7 +99,7 @@
             "format": "uuid"
           },
           {
-            "name": "maxpagesize",
+            "name": "maxPageSize",
             "in": "query",
             "description": "Number of objects to return per page.",
             "required": false,
@@ -154,7 +154,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "maxpagesize",
+            "name": "maxPageSize",
             "in": "query",
             "description": "Number of objects to return per page.",
             "required": false,
@@ -234,7 +234,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/Conversation"
+              "$ref": "#/definitions/CommunicationConversation"
             }
           },
           "default": {
@@ -278,7 +278,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Conversation"
+              "$ref": "#/definitions/CommunicationConversation"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -557,7 +557,7 @@
             "type": "string"
           },
           {
-            "name": "maxpagesize",
+            "name": "maxPageSize",
             "in": "query",
             "description": "Number of objects to return per page.",
             "required": false,
@@ -993,7 +993,7 @@
     }
   },
   "definitions": {
-    "AddParticipantsRequest": {
+    "AddParticipantsOptions": {
       "type": "object",
       "description": "Request payload for adding participants to a conversation.",
       "properties": {
@@ -1001,7 +1001,7 @@
           "type": "array",
           "description": "List of participants to add.",
           "items": {
-            "$ref": "#/definitions/Participant"
+            "$ref": "#/definitions/ConversationParticipant"
           }
         }
       },
@@ -1017,7 +1017,7 @@
           "type": "array",
           "description": "List of Ids with Errors if failed to be added",
           "items": {
-            "$ref": "#/definitions/ParticipantsResult"
+            "$ref": "#/definitions/UpdateParticipantsResult"
           }
         }
       },
@@ -1160,6 +1160,42 @@
       ],
       "x-ms-discriminator-value": "communication"
     },
+    "CommunicationConversation": {
+      "type": "object",
+      "description": "A conversation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The conversation ID.",
+          "readOnly": true
+        },
+        "topic": {
+          "type": "string",
+          "description": "The conversation topic."
+        },
+        "deliveryChannelIds": {
+          "type": "array",
+          "description": "List of delivery channel IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outboundDeliveryStrategy": {
+          "$ref": "#/definitions/OutboundDeliveryStrategyKind",
+          "description": "Outbound delivery strategy for the conversation."
+        },
+        "participants": {
+          "type": "array",
+          "description": "List of participants involved in the conversation.",
+          "items": {
+            "$ref": "#/definitions/ConversationParticipant"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "CommunicationMessageKind": {
       "type": "string",
       "description": "The type of message.",
@@ -1251,42 +1287,6 @@
         "kind"
       ]
     },
-    "Conversation": {
-      "type": "object",
-      "description": "A conversation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The conversation ID.",
-          "readOnly": true
-        },
-        "topic": {
-          "type": "string",
-          "description": "The conversation topic."
-        },
-        "deliveryChannelIds": {
-          "type": "array",
-          "description": "List of delivery channel IDs.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "outboundDeliveryStrategy": {
-          "$ref": "#/definitions/OutboundDeliveryStrategyKind",
-          "description": "Outbound delivery strategy for the conversation."
-        },
-        "participants": {
-          "type": "array",
-          "description": "List of participants involved in the conversation.",
-          "items": {
-            "$ref": "#/definitions/Participant"
-          }
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
     "ConversationMessageContent": {
       "type": "object",
       "description": "Details of the conversation message content.",
@@ -1340,12 +1340,36 @@
         "createdOn"
       ]
     },
+    "ConversationParticipant": {
+      "type": "object",
+      "description": "Advanced Messaging conversation participant.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Participant Identifier.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Participant display name."
+        },
+        "kind": {
+          "$ref": "#/definitions/ParticipantKind",
+          "description": "The type discriminator describing a participant type."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "id",
+        "kind"
+      ]
+    },
     "CreateConversationRequest": {
       "type": "object",
       "description": "Request payload for creating a conversation.",
       "properties": {
         "conversation": {
-          "$ref": "#/definitions/Conversation",
+          "$ref": "#/definitions/CommunicationConversation",
           "description": "The conversation details.",
           "x-ms-mutability": [
             "create"
@@ -1416,7 +1440,7 @@
       ],
       "x-ms-discriminator-value": "document"
     },
-    "ExternalParticipant": {
+    "ExternalConversationParticipant": {
       "type": "object",
       "description": "External conversation participant.",
       "properties": {
@@ -1433,7 +1457,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Participant"
+          "$ref": "#/definitions/ConversationParticipant"
         }
       ],
       "x-ms-discriminator-value": "External"
@@ -1499,7 +1523,7 @@
       ],
       "x-ms-discriminator-value": "image"
     },
-    "InternalParticipant": {
+    "InternalConversationParticipant": {
       "type": "object",
       "description": "Internal conversation participant.",
       "properties": {
@@ -1513,7 +1537,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Participant"
+          "$ref": "#/definitions/ConversationParticipant"
         }
       ],
       "x-ms-discriminator-value": "internal"
@@ -2014,7 +2038,7 @@
           "type": "array",
           "description": "The Conversation items on this page",
           "items": {
-            "$ref": "#/definitions/Conversation"
+            "$ref": "#/definitions/CommunicationConversation"
           }
         },
         "nextLink": {
@@ -2070,30 +2094,6 @@
         "value"
       ]
     },
-    "Participant": {
-      "type": "object",
-      "description": "Advanced Messaging conversation participant.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Participant Identifier.",
-          "readOnly": true
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Participant display name."
-        },
-        "kind": {
-          "$ref": "#/definitions/ParticipantKind",
-          "description": "The type discriminator describing a participant type."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "id",
-        "kind"
-      ]
-    },
     "ParticipantKind": {
       "type": "string",
       "description": "The type of a participant in a threaded conversation.",
@@ -2118,24 +2118,7 @@
         ]
       }
     },
-    "ParticipantsResult": {
-      "type": "object",
-      "description": "Response for the remove participants operation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Participant User Id."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error of the participant operation."
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
-    "RemoveParticipantsRequest": {
+    "RemoveParticipantsOptions": {
       "type": "object",
       "description": "Request payload for removing participants from a conversation.",
       "properties": {
@@ -2159,7 +2142,7 @@
           "type": "array",
           "description": "List of Ids with Errors if failed to be added",
           "items": {
-            "$ref": "#/definitions/ParticipantsResult"
+            "$ref": "#/definitions/UpdateParticipantsResult"
           }
         }
       },
@@ -2167,7 +2150,7 @@
         "invalidParticipants"
       ]
     },
-    "SendConversationMessageRequest": {
+    "SendConversationMessageOptions": {
       "type": "object",
       "description": "Request payload for sending a conversation message.",
       "properties": {
@@ -2289,6 +2272,23 @@
         }
       ],
       "x-ms-discriminator-value": "text"
+    },
+    "UpdateParticipantsResult": {
+      "type": "object",
+      "description": "Response for the remove participants operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Participant User Id."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error of the participant operation."
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "VideoConversationMessageContent": {
       "type": "object",
@@ -2470,7 +2470,7 @@
       "description": "Details of the payload for adding participants to a conversation.",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/AddParticipantsRequest"
+        "$ref": "#/definitions/AddParticipantsOptions"
       },
       "x-ms-parameter-location": "method"
     },
@@ -2519,7 +2519,7 @@
       "description": "Details of the conversation message to send.",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/SendConversationMessageRequest"
+        "$ref": "#/definitions/SendConversationMessageOptions"
       },
       "x-ms-parameter-location": "method"
     },
@@ -2539,7 +2539,7 @@
       "description": "Details of the request body for removing participants from a conversation.",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/RemoveParticipantsRequest"
+        "$ref": "#/definitions/RemoveParticipantsOptions"
       },
       "x-ms-parameter-location": "method"
     }

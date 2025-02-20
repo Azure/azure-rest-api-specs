@@ -86,7 +86,7 @@ interface ConversationMessagesOperations {
   @added(Versions.c2025_03_01_Preview)
   @action("add")
   addParticipants is Operations.ResourceCollectionAction<
-    Participant,
+    ConversationParticipant,
     AddParticipantsRequestBody,
     Response<207> & AddParticipantsResult
   >;
@@ -96,7 +96,7 @@ interface ConversationMessagesOperations {
   @added(Versions.c2025_03_01_Preview)
   @action("remove")
   removeParticipants is Operations.ResourceCollectionAction<
-    Participant,
+    ConversationParticipant,
     RemoveParticipantsRequestBody,
     Response<207> & RemoveParticipantsResult
   >;

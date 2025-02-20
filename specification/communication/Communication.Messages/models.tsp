@@ -440,7 +440,7 @@ model MessageTemplateItem {
 alias CommonListParams = {
   @doc("Number of objects to return per page.")
   @query
-  maxpagesize?: int32;
+  maxPageSize?: int32;
 };
 
 alias ListTemplatesQueryParams = ListQueryParametersTrait<{
@@ -501,7 +501,7 @@ model Message {
 @resource("participants") // participants add/remove
 @parentResource(Conversation)
 @doc("Advanced Messaging conversation participant.")
-model Participant {
+model ConversationParticipant {
   @key("participantId")
   @visibility("read")
   @doc("Participant Identifier.")
@@ -516,7 +516,7 @@ model Participant {
 
 @added(Versions.c2025_03_01_Preview)
 @doc("Internal conversation participant.")
-model InternalParticipant extends Participant {
+model InternalConversationParticipant extends ConversationParticipant {
   @doc("Participant type is internal.")
   kind: ParticipantKind.internal;
 
@@ -526,7 +526,7 @@ model InternalParticipant extends Participant {
 
 @added(Versions.c2025_03_01_Preview)
 @doc("External conversation participant.")
-model ExternalParticipant extends Participant {
+model ExternalConversationParticipant extends ConversationParticipant {
   @doc("Participant type is external.")
   kind: ParticipantKind.external;
 
@@ -548,7 +548,7 @@ union ParticipantKind {
 
 @added(Versions.c2025_03_01_Preview)
 @doc("Request payload for sending a conversation message.")
-model SendConversationMessageRequest {
+model SendConversationMessageOptions {
   @doc("Details of a send conversation message request.")
   request: ConversationMessageContent;
 
@@ -586,6 +586,7 @@ model CreateConversationResult {
 @added(Versions.c2025_03_01_Preview)
 @resource("messages/conversations")
 @doc("A conversation.")
+@clientName("CommunicationConversation")
 model Conversation {
   @key("conversationId")
   @visibility("read") // this model is only used as a parameter
@@ -604,7 +605,7 @@ model Conversation {
 
   @added(Versions.c2025_03_01_Preview)
   @doc("List of participants involved in the conversation.")
-  participants?: Participant[];
+  participants?: ConversationParticipant[];
 }
 
 @added(Versions.c2025_03_01_Preview)
@@ -612,7 +613,7 @@ model Conversation {
 model ConversationMessagesSendRequestBody {
   @doc("Details of the conversation message to send.")
   @bodyRoot
-  body: SendConversationMessageRequest;
+  body: SendConversationMessageOptions;
 }
 
 @added(Versions.c2025_03_01_Preview)
@@ -620,7 +621,7 @@ model ConversationMessagesSendRequestBody {
 model AddParticipantsRequestBody {
   @doc("Details of the payload for adding participants to a conversation.")
   @bodyRoot
-  body: AddParticipantsRequest;
+  body: AddParticipantsOptions;
 }
 
 @added(Versions.c2025_03_01_Preview)
@@ -628,26 +629,26 @@ model AddParticipantsRequestBody {
 model RemoveParticipantsRequestBody {
   @doc("Details of the request body for removing participants from a conversation.")
   @bodyRoot
-  body: RemoveParticipantsRequest;
+  body: RemoveParticipantsOptions;
 }
 
 @added(Versions.c2025_03_01_Preview)
 @doc("Response for the add participants operation.")
 model AddParticipantsResult {
   @doc("List of Ids with Errors if failed to be added")
-  invalidParticipants: ParticipantsResult[];
+  invalidParticipants: UpdateParticipantsResult[];
 }
 
 @added(Versions.c2025_03_01_Preview)
 @doc("Response for the remove participants operation.")
 model RemoveParticipantsResult {
   @doc("List of Ids with Errors if failed to be added")
-  invalidParticipants: ParticipantsResult[];
+  invalidParticipants: UpdateParticipantsResult[];
 }
 
 @added(Versions.c2025_03_01_Preview)
 @doc("Response for the remove participants operation.")
-model ParticipantsResult {
+model UpdateParticipantsResult {
   @doc("Participant User Id.")
   id: string;
 
@@ -737,14 +738,14 @@ union MessagePlatformKind {
 
 @added(Versions.c2025_03_01_Preview)
 @doc("Request payload for adding participants to a conversation.")
-model AddParticipantsRequest {
+model AddParticipantsOptions {
   @doc("List of participants to add.")
-  participants: Participant[];
+  participants: ConversationParticipant[];
 }
 
 @added(Versions.c2025_03_01_Preview)
 @doc("Request payload for removing participants from a conversation.")
-model RemoveParticipantsRequest {
+model RemoveParticipantsOptions {
   @doc("The participant IDs to remove.")
   participantIds: string[];
 }

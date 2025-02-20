@@ -30,10 +30,10 @@ interface MessageTemplateClient
 
 @added(Azure.Communication.MessagesService.Versions.c2025_03_01_Preview)
 @client({
-  name: "ConversationManagementClient",
+  name: "ConversationAdministrationClient",
   service: Azure.Communication.MessagesService,
 })
-interface ConversationManagementClient
+interface ConversationAdministrationClient
   extends Azure.Communication.MessagesService.ConversationManagementOperations {
     listConversations is Azure.Communication.MessagesService.ConversationMessagesOperations.listConversations;
     listMessages is Azure.Communication.MessagesService.ConversationMessagesOperations.listMessages;
@@ -44,10 +44,10 @@ interface ConversationManagementClient
 
 @added(Azure.Communication.MessagesService.Versions.c2025_03_01_Preview)
 @client({
-  name: "ConversationMessagesClient",
+  name: "ConversationThreadClient",
   service: Azure.Communication.MessagesService,
 })
-interface ConversationMessagesClient
+interface ConversationThreadClient
   extends Azure.Communication.MessagesService.ConversationMessagesOperations {}
 
 @@access(Azure.Communication.MessagesService.MessageDataStream,
