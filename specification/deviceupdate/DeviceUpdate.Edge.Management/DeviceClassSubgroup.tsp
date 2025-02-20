@@ -21,7 +21,8 @@ namespace Microsoft.DeviceUpdate;
  */
 @parentResource(Group)
 @added(Versions.v2025_05_01_preview)
-model DeviceClassSubgroup is Azure.ResourceManager.TrackedResource<DeviceClassSubgroupProperties> {
+model DeviceClassSubgroup
+  is Azure.ResourceManager.TrackedResource<DeviceClassSubgroupProperties> {
   ...ResourceNameParameter<
     Resource = DeviceClassSubgroup,
     KeyName = "subgroupName",
@@ -63,15 +64,21 @@ interface DeviceClassSubgroups {
 @@maxLength(DeviceClassSubgroup.name, 255);
 @@minLength(DeviceClassSubgroup.name, 1);
 @@doc(DeviceClassSubgroup.name, "DeviceClassSubgroup Name");
-@@doc(DeviceClassSubgroups.create::parameters.resource, "DeviceClassSubgroup details.");
+@@doc(DeviceClassSubgroups.create::parameters.resource,
+  "DeviceClassSubgroup details."
+);
 @@doc(DeviceClassSubgroups.update::parameters.properties, "Updated tags.");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@clientName(DeviceClassSubgroups.create::parameters.resource, "deviceclasssubgroup");
+@@clientName(DeviceClassSubgroups.create::parameters.resource,
+  "deviceclasssubgroup"
+);
 
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(DeviceClassSubgroups.update::parameters.properties,
   "application/json",
   "tagUpdatePayload"
 );
-@@clientName(DeviceClassSubgroups.update::parameters.properties, "tagUpdatePayload");
+@@clientName(DeviceClassSubgroups.update::parameters.properties,
+  "tagUpdatePayload"
+);
