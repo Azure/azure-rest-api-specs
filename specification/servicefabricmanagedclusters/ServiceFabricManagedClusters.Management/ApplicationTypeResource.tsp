@@ -42,6 +42,7 @@ interface ApplicationTypes {
   /**
    * Updates the tags of an application type resource of a given managed cluster.
    */
+  @parameterVisibility
   update is ArmCustomPatchSync<
     ApplicationTypeResource,
     PatchModel = ApplicationTypeUpdateParameters
