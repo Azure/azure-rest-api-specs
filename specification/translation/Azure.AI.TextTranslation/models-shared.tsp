@@ -19,6 +19,8 @@ alias CommonParameters = {
 model InputTextItem {
   @doc("Text to translate.")
   text: string;
+  @doc("Text field allowing a natural language description of the needed translation")
+  instruction?: string;
 }
 
 alias CommonResultHeaders = {
