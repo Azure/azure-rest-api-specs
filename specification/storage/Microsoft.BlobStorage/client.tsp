@@ -31,3 +31,6 @@ model BlobServiceClientParameters {
 @@clientName(BlobPropertiesInternal.immutabilityPolicyUntilDate,
   "ImmutabilityPolicyExpiresOn"
 );
+
+@@clientName(MetadataHeaders, "metadata", "rust");
+@@clientName(ObjectReplicationHeaders, "objectReplicationHeaders", "rust");
