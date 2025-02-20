@@ -629,7 +629,7 @@ model AddParticipantsRequestBody {
 model RemoveParticipantsRequestBody {
   @doc("Details of the request body for removing participants from a conversation.")
   @bodyRoot
-  body: RemoveParticipantsOptions;
+  options: RemoveParticipantsOptions;
 }
 
 @added(Versions.c2025_03_01_Preview)
