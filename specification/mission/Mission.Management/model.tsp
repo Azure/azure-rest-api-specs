@@ -199,7 +199,7 @@ interface Workload {
       ArmAsyncOperationHeader
   >;
   @parameterVisibility
-  update is ArmCustomPatchAsync<WorkloadResource, WorkloadProperties>;
+  update is ArmCustomPatchAsync<WorkloadResource, WorkloadResource>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<WorkloadResource>;
@@ -218,7 +218,7 @@ interface Endpoint {
       ArmAsyncOperationHeader
   >;
   @parameterVisibility
-  update is ArmCustomPatchAsync<EndpointResource, EndpointProperties>;
+  update is ArmCustomPatchAsync<EndpointResource, EndpointResource>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<EndpointResource>;
@@ -237,7 +237,7 @@ interface VirtualEnclave {
       ArmAsyncOperationHeader
   >;
   @parameterVisibility
-  update is ArmCustomPatchAsync<EnclaveResource, VirtualEnclaveProperties>;
+  update is ArmCustomPatchAsync<EnclaveResource, EnclaveResource>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<EnclaveResource>;
@@ -287,7 +287,7 @@ interface Community {
       ArmAsyncOperationHeader
   >;
   @parameterVisibility
-  update is ArmCustomPatchAsync<CommunityResource, CommunityProperties>;
+  update is ArmCustomPatchAsync<CommunityResource, CommunityResource>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<CommunityResource>;
@@ -322,7 +322,7 @@ interface CatalogInterface {
       ArmAsyncOperationHeader
   >;
   @parameterVisibility
-  update is ArmCustomPatchAsync<CatalogResource, CatalogProperties>;
+  update is ArmCustomPatchAsync<CatalogResource, CatalogResource>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<CatalogResource>;
@@ -341,10 +341,7 @@ interface InternalConnections {
       ArmAsyncOperationHeader
   >;
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    InternalConnection,
-    InternalConnectionProperties
-  >;
+  update is ArmCustomPatchAsync<InternalConnection, InternalConnection>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<InternalConnection>;
@@ -364,7 +361,7 @@ interface TransitHub {
       ArmAsyncOperationHeader
   >;
   @parameterVisibility
-  update is ArmCustomPatchAsync<TransitHubResource, TransitHubProperties>;
+  update is ArmCustomPatchAsync<TransitHubResource, TransitHubResource>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<TransitHubResource>;
@@ -386,7 +383,7 @@ interface EnclaveConnection {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     EnclaveConnectionResource,
-    EnclaveConnectionProperties
+    EnclaveConnectionResource
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -426,7 +423,7 @@ interface EnclaveEndpoints {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     EnclaveEndpointResource,
-    EnclaveEndpointProperties
+    EnclaveEndpointResource
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -466,7 +463,7 @@ interface CommunityEndpoints {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     CommunityEndpointResource,
-    CommunityEndpointProperties
+    CommunityEndpointResource
   >;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
@@ -503,10 +500,7 @@ interface ExternalConnections {
       ArmAsyncOperationHeader
   >;
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    ExternalConnection,
-    ExternalConnectionProperties
-  >;
+  update is ArmCustomPatchAsync<ExternalConnection, ExternalConnection>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<ExternalConnection>;
@@ -527,7 +521,7 @@ interface Approval {
   >;
   listByParent is ArmResourceListByParent<ApprovalResource>;
   @parameterVisibility
-  update is ArmCustomPatchAsync<ApprovalResource, ApprovalProperties>;
+  update is ArmCustomPatchAsync<ApprovalResource, ApprovalResource>;
   delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;
   @doc("Upon receiving approval or rejection from approver, this facilitates actions on approval resource")
   @armResourceAction(ApprovalResource)
