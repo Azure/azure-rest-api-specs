@@ -26,36 +26,30 @@ model ApplicationTypeVersionResource
 }
 
 @armResourceOperations
-interface ApplicationTypeVersionResources {
+interface ApplicationTypeVersions {
   /**
    * Get a Service Fabric managed application type version resource created or in the process of being created in the Service Fabric managed application type name resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApplicationTypeVersions_Get")
   get is ArmResourceRead<ApplicationTypeVersionResource>;
 
   /**
    * Create or update a Service Fabric managed application type version resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("ApplicationTypeVersions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Day 0 Property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ApplicationTypeVersionResource,
     Response = ArmResourceUpdatedResponse<ApplicationTypeVersionResource> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: ApplicationTypeVersionResource;
     }),
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   /**
    * Updates the tags of an application type version resource of a given managed cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
-  @operationId("ApplicationTypeVersions_Update")
   update is ArmCustomPatchSync<
     ApplicationTypeVersionResource,
     PatchModel = ApplicationTypeVersionUpdateParameters
@@ -64,19 +58,14 @@ interface ApplicationTypeVersionResources {
   /**
    * Delete a Service Fabric managed application type version resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("ApplicationTypeVersions_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ApplicationTypeVersionResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
    * Gets all application type version resources created or in the process of being created in the Service Fabric managed application type name resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApplicationTypeVersions_ListByApplicationTypes")
   listByApplicationTypes is ArmResourceListByParent<
     ApplicationTypeVersionResource,
     Response = ArmResponse<ApplicationTypeVersionResourceList>
@@ -87,9 +76,9 @@ interface ApplicationTypeVersionResources {
 @@doc(ApplicationTypeVersionResource.properties,
   "The properties of the application type version resource."
 );
-@@doc(ApplicationTypeVersionResources.createOrUpdate::parameters.resource,
+@@doc(ApplicationTypeVersions.createOrUpdate::parameters.resource,
   "The application type version resource."
 );
-@@doc(ApplicationTypeVersionResources.update::parameters.properties,
+@@doc(ApplicationTypeVersions.update::parameters.properties,
   "The application type version resource updated tags."
 );
