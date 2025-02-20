@@ -37,6 +37,9 @@ directive:
   - suppress: XmsPageableForListCalls
     from: sites.json
     reason: false-positive issue reported in Lintdiff. Because GET /providers/Microsoft.Edge/siteAwareResourceTypes/default isn't a list call and supposed to return single resource named default. Reference - [TypeSpec False Positives] EvenSegmentedPathForPutOperation and XmsPageableForListCalls with @singleton · Issue #646 · Azure/azure-openapi-validator (github.com)
+  - suppress: AvoidAdditionalProperties
+    from: sites.json
+    reason: labels describe user defined tags to be used on Sites.
 ```
 
 ## Configuration
