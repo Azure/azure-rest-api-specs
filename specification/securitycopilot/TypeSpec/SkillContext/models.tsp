@@ -838,5 +838,11 @@ namespace SkillContext
         region: string;
         @doc("Ring of the ECSFlight.")
         ring: string;
+		@doc("Name of the skillset")
+		skillsetName: string;
+		@doc("Name of the skill")
+		skillName: string;
+		@doc("Source of the skillset")
+		source:string;
     }
 }
