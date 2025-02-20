@@ -1,0 +1,59 @@
+{
+  "operationId": "MysqlServers_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-09-30-preview",
+    "body": {
+      "properties": {
+        "hostIp": [
+          "127.0.0.1",
+          "127.0.0.2"
+        ],
+        "hostName": "test.mysql.server",
+        "machineId": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourcegroups/demoRG/providers/Microsoft.OffAzure/serverSites/xxx/machines/xxx",
+        "mysqlVersion": "8.0",
+        "numberOfDatabase": 16,
+        "portNumber": "3306",
+        "supportStatus": "Mainstream"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "serverName": "testServerName",
+    "siteName": "testSite",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "MysqlServers_Create",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testServerName",
+        "type": "Microsoft.MySQLDiscovery/MySQLSites/MySQLServers",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.MySQLDiscovery/MySQLSites/testSite/MySQLServers/testServerName",
+        "properties": {
+          "hostName": "test.mysql.server",
+          "machineId": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourcegroups/demoRG/providers/Microsoft.OffAzure/serverSites/xxx/machines/xxx",
+          "mysqlVersion": "8.0",
+          "numberOfDatabase": 16,
+          "portNumber": "3306",
+          "provisioningState": "Succeeded",
+          "supportStatus": "Mainstream"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testServerName",
+        "type": "Microsoft.MySQLDiscovery/MySQLSites/MySQLServers",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.MySQLDiscovery/MySQLSites/testSite/MySQLServers/testServerName",
+        "properties": {
+          "hostName": "test.mysql.server",
+          "machineId": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourcegroups/demoRG/providers/Microsoft.OffAzure/serverSites/xxx/machines/xxx",
+          "mysqlVersion": "8.0",
+          "numberOfDatabase": 16,
+          "portNumber": "3306",
+          "provisioningState": "Succeeded",
+          "supportStatus": "Mainstream"
+        }
+      }
+    }
+  }
+}
