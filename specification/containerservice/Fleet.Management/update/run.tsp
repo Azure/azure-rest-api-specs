@@ -44,11 +44,11 @@ scalar FleetUpdateStrategyResourceId
   ]>;
 
 scalar AutoUpgradeProfileId
-extends Azure.Core.armResourceIdentifier<[
-  {
-    type: "Microsoft.ContainerService/fleets/updateRuns",
-  }
-]>;
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/fleets/updateRuns",
+    }
+  ]>;
 
 @doc("The properties of the UpdateRun.")
 model UpdateRunProperties {
