@@ -15,7 +15,7 @@ namespace Microsoft.ServiceFabric;
  * Describes a node type in the cluster, each node type represents sub set of nodes in the cluster.
  */
 @parentResource(ManagedCluster)
-model NodeType is Azure.ResourceManager.ProxyResource<NodeTypeProperties> {
+model NodeType is Azure.ResourceManager.TrackedResource<NodeTypeProperties> {
   ...ResourceNameParameter<
     Resource = NodeType,
     KeyName = "nodeTypeName",
@@ -26,6 +26,7 @@ model NodeType is Azure.ResourceManager.ProxyResource<NodeTypeProperties> {
   /**
    * The node type sku.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
   sku?: NodeTypeSku;
 }
 
@@ -39,9 +40,9 @@ interface NodeTypes {
   /**
    * Create or update a Service Fabric node type of a given managed cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Day 0 Property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
     NodeType,
     Response = ArmResourceUpdatedResponse<NodeType> | (ArmAcceptedLroResponse & {
       @bodyRoot
@@ -62,10 +63,9 @@ interface NodeTypes {
   /**
    * Delete a Service Fabric node type of a given managed cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     NodeType,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -79,7 +79,7 @@ interface NodeTypes {
   deallocate is ArmResourceActionAsync<
     NodeType,
     NodeTypeActionParameters,
-    void
+    never
   >;
 
   /**
@@ -88,7 +88,45 @@ interface NodeTypes {
   deleteNode is ArmResourceActionAsync<
     NodeType,
     NodeTypeActionParameters,
-    void
+    never
+  >;
+
+  /**
+   * Redeploys one or more nodes on the node type. It will disable the fabric nodes, trigger a shut down on the VMs, move them to a new node, and power them back on.
+   */
+  redeploy is ArmResourceActionAsync<NodeType, NodeTypeActionParameters, never>;
+
+  /**
+   * Reimages one or more nodes on the node type. It will disable the fabric nodes, trigger a reimage on the VMs and activate the nodes back again.
+   */
+  reimage is ArmResourceActionAsync<NodeType, NodeTypeActionParameters, never>;
+
+  /**
+   * Restarts one or more nodes on the node type. It will disable the fabric nodes, trigger a restart on the VMs and activate the nodes back again.
+   */
+  restart is ArmResourceActionAsync<NodeType, NodeTypeActionParameters, never>;
+
+  /**
+   * Starts one or more nodes on the node type. It will trigger an allocation of the fabric node if needed and activate them.
+   */
+  start is ArmResourceActionAsync<NodeType, NodeTypeActionParameters, never>;
+
+  /**
+   * Starts a fault simulation on the node type.
+   */
+  startFaultSimulation is ArmResourceActionAsync<
+    NodeType,
+    FaultSimulationParameters,
+    never
+  >;
+
+  /**
+   * Stops a fault simulation on the node type.
+   */
+  stopFaultSimulation is ArmResourceActionAsync<
+    NodeType,
+    FaultSimulationIdParameters,
+    never
   >;
 
   /**
@@ -110,47 +148,9 @@ interface NodeTypes {
   >;
 
   /**
-   * Redeploys one or more nodes on the node type. It will disable the fabric nodes, trigger a shut down on the VMs, move them to a new node, and power them back on.
-   */
-  redeploy is ArmResourceActionAsync<NodeType, NodeTypeActionParameters, void>;
-
-  /**
-   * Reimages one or more nodes on the node type. It will disable the fabric nodes, trigger a reimage on the VMs and activate the nodes back again.
-   */
-  reimage is ArmResourceActionAsync<NodeType, NodeTypeActionParameters, void>;
-
-  /**
-   * Restarts one or more nodes on the node type. It will disable the fabric nodes, trigger a restart on the VMs and activate the nodes back again.
-   */
-  restart is ArmResourceActionAsync<NodeType, NodeTypeActionParameters, void>;
-
-  /**
-   * Starts one or more nodes on the node type. It will trigger an allocation of the fabric node if needed and activate them.
-   */
-  start is ArmResourceActionAsync<NodeType, NodeTypeActionParameters, void>;
-
-  /**
-   * Starts a fault simulation on the node type.
-   */
-  startFaultSimulation is ArmResourceActionAsync<
-    NodeType,
-    FaultSimulationParameters,
-    void
-  >;
-
-  /**
-   * Stops a fault simulation on the node type.
-   */
-  stopFaultSimulation is ArmResourceActionAsync<
-    NodeType,
-    FaultSimulationIdParameters,
-    void
-  >;
-
-  /**
    * Get a Service Fabric node type supported SKUs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @get
   @action("skus")
   @operationId("NodeTypeSkus_List")
