@@ -1491,6 +1491,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/experimentations": {
+      "get": {
+        "tags": [
+          "Experimentation"
+        ],
+        "description": "Lists the experimentations for a given configuration store.",
+        "operationId": "Experimentation_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experimentation_Get": {
+            "$ref": "./examples/ConfigurationStoresListExperimentations.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/experimentations/{experimentationName}": {
       "get": {
         "tags": [
@@ -1620,9 +1662,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
           "202": {
             "description": "The request was successful; the operation will complete asynchronously.",
             "headers": {
@@ -1638,7 +1677,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3006,6 +3045,23 @@
         }
       }
     },
+    "ExperimentationListResult": {
+      "description": "The result of a request to list experimentations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Experimentation"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    },
     "Experimentation": {
       "description": "The experimentation resource.",
       "type": "object",
@@ -3037,7 +3093,7 @@
       "description": "All experimentation properties.",
       "type": "object",
       "properties": {
-        "resourceGroupName": {
+        "managedResourceGroupName": {
           "description": "The name of the managed resource group.",
           "type": "string"
         },
