@@ -35,10 +35,10 @@ These settings apply only when `--tag=package-2024-09-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-09-30-preview'
 input-file:
-  - Microsoft.MysqlDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
+  - Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
 suppressions:
   - code: PathResourceProviderNamePascalCase
-    from: Microsoft.MysqlDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
+    from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
     reason: MySQL is a technical term and cannot follow pascal case rule.
 
 ```
@@ -50,7 +50,7 @@ suppressions:
 ``` yaml
 directive:
   - suppress: PathResourceProviderNamePascalCase
-    from: Microsoft.MysqlDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
+    from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
     reason: MySQL is a technical term and cannot follow pascal case rule.
 ```
 
