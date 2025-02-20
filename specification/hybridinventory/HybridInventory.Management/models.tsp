@@ -77,6 +77,32 @@ model ProxySiteRefreshBody {
 }
 
 /**
+ * Represents the presence of Oids in Tables under a DB.
+ */
+union HasTablesWithOids {
+  @doc("The Database has tables with Oids.")
+  True: "true",
+
+  @doc("The Database does not have tables with Oids.")
+  False: "false",
+
+  string,
+}
+
+/**
+ * Represents the presence of Oids in Tables under a DB.
+ */
+union HasCustomDataTypes {
+  @doc("The Database has custom data types.")
+  True: "true",
+
+  @doc("The Database does not have custom data types.")
+  False: "false",
+
+  string,
+}
+
+/**
  * Represents the Support status of the PostgreSQL instance.
  */
 union SupportStatus {
@@ -908,12 +934,12 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * Whether tables with oid's exists in the database.
    */
-  hasTablesWithOids?: boolean;
+  hasTablesWithOids?: HasTablesWithOids;
 
   /**
    * Whether the database has custom data types.
    */
-  hasCustomDataTypes?: boolean;
+  hasCustomDataTypes?: HasCustomDataTypes;
 
   /**
    * The number of errors.
@@ -979,12 +1005,12 @@ model PgsqlDatabaseResourcePatch {
   /**
    * Whether tables with oid's exists in the database.
    */
-  hasTablesWithOids?: boolean;
+  hasTablesWithOids?: HasTablesWithOids;
 
   /**
    * Whether the database has custom data types.
    */
-  hasCustomDataTypes?: boolean;
+  hasCustomDataTypes?: HasCustomDataTypes;
 
   /**
    * The number of errors.
