@@ -26,6 +26,7 @@ model ManagedCluster
   /**
    * The sku of the managed cluster
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
   sku: Sku;
 }
 
@@ -39,15 +40,15 @@ interface ManagedClusters {
   /**
    * Create or update a Service Fabric managed cluster resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Day 0 Property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ManagedCluster,
     Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: ManagedCluster;
     }),
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   /**
@@ -62,11 +63,7 @@ interface ManagedClusters {
   /**
    * Delete a Service Fabric managed cluster resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    ManagedCluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<ManagedCluster>;
 
   /**
    * Gets all Service Fabric cluster resources created or in the process of being created in the resource group.
@@ -117,7 +114,7 @@ interface ManagedClusters {
   /**
    * Action to Apply Maintenance window on the Service Fabric Managed Clusters, right now. Any pending update will be applied.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @action("applyMaintenanceWindow")
   @operationId("managedApplyMaintenanceWindow_Post")
   post is ArmResourceActionSync<ManagedCluster, void, OkResponse>;
@@ -125,7 +122,7 @@ interface ManagedClusters {
   /**
    * Action to get Maintenance Window Status of the Service Fabric Managed Clusters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @action("getMaintenanceWindowStatus")
   @operationId("managedMaintenanceWindowStatus_Get")
   managedMaintenanceWindowStatusGet is ArmResourceActionSync<
@@ -137,7 +134,7 @@ interface ManagedClusters {
   /**
    * Action to get Az Resiliency Status of all the Base resources constituting Service Fabric Managed Clusters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @action("getazresiliencystatus")
   @operationId("managedAzResiliencyStatus_Get")
   managedAzResiliencyStatusGet is ArmResourceActionSync<
