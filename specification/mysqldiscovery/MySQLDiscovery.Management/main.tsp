@@ -26,6 +26,7 @@ using TypeSpec.Versioning;
 /**
  * The Microsoft.MysqlDiscovery Rest API spec.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
@@ -33,7 +34,6 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 namespace Microsoft.MySQLDiscovery;
 
 /**
