@@ -185,7 +185,7 @@ model OperationStatusComplete {
   body: bytes;
 }
 
-@doc("Pending reposnse if the operation was not complete, mandatory in IETF SCITT draft")
+@doc("Pending response if the operation was not complete, mandatory in IETF SCITT draft")
 model OperationStatusPending {
   @doc("Location of the operation")
   @header("Location")
