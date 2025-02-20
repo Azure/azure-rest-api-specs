@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "environmentName": "testcontainerenv",
+    "certificateName": "certificate-firendly-name",
+    "api-version": "2024-08-02-preview",
+    "certificateEnvelope": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-firendly-name",
+        "type": "Microsoft.App/ManagedEnvironments/Certificates",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "subjectName": "my-subject-name.company.country.net",
+          "subjectAlternativeNames": [
+            "CN=my-subject-name.com"
+          ],
+          "issuer": "Issuer Name",
+          "issueDate": "2021-11-06T04:00:00Z",
+          "expirationDate": "2022-11-06T04:00:00Z",
+          "thumbprint": "CERTIFICATE_THUMBPRINT",
+          "valid": true,
+          "certificateType": "ServerSSLCertificate"
+        }
+      }
+    }
+  }
+}

@@ -32,10 +32,10 @@ model OperationStatus {
   @doc("The id of the resource.")
   resourceId?: string;
 
-  @doc("The start time of the operation.")
+  @doc("The start time of the operation, in RFC3339 format.")
   startTime?: utcDateTime;
 
-  @doc("The end time of the operation.")
+  @doc("The end time of the operation, in RFC3339 format.")
   endTime?: utcDateTime;
 
   @doc("Percent of the operation that is complete.")
@@ -43,9 +43,9 @@ model OperationStatus {
   @maxValue(100.0)
   percentComplete?: float64;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "there is no build in type to describe object"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Not all values are strings in this dictionary."
   @doc("Custom operation properties, populated only for a successful operation.")
-  properties?: unknown;
+  properties?: Record<unknown>;
 
   @doc("Operation Error message.")
   error?: Azure.Core.Foundations.Error;

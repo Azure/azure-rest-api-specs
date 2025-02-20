@@ -20,7 +20,6 @@ options:
     flavor: azure
     generate-test: true
     generate-sample: true
-    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Analytics.Purview.DataMap"
     namespace: "{package-dir}"
@@ -42,3 +41,5 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/use-standard-names": "Mapping to atlas API"

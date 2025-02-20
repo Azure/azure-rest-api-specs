@@ -1,0 +1,133 @@
+{
+  "parameters": {
+    "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
+    "resourceGroupName": "Default-NotificationRules",
+    "api-version": "2024-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/microsoft.insights/actionGroups/SampleActionGroup",
+            "type": "Microsoft.Insights/ActionGroups",
+            "name": "SampleActionGroup",
+            "location": "Global",
+            "tags": {},
+            "identity": {
+              "type": "UserAssigned, SystemAssigned",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "principalId": "f11979a4-36d1-45d0-9097-a0da3c7e855d",
+              "userAssignedIdentities": {
+                "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/AzSecPackAutoConfigRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ThomasTestManagedIdentity_123": {
+                  "clientId": "73525f7b-16f5-439f-b150-e6f737b8cb16",
+                  "principalId": "30fe7a91-cd31-4edf-96ab-52883b3199cd"
+                },
+                "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/AzSecPackAutoConfigRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ThomasTestManagedIdentity_456": {
+                  "clientId": "4dfa770d-290d-465b-ad06-4a787b65c641",
+                  "principalId": "92b72e3e-dc08-4697-8643-32426387ebce"
+                }
+              }
+            },
+            "properties": {
+              "groupShortName": "sample",
+              "enabled": true,
+              "emailReceivers": [
+                {
+                  "name": "John Doe's email",
+                  "emailAddress": "johndoe@email.com",
+                  "status": "Enabled",
+                  "useCommonAlertSchema": true
+                },
+                {
+                  "name": "Jane Smith's email",
+                  "emailAddress": "janesmith@email.com",
+                  "status": "Disabled",
+                  "useCommonAlertSchema": true
+                }
+              ],
+              "smsReceivers": [
+                {
+                  "name": "John Doe's mobile",
+                  "countryCode": "1",
+                  "phoneNumber": "1234567890",
+                  "status": "Disabled"
+                },
+                {
+                  "name": "Jane Smith's mobile",
+                  "countryCode": "1",
+                  "phoneNumber": "0987654321",
+                  "status": "Enabled"
+                }
+              ],
+              "webhookReceivers": [
+                {
+                  "name": "Sample webhook",
+                  "serviceUri": "http://www.example.com/webhook",
+                  "useCommonAlertSchema": false
+                },
+                {
+                  "name": "Sample webhook 2",
+                  "serviceUri": "http://www.example.com/webhook2",
+                  "useCommonAlertSchema": true,
+                  "useAadAuth": true,
+                  "objectId": "d3bb868c-fe44-452c-aa26-769a6538c808",
+                  "identifierUri": "http://someidentifier/d7811ba3-7996-4a93-99b6-6b2f3f355f8a",
+                  "tenantId": "68a4459a-ccb8-493c-b9da-dd30457d1b84",
+                  "managedIdentity": "f11979a4-36d1-45d0-9097-a0da3c7e855d"
+                }
+              ],
+              "itsmReceivers": [],
+              "azureAppPushReceivers": [],
+              "automationRunbookReceivers": [],
+              "voiceReceivers": [],
+              "logicAppReceivers": [],
+              "azureFunctionReceivers": [],
+              "armRoleReceivers": [],
+              "eventHubReceivers": [],
+              "incidentReceivers": []
+            }
+          },
+          {
+            "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/microsoft.insights/actionGroups/SampleActionGroup2",
+            "type": "Microsoft.Insights/ActionGroups",
+            "name": "SampleActionGroup2",
+            "location": "Global",
+            "tags": {},
+            "properties": {
+              "groupShortName": "sample2",
+              "enabled": false,
+              "emailReceivers": [
+                {
+                  "name": "John Doe's email",
+                  "emailAddress": "johndoe@email.com",
+                  "status": "Enabled",
+                  "useCommonAlertSchema": true
+                }
+              ],
+              "smsReceivers": [
+                {
+                  "name": "Jane Smith's mobile",
+                  "countryCode": "1",
+                  "phoneNumber": "0987654321",
+                  "status": "Enabled"
+                }
+              ],
+              "webhookReceivers": [],
+              "itsmReceivers": [],
+              "azureAppPushReceivers": [],
+              "automationRunbookReceivers": [],
+              "voiceReceivers": [],
+              "logicAppReceivers": [],
+              "azureFunctionReceivers": [],
+              "armRoleReceivers": [],
+              "eventHubReceivers": [],
+              "incidentReceivers": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@ import "../commons.tsp";
 
 using Azure.ResourceManager;
 using Autorest;
+using TypeSpec.Versioning;
 namespace Oracle.Database;
 
 @armResourceOperations(AutonomousDatabase)
@@ -73,6 +74,20 @@ interface AutonomousDatabases
   shrink is ArmResourceActionAsync<
     AutonomousDatabase,
     void,
+    AutonomousDatabase
+  >;
+
+  //OCI ChangeDisasterRecoveryConfiguration API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/ChangeDisasterRecoveryConfiguration
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
+  @added(Versions.v20241001_preview)
+  @doc("Perform ChangeDisasterRecoveryConfiguration action on Autonomous Database")
+  @Autorest.example(
+    "./examples/autonomousDatabase_changeDisasterRecoveryConfiguration.json",
+    "Perform ChangeDisasterRecoveryConfiguration action on Autonomous Database"
+  )
+  changeDisasterRecoveryConfiguration is ArmResourceActionAsync<
+    AutonomousDatabase,
+    DisasterRecoveryConfigurationDetails,
     AutonomousDatabase
   >;
 }

@@ -14,7 +14,27 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
-    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    generateSample: true
+    package-dir: "arm-computeschedule"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-computeschedule"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.ComputeSchedule"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-computeschedule"
+    flavor: "azure"
+    service-name: "Compute Schedule"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

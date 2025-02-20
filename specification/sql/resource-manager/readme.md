@@ -1543,7 +1543,6 @@ input-file:
 - ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionManagedInstanceBackups.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
-- ./Microsoft.Sql/preview/2021-11-01-preview/DistributedAvailabilityGroups.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ServerTrustCertificates.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/EndpointCertificates.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseSensitivityLabels.json
@@ -1592,6 +1591,7 @@ input-file:
 - ./Microsoft.Sql/preview/2023-05-01-preview/ManagedInstances.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/ReplicationLinks.json
+- ./Microsoft.Sql/preview/2023-08-01-preview/DistributedAvailabilityGroups.json
 
 # Needed when there is more than one input file
 override-info:
@@ -3094,7 +3094,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -3104,20 +3104,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_sql']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-### C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Sql
-  output-folder: $(csharp-sdks-folder)/sqlmanagement/Microsoft.Azure.Management.Sql/src/Generated
-  clear-output-folder: true
 ```
 
 ### Python

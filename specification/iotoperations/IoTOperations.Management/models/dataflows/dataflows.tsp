@@ -212,7 +212,7 @@ model DataflowDestinationOperationSettings {
   endpointRef: string;
 
   @doc("Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
-  dataDestination: string;
+  dataDestination: NonEmptyString;
 }
 
 @doc("Dataflow Source Operation properties")
@@ -230,5 +230,5 @@ model DataflowSourceOperationSettings {
   schemaRef?: string;
 
   @doc("List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.")
-  dataSources: string[];
+  dataSources: NonEmptyString[];
 }
