@@ -38,9 +38,6 @@ suppressions:
   - code: PathResourceTypeNameCamelCase
     from: hybridinventory.json
     reason: HybridInventory is a technical term and cannot follow camel case rule.
-  - code: AvoidAdditionalProperties
-    from: hybridinventory.json
-    reason: ARM team will deliver TagsV2 towards the end of 2024. TagsV2 will support Top-level tags on proxy resources.
 ```
 
 # Code Generation
