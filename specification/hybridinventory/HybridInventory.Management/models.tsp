@@ -685,6 +685,16 @@ model PgsqlInstanceProperties is AzureResourceProperties {
  */
 model PgsqlInstanceResourcePatchProperties {
   /**
+   * PGSQL Instance resource patch properties object.
+   */
+  properties?: PgsqlInstanceResourcePatch;
+}
+
+/**
+ * PGSQL Server properties
+ */
+model PgsqlInstanceResourcePatch {
+  /**
    * The Server IP/host name.
    */
   hostIp?: string[];
@@ -845,16 +855,16 @@ model Collation {
   isDeterministic?: boolean;
 }
 
-/**
- * Object containing tags updates for patch operations.
- */
-model PgsqlInstanceResourcePatch {
-  /**
-   * Resource tags.
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
-  tags?: Tag[];
-}
+// /**
+//  * Object containing tags updates for patch operations.
+//  */
+// model PgsqlInstanceResourcePatch {
+//   /**
+//    * Resource tags.
+//    */
+//   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+//   tags?: Tag[];
+// }
 
 /**
  * List of Databases.
@@ -926,6 +936,16 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
  * PGSQL Database properties
  */
 model PgsqlDatabaseResourcePatchProperties {
+  /**
+   * The database resource patch properties.
+   */
+  properties?: PgsqlDatabaseResourcePatch;
+}
+
+/**
+ * PGSQL Database patch object
+ */
+model PgsqlDatabaseResourcePatch {
   /**
    * The database name.
    */

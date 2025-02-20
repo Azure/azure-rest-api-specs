@@ -2378,9 +2378,9 @@
         }
       }
     },
-    "PgsqlDatabaseResourcePatchProperties": {
+    "PgsqlDatabaseResourcePatch": {
       "type": "object",
-      "description": "PGSQL Database properties",
+      "description": "PGSQL Database patch object",
       "properties": {
         "databaseDisplayName": {
           "type": "string",
@@ -2451,6 +2451,16 @@
             "key",
             "value"
           ]
+        }
+      }
+    },
+    "PgsqlDatabaseResourcePatchProperties": {
+      "type": "object",
+      "description": "PGSQL Database properties",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PgsqlDatabaseResourcePatch",
+          "description": "The database resource patch properties."
         }
       }
     },
@@ -2630,7 +2640,7 @@
         "portNumber"
       ]
     },
-    "PgsqlInstanceResourcePatchProperties": {
+    "PgsqlInstanceResourcePatch": {
       "type": "object",
       "description": "PGSQL Server properties",
       "properties": {
@@ -2734,6 +2744,16 @@
             "key",
             "value"
           ]
+        }
+      }
+    },
+    "PgsqlInstanceResourcePatchProperties": {
+      "type": "object",
+      "description": "PGSQL Server properties",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PgsqlInstanceResourcePatch",
+          "description": "PGSQL Instance resource patch properties object."
         }
       }
     },
