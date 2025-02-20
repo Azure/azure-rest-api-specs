@@ -53,7 +53,7 @@
       "name": "ApplicationTypeVersions"
     },
     {
-      "name": "ServiceResources"
+      "name": "Services"
     },
     {
       "name": "ManagedClusterCodeVersionResults"
@@ -1473,7 +1473,7 @@
       "get": {
         "operationId": "Services_ListByApplications",
         "tags": [
-          "ServiceResources"
+          "Services"
         ],
         "description": "Gets all service resources created or in the process of being created in the Service Fabric managed application resource.",
         "parameters": [
@@ -1522,7 +1522,7 @@
       "get": {
         "operationId": "Services_Get",
         "tags": [
-          "ServiceResources"
+          "Services"
         ],
         "description": "Get a Service Fabric service resource created or in the process of being created in the Service Fabric managed application resource.",
         "parameters": [
@@ -1573,7 +1573,7 @@
       "put": {
         "operationId": "Services_CreateOrUpdate",
         "tags": [
-          "ServiceResources"
+          "Services"
         ],
         "description": "Create or update a Service Fabric managed service resource with the specified name.",
         "parameters": [
@@ -1657,7 +1657,7 @@
       "patch": {
         "operationId": "Services_Update",
         "tags": [
-          "ServiceResources"
+          "Services"
         ],
         "description": "Updates the tags of a service resource of a given managed cluster.",
         "parameters": [
@@ -1717,7 +1717,7 @@
       "delete": {
         "operationId": "Services_Delete",
         "tags": [
-          "ServiceResources"
+          "Services"
         ],
         "description": "Delete a Service Fabric managed service resource with the specified name.",
         "parameters": [
@@ -1746,9 +1746,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
