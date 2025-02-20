@@ -790,9 +790,9 @@ interface Blob {
 
       /** The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set. */
       #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-      @encode("date-time-rfc1123")
+      @encode("rfc7231")
       @header("x-ms-access-tier-change-time")
-      accessTierChangeTime?: string;
+      accessTierChangeTime?: utcDateTime;
 
       ...VersionIdResponseHeader;
       ...IsCurrentVersionResponseHeader;
