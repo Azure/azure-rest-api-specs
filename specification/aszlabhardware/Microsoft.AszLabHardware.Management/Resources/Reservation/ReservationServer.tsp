@@ -50,7 +50,10 @@ interface ReservationServers {
   >;
 
   @doc("Power state operations")
-  reset is ArmResourceActionNoResponseContentAsync<ReservationServer, ResetRequestBody>;
+  reset is ArmResourceActionNoResponseContentAsync<
+    ReservationServer,
+    ResetRequestBody
+  >;
 
   @doc("Allows any requested maintenance on this Server")
   allowMaintenance is ArmResourceActionSync<ReservationServer, void, void>;
