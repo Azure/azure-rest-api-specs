@@ -3,7 +3,7 @@ import "../../Models/System.tsp";
 import "../../Models/ManagementInformation.tsp";
 import "../../Models/SetAccountRequestBody.tsp";
 import "../../Models/RemoveAccountRequestBody.tsp";
-import "../../Models/ConfigId.tsp";
+import "../../Models/ExternalReference.tsp";
 import "../../Models/ResetRequestBody.tsp";
 
 using TypeSpec.Http;
@@ -42,7 +42,7 @@ model LabServerProperties {
 
   @visibility("create", "read")
   @doc("The backing data source for this resource")
-  configId: ConfigId;
+  externalReference: ExternalReference;
 
   @visibility("read")
   @doc("Maintenance status")

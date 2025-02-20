@@ -1,17 +1,17 @@
 @discriminator("type")
 @doc("The backing data source")
-union ConfigId {
+union ExternalReference {
   @doc("OneAsset backing data source")
-  oneAssetConfigId: OneAssetConfigId,
+  oneAssetReference: OneAssetReference,
 }
 
 @doc("The OneAsset id backing a resource")
-model OneAssetConfigId {
+model OneAssetReference {
   @visibility("read")
   @doc("OneAsset type")
   type: "OneAsset";
 
   @visibility("create", "read")
-  @doc("The data source id")
-  dataSourceId?: string;
+  @doc("The OneAsset configuration id")
+  configId?: string;
 }

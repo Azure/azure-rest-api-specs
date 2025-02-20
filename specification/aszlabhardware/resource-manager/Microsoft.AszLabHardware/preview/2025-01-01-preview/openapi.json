@@ -3071,15 +3071,6 @@
         "poolResourceId"
       ]
     },
-    "ConfigId": {
-      "type": "object",
-      "x-nullable": false,
-      "allOf": [
-        {
-          "$ref": "#/definitions/OneAssetConfigId"
-        }
-      ]
-    },
     "Drive": {
       "type": "object",
       "description": "Information regarding individual Disk Drives",
@@ -3186,6 +3177,15 @@
           }
         ]
       }
+    },
+    "ExternalReference": {
+      "type": "object",
+      "x-nullable": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/OneAssetReference"
+        }
+      ]
     },
     "HardwareInfo": {
       "type": "object",
@@ -3537,8 +3537,8 @@
             "create"
           ]
         },
-        "configId": {
-          "$ref": "#/definitions/ConfigId",
+        "externalReference": {
+          "$ref": "#/definitions/ExternalReference",
           "description": "The backing data source for this resource",
           "x-ms-mutability": [
             "read",
@@ -3568,7 +3568,7 @@
         "serialNumber",
         "assetTag",
         "management",
-        "configId",
+        "externalReference",
         "maintenanceStatus",
         "reservationStatus"
       ]
@@ -4059,34 +4059,6 @@
         }
       }
     },
-    "OneAssetConfigId": {
-      "type": "object",
-      "description": "The OneAsset id backing a resource",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OneAsset type",
-          "enum": [
-            "OneAsset"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "readOnly": true
-        },
-        "dataSourceId": {
-          "type": "string",
-          "description": "The data source id",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
     "OneAssetPhysicalLocation": {
       "type": "object",
       "description": "The OneAsset model describing the physical location",
@@ -4132,6 +4104,34 @@
           "format": "int32",
           "description": "The slot in the chassis",
           "readOnly": true
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "OneAssetReference": {
+      "type": "object",
+      "description": "The OneAsset id backing a resource",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OneAsset type",
+          "enum": [
+            "OneAsset"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "configId": {
+          "type": "string",
+          "description": "The OneAsset configuration id",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
