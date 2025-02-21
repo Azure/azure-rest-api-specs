@@ -32,14 +32,14 @@ interface GalleryInVMAccessControlProfileVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GalleryInVMAccessControlProfileVersions_Get")
-  get is ArmResourceRead<GalleryInVMAccessControlProfileVersion>;
+  get is ComputeResourceRead<GalleryInVMAccessControlProfileVersion>;
 
   /**
    * Create or update a gallery inVMAccessControlProfile version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GalleryInVMAccessControlProfileVersions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryInVMAccessControlProfileVersion,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -50,7 +50,7 @@ interface GalleryInVMAccessControlProfileVersions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("GalleryInVMAccessControlProfileVersions_Update")
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     GalleryInVMAccessControlProfileVersion,
     PatchModel = GalleryInVMAccessControlProfileVersionUpdate,
     Response = ArmResponse<GalleryInVMAccessControlProfileVersion> & ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -61,14 +61,14 @@ interface GalleryInVMAccessControlProfileVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GalleryInVMAccessControlProfileVersions_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<GalleryInVMAccessControlProfileVersion>;
+  delete is ComputeResourceDeleteAsync<GalleryInVMAccessControlProfileVersion>;
 
   /**
    * List gallery inVMAccessControlProfile versions in a gallery inVMAccessControlProfile
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GalleryInVMAccessControlProfileVersions_ListByGalleryInVMAccessControlProfile")
-  listByGalleryInVMAccessControlProfile is ArmResourceListByParent<
+  listByGalleryInVMAccessControlProfile is ComputeResourceListByParent<
     GalleryInVMAccessControlProfileVersion,
     Response = ArmResponse<GalleryInVMAccessControlProfileVersionList>
   >;

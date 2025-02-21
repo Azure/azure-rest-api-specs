@@ -32,7 +32,7 @@ import "./CapacityReservationGroup.tsp";
 import "./CapacityReservation.tsp";
 import "./VirtualMachineRunCommand.tsp";
 import "./routes.tsp";
-import "./client.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

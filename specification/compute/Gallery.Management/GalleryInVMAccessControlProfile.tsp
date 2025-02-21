@@ -32,14 +32,14 @@ interface GalleryInVMAccessControlProfiles {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GalleryInVMAccessControlProfiles_Get")
-  get is ArmResourceRead<GalleryInVMAccessControlProfile>;
+  get is ComputeResourceRead<GalleryInVMAccessControlProfile>;
 
   /**
    * Create or update a gallery inVMAccessControlProfile.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GalleryInVMAccessControlProfiles_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryInVMAccessControlProfile,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -50,7 +50,7 @@ interface GalleryInVMAccessControlProfiles {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("GalleryInVMAccessControlProfiles_Update")
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     GalleryInVMAccessControlProfile,
     PatchModel = GalleryInVMAccessControlProfileUpdate,
     Response = ArmResponse<GalleryInVMAccessControlProfile> & ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -61,14 +61,14 @@ interface GalleryInVMAccessControlProfiles {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GalleryInVMAccessControlProfiles_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<GalleryInVMAccessControlProfile>;
+  delete is ComputeResourceDeleteAsync<GalleryInVMAccessControlProfile>;
 
   /**
    * List gallery inVMAccessControlProfiles in a gallery.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GalleryInVMAccessControlProfiles_ListByGallery")
-  listByGallery is ArmResourceListByParent<
+  listByGallery is ComputeResourceListByParent<
     GalleryInVMAccessControlProfile,
     Response = ArmResponse<GalleryInVMAccessControlProfileList>
   >;

@@ -30,7 +30,7 @@ interface SharedGalleryImages {
   /**
    * Get a shared gallery image by subscription id or tenant id.
    */
-  get is ArmResourceRead<SharedGalleryImage>;
+  get is ComputeResourceRead<SharedGalleryImage>;
 
   /**
    * List shared gallery images by subscription id or tenant id.

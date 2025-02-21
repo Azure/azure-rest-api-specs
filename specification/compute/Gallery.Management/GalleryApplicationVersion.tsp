@@ -30,7 +30,7 @@ interface GalleryApplicationVersions {
   /**
    * Retrieves information about a gallery Application Version.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     GalleryApplicationVersion,
     Parameters = {
       /**
@@ -46,7 +46,7 @@ interface GalleryApplicationVersions {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryApplicationVersion,
     Response = ArmResourceUpdatedResponse<GalleryApplicationVersion> | ArmResourceCreatedResponse<
       GalleryApplicationVersion,
@@ -71,7 +71,7 @@ interface GalleryApplicationVersions {
    * Delete a gallery Application Version.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ComputeResourceDeleteAsync<
     GalleryApplicationVersion,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -79,7 +79,7 @@ interface GalleryApplicationVersions {
   /**
    * List gallery Application Versions in a gallery Application Definition.
    */
-  listByGalleryApplication is ArmResourceListByParent<
+  listByGalleryApplication is ComputeResourceListByParent<
     GalleryApplicationVersion,
     Response = ArmResponse<GalleryApplicationVersionList>
   >;

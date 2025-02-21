@@ -30,7 +30,7 @@ interface CommunityGalleries {
   /**
    * Get a community gallery by gallery public name.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     CommunityGallery,
     Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;

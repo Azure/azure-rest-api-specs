@@ -30,7 +30,7 @@ interface SharedGalleries {
   /**
    * Get a shared gallery by subscription id or tenant id.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     SharedGallery,
     Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;

@@ -30,7 +30,7 @@ interface GalleryImageVersions {
   /**
    * Retrieves information about a gallery image version.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     GalleryImageVersion,
     Parameters = {
       /**
@@ -46,7 +46,7 @@ interface GalleryImageVersions {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryImageVersion,
     Response = ArmResourceUpdatedResponse<GalleryImageVersion> | ArmResourceCreatedResponse<
       GalleryImageVersion,
@@ -61,7 +61,7 @@ interface GalleryImageVersions {
    * Update a gallery image version.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     GalleryImageVersion,
     PatchModel = GalleryImageVersionUpdate,
     Response = ArmResponse<GalleryImageVersion> & ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -71,7 +71,7 @@ interface GalleryImageVersions {
    * Delete a gallery image version.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ComputeResourceDeleteAsync<
     GalleryImageVersion,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -79,7 +79,7 @@ interface GalleryImageVersions {
   /**
    * List gallery image versions in a gallery image definition.
    */
-  listByGalleryImage is ArmResourceListByParent<
+  listByGalleryImage is ComputeResourceListByParent<
     GalleryImageVersion,
     Response = ArmResponse<GalleryImageVersionList>
   >;

@@ -33,7 +33,7 @@ interface Galleries {
   /**
    * Retrieves information about a Shared Image Gallery.
    */
-  get is ArmResourceRead<
+  get is ComputeResourceRead<
     Gallery,
     Parameters = {
       /**
@@ -55,7 +55,7 @@ interface Galleries {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     Gallery,
     Response = ArmResourceUpdatedResponse<Gallery> | ArmResourceCreatedResponse<
       Gallery,
@@ -70,7 +70,7 @@ interface Galleries {
    * Update a Shared Image Gallery.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     Gallery,
     PatchModel = GalleryUpdate,
     Response = ArmResponse<Gallery> & ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -80,7 +80,7 @@ interface Galleries {
    * Delete a Shared Image Gallery.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ComputeResourceDeleteAsync<
     Gallery,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -88,7 +88,7 @@ interface Galleries {
   /**
    * List galleries under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is ComputeResourceListByParent<
     Gallery,
     Response = ArmResponse<GalleryList>
   >;
@@ -96,16 +96,17 @@ interface Galleries {
   /**
    * List galleries under a subscription.
    */
-  list is ArmListBySubscription<Gallery, Response = ArmResponse<GalleryList>>;
+  list is ComputeListBySubscription<Gallery, Response = ArmResponse<GalleryList>>;
 
   /**
    * List soft-deleted resources of an artifact in the gallery, such as soft-deleted gallery image version of an image.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
   @get
   @action("versions")
   @operationId("SoftDeletedResource_ListByArtifactName")
-  listByArtifactName is ArmResourceActionSync<
+  listByArtifactName is ComputeResourceActionSync<
     Gallery,
     void,
     ArmResponse<GallerySoftDeletedResourceList>,
@@ -132,7 +133,7 @@ interface Galleries {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("share")
   @operationId("GallerySharingProfile_Update")
-  gallerySharingProfileUpdate is ArmResourceActionAsync<
+  gallerySharingProfileUpdate is ComputeResourceActionAsync<
     Gallery,
     SharingUpdate,
     ArmResponse<SharingUpdate>

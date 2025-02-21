@@ -31,7 +31,7 @@ interface CommunityGalleryImages {
   /**
    * Get a community gallery image.
    */
-  get is ArmResourceRead<CommunityGalleryImage>;
+  get is ComputeResourceRead<CommunityGalleryImage>;
 
   /**
    * List community gallery images inside a gallery.

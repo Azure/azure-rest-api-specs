@@ -31,7 +31,7 @@ interface CommunityGalleryImageVersions {
   /**
    * Get a community gallery image version.
    */
-  get is ArmResourceRead<CommunityGalleryImageVersion>;
+  get is ComputeResourceRead<CommunityGalleryImageVersion>;
 
   /**
    * List community gallery image versions inside an image.

@@ -30,14 +30,14 @@ interface GalleryImages {
   /**
    * Retrieves information about a gallery image definition.
    */
-  get is ArmResourceRead<GalleryImage>;
+  get is ComputeResourceRead<GalleryImage>;
 
   /**
    * Create or update a gallery image definition.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryImage,
     Response = ArmResourceUpdatedResponse<GalleryImage> | ArmResourceCreatedResponse<
       GalleryImage,
@@ -62,7 +62,7 @@ interface GalleryImages {
    * Delete a gallery image.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ComputeResourceDeleteAsync<
     GalleryImage,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -70,7 +70,7 @@ interface GalleryImages {
   /**
    * List gallery image definitions in a gallery.
    */
-  listByGallery is ArmResourceListByParent<
+  listByGallery is ComputeResourceListByParent<
     GalleryImage,
     Response = ArmResponse<GalleryImageList>
   >;

@@ -1758,42 +1758,14 @@ model GallerySoftDeletedResourceList
  * The details information of soft-deleted resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model GallerySoftDeletedResource {
+model GallerySoftDeletedResource
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   /**
    * Describes the properties of a soft-deleted resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GallerySoftDeletedResourceProperties;
-
-  /**
-   * Resource Id
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Resource name
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Resource location
-   */
-  location: string;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
 }
 
 /**

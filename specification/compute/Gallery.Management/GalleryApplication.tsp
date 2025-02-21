@@ -30,14 +30,14 @@ interface GalleryApplications {
   /**
    * Retrieves information about a gallery Application Definition.
    */
-  get is ArmResourceRead<GalleryApplication>;
+  get is ComputeResourceRead<GalleryApplication>;
 
   /**
    * Create or update a gallery Application Definition.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryApplication,
     Response = ArmResourceUpdatedResponse<GalleryApplication> | ArmResourceCreatedResponse<
       GalleryApplication,
@@ -52,7 +52,7 @@ interface GalleryApplications {
    * Update a gallery Application Definition.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     GalleryApplication,
     PatchModel = GalleryApplicationUpdate,
     Response = ArmResponse<GalleryApplication> & ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -62,7 +62,7 @@ interface GalleryApplications {
    * Delete a gallery Application.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ComputeResourceDeleteAsync<
     GalleryApplication,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -70,7 +70,7 @@ interface GalleryApplications {
   /**
    * List gallery Application Definitions in a gallery.
    */
-  listByGallery is ArmResourceListByParent<
+  listByGallery is ComputeResourceListByParent<
     GalleryApplication,
     Response = ArmResponse<GalleryApplicationList>
   >;

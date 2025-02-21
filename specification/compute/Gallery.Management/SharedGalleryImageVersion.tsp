@@ -31,7 +31,7 @@ interface SharedGalleryImageVersions {
   /**
    * Get a shared gallery image version by subscription id or tenant id.
    */
-  get is ArmResourceRead<SharedGalleryImageVersion>;
+  get is ComputeResourceRead<SharedGalleryImageVersion>;
 
   /**
    * List shared gallery image versions by subscription id or tenant id.
