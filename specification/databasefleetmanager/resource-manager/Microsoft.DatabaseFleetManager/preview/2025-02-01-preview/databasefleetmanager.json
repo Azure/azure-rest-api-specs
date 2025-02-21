@@ -350,7 +350,7 @@
             "description": "The fleet object to patch.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Fleet"
+              "$ref": "#/definitions/FleetUpdate"
             }
           }
         ],
@@ -2871,6 +2871,33 @@
           "$ref": "#/definitions/AzureProvisioningState",
           "description": "Provisioning state.",
           "readOnly": true
+        }
+      }
+    },
+    "FleetUpdate": {
+      "type": "object",
+      "description": "An update to a Database Fleet.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/FleetProperties",
+          "description": "The Database Fleet properties.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
