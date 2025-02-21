@@ -43,7 +43,7 @@ interface InitiateSessionHostUpdate {
        */
       @bodyRoot updateSessionHostsRequestBody?: UpdateSessionHostsRequestBody;
     },
-    Response = UpdateSessionHostsRequestBody
+    Response = void
   >;
 }
 
@@ -78,7 +78,7 @@ interface SessionHostManagements {
   @parameterVisibility
   update is ArmCustomPatchSync<
     SessionHostManagement,
-    Response = SessionHostManagementPatch,
+    Response = SessionHostManagement,
     Request = {
       /**
        * The properties to be updated.
