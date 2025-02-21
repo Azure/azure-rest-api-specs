@@ -82,12 +82,6 @@ union MaintenanceStatus {
   string,
 }
 
-@doc("The request body model of an assign POST call")
-model AssignRequestBody {
-  @doc("The pool Azure Resource Id to assign this Labserver to")
-  poolResourceId: PoolResourceId;
-}
-
 @doc("The maintenance state of the server")
 union MaintenanceState {
   @doc("Requires maintenance")
