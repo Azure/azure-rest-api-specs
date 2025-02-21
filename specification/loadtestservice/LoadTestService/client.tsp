@@ -33,18 +33,48 @@ namespace Customizations;
 // Suggestion to rename properties in TestRunStatistics for better explanation
 @@clientName(TestRunStatistics.errorPct, "errorPercentage", "csharp,java");
 @@clientName(TestRunStatistics.meanResTime, "meanResponseTime", "csharp,java");
-@@clientName(TestRunStatistics.medianResTime, "medianResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.medianResTime,
+  "medianResponseTime",
+  "csharp,java"
+);
 @@clientName(TestRunStatistics.maxResTime, "maxResponseTime", "csharp,java");
 @@clientName(TestRunStatistics.minResTime, "minResponseTime", "csharp,java");
-@@clientName(TestRunStatistics.pct75ResTime, "percentile75ResponseTime", "csharp,java");
-@@clientName(TestRunStatistics.pct1ResTime, "percentile90ResponseTime", "csharp,java");
-@@clientName(TestRunStatistics.pct2ResTime, "percentile95ResponseTime", "csharp,java");
-@@clientName(TestRunStatistics.pct96ResTime, "percentile96ResponseTime", "csharp,java");
-@@clientName(TestRunStatistics.pct97ResTime, "percentile97ResponseTime", "csharp,java");
-@@clientName(TestRunStatistics.pct98ResTime, "percentile98ResponseTime", "csharp,java");
-@@clientName(TestRunStatistics.pct3ResTime, "percentile99ResponseTime", "csharp,java");
-@@clientName(TestRunStatistics.pct999ResTime, "percentile999ResponseTime", "csharp,java");
-@@clientName(TestRunStatistics.pct9999ResTime, "percentile9999ResponseTime", "csharp,java");
+@@clientName(TestRunStatistics.pct75ResTime,
+  "percentile75ResponseTime",
+  "csharp,java"
+);
+@@clientName(TestRunStatistics.pct1ResTime,
+  "percentile90ResponseTime",
+  "csharp,java"
+);
+@@clientName(TestRunStatistics.pct2ResTime,
+  "percentile95ResponseTime",
+  "csharp,java"
+);
+@@clientName(TestRunStatistics.pct96ResTime,
+  "percentile96ResponseTime",
+  "csharp,java"
+);
+@@clientName(TestRunStatistics.pct97ResTime,
+  "percentile97ResponseTime",
+  "csharp,java"
+);
+@@clientName(TestRunStatistics.pct98ResTime,
+  "percentile98ResponseTime",
+  "csharp,java"
+);
+@@clientName(TestRunStatistics.pct3ResTime,
+  "percentile99ResponseTime",
+  "csharp,java"
+);
+@@clientName(TestRunStatistics.pct999ResTime,
+  "percentile999ResponseTime",
+  "csharp,java"
+);
+@@clientName(TestRunStatistics.pct9999ResTime,
+  "percentile9999ResponseTime",
+  "csharp,java"
+);
 
 // Suggestion to rename `Url` to `Uri` for csharp
 @@clientName(FileInfo.url, "uri", "csharp");
