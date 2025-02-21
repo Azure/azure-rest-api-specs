@@ -91,7 +91,7 @@ These settings apply only when `--tag=package-2025-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-03-01'
 input-file:
-  - Oracle.Database/preview/2025-03-01/openapi.json
+  - Oracle.Database/stable/2025-03-01/openapi.json
 ```
 
 ---
