@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-08-01",
+    "version": "2021-11-01",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -39,10 +39,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
           }
         },
         "x-ms-pageable": {
@@ -81,10 +78,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 DeleteOfManagedInstanceIsDisabled - Delete operation of managed instance is disabled.\n\n * 400 CustomMaintenanceWindowIsDisabled - Custom maintenance window is not enabled.\n\n * 400 MICantBeMovedFromOrToInstancePool - Existing managed instance can't be moved to managed instance pool.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
           }
         },
         "x-ms-pageable": {
@@ -130,10 +124,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 DeleteOfManagedInstanceIsDisabled - Delete operation of managed instance is disabled.\n\n * 400 CustomMaintenanceWindowIsDisabled - Custom maintenance window is not enabled.\n\n * 400 MICantBeMovedFromOrToInstancePool - Existing managed instance can't be moved to managed instance pool.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 InstancePoolNotFound - An instance pool cannot be found\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 InstancePoolNotFound - An instance pool cannot be found"
           }
         },
         "x-ms-examples": {
@@ -183,18 +174,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 DeleteOfManagedInstanceIsDisabled - Delete operation of managed instance is disabled.\n\n * 400 CustomMaintenanceWindowIsDisabled - Custom maintenance window is not enabled.\n\n * 400 MICantBeMovedFromOrToInstancePool - Existing managed instance can't be moved to managed instance pool.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is required.\n\n * 400 InstancePoolRequestedVcoreCountIsInvalid - Requested vcore count for instance pool is invalid\n\n * 400 InstancePoolRequestMissingSku - Instance pool request is missing sku\n\n * 400 InstancePoolRequestMissingSkuTier - Instance pool request is missing sku tier\n\n * 400 InstancePoolRequestMissingSkuFamily - Instance pool request is missing sku family\n\n * 400 InstancePoolRequestedSubnetResourceIdIsInvalid - Subnet id for instance pool is null or empty\n\n * 400 DeploymentIntoPrivateSubnetsNotAllowed - Deploying managed instances and instance pools into private subnets is not supported.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 409 InstancePoolBusy - An instance pool is busy with another ongoing operation\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is required.\n\n * 400 InstancePoolRequestedVcoreCountIsInvalid - Requested vcore count for instance pool is invalid\n\n * 400 InstancePoolRequestMissingSku - Instance pool request is missing sku\n\n * 400 InstancePoolRequestMissingSkuTier - Instance pool request is missing sku tier\n\n * 400 InstancePoolRequestMissingSkuFamily - Instance pool request is missing sku family\n\n * 400 InstancePoolRequestedSubnetResourceIdIsInvalid - Subnet id for instance pool is null or empty\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 InstancePoolBusy - An instance pool is busy with another ongoing operation\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
           },
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           },
           "201": {
             "description": "Successfully created the instance pool.",
@@ -242,18 +225,10 @@
             "description": "Successfully deleted the instance pool."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 DeleteOfManagedInstanceIsDisabled - Delete operation of managed instance is disabled.\n\n * 400 CustomMaintenanceWindowIsDisabled - Custom maintenance window is not enabled.\n\n * 400 MICantBeMovedFromOrToInstancePool - Existing managed instance can't be moved to managed instance pool.\n\n * 400 InstancePoolNotEmpty - An instance pool is not empty\n\n * 404 InstancePoolNotFound - An instance pool cannot be found\n\n * 404 InstancePoolNotFound - An instance pool cannot be found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 InstancePoolBusy - An instance pool is busy with another ongoing operation\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
+            "description": "*** Error Responses: ***\n\n * 400 InstancePoolNotEmpty - An instance pool is not empty\n\n * 404 InstancePoolNotFound - An instance pool cannot be found\n\n * 404 InstancePoolNotFound - An instance pool cannot be found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 InstancePoolBusy - An instance pool is busy with another ongoing operation\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
           },
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           },
           "204": {
             "description": "The specified instance pool does not exist."
@@ -307,18 +282,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 DeleteOfManagedInstanceIsDisabled - Delete operation of managed instance is disabled.\n\n * 400 CustomMaintenanceWindowIsDisabled - Custom maintenance window is not enabled.\n\n * 400 MICantBeMovedFromOrToInstancePool - Existing managed instance can't be moved to managed instance pool.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
           },
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
@@ -393,7 +360,11 @@
         "vCores": {
           "format": "int32",
           "description": "Count of vCores belonging to this instance pool.",
-          "type": "integer"
+          "type": "integer",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "licenseType": {
           "description": "The license type. Possible values are 'LicenseIncluded' (price for SQL license is included) and 'BasePrice' (without SQL license price).",
@@ -405,24 +376,11 @@
           "x-ms-enum": {
             "name": "InstancePoolLicenseType",
             "modelAsString": true
-          }
-        },
-        "dnsZone": {
-          "description": "The Dns Zone that the managed instance pool is in.",
-          "type": "string",
-          "readOnly": true
-        },
-        "maintenanceConfigurationId": {
-          "description": "Specifies maintenance configuration id to apply to this managed instance.",
-          "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Maintenance/publicMaintenanceConfigurations"
-              }
-            ]
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -430,15 +388,6 @@
       "description": "An update to an Instance pool.",
       "type": "object",
       "properties": {
-        "sku": {
-          "$ref": "../../../common/v1/types.json#/definitions/Sku",
-          "description": "The name and tier of the SKU."
-        },
-        "properties": {
-          "$ref": "#/definitions/InstancePoolProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
