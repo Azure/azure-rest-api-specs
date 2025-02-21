@@ -11,18 +11,27 @@ using Azure.ResourceManager;
 namespace Microsoft.NexusIdentity;
 
 @lroStatus
-@doc("The provisioning state of Identity Set resource.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+@doc("The current provisioning state.")
+union ProvisioningState {
+  @doc("Accepted Provisioning State")
+  Accepted: "Accepted",
 
-  @doc("The operation is accepted and in progress.")
-  Updating,
+  @doc("Succeeded Provisioning State")
+  Succeeded: "Succeeded",
 
-  @doc("The resource is being deleted.")
-  Deleting,
+  @doc("Updating Provisioning State")
+  Updating: "Updating",
 
-  @doc("The operation is accepted.")
-  Accepted,
+  @doc("Deleting Provisioning State")
+  Deleting: "Deleting",
+
+  @doc("Failed Provisioning State")
+  Failed: "Failed",
+
+  @doc("Canceled Provisioning State")
+  Canceled: "Canceled",
+
+  string,
 }
 
 @doc("Identity Set Properties defines the properties of the Identity Set.")
@@ -31,14 +40,14 @@ model IdentitySetResourceProperties {
   scopesTenantId: string;
 
   @doc("""
-  Scopes on which roles are to be watched. Valid scope are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
-  """)
+    Scopes on which roles are to be watched. Valid scope are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+    """)
   scopes: Array<string>;
 
   @doc("""
-  Roles to be watched. Role Definition Ids to be passed here
-  e.g /providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635
-  """)
+    Roles to be watched. Role Definition Ids to be passed here
+    e.g /providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635
+    """)
   roleDefinitionIds: Array<string>;
 
   @doc("The type of access needed for the Roles. Only the specified access types data will be sent.")
@@ -48,18 +57,10 @@ model IdentitySetResourceProperties {
   notificationUrl: url;
 
   @doc("The storage account to which data related to role assignments will be stored for notifications")
-  storageAccount: string;
-  
+  storageAccountName: string;
+
   @doc("The URI of the keyvault which stores the keys for encryption and decryption of the sensitive client data")
   keyVaultUri: url;
-
-  @doc("The application Id of Identity Set resource")
-  @visibility("read")
-  appId?: string;
-
-  @doc("The application name of Identity Set resource")
-  @visibility("read")
-  appName?: string;
 
   @doc("The status of the last operation.")
   @visibility("read")

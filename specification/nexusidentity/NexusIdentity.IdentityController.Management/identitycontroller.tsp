@@ -42,25 +42,35 @@ model OnboardedApp {
   appName: string;
 
   @doc("""
-  Roles to be watched for identity sets. Role Definition Ids to be passed here 
-  e.g /providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635
-  """)
+    Roles to be watched for identity sets. Role Definition Ids to be passed here 
+    e.g /providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635
+    """)
   roleDefinitionIds: Array<string>;
 }
 
 /** The resource provisioning state. */
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+@doc("The current provisioning state.")
+union ProvisioningState {
+  @doc("Accepted Provisioning State")
+  Accepted: "Accepted",
 
-  /** The resource is being updated. */
-  Updating,
+  @doc("Succeeded Provisioning State")
+  Succeeded: "Succeeded",
 
-  /** The resource is being deleted. */
-  Deleting,
+  @doc("Updating Provisioning State")
+  Updating: "Updating",
 
-  /** The resource provisioning request has been accepted. */
-  Accepted,
+  @doc("Deleting Provisioning State")
+  Deleting: "Deleting",
+
+  @doc("Failed Provisioning State")
+  Failed: "Failed",
+
+  @doc("Canceled Provisioning State")
+  Canceled: "Canceled",
+
+  string,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
