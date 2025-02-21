@@ -3061,6 +3061,10 @@
           "type": "boolean",
           "description": "ActiveActive flag."
         },
+        "enableHighBandwidthVpnGateway": {
+          "type": "boolean",
+          "description": "Flag for enabling creation of high bandwidth VPN gateway"
+        },
         "disableIPSecReplayProtection": {
           "type": "boolean",
           "description": "disableIPSecReplayProtection flag."
@@ -3786,6 +3790,12 @@
         "connectionMode": {
           "$ref": "#/definitions/VirtualNetworkGatewayConnectionMode",
           "description": "The connection mode for this connection."
+        },
+        "tunnelProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayConnectionTunnelProperties"
+          }
         },
         "sharedKey": {
           "type": "string",
@@ -5044,6 +5054,19 @@
         "customBgpIpAddress"
       ],
       "description": "GatewayCustomBgpIpAddressIpConfiguration for a virtual network gateway connection."
+    },
+    "VirtualNetworkGatewayConnectionTunnelProperties": {
+      "type": "object",
+      "properties": {
+        "tunnelIpAddress": {
+          "type": "string",
+          "description": "Tunnel remote IP address"
+        },
+        "bgpPeeringAddress": {
+          "type": "string",
+          "description": "BGP peering address"
+        }
+      }
     }
   }
 }
