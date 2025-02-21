@@ -147,7 +147,7 @@ enum ConnectionType {
   AzureAISearch: "CognitiveSearch",
 
   @doc("Generic connection that uses API Key authentication")
-  APIKey: "API Key",
+  APIKey: "ApiKey",
 }
 
 /*
