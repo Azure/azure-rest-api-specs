@@ -64,7 +64,7 @@ interface SAPCentralServerInstances {
     Foundations.OperationStatusResult,
     RequestBody = {
       /**
-       * "SAP Central Services instance start request body.
+       * SAP Central Services instance start request body.
        */
       @body body?: StartRequest;
     }
