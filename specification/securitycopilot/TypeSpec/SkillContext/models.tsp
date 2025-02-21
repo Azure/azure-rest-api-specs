@@ -852,7 +852,7 @@ namespace SkillContext
 		ecsFlightIdentity: ECSFlightIdentity;
 		@doc("Configuration root")
 		configurationRoot: string;
-		defaultValue: object;
+		defaultValue: Record<unknown>;
 	}
 
 	model ECSFlightResponse<T>{

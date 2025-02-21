@@ -193,7 +193,7 @@ op getEcsSettings(
 @get
 @route("/ecsFlight/isEcsFlightEnabled")
 @doc("returns if the flight is enabled")
-op getEcsSettings(
+op isEcsFlightEnabled(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
-@body getInputRequest : FlightEnabledRequest,
+@body flightEnabledRequest : FlightEnabledRequest,
 ): boolean;
