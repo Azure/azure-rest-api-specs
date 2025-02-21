@@ -270,6 +270,6 @@ extends:
           - ${{ if eq(variables['Build.Reason'], 'Manual') }}:
             - template: /eng/common/pipelines/templates/steps/detect-api-changes.yml
               parameters:
-                Artifacts: $(GeneratedSDK.StagedArtifactsFolder)
+                ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
                 ArtifactName: $(PipelineArtifactsName)
                 RepoRoot: $(SdkRepoDirectory)
