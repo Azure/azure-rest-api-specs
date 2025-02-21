@@ -2642,7 +2642,7 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "AKV_CERT_URI",
+            "name": "KeyVaultCertificateUri",
             "value": "AKV_CERT_URI",
             "description": "If the certificate is stored in an Azure Key Vault."
           }
@@ -2838,27 +2838,27 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "NOT_VALIDATED",
+            "name": "NotValidated",
             "value": "NOT_VALIDATED",
             "description": "File is not validated."
           },
           {
-            "name": "VALIDATION_SUCCESS",
+            "name": "ValidationSuccess",
             "value": "VALIDATION_SUCCESS",
             "description": "File is validated."
           },
           {
-            "name": "VALIDATION_FAILURE",
+            "name": "ValidationFailure",
             "value": "VALIDATION_FAILURE",
             "description": "File validation is failed."
           },
           {
-            "name": "VALIDATION_INITIATED",
+            "name": "ValidationInitiated",
             "value": "VALIDATION_INITIATED",
             "description": "File validation is in progress."
           },
           {
-            "name": "VALIDATION_NOT_REQUIRED",
+            "name": "ValidationNotRequired",
             "value": "VALIDATION_NOT_REQUIRED",
             "description": "Validation is not required."
           }
@@ -4297,12 +4297,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "AKV_SECRET_URI",
+            "name": "KeyVaultSecretUri",
             "value": "AKV_SECRET_URI",
             "description": "If the secret is stored in an Azure Key Vault."
           },
           {
-            "name": "SECRET_VALUE",
+            "name": "SecretValue",
             "value": "SECRET_VALUE",
             "description": "If the secret value provided as plain text."
           }
@@ -4699,15 +4699,15 @@
         },
         "testScriptFileInfo": {
           "$ref": "#/definitions/TestFileInfo",
-          "description": "File info"
+          "description": "The test script file for the test run"
         },
         "userPropFileInfo": {
           "$ref": "#/definitions/TestFileInfo",
-          "description": "File info"
+          "description": "The user properties file"
         },
         "inputArtifactsZipFileInfo": {
           "$ref": "#/definitions/TestFileInfo",
-          "description": "File info"
+          "description": "The zip file with all input artifacts"
         },
         "urlTestConfigFileInfo": {
           "$ref": "#/definitions/TestFileInfo",
@@ -5487,15 +5487,15 @@
         },
         "testScriptFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
-          "description": "File info"
+          "description": "The test script file for the test run"
         },
         "userPropFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
-          "description": "File info"
+          "description": "The user properties file"
         },
         "inputArtifactsZipFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
-          "description": "File info"
+          "description": "The zip file for all input artifacts"
         },
         "urlTestConfigFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
@@ -5518,11 +5518,11 @@
       "properties": {
         "resultFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
-          "description": "File info"
+          "description": "The test run results file"
         },
         "logsFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
-          "description": "File info"
+          "description": "The test run report with metrics"
         },
         "artifactsContainerInfo": {
           "$ref": "#/definitions/ArtifactsContainerInfo",
@@ -5725,82 +5725,82 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "ACCEPTED",
+            "name": "Accepted",
             "value": "ACCEPTED",
             "description": "Test run request is accepted."
           },
           {
-            "name": "NOTSTARTED",
+            "name": "NotStarted",
             "value": "NOTSTARTED",
             "description": "Test run is not yet started."
           },
           {
-            "name": "PROVISIONING",
+            "name": "Provisioning",
             "value": "PROVISIONING",
             "description": "Test run is provisioning."
           },
           {
-            "name": "PROVISIONED",
+            "name": "Provisioned",
             "value": "PROVISIONED",
             "description": "Test run is provisioned."
           },
           {
-            "name": "CONFIGURING",
+            "name": "Configuring",
             "value": "CONFIGURING",
             "description": "Test run is getting configured."
           },
           {
-            "name": "CONFIGURED",
+            "name": "Configured",
             "value": "CONFIGURED",
             "description": "Test run configuration is done."
           },
           {
-            "name": "EXECUTING",
+            "name": "Executing",
             "value": "EXECUTING",
             "description": "Test run has started executing."
           },
           {
-            "name": "EXECUTED",
+            "name": "Executed",
             "value": "EXECUTED",
             "description": "Test run execution is completed."
           },
           {
-            "name": "DEPROVISIONING",
+            "name": "Deprovisioning",
             "value": "DEPROVISIONING",
             "description": "Test run is getting deprovisioned."
           },
           {
-            "name": "DEPROVISIONED",
+            "name": "Deprovisioned",
             "value": "DEPROVISIONED",
             "description": "Test run is deprovisioned."
           },
           {
-            "name": "DONE",
+            "name": "Done",
             "value": "DONE",
             "description": "Test run is completed."
           },
           {
-            "name": "CANCELLING",
+            "name": "Cancelling",
             "value": "CANCELLING",
             "description": "Test run is being cancelled."
           },
           {
-            "name": "CANCELLED",
+            "name": "Cancelled",
             "value": "CANCELLED",
             "description": "Test run request is cancelled."
           },
           {
-            "name": "FAILED",
+            "name": "Failed",
             "value": "FAILED",
             "description": "Test run request is failed."
           },
           {
-            "name": "VALIDATION_SUCCESS",
+            "name": "ValidationSuccess",
             "value": "VALIDATION_SUCCESS",
             "description": "Test run JMX file is validated."
           },
           {
-            "name": "VALIDATION_FAILURE",
+            "name": "ValidationFailure",
             "value": "VALIDATION_FAILURE",
             "description": "Test run JMX file validation is failed."
           }

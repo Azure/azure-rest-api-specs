@@ -25,16 +25,12 @@ namespace Customizations;
 @@clientName(Secret.type, "SecretKind", "csharp");
 @@clientName(CertificateMetadata.type, "CertificateKind", "csharp");
 
-// Suggestion to rename Enum Members for more clarity
-@@clientName(CertificateType.AKV_CERT_URI, "KeyVaultCertificateUri", "csharp,java");
-@@clientName(SecretType.AKV_SECRET_URI, "KeyVaultSecretUri", "csharp,java");
-
 // Suggestion to fix casing for acronyms
 @@clientName(LoadTestConfiguration.splitAllCSVs, "splitAllCsvs", "csharp,java");
 @@clientName(Test.publicIPDisabled, "publicIpDisabled", "csharp,java");
 @@clientName(TestRun.publicIPDisabled, "publicIpDisabled", "csharp,java");
 
-// Suggestion to rename properties in TestRunStatistics for better explaination
+// Suggestion to rename properties in TestRunStatistics for better explanation
 @@clientName(TestRunStatistics.errorPct, "errorPercentage", "csharp,java");
 @@clientName(TestRunStatistics.meanResTime, "meanResponseTime", "csharp,java");
 @@clientName(TestRunStatistics.medianResTime, "medianResponseTime", "csharp,java");

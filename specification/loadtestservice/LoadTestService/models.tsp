@@ -85,11 +85,12 @@ union PassFailResult {
 @doc("Types of secrets supported.")
 union SecretType {
   string,
+
   @doc("If the secret is stored in an Azure Key Vault.")
-  AKV_SECRET_URI: "AKV_SECRET_URI",
+  KeyVaultSecretUri: "AKV_SECRET_URI",
 
   @doc("If the secret value provided as plain text.")
-  SECRET_VALUE: "SECRET_VALUE",
+  SecretValue: "SECRET_VALUE",
 }
 
 @doc("Managed identity type.")
@@ -106,8 +107,9 @@ union ManagedIdentityType {
 @doc("Types of certificates supported.")
 union CertificateType {
   string,
+
   @doc("If the certificate is stored in an Azure Key Vault.")
-  AKV_CERT_URI: "AKV_CERT_URI",
+  KeyVaultCertificateUri: "AKV_CERT_URI",
 }
 
 @doc("Types of file supported.")
@@ -139,11 +141,21 @@ union FileType {
 @doc("File status.")
 union FileValidationStatus {
   string,
-  @doc("File is not validated.") "NOT_VALIDATED",
-  @doc("File is validated.") "VALIDATION_SUCCESS",
-  @doc("File validation is failed.") "VALIDATION_FAILURE",
-  @doc("File validation is in progress.") "VALIDATION_INITIATED",
-  @doc("Validation is not required.") "VALIDATION_NOT_REQUIRED",
+
+  @doc("File is not validated.")
+  NotValidated: "NOT_VALIDATED",
+
+  @doc("File is validated.")
+  ValidationSuccess: "VALIDATION_SUCCESS",
+
+  @doc("File validation is failed.")
+  ValidationFailure: "VALIDATION_FAILURE",
+
+  @doc("File validation is in progress.")
+  ValidationInitiated: "VALIDATION_INITIATED",
+
+  @doc("Validation is not required.")
+  ValidationNotRequired: "VALIDATION_NOT_REQUIRED",
 }
 
 @doc("Test result based on pass/fail criteria.")
@@ -157,22 +169,54 @@ union PassFailTestResult {
 @doc("Test run status.")
 union TestRunStatus {
   string,
-  @doc("Test run request is accepted.") "ACCEPTED",
-  @doc("Test run is not yet started.") "NOTSTARTED",
-  @doc("Test run is provisioning.") "PROVISIONING",
-  @doc("Test run is provisioned.") "PROVISIONED",
-  @doc("Test run is getting configured.") "CONFIGURING",
-  @doc("Test run configuration is done.") "CONFIGURED",
-  @doc("Test run has started executing.") "EXECUTING",
-  @doc("Test run execution is completed.") "EXECUTED",
-  @doc("Test run is getting deprovisioned.") "DEPROVISIONING",
-  @doc("Test run is deprovisioned.") "DEPROVISIONED",
-  @doc("Test run is completed.") "DONE",
-  @doc("Test run is being cancelled.") "CANCELLING",
-  @doc("Test run request is cancelled.") "CANCELLED",
-  @doc("Test run request is failed.") "FAILED",
-  @doc("Test run JMX file is validated.") "VALIDATION_SUCCESS",
-  @doc("Test run JMX file validation is failed.") "VALIDATION_FAILURE",
+
+  @doc("Test run request is accepted.")
+  Accepted: "ACCEPTED",
+
+  @doc("Test run is not yet started.")
+  NotStarted: "NOTSTARTED",
+
+  @doc("Test run is provisioning.")
+  Provisioning: "PROVISIONING",
+
+  @doc("Test run is provisioned.")
+  Provisioned: "PROVISIONED",
+
+  @doc("Test run is getting configured.")
+  Configuring: "CONFIGURING",
+
+  @doc("Test run configuration is done.")
+  Configured: "CONFIGURED",
+
+  @doc("Test run has started executing.")
+  Executing: "EXECUTING",
+
+  @doc("Test run execution is completed.")
+  Executed: "EXECUTED",
+
+  @doc("Test run is getting deprovisioned.")
+  Deprovisioning: "DEPROVISIONING",
+
+  @doc("Test run is deprovisioned.")
+  Deprovisioned: "DEPROVISIONED",
+
+  @doc("Test run is completed.")
+  Done: "DONE",
+
+  @doc("Test run is being cancelled.")
+  Cancelling: "CANCELLING",
+
+  @doc("Test run request is cancelled.")
+  Cancelled: "CANCELLED",
+
+  @doc("Test run request is failed.")
+  Failed: "FAILED",
+
+  @doc("Test run JMX file is validated.")
+  ValidationSuccess: "VALIDATION_SUCCESS",
+
+  @doc("Test run JMX file validation is failed.")
+  ValidationFailure: "VALIDATION_FAILURE",
 }
 
 @doc("Aggregation type.")
@@ -551,13 +595,13 @@ model TestInputArtifacts {
   @doc("File info")
   configFileInfo?: TestFileInfo;
 
-  @doc("File info")
+  @doc("The test script file for the test run")
   testScriptFileInfo?: TestFileInfo;
 
-  @doc("File info")
+  @doc("The user properties file")
   userPropFileInfo?: TestFileInfo;
 
-  @doc("File info")
+  @doc("The zip file with all input artifacts")
   inputArtifactsZipFileInfo?: TestFileInfo;
 
   @added(APIVersions.v2023_04_01_preview)
@@ -943,13 +987,13 @@ model TestRunInputArtifacts {
   @doc("File info")
   configFileInfo?: TestRunFileInfo;
 
-  @doc("File info")
+  @doc("The test script file for the test run")
   testScriptFileInfo?: TestRunFileInfo;
 
-  @doc("File info")
+  @doc("The user properties file")
   userPropFileInfo?: TestRunFileInfo;
 
-  @doc("File info")
+  @doc("The zip file for all input artifacts")
   inputArtifactsZipFileInfo?: TestRunFileInfo;
 
   @added(APIVersions.v2023_04_01_preview)
@@ -963,10 +1007,10 @@ model TestRunInputArtifacts {
 
 @doc("The output artifacts for the test run.")
 model TestRunOutputArtifacts {
-  @doc("File info")
+  @doc("The test run results file")
   resultFileInfo?: TestRunFileInfo;
 
-  @doc("File info")
+  @doc("The test run report with metrics")
   logsFileInfo?: TestRunFileInfo;
 
   @doc("The container for test run artifacts.")
