@@ -57,27 +57,31 @@ interface SAPDatabaseInstances {
   /**
    * Starts the database instance of the SAP system.
    */
-  start is ArmResourceActionAsync<
+  start is CustomizedArmResourceActionSync<
     SAPDatabaseInstance,
-    {
-      @doc("SAP Database server instance start request body.")
-      @body
-      body?: StartRequest;
-    },
-    Foundations.OperationStatusResult
+    StartRequest,
+    Foundations.OperationStatusResult,
+    RequestBody = {
+      /**
+       * SAP Database server instance start request body.
+       */
+      @body body?: StartRequest;
+    }
   >;
 
   /**
    * Stops the database instance of the SAP system.
    */
-  stop is ArmResourceActionAsync<
+  stop is CustomizedArmResourceActionSync<
     SAPDatabaseInstance,
-    {
-      @doc("Stop request for the database instance of the SAP system.")
-      @body
-      body?: StopRequest;
-    },
-    Foundations.OperationStatusResult
+    StopRequest,
+    Foundations.OperationStatusResult,
+    RequestBody = {
+      /**
+       * Stop request for the database instance of the SAP system.
+       */
+      @body body?: StopRequest;
+    }
   >;
 }
 
@@ -89,10 +93,4 @@ interface SAPDatabaseInstances {
 );
 @@doc(SAPDatabaseInstances.update::parameters.properties,
   "Database resource update request body."
-);
-@@doc(SAPDatabaseInstances.start::parameters.body,
-  "SAP Database server instance start request body."
-);
-@@doc(SAPDatabaseInstances.stop::parameters.body,
-  "Stop request for the database instance of the SAP system."
 );
