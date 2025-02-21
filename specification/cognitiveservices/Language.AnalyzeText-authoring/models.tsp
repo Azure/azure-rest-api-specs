@@ -584,7 +584,7 @@ model TextAnalysisAuthoringEvaluationOptions {
  * Represents the state of a copy job.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("TextAuthoringCopyProjectOperationState", "csharp")
+@clientName("TextAuthoringCopyProjectState", "csharp")
 @resource("copy/jobs")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringCopyProjectJobState {
@@ -594,7 +594,7 @@ model TextAnalysisAuthoringCopyProjectJobState {
 /**
  * Represents a job's state.
  */
-@clientName("TextAuthoringOperationState", "csharp")
+@clientName("TextAuthoringState", "csharp")
 model TextAnalysisAuthoringJobState {
   /**
    * The job ID.
@@ -750,7 +750,7 @@ model TextAnalysisAuthoringDeleteDeploymentOptions {
 /**
  * Represents the state of a deployment job.
  */
-@clientName("TextAuthoringDeploymentOperationState", "csharp")
+@clientName("TextAuthoringDeploymentState", "csharp")
 @parentResource(TextAnalysisAuthoringProjectDeployment)
 @resource("jobs")
 model TextAnalysisAuthoringDeploymentJobState {
@@ -760,7 +760,7 @@ model TextAnalysisAuthoringDeploymentJobState {
 /**
  * Represents the state of an existing delete deployment from specific resources job.
  */
-@clientName("TextAuthoringDeploymentDeleteFromResourcesOperationState", "csharp")
+@clientName("TextAuthoringDeploymentDeleteFromResourcesState", "csharp")
 @parentResource(TextAnalysisAuthoringProjectDeployment)
 @resource("delete-from-resources/jobs")
 model TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState {
@@ -770,7 +770,7 @@ model TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState {
 /**
  * Represents the state of a deployment job.
  */
-@clientName("TextAuthoringSwapDeploymentsOperationState", "csharp")
+@clientName("TextAuthoringSwapDeploymentsState", "csharp")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
 @resource("deployments/swap/jobs")
 model TextAnalysisAuthoringSwapDeploymentsJobState {
@@ -796,7 +796,7 @@ model TextAnalysisAuthoringSwapDeploymentsOptions {
 /**
  * Represents the state of an export job.
  */
-@clientName("TextAuthoringExportProjectOperationState", "csharp")
+@clientName("TextAuthoringExportProjectState", "csharp")
 @resource("export/jobs")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringExportProjectJobState {
@@ -881,7 +881,7 @@ model TextAnalysisAuthoringExportedModelOptions {
 /**
  * Represents the state of a job to create or updated an exported model.
  */
-@clientName("TextAuthoringExportedModelOperationState", "csharp")
+@clientName("TextAuthoringExportedModelState", "csharp")
 @resource("jobs")
 @parentResource(TextAnalysisAuthoringExportedTrainedModel)
 model TextAnalysisAuthoringExportedModelJobState {
@@ -920,7 +920,7 @@ model TextAnalysisAuthoringModelFile {
 /**
  * Represents the state of an import job.
  */
-@clientName("TextAuthoringImportProjectOperationState", "csharp")
+@clientName("TextAuthoringImportProjectState", "csharp")
 @resource("import/jobs")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringImportProjectJobState {
@@ -993,7 +993,7 @@ model TextAnalysisAuthoringProjectTrainedModel {
 /**
  * Represents the state of a evaluation job.
  */
-@clientName("TextAuthoringEvaluationOperationState", "csharp")
+@clientName("TextAuthoringEvaluationState", "csharp")
 @resource("evaluate/jobs")
 @parentResource(TextAnalysisAuthoringProjectTrainedModel)
 model TextAnalysisAuthoringEvaluationJobState {
@@ -1032,7 +1032,7 @@ model TextAnalysisAuthoringEvaluationJobResult {
 /**
  * Represents a list of results for an evaluation operation.
  */
-@clientName("TextAuthoringEvaluationResults", "csharp")
+@clientName("TextAuthoringEvalResults", "csharp")
 model TextAnalysisAuthoringEvaluationResults {
   /**
    * The list of projects.
@@ -1048,7 +1048,7 @@ model TextAnalysisAuthoringEvaluationResults {
 /**
  * Represents the evaluation result of a document.
  */
-@clientName("TextAuthoringDocumentEvaluationResult", "csharp")
+@clientName("TextAuthoringDocumentEvalResult", "csharp")
 @resource("evaluation/result")
 @parentResource(TextAnalysisAuthoringProjectTrainedModel)
 @discriminator("projectKind")
@@ -1132,7 +1132,7 @@ model TextAnalysisAuthoringEvaluationSummary {
 /**
  * Represents the state of loading a snapshot job.
  */
-@clientName("TextAuthoringLoadSnapshotOperationState", "csharp")
+@clientName("TextAuthoringLoadSnapshotState", "csharp")
 @resource("load-snapshot/jobs")
 @parentResource(TextAnalysisAuthoringProjectTrainedModel)
 model TextAnalysisAuthoringLoadSnapshotJobState {
@@ -1225,7 +1225,7 @@ model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
  * Represents the state of a assign deployment resources job.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("TextAuthoringAssignDeploymentResourcesOperationState", "csharp")
+@clientName("TextAuthoringAssignDeploymentResourcesState", "csharp")
 @resource("resources/assign/jobs")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringAssignDeploymentResourcesJobState {
@@ -1236,7 +1236,7 @@ model TextAnalysisAuthoringAssignDeploymentResourcesJobState {
  * Represents the state of a unassign deployment resources job.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("TextAuthoringUnassignDeploymentResourcesOperationState", "csharp")
+@clientName("TextAuthoringUnassignDeploymentResourcesState", "csharp")
 @resource("resources/unassign/jobs")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringUnassignDeploymentResourcesJobState {
@@ -1262,7 +1262,7 @@ model TextAnalysisAuthoringTrainingJobs {
 /**
  * Represents the state of a training job.
  */
-@clientName("TextAuthoringTrainingOperationState", "csharp")
+@clientName("TextAuthoringTrainingState", "csharp")
 @resource("train/jobs")
 @parentResource(TextAnalysisAuthoringProjectMetadata)
 model TextAnalysisAuthoringTrainingJobState {
@@ -1309,7 +1309,7 @@ model TextAnalysisAuthoringTrainingJobResult {
 /**
  * Represents the detailed state of a training sub-operation.
  */
-@clientName("TextAuthoringSubTrainingOperationState", "csharp")
+@clientName("TextAuthoringSubTrainingState", "csharp")
 model TextAnalysisAuthoringSubTrainingJobState {
   /**
    * Represents progress percentage.
@@ -1338,7 +1338,7 @@ model TextAnalysisAuthoringSubTrainingJobState {
  * Represents the state of a project deletion job.
  */
 @resource("authoring/analyze-text/projects/global/deletion-jobs")
-@clientName("TextAuthoringProjectDeletionOperationState", "csharp")
+@clientName("TextAuthoringProjectDeletionState", "csharp")
 model TextAnalysisAuthoringProjectDeletionJobState {
   ...TextAnalysisAuthoringJobState;
 }
@@ -1535,7 +1535,7 @@ model TextAnalysisAuthoringConfusionMatrixCell {
 /**
  * Represents the document evaluation result for a custom entity recognition project.
  */
-@clientName("CustomEntityRecognitionDocumentEvaluationResult", "csharp")
+@clientName("CustomEntityRecognitionDocumentEvalResult", "csharp")
 model TextAnalysisAuthoringCustomEntityRecognitionDocumentEvaluationResult
   extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
@@ -1552,7 +1552,7 @@ model TextAnalysisAuthoringCustomEntityRecognitionDocumentEvaluationResult
 /**
  * Represents the entity recognition evaluation result for a document.
  */
-@clientName("DocumentEntityRecognitionEvaluationResult", "csharp")
+@clientName("DocumentEntityRecognitionEvalResult", "csharp")
 model TextAnalysisAuthoringDocumentEntityRecognitionEvaluationResult {
   /**
    * Represents the document labelled entities.
@@ -1563,7 +1563,7 @@ model TextAnalysisAuthoringDocumentEntityRecognitionEvaluationResult {
 /**
  * Represents the evaluation comparison between the expected and predicted entities of a document region.
  */
-@clientName("DocumentEntityRegionEvaluationResult", "csharp")
+@clientName("DocumentEntityRegionEvalResult", "csharp")
 model TextAnalysisAuthoringDocumentEntityRegionEvaluationResult {
   /**
    * Represents the region's expected entity labels.
@@ -1589,7 +1589,7 @@ model TextAnalysisAuthoringDocumentEntityRegionEvaluationResult {
 /**
  * Represents an evaluation result entity label.
  */
-@clientName("DocumentEntityLabelEvaluationResult", "csharp")
+@clientName("DocumentEntityLabelEvalResult", "csharp")
 model TextAnalysisAuthoringDocumentEntityLabelEvaluationResult {
   /**
    * Represents the entity category.
@@ -1720,7 +1720,7 @@ model TextAnalysisAuthoringEntityEvaluationSummary {
  * Represents the document evaluation result for a custom entity recognition project.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("CustomHealthcareDocumentEvaluationResult", "csharp")
+@clientName("CustomHealthcareDocumentEvalResult", "csharp")
 model TextAnalysisAuthoringCustomHealthcareDocumentEvaluationResult
   extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
@@ -1737,7 +1737,7 @@ model TextAnalysisAuthoringCustomHealthcareDocumentEvaluationResult
 /**
  * Represents the healthcare evaluation result for a document.
  */
-@clientName("DocumentHealthcareEvaluationResult", "csharp")
+@clientName("DocumentHealthcareEvalResult", "csharp")
 model TextAnalysisAuthoringDocumentHealthcareEvaluationResult {
   /**
    * Represents the document labelled entities.
@@ -1766,7 +1766,7 @@ model TextAnalysisAuthoringCustomHealthcareEvaluationSummary
 /**
  * Represents the document evaluation result for a custom multi-label classification project.
  */
-@clientName("CustomMultiLabelClassificationDocumentEvaluationResult", "csharp")
+@clientName("CustomMultiLabelClassificationDocumentEvalResult", "csharp")
 model TextAnalysisAuthoringCustomMultiLabelClassificationDocumentEvaluationResult
   extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
@@ -1783,7 +1783,7 @@ model TextAnalysisAuthoringCustomMultiLabelClassificationDocumentEvaluationResul
 /**
  * Represents the comparison between the expected and predicted classes that are result from the evaluation operation.
  */
-@clientName("DocumentMultiLabelClassificationEvaluationResult", "csharp")
+@clientName("DocumentMultiLabelClassificationEvalResult", "csharp")
 model TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult {
   /**
    * Represents the document's expected classes.
@@ -1898,7 +1898,7 @@ model TextAnalysisAuthoringMultiLabelClassEvaluationSummary {
 /**
  * Represents the document evaluation result for a custom single-label classification project.
  */
-@clientName("CustomSingleLabelClassificationDocumentEvaluationResult", "csharp")
+@clientName("CustomSingleLabelClassificationDocumentEvalResult", "csharp")
 model TextAnalysisAuthoringCustomSingleLabelClassificationDocumentEvaluationResult
   extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
@@ -1915,7 +1915,7 @@ model TextAnalysisAuthoringCustomSingleLabelClassificationDocumentEvaluationResu
 /**
  * Represents the comparison between the expected and predicted class that result from an evaluation operation.
  */
-@clientName("DocumentSingleLabelClassificationEvaluationResult", "csharp")
+@clientName("DocumentSingleLabelClassificationEvalResult", "csharp")
 model TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult {
   /**
    * Represents the document's expected class.
@@ -2036,7 +2036,7 @@ model TextAnalysisAuthoringSingleLabelClassEvaluationSummary {
  * Represents the document evaluation result for a custom sentiment project.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("CustomTextSentimentDocumentEvaluationResult", "csharp")
+@clientName("CustomTextSentimentDocumentEvalResult", "csharp")
 model TextAnalysisAuthoringCustomTextSentimentDocumentEvaluationResult
   extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
@@ -2053,7 +2053,7 @@ model TextAnalysisAuthoringCustomTextSentimentDocumentEvaluationResult
 /**
  * Represents the comparison between the expected and predicted sentiment that result from an evaluation operation.
  */
-@clientName("DocumentTextSentimentEvaluationResult", "csharp")
+@clientName("DocumentTextSentimentEvalResult", "csharp")
 model TextAnalysisAuthoringDocumentTextSentimentEvaluationResult {
   /**
    * Represents the document's expected sentiment labels.
@@ -2069,7 +2069,7 @@ model TextAnalysisAuthoringDocumentTextSentimentEvaluationResult {
 /**
  * Represents an evaluation result Sentiment label.
  */
-@clientName("DocumentSentimentLabelEvaluationResult", "csharp")
+@clientName("DocumentSentimentLabelEvalResult", "csharp")
 model TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult {
   /**
    * Represents the sentiment category.
