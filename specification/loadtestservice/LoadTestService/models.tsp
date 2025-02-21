@@ -117,25 +117,25 @@ union FileType {
   string,
 
   @doc("If the file is a JMX script.")
-  "JMX_FILE",
+  JmxFile: "JMX_FILE",
 
   @doc("If the file is a user properties file.")
-  "USER_PROPERTIES",
+  UserProperties: "USER_PROPERTIES",
 
   @doc("If the file is not among any of the other supported file types.")
-  "ADDITIONAL_ARTIFACTS",
+  AdditionalArtifacts: "ADDITIONAL_ARTIFACTS",
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a compressed archive containing a collection of various artifacts or resources.")
-  "ZIPPED_ARTIFACTS",
+  ZippedArtifacts: "ZIPPED_ARTIFACTS",
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a JSON config file to define the requests for a URL test.")
-  "URL_TEST_CONFIG",
+  UrlTestConfig: "URL_TEST_CONFIG",
 
   @added(APIVersions.v2024_03_01_preview)
   @doc("If the file is a test script.")
-  "TEST_SCRIPT",
+  TestScript: "TEST_SCRIPT",
 }
 
 @doc("File status.")
