@@ -68,11 +68,16 @@ const config = tseslint.config(
       "@typescript-eslint/restrict-template-expressions": "off",
       "@typescript-eslint/no-unsafe-assignment": "off",
       "@typescript-eslint/no-unsafe-argument": "off",
+      "@typescript-eslint/consistent-indexed-object-style": "off",
+      "@typescript-eslint/no-unnecessary-condition": "off",
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/no-inferrable-types": "off",
 
       // We want more flexibility with file names.
       // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/filename-case.md
       "unicorn/filename-case": "off",
       "unicorn/prefer-ternary": "off",
+      "unicorn/no-useless-undefined": "off",
 
       // We prefer to have explicitly import at the top of the file, even if the same element is exported again,
       // which we do in index.ts files.
