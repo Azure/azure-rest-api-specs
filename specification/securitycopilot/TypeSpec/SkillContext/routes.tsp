@@ -185,9 +185,9 @@ op CreateEmbedding(
 @get
 @route("/ecsFlight/getEcsConfiguration")
 @doc("Gets the ECS configuration")
-op getEcsSettings(
+op getEcsConfiguration(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
-@body getInputRequest : EcsConfigurationRequest,
+@body getEcsConfigurationRequest : EcsConfigurationRequest,
 ): ECSFlightResponse<unknown>;
 
 @get
