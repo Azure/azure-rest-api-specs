@@ -13,7 +13,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Gallery.tsp";
-import "../Common/lagacy.tsp";
+import "../Common/legacy.tsp";
 import "../Common/models-ref.tsp";
 import "./GalleryImage.tsp";
 import "./GalleryImageVersion.tsp";

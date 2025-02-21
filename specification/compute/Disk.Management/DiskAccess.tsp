@@ -25,7 +25,7 @@ model DiskAccess
   /**
    * The extended location where the disk access will be created. Extended location cannot be changed.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   extendedLocation?: ExtendedLocation;
 }
 
@@ -86,6 +86,7 @@ interface DiskAccesses {
    * Gets the private link resources possible under disk access resource
    */
   @get
+  @action("privatelinkresources")
   getPrivateLinkResources is ComputeResourceActionSync<
     DiskAccess,
     void,

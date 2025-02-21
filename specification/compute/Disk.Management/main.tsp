@@ -8,7 +8,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../Common/lagacy.tsp";
+import "../Common/legacy.tsp";
 import "../Common/operations.tsp";
 import "../Common/models-ref.tsp";
 import "./models.tsp";

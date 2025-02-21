@@ -25,7 +25,7 @@ model DiskEncryptionSet
   /**
    * The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   identity?: EncryptionSetIdentity;
 }
 
