@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./HostPool.tsp";
+import "./CustomOperations.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -36,10 +37,13 @@ interface InitiateSessionHostUpdate {
   @action("initiateSessionHostUpdate")
   post is ArmResourceActionSync<
     SessionHostManagement,
-    UpdateSessionHostsRequestBody,
-    Response = {
-      @bodyRoot updateSessionHostsRequest?: UpdateSessionHostsRequestBody;
-    }
+    Request = {
+      /**
+       * The resource properties to be updated
+       */
+      @bodyRoot updateSessionHostsRequestBody?: UpdateSessionHostsRequestBody;
+    },
+    Response = UpdateSessionHostsRequestBody
   >;
 }
 

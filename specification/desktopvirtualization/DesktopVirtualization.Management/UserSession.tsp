@@ -122,10 +122,10 @@ interface UserSessions {
    */
   sendMessage is ArmResourceActionSync<
     UserSession,
-    SendMessage,
-    Response = {
+    Request = {
       @bodyRoot sendMessage?: SendMessage;
-    }
+    },
+    Response = SendMessage
   >;
 }
 

@@ -134,7 +134,10 @@ interface HostPools {
   update is ArmCustomPatchSync<
     HostPool,
     HostPoolPatch,
-    Response = {
+    Request = {
+      /**
+       * The properties to be updated.
+       */
       @bodyRoot hostPool?: HostPoolPatch;
     }
   >;

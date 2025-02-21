@@ -49,7 +49,10 @@ interface ScalingPlans {
   update is ArmCustomPatchSync<
     ScalingPlan,
     ScalingPlanPatch,
-    Response = {
+    Request = {
+      /**
+       * The resource properties to be updated
+       */
       @bodyRoot scalingPlan?: ScalingPlanPatch;
     }
   >;

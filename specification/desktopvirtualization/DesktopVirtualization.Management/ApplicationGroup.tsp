@@ -4,6 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "./CustomOperations.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -81,7 +82,7 @@ interface ApplicationGroups {
   update is ArmCustomPatchSync<
     ApplicationGroup,
     ApplicationGroupPatch,
-    Response = {
+    Request = {
       /**
        * The AppGroup properties to be updated
        */

@@ -883,10 +883,10 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "body",
+            "name": "applicationGroup",
             "in": "body",
-            "description": "The resource properties to be updated",
-            "required": true,
+            "description": "The AppGroup properties to be updated",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ApplicationGroupPatch"
             }
@@ -894,9 +894,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApplicationGroupPatch"
+              "$ref": "#/definitions/ApplicationGroup"
             }
           },
           "default": {
@@ -1202,10 +1202,10 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "body",
+            "name": "application",
             "in": "body",
             "description": "The resource properties to be updated",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ApplicationPatch"
             }
@@ -1213,9 +1213,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPatch"
+              "$ref": "#/definitions/Application"
             }
           },
           "default": {
@@ -1766,10 +1766,10 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "body",
+            "name": "hostPool",
             "in": "body",
-            "description": "The resource properties to be updated",
-            "required": true,
+            "description": "The properties to be updated.",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/HostPoolPatch"
             }
@@ -1777,9 +1777,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HostPoolPatch"
+              "$ref": "#/definitions/HostPool"
             }
           },
           "default": {
@@ -3473,10 +3473,10 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "body",
+            "name": "updateSessionHostsRequestBody",
             "in": "body",
-            "description": "The content of the action request",
-            "required": true,
+            "description": "The resource properties to be updated",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/UpdateSessionHostsRequestBody"
             }
@@ -4227,10 +4227,9 @@
             "maxLength": 24
           },
           {
-            "name": "body",
+            "name": "sendMessage",
             "in": "body",
-            "description": "The content of the action request",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SendMessage"
             }
@@ -4541,10 +4540,10 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "body",
+            "name": "scalingPlan",
             "in": "body",
             "description": "The resource properties to be updated",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ScalingPlanPatch"
             }
@@ -4552,9 +4551,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ScalingPlanPatch"
+              "$ref": "#/definitions/ScalingPlan"
             }
           },
           "default": {
@@ -4860,10 +4859,10 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "body",
+            "name": "scalingPlanPersonalSchedule",
             "in": "body",
             "description": "The resource properties to be updated",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ScalingPlanPersonalSchedulePatch"
             }
@@ -4871,9 +4870,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ScalingPlanPersonalSchedulePatch"
+              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
             }
           },
           "default": {
@@ -5189,10 +5188,10 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "body",
+            "name": "scalingPlanPooledSchedule",
             "in": "body",
             "description": "The resource properties to be updated",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ScalingPlanPooledSchedulePatch"
             }
@@ -5200,9 +5199,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ScalingPlanPooledSchedulePatch"
+              "$ref": "#/definitions/ScalingPlanPooledSchedule"
             }
           },
           "default": {

@@ -44,7 +44,10 @@ interface Applications {
   update is ArmCustomPatchSync<
     Application,
     ApplicationPatch,
-    Response = {
+    Request = {
+      /**
+       * The resource properties to be updated
+       */
       @bodyRoot application?: ApplicationPatch;
     }
   >;

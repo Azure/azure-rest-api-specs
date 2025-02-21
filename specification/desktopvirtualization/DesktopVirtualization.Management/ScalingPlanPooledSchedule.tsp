@@ -47,7 +47,10 @@ interface ScalingPlanPooledSchedules {
   update is ArmCustomPatchSync<
     ScalingPlanPooledSchedule,
     ScalingPlanPooledSchedulePatch,
-    Response = {
+    Request = {
+      /**
+       * The resource properties to be updated
+       */
       @bodyRoot scalingPlanPooledSchedule?: ScalingPlanPooledSchedulePatch;
     }
   >;
