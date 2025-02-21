@@ -825,10 +825,6 @@ namespace SkillContext
 	
 	@doc("ECSFlightIdentity object containing properties for ECSFlight.")
 	model ECSFlightIdentity {
-        @doc("Tenant id of the ECSFlight.")
-		tenantId?: string;
-        @doc("User id of the ECSFlight.")
-        userId?: string;
         @doc("workspace of the ecs flight")
         workspace?: string;
         @doc("Geography of the ECSFlight.")
