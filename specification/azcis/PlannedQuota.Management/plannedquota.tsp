@@ -55,28 +55,23 @@ model PlannedQuotaResourceProperties {
   @added(Versions.v2024_06_24_preview)
   @doc("Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.")
   @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
-  fulfilledPlan?: FulfilledPlan;
+  fulfilledPlan?: ResultData;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
   @added(Versions.v2024_06_24_preview)
   @doc("Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.")
   @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
-  alternatives?: {};
+  alternatives?: ResultData;
 }
 
 @added(Versions.v2024_06_24_preview)
-@doc("Fulfilled Plan details after fulfilling the quota of the plan.")
-model FulfilledPlan {
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
-  @doc("Same as the \"arm\" node in the plan for the corresponding Subscription.")
-  arm?: {};
+@doc("Provisioning result data.")
+model ResultData {
+  @doc("The CIS event identifier.")
+  eventId: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
-  @doc("Same as the \"rdfe\" node in the plan for the corresponding Subscription.")
-  rdfe?: {};
-
-  @doc("Indicates whether AZ is enabled.")
-  isAzEnabled?: boolean;
+  @doc("The exact provisioning result value returned from Planned Quota.")
+  value?: {};
 }
 
 @doc("plannedQuota Property Binding")

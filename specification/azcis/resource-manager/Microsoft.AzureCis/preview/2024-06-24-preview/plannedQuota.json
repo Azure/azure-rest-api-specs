@@ -240,24 +240,6 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
-    "FulfilledPlan": {
-      "type": "object",
-      "description": "Fulfilled Plan details after fulfilling the quota of the plan.",
-      "properties": {
-        "arm": {
-          "type": "object",
-          "description": "Same as the \"arm\" node in the plan for the corresponding Subscription."
-        },
-        "rdfe": {
-          "type": "object",
-          "description": "Same as the \"rdfe\" node in the plan for the corresponding Subscription."
-        },
-        "isAzEnabled": {
-          "type": "boolean",
-          "description": "Indicates whether AZ is enabled."
-        }
-      }
-    },
     "PlannedQuotaProvisioningState": {
       "type": "string",
       "description": "Provisioning status of the resource.",
@@ -381,12 +363,12 @@
           "readOnly": true
         },
         "fulfilledPlan": {
-          "$ref": "#/definitions/FulfilledPlan",
+          "$ref": "#/definitions/ResultData",
           "description": "Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.",
           "readOnly": true
         },
         "alternatives": {
-          "type": "object",
+          "$ref": "#/definitions/ResultData",
           "description": "Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.",
           "readOnly": true
         }
@@ -414,6 +396,23 @@
       "required": [
         "placeholder",
         "resourceName"
+      ]
+    },
+    "ResultData": {
+      "type": "object",
+      "description": "Provisioning result data.",
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "description": "The CIS event identifier."
+        },
+        "value": {
+          "type": "object",
+          "description": "The exact provisioning result value returned from Planned Quota."
+        }
+      },
+      "required": [
+        "eventId"
       ]
     }
   },
