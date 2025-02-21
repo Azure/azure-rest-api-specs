@@ -3,30 +3,30 @@
     "subscriptionId": "20d7082a-0fc7-4468-82bd-542694d5042b",
     "resourceGroupName": "testrg",
     "virtualClusterName": "vc-subnet1-f769ed71-b3ad-491a-a9d5-26eeceaa6be2",
-    "api-version": "2023-08-01",
+    "api-version": "2021-11-01",
     "parameters": {
-      "tags": {
-        "tkey": "tvalue1"
+      "properties": {
+        "maintenanceConfigurationId": "/subscriptions/ab0e51c0-83c0-4380-8ae9-025516df392f/resourceGroups/Federation/providers/Microsoft.Maintenance/maintenanceConfigurations/MiPolicy1"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {},
-        "tags": {
-          "tkey": "tvalue3"
+        "properties": {
+          "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "childResources": [
+            "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance1",
+            "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance2"
+          ],
+          "maintenanceConfigurationId": "/subscriptions/ab0e51c0-83c0-4380-8ae9-025516df392f/resourceGroups/Federation/providers/Microsoft.Maintenance/maintenanceConfigurations/MiPolicy1"
         },
-        "location": "japaneast",
+        "location": "onebox",
         "id": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/testrg/providers/Microsoft.Sql/virtualClusters/vc-subnet1-f769ed71-b3ad-491a-a9d5-26eeceaa6be2",
         "name": "vc-subnet1-f769ed71-b3ad-491a-a9d5-26eeceaa6be2",
         "type": "Microsoft.Sql/virtualClusters"
       }
     },
-    "202": {
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/westus/virtualclusterazureasyncoperation/00000000-1111-2222-3333-444444444444?api-version=2022-11-01-preview"
-      }
-    }
+    "202": {}
   }
 }

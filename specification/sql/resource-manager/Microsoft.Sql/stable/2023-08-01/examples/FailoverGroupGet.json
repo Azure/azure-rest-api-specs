@@ -2,39 +2,35 @@
   "parameters": {
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "Default",
-    "serverName": "failovergroupprimaryserver",
-    "failoverGroupName": "failovergrouptest3",
-    "api-version": "2023-08-01"
+    "serverName": "failover-group-primary-server",
+    "failoverGroupName": "failover-group-test",
+    "api-version": "2021-11-01"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupprimaryserver/failoverGroups/failovergrouptest3",
-        "name": "failovergrouptest3",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-primary-server/failoverGroups/failover-group-test",
+        "name": "failover-group-test",
         "type": "Microsoft.Sql/servers/failoverGroups",
-        "location": "Japan West",
+        "location": "Japan East",
         "properties": {
           "readWriteEndpoint": {
             "failoverPolicy": "Automatic",
-            "failoverWithDataLossGracePeriodMinutes": 120
+            "failoverWithDataLossGracePeriodMinutes": 480
           },
           "readOnlyEndpoint": {
-            "failoverPolicy": "Enabled",
-            "targetServer": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupsecondaryserver"
+            "failoverPolicy": "Disabled"
           },
           "replicationRole": "Primary",
           "replicationState": "CATCH_UP",
           "partnerServers": [
             {
-              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupsecondaryserver",
-              "location": "Japan East",
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failover-group-secondary-server",
+              "location": "Japan West",
               "replicationRole": "Secondary"
             }
           ],
-          "databases": [
-            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupprimaryserver/databases/testdb1",
-            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupprimaryserver/databases/testdb2"
-          ]
+          "databases": []
         }
       }
     }
