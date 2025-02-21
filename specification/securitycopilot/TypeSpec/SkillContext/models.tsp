@@ -826,47 +826,47 @@ namespace SkillContext
 	@doc("ECSFlightIdentity object containing properties for ECSFlight.")
 	model ECSFlightIdentity {
         @doc("Tenant id of the ECSFlight.")
-		tenantId: string;
+		tenantId?: string;
         @doc("User id of the ECSFlight.")
-        userId: string;
+        userId?: string;
         @doc("workspace of the ecs flight")
-        workspace: string;
+        workspace?: string;
         @doc("Geography of the ECSFlight.")
-        geo: string;
+        geo?: string;
         @doc("GPU geograpthy of the ECSFlight")
-        gpuGeo: string;
+        gpuGeo?: string;
         @doc("Region of the ECSFlight.")
-        region: string;
+        region?: string;
         @doc("Ring of the ECSFlight.")
-        ring: string;
+        ring?: string;
 		@doc("Name of the skillset")
-		skillsetName: string;
+		skillsetName?: string;
 		@doc("Name of the skill")
-		skillName: string;
+		skillName?: string;
 		@doc("Source of the skillset")
-		source:string;
+		source?:string;
     }
 
 	model EcsConfigurationRequest{
 		@doc("ECSFlightIdentity object containing properties for ECSFlight.")
-		ecsFlightIdentity: ECSFlightIdentity;
+		ecsFlightIdentity?: ECSFlightIdentity;
 		@doc("Configuration root")
-		configurationRoot: string;
-		defaultValue: unknown;
+		configurationRoot?: string;
+		defaultValue?: unknown;
 	}
 
 	model ECSFlightResponse<T>{
-		eTag: string;
-		ids: Array<string>;
-		settings: T;
+		eTag?: string;
+		ids?: Array<string>;
+		settings?: T;
 	}
 
 	model FlightEnabledRequest{
 		@doc("ECSFlightIdentity object containing properties for ECSFlight.")
-		ecsFlightIdentity: ECSFlightIdentity;
+		ecsFlightIdentity?: ECSFlightIdentity;
 		@doc("Configuration root")
-		configurationRoot: string;
+		configurationRoot?: string;
 		@doc("name of the flight")
-		configurationParameter: string;
+		configurationParameter?: string;
 	}
 }
