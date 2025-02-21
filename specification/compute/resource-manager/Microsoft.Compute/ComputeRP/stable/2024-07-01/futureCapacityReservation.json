@@ -142,7 +142,7 @@
             "description": "The name of the future reservation."
           },
           {
-            "name": "createFutureCapacityReservation",
+            "name": "createOrUpdateFutureCapacityReservation",
             "in": "body",
             "description": "Future reservation payload.",
             "required": true,
@@ -219,7 +219,7 @@
             "description": "The name of the future reservation."
           },
           {
-            "name": "patchFutureCapacityReservation",
+            "name": "createOrUpdateFutureCapacityReservation",
             "in": "body",
             "description": "Future reservation payload.",
             "required": true,
@@ -312,10 +312,9 @@
               "$ref": "#/definitions/ExceptionResponse"
             }
           },
-          "x-ms-examples": {
-            "Delete the future capacity reservation": {
-              "$ref": "./examples/futureCapacityReservationExamples/FutureCapacityReservation_Delete.json"
-            }
+        "x-ms-examples": {
+          "Delete the future capacity reservation": {
+            "$ref": "./examples/futureCapacityReservationExamples/FutureCapacityReservation_Delete.json"
           }
         }
       }
@@ -395,8 +394,7 @@
         },
         "location": {
           "description": "The reservation location.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "state": {
           "description": "The future reservation state.",
@@ -429,20 +427,14 @@
       }
     },
     "FutureReservationRequests": {
-      "type": "object",
+      "type": "array",
       "description": "Future reservation requests.",
-      "properties": {
-        "value": {
-          "description": "List of future reservation request.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FutureReservationRequest"
-          }
-        },
-        "nextLink": {
-          "description": "The URI used to fetch the next page of future reservation requests. When there are no more pages, this is null.",
-          "type": "string"
-        }
+      "items": {
+        "$ref": "#/definitions/FutureReservationRequest"
+      },
+      "nextLink": {
+        "description": "The URI used to fetch the next page of future reservation requests. When there are no more pages, this is null.",
+        "type": "string"
       }
     },
     "FutureReservationRequest": {
@@ -573,20 +565,17 @@
         "needByDate": {
           "description": "The need by date.",
           "type": "string",
-          "readOnly": true,
           "format": "date-time"
         },
         "needByDateExtended": {
           "description": "The extended need by date.",
           "type": "string",
-          "readOnly": true,
           "format": "date-time"
         },
         "minDurationDays": {
           "description": "The minimum duration days.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true
         }
       }
     },
