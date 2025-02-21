@@ -1116,7 +1116,7 @@ model SupportedPrebuiltEntitiesQueryParameter {
  * Represents the summary for an evaluation operation.
  */
 @discriminator("projectKind")
-@clientName("TextAuthoringEvaluationSummary", "csharp")
+@clientName("TextAuthoringEvalSummary", "csharp")
 model TextAnalysisAuthoringEvaluationSummary {
   /**
    * Represents the project type that the evaluation ran on.
@@ -1610,7 +1610,7 @@ model TextAnalysisAuthoringDocumentEntityLabelEvaluationResult {
 /**
  * Represents the evaluation summary for a custom entity recognition project.
  */
-@clientName("CustomEntityRecognitionEvaluationSummary", "csharp")
+@clientName("CustomEntityRecognitionEvalSummary", "csharp")
 model TextAnalysisAuthoringCustomEntityRecognitionEvaluationSummary
   extends TextAnalysisAuthoringEvaluationSummary {
   /**
@@ -1632,7 +1632,7 @@ model TextAnalysisAuthoringConfusionMatrixRow
 /**
  * Represents the evaluation summary for a custom entity recognition project.
  */
-@clientName("EntityRecognitionEvaluationSummary", "csharp")
+@clientName("EntityRecognitionEvalSummary", "csharp")
 model TextAnalysisAuthoringEntityRecognitionEvaluationSummary {
   /**
    * Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.
@@ -1678,7 +1678,7 @@ model TextAnalysisAuthoringEntityRecognitionEvaluationSummary {
 /**
  * Represents the evaluation summary for an entity.
  */
-@clientName("TextAuthoringEntityEvaluationSummary", "csharp")
+@clientName("TextAuthoringEntityEvalSummary", "csharp")
 model TextAnalysisAuthoringEntityEvaluationSummary {
   /**
    * Represents the model precision
@@ -1749,7 +1749,7 @@ model TextAnalysisAuthoringDocumentHealthcareEvaluationResult {
  * Represents the evaluation summary for a custom health care project.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("CustomHealthcareEvaluationSummary", "csharp")
+@clientName("CustomHealthcareEvalSummary", "csharp")
 model TextAnalysisAuthoringCustomHealthcareEvaluationSummary
   extends TextAnalysisAuthoringEvaluationSummary {
   /**
@@ -1799,7 +1799,7 @@ model TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult {
 /**
  * Represents the evaluation summary for a custom multi-label classification project.
  */
-@clientName("CustomMultiLabelClassificationEvaluationSummary", "csharp")
+@clientName("CustomMultiLabelClassificationEvalSummary", "csharp")
 model TextAnalysisAuthoringCustomMultiLabelClassificationEvaluationSummary
   extends TextAnalysisAuthoringEvaluationSummary {
   /**
@@ -1816,7 +1816,7 @@ model TextAnalysisAuthoringCustomMultiLabelClassificationEvaluationSummary
 /**
  * Represents the evaluation summary for a multi-label classification project.
  */
-@clientName("MultiLabelClassificationEvaluationSummary", "csharp")
+@clientName("MultiLabelClassificationEvalSummary", "csharp")
 model TextAnalysisAuthoringMultiLabelClassificationEvaluationSummary {
   /**
    * Represents the classes evaluation
@@ -1857,7 +1857,7 @@ model TextAnalysisAuthoringMultiLabelClassificationEvaluationSummary {
 /**
  * Represents the evaluation summary of a class in a multi-label classification project.
  */
-@clientName("MultiLabelClassEvaluationSummary", "csharp")
+@clientName("MultiLabelClassEvalSummary", "csharp")
 model TextAnalysisAuthoringMultiLabelClassEvaluationSummary {
   /**
    * Represents the model precision
@@ -1931,7 +1931,7 @@ model TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult {
 /**
  * Represents the evaluation summary for a custom single-label classification project.
  */
-@clientName("CustomSingleLabelClassificationEvaluationSummary", "csharp")
+@clientName("CustomSingleLabelClassificationEvalSummary", "csharp")
 model TextAnalysisAuthoringCustomSingleLabelClassificationEvaluationSummary
   extends TextAnalysisAuthoringEvaluationSummary {
   /**
@@ -1948,7 +1948,7 @@ model TextAnalysisAuthoringCustomSingleLabelClassificationEvaluationSummary
 /**
  * Represents the evaluation summary for a custom single-label classification project.
  */
-@clientName("SingleLabelClassificationEvaluationSummary", "csharp")
+@clientName("SingleLabelClassificationEvalSummary", "csharp")
 model TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary {
   /**
    * Represents the confusion matrix between two classes (the two classes can be the same). The matrix is between the class that was labelled and the class that was predicted.
@@ -1994,7 +1994,7 @@ model TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary {
 /**
  * Represents the evaluation summary for a class in a single-label classification project.
  */
-@clientName("SingleLabelClassEvaluationSummary", "csharp")
+@clientName("SingleLabelClassEvalSummary", "csharp")
 model TextAnalysisAuthoringSingleLabelClassEvaluationSummary {
   /**
    * Represents the model precision
@@ -2091,7 +2091,7 @@ model TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult {
  * Represents the evaluation summary for a custom text sentiment project.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("CustomTextSentimentEvaluationSummary", "csharp")
+@clientName("CustomTextSentimentEvalSummary", "csharp")
 model TextAnalysisAuthoringCustomTextSentimentEvaluationSummary
   extends TextAnalysisAuthoringEvaluationSummary {
   /**
@@ -2108,7 +2108,7 @@ model TextAnalysisAuthoringCustomTextSentimentEvaluationSummary
 /**
  * Represents the evaluation summary for a custom text sentiment project.
  */
-@clientName("TextSentimentEvaluationSummary", "csharp")
+@clientName("TextSentimentEvalSummary", "csharp")
 model TextAnalysisAuthoringTextSentimentEvaluationSummary {
   /**
    * Represents evaluation of span level sentiments
@@ -2149,7 +2149,7 @@ model TextAnalysisAuthoringTextSentimentEvaluationSummary {
 /**
  * Represents the evaluation summary for a custom sentiment project.
  */
-@clientName("SpanSentimentEvaluationSummary", "csharp")
+@clientName("SpanSentimentEvalSummary", "csharp")
 model TextAnalysisAuthoringSpanSentimentEvaluationSummary {
   /**
    * Represents the confusion matrix between two sentiments (the two sentiments can be the same). The matrix is between the sentiment that was labelled and the sentiment that was predicted.
@@ -2195,7 +2195,7 @@ model TextAnalysisAuthoringSpanSentimentEvaluationSummary {
 /**
  * Represents the evaluation summary for a sentiment in a custom sentiment project.
  */
-@clientName("SentimentEvaluationSummary", "csharp")
+@clientName("SentimentEvalSummary", "csharp")
 model TextAnalysisAuthoringSentimentEvaluationSummary {
   /**
    * Represents the model precision
