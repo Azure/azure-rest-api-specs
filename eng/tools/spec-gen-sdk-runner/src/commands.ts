@@ -55,27 +55,37 @@ export async function generateSdkForSpecPr(): Promise<number> {
   // Get the spec paths from the changed files
   const changedSpecs = await detectChangedSpecConfigFiles(commandInput);
 
+  let statusCode = 0;
+  let pushedSpecConfigCount;
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
       logMessage("No spec config file found in the changed files", LogLevel.Warn);
       continue;
     }
+    pushedSpecConfigCount = 0;
     if (changedSpec.typespecProject) {
       specGenSdkCommand.push("--tsp-config-relative-path", changedSpec.typespecProject);
+      pushedSpecConfigCount++;
     }
     if (changedSpec.readmeMd) {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
+      pushedSpecConfigCount++;
     }
     const changedSpecPath = changedSpec.typespecProject ?? changedSpec.readmeMd;
     logMessage(`Generating SDK from ${changedSpecPath}`, LogLevel.Group);
     logMessage(`Command:${specGenSdkCommand.join(" ")}`);
+
     try {
       await resetGitRepo(commandInput.localSdkRepoPath);
       await runSpecGenSdkCommand(specGenSdkCommand);
       logMessage("Command executed successfully");
     } catch (error) {
       logMessage(`Error executing command:${error}`, LogLevel.Error);
-      return 1;
+      statusCode = 1;
+    }
+    // Pop the spec config path from specGenSdkCommand
+    for (let index = 0; index < pushedSpecConfigCount * 2; index++) {
+      specGenSdkCommand.pop();
     }
     // Read the execution report to determine if the generation was successful
     const executionReportPath = path.join(
@@ -92,11 +102,11 @@ export async function generateSdkForSpecPr(): Promise<number> {
         `Error reading execution report at ${executionReportPath}:${error}`,
         LogLevel.Error,
       );
-      return 1;
+      statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
   }
-  return 0;
+  return statusCode;
 }
 
 /**
