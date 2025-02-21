@@ -63,6 +63,7 @@ union ProvisioningState {
 }
 
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
+@removed(Microsoft.StandbyPool.Versions.`2025-03-01`)
 @doc("Displays the counts of pooled resources in each state, as known by the StandbyPool resource provider.")
 model PoolResourceStateCount {
   @doc("The state that the pooled resources count is for.")
