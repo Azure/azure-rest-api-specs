@@ -14,7 +14,6 @@ import "./Microsoft.Devices/IotHub.tsp";
 import "./Microsoft.HealthcareApis/HealthcareApis.tsp";
 import "./Microsoft.KeyVault/KeyVault.tsp";
 import "./Microsoft.MachineLearningServices/MachineLearningServices.tsp";
-import "./Microsoft.Media/MediaServices.tsp";
 import "./Microsoft.PolicyInsights/PolicyInsights.tsp";
 import "./Microsoft.Cache/RedisCache.tsp";
 import "./Microsoft.Resources/Resources.tsp";
@@ -25,6 +24,7 @@ import "./Microsoft.Web/Web.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
 import "./Microsoft.ResourceNotifications/HealthResources.tsp";
 import "./Microsoft.ResourceNotifications/Resources.tsp";
+import "./Microsoft.ResourceNotifications/ContainerServiceEventResources.tsp";
 
 import "./propertyNameOverride.tsp";
 

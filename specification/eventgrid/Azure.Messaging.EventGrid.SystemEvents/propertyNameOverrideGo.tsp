@@ -7,7 +7,6 @@ import "./Microsoft.ResourceNotifications/Resources.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
-import "./Microsoft.Media/MediaServices.tsp";
 import "./Microsoft.AVS/AVS.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
@@ -16,11 +15,6 @@ using Azure.ClientGenerator.Core;
 using Microsoft.EventGrid.SystemEvents;
 
 // [BEGIN] misc renames
-
-@@clientName(MediaLiveEventChannelArchiveHeartbeatEventData.channelLatencyMs,
-  "ChannelLatencyMS",
-  "go"
-);
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
   "RecordingDurationMS",
@@ -567,19 +561,21 @@ using Microsoft.EventGrid.SystemEvents;
   "go"
 );
 @@clientName(AcsSmsDeliveryAttemptProperties,
-  "ACSSmsDeliveryAttemptProperties",
+  "ACSSMSDeliveryAttemptProperties",
   "go"
 );
 @@clientName(AcsSmsDeliveryReportReceivedEventData,
-  "ACSSmsDeliveryReportReceivedEventData",
+  "ACSSMSDeliveryReportReceivedEventData",
   "go"
 );
-@@clientName(AcsSmsEventBaseProperties, "ACSSmsEventBaseProperties", "go");
-@@clientName(AcsSmsReceivedEventData, "ACSSmsReceivedEventData", "go");
+@@clientName(AcsSmsEventBaseProperties, "ACSSMSEventBaseProperties", "go");
+@@clientName(AcsSmsReceivedEventData, "ACSSMSReceivedEventData", "go");
 @@clientName(AcsUserDisconnectedEventData,
   "ACSUserDisconnectedEventData",
   "go"
 );
+
 @@clientName(AcsUserEngagement, "ACSUserEngagement", "go");
+@@clientName(AcsMessageReactionContent, "ACSMessageReactionContent", "go");
 
 // [END] ACS renames (and acronym casing)
