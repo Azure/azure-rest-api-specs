@@ -8,6 +8,16 @@ using Azure.ClientGenerator.Core;
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace JavaClient;
 
+@@override(Azure.Batch.Applications.getApplication, getApplication, "java");
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+#suppress "@azure-tools/typespec-azure-core/rpc-operation-needs-route" ""
+op getApplication is ReadOperationWithOptions<
+  Azure.Batch.getApplicationParameters,
+  {},
+  Azure.Batch.BatchApplication
+>;
+
 op ReadOperationWithOptions<
   TParameters extends TypeSpec.Reflection.Model,
   TExtraOptions extends TypeSpec.Reflection.Model,
@@ -23,13 +33,3 @@ op ReadOperationWithOptions<
   {},
   Azure.Batch.BatchError
 >;
-
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-#suppress "@azure-tools/typespec-azure-core/rpc-operation-needs-route" ""
-op getApplicationJava is ReadOperationWithOptions<
-  Azure.Batch.getApplicationParameters,
-  {},
-  Azure.Batch.BatchApplication
->;
-
-@@override(Azure.Batch.Applications.getApplication, getApplicationJava, "java");
