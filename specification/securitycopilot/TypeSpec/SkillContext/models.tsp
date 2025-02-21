@@ -854,4 +854,8 @@ namespace SkillContext
 		configurationRoot: string;
 		defaultValue: object;
 	}
+
+	model ECSFlightContextResponse {
+		id: string;
+	}
 }
