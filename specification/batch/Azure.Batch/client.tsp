@@ -110,7 +110,6 @@ interface BatchClient {
 /* JAVA OVERRIDES */
 // client name overrides
 @@clientName(BatchClient.listApplications, "listApplicationsInternal", "java");
-@@clientName(BatchClient.getApplication, "getApplicationInternal", "java");
 
 @@clientName(BatchClient.listPoolUsageMetrics,
   "listPoolUsageMetricsInternal",

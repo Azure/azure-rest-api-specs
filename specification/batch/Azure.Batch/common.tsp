@@ -20,19 +20,19 @@ namespace Azure.Batch;
 op ListOperation<TFilter, TResponse> is Azure.Core.RpcOperation<
   BatchCommonListHeaders & TFilter,
   BatchResponseHeaders & TResponse,
-  NoFilter,
+  {},
   BatchError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @get
 op ReadOperation<
-  TPathParams extends TypeSpec.Reflection.Model,
+  TExtraParameters extends TypeSpec.Reflection.Model,
   TResource
 > is Azure.Core.RpcOperation<
-  BatchClientRequestHeaders & TPathParams,
+  BatchCommonReadParameters & TExtraParameters,
   TResource & BatchResponseHeaders,
-  NoFilter,
+  {},
   BatchError
 >;
 
@@ -42,9 +42,9 @@ op FileOperation<
   TPathParams extends TypeSpec.Reflection.Model,
   TResource
 > is Azure.Core.RpcOperation<
-  BatchClientRequestHeaders & TPathParams,
+  BatchCommonReadParameters & TPathParams,
   TResource & FileResponseHeaders,
-  NoFilter,
+  {},
   BatchError
 >;
 
@@ -54,9 +54,9 @@ op HeadFileOperation<
   TPathParams extends TypeSpec.Reflection.Model,
   TResource
 > is Azure.Core.RpcOperation<
-  BatchClientRequestHeaders & TPathParams,
+  BatchCommonReadParameters & TPathParams,
   TResource & FileResponseHeaders,
-  NoFilter,
+  {},
   BatchError
 >;
 
@@ -66,36 +66,36 @@ op DeleteOperation<
   TFilter,
   TResponse extends TypeSpec.Reflection.Model
 > is Azure.Core.RpcOperation<
-  BatchClientRequestHeaders & TFilter,
+  BatchCommonReadParameters & TFilter,
   TResponse,
-  NoFilter,
+  {},
   BatchError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @post
 op CreateOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & MinimalMetadata & TResource,
+  BatchCommonReadParameters & MinimalMetadata & TResource,
   Created<TResponse> & BatchResponseHeaders,
-  NoFilter,
+  {},
   BatchError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @patch
 op UpdateOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & MinimalMetadata & TResource,
+  BatchCommonReadParameters & MinimalMetadata & TResource,
   TResponse & BatchResponseHeaders,
-  NoFilter,
+  {},
   BatchError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @put
 op ReplaceOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & MinimalMetadata & TResource,
+  BatchCommonReadParameters & MinimalMetadata & TResource,
   TResponse & BatchResponseHeaders,
-  NoFilter,
+  {},
   BatchError
 >;
 
@@ -110,21 +110,20 @@ op ResourceInfoOperationWithAdditionalResponse<
 > is Foundations.Operation<
   TParams,
   TResponse | TAdditionalResponse,
-  NoFilter,
+  {},
   BatchError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @post
 op PostOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & TResource,
+  BatchCommonReadParameters & TResource,
   TResponse & BatchResponseHeaders,
-  NoFilter,
+  {},
   BatchError
 >;
 
 // Templates
-alias NoFilter = {};
 alias MinimalMetadata = {
   @doc("Type of content")
   @header("content-type")
@@ -334,7 +333,7 @@ alias DeleteResponseHeaders = {
 };
 
 alias BatchCommonListHeaders = {
-  ...BatchClientRequestHeaders;
+  ...BatchCommonReadParameters;
 
   @doc("""
     The maximum number of items to return in the response. A maximum of 1000
@@ -376,7 +375,7 @@ alias BatchTaskFileClientPathContent = {
   filePath: string;
 };
 
-alias BatchClientRequestHeaders = {
+alias BatchCommonReadParameters = {
   @doc("""
     The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.".
     """)

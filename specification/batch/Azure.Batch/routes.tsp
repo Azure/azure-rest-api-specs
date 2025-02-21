@@ -15,6 +15,12 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.Batch;
 
+alias getApplicationParameters = {
+  @doc("The ID of the Application")
+  @path
+  applicationId: string;
+};
+
 // Interfaces ////////////////////
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -41,15 +47,7 @@ interface Applications {
     API.
     """)
   @route("/applications/{applicationId}")
-  @clientName("getApplicationInternal", "java")
-  getApplication is ReadOperation<
-    {
-      @doc("The ID of the Application")
-      @path
-      applicationId: string;
-    },
-    BatchApplication
-  >;
+  getApplication is ReadOperation<getApplicationParameters, BatchApplication>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -169,7 +167,7 @@ interface Pools {
   @route("/pools/{poolId}")
   @clientName("poolExistsInternal", "java")
   poolExists is ResourceInfoOperationWithAdditionalResponse<
-    BatchClientRequestHeaders & BatchPoolHeaders,
+    BatchCommonReadParameters & BatchPoolHeaders,
     PoolDoesNotExistResponseHeaders,
     PoolDoesExistResponseHeaders
   >;
@@ -698,7 +696,7 @@ interface JobSchedules {
   @route("/jobschedules/{jobScheduleId}")
   @clientName("jobScheduleExistsInternal", "java")
   jobScheduleExists is ResourceInfoOperationWithAdditionalResponse<
-    BatchClientRequestHeaders &
+    BatchCommonReadParameters &
       BatchMatchHeaders & {
         @doc("The ID of the Job Schedule which you want to check.")
         @path
