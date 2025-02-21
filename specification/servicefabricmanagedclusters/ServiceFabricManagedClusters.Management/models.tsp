@@ -237,7 +237,9 @@ union ServiceScalingTriggerKind {
   AverageServiceLoadTrigger: "AverageServiceLoadTrigger",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * The operating system of the cluster. The default means all.
+ */
 union ManagedClusterVersionEnvironment {
   string,
 
@@ -302,22 +304,37 @@ union ClusterState {
  */
 union Protocol {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Transport protocol is TCP.
+   */
   tcp: "tcp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Transport protocol is UDP.
+   */
   udp: "udp",
 }
 
 /**
- * the reference to the load balancer probe used by the load balancing rule.
+ * The reference to the load balancer probe used by the load balancing rule.
  */
 union ProbeProtocol {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Probe protocol is TCP.
+   */
   tcp: "tcp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Probe protocol is HTTP.
+   */
   http: "http",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Probe protocol is HTTPS.
+   */
   https: "https",
 }
 
@@ -326,19 +343,40 @@ union ProbeProtocol {
  */
 union NsgProtocol {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Protocol applies to HTTP.
+   */
   http: "http",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Protocol applies to HTTPS.
+   */
   https: "https",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Protocol applies to TCP.
+   */
   tcp: "tcp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Protocol applies to UDP.
+   */
   udp: "udp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Protocol applies to ICMP.
+   */
   icmp: "icmp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Protocol applies to AH.
+   */
   ah: "ah",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Protocol applies to ESP.
+   */
   esp: "esp",
 }
 
@@ -347,9 +385,15 @@ union NsgProtocol {
  */
 union Access {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The network traffic is allowed.
+   */
   allow: "allow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The network traffic is denied.
+   */
   deny: "deny",
 }
 
@@ -358,9 +402,15 @@ union Access {
  */
 union Direction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Inbound direction.
+   */
   inbound: "inbound",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Outbound direction.
+   */
   outbound: "outbound",
 }
 
@@ -369,25 +419,52 @@ union Direction {
  */
 union ManagedResourceProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The resource does not have a provisioning state.
+   */
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The resource is being created.
+   */
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The resource is created.
+   */
   Created: "Created",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The resource is being updated.
+   */
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The resource provisioning has succeeded.
+   */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The resource provisioning has failed.
+   */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The resource provisioning has been canceled.
+   */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The resource is being deleted.
+   */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The resource has been deleted.
+   */
   Deleted: "Deleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
   Other: "Other",
 }
 
@@ -458,9 +535,15 @@ union ManagedClusterAddOnFeature {
  */
 union PrivateEndpointNetworkPolicies {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Enable apply network policies on private end point in the subnet.
+   */
   enabled: "enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Disable apply network policies on private end point in the subnet.
+   */
   disabled: "disabled",
 }
 
@@ -469,9 +552,15 @@ union PrivateEndpointNetworkPolicies {
  */
 union PrivateLinkServiceNetworkPolicies {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Enable apply network policies on private link service in the subnet.
+   */
   enabled: "enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Disable apply network policies on private link service in the subnet.
+   */
   disabled: "disabled",
 }
 
@@ -751,9 +840,15 @@ union SecurityType {
  */
 union PrivateIPAddressVersion {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The IP configuration's private IP is IPv4.
+   */
   IPv4: "IPv4",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The IP configuration's private IP is IPv6.
+   */
   IPv6: "IPv6",
 }
 
@@ -762,9 +857,15 @@ union PrivateIPAddressVersion {
  */
 union PublicIPAddressVersion {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The IP configuration's public IP is IPv4.
+   */
   IPv4: "IPv4",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The IP configuration's public IP is IPv6.
+   */
   IPv6: "IPv6",
 }
 
@@ -833,7 +934,7 @@ union UpgradeMode {
 /**
  * The type of managed identity for the resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backwards compatibility with existing flag enum"
 enum ManagedIdentityType {
   /**
    * Indicates that no identity is associated with the resource.
@@ -904,7 +1005,7 @@ model ApplicationTypeResourceProperties {
   /**
    * The current deployment or provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Day 0 property, keep as string for backwards compatibility"
   @visibility("read")
   provisioningState?: string;
 }
@@ -940,7 +1041,7 @@ model ProxyResource {
   /**
    * Azure resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
   @visibility("read", "create")
   tags?: Record<string>;
 
@@ -958,7 +1059,7 @@ model ApplicationTypeUpdateParameters {
   /**
    * Application type update parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
   tags?: Record<string>;
 }
 
@@ -975,7 +1076,7 @@ model ApplicationTypeVersionResourceProperties {
   /**
    * The current deployment or provisioning state, which only appears in the response
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Day 0 property, keep as string for backwards compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -992,7 +1093,7 @@ model ApplicationTypeVersionUpdateParameters {
   /**
    * Application type version update parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
   tags?: Record<string>;
 }
 
@@ -1027,11 +1128,13 @@ model ManagedIdentity {
    * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    *
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Backwards compatibility, used to pass user identities"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * User assigned identity.
+ */
 model UserAssignedIdentity {
   /**
    * The principal id of user assigned identity.
@@ -1053,7 +1156,7 @@ model ApplicationResourceProperties {
   /**
    * The current deployment or provisioning state, which only appears in the response
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Day 0 property, keep as string for backwards compatibility"
   @visibility("read")
   provisioningState?: string;
 
@@ -1067,7 +1170,7 @@ model ApplicationResourceProperties {
   /**
    * List of application parameters with overridden values from their default values specified in the application manifest.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
   parameters?: Record<string>;
 
   /**
@@ -1150,7 +1253,7 @@ model ApplicationHealthPolicy {
   /**
    * The map with service type health policy per service type name. The map is empty by default.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to ServiceTypeHealthPolicy dictionary"
   serviceTypeHealthPolicyMap?: Record<ServiceTypeHealthPolicy>;
 }
 
@@ -1231,7 +1334,9 @@ model RollingUpgradeMonitoringPolicy {
   upgradeDomainTimeout: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * User assigned identity for the application.
+ */
 model ApplicationUserAssignedIdentity {
   /**
    * The friendly name of user assigned identity.
@@ -1245,13 +1350,13 @@ model ApplicationUserAssignedIdentity {
 }
 
 /**
- * Application update request
+ * Application update request.
  */
 model ApplicationUpdateParameters {
   /**
    * Application update parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
   tags?: Record<string>;
 }
 
@@ -1263,15 +1368,19 @@ model ServiceResourceList is Azure.Core.Page<ServiceResource>;
 /**
  * The service resource properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @discriminator("serviceKind")
 model ServiceResourceProperties extends ServiceResourcePropertiesBase {
   /**
    * The current deployment or provisioning state, which only appears in the response
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Day 0 property, keep as string for backwards compatibility"
   @visibility("read")
   provisioningState?: string;
+
+  /**
+   * The kind of service (Stateless or Stateful).
+   */
+  serviceKind: ServiceKind;
 
   /**
    * The name of the service type
@@ -1301,7 +1410,9 @@ model ServiceResourceProperties extends ServiceResourcePropertiesBase {
  * Describes how the service is partitioned.
  */
 @discriminator("partitionScheme")
-model Partition {}
+model Partition {
+  partitionScheme: PartitionScheme;
+}
 
 /**
  * The common service resource properties.
@@ -1315,16 +1426,19 @@ model ServiceResourcePropertiesBase {
   /**
    * A list that describes the correlation of the service with other services.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   correlationScheme?: ServiceCorrelation[];
 
   /**
    * The service load metrics is given as an array of ServiceLoadMetric objects.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   serviceLoadMetrics?: ServiceLoadMetric[];
 
   /**
    * A list that describes the correlation of the service with other services.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   servicePlacementPolicies?: ServicePlacementPolicy[];
 
   /**
@@ -1335,6 +1449,7 @@ model ServiceResourcePropertiesBase {
   /**
    * Scaling policies for this service.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   scalingPolicies?: ScalingPolicy[];
 }
 
@@ -1387,7 +1502,9 @@ model ServiceLoadMetric {
  * Describes the policy to be used for placement of a Service Fabric service.
  */
 @discriminator("type")
-model ServicePlacementPolicy {}
+model ServicePlacementPolicy {
+  type: ServicePlacementPolicyType;
+}
 
 /**
  * Specifies a metric to load balance a service during runtime.
@@ -1408,13 +1525,17 @@ model ScalingPolicy {
  * Describes the mechanism for performing a scaling operation.
  */
 @discriminator("kind")
-model ScalingMechanism {}
+model ScalingMechanism {
+  kind: ServiceScalingMechanismKind;
+}
 
 /**
  * Describes the trigger for performing a scaling operation.
  */
 @discriminator("kind")
-model ScalingTrigger {}
+model ScalingTrigger {
+  kind: ServiceScalingTriggerKind;
+}
 
 /**
  * Service update request
@@ -1423,7 +1544,7 @@ model ServiceUpdateParameters {
   /**
    * Service update parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
   tags?: Record<string>;
 }
 
@@ -1485,7 +1606,6 @@ model AvailableOperationDisplay {
 /**
  * The detail of the Service Fabric runtime version result
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model ManagedClusterVersionDetails {
   /**
    * The Service Fabric runtime version of the cluster.
@@ -1543,12 +1663,13 @@ model LongRunningOperationResult {
 /**
  * Describes the result of the request to list Managed VM Sizes for Service Fabric Managed Clusters.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well known abbreviation"
 model ManagedVMSizesResult is Azure.Core.Page<ManagedVMSize>;
 
 /**
  * VM Sizes properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well known abbreviation"
 model VMSize {
   /**
    * VM Size name.
@@ -1681,6 +1802,7 @@ model ManagedClusterProperties {
   /**
    * Enables automatic OS upgrade for node types created using OS images with version 'latest'. The default value for this setting is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OS is a well known abbreviation"
   enableAutoOSUpgrade?: boolean;
 
   /**
@@ -1718,6 +1840,7 @@ model ManagedClusterProperties {
   /**
    * Setting this to true will link the IPv4 address as the ServicePublicIP of the IPv6 address. It can only be set to True if IPv6 is enabled on the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
   enableServicePublicIP?: boolean;
 
   /**
@@ -1745,6 +1868,7 @@ model ManagedClusterProperties {
   /**
    * Specify the resource id of a public IPv4 prefix that the load balancer will allocate a public IPv4 address from. This setting cannot be changed once the cluster is created.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
   publicIPPrefixId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/publicIPPrefixes";
@@ -1754,6 +1878,7 @@ model ManagedClusterProperties {
   /**
    * Specify the resource id of a public IPv6 prefix that the load balancer will allocate a public IPv6 address from. This setting cannot be changed once the cluster is created.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
   publicIPv6PrefixId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/publicIPPrefixes";
@@ -2234,7 +2359,7 @@ model Resource {
   /**
    * Azure resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
   tags?: Record<string>;
 
   /**
@@ -2257,7 +2382,7 @@ model ManagedClusterUpdateParameters {
   /**
    * Managed cluster update parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
   tags?: Record<string>;
 }
 
@@ -2359,6 +2484,11 @@ model NodeTypeFaultSimulation {
  */
 @discriminator("faultKind")
 model FaultSimulationParameters {
+  /**
+   * The kind of fault to be simulated.
+   */
+  faultKind: FaultKind;
+
   /**
    * Force the action to go through without any check on the cluster.
    */
@@ -2501,6 +2631,7 @@ model NodeTypeProperties {
   /**
    * Disk size for the managed disk attached to the vms on the node type in GBs.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is a well known abbreviation"
   dataDiskSizeGB?: int32;
 
   /**
@@ -2517,13 +2648,13 @@ model NodeTypeProperties {
   /**
    * The placement tags applied to nodes in the node type, which can be used to indicate where certain services (workload) should run.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
   placementProperties?: Record<string>;
 
   /**
    * The capacity tags applied to the nodes in the node type, the cluster resource manager uses these tags to understand how much resource a node has.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
   capacities?: Record<string>;
 
   /**
@@ -2645,6 +2776,7 @@ model NodeTypeProperties {
   /**
    * Indicates whether the node type will be Spot Virtual Machines. Azure will allocate the VMs if there is capacity available and the VMs can be evicted at any time.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well known abbreviation"
   isSpotVM?: boolean;
 
   /**
@@ -2655,6 +2787,7 @@ model NodeTypeProperties {
   /**
    * Indicates whether to use ephemeral os disk. The sku selected on the vmSize property needs to support this feature.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OS is a well known abbreviation"
   useEphemeralOSDisk?: boolean;
 
   /**
@@ -2709,11 +2842,13 @@ model NodeTypeProperties {
   /**
    * Specifies whether each node is allocated its own public IPv4 address. This is only supported on secondary node types with custom Load Balancers.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
   enableNodePublicIP?: boolean;
 
   /**
    * Specifies whether each node is allocated its own public IPv6 address. This is only supported on secondary node types with custom Load Balancers.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
   enableNodePublicIPv6?: boolean;
 
   /**
@@ -2852,7 +2987,6 @@ model VmssExtension {
   /**
    * Describes the properties of a Virtual Machine Scale Set Extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: VmssExtensionProperties;
 }
@@ -2971,6 +3105,7 @@ model VmssDataDisk {
   /**
    * Disk size for each vm in the node type in GBs.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is a well known abbreviation"
   diskSizeGB: int32;
 
   /**
@@ -3094,17 +3229,20 @@ model IpConfiguration {
   /**
    * Specifies whether the IP configuration's private IP is IPv4 or IPv6. Default is IPv4.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
   privateIPAddressVersion?: PrivateIPAddressVersion = PrivateIPAddressVersion.IPv4;
 
   /**
    * The public IP address configuration of the network interface.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
   publicIPAddressConfiguration?: IpConfigurationPublicIPAddressConfiguration;
 }
 
 /**
  * The public IP address configuration of the network interface.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
 model IpConfigurationPublicIPAddressConfiguration {
   /**
    * Name of the network interface.
@@ -3120,6 +3258,7 @@ model IpConfigurationPublicIPAddressConfiguration {
   /**
    * Specifies whether the IP configuration's public IP is IPv4 or IPv6. Default is IPv4.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
   publicIPAddressVersion?: PublicIPAddressVersion = PublicIPAddressVersion.IPv4;
 }
 
@@ -3209,7 +3348,6 @@ model ManagedProxyResource {
   /**
    * Azure resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   tags?: Record<string>;
 
@@ -3227,7 +3365,7 @@ model NodeTypeUpdateParameters {
   /**
    * Node type update parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
   tags?: Record<string>;
 
   /**

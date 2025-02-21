@@ -3641,11 +3641,13 @@
         "values": [
           {
             "name": "allow",
-            "value": "allow"
+            "value": "allow",
+            "description": "The network traffic is allowed."
           },
           {
             "name": "deny",
-            "value": "deny"
+            "value": "deny",
+            "description": "The network traffic is denied."
           }
         ]
       }
@@ -3964,7 +3966,7 @@
     },
     "ApplicationUpdateParameters": {
       "type": "object",
-      "description": "Application update request",
+      "description": "Application update request.",
       "properties": {
         "tags": {
           "type": "object",
@@ -4013,6 +4015,7 @@
     },
     "ApplicationUserAssignedIdentity": {
       "type": "object",
+      "description": "User assigned identity for the application.",
       "properties": {
         "name": {
           "type": "string",
@@ -4396,11 +4399,13 @@
         "values": [
           {
             "name": "inbound",
-            "value": "inbound"
+            "value": "inbound",
+            "description": "Inbound direction."
           },
           {
             "name": "outbound",
-            "value": "outbound"
+            "value": "outbound",
+            "description": "Outbound direction."
           }
         ]
       }
@@ -4483,6 +4488,24 @@
             "name": "Manual",
             "value": "Manual",
             "description": "Indicates that a manual repair will need to be performed by the administrator if the upgrade fails. Service Fabric will not proceed to the next upgrade domain automatically."
+          }
+        ]
+      }
+    },
+    "FaultKind": {
+      "type": "string",
+      "description": "The kind of fault simulation.",
+      "enum": [
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "FaultKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Zone",
+            "value": "Zone",
+            "description": "Simulates an availability zone down."
           }
         ]
       }
@@ -4594,8 +4617,8 @@
       "description": "Parameters for Fault Simulation action.",
       "properties": {
         "faultKind": {
-          "type": "string",
-          "description": "Discriminator property for FaultSimulationParameters."
+          "$ref": "#/definitions/FaultKind",
+          "description": "The kind of fault to be simulated."
         },
         "force": {
           "type": "boolean",
@@ -4759,11 +4782,13 @@
             "values": [
               {
                 "name": "IPv4",
-                "value": "IPv4"
+                "value": "IPv4",
+                "description": "The IP configuration's private IP is IPv4."
               },
               {
                 "name": "IPv6",
-                "value": "IPv6"
+                "value": "IPv6",
+                "description": "The IP configuration's private IP is IPv6."
               }
             ]
           }
@@ -4807,11 +4832,13 @@
             "values": [
               {
                 "name": "IPv4",
-                "value": "IPv4"
+                "value": "IPv4",
+                "description": "The IP configuration's public IP is IPv4."
               },
               {
                 "name": "IPv6",
-                "value": "IPv6"
+                "value": "IPv6",
+                "description": "The IP configuration's public IP is IPv6."
               }
             ]
           }
@@ -5457,39 +5484,48 @@
         "values": [
           {
             "name": "None",
-            "value": "None"
+            "value": "None",
+            "description": "The resource does not have a provisioning state."
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "The resource is being created."
           },
           {
             "name": "Created",
-            "value": "Created"
+            "value": "Created",
+            "description": "The resource is created."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "The resource is being updated."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "The resource provisioning has succeeded."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "The resource provisioning has failed."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "The resource provisioning has been canceled."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "The resource is being deleted."
           },
           {
             "name": "Deleted",
-            "value": "Deleted"
+            "value": "Deleted",
+            "description": "The resource has been deleted."
           },
           {
             "name": "Other",
@@ -6335,31 +6371,38 @@
         "values": [
           {
             "name": "http",
-            "value": "http"
+            "value": "http",
+            "description": "Protocol applies to HTTP."
           },
           {
             "name": "https",
-            "value": "https"
+            "value": "https",
+            "description": "Protocol applies to HTTPS."
           },
           {
             "name": "tcp",
-            "value": "tcp"
+            "value": "tcp",
+            "description": "Protocol applies to TCP."
           },
           {
             "name": "udp",
-            "value": "udp"
+            "value": "udp",
+            "description": "Protocol applies to UDP."
           },
           {
             "name": "icmp",
-            "value": "icmp"
+            "value": "icmp",
+            "description": "Protocol applies to ICMP."
           },
           {
             "name": "ah",
-            "value": "ah"
+            "value": "ah",
+            "description": "Protocol applies to AH."
           },
           {
             "name": "esp",
-            "value": "esp"
+            "value": "esp",
+            "description": "Protocol applies to ESP."
           }
         ]
       }
@@ -6387,8 +6430,7 @@
       "description": "Describes how the service is partitioned.",
       "properties": {
         "partitionScheme": {
-          "type": "string",
-          "description": "Discriminator property for Partition."
+          "$ref": "#/definitions/PartitionScheme"
         }
       },
       "discriminator": "partitionScheme",
@@ -6428,6 +6470,36 @@
       ],
       "x-ms-discriminator-value": "ScalePartitionInstanceCount"
     },
+    "PartitionScheme": {
+      "type": "string",
+      "description": "Enumerates the ways that a service can be partitioned.",
+      "enum": [
+        "Singleton",
+        "UniformInt64Range",
+        "Named"
+      ],
+      "x-ms-enum": {
+        "name": "PartitionScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Singleton",
+            "value": "Singleton",
+            "description": "Indicates that the partition is based on string names, and is a SingletonPartitionScheme object, The value is 0."
+          },
+          {
+            "name": "UniformInt64Range",
+            "value": "UniformInt64Range",
+            "description": "Indicates that the partition is based on Int64 key ranges, and is a UniformInt64RangePartitionScheme object. The value is 1."
+          },
+          {
+            "name": "Named",
+            "value": "Named",
+            "description": "Indicates that the partition is based on string names, and is a NamedPartitionScheme object. The value is 2."
+          }
+        ]
+      }
+    },
     "PrivateEndpointNetworkPolicies": {
       "type": "string",
       "description": "Enable or Disable apply network policies on private end point in the subnet.",
@@ -6441,11 +6513,13 @@
         "values": [
           {
             "name": "enabled",
-            "value": "enabled"
+            "value": "enabled",
+            "description": "Enable apply network policies on private end point in the subnet."
           },
           {
             "name": "disabled",
-            "value": "disabled"
+            "value": "disabled",
+            "description": "Disable apply network policies on private end point in the subnet."
           }
         ]
       }
@@ -6463,18 +6537,20 @@
         "values": [
           {
             "name": "enabled",
-            "value": "enabled"
+            "value": "enabled",
+            "description": "Enable apply network policies on private link service in the subnet."
           },
           {
             "name": "disabled",
-            "value": "disabled"
+            "value": "disabled",
+            "description": "Disable apply network policies on private link service in the subnet."
           }
         ]
       }
     },
     "ProbeProtocol": {
       "type": "string",
-      "description": "the reference to the load balancer probe used by the load balancing rule.",
+      "description": "The reference to the load balancer probe used by the load balancing rule.",
       "enum": [
         "tcp",
         "http",
@@ -6486,15 +6562,18 @@
         "values": [
           {
             "name": "tcp",
-            "value": "tcp"
+            "value": "tcp",
+            "description": "Probe protocol is TCP."
           },
           {
             "name": "http",
-            "value": "http"
+            "value": "http",
+            "description": "Probe protocol is HTTP."
           },
           {
             "name": "https",
-            "value": "https"
+            "value": "https",
+            "description": "Probe protocol is HTTPS."
           }
         ]
       }
@@ -6512,11 +6591,13 @@
         "values": [
           {
             "name": "tcp",
-            "value": "tcp"
+            "value": "tcp",
+            "description": "Transport protocol is TCP."
           },
           {
             "name": "udp",
-            "value": "udp"
+            "value": "udp",
+            "description": "Transport protocol is UDP."
           }
         ]
       }
@@ -6624,8 +6705,7 @@
       "description": "Describes the mechanism for performing a scaling operation.",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "Discriminator property for ScalingMechanism."
+          "$ref": "#/definitions/ServiceScalingMechanismKind"
         }
       },
       "discriminator": "kind",
@@ -6656,8 +6736,7 @@
       "description": "Describes the trigger for performing a scaling operation.",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "Discriminator property for ScalingTrigger."
+          "$ref": "#/definitions/ServiceScalingTriggerKind"
         }
       },
       "discriminator": "kind",
@@ -6750,6 +6829,30 @@
       "required": [
         "service"
       ]
+    },
+    "ServiceKind": {
+      "type": "string",
+      "description": "The kind of service (Stateless or Stateful).",
+      "enum": [
+        "Stateless",
+        "Stateful"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Stateless",
+            "value": "Stateless",
+            "description": "Does not use Service Fabric to make its state highly available or reliable. The value is 0."
+          },
+          {
+            "name": "Stateful",
+            "value": "Stateful",
+            "description": "Uses Service Fabric to make its state or part of its state highly available and reliable. The value is 1."
+          }
+        ]
+      }
     },
     "ServiceLoadMetric": {
       "type": "object",
@@ -6877,14 +6980,55 @@
       "description": "Describes the policy to be used for placement of a Service Fabric service.",
       "properties": {
         "type": {
-          "type": "string",
-          "description": "Discriminator property for ServicePlacementPolicy."
+          "$ref": "#/definitions/ServicePlacementPolicyType"
         }
       },
       "discriminator": "type",
       "required": [
         "type"
       ]
+    },
+    "ServicePlacementPolicyType": {
+      "type": "string",
+      "description": "The type of placement policy for a service fabric service. Following are the possible values.",
+      "enum": [
+        "InvalidDomain",
+        "RequiredDomain",
+        "PreferredPrimaryDomain",
+        "RequiredDomainDistribution",
+        "NonPartiallyPlaceService"
+      ],
+      "x-ms-enum": {
+        "name": "ServicePlacementPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidDomain",
+            "value": "InvalidDomain",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementInvalidDomainPolicyDescription, which indicates that a particular fault or upgrade domain cannot be used for placement of this service. The value is 0."
+          },
+          {
+            "name": "RequiredDomain",
+            "value": "RequiredDomain",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementRequireDomainDistributionPolicyDescription indicating that the replicas of the service must be placed in a specific domain. The value is 1."
+          },
+          {
+            "name": "PreferredPrimaryDomain",
+            "value": "PreferredPrimaryDomain",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementPreferPrimaryDomainPolicyDescription, which indicates that if possible the Primary replica for the partitions of the service should be located in a particular domain as an optimization. The value is 2."
+          },
+          {
+            "name": "RequiredDomainDistribution",
+            "value": "RequiredDomainDistribution",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementRequireDomainDistributionPolicyDescription, indicating that the system will disallow placement of any two replicas from the same partition in the same domain at any time. The value is 3."
+          },
+          {
+            "name": "NonPartiallyPlaceService",
+            "value": "NonPartiallyPlaceService",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementNonPartiallyPlaceServicePolicyDescription, which indicates that if possible all replicas of a particular partition of the service should be placed atomically. The value is 4."
+          }
+        ]
+      }
     },
     "ServicePlacementPreferPrimaryDomainPolicy": {
       "type": "object",
@@ -6984,14 +7128,14 @@
       "type": "object",
       "description": "The service resource properties.",
       "properties": {
-        "serviceKind": {
-          "type": "string",
-          "description": "Discriminator property for ServiceResourceProperties."
-        },
         "provisioningState": {
           "type": "string",
           "description": "The current deployment or provisioning state, which only appears in the response",
           "readOnly": true
+        },
+        "serviceKind": {
+          "$ref": "#/definitions/ServiceKind",
+          "description": "The kind of service (Stateless or Stateful)."
         },
         "serviceTypeName": {
           "type": "string",
@@ -7066,6 +7210,54 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "ServiceScalingMechanismKind": {
+      "type": "string",
+      "description": "Enumerates the ways that a service can be partitioned.",
+      "enum": [
+        "ScalePartitionInstanceCount",
+        "AddRemoveIncrementalNamedPartition"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceScalingMechanismKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ScalePartitionInstanceCount",
+            "value": "ScalePartitionInstanceCount",
+            "description": "Represents a scaling mechanism for adding or removing instances of stateless service partition. The value is 0."
+          },
+          {
+            "name": "AddRemoveIncrementalNamedPartition",
+            "value": "AddRemoveIncrementalNamedPartition",
+            "description": "Represents a scaling mechanism for adding or removing named partitions of a stateless service. The value is 1."
+          }
+        ]
+      }
+    },
+    "ServiceScalingTriggerKind": {
+      "type": "string",
+      "description": "Enumerates the ways that a service can be partitioned.",
+      "enum": [
+        "AveragePartitionLoadTrigger",
+        "AverageServiceLoadTrigger"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceScalingTriggerKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AveragePartitionLoadTrigger",
+            "value": "AveragePartitionLoadTrigger",
+            "description": "Represents a scaling trigger related to an average load of a metric/resource of a partition. The value is 0."
+          },
+          {
+            "name": "AverageServiceLoadTrigger",
+            "value": "AverageServiceLoadTrigger",
+            "description": "Represents a scaling policy related to an average load of a metric/resource of a service. The value is 1."
+          }
+        ]
       }
     },
     "ServiceTypeHealthPolicy": {
@@ -7420,6 +7612,7 @@
     },
     "UserAssignedIdentity": {
       "type": "object",
+      "description": "User assigned identity.",
       "properties": {
         "principalId": {
           "type": "string",
