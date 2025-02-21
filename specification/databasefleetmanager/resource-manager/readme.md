@@ -91,19 +91,13 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ```yaml
 suppressions:
-  - code: PatchBodyParametersSchema
-    from: databasefleetmanager.json 
-    reason: False alarm stating that there should be no required property in PATCH operations, but location property is required for tracked resources.
-  - code: GuidUsage
-    from: databasefleetmanager.json
-    reason: We are using GUID for references to Azure Active Directory IDs which are GUIDs.
-  - code: BodyTopLevelProperties
-    from: databasefleetmanager.json
-    reason: False alarm for pagination response schema.
-  - code: AvoidAdditionalProperties
-    from: databasefleetmanager.json
-    reason: A custom object is needed for passing underlying SQL resource tags.
   - code: EnumInsteadOfBoolean
     from: databasefleetmanager.json
     reason: These booleans are never expected to expand.
+    where:
+      - $.definitions.FleetDatabaseProperties.properties.recoverable
+      - $.definitions.FleetTierProperties.properties.disabled
+      - $.definitions.FleetTierProperties.properties.serverless
+      - $.definitions.FleetTierProperties.properties.pooled
+      - $.definitions.TransparentDataEncryption.properties.enableAutoRotation
 ```
