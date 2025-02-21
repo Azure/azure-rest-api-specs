@@ -1305,7 +1305,7 @@
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "description": "Resource properties.",
           "$ref": "#/definitions/MySQLSiteProperties"
         },
@@ -1385,7 +1385,7 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "description": "Resource properties.",
           "$ref": "#/definitions/MySQLServerProperties"
         },
@@ -1412,7 +1412,7 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "description": "Resource properties.",
           "$ref": "#/definitions/SummariesProperties"
         },
@@ -1439,7 +1439,7 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "description": "Resource properties.",
           "$ref": "#/definitions/ErrorSummariesProperties"
         },
@@ -1690,7 +1690,7 @@
           "description": "Resource tags."
         },
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/MySQLServerProperties",
           "description": "The MySQLServer resource definition."
         }
@@ -1708,7 +1708,7 @@
           "description": "Resource tags."
         },
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/MySQLSiteProperties",
           "description": "The MySQLSites resource definition."
         }
@@ -1742,7 +1742,7 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "description": "Resource properties.",
           "$ref": "#/definitions/AgentProperties"
         }
@@ -1772,6 +1772,14 @@
           "type": "string",
           "description": "Name of the appliance on which agent is running."
         },
+        "fabricSiteName": {
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "type": "string",
+          "description": "Name of the site which enables fabric discovery."
+        },
         "healthDetails": {
           "$ref": "#/definitions/AgentHealthProperties",
           "description": "Health details of the agent."
@@ -1797,14 +1805,15 @@
       },
       "required": [
         "servicePrincipalIdentityDetails",
-        "migrateApplianceName"
+        "migrateApplianceName",
+        "fabricSiteName"
       ]
     },
     "AgentResourcePatch": {
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/AgentResourcePatchProperties",
           "description": "The Agent properties resource definition."
         }

@@ -32,7 +32,7 @@ model Workflow is Azure.ResourceManager.TrackedResource<WorkflowProperties> {
   @doc("Name of the workflow")
   @maxLength(61)
   @minLength(3)
-  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   @path
   @key("workflowName")
   @segment("workflows")
