@@ -12,24 +12,30 @@ namespace JavaClient;
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/rpc-operation-needs-route" ""
-op getApplication is ReadOperationWithOptions<
-  Azure.Batch.getApplicationParameters,
-  {},
-  Azure.Batch.BatchApplication
->;
-
-op ReadOperationWithOptions<
-  TParameters extends TypeSpec.Reflection.Model,
-  TExtraOptions extends TypeSpec.Reflection.Model,
-  TResource
-> is Azure.Core.RpcOperation<
+op getApplication is Azure.Core.RpcOperation<
   {
-    ...TParameters;
+    ...Azure.Batch.getApplicationParameters;
 
     @doc("Options for this operation")
-    options?: Azure.Batch.BatchCommonReadParameters & TExtraOptions;
+    options?: Azure.Batch.BatchCommonReadParameters;
   },
-  TResource & Azure.Batch.BatchResponseHeaders,
+  Azure.Batch.BatchApplication & Azure.Batch.BatchResponseHeaders,
   {},
   Azure.Batch.BatchError
 >;
+
+// op ReadOperationWithOptions<
+//   TParameters extends TypeSpec.Reflection.Model,
+//   TExtraOptions extends TypeSpec.Reflection.Model,
+//   TResource
+// > is Azure.Core.RpcOperation<
+//   {
+//     ...TParameters;
+
+//     @doc("Options for this operation")
+//     options?: Azure.Batch.BatchCommonReadParameters & TExtraOptions;
+//   },
+//   TResource & Azure.Batch.BatchResponseHeaders,
+//   {},
+//   Azure.Batch.BatchError
+// >;
