@@ -1415,7 +1415,7 @@ model NetworkInfoProperties {
   /**
    * The resource ID of the subnet.
    */
-  subnetId?: Azure.Core.armResourceIdentifier;
+  subnetId: Azure.Core.armResourceIdentifier;
 
   /**
    * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
@@ -1767,17 +1767,17 @@ model ActiveSessionHostConfigurationProperties {
    * Hashtable that lists key/value pair tags to apply to the VMs
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Already implemented with Record"
-  vmTags: Record<string>;
+  vmTags?: Record<string>;
 
   /**
    * The Location for the session host to be created in. It will default to the location of the hostpool if not provided.
    */
-  vmLocation: string;
+  vmLocation?: string;
 
   /**
    * The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided.
    */
-  vmResourceGroup: string;
+  vmResourceGroup?: string;
 
   /**
    * The prefix that should be associated with session host names
@@ -1788,7 +1788,7 @@ model ActiveSessionHostConfigurationProperties {
   /**
    * Value for availability zones to be used by the session host. Should be from [1,2,3].
    */
-  availabilityZones: int32[];
+  availabilityZones?: int32[];
 
   /**
    * Network information.
@@ -1823,7 +1823,7 @@ model ActiveSessionHostConfigurationProperties {
   /**
    * Security information.
    */
-  securityInfo: SecurityInfoProperties;
+  securityInfo?: SecurityInfoProperties;
 
   /**
    * Local Admin credentials for session hosts.
@@ -3796,12 +3796,12 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DayOfWeek[];
+  daysOfWeek: DayOfWeek[];
 
   /**
    * Starting time for ramp up period.
    */
-  rampUpStartTime?: Time;
+  rampUpStartTime: Time;
 
   /**
    * The desired startup behavior during the ramp up period for personal vms in the hostpool.
@@ -3839,7 +3839,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Starting time for peak period.
    */
-  peakStartTime?: Time;
+  peakStartTime: Time;
 
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
@@ -3872,7 +3872,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Starting time for ramp down period.
    */
-  rampDownStartTime?: Time;
+  rampDownStartTime: Time;
 
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
@@ -3905,7 +3905,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Starting time for off-peak period.
    */
-  offPeakStartTime?: Time;
+  offPeakStartTime: Time;
 
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
@@ -4115,12 +4115,12 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek?: DayOfWeek[];
+  daysOfWeek: DayOfWeek[];
 
   /**
    * Starting time for ramp up period.
    */
-  rampUpStartTime?: Time;
+  rampUpStartTime: Time;
 
   /**
    * Load balancing algorithm for ramp up period.
@@ -4139,12 +4139,12 @@ model ScalingPlanPooledScheduleProperties {
    */
   @maxValue(100)
   @minValue(1)
-  rampUpCapacityThresholdPct?: int32;
+  rampUpCapacityThresholdPct: int32;
 
   /**
    * Starting time for peak period.
    */
-  peakStartTime?: Time;
+  peakStartTime: Time;
 
   /**
    * Load balancing algorithm for peak period.
@@ -4154,7 +4154,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Starting time for ramp down period.
    */
-  rampDownStartTime?: Time;
+  rampDownStartTime: Time;
 
   /**
    * Load balancing algorithm for ramp down period.
@@ -4173,7 +4173,7 @@ model ScalingPlanPooledScheduleProperties {
    */
   @maxValue(100)
   @minValue(1)
-  rampDownCapacityThresholdPct?: int32;
+  rampDownCapacityThresholdPct: int32;
 
   /**
    * Should users be logged off forcefully from hosts.
@@ -4198,7 +4198,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Starting time for off-peak period.
    */
-  offPeakStartTime?: Time;
+  offPeakStartTime: Time;
 
   /**
    * Load balancing algorithm for off-peak period.

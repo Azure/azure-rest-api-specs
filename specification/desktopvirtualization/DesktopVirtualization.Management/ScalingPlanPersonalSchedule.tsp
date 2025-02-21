@@ -46,7 +46,10 @@ interface ScalingPlanPersonalSchedules {
   @parameterVisibility
   update is ArmCustomPatchSync<
     ScalingPlanPersonalSchedule,
-    ScalingPlanPersonalSchedulePatch
+    ScalingPlanPersonalSchedulePatch,
+    Response = {
+      @bodyRoot scalingPlanPersonalSchedule?: ScalingPlanPersonalSchedulePatch;
+    }
   >;
 
   /**
@@ -89,8 +92,5 @@ interface ScalingPlanPersonalSchedules {
   "Detailed properties for ScalingPlanPersonalSchedule"
 );
 @@doc(ScalingPlanPersonalSchedules.create::parameters.resource,
-  "Object containing ScalingPlanPersonalSchedule definitions."
-);
-@@doc(ScalingPlanPersonalSchedules.update::parameters.properties,
   "Object containing ScalingPlanPersonalSchedule definitions."
 );

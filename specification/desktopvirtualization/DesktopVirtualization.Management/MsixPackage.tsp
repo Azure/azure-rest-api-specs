@@ -106,6 +106,3 @@ interface MSIXPackages {
 @@doc(MSIXPackages.createOrUpdate::parameters.resource,
   "Object containing  MSIX Package definitions."
 );
-@@doc(MSIXPackages.update::parameters.properties,
-  "Object containing MSIX Package definitions."
-);

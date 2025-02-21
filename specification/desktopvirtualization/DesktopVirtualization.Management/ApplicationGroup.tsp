@@ -37,7 +37,7 @@ interface StartMenuItems {
    */
   @get
   @action("startMenuItems")
-  list is ArmResourceActionSync<
+  list is Azure.ResourceManager.ArmResourceActionSync<
     ApplicationGroup,
     void,
     StartMenuItemList,
@@ -78,7 +78,16 @@ interface ApplicationGroups {
    * Update an applicationGroup.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<ApplicationGroup, ApplicationGroupPatch>;
+  update is ArmCustomPatchSync<
+    ApplicationGroup,
+    ApplicationGroupPatch,
+    Response = {
+      /**
+       * The AppGroup properties to be updated
+       */
+      @bodyRoot applicationGroup?: ApplicationGroupPatch;
+    }
+  >;
 
   /**
    * Remove an applicationGroup.
@@ -142,8 +151,5 @@ interface ApplicationGroups {
 @@doc(ApplicationGroup.name, "The name of the application group");
 @@doc(ApplicationGroup.properties, "Detailed properties for ApplicationGroup");
 @@doc(ApplicationGroups.createOrUpdate::parameters.resource,
-  "Object containing ApplicationGroup definitions."
-);
-@@doc(ApplicationGroups.update::parameters.properties,
   "Object containing ApplicationGroup definitions."
 );

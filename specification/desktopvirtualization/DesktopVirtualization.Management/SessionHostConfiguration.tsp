@@ -39,7 +39,13 @@ interface SessionHostConfigurations {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     SessionHostConfiguration,
-    SessionHostConfigurationPatch
+    SessionHostConfigurationPatch,
+    Request = {
+      /**
+       * The resource properties to be updated
+       */
+      @bodyRoot sessionHostConfiguration?: SessionHostConfigurationPatch;
+    }
   >;
 
   /**

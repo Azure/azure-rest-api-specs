@@ -35,7 +35,13 @@ interface Desktops {
    * Update a desktop.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<Desktop, DesktopPatch>;
+  update is ArmCustomPatchSync<
+    Desktop,
+    DesktopPatch,
+    Response = {
+      @bodyRoot desktop?: DesktopPatch;
+    }
+  >;
 
   /**
    * List desktops.
@@ -71,6 +77,3 @@ interface Desktops {
   "The name of the desktop within the specified desktop group"
 );
 @@doc(Desktop.properties, "Detailed properties for Desktop");
-@@doc(Desktops.update::parameters.properties,
-  "Object containing Desktop definitions."
-);

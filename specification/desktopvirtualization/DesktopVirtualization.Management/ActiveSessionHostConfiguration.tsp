@@ -17,7 +17,10 @@ namespace Microsoft.DesktopVirtualization;
 @parentResource(HostPool)
 @singleton("default")
 model ActiveSessionHostConfiguration
-  is Azure.ResourceManager.ProxyResource<ActiveSessionHostConfigurationProperties> {
+  is Azure.ResourceManager.ProxyResource<
+    ActiveSessionHostConfigurationProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = ActiveSessionHostConfiguration,
     SegmentName = "activeSessionHostConfigurations",
@@ -37,7 +40,7 @@ interface ActiveSessionHostConfigurations {
    */
   @action("activeSessionHostConfigurations")
   @get
-  listByHostPool is ArmResourceActionSync<
+  listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
     HostPool,
     void,
     ActiveSessionHostConfigurationList

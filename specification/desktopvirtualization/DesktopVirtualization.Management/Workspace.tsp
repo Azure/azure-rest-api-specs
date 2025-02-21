@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "./CustomOperations.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -44,7 +45,16 @@ interface Workspaces {
    * Update a workspace.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<Workspace, WorkspacePatch>;
+  update is ArmCustomPatchSync<
+    Workspace,
+    WorkspacePatch,
+    Request = {
+      /**
+       * The resource properties to be updated
+       */
+      @bodyRoot workspace?: WorkspacePatch;
+    }
+  >;
 
   /**
    * Remove a workspace.
@@ -92,8 +102,5 @@ interface Workspaces {
 @@doc(Workspace.name, "The name of the workspace");
 @@doc(Workspace.properties, "Detailed properties for Workspace");
 @@doc(Workspaces.createOrUpdate::parameters.resource,
-  "Object containing Workspace definitions."
-);
-@@doc(Workspaces.update::parameters.properties,
   "Object containing Workspace definitions."
 );

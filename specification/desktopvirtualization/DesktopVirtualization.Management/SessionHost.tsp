@@ -39,6 +39,12 @@ interface SessionHosts {
   update is ArmCustomPatchSync<
     SessionHost,
     SessionHostPatch,
+    Request = {
+      /**
+       * The resource properties to be updated
+       */
+      @bodyRoot sessionHost?: SessionHostPatch;
+    },
     Parameters = {
       /**
        * Force flag to update assign, unassign or reassign personal desktop.
@@ -107,6 +113,3 @@ interface SessionHosts {
   "The name of the session host within the specified host pool"
 );
 @@doc(SessionHost.properties, "Detailed properties for SessionHost");
-@@doc(SessionHosts.update::parameters.properties,
-  "Object containing SessionHost definitions."
-);

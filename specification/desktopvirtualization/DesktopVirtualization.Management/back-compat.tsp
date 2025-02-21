@@ -31,12 +31,6 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(HostPools.createOrUpdate::parameters.resource, "hostPool");
 
-@@clientName(AppAttachPackageInfo.`import`::parameters.body,
-  "importPackageInfoRequest"
-);
-
-@@clientName(MSIXImages.expand::parameters.body, "msixImageURI");
-
 @@clientName(ScalingPlans.create::parameters.resource, "scalingPlan");
 
 @@clientName(ScalingPlanPersonalSchedules.create::parameters.resource,
@@ -61,51 +55,7 @@ using Microsoft.DesktopVirtualization;
   "sessionHostConfiguration"
 );
 
-@@clientName(InitiateSessionHostUpdate.post::parameters.body,
-  "updateSessionHostsRequestBody"
-);
-
-@@clientName(Applications.update::parameters.properties, "application");
-
-@@clientName(Desktops.update::parameters.properties, "desktop");
-
-@@clientName(UserSessions.sendMessage::parameters.body, "sendMessage");
-
-@@clientName(HostPools.update::parameters.properties, "hostPool");
-
-@@clientName(SessionHostConfigurations.update::parameters.properties,
-  "sessionHostConfiguration"
-);
-
-@@clientName(SessionHostManagements.update::parameters.properties,
-  "sessionHostManagement"
-);
-
-@@clientName(SessionHosts.update::parameters.properties, "sessionHost");
-
-@@clientName(ScalingPlans.update::parameters.properties, "scalingPlan");
-
-@@clientName(ScalingPlanPersonalSchedules.update::parameters.properties,
-  "scalingPlanSchedule"
-);
-
-@@clientName(ScalingPlanPooledSchedules.update::parameters.properties,
-  "scalingPlanSchedule"
-);
-
-@@clientName(Workspaces.update::parameters.properties, "workspace");
-
-@@clientName(AppAttachPackages.update::parameters.properties,
-  "appAttachPackagePatch"
-);
-
-@@clientName(ApplicationGroups.update::parameters.properties,
-  "applicationGroup"
-);
-
 @@clientName(MSIXPackages.createOrUpdate::parameters.resource, "msixPackage");
-
-@@clientName(MSIXPackages.update::parameters.properties, "msixPackage");
 
 @@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
   "^[-\\w\\._,\\(\\)]+$"

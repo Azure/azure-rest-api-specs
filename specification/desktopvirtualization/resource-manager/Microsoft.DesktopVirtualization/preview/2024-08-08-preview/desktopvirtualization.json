@@ -592,8 +592,8 @@
           {
             "name": "appAttachPackagePatch",
             "in": "body",
-            "description": "Object containing App Attach Package definition.",
-            "required": true,
+            "description": "The resource properties to be updated",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/AppAttachPackagePatch"
             }
@@ -883,9 +883,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "applicationGroup",
+            "name": "body",
             "in": "body",
-            "description": "Object containing ApplicationGroup definitions.",
+            "description": "The resource properties to be updated",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApplicationGroupPatch"
@@ -894,9 +894,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ApplicationGroup"
+              "$ref": "#/definitions/ApplicationGroupPatch"
             }
           },
           "default": {
@@ -1202,9 +1202,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "application",
+            "name": "body",
             "in": "body",
-            "description": "Object containing Application definitions.",
+            "description": "The resource properties to be updated",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApplicationPatch"
@@ -1213,9 +1213,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Application"
+              "$ref": "#/definitions/ApplicationPatch"
             }
           },
           "default": {
@@ -1459,9 +1459,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "desktop",
+            "name": "body",
             "in": "body",
-            "description": "Object containing Desktop definitions.",
+            "description": "The resource properties to be updated",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DesktopPatch"
@@ -1470,9 +1470,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Desktop"
+              "$ref": "#/definitions/DesktopPatch"
             }
           },
           "default": {
@@ -1766,9 +1766,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "hostPool",
+            "name": "body",
             "in": "body",
-            "description": "Object containing HostPool definitions.",
+            "description": "The resource properties to be updated",
             "required": true,
             "schema": {
               "$ref": "#/definitions/HostPoolPatch"
@@ -1777,9 +1777,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/HostPool"
+              "$ref": "#/definitions/HostPoolPatch"
             }
           },
           "default": {
@@ -1979,9 +1979,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "msixImageURI",
+            "name": "body",
             "in": "body",
-            "description": "Object containing URI to MSIX Image",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MSIXImageURI"
@@ -2040,9 +2040,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "importPackageInfoRequest",
+            "name": "body",
             "in": "body",
-            "description": "Object containing URI to package image and other optional properties",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ImportPackageInfoRequest"
@@ -2364,9 +2364,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "msixPackage",
+            "name": "body",
             "in": "body",
-            "description": "Object containing MSIX Package definitions.",
+            "description": "The resource properties to be updated",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MSIXPackagePatch"
@@ -3110,8 +3110,8 @@
           {
             "name": "sessionHostConfiguration",
             "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
+            "description": "The resource properties to be updated",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SessionHostConfigurationPatch"
             }
@@ -3345,9 +3345,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "sessionHostManagement",
+            "name": "body",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "The resource properties to be updated",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SessionHostManagementPatch"
@@ -3356,9 +3356,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SessionHostManagement"
+              "$ref": "#/definitions/SessionHostManagementPatch"
             }
           },
           "default": {
@@ -3473,7 +3473,7 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "updateSessionHostsRequestBody",
+            "name": "body",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
@@ -3483,8 +3483,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Operation completed successfully."
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateSessionHostsRequestBody"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3738,8 +3741,8 @@
           {
             "name": "sessionHost",
             "in": "body",
-            "description": "Object containing SessionHost definitions.",
-            "required": true,
+            "description": "The resource properties to be updated",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SessionHostPatch"
             }
@@ -4224,9 +4227,9 @@
             "maxLength": 24
           },
           {
-            "name": "sendMessage",
+            "name": "body",
             "in": "body",
-            "description": "Object containing message includes title and message body",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SendMessage"
@@ -4234,8 +4237,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Azure operation completed successfully."
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SendMessage"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4535,9 +4541,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "scalingPlan",
+            "name": "body",
             "in": "body",
-            "description": "Object containing scaling plan definitions.",
+            "description": "The resource properties to be updated",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScalingPlanPatch"
@@ -4546,9 +4552,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ScalingPlan"
+              "$ref": "#/definitions/ScalingPlanPatch"
             }
           },
           "default": {
@@ -4854,9 +4860,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "scalingPlanSchedule",
+            "name": "body",
             "in": "body",
-            "description": "Object containing ScalingPlanPersonalSchedule definitions.",
+            "description": "The resource properties to be updated",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScalingPlanPersonalSchedulePatch"
@@ -4865,9 +4871,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
+              "$ref": "#/definitions/ScalingPlanPersonalSchedulePatch"
             }
           },
           "default": {
@@ -5183,9 +5189,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "scalingPlanSchedule",
+            "name": "body",
             "in": "body",
-            "description": "Object containing ScalingPlanPooledSchedule definitions.",
+            "description": "The resource properties to be updated",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScalingPlanPooledSchedulePatch"
@@ -5194,9 +5200,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ScalingPlanPooledSchedule"
+              "$ref": "#/definitions/ScalingPlanPooledSchedulePatch"
             }
           },
           "default": {
@@ -5474,8 +5480,8 @@
           {
             "name": "workspace",
             "in": "body",
-            "description": "Object containing Workspace definitions.",
-            "required": true,
+            "description": "The resource properties to be updated",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/WorkspacePatch"
             }
@@ -5899,6 +5905,9 @@
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
@@ -6008,17 +6017,12 @@
         }
       },
       "required": [
-        "vmTags",
-        "vmLocation",
-        "vmResourceGroup",
         "vmNamePrefix",
-        "availabilityZones",
         "networkInfo",
         "vmSizeId",
         "diskInfo",
         "imageInfo",
         "domainInfo",
-        "securityInfo",
         "vmAdminCredentials"
       ]
     },
@@ -8299,7 +8303,10 @@
           "type": "string",
           "description": "The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG)."
         }
-      }
+      },
+      "required": [
+        "subnetId"
+      ]
     },
     "OperationProperties": {
       "type": "object",
@@ -9604,7 +9611,14 @@
           "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period.",
           "minimum": 0
         }
-      }
+      },
+      "required": [
+        "daysOfWeek",
+        "rampUpStartTime",
+        "peakStartTime",
+        "rampDownStartTime",
+        "offPeakStartTime"
+      ]
     },
     "ScalingPlanPooledSchedule": {
       "type": "object",
@@ -9847,7 +9861,16 @@
           "$ref": "#/definitions/SessionHostLoadBalancingAlgorithm",
           "description": "Load balancing algorithm for off-peak period."
         }
-      }
+      },
+      "required": [
+        "daysOfWeek",
+        "rampUpStartTime",
+        "rampUpCapacityThresholdPct",
+        "peakStartTime",
+        "rampDownStartTime",
+        "rampDownCapacityThresholdPct",
+        "offPeakStartTime"
+      ]
     },
     "ScalingPlanProperties": {
       "type": "object",
@@ -10499,6 +10522,9 @@
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"

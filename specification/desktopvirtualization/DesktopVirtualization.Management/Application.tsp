@@ -41,7 +41,13 @@ interface Applications {
    * Update an application.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<Application, ApplicationPatch>;
+  update is ArmCustomPatchSync<
+    Application,
+    ApplicationPatch,
+    Response = {
+      @bodyRoot application?: ApplicationPatch;
+    }
+  >;
 
   /**
    * Remove an application.
@@ -83,8 +89,5 @@ interface Applications {
 );
 @@doc(Application.properties, "Detailed properties for Application");
 @@doc(Applications.createOrUpdate::parameters.resource,
-  "Object containing Application definitions."
-);
-@@doc(Applications.update::parameters.properties,
   "Object containing Application definitions."
 );

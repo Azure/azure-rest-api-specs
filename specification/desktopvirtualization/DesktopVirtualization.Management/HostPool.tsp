@@ -60,7 +60,7 @@ interface PrivateLinkResources {
    */
   @action("privateLinkResources")
   @get
-  listByHostPool is ArmResourceActionSync<
+  listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
     HostPool,
     void,
     PrivateLinkResourceListResult,
@@ -90,7 +90,7 @@ interface PrivateLinkResources {
    */
   @action("privateLinkResources")
   @get
-  listByWorkspace is ArmResourceActionSync<
+  listByWorkspace is Azure.ResourceManager.ArmResourceActionSync<
     Workspace,
     void,
     PrivateLinkResourceListResult,
@@ -131,7 +131,13 @@ interface HostPools {
    * Update a host pool.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<HostPool, HostPoolPatch>;
+  update is ArmCustomPatchSync<
+    HostPool,
+    HostPoolPatch,
+    Response = {
+      @bodyRoot hostPool?: HostPoolPatch;
+    }
+  >;
 
   /**
    * Remove a host pool.
@@ -229,12 +235,11 @@ interface HostPools {
 @@doc(HostPools.createOrUpdate::parameters.resource,
   "Object containing HostPool definitions."
 );
-@@doc(HostPools.update::parameters.properties,
-  "Object containing HostPool definitions."
-);
-@@doc(MSIXImages.expand::parameters.body,
+
+//TODO: Body doesn't exist anymore?
+/*@@doc(MSIXImages.expand::parameters.body,
   "Object containing URI to MSIX Image"
 );
 @@doc(AppAttachPackageInfo.`import`::parameters.body,
   "Object containing URI to package image and other optional properties"
-);
+); */

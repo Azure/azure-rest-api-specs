@@ -46,7 +46,10 @@ interface ScalingPlanPooledSchedules {
   @parameterVisibility
   update is ArmCustomPatchSync<
     ScalingPlanPooledSchedule,
-    ScalingPlanPooledSchedulePatch
+    ScalingPlanPooledSchedulePatch,
+    Response = {
+      @bodyRoot scalingPlanPooledSchedule?: ScalingPlanPooledSchedulePatch;
+    }
   >;
 
   /**
@@ -89,8 +92,5 @@ interface ScalingPlanPooledSchedules {
   "Detailed properties for ScalingPlanPooledSchedule"
 );
 @@doc(ScalingPlanPooledSchedules.create::parameters.resource,
-  "Object containing ScalingPlanPooledSchedule definitions."
-);
-@@doc(ScalingPlanPooledSchedules.update::parameters.properties,
   "Object containing ScalingPlanPooledSchedule definitions."
 );

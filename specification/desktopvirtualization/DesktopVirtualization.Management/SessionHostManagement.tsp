@@ -17,7 +17,10 @@ namespace Microsoft.DesktopVirtualization;
 @parentResource(HostPool)
 @singleton("default")
 model SessionHostManagement
-  is Azure.ResourceManager.ProxyResource<SessionHostManagementProperties> {
+  is Azure.ResourceManager.ProxyResource<
+    SessionHostManagementProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = SessionHostManagement,
     KeyName = "sessionHostManagements",
@@ -34,7 +37,9 @@ interface InitiateSessionHostUpdate {
   post is ArmResourceActionSync<
     SessionHostManagement,
     UpdateSessionHostsRequestBody,
-    ArmNoContentResponse
+    Response = {
+      @bodyRoot updateSessionHostsRequest?: UpdateSessionHostsRequestBody;
+    }
   >;
 }
 
@@ -69,7 +74,10 @@ interface SessionHostManagements {
   @parameterVisibility
   update is ArmCustomPatchSync<
     SessionHostManagement,
-    SessionHostManagementPatch
+    SessionHostManagementPatch,
+    Response = {
+      @bodyRoot sessionHostManagement?: SessionHostManagementPatch;
+    }
   >;
 
   /**

@@ -75,7 +75,7 @@ interface UserSessions {
 
   @get
   @action("userSessions")
-  listByHostPool is ArmResourceActionSync<
+  listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
     HostPool,
     void,
     UserSessionList,
@@ -120,7 +120,13 @@ interface UserSessions {
   /**
    * Send a message to a user.
    */
-  sendMessage is ArmResourceActionSync<UserSession, SendMessage, void>;
+  sendMessage is ArmResourceActionSync<
+    UserSession,
+    SendMessage,
+    Response = {
+      @bodyRoot sendMessage?: SendMessage;
+    }
+  >;
 }
 
 @@maxLength(UserSession.name, 24);
@@ -129,6 +135,3 @@ interface UserSessions {
   "The name of the user session within the specified session host"
 );
 @@doc(UserSession.properties, "Detailed properties for UserSession");
-@@doc(UserSessions.sendMessage::parameters.body,
-  "Object containing message includes title and message body"
-);

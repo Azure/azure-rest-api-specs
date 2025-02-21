@@ -46,7 +46,13 @@ interface ScalingPlans {
    * Update a scaling plan.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<ScalingPlan, ScalingPlanPatch>;
+  update is ArmCustomPatchSync<
+    ScalingPlan,
+    ScalingPlanPatch,
+    Response = {
+      @bodyRoot scalingPlan?: ScalingPlanPatch;
+    }
+  >;
 
   /**
    * Remove a scaling plan.
@@ -112,7 +118,7 @@ interface ScalingPlans {
    */
   @get
   @action("scalingPlans")
-  listByHostPool is ArmResourceActionSync<
+  listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
     HostPool,
     void,
     ScalingPlanList,
@@ -143,8 +149,5 @@ interface ScalingPlans {
 @@doc(ScalingPlan.name, "The name of the scaling plan.");
 @@doc(ScalingPlan.properties, "Detailed properties for scaling plan.");
 @@doc(ScalingPlans.create::parameters.resource,
-  "Object containing scaling plan definitions."
-);
-@@doc(ScalingPlans.update::parameters.properties,
   "Object containing scaling plan definitions."
 );

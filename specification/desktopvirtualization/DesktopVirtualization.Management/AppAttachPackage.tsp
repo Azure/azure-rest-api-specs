@@ -39,7 +39,16 @@ interface AppAttachPackages {
    * Update an App Attach Package
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<AppAttachPackage, AppAttachPackagePatch>;
+  update is ArmCustomPatchSync<
+    AppAttachPackage,
+    AppAttachPackagePatch,
+    Request = {
+      /**
+       * The resource properties to be updated
+       */
+      @bodyRoot appAttachPackagePatch?: AppAttachPackagePatch;
+    }
+  >;
 
   /**
    * Remove an App Attach Package.
@@ -94,7 +103,4 @@ interface AppAttachPackages {
 );
 @@doc(AppAttachPackages.createOrUpdate::parameters.resource,
   "Object containing App Attach Package definitions."
-);
-@@doc(AppAttachPackages.update::parameters.properties,
-  "Object containing App Attach Package definition."
 );
