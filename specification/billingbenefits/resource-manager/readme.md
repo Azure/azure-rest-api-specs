@@ -26,7 +26,7 @@ These are the global settings for the billingbenefits.
 
 ```yaml
 openapi-type: arm
-tag: package-2022-11-01
+tag: package-preview-2024-11-01
 ```
 
 ### Suppression
@@ -53,6 +53,15 @@ directive:
     reason: According to ARM's guide 200 is returned when PUT call finishes.
   - suppress: TrackedResourcePatchOperation
     from: billingbenefits.json
+```
+
+### Tag: package-preview-2024-11-01-preview
+
+These settings apply only when `--tag=package-preview-2024-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11-01-preview'
+input-file:
+  - Microsoft.BillingBenefits/preview/2024-11-01-preview/billingbenefits.json
 ```
 
 ### Tag: package-2022-11-01
