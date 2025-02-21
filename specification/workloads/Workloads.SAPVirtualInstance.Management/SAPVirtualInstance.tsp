@@ -68,7 +68,7 @@ interface SAPVirtualInstances {
       /**
        * Object of type StartRequest
        */
-      @body startRequest?: StartRequest;
+      @body body?: StartRequest;
     }
   >;
 
@@ -83,7 +83,7 @@ interface SAPVirtualInstances {
       /**
        * Object of type StopRequest
        */
-      @body stopRequest?: StopRequest;
+      @body body?: StopRequest;
     }
   >;
 
