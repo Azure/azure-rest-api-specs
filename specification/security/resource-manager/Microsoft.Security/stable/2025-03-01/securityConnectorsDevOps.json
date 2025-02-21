@@ -879,6 +879,9 @@
           },
           "Get_DevOpsConfigurations_WithCapabilities": {
             "$ref": "./examples/SecurityConnectorsDevOps/GetDevOpsConfigurationsWithCapabilities_example.json"
+          },
+          "Get_DevOpsConfigurations_WithAgentlessConfigurations": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetDevOpsConfigurationsWithAgentlessConfigurations_example.json"
           }
         }
       },
@@ -956,6 +959,9 @@
           },
           "CreateOrUpdate_DevOpsConfigurations_OnboardSelected": {
             "$ref": "./examples/SecurityConnectorsDevOps/CreateOrUpdateDevOpsConfigurationsOnboardSelected_example.json"
+          },
+          "CreateOrUpdate_DevOpsConfigurations_WithAgentlessConfigurations": {
+            "$ref": "./examples/SecurityConnectorsDevOps/CreateOrUpdateDevOpsConfigurationsWithAgentlessConfigurations_example.json"
           }
         }
       },
@@ -1714,11 +1720,7 @@
           }
         },
         "inventoryListType": {
-          "description": "Gets or sets the inventory list kind for inclusion or exclusion from Agentless.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/InventoryListKind"
-          }
+          "$ref": "#/definitions/InventoryListKind"
         },
         "inventoryList": {
           "description": "Gets or sets the inventory list for inclusion or exclusion from Agentless.\r\nWill be ignored if agentless auto-discovery is enabled.",
@@ -2162,11 +2164,7 @@
           "readOnly": true
         },
         "agentlessConfiguration": {
-          "description": "Optional Agentless configuration for the connector.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/AgentlessConfiguration"
-          }
+          "$ref": "#/definitions/AgentlessConfiguration"
         }
       }
     },
