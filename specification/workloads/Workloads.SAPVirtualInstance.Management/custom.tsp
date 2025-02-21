@@ -34,3 +34,36 @@ op VirtualResourceActionSync<
   @bodyRoot
   body: Request,
 ): Response | Error;
+
+/**
+ * @dev A long-running resource action.
+ * @template Resource The resource being acted upon
+ * @template Request The request model for the action
+ * @template Response The response model for the action
+ * @template BaseParameters Optional. Allows overriding the parameters for the operation
+ * @template Parameters Optional. Additional parameters after the path parameters
+ * @template Error Optional. The error response, if non-standard.
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "template"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "template"
+@returnsDoc("Azure operation completed successfully.")
+@autoRoute
+@armResourceAction(Resource)
+@post
+op CustomizedArmResourceActionSync<
+  Resource extends Azure.ResourceManager.Foundations.Resource,
+  Request extends TypeSpec.Reflection.Model | void,
+  Response extends TypeSpec.Reflection.Model | void,
+  BaseParameters extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
+  Parameters extends {} = {},
+  Error extends {} = ErrorResponse,
+  RequestBody extends {} = {
+    @doc("The content of the action request")
+    @bodyRoot
+    body: Request;
+  }
+>(
+  ...ResourceInstanceParameters<Resource, BaseParameters>,
+  ...Parameters,
+  ...RequestBody,
+): Response | Error;

@@ -60,19 +60,31 @@ interface SAPVirtualInstances {
   /**
    * Starts the SAP application, that is the Central Services instance and Application server instances.
    */
-  start is ArmResourceActionAsync<
+  start is CustomizedArmResourceActionSync<
     SAPVirtualInstance,
     StartRequest,
-    Foundations.OperationStatusResult
+    Foundations.OperationStatusResult,
+    RequestBody = {
+      /**
+       * Object of type StartRequest
+       */
+      @body StartRequest?: StartRequest;
+    }
   >;
 
   /**
    * Stops the SAP Application, that is the Application server instances and Central Services instance.
    */
-  stop is ArmResourceActionAsync<
+  stop is CustomizedArmResourceActionSync<
     SAPVirtualInstance,
     StopRequest,
-    Foundations.OperationStatusResult
+    Foundations.OperationStatusResult,
+    RequestBody = {
+      /**
+       * Object of type StopRequest
+       */
+      @body StopRequest?: StopRequest;
+    }
   >;
 
   /**
@@ -128,10 +140,4 @@ interface SAPVirtualInstances {
 );
 @@doc(SAPVirtualInstances.update::parameters.properties,
   "Request body to update a Virtual Instance for SAP solutions resource."
-);
-@@doc(SAPVirtualInstances.start::parameters.body,
-  "The Virtual Instance for SAP solutions resource start request body."
-);
-@@doc(SAPVirtualInstances.stop::parameters.body,
-  "The Virtual Instance for SAP solutions resource stop request body."
 );

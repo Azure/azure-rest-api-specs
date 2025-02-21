@@ -58,19 +58,31 @@ interface SAPApplicationServerInstances {
   /**
    * Starts the SAP Application Server Instance.
    */
-  start is ArmResourceActionAsync<
+  start is CustomizedArmResourceActionSync<
     SAPApplicationServerInstance,
     StartRequest,
-    Foundations.OperationStatusResult
+    Foundations.OperationStatusResult,
+    RequestBody = {
+      /**
+       * Object of type StartRequest
+       */
+      @body StartRequest?: StartRequest;
+    }
   >;
 
   /**
    * Stops the SAP Application Server Instance.
    */
-  stop is ArmResourceActionAsync<
+  stop is CustomizedArmResourceActionSync<
     SAPApplicationServerInstance,
     StopRequest,
-    Foundations.OperationStatusResult
+    Foundations.OperationStatusResult,
+    RequestBody = {
+      /**
+       * Object of type StopRequest
+       */
+      @body StopRequest?: StopRequest;
+    }
   >;
 }
 
@@ -82,10 +94,4 @@ interface SAPApplicationServerInstances {
 );
 @@doc(SAPApplicationServerInstances.update::parameters.properties,
   "The SAP Application Server Instance resource request body."
-);
-@@doc(SAPApplicationServerInstances.start::parameters.body,
-  "SAP Application server instance start request body."
-);
-@@doc(SAPApplicationServerInstances.stop::parameters.body,
-  "SAP Application server instance stop request body."
 );

@@ -58,19 +58,31 @@ interface SAPCentralServerInstances {
   /**
    * Starts the SAP Central Services Instance.
    */
-  start is ArmResourceActionAsync<
+  start is CustomizedArmResourceActionSync<
     SAPCentralServerInstance,
     StartRequest,
-    Foundations.OperationStatusResult
+    Foundations.OperationStatusResult,
+    RequestBody = {
+      /**
+       * Object of type StartRequest
+       */
+      @body StartRequest?: StartRequest;
+    }
   >;
 
   /**
    * Stops the SAP Central Services Instance.
    */
-  stop is ArmResourceActionAsync<
+  stop is CustomizedArmResourceActionSync<
     SAPCentralServerInstance,
     StopRequest,
-    Foundations.OperationStatusResult
+    Foundations.OperationStatusResult,
+    RequestBody = {
+      /**
+       * Object of type StopRequest
+       */
+      @body StopRequest?: StopRequest;
+    }
   >;
 }
 
@@ -82,10 +94,4 @@ interface SAPCentralServerInstances {
 );
 @@doc(SAPCentralServerInstances.update::parameters.properties,
   "The SAP Central Services Instance resource request body."
-);
-@@doc(SAPCentralServerInstances.start::parameters.body,
-  "SAP Central Services instance start request body."
-);
-@@doc(SAPCentralServerInstances.stop::parameters.body,
-  "SAP Central Services instance stop request body."
 );
