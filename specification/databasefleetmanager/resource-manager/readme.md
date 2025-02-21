@@ -91,6 +91,14 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ```yaml
 suppressions:
+  - code: GuidUsage
+    from: databasefleetmanager.json
+    reason: We are using GUID for references to Azure Active Directory IDs which are GUIDs.
+    where: $.definitions["Azure.Core.uuid"].format
+  - code: AvoidAdditionalProperties
+    from: databasefleetmanager.json
+    reason: A custom object is needed for passing underlying SQL resource tags.
+    where: $.definitions.FleetDatabaseProperties.properties.resourceTags
   - code: EnumInsteadOfBoolean
     from: databasefleetmanager.json
     reason: These booleans are never expected to expand.
