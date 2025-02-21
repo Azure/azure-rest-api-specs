@@ -45,6 +45,12 @@ model SolutionVersionParameter {
   reviewId: string;
 }
 
+@doc("Solution Parameter")
+model SolutionParameter {
+  @doc("Solution Name")
+  solutionName: string;
+}
+
 @doc("Target Properties")
 model TargetProperties {
   @doc("Description of target")
@@ -64,12 +70,15 @@ model TargetProperties {
   @doc("Hierarchy Level")
   hierarchyLevel: string;
 
+  @doc("Status of target")
+  @visibility("read")
+  status?: DeploymentStatus;
+
   @doc("Scope of the target resource")
   solutionScope?: string;
 
-  @doc("Is this resource deprecated")
-  @visibility("read")
-  isDeprecated?: boolean;
+  @doc("State of resource")
+  state?: ResourceState;
 
   @doc("Provisioning state of resource")
   @visibility("read")
@@ -83,12 +92,12 @@ model ForceDeleteParameter {
   forceDelete?: boolean = false;
 }
 
-@doc("Target Resource")
+@doc("Target Resource. Represents a resource to be deployed on the edge.")
 model Target is Azure.ResourceManager.TrackedResource<TargetProperties> {
   @doc("Name of the target")
   @maxLength(61)
   @minLength(3)
-  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
+  @pattern("^[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   @path
   @key("targetName")
   @segment("targets")
@@ -125,29 +134,41 @@ interface Targets {
   listBySubscription is ArmListBySubscription<Target>;
 
   @doc("Post request to deploy")
-  deploy is ArmResourceActionAsync<Target, SolutionVersion, Instance>;
+  installSolution is ArmResourceActionNoResponseContentAsync<
+    Target,
+    SolutionVersionParameter
+  >;
+
+  @doc("Post request to uninstall")
+  uninstallSolution is ArmResourceActionNoResponseContentAsync<
+    Target,
+    SolutionParameter
+  >;
+
+  @doc("Post request to remove solution version revision")
+  removeRevision is ArmResourceActionNoResponseContentAsync<
+    Target,
+    SolutionTemplateParameter
+  >;
 
   @doc("Post request to resolve configuration")
-  resolve is ArmResourceActionAsync<
+  resolveConfiguration is ArmResourceActionAsync<
     Target,
     SolutionTemplateParameter,
     ResolvedConfiguration
   >;
 
   @doc("Post request to review configuration")
-  review is ArmResourceActionAsync<
+  reviewSolutionVersion is ArmResourceActionAsync<
     Target,
     SolutionTemplateParameter,
     SolutionVersion
   >;
 
   @doc("Post request to publish")
-  publish is ArmResourceActionAsync<
+  publishSolutionVersion is ArmResourceActionAsync<
     Target,
     SolutionVersionParameter,
     SolutionVersion
   >;
-
-  @doc("Deprecate resource")
-  deprecate is ArmResourceActionNoResponseContentAsync<Target, void>;
 }

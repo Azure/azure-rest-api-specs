@@ -11,6 +11,20 @@ using TypeSpec.OpenAPI;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
+@doc("Type of SnapshotLockingMode")
+union SnapshotLockingModeForMysql {
+  @doc("Minimal type")
+  Minimal: "Minimal",
+
+  @doc("Extended type")
+  Extended: "Extended",
+
+  @doc("None type")
+  None: "None",
+
+  string,
+}
+
 @doc("Configuration for MySqlSourceConnector")
 model MySqlSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of MySqlSourceConnector")
@@ -38,20 +52,6 @@ model MySqlSourceConnectorProperties extends DataSourceProperties {
   @doc("Tables used as source.")
   tableNames: string;
 
-  @doc("Snapshot Locking Mode")
+  @doc("Snapshot Locking Mode.")
   snapshotLockingMode?: SnapshotLockingModeForMysql;
-}
-
-@doc("Type of AzureServiceBusType")
-union SnapshotLockingModeForMysql {
-  @doc("Minimal type")
-  Minimal: "Minimal",
-
-  @doc("Extended type")
-  Extended: "Extended",
-
-  @doc("None type")
-  None: "None",
-
-  string,
 }

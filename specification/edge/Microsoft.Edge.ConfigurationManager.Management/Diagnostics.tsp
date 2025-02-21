@@ -25,7 +25,7 @@ model Diagnostic is Azure.ResourceManager.ProxyResource<DiagnosticProperties> {
   @doc("Name of Diagnostic.")
   @maxLength(90)
   @minLength(1)
-  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
+  @pattern("^[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   @path
   @key("diagnosticName")
   @segment("diagnostics")

@@ -11,6 +11,26 @@ using TypeSpec.OpenAPI;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
+@doc("StartPosition types for Kinesis")
+union KinesisStartPositionType {
+  @doc("TrimHorizon type")
+  TrimHorizon: "TrimHorizon",
+
+  @doc("Latest type")
+  Latest: "Latest",
+
+  @doc("AtSequenceNumber type")
+  AtSequenceNumber: "AtSequenceNumber",
+
+  @doc("AfterSequenceNumber type")
+  AfterSequenceNumber: "AfterSequenceNumber",
+
+  @doc("AtTimestamp type")
+  AtTimestamp: "AtTimestamp",
+
+  string,
+}
+
 @doc("Configuration for KinesisSourceConnector")
 model KinesisSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of KinesisSourceConnector")
@@ -37,24 +57,4 @@ model KinesisSourceConnectorProperties extends DataSourceProperties {
 
   @doc("startTime for startPosition.")
   startTime?: utcDateTime;
-}
-
-@doc("StartPosition types for Kinesis")
-union KinesisStartPositionType {
-  @doc("TrimHorizon type")
-  TrimHorizon: "TrimHorizon",
-
-  @doc("Latest type")
-  Latest: "Latest",
-
-  @doc("AtSequenceNumber type")
-  AtSequenceNumber: "AtSequenceNumber",
-
-  @doc("AfterSequenceNumber type")
-  AfterSequenceNumber: "AfterSequenceNumber",
-
-  @doc("AtTimestamp type")
-  AtTimestamp: "AtTimestamp",
-
-  string,
 }
