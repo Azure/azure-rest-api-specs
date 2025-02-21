@@ -73,6 +73,59 @@
     }
   ],
   "paths": {
+    "/": {
+      "get": {
+        "operationId": "StreamOperations_GetMedia",
+        "tags": [
+          "Stream"
+        ],
+        "description": "Download the Media payload from a User to Business message.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Download media": {
+            "$ref": "./examples/Stream_GetMedia.json"
+          }
+        }
+      }
+    },
     "/messages/channels/{channelId}/templates": {
       "get": {
         "operationId": "TemplateOperations_ListTemplates",
@@ -225,66 +278,6 @@
           },
           "Sends a notification message - text": {
             "$ref": "./examples/NotificationMessages_SendText.json"
-          }
-        }
-      }
-    },
-    "/messages/streams/{id}": {
-      "get": {
-        "operationId": "StreamOperations_GetMedia",
-        "tags": [
-          "Stream"
-        ],
-        "description": "Download the Media payload from a User to Business message.",
-        "produces": [
-          "application/octet-stream",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The stream ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "file"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Download media": {
-            "$ref": "./examples/Stream_GetMedia.json"
           }
         }
       }
