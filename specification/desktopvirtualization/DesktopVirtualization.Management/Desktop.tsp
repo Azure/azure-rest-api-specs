@@ -38,7 +38,10 @@ interface Desktops {
   update is ArmCustomPatchSync<
     Desktop,
     DesktopPatch,
-    Response = {
+    Request = {
+      /**
+       * The resource properties to be updated
+       */
       @bodyRoot desktop?: DesktopPatch;
     }
   >;

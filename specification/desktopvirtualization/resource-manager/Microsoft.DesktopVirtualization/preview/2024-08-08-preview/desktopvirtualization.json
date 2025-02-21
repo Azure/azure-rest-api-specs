@@ -1459,10 +1459,10 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "body",
+            "name": "desktop",
             "in": "body",
             "description": "The resource properties to be updated",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/DesktopPatch"
             }
@@ -1470,9 +1470,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DesktopPatch"
+              "$ref": "#/definitions/Desktop"
             }
           },
           "default": {
@@ -1979,10 +1979,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "body",
+            "name": "msixImageURI",
             "in": "body",
-            "description": "The content of the action request",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/MSIXImageURI"
             }
@@ -2040,10 +2039,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "body",
+            "name": "importPackageInfoRequest",
             "in": "body",
-            "description": "The content of the action request",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ImportPackageInfoRequest"
             }
@@ -2364,9 +2362,9 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "body",
+            "name": "msixPackage",
             "in": "body",
-            "description": "The resource properties to be updated",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MSIXPackagePatch"
@@ -3345,10 +3343,10 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "body",
+            "name": "sessionHostManagement",
             "in": "body",
-            "description": "The resource properties to be updated",
-            "required": true,
+            "description": "The properties to be updated.",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SessionHostManagementPatch"
             }

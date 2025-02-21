@@ -78,8 +78,11 @@ interface SessionHostManagements {
   @parameterVisibility
   update is ArmCustomPatchSync<
     SessionHostManagement,
-    SessionHostManagementPatch,
-    Response = {
+    Response = SessionHostManagementPatch,
+    Request = {
+      /**
+       * The properties to be updated.
+       */
       @bodyRoot sessionHostManagement?: SessionHostManagementPatch;
     }
   >;

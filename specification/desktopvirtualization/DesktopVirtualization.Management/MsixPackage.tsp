@@ -52,7 +52,7 @@ interface MSIXPackages {
    * Update an  MSIX Package.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<
+  update is Azure.ResourceManager.ArmCustomPatchSync<
     MSIXPackage,
     MSIXPackagePatch,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters

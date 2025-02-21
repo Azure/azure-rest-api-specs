@@ -57,6 +57,8 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(MSIXPackages.createOrUpdate::parameters.resource, "msixPackage");
 
+@@clientName(MSIXPackages.update::parameters.properties, "msixPackage");
+
 @@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
   "^[-\\w\\._,\\(\\)]+$"
 );

@@ -37,8 +37,10 @@ interface AppAttachPackageInfo {
   @action("importAppAttachPackageInfo")
   `import` is ArmResourceActionSync<
     HostPool,
-    ImportPackageInfoRequest,
-    AppAttachPackageList
+    Request = {
+      @bodyRoot importPackageInfoRequest?: ImportPackageInfoRequest;
+    },
+    Response = AppAttachPackageList
   >;
 }
 
@@ -50,7 +52,13 @@ interface MSIXImages {
    * This action uses incorrect Msix casing intentionally to match the previous APIs.
    */
   @action("expandMsixImage")
-  expand is ArmResourceActionSync<HostPool, MSIXImageURI, ExpandMsixImageList>;
+  expand is ArmResourceActionSync<
+    HostPool,
+    Request = {
+      @bodyRoot msixImageURI?: MSIXImageURI;
+    },
+    Response = ExpandMsixImageList
+  >;
 }
 
 @armResourceOperations
@@ -238,11 +246,3 @@ interface HostPools {
 @@doc(HostPools.createOrUpdate::parameters.resource,
   "Object containing HostPool definitions."
 );
-
-//TODO: Body doesn't exist anymore?
-/*@@doc(MSIXImages.expand::parameters.body,
-  "Object containing URI to MSIX Image"
-);
-@@doc(AppAttachPackageInfo.`import`::parameters.body,
-  "Object containing URI to package image and other optional properties"
-); */
