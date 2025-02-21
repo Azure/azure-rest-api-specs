@@ -96,20 +96,6 @@
         }
       }
     },
-    "EncryptionProperties": {
-      "type": "object",
-      "description": "Configuration of key for data encryption",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/EncryptionStatus",
-          "description": "Indicates whether or not the encryption is enabled for container registry."
-        },
-        "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
-          "description": "Key vault properties."
-        }
-      }
-    },
     "EncryptionStatus": {
       "type": "string",
       "description": "Indicates whether or not the encryption is enabled for container registry.",
@@ -245,32 +231,6 @@
           "description": "The client ID of the identity which will be used to access key vault."
         }
       }
-    },
-    "LocationData": {
-      "type": "object",
-      "description": "Metadata pertaining to the geographic location of the resource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "A canonical name for the geographic or physical location.",
-          "maxLength": 256
-        },
-        "city": {
-          "type": "string",
-          "description": "The city or locality where the resource is located."
-        },
-        "district": {
-          "type": "string",
-          "description": "The district, state, or province where the resource is located."
-        },
-        "countryOrRegion": {
-          "type": "string",
-          "description": "The country or region where the resource is located"
-        }
-      },
-      "required": [
-        "name"
-      ]
     },
     "LocationResourceParameter": {
       "type": "object",
@@ -513,7 +473,7 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "$ref": "#/definitions/systemData",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         }
@@ -635,38 +595,6 @@
         ]
       }
     },
-    "SystemData": {
-      "type": "object",
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "$ref": "#/definitions/createdByType",
-          "description": "The type of identity that created the resource."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/createdByType",
-          "description": "The type of identity that last modified the resource."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
-        }
-      }
-    },
     "TrackedResource": {
       "type": "object",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
@@ -730,6 +658,78 @@
             "description": "The entity was created by a key."
           }
         ]
+      }
+    },
+    "encryptionProperties": {
+      "type": "object",
+      "description": "Configuration of key for data encryption",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/EncryptionStatus",
+          "description": "Indicates whether or not the encryption is enabled for container registry."
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Key vault properties."
+        }
+      }
+    },
+    "locationData": {
+      "type": "object",
+      "description": "Metadata pertaining to the geographic location of the resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A canonical name for the geographic or physical location.",
+          "maxLength": 256
+        },
+        "city": {
+          "type": "string",
+          "description": "The city or locality where the resource is located."
+        },
+        "district": {
+          "type": "string",
+          "description": "The district, state, or province where the resource is located."
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "The country or region where the resource is located"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "systemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "$ref": "#/definitions/createdByType",
+          "description": "The type of identity that created the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/createdByType",
+          "description": "The type of identity that last modified the resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
       }
     }
   },
