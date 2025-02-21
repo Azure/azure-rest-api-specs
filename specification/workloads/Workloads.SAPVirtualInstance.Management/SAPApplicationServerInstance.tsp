@@ -64,7 +64,7 @@ interface SAPApplicationServerInstances {
     Foundations.OperationStatusResult,
     RequestBody = {
       /**
-       * Object of type StartRequest
+       * SAP Application server instance start request body.
        */
       @body body?: StartRequest;
     }
@@ -79,7 +79,7 @@ interface SAPApplicationServerInstances {
     Foundations.OperationStatusResult,
     RequestBody = {
       /**
-       * Object of type StopRequest
+       * SAP Application server instance stop request body.
        */
       @body body?: StopRequest;
     }

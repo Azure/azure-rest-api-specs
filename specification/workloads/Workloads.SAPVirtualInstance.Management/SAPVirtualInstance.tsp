@@ -66,7 +66,7 @@ interface SAPVirtualInstances {
     Foundations.OperationStatusResult,
     RequestBody = {
       /**
-       * Object of type StartRequest
+       * The Virtual Instance for SAP solutions resource start request body.
        */
       @body body?: StartRequest;
     }
@@ -81,7 +81,7 @@ interface SAPVirtualInstances {
     Foundations.OperationStatusResult,
     RequestBody = {
       /**
-       * Object of type StopRequest
+       * The Virtual Instance for SAP solutions resource stop request body.
        */
       @body body?: StopRequest;
     }
