@@ -7,36 +7,30 @@ using Microsoft.ServiceFabric;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VmssExtension.properties);
 
-@@clientName(ApplicationTypeResources.createOrUpdate::parameters.resource,
+@@clientName(ApplicationTypes.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ApplicationTypeResources.update::parameters.properties,
-  "parameters"
-);
+@@clientName(ApplicationTypes.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ApplicationTypeResource.properties);
 
-@@clientName(ApplicationTypeVersionResources.createOrUpdate::parameters.resource,
+@@clientName(ApplicationTypeVersions.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ApplicationTypeVersionResources.update::parameters.properties,
+@@clientName(ApplicationTypeVersions.update::parameters.properties,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ApplicationTypeVersionResource.properties);
 
-@@clientName(ApplicationResources.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(ApplicationResources.update::parameters.properties, "parameters");
-@@clientName(ApplicationResources.resumeUpgrade::parameters.body, "parameters");
+@@clientName(Applications.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Applications.update::parameters.properties, "parameters");
+@@clientName(Applications.resumeUpgrade::parameters.body, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ApplicationResource.properties);
 
-@@clientName(ServiceResources.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(ServiceResources.update::parameters.properties, "parameters");
+@@clientName(Services.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Services.update::parameters.properties, "parameters");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ManagedClusterCodeVersionResult.properties);
