@@ -65,7 +65,7 @@ interface SAPDatabaseInstances {
       /**
        * Object of type StartRequest
        */
-      @body StartRequest?: StartRequest;
+      @body startRequest?: StartRequest;
     }
   >;
 
@@ -80,7 +80,7 @@ interface SAPDatabaseInstances {
       /**
        * Object of type StopRequest
        */
-      @body StopRequest?: StopRequest;
+      @body stopRequest?: StopRequest;
     }
   >;
 }

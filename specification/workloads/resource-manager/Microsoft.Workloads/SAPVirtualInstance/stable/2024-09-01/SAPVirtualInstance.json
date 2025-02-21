@@ -1091,7 +1091,7 @@
             "pattern": "^.*"
           },
           {
-            "name": "StartRequest",
+            "name": "startRequest",
             "in": "body",
             "description": "Object of type StartRequest",
             "required": false,
@@ -1105,6 +1105,20 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1121,7 +1135,11 @@
           "Start the SAP Application Server Instance.": {
             "$ref": "./examples/SapApplicationServerInstances_StartInstance.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/applicationInstances/{applicationInstanceName}/stop": {
@@ -1158,7 +1176,7 @@
             "pattern": "^.*"
           },
           {
-            "name": "StopRequest",
+            "name": "stopRequest",
             "in": "body",
             "description": "Object of type StopRequest",
             "required": false,
@@ -1172,6 +1190,20 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1194,7 +1226,11 @@
           "Stop the SAP Application Server Instance and it's infrastructure.": {
             "$ref": "./examples/SapApplicationServerInstances_StopInstanceInfrastructure.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/centralInstances": {
@@ -1552,7 +1588,7 @@
             "pattern": "^.*"
           },
           {
-            "name": "StartRequest",
+            "name": "startRequest",
             "in": "body",
             "description": "Object of type StartRequest",
             "required": false,
@@ -1566,6 +1602,20 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1582,7 +1632,11 @@
           "Start the virtual machine(s) and the SAP central services instance on it.": {
             "$ref": "./examples/SapCentralInstances_StartInstanceVM.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/centralInstances/{centralInstanceName}/stop": {
@@ -1619,7 +1673,7 @@
             "pattern": "^.*"
           },
           {
-            "name": "StopRequest",
+            "name": "stopRequest",
             "in": "body",
             "description": "Object of type StopRequest",
             "required": false,
@@ -1633,6 +1687,20 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1649,7 +1717,11 @@
           "Stop the SAP Central Services Instance.": {
             "$ref": "./examples/SapCentralInstances_StopInstance.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/databaseInstances": {
@@ -2007,7 +2079,7 @@
             "pattern": "^.*"
           },
           {
-            "name": "StartRequest",
+            "name": "startRequest",
             "in": "body",
             "description": "Object of type StartRequest",
             "required": false,
@@ -2021,6 +2093,20 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -2037,7 +2123,11 @@
           "Start the database instance of the SAP system.": {
             "$ref": "./examples/SapDatabaseInstances_StartInstance.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/databaseInstances/{databaseInstanceName}/stop": {
@@ -2074,7 +2164,7 @@
             "pattern": "^.*"
           },
           {
-            "name": "StopRequest",
+            "name": "stopRequest",
             "in": "body",
             "description": "Object of type StopRequest",
             "required": false,
@@ -2088,6 +2178,20 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -2110,7 +2214,11 @@
           "Stop the database instance of the SAP system.": {
             "$ref": "./examples/SapDatabaseInstances_StopInstance.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/start": {
@@ -2139,7 +2247,7 @@
             "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
           },
           {
-            "name": "StartRequest",
+            "name": "startRequest",
             "in": "body",
             "description": "Object of type StartRequest",
             "required": false,
@@ -2153,6 +2261,20 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -2169,7 +2291,11 @@
           "SAPVirtualInstances_Start_WithInfraOperations": {
             "$ref": "./examples/SapVirtualInstances_StartWithInfraOperations.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/stop": {
@@ -2198,7 +2324,7 @@
             "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
           },
           {
-            "name": "StopRequest",
+            "name": "stopRequest",
             "in": "body",
             "description": "Object of type StopRequest",
             "required": false,
@@ -2212,6 +2338,20 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -2234,7 +2374,11 @@
           "Stop the virtual machine(s) and the SAP system on it.": {
             "$ref": "./examples/SapVirtualInstances_StopVMAndSystem.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },

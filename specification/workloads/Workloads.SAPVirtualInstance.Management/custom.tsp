@@ -55,6 +55,12 @@ op CustomizedArmResourceActionSync<
   Request extends TypeSpec.Reflection.Model | void,
   Response extends TypeSpec.Reflection.Model | void,
   BaseParameters extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
+  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader<
+    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+    Response,
+    string
+  > &
+    Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
   Error extends {} = ErrorResponse,
   RequestBody extends {} = {
@@ -66,4 +72,7 @@ op CustomizedArmResourceActionSync<
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   ...Parameters,
   ...RequestBody,
-): Response | Error;
+): ArmAcceptedLroResponse<
+  "Resource operation accepted.",
+  LroHeaders
+> | Response | Error;

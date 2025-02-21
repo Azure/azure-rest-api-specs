@@ -66,7 +66,7 @@ interface SAPApplicationServerInstances {
       /**
        * Object of type StartRequest
        */
-      @body StartRequest?: StartRequest;
+      @body startRequest?: StartRequest;
     }
   >;
 
@@ -81,7 +81,7 @@ interface SAPApplicationServerInstances {
       /**
        * Object of type StopRequest
        */
-      @body StopRequest?: StopRequest;
+      @body stopRequest?: StopRequest;
     }
   >;
 }
