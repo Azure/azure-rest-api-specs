@@ -77,5 +77,5 @@ model CustomParameters {
   @query
   @minLength(1)
   @doc("Filter by resource type")
-  resourceType?: string;
+  resourceType: string;
 }

@@ -742,6 +742,7 @@ model TestRun {
   regionalStatistics?: Record<TestRunStatistics>;
 
   @doc("The load test configuration.")
+  @visibility("read")
   loadTestConfiguration?: LoadTestConfiguration;
 
   @doc("Collection of test run artifacts")
