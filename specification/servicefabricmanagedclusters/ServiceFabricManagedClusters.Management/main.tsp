@@ -20,7 +20,7 @@ import "./ManagedClusterCodeVersionResult.tsp";
 import "./ManagedVMSize.tsp";
 import "./ManagedCluster.tsp";
 import "./NodeType.tsp";
-import "./routes.tsp";
+import "./Operations.tsp";
 import "./legacy.tsp";
 
 using TypeSpec.Rest;
