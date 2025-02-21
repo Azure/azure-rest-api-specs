@@ -281,3 +281,7 @@ using Microsoft.Compute;
   "runCommand"
 );
 @@clientName(VirtualMachines.createOrUpdate::parameters.resource, "parameters");
+
+@@clientName(LogAnalyticsOperations.exportThrottledRequests::parameters.body,
+  "parameters"
+);

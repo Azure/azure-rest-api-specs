@@ -15,7 +15,9 @@ namespace Microsoft.Compute;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage"
-@Azure.ResourceManager.Private.armResourceInternal(VirtualMachineScaleSetProperties)
+@Azure.ResourceManager.Private.armResourceInternal(
+  VirtualMachineScaleSetProperties
+)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineScaleSet extends Foundations.TrackedResource {
   ...ResourceNameParameter<
@@ -24,7 +26,7 @@ model VirtualMachineScaleSet extends Foundations.TrackedResource {
     SegmentName = "virtualMachineScaleSets",
     NamePattern = ""
   >;
-  
+
   /**
    * The virtual machine scale set sku.
    */

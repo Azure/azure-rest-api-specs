@@ -53,7 +53,9 @@ interface GalleryInVMAccessControlProfiles {
   update is ComputeCustomPatchAsync<
     GalleryInVMAccessControlProfile,
     PatchModel = GalleryInVMAccessControlProfileUpdate,
-    Response = ArmResponse<GalleryInVMAccessControlProfile> & ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResponse<GalleryInVMAccessControlProfile> &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

@@ -73,7 +73,9 @@ interface Galleries {
   update is ComputeCustomPatchAsync<
     Gallery,
     PatchModel = GalleryUpdate,
-    Response = ArmResponse<Gallery> & ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResponse<Gallery> &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -96,7 +98,10 @@ interface Galleries {
   /**
    * List galleries under a subscription.
    */
-  list is ComputeListBySubscription<Gallery, Response = ArmResponse<GalleryList>>;
+  list is ComputeListBySubscription<
+    Gallery,
+    Response = ArmResponse<GalleryList>
+  >;
 
   /**
    * List soft-deleted resources of an artifact in the gallery, such as soft-deleted gallery image version of an image.

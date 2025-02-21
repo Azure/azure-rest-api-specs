@@ -44,7 +44,20 @@ using TypeSpec.Versioning;
  * Compute Client
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
+@useAuth(
+  OAuth2Auth<[
+    {
+      @doc("implicit flow")
+      type: OAuth2FlowType.implicit,
+
+      @doc("the authorization URL")
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+
+      @doc("list of scopes for the credential")
+      scopes?: ["user_impersonation"],
+    }
+  ]>
+)
 @service({
   title: "Azure Compute resource management API.",
 })
