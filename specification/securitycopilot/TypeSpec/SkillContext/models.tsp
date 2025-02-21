@@ -855,7 +855,18 @@ namespace SkillContext
 		defaultValue: object;
 	}
 
-	model ECSFlightContextResponse {
-		id: string;
+	model ECSFlightResponse<T>{
+		eTag: string;
+		ids: Array<string>;
+		settings: T;
+	}
+
+	model FlightEnabledRequest{
+		@doc("ECSFlightIdentity object containing properties for ECSFlight.")
+		ecsFlightIdentity: ECSFlightIdentity;
+		@doc("Configuration root")
+		configurationRoot: string;
+		@doc("name of the flight")
+		configurationParameter: string;
 	}
 }

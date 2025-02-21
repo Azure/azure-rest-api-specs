@@ -183,9 +183,17 @@ op CreateEmbedding(
 ): EmbeddingResponse;
 
 @get
-@route("/ecsFlight/getEcsSettings")
-@doc("Gets the ECS settings")
+@route("/ecsFlight/getEcsConfiguration")
+@doc("Gets the ECS configuration")
 op getEcsSettings(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
-@body getInputRequest : ECSFlightIdentity,
-): ECSFlightContextResponse;
+@body getInputRequest : EcsConfigurationRequest,
+): ECSFlightResponse<object>;
+
+@get
+@route("/ecsFlight/isEcsFlightEnabled")
+@doc("returns if the flight is enabled")
+op getEcsSettings(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body getInputRequest : FlightEnabledRequest,
+): boolean;
