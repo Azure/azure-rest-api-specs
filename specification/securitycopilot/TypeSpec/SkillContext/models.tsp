@@ -846,4 +846,12 @@ namespace SkillContext
 		@doc("Source of the skillset")
 		source:string;
     }
+
+	model EcsConfigurationRequest{
+		@doc("ECSFlightIdentity object containing properties for ECSFlight.")
+		ecsFlightIdentity: ECSFlightIdentity;
+		@doc("Configuration root")
+		configurationRoot: string;
+		defaultValue: object;
+	}
 }
