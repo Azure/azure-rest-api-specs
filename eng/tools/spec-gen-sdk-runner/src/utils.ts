@@ -15,7 +15,7 @@ export const execAsync = promisify(exec);
  */
 export async function resetGitRepo(repoPath: string): Promise<void> {
   try {
-    const { stderr } = await execAsync("git reset --hard HEAD", {
+    const { stderr } = await execAsync("git clean -fd && git reset --hard HEAD", {
       cwd: repoPath,
     });
     if (stderr) {
