@@ -62,7 +62,7 @@
   "paths": {
     "": {
       "get": {
-        "operationId": "Service_GetProperties",
+        "operationId": "GetProperties",
         "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "produces": [
           "application/xml",
@@ -118,7 +118,7 @@
         }
       },
       "put": {
-        "operationId": "Service_SetProperties",
+        "operationId": "SetProperties",
         "description": "Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
         "consumes": [
           "application/xml"
@@ -178,7 +178,7 @@
         }
       },
       "post": {
-        "operationId": "Service_GetUserDelegationKey",
+        "operationId": "GetUserDelegationKey",
         "description": "Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication.",
         "produces": [
           "application/xml",
@@ -12922,7 +12922,7 @@
     },
     "/?comp=batch": {
       "post": {
-        "operationId": "Service_SubmitBatch",
+        "operationId": "SubmitBatch",
         "description": "The Batch operation allows multiple API calls to be embedded into a single HTTP request.",
         "produces": [
           "multipart/mixed",
@@ -13002,7 +13002,7 @@
     },
     "/?comp=blobs": {
       "get": {
-        "operationId": "Service_FilterBlobs",
+        "operationId": "FilterBlobs",
         "description": "The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression.",
         "produces": [
           "application/xml",
@@ -13119,7 +13119,7 @@
     },
     "/?comp=list": {
       "get": {
-        "operationId": "Service_ListContainersSegment",
+        "operationId": "ListContainersSegment",
         "description": "The List Containers Segment operation returns a list of the containers under the specified account",
         "produces": [
           "application/xml",
@@ -13237,7 +13237,7 @@
     },
     "/?restype=account&comp=properties": {
       "get": {
-        "operationId": "Service_GetAccountInfo",
+        "operationId": "GetAccountInfo",
         "description": "Returns the sku name and account kind.",
         "parameters": [
           {
@@ -13381,7 +13381,7 @@
     },
     "/?restype=service&comp=stats": {
       "get": {
-        "operationId": "Service_GetStatistics",
+        "operationId": "GetStatistics",
         "description": "Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account.",
         "produces": [
           "application/xml",

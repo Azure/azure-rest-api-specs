@@ -10,6 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 namespace Storage.Blob{
 
   alias ApiVersionHeader = {
@@ -46,121 +47,118 @@ namespace Storage.Blob{
     ...ClientRequestIdHeader;
   }) | TError;
 
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-  namespace Service {
-    /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-    @put
-    @route("/?restype=service&comp=properties")
-    op setProperties is StorageOperation<
-      TimeoutParameter & StorageServiceProperties,
-      {
-        @statusCode statusCode: 202;
-      }
-    >;
+  /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  @put
+  @route("/?restype=service&comp=properties")
+  op setProperties is StorageOperation<
+    TimeoutParameter & StorageServiceProperties,
+    {
+      @statusCode statusCode: 202;
+    }
+  >;
 
-    /** Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    @get
-    @route("/?restype=service&comp=properties")
-    op getProperties is StorageOperation<TimeoutParameter, StorageServiceProperties>;
+  /** Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  @get
+  @route("/?restype=service&comp=properties")
+  op getProperties is StorageOperation<TimeoutParameter, StorageServiceProperties>;
 
-    /** Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    @get
-    @route("/?restype=service&comp=stats")
-    op getStatistics is StorageOperation<
-      TimeoutParameter,
-      DateResponseHeader & StorageServiceStats
-    >;
+  /** Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  @get
+  @route("/?restype=service&comp=stats")
+  op getStatistics is StorageOperation<
+    TimeoutParameter,
+    DateResponseHeader & StorageServiceStats
+  >;
 
-    /** The List Containers Segment operation returns a list of the containers under the specified account */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-    @get
-    @route("/?comp=list")
-    op listContainersSegment is StorageOperation<
-      {
-        ...PrefixParameter;
-        ...MarkerParameter;
-        ...MaxResultsParameter;
-        ...TimeoutParameter;
+  /** The List Containers Segment operation returns a list of the containers under the specified account */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @get
+  @route("/?comp=list")
+  op listContainersSegment is StorageOperation<
+    {
+      ...PrefixParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...TimeoutParameter;
 
-        /** Include this parameter to specify that the container's metadata be returned as part of the response body. */
-        @query include?: Array<ListContainersIncludeType>;
-      },
-      ListContainersSegmentResponse
-    >;
+      /** Include this parameter to specify that the container's metadata be returned as part of the response body. */
+      @query include?: Array<ListContainersIncludeType>;
+    },
+    ListContainersSegmentResponse
+  >;
 
-    /** Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    @post
-    @route("/?restype=service&comp=userdelegationkey")
-    op getUserDelegationKey is StorageOperation<
-      KeyInfo & TimeoutParameter,
-      UserDelegationKey & DateResponseHeader
-    >;
+  /** Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  @post
+  @route("/?restype=service&comp=userdelegationkey")
+  op getUserDelegationKey is StorageOperation<
+    KeyInfo & TimeoutParameter,
+    UserDelegationKey & DateResponseHeader
+  >;
 
-    /** Returns the sku name and account kind. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-    @get
-    @route("/?restype=account&comp=properties")
-    op getAccountInfo is StorageOperation<
-      TimeoutParameter,
-      {
-        ...DateResponseHeader;
-        ...SkuNameResponseHeader;
-        ...AccountKindResponseHeader;
+  /** Returns the sku name and account kind. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  @get
+  @route("/?restype=account&comp=properties")
+  op getAccountInfo is StorageOperation<
+    TimeoutParameter,
+    {
+      ...DateResponseHeader;
+      ...SkuNameResponseHeader;
+      ...AccountKindResponseHeader;
 
-        /** Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled. */
-        @header("x-ms-is-hns-enabled")
-        isHierarchicalNamespaceEnabled?: boolean;
-      }
-    >;
+      /** Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled. */
+      @header("x-ms-is-hns-enabled")
+      isHierarchicalNamespaceEnabled?: boolean;
+    }
+  >;
 
-    /** The Batch operation allows multiple API calls to be embedded into a single HTTP request. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-    @post
-    @route("/?comp=batch")
-    op submitBatch(
-      /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
-      @header("Content-Type")
-      multipartContentType: "multipart/mixed",
+  /** The Batch operation allows multiple API calls to be embedded into a single HTTP request. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  @post
+  @route("/?comp=batch")
+  op submitBatch(
+    /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
+    @header("Content-Type")
+    multipartContentType: "multipart/mixed",
 
-      ...ApiVersionHeader,
-      ...TimeoutParameter,
-      ...ClientRequestIdHeader,
-      ...ContentLengthParameter,
-      ...BodyParameter,
-    ): (BodyParameter & {
-      /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
-      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-      @header("Content-Type")
-      contentType: "multipart/mixed";
+    ...ApiVersionHeader,
+    ...TimeoutParameter,
+    ...ClientRequestIdHeader,
+    ...ContentLengthParameter,
+    ...BodyParameter,
+  ): (BodyParameter & {
+    /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
+    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+    @header("Content-Type")
+    contentType: "multipart/mixed";
 
-      ...RequestIdResponseHeader;
-      ...ClientRequestIdHeader;
-    }) | StorageError;
+    ...RequestIdResponseHeader;
+    ...ClientRequestIdHeader;
+  }) | StorageError;
 
-    /** The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-    @get
-    @route("/?comp=blobs")
-    op filterBlobs is StorageOperation<
-      {
-        ...TimeoutParameter;
-        ...FilterBlobsWhereParameter;
-        ...MarkerParameter;
-        ...MaxResultsParameter;
-        ...FilterBlobsIncludeParameter;
-      },
-      DateResponseHeader & FilterBlobSegment
-    >;
-  }
+  /** The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @get
+  @route("/?comp=blobs")
+  op filterBlobs is StorageOperation<
+    {
+      ...TimeoutParameter;
+      ...FilterBlobsWhereParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...FilterBlobsIncludeParameter;
+    },
+    DateResponseHeader & FilterBlobSegment
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   namespace Container {
