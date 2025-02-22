@@ -27,11 +27,13 @@ parameters:
 extends:
   template: /eng/pipelines/templates/stages/1es-redirect.yml
   parameters:
+    Use1ESOfficial: false
     stages:
     - stage: Build
       displayName: 'SDK Generation'
       jobs:
       - job:
+        timeoutInMinutes: 2400
 
         variables:
           - template: /eng/pipelines/templates/variables/image.yml
@@ -56,12 +58,12 @@ extends:
               displayName: Publish SDK artifacts to Pipeline Artifacts
               condition: and(ne(variables['ValidationResult'], ''), eq(variables['HasSDKArtifact'], 'true'))
               artifactName: $(sdkArtifactName)
-              targetPath: "$(System.DefaultWorkingDirectory)/out/generatedSdkArtifacts"
+              targetPath: "$(System.DefaultWorkingDirectory)/out/stagedArtifacts"
             - output: pipelineArtifact
               displayName: Publish API View artifacts to Pipeline Artifacts
               condition: and(ne(variables['ValidationResult'], ''), eq(variables['HasApiViewArtifact'], 'true'))
               artifactName: $(ArtifactName)
-              targetPath: "$(System.DefaultWorkingDirectory)/out/sdkApiViewArtifacts"
+              targetPath: "$(System.DefaultWorkingDirectory)/out/stagedArtifacts"
             - output: pipelineArtifact
               displayName: Publish logs to Pipeline Artifacts
               condition: ne(variables['ValidationResult'], '')
@@ -168,7 +170,7 @@ extends:
               optional_params=""
               sdk_gen_info="sdk generation from Config : "
 
-              if [ "${{ parameters.ConfigType }}" = "TypeSpec" ]; then
+              if [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "TypeSpec" ]; then
                 optional_params="$optional_params --tsp-config-relative-path ${{ parameters.ConfigPath }}"
                 sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
               elif [ "${{ parameters.ConfigType }}" = "OpenAPI" ]; then
@@ -177,7 +179,7 @@ extends:
               fi
 
               if [ "$(Build.Reason)" = "PullRequest" ]; then
-                optional_params="$optional_params --pr-number=$(System.PullRequest.PullRequestNumber)"
+                optional_params="$optional_params --pr-number $(System.PullRequest.PullRequestNumber)"
                 specPrUrl="${{ parameters.SpecRepoUrl }}/pull/$(System.PullRequest.PullRequestNumber)"
                 sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl"
               fi
