@@ -255,6 +255,8 @@ model CollectionListResponse {
 /**
  * Collection.
  */
+@resource("collections")
+@parentResource(Catalog)
 model Collection {
   /**
    * Schema Foreign Key.
@@ -263,10 +265,11 @@ model Collection {
   schemaId: string;
 
   /**
-   * CatalogId.
+   * CollectionId.
    */
+  @key("collectionId")
   @visibility("read")
-  catalogId?: string;
+  collectionId: string;
 
   /**
    * Links for referencing other objects.

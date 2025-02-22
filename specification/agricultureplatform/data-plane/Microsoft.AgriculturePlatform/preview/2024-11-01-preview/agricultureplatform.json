@@ -300,7 +300,7 @@
     },
     "/catalogs/{catalogId}/collections": {
       "get": {
-        "operationId": "Collections_List",
+        "operationId": "CollectionsOperations_Collections_List",
         "description": "Returns a paginated list of Collection resources.",
         "parameters": [
           {
@@ -309,7 +309,7 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Id of the Catalog.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           },
@@ -412,7 +412,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CollectionListResponse"
+              "$ref": "#/definitions/PagedCollection"
             }
           },
           "default": {
@@ -427,12 +427,15 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/catalogs/{catalogId}/collections/{collectionId}": {
       "get": {
-        "operationId": "Collections_Get",
+        "operationId": "CollectionsOperations_Collections_Get",
         "description": "Gets a specified Collection resource.",
         "parameters": [
           {
@@ -441,14 +444,14 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Id of the Catalog.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Id of the Collection.",
+            "description": "CollectionId.",
             "required": true,
             "type": "string"
           }
@@ -475,39 +478,48 @@
         }
       },
       "patch": {
-        "operationId": "Collections_CreateOrUpdate",
+        "operationId": "CollectionsOperations_Collections_CreateOrUpdate",
         "description": "Creates or updates a Collection resource.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "collectionId",
-            "in": "path",
-            "description": "Id of the Collection resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "catalogId",
             "in": "path",
-            "description": "Id of the Catalog resource.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "collection",
+            "name": "collectionId",
+            "in": "path",
+            "description": "CollectionId.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "Collection resource payload to create or update.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CollectionUpdate"
+              "$ref": "#/definitions/CollectionCreateOrUpdate"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Collection"
             }
@@ -527,7 +539,7 @@
         }
       },
       "delete": {
-        "operationId": "Collections_Delete",
+        "operationId": "CollectionsOperations_Collections_Delete",
         "description": "Deletes Collection for given Collection id.",
         "parameters": [
           {
@@ -536,14 +548,14 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Id of Catalog.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Id of Collection to be deleted.",
+            "description": "CollectionId.",
             "required": true,
             "type": "string"
           }
@@ -1871,9 +1883,9 @@
           "description": "Schema Foreign Key.",
           "minLength": 1
         },
-        "catalogId": {
+        "collectionId": {
           "type": "string",
-          "description": "CatalogId.",
+          "description": "CollectionId.",
           "readOnly": true
         },
         "links": {
@@ -1944,30 +1956,11 @@
         }
       },
       "required": [
-        "schemaId"
+        "schemaId",
+        "collectionId"
       ]
     },
-    "CollectionListResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Collection"
-          }
-        },
-        "skipToken": {
-          "type": "string"
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "CollectionUpdate": {
+    "CollectionCreateOrUpdate": {
       "type": "object",
       "description": "Collection.",
       "properties": {
@@ -2011,6 +2004,26 @@
           "additionalProperties": {}
         }
       }
+    },
+    "CollectionListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Collection"
+          }
+        },
+        "skipToken": {
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "CrossCollectionItemSearchQuery": {
       "type": "object",
@@ -2704,6 +2717,27 @@
           "description": "The Catalog items on this page",
           "items": {
             "$ref": "#/definitions/Catalog"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedCollection": {
+      "type": "object",
+      "description": "Paged collection of Collection items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Collection items on this page",
+          "items": {
+            "$ref": "#/definitions/Collection"
           }
         },
         "nextLink": {

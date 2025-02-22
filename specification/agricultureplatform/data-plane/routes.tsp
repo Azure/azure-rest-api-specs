@@ -107,158 +107,88 @@ interface CollectionsOperations {
   /**
    * Returns a paginated list of Collection resources.
    */
-  @operationId("Collections_List")
-  @route("/catalogs/{catalogId}/collections")
-  @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Catalog.
-       */
-      @path
-      catalogId: string;
+  Collections_List is Operations.ResourceList<Collection,QueryParametersTrait<
+  {
+    /**
+     * Names of the resource.
+     */
+    @query(#{ name: "names", explode: true })
+    names?: string[];
 
-      /**
-       * Names of the resource.
-       */
-      @query(#{ name: "names", explode: true })
-      names?: string[];
+    /**
+     * Filters on key-value pairs within the Properties object.
+     * eg. "{testKey} eq {testValue}".
+     */
+    @query(#{ name: "propertyFilters", explode: true })
+    propertyFilters?: string[];
 
-      /**
-       * Filters on key-value pairs within the Properties object.
-       * eg. "{testKey} eq {testValue}".
-       */
-      @query(#{ name: "propertyFilters", explode: true })
-      propertyFilters?: string[];
+    /**
+     * Statuses of the resource.
+     */
+    @query(#{ name: "statuses", explode: true })
+    statuses?: string[];
 
-      /**
-       * Statuses of the resource.
-       */
-      @query(#{ name: "statuses", explode: true })
-      statuses?: string[];
+    /**
+     * Ids of the resource.
+     */
+    @query(#{ name: "ids", explode: true })
+    ids?: string[];
 
-      /**
-       * Ids of the resource.
-       */
-      @query(#{ name: "ids", explode: true })
-      ids?: string[];
+    /**
+     * Minimum creation date of resource (inclusive).
+     */
+    @query("minCreatedDateTime")
+    minCreatedDateTime?: utcDateTime;
 
-      /**
-       * Minimum creation date of resource (inclusive).
-       */
-      @query("minCreatedDateTime")
-      minCreatedDateTime?: utcDateTime;
+    /**
+     * Maximum creation date of resource (inclusive).
+     */
+    @query("maxCreatedDateTime")
+    maxCreatedDateTime?: utcDateTime;
 
-      /**
-       * Maximum creation date of resource (inclusive).
-       */
-      @query("maxCreatedDateTime")
-      maxCreatedDateTime?: utcDateTime;
+    /**
+     * Minimum last modified date of resource (inclusive).
+     */
+    @query("minLastModifiedDateTime")
+    minLastModifiedDateTime?: utcDateTime;
 
-      /**
-       * Minimum last modified date of resource (inclusive).
-       */
-      @query("minLastModifiedDateTime")
-      minLastModifiedDateTime?: utcDateTime;
+    /**
+     * Maximum last modified date of resource (inclusive).
+     */
+    @query("maxLastModifiedDateTime")
+    maxLastModifiedDateTime?: utcDateTime;
 
-      /**
-       * Maximum last modified date of resource (inclusive).
-       */
-      @query("maxLastModifiedDateTime")
-      maxLastModifiedDateTime?: utcDateTime;
+    /**
+     * Maximum number of items needed (inclusive).
+     * Minimum = 10, Maximum = 1000, Default value = 50.
+     */
+    @maxValue(1000)
+    @minValue(10)
+    @query("maxPageSize")
+    maxPageSize?: int32 = 50;
 
-      /**
-       * Maximum number of items needed (inclusive).
-       * Minimum = 10, Maximum = 1000, Default value = 50.
-       */
-      @maxValue(1000)
-      @minValue(10)
-      @query("maxPageSize")
-      maxPageSize?: int32 = 50;
-
-      /**
-       * Skip token for getting next set of results.
-       */
-      @query("skipToken")
-      skipToken?: string;
-    },
-    CollectionListResponse
+    /**
+     * Skip token for getting next set of results.
+     */
+    @query("skipToken")
+    skipToken?: string;
+  }>
   >;
 
   /**
    * Gets a specified Collection resource.
    */
-  @operationId("Collections_Get")
-  @route("/catalogs/{catalogId}/collections/{collectionId}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Catalog.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Id of the Collection.
-       */
-      @path
-      collectionId: string;
-    },
-    Collection
-  >;
+  Collections_Get is Operations.ResourceRead<Collection>;
 
   /**
    * Creates or updates a Collection resource.
    */
-  @operationId("Collections_CreateOrUpdate")
-  @route("/catalogs/{catalogId}/collections/{collectionId}")
-  @patch
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Collection resource.
-       */
-      @path
-      collectionId: string;
-
-      /**
-       * Id of the Catalog resource.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Collection resource payload to create or update.
-       */
-      @bodyRoot
-      collection: Collection;
-    },
-    Collection
-  >;
+  Collections_CreateOrUpdate is Operations.ResourceCreateOrUpdate<Collection>;
 
   /**
    * Deletes Collection for given Collection id.
    */
-  @operationId("Collections_Delete")
-  @route("/catalogs/{catalogId}/collections/{collectionId}")
-  @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of Catalog.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Id of Collection to be deleted.
-       */
-      @path
-      collectionId: string;
-    },
-    void
-  >;
+  Collections_Delete is Operations.ResourceDelete<Collection>;
 }
 
 interface FileOperations {
