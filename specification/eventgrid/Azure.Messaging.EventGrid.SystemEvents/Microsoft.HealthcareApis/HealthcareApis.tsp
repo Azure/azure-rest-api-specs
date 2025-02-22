@@ -124,487 +124,487 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of FHIR resource type enumeration. */
   union HealthcareFhirResourceType {
     /** The FHIR resource type defined in STU3 and R4. */
-    "Account",
+    Account: "Account",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "ActivityDefinition",
+    ActivityDefinition: "ActivityDefinition",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "AdverseEvent",
+    AdverseEvent: "AdverseEvent",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "AllergyIntolerance",
+    AllergyIntolerance: "AllergyIntolerance",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Appointment",
+    Appointment: "Appointment",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "AppointmentResponse",
+    AppointmentResponse: "AppointmentResponse",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "AuditEvent",
+    AuditEvent: "AuditEvent",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Basic",
+    Basic: "Basic",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Binary",
+    Binary: "Binary",
 
     /** The FHIR resource type defined in R4. */
-    "BiologicallyDerivedProduct",
+    BiologicallyDerivedProduct: "BiologicallyDerivedProduct",
 
     /** The FHIR resource type defined in STU3. */
-    "BodySite",
+    BodySite: "BodySite",
 
     /** The FHIR resource type defined in R4. */
-    "BodyStructure",
+    BodyStructure: "BodyStructure",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Bundle",
+    Bundle: "Bundle",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "CapabilityStatement",
+    CapabilityStatement: "CapabilityStatement",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "CarePlan",
+    CarePlan: "CarePlan",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "CareTeam",
+    CareTeam: "CareTeam",
 
     /** The FHIR resource type defined in R4. */
-    "CatalogEntry",
+    CatalogEntry: "CatalogEntry",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "ChargeItem",
+    ChargeItem: "ChargeItem",
 
     /** The FHIR resource type defined in R4. */
-    "ChargeItemDefinition",
+    ChargeItemDefinition: "ChargeItemDefinition",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Claim",
+    Claim: "Claim",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "ClaimResponse",
+    ClaimResponse: "ClaimResponse",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "ClinicalImpression",
+    ClinicalImpression: "ClinicalImpression",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "CodeSystem",
+    CodeSystem: "CodeSystem",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Communication",
+    Communication: "Communication",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "CommunicationRequest",
+    CommunicationRequest: "CommunicationRequest",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "CompartmentDefinition",
+    CompartmentDefinition: "CompartmentDefinition",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Composition",
+    Composition: "Composition",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "ConceptMap",
+    ConceptMap: "ConceptMap",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Condition",
+    Condition: "Condition",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Consent",
+    Consent: "Consent",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Contract",
+    Contract: "Contract",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Coverage",
+    Coverage: "Coverage",
 
     /** The FHIR resource type defined in R4. */
-    "CoverageEligibilityRequest",
+    CoverageEligibilityRequest: "CoverageEligibilityRequest",
 
     /** The FHIR resource type defined in R4. */
-    "CoverageEligibilityResponse",
+    CoverageEligibilityResponse: "CoverageEligibilityResponse",
 
     /** The FHIR resource type defined in STU3. */
-    "DataElement",
+    DataElement: "DataElement",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "DetectedIssue",
+    DetectedIssue: "DetectedIssue",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Device",
-
-    /** The FHIR resource type defined in STU3. */
-    "DeviceComponent",
-
-    /** The FHIR resource type defined in R4. */
-    "DeviceDefinition",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "DeviceMetric",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "DeviceRequest",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "DeviceUseStatement",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "DiagnosticReport",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "DocumentManifest",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "DocumentReference",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "DomainResource",
-
-    /** The FHIR resource type defined in R4. */
-    "EffectEvidenceSynthesis",
+    Device: "Device",
 
     /** The FHIR resource type defined in STU3. */
-    "EligibilityRequest",
+    DeviceComponent: "DeviceComponent",
+
+    /** The FHIR resource type defined in R4. */
+    DeviceDefinition: "DeviceDefinition",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    DeviceMetric: "DeviceMetric",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    DeviceRequest: "DeviceRequest",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    DeviceUseStatement: "DeviceUseStatement",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    DiagnosticReport: "DiagnosticReport",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    DocumentManifest: "DocumentManifest",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    DocumentReference: "DocumentReference",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    DomainResource: "DomainResource",
+
+    /** The FHIR resource type defined in R4. */
+    EffectEvidenceSynthesis: "EffectEvidenceSynthesis",
 
     /** The FHIR resource type defined in STU3. */
-    "EligibilityResponse",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Encounter",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Endpoint",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "EnrollmentRequest",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "EnrollmentResponse",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "EpisodeOfCare",
-
-    /** The FHIR resource type defined in R4. */
-    "EventDefinition",
-
-    /** The FHIR resource type defined in R4. */
-    "Evidence",
-
-    /** The FHIR resource type defined in R4. */
-    "EvidenceVariable",
-
-    /** The FHIR resource type defined in R4. */
-    "ExampleScenario",
+    EligibilityRequest: "EligibilityRequest",
 
     /** The FHIR resource type defined in STU3. */
-    "ExpansionProfile",
+    EligibilityResponse: "EligibilityResponse",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "ExplanationOfBenefit",
+    Encounter: "Encounter",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "FamilyMemberHistory",
+    Endpoint: "Endpoint",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Flag",
+    EnrollmentRequest: "EnrollmentRequest",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Goal",
+    EnrollmentResponse: "EnrollmentResponse",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "GraphDefinition",
+    EpisodeOfCare: "EpisodeOfCare",
 
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Group",
+    /** The FHIR resource type defined in R4. */
+    EventDefinition: "EventDefinition",
 
-    /** The FHIR resource type defined in STU3 and R4. */
-    "GuidanceResponse",
+    /** The FHIR resource type defined in R4. */
+    Evidence: "Evidence",
 
-    /** The FHIR resource type defined in STU3 and R4. */
-    "HealthcareService",
+    /** The FHIR resource type defined in R4. */
+    EvidenceVariable: "EvidenceVariable",
+
+    /** The FHIR resource type defined in R4. */
+    ExampleScenario: "ExampleScenario",
 
     /** The FHIR resource type defined in STU3. */
-    "ImagingManifest",
+    ExpansionProfile: "ExpansionProfile",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "ImagingStudy",
+    ExplanationOfBenefit: "ExplanationOfBenefit",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Immunization",
-
-    /** The FHIR resource type defined in R4. */
-    "ImmunizationEvaluation",
+    FamilyMemberHistory: "FamilyMemberHistory",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "ImmunizationRecommendation",
+    Flag: "Flag",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "ImplementationGuide",
-
-    /** The FHIR resource type defined in R4. */
-    "InsurancePlan",
-
-    /** The FHIR resource type defined in R4. */
-    "Invoice",
+    Goal: "Goal",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Library",
+    GraphDefinition: "GraphDefinition",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Linkage",
+    Group: "Group",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "List",
+    GuidanceResponse: "GuidanceResponse",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Location",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Measure",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "MeasureReport",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Media",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Medication",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "MedicationAdministration",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "MedicationDispense",
-
-    /** The FHIR resource type defined in R4. */
-    "MedicationKnowledge",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "MedicationRequest",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "MedicationStatement",
-
-    /** The FHIR resource type defined in R4. */
-    "MedicinalProduct",
-
-    /** The FHIR resource type defined in R4. */
-    "MedicinalProductAuthorization",
-
-    /** The FHIR resource type defined in R4. */
-    "MedicinalProductContraindication",
-
-    /** The FHIR resource type defined in R4. */
-    "MedicinalProductIndication",
-
-    /** The FHIR resource type defined in R4. */
-    "MedicinalProductIngredient",
-
-    /** The FHIR resource type defined in R4. */
-    "MedicinalProductInteraction",
-
-    /** The FHIR resource type defined in R4. */
-    "MedicinalProductManufactured",
-
-    /** The FHIR resource type defined in R4. */
-    "MedicinalProductPackaged",
-
-    /** The FHIR resource type defined in R4. */
-    "MedicinalProductPharmaceutical",
-
-    /** The FHIR resource type defined in R4. */
-    "MedicinalProductUndesirableEffect",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "MessageDefinition",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "MessageHeader",
-
-    /** The FHIR resource type defined in R4. */
-    "MolecularSequence",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "NamingSystem",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "NutritionOrder",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Observation",
-
-    /** The FHIR resource type defined in R4. */
-    "ObservationDefinition",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "OperationDefinition",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "OperationOutcome",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Organization",
-
-    /** The FHIR resource type defined in R4. */
-    "OrganizationAffiliation",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Parameters",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Patient",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "PaymentNotice",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "PaymentReconciliation",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Person",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "PlanDefinition",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Practitioner",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "PractitionerRole",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Procedure",
+    HealthcareService: "HealthcareService",
 
     /** The FHIR resource type defined in STU3. */
-    "ProcedureRequest",
+    ImagingManifest: "ImagingManifest",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    ImagingStudy: "ImagingStudy",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Immunization: "Immunization",
+
+    /** The FHIR resource type defined in R4. */
+    ImmunizationEvaluation: "ImmunizationEvaluation",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    ImmunizationRecommendation: "ImmunizationRecommendation",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    ImplementationGuide: "ImplementationGuide",
+
+    /** The FHIR resource type defined in R4. */
+    InsurancePlan: "InsurancePlan",
+
+    /** The FHIR resource type defined in R4. */
+    Invoice: "Invoice",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Library: "Library",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Linkage: "Linkage",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    List: "List",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Location: "Location",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Measure: "Measure",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    MeasureReport: "MeasureReport",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Media: "Media",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Medication: "Medication",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    MedicationAdministration: "MedicationAdministration",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    MedicationDispense: "MedicationDispense",
+
+    /** The FHIR resource type defined in R4. */
+    MedicationKnowledge: "MedicationKnowledge",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    MedicationRequest: "MedicationRequest",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    MedicationStatement: "MedicationStatement",
+
+    /** The FHIR resource type defined in R4. */
+    MedicinalProduct: "MedicinalProduct",
+
+    /** The FHIR resource type defined in R4. */
+    MedicinalProductAuthorization: "MedicinalProductAuthorization",
+
+    /** The FHIR resource type defined in R4. */
+    MedicinalProductContraindication: "MedicinalProductContraindication",
+
+    /** The FHIR resource type defined in R4. */
+    MedicinalProductIndication: "MedicinalProductIndication",
+
+    /** The FHIR resource type defined in R4. */
+    MedicinalProductIngredient: "MedicinalProductIngredient",
+
+    /** The FHIR resource type defined in R4. */
+    MedicinalProductInteraction: "MedicinalProductInteraction",
+
+    /** The FHIR resource type defined in R4. */
+    MedicinalProductManufactured: "MedicinalProductManufactured",
+
+    /** The FHIR resource type defined in R4. */
+    MedicinalProductPackaged: "MedicinalProductPackaged",
+
+    /** The FHIR resource type defined in R4. */
+    MedicinalProductPharmaceutical: "MedicinalProductPharmaceutical",
+
+    /** The FHIR resource type defined in R4. */
+    MedicinalProductUndesirableEffect: "MedicinalProductUndesirableEffect",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    MessageDefinition: "MessageDefinition",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    MessageHeader: "MessageHeader",
+
+    /** The FHIR resource type defined in R4. */
+    MolecularSequence: "MolecularSequence",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    NamingSystem: "NamingSystem",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    NutritionOrder: "NutritionOrder",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Observation: "Observation",
+
+    /** The FHIR resource type defined in R4. */
+    ObservationDefinition: "ObservationDefinition",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    OperationDefinition: "OperationDefinition",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    OperationOutcome: "OperationOutcome",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Organization: "Organization",
+
+    /** The FHIR resource type defined in R4. */
+    OrganizationAffiliation: "OrganizationAffiliation",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Parameters: "Parameters",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Patient: "Patient",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    PaymentNotice: "PaymentNotice",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    PaymentReconciliation: "PaymentReconciliation",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Person: "Person",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    PlanDefinition: "PlanDefinition",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Practitioner: "Practitioner",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    PractitionerRole: "PractitionerRole",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Procedure: "Procedure",
 
     /** The FHIR resource type defined in STU3. */
-    "ProcessRequest",
+    ProcedureRequest: "ProcedureRequest",
 
     /** The FHIR resource type defined in STU3. */
-    "ProcessResponse",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Provenance",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Questionnaire",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "QuestionnaireResponse",
+    ProcessRequest: "ProcessRequest",
 
     /** The FHIR resource type defined in STU3. */
-    "ReferralRequest",
+    ProcessResponse: "ProcessResponse",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "RelatedPerson",
+    Provenance: "Provenance",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "RequestGroup",
-
-    /** The FHIR resource type defined in R4. */
-    "ResearchDefinition",
-
-    /** The FHIR resource type defined in R4. */
-    "ResearchElementDefinition",
+    Questionnaire: "Questionnaire",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "ResearchStudy",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "ResearchSubject",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Resource",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "RiskAssessment",
-
-    /** The FHIR resource type defined in R4. */
-    "RiskEvidenceSynthesis",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "Schedule",
-
-    /** The FHIR resource type defined in STU3 and R4. */
-    "SearchParameter",
+    QuestionnaireResponse: "QuestionnaireResponse",
 
     /** The FHIR resource type defined in STU3. */
-    "Sequence",
+    ReferralRequest: "ReferralRequest",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    RelatedPerson: "RelatedPerson",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    RequestGroup: "RequestGroup",
+
+    /** The FHIR resource type defined in R4. */
+    ResearchDefinition: "ResearchDefinition",
+
+    /** The FHIR resource type defined in R4. */
+    ResearchElementDefinition: "ResearchElementDefinition",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    ResearchStudy: "ResearchStudy",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    ResearchSubject: "ResearchSubject",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Resource: "Resource",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    RiskAssessment: "RiskAssessment",
+
+    /** The FHIR resource type defined in R4. */
+    RiskEvidenceSynthesis: "RiskEvidenceSynthesis",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    Schedule: "Schedule",
+
+    /** The FHIR resource type defined in STU3 and R4. */
+    SearchParameter: "SearchParameter",
 
     /** The FHIR resource type defined in STU3. */
-    "ServiceDefinition",
+    Sequence: "Sequence",
+
+    /** The FHIR resource type defined in STU3. */
+    ServiceDefinition: "ServiceDefinition",
 
     /** The FHIR resource type defined in R4. */
-    "ServiceRequest",
+    ServiceRequest: "ServiceRequest",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Slot",
+    Slot: "Slot",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Specimen",
+    Specimen: "Specimen",
 
     /** The FHIR resource type defined in R4. */
-    "SpecimenDefinition",
+    SpecimenDefinition: "SpecimenDefinition",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "StructureDefinition",
+    StructureDefinition: "StructureDefinition",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "StructureMap",
+    StructureMap: "StructureMap",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Subscription",
+    Subscription: "Subscription",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Substance",
+    Substance: "Substance",
 
     /** The FHIR resource type defined in R4. */
-    "SubstanceNucleicAcid",
+    SubstanceNucleicAcid: "SubstanceNucleicAcid",
 
     /** The FHIR resource type defined in R4. */
-    "SubstancePolymer",
+    SubstancePolymer: "SubstancePolymer",
 
     /** The FHIR resource type defined in R4. */
-    "SubstanceProtein",
+    SubstanceProtein: "SubstanceProtein",
 
     /** The FHIR resource type defined in R4. */
-    "SubstanceReferenceInformation",
+    SubstanceReferenceInformation: "SubstanceReferenceInformation",
 
     /** The FHIR resource type defined in R4. */
-    "SubstanceSourceMaterial",
+    SubstanceSourceMaterial: "SubstanceSourceMaterial",
 
     /** The FHIR resource type defined in R4. */
-    "SubstanceSpecification",
+    SubstanceSpecification: "SubstanceSpecification",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "SupplyDelivery",
+    SupplyDelivery: "SupplyDelivery",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "SupplyRequest",
+    SupplyRequest: "SupplyRequest",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "Task",
+    Task: "Task",
 
     /** The FHIR resource type defined in R4. */
-    "TerminologyCapabilities",
+    TerminologyCapabilities: "TerminologyCapabilities",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "TestReport",
+    TestReport: "TestReport",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "TestScript",
+    TestScript: "TestScript",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "ValueSet",
+    ValueSet: "ValueSet",
 
     /** The FHIR resource type defined in R4. */
-    "VerificationResult",
+    VerificationResult: "VerificationResult",
 
     /** The FHIR resource type defined in STU3 and R4. */
-    "VisionPrescription",
+    VisionPrescription: "VisionPrescription",
 
     string,
   }
