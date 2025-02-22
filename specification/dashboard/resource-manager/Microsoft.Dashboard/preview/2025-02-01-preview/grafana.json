@@ -1839,6 +1839,10 @@
           "description": "The api key setting of the Grafana instance.",
           "$ref": "#/definitions/ApiKey"
         },
+        "creatorCanAdmin": {
+          "description": "The creator will have admin access for the Grafana instance.",
+          "$ref": "#/definitions/CreatorCanAdmin"
+        },
         "deterministicOutboundIP": {
           "description": "Whether a Grafana instance uses deterministic outbound IPs.",
           "$ref": "#/definitions/DeterministicOutboundIP"
@@ -1920,6 +1924,10 @@
         "apiKey": {
           "description": "The api key setting of the Grafana instance.",
           "$ref": "#/definitions/ApiKey"
+        },
+        "creatorCanAdmin": {
+          "description": "The creator will have admin access for the Grafana instance.",
+          "$ref": "#/definitions/CreatorCanAdmin"
         },
         "deterministicOutboundIP": {
           "description": "Whether a Grafana instance uses deterministic outbound IPs.",
@@ -2057,6 +2065,17 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ApiKey"
+      }
+    },
+    "CreatorCanAdmin": {
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "CreatorCanAdmin"
       }
     },
     "DeterministicOutboundIP": {
