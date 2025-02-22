@@ -473,10 +473,12 @@
       "type": "object",
       "properties": {
         "format": {
-          "description": "The format of the export being delivered. Currently only 'Csv' is supported.",
+          "description": "The format of the export being delivered.",
           "type": "string",
           "enum": [
-            "Csv"
+            "Csv",
+            "Parquet",
+            "Delta"
           ],
           "x-ms-enum": {
             "name": "FormatType",
