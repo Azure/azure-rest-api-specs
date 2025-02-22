@@ -76,7 +76,7 @@ model ThreadMessage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "assistant_id")
   @doc("If applicable, the ID of the agent that authored this message.")
-  assistantId: string | null;
+  agentId: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "run_id")
@@ -151,7 +151,7 @@ model MessageTextDetails {
   annotations: MessageTextAnnotation[];
 }
 
-// Annotations, used by text content: "file_citation" | "file_path"
+// Annotations, used by text content: "file_citation" | "file_path" | "url_citation"
 
 @discriminator("type")
 @doc("An abstract representation of an annotation to text thread message content.")
@@ -162,6 +162,35 @@ model MessageTextAnnotation {
 
   @doc("The textual content associated with this text annotation item.")
   text: string;
+}
+
+// URL citation annotation + details
+
+@doc("A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.")
+model MessageTextUrlCitationAnnotation extends MessageTextAnnotation {
+  @doc("The object type, which is always 'url_citation'.")
+  type: "url_citation";
+
+  @encodedName("application/json", "url_citation")
+  @doc("The details of the URL citation.")
+  urlCitation: MessageTextUrlCitationDetails;
+
+  @encodedName("application/json", "start_index")
+  @doc("The first text index associated with this text annotation.")
+  startIndex?: int32;
+
+  @encodedName("application/json", "end_index")
+  @doc("The last text index associated with this text annotation.")
+  endIndex?: int32;
+}
+
+@doc("A representation of a URL citation, as used in text thread message content.")
+model MessageTextUrlCitationDetails {
+  @doc("The URL associated with this citation.")
+  url: string;
+
+  @doc("The title of the URL.")
+  title?: string;
 }
 
 // File citation annotation + details
@@ -355,6 +384,33 @@ model MessageDeltaTextAnnotation {
   type: string;
 }
 
+@doc("A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.")
+model MessageDeltaTextUrlCitationAnnotation extends MessageDeltaTextAnnotation {
+  @doc("The object type, which is always 'url_citation'.")
+  type: "url_citation";
+
+  @encodedName("application/json", "url_citation")
+  @doc("The details of the URL citation.")
+  urlCitation: MessageDeltaTextUrlCitationDetails;
+
+  @encodedName("application/json", "start_index")
+  @doc("The first text index associated with this text annotation.")
+  startIndex?: int32;
+
+  @encodedName("application/json", "end_index")
+  @doc("The last text index associated with this text annotation.")
+  endIndex?: int32;
+}
+
+@doc("A representation of a URL citation, as used in text thread message content.")
+model MessageDeltaTextUrlCitationDetails {
+  @doc("The URL associated with this citation.")
+  url: string;
+
+  @doc("The title of the URL.")
+  title?: string;
+}
+
 /** Represents a streamed file citation applied to a streaming text content part. */
 model MessageDeltaTextFileCitationAnnotation
   extends MessageDeltaTextAnnotation {
@@ -413,13 +469,4 @@ model MessageDeltaTextFilePathAnnotationObject {
   /** The file ID for the annotation. */
   @encodedName("application/json", "file_id")
   fileId?: string;
-}
-
-/** A representation of the URL used for the text citation. */
-model MessageDeltaTextUrlCitationDetails {
-  /** The URL where the citation is from. */
-  url?: string;
-
-  /** The title of the URL. */
-  title?: string;
 }

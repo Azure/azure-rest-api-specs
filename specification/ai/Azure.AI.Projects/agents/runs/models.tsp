@@ -23,7 +23,7 @@ model ThreadRun {
 
   @encodedName("application/json", "assistant_id")
   @doc("The ID of the agent associated with the thread this run was performed against.")
-  assistantId: string;
+  agentId: string;
 
   @doc("The status of the agent thread run.")
   status: RunStatus;
@@ -187,7 +187,7 @@ model RunCompletionUsage {
 model CreateRunOptions {
   @doc("The ID of the agent that should run the thread.")
   @encodedName("application/json", "assistant_id")
-  assistantId: string;
+  agentId: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden model name that the agent should use to run the thread.")
@@ -351,7 +351,7 @@ model SubmitToolOutputsDetails {
 model CreateAndRunThreadOptions {
   @encodedName("application/json", "assistant_id")
   @doc("The ID of the agent for which the thread should be created.")
-  assistantId: string;
+  agentId: string;
 
   @doc("The details used to create the new thread. If no thread is provided, an empty one will be created.")
   thread?: AgentThreadCreationOptions;

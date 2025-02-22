@@ -139,7 +139,7 @@ model CreateAgentOptions {
 model UpdateAgentOptions {
   @path
   @doc("The ID of the agent to modify.")
-  assistantId: string;
+  agentId: string;
 
   @doc("The ID of the model to use.")
   `model`?: string;
