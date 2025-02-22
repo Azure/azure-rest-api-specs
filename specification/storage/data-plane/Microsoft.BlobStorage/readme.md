@@ -129,6 +129,6 @@ directive:
 ```yaml
 suppressions:
   - code: LroExtension
-    from: stable/2025-01-05/blob.json
+    from: blob.json
     reason: Legacy operations not defined as lro
 ```
