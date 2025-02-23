@@ -1981,7 +1981,7 @@
           {
             "name": "msixImageURI",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/MSIXImageURI"
             }
@@ -2041,7 +2041,7 @@
           {
             "name": "importPackageInfoRequest",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ImportPackageInfoRequest"
             }
@@ -4851,7 +4851,7 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "scalingPlanPersonalSchedule",
+            "name": "scalingPlanSchedule",
             "in": "body",
             "description": "The resource properties to be updated",
             "required": false,
@@ -5180,7 +5180,7 @@
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           },
           {
-            "name": "scalingPlanPooledSchedule",
+            "name": "scalingPlanSchedule",
             "in": "body",
             "description": "The resource properties to be updated",
             "required": false,
@@ -10205,6 +10205,9 @@
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"

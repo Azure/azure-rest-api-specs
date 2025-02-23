@@ -44,8 +44,7 @@ interface SessionHosts {
        * The resource properties to be updated
        */
       @bodyRoot sessionHost?: SessionHostPatch;
-    },
-    Parameters = {
+
       /**
        * Force flag to update assign, unassign or reassign personal desktop.
        */
