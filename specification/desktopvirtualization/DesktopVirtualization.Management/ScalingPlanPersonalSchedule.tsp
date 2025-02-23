@@ -51,7 +51,7 @@ interface ScalingPlanPersonalSchedules {
       /**
        * The resource properties to be updated
        */
-      @bodyRoot scalingPlanPersonalSchedule?: ScalingPlanPersonalSchedulePatch;
+      @bodyRoot scalingPlanSchedule?: ScalingPlanPersonalSchedulePatch;
     }
   >;
 

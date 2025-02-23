@@ -51,7 +51,7 @@ interface ScalingPlanPooledSchedules {
       /**
        * The resource properties to be updated
        */
-      @bodyRoot scalingPlanPooledSchedule?: ScalingPlanPooledSchedulePatch;
+      @bodyRoot scalingPlanSchedule?: ScalingPlanPooledSchedulePatch;
     }
   >;
 
