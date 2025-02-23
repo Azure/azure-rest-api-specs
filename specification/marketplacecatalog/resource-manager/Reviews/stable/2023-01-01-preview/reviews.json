@@ -1,0 +1,84 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Marketplace Rating And Reviews API",
+    "description": "Microsoft Marketplace Rating And Reviews API",
+    "version": "2023-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/userhasreview": {
+      "get": {
+        "tags": [],
+        "summary": "Get true/false if the user has already submitted a review for the product.",
+        "operationId": "RatingAndReviews_GetUserHasReview",
+        "x-ms-examples": {
+          "Get_Key": {
+            "$ref": "./examples/GetUserHasReview.json"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returns true or false if the user has already submitted a review.",
+            "schema": {
+              "$ref": "#/definitions/UserHasReviewDto"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UserHasReviewDto": {
+      "type": "object",
+      "description": "UserHasReview object containing if user has already submitted a review and when the last time the review was updated.",
+      "properties": {
+        "hasReview": {
+          "type": "boolean",
+          "description": "True if the user has already submitted a review."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last Updated Date",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
