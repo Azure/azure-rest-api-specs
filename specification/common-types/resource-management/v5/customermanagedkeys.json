@@ -6,34 +6,6 @@
   },
   "paths": {},
   "definitions": {
-    "CustomerManagedKeyEncryption": {
-      "type": "object",
-      "description": "Customer-managed key encryption properties for the resource.",
-      "properties": {
-        "keyEncryptionKeyIdentity": {
-          "$ref": "#/definitions/KeyEncryptionKeyIdentity",
-          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
-        },
-        "keyEncryptionKeyUrl": {
-          "type": "string",
-          "description": "key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
-        }
-      }
-    },
-    "Encryption": {
-      "type": "object",
-      "description": "(Optional) Discouraged to include in resource definition. Only needed where it is possible to disable platform (AKA infrastructure) encryption. Azure SQL TDE is an example of this. Values are enabled and disabled.",
-      "properties": {
-        "infrastructureEncryption": {
-          "$ref": "#/definitions/InfrastructureEncryption",
-          "description": "Values are enabled and disabled."
-        },
-        "customerManagedKeyEncryption": {
-          "$ref": "#/definitions/CustomerManagedKeyEncryption",
-          "description": "All Customer-managed key encryption properties for the resource."
-        }
-      }
-    },
     "InfrastructureEncryption": {
       "type": "string",
       "description": "(Optional) Discouraged to include in resource definition. Only needed where it is possible to disable platform (AKA infrastructure) encryption. Azure SQL TDE is an example of this. Values are enabled and disabled.",
@@ -111,6 +83,34 @@
             "description": "Delegated identity"
           }
         ]
+      }
+    },
+    "customerManagedKeyEncryption": {
+      "type": "object",
+      "description": "Customer-managed key encryption properties for the resource.",
+      "properties": {
+        "keyEncryptionKeyIdentity": {
+          "$ref": "#/definitions/KeyEncryptionKeyIdentity",
+          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
+        },
+        "keyEncryptionKeyUrl": {
+          "type": "string",
+          "description": "key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
+        }
+      }
+    },
+    "encryption": {
+      "type": "object",
+      "description": "(Optional) Discouraged to include in resource definition. Only needed where it is possible to disable platform (AKA infrastructure) encryption. Azure SQL TDE is an example of this. Values are enabled and disabled.",
+      "properties": {
+        "infrastructureEncryption": {
+          "$ref": "#/definitions/InfrastructureEncryption",
+          "description": "Values are enabled and disabled."
+        },
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/customerManagedKeyEncryption",
+          "description": "All Customer-managed key encryption properties for the resource."
+        }
       }
     }
   }
