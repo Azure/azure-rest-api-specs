@@ -807,6 +807,14 @@
           "items": {
             "$ref": "#/definitions/ManagedRuleGroupOverride"
           }
+        },
+        "computedDisabledRules": {
+          "readOnly": true,
+          "description": "Stores the final list of disabled rule groups",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSetRuleGroup"
+          }
         }
       }
     },
@@ -860,6 +868,26 @@
         "sensitivity": {
           "description": "Describes the override sensitivity to be applied when rule matches.",
           "$ref": "#/definitions/SensitivityType"
+        }
+      }
+    },
+    "ManagedRuleSetRuleGroup": {
+      "description": "Defines a managed rule set rule group",
+      "type": "object",
+      "required": [
+        "ruleGroupName"
+      ],
+      "properties": {
+        "ruleGroupName": {
+          "description": "Name of the rule group",
+          "type": "string"
+        },
+        "rules": {
+          "description": "List of rules within the rule group",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
