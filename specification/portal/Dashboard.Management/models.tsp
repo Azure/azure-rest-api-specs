@@ -77,7 +77,7 @@ model ErrorDefinition {
    * Internal error details.
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["code"])
+  @identifiers(#["code"])
   details?: ErrorDefinition[];
 }
 
@@ -97,7 +97,7 @@ model DashboardProperties {
   /**
    * The dashboard lenses.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   lenses?: DashboardLens[];
 
   /**
@@ -119,7 +119,7 @@ model DashboardLens {
   /**
    * The dashboard parts.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   parts: DashboardParts[];
 
   /**
@@ -237,7 +237,7 @@ model MarkdownPartMetadata extends DashboardPartMetadata {
    * Input to dashboard part.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   inputs?: {}[];
 
   /**

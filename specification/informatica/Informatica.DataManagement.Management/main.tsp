@@ -418,7 +418,7 @@ model InformaticaServerlessRuntimeProperties {
   serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfile;
 
   @doc("String KV pairs indicating Advanced custom properties.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   advancedCustomProperties?: AdvancedCustomProperties[];
 
   @doc("Supplementary file location.")
@@ -428,7 +428,7 @@ model InformaticaServerlessRuntimeProperties {
   serverlessRuntimeConfig?: ServerlessRuntimeConfigProperties;
 
   @doc("Serverless Runtime Tags")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   serverlessRuntimeTags?: ServerlessRuntimeTag[];
 
   @doc("Serverless runtime user context properties")
@@ -438,11 +438,11 @@ model InformaticaServerlessRuntimeProperties {
 @doc("Serverless Runtime config properties.")
 model ServerlessRuntimeConfigProperties {
   @doc("The List of Informatica Serverless Runtime CDI Config Properties.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   cdiConfigProps?: CdiConfigProps[];
 
   @doc("The List of Informatica Serverless Runtime CDIE Config Properties.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   cdieConfigProps?: CdiConfigProps[];
 }
 
@@ -452,18 +452,18 @@ model ServerlessConfigProperties {
   platform?: PlatformType;
 
   @doc("List of application types supported by informatica")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   applicationTypes?: ApplicationTypeMetadata[];
 
   @doc("The list of compute units with possible array of values")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   computeUnits?: ComputeUnitsMetadata[];
 
   @doc("Serverless Runtime execution timeout")
   executionTimeout?: string;
 
   @doc("List of supported serverless informatica regions")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   regions?: RegionsMetadata[];
 }
 
@@ -527,7 +527,7 @@ model CdiConfigProps {
   engineVersion: string;
 
   @doc("ApplicationConfigs of the CDI or CDIE.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   applicationConfigs: ApplicationConfigs[];
 }
 
@@ -712,7 +712,7 @@ model ServerlessRuntimePropertiesCustomUpdate {
   serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfileUpdate;
 
   @doc("String KV pairs indicating Advanced custom properties.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   advancedCustomProperties?: AdvancedCustomProperties[];
 
   @doc("Supplementary file location.")
@@ -722,7 +722,7 @@ model ServerlessRuntimePropertiesCustomUpdate {
   serverlessRuntimeConfig?: ServerlessRuntimeConfigPropertiesUpdate;
 
   @doc("Serverless Runtime Tags")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   serverlessRuntimeTags?: ServerlessRuntimeTag[];
 
   @doc("Serverless runtime user context properties")
