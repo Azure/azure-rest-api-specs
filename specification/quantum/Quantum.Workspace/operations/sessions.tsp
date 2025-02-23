@@ -67,13 +67,15 @@ model SessionDetails extends ItemDetails {
   status?: SessionStatus;
 }
 
+/** A Paged List of SessionDetails. */ // Used by workspace/sesssions
+alias PagedSessionDetails = Azure.Core.Page<SessionDetails>;
+
 @useDependency(DefaultAzureCoreVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface SessionOperations {
     /** Open a new session. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-    open is CreateOperation<SessionDetails>;
+    createOrReplace is CreateOperation<SessionDetails>;
 
     /** Close an existing session. */
     close is ActionOperation<SessionDetails>;
@@ -82,16 +84,28 @@ namespace Quantum.Workspace.Operations {
     get is GetOperation<SessionDetails>;
 
     /** List all Sessions. */
-    list is ListOperation<SessionDetails>;
-
-    /** List jobs in a session. */
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id" ""
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "The nesting of Jobs under a Session makes the auto-generated ID to be Sessions_JobsList, which is not in a Noun_Verb format."
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
       We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
       See https://github.com/Azure/typespec-azure/issues/494
       """
+    list is CustomListOperation<
+      Resource = SessionDetails,
+      Response = PagedSessionDetails,
+      Parameters = {
+        ...CustomFilterQueryParameter;
+        ...CustomSkipQueryParameter;
+        ...CustomTopQueryParameter;
+        ...CustomOrderByQueryParameter;
+      }
+    >;
+
+    /** List jobs in a session. */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "The nesting of Jobs under a Session makes the auto-generated ID to be Sessions_JobsList, which is not in a Noun_Verb format."
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
+      We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
+      See https://github.com/Azure/typespec-azure/issues/494
+      """
     @operationId("SessionsJobs_List")
     jobsList is CustomListOperation<
       Resource = JobDetails,
@@ -101,6 +115,11 @@ namespace Quantum.Workspace.Operations {
         @path
         @segment("sessions")
         sessionId: WorkspaceItemId;
+
+        ...CustomFilterQueryParameter;
+        ...CustomSkipQueryParameter;
+        ...CustomTopQueryParameter;
+        ...CustomOrderByQueryParameter;
       }
     >;
   }
