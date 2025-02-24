@@ -14,12 +14,19 @@ union PFMetrics {
   string,
 
   @doc("Pass fail criteria for response time metric in milliseconds.")
-  "response_time_ms",
+  ResponseTimeInMilliseconds: "response_time_ms",
 
-  @doc("Pass fail criteria for latency metric in milliseconds.") "latency",
-  @doc("Pass fail criteria for error metric.") "error",
-  @doc("Pass fail criteria for total requests.") "requests",
-  @doc("Pass fail criteria for request per second.") "requests_per_sec",
+  @doc("Pass fail criteria for latency metric in milliseconds.")
+  Latency: "latency",
+
+  @doc("Pass fail criteria for error metric.")
+  Error: "error",
+
+  @doc("Pass fail criteria for total requests.")
+  Requests: "requests",
+
+  @doc("Pass fail criteria for request per second.")
+  RequestsPerSecond: "requests_per_sec",
 }
 
 @doc("Aggregation functions for pass/fail criteria.")

@@ -26,7 +26,10 @@ namespace Customizations;
 @@clientName(CertificateMetadata.type, "CertificateKind", "csharp");
 
 // Suggestion to fix casing for acronyms
-@@clientName(LoadTestConfiguration.splitAllCSVs, "splitAllCsvs", "csharp,java,python"); // NOTE: Python is needed since the emitter bugs out for "CSVs" to cs_vs
+@@clientName(LoadTestConfiguration.splitAllCSVs,
+  "splitAllCsvs",
+  "csharp,java,python"
+); // NOTE: Python is needed since the emitter bugs out for "CSVs" to cs_vs
 @@clientName(Test.publicIPDisabled, "publicIpDisabled", "csharp,java");
 @@clientName(TestRun.publicIPDisabled, "publicIpDisabled", "csharp,java");
 
@@ -79,6 +82,7 @@ namespace Customizations;
 // Suggestion to rename `Url` to `Uri` for csharp
 @@clientName(FileInfo.url, "uri", "csharp");
 @@clientName(ArtifactsContainerInfo.url, "uri", "csharp");
+@@clientName(TestRun.portalUrl, "portalUri", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
