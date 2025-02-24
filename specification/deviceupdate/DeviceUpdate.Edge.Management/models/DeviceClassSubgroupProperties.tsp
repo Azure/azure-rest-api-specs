@@ -36,14 +36,8 @@ model DeviceClassSubgroupProperties {
   deviceClassId: string;
 
   /**
-   * Date and time in UTC when this Subgroup was created.
+   * Active deployment ID for this Subgroup
    */
   @visibility("read")
-  createdDateTime: utcDateTime;
-
-  /**
-   * Active deployment for this Subgroup
-   */
-  @visibility("read")
-  activeDeployment?: ActiveDeployment;
+  activeDeploymentId?: string;
 }

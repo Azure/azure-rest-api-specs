@@ -34,12 +34,6 @@ model GroupProperties {
    */
   @visibility("read", "create")
   groupType: GroupType;
-
-  /**
-   * Date and time in UTC when the Group was created.
-   */
-  @visibility("read")
-  createdDateTime: utcDateTime;
 }
 
 /**

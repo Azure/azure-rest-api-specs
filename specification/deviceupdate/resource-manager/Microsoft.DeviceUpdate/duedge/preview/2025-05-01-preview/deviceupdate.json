@@ -3845,22 +3845,15 @@
             "create"
           ]
         },
-        "createdDateTime": {
+        "activeDeploymentId": {
           "type": "string",
-          "format": "date-time",
-          "description": "Date and time in UTC when this Subgroup was created.",
-          "readOnly": true
-        },
-        "activeDeployment": {
-          "$ref": "#/definitions/ActiveDeployment",
-          "description": "Active deployment for this Subgroup",
+          "description": "Active deployment ID for this Subgroup",
           "readOnly": true
         }
       },
       "required": [
         "groupId",
-        "deviceClassId",
-        "createdDateTime"
+        "deviceClassId"
       ]
     },
     "DeviceClassUpdatableDevices": {
@@ -4143,18 +4136,11 @@
             "read",
             "create"
           ]
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time in UTC when the Group was created.",
-          "readOnly": true
         }
       },
       "required": [
         "groupId",
-        "groupType",
-        "createdDateTime"
+        "groupType"
       ]
     },
     "GroupType": {
