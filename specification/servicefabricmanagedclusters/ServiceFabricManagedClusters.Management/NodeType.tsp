@@ -15,13 +15,14 @@ namespace Microsoft.ServiceFabric;
  * Describes a node type in the cluster, each node type represents sub set of nodes in the cluster.
  */
 @parentResource(ManagedCluster)
-model NodeType is Azure.ResourceManager.TrackedResource<NodeTypeProperties> {
+model NodeType is Azure.ResourceManager.ProxyResource<NodeTypeProperties> {
   ...ResourceNameParameter<
     Resource = NodeType,
     KeyName = "nodeTypeName",
     SegmentName = "nodeTypes",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /**
    * The node type sku.

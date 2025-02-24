@@ -1011,48 +1011,6 @@ model ApplicationTypeResourceProperties {
 }
 
 /**
- * The resource model definition for proxy-only resource.
- */
-model ProxyResource {
-  /**
-   * Azure resource identifier.
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Azure resource name.
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Azure resource type.
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Resource location depends on the parent resource.
-   */
-  @visibility("read", "create")
-  location?: string;
-
-  /**
-   * Azure resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
-  @visibility("read", "create")
-  tags?: Record<string>;
-
-  /**
-   * Metadata pertaining to creation and last modification of the resource.
-   */
-  @visibility("read")
-  systemData?: SystemData;
-}
-
-/**
  * Application type update request
  */
 model ApplicationTypeUpdateParameters {
@@ -3321,41 +3279,6 @@ model NodeTypeSku {
   @maxValue(2147483647)
   @minValue(1)
   capacity: int32;
-}
-
-/**
- * The resource model definition for proxy-only resource.
- */
-model ManagedProxyResource {
-  /**
-   * Azure resource identifier.
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Azure resource name.
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Azure resource type.
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Azure resource tags.
-   */
-  @visibility("read", "create")
-  tags?: Record<string>;
-
-  /**
-   * Metadata pertaining to creation and last modification of the resource.
-   */
-  @visibility("read")
-  systemData?: SystemData;
 }
 
 /**

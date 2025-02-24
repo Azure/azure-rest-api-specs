@@ -4976,14 +4976,16 @@
           "description": "The managed cluster resource properties",
           "x-ms-client-flatten": true
         },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The sku of the managed cluster"
         }
       },
-      "required": [
-        "sku"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -5723,6 +5725,13 @@
           "description": "The node type properties",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "sku": {
           "$ref": "#/definitions/NodeTypeSku",
           "description": "The node type sku."
@@ -5730,7 +5739,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
