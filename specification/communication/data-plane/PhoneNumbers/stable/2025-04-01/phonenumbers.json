@@ -1732,7 +1732,7 @@
           "type": "string"
         },
         "isResellConsentRequired": {
-          "description": "Indicates if resell consent is required.",
+          "description": "Indicates if resell consent is required. If true, the phone number cannot be acquired unless the customer provides explicit constent to not resell it.",
           "type": "boolean"
         },
         "errorCode": {
@@ -2001,6 +2001,7 @@
         "cost": {
           "readOnly": true,
           "type": "object",
+          "description": "The incurred cost for this phone number.",
           "allOf": [
             {
               "$ref": "#/definitions/PhoneNumberCost"
@@ -2024,8 +2025,9 @@
           }
         },
         "isResellConsentRequired": {
-          "description": "Indicates if resell consent is required.",
-          "type": "boolean"
+          "description": "Indicates if resell consent is required. If true, the phone number cannot be acquired unless the customer provides explicit constent to not resell it.",
+          "type": "boolean",
+          "readOnly": true
         },
         "error": {
           "$ref": "#/definitions/AvailablePhoneNumberError"
@@ -2039,11 +2041,13 @@
       "properties": {
         "code": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "description": "The error code indicating the reason why the operation performed on the phone number failed."
         },
         "message": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "description": "The error message describing the failure that occurred."
         }
       }
     },
