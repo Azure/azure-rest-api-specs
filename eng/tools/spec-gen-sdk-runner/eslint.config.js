@@ -78,22 +78,12 @@ const config = tseslint.config(
       "unicorn/filename-case": "off",
       "unicorn/prefer-ternary": "off",
       "unicorn/no-useless-undefined": "off",
+      "unicorn/prevent-abbreviations": "off",
 
       // We prefer to have explicitly import at the top of the file, even if the same element is exported again,
       // which we do in index.ts files.
       // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-export-from.md
       "unicorn/prefer-export-from": ["error", { ignoreUsedVariables: true }],
-
-      // We allow some abbreviations that we like.
-      // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prevent-abbreviations.md
-      "unicorn/prevent-abbreviations": [
-        "error",
-        {
-          allowList: {
-            args: true,
-          },
-        },
-      ],
     },
   }
 );

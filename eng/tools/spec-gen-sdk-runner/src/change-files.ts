@@ -1,16 +1,15 @@
 import path from "node:path";
 import {
-  execAsync,
   getChangedFiles,
   searchRelatedParentFolders,
-  searchRelatedTypeSpecProjectBySharedLibrary,
   searchSharedLibrary,
+  searchRelatedTypeSpecProjectBySharedLibrary,
 } from "./utils.js";
 import { logMessage } from "./log.js";
 import { SpecGenSdkCmdInput } from "./types.js";
 
-const readmeMdRegex = /^readme.md$/;
-const typespecProjectRegex = /^tspconfig.yaml$/;
+const readmeMdRegex = /^readme.md$/i;
+const typespecProjectRegex = /^tspconfig.yaml$/i;
 const typespecProjectSharedLibraryRegex = /[^/]+\.Shared/;
 
 type ChangedSpecs = {
@@ -19,43 +18,48 @@ type ChangedSpecs = {
   specs: string[];
 };
 
-export async function detectChangedSpecConfigFiles(
-  commandInput: SpecGenSdkCmdInput,
-): Promise<ChangedSpecs[]> {
+export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): ChangedSpecs[] {
   const prChangedFiles: string[] = getChangedFiles(commandInput.localSpecRepoPath) ?? [];
   if (prChangedFiles.length === 0) {
     logMessage("No files changed in the PR");
   }
   logMessage(`Changed files in the PR: ${prChangedFiles.length}`);
-  const fileList = prChangedFiles.filter((p) => !p.includes("/scenarios/"));
-  const { stdout: headCommitRaw } = await execAsync("git rev-parse HEAD");
-  const headCommit = headCommitRaw.trim(); // Trim any newline characters
-  const { stdout: treeIdRaw } = await execAsync(`git rev-parse ${headCommit}^{tree}`);
-  const treeId = treeIdRaw.trim();
+  for (const file of prChangedFiles) {
+    logMessage(`\t${file}`);
+  }
+  const fileList = prChangedFiles
+    .filter((p) => p.startsWith("specification/"))
+    .filter((p) => !p.includes("/scenarios/"));
 
   logMessage(`Related readme.md and typespec project list:`);
   const changedSpecs: ChangedSpecs[] = [];
-  const readmeMDResult = await searchRelatedParentFolders(fileList, {
+
+  const readmeMDResult = searchRelatedParentFolders(fileList, {
     searchFileRegex: readmeMdRegex,
-    specFolder: commandInput.localSpecRepoPath,
-    treeId,
+    specRepoFolder: commandInput.localSpecRepoPath,
+    stopAtFolder: "specification",
   });
-  const typespecProjectResult = await searchRelatedParentFolders(fileList, {
+
+  const typespecProjectResult = searchRelatedParentFolders(fileList, {
     searchFileRegex: typespecProjectRegex,
-    specFolder: commandInput.localSpecRepoPath,
-    treeId,
+    specRepoFolder: commandInput.localSpecRepoPath,
+    stopAtFolder: "specification",
   });
+
   const typespecProjectSharedLibraries = searchSharedLibrary(fileList, {
     searchFileRegex: typespecProjectSharedLibraryRegex,
-    specFolder: commandInput.localSpecRepoPath,
-    treeId,
+    specRepoFolder: commandInput.localSpecRepoPath,
   });
-  const typespecProjectResultSearchedBySharedLibrary =
-    await searchRelatedTypeSpecProjectBySharedLibrary(typespecProjectSharedLibraries, {
+
+  const typespecProjectResultSearchedBySharedLibrary = searchRelatedTypeSpecProjectBySharedLibrary(
+    typespecProjectSharedLibraries,
+    {
       searchFileRegex: typespecProjectRegex,
-      specFolder: commandInput.localSpecRepoPath,
-      treeId,
-    });
+      specRepoFolder: commandInput.localSpecRepoPath,
+    },
+  );
+
+  // Merge typespec project results
   for (const folderPath of Object.keys(typespecProjectResultSearchedBySharedLibrary)) {
     if (typespecProjectResult[folderPath]) {
       typespecProjectResult[folderPath] = [
@@ -66,29 +70,26 @@ export async function detectChangedSpecConfigFiles(
       typespecProjectResult[folderPath] = typespecProjectResultSearchedBySharedLibrary[folderPath];
     }
   }
-  const result: { [folderPath: string]: string[] } = {};
-  for (const folderPath of Object.keys(readmeMDResult)) {
-    result[folderPath] = readmeMDResult[folderPath];
-  }
 
-  for (const folderPath of Object.keys(typespecProjectResult)) {
-    result[folderPath] = typespecProjectResult[folderPath];
-  }
-  for (const folderPath of Object.keys(result)) {
-    const readmeMdPath = path.join(folderPath, "readme.md");
+  // Combine results
+  for (const folderPath of new Set([
+    ...Object.keys(readmeMDResult),
+    ...Object.keys(typespecProjectResult),
+  ])) {
     const cs: ChangedSpecs = {
-      readmeMd: readmeMdPath,
-      specs: readmeMDResult[folderPath],
+      specs: [],
     };
 
     if (typespecProjectResult[folderPath]) {
-      delete cs.readmeMd;
       cs.specs = typespecProjectResult[folderPath];
       cs.typespecProject = path.join(folderPath, "tspconfig.yaml");
       logMessage(`\t tspconfig.yaml file: ${cs.typespecProject}`);
     } else {
-      logMessage(`\t readme.md file: ${readmeMdPath}`);
+      cs.readmeMd = path.join(folderPath, "readme.md");
+      cs.specs = readmeMDResult[folderPath];
+      logMessage(`\t readme.md file: ${cs.readmeMd}`);
     }
+
     changedSpecs.push(cs);
   }
 

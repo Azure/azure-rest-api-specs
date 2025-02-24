@@ -15,7 +15,7 @@ export const execAsync = promisify(exec);
  */
 export async function resetGitRepo(repoPath: string): Promise<void> {
   try {
-    const { stderr } = await execAsync("git clean -fd && git reset --hard HEAD", {
+    const { stderr } = await execAsync("git clean -fdx && git reset --hard HEAD", {
       cwd: repoPath,
     });
     if (stderr) {
@@ -158,183 +158,151 @@ export function getChangedFiles(
   return undefined;
 }
 
-/*
- * The options for searching related folders
- */
-export type FsSearchOptions = {
-  searchFileRegex: RegExp;
-  treeId: string;
-  specFolder: string;
-};
-
-export type ListTree = {
-  mode: string;
-  type: string;
-  object: string;
-  file: string;
-}[];
-
 /**
- * Search for the related folder of a file
- * @param filePath The file path to search
- * @param options The search options
- * @returns The related folder of the file
+ * Searches upward from a starting path to find the nearest parent directory containing a file matching the given pattern
+ * @param startPath - The directory path to start searching from
+ * @param searchFile - Regular expression pattern to match the target file name
+ * @param specRepoFolder - The root folder of the repository
+ * @param stopAtFolder - Optional boundary directory where the search should stop
+ * @returns The path of the directory containing the matching file, or undefined if not found
  */
-export const searchRelatedFolder = (filePath: string, options: FsSearchOptions) => {
-  let searchPath = filePath;
+export function findParentWithFile(
+  startPath: string,
+  searchFile: RegExp,
+  specRepoFolder: string,
+  stopAtFolder?: string,
+): string | undefined {
+  let currentPath = startPath;
 
-  while (searchPath !== "." && searchPath !== path.dirname(searchPath)) {
-    const fileName = path.basename(searchPath);
-    if (options.searchFileRegex.test(fileName)) {
-      return searchPath;
-    }
-    searchPath = path.dirname(searchPath);
-  }
-
-  return undefined;
-};
-
-/**
- * Search for the shared library folder from peer's folder
- */
-export const searchSharedLibrary = (fileList: string[], options: FsSearchOptions) => {
-  const result: { [relatedFolder: string]: string[] } = {};
-  fileList.sort();
-  let lastFolder: string | undefined = undefined;
-
-  for (const filePath of fileList) {
-    if (lastFolder !== undefined && filePath.startsWith(lastFolder)) {
-      result[lastFolder].push(filePath);
-    }
-    const relatedFolder = searchRelatedFolder(filePath, options);
-    if (relatedFolder === undefined) {
-      continue;
-    }
-    if (result[relatedFolder] === undefined) {
-      result[relatedFolder] = [];
-    }
-    result[relatedFolder].push(filePath);
-    lastFolder = relatedFolder;
-  }
-
-  return result;
-};
-
-/*
- * Search for the related type spec projects from a shared library
- */
-export const searchRelatedTypeSpecProjectBySharedLibrary = async (
-  sharedLibraries: { [relatedFolder: string]: string[] },
-  options: FsSearchOptions,
-) => {
-  const result: { [relatedFolder: string]: string[] } = {};
-  for (const sharedLibrary of Object.keys(sharedLibraries)) {
-    const parentFolder = path.dirname(sharedLibrary);
-    const fileNames = await getFilesInFolder(parentFolder, options);
-    for (const fileName of fileNames) {
-      const filePath = path.join(parentFolder, fileName);
-      const subFileNames = await getFilesInFolder(filePath, options);
-      for (const subFileName of subFileNames) {
-        if (options.searchFileRegex.test(subFileName)) {
-          if (!result[filePath]) {
-            result[filePath] = [];
-          }
-          result[filePath] = [...result[filePath], ...sharedLibraries[sharedLibrary]];
-        }
+  while (currentPath) {
+    try {
+      const absolutePath = path.resolve(specRepoFolder, currentPath);
+      const files = fs.readdirSync(absolutePath);
+      if (files.some((file) => searchFile.test(file.toLowerCase()))) {
+        return currentPath;
       }
+    } catch (error) {
+      logMessage(`Error reading directory: ${currentPath} with ${error}`, LogLevel.Warn);
+      return undefined;
+    }
+    currentPath = path.dirname(currentPath);
+    if (stopAtFolder && currentPath === stopAtFolder) {
+      return undefined;
     }
   }
-  return result;
-};
+  return undefined;
+}
 
 /**
- * Search from the parent folders for a list of files
+ * Searches for parent directories containing specific files for a list of files
+ * Optimizes the search by grouping files in the same directory to avoid redundant searches
+ * @param files - Array of file paths to process
+ * @param options - Search configuration options
+ * @returns Object mapping parent directory paths to arrays of related files
  */
-export const searchRelatedParentFolders = async (fileList: string[], options: FsSearchOptions) => {
-  const result: { [relatedFolder: string]: string[] } = {};
-  fileList.sort();
+export function searchRelatedParentFolders(
+  files: string[],
+  options: { searchFileRegex: RegExp; specRepoFolder: string; stopAtFolder?: string },
+): { [folderPath: string]: string[] } {
+  const result: { [folderPath: string]: string[] } = {};
 
-  for (const filePath of fileList) {
-    const relatedParentFolder = await searchRelatedParentFolder(filePath, options);
-    if (relatedParentFolder === undefined) {
-      continue;
+  // Group files by their directory path to avoid redundant searches
+  // Example: for files ["dir1/a.ts", "dir1/b.ts", "dir2/c.ts"]
+  // Creates: { "dir1": ["dir1/a.ts", "dir1/b.ts"], "dir2": ["dir2/c.ts"] }
+  // eslint-disable-next-line unicorn/no-array-reduce
+  const filesByDir = files.reduce<{ [dir: string]: string[] }>((acc, file) => {
+    const dir = path.dirname(file);
+    if (!acc[dir]) {
+      acc[dir] = [];
     }
-    if (result[relatedParentFolder] === undefined) {
-      result[relatedParentFolder] = [];
-    }
-    result[relatedParentFolder].push(filePath);
-  }
+    acc[dir].push(file);
+    return acc;
+  }, {});
 
-  return result;
-};
-
-/*
- * Search from a nearest parent folder for the specific file pattern
- */
-export const searchRelatedParentFolder = async (filePath: string, options: FsSearchOptions) => {
-  let searchPath = filePath;
-
-  while (searchPath !== ".") {
-    const fileNames = await getFilesInFolder(searchPath, options);
-    for (const fileName of fileNames) {
-      if (options.searchFileRegex.test(fileName)) {
-        return searchPath;
-      }
-    }
-    searchPath = path.dirname(searchPath);
-  }
-
-  return undefined;
-};
-
-/*
- * Get the files in a folder
- */
-const getFilesInFolder = async (
-  searchPath: string,
-  options: FsSearchOptions,
-): Promise<string[]> => {
-  const workingFolder = ".";
-  const workPath = path.resolve(process.cwd(), workingFolder, options.specFolder, searchPath);
-  // Execute the git command using exec
-  const { stdout, stderr } = await execAsync(`git ls-tree ${options.treeId} ${workPath}`);
-  if (stderr) {
-    throw new Error(`Error executing git ls-tree ${options.treeId} ${workPath}: ${stderr}`);
-  }
-  const subTree = gitTreeResultToStringArray(stdout);
-  if (subTree.length === 0 || (subTree.length > 0 && subTree[0].type !== "tree")) {
-    return [];
-  }
-  const entryPath = path.join(workPath, "/");
-  const { stdout: treeEntry, stderr: treeEntryError } = await execAsync(
-    `git ls-tree ${options.treeId} ${entryPath}`,
-  );
-  if (treeEntryError) {
-    throw new Error(
-      `Error executing git ls-tree ${options.treeId} ${entryPath}: ${treeEntryError}`,
+  // Search parent folder only once per unique directory
+  for (const [dir, dirFiles] of Object.entries(filesByDir)) {
+    const parentFolder = findParentWithFile(
+      dir,
+      options.searchFileRegex,
+      options.specRepoFolder,
+      options.stopAtFolder,
     );
+    if (parentFolder) {
+      if (!result[parentFolder]) {
+        result[parentFolder] = [];
+      }
+      result[parentFolder].push(...dirFiles);
+    }
   }
-  const subTreeEntry = gitTreeResultToStringArray(treeEntry);
-  return subTreeEntry.map((item) => item.file.slice(searchPath.length + 1));
-};
 
-/*
- * Convert the git tree result to a string array
+  return result;
+}
+
+/**
+ * Identifies files that are part of a shared library based on their directory names
+ * @param files - Array of file paths to check
+ * @param options - Search configuration options
+ * @returns Array of files that belong to shared libraries
  */
-export function gitTreeResultToStringArray(treeResult: string): ListTree {
-  if (treeResult === "") {
-    return [];
-  }
-  const lines = treeResult.trim().split("\n");
-  const resultArray = lines.map((line) => {
-    const [mode, type, object, file] = line.split(/\s+/);
-    return {
-      mode,
-      type,
-      object,
-      file,
-    };
+export function searchSharedLibrary(
+  files: string[],
+  options: { searchFileRegex: RegExp; specRepoFolder: string },
+): string[] {
+  return files.filter((file) => {
+    const dirname = path.dirname(file);
+    return options.searchFileRegex.test(dirname);
   });
+}
 
-  return resultArray;
+/**
+ * Finds peer TypeSpec projects for shared libraries and maps them to their source libraries
+ * Assumes all shared libraries are from the same parent folder
+ * @param sharedLibraries - Array of shared library file paths (all from same parent)
+ * @param options - Search configuration options
+ * @returns Object mapping project directory paths to arrays of related shared library files
+ */
+export function searchRelatedTypeSpecProjectBySharedLibrary(
+  sharedLibraries: string[],
+  options: { searchFileRegex: RegExp; specRepoFolder: string },
+): { [folderPath: string]: string[] } {
+  if (sharedLibraries.length === 0) {
+    return {};
+  }
+
+  const result: { [folderPath: string]: string[] } = {};
+  const managementSuffix = ".Management";
+
+  // Get parent directory from first library (all libraries share same parent)
+  const parentDir = path.dirname(path.dirname(sharedLibraries[0]));
+  const sourceLibDir = path.dirname(sharedLibraries[0]);
+
+  try {
+    const absoluteParentPath = path.resolve(options.specRepoFolder, parentDir);
+    const peerDirs = fs.readdirSync(absoluteParentPath, { withFileTypes: true });
+
+    // Find all peer directories containing TypeSpec projects
+    for (const peerDir of peerDirs) {
+      if (
+        !peerDir.isDirectory() ||
+        peerDir.name.endsWith(managementSuffix) ||
+        path.join(parentDir, peerDir.name) === sourceLibDir
+      ) {
+        continue;
+      }
+
+      const peerPath = path.join(parentDir, peerDir.name);
+      try {
+        const peerFiles = fs.readdirSync(path.resolve(options.specRepoFolder, peerPath));
+        if (peerFiles.some((file) => options.searchFileRegex.test(file.toLowerCase()))) {
+          result[peerPath] = sharedLibraries;
+        }
+      } catch {
+        logMessage(`Error reading directory: ${peerPath}`, LogLevel.Warn);
+      }
+    }
+  } catch {
+    logMessage(`Error reading directory: ${parentDir}`, LogLevel.Warn);
+  }
+
+  return result;
 }
