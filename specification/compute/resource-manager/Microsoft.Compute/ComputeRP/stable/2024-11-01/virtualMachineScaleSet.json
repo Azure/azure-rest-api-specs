@@ -3080,10 +3080,11 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation. 'InstanceView' will retrieve the instance view of the virtual machine. 'UserData' will retrieve the UserData of the virtual machine.",
+            "description": "The expand expression to apply on the operation. 'InstanceView' will retrieve the instance view of the virtual machine. 'UserData' will retrieve the UserData of the virtual machine. 'resiliencyView' will retrieve the instance view of the Virtual machine (if applicable) and include 'resilientVMDeletionStatus' as part of it.",
             "enum": [
               "instanceView",
-              "userData"
+              "userData",
+              "resiliencyView"
             ],
             "x-ms-enum": {
               "name": "InstanceViewTypes",
@@ -3117,6 +3118,9 @@
           },
           "Get VM scale set VM with VMSizeProperties": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_Get_WithVMSizeProperties.json"
+          },
+          "Get VM scale set VM with ResiliencyView": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_Get_WithResilientVMDeletionStatus.json"
           }
         }
       }
@@ -3252,6 +3256,9 @@
           },
           "VirtualMachineScaleSetVM_List_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_List_MinimumSet_Gen.json"
+          },
+          "List Vmss VMs with ResilientVMDeletionStatus.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_List_WithResiliencyView.json"
           }
         }
       }
@@ -6015,6 +6022,20 @@
         "hardwareProfile": {
           "$ref": "./computeRPCommon.json#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
+        },
+        "resilientVMDeletionStatus": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "InProgress",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "resilientVMDeletionStatus",
+            "modelAsString": true
+          },
+          "description": "Specifies the resilient VM deletion status for the virtual machine."
         },
         "storageProfile": {
           "$ref": "./computeRPCommon.json#/definitions/StorageProfile",
