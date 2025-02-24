@@ -3,6 +3,13 @@ import { vi } from "vitest";
 // Partial mock of `github` parameter passed into github-script actions
 export function createMockGithub() {
   return {
+    paginate: async (func, params) => {
+      // Assume all test data fits in single page
+      const data = (await func(params)).data;
+
+      // Simulate normalization performed by real impl
+      return Array.isArray(data) ? data : data[Object.keys(data)[0]];
+    },
     rest: {
       actions: {
         listWorkflowRunArtifacts: vi
@@ -22,6 +29,11 @@ export function createMockGithub() {
       },
       pulls: {
         get: vi.fn(),
+      },
+      repos: {
+        listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
+          data: [],
+        }),
       },
     },
   };
