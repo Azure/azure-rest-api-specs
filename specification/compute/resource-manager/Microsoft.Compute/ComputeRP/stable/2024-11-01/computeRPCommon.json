@@ -1168,6 +1168,29 @@
       },
       "description": "Specifies the Managed Identity used by ADE to get access token for keyvault operations."
     },
+    "HostEndpointSettings": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Specifies the execution mode. In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints. In Enforce mode, the system will enforce the access control and it is the recommended mode of operation.",
+          "enum": [
+            "Audit",
+            "Enforce",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "Modes",
+            "modelAsString": true
+          }
+        },
+        "inVMAccessControlProfileReferenceId": {
+          "type": "string",
+          "description": "Specifies the InVMAccessControlProfileVersion resource id in the format of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}"
+        }
+      },
+      "description": "Specifies particular host endpoint settings."
+    },
     "ProxyAgentSettings": {
       "type": "object",
       "properties": {
@@ -1177,7 +1200,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Specifies the mode that ProxyAgent will execute on if the feature is enabled. ProxyAgent will start to audit or monitor but not enforce access control over requests to host endpoints in Audit mode, while in Enforce mode it will enforce access control. The default value is Enforce mode.",
+          "description": "Specifies the mode that ProxyAgent will execute on. Warning: this property has been deprecated, please specify 'mode' under particular hostendpoint setting.",
           "enum": [
             "Audit",
             "Enforce"
@@ -1190,10 +1213,18 @@
         "keyIncarnationId": {
           "type": "integer",
           "format": "int32",
-          "description": "Increase the value of this property allows user to reset the key used for securing communication channel between guest and host."
+          "description": "Increase the value of this property allows users to reset the key used for securing communication channel between guest and host."
+        },
+        "wireServer": {
+          "$ref": "#/definitions/HostEndpointSettings",
+          "description": "Specifies the Wire Server endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01."
+        },
+        "imds": {
+          "$ref": "#/definitions/HostEndpointSettings",
+          "description": "Specifies the IMDS endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01."
         }
       },
-      "description": "Specifies ProxyAgent settings while creating the virtual machine. Minimum api-version: 2023-09-01."
+      "description": "Specifies ProxyAgent settings for the virtual machine or virtual machine scale set. Minimum api-version: 2023-09-01."
     },
     "SecurityProfile": {
       "properties": {
