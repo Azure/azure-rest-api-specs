@@ -706,9 +706,13 @@
           "type": "string",
           "description": "The recipient Email Address"
         },
+        "internetMessageId": {
+          "type": "string",
+          "description": "The Internet Message Id of the email that has been sent"
+        },
         "messageId": {
           "type": "string",
-          "description": "The Id of the email been sent"
+          "description": "The Id of the email that has been sent"
         },
         "status": {
           "$ref": "#/definitions/AcsEmailDeliveryReportStatus",
@@ -725,6 +729,9 @@
         }
       },
       "required": [
+        "sender",
+        "recipient",
+        "internetMessageId",
         "status",
         "deliveryStatusDetails",
         "deliveryAttemptTimestamp"
@@ -785,6 +792,10 @@
         "statusMessage": {
           "type": "string",
           "description": "Detailed status message"
+        },
+        "recipientMailServerHostName": {
+          "type": "string",
+          "description": "Recipient mail server host name"
         }
       }
     },
@@ -1087,8 +1098,9 @@
         }
       },
       "required": [
-        "receivedTimeStamp",
-        "error"
+        "from",
+        "to",
+        "receivedTimeStamp"
       ]
     },
     "AcsMessageInteractiveButtonReplyContent": {
@@ -1125,9 +1137,7 @@
         }
       },
       "required": [
-        "type",
-        "buttonReply",
-        "listReply"
+        "type"
       ]
     },
     "AcsMessageInteractiveListReplyContent": {
@@ -1155,22 +1165,47 @@
       "properties": {
         "mimeType": {
           "type": "string",
-          "description": "The MIME type of the file this media represents"
+          "description": "Required. The MIME type of the file this media represents"
         },
         "id": {
           "type": "string",
-          "description": "The media identifier",
+          "description": "Required. The media identifier",
           "x-ms-client-name": "mediaId"
         },
         "fileName": {
           "type": "string",
-          "description": "The filename of the underlying media file as specified when uploaded"
+          "description": "Optional. The filename of the underlying media file as specified when uploaded"
         },
         "caption": {
           "type": "string",
-          "description": "The caption for the media object, if supported and provided"
+          "description": "Optional. The caption for the media object, if supported and provided"
+        },
+        "animated": {
+          "type": "boolean",
+          "description": "Optional. Set to true if the sticker is animated; false otherwise."
         }
-      }
+      },
+      "required": [
+        "mimeType",
+        "id"
+      ]
+    },
+    "AcsMessageReactionContent": {
+      "type": "object",
+      "description": "Message Reaction Content",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "Required. WhatsApp message ID of the message that the emoji is applied to"
+        },
+        "emoji": {
+          "type": "string",
+          "description": "Optional. Unicode escape sequence of the emoji."
+        }
+      },
+      "required": [
+        "messageId"
+      ]
     },
     "AcsMessageReceivedEventData": {
       "type": "object",
@@ -1178,38 +1213,47 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "The message content"
+          "description": "Optional. The message content"
+        },
+        "messageId": {
+          "type": "string",
+          "description": "Optional. Message ID. Format is Guid as string."
         },
         "channelType": {
           "$ref": "#/definitions/AcsMessageChannelKind",
-          "description": "The message channel type",
+          "description": "Required. The message channel type",
           "x-ms-client-name": "channelKind"
+        },
+        "messageType": {
+          "type": "string",
+          "description": "Required. Whatsapp message type"
         },
         "media": {
           "$ref": "#/definitions/AcsMessageMediaContent",
-          "description": "The received message media content",
+          "description": "Optional. The received message media content",
           "x-ms-client-name": "mediaContent"
+        },
+        "reaction": {
+          "$ref": "#/definitions/AcsMessageReactionContent",
+          "description": "Optional. The received message reaction content"
         },
         "context": {
           "$ref": "#/definitions/AcsMessageContext",
-          "description": "The received message context"
+          "description": "Optional. The received message context"
         },
         "button": {
           "$ref": "#/definitions/AcsMessageButtonContent",
-          "description": "The received message button content"
+          "description": "Optional. The received message button content"
         },
         "interactive": {
           "$ref": "#/definitions/AcsMessageInteractiveContent",
-          "description": "The received message interactive content",
+          "description": "Optional. The received message interactive content",
           "x-ms-client-name": "interactiveContent"
         }
       },
       "required": [
         "channelType",
-        "media",
-        "context",
-        "button",
-        "interactive"
+        "messageType"
       ],
       "allOf": [
         {
@@ -2482,10 +2526,16 @@
           "type": "string",
           "format": "date-time",
           "description": "The time at which the SMS was received"
+        },
+        "segmentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of segments in the message"
         }
       },
       "required": [
-        "receivedTimestamp"
+        "receivedTimestamp",
+        "segmentCount"
       ],
       "allOf": [
         {
@@ -2548,7 +2598,7 @@
         }
       },
       "required": [
-        "specification"
+        "title"
       ]
     },
     "ApiCenterApiDefinitionUpdatedEventData": {
@@ -2569,7 +2619,7 @@
         }
       },
       "required": [
-        "specification"
+        "title"
       ]
     },
     "ApiCenterApiSpecification": {
@@ -2584,7 +2634,10 @@
           "type": "string",
           "description": "Specification version."
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "ApiManagementApiCreatedEventData": {
       "type": "object",
@@ -3415,9 +3468,11 @@
         }
       },
       "required": [
+        "id",
         "timestamp",
-        "target",
-        "connectedRegistry"
+        "action",
+        "location",
+        "target"
       ]
     },
     "ContainerRegistryArtifactEventTarget": {
@@ -3453,7 +3508,11 @@
           "type": "string",
           "description": "The version of the artifact."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "repository"
+      ]
     },
     "ContainerRegistryChartDeletedEventData": {
       "type": "object",
@@ -3491,7 +3550,10 @@
           "type": "string",
           "description": "The name of the connected registry that generated this event."
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "ContainerRegistryEventData": {
       "type": "object",
@@ -3536,12 +3598,11 @@
         }
       },
       "required": [
+        "id",
         "timestamp",
-        "target",
-        "request",
-        "actor",
-        "source",
-        "connectedRegistry"
+        "action",
+        "location",
+        "target"
       ]
     },
     "ContainerRegistryEventRequest": {
@@ -3568,7 +3629,12 @@
           "type": "string",
           "description": "The user agent header of the request."
         }
-      }
+      },
+      "required": [
+        "id",
+        "host",
+        "method"
+      ]
     },
     "ContainerRegistryEventSource": {
       "type": "object",
@@ -3618,7 +3684,11 @@
           "type": "string",
           "description": "The tag name."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "repository"
+      ]
     },
     "ContainerRegistryImageDeletedEventData": {
       "type": "object",
@@ -3744,6 +3814,7 @@
         }
       },
       "required": [
+        "serialNumber",
         "stageName",
         "stageTime"
       ]
@@ -3767,6 +3838,7 @@
         }
       },
       "required": [
+        "serialNumber",
         "stageName",
         "stageTime"
       ]
@@ -3790,6 +3862,7 @@
         }
       },
       "required": [
+        "serialNumber",
         "stageName",
         "stageTime"
       ]
@@ -3832,7 +3905,10 @@
           "type": "string",
           "description": "Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number."
         }
-      }
+      },
+      "required": [
+        "sequenceNumber"
+      ]
     },
     "DeviceConnectionStateEventProperties": {
       "type": "object",
@@ -3856,6 +3932,8 @@
         }
       },
       "required": [
+        "deviceId",
+        "hubName",
         "deviceConnectionStateEventInfo"
       ]
     },
@@ -3877,6 +3955,8 @@
         }
       },
       "required": [
+        "deviceId",
+        "hubName",
         "twin"
       ]
     },
@@ -3962,7 +4042,16 @@
         }
       },
       "required": [
+        "authenticationType",
+        "cloudToDeviceMessageCount",
+        "connectionState",
+        "deviceId",
+        "etag",
+        "lastActivityTime",
         "properties",
+        "status",
+        "statusUpdateTime",
+        "version",
         "x509Thumbprint"
       ]
     },
@@ -3996,7 +4085,11 @@
           "type": "string",
           "description": "Secondary thumbprint for the x509 certificate."
         }
-      }
+      },
+      "required": [
+        "primaryThumbprint",
+        "secondaryThumbprint"
+      ]
     },
     "DeviceTwinMetadata": {
       "type": "object",
@@ -4007,7 +4100,10 @@
           "description": "The ISO8601 timestamp of the last time the properties were updated.",
           "x-ms-client-name": "$lastUpdated"
         }
-      }
+      },
+      "required": [
+        "lastUpdated"
+      ]
     },
     "DeviceTwinProperties": {
       "type": "object",
@@ -4026,7 +4122,8 @@
         }
       },
       "required": [
-        "metadata"
+        "metadata",
+        "version"
       ]
     },
     "EventGridMQTTClientCreatedOrUpdatedEventData": {
@@ -4170,7 +4267,12 @@
           "type": "string",
           "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
         }
-      }
+      },
+      "required": [
+        "clientAuthenticationName",
+        "clientName",
+        "namespaceName"
+      ]
     },
     "EventGridMQTTClientSessionConnectedEventData": {
       "type": "object",
@@ -4186,6 +4288,10 @@
           "description": "A number that helps indicate order of MQTT client session connected or\ndisconnected events. Latest event will have a sequence number that is higher\nthan the previous event."
         }
       },
+      "required": [
+        "clientSessionName",
+        "sequenceNumber"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EventGridMQTTClientEventData"
@@ -4211,6 +4317,8 @@
         }
       },
       "required": [
+        "clientSessionName",
+        "sequenceNumber",
         "disconnectionReason"
       ],
       "allOf": [
@@ -4325,7 +4433,15 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName",
+        "sequenceNumber"
+      ]
     },
     "HealthcareDicomImageDeletedEventData": {
       "type": "object",
@@ -4356,7 +4472,15 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName",
+        "sequenceNumber"
+      ]
     },
     "HealthcareDicomImageUpdatedEventData": {
       "type": "object",
@@ -4387,7 +4511,15 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName",
+        "sequenceNumber"
+      ]
     },
     "HealthcareFhirResourceCreatedEventData": {
       "type": "object",
@@ -4416,7 +4548,10 @@
         }
       },
       "required": [
-        "resourceType"
+        "resourceType",
+        "resourceFhirAccount",
+        "resourceFhirId",
+        "resourceVersionId"
       ]
     },
     "HealthcareFhirResourceDeletedEventData": {
@@ -4446,7 +4581,10 @@
         }
       },
       "required": [
-        "resourceType"
+        "resourceType",
+        "resourceFhirAccount",
+        "resourceFhirId",
+        "resourceVersionId"
       ]
     },
     "HealthcareFhirResourceType": {
@@ -5454,7 +5592,10 @@
         }
       },
       "required": [
-        "resourceType"
+        "resourceType",
+        "resourceFhirAccount",
+        "resourceFhirId",
+        "resourceVersionId"
       ]
     },
     "IotHubDeviceConnectedEventData": {
@@ -5536,7 +5677,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultCertificateExpiredEventData": {
       "type": "object",
@@ -5572,7 +5722,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultCertificateNearExpiryEventData": {
       "type": "object",
@@ -5608,7 +5767,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultCertificateNewVersionCreatedEventData": {
       "type": "object",
@@ -5644,7 +5812,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultKeyExpiredEventData": {
       "type": "object",
@@ -5680,7 +5857,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultKeyNearExpiryEventData": {
       "type": "object",
@@ -5716,7 +5902,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultKeyNewVersionCreatedEventData": {
       "type": "object",
@@ -5752,7 +5947,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultSecretExpiredEventData": {
       "type": "object",
@@ -5788,7 +5992,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultSecretNearExpiryEventData": {
       "type": "object",
@@ -5824,7 +6037,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultSecretNewVersionCreatedEventData": {
       "type": "object",
@@ -5860,7 +6082,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "MachineLearningServicesDatasetDriftDetectedEventData": {
       "type": "object",
@@ -6084,7 +6315,10 @@
         }
       },
       "required": [
-        "geometries"
+        "expiredGeofenceGeometryId",
+        "geometries",
+        "invalidPeriodGeofenceGeometryId",
+        "isEventPublished"
       ]
     },
     "MapsGeofenceExitedEventData": {
@@ -6127,7 +6361,14 @@
           "type": "string",
           "description": "The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API."
         }
-      }
+      },
+      "required": [
+        "deviceId",
+        "distance",
+        "geometryId",
+        "nearestLat",
+        "nearestLon"
+      ]
     },
     "MapsGeofenceResultEventData": {
       "type": "object",
@@ -6137,860 +6378,6 @@
           "$ref": "#/definitions/MapsGeofenceEventProperties"
         }
       ]
-    },
-    "MediaJobCanceledEventData": {
-      "type": "object",
-      "description": "Job canceled event data. Schema of the data property of an EventGridEvent for a\nMicrosoft.Media.JobCanceled event.",
-      "properties": {
-        "outputs": {
-          "type": "array",
-          "description": "Gets the Job outputs.",
-          "items": {
-            "$ref": "#/definitions/MediaJobOutput"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "outputs"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobStateChangeEventData"
-        }
-      ]
-    },
-    "MediaJobCancelingEventData": {
-      "type": "object",
-      "description": "Job canceling event data. Schema of the data property of an EventGridEvent for\na Microsoft.Media.JobCanceling event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobStateChangeEventData"
-        }
-      ]
-    },
-    "MediaJobError": {
-      "type": "object",
-      "description": "Details of JobOutput errors.",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/MediaJobErrorCode",
-          "description": "Error code describing the error."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable language-dependent representation of the error."
-        },
-        "category": {
-          "$ref": "#/definitions/MediaJobErrorCategory",
-          "description": "Helps with categorization of errors."
-        },
-        "retry": {
-          "$ref": "#/definitions/MediaJobRetry",
-          "description": "Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/MediaJobErrorDetail"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "code",
-        "category",
-        "retry",
-        "details"
-      ]
-    },
-    "MediaJobErrorCategory": {
-      "type": "string",
-      "description": "Error categories for Media Job Errors.",
-      "enum": [
-        "Service",
-        "Download",
-        "Upload",
-        "Configuration",
-        "Content",
-        "Account"
-      ],
-      "x-ms-enum": {
-        "name": "MediaJobErrorCategory",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Service",
-            "value": "Service",
-            "description": "The error is service related."
-          },
-          {
-            "name": "Download",
-            "value": "Download",
-            "description": "The error is download related."
-          },
-          {
-            "name": "Upload",
-            "value": "Upload",
-            "description": "The error is upload related."
-          },
-          {
-            "name": "Configuration",
-            "value": "Configuration",
-            "description": "The error is configuration related."
-          },
-          {
-            "name": "Content",
-            "value": "Content",
-            "description": "The error is related to data in the input files."
-          },
-          {
-            "name": "Account",
-            "value": "Account",
-            "description": "The error is related to account information."
-          }
-        ]
-      }
-    },
-    "MediaJobErrorCode": {
-      "type": "string",
-      "description": "Media Job Error Codes.",
-      "enum": [
-        "ServiceError",
-        "ServiceTransientError",
-        "DownloadNotAccessible",
-        "DownloadTransientError",
-        "UploadNotAccessible",
-        "UploadTransientError",
-        "ConfigurationUnsupported",
-        "ContentMalformed",
-        "ContentUnsupported",
-        "IdentityUnsupported"
-      ],
-      "x-ms-enum": {
-        "name": "MediaJobErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ServiceError",
-            "value": "ServiceError",
-            "description": "Fatal service error, please contact support."
-          },
-          {
-            "name": "ServiceTransientError",
-            "value": "ServiceTransientError",
-            "description": "Transient error, please retry, if retry is unsuccessful, please contact support."
-          },
-          {
-            "name": "DownloadNotAccessible",
-            "value": "DownloadNotAccessible",
-            "description": "While trying to download the input files, the files were not accessible, please check the availability of the source."
-          },
-          {
-            "name": "DownloadTransientError",
-            "value": "DownloadTransientError",
-            "description": "While trying to download the input files, there was an issue during transfer (storage service, network errors), see details and check your source."
-          },
-          {
-            "name": "UploadNotAccessible",
-            "value": "UploadNotAccessible",
-            "description": "While trying to upload the output files, the destination was not reachable, please check the availability of the destination."
-          },
-          {
-            "name": "UploadTransientError",
-            "value": "UploadTransientError",
-            "description": "While trying to upload the output files, there was an issue during transfer (storage service, network errors), see details and check your destination."
-          },
-          {
-            "name": "ConfigurationUnsupported",
-            "value": "ConfigurationUnsupported",
-            "description": "There was a problem with the combination of input files and the configuration settings applied, fix the configuration settings and retry with the same input, or change input to match the configuration."
-          },
-          {
-            "name": "ContentMalformed",
-            "value": "ContentMalformed",
-            "description": "There was a problem with the input content (for example: zero byte files, or corrupt/non-decodable files), check the input files."
-          },
-          {
-            "name": "ContentUnsupported",
-            "value": "ContentUnsupported",
-            "description": "There was a problem with the format of the input (not valid media file, or an unsupported file/codec), check the validity of the input files."
-          },
-          {
-            "name": "IdentityUnsupported",
-            "value": "IdentityUnsupported",
-            "description": "There is an error verifying to the account identity. Check and fix the identity configurations and retry. If unsuccessful, please contact support."
-          }
-        ]
-      }
-    },
-    "MediaJobErrorDetail": {
-      "type": "object",
-      "description": "Details of JobOutput errors.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Code describing the error detail."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        }
-      }
-    },
-    "MediaJobErroredEventData": {
-      "type": "object",
-      "description": "Job error state event data. Schema of the data property of an EventGridEvent\nfor a Microsoft.Media.JobErrored event.",
-      "properties": {
-        "outputs": {
-          "type": "array",
-          "description": "Gets the Job outputs.",
-          "items": {
-            "$ref": "#/definitions/MediaJobOutput"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "outputs"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobStateChangeEventData"
-        }
-      ]
-    },
-    "MediaJobFinishedEventData": {
-      "type": "object",
-      "description": "Job finished event data. Schema of the data property of an EventGridEvent for a\nMicrosoft.Media.JobFinished event.",
-      "properties": {
-        "outputs": {
-          "type": "array",
-          "description": "Gets the Job outputs.",
-          "items": {
-            "$ref": "#/definitions/MediaJobOutput"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "outputs"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobStateChangeEventData"
-        }
-      ]
-    },
-    "MediaJobOutput": {
-      "type": "object",
-      "description": "The event data for a Job output.",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "The discriminator for derived types."
-        },
-        "error": {
-          "$ref": "#/definitions/MediaJobError",
-          "description": "Gets the Job output error."
-        },
-        "label": {
-          "type": "string",
-          "description": "Gets the Job output label."
-        },
-        "progress": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the Job output progress."
-        },
-        "state": {
-          "$ref": "#/definitions/MediaJobState",
-          "description": "Gets the Job output state."
-        }
-      },
-      "discriminator": "@odata.type",
-      "required": [
-        "@odata.type",
-        "error",
-        "progress",
-        "state"
-      ]
-    },
-    "MediaJobOutputAsset": {
-      "type": "object",
-      "description": "The event data for a Job output asset.",
-      "properties": {
-        "assetName": {
-          "type": "string",
-          "description": "Gets the Job output asset name."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobOutput"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputAsset"
-    },
-    "MediaJobOutputCanceledEventData": {
-      "type": "object",
-      "description": "Job output canceled event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputCanceled event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
-        }
-      ]
-    },
-    "MediaJobOutputCancelingEventData": {
-      "type": "object",
-      "description": "Job output canceling event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputCanceling event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
-        }
-      ]
-    },
-    "MediaJobOutputErroredEventData": {
-      "type": "object",
-      "description": "Job output error event data. Schema of the data property of an EventGridEvent\nfor a Microsoft.Media.JobOutputErrored event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
-        }
-      ]
-    },
-    "MediaJobOutputFinishedEventData": {
-      "type": "object",
-      "description": "Job output finished event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputFinished event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
-        }
-      ]
-    },
-    "MediaJobOutputProcessingEventData": {
-      "type": "object",
-      "description": "Job output processing event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputProcessing event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
-        }
-      ]
-    },
-    "MediaJobOutputProgressEventData": {
-      "type": "object",
-      "description": "Job Output Progress Event Data. Schema of the Data property of an\n  EventGridEvent for a Microsoft.Media.JobOutputProgress event.",
-      "properties": {
-        "label": {
-          "type": "string",
-          "description": "Gets the Job output label."
-        },
-        "progress": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the Job output progress."
-        },
-        "jobCorrelationData": {
-          "type": "object",
-          "description": "Gets the Job correlation data.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "jobCorrelationData"
-      ]
-    },
-    "MediaJobOutputScheduledEventData": {
-      "type": "object",
-      "description": "Job output scheduled event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputScheduled event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
-        }
-      ]
-    },
-    "MediaJobOutputStateChangeEventData": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\n  Microsoft.Media.JobOutputStateChange event.",
-      "properties": {
-        "previousState": {
-          "$ref": "#/definitions/MediaJobState",
-          "description": "The previous state of the Job."
-        },
-        "output": {
-          "$ref": "#/definitions/MediaJobOutput",
-          "description": "Gets the output."
-        },
-        "jobCorrelationData": {
-          "type": "object",
-          "description": "Gets the Job correlation data.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "previousState",
-        "output",
-        "jobCorrelationData"
-      ]
-    },
-    "MediaJobProcessingEventData": {
-      "type": "object",
-      "description": "Job processing event data. Schema of the data property of an EventGridEvent for\na Microsoft.Media.JobProcessing event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobStateChangeEventData"
-        }
-      ]
-    },
-    "MediaJobRetry": {
-      "type": "string",
-      "description": "Media Job Retry Options.",
-      "enum": [
-        "DoNotRetry",
-        "MayRetry"
-      ],
-      "x-ms-enum": {
-        "name": "MediaJobRetry",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DoNotRetry",
-            "value": "DoNotRetry",
-            "description": "Issue needs to be investigated and then the job resubmitted with corrections or retried once the underlying issue has been corrected."
-          },
-          {
-            "name": "MayRetry",
-            "value": "MayRetry",
-            "description": "Issue may be resolved after waiting for a period of time and resubmitting the same Job."
-          }
-        ]
-      }
-    },
-    "MediaJobScheduledEventData": {
-      "type": "object",
-      "description": "Job scheduled event data. Schema of the data property of an EventGridEvent for\na Microsoft.Media.JobScheduled event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaJobStateChangeEventData"
-        }
-      ]
-    },
-    "MediaJobState": {
-      "type": "string",
-      "description": "State of a Media Job.",
-      "enum": [
-        "Canceled",
-        "Canceling",
-        "Error",
-        "Finished",
-        "Processing",
-        "Queued",
-        "Scheduled"
-      ],
-      "x-ms-enum": {
-        "name": "MediaJobState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The job was canceled. This is a final state for the job."
-          },
-          {
-            "name": "Canceling",
-            "value": "Canceling",
-            "description": "The job is in the process of being canceled. This is a transient state for the job."
-          },
-          {
-            "name": "Error",
-            "value": "Error",
-            "description": "The job has encountered an error. This is a final state for the job."
-          },
-          {
-            "name": "Finished",
-            "value": "Finished",
-            "description": "The job is finished. This is a final state for the job."
-          },
-          {
-            "name": "Processing",
-            "value": "Processing",
-            "description": "The job is processing. This is a transient state for the job."
-          },
-          {
-            "name": "Queued",
-            "value": "Queued",
-            "description": "The job is in a queued state, waiting for resources to become available. This is a transient state."
-          },
-          {
-            "name": "Scheduled",
-            "value": "Scheduled",
-            "description": "The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states."
-          }
-        ]
-      }
-    },
-    "MediaJobStateChangeEventData": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\n  Microsoft.Media.JobStateChange event.",
-      "properties": {
-        "previousState": {
-          "$ref": "#/definitions/MediaJobState",
-          "description": "The previous state of the Job."
-        },
-        "state": {
-          "$ref": "#/definitions/MediaJobState",
-          "description": "The new state of the Job."
-        },
-        "correlationData": {
-          "type": "object",
-          "description": "Gets the Job correlation data.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "previousState",
-        "state",
-        "correlationData"
-      ]
-    },
-    "MediaLiveEventChannelArchiveHeartbeatEventData": {
-      "type": "object",
-      "description": "Channel Archive heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventChannelArchiveHeartbeat event.",
-      "properties": {
-        "channelLatencyMs": {
-          "type": "string",
-          "description": "Gets the channel latency in ms."
-        },
-        "latencyResultCode": {
-          "type": "string",
-          "description": "Gets the latency result code."
-        }
-      },
-      "required": [
-        "channelLatencyMs",
-        "latencyResultCode"
-      ]
-    },
-    "MediaLiveEventConnectionRejectedEventData": {
-      "type": "object",
-      "description": "Encoder connection rejected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventConnectionRejected event.",
-      "properties": {
-        "ingestUrl": {
-          "type": "string",
-          "description": "Gets the ingest URL provided by the live event."
-        },
-        "streamId": {
-          "type": "string",
-          "description": "Gets the stream Id."
-        },
-        "encoderIp": {
-          "type": "string",
-          "description": "Gets the remote IP."
-        },
-        "encoderPort": {
-          "type": "string",
-          "description": "Gets the remote port."
-        },
-        "resultCode": {
-          "type": "string",
-          "description": "Gets the result code."
-        }
-      }
-    },
-    "MediaLiveEventEncoderConnectedEventData": {
-      "type": "object",
-      "description": "Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderConnected event.",
-      "properties": {
-        "ingestUrl": {
-          "type": "string",
-          "description": "Gets the ingest URL provided by the live event."
-        },
-        "streamId": {
-          "type": "string",
-          "description": "Gets the stream Id."
-        },
-        "encoderIp": {
-          "type": "string",
-          "description": "Gets the remote IP."
-        },
-        "encoderPort": {
-          "type": "string",
-          "description": "Gets the remote port."
-        }
-      }
-    },
-    "MediaLiveEventEncoderDisconnectedEventData": {
-      "type": "object",
-      "description": "Encoder disconnected event data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderDisconnected event.",
-      "properties": {
-        "ingestUrl": {
-          "type": "string",
-          "description": "Gets the ingest URL provided by the live event."
-        },
-        "streamId": {
-          "type": "string",
-          "description": "Gets the stream Id."
-        },
-        "encoderIp": {
-          "type": "string",
-          "description": "Gets the remote IP."
-        },
-        "encoderPort": {
-          "type": "string",
-          "description": "Gets the remote port."
-        },
-        "resultCode": {
-          "type": "string",
-          "description": "Gets the result code."
-        }
-      }
-    },
-    "MediaLiveEventIncomingDataChunkDroppedEventData": {
-      "type": "object",
-      "description": "Ingest fragment dropped event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingDataChunkDropped event.",
-      "properties": {
-        "timestamp": {
-          "type": "string",
-          "description": "Gets the timestamp of the data chunk dropped."
-        },
-        "trackType": {
-          "type": "string",
-          "description": "Gets the type of the track (Audio / Video)."
-        },
-        "bitrate": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the bitrate of the track."
-        },
-        "timescale": {
-          "type": "string",
-          "description": "Gets the timescale of the Timestamp."
-        },
-        "resultCode": {
-          "type": "string",
-          "description": "Gets the result code for fragment drop operation."
-        },
-        "trackName": {
-          "type": "string",
-          "description": "Gets the name of the track for which fragment is dropped."
-        }
-      }
-    },
-    "MediaLiveEventIncomingStreamReceivedEventData": {
-      "type": "object",
-      "description": "Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamReceived event.",
-      "properties": {
-        "ingestUrl": {
-          "type": "string",
-          "description": "Gets the ingest URL provided by the live event."
-        },
-        "trackType": {
-          "type": "string",
-          "description": "Gets the type of the track (Audio / Video)."
-        },
-        "trackName": {
-          "type": "string",
-          "description": "Gets the track name."
-        },
-        "bitrate": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the bitrate of the track."
-        },
-        "encoderIp": {
-          "type": "string",
-          "description": "Gets the remote IP."
-        },
-        "encoderPort": {
-          "type": "string",
-          "description": "Gets the remote port."
-        },
-        "timestamp": {
-          "type": "string",
-          "description": "Gets the first timestamp of the data chunk received."
-        },
-        "duration": {
-          "type": "string",
-          "description": "Gets the duration of the first data chunk."
-        },
-        "timescale": {
-          "type": "string",
-          "description": "Gets the timescale in which timestamp is represented."
-        }
-      }
-    },
-    "MediaLiveEventIncomingStreamsOutOfSyncEventData": {
-      "type": "object",
-      "description": "Incoming streams out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamsOutOfSync event.",
-      "properties": {
-        "minLastTimestamp": {
-          "type": "string",
-          "description": "Gets the minimum last timestamp received."
-        },
-        "typeOfStreamWithMinLastTimestamp": {
-          "type": "string",
-          "description": "Gets the type of stream with minimum last timestamp."
-        },
-        "maxLastTimestamp": {
-          "type": "string",
-          "description": "Gets the maximum timestamp among all the tracks (audio or video)."
-        },
-        "typeOfStreamWithMaxLastTimestamp": {
-          "type": "string",
-          "description": "Gets the type of stream with maximum last timestamp."
-        },
-        "timescaleOfMinLastTimestamp": {
-          "type": "string",
-          "description": "Gets the timescale in which \\\"MinLastTimestamp\\\" is represented."
-        },
-        "timescaleOfMaxLastTimestamp": {
-          "type": "string",
-          "description": "Gets the timescale in which \\\"MaxLastTimestamp\\\" is represented."
-        }
-      }
-    },
-    "MediaLiveEventIncomingVideoStreamsOutOfSyncEventData": {
-      "type": "object",
-      "description": "Incoming video stream out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingVideoStreamsOutOfSync event.",
-      "properties": {
-        "firstTimestamp": {
-          "type": "string",
-          "description": "Gets the first timestamp received for one of the quality levels."
-        },
-        "firstDuration": {
-          "type": "string",
-          "description": "Gets the duration of the data chunk with first timestamp."
-        },
-        "secondTimestamp": {
-          "type": "string",
-          "description": "Gets the timestamp received for some other quality levels."
-        },
-        "secondDuration": {
-          "type": "string",
-          "description": "Gets the duration of the data chunk with second timestamp."
-        },
-        "timescale": {
-          "type": "string",
-          "description": "Gets the timescale in which both the timestamps and durations are represented."
-        }
-      }
-    },
-    "MediaLiveEventIngestHeartbeatEventData": {
-      "type": "object",
-      "description": "Ingest heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIngestHeartbeat event.",
-      "properties": {
-        "trackType": {
-          "type": "string",
-          "description": "Gets the type of the track (Audio / Video)."
-        },
-        "trackName": {
-          "type": "string",
-          "description": "Gets the track name."
-        },
-        "transcriptionLanguage": {
-          "type": "string",
-          "description": "Gets the Live Transcription language."
-        },
-        "transcriptionState": {
-          "type": "string",
-          "description": "Gets the Live Transcription state."
-        },
-        "bitrate": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the bitrate of the track."
-        },
-        "incomingBitrate": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the incoming bitrate."
-        },
-        "ingestDriftValue": {
-          "type": "string",
-          "description": "Gets the track ingest drift value."
-        },
-        "lastFragmentArrivalTime": {
-          "type": "string",
-          "description": "Gets the arrival UTC time of the last fragment."
-        },
-        "lastTimestamp": {
-          "type": "string",
-          "description": "Gets the last timestamp."
-        },
-        "timescale": {
-          "type": "string",
-          "description": "Gets the timescale of the last timestamp."
-        },
-        "overlapCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the fragment Overlap count."
-        },
-        "discontinuityCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the fragment Discontinuity count."
-        },
-        "nonincreasingCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets Non increasing count."
-        },
-        "unexpectedBitrate": {
-          "type": "boolean",
-          "description": "Gets a value indicating whether unexpected bitrate is present or not."
-        },
-        "state": {
-          "type": "string",
-          "description": "Gets the state of the live event."
-        },
-        "healthy": {
-          "type": "boolean",
-          "description": "Gets a value indicating whether preview is healthy or not."
-        }
-      }
-    },
-    "MediaLiveEventTrackDiscontinuityDetectedEventData": {
-      "type": "object",
-      "description": "Ingest track discontinuity detected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventTrackDiscontinuityDetected event.",
-      "properties": {
-        "trackType": {
-          "type": "string",
-          "description": "Gets the type of the track (Audio / Video)."
-        },
-        "trackName": {
-          "type": "string",
-          "description": "Gets the track name."
-        },
-        "bitrate": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the bitrate."
-        },
-        "previousTimestamp": {
-          "type": "string",
-          "description": "Gets the timestamp of the previous fragment."
-        },
-        "newTimestamp": {
-          "type": "string",
-          "description": "Gets the timestamp of the current fragment."
-        },
-        "timescale": {
-          "type": "string",
-          "description": "Gets the timescale in which both timestamps and discontinuity gap are represented."
-        },
-        "discontinuityGap": {
-          "type": "string",
-          "description": "Gets the discontinuity gap between PreviousTimestamp and NewTimestamp."
-        }
-      }
     },
     "MicrosoftTeamsAppIdentifierModel": {
       "type": "object",
@@ -7080,7 +6467,13 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "policyAssignmentId",
+        "policyDefinitionId",
+        "policyDefinitionReferenceId",
+        "complianceState",
+        "subscriptionId",
+        "complianceReasonCode"
       ]
     },
     "PolicyInsightsPolicyStateCreatedEventData": {
@@ -7118,7 +6511,13 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "policyAssignmentId",
+        "policyDefinitionId",
+        "policyDefinitionReferenceId",
+        "complianceState",
+        "subscriptionId",
+        "complianceReasonCode"
       ]
     },
     "PolicyInsightsPolicyStateDeletedEventData": {
@@ -7156,7 +6555,13 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "policyAssignmentId",
+        "policyDefinitionId",
+        "policyDefinitionReferenceId",
+        "complianceState",
+        "subscriptionId",
+        "complianceReasonCode"
       ]
     },
     "RedisExportRDBCompletedEventData": {
@@ -7176,10 +6581,7 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded"
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "RedisImportRDBCompletedEventData": {
       "type": "object",
@@ -7198,10 +6600,7 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded"
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "RedisPatchingCompletedEventData": {
       "type": "object",
@@ -7220,10 +6619,7 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded"
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "RedisScalingCompletedEventData": {
       "type": "object",
@@ -7242,10 +6638,7 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded"
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "ResourceActionCancelEventData": {
       "type": "object",
@@ -7698,7 +7091,12 @@
           "type": "string",
           "description": "the type of the resource for which the event is being emitted"
         }
-      }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
     },
     "ResourceNotificationsResourceDeletedEventData": {
       "type": "object",
@@ -7772,8 +7170,9 @@
         }
       },
       "required": [
-        "tags",
-        "properties"
+        "id",
+        "name",
+        "type"
       ]
     },
     "ResourceNotificationsResourceUpdatedEventData": {
@@ -7797,7 +7196,8 @@
       },
       "required": [
         "resourceInfo",
-        "operationalInfo"
+        "operationalInfo",
+        "apiVersion"
       ]
     },
     "ResourceWriteCancelEventData": {
@@ -7992,17 +7392,28 @@
         },
         "queueName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null.",
+          "x-nullable": true
         },
         "topicName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         },
         "subscriptionName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         }
-      }
+      },
+      "required": [
+        "namespaceName",
+        "requestUri",
+        "entityType",
+        "queueName",
+        "topicName",
+        "subscriptionName"
+      ]
     },
     "ServiceBusActiveMessagesAvailableWithNoListenersEventData": {
       "type": "object",
@@ -8022,17 +7433,28 @@
         },
         "queueName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null.",
+          "x-nullable": true
         },
         "topicName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         },
         "subscriptionName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         }
-      }
+      },
+      "required": [
+        "namespaceName",
+        "requestUri",
+        "entityType",
+        "queueName",
+        "topicName",
+        "subscriptionName"
+      ]
     },
     "ServiceBusDeadletterMessagesAvailablePeriodicNotificationsEventData": {
       "type": "object",
@@ -8052,17 +7474,28 @@
         },
         "queueName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null.",
+          "x-nullable": true
         },
         "topicName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         },
         "subscriptionName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         }
-      }
+      },
+      "required": [
+        "namespaceName",
+        "requestUri",
+        "entityType",
+        "queueName",
+        "topicName",
+        "subscriptionName"
+      ]
     },
     "ServiceBusDeadletterMessagesAvailableWithNoListenersEventData": {
       "type": "object",
@@ -8082,17 +7515,28 @@
         },
         "queueName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null.",
+          "x-nullable": true
         },
         "topicName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         },
         "subscriptionName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         }
-      }
+      },
+      "required": [
+        "namespaceName",
+        "requestUri",
+        "entityType",
+        "queueName",
+        "topicName",
+        "subscriptionName"
+      ]
     },
     "SignalRServiceClientConnectionConnectedEventData": {
       "type": "object",
@@ -8117,7 +7561,9 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "hubName",
+        "connectionId"
       ]
     },
     "SignalRServiceClientConnectionDisconnectedEventData": {
@@ -8147,7 +7593,9 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "hubName",
+        "connectionId"
       ]
     },
     "StampKind": {
@@ -8912,7 +8360,10 @@
           "type": "string",
           "description": "The Azure resource ID of the deleted event subscription."
         }
-      }
+      },
+      "required": [
+        "eventSubscriptionId"
+      ]
     },
     "SubscriptionValidationEventData": {
       "type": "object",
@@ -8926,7 +8377,11 @@
           "type": "string",
           "description": "The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).\nTo complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,\nor perform a GET request on the validationUrl (available starting version 2018-05-01-preview)."
         }
-      }
+      },
+      "required": [
+        "validationCode",
+        "validationUrl"
+      ]
     },
     "SubscriptionValidationResponse": {
       "type": "object",
@@ -8936,7 +8391,10 @@
           "type": "string",
           "description": "The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription."
         }
-      }
+      },
+      "required": [
+        "validationResponse"
+      ]
     },
     "WebAppServicePlanUpdatedEventData": {
       "type": "object",

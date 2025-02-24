@@ -10363,6 +10363,20 @@
             "name": "AcquireStorageAccountLock",
             "modelAsString": true
           }
+        },
+        "operationType": {
+          "description": "Re-Do Operation",
+          "enum": [
+            "Invalid",
+            "Register",
+            "Reregister",
+            "Rehydrate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationType",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "StorageContainer"
@@ -11317,7 +11331,8 @@
           "enum": [
             "Invalid",
             "Register",
-            "Reregister"
+            "Reregister",
+            "Rehydrate"
           ],
           "type": "string",
           "x-ms-enum": {

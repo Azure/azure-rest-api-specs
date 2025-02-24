@@ -27,7 +27,29 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2024-11-15
+tag: package-preview-2024-12-01
+```
+
+### Tag: package-preview-2024-12-01
+
+These settings apply only when `--tag=package-preview-2024-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-12-01'
+input-file:
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/chaosFault.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/networkSecurityPerimeter.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/services.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/throughputpool.json
+  - Microsoft.DocumentDB/preview/2024-12-01-preview/tablerbac.json
 ```
 
 ### Tag: package-2024-11-15
@@ -578,7 +600,6 @@ input-file:
   - Microsoft.DocumentDB/preview/2021-03-01-preview/privateEndpointConnection.json
 modelerfour:
   lenient-model-deduplication: true
-tag: package-2024-11-15
 ```
 
 ### Tag: package-preview-2021-04
@@ -924,6 +945,49 @@ directive:
   - suppress: BodyTopLevelProperties
     from: chaosFault.json
     reason: Temporarily suppressing existing linter errors due to known issue in linter validation as discussed in the ARM Office hours.
+  - suppress: DeleteResponseCodes
+    from: tablerbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: PutResponseCodes
+    from: tablerbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: tablerbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: MissingSegmentsInNestedResourceListOperation
+    from: tablerbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: PutResponseCodes
+    from: dataTransferService.json
+    reason: Suppressing errors for existing APIs
+  - suppress: PutResponseCodes
+    from: cosmos-db.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/graphs/{graphName}"].put
+    reason: Suppressing errors for existing APIs
+  - suppress: DeleteResponseCodes
+    from: cosmos-db.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/graphs/{graphName}"].delete
+    reason: Suppressing errors for existing APIs
+  - suppress: PutResponseCodes
+    from: cosmos-db.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}"].put
+    reason: Suppressing errors for existing APIs
+  - suppress: DeleteResponseCodes
+    from: cosmos-db.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}"].delete
+    reason: Suppressing errors for existing APIs
+  - suppress: PutResponseCodes
+    from: cosmos-db.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/default"].put
+    reason: Suppressing errors for existing APIs
+  - suppress: BodyTopLevelProperties
+    from: managedCassandra.json
+    where: $.definitions.CommandPublicResource
+    reason: Suppressing errors for existing APIs
+  - suppress: BodyTopLevelProperties
+    from: managedCassandra.json
+    where: $.definitions.BackupResource
+    reason: Suppressing errors for existing APIs
 
 ```
 
@@ -939,27 +1003,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.CosmosDB
-  output-folder: $(csharp-sdks-folder)/cosmosdb/Microsoft.Azure.Management.CosmosDB/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python

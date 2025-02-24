@@ -3930,7 +3930,9 @@
           "maximum": 100
         },
         "properties": {
-          "description": "Custom operation properties, populated only for a successful operation."
+          "type": "object",
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "additionalProperties": {}
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -4161,10 +4163,7 @@
         "localAdministrator": {
           "$ref": "#/definitions/LocalAdminStatus",
           "description": "Indicates whether the owner of the Dev Box is a local administrator.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         }
       },
       "required": [
@@ -5463,7 +5462,9 @@
           "maximum": 100
         },
         "properties": {
-          "description": "Custom operation properties, populated only for a successful operation."
+          "type": "object",
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "additionalProperties": {}
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",

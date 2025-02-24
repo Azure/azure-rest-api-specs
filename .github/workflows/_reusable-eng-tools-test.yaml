@@ -20,19 +20,22 @@ on:
         required: false
         type: boolean
 
+permissions:
+  contents: read
+
 jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        node-version: [18, 20]
+        os: [ubuntu, windows]
+        node-version: [18, 22]
         exclude:
-          - os: ubuntu-latest
-            node-version: 20
-          - os: windows-latest
+          - os: ubuntu
+            node-version: 22
+          - os: windows
             node-version: 18
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
     steps:
       - if: runner.os == 'Windows'
@@ -46,8 +49,8 @@ jobs:
             eng
             ${{ inputs.sparse-checkout-paths }}
 
-      - name: Setup Node ${{ matrix.node-version }} and run `npm ci`
-        uses: ./.github/actions/setup-node-npm-ci
+      - name: Setup Node ${{ matrix.node-version }} and install deps
+        uses: ./.github/actions/setup-node-install-deps
         with:
           node-version: ${{ matrix.node-version }}.x
 
@@ -63,7 +66,7 @@ jobs:
       - run: npm run prettier
         if: inputs.prettier == true
         shell: pwsh
-        working-directory: ./eng/tools/${{ inputs.package }}        
+        working-directory: ./eng/tools/${{ inputs.package }}
 
       - run: npm run test:ci
         shell: pwsh

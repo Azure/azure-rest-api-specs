@@ -38,8 +38,7 @@ These settings apply only when `--tag=package-2024-09` is specified on the comma
 ``` yaml $(tag) == 'package-2024-09'
 input-file:
   - stable/2024-09-01/SAPVirtualInstance.json
-  - ../common-types/v1/commonTypes.json
-  - ../operations/stable/2024-09-01/operations.json
+
 suppressions:
   - code: BodyTopLevelProperties
     from: SAPVirtualInstance.json
@@ -76,7 +75,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
 ```

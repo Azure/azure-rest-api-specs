@@ -42,7 +42,7 @@ tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2024-05-stable
+tag: package-policy-2025-01-stable
 ```
 
 ``` yaml $(package-databoundaries)
@@ -55,6 +55,10 @@ tag: package-resources-2024-03
 
 ``` yaml $(package-resources)
 tag: package-resources-2024-07
+```
+
+``` yaml $(package-resources)
+tag: package-resources-2024-11
 ```
 
 ``` yaml $(package-subscriptions)
@@ -93,12 +97,28 @@ tag: package-snapshots-2022-11
 tag: package-bicep-2023-11
 ```
 
+### Tag: package-policy-2025-01-stable
 
-### Tag: package-policy-2024-05-stable
+These settings apply only when `--tag=package-policy-2025-01-stable` is specified on the command line.
 
-These settings apply only when `--tag=package-policy-2024-05-stable` is specified on the command line.
+```yaml $(tag) == 'package-policy-2025-01-stable'
+input-file:
+- Microsoft.Authorization/stable/2025-01-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2025-01-01/policyDefinitionVersions.json
+- Microsoft.Authorization/stable/2025-01-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2025-01-01/policySetDefinitionVersions.json
+- Microsoft.Authorization/stable/2025-01-01/policyAssignments.json
 
-```yaml $(tag) == 'package-policy-2024-05-stable'
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2024-05
+
+These settings apply only when `--tag=package-policy-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2024-05'
 input-file:
 - Microsoft.Authorization/stable/2024-05-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2024-05-01/policyDefinitionVersions.json
@@ -205,6 +225,15 @@ These settings apply only when `--tag=package-resources-2024-07` is specified on
 ``` yaml $(tag) == 'package-resources-2024-07'
 input-file:
   - Microsoft.Resources/stable/2024-07-01/resources.json
+```
+
+### Tag: package-resources-2024-11
+
+These settings apply only when `--tag=package-resources-2024-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2024-11'
+input-file:
+  - Microsoft.Resources/stable/2024-11-01/resources.json
 ```
 
 ### Tag: package-2022-12
@@ -1021,6 +1050,23 @@ input-file:
 - Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
 ```
 
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Authorization/stable/2016-09-01/locks.json
+- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+- Microsoft.Resources/stable/2016-06-01/subscriptions.json
+- Microsoft.Resources/stable/2018-05-01/resources.json
+
+override-info:
+  title: PolicyClient
+```
+
 ## Suppression
 
 ``` yaml
@@ -1268,7 +1314,7 @@ directive:
     reason: The resource is managed in a management group level (instead of inside a resource group)
   - suppress: TopLevelResourcesListBySubscription
     from: changes.json
-    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios.
   - from: changes.json
     suppress: OperationsAPIImplementation
     where: $.paths
@@ -1279,7 +1325,7 @@ directive:
     reason: 'Duplicate Operations API causes generation issues'
   - suppress: TopLevelResourcesListBySubscription
     from: snapshots.json
-    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios.
   - suppress: RequiredReadOnlySystemData
     from: changes.json
     reason: System Metadata from a change resource perspective is irrelevant
@@ -1565,7 +1611,10 @@ directive:
     reason: "This is for specific properties that require extra processing to produce so only want to return on demand."
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: policyAssignments.json
-    reason: "Policy assignments can have a manged identity associated with them.  This requires a location."
+    reason: "Policy assignments can have a manged identity associated with them. This requires a location."
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: resources.json
+    reason: "The deployments resource type is ProxyOnly."
 ```
 
 ---
@@ -1579,7 +1628,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -1620,21 +1669,4 @@ batch:
   - package-changes: true
   - package-snapshots: true
   - package-bicep: true
-```
-
-### Tag: profile-hybrid-2019-03-01
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
-
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
-input-file:
-- Microsoft.Authorization/stable/2016-09-01/locks.json
-- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
-- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
-- Microsoft.Resources/stable/2016-06-01/subscriptions.json
-- Microsoft.Resources/stable/2018-05-01/resources.json
-
-override-info:
-  title: PolicyClient
 ```
