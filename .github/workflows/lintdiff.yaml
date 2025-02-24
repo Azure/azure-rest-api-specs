@@ -32,12 +32,6 @@ jobs:
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
-        with:
-          working-directory: eng/tools/lint-diff
-          # TODO: this probably needs a package-lock.json and dist
-          install-command: npm i
-      - run: npm run build
-        working-directory: eng/tools/lint-diff
 
       # TODO: This can probably be updated to run directly from JS
       # TODO: default workspace is the after/ folder
