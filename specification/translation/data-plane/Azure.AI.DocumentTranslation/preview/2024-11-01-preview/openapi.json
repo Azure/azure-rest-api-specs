@@ -1,0 +1,1602 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure.AI.DocumentTranslation",
+    "version": "2024-11-01-preview",
+    "description": "Document translation service",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/translator",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported document Translation endpoint, protocol and hostname, for example: https://{TranslatorResourceName}.cognitiveservices.azure.com/translator.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/document/batches": {
+      "get": {
+        "operationId": "DocumentTranslationOperations_GetTranslationsStatus",
+        "summary": "Returns a list of batch requests submitted and the status for each request",
+        "description": "Returns a list of batch requests submitted and the status for each\nrequest.\nThis list only contains batch requests submitted by the user (based on\nthe resource).\n            \nIf the number of requests exceeds our paging limit,\nserver-side paging is used. Paginated responses indicate a partial result and\ninclude a continuation token in the response.\nThe absence of a continuation\ntoken means that no additional pages are available.\n            \ntop, skip\nand maxpagesize query parameters can be used to specify a number of results to\nreturn and an offset for the collection.\n            \ntop indicates the total\nnumber of records the user wants to be returned across all pages.\nskip\nindicates the number of records to skip from the list of batches based on the\nsorting method specified.  By default, we sort by descending start\ntime.\nmaxpagesize is the maximum items returned in a page.  If more items are\nrequested via top (or top is not specified and there are more items to be\nreturned), @nextLink will contain the link to the next page.\n           \n\norderby query parameter can be used to sort the returned list (ex\n\"orderby=createdDateTimeUtc asc\" or \"orderby=createdDateTimeUtc\ndesc\").\nThe default sorting is descending by createdDateTimeUtc.\nSome query\nparameters can be used to filter the returned list (ex:\n\"status=Succeeded,Cancelled\") will only return succeeded and cancelled\noperations.\ncreatedDateTimeUtcStart and createdDateTimeUtcEnd can be used\ncombined or separately to specify a range of datetime to filter the returned\nlist by.\nThe supported filtering query parameters are (status, ids,\ncreatedDateTimeUtcStart, createdDateTimeUtcEnd).\n            \nThe server honors\nthe values specified by the client. However, clients must be prepared to handle\nresponses that contain a different page size or contain a continuation token.\n \n          \nWhen both top and skip are included, the server should first apply\nskip and then top on the collection.\nNote: If the server can't honor top\nand/or skip, the server must return an error to the client informing about it\ninstead of just ignoring the query options.\nThis reduces the risk of the client\nmaking assumptions about the data returned.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GetTranslationsStatusOptions.top"
+          },
+          {
+            "$ref": "#/parameters/GetTranslationsStatusOptions.skip"
+          },
+          {
+            "$ref": "#/parameters/GetTranslationsStatusOptions.maxpagesize"
+          },
+          {
+            "$ref": "#/parameters/GetTranslationsStatusOptions.ids"
+          },
+          {
+            "$ref": "#/parameters/GetTranslationsStatusOptions.statuses"
+          },
+          {
+            "$ref": "#/parameters/GetTranslationsStatusOptions.createdDateTimeUtcStart"
+          },
+          {
+            "$ref": "#/parameters/GetTranslationsStatusOptions.createdDateTimeUtcEnd"
+          },
+          {
+            "$ref": "#/parameters/GetTranslationsStatusOptions.orderby"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TranslationsStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns a list of batch requests submitted and the status for each request": {
+            "$ref": "./examples/operations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "DocumentTranslationOperations_StartTranslation",
+        "summary": "Submit a document translation request to the Document Translation service",
+        "description": "Use this API to submit a bulk (batch) translation request to the Document\nTranslation service.\nEach request can contain multiple documents and must\ncontain a source and destination container for each document.\n            \nThe\nprefix and suffix filter (if supplied) are used to filter folders. The prefix\nis applied to the subpath after the container name.\n            \nGlossaries /\nTranslation memory can be included in the request and are applied by the\nservice when the document is translated.\n            \nIf the glossary is\ninvalid or unreachable during translation, an error is indicated in the\ndocument status.\nIf a file with the same name already exists at the\ndestination, it will be overwritten. The targetUrl for each target language\nmust be unique.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTranslationBody"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "description": "Link to the translation operation status"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Submit a document translation request to the Document Translation service": {
+            "$ref": "./examples/batch.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location",
+          "final-state-schema": "#/definitions/TranslationStatus"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/document/batches/{id}": {
+      "get": {
+        "operationId": "DocumentTranslationOperations_GetTranslationStatus",
+        "summary": "Returns the status for a document translation request",
+        "description": "Returns the status for a document translation request.\nThe status includes the\noverall request status, as well as the status for documents that are being\ntranslated as part of that request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Format - uuid.  The operation id",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "translationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TranslationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns the status for a batch document translation request": {
+            "$ref": "./examples/operation.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DocumentTranslationOperations_CancelTranslation",
+        "summary": "Cancel a currently processing or queued translation",
+        "description": "Cancel a currently processing or queued translation.\nA translation will not be\ncancelled if it is already completed or failed or cancelling. A bad request\nwill be returned.\nAll documents that have completed translation will not be\ncancelled and will be charged.\nAll pending documents will be cancelled if\npossible.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Format - uuid.  The operation-id",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "translationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TranslationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a currently processing or queued translation": {
+            "$ref": "./examples/cancel.json"
+          }
+        }
+      }
+    },
+    "/document/batches/{id}/documents": {
+      "get": {
+        "operationId": "DocumentTranslationOperations_GetDocumentsStatus",
+        "summary": "Returns the status for all documents in a batch document translation request",
+        "description": "Returns the status for all documents in a batch document translation request.\n \n          \nIf the number of documents in the response exceeds our paging limit,\nserver-side paging is used.\nPaginated responses indicate a partial result and\ninclude a continuation token in the response. The absence of a continuation\ntoken means that no additional pages are available.\n            \ntop, skip\nand maxpagesize query parameters can be used to specify a number of results to\nreturn and an offset for the collection.\n            \ntop indicates the total\nnumber of records the user wants to be returned across all pages.\nskip\nindicates the number of records to skip from the list of document status held\nby the server based on the sorting method specified.  By default, we sort by\ndescending start time.\nmaxpagesize is the maximum items returned in a page. \nIf more items are requested via top (or top is not specified and there are\nmore items to be returned), @nextLink will contain the link to the next page.\n \n          \norderby query parameter can be used to sort the returned list (ex\n\"orderby=createdDateTimeUtc asc\" or \"orderby=createdDateTimeUtc\ndesc\").\nThe default sorting is descending by createdDateTimeUtc.\nSome query\nparameters can be used to filter the returned list (ex:\n\"status=Succeeded,Cancelled\") will only return succeeded and cancelled\ndocuments.\ncreatedDateTimeUtcStart and createdDateTimeUtcEnd can be used\ncombined or separately to specify a range of datetime to filter the returned\nlist by.\nThe supported filtering query parameters are (status, ids,\ncreatedDateTimeUtcStart, createdDateTimeUtcEnd).\n            \nWhen both top\nand skip are included, the server should first apply skip and then top on\nthe collection.\nNote: If the server can't honor top and/or skip, the server\nmust return an error to the client informing about it instead of just ignoring\nthe query options.\nThis reduces the risk of the client making assumptions about\nthe data returned.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GetDocumentsStatusOptions.id"
+          },
+          {
+            "$ref": "#/parameters/GetDocumentsStatusOptions.top"
+          },
+          {
+            "$ref": "#/parameters/GetDocumentsStatusOptions.skip"
+          },
+          {
+            "$ref": "#/parameters/GetDocumentsStatusOptions.maxpagesize"
+          },
+          {
+            "$ref": "#/parameters/GetDocumentsStatusOptions.ids"
+          },
+          {
+            "$ref": "#/parameters/GetDocumentsStatusOptions.statuses"
+          },
+          {
+            "$ref": "#/parameters/GetDocumentsStatusOptions.createdDateTimeUtcStart"
+          },
+          {
+            "$ref": "#/parameters/GetDocumentsStatusOptions.createdDateTimeUtcEnd"
+          },
+          {
+            "$ref": "#/parameters/GetDocumentsStatusOptions.orderby"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DocumentsStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns the status for all documents in a batch document translation request": {
+            "$ref": "./examples/documents.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/document/batches/{id}/documents/{documentId}": {
+      "get": {
+        "operationId": "DocumentTranslationOperations_GetDocumentStatus",
+        "summary": "Returns the status for a specific document",
+        "description": "Returns the translation status for a specific document based on the request Id\nand document Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Format - uuid.  The batch id",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "translationId"
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "Format - uuid.  The document id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DocumentStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns the status of a single document in a batch translation request": {
+            "$ref": "./examples/document.json"
+          }
+        }
+      }
+    },
+    "/document/formats": {
+      "get": {
+        "operationId": "DocumentTranslationOperations_GetSupportedFormats",
+        "summary": "Returns a list of supported document formats",
+        "description": "The list of supported formats supported by the Document Translation\nservice.\nThe list includes the common file extension, as well as the\ncontent-type if using the upload API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "the type of format like document or glossary ",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "document",
+              "glossary"
+            ],
+            "x-ms-enum": {
+              "name": "FileFormatType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Document",
+                  "value": "document",
+                  "description": "Document type file format"
+                },
+                {
+                  "name": "Glossary",
+                  "value": "glossary",
+                  "description": "Glossary type file format"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SupportedFileFormats"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns a list of supported document formats": {
+            "$ref": "./examples/format.json"
+          }
+        }
+      }
+    },
+    "/document:translate": {
+      "post": {
+        "operationId": "DocumentTranslationOperations_DocumentTranslate",
+        "summary": "Submit a single document translation request to the Document Translation service",
+        "description": "Use this API to submit a single translation request to the Document Translation Service.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateBody.sourceLanguage"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateBody.targetLanguage"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateBody.category"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateBody.allowFallback"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateBody.translateTextWithinImage"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "document",
+            "in": "formData",
+            "description": "Document to be translated in the form",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "glossary",
+            "in": "formData",
+            "description": "Glossary-translation memory will be used during translation in the form. ",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "total-image-scans-failed": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the number of failed image translations within a document translation job"
+              },
+              "total-image-scans-succeeded": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies the number of successful image translations within a document translation job"
+              },
+              "x-metered-usage": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Specifies consumption (the number of characters for which the user will be charged) for the translation job request"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Translate a single document": {
+            "$ref": "./examples/DocumentTranslate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdditionalOutputFileFormat": {
+      "type": "string",
+      "description": "List of possible additional output formats",
+      "enum": [
+        "None",
+        "OpenXmlWord"
+      ],
+      "x-ms-enum": {
+        "name": "AdditionalOutputFileFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No additional format"
+          },
+          {
+            "name": "OpenXmlWord",
+            "value": "OpenXmlWord",
+            "description": "OpenXmlWord format"
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "BatchOptions": {
+      "type": "object",
+      "description": "Translation batch request options",
+      "properties": {
+        "translateTextWithinImage": {
+          "type": "boolean",
+          "description": "Translation text within an image option",
+          "default": false
+        }
+      }
+    },
+    "BatchRequest": {
+      "type": "object",
+      "description": "Definition for the input batch translation request",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/SourceInput",
+          "description": "Source of the input documents"
+        },
+        "targets": {
+          "type": "array",
+          "description": "Location of the destination for the output",
+          "items": {
+            "$ref": "#/definitions/TargetInput"
+          },
+          "x-ms-identifiers": []
+        },
+        "storageType": {
+          "$ref": "#/definitions/StorageInputType",
+          "description": "Storage type of the input documents source string"
+        }
+      },
+      "required": [
+        "source",
+        "targets"
+      ]
+    },
+    "DocumentFilter": {
+      "type": "object",
+      "description": "Document filter",
+      "properties": {
+        "prefix": {
+          "type": "string",
+          "description": "A case-sensitive prefix string to filter documents in the source path for\ntranslation. \nFor example, when using a Azure storage blob Uri, use the prefix\nto restrict sub folders for translation."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "A case-sensitive suffix string to filter documents in the source path for\ntranslation. \nThis is most often use for file extensions"
+        }
+      }
+    },
+    "DocumentStatus": {
+      "type": "object",
+      "description": "Document Status Response",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Location of the document or folder"
+        },
+        "sourcePath": {
+          "type": "string",
+          "description": "Location of the source document"
+        },
+        "createdDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation created date time"
+        },
+        "lastActionDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time in which the operation's status has been updated"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "List of possible statuses for job or document"
+        },
+        "to": {
+          "type": "string",
+          "description": "To language"
+        },
+        "error": {
+          "$ref": "#/definitions/TranslationError",
+          "description": "This contains an outer error with error code, message, details, target and an\ninner error with more descriptive details."
+        },
+        "progress": {
+          "type": "number",
+          "format": "float",
+          "description": "Progress of the translation if available",
+          "maximum": 1
+        },
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Document Id"
+        },
+        "characterCharged": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Character charged by the API"
+        },
+        "totalImageScansSucceeded": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total image scans charged by the API"
+        },
+        "totalImageScansFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total image scans failed"
+        }
+      },
+      "required": [
+        "sourcePath",
+        "createdDateTimeUtc",
+        "lastActionDateTimeUtc",
+        "status",
+        "to",
+        "progress",
+        "id"
+      ]
+    },
+    "DocumentTranslateContent": {
+      "type": "object",
+      "description": "Document Translate Request Content",
+      "properties": {
+        "document": {
+          "type": "string",
+          "format": "byte",
+          "description": "Document to be translated in the form"
+        },
+        "glossary": {
+          "type": "array",
+          "description": "Glossary-translation memory will be used during translation in the form. ",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      },
+      "required": [
+        "document"
+      ]
+    },
+    "DocumentTranslateResult": {
+      "type": "object",
+      "description": "Document Translate Result / Response.",
+      "properties": {
+        "document": {
+          "type": "string",
+          "format": "byte",
+          "description": "Request response, response is a translated document."
+        }
+      },
+      "required": [
+        "document"
+      ]
+    },
+    "DocumentsStatus": {
+      "type": "object",
+      "description": "Documents Status Response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The detail status of individual documents",
+          "items": {
+            "$ref": "#/definitions/DocumentStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url for the next page.  Null if no more pages available"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FileFormat": {
+      "type": "object",
+      "description": "File Format",
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Name of the format"
+        },
+        "fileExtensions": {
+          "type": "array",
+          "description": "Supported file extension for this format",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contentTypes": {
+          "type": "array",
+          "description": "Supported Content-Types for this format",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultVersion": {
+          "type": "string",
+          "description": "Default version if none is specified"
+        },
+        "versions": {
+          "type": "array",
+          "description": "Supported Version",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/FileFormatType",
+          "description": "Supported Type for this format"
+        }
+      },
+      "required": [
+        "format",
+        "fileExtensions",
+        "contentTypes"
+      ]
+    },
+    "FileFormatType": {
+      "type": "string",
+      "description": "Format types",
+      "enum": [
+        "document",
+        "glossary"
+      ],
+      "x-ms-enum": {
+        "name": "FileFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Document",
+            "value": "document",
+            "description": "Document type file format"
+          },
+          {
+            "name": "Glossary",
+            "value": "glossary",
+            "description": "Glossary type file format"
+          }
+        ]
+      }
+    },
+    "Glossary": {
+      "type": "object",
+      "description": "Glossary / translation memory for the request",
+      "properties": {
+        "glossaryUrl": {
+          "type": "string",
+          "description": "Location of the glossary. \nWe will use the file extension to extract the\nformatting if the format parameter is not supplied.\n\nIf the translation\nlanguage pair is not present in the glossary, it will not be applied"
+        },
+        "format": {
+          "type": "string",
+          "description": "Format"
+        },
+        "version": {
+          "type": "string",
+          "description": "Optional Version.  If not specified, default is used."
+        },
+        "storageSource": {
+          "$ref": "#/definitions/StorageSource",
+          "description": "Storage Source"
+        }
+      },
+      "required": [
+        "glossaryUrl",
+        "format"
+      ]
+    },
+    "InnerTranslationError": {
+      "type": "object",
+      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines\nwhich is available at\nhttps://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\nThis\ncontains required properties ErrorCode, message and optional properties target,\ndetails(key value pair), inner error(this can be nested).",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Gets code error string."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets high level error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets the source of the error. \nFor example it would be \"documents\" or\n\"document id\" in case of invalid document.",
+          "readOnly": true
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerTranslationError",
+          "description": "New Inner Error format which conforms to Cognitive Services API Guidelines\nwhich is available at\nhttps://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\nThis\ncontains required properties ErrorCode, message and optional properties target,\ndetails(key value pair), inner error(this can be nested)."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "SourceInput": {
+      "type": "object",
+      "description": "Source of the input documents",
+      "properties": {
+        "sourceUrl": {
+          "type": "string",
+          "description": "Location of the folder / container or single file with your documents"
+        },
+        "filter": {
+          "$ref": "#/definitions/DocumentFilter",
+          "description": "Document filter"
+        },
+        "language": {
+          "type": "string",
+          "description": "Language code\nIf none is specified, we will perform auto detect on the document"
+        },
+        "storageSource": {
+          "$ref": "#/definitions/StorageSource",
+          "description": "Storage Source"
+        }
+      },
+      "required": [
+        "sourceUrl"
+      ]
+    },
+    "StartTranslationDetails": {
+      "type": "object",
+      "description": "Translation job submission batch request",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "description": "The input list of documents or folders containing documents",
+          "items": {
+            "$ref": "#/definitions/BatchRequest"
+          },
+          "x-ms-identifiers": []
+        },
+        "options": {
+          "$ref": "#/definitions/BatchOptions",
+          "description": "The batch operation options"
+        }
+      },
+      "required": [
+        "inputs"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "description": "List of possible statuses for job or document",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Cancelled",
+        "Cancelling",
+        "ValidationFailed"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "NotStarted"
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Cancelled"
+          },
+          {
+            "name": "Cancelling",
+            "value": "Cancelling",
+            "description": "Cancelling"
+          },
+          {
+            "name": "ValidationFailed",
+            "value": "ValidationFailed",
+            "description": "ValidationFailed"
+          }
+        ]
+      }
+    },
+    "StatusSummary": {
+      "type": "object",
+      "description": "Status Summary",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count"
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Failed count"
+        },
+        "success": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Success"
+        },
+        "inProgress": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of in progress"
+        },
+        "notYetStarted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of not yet started"
+        },
+        "cancelled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of cancelled"
+        },
+        "totalCharacterCharged": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total characters charged by the API"
+        },
+        "totalImageScansSucceeded": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total image scans charged by the API"
+        },
+        "totalImageScansFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total image scans failed"
+        }
+      },
+      "required": [
+        "total",
+        "failed",
+        "success",
+        "inProgress",
+        "notYetStarted",
+        "cancelled",
+        "totalCharacterCharged"
+      ]
+    },
+    "StorageInputType": {
+      "type": "string",
+      "description": "Storage type of the input documents source string",
+      "enum": [
+        "Folder",
+        "File"
+      ],
+      "x-ms-enum": {
+        "name": "StorageInputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Folder",
+            "value": "Folder",
+            "description": "Folder storage input type"
+          },
+          {
+            "name": "File",
+            "value": "File",
+            "description": "File storage input type"
+          }
+        ]
+      }
+    },
+    "StorageSource": {
+      "type": "string",
+      "description": "Storage Source",
+      "enum": [
+        "AzureBlob"
+      ],
+      "x-ms-enum": {
+        "name": "StorageSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureBlob",
+            "value": "AzureBlob",
+            "description": "Azure blob storage source"
+          }
+        ]
+      }
+    },
+    "SupportedFileFormats": {
+      "type": "object",
+      "description": "List of supported file formats",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "list of objects",
+          "items": {
+            "$ref": "#/definitions/FileFormat"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TargetInput": {
+      "type": "object",
+      "description": "Destination for the finished translated documents",
+      "properties": {
+        "targetUrl": {
+          "type": "string",
+          "description": "Location of the folder / container with your documents"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category / custom system for translation request"
+        },
+        "language": {
+          "type": "string",
+          "description": "Target Language"
+        },
+        "glossaries": {
+          "type": "array",
+          "description": "List of Glossary",
+          "items": {
+            "$ref": "#/definitions/Glossary"
+          },
+          "x-ms-identifiers": []
+        },
+        "storageSource": {
+          "$ref": "#/definitions/StorageSource",
+          "description": "Storage Source"
+        }
+      },
+      "required": [
+        "targetUrl",
+        "language"
+      ]
+    },
+    "TranslationError": {
+      "type": "object",
+      "description": "This contains an outer error with error code, message, details, target and an\ninner error with more descriptive details.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/TranslationErrorCode",
+          "description": "Enums containing high level error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets high level error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets the source of the error. \nFor example it would be \"documents\" or\n\"document id\" in case of invalid document.",
+          "readOnly": true
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerTranslationError",
+          "description": "New Inner Error format which conforms to Cognitive Services API Guidelines\nwhich is available at\nhttps://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\nThis\ncontains required properties ErrorCode, message and optional properties target,\ndetails(key value pair), inner error(this can be nested)."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "TranslationErrorCode": {
+      "type": "string",
+      "description": "Enums containing high level error codes.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidArgument",
+        "InternalServerError",
+        "ServiceUnavailable",
+        "ResourceNotFound",
+        "Unauthorized",
+        "RequestRateTooHigh"
+      ],
+      "x-ms-enum": {
+        "name": "TranslationErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidRequest",
+            "value": "InvalidRequest",
+            "description": "InvalidRequest"
+          },
+          {
+            "name": "InvalidArgument",
+            "value": "InvalidArgument",
+            "description": "InvalidArgument"
+          },
+          {
+            "name": "InternalServerError",
+            "value": "InternalServerError",
+            "description": "InternalServerError"
+          },
+          {
+            "name": "ServiceUnavailable",
+            "value": "ServiceUnavailable",
+            "description": "ServiceUnavailable"
+          },
+          {
+            "name": "ResourceNotFound",
+            "value": "ResourceNotFound",
+            "description": "ResourceNotFound"
+          },
+          {
+            "name": "Unauthorized",
+            "value": "Unauthorized",
+            "description": "Unauthorized"
+          },
+          {
+            "name": "RequestRateTooHigh",
+            "value": "RequestRateTooHigh",
+            "description": "RequestRateTooHigh"
+          }
+        ]
+      }
+    },
+    "TranslationErrorResponse": {
+      "type": "object",
+      "description": "Contains unified error information used for HTTP responses across any Cognitive\nService. Instances\ncan be created either through\nMicrosoft.CloudAI.Containers.HttpStatusExceptionV2 or by returning it directly\nfrom\na controller.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/TranslationError",
+          "description": "This contains an outer error with error code, message, details, target and an\ninner error with more descriptive details."
+        }
+      }
+    },
+    "TranslationStatus": {
+      "type": "object",
+      "description": "Translation job status response",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the translation operation."
+        },
+        "createdDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation created date time"
+        },
+        "lastActionDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time in which the operation's status has been updated"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "List of possible statuses for job or document"
+        },
+        "error": {
+          "$ref": "#/definitions/TranslationError",
+          "description": "This contains an outer error with error code, message, details, target and an\ninner error with more descriptive details."
+        },
+        "summary": {
+          "$ref": "#/definitions/StatusSummary",
+          "description": "Status Summary"
+        }
+      },
+      "required": [
+        "id",
+        "createdDateTimeUtc",
+        "lastActionDateTimeUtc",
+        "status",
+        "summary"
+      ]
+    },
+    "TranslationsStatus": {
+      "type": "object",
+      "description": "Translation job Status Response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The summary status of individual operation",
+          "items": {
+            "$ref": "#/definitions/TranslationStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url for the next page.  Null if no more pages available"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "DocumentTranslateBody.allowFallback": {
+      "name": "allowFallback",
+      "in": "query",
+      "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. \nPossible values are: true (default) or false.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentTranslateBody.category": {
+      "name": "category",
+      "in": "query",
+      "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations \nfrom a customized system built with Custom Translator. Add the Category ID from your Custom Translator \nproject details to this parameter to use your deployed customized system. Default value is: general.",
+      "required": false,
+      "type": "string",
+      "default": "general",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentTranslateBody.sourceLanguage": {
+      "name": "sourceLanguage",
+      "in": "query",
+      "description": "Specifies source language of the input document.\nIf this parameter isn't specified, automatic language detection is applied to determine the source language.\nFor example if the source document is written in English, then use sourceLanguage=en",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentTranslateBody.targetLanguage": {
+      "name": "targetLanguage",
+      "in": "query",
+      "description": "Specifies the language of the output document.\nThe target language must be one of the supported languages included in the translation scope.\nFor example if you want to translate the document in German language, then use targetLanguage=de ",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentTranslateBody.translateTextWithinImage": {
+      "name": "translateTextWithinImage",
+      "in": "query",
+      "description": "Optional boolean parameter to translate text within an image in the document",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.createdDateTimeUtcEnd": {
+      "name": "createdDateTimeUtcEnd",
+      "in": "query",
+      "description": "the end datetime to get items before",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.createdDateTimeUtcStart": {
+      "name": "createdDateTimeUtcStart",
+      "in": "query",
+      "description": "the start datetime to get items after",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.id": {
+      "name": "id",
+      "in": "path",
+      "description": "Format - uuid.  The operation id",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.ids": {
+      "name": "ids",
+      "in": "query",
+      "description": "Ids to use in filtering",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.maxpagesize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "maxpagesize is the maximum items returned in a page.  If more items are\nrequested via top (or top is not specified and there are more items to be\nreturned), @nextLink will contain the link to the next page.\n            \n\nClients MAY request server-driven paging with a specific page size by\nspecifying a maxpagesize preference. The server SHOULD honor this preference\nif the specified page size is smaller than the server's default page size.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.orderby": {
+      "name": "orderby",
+      "in": "query",
+      "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.skip": {
+      "name": "skip",
+      "in": "query",
+      "description": "skip indicates the number of records to skip from the list of records held by\nthe server based on the sorting method specified.  By default, we sort by\ndescending start time.\n            \nClients MAY use top and skip query\nparameters to specify a number of results to return and an offset into the\ncollection.\nWhen both top and skip are given by a client, the server SHOULD\nfirst apply skip and then top on the collection.\n            \nNote: If the\nserver can't honor top and/or skip, the server MUST return an error to the\nclient informing about it instead of just ignoring the query options.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "maximum": 2147483647,
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.statuses": {
+      "name": "statuses",
+      "in": "query",
+      "description": "Statuses to use in filtering",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.top": {
+      "name": "top",
+      "in": "query",
+      "description": "top indicates the total number of records the user wants to be returned across\nall pages.\n            \nClients MAY use top and skip query parameters to\nspecify a number of results to return and an offset into the collection.\nWhen\nboth top and skip are given by a client, the server SHOULD first apply skip\nand then top on the collection.\n            \nNote: If the server can't honor\ntop and/or skip, the server MUST return an error to the client informing\nabout it instead of just ignoring the query options.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "maximum": 2147483647,
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.createdDateTimeUtcEnd": {
+      "name": "createdDateTimeUtcEnd",
+      "in": "query",
+      "description": "the end datetime to get items before",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.createdDateTimeUtcStart": {
+      "name": "createdDateTimeUtcStart",
+      "in": "query",
+      "description": "the start datetime to get items after",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.ids": {
+      "name": "ids",
+      "in": "query",
+      "description": "Ids to use in filtering",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.maxpagesize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "maxpagesize is the maximum items returned in a page.  If more items are\nrequested via top (or top is not specified and there are more items to be\nreturned), @nextLink will contain the link to the next page.\n            \n\nClients MAY request server-driven paging with a specific page size by\nspecifying a maxpagesize preference. The server SHOULD honor this preference\nif the specified page size is smaller than the server's default page size.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.orderby": {
+      "name": "orderby",
+      "in": "query",
+      "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.skip": {
+      "name": "skip",
+      "in": "query",
+      "description": "skip indicates the number of records to skip from the list of records held by\nthe server based on the sorting method specified.  By default, we sort by\ndescending start time.\n            \nClients MAY use top and skip query\nparameters to specify a number of results to return and an offset into the\ncollection.\nWhen both top and skip are given by a client, the server SHOULD\nfirst apply skip and then top on the collection.\n            \nNote: If the\nserver can't honor top and/or skip, the server MUST return an error to the\nclient informing about it instead of just ignoring the query options.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "maximum": 2147483647,
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.statuses": {
+      "name": "statuses",
+      "in": "query",
+      "description": "Statuses to use in filtering",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.top": {
+      "name": "top",
+      "in": "query",
+      "description": "top indicates the total number of records the user wants to be returned across\nall pages.\n            \nClients MAY use top and skip query parameters to\nspecify a number of results to return and an offset into the collection.\nWhen\nboth top and skip are given by a client, the server SHOULD first apply skip\nand then top on the collection.\n            \nNote: If the server can't honor\ntop and/or skip, the server MUST return an error to the client informing\nabout it instead of just ignoring the query options.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "maximum": 2147483647,
+      "x-ms-parameter-location": "method"
+    },
+    "StartTranslationBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Translation job submission batch request",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/StartTranslationDetails"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

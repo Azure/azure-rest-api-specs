@@ -20,10 +20,10 @@ namespace Microsoft.AzurePlaywrightService;
 
 @doc("Microsoft.AzurePlaywrightService Management API Versions.")
 enum Versions {
-  /** 2024-08-01-preview version */
+  /** 2024-12-01 version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -55,7 +55,7 @@ model AccountProperties {
   @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
   reporting?: EnablementStatus = EnablementStatus.Enabled;
 
-  @doc("When enabled, this feature allows the workspace to use local auth(through access key) for authentication of test runs.")
+  @doc("When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.")
   localAuth?: EnablementStatus = EnablementStatus.Disabled;
 
   @visibility("read")
