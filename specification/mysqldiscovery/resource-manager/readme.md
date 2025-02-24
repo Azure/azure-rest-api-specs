@@ -37,12 +37,10 @@ These settings apply only when `--tag=package-2024-09-30-preview` is specified o
 input-file:
   - Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
 suppressions:
-  - code: PathResourceProviderNamePascalCase
-    from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
-    reason: MySQL is a technical term and cannot follow pascal case rule.
-  - code: PathResourceTypeNameCamelCase
-    from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
+  - code: PostResponseCodes
     reason: MySQL is a technical term and cannot follow camel case rule.
+    where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/refresh"].post
   - code: DefinitionsPropertiesNamesCamelCase
     from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
     reason: MySQL is a technical term and cannot follow camel case rule.
