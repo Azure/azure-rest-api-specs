@@ -249,7 +249,7 @@ export class TspConfigGoDpServiceDirMatchPatternSubRule extends TspconfigEmitter
 
 export class TspConfigGoDpPackageDirectoryMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-go", "package-dir", new RegExp(/^az[^\/]*\/.*$/));
+    super("@azure-tools/typespec-go", "package-dir", new RegExp(/^az.*$/));
   }
   protected skip(_: any, folder: string) {
     return skipForManagementPlane(folder);
