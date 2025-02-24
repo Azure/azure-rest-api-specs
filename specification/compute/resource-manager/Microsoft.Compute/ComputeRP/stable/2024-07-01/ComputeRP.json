@@ -22,18 +22,19 @@
   ],
   "security": [
     {
-      "OAuth2Auth": [
+      "azure_auth": [
         "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "OAuth2Auth": {
+    "azure_auth": {
       "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": ""
+        "user_impersonation": "impersonate your user account"
       }
     }
   },
@@ -389,10 +390,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
+              "$ref": "#/definitions/PagedVirtualMachineImageResource"
             }
           },
           "default": {
@@ -409,6 +407,9 @@
           "virtualMachineImagesEdgeZone_ListPublishers_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListPublishers_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -445,10 +446,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
+              "$ref": "#/definitions/PagedVirtualMachineImageResource"
             }
           },
           "default": {
@@ -465,6 +463,9 @@
           "virtualMachineImagesEdgeZone_ListOffers_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListOffers_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -508,10 +509,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
+              "$ref": "#/definitions/PagedVirtualMachineImageResource"
             }
           },
           "default": {
@@ -528,6 +526,9 @@
           "virtualMachineImagesEdgeZone_ListSkus_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListSkus_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -600,10 +601,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
+              "$ref": "#/definitions/PagedVirtualMachineImageResource"
             }
           },
           "default": {
@@ -620,6 +618,9 @@
           "virtualMachineImagesEdgeZone_List_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -888,10 +889,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
+              "$ref": "#/definitions/PagedVirtualMachineImageResource"
             }
           },
           "default": {
@@ -908,6 +906,9 @@
           "virtualMachineImage_ListPublishers_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListPublishers_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1118,10 +1119,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
+              "$ref": "#/definitions/PagedVirtualMachineImageResource"
             }
           },
           "default": {
@@ -1138,6 +1136,9 @@
           "virtualMachineImage_ListOffers_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListOffers_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1174,10 +1175,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
+              "$ref": "#/definitions/PagedVirtualMachineImageResource"
             }
           },
           "default": {
@@ -1194,6 +1192,9 @@
           "virtualMachineImage_ListSkus_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListSkus_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1257,10 +1258,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
+              "$ref": "#/definitions/PagedVirtualMachineImageResource"
             }
           },
           "default": {
@@ -1277,6 +1275,9 @@
           "virtualMachineImage_List_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -15019,6 +15020,27 @@
           "readOnly": true
         }
       }
+    },
+    "PagedVirtualMachineImageResource": {
+      "type": "object",
+      "description": "Paged collection of VirtualMachineImageResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualMachineImageResource items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineImageResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PassNames": {
       "type": "string",
