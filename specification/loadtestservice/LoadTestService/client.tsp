@@ -84,6 +84,9 @@ namespace Customizations;
 @@clientName(ArtifactsContainerInfo.url, "uri", "csharp");
 @@clientName(TestRun.portalUrl, "portalUri", "csharp");
 
+// Suggestion to change type to Uri for csharp
+@@alternateType(TestRun.portalUrl, url, "csharp");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
