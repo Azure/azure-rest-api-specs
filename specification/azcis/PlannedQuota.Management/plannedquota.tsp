@@ -55,17 +55,17 @@ model PlannedQuotaResourceProperties {
   @added(Versions.v2024_06_24_preview)
   @doc("Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.")
   @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
-  fulfilledPlan?: ResultData;
+  fulfilledPlan?: EventData;
 
   @added(Versions.v2024_06_24_preview)
   @doc("Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.")
   @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
-  alternatives?: ResultData;
+  alternatives?: EventData;
 }
 
 @added(Versions.v2024_06_24_preview)
-@doc("Provisioning result data.")
-model ResultData {
+@doc("Provisioning result event data.")
+model EventData {
   @doc("The CIS event identifier.")
   eventId: string;
 
