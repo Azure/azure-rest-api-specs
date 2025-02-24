@@ -1577,7 +1577,7 @@
           "VolumesBackupValidation"
         ],
         "description": "Validate whether a disk snapshot backup can be taken for list of volumes.",
-        "operationId": "VolumeGroups_Pre_Backup",
+        "operationId": "VolumeGroups_PreBackup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1605,11 +1605,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK -- Resource backup validation is successfully completed."
-          },
-          "201": {
-            "description": "Created -- Resource backup Validation started; operation will complete asynchronously."
+          "202": {
+            "description": "Accepted -- Resource backup Validation request accepted; operation will complete asynchronously."
           },
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
@@ -1624,7 +1621,7 @@
         },
         "x-ms-examples": {
           "VolumeGroups_Pre_Backup_MaximumSet_Gen": {
-            "$ref": "./examples/VolumeGroups_Pre_Backup_MaximumSet_Gen.json"
+            "$ref": "./examples/VolumeGroups_PreBackup_MaximumSet_Gen.json"
           }
         }
       }
@@ -1635,7 +1632,7 @@
           "VolumesRestoreValidation"
         ],
         "description": "Validate whether a list of backed up disk snapshots can be restored into ElasticSan volumes.",
-        "operationId": "VolumeGroups_Pre_Restore",
+        "operationId": "VolumeGroups_PreRestore",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1663,11 +1660,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK -- Resource Restore validation is successfully completed."
-          },
-          "201": {
-            "description": "Created -- Resource Restore Validation started; operation will complete asynchronously."
+          "202": {
+            "description": "Accepted -- Resource Restore Validation request accepted; operation will complete asynchronously."
           },
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
@@ -1682,7 +1676,7 @@
         },
         "x-ms-examples": {
           "VolumeGroups_Pre_Restore_MaximumSet_Gen": {
-            "$ref": "./examples/VolumeGroups_Pre_Restore_MaximumSet_Gen.json"
+            "$ref": "./examples/VolumeGroups_PreRestore_MaximumSet_Gen.json"
           }
         }
       }
