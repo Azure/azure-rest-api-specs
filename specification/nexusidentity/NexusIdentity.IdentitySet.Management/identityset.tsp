@@ -68,16 +68,19 @@ model IdentitySetResourceProperties {
 }
 
 @doc("Access Type defines the type of access needed for the Roles.")
-enum AccessType {
+union AccessType {
   @doc("SSH access")
-  Ssh,
+  Ssh: "Ssh",
 
   @doc("Web access")
-  Web,
+  Web: "Web",
+
+  string,
 }
 
 @doc("Identity Set resource definition")
 model IdentitySetResource is TrackedResource<IdentitySetResourceProperties> {
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key
   @segment("identitySets")
   @doc("The name of the Identity Set resource.")

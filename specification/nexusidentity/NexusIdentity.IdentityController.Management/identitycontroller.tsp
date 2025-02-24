@@ -22,6 +22,7 @@ model IdentityController is TrackedResource<IdentityControllerProperties> {
 
 /** IdentityController properties */
 model IdentityControllerProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("List of onboarded apps for Nexus Identity")
   onboardedApps: Array<OnboardedApp>;
 
