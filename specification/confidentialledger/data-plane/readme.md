@@ -190,6 +190,9 @@ These settings apply only when `--tag=package-2025-01-31-preview-codetransparenc
 input-file:
   - Microsoft.CodeTransparency/preview/2025-01-31-preview/cts.json
 suppressions:
+  - code: LroExtension
+    from: cts.json
+    reason: Following RFC which does not specify this
   - code: ErrorResponse
     from: cts.json
     reason: No way to express when using CBOR
