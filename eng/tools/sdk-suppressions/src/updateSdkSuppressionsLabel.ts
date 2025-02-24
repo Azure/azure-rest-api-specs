@@ -27,7 +27,7 @@ export async function getSdkSuppressionsSdkNames(
   headCommitHash: string
 ): Promise<SdkName[]> {
   console.log(`Will compare base commit: ${baseCommitHash} and head commit: ${headCommitHash} to get different SDK.`);
-  const filesChangedPaths = prChangeFiles.split(" ");
+  const filesChangedPaths = prChangeFiles.split(",");
   console.log(`The pr origin changed files: ${filesChangedPaths.join(", ")}`);
   let suppressionFileList = filterSuppressionList(filesChangedPaths);
   console.log(`Will compare sdk-suppression.yaml files: ${suppressionFileList.join(", ")}`);
@@ -197,7 +197,6 @@ export async function updateSdkSuppressionsLabels(
   } catch (err) {
     console.error("Error running git command:", err);
   }
-  console.log(`prChangeFiles: ${prChangeFiles}`);
   const sdkNames = await getSdkSuppressionsSdkNames(prChangeFiles, baseCommitHash, headCommitHash);
 
   console.log(
