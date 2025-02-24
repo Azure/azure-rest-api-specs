@@ -801,7 +801,7 @@
     },
     "/catalogs/{catalogId}/collections/{collectionId}/items:search": {
       "post": {
-        "operationId": "ItemsOperations_Search",
+        "operationId": "ItemsOperations_GetAllUnderCollection",
         "description": "Search for Items across all parties by intersecting geometry.",
         "parameters": [
           {
@@ -854,7 +854,7 @@
     },
     "/catalogs/{catalogId}/items:search": {
       "post": {
-        "operationId": "ItemsOperationInCatalog_Search",
+        "operationId": "ItemsOperations_SearchAcrossCollection",
         "description": "Search for Items across all collections.",
         "parameters": [
           {
@@ -900,7 +900,7 @@
     },
     "/external/satellite:fetch": {
       "post": {
-        "operationId": "SatelliteOperations_Fetch",
+        "operationId": "SatelliteOperations_FetchItems",
         "description": "Fetches Satellite data.",
         "parameters": [
           {
@@ -960,7 +960,7 @@
     },
     "/external/satellite:stac": {
       "post": {
-        "operationId": "SatelliteOperations_Stac",
+        "operationId": "SatelliteOperations_SearchItems",
         "description": "Searches for STAC items by collection id, bbox, intersecting geometry, start\nand end datetime.",
         "parameters": [
           {
@@ -1176,7 +1176,7 @@
     },
     "/external/weather:fetch": {
       "post": {
-        "operationId": "WeatherOperations_Fetch",
+        "operationId": "WeatherOperations_Get",
         "description": "Returns a list of WeatherData.",
         "parameters": [
           {

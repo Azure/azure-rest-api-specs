@@ -195,11 +195,13 @@ interface FileOperations {
   /**
    * Deletes file.
    */
+  @action("delete")
   delete is Operations.ResourceCollectionAction<FileResource, File, NoContentResponse>;
 
   /**
    * Downloads and returns file Stream as response for the given input filePath.
    */
+  @action("download")
   download is Operations.ResourceCollectionAction<
     FileResource,
     File,
@@ -216,6 +218,7 @@ interface FileOperations {
   /**
    * Uploads a file.
    */
+  @action("upload")
   upload is Operations.ResourceCollectionAction<FileResource, {} , File>;
 }
 
@@ -223,6 +226,7 @@ interface ItemsOperations {
   /**
    * Creates or updates a Item resource.
    */
+  @action("create")
   create is Operations.ResourceCollectionAction<Item, ItemParameters, ItemResponse>;
 
   /**
@@ -243,7 +247,8 @@ interface ItemsOperations {
   /**
    * Search for Items across all parties by intersecting geometry.
    */
-  search is Operations.ResourceCollectionAction<
+  @action("search")
+  getAllUnderCollection is Operations.ResourceCollectionAction<
     Item,
     ItemQuery,
     ItemListResponse,
@@ -259,14 +264,11 @@ interface ItemsOperations {
     // }>
   >;
 
-  
-}
-
-interface ItemsOperationInCatalog {
   /**
    * Search for Items across all collections.
    */
-  search is Operations.ResourceCollectionAction<
+  @action("search")
+  searchAcrossCollection is Operations.ResourceCollectionAction<
     ItemsinCatalog,
     CrossCollectionItemSearchQuery,
     ItemListResponse
@@ -277,7 +279,8 @@ interface SatelliteOperations {
   /**
    * Fetches Satellite data.
    */
-  fetch is Operations.ResourceCollectionAction<
+  @action("fetch")
+  fetchItems is Operations.ResourceCollectionAction<
   SatelliteResource,
     SatelliteFetchRequest,
     SatelliteFetchResponse,
@@ -308,7 +311,8 @@ interface SatelliteOperations {
    * Searches for STAC items by collection id, bbox, intersecting geometry, start
    * and end datetime.
    */
-  stac is Operations.ResourceCollectionAction<
+  @action("stac")
+  searchItems is Operations.ResourceCollectionAction<
   SatelliteResource,
     SatelliteStacRequest,
     SearchFeaturesResponse,
@@ -470,7 +474,8 @@ interface WeatherOperations {
   /**
    * Returns a list of WeatherData.
    */
-  fetch is Operations.ResourceCollectionAction<
+  @action("fetch")
+  get is Operations.ResourceCollectionAction<
     WeatherResource,
     WeatherRequest,
     WeatherResponse
