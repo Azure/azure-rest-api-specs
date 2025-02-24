@@ -1334,7 +1334,7 @@
     },
     "/schemas": {
       "get": {
-        "operationId": "Schemas_List",
+        "operationId": "SchemasOperations_Schemas_List",
         "description": "Returns a paginated list of Schema resources.",
         "parameters": [
           {
@@ -1439,7 +1439,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SchemaListResponse"
+              "$ref": "#/definitions/PagedSchema"
             }
           },
           "default": {
@@ -1454,12 +1454,15 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/schemas/{schemaId}": {
       "get": {
-        "operationId": "Schemas_Get",
+        "operationId": "SchemasOperations_Schemas_Get",
         "description": "Gets a specified Schema resource.",
         "parameters": [
           {
@@ -1495,8 +1498,11 @@
         }
       },
       "patch": {
-        "operationId": "Schemas_CreateOrUpdate",
+        "operationId": "SchemasOperations_Schemas_CreateOrUpdate",
         "description": "Creates or updates a Schema resource.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1504,23 +1510,29 @@
           {
             "name": "schemaId",
             "in": "path",
-            "description": "Id of the Schema resource.",
+            "description": "Id of the Schema.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "schema",
+            "name": "resource",
             "in": "body",
-            "description": "Schema resource payload to create or update.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SchemaUpdate"
+              "$ref": "#/definitions/SchemaCreateOrUpdate"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Schema"
             }
@@ -1540,7 +1552,7 @@
         }
       },
       "delete": {
-        "operationId": "Schemas_Delete",
+        "operationId": "SchemasOperations_Schemas_Delete",
         "description": "Deletes Schema for given Schema id.",
         "parameters": [
           {
@@ -1549,7 +1561,7 @@
           {
             "name": "schemaId",
             "in": "path",
-            "description": "Id of Schema to be deleted.",
+            "description": "Id of the Schema.",
             "required": true,
             "type": "string"
           }
@@ -3030,6 +3042,27 @@
         "value"
       ]
     },
+    "PagedSchema": {
+      "type": "object",
+      "description": "Paged collection of Schema items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Schema items on this page",
+          "items": {
+            "$ref": "#/definitions/Schema"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Point": {
       "type": "object",
       "description": "Point geometry.",
@@ -3400,7 +3433,7 @@
         },
         "id": {
           "type": "string",
-          "description": "Unique resource ID.",
+          "description": "Id of the Schema.",
           "readOnly": true
         },
         "eTag": {
@@ -3458,30 +3491,11 @@
         }
       },
       "required": [
-        "schemaModel"
+        "schemaModel",
+        "id"
       ]
     },
-    "SchemaListResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Schema"
-          }
-        },
-        "skipToken": {
-          "type": "string"
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "SchemaUpdate": {
+    "SchemaCreateOrUpdate": {
       "type": "object",
       "description": "SchemaModel.",
       "properties": {
@@ -3517,6 +3531,26 @@
           "additionalProperties": {}
         }
       }
+    },
+    "SchemaListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schema"
+          }
+        },
+        "skipToken": {
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SearchFeaturesResponse": {
       "type": "object",

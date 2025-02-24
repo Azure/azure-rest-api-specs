@@ -361,134 +361,88 @@ interface SchemasOperations {
   /**
    * Returns a paginated list of Schema resources.
    */
-  @operationId("Schemas_List")
-  @route("/schemas")
-  @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Names of the resource.
-       */
-      @query(#{ name: "names", explode: true })
-      names?: string[];
+  Schemas_List is Operations.ResourceList<Schema,QueryParametersTrait<
+  {
+    /**
+     * Names of the resource.
+     */
+    @query(#{ name: "names", explode: true })
+    names?: string[];
 
-      /**
-       * Filters on key-value pairs within the Properties object.
-       * eg. "{testKey} eq {testValue}".
-       */
-      @query(#{ name: "propertyFilters", explode: true })
-      propertyFilters?: string[];
+    /**
+     * Filters on key-value pairs within the Properties object.
+     * eg. "{testKey} eq {testValue}".
+     */
+    @query(#{ name: "propertyFilters", explode: true })
+    propertyFilters?: string[];
 
-      /**
-       * Statuses of the resource.
-       */
-      @query(#{ name: "statuses", explode: true })
-      statuses?: string[];
+    /**
+     * Statuses of the resource.
+     */
+    @query(#{ name: "statuses", explode: true })
+    statuses?: string[];
 
-      /**
-       * Ids of the resource.
-       */
-      @query(#{ name: "ids", explode: true })
-      ids?: string[];
+    /**
+     * Ids of the resource.
+     */
+    @query(#{ name: "ids", explode: true })
+    ids?: string[];
 
-      /**
-       * Minimum creation date of resource (inclusive).
-       */
-      @query("minCreatedDateTime")
-      minCreatedDateTime?: utcDateTime;
+    /**
+     * Minimum creation date of resource (inclusive).
+     */
+    @query("minCreatedDateTime")
+    minCreatedDateTime?: utcDateTime;
 
-      /**
-       * Maximum creation date of resource (inclusive).
-       */
-      @query("maxCreatedDateTime")
-      maxCreatedDateTime?: utcDateTime;
+    /**
+     * Maximum creation date of resource (inclusive).
+     */
+    @query("maxCreatedDateTime")
+    maxCreatedDateTime?: utcDateTime;
 
-      /**
-       * Minimum last modified date of resource (inclusive).
-       */
-      @query("minLastModifiedDateTime")
-      minLastModifiedDateTime?: utcDateTime;
+    /**
+     * Minimum last modified date of resource (inclusive).
+     */
+    @query("minLastModifiedDateTime")
+    minLastModifiedDateTime?: utcDateTime;
 
-      /**
-       * Maximum last modified date of resource (inclusive).
-       */
-      @query("maxLastModifiedDateTime")
-      maxLastModifiedDateTime?: utcDateTime;
+    /**
+     * Maximum last modified date of resource (inclusive).
+     */
+    @query("maxLastModifiedDateTime")
+    maxLastModifiedDateTime?: utcDateTime;
 
-      /**
-       * Maximum number of items needed (inclusive).
-       * Minimum = 10, Maximum = 1000, Default value = 50.
-       */
-      @maxValue(1000)
-      @minValue(10)
-      @query("maxPageSize")
-      maxPageSize?: int32 = 50;
+    /**
+     * Maximum number of items needed (inclusive).
+     * Minimum = 10, Maximum = 1000, Default value = 50.
+     */
+    @maxValue(1000)
+    @minValue(10)
+    @query("maxPageSize")
+    maxPageSize?: int32 = 50;
 
-      /**
-       * Skip token for getting next set of results.
-       */
-      @query("skipToken")
-      skipToken?: string;
-    },
-    SchemaListResponse
+    /**
+     * Skip token for getting next set of results.
+     */
+    @query("skipToken")
+    skipToken?: string;
+  }>
   >;
 
   /**
    * Gets a specified Schema resource.
    */
-  @operationId("Schemas_Get")
-  @route("/schemas/{schemaId}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Schema.
-       */
-      @path
-      schemaId: string;
-    },
-    Schema
-  >;
+  Schemas_Get is Operations.ResourceRead<Schema>;
 
   /**
    * Creates or updates a Schema resource.
    */
-  @operationId("Schemas_CreateOrUpdate")
-  @route("/schemas/{schemaId}")
-  @patch
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Schema resource.
-       */
-      @path
-      schemaId: string;
-
-      /**
-       * Schema resource payload to create or update.
-       */
-      @bodyRoot
-      schema: Schema;
-    },
-    Schema
-  >;
+  Schemas_CreateOrUpdate is Operations.ResourceCreateOrUpdate<Schema>;
 
   /**
    * Deletes Schema for given Schema id.
    */
-  @operationId("Schemas_Delete")
-  @route("/schemas/{schemaId}")
-  @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of Schema to be deleted.
-       */
-      @path
-      schemaId: string;
-    },
-    void
-  >;
+  Schemas_Delete is Operations.ResourceDelete<Schema>;
 }
 
 interface SolutionsOperations {

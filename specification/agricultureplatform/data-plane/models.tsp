@@ -1253,6 +1253,7 @@ model SchemaListResponse {
 /**
  * SchemaModel.
  */
+@resource("schemas")
 model Schema {
   /**
    * Dependent Collections.
@@ -1266,10 +1267,11 @@ model Schema {
   schemaModel: Record<unknown>;
 
   /**
-   * Unique resource ID.
+   * Id of the Schema.
    */
+  @key("schemaId")
   @visibility("read")
-  id?: string;
+  id: string;
 
   /**
    * The ETag value to implement optimistic concurrency.
