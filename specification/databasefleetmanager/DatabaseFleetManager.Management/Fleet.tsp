@@ -39,7 +39,7 @@ interface Fleets {
    * Modifies a fleet resource.
    */
   @parameterVisibility
-  update is ArmCustomPatchAsync<Fleet, Fleet>;
+  update is ArmCustomPatchAsync<Fleet, FleetUpdate>;
 
   /**
    * Deletes a fleet.

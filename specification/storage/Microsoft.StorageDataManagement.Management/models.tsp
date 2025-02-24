@@ -126,15 +126,14 @@ model TestExistingConnectionRequest {
 // Test connection response
 @doc("The test connection response")
 model TestConnectionResponse {
-  @doc("Which request attempt failed. Valid values are List and GetBlob.")
+  @doc("Indicates the method used to validate the connection to the backing data store. Valid values are `GetBlob` and `ListBlobs` for failure, and `TestExistingConnection` for success.")
   @minLength(1)
   storageConnectorMethodName: string;
 
-  @doc("A string representing the error received from the backing data store. Format will vary depending on the data store type.  This will be capped at 1 MB in size.")
-  @minLength(1)
-  storageConnectorErrorMessage: string;
+  @doc("A string representing the error received from the backing data store. Format will vary depending on the data store type and will be capped at 1 MB in size. The error message will be empty if the connection was successful.")
+  storageConnectorErrorMessage?: string;
 
-  @doc("The request ID associated with the request sent to the backing data store for validation.")
+  @doc("The request Id associated with the request sent to the backing data store for validation.")
   @minLength(1)
   storageConnectorRequestId: string;
 }
