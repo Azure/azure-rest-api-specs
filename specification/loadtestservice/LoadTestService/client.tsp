@@ -26,7 +26,7 @@ namespace Customizations;
 @@clientName(CertificateMetadata.type, "CertificateKind", "csharp");
 
 // Suggestion to fix casing for acronyms
-@@clientName(LoadTestConfiguration.splitAllCSVs, "splitAllCsvs", "csharp,java");
+@@clientName(LoadTestConfiguration.splitAllCSVs, "splitAllCsvs", "csharp,java,python"); // NOTE: Python is needed since the emitter bugs out for "CSVs" to cs_vs
 @@clientName(Test.publicIPDisabled, "publicIpDisabled", "csharp,java");
 @@clientName(TestRun.publicIPDisabled, "publicIpDisabled", "csharp,java");
 
