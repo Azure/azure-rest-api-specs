@@ -141,7 +141,15 @@ function isManagementSdk(folder: string): boolean {
 function skipForDataPlane(folder: string): SkipResult {
   return {
     shouldSkip: !isManagementSdk(folder),
-    reason: "This rule is only applicable for management SDKs.",
+    reason: "This rule is only applicable for management plane SDKs.",
+  };
+}
+
+
+function skipForManagementPlane(folder: string): SkipResult {
+  return {
+    shouldSkip: isManagementSdk(folder),
+    reason: "This rule is only applicable for data plane SDKs.",
   };
 }
 
@@ -230,7 +238,17 @@ export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends Tspcon
   }
 }
 
-// ----- Go management sub rules -----
+// ----- Go data plane sub rules -----
+export class TspConfigGoDpServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-go", "service-dir", new RegExp(/^sdk\/.*$/));
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
+// ----- Go management plane sub rules -----
 export class TspConfigGoMgmtServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "service-dir", new RegExp(/^sdk\/resourcemanager\/[^\/]*$/));
