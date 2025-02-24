@@ -199,21 +199,6 @@
           },
           {
             "in": "query",
-            "name": "phoneNumberType",
-            "description": "Filter by numberType, e.g. Geographic, TollFree.",
-            "type": "string",
-            "enum": [
-              "geographic",
-              "tollFree",
-              "mobile"
-            ],
-            "x-ms-enum": {
-              "name": "PhoneNumberType",
-              "modelAsString": true
-            }
-          },
-          {
-            "in": "query",
             "name": "skip",
             "description": "An optional parameter for how many entries to skip, for pagination purposes. The default value is 0.",
             "type": "integer",
@@ -242,6 +227,21 @@
             "name": "accept-language",
             "description": "The locale to display in the localized fields in the response. e.g. 'en-US'",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "phoneNumberType",
+            "description": "Filter by numberType, e.g. Geographic, TollFree.",
+            "type": "string",
+            "enum": [
+              "geographic",
+              "tollFree",
+              "mobile"
+            ],
+            "x-ms-enum": {
+              "name": "PhoneNumberType",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
