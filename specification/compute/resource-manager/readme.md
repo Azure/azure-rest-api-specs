@@ -267,6 +267,9 @@ directive:
   - suppress: ResourceNameRestriction
     from: dedicatedHost.json
     reason: there is no dedicated host naming requirement. It only follows ARM resource naming requirement.
+  - suppress: ResourceNameRestriction
+    from: availabilitySet.json
+    reason: there is no availability set naming requirement. It only follows ARM resource naming requirement.
 
 suppressions:
   - code: OperationsAPIImplementation

@@ -2018,6 +2018,63 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/migrateToVirtualMachineScaleSet": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_migrateToVMScaleSet",
+        "description": "Migrate a virtual machine from availability set to Flexible Virtual Machine Scale Set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/MigrateVMToVirtualMachineScaleSetInput"
+            },
+            "description": "Parameters supplied to the Migrate Virtual Machine operation."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Migrate a Virtual Machine to Flexible Virtual Machine Scale Ser.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_MigrateToVirtualMachineScaleSet.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3593,6 +3650,25 @@
         }
       },
       "description": "Describes the properties of the last installed patch summary."
+    },
+    "MigrateVMToVirtualMachineScaleSetInput": {
+      "type": "object",
+      "properties": {
+        "targetZone": {
+          "type": "string",
+          "description": "The target zone of VM migration to Flexible Virtual Machine Scale Set."
+        },
+        "targetFaultDomain": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target compute fault domain of VM migration to Flexible Virtual Machine Scale Set."
+        },
+        "targetVMSize": {
+          "type": "string",
+          "description": "The target Virtual Machine size of VM migration to Flexible Virtual Machine Scale Set."
+        }
+      },
+      "description": "The input of virtual machine migration from Availability Set to Flexible Virtual Machine Scale Set."
     },
     "Placement": {
       "properties": {
