@@ -5,19 +5,19 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** The access tier of the blob. */
   union StorageBlobAccessTier {
     /** The blob is in access tier Hot */
-    "Hot",
+    Hot: "Hot",
 
     /** The blob is in access tier Cool */
-    "Cool",
+    Cool: "Cool",
 
     /** The blob is in access tier Cold */
-    "Cold",
+    Cold: "Cold",
 
     /** The blob is in access tier Archive */
-    "Archive",
+    Archive: "Archive",
 
     /** The blob is in access tier Default(Inferred) */
-    "Default",
+    Default: "Default",
 
     string,
   }
@@ -371,13 +371,13 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** The status for a LCM policy. */
   union StorageLifecycleCompletionStatus {
     /** Completed */
-    "Completed",
+    Completed: "Completed",
 
     /** CompletedWithError */
-    "CompletedWithError",
+    CompletedWithError: "CompletedWithError",
 
     /** Incomplete */
-    "Incomplete",
+    Incomplete: "Incomplete",
 
     string,
   }
@@ -385,10 +385,10 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** The status for a storage task. */
   union StorageTaskAssignmentCompletedStatus {
     /** Succeeded */
-    "Succeeded",
+    Succeeded: "Succeeded",
 
     /** Failed */
-    "Failed",
+    Failed: "Failed",
 
     string,
   }
@@ -396,10 +396,10 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** The status for a storage task. */
   union StorageTaskCompletedStatus {
     /** Succeeded */
-    "Succeeded",
+    Succeeded: "Succeeded",
 
     /** Failed */
-    "Failed",
+    Failed: "Failed",
 
     string,
   }
