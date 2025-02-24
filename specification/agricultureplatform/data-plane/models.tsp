@@ -1381,6 +1381,14 @@ model CatalogCollection {
   collectionId?: string;
 }
 
+@resource("external/solutions")
+model SolutionResource {
+  /**
+   * Dummy key for solution resource
+   */
+  @key("key")
+  key: string;
+}
 /**
  * Solution.
  */

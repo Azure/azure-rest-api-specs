@@ -431,10 +431,9 @@ interface SolutionsOperations {
   /**
    * Cancel Solution job Async.
    */
-  @operationId("Solutions_CancelJob")
-  @route("/external/solutions:cancel-job")
-  @post
-  cancelJob is Azure.Core.Foundations.Operation<
+  @action("cancel-job")
+  cancelJob is Operations.ResourceCollectionAction<
+    SolutionResource,
     Solution,
     SamplePartnerResponse
   >;
@@ -442,10 +441,9 @@ interface SolutionsOperations {
   /**
    * Creates solution job async.
    */
-  @operationId("Solutions_CreateJob")
-  @route("/external/solutions:create-job")
-  @post
-  createJob is Azure.Core.Foundations.Operation<
+  @action("create-job")
+  createJob is Operations.ResourceCollectionAction<
+    SolutionResource,
     SolutionData,
     SamplePartnerResponse
   >;
@@ -453,10 +451,9 @@ interface SolutionsOperations {
   /**
    * Gets solution Data async.
    */
-  @operationId("Solutions_GetData")
-  @route("/external/solutions:get-data")
-  @post
-  getData is Azure.Core.Foundations.Operation<
+  @action("get-data")
+  getData is Operations.ResourceCollectionAction<
+    SolutionResource,
     SolutionData,
     SamplePartnerResponse
   >;
@@ -464,10 +461,12 @@ interface SolutionsOperations {
   /**
    * Gets Solution get job response async.
    */
-  @operationId("Solutions_GetJob")
-  @route("/external/solutions:get-job")
-  @post
-  getJob is Azure.Core.Foundations.Operation<Solution, SamplePartnerResponse>;
+  @action("get-job")
+  getJob is Operations.ResourceCollectionAction<
+    SolutionResource,
+    Solution,
+    SamplePartnerResponse
+  >;
 }
 
 interface WeatherOperations {
