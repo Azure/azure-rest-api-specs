@@ -196,10 +196,6 @@ interface FileOperations {
    * Deletes file.
    */
   delete is Operations.ResourceCollectionAction<FileResource, File, NoContentResponse>;
-  // @operationId("File_Delete")
-  // @route("/file:delete")
-  // @post
-  // delete is Azure.Core.Foundations.Operation<File, void>;
 
   /**
    * Downloads and returns file Stream as response for the given input filePath.
@@ -216,34 +212,11 @@ interface FileOperations {
       accept: "application/json, application/octet-stream";
     }>
   >;
-  // @operationId("File_Download")
-  // @route("/file:download")
-  // @post
-  // download is Azure.Core.Foundations.Operation<
-  //   {
-  //     /**
-  //      * request.
-  //      */
-  //     @bodyRoot
-  //     request: File;
-
-  //     /**
-  //      * Accept header
-  //      */
-  //     @header
-  //     accept: "application/json, application/octet-stream";
-  //   },
-  //   void
-  // >;
 
   /**
    * Uploads a file.
    */
   upload is Operations.ResourceCollectionAction<FileResource, {} , File>;
-  // @operationId("File_Upload")
-  // @route("/file:upload")
-  // @post
-  // upload is Azure.Core.Foundations.Operation<{}, File>;
 }
 
 interface ItemsOperations {
