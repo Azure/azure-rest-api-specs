@@ -197,7 +197,7 @@ export async function updateSdkSuppressionsLabels(
   } catch (err) {
     console.error("Error running git command:", err);
   }
-
+  console.log(`prChangeFiles: ${prChangeFiles}`);
   const sdkNames = await getSdkSuppressionsSdkNames(prChangeFiles, baseCommitHash, headCommitHash);
 
   console.log(
