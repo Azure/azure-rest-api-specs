@@ -599,7 +599,7 @@ model OptionalLoadTestConfiguration {
 
 @doc("The input artifacts for the test.")
 model TestInputArtifacts {
-  @doc("File info")
+  @doc("The load test YAML file that contains the the test configuration")
   configFileInfo?: TestFileInfo;
 
   @doc("The test script file for the test run")
@@ -991,7 +991,7 @@ model TestRunArtifacts {
 
 @doc("The input artifacts for the test run.")
 model TestRunInputArtifacts {
-  @doc("File info")
+  @doc("The load test YAML file that contains the the test configuration")
   configFileInfo?: TestRunFileInfo;
 
   @doc("The test script file for the test run")
