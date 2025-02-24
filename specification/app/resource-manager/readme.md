@@ -39,11 +39,11 @@ directive:
       Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
 ```
 
-### Tag: package-preview-2025-02-02-preview
+### Tag: package-preview-2025-02-02
 
-These settings apply only when `--tag=package-preview-2025-02-02-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2025-02-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-02-02-preview'
+```yaml $(tag) == 'package-preview-2025-02-02'
 input-file:
   - Microsoft.App/preview/2025-02-02-preview/AppResiliency.json
   - Microsoft.App/preview/2025-02-02-preview/AuthConfigs.json
