@@ -16,9 +16,13 @@ export async function main() {
   let validArgs = true;
   const config: ParseArgsConfig = {
     options: {
-      path: {
+      before: {
         type: "string",
-        short: "p",
+        short: "b",
+      },
+      after: {
+        type: "string",
+        short: "a",
       },
       "changed-files-path": {
         type: "string",
@@ -28,6 +32,8 @@ export async function main() {
         type: "string",
         short: "o",
       },
+      // TODO: Bring this in through package.json. Do not use autorest's
+      // package manager.
       "lint-version": {
         type: "string",
         short: "l",
@@ -39,16 +45,27 @@ export async function main() {
 
   const {
     values: {
-      path: pathArg,
+      before: beforeArg,
+      after: afterArg,
       "changed-files-path": changedFilesPath,
       "out-file": outFile,
       "lint-version": lintVersion,
     },
   } = parseArgs(config);
 
-  if (!changedFilesPath) {
+  if (!beforeArg || !(await pathExists(beforeArg as string))) {
     validArgs = false;
-    console.log("Missing required argument: --changed-files-path");
+    console.log(`--before must be a valid path. Value passed: ${beforeArg || "<empty>"}`);
+  }
+
+  if (!afterArg || !(await pathExists(afterArg as string))) {
+    validArgs = false;
+    console.log(`--after must be a valid path. Value passed: ${afterArg || "<empty>"}`);
+  }
+
+  if (!changedFilesPath || !(await pathExists(changedFilesPath as string))) {
+    validArgs = false;
+    console.log("--changed-files-path missing");
   }
 
   if (!(lintVersion as string).match(/^\d+\.\d+\.\d+$/)) {
@@ -71,7 +88,8 @@ export async function main() {
   // console.log(versionResult.stdout);
 
   await runLintDiff(
-    pathArg as string,
+    beforeArg as string,
+    afterArg as string,
     changedFilesPath as string,
     outFile as string,
     lintVersion as string,
@@ -85,7 +103,8 @@ export type DiffResult<T> = {
 };
 
 async function runLintDiff(
-  targetPath: string,
+  beforePath: string,
+  afterPath: string,
   changedFilesPath: string,
   outFile: string,
   lintVersion: string,
@@ -106,8 +125,10 @@ async function runLintDiff(
   // );
 
   // TODO: Where to establish full path? (Probably sooner)
-  const affectedReadmes = await getAffectedReadmeFiles(changedFiles, targetPath);
-  const affectedTags = await getAffectedTags(affectedReadmes, targetPath);
+
+  console.log(beforePath, afterPath);
+  const affectedReadmes = await getAffectedReadmeFiles(changedFiles, afterPath);
+  const affectedTags = await getAffectedTags(affectedReadmes, afterPath);
 
   console.log(`Affected tags:\n${JSON.stringify(affectedTags)}`);
   // console.log(`Changed files:\n${changedReadMeFiles.join("\n")}`);
@@ -122,7 +143,7 @@ async function runLintDiff(
   for (const readmeAndTags of affectedTags) {
     const dedupedTags = await deduplicateTags(
       readmeAndTags.tags,
-      await readFile(join(targetPath, readmeAndTags.readme), { encoding: "utf-8" }),
+      await readFile(join(afterPath, readmeAndTags.readme), { encoding: "utf-8" }),
     );
 
     changedFileAndTagsMap.set(readmeAndTags.readme, dedupedTags);
@@ -130,7 +151,7 @@ async function runLintDiff(
 
   // TODO:
   for (const file of changedFileAndTagsMap.keys()) {
-    const changedFilePath = `${targetPath}/${file}`;
+    const changedFilePath = `${afterPath}/${file}`;
     console.log(`Linting ${changedFilePath}`);
 
     let openApiType = await getOpenapiType(changedFilePath);
@@ -148,7 +169,7 @@ async function runLintDiff(
       let tagArg = tag ? `--tag=${tag} ` : "";
 
       let autorestCommand =
-        `npm exec -- autorest ` +
+        `npm exec --no -- autorest ` +
         `--v3 ` +
         `--spectral ` +
         `--azure-validator ` +
