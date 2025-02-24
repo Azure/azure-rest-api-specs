@@ -232,7 +232,7 @@
         }
       }
     },
-    "/assistants/{assistantId}": {
+    "/assistants/{agentId}": {
       "get": {
         "operationId": "GetAgent",
         "description": "Retrieves an existing agent.",
@@ -241,7 +241,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "assistantId",
+            "name": "agentId",
             "in": "path",
             "description": "Identifier of the agent.",
             "required": true,
@@ -277,7 +277,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/UpdateAgentOptions.assistantId"
+            "$ref": "#/parameters/UpdateAgentOptions.agentId"
           },
           {
             "name": "body",
@@ -317,7 +317,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "assistantId",
+            "name": "agentId",
             "in": "path",
             "description": "Identifier of the agent.",
             "required": true,
@@ -3589,7 +3589,7 @@
         "assistant_id": {
           "type": "string",
           "description": "The ID of the agent for which the thread should be created.",
-          "x-ms-client-name": "assistantId"
+          "x-ms-client-name": "agentId"
         },
         "thread": {
           "$ref": "#/definitions/AgentThreadCreationOptions",
@@ -3755,7 +3755,7 @@
         "assistant_id": {
           "type": "string",
           "description": "The ID of the agent that should run the thread.",
-          "x-ms-client-name": "assistantId"
+          "x-ms-client-name": "agentId"
         },
         "model": {
           "type": "string",
@@ -4614,19 +4614,54 @@
         }
       }
     },
+    "MessageDeltaTextUrlCitationAnnotation": {
+      "type": "object",
+      "description": "A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.",
+      "properties": {
+        "url_citation": {
+          "$ref": "#/definitions/MessageDeltaTextUrlCitationDetails",
+          "description": "The details of the URL citation.",
+          "x-ms-client-name": "urlCitation"
+        },
+        "start_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first text index associated with this text annotation.",
+          "x-ms-client-name": "startIndex"
+        },
+        "end_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last text index associated with this text annotation.",
+          "x-ms-client-name": "endIndex"
+        }
+      },
+      "required": [
+        "url_citation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageDeltaTextAnnotation"
+        }
+      ],
+      "x-ms-discriminator-value": "url_citation"
+    },
     "MessageDeltaTextUrlCitationDetails": {
       "type": "object",
-      "description": "A representation of the URL used for the text citation.",
+      "description": "A representation of a URL citation, as used in text thread message content.",
       "properties": {
         "url": {
           "type": "string",
-          "description": "The URL where the citation is from."
+          "description": "The URL associated with this citation."
         },
         "title": {
           "type": "string",
           "description": "The title of the URL."
         }
-      }
+      },
+      "required": [
+        "url"
+      ]
     },
     "MessageImageFileContent": {
       "type": "object",
@@ -4968,6 +5003,55 @@
       },
       "required": [
         "file_id"
+      ]
+    },
+    "MessageTextUrlCitationAnnotation": {
+      "type": "object",
+      "description": "A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.",
+      "properties": {
+        "url_citation": {
+          "$ref": "#/definitions/MessageTextUrlCitationDetails",
+          "description": "The details of the URL citation.",
+          "x-ms-client-name": "urlCitation"
+        },
+        "start_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first text index associated with this text annotation.",
+          "x-ms-client-name": "startIndex"
+        },
+        "end_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last text index associated with this text annotation.",
+          "x-ms-client-name": "endIndex"
+        }
+      },
+      "required": [
+        "url_citation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTextAnnotation"
+        }
+      ],
+      "x-ms-discriminator-value": "url_citation"
+    },
+    "MessageTextUrlCitationDetails": {
+      "type": "object",
+      "description": "A representation of a URL citation, as used in text thread message content.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL associated with this citation."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the URL."
+        }
+      },
+      "required": [
+        "url"
       ]
     },
     "MicrosoftFabricToolDefinition": {
@@ -5495,7 +5579,7 @@
         "assistant_id": {
           "type": "string",
           "description": "The ID of the agent associated with the run step.",
-          "x-ms-client-name": "assistantId"
+          "x-ms-client-name": "agentId"
         },
         "thread_id": {
           "type": "string",
@@ -5938,11 +6022,8 @@
       "description": "Represents a file search tool call within a streaming run step's tool call details.",
       "properties": {
         "file_search": {
-          "type": "object",
+          "$ref": "#/definitions/RunStepFileSearchToolCallResults",
           "description": "Reserved for future use.",
-          "additionalProperties": {
-            "type": "string"
-          },
           "x-ms-client-name": "fileSearch"
         }
       },
@@ -6716,7 +6797,7 @@
           "type": "string",
           "description": "If applicable, the ID of the agent that authored this message.",
           "x-nullable": true,
-          "x-ms-client-name": "assistantId"
+          "x-ms-client-name": "agentId"
         },
         "run_id": {
           "type": "string",
@@ -6820,7 +6901,7 @@
         "assistant_id": {
           "type": "string",
           "description": "The ID of the agent associated with the thread this run was performed against.",
-          "x-ms-client-name": "assistantId"
+          "x-ms-client-name": "agentId"
         },
         "status": {
           "$ref": "#/definitions/RunStatus",
@@ -8176,8 +8257,8 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "UpdateAgentOptions.assistantId": {
-      "name": "assistantId",
+    "UpdateAgentOptions.agentId": {
+      "name": "agentId",
       "in": "path",
       "description": "The ID of the agent to modify.",
       "required": true,
