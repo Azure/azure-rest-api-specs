@@ -40,6 +40,12 @@ suppressions:
   - code: PathResourceProviderNamePascalCase
     from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
     reason: MySQL is a technical term and cannot follow pascal case rule.
+  - code: PathResourceTypeNameCamelCase
+    from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
+    reason: MySQL is a technical term and cannot follow camel case rule.
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
+    reason: MySQL is a technical term and cannot follow camel case rule.
 
 ```
 ---
@@ -52,6 +58,12 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
     reason: MySQL is a technical term and cannot follow pascal case rule.
+  - suppress: PathResourceTypeNameCamelCase
+    from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
+    reason: MySQL is a technical term and cannot follow camel case rule.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
+    reason: MySQL is a technical term and cannot follow camel case rule.
 ```
 
 ## Swagger to SDK

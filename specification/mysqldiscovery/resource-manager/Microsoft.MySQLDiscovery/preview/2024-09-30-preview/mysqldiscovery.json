@@ -886,7 +886,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
