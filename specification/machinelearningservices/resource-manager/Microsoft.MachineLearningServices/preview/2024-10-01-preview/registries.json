@@ -637,6 +637,20 @@
           "$ref": "#/definitions/ManagedResourceGroupSettings",
           "x-nullable": true
         },
+        "syndicatedRegistries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "registryId": {
+                "description": "Registry id guid of a destination registry that this registry can syndicate to ",
+                "type": "string",
+                "x-nullable": true
+              }
+            }
+          },
+          "x-nullable": true
+        },
         "mlFlowRegistryUri": {
           "description": "MLFlow Registry URI for the Registry",
           "type": "string",
