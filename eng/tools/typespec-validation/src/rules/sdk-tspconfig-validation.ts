@@ -98,7 +98,7 @@ class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
 }
 
 class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
-  private emitterName: string;
+  protected emitterName: string;
 
   constructor(emitterName: string, keyToValidate: string, expectedValue: ExpectedValueType) {
     super(keyToValidate, expectedValue);
@@ -144,7 +144,6 @@ function skipForDataPlane(folder: string): SkipResult {
     reason: "This rule is only applicable for management plane SDKs.",
   };
 }
-
 
 function skipForManagementPlane(folder: string): SkipResult {
   return {
@@ -244,11 +243,37 @@ export class TspConfigGoDpServiceDirMatchPatternSubRule extends TspconfigEmitter
     super("@azure-tools/typespec-go", "service-dir", new RegExp(/^sdk\/.*$/));
   }
   protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder);
+    return skipForManagementPlane(folder);
   }
 }
 
-// ----- Go management plane sub rules -----
+export class TspConfigGoDpPackageDirectoryMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-go", "package-dir", new RegExp(/^az[^\/]*\/.*$/));
+  }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
+export class TspConfigGoDpModuleMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-go",
+      "module",
+      new RegExp(/^github.com\/Azure\/azure-sdk-for-go\/.*$/),
+    );
+  }
+  protected validate(config: any): RuleResult {
+    let module = config?.options?.[this.emitterName]?.module;
+    if (module === undefined) return { success: true };
+    return super.validate(config);
+  }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
 export class TspConfigGoMgmtServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "service-dir", new RegExp(/^sdk\/resourcemanager\/[^\/]*$/));
@@ -298,15 +323,6 @@ export class TspConfigGoMgmtGenerateExamplesTrueSubRule extends TspconfigEmitter
   }
 }
 
-export class TspConfigGoMgmtGenerateFakesTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-go", "generate-fakes", true);
-  }
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder);
-  }
-}
-
 export class TspConfigGoMgmtHeadAsBooleanTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "head-as-boolean", true);
@@ -316,12 +332,16 @@ export class TspConfigGoMgmtHeadAsBooleanTrueSubRule extends TspconfigEmitterOpt
   }
 }
 
-export class TspConfigGoMgmtInjectSpansTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+// ----- Go az sub rules -----
+export class TspConfigGoAzGenerateFakesTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-go", "generate-fakes", true);
+  }
+}
+
+export class TspConfigGoAzInjectSpansTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "inject-spans", true);
-  }
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder);
   }
 }
 
@@ -404,9 +424,12 @@ export const defaultRules = [
   new TspConfigGoMgmtModuleEqualStringSubRule(),
   new TspConfigGoMgmtFixConstStutteringTrueSubRule(),
   new TspConfigGoMgmtGenerateExamplesTrueSubRule(),
-  new TspConfigGoMgmtGenerateFakesTrueSubRule(),
+  new TspConfigGoAzGenerateFakesTrueSubRule(),
   new TspConfigGoMgmtHeadAsBooleanTrueSubRule(),
-  new TspConfigGoMgmtInjectSpansTrueSubRule(),
+  new TspConfigGoAzInjectSpansTrueSubRule(),
+  new TspConfigGoDpServiceDirMatchPatternSubRule(),
+  new TspConfigGoDpPackageDirectoryMatchPatternSubRule(),
+  new TspConfigGoDpModuleMatchPatternSubRule(),
   new TspConfigPythonMgmtPackageDirectorySubRule(),
   new TspConfigPythonMgmtPackageNameEqualStringSubRule(),
   new TspConfigPythonMgmtGenerateTestTrueSubRule(),
