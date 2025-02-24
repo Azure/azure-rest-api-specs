@@ -1,4 +1,4 @@
-name: LintDiff (preview)
+name: LintDiff (Preview)
 
 on: pull_request
 
@@ -58,11 +58,11 @@ jobs:
         run: |
           realpath ../../../before
           realpath ../../../changed-files.txt
-          npm exec -- lint-diff --path ../../../before --changed-files-path ../../../changed-files.txt --out-file placeholder.txt
+          npm exec --no -- lint-diff --path ../../../before --changed-files-path ../../../changed-files.txt --out-file placeholder.txt
         working-directory: eng/tools/lint-diff
 
       - name: Run LintDiff After
         run: |
-          npm exec -- lint-diff --path ../../../../after --changed-files-path ../../../../changed-files.txt --out-file placeholder.txt
+          npm exec --no -- lint-diff --path ../../../../after --changed-files-path ../../../../changed-files.txt --out-file placeholder.txt
           # TODO: npm exec -- summarize-lint-diff 
         working-directory: eng/tools/lint-diff
