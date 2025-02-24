@@ -236,192 +236,52 @@ interface ItemsOperations {
   /**
    * Creates or updates a Item resource.
    */
-  @operationId("Items_Create")
-  @route("/catalogs/{catalogId}/collections/{collectionId}/items/:create")
-  @post
-  create is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Collection resource.
-       */
-      @path
-      collectionId: string;
-
-      /**
-       * Id of the Catalog resource.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Collection resource payload to create or update.
-       */
-      @bodyRoot
-      item: Item;
-    },
-    Item
-  >;
+  create is Operations.ResourceCollectionAction<Item, ItemParameters, ItemResponse>;
 
   /**
    * Gets a specified Item resource.
    */
-  @operationId("Items_Get")
-  @route("/catalogs/{catalogId}/collections/{collectionId}/items/{itemId}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Catalog.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Id of the Collection.
-       */
-      @path
-      collectionId: string;
-
-      /**
-       * Id of the Item.
-       */
-      @path
-      itemId: string;
-    },
-    Item
-  >;
+  Items_Get is Operations.ResourceRead<Item>;
 
   /**
    * Creates or updates a Item resource.
    */
-  @operationId("Items_CreateOrUpdate")
-  @route("/catalogs/{catalogId}/collections/{collectionId}/items/{itemId}")
-  @patch
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Item resource.
-       */
-      @path
-      itemId: string;
-
-      /**
-       * Id of the Collection resource.
-       */
-      @path
-      collectionId: string;
-
-      /**
-       * Id of the Catalog resource.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Item resource payload to create or update.
-       */
-      @bodyRoot
-      item: Item;
-    },
-    Item
-  >;
+  Items_CreateOrUpdate is Operations.ResourceCreateOrUpdate<Item>;
 
   /**
    * Deletes Item for given Item id.
    */
-  @operationId("Items_Delete")
-  @route("/catalogs/{catalogId}/collections/{collectionId}/items/{itemId}")
-  @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of Catalog.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Id of Collection.
-       */
-      @path
-      collectionId: string;
-
-      /**
-       * Id of Item to be deleted.
-       */
-      @path
-      itemId: string;
-    },
-    void
-  >;
+  Items_Delete is Operations.ResourceDelete<Item>;
 
   /**
    * Search for Items across all parties by intersecting geometry.
    */
-  @operationId("Items_GetAllUnderCollection")
-  @route("/catalogs/{catalogId}/collections/{collectionId}/items:search")
-  @post
-  getAllUnderCollection is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * catalogId.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * collectionId.
-       */
-      @path
-      collectionId: string;
-
-      /**
-       * Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000,
-       * Default Value = 50.
-       */
-      @maxValue(1000)
-      @minValue(10)
-      @query("maxPageSize")
-      maxPageSize?: int32 = 50;
-
-      /**
-       * Query filters.
-       */
-      @bodyRoot
-      searchItemQuery: ItemQuery;
-    },
-    ItemListResponse
+  search is Operations.ResourceCollectionAction<
+    Item,
+    ItemQuery,
+    ItemListResponse,
+    // QueryParametersTrait<{
+    //   /**
+    //    * Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000,
+    //    * Default Value = 50.
+    //    */
+    //   @maxValue(1000)
+    //   @minValue(10)
+    //   @query("maxPageSize")
+    //   maxPageSize?: int32 = 50;
+    // }>
   >;
 
+  
+}
+
+interface ItemsOperationInCatalog {
   /**
    * Search for Items across all collections.
    */
-  @operationId("Items_SearchAcrossCollection")
-  @route("/catalogs/{catalogId}/items:search")
-  @post
-  searchAcrossCollection is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * catalogId.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000,
-       * Default Value = 50.
-       */
-      @maxValue(1000)
-      @minValue(10)
-      @query("maxPageSize")
-      maxPageSize?: int32 = 50;
-
-      /**
-       * Query filters.
-       */
-      @bodyRoot
-      searchItemQuery: CrossCollectionItemSearchQuery;
-    },
+  search is Operations.ResourceCollectionAction<
+    ItemsinCatalog,
+    CrossCollectionItemSearchQuery,
     ItemListResponse
   >;
 }
