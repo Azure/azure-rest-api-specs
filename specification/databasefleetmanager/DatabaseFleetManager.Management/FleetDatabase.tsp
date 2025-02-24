@@ -99,10 +99,7 @@ interface FleetDatabases {
   /**
    * Revert a database transparent data encryption (TDE).
    */
-  revertTransparentDataEncryption is ArmResourceActionNoResponseContentAsync<
-    FleetDatabase,
-    void
-  >;
+  revert is ArmResourceActionNoResponseContentAsync<FleetDatabase, void>;
 }
 
 @@doc(FleetDatabase.name, "Name of the database.");
