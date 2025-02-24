@@ -20,8 +20,15 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "securityDefinitions": {
-    "azure_auth": {
+    "AadOauth2Auth": {
       "type": "oauth2",
       "description": "The Azure Active Directory OAuth2 Flow",
       "flow": "accessCode",
