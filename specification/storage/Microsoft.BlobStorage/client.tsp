@@ -14,39 +14,39 @@ model BlobServiceClientParameters {
 }
 
 @@clientNamespace(Storage.Blob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.Container.Blob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.AppendBlob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.Container.Blob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.Container.AppendBlob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.Container.BlockBlob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.Container.PageBlob, "Azure.Storage.Blobs");
 
 @@clientName(Storage.Blob, "ServiceClient");
 
-@@clientInitialization(Storage.Blob.Container.Blob,
-  {
-    parameters: BlobServiceClientParameters,
-    initializedBy: InitializedBy.parent | InitializedBy.individually,
-  }
-);
 @@clientInitialization(Storage.Blob.Container,
   {
     parameters: ContainerNamePathParameter,
     initializedBy: InitializedBy.parent | InitializedBy.individually,
   }
 );
-@@clientInitialization(Storage.Blob.AppendBlob,
+@@clientInitialization(Storage.Blob.Container.Blob,
   {
     parameters: BlobServiceClientParameters,
     initializedBy: InitializedBy.parent | InitializedBy.individually,
   }
 );
-@@clientInitialization(Storage.Blob.BlockBlob,
+@@clientInitialization(Storage.Blob.Container.AppendBlob,
   {
     parameters: BlobServiceClientParameters,
     initializedBy: InitializedBy.parent | InitializedBy.individually,
   }
 );
-@@clientInitialization(Storage.Blob.PageBlob,
+@@clientInitialization(Storage.Blob.Container.BlockBlob,
+  {
+    parameters: BlobServiceClientParameters,
+    initializedBy: InitializedBy.parent | InitializedBy.individually,
+  }
+);
+@@clientInitialization(Storage.Blob.Container.PageBlob,
   {
     parameters: BlobServiceClientParameters,
     initializedBy: InitializedBy.parent | InitializedBy.individually,
