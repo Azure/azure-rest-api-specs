@@ -11,10 +11,13 @@ on:
     - cron: "6 12 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   spellcheck:
     name: SpellCheck
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout repository
@@ -25,6 +28,7 @@ jobs:
       - name: Run spelling check
         run: |
           ./eng/common/spelling/Invoke-Cspell.ps1 `
-            -ScanGlobs 'specification/**' `
-            -CSpellConfigPath './cspell.json'
+            -ScanGlobs '**' `
+            -CSpellConfigPath './cspell.json' `
+            -SpellCheckRoot (Resolve-Path specification)
         shell: pwsh
