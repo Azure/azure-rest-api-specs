@@ -265,6 +265,9 @@
           "Create a scale set with sku profile": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSkuProfile.json"
           },
+          "Create a scale set with sku profile and prioritized allocation strategy": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSkuProfile_Prioritized.json"
+          },
           "Create a VMSS with an extension with protectedSettingsFromKeyVault": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithProtectedSettingsFromKeyVault.json"
           },
@@ -285,6 +288,9 @@
           },
           "Create a scale set with Security Posture Reference": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSecurityPostureReference.json"
+          },
+          "Create a scale set with Automatic Zone Rebalancing enabled": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithAutomaticZoneRebalancingPolicy.json"
           },
           "Create a scale set with Resilient VM Creation enabled": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithResilientVMCreationPolicy.json"
@@ -3930,9 +3936,13 @@
         "resilientVMDeletionPolicy": {
           "$ref": "#/definitions/ResilientVMDeletionPolicy",
           "description": "The configuration parameters used while performing resilient VM deletion."
+        },
+        "automaticZoneRebalancingPolicy": {
+          "$ref": "#/definitions/AutomaticZoneRebalancingPolicy",
+          "description": "The configuration parameters used while performing automatic AZ balancing."
         }
       },
-      "description": "Describes an resiliency policy - resilientVMCreationPolicy and/or resilientVMDeletionPolicy."
+      "description": "Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy and/or ResilientVMDeletionPolicy."
     },
     "ResilientVMCreationPolicy": {
       "type": "object",
@@ -3953,6 +3963,38 @@
         }
       },
       "description": "The configuration parameters used while performing resilient VM deletion."
+    },
+    "AutomaticZoneRebalancingPolicy": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether Automatic AZ Balancing should be enabled on the virtual machine scale set. The default value is false."
+        },
+        "rebalanceStrategy": {
+          "type": "string",
+          "description": "Type of rebalance strategy that will be used for rebalancing virtual machines in the scale set across availability zones. Default and only supported value for now is Recreate.",
+          "enum": [
+            "Recreate"
+          ],
+          "x-ms-enum": {
+            "name": "RebalanceStrategy",
+            "modelAsString": true
+          }
+        },
+        "rebalanceBehavior": {
+          "type": "string",
+          "description": "Type of rebalance behavior that will be used for recreating virtual machines in the scale set across availability zones. Default and only supported value for now is CreateBeforeDelete.",
+          "enum": [
+            "CreateBeforeDelete"
+          ],
+          "x-ms-enum": {
+            "name": "RebalanceBehavior",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The configuration parameters used while performing automatic AZ balancing."
     },
     "RollingUpgradePolicy": {
       "properties": {
@@ -4021,6 +4063,10 @@
         "forceDeletion": {
           "type": "boolean",
           "description": "This property allows you to specify if virtual machines chosen for removal have to be force deleted when a virtual machine scale set is being scaled-in.(Feature in Preview)"
+        },
+        "prioritizeUnhealthyVMs": {
+          "type": "boolean",
+          "description": "This property allows you to prioritize the deletion of unhealthy and inactive VMs when a virtual machine scale set is being scaled-in.(Feature in Preview)"
         }
       },
       "description": "Describes a scale-in policy for a virtual machine scale set."
@@ -4076,7 +4122,8 @@
           "description": "Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.",
           "enum": [
             "LowestPrice",
-            "CapacityOptimized"
+            "CapacityOptimized",
+            "Prioritized"
           ],
           "x-ms-enum": {
             "name": "AllocationStrategy",
@@ -4092,6 +4139,12 @@
         "name": {
           "type": "string",
           "description": "Specifies the name of the VM Size."
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Specifies the rank (a.k.a priority) associated with the VM Size."
         }
       },
       "description": "Specifies the VM Size."

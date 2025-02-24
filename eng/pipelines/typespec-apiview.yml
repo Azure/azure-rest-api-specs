@@ -1,0 +1,52 @@
+parameters:
+  - name: APIViewArtifactsDirectoryName
+    type: string
+    default: 'TypespecAPIViewArtifacts'
+  - name: APIViewArtifactsName
+    type: string
+    default: 'typeSpecAPIViewArtifacts'
+  - name: APIViewAPIUri
+    type: string
+    default: 'https://apiview.dev/PullRequest/DetectAPIChanges'
+    # Please use 'https://apiviewstagingtest.com/PullRequest/DetectAPIChanges' for testing purposes
+
+jobs:
+- job:
+  pool:
+    name: azsdk-pool-x64
+    demands: ImageOverride -equals ubuntu-22.04
+
+  steps:
+  - checkout: self
+    fetchDepth: 0
+
+  - pwsh: |
+      . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
+      New-TypeSpecAPIViewTokens `
+        -TempDirectory "$(Agent.TempDirectory)" `
+        -ArtifactsStagingDirectory "$(Build.ArtifactStagingDirectory)" `
+        -APIViewArtifactsDirectoryName "${{ parameters.APIViewArtifactsDirectoryName }}"
+    displayName: Generate TypeSpec APIView Tokens
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)/${{ parameters.APIViewArtifactsDirectoryName }}'
+      artifactName: '${{ parameters.APIViewArtifactsName }}'
+      publishLocation: 'pipeline'
+    displayName: 'Publish TypeSpec APIView Artifacts'
+    condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))
+
+  - pwsh: |
+      . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
+      New-RestSpecsAPIViewReviews `
+        -ArtiFactsStagingDirectory $(Build.ArtifactStagingDirectory) `
+        -APIViewArtifactsDirectoryName ${{ parameters.APIViewArtifactsDirectoryName }} `
+        -APIViewArtifactsName ${{ parameters.APIViewArtifactsName }} `
+        -APIViewUri ${{ parameters.APIViewAPIUri }} `
+        -BuildId $(Build.BuildId) `
+        -RepoName $(Build.Repository.Name) `
+        -PullRequestNumber $(System.PullRequest.PullRequestNumber)`
+        -Language 'TypeSpec' `
+        -CommitSha $(Build.SourceVersion)
+    displayName: Create TypeSpec APIView
+    condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))

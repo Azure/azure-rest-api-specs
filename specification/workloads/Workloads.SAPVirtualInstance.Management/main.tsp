@@ -31,6 +31,8 @@ using TypeSpec.Versioning;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Workloads;
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 /**
  * The available API versions.
  */
