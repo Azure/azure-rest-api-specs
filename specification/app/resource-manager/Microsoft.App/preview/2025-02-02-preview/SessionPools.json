@@ -529,6 +529,28 @@
             "name": "SessionNetworkStatus",
             "modelAsString": true
           }
+        },
+        "subnet": {
+          "description": "The subnet to which the Session Pool will be connected.",
+          "$ref": "#/definitions/SessionPoolSubnetReference"
+        }
+      }
+    },
+    "SessionPoolSubnetReference": {
+      "description": "Reference to a virtual network subnet to which a Session Pool will be connected.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID of the subnet to which a Session Pool will be connected",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         }
       }
     },
