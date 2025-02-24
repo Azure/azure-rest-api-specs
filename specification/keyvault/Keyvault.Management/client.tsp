@@ -16,13 +16,9 @@ using Microsoft.KeyVault;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(MhsmPrivateLinkResource.properties);
 
-@@clientName(Keys.createIfNotExist::parameters.resource, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Key.properties);
 
-@@clientName(ManagedHsmKeys.createIfNotExist::parameters.resource,
-  "parameters"
-);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ManagedHsmKey.properties);
 

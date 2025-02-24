@@ -11,74 +11,6 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.KeyVault;
 
 /**
- * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
- */
-union DeletionRecoveryLevel {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Purgeable: "Purgeable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `Recoverable+Purgeable`: "Recoverable+Purgeable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Recoverable: "Recoverable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `Recoverable+ProtectedSubscription`: "Recoverable+ProtectedSubscription",
-}
-
-/**
- * The type of the key. For valid values, see JsonWebKeyType.
- */
-union JsonWebKeyType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  EC: "EC",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `EC-HSM`: "EC-HSM",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  RSA: "RSA",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `RSA-HSM`: "RSA-HSM",
-}
-
-/**
- * The permitted JSON web key operations of the key. For more information, see JsonWebKeyOperation.
- */
-union JsonWebKeyOperation {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  encrypt: "encrypt",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  decrypt: "decrypt",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  sign: "sign",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  verify: "verify",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  wrapKey: "wrapKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  unwrapKey: "unwrapKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `import`: "import",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  release: "release",
-}
-
-/**
- * The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256
- */
-union JsonWebKeyCurveName {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `P-256`: "P-256",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `P-384`: "P-384",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `P-521`: "P-521",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `P-256K`: "P-256K",
-}
-
-/**
  * SKU family name
  */
 union SkuFamily {
@@ -457,12 +389,71 @@ union ManagedServiceIdentityType {
 }
 
 /**
- * The type of action.
+ * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum KeyRotationPolicyActionType {
-  rotate,
-  notify,
+union DeletionRecoveryLevel {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Purgeable: "Purgeable",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `Recoverable+Purgeable`: "Recoverable+Purgeable",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Recoverable: "Recoverable",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `Recoverable+ProtectedSubscription`: "Recoverable+ProtectedSubscription",
+}
+
+/**
+ * The type of the key. For valid values, see JsonWebKeyType.
+ */
+union JsonWebKeyType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  EC: "EC",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `EC-HSM`: "EC-HSM",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  RSA: "RSA",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `RSA-HSM`: "RSA-HSM",
+}
+
+/**
+ * The permitted JSON web key operations of the key. For more information, see JsonWebKeyOperation.
+ */
+union JsonWebKeyOperation {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  encrypt: "encrypt",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  decrypt: "decrypt",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  sign: "sign",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  verify: "verify",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  wrapKey: "wrapKey",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  unwrapKey: "unwrapKey",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `import`: "import",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  release: "release",
+}
+
+/**
+ * The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256
+ */
+union JsonWebKeyCurveName {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `P-256`: "P-256",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `P-384`: "P-384",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `P-521`: "P-521",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `P-256K`: "P-256K",
 }
 
 /**
@@ -513,483 +504,12 @@ enum ManagedHsmSkuName {
 }
 
 /**
- * The parameters used to create a key.
+ * The type of action.
  */
-model KeyCreateParameters {
-  /**
-   * The tags that will be assigned to the key.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
-  /**
-   * The properties of the key to be created.
-   */
-  properties: KeyProperties;
-}
-
-/**
- * The properties of the key.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-model KeyProperties {
-  /**
-   * The attributes of the key.
-   */
-  attributes?: KeyAttributes;
-
-  /**
-   * The type of the key. For valid values, see JsonWebKeyType.
-   */
-  kty?: JsonWebKeyType;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  keyOps?: JsonWebKeyOperation[];
-
-  /**
-   * The key size in bits. For example: 2048, 3072, or 4096 for RSA. Default for RSA and RSA-HSM keys is 2048. Exception made for bring your own key (BYOK), key exchange keys default to 4096.
-   */
-  keySize?: int32;
-
-  /**
-   * The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256
-   */
-  curveName?: JsonWebKeyCurveName;
-
-  /**
-   * The URI to retrieve the current version of the key.
-   */
-  @visibility("read")
-  keyUri?: string;
-
-  /**
-   * The URI to retrieve the specific version of the key.
-   */
-  @visibility("read")
-  keyUriWithVersion?: string;
-
-  /**
-   * Key rotation policy in response. It will be used for both output and input. Omitted if empty
-   */
-  rotationPolicy?: RotationPolicy;
-
-  /**
-   * Key release policy in response. It will be used for both output and input. Omitted if empty
-   */
-  @encodedName("application/json", "release_policy")
-  releasePolicy?: KeyReleasePolicy;
-}
-
-/**
- * The object attributes managed by the Azure Key Vault service.
- */
-model KeyAttributes {
-  /**
-   * Determines whether or not the object is enabled.
-   */
-  enabled?: boolean;
-
-  /**
-   * Not before date in seconds since 1970-01-01T00:00:00Z.
-   */
-  @encodedName("application/json", "nbf")
-  notBefore?: int64;
-
-  /**
-   * Expiry date in seconds since 1970-01-01T00:00:00Z.
-   */
-  @encodedName("application/json", "exp")
-  expires?: int64;
-
-  /**
-   * Creation time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility("read")
-  created?: int64;
-
-  /**
-   * Last updated time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility("read")
-  updated?: int64;
-
-  /**
-   * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
-   */
-  @visibility("read")
-  recoveryLevel?: DeletionRecoveryLevel;
-
-  /**
-   * Indicates if the private key can be exported.
-   */
-  exportable?: boolean;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model RotationPolicy {
-  /**
-   * The attributes of key rotation policy.
-   */
-  attributes?: KeyRotationPolicyAttributes;
-
-  /**
-   * The lifetimeActions for key rotation action.
-   */
-  @OpenAPI.extension("x-ms-identifiers", [])
-  lifetimeActions?: LifetimeAction[];
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model KeyRotationPolicyAttributes {
-  /**
-   * Creation time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility("read")
-  created?: int64;
-
-  /**
-   * Last updated time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility("read")
-  updated?: int64;
-
-  /**
-   * The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'.
-   */
-  expiryTime?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model LifetimeAction {
-  /**
-   * The trigger of key rotation policy lifetimeAction.
-   */
-  trigger?: Trigger;
-
-  /**
-   * The action of key rotation policy lifetimeAction.
-   */
-  action?: Action;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model Trigger {
-  /**
-   * The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
-   */
-  timeAfterCreate?: string;
-
-  /**
-   * The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
-   */
-  timeBeforeExpiry?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model Action {
-  /**
-   * The type of action.
-   */
-  type?: KeyRotationPolicyActionType;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model KeyReleasePolicy {
-  /**
-   * Content type and version of key release policy
-   */
-  contentType?: string = "application/json; charset=utf-8";
-
-  /**
-   * Blob encoding the policy rules under which the key can be released.
-   */
-  data?: bytes;
-}
-
-/**
- * Key Vault resource
- */
-model Resource {
-  /**
-   * Fully qualified identifier of the key vault resource.
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Name of the key vault resource.
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Resource type of the key vault resource.
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Azure location of the key vault resource.
-   */
-  @visibility("read")
-  location?: string;
-
-  /**
-   * Tags assigned to the key vault resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read")
-  tags?: Record<string>;
-}
-
-/**
- * An error response from Key Vault resource provider
- */
-@error
-model CloudError {
-  /**
-   * An error response from Key Vault resource provider
-   */
-  error?: CloudErrorBody;
-}
-
-/**
- * An error response from Key Vault resource provider
- */
-model CloudErrorBody {
-  /**
-   * Error code. This is a mnemonic that can be consumed programmatically.
-   */
-  code?: string;
-
-  /**
-   * User friendly error message. The message is typically localized and may vary with service version.
-   */
-  message?: string;
-}
-
-/**
- * The parameters used to create a key.
- */
-model ManagedHsmKeyCreateParameters {
-  /**
-   * The tags that will be assigned to the key.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
-  /**
-   * The properties of the key to be created.
-   */
-  properties: ManagedHsmKeyProperties;
-}
-
-/**
- * The properties of the key.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-model ManagedHsmKeyProperties {
-  /**
-   * The attributes of the key.
-   */
-  attributes?: ManagedHsmKeyAttributes;
-
-  /**
-   * The type of the key. For valid values, see JsonWebKeyType.
-   */
-  kty?: JsonWebKeyType;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  keyOps?: JsonWebKeyOperation[];
-
-  /**
-   * The key size in bits. For example: 2048, 3072, or 4096 for RSA. Default for RSA and RSA-HSM keys is 2048. Exception made for bring your own key (BYOK), key exchange keys default to 4096.
-   */
-  keySize?: int32;
-
-  /**
-   * The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256
-   */
-  curveName?: JsonWebKeyCurveName;
-
-  /**
-   * The URI to retrieve the current version of the key.
-   */
-  @visibility("read")
-  keyUri?: string;
-
-  /**
-   * The URI to retrieve the specific version of the key.
-   */
-  @visibility("read")
-  keyUriWithVersion?: string;
-
-  /**
-   * Key rotation policy in response. It will be used for both output and input. Omitted if empty
-   */
-  rotationPolicy?: ManagedHsmRotationPolicy;
-
-  /**
-   * Key release policy in response. It will be used for both output and input. Omitted if empty
-   */
-  @encodedName("application/json", "release_policy")
-  releasePolicy?: ManagedHsmKeyReleasePolicy;
-}
-
-/**
- * The object attributes managed by the Azure Key Vault service.
- */
-model ManagedHsmKeyAttributes {
-  /**
-   * Determines whether or not the object is enabled.
-   */
-  enabled?: boolean;
-
-  /**
-   * Not before date in seconds since 1970-01-01T00:00:00Z.
-   */
-  @encodedName("application/json", "nbf")
-  notBefore?: int64;
-
-  /**
-   * Expiry date in seconds since 1970-01-01T00:00:00Z.
-   */
-  @encodedName("application/json", "exp")
-  expires?: int64;
-
-  /**
-   * Creation time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility("read")
-  created?: int64;
-
-  /**
-   * Last updated time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility("read")
-  updated?: int64;
-
-  /**
-   * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
-   */
-  @visibility("read")
-  recoveryLevel?: DeletionRecoveryLevel;
-
-  /**
-   * Indicates if the private key can be exported.
-   */
-  exportable?: boolean;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ManagedHsmRotationPolicy {
-  /**
-   * The attributes of key rotation policy.
-   */
-  attributes?: ManagedHsmKeyRotationPolicyAttributes;
-
-  /**
-   * The lifetimeActions for key rotation action.
-   */
-  @OpenAPI.extension("x-ms-identifiers", [])
-  lifetimeActions?: ManagedHsmLifetimeAction[];
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ManagedHsmKeyRotationPolicyAttributes {
-  /**
-   * Creation time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility("read")
-  created?: int64;
-
-  /**
-   * Last updated time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility("read")
-  updated?: int64;
-
-  /**
-   * The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'.
-   */
-  expiryTime?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ManagedHsmLifetimeAction {
-  /**
-   * The trigger of key rotation policy lifetimeAction.
-   */
-  trigger?: ManagedHsmTrigger;
-
-  /**
-   * The action of key rotation policy lifetimeAction.
-   */
-  action?: ManagedHsmAction;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ManagedHsmTrigger {
-  /**
-   * The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
-   */
-  timeAfterCreate?: string;
-
-  /**
-   * The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
-   */
-  timeBeforeExpiry?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ManagedHsmAction {
-  /**
-   * The type of action.
-   */
-  type?: KeyRotationPolicyActionType;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ManagedHsmKeyReleasePolicy {
-  /**
-   * Content type and version of key release policy
-   */
-  contentType?: string = "application/json; charset=utf-8";
-
-  /**
-   * Blob encoding the policy rules under which the key can be released.
-   */
-  data?: bytes;
-}
-
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model ProxyResourceWithoutSystemData {
-  /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create", "update")
-  tags?: Record<string>;
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum KeyRotationPolicyActionType {
+  rotate,
+  notify,
 }
 
 /**
@@ -1300,6 +820,32 @@ model PrivateLinkServiceConnectionState {
 }
 
 /**
+ * An error response from Key Vault resource provider
+ */
+@error
+model CloudError {
+  /**
+   * An error response from Key Vault resource provider
+   */
+  error?: CloudErrorBody;
+}
+
+/**
+ * An error response from Key Vault resource provider
+ */
+model CloudErrorBody {
+  /**
+   * Error code. This is a mnemonic that can be consumed programmatically.
+   */
+  code?: string;
+
+  /**
+   * User friendly error message. The message is typically localized and may vary with service version.
+   */
+  message?: string;
+}
+
+/**
  * Parameters for creating or updating a vault
  */
 model VaultPatchParameters {
@@ -1480,6 +1026,42 @@ model DeletedVaultProperties {
    */
   @visibility("read")
   purgeProtectionEnabled?: boolean;
+}
+
+/**
+ * Key Vault resource
+ */
+model Resource {
+  /**
+   * Fully qualified identifier of the key vault resource.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Name of the key vault resource.
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Resource type of the key vault resource.
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Azure location of the key vault resource.
+   */
+  @visibility("read")
+  location?: string;
+
+  /**
+   * Tags assigned to the key vault resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility("read")
+  tags?: Record<string>;
 }
 
 /**
@@ -2264,13 +1846,11 @@ model Attributes {
   /**
    * Not before date in seconds since 1970-01-01T00:00:00Z.
    */
-  @encodedName("application/json", "nbf")
   notBefore?: plainTime;
 
   /**
    * Expiry date in seconds since 1970-01-01T00:00:00Z.
    */
-  @encodedName("application/json", "exp")
   expires?: plainTime;
 
   /**
@@ -2320,4 +1900,476 @@ model SecretPatchProperties {
    * The attributes of the secret.
    */
   attributes?: SecretAttributes;
+}
+
+/**
+ * The properties of the key.
+ */
+model KeyProperties {
+  /**
+   * The attributes of the key.
+   */
+  attributes?: KeyAttributes;
+
+  /**
+   * The type of the key. For valid values, see JsonWebKeyType.
+   */
+  kty?: JsonWebKeyType;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  keyOps?: JsonWebKeyOperation[];
+
+  /**
+   * The key size in bits. For example: 2048, 3072, or 4096 for RSA. Default for RSA and RSA-HSM keys is 2048. Exception made for bring your own key (BYOK), key exchange keys default to 4096.
+   */
+  keySize?: int32;
+
+  /**
+   * The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256
+   */
+  curveName?: JsonWebKeyCurveName;
+
+  /**
+   * The URI to retrieve the current version of the key.
+   */
+  @visibility("read")
+  keyUri?: string;
+
+  /**
+   * The URI to retrieve the specific version of the key.
+   */
+  @visibility("read")
+  keyUriWithVersion?: string;
+
+  /**
+   * Key rotation policy in response. It will be used for both output and input. Omitted if empty
+   */
+  rotationPolicy?: RotationPolicy;
+
+  /**
+   * Key release policy in response. It will be used for both output and input. Omitted if empty
+   */
+  @encodedName("application/json", "release_policy")
+  releasePolicy?: KeyReleasePolicy;
+}
+
+/**
+ * The object attributes managed by the Azure Key Vault service.
+ */
+model KeyAttributes {
+  /**
+   * Determines whether or not the object is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * Not before date in seconds since 1970-01-01T00:00:00Z.
+   */
+  @encodedName("application/json", "nbf")
+  notBefore?: int64;
+
+  /**
+   * Expiry date in seconds since 1970-01-01T00:00:00Z.
+   */
+  @encodedName("application/json", "exp")
+  expires?: int64;
+
+  /**
+   * Creation time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility("read")
+  created?: int64;
+
+  /**
+   * Last updated time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility("read")
+  updated?: int64;
+
+  /**
+   * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
+   */
+  @visibility("read")
+  recoveryLevel?: DeletionRecoveryLevel;
+
+  /**
+   * Indicates if the private key can be exported.
+   */
+  exportable?: boolean;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model RotationPolicy {
+  /**
+   * The attributes of key rotation policy.
+   */
+  attributes?: KeyRotationPolicyAttributes;
+
+  /**
+   * The lifetimeActions for key rotation action.
+   */
+  @OpenAPI.extension("x-ms-identifiers", [])
+  lifetimeActions?: LifetimeAction[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model KeyRotationPolicyAttributes {
+  /**
+   * Creation time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility("read")
+  created?: int64;
+
+  /**
+   * Last updated time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility("read")
+  updated?: int64;
+
+  /**
+   * The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'.
+   */
+  expiryTime?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model LifetimeAction {
+  /**
+   * The trigger of key rotation policy lifetimeAction.
+   */
+  trigger?: Trigger;
+
+  /**
+   * The action of key rotation policy lifetimeAction.
+   */
+  action?: Action;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model Trigger {
+  /**
+   * The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
+   */
+  timeAfterCreate?: string;
+
+  /**
+   * The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
+   */
+  timeBeforeExpiry?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model Action {
+  /**
+   * The type of action.
+   */
+  type?: KeyRotationPolicyActionType;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model KeyReleasePolicy {
+  /**
+   * Content type and version of key release policy
+   */
+  contentType?: string = "application/json; charset=utf-8";
+
+  /**
+   * Blob encoding the policy rules under which the key can be released.
+   */
+  data?: bytes;
+}
+
+/**
+ * The parameters used to create a key.
+ */
+model KeyCreateParameters {
+  /**
+   * The tags that will be assigned to the key.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * The properties of the key to be created.
+   */
+  properties: KeyProperties;
+}
+
+/**
+ * The key resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model Key extends Resource {
+  /**
+   * The properties of the key.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties: KeyProperties;
+}
+
+/**
+ * The page of keys.
+ */
+model KeyListResult {
+  /**
+   * The key resources.
+   */
+  value?: Key[];
+
+  /**
+   * The URL to get the next page of keys.
+   */
+  nextLink?: string;
+}
+
+/**
+ * The properties of the key.
+ */
+model ManagedHsmKeyProperties {
+  /**
+   * The attributes of the key.
+   */
+  attributes?: ManagedHsmKeyAttributes;
+
+  /**
+   * The type of the key. For valid values, see JsonWebKeyType.
+   */
+  kty?: JsonWebKeyType;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  keyOps?: JsonWebKeyOperation[];
+
+  /**
+   * The key size in bits. For example: 2048, 3072, or 4096 for RSA. Default for RSA and RSA-HSM keys is 2048. Exception made for bring your own key (BYOK), key exchange keys default to 4096.
+   */
+  keySize?: int32;
+
+  /**
+   * The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256
+   */
+  curveName?: JsonWebKeyCurveName;
+
+  /**
+   * The URI to retrieve the current version of the key.
+   */
+  @visibility("read")
+  keyUri?: string;
+
+  /**
+   * The URI to retrieve the specific version of the key.
+   */
+  @visibility("read")
+  keyUriWithVersion?: string;
+
+  /**
+   * Key rotation policy in response. It will be used for both output and input. Omitted if empty
+   */
+  rotationPolicy?: ManagedHsmRotationPolicy;
+
+  /**
+   * Key release policy in response. It will be used for both output and input. Omitted if empty
+   */
+  @encodedName("application/json", "release_policy")
+  releasePolicy?: ManagedHsmKeyReleasePolicy;
+}
+
+/**
+ * The object attributes managed by the Azure Key Vault service.
+ */
+model ManagedHsmKeyAttributes {
+  /**
+   * Determines whether or not the object is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * Not before date in seconds since 1970-01-01T00:00:00Z.
+   */
+  @encodedName("application/json", "nbf")
+  notBefore?: int64;
+
+  /**
+   * Expiry date in seconds since 1970-01-01T00:00:00Z.
+   */
+  @encodedName("application/json", "exp")
+  expires?: int64;
+
+  /**
+   * Creation time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility("read")
+  created?: int64;
+
+  /**
+   * Last updated time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility("read")
+  updated?: int64;
+
+  /**
+   * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
+   */
+  @visibility("read")
+  recoveryLevel?: DeletionRecoveryLevel;
+
+  /**
+   * Indicates if the private key can be exported.
+   */
+  exportable?: boolean;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ManagedHsmRotationPolicy {
+  /**
+   * The attributes of key rotation policy.
+   */
+  attributes?: ManagedHsmKeyRotationPolicyAttributes;
+
+  /**
+   * The lifetimeActions for key rotation action.
+   */
+  @OpenAPI.extension("x-ms-identifiers", [])
+  lifetimeActions?: ManagedHsmLifetimeAction[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ManagedHsmKeyRotationPolicyAttributes {
+  /**
+   * Creation time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility("read")
+  created?: int64;
+
+  /**
+   * Last updated time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility("read")
+  updated?: int64;
+
+  /**
+   * The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'.
+   */
+  expiryTime?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ManagedHsmLifetimeAction {
+  /**
+   * The trigger of key rotation policy lifetimeAction.
+   */
+  trigger?: ManagedHsmTrigger;
+
+  /**
+   * The action of key rotation policy lifetimeAction.
+   */
+  action?: ManagedHsmAction;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ManagedHsmTrigger {
+  /**
+   * The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
+   */
+  timeAfterCreate?: string;
+
+  /**
+   * The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
+   */
+  timeBeforeExpiry?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ManagedHsmAction {
+  /**
+   * The type of action.
+   */
+  type?: KeyRotationPolicyActionType;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ManagedHsmKeyReleasePolicy {
+  /**
+   * Content type and version of key release policy
+   */
+  contentType?: string = "application/json; charset=utf-8";
+
+  /**
+   * Blob encoding the policy rules under which the key can be released.
+   */
+  data?: bytes;
+}
+
+/**
+ * The parameters used to create a key.
+ */
+model ManagedHsmKeyCreateParameters {
+  /**
+   * The tags that will be assigned to the key.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * The properties of the key to be created.
+   */
+  properties: ManagedHsmKeyProperties;
+}
+
+/**
+ * The key resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model ManagedHsmKey extends ProxyResourceWithoutSystemData {
+  /**
+   * The properties of the key.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties: ManagedHsmKeyProperties;
+}
+
+/**
+ * Common fields that are returned in the response for all Azure Resource Manager resources
+ */
+model ProxyResourceWithoutSystemData {
+  /**
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The name of the resource
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility("read", "create", "update")
+  tags?: Record<string>;
+}
+
+/**
+ * The page of keys.
+ */
+model ManagedHsmKeyListResult {
+  /**
+   * The key resources.
+   */
+  value?: ManagedHsmKey[];
+
+  /**
+   * The URL to get the next page of keys.
+   */
+  nextLink?: string;
 }

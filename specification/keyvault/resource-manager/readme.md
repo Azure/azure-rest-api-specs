@@ -326,6 +326,21 @@ directive:
 - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
   from: keyvault.json
   reason: The Vaults_List API endpoint only supports version 2015-11-01.
+# Remove keysManagedHsm.json and keys.json since these 2 are part of data plane
+- from: keysManagedHsm.json
+  where: $.paths
+  transform: >
+    for (var path in $)
+    {
+        delete $[path];
+    }
+- from: keys.json
+  where: $.paths
+  transform: >
+    for (var path in $)
+    {
+        delete $[path];
+    }
 ```
 
 ---

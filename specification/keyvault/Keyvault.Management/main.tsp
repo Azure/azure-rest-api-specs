@@ -5,15 +5,13 @@
  *   isFullCompatible: true
  *   guessResourceKey: false
  * Version: 0.10.9
- * Date: 2025-02-13T03:33:31.572Z
+ * Date: 2025-02-19T07:38:41.410Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./Key.tsp";
-import "./ManagedHsmKey.tsp";
 import "./Vault.tsp";
 import "./DeletedVault.tsp";
 import "./PrivateEndpointConnection.tsp";
@@ -22,7 +20,6 @@ import "./DeletedManagedHsm.tsp";
 import "./MhsmPrivateEndpointConnection.tsp";
 import "./Secret.tsp";
 import "./routes.tsp";
-import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
