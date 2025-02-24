@@ -10,7 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using OpenAPI;
 
-@doc("The properties specific to elastic pool in Azure SQL Database.")
+@doc("The properties specific to an elastic pool in Azure SQL Database.")
 model SqlDbElasticPoolTargetProperties extends TargetProperties {
   @doc("The Azure SQL DB elastic pool target.")
   targetType: "SqlEp";

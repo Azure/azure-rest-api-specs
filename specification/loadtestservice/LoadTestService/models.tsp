@@ -351,7 +351,7 @@ model Test {
 
   @doc("Type of the managed identity built in load test engines")
   @added(APIVersions.v2024_12_01_preview)
-  engineBuiltInIdentityType?: ManagedIdentityType = ManagedIdentityType.SystemAssigned;
+  engineBuiltInIdentityType?: ManagedIdentityType;
 
   @doc("Resource Ids of the managed identity built in to load test engines. Required if engineBuiltInIdentityType is UserAssigned.")
   @added(APIVersions.v2024_12_01_preview)
@@ -737,6 +737,7 @@ model TestRun {
   regionalStatistics?: Record<TestRunStatistics>;
 
   @doc("The load test configuration.")
+  @visibility("read")
   loadTestConfiguration?: LoadTestConfiguration;
 
   @doc("Collection of test run artifacts")

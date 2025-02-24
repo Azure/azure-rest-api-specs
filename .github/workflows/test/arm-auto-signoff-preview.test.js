@@ -10,16 +10,16 @@ const core = createMockCore();
 
 /**
  * @param {Object} param0
- * @param {boolean} param0.incrementalTypespec
+ * @param {boolean} param0.incrementalTypeSpec
  */
-function createMockGithub({ incrementalTypespec }) {
+function createMockGithub({ incrementalTypeSpec }) {
   const github = createMockGithubBase();
 
   github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
     data: {
       workflow_runs: [
         {
-          name: "ARM Incremental Typespec (Preview)",
+          name: "ARM Incremental TypeSpec (Preview)",
           id: 456,
           status: "completed",
           conclusion: "success",
@@ -30,7 +30,7 @@ function createMockGithub({ incrementalTypespec }) {
 
   github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
     data: {
-      artifacts: [{ name: `incremental-typespec=${incrementalTypespec}` }],
+      artifacts: [{ name: `incremental-typespec=${incrementalTypeSpec}` }],
     },
   });
 
@@ -43,7 +43,7 @@ describe("getLabelActionImpl", () => {
   });
 
   it("removes label if not incremental typespec", async () => {
-    const github = createMockGithub({ incrementalTypespec: false });
+    const github = createMockGithub({ incrementalTypeSpec: false });
 
     await expect(
       getLabelActionImpl({
@@ -54,7 +54,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toBe(LabelAction.Remove);
+    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
   });
 
   it.each([
@@ -62,7 +62,7 @@ describe("getLabelActionImpl", () => {
     { labels: ["ARMReview", "NotReadyForARMReview"] },
     { labels: ["ARMReview", "SuppressionReviewRequired"] },
   ])("removes label if not all labels match ($labels)", async ({ labels }) => {
-    const github = createMockGithub({ incrementalTypespec: true });
+    const github = createMockGithub({ incrementalTypeSpec: true });
 
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: labels.map((name) => ({ name })),
@@ -77,11 +77,11 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toBe(LabelAction.Remove);
+    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
   });
 
   it("removes label if check failed", async () => {
-    const github = createMockGithub({ incrementalTypespec: true });
+    const github = createMockGithub({ incrementalTypeSpec: true });
 
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: [{ name: "ARMReview" }],
@@ -107,11 +107,11 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toBe(LabelAction.Remove);
+    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
   });
 
   it("no-ops if check not found or not completed", async () => {
-    const github = createMockGithub({ incrementalTypespec: true });
+    const github = createMockGithub({ incrementalTypeSpec: true });
 
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: [{ name: "ARMReview" }],
@@ -131,7 +131,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toBe(LabelAction.None);
+    ).resolves.toEqual({ labelAction: LabelAction.None, issueNumber: 123 });
 
     github.rest.checks.listForRef.mockResolvedValue({
       data: {
@@ -153,11 +153,11 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toBe(LabelAction.None);
+    ).resolves.toEqual({ labelAction: LabelAction.None, issueNumber: 123 });
   });
 
   it("adds label if incremental tsp, labels match, and check succeeded", async () => {
-    const github = createMockGithub({ incrementalTypespec: true });
+    const github = createMockGithub({ incrementalTypeSpec: true });
 
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: [{ name: "ARMReview" }],
@@ -183,6 +183,6 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toBe(LabelAction.Add);
+    ).resolves.toEqual({ labelAction: LabelAction.Add, issueNumber: 123 });
   });
 });

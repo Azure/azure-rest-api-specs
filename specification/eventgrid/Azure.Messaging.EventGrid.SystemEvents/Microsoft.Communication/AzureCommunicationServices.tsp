@@ -1,4 +1,4 @@
-import "@typespec/versioning";
+﻿import "@typespec/versioning";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
@@ -1194,38 +1194,60 @@ model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsMessageReceivedEventData extends AcsMessageEventData {
-  /** The message content */
+  /** Optional. The message content */
   content?: string;
 
-  /** The message channel type */
+  /** Optional. Message ID. Format is Guid as string. */
+  messageId?: string;
+
+  /** Required. The message channel type */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   channelType: AcsMessageChannelKind;
 
-  /** The received message media content */
-  media: AcsMessageMediaContent;
+  /** Required. Whatsapp message type */
+  messageType: string;
 
-  /** The received message context */
-  context: AcsMessageContext;
+  /** Optional. The received message media content */
+  media?: AcsMessageMediaContent;
 
-  /** The received message button content */
-  button: AcsMessageButtonContent;
+  /** Optional. The received message reaction content */
+  reaction?: AcsMessageReactionContent;
 
-  /** The received message interactive content */
-  interactive: AcsMessageInteractiveContent;
+  /** Optional. The received message context */
+  context?: AcsMessageContext;
+
+  /** Optional. The received message button content */
+  button?: AcsMessageButtonContent;
+
+  /** Optional. The received message interactive content */
+  interactive?: AcsMessageInteractiveContent;
 }
 
 /** Message Media Content */
 model AcsMessageMediaContent {
-  /** The MIME type of the file this media represents */
-  mimeType?: string;
+  /** Required. The MIME type of the file this media represents */
+  mimeType: string;
 
-  /** The media identifier */
-  id?: string;
+  /** Required. The media identifier */
+  id: string;
 
-  /** The filename of the underlying media file as specified when uploaded */
+  /** Optional. The filename of the underlying media file as specified when uploaded */
   fileName?: string;
 
-  /** The caption for the media object, if supported and provided */
+  /** Optional. The caption for the media object, if supported and provided */
   caption?: string;
+
+  /** Optional. Set to true if the sticker is animated; false otherwise. */
+  animated?: boolean;
+}
+
+/** Message Reaction Content */
+model AcsMessageReactionContent {
+  /** Required. WhatsApp message ID of the message that the emoji is applied to */
+  messageId: string;
+
+  /** Optional. Unicode escape sequence of the emoji. */
+  emoji?: string;
 }
 
 /** Message Context */
@@ -1253,10 +1275,10 @@ model AcsMessageInteractiveContent {
   type: AcsInteractiveReplyKind;
 
   /** The Message Sent when a customer clicks a button */
-  buttonReply: AcsMessageInteractiveButtonReplyContent;
+  buttonReply?: AcsMessageInteractiveButtonReplyContent;
 
   /** The Message Sent when a customer selects an item from a list */
-  listReply: AcsMessageInteractiveListReplyContent;
+  listReply?: AcsMessageInteractiveListReplyContent;
 }
 
 /** Message Interactive button reply content for a user to business message */
@@ -1283,17 +1305,17 @@ model AcsMessageInteractiveListReplyContent {
 /** Schema of common properties of all chat thread events */
 model AcsMessageEventData {
   /** The message sender */
-  from?: string;
+  from: string;
 
   /** The message recipient */
-  to?: string;
+  to: string;
 
   /** The time message was received */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   receivedTimeStamp: utcDateTime;
 
   /** The channel event error */
-  error: AcsMessageChannelEventError;
+  error?: AcsMessageChannelEventError;
 }
 
 /** Message Channel Event Error */
