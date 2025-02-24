@@ -1052,23 +1052,21 @@
       "properties": {
         "storageConnectorMethodName": {
           "type": "string",
-          "description": "Which request attempt failed. Valid values are List and GetBlob.",
+          "description": "Indicates the method used to validate the connection to the backing data store. Valid values are `GetBlob` and `ListBlobs` for failure, and `TestExistingConnection` for success.",
           "minLength": 1
         },
         "storageConnectorErrorMessage": {
           "type": "string",
-          "description": "A string representing the error received from the backing data store. Format will vary depending on the data store type.  This will be capped at 1 MB in size.",
-          "minLength": 1
+          "description": "A string representing the error received from the backing data store. Format will vary depending on the data store type and will be capped at 1 MB in size. The error message will be empty if the connection was successful."
         },
         "storageConnectorRequestId": {
           "type": "string",
-          "description": "The request ID associated with the request sent to the backing data store for validation.",
+          "description": "The request Id associated with the request sent to the backing data store for validation.",
           "minLength": 1
         }
       },
       "required": [
         "storageConnectorMethodName",
-        "storageConnectorErrorMessage",
         "storageConnectorRequestId"
       ]
     },
