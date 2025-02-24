@@ -465,6 +465,9 @@ union ManagedResourceProvisioningState {
    */
   Deleted: "Deleted",
 
+  /**
+   * The resource provisioning state is a state other than the previously specified states.
+   */
   Other: "Other",
 }
 
@@ -1310,6 +1313,7 @@ model ApplicationUserAssignedIdentity {
 /**
  * Application update request.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Not adding identity property as this API is for updating tags only"
 model ApplicationUpdateParameters {
   /**
    * Application update parameters
@@ -1326,6 +1330,7 @@ model ServiceResourceList is Azure.Core.Page<ServiceResource>;
 /**
  * The service resource properties.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Day 0 property, keeping definition as is for backwards compatibility"
 @discriminator("serviceKind")
 model ServiceResourceProperties extends ServiceResourcePropertiesBase {
   /**
@@ -1564,6 +1569,7 @@ model AvailableOperationDisplay {
 /**
  * The detail of the Service Fabric runtime version result
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource, no provisioning"
 model ManagedClusterVersionDetails {
   /**
    * The Service Fabric runtime version of the cluster.
@@ -1593,13 +1599,11 @@ model LongRunningOperationResult {
   /**
    * The start time of the operation.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time of the operation.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -1627,6 +1631,7 @@ model ManagedVMSizesResult is Azure.Core.Page<ManagedVMSize>;
 /**
  * VM Sizes properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource, no provisioning"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well known abbreviation"
 model VMSize {
   /**
@@ -2336,6 +2341,7 @@ model Resource {
 /**
  * Managed cluster update request
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Not adding skus property as this API is for updating tags only"
 model ManagedClusterUpdateParameters {
   /**
    * Managed cluster update parameters
@@ -2371,13 +2377,11 @@ model FaultSimulation {
   /**
    * The start time of the fault simulation.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time of the fault simulation.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -2465,7 +2469,6 @@ model FaultSimulationConstraints {
   /**
    * The absolute expiration timestamp (UTC) after which this fault simulation should be stopped if it's still active.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTime?: utcDateTime;
 }
 
@@ -2500,22 +2503,22 @@ model ManagedMaintenanceWindowStatus {
   /**
    * Last window update time in UTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "UTC is a well known abbreviation"
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastWindowStatusUpdateAtUTC?: utcDateTime;
 
   /**
    * Last window start time in UTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "UTC is a well known abbreviation"
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastWindowStartTimeUTC?: utcDateTime;
 
   /**
    * Last window end time in UTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "UTC is a well known abbreviation"
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastWindowEndTimeUTC?: utcDateTime;
 }
 
@@ -2873,7 +2876,7 @@ model NodeTypeProperties {
   /**
    * Specifies the gallery applications that should be made available to the underlying VMSS.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", [])
   vmApplications?: VmApplication[];
 }
 
@@ -2945,6 +2948,7 @@ model VmssExtension {
   /**
    * Describes the properties of a Virtual Machine Scale Set Extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Backwards compatibility with existing flatten"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: VmssExtensionProperties;
 }
@@ -2976,11 +2980,13 @@ model VmssExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass dictionary"
   settings?: Record<unknown>;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass dictionary"
   protectedSettings?: Record<unknown>;
 
   /**
