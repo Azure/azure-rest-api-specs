@@ -1,71 +1,73 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resRg",
+    "api-version": "2024-11-01-preview",
     "clusterName": "myCluster",
     "nodeTypeName": "BE",
-    "api-version": "2024-11-01-preview"
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "",
         "value": [
           {
+            "capacity": {
+              "default": 1,
+              "maximum": 100,
+              "minimum": 1,
+              "scaleType": "Automatic"
+            },
             "resourceType": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
             "sku": {
               "name": "Standard_S0",
               "tier": "Standard"
-            },
-            "capacity": {
-              "minimum": 1,
-              "maximum": 100,
-              "default": 1,
-              "scaleType": "Automatic"
             }
           },
           {
+            "capacity": {
+              "default": 3,
+              "maximum": 300,
+              "minimum": 3,
+              "scaleType": "Automatic"
+            },
             "resourceType": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
             "sku": {
               "name": "Standard_S1",
               "tier": "Standard"
-            },
-            "capacity": {
-              "minimum": 3,
-              "maximum": 300,
-              "default": 3,
-              "scaleType": "Automatic"
             }
           },
           {
+            "capacity": {
+              "default": 1,
+              "maximum": 1000,
+              "minimum": 1,
+              "scaleType": "Automatic"
+            },
             "resourceType": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
             "sku": {
               "name": "Standard_S2",
               "tier": "Standard"
-            },
-            "capacity": {
-              "minimum": 1,
-              "maximum": 1000,
-              "default": 1,
-              "scaleType": "Automatic"
             }
           },
           {
+            "capacity": {
+              "default": 3,
+              "maximum": 1000,
+              "minimum": 3,
+              "scaleType": "Automatic"
+            },
             "resourceType": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
             "sku": {
               "name": "Standard_S3",
               "tier": "Standard"
-            },
-            "capacity": {
-              "minimum": 3,
-              "maximum": 1000,
-              "default": 3,
-              "scaleType": "Automatic"
             }
           }
-        ],
-        "nextLink": ""
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "NodeTypeSkus_List",
+  "title": "List a node type SKUs"
 }

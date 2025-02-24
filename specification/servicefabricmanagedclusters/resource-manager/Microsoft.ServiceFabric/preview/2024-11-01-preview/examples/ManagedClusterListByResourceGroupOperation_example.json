@@ -1,40 +1,32 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-11-01-preview",
     "resourceGroupName": "resRg",
-    "api-version": "2024-11-01-preview"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "",
         "value": [
           {
-            "type": "Microsoft.ServiceFabric/managedClusters",
-            "location": "eastus",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster",
             "name": "myCluster",
-            "tags": {},
-            "sku": {
-              "name": "Standard"
-            },
+            "type": "Microsoft.ServiceFabric/managedClusters",
             "etag": "W/\"636462502169240745\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster",
+            "location": "eastus",
             "properties": {
-              "provisioningState": "Succeeded",
-              "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
-              "clusterCodeVersion": "7.1.168.9494",
-              "clusterUpgradeMode": "Automatic",
-              "clusterUpgradeCadence": "Wave0",
-              "clusterState": "WaitingForNodes",
-              "dnsName": "myCluster",
-              "fqdn": "MyCluster.eastus.cloudapp.azure.com",
+              "adminUserName": "vmadmin",
+              "clientConnectionPort": 19000,
               "clusterCertificateThumbprints": [
                 "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
               ],
-              "clientConnectionPort": 19000,
-              "httpGatewayConnectionPort": 19080,
-              "loadBalancingRules": [],
-              "adminUserName": "vmadmin",
+              "clusterCodeVersion": "7.1.168.9494",
+              "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
+              "clusterState": "WaitingForNodes",
+              "clusterUpgradeCadence": "Wave0",
+              "clusterUpgradeMode": "Automatic",
+              "dnsName": "myCluster",
               "fabricSettings": [
                 {
                   "name": "ManagedIdentityTokenService",
@@ -45,35 +37,35 @@
                     }
                   ]
                 }
-              ]
-            }
+              ],
+              "fqdn": "MyCluster.eastus.cloudapp.azure.com",
+              "httpGatewayConnectionPort": 19080,
+              "loadBalancingRules": [],
+              "provisioningState": "Succeeded"
+            },
+            "sku": {
+              "name": "Standard"
+            },
+            "tags": {}
           },
           {
-            "type": "Microsoft.ServiceFabric/managedClusters",
-            "location": "eastus",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster2",
             "name": "myCluster2",
-            "tags": {},
-            "sku": {
-              "name": "Standard"
-            },
+            "type": "Microsoft.ServiceFabric/managedClusters",
             "etag": "W/\"636462502164040075\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster2",
+            "location": "eastus",
             "properties": {
-              "provisioningState": "Succeeded",
-              "clusterId": "2747e469-b24e-4039-8a0a-46151419523f",
-              "clusterCodeVersion": "7.1.168.9494",
-              "clusterUpgradeMode": "Automatic",
-              "clusterUpgradeCadence": "Wave0",
-              "clusterState": "WaitingForNodes",
-              "dnsName": "myCluster2",
-              "fqdn": "MyCluster.eastus.cloudapp.azure.com",
+              "adminUserName": "vmadmin",
+              "clientConnectionPort": 19000,
               "clusterCertificateThumbprints": [
                 "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
               ],
-              "clientConnectionPort": 19000,
-              "httpGatewayConnectionPort": 19080,
-              "loadBalancingRules": [],
-              "adminUserName": "vmadmin",
+              "clusterCodeVersion": "7.1.168.9494",
+              "clusterId": "2747e469-b24e-4039-8a0a-46151419523f",
+              "clusterState": "WaitingForNodes",
+              "clusterUpgradeCadence": "Wave0",
+              "clusterUpgradeMode": "Automatic",
+              "dnsName": "myCluster2",
               "fabricSettings": [
                 {
                   "name": "ManagedIdentityTokenService",
@@ -84,12 +76,22 @@
                     }
                   ]
                 }
-              ]
-            }
+              ],
+              "fqdn": "MyCluster.eastus.cloudapp.azure.com",
+              "httpGatewayConnectionPort": 19080,
+              "loadBalancingRules": [],
+              "provisioningState": "Succeeded"
+            },
+            "sku": {
+              "name": "Standard"
+            },
+            "tags": {}
           }
-        ],
-        "nextLink": ""
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ManagedClusters_ListByResourceGroup",
+  "title": "List cluster by resource group"
 }

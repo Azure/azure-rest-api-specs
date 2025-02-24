@@ -1,45 +1,58 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resRg",
+    "api-version": "2024-11-01-preview",
     "clusterName": "myCluster",
     "nodeTypeName": "BE",
-    "api-version": "2024-11-01-preview",
     "parameters": {
       "tags": {
         "a": "b"
       }
-    }
+    },
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "BE",
         "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/BE",
-        "name": "BE",
-        "tags": {
-          "a": "b"
-        },
         "properties": {
-          "provisioningState": "Succeeded",
-          "isPrimary": false,
+          "capacities": {
+            "ClientConnections": "65536"
+          },
           "dataDiskSizeGB": 200,
           "dataDiskType": "StandardSSD_LRS",
+          "isPrimary": false,
+          "isStateless": false,
           "placementProperties": {
             "HasSSD": "true",
             "NodeColor": "green",
             "SomeProperty": "5"
           },
-          "capacities": {
-            "ClientConnections": "65536"
-          },
-          "vmSize": "Standard_D3",
-          "vmImagePublisher": "MicrosoftWindowsServer",
+          "provisioningState": "Succeeded",
+          "vmExtensions": [
+            {
+              "name": "Microsoft.Azure.Geneva.GenevaMonitoring",
+              "properties": {
+                "type": "GenevaMonitoring",
+                "autoUpgradeMinorVersion": true,
+                "publisher": "Microsoft.Azure.Geneva",
+                "settings": {},
+                "typeHandlerVersion": "2.0"
+              }
+            }
+          ],
           "vmImageOffer": "WindowsServer",
+          "vmImagePublisher": "MicrosoftWindowsServer",
           "vmImageSku": "2016-Datacenter-Server-Core",
           "vmImageVersion": "latest",
           "vmInstanceCount": 10,
-          "isStateless": false,
+          "vmManagedIdentity": {
+            "userAssignedIdentities": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
+            ]
+          },
           "vmSecrets": [
             {
               "sourceVault": {
@@ -53,31 +66,20 @@
               ]
             }
           ],
-          "vmExtensions": [
-            {
-              "name": "Microsoft.Azure.Geneva.GenevaMonitoring",
-              "properties": {
-                "autoUpgradeMinorVersion": true,
-                "publisher": "Microsoft.Azure.Geneva",
-                "type": "GenevaMonitoring",
-                "typeHandlerVersion": "2.0",
-                "settings": {}
-              }
-            }
-          ],
-          "vmManagedIdentity": {
-            "userAssignedIdentities": [
-              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
-            ]
-          }
+          "vmSize": "Standard_D3"
+        },
+        "tags": {
+          "a": "b"
         }
       }
     },
     "202": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-11-01-preview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-11-01-preview"
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-11-01-preview",
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-11-01-preview"
       }
     }
-  }
+  },
+  "operationId": "NodeTypes_Update",
+  "title": "Patch a node type"
 }

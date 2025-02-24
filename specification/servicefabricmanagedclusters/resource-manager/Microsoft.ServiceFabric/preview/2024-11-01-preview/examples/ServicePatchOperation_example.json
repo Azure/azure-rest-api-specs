@@ -1,53 +1,39 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resRg",
-    "clusterName": "myCluster",
-    "applicationName": "myApp",
-    "serviceName": "myService",
     "api-version": "2024-11-01-preview",
+    "applicationName": "myApp",
+    "clusterName": "myCluster",
     "parameters": {
       "tags": {
         "a": "b"
       }
-    }
+    },
+    "resourceGroupName": "resRg",
+    "serviceName": "myService",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "name": "myService",
         "type": "Microsoft.ServiceFabric/managedClusters/applications/services",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService",
-        "name": "myService",
-        "tags": {
-          "a": "b"
-        },
         "properties": {
-          "provisioningState": "Succeeded",
-          "serviceKind": "Stateless",
-          "placementConstraints": "NodeType==frontend",
-          "serviceTypeName": "myServiceType",
+          "correlationScheme": [
+            {
+              "scheme": "AlignedAffinity",
+              "serviceName": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService1"
+            }
+          ],
+          "defaultMoveCost": "Medium",
+          "instanceCount": 5,
+          "minInstanceCount": 3,
+          "minInstancePercentage": 30,
           "partitionDescription": {
             "partitionScheme": "Singleton"
           },
-          "serviceLoadMetrics": [
-            {
-              "name": "metric1",
-              "weight": "Low",
-              "defaultLoad": 3
-            }
-          ],
-          "correlationScheme": [
-            {
-              "serviceName": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService1",
-              "scheme": "AlignedAffinity"
-            }
-          ],
-          "servicePlacementPolicies": [
-            {
-              "type": "NonPartiallyPlaceService"
-            }
-          ],
+          "placementConstraints": "NodeType==frontend",
+          "provisioningState": "Succeeded",
           "scalingPolicies": [
             {
               "scalingMechanism": {
@@ -58,20 +44,36 @@
               },
               "scalingTrigger": {
                 "kind": "AveragePartitionLoadTrigger",
-                "lowerLoadThreshold": 2.0,
+                "lowerLoadThreshold": 2,
                 "metricName": "metricName",
                 "scaleInterval": "00:01:00",
-                "upperLoadThreshold": 8.0
+                "upperLoadThreshold": 8
               }
             }
           ],
-          "defaultMoveCost": "Medium",
-          "instanceCount": 5,
-          "minInstanceCount": 3,
-          "minInstancePercentage": 30,
-          "servicePackageActivationMode": "SharedProcess"
+          "serviceKind": "Stateless",
+          "serviceLoadMetrics": [
+            {
+              "name": "metric1",
+              "defaultLoad": 3,
+              "weight": "Low"
+            }
+          ],
+          "servicePackageActivationMode": "SharedProcess",
+          "servicePlacementPolicies": [
+            {
+              "type": "NonPartiallyPlaceService"
+            }
+          ],
+          "serviceTypeName": "myServiceType"
+        },
+        "tags": {
+          "a": "b"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Services_Update",
+  "title": "Patch a service"
 }

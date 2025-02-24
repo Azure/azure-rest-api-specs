@@ -1,40 +1,42 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resRg",
-    "clusterName": "myCluster",
+    "api-version": "2024-11-01-preview",
     "applicationName": "myApp",
-    "api-version": "2024-11-01-preview"
+    "clusterName": "myCluster",
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "",
         "value": [
           {
+            "name": "myService",
             "type": "Microsoft.ServiceFabric/managedClusters/applications/services",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService",
-            "name": "myService",
             "properties": {
-              "provisioningState": "Updating",
-              "serviceKind": "Stateless",
-              "serviceTypeName": "myServiceType",
+              "instanceCount": 1,
               "partitionDescription": {
                 "partitionScheme": "Singleton"
               },
+              "provisioningState": "Updating",
+              "serviceKind": "Stateless",
               "serviceLoadMetrics": [
                 {
                   "name": "metric1",
                   "weight": "Low"
                 }
               ],
-              "instanceCount": 1,
-              "servicePackageActivationMode": "SharedProcess"
+              "servicePackageActivationMode": "SharedProcess",
+              "serviceTypeName": "myServiceType"
             }
           }
-        ],
-        "nextLink": ""
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Services_ListByApplications",
+  "title": "Get a list of service resources"
 }

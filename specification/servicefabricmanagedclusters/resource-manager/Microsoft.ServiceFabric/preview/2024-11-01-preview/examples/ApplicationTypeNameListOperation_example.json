@@ -1,26 +1,28 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resRg",
+    "api-version": "2024-11-01-preview",
     "clusterName": "myCluster",
-    "api-version": "2024-11-01-preview"
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": "",
         "value": [
           {
+            "name": "myAppType",
             "type": "Microsoft.ServiceFabric/managedClusters/applicationTypes",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applicationTypes/myAppType",
-            "name": "myAppType",
             "properties": {
               "provisioningState": "Succeeded"
             }
           }
-        ],
-        "nextLink": ""
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ApplicationTypes_List",
+  "title": "Get a list of application type name resources"
 }

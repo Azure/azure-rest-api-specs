@@ -1,32 +1,29 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "resRg",
+    "api-version": "2024-11-01-preview",
     "clusterName": "myCluster",
     "nodeTypeName": "FE",
-    "api-version": "2024-11-01-preview"
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "name": "FE",
         "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/FE",
-        "name": "FE",
-        "tags": {},
         "properties": {
-          "isPrimary": true,
+          "capacities": {},
           "dataDiskSizeGB": 100,
           "dataDiskType": "StandardSSD_LRS",
+          "isPrimary": true,
+          "isStateless": false,
           "placementProperties": {},
-          "capacities": {},
-          "vmSize": "Standard_D2",
-          "vmImagePublisher": "MicrosoftWindowsServer",
           "vmImageOffer": "WindowsServer",
+          "vmImagePublisher": "MicrosoftWindowsServer",
           "vmImageSku": "2016-Datacenter",
           "vmImageVersion": "latest",
           "vmInstanceCount": 5,
-          "isStateless": false,
           "vmSecrets": [
             {
               "sourceVault": {
@@ -39,9 +36,14 @@
                 }
               ]
             }
-          ]
-        }
-      }
+          ],
+          "vmSize": "Standard_D2"
+        },
+        "tags": {}
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "NodeTypes_Get",
+  "title": "Get a node type"
 }
