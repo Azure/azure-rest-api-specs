@@ -14,7 +14,7 @@ model BlobServiceClientParameters {
 }
 
 @@clientNamespace(Storage.Blob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.Container.Blob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.AppendBlob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs");
@@ -22,7 +22,7 @@ model BlobServiceClientParameters {
 
 @@clientName(Storage.Blob, "ServiceClient");
 
-@@clientInitialization(Storage.Blob.Blob,
+@@clientInitialization(Storage.Blob.Container.Blob,
   {
     parameters: BlobServiceClientParameters,
     initializedBy: InitializedBy.parent | InitializedBy.individually,

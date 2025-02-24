@@ -11,8 +11,7 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-namespace Storage.Blob{
-
+namespace Storage.Blob {
   alias ApiVersionHeader = {
     /** Specifies the version of the operation to use for this request. */
     @apiVersion
@@ -63,7 +62,10 @@ namespace Storage.Blob{
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
   @route("/?restype=service&comp=properties")
-  op getProperties is StorageOperation<TimeoutParameter, StorageServiceProperties>;
+  op getProperties is StorageOperation<
+    TimeoutParameter,
+    StorageServiceProperties
+  >;
 
   /** Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -176,7 +178,8 @@ namespace Storage.Blob{
         ...BlobPublicAccess;
 
         /** Optional.  Version 2019-07-07 and later.  Specifies the default encryption scope to set on the container and use for all future writes. */
-        @header("x-ms-default-encryption-scope") defaultEncryptionScope?: string;
+        @header("x-ms-default-encryption-scope")
+        defaultEncryptionScope?: string;
 
         ...DenyEncryptionScopeOverride;
       },
