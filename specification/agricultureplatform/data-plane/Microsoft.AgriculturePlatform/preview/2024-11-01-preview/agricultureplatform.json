@@ -184,7 +184,7 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Unique resource ID.",
+            "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
           }
@@ -223,7 +223,7 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Unique resource ID.",
+            "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
           },
@@ -274,7 +274,7 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Unique resource ID.",
+            "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
           }
@@ -309,7 +309,7 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Unique resource ID.",
+            "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
           },
@@ -444,14 +444,14 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Unique resource ID.",
+            "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionId",
             "in": "path",
-            "description": "CollectionId.",
+            "description": "Id of the Collection.",
             "required": true,
             "type": "string"
           }
@@ -490,14 +490,14 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Unique resource ID.",
+            "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionId",
             "in": "path",
-            "description": "CollectionId.",
+            "description": "Id of the Collection.",
             "required": true,
             "type": "string"
           },
@@ -548,14 +548,14 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Unique resource ID.",
+            "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionId",
             "in": "path",
-            "description": "CollectionId.",
+            "description": "Id of the Collection.",
             "required": true,
             "type": "string"
           }
@@ -581,7 +581,7 @@
     },
     "/catalogs/{catalogId}/collections/{collectionId}/items/{itemId}": {
       "get": {
-        "operationId": "Items_Get",
+        "operationId": "ItemsOperations_Items_Get",
         "description": "Gets a specified Item resource.",
         "parameters": [
           {
@@ -631,46 +631,55 @@
         }
       },
       "patch": {
-        "operationId": "Items_CreateOrUpdate",
+        "operationId": "ItemsOperations_Items_CreateOrUpdate",
         "description": "Creates or updates a Item resource.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "itemId",
+            "name": "catalogId",
             "in": "path",
-            "description": "Id of the Item resource.",
+            "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Id of the Collection resource.",
+            "description": "Id of the Collection.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "catalogId",
+            "name": "itemId",
             "in": "path",
-            "description": "Id of the Catalog resource.",
+            "description": "Id of the Item.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "item",
+            "name": "resource",
             "in": "body",
-            "description": "Item resource payload to create or update.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ItemUpdate"
+              "$ref": "#/definitions/ItemCreateOrUpdate"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Item"
             }
@@ -690,7 +699,7 @@
         }
       },
       "delete": {
-        "operationId": "Items_Delete",
+        "operationId": "ItemsOperations_Items_Delete",
         "description": "Deletes Item for given Item id.",
         "parameters": [
           {
@@ -699,21 +708,21 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "Id of Catalog.",
+            "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Id of Collection.",
+            "description": "Id of the Collection.",
             "required": true,
             "type": "string"
           },
           {
             "name": "itemId",
             "in": "path",
-            "description": "Id of Item to be deleted.",
+            "description": "Id of the Item.",
             "required": true,
             "type": "string"
           }
@@ -737,35 +746,34 @@
         }
       }
     },
-    "/catalogs/{catalogId}/collections/{collectionId}/items/:create": {
+    "/catalogs/{catalogId}/collections/{collectionId}/items:create": {
       "post": {
-        "operationId": "Items_Create",
+        "operationId": "ItemsOperations_Create",
         "description": "Creates or updates a Item resource.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "collectionId",
-            "in": "path",
-            "description": "Id of the Collection resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "catalogId",
             "in": "path",
-            "description": "Id of the Catalog resource.",
+            "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "item",
+            "name": "collectionId",
+            "in": "path",
+            "description": "Id of the Collection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
             "in": "body",
-            "description": "Collection resource payload to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Item"
+              "$ref": "#/definitions/ItemParameters"
             }
           }
         ],
@@ -773,7 +781,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Item"
+              "$ref": "#/definitions/ItemResponse"
             }
           },
           "default": {
@@ -793,7 +801,7 @@
     },
     "/catalogs/{catalogId}/collections/{collectionId}/items:search": {
       "post": {
-        "operationId": "Items_GetAllUnderCollection",
+        "operationId": "ItemsOperations_Search",
         "description": "Search for Items across all parties by intersecting geometry.",
         "parameters": [
           {
@@ -802,32 +810,20 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "catalogId.",
+            "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
           },
           {
             "name": "collectionId",
             "in": "path",
-            "description": "collectionId.",
+            "description": "Id of the Collection.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "maxPageSize",
-            "in": "query",
-            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000,\nDefault Value = 50.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 50,
-            "minimum": 10,
-            "maximum": 1000
-          },
-          {
-            "name": "searchItemQuery",
+            "name": "body",
             "in": "body",
-            "description": "Query filters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ItemQuery"
@@ -858,7 +854,7 @@
     },
     "/catalogs/{catalogId}/items:search": {
       "post": {
-        "operationId": "Items_SearchAcrossCollection",
+        "operationId": "ItemsOperationInCatalog_Search",
         "description": "Search for Items across all collections.",
         "parameters": [
           {
@@ -867,25 +863,13 @@
           {
             "name": "catalogId",
             "in": "path",
-            "description": "catalogId.",
+            "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "maxPageSize",
-            "in": "query",
-            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000,\nDefault Value = 50.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 50,
-            "minimum": 10,
-            "maximum": 1000
-          },
-          {
-            "name": "searchItemQuery",
+            "name": "body",
             "in": "body",
-            "description": "Query filters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CrossCollectionItemSearchQuery"
@@ -1737,7 +1721,7 @@
         },
         "id": {
           "type": "string",
-          "description": "Unique resource ID.",
+          "description": "Id of the Catalog.",
           "readOnly": true
         },
         "eTag": {
@@ -1885,7 +1869,7 @@
         },
         "collectionId": {
           "type": "string",
-          "description": "CollectionId.",
+          "description": "Id of the Collection.",
           "readOnly": true
         },
         "links": {
@@ -2359,6 +2343,339 @@
         },
         "ownerItemId": {
           "type": "string",
+          "description": "Id of the Item."
+        },
+        "catalogId": {
+          "type": "string",
+          "description": "Id of the Catalog resource.",
+          "readOnly": true
+        },
+        "collectionId": {
+          "type": "string",
+          "description": "Id of the Collection resource.",
+          "readOnly": true
+        },
+        "assets": {
+          "type": "array",
+          "description": "Assets.",
+          "items": {
+            "$ref": "#/definitions/Asset"
+          },
+          "x-ms-identifiers": []
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique resource ID.",
+          "readOnly": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "The ETag value to implement optimistic concurrency.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the resource.",
+          "maxLength": 100
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "readOnly": true
+        },
+        "modifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "readOnly": true
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the resource.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "name": {
+          "type": "string",
+          "description": "Name to identify resource.",
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "Textual description of the resource.",
+          "maxLength": 500
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Created by user/tenant id.",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "Modified by user/tenant id.",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "data",
+        "ownerItemId"
+      ]
+    },
+    "ItemCreateOrUpdate": {
+      "type": "object",
+      "description": "Item.",
+      "properties": {
+        "links": {
+          "type": "array",
+          "description": "Links.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-identifiers": []
+        },
+        "data": {
+          "type": "object",
+          "description": "Schema for records under the dataset.",
+          "additionalProperties": {}
+        },
+        "ownerItemId": {
+          "type": "string",
+          "description": "Id of the Item."
+        },
+        "assets": {
+          "type": "array",
+          "description": "Assets.",
+          "items": {
+            "$ref": "#/definitions/Asset"
+          },
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the resource.",
+          "maxLength": 100
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the resource.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "name": {
+          "type": "string",
+          "description": "Name to identify resource.",
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "Textual description of the resource.",
+          "maxLength": 500
+        },
+        "properties": {
+          "type": "object",
+          "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ItemListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Item"
+          }
+        },
+        "skipToken": {
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ItemParameters": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "array",
+          "description": "Links.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-identifiers": []
+        },
+        "data": {
+          "type": "object",
+          "description": "Schema for records under the dataset.",
+          "additionalProperties": {}
+        },
+        "ownerItemId": {
+          "type": "string",
+          "description": "OwnerItemId."
+        },
+        "assets": {
+          "type": "array",
+          "description": "CatalogId.CollectionId.Assets.",
+          "items": {
+            "$ref": "#/definitions/Asset"
+          },
+          "x-ms-identifiers": []
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique resource ID.",
+          "readOnly": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "The ETag value to implement optimistic concurrency.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the resource.",
+          "maxLength": 100
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "readOnly": true
+        },
+        "modifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "readOnly": true
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the resource.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "name": {
+          "type": "string",
+          "description": "Name to identify resource.",
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "Textual description of the resource.",
+          "maxLength": 500
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Created by user/tenant id.",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "Modified by user/tenant id.",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "ItemQuery": {
+      "type": "object",
+      "description": "CatalogQuery.",
+      "properties": {
+        "ownerItemIds": {
+          "type": "array",
+          "description": "Owner Item Ids of the resource.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataFilters": {
+          "type": "array",
+          "description": "Filters on key-value pairs within the Data object.\ne.g. \"{testKey} eq {testValue}\".",
+          "items": {
+            "type": "string"
+          }
+        },
+        "intersectsWithGeometry": {
+          "$ref": "#/definitions/GeoJsonObject",
+          "description": "GeoJSON (For more details: https://geojson.org/). Note: Coordinates are\nexpected in [Longitude, Latitude] format."
+        },
+        "ids": {
+          "type": "array",
+          "description": "Ids of the resource.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "minCreatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Minimum creation date of resource (inclusive)."
+        },
+        "maxCreatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Maximum creation date of resource (inclusive)."
+        },
+        "minLastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Minimum last modified date of resource (inclusive)."
+        },
+        "maxLastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Maximum last modified date of resource (inclusive)."
+        },
+        "maxPageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+          "default": 50,
+          "minimum": 10,
+          "maximum": 1000
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "Skip token for getting next set of results."
+        }
+      }
+    },
+    "ItemResponse": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "array",
+          "description": "Links.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-identifiers": []
+        },
+        "data": {
+          "type": "object",
+          "description": "Schema for records under the dataset.",
+          "additionalProperties": {}
+        },
+        "ownerItemId": {
+          "type": "string",
           "description": "OwnerItemId."
         },
         "catalogId": {
@@ -2442,90 +2759,7 @@
         "data"
       ]
     },
-    "ItemListResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Item"
-          }
-        },
-        "skipToken": {
-          "type": "string"
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ItemQuery": {
-      "type": "object",
-      "description": "CatalogQuery.",
-      "properties": {
-        "ownerItemIds": {
-          "type": "array",
-          "description": "Owner Item Ids of the resource.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "dataFilters": {
-          "type": "array",
-          "description": "Filters on key-value pairs within the Data object.\ne.g. \"{testKey} eq {testValue}\".",
-          "items": {
-            "type": "string"
-          }
-        },
-        "intersectsWithGeometry": {
-          "$ref": "#/definitions/GeoJsonObject",
-          "description": "GeoJSON (For more details: https://geojson.org/). Note: Coordinates are\nexpected in [Longitude, Latitude] format."
-        },
-        "ids": {
-          "type": "array",
-          "description": "Ids of the resource.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "minCreatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Minimum creation date of resource (inclusive)."
-        },
-        "maxCreatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Maximum creation date of resource (inclusive)."
-        },
-        "minLastModifiedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Minimum last modified date of resource (inclusive)."
-        },
-        "maxLastModifiedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Maximum last modified date of resource (inclusive)."
-        },
-        "maxPageSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
-          "default": 50,
-          "minimum": 10,
-          "maximum": 1000
-        },
-        "skipToken": {
-          "type": "string",
-          "description": "Skip token for getting next set of results."
-        }
-      }
-    },
-    "ItemUpdate": {
+    "ItemsinCatalog": {
       "type": "object",
       "description": "Item.",
       "properties": {
@@ -2544,7 +2778,17 @@
         },
         "ownerItemId": {
           "type": "string",
-          "description": "OwnerItemId."
+          "description": "Id of the Item."
+        },
+        "catalogId": {
+          "type": "string",
+          "description": "Id of the Catalog resource.",
+          "readOnly": true
+        },
+        "collectionId": {
+          "type": "string",
+          "description": "Id of the Collection resource.",
+          "readOnly": true
         },
         "assets": {
           "type": "array",
@@ -2554,10 +2798,32 @@
           },
           "x-ms-identifiers": []
         },
+        "id": {
+          "type": "string",
+          "description": "Unique resource ID.",
+          "readOnly": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "The ETag value to implement optimistic concurrency.",
+          "readOnly": true
+        },
         "status": {
           "type": "string",
           "description": "Status of the resource.",
           "maxLength": 100
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "readOnly": true
+        },
+        "modifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "readOnly": true
         },
         "source": {
           "type": "string",
@@ -2575,12 +2841,26 @@
           "description": "Textual description of the resource.",
           "maxLength": 500
         },
+        "createdBy": {
+          "type": "string",
+          "description": "Created by user/tenant id.",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "Modified by user/tenant id.",
+          "readOnly": true
+        },
         "properties": {
           "type": "object",
           "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "data",
+        "ownerItemId"
+      ]
     },
     "KeyVaultProperties": {
       "type": "object",

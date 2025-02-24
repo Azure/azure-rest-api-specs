@@ -81,7 +81,7 @@ model Catalog {
   links?: Link[];
 
   /**
-   * Unique resource ID.
+   * Id of the Catalog.
    */
   @visibility("read")
   @key("catalogId")
@@ -265,7 +265,7 @@ model Collection {
   schemaId: string;
 
   /**
-   * CollectionId.
+   * Id of the Collection.
    */
   @key("collectionId")
   @visibility("read")
@@ -364,7 +364,227 @@ model File {
 /**
  * Item.
  */
+@parentResource(Collection)
+@resource("items")
 model Item {
+  /**
+   * Links.
+   */
+  links?: Link[];
+
+  /**
+   * Schema for records under the dataset.
+   */
+  data: Record<unknown>;
+
+  /**
+   * Id of the Item.
+   */
+  @key("itemId")
+  ownerItemId: string;
+
+  /**
+   * Id of the Catalog resource.
+   */
+  @visibility("read")
+  catalogId?: string;
+
+  /**
+   * Id of the Collection resource.
+   */
+  @visibility("read")
+  collectionId?: string;
+
+  /**
+   * Assets.
+   */
+  assets?: Asset[];
+
+  /**
+   * Unique resource ID.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The ETag value to implement optimistic concurrency.
+   */
+  @visibility("read")
+  eTag?: string;
+
+  /**
+   * Status of the resource.
+   */
+  @maxLength(100)
+  status?: string;
+
+  /**
+   * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
+   */
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime?: utcDateTime;
+
+  /**
+   * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
+   */
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  modifiedDateTime?: utcDateTime;
+
+  /**
+   * Source of the resource.
+   */
+  @maxLength(100)
+  @minLength(2)
+  source?: string;
+
+  /**
+   * Name to identify resource.
+   */
+  @maxLength(100)
+  name?: string;
+
+  /**
+   * Textual description of the resource.
+   */
+  @maxLength(500)
+  description?: string;
+
+  /**
+   * Created by user/tenant id.
+   */
+  @visibility("read")
+  createdBy?: string;
+
+  /**
+   * Modified by user/tenant id.
+   */
+  @visibility("read")
+  modifiedBy?: string;
+
+  /**
+   * A collection of key value pairs that belongs to the resource.
+   * Each pair must not have a key greater than 50 characters
+   * and must not have a value greater than 150 characters.
+   * Note: A maximum of 25 key value pairs can be provided for a resource and only
+   * string,
+   * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
+   */
+  properties?: Record<unknown>;
+}
+
+@parentResource(Catalog)
+@resource("items")
+model ItemsinCatalog is Item;
+model ItemParameters {
+  /**
+   * Links.
+   */
+  links?: Link[];
+
+  /**
+   * Schema for records under the dataset.
+   */
+  data: Record<unknown>;
+
+  /**
+   * OwnerItemId.
+   */
+  ownerItemId?: string;
+
+  /**
+   * CatalogId.
+   */
+  // @visibility("read")
+  // catalogId?: string;
+
+  /**
+   * CollectionId.
+   */
+  // @visibility("read")
+  // collectionId?: string;
+
+  /**
+   * Assets.
+   */
+  assets?: Asset[];
+
+  /**
+   * Unique resource ID.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The ETag value to implement optimistic concurrency.
+   */
+  @visibility("read")
+  eTag?: string;
+
+  /**
+   * Status of the resource.
+   */
+  @maxLength(100)
+  status?: string;
+
+  /**
+   * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
+   */
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime?: utcDateTime;
+
+  /**
+   * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
+   */
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  modifiedDateTime?: utcDateTime;
+
+  /**
+   * Source of the resource.
+   */
+  @maxLength(100)
+  @minLength(2)
+  source?: string;
+
+  /**
+   * Name to identify resource.
+   */
+  @maxLength(100)
+  name?: string;
+
+  /**
+   * Textual description of the resource.
+   */
+  @maxLength(500)
+  description?: string;
+
+  /**
+   * Created by user/tenant id.
+   */
+  @visibility("read")
+  createdBy?: string;
+
+  /**
+   * Modified by user/tenant id.
+   */
+  @visibility("read")
+  modifiedBy?: string;
+
+  /**
+   * A collection of key value pairs that belongs to the resource.
+   * Each pair must not have a key greater than 50 characters
+   * and must not have a value greater than 150 characters.
+   * Note: A maximum of 25 key value pairs can be provided for a resource and only
+   * string,
+   * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
+   */
+  properties?: Record<unknown>;
+}
+
+model ItemResponse {
   /**
    * Links.
    */
