@@ -41,6 +41,7 @@ op VirtualResourceActionSync<
  * @template Request The request model for the action
  * @template Response The response model for the action
  * @template BaseParameters Optional. Allows overriding the parameters for the operation
+ * @template LroHeaders Optional. Allows overriding the headers returned in the Accepted response
  * @template Parameters Optional. Additional parameters after the path parameters
  * @template Error Optional. The error response, if non-standard.
  */
@@ -50,7 +51,7 @@ op VirtualResourceActionSync<
 @autoRoute
 @armResourceAction(Resource)
 @post
-op CustomizedArmResourceActionSync<
+op CustomizedArmResourceActionAsync<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
   Response extends TypeSpec.Reflection.Model | void,
@@ -62,16 +63,11 @@ op CustomizedArmResourceActionSync<
   > &
     Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Error extends {} = ErrorResponse,
-  RequestBody extends {} = {
-    @doc("The content of the action request")
-    @bodyRoot
-    body: Request;
-  }
+  Error extends {} = ErrorResponse
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   ...Parameters,
-  ...RequestBody,
+  @bodyRoot body?: Request,
 ): ArmAcceptedLroResponse<
   "Resource operation accepted.",
   LroHeaders
