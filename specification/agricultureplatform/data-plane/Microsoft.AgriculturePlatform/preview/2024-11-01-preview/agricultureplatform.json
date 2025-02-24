@@ -900,7 +900,7 @@
     },
     "/external/satellite:fetch": {
       "post": {
-        "operationId": "Satellite_FetchItems",
+        "operationId": "SatelliteOperations_Fetch",
         "description": "Fetches Satellite data.",
         "parameters": [
           {
@@ -928,9 +928,8 @@
             "maximum": 2147483647
           },
           {
-            "name": "searchItemsQuery",
+            "name": "body",
             "in": "body",
-            "description": "Query filters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SatelliteFetchRequest"
@@ -961,7 +960,7 @@
     },
     "/external/satellite:stac": {
       "post": {
-        "operationId": "Satellite_SearchItems",
+        "operationId": "SatelliteOperations_Stac",
         "description": "Searches for STAC items by collection id, bbox, intersecting geometry, start\nand end datetime.",
         "parameters": [
           {
@@ -989,9 +988,8 @@
             "maximum": 2147483647
           },
           {
-            "name": "request",
+            "name": "body",
             "in": "body",
-            "description": "Request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SatelliteStacRequest"
@@ -1178,7 +1176,7 @@
     },
     "/external/weather:fetch": {
       "post": {
-        "operationId": "Weather_Get",
+        "operationId": "WeatherOperations_Fetch",
         "description": "Returns a list of WeatherData.",
         "parameters": [
           {
@@ -1217,7 +1215,7 @@
     },
     "/file:delete": {
       "post": {
-        "operationId": "File_Delete",
+        "operationId": "FileOperations_Delete",
         "description": "Deletes file.",
         "parameters": [
           {
@@ -1253,7 +1251,7 @@
     },
     "/file:download": {
       "post": {
-        "operationId": "File_Download",
+        "operationId": "FileOperations_Download",
         "description": "Downloads and returns file Stream as response for the given input filePath.",
         "parameters": [
           {
@@ -1273,9 +1271,8 @@
             }
           },
           {
-            "name": "request",
+            "name": "body",
             "in": "body",
-            "description": "request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/File"
@@ -1303,7 +1300,7 @@
     },
     "/file:upload": {
       "post": {
-        "operationId": "File_Upload",
+        "operationId": "FileOperations_Upload",
         "description": "Uploads a file.",
         "parameters": [
           {
@@ -2235,6 +2232,19 @@
       },
       "required": [
         "filePath"
+      ]
+    },
+    "FileResource": {
+      "type": "object",
+      "description": "Resource model for File API.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Dummy key for file resource"
+        }
+      },
+      "required": [
+        "key"
       ]
     },
     "GeoJsonObject": {
@@ -3359,6 +3369,19 @@
         }
       }
     },
+    "SatelliteResource": {
+      "type": "object",
+      "description": "Resource model for Satellite API.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Dummy key for satellite resource"
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
     "SatelliteStacRequest": {
       "type": "object",
       "description": "Satellite  Stac Request.",
@@ -4056,6 +4079,19 @@
         "providerName",
         "providerApiName",
         "units"
+      ]
+    },
+    "WeatherResource": {
+      "type": "object",
+      "description": "Resource model for Weather API.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Dummy key for satellite resource"
+        }
+      },
+      "required": [
+        "key"
       ]
     },
     "WeatherResponse": {

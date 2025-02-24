@@ -351,6 +351,18 @@ model Collection {
 }
 
 /**
+ * Resource model for File API.
+ */
+@resource("file")
+model FileResource {
+  /**
+   * Dummy key for file resource
+   */
+  @key("key")
+  key: string;
+}
+
+/**
  * File.
  */
 model File {
@@ -961,6 +973,17 @@ model AuthCredentials {
 }
 
 /**
+ * Resource model for Satellite API.
+ */
+@resource("external/satellite")
+model SatelliteResource {
+  /**
+   * Dummy key for satellite resource
+   */
+  @key("key")
+  key: string;
+}
+/**
  * Data Model for SatelliteIngestionJobRequest.
  */
 model SatelliteData {
@@ -1512,6 +1535,17 @@ model SolutionData {
   partnerRequestHeaders: Record<unknown>;
 }
 
+/**
+ * Resource model for Weather API.
+ */
+@resource("external/weather")
+model WeatherResource {
+  /**
+   * Dummy key for satellite resource
+   */
+  @key("key")
+  key: string;
+}
 /**
  * WeatherRequest.
  */

@@ -195,41 +195,55 @@ interface FileOperations {
   /**
    * Deletes file.
    */
-  @operationId("File_Delete")
-  @route("/file:delete")
-  @post
-  delete is Azure.Core.Foundations.Operation<File, void>;
+  delete is Operations.ResourceCollectionAction<FileResource, File, NoContentResponse>;
+  // @operationId("File_Delete")
+  // @route("/file:delete")
+  // @post
+  // delete is Azure.Core.Foundations.Operation<File, void>;
 
   /**
    * Downloads and returns file Stream as response for the given input filePath.
    */
-  @operationId("File_Download")
-  @route("/file:download")
-  @post
-  download is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * request.
-       */
-      @bodyRoot
-      request: File;
-
+  download is Operations.ResourceCollectionAction<
+    FileResource,
+    File,
+    NoContentResponse,
+    RequestHeadersTrait<{
       /**
        * Accept header
        */
       @header
       accept: "application/json, application/octet-stream";
-    },
-    void
+    }>
   >;
+  // @operationId("File_Download")
+  // @route("/file:download")
+  // @post
+  // download is Azure.Core.Foundations.Operation<
+  //   {
+  //     /**
+  //      * request.
+  //      */
+  //     @bodyRoot
+  //     request: File;
+
+  //     /**
+  //      * Accept header
+  //      */
+  //     @header
+  //     accept: "application/json, application/octet-stream";
+  //   },
+  //   void
+  // >;
 
   /**
    * Uploads a file.
    */
-  @operationId("File_Upload")
-  @route("/file:upload")
-  @post
-  upload is Azure.Core.Foundations.Operation<{}, File>;
+  upload is Operations.ResourceCollectionAction<FileResource, {} , File>;
+  // @operationId("File_Upload")
+  // @route("/file:upload")
+  // @post
+  // upload is Azure.Core.Foundations.Operation<{}, File>;
 }
 
 interface ItemsOperations {
@@ -290,10 +304,11 @@ interface SatelliteOperations {
   /**
    * Fetches Satellite data.
    */
-  @operationId("Satellite_FetchItems")
-  @route("/external/satellite:fetch")
-  @post
-  fetchItems is Azure.Core.Foundations.Operation<
+  fetch is Operations.ResourceCollectionAction<
+  SatelliteResource,
+    SatelliteFetchRequest,
+    SatelliteFetchResponse,
+    QueryParametersTrait<
     {
       /**
        * Maximum number of items needed (inclusive). Minimum = 1, Maximum = 100, Default
@@ -311,49 +326,39 @@ interface SatelliteOperations {
       @minValue(1)
       @query("skip")
       skip?: int32;
-
-      /**
-       * Query filters.
-       */
-      @bodyRoot
-      searchItemsQuery: SatelliteFetchRequest;
-    },
-    SatelliteFetchResponse
+    }
+    >
   >;
+  
 
   /**
    * Searches for STAC items by collection id, bbox, intersecting geometry, start
    * and end datetime.
    */
-  @operationId("Satellite_SearchItems")
-  @route("/external/satellite:stac")
-  @post
-  searchItems is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Maximum number of items needed (inclusive). Minimum = 1, Maximum = 100, Default
-       * value = 10.
-       */
-      @maxValue(100)
-      @minValue(1)
-      @query("maxpagesize")
-      maxpagesize?: int32 = 10;
+  stac is Operations.ResourceCollectionAction<
+  SatelliteResource,
+    SatelliteStacRequest,
+    SearchFeaturesResponse,
+    QueryParametersTrait<
+      {
+        /**
+         * Maximum number of items needed (inclusive). Minimum = 1, Maximum = 100, Default
+         * value = 10.
+         */
+        @maxValue(100)
+        @minValue(1)
+        @query("maxpagesize")
+        maxpagesize?: int32 = 10;
 
-      /**
-       * Skip token for getting next set of results.
-       */
-      @maxValue(2147483647)
-      @minValue(1)
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * Request.
-       */
-      @bodyRoot
-      request: SatelliteStacRequest;
-    },
-    SearchFeaturesResponse
+        /**
+         * Skip token for getting next set of results.
+         */
+        @maxValue(2147483647)
+        @minValue(1)
+        @query("skip")
+        skip?: int32;
+      }
+    >
   >;
 }
 
@@ -492,8 +497,9 @@ interface WeatherOperations {
   /**
    * Returns a list of WeatherData.
    */
-  @operationId("Weather_Get")
-  @route("/external/weather:fetch")
-  @post
-  get is Azure.Core.Foundations.Operation<WeatherRequest, WeatherResponse>;
+  fetch is Operations.ResourceCollectionAction<
+    WeatherResource,
+    WeatherRequest,
+    WeatherResponse
+  >;
 }
