@@ -29,6 +29,7 @@ openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2024-09-30-preview
 ```
+
 ### Tag: package-2024-09-30-preview
 
 These settings apply only when `--tag=package-2024-09-30-preview` is specified on the command line.
@@ -40,18 +41,32 @@ suppressions:
   - code: PostResponseCodes
     reason: MySQL is a technical term and cannot follow camel case rule.
     where:
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/refresh"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/refresh"].post
+  - code: PathResourceTypeNameCamelCase
+    reason: MySQL is a technical term and cannot follow camel case rule.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.MySQLDiscovery/MySQLSites"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers/{serverName}"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/errorSummaries"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/errorSummaries/{errorSummaryName}"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/refresh"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/summaries"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/summaries/{summaryName}"].get
   - code: DefinitionsPropertiesNamesCamelCase
     from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
     reason: MySQL is a technical term and cannot follow camel case rule.
-
 ```
+
 ---
 
 # Code Generation
 
 ## Suppression
-``` yaml
+
+```yaml
 directive:
   - suppress: PathResourceProviderNamePascalCase
     from: Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
