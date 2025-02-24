@@ -17,22 +17,34 @@ namespace Azure.AI.Unified;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Model Deployment Definition")
-model Model extends ResourceBase {
-  @doc("Name of the specific model that is deployed")
+model Model {
+  @doc("Name of the deployment for the model")
+  @visibility("read")
+  deploymentName: string;
+
+  @doc("Publisher-specific name of the model")
   @visibility("read")
   modelName: string;
 
   @doc("Name of the model publisher")
   @visibility("read")
-  modelPublisher: string;
+  publisher: string;
 
-  @doc("Model format")
+  @doc("Capabilities of model")
   @visibility("read")
-  modelFormat: string;
+  capabilities: Record<string>;
+
+  @doc("RAI policy enabled for model")
+  @visibility("read")
+  raiPolicyName: string;
 
   @doc("Sku of the model deployment")
   @visibility("read")
   sku: Sku;
+
+  @doc("System data of the resource")
+  @visibility("read")
+  systemData: SystemData;
 }
 
 
