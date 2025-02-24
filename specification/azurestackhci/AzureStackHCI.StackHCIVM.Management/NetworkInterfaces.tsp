@@ -2,17 +2,19 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - x-ms-azure-resource is this needed?"
 @doc("The network interface resource definition.")
 @extension("x-ms-azure-resource", true)
 model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
@@ -33,17 +35,24 @@ interface NetworkInterfaces {
   @doc("Gets a network interface")
   get is ArmResourceRead<NetworkInterface>;
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a network interface. Please note some properties can be set only during network interface creation.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    NetworkInterface,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkInterface>;
 
   @doc("The operation to update a network interface.")
   @parameterVisibility
-  update is ArmCustomPatchAsync<NetworkInterface>;
+  @removed(Versions.v2025_02_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_02_01_preview, "update")
+  updateOld is ArmCustomPatchAsync<NetworkInterface>;
+
+  @doc("The operation to update a network interface.")
+  @parameterVisibility
+  @added(Versions.v2025_02_01_preview)
+  @sharedRoute
+  update is ArmCustomPatchAsync<
+    NetworkInterface,
+    NetworkInterfacesUpdateRequest
+  >;
 
   @doc("The operation to delete a network interface.")
   delete is ArmResourceDeleteWithoutOkAsync<NetworkInterface>;

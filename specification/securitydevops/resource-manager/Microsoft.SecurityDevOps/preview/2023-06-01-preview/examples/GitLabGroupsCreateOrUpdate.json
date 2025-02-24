@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "westusrg",
+    "gitLabConnectorName": "testconnector",
+    "gitLabGroupFQName": "parentGroup$subGroup$testGroup",
+    "gitLabGroup": {
+      "properties": {
+        "autoDiscovery": "Disabled"
+      }
+    },
+    "api-version": "2023-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/e7032cc6-7422-4ddd-9022-bfbf23b05332/resourceGroups/westusrg/providers/Microsoft.SecurityDevOps/gitLabConnectors/testconnector/groups/testParent$Group",
+        "type": "Microsoft.SecurityDevOps/gitLabConnectors/groups",
+        "properties": {
+          "autoDiscovery": "Disabled",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://api-prod.resources.windows-int.net/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.SecurityDevOps/locations/WESTUS/operationStatuses/7e430d08-0ed2-4566-bcdc-3508e79f51cd*0000000000000000000000000000000000000000000000000000000000000000?api-version=2023-06-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/e7032cc6-7422-4ddd-9022-bfbf23b05332/resourceGroups/westusrg/providers/Microsoft.SecurityDevOps/gitLabConnectors/testconnector/groups/testParent$Group",
+        "type": "Microsoft.SecurityDevOps/gitLabConnectors/groups",
+        "properties": {
+          "autoDiscovery": "Disabled",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

@@ -49,13 +49,13 @@ model BrokerAuthenticatorMethods {
   method: BrokerAuthenticationMethod;
 
   @doc("Custom authentication configuration.")
-  customSettings?: BrokerAuthenticatorMethodCustom;
+  custom?: BrokerAuthenticatorMethodCustom;
 
   @doc("ServiceAccountToken authentication configuration.")
-  serviceAccountTokenSettings?: BrokerAuthenticatorMethodSat;
+  serviceAccountToken?: BrokerAuthenticatorMethodSat;
 
   @doc("X.509 authentication configuration.")
-  x509Settings?: BrokerAuthenticatorMethodX509;
+  x509Credentials?: BrokerAuthenticatorMethodX509;
 }
 
 @doc("Broker Authentication Mode")
@@ -69,5 +69,5 @@ union BrokerAuthenticationMethod {
   ServiceAccountToken: "ServiceAccountToken",
 
   @doc("X.509 authentication configuration.")
-  X509: "X509",
+  X509Credentials: "X509Credentials",
 }

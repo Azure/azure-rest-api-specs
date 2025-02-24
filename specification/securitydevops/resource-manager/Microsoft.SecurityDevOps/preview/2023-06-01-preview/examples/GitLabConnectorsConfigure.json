@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "westusrg",
+    "gitLabConnectorName": "testconnector",
+    "api-version": "2023-06-01-preview",
+    "gitLabConnectorConfiguration": {
+      "groups": {
+        "group1Name": {
+          "autoDiscovery": "Disabled",
+          "projectConfigs": {
+            "project1Name": null,
+            "project2Name": {
+              "desiredOnboardingState": "Enabled"
+            },
+            "project3Name": {
+              "desiredOnboardingState": "Disabled"
+            }
+          }
+        },
+        "group2Name": null,
+        "group3Name": {
+          "autoDiscovery": "Enabled"
+        },
+        "group4Name": {
+          "projectConfigs": null
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "groups": {
+          "group1Name": {
+            "autoDiscovery": "Disabled",
+            "projectConfigs": {
+              "project1Name": null,
+              "project2Name": {
+                "desiredOnboardingState": "Enabled"
+              },
+              "project3Name": {
+                "desiredOnboardingState": "Disabled"
+              }
+            }
+          },
+          "group2Name": null,
+          "group3Name": {
+            "autoDiscovery": "Enabled"
+          },
+          "group4Name": {
+            "projectConfigs": null
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://api-prod.resources.windows-int.net/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.SecurityDevOps/locations/WESTUS/operationStatuses/7e430d08-0ed2-4566-bcdc-3508e79f51cd*0000000000000000000000000000000000000000000000000000000000000000?api-version=2023-06-01-preview"
+      }
+    }
+  }
+}

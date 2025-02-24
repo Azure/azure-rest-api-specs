@@ -26,6 +26,10 @@ model SiteProperties {
     }
   ]>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
+
   @doc("Provisioning state of last operation")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
@@ -45,12 +49,46 @@ model SiteUpdateProperties {
       type: "Microsoft.EdgeOrder/addresses";
     }
   ]>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
 }
 
 @doc("The type used for update operations of the Site.")
 model SiteUpdate {
   @doc("The updatable properties of the Site.")
   properties?: SiteUpdateProperties;
+}
+
+@doc("Properties of the SiteAwareResourceType resource type.")
+model SiteAwareResourceTypeProperties {
+  @doc("Details for each SiteAwareResourceType")
+  @extension("x-ms-identifiers", [])
+  supportedResourceTypes?: SiteAwareResourceTypeDetails[];
+
+  @doc("Provisioning state of last operation")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("The properties and availability status of each resource type on which aggregations will be performed over Site.")
+model SiteAwareResourceTypeDetails {
+  @doc("Name of the resource-type")
+  @visibility("read")
+  displayName?: string;
+
+  @doc("fully qualified name of the resource-type")
+  @visibility("read")
+  resourceType?: string;
+
+  @doc("Distinguishes whether RP is already Supported or ComingSoon")
+  @visibility("read")
+  availabilityStatus?: AvailabilityStatus;
+
+  @doc("Aggregation properties for the resource-type")
+  @visibility("read")
+  supportedCapabilities?: string[];
 }
 
 @doc("ResourceType availability status")

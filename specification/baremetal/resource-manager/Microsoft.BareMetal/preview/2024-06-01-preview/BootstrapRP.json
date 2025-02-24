@@ -1,0 +1,751 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BootstrapRP",
+    "version": "2024-06-01-preview",
+    "description": "Microsoft BareMetal Azure Resource Provider specification",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "BareMetalConnections"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Locations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.BareMetal/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BareMetal/bareMetalConnections": {
+      "get": {
+        "operationId": "BareMetalConnections_ListSubscription",
+        "tags": [
+          "BareMetalConnections"
+        ],
+        "description": "List all BareMetalConnection objects in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BareMetalConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BareMetalConnections list subscription": {
+            "$ref": "./examples/BareMetalConnections_ListSubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BareMetal/locations/{location}/updateRoutesOnVirtualNetwork": {
+      "post": {
+        "operationId": "Locations_UpdateRoutesOnVirtualNetwork",
+        "tags": [
+          "Locations"
+        ],
+        "description": "Update Routes on Virtual Network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "updateRoutesOnVirtualNetworkObject",
+            "in": "body",
+            "description": "The updateRoutesOnVirtualNetwork object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateRoutesOnVirtualNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRoutesOnVirtualNetwork"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Locations_UpdateRoutesOnVirtualNetwork": {
+            "$ref": "./examples/Locations_UpdateRoutesOnVirtualNetwork.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetal/bareMetalConnections": {
+      "get": {
+        "operationId": "BareMetalConnections_ListResourceGroup",
+        "tags": [
+          "BareMetalConnections"
+        ],
+        "description": "List all BareMetalConnection objects in the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BareMetalConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BareMetalConnections list resource group": {
+            "$ref": "./examples/BareMetalConnections_ListResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetal/bareMetalConnections/{connectionName}": {
+      "get": {
+        "operationId": "BareMetalConnections_Get",
+        "tags": [
+          "BareMetalConnections"
+        ],
+        "description": "Get the BareMetalConnection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the BareMetal Connection. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BareMetalConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BareMetalConnections get": {
+            "$ref": "./examples/BareMetalConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BareMetalConnections_CreateOrUpdate",
+        "tags": [
+          "BareMetalConnections"
+        ],
+        "description": "Create or update the BareMetalConnection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the BareMetal Connection. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "bareMetalConnectionObject",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BareMetalConnection"
+            },
+            "x-ms-client-name": "resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BareMetalConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BareMetalConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'BareMetalConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BareMetalConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BareMetalConnections create or update": {
+            "$ref": "./examples/BareMetalConnections_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "BareMetalConnections_Update",
+        "tags": [
+          "BareMetalConnections"
+        ],
+        "description": "Patch the BareMetalConnection. Only the tags may be updated.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the BareMetal Connection. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "bareMetalConnectionObject",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BareMetalConnectionUpdate"
+            },
+            "x-ms-client-name": "properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BareMetalConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BareMetalConnections patch": {
+            "$ref": "./examples/BareMetalConnections_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "BareMetalConnections_Delete",
+        "tags": [
+          "BareMetalConnections"
+        ],
+        "description": "Delete the BareMetalConnection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the BareMetal Connection. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BareMetalConnections delete": {
+            "$ref": "./examples/BareMetalConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "BareMetalConnection": {
+      "type": "object",
+      "description": "Model representing a BareMetal Connection object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BareMetalConnectionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "BareMetalConnectionListResult": {
+      "type": "object",
+      "description": "The response of a BareMetalConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BareMetalConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/BareMetalConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BareMetalConnectionProperties": {
+      "type": "object",
+      "description": "Basic BareMetal Connection properties needed for the request and response.",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "IPv4 address to be allocated in the subnet of the associated BareMetal Connection."
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "VLAN ID assigned to the subnet of the associated BareMetal Connection.  Assigned by resource provider.",
+          "readOnly": true
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "ID of the baremetal device in GUID format."
+        },
+        "subnetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The baremetal-delegated subnet resource ID."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The current provisioning state.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ipAddress",
+        "deviceId",
+        "subnetResourceId"
+      ]
+    },
+    "BareMetalConnectionUpdate": {
+      "type": "object",
+      "description": "Model representing a BareMetal Connection object.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state.",
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "is creating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "is deleting"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "is succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "is failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "is canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RouteToVirtualNetworkOperationStatus": {
+      "type": "string",
+      "description": "Status of the route to virtualNetwork.",
+      "enum": [
+        "succeeded",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "RouteToVirtualNetworkOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "succeeded",
+            "value": "succeeded",
+            "description": "is succeeded"
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "is failed"
+          }
+        ]
+      }
+    },
+    "RoutesToVirtualNetworkOperationType": {
+      "type": "string",
+      "description": "Type of operation.",
+      "enum": [
+        "create",
+        "delete"
+      ],
+      "x-ms-enum": {
+        "name": "RoutesToVirtualNetworkOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "create",
+            "value": "create",
+            "description": "is create operation"
+          },
+          {
+            "name": "delete",
+            "value": "delete",
+            "description": "is delete operation"
+          }
+        ]
+      }
+    },
+    "RoutesToVirtualNetworkOperationsProperties": {
+      "type": "object",
+      "description": "Routes to VirtualNetwork Operations Properties.",
+      "properties": {
+        "vnetId": {
+          "type": "string",
+          "description": "Vnet Id in GUID format."
+        },
+        "routeAddress": {
+          "type": "string",
+          "description": "Route Address in IP Address format."
+        },
+        "nextHopNetworkInterfaceId": {
+          "type": "string",
+          "description": "Next Hop Network Interface Id in GUID format."
+        },
+        "logicalContainerId": {
+          "type": "string",
+          "description": "Logical Container Id in GUID format."
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "AvailabilityZone in string format."
+        },
+        "status": {
+          "$ref": "#/definitions/RouteToVirtualNetworkOperationStatus",
+          "description": "Status of the route.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "The error detail.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "vnetId",
+        "routeAddress",
+        "logicalContainerId",
+        "availabilityZone"
+      ]
+    },
+    "UpdateRoutesOnVirtualNetwork": {
+      "type": "object",
+      "description": "Update Routes on VirtualNetwork Object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateRoutesOnVirtualNetworkProperties",
+          "description": "Update Routes on Virtual Network Properties Object."
+        }
+      }
+    },
+    "UpdateRoutesOnVirtualNetworkProperties": {
+      "type": "object",
+      "description": "Update Routes on VirtualNetwork Properties.",
+      "properties": {
+        "routesToVirtualNetwork": {
+          "type": "array",
+          "description": "List of Routes that needs to updated for VirtualNetwork.",
+          "items": {
+            "$ref": "#/definitions/RoutesToVirtualNetworkOperationsProperties"
+          },
+          "x-ms-identifiers": [
+            "vnetId",
+            "routeAddress"
+          ]
+        },
+        "operationType": {
+          "$ref": "#/definitions/RoutesToVirtualNetworkOperationType",
+          "description": "Type of operation."
+        }
+      },
+      "required": [
+        "routesToVirtualNetwork",
+        "operationType"
+      ]
+    }
+  },
+  "parameters": {}
+}

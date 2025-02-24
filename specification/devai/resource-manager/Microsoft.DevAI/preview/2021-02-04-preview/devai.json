@@ -1,0 +1,2508 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-02-04-preview",
+    "title": "DevAI",
+    "description": "Microsoft DevAI Platform"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevAI/instances/{instanceName}/experiments/{experimentName}": {
+      "get": {
+        "tags": [
+          "ExperimentResource"
+        ],
+        "summary": "Gets an existing experiment of the instance resource.",
+        "operationId": "Experiments_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experiments_Get": {
+            "$ref": "./examples/Experiments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ExperimentResource"
+        ],
+        "summary": "Creates or updates an experiment of the instance resource.",
+        "operationId": "Experiments_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experiments_CreateAdf": {
+            "$ref": "./examples/Experiments_CreateAdf.json"
+          },
+          "Experiments_CreateBatch": {
+            "$ref": "./examples/Experiments_CreateBatch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ExperimentResource"
+        ],
+        "summary": "Deletes an existing experiment of the instance resource.",
+        "operationId": "Experiments_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experiments_Delete": {
+            "$ref": "./examples/Experiments_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "ExperimentResource"
+        ],
+        "summary": "Updates an experiment of the instance resource.",
+        "operationId": "Experiments_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExperimentUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experiments_Update": {
+            "$ref": "./examples/Experiments_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevAI/instances/{instanceName}/experiments": {
+      "get": {
+        "tags": [
+          "ExperimentResource"
+        ],
+        "summary": "Lists all the experiments within the specified instance.",
+        "operationId": "Experiments_ListByInstance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experiments_ListByInstance": {
+            "$ref": "./examples/Experiments_ListByInstance.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevAI/instances/{instanceName}/sandboxes/{sandboxName}/experiments/{experimentName}": {
+      "get": {
+        "tags": [
+          "ExperimentSandboxResource"
+        ],
+        "summary": "Gets an existing experiment resource.",
+        "operationId": "Experiments_GetInSandbox",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experiments_GetInSandbox": {
+            "$ref": "./examples/Experiments_GetInSandbox.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ExperimentSandboxResource"
+        ],
+        "summary": "Creates or updates an Experiment of the sandbox resource.",
+        "operationId": "Experiments_CreateInSandbox",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experiments_CreateInSandbox": {
+            "$ref": "./examples/Experiments_CreateInSandbox.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ExperimentSandboxResource"
+        ],
+        "summary": "Deletes an existing Experiment of the Sandbox resource.",
+        "operationId": "Experiments_DeleteInSandbox",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experiments_DeleteInSandbox": {
+            "$ref": "./examples/Experiments_DeleteInSandbox.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "ExperimentSandboxResource"
+        ],
+        "summary": "Updates an Experiment of the Sandbox resource.",
+        "operationId": "Experiments_UpdateInSandbox",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExperimentUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experiments_UpdateInSandbox": {
+            "$ref": "./examples/Experiments_UpdateInSandbox.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevAI/instances/{instanceName}/sandboxes/{sandboxName}/experiments": {
+      "get": {
+        "tags": [
+          "ExperimentSandboxResource"
+        ],
+        "summary": "Lists all the experiments within the specified sandbox.",
+        "operationId": "Experiments_ListBySandbox",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Experiments_ListBySandbox": {
+            "$ref": "./examples/Experiments_ListBySandbox.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevAI/instances/{instanceName}": {
+      "get": {
+        "tags": [
+          "InstanceResource"
+        ],
+        "summary": "Gets an existing instance resource.",
+        "operationId": "Instances_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_Get": {
+            "$ref": "./examples/Instances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "InstanceResource"
+        ],
+        "summary": "Creates or updates an instance resource.",
+        "operationId": "Instances_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_Create": {
+            "$ref": "./examples/Instances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "InstanceResource"
+        ],
+        "summary": "Deletes an existing instance resource.",
+        "operationId": "Instances_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_Delete": {
+            "$ref": "./examples/Instances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "InstanceResource"
+        ],
+        "summary": "Updates an instance resource.",
+        "operationId": "Instances_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InstanceUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_Update": {
+            "$ref": "./examples/Instances_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevAI/instances": {
+      "get": {
+        "tags": [
+          "InstanceResource"
+        ],
+        "summary": "Lists all the instances under the specified resource group.",
+        "operationId": "Instances_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/InstanceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_ListByResourceGroup": {
+            "$ref": "./examples/Instances_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevAI/instances": {
+      "get": {
+        "tags": [
+          "InstanceResource"
+        ],
+        "summary": "Lists all the instances under the specified subscription.",
+        "operationId": "Instances_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/InstanceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_List": {
+            "$ref": "./examples/Instances_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevAI/instances/{instanceName}/swapslots": {
+      "post": {
+        "tags": [
+          "InstanceResource"
+        ],
+        "summary": "Endpoint to swap the active and inactive slots of the instance.",
+        "operationId": "Instances_SwapSlots",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_SwapSlots": {
+            "$ref": "./examples/Instances_SwapSlots.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevAI/instances/{instanceName}/getConfig": {
+      "post": {
+        "tags": [
+          "InstanceResource"
+        ],
+        "summary": "Endpoint to get the configuration for a DevAI instance.",
+        "operationId": "Instances_GetConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_GetConfiguration": {
+            "$ref": "./examples/Instances_GetConfiguration.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DevAI/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Retrieves a list of available API operations under this Resource Provider.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the list of operations under Microsoft.DevAI resource provider.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevAI/instances/{instanceName}/sandboxes/{sandboxName}": {
+      "get": {
+        "tags": [
+          "SandboxResource"
+        ],
+        "summary": "Gets an existing sandbox resource.",
+        "operationId": "Sandboxes_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Sandbox"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sandboxes_Get": {
+            "$ref": "./examples/Sandboxes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SandboxResource"
+        ],
+        "summary": "Creates or updates a sandbox of an instance resource.",
+        "operationId": "Sandboxes_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sandbox"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Sandbox"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Sandbox"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sandboxes_Create": {
+            "$ref": "./examples/Sandboxes_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "SandboxResource"
+        ],
+        "summary": "Deletes an existing instance of the resource.",
+        "operationId": "Sandboxes_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sandboxes_Delete": {
+            "$ref": "./examples/Sandboxes_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "SandboxResource"
+        ],
+        "summary": "Updates an instance of the resource.",
+        "operationId": "Sandboxes_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The properties of the resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SandboxUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Sandbox"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Sandbox"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sandboxes_Update": {
+            "$ref": "./examples/Sandboxes_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevAI/instances/{instanceName}/sandboxes": {
+      "get": {
+        "tags": [
+          "SandboxResource"
+        ],
+        "summary": "Lists all the sandboxes within the specified instance.",
+        "operationId": "Sandboxes_ListByInstance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/SandboxListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sandboxes_ListByInstance": {
+            "$ref": "./examples/Sandboxes_ListByInstance.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevAI/instances/{instanceName}/sandboxes/{sandboxName}/getConfig": {
+      "post": {
+        "tags": [
+          "SandboxResource"
+        ],
+        "summary": "Endpoint to get the configuration for a sandbox.",
+        "operationId": "Sandboxes_GetConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SandboxNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sandboxes_GetConfiguration": {
+            "$ref": "./examples/Sandboxes_GetConfiguration.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdfPipelineReference": {
+      "description": "The reference to an Azure Data Factory Pipeline.",
+      "required": [
+        "inputName",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the Azure Data Factory Pipeline.",
+          "type": "string"
+        },
+        "inputName": {
+          "description": "The name of the input parameter of the Azure Data Factory Pipeline.",
+          "type": "string"
+        }
+      }
+    },
+    "AdfPipelines": {
+      "description": "The definition of a set of Azure Data Factory pipelines.",
+      "required": [
+        "names"
+      ],
+      "type": "object",
+      "properties": {
+        "names": {
+          "description": "A collection of names of the pipelines. For each pipeline name, max of 140 characters, must start with letter, number, or underscore and not contain \".\", \"+\", \"?\", \"/\", \"<\", \">\", \"*\", \"%\", \"&\", \":\", \"\\\".",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "armTemplateFileLink": {
+          "description": "The path to pipelines ARM template file.",
+          "type": "string"
+        },
+        "armParametersFileLink": {
+          "description": "The path to pipelines ARM parameters file.",
+          "type": "string"
+        },
+        "activities": {
+          "description": "A collection of paths to activities.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BaseResource": {
+      "description": "The base properties of all resources by this resource provider.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+            }
+          ],
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "BaseResourceProperties": {
+      "description": "The base properties of all Azure resource properties.",
+      "required": [
+        "notificationEmails"
+      ],
+      "type": "object",
+      "properties": {
+        "deletionProtectionStatus": {
+          "description": "Whether the resource is protected from deletion.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "The item is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "The item is disabled."
+              }
+            ]
+          }
+        },
+        "notificationEmails": {
+          "description": "A collection of notification emails for the resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "description": "The resource's current state.",
+          "enum": [
+            "Accepted",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Failed",
+            "Succeeded",
+            "Swapping",
+            "Updating"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ResourceProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Accepted",
+                "description": "The last operation for the resource was accepted for an asynchronous operation."
+              },
+              {
+                "value": "Canceled",
+                "description": "The last operation for the resource was cancelled before completion."
+              },
+              {
+                "value": "Creating",
+                "description": "The resource is being created."
+              },
+              {
+                "value": "Deleting",
+                "description": "The resource is being deleted."
+              },
+              {
+                "value": "Failed",
+                "description": "The last operation for the resource did not complete successfully."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The resource is ready for use."
+              },
+              {
+                "value": "Swapping",
+                "description": "The resource is swapping active slots."
+              },
+              {
+                "value": "Updating",
+                "description": "The resource is being updated."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "BaseUpdateProperties": {
+      "description": "The definition of properties in a patch request.",
+      "type": "object",
+      "properties": {
+        "deletionProtectionStatus": {
+          "description": "Whether the resource is protected from deletion.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "The item is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "The item is disabled."
+              }
+            ]
+          }
+        },
+        "notificationEmails": {
+          "description": "A collection of notification emails for the resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConfigurationResponse": {
+      "description": "The configuration of the resources.",
+      "type": "object",
+      "properties": {
+        "configurations": {
+          "description": "The configuration used in the code to find various resources.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DataType": {
+      "description": "The definition of a data type.",
+      "required": [
+        "dataFamilyId",
+        "descriptors",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "adfPipelineReference": {
+          "description": "The Azure Data Factory pipeline that produces the data type.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdfPipelineReference"
+            }
+          ]
+        },
+        "dataFamilyId": {
+          "description": "The id of the data family that this data type belongs to.",
+          "type": "string"
+        },
+        "descriptors": {
+          "description": "A collection of descriptors that can describe inventory items of this data type. The collection can also include a friendly name for the main descriptor which can be used as an alternative in Get operations.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "friendlyDescriptorName": {
+          "description": "The friendly name of the main descriptor that can be used in Get operations instead of the collection of descriptors.",
+          "type": "string"
+        },
+        "mainDescriptor": {
+          "description": "The main descriptor of this data type.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the data type. Built-in data type names \"adhoc\" and \"activity_output\" are not allowed.",
+          "type": "string"
+        }
+      }
+    },
+    "Experiment": {
+      "description": "The definition of a DevAI Experiment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties associated with this experiment.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ExperimentResourceProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExperimentListResult": {
+      "description": "The result of a request to list a resource.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of resources. Since this list may be incomplete, the nextLink field should be used to request the next list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Experiment"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list.",
+          "type": "string"
+        }
+      }
+    },
+    "ExperimentResourceProperties": {
+      "description": "The properties of an Experiment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResourceProperties"
+        }
+      ],
+      "properties": {
+        "dataTypes": {
+          "description": "The collection of data types defined in this Experiment. This will be ignored if the experiment is a built-in experiment. The built-in experiment names are \"Source\" and \"DataProvider\".",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataType"
+          }
+        },
+        "pipelinesInfo": {
+          "description": "The information of the Azure Data Factory pipelines. This will be ignored if the experiment is a built-in experiment. The built-in experiment names are \"Source\" and \"DataProvider\".",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdfPipelines"
+            }
+          ]
+        },
+        "batchJobCommand": {
+          "description": "The batch job command line. This will be ignored if the experiment is a built-in experiment. The built-in experiment names are \"Source\" and \"DataProvider\".",
+          "type": "string"
+        },
+        "machinePools": {
+          "description": "The Batch VM Pools the experiment will create, own, and use . If it's not specified, the shared machine pool created at the parent is used. This will be ignored if the experiment is a built-in experiment. The built-in experiment names are \"Source\" and \"DataProvider\".",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamedMachinePool"
+          }
+        }
+      }
+    },
+    "ExperimentUpdateProperties": {
+      "description": "The definition of properties for Experiment patch requests.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseUpdateProperties"
+        }
+      ],
+      "properties": {
+        "dataTypes": {
+          "description": "The collection of data types defined in this Experiment. This will be ignored if the experiment is a built-in experiment. The built-in experiment names are \"Source\" and \"DataProvider\".",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataType"
+          }
+        },
+        "pipelinesInfo": {
+          "description": "The collection of data types defined in this Experiment. This will be ignored if the experiment is a built-in experiment. The built-in experiment names are \"Source\" and \"DataProvider\".",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdfPipelines"
+            }
+          ]
+        },
+        "batchJobCommand": {
+          "description": "The batch job command line. This will be ignored if the experiment is a built-in experiment. The built-in experiment names are \"Source\" and \"DataProvider\".",
+          "type": "string"
+        },
+        "machinePools": {
+          "description": "The Batch VM Pools the experiment will create, own, and use . If it's not specified, the shared machine pool created at the parent is used. This will be ignored if the experiment is a built-in experiment. The built-in experiment names are \"Source\" and \"DataProvider\".",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamedMachinePool"
+          }
+        }
+      }
+    },
+    "ExperimentUpdateRequest": {
+      "description": "A patch request definition to update an Experiment.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "The properties the experiment will be updated with.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ExperimentUpdateProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The tags for the experiment.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Instance": {
+      "description": "The definition of an Instance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties associated with this instance.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InstanceResourceProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "InstanceListResult": {
+      "description": "The result of a request to list a resource.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of resources. Since this list may be incomplete, the nextLink field should be used to request the next list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Instance"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list.",
+          "type": "string"
+        }
+      }
+    },
+    "InstancePermissions": {
+      "description": "The permissions that can be granted in an Instance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourcePermissions"
+        }
+      ],
+      "properties": {
+        "appServiceCallers": {
+          "description": "The object ids to grant access to call instance app service.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InstancePermissionsTopLevelResourceProperties": {
+      "description": "The base properties of all Azure resource properties for top level resource types.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResourceProperties"
+        }
+      ],
+      "properties": {
+        "resourceConfiguration": {
+          "description": "A collection of configuration values that are available to consume in the resources.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "securityGroupPermissions": {
+          "description": "The permissions granted to security groups.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InstancePermissions"
+            }
+          ]
+        },
+        "servicePrincipalPermissions": {
+          "description": "The permissions granted to service principals.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InstancePermissions"
+            }
+          ]
+        }
+      }
+    },
+    "InstancePermissionsTopLevelUpdateProperties": {
+      "description": "The definition of properties in a patch request.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseUpdateProperties"
+        }
+      ],
+      "properties": {
+        "resourceConfiguration": {
+          "description": "A collection of configuration values that are available to consume in the resources.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "securityGroupPermissions": {
+          "description": "The permissions granted to security groups.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InstancePermissions"
+            }
+          ]
+        },
+        "servicePrincipalPermissions": {
+          "description": "The permissions granted to service principals.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InstancePermissions"
+            }
+          ]
+        }
+      }
+    },
+    "InstanceResourceProperties": {
+      "description": "The properties of an Instance resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InstancePermissionsTopLevelResourceProperties"
+        }
+      ],
+      "properties": {
+        "apiTier": {
+          "description": "The app service sku needed for this instance's expected workload. This is the same value of \"name\" in \"skuDescription\" https://docs.microsoft.com/en-us/azure/templates/microsoft.web/serverfarms?tabs=json#SkuDescription. A list of possible values are in the Instance column in the pricing table https://azure.microsoft.com/en-us/pricing/details/app-service/windows/#pricing.",
+          "default": "S1",
+          "type": "string"
+        },
+        "sharedMachinePool": {
+          "description": "The shared machine pool used in the instance. The pool name is \"Shared\". An experiment in the instance can use this pool. If it's not specified, a default one is created.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MachinePool"
+            }
+          ]
+        },
+        "azureMachineLearningStatus": {
+          "description": "Indicates Whether an Azure Machine Learning resource should be created in the instance.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "The item is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "The item is disabled."
+              }
+            ]
+          }
+        },
+        "hostname": {
+          "format": "hostname",
+          "description": "The shared SSL Hostname for the instance, if any. Must only include root of hostname and it must be a subdomain of *.smltenant.microsoft.com.",
+          "type": "string"
+        },
+        "authJwtAudiences": {
+          "description": "The audiences allowed to make requests for user based auth.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedIPs": {
+          "description": "The IP ranges (CIDR notation) allowed to access Key Vault, Storage Accounts, Azure Machine Learning and Container Registry.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trafficManager": {
+          "description": "The Traffic Manager resource associated with the Instance.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TrafficManagerSettings"
+            }
+          ]
+        },
+        "uniqueNameGeneration": {
+          "description": "Whether the resource name should be used as-is instead of generating a unique suffix.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "The item is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "The item is disabled."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "InstanceUpdateProperties": {
+      "description": "The definition of properties for Instance patch requests.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InstancePermissionsTopLevelUpdateProperties"
+        }
+      ],
+      "properties": {
+        "apiTier": {
+          "description": "The app service sku needed for this instance's expected workload. This is the same value of \"name\" in \"skuDescription\" https://docs.microsoft.com/en-us/azure/templates/microsoft.web/serverfarms?tabs=json#SkuDescription. A list of possible values are in the Instance column in the pricing table https://azure.microsoft.com/en-us/pricing/details/app-service/windows/#pricing.",
+          "default": "S1",
+          "type": "string"
+        },
+        "sharedMachinePool": {
+          "description": "The shared machine pool used in the instance. The pool name is \"Shared\". An experiment in the instance can use this pool.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MachinePool"
+            }
+          ]
+        },
+        "azureMachineLearningStatus": {
+          "description": "Indicates Whether an Azure Machine Learning resource should be created in the instance.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "The item is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "The item is disabled."
+              }
+            ]
+          }
+        },
+        "hostname": {
+          "format": "hostname",
+          "description": "The shared SSL Hostname for the instance, if any. Must only include root of hostname and it must be a subdomain of *.smltenant.microsoft.com.",
+          "type": "string"
+        },
+        "authJwtAudiences": {
+          "description": "The audiences allowed to make requests for user based auth.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedIPs": {
+          "description": "The IP ranges (CIDR notation) allowed to access Key Vault, Storage Accounts, Azure Machine Learning and Container Registry.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trafficManager": {
+          "description": "The Traffic Manager resource associated with the Instance.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TrafficManagerSettings"
+            }
+          ]
+        }
+      }
+    },
+    "InstanceUpdateRequest": {
+      "description": "A patch request definition to update an Instance.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "The properties the instance will be updated with.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InstanceUpdateProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The tags for the instance.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MachinePool": {
+      "description": "The definition of a Batch VM Pool.",
+      "type": "object",
+      "properties": {
+        "apps": {
+          "description": "The MachinePoolApp to install into the pool.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachinePoolApp"
+          }
+        },
+        "scale": {
+          "description": "The definition of the Scale strategy for a Batch VM Pool.",
+          "type": "object",
+          "properties": {
+            "dedicatedNodeCount": {
+              "format": "int32",
+              "description": "The number of nodes to have in the VM Pool when configured to use Fixed scaling.",
+              "default": 1,
+              "type": "integer"
+            },
+            "evaluationPeriodMinutes": {
+              "format": "int32",
+              "description": "The number of minutes to wait before evaluating the scaling formula when configured to use Auto scaling.",
+              "type": "integer"
+            },
+            "formula": {
+              "description": "The scaling formula to use when configured to use Auto scaling. Refer to https://docs.microsoft.com/en-us/azure/batch/batch-automatic-scaling#write-an-autoscale-formula for how to write the formula.",
+              "type": "string"
+            },
+            "mode": {
+              "description": "The kind of scaling the VM Pool to use.",
+              "default": "Auto",
+              "enum": [
+                "Auto",
+                "Fixed"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "MachinePoolScaleMode",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Auto",
+                    "description": "Dynamic scaling will be done automatically based on a provided formula."
+                  },
+                  {
+                    "value": "Fixed",
+                    "description": "Static scaling will be fixed to a predetermined number of VMs."
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "vmOsType": {
+          "description": "The OS to be used in the Pool.",
+          "default": "Windows",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OsType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Windows",
+                "description": "The Windows operating system."
+              },
+              {
+                "value": "Linux",
+                "description": "The Linux operating system."
+              }
+            ]
+          }
+        },
+        "vmSize": {
+          "description": "The size of the VM to be used in the Pool. It follows the requirements of vmSize for the Azure Batch https://docs.microsoft.com/en-us/azure/templates/microsoft.batch/batchaccounts/pools?tabs=json. A list of possible vmSize can be found at https://docs.microsoft.com/en-us/azure/virtual-machines/sizes. The available VM sizes depend on region and availability set.",
+          "default": "STANDARD_A1_V2",
+          "type": "string"
+        },
+        "maxTasksPerNode": {
+          "format": "int32",
+          "description": "The maximum number of parallel tasks to run on a node.",
+          "default": 1,
+          "type": "integer"
+        }
+      }
+    },
+    "MachinePoolApp": {
+      "description": "The definition of a 3rd Party app that can be installed into a Batch VM Pool.",
+      "required": [
+        "name",
+        "packageLink",
+        "version"
+      ],
+      "type": "object",
+      "properties": {
+        "startTaskStatus": {
+          "description": "Indicates if this app contains a start task to include in the VM Pool.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "The item is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "The item is disabled."
+              }
+            ]
+          }
+        },
+        "name": {
+          "description": "The name of the app.",
+          "type": "string"
+        },
+        "packageLink": {
+          "description": "The path to the app package deployed to the machine pool. The package is compressed into a zip file.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the app.",
+          "type": "string"
+        }
+      }
+    },
+    "NamedMachinePool": {
+      "description": "The definition of a Batch VM Pool that explicitly requires a name.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MachinePool"
+        }
+      ],
+      "properties": {
+        "name": {
+          "description": "The name of the VM Pool.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourcePermissions": {
+      "description": "The permissions that can be granted in the resource.",
+      "type": "object",
+      "properties": {
+        "blobContributors": {
+          "description": "The object ids to grant contributor access to public and internal blob data.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blobReaders": {
+          "description": "The object ids to grant read access to public and internal blob data.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "secretsGetters": {
+          "description": "The object ids to grant access to get keyvault secrets.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Sandbox": {
+      "description": "The definition of an instance Sandbox.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties associated with this Sandbox.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SandboxResourceProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SandboxListResult": {
+      "description": "The result of a request to list a resource.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of resources. Since this list may be incomplete, the nextLink field should be used to request the next list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sandbox"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list.",
+          "type": "string"
+        }
+      }
+    },
+    "SandboxResourceProperties": {
+      "description": "The definition of properties of a Sandbox.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResourceProperties"
+        }
+      ],
+      "properties": {
+        "azureMachineLearningStatus": {
+          "description": "Indicates Whether an Azure Machine Learning resource should be created in the sandbox.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "The item is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "The item is disabled."
+              }
+            ]
+          }
+        },
+        "sharedMachinePool": {
+          "description": "The shared machine pool used in the instance. The pool name is \"Shared\". An experiment in the instance can use this pool. If it's not specified, a default one is created.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MachinePool"
+            }
+          ]
+        }
+      }
+    },
+    "SandboxUpdateProperties": {
+      "description": "The definition of properties for Sandbox patch requests.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseUpdateProperties"
+        }
+      ],
+      "properties": {
+        "azureMachineLearningStatus": {
+          "description": "Indicates Whether an Azure Machine Learning resource should be created in the sandbox.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "The item is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "The item is disabled."
+              }
+            ]
+          }
+        },
+        "sharedMachinePool": {
+          "description": "The shared machine pool used in the instance. The pool name is \"Shared\". An experiment in the instance can use this pool. If it's not specified, a default one is created.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MachinePool"
+            }
+          ]
+        }
+      }
+    },
+    "SandboxUpdateRequest": {
+      "description": "A patch request definition to update a Sandbox.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "The properties the Sandbox will be updated with.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SandboxUpdateProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The tags for the Sandbox.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TrafficManagerSettings": {
+      "description": "The definition of a Traffic Manager resource associated with an Instance.",
+      "required": [
+        "name",
+        "resourceGroupName"
+      ],
+      "type": "object",
+      "properties": {
+        "endpointStatus": {
+          "description": "Whether the endpoint should be enabled at the completion of deployment.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "The item is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "The item is disabled."
+              }
+            ]
+          }
+        },
+        "name": {
+          "description": "The name of the associated Traffic Manager resource.",
+          "type": "string"
+        },
+        "globalNameOverride": {
+          "description": "Override the default (Name) setting for the global auth AAD resource name for multi-TM scenarios.",
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "description": "The resource group name of the associated Traffic Manager resource.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "InstanceNameParameter": {
+      "in": "path",
+      "name": "instanceName",
+      "description": "The name of the instance resource.",
+      "required": true,
+      "type": "string",
+      "maxLength": 20,
+      "minLength": 5,
+      "x-ms-parameter-location": "method"
+    },
+    "SandboxNameParameter": {
+      "in": "path",
+      "name": "sandboxName",
+      "description": "The name of the sandbox resource.",
+      "required": true,
+      "type": "string",
+      "maxLength": 20,
+      "minLength": 5,
+      "x-ms-parameter-location": "method"
+    },
+    "ExperimentNameParameter": {
+      "in": "path",
+      "name": "experimentName",
+      "description": "The name of the experiment resource.",
+      "required": true,
+      "type": "string",
+      "maxLength": 20,
+      "minLength": 5,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

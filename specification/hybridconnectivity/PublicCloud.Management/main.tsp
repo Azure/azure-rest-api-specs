@@ -23,10 +23,10 @@ namespace Microsoft.HybridConnectivity;
 
 @doc("Hybrid Connectivity Management service version.")
 enum Versions {
-  @doc("Version 2024-12-01")
+  @doc("Version 2024-08-01-preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_12_01: "2024-12-01",
+  v2024_08_01: "2024-08-01-preview",
 }
 
 //---------------------------------------------- Models ----------------------------------------------
@@ -55,7 +55,7 @@ model SolutionTypeSettings {
 //------------------- Test Permissions -------------------
 
 @doc("Public connector permissions.")
-model TestPermissionResult {
+model TestPermissionResponse {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Solution type permissions.")
   solutionTypes: Array<SolutionTypePermissions>;
@@ -117,7 +117,7 @@ model PublicCloudConnectorProperties {
   awsCloudProfile: AwsCloudProfile;
 
   @doc("Host cloud the public cloud connector.")
-  @visibility("create", "read")
+  @visibility("create")
   hostType: HostType;
 
   @doc("The resource provisioning state.")
@@ -140,14 +140,14 @@ union HostType {
 @doc("cloud profile for AWS.")
 model AwsCloudProfile {
   @doc("Account id for the AWS account.")
-  @visibility("create", "read")
+  @visibility("create")
   accountId: string;
 
   @doc("List of AWS accounts which need to be excluded.")
   excludedAccounts?: string[];
 
   @doc("Boolean value that indicates whether the account is organizational or not. True represents organization account, whereas false represents a single account.")
-  @visibility("create", "read")
+  @visibility("create")
   isOrganizationalAccount?: boolean = false;
 }
 
@@ -301,15 +301,17 @@ union CloudNativeType {
 
 //------------------- Shared -------------------
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "will move to a more structured model when stable/GA"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
 @doc("Solution settings")
 model SolutionSettings is Record<string>;
 
 //---------------------------------------------- Operations ----------------------------------------------
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
+alias GenerateAwsTemplatePostResponse = Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/")
 interface GenerateAwsTemplate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
@@ -325,7 +327,7 @@ interface GenerateAwsTemplate {
     @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
     @body
     generateAwsTemplateRequest: GenerateAwsTemplateRequest,
-  ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
+  ): GenerateAwsTemplatePostResponse;
 }
 
 @armResourceOperations
@@ -343,7 +345,7 @@ interface PublicCloudConnectors {
   testPermissions is ArmResourceActionAsync<
     PublicCloudConnector,
     void,
-    Azure.ResourceManager.Foundations.OperationStatusResult
+    TestPermissionResponse
   >;
 }
 
@@ -359,17 +361,16 @@ interface SolutionConfigurations {
   listByWidget is ArmResourceListAtScope<SolutionConfiguration>;
 
   @doc("Trigger immediate sync with source cloud")
-  syncNow is ArmResourceActionAsync<
+  syncNow is ArmResourceActionNoResponseContentAsync<
     SolutionConfiguration,
-    void,
-    Azure.ResourceManager.Foundations.OperationStatusResult
+    void
   >;
 }
 
 @armResourceOperations
 interface Inventory {
   get is ArmResourceRead<InventoryResource>;
-  listBySolutionConfiguration is ArmResourceListByParent<InventoryResource>;
+  listByWidget is ArmResourceListByParent<InventoryResource>;
 }
 
 @armResourceOperations

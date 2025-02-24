@@ -1,0 +1,294 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The definitions in this swagger specification will be used to manage the Hybrid Network resources.",
+    "version": "2023-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ReferencedResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Reference to another resource.",
+      "x-ms-azure-resource": true
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Accepted",
+        "Deleting",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "Converging"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "NFVIType": {
+      "type": "string",
+      "description": "The NFVI type.",
+      "enum": [
+        "Unknown",
+        "AzureArcKubernetes"
+      ],
+      "x-ms-enum": {
+        "name": "NFVIType",
+        "modelAsString": true
+      }
+    },
+    "TagsObject": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Tags object for patch operations."
+    },
+    "NetworkFunctionApplication": {
+      "description": "Network function application definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the network function application."
+        }
+      }
+    },
+    "ArtifactProfile": {
+      "description": "Artifact profile properties.",
+      "type": "object",
+      "properties": {
+        "artifactStore": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "The reference to artifact store."
+        }
+      }
+    },
+    "GenericParameters": {
+      "type": "object",
+      "description": "The parameters for the generic object."
+    },
+    "ManagedResourceGroupConfiguration": {
+      "description": "Managed resource group configuration.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name."
+        },
+        "location": {
+          "type": "string",
+          "description": "Managed resource group location."
+        }
+      }
+    },
+    "PublisherScope": {
+      "type": "string",
+      "description": "Publisher Scope.",
+      "enum": [
+        "Unknown",
+        "Public",
+        "Private"
+      ],
+      "x-ms-enum": {
+        "name": "PublisherScope",
+        "modelAsString": true
+      }
+    },
+    "ArtifactAccessCredential": {
+      "description": "The artifact manifest credential definition.",
+      "type": "object",
+      "discriminator": "credentialType",
+      "required": [
+        "credentialType"
+      ],
+      "properties": {
+        "credentialType": {
+          "type": "string",
+          "description": "The credential type.",
+          "enum": [
+            "Unknown",
+            "AzureContainerRegistryScopedToken"
+          ],
+          "x-ms-enum": {
+            "name": "CredentialType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureContainerRegistryScopedTokenCredential": {
+      "description": "The azure container registry scoped token credential definition.",
+      "type": "object",
+      "x-ms-discriminator-value": "AzureContainerRegistryScopedToken",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArtifactAccessCredential"
+        }
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The username of the credential."
+        },
+        "acrToken": {
+          "type": "string",
+          "description": "The credential value."
+        },
+        "acrServerUrl": {
+          "type": "string",
+          "description": "The Acr server url"
+        },
+        "repositories": {
+          "type": "array",
+          "description": "The repositories that could be accessed using the current credential.",
+          "items": {
+            "type": "string",
+            "description": "The repository that could be accessed using the current credential."
+          },
+          "x-ms-identifiers": []
+        },
+        "expiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time when credential will expire."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PublisherNameParameter": {
+      "name": "publisherName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the publisher.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkFunctionDefinitionGroupNameParameter": {
+      "name": "networkFunctionDefinitionGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network function definition group.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkFunctionDefinitionVersionNameParameter": {
+      "name": "networkFunctionDefinitionVersionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "maxLength": 64,
+      "description": "The name of the network function definition version.",
+      "x-ms-parameter-location": "method"
+    },
+    "ArtifactStoreParameter": {
+      "name": "artifactStoreName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the artifact store.",
+      "x-ms-parameter-location": "method"
+    },
+    "ArtifactManifestParameter": {
+      "name": "artifactManifestName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "description": "The name of the artifact manifest.",
+      "x-ms-parameter-location": "method"
+    },
+    "PublisherScopeNameParameter": {
+      "name": "publisherScopeName",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the publisher scope.",
+      "x-ms-parameter-location": "method"
+    },
+    "PublisherLocationNameParameter": {
+      "name": "publisherLocationName",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the publisher location.",
+      "x-ms-parameter-location": "method"
+    },
+    "ArtifactNameParameter": {
+      "name": "artifactName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "description": "The name of the network function definition version artifact.",
+      "x-ms-parameter-location": "method"
+    },
+    "ArtifactVersionNameParameter": {
+      "name": "artifactVersionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "description": "The name of the network function definition version artifact version.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

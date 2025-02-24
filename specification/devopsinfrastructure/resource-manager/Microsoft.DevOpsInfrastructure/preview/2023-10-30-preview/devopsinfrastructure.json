@@ -60,7 +60,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -99,7 +99,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PoolListResult"
             }
@@ -141,7 +141,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PoolListResult"
             }
@@ -191,7 +191,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Pool"
             }
@@ -256,6 +256,10 @@
               "$ref": "#/definitions/Pool"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -316,7 +320,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Pool"
             }
@@ -324,14 +328,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -381,19 +385,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -420,8 +424,7 @@
       "description": "The agent profile of the machines in the pool.",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "Discriminator property for AgentProfile."
+          "$ref": "#/definitions/AgentProfileKind"
         },
         "resourcePredictions": {
           "$ref": "#/definitions/ResourcePredictions",
@@ -432,6 +435,118 @@
       "required": [
         "kind"
       ]
+    },
+    "AgentProfileKind": {
+      "type": "string",
+      "description": "The kinds of agents",
+      "enum": [
+        "Stateless",
+        "Stateful"
+      ],
+      "x-ms-enum": {
+        "name": "AgentProfileKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Stateless",
+            "value": "Stateless",
+            "description": "Machines will be cleaned up after execution"
+          },
+          {
+            "name": "Stateful",
+            "value": "Stateful",
+            "description": "Machines returned to the pool after execution"
+          }
+        ]
+      }
+    },
+    "AgentProfileUpdate": {
+      "type": "object",
+      "description": "The agent profile of the machines in the pool.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AgentProfileKind"
+        },
+        "resourcePredictions": {
+          "$ref": "#/definitions/ResourcePredictions",
+          "description": "Defines pool buffer."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.Legacy.ManagedServiceIdentityType": {
+      "type": "string",
+      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity."
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "System and user assigned managed identity."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Update": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.Legacy.ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
     },
     "AzureDevOpsOrganizationProfile": {
       "type": "object",
@@ -456,6 +571,26 @@
       ],
       "x-ms-discriminator-value": "AzureDevOps"
     },
+    "AzureDevOpsOrganizationProfileUpdate": {
+      "type": "object",
+      "description": "Azure DevOps organization profile",
+      "properties": {
+        "organizations": {
+          "type": "array",
+          "description": "The list of Azure DevOps organizations the pool should be present in.",
+          "items": {
+            "$ref": "#/definitions/Organization"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OrganizationProfileUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureDevOps"
+    },
     "DevOpsAzureSku": {
       "type": "object",
       "description": "The Azure SKU of the machines in the pool.",
@@ -474,13 +609,58 @@
         "name"
       ]
     },
+    "DevOpsAzureSkuUpdate": {
+      "type": "object",
+      "description": "The Azure SKU of the machines in the pool.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Azure SKU name of the machines in the pool."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The Azure SKU tier of the machines in the pool.",
+          "default": "Standard"
+        }
+      }
+    },
     "FabricProfile": {
       "type": "object",
       "description": "Defines the type of fabric the agent will run on.",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "Discriminator property for FabricProfile."
+          "$ref": "#/definitions/FabricProfileKind"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "FabricProfileKind": {
+      "type": "string",
+      "description": "The kind of fabric profile",
+      "enum": [
+        "Vmss"
+      ],
+      "x-ms-enum": {
+        "name": "FabricProfileKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Vmss",
+            "value": "Vmss",
+            "description": "A fabric profile containing virtual machine scale sets"
+          }
+        ]
+      }
+    },
+    "FabricProfileUpdate": {
+      "type": "object",
+      "description": "Defines the type of fabric the agent will run on.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/FabricProfileKind"
         }
       },
       "discriminator": "kind",
@@ -500,6 +680,16 @@
       "required": [
         "subnetId"
       ]
+    },
+    "NetworkProfileUpdate": {
+      "type": "object",
+      "description": "The network profile of the machines in the pool.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The subnet id on which to put all machines created in the pool."
+        }
+      }
     },
     "Organization": {
       "type": "object",
@@ -531,8 +721,38 @@
       "description": "Defines the organization in which the pool will be used.",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "Discriminator property for OrganizationProfile."
+          "$ref": "#/definitions/OrganizationProfileKind"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "OrganizationProfileKind": {
+      "type": "string",
+      "description": "The kinds of organization profile",
+      "enum": [
+        "AzureDevOps"
+      ],
+      "x-ms-enum": {
+        "name": "OrganizationProfileKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureDevOps",
+            "value": "AzureDevOps",
+            "description": "An ADO organization profile"
+          }
+        ]
+      }
+    },
+    "OrganizationProfileUpdate": {
+      "type": "object",
+      "description": "Defines the organization in which the pool will be used.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/OrganizationProfileKind"
         }
       },
       "discriminator": "kind",
@@ -553,18 +773,23 @@
         "secretsManagementSettings"
       ]
     },
+    "OsProfileUpdate": {
+      "type": "object",
+      "description": "The OS profile of the machines in the pool.",
+      "properties": {
+        "secretsManagementSettings": {
+          "$ref": "#/definitions/SecretsManagementSettingsUpdate",
+          "description": "The secret management settings of the machines in the pool."
+        }
+      }
+    },
     "Pool": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PoolProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -629,7 +854,8 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the current operation."
+          "description": "The status of the current operation.",
+          "readOnly": true
         },
         "maximumConcurrency": {
           "type": "integer",
@@ -663,35 +889,10 @@
         "devCenterProjectResourceId"
       ]
     },
-    "PoolUpdate": {
+    "PoolPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Pool.",
+      "description": "Pool properties",
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/PoolUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PoolUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Pool.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the current operation."
-        },
         "maximumConcurrency": {
           "type": "integer",
           "format": "int32",
@@ -700,15 +901,15 @@
           "maximum": 10000
         },
         "organizationProfile": {
-          "$ref": "#/definitions/OrganizationProfile",
+          "$ref": "#/definitions/OrganizationProfileUpdate",
           "description": "Defines the organization in which the pool will be used."
         },
         "agentProfile": {
-          "$ref": "#/definitions/AgentProfile",
+          "$ref": "#/definitions/AgentProfileUpdate",
           "description": "Defines how the machine will be handled once it executed a job."
         },
         "fabricProfile": {
-          "$ref": "#/definitions/FabricProfile",
+          "$ref": "#/definitions/FabricProfileUpdate",
           "description": "Defines the type of fabric the agent will run on."
         },
         "devCenterProjectResourceId": {
@@ -716,6 +917,25 @@
           "description": "The resource id of the DevCenter Project the pool belongs to."
         }
       }
+    },
+    "PoolUpdate": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PoolPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Update",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "ProvisioningState": {
       "type": "string",
@@ -769,7 +989,8 @@
             "description": "Represents an accepted operation."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ResourcePredictions": {
       "type": "object",
@@ -801,6 +1022,28 @@
         "keyExportable"
       ]
     },
+    "SecretsManagementSettingsUpdate": {
+      "type": "object",
+      "description": "The secret management settings of the machines in the pool.",
+      "properties": {
+        "certificateStoreLocation": {
+          "type": "string",
+          "description": "Where to store certificates on the machine."
+        },
+        "observedCertificates": {
+          "type": "array",
+          "description": "The list of certificates to install on all machines in the pool.",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "keyExportable": {
+          "type": "boolean",
+          "description": "Defines if the key of the certificates should be exportable."
+        }
+      }
+    },
     "Stateful": {
       "type": "object",
       "description": "Stateful profile meaning that the machines will be returned to the pool after running a job.",
@@ -820,12 +1063,38 @@
       ],
       "x-ms-discriminator-value": "Stateful"
     },
+    "StatefulUpdate": {
+      "type": "object",
+      "description": "Stateful profile meaning that the machines will be returned to the pool after running a job.",
+      "properties": {
+        "maxAgentLifetime": {
+          "type": "string",
+          "description": "How long should stateful machines be kept around. The maximum is one week."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentProfileUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful"
+    },
     "StatelessAgentProfile": {
       "type": "object",
       "description": "Stateless profile meaning that the machines will be cleaned up after running a job.",
       "allOf": [
         {
           "$ref": "#/definitions/AgentProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless"
+    },
+    "StatelessAgentProfileUpdate": {
+      "type": "object",
+      "description": "Stateless profile meaning that the machines will be cleaned up after running a job.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentProfileUpdate"
         }
       ],
       "x-ms-discriminator-value": "Stateless"
@@ -862,6 +1131,38 @@
       "allOf": [
         {
           "$ref": "#/definitions/FabricProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "Vmss"
+    },
+    "VmssFabricProfileUpdate": {
+      "type": "object",
+      "description": "The agents will run on Virtual Machine Scale Sets.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/DevOpsAzureSkuUpdate",
+          "description": "The Azure SKU of the machines in the pool."
+        },
+        "images": {
+          "type": "array",
+          "description": "The VM images of the machines in the pool.",
+          "items": {
+            "$ref": "#/definitions/PoolImage"
+          },
+          "x-ms-identifiers": []
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OsProfileUpdate",
+          "description": "The OS profile of the machines in the pool."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfileUpdate",
+          "description": "The network profile of the machines in the pool."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricProfileUpdate"
         }
       ],
       "x-ms-discriminator-value": "Vmss"

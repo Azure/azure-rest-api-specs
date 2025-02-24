@@ -1,0 +1,42 @@
+{
+  "title": "HealthModels_ListByResourceGroup",
+  "operationId": "HealthModels_ListByResourceGroup",
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2022-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourcegroups/myResourceGroup/providers/Microsoft.HealthModel/healthmodels/myModel1",
+            "name": "myModel1",
+            "type": "Microsoft.HealthModel/healthmodels",
+            "location": "global",
+            "properties": {
+              "versionNumber": "16776797",
+              "activeState": "Active",
+              "refreshInterval": "PT1M"
+            }
+          },
+          {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourcegroups/myResourceGroup/providers/Microsoft.HealthModel/healthmodels/myModel2",
+            "name": "myModel2",
+            "type": "Microsoft.HealthModel/healthmodels",
+            "location": "westus",
+            "tags": {
+              "test": "bar"
+            },
+            "properties": {
+              "versionNumber": "1677679737124",
+              "activeState": "Active",
+              "refreshInterval": "PT5M"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

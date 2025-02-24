@@ -1,0 +1,165 @@
+{
+  "title": "Broker_CreateOrUpdate",
+  "operationId": "Broker_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "e4kName": "test",
+    "brokerName": "test",
+    "resource": {
+      "extendedLocation": {
+        "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ExtendedLocation/customLocations/test",
+        "type": "CustomLocation"
+      },
+      "location": "test",
+      "properties": {
+        "authImage": {
+          "pullPolicy": "Always",
+          "repository": "sample.azurecr.io/sample-authentication",
+          "tag": "0.5.0"
+        },
+        "brokerImage": {
+          "pullPolicy": "Always",
+          "repository": "sample.azurecr.io/sample-pod",
+          "tag": "0.5.0"
+        },
+        "healthManagerImage": {
+          "pullPolicy": "Always",
+          "repository": "sample.azurecr.io/sample-operator",
+          "tag": "0.5.0"
+        },
+        "cardinality": {
+          "backendChain": {
+            "partitions": 2,
+            "replicas": 1,
+            "workers": 1
+          },
+          "frontend": {
+            "replicas": 2
+          }
+        },
+        "mode": "distributed",
+        "diagnostics": {
+          "diagnosticServiceEndpoint": "azedge-diagnostics-service:9700",
+          "enableMetrics": true,
+          "enableTracing": true,
+          "logLevel": "debug,hyper=off,kube_client=off,tower=off,conhash=off,h2=off",
+          "enableSelfCheck": false
+        }
+      }
+    },
+    "api-version": "2023-07-17-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ExtendedLocation/customLocations/test",
+          "type": "CustomLocation"
+        },
+        "location": "test",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.AlicespringsDataplane/e4k/test/broker/test",
+        "type": "Microsoft.AlicespringsDataplane/e4k/broker",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2023-06-20T22:54:18.5423954Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-20T23:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "authImage": {
+            "pullPolicy": "Always",
+            "repository": "sample.azurecr.io/sample-authentication",
+            "tag": "0.5.0"
+          },
+          "brokerImage": {
+            "pullPolicy": "Always",
+            "repository": "sample.azurecr.io/sample-pod",
+            "tag": "0.5.0"
+          },
+          "healthManagerImage": {
+            "pullPolicy": "Always",
+            "repository": "sample.azurecr.io/sample-operator",
+            "tag": "0.5.0"
+          },
+          "cardinality": {
+            "backendChain": {
+              "partitions": 2,
+              "replicas": 1,
+              "workers": 1
+            },
+            "frontend": {
+              "replicas": 2
+            }
+          },
+          "mode": "distributed",
+          "diagnostics": {
+            "diagnosticServiceEndpoint": "azedge-diagnostics-service:9700",
+            "enableMetrics": true,
+            "enableTracing": true,
+            "logLevel": "debug,hyper=off,kube_client=off,tower=off,conhash=off,h2=off",
+            "enableSelfCheck": false
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ExtendedLocation/customLocations/test",
+          "type": "CustomLocation"
+        },
+        "location": "test",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.AlicespringsDataplane/e4k/test/broker/test",
+        "type": "Microsoft.AlicespringsDataplane/e4k/broker",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2023-06-20T22:54:18.5423954Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-20T23:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "authImage": {
+            "pullPolicy": "Always",
+            "repository": "sample.azurecr.io/sample-authentication",
+            "tag": "0.5.0"
+          },
+          "brokerImage": {
+            "pullPolicy": "Always",
+            "repository": "sample.azurecr.io/sample-pod",
+            "tag": "0.5.0"
+          },
+          "healthManagerImage": {
+            "pullPolicy": "Always",
+            "repository": "sample.azurecr.io/sample-operator",
+            "tag": "0.5.0"
+          },
+          "cardinality": {
+            "backendChain": {
+              "partitions": 2,
+              "replicas": 1,
+              "workers": 1
+            },
+            "frontend": {
+              "replicas": 2
+            }
+          },
+          "mode": "distributed",
+          "diagnostics": {
+            "diagnosticServiceEndpoint": "azedge-diagnostics-service:9700",
+            "enableMetrics": true,
+            "enableTracing": true,
+            "logLevel": "debug,hyper=off,kube_client=off,tower=off,conhash=off,h2=off",
+            "enableSelfCheck": false
+          }
+        }
+      }
+    }
+  }
+}

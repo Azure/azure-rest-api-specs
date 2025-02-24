@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2024-06-27",
+    "parameters": {
+      "certRecord": {
+        "certificationStatus": "CertIngestion",
+        "controls": [
+          {
+            "controlId": "Operational_Security_10",
+            "controlStatus": "Approved"
+          }
+        ],
+        "ingestionStatus": "EvidenceResubmitted",
+        "offerGuid": "00000000-0000-0000-0000-000000000001"
+      }
+    },
+    "reportName": "testReportName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "certRecord": {
+          "offerGuid": "addb13fc-64bf-4005-b693-4c2f094e2187",
+          "certificationStatus": "CertIngestion",
+          "ingestionStatus": "InitialDocumentResubmitted",
+          "controls": []
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationStatuses/{operationId}",
+        "Location": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationResults/{operationId}"
+      }
+    }
+  },
+  "operationId": "Reports_SyncCertRecord",
+  "title": "Reports_SyncCertRecord"
+}

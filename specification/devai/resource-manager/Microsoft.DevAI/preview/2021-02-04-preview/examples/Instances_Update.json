@@ -1,0 +1,201 @@
+{
+  "parameters": {
+    "api-version": "2021-02-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "instanceName": "myInstance",
+    "body": {
+      "properties": {
+        "notificationEmails": [
+          "sample@email.com"
+        ],
+        "securityGroupPermissions": {
+          "appServiceCallers": [
+            "00000000-0000-0000-0000-000000000000"
+          ],
+          "blobReaders": [
+            "00000000-0000-0000-0000-000000000000"
+          ],
+          "blobContributors": [
+            "00000000-0000-0000-0000-000000000000"
+          ],
+          "secretsGetters": [
+            "00000000-0000-0000-0000-000000000000"
+          ]
+        },
+        "servicePrincipalPermissions": {
+          "appServiceCallers": [
+            "00000000-0000-0000-0000-000000000000"
+          ],
+          "blobReaders": [
+            "00000000-0000-0000-0000-000000000000"
+          ],
+          "blobContributors": [
+            "00000000-0000-0000-0000-000000000000"
+          ],
+          "secretsGetters": [
+            "00000000-0000-0000-0000-000000000000"
+          ]
+        },
+        "apiTier": "S1",
+        "sharedMachinePool": {
+          "scale": {
+            "mode": "Fixed",
+            "dedicatedNodeCount": 1
+          },
+          "vmSize": "STANDARD_A2_V2"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus2",
+        "properties": {
+          "apiTier": "S1",
+          "hostname": "mydomain",
+          "provisioningState": "Updating",
+          "resourceConfiguration": {
+            "name": "value"
+          },
+          "notificationEmails": [
+            "sample@email.com"
+          ],
+          "securityGroupPermissions": {
+            "appServiceCallers": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "blobReaders": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "blobContributors": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "secretsGetters": [
+              "00000000-0000-0000-0000-000000000000"
+            ]
+          },
+          "servicePrincipalPermissions": {
+            "appServiceCallers": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "blobReaders": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "blobContributors": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "secretsGetters": [
+              "00000000-0000-0000-0000-000000000000"
+            ]
+          },
+          "trafficManager": {
+            "endpointStatus": "Enabled",
+            "name": "mytrafficmanager",
+            "resourceGroupName": "myTMResourceGroup"
+          },
+          "sharedMachinePool": {
+            "vmSize": "STANDARD_A2_V2",
+            "maxTasksPerNode": 8,
+            "apps": [
+              {
+                "packageLink": "https://foo.blob.core.windows.net/stores/myapp/3.2.01572.002/myapp/myapp.zip?sv=...",
+                "startTaskStatus": "Enabled",
+                "name": "myapp",
+                "version": "3.2.01572.002"
+              }
+            ],
+            "scale": {
+              "mode": "Fixed",
+              "dedicatedNodeCount": 1
+            },
+            "vmOsType": "Windows"
+          }
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-02-04T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-02-05T17:18:19.1234567Z"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "location": "westus2",
+        "properties": {
+          "apiTier": "S1",
+          "hostname": "mydomain",
+          "provisioningState": "Updating",
+          "resourceConfiguration": {
+            "name": "value"
+          },
+          "notificationEmails": [
+            "sample@email.com"
+          ],
+          "securityGroupPermissions": {
+            "appServiceCallers": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "blobReaders": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "blobContributors": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "secretsGetters": [
+              "00000000-0000-0000-0000-000000000000"
+            ]
+          },
+          "servicePrincipalPermissions": {
+            "appServiceCallers": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "blobReaders": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "blobContributors": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "secretsGetters": [
+              "00000000-0000-0000-0000-000000000000"
+            ]
+          },
+          "trafficManager": {
+            "endpointStatus": "Enabled",
+            "name": "mytrafficmanager",
+            "resourceGroupName": "myTMResourceGroup"
+          },
+          "sharedMachinePool": {
+            "vmSize": "STANDARD_A2_V2",
+            "maxTasksPerNode": 8,
+            "apps": [
+              {
+                "packageLink": "https://foo.blob.core.windows.net/stores/myapp/3.2.01572.002/myapp/myapp.zip?sv=...",
+                "startTaskStatus": "Enabled",
+                "name": "myapp",
+                "version": "3.2.01572.002"
+              }
+            ],
+            "scale": {
+              "mode": "Fixed",
+              "dedicatedNodeCount": 1
+            },
+            "vmOsType": "Windows"
+          }
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-02-04T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-02-05T17:18:19.1234567Z"
+        }
+      }
+    }
+  }
+}

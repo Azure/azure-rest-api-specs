@@ -1,0 +1,543 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-10-01-preview",
+    "title": "SyntheticsManagementClient",
+    "description": "The Synthetics Management Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Synthetics/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "description": "Lists available operations for the Microsoft.Synthetics provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of available operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synthetics/workspaces/{workspaceName}": {
+      "put": {
+        "tags": [
+          "SyntheticsWorkspace"
+        ],
+        "operationId": "Workspace_Create",
+        "x-ms-examples": {
+          "Workspace_Create": {
+            "$ref": "./examples/Workspace_Create.json"
+          }
+        },
+        "description": "Creates a new Synthetics Workspace with the specified parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "SyntheticsWorkspace"
+        ],
+        "operationId": "Workspace_Update",
+        "x-ms-examples": {
+          "Workspace_Update": {
+            "$ref": "./examples/Workspace_Update.json"
+          }
+        },
+        "description": "Updates the properties of an existing Synthetics workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResourceUpdate"
+            },
+            "description": "Additional parameters for workspace update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Synthetics workspace entity.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SyntheticsWorkspace"
+        ],
+        "operationId": "Workspace_Delete",
+        "x-ms-examples": {
+          "Workspace_Delete": {
+            "$ref": "./examples/Workspace_Delete.json"
+          }
+        },
+        "description": "Deletes the specified Synthetics workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent -- workspace does not exist in the subscription."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "SyntheticsWorkspace"
+        ],
+        "operationId": "Workspace_Get",
+        "x-ms-examples": {
+          "Workspace_Get": {
+            "$ref": "./examples/Workspace_Get.json"
+          }
+        },
+        "description": "Gets information about the specified Synthetics workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Synthetics workspace entity.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Synthetics/workspaces": {
+      "get": {
+        "tags": [
+          "SyntheticsWorkspace"
+        ],
+        "operationId": "Workspaces_List",
+        "x-ms-examples": {
+          "Workspace_List": {
+            "$ref": "./examples/Workspace_List.json"
+          }
+        },
+        "description": "Gets information about the Synthetics workspaces associated with the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of Synthetics workspace entities associated with the subscription.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synthetics/workspaces": {
+      "get": {
+        "tags": [
+          "SyntheticsWorkspace"
+        ],
+        "operationId": "Workspace_ListByResourceGroup",
+        "x-ms-examples": {
+          "Workspace_ListByResourceGroup": {
+            "$ref": "./examples/Workspace_ListByResourceGroup.json"
+          }
+        },
+        "description": "Gets information about the Synthetics workspaces associated with the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of Synthetics workspace entities associated with the resource group.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkspaceResource": {
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceResourceProperties",
+          "description": "The properties associated with the workspace."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "A Synthetics workspace resource.",
+      "x-ms-azure-resource": true
+    },
+    "WorkspaceResourceProperties": {
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "description": "The unique, immutable id of this resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of this resource.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "The friendly name for this synthetics workspace. This name in mutable.",
+          "type": "string"
+        },
+        "keyVault": {
+          "description": "ARM identifier of the key vault associated with this workspace. This cannot be changed on creation.",
+          "type": "string"
+        },
+        "applicationInsights": {
+          "description": "ARM identifier of the application insights associated with this workspace. This cannot be changed on creation.",
+          "type": "string"
+        },
+        "storageAccount": {
+          "description": "ARM identifier of the storage account associated with this workspace. This cannot be changed on creation.",
+          "type": "string"
+        },
+        "regionalEndpoint": {
+          "description": "The url that this workspace should use for Synthetics service."
+        },
+        "primaryUserAssignedIdentity": {
+          "description": "The user assigned identity resource id that represents the synthetics workspace identity.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id associated with this workspace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "description": "The provisioned state of the resource",
+          "enum": [
+            "Invalid",
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Invalid",
+                "description": "The workspace is in an invalid state."
+              },
+              {
+                "value": "Creating",
+                "description": "The workspace is being created."
+              },
+              {
+                "value": "Deleting",
+                "description": "The workspace is being deleted."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The workspace has been created and is ready for use."
+              },
+              {
+                "value": "Failed",
+                "description": "The last operation for the workspace has failed."
+              },
+              {
+                "value": "Cancelled",
+                "description": "The last operation for the workspace is cancelled."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Properties of a Synthetics workspace."
+    },
+    "WorkspaceResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user-specified tags associated with the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkspaceResourcePropertiesUpdates",
+          "description": "The properties that the synthetics workspace will be updated with.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
+        }
+      },
+      "description": "Parameters for updating a Synthetics workspace."
+    },
+    "WorkspaceResourcePropertiesUpdates": {
+      "type": "object",
+      "description": "The parameters for updating the properties of a Synthetics Workspace.",
+      "properties": {
+        "description": {
+          "description": "The description of this workspace.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "The friendly name for this workspace.",
+          "type": "string"
+        },
+        "primaryUserAssignedIdentity": {
+          "description": "The user assigned identity resource id that represents the workspace identity.",
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceResource"
+          },
+          "description": "The collection of Synthetics workspaces returned by the listing operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation.",
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z0-9]+$",
+      "minLength": 3,
+      "maxLength": 24,
+      "description": "A name for the Synthetics Workspace which must be unique within the region.Synthetics Workspace names must be between 3 and 24 characters in length and must use only numbers and lowercase letters. This name is used as part of the DNS name that is used to access the Synthetics Workspace service in the region in which the workspace is created. For example: http://workspacename.region.synthetics.azure.com/.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

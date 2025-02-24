@@ -679,7 +679,7 @@ model ExtendedLocation {
 
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -766,7 +766,7 @@ model RouteTable {
   @visibility("read")
   type?: string;
 
-  #suppress "deprecated" "LEGACY flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the route table.")
   @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteTableProperties;
@@ -781,7 +781,7 @@ model RouteTableProperties {
 
 @doc("Route - Route resource.")
 model Route {
-  #suppress "deprecated" "Legacy flattened property"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the route.")
   @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteProperties;
@@ -847,6 +847,34 @@ model NetworkSecurityGroupProperties {
   @doc("The provisioning state of the network security group resource.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of Network Security Group")
+  @visibility("read")
+  @added(Versions.v2025_02_01_preview)
+  status?: NetworkSecurityGroupStatus;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("The observed state of network security group")
+model NetworkSecurityGroupStatus {
+  @doc("NetworkSecurityGroup provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("network security group provisioning status")
+  provisioningStatus?: NetworkSecurityGroupStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("network security group provisioning status")
+model NetworkSecurityGroupStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the network security group")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the network security group [Succeeded, Failed, InProgress]")
+  status?: Status;
 }
 
 @doc("Security rule resource.")
@@ -895,6 +923,10 @@ model NetworkInterfaceProperties {
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
 
+  @added(Versions.v2025_02_01_preview)
+  @doc("Boolean indicating whether this is a existing local network interface or if one should be created.")
+  createFromLocal?: boolean = false;
+
   @doc("Provisioning state of the network interface.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
@@ -908,6 +940,7 @@ model NetworkInterfaceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+#suppress "deprecated" "Legacy flattening"
 @doc("InterfaceIPConfiguration IPConfiguration in a network interface.")
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -948,6 +981,7 @@ model InterfaceDNSSettings {
   dnsServers?: string[];
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of network interfaces")
 model NetworkInterfaceStatus {
   @doc("NetworkInterface provisioning error code")
@@ -969,6 +1003,7 @@ model NetworkInterfaceStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of logical networks")
 model LogicalNetworkStatus {
   @doc("LogicalNetwork provisioning error code")
@@ -992,9 +1027,41 @@ model LogicalNetworkStatusProvisioningStatus {
 
 @doc("The logical network resource patch definition.")
 model LogicalNetworksUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: LogicalNetworkUpdateProperties;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Properties under the logical network resource")
+model LogicalNetworkUpdateProperties {
+  @doc("Subnet - list of subnets under the logical network")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  subnets?: SubnetUpdate[];
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Subnet resource")
+model SubnetUpdate {
+  #suppress "deprecated" "Legacy flattening"
+  @doc("Properties of the subnet.")
+  @Azure.ClientGenerator.Core.flattenProperty
+  properties?: SubnetUpdateProperties;
+
+  @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
+  name?: string;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Properties of the subnet.")
+model SubnetUpdateProperties {
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
 }
 
 @doc("Properties under the marketplace gallery image resource")
@@ -1031,6 +1098,7 @@ model MarketplaceGalleryImageProperties {
   status?: MarketplaceGalleryImageStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of marketplace gallery images")
 model MarketplaceGalleryImageStatus {
   @doc("MarketplaceGalleryImage provisioning error code")
@@ -1067,21 +1135,35 @@ model MarketplaceGalleryImageStatusDownloadStatus {
 
 @doc("The marketplace gallery image resource patch definition.")
 model MarketplaceGalleryImagesUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("The network interface resource patch definition.")
 model NetworkInterfacesUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2025_02_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: NetworkInterfacesUpdateProperties;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("Defines the resource properties for the update.")
+model NetworkInterfacesUpdateProperties {
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @doc("DNS Settings for the interface")
+  dnsSettings?: InterfaceDNSSettings;
 }
 
 @doc("Tags object for patch operations.")
 model TagsObject {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 }
@@ -1100,6 +1182,7 @@ model StorageContainerProperties {
   status?: StorageContainerStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of storage containers")
 model StorageContainerStatus {
   @doc("StorageContainer provisioning error code")
@@ -1131,7 +1214,7 @@ model StorageContainerStatusProvisioningStatus {
 
 @doc("The storage container resource patch definition.")
 model StorageContainersUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1166,6 +1249,10 @@ model VirtualHardDiskProperties {
   @doc("The format of the actual VHD file [vhd, vhdx]")
   diskFileFormat?: DiskFileFormat;
 
+  @added(Versions.v2025_02_01_preview)
+  @doc("Boolean indicating whether it is an existing local hard disk or if one should be created.")
+  createFromLocal?: boolean = false;
+
   @doc("Provisioning state of the virtual hard disk.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
@@ -1182,6 +1269,7 @@ model VirtualHardDiskProperties {
   status?: VirtualHardDiskStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of virtual hard disks")
 model VirtualHardDiskStatus {
   @doc("VirtualHardDisk provisioning error code")
@@ -1224,8 +1312,6 @@ model VirtualHardDiskDownloadStatus {
 
   @added(Versions.v2024_10_01_preview)
   @doc("The progress of the operation in percentage")
-  @minValue(0)
-  @maxValue(100)
   progressPercentage?: int64;
 }
 
@@ -1241,8 +1327,6 @@ model VirtualHardDiskUploadStatus {
 
   @added(Versions.v2024_10_01_preview)
   @doc("The progress of the operation in percentage")
-  @minValue(0)
-  @maxValue(100)
   progressPercentage?: int64;
 
   @added(Versions.v2024_10_01_preview)
@@ -1256,9 +1340,21 @@ model VirtualHardDiskUploadStatus {
 
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2025_02_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: VirtualHardDisksUpdateProperties;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("Defines the resource properties for the update.")
+model VirtualHardDisksUpdateProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is a short form."
+  @doc("Size of the disk in GB")
+  diskSizeGB?: int64;
 }
 
 @added(Versions.v2024_05_01_preview)
@@ -1302,6 +1398,10 @@ model VirtualMachineInstanceProperties {
 
   @doc("HTTP Proxy configuration for the VM.")
   httpProxyConfig?: HttpProxyConfiguration;
+
+  @added(Versions.v2025_02_01_preview)
+  @doc("Boolean indicating whether this is an existing local virtual machine or if one should be created.")
+  createFromLocal?: boolean = false;
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
@@ -1574,6 +1674,7 @@ model InstanceViewStatus {
   time?: utcDateTime;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of virtual machine instances")
 model VirtualMachineInstanceStatus {
   @doc("VirtualMachine provisioning error code")

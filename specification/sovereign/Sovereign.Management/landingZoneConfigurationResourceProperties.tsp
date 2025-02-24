@@ -4,7 +4,7 @@ using Azure.Core;
 
 namespace Microsoft.Sovereign;
 
-@added(Versions.Preview20250227)
+@added(Versions.Preview20241031)
 @doc("The properties of landing zone configuration resource type.")
 model LandingZoneConfigurationResourceProperties {
   @visibility("read")
@@ -98,22 +98,12 @@ model LandingZoneConfigurationResourceProperties {
   @doc("This will be applied to the sandbox management group.")
   sandboxMgMetadata?: SandboxManagementGroupProperties;
 
+  @added(Versions.Preview20241031)
   @doc("The managed identity to be tied to this landing zone configuration")
   managedIdentity: ManagedIdentityProperties;
-
-  @doc("Platform children management group properties.")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  platformMgChildren?: PlatformManagementGroupProperties[];
-
-  @doc("The naming convention that's used by default for all resource types for this landing zone configuration")
-  namingConventionFormula?: string;
-
-  @doc("The customized naming convention for one or more resource types in this landing zone configuration")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  customNamingConvention?: CustomNamingConvention[];
 }
 
-@added(Versions.Preview20250227)
+@added(Versions.Preview20241031)
 @doc("The properties of managed identity.")
 model ManagedIdentityProperties {
   @doc("The type of managed identity.")
@@ -127,7 +117,7 @@ model ManagedIdentityProperties {
   ]>;
 }
 
-@added(Versions.Preview20250227)
+@added(Versions.Preview20241031)
 @doc("The authoring status for a landing zone configuration.")
 union ManagedIdentityResourceType {
   @doc("System assigned managed identity.")
@@ -145,8 +135,7 @@ model Tags {
   name: string;
 
   @doc("A tag value.")
-  @madeOptional(Versions.Preview20250227)
-  value?: string;
+  value: string;
 }
 
 @doc("Landing zone management group properties.")
@@ -247,11 +236,8 @@ model GenerateLandingZoneRequest {
   @pattern("^([a-zA-Z0-9]+)$")
   deploymentLocation: string;
 
-  @doc("The name of the organization or agency the landing zone is being deployed for.")
+  @doc("The name of the country/region or agency the landing zone is being deployed for")
   organization?: string;
-
-  @doc("The environment for which the landing zone is being deployed")
-  environment?: string;
 }
 
 @doc("The response for the request to generate landing zone code.")
@@ -266,18 +252,22 @@ model GenerateLandingZoneResponse {
   @secret
   generatedCodeUrl: url;
 
+  @added(Versions.Preview20241031)
   @doc("The storage account name to access the generated code.")
   @secret
   storageAccountName: string;
 
+  @added(Versions.Preview20241031)
   @doc("The storage account container to access the generated code.")
   @secret
   containerName: string;
 
+  @added(Versions.Preview20241031)
   @doc("The storage account blob name to access the generated code.")
   @secret
   blobName: string;
 
+  @added(Versions.Preview20241031)
   @doc("The generated code content as a json string.")
   @secret
   generatedArmTemplate?: string;
@@ -317,9 +307,12 @@ union InfrastructureAsCodeOutputOptions {
   @doc("Value when generating Landing Zone code in Bicep.")
   Bicep: "Bicep",
 
+  @added(Versions.Preview20240331)
   @doc("Value when generating landing zone code in Arm.")
   ARM: "ARM",
 
+  // values to be added in the future.
+  //terraform: "Terraform",
   string,
 }
 
@@ -368,6 +361,7 @@ model CreateCopyResponse {
   ]>;
 }
 
+@added(Versions.Preview20241031)
 @doc("The request for the create copy action of landing zone configuration.")
 model CreateLandingZoneConfigurationCopyRequest {
   @doc("The name of the new landing zone configuration resource.")
@@ -375,6 +369,7 @@ model CreateLandingZoneConfigurationCopyRequest {
   name: string;
 }
 
+@added(Versions.Preview20241031)
 @doc("The response of the create copy action of landing zone configuration.")
 model CreateLandingZoneConfigurationCopyResponse {
   @doc("The id of the copied landing zone configuration resource.")
@@ -383,59 +378,4 @@ model CreateLandingZoneConfigurationCopyResponse {
       type: "Microsoft.Sovereign/landingZoneAccounts/landingZoneConfigurations";
     }
   ]>;
-}
-
-@doc("The details for the custom resource override.")
-@added(Versions.Preview20250227)
-model CustomNamingConvention {
-  @doc("The type of the resource.")
-  resourceType: ResourceType;
-
-  @doc("The custom formula for the resource type.")
-  formula: string;
-}
-
-@doc("The input values for defining resource types for naming conventions.")
-@added(Versions.Preview20250227)
-union ResourceType {
-  @doc("Value when customer wants to provide custom naming convention for Azure Firewall.")
-  azureFirewalls: "azureFirewalls",
-
-  @doc("Value when customer wants to provide custom naming convention for Log Analytics workspace.")
-  workspaces: "workspaces",
-
-  @doc("Value when customer wants to provide custom naming convention for automation account.")
-  automationAccounts: "automationAccounts",
-
-  @doc("Value when customer wants to provide custom naming convention for dashboard.")
-  dashboards: "dashboards",
-
-  @doc("Value when customer wants to provide custom naming convention for managed identity.")
-  userAssignedIdentities: "userAssignedIdentities",
-
-  @doc("Value when customer wants to provide custom naming convention for Bastion.")
-  bastionHosts: "bastionHosts",
-
-  @doc("Value when customer wants to provide custom naming convention for DDoS protection plan.")
-  ddosProtectionPlans: "ddosProtectionPlans",
-
-  @doc("Value when customer wants to provide custom naming convention for Bastion NSG.")
-  networkSecurityGroups: "networkSecurityGroups",
-
-  @doc("Value when customer wants to provide custom naming convention for virtual network.")
-  virtualNetworks: "virtualNetworks",
-
-  @doc("Value when customer wants to provide custom naming convention for route table.")
-  routeTables: "routeTables",
-
-  string,
-}
-
-@added(Versions.Preview20250227)
-@doc("Platform management group properties.")
-model PlatformManagementGroupProperties {
-  ...ManagementGroupProperties;
-
-  @doc("Management group name.")
-  name: string;
 }

@@ -1,0 +1,74 @@
+{
+  "title": "Storages_CreateOrUpdate with zone redundancy",
+  "operationId": "Storages_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2024-05-01-preview",
+    "workbenchName": "test-workbench",
+    "chamberName": "test-chamber",
+    "storageName": "test-storage",
+    "resource": {
+      "location": "Central US",
+      "sku": {
+        "name": "Ultra_ANF_ZRS"
+      },
+      "zones": [
+        "1",
+        "2"
+      ],
+      "properties": {
+        "capacityAllocated": 4
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-storage",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/test-chamber/storages/test-storage",
+        "type": "Microsoft.ModSimWorkbench/workbenches/chambers/storages",
+        "location": "Central US",
+        "sku": {
+          "name": "Ultra_ANF_ZRS",
+          "tier": "Ultra",
+          "family": "ANF"
+        },
+        "zones": [
+          "1",
+          "2"
+        ],
+        "properties": {
+          "provisioningState": "Succeeded",
+          "capacityAllocated": 4,
+          "capacityUsed": 2
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "x-ms-async-operation-timeout": "PT30M"
+      },
+      "body": {
+        "name": "test-storage",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/test-chamber/storages/test-storage",
+        "type": "Microsoft.ModSimWorkbench/workbenches/chambers/storages",
+        "location": "Central US",
+        "sku": {
+          "name": "Ultra_ANF_ZRS",
+          "tier": "Ultra",
+          "family": "ANF"
+        },
+        "zones": [
+          "1",
+          "2"
+        ],
+        "properties": {
+          "provisioningState": "Succeeded",
+          "capacityAllocated": 4,
+          "capacityUsed": 2
+        }
+      }
+    }
+  }
+}

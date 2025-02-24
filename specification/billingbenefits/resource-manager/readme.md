@@ -26,7 +26,8 @@ These are the global settings for the billingbenefits.
 
 ```yaml
 openapi-type: arm
-tag: package-2022-11-01
+openapi-subtype: providerHub
+tag: package-preview-2024-11-01-preview
 ```
 
 ### Suppression
@@ -53,16 +54,64 @@ directive:
     reason: According to ARM's guide 200 is returned when PUT call finishes.
   - suppress: TrackedResourcePatchOperation
     from: billingbenefits.json
+  - suppress: TenantLevelAPIsNotAllowed
+    from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrderAliases/{savingsPlanOrderAliasName}"]
+  - suppress: ParametersInPointGet
+    from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}"].get.parameters
+  - suppress: ParametersInPointGet
+    from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].get.parameters
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+  - suppress: PatchResponseCodes
+    from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].patch
+  - suppress: NoErrorCodeResponses
+    from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].patch.responses["404"]
+  - suppress: PathForTrackedResourceTypes
+    from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/reservationOrderAliases/{reservationOrderAliasName}"]
+  - suppress:  PutRequestResponseSchemeArm
+    from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.paths["/providers/Microsoft.BillingBenefits/reservationOrderAliases/{reservationOrderAliasName}"].put
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: billingbenefits.json
+    reason: False-positive. Tags property exists.
+    where: $.paths["/providers/Microsoft.BillingBenefits/reservationOrderAliases/{reservationOrderAliasName}"].put
+  - suppress: AvoidAdditionalProperties
+    from: billingbenefits.json
+    reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
+    where: $.definitions.SavingsPlanModelListResult.properties
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: billingbenefits.json
+    reason: False-positive. ReservationOrderAliasResponse is a type defintion that does not require a delete operation.
+    where: $.definitions.ReservationOrderAliasResponse
+  - suppress: PatchIdentityProperty
+    from: billingbenefits.json
+    reason: False-positive. Identity property is never defined on the model.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/discounts/{discountName}"].patch.parameters[4]
 ```
 
-### Tag: package-2022-11-01
+### Tag: package-preview-2024-11-01-preview
 
-These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-11-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-11-01'
+```yaml $(tag) == 'package-preview-2024-11-01-preview'
 input-file:
-  - Microsoft.BillingBenefits/stable/2022-11-01/billingbenefits.json
+  - Microsoft.BillingBenefits/preview/2024-11-01-preview/billingbenefits.json
 ```
+
 
 ---
 

@@ -19,7 +19,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Microsoft Entra ID OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -1187,7 +1187,7 @@
         },
         "business": {
           "description": "Business of the company",
-          "maxLength": 64,
+          "maxLength": 50,
           "type": "string"
         },
         "employeesNumber": {
@@ -1197,12 +1197,12 @@
         },
         "state": {
           "description": "State of the company location.",
-          "maxLength": 64,
+          "maxLength": 50,
           "type": "string"
         },
         "country": {
           "description": "Country of the company location.",
-          "maxLength": 64,
+          "maxLength": 50,
           "type": "string"
         }
       }
@@ -1223,7 +1223,7 @@
         },
         "companyName": {
           "description": "Company name of the user",
-          "maxLength": 64,
+          "maxLength": 50,
           "type": "string"
         },
         "emailAddress": {
@@ -1762,7 +1762,13 @@
       "in": "query",
       "description": "The API version to be used with the HTTP request.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "2020-07-01-preview",
+        "2020-07-01",
+        "2021-09-01-preview",
+        "2021-10-01-preview"
+      ]
     },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",

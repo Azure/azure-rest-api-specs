@@ -12,12 +12,7 @@ using TypeSpec.Rest;
 @armResourceOperations
 interface SharedPrivateLinkResources {
   get is ArmResourceRead<SharedPrivateLinkResource>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrUpdateAsync<
-    SharedPrivateLinkResource,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  create is ArmResourceCreateOrUpdateAsync<SharedPrivateLinkResource>;
   delete is ArmResourceDeleteWithoutOkAsync<SharedPrivateLinkResource>;
   listByWatcher is ArmResourceListByParent<SharedPrivateLinkResource>;
 }
@@ -35,7 +30,7 @@ model SharedPrivateLinkResource
 
 @doc("The generic properties of a Shared Private Link resource.")
 model SharedPrivateLinkResourceProperties {
-  @doc("The resource ID of the resource the shared private link resource is for.")
+  @doc("The resource id of the resource the shared private link resource is for.")
   privateLinkResourceId: Azure.Core.armResourceIdentifier;
 
   @doc("The group id from the provider of resource the shared private link resource is for.")
@@ -44,7 +39,7 @@ model SharedPrivateLinkResourceProperties {
   @doc("The request message for requesting approval of the shared private link resource.")
   requestMessage: string;
 
-  @doc("The DNS zone to be included in the DNS name of the shared private link. Value is required for Azure Data Explorer clusters and SQL managed instances. The value to use is the second segment of the host FQDN name of the resource that the shared private link resource is for.")
+  @doc("The DNS zone to be included in the DNS name of the shared private link. Value is service-specific.")
   dnsZone?: string;
 
   @visibility("read")

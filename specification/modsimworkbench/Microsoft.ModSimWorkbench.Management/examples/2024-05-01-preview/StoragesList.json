@@ -1,0 +1,51 @@
+{
+  "title": "Storages_List",
+  "operationId": "Storages_List",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2024-05-01-preview",
+    "workbenchName": "test-workbench",
+    "chamberName": "test-chamber"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "test-storage",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/test-chamber/storages/test-storage",
+            "type": "Microsoft.ModSimWorkbench/workbenches/chambers/storages",
+            "location": "Central US",
+            "sku": {
+              "name": "Standard_ANF_LRS",
+              "tier": "Standard",
+              "family": "ANF"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "capacityAllocated": 4,
+              "capacityUsed": 2
+            }
+          },
+          {
+            "name": "test-storage2",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/test-chamber/storages/test-storage2",
+            "type": "Microsoft.ModSimWorkbench/workbenches/chambers/storages",
+            "location": "Central US",
+            "sku": {
+              "name": "Standard_ANF_LRS",
+              "tier": "Standard",
+              "family": "ANF"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "capacityAllocated": 4,
+              "capacityUsed": 4
+            }
+          }
+        ]
+      }
+    }
+  }
+}

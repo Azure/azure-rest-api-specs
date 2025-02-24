@@ -1,0 +1,60 @@
+{
+  "title": "LandingZoneRegistrationOperations_Drift",
+  "operationId": "LandingZoneRegistrationOperations_Drift",
+  "parameters": {
+    "api-version": "2024-10-31-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "landingZoneAccountName": "myLZA",
+    "landingZoneRegistrationName": "myLZR"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "reportRuntime": "2025-02-06T00:09:25.3183077+00:00",
+        "landingZoneAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myRG/providers/Microsoft.Sovereign/landingZoneAccounts/myLZA",
+        "landingZoneRegistrationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myRG/providers/Microsoft.Sovereign/landingzoneaccounts/myLZA/landingzoneregistrations/myLZR",
+        "landingZoneConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myRG/providers/Microsoft.Sovereign/landingzoneaccounts/myLZA/landingzoneconfigurations/myLZC",
+        "managementGroupId": "/providers/Microsoft.Management/managementGroups/myMgId",
+        "totalEvaluatedRules": 32,
+        "totalAnalyzedItems": 256,
+        "totalDriftedItems": 4,
+        "driftedItems": [
+          {
+            "ruleName": "Management Group Display Name Changed",
+            "category": "ManagementGroup",
+            "priority": "Low",
+            "detail": "Management Group display name changed from Confidential Corp to Not Confidential Corp",
+            "identifier": "/tenant/00000000-0000-0000-0000-000000000000/providers/Microsoft.Management/managementGroups/myMgId"
+          },
+          {
+            "ruleName": "Management Group Added",
+            "category": "Management Group",
+            "priority": "Medium",
+            "detail": "Management Group Administration Group was added",
+            "identifier": "/tenant/00000000-0000-0000-0000-000000000000/providers/Microsoft.Management/managementGroups/myMgId"
+          },
+          {
+            "ruleName": "Management Group Removed",
+            "category": "Management Group",
+            "priority": "High",
+            "detail": "Management Group Landing Zone Sandbox was removed",
+            "identifier": "/tenant/00000000-0000-0000-0000-000000000000/providers/Microsoft.Management/managementGroups/myMgId"
+          },
+          {
+            "ruleName": "Log Retention Decreased",
+            "category": "Log Retention",
+            "priority": "High",
+            "detail": "Log retention in days for workspace MyLogAnalyticsWorkspace is less than 540.",
+            "identifier": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/MyLogAnalyticsWorkspace"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

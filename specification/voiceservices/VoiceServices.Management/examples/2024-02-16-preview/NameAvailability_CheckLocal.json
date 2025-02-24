@@ -1,0 +1,22 @@
+{
+  "operationId": "NameAvailability_CheckLocal",
+  "title": "CheckLocalNameAvailability",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-02-16-preview",
+    "location": "useast",
+    "body": {
+      "name": "myname",
+      "type": "Microsoft.VoiceServices/CommunicationsGateways"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nameAvailable": false,
+        "reason": "AlreadyExists",
+        "message": "Some error string"
+      }
+    }
+  }
+}

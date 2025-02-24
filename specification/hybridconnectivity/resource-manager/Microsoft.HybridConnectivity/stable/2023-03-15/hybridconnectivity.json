@@ -309,7 +309,7 @@
         "tags": [
           "ServiceConfigurations"
         ],
-        "summary": "Lists of all the services associated with endpoint resource.",
+        "summary": "Lists of all the services associated with endpoint resource",
         "operationId": "ServiceConfigurations_ListByEndpointResource",
         "description": "API to enumerate registered services in service configurations under a Endpoint Resource",
         "produces": [
@@ -361,10 +361,10 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "HybridConnectivityEndpointsServiceconfigurationsGetSSH": {
+          "HybridConnectivityEndpointsServiceConfigurationsGetSSH": {
             "$ref": "./examples/ServiceConfigurationsGetSSH.json"
           },
-          "HybridConnectivityEndpointsServiceconfigurationsGetWAC": {
+          "HybridConnectivityEndpointsServiceConfigurationsGetWAC": {
             "$ref": "./examples/ServiceConfigurationsGetWAC.json"
           }
         },
@@ -384,7 +384,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Service configuration resource request was successful",
+            "description": "Service details",
             "schema": {
               "$ref": "#/definitions/ServiceConfigurationResource"
             }
@@ -403,7 +403,7 @@
           "ServiceConfigurations"
         ],
         "description": "Create or update a service in serviceConfiguration for the endpoint resource.",
-        "operationId": "ServiceConfigurations_CreateOrupdate",
+        "operationId": "ServiceConfigurations_CreateOrUpdate",
         "produces": [
           "application/json"
         ],
@@ -440,7 +440,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ServiceConfiguration resource create request was successful.",
+            "description": "ServiceConfiguration Resource details.",
             "schema": {
               "$ref": "#/definitions/ServiceConfigurationResource"
             }
@@ -541,10 +541,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The service configuration resource is deleted successfully."
+            "description": "The endpoint is deleted successfully."
           },
           "204": {
-            "description": "The service configuration resource has been deleted already."
+            "description": "The endpoint has been deleted already."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -948,7 +948,7 @@
             "Canceled"
           ],
           "x-ms-enum": {
-            "name": "ProvisioningState",
+            "name": "result",
             "modelAsString": true
           }
         }
@@ -1029,7 +1029,7 @@
         },
         "serviceName": {
           "type": "string",
-          "description": "The name of the service. It is an optional property, if not provided, service configuration tokens issue code would be by passed.",
+          "description": "The name of the service.",
           "enum": [
             "SSH",
             "WAC"
@@ -1047,7 +1047,7 @@
       "properties": {
         "serviceName": {
           "type": "string",
-          "description": "The name of the service. If not provided, the request will by pass the generation of service configuration token ",
+          "description": "The name of the service. If not provided, the request will by pass the generation of service configuration token.",
           "enum": [
             "SSH",
             "WAC"

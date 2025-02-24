@@ -1,0 +1,47 @@
+{
+  "title": "Get PlannedQuota",
+  "operationId": "PlannedQuota_Get",
+  "parameters": {
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "resourceName": "prodUSEastAzcis",
+    "api-version": "2024-06-24-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/providers/Microsoft.AzureCis/plannedQuotas/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/plannedQuotas",
+        "properties": {
+          "plannedQuotaName": "PlannedQuota202310191",
+          "contactEmail": "somemail@microsoft.com",
+          "subscriptionNameInPlan": "DataSub1",
+          "stage": "GA",
+          "azureLocation": "useast",
+          "skipUnsupportedSilently": false,
+          "provisioningState": "Succeeded",
+          "fulfilledPlan": {
+            "arm": {
+              "vm": {
+                "cores": {
+                  "DV2F": 228,
+                  "EV3F": 212
+                }
+              }
+            },
+            "rdfe": {
+              "storage": {
+                "accounts": 100
+              }
+            },
+            "isAzEnabled": true
+          },
+          "alternatives": {
+            "DV2F": "DV3F",
+            "EV3F": "EV4F"
+          }
+        }
+      }
+    }
+  }
+}

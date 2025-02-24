@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-fluidrelay"
-  output-folder: "$(typescript-sdks-folder)/sdk/fluidrelay/arm-fluidrelay"
+  package-name: "fluidrelay"
+  output-folder: "$(typescript-sdks-folder)/packages/fluidrelay"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

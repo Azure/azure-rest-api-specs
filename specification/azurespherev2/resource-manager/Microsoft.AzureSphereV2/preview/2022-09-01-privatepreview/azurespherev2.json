@@ -1,0 +1,3469 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Sphere V2 Management",
+    "version": "2022-09-01-privatepreview",
+    "description": "Use these APIs to manage Azure Sphere V2 in your Azure subscription.",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Catalogs"
+    },
+    {
+      "name": "ProvisioningPackages"
+    },
+    {
+      "name": "Certificates"
+    },
+    {
+      "name": "DeviceRegistrations"
+    },
+    {
+      "name": "SyndicationChannels"
+    },
+    {
+      "name": "UpdatePackages"
+    },
+    {
+      "name": "Deployments"
+    },
+    {
+      "name": "Artifacts"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureSphereV2/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/listOperations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphereV2/catalogs": {
+      "get": {
+        "tags": [
+          "Catalogs"
+        ],
+        "operationId": "Catalogs_ListBySubscription",
+        "description": "List Catalog resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CatalogListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Catalogs_ListBySubscription": {
+            "$ref": "./examples/listCatalogsBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/artifacts": {
+      "get": {
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "Artifacts_ListBySubscription",
+        "description": "List Artifact resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Artifacts_ListBySubscription": {
+            "$ref": "./examples/listArtifactsBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/certificates": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "Certificates_ListBySubscription",
+        "description": "List Certificate resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Certificates_ListBySubscription": {
+            "$ref": "./examples/listCertificatesBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/deviceRegistrations": {
+      "get": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_ListBySubscription",
+        "description": "List DeviceRegistration resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistrationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DeviceRegistrations_ListBySubscription": {
+            "$ref": "./examples/listDeviceRegistrationsBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/provisioningPackages": {
+      "get": {
+        "tags": [
+          "ProvisioningPackages"
+        ],
+        "operationId": "ProvisioningPackages_ListBySubscription",
+        "description": "List ProvisioningPackage resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningPackageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ProvisioningPackages_ListBySubscription": {
+            "$ref": "./examples/listProvisioningPackagesBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/syndicationChannels": {
+      "get": {
+        "tags": [
+          "SyndicationChannels"
+        ],
+        "operationId": "SyndicationChannels_ListBySubscription",
+        "description": "List SyndicationChannel resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SyndicationChannelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SyndicationChannels_ListBySubscription": {
+            "$ref": "./examples/listSyndicationChannelsBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/updatePackages": {
+      "get": {
+        "tags": [
+          "UpdatePackages"
+        ],
+        "operationId": "UpdatePackages_ListBySubscription",
+        "description": "List UpdatePackage resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdatePackageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "UpdatePackages_ListBySubscription": {
+            "$ref": "./examples/listUpdatePackagesBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs": {
+      "get": {
+        "tags": [
+          "Catalogs"
+        ],
+        "operationId": "Catalogs_ListByResourceGroup",
+        "description": "List Catalog resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CatalogListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Catalogs_ListByResourceGroup": {
+            "$ref": "./examples/listCatalogsByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}": {
+      "get": {
+        "tags": [
+          "Catalogs"
+        ],
+        "operationId": "Catalogs_Get",
+        "description": "Get a Catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_Get": {
+            "$ref": "./examples/getCatalog.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Catalogs"
+        ],
+        "operationId": "Catalogs_CreateOrUpdate",
+        "description": "Create a Catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_CreateOrUpdate": {
+            "$ref": "./examples/putCatalog.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Catalogs"
+        ],
+        "operationId": "Catalogs_Update",
+        "description": "Update a Catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/CatalogUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_Update": {
+            "$ref": "./examples/patchCatalog.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Catalogs"
+        ],
+        "operationId": "Catalogs_Delete",
+        "description": "Delete a Catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_Delete": {
+            "$ref": "./examples/deleteCatalog.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/artifacts": {
+      "get": {
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "Artifacts_ListByCatalog",
+        "description": "List Artifact resources by Catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Artifacts_ListByCatalog": {
+            "$ref": "./examples/listArtifactsByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/artifacts/{artifactName}": {
+      "get": {
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "Artifacts_Get",
+        "description": "Get a Artifact",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/Artifact.artifactName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts_Get": {
+            "$ref": "./examples/getArtifact.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "Artifacts_CreateOrUpdate",
+        "description": "Create a Artifact",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/Artifact.artifactName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts_CreateOrUpdate": {
+            "$ref": "./examples/putArtifact.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "Artifacts_Update",
+        "description": "Update a Artifact",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/Artifact.artifactName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts_Update": {
+            "$ref": "./examples/patchArtifact.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "Artifacts_Delete",
+        "description": "Delete a Artifact",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/Artifact.artifactName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts_Delete": {
+            "$ref": "./examples/deleteArtifact.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/certificates": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "Certificates_ListByCatalog",
+        "description": "List Certificate resources by Catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Certificates_ListByCatalog": {
+            "$ref": "./examples/listCertificatesByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/certificates/{serialNumber}": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "Certificates_Get",
+        "description": "Get a Certificate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/Certificate.serialNumber"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Certificates_Get": {
+            "$ref": "./examples/getCertificate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/deviceRegistrations": {
+      "get": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_ListByCatalog",
+        "description": "List DeviceRegistration resources by Catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistrationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DeviceRegistrations_ListByCatalog": {
+            "$ref": "./examples/listDeviceRegistrationsByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/deviceRegistrations/{networkDeviceIdentifier}": {
+      "get": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_Get",
+        "description": "Get a DeviceRegistration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/DeviceRegistration.networkDeviceIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceRegistrations_Get": {
+            "$ref": "./examples/getDeviceRegistration.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_CreateOrUpdate",
+        "description": "Create a DeviceRegistration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/DeviceRegistration.networkDeviceIdentifier"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistration"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceRegistrations_CreateOrUpdate": {
+            "$ref": "./examples/putDeviceRegistration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_Update",
+        "description": "Update a DeviceRegistration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/DeviceRegistration.networkDeviceIdentifier"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistrationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceRegistrations_Update": {
+            "$ref": "./examples/patchDeviceRegistration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_Delete",
+        "description": "Delete a DeviceRegistration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/DeviceRegistration.networkDeviceIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceRegistrations_Delete": {
+            "$ref": "./examples/deleteDeviceRegistration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/deviceRegistrations/{networkDeviceIdentifier}/generateAuthToken": {
+      "post": {
+        "tags": [
+          "DeviceRegistrations"
+        ],
+        "operationId": "DeviceRegistrations_GenerateAuthToken",
+        "description": "Generates an authentication JWT token.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/DeviceRegistration.networkDeviceIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistrationGenerateAuthTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceRegistrations_GenerateAuthToken": {
+            "$ref": "./examples/generateAuthTokenDeviceRegistration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/provisioningPackages": {
+      "get": {
+        "tags": [
+          "ProvisioningPackages"
+        ],
+        "operationId": "ProvisioningPackages_ListByCatalog",
+        "description": "List ProvisioningPackage resources by Catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningPackageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ProvisioningPackages_ListByCatalog": {
+            "$ref": "./examples/listProvisioningPackagesByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/provisioningPackages/{provisioningPackageName}": {
+      "get": {
+        "tags": [
+          "ProvisioningPackages"
+        ],
+        "operationId": "ProvisioningPackages_Get",
+        "description": "Get a ProvisioningPackage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/ProvisioningPackage.provisioningPackageName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningPackage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProvisioningPackages_Get": {
+            "$ref": "./examples/getProvisioningPackage.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ProvisioningPackages"
+        ],
+        "operationId": "ProvisioningPackages_CreateOrUpdate",
+        "description": "Create a ProvisioningPackage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/ProvisioningPackage.provisioningPackageName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningPackage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningPackage"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ProvisioningPackage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProvisioningPackages_CreateOrUpdate": {
+            "$ref": "./examples/putProvisioningPackage.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ProvisioningPackages"
+        ],
+        "operationId": "ProvisioningPackages_Update",
+        "description": "Update a ProvisioningPackage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/ProvisioningPackage.provisioningPackageName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningPackageUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningPackage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProvisioningPackages_Update": {
+            "$ref": "./examples/patchProvisioningPackage.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProvisioningPackages"
+        ],
+        "operationId": "ProvisioningPackages_Delete",
+        "description": "Delete a ProvisioningPackage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/ProvisioningPackage.provisioningPackageName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProvisioningPackages_Delete": {
+            "$ref": "./examples/deleteProvisioningPackage.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/provisioningPackages/{provisioningPackageName}/format": {
+      "post": {
+        "tags": [
+          "ProvisioningPackages"
+        ],
+        "operationId": "ProvisioningPackages_Format",
+        "description": "Returns the formatted provisioning package.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/ProvisioningPackage.provisioningPackageName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningPackageFormatActionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProvisioningPackages_Format": {
+            "$ref": "./examples/formatProvisioningPackage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/startDevicesActivation": {
+      "post": {
+        "tags": [
+          "Catalogs"
+        ],
+        "operationId": "Catalogs_StartDevicesActivation",
+        "description": "Bulk activation of devices.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "description": "Request parameters to start a devices activation process.",
+            "schema": {
+              "$ref": "#/definitions/StartDevicesActivationActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Start bulk activation of devices response.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_StartDevicesActivation": {
+            "$ref": "./examples/startDevicesActivationCatalog.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/syndicationChannels": {
+      "get": {
+        "tags": [
+          "SyndicationChannels"
+        ],
+        "operationId": "SyndicationChannels_ListByCatalog",
+        "description": "List SyndicationChannel resources by Catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SyndicationChannelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SyndicationChannels_ListByCatalog": {
+            "$ref": "./examples/listSyndicationChannelsByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/syndicationChannels/{syndicationChannelName}": {
+      "get": {
+        "tags": [
+          "SyndicationChannels"
+        ],
+        "operationId": "SyndicationChannels_Get",
+        "description": "Get a SyndicationChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/SyndicationChannel.syndicationChannelName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SyndicationChannel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SyndicationChannels_Get": {
+            "$ref": "./examples/getSyndicationChannel.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SyndicationChannels"
+        ],
+        "operationId": "SyndicationChannels_CreateOrUpdate",
+        "description": "Create a SyndicationChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/SyndicationChannel.syndicationChannelName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/SyndicationChannel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SyndicationChannel"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SyndicationChannel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SyndicationChannels_CreateOrUpdate": {
+            "$ref": "./examples/putSyndicationChannel.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "SyndicationChannels"
+        ],
+        "operationId": "SyndicationChannels_Update",
+        "description": "Update a SyndicationChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/SyndicationChannel.syndicationChannelName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/SyndicationChannelUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SyndicationChannel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SyndicationChannels_Update": {
+            "$ref": "./examples/patchSyndicationChannel.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SyndicationChannels"
+        ],
+        "operationId": "SyndicationChannels_Delete",
+        "description": "Delete a SyndicationChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/SyndicationChannel.syndicationChannelName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SyndicationChannels_Delete": {
+            "$ref": "./examples/deleteSyndicationChannel.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/syndicationChannels/{syndicationChannelName}/deployments": {
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ListBySyndicationChannel",
+        "description": "List Deployment resources by SyndicationChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/SyndicationChannel.syndicationChannelName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Deployments_ListBySyndicationChannel": {
+            "$ref": "./examples/listDeploymentsByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/syndicationChannels/{syndicationChannelName}/deployments/{deploymentName}": {
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Get",
+        "description": "Get a Deployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/SyndicationChannel.syndicationChannelName"
+          },
+          {
+            "$ref": "#/parameters/Deployment.deploymentName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Get": {
+            "$ref": "./examples/getDeployment.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CreateOrUpdate",
+        "description": "Create a Deployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/SyndicationChannel.syndicationChannelName"
+          },
+          {
+            "$ref": "#/parameters/Deployment.deploymentName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_CreateOrUpdate": {
+            "$ref": "./examples/putDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Delete",
+        "description": "Delete a Deployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/SyndicationChannel.syndicationChannelName"
+          },
+          {
+            "$ref": "#/parameters/Deployment.deploymentName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Delete": {
+            "$ref": "./examples/deleteDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/updatePackages": {
+      "get": {
+        "tags": [
+          "UpdatePackages"
+        ],
+        "operationId": "UpdatePackages_ListByCatalog",
+        "description": "List UpdatePackage resources by Catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdatePackageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "UpdatePackages_ListByCatalog": {
+            "$ref": "./examples/listUpdatePackagesByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphereV2/catalogs/{catalogName}/updatePackages/{updatePackageName}": {
+      "get": {
+        "tags": [
+          "UpdatePackages"
+        ],
+        "operationId": "UpdatePackages_Get",
+        "description": "Get a UpdatePackage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/UpdatePackage.updatePackageName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdatePackage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdatePackages_Get": {
+            "$ref": "./examples/getUpdatePackage.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UpdatePackages"
+        ],
+        "operationId": "UpdatePackages_CreateOrUpdate",
+        "description": "Create a UpdatePackage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/UpdatePackage.updatePackageName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/UpdatePackage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdatePackage"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UpdatePackage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdatePackages_CreateOrUpdate": {
+            "$ref": "./examples/putUpdatePackage.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "UpdatePackages"
+        ],
+        "operationId": "UpdatePackages_Update",
+        "description": "Update a UpdatePackage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/UpdatePackage.updatePackageName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/UpdatePackageUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdatePackage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdatePackages_Update": {
+            "$ref": "./examples/patchUpdatePackage.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UpdatePackages"
+        ],
+        "operationId": "UpdatePackages_Delete",
+        "description": "Delete a UpdatePackage",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Catalog.catalogName"
+          },
+          {
+            "$ref": "#/parameters/UpdatePackage.updatePackageName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdatePackages_Delete": {
+            "$ref": "./examples/deleteUpdatePackage.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Artifact": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ArtifactProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "An Azure Sphere artifact is a binary can be deployed to an Azure Sphere device.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ArtifactListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          },
+          "x-cadl-name": "Artifact[]",
+          "description": "The Artifact items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<Artifact>"
+        }
+      },
+      "description": "The response of a Artifact list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "ArtifactProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "sha256Hash": {
+          "type": "string",
+          "description": "Optional: The Sha256 hash of the artifact. If provided it will be used to verify the contents retrieved from the provided Uri."
+        },
+        "sasUri": {
+          "type": "string",
+          "description": "The Azure Blob SAS Uri of the artifact."
+        },
+        "artifactType": {
+          "type": "string",
+          "description": "The artifact type."
+        }
+      },
+      "description": "The properties of artifact.",
+      "required": [
+        "sasUri",
+        "artifactType"
+      ]
+    },
+    "ArtifactUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        }
+      },
+      "description": "The type used for update operations of the Artifact."
+    },
+    "AttestationPolicy": {
+      "type": "string",
+      "description": "Options for values on attestation policy.",
+      "enum": [
+        "Enforce",
+        "Ignore"
+      ],
+      "x-ms-enum": {
+        "name": "AttestationPolicy",
+        "modelAsString": false
+      }
+    },
+    "Catalog": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CatalogProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "An Azure Sphere Catalog.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CatalogListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Catalog"
+          },
+          "x-cadl-name": "Catalog[]",
+          "description": "The Catalog items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<Catalog>"
+        }
+      },
+      "description": "The response of a Catalog list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "CatalogProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "policies": {
+          "$ref": "#/definitions/Policies",
+          "description": "Catalog level policies configuration."
+        }
+      },
+      "description": "The properties of Azure Sphere Catalog."
+    },
+    "CatalogUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/CatalogUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the Catalog."
+    },
+    "CatalogUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "policies": {
+          "$ref": "#/definitions/Policies",
+          "description": "Catalog level policies configuration."
+        }
+      },
+      "description": "The updatable properties of the Catalog."
+    },
+    "Certificate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CertificateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "An Azure Sphere catalog certificate.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CertificateListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          },
+          "x-cadl-name": "Certificate[]",
+          "description": "The Certificate items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<Certificate>"
+        }
+      },
+      "description": "The response of a Certificate list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "CertificateProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "notBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start timestamp of the certificate."
+        },
+        "notAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration timestamp of the certificate."
+        },
+        "certificate": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64 representation of the catalog certificate."
+        }
+      },
+      "description": "The properties of Certificate.",
+      "required": [
+        "notBefore",
+        "notAfter",
+        "certificate"
+      ]
+    },
+    "CompatibilityProperties": {
+      "type": "object",
+      "properties": {
+        "manufacturerName": {
+          "type": "string",
+          "description": "The manufacturer compatibility value."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "The model compatibility value."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Additional compatibility properties."
+        }
+      },
+      "description": "Compatibility properties for a syndication channel.",
+      "required": [
+        "manufacturerName",
+        "modelName"
+      ]
+    },
+    "Deployment": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "An Azure Sphere deployment.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeploymentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Deployment"
+          },
+          "x-cadl-name": "Deployment[]",
+          "description": "The Deployment items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<Deployment>"
+        }
+      },
+      "description": "The response of a Deployment list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "updatePackageName": {
+          "type": "string",
+          "description": "The name of the update package to deploy.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "updatePackageSnapshot": {
+          "$ref": "#/definitions/UpdatePackageProperties",
+          "description": "A snapshot of the update package, taken at the time of deployment.",
+          "readOnly": true
+        },
+        "syndicationChannelSnapshot": {
+          "$ref": "#/definitions/SyndicationChannelProperties",
+          "description": "A snapshot of the syndication channel, taken at the time of deployment.",
+          "readOnly": true
+        },
+        "dependencyUpdatePackages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdatePackageProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "UpdatePackageProperties[]",
+          "description": "A snapshot of the update package, taken at the time of deployment.",
+          "readOnly": true
+        },
+        "versionIdentifier": {
+          "type": "string",
+          "description": "A string that uniquely identifies the set of artifacts being deployed.",
+          "readOnly": true
+        },
+        "aduDeploymentId": {
+          "type": "string",
+          "description": "The ID of the associated ADU deployment.",
+          "readOnly": true
+        },
+        "createdDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time that the deployment was created.",
+          "readOnly": true
+        },
+        "deploymentDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time that the deployment was successfully deployed.",
+          "readOnly": true
+        }
+      },
+      "description": "The properties of deployment.",
+      "required": [
+        "updatePackageName"
+      ]
+    },
+    "DeploymentState": {
+      "type": "string",
+      "description": "Options for values on attestation policy.",
+      "enum": [
+        "NotReady",
+        "Ready",
+        "Deployed"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotReady",
+            "value": "NotReady",
+            "description": "The update package has not met the requirements for deployment."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The update package meets the requirements for deployment and may be deployed at any time. It has not yet been deployed to any syndication channels."
+          },
+          {
+            "name": "Deployed",
+            "value": "Deployed",
+            "description": "The update package has been deployed to at least one syndication channel."
+          }
+        ]
+      }
+    },
+    "DeviceRegistration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceRegistrationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "An Azure Sphere device registration.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DeviceRegistrationGenerateAuthTokenResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64 encoded device authentication JWT token."
+        }
+      },
+      "description": "Output values of the generate auth token response.",
+      "required": [
+        "token"
+      ]
+    },
+    "DeviceRegistrationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceRegistration"
+          },
+          "x-cadl-name": "DeviceRegistration[]",
+          "description": "The DeviceRegistration items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<DeviceRegistration>"
+        }
+      },
+      "description": "The response of a DeviceRegistration list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "DeviceRegistrationProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "provisioningPackageName": {
+          "type": "string",
+          "description": "Provisioning package name.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "attestationPublicKey": {
+          "type": "string",
+          "description": "Attestation public key of the device.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "signedChallenge": {
+          "type": "string",
+          "description": "Signed proof of possession challenge."
+        },
+        "deviceType": {
+          "type": "string",
+          "description": "Type of device",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "The properties of DeviceRegistration.",
+      "required": [
+        "provisioningPackageName",
+        "attestationPublicKey",
+        "deviceType"
+      ]
+    },
+    "DeviceRegistrationUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        }
+      },
+      "description": "The type used for update operations of the DeviceRegistration."
+    },
+    "Policies": {
+      "type": "object",
+      "properties": {
+        "attestation": {
+          "$ref": "#/definitions/AttestationPolicy",
+          "description": "Policy if device attestation is required before delivering a certificate.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "Catalog level policies.",
+      "required": [
+        "attestation"
+      ]
+    },
+    "ProvisioningPackage": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProvisioningPackageProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "An Azure Sphere provisioning package.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ProvisioningPackageFormatActionResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Provisioning package resource identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the provisioning package."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the provisioning package format."
+        },
+        "properties": {
+          "$ref": "#/definitions/ProvisioningPackageFormatActionResponseProperties",
+          "description": "Properties of the provisioning package"
+        }
+      },
+      "description": "Values of the format provisioning package response.",
+      "required": [
+        "id",
+        "name",
+        "version",
+        "properties"
+      ]
+    },
+    "ProvisioningPackageFormatActionResponseProperties": {
+      "type": "object",
+      "properties": {
+        "catalogName": {
+          "type": "string",
+          "description": "Name of the catalog where the devices will be provisioned and activated."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location (region) of the catalog."
+        },
+        "baseEndpoint": {
+          "type": "string",
+          "description": "Base of the endpoint of the catalog used in the device for the different AS3 services including attestation, device insights and others."
+        },
+        "challenge": {
+          "type": "string",
+          "description": "Unique random GUID proof of possession challenge value used during provisioning and activation stages to validate the possession of the private key in the device."
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "An UTC creation date of the provisioning package."
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "An UTC expiration date of the provisioning package defined by the Catalog owner during provisioning package creation. New devices cannot be activated in the catalog after the expiration date."
+        }
+      },
+      "description": "Detailed properties of the provisioning package",
+      "required": [
+        "catalogName",
+        "location",
+        "baseEndpoint",
+        "challenge",
+        "createdDate",
+        "expirationDate"
+      ]
+    },
+    "ProvisioningPackageListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProvisioningPackage"
+          },
+          "x-cadl-name": "ProvisioningPackage[]",
+          "description": "The ProvisioningPackage items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<ProvisioningPackage>"
+        }
+      },
+      "description": "The response of a ProvisioningPackage list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "ProvisioningPackageProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "challenge": {
+          "type": "string",
+          "description": "Proof of possession challenge value for device provisioning.",
+          "readOnly": true
+        },
+        "baseEndpoint": {
+          "type": "string",
+          "description": "Base endpoint for data plane operations including devices to request a certificate with the attestation measurements and others.",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration date for his bulk device registration.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "The properties of ProvisioningPackage."
+    },
+    "ProvisioningPackageUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        }
+      },
+      "description": "The type used for update operations of the ProvisioningPackage."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "StartDevicesActivationActionRequest": {
+      "type": "object",
+      "properties": {
+        "packageLocation": {
+          "type": "string",
+          "description": "URI with the location of the activation package."
+        }
+      },
+      "description": "Start bulk activation of devices request.",
+      "required": [
+        "packageLocation"
+      ]
+    },
+    "SyndicationChannel": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SyndicationChannelProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "An Azure Sphere syndication channel.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SyndicationChannelListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SyndicationChannel"
+          },
+          "x-cadl-name": "SyndicationChannel[]",
+          "description": "The SyndicationChannel items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<SyndicationChannel>"
+        }
+      },
+      "description": "The response of a SyndicationChannel list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "SyndicationChannelProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "compatibilityData": {
+          "$ref": "#/definitions/CompatibilityProperties",
+          "description": "Compatibility data of the syndication channel. This should match the compatibility properties of the associated Device Update compatibility set."
+        },
+        "platform": {
+          "type": "string",
+          "description": "The platform. Examples include: imx8ulp, qemuarm64.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "dependencyChannels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Resource IDs of Azure Sphere syndication channels that provide required dependencies for the deployments made to the syndication channel."
+        }
+      },
+      "description": "The properties of SyndicationChannel.",
+      "required": [
+        "compatibilityData",
+        "platform",
+        "dependencyChannels"
+      ]
+    },
+    "SyndicationChannelUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/SyndicationChannelUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the SyndicationChannel."
+    },
+    "SyndicationChannelUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "compatibilityData": {
+          "$ref": "#/definitions/CompatibilityProperties",
+          "description": "Compatibility data of the syndication channel. This should match the compatibility properties of the associated Device Update compatibility set."
+        },
+        "dependencyChannels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Resource IDs of Azure Sphere syndication channels that provide required dependencies for the deployments made to the syndication channel."
+        }
+      },
+      "description": "The updatable properties of the SyndicationChannel."
+    },
+    "UpdatePackage": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdatePackageProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "An Azure Sphere update package.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "UpdatePackageListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdatePackage"
+          },
+          "x-cadl-name": "UpdatePackage[]",
+          "description": "The UpdatePackage items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation<UpdatePackage>"
+        }
+      },
+      "description": "The response of a UpdatePackage list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "UpdatePackageProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "artifactNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Artifact names."
+        },
+        "deploymentState": {
+          "$ref": "#/definitions/DeploymentState",
+          "description": "The deployment state.",
+          "readOnly": true
+        }
+      },
+      "description": "The properties of UpdatePackage.",
+      "required": [
+        "artifactNames"
+      ]
+    },
+    "UpdatePackageUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/UpdatePackageUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the UpdatePackage."
+    },
+    "UpdatePackageUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "artifactNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Artifact names."
+        }
+      },
+      "description": "The updatable properties of the UpdatePackage."
+    }
+  },
+  "parameters": {
+    "Artifact.artifactName": {
+      "name": "artifactName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the artifact",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Catalog.catalogName": {
+      "name": "catalogName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the catalog",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Certificate.serialNumber": {
+      "name": "serialNumber",
+      "in": "path",
+      "required": true,
+      "description": "Serial number of the certificate. Use 'active' to retrieve the latest.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Deployment.deploymentName": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the deployment.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DeviceRegistration.networkDeviceIdentifier": {
+      "name": "networkDeviceIdentifier",
+      "in": "path",
+      "required": true,
+      "description": "Network device identifier.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ProvisioningPackage.provisioningPackageName": {
+      "name": "provisioningPackageName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the provisioning package",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SyndicationChannel.syndicationChannelName": {
+      "name": "syndicationChannelName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the syndication channel",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdatePackage.updatePackageName": {
+      "name": "updatePackageName",
+      "in": "path",
+      "required": true,
+      "description": "Name of the update package.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

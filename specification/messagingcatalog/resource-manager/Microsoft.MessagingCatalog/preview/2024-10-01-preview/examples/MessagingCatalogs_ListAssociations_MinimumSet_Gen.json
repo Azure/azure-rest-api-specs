@@ -1,0 +1,38 @@
+{
+  "title": "MessagingCatalogs_ListAssociations_MinimumSet_Gen",
+  "operationId": "MessagingCatalogs_ListAssociations",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "resourceGroupName": "rgmessagingcatalog",
+    "subscriptionId": "A7BFF0F7-F69A-4D4B-AB83-BE8EB0ADC35E",
+    "catalogName": "mycatalog",
+    "body": {
+      "skip": 0,
+      "top": 20
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MessagingCatalog/operationStatuses/{operationId}"
+      }
+    },
+    "200": {
+      "body": {
+        "associations": [
+          {
+            "id": "52fc1de0-ac86-4d13-8e22-278874a8c78b",
+            "associationType": "EventSet",
+            "definition": {
+              "tenantId": "381362be-7f87-45e5-8639-d56ce9e2d80d",
+              "workspaceId": "bdd4879a-e924-4ec7-a506-9a773f7b9b56",
+              "artifactId": "e56e3a43-6927-4ac3-8ac3-b2394a10d69c",
+              "messageGroupId": "MyMessageGroup",
+              "schemaGroupId": "MySchemaGroup"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

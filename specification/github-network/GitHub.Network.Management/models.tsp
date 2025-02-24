@@ -18,20 +18,18 @@ namespace GitHub.Network;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Provisioning status of the managed application.")
-union ProvisioningState {
+enum ProvisioningState {
   @doc("The provisioning of the resource failed.")
-  Failed: "Failed",
+  Failed,
 
   @doc("The resource was provisioned successfully.")
-  Succeeded: "Succeeded",
+  Succeeded,
 
   @doc("The provisioning of the resource was cancelled.")
-  Canceled: "Canceled",
+  Canceled,
 
   @doc("The resource provisioning is in progress.")
-  Accepted: "Accepted",
-
-  string,
+  Accepted,
 }
 
 @doc("NetworkSettings resource-specific properties.")
@@ -44,6 +42,15 @@ model NetworkSettingsResourceProperties {
   @added(Versions.`2024-04-01-preview`)
   @visibility("read", "create")
   businessId?: string;
+
+  @doc("Specifies the GitHub organization (enterprise) ID associated to the Azure subscription.")
+  @removed(Versions.`2024-04-01-preview`)
+  @visibility("read", "create")
+  organizationId?: string;
+
+  @doc("Specifies a comma-separated list of service names the resource is associated with.")
+  @removed(Versions.`2024-04-01-preview`)
+  targetServices?: [];
 
   @doc("The managed application provisioning state.")
   @visibility("read")

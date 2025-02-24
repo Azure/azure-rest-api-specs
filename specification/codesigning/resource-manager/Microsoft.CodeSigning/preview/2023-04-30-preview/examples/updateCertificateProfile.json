@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "MyResourceGroup",
+    "api-version": "2023-04-30-preview",
+    "accountName": "MyAccount",
+    "profileName": "profileA",
+    "certificateProfilePatch": {
+      "properties": {
+        "certificates": [
+          {
+            "serialNumber": "xxxxxxxxxxxxxxxxxx",
+            "subjectName": "CN=Contoso Inc, O=Contoso Inc, L=New York, S=New York, C=US",
+            "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "createdDate": "3/14/2023 5:27:49 PM",
+            "expiryDate": "3/17/2023 5:27:49 PM",
+            "status": "Active",
+            "revocations": [
+              {
+                "requestedAt": "3/19/2023 5:27:49 PM",
+                "revokedAt": "3/19/2023 5:27:49 PM",
+                "reason": "KeyCompromised",
+                "remarks": "test"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSigningAccounts/MyAccount/certificateProfiles/profileA",
+        "name": "profileA",
+        "type": "Microsoft.CodeSigning/codeSigningAccounts/certificateProfiles",
+        "properties": {
+          "profileType": "Test",
+          "rotationPolicy": "30 Days",
+          "commonName": "Microsoft Corporation",
+          "organization": "Microsoft Corporation",
+          "streetAddress": "123 Bluebonnet",
+          "country": "US",
+          "state": "Texas",
+          "city": "Dallas",
+          "provisioningState": "Succeeded",
+          "status": "Active",
+          "certificates": [
+            {
+              "serialNumber": "xxxxxxxxxxxxxxxxxx",
+              "subjectName": "CN=Contoso Inc, O=Contoso Inc, L=New York, S=New York, C=US",
+              "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              "createdDate": "3/14/2023 5:27:49 PM",
+              "expiryDate": "3/17/2023 5:27:49 PM",
+              "status": "Revoked"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-09-01-privatepreview",
+    "title": "ApplicationAssessment",
+    "description": "Application assessments when migrating to Azure or upgrading to new OS versions"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/readinessByAnnotations": {
+      "get": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "migrateProjectsAssessment_listReadinessByAnnotations",
+        "description": "Gets readiness by annotations",
+        "x-ms-examples": {
+          "migrateAssessment_readinessByAnnotations": {
+            "$ref": "./examples/migrateAssessments_listReadinessByAnnotations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assessment was updated, update is only allowed when the assessment is in status Completed or Failed; attempting to update the assessment when it's in other states will lead to failure ",
+            "schema": {
+              "$ref": "#/definitions/annotationReadinessList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "annotationReadiness": {
+      "type": "object",
+      "description": "Readiness per status value",
+      "allOf": [
+        {
+          "$ref": "migrateAssessments.json#/definitions/readiness"
+        }
+      ],
+      "properties": {
+        "annotation": {
+          "type": "string",
+          "description": "The type of annotation",
+          "readOnly": true
+        },
+        "annotationValue": {
+          "type": "string",
+          "description": "The value of the annotation",
+          "readOnly": true
+        }
+      }
+    },
+    "annotationReadinessList": {
+      "type": "object",
+      "description": "List of readiness by annotation",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/annotationReadiness"
+          },
+          "description": "Array of annotation readiness"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to next set of results, null if at end of results"
+        }
+      }
+    }
+  }
+}

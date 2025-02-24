@@ -1,0 +1,61 @@
+{
+  "title": "Create dsmsCertificate",
+  "operationId": "DsmsCertificate_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "prodUSEastAzcis",
+    "api-version": "2024-06-24-preview",
+    "resource": {
+      "properties": {
+        "certificateName": "cert.pfx",
+        "certificateType": "Chained",
+        "rootPath": "test",
+        "subjectName": "CN=test.example.com",
+        "subjectAlternativeName": "DNS=test.example.com",
+        "caName": "AME",
+        "azureLocation": "uswest"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCIS/dsmsCertificates/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/dsmsCertificates",
+        "properties": {
+          "certificateName": "cert.pfx",
+          "certificateType": "Chained",
+          "rootPath": "test",
+          "subjectName": "CN=test.example.com",
+          "subjectAlternativeName": "DNS=test.example.com",
+          "caName": "AME",
+          "azureLocation": "uswest",
+          "provisioningState": "Succeeded",
+          "chainedCertificateDsmsName": "cert.pfx",
+          "edgeSiteChildTrustIsland": "TestCTI"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCIS/dsmsCertificates/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/dsmsCertificates",
+        "properties": {
+          "certificateName": "cert.pfx",
+          "certificateType": "Chained",
+          "rootPath": "test",
+          "subjectName": "CN=test.example.com",
+          "subjectAlternativeName": "DNS=test.example.com",
+          "caName": "AME",
+          "azureLocation": "uswest",
+          "provisioningState": "Succeeded",
+          "chainedCertificateDsmsName": "cert.pfx",
+          "edgeSiteChildTrustIsland": "TestCTI"
+        }
+      }
+    }
+  }
+}

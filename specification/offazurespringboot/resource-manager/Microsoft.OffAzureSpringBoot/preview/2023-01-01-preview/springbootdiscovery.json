@@ -217,15 +217,10 @@
               "$ref": "#/definitions/springbootsitesModel"
             }
           },
-          "202": {
+          "201": {
             "description": "Updates the springbootsites resource.",
             "schema": {
               "$ref": "#/definitions/springbootsitesModel"
-            },
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -242,14 +237,10 @@
           "springbootsites_Update_MinimumSet_Gen": {
             "$ref": "./examples/springbootsites_Update_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/refreshSite": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{springbootsitesName}/RefreshSite": {
       "post": {
         "tags": [
           "springbootsites"
@@ -271,13 +262,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Trigger refresh success"
+          },
           "202": {
-            "description": "Trigger refresh success",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Trigger refresh success"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -403,7 +392,7 @@
           "200": {
             "description": "Describe the result of a successful operation.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/ResourceProviderOperationList"
             }
           },
           "default": {
@@ -628,15 +617,10 @@
               "$ref": "#/definitions/springbootserversModel"
             }
           },
-          "202": {
+          "201": {
             "description": "Updates the springbootservers resource.",
             "schema": {
               "$ref": "#/definitions/springbootserversModel"
-            },
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -653,10 +637,6 @@
           "springbootservers_Update_MinimumSet_Gen": {
             "$ref": "./examples/springbootservers_Update_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -964,7 +944,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/summaries/{summaryName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/Summaries/{summaryName}": {
       "get": {
         "tags": [
           "Summaries"
@@ -1013,7 +993,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/summaries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/Summaries": {
       "get": {
         "tags": [
           "Summaries"
@@ -1062,7 +1042,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/errorSummaries/{errorSummaryName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/ErrorSummaries/{errorSummaryName}": {
       "get": {
         "tags": [
           "ErrorSummaries"
@@ -1111,7 +1091,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/errorSummaries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/ErrorSummaries": {
       "get": {
         "tags": [
           "ErrorSummaries"
@@ -1239,7 +1219,6 @@
           "description": "The springbootsites resource definition."
         }
       },
-      "required": [],
       "description": "The springbootsites resource patch definition."
     },
     "springbootsitesListResult": {
@@ -1258,6 +1237,59 @@
         }
       },
       "description": "The springbootsites list resource definition."
+    },
+    "ResourceProviderOperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          },
+          "description": "The resource provider operation list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of resource operation list."
+        }
+      },
+      "description": "Results of the request to list operations."
+    },
+    "ResourceProviderOperation": {
+      "type": "object",
+      "properties": {
+        "isDataAction": {
+          "type": "string",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name, in format of {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "The resource provider."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of this operation."
+            }
+          },
+          "description": "Display metadata associated with the operation."
+        }
+      },
+      "description": "Results of the request to list operations."
     },
     "springbootserversProperties": {
       "type": "object",
@@ -1332,13 +1364,6 @@
         }
       ],
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
         "properties": {
           "$ref": "#/definitions/springbootserversProperties",
           "description": "The springbootservers resource definition."
@@ -1407,7 +1432,6 @@
         },
         "applicationConfigurations": {
           "type": "array",
-          "x-ms-identifiers": [],
           "description": "The application configuration file list.",
           "items": {
             "type": "object",
@@ -1486,7 +1510,6 @@
         },
         "miscs": {
           "type": "array",
-          "x-ms-identifiers": [],
           "items": {
             "type": "object",
             "properties": {
@@ -1507,7 +1530,6 @@
         },
         "instances": {
           "type": "array",
-          "x-ms-identifiers": [],
           "items": {
             "type": "object",
             "properties": {
@@ -1622,13 +1644,6 @@
         "properties": {
           "$ref": "#/definitions/springbootappsProperties",
           "description": "The springbootapps resource definition."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
       "description": "The springbootapps envelope resource definition."
@@ -1682,8 +1697,7 @@
         },
         "affectedObjectsCount": {
           "type": "integer",
-          "description": "The count.",
-          "format": "int64"
+          "description": "The count."
         }
       }
     },
@@ -1693,8 +1707,7 @@
       "properties": {
         "id": {
           "description": "The error ID.",
-          "type": "integer",
-          "format": "int64"
+          "type": "integer"
         },
         "code": {
           "description": "The error code.",
@@ -1771,13 +1784,11 @@
       "properties": {
         "discoveredServers": {
           "type": "integer",
-          "description": "The of number discovered spring boot servers.",
-          "format": "int64"
+          "description": "The of number discovered spring boot servers."
         },
         "discoveredApps": {
           "type": "integer",
-          "description": "The of number discovered spring boot apps.",
-          "format": "int64"
+          "description": "The of number discovered spring boot apps."
         },
         "errors": {
           "description": "The list of errors.",
@@ -1813,7 +1824,6 @@
         "discoveryScopeErrorSummaries": {
           "description": "The list of ErrorSummary.",
           "type": "array",
-          "x-ms-identifiers": [],
           "items": {
             "description": "The error",
             "$ref": "#/definitions/ErrorSummaryModel"
@@ -1934,7 +1944,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-z][a-z0-9-]*$",
       "maxLength": 64,
       "minLength": 3,
       "description": "The springbootsites name."
@@ -1945,7 +1954,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-z][a-z0-9-]*$",
       "maxLength": 64,
       "minLength": 3,
       "description": "The springbootsites name."
@@ -1978,7 +1986,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$",
       "maxLength": 64,
       "minLength": 3,
       "description": "The springbootservers name."
@@ -1989,7 +1996,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$",
       "maxLength": 64,
       "minLength": 3,
       "description": "The springbootapps name."

@@ -27,7 +27,43 @@ These are the global settings for the scom.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-07-07-preview
+tag: package-2025-02-03-preview
+```
+
+### Tag: package-2021-06-30-preview
+
+These settings apply only when `--tag=package-2021-06-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06-30-preview'
+input-file:
+  - Microsoft.Scom/preview/2021-06-30-preview/scom.json
+```
+
+### Tag: package-2022-04-30-preview
+
+These settings apply only when `--tag=package-2022-04-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-04-30-preview'
+input-file:
+  - Microsoft.Scom/preview/2022-04-30-preview/scom.json
+```
+
+### Tag: package-2022-09-13-preview
+
+These settings apply only when `--tag=package-2022-09-13-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09-13-preview'
+input-file:
+  - Microsoft.Scom/preview/2022-09-13-preview/scom.json
+```
+
+### Tag: package-2023-06-30
+
+These settings apply only when `--tag=package-2023-06-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06-30'
+input-file:
+  - Microsoft.Scom/stable/2023-06-30/scom.json
 ```
 
 ### Tag: package-2023-07-07-preview
@@ -39,7 +75,111 @@ input-file:
   - Microsoft.Scom/preview/2023-07-07-preview/scom.json
   - Microsoft.Scom/preview/2023-07-07-preview/monitoredResources.json
   - Microsoft.Scom/preview/2023-07-07-preview/managedGateways.json
+  - Microsoft.Scom/preview/2023-07-07-preview/commonTypes.json
 ```
+
+### Tag: package-2023-10-30
+
+These settings apply only when `--tag=package-2023-10-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-30'
+input-file:
+  - Microsoft.Scom/stable/2023-10-30/scom.json
+  - Microsoft.Scom/stable/2023-10-30/monitoredResources.json
+  - Microsoft.Scom/stable/2023-10-30/managedGateways.json
+  - Microsoft.Scom/stable/2023-10-30/commonTypes.json
+```
+
+### Tag: package-2024-01-01-preview
+
+These settings apply only when `--tag=2024-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01-01-preview'
+input-file:
+  - Microsoft.Scom/preview/2024-01-01-preview/scom.json
+  - Microsoft.Scom/preview/2024-01-01-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2024-01-01-preview/managedGateways.json
+  - Microsoft.Scom/preview/2024-01-01-preview/commonTypes.json
+```
+
+### Tag: package-2024-03-07-preview
+
+These settings apply only when `--tag=2024-03-07-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-07-preview'
+input-file:
+  - Microsoft.Scom/preview/2024-03-07-preview/scom.json
+  - Microsoft.Scom/preview/2024-03-07-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2024-03-07-preview/managedGateways.json
+  - Microsoft.Scom/preview/2024-03-07-preview/commonTypes.json
+  - Microsoft.Scom/preview/2024-03-07-preview/linkedGrafanaInstances.json
+```
+
+### Tag: package-2024-06-05-preview
+
+These settings apply only when `--tag=2024-06-05-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-05-preview'
+input-file:
+  - Microsoft.Scom/preview/2024-06-05-preview/scom.json
+  - Microsoft.Scom/preview/2024-06-05-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2024-06-05-preview/managedGateways.json
+  - Microsoft.Scom/preview/2024-06-05-preview/commonTypes.json
+  - Microsoft.Scom/preview/2024-06-05-preview/linkedGrafanaInstances.json
+```
+
+### Tag: package-2024-06-15-preview
+
+These settings apply only when `--tag=2024-06-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-15-preview'
+input-file:
+  - Microsoft.Scom/preview/2024-06-15-preview/scom.json
+  - Microsoft.Scom/preview/2024-06-15-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2024-06-15-preview/managedGateways.json
+  - Microsoft.Scom/preview/2024-06-15-preview/commonTypes.json
+  - Microsoft.Scom/preview/2024-06-15-preview/linkedGrafanaInstances.json
+```
+
+### Tag: package-2024-07-15-preview
+
+These settings apply only when `--tag=2024-07-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07-15-preview'
+input-file:
+  - Microsoft.Scom/preview/2024-07-15-preview/scom.json
+  - Microsoft.Scom/preview/2024-07-15-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2024-07-15-preview/managedGateways.json
+  - Microsoft.Scom/preview/2024-07-15-preview/commonTypes.json
+  - Microsoft.Scom/preview/2024-07-15-preview/linkedGrafanaInstances.json
+```
+
+### Tag: package-2024-12-10-preview
+
+These settings apply only when `--tag=2024-12-10-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-10-preview'
+input-file:
+  - Microsoft.Scom/preview/2024-12-10-preview/scom.json
+  - Microsoft.Scom/preview/2024-12-10-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2024-12-10-preview/managedGateways.json
+  - Microsoft.Scom/preview/2024-12-10-preview/commonTypes.json
+  - Microsoft.Scom/preview/2024-12-10-preview/linkedGrafanaInstances.json
+```
+
+### Tag: package-2025-02-03-preview
+
+These settings apply only when `--tag=2025-02-03-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-03-preview'
+input-file:
+  - Microsoft.Scom/preview/2025-02-03-preview/scom.json
+  - Microsoft.Scom/preview/2025-02-03-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2025-02-03-preview/managedGateways.json
+  - Microsoft.Scom/preview/2025-02-03-preview/commonTypes.json
+  - Microsoft.Scom/preview/2025-02-03-preview/linkedGrafanaInstances.json
+```
+
 ---
 
 # Code Generation
@@ -84,7 +224,4 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-### Suppress lint rules
 
-``` yaml
-```

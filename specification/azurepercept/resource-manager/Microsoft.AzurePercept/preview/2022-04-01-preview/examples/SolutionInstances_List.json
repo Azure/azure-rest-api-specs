@@ -1,0 +1,116 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myAccount"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutionInstances/mySolutionInstance",
+            "name": "mySolutionInstance",
+            "type": "Microsoft.AzurePercept/accounts/solutionInstances",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/devices/myDevice",
+              "solution": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutions/mySolution",
+              "description": "User provided SolutionInstance description",
+              "reportedStatus": {
+                "code": "Active",
+                "message": "SolutionInstance is created and active."
+              },
+              "desiredStatus": {
+                "code": "Active"
+              },
+              "accounts": [
+                {
+                  "kind": "computervision",
+                  "accountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.CognitiveServices/accounts/my-cv-account"
+                }
+              ],
+              "configurations": {
+                "parameters": [
+                  {
+                    "name": "param1",
+                    "stringValue": "newAVAimageULR"
+                  },
+                  {
+                    "name": "param2",
+                    "stringValue": "newSAimageULR"
+                  },
+                  {
+                    "name": "objectParam",
+                    "objectValue": {
+                      "abc": "cde"
+                    }
+                  }
+                ]
+              },
+              "enableLogs": true
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutionInstances/myOtherSolutionInstance",
+            "name": "myOtherSolutionInstance",
+            "type": "Microsoft.AzurePercept/accounts/solutionInstances",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/devices/myOtherDevice",
+              "solution": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutions/myOtherSolution",
+              "description": "User provided SolutionInstance description",
+              "reportedStatus": {
+                "code": "Inactive",
+                "message": "SolutionInstance is inactive."
+              },
+              "desiredStatus": {
+                "code": "Inactive"
+              },
+              "accounts": [
+                {
+                  "kind": "computervision",
+                  "accountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.CognitiveServices/accounts/my-cv-account"
+                }
+              ],
+              "configurations": {
+                "parameters": [
+                  {
+                    "name": "param1",
+                    "stringValue": "newAVAimageULR"
+                  },
+                  {
+                    "name": "param2",
+                    "stringValue": "newSAimageULR"
+                  },
+                  {
+                    "name": "objectParam",
+                    "objectValue": {
+                      "abc": "cde"
+                    }
+                  }
+                ]
+              },
+              "enableLogs": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}
