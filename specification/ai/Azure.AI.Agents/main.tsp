@@ -2,9 +2,16 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./connections/routes.tsp";
-import "./evaluations/routes.tsp";
-import "./telemetry/routes.tsp";
+import "./routes.tsp";
+import "./threads/routes.tsp";
+import "./messages/routes.tsp";
+import "./runs/routes.tsp";
+import "./run_steps/routes.tsp";
+import "./files/routes.tsp";
+import "./streaming/events.tsp";
+import "./vector_stores/routes.tsp";
+import "./vector_stores/files/routes.tsp";
+import "./vector_stores/file_batches/routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -47,7 +54,7 @@ namespace Azure.AI {
   }
 )
 @versioned(Versions)
-namespace Azure.AI.Projects {
+namespace Azure.AI.Agents {
   @doc("Azure AI API versions")
   enum Versions {
     @doc("Azure AI API version 2024-07-01-preview.")
