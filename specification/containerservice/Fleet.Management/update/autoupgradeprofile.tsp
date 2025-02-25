@@ -164,13 +164,6 @@ union AutoUpgradeLastTriggerStatus {
 @added(Versions.v2025_03_01)
 @armResourceOperations
 interface AutoUpgradeProfileOperations {
-  generateUpdateRuns is Azure.ResourceManager.ArmResourceActionSync<
-    AutoUpgradeProfile,
-    GenerateUpdateRunRequest,
-    AutoUpgradeProfile,
-    BaseParameters<AutoUpgradeProfile> & IfMatchParameters<AutoUpgradeProfile> 
-  >;
-
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
   @useFinalStateVia("azure-async-operation")
   generate is Azure.ResourceManager.ArmResourceActionAsync<
@@ -189,15 +182,9 @@ interface AutoUpgradeProfileOperations {
 }
 
 @added(Versions.v2025_03_01)
-@doc("GenerateUpdateRunsRequest is the HTTP body of a generate updateruns request.")
-model GenerateUpdateRunRequest {
-  @doc("The update spec that will be applied to managed clusters when generating update runs.")
-  updateSpecification: ManagedClusterUpdate;
-}
-
-@added(Versions.v2025_03_01)
 @doc("GenerateResponse is the response of a generate request.")
 model GenerateResponse {
-  @doc("ID of the generated update run.")
+  @visibility("create", "read")
+  @doc("The ARM resource id of the generated UpdateRun. Must be a valid Azure resource id. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}'.")
   id: string;
 }

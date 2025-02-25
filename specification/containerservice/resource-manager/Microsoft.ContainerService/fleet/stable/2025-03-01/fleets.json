@@ -811,13 +811,13 @@
         "description": "A long-running resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "StartUpdateRun",
@@ -875,7 +875,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -883,77 +883,6 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/autoUpgradeProfiles/{autoUpgradeProfileName}/generateUpdateRuns": {
-      "post": {
-        "operationId": "AutoUpgradeProfileOperations_GenerateUpdateRuns",
-        "tags": [
-          "AutoUpgradeProfileOperations"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if an entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "fleetName",
-            "in": "path",
-            "description": "The name of the Fleet resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "autoUpgradeProfileName",
-            "in": "path",
-            "description": "The name of the AutoUpgradeProfile resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GenerateUpdateRunRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AutoUpgradeProfile"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/listCredentials": {
@@ -3085,24 +3014,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "ID of the generated update run."
+          "description": "The ARM resource id of the generated UpdateRun. Must be a valid Azure resource id. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}'.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
         "id"
-      ]
-    },
-    "GenerateUpdateRunRequest": {
-      "type": "object",
-      "description": "GenerateUpdateRunsRequest is the HTTP body of a generate updateruns request.",
-      "properties": {
-        "updateSpecification": {
-          "$ref": "#/definitions/ManagedClusterUpdate",
-          "description": "The update spec that will be applied to managed clusters when generating update runs."
-        }
-      },
-      "required": [
-        "updateSpecification"
       ]
     },
     "KubernetesVersion": {
