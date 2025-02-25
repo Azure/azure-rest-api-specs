@@ -493,6 +493,20 @@
               "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher.",
               "type": "string"
             },
+            "autoUpgradeMode": {
+              "description": "Defines extension automatic upgrades modes",
+              "type": "string",
+              "enum": [
+                "none",
+                "patch",
+                "compatible"
+              ],
+              "default": "compatible",
+              "x-ms-enum": {
+                "name": "AutoUpgradeMode",
+                "modelAsString": true
+              }
+            },
             "autoUpgradeMinorVersion": {
               "description": "Flag to note if this extension participates in auto upgrade of minor version, or not.",
               "type": "boolean",
@@ -657,6 +671,19 @@
           "x-ms-client-flatten": true,
           "description": "Updatable properties of an Extension Patch Request",
           "properties": {
+            "autoUpgradeMode": {
+              "description": "Defines extension automatic upgrades modes",
+              "type": "string",
+              "enum": [
+                "none",
+                "patch",
+                "compatible"
+              ],
+              "x-ms-enum": {
+                "name": "AutoUpgradeMode",
+                "modelAsString": true
+              }
+            },
             "autoUpgradeMinorVersion": {
               "description": "Flag to note if this extension participates in auto upgrade of minor version, or not.",
               "type": "boolean",
