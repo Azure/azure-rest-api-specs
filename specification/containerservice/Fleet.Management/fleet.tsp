@@ -213,9 +213,7 @@ interface Fleets {
   @operationId("Fleets_Update")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "original-uri",
-    }
+    #{ `final-state-via`: "original-uri" }
   )
   @sharedRoute
   updateAsync is ArmCustomPatchAsync<
