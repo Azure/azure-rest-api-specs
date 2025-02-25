@@ -15,10 +15,20 @@ export async function getChangedFiles(
   headCommitish = "HEAD",
   diffFilter = "d",
 ) {
-  return await getChangedFilesImpl(
-    `Get-ChangedFiles ${baseCommitish} ${headCommitish} ${diffFilter}"`,
+  const result = await execRoot(
+    `git -c core.quotepath=off diff --name-only --diff-filter=${diffFilter} ${baseCommitish} ${headCommitish}`,
     core,
   );
+
+  const files = result.trim().split("\n");
+
+  core.info("Changed Files:");
+  for (const file of files) {
+    core.info(`  ${file}`);
+  }
+  core.info("");
+
+  return files;
 }
 
 /**
@@ -34,10 +44,9 @@ export async function getChangedSwaggerFiles(
   headCommitish = "HEAD",
   diffFilter = "d",
 ) {
-  return await getChangedFilesImpl(
-    `Get-ChangedSwaggerFiles(Get-ChangedFiles ${baseCommitish} ${headCommitish} ${diffFilter})`,
-    core,
-  );
+  return (
+    await getChangedFiles(core, baseCommitish, headCommitish, diffFilter)
+  ).filter((f) => f.endsWith(".json"));
 }
 
 /**
@@ -55,9 +64,9 @@ export async function getChangedResourceManagerSwaggerFiles(
 ) {
   const changedSwaggerFiles = await getChangedSwaggerFiles(
     core,
-    "HEAD^",
-    "HEAD",
-    "",
+    baseCommitish,
+    headCommitish,
+    diffFilter,
   );
   const changedResourceManagerSwaggerFiles = changedSwaggerFiles.filter(
     (f) => f.includes("/resource-manager/") && !f.includes("/examples/"),
@@ -66,26 +75,4 @@ export async function getChangedResourceManagerSwaggerFiles(
     `Changed files containing path '/resource-manager/': ${changedResourceManagerSwaggerFiles}`,
   );
   return changedResourceManagerSwaggerFiles;
-}
-
-/**
- * @param {string} command
- * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @returns {Promise<string[]>}
- */
-async function getChangedFilesImpl(command, core) {
-  const result = await execRoot(
-    `pwsh -command ". ./eng/scripts/ChangedFiles-Functions.ps1; ${command}"`,
-    core,
-  );
-
-  const files = result.trim().split("\n");
-
-  core.info("Changed Files:");
-  for (const file of files) {
-    core.info(`  ${file}`);
-  }
-  core.info("");
-
-  return files;
 }
