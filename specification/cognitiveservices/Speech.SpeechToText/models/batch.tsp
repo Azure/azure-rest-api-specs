@@ -96,7 +96,7 @@ model TranscriptionProperties {
   @doc("EntityError")
   error?: EntityError;
 
-  @doc("DiarizationProperties")
+  @doc("Speaker Identification")
   diarization?: DiarizationProperties;
 
   @doc("LanguageIdentificationProperties")
@@ -130,9 +130,9 @@ model TranscriptionLinks {
   files?: url;
 }
 
-@doc("DiarizationProperties")
+@doc("Speaker Identification Properties")
 model DiarizationProperties {
-  @doc("A value indicating whether speaker diarization is enabled.")
+  @doc("A value indicating whether speaker identification is enabled.")
   enabled: boolean;
 
   @minValue(2)
@@ -168,23 +168,6 @@ model LanguageIdentificationProperties {
 
   @doc("An optional mapping of locales to speech model entities. If no model is given for a locale, the default base model is used.\r\nKeys must be locales contained in the candidate locales, values are entities for models of the respective locales.")
   speechModelMapping?: Record<EntityReference>;
-}
-
-@doc("Mode of profanity filtering.")
-union ProfanityFilterMode {
-  @doc("Disable profanity filtering.")
-  None: "None",
-
-  @doc("Remove profanity.")
-  Removed: "Removed",
-
-  @doc("Add \"profanity\" XML tags</Profanity>")
-  Tags: "Tags",
-
-  @doc("Mask the profanity with * except of the first letter, e.g., f***")
-  Masked: "Masked",
-
-  string,
 }
 
 @doc("The mode used for language identification.")

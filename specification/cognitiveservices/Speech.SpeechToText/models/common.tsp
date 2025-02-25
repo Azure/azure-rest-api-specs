@@ -27,6 +27,23 @@ model EntityError {
   message?: string;
 }
 
+@doc("Mode of profanity filtering.")
+union ProfanityFilterMode {
+  @doc("Disable profanity filtering.")
+  None: "None",
+
+  @doc("Remove profanity.")
+  Removed: "Removed",
+
+  @doc("Add \"profanity\" XML tags</Profanity>")
+  Tags: "Tags",
+
+  @doc("Mask the profanity with * except of the first letter, e.g., f***")
+  Masked: "Masked",
+
+  string,
+}
+
 // Overwriting Azure.Core.Foundations.CustomPage for our own page response layout
 @pagedResult
 @doc("Page of entities.")
