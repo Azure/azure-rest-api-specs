@@ -133,12 +133,17 @@ model GetApplicationOptions {
 @doc("Custom override for Get Application operation.")
 op getApplicationCustomization(
   ...GetApplicationRequiredParameter,
+
   @doc("Optional parameters for Get Application operation.")
   options?: GetApplicationOptions,
+
   ...ApiVersionParameter,
 ): void;
 
-@@override(Azure.Batch.Applications.getApplication, Client.getApplicationCustomization, "java");
+@@override(Azure.Batch.Applications.getApplication,
+  Client.getApplicationCustomization,
+  "java"
+);
 
 // client name overrides
 @@clientName(BatchClient.listApplications, "listApplicationsInternal", "java");
