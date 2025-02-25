@@ -16,7 +16,7 @@ using TypeSpec.Versioning;
 @doc("Azure Edge Sites Resource Provider management API.")
 @armProviderNamespace
 @service({
-  title: "Edge Sites",
+  title: "Edge Sites test",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
