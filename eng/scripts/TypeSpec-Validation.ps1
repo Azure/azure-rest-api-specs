@@ -6,20 +6,20 @@ param (
   [switch]$GitClean = $false,
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
-  [string]$TargetCommitish = "HEAD"
+  [string]$HeadCommitish = "HEAD"
 )
 
 if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) { 
   throw "Shard ($Shard) must be less than TotalShards ($TotalShards)"
 }
 
-. $PSScriptRoot/Logging-Functions.ps1
+. $PSScriptRoot/../common/scripts/logging.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
 . $PSScriptRoot/Array-Functions.ps1
 
 $typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
   -BaseCommitish:$BaseCommitish `
-  -TargetCommitish:$TargetCommitish `
+  -HeadCommitish:$HeadCommitish `
   -CheckAll:$CheckAll
 
 if ($TotalShards -gt 1 -and $TotalShards -le $typespecFolders.Count) { 

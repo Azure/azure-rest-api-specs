@@ -274,6 +274,7 @@ interface Tasks {
 @tag("CisaCves")
 @doc("Provides access to cisa cves.")
 interface CisaCves {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @doc("Retrieve a list of CisaCves for the provided search parameters.")
   @Versioning.added(Versions.v2024_03_01_preview)
   getCisaCves is Operations.ResourceList<CisaCveResult, CisaCveListTrait>;

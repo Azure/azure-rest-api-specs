@@ -93,6 +93,7 @@ interface DevBoxes {
   @doc("Gets a Dev Box.")
   getDevBoxByUser is StandardResourceOperations.ResourceRead<DevBox>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
   // The standard operation names the body as resource, so the generated swagger has parameter
   //  {
@@ -235,6 +236,7 @@ interface DevBoxes {
   //     "name": "body",
   //     "in": "body",
   //  }
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @doc("Applies customizations to the Dev Box.")
   @put
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationGroups/{customizationGroupName}")
@@ -441,7 +443,11 @@ interface DevBoxes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
-  @doc("Captures a manual snapshot of the Dev Box.")
+  @doc("""
+    Captures a manual snapshot of the Dev Box. 
+    Upon completion, a snapshotId will be generated. 
+    To retrieve all snapshots and their corresponding IDs, use the list snapshots endpoint.
+    """)
   @added(APIVersions.v2024_10_01_preview)
   @pollingOperation(OperationStatuses.get)
   @action("captureSnapshot")
