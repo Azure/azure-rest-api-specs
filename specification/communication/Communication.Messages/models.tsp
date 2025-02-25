@@ -664,7 +664,9 @@ model CommunicationChannel {
 @doc("A data stream.")
 model MessageDataStream {
   @key
-  @invisible(Lifecycle) // this model is only used as a parameter
+  // @invisible(Lifecycle) // this model is only used as a parameter
+  @path
+  @visibility(Lifecycle.Query)
   @doc("The stream ID.")
   @clientName("mediaId", "java")
   id: string;
