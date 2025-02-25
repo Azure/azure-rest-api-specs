@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    "default": "sdk/servicefabricmanagedclusters"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -29,6 +32,10 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/servicefabricmanagedclusters"
     package-dir: "armservicefabricmanagedclusters"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-servicefabricmanagedclusters"
+    namespace: com.azure.resourcemanager.servicefabricmanagedclusters
     flavor: azure
 linter:
   extends:
