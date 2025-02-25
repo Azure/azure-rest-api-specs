@@ -1,6 +1,14 @@
 name: ARM Incremental TypeSpec (Preview)
 
-on: pull_request
+on:
+  pull_request:
+    paths:
+      # Always trigger on changes to WF itself
+      - ".github/**"
+      # Only trigger if PR includes at least one non-example RM swagger, since this is only way WF can return "true"
+      # All consumers of workflow must treat "skipped" as equal to "completed false"
+      - "**/resource-manager/**/*.json"
+      - "!**/examples/**/*.json"
 
 permissions:
   contents: read
@@ -16,6 +24,10 @@ jobs:
         with:
           # Required to detect changed files in PR
           fetch-depth: 2
+          # Check only needs to view contents of changed files as a string, so can use
+          # "git show" on specific files instead of cloning whole repo
+          sparse-checkout: |
+            .github
 
       # Output is "true" if PR contains only incremental changes to an existing TypeSpec RP
       - id: incremental-typespec
