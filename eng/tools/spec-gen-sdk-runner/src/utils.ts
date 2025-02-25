@@ -306,3 +306,115 @@ export function searchRelatedTypeSpecProjectBySharedLibrary(
 
   return result;
 }
+
+export function extractServiceName(path: string): string {
+  const match = /specification\/([^/]*)\//.exec(path);
+  return match ? match[1] : "";
+}
+
+export type ServiceFolderInfo = {
+  resourceManagerPaths: { path: string; subPath?: string }[];
+  dataPlanePaths: { path: string; subFolder?: string }[];
+  managementPaths: string[];
+  otherTypeSpecPaths: string[];
+};
+
+export function groupPathsByService(
+  readmeMDResult: { [folderPath: string]: string[] },
+  typespecProjectResult: { [folderPath: string]: string[] },
+): Map<string, ServiceFolderInfo> {
+  const serviceMap = new Map<string, ServiceFolderInfo>();
+
+  // Process readme paths
+  for (const folderPath of Object.keys(readmeMDResult)) {
+    const serviceName = extractServiceName(folderPath);
+    if (!serviceName) continue;
+
+    if (!serviceMap.has(serviceName)) {
+      serviceMap.set(serviceName, {
+        resourceManagerPaths: [],
+        dataPlanePaths: [],
+        managementPaths: [],
+        otherTypeSpecPaths: [],
+      });
+    }
+
+    const info = serviceMap.get(serviceName)!;
+    if (folderPath.includes("resource-manager")) {
+      const subPathMatch = /resource-manager\/([^/]+)/.exec(folderPath);
+      info.resourceManagerPaths.push({
+        path: folderPath,
+        subPath: subPathMatch ? subPathMatch[1] : undefined,
+      });
+    } else if (folderPath.includes("data-plane")) {
+      const subFolderMatch = /data-plane\/([^/]+)/.exec(folderPath);
+      info.dataPlanePaths.push({
+        path: folderPath,
+        subFolder: subFolderMatch ? subFolderMatch[1] : undefined,
+      });
+    }
+  }
+
+  // Process typespec paths
+  for (const folderPath of Object.keys(typespecProjectResult)) {
+    const serviceName = extractServiceName(folderPath);
+    if (!serviceName) continue;
+
+    if (!serviceMap.has(serviceName)) {
+      serviceMap.set(serviceName, {
+        resourceManagerPaths: [],
+        dataPlanePaths: [],
+        managementPaths: [],
+        otherTypeSpecPaths: [],
+      });
+    }
+
+    const info = serviceMap.get(serviceName)!;
+    if (folderPath.endsWith(".Management")) {
+      info.managementPaths.push(folderPath);
+    } else {
+      info.otherTypeSpecPaths.push(folderPath);
+    }
+  }
+
+  return serviceMap;
+}
+
+export function getLastPathSegment(path: string): string {
+  const segments = path.split("/");
+  // eslint-disable-next-line unicorn/prefer-at
+  return segments[segments.length - 1];
+}
+
+export type SpecResults = {
+  readmeMDResult: { [folderPath: string]: string[] };
+  typespecProjectResult: { [folderPath: string]: string[] };
+};
+
+export type ChangedSpecs = {
+  [K in "readmeMd" | "typespecProject"]?: string;
+} & {
+  specs: string[];
+};
+
+/**
+ * Creates combined specs from readme and typespec paths
+ * @param readmePath - Path to the readme file
+ * @param typespecPaths - Array of typespec paths to combine with
+ * @param results - Current state of readme and typespec results
+ * @returns Array of specs with combined files
+ */
+export function createCombinedSpecs(
+  readmePath: string,
+  typespecPaths: string[],
+  results: SpecResults,
+): ChangedSpecs[] {
+  return typespecPaths.map((tsPath) => ({
+    specs: [
+      ...(results.readmeMDResult[readmePath] || []),
+      ...(results.typespecProjectResult[tsPath] || []),
+    ],
+    readmeMd: path.join(readmePath, "readme.md"),
+    typespecProject: path.join(tsPath, "tspconfig.yaml"),
+  }));
+}
