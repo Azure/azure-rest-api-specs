@@ -27,7 +27,23 @@ using Microsoft.ServiceNetworking;
 @@flattenProperty(AssociationUpdate.properties, "csharp");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(TrafficController.properties, "csharp");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(SecurityPolicy.properties, "csharp");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@clientName(SecurityPolicy,
   "ApplicationGatewayForContainersSecurityPolicy",
+  "csharp"
+);
+@@clientName(Association, "TrafficControllerAssociation", "csharp");
+@@clientName(AssociationUpdate, "TrafficControllerAssociationUpdate", "csharp");
+@@clientName(AssociationType, "TrafficControllerAssociationType", "csharp");
+@@clientName(Frontend, "TrafficControllerFrontend", "csharp");
+@@clientName(PolicyType,
+  "ApplicationGatewayForContainersSecurityPolicyType",
+  "csharp"
+);
+@@clientName(ProvisioningState, "ServiceNetworkingProvisioningState", "csharp");
+@@clientName(TrafficControllerProperties.provisioningState,
+  "TrafficControllerProvisioningState",
   "csharp"
 );
