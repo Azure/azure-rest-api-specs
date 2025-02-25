@@ -557,7 +557,7 @@
         ]
       }
     },
-    "/providers/Microsoft.Subscription/transfers/{transferId}": {
+    "/providers/Microsoft.Subscription/transfers/default": {
       "put": {
         "description": "Transfer subscriptions to destination email id.",
         "operationId": "Transfers_SendExport",
@@ -595,7 +595,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/providers/Microsoft.Subscription/transfers/{transferId}": {
       "get": {
         "operationId": "Transfers_GetById",
         "x-ms-examples": {
