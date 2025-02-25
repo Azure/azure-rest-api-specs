@@ -22,19 +22,6 @@ model DatasetContainer extends AssetContainer {
 
 }
 
-// @doc("PagedDataContainer Definition")
-// @pagedResult
-// model PagedDatasetContainer {
-//   @doc("The list of DatasetContainers.")
-//   @extension("x-ms-identifiers", [])
-//   @items
-//   value: DatasetContainer[];
-
-//   @doc("The link to the next page of results, if any.")
-//   @nextLink
-//   nextLink?: string;
-// }
-
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DatasetVersion Definition")
 @discriminator("datasetType")
