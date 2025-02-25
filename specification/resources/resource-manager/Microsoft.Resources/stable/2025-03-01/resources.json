@@ -6105,7 +6105,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the resource."
+          "description": "The Azure resource ID of the resource."
         },
         "resourceName": {
           "type": "string",
@@ -6114,6 +6114,22 @@
         "resourceType": {
           "type": "string",
           "description": "The type of the resource."
+        },
+        "extension": {
+          "$ref": "#/definitions/DeploymentExtensionDefinition",
+          "description": "The extension the resource was deployed with."
+        },
+        "identifiers": {
+          "type": "object",
+          "description": "The extensible resource identifiers."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version the resource was deployed with."
+        },
+        "symbolicName": {
+          "type": "string",
+          "description": "The symbolic name of the resource as defined in the deployment template."
         }
       },
       "description": "Target resource."
