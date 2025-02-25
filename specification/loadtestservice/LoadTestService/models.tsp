@@ -32,42 +32,57 @@ union PFMetrics {
 @doc("Aggregation functions for pass/fail criteria.")
 union PassFailAggregationFunction {
   string,
-  @doc("Criteria applies for count value.") "count",
-  @doc("Criteria applies for given percentage value.") "percentage",
-  @doc("Criteria applies for avg value.") "avg",
-  @doc("Criteria applies for 50th percentile value.") "p50",
+
+  @doc("Criteria applies for count value.")
+  Count: "count",
+
+  @doc("Criteria applies for given percentage value.")
+  Percentage: "percentage",
+
+  @doc("Criteria applies for avg value.")
+  Average: "avg",
+
+  @doc("Criteria applies for 50th percentile value.")
+  Percentile50: "p50",
 
   @doc("Criteria applies for 75th percentile value.")
   @added(APIVersions.v2024_05_01_preview)
-  "p75",
+  Percentile75: "p75",
 
-  @doc("Criteria applies for 90th percentile value.") "p90",
-  @doc("Criteria applies for 95th percentile value.") "p95",
+  @doc("Criteria applies for 90th percentile value.") 
+  Percentile90: "p90",
+
+  @doc("Criteria applies for 95th percentile value.")
+  Percentile95: "p95",
 
   @doc("Criteria applies for 96th percentile value.")
   @added(APIVersions.v2024_05_01_preview)
-  "p96",
+  Percentile96: "p96",
 
   @doc("Criteria applies for 97th percentile value.")
   @added(APIVersions.v2024_05_01_preview)
-  "p97",
+  Percentile97: "p97",
 
   @doc("Criteria applies for 98th percentile value.")
   @added(APIVersions.v2024_05_01_preview)
-  "p98",
+  Percentile98: "p98",
 
-  @doc("Criteria applies for 99th percentile value.") "p99",
+  @doc("Criteria applies for 99th percentile value.")
+  Percentile99: "p99",
 
   @doc("Criteria applies for 99.9th percentile value.")
   @added(APIVersions.v2024_05_01_preview)
-  "p99.9",
+  Percentile999: "p99.9",
 
   @doc("Criteria applies for 99.99th percentile value.")
   @added(APIVersions.v2024_05_01_preview)
-  "p99.99",
+  Percentile9999: "p99.99",
 
-  @doc("Criteria applies for minimum value.") "min",
-  @doc("Criteria applies for maximum value.") "max",
+  @doc("Criteria applies for minimum value.")
+  Minimum: "min",
+
+  @doc("Criteria applies for maximum value.")
+  Maximum: "max",
 }
 
 @doc("Action to take on failure of pass/fail criteria.")
