@@ -28,7 +28,7 @@ using Azure.Core.Traits;
   ]>
 )
 @service({
-  title: "Microsoft Cognitive Language Service - Document Analysis",
+  title: "Microsoft Cognitive Language Service - Document Analysis test",
 })
 @server(
   "{Endpoint}/language",
