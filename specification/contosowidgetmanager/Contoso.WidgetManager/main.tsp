@@ -23,7 +23,7 @@ enum Versions {
   v2022_11_01_Preview: "2022-11-01-preview",
 }
 
-@doc("A widget.")
+@doc("A widget. test")
 @resource("widgets")
 model WidgetSuite {
   @key("widgetName")
