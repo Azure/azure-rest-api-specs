@@ -17,7 +17,7 @@ model VirtualMachineInstance
   /** Name of the virtual machine instance. */
   @key
   @segment("virtualMachineInstances")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   @maxLength(54)
   @minLength(1)
   @pattern("[a-zA-Z0-9-_\\.]")
@@ -26,7 +26,7 @@ model VirtualMachineInstance
 
   /** Gets or sets the extended location. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is allowed but not recognized by the linter"
-  @visibility("read", "create")
+ @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 

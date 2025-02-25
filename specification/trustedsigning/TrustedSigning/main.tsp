@@ -114,7 +114,7 @@ union SignatureAlgorithm {
 @resource("codesigningaccounts")
 model SigningAccount {
   @key("accountName")
-  @visibility("read", "update")
+ @visibility(Lifecycle.Read, Lifecycle.Update)
   @doc("Azure Trusted Signing account name.")
   accountName: string;
 }
@@ -124,7 +124,7 @@ model SigningAccount {
 @parentResource(SigningAccount)
 model CertificateProfileName {
   @key("certificateProfile")
-  @visibility("read", "update")
+ @visibility(Lifecycle.Read, Lifecycle.Update)
   @doc("Azure Trusted Signing certificate profile name under an account.")
   certificateProfile: string;
 }
@@ -172,7 +172,7 @@ model SigningOptions {
 @parentResource(CertificateProfileName)
 model ExtendedKeyUsage {
   @key("eku")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   @doc("An oid string that represents an eku.")
   eku: string;
 }

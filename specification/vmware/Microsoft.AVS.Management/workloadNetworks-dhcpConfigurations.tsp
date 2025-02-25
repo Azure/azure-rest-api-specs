@@ -107,11 +107,11 @@ model WorkloadNetworkDhcpEntity {
   displayName?: string;
 
   @doc("NSX Segments consuming DHCP.")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   segments?: string[];
 
   @doc("The provisioning state")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkDhcpProvisioningState;
 
   @doc("NSX revision number.")

@@ -16,7 +16,7 @@ model SAPDiscoverySite is TrackedResource<SAPDiscoverySiteProperties> {
   @path
   @key("sapDiscoverySiteName")
   @segment("sapDiscoverySites")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   name: string;
 
   /**

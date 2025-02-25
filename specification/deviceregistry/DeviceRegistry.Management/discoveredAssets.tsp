@@ -31,7 +31,7 @@ model DiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The extended location.")
-  @visibility("read", "create")
+ @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
@@ -40,7 +40,7 @@ model DiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
 @removed(Versions.v2024_11_01)
 model DiscoveredAssetProperties {
   @doc("A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must provide asset endpoint profile name.")
-  @visibility("read", "create")
+ @visibility(Lifecycle.Read, Lifecycle.Create)
   assetEndpointProfileRef: string;
 
   @doc("Identifier used to detect changes in the asset.")
@@ -91,7 +91,7 @@ model DiscoveredAssetProperties {
   events?: DiscoveredEvent[];
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

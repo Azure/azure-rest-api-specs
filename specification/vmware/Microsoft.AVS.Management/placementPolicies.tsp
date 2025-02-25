@@ -149,7 +149,7 @@ model PlacementPolicyProperties {
   displayName?: string;
 
   @doc("The provisioning state")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   provisioningState?: PlacementPolicyProvisioningState;
 }
 

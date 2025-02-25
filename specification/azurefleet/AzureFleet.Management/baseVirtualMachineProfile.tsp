@@ -108,7 +108,7 @@ model BaseVirtualMachineProfile {
    * will be added to VMSS Flex VM tags when creating/updating the VMSS VM Profile
    * with minimum api-version 2023-09-01. Examples: "2024-07-01T00:00:01.1234567+00:00"
    */
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
 }
 
@@ -151,7 +151,7 @@ model VirtualMachineScaleSetOSProfile {
     repair disks on Azure Linux VMs using the VMAccess
     Extension](https://learn.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)
     """)
-  @visibility("create", "update")
+ @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   adminPassword?: string;
 
@@ -162,7 +162,7 @@ model VirtualMachineScaleSetOSProfile {
    * your VM, see [Using cloud-init to customize a Linux VM during
    * creation](https://learn.microsoft.com/azure/virtual-machines/linux/using-cloud-init)
    */
-  @visibility("create", "update")
+ @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   customData?: string;
 
@@ -287,7 +287,7 @@ model AdditionalUnattendContent {
    * the specified path and component. The XML must be less than 4KB and must
    * include the root element for the setting or feature that is being inserted.
    */
-  @visibility("create", "update")
+ @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   content?: string;
 }
@@ -650,7 +650,7 @@ model ImageReference is SubResource {
    * image used to create the virtual machine. This readonly field differs from 'version',
    * only if the value specified in 'version' field is 'latest'.
    */
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   exactVersion?: string;
 
   /**
@@ -1383,7 +1383,7 @@ model VirtualMachineScaleSetExtension is SubResourceReadOnly {
   /**
    * Resource type
    */
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -1443,14 +1443,14 @@ model VirtualMachineScaleSetExtensionProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json#L5002C1-L5009C11"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
-  @visibility("create", "update")
+ @visibility(Lifecycle.Create, Lifecycle.Update)
   @OpenAPI.extension("x-ms-secret", true)
   protectedSettings?: Record<unknown>;
 
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -1495,7 +1495,7 @@ model SubResourceReadOnly {
   /**
    * Resource Id
    */
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   id?: armResourceIdentifier;
 }
 

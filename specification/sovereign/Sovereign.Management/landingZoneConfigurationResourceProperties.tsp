@@ -7,12 +7,12 @@ namespace Microsoft.Sovereign;
 @added(Versions.Preview20250227)
 @doc("The properties of landing zone configuration resource type.")
 model LandingZoneConfigurationResourceProperties {
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   @doc("The state that reflects the current stage in the creation, updating, or deletion process of the landing zone configuration.")
   provisioningState?: provisioningState;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Handled in code."
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   @doc("The status that indicates the current phase of the configuration process for a deployment.")
   authoringStatus?: AuthoringStatus;
 

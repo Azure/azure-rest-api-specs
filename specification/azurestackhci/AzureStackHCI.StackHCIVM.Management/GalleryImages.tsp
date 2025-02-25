@@ -21,7 +21,7 @@ model GalleryImage is TrackedResource<GalleryImageProperties> {
   @path
   @key("galleryImageName")
   @segment("galleryImages")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")

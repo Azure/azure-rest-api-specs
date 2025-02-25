@@ -15,7 +15,7 @@ model Monitor is TrackedResource<MonitorProperties> {
   @path
   @key("monitorName")
   @segment("monitors")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   name: string;
 
   ...ManagedServiceIdentityProperty;

@@ -23,7 +23,7 @@ model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
   @path
   @key("networkInterfaceName")
   @segment("networkInterfaces")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")

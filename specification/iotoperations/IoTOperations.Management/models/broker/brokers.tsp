@@ -27,36 +27,36 @@ model BrokerResource is ProxyResource<BrokerProperties> {
   // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+ @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
 @doc("Broker Resource properties")
 model BrokerProperties {
-  @visibility("read", "create")
+ @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Advanced settings of Broker.")
   advanced?: AdvancedSettings;
 
-  @visibility("read", "create")
+ @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The cardinality details of the broker.")
   cardinality?: Cardinality;
 
   @doc("Spec defines the desired identities of Broker diagnostics settings.")
   diagnostics?: BrokerDiagnostics;
 
-  @visibility("read", "create")
+ @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Settings of Disk Backed Message Buffer.")
   diskBackedMessageBuffer?: DiskBackedMessageBuffer;
 
-  @visibility("read", "create")
+ @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("This setting controls whether Kubernetes CPU resource limits are requested. Increasing the number of replicas or workers proportionally increases the amount of CPU resources requested. If this setting is enabled and there are insufficient CPU resources, an error will be emitted.")
   generateResourceLimits?: GenerateResourceLimits;
 
-  @visibility("read", "create")
+ @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Memory profile of Broker.")
   memoryProfile?: BrokerMemoryProfile = BrokerMemoryProfile.Medium;
 
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

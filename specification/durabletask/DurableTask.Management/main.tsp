@@ -41,12 +41,12 @@ model Scheduler is Azure.ResourceManager.TrackedResource<SchedulerProperties> {
 @doc("Details of the Scheduler")
 @added(Versions.v2024_10_01_Preview)
 model SchedulerProperties {
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   @doc("The status of the last operation")
   provisioningState?: ProvisioningState;
 
   @doc("URL of the durable task scheduler")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   endpoint?: string;
 
   @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
@@ -66,7 +66,7 @@ model SchedulerSku {
   capacity?: int32;
 
   @doc("Indicates whether the current SKU configuration is zone redundant")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   redundancyState?: RedundancyState;
 }
 
@@ -95,12 +95,12 @@ union RedundancyState {
 
 @doc("The properties of Task Hub")
 model TaskHubProperties {
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   @doc("The status of the last operation")
   provisioningState?: ProvisioningState;
 
   @doc("URL of the durable task scheduler dashboard")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   dashboardUrl?: url;
 }
 

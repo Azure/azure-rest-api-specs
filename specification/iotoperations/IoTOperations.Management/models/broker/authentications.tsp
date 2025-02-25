@@ -28,7 +28,7 @@ model BrokerAuthenticationResource
   // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+ @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
@@ -38,7 +38,7 @@ model BrokerAuthenticationProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   authenticationMethods: BrokerAuthenticatorMethods[];
 
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

@@ -18,7 +18,7 @@ model Catalog is TrackedResource<CatalogProperties> {
   @path
   @key("catalogName")
   @segment("catalogs")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   name: string;
 }
 

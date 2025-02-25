@@ -118,11 +118,11 @@ model WorkloadNetworkVMGroupProperties {
   members?: string[];
 
   @doc("VM Group status.")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   status?: VMGroupStatusEnum;
 
   @doc("The provisioning state")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkVMGroupProvisioningState;
 
   @doc("NSX revision number.")

@@ -22,7 +22,7 @@ model VirtualHardDisk is TrackedResource<VirtualHardDiskProperties> {
   @path
   @key("virtualHardDiskName")
   @segment("virtualHardDisks")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")

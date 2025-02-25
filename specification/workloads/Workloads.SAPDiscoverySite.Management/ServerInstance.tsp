@@ -15,7 +15,7 @@ model ServerInstance is ProxyResource<ServerInstanceProperties> {
   @path
   @key("serverInstanceName")
   @segment("serverInstances")
-  @visibility("read")
+ @visibility(Lifecycle.Read)
   name: string;
 }
 
