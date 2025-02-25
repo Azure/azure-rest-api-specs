@@ -711,7 +711,7 @@
       "properties": {
         "identity": {
           "description": "Managed identities needed by a session pool to interact with other Azure services to not maintain any secrets or credentials in code.",
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity"
+          "$ref": "#/definitions/ManagedServiceIdentityUpdate"
         },
         "properties": {
           "description": "Session pool resource specific updatable properties.",
@@ -745,6 +745,29 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
         }
       }
     },
