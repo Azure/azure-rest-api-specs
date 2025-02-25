@@ -49,7 +49,7 @@ union PassFailAggregationFunction {
   @added(APIVersions.v2024_05_01_preview)
   Percentile75: "p75",
 
-  @doc("Criteria applies for 90th percentile value.") 
+  @doc("Criteria applies for 90th percentile value.")
   Percentile90: "p90",
 
   @doc("Criteria applies for 95th percentile value.")
