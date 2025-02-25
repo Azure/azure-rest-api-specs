@@ -1183,5 +1183,5 @@ model HostMachineProperties {
   /**
    * The allocated RAM in Machine.
    */
-  allocatedMemoryinMb?: int64;
+  allocatedMemoryInMb?: int64;
 }
