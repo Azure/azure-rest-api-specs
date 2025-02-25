@@ -1,53 +1,53 @@
 {
   "parameters": {
-    "resourceGroupName": "sample-group",
-    "vaultName": "sample-vault",
-    "operationKind": "add",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "api-version": "2024-11-01",
+    "operationKind": "add",
     "parameters": {
       "properties": {
         "accessPolicies": [
           {
-            "tenantId": "00000000-0000-0000-0000-000000000000",
             "objectId": "00000000-0000-0000-0000-000000000000",
             "permissions": {
+              "certificates": [
+                "get"
+              ],
               "keys": [
                 "encrypt"
               ],
               "secrets": [
                 "get"
-              ],
-              "certificates": [
-                "get"
               ]
-            }
+            },
+            "tenantId": "00000000-0000-0000-0000-000000000000"
           }
         ]
       }
-    }
+    },
+    "resourceGroupName": "sample-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "sample-vault"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/accessPolicies/",
         "type": "Microsoft.KeyVault/vaults/accessPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/accessPolicies/",
         "properties": {
           "accessPolicies": [
             {
-              "tenantId": "00000000-0000-0000-0000-000000000000",
               "objectId": "00000000-0000-0000-0000-000000000000",
               "permissions": {
+                "certificates": [
+                  "get"
+                ],
                 "keys": [
                   "encrypt"
                 ],
                 "secrets": [
                   "get"
-                ],
-                "certificates": [
-                  "get"
                 ]
-              }
+              },
+              "tenantId": "00000000-0000-0000-0000-000000000000"
             }
           ]
         }
@@ -55,28 +55,30 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/accessPolicies/",
         "type": "Microsoft.KeyVault/vaults/accessPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/accessPolicies/",
         "properties": {
           "accessPolicies": [
             {
-              "tenantId": "00000000-0000-0000-0000-000000000000",
               "objectId": "00000000-0000-0000-0000-000000000000",
               "permissions": {
+                "certificates": [
+                  "get"
+                ],
                 "keys": [
                   "encrypt"
                 ],
                 "secrets": [
                   "get"
-                ],
-                "certificates": [
-                  "get"
                 ]
-              }
+              },
+              "tenantId": "00000000-0000-0000-0000-000000000000"
             }
           ]
         }
       }
     }
-  }
+  },
+  "operationId": "Vaults_UpdateAccessPolicy",
+  "title": "Add an access policy, or update an access policy with new permissions"
 }

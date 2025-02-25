@@ -1,27 +1,29 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "sample-group",
     "name": "sample-mhsm",
-    "api-version": "2024-11-01"
+    "api-version": "2024-11-01",
+    "resourceGroupName": "sample-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": null,
         "value": [
           {
             "name": "sample-region1",
-            "provisioningState": "Succeeded",
-            "isPrimary": true
+            "isPrimary": true,
+            "provisioningState": "Succeeded"
           },
           {
             "name": "sample-region2",
-            "provisioningState": "Succeeded",
-            "isPrimary": false
+            "isPrimary": false,
+            "provisioningState": "Succeeded"
           }
-        ],
-        "nextLink": null
+        ]
       }
     }
-  }
+  },
+  "operationId": "MHSMRegions_ListByResource",
+  "title": "List managed HSM Pools in a subscription"
 }

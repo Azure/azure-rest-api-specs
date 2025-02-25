@@ -1,37 +1,38 @@
 {
   "parameters": {
+    "api-version": "2024-11-01",
     "resourceGroupName": "sample-resource-group",
-    "vaultName": "sample-vault",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "api-version": "2024-11-01"
+    "vaultName": "sample-vault"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
         "name": "sample-vault",
         "type": "Microsoft.KeyVault/vaults",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
         "location": "westus",
-        "tags": {},
-        "systemData": {
-          "createdBy": "keyVaultUser1",
-          "createdByType": "User",
-          "createdAt": "2020-01-01T12:00:00.0000000Z",
-          "lastModifiedBy": "keyVaultUser2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z"
-        },
         "properties": {
-          "sku": {
-            "family": "A",
-            "name": "standard"
-          },
-          "tenantId": "00000000-0000-0000-0000-000000000000",
           "accessPolicies": [
             {
-              "tenantId": "00000000-0000-0000-0000-000000000000",
               "objectId": "00000000-0000-0000-0000-000000000000",
               "permissions": {
+                "certificates": [
+                  "get",
+                  "list",
+                  "delete",
+                  "create",
+                  "import",
+                  "update",
+                  "managecontacts",
+                  "getissuers",
+                  "listissuers",
+                  "setissuers",
+                  "deleteissuers",
+                  "manageissuers",
+                  "recover",
+                  "purge"
+                ],
                 "keys": [
                   "encrypt",
                   "decrypt",
@@ -59,35 +60,36 @@
                   "restore",
                   "recover",
                   "purge"
-                ],
-                "certificates": [
-                  "get",
-                  "list",
-                  "delete",
-                  "create",
-                  "import",
-                  "update",
-                  "managecontacts",
-                  "getissuers",
-                  "listissuers",
-                  "setissuers",
-                  "deleteissuers",
-                  "manageissuers",
-                  "recover",
-                  "purge"
                 ]
-              }
+              },
+              "tenantId": "00000000-0000-0000-0000-000000000000"
             }
           ],
           "enabledForDeployment": true,
           "enabledForDiskEncryption": true,
           "enabledForTemplateDeployment": true,
           "hsmPoolResourceId": "00000000-0000-0000-0000-000000000000",
-          "vaultUri": "https://sample-vault.vault.azure.net",
           "provisioningState": "Succeeded",
-          "publicNetworkAccess": "Enabled"
-        }
+          "publicNetworkAccess": "Enabled",
+          "sku": {
+            "name": "standard",
+            "family": "A"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "vaultUri": "https://sample-vault.vault.azure.net"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:00:00.0000000Z",
+          "createdBy": "keyVaultUser1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z",
+          "lastModifiedBy": "keyVaultUser2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
       }
     }
-  }
+  },
+  "operationId": "Vaults_Get",
+  "title": "Retrieve a vault"
 }

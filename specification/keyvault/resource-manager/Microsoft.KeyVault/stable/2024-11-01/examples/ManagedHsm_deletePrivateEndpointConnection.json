@@ -1,17 +1,17 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "sample-group",
     "name": "sample-mhsm",
+    "api-version": "2024-11-01",
     "privateEndpointConnectionName": "sample-pec",
-    "api-version": "2024-11-01"
+    "resourceGroupName": "sample-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-vault/privateEndpointConnections/sample-pec",
         "name": "sample-pec",
         "type": "Microsoft.KeyVault/managedhsms/privateEndpointConnections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-vault/privateEndpointConnections/sample-pec",
         "properties": {
           "provisioningState": "Disconnected"
         }
@@ -23,5 +23,7 @@
       }
     },
     "204": {}
-  }
+  },
+  "operationId": "MHSMPrivateEndpointConnections_Delete",
+  "title": "ManagedHsmDeletePrivateEndpointConnection"
 }
