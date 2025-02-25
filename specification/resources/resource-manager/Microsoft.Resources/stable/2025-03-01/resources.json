@@ -4658,6 +4658,13 @@
           "$ref": "#/definitions/ParametersLink",
           "description": "The URI of parameters file. You use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
         },
+        "extensionConfigs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentExtensionConfig"
+          },
+          "description": "The configurations to use for deployment extensions. The keys of this object are deployment extension aliases as defined in the deployment template."
+        },
         "mode": {
           "type": "string",
           "description": "The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources.",
@@ -5406,6 +5413,14 @@
           "$ref": "#/definitions/ParametersLink",
           "description": "The URI referencing the parameters. "
         },
+        "extensions": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentExtensionDefinition"
+          },
+          "description": "The extensions used in this deployment."
+        },
         "mode": {
           "readOnly": true,
           "type": "string",
@@ -5478,7 +5493,27 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The fully qualified resource Id."
+          "description": "The fully qualified Azure resource ID."
+        },
+        "extension": {
+          "readOnly": true,
+          "$ref": "#/definitions/DeploymentExtensionDefinition",
+          "description": "The key of the extension the resource was deployed with."
+        },
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "identifiers": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The extensible resource identifiers."
+        },
+        "apiVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The API version the resource was deployed with."
         }
       }
     },
@@ -6889,6 +6924,106 @@
           {
             "description": "Static analysis of the template is performed and resource declarations are sent to resource providers for semantic validation. Skips validating that the caller has RBAC write permissions on each resource.",
             "value": "ProviderNoRbac"
+          }
+        ]
+      }
+    },
+    "DeploymentExtensionDefinition": {
+      "type": "object",
+      "properties": {
+        "alias": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The alias of the extension as defined in the deployment template."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The extension name."
+        },
+        "version": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The extension version."
+        },
+        "configId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The extension configuration ID. It uniquely identifies a deployment control plane within an extension."
+        },
+        "config": {
+          "readOnly": true,
+          "$ref": "#/definitions/DeploymentExtensionConfig",
+          "description": "The extension configuration."
+        }
+      }
+    },
+    "DeploymentExtensionConfig": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/DeploymentExtensionConfigItem"
+      },
+      "description": "An extension configuration. Keys of the object are defined by an extension's configuration schema."
+    },
+    "DeploymentExtensionConfigItem": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "$ref": "#/definitions/ExtensionConfigPropertyType",
+          "description": "The value type of the extension config property."
+        },
+        "value": {
+          "description": "The value of the extension config property."
+        },
+        "keyVaultReference": {
+          "$ref": "#/definitions/KeyVaultParameterReference",
+          "description": "The Azure Key Vault reference used to retrieve the secret value of the extension config property."
+        }
+      }
+    },
+    "ExtensionConfigPropertyType": {
+      "type": "string",
+      "enum": [
+        "String",
+        "Int",
+        "Bool",
+        "Array",
+        "Object",
+        "SecureString",
+        "SecureObject"
+      ],
+      "x-ms-enum": {
+        "name": "ExtensionConfigPropertyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "Property type representing a string value.",
+            "value": "String"
+          },
+          {
+            "description": "Property type representing an integer value.",
+            "value": "Int"
+          },
+          {
+            "description": "Property type representing a boolean value.",
+            "value": "Bool"
+          },
+          {
+            "description": "Property type representing an array value.",
+            "value": "Array"
+          },
+          {
+            "description": "Property type representing an object value.",
+            "value": "Object"
+          },
+          {
+            "description": "Property type representing a secure string value.",
+            "value": "SecureString"
+          },
+          {
+            "description": "Property type representing a secure object value.",
+            "value": "SecureObject"
           }
         ]
       }
