@@ -2118,6 +2118,22 @@
         ]
       }
     },
+    "HostMachineProperties": {
+      "type": "object",
+      "description": "Represents a Collation in PostgreSQL.",
+      "properties": {
+        "vCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The machine vCore count."
+        },
+        "allocatedMemoryinMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The allocated RAM in Machine."
+        }
+      }
+    },
     "Language": {
       "type": "string",
       "description": "Represents the Language supported by PostgreSQL. https://wiki.postgresql.org/wiki/PL_Matrix.",
@@ -2557,6 +2573,10 @@
             ]
           }
         },
+        "hostMachineProperties": {
+          "$ref": "#/definitions/HostMachineProperties",
+          "description": "The host machine properties."
+        },
         "portNumber": {
           "type": "integer",
           "format": "int64",
@@ -2684,6 +2704,10 @@
               }
             ]
           }
+        },
+        "hostMachineProperties": {
+          "$ref": "#/definitions/HostMachineProperties",
+          "description": "The host machine properties."
         },
         "pgsqlVersion": {
           "type": "string",

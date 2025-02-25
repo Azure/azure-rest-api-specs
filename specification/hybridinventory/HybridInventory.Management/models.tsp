@@ -624,6 +624,11 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   ]>;
 
   /**
+   * The host machine properties.
+   */
+  hostMachineProperties?: HostMachineProperties;
+
+  /**
    * PGSQL Server port number
    */
   portNumber: int64;
@@ -733,6 +738,11 @@ model PgsqlInstanceResourcePatch {
       type: "Microsoft.OffAzure/serverSites/machines";
     }
   ]>;
+
+  /**
+   * The host machine properties.
+   */
+  hostMachineProperties?: HostMachineProperties;
 
   /**
    * The pgsql server version.
@@ -1159,4 +1169,19 @@ model AgentResourcePatchProperties {
 @doc("The Site Tags patch resource definition.")
 model SiteTagsPatch {
   ...TagsUpdate;
+}
+
+/**
+ * Represents a Collation in PostgreSQL.
+ */
+model HostMachineProperties {
+  /**
+   * The machine vCore count.
+   */
+  vCores?: int64;
+
+  /**
+   * The allocated RAM in Machine.
+   */
+  allocatedMemoryinMb?: int64;
 }
