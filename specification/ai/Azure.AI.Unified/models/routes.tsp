@@ -3,9 +3,9 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
-import "./chat_completions.tsp"
-import "./embeddings.tsp"
-import "./image_embeddings.tsp"
+import "./chat_completions.tsp";
+import "./embeddings.tsp";
+import "./image_embeddings.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -69,7 +69,7 @@ interface Models {
       @body
       body: ChatCompletionsOptions;
 
-      ...AdditionalRequestHeaders;
+      ...AdditionalInferenceRequestHeaders;
     },
     ChatCompletions
   >;
@@ -86,7 +86,7 @@ interface Models {
       @body
       body: EmbeddingsOptions;
 
-      ...AdditionalRequestHeaders;
+      ...AdditionalInferenceRequestHeaders;
     },
     EmbeddingsResult
   >;
@@ -103,7 +103,7 @@ interface Models {
       @body
       body: ImageEmbeddingsOptions;
 
-      ...AdditionalRequestHeaders;
+      ...AdditionalInferenceRequestHeaders;
     },
     EmbeddingsResult
   >;
