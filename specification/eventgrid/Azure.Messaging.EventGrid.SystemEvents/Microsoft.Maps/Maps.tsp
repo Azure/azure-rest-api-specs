@@ -14,6 +14,7 @@ const MicrosoftMapsGeofenceEnteredExample: MapsGeofenceEnteredEventData = #{
       nearestLon: -122.132151,
     }
   ],
+  isEventPublished: true,
   expiredGeofenceGeometryId: #[],
   invalidPeriodGeofenceGeometryId: #[],
 };
@@ -45,6 +46,7 @@ const MicrosoftMapsGeofenceResultExample: MapsGeofenceResultEventData = #{
       nearestLon: -122.131841,
     }
   ],
+  isEventPublished: true,
   expiredGeofenceGeometryId: #[],
   invalidPeriodGeofenceGeometryId: #[],
 };
