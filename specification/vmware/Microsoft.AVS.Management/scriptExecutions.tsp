@@ -125,19 +125,19 @@ model ScriptExecutionProperties {
   retention?: string;
 
   @doc("Time the script execution was submitted")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   submittedAt?: utcDateTime;
 
   @doc("Time the script execution was started")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   startedAt?: utcDateTime;
 
   @doc("Time the script execution was finished")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   finishedAt?: utcDateTime;
 
   @doc("The state of the script execution resource")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ScriptExecutionProvisioningState;
 
   @doc("Standard output stream from the powershell execution")
@@ -150,15 +150,15 @@ model ScriptExecutionProperties {
   namedOutputs?: Record<{}>;
 
   @doc("Standard information out stream from the powershell execution")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   information?: string[];
 
   @doc("Standard warning out stream from the powershell execution")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   warnings?: string[];
 
   @doc("Standard error output stream from the powershell execution")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   errors?: string[];
 }
 

@@ -20,7 +20,7 @@ model PortalTenantCompileFile
   @path
   @key("compilefile")
   @segment("compilefile")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

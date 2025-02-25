@@ -26,7 +26,7 @@ model StandbyContainerGroupPoolResource
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("standbyContainerGroupPoolName")
   @segment("standbyContainerGroupPools")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("Name of the standby container group pool")
   @path
   name: string;
@@ -42,7 +42,7 @@ model StandbyContainerGroupPoolResourceProperties {
   containerGroupProperties: ContainerGroupProperties;
 
   @doc("The status of the last operation.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

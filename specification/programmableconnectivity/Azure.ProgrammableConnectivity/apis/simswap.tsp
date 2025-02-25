@@ -33,7 +33,7 @@ interface SimSwap {
 model SimSwapEndpoint {
   @key
   @doc("Static endpoint")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   simSwap: "sim-swap";
 }
 

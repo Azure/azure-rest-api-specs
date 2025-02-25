@@ -25,7 +25,7 @@ model SapLandscapeMonitorResource
   @key
   @path
   @segment("sapLandscapeMonitor")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

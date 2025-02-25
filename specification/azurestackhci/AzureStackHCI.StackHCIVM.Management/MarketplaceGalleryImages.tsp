@@ -22,7 +22,7 @@ model MarketplaceGalleryImage
   @path
   @key("marketplaceGalleryImageName")
   @segment("marketplaceGalleryImages")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")

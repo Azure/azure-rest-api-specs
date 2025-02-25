@@ -21,7 +21,7 @@ model ImpactCategory
   @key("impactCategoryName")
   @segment("impactCategories")
   @doc("Name of the impact category")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

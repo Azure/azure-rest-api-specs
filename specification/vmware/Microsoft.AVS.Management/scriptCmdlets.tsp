@@ -84,24 +84,24 @@ union ScriptCmdletProvisioningState {
 @doc("Properties of a pre-canned script")
 model ScriptCmdletProperties {
   @doc("The provisioning state of the resource.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ScriptCmdletProvisioningState;
 
   @doc("Description of the scripts functionality")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   description?: string;
 
   @doc("Recommended time limit for execution")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   timeout?: string;
 
   @doc("Specifies whether a script cmdlet is intended to be invoked only through automation or visible to customers")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   audience?: ScriptCmdletAudience;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Parameters the script will accept")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   parameters?: ScriptParameter[];
 }
 
@@ -122,24 +122,24 @@ model ScriptParameter {
     The type of parameter the script is expecting. psCredential is a
     PSCredentialObject
     """)
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   type?: ScriptParameterTypes;
 
   @doc("The parameter name that the script will expect a parameter value for")
   name?: string;
 
   @doc("User friendly description of the parameter")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   description?: string;
 
   @doc("""
     Should this parameter be visible to arm and passed in the parameters argument
     when executing
     """)
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   visibility?: VisibilityParameterEnum;
 
   @doc("Is this parameter required or optional")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   optional?: OptionalParamEnum;
 }

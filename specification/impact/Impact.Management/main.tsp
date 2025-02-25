@@ -30,6 +30,6 @@ union ProvisioningState {
 @doc("General resource properties.")
 model ResourceProperties {
   @doc("Resource provisioning state.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

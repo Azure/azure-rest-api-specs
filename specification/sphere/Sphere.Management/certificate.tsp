@@ -19,7 +19,7 @@ model Certificate is ProxyResource<CertificateProperties> {
   @path
   @key("serialNumber")
   @segment("certificates")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

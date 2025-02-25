@@ -39,14 +39,14 @@ model WorkloadNetworkVirtualMachine
 @doc("NSX Virtual Machine Properties")
 model WorkloadNetworkVirtualMachineProperties {
   @doc("The provisioning state of the resource.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkProvisioningState;
 
   @doc("Display name of the VM.")
   displayName?: string;
 
   @doc("Virtual machine type.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   vmType?: VMTypeEnum;
 }
 

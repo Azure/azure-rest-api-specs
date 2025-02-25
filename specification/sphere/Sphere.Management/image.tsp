@@ -16,7 +16,7 @@ model Image is ProxyResource<ImageProperties> {
   @path
   @key("imageName")
   @segment("images")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

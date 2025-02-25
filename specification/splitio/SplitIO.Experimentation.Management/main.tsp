@@ -33,7 +33,7 @@ namespace SplitIO.Experimentation {
   @doc("Properties of the experimentation workspace")
   model ExperimentationWorkspaceProperties {
     @doc("Provisioning state of the resource.")
-   @visibility(Lifecycle.Read)
+    @visibility(Lifecycle.Read)
     provisioningState?: ResourceProvisioningState;
 
     @doc("Access policy for an experimentation workspace.")
@@ -53,7 +53,7 @@ namespace SplitIO.Experimentation {
     defaultRole?: DataPlaneRole;
 
     @doc("Endpoint used for access to the experimentation workspace.")
-   @visibility(Lifecycle.Read)
+    @visibility(Lifecycle.Read)
     dataPlaneEndpoint?: url;
   }
 
@@ -145,7 +145,7 @@ namespace SplitIO.Experimentation {
   @doc("The exchange token result that contains the bearer token which is used for Split.IO data plane authentication.")
   model ExchangeTokenResult {
     @doc("The bearer token that is used for Split.IO data plane authentication.")
-   @visibility(Lifecycle.Read)
+    @visibility(Lifecycle.Read)
     @secret
     token: string;
   }

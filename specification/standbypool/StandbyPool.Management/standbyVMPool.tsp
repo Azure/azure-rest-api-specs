@@ -25,7 +25,7 @@ model StandbyVirtualMachinePoolResource
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("standbyVirtualMachinePoolName")
   @segment("standbyVirtualMachinePools")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("Name of the standby virtual machine pool")
   @path
   name: string;
@@ -50,7 +50,7 @@ model StandbyVirtualMachinePoolResourceProperties {
   ]>;
 
   @doc("The status of the last operation.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

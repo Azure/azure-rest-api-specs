@@ -43,7 +43,7 @@ model AzureKeyVaultSecretProviderClassProperties {
   objects?: string;
 
   @doc("Provisioning state of the AzureKeyVaultSecretProviderClass instance.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

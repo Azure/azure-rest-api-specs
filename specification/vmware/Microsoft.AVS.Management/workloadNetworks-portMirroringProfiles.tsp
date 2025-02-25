@@ -139,11 +139,11 @@ model WorkloadNetworkPortMirroringProperties {
   destination?: string;
 
   @doc("Port Mirroring Status.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: PortMirroringStatusEnum;
 
   @doc("The provisioning state")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkPortMirroringProvisioningState;
 
   @doc("NSX revision number.")

@@ -15,7 +15,7 @@ model Deployment is ProxyResource<DeploymentProperties> {
   @path
   @key("deploymentName")
   @segment("deployments")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

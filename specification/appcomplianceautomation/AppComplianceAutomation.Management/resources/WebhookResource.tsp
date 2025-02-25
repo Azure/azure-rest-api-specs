@@ -33,7 +33,7 @@ model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @pattern("^[-a-zA-Z0-9_]{1,50}$")
   @key("webhookName")
   @segment("webhooks")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 

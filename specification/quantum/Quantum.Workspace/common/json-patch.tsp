@@ -36,20 +36,20 @@ union JsonPatchOperation {
 /** A JSONPatch object as defined by RFC 6902. */
 model JsonPatchObject {
   /** The operation to be performed. */
- @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create)
   @encodedName("application/json", "op")
   operation: JsonPatchOperation;
 
   /** A JSON-Pointer. */
- @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create)
   path: string;
 
   /** A value to be used in the operation on the path. */
- @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create)
   value?: {};
 
   /** Optional field used in copy and move operations. */
- @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create)
   from?: string;
 }
 

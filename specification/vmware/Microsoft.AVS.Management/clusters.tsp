@@ -87,11 +87,11 @@ model CommonClusterProperties {
   clusterSize?: int32;
 
   @doc("The state of the cluster provisioning")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ClusterProvisioningState;
 
   @doc("The identity")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   clusterId?: int32;
 
   @doc("The hosts")
@@ -148,10 +148,10 @@ model ClusterZoneList {
 @doc("Zone and associated hosts info")
 model ClusterZone {
   @doc("List of hosts belonging to the availability zone in a cluster")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   hosts?: string[];
 
   @doc("Availability zone identifier")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   zone?: string;
 }

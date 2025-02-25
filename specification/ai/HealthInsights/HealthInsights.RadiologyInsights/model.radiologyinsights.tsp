@@ -87,11 +87,11 @@ model QualityMeasureOptions {
 @resource("radiology-insights/jobs")
 model RadiologyInsightsJob {
   @doc("The request data for the operation.")
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobData?: RadiologyInsightsData;
 
   @doc("The result of the operation.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   result?: RadiologyInsightsInferenceResult;
 
   ...HealthInsightsJobBase;

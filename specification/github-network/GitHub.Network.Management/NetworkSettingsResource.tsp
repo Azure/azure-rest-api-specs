@@ -22,7 +22,7 @@ model NetworkSettingsResource
   @path
   @key("networkSettingsName")
   @segment("networkSettings")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

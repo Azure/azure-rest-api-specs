@@ -1321,7 +1321,7 @@ model ClassifierCopyAuthorization {
 model DocumentIntelligenceOperationDetails {
   @doc("Operation ID")
   @key
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   operationId: string;
 
   @doc("Operation status.  notStarted, running, completed, or failed")
@@ -1358,7 +1358,7 @@ model DocumentIntelligenceOperationDetails {
 @doc("Document model info.")
 model DocumentModelDetails {
   @key
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Unique document model name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
   modelId: string;
@@ -1368,40 +1368,40 @@ model DocumentModelDetails {
   description?: string;
 
   @doc("Date and time (UTC) when the document model was created.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the document model will expire.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   expirationDateTime?: utcDateTime;
 
   @doc("Date and time (UTC) when the document model was last modified.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   modifiedDateTime?: utcDateTime;
 
   @doc("API version used to create this document model.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   apiVersion?: string;
 
   @doc("List of key-value tag attributes associated with the document model.")
   tags?: Record<string>;
 
   @doc("Custom document model build mode.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   buildMode?: DocumentBuildMode;
 
   @doc("""
     Azure Blob Storage location containing the training data.  Either
     azureBlobSource or azureBlobFileListSource must be specified.
     """)
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   azureBlobSource?: AzureBlobContentSource;
 
   @doc("""
     Azure Blob Storage file list specifying the training data.  Either
     azureBlobSource or azureBlobFileListSource must be specified.
     """)
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   azureBlobFileListSource?: AzureBlobFileListContentSource;
 
   @doc("For composed models, the custom classifier to split and classify the input file.")
@@ -1411,15 +1411,15 @@ model DocumentModelDetails {
   split?: SplitMode = SplitMode.none;
 
   @doc("Supported document types.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   docTypes?: Record<DocumentTypeDetails>;
 
   @doc("List of warnings encountered while building the model.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   warnings?: DocumentIntelligenceWarning[];
 
   @doc("Number of V100-equivalent GPU hours consumed for model training.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   trainingHours?: float32;
 }
 
@@ -1520,7 +1520,7 @@ model ClassifierDocumentTypeDetails {
 @resource("documentClassifiers")
 model DocumentClassifierDetails {
   @key
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Unique document classifier name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
   @maxLength(64)
@@ -1537,7 +1537,7 @@ model DocumentClassifierDetails {
   expirationDateTime?: utcDateTime;
 
   @doc("Date and time (UTC) when the document model was last modified.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   modifiedDateTime?: utcDateTime;
 
   @doc("API version used to create this document classifier.")

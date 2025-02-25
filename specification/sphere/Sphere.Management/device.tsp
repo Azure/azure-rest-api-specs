@@ -17,7 +17,7 @@ model Device is ProxyResource<DeviceProperties> {
   @path
   @key("deviceName")
   @segment("devices")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

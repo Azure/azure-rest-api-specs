@@ -21,7 +21,7 @@ model LogicalNetwork is TrackedResource<LogicalNetworkProperties> {
   @path
   @key("logicalNetworkName")
   @segment("logicalNetworks")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")

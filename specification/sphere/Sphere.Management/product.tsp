@@ -23,7 +23,7 @@ model Product is ProxyResource<ProductProperties> {
   @path
   @key("productName")
   @segment("products")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

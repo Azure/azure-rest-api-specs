@@ -17,7 +17,7 @@ model SAPInstance is TrackedResource<SAPInstanceProperties> {
   @path
   @key("sapInstanceName")
   @segment("sapInstances")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

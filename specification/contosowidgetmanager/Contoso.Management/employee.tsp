@@ -28,7 +28,7 @@ model EmployeeProperties {
   profile?: bytes;
 
   /** The status of the last operation. */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

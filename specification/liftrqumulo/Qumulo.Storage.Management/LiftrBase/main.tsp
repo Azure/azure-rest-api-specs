@@ -78,7 +78,7 @@ model MarketplaceDetails {
   /**
    * Marketplace subscription status
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
 }
 

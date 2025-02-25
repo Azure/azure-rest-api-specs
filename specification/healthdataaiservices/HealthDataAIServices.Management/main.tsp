@@ -101,16 +101,16 @@ enum PublicNetworkAccess {
 
 @doc("Details of the HealthDataAIServices DeidService.")
 model DeidServiceProperties {
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("Deid service url.")
   serviceUrl?: string;
 
   @doc("List of private endpoint connections.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   @doc("Gets or sets allow or disallow public network access to resource")

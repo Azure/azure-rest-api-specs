@@ -63,7 +63,7 @@ union ProvisioningState {
 
 @doc("Details of the VerifiedId Authority.")
 model AuthorityProperties {
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

@@ -612,14 +612,14 @@ model TriggerEvaluationProperty {
   /**
    * The time when the evaluation is triggered.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   triggerTime?: utcDateTime;
 
   /**
    * The time when the evaluation is end.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   evaluationEndTime?: utcDateTime;
 
@@ -643,44 +643,44 @@ model QuickAssessment {
   /**
    * Resource id.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceId?: string;
 
   /**
    * Responsibility id.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   responsibilityId?: string;
 
   /**
    * The timestamp of resource creation (UTC).
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timestamp?: utcDateTime;
 
   /**
    * Quick assessment status.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceStatus?: ResourceStatus;
 
   /**
    * Quick assessment display name.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   /**
    * Quick assessment display name.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   description?: string;
 
   /**
    * Link to remediation steps for this quick assessment.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   remediationLink?: string;
 }
 
@@ -739,19 +739,19 @@ alias ReportBaseProperties = {
   /**
    * Report status.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: ReportStatus;
 
   /**
    * List of report error codes.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   errors?: string[];
 
   /**
    * Report's tenant id.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
@@ -762,27 +762,27 @@ alias ReportBaseProperties = {
   /**
    * Report next collection trigger time.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextTriggerTime?: utcDateTime;
 
   /**
    * Report last collection trigger time.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastTriggerTime?: utcDateTime;
 
   /**
    * List of subscription Ids.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   subscriptions?: string[];
 
   /**
    * Report compliance status.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   complianceStatus?: ReportComplianceStatus;
 
   /**
@@ -793,14 +793,14 @@ alias ReportBaseProperties = {
   /**
    * List of synchronized certification records.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", ["offerGuid"])
   certRecords?: CertSyncRecord[];
 
   /**
    * Azure lifecycle management
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 };
 
@@ -891,7 +891,7 @@ model ReportComplianceStatus {
   /**
    * The Microsoft 365 certification name.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   m365?: OverviewStatus;
 }
 
@@ -902,31 +902,31 @@ model OverviewStatus {
   /**
    * The count of all passed control.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   passedCount?: int32;
 
   /**
    * The count of all failed control.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   failedCount?: int32;
 
   /**
    * The count of all manual control.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   manualCount?: int32;
 
   /**
    * The count of all not applicable control.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   notApplicableCount?: int32;
 
   /**
    * The count of all pending for approval control.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   pendingCount?: int32;
 }
 
@@ -1009,7 +1009,7 @@ model WebhookProperties {
   /**
    * Webhook id in database.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   webhookId?: string;
 
   /**
@@ -1020,7 +1020,7 @@ model WebhookProperties {
   /**
    * Tenant id.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
@@ -1058,7 +1058,7 @@ model WebhookProperties {
   /**
    * whether webhookKey is enabled.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   webhookKeyEnabled?: WebhookKeyEnabled;
 
   /**
@@ -1069,13 +1069,13 @@ model WebhookProperties {
   /**
    * webhook deliveryStatus
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   deliveryStatus?: DeliveryStatus;
 
   /**
    * Azure Resource Provisioning State
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -1096,38 +1096,38 @@ model SnapshotProperties {
   /**
    * Snapshot name.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   snapshotName?: string;
 
   /**
    * The timestamp of resource creation (UTC).
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * Azure lifecycle management
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * The report essential info.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   reportProperties?: ReportProperties;
 
   /**
    * Metadata pertaining to creation and last modification of the resource.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   reportSystemData?: SystemData;
 
   /**
    * List of compliance results.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", ["complianceName"])
   complianceResults?: ComplianceResult[];
 }
@@ -1139,13 +1139,13 @@ model ComplianceResult {
   /**
    * The name of the compliance. e.g. "M365"
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   complianceName?: string;
 
   /**
    * List of categories.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", ["categoryName"])
   categories?: Category[];
 }
@@ -1157,19 +1157,19 @@ model Category {
   /**
    * The name of the compliance category. e.g. "Operational Security"
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   categoryName?: string;
 
   /**
    * Category status.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   categoryStatus?: CategoryStatus;
 
   /**
    * List of control families.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", ["controlFamilyName"])
   controlFamilies?: ControlFamily[];
 }
@@ -1181,19 +1181,19 @@ model ControlFamily {
   /**
    * The name of the control family. e.g. "Malware Protection - Anti-Virus"
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   controlFamilyName?: string;
 
   /**
    * The control family status
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   controlFamilyStatus?: ControlFamilyStatus;
 
   /**
    * List of controls.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", ["controlId"])
   controls?: Control[];
 }
@@ -1205,43 +1205,43 @@ model Control {
   /**
    * The Id of the control. e.g. "Operational_Security_10"
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   controlId?: string;
 
   /**
    * The name of the control. e.g. "Unsupported OS and Software."
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   controlName?: string;
 
   /**
    * The full name of the control. e.g. "Validate that unsupported operating systems and software components are not in use."
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   controlFullName?: string;
 
   /**
    * The control's description
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   controlDescription?: string;
 
   /**
    * The hyper link to the control's description'.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   controlDescriptionHyperLink?: string;
 
   /**
    * Control status.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   controlStatus?: ControlStatus;
 
   /**
    * List of customer responsibility.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", ["responsibilityId"])
   responsibilities?: Responsibility[];
 }
@@ -1253,43 +1253,43 @@ model Responsibility {
   /**
    * The id of the customer responsibility.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   responsibilityId?: string;
 
   /**
    * The title of the customer responsibility.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   responsibilityTitle?: string;
 
   /**
    * The description of the customer responsibility.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   responsibilityDescription?: string;
 
   /**
    * The type of customer responsibility.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   responsibilityType?: ResponsibilityType;
 
   /**
    * The severity level of this customer responsibility.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   responsibilitySeverity?: ResponsibilitySeverity;
 
   /**
    * The status of this customer responsibility.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   responsibilityStatus?: ResponsibilityStatus;
 
   /**
    * The supported cloud environment of this customer responsibility.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   responsibilityEnvironment?: ResponsibilityEnvironment;
 
   /**
@@ -1305,27 +1305,27 @@ model Responsibility {
   /**
    * List of resource.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", ["resourceId"])
   resourceList?: ResponsibilityResource[];
 
   /**
    * List of recommendation.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", ["recommendationId"])
   recommendationList?: Recommendation[];
 
   /**
    * The evidence upload guidance description.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   guidance?: string;
 
   /**
    * The justification given by the user to clarify the reason.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   justification?: string;
 
   /**
@@ -1341,37 +1341,37 @@ model ResponsibilityResource {
   /**
    * The Id of the resource.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceId?: string;
 
   /**
    * Account Id. For example - AWS account Id.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   accountId?: string;
 
   /**
    * The type of the resource. e.g. "Microsoft.SignalRService/SignalR"
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
    * Resource origin.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceOrigin?: ResourceOrigin;
 
   /**
    * Resource status.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceStatus?: ResourceStatus;
 
   /**
    * The status change date for the resource.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   resourceStatusChangeDate?: utcDateTime;
 
@@ -1388,19 +1388,19 @@ model Recommendation {
   /**
    * The Id of the recommendation.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   recommendationId?: string;
 
   /**
    * The short name of the recommendation. e.g. "Invalid TLS config"
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   recommendationShortName?: string;
 
   /**
    * List of recommendation solutions.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", ["recommendationSolutionIndex"])
   recommendationSolutions?: RecommendationSolution[];
 }
@@ -1412,19 +1412,19 @@ model RecommendationSolution {
   /**
    * The index of the recommendation solution.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   recommendationSolutionIndex?: string;
 
   /**
    * The detail steps of the recommendation solution.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   recommendationSolutionContent?: string;
 
   /**
    * Indicates whether this solution is the recommended.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   isRecommendSolution?: IsRecommendSolution;
 }
 
@@ -1456,27 +1456,27 @@ model DownloadResponse {
   /**
    * Resource list of the report
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", ["resourceId"])
   resourceList?: ResourceItem[];
 
   /**
    * List of the compliance result
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", ["controlId"])
   complianceReport?: ComplianceReportItem[];
 
   /**
    * Compliance pdf report
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   compliancePdfReport?: DownloadResponseCompliancePdfReport;
 
   /**
    * The detailed compliance pdf report
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   complianceDetailedPdfReport?: DownloadResponseComplianceDetailedPdfReport;
 }
 
@@ -1487,25 +1487,25 @@ model ResourceItem {
   /**
    * The subscription Id of this resource.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   subscriptionId?: string;
 
   /**
    * The resource group name of this resource.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceGroup?: string;
 
   /**
    * The resource type of this resource. e.g. "Microsoft.SignalRService/SignalR"
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
    * The resource Id - e.g. "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1".
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceId?: string;
 }
 
@@ -1516,73 +1516,73 @@ model ComplianceReportItem {
   /**
    * The category name.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   categoryName?: string;
 
   /**
    * The control family name.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   controlFamilyName?: string;
 
   /**
    * The control Id - e.g. "1".
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   controlId?: string;
 
   /**
    * The control name.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   controlName?: string;
 
   /**
    * Control status.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   controlStatus?: ControlStatus;
 
   /**
    * The title of the customer responsibility.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   responsibilityTitle?: string;
 
   /**
    * The description of the customer responsibility.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   responsibilityDescription?: string;
 
   /**
    * The Id of the resource.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceId?: string;
 
   /**
    * The type of the resource.  e.g. "Microsoft.SignalRService/SignalR"
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
    * Resource origin.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceOrigin?: ResourceOrigin;
 
   /**
    * Resource status.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   resourceStatus?: ResourceStatus;
 
   /**
    * The status change date for the resource.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   resourceStatusChangeDate?: utcDateTime;
 }
@@ -1594,7 +1594,7 @@ model DownloadResponseCompliancePdfReport {
   /**
    * The uri of compliance pdf report
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   sasUri?: string;
 }
 
@@ -1605,7 +1605,7 @@ model DownloadResponseComplianceDetailedPdfReport {
   /**
    * The uri of detailed compliance pdf report
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   sasUri?: string;
 }
 
@@ -1622,7 +1622,7 @@ model ScopingConfigurationProperties {
   /**
    * Azure lifecycle management
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -1644,37 +1644,37 @@ model ScopingQuestion {
   /**
    * Question id.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   questionId: string;
 
   /**
    * Superior question id.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   superiorQuestionId?: string;
 
   /**
    * Input type of the question answer.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   inputType: InputType;
 
   /**
    * Option id list.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   optionIds: string[];
 
   /**
    * The rule of the question.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   rules: Rule[];
 
   /**
    * The answer value to show the sub questions.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   showSubQuestionsValue?: string;
 }
 
@@ -1726,7 +1726,7 @@ model EvidenceProperties {
   /**
    * Azure lifecycle management
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -1753,7 +1753,7 @@ model EvidenceFileDownloadResponse {
   /**
    * The uri of evidence file
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   evidenceFile?: EvidenceFileDownloadResponseEvidenceFile;
 }
 
@@ -1764,7 +1764,7 @@ model EvidenceFileDownloadResponseEvidenceFile {
   /**
    * The url of evidence file
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   url?: string;
 }
 
@@ -1775,13 +1775,13 @@ model ReportFixResult {
   /**
    * Indicates whether the fix action is Succeeded or Failed.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   result?: Result;
 
   /**
    * If the report fix action failed, to indicate the detailed failed reason.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   reason?: string;
 }
 
@@ -1792,13 +1792,13 @@ model ReportVerificationResult {
   /**
    * Indicates whether the report verification action is Succeeded or Failed.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   result?: Result;
 
   /**
    * If the report verification action failed, to indicate the detailed failed reason.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   reason?: string;
 }
 

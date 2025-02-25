@@ -29,14 +29,14 @@ model Asset is TrackedResource<AssetProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The extended location.")
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
 @doc("Defines the asset properties.")
 model AssetProperties {
   @doc("Globally unique, immutable, non-reusable id.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   uuid?: string;
 
   @doc("Resource path to asset type (model) definition.")
@@ -47,7 +47,7 @@ model AssetProperties {
   enabled?: boolean;
 
   @doc("Asset id provided by the customer.")
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   externalAssetId?: string;
 
   @doc("Human-readable display name.")
@@ -57,17 +57,17 @@ model AssetProperties {
   description?: string;
 
   @doc("A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must have the format <ModuleCR.metadata.namespace>/<ModuleCR.metadata.name>.")
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @removed(Versions.v2024_09_01_preview)
   assetEndpointProfileUri: string;
 
   @doc("A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must provide asset endpoint profile name.")
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2024_09_01_preview)
   assetEndpointProfileRef: string;
 
   @doc("An integer that is incremented each time the resource is modified.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @typeChangedFrom(Versions.v2024_09_01_preview, int32)
   version?: int64;
 
@@ -100,7 +100,7 @@ model AssetProperties {
   attributes?: Record<unknown>;
 
   @doc("Reference to a list of discovered assets. Populated only if the asset has been created from discovery flow. Discovered asset names must be provided.")
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2024_09_01_preview)
   discoveredAssetRefs?: string[];
 
@@ -134,11 +134,11 @@ model AssetProperties {
   events?: Event[];
 
   @doc("Read only object to reflect changes that have occurred on the Edge. Similar to Kubernetes status property for custom resources.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: AssetStatus;
 
   @doc("Provisioning state of the resource.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -296,23 +296,23 @@ union EventObservabilityMode {
 @doc("Defines the asset status properties.")
 model AssetStatus {
   @doc("Array object to transfer and persist errors that originate from the Edge.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", [])
   errors?: AssetStatusError[];
 
   @doc("A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version.")
   @typeChangedFrom(Versions.v2024_09_01_preview, int32)
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   version?: int64;
 
   @doc("Array of dataset statuses that describe the status of each dataset.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_09_01_preview)
   @extension("x-ms-identifiers", [])
   datasets?: AssetStatusDataset[];
 
   @doc("Array of event statuses that describe the status of each event.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_09_01_preview)
   @extension("x-ms-identifiers", [])
   events?: AssetStatusEvent[];
@@ -321,11 +321,11 @@ model AssetStatus {
 @doc("Defines the asset status error properties.")
 model AssetStatusError {
   @doc("Error code for classification of errors (ex: 400, 404, 500, etc.).")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   code?: int32;
 
   @doc("Human readable helpful error message to provide additional context for error (ex: “capability Id 'foo' does not exist”).")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
@@ -333,11 +333,11 @@ model AssetStatusError {
 @added(Versions.v2024_09_01_preview)
 model AssetStatusDataset {
   @doc("The name of the dataset. Must be unique within the status.datasets array. This name is used to correlate between the spec and status dataset information.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The message schema reference object.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   messageSchemaReference?: MessageSchemaReference;
 }
 
@@ -345,11 +345,11 @@ model AssetStatusDataset {
 @added(Versions.v2024_09_01_preview)
 model AssetStatusEvent {
   @doc("The name of the event. Must be unique within the status.events array. This name is used to correlate between the spec and status event information.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The message schema reference object.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   messageSchemaReference?: MessageSchemaReference;
 }
 
@@ -357,15 +357,15 @@ model AssetStatusEvent {
 @added(Versions.v2024_09_01_preview)
 model MessageSchemaReference {
   @doc("The message schema registry namespace.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   schemaRegistryNamespace: string;
 
   @doc("The message schema name.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   schemaName: string;
 
   @doc("The message schema version.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   schemaVersion: string;
 }
 

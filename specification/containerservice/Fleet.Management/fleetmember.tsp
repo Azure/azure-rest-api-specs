@@ -21,7 +21,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   @key("fleetMemberName")
   @path
   @segment("members")
- @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
@@ -40,7 +40,7 @@ model FleetMemberProperties {
   // omitting it for now as response headers do not impact SDK generation.
   // ...EtagResponseEnvelope;
 
- @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The ARM resource id of the cluster that joins the Fleet. Must be a valid Azure resource id. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}'.")
   clusterResourceId: ClusterResourceId;
 
@@ -51,7 +51,7 @@ model FleetMemberProperties {
   @added(Versions.v2023_03_15_preview)
   group?: string;
 
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: FleetMemberProvisioningState;
 }

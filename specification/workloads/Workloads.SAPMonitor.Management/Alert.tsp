@@ -18,7 +18,7 @@ model Alert is ProxyResource<AlertProperties> {
   @path
   @key("alertName")
   @segment("alerts")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

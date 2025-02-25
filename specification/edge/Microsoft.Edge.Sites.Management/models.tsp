@@ -27,7 +27,7 @@ model SiteProperties {
   ]>;
 
   @doc("Provisioning state of last operation")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

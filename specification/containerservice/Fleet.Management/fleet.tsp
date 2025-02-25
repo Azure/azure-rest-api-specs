@@ -25,7 +25,7 @@ model Fleet is TrackedResource<FleetProperties> {
   @key("fleetName")
   @path
   @segment("fleets")
- @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
@@ -42,7 +42,7 @@ model FleetProperties {
   // omitting it for now as response headers do not impact SDK generation.
   //  ...EtagResponseEnvelope;
 
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: FleetProvisioningState;
 
@@ -61,7 +61,7 @@ model FleetProperties {
 @doc("The FleetHubProfile configures the fleet hub.")
 model FleetHubProfile {
   @doc("DNS prefix used to create the FQDN for the Fleet hub.")
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][a-zA-Z0-9-]{0,52}[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(54)
@@ -69,24 +69,24 @@ model FleetHubProfile {
 
   @added(Versions.v2023_06_15_preview)
   @doc("The access profile for the Fleet hub API server.")
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   apiServerAccessProfile?: APIServerAccessProfile;
 
   @added(Versions.v2023_06_15_preview)
   @doc("The agent profile for the Fleet hub.")
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   agentProfile?: AgentProfile;
 
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("The FQDN of the Fleet hub.")
   fqdn?: string;
 
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("The Kubernetes version of the Fleet hub.")
   kubernetesVersion?: string;
 
   @added(Versions.v2023_08_15_preview)
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("The Azure Portal FQDN of the Fleet hub.")
   portalFqdn?: string;
 }
@@ -101,18 +101,18 @@ scalar SubnetResourceId
 #suppress "@azure-tools/typespec-azure-core/casing-style" "match existing AKS APIServerAccessProfile"
 @doc("Access profile for the Fleet hub API server.")
 model APIServerAccessProfile {
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Whether to create the Fleet hub as a private cluster or not.")
   enablePrivateCluster?: boolean;
 
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2023_06_15_preview)
   @removed(Versions.v2024_04_01)
   @added(Versions.v2024_05_02_preview)
   @doc("Whether to enable apiserver vnet integration for the Fleet hub or not.")
   enableVnetIntegration?: boolean;
 
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2023_06_15_preview)
   @removed(Versions.v2024_04_01)
   @added(Versions.v2024_05_02_preview)
@@ -122,13 +122,13 @@ model APIServerAccessProfile {
 
 @doc("Agent profile for the Fleet hub.")
 model AgentProfile {
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The ID of the subnet which the Fleet hub node will join on startup. If this is not specified, a vnet and subnet will be generated and used.")
   subnetId?: SubnetResourceId;
 
   @added(Versions.v2023_08_15_preview)
   @doc("The virtual machine size of the Fleet hub.")
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   vmSize?: string;
 }
 
@@ -163,18 +163,18 @@ model FleetPatch {
 
 @doc("One credential result item.")
 model FleetCredentialResult {
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("The name of the credential.")
   name?: string;
 
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("Base64-encoded Kubernetes configuration file.")
   value?: bytes;
 }
 
 @doc("The Credential results response.")
 model FleetCredentialResults {
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("Array of base64-encoded Kubernetes configuration files.")
   @extension("x-ms-identifiers", ["name"])
   kubeconfigs?: FleetCredentialResult[];

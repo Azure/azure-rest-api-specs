@@ -28,7 +28,7 @@ enum Versions {
 model WidgetSuite {
   @key("widgetName")
   @doc("The widget name.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The ID of the widget's manufacturer.")

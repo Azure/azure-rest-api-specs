@@ -183,13 +183,13 @@ model SAPDiscoverySiteProperties {
   /**
    * Defines the provisioning states.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * Indicates any errors on the SAP Migration discovery site resource.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   errors?: SAPMigrateError;
 }
 
@@ -213,25 +213,25 @@ model ErrorDefinition {
   /**
    * Service specific error code which serves as the substatus for the HTTP error code.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * Description of the error.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * Description of the recommendation.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   recommendation?: string;
 
   /**
    * Internal error details.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", [])
   details?: ErrorDefinition[];
 }
@@ -259,37 +259,37 @@ model SAPInstanceProperties {
   /**
    * This is the SID of SAP System. Keeping this not equal to ID as different landscapes can have repeated System SID IDs.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   systemSid?: string;
 
   /**
    * The Environment; PRD, QA, DEV, etc to which SAP system belongs to. Select from the list of available dropdown values.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   environment?: SapInstanceEnvironment;
 
   /**
    * This is the SID of the production system in a landscape.  An SAP system could itself be a production SID or a part of a landscape with a different Production SID. This field can be used to relate non-prod SIDs, other components, SID (WEBDISP) to the prod SID. Enter the value of Production SID.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   landscapeSid?: string;
 
   /**
    * Enter a business function/department identifier to group multiple SIDs.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   application?: string;
 
   /**
    * Defines the provisioning states.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * Defines the errors related to SAP Instance resource.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   errors?: SAPMigrateError;
 }
 
@@ -300,61 +300,61 @@ model ServerInstanceProperties {
   /**
    * This is the Virtual Machine Name of the SAP system. Add all the virtual machines attached to an SAP system which you wish to migrate to Azure. Keeping this not equal to ID as for single tier all InstanceTypes would be on same server, leading to multiple resources with same servername.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   serverName?: string;
 
   /**
    * Defines the type SAP instance on this server instance.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   sapInstanceType?: SapInstanceType;
 
   /**
    * This is the Instance SID for ASCS/AP/DB instance.  An SAP system with HANA database for example could have a different SID for database Instance than that of ASCS instance.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   instanceSid?: string;
 
   /**
    * This is the SAP Application Component; e.g. SAP S/4HANA 2022, SAP ERP ENHANCE PACKAGE.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   sapProduct?: string;
 
   /**
    * Provide the product version of the SAP product.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   sapProductVersion?: string;
 
   /**
    * This is Operating System on which the host server is running.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   operatingSystem?: OperatingSystem;
 
   /**
    * Configuration data for this server instance.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   configurationData?: ConfigurationData;
 
   /**
    * Configuration data for this server instance.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   performanceData?: PerformanceData;
 
   /**
    * Defines the provisioning states.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * Defines the errors related to SAP Instance resource.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   errors?: SAPMigrateError;
 }
 
@@ -375,69 +375,69 @@ model ConfigurationData {
   /**
    * Provide the SAPS for each server of the SAP system. This should be a non-zero value. For example, 1000.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   saps?: int32;
 
   /**
    * Provide the CPU value of the server. For example, 16, 32 etc.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   cpu?: int32;
 
   /**
    * Provide the CPU architecture type of the server. For example, Xeon Platinum 8171M, Xeon E5-2673 v3.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   cpuType?: string;
 
   /**
    * Provide the CPU clock speed of the server in MHz. This should be a non-zero value. For example, 2100.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   cpuInMhz?: int32;
 
   /**
    * Provide the RAM of the server. This should be a non-zero value. For example, 256.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   ram?: int32;
 
   /**
    * Provide the HW manufacturer company of the server.  For example, Microsoft Corporation.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   hardwareManufacturer?: string;
 
   /**
    * Specify if the Hardware is a physical server or virtual machine.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   `model`?: string;
 
   /**
    * Provide the total disk volume capacity in GB. Add the disk volume for each individual disks and provide the total sum in this field.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is short for Gigabytes."
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   totalDiskSizeGB?: int32;
 
   /**
    * Provide the total disk IOPS capacity. Add the disk volume for each individual disk and provide the sum total in this field.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   totalDiskIops?: int32;
 
   /**
    * The database of this is a server instance. Applicable only if SAP instance type for this server instance is 'DB'.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   databaseType?: DatabaseType;
 
   /**
    *  Provide the target HANA database size you need. Applicable only if SAP instance type for this server instance is 'DB' and you are migrating an AnyDb database to SAP S/4HANA.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is short for Gigabytes."
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   targetHanaRamSizeGB?: int32;
 }
 
@@ -457,14 +457,14 @@ model ExcelPerformanceData extends PerformanceData {
   /**
    * Provide the max CPU percentage load on the server. Omit the percentage symbol while filling this value.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   maxCpuLoad?: int32;
 
   /**
    * Provide the source Database size in GB. Applicable only if SAP instance type for this server instance is 'DB'.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is short for Gigabytes."
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   totalSourceDbSizeGB?: int32;
 
   /**

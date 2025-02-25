@@ -43,18 +43,18 @@ model Snapshot is ProxyResource<SnapshotProperties> {
 
 @doc("Volume Snapshot Properties")
 model SnapshotProperties {
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
   @doc("The status of the resource.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: ResourceOperationalStatus;
 
   @doc("Reference to the source volume")
   @minLength(3)
   @maxLength(253)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   source: string;
 }

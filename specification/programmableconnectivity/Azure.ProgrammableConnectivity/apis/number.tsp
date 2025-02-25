@@ -55,7 +55,7 @@ interface NumberVerification {
 model NumberVerificationEndpoint {
   @key
   @doc("Static endpoint")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   number: "number";
 }
 

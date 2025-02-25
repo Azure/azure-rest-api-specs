@@ -39,7 +39,7 @@ model FileSystemResourceProperties {
   /**
    * Provisioning State of the resource
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -130,7 +130,7 @@ model FileSystemResource
   @path
   @key("fileSystemName")
   @segment("fileSystems")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9_-]*$")
   name: string;
 

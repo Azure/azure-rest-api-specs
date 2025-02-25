@@ -242,13 +242,13 @@ model MonitorProperties {
   /**
    * State of provisioning of the SAP monitor.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadMonitorProvisioningState;
 
   /**
    * Defines the SAP monitor errors.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   errors?: ErrorDetail;
 
   /**
@@ -289,13 +289,13 @@ model MonitorProperties {
   /**
    * The ARM ID of the MSI used for SAP monitoring.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   msiArmId?: string;
 
   /**
    * The ARM ID of the Storage account used for SAP monitoring.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   storageAccountArmId?: string;
 }
 
@@ -340,19 +340,19 @@ model ProviderInstanceProperties {
   /**
    * State of provisioning of the provider instance
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadMonitorProvisioningState;
 
   /**
    * Resource health details
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   health?: Health;
 
   /**
    * Defines the provider instance errors.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   errors?: ErrorDetail;
 
   /**
@@ -368,13 +368,13 @@ model Health {
   /**
    * Health state of the resource
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   healthState?: WorkloadProviderInstanceHealthState;
 
   /**
    * Reasons impacting health state
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   impactingReasons?: string;
 }
 
@@ -387,7 +387,7 @@ model ProviderSpecificProperties {
    * The provider type. For example, the value can be SapHana.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   providerType: string;
 }
 
@@ -398,7 +398,7 @@ model SapLandscapeMonitorProperties {
   /**
    * State of provisioning of the SAP monitor.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: SapLandscapeMonitorProvisioningState;
 
   /**
@@ -851,13 +851,13 @@ model AlertProperties {
   /**
    * Defines the alert instance errors.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   errors?: ErrorDetail;
 
   /**
    * ID of the alert rule resource created.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   alertRuleResourceId?: armResourceIdentifier;
 
   /**
@@ -883,7 +883,7 @@ model AlertProperties {
   /**
    * State of provisioning of the alert instance
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadMonitorProvisioningState;
 }
 
@@ -985,13 +985,13 @@ model AlertTemplateProperties {
   /**
    * Defines the SAP monitor Alert Template errors.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   errors?: ErrorDetail;
 
   /**
    * State of provisioning of the Alert Template.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadMonitorProvisioningState;
 
   /**

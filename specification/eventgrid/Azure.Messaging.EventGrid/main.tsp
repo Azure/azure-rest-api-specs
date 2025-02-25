@@ -208,7 +208,7 @@ namespace Microsoft.EventGrid {
   model Topic {
     @key
     @doc("Topic Name.")
-   @visibility(Lifecycle.Read)
+    @visibility(Lifecycle.Read)
     topicName: string;
   }
 
@@ -218,7 +218,7 @@ namespace Microsoft.EventGrid {
   model EventSubscription {
     @key
     @doc("Event Subscription Name.")
-   @visibility(Lifecycle.Read)
+    @visibility(Lifecycle.Read)
     eventSubscriptionName: string;
   }
 

@@ -51,19 +51,19 @@ union SessionStatus {
 model SessionDetails extends ItemDetails {
   /** Id of the session. */
   @key("sessionId")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   id: WorkspaceItemId;
 
   /** Type of the Quantum Workspace item is Session. */
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   itemType: ItemType.Session;
 
   /** Policy controlling the behavior of the Session when a job in the session fails. */
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobFailurePolicy: SessionJobFailurePolicy;
 
   /** The status of the session. */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: SessionStatus;
 }
 

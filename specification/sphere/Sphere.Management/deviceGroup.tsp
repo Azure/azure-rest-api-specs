@@ -19,7 +19,7 @@ model DeviceGroup is ProxyResource<DeviceGroupProperties> {
   @path
   @key("deviceGroupName")
   @segment("deviceGroups")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

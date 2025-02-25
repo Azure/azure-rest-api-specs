@@ -25,55 +25,55 @@ model AzureMonitorWorkspace
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "ETag is not included in TrackedResource."
   @doc("Resource entity tag (ETag)")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   etag?: string;
 }
 
 @doc("Properties that need to be specified to create a new workspace.")
 model AzureMonitorWorkspaceProperties {
   @doc("The immutable ID of the Azure Monitor workspace. This property is read-only.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   accountId?: string;
 
   @doc("Information about metrics for the Azure Monitor workspace")
   metrics?: Metrics;
 
   @doc("The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The Data Collection Rule and Endpoint used for ingestion by default.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   defaultIngestionSettings?: IngestionSettings;
 
   @doc("List of private endpoint connections.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   @doc("Gets or sets allow or disallow public network access to workspace")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   publicNetworkAccess?: PublicNetworkAccess;
 }
 
 @doc("Information about metrics for the workspace")
 model Metrics {
   @doc("The Prometheus query endpoint for the workspace")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   prometheusQueryEndpoint?: string;
 
   @doc("An internal identifier for the metrics container. Only to be used by the system")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   internalId?: string;
 }
 
 @doc("Settings for data ingestion")
 model IngestionSettings {
   @doc("The Azure resource Id of the default data collection rule for this workspace.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   dataCollectionRuleResourceId?: string;
 
   @doc("The Azure resource Id of the default data collection endpoint for this workspace.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   dataCollectionEndpointResourceId?: string;
 }
 

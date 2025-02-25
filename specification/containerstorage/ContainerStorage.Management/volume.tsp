@@ -50,12 +50,12 @@ model Volume is ProxyResource<VolumeProperties> {
 
 @doc("Volume Properties")
 model VolumeProperties {
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
   @doc("The status of the resource.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: ResourceOperationalStatus;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
@@ -67,14 +67,14 @@ model VolumeProperties {
   @minValue(1)
   capacityGiB: int64;
 
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("Properties of the volume")
   volumeType?: VolumeType;
 }
 
 @doc("Properties of the volume")
 model VolumeType {
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("Properties of the ElasticSAN iSCSI target")
   elasticSan?: ElasticSanVolumeProperties;
 }

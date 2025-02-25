@@ -20,7 +20,7 @@ model FabricCapacity is TrackedResource<FabricCapacityProperties, false> {
   @key("capacityName")
   @path
   @segment("capacities")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The standard ResourceSkuProperty does not fit our case"

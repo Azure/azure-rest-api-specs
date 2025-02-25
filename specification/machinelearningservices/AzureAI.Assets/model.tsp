@@ -18,7 +18,7 @@ namespace Microsoft.MachineLearningServices;
 @doc("AssetVersion Definition")
 model AssetVersion {
   @doc("Fully qualified resource Id: azureml://workspace/{workspaceName}/indexes/{name}/versions/{version} of the index.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
@@ -28,7 +28,7 @@ model AssetVersion {
   description?: string;
 
   @doc("Metadata containing createdBy and modifiedBy information.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 
   @doc("Asset's tags. Unlike properties, tags are fully mutable.")

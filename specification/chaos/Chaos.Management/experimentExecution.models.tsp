@@ -35,26 +35,26 @@ model ExperimentExecutionProperties {
   /**
    * The status of the execution.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * String that represents the start date time.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   startedAt?: utcDateTime;
 
   /**
    * String that represents the stop date time.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   stoppedAt?: utcDateTime;
 
   /**
    * Resource provisioning state. Not currently in use for executions.
    */
   @removed(Microsoft.Chaos.Versions.v2025_01_01)
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -65,25 +65,25 @@ model ExperimentExecutionDetails {
   /**
    * String of the resource type.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * String of the fully qualified resource ID.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * String of the resource name.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The properties of the experiment execution details.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   properties?: ExperimentExecutionDetailsProperties;
 }
 
@@ -95,44 +95,44 @@ model ExperimentExecutionDetailsProperties {
   /**
    * The status of the execution.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * String that represents the start date time.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   startedAt?: utcDateTime;
 
   /**
    * String that represents the stop date time.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   stoppedAt?: utcDateTime;
 
   /**
    * Resource provisioning state. Not currently in use for executions.
    */
   @removed(Microsoft.Chaos.Versions.v2025_01_01)
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * The reason why the execution failed.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   failureReason?: string;
 
   /**
    * String that represents the last action date time.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   lastActionAt?: utcDateTime;
 
   /**
    * The information of the experiment run.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   runInformation?: ExperimentExecutionDetailsPropertiesRunInformation;
 }
 
@@ -143,7 +143,7 @@ model ExperimentExecutionDetailsPropertiesRunInformation {
   /**
    * The steps of the experiment run.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", ["stepName"])
   steps?: StepStatus[];
 }
@@ -155,25 +155,25 @@ model StepStatus {
   /**
    * The name of the step.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   stepName?: string;
 
   /**
    * The id of the step.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   stepId?: string;
 
   /**
    * The value of the status of the step.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * The array of branches.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", ["branchName"])
   branches?: BranchStatus[];
 }
@@ -185,25 +185,25 @@ model BranchStatus {
   /**
    * The name of the branch status.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   branchName?: string;
 
   /**
    * The id of the branch status.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   branchId?: string;
 
   /**
    * The status of the branch.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * The array of actions.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", ["actionId"])
   actions?: ActionStatus[];
 }
@@ -215,37 +215,37 @@ model ActionStatus {
   /**
    * The name of the action status.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   actionName?: string;
 
   /**
    * The id of the action status.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   actionId?: string;
 
   /**
    * The status of the action.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * String that represents the start time of the action.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   startTime?: utcDateTime;
 
   /**
    * String that represents the end time of the action.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
 
   /**
    * The array of targets.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", [])
   targets?: ExperimentExecutionActionTargetDetailsProperties[];
 }
@@ -257,31 +257,31 @@ model ExperimentExecutionActionTargetDetailsProperties {
   /**
    * The status of the execution.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * The target for the action.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   target?: string;
 
   /**
    * String that represents the failed date time.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   targetFailedTime?: utcDateTime;
 
   /**
    * String that represents the completed date time.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   targetCompletedTime?: utcDateTime;
 
   /**
    * The error of the action.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   error?: ExperimentExecutionActionTargetDetailsError;
 }
 
@@ -292,13 +292,13 @@ model ExperimentExecutionActionTargetDetailsError {
   /**
    * The error code.
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * The error message
    */
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 

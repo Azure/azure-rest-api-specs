@@ -37,15 +37,15 @@ union ProvisioningState {
 @doc("NetworkSettings resource-specific properties.")
 model NetworkSettingsResourceProperties {
   @doc("Specifies a subnet ID for vnet-injection.")
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   subnetId?: string;
 
   @doc("Specifies the GitHub business (enterprise/organization) ID associated to the Azure subscription.")
   @added(Versions.`2024-04-01-preview`)
- @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   businessId?: string;
 
   @doc("The managed application provisioning state.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

@@ -114,7 +114,7 @@ model WorkloadNetworkDnsZoneProperties {
   dnsServices?: int64;
 
   @doc("The provisioning state")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkDnsZoneProvisioningState;
 
   @doc("NSX revision number.")

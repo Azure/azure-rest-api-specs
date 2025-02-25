@@ -71,7 +71,7 @@ union ProvisioningState {
 
 @doc("Details of the Compute Fleet.")
 model FleetProperties {
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
@@ -97,11 +97,11 @@ model FleetProperties {
   computeProfile: ComputeProfile;
 
   @doc("Specifies the time at which the Compute Fleet is created.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
 
   @doc("Specifies the ID which uniquely identifies a Compute Fleet.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   uniqueId?: string;
 }
 

@@ -151,11 +151,11 @@ model WorkloadNetworkDnsServiceProperties {
   logLevel?: DnsServiceLogLevelEnum;
 
   @doc("DNS Service status.")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   status?: DnsServiceStatusEnum;
 
   @doc("The provisioning state")
- @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkDnsServiceProvisioningState;
 
   @doc("NSX revision number.")
