@@ -108,7 +108,7 @@ op  getSupportedPrebuiltEntities is languageOperations.ResourceList<
       StandardListQueryParameters>
   >;
 
-interface TextAuthoringProjects {
+interface TextAuthoringProject {
 
   /**
    * Gets the status for an import.
@@ -151,7 +151,7 @@ interface TextAuthoringProjects {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}")
   @delete
-  @pollingOperation(TextAuthoringProjects.getProjectDeletionStatus)
+  @pollingOperation(TextAuthoringProject.getProjectDeletionStatus)
   deleteProject is Foundations.LongRunningOperation<
     {
       /**
@@ -185,7 +185,7 @@ interface TextAuthoringProjects {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:copy")
   @post
-  @pollingOperation(TextAuthoringProjects.getCopyProjectStatus)
+  @pollingOperation(TextAuthoringProject.getCopyProjectStatus)
   @added(Versions.v2023_04_15_preview)
   copyProject is Foundations.LongRunningOperation<
     {
@@ -212,7 +212,7 @@ interface TextAuthoringProjects {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:export")
   @post
-  @pollingOperation(TextAuthoringProjects.getExportStatus)
+  @pollingOperation(TextAuthoringProject.getExportStatus)
   export is Foundations.LongRunningOperation<
     {
       /**
@@ -250,7 +250,7 @@ interface TextAuthoringProjects {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:import")
   @post
-  @pollingOperation(TextAuthoringProjects.getImportStatus)
+  @pollingOperation(TextAuthoringProject.getImportStatus)
   `import` is Foundations.LongRunningOperation<
     {
       /**
@@ -283,7 +283,7 @@ interface TextAuthoringProjects {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:train")
   @post
-  @pollingOperation(TextAuthoringProjects.getTrainingStatus)
+  @pollingOperation(TextAuthoringProject.getTrainingStatus)
   train is Foundations.LongRunningOperation<
     {
       /**
@@ -320,7 +320,7 @@ interface TextAuthoringProjects {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}/:cancel")
   @post
-  @pollingOperation(TextAuthoringProjects.getTrainingStatus)
+  @pollingOperation(TextAuthoringProject.getTrainingStatus)
   cancelTrainingJob is Foundations.LongRunningOperation<
     {
       /**
@@ -346,7 +346,7 @@ interface TextAuthoringProjects {
   getProjectDeletionStatus is languageOperations.ResourceRead<TextAnalysisAuthoringProjectDeletionJobState>;
 }
 
-interface TextAuthoringDeployments {
+interface TextAuthoringDeployment {
   /**
    * Gets the details of a deployment.
    */
@@ -358,7 +358,7 @@ interface TextAuthoringDeployments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}")
   @delete
-  @pollingOperation(TextAuthoringDeployments.getDeploymentStatus)
+  @pollingOperation(TextAuthoringDeployment.getDeploymentStatus)
   deleteDeployment is Foundations.LongRunningOperation<
     {
       /**
@@ -385,7 +385,7 @@ interface TextAuthoringDeployments {
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
   @post
   @pollingOperation(
-    TextAuthoringDeployments.getDeploymentDeleteFromResourcesStatus
+    TextAuthoringDeployment.getDeploymentDeleteFromResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
   deleteDeploymentFromResources is Foundations.LongRunningOperation<
@@ -430,7 +430,7 @@ interface TextAuthoringDeployments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/deployments/:swap")
   @post
-  @pollingOperation(TextAuthoringDeployments.getSwapDeploymentsStatus)
+  @pollingOperation(TextAuthoringDeployment.getSwapDeploymentsStatus)
   swapDeployments is Foundations.LongRunningOperation<
     {
       /**
@@ -461,7 +461,7 @@ interface TextAuthoringDeployments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/resources/:assign")
   @post
-  @pollingOperation(TextAuthoringDeployments.getAssignDeploymentResourcesStatus)
+  @pollingOperation(TextAuthoringDeployment.getAssignDeploymentResourcesStatus)
   @added(Versions.v2023_04_15_preview)
   assignDeploymentResources is Foundations.LongRunningOperation<
     {
@@ -488,7 +488,7 @@ interface TextAuthoringDeployments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/resources/:unassign")
   @post
-  @pollingOperation(TextAuthoringDeployments.getUnassignDeploymentResourcesStatus)
+  @pollingOperation(TextAuthoringDeployment.getUnassignDeploymentResourcesStatus)
   @added(Versions.v2023_04_15_preview)
   unassignDeploymentResources is Foundations.LongRunningOperation<
     {
@@ -527,7 +527,7 @@ interface TextAuthoringDeployments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}")
   @put
-  @pollingOperation(TextAuthoringDeployments.getDeploymentStatus)
+  @pollingOperation(TextAuthoringDeployment.getDeploymentStatus)
   deployProject is Foundations.LongRunningOperation<
     {
       /**
@@ -554,7 +554,7 @@ interface TextAuthoringDeployments {
   >; 
 }
 
-interface TextAuthoringModels { 
+interface TextAuthoringModel { 
 
   /**
    * Gets the details of an exported model.
@@ -568,7 +568,7 @@ interface TextAuthoringModels {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @put
-  @pollingOperation(TextAuthoringModels.getExportedModelJobStatus)
+  @pollingOperation(TextAuthoringModel.getExportedModelJobStatus)
   @added(Versions.v2023_04_15_preview)
   createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
@@ -601,7 +601,7 @@ interface TextAuthoringModels {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
-  @pollingOperation(TextAuthoringModels.getExportedModelJobStatus)
+  @pollingOperation(TextAuthoringModel.getExportedModelJobStatus)
   @added(Versions.v2023_04_15_preview)
   deleteExportedModel is Foundations.LongRunningOperation<
     {
@@ -670,7 +670,7 @@ interface TextAuthoringModels {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
-  @pollingOperation(TextAuthoringModels.getEvaluationStatus)
+  @pollingOperation(TextAuthoringModel.getEvaluationStatus)
   @added(Versions.v2023_04_15_preview)
   evaluateModel is Foundations.LongRunningOperation<
     {
@@ -700,7 +700,7 @@ interface TextAuthoringModels {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
   @post
-  @pollingOperation(TextAuthoringModels.getLoadSnapshotStatus)
+  @pollingOperation(TextAuthoringModel.getLoadSnapshotStatus)
   loadSnapshot is Foundations.LongRunningOperation<
     {
       /**
