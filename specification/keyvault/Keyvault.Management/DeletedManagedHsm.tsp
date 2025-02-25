@@ -41,10 +41,10 @@ interface DeletedManagedHsms {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("purge")
   @operationId("ManagedHsms_PurgeDeleted")
-  purgeDeleted is ArmResourceActionAsync<
+  purgeDeleted is ArmResourceActionAsyncBase<
     DeletedManagedHsm,
     void,
-    void,
+    Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 }

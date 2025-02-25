@@ -652,6 +652,8 @@ model AccessPolicyEntry {
   /**
    * The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @format("uuid")
   tenantId: string;
 
   /**
@@ -662,6 +664,8 @@ model AccessPolicyEntry {
   /**
    *  Application ID of the client making request on behalf of a principal
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @format("uuid")
   applicationId?: string;
 
   /**
@@ -712,6 +716,7 @@ model NetworkRuleSet {
   /**
    * The list of IP address rules.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   ipRules?: IPRule[];
 
   /**
@@ -1832,6 +1837,7 @@ model SecretProperties {
  * The secret management attributes.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 model SecretAttributes extends Attributes {}
 
 /**
@@ -1846,24 +1852,28 @@ model Attributes {
   /**
    * Not before date in seconds since 1970-01-01T00:00:00Z.
    */
-  notBefore?: plainTime;
+  @encode("unixTimestamp", int32)
+  notBefore?: utcDateTime;
 
   /**
    * Expiry date in seconds since 1970-01-01T00:00:00Z.
    */
-  expires?: plainTime;
+  @encode("unixTimestamp", int32)
+  expires?: utcDateTime;
 
   /**
    * Creation time in seconds since 1970-01-01T00:00:00Z.
    */
+  @encode("unixTimestamp", int32)
   @visibility("read")
-  created?: plainTime;
+  created?: utcDateTime;
 
   /**
    * Last updated time in seconds since 1970-01-01T00:00:00Z.
    */
+  @encode("unixTimestamp", int32)
   @visibility("read")
-  updated?: plainTime;
+  updated?: utcDateTime;
 }
 
 /**

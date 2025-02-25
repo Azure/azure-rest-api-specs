@@ -32,10 +32,7 @@ interface Vaults {
   /**
    * Create or update a key vault in the specified subscription.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Vault,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Vault>;
 
   /**
    * Update a key vault in the specified subscription.
@@ -88,7 +85,7 @@ interface Vaults {
   updateAccessPolicy is ArmResourceActionSync<
     Vault,
     VaultAccessPolicyParameters,
-    ArmResponse<VaultAccessPolicyParameters> | ArmResourceCreatedSyncResponse<VaultAccessPolicyParameters>,
+    ArmResponse<VaultAccessPolicyParameters> | ArmCreatedResponse<VaultAccessPolicyParameters>,
     Parameters = {
       /**
        * Name of the operation

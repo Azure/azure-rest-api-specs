@@ -36,7 +36,10 @@ interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the key vault.
    */
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is ArmResourceRead<
+    PrivateEndpointConnection,
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | NoContentResponse
+  >;
 
   /**
    * Updates the specified private endpoint connection associated with the key vault.

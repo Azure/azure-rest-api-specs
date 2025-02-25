@@ -24,6 +24,7 @@ model Secret is Azure.ResourceManager.TrackedResource<SecretProperties, false> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 @armResourceOperations
 interface Secrets {
   /**

@@ -32,6 +32,7 @@ interface VaultsOperations {
    * The List operation gets information about the vaults associated with the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
   @operationId("Vaults_List")
   @route("/subscriptions/{subscriptionId}/resources")
   @get
@@ -51,7 +52,7 @@ interface VaultsOperations {
     $top?: int32,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<Resource>> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<Azure.ResourceManager.CommonTypes.Resource>> | ErrorResponse;
 
   /**
    * Checks that the vault name is valid and is not already in use.
@@ -95,3 +96,7 @@ interface ManagedHsmsOperations {
     Parameters = {}
   >;
 }
+
+@@doc(VaultsOperations.checkNameAvailability::parameters.body,
+  "The name of the vault."
+);

@@ -28,7 +28,10 @@ interface ManagedHsms {
   /**
    * Gets the specified managed HSM Pool.
    */
-  get is ArmResourceRead<ManagedHsm>;
+  get is ArmResourceRead<
+    ManagedHsm,
+    Response = ArmResourceUpdatedResponse<ManagedHsm> | NoContentResponse
+  >;
 
   /**
    * Create or update a managed HSM Pool in the specified subscription.
@@ -47,8 +50,15 @@ interface ManagedHsms {
   /**
    * Update a managed HSM Pool in the specified subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   @parameterVisibility
-  update is ArmCustomPatchAsync<ManagedHsm, PatchModel = ManagedHsm>;
+  update is ArmCustomPatchAsync<
+    ManagedHsm,
+    PatchModel = ManagedHsm,
+    Response = ArmResourceUpdatedResponse<ManagedHsm> | (ArmAcceptedLroResponse & {
+      @bodyRoot _: ManagedHsm;
+    })
+  >;
 
   /**
    * Deletes the specified managed HSM Pool.

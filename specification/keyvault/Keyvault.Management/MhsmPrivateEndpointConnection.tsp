@@ -48,7 +48,8 @@ interface MhsmPrivateEndpointConnections {
   @operationId("MHSMPrivateEndpointConnections_Put")
   put is ArmResourceCreateOrReplaceSync<
     MhsmPrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<MhsmPrivateEndpointConnection>
+    Response = ArmResourceUpdatedResponse<MhsmPrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -59,7 +60,7 @@ interface MhsmPrivateEndpointConnections {
   @operationId("MHSMPrivateEndpointConnections_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     MhsmPrivateEndpointConnection,
-    Response = ArmResponse<MhsmPrivateEndpointConnection> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmResponse<MhsmPrivateEndpointConnection> | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
