@@ -170,11 +170,7 @@ interface AutoUpgradeProfileOperations {
       AutoUpgradeProfile,
       void,
       GenerateResponse,
-      BaseParameters<AutoUpgradeProfile> & {
-        @header("StartUpdateRun")
-        @doc("Whether to start the update run after it is created in the generate operation. Empty value indicates that update run will not be started.")
-        startUpdateRun?: string;
-      },
+      BaseParameters<AutoUpgradeProfile>,
       LroHeaders = ArmAsyncOperationHeader
       & ArmLroLocationHeader
       & IfMatchParameters<AutoUpgradeProfile>
