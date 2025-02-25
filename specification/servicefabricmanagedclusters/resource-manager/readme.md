@@ -4,13 +4,18 @@
 
 This is the AutoRest configuration file for Service Fabric Managed Clusters.
 
-Azure Service Fabric Managed Clusters are an evolution of the Azure Service Fabric cluster resource model where all the underlying resources for the cluster are abstracted away and managed by Azure on your behalf.
+Azure Service Fabric Managed Clusters are an evolution of the Azure Service Fabric cluster resource model where all the
+underlying resources for the cluster are abstracted away and managed by Azure on your behalf.
 
-[Azure Service Fabric](http://aka.ms/ServiceFabric) is a distributed systems platform that makes it easy to package, deploy, and manage scalable and reliable microservices.
+[Azure Service Fabric](http://aka.ms/ServiceFabric) is a distributed systems platform that makes it easy to package,
+deploy, and manage scalable and reliable microservices.
 
 ---
+
 ## Getting Started
-To build the SDK for ServiceFabricManagedClustersManagementClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+
+To build the SDK for ServiceFabricManagedClustersManagementClient, simply [Install AutoRest]
+(https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -35,7 +40,8 @@ directive:
   - suppress: LongRunningResponseStatusCode
     reason: The validation tools do not properly recognize 202 as a supported response code.
   - suppress: SummaryAndDescriptionMustNotBeSame
-    reason: There are a lot of APIs with missing summary content. While it is being worked on disabling this to ensure that we catch and fix other violations.
+    reason: There are a lot of APIs with missing summary content. While it is being worked on disabling this to ensure
+    that we catch and fix other violations.
   - suppress: TrackedResourceListByImmediateParent
     reason: Proxy resources are not properly evaluated by the validation toolset.
   - suppress: DefinitionsPropertiesNamesCamelCase
@@ -51,11 +57,16 @@ directive:
   - suppress: TrackedResourceListBySubscription
     reason: Proxy resources are not properly evaluated by the validation toolset.
   - suppress: DescriptionAndTitleMissing
-    reason: There are a lot of APIs with missing titles. While it is being worked on disabling this to ensure that we catch and fix other violations.
+    reason: There are a lot of APIs with missing titles. While it is being worked on disabling this to ensure that we
+    catch and fix other violations.
   - suppress: Example Validations
-    reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
+    reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to
+    selectively disable the validation for a particular example or paths, all of the example validation is being turned
+    off.
   - suppress: Example Validations
-    reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
+    reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to
+    selectively disable the validation for a particular example or paths, all of the example validation is being turned
+    off.
   - suppress: R3006
     where:
       - $.definitions.ManagedCluster.properties
@@ -75,9 +86,7 @@ These settings apply only when `--tag=package-2024-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2024-11-preview'
 input-file:
-- Microsoft.ServiceFabric/preview/2024-11-01-preview/managedapplication.json
-- Microsoft.ServiceFabric/preview/2024-11-01-preview/managedcluster.json
-- Microsoft.ServiceFabric/preview/2024-11-01-preview/nodetype.json
+- Microsoft.ServiceFabric/preview/2024-11-01-preview/servicefabricmanagedclusters.json
 ```
 
 ### Tag: package-2024-09-preview
@@ -301,6 +310,7 @@ input-file:
 ```
 
 ### AutoRest v3 Suppressions
+
 ``` yaml
 suppressions:
     
@@ -311,12 +321,13 @@ suppressions:
     reason: service created with the 202 pattern before this rule was introduced.
   
   - code: LroErrorContent
-    reason: Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215) but its going to take some time because we generate the swagger from an internal repo that currently can't reference the common types.
+    reason: Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215) but its going to take some time
+    because we generate the swagger from an internal repo that currently can't reference the common types.
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
