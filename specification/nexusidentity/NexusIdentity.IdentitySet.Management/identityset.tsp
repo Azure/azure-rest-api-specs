@@ -57,10 +57,10 @@ model IdentitySetResourceProperties {
   notificationUrl: url;
 
   @doc("The storage account to which data related to role assignments will be stored for notifications")
-  storageAccountName: string;
+  storageAccountName?: string;
 
   @doc("The URI of the keyvault which stores the keys for encryption and decryption of the sensitive client data")
-  keyVaultUri: url;
+  keyVaultUri?: url;
 
   @doc("The status of the last operation.")
   @visibility("read")
