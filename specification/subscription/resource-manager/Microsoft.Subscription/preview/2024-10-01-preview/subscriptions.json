@@ -600,10 +600,41 @@
         "operationId": "Transfers_GetById",
         "x-ms-examples": {
           "GetTransferById": {
-            "$ref": "./examples/getTransferById.json"
+            "$ref": "./examples/getTransfer.json"
           }
         },
         "description": "Get transfer details by transfer id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/transferIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transfer details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Transfers_CancelById",
+        "x-ms-examples": {
+          "GetTransferById": {
+            "$ref": "./examples/cancelTransfer.json"
+          }
+        },
+        "description": "Cancel transfer by transfer id.",
         "parameters": [
           {
             "$ref": "#/parameters/transferIdParameter"
@@ -1368,6 +1399,9 @@
           },
           "destination": {
             "$ref": "#/definitions/TransferSourceOrDestination"
+          },
+          "canceledBy":{
+            "$ref": "#/definitions/TransferCancellation"
           },
           "lastUpdatedTime": {
             "description": "Last updated time.",
