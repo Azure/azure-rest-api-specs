@@ -4188,19 +4188,33 @@
       "description": "The configuration for monitoring changes in a connected storage.",
       "type": "object",
       "properties": {
-        "namespaceResourceId": {
+        "systemTopicResourceId": {
           "type": "string",
-          "description": "The resource id of the Azure Event Grid Namespace.",
+          "description": "The resource id of the Azure Event Grid System Topic.",
           "readOnly": false
         },
-        "topicName": {
+        "messageQueue": {
+          "description": "The Azure Storage queue used for storage events.",
+          "$ref": "#/definitions/StorageMonitorQueue"
+        },
+        "poisonQueue": {
+          "description": "The Azure Storage queue used for events that failed to be processed.",
+          "$ref": "#/definitions/StorageMonitorQueue"
+        }
+      }
+    },
+    "StorageMonitorQueue": {
+      "description": "An Azure Storage queue used for ADLS Gen 2 storage events.",
+      "type": "object",
+      "properties": {
+        "name": {
           "type": "string",
-          "description": "The name of the namespace topic within the specified namespace.",
+          "description": "The name of the Azure Storage queue.",
           "readOnly": false
         },
-        "eventSubscriptionName": {
-          "type": "string",
-          "description": "The name of the event subscription associated with the given namespace topic that contains storage events.",
+        "timeToLiveInSeconds": {
+          "type": "int64",
+          "description": "The Azure Storage queue message time-to-live in seconds.",
           "readOnly": false
         }
       }

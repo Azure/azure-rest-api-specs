@@ -9,12 +9,18 @@
       "location": "westus",
       "properties": {
         "storageConfiguration": {
-          "storageResourceId": "/subscriptions/ab309d4e-4c2e-4241-be2e-08e1c8dd4246/resourceGroups/rgname/providers/Microsoft.Storage/storageAccounts/accountname",
+          "storageResourceId": "/subscriptions/aa39e6f9-c22e-4935-9ef1-1e4c9aa3c130/resourceGroups/rgname/providers/Microsoft.Storage/storageAccounts/accountname",
           "fileSystemName": "fileSystemName",
           "storageMonitorConfiguration": {
-            "namespaceResourceId": "/subscriptions/ab309d4e-4c2e-4241-be2e-08e1c8dd4246/resourceGroups/rgname/providers/Microsoft.EventGrid/namespaces/namespacename",
-            "topicName": "topicName",
-            "eventSubscriptionName": "eventSubscriptionName"
+            "systemTopicResourceId": "/subscriptions/aa39e6f9-c22e-4935-9ef1-1e4c9aa3c130/resourceGroups/rgname/providers/Microsoft.EventGrid/systemTopics/topicname",
+            "messageQueue": {
+              "name": "queuename1",
+              "timeToLiveInSeconds": 2592000
+            },
+            "poisonQueue": {
+              "name": "queuename2",
+              "timeToLiveInSeconds": 2592000
+            }
           }
         },
         "enableDataPartitions": false
@@ -63,12 +69,18 @@
             }
           },
           "storageConfiguration": {
-            "storageResourceId": "/subscriptions/ab309d4e-4c2e-4241-be2e-08e1c8dd4246/resourceGroups/rgname/providers/Microsoft.Storage/storageAccounts/accountname",
+            "storageResourceId": "/subscriptions/aa39e6f9-c22e-4935-9ef1-1e4c9aa3c130/resourceGroups/rgname/providers/Microsoft.Storage/storageAccounts/accountname",
             "fileSystemName": "fileSystemName",
             "storageMonitorConfiguration": {
-              "namespaceResourceId": "/subscriptions/ab309d4e-4c2e-4241-be2e-08e1c8dd4246/resourceGroups/rgname/providers/Microsoft.EventGrid/namespaces/namespacename",
-              "topicName": "topicName",
-              "eventSubscriptionName": "eventSubscriptionName"
+              "systemTopicResourceId": "/subscriptions/aa39e6f9-c22e-4935-9ef1-1e4c9aa3c130/resourceGroups/rgname/providers/Microsoft.EventGrid/systemTopics/topicname",
+              "messageQueue": {
+                "name": "queuename1",
+                "timeToLiveInSeconds": 2592000
+              },
+              "poisonQueue": {
+                "name": "queuename2",
+                "timeToLiveInSeconds": 2592000
+              }
             }
           },
           "enableDataPartitions": false
