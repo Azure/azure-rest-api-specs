@@ -53,25 +53,21 @@ model PlannedQuotaResourceProperties {
   provisioningState?: PlannedQuotaProvisioningState;
 
   @added(Versions.v2024_06_24_preview)
+  @doc("The planned quota request identifier.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  requestId?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
+  @added(Versions.v2024_06_24_preview)
   @doc("Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.")
   @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
-  fulfilledPlan?: EventData;
+  fulfilledPlan?: {};
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
   @added(Versions.v2024_06_24_preview)
   @doc("Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.")
   @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
-  alternatives?: EventData;
-}
-
-@added(Versions.v2024_06_24_preview)
-@doc("Provisioning result event data.")
-model EventData {
-  @doc("The CIS event identifier.")
-  eventId: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
-  @doc("The exact provisioning result value returned from Planned Quota.")
-  value?: {};
+  alternatives?: {};
 }
 
 @doc("plannedQuota Property Binding")

@@ -240,23 +240,6 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
-    "EventData": {
-      "type": "object",
-      "description": "Provisioning result event data.",
-      "properties": {
-        "eventId": {
-          "type": "string",
-          "description": "The CIS event identifier."
-        },
-        "value": {
-          "type": "object",
-          "description": "The exact provisioning result value returned from Planned Quota."
-        }
-      },
-      "required": [
-        "eventId"
-      ]
-    },
     "PlannedQuotaProvisioningState": {
       "type": "string",
       "description": "Provisioning status of the resource.",
@@ -379,13 +362,18 @@
           "description": "Provisioning status of the resource.",
           "readOnly": true
         },
+        "requestId": {
+          "type": "string",
+          "description": "The planned quota request identifier.",
+          "readOnly": true
+        },
         "fulfilledPlan": {
-          "$ref": "#/definitions/EventData",
+          "type": "object",
           "description": "Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.",
           "readOnly": true
         },
         "alternatives": {
-          "$ref": "#/definitions/EventData",
+          "type": "object",
           "description": "Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.",
           "readOnly": true
         }
