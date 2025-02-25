@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
   title: "Azure Batch",
 })
 @versioned(Azure.Batch.Versions)
-@doc("Azure Batch provides Cloud-scale job scheduling and compute management.")
+@doc("Azure Batch provides Cloud-scale job scheduling and compute management. test")
 @server(
   "{endpoint}",
   "Azure Batch provides Cloud-scale job scheduling and compute management.",
