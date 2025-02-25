@@ -124,6 +124,14 @@ interface RAISvc {
       @doc("Operation id.")
       @path
       operationId: string;
+
+      @doc("Api key.")
+      @header
+      apiKey?: string;
+
+      @doc("Model Endpoint.")
+      @header
+      modelEndpoint?: string;
     },
     string
   >;
