@@ -2396,6 +2396,18 @@
           "type": "string",
           "description": "The database name."
         },
+        "pgSqlInstanceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "discovered PGSQL Instance Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridInventory/PGSQLSites/PGSQLInstances"
+              }
+            ]
+          }
+        },
         "encoding": {
           "$ref": "#/definitions/Encoding",
           "description": "PGSQL database encoding."

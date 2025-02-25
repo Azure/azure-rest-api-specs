@@ -987,6 +987,15 @@ model PgsqlDatabaseResourcePatch {
   databaseDisplayName?: string;
 
   /**
+   * discovered PGSQL Instance Id
+   */
+  pgSqlInstanceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridInventory/PGSQLSites/PGSQLInstances";
+    }
+  ]>;
+
+  /**
    * PGSQL database encoding.
    */
   encoding?: Encoding;
