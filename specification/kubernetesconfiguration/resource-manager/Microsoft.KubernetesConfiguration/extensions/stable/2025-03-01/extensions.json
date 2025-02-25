@@ -48,6 +48,9 @@
           },
           "Create Extension with Plan": {
             "$ref": "./examples/CreateExtensionWithPlan.json"
+          },
+          "Create Extension With Identity": {
+            "$ref": "./examples/CreateExtensionWithIdentity.json"
           }
         },
         "parameters": [
@@ -620,13 +623,19 @@
               "description": "Flag to note if this extension is a system extension",
               "type": "boolean",
               "default": false
+            },
+            "workloadIdentityEnabled":{
+              "readOnly": true,
+              "description": "Whether the provided identity is a workload identity. If an identity is provided by user, this will be set to true. Otherwise will be false.",
+              "type": "boolean",
+              "default": false
             }
           }
         },
         "identity": {
           "description": "Identity of the Extension resource",
           "x-nullable": true,
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
+          "$ref": "#/definitions/ManagedServiceIdentity"
         },
         "systemData": {
           "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
@@ -717,8 +726,48 @@
               }
             }
           }
+        },
+        "identity": {
+          "description": "Identity of the Extension resource",
+          "x-nullable": true,
+          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       }
+    },
+    "ManagedServiceIdentity": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the resource. Only user assigned identities are supported.",
+          "enum": [
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "Identity for the resource."
     }
   },
   "parameters": {
