@@ -46,6 +46,15 @@ input-file:
   - stable/2025-01-01/managedClusters.json
 ```
 
+### Tag: package-preview-2025-01
+
+These settings apply only when `--tag=package-preview-2025-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-01'
+input-file:
+  - preview/2025-01-02-preview/managedClusters.json
+```
+
 ### Tag: package-2024-10
 
 These settings apply only when `--tag=package-2024-10` is specified on the command line.
