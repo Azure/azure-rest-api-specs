@@ -56,6 +56,14 @@ model IdentitySetResourceProperties {
   @doc("The URL to which the Nexus Identity Service will send notifications.")
   notificationUrl: url;
 
+  @doc("The application Id of Identity Set resource")
+  @visibility("read")
+  appId?: string;
+
+  @doc("The application name of Identity Set resource")
+  @visibility("read")
+  appName?: string;
+
   @doc("The storage account to which data related to role assignments will be stored for notifications")
   storageAccountName?: string;
 
