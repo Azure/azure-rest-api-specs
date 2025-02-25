@@ -21,7 +21,8 @@ model DiagnosticProperties {
 
 @doc("A Diagnostic resource.")
 @resource("diagnostics")
-model Diagnostic is Azure.ResourceManager.ProxyResource<DiagnosticProperties> {
+model Diagnostic
+  is Azure.ResourceManager.TrackedResource<DiagnosticProperties> {
   @doc("Name of Diagnostic.")
   @maxLength(90)
   @minLength(1)
