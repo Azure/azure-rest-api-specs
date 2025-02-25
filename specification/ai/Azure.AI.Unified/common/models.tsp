@@ -223,14 +223,32 @@ model OutputPathAssetReference extends AssetReferenceBase {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Base definition for an asset.")
-model AssetBase extends ResourceBase {
-  @doc("If the name version are system generated (anonymous registration).")
-  @visibility("read", "create")
-  isAnonymous?: boolean;
-
-  @doc("Is the asset archived?")
+model AssetBase  {
+  @doc("Asset stage")
   @visibility("read", "create", "update")
-  isArchived?: boolean;
+  stage?: string;
+
+  @doc("A unique identifier for the asset, assetId probably?")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
+  @doc("The version of the resource")
+  @visibility("read")
+  version?: string;
+
+  @doc("The asset description text.")
+  description?: string;
+
+  @doc("Tag dictionary. Tags can be added, removed, and updated.")
+  tags?: Record<string>;
+
+  @doc("System data of the resource")
+  @visibility("read")
+  systemData?: SystemData;
 }
 
 @doc("Enum to determine the type of data.")
@@ -264,26 +282,6 @@ model AssetContainer {
   name?: string;
 }
 
-@doc("ResourceBase definition")
-model ResourceBase {
-  @doc("A unique identifier for the asset, assetId probably?")
-  @visibility("read")
-  id?: string;
-
-  @doc("The name of the resource")
-  @visibility("read")
-  name?: string;
-
-  @doc("The asset description text.")
-  description?: string;
-
-  @doc("Tag dictionary. Tags can be added, removed, and updated.")
-  tags?: Record<string>;
-
-  @doc("System data of the resource")
-  @visibility("read")
-  systemData?: SystemData;
-}
 
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
