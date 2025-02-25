@@ -108,10 +108,112 @@ model SampleGenerator {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model StringCheckConfig extends GraderConfigBase {
+  Type: string = "string-check-grader";
+  Lhs: VRef;
+  Rhs: VRef;
+  CaseSensitive: boolean;
+  Operation: string;
+  TrueGrade: integer;
+  FalseGrade: integer;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model StringValidityConfig extends GraderConfigBase {
+  Type: string = "string-validity-grader";
+  Operation: string;
+  TrueGrade: integer;
+  FalseGrade: integer;
+  Reference: VRef;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model ChatCriteriaModelGraderConfig extends GraderConfigBase {
+  Type: string = "chat-criteria-model-grader";
+  ModelName?: string;
+  TrueGrade: integer;
+  FalseGrade: integer;
+  Conversation?: VRef;
+  Response: VRef;
+  Criteria: JsonSchema;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model JsonSchemaConfig extends GraderConfigBase {
+  Type: string = "json-schema-grader";
+  JsonSchema: JsonSchema;
+  Reference: VRef;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model SentimentClassificationConfig extends GraderConfigBase {
+  Type: string = "sentiment-classification-model-grader";
+  ModelName: string;
+  NegativeGrade: integer;
+  NeutralGrade: integer;
+  PositiveGrade: integer;
+  UnsureGrade: integer;
+  Text: VRef;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model FactualityConfig extends GraderConfigBase {
+  Type: string = "factuality-model-grader";
+  ModelName: string;
+  AgreementGrade: integer;
+  DifferButFactualAgreementGrade: integer;
+  DisagreementGrade: integer;
+  SubsetGrade: integer;
+  SupersetGrade: integer;
+  Question: VRef;
+  Reference: VRef;
+  Submission: VRef;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model SemanticSimilarityConfig extends GraderConfigBase {
+  Type: string = "discrete-classification-model-grader";
+  ModelName: string;
+  InvalidGrade: integer;
+  Prompt: Prompt;
+  Labels: Label[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model JsonSchema {
+  Type: string;
+  Value: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model VRef {
+  Type: string;
+  NamespaceName: string;
+  VariableName: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model Prompt {
+  Type: string;
+  Template: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model Label {
+  Text: string;
+  Grade: integer;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model GraderConfigBase {
+  Type: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 model Grader {
   Name: string;
   Description: string;
-  Config: unknown;
+  Config: GraderConfigBase;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
