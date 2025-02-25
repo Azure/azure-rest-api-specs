@@ -1491,12 +1491,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/experimentations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/experimentation": {
       "get": {
         "tags": [
           "Experimentation"
         ],
-        "description": "Lists the experimentations for a given configuration store.",
+        "description": "Lists experimentation for a given configuration store.",
         "operationId": "Experimentation_List",
         "parameters": [
           {
@@ -1528,7 +1528,7 @@
         },
         "x-ms-examples": {
           "Experimentation_Get": {
-            "$ref": "./examples/ConfigurationStoresListExperimentations.json"
+            "$ref": "./examples/ConfigurationStoresListExperimentation.json"
           }
         },
         "x-ms-pageable": {
@@ -1536,7 +1536,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/experimentations/{experimentationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/experimentation/{experimentationName}": {
       "get": {
         "tags": [
           "Experimentation"
@@ -3049,7 +3049,7 @@
       }
     },
     "ExperimentationListResult": {
-      "description": "The result of a request to list experimentations.",
+      "description": "The result of a request to list experimentation.",
       "type": "object",
       "properties": {
         "value": {
@@ -3101,12 +3101,12 @@
           "type": "string"
         },
         "onlineExperimentationWorkspaceResourceId": {
-          "description": "The resource ID of the online experimentation workspace.",
+          "description": "The resource ID of the managed Microsoft.OnlineExperimentation/workspaces resource.",
           "type": "string",
           "readOnly": true
         },
         "storageAccountResourceId": {
-          "description": "The resource ID of the storage account.",
+          "description": "The resource ID of the managed Microsoft.Storage/storageAccounts resource.",
           "type": "string",
           "readOnly": true
         },
@@ -3187,7 +3187,7 @@
       "description": "The name of the experimentation.",
       "required": true,
       "type": "string",
-      "pattern": "^experimentation$",
+      "pattern": "^Experimentation$",
       "x-ms-parameter-location": "method"
     }
   },
