@@ -31,7 +31,7 @@ interface Evaluations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Creates an evaluation.")
-  @route("/evaluations/create")
+  @route("/evaluations:create")
   @post
   create is Azure.Core.Foundations.Operation<
     {
