@@ -44,3 +44,16 @@ options:
     dev-options:
       loglevel: info
     flavor: azure
+  "@azure-tools/typespec-ts":
+    generateMetadata: true
+    generateTest: true
+    azureSdkForJs: true
+    package-dir: "eventgrid"
+    packageDetails:
+      name: "@azure/eventgrid"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/sdk/messaging/eventgrid/aznamespaces"
+    module-version: "0.0.1"
+    emitter-output-dir: "{project-root}"
+    slice-elements-byval: true

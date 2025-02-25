@@ -28,3 +28,4 @@ using Microsoft.AzureTerraform;
 @@clientName(targetProvider.azapi, "AzApi", "csharp");
 @@clientName(targetProvider.azurerm, "AzureRM", "csharp");
 @@clientName(Terraform.exportTerraform, "ExportTerraform", "csharp");
+@@clientName(Microsoft.AzureTerraform, "TerraformMgmt", "python");

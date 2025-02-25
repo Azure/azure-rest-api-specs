@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/servicenetworking"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -15,3 +18,35 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/TrafficController.json"
     omit-unreachable-types: true
     use-read-only-status-schema: true
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    generateSample: true
+    package-dir: "arm-servicenetworking"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-servicenetworking"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-servicenetworking"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/servicenetworking"
+    package-dir: "armservicenetworking"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-servicenetworking"
+    flavor: "azure"
+    service-name: "Traffic Controller"

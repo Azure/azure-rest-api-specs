@@ -65,7 +65,6 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-net-track2
 ```
 ## Az
 
@@ -86,3 +85,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
