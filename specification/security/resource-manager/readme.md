@@ -106,6 +106,16 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-01'
+input-file:
+  - Microsoft.Security/stable/2025-01-01/defenderForStorageSettings.json
+  - Microsoft.Security/stable/2025-01-01/operations.json
+```
+
 ### Tag: package-preview-2024-10
 
 These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
@@ -523,7 +533,6 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
-- Microsoft.Security/preview/2024-10-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
@@ -540,7 +549,6 @@ input-file:
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
-- Microsoft.Security/preview/2024-10-01-preview/defenderForStorageSettings.json
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
@@ -575,6 +583,8 @@ input-file:
 - Microsoft.Security/stable/2024-08-01/securityStandards.json
 - Microsoft.Security/stable/2024-08-01/standardAssignments.json
 - Microsoft.Security/stable/2024-08-01/customRecommedations.json
+- Microsoft.Security/stable/2025-01-01/operations.json
+- Microsoft.Security/stable/2025-01-01/defenderForStorageSettings.json
 
 # Autorest suppressions
 suppressions:
