@@ -176,7 +176,7 @@ model FleetCredentialResult {
 model FleetCredentialResults {
   @visibility("read")
   @doc("Array of base64-encoded Kubernetes configuration files.")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   kubeconfigs?: FleetCredentialResult[];
 }
 

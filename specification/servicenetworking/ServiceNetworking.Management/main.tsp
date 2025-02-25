@@ -207,7 +207,7 @@ model TrafficControllerProperties {
 
   /** Security Policy Configuration */
   @added(Versions.v2024_05_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   securityPolicyConfigurations?: SecurityPolicyConfigurations;
 
   /** The status of the last operation. */

@@ -72,7 +72,7 @@ model CloudFormationStackProperties {
 @doc("Definition of awsCloudFormationStack")
 model AwsCloudFormationStackProperties {
   @doc("Property capabilities")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   capabilities?: Capabilities[];
 
   @doc("Property changeSetId")
@@ -94,11 +94,11 @@ model AwsCloudFormationStackProperties {
   lastUpdateTime?: string;
 
   @doc("Property notificationARNs")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   notificationARNs?: string[];
 
   @doc("Property outputs")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   outputs?: Output[];
 
   @doc("Property parameters")
@@ -132,7 +132,7 @@ model AwsCloudFormationStackProperties {
   stackStatusReason?: string;
 
   @doc("Property tags")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   tags?: Tag[];
 
   @doc("Property templateBody")

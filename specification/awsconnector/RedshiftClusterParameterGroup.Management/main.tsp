@@ -88,11 +88,11 @@ model AwsRedshiftClusterParameterGroupProperties {
   parameterGroupName?: string;
 
   @doc("An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   parameters?: Parameter[];
 
   @doc("An array of key-value pairs to apply to this resource.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   tags?: Tag[];
 }
 
