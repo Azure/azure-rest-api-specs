@@ -246,23 +246,27 @@ union DatasetType {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("AssetContainer definition")
-model AssetContainer extends ResourceBase {
-  @doc("Is the asset archived?")
-  @visibility("read", "create", "update")
-  isArchived?: boolean;
-
-  @doc("The latest version inside this container.")
-  @visibility("read")
-  latestVersion?: string;
-
+model AssetContainer {
   @doc("The next auto incremental version")
   @visibility("read")
   nextVersion?: string;
+
+  @doc("Key is label name, value is version.")
+  @visibility("read, update")
+  labels: Record<string>;
+
+  @doc("A unique identifier for the asset, assetId probably?")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
 }
 
 @doc("ResourceBase definition")
 model ResourceBase {
-  @doc("A unique identifier for the asset")
+  @doc("A unique identifier for the asset, assetId probably?")
   @visibility("read")
   id?: string;
 
@@ -272,9 +276,6 @@ model ResourceBase {
 
   @doc("The asset description text.")
   description?: string;
-
-  @doc("The asset property dictionary.")
-  properties?: Record<string>;
 
   @doc("Tag dictionary. Tags can be added, removed, and updated.")
   tags?: Record<string>;
