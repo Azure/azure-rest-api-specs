@@ -22,7 +22,7 @@ model EvaluatorConfiguration {
   id: string;
 
   @doc("Initialization parameters of the evaluator.")
-  initParams?: Record<string>;
+  initParams?: Record<unkown>;
 
   @doc("Data parameters of the evaluator.")
   dataMapping?: Record<string>;
@@ -32,47 +32,16 @@ model EvaluatorConfiguration {
 @doc("Abstract data class.")
 @discriminator("type")
 model InputData {
-  @doc("Evaluation input data")
-  id: string;
-}
-
-@doc("Data Source for Application Insight.")
-model AppInsightsConfiguration extends InputData {
-  type: "app_insights";
-
-  @doc("Application Insight connection string.")
-  connectionString: string;
-
-  @doc("Query to fetch data.")
-  query: string;
+  @doc("Type of the data")
+  type: string;
 }
 
 @doc("Dataset as source for evaluation.")
 model Dataset extends InputData {
   type: "dataset";
-}
 
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
-@discriminator("type")
-@doc("Evaluation Target.")
-model EvaluationTarget {
-  @doc("Name of the evaluation target.")
-  name?: string;
-}
-
-@doc("Base Model and prompt for evaluation.")
-model BaseModel extends EvaluationTarget {
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
-  @doc("Base model for evaluation.")
-  model_config: Record<Record<unknown>>;
-
-  @doc("System prompt to be used with base model. This property will hold prompt asset id.")
-  prompt: string;
-
-  @doc("parameters for evaluation.")
-  parameters: Record<string>;
-
-  type: "base_model";
+  @doc("Evaluation input data")
+  id: string;
 }
 
 @doc("Evaluation Definition")
@@ -105,9 +74,6 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
-
-  @doc("Evaluation Target.")
-  evaluationTarget?: EvaluationTarget;
 }
 
 @doc("Paged evaluation items")
@@ -121,17 +87,4 @@ model PagedEvaluation {
   @doc("The link to the next page of items")
   @nextLink
   nextLink?: ResourceLocation<Evaluation>;
-}
-
-@doc("Update Evaluation Request")
-model UpdateEvaluationRequest {
-  // Tags do we addition or overwrite?
-  @doc("Tags to be updated.")
-  tags: Record<string>;
-
-  @doc("Display Name")
-  displayName: string;
-
-  @doc("Description")
-  description: string;
 }
