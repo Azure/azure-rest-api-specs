@@ -2,6 +2,8 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using global.Azure.Core.Foundations;
+using TypeSpec.Http;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2024_07_01)
@@ -115,9 +117,31 @@ interface BatchClient {
 );
 
 /* JAVA OVERRIDES */
+// Options Bag Overrides
+alias GetApplicationRequiredParameter = {
+  @doc("The ID of the Application")
+  @path
+  applicationId: string;
+};
+
+@doc("Optional parameters for Get Application operation.")
+model GetApplicationOptions {
+  ...Azure.Batch.BatchClientRequestHeaders;
+}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@doc("Custom override for Get Application operation.")
+op getApplicationCustomization(
+  ...GetApplicationRequiredParameter,
+  @doc("Optional parameters for Get Application operation.")
+  options?: GetApplicationOptions,
+  ...ApiVersionParameter,
+): void;
+
+@@override(Azure.Batch.Applications.getApplication, Client.getApplicationCustomization, "java");
+
 // client name overrides
 @@clientName(BatchClient.listApplications, "listApplicationsInternal", "java");
-@@clientName(BatchClient.getApplication, "getApplicationInternal", "java");
 
 @@clientName(BatchClient.listPoolUsageMetrics,
   "listPoolUsageMetricsInternal",
