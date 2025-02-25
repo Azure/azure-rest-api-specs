@@ -3,7 +3,7 @@ import { exec } from "node:child_process";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { getOpenapiType, getAllTags, getInputFiles } from "./markdown-parser.js";
 import { sep, dirname, join } from "path";
-import { pathExists } from "./util.js";
+import { pathExists, getPathToDependency } from "./util.js";
 
 // 64 MiB max ouptut buffers for exec
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
@@ -32,13 +32,6 @@ export async function main() {
         type: "string",
         short: "o",
       },
-      // TODO: Bring this in through package.json. Do not use autorest's
-      // package manager.
-      "lint-version": {
-        type: "string",
-        short: "l",
-        default: "2.2.3",
-      },
     },
     strict: true,
   };
@@ -49,7 +42,6 @@ export async function main() {
       after: afterArg,
       "changed-files-path": changedFilesPath,
       "out-file": outFile,
-      "lint-version": lintVersion,
     },
   } = parseArgs(config);
 
@@ -66,11 +58,6 @@ export async function main() {
   if (!changedFilesPath || !(await pathExists(changedFilesPath as string))) {
     validArgs = false;
     console.log("--changed-files-path missing");
-  }
-
-  if (!(lintVersion as string).match(/^\d+\.\d+\.\d+$/)) {
-    validArgs = false;
-    console.log("Invalid lint version:", lintVersion);
   }
 
   if (!validArgs) {
@@ -92,7 +79,6 @@ export async function main() {
     afterArg as string,
     changedFilesPath as string,
     outFile as string,
-    lintVersion as string,
   );
 }
 
@@ -107,7 +93,6 @@ async function runLintDiff(
   afterPath: string,
   changedFilesPath: string,
   outFile: string,
-  lintVersion: string,
 ) {
   // TODO: Should filter happen here or upstream? (probably upstream)
   // TODO: NEED TO PARSE TAG CHANGES STILL
@@ -138,7 +123,7 @@ async function runLintDiff(
   //   return;
   // }
 
-  let validator = `@microsoft.azure/openapi-validator@${lintVersion}`;
+  const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
   const changedFileAndTagsMap = new Map<string, string[]>();
   for (const readmeAndTags of affectedTags) {
     const dedupedTags = await deduplicateTags(
@@ -178,7 +163,7 @@ async function runLintDiff(
         `--message-format=json ` +
         `--openapi-type=${openApiType} ` +
         `--openapi-subtype=${openApiSubType} ` +
-        `--use=${validator} ` +
+        `--use=${dependenciesDir} ` +
         `${tagArg} ` +
         `${changedFilePath}`;
 
