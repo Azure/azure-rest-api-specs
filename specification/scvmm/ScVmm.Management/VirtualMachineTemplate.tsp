@@ -44,7 +44,7 @@ interface VirtualMachineTemplates {
   @summary("Implements the VirtualMachineTemplate PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
+    #{
       `final-state-via`: "azure-async-operation",
     }
   )
@@ -54,7 +54,7 @@ interface VirtualMachineTemplates {
   @summary("Implements VirtualMachineTemplate DELETE method.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
+    #{
       `final-state-via`: "azure-async-operation",
     }
   )

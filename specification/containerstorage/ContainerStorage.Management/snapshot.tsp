@@ -16,9 +16,7 @@ interface Snapshots {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DOT NOT COPY - migrate to LRO apis"
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
+    #{ `final-state-via`: "location" }
   )
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<

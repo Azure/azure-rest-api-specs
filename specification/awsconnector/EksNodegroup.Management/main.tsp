@@ -93,7 +93,7 @@ model AwsEksNodegroupProperties {
   id?: string;
 
   @doc("Specify the instance types for a node group.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   instanceTypes?: string[];
 
   @doc("The Kubernetes labels to be applied to the nodes in the node group when they are created.")
@@ -118,14 +118,14 @@ model AwsEksNodegroupProperties {
   scalingConfig?: ScalingConfig;
 
   @doc("The subnets to use for the Auto Scaling group that is created for your node group.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   subnets?: string[];
 
   @doc("The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.")
   tags?: Record<string>;
 
   @doc("The Kubernetes taints to be applied to the nodes in the node group when they are created.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   taints?: Taint[];
 
   @doc("The node group update configuration. The node group update configuration.")
@@ -161,7 +161,7 @@ model RemoteAccess {
   ec2SshKey?: string;
 
   @doc("Property sourceSecurityGroups")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   sourceSecurityGroups?: string[];
 }
 

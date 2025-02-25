@@ -70,9 +70,7 @@ interface FleetUpdateStrategies {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   delete is ArmResourceDeleteAsync<
     FleetUpdateStrategy,
