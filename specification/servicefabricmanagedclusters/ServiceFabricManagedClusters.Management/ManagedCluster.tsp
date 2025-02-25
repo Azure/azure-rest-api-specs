@@ -100,7 +100,7 @@ interface ManagedClusters {
   startFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
     FaultSimulationParameters,
-    ArmResponse<FaultSimulation>
+    never
   >;
 
   /**
@@ -109,7 +109,7 @@ interface ManagedClusters {
   stopFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
     FaultSimulationIdParameters,
-    ArmResponse<FaultSimulation>
+    never
   >;
 
   /**

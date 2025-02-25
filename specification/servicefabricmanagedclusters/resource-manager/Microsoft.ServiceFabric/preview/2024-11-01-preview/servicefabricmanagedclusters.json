@@ -3533,12 +3533,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FaultSimulation"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -3606,12 +3600,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FaultSimulation"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -4161,19 +4149,6 @@
         }
       ],
       "x-ms-discriminator-value": "AverageServiceLoadTrigger"
-    },
-    "Azure.ResourceManager.ArmResponse<FaultSimulation>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/FaultSimulation",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "AzureActiveDirectory": {
       "type": "object",
