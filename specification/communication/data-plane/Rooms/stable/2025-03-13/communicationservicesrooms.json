@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Communication Room Service",
     "description": "Azure Communication Room Service",
-    "version": "2025-03-07"
+    "version": "2025-03-13"
   },
   "paths": {
     "/rooms": {
@@ -41,10 +41,10 @@
             "in": "body",
             "name": "createRoomRequest",
             "description": "The create room request body.",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/CreateRoomRequest"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -61,8 +61,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "x-ms-client-name": "ErrorCode"
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
               }
             }
           }
@@ -101,20 +101,20 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "x-ms-client-name": "ErrorCode"
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
               }
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
         },
         "x-ms-examples": {
           "List all rooms.": {
             "$ref": "./examples/Rooms_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -154,8 +154,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "x-ms-client-name": "ErrorCode"
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
               }
             }
           }
@@ -213,8 +213,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "x-ms-client-name": "ErrorCode"
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
               }
             }
           }
@@ -257,8 +257,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "x-ms-client-name": "ErrorCode"
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
               }
             }
           }
@@ -306,14 +306,14 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "x-ms-client-name": "ErrorCode"
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
               }
             }
           }
         },
         "x-ms-examples": {
-          "Get participants.": {
+          "Get participants": {
             "$ref": "./examples/Participants_List.json"
           }
         },
@@ -369,14 +369,14 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "type": "string",
-                "x-ms-client-name": "ErrorCode"
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
               }
             }
           }
         },
         "x-ms-examples": {
-          "Update participants.": {
+          "Update participants": {
             "$ref": "./examples/Participants_Update.json"
           }
         }
@@ -406,6 +406,11 @@
           "type": "string",
           "example": "2021-09-08T15:55:41Z"
         },
+        "pstnDialOutEnabled": {
+          "description": "Set this flag to true if, at the time of the call, dial out to a PSTN number is enabled in a particular room. By default, this flag is set to false.",
+          "type": "boolean",
+          "example": true
+        },
         "participants": {
           "description": "(Optional) Participants to be invited to the room.",
           "type": "object",
@@ -424,11 +429,6 @@
             },
             "rawId4": null
           }
-        },
-        "pstnDialOutEnabled": {
-          "description": "Set this flag to true if, at the time of the call, dial out to a PSTN number is enabled in a particular room. By default, this flag is set to false.",
-          "type": "boolean",
-          "example": true
         }
       }
     },
@@ -479,14 +479,14 @@
     },
     "RoomModel": {
       "description": "The meeting room.",
+      "type": "object",
       "required": [
         "createdAt",
         "id",
-        "pstnDialOutEnabled",
         "validFrom",
-        "validUntil"
+        "validUntil",
+        "pstnDialOutEnabled"
       ],
-      "type": "object",
       "properties": {
         "id": {
           "description": "Unique identifier of a room. This id is server generated.",
@@ -527,7 +527,7 @@
       "type": "object",
       "properties": {
         "rawId": {
-          "description": "Raw ID representation of the communication identifier. Please refer to the following document for additional information on Raw ID. <br /> https://learn.microsoft.com/azure/communication-services/concepts/identifiers?pivots=programming-language-rest#raw-id-representation",
+          "description": "Raw ID representation of the communication identifier. Please refer to the following document for additional information on Raw ID. <br> https://learn.microsoft.com/azure/communication-services/concepts/identifiers?pivots=programming-language-rest#raw-id-representation",
           "type": "string"
         },
         "role": {
