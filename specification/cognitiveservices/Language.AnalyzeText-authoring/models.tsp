@@ -903,7 +903,7 @@ model TextAnalysisAuthoringExportedModelManifest {
 /**
  * Represents the properties for the model file.
  */
-@clientName("ModelFile", "csharp")
+@clientName("TextAuthoringModelFile", "csharp")
 @added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringModelFile {
   /**
@@ -2236,7 +2236,7 @@ model TextAnalysisAuthoringSentimentEvaluationSummary {
 /**
  * Represents a class of an exported project.
  */
-@clientName("ExportedClass", "csharp")
+@clientName("TextAuthoringExportedClass", "csharp")
 model TextAnalysisAuthoringExportedClass {
   /**
    * The class category.
@@ -2247,7 +2247,7 @@ model TextAnalysisAuthoringExportedClass {
 /**
  * Represents an entity in an exported project with composite entities enabled.
  */
-@clientName("ExportedCompositeEntity", "csharp")
+@clientName("TextAuthoringExportedCompositeEntity", "csharp")
 model TextAnalysisAuthoringExportedCompositeEntity {
   /**
    * The behavior to follow when the entity's components overlap with each other.
