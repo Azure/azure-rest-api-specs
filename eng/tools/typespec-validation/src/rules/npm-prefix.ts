@@ -47,3 +47,5 @@ export class NpmPrefixRule implements Rule {
     };
   }
 }
+
+export default NpmPrefixRule;

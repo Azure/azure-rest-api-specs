@@ -50,3 +50,5 @@ export class FormatRule implements Rule {
     };
   }
 }
+
+export default FormatRule;

@@ -51,3 +51,5 @@ export class FlavorAzureRule implements Rule {
     return regex.test(name);
   }
 }
+
+export default FlavorAzureRule;

@@ -48,8 +48,6 @@ export abstract class TspconfigSubRuleBase {
     return { shouldSkip: false };
   }
 
-  protected abstract validate(config: any): RuleResult;
-
   protected validateValue(
     actual: string | boolean | undefined,
     expected: ExpectedValueType,
@@ -72,6 +70,9 @@ export abstract class TspconfigSubRuleBase {
       errorOutput: `- ${error}. ${action}.`,
     };
   }
+
+  public abstract getPathOfKeyToValidate(): string;
+  protected abstract validate(config: any): RuleResult;
 }
 
 class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
@@ -94,6 +95,10 @@ class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
       );
 
     return { success: true };
+  }
+
+  public getPathOfKeyToValidate() {
+    return `parameters.${this.keyToValidate}.default`;
   }
 }
 
@@ -131,6 +136,10 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       );
 
     return { success: true };
+  }
+
+  public getPathOfKeyToValidate() {
+    return `options.${this.emitterName}.${this.keyToValidate}`;
   }
 }
 
@@ -400,18 +409,24 @@ export const defaultRules = [
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
-  private rules: TspconfigSubRuleBase[] = [];
+  private subRules: TspconfigSubRuleBase[] = [];
   name = "SdkTspConfigValidation";
   description = "Validate the SDK tspconfig.yaml file";
 
-  constructor(rules?: TspconfigSubRuleBase[]) {
-    this.rules = rules || defaultRules;
+  constructor(subRules?: TspconfigSubRuleBase[]) {
+    this.subRules = subRules || defaultRules;
   }
-  async execute(host?: TsvHost, folder?: string): Promise<RuleResult> {
+  async execute(
+    host?: TsvHost,
+    folder?: string,
+    ignoredOptions?: Set<string>,
+  ): Promise<RuleResult> {
     const failedResults = [];
     let success = true;
-    for (const rule of this.rules) {
-      const result = await rule.execute(host!, folder!);
+    for (const subRule of this.subRules) {
+      if (ignoredOptions && ignoredOptions.has(subRule.getPathOfKeyToValidate())) continue;
+      console.log(subRule.getPathOfKeyToValidate());
+      const result = await subRule.execute(host!, folder!);
       if (!result.success) failedResults.push(result);
       success &&= result.success;
     }
@@ -423,3 +438,5 @@ export class SdkTspConfigValidationRule implements Rule {
     };
   }
 }
+
+export default SdkTspConfigValidationRule;

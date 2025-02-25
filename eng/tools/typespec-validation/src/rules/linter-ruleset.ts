@@ -105,3 +105,5 @@ export class LinterRulesetRule implements Rule {
     };
   }
 }
+
+export default LinterRulesetRule;

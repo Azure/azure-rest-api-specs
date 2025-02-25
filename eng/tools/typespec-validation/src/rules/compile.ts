@@ -60,3 +60,5 @@ export class CompileRule implements Rule {
     };
   }
 }
+
+export default CompileRule;
