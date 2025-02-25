@@ -238,10 +238,6 @@ directive:
     suppress:
       - BodyTopLevelProperties
   - where:
-      - $.definitions.Placement
-    suppress:
-      - MissingTypeObject
-  - where:
       - $.definitions.StorageProfile.properties.alignRegionalDisksToVMZone
     suppress:
       - EnumInsteadOfBoolean
