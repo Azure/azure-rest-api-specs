@@ -22,7 +22,7 @@ model EvaluatorConfiguration {
   id: string;
 
   @doc("Initialization parameters of the evaluator.")
-  initParams?: Record<unkown>;
+  initParams?: Record<unknown>;
 
   @doc("Data parameters of the evaluator.")
   dataMapping?: Record<string>;
