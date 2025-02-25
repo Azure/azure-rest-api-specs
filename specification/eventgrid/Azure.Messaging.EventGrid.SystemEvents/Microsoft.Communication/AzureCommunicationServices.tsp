@@ -55,11 +55,9 @@ model AcsChatAzureBotCommandEventData
 model AcsChatTypingIndicatorSentEventData
   extends AcsChatEventInThreadBaseProperties {
   /** The communication identifier of the sender */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   senderCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The display name of the sender */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   senderDisplayName?: string;
 }
 
@@ -767,7 +765,6 @@ model AcsRouterWorkerSelector {
 
 alias AcsChatMessageBaseEventData = {
   /** The body of the chat message */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   messageBody: string;
 
   /** The chat message metadata */
