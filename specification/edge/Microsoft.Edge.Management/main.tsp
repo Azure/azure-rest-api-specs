@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 @armProviderNamespace
 @service({
-  title: "Microsoft.Edge",
+  title: "Microsoft.Edge test",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
