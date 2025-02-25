@@ -167,14 +167,14 @@ interface AutoUpgradeProfileOperations {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
   @useFinalStateVia("azure-async-operation")
   generate is Azure.ResourceManager.ArmResourceActionAsync<
-      AutoUpgradeProfile,
-      void,
-      GenerateResponse,
-      BaseParameters<AutoUpgradeProfile>,
-      LroHeaders = ArmAsyncOperationHeader
-      & ArmLroLocationHeader
-      & IfMatchParameters<AutoUpgradeProfile>
-    >;
+    AutoUpgradeProfile,
+    void,
+    GenerateResponse,
+    BaseParameters<AutoUpgradeProfile>,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      IfMatchParameters<AutoUpgradeProfile>
+  >;
 }
 
 @added(Versions.v2025_03_01)
