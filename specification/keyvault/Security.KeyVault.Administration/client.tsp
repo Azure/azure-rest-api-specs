@@ -20,6 +20,36 @@ namespace ClientCustomizations;
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
 @@access(KeyVault, Access.internal, "csharp");
 
+@client(
+    {
+      name: "KeyVaultAccessControlRestClient",
+      service: KeyVault,
+    },
+    "csharp"
+  )
+  @operationGroup
+    interface RoleDefinitions{
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        deleteRoleDefinition is KeyVault.RoleDefinitions.delete;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        createOrUpdateRoleDefinition is KeyVault.RoleDefinitions.createOrUpdate;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        getRoleDefinition is KeyVault.RoleDefinitions.get;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        listRoleDefinitions is KeyVault.RoleDefinitions.list;
+    }
+  @operationGroup
+    interface RoleAssignments{
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        deleteRoleAssignment is KeyVault.RoleAssignments.delete;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        createRoleAssignment is KeyVault.RoleAssignments.create;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        getRoleAssignment is KeyVault.RoleAssignments.get;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        listRoleAssignments is KeyVault.RoleAssignments.listForScope;
+    }
+
 // JavaScript customizations
 @@clientName(KeyVault.FullBackupOperation.azureStorageBlobContainerUri,
   "folderUri",
