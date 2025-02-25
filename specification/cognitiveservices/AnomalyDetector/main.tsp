@@ -29,7 +29,7 @@ using TypeSpec.Versioning;
   }
 )
 @doc("""
-  The Anomaly Detector API detects anomalies automatically in time series data.
+   Test The Anomaly Detector API detects anomalies automatically in time series data.
   It supports both a stateless detection mode and a
   stateful detection mode. In stateless mode, there are three functionalities. Entire
   Detect is for detecting the whole series, with the model trained by the time series.
