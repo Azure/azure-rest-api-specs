@@ -20,19 +20,55 @@ using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Edge;
 
+@doc("Solution Version Snapshot")
+model SolutionVersionSnapshot {
+  @doc("Solution version of instance")
+  solutionVersionId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/targets/solutions/versions";
+    }
+  ]>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
+  @doc("App components spec")
+  specification?: Record<unknown>;
+}
+
+@doc("Target Snapshot")
+model TargetSnapshot {
+  @doc("Target of instance")
+  targetId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/targets";
+    }
+  ]>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
+  @doc("target spec")
+  targetSpecification?: Record<unknown>;
+
+  @doc("Scope of the target resource")
+  solutionScope?: string;
+}
+
 @doc("Instance History Properties")
 model InstanceHistoryProperties {
   @doc("Solution version of instance")
   @visibility("read")
-  solutionVersion: SolutionVersion;
+  solutionVersion: SolutionVersionSnapshot;
 
   @doc("Target of instance")
   @visibility("read")
-  target: Target;
+  target: TargetSnapshot;
 
   @doc("Scope of instance")
   @visibility("read")
   solutionScope?: string;
+
+  @doc("State of instance")
+  activeState?: ActiveState;
 
   @doc("Reconciliation policy of instance")
   @visibility("read")
@@ -41,10 +77,6 @@ model InstanceHistoryProperties {
   @doc("Deployment Status of instance")
   @visibility("read")
   status?: DeploymentStatus;
-
-  @doc("Deployment timestamp of instance")
-  @visibility("read")
-  deploymentTimestampEpoch?: int64;
 
   @doc("Provisioning state of resource")
   @visibility("read")
