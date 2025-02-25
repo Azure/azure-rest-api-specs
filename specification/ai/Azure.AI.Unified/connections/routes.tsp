@@ -50,6 +50,10 @@ interface Connections {
   @get
   list is Azure.Core.Foundations.Operation<
     {
+      @doc("Specific type of connection to return in list")
+      @query("$connectionType")
+      connectionType: string,
+
       ...StandardListQueryParameters;
     },
     PagedConnection

@@ -20,11 +20,15 @@ namespace Azure.AI.Unified;
 model Model {
   @doc("Name of the deployment for the model")
   @visibility("read")
-  deploymentName: string;
+  name: string;
 
   @doc("Publisher-specific name of the model")
   @visibility("read")
   modelName: string;
+
+  @doc("Publisher-specific version of the model")
+  @visibility("read")
+  modelVersion: string;
 
   @doc("Name of the model publisher")
   @visibility("read")
