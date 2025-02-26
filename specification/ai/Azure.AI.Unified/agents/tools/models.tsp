@@ -1,6 +1,6 @@
 import "@typespec/http";
 import "@typespec/versioning";
-import "../../common/models.tsp"
+import "../../common/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
