@@ -24,7 +24,7 @@ interface VaultsOperations {
   @get
   @action("deletedVaults")
   listDeleted is ArmProviderActionSync<
-    Response = ResourceListResult<DeletedVault>,
+    Response = Azure.ResourceManager.ResourceListResult<DeletedVault>,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
@@ -52,7 +52,7 @@ interface VaultsOperations {
     $top?: int32,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<Azure.ResourceManager.CommonTypes.Resource>> | ErrorResponse;
+  ): ArmResponse<ResourceListResult> | ErrorResponse;
 
   /**
    * Checks that the vault name is valid and is not already in use.
@@ -79,7 +79,7 @@ interface ManagedHsmsOperations {
   @get
   @action("deletedManagedHSMs")
   listDeleted is ArmProviderActionSync<
-    Response = ResourceListResult<DeletedManagedHsm>,
+    Response = Azure.ResourceManager.ResourceListResult<DeletedManagedHsm>,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;

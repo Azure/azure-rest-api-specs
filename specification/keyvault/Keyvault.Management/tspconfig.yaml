@@ -9,6 +9,11 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-csharp":
+    flavor: "azure"
+    namespace: "Azure.ResourceManager.KeyVault"
+    clear-output-folder: true
+    examples-dir: "{project-root}/examples"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -30,7 +30,7 @@ interface ManagedHsms {
    */
   get is ArmResourceRead<
     ManagedHsm,
-    Response = ArmResourceUpdatedResponse<ManagedHsm> | NoContentResponse
+    Response = ArmResponse<ManagedHsm> | NoContentResponse
   >;
 
   /**

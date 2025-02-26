@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Microsoft.KeyVault;
 
@@ -2382,4 +2383,19 @@ model ManagedHsmKeyListResult {
    * The URL to get the next page of keys.
    */
   nextLink?: string;
+}
+/**
+ * Describes a page of resource object.
+ * @template Resource The resource type.
+ */
+@pagedResult
+@doc("Paged collection of {name} items", Resource)
+model ResourceListResult {
+  @doc("The {name} items on this page", Resource)
+  @items
+  value: Resource[];
+
+  @doc("The link to the next page of items")
+  @TypeSpec.nextLink
+  nextLink?: ResourceLocation<Resource>;
 }

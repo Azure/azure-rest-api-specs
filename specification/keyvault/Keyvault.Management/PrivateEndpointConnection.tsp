@@ -38,7 +38,7 @@ interface PrivateEndpointConnections {
    */
   get is ArmResourceRead<
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | NoContentResponse
+    Response = ArmResponse<PrivateEndpointConnection> | NoContentResponse
   >;
 
   /**

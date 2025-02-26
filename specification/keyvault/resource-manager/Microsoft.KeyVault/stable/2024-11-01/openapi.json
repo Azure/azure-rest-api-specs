@@ -635,7 +635,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ManagedHsm' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ManagedHsm"
             }
@@ -1641,7 +1641,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -4122,13 +4122,13 @@
     },
     "ResourceListResult": {
       "type": "object",
-      "description": "The response of a Resource list operation.",
+      "description": "Paged collection of Resource items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Resource items on this page",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+            "$ref": "#/definitions/Resource"
           }
         },
         "nextLink": {
