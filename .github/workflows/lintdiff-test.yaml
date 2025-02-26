@@ -1,0 +1,48 @@
+name: LintDiff - Test
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - eng/tools/lint-diff/**
+  pull_request:
+    paths:
+      - eng/tools/lint-diff/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+    working-directory: eng/tools/lint-diff
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # TODO: Sparse checkout is probably too sparse
+          sparse-checkout: |
+            eng/tools/lint-diff
+            eng/tools/package.json
+            package.json
+            package-lock.json
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Run tests
+        run: npm run test:ci
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report
+          path: eng/tools/lint-diff/coverage
+          if-no-files-found: ignore
