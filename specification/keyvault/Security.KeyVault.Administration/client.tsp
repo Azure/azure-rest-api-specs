@@ -56,19 +56,19 @@ namespace ClientCustomizations;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
         fullBackup is KeyVault.fullBackup;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        fullRestore is KeyVault.fullRestoreOperation;
+        fullRestoreOperation is KeyVault.fullRestoreOperation;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
         fullBackupStatus is KeyVault.fullBackupStatus;
-        //#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        //preFullBackup is KeyVault.preFullBackup;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        preFullBackup is KeyVault.preFullBackup;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
         restoreStatus is KeyVault.restoreStatus;
-        //#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        //preFullRestore is KeyVault.preFullRestoreOperation;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        preFullRestoreOperation is KeyVault.preFullRestoreOperation;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
         selectiveKeyRestoreStatus is KeyVault.selectiveKeyRestoreStatus;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        selectiveKeyRestore is KeyVault.selectiveKeyRestoreOperation;
+        selectiveKeyRestoreOperation is KeyVault.selectiveKeyRestoreOperation;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
         updateSetting is KeyVault.updateSetting;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
