@@ -98,7 +98,6 @@ namespace ClientCustomizations;
 @@clientName(KeyVault.Setting.type, "SettingType", "csharp");
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
 @@access(KeyVault, Access.internal, "csharp");
-@@clientName(KeyVaultError, "KeyVaultServiceError", "csharp");
 
 
 // JavaScript customizations
