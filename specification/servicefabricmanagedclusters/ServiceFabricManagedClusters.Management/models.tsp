@@ -1611,12 +1611,6 @@ model LongRunningOperationResult {
 }
 
 /**
- * Describes the result of the request to list Managed VM Sizes for Service Fabric Managed Clusters.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well known abbreviation"
-model ManagedVMSizesResult is Azure.Core.Page<ManagedVMSize>;
-
-/**
  * VM Sizes properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource, no provisioning"
