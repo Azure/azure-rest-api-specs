@@ -398,7 +398,6 @@ op getCertificate is KeyVaultOperation<
 @patch(#{ implicitOptionality: false })
 @summary("Updates a certificate operation.")
 @route("/certificates/{certificate-name}/pending")
-@patch
 op updateCertificateOperation is KeyVaultOperation<
   {
     /**
