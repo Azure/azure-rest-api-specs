@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "$filter": "(properties%2farchived+eq+false)",
+    "$orderby": "properties/displayName asc",
+    "$skiptoken": "50",
+    "refreshsummary": "true",
+    "take": "1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/microsoft.billingbenefits/savingsPlanOrders/20000000-0000-0000-0000-000000000000/savingsPlans/30000000-0000-0000-0000-000000000000",
+            "name": "20000000-0000-0000-0000-000000000000/30000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.BillingBenefits/savingsPlanOrders/savingsPlans",
+            "sku": {
+              "name": "Compute_Savings_Plan"
+            },
+            "properties": {
+              "billingScopeId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000009",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/billingProfiles/KPSV-DWNE-BG7-TGB",
+              "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31",
+              "appliedScopeProperties": {
+                "subscriptionId": "/subscriptions/20000000-0000-0000-0000-000000000005",
+                "displayName": "Azure subscription 1"
+              },
+              "commitment": {
+                "grain": "Hourly",
+                "currencyCode": "USD",
+                "amount": 0.001
+              },
+              "renew": false,
+              "appliedScopeType": "Single",
+              "displayName": "Compute_SavingsPlan_10-19-2022_11-03",
+              "provisioningState": "Succeeded",
+              "term": "P1Y",
+              "displayProvisioningState": "Succeeded",
+              "userFriendlyAppliedScopeType": "Single",
+              "expiryDateTime": "2023-10-19T18:05:36.5252231Z",
+              "purchaseDateTime": "2022-10-19T18:03:56.4032132Z",
+              "effectiveDateTime": "2022-10-19T18:05:37.1034288Z",
+              "utilization": {
+                "trend": "",
+                "aggregates": [
+                  {
+                    "grain": 1.0,
+                    "grainUnit": "days",
+                    "value": 100.0,
+                    "valueUnit": "percentage"
+                  },
+                  {
+                    "grain": 7.0,
+                    "grainUnit": "days",
+                    "value": 78.0,
+                    "valueUnit": "percentage"
+                  },
+                  {
+                    "grain": 30.0,
+                    "grainUnit": "days",
+                    "value": 78.12,
+                    "valueUnit": "percentage"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "additionalProperties": [
+          {
+            "name": "summary",
+            "value": {
+              "noBenefitCount": 0,
+              "warningCount": 0,
+              "succeededCount": 1,
+              "failedCount": 0,
+              "expiringCount": 0,
+              "expiredCount": 0,
+              "pendingCount": 0,
+              "cancelledCount": 0,
+              "processingCount": 0
+            }
+          }
+        ]
+      }
+    }
+  }
+}
