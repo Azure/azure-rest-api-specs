@@ -99,6 +99,7 @@ model AwsEc2SubnetProperties {
   ipv6CidrBlock?: string;
 
   @doc("The IPv6 network ranges for the subnet, in CIDR notation.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv6CidrBlocks?: string[];
 
@@ -127,6 +128,7 @@ model AwsEc2SubnetProperties {
   subnetId?: string;
 
   @doc("Any tags assigned to the subnet.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

@@ -47,6 +47,7 @@ model DiscoveredAssetEndpointProfileProperties {
   additionalConfiguration?: string;
 
   @doc("List of supported authentication methods supported by the target server.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   supportedAuthenticationMethods?: AuthenticationMethod[];
 

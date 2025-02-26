@@ -72,6 +72,7 @@ model LambdaFunctionProperties {
 @doc("Definition of awsLambdaFunction")
 model AwsLambdaFunctionProperties {
   @doc("The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is ``x86_64``.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   architectures?: Architectures[];
 
@@ -97,6 +98,7 @@ model AwsLambdaFunctionProperties {
   ephemeralStorage?: EphemeralStorage;
 
   @doc("Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an [AWS::EFS::MountTarget](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-mounttarget.html) resource, you must also specify a ``DependsOn`` attribute to ensure that the mount target is created or updated before the function. For more information about using the ``DependsOn`` attribute, see [DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html).")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   fileSystemConfigs?: FileSystemConfig[];
 
@@ -113,6 +115,7 @@ model AwsLambdaFunctionProperties {
   kmsKeyArn?: string;
 
   @doc("A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add to the function's execution environment. Specify each layer by its ARN, including the version.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   layers?: string[];
 
@@ -144,6 +147,7 @@ model AwsLambdaFunctionProperties {
   snapStartResponse?: SnapStartResponse;
 
   @doc("A list of [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to apply to the function.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -251,10 +255,12 @@ model FileSystemConfig {
 @doc("Definition of ImageConfig")
 model ImageConfig {
   @doc("Specifies parameters that you want to pass in with ENTRYPOINT. You can specify a maximum of 1,500 parameters in the list.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   command?: string[];
 
   @doc("Specifies the entry point to their application, which is typically the location of the runtime executable. You can specify a maximum of 1,500 string entries in the list.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   entryPoint?: string[];
 
@@ -456,10 +462,12 @@ model VpcConfig {
   ipv6AllowedForDualStack?: boolean;
 
   @doc("A list of VPC security group IDs.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
   @doc("A list of VPC subnet IDs.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 }

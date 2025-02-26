@@ -74,6 +74,7 @@ model GitHubOrganizationProfile extends OrganizationProfile {
   kind: "GitHub";
 
   @doc("The list of GitHub organizations/repositories the pool should be present in.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   organizations: GitHubOrganization[];
 }
@@ -92,6 +93,7 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   kind: "AzureDevOps";
 
   @doc("The list of Azure DevOps organizations the pool should be present in.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   organizations: Organization[];
 
@@ -152,6 +154,7 @@ model VmssFabricProfile extends FabricProfile {
   sku: DevOpsAzureSku;
 
   @doc("The VM images of the machines in the pool.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   images: PoolImage[];
 
@@ -177,6 +180,7 @@ model StorageProfile {
   osDiskStorageAccountType?: OsDiskStorageAccountType;
 
   @doc("A list of empty data disks to attach.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dataDisks?: DataDisk[];
 }
@@ -625,6 +629,7 @@ model ResourceSkuLocationInfo {
   zones: string[];
 
   @doc("Gets details of capabilities available to a SKU in specific zones.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   zoneDetails: ResourceSkuZoneDetails[];
 }
@@ -635,6 +640,7 @@ model ResourceSkuZoneDetails {
   name: string[];
 
   @doc("A list of capabilities that are available for the SKU in the specified list of zones.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   capabilities: ResourceSkuCapabilities[];
 }
@@ -670,14 +676,17 @@ model ResourceSkuProperties {
   locations: azureLocation[];
 
   @doc("A list of locations and availability zones in those locations where the SKU is available")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   locationInfo: ResourceSkuLocationInfo[];
 
   @doc("Name value pairs to describe the capability.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   capabilities: ResourceSkuCapabilities[];
 
   @doc("The restrictions of the SKU.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   restrictions: ResourceSkuRestrictions[];
 }

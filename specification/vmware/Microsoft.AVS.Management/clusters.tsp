@@ -30,7 +30,8 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("Update a Cluster")
   @extension("x-ms-long-running-operation", true)
-  @extension(
+  #suppress "deprecated" "Updated to value syntax next release" 
+@extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "location",

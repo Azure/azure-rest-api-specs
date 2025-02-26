@@ -232,6 +232,7 @@ model ErrorDefinition {
    * Internal error details.
    */
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   details?: ErrorDefinition[];
 }

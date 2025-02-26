@@ -111,6 +111,7 @@ model AwsEc2AddressProperties {
   publicIpv4Pool?: string;
 
   @doc("<p>Any tags assigned to the Elastic IP address.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }

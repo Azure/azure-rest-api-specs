@@ -640,6 +640,7 @@ model SAPSupportedResourceSkusResult {
   /**
    * Gets the list of SAP supported SKUs.
    */
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   supportedSkus?: SAPSupportedSku[];
 }
@@ -726,6 +727,7 @@ model SAPDiskConfiguration {
   /**
    * The list of supported disks for a given VM Sku.
    */
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   supportedConfigurations?: DiskDetails[];
 }
@@ -831,6 +833,7 @@ model SAPAvailabilityZoneDetailsResult {
   /**
    * Gets the list of availability zone pairs.
    */
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   availabilityZonePairs?: SAPAvailabilityZonePair[];
 }
@@ -968,6 +971,7 @@ model ErrorDefinition {
    * Internal error details.
    */
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   details?: ErrorDefinition[];
 }
@@ -1093,6 +1097,7 @@ model SAPCentralServerProperties {
    * The list of virtual machines corresponding to the Central Services instance.
    */
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   vmDetails?: CentralServerVmDetails[];
 
@@ -1292,6 +1297,7 @@ model CentralServerVmDetails {
    * Storage details of all the Storage Accounts attached to the ASCS Virtual Machine. For e.g. NFS on AFS Shared Storage.
    */
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   storageDetails?: StorageInformation[];
 }
@@ -1358,6 +1364,7 @@ model SAPDatabaseProperties {
    * The list of virtual machines corresponding to the Database resource.
    */
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   vmDetails?: DatabaseVmDetails[];
 
@@ -1400,6 +1407,7 @@ model DatabaseVmDetails {
    * Storage details of all the Storage Accounts attached to the Database Virtual Machine. For e.g. NFS on AFS Shared Storage.
    */
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   storageDetails?: StorageInformation[];
 }
@@ -1491,6 +1499,7 @@ model SAPApplicationServerProperties {
    * The list of virtual machines.
    */
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   vmDetails?: ApplicationServerVmDetails[];
 
@@ -1539,6 +1548,7 @@ model ApplicationServerVmDetails {
    * Storage details of all the Storage Accounts attached to the App Virtual Machine. For e.g. NFS on AFS Shared Storage.
    */
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   storageDetails?: StorageInformation[];
 }
@@ -1649,6 +1659,7 @@ model SshConfiguration {
   /**
    * The list of SSH public keys used to authenticate with linux based VMs.
    */
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   publicKeys?: SshPublicKey[];
 }
@@ -2116,6 +2127,7 @@ model VirtualMachineResourceNames {
   /**
    * The list of network interface name objects for the selected virtual machine. Currently, only one network interface is supported per virtual machine.
    */
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   networkInterfaces?: NetworkInterfaceResourceNames[];
 
@@ -2178,6 +2190,7 @@ model CentralServerFullResourceNames {
   /**
    * The list of names for all ASCS virtual machines to be deployed. The number of entries in this list should be equal to the number VMs to be created for ASCS layer. At maximum, there can be two virtual machines at this layer: ASCS and ERS.
    */
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   virtualMachines?: VirtualMachineResourceNames[];
 
@@ -2224,6 +2237,7 @@ model ApplicationServerFullResourceNames {
   /**
    * The list of virtual machine naming details.
    */
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   virtualMachines?: VirtualMachineResourceNames[];
 
@@ -2240,6 +2254,7 @@ model DatabaseServerFullResourceNames {
   /**
    * The list of virtual machine naming details.
    */
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   virtualMachines?: VirtualMachineResourceNames[];
 

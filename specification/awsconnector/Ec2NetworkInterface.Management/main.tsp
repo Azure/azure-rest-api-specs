@@ -81,6 +81,7 @@ model AwsEc2NetworkInterfaceProperties {
   enablePrimaryIpv6?: boolean;
 
   @doc("A list of security group IDs associated with this network interface.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   groupSet?: string[];
 
@@ -94,6 +95,7 @@ model AwsEc2NetworkInterfaceProperties {
   ipv4PrefixCount?: int32;
 
   @doc("Assigns a list of IPv4 prefixes to the network interface. If you want EC2 to automatically assign IPv4 prefixes, use the Ipv4PrefixCount property and do not specify this property. Presently, only /28 prefixes are supported. You can't specify IPv4 prefixes if you've specified one of the following: a count of IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv4Prefixes?: Ipv4PrefixSpecification[];
 
@@ -101,6 +103,7 @@ model AwsEc2NetworkInterfaceProperties {
   ipv6AddressCount?: int32;
 
   @doc("One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet to associate with the network interface. If you're specifying a number of IPv6 addresses, use the Ipv6AddressCount property and don't specify this property.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv6Addresses?: InstanceIpv6Address[];
 
@@ -108,6 +111,7 @@ model AwsEc2NetworkInterfaceProperties {
   ipv6PrefixCount?: int32;
 
   @doc("Assigns a list of IPv6 prefixes to the network interface. If you want EC2 to automatically assign IPv6 prefixes, use the Ipv6PrefixCount property and do not specify this property. Presently, only /80 prefixes are supported. You can't specify IPv6 prefixes if you've specified one of the following: a count of IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv6Prefixes?: Ipv6PrefixSpecification[];
 
@@ -121,6 +125,7 @@ model AwsEc2NetworkInterfaceProperties {
   privateIpAddress?: string;
 
   @doc("Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the Primary property to true in the PrivateIpAddressSpecification property. If you want EC2 to automatically assign private IP addresses, use the SecondaryPrivateIpAddressCount property and do not specify this property.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   privateIpAddresses?: PrivateIpAddressSpecification[];
 
@@ -128,6 +133,7 @@ model AwsEc2NetworkInterfaceProperties {
   secondaryPrivateIpAddressCount?: int32;
 
   @doc("Returns the secondary private IP addresses of the network interface.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   secondaryPrivateIpAddresses?: string[];
 
@@ -138,6 +144,7 @@ model AwsEc2NetworkInterfaceProperties {
   subnetId?: string;
 
   @doc("An arbitrary set of tags (key-value pairs) for this network interface.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

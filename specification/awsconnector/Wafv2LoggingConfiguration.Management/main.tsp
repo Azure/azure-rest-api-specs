@@ -73,6 +73,7 @@ model Wafv2LoggingConfigurationProperties {
 @doc("Definition of awsWafv2LoggingConfiguration")
 model AwsWafv2LoggingConfigurationProperties {
   @doc("The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   logDestinationConfigs?: string[];
 
@@ -83,6 +84,7 @@ model AwsWafv2LoggingConfigurationProperties {
   managedByFirewallManager?: boolean;
 
   @doc("The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   redactedFields?: FieldToMatch[];
 
@@ -100,6 +102,7 @@ model LoggingFilterModelProperties {
   defaultBehavior?: DefaultBehavior;
 
   @doc("The filters that you want to apply to the logs.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   filters?: Filter[];
 }
@@ -144,6 +147,7 @@ model Filter {
   behavior?: FilterBehavior;
 
   @doc("Match conditions for the filter.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   conditions?: Condition[];
 

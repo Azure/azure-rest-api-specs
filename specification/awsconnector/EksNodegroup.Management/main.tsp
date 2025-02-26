@@ -93,6 +93,7 @@ model AwsEksNodegroupProperties {
   id?: string;
 
   @doc("Specify the instance types for a node group.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   instanceTypes?: string[];
 
@@ -118,6 +119,7 @@ model AwsEksNodegroupProperties {
   scalingConfig?: ScalingConfig;
 
   @doc("The subnets to use for the Auto Scaling group that is created for your node group.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subnets?: string[];
 
@@ -125,6 +127,7 @@ model AwsEksNodegroupProperties {
   tags?: Record<string>;
 
   @doc("The Kubernetes taints to be applied to the nodes in the node group when they are created.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   taints?: Taint[];
 
@@ -161,6 +164,7 @@ model RemoteAccess {
   ec2SshKey?: string;
 
   @doc("Property sourceSecurityGroups")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   sourceSecurityGroups?: string[];
 }

@@ -88,6 +88,7 @@ model AwsEc2VPCPeeringConnectionProperties {
   peerVpcId?: string;
 
   @doc("Property tags")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

@@ -206,6 +206,7 @@ model KafkaTopicMapProperties {
   partitionStrategy?: KafkaPartitionStrategy = KafkaPartitionStrategy.default;
 
   @doc("The route details for Kafka connector.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   routes: KafkaRoutes[];
 

@@ -72,6 +72,7 @@ model EmrClusterProperties {
 @doc("Definition of awsEmrCluster")
 model AwsEmrClusterProperties {
   @doc("<p>The applications installed on this cluster.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   applications?: Application[];
 
@@ -85,6 +86,7 @@ model AwsEmrClusterProperties {
   clusterArn?: string;
 
   @doc("<p>Applies only to Amazon EMR releases 4.x and later. The list of configurations that are supplied to the Amazon EMR cluster.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   configurations?: Configuration[];
 
@@ -134,6 +136,7 @@ model AwsEmrClusterProperties {
   outpostArn?: string;
 
   @doc("<p>Placement group configured for an Amazon EMR cluster.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   placementGroups?: PlacementGroupConfig[];
 
@@ -165,6 +168,7 @@ model AwsEmrClusterProperties {
   stepConcurrencyLevel?: int32;
 
   @doc("<p>A list of tags associated with a cluster.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -230,6 +234,7 @@ model Application {
   additionalInfo?: Record<string>;
 
   @doc("<p>Arguments for Amazon EMR to pass to the application.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   args?: string[];
 
@@ -271,6 +276,7 @@ model Configuration {
   classification?: string;
 
   @doc("<p>A list of additional configurations to apply within a configuration object.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   configurations?: Configuration[];
 
@@ -285,10 +291,12 @@ model Configuration {
 @doc("Definition of Ec2InstanceAttributes")
 model Ec2InstanceAttributes {
   @doc("<p>A list of additional Amazon EC2 security group IDs for the master node.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   additionalMasterSecurityGroups?: string[];
 
   @doc("<p>A list of additional Amazon EC2 security group IDs for the core and task nodes.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   additionalSlaveSecurityGroups?: string[];
 
@@ -311,10 +319,12 @@ model Ec2InstanceAttributes {
   iamInstanceProfile?: string;
 
   @doc("<p>Applies to clusters configured with the instance fleets option. Specifies one or more Availability Zones in which to launch Amazon EC2 cluster instances when the EC2-Classic network configuration is supported. Amazon EMR chooses the Availability Zone with the best fit from among the list of <code>RequestedEc2AvailabilityZones</code>, and then launches all cluster instances within that Availability Zone. If you do not specify this value, Amazon EMR chooses the Availability Zone for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   requestedEc2AvailabilityZones?: string[];
 
   @doc("<p>Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch Amazon EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the Amazon EC2 subnet with the best fit from among the list of <code>RequestedEc2SubnetIds</code>, and then launches all cluster instances within that Subnet. If this value is not specified, and the account and Region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses <code>RequestedEc2AvailabilityZones</code> instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   requestedEc2SubnetIds?: string[];
 
@@ -388,6 +398,7 @@ model InstanceRoleTypeEnumValue {
 @doc("Definition of ClusterStatus")
 model ClusterStatus {
   @doc("<p>A list of tuples that provides information about the errors that caused a cluster to terminate. This structure can contain up to 10 different <code>ErrorDetail</code> tuples.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   errorDetails?: ErrorDetail[];
 
@@ -487,6 +498,7 @@ model ErrorDetail {
   errorCode?: string;
 
   @doc("<p>A list of key value pairs that provides contextual information about why an error occured.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   errorData?: StringMap[];
 

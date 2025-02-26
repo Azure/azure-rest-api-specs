@@ -75,6 +75,7 @@ model AwsEc2ImageProperties {
   architecture?: ArchitectureValuesEnumValue;
 
   @doc("<p>Any block device mapping entries.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   blockDeviceMappings?: BlockDeviceMapping[];
 
@@ -133,6 +134,7 @@ model AwsEc2ImageProperties {
   platformDetails?: string;
 
   @doc("<p>Any product codes associated with the AMI.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   productCodes?: ProductCode[];
 
@@ -161,6 +163,7 @@ model AwsEc2ImageProperties {
   stateReason?: StateReason;
 
   @doc("<p>Any tags assigned to the image.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

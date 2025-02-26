@@ -75,6 +75,7 @@ model AwsEc2NetworkAclProperties {
   id?: string;
 
   @doc("The tags for the network ACL.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

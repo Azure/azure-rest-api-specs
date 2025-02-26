@@ -91,6 +91,7 @@ model AwsNetworkFirewallRuleGroupProperties {
   ruleGroupName?: string;
 
   @doc("Property tags")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -177,6 +178,7 @@ model RulesSource {
   rulesString?: string;
 
   @doc("Property statefulRules")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   statefulRules?: StatefulRule[];
 
@@ -222,6 +224,7 @@ model IPSetReference {
 @doc("Definition of IPSet")
 model IPSet {
   @doc("Property definition")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   definition?: string[];
 }
@@ -233,6 +236,7 @@ model IPSet {
 @doc("Definition of PortSet")
 model PortSet {
   @doc("Property definition")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   definition?: string[];
 }
@@ -247,10 +251,12 @@ model RulesSourceList {
   generatedRulesType?: RulesSourceListGeneratedRulesType;
 
   @doc("Property targetTypes")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   targetTypes?: string[];
 
   @doc("Property targets")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   targets?: string[];
 }
@@ -279,6 +285,7 @@ model StatefulRule {
   header?: Header;
 
   @doc("Property ruleOptions")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ruleOptions?: RuleOption[];
 }
@@ -307,10 +314,12 @@ union StatefulRuleAction {
 @doc("Definition of StatelessRulesAndCustomActions")
 model StatelessRulesAndCustomActions {
   @doc("Property customActions")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   customActions?: CustomAction[];
 
   @doc("Property statelessRules")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   statelessRules?: StatelessRule[];
 }
@@ -361,6 +370,7 @@ model RuleOption {
   keyword?: string;
 
   @doc("Property settings")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   settings?: string[];
 }
@@ -470,6 +480,7 @@ model ActionDefinition {
 @doc("Definition of RuleDefinition")
 model RuleDefinition {
   @doc("Property actions")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   actions?: string[];
 
@@ -484,6 +495,7 @@ model RuleDefinition {
 @doc("Definition of PublishMetricAction")
 model PublishMetricAction {
   @doc("Property dimensions")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dimensions?: Dimension[];
 }
@@ -495,26 +507,32 @@ model PublishMetricAction {
 @doc("Definition of MatchAttributes")
 model MatchAttributes {
   @doc("Property destinationPorts")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   destinationPorts?: PortRange[];
 
   @doc("Property destinations")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   destinations?: Address[];
 
   @doc("Property protocols")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   protocols?: int32[];
 
   @doc("Property sourcePorts")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   sourcePorts?: PortRange[];
 
   @doc("Property sources")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   sources?: Address[];
 
   @doc("Property tcpFlags")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tcpFlags?: TCPFlagField[];
 }
@@ -559,10 +577,12 @@ model Address {
 @doc("Definition of TCPFlagField")
 model TCPFlagField {
   @doc("Property flags")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   flags?: string[];
 
   @doc("Property masks")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   masks?: string[];
 }

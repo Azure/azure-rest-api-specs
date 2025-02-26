@@ -91,6 +91,7 @@ model AwsElasticBeanstalkEnvironmentProperties {
   operationsRole?: string;
 
   @doc("Key-value pairs defining configuration options for this environment, such as the instance type.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   optionSettings?: OptionSetting[];
 
@@ -101,6 +102,7 @@ model AwsElasticBeanstalkEnvironmentProperties {
   solutionStackName?: string;
 
   @doc("Specifies the tags applied to resources in the environment.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

@@ -51,7 +51,8 @@ interface WorkloadNetworkDnsServices {
   @doc("Delete a {name}", WorkloadNetworkDnsService)
   @delete
   @extension("x-ms-long-running-operation", true)
-  @extension(
+  #suppress "deprecated" "Updated to value syntax next release" 
+@extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "location",

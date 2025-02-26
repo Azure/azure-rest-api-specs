@@ -90,6 +90,7 @@ model AwsOrganizationsAccountProperties {
   joinedTimestamp?: string;
 
   @doc("List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   parentIds?: string[];
 
@@ -100,6 +101,7 @@ model AwsOrganizationsAccountProperties {
   status?: Status;
 
   @doc("A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }

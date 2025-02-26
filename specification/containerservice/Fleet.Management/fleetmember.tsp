@@ -104,7 +104,8 @@ interface FleetMembers {
   @sharedRoute
   @added(Versions.v2023_06_15_preview)
   @operationId("FleetMembers_Update")
-  @extension(
+  #suppress "deprecated" "Updated to value syntax next release" 
+@extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "original-uri",

@@ -138,6 +138,7 @@ model AwsRdsDBSnapshotProperties {
   port?: int32;
 
   @doc("<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   processorFeatures?: ProcessorFeature[];
 
@@ -169,6 +170,7 @@ model AwsRdsDBSnapshotProperties {
   storageType?: string;
 
   @doc("Property tagList")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tagList?: Tag[];
 

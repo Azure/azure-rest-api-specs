@@ -41,14 +41,17 @@ model PipelineGroupProperties {
   replicas?: int32;
 
   @doc("The receivers specified for a pipeline group instance.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   receivers: Receiver[];
 
   @doc("The processors specified for a pipeline group instance.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   processors: Processor[];
 
   @doc("The exporters specified for a pipeline group instance.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   exporters: Exporter[];
 
@@ -56,6 +59,7 @@ model PipelineGroupProperties {
   service: Service;
 
   @doc("Networking configurations for the pipeline group instance.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   networkingConfigurations?: NetworkingConfiguration[];
 
@@ -154,10 +158,12 @@ union ExporterType {
 @doc("Service Info.")
 model Service {
   @doc("Pipelines belonging to a given pipeline group.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   pipelines: Pipeline[];
 
   @doc("Persistence options to all pipelines in the instance.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   persistence?: PersistenceConfigurations;
 }
@@ -172,14 +178,17 @@ model Pipeline {
   type: PipelineType;
 
   @doc("Reference to receivers configured for the pipeline.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   receivers: string[];
 
   @doc("Reference to processors configured for the pipeline.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   processors?: string[];
 
   @doc("Reference to exporters configured for the pipeline.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   exporters: string[];
 }
@@ -202,6 +211,7 @@ model NetworkingConfiguration {
   host?: string;
 
   @doc("Networking routes configuration.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   routes: NetworkingRoute[];
 }

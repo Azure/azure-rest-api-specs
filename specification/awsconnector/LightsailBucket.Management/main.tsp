@@ -90,14 +90,17 @@ model AwsLightsailBucketProperties {
   objectVersioning?: boolean;
 
   @doc("An array of strings to specify the AWS account IDs that can access the bucket.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   readOnlyAccessAccounts?: string[];
 
   @doc("The names of the Lightsail resources for which to set bucket access.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   resourcesReceivingAccess?: string[];
 
   @doc("An array of key-value pairs to apply to this resource.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

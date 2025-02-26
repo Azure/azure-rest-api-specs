@@ -75,6 +75,7 @@ model AwsEc2AccountAttributeProperties {
   attributeName?: string;
 
   @doc("<p>The values for the account attribute.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   attributeValues?: AccountAttributeValue[];
 }

@@ -49,6 +49,7 @@ op FleetCustomPatchSync<
 @autoRoute
 @doc("Create a {name}", TResource)
 @extension("x-ms-long-running-operation", true)
+#suppress "deprecated" "Updated to value syntax next release" 
 @extension(
   "x-ms-long-running-operation-options",
   {
@@ -74,6 +75,7 @@ op FleetArmResourceCreateOrUpdateAsync<
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
 @autoRoute
 @doc("Delete a {name}", TResource)
+#suppress "deprecated" "Updated to value syntax next release" 
 @extension(
   "x-ms-long-running-operation-options",
   {

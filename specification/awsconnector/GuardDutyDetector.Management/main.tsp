@@ -78,6 +78,7 @@ model AwsGuardDutyDetectorProperties {
   enable?: boolean;
 
   @doc("Property features")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   features?: CFNFeatureConfiguration[];
 
@@ -88,6 +89,7 @@ model AwsGuardDutyDetectorProperties {
   id?: string;
 
   @doc("Property tags")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: TagItem[];
 }
@@ -115,6 +117,7 @@ model CFNDataSourceConfigurations {
 @doc("Definition of CFNFeatureConfiguration")
 model CFNFeatureConfiguration {
   @doc("Property additionalConfiguration")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   additionalConfiguration?: CFNFeatureAdditionalConfiguration[];
 

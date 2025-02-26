@@ -42,7 +42,8 @@ interface VirtualMachineTemplates {
   /** Updates the VirtualMachineTemplate resource. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Implements the VirtualMachineTemplate PATCH method.")
-  @extension(
+  #suppress "deprecated" "Updated to value syntax next release" 
+@extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "azure-async-operation",
@@ -52,7 +53,8 @@ interface VirtualMachineTemplates {
   /** Deregisters the ScVmm VM Template from Azure. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Implements VirtualMachineTemplate DELETE method.")
-  @extension(
+  #suppress "deprecated" "Updated to value syntax next release" 
+@extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "azure-async-operation",

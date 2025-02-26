@@ -96,6 +96,7 @@ model AwsApiGatewayStageProperties {
   documentationVersion?: string;
 
   @doc("A map that defines the method settings for a Stage resource. Keys (designated as ``/{method_setting_key`` below) are method paths defined as ``{resource_path}/{http_method}`` for an individual method override, or ``/\\*/\\*`` for overriding all methods in the stage.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   methodSettings?: MethodSetting[];
 
@@ -106,6 +107,7 @@ model AwsApiGatewayStageProperties {
   stageName?: string;
 
   @doc("The collection of tags. Each tag element is associated with a given resource.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

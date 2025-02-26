@@ -102,6 +102,7 @@ interface AzureLargeInstances {
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
 @autoRoute
 @OpenAPI.extension("x-ms-long-running-operation", true)
+#suppress "deprecated" "Updated to value syntax next release" 
 @OpenAPI.extension(
   "x-ms-long-running-operation-options",
   {

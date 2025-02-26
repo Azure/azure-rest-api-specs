@@ -75,6 +75,7 @@ model AwsEc2VPCEndpointProperties {
   creationTimestamp?: string;
 
   @doc("Property dnsEntries")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dnsEntries?: string[];
 
@@ -82,6 +83,7 @@ model AwsEc2VPCEndpointProperties {
   id?: string;
 
   @doc("Property networkInterfaceIds")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   networkInterfaceIds?: string[];
 
@@ -92,10 +94,12 @@ model AwsEc2VPCEndpointProperties {
   privateDnsEnabled?: boolean;
 
   @doc("The IDs of the route tables. Routing is supported only for gateway endpoints.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   routeTableIds?: string[];
 
   @doc("The IDs of the security groups to associate with the endpoint network interfaces. If this parameter is not specified, we use the default security group for the VPC. Security groups are supported only for interface endpoints.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
@@ -103,6 +107,7 @@ model AwsEc2VPCEndpointProperties {
   serviceName?: string;
 
   @doc("The IDs of the subnets in which to create endpoint network interfaces. You must specify this property for an interface endpoint or a Gateway Load Balancer endpoint. You can't specify this property for a gateway endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 

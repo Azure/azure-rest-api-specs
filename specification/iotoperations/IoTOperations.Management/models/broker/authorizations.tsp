@@ -48,6 +48,7 @@ model AuthorizationConfig {
   cache?: OperationalMode = OperationalMode.Enabled;
 
   @doc("The authorization rules to follow. If no rule is set, but Authorization Resource is used that would mean DenyAll.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   rules?: AuthorizationRule[];
 }
@@ -55,6 +56,7 @@ model AuthorizationConfig {
 @doc("AuthorizationConfig Rule Properties")
 model AuthorizationRule {
   @doc("Give access to Broker methods and topics.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   brokerResources: BrokerResourceRule[];
 
@@ -62,6 +64,7 @@ model AuthorizationRule {
   principals: PrincipalDefinition;
 
   @doc("Give access to state store resources.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   stateStoreResources?: StateStoreResourceRule[];
 }
@@ -70,6 +73,7 @@ model AuthorizationRule {
 model PrincipalDefinition {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("A list of key-value pairs that match the attributes of the clients. The attributes are case-sensitive and must match the attributes provided by the clients during authentication.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   attributes?: Record<string>[] = #[];
 

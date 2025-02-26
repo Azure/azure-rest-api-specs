@@ -72,6 +72,7 @@ model AppSyncGraphqlApiProperties {
 @doc("Definition of awsAppSyncGraphqlApi")
 model AwsAppSyncGraphqlApiProperties {
   @doc("<p>A list of additional authentication providers for the <code>GraphqlApi</code> API.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   additionalAuthenticationProviders?: AdditionalAuthenticationProvider[];
 

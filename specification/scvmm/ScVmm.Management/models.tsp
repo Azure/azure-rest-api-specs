@@ -380,11 +380,13 @@ model VirtualMachineTemplateProperties {
 
   /** Gets the network interfaces of the template. */
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["name", "nicId"])
   networkInterfaces?: NetworkInterface[];
 
   /** Gets the disks of the template. */
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["diskId", "name"])
   disks?: VirtualDisk[];
 
@@ -711,6 +713,7 @@ model HardwareProfileUpdate is UpdateableProperties<HardwareProfile>;
 /** Defines the resource properties. */
 model NetworkProfile {
   /** Gets or sets the list of network interfaces associated with the virtual machine. */
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["name", "nicId"])
   networkInterfaces?: NetworkInterface[];
 }
@@ -719,6 +722,7 @@ model NetworkProfile {
 model NetworkProfileUpdate
   is UpdateableProperties<OmitProperties<NetworkProfile, "networkInterfaces">> {
   /** Gets or sets the list of network interfaces associated with the virtual machine. */
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["name", "nicId"])
   networkInterfaces?: NetworkInterfaceUpdate[];
 }
@@ -726,6 +730,7 @@ model NetworkProfileUpdate
 /** Defines the resource properties. */
 model StorageProfile {
   /** Gets or sets the list of virtual disks associated with the virtual machine. */
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["diskId", "name"])
   disks?: VirtualDisk[];
 }
@@ -734,6 +739,7 @@ model StorageProfile {
 model StorageProfileUpdate
   is UpdateableProperties<OmitProperties<StorageProfile, "disks">> {
   /** Gets or sets the list of virtual disks associated with the virtual machine. */
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["diskId", "name"])
   disks?: VirtualDiskUpdate[];
 }
@@ -781,6 +787,7 @@ model InfrastructureProfile {
   /** Checkpoints in the vm. */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Workaround for emitter problem"
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["checkpointID"])
   checkpoints?: Checkpoint[];
 

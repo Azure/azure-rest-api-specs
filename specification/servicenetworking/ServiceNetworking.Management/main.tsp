@@ -207,6 +207,7 @@ model TrafficControllerProperties {
 
   /** Security Policy Configuration */
   @added(Versions.v2024_05_01_preview)
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   securityPolicyConfigurations?: SecurityPolicyConfigurations;
 

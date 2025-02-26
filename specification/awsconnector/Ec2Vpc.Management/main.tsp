@@ -75,6 +75,7 @@ model AwsEc2VpcProperties {
   cidrBlock?: string;
 
   @doc("Property cidrBlockAssociations")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   cidrBlockAssociations?: string[];
 
@@ -100,10 +101,12 @@ model AwsEc2VpcProperties {
   ipv4NetmaskLength?: int32;
 
   @doc("Property ipv6CidrBlocks")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv6CidrBlocks?: string[];
 
   @doc("The tags for the VPC.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

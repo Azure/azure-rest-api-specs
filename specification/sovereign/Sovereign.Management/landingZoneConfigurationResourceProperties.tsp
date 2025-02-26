@@ -37,6 +37,7 @@ model LandingZoneConfigurationResourceProperties {
   ]>;
 
   @doc("Tags are key-value pairs that can be assigned to a resource to organize and manage it more effectively. Example: {'name': 'a tag name', 'value': 'a tag value'}")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   tags?: Tags[];
 
@@ -71,6 +72,7 @@ model LandingZoneConfigurationResourceProperties {
   azureBastionSubnetCidrBlock?: string;
 
   @doc("The child management groups of 'Landing Zones' management group and their assigned policies.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   landingZonesMgChildren?: LandingZoneManagementGroupProperties[];
 
@@ -102,6 +104,7 @@ model LandingZoneConfigurationResourceProperties {
   managedIdentity: ManagedIdentityProperties;
 
   @doc("The names of the 'Platform' child management groups and their assigned policies, excluding the default ones: 'Connectivity', 'Identity', and 'Management'")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   platformMgChildren?: PlatformManagementGroupProperties[];
 
@@ -109,6 +112,7 @@ model LandingZoneConfigurationResourceProperties {
   namingConventionFormula?: string;
 
   @doc("The custom naming convention applied to specific resource types for this landing zone configuration, which overrides the default naming convention for those resource types. Example - 'customNamingConvention': [{'resourceType': 'azureFirewalls', 'formula': '{DeploymentPrefix}-afwl-{DeploymentSuffix}'}]")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   customNamingConvention?: CustomNamingConvention[];
 }
@@ -160,6 +164,7 @@ model LandingZoneManagementGroupProperties {
 @doc("The properties of policy initiatives applied to the management group.")
 model ManagementGroupProperties {
   @doc("Array of policy initiatives applied to the management group.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   policyInitiativesAssignmentProperties: PolicyInitiativeAssignmentProperties[];
 }

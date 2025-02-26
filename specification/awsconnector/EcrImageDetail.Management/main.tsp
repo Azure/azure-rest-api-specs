@@ -93,6 +93,7 @@ model AwsEcrImageDetailProperties {
   imageSizeInBytes?: int64;
 
   @doc("<p>The list of tags associated with this image.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   imageTags?: string[];
 

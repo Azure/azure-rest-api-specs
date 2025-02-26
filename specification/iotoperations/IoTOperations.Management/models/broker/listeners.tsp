@@ -36,6 +36,7 @@ model BrokerListenerProperties {
   serviceName?: string;
 
   @doc("Ports on which this listener accepts client connections.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", ["port"])
   ports: ListenerPort[];
 

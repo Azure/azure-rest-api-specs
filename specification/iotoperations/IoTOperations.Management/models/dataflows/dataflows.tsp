@@ -38,6 +38,7 @@ model DataflowProperties {
   mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("List of operations including source and destination references as well as transformation.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   operations: DataflowOperation[];
 
@@ -89,14 +90,17 @@ model DataflowBuiltInTransformationSettings {
 
   @doc("Enrich data from Broker State Store. Dataset references a key in Broker State Store.")
   @maxItems(1)
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   datasets?: DataflowBuiltInTransformationDataset[] = #[];
 
   @doc("Filters input record or datapoints based on condition.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   filter?: DataflowBuiltInTransformationFilter[] = #[];
 
   @doc("Maps input to output message.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   map?: DataflowBuiltInTransformationMap[] = #[];
 }

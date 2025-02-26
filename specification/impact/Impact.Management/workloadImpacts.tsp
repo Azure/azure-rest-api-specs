@@ -50,10 +50,12 @@ model WorkloadImpactProperties is ResourceProperties {
   impactDescription?: string;
 
   @doc("The ARM correlation ids, this is important field for control plane related impacts")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   armCorrelationIds?: string[];
 
   @doc("Details about performance issue. Applicable for performance impacts.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   performance?: Performance[];
 

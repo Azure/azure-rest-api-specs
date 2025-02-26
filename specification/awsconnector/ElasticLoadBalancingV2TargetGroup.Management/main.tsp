@@ -105,6 +105,7 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   ipAddressType?: string;
 
   @doc("The Amazon Resource Names (ARNs) of the load balancers that route traffic to this target group.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   loadBalancerArns?: string[];
 
@@ -124,6 +125,7 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   protocolVersion?: string;
 
   @doc("The tags.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -131,6 +133,7 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   targetGroupArn?: string;
 
   @doc("The attributes.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   targetGroupAttributes?: TargetGroupAttribute[];
 
@@ -144,6 +147,7 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   targetType?: string;
 
   @doc("The targets.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   targets?: TargetDescription[];
 

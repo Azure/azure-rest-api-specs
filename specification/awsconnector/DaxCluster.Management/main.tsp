@@ -93,6 +93,7 @@ model AwsDaxClusterProperties {
   iamRoleArn?: string;
 
   @doc("<p>A list of nodes to be removed from the cluster.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   nodeIdsToRemove?: string[];
 
@@ -100,6 +101,7 @@ model AwsDaxClusterProperties {
   nodeType?: string;
 
   @doc("<p>A list of nodes that are currently in the cluster.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   nodes?: Node[];
 
@@ -116,6 +118,7 @@ model AwsDaxClusterProperties {
   sseDescription?: SSEDescription;
 
   @doc("<p>A list of security groups, and the status of each, for the nodes in the cluster.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   securityGroups?: SecurityGroupMembership[];
 
@@ -211,6 +214,7 @@ model NotificationConfiguration {
 @doc("Definition of ParameterGroupStatus")
 model ParameterGroupStatus {
   @doc("<p>The node IDs of one or more nodes to be rebooted.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   nodeIdsToReboot?: string[];
 

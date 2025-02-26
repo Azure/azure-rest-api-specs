@@ -83,10 +83,12 @@ model DiscoveredAssetProperties {
   defaultTopic?: Topic;
 
   @doc("Array of datasets that are part of the asset. Each dataset spec describes the data points that make up the set.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   datasets?: DiscoveredDataset[];
 
   @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   events?: DiscoveredEvent[];
 
@@ -109,6 +111,7 @@ model DiscoveredDataset {
   topic?: Topic;
 
   @doc("Array of data points that are part of the dataset. Each data point can have per-data point configuration.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dataPoints?: DiscoveredDataPoint[];
 }

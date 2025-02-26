@@ -45,7 +45,8 @@ interface WorkloadNetworkDnsZones {
   @doc("Delete a {name}", WorkloadNetworkDnsZone)
   @delete
   @extension("x-ms-long-running-operation", true)
-  @extension(
+  #suppress "deprecated" "Updated to value syntax next release" 
+@extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "location",

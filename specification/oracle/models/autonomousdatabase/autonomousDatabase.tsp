@@ -569,6 +569,7 @@ model ConnectionStringType {
   medium?: string;
 
   @doc("A list of connection string profiles to allow clients to group, filter and select connection string values based on structured metadata.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   profiles?: ProfileType[];
 }
@@ -749,6 +750,7 @@ model AutonomousDatabaseBaseProperties {
 
   @doc("Customer Contacts.")
   @visibility("create", "read", "update")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   customerContacts?: CustomerContact[];
 

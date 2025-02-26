@@ -121,15 +121,18 @@ model AssetProperties {
 
   @doc("Array of data points that are part of the asset. Each data point can reference an asset type capability and have per-data point configuration.")
   @removed(Versions.v2024_09_01_preview)
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dataPoints?: DataPoint[];
 
   @doc("Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.")
   @added(Versions.v2024_09_01_preview)
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   datasets?: Dataset[];
 
   @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   events?: Event[];
 
@@ -155,6 +158,7 @@ model Dataset {
   topic?: Topic;
 
   @doc("Array of data points that are part of the dataset. Each data point can have per-data point configuration.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dataPoints?: DataPoint[];
 }
@@ -297,6 +301,7 @@ union EventObservabilityMode {
 model AssetStatus {
   @doc("Array object to transfer and persist errors that originate from the Edge.")
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   errors?: AssetStatusError[];
 
@@ -308,12 +313,14 @@ model AssetStatus {
   @doc("Array of dataset statuses that describe the status of each dataset.")
   @visibility("read")
   @added(Versions.v2024_09_01_preview)
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   datasets?: AssetStatusDataset[];
 
   @doc("Array of event statuses that describe the status of each event.")
   @visibility("read")
   @added(Versions.v2024_09_01_preview)
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   events?: AssetStatusEvent[];
 }

@@ -72,6 +72,7 @@ model CloudFormationStackProperties {
 @doc("Definition of awsCloudFormationStack")
 model AwsCloudFormationStackProperties {
   @doc("Property capabilities")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   capabilities?: Capabilities[];
 
@@ -94,10 +95,12 @@ model AwsCloudFormationStackProperties {
   lastUpdateTime?: string;
 
   @doc("Property notificationARNs")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   notificationARNs?: string[];
 
   @doc("Property outputs")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   outputs?: Output[];
 
@@ -132,6 +135,7 @@ model AwsCloudFormationStackProperties {
   stackStatusReason?: string;
 
   @doc("Property tags")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

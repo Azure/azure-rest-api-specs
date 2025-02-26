@@ -82,6 +82,7 @@ model AwsCloudFrontDistributionProperties {
   id?: string;
 
   @doc("A complex type that contains zero or more ``Tag`` elements.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -93,14 +94,17 @@ model AwsCloudFrontDistributionProperties {
 @doc("Definition of DistributionConfig")
 model DistributionConfig {
   @doc("A complex type that contains information about CNAMEs (alternate domain names), if any, for this distribution.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   aliases?: string[];
 
   @doc("Property cnamEs")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   cnamEs?: string[];
 
   @doc("A complex type that contains zero or more ``CacheBehavior`` elements.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   cacheBehaviors?: CacheBehavior[];
 
@@ -111,6 +115,7 @@ model DistributionConfig {
   continuousDeploymentPolicyId?: string;
 
   @doc("A complex type that controls the following:  +  Whether CloudFront replaces HTTP status codes in the 4xx and 5xx range with custom error messages before returning the response to the viewer.  +  How long CloudFront caches HTTP status codes in the 4xx and 5xx range.   For more information about custom error pages, see [Customizing Error Responses](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html) in the *Amazon CloudFront Developer Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   customErrorResponses?: CustomErrorResponse[];
 
@@ -139,6 +144,7 @@ model DistributionConfig {
   originGroups?: OriginGroups;
 
   @doc("A complex type that contains information about origins for this distribution.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   origins?: Origin[];
 
@@ -181,6 +187,7 @@ model Tag {
 @doc("Definition of CacheBehavior")
 model CacheBehavior {
   @doc("A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin. There are three choices:  +  CloudFront forwards only ``GET`` and ``HEAD`` requests.  +  CloudFront forwards only ``GET``, ``HEAD``, and ``OPTIONS`` requests.  +  CloudFront forwards ``GET, HEAD, OPTIONS, PUT, PATCH, POST``, and ``DELETE`` requests.   If you pick the third choice, you may need to restrict access to your Amazon S3 bucket or to your custom origin so users can't perform operations that you don't want them to. For example, you might not want users to have permissions to delete objects from your origin.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   allowedMethods?: string[];
 
@@ -188,6 +195,7 @@ model CacheBehavior {
   cachePolicyId?: string;
 
   @doc("A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:  +  CloudFront caches responses to ``GET`` and ``HEAD`` requests.  +  CloudFront caches responses to ``GET``, ``HEAD``, and ``OPTIONS`` requests.   If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   cachedMethods?: string[];
 
@@ -204,10 +212,12 @@ model CacheBehavior {
   forwardedValues?: ForwardedValues;
 
   @doc("A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the ``LIVE`` stage to associate them with a cache behavior.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   functionAssociations?: FunctionAssociation[];
 
   @doc("A complex type that contains zero or more Lambda@Edge function associations for a cache behavior.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   lambdaFunctionAssociations?: LambdaFunctionAssociation[];
 
@@ -236,10 +246,12 @@ model CacheBehavior {
   targetOriginId?: string;
 
   @doc("A list of key groups that CloudFront can use to validate signed URLs or signed cookies. When a cache behavior contains trusted key groups, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with a private key whose corresponding public key is in the key group. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see [Serving private content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   trustedKeyGroups?: string[];
 
   @doc("We recommend using ``TrustedKeyGroups`` instead of ``TrustedSigners``.  A list of AWS-account IDs whose public keys CloudFront can use to validate signed URLs or signed cookies. When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with the private key of a CloudFront key pair in the trusted signer's AWS-account. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see [Serving private content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   trustedSigners?: string[];
 
@@ -285,6 +297,7 @@ model LegacyCustomOrigin {
   originProtocolPolicy?: string;
 
   @doc("Property originSSLProtocols")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   originSSLProtocols?: string[];
 }
@@ -296,6 +309,7 @@ model LegacyCustomOrigin {
 @doc("Definition of DefaultCacheBehavior")
 model DefaultCacheBehavior {
   @doc("A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin. There are three choices:  +  CloudFront forwards only ``GET`` and ``HEAD`` requests.  +  CloudFront forwards only ``GET``, ``HEAD``, and ``OPTIONS`` requests.  +  CloudFront forwards ``GET, HEAD, OPTIONS, PUT, PATCH, POST``, and ``DELETE`` requests.   If you pick the third choice, you may need to restrict access to your Amazon S3 bucket or to your custom origin so users can't perform operations that you don't want them to. For example, you might not want users to have permissions to delete objects from your origin.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   allowedMethods?: string[];
 
@@ -303,6 +317,7 @@ model DefaultCacheBehavior {
   cachePolicyId?: string;
 
   @doc("A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:  +  CloudFront caches responses to ``GET`` and ``HEAD`` requests.  +  CloudFront caches responses to ``GET``, ``HEAD``, and ``OPTIONS`` requests.   If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   cachedMethods?: string[];
 
@@ -319,10 +334,12 @@ model DefaultCacheBehavior {
   forwardedValues?: ForwardedValues;
 
   @doc("A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the ``LIVE`` stage to associate them with a cache behavior.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   functionAssociations?: FunctionAssociation[];
 
   @doc("A complex type that contains zero or more Lambda@Edge function associations for a cache behavior.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   lambdaFunctionAssociations?: LambdaFunctionAssociation[];
 
@@ -348,10 +365,12 @@ model DefaultCacheBehavior {
   targetOriginId?: string;
 
   @doc("A list of key groups that CloudFront can use to validate signed URLs or signed cookies. When a cache behavior contains trusted key groups, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with a private key whose corresponding public key is in the key group. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see [Serving private content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   trustedKeyGroups?: string[];
 
   @doc("We recommend using ``TrustedKeyGroups`` instead of ``TrustedSigners``.  A list of AWS-account IDs whose public keys CloudFront can use to validate signed URLs or signed cookies. When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with the private key of a CloudFront key pair in a trusted signer's AWS-account. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see [Serving private content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   trustedSigners?: string[];
 
@@ -382,6 +401,7 @@ model Logging {
 @doc("Definition of OriginGroups")
 model OriginGroups {
   @doc("The items (origin groups) in a distribution.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   items?: OriginGroup[];
 
@@ -414,6 +434,7 @@ model Origin {
   originAccessControlId?: string;
 
   @doc("A list of HTTP header names and values that CloudFront adds to the requests that it sends to the origin. For more information, see [Adding Custom Headers to Origin Requests](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/add-origin-custom-headers.html) in the *Amazon CloudFront Developer Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   originCustomHeaders?: OriginCustomHeader[];
 
@@ -482,6 +503,7 @@ model ForwardedValues {
   cookies?: Cookies;
 
   @doc("This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include headers in the cache key, use a cache policy. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) in the *Amazon CloudFront Developer Guide*. If you want to send headers to the origin but not include them in the cache key, use an origin request policy. For more information, see [Creating origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) in the *Amazon CloudFront Developer Guide*. A complex type that specifies the ``Headers``, if any, that you want CloudFront to forward to the origin for this cache behavior (whitelisted headers). For the headers that you specify, CloudFront also caches separate versions of a specified object that is based on the header values in viewer requests. For more information, see [Caching Content Based on Request Headers](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html) in the *Amazon CloudFront Developer Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   headers?: string[];
 
@@ -489,6 +511,7 @@ model ForwardedValues {
   queryString?: boolean;
 
   @doc("This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include query strings in the cache key, use a cache policy. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) in the *Amazon CloudFront Developer Guide*. If you want to send query strings to the origin but not include them in the cache key, use an origin request policy. For more information, see [Creating origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) in the *Amazon CloudFront Developer Guide*. A complex type that contains information about the query string parameters that you want CloudFront to use for caching for this cache behavior.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   queryStringCacheKeys?: string[];
 }
@@ -560,6 +583,7 @@ model CustomOriginConfig {
   originReadTimeout?: int32 = 30;
 
   @doc("Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to your origin over HTTPS. Valid values include ``SSLv3``, ``TLSv1``, ``TLSv1.1``, and ``TLSv1.2``. For more information, see [Minimum Origin SSL Protocol](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginSSLProtocols) in the *Amazon CloudFront Developer Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   originSSLProtocols?: string[];
 }
@@ -607,6 +631,7 @@ model S3OriginConfig {
 @doc("Definition of GeoRestriction")
 model GeoRestriction {
   @doc("A complex type that contains a ``Location`` element for each country in which you want CloudFront either to distribute your content or not distribute your content.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   locations?: string[];
 
@@ -624,6 +649,7 @@ model Cookies {
   forward?: string;
 
   @doc("This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include cookies in the cache key, use a cache policy. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) in the *Amazon CloudFront Developer Guide*. If you want to send cookies to the origin but not include them in the cache key, use an origin request policy. For more information, see [Creating origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) in the *Amazon CloudFront Developer Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   whitelistedNames?: string[];
 }
@@ -645,6 +671,7 @@ model OriginGroupFailoverCriteria {
 @doc("Definition of OriginGroupMembers")
 model OriginGroupMembers {
   @doc("Items (origins) in an origin group.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   items?: OriginGroupMember[];
 
@@ -659,6 +686,7 @@ model OriginGroupMembers {
 @doc("Definition of StatusCodes")
 model StatusCodes {
   @doc("The items (status codes) for an origin group.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   items?: int32[];
 

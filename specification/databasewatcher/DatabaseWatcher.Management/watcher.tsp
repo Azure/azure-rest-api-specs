@@ -156,7 +156,8 @@ interface Watchers {
   @action
   @post
   @armResourceAction(Watcher)
-  @extension(
+  #suppress "deprecated" "Updated to value syntax next release" 
+@extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "azure-async-operation",
@@ -172,7 +173,8 @@ interface Watchers {
   @post
   @armResourceAction(Watcher)
   @extension("x-ms-long-running-operation", true)
-  @extension(
+  #suppress "deprecated" "Updated to value syntax next release" 
+@extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "azure-async-operation",

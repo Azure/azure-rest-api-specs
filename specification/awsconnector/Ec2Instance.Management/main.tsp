@@ -70,6 +70,7 @@ model AwsEc2InstanceProperties {
   architecture?: ArchitectureValuesEnumValue;
 
   @doc("<p>Any block device mapping entries for the instance.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   blockDeviceMappings?: InstanceBlockDeviceMapping[];
 
@@ -95,10 +96,12 @@ model AwsEc2InstanceProperties {
   ebsOptimized?: boolean;
 
   @doc("<p>Deprecated.</p> <note> <p>Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads that require graphics acceleration, we recommend that you use Amazon EC2 G4ad, G4dn, or G5 instances.</p> </note>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   elasticGpuAssociations?: ElasticGpuAssociation[];
 
   @doc("<p>The elastic inference accelerator associated with the instance.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   elasticInferenceAcceleratorAssociations?: ElasticInferenceAcceleratorAssociation[];
 
@@ -142,6 +145,7 @@ model AwsEc2InstanceProperties {
   launchTime?: utcDateTime;
 
   @doc("<p>The license configurations for the instance.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   licenses?: LicenseConfiguration[];
 
@@ -155,6 +159,7 @@ model AwsEc2InstanceProperties {
   monitoring?: Monitoring;
 
   @doc("<p>The network interfaces for the instance.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   networkInterfaces?: InstanceNetworkInterface[];
 
@@ -180,6 +185,7 @@ model AwsEc2InstanceProperties {
   privateIpAddress?: string;
 
   @doc("<p>The product codes attached to this instance, if applicable.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   productCodes?: ProductCode[];
 
@@ -199,6 +205,7 @@ model AwsEc2InstanceProperties {
   rootDeviceType?: DeviceTypeEnumValue;
 
   @doc("<p>The security groups for the instance.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   securityGroups?: GroupIdentifier[];
 
@@ -224,6 +231,7 @@ model AwsEc2InstanceProperties {
   subnetId?: string;
 
   @doc("<p>Any tags assigned to the instance.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -3187,6 +3195,7 @@ model InstanceNetworkInterface {
   description?: string;
 
   @doc("<p>The security groups.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   groups?: GroupIdentifier[];
 
@@ -3194,14 +3203,17 @@ model InstanceNetworkInterface {
   interfaceType?: string;
 
   @doc("<p>The IPv4 delegated prefixes that are assigned to the network interface.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv4Prefixes?: InstanceIpv4Prefix[];
 
   @doc("<p>The IPv6 addresses associated with the network interface.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv6Addresses?: InstanceIpv6Address[];
 
   @doc("<p>The IPv6 delegated prefixes that are assigned to the network interface.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv6Prefixes?: InstanceIpv6Prefix[];
 
@@ -3221,6 +3233,7 @@ model InstanceNetworkInterface {
   privateIpAddress?: string;
 
   @doc("<p>The private IPv4 addresses associated with the network interface.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   privateIpAddresses?: InstancePrivateIpAddress[];
 

@@ -79,6 +79,7 @@ model RdsDBSnapshotAttributesResultProperties {
 @doc("Definition of awsRdsDBSnapshotAttributesResult")
 model AwsRdsDBSnapshotAttributesResultProperties {
   @doc("<p>The list of attributes and values for the manual DB snapshot.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dbSnapshotAttributes?: DBSnapshotAttribute[];
 
@@ -96,6 +97,7 @@ model DBSnapshotAttribute {
   attributeName?: string;
 
   @doc("<p>The value or values for the manual DB snapshot attribute.</p> <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this element returns a list of IDs of the Amazon Web Services accounts that are authorized to copy or restore the manual DB snapshot. If a value of <code>all</code> is in the list, then the manual DB snapshot is public and available for any Amazon Web Services account to copy or restore.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   attributeValues?: string[];
 }

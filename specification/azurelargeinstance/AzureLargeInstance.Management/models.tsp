@@ -383,6 +383,7 @@ model StorageProfile {
     Specifies information about the operating system disk used by Azure Large
     Instance.
     """)
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   osDisks?: Disk[];
 }
@@ -437,6 +438,7 @@ model OsProfile {
 @doc("Specifies the network settings for the Azure Large Instance disks.")
 model NetworkProfile {
   @doc("Specifies the network interfaces for the Azure Large Instance.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   networkInterfaces?: IpAddress[];
 

@@ -38,6 +38,7 @@ model StandbyVirtualMachinePoolResourceProperties {
   elasticityProfile?: StandbyVirtualMachinePoolElasticityProfile;
 
   @doc("Specifies the desired state of virtual machines in the pool.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["vmState"])
   virtualMachineState: VirtualMachineState;
 

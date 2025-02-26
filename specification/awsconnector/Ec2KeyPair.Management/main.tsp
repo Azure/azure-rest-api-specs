@@ -90,6 +90,7 @@ model AwsEc2KeyPairProperties {
   publicKeyMaterial?: string;
 
   @doc("The tags to apply to the key pair.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }

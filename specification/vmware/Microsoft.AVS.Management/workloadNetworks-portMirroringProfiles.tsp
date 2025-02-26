@@ -48,7 +48,8 @@ interface WorkloadNetworkPortMirroringProfiles {
   @doc("Delete a {name}", WorkloadNetworkPortMirroring)
   @delete
   @extension("x-ms-long-running-operation", true)
-  @extension(
+  #suppress "deprecated" "Updated to value syntax next release" 
+@extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "location",

@@ -49,6 +49,7 @@ model HealthValidationProperties {
   status: validationStatus;
 
   @visibility("read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   @doc("The list of issues found by health validation.")
   issues: ValidationIssue[];

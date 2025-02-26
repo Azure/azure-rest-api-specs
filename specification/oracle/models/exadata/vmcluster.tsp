@@ -48,6 +48,7 @@ union UpdateAction {
 @doc("ExadataIormConfig for cloud vm cluster")
 model ExadataIormConfig {
   @doc("An array of IORM settings for all the database in the Exadata DB system.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dbPlans?: DbIormConfig[];
 
@@ -353,6 +354,7 @@ model CloudVmClusterProperties {
 
   @doc("CIDR blocks for additional NSG ingress rules. The VNET CIDRs used to provision the VM Cluster will be added by default.")
   @visibility("create", "read")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   nsgCidrs?: NsgCidr[];
 

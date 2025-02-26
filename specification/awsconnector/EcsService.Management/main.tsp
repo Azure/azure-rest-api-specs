@@ -72,6 +72,7 @@ model EcsServiceProperties {
 @doc("Definition of awsEcsService")
 model AwsEcsServiceProperties {
   @doc("The capacity provider strategy to use for the service. If a ``capacityProviderStrategy`` is specified, the ``launchType`` parameter must be omitted. If no ``capacityProviderStrategy`` or ``launchType`` is specified, the ``defaultCapacityProviderStrategy`` for the cluster is used. A capacity provider strategy may contain a maximum of 6 capacity providers.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   capacityProviderStrategy?: CapacityProviderStrategyItem[];
 
@@ -100,6 +101,7 @@ model AwsEcsServiceProperties {
   launchType?: LaunchType;
 
   @doc("A list of load balancer objects to associate with the service. If you specify the ``Role`` property, ``LoadBalancers`` must be specified as well. For information about the number of load balancers that you can specify per service, see [Service Load Balancing](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html) in the *Amazon Elastic Container Service Developer Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   loadBalancers?: LoadBalancer[];
 
@@ -110,10 +112,12 @@ model AwsEcsServiceProperties {
   networkConfiguration?: NetworkConfiguration;
 
   @doc("An array of placement constraint objects to use for tasks in your service. You can specify a maximum of 10 constraints for each task. This limit includes constraints in the task definition and those specified at runtime.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   placementConstraints?: PlacementConstraint[];
 
   @doc("The placement strategy objects to use for tasks in your service. You can specify a maximum of 5 strategy rules for each service.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   placementStrategies?: PlacementStrategy[];
 
@@ -139,10 +143,12 @@ model AwsEcsServiceProperties {
   serviceName?: string;
 
   @doc("The details of the service discovery registry to associate with this service. For more information, see [Service discovery](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).  Each service may be associated with one service registry. Multiple service registries for each service isn't supported.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   serviceRegistries?: ServiceRegistry[];
 
   @doc("The metadata that you apply to the service to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. When a service is deleted, the tags are deleted as well. The following basic restrictions apply to tags:  +  Maximum number of tags per resource - 50  +  For each resource, each tag key must be unique, and each tag key can have only one value.  +  Maximum key length - 128 Unicode characters in UTF-8  +  Maximum value length - 256 Unicode characters in UTF-8  +  If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.  +  Tag keys and values are case-sensitive.  +  Do not use ``aws:``, ``AWS:``, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -150,6 +156,7 @@ model AwsEcsServiceProperties {
   taskDefinition?: string;
 
   @doc("The configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   volumeConfigurations?: ServiceVolumeConfiguration[];
 }
@@ -345,6 +352,7 @@ model ServiceConnectConfiguration {
   `namespace`?: string;
 
   @doc("The list of Service Connect service objects. These are names and aliases (also known as endpoints) that are used by other Amazon ECS services to connect to this service.  This field is not required for a 'client' Amazon ECS service that's a member of a namespace only to connect to other services within the namespace. An example of this would be a frontend application that accepts incoming requests from either a load balancer that's attached to the service or by other means. An object selects a port from the task definition, assigns a name for the CMAPlong service, and a list of aliases (endpoints) and ports for client applications to refer to this service.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   services?: ServiceConnectService[];
 }
@@ -401,6 +409,7 @@ model ServiceVolumeConfiguration {
 @doc("Definition of DeploymentAlarms")
 model DeploymentAlarms {
   @doc("One or more CloudWatch alarm names. Use a ',' to separate the alarms.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   alarmNames?: string[];
 
@@ -434,10 +443,12 @@ model AwsVpcConfiguration {
   assignPublicIp?: AwsVpcConfigurationAssignPublicIp;
 
   @doc("The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``AwsVpcConfiguration``.  All specified security groups must be from the same VPC.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   securityGroups?: string[];
 
   @doc("The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``AwsVpcConfiguration``.  All specified subnets must be from the same VPC.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subnets?: string[];
 }
@@ -466,6 +477,7 @@ model LogConfiguration {
   options?: unknown;
 
   @doc("The secrets to pass to the log configuration. For more information, see [Specifying sensitive data](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html) in the *Amazon Elastic Container Service Developer Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   secretOptions?: Secret[];
 }
@@ -477,6 +489,7 @@ model LogConfiguration {
 @doc("Definition of ServiceConnectService")
 model ServiceConnectService {
   @doc("The list of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. Each alias ('endpoint') is a fully-qualified name and port number that other Amazon ECS tasks ('clients') can use to connect to this service. Each name and port mapping must be unique within the namespace. For each ``ServiceConnectService``, you must provide at least one ``clientAlias`` with one ``port``.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   clientAliases?: ServiceConnectClientAlias[];
 
@@ -524,6 +537,7 @@ model ServiceManagedEBSVolumeConfiguration {
   snapshotId?: string;
 
   @doc("The tags to apply to the volume. Amazon ECS applies service-managed tags by default. This parameter maps 1:1 with the ``TagSpecifications.N`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tagSpecifications?: EBSTagSpecification[];
 
@@ -602,6 +616,7 @@ model EBSTagSpecification {
   resourceType?: string;
 
   @doc("The tags applied to this Amazon EBS volume. ``AmazonECSCreated`` and ``AmazonECSManaged`` are reserved tags that can't be used.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }

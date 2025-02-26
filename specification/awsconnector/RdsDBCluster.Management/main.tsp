@@ -75,6 +75,7 @@ model AwsRdsDBClusterProperties {
   allocatedStorage?: int32;
 
   @doc("Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   associatedRoles?: DBClusterRole[];
 
@@ -82,6 +83,7 @@ model AwsRdsDBClusterProperties {
   autoMinorVersionUpgrade?: boolean;
 
   @doc("A list of Availability Zones (AZs) where instances in the DB cluster can be created. For information on AWS Regions and Availability Zones, see Choosing the Regions and Availability Zones in the Amazon Aurora User Guide.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   availabilityZones?: string[];
 
@@ -131,6 +133,7 @@ model AwsRdsDBClusterProperties {
   domainIAMRoleName?: string;
 
   @doc("The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   enableCloudwatchLogsExports?: string[];
 
@@ -243,6 +246,7 @@ model AwsRdsDBClusterProperties {
   storageType?: string;
 
   @doc("An array of key-value pairs to apply to this resource.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -250,6 +254,7 @@ model AwsRdsDBClusterProperties {
   useLatestRestorableTime?: boolean;
 
   @doc("A list of EC2 VPC security groups to associate with this DB cluster.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   vpcSecurityGroupIds?: string[];
 }

@@ -73,6 +73,7 @@ model S3AccessControlPolicyProperties {
 @doc("Definition of awsS3AccessControlPolicy")
 model AwsS3AccessControlPolicyProperties {
   @doc("<p>A list of grants.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   grants?: Grant[];
 

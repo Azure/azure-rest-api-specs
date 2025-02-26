@@ -81,6 +81,7 @@ model AwsEfsMountTargetProperties {
   ipAddress?: string;
 
   @doc("Up to five VPC security group IDs, of the form ``sg-xxxxxxxx``. These must be for the same VPC as subnet specified.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   securityGroups?: string[];
 

@@ -32,6 +32,7 @@ model Solution is TrackedResource<SolutionProperties> {
 @doc("The properties of a Solution resource.")
 model SolutionProperties {
   @doc("A list of components")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   components?: ComponentProperties[];
 

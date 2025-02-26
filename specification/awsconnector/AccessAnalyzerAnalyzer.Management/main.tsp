@@ -79,6 +79,7 @@ model AwsAccessAnalyzerAnalyzerProperties {
   analyzerName?: string;
 
   @doc("Property archiveRules")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   archiveRules?: ArchiveRule[];
 
@@ -86,6 +87,7 @@ model AwsAccessAnalyzerAnalyzerProperties {
   arn?: string;
 
   @doc("An array of key-value pairs to apply to this resource.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -110,6 +112,7 @@ model UnusedAccessConfiguration {
 @doc("Definition of ArchiveRule")
 model ArchiveRule {
   @doc("Property filter")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   filter?: Filter[];
 
@@ -137,10 +140,12 @@ model Tag {
 @doc("Definition of Filter")
 model Filter {
   @doc("Property contains")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   contains?: string[];
 
   @doc("Property eq")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   eq?: string[];
 
@@ -148,6 +153,7 @@ model Filter {
   exists?: boolean;
 
   @doc("Property neq")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   neq?: string[];
 

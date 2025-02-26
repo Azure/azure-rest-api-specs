@@ -241,6 +241,7 @@ model DataLakeConnectorMap {
 @doc("Delta table properties")
 model DeltaTable {
   @doc("Schema list supported.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   schema: DeltaTableSchema[];
 

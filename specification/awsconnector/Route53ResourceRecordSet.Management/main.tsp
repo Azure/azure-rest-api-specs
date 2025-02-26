@@ -100,6 +100,7 @@ model AwsRoute53ResourceRecordSetProperties {
   region?: ResourceRecordSetRegionEnumValue;
 
   @doc("<p>Information about the resource records to act upon.</p> <note> <p>If you're creating an alias resource record set, omit <code>ResourceRecords</code>.</p> </note>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   resourceRecords?: ResourceRecord[];
 

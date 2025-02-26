@@ -128,6 +128,7 @@ model AwsDatabaseMigrationServiceReplicationInstanceProperties {
   replicationInstanceIdentifier?: string;
 
   @doc("<p>One or more IPv6 addresses for the replication instance.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   replicationInstanceIpv6Addresses?: string[];
 
@@ -135,6 +136,7 @@ model AwsDatabaseMigrationServiceReplicationInstanceProperties {
   replicationInstancePrivateIpAddress?: string;
 
   @doc("<p>One or more private IP addresses for the replication instance.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   replicationInstancePrivateIpAddresses?: string[];
 
@@ -142,6 +144,7 @@ model AwsDatabaseMigrationServiceReplicationInstanceProperties {
   replicationInstancePublicIpAddress?: string;
 
   @doc("<p>One or more public IP addresses for the replication instance.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   replicationInstancePublicIpAddresses?: string[];
 
@@ -155,6 +158,7 @@ model AwsDatabaseMigrationServiceReplicationInstanceProperties {
   secondaryAvailabilityZone?: string;
 
   @doc("<p>The VPC security group for the instance.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   vpcSecurityGroups?: VpcSecurityGroupMembership[];
 }
@@ -197,10 +201,12 @@ model ReplicationSubnetGroup {
   subnetGroupStatus?: string;
 
   @doc("<p>The subnets that are in the subnet group.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subnets?: Subnet[];
 
   @doc("<p>The IP addressing protocol supported by the subnet group. This is used by a replication instance with values such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   supportedNetworkTypes?: string[];
 

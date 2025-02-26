@@ -117,6 +117,7 @@ model AwsEc2SnapshotProperties {
   storageTier?: StorageTierEnumValue;
 
   @doc("<p>Any tags assigned to the snapshot.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

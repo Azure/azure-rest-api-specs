@@ -87,6 +87,7 @@ model AwsSageMakerAppProperties {
   resourceSpec?: ResourceSpec;
 
   @doc("A list of tags to apply to the app.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

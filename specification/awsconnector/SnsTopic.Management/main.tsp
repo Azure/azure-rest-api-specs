@@ -81,6 +81,7 @@ model AwsSnsTopicProperties {
   dataProtectionPolicy?: unknown;
 
   @doc("Property deliveryStatusLogging")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   deliveryStatusLogging?: LoggingConfig[];
 
@@ -97,10 +98,12 @@ model AwsSnsTopicProperties {
   signatureVersion?: string;
 
   @doc("The SNS subscriptions (endpoints) for this topic.  If you specify the ``Subscription`` property in the ``AWS::SNS::Topic`` resource and it creates an associated subscription resource, the associated subscription is not deleted when the ``AWS::SNS::Topic`` resource is deleted.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subscription?: Subscription[];
 
   @doc("The list of tags to add to a new topic.  To be able to tag a topic on creation, you must have the ``sns:CreateTopic`` and ``sns:TagResource`` permissions.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

@@ -78,6 +78,7 @@ model AwsIamGroupProperties {
   groupName?: string;
 
   @doc("The Amazon Resource Name (ARN) of the IAM policy you want to attach. For more information about ARNs, see [Amazon Resource Names (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *General Reference*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   managedPolicyArns?: string[];
 
@@ -85,6 +86,7 @@ model AwsIamGroupProperties {
   path?: string;
 
   @doc("Adds or updates an inline policy document that is embedded in the specified IAM group. To view AWS::IAM::Group snippets, see [Declaring an Group Resource](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-iam.html#scenario-iam-group).  The name of each inline policy for a role, user, or group must be unique. If you don't choose unique names, updates to the IAM identity will fail.   For information about limits on the number of inline policies that you can embed in a group, see [Limitations on Entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html) in the *User Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   policies?: Policy[];
 }

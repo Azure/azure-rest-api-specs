@@ -63,6 +63,7 @@ op ArmResourceActionNoContentAsyncNoRequestBody<
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
 @autoRoute
 @extension("x-ms-long-running-operation", true)
+#suppress "deprecated" "Updated to value syntax next release" 
 @extension(
   "x-ms-long-running-operation-options",
   {

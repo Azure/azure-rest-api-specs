@@ -62,6 +62,7 @@ model MaintenanceWindow {
   preference?: Preference;
 
   @doc("Months during the year when maintenance should be performed.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["name"])
   months?: Month[];
 
@@ -69,6 +70,7 @@ model MaintenanceWindow {
   weeksOfMonth?: int32[];
 
   @doc("Days during the week when maintenance should be performed.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["name"])
   daysOfWeek?: DayOfWeek[];
 
@@ -177,6 +179,7 @@ model CloudExadataInfrastructureProperties {
   estimatedPatchingTime?: EstimatedPatchingTime;
 
   @doc("The list of customer email addresses that receive information from Oracle about the specified OCI Database service resource. Oracle uses these email addresses to send notifications about planned and unplanned software maintenance updates, information about system hardware, and other information needed by administrators. Up to 10 email addresses can be added to the customer contacts for a cloud Exadata infrastructure instance. ")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   @visibility("create", "read", "update")
   customerContacts?: CustomerContact[];

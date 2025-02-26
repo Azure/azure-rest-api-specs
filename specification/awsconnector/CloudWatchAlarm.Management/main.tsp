@@ -75,6 +75,7 @@ model AwsCloudWatchAlarmProperties {
   actionsEnabled?: boolean = true;
 
   @doc("The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN). For more information about creating alarms and the actions that you can specify, see [PutMetricAlarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html) in the *API Reference*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   alarmActions?: string[];
 
@@ -94,6 +95,7 @@ model AwsCloudWatchAlarmProperties {
   datapointsToAlarm?: int32;
 
   @doc("The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify ``Dimensions``. Instead, you use ``Metrics``.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dimensions?: Dimension[];
 
@@ -107,6 +109,7 @@ model AwsCloudWatchAlarmProperties {
   extendedStatistic?: string;
 
   @doc("The actions to execute when this alarm transitions to the ``INSUFFICIENT_DATA`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   insufficientDataActions?: string[];
 
@@ -114,6 +117,7 @@ model AwsCloudWatchAlarmProperties {
   metricName?: string;
 
   @doc("An array that enables you to create an alarm based on the result of a metric math expression. Each item in the array either retrieves a metric or performs a math expression. If you specify the ``Metrics`` parameter, you cannot specify ``MetricName``, ``Dimensions``, ``Period``, ``Namespace``, ``Statistic``, ``ExtendedStatistic``, or ``Unit``.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   metrics?: MetricDataQuery[];
 
@@ -121,6 +125,7 @@ model AwsCloudWatchAlarmProperties {
   `namespace`?: string;
 
   @doc("The actions to execute when this alarm transitions to the ``OK`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   okActions?: string[];
 
@@ -131,6 +136,7 @@ model AwsCloudWatchAlarmProperties {
   statistic?: string;
 
   @doc("Property tags")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -227,6 +233,7 @@ model MetricStat {
 @doc("Definition of Metric")
 model Metric {
   @doc("The metric dimensions that you want to be used for the metric that the alarm will watch.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dimensions?: Dimension[];
 

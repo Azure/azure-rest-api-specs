@@ -132,6 +132,7 @@ model ExportResult {
   skippedResources?: armResourceIdentifier[];
 
   @doc("A list of errors derived during exporting each resource")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   errors?: ErrorDetail[];
 }

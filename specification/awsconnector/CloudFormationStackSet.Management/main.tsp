@@ -82,6 +82,7 @@ model AwsCloudFormationStackSetProperties {
   callAs?: CallAs;
 
   @doc("In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   capabilities?: string[];
 
@@ -98,6 +99,7 @@ model AwsCloudFormationStackSetProperties {
   operationPreferences?: OperationPreferences;
 
   @doc("The input parameters for the stack set template.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   parameters?: Parameter[];
 
@@ -105,6 +107,7 @@ model AwsCloudFormationStackSetProperties {
   permissionModel?: PermissionModel;
 
   @doc("A group of stack instances with parameters in some specific accounts and regions.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   stackInstancesGroup?: StackInstances[];
 
@@ -115,6 +118,7 @@ model AwsCloudFormationStackSetProperties {
   stackSetName?: string;
 
   @doc("The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -193,6 +197,7 @@ model OperationPreferences {
   regionConcurrencyType?: OperationPreferencesRegionConcurrencyType;
 
   @doc("Property regionOrder")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   regionOrder?: string[];
 }
@@ -231,10 +236,12 @@ model StackInstances {
   deploymentTargets?: DeploymentTargets;
 
   @doc("A list of stack set parameters whose values you want to override in the selected stack instances.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   parameterOverrides?: Parameter[];
 
   @doc("The names of one or more Regions where you want to create stack instances using the specified AWS account(s).")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   regions?: string[];
 }
@@ -262,6 +269,7 @@ model DeploymentTargets {
   accountFilterType?: DeploymentTargetsAccountFilterType;
 
   @doc("AWS accounts that you want to create stack instances in the specified Region(s) for.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   accounts?: string[];
 
@@ -269,6 +277,7 @@ model DeploymentTargets {
   accountsUrl?: string;
 
   @doc("The organization root ID or organizational unit (OU) IDs to which StackSets deploys.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   organizationalUnitIds?: string[];
 }

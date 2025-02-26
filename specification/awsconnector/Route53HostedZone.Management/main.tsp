@@ -75,6 +75,7 @@ model AwsRoute53HostedZoneProperties {
   hostedZoneConfig?: HostedZoneConfig;
 
   @doc("Adds, edits, or deletes tags for a health check or a hosted zone. For information about using tags for cost allocation, see [Using Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *User Guide*.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   hostedZoneTags?: HostedZoneTag[];
 
@@ -85,6 +86,7 @@ model AwsRoute53HostedZoneProperties {
   name?: string;
 
   @doc("Property nameServers")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   nameServers?: string[];
 
@@ -92,6 +94,7 @@ model AwsRoute53HostedZoneProperties {
   queryLoggingConfig?: QueryLoggingConfig;
 
   @doc("*Private hosted zones:* A complex type that contains information about the VPCs that are associated with the specified hosted zone.  For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   vpCs?: VPC[];
 }

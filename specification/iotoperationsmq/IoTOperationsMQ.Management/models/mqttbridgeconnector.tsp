@@ -148,6 +148,7 @@ model MqttBridgeTopicMapProperties {
   mqttBridgeConnectorRef: string;
 
   @doc("The route details for MqttBridge connector.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   routes?: MqttBridgeRoutes[];
 

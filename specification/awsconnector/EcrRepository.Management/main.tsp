@@ -99,6 +99,7 @@ model AwsEcrRepositoryProperties {
   repositoryUri?: string;
 
   @doc("An array of key-value pairs to apply to this resource.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }

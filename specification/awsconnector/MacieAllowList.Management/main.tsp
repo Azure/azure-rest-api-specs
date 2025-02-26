@@ -90,6 +90,7 @@ model AwsMacieAllowListProperties {
   status?: Status;
 
   @doc("A collection of tags associated with a resource")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }

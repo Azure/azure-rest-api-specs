@@ -32,6 +32,7 @@ model Target is TrackedResource<TargetProperties> {
 @doc("The properties of a Target resource.")
 model TargetProperties {
   @doc("A list of components.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   components?: ComponentProperties[];
 
@@ -39,6 +40,7 @@ model TargetProperties {
   scope?: string;
 
   @doc("Defines the device topology for a target or instance.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   topologies?: TopologiesProperties[];
 
@@ -56,6 +58,7 @@ model TargetProperties {
 @doc("Defines a desired runtime component.")
 model TopologiesProperties {
   @doc("bindings description.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   bindings?: BindingProperties[];
 }

@@ -75,6 +75,7 @@ model AwsEc2InstanceStatusProperties {
   availabilityZone?: string;
 
   @doc("<p>Any scheduled events associated with the instance.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   events?: InstanceStatusEvent[];
 
@@ -202,6 +203,7 @@ model InstanceStateNameEnumValue {
 @doc("Definition of InstanceStatusSummary")
 model InstanceStatusSummary {
   @doc("<p>The system instance health or application instance health.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   details?: InstanceStatusDetails[];
 

@@ -72,6 +72,7 @@ model LightsailInstanceProperties {
 @doc("Definition of awsLightsailInstance")
 model AwsLightsailInstanceProperties {
   @doc("An array of objects representing the add-ons to enable for the new instance.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   addOns?: AddOn[];
 
@@ -124,6 +125,7 @@ model AwsLightsailInstanceProperties {
   supportCode?: string;
 
   @doc("An array of key-value pairs to apply to this resource.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -186,6 +188,7 @@ model Hardware {
   cpuCount?: int32;
 
   @doc("Disks attached to the Instance.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   disks?: Disk[];
 
@@ -216,6 +219,7 @@ model Networking {
   monthlyTransfer?: MonthlyTransfer;
 
   @doc("Ports to the Instance.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ports?: Port[];
 }
@@ -310,10 +314,12 @@ model Port {
   accessType?: string;
 
   @doc("cidr List Aliases")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   cidrListAliases?: string[];
 
   @doc("Property cidrs")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   cidrs?: string[];
 
@@ -324,6 +330,7 @@ model Port {
   fromPort?: int32;
 
   @doc("IPv6 Cidrs")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv6Cidrs?: string[];
 

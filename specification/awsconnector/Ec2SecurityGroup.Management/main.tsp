@@ -81,10 +81,12 @@ model AwsEc2SecurityGroupProperties {
   groupName?: string;
 
   @doc("<p>The inbound rules associated with the security group.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipPermissions?: IpPermission[];
 
   @doc("<p>The outbound rules associated with the security group.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipPermissionsEgress?: IpPermission[];
 
@@ -92,6 +94,7 @@ model AwsEc2SecurityGroupProperties {
   ownerId?: string;
 
   @doc("<p>Any tags assigned to the security group.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -112,14 +115,17 @@ model IpPermission {
   ipProtocol?: string;
 
   @doc("<p>The IPv4 address ranges.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipRanges?: IpRange[];
 
   @doc("<p>The IPv6 address ranges.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv6Ranges?: Ipv6Range[];
 
   @doc("<p>The prefix list IDs.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   prefixListIds?: PrefixListId[];
 
@@ -127,6 +133,7 @@ model IpPermission {
   toPort?: int32;
 
   @doc("<p>The security group and Amazon Web Services account ID pairs.</p>")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   userIdGroupPairs?: UserIdGroupPair[];
 }

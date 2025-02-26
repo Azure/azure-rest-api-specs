@@ -99,6 +99,7 @@ model AwsEc2VolumeProperties {
   snapshotId?: string;
 
   @doc("The tags to apply to the volume during creation.")
+  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
