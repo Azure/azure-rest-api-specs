@@ -72,7 +72,7 @@ namespace Azure.AI.OpenAI.Assistants {
     v2024_10_01_Preview: "2024-10-01-preview",
 
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    @doc("The October 2024 preview release for Azure OpenAI.")
-    v2025_03_01_Preview: "2025-03-01-preview",
+    @doc("The December 2024 preview release for Azure OpenAI.")
+    v2025_01_01_preview: "2025-01-01-preview",
   }
 }
