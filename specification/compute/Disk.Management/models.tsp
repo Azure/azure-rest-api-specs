@@ -917,6 +917,7 @@ model DiskSecurityProfile {
 /**
  * Disk update resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope"
 model DiskUpdate {
   /**
    * Disk resource update properties.
@@ -1735,6 +1736,7 @@ model CopyCompletionError {
 /**
  * Snapshot update resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope"
 model SnapshotUpdate {
   /**
    * Snapshot resource update properties.
