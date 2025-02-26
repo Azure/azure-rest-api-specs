@@ -22,6 +22,18 @@ model DatasetContainer extends AssetContainer {
 
 }
 
+@doc("Enum to determine the type of data.")
+union DatasetType {
+  string,
+
+  @doc("URI file.")
+  uri_file: "uri_file",
+
+  @doc("URI folder.")
+  uri_folder: "uri_folder",
+}
+
+
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DatasetVersion Definition")
 @discriminator("datasetType")

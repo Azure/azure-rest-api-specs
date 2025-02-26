@@ -113,4 +113,24 @@ interface Datasets {
     @body
     body: DatasetVersion,
   ): DatasetVersion;
+
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Start pending upload.")
+  @post
+  @route("/datasets/{name}/versions/{version}/startPendingUpload")
+  createOrGetStartPendingUpload(
+    @doc("Container name.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
+
+    @doc("Version identifier.")
+    @path
+    version: string,
+
+    @doc("Pensing upload request.")
+    @body
+    body: PendingUploadRequestDto
+  ): PendingUploadResponseDto;
 }
