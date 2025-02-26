@@ -33,9 +33,6 @@ namespace ClientCustomizations;
         getRoleDefinition is KeyVault.RoleDefinitions.get;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
         listRoleDefinitions is KeyVault.RoleDefinitions.list;
-    }
-  @operationGroup
-    interface RoleAssignments{
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
         deleteRoleAssignment is KeyVault.RoleAssignments.delete;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
