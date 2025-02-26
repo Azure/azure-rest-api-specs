@@ -17,7 +17,7 @@ namespace Microsoft.AzureCis;
 @doc("Defines the array of allowlists for a secret")
 model Allowlists {
   @doc("Allowlist elements")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   elements: Allowlist[];
 }
 

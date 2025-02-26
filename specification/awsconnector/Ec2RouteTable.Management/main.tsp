@@ -75,7 +75,7 @@ model AwsEc2RouteTableProperties {
   routeTableId?: string;
 
   @doc("Any tags assigned to the route table.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   tags?: Tag[];
 
   @doc("The ID of the VPC.")

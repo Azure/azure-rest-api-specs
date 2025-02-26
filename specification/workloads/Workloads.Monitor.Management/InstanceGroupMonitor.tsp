@@ -35,11 +35,11 @@ model InstanceGroupMonitorProperties is ResourceCommonProperties {
   ]>;
 
   /** The discovery configurations */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   discoveryConfigurations: DiscoveryConfiguration[];
 
   /** The group configurations */
-  @extension("x-ms-identifiers", ["groupBy"])
+  @extension("x-ms-identifiers", #["groupBy"])
   groupConfigurations?: GroupConfiguration[];
 }
 

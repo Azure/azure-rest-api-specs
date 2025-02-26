@@ -95,12 +95,12 @@ model CredentialProperties {
   target?: Target;
 
   @visibility("read", "create", "update")
-  @extension("x-ms-identifiers", ["remoteRef"])
+  @extension("x-ms-identifiers", #["remoteRef"])
   @doc(" Data defines the connection between the Kubernetes Secret keys and the Provider data, Array.")
   data?: Data[];
 
   @visibility("read")
-  @extension("x-ms-identifiers", ["type"])
+  @extension("x-ms-identifiers", #["type"])
   @doc("The resource status information.")
   statuses?: ResourceStatus[];
 }

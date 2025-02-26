@@ -16,12 +16,12 @@ model AccessControlListProperties {
   @doc("Default action that needs to be applied when no condition is matched. Example: Permit | Deny.")
   defaultAction?: CommunityActionTypes = CommunityActionTypes.Permit;
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of match configurations.")
   @minItems(1)
   matchConfigurations?: AccessControlListMatchConfiguration[];
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of dynamic match configurations.")
   @minItems(1)
   dynamicMatchConfigurations?: CommonDynamicMatchConfiguration[];
@@ -74,12 +74,12 @@ model AccessControlListMatchConfiguration {
   @doc("Type of IP Address. IPv4 or IPv6")
   ipAddressType?: IPAddressType;
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of the match conditions.")
   @minItems(1)
   matchConditions?: AccessControlListMatchCondition[];
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of actions that need to be performed for the matched conditions.")
   @minItems(1)
   actions?: AccessControlListAction[];
@@ -99,12 +99,12 @@ model AccessControlListMatchConfigurationPatch {
   @doc("Type of IP Address. IPv4 or IPv6")
   ipAddressType?: IPAddressType;
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of the match conditions.")
   @minItems(1)
   matchConditions?: AccessControlListMatchConditionPatch[];
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of actions that need to be performed for the matched conditions.")
   @minItems(1)
   actions?: AccessControlListActionPatch[];
@@ -238,12 +238,12 @@ model AccessControlListPatchProperties {
   @doc("Default action that needs to be applied when no condition is matched. Example: Permit | Deny.")
   defaultAction?: CommunityActionTypes;
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of match configurations.")
   @minItems(1)
   matchConfigurations?: AccessControlListMatchConfigurationPatch[];
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of dynamic match configurations.")
   @minItems(1)
   dynamicMatchConfigurations?: CommonDynamicMatchConfigurationPatch[];

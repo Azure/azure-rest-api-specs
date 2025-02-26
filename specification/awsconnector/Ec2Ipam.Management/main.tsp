@@ -90,7 +90,7 @@ model AwsEc2IpamProperties {
   ipamRegion?: string;
 
   @doc("<p>The operating Regions for an IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions.</p> <p>For more information about operating Regions, see <a href='https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html'>Create an IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   operatingRegions?: IpamOperatingRegion[];
 
   @doc("<p>The Amazon Web Services account ID of the owner of the IPAM.</p>")
@@ -115,7 +115,7 @@ model AwsEc2IpamProperties {
   stateMessage?: string;
 
   @doc("<p>The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   tags?: Tag[];
 
   @doc("<p>IPAM is offered in a Free Tier and an Advanced Tier. For more information about the features available in each tier and the costs associated with the tiers, see <a href='http://aws.amazon.com/vpc/pricing/'>Amazon VPC pricing &gt; IPAM tab</a>.</p>")

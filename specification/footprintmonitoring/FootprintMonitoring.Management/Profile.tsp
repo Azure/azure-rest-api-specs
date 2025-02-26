@@ -30,8 +30,8 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `Get a Footprint profile (max).`: {
+    #{
+      `Get a Footprint profile (max).`: #{
         $ref: "./examples/Profiles_Get_MaximumSet_Gen.json",
       },
     }
@@ -58,8 +58,8 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `Update a Footprint profile (max).`: {
+    #{
+      `Update a Footprint profile (max).`: #{
         $ref: "./examples/Profiles_Update_MaximumSet_Gen.json",
       },
     }
@@ -81,8 +81,8 @@ interface Profiles {
   )
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `Delete a Footprint profile (min).`: {
+    #{
+      `Delete a Footprint profile (min).`: #{
         $ref: "./examples/Profiles_Delete_MinimumSet_Gen.json",
       },
     }
@@ -95,8 +95,8 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `List all Footprint profiles under a resource group (max).`: {
+    #{
+      `List all Footprint profiles under a resource group (max).`: #{
         $ref: "./examples/Profiles_ListByResourceGroup_MaximumSet_Gen.json",
       },
     }
@@ -109,8 +109,8 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `List all Footprint profiles under a subscription (max).`: {
+    #{
+      `List all Footprint profiles under a subscription (max).`: #{
         $ref: "./examples/Profiles_ListBySubscription_MaximumSet_Gen.json",
       },
     }

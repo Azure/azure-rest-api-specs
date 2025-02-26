@@ -538,7 +538,7 @@ union DependenciesAggregationType {
 @doc("A grouping of signal assignments and link to a data source")
 model SignalAssignmentGroup {
   @doc("Signal definitions which are assigned to this signal group. All assignments are combined with an OR operator.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   @maxItems(50)
   signalAssignments?: SignalAssignment[];
 

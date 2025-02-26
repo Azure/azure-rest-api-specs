@@ -165,7 +165,7 @@ model CloudVmClusterProperties {
   @doc("Array of mount path and size.")
   @added(Versions.v20241201_preview)
   @visibility("read", "update")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   fileSystemConfigurationDetails?: FileSystemConfigurationDetails[];
 
   @doc("The data disk group size to be allocated in TBs.")
@@ -317,7 +317,7 @@ model CloudVmClusterProperties {
 
   @doc("CIDR blocks for additional NSG ingress rules. The VNET CIDRs used to provision the VM Cluster will be added by default.")
   @visibility("create", "read")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   nsgCidrs?: NsgCidr[];
 
   @doc("Indicates user preferences for the various diagnostic collection options for the VM cluster/Cloud VM cluster/VMBM DBCS.")

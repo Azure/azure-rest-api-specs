@@ -26,7 +26,7 @@ model NetworkFabricProperties {
   storageAccountConfiguration?: StorageAccountConfiguration;
 
   @doc("Network Fabric Lock details")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @added(Versions.v2024_06_15_preview)
   @visibility("read")
   @minItems(1)
@@ -97,7 +97,7 @@ model NetworkFabricProperties {
   ]>[];
 
   @doc("Feature flag status information")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @added(Versions.v2024_06_15_preview)
   @visibility("read")
   @minItems(1)

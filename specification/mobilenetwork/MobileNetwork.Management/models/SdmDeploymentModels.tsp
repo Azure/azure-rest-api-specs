@@ -16,7 +16,7 @@ model SdmDeploymentResourceProperties {
   provisioningState?: ProvisioningState;
 
   @doc("Azure for Operators 5G Core Subscriber Data Management component parameters.  One set per component type")
-  @extension("x-ms-identifiers", ["type"])
+  @extension("x-ms-identifiers", #["type"])
   componentParameters: QualifiedComponentDeploymentParameters[];
 
   @doc("Reference to cluster where the Network Function is deployed")

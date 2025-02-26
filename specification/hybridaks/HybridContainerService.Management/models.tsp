@@ -284,7 +284,7 @@ model ProvisionedClusterProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    [
+    #[
       "osType",
       "osSKU",
       "nodeLabels",
@@ -348,7 +348,7 @@ model LinuxProfilePropertiesSsh {
   /**
    * The list of SSH public keys used to authenticate with VMs. A maximum of 1 key may be specified.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["keyData"])
+  @OpenAPI.extension("x-ms-identifiers", #["keyData"])
   publicKeys?: LinuxProfilePropertiesSshPublicKeysItem[];
 }
 
@@ -604,7 +604,7 @@ model ProvisionedClusterPropertiesStatus {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["name", "phase", "ready", "errorMessage"]
+    #["name", "phase", "ready", "errorMessage"]
   )
   controlPlaneStatus?: AddonStatusProfile[];
 
@@ -840,7 +840,7 @@ model ProvisionedClusterPoolUpgradeProfile {
   /**
    * List of available kubernetes versions for upgrade.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["kubernetesVersion", "isPreview"])
+  @OpenAPI.extension("x-ms-identifiers", #["kubernetesVersion", "isPreview"])
   upgrades?: ProvisionedClusterPoolUpgradeProfileProperties[];
 }
 
@@ -927,7 +927,7 @@ model AgentPoolProvisioningStatusStatus {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["count", "vmSize", "kubernetesVersion", "gpuCountPerNode"]
+    #["count", "vmSize", "kubernetesVersion", "gpuCountPerNode"]
   )
   readyReplicas?: AgentPoolUpdateProfile[];
 }
@@ -998,7 +998,7 @@ model ListCredentialResponseProperties {
    * Base64-encoded Kubernetes configuration file.
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name", "value"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "value"])
   kubeconfigs?: CredentialResult[];
 }
 
@@ -1034,7 +1034,7 @@ model KubernetesVersionProfileProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["version", "isPreview", "patchVersions"]
+    #["version", "isPreview", "patchVersions"]
   )
   values?: KubernetesVersionProperties[];
 }
@@ -1072,7 +1072,7 @@ model KubernetesPatchVersions {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["osType", "osSku", "ready", "errorMessage"]
+    #["osType", "osSku", "ready", "errorMessage"]
   )
   readiness?: KubernetesVersionReadiness[];
 
@@ -1125,7 +1125,7 @@ model VmSkuProfileProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["resourceType", "capabilities", "name", "tier", "size"]
+    #["resourceType", "capabilities", "name", "tier", "size"]
   )
   values?: VmSkuProperties[];
 }
@@ -1144,7 +1144,7 @@ model VmSkuProperties {
    * The list of name-value pairs to describe VM SKU capabilities like MemoryGB, vCPUs, etc.
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name", "value"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "value"])
   capabilities?: VmSkuCapabilities[];
 
   /**
@@ -1195,13 +1195,13 @@ model VirtualNetworkProperties {
   /**
    * Range of IP Addresses for Kubernetes API Server and services if using HA Proxy load balancer
    */
-  @OpenAPI.extension("x-ms-identifiers", ["startIP", "endIP"])
+  @OpenAPI.extension("x-ms-identifiers", #["startIP", "endIP"])
   vipPool?: VirtualNetworkPropertiesVipPoolItem[];
 
   /**
    * Range of IP Addresses for Kubernetes node VMs
    */
-  @OpenAPI.extension("x-ms-identifiers", ["startIP", "endIP"])
+  @OpenAPI.extension("x-ms-identifiers", #["startIP", "endIP"])
   vmipPool?: VirtualNetworkPropertiesVmipPoolItem[];
 
   /**

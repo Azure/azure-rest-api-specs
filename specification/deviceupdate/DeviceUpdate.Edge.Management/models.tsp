@@ -384,14 +384,14 @@ model UpdateAccountProperties {
    * Device Update update account primary and failover location details
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   locations?: Location[];
 
   /**
    * MQTT Brokers used for device communication.
    */
   @madeOptional(Versions.v2024_10_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   mqttBrokers?: MqttBroker[];
 
   /**
@@ -415,7 +415,7 @@ model UpdateAccountProperties {
    * Device enrollment scopes
    */
   @added(Versions.v2025_04_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   deviceEnrollmentScopes?: DeviceEnrollmentScope[];
 
   /**
@@ -824,7 +824,7 @@ model InstallResult {
   /**
    * Array of step results
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   stepResults?: StepResult[];
 }
 
@@ -881,7 +881,7 @@ model DeviceClassUpdatableDevicesList {
   /**
    * The list of device classes and the highest version update details for each.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   deviceClassHighestVersionUpdates: DeviceClassUpdatableDevices[];
 }
 
@@ -1022,7 +1022,7 @@ model DeploymentStatus {
   /**
    * The collection of device class subgroup status objects
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   subgroupStatus: DeviceClassSubgroupDeploymentStatus[];
 }
 
@@ -1108,7 +1108,7 @@ model DeviceClassProperties {
   /**
    * The list of installable update Ids.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   installableUpdates?: UpdateId[];
 }
 
@@ -1135,7 +1135,7 @@ model ImportUpdateRequest {
   /**
    * Import update input metadata.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   importUpdateInput: ImportUpdateInputItem[];
 
   /**
@@ -1163,7 +1163,7 @@ model ImportUpdateInputItem {
   /**
    * One or more update file properties like filename and source URL.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @minItems(0)
   @maxItems(10)
   files?: FileImportMetadata[];
@@ -1195,7 +1195,7 @@ model ImportManifestMetadata {
    * An array containing the hash(es) of the file. At least one item is required containing SHA256 hash algorithm and the value being the hash of the file calculated using that algorithm.
    */
   @added(Versions.v2025_04_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @minItems(1)
   hashes: HashValue[];
 }
@@ -1254,7 +1254,7 @@ model UpdateProperties {
    * List of update compatibility information.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   compatibility: Record<string>[];
 
   /**
@@ -1265,13 +1265,13 @@ model UpdateProperties {
   /**
    * List of update identities that reference this update.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["provider", "name", "version"])
+  @OpenAPI.extension("x-ms-identifiers", #["provider", "name", "version"])
   referencedBy?: UpdateId[];
 
   /**
    * List of update file metadata.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["fileName"])
+  @OpenAPI.extension("x-ms-identifiers", #["fileName"])
   files?: UpdateFile[];
 
   /**
@@ -1306,7 +1306,7 @@ model Instructions {
    */
   @minItems(1)
   @maxItems(10)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   steps: Step[];
 }
 
@@ -1359,7 +1359,7 @@ model UpdateFile is UpdateFileBase {
   /**
    * Optional related files metadata used together DownloadHandler metadata to download payload file.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   relatedFiles?: UpdateFileBase[];
 
   /**
@@ -1399,7 +1399,7 @@ model UpdateFileBase {
    * Mapping of hashing algorithm to base64 encoded hash values.
    */
   @added(Versions.v2025_04_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @minItems(1)
   hashes: HashValue[];
 

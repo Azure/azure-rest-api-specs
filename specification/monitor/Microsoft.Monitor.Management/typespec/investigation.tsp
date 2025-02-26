@@ -222,7 +222,7 @@ union ScopeSourceType {
 @removed(Microsoft.Monitor.Versions.v2024_10_01)
 model InvestigationProperties {
   @doc("The target ARM resources which the investigation will use.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   targets: string[];
 
   @doc("The display name of this investigation.")
@@ -253,11 +253,11 @@ model InvestigationProperties {
 @removed(Microsoft.Monitor.Versions.v2024_10_01)
 model InvestigationRunConfiguration {
   @doc("Hints used for the investigation run")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   hints?: Filter[];
 
   @doc("A list of filters to decide on the scope")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   tagScopeFilters?: Filter[];
 
   @doc("The time window to look back from impactTime. The format should be of a TimeSpan.")
@@ -270,7 +270,7 @@ model InvestigationRunConfiguration {
   sensitivity?: Sensitivity;
 
   @doc("List of ARM resources to investigate.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   investigationScope?: string[];
 }
 
@@ -287,7 +287,7 @@ model Filter {
   operator?: FilterOperator;
 
   @doc("The values to filter based on.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   values?: string[];
 }
 
@@ -315,7 +315,7 @@ model Investigation {
   result?: InvestigationResult;
 
   @doc("Child investigations.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   healthChecks?: Investigation[];
 }
 

@@ -77,9 +77,7 @@ interface Reservations
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   changePlan(
@@ -119,7 +117,7 @@ model ReservationBillingUsageReport {
   timestamp: string;
 
   @doc("A list of detailed billing usage properties")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   billingUsageProperties: BillingUsageProperty[];
 
   @doc("Overall status message of the billing usage report")
@@ -148,7 +146,7 @@ model BillingUsageProperty {
   statusMessage?: string;
 
   @doc("Optional list of sub-properties providing additional details")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   subProperties?: BillingUsageProperty[];
 }
 
@@ -355,9 +353,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   enableAvs(
@@ -379,9 +375,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   enableAvsConnection(
@@ -403,9 +397,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   disableAvs(
@@ -423,9 +415,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   disableAvsConnection(
@@ -443,9 +433,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   finalizeAvs(
@@ -463,9 +451,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   finalizeAvsConnection(
@@ -487,9 +473,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   repairAvsConnection(
@@ -507,9 +491,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   enableVspherePlugin(
@@ -531,9 +513,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   disableVspherePlugin(
@@ -551,9 +531,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   upgradeVspherePlugin(
@@ -681,7 +659,7 @@ model Avs {
   vasaProviderUrls: string[];
 
   @doc("Array of iSCSI endpoint and IQN.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   vasaIscsiEndpoints: VasaIscsiEndpoints[];
 }
 
@@ -713,7 +691,7 @@ model HealthResponse {
   health: HealthDetails;
 
   @doc("List of health alerts")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   alerts: Alert[];
 }
 

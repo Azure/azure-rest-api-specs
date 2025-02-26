@@ -17,6 +17,6 @@ model AttachedWifiSsidPropertiesFormat {
 
   @doc("The address pool used by the Wi-Fi Access Point for this SSID when allocating an IP address to a UE.")
   @minItems(1)
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   wifiUserEquipmentAddressPoolSubnet?: UserEquipmentAddressPool[];
 }

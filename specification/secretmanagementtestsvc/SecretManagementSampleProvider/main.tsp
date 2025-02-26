@@ -67,7 +67,7 @@ model WeatherForecastResourceProperties {
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  @extension("x-ms-identifiers", ["city"])
+  @extension("x-ms-identifiers", #["city"])
   @doc("Collection of weather forecasts")
   weatherForecastProperties: WeatherForecastProperties[];
 }

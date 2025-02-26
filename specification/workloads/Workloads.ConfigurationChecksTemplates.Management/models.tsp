@@ -250,14 +250,14 @@ model CheckConfiguration {
    * List of input parameters to be used in the check.
    */
   @doc("List of input parameters to be used in the check.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   inputParameters?: SharedParameters[];
 
   /**
    * List of output parameters to be used in the check.
    */
   @doc("List of output parameters to be used in the check.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   outputParameters: OutputParameters[];
 }
 
@@ -274,7 +274,7 @@ model RoleConfiguration {
    * List of checks to be executed for the role.
    */
   @doc("List of checks to be executed for the role.")
-  @OpenAPI.extension("x-ms-identifiers", ["checkId"])
+  @OpenAPI.extension("x-ms-identifiers", #["checkId"])
   checks: CheckConfiguration[];
 }
 
@@ -290,7 +290,7 @@ model WorkloadComponents {
    * List of roles managed at the component level.
    */
   @doc("List of roles managed at the component level.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   roles: RoleConfiguration[];
 }
 
@@ -312,14 +312,14 @@ model Configuration {
    * List of components managed at the workload level.
    */
   @doc("List of components managed at the workload level.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   components?: WorkloadComponents[];
 
   /**
    * List of common checks to be executed for all the components (or) at parent resource level.
    */
   @doc("List of common checks to be executed for all the components (or) at parent resource level.")
-  @OpenAPI.extension("x-ms-identifiers", ["checkId"])
+  @OpenAPI.extension("x-ms-identifiers", #["checkId"])
   commonChecks?: CheckConfiguration[];
 }
 

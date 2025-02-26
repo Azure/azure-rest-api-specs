@@ -51,7 +51,7 @@ model SharedStorageProperties {
 
   @visibility("read", "create", "update")
   @doc("List of Chambers connected to the shared storage.")
-  @extension("x-ms-identifiers", ["id"])
+  @extension("x-ms-identifiers", #["id"])
   chambers: Array<ConnectedChamber>;
 
   @visibility("read", "create", "update")

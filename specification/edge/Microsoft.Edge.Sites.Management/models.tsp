@@ -64,7 +64,7 @@ model SiteUpdate {
 @doc("Properties of the SiteAwareResourceType resource type.")
 model SiteAwareResourceTypeProperties {
   @doc("Details for each SiteAwareResourceType")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   supportedResourceTypes?: SiteAwareResourceTypeDetails[];
 
   @doc("Provisioning state of last operation")

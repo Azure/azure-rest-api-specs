@@ -38,7 +38,7 @@ model SolutionTemplateParameter {
   solutionInstanceName?: string;
 
   @doc("Solution Dependencies")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   solutionDependencies?: SolutionDependencyParameter[];
 }
 
@@ -74,7 +74,7 @@ model SolutionDependencyParameter {
   targetId?: string;
 
   @doc("Solution dependencies")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   dependencies?: SolutionDependencyParameter[];
 }
 

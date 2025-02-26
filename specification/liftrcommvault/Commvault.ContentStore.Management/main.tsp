@@ -156,14 +156,14 @@ model PlanProperties {
   @visibility("read", "create")
   @minItems(1)
   @maxItems(11)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   storagePlans: StoragePlan[];
 
   @doc("The Commvault Plan Schedule")
   @visibility("read", "create", "update")
   @minItems(1)
   @maxItems(11)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   schedules?: Schedule[];
 
   @doc("The Commvault Plan Retention")
@@ -199,7 +199,7 @@ model StoragePlan {
   backupRuleType?: BackupRuleType;
 
   @doc("Extended Retention Policy")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   extendedRetention?: ExtendedRetentionTime[];
 }
 
@@ -282,7 +282,7 @@ model Schedule {
   dayOfMonth?: int32;
 
   @doc("Weekly Days List")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   weeklyDays?: WeeklyDays[];
 
   @doc("Time of Retention")
@@ -552,7 +552,7 @@ model ProtectionGroupResources {
   matchRules?: {
     @doc("rules to match")
     @visibility("read", "create", "update")
-    @OpenAPI.extension("x-ms-identifiers", [])
+    @OpenAPI.extension("x-ms-identifiers", #[])
     rules: Rule[];
 
     @doc("match Type all or any")
@@ -767,7 +767,7 @@ model VmInfo {
 
   @doc("The vmTag of the VM.")
   @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   vmtag?: VmTag[];
 }
 
@@ -775,7 +775,7 @@ model VmInfo {
 model VmDestinationInfo {
   @doc("List of information on VMs")
   @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   vmInfoList: VmInfo[];
 }
 

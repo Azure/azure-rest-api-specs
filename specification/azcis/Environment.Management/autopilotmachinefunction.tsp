@@ -18,7 +18,7 @@ namespace Microsoft.AzureCis;
 @doc("AutopilotMachineFunction properties")
 model AutopilotMachineFunctionResourceProperties {
   @doc("Goal state of MachinesFunctions.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   machineFunctions?: Array<MachineFunction>; // Camel case for the parameter names.
 
   @doc("Target Environment Name to allocate MachineFunction.")

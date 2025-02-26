@@ -95,7 +95,7 @@ model OfferProperties {
   provisioningState?: ResourceProvisioningState;
 
   @doc("The marketplace skus")
-  @extension("x-ms-identifiers", ["marketplaceSkuId"])
+  @extension("x-ms-identifiers", #["marketplaceSkuId"])
   marketplaceSkus?: MarketplaceSku[];
 }
 
@@ -215,7 +215,7 @@ model MarketplaceSku {
   @doc("The operating system supported")
   operatingSystem?: SkuOperatingSystem;
 
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @doc("The marketplace sku version")
   marketplaceSkuVersions?: MarketplaceSkuVersion[];
 }

@@ -586,7 +586,7 @@ op ArmResourceListActionSync<
 @doc("The list of available versions")
 model AvailableVersionListResult {
   @doc("The list of versions")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   versions: ApplicationVersion[];
 }
 

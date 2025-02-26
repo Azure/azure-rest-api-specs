@@ -30,7 +30,7 @@ model ApplicationResourceAlerts {
   defaults?: AlertDefaults;
 
   @doc("The application resource alert rules.")
-  @OpenAPI.extension("x-ms-identifiers", ["alertRuleId"])
+  @OpenAPI.extension("x-ms-identifiers", #["alertRuleId"])
   alertRules?: AlertRule[];
 }
 

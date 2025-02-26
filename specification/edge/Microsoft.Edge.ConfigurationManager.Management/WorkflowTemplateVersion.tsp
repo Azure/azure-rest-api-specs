@@ -36,7 +36,7 @@ model WorkflowTemplateVersionProperties {
   @doc("Config expressions for this workflow version")
   configurations?: string;
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("workflow template specification")
   stageSpecTemplate: StageSpecTemplate[];
 

@@ -11,14 +11,14 @@ model NetworkDeviceSkuProperties {
   manufacturer?: string;
 
   @doc("List of supported version details of network device.")
-  @OpenAPI.extension("x-ms-identifiers", ["version"])
+  @OpenAPI.extension("x-ms-identifiers", #["version"])
   supportedVersions?: SupportedVersionProperties[];
 
   @doc("Available roles for the network device.")
   supportedRoleTypes?: NetworkDeviceRoleName[];
 
   @doc("List of network device interfaces.")
-  @OpenAPI.extension("x-ms-identifiers", ["identifier"])
+  @OpenAPI.extension("x-ms-identifiers", #["identifier"])
   interfaces?: DeviceInterfaceProperties[];
 
   @doc("Provisioning state of the resource.")
@@ -50,7 +50,7 @@ model DeviceInterfaceProperties {
   interfaceType?: string;
 
   @doc("List of supported connector types.")
-  @OpenAPI.extension("x-ms-identifiers", ["connectorType"])
+  @OpenAPI.extension("x-ms-identifiers", #["connectorType"])
   supportedConnectorTypes?: SupportedConnectorProperties[];
 }
 

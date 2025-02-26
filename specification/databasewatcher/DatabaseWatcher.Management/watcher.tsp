@@ -126,9 +126,7 @@ interface Watchers {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   start(
     ...ResourceInstanceParameters<Watcher>,
@@ -142,9 +140,7 @@ interface Watchers {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   stop(
     ...ResourceInstanceParameters<Watcher>,

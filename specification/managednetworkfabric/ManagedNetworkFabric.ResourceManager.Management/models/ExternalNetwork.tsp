@@ -390,11 +390,11 @@ model ExternalNetworkStaticRouteConfiguration {
   bfdConfiguration?: BfdConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv4Routes?: StaticRouteProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv6Routes?: StaticRouteProperties[];
 }
 
@@ -405,11 +405,11 @@ model ExternalNetworkStaticRoutePatchConfiguration {
   bfdConfiguration?: BfdPatchConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv4Routes?: StaticRoutePatchProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv6Routes?: StaticRoutePatchProperties[];
 }
 

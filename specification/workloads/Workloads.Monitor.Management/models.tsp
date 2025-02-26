@@ -482,13 +482,13 @@ model Db2JobConfigurationsProperties {
   /**
    * Gets or sets the list of Configuration parameters.
    */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   parameters?: ConfigurationParameter[];
 
   /**
    * Gets or sets the list of actions
    */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   actions?: ActionsParameter[];
 }
 
@@ -519,7 +519,7 @@ model ActionsParameter {
   /**
    * Gets or sets the list of function Name.
    */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   parameters?: ConfigurationParameter[];
 }
 
@@ -600,7 +600,7 @@ model SapLandscapeMonitorProperties {
    * Gets or sets the list Top Metric Thresholds for SAP Landscape Monitor Dashboard
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   topMetricsThresholds?: SapLandscapeMonitorMetricThresholds[];
 }
 
@@ -612,14 +612,14 @@ model SapLandscapeMonitorPropertiesGrouping {
    * Gets or sets the list of landscape to SID mappings.
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   landscape?: SapLandscapeMonitorSidMapping[];
 
   /**
    * Gets or sets the list of Sap Applications to SID mappings.
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   sapApplication?: SapLandscapeMonitorSidMapping[];
 }
 
@@ -1144,7 +1144,7 @@ model AlertRuleProperties {
   /**
    * The alert query parameters.
    */
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   alertQueryParameters?: AlertQueryParameter[];
 }
 
@@ -1245,7 +1245,7 @@ model AlertTemplateProperties {
    * Describes the Query Input Parameter properties in alerts template.
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   queryInputParameters?: AlertTemplateQueryInputParameter[];
 }
 
@@ -1395,7 +1395,7 @@ model ComponentHealthDefinition {
   dependenciesSignalDefinition?: DependenciesSignalDefinition;
 
   /** The resource signal definition mappings. */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   resourceSignalDefinitionMappings?: ResourceSignalDefinitionMapping[];
 }
 
@@ -1444,7 +1444,7 @@ model InstanceGroupHealthStatusResponse {
   healthSnapshotId: string;
 
   /** The instances health status. */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   instances: InstanceHealthStatusResponse[];
 
   /** The link to the next page of results. */

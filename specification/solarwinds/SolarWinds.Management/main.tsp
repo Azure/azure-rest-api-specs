@@ -328,7 +328,7 @@ model LogRules {
   sendActivityLogs?: SendActivityLogsStatus;
 
   @doc("List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured.\nIf only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   filteringTags?: FilteringTag[];
 }
 
@@ -338,7 +338,7 @@ model MetricRules {
   sendMetrics?: SendMetricsStatus;
 
   @doc("List of filtering tags to be used for capturing metrics.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   filteringTags?: FilteringTag[];
 }
 

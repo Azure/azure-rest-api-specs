@@ -91,7 +91,7 @@ model UeInfo4GProperties {
 
   @doc("UE Session Info for 4G.")
   @maxItems(11)
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   sessionInfo?: Array<UeSessionInfo4G>;
 }
 
@@ -262,7 +262,7 @@ model UeInfo5GProperties {
 
   @doc("UE Session Info for 5G.")
   @maxItems(15)
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   sessionInfo?: Array<UeSessionInfo5G>;
 
   @doc("Subscription Permanent Identifier.")
@@ -273,7 +273,7 @@ model UeInfo5GProperties {
 model UeConnectionInfo5G {
   @doc("Allowed Network Slice Selection Assistance Information.")
   @maxItems(8)
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   allowedNssai?: Array<Snssai>;
 
   @doc("The AMF UE NGAP ID.")
@@ -361,7 +361,7 @@ model UeSessionInfo5G {
   pduSessionId: PduSessionId;
 
   @doc("QoS Flow.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   qosFlow: Array<UeQOSFlow>;
 
   @doc("Single-network slice selection assistance information (S-NSSAI).")

@@ -25,7 +25,7 @@ model SolutionProperties {
   solutionTemplateId?: string;
 
   @doc("List of latest revisions for available solution template versions")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   @visibility("read")
   availableSolutionTemplateVersions?: AvailableSolutionTemplateVersion[];
 

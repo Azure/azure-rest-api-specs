@@ -164,13 +164,13 @@ model WindowsImageProperties {
   /**
    * Specifies the properties used to describe the customization steps of the image, like Image source etc
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   customize?: WindowsImageCustomizer[];
 
   /**
    * The distribution targets where the image output needs to go to.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   distribute: WindowsImageDistributor[];
 
   /**
@@ -281,7 +281,7 @@ model WindowsImageDistributor {
   /**
    * The target regions where the distributed Image Version is going to be replicated to. This object supersedes replicationRegions and can be specified only if replicationRegions is not specified.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   targetRegions?: TargetRegion[];
 }
 
@@ -394,7 +394,7 @@ model WindowsImageTagUpdateParametersProperties {
   /**
    * The distribution targets where the image output needs to go to.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   distribute?: WindowsImageDistributor[];
 }
 

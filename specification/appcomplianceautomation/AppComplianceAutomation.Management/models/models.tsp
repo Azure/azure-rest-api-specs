@@ -578,7 +578,7 @@ model GetOverviewStatusResponse {
   /**
    * List of different status items.
    */
-  @extension("x-ms-identifiers", ["statusName"])
+  @extension("x-ms-identifiers", #["statusName"])
   statusList?: StatusItem[];
 }
 
@@ -660,13 +660,13 @@ model TriggerEvaluationProperty {
   /**
    * List of resource ids to be evaluated
    */
-  @extension("x-ms-identifiers", ["resourceId"])
+  @extension("x-ms-identifiers", #["resourceId"])
   resourceIds?: string[];
 
   /**
    * List of quick assessments
    */
-  @extension("x-ms-identifiers", ["resourceId"])
+  @extension("x-ms-identifiers", #["resourceId"])
   quickAssessments?: QuickAssessment[];
 }
 
@@ -737,7 +737,7 @@ model ListInUseStorageAccountsResponse {
   /**
    * The storage account list which in use in related reports.
    */
-  @extension("x-ms-identifiers", ["accountName"])
+  @extension("x-ms-identifiers", #["accountName"])
   storageAccountList?: StorageInfo[];
 }
 
@@ -828,7 +828,7 @@ model ReportBaseProperties {
    * List of synchronized certification records.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["offerGuid"])
+  @extension("x-ms-identifiers", #["offerGuid"])
   certRecords?: CertSyncRecord[];
 
   /**
@@ -869,7 +869,7 @@ model ReportProperties {
   /**
    * List of resource data.
    */
-  @extension("x-ms-identifiers", ["resourceId"])
+  @extension("x-ms-identifiers", #["resourceId"])
   resources: ResourceMetadata[];
 
   ...ReportBaseProperties;
@@ -894,7 +894,7 @@ model ReportPatchProperties {
   /**
    * List of resource data.
    */
-  @extension("x-ms-identifiers", ["resourceId"])
+  @extension("x-ms-identifiers", #["resourceId"])
   resources?: ResourceMetadata[];
 
   ...ReportBaseProperties;
@@ -999,7 +999,7 @@ model CertSyncRecord {
   /**
    * The control records list to be synchronized.
    */
-  @extension("x-ms-identifiers", ["controlId"])
+  @extension("x-ms-identifiers", #["controlId"])
   controls?: ControlSyncRecord[];
 }
 
@@ -1178,7 +1178,7 @@ model SnapshotProperties {
    * List of compliance results.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["complianceName"])
+  @extension("x-ms-identifiers", #["complianceName"])
   complianceResults?: ComplianceResult[];
 }
 
@@ -1196,7 +1196,7 @@ model ComplianceResult {
    * List of categories.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["categoryName"])
+  @extension("x-ms-identifiers", #["categoryName"])
   categories?: Category[];
 }
 
@@ -1220,7 +1220,7 @@ model Category {
    * List of control families.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["controlFamilyName"])
+  @extension("x-ms-identifiers", #["controlFamilyName"])
   controlFamilies?: ControlFamily[];
 }
 
@@ -1244,7 +1244,7 @@ model ControlFamily {
    * List of controls.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["controlId"])
+  @extension("x-ms-identifiers", #["controlId"])
   @added(Versions.v2024_12_15_preview)
   controls?: ControlEssentialInfo[];
 
@@ -1252,7 +1252,7 @@ model ControlFamily {
    * List of controls.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["controlId"])
+  @extension("x-ms-identifiers", #["controlId"])
   @renamedFrom(Versions.v2024_12_15_preview, "controls")
   @removed(Versions.v2024_12_15_preview)
   oldcontrols?: Control[];
@@ -1303,7 +1303,7 @@ model Control {
    * List of customer responsibility.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["responsibilityId"])
+  @extension("x-ms-identifiers", #["responsibilityId"])
   responsibilities?: Responsibility[];
 }
 
@@ -1352,7 +1352,7 @@ model ControlProperties {
    * List of customer responsibility.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["responsibilityId"])
+  @extension("x-ms-identifiers", #["responsibilityId"])
   responsibilities?: Responsibility[];
 
   /**
@@ -1464,14 +1464,14 @@ model Responsibility {
    * List of resource.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["resourceId"])
+  @extension("x-ms-identifiers", #["resourceId"])
   resourceList?: ResponsibilityResource[];
 
   /**
    * List of recommendation.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["recommendationId"])
+  @extension("x-ms-identifiers", #["recommendationId"])
   recommendationList?: Recommendation[];
 
   /**
@@ -1559,7 +1559,7 @@ model Recommendation {
    * List of recommendation solutions.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["recommendationSolutionIndex"])
+  @extension("x-ms-identifiers", #["recommendationSolutionIndex"])
   recommendationSolutions?: RecommendationSolution[];
 }
 
@@ -1615,14 +1615,14 @@ model DownloadResponse {
    * Resource list of the report
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["resourceId"])
+  @extension("x-ms-identifiers", #["resourceId"])
   resourceList?: ResourceItem[];
 
   /**
    * List of the compliance result
    */
   @visibility("read")
-  @extension("x-ms-identifiers", ["controlId"])
+  @extension("x-ms-identifiers", #["controlId"])
   complianceReport?: ComplianceReportItem[];
 
   /**
@@ -1774,7 +1774,7 @@ model ScopingConfigurationProperties {
   /**
    * List of scoping question answers.
    */
-  @extension("x-ms-identifiers", ["questionId"])
+  @extension("x-ms-identifiers", #["questionId"])
   answers?: ScopingAnswer[];
 
   /**
@@ -1791,7 +1791,7 @@ model ScopingQuestions {
   /**
    * List of scoping questions.
    */
-  @extension("x-ms-identifiers", ["questionId"])
+  @extension("x-ms-identifiers", #["questionId"])
   questions?: ScopingQuestion[];
 }
 

@@ -42,7 +42,7 @@ model PlannedQuotaResourceProperties {
   planVersion?: string;
 
   @doc("Property bindings")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   propertyBindings?: Array<PropertyBinding>;
 
   @doc("Skip unsupported silently")

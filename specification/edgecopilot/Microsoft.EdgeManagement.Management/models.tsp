@@ -111,7 +111,7 @@ model ChatContext {
   /**
    * Resource Ids of the chat is referring to.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   resourceIds?: Azure.Core.armResourceIdentifier[];
 
   /**
@@ -163,6 +163,6 @@ model ChatResult {
   /**
    * Reply message schema. Contains reply messages from chatbot
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   replyMessages: ChatMessage[];
 }

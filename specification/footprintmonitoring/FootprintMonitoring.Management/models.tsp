@@ -18,16 +18,16 @@ interface Operations {
   @armResourceRead(Azure.ResourceManager.Foundations.OperationListResult)
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `List all operations (maximum).`: {
+    #{
+      `List all operations (maximum).`: #{
         $ref: "./examples/Operations_List_MaximumSet_Gen.json",
       },
     }
   )
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `List all operations (maximum).`: {
+    #{
+      `List all operations (maximum).`: #{
         $ref: "./examples/Operations_List_MinimumSet_Gen.json",
       },
     }

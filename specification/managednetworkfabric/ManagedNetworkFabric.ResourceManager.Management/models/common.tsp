@@ -353,30 +353,30 @@ model IpMatchConditionPatch is IpMatchCondition;
 
 @doc("Dynamic match configuration object.")
 model CommonDynamicMatchConfiguration {
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of IP Groups.")
   ipGroups?: IpGroupProperties[];
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of vlan groups.")
   vlanGroups?: VlanGroupProperties[];
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of the port groups.")
   portGroups?: PortGroupProperties[];
 }
 
 @doc("Dynamic match configuration object.")
 model CommonDynamicMatchConfigurationPatch {
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of IP Groups.")
   ipGroups?: IpGroupPatchProperties[];
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of vlan groups.")
   vlanGroups?: VlanGroupPatchProperties[];
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of the port groups.")
   portGroups?: PortGroupPatchProperties[];
 }
@@ -812,11 +812,11 @@ model StaticRouteConfiguration {
   bfdConfiguration?: BfdConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv4Routes?: StaticRouteProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv6Routes?: StaticRouteProperties[];
 
   @doc("Extension. Example: NoExtension | NPB.")
@@ -829,11 +829,11 @@ model StaticRoutePatchConfiguration {
   bfdConfiguration?: BfdPatchConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv4Routes?: StaticRoutePatchProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv6Routes?: StaticRoutePatchProperties[];
 }
 
@@ -934,7 +934,7 @@ union BgpAdministrativeState {
 @added(Versions.v2024_06_15_preview)
 model NativeIpv4PrefixLimitProperties {
   @doc("Prefix limits")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @minItems(1)
   prefixLimits?: PrefixLimitProperties[];
 }
@@ -943,7 +943,7 @@ model NativeIpv4PrefixLimitProperties {
 @added(Versions.v2024_06_15_preview)
 model NativeIpv4PrefixLimitPatchProperties {
   @doc("Prefix limits")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @minItems(1)
   prefixLimits?: PrefixLimitPatchProperties[];
 }
@@ -952,7 +952,7 @@ model NativeIpv4PrefixLimitPatchProperties {
 @added(Versions.v2024_06_15_preview)
 model NativeIpv6PrefixLimitProperties {
   @doc("Prefix limits")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @minItems(1)
   prefixLimits?: PrefixLimitProperties[];
 }
@@ -961,7 +961,7 @@ model NativeIpv6PrefixLimitProperties {
 @added(Versions.v2024_06_15_preview)
 model NativeIpv6PrefixLimitPatchProperties {
   @doc("Prefix limits")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @minItems(1)
   prefixLimits?: PrefixLimitPatchProperties[];
 }

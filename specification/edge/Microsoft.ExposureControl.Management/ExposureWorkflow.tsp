@@ -38,7 +38,7 @@ model ExposureWorkflowProperties {
   @doc("Workflow manifest Id.")
   exposureWorkflowManifestId?: string;
 
-  @extension("x-ms-identifiers", ["ringName"])
+  @extension("x-ms-identifiers", #["ringName"])
   @doc("Ring configuration details.")
   @visibility("read")
   rings: Array<ExposureWorkflowRingConfigurationProperties>;
@@ -84,7 +84,7 @@ model ExposureWorkflowRingConfigurationProperties {
   @visibility("read")
   ringName: string;
 
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   @doc("Exposure Group Properties.")
   @visibility("read")
   exposureGroupProperties: Array<ExposureGroupProperties>;

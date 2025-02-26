@@ -23,15 +23,15 @@ model PolicySettings {
   customBlockResponse?: CustomBlockResponse;
 
   @doc("Request body inspection settings overrides for endpoint types")
-  @extension("x-ms-identifiers", ["endpointType"])
+  @extension("x-ms-identifiers", #["endpointType"])
   requestBodyInspections?: RequestBodyInspection[] = #[];
 
   @doc("Request body size limitation settings overrides for endpoint types")
-  @extension("x-ms-identifiers", ["endpointType"])
+  @extension("x-ms-identifiers", #["endpointType"])
   requestBodySizeLimitations?: RequestBodySizeLimitation[] = #[];
 
   @doc("File upload size limitation settings overrides for endpoint types")
-  @extension("x-ms-identifiers", ["endpointType"])
+  @extension("x-ms-identifiers", #["endpointType"])
   fileUploadSizeLimitations?: FileUploadSizeLimitation[] = #[];
 }
 

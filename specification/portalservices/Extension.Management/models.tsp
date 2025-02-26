@@ -233,7 +233,7 @@ model DeploymentConfig {
   /**
    * Defines the deployment stages, regions to deploy to for each stage and sequence to rollout to individual stages.
    */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   stageDefinition?: Record<Array<string>>;
 
   /**
@@ -343,7 +343,7 @@ model PortalExtensionAlter {
   /**
    * The list of alterations to perform on the source code.
    */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   alterations?: Array<PortalExtensionAlterAlterationsItem>;
 }
 

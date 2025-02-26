@@ -256,7 +256,7 @@ model OptionBLayer3ConfigurationPatchProperties {
   @doc("OptionB Layer3 prefix limit configuration.")
   @added(Versions.v2024_06_15_preview)
   @minItems(1)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   prefixLimits?: OptionBLayer3PrefixLimitPatchProperties[];
 }
 
@@ -293,7 +293,7 @@ model OptionBLayer3Configuration {
   @doc("OptionB Layer3 prefix limit configuration.")
   @added(Versions.v2024_06_15_preview)
   @minItems(1)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   prefixLimits?: OptionBLayer3PrefixLimitProperties[];
 }
 
@@ -303,13 +303,13 @@ model NpbStaticRouteConfiguration {
   bfdConfiguration?: BfdConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   @minItems(1)
   ipv4Routes?: StaticRouteProperties[];
 
   @doc("List of IPv6 Routes.")
   @minItems(1)
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv6Routes?: StaticRouteProperties[];
 }
 
@@ -319,13 +319,13 @@ model NpbStaticRouteConfigurationPatch {
   bfdConfiguration?: BfdPatchConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   @minItems(1)
   ipv4Routes?: StaticRoutePatchProperties[];
 
   @doc("List of IPv6 Routes.")
   @minItems(1)
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv6Routes?: StaticRoutePatchProperties[];
 }
 
@@ -392,11 +392,11 @@ model NniStaticRouteConfiguration {
   bfdConfiguration?: BfdConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv4Routes?: StaticRouteProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv6Routes?: StaticRouteProperties[];
 }
 
@@ -407,11 +407,11 @@ model NniStaticRoutePatchConfiguration {
   bfdConfiguration?: BfdPatchConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv4Routes?: StaticRoutePatchProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv6Routes?: StaticRoutePatchProperties[];
 }
 
@@ -431,11 +431,11 @@ union MicroBfdState {
 @added(Versions.v2024_06_15_preview)
 model ConditionalDefaultRouteProperties {
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv4Routes?: StaticRouteProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
   ipv6Routes?: StaticRouteProperties[];
 }
 

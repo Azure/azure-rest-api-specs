@@ -180,7 +180,7 @@ model ProvisioningRequest {
   osProfile: OsProvisionProfile;
 
   @doc("User configuration.")
-  @extension("x-ms-identifiers", ["userName"])
+  @extension("x-ms-identifiers", #["userName"])
   userDetails: UserDetails[];
 
   @doc("Onboarding configuration.")
@@ -223,7 +223,7 @@ model RemoteSupportReportedProperties {
 
   @doc("Details of the remote support session.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["sessionId"])
+  @extension("x-ms-identifiers", #["sessionId"])
   sessionDetails?: RemoteSupportSession[];
 }
 
@@ -326,7 +326,7 @@ model LogCollectionReportedProperties {
 
   @doc("Details of the log collection session.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["correlationId"])
+  @extension("x-ms-identifiers", #["correlationId"])
   logCollectionSessionDetails?: LogCollectionSession[];
 }
 
@@ -401,7 +401,7 @@ model EceActionStatus {
 
   @doc("List of steps of Edge device job.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   steps?: Step[];
 }
 
@@ -444,7 +444,7 @@ model Step {
 
   @doc("List of nested steps during job execution..")
   @visibility("read")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   steps?: Step[];
 
   @doc("List of exceptions in job execution.")
@@ -523,7 +523,7 @@ model DeviceConfiguration {
 
 @doc("Network configuration.")
 model NetworkConfiguration {
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of network adapters.")
   networkAdapters: NetworkAdapter[];
 }

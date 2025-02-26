@@ -15,12 +15,12 @@ model NetworkTapRuleProperties {
   tapRulesUrl?: url;
 
   @doc("List of match configurations.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @minItems(1)
   matchConfigurations?: NetworkTapRuleMatchConfiguration[];
 
   @doc("List of dynamic match configurations.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @minItems(1)
   dynamicMatchConfigurations?: CommonDynamicMatchConfiguration[];
 
@@ -72,11 +72,11 @@ model NetworkTapRuleMatchConfiguration {
   ipAddressType?: IPAddressType;
 
   @doc("List of the match conditions.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   matchConditions?: NetworkTapRuleMatchCondition[];
 
   @doc("List of actions that need to be performed for the matched conditions.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   actions?: NetworkTapRuleAction[];
 }
 
@@ -95,11 +95,11 @@ model NetworkTapRuleMatchConfigurationPatch {
   ipAddressType?: IPAddressType;
 
   @doc("List of the match conditions.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   matchConditions?: NetworkTapRuleMatchConditionPatch[];
 
   @doc("List of actions that need to be performed for the matched conditions.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   actions?: NetworkTapRuleActionPatch[];
 }
 
@@ -187,12 +187,12 @@ model NetworkTapRulePatchProperties {
   globalNetworkTapRuleActions?: GlobalNetworkTapRuleActionPatchProperties;
 
   @doc("List of match configurations.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @minItems(1)
   matchConfigurations?: NetworkTapRuleMatchConfigurationPatch[];
 
   @doc("List of dynamic match configurations.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @minItems(1)
   dynamicMatchConfigurations?: CommonDynamicMatchConfigurationPatch[];
 }

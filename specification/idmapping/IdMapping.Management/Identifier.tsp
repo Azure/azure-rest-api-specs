@@ -38,7 +38,7 @@ model IdentifierProperties {
   identifierCreationTimestamp?: utcDateTime;
 
   /** The new created resourceIdentifier for the resource */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   resourceIdentifiers: ResourceIdentifier[];
 }
 

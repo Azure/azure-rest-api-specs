@@ -89,7 +89,7 @@ model RetrieveNextStagesResponse {
   lastStageSequence: int32;
 
   @doc("StageProgression resources that are ready to put in 'InProgress' state.")
-  @OpenAPI.extension("x-ms-identifiers", ["stageReference"])
+  @OpenAPI.extension("x-ms-identifiers", #["stageReference"])
   nextStages: RetrieveNextStagesResponseItem[];
 }
 
@@ -239,7 +239,7 @@ model InlineArtifactContent {
 model ArmOperationArtifactContent {
   @doc("Arm Operation array.")
   @visibility("read", "create", "update")
-  @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
+  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
   operations: ArmOperationResource[];
 }
 

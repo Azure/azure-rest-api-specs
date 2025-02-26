@@ -249,11 +249,11 @@ model NetworkAcls {
   virtualNetworkRule: VirtualNetworkRule[];
 
   @doc("IP rule with specific IP or IP range in CIDR format.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   ipRules: IPRules[];
 
   @doc("Resource Access Rules.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   resourceAccessRules: ResourceAccessRules[];
 
   @doc("Default Action")
