@@ -262,6 +262,7 @@ model MetadataSchemaProperties {
   @doc("The schema defining the type.")
   schema: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The assignees")
   @extension("x-ms-identifiers", [])
   assignedTo?: MetadataAssignment[];
@@ -317,11 +318,13 @@ model ApiProperties {
   @doc("Terms of service for the API.")
   termsOfService?: TermsOfService;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The set of external documentation")
   @maxItems(20)
   @extension("x-ms-identifiers", [])
   externalDocumentation?: ExternalDocumentation[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The set of contacts")
   @extension("x-ms-identifiers", [])
   contacts?: Contact[];
