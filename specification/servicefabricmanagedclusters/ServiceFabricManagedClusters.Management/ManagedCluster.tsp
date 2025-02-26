@@ -15,7 +15,7 @@ namespace Microsoft.ServiceFabric;
  *
  */
 model ManagedCluster
-  is Azure.ResourceManager.ProxyResource<ManagedClusterProperties> {
+  is Azure.ResourceManager.TrackedResource<ManagedClusterProperties> {
   ...ResourceNameParameter<
     Resource = ManagedCluster,
     KeyName = "clusterName",
@@ -23,13 +23,6 @@ model ManagedCluster
     NamePattern = ""
   >;
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility("create", "read")
-  location?: string;
 
   /**
    * If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
