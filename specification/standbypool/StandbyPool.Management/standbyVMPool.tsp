@@ -37,8 +37,8 @@ model StandbyVirtualMachinePoolResourceProperties {
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
   elasticityProfile?: StandbyVirtualMachinePoolElasticityProfile;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specifies the desired state of virtual machines in the pool.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["vmState"])
   virtualMachineState: VirtualMachineState;
 

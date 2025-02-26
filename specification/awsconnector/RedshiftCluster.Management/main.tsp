@@ -101,8 +101,8 @@ model AwsRedshiftClusterProperties {
   @doc("The name of the parameter group to be associated with this cluster.")
   clusterParameterGroupName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of security groups to be associated with this cluster.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   clusterSecurityGroups?: string[];
 
@@ -154,8 +154,8 @@ model AwsRedshiftClusterProperties {
   @doc("Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM.")
   hsmConfigurationIdentifier?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 50 IAM roles in a single request")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   iamRoles?: string[];
 
@@ -234,13 +234,13 @@ model AwsRedshiftClusterProperties {
   @doc("The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive.")
   snapshotIdentifier?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of tags for the cluster parameter group.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   vpcSecurityGroupIds?: string[];
 }

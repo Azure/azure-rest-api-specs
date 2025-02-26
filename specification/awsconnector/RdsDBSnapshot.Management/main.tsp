@@ -137,8 +137,8 @@ model AwsRdsDBSnapshotProperties {
   @doc("<p>Specifies the port that the database engine was listening on at the time of the snapshot.</p>")
   port?: int32;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   processorFeatures?: ProcessorFeature[];
 
@@ -169,8 +169,8 @@ model AwsRdsDBSnapshotProperties {
   @doc("<p>Specifies the storage type associated with DB snapshot.</p>")
   storageType?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property tagList")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tagList?: Tag[];
 

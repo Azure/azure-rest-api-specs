@@ -74,8 +74,8 @@ model AwsDynamoDBTableProperties {
   @doc("Property arn")
   arn?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of attributes that describe the key schema for the table and indexes. This property is required to create a DDB table. Update requires: [Some interruptions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt). Replacement if you edit an existing AttributeDefinition.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   attributeDefinitions?: AttributeDefinition[];
 
@@ -88,24 +88,24 @@ model AwsDynamoDBTableProperties {
   @doc("Determines if a table is protected from deletion. When enabled, the table cannot be deleted by any user or process. This setting is disabled by default. For more information, see [Using deletion protection](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.Basics.html#WorkingWithTables.Basics.DeletionProtection) in the *Developer Guide*.")
   deletionProtectionEnabled?: boolean;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Global secondary indexes to be created on the table. You can create up to 20 global secondary indexes.  If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command. If you add or delete an index during an update, we recommend that you don't update any other resources. If your stack fails to update and is rolled back while adding a new index, you must manually delete the index.  Updates are not supported. The following are exceptions:  +  If you update either the contributor insights specification or the provisioned throughput values of global secondary indexes, you can update the table without interruption.  +  You can delete or add one global secondary index without interruption. If you do both in the same update (for example, by changing the index's logical ID), the update fails.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   globalSecondaryIndexes?: GlobalSecondaryIndex[];
 
   @doc("Specifies the properties of data being imported from the S3 bucket source to the table.  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, or the ``DeletionProtectionEnabled`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission. Specifies the properties of data being imported from the S3 bucket source to the table.")
   importSourceSpecification?: ImportSourceSpecification;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specifies the attributes that make up the primary key for the table. The attributes in the ``KeySchema`` property must also be defined in the ``AttributeDefinitions`` property.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   keySchema?: KeySchema[];
 
   @doc("The Kinesis Data Streams configuration for the specified table. The Kinesis Data Streams configuration for the specified table.")
   kinesisStreamSpecification?: KinesisStreamSpecification;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Local secondary indexes to be created on the table. You can create up to 5 local secondary indexes. Each index is scoped to a given hash key value. The size of each hash key can be up to 10 gigabytes.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   localSecondaryIndexes?: LocalSecondaryIndex[];
 
@@ -133,8 +133,8 @@ model AwsDynamoDBTableProperties {
   @doc("A name for the table. If you don't specify a name, CFNlong generates a unique physical ID and uses that ID for the table name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.")
   tableName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An array of key-value pairs to apply to this resource. For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -177,8 +177,8 @@ model GlobalSecondaryIndex {
   @doc("The name of the global secondary index. The name must be unique among all other indexes on this table.")
   indexName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:  +   ``HASH`` - partition key  +   ``RANGE`` - sort key    The partition key of an item is also known as its *hash attribute*. The term 'hash attribute' derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its *range attribute*. The term 'range attribute' derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   keySchema?: KeySchema[];
 
@@ -254,8 +254,8 @@ model LocalSecondaryIndex {
   @doc("The name of the local secondary index. The name must be unique among all other indexes on this table.")
   indexName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The complete key schema for the local secondary index, consisting of one or more pairs of attribute names and key types:  +   ``HASH`` - partition key  +   ``RANGE`` - sort key    The partition key of an item is also known as its *hash attribute*. The term 'hash attribute' derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its *range attribute*. The term 'range attribute' derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   keySchema?: KeySchema[];
 
@@ -357,8 +357,8 @@ model TimeToLiveSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Projection")
 model Projection {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Represents the non-key attribute names which will be projected into the index. For local secondary indexes, the total count of ``NonKeyAttributes`` summed across all of the local secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   nonKeyAttributes?: string[];
 
@@ -401,8 +401,8 @@ model Csv {
   @doc("The delimiter used for separating items in the CSV file being imported.")
   delimiter?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("List of the headers used to specify a common header for all source CSV files being imported. If this field is specified then the first line of each CSV file is treated as data instead of the header. If this field is not specified the the first line of each CSV file is treated as the header.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   headerList?: string[];
 }

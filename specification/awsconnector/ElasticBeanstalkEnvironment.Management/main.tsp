@@ -90,8 +90,8 @@ model AwsElasticBeanstalkEnvironmentProperties {
   @doc("The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.")
   operationsRole?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Key-value pairs defining configuration options for this environment, such as the instance type.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   optionSettings?: OptionSetting[];
 
@@ -101,8 +101,8 @@ model AwsElasticBeanstalkEnvironmentProperties {
   @doc("The name of an Elastic Beanstalk solution stack (platform version) to use with the environment.")
   solutionStackName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specifies the tags applied to resources in the environment.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

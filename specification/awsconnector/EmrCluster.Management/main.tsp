@@ -71,8 +71,8 @@ model EmrClusterProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEmrCluster")
 model AwsEmrClusterProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The applications installed on this cluster.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   applications?: Application[];
 
@@ -85,8 +85,8 @@ model AwsEmrClusterProperties {
   @doc("<p>The Amazon Resource Name of the cluster.</p>")
   clusterArn?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Applies only to Amazon EMR releases 4.x and later. The list of configurations that are supplied to the Amazon EMR cluster.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   configurations?: Configuration[];
 
@@ -135,8 +135,8 @@ model AwsEmrClusterProperties {
   @doc("<p> The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. </p>")
   outpostArn?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Placement group configured for an Amazon EMR cluster.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   placementGroups?: PlacementGroupConfig[];
 
@@ -167,8 +167,8 @@ model AwsEmrClusterProperties {
   @doc("<p>Specifies the number of steps that can be executed concurrently.</p>")
   stepConcurrencyLevel?: int32;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>A list of tags associated with a cluster.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -233,8 +233,8 @@ model Application {
   @doc("<p>This option is for advanced users only. This is meta information about third-party applications that third-party vendors use for testing purposes.</p>")
   additionalInfo?: Record<string>;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Arguments for Amazon EMR to pass to the application.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   args?: string[];
 
@@ -275,8 +275,8 @@ model Configuration {
   @doc("<p>The classification within a configuration.</p>")
   classification?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>A list of additional configurations to apply within a configuration object.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   configurations?: Configuration[];
 
@@ -290,13 +290,13 @@ model Configuration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2InstanceAttributes")
 model Ec2InstanceAttributes {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>A list of additional Amazon EC2 security group IDs for the master node.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   additionalMasterSecurityGroups?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>A list of additional Amazon EC2 security group IDs for the core and task nodes.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   additionalSlaveSecurityGroups?: string[];
 
@@ -318,13 +318,13 @@ model Ec2InstanceAttributes {
   @doc("<p>The IAM role that was specified when the cluster was launched. The Amazon EC2 instances of the cluster assume this role.</p>")
   iamInstanceProfile?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Applies to clusters configured with the instance fleets option. Specifies one or more Availability Zones in which to launch Amazon EC2 cluster instances when the EC2-Classic network configuration is supported. Amazon EMR chooses the Availability Zone with the best fit from among the list of <code>RequestedEc2AvailabilityZones</code>, and then launches all cluster instances within that Availability Zone. If you do not specify this value, Amazon EMR chooses the Availability Zone for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   requestedEc2AvailabilityZones?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch Amazon EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the Amazon EC2 subnet with the best fit from among the list of <code>RequestedEc2SubnetIds</code>, and then launches all cluster instances within that Subnet. If this value is not specified, and the account and Region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses <code>RequestedEc2AvailabilityZones</code> instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   requestedEc2SubnetIds?: string[];
 
@@ -397,8 +397,8 @@ model InstanceRoleTypeEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ClusterStatus")
 model ClusterStatus {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>A list of tuples that provides information about the errors that caused a cluster to terminate. This structure can contain up to 10 different <code>ErrorDetail</code> tuples.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   errorDetails?: ErrorDetail[];
 
@@ -497,8 +497,8 @@ model ErrorDetail {
   @doc("<p>The name or code associated with the error.</p>")
   errorCode?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>A list of key value pairs that provides contextual information about why an error occured.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   errorData?: StringMap[];
 

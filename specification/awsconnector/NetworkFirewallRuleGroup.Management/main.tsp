@@ -90,8 +90,8 @@ model AwsNetworkFirewallRuleGroupProperties {
   @doc("Property ruleGroupName")
   ruleGroupName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property tags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -177,8 +177,8 @@ model RulesSource {
   @doc("Property rulesString")
   rulesString?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property statefulRules")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   statefulRules?: StatefulRule[];
 
@@ -223,8 +223,8 @@ model IPSetReference {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IPSet")
 model IPSet {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property definition")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   definition?: string[];
 }
@@ -235,8 +235,8 @@ model IPSet {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PortSet")
 model PortSet {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property definition")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   definition?: string[];
 }
@@ -250,13 +250,13 @@ model RulesSourceList {
   @doc("Property generatedRulesType")
   generatedRulesType?: RulesSourceListGeneratedRulesType;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property targetTypes")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   targetTypes?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property targets")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   targets?: string[];
 }
@@ -284,8 +284,8 @@ model StatefulRule {
   @doc("Property header")
   header?: Header;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property ruleOptions")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ruleOptions?: RuleOption[];
 }
@@ -313,13 +313,13 @@ union StatefulRuleAction {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatelessRulesAndCustomActions")
 model StatelessRulesAndCustomActions {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property customActions")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   customActions?: CustomAction[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property statelessRules")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   statelessRules?: StatelessRule[];
 }
@@ -369,8 +369,8 @@ model RuleOption {
   @doc("Property keyword")
   keyword?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property settings")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   settings?: string[];
 }
@@ -479,8 +479,8 @@ model ActionDefinition {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RuleDefinition")
 model RuleDefinition {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property actions")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   actions?: string[];
 
@@ -494,8 +494,8 @@ model RuleDefinition {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PublishMetricAction")
 model PublishMetricAction {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property dimensions")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dimensions?: Dimension[];
 }
@@ -506,33 +506,33 @@ model PublishMetricAction {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MatchAttributes")
 model MatchAttributes {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property destinationPorts")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   destinationPorts?: PortRange[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property destinations")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   destinations?: Address[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property protocols")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   protocols?: int32[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property sourcePorts")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   sourcePorts?: PortRange[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property sources")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   sources?: Address[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property tcpFlags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tcpFlags?: TCPFlagField[];
 }
@@ -576,13 +576,13 @@ model Address {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of TCPFlagField")
 model TCPFlagField {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property flags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   flags?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property masks")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   masks?: string[];
 }

@@ -84,14 +84,14 @@ model AgriServiceResourceProperties {
   @doc("Managed On Behalf Of Configuration.")
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Data connector credentials of AgriService instance.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", ["key"])
   @visibility("read", "create", "update")
   dataConnectorCredentials?: DataConnectorCredentialMap[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("AgriService installed solutions.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", ["key"])
   @visibility("read", "create", "update")
   installedSolutions?: InstalledSolutionMap[];
@@ -280,8 +280,8 @@ op ArmResourceListActionSync<
 
 @doc("The list of available agri solutions.")
 model AvailableAgriSolutionListResult {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Agri solutions list.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   solutions: DataManagerForAgricultureSolution[];
 }

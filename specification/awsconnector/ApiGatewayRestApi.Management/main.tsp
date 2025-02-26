@@ -74,8 +74,8 @@ model AwsApiGatewayRestApiProperties {
   @doc("The source of the API key for metering requests according to a usage plan. Valid values are: ``HEADER`` to read the API key from the ``X-API-Key`` header of a request. ``AUTHORIZER`` to read the API key from the ``UsageIdentifierKey`` from a custom authorizer.")
   apiKeySourceType?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   binaryMediaTypes?: string[];
 
@@ -121,8 +121,8 @@ model AwsApiGatewayRestApiProperties {
   @doc("Property rootResourceId")
   rootResourceId?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:``. The tag value can be up to 256 characters.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -152,13 +152,13 @@ model S3Location {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EndpointConfiguration")
 model EndpointConfiguration {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of endpoint types of an API (RestApi) or its custom domain name (DomainName). For an edge-optimized API and its custom domain name, the endpoint type is ``'EDGE'``. For a regional API and its custom domain name, the endpoint type is ``REGIONAL``. For a private API, the endpoint type is ``PRIVATE``.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   types?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of VpcEndpointIds of an API (RestApi) against which to create Route53 ALIASes. It is only supported for ``PRIVATE`` endpoint type.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   vpcEndpointIds?: string[];
 }

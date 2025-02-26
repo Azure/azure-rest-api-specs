@@ -417,8 +417,8 @@ model InformaticaServerlessRuntimeProperties {
   @doc("Informatica Serverless Network profile properties.")
   serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfile;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("String KV pairs indicating Advanced custom properties.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   advancedCustomProperties?: AdvancedCustomProperties[];
 
@@ -428,8 +428,8 @@ model InformaticaServerlessRuntimeProperties {
   @doc("Serverless config properties")
   serverlessRuntimeConfig?: ServerlessRuntimeConfigProperties;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Serverless Runtime Tags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   serverlessRuntimeTags?: ServerlessRuntimeTag[];
 
@@ -439,13 +439,13 @@ model InformaticaServerlessRuntimeProperties {
 
 @doc("Serverless Runtime config properties.")
 model ServerlessRuntimeConfigProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The List of Informatica Serverless Runtime CDI Config Properties.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   cdiConfigProps?: CdiConfigProps[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The List of Informatica Serverless Runtime CDIE Config Properties.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   cdieConfigProps?: CdiConfigProps[];
 }
@@ -455,21 +455,21 @@ model ServerlessConfigProperties {
   @doc("Platform types")
   platform?: PlatformType;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("List of application types supported by informatica")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   applicationTypes?: ApplicationTypeMetadata[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of compute units with possible array of values")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   computeUnits?: ComputeUnitsMetadata[];
 
   @doc("Serverless Runtime execution timeout")
   executionTimeout?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("List of supported serverless informatica regions")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   regions?: RegionsMetadata[];
 }
@@ -533,8 +533,8 @@ model CdiConfigProps {
   @doc("EngineVersion of the application config.")
   engineVersion: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("ApplicationConfigs of the CDI or CDIE.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   applicationConfigs: ApplicationConfigs[];
 }
@@ -719,8 +719,8 @@ model ServerlessRuntimePropertiesCustomUpdate {
   @doc("Informatica Serverless Network profile properties.")
   serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfileUpdate;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("String KV pairs indicating Advanced custom properties.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   advancedCustomProperties?: AdvancedCustomProperties[];
 
@@ -730,8 +730,8 @@ model ServerlessRuntimePropertiesCustomUpdate {
   @doc("Serverless config properties")
   serverlessRuntimeConfig?: ServerlessRuntimeConfigPropertiesUpdate;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Serverless Runtime Tags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   serverlessRuntimeTags?: ServerlessRuntimeTag[];
 

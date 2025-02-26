@@ -104,8 +104,8 @@ model AwsEc2FlowLogProperties {
   @doc("The type of resource for which to create the flow log. For example, if you specified a VPC ID for the ResourceId property, specify VPC for this property.")
   resourceType?: ResourceType;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The tags to apply to the flow logs.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

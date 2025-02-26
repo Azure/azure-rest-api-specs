@@ -104,7 +104,7 @@ model ExperimentProperties {
   /**
    * List of steps.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   steps: ChaosExperimentStep[];
 
@@ -133,7 +133,7 @@ model ChaosExperimentStep {
   /**
    * List of branches.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   branches: ChaosExperimentBranch[];
 }
@@ -151,7 +151,7 @@ model ChaosExperimentBranch {
   /**
    * List of actions.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   actions: ChaosExperimentAction[];
 }
@@ -248,7 +248,7 @@ model ContinuousAction extends ChaosExperimentAction {
   /**
    * List of key value pairs.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", ["key"])
   parameters: KeyValuePair[];
 
@@ -303,7 +303,7 @@ model DiscreteAction extends ChaosExperimentAction {
   /**
    * List of key value pairs.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", ["key"])
   parameters: KeyValuePair[];
 

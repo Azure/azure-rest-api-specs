@@ -128,7 +128,7 @@ model MongoClusterProperties {
   publicNetworkAccess?: PublicNetworkAccess;
 
   /** The list of node group specs in the cluster. */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   @removed(Versions.v2024_07_01)
   nodeGroupSpecs?: NodeGroupSpec[];
@@ -253,8 +253,8 @@ model BackupProperties {
 /** The connection strings for the given mongo cluster. */
 model ListConnectionStringsResult {
   /** An array that contains the connection strings for a mongo cluster. */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   connectionStrings?: ConnectionString[];
 }

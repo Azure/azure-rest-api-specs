@@ -71,8 +71,8 @@ model LambdaFunctionProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLambdaFunction")
 model AwsLambdaFunctionProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is ``x86_64``.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   architectures?: Architectures[];
 
@@ -97,8 +97,8 @@ model AwsLambdaFunctionProperties {
   @doc("The size of the function's ``/tmp`` directory in MB. The default value is 512, but it can be any whole number between 512 and 10,240 MB. The size of the function's ``/tmp`` directory in MB. The default value is 512, but it can be any whole number between 512 and 10,240 MB.")
   ephemeralStorage?: EphemeralStorage;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an [AWS::EFS::MountTarget](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-mounttarget.html) resource, you must also specify a ``DependsOn`` attribute to ensure that the mount target is created or updated before the function. For more information about using the ``DependsOn`` attribute, see [DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html).")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   fileSystemConfigs?: FileSystemConfig[];
 
@@ -114,8 +114,8 @@ model AwsLambdaFunctionProperties {
   @doc("The ARN of the KMSlong (KMS) customer managed key that's used to encrypt your function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption). When [Lambda SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html) is activated, Lambda also uses this key is to encrypt your function's snapshot. If you deploy your function using a container image, Lambda also uses this key to encrypt your function when it's deployed. Note that this is not the same key that's used to protect your container image in the Amazon Elastic Container Registry (Amazon ECR). If you don't provide a customer managed key, Lambda uses a default service key.")
   kmsKeyArn?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add to the function's execution environment. Specify each layer by its ARN, including the version.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   layers?: string[];
 
@@ -146,8 +146,8 @@ model AwsLambdaFunctionProperties {
   @doc("The function's [SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html) setting.")
   snapStartResponse?: SnapStartResponse;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to apply to the function.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -254,13 +254,13 @@ model FileSystemConfig {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ImageConfig")
 model ImageConfig {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specifies parameters that you want to pass in with ENTRYPOINT. You can specify a maximum of 1,500 parameters in the list.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   command?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specifies the entry point to their application, which is typically the location of the runtime executable. You can specify a maximum of 1,500 string entries in the list.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   entryPoint?: string[];
 
@@ -461,13 +461,13 @@ model VpcConfig {
   @doc("Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.")
   ipv6AllowedForDualStack?: boolean;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of VPC security group IDs.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of VPC subnet IDs.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 }

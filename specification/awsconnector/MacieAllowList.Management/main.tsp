@@ -89,8 +89,8 @@ model AwsMacieAllowListProperties {
   @doc("AllowList status. The status for the AllowList")
   status?: Status;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A collection of tags associated with a resource")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }

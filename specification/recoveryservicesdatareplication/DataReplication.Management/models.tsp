@@ -788,8 +788,8 @@ model EventModelProperties {
   /**
    * Gets or sets the errors associated with this event.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   healthErrors?: HealthErrorModel[];
 
@@ -822,7 +822,7 @@ model HealthErrorModel {
   /**
    * Gets or sets a list of child health errors associated with this error.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   childErrors?: InnerHealthErrorModel[];
 
@@ -1005,8 +1005,8 @@ model FabricModelProperties {
   /**
    * Gets or sets the list of health errors.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   healthErrors?: HealthErrorModel[];
 
@@ -1124,8 +1124,8 @@ model FabricAgentModelProperties {
   /**
    * Gets or sets the list of health errors.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   healthErrors?: HealthErrorModel[];
 
@@ -1271,16 +1271,16 @@ model JobModelProperties {
   /**
    * Gets or sets the list of tasks.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   tasks?: TaskModel[];
 
   /**
    * Gets or sets the list of errors.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   errors?: ErrorModel[];
 
@@ -1334,7 +1334,7 @@ model TaskModel {
   /**
    * Gets or sets the list of children job models.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   childrenJobs?: JobModel[];
 }
@@ -1519,28 +1519,28 @@ model RemotePrivateEndpoint {
   /**
    * Gets or sets the list of Private Link Service Connections and gets populated for Auto approval flow.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   privateLinkServiceConnections?: PrivateLinkServiceConnection[];
 
   /**
    * Gets or sets the list of Manual Private Link Service Connections and gets populated for Manual approval flow.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   manualPrivateLinkServiceConnections?: PrivateLinkServiceConnection[];
 
   /**
    * Gets or sets the list of private link service proxies.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   privateLinkServiceProxies?: PrivateLinkServiceProxy[];
 
   /**
    * Gets or sets the list of Connection Details. This is the connection details for private endpoint.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   connectionDetails?: ConnectionDetails[];
 }
@@ -1587,7 +1587,7 @@ model PrivateLinkServiceProxy {
   /**
    * Gets or sets group connectivity information.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   groupConnectivityInformation?: GroupConnectivityInformation[];
 }
@@ -1865,8 +1865,8 @@ model ProtectedItemModelProperties {
   /**
    * Gets or sets the list of health errors.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   healthErrors?: HealthErrorModel[];
 
@@ -2114,7 +2114,7 @@ model DeploymentPreflightModel {
   /**
    * Gets or sets the list of resources.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   resources?: DeploymentPreflightResource[];
 }
@@ -2296,7 +2296,7 @@ model AzStackHCIClusterProperties {
   /**
    * Gets or sets the list of AzStackHCICluster Storage Container.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   storageContainers: StorageContainerProperties[];
 }
@@ -2399,8 +2399,8 @@ model FailoverJobModelCustomProperties extends JobModelCustomProperties {
   /**
    * Gets or sets the failed over protected item details.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   protectedItemDetails?: FailoverProtectedItemProperties[];
 
@@ -2822,14 +2822,14 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the list of disks to replicate.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   disksToInclude: HyperVToAzStackHCIDiskInput[];
 
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   nicsToInclude: HyperVToAzStackHCINicInput[];
 
@@ -2998,16 +2998,16 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the list of protected disks.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   protectedDisks?: HyperVToAzStackHCIProtectedDiskProperties[];
 
   /**
    * Gets or sets the VM NIC details.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   protectedNics?: HyperVToAzStackHCIProtectedNicProperties[];
 
@@ -3101,7 +3101,7 @@ model HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   nicsToInclude?: HyperVToAzStackHCINicInput[];
 
@@ -3317,7 +3317,7 @@ model OperationModelCollection {
   /**
    * Gets or sets the list of operations.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   value?: OperationModel[];
 
@@ -3388,8 +3388,8 @@ model TestFailoverJobModelCustomProperties extends JobModelCustomProperties {
   /**
    * Gets or sets the test VM details.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   protectedItemDetails?: FailoverProtectedItemProperties[];
 
@@ -3791,30 +3791,30 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the list of disks to replicate.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   disksToInclude: VMwareToAzStackHCIDiskInput[];
 
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   nicsToInclude: VMwareToAzStackHCINicInput[];
 
   /**
    * Gets or sets the list of protected disks.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   protectedDisks?: VMwareToAzStackHCIProtectedDiskProperties[];
 
   /**
    * Gets or sets the VM NIC details.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   protectedNics?: VMwareToAzStackHCIProtectedNicProperties[];
 
@@ -4085,7 +4085,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   nicsToInclude?: VMwareToAzStackHCINicInput[];
 

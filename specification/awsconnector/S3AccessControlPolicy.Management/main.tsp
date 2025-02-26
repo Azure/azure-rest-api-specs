@@ -72,8 +72,8 @@ model S3AccessControlPolicyProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsS3AccessControlPolicy")
 model AwsS3AccessControlPolicyProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>A list of grants.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   grants?: Grant[];
 

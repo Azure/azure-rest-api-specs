@@ -72,8 +72,8 @@ model Wafv2LoggingConfigurationProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsWafv2LoggingConfiguration")
 model AwsWafv2LoggingConfigurationProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   logDestinationConfigs?: string[];
 
@@ -83,8 +83,8 @@ model AwsWafv2LoggingConfigurationProperties {
   @doc("Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.")
   managedByFirewallManager?: boolean;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   redactedFields?: FieldToMatch[];
 
@@ -101,8 +101,8 @@ model LoggingFilterModelProperties {
   @doc("Default handling for logs that don't match any of the specified filtering conditions.")
   defaultBehavior?: DefaultBehavior;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The filters that you want to apply to the logs.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   filters?: Filter[];
 }
@@ -146,8 +146,8 @@ model Filter {
   @doc("How to handle logs that satisfy the filter's conditions and requirement.")
   behavior?: FilterBehavior;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Match conditions for the filter.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   conditions?: Condition[];
 

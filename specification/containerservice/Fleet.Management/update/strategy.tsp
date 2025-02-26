@@ -68,8 +68,8 @@ interface FleetUpdateStrategies {
   #suppress "deprecated" "Existing API"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
-  #suppress "deprecated" "Updated to value syntax next release" 
-@extension(
+  #suppress "deprecated" "Updated to value syntax next release"
+  @extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "azure-async-operation",

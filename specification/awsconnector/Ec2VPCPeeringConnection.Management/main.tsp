@@ -87,8 +87,8 @@ model AwsEc2VPCPeeringConnectionProperties {
   @doc("The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.")
   peerVpcId?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property tags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

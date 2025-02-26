@@ -104,8 +104,8 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   @doc("The type of IP address used for this target group. The possible values are ipv4 and ipv6.")
   ipAddressType?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The Amazon Resource Names (ARNs) of the load balancers that route traffic to this target group.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   loadBalancerArns?: string[];
 
@@ -124,16 +124,16 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   @doc("[HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1, and HTTP2.")
   protocolVersion?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The tags.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
   @doc("The ARN of the Target Group")
   targetGroupArn?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The attributes.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   targetGroupAttributes?: TargetGroupAttribute[];
 
@@ -146,8 +146,8 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   @doc("The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type.")
   targetType?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The targets.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   targets?: TargetDescription[];
 

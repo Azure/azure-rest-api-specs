@@ -77,8 +77,8 @@ model AwsRdsDBInstanceProperties {
   @doc("A value that indicates whether major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible. Constraints: Major version upgrades must be allowed when specifying a value for the ``EngineVersion`` parameter that is a different major version than the DB instance's current version.")
   allowMajorVersionUpgrade?: boolean;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The IAMlong (IAM) roles associated with the DB instance.   *Amazon Aurora*  Not applicable. The associated roles are managed by the DB cluster.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   associatedRoles?: DBInstanceRole[];
 
@@ -136,8 +136,8 @@ model AwsRdsDBInstanceProperties {
   @doc("The name of an existing DB parameter group or a reference to an [AWS::RDS::DBParameterGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbparametergroup.html) resource created in the template. To list all of the available DB parameter group names, use the following command:  ``aws rds describe-db-parameter-groups --query 'DBParameterGroups[].DBParameterGroupName' --output text``   If any of the data members of the referenced parameter group are changed during an update, the DB instance might need to be restarted, which causes some interruption. If the parameter group contains static parameters, whether they were changed or not, an update triggers a reboot.  If you don't specify a value for ``DBParameterGroupName`` property, the default DB parameter group for the specified engine and engine version is used.")
   dbParameterGroupName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of the DB security groups to assign to the DB instance. The list can include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup resources created in the template.  If you set DBSecurityGroups, you must not set VPCSecurityGroups, and vice versa. Also, note that the DBSecurityGroups property exists only for backwards compatibility with older regions and is no longer recommended for providing security information to an RDS DB instance. Instead, use VPCSecurityGroups.  If you specify this property, AWS CloudFormation sends only the following properties (if specified) to Amazon RDS during create operations:  +   ``AllocatedStorage``   +   ``AutoMinorVersionUpgrade``   +   ``AvailabilityZone``   +   ``BackupRetentionPeriod``   +   ``CharacterSetName``   +   ``DBInstanceClass``   +   ``DBName``   +   ``DBParameterGroupName``   +   ``DBSecurityGroups``   +   ``DBSubnetGroupName``   +   ``Engine``   +   ``EngineVersion``   +   ``Iops``   +   ``LicenseModel``   +   ``MasterUsername``   +   ``MasterUserPassword``   +   ``MultiAZ``   +   ``OptionGroupName``   +   ``PreferredBackupWindow``   +   ``PreferredMaintenanceWindow``    All other properties are ignored. Specify a virtual private cloud (VPC) security group if you want to submit other properties, such as ``StorageType``, ``StorageEncrypted``, or ``KmsKeyId``. If you're already using the ``DBSecurityGroups`` property, you can't use these other properties by updating your DB instance to use a VPC security group. You must recreate the DB instance.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dbSecurityGroups?: string[];
 
@@ -168,8 +168,8 @@ model AwsRdsDBInstanceProperties {
   @doc("The ARN for the Secrets Manager secret with the credentials for the user joining the domain. Example: ``arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456``")
   domainAuthSecretArn?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers. Constraints:  +  Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.   Example: ``123.124.125.126,234.235.236.237``")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   domainDnsIps?: string[];
 
@@ -182,8 +182,8 @@ model AwsRdsDBInstanceProperties {
   @doc("The Active Directory organizational unit for your DB instance to join. Constraints:  +  Must be in the distinguished name format.  +  Can't be longer than 64 characters.   Example: ``OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain``")
   domainOu?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see [Publishing Database Logs to Amazon CloudWatch Logs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch) in the *Amazon Relational Database Service User Guide*.  *Amazon Aurora*  Not applicable. CloudWatch Logs exports are managed by the DB cluster.   *Db2*  Valid values: ``diag.log``, ``notify.log``   *MariaDB*  Valid values: ``audit``, ``error``, ``general``, ``slowquery``   *Microsoft SQL Server*  Valid values: ``agent``, ``error``   *MySQL*  Valid values: ``audit``, ``error``, ``general``, ``slowquery``   *Oracle*  Valid values: ``alert``, ``audit``, ``listener``, ``trace``, ``oemagent``   *PostgreSQL*  Valid values: ``postgresql``, ``upgrade``")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   enableCloudwatchLogsExports?: string[];
 
@@ -259,8 +259,8 @@ model AwsRdsDBInstanceProperties {
   @doc("The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ``ddd:hh24:mi-ddd:hh24:mi``  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. To see the time blocks available, see [Adjusting the Preferred DB Instance Maintenance Window](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow) in the *Amazon RDS User Guide.*   This property applies when AWS CloudFormation initially creates the DB instance. If you use AWS CloudFormation to update the DB instance, those updates are applied immediately.  Constraints: Minimum 30-minute window.")
   preferredMaintenanceWindow?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The number of CPU cores and the number of threads per core for the DB instance class of the DB instance. This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   processorFeatures?: ProcessorFeature[];
 
@@ -300,8 +300,8 @@ model AwsRdsDBInstanceProperties {
   @doc("The storage type to associate with the DB instance. If you specify ``io1``, ``io2``, or ``gp3``, you must also include a value for the ``Iops`` parameter. This setting doesn't apply to Amazon Aurora DB instances. Storage is managed by the DB cluster. Valid Values: ``gp2 | gp3 | io1 | io2 | standard``  Default: ``io1``, if the ``Iops`` parameter is specified. Otherwise, ``gp2``.")
   storageType?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An optional array of key-value pairs to apply to this DB instance.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -320,8 +320,8 @@ model AwsRdsDBInstanceProperties {
   @doc("Specifies whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time. Constraints:  +  Can't be specified if the ``RestoreTime`` parameter is provided.")
   useLatestRestorableTime?: boolean;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to [AWS::EC2::SecurityGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html) resources created in the template. If you plan to update the resource, don't specify VPC security groups in a shared VPC.  If you set ``VPCSecurityGroups``, you must not set [DBSecurityGroups](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups), and vice versa.  You can migrate a DB instance in your stack from an RDS DB security group to a VPC security group, but keep the following in mind:  +  You can't revert to using an RDS security group after you establish a VPC security group membership.  +  When you migrate your DB instance to VPC security groups, if your stack update rolls back because the DB instance update fails or because an update fails in another AWS CloudFormation resource, the rollback fails because it can't revert to an RDS security group.  +  To use the properties that are available when you use a VPC security group, you must recreate the DB instance. If you don't, AWS CloudFormation submits only the property values that are listed in the [DBSecurityGroups](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups) property.    To avoid this situation, migrate your DB instance to using VPC security groups only when that is the only change in your stack template.   *Amazon Aurora*  Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. If specified, the setting must match the DB cluster setting.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   vpcSecurityGroups?: string[];
 }

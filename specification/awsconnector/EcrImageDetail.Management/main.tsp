@@ -92,8 +92,8 @@ model AwsEcrImageDetailProperties {
   @doc("<p>The size, in bytes, of the image in the repository.</p> <p>If the image is a manifest list, this will be the max size of all manifests in the list.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>")
   imageSizeInBytes?: int64;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The list of tags associated with this image.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   imageTags?: string[];
 

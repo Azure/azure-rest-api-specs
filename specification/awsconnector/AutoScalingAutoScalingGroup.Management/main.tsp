@@ -82,8 +82,8 @@ model AwsAutoScalingAutoScalingGroupProperties {
   @doc("The name of the Auto Scaling group. This name must be unique per Region per account. The name can contain any ASCII character 33 to 126 including most punctuation characters, digits, and upper and lowercased letters.  You cannot use a colon (:) in the name.")
   autoScalingGroupName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the ``VPCZoneIdentifier`` property, or for attaching a network interface when an existing network interface ID is specified in a launch template.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   availabilityZones?: string[];
 
@@ -123,13 +123,13 @@ model AwsAutoScalingAutoScalingGroupProperties {
   @doc("Information used to specify the launch template and version to use to launch instances. You can alternatively associate a launch template to the Auto Scaling group by specifying a ``MixedInstancesPolicy``. For more information about creating launch templates, see [Create a launch template for an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html) in the *Amazon EC2 Auto Scaling User Guide*. If you omit this property, you must specify ``MixedInstancesPolicy``, ``LaunchConfigurationName``, or ``InstanceId``. Specifies a launch template to use when provisioning EC2 instances for an Auto Scaling group. You must specify the following:  +  The ID or the name of the launch template, but not both.  +  The version of the launch template.   ``LaunchTemplateSpecification`` is property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource. It is also a property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplate.html) and [AWS::AutoScaling::AutoScalingGroup LaunchTemplateOverrides](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplateoverrides.html) property types. For information about creating a launch template, see [AWS::EC2::LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html) and [Create a launch template for an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html) in the *Amazon EC2 Auto Scaling User Guide*. For examples of launch templates, see [Auto scaling template snippets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html) and the [Examples](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#aws-resource-ec2-launchtemplate--examples) section in the ``AWS::EC2::LaunchTemplate`` resource.")
   launchTemplate?: LaunchTemplateSpecification;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("One or more lifecycle hooks to add to the Auto Scaling group before instances are launched.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   lifecycleHookSpecificationList?: LifecycleHookSpecification[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of Classic Load Balancers associated with this Auto Scaling group. For Application Load Balancers, Network Load Balancers, and Gateway Load Balancers, specify the ``TargetGroupARNs`` property instead.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   loadBalancerNames?: string[];
 
@@ -139,8 +139,8 @@ model AwsAutoScalingAutoScalingGroupProperties {
   @doc("The maximum size of the group.  With a mixed instances policy that uses instance weighting, Amazon EC2 Auto Scaling may need to go above ``MaxSize`` to meet your capacity requirements. In this event, Amazon EC2 Auto Scaling will never go above ``MaxSize`` by more than your largest instance weight (weights that define how many units each instance contributes to the desired capacity of the group).")
   maxSize?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Enables the monitoring of group metrics of an Auto Scaling group. By default, these metrics are disabled.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   metricsCollection?: MetricsCollection[];
 
@@ -156,8 +156,8 @@ model AwsAutoScalingAutoScalingGroupProperties {
   @doc("A structure that specifies an Amazon SNS notification configuration for the ``NotificationConfigurations`` property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource. For an example template snippet, see [Auto scaling template snippets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html). For more information, see [Get Amazon SNS notifications when your Auto Scaling group scales](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html) in the *Amazon EC2 Auto Scaling User Guide*.")
   notificationConfiguration?: NotificationConfiguration;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Configures an Auto Scaling group to send notifications when specified events take place.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   notificationConfigurations?: NotificationConfiguration[];
 
@@ -167,23 +167,23 @@ model AwsAutoScalingAutoScalingGroupProperties {
   @doc("The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS service on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role named ``AWSServiceRoleForAutoScaling``, which it creates if it does not exist. For more information, see [Service-linked roles](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html) in the *Amazon EC2 Auto Scaling User Guide*.")
   serviceLinkedRoleARN?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("One or more tags. You can tag your Auto Scaling group and propagate the tags to the Amazon EC2 instances it launches. Tags are not propagated to Amazon EBS volumes. To add tags to Amazon EBS volumes, specify the tags in a launch template but use caution. If the launch template specifies an instance tag with a key that is also specified for the Auto Scaling group, Amazon EC2 Auto Scaling overrides the value of that instance tag with the value specified by the Auto Scaling group. For more information, see [Tag Auto Scaling groups and instances](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html) in the *Amazon EC2 Auto Scaling User Guide*.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: TagProperty[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The Amazon Resource Names (ARN) of the Elastic Load Balancing target groups to associate with the Auto Scaling group. Instances are registered as targets with the target groups. The target groups receive incoming traffic and route requests to one or more registered targets. For more information, see [Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html) in the *Amazon EC2 Auto Scaling User Guide*.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   targetGroupARNs?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A policy or a list of policies that are used to select the instance to terminate. These policies are executed in the order that you list them. For more information, see [Work with Amazon EC2 Auto Scaling termination policies](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html) in the *Amazon EC2 Auto Scaling User Guide*. Valid values: ``Default`` | ``AllocationStrategy`` | ``ClosestToNextInstanceHour`` | ``NewestInstance`` | ``OldestInstance`` | ``OldestLaunchConfiguration`` | ``OldestLaunchTemplate`` | ``arn:aws:lambda:region:account-id:function:my-function:my-alias``")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   terminationPolicies?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of subnet IDs for a virtual private cloud (VPC) where instances in the Auto Scaling group can be created. If this resource specifies public subnets and is also in a VPC that is defined in the same stack template, you must use the [DependsOn attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html) to declare a dependency on the [VPC-gateway attachment](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc-gateway-attachment.html).  When you update ``VPCZoneIdentifier``, this retains the same Auto Scaling group and replaces old instances with new ones, according to the specified subnets. You can optionally specify how CloudFormation handles these updates by using an [UpdatePolicy attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatepolicy.html).  Required to launch instances into a nondefault VPC. If you specify ``VPCZoneIdentifier`` with ``AvailabilityZones``, the subnets that you specify for this property must reside in those Availability Zones.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   vpcZoneIdentifier?: string[];
 }
@@ -254,8 +254,8 @@ model MetricsCollection {
   @doc("The frequency at which Amazon EC2 Auto Scaling sends aggregated data to CloudWatch. The only valid value is ``1Minute``.")
   granularity?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Identifies the metrics to enable. You can specify one or more of the following metrics:  +   ``GroupMinSize``   +   ``GroupMaxSize``   +   ``GroupDesiredCapacity``   +   ``GroupInServiceInstances``   +   ``GroupPendingInstances``   +   ``GroupStandbyInstances``   +   ``GroupTerminatingInstances``   +   ``GroupTotalInstances``   +   ``GroupInServiceCapacity``   +   ``GroupPendingCapacity``   +   ``GroupStandbyCapacity``   +   ``GroupTerminatingCapacity``   +   ``GroupTotalCapacity``   +   ``WarmPoolDesiredCapacity``   +   ``WarmPoolWarmedCapacity``   +   ``WarmPoolPendingCapacity``   +   ``WarmPoolTerminatingCapacity``   +   ``WarmPoolTotalCapacity``   +   ``GroupAndWarmPoolDesiredCapacity``   +   ``GroupAndWarmPoolTotalCapacity``    If you specify ``Granularity`` and don't specify any metrics, all metrics are enabled. For more information, see [Auto Scaling group metrics](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics) in the *Amazon EC2 Auto Scaling User Guide*.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   metrics?: string[];
 }
@@ -279,8 +279,8 @@ model MixedInstancesPolicy {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NotificationConfiguration")
 model NotificationConfiguration {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of event types that send a notification. Event types can include any of the following types.  *Allowed values*:  +   ``autoscaling:EC2_INSTANCE_LAUNCH``   +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR``   +   ``autoscaling:EC2_INSTANCE_TERMINATE``   +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR``   +   ``autoscaling:TEST_NOTIFICATION``")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   notificationTypes?: string[];
 
@@ -338,8 +338,8 @@ model LaunchTemplate {
   @doc("The launch template. Specifies a launch template to use when provisioning EC2 instances for an Auto Scaling group. You must specify the following:  +  The ID or the name of the launch template, but not both.  +  The version of the launch template.   ``LaunchTemplateSpecification`` is property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource. It is also a property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplate.html) and [AWS::AutoScaling::AutoScalingGroup LaunchTemplateOverrides](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplateoverrides.html) property types. For information about creating a launch template, see [AWS::EC2::LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html) and [Create a launch template for an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html) in the *Amazon EC2 Auto Scaling User Guide*. For examples of launch templates, see [Auto scaling template snippets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html) and the [Examples](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#aws-resource-ec2-launchtemplate--examples) section in the ``AWS::EC2::LaunchTemplate`` resource.")
   launchTemplateSpecification?: LaunchTemplateSpecification;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Any properties that you specify override the same properties in the launch template.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   overrides?: LaunchTemplateOverrides[];
 }
@@ -372,26 +372,26 @@ model InstanceRequirements {
   @doc("The minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips) for an instance type. To exclude accelerator-enabled instance types, set ``Max`` to ``0``. Default: No minimum or maximum limits ``AcceleratorCountRequest`` is a property of the ``InstanceRequirements`` property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplateOverrides](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplateoverrides.html) property type that describes the minimum and maximum number of accelerators for an instance type.")
   acceleratorCount?: AcceleratorCountRequest;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Indicates whether instance types must have accelerators by specific manufacturers.  +  For instance types with NVIDIA devices, specify ``nvidia``.  +  For instance types with AMD devices, specify ``amd``.  +  For instance types with AWS devices, specify ``amazon-web-services``.  +  For instance types with Xilinx devices, specify ``xilinx``.   Default: Any manufacturer")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   acceleratorManufacturers?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Lists the accelerators that must be on an instance type.  +  For instance types with NVIDIA A100 GPUs, specify ``a100``.  +  For instance types with NVIDIA V100 GPUs, specify ``v100``.  +  For instance types with NVIDIA K80 GPUs, specify ``k80``.  +  For instance types with NVIDIA T4 GPUs, specify ``t4``.  +  For instance types with NVIDIA M60 GPUs, specify ``m60``.  +  For instance types with AMD Radeon Pro V520 GPUs, specify ``radeon-pro-v520``.  +  For instance types with Xilinx VU9P FPGAs, specify ``vu9p``.   Default: Any accelerator")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   acceleratorNames?: string[];
 
   @doc("The minimum and maximum total memory size for the accelerators on an instance type, in MiB. Default: No minimum or maximum limits ``AcceleratorTotalMemoryMiBRequest`` is a property of the ``InstanceRequirements`` property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplateOverrides](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplateoverrides.html) property type that describes the minimum and maximum total memory size for the accelerators for an instance type, in MiB.")
   acceleratorTotalMemoryMiB?: AcceleratorTotalMemoryMiBRequest;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Lists the accelerator types that must be on an instance type.  +  For instance types with GPU accelerators, specify ``gpu``.  +  For instance types with FPGA accelerators, specify ``fpga``.  +  For instance types with inference accelerators, specify ``inference``.   Default: Any accelerator type")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   acceleratorTypes?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (``*``), to allow an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``. For example, if you specify ``c5*``, Amazon EC2 Auto Scaling will allow the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 Auto Scaling will allow all the M5a instance types, but not the M5n instance types.  If you specify ``AllowedInstanceTypes``, you can't specify ``ExcludedInstanceTypes``.  Default: All instance types")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   allowedInstanceTypes?: string[];
 
@@ -404,26 +404,26 @@ model InstanceRequirements {
   @doc("Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide for Linux Instances*. Default: ``excluded``")
   burstablePerformance?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Lists which specific CPU manufacturers to include.  +  For instance types with Intel CPUs, specify ``intel``.  +  For instance types with AMD CPUs, specify ``amd``.  +  For instance types with AWS CPUs, specify ``amazon-web-services``.    Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.   Default: Any manufacturer")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   cpuManufacturers?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (``*``), to exclude an instance family, type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.  For example, if you specify ``c5*``, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 Auto Scaling will exclude all the M5a instance types, but not the M5n instance types.  If you specify ``ExcludedInstanceTypes``, you can't specify ``AllowedInstanceTypes``.  Default: No excluded instance types")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   excludedInstanceTypes?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Indicates whether current or previous generation instance types are included.  +  For current generation instance types, specify ``current``. The current generation includes EC2 instance types currently recommended for use. This typically includes the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*.  +  For previous generation instance types, specify ``previous``.   Default: Any current or previous generation")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   instanceGenerations?: string[];
 
   @doc("Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, see [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide for Linux Instances*. Default: ``included``")
   localStorage?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Indicates the type of local storage that is required.  +  For instance types with hard disk drive (HDD) storage, specify ``hdd``.  +  For instance types with solid state drive (SSD) storage, specify ``ssd``.   Default: Any local storage type")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   localStorageTypes?: string[];
 

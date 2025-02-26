@@ -39,9 +39,9 @@ interface AvailabilitySets {
   >;
   /** Updates the AvailabilitySets resource. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "deprecated" "Updated to value syntax next release"
   @summary("Implements the AvailabilitySets PATCH method.")
-  #suppress "deprecated" "Updated to value syntax next release" 
-@extension(
+  @extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "azure-async-operation",

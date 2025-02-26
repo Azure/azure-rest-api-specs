@@ -61,16 +61,16 @@ model MaintenanceWindow {
   @doc("The maintenance window scheduling preference.")
   preference?: Preference;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Months during the year when maintenance should be performed.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["name"])
   months?: Month[];
 
   @doc("Weeks during the month when maintenance should be performed. Weeks start on the 1st, 8th, 15th, and 22nd days of the month, and have a duration of 7 days. Weeks start and end based on calendar dates, not days of the week. For example, to allow maintenance during the 2nd week of the month (from the 8th day to the 14th day of the month), use the value 2. Maintenance cannot be scheduled for the fifth week of months that contain more than 28 days. Note that this parameter works in conjunction with the  daysOfWeek and hoursOfDay parameters to allow you to specify specific days of the week and hours that maintenance will be performed. ")
   weeksOfMonth?: int32[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Days during the week when maintenance should be performed.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["name"])
   daysOfWeek?: DayOfWeek[];
 
@@ -178,8 +178,8 @@ model CloudExadataInfrastructureProperties {
   @visibility("read")
   estimatedPatchingTime?: EstimatedPatchingTime;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of customer email addresses that receive information from Oracle about the specified OCI Database service resource. Oracle uses these email addresses to send notifications about planned and unplanned software maintenance updates, information about system hardware, and other information needed by administrators. Up to 10 email addresses can be added to the customer contacts for a cloud Exadata infrastructure instance. ")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   @visibility("create", "read", "update")
   customerContacts?: CustomerContact[];

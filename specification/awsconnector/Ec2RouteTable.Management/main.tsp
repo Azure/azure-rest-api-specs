@@ -74,8 +74,8 @@ model AwsEc2RouteTableProperties {
   @doc("Property routeTableId")
   routeTableId?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Any tags assigned to the route table.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

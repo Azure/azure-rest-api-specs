@@ -89,8 +89,8 @@ model AwsIamServerCertificateProperties {
   @doc("Property serverCertificateName")
   serverCertificateName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property tags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }

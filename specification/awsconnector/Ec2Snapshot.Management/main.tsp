@@ -116,8 +116,8 @@ model AwsEc2SnapshotProperties {
   @doc("<p>The storage tier in which the snapshot is stored. <code>standard</code> indicates that the snapshot is stored in the standard snapshot storage tier and that it is ready for use. <code>archive</code> indicates that the snapshot is currently archived and that it must be restored before it can be used.</p>")
   storageTier?: StorageTierEnumValue;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Any tags assigned to the snapshot.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

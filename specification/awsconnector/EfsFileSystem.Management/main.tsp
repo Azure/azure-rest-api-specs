@@ -95,16 +95,16 @@ model AwsEfsFileSystemProperties {
   @doc("Describes the protection on the file system. Describes the protection on the file system.")
   fileSystemProtection?: FileSystemProtection;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Use to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a ``'Key':'Name','Value':'{value}'`` key-value pair. Each key must be unique. For more information, see [Tagging resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the *General Reference Guide*.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   fileSystemTags?: ElasticFileSystemTag[];
 
   @doc("The ID of the kms-key-long to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault kms-key. If this parameter is not specified, the default kms-key for EFS is used. This ID can be in one of the following formats:  +  Key ID - A unique identifier of the key, for example ``1234abcd-12ab-34cd-56ef-1234567890ab``.  +  ARN - An Amazon Resource Name (ARN) for the key, for example ``arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab``.  +  Key alias - A previously created display name for a key, for example ``alias/projectKey1``.  +  Key alias ARN - An ARN for a key alias, for example ``arn:aws:kms:us-west-2:444455556666:alias/projectKey1``.   If ``KmsKeyId`` is specified, the ``Encrypted`` parameter must be set to true.")
   kmsKeyId?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An array of ``LifecyclePolicy`` objects that define the file system's ``LifecycleConfiguration`` object. A ``LifecycleConfiguration`` object informs Lifecycle management of the following:  +  When to move files in the file system from primary storage to IA storage.  + When to move files in the file system from primary storage or IA storage to Archive storage. +  When to move files that are in IA or Archive storage to primary storage.    EFS requires that each ``LifecyclePolicy`` object have only a single transition. This means that in a request body, ``LifecyclePolicies`` needs to be structured as an array of ``LifecyclePolicy`` objects, one object for each transition, ``TransitionToIA``, ``TransitionToArchive`` ``TransitionToPrimaryStorageClass``. See the example requests in the following section for more information.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   lifecyclePolicies?: LifecyclePolicy[];
 
@@ -198,8 +198,8 @@ model LifecyclePolicy {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ReplicationConfiguration")
 model ReplicationConfiguration {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An array of destination objects. Only one destination object is supported.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   destinations?: ReplicationDestination[];
 }

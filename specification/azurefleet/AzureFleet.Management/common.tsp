@@ -14,7 +14,7 @@ namespace Microsoft.AzureFleet;
 
 @doc("ApiError for Fleet")
 model ApiError is ApiErrorBase {
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", ["message", "target"])
   @doc("The API error details")
   details?: Array<ApiErrorBase>;

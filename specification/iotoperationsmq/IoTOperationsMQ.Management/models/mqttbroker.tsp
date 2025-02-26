@@ -249,8 +249,8 @@ model DiskBackedMessageBufferSettings {
 // Add VolumeClaimSpec model
 @doc("VolumeClaimSpec properties")
 model VolumeClaimSpec {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   accessModes?: string[];
 
@@ -317,8 +317,8 @@ model VolumeClaimResourceRequirements {
 // Add VolumeClaimSpecSelector model
 @doc("VolumeClaimSpecSelector properties")
 model VolumeClaimSpecSelector {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("MatchExpressions is a list of label selector requirements. The requirements are ANDed.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   matchExpressions?: VolumeClaimSpecSelectorMatchExpressions[];
 
@@ -510,8 +510,8 @@ model BrokerAuthenticationResource
 @doc("Broker Resource properties")
 model BrokerAuthenticationProperties {
   // GENERATION FIX TEMP - add "minProperties": 1 and "maxProperties": 1 to this property after creation.
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of authentication methods supported by the Authentication Resource. For each array element, NOTE - Enum only authenticator type supported.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   authenticationMethods: BrokerAuthenticatorMethods[];
 
@@ -662,16 +662,16 @@ model AuthorizationConfig {
   @doc("Enable caching of the authorization rules.")
   enableCache?: boolean = true;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Authorization Rules to be used. If no rule is set, but Authorization Resource is used that would mean DenyAll.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   rules?: AuthorizationBasicRule[];
 }
 
 @doc("BasicRules of AuthorizationConfig Polar rules are not supported")
 model AuthorizationBasicRule {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("This subfield defines the broker resources that the Basic Rule is applied on.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   brokerResources: ResourceInfoDefinition[];
 
@@ -682,8 +682,8 @@ model AuthorizationBasicRule {
 @doc("PrincipalDefinition properties of Basic Rule")
 model PrincipalDefinition {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of key-value pairs that match the attributes of the clients. The attributes are case-sensitive and must match the attributes provided by the clients during authentication.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   attributes?: Record<string>[] = #[];
 

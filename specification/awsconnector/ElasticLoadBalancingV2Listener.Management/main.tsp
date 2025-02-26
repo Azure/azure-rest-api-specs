@@ -79,18 +79,18 @@ model ElasticLoadBalancingV2ListenerProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsElasticLoadBalancingV2Listener")
 model AwsElasticLoadBalancingV2ListenerProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("[TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN) policy.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   alpnPolicy?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The default SSL server certificate for a secure listener. You must provide exactly one certificate if the listener protocol is HTTPS or TLS. To create a certificate list for a secure listener, use [AWS::ElasticLoadBalancingV2::ListenerCertificate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html).")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   certificates?: Certificate[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The actions for the default rule. You cannot define a condition for a default rule. To create additional rules for an Application Load Balancer, use [AWS::ElasticLoadBalancingV2::ListenerRule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html).")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   defaultActions?: Action[];
 
@@ -269,8 +269,8 @@ model ForwardConfig {
   @doc("Information about the target group stickiness for a rule. Information about the target group stickiness for a rule.")
   targetGroupStickinessConfig?: TargetGroupStickinessConfig;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Information about how traffic will be distributed between multiple target groups in a forward rule.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   targetGroups?: TargetGroupTuple[];
 }

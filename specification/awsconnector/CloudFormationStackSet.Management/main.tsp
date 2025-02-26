@@ -81,8 +81,8 @@ model AwsCloudFormationStackSetProperties {
   @doc("Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN.")
   callAs?: CallAs;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   capabilities?: string[];
 
@@ -98,16 +98,16 @@ model AwsCloudFormationStackSetProperties {
   @doc("The user-specified preferences for how AWS CloudFormation performs a stack set operation.")
   operationPreferences?: OperationPreferences;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The input parameters for the stack set template.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   parameters?: Parameter[];
 
   @doc("Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified.")
   permissionModel?: PermissionModel;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A group of stack instances with parameters in some specific accounts and regions.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   stackInstancesGroup?: StackInstances[];
 
@@ -117,8 +117,8 @@ model AwsCloudFormationStackSetProperties {
   @doc("The name to associate with the stack set. The name must be unique in the Region where you create your stack set.")
   stackSetName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -196,8 +196,8 @@ model OperationPreferences {
   @doc("The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time")
   regionConcurrencyType?: OperationPreferencesRegionConcurrencyType;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property regionOrder")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   regionOrder?: string[];
 }
@@ -235,13 +235,13 @@ model StackInstances {
   @doc("The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.")
   deploymentTargets?: DeploymentTargets;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of stack set parameters whose values you want to override in the selected stack instances.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   parameterOverrides?: Parameter[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The names of one or more Regions where you want to create stack instances using the specified AWS account(s).")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   regions?: string[];
 }
@@ -268,16 +268,16 @@ model DeploymentTargets {
   @doc("The filter type you want to apply on organizational units and accounts.")
   accountFilterType?: DeploymentTargetsAccountFilterType;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("AWS accounts that you want to create stack instances in the specified Region(s) for.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   accounts?: string[];
 
   @doc("Returns the value of the AccountsUrl property.")
   accountsUrl?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The organization root ID or organizational unit (OU) IDs to which StackSets deploys.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   organizationalUnitIds?: string[];
 }

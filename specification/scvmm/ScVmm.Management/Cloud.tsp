@@ -40,9 +40,9 @@ interface Clouds {
   >;
   /** Updates the Clouds resource. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "deprecated" "Updated to value syntax next release"
   @summary("Implements the Clouds PATCH method.")
-  #suppress "deprecated" "Updated to value syntax next release" 
-@extension(
+  @extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "azure-async-operation",
@@ -51,9 +51,9 @@ interface Clouds {
   update is ArmTagsPatchAsync<Cloud>;
   /** Deregisters the ScVmm fabric cloud from Azure. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "deprecated" "Updated to value syntax next release"
   @summary("Implements Cloud resource DELETE method.")
-  #suppress "deprecated" "Updated to value syntax next release" 
-@extension(
+  @extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "azure-async-operation",

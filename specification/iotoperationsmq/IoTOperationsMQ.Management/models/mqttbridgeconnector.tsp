@@ -147,8 +147,8 @@ model MqttBridgeTopicMapProperties {
   @doc("The MqttBridgeConnector CRD it refers to.")
   mqttBridgeConnectorRef: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The route details for MqttBridge connector.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   routes?: MqttBridgeRoutes[];
 

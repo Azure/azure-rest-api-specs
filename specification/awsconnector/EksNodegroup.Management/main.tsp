@@ -92,8 +92,8 @@ model AwsEksNodegroupProperties {
   @doc("Property id")
   id?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specify the instance types for a node group.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   instanceTypes?: string[];
 
@@ -118,16 +118,16 @@ model AwsEksNodegroupProperties {
   @doc("The scaling configuration details for the Auto Scaling group that is created for your node group. An object representing a auto scaling group specification for AWS EKS Nodegroup.")
   scalingConfig?: ScalingConfig;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The subnets to use for the Auto Scaling group that is created for your node group.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subnets?: string[];
 
   @doc("The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.")
   tags?: Record<string>;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The Kubernetes taints to be applied to the nodes in the node group when they are created.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   taints?: Taint[];
 
@@ -163,8 +163,8 @@ model RemoteAccess {
   @doc("Property ec2SshKey")
   ec2SshKey?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property sourceSecurityGroups")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   sourceSecurityGroups?: string[];
 }

@@ -80,21 +80,21 @@ model AwsEc2SecurityGroupProperties {
   @doc("<p>The name of the security group.</p>")
   groupName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The inbound rules associated with the security group.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipPermissions?: IpPermission[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The outbound rules associated with the security group.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipPermissionsEgress?: IpPermission[];
 
   @doc("<p>The Amazon Web Services account ID of the owner of the security group.</p>")
   ownerId?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Any tags assigned to the security group.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -114,26 +114,26 @@ model IpPermission {
   @doc("<p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>, <code>icmpv6</code>) or number (see <a href='http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml'>Protocol Numbers</a>).</p> <p>Use <code>-1</code> to specify all protocols. When authorizing security group rules, specifying <code>-1</code> or a protocol number other than <code>tcp</code>, <code>udp</code>, <code>icmp</code>, or <code>icmpv6</code> allows traffic on all ports, regardless of any port range you specify. For <code>tcp</code>, <code>udp</code>, and <code>icmp</code>, you must specify a port range. For <code>icmpv6</code>, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.</p>")
   ipProtocol?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The IPv4 address ranges.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipRanges?: IpRange[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The IPv6 address ranges.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv6Ranges?: Ipv6Range[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The prefix list IDs.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   prefixListIds?: PrefixListId[];
 
   @doc("<p>If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).</p>")
   toPort?: int32;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The security group and Amazon Web Services account ID pairs.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   userIdGroupPairs?: UserIdGroupPair[];
 }

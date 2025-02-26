@@ -89,8 +89,8 @@ model AwsEc2KeyPairProperties {
   @doc("The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.")
   publicKeyMaterial?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The tags to apply to the key pair.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }

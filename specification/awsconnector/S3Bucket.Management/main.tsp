@@ -77,8 +77,8 @@ model AwsS3BucketProperties {
   @doc("This is a legacy property, and it is not recommended for most use cases. A majority of modern use cases in Amazon S3 no longer require the use of ACLs, and we recommend that you keep ACLs disabled. For more information, see [Controlling object ownership](https://docs.aws.amazon.com//AmazonS3/latest/userguide/about-object-ownership.html) in the *Amazon S3 User Guide*.  A canned access control list (ACL) that grants predefined permissions to the bucket. For more information about canned ACLs, see [Canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) in the *Amazon S3 User Guide*.  S3 buckets are created with ACLs disabled by default. Therefore, unless you explicitly set the [AWS::S3::OwnershipControls](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-ownershipcontrols.html) property to enable ACLs, your resource will fail to deploy with any value other than Private. Use cases requiring ACLs are uncommon.  The majority of access control configurations can be successfully and more easily achieved with bucket policies. For more information, see [AWS::S3::BucketPolicy](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html). For examples of common policy configurations, including S3 Server Access Logs buckets and more, see [Bucket policy examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html) in the *Amazon S3 User Guide*.")
   accessControl?: AccessControl;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specifies the configuration and any analyses for the analytics filter of an Amazon S3 bucket.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   analyticsConfigurations?: AnalyticsConfiguration[];
 
@@ -100,13 +100,13 @@ model AwsS3BucketProperties {
   @doc("Property dualStackDomainName")
   dualStackDomainName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Defines how Amazon S3 handles Intelligent-Tiering storage.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   intelligentTieringConfigurations?: IntelligentTieringConfiguration[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specifies the inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   inventoryConfigurations?: InventoryConfiguration[];
 
@@ -116,8 +116,8 @@ model AwsS3BucketProperties {
   @doc("Settings that define where logs are stored. Describes where logs are stored and the prefix that Amazon S3 assigns to all log object keys for a bucket. For examples and more information, see [PUT Bucket logging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html) in the *Amazon S3 API Reference*.  To successfully complete the ``AWS::S3::Bucket LoggingConfiguration`` request, you must have ``s3:PutObject`` and ``s3:PutObjectAcl`` in your IAM permissions.")
   loggingConfiguration?: LoggingConfiguration;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specifies a metrics configuration for the CloudWatch request metrics (specified by the metrics configuration ID) from an Amazon S3 bucket. If you're updating an existing metrics configuration, note that this is a full replacement of the existing metrics configuration. If you don't include the elements you want to keep, they are erased. For more information, see [PutBucketMetricsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html).")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   metricsConfigurations?: MetricsConfiguration[];
 
@@ -142,8 +142,8 @@ model AwsS3BucketProperties {
   @doc("Configuration for replicating objects in an S3 bucket. To enable replication, you must also enable versioning by using the ``VersioningConfiguration`` property. Amazon S3 can store replicated objects in a single destination bucket or multiple destination buckets. The destination bucket or buckets must already exist. A container for replication rules. You can add up to 1,000 rules. The maximum size of a replication configuration is 2 MB. The latest version of the replication configuration XML is V2. For more information about XML V2 replication configurations, see [Replication configuration](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-add-config.html) in the *Amazon S3 User Guide*.")
   replicationConfiguration?: ReplicationConfiguration;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An arbitrary set of tags (key-value pairs) for this S3 bucket.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -222,8 +222,8 @@ model AnalyticsConfiguration {
   @doc("Contains data related to access patterns to be collected and made available to analyze the tradeoffs between different storage classes. Specifies data related to access patterns to be collected and made available to analyze the tradeoffs between different storage classes for an Amazon S3 bucket.")
   storageClassAnalysis?: StorageClassAnalysis;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The tags to use when evaluating an analytics filter. The analytics only includes objects that meet the filter's criteria. If no filter is specified, all of the contents of the bucket are included in the analysis.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tagFilters?: TagFilter[];
 }
@@ -234,8 +234,8 @@ model AnalyticsConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of BucketEncryption")
 model BucketEncryption {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specifies the default server-side-encryption configuration.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   serverSideEncryptionConfiguration?: ServerSideEncryptionRule[];
 }
@@ -246,8 +246,8 @@ model BucketEncryption {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CorsConfiguration")
 model CorsConfiguration {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A set of origins and methods (cross-origin access that you want to allow). You can add up to 100 rules to the configuration.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   corsRules?: CorsRule[];
 }
@@ -267,13 +267,13 @@ model IntelligentTieringConfiguration {
   @doc("Specifies the status of the configuration.")
   status?: IntelligentTieringConfigurationStatus;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A container for a key-value pair.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tagFilters?: TagFilter[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ``ARCHIVE_ACCESS`` and ``DEEP_ARCHIVE_ACCESS``.  You only need Intelligent Tiering Configuration enabled on a bucket if you want to automatically move objects stored in the Intelligent-Tiering storage class to Archive Access or Deep Archive Access tiers.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tierings?: Tiering[];
 }
@@ -307,8 +307,8 @@ model InventoryConfiguration {
   @doc("Object versions to include in the inventory list. If set to ``All``, the list includes all the object versions, which adds the version-related fields ``VersionId``, ``IsLatest``, and ``DeleteMarker`` to the list. If set to ``Current``, the list does not contain these version-related fields.")
   includedObjectVersions?: InventoryConfigurationIncludedObjectVersions;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Contains the optional fields that are included in the inventory results.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   optionalFields?: InventoryConfigurationOptionalFields[];
 
@@ -347,8 +347,8 @@ union InventoryConfigurationScheduleFrequency {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LifecycleConfiguration")
 model LifecycleConfiguration {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A lifecycle rule for individual objects in an Amazon S3 bucket.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   rules?: Rule[];
 }
@@ -434,8 +434,8 @@ model MetricsConfiguration {
   @doc("The prefix that an object must have to be included in the metrics results.")
   prefix?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specifies a list of tag filters to use as a metrics configuration filter. The metrics configuration includes only objects that meet the filter's criteria.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tagFilters?: TagFilter[];
 }
@@ -449,18 +449,18 @@ model NotificationConfiguration {
   @doc("Enables delivery of events to Amazon EventBridge. Amazon S3 can send events to Amazon EventBridge whenever certain events happen in your bucket, see [Using EventBridge](https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventBridge.html) in the *Amazon S3 User Guide*. Unlike other destinations, delivery of events to EventBridge can be either enabled or disabled for a bucket. If enabled, all events will be sent to EventBridge and you can use EventBridge rules to route events to additional targets. For more information, see [What Is Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html) in the *Amazon EventBridge User Guide*")
   eventBridgeConfiguration?: EventBridgeConfiguration;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Describes the LAMlong functions to invoke and the events for which to invoke them.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   lambdaConfigurations?: LambdaConfiguration[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The Amazon Simple Queue Service queues to publish messages to and the events for which to publish messages.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   queueConfigurations?: QueueConfiguration[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The topic to which notifications are sent and the events for which notifications are generated.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   topicConfigurations?: TopicConfiguration[];
 }
@@ -484,8 +484,8 @@ model ObjectLockConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OwnershipControls")
 model OwnershipControls {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Specifies the container element for Object Ownership rules.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   rules?: OwnershipControlsRule[];
 }
@@ -518,8 +518,8 @@ model ReplicationConfiguration {
   @doc("The Amazon Resource Name (ARN) of the IAMlong (IAM) role that Amazon S3 assumes when replicating objects. For more information, see [How to Set Up Replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-how-setup.html) in the *Amazon S3 User Guide*.")
   role?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A container for one or more replication rules. A replication configuration must have at least one rule and can contain a maximum of 1,000 rules.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   rules?: ReplicationRule[];
 }
@@ -573,8 +573,8 @@ model WebsiteConfiguration {
   @doc("The redirect behavior for every request to this bucket's website endpoint.  If you specify this property, you can't specify any other property. Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.")
   redirectAllRequestsTo?: RedirectAllRequestsTo;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Rules that define when a redirect is applied and the redirect behavior.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   routingRules?: RoutingRule[];
 }
@@ -621,23 +621,23 @@ model ServerSideEncryptionRule {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CorsRule")
 model CorsRule {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Headers that are specified in the ``Access-Control-Request-Headers`` header. These headers are allowed in a preflight OPTIONS request. In response to any preflight OPTIONS request, Amazon S3 returns any requested headers that are allowed.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   allowedHeaders?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An HTTP method that you allow the origin to run.  *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   allowedMethods?: CorsRuleAllowedMethods[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("One or more origins you want customers to be able to access the bucket from.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   allowedOrigins?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript ``XMLHttpRequest`` object).")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   exposedHeaders?: string[];
 
@@ -755,8 +755,8 @@ model Rule {
   @doc("(Deprecated.) For buckets with versioning enabled (or suspended), specifies when non-current objects transition to a specified storage class. If you specify a transition and expiration time, the expiration time must be later than the transition time. If you specify this property, don't specify the ``NoncurrentVersionTransitions`` property. Container for the transition rule that describes when noncurrent objects transition to the ``STANDARD_IA``, ``ONEZONE_IA``, ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE`` storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the ``STANDARD_IA``, ``ONEZONE_IA``, ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE`` storage class at a specific period in the object's lifetime. If you specify this property, don't specify the ``NoncurrentVersionTransitions`` property.")
   noncurrentVersionTransition?: NoncurrentVersionTransition;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("For buckets with versioning enabled (or suspended), one or more transition rules that specify when non-current objects transition to a specified storage class. If you specify a transition and expiration time, the expiration time must be later than the transition time. If you specify this property, don't specify the ``NoncurrentVersionTransition`` property.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   noncurrentVersionTransitions?: NoncurrentVersionTransition[];
 
@@ -772,16 +772,16 @@ model Rule {
   @doc("If ``Enabled``, the rule is currently being applied. If ``Disabled``, the rule is not currently being applied.")
   status?: RuleStatus;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Tags to use to identify a subset of objects to which the lifecycle rule applies.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tagFilters?: TagFilter[];
 
   @doc("(Deprecated.) Specifies when an object transitions to a specified storage class. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time. If you specify this property, don't specify the ``Transitions`` property. Specifies when an object transitions to a specified storage class. For more information about Amazon S3 lifecycle configuration rules, see [Transitioning Objects Using Amazon S3 Lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html) in the *Amazon S3 User Guide*.")
   transition?: Transition;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("One or more transition rules that specify when an object transitions to a specified storage class. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time. If you specify this property, don't specify the ``Transition`` property.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   transitions?: Transition[];
 }
@@ -1339,8 +1339,8 @@ model RoutingRuleCondition {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of S3KeyFilter")
 model S3KeyFilter {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of containers for the key-value pair that defines the criteria for the filter rule.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   rules?: FilterRule[];
 }
@@ -1422,8 +1422,8 @@ model ReplicationRuleAndOperator {
   @doc("An object key name prefix that identifies the subset of objects to which the rule applies.")
   prefix?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An array of tags containing key and value pairs.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tagFilters?: TagFilter[];
 }

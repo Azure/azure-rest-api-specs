@@ -225,8 +225,8 @@ model Identity {
   /**
    * User identity ids
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read", "create", "update")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   userAssignedIdentities?: DatabaseIdentity[];
 
@@ -468,8 +468,8 @@ model RegisterServerDefinition {
   /**
    * Destination tier overrides.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read", "create")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   destinationTierOverrides?: DestinationTierOverride[];
 }

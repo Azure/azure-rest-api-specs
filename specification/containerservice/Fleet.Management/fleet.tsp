@@ -174,9 +174,9 @@ model FleetCredentialResult {
 
 @doc("The Credential results response.")
 model FleetCredentialResults {
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
   @doc("Array of base64-encoded Kubernetes configuration files.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["name"])
   kubeconfigs?: FleetCredentialResult[];
 }
@@ -210,11 +210,11 @@ interface Fleets {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Use operationId to keep same name as deprecated sync operation"
+  #suppress "deprecated" "Updated to value syntax next release"
+  #suppress "deprecated" "Updated to value syntax next release"
   @added(Versions.v2023_06_15_preview)
   @operationId("Fleets_Update")
-  #suppress "deprecated" "Updated to value syntax next release" 
-#suppress "deprecated" "Updated to value syntax next release" 
-@extension(
+  @extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "original-uri",

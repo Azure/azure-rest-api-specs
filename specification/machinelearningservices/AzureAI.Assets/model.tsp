@@ -47,8 +47,8 @@ model Index is AssetVersion {
 @doc("Paged collection of IndexVersion items.")
 @pagedResult
 model PagedIndex {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of Indexes.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   @items
   value: Index[];
@@ -72,8 +72,8 @@ model Prompt is AssetVersion {
 @pagedResult
 @added(Versions.`2024-05-01-preview`)
 model PagedPrompt {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of Prompts.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   @items
   value: Prompt[];

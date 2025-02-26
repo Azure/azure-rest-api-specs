@@ -74,8 +74,8 @@ model AwsEc2ImageProperties {
   @doc("<p>The architecture of the image.</p>")
   architecture?: ArchitectureValuesEnumValue;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Any block device mapping entries.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   blockDeviceMappings?: BlockDeviceMapping[];
 
@@ -133,8 +133,8 @@ model AwsEc2ImageProperties {
   @doc("<p>The platform details associated with the billing code of the AMI. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html'>Understand AMI billing information</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   platformDetails?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Any product codes associated with the AMI.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   productCodes?: ProductCode[];
 
@@ -162,8 +162,8 @@ model AwsEc2ImageProperties {
   @doc("<p>The reason for the state change.</p>")
   stateReason?: StateReason;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Any tags assigned to the image.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

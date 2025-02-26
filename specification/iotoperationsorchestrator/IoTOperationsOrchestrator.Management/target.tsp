@@ -31,16 +31,16 @@ model Target is TrackedResource<TargetProperties> {
 
 @doc("The properties of a Target resource.")
 model TargetProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of components.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   components?: ComponentProperties[];
 
   @doc("Deployment scope (such as Kubernetes namespace).")
   scope?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Defines the device topology for a target or instance.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   topologies?: TopologiesProperties[];
 
@@ -57,8 +57,8 @@ model TargetProperties {
 
 @doc("Defines a desired runtime component.")
 model TopologiesProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("bindings description.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   bindings?: BindingProperties[];
 }

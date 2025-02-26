@@ -46,8 +46,8 @@ model DiscoveredAssetEndpointProfileProperties {
   @doc("Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF).")
   additionalConfiguration?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("List of supported authentication methods supported by the target server.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   supportedAuthenticationMethods?: AuthenticationMethod[];
 

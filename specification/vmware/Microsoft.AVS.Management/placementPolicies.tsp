@@ -32,10 +32,10 @@ interface PlacementPolicies {
   // update is ArmCustomPatchAsync<PlacementPolicy, PlacementPolicyUpdate>;
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Update a PlacementPolicy")
   @extension("x-ms-long-running-operation", true)
-  #suppress "deprecated" "Updated to value syntax next release" 
-@extension(
+  @extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "location",

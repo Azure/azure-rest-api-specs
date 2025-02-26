@@ -76,8 +76,8 @@ model ErrorDefinition {
   /**
    * Internal error details.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", ["code"])
   details?: ErrorDefinition[];
 }
@@ -98,7 +98,7 @@ model DashboardProperties {
   /**
    * The dashboard lenses.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   lenses?: DashboardLens[];
 
@@ -121,7 +121,7 @@ model DashboardLens {
   /**
    * The dashboard parts.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   parts: DashboardParts[];
 
@@ -240,7 +240,7 @@ model MarkdownPartMetadata extends DashboardPartMetadata {
    * Input to dashboard part.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   inputs?: {}[];
 

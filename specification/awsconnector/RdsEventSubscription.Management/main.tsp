@@ -74,16 +74,16 @@ model AwsRdsEventSubscriptionProperties {
   @doc("A Boolean value; set to true to activate the subscription, set to false to create the subscription but not active it.")
   enabled?: boolean = true;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of event categories for a SourceType that you want to subscribe to. You can see a list of the categories for a given SourceType in the Events topic in the Amazon RDS User Guide or by using the DescribeEventCategories action.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   eventCategories?: string[];
 
   @doc("The Amazon Resource Name (ARN) of the SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it.")
   snsTopicArn?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   sourceIds?: string[];
 
@@ -93,8 +93,8 @@ model AwsRdsEventSubscriptionProperties {
   @doc("The name of the subscription.")
   subscriptionName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An array of key-value pairs to apply to this resource.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }

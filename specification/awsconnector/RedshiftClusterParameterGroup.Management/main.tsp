@@ -87,13 +87,13 @@ model AwsRedshiftClusterParameterGroupProperties {
   @doc("The name of the cluster parameter group.")
   parameterGroupName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   parameters?: Parameter[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An array of key-value pairs to apply to this resource.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }

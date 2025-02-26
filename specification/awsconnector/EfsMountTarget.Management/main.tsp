@@ -80,8 +80,8 @@ model AwsEfsMountTargetProperties {
   @doc("Valid IPv4 address within the address range of the specified subnet.")
   ipAddress?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Up to five VPC security group IDs, of the form ``sg-xxxxxxxx``. These must be for the same VPC as subnet specified.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   securityGroups?: string[];
 

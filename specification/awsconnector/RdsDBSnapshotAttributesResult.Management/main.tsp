@@ -78,8 +78,8 @@ model RdsDBSnapshotAttributesResultProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsRdsDBSnapshotAttributesResult")
 model AwsRdsDBSnapshotAttributesResultProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The list of attributes and values for the manual DB snapshot.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dbSnapshotAttributes?: DBSnapshotAttribute[];
 
@@ -96,8 +96,8 @@ model DBSnapshotAttribute {
   @doc("<p>The name of the manual DB snapshot attribute.</p> <p>The attribute named <code>restore</code> refers to the list of Amazon Web Services accounts that have permission to copy or restore the manual DB cluster snapshot. For more information, see the <code>ModifyDBSnapshotAttribute</code> API action.</p>")
   attributeName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The value or values for the manual DB snapshot attribute.</p> <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this element returns a list of IDs of the Amazon Web Services accounts that are authorized to copy or restore the manual DB snapshot. If a value of <code>all</code> is in the list, then the manual DB snapshot is public and available for any Amazon Web Services account to copy or restore.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   attributeValues?: string[];
 }

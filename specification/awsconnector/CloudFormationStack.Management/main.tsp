@@ -71,8 +71,8 @@ model CloudFormationStackProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsCloudFormationStack")
 model AwsCloudFormationStackProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property capabilities")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   capabilities?: Capabilities[];
 
@@ -94,13 +94,13 @@ model AwsCloudFormationStackProperties {
   @doc("Property lastUpdateTime")
   lastUpdateTime?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property notificationARNs")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   notificationARNs?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property outputs")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   outputs?: Output[];
 
@@ -134,8 +134,8 @@ model AwsCloudFormationStackProperties {
   @doc("Property stackStatusReason")
   stackStatusReason?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property tags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

@@ -152,12 +152,12 @@ interface Watchers {
   listBySubscription is ArmListBySubscription<Watcher>;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The action to start monitoring all targets configured for a database watcher.")
   @action
   @post
   @armResourceAction(Watcher)
-  #suppress "deprecated" "Updated to value syntax next release" 
-@extension(
+  @extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "azure-async-operation",
@@ -168,13 +168,13 @@ interface Watchers {
   ): ArmAcceptedLroResponse | ArmResponse<Watcher> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The action to stop monitoring all targets configured for a database watcher.")
   @action
   @post
   @armResourceAction(Watcher)
   @extension("x-ms-long-running-operation", true)
-  #suppress "deprecated" "Updated to value syntax next release" 
-@extension(
+  @extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "azure-async-operation",

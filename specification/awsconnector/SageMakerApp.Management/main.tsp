@@ -86,8 +86,8 @@ model AwsSageMakerAppProperties {
   @doc("The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.")
   resourceSpec?: ResourceSpec;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of tags to apply to the app.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

@@ -98,8 +98,8 @@ model AwsEc2VolumeProperties {
   @doc("The snapshot from which to create the volume. You must specify either a snapshot ID or a volume size.")
   snapshotId?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The tags to apply to the volume during creation.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

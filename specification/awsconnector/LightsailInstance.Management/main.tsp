@@ -71,8 +71,8 @@ model LightsailInstanceProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLightsailInstance")
 model AwsLightsailInstanceProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An array of objects representing the add-ons to enable for the new instance.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   addOns?: AddOn[];
 
@@ -124,8 +124,8 @@ model AwsLightsailInstanceProperties {
   @doc("Support code to help identify any issues")
   supportCode?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An array of key-value pairs to apply to this resource.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -187,8 +187,8 @@ model Hardware {
   @doc("CPU count of the Instance.")
   cpuCount?: int32;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Disks attached to the Instance.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   disks?: Disk[];
 
@@ -218,8 +218,8 @@ model Networking {
   @doc("Monthly Transfer of the Instance.")
   monthlyTransfer?: MonthlyTransfer;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Ports to the Instance.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ports?: Port[];
 }
@@ -313,13 +313,13 @@ model Port {
   @doc("Access Type Protocol of the Instance.")
   accessType?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("cidr List Aliases")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   cidrListAliases?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property cidrs")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   cidrs?: string[];
 
@@ -329,8 +329,8 @@ model Port {
   @doc("From Port of the Instance.")
   fromPort?: int32;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("IPv6 Cidrs")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv6Cidrs?: string[];
 

@@ -80,8 +80,8 @@ model AwsSnsTopicProperties {
   @doc("The body of the policy document you want to use for this topic. You can only add one policy per topic. The policy must be in JSON string format. Length Constraints: Maximum length of 30,720.")
   dataProtectionPolicy?: unknown;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property deliveryStatusLogging")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   deliveryStatusLogging?: LoggingConfig[];
 
@@ -97,13 +97,13 @@ model AwsSnsTopicProperties {
   @doc("The signature version corresponds to the hashing algorithm used while creating the signature of the notifications, subscription confirmations, or unsubscribe confirmation messages sent by Amazon SNS. By default, ``SignatureVersion`` is set to ``1``.")
   signatureVersion?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The SNS subscriptions (endpoints) for this topic.  If you specify the ``Subscription`` property in the ``AWS::SNS::Topic`` resource and it creates an associated subscription resource, the associated subscription is not deleted when the ``AWS::SNS::Topic`` resource is deleted.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subscription?: Subscription[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of tags to add to a new topic.  To be able to tag a topic on creation, you must have the ``sns:CreateTopic`` and ``sns:TagResource`` permissions.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

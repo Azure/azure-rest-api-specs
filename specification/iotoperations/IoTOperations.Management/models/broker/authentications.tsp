@@ -34,8 +34,8 @@ model BrokerAuthenticationResource
 
 @doc("BrokerAuthentication Resource properties")
 model BrokerAuthenticationProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Defines a set of Broker authentication methods to be used on `BrokerListeners`. For each array element one authenticator type supported.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   authenticationMethods: BrokerAuthenticatorMethods[];
 

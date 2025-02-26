@@ -183,8 +183,8 @@ model VolumeClaimSpec {
   @doc("Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1")
   storageClassName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   accessModes?: string[];
 
@@ -214,8 +214,8 @@ model VolumeClaimResourceRequirements {
 
 @doc("VolumeClaimSpecSelector properties")
 model VolumeClaimSpecSelector {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("MatchExpressions is a list of label selector requirements. The requirements are ANDed.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   matchExpressions?: VolumeClaimSpecSelectorMatchExpressions[];
 

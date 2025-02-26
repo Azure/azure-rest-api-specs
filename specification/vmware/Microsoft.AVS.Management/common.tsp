@@ -61,9 +61,9 @@ op ArmResourceActionNoContentAsyncNoRequestBody<
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+#suppress "deprecated" "Updated to value syntax next release"
 @autoRoute
 @extension("x-ms-long-running-operation", true)
-#suppress "deprecated" "Updated to value syntax next release" 
 @extension(
   "x-ms-long-running-operation-options",
   {

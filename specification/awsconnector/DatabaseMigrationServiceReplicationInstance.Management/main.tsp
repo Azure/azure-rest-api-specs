@@ -127,24 +127,24 @@ model AwsDatabaseMigrationServiceReplicationInstanceProperties {
   @doc("<p>The replication instance identifier is a required parameter. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1-63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>")
   replicationInstanceIdentifier?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>One or more IPv6 addresses for the replication instance.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   replicationInstanceIpv6Addresses?: string[];
 
   @doc("<p>The private IP address of the replication instance.</p>")
   replicationInstancePrivateIpAddress?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>One or more private IP addresses for the replication instance.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   replicationInstancePrivateIpAddresses?: string[];
 
   @doc("<p>The public IP address of the replication instance.</p>")
   replicationInstancePublicIpAddress?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>One or more public IP addresses for the replication instance.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   replicationInstancePublicIpAddresses?: string[];
 
@@ -157,8 +157,8 @@ model AwsDatabaseMigrationServiceReplicationInstanceProperties {
   @doc("<p>The Availability Zone of the standby replication instance in a Multi-AZ deployment.</p>")
   secondaryAvailabilityZone?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The VPC security group for the instance.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   vpcSecurityGroups?: VpcSecurityGroupMembership[];
 }
@@ -200,13 +200,13 @@ model ReplicationSubnetGroup {
   @doc("<p>The status of the subnet group.</p>")
   subnetGroupStatus?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The subnets that are in the subnet group.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subnets?: Subnet[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The IP addressing protocol supported by the subnet group. This is used by a replication instance with values such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   supportedNetworkTypes?: string[];
 

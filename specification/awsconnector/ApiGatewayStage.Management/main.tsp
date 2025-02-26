@@ -95,8 +95,8 @@ model AwsApiGatewayStageProperties {
   @doc("The version of the associated API documentation.")
   documentationVersion?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A map that defines the method settings for a Stage resource. Keys (designated as ``/{method_setting_key`` below) are method paths defined as ``{resource_path}/{http_method}`` for an individual method override, or ``/\\*/\\*`` for overriding all methods in the stage.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   methodSettings?: MethodSetting[];
 
@@ -106,8 +106,8 @@ model AwsApiGatewayStageProperties {
   @doc("The name of the stage is the first path segment in the Uniform Resource Identifier (URI) of a call to API Gateway. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.")
   stageName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The collection of tags. Each tag element is associated with a given resource.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

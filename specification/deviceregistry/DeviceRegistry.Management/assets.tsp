@@ -119,20 +119,20 @@ model AssetProperties {
   @added(Versions.v2024_09_01_preview)
   defaultTopic?: Topic;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Array of data points that are part of the asset. Each data point can reference an asset type capability and have per-data point configuration.")
   @removed(Versions.v2024_09_01_preview)
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dataPoints?: DataPoint[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.")
   @added(Versions.v2024_09_01_preview)
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   datasets?: Dataset[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   events?: Event[];
 
@@ -157,8 +157,8 @@ model Dataset {
   @doc("Object that describes the topic information for the specific dataset.")
   topic?: Topic;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Array of data points that are part of the dataset. Each data point can have per-data point configuration.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dataPoints?: DataPoint[];
 }
@@ -299,9 +299,9 @@ union EventObservabilityMode {
 
 @doc("Defines the asset status properties.")
 model AssetStatus {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Array object to transfer and persist errors that originate from the Edge.")
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   errors?: AssetStatusError[];
 
@@ -310,17 +310,17 @@ model AssetStatus {
   @visibility("read")
   version?: int64;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Array of dataset statuses that describe the status of each dataset.")
   @visibility("read")
   @added(Versions.v2024_09_01_preview)
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   datasets?: AssetStatusDataset[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Array of event statuses that describe the status of each event.")
   @visibility("read")
   @added(Versions.v2024_09_01_preview)
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   events?: AssetStatusEvent[];
 }

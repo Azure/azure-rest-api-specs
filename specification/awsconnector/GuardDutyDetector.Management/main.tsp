@@ -77,8 +77,8 @@ model AwsGuardDutyDetectorProperties {
   @doc("Property enable")
   enable?: boolean;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property features")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   features?: CFNFeatureConfiguration[];
 
@@ -88,8 +88,8 @@ model AwsGuardDutyDetectorProperties {
   @doc("Property id")
   id?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property tags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: TagItem[];
 }
@@ -116,8 +116,8 @@ model CFNDataSourceConfigurations {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CFNFeatureConfiguration")
 model CFNFeatureConfiguration {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property additionalConfiguration")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   additionalConfiguration?: CFNFeatureAdditionalConfiguration[];
 

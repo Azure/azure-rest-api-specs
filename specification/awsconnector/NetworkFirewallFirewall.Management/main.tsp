@@ -78,8 +78,8 @@ model AwsNetworkFirewallFirewallProperties {
   @doc("Property description")
   description?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property endpointIds")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   endpointIds?: string[];
 
@@ -101,13 +101,13 @@ model AwsNetworkFirewallFirewallProperties {
   @doc("Property subnetChangeProtection")
   subnetChangeProtection?: boolean;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property subnetMappings")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subnetMappings?: SubnetMapping[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property tags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

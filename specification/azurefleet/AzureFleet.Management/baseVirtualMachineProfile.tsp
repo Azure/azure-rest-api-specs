@@ -187,7 +187,7 @@ model VirtualMachineScaleSetOSProfile {
    * Windows](https://learn.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "id exists inside sourceVault"
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", ["sourceVault/id"])
   secrets?: VaultSecretGroup[];
 
@@ -237,7 +237,7 @@ model WindowsConfiguration {
    * Specifies additional base-64 encoded XML formatted information that can be
    * included in the Unattend.xml file, which is used by Windows Setup.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   additionalUnattendContent?: AdditionalUnattendContent[];
 
@@ -362,7 +362,7 @@ model WinRMConfiguration {
   /**
    * The list of Windows Remote Management listeners
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   listeners?: WinRMListener[];
 }
@@ -441,7 +441,7 @@ model SshConfiguration {
   /**
    * The list of SSH public keys used to authenticate with linux based VMs.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", ["path"])
   publicKeys?: SshPublicKey[];
 }
@@ -528,7 +528,7 @@ model VaultSecretGroup {
   /**
    * The list of key vault references in SourceVault which contain certificates.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", ["certificateUrl"])
   vaultCertificates?: VaultCertificate[];
 }
@@ -603,7 +603,7 @@ model VirtualMachineScaleSetStorageProfile {
    * and VHDs for Azure virtual
    * machines](https://learn.microsoft.com/azure/virtual-machines/managed-disks-overview).
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", ["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
@@ -927,7 +927,7 @@ model VirtualMachineScaleSetNetworkProfile {
   /**
    * The list of network configurations.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   networkInterfaceConfigurations?: VirtualMachineScaleSetNetworkConfiguration[];
 
@@ -1003,7 +1003,7 @@ model VirtualMachineScaleSetNetworkConfigurationProperties {
   /**
    * Specifies the IP configurations of the network interface.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   ipConfigurations: VirtualMachineScaleSetIPConfiguration[];
 
@@ -1158,7 +1158,7 @@ model VirtualMachineScaleSetPublicIPAddressConfigurationProperties {
   /**
    * The list of IP tags associated with the public IP address.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", [])
   ipTags?: VirtualMachineScaleSetIpTag[];
 
@@ -1581,7 +1581,7 @@ model ApplicationProfile {
   /**
    * Specifies the gallery applications that should be made available to the VM/VMSS
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", ["packageReferenceId"])
   galleryApplications?: VMGalleryApplication[];
 }

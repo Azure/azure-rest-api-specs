@@ -143,8 +143,8 @@ model ExperimentExecutionDetailsPropertiesRunInformation {
   /**
    * The steps of the experiment run.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", ["stepName"])
   steps?: StepStatus[];
 }
@@ -174,8 +174,8 @@ model StepStatus {
   /**
    * The array of branches.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", ["branchName"])
   branches?: BranchStatus[];
 }
@@ -205,8 +205,8 @@ model BranchStatus {
   /**
    * The array of actions.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", ["actionId"])
   actions?: ActionStatus[];
 }
@@ -248,8 +248,8 @@ model ActionStatus {
   /**
    * The array of targets.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   targets?: ExperimentExecutionActionTargetDetailsProperties[];
 }

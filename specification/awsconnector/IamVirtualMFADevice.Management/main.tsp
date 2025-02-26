@@ -77,13 +77,13 @@ model AwsIamVirtualMFADeviceProperties {
   @doc("Property serialNumber")
   serialNumber?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property tags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property users")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   users?: string[];
 

@@ -37,9 +37,9 @@ model StandbyContainerGroupPoolRuntimeViewResource
 @doc("Contains information about a standby pool as last known by the StandbyPool resource provider.")
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
 model StandbyContainerGroupPoolRuntimeViewResourceProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list containing the counts of container groups in each possible state, as known by the StandbyPool resource provider.")
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   instanceCountSummary: ContainerGroupInstanceCountSummary[];
 
@@ -51,8 +51,8 @@ model StandbyContainerGroupPoolRuntimeViewResourceProperties {
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
 @doc("Displays the counts of container groups in each state, as known by the StandbyPool resource provider.")
 model ContainerGroupInstanceCountSummary {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The count of pooled resources in each state.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["state"])
   instanceCountsByState: PoolResourceStateCount[];
 }

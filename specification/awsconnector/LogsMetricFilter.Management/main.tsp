@@ -80,8 +80,8 @@ model AwsLogsMetricFilterProperties {
   @doc("The name of an existing log group that you want to associate with this metric filter.")
   logGroupName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The metric transformations.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   metricTransformations?: MetricTransformation[];
 }
@@ -95,8 +95,8 @@ model MetricTransformation {
   @doc("(Optional) The value to emit when a filter pattern does not match a log event. This value can be null.")
   defaultValue?: int32;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The fields to use as dimensions for the metric. One metric filter can include as many as three dimensions.  Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as ``IPAddress`` or ``requestID`` as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric.  CloudWatch Logs disables a metric filter if it generates 1000 different name/value pairs for your specified dimensions within a certain amount of time. This helps to prevent accidental high charges. You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see [Creating a Billing Alarm to Monitor Your Estimated Charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dimensions?: Dimension[];
 

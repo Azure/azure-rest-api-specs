@@ -131,8 +131,8 @@ model ExportResult {
   @doc("A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform")
   skippedResources?: armResourceIdentifier[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of errors derived during exporting each resource")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   errors?: ErrorDetail[];
 }

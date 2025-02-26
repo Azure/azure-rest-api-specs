@@ -39,8 +39,8 @@ model ImpactCategoryProperties is ResourceProperties {
   @doc("Description of the category")
   description?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The workloadImpact properties which are required when reporting with the impact category")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   requiredImpactProperties?: RequiredImpactProperties[];
 }

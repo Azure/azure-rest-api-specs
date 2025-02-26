@@ -46,10 +46,10 @@ op FleetCustomPatchSync<
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "this is a template"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+#suppress "deprecated" "Updated to value syntax next release"
 @autoRoute
 @doc("Create a {name}", TResource)
 @extension("x-ms-long-running-operation", true)
-#suppress "deprecated" "Updated to value syntax next release" 
 @extension(
   "x-ms-long-running-operation-options",
   {
@@ -73,9 +73,9 @@ op FleetArmResourceCreateOrUpdateAsync<
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "this is a template"
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "inlining the response with a header does not present a risk"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+#suppress "deprecated" "Updated to value syntax next release"
 @autoRoute
 @doc("Delete a {name}", TResource)
-#suppress "deprecated" "Updated to value syntax next release" 
 @extension(
   "x-ms-long-running-operation-options",
   {

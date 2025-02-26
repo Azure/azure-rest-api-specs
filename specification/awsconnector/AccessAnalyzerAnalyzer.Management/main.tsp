@@ -78,16 +78,16 @@ model AwsAccessAnalyzerAnalyzerProperties {
   @doc("Analyzer name")
   analyzerName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property archiveRules")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   archiveRules?: ArchiveRule[];
 
   @doc("Amazon Resource Name (ARN) of the analyzer")
   arn?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An array of key-value pairs to apply to this resource.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -111,8 +111,8 @@ model UnusedAccessConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ArchiveRule")
 model ArchiveRule {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property filter")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   filter?: Filter[];
 
@@ -139,21 +139,21 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Filter")
 model Filter {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property contains")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   contains?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property eq")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   eq?: string[];
 
   @doc("Property exists")
   exists?: boolean;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property neq")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   neq?: string[];
 

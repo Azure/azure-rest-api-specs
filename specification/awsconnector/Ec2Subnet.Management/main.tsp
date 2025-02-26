@@ -98,8 +98,8 @@ model AwsEc2SubnetProperties {
   @doc("The IPv6 CIDR block. If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.")
   ipv6CidrBlock?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The IPv6 network ranges for the subnet, in CIDR notation.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   ipv6CidrBlocks?: string[];
 
@@ -127,8 +127,8 @@ model AwsEc2SubnetProperties {
   @doc("Property subnetId")
   subnetId?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Any tags assigned to the subnet.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

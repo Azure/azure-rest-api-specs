@@ -71,8 +71,8 @@ model AppSyncGraphqlApiProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsAppSyncGraphqlApi")
 model AwsAppSyncGraphqlApiProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>A list of additional authentication providers for the <code>GraphqlApi</code> API.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   additionalAuthenticationProviders?: AdditionalAuthenticationProvider[];
 

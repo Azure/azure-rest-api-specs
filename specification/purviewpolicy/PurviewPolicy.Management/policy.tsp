@@ -87,7 +87,7 @@ model Policy extends Azure.ResourceManager.Foundations.ProxyResource {
   members: PolicyMembers;
 
   /** Array of decision rules for the policy */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   decisionRules: PolicyDecisionRule[];
 
@@ -102,12 +102,12 @@ model Policy extends Azure.ResourceManager.Foundations.ProxyResource {
 /** Policy member */
 model PolicyMembers {
   /** Array of azure active directory members */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   fabricItemMembers?: FabricItemMember[];
 
   /** Array of azure active directory members */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   aadMembers?: AadMember[];
 }
@@ -139,7 +139,7 @@ model PolicyDecisionRule {
   effect: Decision;
 
   /** Array of attribute predicates */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   permission?: AttributePredicate[];
 }

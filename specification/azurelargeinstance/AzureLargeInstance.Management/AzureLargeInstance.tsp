@@ -100,9 +100,9 @@ interface AzureLargeInstances {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template for optional body"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
+#suppress "deprecated" "Updated to value syntax next release"
 @autoRoute
 @OpenAPI.extension("x-ms-long-running-operation", true)
-#suppress "deprecated" "Updated to value syntax next release" 
 @OpenAPI.extension(
   "x-ms-long-running-operation-options",
   {

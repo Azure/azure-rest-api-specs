@@ -93,8 +93,8 @@ model AwsNetworkFirewallFirewallPolicyProperties {
   @doc("Property firewallPolicyName")
   firewallPolicyName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property tags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -108,36 +108,36 @@ model FirewallPolicy {
   @doc("Property policyVariables")
   policyVariables?: RuleVariablesModel;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property statefulDefaultActions")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   statefulDefaultActions?: string[];
 
   @doc("Property statefulEngineOptions")
   statefulEngineOptions?: StatefulEngineOptions;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property statefulRuleGroupReferences")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   statefulRuleGroupReferences?: StatefulRuleGroupReference[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property statelessCustomActions")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   statelessCustomActions?: CustomAction[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property statelessDefaultActions")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   statelessDefaultActions?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property statelessFragmentDefaultActions")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   statelessFragmentDefaultActions?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property statelessRuleGroupReferences")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   statelessRuleGroupReferences?: StatelessRuleGroupReference[];
 
@@ -255,8 +255,8 @@ model StatelessRuleGroupReference {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IPSet")
 model IPSet {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property definition")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   definition?: string[];
 }
@@ -295,8 +295,8 @@ model ActionDefinition {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PublishMetricAction")
 model PublishMetricAction {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property dimensions")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dimensions?: Dimension[];
 }

@@ -36,8 +36,8 @@ model LandingZoneConfigurationResourceProperties {
     }
   ]>;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Tags are key-value pairs that can be assigned to a resource to organize and manage it more effectively. Example: {'name': 'a tag name', 'value': 'a tag value'}")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   tags?: Tags[];
 
@@ -71,8 +71,8 @@ model LandingZoneConfigurationResourceProperties {
   @doc("The Bastion subnet address. Specify the address using IPv4 CIDR notation.")
   azureBastionSubnetCidrBlock?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The child management groups of 'Landing Zones' management group and their assigned policies.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   landingZonesMgChildren?: LandingZoneManagementGroupProperties[];
 
@@ -103,16 +103,16 @@ model LandingZoneConfigurationResourceProperties {
   @doc("The managed identity to be assigned to this landing zone configuration.")
   managedIdentity: ManagedIdentityProperties;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The names of the 'Platform' child management groups and their assigned policies, excluding the default ones: 'Connectivity', 'Identity', and 'Management'")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   platformMgChildren?: PlatformManagementGroupProperties[];
 
   @doc("The default naming convention applied to all resources for this landing zone configuration. Example - {DeploymentPrefix}-Contoso-{ResourceTypeAbbreviation}{DeploymentSuffix}-{Environment}-testing")
   namingConventionFormula?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The custom naming convention applied to specific resource types for this landing zone configuration, which overrides the default naming convention for those resource types. Example - 'customNamingConvention': [{'resourceType': 'azureFirewalls', 'formula': '{DeploymentPrefix}-afwl-{DeploymentSuffix}'}]")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   customNamingConvention?: CustomNamingConvention[];
 }
@@ -163,8 +163,8 @@ model LandingZoneManagementGroupProperties {
 
 @doc("The properties of policy initiatives applied to the management group.")
 model ManagementGroupProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Array of policy initiatives applied to the management group.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   policyInitiativesAssignmentProperties: PolicyInitiativeAssignmentProperties[];
 }

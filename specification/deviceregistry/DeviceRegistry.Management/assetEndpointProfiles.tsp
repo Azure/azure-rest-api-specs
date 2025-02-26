@@ -124,8 +124,8 @@ model X509Credentials {
 @doc("Definition of the authentication mechanism for the southbound connector.")
 @removed(Versions.v2024_09_01_preview)
 model TransportAuthentication {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Defines a reference to a secret which contains all certificates and private keys that can be used by the southbound connector connecting to the shop floor/OT device. The accepted extensions are .der for certificates and .pfx/.pem for private keys.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   @removed(Versions.v2024_09_01_preview)
   ownCertificates: OwnCertificate[];
@@ -147,9 +147,9 @@ model OwnCertificate {
 @doc("Defines the asset endpoint profile status properties.")
 @added(Versions.v2024_09_01_preview)
 model AssetEndpointProfileStatus {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Array object to transfer and persist errors that originate from the Edge.")
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   errors?: AssetEndpointProfileStatusError[];
 }

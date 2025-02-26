@@ -89,8 +89,8 @@ model AwsEc2IpamProperties {
   @doc("<p>The Amazon Web Services Region of the IPAM.</p>")
   ipamRegion?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The operating Regions for an IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions.</p> <p>For more information about operating Regions, see <a href='https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html'>Create an IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   operatingRegions?: IpamOperatingRegion[];
 
@@ -115,8 +115,8 @@ model AwsEc2IpamProperties {
   @doc("<p>The state message.</p>")
   stateMessage?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 

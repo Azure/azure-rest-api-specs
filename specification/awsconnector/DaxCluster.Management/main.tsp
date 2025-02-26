@@ -92,16 +92,16 @@ model AwsDaxClusterProperties {
   @doc("<p>A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role's permissions to access DynamoDB on your behalf.</p>")
   iamRoleArn?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>A list of nodes to be removed from the cluster.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   nodeIdsToRemove?: string[];
 
   @doc("<p>The node type for the nodes in the cluster. (All nodes in a DAX cluster are of the same type.)</p>")
   nodeType?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>A list of nodes that are currently in the cluster.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   nodes?: Node[];
 
@@ -117,8 +117,8 @@ model AwsDaxClusterProperties {
   @doc("<p>The description of the server-side encryption status on the specified DAX cluster.</p>")
   sseDescription?: SSEDescription;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>A list of security groups, and the status of each, for the nodes in the cluster.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   securityGroups?: SecurityGroupMembership[];
 
@@ -213,8 +213,8 @@ model NotificationConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ParameterGroupStatus")
 model ParameterGroupStatus {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The node IDs of one or more nodes to be rebooted.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   nodeIdsToReboot?: string[];
 

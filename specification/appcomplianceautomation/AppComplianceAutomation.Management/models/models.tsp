@@ -544,7 +544,7 @@ model GetOverviewStatusResponse {
   /**
    * List of different status items.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", ["statusName"])
   statusList?: StatusItem[];
 }
@@ -627,14 +627,14 @@ model TriggerEvaluationProperty {
   /**
    * List of resource ids to be evaluated
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", ["resourceId"])
   resourceIds?: string[];
 
   /**
    * List of quick assessments
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", ["resourceId"])
   quickAssessments?: QuickAssessment[];
 }
@@ -706,7 +706,7 @@ model ListInUseStorageAccountsResponse {
   /**
    * The storage account list which in use in related reports.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", ["accountName"])
   storageAccountList?: StorageInfo[];
 }
@@ -797,8 +797,8 @@ alias ReportBaseProperties = {
   /**
    * List of synchronized certification records.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["offerGuid"])
   certRecords?: CertSyncRecord[];
 
@@ -828,7 +828,7 @@ model ReportProperties {
   /**
    * List of resource data.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", ["resourceId"])
   resources: ResourceMetadata[];
 
@@ -854,7 +854,7 @@ model ReportPatchProperties {
   /**
    * List of resource data.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", ["resourceId"])
   resources?: ResourceMetadata[];
 
@@ -960,7 +960,7 @@ model CertSyncRecord {
   /**
    * The control records list to be synchronized.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", ["controlId"])
   controls?: ControlSyncRecord[];
 }
@@ -1135,8 +1135,8 @@ model SnapshotProperties {
   /**
    * List of compliance results.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["complianceName"])
   complianceResults?: ComplianceResult[];
 }
@@ -1154,8 +1154,8 @@ model ComplianceResult {
   /**
    * List of categories.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["categoryName"])
   categories?: Category[];
 }
@@ -1179,8 +1179,8 @@ model Category {
   /**
    * List of control families.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["controlFamilyName"])
   controlFamilies?: ControlFamily[];
 }
@@ -1204,8 +1204,8 @@ model ControlFamily {
   /**
    * List of controls.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["controlId"])
   controls?: Control[];
 }
@@ -1253,8 +1253,8 @@ model Control {
   /**
    * List of customer responsibility.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["responsibilityId"])
   responsibilities?: Responsibility[];
 }
@@ -1318,16 +1318,16 @@ model Responsibility {
   /**
    * List of resource.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["resourceId"])
   resourceList?: ResponsibilityResource[];
 
   /**
    * List of recommendation.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["recommendationId"])
   recommendationList?: Recommendation[];
 
@@ -1415,8 +1415,8 @@ model Recommendation {
   /**
    * List of recommendation solutions.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["recommendationSolutionIndex"])
   recommendationSolutions?: RecommendationSolution[];
 }
@@ -1472,16 +1472,16 @@ model DownloadResponse {
   /**
    * Resource list of the report
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["resourceId"])
   resourceList?: ResourceItem[];
 
   /**
    * List of the compliance result
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @visibility("read")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["controlId"])
   complianceReport?: ComplianceReportItem[];
 
@@ -1634,7 +1634,7 @@ model ScopingConfigurationProperties {
   /**
    * List of scoping question answers.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", ["questionId"])
   answers?: ScopingAnswer[];
 
@@ -1652,7 +1652,7 @@ model ScopingQuestions {
   /**
    * List of scoping questions.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", ["questionId"])
   questions?: ScopingQuestion[];
 }

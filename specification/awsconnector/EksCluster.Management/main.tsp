@@ -81,8 +81,8 @@ model AwsEksClusterProperties {
   @doc("<p>The Unix epoch timestamp at object creation.</p>")
   createdAt?: utcDateTime;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The encryption configuration for the cluster.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   encryptionConfig?: EncryptionConfig[];
 
@@ -240,8 +240,8 @@ model EncryptionConfig {
   @doc("<p>Key Management Service (KMS) key. Either the ARN or the alias can be used.</p>")
   provider?: Provider;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Specifies the resources to be encrypted. The only supported value is <code>secrets</code>.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   resources?: string[];
 }
@@ -252,8 +252,8 @@ model EncryptionConfig {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ClusterHealth")
 model ClusterHealth {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>An object representing the health issues of your local Amazon EKS cluster on an Amazon Web Services Outpost.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   issues?: ClusterIssue[];
 }
@@ -311,8 +311,8 @@ model IpFamilyEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Logging")
 model Logging {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The cluster control plane logging configuration for your cluster.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   clusterLogging?: LogSetup[];
 }
@@ -329,8 +329,8 @@ model OutpostConfigResponse {
   @doc("<p>An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href='https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html'>Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>")
   controlPlanePlacement?: ControlPlanePlacementResponse;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The ARN of the Outpost that you specified for use with your local Amazon EKS cluster on Outposts.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   outpostArns?: string[];
 }
@@ -350,18 +350,18 @@ model VpcConfigResponse {
   @doc("<p>Whether the public API server endpoint is enabled.</p>")
   endpointPublicAccess?: boolean;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   publicAccessCidrs?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your nodes and the Kubernetes control plane.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The subnets associated with your cluster.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 
@@ -391,8 +391,8 @@ model ClusterIssue {
   @doc("<p>A description of the issue.</p>")
   message?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The resource IDs that the issue relates to.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   resourceIds?: string[];
 }
@@ -488,8 +488,8 @@ model LogSetup {
   @doc("<p>If a log type is enabled, that log type exports its control plane logs to CloudWatch Logs. If a log type isn't enabled, that log type doesn't export its control plane logs. Each individual log type can be enabled or disabled independently.</p>")
   enabled?: boolean;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The available cluster control plane log types.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   types?: LogType[];
 }

@@ -87,8 +87,8 @@ model AwsElasticBeanstalkConfigurationTemplateProperties {
   @doc("The ID of an environment whose settings you want to use to create the configuration template. You must specify EnvironmentId if you don't specify PlatformArn, SolutionStackName, or SourceConfiguration.")
   environmentId?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Option values for the Elastic Beanstalk configuration, such as the instance type. If specified, these values override the values obtained from the solution stack or the source configuration template. For a complete list of Elastic Beanstalk configuration options, see [Option Values](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html) in the AWS Elastic Beanstalk Developer Guide.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   optionSettings?: ConfigurationOptionSetting[];
 

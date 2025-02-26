@@ -73,8 +73,8 @@ model GitHubOrganizationProfile extends OrganizationProfile {
   @doc("GitHub organization profile")
   kind: "GitHub";
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of GitHub organizations/repositories the pool should be present in.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   organizations: GitHubOrganization[];
 }
@@ -92,8 +92,8 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   @doc("Azure DevOps organization profile")
   kind: "AzureDevOps";
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of Azure DevOps organizations the pool should be present in.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   organizations: Organization[];
 
@@ -153,8 +153,8 @@ model VmssFabricProfile extends FabricProfile {
   @doc("The Azure SKU of the machines in the pool.")
   sku: DevOpsAzureSku;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The VM images of the machines in the pool.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   images: PoolImage[];
 
@@ -179,8 +179,8 @@ model StorageProfile {
   @doc("The Azure SKU name of the machines in the pool.")
   osDiskStorageAccountType?: OsDiskStorageAccountType;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of empty data disks to attach.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dataDisks?: DataDisk[];
 }
@@ -628,8 +628,8 @@ model ResourceSkuLocationInfo {
   @doc("List of availability zones where the SKU is supported.")
   zones: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Gets details of capabilities available to a SKU in specific zones.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   zoneDetails: ResourceSkuZoneDetails[];
 }
@@ -639,8 +639,8 @@ model ResourceSkuZoneDetails {
   @doc("Gets the set of zones that the SKU is available in with the specified capabilities.")
   name: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of capabilities that are available for the SKU in the specified list of zones.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   capabilities: ResourceSkuCapabilities[];
 }
@@ -675,18 +675,18 @@ model ResourceSkuProperties {
   @doc("The set of locations that the SKU is available.")
   locations: azureLocation[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of locations and availability zones in those locations where the SKU is available")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   locationInfo: ResourceSkuLocationInfo[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Name value pairs to describe the capability.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   capabilities: ResourceSkuCapabilities[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The restrictions of the SKU.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   restrictions: ResourceSkuRestrictions[];
 }

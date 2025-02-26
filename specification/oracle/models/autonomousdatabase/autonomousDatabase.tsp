@@ -568,8 +568,8 @@ model ConnectionStringType {
   @maxLength(255)
   medium?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A list of connection string profiles to allow clients to group, filter and select connection string values based on structured metadata.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   profiles?: ProfileType[];
 }
@@ -748,9 +748,9 @@ model AutonomousDatabaseBaseProperties {
   @maxValue(128)
   cpuCoreCount?: int32;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Customer Contacts.")
   @visibility("create", "read", "update")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @OpenAPI.extension("x-ms-identifiers", [])
   customerContacts?: CustomerContact[];
 

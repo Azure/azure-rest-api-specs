@@ -138,8 +138,8 @@ model AwsOpenSearchDomainStatusProperties {
   @doc("<p>Log publishing options for the domain.</p>")
   logPublishingOptions?: Record<LogPublishingOption>;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Information about the domain properties that are currently being modified.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   modifyingProperties?: ModifyingProperties[];
 
@@ -1071,18 +1071,18 @@ model SoftwareUpdateOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of VPCDerivedInfo")
 model VPCDerivedInfo {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The list of Availability Zones associated with the VPC subnets.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   availabilityZones?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The list of security group IDs associated with the VPC endpoints for the domain.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>A list of subnet IDs associated with the VPC endpoints for the domain.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 

@@ -81,7 +81,7 @@ model FleetProperties {
   @doc("Configuration Options for Regular instances in Compute Fleet.")
   regularPriorityProfile?: RegularPriorityProfile;
 
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   @doc("List of VM sizes supported for Compute Fleet")
   vmSizesProfile: Array<VmSizeProfile>;
@@ -428,7 +428,7 @@ model VMAttributes {
     """)
   localStorageInGiB?: VMAttributeMinMaxDouble;
 
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   @doc("""
     The local storage disk types specified as a list. LocalStorageSupport should be set to "Included" or "Required" to use this VMAttribute. 
@@ -462,7 +462,7 @@ model VMAttributes {
     """)
   acceleratorSupport?: VMAttributeSupport;
 
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   @doc("""
     The accelerator manufacturers specified as a list. 
@@ -471,7 +471,7 @@ model VMAttributes {
     """)
   acceleratorManufacturers?: Array<AcceleratorManufacturer>;
 
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   @doc("""
     The accelerator types specified as a list. acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
@@ -486,17 +486,17 @@ model VMAttributes {
     """)
   acceleratorCount?: VMAttributeMinMaxInteger;
 
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   @doc("The VM category specified as a list. Optional parameter.")
   vmCategories?: Array<VMCategory>;
 
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   @doc("The VM architecture types specified as a list. Optional parameter.")
   architectureTypes?: Array<ArchitectureType>;
 
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   @doc("The VM CPU manufacturers specified as a list. Optional parameter.")
   cpuManufacturers?: Array<CpuManufacturer>;
@@ -504,7 +504,7 @@ model VMAttributes {
   @doc("Specifies whether the VMSize supporting burstable capability should be used to build Fleet or not.")
   burstableSupport?: VMAttributeSupport;
 
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   @doc("Specifies which VMSizes should be excluded while building Fleet. Optional parameter.")
   excludedVMSizes?: Array<string>;
@@ -528,7 +528,7 @@ model LocationProfile {
 @added(Versions.v2024_11_01)
 @doc("Represents the configuration for additional locations where Fleet resources may be deployed.")
 model AdditionalLocationsProfile {
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", [])
   @doc("The list of location profiles.")
   locationProfiles: Array<LocationProfile>;

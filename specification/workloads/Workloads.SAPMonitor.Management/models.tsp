@@ -409,8 +409,8 @@ model SapLandscapeMonitorProperties {
   /**
    * Gets or sets the list Top Metric Thresholds for SAP Landscape Monitor Dashboard
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @maxItems(50)
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["name"])
   topMetricsThresholds?: SapLandscapeMonitorMetricThresholds[];
 }
@@ -422,16 +422,16 @@ model SapLandscapeMonitorPropertiesGrouping {
   /**
    * Gets or sets the list of landscape to SID mappings.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @maxItems(50)
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["name"])
   landscape?: SapLandscapeMonitorSidMapping[];
 
   /**
    * Gets or sets the list of Sap Applications to SID mappings.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @maxItems(50)
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["name"])
   sapApplication?: SapLandscapeMonitorSidMapping[];
 }
@@ -960,7 +960,7 @@ model AlertRuleProperties {
   /**
    * The alert query parameters.
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @extension("x-ms-identifiers", ["name"])
   alertQueryParameters?: AlertQueryParameter[];
 }
@@ -1063,8 +1063,8 @@ model AlertTemplateProperties {
   /**
    * Describes the Query Input Parameter properties in alerts template.
    */
+  #suppress "deprecated" "Updated to value syntax next release"
   @maxItems(50)
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", ["name"])
   queryInputParameters?: AlertTemplateQueryInputParameter[];
 }

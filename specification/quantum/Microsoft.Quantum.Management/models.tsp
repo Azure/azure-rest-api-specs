@@ -370,7 +370,7 @@ model WorkspaceResourceProperties {
   /**
    * List of Providers selected for this Workspace
    */
-  #suppress "deprecated" "Updated to value syntax next release" 
+  #suppress "deprecated" "Updated to value syntax next release"
   @OpenAPI.extension("x-ms-identifiers", ["providerId"])
   providers?: Provider[];
 

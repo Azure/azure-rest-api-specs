@@ -71,8 +71,8 @@ model CloudTrailTrailProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsCloudTrailTrail")
 model AwsCloudTrailTrailProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The advanced event selectors that were used to select events for the data store.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   advancedEventSelectors?: AdvancedEventSelector[];
 
@@ -88,16 +88,16 @@ model AwsCloudTrailTrailProperties {
   @doc("Specifies whether log file validation is enabled. The default is false.")
   enableLogFileValidation?: boolean;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. You can configure up to five event selectors for a trail.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   eventSelectors?: EventSelector[];
 
   @doc("Specifies whether the trail is publishing events from global services such as IAM to the log files.")
   includeGlobalServiceEvents?: boolean;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   insightSelectors?: InsightSelector[];
 
@@ -125,8 +125,8 @@ model AwsCloudTrailTrailProperties {
   @doc("Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.")
   snsTopicName?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property tags")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
@@ -140,8 +140,8 @@ model AwsCloudTrailTrailProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AdvancedEventSelector")
 model AdvancedEventSelector {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Contains all selector statements in an advanced event selector.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   fieldSelectors?: AdvancedFieldSelector[];
 
@@ -155,13 +155,13 @@ model AdvancedEventSelector {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EventSelector")
 model EventSelector {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Property dataResources")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   dataResources?: DataResource[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing 'kms.amazonaws.com'. By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   excludeManagementEventSources?: string[];
 
@@ -215,36 +215,36 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AdvancedFieldSelector")
 model AdvancedFieldSelector {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An operator that includes events that match the last few characters of the event record field specified as the value of Field.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   endsWith?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   equals?: string[];
 
   @doc("A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.")
   field?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An operator that excludes events that match the last few characters of the event record field specified as the value of Field.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   notEndsWith?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An operator that excludes events that match the exact value of the event record field specified as the value of Field.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   notEquals?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An operator that excludes events that match the first few characters of the event record field specified as the value of Field.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   notStartsWith?: string[];
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An operator that includes events that match the first few characters of the event record field specified as the value of Field.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   startsWith?: string[];
 }
@@ -258,8 +258,8 @@ model DataResource {
   @doc("The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources.")
   type?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   values?: string[];
 }

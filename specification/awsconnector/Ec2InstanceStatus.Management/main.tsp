@@ -74,8 +74,8 @@ model AwsEc2InstanceStatusProperties {
   @doc("<p>The Availability Zone of the instance.</p>")
   availabilityZone?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>Any scheduled events associated with the instance.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   events?: InstanceStatusEvent[];
 
@@ -202,8 +202,8 @@ model InstanceStateNameEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceStatusSummary")
 model InstanceStatusSummary {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("<p>The system instance health or application instance health.</p>")
-  #suppress "deprecated" "Updated to value syntax next release" 
   @extension("x-ms-identifiers", [])
   details?: InstanceStatusDetails[];
 

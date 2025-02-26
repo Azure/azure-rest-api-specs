@@ -33,14 +33,14 @@ interface WorkloadNetworkPublicIps {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PublicIPIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  #suppress "deprecated" "Updated to value syntax next release"
   @operationId("WorkloadNetworks_DeletePublicIP")
   // delete is ArmResourceDeleteAsync<WorkloadNetworkPublicIP>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}")
   @doc("Delete a {name}", WorkloadNetworkPublicIP)
   @delete
   @extension("x-ms-long-running-operation", true)
-  #suppress "deprecated" "Updated to value syntax next release" 
-@extension(
+  @extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "location",
