@@ -26,12 +26,31 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-11
+tag: package-2024-08
 azure-validator: false
 ```
 
 ---
 
+
+### Tag: package-2024-08
+
+These settings apply only when `--tag=package-2024-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08'
+input-file:
+  - Microsoft.CostManagement/stable/2024-08-01/common-types.json
+  - Microsoft.CostManagement/stable/2024-08-01/costallocation.json
+  - Microsoft.CostManagement/stable/2024-08-01/costmanagement.benefits.json
+  - Microsoft.CostManagement/stable/2024-08-01/costmanagement.budgets.json
+  - Microsoft.CostManagement/stable/2024-08-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2024-08-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2024-08-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2024-08-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2024-08-01/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/stable/2024-08-01/scheduledActions.json
+  - Microsoft.CostManagement/stable/2024-08-01/settings.json
+```
 
 ### Tag: package-2023-11
 
@@ -540,7 +559,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-node
@@ -550,20 +569,6 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.CostManagement
-  output-folder: $(csharp-sdks-folder)/cost-management/Microsoft.Azure.Management.CostManagement/src/Generated
-  clear-output-folder: true
 ```
 
 ## Go

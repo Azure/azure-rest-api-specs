@@ -1147,6 +1147,9 @@
           "List the dimension values for the given metric dimension name.": {
             "$ref": "./examples/ListMetricDimensionValues.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2224,7 +2227,7 @@
     },
     "AppComponent": {
       "type": "object",
-      "description": "An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
+      "description": "An Azure resource object (Refer azure generic resource model :https://learn.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -2266,7 +2269,7 @@
     },
     "AppComponentUpdate": {
       "type": "object",
-      "description": "An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
+      "description": "An Azure resource object (Refer azure generic resource model :https://learn.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
       "properties": {
         "resourceName": {
           "type": "string",
@@ -3429,7 +3432,7 @@
     },
     "ResourceMetric": {
       "type": "object",
-      "description": "Associated metric definition for particular metrics of the azure resource (\nRefer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
+      "description": "Associated metric definition for particular metrics of the azure resource (\nRefer :\nhttps://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
       "properties": {
         "id": {
           "type": "string",
@@ -3475,7 +3478,7 @@
     },
     "ResourceMetricUpdate": {
       "type": "object",
-      "description": "Associated metric definition for particular metrics of the azure resource (\nRefer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
+      "description": "Associated metric definition for particular metrics of the azure resource (\nRefer :\nhttps://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -4422,7 +4425,8 @@
         },
         "loadTestConfiguration": {
           "$ref": "#/definitions/LoadTestConfiguration",
-          "description": "The load test configuration."
+          "description": "The load test configuration.",
+          "readOnly": true
         },
         "testArtifacts": {
           "$ref": "#/definitions/TestRunArtifacts",
@@ -4642,10 +4646,6 @@
             "type": "string"
           }
         },
-        "loadTestConfiguration": {
-          "$ref": "#/definitions/LoadTestConfiguration",
-          "description": "The load test configuration."
-        },
         "displayName": {
           "type": "string",
           "description": "Display name of a testRun.",
@@ -4807,7 +4807,7 @@
         },
         "metrics": {
           "type": "object",
-          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
+          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
           "additionalProperties": {
             "$ref": "#/definitions/ResourceMetric"
           }
@@ -4972,7 +4972,7 @@
         },
         "metrics": {
           "type": "object",
-          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
+          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
           "additionalProperties": {
             "$ref": "#/definitions/ResourceMetric"
           }
@@ -5010,7 +5010,7 @@
       "properties": {
         "metrics": {
           "type": "object",
-          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
+          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
           "additionalProperties": {
             "$ref": "#/definitions/ResourceMetricUpdate"
           }
@@ -5125,7 +5125,11 @@
       "in": "query",
       "description": "Comma separated list IDs of the tests which should be associated with the test profiles to fetch.",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ListTestProfileQueryParams.testProfileIds": {
@@ -5133,7 +5137,11 @@
       "in": "query",
       "description": "Comma separated list of IDs of the test profiles to filter.",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ListTestProfileRunQueryParams.createdDateEndTime": {
@@ -5204,7 +5212,11 @@
       "in": "query",
       "description": "Comma separated list of Statuses of the test profile runs to filter.",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ListTestProfileRunQueryParams.testProfileIds": {
@@ -5212,7 +5224,11 @@
       "in": "query",
       "description": "Comma separated IDs of the test profiles which should be associated with the test profile runs to fetch.",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ListTestProfileRunQueryParams.testProfileRunIds": {
@@ -5220,7 +5236,11 @@
       "in": "query",
       "description": "Comma separated list of IDs of the test profile runs to filter.",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ListTestQueryParams.lastModifiedEndTime": {

@@ -27,7 +27,7 @@ These are the global settings for the Oracle.Database.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-06-01
+tag: package-2024-10-01-preview
 ```
 
 ``` yaml
@@ -71,6 +71,23 @@ input-file:
   - Oracle.Database/stable/2024-06-01/openapi.json
 ```
 
+### Tag: package-2024-08-01-preview
+
+These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-01-preview'
+input-file:
+  - Oracle.Database/preview/2024-08-01-preview/openapi.json
+```
+
+### Tag: package-2024-10-01-preview
+
+These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10-01-preview'
+input-file:
+  - Oracle.Database/preview/2024-10-01-preview/openapi.json
+```
 ---
 
 # Code Generation
@@ -82,7 +99,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

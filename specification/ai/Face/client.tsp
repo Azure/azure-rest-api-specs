@@ -8,7 +8,7 @@ using Azure.ClientGenerator.Core;
 using Face;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(Face.Versions.v1_2_preview_1)
+@TypeSpec.Versioning.useDependency(Face.Versions.v1_2)
 namespace ClientCustomizations;
 
 @@clientName(RecognitionModel, "FaceRecognitionModel");
@@ -22,9 +22,6 @@ namespace ClientCustomizations;
 @@clientName(TrainingResult, "FaceTrainingResult");
 @@clientName(IdentificationCandidate, "FaceIdentificationCandidate");
 @@clientName(IdentificationResult, "FaceIdentificationResult");
-@@clientName(CreateLivenessWithVerifySessionJsonContent,
-  "CreateLivenessWithVerifySessionContent"
-);
 
 @@access(DetectionModel, Access.public);
 @@access(RecognitionModel, Access.public);
@@ -85,10 +82,20 @@ interface FaceClient {
   verifyFromLargePersonGroup is FaceRecognitionOperations.verifyFromLargePersonGroup;
 }
 
-@client({
-  name: "FaceAdministrationClient",
-  service: Face,
-})
+@client(
+  {
+    name: "administration.FaceAdministrationClient",
+    service: Face,
+  },
+  "java"
+)
+@client(
+  {
+    name: "FaceAdministrationClient",
+    service: Face,
+  },
+  "csharp,python,javascript,go"
+)
 namespace FaceAdministrationClient {
   /**
    * Client options for LargeFaceListClient
@@ -206,26 +213,14 @@ interface FaceSessionClient {
   deleteLivenessSession is LivenessSessionOperations.deleteLivenessSession;
   @doc("Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-session-result for more details.")
   getLivenessSessionResult is LivenessSessionOperations.getLivenessSessionResult;
-  @doc("Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-sessions for more details.")
-  getLivenessSessions is LivenessSessionOperations.getLivenessSessions;
-  @doc("Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-session-audit-entries for more details.")
-  getLivenessSessionAuditEntries is LivenessSessionOperations.getLivenessSessionAuditEntries;
 
-  @access(Access.internal)
-  @doc("Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/create-liveness-with-verify-session for more details.")
-  createLivenessWithVerifySession is LivenessSessionOperations.createLivenessWithVerifySession;
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  @access(Access.internal)
   @doc("Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/create-liveness-with-verify-session-with-verify-image for more details.")
-  createLivenessWithVerifySessionWithVerifyImage is LivenessSessionOperations.createLivenessWithVerifySessionWithVerifyImage;
+  createLivenessWithVerifySession is LivenessSessionOperations.createLivenessWithVerifySession;
   @doc("Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/delete-liveness-with-verify-session for more details.")
   deleteLivenessWithVerifySession is LivenessSessionOperations.deleteLivenessWithVerifySession;
   @doc("Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-session-result for more details.")
   getLivenessWithVerifySessionResult is LivenessSessionOperations.getLivenessWithVerifySessionResult;
-  @doc("Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-sessions for more details.")
-  getLivenessWithVerifySessions is LivenessSessionOperations.getLivenessWithVerifySessions;
-  @doc("Please refer to https://learn.microsoft.com/rest/api/face/liveness-session-operations/get-liveness-with-verify-session-audit-entries for more details.")
-  getLivenessWithVerifySessionAuditEntries is LivenessSessionOperations.getLivenessWithVerifySessionAuditEntries;
 
   @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-detection-operations/detect-from-session-image-id for more details.")
   detectFromSessionImage is FaceDetectionOperations.detectFromSessionImageId;

@@ -1762,7 +1762,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restoreSnapshot": {
       "post": {
-        "operationId": "DevBoxes_RestoreSnapshotDevBox",
+        "operationId": "DevBoxes_RestoreSnapshot",
         "description": "Restores a Dev Box to a specified snapshot.",
         "parameters": [
           {
@@ -1831,7 +1831,7 @@
         },
         "x-ms-examples": {
           "Attempts to restore the Dev Box to a selected snapshot.": {
-            "$ref": "./examples/DevBoxes_RestoreSnapshotDevBox.json"
+            "$ref": "./examples/DevBoxes_RestoreSnapshot.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -4206,7 +4206,9 @@
           "maximum": 100
         },
         "properties": {
-          "description": "Custom operation properties, populated only for a successful operation."
+          "type": "object",
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "additionalProperties": {}
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -4437,10 +4439,7 @@
         "localAdministrator": {
           "$ref": "#/definitions/LocalAdminStatus",
           "description": "Indicates whether the owner of the Dev Box is a local administrator.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         }
       },
       "required": [
@@ -5785,7 +5784,9 @@
           "maximum": 100
         },
         "properties": {
-          "description": "Custom operation properties, populated only for a successful operation."
+          "type": "object",
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "additionalProperties": {}
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
