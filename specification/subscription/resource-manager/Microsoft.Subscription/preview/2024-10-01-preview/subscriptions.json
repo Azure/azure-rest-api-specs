@@ -557,9 +557,9 @@
         ]
       }
     },
-    "/providers/Microsoft.Subscription/transfers/default": {
+    "/providers/Microsoft.Subscription/transfers/{transferId}": {
       "put": {
-        "description": "Transfer subscriptions to destination email id.",
+        "description": "Transfer subscription billing ownership to destination email id.",
         "operationId": "Transfers_SendExport",
         "x-ms-examples": {
           "CreateTransfer": {
@@ -595,9 +595,7 @@
             }
           }
         }
-      }
-    },
-    "/providers/Microsoft.Subscription/transfers/{transferId}": {
+      },
       "get": {
         "operationId": "Transfers_GetById",
         "x-ms-examples": {
