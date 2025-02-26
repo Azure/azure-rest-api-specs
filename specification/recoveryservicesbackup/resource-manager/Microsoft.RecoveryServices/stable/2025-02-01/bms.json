@@ -6589,6 +6589,53 @@
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreRequest"
     },
+    "AzureWorkloadSAPAsePointInTimeRecoveryPoint": {
+      "description": "Recovery point specific to PointInTime in SAPAse",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadSAPAsePointInTimeRecoveryPoint"
+    },
+    "AzureWorkloadSAPAsePointInTimeRestoreRequest": {
+      "description": "AzureWorkload SAP Ase-specific restore. Specifically for PointInTime/Log restore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadSAPAseRestoreRequest"
+        }
+      ],
+      "properties": {
+        "pointInTime": {
+          "format": "date-time",
+          "description": "PointInTime value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSAPAsePointInTimeRestoreRequest"
+    },
+    "AzureWorkloadSAPAseRecoveryPoint": {
+      "description": "SAPAse specific recoverypoint, specifically encapsulates full/diff recoverypoints",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadRecoveryPoint"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadSAPAseRecoveryPoint"
+    },
+    "AzureWorkloadSAPAseRestoreRequest": {
+      "description": "AzureWorkload SAP Ase-specific restore.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadSAPAseRestoreRequest"
+    },
     "AzureWorkloadSQLPointInTimeRecoveryPoint": {
       "description": "Recovery point specific to PointInTime",
       "type": "object",
@@ -10494,6 +10541,16 @@
         }
       },
       "x-ms-discriminator-value": "AzureVmWorkloadProtectableItem"
+    },
+    "AzureVmWorkloadSAPAseDatabaseProtectableItem": {
+      "description": "Azure VM workload-specific protectable item representing SAP ASE Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPAseDatabase"
     },
     "AzureVmWorkloadSAPAseDatabaseWorkloadItem": {
       "description": "Azure VM workload-specific workload item representing SAP ASE Database.",
