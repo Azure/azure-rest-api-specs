@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/kubernetesruntime"
+    default: "sdk/containerorchestratorruntime"
   swagger-repo-dir:
     default: "{project-root}/swagger"
 
@@ -27,6 +27,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
+    "service-dir": kubernetesruntime
     azureSdkForJs: true
     isModularLibrary: true
     generateMetadata: true
@@ -39,7 +40,6 @@ options:
       name: "@azure/arm-containerorchestratorruntime"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-containerorchestratorruntime"
-    namespace: "com.azure.resourcemanager.containerorchestratorruntime"
     service-name: "Container Orchestrator Runtime"
     flavor: "azure"
 
