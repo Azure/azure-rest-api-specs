@@ -27,7 +27,7 @@ These are the global settings for the ServiceFabricManagedClustersManagementClie
 title: ServiceFabricManagedClustersManagementClient
 description: Service Fabric Managed Clusters Management Client
 openapi-type: arm
-tag: package-2024-06-preview
+tag: package-2024-11-preview
 
 directive:
   - suppress: ListInOperationName
@@ -67,6 +67,28 @@ directive:
     reason:
       - Currently systemData is not allowed.
 
+```
+
+### Tag: package-2024-11-preview
+
+These settings apply only when `--tag=package-2024-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2024-11-01-preview/managedapplication.json
+- Microsoft.ServiceFabric/preview/2024-11-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2024-11-01-preview/nodetype.json
+```
+
+### Tag: package-2024-09-preview
+
+These settings apply only when `--tag=package-2024-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2024-09-01-preview/managedapplication.json
+- Microsoft.ServiceFabric/preview/2024-09-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2024-09-01-preview/nodetype.json
 ```
 
 ### Tag: package-2024-06-preview
@@ -303,27 +325,11 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-go
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ServiceFabricManagedClusters
-  payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/servicefabricmanagedclusters/Microsoft.Azure.Management.ServiceFabricManagedClusters/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python
