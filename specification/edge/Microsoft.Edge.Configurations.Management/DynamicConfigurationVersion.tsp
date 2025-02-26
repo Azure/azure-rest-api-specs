@@ -21,6 +21,10 @@ model DynamicConfigurationVersionProperties {
   @doc("Values of configuration version")
   values: string;
 
+  @doc("Schema Id for configuration")
+  @visibility("read")
+  schemaId?: string;
+
   @doc("Provisioning state of resource")
   @visibility("read")
   provisioningState?: ProvisioningState;
