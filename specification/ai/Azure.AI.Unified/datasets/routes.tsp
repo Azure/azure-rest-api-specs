@@ -20,31 +20,15 @@ interface Datasets {
   @doc("List datasets in a project.")
   @route("/datasets")
   @get
-  listDatasets(
-    @doc("Continuation token for pagination.")
-    @query("$skip")
-    $skip?: string,
+  listLatestDatasets(
+    @doc("Continuation token for pagination. This is the nextLink from the previous response.")
+    @query("$continuationToken")
+    $continuationToken?: string,
 
     @doc("View type for including/excluding (for example) archived entities.")
     @query("listViewType")
     listViewType?: ListViewType,
-  ): PagedDatasetContainer;
-
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Delete container.")
-  @route("/datasets/{name}")
-  @delete
-  delete(
-    @doc("Name of Azure Machine Learning workspace.")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    @path
-    workspaceName: string,
-
-    @doc("Container name.")
-    @path
-    name: string,
-  ): void;
+  ): PagedDatasetVersion;
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -129,4 +113,24 @@ interface Datasets {
     @body
     body: DatasetVersion,
   ): DatasetVersion;
+
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Start pending upload.")
+  @post
+  @route("/datasets/{name}/versions/{version}/startPendingUpload")
+  createOrGetStartPendingUpload(
+    @doc("Container name.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
+
+    @doc("Version identifier.")
+    @path
+    version: string,
+
+    @doc("Pensing upload request.")
+    @body
+    body: PendingUploadRequestDto
+  ): PendingUploadResponseDto;
 }
