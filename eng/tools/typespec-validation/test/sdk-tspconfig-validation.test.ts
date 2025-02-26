@@ -12,7 +12,7 @@ import {
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
   TspConfigGoMgmtFixConstStutteringTrueSubRule,
-  TspConfigGoMgmtGenerateSamplesTrueSubRule,
+  TspConfigGoMgmtGenerateExamplesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
   TspConfigGoAzGenerateFakesTrueSubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
@@ -119,9 +119,8 @@ function createEmitterOptionTestCases(
 ): Case[] {
   const cases: Case[] = [];
 
-  const language = emitterName.split("-").pop();
   cases.push({
-    description: `Validate ${language}'s option:${key} with valid value ${validValue}`,
+    description: `Validate ${emitterName}'s option:${key} with valid value ${validValue}`,
     folder,
     tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: validValue }),
     success: true,
@@ -129,21 +128,21 @@ function createEmitterOptionTestCases(
   });
 
   cases.push({
-    description: `Validate ${language}'s option:${key} with invalid value ${invalidValue}`,
+    description: `Validate ${emitterName}'s option:${key} with invalid value ${invalidValue}`,
     folder,
     tspconfigContent: createEmitterOptionExample(emitterName, {
       key: key,
       value: invalidValue,
     }),
-    success: shouldBeTrueOnFailSubRuleValidation(emitterName),
+    success: false,
     subRules,
   });
 
   cases.push({
-    description: `Validate ${language}'s option:${key} with undefined value`,
+    description: `Validate ${emitterName}'s option:${key} with undefined value`,
     folder,
     tspconfigContent: createEmitterOptionExample(emitterName),
-    success: allowUndefined ? true : shouldBeTrueOnFailSubRuleValidation(emitterName),
+    success: allowUndefined ? true : false,
     subRules,
   });
 

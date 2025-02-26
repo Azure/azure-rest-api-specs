@@ -11,11 +11,11 @@ export async function main() {
   const args: string[] = process.argv.slice(2);
   // Log the arguments to the console
   console.log("Arguments passed to the script:", args.join(" "));
-  const batchType: string = getArgumentValue(args, "--batch-type", "");
+  const runMode: string = getArgumentValue(args, "--rm", "");
   const pullRequestNumber: string = getArgumentValue(args, "--pr-number", "");
   let statusCode = 0;
-  if (batchType) {
-    statusCode = await generateSdkForBatchSpecs(batchType);
+  if (runMode) {
+    statusCode = await generateSdkForBatchSpecs(runMode);
   } else if (pullRequestNumber) {
     statusCode = await generateSdkForSpecPr();
   } else {
