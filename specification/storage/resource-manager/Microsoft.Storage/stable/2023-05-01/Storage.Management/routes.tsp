@@ -23,6 +23,7 @@ interface SkusOperations {
   @autoRoute
   @get
   @action("skus")
+  @tag("Skus")
   list is ArmProviderActionSync<
     Response = StorageSkuListResult,
     Scope = SubscriptionActionScope,
@@ -56,6 +57,7 @@ interface DeletedAccountsOperations {
   @autoRoute
   @get
   @action("deletedAccounts")
+  @tag("DeletedAccounts")
   list is ArmProviderActionSync<
     Response = ResourceListResult<DeletedAccount>,
     Scope = SubscriptionActionScope,
@@ -73,9 +75,13 @@ interface UsagesOperations {
   @autoRoute
   @get
   @action("usages")
+  @tag("LocationUsage")
   listByLocation is ArmProviderActionSync<
     Response = UsageListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
 }
+@@doc(StorageAccountsOperations.checkNameAvailability::parameters.body,
+  "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
+);

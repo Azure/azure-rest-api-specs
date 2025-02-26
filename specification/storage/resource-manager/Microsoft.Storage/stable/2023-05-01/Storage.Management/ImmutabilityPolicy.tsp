@@ -14,13 +14,12 @@ namespace Microsoft.Storage;
 /**
  * The ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag.
  */
-@singleton("default")
 @parentResource(BlobContainer)
 model ImmutabilityPolicy
   is Azure.ResourceManager.ProxyResource<ImmutabilityPolicyProperty, false> {
   ...ResourceNameParameter<
     Resource = ImmutabilityPolicy,
-    KeyName = "immutabilityPolicy",
+    KeyName = "ImmutabilityPolicyName",
     SegmentName = "immutabilityPolicies",
     NamePattern = ""
   >;
@@ -32,6 +31,7 @@ interface ImmutabilityPolicies {
    * Gets the existing immutability policy along with the corresponding ETag in response headers and body.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @operationId("BlobContainers_GetImmutabilityPolicy")
   getImmutabilityPolicy is ArmResourceRead<
     ImmutabilityPolicy,
@@ -41,6 +41,13 @@ interface ImmutabilityPolicies {
        */
       @header
       `If-Match`?: string;
+    },
+    Response = ArmResponse<ImmutabilityPolicy> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers..
+       */
+      @header("ETag")
+      eTag: string;
     }
   >;
 
@@ -49,6 +56,7 @@ interface ImmutabilityPolicies {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @operationId("BlobContainers_CreateOrUpdateImmutabilityPolicy")
   createOrUpdateImmutabilityPolicy is ArmResourceCreateOrReplaceSync<
     ImmutabilityPolicy,
@@ -59,7 +67,13 @@ interface ImmutabilityPolicies {
       @header
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<ImmutabilityPolicy>
+    Response = ArmResponse<ImmutabilityPolicy> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers..
+       */
+      @header("ETag")
+      eTag: string;
+    }
   >;
 
   /**
@@ -67,6 +81,7 @@ interface ImmutabilityPolicies {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @operationId("BlobContainers_DeleteImmutabilityPolicy")
   deleteImmutabilityPolicy is ArmResourceDeleteSync<
     ImmutabilityPolicy,
@@ -77,25 +92,38 @@ interface ImmutabilityPolicies {
       @header
       `If-Match`: string;
     },
-    Response = ArmResponse<ImmutabilityPolicy>
+    Response = ArmResponse<ImmutabilityPolicy> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers..
+       */
+      @header("ETag")
+      eTag: string;
+    }
   >;
 
   /**
    * Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @action("lock")
   @operationId("BlobContainers_LockImmutabilityPolicy")
   lockImmutabilityPolicy is ArmResourceActionSync<
     ImmutabilityPolicy,
     void,
-    ArmResponse<ImmutabilityPolicy>,
     Parameters = {
       /**
        * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
        */
       @header
       `If-Match`: string;
+    },
+    Response = ArmResponse<ImmutabilityPolicy> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers..
+       */
+      @header("ETag")
+      eTag: string;
     }
   >;
 
@@ -103,6 +131,7 @@ interface ImmutabilityPolicies {
    * Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @action("extend")
   @operationId("BlobContainers_ExtendImmutabilityPolicy")
   extendImmutabilityPolicy is ArmResourceActionSync<
@@ -114,13 +143,19 @@ interface ImmutabilityPolicies {
       @bodyRoot
       parameters?: ImmutabilityPolicy;
     },
-    ArmResponse<ImmutabilityPolicy>,
     Parameters = {
       /**
        * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
        */
       @header
       `If-Match`: string;
+    },
+    Response = ArmResponse<ImmutabilityPolicy> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers..
+       */
+      @header("ETag")
+      eTag: string;
     }
   >;
 }

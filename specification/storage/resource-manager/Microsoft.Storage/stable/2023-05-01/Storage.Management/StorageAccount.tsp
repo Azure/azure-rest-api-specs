@@ -129,6 +129,7 @@ interface StorageAccounts {
    * List SAS credentials of a storage account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @action("ListAccountSas")
   @operationId("StorageAccounts_ListAccountSAS")
   listAccountSAS is ArmResourceActionSync<
@@ -141,6 +142,7 @@ interface StorageAccounts {
    * List service SAS credentials of a specific resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @action("ListServiceSas")
   @operationId("StorageAccounts_ListServiceSAS")
   listServiceSAS is ArmResourceActionSync<

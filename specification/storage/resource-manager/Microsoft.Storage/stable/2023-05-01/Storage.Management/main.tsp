@@ -5,7 +5,7 @@
  *   isFullCompatible: true
  *   guessResourceKey: false
  * Version: 0.10.9
- * Date: 2025-02-26T07:25:06.907Z
+ * Date: 2025-02-17T01:41:51.628Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -44,7 +44,6 @@ using TypeSpec.Versioning;
  * The Azure Storage Management API.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "StorageManagementClient",
 })
@@ -52,6 +51,11 @@ using TypeSpec.Versioning;
 // FIXME: Common type version v1 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Storage;
+
+/**
+ * The Operations interface for the Storage namespace.
+ */
+interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
  * The available API versions.
