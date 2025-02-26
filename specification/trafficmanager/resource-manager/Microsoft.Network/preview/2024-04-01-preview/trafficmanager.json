@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "TrafficManagerManagementClient",
-    "version": "2022-04-01"
+    "version": "2024-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -547,6 +547,9 @@
           "Profile-GET-WithEndpoints": {
             "$ref": "./examples/Profile-GET-WithEndpoints.json"
           },
+          "Profile-GET-WithEndpointsAndRecordType": {
+            "$ref": "./examples/Profile-GET-WithEndpointsAndRecordType.json"
+          },
           "Profile-GET-WithTrafficViewEnabled": {
             "$ref": "./examples/Profile-GET-WithTrafficViewEnabled.json"
           },
@@ -614,6 +617,9 @@
           },
           "Profile-PUT-WithEndpoints": {
             "$ref": "./examples/Profile-PUT-WithEndpoints.json"
+          },
+          "Profile-PUT-WithEndpointsAndRecordType": {
+            "$ref": "./examples/Profile-PUT-WithEndpointsAndRecordType.json"
           },
           "Profile-PUT-WithNestedEndpoints": {
             "$ref": "./examples/Profile-PUT-WithNestedEndpoints.json"
@@ -1434,6 +1440,19 @@
           "type": "integer",
           "description": "Maximum number of endpoints to be returned for MultiValue routing type.",
           "format": "int64"
+        },
+        "recordType": {
+          "type": "string",
+          "description": "When record type is set, a traffic manager profile will allow only endpoints that match this type.",
+          "enum": [
+            "A",
+            "AAAA",
+            "CNAME"
+          ],
+          "x-ms-enum": {
+            "name": "RecordType",
+            "modelAsString": true
+          }
         }
       },
       "description": "Class representing the Traffic Manager profile properties."
