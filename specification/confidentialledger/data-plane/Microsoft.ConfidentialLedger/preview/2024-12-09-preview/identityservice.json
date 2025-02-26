@@ -1,0 +1,90 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-12-09-preview",
+    "title": "ConfidentialLedgerCertificateClient",
+    "description": "The ConfidentialLedgerCertificateClient is used to retrieve the TLS certificate required for connecting to a Confidential Ledger."
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "endpoint",
+        "description": "The certificate endpoint (or \"Identity Service Endpoint\" in the Azure portal), for example https://identity.confidential-ledger.core.azure.com",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "format": "url",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
+      }
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/ledgerIdentity/{ledgerId}": {
+      "get": {
+        "operationId": "GetLedgerIdentity",
+        "x-ms-examples": {
+          "GetLedgerIdentity": {
+            "$ref": "./examples/identity/GetLedgerIdentity.json"
+          }
+        },
+        "summary": "Gets identity information for a Confidential Ledger instance.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "ledgerId",
+            "description": "Id of the Confidential Ledger instance to get information for",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns ledger information.",
+            "schema": {
+              "$ref": "#/definitions/LedgerIdentityInformation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LedgerIdentityInformation": {
+      "description": "Contains the information about a Confidential Ledger.",
+      "required": [
+        "ledgerTlsCertificate"
+      ],
+      "properties": {
+        "ledgerId": {
+          "description": "Id for the ledger.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ledgerTlsCertificate": {
+          "description": "PEM-encoded certificate used for TLS by the Confidential Ledger.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

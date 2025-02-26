@@ -21,6 +21,9 @@ enum Versions {
   /** 2024-05-01 preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_05_01_preview: "2024-05-01-preview",
+
+  /** 2025-01-01 stable version */
+  v2025_05_01: "2025-01-01",
 }
 
 using TypeSpec.Http;
@@ -64,6 +67,32 @@ model Association is TrackedResource<AssociationProperties> {
   @segment("associations")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
   name: string;
+}
+
+/** The type used for update operations of the Association. */
+model AssociationUpdate {
+  /** Resource tags. */
+  tags?: TrackedResource.tags;
+
+  /** The resource-specific properties for this resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: AssociationUpdateProperties;
+}
+
+/** The updatable properties of the Association. */
+model AssociationUpdateProperties {
+  /** Association Type */
+  associationType?: AssociationType;
+
+  /** Association Subnet */
+  subnet?: AssociationSubnetUpdate;
+}
+
+/** Association Subnet. */
+model AssociationSubnetUpdate {
+  /** Association ID. */
+  id: string;
 }
 
 /** Association Properties. */
@@ -229,13 +258,7 @@ interface AssociationsInterface {
     Association,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmCustomPatchSync<
-    Association,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Association,
-      AssociationProperties
-    >
-  >;
+  update is ArmCustomPatchSync<Association, AssociationUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Association>;
   listByTrafficController is ArmResourceListByParent<Association>;
 }

@@ -1357,8 +1357,16 @@
           "description": "The time at which the SMS was received",
           "format": "date-time",
           "type": "string"
+        },
+        "segmentCount": {
+          "description": "Number of segments in the message",
+          "format": "int32",
+          "type": "integer"
         }
-      }
+      },
+      "required": [
+        "segmentCount"
+      ]
     },
     "AcsRecordingFileStatusUpdatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event.",
@@ -1432,6 +1440,10 @@
         },
         "recipient": {
           "description": "The recipient Email Address",
+          "type": "string"
+        },
+        "internetMessageId": {
+          "description": "The Internet Message Id of the email been sent",
           "type": "string"
         },
         "messageId": {
@@ -1548,6 +1560,10 @@
           "description": "The received message content",
           "type": "string"
         },
+        "messageId": {
+          "description": "Message ID. Format is Guid as string.",
+          "type": "string"
+        },
         "channelType": {
           "description": "The received message channel Kind",
           "type": "string",
@@ -1566,11 +1582,20 @@
             ]
           }
         },
+        "messageType": {
+          "description": "WhatsApp Message Type",
+          "type": "string"
+        },
         "media": {
           "description": "The received message media content",
           "$ref": "#/definitions/AcsMessageMediaContent",
           "type": "object",
           "x-ms-client-name": "mediaContent"
+        },
+        "reaction": {
+          "description": "The received message reaction content",
+          "$ref": "#/definitions/AcsMessageReactionContent",
+          "type": "object"
         },
         "context": {
           "description": "The received message context",
@@ -1589,6 +1614,9 @@
           "x-ms-client-name": "interactiveContent"
         }
       },
+      "required": [
+        "messageType"
+      ],
       "x-ms-examples": {
         "snapshotCreatedCloudEventsSchema": {
           "$ref": "./examples/cloud-events-schema/advanced_message_received.json"
@@ -1697,7 +1725,11 @@
           "$ref": "#/definitions/AcsMessageChannelEventError",
           "type": "object"
         }
-      }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
     },
     "AcsChatThreadEventBaseProperties": {
       "description": "Schema of common properties of all chat thread events",
@@ -2015,6 +2047,10 @@
       "description": "Detailed information about the status if any",
       "type": "object",
       "properties": {
+        "recipientMailServerHostName": {
+          "description": "Recipient Mail Server Host Name",
+          "type": "string"
+        },
         "statusMessage": {
           "description": "Detailed status message",
           "type": "string"
@@ -2233,8 +2269,33 @@
         "caption": {
           "description": "The caption for the media object, if supported and provided",
           "type": "string"
+        },
+        "animated": {
+          "description": "Set to true if the sticker is animated; false otherwise.",
+          "type": "boolean"
         }
-      }
+      },
+      "required": [
+        "mimeType",
+        "id"
+      ]
+    },
+    "AcsMessageReactionContent": {
+      "description": "Message Reaction Content",
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "description": "WhatsApp message ID of message you want to apply the emoji to.",
+          "type": "string"
+        },
+        "emoji": {
+          "description": "Unicode escape sequence of the emoji.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "messageId"
+      ]
     },
     "AcsMessageContext": {
       "description": "Message Context",

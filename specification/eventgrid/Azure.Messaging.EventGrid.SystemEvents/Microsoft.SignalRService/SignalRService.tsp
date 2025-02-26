@@ -24,10 +24,10 @@ namespace Microsoft.EventGrid.SystemEvents {
     timestamp: utcDateTime;
 
     /** The hub of connected client connection. */
-    hubName?: string;
+    hubName: string;
 
     /** The connection Id of connected client connection. */
-    connectionId?: string;
+    connectionId: string;
 
     /** The user Id of connected client connection. */
     userId?: string;

@@ -9,6 +9,153 @@
     "https"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/availableQuota": {
+      "get": {
+        "tags": [
+          "Quota"
+        ],
+        "summary": "List available MaaS PTU quota.",
+        "operationId": "PTUQuota_ListAvailable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AvailableQuotaArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List available MaaS PTU quota.": {
+            "$ref": "./examples/PTUQuota/listAvailable.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/availableQuota/default": {
+      "get": {
+        "tags": [
+          "Quota"
+        ],
+        "summary": "Get available MaaS PTU quota.",
+        "operationId": "PTUQuota_GetAvailable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AvailableQuota"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get available MaaS PTU quota.": {
+            "$ref": "./examples/PTUQuota/getAvailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/quotaAndUsage": {
+      "get": {
+        "tags": [
+          "Quota"
+        ],
+        "summary": "List MaaS PTU usage and quota.",
+        "operationId": "PTUQuota_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UsageAndQuotaDetailsArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List MaaS PTU usage and quota.": {
+            "$ref": "./examples/PTUQuota/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/codes": {
       "get": {
         "tags": [
@@ -13775,7 +13922,7 @@
         },
         "failed": {
           "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which Failed provisioning state and have target group payload.",
+          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state and have target group payload.",
           "default": 0,
           "type": "integer"
         },
@@ -14218,6 +14365,46 @@
         }
       ],
       "x-ms-discriminator-value": "Auto",
+      "additionalProperties": false
+    },
+    "AvailableQuota": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Available quota properties",
+          "$ref": "#/definitions/AvailableQuotaProperties",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AvailableQuotaArmPaginatedResult": {
+      "description": "A paginated list of AvailableQuota entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of AvailableQuota objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type AvailableQuota.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableQuota"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AvailableQuotaProperties": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "format": "int64",
+          "description": "The number of available quota",
+          "type": "integer"
+        }
+      },
       "additionalProperties": false
     },
     "AzureBlobDatastore": {
@@ -23486,6 +23673,37 @@
       "x-ms-discriminator-value": "OutputPath",
       "additionalProperties": false
     },
+    "PTUDeploymentUsage": {
+      "type": "object",
+      "properties": {
+        "collectionQuotaUsage": {
+          "format": "int64",
+          "description": "Usage number from the collection level quota",
+          "type": "integer"
+        },
+        "deploymentName": {
+          "description": "Deployment name",
+          "type": "string",
+          "x-nullable": true
+        },
+        "resourceGroup": {
+          "description": "Resource group name",
+          "type": "string",
+          "x-nullable": true
+        },
+        "usage": {
+          "format": "int64",
+          "description": "Usage number from subscription level quota",
+          "type": "integer"
+        },
+        "workspaceName": {
+          "description": "Workspace name",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "PartialBatchDeployment": {
       "description": "Mutable batch inference settings per deployment.",
       "type": "object",
@@ -26839,6 +27057,48 @@
         }
       ],
       "x-ms-discriminator-value": "uri_folder",
+      "additionalProperties": false
+    },
+    "UsageAndQuotaDetails": {
+      "type": "object",
+      "properties": {
+        "modelCollection": {
+          "description": "Model collection name",
+          "type": "string",
+          "x-nullable": true
+        },
+        "quota": {
+          "format": "int64",
+          "description": "The total number of quota",
+          "type": "integer"
+        },
+        "usageDetails": {
+          "description": "Usage details for each deployment",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PTUDeploymentUsage"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "UsageAndQuotaDetailsArmPaginatedResult": {
+      "description": "A paginated list of UsageAndQuotaDetails entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of UsageAndQuotaDetails objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type UsageAndQuotaDetails.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageAndQuotaDetails"
+          }
+        }
+      },
       "additionalProperties": false
     },
     "UseStl": {

@@ -12,6 +12,7 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2025-02
   - tag: package-2024-06-preview
   - tag: package-2023-12-preview
   - tag: package-2023-06-preview
@@ -32,6 +33,16 @@ batch:
   - tag: package-2017-09-preview
   - tag: package-2017-06-preview
 ```
+### Tag: package-2025-02 and ruby
+These settings apply only when `--tag=package-2025-02 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2025-02' && $(ruby)
+
+namespace: "Azure::EventGrid::Mgmt::V2025_02_15"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_event_grid/lib
+```
+
 ### Tag: package-2024-06-preview and ruby
 These settings apply only when `--tag=package-2024-06-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.

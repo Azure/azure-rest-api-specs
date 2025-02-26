@@ -191,6 +191,47 @@ model QuotaResource is ProxyResource<QuotaResourceProperties> {
   name: string;
 }
 
+@doc("Max monthly virtual usage hours resource limit properties.")
+@added(APIVersions.v2024_12_01_preview)
+model MaxMonthlyVirtualUserHoursResourceProperties {
+  @doc("Current limit value, with -1 indicating that there is no limit.")
+  @minValue(-1)
+  @visibility("read")
+  limit?: int32;
+
+  @doc("Current usage value.")
+  @minValue(0)
+  @visibility("read")
+  usage?: int32;
+
+  @doc("Resource provisioning state.")
+  @visibility("read")
+  provisioningState?: ResourceState;
+}
+
+@parentResource(LoadTestResource)
+@doc("Max monthly virtual usage hours resource.")
+@added(APIVersions.v2024_12_01_preview)
+model MaxMonthlyVirtualUserHoursResource
+  is ProxyResource<MaxMonthlyVirtualUserHoursResourceProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Singleton"
+  @doc("The limit name.")
+  @key("limitName")
+  @path
+  @segment("limits")
+  name: "maxMonthlyVirtualUserHours";
+}
+
+@doc("Max monthly virtual usage hours limit request payload.")
+@added(APIVersions.v2024_12_01_preview)
+model MaxMonthlyVirtualUserHoursLimitRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
+  @doc("The new maxMonthlyVirtualUserHours limit, with -1 indicating that there is no limit.")
+  @minValue(-1)
+  limit?: int32;
+}
+
 @doc("LoadTest resource properties.")
 model LoadTestProperties {
   @maxLength(512)

@@ -2,24 +2,27 @@ name: TypeSpec Validation
 
 on: pull_request
 
+permissions:
+  contents: read
+
 jobs:
   typespec-validation:
     name: TypeSpec Validation
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 2
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-    - name: Setup Node and run `npm ci`
-      uses: ./.github/actions/setup-node-npm-ci
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
 
-    - name: Validate Impacted Specs
-      run: |
-        # Keep processing when errors are written. Nonzero exit will mark the 
-        # step as failed. 
-        $ErrorActionPreference = 'Continue'
+      - name: Validate Impacted Specs
+        run: |
+          # Keep processing when errors are written. Nonzero exit will mark the 
+          # step as failed. 
+          $ErrorActionPreference = 'Continue'
 
-        ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
-      shell: pwsh
+          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
+        shell: pwsh

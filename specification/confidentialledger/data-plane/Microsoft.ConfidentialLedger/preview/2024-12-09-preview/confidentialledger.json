@@ -1,0 +1,2226 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-12-09-preview",
+    "title": "ConfidentialLedgerClient",
+    "description": "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service."
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "endpoint",
+        "description": "The Confidential Ledger URL, for example https://contoso.confidentialledger.azure.com",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "format": "url",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
+      }
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/app/governance/constitution": {
+      "get": {
+        "operationId": "GetConstitution",
+        "x-ms-examples": {
+          "GetConstitution": {
+            "$ref": "./examples/ledger/GetConstitution.json"
+          }
+        },
+        "summary": "Gets the constitution used for governance.",
+        "description": "The constitution is a script that assesses and applies proposals from consortium members.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The constitution.",
+            "schema": {
+              "$ref": "#/definitions/Constitution"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/governance/members": {
+      "get": {
+        "operationId": "ListConsortiumMembers",
+        "x-ms-examples": {
+          "ListConsortiumMembers": {
+            "$ref": "./examples/ledger/ListConsortiumMembers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "members",
+          "nextLinkName": "nextLink"
+        },
+        "summary": "Lists the consortium members.",
+        "description": "Consortium members can manage the Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of consortium members.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/enclaveQuotes": {
+      "get": {
+        "operationId": "GetEnclaveQuotes",
+        "x-ms-examples": {
+          "GetEnclaveQuotes": {
+            "$ref": "./examples/ledger/GetEnclaveQuotes.json"
+          }
+        },
+        "summary": "Gets quotes for all nodes of the Confidential Ledger.",
+        "description": "A quote is an SGX enclave measurement that can be used to verify the validity of a node and its enclave.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response containing enclave quotes.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerEnclaves"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/collections": {
+      "get": {
+        "operationId": "ListCollections",
+        "x-ms-examples": {
+          "GetCollectionIds": {
+            "$ref": "./examples/ledger/ListCollections.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "collections",
+          "nextLinkName": "nextLink"
+        },
+        "summary": "Retrieves a list of collection ids present in the Confidential Ledger",
+        "description": "Collection ids are user-created collections of ledger entries",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of collections",
+            "schema": {
+              "$ref": "#/definitions/PagedCollections"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/transactions": {
+      "get": {
+        "operationId": "ListLedgerEntries",
+        "x-ms-examples": {
+          "ListLedgerEntries": {
+            "$ref": "./examples/ledger/ListLedgerEntries.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "entries",
+          "nextLinkName": "nextLink"
+        },
+        "summary": "Gets ledger entries from a collection corresponding to a range.",
+        "description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TransactionIdFromParameter"
+          },
+          {
+            "$ref": "#/parameters/TransactionIdToParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ledger entries in the specified range.",
+            "schema": {
+              "$ref": "#/definitions/PagedLedgerEntries"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateLedgerEntry",
+        "x-ms-examples": {
+          "CreateLedgerEntry": {
+            "$ref": "./examples/ledger/CreateLedgerEntry.json"
+          }
+        },
+        "summary": "Writes a ledger entry.",
+        "description": "A collection id may optionally be specified.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "entry",
+            "description": "Ledger entry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LedgerEntry"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the transaction id at which the write will be durably stored.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The transaction id at which this write will become durable."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/LedgerWriteResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/transactions/{transactionId}": {
+      "get": {
+        "operationId": "GetLedgerEntry",
+        "x-ms-examples": {
+          "GetLedgerEntry": {
+            "$ref": "./examples/ledger/GetLedgerEntry.json"
+          }
+        },
+        "summary": "Gets the ledger entry at the specified transaction id. A collection id may optionally be specified to indicate the collection from which to fetch the value.",
+        "description": "To return older ledger entries, the relevant sections of the ledger must be read from disk and validated. To prevent blocking within the enclave, the response will indicate whether the entry is ready and part of the response, or if the loading is still ongoing.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TransactionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The result of querying the Confidential Ledger.",
+            "schema": {
+              "$ref": "#/definitions/LedgerQueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/transactions/{transactionId}/receipt": {
+      "get": {
+        "operationId": "GetReceipt",
+        "x-ms-examples": {
+          "GetReceipt": {
+            "$ref": "./examples/ledger/GetReceipt.json"
+          }
+        },
+        "summary": "Gets a receipt certifying ledger contents at a particular transaction id.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TransactionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The receipt for the write occurring at the transaction id.",
+            "schema": {
+              "$ref": "#/definitions/TransactionReceipt"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/transactions/{transactionId}/status": {
+      "get": {
+        "operationId": "GetTransactionStatus",
+        "x-ms-examples": {
+          "GetTransactionStatus": {
+            "$ref": "./examples/ledger/GetTransactionStatus.json"
+          }
+        },
+        "summary": "Gets the status of an entry identified by a transaction id.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TransactionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the entry recorded at the specified transaction id.",
+            "schema": {
+              "$ref": "#/definitions/TransactionStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/transactions/current": {
+      "get": {
+        "operationId": "GetCurrentLedgerEntry",
+        "x-ms-examples": {
+          "GetCurrentLedgerEntry": {
+            "$ref": "./examples/ledger/GetCurrentLedgerEntry.json"
+          }
+        },
+        "summary": "Gets the current value available in the ledger.",
+        "description": "A collection id may optionally be specified.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The current ledger entry available on the receiving node. Non-primary nodes may return older values.",
+            "schema": {
+              "$ref": "#/definitions/LedgerEntry"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/users": {
+      "get": {
+        "operationId": "ListUsers",
+        "x-ms-examples": {
+          "ListUserEntries": {
+            "$ref": "./examples/ledger/ListUsers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "ledgerUsers",
+          "nextLinkName": "nextLink"
+        },
+        "summary": "Gets details on a list of users.",
+        "description": "All users' object IDs and single role per user will be returned.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Users in the paged specified range.",
+            "schema": {
+              "$ref": "#/definitions/PagedUsers"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/ledgerUsers": {
+      "get": {
+        "operationId": "ListLedgerUsers",
+        "x-ms-examples": {
+          "ListLedgerUsersEntries": {
+            "$ref": "./examples/ledger/ListLedgerUsers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "ledgerUsers",
+          "nextLinkName": "nextLink"
+        },
+        "summary": "Gets details on a list of users.",
+        "description": "All users' object IDs and multiple roles will be returned.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Users in the paged specified range.",
+            "schema": {
+              "$ref": "#/definitions/PagedLedgerUsers"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/users/{userId}": {
+      "delete": {
+        "operationId": "DeleteUser",
+        "x-ms-examples": {
+          "DeleteUser": {
+            "$ref": "./examples/ledger/DeleteUser.json"
+          }
+        },
+        "summary": "Deletes a user from the Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The specified user is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "GetUser",
+        "x-ms-examples": {
+          "GetUser": {
+            "$ref": "./examples/ledger/GetUser.json"
+          }
+        },
+        "summary": "Gets a user.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details about the specified user.",
+            "schema": {
+              "$ref": "#/definitions/LedgerUser"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CreateOrUpdateUser",
+        "x-ms-examples": {
+          "CreateOrUpdateUser": {
+            "$ref": "./examples/ledger/CreateOrUpdateUser.json"
+          }
+        },
+        "summary": "Adds a user or updates a user's fields.",
+        "description": "A JSON merge patch is applied for existing users",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDetailsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/LedgerUser"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/ledgerUsers/{userId}": {
+      "delete": {
+        "operationId": "DeleteLedgerUser",
+        "x-ms-examples": {
+          "DeleteUser": {
+            "$ref": "./examples/ledger/DeleteUser.json"
+          }
+        },
+        "summary": "Deletes a user with multiple roles from the Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The specified user is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "GetLedgerUser",
+        "x-ms-examples": {
+          "GetLedgerUser": {
+            "$ref": "./examples/ledger/GetLedgerUser.json"
+          }
+        },
+        "summary": "Gets a user with multiple roles.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details about the specified user.",
+            "schema": {
+              "$ref": "#/definitions/LedgerUserMultipleRoles"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CreateOrUpdateLedgerUser",
+        "x-ms-examples": {
+          "CreateOrUpdateLedgerUser": {
+            "$ref": "./examples/ledger/CreateOrUpdateLedgerUser.json"
+          }
+        },
+        "summary": "Adds a user or updates a user's fields.",
+        "description": "A JSON merge patch is applied for existing users",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UserMultipleRolesParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/LedgerUserMultipleRoles"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/userDefinedEndpoints": {
+      "get": {
+        "operationId": "GetUserDefinedEndpoint",
+        "x-ms-examples": {
+          "GetUserDefinedEndpoint": {
+            "$ref": "./examples/ledger/GetUserDefinedEndpoint.json"
+          }
+        },
+        "summary": "Gets a user defined endpoint.",
+        "description": "Returns the user defined endpoint in the ACL instance",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the user defined endpoints.",
+            "schema": {
+              "$ref": "#/definitions/Bundle"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateUserDefinedEndpoint",
+        "x-ms-examples": {
+          "CreateUserDefinedEndpoint": {
+            "$ref": "./examples/ledger/CreateUserDefinedEndpoint.json"
+          }
+        },
+        "summary": "Creates a user defined endpoint.",
+        "description": "Creates the user defined endpoint in the ACL instance ",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BundleParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The user defined endpoint is created."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/userDefinedEndpoints/runTimeOptions": {
+      "get": {
+        "operationId": "GetRuntimeOptions",
+        "x-ms-examples": {
+          "GetRuntimeOptions": {
+            "$ref": "./examples/ledger/GetRuntimeOptions.json"
+          }
+        },
+        "summary": "Runtime options for user defined endpoints.",
+        "description": "It returns the runtime options",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " Runtime options for user defined endpoints.",
+            "schema": {
+              "$ref": "#/definitions/JSRuntimeOptions"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateRuntimeOptions",
+        "x-ms-examples": {
+          "UpdateRuntimeOptions": {
+            "$ref": "./examples/ledger/UpdateRuntimeOptions.json"
+          }
+        },
+        "summary": "Runtime options for user defined endpoints.",
+        "description": "Updates the runtime options.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JSRuntimeOptionsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " Runtime options for user defined endpoints.",
+            "schema": {
+              "$ref": "#/definitions/JSRuntimeOptions"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/userDefinedEndpoints/modules": {
+      "get": {
+        "operationId": "GetUserDefinedEndpointsModule",
+        "x-ms-examples": {
+          "GetUserDefinedEndpointsModule": {
+            "$ref": "./examples/ledger/GetUserDefinedEndpointsModule.json"
+          }
+        },
+        "summary": "Module for user defined endpoints.",
+        "description": "It gets the module for the user defined endpoint.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ModuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Module for user defined endpoints.",
+            "schema": {
+              "$ref": "#/definitions/ModuleDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/userDefinedFunctions": {
+      "get": {
+        "operationId": "ListUserDefinedFunctions",
+        "x-ms-examples": {
+          "GetUserDefinedFunctions": {
+            "$ref": "./examples/ledger/ListUserDefinedFunctions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "functions",
+          "nextLinkName": "nextLink"
+        },
+        "summary": "Retrieves a list of user defined functions present in the Confidential Ledger",
+        "description": "User defined functions stored in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of user defined functions",
+            "schema": {
+              "$ref": "#/definitions/PagedUserDefinedFunctions"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/userDefinedFunctions/{functionId}": {
+      "delete": {
+        "operationId": "DeleteUserDefinedFunction",
+        "x-ms-examples": {
+          "DeleteUserDefinedFunction": {
+            "$ref": "./examples/ledger/DeleteUserDefinedFunction.json"
+          }
+        },
+        "summary": "Deletes a user defined function from the Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The specified user defined function is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "GetUserDefinedFunction",
+        "x-ms-examples": {
+          "GetUserDefinedFunction": {
+            "$ref": "./examples/ledger/GetUserDefinedFunction.json"
+          }
+        },
+        "summary": "Gets a user defined function.",
+        "description": "Returns the user defined function in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the user defined function.",
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateUserDefinedFunction",
+        "x-ms-examples": {
+          "CreateUserDefinedFunction": {
+            "$ref": "./examples/ledger/CreateOrUpdateUserDefinedFunction.json"
+          }
+        },
+        "summary": "Creates a user defined function.",
+        "description": "Creates the user defined function in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user defined function is updated.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The transaction id at which this write will become durable."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunction"
+            }
+          },
+          "201": {
+            "description": "The user defined function is created.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The transaction id at which this write will become durable."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/userDefinedFunctions/{functionId}:execute": {
+      "post": {
+        "operationId": "ExecuteUserDefinedFunction",
+        "x-ms-examples": {
+          "CreateUserDefinedFunction": {
+            "$ref": "./examples/ledger/ExecuteUserDefinedFunction.json"
+          }
+        },
+        "summary": "Executes a user defined function.",
+        "description": "Executes the user defined function in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionExecutionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user defined function is executed. The response contains either the result of the execution (in case the function execution was successful) or an error object (in case the function execution returned an error).",
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunctionExecutionResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/roles": {
+      "get": {
+        "operationId": "GetUserDefinedRole",
+        "x-ms-examples": {
+          "GetUserDefinedRole": {
+            "$ref": "./examples/ledger/GetUserDefinedRole.json"
+          }
+        },
+        "summary": "Gets role actions for user defined roles",
+        "description": "user defined roles allow users to define and manage app specific AuthZ policy.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets role actions for user defined roles",
+            "schema": {
+              "$ref": "#/definitions/Roles"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateUserDefinedRole",
+        "x-ms-examples": {
+          "CreateUserDefinedRole": {
+            "$ref": "./examples/ledger/CreateUserDefinedRole.json"
+          }
+        },
+        "summary": "Creates new roles and their actions",
+        "description": "User defined roles allow users to define and manage app specific AuthZ policy.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully added the roles."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateUserDefinedRole",
+        "x-ms-examples": {
+          "UpdateUserDefinedRole": {
+            "$ref": "./examples/ledger/UpdateUserDefinedRole.json"
+          }
+        },
+        "summary": "Patch replaces the allowed action on existing roles,if the desire is to remove an existing action, the role must be deleted and recreated.",
+        "description": "User defined roles allow users to define and manage app specific AuthZ policy.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully patched the roles."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteUserDefinedRole",
+        "x-ms-examples": {
+          "DeleteUserDefinedRole": {
+            "$ref": "./examples/ledger/DeleteUserDefinedRole.json"
+          }
+        },
+        "summary": "Deletes user defined roles",
+        "description": "A user defined role allows the users to create and manage their own role actions using the API.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the user roles."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationClaims": {
+      "description": "List of application claims.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ApplicationClaim"
+      }
+    },
+    "ApplicationClaim": {
+      "description": "A claim of a ledger application.",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "digest": {
+          "$ref": "#/definitions/ClaimDigest"
+        },
+        "kind": {
+          "$ref": "#/definitions/ApplicationClaimKind"
+        },
+        "ledgerEntry": {
+          "$ref": "#/definitions/LedgerEntryClaim"
+        }
+      },
+      "type": "object"
+    },
+    "ApplicationClaimKind": {
+      "type": "string",
+      "description": "Represents the kind of an application claim.",
+      "enum": [
+        "LedgerEntry",
+        "ClaimDigest"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationClaimKind",
+        "modelAsString": true
+      }
+    },
+    "ApplicationClaimProtocol": {
+      "type": "string",
+      "description": "Represents the protocol to be used to compute the digest of a claim from the given claim data.",
+      "enum": [
+        "LedgerEntryV1"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationClaimProtocol",
+        "modelAsString": true
+      }
+    },
+    "ClaimDigest": {
+      "description": "An application claim in digested form.",
+      "required": [
+        "protocol"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The digest of the application claim, in hexadecimal form."
+        },
+        "protocol": {
+          "$ref": "#/definitions/ApplicationClaimProtocol"
+        }
+      },
+      "type": "object"
+    },
+    "LedgerEntryClaim": {
+      "description": "An application claim derived from ledger entry data.",
+      "required": [
+        "protocol"
+      ],
+      "properties": {
+        "collectionId": {
+          "description": "Identifier of a collection.",
+          "type": "string"
+        },
+        "contents": {
+          "description": "Contents of a ledger entry.",
+          "type": "string"
+        },
+        "secretKey": {
+          "type": "string",
+          "description": "Base64-encoded secret key."
+        },
+        "protocol": {
+          "$ref": "#/definitions/ApplicationClaimProtocol"
+        }
+      },
+      "type": "object"
+    },
+    "ConfidentialLedgerEnclaves": {
+      "description": "Information about the enclaves running the Confidential Ledger.",
+      "required": [
+        "currentNodeId",
+        "enclaveQuotes"
+      ],
+      "properties": {
+        "currentNodeId": {
+          "description": "Id of the Confidential Ledger node responding to the request.",
+          "$ref": "#/definitions/EntityId"
+        },
+        "enclaveQuotes": {
+          "$ref": "#/definitions/EnclaveQuotes"
+        }
+      },
+      "type": "object"
+    },
+    "Consortium": {
+      "description": "List of members in the consortium.",
+      "required": [
+        "members"
+      ],
+      "properties": {
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsortiumMember"
+          }
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ConsortiumMember": {
+      "description": "Describes a member of the consortium.",
+      "required": [
+        "certificate",
+        "id"
+      ],
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "description": "PEM-encoded certificate associated with the member."
+        },
+        "id": {
+          "description": "Identifier assigned to the member.",
+          "$ref": "#/definitions/EntityId"
+        }
+      },
+      "type": "object"
+    },
+    "Constitution": {
+      "description": "The governance script for the application.",
+      "required": [
+        "digest",
+        "script"
+      ],
+      "properties": {
+        "digest": {
+          "description": "SHA256 digest of the constitution script.",
+          "type": "string"
+        },
+        "script": {
+          "description": "Contents of the constitution.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EnclaveQuote": {
+      "description": "Contains the enclave quote.",
+      "required": [
+        "nodeId",
+        "quoteVersion",
+        "raw"
+      ],
+      "properties": {
+        "nodeId": {
+          "description": "ID assigned to this node.",
+          "$ref": "#/definitions/EntityId"
+        },
+        "mrenclave": {
+          "description": "MRENCLAVE value of the code running in the enclave.",
+          "type": "string"
+        },
+        "quoteVersion": {
+          "description": "Version of the quote presented.",
+          "type": "string"
+        },
+        "raw": {
+          "description": "Raw SGX quote, parsable by tools like Open Enclave's oeverify.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EnclaveQuotes": {
+      "description": "Dictionary of enclave quotes, indexed by node id.",
+      "additionalProperties": {
+        "$ref": "#/definitions/EnclaveQuote"
+      },
+      "type": "object"
+    },
+    "EntityId": {
+      "description": "Identifier for an entity.",
+      "type": "string"
+    },
+    "LedgerEntries": {
+      "description": "Array of ledger entries.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LedgerEntry"
+      }
+    },
+    "LedgerEntry": {
+      "description": "An entry in the ledger.",
+      "required": [
+        "contents"
+      ],
+      "properties": {
+        "contents": {
+          "type": "string",
+          "description": "Contents of the ledger entry."
+        },
+        "collectionId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "transactionId": {
+          "$ref": "#/definitions/TransactionId",
+          "readOnly": true
+        },
+        "preHooks": {
+          "description": "List of user defined function hooks to be executed before the ledger entry is written.",
+          "$ref": "#/definitions/UserDefinedFunctionHooks"
+        },
+        "postHooks": {
+          "description": "List of user defined function hooks to be executed after the ledger entry is written.",
+          "$ref": "#/definitions/UserDefinedFunctionHooks"
+        }
+      },
+      "type": "object"
+    },
+    "LedgerQueryResult": {
+      "description": "The result of querying for a ledger entry from an older transaction id. The ledger entry is available in the response only if the returned state is Ready.",
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/LedgerQueryState"
+        },
+        "entry": {
+          "description": "The ledger entry found as a result of the query. This is only available if the query is in Ready state.",
+          "$ref": "#/definitions/LedgerEntry"
+        }
+      },
+      "type": "object"
+    },
+    "LedgerQueryState": {
+      "description": "State of a ledger query.",
+      "type": "string",
+      "enum": [
+        "Loading",
+        "Ready"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialLedgerQueryState",
+        "modelAsString": true
+      }
+    },
+    "LedgerUser": {
+      "description": "Details about a Confidential Ledger user.",
+      "required": [
+        "assignedRole"
+      ],
+      "properties": {
+        "assignedRole": {
+          "$ref": "#/definitions/LedgerUserRole"
+        },
+        "userId": {
+          "$ref": "#/definitions/UserId",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "LedgerUserMultipleRoles": {
+      "description": "Details about a Confidential Ledger user.",
+      "required": [
+        "assignedRoles"
+      ],
+      "properties": {
+        "assignedRoles": {
+          "$ref": "#/definitions/LedgerUserMultipleRolesDef"
+        },
+        "userId": {
+          "$ref": "#/definitions/UserId",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "LedgerUserRole": {
+      "type": "string",
+      "description": "Represents an assignable role.",
+      "enum": [
+        "Administrator",
+        "Contributor",
+        "Reader"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialLedgerUserRoleName",
+        "modelAsString": true
+      }
+    },
+    "LedgerUserMultipleRolesDef": {
+      "description": "Represents an assignable role.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MultipleRolesList"
+      }
+    },
+    "MultipleRolesList": {
+      "description": "Represents list of roles for single user",
+      "type": "string",
+      "enum": [
+        "Administrator",
+        "Contributor",
+        "Reader"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ConfidentialLedgerUserRoleName"
+      }
+    },
+    "LedgerWriteResult": {
+      "description": "Returned as a result of a write to the Confidential Ledger, the transaction id in the response indicates when the write will become durable.",
+      "required": [
+        "collectionId"
+      ],
+      "properties": {
+        "collectionId": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MerkleProof": {
+      "description": "The Merkle proof verifying a transaction.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MerkleProofElement"
+      }
+    },
+    "MerkleProofElement": {
+      "description": "An item in the Merkle proof.",
+      "type": "object",
+      "properties": {
+        "left": {
+          "type": "string"
+        },
+        "right": {
+          "type": "string"
+        }
+      }
+    },
+    "PagedLedgerEntries": {
+      "description": "Paginated ledger entries returned in response to a query.",
+      "type": "object",
+      "required": [
+        "state",
+        "entries"
+      ],
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/LedgerQueryState"
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
+        },
+        "entries": {
+          "$ref": "#/definitions/LedgerEntries"
+        }
+      }
+    },
+    "Pem": {
+      "type": "string"
+    },
+    "PemArray": {
+      "items": {
+        "$ref": "#/definitions/Pem"
+      },
+      "type": "array"
+    },
+    "ReceiptContents": {
+      "properties": {
+        "cert": {
+          "type": "string"
+        },
+        "leaf": {
+          "type": "string"
+        },
+        "leafComponents": {
+          "$ref": "#/definitions/ReceiptLeafComponents"
+        },
+        "nodeId": {
+          "type": "string"
+        },
+        "proof": {
+          "$ref": "#/definitions/ReceiptElementArray"
+        },
+        "root": {
+          "type": "string"
+        },
+        "serviceEndorsements": {
+          "$ref": "#/definitions/PemArray"
+        },
+        "signature": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "signature",
+        "proof",
+        "nodeId"
+      ],
+      "type": "object"
+    },
+    "ReceiptElement": {
+      "properties": {
+        "left": {
+          "type": "string"
+        },
+        "right": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ReceiptElementArray": {
+      "items": {
+        "$ref": "#/definitions/ReceiptElement"
+      },
+      "type": "array"
+    },
+    "ReceiptLeafComponents": {
+      "properties": {
+        "claimsDigest": {
+          "type": "string"
+        },
+        "commitEvidence": {
+          "type": "string"
+        },
+        "writeSetDigest": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RoleAssignment": {
+      "description": "Object for assigning a role to a user.",
+      "required": [
+        "roleName"
+      ],
+      "properties": {
+        "roleName": {
+          "$ref": "#/definitions/LedgerUserRole"
+        },
+        "description": {
+          "description": "Description of the role.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Collection": {
+      "description": "Identifier for collections.",
+      "required": [
+        "collectionId"
+      ],
+      "properties": {
+        "collectionId": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PagedCollections": {
+      "description": "Paginated collections returned in response to a query.",
+      "type": "object",
+      "required": [
+        "collections"
+      ],
+      "properties": {
+        "collections": {
+          "items": {
+            "$ref": "#/definitions/Collection"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
+        }
+      }
+    },
+    "PagedUserDefinedFunctions": {
+      "description": "Paginated user defined functions returned in response to a query.",
+      "type": "object",
+      "required": [
+        "functions"
+      ],
+      "properties": {
+        "functions": {
+          "items": {
+            "$ref": "#/definitions/UserDefinedFunction"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
+        }
+      }
+    },
+    "PagedUsers": {
+      "description": "Paginated users returned in response to a query.",
+      "type": "object",
+      "properties": {
+        "ledgerUsers": {
+          "items": {
+            "$ref": "#/definitions/LedgerUser"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
+        }
+      }
+    },
+    "PagedLedgerUsers": {
+      "description": "Paginated users returned in response to a query.",
+      "type": "object",
+      "properties": {
+        "ledgerUsers": {
+          "items": {
+            "$ref": "#/definitions/LedgerUserMultipleRoles"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
+        }
+      }
+    },
+    "TransactionId": {
+      "description": "A unique identifier for the state of the ledger. If returned as part of a LedgerEntry, it indicates the state from which the entry was read.",
+      "type": "string"
+    },
+    "TransactionReceipt": {
+      "description": "A receipt certifying the transaction at the specified id.",
+      "required": [
+        "state",
+        "transactionId"
+      ],
+      "properties": {
+        "applicationClaims": {
+          "$ref": "#/definitions/ApplicationClaims"
+        },
+        "receipt": {
+          "$ref": "#/definitions/ReceiptContents"
+        },
+        "state": {
+          "$ref": "#/definitions/LedgerQueryState"
+        },
+        "transactionId": {
+          "$ref": "#/definitions/TransactionId"
+        }
+      },
+      "type": "object"
+    },
+    "TransactionState": {
+      "type": "string",
+      "description": "Represents the state of the transaction.",
+      "enum": [
+        "Committed",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "TransactionState",
+        "modelAsString": true
+      }
+    },
+    "TransactionStatus": {
+      "description": "Response returned to a query for the transaction status",
+      "required": [
+        "state",
+        "transactionId"
+      ],
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/TransactionState"
+        },
+        "transactionId": {
+          "$ref": "#/definitions/TransactionId"
+        }
+      },
+      "type": "object"
+    },
+    "UserId": {
+      "description": "Identifier for the user. This must either be an AAD object id or a certificate fingerprint.",
+      "type": "string"
+    },
+    "Bundle": {
+      "description": "bundle for the user defined endpoints",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/Metadata"
+        },
+        "modules": {
+          "$ref": "#/definitions/ModuleDef_array"
+        }
+      },
+      "required": [
+        "modules",
+        "metadata"
+      ],
+      "type": "object"
+    },
+    "Metadata": {
+      "properties": {
+        "endpoints": {
+          "$ref": "#/definitions/path"
+        }
+      },
+      "required": [
+        "endpoints"
+      ],
+      "type": "object"
+    },
+    "path": {
+      "description": "A map of path to method endpoints for the path",
+      "additionalProperties": {
+        "$ref": "#/definitions/method_to_EndpointProperties"
+      },
+      "type": "object"
+    },
+    "method_to_EndpointProperties": {
+      "properties": {
+        "get": {
+          "$ref": "#/definitions/EndpointProperties"
+        },
+        "put": {
+          "$ref": "#/definitions/EndpointProperties"
+        },
+        "patch": {
+          "$ref": "#/definitions/EndpointProperties"
+        },
+        "delete": {
+          "$ref": "#/definitions/EndpointProperties"
+        }
+      },
+      "type": "object"
+    },
+    "EndpointProperties": {
+      "properties": {
+        "authn_policies": {
+          "$ref": "#/definitions/json_array"
+        },
+        "forwarding_required": {
+          "$ref": "#/definitions/ForwardingRequired"
+        },
+        "interpreter_reuse": {
+          "$ref": "#/definitions/InterpreterReusePolicy"
+        },
+        "js_function": {
+          "type": "string"
+        },
+        "js_module": {
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/definitions/Mode"
+        },
+        "openapi": {
+          "$ref": "#/definitions/json"
+        },
+        "openapi_hidden": {
+          "$ref": "#/definitions/boolean"
+        },
+        "redirection_strategy": {
+          "$ref": "#/definitions/RedirectionStrategy"
+        }
+      },
+      "required": [
+        "forwarding_required",
+        "authn_policies"
+      ],
+      "type": "object"
+    },
+    "json": {},
+    "json_array": {
+      "items": {
+        "$ref": "#/definitions/json"
+      },
+      "type": "array"
+    },
+    "ForwardingRequired": {
+      "enum": [
+        "sometimes",
+        "always",
+        "never"
+      ],
+      "x-ms-enum": {
+        "name": "ForwardingRequired",
+        "modelAsString": true
+      },
+      "type": "string"
+    },
+    "InterpreterReusePolicy": {
+      "properties": {
+        "key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "type": "object"
+    },
+    "Mode": {
+      "enum": [
+        "readwrite",
+        "readonly",
+        "historical"
+      ],
+      "x-ms-enum": {
+        "name": "Mode",
+        "modelAsString": true
+      },
+      "type": "string"
+    },
+    "RedirectionStrategy": {
+      "enum": [
+        "none",
+        "to_primary",
+        "to_backup"
+      ],
+      "x-ms-enum": {
+        "name": "RedirectionStrategy",
+        "modelAsString": true
+      },
+      "type": "string"
+    },
+    "ModuleDef": {
+      "properties": {
+        "module": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "module"
+      ],
+      "type": "object"
+    },
+    "ModuleDef_array": {
+      "items": {
+        "$ref": "#/definitions/ModuleDef"
+      },
+      "type": "object"
+    },
+    "JSRuntimeOptions": {
+      "description": "JS runtime options for user defined endpoints and functions",
+      "properties": {
+        "log_exception_details": {
+          "$ref": "#/definitions/boolean"
+        },
+        "max_cached_interpreters": {
+          "$ref": "#/definitions/uint64"
+        },
+        "max_execution_time_ms": {
+          "$ref": "#/definitions/uint64"
+        },
+        "max_heap_bytes": {
+          "$ref": "#/definitions/uint64"
+        },
+        "max_stack_bytes": {
+          "$ref": "#/definitions/uint64"
+        },
+        "return_exception_details": {
+          "$ref": "#/definitions/boolean"
+        }
+      },
+      "type": "object"
+    },
+    "uint64": {
+      "minimum": 0,
+      "type": "integer",
+      "format": "int64"
+    },
+    "boolean": {
+      "type": "boolean"
+    },
+    "Roles": {
+      "description": "Definition for roles",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Role"
+      }
+    },
+    "Role": {
+      "description": "Definition for roles",
+      "type": "object",
+      "properties": {
+        "roleName": {
+          "description": "name of the user defined role",
+          "type": "string"
+        },
+        "roleActions": {
+          "items": {
+            "$ref": "#/definitions/RoleActionDef"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "RoleActionDef": {
+      "properties": {
+        "roleActions": {
+          "description": "action of the user defined role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "roleActions"
+      ],
+      "type": "string"
+    },
+    "UserDefinedFunction": {
+      "description": "A user defined function in the ledger.",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Code of the user defined function in JavaScript."
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the user defined function.",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "UserDefinedFunctionExecutionArgument": {
+      "type": "string"
+    },
+    "UserDefinedFunctionExecutionProperties": {
+      "description": "The properties for executing a user defined function.",
+      "properties": {
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserDefinedFunctionExecutionArgument"
+          },
+          "description": "Runtime arguments of the user defined function. Defaults to an empty list."
+        },
+        "exportedFunctionName": {
+          "type": "string",
+          "description": "Name of the exported function to execute in the code of the user defined function. Defaults to main."
+        },
+        "runtimeOptions": {
+          "$ref": "#/definitions/JSRuntimeOptions"
+        }
+      },
+      "type": "object"
+    },
+    "UserDefinedFunctionExecutionStatus": {
+      "type": "string",
+      "description": "Represents the status of a user defined function execution.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "UserDefinedFunctionExecutionStatus",
+        "modelAsString": true
+      }
+    },
+    "UserDefinedFunctionExecutionError": {
+      "description": "The error object of a user defined function execution. This is returned only when the user defined function execution throws an exception.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Message indicating the error thrown when executing the function."
+        }
+      },
+      "type": "object"
+    },
+    "UserDefinedFunctionExecutionResult": {
+      "description": "The result object of a user defined function execution. This is returned only when the user defined function executes successfully.",
+      "properties": {
+        "returnValue": {
+          "type": "string",
+          "description": "String-encoded value returned by the user defined function execution. If the function does not return any value, this is set to an empty string."
+        }
+      },
+      "type": "object"
+    },
+    "UserDefinedFunctionExecutionResponse": {
+      "description": "The result of a user defined function execution.",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/UserDefinedFunctionExecutionError"
+        },
+        "result": {
+          "$ref": "#/definitions/UserDefinedFunctionExecutionResult"
+        },
+        "status": {
+          "$ref": "#/definitions/UserDefinedFunctionExecutionStatus"
+        }
+      },
+      "type": "object"
+    },
+    "UserDefinedFunctionHook": {
+      "description": "Hook for a user defined function execution.",
+      "required": [
+        "functionId"
+      ],
+      "properties": {
+        "functionId": {
+          "type": "string",
+          "description": "ID of the user defined function to execute."
+        },
+        "properties": {
+          "$ref": "#/definitions/UserDefinedFunctionExecutionProperties"
+        }
+      },
+      "type": "object"
+    },
+    "UserDefinedFunctionHooks": {
+      "description": "List of user defined function hooks.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/UserDefinedFunctionHook"
+      }
+    }
+  },
+  "parameters": {
+    "CommitParameter": {
+      "name": "commit",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "integer",
+      "format": "int64",
+      "description": "The commit in the consensus protocol."
+    },
+    "CollectionIdParameter": {
+      "name": "collectionId",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "The collection id.",
+      "type": "string"
+    },
+    "TransactionIdParameter": {
+      "name": "transactionId",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "Identifies a write transaction.",
+      "type": "string"
+    },
+    "TransactionIdFromParameter": {
+      "name": "fromTransactionId",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "Specify the first transaction ID in a range.",
+      "type": "string"
+    },
+    "TransactionIdToParameter": {
+      "name": "toTransactionId",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "Specify the last transaction ID in a range.",
+      "type": "string"
+    },
+    "UserDefinedFunctionIdParameter": {
+      "name": "functionId",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "Identifies a user defined function.",
+      "type": "string"
+    },
+    "UserDefinedFunctionParameter": {
+      "name": "userDefinedFunction",
+      "description": "Specify a user defined function of a Confidential Ledger.",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/UserDefinedFunction"
+      }
+    },
+    "UserDefinedFunctionExecutionParameter": {
+      "name": "userDefinedFunctionExecutionProperties",
+      "description": "Specify user defined function execution properties.",
+      "in": "body",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/UserDefinedFunctionExecutionProperties"
+      }
+    },
+    "UserDetailsParameter": {
+      "name": "userDetails",
+      "description": "Details about a Confidential Ledger user.",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/LedgerUser"
+      }
+    },
+    "UserMultipleRolesParameter": {
+      "name": "userMultipleRoles",
+      "description": "Details about a Confidential Ledger user with multiple roles.",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/LedgerUserMultipleRoles"
+      }
+    },
+    "UserIdParameter": {
+      "name": "userId",
+      "in": "path",
+      "required": true,
+      "description": "The user id, either an AAD object ID or certificate fingerprint.",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "BundleParameter": {
+      "name": "bundle",
+      "description": "bundle parameter description",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/Bundle"
+      }
+    },
+    "ModuleNameParameter": {
+      "name": "module",
+      "required": true,
+      "description": "module name of the user defined endpoint",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string"
+    },
+    "JSRuntimeOptionsParameter": {
+      "name": "JSRuntimeOptions",
+      "description": "JS runtime options",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/JSRuntimeOptions"
+      }
+    },
+    "RoleParameter": {
+      "name": "roles",
+      "description": "user defined role",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/Roles"
+      }
+    },
+    "RoleNameParameter": {
+      "name": "roleName",
+      "description": "user defined role name",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  }
+}

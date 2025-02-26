@@ -95,7 +95,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
-## Suppression
+## Suppressions
 
 ``` yaml
 directive:
@@ -107,4 +107,10 @@ directive:
     where: $.definitions.ProviderDescription.properties.properties
     from: quantum.json
     reason: We don't have end customers making direct API calls and this is a breaking change for our existing clients.
+```
+
+```yaml
+suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    reason: The provisioningState being flagged is not the ARM resource provisioningState, but the field for our ProviderStatus. Currently, this cannot be readOnly, or it will cause livesite issue and workspace does not behave correctly. We have on our roadmap to fix this issue, but this needs to be settable for control plane to work properly.
 ```

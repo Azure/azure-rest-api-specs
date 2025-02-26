@@ -681,7 +681,7 @@ model DevBox {
   lastConnectedTime?: utcDateTime;
 
   @doc("Indicates whether the owner of the Dev Box is a local administrator.")
-  @visibility("read", "create")
+  @visibility("read")
   localAdministrator?: LocalAdminStatus;
 }
 
