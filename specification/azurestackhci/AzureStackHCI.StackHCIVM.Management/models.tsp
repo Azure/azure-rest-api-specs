@@ -689,6 +689,7 @@ model LogicalNetworkProperties {
   @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Subnet - list of subnets under the logical network")
   @OpenAPI.extension("x-ms-identifiers", [])
   subnets?: Subnet[];
@@ -734,6 +735,7 @@ model SubnetProperties {
   @doc("IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'")
   ipAllocationMethod?: IpAllocationMethodEnum;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
   @extension("x-ms-identifiers", [])
   ipConfigurationReferences?: SubnetIpConfigurationReference[];
@@ -744,6 +746,7 @@ model SubnetProperties {
   @doc("Route table resource.")
   routeTable?: RouteTable;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("network associated pool of IP Addresses")
   @extension("x-ms-identifiers", [])
   ipPools?: IPPool[];
@@ -774,6 +777,7 @@ model RouteTable {
 
 @doc("RouteTablePropertiesFormat - Route Table resource.")
 model RouteTableProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("Collection of routes contained within a route table.")
   @extension("x-ms-identifiers", [])
   routes?: Route[];
@@ -835,6 +839,7 @@ model IPPoolInfo {
 
 @doc("Network Security Group resource.")
 model NetworkSecurityGroupProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
   @extension("x-ms-identifiers", [])
@@ -913,6 +918,7 @@ model SecurityRuleProperties {
 
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
   @extension("x-ms-identifiers", [])
   ipConfigurations?: IPConfiguration[];
@@ -1408,6 +1414,7 @@ model VirtualMachineInstancePropertiesHardwareProfile {
   dynamicMemoryConfig?: VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
+  #suppress "deprecated" "Updated to value syntax next release"
   @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
   @extension("x-ms-identifiers", [])
@@ -1445,6 +1452,7 @@ model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
 
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
 model VirtualMachineInstancePropertiesNetworkProfile {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
   @extension("x-ms-identifiers", [])
   networkInterfaces?: NetworkInterfaceArmReference[];
@@ -1489,6 +1497,7 @@ model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
 
 @doc("SSH configuration for Linux based VMs running on Azure")
 model SshConfiguration {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The list of SSH public keys used to authenticate with linux based VMs.")
   @extension("x-ms-identifiers", ["path"])
   publicKeys?: SshPublicKey[];
@@ -1616,6 +1625,7 @@ model VirtualMachineConfigAgentInstanceView {
   @doc("The VM Config Agent full version.")
   vmConfigAgentVersion?: string;
 
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("The resource status information.")
   @extension("x-ms-identifiers", [])
   statuses?: InstanceViewStatus[];
@@ -1739,6 +1749,7 @@ model HardwareProfileUpdate {
   memoryMB?: int64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
+  #suppress "deprecated" "Updated to value syntax next release"
   @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - updated list of GPUs on the virtual machine instance")
   @extension("x-ms-identifiers", [])
@@ -1753,6 +1764,7 @@ model StorageProfileUpdate {
 
 @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
 model NetworkProfileUpdate {
+  #suppress "deprecated" "Updated to value syntax next release"
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
   @extension("x-ms-identifiers", [])
   networkInterfaces?: NetworkInterfaceArmReference[];
