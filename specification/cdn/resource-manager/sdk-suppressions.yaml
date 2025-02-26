@@ -14,6 +14,7 @@ suppressions:
       - Type of parameter matchValues of interface RequestMethodMatchConditionParameters is changed from RequestMethodMatchConditionParametersMatchValuesItem[] to RequestMethodMatchValue[]
       - Type of parameter matchValues of interface RequestSchemeMatchConditionParameters is changed from RequestSchemeMatchConditionParametersMatchValuesItem[] to RequestSchemeMatchValue[]
       - Type of parameter typeName of interface KeyVaultSigningKeyParameters is changed from "KeyVaultSigningKeyParameters" to KeyVaultSigningKeyParametersType
+      - Parameter secretVersion of interface UrlSigningKeyParameters is now required
   azure-sdk-for-go:
     - package: sdk/resourcemanager/cdn/armcdn
       breaking-changes:
@@ -143,3 +144,4 @@ suppressions:
         - Deleted or renamed model `UrlRedirectActionParametersTypeName`
         - Deleted or renamed model `UrlRewriteActionParametersTypeName`
         - Deleted or renamed model `UrlSigningActionParametersTypeName`
+        - Method `UrlSigningKeyParameters.__init__` removed default value `None` from its parameter `secret_version`
