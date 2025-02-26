@@ -41,3 +41,5 @@ export class EmitAutorestRule implements Rule {
     };
   }
 }
+
+export default EmitAutorestRule;

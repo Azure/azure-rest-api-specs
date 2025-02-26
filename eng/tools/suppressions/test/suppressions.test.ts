@@ -249,3 +249,29 @@ test("yaml array not suppression", () => {
     `[ZodValidationError: Validation error: Required at "[0].tool"; Required at "[0].reason"]`,
   );
 });
+
+test("suppression with sub rules", () => {
+  let suppressions: Suppression[] = getSuppressionsFromYaml(
+    "TestTool",
+    "foo",
+    "suppressions.yaml",
+    `
+- tool: TestTool
+  path: foo
+  rule: my-rule
+  sub-rules:
+    - my.option.a
+    - my.option.b
+  reason: test
+    `,
+  );
+  expect(suppressions).toStrictEqual([
+    {
+      tool: "TestTool",
+      paths: ["foo"],
+      rule: "my-rule",
+      subRules: ["my.option.a", "my.option.b"],
+      reason: "test",
+    },
+  ]);
+});

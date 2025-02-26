@@ -110,3 +110,5 @@ export class FolderStructureRule implements Rule {
     };
   }
 }
+
+export default FolderStructureRule;

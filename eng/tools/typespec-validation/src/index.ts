@@ -1,15 +1,10 @@
+import { readdir } from "node:fs/promises";
+import { join, dirname } from "node:path";
 import { ParseArgsConfig, parseArgs } from "node:util";
 import { Suppression, getSuppressions } from "suppressions";
-
-import { CompileRule } from "./rules/compile.js";
-import { EmitAutorestRule } from "./rules/emit-autorest.js";
-import { FlavorAzureRule } from "./rules/flavor-azure.js";
-import { FolderStructureRule } from "./rules/folder-structure.js";
-import { FormatRule } from "./rules/format.js";
-import { LinterRulesetRule } from "./rules/linter-ruleset.js";
-import { NpmPrefixRule } from "./rules/npm-prefix.js";
-import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
+import { fileURLToPath } from "url";
+import { Rule } from "./rule.js";
 
 export async function main() {
   const host = new TsvRunnerHost();
@@ -38,24 +33,17 @@ export async function main() {
   if (suppressions && suppressions[0]) {
     // Use reason from first matching suppression and ignore rest
     console.log(`  Suppressed: ${suppressions[0].reason}`);
-    return;
   }
 
-  const rules = [
-    new FolderStructureRule(),
-    new NpmPrefixRule(),
-    new EmitAutorestRule(),
-    new FlavorAzureRule(),
-    new LinterRulesetRule(),
-    new CompileRule(),
-    new FormatRule(),
-    new SdkTspConfigValidationRule(),
-  ];
+  const ruleMap = await loadRules();
+  const subRuleMap = getSubRules(ruleMap, suppressions);
+  const rules = [...ruleMap.values()];
+
   let success = true;
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
     console.log("\nExecuting rule: " + rule.name);
-    const result = await rule.execute(host, absolutePath);
+    const result = await rule.execute(host, absolutePath, subRuleMap.get(rule.name));
     if (result.stdOutput) console.log(result.stdOutput);
     if (!result.success) {
       success = false;
@@ -71,4 +59,33 @@ export async function main() {
   if (!success) {
     process.exitCode = 1;
   }
+}
+
+async function loadRules(): Promise<Map<string, Rule>> {
+  const currentPath = fileURLToPath(import.meta.url);
+  const currentDir = dirname(currentPath);
+  const ruleFileNames = (await readdir(join(currentDir, "rules"))).filter((p) => p.endsWith(".js"));
+  const ruleMap = new Map<string, Rule>();
+  for (const ruleFileName of ruleFileNames) {
+    const module = await import(join("file://", currentDir, "rules", ruleFileName));
+    const rule = new module.default() as Rule;
+    ruleMap.set(rule.name, rule);
+  }
+  return ruleMap;
+}
+
+function getSubRules(ruleMap: Map<string, Rule>, suppressions: Suppression[]) {
+  const subRuleMap = new Map<string, Set<string>>();
+  for (const suppression of suppressions) {
+    if (
+      ruleMap.has(suppression.rule) &&
+      (!suppression["subRules"] || suppression["subRules"].length == 0)
+    ) {
+      ruleMap.delete(suppression.rule);
+    }
+    const subRules = suppression["subRules"];
+    if (subRules && subRules.length > 0)
+      subRuleMap.set(suppression.rule, new Set<string>([...subRules]));
+  }
+  return subRuleMap;
 }
