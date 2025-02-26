@@ -50,6 +50,37 @@ namespace ClientCustomizations;
         listRoleAssignments is KeyVault.RoleAssignments.listForScope;
     }
 
+    @client(
+        {
+        name: "KeyVaultRestClient",
+        service: KeyVault,
+        }, 
+        "csharp")
+      interface KeyVaultRestClient {
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        fullBackup is KeyVault.fullBackup;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        fullRestore is KeyVault.fullRestoreOperation;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        fullBackupStatus is KeyVault.fullBackupStatus;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        preFullBackup is KeyVault.preFullBackup;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        restoreStatus is KeyVault.restoreStatus;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        preFullRestore is KeyVault.preFullRestoreOperation;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        selectiveKeyRestoreStatus is KeyVault.selectiveKeyRestoreStatus;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        selectiveKeyRestore is KeyVault.selectiveKeyRestoreOperation;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        updateSetting is KeyVault.updateSetting;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        getSetting is KeyVault.getSetting;
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        getSettings is KeyVault.getSettings;
+      }
+
 // JavaScript customizations
 @@clientName(KeyVault.FullBackupOperation.azureStorageBlobContainerUri,
   "folderUri",
