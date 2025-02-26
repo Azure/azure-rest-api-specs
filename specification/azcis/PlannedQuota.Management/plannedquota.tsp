@@ -53,7 +53,7 @@ model PlannedQuotaResourceProperties {
   provisioningState?: PlannedQuotaProvisioningState;
 
   @added(Versions.v2024_06_24_preview)
-  @doc("The planned quota request identifier.")
+  @doc("The planned quota request identifier; a part of provisioning ResultData output.")
   @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
   requestId?: string;
 
