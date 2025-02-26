@@ -59,12 +59,12 @@ namespace ClientCustomizations;
         fullRestore is KeyVault.fullRestoreOperation;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
         fullBackupStatus is KeyVault.fullBackupStatus;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        preFullBackup is KeyVault.preFullBackup;
+        //#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        //preFullBackup is KeyVault.preFullBackup;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
         restoreStatus is KeyVault.restoreStatus;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        preFullRestore is KeyVault.preFullRestoreOperation;
+        //#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+        //preFullRestore is KeyVault.preFullRestoreOperation;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
         selectiveKeyRestoreStatus is KeyVault.selectiveKeyRestoreStatus;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -102,6 +102,7 @@ namespace ClientCustomizations;
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
 @@access(KeyVault, Access.internal, "csharp");
 @@clientName(KeyVaultError, "KeyVaultServiceError", "csharp");
+
 
 // JavaScript customizations
 @@clientName(KeyVault.FullBackupOperation.azureStorageBlobContainerUri,
