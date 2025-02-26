@@ -3005,7 +3005,15 @@
           "type": "string"
         },
         "supportedPolicy": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "All"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceTypeExtendedLocationPolicy",
+            "modelAsString": true
+          }
         }
       }
     },
