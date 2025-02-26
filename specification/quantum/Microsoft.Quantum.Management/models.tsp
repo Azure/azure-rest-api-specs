@@ -370,7 +370,7 @@ model WorkspaceResourceProperties {
   /**
    * List of Providers selected for this Workspace
    */
-  @OpenAPI.extension("x-ms-identifiers", ["providerId"])
+  @identifiers(#["providerId"])
   providers?: Provider[];
 
   /**
