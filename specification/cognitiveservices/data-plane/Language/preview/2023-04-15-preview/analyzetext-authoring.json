@@ -106,7 +106,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}": {
       "get": {
-        "operationId": "TextAuthoringProjects_GetProject",
+        "operationId": "TextAuthoringProject_GetProject",
         "description": "Gets the details of a project.",
         "parameters": [
           {
@@ -142,7 +142,7 @@
         }
       },
       "patch": {
-        "operationId": "TextAuthoringProjects_CreateProject",
+        "operationId": "TextAuthoringProject_CreateProject",
         "description": "The most basic operation that applies to a resource.",
         "consumes": [
           "application/merge-patch+json"
@@ -196,7 +196,7 @@
         }
       },
       "delete": {
-        "operationId": "TextAuthoringProjects_DeleteProject",
+        "operationId": "TextAuthoringProject_DeleteProject",
         "description": "Deletes a project.",
         "parameters": [
           {
@@ -239,7 +239,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/:authorize-copy": {
       "post": {
-        "operationId": "TextAuthoringProjects_CopyProjectAuthorization",
+        "operationId": "TextAuthoringProject_CopyProjectAuthorization",
         "description": "Generates a copy project operation authorization to the current target Azure resource.",
         "parameters": [
           {
@@ -285,7 +285,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/:copy": {
       "post": {
-        "operationId": "TextAuthoringProjects_CopyProject",
+        "operationId": "TextAuthoringProject_CopyProject",
         "description": "Copies an existing project to another Azure resource.",
         "parameters": [
           {
@@ -337,7 +337,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/:export": {
       "post": {
-        "operationId": "TextAuthoringProjects_Export",
+        "operationId": "TextAuthoringProject_Export",
         "description": "Triggers a job to export a project's data.",
         "parameters": [
           {
@@ -415,7 +415,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/:import": {
       "post": {
-        "operationId": "TextAuthoringProjects_Import",
+        "operationId": "TextAuthoringProject_Import",
         "description": "Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.",
         "parameters": [
           {
@@ -474,7 +474,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/:train": {
       "post": {
-        "operationId": "TextAuthoringProjects_Train",
+        "operationId": "TextAuthoringProject_Train",
         "description": "Triggers a training job for a project.",
         "parameters": [
           {
@@ -526,7 +526,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/copy/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringProjects_GetCopyProjectStatus",
+        "operationId": "TextAuthoringProject_GetCopyProjectStatus",
         "description": "Gets the status of an existing copy project job.",
         "parameters": [
           {
@@ -621,7 +621,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}": {
       "get": {
-        "operationId": "TextAuthoringDeployments_GetDeployment",
+        "operationId": "TextAuthoringDeployment_GetDeployment",
         "description": "Gets the details of a deployment.",
         "parameters": [
           {
@@ -664,7 +664,7 @@
         }
       },
       "put": {
-        "operationId": "TextAuthoringDeployments_DeployProject",
+        "operationId": "TextAuthoringDeployment_DeployProject",
         "description": "Creates a new deployment or replaces an existing one.",
         "parameters": [
           {
@@ -721,7 +721,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "TextAuthoringDeployments_DeleteDeployment",
+        "operationId": "TextAuthoringDeployment_DeleteDeployment",
         "description": "Deletes a project deployment.",
         "parameters": [
           {
@@ -771,7 +771,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
       "post": {
-        "operationId": "TextAuthoringDeployments_DeleteDeploymentFromResources",
+        "operationId": "TextAuthoringDeployment_DeleteDeploymentFromResources",
         "description": "Deletes a project deployment from the specified assigned resources.",
         "parameters": [
           {
@@ -830,7 +830,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringDeployments_GetDeploymentDeleteFromResourcesStatus",
+        "operationId": "TextAuthoringDeployment_GetDeploymentDeleteFromResourcesStatus",
         "description": "Gets the status of an existing delete deployment from specific resources job.",
         "parameters": [
           {
@@ -882,7 +882,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringDeployments_GetDeploymentStatus",
+        "operationId": "TextAuthoringDeployment_GetDeploymentStatus",
         "description": "Gets the status of an existing deployment job.",
         "parameters": [
           {
@@ -934,7 +934,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/:swap": {
       "post": {
-        "operationId": "TextAuthoringDeployments_SwapDeployments",
+        "operationId": "TextAuthoringDeployment_SwapDeployments",
         "description": "Swaps two existing deployments with each other.",
         "parameters": [
           {
@@ -986,7 +986,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/swap/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringDeployments_GetSwapDeploymentsStatus",
+        "operationId": "TextAuthoringDeployment_GetSwapDeploymentsStatus",
         "description": "Gets the status of an existing swap deployment job.",
         "parameters": [
           {
@@ -1031,7 +1031,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringProjects_GetExportStatus",
+        "operationId": "TextAuthoringProject_GetExportStatus",
         "description": "Gets the status of an export job. Once job completes, returns the project metadata, and assets.",
         "parameters": [
           {
@@ -1126,7 +1126,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}": {
       "get": {
-        "operationId": "TextAuthoringModels_GetExportedModel",
+        "operationId": "TextAuthoringExportedModel_GetExportedModel",
         "description": "Gets the details of an exported model.",
         "parameters": [
           {
@@ -1169,7 +1169,7 @@
         }
       },
       "put": {
-        "operationId": "TextAuthoringModels_CreateOrUpdateExportedModel",
+        "operationId": "TextAuthoringExportedModel_CreateOrUpdateExportedModel",
         "description": "Creates a new exported model or replaces an existing one.",
         "parameters": [
           {
@@ -1226,7 +1226,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "TextAuthoringModels_DeleteExportedModel",
+        "operationId": "TextAuthoringExportedModel_DeleteExportedModel",
         "description": "Deletes an existing exported model.",
         "parameters": [
           {
@@ -1276,7 +1276,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringModels_GetExportedModelJobStatus",
+        "operationId": "TextAuthoringExportedModel_GetExportedModelJobStatus",
         "description": "Gets the status for an existing job to create or update an exported model.",
         "parameters": [
           {
@@ -1328,7 +1328,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/manifest": {
       "get": {
-        "operationId": "TextAuthoringModels_GetExportedModelManifest",
+        "operationId": "TextAuthoringExportedModel_GetExportedModelManifest",
         "description": "Gets the details and URL needed to download the exported model.",
         "parameters": [
           {
@@ -1373,7 +1373,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringProjects_GetImportStatus",
+        "operationId": "TextAuthoringProject_GetImportStatus",
         "description": "Gets the status for an import.",
         "parameters": [
           {
@@ -1468,7 +1468,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}": {
       "get": {
-        "operationId": "TextAuthoringModels_GetTrainedModel",
+        "operationId": "TextAuthoringTrainedModel_GetTrainedModel",
         "description": "Gets the details of a trained model.",
         "parameters": [
           {
@@ -1511,7 +1511,7 @@
         }
       },
       "delete": {
-        "operationId": "TextAuthoringModels_DeleteTrainedModel",
+        "operationId": "TextAuthoringTrainedModel_DeleteTrainedModel",
         "description": "Deletes an existing trained model.",
         "parameters": [
           {
@@ -1553,7 +1553,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
       "post": {
-        "operationId": "TextAuthoringModels_EvaluateModel",
+        "operationId": "TextAuthoringTrainedModel_EvaluateModel",
         "description": "Triggers evaluation operation on a trained model.",
         "parameters": [
           {
@@ -1612,7 +1612,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
-        "operationId": "TextAuthoringModels_LoadSnapshot",
+        "operationId": "TextAuthoringTrainedModel_LoadSnapshot",
         "description": "Long-running operation.",
         "parameters": [
           {
@@ -1662,7 +1662,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringModels_GetEvaluationStatus",
+        "operationId": "TextAuthoringTrainedModel_GetEvaluationStatus",
         "description": "Gets the status for an evaluation job.",
         "parameters": [
           {
@@ -1714,7 +1714,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
       "get": {
-        "operationId": "TextAuthoringModels_GetModelEvaluationResults",
+        "operationId": "TextAuthoringTrainedModel_GetModelEvaluationResults",
         "description": "Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.",
         "parameters": [
           {
@@ -1774,7 +1774,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
       "get": {
-        "operationId": "TextAuthoringModels_GetModelEvaluationSummary",
+        "operationId": "TextAuthoringTrainedModel_GetModelEvaluationSummary",
         "description": "Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model e.g., F1, Precision, Recall, etc.",
         "parameters": [
           {
@@ -1819,7 +1819,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringModels_GetLoadSnapshotStatus",
+        "operationId": "TextAuthoringTrainedModel_GetLoadSnapshotStatus",
         "description": "Gets the status for loading a snapshot.",
         "parameters": [
           {
@@ -1921,7 +1921,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/resources/:assign": {
       "post": {
-        "operationId": "TextAuthoringDeployments_AssignDeploymentResources",
+        "operationId": "TextAuthoringDeployment_AssignDeploymentResources",
         "description": "Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
         "parameters": [
           {
@@ -1973,7 +1973,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/resources/:unassign": {
       "post": {
-        "operationId": "TextAuthoringDeployments_UnassignDeploymentResources",
+        "operationId": "TextAuthoringDeployment_UnassignDeploymentResources",
         "description": "Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.",
         "parameters": [
           {
@@ -2025,7 +2025,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/resources/assign/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringDeployments_GetAssignDeploymentResourcesStatus",
+        "operationId": "TextAuthoringDeployment_GetAssignDeploymentResourcesStatus",
         "description": "Gets the status of an existing assign deployment resources job.",
         "parameters": [
           {
@@ -2070,7 +2070,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringDeployments_GetUnassignDeploymentResourcesStatus",
+        "operationId": "TextAuthoringDeployment_GetUnassignDeploymentResourcesStatus",
         "description": "Gets the status of an existing unassign deployment resources job.",
         "parameters": [
           {
@@ -2165,7 +2165,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringProjects_GetTrainingStatus",
+        "operationId": "TextAuthoringProject_GetTrainingStatus",
         "description": "Gets the status for a training job.",
         "parameters": [
           {
@@ -2210,7 +2210,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}/:cancel": {
       "post": {
-        "operationId": "TextAuthoringProjects_CancelTrainingJob",
+        "operationId": "TextAuthoringProject_CancelTrainingJob",
         "description": "Triggers a cancellation for a running training job.",
         "parameters": [
           {
@@ -2260,7 +2260,7 @@
     },
     "/authoring/analyze-text/projects/global/deletion-jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringProjects_GetProjectDeletionStatus",
+        "operationId": "TextAuthoringProject_GetProjectDeletionStatus",
         "description": "Gets the status for a project deletion job.",
         "parameters": [
           {

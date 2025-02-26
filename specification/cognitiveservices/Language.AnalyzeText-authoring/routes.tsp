@@ -554,7 +554,7 @@ interface TextAuthoringDeployment {
   >; 
 }
 
-interface TextAuthoringModel { 
+interface TextAuthoringExportedModel { 
 
   /**
    * Gets the details of an exported model.
@@ -568,7 +568,7 @@ interface TextAuthoringModel {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @put
-  @pollingOperation(TextAuthoringModel.getExportedModelJobStatus)
+  @pollingOperation(TextAuthoringExportedModel.getExportedModelJobStatus)
   @added(Versions.v2023_04_15_preview)
   createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
@@ -601,7 +601,7 @@ interface TextAuthoringModel {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
-  @pollingOperation(TextAuthoringModel.getExportedModelJobStatus)
+  @pollingOperation(TextAuthoringExportedModel.getExportedModelJobStatus)
   @added(Versions.v2023_04_15_preview)
   deleteExportedModel is Foundations.LongRunningOperation<
     {
@@ -653,7 +653,9 @@ interface TextAuthoringModel {
     {},
     Foundations.ErrorResponse
   >;
+}
 
+interface TextAuthoringTrainedModel { 
   /**
    * Gets the details of a trained model.
    */
@@ -670,7 +672,7 @@ interface TextAuthoringModel {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
-  @pollingOperation(TextAuthoringModel.getEvaluationStatus)
+  @pollingOperation(TextAuthoringTrainedModel.getEvaluationStatus)
   @added(Versions.v2023_04_15_preview)
   evaluateModel is Foundations.LongRunningOperation<
     {
@@ -700,7 +702,7 @@ interface TextAuthoringModel {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
   @post
-  @pollingOperation(TextAuthoringModel.getLoadSnapshotStatus)
+  @pollingOperation(TextAuthoringTrainedModel.getLoadSnapshotStatus)
   loadSnapshot is Foundations.LongRunningOperation<
     {
       /**
