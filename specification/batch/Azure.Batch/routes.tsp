@@ -5,6 +5,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "./common.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -14,6 +15,14 @@ using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 
 namespace Azure.Batch;
+
+//Aliases
+
+alias GetApplicationRequiredParameters = {
+  @doc("The ID of the Application")
+  @path
+  applicationId: string;
+};
 
 // Interfaces ////////////////////
 
@@ -41,12 +50,9 @@ interface Applications {
     API.
     """)
   @route("/applications/{applicationId}")
-  @clientName("getApplicationInternal", "java")
   getApplication is ReadOperation<
     {
-      @doc("The ID of the Application")
-      @path
-      applicationId: string;
+      ...Azure.Batch.GetApplicationRequiredParameters;
     },
     BatchApplication
   >;
