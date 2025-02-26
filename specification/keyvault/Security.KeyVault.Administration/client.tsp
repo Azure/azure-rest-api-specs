@@ -16,10 +16,6 @@ namespace ClientCustomizations;
 @@clientName(KeyVault.SettingTypeEnum, "KeyVaultSettingType", "java");
 
 //C# customizations
-@@clientName(KeyVault.Setting.type, "SettingType", "csharp");
-@@clientName(KeyVault.Setting.value, "Content", "csharp");
-@@access(KeyVault, Access.internal, "csharp");
-
 @client(
     {
       name: "KeyVaultAccessControlRestClient",
@@ -52,11 +48,11 @@ namespace ClientCustomizations;
 
     @client(
         {
-        name: "KeyVaultRestClient",
+        name: "KeyVaultClient",
         service: KeyVault,
         }, 
         "csharp")
-      interface KeyVaultRestClient {
+      interface KeyVaultClient {
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
         fullBackup is KeyVault.fullBackup;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -80,6 +76,14 @@ namespace ClientCustomizations;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
         getSettings is KeyVault.getSettings;
       }
+
+@@access(KeyVault, Access.internal, "csharp");
+@@access(KeyVault.fullBackup, Access.internal, "csharp");
+
+@@clientName(KeyVault.Setting.type, "SettingType", "csharp");
+@@clientName(KeyVault.Setting.value, "Content", "csharp");
+@@access(KeyVault, Access.internal, "csharp");
+@@clientName(KeyVaultError, "KeyVaultServiceError", "csharp");
 
 // JavaScript customizations
 @@clientName(KeyVault.FullBackupOperation.azureStorageBlobContainerUri,
