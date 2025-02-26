@@ -34,3 +34,26 @@ op getApplicationCustomization(
 );
 
 @@access(JavaClient.GetApplicationOptions, Access.public, "java");
+
+// List Applications Operation
+
+@doc("Optional parameters for List Applications operation.")
+model ListBatchApplicationsOptions {
+  ...Azure.Batch.BatchCommonListHeaders;
+}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@doc("Custom override for List Applications operation.")
+op listApplicationsCustomization(
+  @doc("Optional parameters for List Applications operation.")
+  options?: ListBatchApplicationsOptions,
+
+  ...ApiVersionParameter,
+): Azure.Batch.BatchApplicationListResult;
+
+@@override(Azure.Batch.Applications.listApplications,
+  listApplicationsCustomization,
+  "java"
+);
+
+@@access(JavaClient.ListBatchApplicationsOptions, Access.public, "java");
