@@ -38,7 +38,6 @@ interface Applications {
     API.
     """)
   @route("/applications")
-  @clientName("listApplicationsInternal", "java")
   listApplications is ListOperation<{}, BatchApplicationListResult>;
 
   @summary("Gets information about the specified Application.")
