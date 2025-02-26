@@ -20,7 +20,7 @@ model QuantumProviderAccount
   is Azure.ResourceManager.TrackedResource<ProviderAccountProperties> {
   ...ResourceNameParameter<
     Resource = QuantumProviderAccount,
-    KeyName = "ProviderAccountName",
+    KeyName = "providerAccountName",
     SegmentName = "providerAccounts",
     NamePattern = "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
   >;
