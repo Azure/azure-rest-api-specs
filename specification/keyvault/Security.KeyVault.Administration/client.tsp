@@ -26,21 +26,21 @@ namespace ClientCustomizations;
   @operationGroup
     interface KeyVaultAccessControlRestClient{
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        deleteRoleDefinitionInternal is KeyVault.RoleDefinitions.delete;
+        deleteRoleDefinition is KeyVault.RoleDefinitions.delete;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        createOrUpdateRoleDefinitionInternal is KeyVault.RoleDefinitions.createOrUpdate;
+        createOrUpdateRoleDefinition is KeyVault.RoleDefinitions.createOrUpdate;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        getRoleDefinitionInternal is KeyVault.RoleDefinitions.get;
+        getRoleDefinition is KeyVault.RoleDefinitions.get;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        listRoleDefinitionsInternal is KeyVault.RoleDefinitions.list;
+        listRoleDefinitions is KeyVault.RoleDefinitions.list;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        deleteRoleAssignmentInternal is KeyVault.RoleAssignments.delete;
+        deleteRoleAssignment is KeyVault.RoleAssignments.delete;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        createRoleAssignmentInternal is KeyVault.RoleAssignments.create;
+        createRoleAssignment is KeyVault.RoleAssignments.create;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        getRoleAssignmentInternal is KeyVault.RoleAssignments.get;
+        getRoleAssignment is KeyVault.RoleAssignments.get;
         #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        listRoleAssignmentsInternal is KeyVault.RoleAssignments.listForScope;
+        listRoleAssignments is KeyVault.RoleAssignments.listForScope;
     }
 
     @client(
