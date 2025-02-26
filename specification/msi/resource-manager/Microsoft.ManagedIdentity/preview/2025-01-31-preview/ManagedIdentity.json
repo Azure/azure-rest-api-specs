@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-11-30",
+    "version": "2025-01-31-preview",
     "title": "ManagedServiceIdentityClient",
     "description": "The Managed Service Identity Client."
   },
@@ -404,6 +404,9 @@
         "x-ms-examples": {
           "FederatedIdentityCredentialCreate": {
             "$ref": "./examples/FederatedIdentityCredentialCreate.json"
+          },
+          "FlexibleFederatedIdentityCredentialCreate": {
+            "$ref": "./examples/FlexibleFederatedIdentityCredentialCreate.json"
           }
         },
         "parameters": [
@@ -459,6 +462,9 @@
         "x-ms-examples": {
           "FederatedIdentityCredentialGet": {
             "$ref": "./examples/FederatedIdentityCredentialGet.json"
+          },
+          "FlexibleFederatedIdentityCredentialGet": {
+            "$ref": "./examples/FlexibleFederatedIdentityCredentialGet.json"
           }
         },
         "parameters": [
@@ -722,7 +728,6 @@
       "title": "Federated identity credential properties.",
       "required": [
         "issuer",
-        "subject",
         "audiences"
       ],
       "properties": {
@@ -733,7 +738,7 @@
         },
         "subject": {
           "type": "string",
-          "description": "The identifier of the external identity."
+          "description": "The identifier of the external identity. Either 'subject' or 'claimsMatchingExpression' must be defined, but not both."
         },
         "audiences": {
           "type": "array",
@@ -741,6 +746,25 @@
             "type": "string"
           },
           "description": "The list of audiences that can appear in the issued token."
+        },
+        "claimsMatchingExpression": {
+          "type": "object",
+          "description": "Object for defining the allowed identifiers of external identities. Either 'subject' or 'claimsMatchingExpression' must be defined, but not both.",
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "Wildcard-based expression for matching incoming subject claims."
+            },
+            "languageVersion": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Specifies the version of the flexible fic language used in the expression."
+            }
+          },
+          "required": [
+            "value",
+            "languageVersion"
+          ]
         }
       }
     },
