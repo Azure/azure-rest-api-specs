@@ -118,11 +118,6 @@ interface BatchClient {
 
 /* JAVA OVERRIDES */
 // Options Bag Overrides
-alias GetApplicationRequiredParameter = {
-  @doc("The ID of the Application")
-  @path
-  applicationId: string;
-};
 
 @doc("Optional parameters for Get Application operation.")
 model GetApplicationOptions {
@@ -132,7 +127,7 @@ model GetApplicationOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Custom override for Get Application operation.")
 op getApplicationCustomization(
-  ...GetApplicationRequiredParameter,
+  ...Azure.Batch.GetApplicationRequiredParameters,
 
   @doc("Optional parameters for Get Application operation.")
   options?: GetApplicationOptions,
@@ -324,6 +319,9 @@ op getApplicationCustomization(
   Access.internal,
   "java"
 );
+
+//Options Bag Overrides
+@@access(GetApplicationOptions, Access.public, "java");
 
 // model overrides
 @@access(Azure.Batch.BatchApplicationListResult, Access.public, "java");

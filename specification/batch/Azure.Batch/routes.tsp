@@ -16,6 +16,14 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.Batch;
 
+//Aliases
+
+alias GetApplicationRequiredParameters = {
+  @doc("The ID of the Application")
+  @path
+  applicationId: string;
+};
+
 // Interfaces ////////////////////
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -44,7 +52,7 @@ interface Applications {
   @route("/applications/{applicationId}")
   getApplication is ReadOperation<
     {
-      ...Client.GetApplicationRequiredParameter;
+      ...Azure.Batch.GetApplicationRequiredParameters;
     },
     BatchApplication
   >;
