@@ -42,17 +42,90 @@ model StandbyContainerGroupPoolRuntimeViewResourceProperties {
   @extension("x-ms-identifiers", [])
   instanceCountSummary: ContainerGroupInstanceCountSummary[];
 
+  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @doc("Display status of the standby pool")
+  @visibility("read")
+  status?: PoolStatus;
+
   @doc("Displays the provisioning state of the standby pool")
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @doc("Displays prediction information of the standby pool")
+  @visibility("read")
+  prediction?: StandbyContainerGroupPoolPrediction;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
 @doc("Displays the counts of container groups in each state, as known by the StandbyPool resource provider.")
 model ContainerGroupInstanceCountSummary {
+  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @doc("The zone that the provided counts are in. It will not have a value if zones are not enabled.")
+  zone?: int64;
+
   @doc("The count of pooled resources in each state.")
   @extension("x-ms-identifiers", ["state"])
-  instanceCountsByState: PoolResourceStateCount[];
+  @removed(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @renamedFrom(
+    Microsoft.StandbyPool.Versions.`2025-03-01`,
+    "instanceCountsByState"
+  )
+  oldinstanceCountsByState: PoolResourceStateCount[];
+
+  @doc("The count of pooled container groups in each state for the given zone.")
+  @extension("x-ms-identifiers", ["state"])
+  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  instanceCountsByState: PoolContainerGroupStateCount[];
+}
+
+@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@doc("The state of the pooled container groups.")
+union PoolContainerGroupState {
+  @doc("The container group is up and running.")
+  Running: "Running",
+
+  @doc("The container group is creating.")
+  Creating: "Creating",
+
+  @doc("The container group is deleting.")
+  Deleting: "Deleting",
+
+  string,
+}
+
+@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@doc("Displays the counts of pooled container groups in each state, as known by the StandbyPool resource provider.")
+model PoolContainerGroupStateCount {
+  @doc("The state that the pooled container groups count is for.")
+  state: PoolContainerGroupState;
+
+  @doc("The count of pooled container groups in the given state.")
+  count: int64;
+}
+
+@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@doc("Displays prediction information of the standby pool.")
+model StandbyContainerGroupPoolPrediction {
+  @doc("Displays the forecast information of the standby pool.")
+  @visibility("read")
+  forecastValues: StandbyContainerGroupPoolForecastValues;
+
+  @doc("Displays the UTC timestamp of when the prediction was retrieved for the standby pool.")
+  @visibility("read")
+  forecastStartTime: utcDateTime;
+
+  @doc("Displays additional information for the prediction of the standby pool.")
+  @visibility("read")
+  forecastInfo: string;
+}
+
+@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@doc("Displays the forecast information of the standby pool.")
+model StandbyContainerGroupPoolForecastValues {
+  @doc("Displays the predicted count of instances to be requested from the standby pool.")
+  @visibility("read")
+  instancesRequestedCount: int64[];
 }
 
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)

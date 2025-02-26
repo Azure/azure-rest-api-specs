@@ -41,6 +41,10 @@ model StandbyContainerGroupPoolResourceProperties {
   @doc("Specifies container group properties of standby container group pools.")
   containerGroupProperties: ContainerGroupProperties;
 
+  @doc("Specifies zones of standby container group pools.")
+  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  zones?: string[];
+
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
