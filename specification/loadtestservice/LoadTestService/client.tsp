@@ -88,6 +88,12 @@ namespace Customizations;
   "csharp"
 );
 
+// Renames for properties that had unit of duration in name
+@@clientName(AutoStopCriteria.errorRateTimeWindowInSeconds,
+  "errorRateTimeWindow",
+  "csharp,java"
+);
+
 // Suggestion to change type to Uri for csharp
 @@alternateType(TestRun.portalUrl, url, "csharp");
 @@alternateType(OptionalLoadTestConfiguration.endpointUrl, url, "csharp");

@@ -540,7 +540,8 @@ model AutoStopCriteria {
   errorRate?: float32 = 90;
 
   @doc("Time window during which the error percentage should be evaluated in seconds.")
-  errorRateTimeWindowInSeconds?: int32 = 60;
+  @encode(DurationKnownEncoding.seconds, int32)
+  errorRateTimeWindowInSeconds?: duration = duration.fromISO("PT60S");
 }
 
 @doc("Configurations for the load test.")
