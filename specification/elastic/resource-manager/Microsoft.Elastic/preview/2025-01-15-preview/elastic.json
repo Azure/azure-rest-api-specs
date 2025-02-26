@@ -2523,6 +2523,57 @@
         }
       }
     },
+    "HostingType": {
+      "enum": [
+        "Hosted",
+        "Serverless"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "HostingType"
+      }
+    },
+    "ProjectDetails": {
+      "description": "Project details of the monitor resource IF it belongs to Serverless offer kind.",
+      "type": "object",
+      "properties": {
+        "projectType": {
+          "description": "Project type; ex: Search / Observability / Security",
+          "$ref": "#/definitions/ProjectType"
+        },
+        "configurationType": {
+          "description": "Publisher ID of the plan",
+          "$ref": "#/definitions/ConfigurationType"
+        }
+      }
+    },
+    "ProjectType": {
+      "enum": [
+        "Elasticsearch",
+        "Observability",
+        "Security",
+        "NotApplicable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProjectType"
+      }
+    },
+    "ConfigurationType": {
+      "enum": [
+        "GeneralPurpose",
+        "Vector",
+        "TimeSeries",
+        "NotApplicable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ConfigurationType"
+      }
+    },
     "LiftrResourceCategories": {
       "enum": [
         "Unknown",
@@ -2594,6 +2645,14 @@
         "generateApiKey": {
           "description": "Flag to determine if User API Key has to be generated and shared.",
           "type": "boolean"
+        },
+        "hostingType": {
+          "description": "Hosting type of the monitor resource - either Hosted deployments OR Serverless Projects.",
+          "$ref": "#/definitions/HostingType"
+        },
+        "projectDetails": {
+          "description": "Project details of the monitor resource IF it belongs to Serverless offer kind.",
+          "$ref": "#/definitions/ProjectDetails"
         }
       }
     },
@@ -2650,6 +2709,10 @@
           "description": "The type of the monitor resource.",
           "type": "string",
           "readOnly": true
+        },
+        "kind": {
+          "description": "The kind of the Elastic resource - observability, security, search etc.",
+          "type": "string"
         },
         "sku": {
           "description": "SKU of the monitor resource.",
@@ -3210,19 +3273,23 @@
       "type": "object",
       "properties": {
         "partnerDeploymentName": {
-          "description": "Elastic deployment name",
+          "description": "Elastic resource name",
           "type": "string"
         },
         "partnerDeploymentUri": {
-          "description": "Deployment URL of the elasticsearch in Elastic cloud deployment.",
+          "description": "URL of the resource in Elastic cloud.",
           "type": "string"
         },
         "azureResourceId": {
-          "description": "The azure resource Id of the deployment.",
+          "description": "The azure resource Id of the resource.",
           "type": "string"
         },
         "location": {
-          "description": "The location of the deployment.",
+          "description": "The location of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The hosting type of the resource.",
           "type": "string"
         }
       }
@@ -3305,6 +3372,16 @@
         "marketplaceSaasInfo": {
           "description": "Marketplace SaaS Info of the resource.",
           "$ref": "#/definitions/MarketplaceSaaSInfo",
+          "readOnly": true
+        },
+        "projectType": {
+          "description": "Project Type - Applicable for Serverless only.",
+          "type": "string",
+          "readOnly": true
+        },
+        "configurationType": {
+          "description": "ConfigurationType Type - Applicable for Serverless only.",
+          "type": "string",
           "readOnly": true
         }
       }
