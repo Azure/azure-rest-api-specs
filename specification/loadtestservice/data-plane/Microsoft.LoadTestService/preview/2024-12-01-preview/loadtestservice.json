@@ -3271,6 +3271,30 @@
         }
       }
     },
+    "ManagedIdentityType": {
+      "type": "string",
+      "description": "Managed identity type.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System-assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identity."
+          }
+        ]
+      }
+    },
     "MetricAvailability": {
       "type": "object",
       "description": "Metric availability specifies the time grain (aggregation interval or frequency)",
@@ -4950,29 +4974,8 @@
           "description": "Resource Id of the managed identity referencing the metrics."
         },
         "engineBuiltInIdentityType": {
-          "type": "string",
-          "description": "Type of the managed identity built in load test engines",
-          "default": "SystemAssigned",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "ManagedIdentityType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "SystemAssigned",
-                "value": "SystemAssigned",
-                "description": "System-assigned managed identity."
-              },
-              {
-                "name": "UserAssigned",
-                "value": "UserAssigned",
-                "description": "User-assigned managed identity."
-              }
-            ]
-          }
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "Type of the managed identity built in load test engines"
         },
         "engineBuiltInIdentityIds": {
           "type": "array",
@@ -5163,29 +5166,8 @@
           "description": "Resource Id of the managed identity referencing the metrics."
         },
         "engineBuiltInIdentityType": {
-          "type": "string",
-          "description": "Type of the managed identity built in load test engines",
-          "default": "SystemAssigned",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "ManagedIdentityType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "SystemAssigned",
-                "value": "SystemAssigned",
-                "description": "System-assigned managed identity."
-              },
-              {
-                "name": "UserAssigned",
-                "value": "UserAssigned",
-                "description": "User-assigned managed identity."
-              }
-            ]
-          }
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "Type of the managed identity built in load test engines"
         },
         "engineBuiltInIdentityIds": {
           "type": "array",
@@ -5693,7 +5675,8 @@
         },
         "loadTestConfiguration": {
           "$ref": "#/definitions/LoadTestConfiguration",
-          "description": "The load test configuration."
+          "description": "The load test configuration.",
+          "readOnly": true
         },
         "testArtifacts": {
           "$ref": "#/definitions/TestRunArtifacts",
@@ -5922,10 +5905,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "loadTestConfiguration": {
-          "$ref": "#/definitions/LoadTestConfiguration",
-          "description": "The load test configuration."
         },
         "displayName": {
           "type": "string",
