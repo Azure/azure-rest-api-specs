@@ -4,6 +4,7 @@ import { parseArgs, ParseArgsConfig } from "node:util";
 import { getOpenapiType, getAllTags, getInputFiles } from "./markdown-parser.js";
 import { sep, dirname, join } from "path";
 import { pathExists, getPathToDependency } from "./util.js";
+// import $RefParser from "@apidevtools/json-schema-ref-parser";
 
 // 64 MiB max ouptut buffers for exec
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
@@ -98,85 +99,100 @@ async function runLintDiff(
   // TODO: NEED TO PARSE TAG CHANGES STILL
   // Basic filtering until tag parsing is brought over
 
-  // const ignoreFilesWith = ["/examples/", "/quickstart-templates/", "/scenarios/"];
-  const changedFiles = await readFileList(changedFilesPath);
-  // TODO: might not be necessary
-  // const changedReadMeFiles = changedFiles.filter(
-  //   async (file) =>
-  //     file.startsWith("specification") &&
-  //     file.endsWith(`${sep}readme.md`) &&
-  //     !ignoreFilesWith.some((ignore) => file.includes(ignore)) &&
-  //     (await pathExists(path.join(targetPath, file))),
-  // );
-
-  // TODO: Where to establish full path? (Probably sooner)
-
-  console.log(beforePath, afterPath);
-  const affectedReadmes = await getAffectedReadmeFiles(changedFiles, afterPath);
-  const affectedTags = await getAffectedTags(affectedReadmes, afterPath);
-
-  console.log(`Affected tags:\n${JSON.stringify(affectedTags)}`);
-  // console.log(`Changed files:\n${changedReadMeFiles.join("\n")}`);
-
-  // if (changedReadMeFiles.length === 0) {
-  //   console.log("No readme files changed, exiting");
-  //   return;
-  // }
-
-  const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
-  const changedFileAndTagsMap = new Map<string, string[]>();
-  for (const readmeAndTags of affectedTags) {
-    const dedupedTags = await deduplicateTags(
-      readmeAndTags.tags,
-      await readFile(join(afterPath, readmeAndTags.readme), { encoding: "utf-8" }),
-    );
-
-    changedFileAndTagsMap.set(readmeAndTags.readme, dedupedTags);
-  }
-
-  // TODO:
-  for (const file of changedFileAndTagsMap.keys()) {
-    const changedFilePath = `${afterPath}/${file}`;
-    console.log(`Linting ${changedFilePath}`);
-
-    let openApiType = await getOpenapiType(changedFilePath);
-
-    // From momentOfTruth.ts:executeAutoRestWithLintDiff
-    // This is a quick workaround for https://github.com/Azure/azure-sdk-tools/issues/6549
-    // We override the openapi-subtype with the value of openapi-type,
-    // to prevent LintDiff from reading openapi-subtype from the AutoRest config file (README)
-    // and overriding openapi-type with it.
-    let openApiSubType = openApiType;
-
-    // TODO: Is there a more syntactically graceful way to handle empty tags?
-    for (const tag of changedFileAndTagsMap.get(file) || [null]) {
-      // TODO: See tag specified in momentOfTruth.ts:executeAutoRestWithLintDiff
-      let tagArg = tag ? `--tag=${tag} ` : "";
-
-      let autorestCommand =
-        `npm exec --no -- autorest ` +
-        `--v3 ` +
-        `--spectral ` +
-        `--azure-validator ` +
-        `--semantic-validator=false ` +
-        `--model-validator=false ` +
-        `--message-format=json ` +
-        `--openapi-type=${openApiType} ` +
-        `--openapi-subtype=${openApiSubType} ` +
-        `--use=${dependenciesDir} ` +
-        `${tagArg} ` +
-        `${changedFilePath}`;
-
-      console.log(`autorest command: ${autorestCommand}`);
-      let lintDiffResult = await executeCommand(autorestCommand);
-
-      if (lintDiffResult.error) {
-        console.error("Error running autorest", lintDiffResult.error);
-        process.exit(1);
+  // Read changed files, exclude any files that should be ignored
+  const ignoreFilesWith = ["/examples/", "/quickstart-templates/", "/scenarios/"];
+  const changedFiles = (await readFileList(changedFilesPath)).filter((file) => {
+    for (const ignore of ignoreFilesWith) {
+      if (file.includes(ignore)) {
+        return false;
       }
+    }
+    return true;
+  });
 
-      // console.log("Lint diff result:", lintDiffResult.stdout);
-      console.log("Results would be written to: ", outFile);
+  for (const rootPath in [beforePath, afterPath]) {
+    // Filter changed files to include only those that exist in the rootPath
+    const existingChangedFiles = [];
+    for (const file of changedFiles) {
+      if (await pathExists(join(rootPath, file))) {
+        existingChangedFiles.push(file);
+      }
+    }
+
+    const affectedReadmes = await getAffectedReadmes(existingChangedFiles, rootPath);
+
+    // Get the affected swagger files from the existing changed files
+    // const affectedSwaggers = await getAffectedSwaggers(existingChangedFiles, rootPath);
+    // const deduplicatedAffectedFiles = Array.from(
+    //   new Set([...existingChangedFiles, ...affectedSwaggers]),
+    // );
+
+    // TODO: Fix
+    const affectedTags = await getAffectedTags(affectedReadmes, [""], rootPath);
+
+    // console.log(`Affected tags:\n${JSON.stringify(affectedTags)}`);
+    // console.log(`Changed files:\n${changedReadMeFiles.join("\n")}`);
+
+    // if (changedReadMeFiles.length === 0) {
+    //   console.log("No readme files changed, exiting");
+    //   return;
+    // }
+
+    const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
+    const changedFileAndTagsMap = new Map<string, string[]>();
+    for (const readmeAndTags of affectedTags) {
+      const dedupedTags = await deduplicateTags(
+        readmeAndTags.tags,
+        await readFile(join(afterPath, readmeAndTags.readme), { encoding: "utf-8" }),
+      );
+
+      changedFileAndTagsMap.set(readmeAndTags.readme, dedupedTags);
+    }
+
+    // TODO:
+    for (const file of changedFileAndTagsMap.keys()) {
+      const changedFilePath = `${afterPath}/${file}`;
+      console.log(`Linting ${changedFilePath}`);
+
+      let openApiType = await getOpenapiType(changedFilePath);
+
+      // From momentOfTruth.ts:executeAutoRestWithLintDiff
+      // This is a quick workaround for https://github.com/Azure/azure-sdk-tools/issues/6549
+      // We override the openapi-subtype with the value of openapi-type,
+      // to prevent LintDiff from reading openapi-subtype from the AutoRest config file (README)
+      // and overriding openapi-type with it.
+      let openApiSubType = openApiType;
+
+      // TODO: Is there a more syntactically graceful way to handle empty tags?
+      for (const tag of changedFileAndTagsMap.get(file) || [null]) {
+        // TODO: See tag specified in momentOfTruth.ts:executeAutoRestWithLintDiff
+        let tagArg = tag ? `--tag=${tag} ` : "";
+
+        let autorestCommand =
+          `npm exec --no -- autorest ` +
+          `--v3 ` +
+          `--spectral ` +
+          `--azure-validator ` +
+          `--semantic-validator=false ` +
+          `--model-validator=false ` +
+          `--message-format=json ` +
+          `--openapi-type=${openApiType} ` +
+          `--openapi-subtype=${openApiSubType} ` +
+          `--use=${dependenciesDir} ` +
+          `${tagArg} ` +
+          `${changedFilePath}`;
+
+        console.log(`autorest command: ${autorestCommand}`);
+        let lintDiffResult = await executeCommand(autorestCommand);
+
+        if (lintDiffResult.error) {
+          console.error("Error running autorest", lintDiffResult.error);
+          process.exit(1);
+        }
+
+        // console.log("Lint diff result:", lintDiffResult.stdout);
+        console.log("Results would be written to: ", outFile);
+      }
     }
   }
 }
@@ -209,12 +225,12 @@ async function readFileList(changedFilesPath: string): Promise<string[]> {
  * searching for readme files in each higher directory up to the "specification/"
  * directory.
  *
- * Mostly stands in for getReadmeDiffs in momentOfTruth.ts
- *
- * TODO: TESTS
  * @param changedFiles List of changed files.
  */
-async function getAffectedReadmeFiles(changedFiles: string[], repoRoot: string): Promise<string[]> {
+export async function getAffectedReadmes(
+  changedFiles: string[],
+  repoRoot: string,
+): Promise<string[]> {
   const changedFilesInSpecDir = changedFiles.filter((file) =>
     file.startsWith(`specification${sep}`),
   );
@@ -240,7 +256,9 @@ async function getAffectedReadmeFiles(changedFiles: string[], repoRoot: string):
   // changedFilesInSpecDir)
   for (const specFile of changedSpecFiles) {
     let dir = dirname(specFile);
-    while (!visitedFolders.has(dir)) {
+    // Exclude '.' as it is outside the specification folder for purposes of
+    // this function (avoid including root readme.md file)
+    while (!visitedFolders.has(dir) && dir !== ".") {
       visitedFolders.add(dir);
       // TODO: Case sensitivity??
       const readmeFile = join(repoRoot, dir, "readme.md");
@@ -261,8 +279,10 @@ type ReadmeAndTags = {
 
 async function getAffectedTags(
   affectedReadmes: string[],
+  affectedSwaggers: string[],
   rootPath: string,
 ): Promise<ReadmeAndTags[]> {
+  console.log(affectedSwaggers);
   let affectedTags: ReadmeAndTags[] = [];
 
   for (const readmePath of affectedReadmes) {
@@ -275,6 +295,8 @@ async function getAffectedTags(
 
   return affectedTags;
 }
+
+// async function getAffectedSwaggers(changedFiles: string[], rootPath: string): Promise<string[]> {}
 
 /**
  * Given a list of tags and the content of a readme file, find the input files
