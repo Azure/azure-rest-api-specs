@@ -1,15 +1,16 @@
 {
-  "operationId": "FleetMembers_Update",
-  "title": "Updates a FleetMember resource synchronously.",
+  "operationId": "Fleets_Update",
+  "title": "Update a Fleet.",
   "parameters": {
     "api-version": "2025-03-01",
     "subscriptionId": "subid1",
     "resourceGroupName": "rg1",
     "fleetName": "fleet1",
-    "fleetMemberName": "member-1",
+    "If-Match": "dfjkwelr7384",
     "properties": {
-      "properties": {
-        "group": "staging"
+      "tags": {
+        "tier": "secure",
+        "env": "prod"
       }
     }
   },
@@ -19,9 +20,9 @@
         "ETag": "23ujdflewrj3="
       },
       "body": {
-        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/members/member-1",
-        "name": "member-1",
-        "type": "Microsoft.ContainerService/fleets/members",
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1",
+        "name": "fleet-1",
+        "type": "Microsoft.ContainerService/fleets",
         "systemData": {
           "createdBy": "someUser",
           "createdByType": "User",
@@ -30,14 +31,23 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2022-03-23T05:40:40.657Z"
         },
+        "tags": {
+          "tier": "secure",
+          "env": "prod"
+        },
+        "location": "East US",
         "eTag": "23ujdflewrj3=",
         "properties": {
-          "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1",
-          "group": "staging",
-          "provisioningState": "Succeeded",
-          "labels": {
-            "environment": "production"
-          }
+          "hubProfile": {
+            "dnsPrefix": "dnsprefix1",
+            "fqdn": "dnsprefix1-abcd1234.flt.eastus.azmk8s.io",
+            "portalFqdn": "dnsprefix1-abcd1234.flt.eastus.azmk8s.io",
+            "kubernetesVersion": "1.22.4",
+            "agentProfile": {
+              "vmSize": "Standard_DS1"
+            }
+          },
+          "provisioningState": "Succeeded"
         }
       }
     },
