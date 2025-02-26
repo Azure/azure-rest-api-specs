@@ -77,8 +77,26 @@ namespace ClientCustomizations;
         getSettings is KeyVault.getSettings;
       }
 
-@@access(KeyVault, Access.internal, "csharp");
 @@access(KeyVault.fullBackup, Access.internal, "csharp");
+@@access(KeyVault.fullRestoreOperation, Access.internal, "csharp");
+@@access(KeyVault.fullBackupStatus, Access.internal, "csharp");
+@@access(KeyVault.preFullBackup, Access.internal, "csharp");
+@@access(KeyVault.restoreStatus, Access.internal, "csharp");
+@@access(KeyVault.preFullRestoreOperation, Access.internal, "csharp");
+@@access(KeyVault.selectiveKeyRestoreStatus, Access.internal, "csharp");
+@@access(KeyVault.selectiveKeyRestoreOperation, Access.internal, "csharp");
+@@access(KeyVault.updateSetting, Access.internal, "csharp");
+@@access(KeyVault.getSetting, Access.internal, "csharp");
+@@access(KeyVault.getSettings, Access.internal, "csharp");
+
+@@access(KeyVault.RoleDefinitions.delete, Access.internal, "csharp");
+@@access(KeyVault.RoleDefinitions.createOrUpdate, Access.internal, "csharp");
+@@access(KeyVault.RoleDefinitions.get, Access.internal, "csharp");
+@@access(KeyVault.RoleDefinitions.list, Access.internal, "csharp");
+@@access(KeyVault.RoleAssignments.delete, Access.internal, "csharp");
+@@access(KeyVault.RoleAssignments.create, Access.internal, "csharp");
+@@access(KeyVault.RoleAssignments.get, Access.internal, "csharp");
+@@access(KeyVault.RoleAssignments.listForScope, Access.internal, "csharp");
 
 @@clientName(KeyVault.Setting.type, "SettingType", "csharp");
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
