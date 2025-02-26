@@ -79,7 +79,7 @@
         "phoneNumber",
         "microsoftTeamsUser",
         "microsoftTeamsApp",
-        "teamsPhoneUser"
+        "teamsExtensionUser"
       ],
       "x-ms-enum": {
         "name": "CommunicationIdentifierModelKind",
@@ -114,9 +114,9 @@
           "$ref": "#/definitions/MicrosoftTeamsAppIdentifierModel",
           "description": "The Microsoft Teams application."
         },
-        "teamsPhoneUser": {
-          "$ref": "#/definitions/TeamsPhoneUserIdentifierModel",
-          "description": "The Microsoft Teams Phone user."
+        "teamsExtensionUser": {
+          "$ref": "#/definitions/TeamsExtensionUserIdentifierModel",
+          "description": "The Microsoft Teams Extension user."
         }
       }
     },
@@ -184,7 +184,7 @@
         }
       }
     },
-    "TeamsPhoneUserIdentifierModel": {
+    "TeamsExtensionUserIdentifierModel": {
       "description": "A Microsoft Teams Phone user who is using a Communication Services resource to extend their Teams Phone set up.",
       "type": "object",
       "required": [
@@ -194,11 +194,11 @@
       "properties": {
         "userId": {
           "type": "string",
-          "description": "The Id of the Microsoft Teams Phone user, i.e. the Entra ID object Id of the user."
+          "description": "The Id of the Microsoft Teams Extension user, i.e. the Entra ID object Id of the user."
         },
         "tenantId": {
           "type": "string",
-          "description": "The tenant Id of the Microsoft Teams Phone user."
+          "description": "The tenant Id of the Microsoft Teams Extension user."
         },
         "resourceId": {
           "type": "string",
