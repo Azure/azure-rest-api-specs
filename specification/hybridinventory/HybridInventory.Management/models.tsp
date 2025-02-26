@@ -1108,6 +1108,12 @@ model AgentProperties is AzureResourceProperties {
    * Health details of the agent.
    */
   healthDetails?: AgentHealthProperties;
+
+  /**
+   * Name of the appliance on which agent is running.
+   */
+  @visibility("read", "create")
+  fabricSiteName: string;
 }
 
 /**
