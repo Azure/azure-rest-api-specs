@@ -44,8 +44,8 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `Create or update a Footprint profile (max).`: {
+    #{
+      `Create or update a Footprint profile (max).`: #{
         $ref: "./examples/Profiles_CreateOrUpdate_MaximumSet_Gen.json",
       },
     }
@@ -73,8 +73,8 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `Delete a Footprint profile (max).`: {
+    #{
+      `Delete a Footprint profile (max).`: #{
         $ref: "./examples/Profiles_Delete_MaximumSet_Gen.json",
       },
     }
