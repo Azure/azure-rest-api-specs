@@ -26,7 +26,7 @@ using Azure.Core.Traits;
 @versioned(Microsoft.CodeTransparency.Versions)
 namespace Microsoft.CodeTransparency;
 
-@doc("The Microsoft.CodeTransparency service versions.")
+@doc("The Microsoft.CodeTransparency service versions. Test")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @doc("The 2024-01-11-preview version of the Microsoft.CodeTransparency service.")
