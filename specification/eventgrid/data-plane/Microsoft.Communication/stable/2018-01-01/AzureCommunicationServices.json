@@ -911,6 +911,50 @@
         }
       }
     },
+    "AcsChatAzureBotCommandEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AcsChatTypingIndicatorSentEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorSent event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "senderCommunicationIdentifier": {
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the sender"
+        },
+        "senderDisplayName": {
+          "type": "string",
+          "description": "The display name of the sender"
+        }
+      },
+      "required": [
+        "senderCommunicationIdentifier"
+      ]
+    },
     "AcsChatMessageReceivedInThreadEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
       "allOf": [
