@@ -29,6 +29,11 @@ using TypeSpec.Http;
   {
     @doc("The Document Intelligence service endpoint.")
     endpoint: url,
+
+    authorizationCode: {
+      @doc("The authorization code for the Document Intelligence service.")
+      code: string,
+    },
   }
 )
 namespace DocumentIntelligence;
