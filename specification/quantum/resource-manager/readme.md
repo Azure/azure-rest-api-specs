@@ -26,7 +26,8 @@ These are the global settings for Azure Quantum management SDK.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-01-01-preview
+tag: package-2025-02-15-preview
+
 modelerfour:
   flatten-models: false
 ```
@@ -65,6 +66,15 @@ These settings apply only when `--tag=package-2025-01-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-01-01-preview'
 input-file:
   - Microsoft.Quantum/preview/2025-01-01-preview/quantum.json
+```
+
+### Tag: package-2025-02-15-preview
+
+These settings apply only when `--tag=package-2025-02-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-15-preview'
+input-file:
+  - Microsoft.Quantum/preview/2025-02-15-preview/quantum.json
 ```
 
 ---
@@ -124,6 +134,15 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## Suppressions
 
 ```yaml
+directive:
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.operation.properties.isDataAction
+    from: quantum.json
+    reason: 'This property is really a boolean, there are no plans to have more than two values in the future.'
+  - suppress: AvoidNestedProperties
+    where: $.definitions.ProviderDescription.properties.properties
+    from: quantum.json
+    reason: We don't have end customers making direct API calls and this is a breaking change for our existing clients.
 suppressions:
   - code: EnumInsteadOfBoolean
     where:
