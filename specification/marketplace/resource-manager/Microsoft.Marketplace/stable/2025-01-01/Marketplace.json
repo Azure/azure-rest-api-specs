@@ -862,50 +862,6 @@
             "$ref": "./examples/GetPrivateStoreOffers.json"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "PrivateStores"
-        ],
-        "operationId": "PrivateStoreCollectionOffersWithContextsPlans_List",
-        "description": "Get a list of offers in the given private store and collection including private plans.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/CollectionIdParameter"
-          },
-          {
-            "in": "body",
-            "name": "payload",
-            "schema": {
-              "$ref": "#/definitions/GetCollectionOffersWithContextsPlansProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OfferListResponse"
-            }
-          },
-          "default": {
-            "description": "Microsoft.Marketplace error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "GetCollectionOffersWithContextsPlans": {
-            "$ref": "./examples/GetCollectionOffersWithContextsPlans.json"
-          }
-        }
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/mapOffersToContexts": {
@@ -1207,6 +1163,57 @@
         "x-ms-examples": {
           "PostPrivateStoreCollectionOffer": {
             "$ref": "./examples/PostPrivateStoreCollectionOffer.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers/{offerId}/plans": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreCollectionOfferPlansList",
+        "description": "Get a list of offer plans for given collection, considering the provided contexts.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferIdPathParameter"
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/CollectionOffersByAllContextsPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieve offer's plans considering the provided contexts.",
+            "schema": {
+              "$ref": "#/definitions/PlanListResponse"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpsertOfferWithMultiContext": {
+            "$ref": "./examples/GetCollectionOfferPlansWithContexts.json"
           }
         }
       }
@@ -2253,37 +2260,6 @@
         }
       }
     },
-    "GetCollectionOffersWithContextsPlansProperties": {
-      "description": "List of offer IDs and list of subscriptions IDs to get the offers' details",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/GetCollectionOffersWithContextsPlansDetails",
-          "description": "List of offer IDs and list of subscriptions IDs to get the offers' details",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "GetCollectionOffersWithContextsPlansDetails": {
-      "description": "List of offers IDs and list of subscriptions IDs to get the private plans besides the public plans",
-      "type": "object",
-      "properties": {
-        "offerIds": {
-          "description": "List of offer IDs. If empty, all offers within the collection will be returned.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "subscriptionIds": {
-          "description": "List of subscription IDs",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "OfferListResponse": {
       "type": "object",
       "properties": {
@@ -2513,6 +2489,25 @@
           "description": "Stack type (classic or arm)",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "PlanListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Plan"
+          },
+          "x-ms-identifiers": [
+            "planId"
+          ]
+        },
+        "nextLink": {
+          "description": "URL to get the next set of plan list results if there are any.",
+          "type": "string"
         }
       }
     },
