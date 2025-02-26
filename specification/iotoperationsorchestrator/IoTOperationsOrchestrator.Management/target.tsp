@@ -32,14 +32,14 @@ model Target is TrackedResource<TargetProperties> {
 @doc("The properties of a Target resource.")
 model TargetProperties {
   @doc("A list of components.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   components?: ComponentProperties[];
 
   @doc("Deployment scope (such as Kubernetes namespace).")
   scope?: string;
 
   @doc("Defines the device topology for a target or instance.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   topologies?: TopologiesProperties[];
 
   @doc("Reconciliation Policy.")
@@ -56,7 +56,7 @@ model TargetProperties {
 @doc("Defines a desired runtime component.")
 model TopologiesProperties {
   @doc("bindings description.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   bindings?: BindingProperties[];
 }
 

@@ -87,7 +87,7 @@ model AwsSageMakerAppProperties {
   resourceSpec?: ResourceSpec;
 
   @doc("A list of tags to apply to the app.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   tags?: Tag[];
 
   @doc("The user profile name.")

@@ -32,9 +32,7 @@ interface Clusters {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
+    #{ `final-state-via`: "location" }
   )
   @armResourceUpdate(Cluster)
   @patch

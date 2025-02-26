@@ -93,14 +93,14 @@ model AwsDaxClusterProperties {
   iamRoleArn?: string;
 
   @doc("<p>A list of nodes to be removed from the cluster.</p>")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   nodeIdsToRemove?: string[];
 
   @doc("<p>The node type for the nodes in the cluster. (All nodes in a DAX cluster are of the same type.)</p>")
   nodeType?: string;
 
   @doc("<p>A list of nodes that are currently in the cluster.</p>")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   nodes?: Node[];
 
   @doc("<p>Describes a notification topic and its status. Notification topics are used for publishing DAX events to subscribers using Amazon Simple Notification Service (SNS).</p>")
@@ -116,7 +116,7 @@ model AwsDaxClusterProperties {
   sseDescription?: SSEDescription;
 
   @doc("<p>A list of security groups, and the status of each, for the nodes in the cluster.</p>")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   securityGroups?: SecurityGroupMembership[];
 
   @doc("<p>The current status of the cluster.</p>")
@@ -211,7 +211,7 @@ model NotificationConfiguration {
 @doc("Definition of ParameterGroupStatus")
 model ParameterGroupStatus {
   @doc("<p>The node IDs of one or more nodes to be rebooted.</p>")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   nodeIdsToReboot?: string[];
 
   @doc("<p>The status of parameter updates. </p>")
