@@ -238,18 +238,6 @@ union ServiceScalingTriggerKind {
 }
 
 /**
- * The operating system of the cluster. The default means all.
- */
-union ManagedClusterVersionEnvironment {
-  string,
-
-  /**
-   * Windows.
-   */
-  Windows: "Windows",
-}
-
-/**
  * Cluster operating system, the default will be Windows
  */
 union OsType {

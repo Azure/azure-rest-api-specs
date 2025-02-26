@@ -32,9 +32,6 @@ using Microsoft.ServiceFabric;
 @@clientName(Services.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Services.update::parameters.properties, "parameters");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ManagedClusterCodeVersionResult.properties);
-
 @@clientName(ManagedClusters.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ManagedClusters.update::parameters.properties, "parameters");
 @@clientName(ManagedClusters.getFaultSimulation::parameters.body, "parameters");
@@ -46,6 +43,9 @@ using Microsoft.ServiceFabric;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ManagedCluster.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(ManagedClusterCodeVersionResult.properties);
 
 @@clientName(NodeTypes.createOrUpdate::parameters.resource, "parameters");
 @@clientName(NodeTypes.update::parameters.properties, "parameters");

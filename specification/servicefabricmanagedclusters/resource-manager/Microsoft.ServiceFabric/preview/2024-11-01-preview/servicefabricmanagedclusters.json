@@ -56,9 +56,6 @@
       "name": "Services"
     },
     {
-      "name": "ManagedClusterCodeVersionResults"
-    },
-    {
       "name": "ManagedClusterVersion"
     },
     {
@@ -112,8 +109,9 @@
       "get": {
         "operationId": "ManagedClusterVersion_ListByEnvironment",
         "tags": [
-          "ManagedClusterCodeVersionResults"
+          "ManagedClusterVersion"
         ],
+        "summary": "Gets the list of Service Fabric cluster code versions available for the specified environment.",
         "description": "Gets all available code versions for Service Fabric cluster resources by environment.",
         "parameters": [
           {
@@ -123,19 +121,45 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "description": "The location for the cluster code versions. This is different from cluster location.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "name": "environment",
             "in": "path",
-            "description": "environments",
+            "description": "The operating system of the cluster.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Windows",
+              "Linux"
+            ],
+            "x-ms-enum": {
+              "name": "Environment",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Windows",
+                  "value": "Windows",
+                  "description": "Windows."
+                },
+                {
+                  "name": "Linux",
+                  "value": "Linux",
+                  "description": "Linux"
+                }
+              ]
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
           "200": {
-            "description": "The list results of the Service Fabric runtime versions.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -161,8 +185,9 @@
       "get": {
         "operationId": "ManagedClusterVersion_GetByEnvironment",
         "tags": [
-          "ManagedClusterCodeVersionResults"
+          "ManagedClusterVersion"
         ],
+        "summary": "Gets information about a Service Fabric cluster code version available for the specified environment.",
         "description": "Gets information about an available Service Fabric cluster code version by environment.",
         "parameters": [
           {
@@ -172,21 +197,48 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "description": "The location for the cluster code versions. This is different from cluster location.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "name": "environment",
             "in": "path",
-            "description": "environments",
+            "description": "The operating system of the cluster.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Windows",
+              "Linux"
+            ],
+            "x-ms-enum": {
+              "name": "Environment",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Windows",
+                  "value": "Windows",
+                  "description": "Windows."
+                },
+                {
+                  "name": "Linux",
+                  "value": "Linux",
+                  "description": "Linux"
+                }
+              ]
+            },
+            "x-ms-parameter-location": "method"
           },
           {
             "name": "clusterVersion",
             "in": "path",
-            "description": "The name of the ManagedClusterCodeVersionResult",
+            "description": "The cluster code version.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
@@ -316,6 +368,7 @@
         "tags": [
           "ManagedClusterVersion"
         ],
+        "summary": "Gets the list of Service Fabric cluster code versions available for the specified location.",
         "description": "Gets all available code versions for Service Fabric cluster resources by location.",
         "parameters": [
           {
@@ -325,12 +378,17 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "description": "The location for the cluster code versions. This is different from cluster location.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
           "200": {
-            "description": "The list results of the Service Fabric runtime versions.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -358,6 +416,7 @@
         "tags": [
           "ManagedClusterVersion"
         ],
+        "summary": "Gets information about a Service Fabric managed cluster code version available in the specified location.",
         "description": "Gets information about an available Service Fabric managed cluster code version.",
         "parameters": [
           {
@@ -367,14 +426,20 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "description": "The location for the cluster code versions. This is different from cluster location.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "name": "clusterVersion",
             "in": "path",
-            "description": "The name of the ManagedClusterCodeVersionResult",
+            "description": "The cluster code version.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
@@ -5079,17 +5144,24 @@
       "type": "object",
       "description": "The result of the Service Fabric runtime versions",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identification of the result"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the result"
+        },
+        "type": {
+          "type": "string",
+          "description": "The result resource type"
+        },
         "properties": {
           "$ref": "#/definitions/ManagedClusterVersionDetails",
           "description": "The detail of the Service Fabric runtime version result",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "ManagedClusterListResult": {
       "type": "object",
