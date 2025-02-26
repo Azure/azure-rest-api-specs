@@ -561,19 +561,21 @@ using Microsoft.EventGrid.SystemEvents;
   "go"
 );
 @@clientName(AcsSmsDeliveryAttemptProperties,
-  "ACSSmsDeliveryAttemptProperties",
+  "ACSSMSDeliveryAttemptProperties",
   "go"
 );
 @@clientName(AcsSmsDeliveryReportReceivedEventData,
-  "ACSSmsDeliveryReportReceivedEventData",
+  "ACSSMSDeliveryReportReceivedEventData",
   "go"
 );
-@@clientName(AcsSmsEventBaseProperties, "ACSSmsEventBaseProperties", "go");
-@@clientName(AcsSmsReceivedEventData, "ACSSmsReceivedEventData", "go");
+@@clientName(AcsSmsEventBaseProperties, "ACSSMSEventBaseProperties", "go");
+@@clientName(AcsSmsReceivedEventData, "ACSSMSReceivedEventData", "go");
 @@clientName(AcsUserDisconnectedEventData,
   "ACSUserDisconnectedEventData",
   "go"
 );
+
 @@clientName(AcsUserEngagement, "ACSUserEngagement", "go");
+@@clientName(AcsMessageReactionContent, "ACSMessageReactionContent", "go");
 
 // [END] ACS renames (and acronym casing)
