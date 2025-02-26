@@ -1,5 +1,5 @@
 import { execa } from "execa";
-import { afterEach, test, vi } from "vitest";
+import { test, vi } from "vitest";
 import { getAffectedReadmes } from "../src/lint-diff.js";
 import { beforeEach, describe } from "node:test";
 import { vol } from "memfs";
