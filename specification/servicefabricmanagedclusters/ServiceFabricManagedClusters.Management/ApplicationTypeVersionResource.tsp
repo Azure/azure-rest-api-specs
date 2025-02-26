@@ -16,13 +16,21 @@ namespace Microsoft.ServiceFabric;
  */
 @parentResource(ApplicationTypeResource)
 model ApplicationTypeVersionResource
-  is Azure.ResourceManager.TrackedResource<ApplicationTypeVersionResourceProperties> {
+  is Azure.ResourceManager.ProxyResource<ApplicationTypeVersionResourceProperties> {
   ...ResourceNameParameter<
     Resource = ApplicationTypeVersionResource,
     KeyName = "version",
     SegmentName = "versions",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility("create", "read")
+  location?: string;
 }
 
 @armResourceOperations

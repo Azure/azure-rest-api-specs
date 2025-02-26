@@ -14,19 +14,27 @@ namespace Microsoft.ServiceFabric;
  * The application resource.
  */
 model ApplicationResource
-  is Azure.ResourceManager.TrackedResource<ApplicationResourceProperties> {
+  is Azure.ResourceManager.ProxyResource<ApplicationResourceProperties> {
   ...ResourceNameParameter<
     Resource = ApplicationResource,
     KeyName = "applicationName",
     SegmentName = "applications",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /**
    * Describes the managed identities for an Azure resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backwards compatibility with existing spec"
   identity?: ManagedIdentity;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility("create", "read")
+  location?: string;
 }
 
 @armResourceOperations

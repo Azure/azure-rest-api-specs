@@ -14,13 +14,21 @@ namespace Microsoft.ServiceFabric;
  * The application type name resource
  */
 model ApplicationTypeResource
-  is Azure.ResourceManager.TrackedResource<ApplicationTypeResourceProperties> {
+  is Azure.ResourceManager.ProxyResource<ApplicationTypeResourceProperties> {
   ...ResourceNameParameter<
     Resource = ApplicationTypeResource,
     KeyName = "applicationTypeName",
     SegmentName = "applicationTypes",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility("create", "read")
+  location?: string;
 }
 
 @armResourceOperations
