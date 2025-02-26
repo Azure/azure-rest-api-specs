@@ -29,6 +29,8 @@ interface OperationResults {
     /**
      * operation identifier.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     operationId: string,
   ):
@@ -55,6 +57,8 @@ interface OperationStatus {
     /**
      * operation identifier.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     operationId: string,
   ): ArmResponse<LongRunningOperationResult> | ErrorResponse;
