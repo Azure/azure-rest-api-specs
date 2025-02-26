@@ -31,7 +31,7 @@ interface WorkloadNetworkSegments {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateSegments")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<WorkloadNetworkSegment, WorkloadNetworkSegment>;
 
   #suppress "deprecated"

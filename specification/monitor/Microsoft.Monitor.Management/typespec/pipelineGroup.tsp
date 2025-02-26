@@ -257,7 +257,7 @@ interface PipelineGroups {
   delete is ArmResourceDeleteWithoutOkAsync<PipelineGroup>;
 
   @doc("Updates a pipeline group instance")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PipelineGroup,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

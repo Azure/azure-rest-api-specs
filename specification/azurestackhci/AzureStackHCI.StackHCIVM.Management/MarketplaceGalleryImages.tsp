@@ -43,7 +43,7 @@ interface MarketplaceGalleryImages {
   >;
 
   @doc("The operation to update a marketplace gallery image.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<MarketplaceGalleryImage>;
 
   @doc("The operation to delete a marketplace gallery image.")

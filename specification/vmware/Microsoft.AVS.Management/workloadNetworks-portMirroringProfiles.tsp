@@ -34,7 +34,7 @@ interface WorkloadNetworkPortMirroringProfiles {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdatePortMirroring")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     WorkloadNetworkPortMirroring,
     WorkloadNetworkPortMirroring

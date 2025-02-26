@@ -42,7 +42,7 @@ interface LogicalNetworks {
   >;
 
   @doc("The operation to update a logical network.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<LogicalNetwork, LogicalNetworksUpdateRequest>;
 
   @doc("The operation to delete a logical network.")

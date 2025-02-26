@@ -42,7 +42,7 @@ interface GalleryImages {
   >;
 
   @doc("The operation to update a gallery image.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<GalleryImage>;
 
   @doc("The operation to delete a gallery image.")

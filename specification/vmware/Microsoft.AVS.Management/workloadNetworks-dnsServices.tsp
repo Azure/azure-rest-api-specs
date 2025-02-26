@@ -37,7 +37,7 @@ interface WorkloadNetworkDnsServices {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsService")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     WorkloadNetworkDnsService,
     WorkloadNetworkDnsService

@@ -41,7 +41,7 @@ interface Monitors {
   /**
    * Patches the Tags field of a SAP monitor for the specified subscription, resource group, and SAP monitor name.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Monitor, UpdateMonitorRequest>;
 
   /**

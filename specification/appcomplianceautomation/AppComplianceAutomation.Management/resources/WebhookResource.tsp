@@ -66,7 +66,7 @@ interface Webhook {
    * Update an exiting AppComplianceAutomation webhook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("Webhook_Update")
   update is ArmCustomPatchSync<
     WebhookResource,

@@ -45,7 +45,7 @@ interface VirtualMachineInstances {
   >;
 
   @doc("The operation to update a virtual machine instance.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
     VirtualMachineInstanceUpdateRequest

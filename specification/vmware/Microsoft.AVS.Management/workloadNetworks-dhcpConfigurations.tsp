@@ -41,7 +41,7 @@ interface WorkloadNetworkDhcpConfigurations {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDhcp")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcp>;
 
   #suppress "deprecated"

@@ -42,7 +42,7 @@ interface SAPInstances {
   /**
    * Updates the SAP Instance resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmTagsPatchSync<SAPInstance>;
 
   /**

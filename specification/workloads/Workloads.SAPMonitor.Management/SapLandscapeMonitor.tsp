@@ -44,7 +44,7 @@ interface SapLandscapeMonitor {
   /**
    * Patches the SAP Landscape Monitor Dashboard for the specified subscription, resource group, and SAP monitor name.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     SapLandscapeMonitorResource,
     SapLandscapeMonitorResource

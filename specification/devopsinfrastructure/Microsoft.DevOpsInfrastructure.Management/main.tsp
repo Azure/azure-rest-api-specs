@@ -448,7 +448,7 @@ interface Pools {
     Pool,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Pool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<Pool, PoolProperties>

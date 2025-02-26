@@ -90,7 +90,7 @@ interface StandbyVirtualMachinePools {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     StandbyVirtualMachinePoolResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
