@@ -1605,6 +1605,12 @@
           }
         ],
         "responses": {
+          "200" : {
+            "description": "Resource backup Validation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreValidationResponse"
+            }
+          },
           "202": {
             "description": "Accepted -- Resource backup Validation request accepted; operation will complete asynchronously."
           },
@@ -1660,6 +1666,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource Restore Validation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreValidationResponse"
+            }
+          },
           "202": {
             "description": "Accepted -- Resource Restore Validation request accepted; operation will complete asynchronously."
           },
@@ -2885,7 +2897,18 @@
           "description": "array of DiskSnapshot ARM IDs",
           "items": {
             "type": "string",
+            "format": "arm-id",
             "description": "Fully qualified ARM Resource ID of Disk Snapshot"
+          }
+        }
+      },
+      "PreValidationResponse": {
+        "type": "object",
+        "description": "response object for pre validation api",
+        "properties": {
+          "validationStatus": {
+            "type": "string",
+            "description": "a status value indicating success or failure of validation"
           }
         }
       }
