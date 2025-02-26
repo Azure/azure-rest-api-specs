@@ -146,11 +146,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Label history deleted successfully."
+          "200": {
+            "description": "Ok."
           },
-          "409": {
-            "description": "Conflict."
+          "204": {
+            "description": "No Content."
           },
           "default": {
             "description": "Common error response.",
@@ -226,6 +226,10 @@
             "Failed",
             "Starting"
           ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          },
           "readOnly": true
         }
       }
