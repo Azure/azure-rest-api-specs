@@ -54,6 +54,17 @@ suppressions:
     reason: Operation APIs for Microsoft.Cdn are to be defined in cdn swagger
 ```
 
+### Tag: package-preview-2025-01
+
+These settings apply only when `--tag=package-preview-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-01'
+input-file:
+  - Microsoft.Cdn/preview/2025-01-01-preview/afdx.json
+  - Microsoft.Cdn/preview/2025-01-01-preview/cdn.json
+  - Microsoft.Cdn/preview/2025-01-01-preview/cdnwebapplicationfirewall.json
+```
+
 ### Tag: package-2024-09
 
 These settings apply only when `--tag=package-2024-09` is specified on the command line.
