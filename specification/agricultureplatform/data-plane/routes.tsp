@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace AzureAgFoodPlatformDataPlaneService;
+namespace Microsoft.AgriculturePlatform;
 
 alias ServiceTraits = SupportsRepeatableRequests;
 

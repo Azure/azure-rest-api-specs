@@ -1,21 +1,38 @@
+parameters:
+  "service-dir":
+    default: "sdk/agricultureplatform"
 emit:
   - "@azure-tools/typespec-autorest"
+# linter:
+#   extends:
+#     - "@azure-tools/typespec-azure-rulesets/data-plane"
 
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     examples-dir: "{project-root}/examples"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
-  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
-  # "@azure-tools/typespec-python":
-  #   "basic-setup-py": true
-  #   "package-version":
-  #   "package-name":
-  #   "output-path":
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
-  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
-  # "@azure-tools/typespec-ts": true
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/agricultureplatform.json"
+  "@azure-tools/typespec-python":
+    package-dir: "microsoft-agricultureplatform"
+    package-name: "{package-dir}"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Microsoft.AgriculturePlatform"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "agricultureplatform"
+    azureSdkForJs: true
+    packageDetails:
+      name: "@azure-rest/agricultureplatform"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "microsoft-agricultureplatform"
+    namespace: com.microsoft.agricultureplatform
+    service-name: "agricultureplatform"
+    flavor: azure

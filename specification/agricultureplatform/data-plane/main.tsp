@@ -20,17 +20,17 @@ using TypeSpec.Versioning;
  */
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Authorization">)
 @service({
-  title: "Azure AgFoodPlatform Data Plane Service",
+  title: "Microsoft.AgriculturePlatform Data Plane Service",
 })
 @versioned(Versions)
 @server(
   "{$host}",
-  "APIs documentation for Azure AgPlatform DataPlane Service.",
+  "APIs documentation for Microsoft.AgriculturePlatform DataPlane Service.",
   {
     $host: string,
   }
 )
-namespace AzureAgFoodPlatformDataPlaneService;
+namespace Microsoft.AgriculturePlatform;
 
 /**
  * The available API versions.

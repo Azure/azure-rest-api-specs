@@ -4,7 +4,7 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace AzureAgFoodPlatformDataPlaneService;
+namespace Microsoft.AgriculturePlatform;
 
 /**
  * Type of relationship.
