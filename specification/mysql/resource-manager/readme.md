@@ -28,11 +28,11 @@ These are the global settings for the MySql API.
 title: MySQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2024-06-01-preview
+tag: package-flexibleserver-2024-10-01-preview
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2024-06-01-preview
+tag: package-flexibleserver-2024-10-01-preview
 ```
 
 ``` yaml $(package-singleservers)
@@ -461,6 +461,42 @@ suppressions:
     reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
 ```
 
+### Tag: package-flexibleserver-2024-10-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2024-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2024-10-01-preview'
+input-file:
+- Microsoft.DBforMySQL/AAD/stable/2023-12-30/AzureADAdministrator.json
+- Microsoft.DBforMySQL/Backups/stable/2023-12-30/Backups.json
+- Microsoft.DBforMySQL/Backups/stable/2023-12-30/BackupAndExport.json
+- Microsoft.DBforMySQL/Backups/stable/2023-12-30/LongRunningBackups.json
+- Microsoft.DBforMySQL/Configurations/stable/2023-12-30/Configurations.json
+- Microsoft.DBforMySQL/Databases/stable/2023-12-30/Databases.json
+- Microsoft.DBforMySQL/Firewall/stable/2023-12-30/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2024-10-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2024-10-01-preview/AdvancedThreatProtectionSettings.json
+- Microsoft.DBforMySQL/LogFiles/stable/2023-12-30/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2024-10-01-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/Maintenance/stable/2023-12-30/Maintenances.json
+suppressions:
+  - code: PostOperationAsyncResponseValidation
+    from: FlexibleServers.json
+    reason: This check is optional.
+  - code: PutResponseCodes
+    from: LongRunningBackups.json
+    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
+  - code: PutResponseCodes
+    from: AdvancedThreatProtectionSettings.json
+    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
+  - code: PutInOperationName
+    from: AdvancedThreatProtectionSettings.json
+    reason: "This API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario"
+  - code: AllProxyResourcesShouldHaveDelete
+    from: AdvancedThreatProtectionSettings.json
+    reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
+```
+
 ### Tag: package-flexibleserver-2023-06-30-privatelink
 
 These settings apply only when `--tag=package-flexibleserver-2023-06-30-privatelink` is specified on the command line.
@@ -535,7 +571,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -543,20 +579,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-### C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.MySQL
-  output-folder: $(csharp-sdks-folder)/mysql/Microsoft.Azure.Management.MySQL/src/mysql/Generated
-  clear-output-folder: true
 ```
 
 ## Python
