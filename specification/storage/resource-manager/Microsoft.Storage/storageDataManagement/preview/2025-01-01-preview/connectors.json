@@ -516,7 +516,8 @@
       "description": "The auth properties for bucket connection.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AuthType"
+          "$ref": "#/definitions/AuthType",
+          "description": "The auth type for bucket connection."
         }
       },
       "discriminator": "type",
@@ -529,7 +530,8 @@
       "description": "The auth properties for bucket connection.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AuthType"
+          "$ref": "#/definitions/AuthType",
+          "description": "The auth type for bucket connection."
         }
       },
       "discriminator": "type",
@@ -610,7 +612,11 @@
       "properties": {
         "connection": {
           "$ref": "#/definitions/Connection",
-          "description": "Details for how to connect to the backing data store."
+          "description": "Details for how to connect to the backing data store.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "authProperties": {
           "$ref": "#/definitions/AuthProperties",
@@ -618,7 +624,11 @@
         },
         "hostOverride": {
           "type": "string",
-          "description": "The host to use when computing the signature for requests to the backing data store. If not provided, defaults to what is provided in the endpoint for the connection."
+          "description": "The host to use when computing the signature for requests to the backing data store. If not provided, defaults to what is provided in the endpoint for the connection.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -636,17 +646,9 @@
       "type": "object",
       "description": "The properties of the backing data store.",
       "properties": {
-        "connection": {
-          "$ref": "#/definitions/ConnectionUpdate",
-          "description": "Details for how to connect to the backing data store."
-        },
         "authProperties": {
           "$ref": "#/definitions/AuthPropertiesUpdate",
           "description": "Details for how to authenticate to the backing data store."
-        },
-        "hostOverride": {
-          "type": "string",
-          "description": "The host to use when computing the signature for requests to the backing data store. If not provided, defaults to what is provided in the endpoint for the connection."
         }
       },
       "allOf": [
@@ -662,7 +664,11 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/ConnectionType",
-          "description": "Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object."
+          "description": "Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object. Not mutable once the Storage Connector is created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "discriminator": "type",
@@ -687,20 +693,6 @@
           }
         ]
       }
-    },
-    "ConnectionUpdate": {
-      "type": "object",
-      "description": "Details related to the type of bucket connection",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ConnectionType",
-          "description": "Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
     },
     "Connector": {
       "type": "object",
@@ -749,25 +741,25 @@
         },
         "state": {
           "type": "string",
-          "description": "State - Enabled or Disabled. Whether or not the Storage Connector should start as enabled (default: Enabled) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)",
-          "default": "Enabled",
+          "description": "State - Active or Inactive. Whether or not the Storage Connector should start as active (default: Active) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)",
+          "default": "Active",
           "enum": [
-            "Enabled",
-            "Disabled"
+            "Active",
+            "Inactive"
           ],
           "x-ms-enum": {
             "name": "State",
             "modelAsString": true,
             "values": [
               {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Whether the connector is enabled"
+                "name": "Active",
+                "value": "Active",
+                "description": "Whether the connector is active"
               },
               {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Whether the connector is disabled"
+                "name": "Inactive",
+                "value": "Inactive",
+                "description": "Whether the connector is inactive"
               }
             ]
           }
@@ -787,6 +779,7 @@
           "description": "Test connection to backing data source before creating the storage connector.",
           "default": false,
           "x-ms-mutability": [
+            "update",
             "create"
           ]
         },
@@ -794,6 +787,7 @@
           "$ref": "#/definitions/DataSourceType",
           "description": "The source of the backing data source.",
           "x-ms-mutability": [
+            "read",
             "create"
           ]
         },
@@ -818,25 +812,25 @@
       "properties": {
         "state": {
           "type": "string",
-          "description": "State - Enabled or Disabled. Whether or not the Storage Connector should start as enabled (default: Enabled) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)",
-          "default": "Enabled",
+          "description": "State - Active or Inactive. Whether or not the Storage Connector should start as active (default: Active) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)",
+          "default": "Active",
           "enum": [
-            "Enabled",
-            "Disabled"
+            "Active",
+            "Inactive"
           ],
           "x-ms-enum": {
             "name": "State",
             "modelAsString": true,
             "values": [
               {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Whether the connector is enabled"
+                "name": "Active",
+                "value": "Active",
+                "description": "Whether the connector is active"
               },
               {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Whether the connector is disabled"
+                "name": "Inactive",
+                "value": "Inactive",
+                "description": "Whether the connector is inactive"
               }
             ]
           }
@@ -845,6 +839,15 @@
           "type": "string",
           "description": "Arbitrary description of this Storage Connector. Max 250 characters.",
           "maxLength": 250
+        },
+        "testConnection": {
+          "type": "boolean",
+          "description": "Test connection to backing data source before creating the storage connector.",
+          "default": false,
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         },
         "source": {
           "$ref": "#/definitions/SourceUpdate",
@@ -916,7 +919,11 @@
         "endpoint": {
           "type": "string",
           "description": "Endpoint to connect to, including the protocol (http vs https), the host name, the port if applicable (defaulting to 80 or 443), and the path if applicable. Samples: https://203.0.113.1:9000/AllowSelfSignedCerts Bucket: https://data.contoso.com/bucketname .",
-          "minLength": 4
+          "minLength": 4,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tlsVerification": {
           "type": "string",
@@ -941,7 +948,11 @@
                 "description": "Use AllowSelfSignedCerts as TlsVerification"
               }
             ]
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -950,48 +961,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/Connection"
-        }
-      ],
-      "x-ms-discriminator-value": "Endpoint"
-    },
-    "EndpointConnectionUpdate": {
-      "type": "object",
-      "description": "Details related to endpoint based bucket connection",
-      "properties": {
-        "endpoint": {
-          "type": "string",
-          "description": "Endpoint to connect to, including the protocol (http vs https), the host name, the port if applicable (defaulting to 80 or 443), and the path if applicable. Samples: https://203.0.113.1:9000/AllowSelfSignedCerts Bucket: https://data.contoso.com/bucketname .",
-          "minLength": 4
-        },
-        "tlsVerification": {
-          "type": "string",
-          "description": "Options - Perform or Skip (default: Perform)  If this is set to “Skip”, Azure Storage will not verify the certificate chain of TLS connections to a root CA. Set this to “Skip” if the backing data store uses a self-signed cert. Ignored if the endpoint field does not use HTTPS.",
-          "default": "Perform",
-          "enum": [
-            "Perform",
-            "AllowSelfSignedCerts"
-          ],
-          "x-ms-enum": {
-            "name": "TlsVerification",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Perform",
-                "value": "Perform",
-                "description": "Perform TLS Verification"
-              },
-              {
-                "name": "AllowSelfSignedCerts",
-                "value": "AllowSelfSignedCerts",
-                "description": "Use AllowSelfSignedCerts as TlsVerification"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionUpdate"
         }
       ],
       "x-ms-discriminator-value": "Endpoint"

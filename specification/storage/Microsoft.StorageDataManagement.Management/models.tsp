@@ -20,8 +20,8 @@ model ConnectorProperties {
   @doc("System-generated identifier for the Storage Connector. Not a valid input parameter when creating.")
   uniqueId?: string;
 
-  @doc("State - Enabled or Disabled. Whether or not the Storage Connector should start as enabled (default: Enabled) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)")
-  state?: State = State.Enabled;
+  @doc("State - Active or Inactive. Whether or not the Storage Connector should start as active (default: Active) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)")
+  state?: State = State.Active;
 
   @visibility("read")
   @doc("System-generated creation time for the Storage Connector. Not a valid input parameter when creating.")
@@ -31,11 +31,11 @@ model ConnectorProperties {
   @maxLength(250)
   description?: string;
 
-  @visibility("create")
+  @visibility("create", "update")
   @doc("Test connection to backing data source before creating the storage connector.")
   testConnection?: boolean = false;
 
-  @visibility("create")
+  @visibility("create", "read")
   @doc("The source of the backing data source.")
   dataSourceType: DataSourceType;
 
@@ -61,12 +61,14 @@ model BucketSource extends Source {
   type: SourceType.Bucket;
 
   @doc("Details for how to connect to the backing data store.")
+  @visibility("create", "read")
   connection: Connection;
 
   @doc("Details for how to authenticate to the backing data store.")
   authProperties: AuthProperties;
 
   @doc("The host to use when computing the signature for requests to the backing data store. If not provided, defaults to what is provided in the endpoint for the connection.")
+  @visibility("create", "read")
   hostOverride?: string;
 }
 
@@ -74,7 +76,8 @@ model BucketSource extends Source {
 @discriminator("type")
 @doc("Details related to the type of bucket connection")
 model Connection {
-  @doc("Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object.")
+  @doc("Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object. Not mutable once the Storage Connector is created.")
+  @visibility("create", "read")
   type: ConnectionType;
 }
 
@@ -85,9 +88,11 @@ model EndpointConnection extends Connection {
 
   @doc("Endpoint to connect to, including the protocol (http vs https), the host name, the port if applicable (defaulting to 80 or 443), and the path if applicable. Samples: https://203.0.113.1:9000/AllowSelfSignedCerts Bucket: https://data.contoso.com/bucketname .")
   @minLength(4)
+  @visibility("create", "read")
   endpoint: string;
 
   @doc("Options - Perform or Skip (default: Perform)  If this is set to “Skip”, Azure Storage will not verify the certificate chain of TLS connections to a root CA. Set this to “Skip” if the backing data store uses a self-signed cert. Ignored if the endpoint field does not use HTTPS.")
+  @visibility("create", "read")
   tlsVerification?: TlsVerification = TlsVerification.Perform;
 }
 
@@ -95,6 +100,7 @@ model EndpointConnection extends Connection {
 @discriminator("type")
 @doc("The auth properties for bucket connection.")
 model AuthProperties {
+  @doc("The auth type for bucket connection.")
   type: AuthType;
 }
 
