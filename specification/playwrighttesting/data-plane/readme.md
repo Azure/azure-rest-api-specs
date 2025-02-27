@@ -26,10 +26,38 @@ These are the global settings for the playwrighttesting.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2023-10-01-preview
-title: [[Title]]
+tag: package-2024-12-01
+title: PlaywrightTestingClient
 security: AADToken
-security-scopes: [[SecurityScopes]]
+#security-scopes: [[SecurityScopes]]
+```
+
+### Tag: package-2024-12-01
+
+These settings apply only when `--tag=package-2024-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-01'
+input-file:
+  - Microsoft.PlaywrightTesting.AuthManager/stable/2024-12-01/playwrighttesting.json
+suppressions:
+  - code: ValidResponseCodeRequired
+    from: playwrighttesting.json
+    reason: Need 302 response code as a product requirement to redirect the client for test execution on remote browsers provided by the service.
+    where:
+      - $.paths["/accounts/{accountId}/browsers"].get.responses
+  - code: SecurityDefinitionDescription
+    from: playwrighttesting.json
+    reason: Seems like a tool bug, as the description is added in the TypeSpec already.
+  - code: PathParameterSchema
+    from: playwrighttesting.json
+    reason: No provision to define path parameter schema for custom routes of rpc operations in Typespec.
+    where:
+      - $.paths["/accounts/{accountId}/browsers"].get.parameters[1]
+  - code: OperationId
+    from: playwrighttesting.json
+    reason: Inconsistency with Typespec nomenclature to use create and replace for put while update is used for patch api.
+    where:
+      - $.paths["/accounts/{accountId}/access-tokens/{accessTokenId}"].put.operationId
 ```
 
 ### Tag: package-2023-10-01-preview
@@ -53,5 +81,5 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
 ```

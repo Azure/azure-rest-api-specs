@@ -1,0 +1,617 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ConfigServiceConfigurationRecorderStatuses"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/configServiceConfigurationRecorderStatuses": {
+      "get": {
+        "operationId": "ConfigServiceConfigurationRecorderStatuses_ListBySubscription",
+        "tags": [
+          "ConfigServiceConfigurationRecorderStatuses"
+        ],
+        "description": "List ConfigServiceConfigurationRecorderStatus resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorderStatusListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceConfigurationRecorderStatuses_ListBySubscription": {
+            "$ref": "./examples/ConfigServiceConfigurationRecorderStatuses_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/configServiceConfigurationRecorderStatuses": {
+      "get": {
+        "operationId": "ConfigServiceConfigurationRecorderStatuses_ListByResourceGroup",
+        "tags": [
+          "ConfigServiceConfigurationRecorderStatuses"
+        ],
+        "description": "List ConfigServiceConfigurationRecorderStatus resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorderStatusListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceConfigurationRecorderStatuses_ListByResourceGroup": {
+            "$ref": "./examples/ConfigServiceConfigurationRecorderStatuses_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/configServiceConfigurationRecorderStatuses/{name}": {
+      "get": {
+        "operationId": "ConfigServiceConfigurationRecorderStatuses_Get",
+        "tags": [
+          "ConfigServiceConfigurationRecorderStatuses"
+        ],
+        "description": "Get a ConfigServiceConfigurationRecorderStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ConfigServiceConfigurationRecorderStatus",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorderStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceConfigurationRecorderStatuses_Get": {
+            "$ref": "./examples/ConfigServiceConfigurationRecorderStatuses_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigServiceConfigurationRecorderStatuses_CreateOrReplace",
+        "tags": [
+          "ConfigServiceConfigurationRecorderStatuses"
+        ],
+        "description": "Create a ConfigServiceConfigurationRecorderStatus. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ConfigServiceConfigurationRecorderStatus",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorderStatus"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConfigServiceConfigurationRecorderStatus' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorderStatus"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConfigServiceConfigurationRecorderStatus' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorderStatus"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceConfigurationRecorderStatuses_CreateOrReplace": {
+            "$ref": "./examples/ConfigServiceConfigurationRecorderStatuses_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ConfigServiceConfigurationRecorderStatuses_Update",
+        "tags": [
+          "ConfigServiceConfigurationRecorderStatuses"
+        ],
+        "description": "Update a ConfigServiceConfigurationRecorderStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ConfigServiceConfigurationRecorderStatus",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorderStatusTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorderStatus"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceConfigurationRecorderStatuses_Update": {
+            "$ref": "./examples/ConfigServiceConfigurationRecorderStatuses_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ConfigServiceConfigurationRecorderStatuses_Delete",
+        "tags": [
+          "ConfigServiceConfigurationRecorderStatuses"
+        ],
+        "description": "Delete a ConfigServiceConfigurationRecorderStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ConfigServiceConfigurationRecorderStatus",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceConfigurationRecorderStatuses_Delete": {
+            "$ref": "./examples/ConfigServiceConfigurationRecorderStatuses_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsConfigServiceConfigurationRecorderStatusProperties": {
+      "type": "object",
+      "description": "Definition of awsConfigServiceConfigurationRecorderStatus",
+      "properties": {
+        "lastErrorCode": {
+          "type": "string",
+          "description": "<p>The latest error code from when the recorder last failed.</p>"
+        },
+        "lastErrorMessage": {
+          "type": "string",
+          "description": "<p>The latest error message from when the recorder last failed.</p>"
+        },
+        "lastStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time the recorder was last started.</p>"
+        },
+        "lastStatus": {
+          "$ref": "#/definitions/RecorderStatusEnumValue",
+          "description": "<p>The status of the latest recording event processed by the recorder.</p>"
+        },
+        "lastStatusChangeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time of the latest change in status of an recording event processed by the recorder.</p>"
+        },
+        "lastStopTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time the recorder was last stopped.</p>"
+        },
+        "name": {
+          "type": "string",
+          "description": "<p>The name of the configuration recorder.</p>"
+        },
+        "recording": {
+          "type": "boolean",
+          "description": "<p>Specifies whether or not the recorder is currently recording.</p>"
+        }
+      }
+    },
+    "ConfigServiceConfigurationRecorderStatus": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigServiceConfigurationRecorderStatusProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ConfigServiceConfigurationRecorderStatusListResult": {
+      "type": "object",
+      "description": "The response of a ConfigServiceConfigurationRecorderStatus list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConfigServiceConfigurationRecorderStatus items on this page",
+          "items": {
+            "$ref": "#/definitions/ConfigServiceConfigurationRecorderStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConfigServiceConfigurationRecorderStatusProperties": {
+      "type": "object",
+      "description": "Definition of ConfigServiceConfigurationRecorderStatus",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsConfigServiceConfigurationRecorderStatusProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfigServiceConfigurationRecorderStatusTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ConfigServiceConfigurationRecorderStatus resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RecorderStatus": {
+      "type": "string",
+      "description": "RecorderStatus enum",
+      "enum": [
+        "Failure",
+        "Pending",
+        "Success"
+      ],
+      "x-ms-enum": {
+        "name": "RecorderStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Failure",
+            "value": "Failure",
+            "description": "RecorderStatus enum Failure"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "RecorderStatus enum Pending"
+          },
+          {
+            "name": "Success",
+            "value": "Success",
+            "description": "RecorderStatus enum Success"
+          }
+        ]
+      }
+    },
+    "RecorderStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of RecorderStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/RecorderStatus",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

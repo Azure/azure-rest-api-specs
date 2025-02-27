@@ -1,0 +1,970 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.DurableTask",
+    "version": "2024-10-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Schedulers"
+    },
+    {
+      "name": "TaskHubs"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.DurableTask/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DurableTask/schedulers": {
+      "get": {
+        "operationId": "Schedulers_ListBySubscription",
+        "tags": [
+          "Schedulers"
+        ],
+        "description": "List Schedulers by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SchedulerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedulers_ListBySubscription": {
+            "$ref": "./examples/Schedulers_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers": {
+      "get": {
+        "operationId": "Schedulers_ListByResourceGroup",
+        "tags": [
+          "Schedulers"
+        ],
+        "description": "List Schedulers by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SchedulerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedulers_ListByResourceGroup": {
+            "$ref": "./examples/Schedulers_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}": {
+      "get": {
+        "operationId": "Schedulers_Get",
+        "tags": [
+          "Schedulers"
+        ],
+        "description": "Get a Scheduler",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Scheduler"
+            }
+          },
+          "default": {
+            "description": "Not found error: resource does not exist",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedulers_Get": {
+            "$ref": "./examples/Schedulers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Schedulers_CreateOrUpdate",
+        "tags": [
+          "Schedulers"
+        ],
+        "description": "Create or update a Scheduler",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Scheduler"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Scheduler' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Scheduler"
+            }
+          },
+          "201": {
+            "description": "Resource 'Scheduler' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Scheduler"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "Validation error: required parameters are missing",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedulers_CreateOrUpdate": {
+            "$ref": "./examples/Schedulers_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Schedulers_Update",
+        "tags": [
+          "Schedulers"
+        ],
+        "description": "Update a Scheduler",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SchedulerUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Scheduler"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "Validation error: required parameters are missing",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedulers_Update": {
+            "$ref": "./examples/Schedulers_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Schedulers_Delete",
+        "tags": [
+          "Schedulers"
+        ],
+        "description": "Delete a Scheduler",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedulers_Delete": {
+            "$ref": "./examples/Schedulers_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/taskHubs": {
+      "get": {
+        "operationId": "TaskHubs_ListByScheduler",
+        "tags": [
+          "TaskHubs"
+        ],
+        "description": "List Task Hubs",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TaskHubListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TaskHubs_ListByScheduler": {
+            "$ref": "./examples/TaskHubs_ListByScheduler.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/taskHubs/{taskHubName}": {
+      "get": {
+        "operationId": "TaskHubs_Get",
+        "tags": [
+          "TaskHubs"
+        ],
+        "description": "Get a Task Hub",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "taskHubName",
+            "in": "path",
+            "description": "The name of the TaskHub",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TaskHub"
+            }
+          },
+          "default": {
+            "description": "Not found error: resource does not exist",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TaskHubs_Get": {
+            "$ref": "./examples/TaskHubs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TaskHubs_CreateOrUpdate",
+        "tags": [
+          "TaskHubs"
+        ],
+        "description": "Create or Update a Task Hub",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "taskHubName",
+            "in": "path",
+            "description": "The name of the TaskHub",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskHub"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TaskHub' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TaskHub"
+            }
+          },
+          "201": {
+            "description": "Resource 'TaskHub' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TaskHub"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "Validation error: required parameters are missing",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TaskHubs_CreateOrUpdate": {
+            "$ref": "./examples/TaskHubs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "TaskHubs_Delete",
+        "tags": [
+          "TaskHubs"
+        ],
+        "description": "Delete a Task Hub",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "taskHubName",
+            "in": "path",
+            "description": "The name of the TaskHub",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TaskHubs_Delete": {
+            "$ref": "./examples/TaskHubs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RedundancyState": {
+      "type": "string",
+      "description": "The state of the resource redundancy",
+      "enum": [
+        "None",
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "RedundancyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The resource is not redundant"
+          },
+          {
+            "name": "Zone",
+            "value": "Zone",
+            "description": "The resource is zone redundant"
+          }
+        ]
+      }
+    },
+    "Scheduler": {
+      "type": "object",
+      "description": "A Durable Task Scheduler resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchedulerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SchedulerListResult": {
+      "type": "object",
+      "description": "The response of a Scheduler list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Scheduler items on this page",
+          "items": {
+            "$ref": "#/definitions/Scheduler"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SchedulerProperties": {
+      "type": "object",
+      "description": "Details of the Scheduler",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "URL of the durable task scheduler",
+          "readOnly": true
+        },
+        "ipAllowlist": {
+          "type": "array",
+          "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/SchedulerSku",
+          "description": "SKU of the durable task scheduler"
+        }
+      },
+      "required": [
+        "ipAllowlist",
+        "sku"
+      ]
+    },
+    "SchedulerPropertiesUpdate": {
+      "type": "object",
+      "description": "Details of the Scheduler",
+      "properties": {
+        "ipAllowlist": {
+          "type": "array",
+          "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/SchedulerSkuUpdate",
+          "description": "SKU of the durable task scheduler"
+        }
+      }
+    },
+    "SchedulerSku": {
+      "type": "object",
+      "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy"
+        },
+        "redundancyState": {
+          "$ref": "#/definitions/RedundancyState",
+          "description": "Indicates whether the current SKU configuration is zone redundant",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SchedulerSkuUpdate": {
+      "type": "object",
+      "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy"
+        }
+      }
+    },
+    "SchedulerUpdate": {
+      "type": "object",
+      "description": "A Durable Task Scheduler resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchedulerPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "TaskHub": {
+      "type": "object",
+      "description": "A Task Hub resource belonging to the scheduler",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TaskHubProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TaskHubListResult": {
+      "type": "object",
+      "description": "The response of a TaskHub list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TaskHub items on this page",
+          "items": {
+            "$ref": "#/definitions/TaskHub"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TaskHubProperties": {
+      "type": "object",
+      "description": "The properties of Task Hub",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation",
+          "readOnly": true
+        },
+        "dashboardUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the durable task scheduler dashboard",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
