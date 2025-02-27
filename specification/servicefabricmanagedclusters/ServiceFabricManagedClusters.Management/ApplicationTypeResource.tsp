@@ -13,6 +13,7 @@ namespace Microsoft.ServiceFabric;
 /**
  * The application type name resource
  */
+@parentResource(ManagedCluster)
 model ApplicationTypeResource
   is Azure.ResourceManager.ProxyResource<ApplicationTypeResourceProperties> {
   ...ResourceNameParameter<
