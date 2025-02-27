@@ -117,12 +117,12 @@ model ChatContext {
   /**
    * The start time of the issue that needs troubleshoot.
    */
-  startTime: utcDateTime;
+  startTime?: utcDateTime;
 
   /**
    * The end time of the issue that needs troubleshoot.
    */
-  endTime: utcDateTime;
+  endTime?: utcDateTime;
 }
 
 /**
