@@ -664,11 +664,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/ConnectionType",
-          "description": "Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object. Not mutable once the Storage Connector is created.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object. Not mutable once the Storage Connector is created."
         }
       },
       "discriminator": "type",
@@ -919,11 +915,7 @@
         "endpoint": {
           "type": "string",
           "description": "Endpoint to connect to, including the protocol (http vs https), the host name, the port if applicable (defaulting to 80 or 443), and the path if applicable. Samples: https://203.0.113.1:9000/AllowSelfSignedCerts Bucket: https://data.contoso.com/bucketname .",
-          "minLength": 4,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "minLength": 4
         },
         "tlsVerification": {
           "type": "string",
@@ -948,11 +940,7 @@
                 "description": "Use AllowSelfSignedCerts as TlsVerification"
               }
             ]
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          }
         }
       },
       "required": [

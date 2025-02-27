@@ -77,7 +77,6 @@ model BucketSource extends Source {
 @doc("Details related to the type of bucket connection")
 model Connection {
   @doc("Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object. Not mutable once the Storage Connector is created.")
-  @visibility("create", "read")
   type: ConnectionType;
 }
 
@@ -88,11 +87,9 @@ model EndpointConnection extends Connection {
 
   @doc("Endpoint to connect to, including the protocol (http vs https), the host name, the port if applicable (defaulting to 80 or 443), and the path if applicable. Samples: https://203.0.113.1:9000/AllowSelfSignedCerts Bucket: https://data.contoso.com/bucketname .")
   @minLength(4)
-  @visibility("create", "read")
   endpoint: string;
 
   @doc("Options - Perform or Skip (default: Perform)  If this is set to “Skip”, Azure Storage will not verify the certificate chain of TLS connections to a root CA. Set this to “Skip” if the backing data store uses a self-signed cert. Ignored if the endpoint field does not use HTTPS.")
-  @visibility("create", "read")
   tlsVerification?: TlsVerification = TlsVerification.Perform;
 }
 
