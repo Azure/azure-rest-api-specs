@@ -28,7 +28,7 @@ openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2025-03-30
 ```
-### Tag: package-2025-09-30-preview
+### Tag: package-2025-09-30
 
 These settings apply only when `--tag=package-2025-03-30` is specified on the command line.
 
