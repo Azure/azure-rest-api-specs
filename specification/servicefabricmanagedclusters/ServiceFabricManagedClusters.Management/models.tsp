@@ -3526,13 +3526,10 @@ model ServicePlacementInvalidDomainPolicy extends ServicePlacementPolicy {
 }
 
 /**
- * ServicePlacementNonPartiallyPlaceServicePolicy
+ * The type of placement policy for a service fabric service. Following are the possible values.
  */
 model ServicePlacementNonPartiallyPlaceServicePolicy
   extends ServicePlacementPolicy {
-  /**
-   * The type of placement policy for a service fabric service. Following are the possible values.
-   */
   type: "NonPartiallyPlaceService";
 }
 

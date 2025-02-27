@@ -173,12 +173,12 @@ union Environment {
   string,
 
   /**
-   * Windows.
+   * Indicates os is Windows.
    */
   Windows: "Windows",
 
   /**
-   * Linux
+   * Indicates os is Linux.
    */
   Linux: "Linux",
 }
