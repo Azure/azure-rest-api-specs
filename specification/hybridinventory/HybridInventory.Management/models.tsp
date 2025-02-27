@@ -636,7 +636,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * The pgsql server version.
    */
-  pgsqlVersion?: string;
+  version?: string;
 
   /**
    * The number of database.
