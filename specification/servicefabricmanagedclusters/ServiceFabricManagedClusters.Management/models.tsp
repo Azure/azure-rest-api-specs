@@ -3597,7 +3597,7 @@ model ServicePlacementRequiredDomainPolicy extends ServicePlacementPolicy {
 }
 
 /**
- * SingletonPartitionScheme
+ * Describes the partition scheme of a singleton-partitioned, or non-partitioned service.
  */
 model SingletonPartitionScheme extends Partition {
   /**
