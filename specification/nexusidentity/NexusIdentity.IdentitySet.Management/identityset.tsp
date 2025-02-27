@@ -68,7 +68,7 @@ model IdentitySetResourceProperties {
   storageAccountName?: string;
 
   @doc("The URI of the keyvault which stores the keys for encryption and decryption of the sensitive client data")
-  keyVaultUri?: url;
+  keyVaultId?: url;
 
   @doc("The status of the last operation.")
   @visibility("read")
