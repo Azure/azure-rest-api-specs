@@ -142,7 +142,15 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "The phone number in E.164 format."
+          "description": "The phone number, usually in E.164 format."
+        },
+        "isAnonymous": {
+          "type": "boolean",
+          "description": "True if the phone number is anonymous. By default false if missing. If the phone number is anonymous, the value will be the string 'anonymous'."
+        },
+        "assertedId": {
+          "type": "string",
+          "description": "The asserted Id of the phone number. An asserted Id gets generated when the same phone number joins the same call more than once."
         }
       }
     },
