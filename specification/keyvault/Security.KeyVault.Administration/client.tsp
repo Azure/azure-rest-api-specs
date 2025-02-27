@@ -17,13 +17,13 @@ namespace ClientCustomizations;
 
 //C# customizations
 @client(
-    {
-      name: "KeyVaultAccessControlRestClient",
-      service: KeyVault,
-    },
-    "csharp"
-  )
-interface KeyVaultAccessControlRestClient{
+  {
+    name: "KeyVaultAccessControlRestClient",
+    service: KeyVault,
+  },
+  "csharp"
+)
+interface KeyVaultAccessControlRestClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   deleteRoleDefinition is KeyVault.RoleDefinitions.delete;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -44,10 +44,11 @@ interface KeyVaultAccessControlRestClient{
 
 @client(
   {
-  name: "KeyVaultRestClient",
-  service: KeyVault,
-  }, 
-  "csharp")
+    name: "KeyVaultRestClient",
+    service: KeyVault,
+  },
+  "csharp"
+)
 interface KeyVaultClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   fullBackup is KeyVault.fullBackup;
@@ -100,7 +101,6 @@ interface KeyVaultClient {
 @@clientName(KeyVault.Setting.type, "SettingType", "csharp");
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
 @@access(KeyVault, Access.internal, "csharp");
-
 
 // JavaScript customizations
 @@clientName(KeyVault.FullBackupOperation.azureStorageBlobContainerUri,
