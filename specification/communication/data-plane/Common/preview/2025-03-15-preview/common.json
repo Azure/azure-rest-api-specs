@@ -3,7 +3,7 @@
   "info": {
     "title": "Communication",
     "description": "Communication Services API common types.",
-    "version": "2023-11-15"
+    "version": "2025-03-15-preview"
   },
   "paths": {},
   "definitions": {
@@ -78,7 +78,8 @@
         "communicationUser",
         "phoneNumber",
         "microsoftTeamsUser",
-        "microsoftTeamsApp"
+        "microsoftTeamsApp",
+        "teamsExtensionUser"
       ],
       "x-ms-enum": {
         "name": "CommunicationIdentifierModelKind",
@@ -112,6 +113,10 @@
         "microsoftTeamsApp": {
           "$ref": "#/definitions/MicrosoftTeamsAppIdentifierModel",
           "description": "The Microsoft Teams application."
+        },
+        "teamsExtensionUser": {
+          "$ref": "#/definitions/TeamsExtensionUserIdentifierModel",
+          "description": "The Microsoft Teams Extension user."
         }
       }
     },
@@ -150,7 +155,7 @@
       "properties": {
         "userId": {
           "type": "string",
-          "description": "The Id of the Microsoft Teams user. If not anonymous, this is the AAD object Id of the user."
+          "description": "The Id of the Microsoft Teams user. If not anonymous, this is the Entra ID object Id of the user."
         },
         "isAnonymous": {
           "type": "boolean",
@@ -172,6 +177,32 @@
         "appId": {
           "type": "string",
           "description": "The Id of the Microsoft Teams application."
+        },
+        "cloud": {
+          "$ref": "#/definitions/CommunicationCloudEnvironmentModel",
+          "description": "The cloud that the Microsoft Teams application belongs to. By default 'public' if missing."
+        }
+      }
+    },
+    "TeamsExtensionUserIdentifierModel": {
+      "description": "A Microsoft Teams Phone user who is using a Communication Services resource to extend their Teams Phone set up.",
+      "type": "object",
+      "required": [
+        "userId",
+        "tenantId"
+      ],
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The Id of the Microsoft Teams Extension user, i.e. the Entra ID object Id of the user."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant Id of the Microsoft Teams Extension user."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The Communication Services resource Id."
         },
         "cloud": {
           "$ref": "#/definitions/CommunicationCloudEnvironmentModel",
