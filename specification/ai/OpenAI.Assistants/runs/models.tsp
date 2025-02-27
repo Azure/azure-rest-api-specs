@@ -138,6 +138,13 @@ model ThreadRun {
   @added(ServiceApiVersions.v2024_05_01_preview)
   toolChoice: AssistantsApiToolChoiceOption | null;
 
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  @added(ServiceApiVersions.v2024_09_01_preview)
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls: boolean;
+
   /** The response format of the tool calls used in this run. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
@@ -177,6 +184,17 @@ model RunCompletionUsage {
   totalTokens: int64;
 }
 
+/**
+ * Values to for the includes parameter in the create run operation.
+ */
+@added(ServiceApiVersions.v2025_01_01_preview)
+union RunIncludes {
+  string,
+
+  /** Fetch the file search result content. */
+  fileSearchContent: "step_details.tool_calls[*].file_search.results[*].content",
+}
+
 @doc("The details used when creating a new run of an assistant thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model CreateRunOptions {
@@ -209,6 +227,13 @@ model CreateRunOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden list of enabled tools that the assistant should use to run the thread.")
   tools?: ToolDefinition[] | null;
+
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  @added(ServiceApiVersions.v2024_09_01_preview)
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls?: boolean = true;
 
   /**
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
@@ -376,6 +401,13 @@ model CreateAndRunThreadOptions {
   @doc("The overridden list of enabled tools the assistant should use to run the thread.")
   @clientName("overrideTools", "csharp")
   tools?: ToolDefinition[] | null;
+
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  @added(ServiceApiVersions.v2024_09_01_preview)
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls?: boolean = true;
 
   /** Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"

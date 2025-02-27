@@ -7,8 +7,7 @@
     "get-specs-model": "cmd/get-specs-model.js"
   },
   "scripts": {
-    "build": "tsc",
-    "postinstall": "npm run build",
+    "build": "tsc --build",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose",
     "lint": "eslint . -c eslint.config.js --report-unused-disable-directives --max-warnings 0",
@@ -24,13 +23,12 @@
   "devDependencies": {
     "@eslint/js": "^9.7.0",
     "@tsconfig/strictest": "^2.0.5",
-    "@types/eslint__js": "^8.42.3",
     "@types/node": "^18.19.31",
-    "@vitest/coverage-v8": "^2.0.4",
-    "eslint": "^8.57.0",
-    "eslint-plugin-unicorn": "^54.0.0",
+    "@vitest/coverage-v8": "^3.0.5",
+    "eslint": "^9.14.0",
+    "eslint-plugin-unicorn": "^57.0.0",
     "typescript": "~5.6.2",
-    "typescript-eslint": "^7.16.0",
-    "vitest": "^2.0.4"
+    "typescript-eslint": "^8.13.0",
+    "vitest": "^3.0.5"
   }
 }
