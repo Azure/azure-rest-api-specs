@@ -25,6 +25,16 @@ namespace Customizations;
 @@clientName(Secret.type, "SecretKind", "csharp");
 @@clientName(CertificateMetadata.type, "CertificateKind", "csharp");
 
+// Suggestion to rename properties to not have abbreviations
+@@clientName(LoadTestConfiguration.optionalLoadTestConfig,
+  "optionalLoadTestConfiguration",
+  "csharp,java"
+);
+@@clientName(LoadTestConfiguration.regionalLoadTestConfig,
+  "regionalLoadTestConfiguration",
+  "csharp,java"
+);
+
 // Suggestion to fix casing for acronyms
 @@clientName(LoadTestConfiguration.splitAllCSVs,
   "splitAllCsvs",
@@ -88,7 +98,7 @@ namespace Customizations;
   "csharp"
 );
 
-// Renames for properties that had unit of duration in name
+// Renames for properties that had unit of duration in name but will get converted to duration type
 @@clientName(AutoStopCriteria.errorRateTimeWindowInSeconds,
   "errorRateTimeWindow",
   "csharp,java"
