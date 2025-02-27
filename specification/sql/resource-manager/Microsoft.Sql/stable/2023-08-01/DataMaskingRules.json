@@ -62,7 +62,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***"
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -137,7 +140,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***"
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseNameForDataMaskingOperation - It is not possible to apply data masking policy and rules directly to the master database. Data masking policy/rules are only applicable to user database.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           },
           "201": {
             "description": "Successfully created a database data masking rule.",
