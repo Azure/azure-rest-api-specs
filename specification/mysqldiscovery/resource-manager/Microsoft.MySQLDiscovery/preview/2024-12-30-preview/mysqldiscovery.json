@@ -944,10 +944,6 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
@@ -980,19 +976,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
+          "200": {
+            "description": "Resource deleted successfully."
           },
           "204": {
             "description": "The Agent resource is already deleted or not found"
@@ -1003,10 +988,6 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "patch": {
@@ -1054,30 +1035,12 @@
               "$ref": "#/definitions/Agent"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },

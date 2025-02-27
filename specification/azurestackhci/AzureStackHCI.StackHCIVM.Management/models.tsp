@@ -1384,6 +1384,10 @@ model VirtualMachineInstanceProperties {
   @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
   hardwareProfile?: VirtualMachineInstancePropertiesHardwareProfile;
 
+  @added(Versions.v2025_04_01_preview)
+  @doc("PlacementProfile - Specifies the placement related settings for the virtual machine.")
+  placementProfile?: VirtualMachineInstancePropertiesPlacementProfile;
+
   @doc("NetworkProfile - describes the network configuration the virtual machine instance")
   networkProfile?: VirtualMachineInstancePropertiesNetworkProfile;
 
@@ -1424,6 +1428,17 @@ model VirtualMachineInstanceProperties {
 
   @doc("Unique identifier defined by ARC to identify the guest of the VM.")
   resourceUid?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
+  @added(Versions.v2025_04_01_preview)
+  @doc("Unique identifier for the Hyper-V VM resource.")
+  @visibility("read")
+  hyperVVmId?: string;
+
+  @added(Versions.v2025_04_01_preview)
+  @doc("Name of the host node that the VM is on.")
+  @visibility("read")
+  hostNodeName?: string;
 }
 
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
@@ -1446,6 +1461,16 @@ model VirtualMachineInstancePropertiesHardwareProfile {
   @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
   @extension("x-ms-identifiers", [])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
+}
+
+@added(Versions.v2025_04_01_preview)
+@doc("PlacementProfile - Specifies the placement related settings for the virtual machine.")
+model VirtualMachineInstancePropertiesPlacementProfile {
+  @doc("The zone in which the VM should be placed in.")
+  zone?: string;
+
+  @doc("Specifies whether VM can only failover strictly within the zone it was placed in")
+  strictPlacementPolicy?: boolean;
 }
 
 @doc("Dynamic memory config")
