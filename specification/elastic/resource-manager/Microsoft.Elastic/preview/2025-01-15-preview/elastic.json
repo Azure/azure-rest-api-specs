@@ -2529,6 +2529,7 @@
         "Serverless"
       ],
       "type": "string",
+      "description": "Hosting type of the monitor resource - either Hosted deployments or Serverless Projects.",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "HostingType"
@@ -2539,11 +2540,11 @@
       "type": "object",
       "properties": {
         "projectType": {
-          "description": "Project type; ex: Search / Observability / Security",
+          "description": "Project type; ex: Elasticsearch / Observability / Security",
           "$ref": "#/definitions/ProjectType"
         },
         "configurationType": {
-          "description": "Publisher ID of the plan",
+          "description": "Configuration type of the Elasticsearch project",
           "$ref": "#/definitions/ConfigurationType"
         }
       }
@@ -2556,6 +2557,7 @@
         "NotApplicable"
       ],
       "type": "string",
+      "description": "Project type; ex: Elasticsearch / Observability / Security",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ProjectType"
@@ -2569,6 +2571,7 @@
         "NotApplicable"
       ],
       "type": "string",
+      "description": "Configuration type of the Elasticsearch project",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ConfigurationType"
