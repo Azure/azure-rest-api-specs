@@ -12,8 +12,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 /**
- * Client that can be used to manage and query indexes and documents, as well as
- * manage other resources, on a search service.
+ * Client that can be used to query an index and upload, merge, or delete documents.
  */
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[

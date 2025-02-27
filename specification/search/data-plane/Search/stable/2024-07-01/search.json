@@ -3661,34 +3661,6 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.DocumentExtractionSkill"
     },
-    "EdgeNGramTokenFilter": {
-      "type": "object",
-      "description": "Generates n-grams of the given size(s) starting from the front or the back of\nan input token. This token filter is implemented using Apache Lucene.",
-      "properties": {
-        "minGram": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum n-gram length. Default is 1. Must be less than the value of maxGram.",
-          "default": 1
-        },
-        "maxGram": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum n-gram length. Default is 2.",
-          "default": 2
-        },
-        "side": {
-          "$ref": "#/definitions/EdgeNGramTokenFilterSide",
-          "description": "Specifies which side of the input the n-gram should be generated from. Default\nis \"front\"."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.EdgeNGramTokenFilter"
-    },
     "EdgeNGramTokenFilterSide": {
       "type": "string",
       "description": "Specifies which side of the input an n-gram should be generated from.",
@@ -5495,24 +5467,6 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordMarkerTokenFilter"
     },
-    "KeywordTokenizer": {
-      "type": "object",
-      "description": "Emits the entire input as a single token. This tokenizer is implemented using\nApache Lucene.",
-      "properties": {
-        "bufferSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The read buffer size in bytes. Default is 256.",
-          "default": 256
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/LexicalTokenizer"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordTokenizer"
-    },
     "KeywordTokenizerV2": {
       "type": "object",
       "description": "Emits the entire input as a single token. This tokenizer is implemented using\nApache Lucene.",
@@ -6413,24 +6367,6 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardAnalyzer"
     },
-    "LuceneStandardTokenizer": {
-      "type": "object",
-      "description": "Breaks text following the Unicode Text Segmentation rules. This tokenizer is\nimplemented using Apache Lucene.",
-      "properties": {
-        "maxTokenLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum token length. Default is 255. Tokens longer than the maximum length\nare split.",
-          "default": 255
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/LexicalTokenizer"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardTokenizer"
-    },
     "LuceneStandardTokenizerV2": {
       "type": "object",
       "description": "Breaks text following the Unicode Text Segmentation rules. This tokenizer is\nimplemented using Apache Lucene.",
@@ -7136,30 +7072,6 @@
           }
         ]
       }
-    },
-    "NGramTokenFilter": {
-      "type": "object",
-      "description": "Generates n-grams of the given size(s). This token filter is implemented using\nApache Lucene.",
-      "properties": {
-        "minGram": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum n-gram length. Default is 1. Must be less than the value of maxGram.",
-          "default": 1
-        },
-        "maxGram": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum n-gram length. Default is 2.",
-          "default": 2
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.NGramTokenFilter"
     },
     "NGramTokenFilterV2": {
       "type": "object",
