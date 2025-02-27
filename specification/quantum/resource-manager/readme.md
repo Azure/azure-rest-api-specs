@@ -151,8 +151,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}"].patch.parameters[4]
     reason: We do not support updating the Identity property.
   - code: ProvisioningStateMustBeReadOnly
-    where:
-      - $.definitions.Provider.properties.provisioningState
     reason: The provisioningState being flagged is not the ARM resource provisioningState, but the field for our ProviderStatus. Currently, this cannot be readOnly, or it will cause livesite issue and workspace does not behave correctly. We have on our roadmap to fix this issue, but this needs to be settable for control plane to work properly.
   - code: AvoidAnonymousTypes
     where: 
