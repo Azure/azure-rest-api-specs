@@ -3997,7 +3997,8 @@
             "loadBalancer",
             "userDefinedRouting",
             "managedNATGateway",
-            "userAssignedNATGateway"
+            "userAssignedNATGateway",
+            "none"
           ],
           "x-ms-enum": {
             "name": "outboundType",
@@ -4018,6 +4019,10 @@
               {
                 "value": "userAssignedNATGateway",
                 "description": "The user-assigned NAT gateway associated to the cluster subnet is used for egress. This is an advanced scenario and requires proper network configuration."
+              },
+              {
+                "value": "none",
+                "description": "The AKS cluster is not set with any outbound-type. All AKS nodes follows Azure VM default outbound behavior. Please refer to https://azure.microsoft.com/en-us/updates/default-outbound-access-for-vms-in-azure-will-be-retired-transition-to-a-new-method-of-internet-access/"
               }
             ]
           },
@@ -5116,6 +5121,10 @@
         "metricsProfile": {
           "$ref": "#/definitions/ManagedClusterMetricsProfile",
           "description": "Optional cluster metrics configuration."
+        },
+        "bootstrapProfile": {
+          "$ref": "#/definitions/ManagedClusterBootstrapProfile",
+          "description": "Profile of the cluster bootstrap configuration."
         }
       },
       "description": "Properties of the managed cluster."
@@ -7596,6 +7605,48 @@
           "description": "The Managed Cluster sku.tier must be set to 'Standard' or 'Premium' to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal. If not specified, the default is false. For more information see aka.ms/aks/docs/cost-analysis."
         }
       }
+    },
+    "ManagedClusterBootstrapProfile": {
+      "description": "The bootstrap profile.",
+      "properties": {
+        "artifactSource": {
+          "type": "string",
+          "enum": [
+            "Direct",
+            "Cache"
+          ],
+          "x-ms-enum": {
+            "name": "ArtifactSource",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Cache",
+                "description": "pull images from Azure Container Registry with cache"
+              },
+              {
+                "value": "Direct",
+                "description": "pull images from Microsoft Artifact Registry"
+              }
+            ]
+          },
+          "default": "Direct",
+          "title": "The artifact source.",
+          "description": "The source where the artifacts are downloaded from."
+        },
+        "containerRegistryId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerRegistry/registries"
+              }
+            ]
+          },
+          "description": "The resource Id of Azure Container Registry. The registry must have private network access, premium SKU and zone redundancy."
+        }
+      },
+      "type": "object"
     },
     "AgentPoolDeleteMachinesParameter": {
       "type": "object",
