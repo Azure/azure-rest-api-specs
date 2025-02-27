@@ -65,17 +65,6 @@ model ProviderAccountProperties {
   /** Managed On Behalf Of configuration. */
   @visibility("read")
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
-
-  // /** Azure ARC configuration. */
-  // machineEntity: ...;
-
-  // /** Quota Dimension definitions for this ProviderAccount. */
-  // @visibility("read", "create", "update")
-  // quotaDimensions?: QuotaDimension[];
-
-  // /** List of subscriptions-level Quotas for this ProviderAccount. */
-  // @visibility("read", "create", "update")
-  // subscriptionQuotaLimits?: SubscriptionQuotaLimit[];
 }
 
 /** The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000). */
