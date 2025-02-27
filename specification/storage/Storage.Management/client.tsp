@@ -25,7 +25,7 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateLinkResource.properties);
 
-@@clientName(BlobServicePropertiesOperationGroup, "BlobServiceProperties");
+// @@clientName(BlobServicePropertiesOperationGroup, "BlobServiceProperties");
 @@clientName(BlobServices.setServiceProperties::parameters.resource,
   "parameters"
 );
@@ -45,7 +45,7 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ImmutabilityPolicy.properties);
 
-@@clientName(FileServicePropertiesOperationGroup, "FileServiceProperties");
+// @@clientName(FileServicePropertiesOperationGroup, "FileServiceProperties");
 @@clientName(FileServices.setServiceProperties::parameters.resource,
   "parameters"
 );
@@ -58,7 +58,7 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(FileShare.properties);
 
-@@clientName(QueueServicePropertiesOperationGroup, "QueueServiceProperties");
+// @@clientName(QueueServicePropertiesOperationGroup, "QueueServiceProperties");
 @@clientName(QueueServices.setServiceProperties::parameters.resource,
   "parameters"
 );
@@ -121,7 +121,7 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(EncryptionScope.properties);
 
-@@clientName(TableServicePropertiesOperationGroup, "TableServiceProperties");
+// @@clientName(TableServicePropertiesOperationGroup, "TableServiceProperties");
 @@clientName(TableServices.setServiceProperties::parameters.resource,
   "parameters"
 );
@@ -140,3 +140,8 @@ using Microsoft.Storage;
 @@clientName(StorageTaskAssignments.update::parameters.properties,
   "parameters"
 );
+
+@@clientName(StorageAccountsOperations.checkNameAvailability::parameters.body,
+  "accountName"
+);
+@@clientName(CorsRules, "StorageCorsRules", "csharp");

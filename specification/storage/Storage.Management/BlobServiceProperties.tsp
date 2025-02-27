@@ -14,13 +14,12 @@ namespace Microsoft.Storage;
 /**
  * The properties of a storage account’s Blob service.
  */
-@singleton("default")
 @parentResource(StorageAccount)
 model BlobServiceProperties
   is Azure.ResourceManager.ProxyResource<BlobServicePropertiesProperties> {
   ...ResourceNameParameter<
     Resource = BlobServiceProperties,
-    KeyName = "blobService",
+    KeyName = "blobServicesName",
     SegmentName = "blobServices",
     NamePattern = ""
   >;
@@ -33,6 +32,7 @@ model BlobServiceProperties
   sku?: Sku;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations
 interface BlobServices {
   /**

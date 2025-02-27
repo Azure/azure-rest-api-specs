@@ -70,10 +70,16 @@ interface StorageAccounts {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceAsync<
-    StorageAccount,
+  @armResourceCreateOrUpdate(StorageAccount)
+  @autoRoute
+  create is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<
+      StorageAccount,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAccount>
+    >,
+    StorageAccountCreateParameters,
     Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    ErrorResponse = ErrorResponse
   >;
 
   /**
@@ -129,6 +135,7 @@ interface StorageAccounts {
    * List SAS credentials of a storage account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @action("ListAccountSas")
   @operationId("StorageAccounts_ListAccountSAS")
   listAccountSAS is ArmResourceActionSync<
@@ -141,6 +148,7 @@ interface StorageAccounts {
    * List service SAS credentials of a specific resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @action("ListServiceSas")
   @operationId("StorageAccounts_ListServiceSAS")
   listServiceSAS is ArmResourceActionSync<

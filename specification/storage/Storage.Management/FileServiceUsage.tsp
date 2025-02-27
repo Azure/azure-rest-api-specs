@@ -15,13 +15,25 @@ namespace Microsoft.Storage;
  * The usage of file service in storage account.
  */
 @singleton("default")
-@parentResource(StorageAccount)
+@parentResource(FileService)
 model FileServiceUsage
   is Azure.ResourceManager.ProxyResource<FileServiceUsageProperties> {
   ...ResourceNameParameter<
     Resource = FileServiceUsage,
     KeyName = "usage",
     SegmentName = "usages",
+    NamePattern = ""
+  >;
+}
+
+@singleton("default")
+@parentResource(StorageAccount)
+model FileService
+  is Azure.ResourceManager.ProxyResource<FileServiceProperties> {
+  ...ResourceNameParameter<
+    Resource = FileServiceProperties,
+    KeyName = "FileServicesName",
+    SegmentName = "fileServices",
     NamePattern = ""
   >;
 }

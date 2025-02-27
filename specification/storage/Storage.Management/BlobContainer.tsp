@@ -23,6 +23,7 @@ model BlobContainer
     SegmentName = "containers",
     NamePattern = ""
   >;
+  ...EntityTagProperty;
 }
 
 @armResourceOperations

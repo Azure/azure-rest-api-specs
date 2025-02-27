@@ -970,6 +970,9 @@ model BlobServiceItems {
   @visibility("read")
   @items
   value?: BlobServiceProperties[];
+
+  @nextLink
+  nextlink?: string;
 }
 
 /**
@@ -1030,6 +1033,8 @@ model CorsRules {
   /**
    * The List of CORS rules. You can include up to five CorsRule elements in the request.
    */
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
+  @OpenAPI.extension("x-ms-identifiers", [])
   corsRules?: CorsRule[];
 }
 
@@ -1352,6 +1357,7 @@ model ImmutabilityPolicyProperties {
    * The ImmutabilityPolicy update history of the blob container.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   updateHistory?: UpdateHistoryProperty[];
 }
 
@@ -1447,6 +1453,7 @@ model LegalHoldProperties {
   /**
    * The list of LegalHold tags of a blob container.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   tags?: TagProperty[];
 
   /**
@@ -1642,6 +1649,7 @@ model CloudErrorBody {
   /**
    * A list of additional details about the error.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   details?: CloudErrorBody[];
 }
 
@@ -1792,6 +1800,7 @@ model AccountLimits {
   /**
    * The maximum provisioned bandwidth limit in mebibytes per second for the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility("read")
   maxProvisionedBandwidthMiBPerSec?: int32;
 }
@@ -1829,12 +1838,14 @@ model FileShareLimits {
   /**
    * The minimum provisioned bandwidth limit in mebibytes per second for a file share in the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility("read")
   minProvisionedBandwidthMiBPerSec?: int32;
 
   /**
    * The maximum provisioned bandwidth limit in mebibytes per second for a file share in the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility("read")
   maxProvisionedBandwidthMiBPerSec?: int32;
 }
@@ -1859,6 +1870,7 @@ model FileShareRecommendations {
   /**
    * The base bandwidth in the file share provisioned bandwidth recommendation formula.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility("read")
   baseBandwidthMiBPerSec?: int32;
 
@@ -1883,6 +1895,7 @@ model BurstingConstants {
   /**
    * The scalar against provisioned IOPS in the file share included burst IOPS formula.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility("read")
   burstIOScalar?: float64;
 
@@ -1936,6 +1949,7 @@ model AccountUsageElements {
   /**
    * The total provisioned bandwidth in mebibytes per second.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility("read")
   provisionedBandwidthMiBPerSec?: int32;
 }
@@ -2391,6 +2405,10 @@ model StorageSkuListResult {
   @visibility("read")
   @items
   value?: SkuInformation[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @nextLink
+  nextlink?: string;
 }
 
 /**
@@ -2435,12 +2453,14 @@ model SkuInformation {
   /**
    * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   restrictions?: Restriction[];
 }
 
 /**
  * The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model SKUCapability {
   /**
    * The name of capability, The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.
@@ -2660,12 +2680,14 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * Enables Secure File Transfer Protocol, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @encodedName("application/json", "isSftpEnabled")
   IsSftpEnabled?: boolean;
 
   /**
    * Enables local users feature, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @encodedName("application/json", "isLocalUserEnabled")
   IsLocalUserEnabled?: boolean;
 
@@ -2677,6 +2699,7 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * Account HierarchicalNamespace enabled if sets to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @encodedName("application/json", "isHnsEnabled")
   IsHnsEnabled?: boolean;
 
@@ -2719,6 +2742,7 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   defaultToOAuthAuthentication?: boolean;
 
   /**
@@ -2924,16 +2948,19 @@ model NetworkRuleSet {
   /**
    * Sets the resource access rules
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   resourceAccessRules?: ResourceAccessRule[];
 
   /**
    * Sets the virtual network rules
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   virtualNetworkRules?: VirtualNetworkRule[];
 
   /**
    * Sets the IP ACL rules
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   ipRules?: IPRule[];
 
   /**
@@ -2960,6 +2987,7 @@ model ResourceAccessRule {
 /**
  * Virtual Network rule.
  */
+@OpenAPI.extension("x-ms-identifiers", [])
 model VirtualNetworkRule {
   /**
    * Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.
@@ -2981,6 +3009,7 @@ model VirtualNetworkRule {
 /**
  * IP rule with specific IP or IP range in CIDR format.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model IPRule {
   /**
    * Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.
@@ -3233,12 +3262,14 @@ model StorageAccountProperties {
   /**
    * Enables Secure File Transfer Protocol, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @encodedName("application/json", "isSftpEnabled")
   IsSftpEnabled?: boolean;
 
   /**
    * Enables local users feature, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @encodedName("application/json", "isLocalUserEnabled")
   IsLocalUserEnabled?: boolean;
 
@@ -3250,6 +3281,7 @@ model StorageAccountProperties {
   /**
    * Account HierarchicalNamespace enabled if sets to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @encodedName("application/json", "isHnsEnabled")
   IsHnsEnabled?: boolean;
 
@@ -3316,6 +3348,7 @@ model StorageAccountProperties {
   /**
    * A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   defaultToOAuthAuthentication?: boolean;
 
   /**
@@ -3346,6 +3379,7 @@ model StorageAccountProperties {
   /**
    * This property will be set to true or false on an event of ongoing migration. Default value is null.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility("read")
   @encodedName("application/json", "isSkuConversionBlocked")
   IsSkuConversionBlocked?: boolean;
@@ -3627,6 +3661,7 @@ model BlobRestoreParameters {
   /**
    * Blob ranges to restore.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   blobRanges: BlobRestoreRange[];
 }
 
@@ -3749,12 +3784,14 @@ model StorageAccountPropertiesUpdateParameters {
   /**
    * Enables Secure File Transfer Protocol, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @encodedName("application/json", "isSftpEnabled")
   IsSftpEnabled?: boolean;
 
   /**
    * Enables local users feature, if set to true
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @encodedName("application/json", "isLocalUserEnabled")
   IsLocalUserEnabled?: boolean;
 
@@ -3802,6 +3839,7 @@ model StorageAccountPropertiesUpdateParameters {
   /**
    * A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   defaultToOAuthAuthentication?: boolean;
 
   /**
@@ -3884,6 +3922,7 @@ model StorageAccountListKeysResult {
    * Gets the list of storage account keys and their properties for the specified storage account.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   keys?: StorageAccountKey[];
 }
 
@@ -4010,6 +4049,7 @@ model AccountSasParameters {
   /**
    * An IP address or a range of IP addresses from which to accept requests.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @encodedName("application/json", "signedIp")
   IPAddressOrRange?: string;
 
@@ -4074,6 +4114,7 @@ model ServiceSasParameters {
   /**
    * An IP address or a range of IP addresses from which to accept requests.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @encodedName("application/json", "signedIp")
   IPAddressOrRange?: string;
 
@@ -4612,6 +4653,7 @@ model BlobInventoryPolicyFilter {
 /**
  * This property defines the creation time based filtering condition. Blob Inventory schema parameter 'Creation-Time' is mandatory with this filter.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model BlobInventoryCreationTime {
   /**
    * When set the policy filters the objects that are created in the last N days. Where N is an integer value between 1 to 36500.
@@ -4632,6 +4674,10 @@ model ListBlobInventoryPolicy {
   @visibility("read")
   @items
   value?: BlobInventoryPolicy[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @nextLink
+  nextlink?: string;
 }
 
 /**
@@ -4644,6 +4690,10 @@ model PrivateEndpointConnectionListResult {
    */
   @items
   value?: PrivateEndpointConnection[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @nextLink
+  nextlink?: string;
 }
 
 /**
@@ -4734,6 +4784,7 @@ model ObjectReplicationPolicyProperties {
   /**
    * The storage account object replication rules.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   rules?: ObjectReplicationPolicyRule[];
 }
 
@@ -4790,6 +4841,7 @@ model LocalUserProperties {
   /**
    * The permission scopes of the local user.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["resourceName", "service"])
   permissionScopes?: PermissionScope[];
 
   /**
@@ -4800,6 +4852,7 @@ model LocalUserProperties {
   /**
    * Optional, local user ssh authorized keys for SFTP.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   sshAuthorizedKeys?: SshPublicKey[];
 
   /**
@@ -4847,6 +4900,7 @@ model LocalUserProperties {
   /**
    * Indicates if the local user is enabled for access with NFSv3 protocol.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   isNFSv3Enabled?: boolean;
 }
 
@@ -4888,6 +4942,7 @@ model LocalUserKeys {
   /**
    * Optional, local user ssh authorized keys for SFTP.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   sshAuthorizedKeys?: SshPublicKey[];
 
   /**
@@ -5622,7 +5677,8 @@ model StorageTaskReportSummary is Azure.Core.Page<StorageTaskReportInstance>;
  * Storage Tasks run report instance
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model StorageTaskReportInstance extends ProxyResource {
+model StorageTaskReportInstance
+  extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Storage task execution report for a run instance.
    */

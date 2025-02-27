@@ -22,8 +22,10 @@ model FileShare is Azure.ResourceManager.ProxyResource<FileShareProperties> {
     SegmentName = "shares",
     NamePattern = ""
   >;
+  ...EntityTagProperty;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface FileShares {
   /**
@@ -69,6 +71,7 @@ interface FileShares {
   /**
    * Deletes specified share under its account.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   delete is ArmResourceDeleteSync<
     FileShare,
     Parameters = {
@@ -94,6 +97,7 @@ interface FileShares {
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   lease is ArmResourceActionSync<
     FileShare,
     {
@@ -103,13 +107,19 @@ interface FileShares {
       @bodyRoot
       parameters?: LeaseShareRequest;
     },
-    ArmResponse<LeaseShareResponse>,
     Parameters = {
       /**
        * Optional. Specify the snapshot time to lease a snapshot.
        */
       @header
       `x-ms-snapshot`?: string;
+    },
+    Response = ArmResponse<LeaseShareResponse> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers..
+       */
+      @header("ETag")
+      eTag: string;
     }
   >;
 }

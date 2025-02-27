@@ -43,10 +43,11 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Refreshes any information about the association.
    */
-  reconcile is ArmResourceActionAsync<
+  reconcile is ArmResourceActionAsyncBase<
     NetworkSecurityPerimeterConfiguration,
     void,
-    void
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
+    Response = ArmAcceptedLroResponse
   >;
 }
 
