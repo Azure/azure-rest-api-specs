@@ -1,74 +1,75 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res9101",
     "accountName": "sto4445",
     "api-version": "2024-01-01",
     "parameters": {
-      "sku": {
-        "name": "Premium_LRS"
-      },
       "kind": "BlockBlobStorage",
       "location": "eastus",
       "properties": {
-        "minimumTlsVersion": "TLS1_2",
         "allowSharedKeyAccess": true,
         "encryption": {
-          "services": {
-            "file": {
-              "keyType": "Account",
-              "enabled": true
-            },
-            "blob": {
-              "keyType": "Account",
-              "enabled": true
-            }
-          },
+          "keySource": "Microsoft.Storage",
           "requireInfrastructureEncryption": false,
-          "keySource": "Microsoft.Storage"
-        }
+          "services": {
+            "blob": {
+              "enabled": true,
+              "keyType": "Account"
+            },
+            "file": {
+              "enabled": true,
+              "keyType": "Account"
+            }
+          }
+        },
+        "minimumTlsVersion": "TLS1_2"
+      },
+      "sku": {
+        "name": "Premium_LRS"
       },
       "tags": {
         "key1": "value1",
         "key2": "value2"
       }
-    }
+    },
+    "resourceGroupName": "res9101",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "sto4445",
+        "type": "Microsoft.Storage/storageAccounts",
         "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
         "kind": "Storage",
         "location": "eastus",
-        "name": "sto4445",
         "properties": {
-          "allowBlobPublicAccess": false,
-          "minimumTlsVersion": "TLS1_2",
-          "creationTime": "2017-05-24T13:25:33.4863236Z",
-          "primaryEndpoints": {
-            "blob": "https://sto4445.blob.core.windows.net/",
-            "web": "https://sto4445.web.core.windows.net/",
-            "dfs": "https://sto4445.dfs.core.windows.net/"
-          },
-          "primaryLocation": "eastus2euap",
           "accessTier": "Premium",
-          "provisioningState": "Succeeded",
+          "allowBlobPublicAccess": false,
+          "creationTime": "2017-05-24T13:25:33.4863236Z",
           "encryption": {
+            "keySource": "Microsoft.Storage",
+            "requireInfrastructureEncryption": false,
             "services": {
-              "file": {
-                "keyType": "Account",
+              "blob": {
                 "enabled": true,
+                "keyType": "Account",
                 "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
               },
-              "blob": {
-                "keyType": "Account",
+              "file": {
                 "enabled": true,
+                "keyType": "Account",
                 "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
               }
-            },
-            "requireInfrastructureEncryption": false,
-            "keySource": "Microsoft.Storage"
+            }
           },
+          "minimumTlsVersion": "TLS1_2",
+          "primaryEndpoints": {
+            "blob": "https://sto4445.blob.core.windows.net/",
+            "dfs": "https://sto4445.dfs.core.windows.net/",
+            "web": "https://sto4445.web.core.windows.net/"
+          },
+          "primaryLocation": "eastus2euap",
+          "provisioningState": "Succeeded",
           "statusOfPrimary": "available",
           "statusOfSecondary": "available",
           "supportsHttpsTrafficOnly": true
@@ -80,10 +81,11 @@
         "tags": {
           "key1": "value1",
           "key2": "value2"
-        },
-        "type": "Microsoft.Storage/storageAccounts"
+        }
       }
     },
     "202": {}
-  }
+  },
+  "operationId": "StorageAccounts_Create",
+  "title": "StorageAccountCreatePremiumBlockBlobStorage"
 }

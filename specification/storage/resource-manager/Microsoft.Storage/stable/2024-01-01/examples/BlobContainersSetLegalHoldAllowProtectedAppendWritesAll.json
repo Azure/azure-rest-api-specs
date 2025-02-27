@@ -1,31 +1,33 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res4303",
-    "accountName": "sto7280",
-    "containerName": "container8723",
-    "api-version": "2024-01-01",
-    "monitor": "true",
     "LegalHold": {
+      "allowProtectedAppendWritesAll": true,
       "tags": [
         "tag1",
         "tag2",
         "tag3"
-      ],
-      "allowProtectedAppendWritesAll": true
-    }
+      ]
+    },
+    "accountName": "sto7280",
+    "api-version": "2024-01-01",
+    "containerName": "container8723",
+    "monitor": "true",
+    "resourceGroupName": "res4303",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
+        "allowProtectedAppendWritesAll": true,
         "hasLegalHold": true,
         "tags": [
           "tag1",
           "tag2",
           "tag3"
-        ],
-        "allowProtectedAppendWritesAll": true
+        ]
       }
     }
-  }
+  },
+  "operationId": "BlobContainers_SetLegalHold",
+  "title": "SetLegalHoldContainersWithAllowProtectedAppendWritesAll"
 }

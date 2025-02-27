@@ -1,20 +1,14 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res9101",
     "accountName": "sto4445",
     "api-version": "2024-01-01",
     "parameters": {
-      "sku": {
-        "name": "Premium_LRS"
-      },
       "kind": "BlockBlobStorage",
       "location": "eastus",
       "properties": {
+        "enableExtendedGroups": true,
         "isHnsEnabled": true,
         "isNfsV3Enabled": true,
-        "enableExtendedGroups": true,
-        "supportsHttpsTrafficOnly": false,
         "networkAcls": {
           "bypass": "AzureServices",
           "defaultAction": "Allow",
@@ -24,22 +18,28 @@
               "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Network/virtualNetworks/net123/subnets/subnet12"
             }
           ]
-        }
+        },
+        "supportsHttpsTrafficOnly": false
+      },
+      "sku": {
+        "name": "Premium_LRS"
       }
-    }
+    },
+    "resourceGroupName": "res9101",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "sto4445",
+        "type": "Microsoft.Storage/storageAccounts",
         "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
         "kind": "BlockBlobStorage",
         "location": "eastus",
-        "name": "sto4445",
         "properties": {
+          "enableExtendedGroups": true,
           "isHnsEnabled": true,
           "isNfsV3Enabled": true,
-          "enableExtendedGroups": true,
-          "supportsHttpsTrafficOnly": false,
           "networkAcls": {
             "bypass": "AzureServices",
             "defaultAction": "Allow",
@@ -49,15 +49,17 @@
                 "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Network/virtualNetworks/net123/subnets/subnet12"
               }
             ]
-          }
+          },
+          "supportsHttpsTrafficOnly": false
         },
         "sku": {
           "name": "Premium_LRS",
           "tier": "Premium"
-        },
-        "type": "Microsoft.Storage/storageAccounts"
+        }
       }
     },
     "202": {}
-  }
+  },
+  "operationId": "StorageAccounts_Create",
+  "title": "NfsV3AccountCreate"
 }

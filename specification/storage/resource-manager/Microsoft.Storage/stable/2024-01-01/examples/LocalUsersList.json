@@ -1,66 +1,68 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res6977",
     "accountName": "sto2527",
     "api-version": "2024-01-01",
-    "monitor": "true"
+    "monitor": "true",
+    "resourceGroupName": "res6977",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/loalUsers/user1",
             "name": "user1",
             "type": "Microsoft.Storage/storageAccounts/localUsers",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/loalUsers/user1",
             "properties": {
-              "permissionScopes": [
-                {
-                  "permissions": "rwd",
-                  "service": "file",
-                  "resourceName": "share1"
-                },
-                {
-                  "permissions": "rw",
-                  "service": "file",
-                  "resourceName": "share2"
-                }
-              ],
-              "homeDirectory": "homedirectory",
-              "sid": "S-1-2-0-125132-153423-36235-1000",
+              "allowAclAuthorization": true,
+              "groupId": 2000,
               "hasSharedKey": true,
               "hasSshKey": true,
               "hasSshPassword": true,
-              "userId": 1000,
-              "groupId": 2000,
-              "allowAclAuthorization": true
+              "homeDirectory": "homedirectory",
+              "permissionScopes": [
+                {
+                  "permissions": "rwd",
+                  "resourceName": "share1",
+                  "service": "file"
+                },
+                {
+                  "permissions": "rw",
+                  "resourceName": "share2",
+                  "service": "file"
+                }
+              ],
+              "sid": "S-1-2-0-125132-153423-36235-1000",
+              "userId": 1000
             }
           },
           {
-            "id": "/subscriptions/{subscription-id}/resourceGroups/res9290/providers/Microsoft.Storage/storageAccounts/sto1590/loalUsers/user2",
             "name": "user2",
             "type": "Microsoft.Storage/storageAccounts/localUsers",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res9290/providers/Microsoft.Storage/storageAccounts/sto1590/loalUsers/user2",
             "properties": {
-              "permissionScopes": [
-                {
-                  "permissions": "rw",
-                  "service": "blob",
-                  "resourceName": "resourcename"
-                }
-              ],
-              "sid": "S-1-2-0-533672-235636-66334-1001",
+              "allowAclAuthorization": true,
+              "groupId": 2000,
               "hasSharedKey": true,
               "hasSshKey": false,
               "hasSshPassword": true,
-              "userId": 1001,
-              "groupId": 2000,
-              "allowAclAuthorization": true
+              "permissionScopes": [
+                {
+                  "permissions": "rw",
+                  "resourceName": "resourcename",
+                  "service": "blob"
+                }
+              ],
+              "sid": "S-1-2-0-533672-235636-66334-1001",
+              "userId": 1001
             }
           }
-        ],
-        "nextLink": null
+        ]
       }
     }
-  }
+  },
+  "operationId": "LocalUsers_List",
+  "title": "ListLocalUsers"
 }

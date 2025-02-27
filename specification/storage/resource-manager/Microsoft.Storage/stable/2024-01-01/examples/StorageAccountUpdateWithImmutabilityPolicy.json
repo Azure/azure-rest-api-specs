@@ -1,38 +1,39 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res9407",
     "accountName": "sto8596",
     "api-version": "2024-01-01",
     "monitor": "true",
     "parameters": {
       "properties": {
         "immutableStorageWithVersioning": {
+          "enabled": true,
           "immutabilityPolicy": {
-            "immutabilityPeriodSinceCreationInDays": 15,
             "allowProtectedAppendWrites": true,
+            "immutabilityPeriodSinceCreationInDays": 15,
             "state": "Locked"
-          },
-          "enabled": true
+          }
         }
       }
-    }
+    },
+    "resourceGroupName": "res9407",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "sto8596",
+        "type": "Microsoft.Storage/storageAccounts",
         "id": "/subscriptions/{subscription-id}/resourceGroups/res9407/providers/Microsoft.Storage/storageAccounts/sto8596",
         "kind": "Storage",
         "location": "eastus2(stage)",
-        "name": "sto8596",
         "properties": {
           "immutableStorageWithVersioning": {
+            "enabled": true,
             "immutabilityPolicy": {
-              "immutabilityPeriodSinceCreationInDays": 15,
               "allowProtectedAppendWrites": true,
+              "immutabilityPeriodSinceCreationInDays": 15,
               "state": "Locked"
-            },
-            "enabled": true
+            }
           }
         },
         "sku": {
@@ -42,9 +43,10 @@
         "tags": {
           "key1": "value1",
           "key2": "value2"
-        },
-        "type": "Microsoft.Storage/storageAccounts"
+        }
       }
     }
-  }
+  },
+  "operationId": "StorageAccounts_Update",
+  "title": "StorageAccountUpdateWithImmutabilityPolicy"
 }

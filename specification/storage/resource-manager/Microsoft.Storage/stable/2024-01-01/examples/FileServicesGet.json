@@ -1,25 +1,26 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res4410",
-    "accountName": "sto8607",
     "FileServicesName": "default",
+    "accountName": "sto8607",
     "api-version": "2024-01-01",
-    "monitor": "true"
+    "monitor": "true",
+    "resourceGroupName": "res4410",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/fileServices/default",
         "name": "default",
         "type": "Microsoft.Storage/storageAccounts/fileServices",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/fileServices/default",
         "properties": {
           "cors": {
             "corsRules": [
               {
-                "allowedOrigins": [
-                  "http://www.contoso.com",
-                  "http://www.fabrikam.com"
+                "allowedHeaders": [
+                  "x-ms-meta-abc",
+                  "x-ms-meta-data*",
+                  "x-ms-meta-target*"
                 ],
                 "allowedMethods": [
                   "GET",
@@ -29,49 +30,48 @@
                   "MERGE",
                   "PUT"
                 ],
-                "maxAgeInSeconds": 100,
+                "allowedOrigins": [
+                  "http://www.contoso.com",
+                  "http://www.fabrikam.com"
+                ],
                 "exposedHeaders": [
                   "x-ms-meta-*"
                 ],
-                "allowedHeaders": [
-                  "x-ms-meta-abc",
-                  "x-ms-meta-data*",
-                  "x-ms-meta-target*"
-                ]
+                "maxAgeInSeconds": 100
               },
               {
-                "allowedOrigins": [
+                "allowedHeaders": [
                   "*"
                 ],
                 "allowedMethods": [
                   "GET"
                 ],
-                "maxAgeInSeconds": 2,
+                "allowedOrigins": [
+                  "*"
+                ],
                 "exposedHeaders": [
                   "*"
                 ],
-                "allowedHeaders": [
-                  "*"
-                ]
+                "maxAgeInSeconds": 2
               },
               {
-                "allowedOrigins": [
-                  "http://www.abc23.com",
-                  "https://www.fabrikam.com/*"
+                "allowedHeaders": [
+                  "x-ms-meta-12345675754564*"
                 ],
                 "allowedMethods": [
                   "GET",
                   "PUT"
                 ],
-                "maxAgeInSeconds": 2000,
+                "allowedOrigins": [
+                  "http://www.abc23.com",
+                  "https://www.fabrikam.com/*"
+                ],
                 "exposedHeaders": [
                   "x-ms-meta-abc",
                   "x-ms-meta-data*",
                   "x-ms-meta-target*"
                 ],
-                "allowedHeaders": [
-                  "x-ms-meta-12345675754564*"
-                ]
+                "maxAgeInSeconds": 2000
               }
             ]
           }
@@ -82,5 +82,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "FileServices_GetServiceProperties",
+  "title": "GetFileServices"
 }

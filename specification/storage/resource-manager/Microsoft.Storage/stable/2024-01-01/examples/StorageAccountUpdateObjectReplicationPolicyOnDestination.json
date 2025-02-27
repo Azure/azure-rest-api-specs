@@ -1,71 +1,73 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res7687",
     "accountName": "dst112",
-    "objectReplicationPolicyId": "2a20bb73-5717-4635-985a-5d4cf777438f",
     "api-version": "2024-01-01",
     "monitor": "true",
+    "objectReplicationPolicyId": "2a20bb73-5717-4635-985a-5d4cf777438f",
     "properties": {
       "properties": {
-        "sourceAccount": "src1122",
         "destinationAccount": "dst112",
+        "metrics": {
+          "enabled": true
+        },
         "rules": [
           {
-            "ruleId": "d5d18a48-8801-4554-aeaa-74faf65f5ef9",
-            "sourceContainer": "scont139",
             "destinationContainer": "dcont139",
             "filters": {
               "prefixMatch": [
                 "blobA",
                 "blobB"
               ]
-            }
+            },
+            "ruleId": "d5d18a48-8801-4554-aeaa-74faf65f5ef9",
+            "sourceContainer": "scont139"
           },
           {
-            "sourceContainer": "scont179",
-            "destinationContainer": "dcont179"
+            "destinationContainer": "dcont179",
+            "sourceContainer": "scont179"
           }
         ],
-        "metrics": {
-          "enabled": true
-        }
+        "sourceAccount": "src1122"
       }
-    }
+    },
+    "resourceGroupName": "res7687",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/dst112/objectReplicationPolicies/2a20bb73-5717-4635-985a-5d4cf777438f",
         "name": "2a20bb73-5717-4635-985a-5d4cf777438f",
         "type": "Microsoft.Storage/storageAccounts/objectReplicationPolicies",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/dst112/objectReplicationPolicies/2a20bb73-5717-4635-985a-5d4cf777438f",
         "properties": {
-          "policyId": "2a20bb73-5717-4635-985a-5d4cf777438f",
-          "sourceAccount": "src1122",
           "destinationAccount": "dst112",
+          "metrics": {
+            "enabled": true
+          },
+          "policyId": "2a20bb73-5717-4635-985a-5d4cf777438f",
           "rules": [
             {
-              "ruleId": "d5d18a48-8801-4554-aeaa-74faf65f5ef9",
-              "sourceContainer": "sourceContainer1",
               "destinationContainer": "destContainer1",
               "filters": {
                 "prefixMatch": [
                   "blobA",
                   "blobB"
                 ]
-              }
+              },
+              "ruleId": "d5d18a48-8801-4554-aeaa-74faf65f5ef9",
+              "sourceContainer": "sourceContainer1"
             },
             {
+              "destinationContainer": "dcont179",
               "ruleId": "cfbb4bc2-8b60-429f-b05a-d1e0942b33b2",
-              "sourceContainer": "scont179",
-              "destinationContainer": "dcont179"
+              "sourceContainer": "scont179"
             }
           ],
-          "metrics": {
-            "enabled": true
-          }
+          "sourceAccount": "src1122"
         }
       }
     }
-  }
+  },
+  "operationId": "ObjectReplicationPolicies_CreateOrUpdate",
+  "title": "StorageAccountUpdateObjectReplicationPolicyOnDestination"
 }

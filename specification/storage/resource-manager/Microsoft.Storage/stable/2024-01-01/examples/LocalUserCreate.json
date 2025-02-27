@@ -1,70 +1,72 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res6977",
     "accountName": "sto2527",
-    "username": "user1",
     "api-version": "2024-01-01",
+    "monitor": "true",
     "properties": {
       "properties": {
+        "allowAclAuthorization": true,
+        "groupId": 2000,
+        "hasSshPassword": true,
+        "homeDirectory": "homedirectory",
         "permissionScopes": [
           {
             "permissions": "rwd",
-            "service": "file",
-            "resourceName": "share1"
+            "resourceName": "share1",
+            "service": "file"
           },
           {
             "permissions": "rw",
-            "service": "file",
-            "resourceName": "share2"
+            "resourceName": "share2",
+            "service": "file"
           }
         ],
-        "homeDirectory": "homedirectory",
-        "hasSshPassword": true,
         "sshAuthorizedKeys": [
           {
             "description": "key name",
             "key": "ssh-rsa keykeykeykeykey="
           }
-        ],
-        "groupId": 2000,
-        "allowAclAuthorization": true
+        ]
       }
     },
-    "monitor": "true"
+    "resourceGroupName": "res6977",
+    "subscriptionId": "{subscription-id}",
+    "username": "user1"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/loalUsers/user1",
         "name": "user1",
         "type": "Microsoft.Storage/storageAccounts/localUsers",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/loalUsers/user1",
         "properties": {
+          "allowAclAuthorization": true,
+          "groupId": 2000,
+          "homeDirectory": "homedirectory",
           "permissionScopes": [
             {
               "permissions": "rwd",
-              "service": "file",
-              "resourceName": "share1"
+              "resourceName": "share1",
+              "service": "file"
             },
             {
               "permissions": "rw",
-              "service": "file",
-              "resourceName": "share2"
+              "resourceName": "share2",
+              "service": "file"
             }
           ],
-          "homeDirectory": "homedirectory",
+          "sid": "S-1-2-0-125132-153423-36235-1000",
           "sshAuthorizedKeys": [
             {
               "description": "key name",
               "key": "ssh-rsa keykeykeykeykey="
             }
           ],
-          "sid": "S-1-2-0-125132-153423-36235-1000",
-          "userId": 1000,
-          "groupId": 2000,
-          "allowAclAuthorization": true
+          "userId": 1000
         }
       }
     }
-  }
+  },
+  "operationId": "LocalUsers_CreateOrUpdate",
+  "title": "CreateLocalUser"
 }

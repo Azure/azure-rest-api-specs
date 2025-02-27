@@ -1,11 +1,11 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res4228",
     "accountName": "sto2434",
     "api-version": "2024-01-01",
+    "failoverType": "Planned",
     "monitor": "true",
-    "failoverType": "Planned"
+    "resourceGroupName": "res4228",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {},
@@ -14,5 +14,7 @@
         "Location": "https://endpoint:port/subscriptions/{subscription-id}/providers/Microsoft.Storage/locations/{location}/asyncoperations/{operationid}?monitor=true&api-version=2022-09-01"
       }
     }
-  }
+  },
+  "operationId": "StorageAccounts_Failover",
+  "title": "StorageAccountFailoverPlanned"
 }

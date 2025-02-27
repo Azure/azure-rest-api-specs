@@ -1,35 +1,37 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res3376",
     "accountName": "sto328",
-    "shareName": "share6185",
     "api-version": "2024-01-01",
-    "monitor": "true",
     "fileShare": {
       "properties": {
         "fileSharePaidBursting": {
           "paidBurstingEnabled": true,
-          "paidBurstingMaxIops": 102400,
-          "paidBurstingMaxBandwidthMibps": 10340
+          "paidBurstingMaxBandwidthMibps": 10340,
+          "paidBurstingMaxIops": 102400
         }
       }
-    }
+    },
+    "monitor": "true",
+    "resourceGroupName": "res3376",
+    "shareName": "share6185",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/fileServices/default/shares/share6185",
         "name": "share6185",
         "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/fileServices/default/shares/share6185",
         "properties": {
           "fileSharePaidBursting": {
             "paidBurstingEnabled": true,
-            "paidBurstingMaxIops": 102400,
-            "paidBurstingMaxBandwidthMibps": 10340
+            "paidBurstingMaxBandwidthMibps": 10340,
+            "paidBurstingMaxIops": 102400
           }
         }
       }
     }
-  }
+  },
+  "operationId": "FileShares_Update",
+  "title": "UpdateSharePaidBursting"
 }

@@ -1,70 +1,72 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res9101",
     "accountName": "sto4445",
     "api-version": "2024-01-01",
     "parameters": {
-      "sku": {
-        "name": "Standard_GRS"
+      "extendedLocation": {
+        "name": "losangeles001",
+        "type": "EdgeZone"
       },
       "kind": "Storage",
       "location": "eastus",
-      "extendedLocation": {
-        "type": "EdgeZone",
-        "name": "losangeles001"
-      },
       "properties": {
         "immutableStorageWithVersioning": {
+          "enabled": true,
           "immutabilityPolicy": {
-            "immutabilityPeriodSinceCreationInDays": 15,
             "allowProtectedAppendWrites": true,
+            "immutabilityPeriodSinceCreationInDays": 15,
             "state": "Unlocked"
-          },
-          "enabled": true
+          }
         }
+      },
+      "sku": {
+        "name": "Standard_GRS"
       }
-    }
+    },
+    "resourceGroupName": "res9101",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "sto4445",
+        "type": "Microsoft.Storage/storageAccounts",
+        "extendedLocation": {
+          "name": "losangeles001",
+          "type": "EdgeZone"
+        },
         "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
         "kind": "Storage",
         "location": "eastus",
-        "name": "sto4445",
-        "extendedLocation": {
-          "type": "EdgeZone",
-          "name": "losangeles001"
-        },
         "properties": {
           "creationTime": "2017-05-24T13:25:33.4863236Z",
+          "immutableStorageWithVersioning": {
+            "enabled": true,
+            "immutabilityPolicy": {
+              "allowProtectedAppendWrites": true,
+              "immutabilityPeriodSinceCreationInDays": 15,
+              "state": "Unlocked"
+            }
+          },
           "primaryEndpoints": {
-            "web": "https://sto4445.web.core.windows.net/",
-            "dfs": "https://sto4445.dfs.core.windows.net/",
             "blob": "https://sto4445.blob.core.windows.net/",
+            "dfs": "https://sto4445.dfs.core.windows.net/",
             "file": "https://sto4445.file.core.windows.net/",
             "queue": "https://sto4445.queue.core.windows.net/",
-            "table": "https://sto4445.table.core.windows.net/"
+            "table": "https://sto4445.table.core.windows.net/",
+            "web": "https://sto4445.web.core.windows.net/"
           },
           "primaryLocation": "eastus2euap",
-          "provisioningState": "Succeeded",
-          "immutableStorageWithVersioning": {
-            "immutabilityPolicy": {
-              "immutabilityPeriodSinceCreationInDays": 15,
-              "allowProtectedAppendWrites": true,
-              "state": "Unlocked"
-            },
-            "enabled": true
-          }
+          "provisioningState": "Succeeded"
         },
         "sku": {
           "name": "Standard_GRS",
           "tier": "Standard"
-        },
-        "type": "Microsoft.Storage/storageAccounts"
+        }
       }
     },
     "202": {}
-  }
+  },
+  "operationId": "StorageAccounts_Create",
+  "title": "StorageAccountCreateWithImmutabilityPolicy"
 }

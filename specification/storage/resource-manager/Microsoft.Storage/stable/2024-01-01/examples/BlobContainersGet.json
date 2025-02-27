@@ -1,24 +1,22 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res9871",
     "accountName": "sto6217",
-    "containerName": "container1634",
     "api-version": "2024-01-01",
-    "monitor": "true"
+    "containerName": "container1634",
+    "monitor": "true",
+    "resourceGroupName": "res9871",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto6217/blobServices/default/containers/container1634",
         "name": "container1634",
         "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
         "etag": "\"0x8D592D74CC20EBA\"",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto6217/blobServices/default/containers/container1634",
         "properties": {
-          "publicAccess": "None",
-          "leaseStatus": "Unlocked",
-          "leaseState": "Available",
-          "lastModifiedTime": "2018-03-26T05:06:14Z",
+          "hasImmutabilityPolicy": true,
+          "hasLegalHold": true,
           "immutabilityPolicy": {
             "etag": "\"8d592d74cb3011a\"",
             "properties": {
@@ -27,55 +25,59 @@
             },
             "updateHistory": [
               {
-                "update": "put",
                 "immutabilityPeriodSinceCreationInDays": 3,
+                "objectIdentifier": "ce7cd28a-fc25-4bf1-8fb9-e1b9833ffd4b",
+                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
                 "timestamp": "2018-03-26T05:06:11.431403Z",
-                "objectIdentifier": "ce7cd28a-fc25-4bf1-8fb9-e1b9833ffd4b",
-                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+                "update": "put"
               },
               {
-                "update": "lock",
                 "immutabilityPeriodSinceCreationInDays": 3,
-                "timestamp": "2018-03-26T05:06:13.0907641Z",
                 "objectIdentifier": "ce7cd28a-fc25-4bf1-8fb9-e1b9833ffd4b",
-                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+                "timestamp": "2018-03-26T05:06:13.0907641Z",
+                "update": "lock"
               },
               {
-                "update": "extend",
                 "immutabilityPeriodSinceCreationInDays": 100,
-                "timestamp": "2018-03-26T05:06:14.7097716Z",
                 "objectIdentifier": "ce7cd28a-fc25-4bf1-8fb9-e1b9833ffd4b",
-                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+                "timestamp": "2018-03-26T05:06:14.7097716Z",
+                "update": "extend"
               }
             ]
           },
+          "lastModifiedTime": "2018-03-26T05:06:14Z",
+          "leaseState": "Available",
+          "leaseStatus": "Unlocked",
           "legalHold": {
             "hasLegalHold": true,
             "tags": [
               {
+                "objectIdentifier": "ce7cd28a-fc25-4bf1-8fb9-e1b9833ffd4b",
                 "tag": "tag1",
-                "timestamp": "2018-03-26T05:06:09.6964643Z",
-                "objectIdentifier": "ce7cd28a-fc25-4bf1-8fb9-e1b9833ffd4b",
-                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+                "timestamp": "2018-03-26T05:06:09.6964643Z"
               },
               {
+                "objectIdentifier": "ce7cd28a-fc25-4bf1-8fb9-e1b9833ffd4b",
                 "tag": "tag2",
-                "timestamp": "2018-03-26T05:06:09.6964643Z",
-                "objectIdentifier": "ce7cd28a-fc25-4bf1-8fb9-e1b9833ffd4b",
-                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+                "timestamp": "2018-03-26T05:06:09.6964643Z"
               },
               {
-                "tag": "tag3",
-                "timestamp": "2018-03-26T05:06:09.6964643Z",
                 "objectIdentifier": "ce7cd28a-fc25-4bf1-8fb9-e1b9833ffd4b",
-                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+                "tag": "tag3",
+                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+                "timestamp": "2018-03-26T05:06:09.6964643Z"
               }
             ]
           },
-          "hasImmutabilityPolicy": true,
-          "hasLegalHold": true
+          "publicAccess": "None"
         }
       }
     }
-  }
+  },
+  "operationId": "BlobContainers_Get",
+  "title": "GetContainers"
 }

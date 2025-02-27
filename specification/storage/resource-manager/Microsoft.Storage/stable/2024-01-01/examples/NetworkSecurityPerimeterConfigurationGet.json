@@ -1,41 +1,25 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "res4410",
     "accountName": "sto8607",
+    "api-version": "2024-01-01",
     "networkSecurityPerimeterConfigurationName": "dbedb4e0-40e6-4145-81f3-f1314c150774.resourceAssociation1",
-    "api-version": "2024-01-01"
+    "resourceGroupName": "res4410",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/networkSecurityPerimeterConfigurations/dbedb4e0-40e6-4145-81f3-f1314c150774.resourceAssociation1",
         "name": "dbedb4e0-40e6-4145-81f3-f1314c150774.resourceAssociation1",
         "type": "Microsoft.Storage/storageAccounts/networkSecurityPerimeterConfigurations",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/networkSecurityPerimeterConfigurations/dbedb4e0-40e6-4145-81f3-f1314c150774.resourceAssociation1",
         "properties": {
-          "provisioningState": "Succeeded",
-          "provisioningIssues": [
-            {
-              "name": "ConfigurationPropagationFailure",
-              "properties": {
-                "issueType": "ConfigurationPropagationFailure",
-                "severity": "Error",
-                "description": "Failed to update Network Security Perimeter association."
-              }
-            }
-          ],
           "networkSecurityPerimeter": {
             "id": "/subscriptions/dbedb4e0-40e6-4145-81f3-f1314c150774/resourceGroups/res4794/providers/Microsoft.Network/networkSecurityPerimeters/nsp1",
-            "perimeterGuid": "ce2d5953-5c15-40ca-9d51-cc3f4a63b0f5",
-            "location": "East US"
-          },
-          "resourceAssociation": {
-            "name": "resourceAssociation1",
-            "accessMode": "Enforced"
+            "location": "East US",
+            "perimeterGuid": "ce2d5953-5c15-40ca-9d51-cc3f4a63b0f5"
           },
           "profile": {
             "name": "profile1",
-            "accessRulesVersion": 10,
             "accessRules": [
               {
                 "name": "allowedSubscriptions",
@@ -49,14 +33,32 @@
                 }
               }
             ],
+            "accessRulesVersion": 10,
             "diagnosticSettingsVersion": 5,
             "enabledLogCategories": [
               "NspPublicInboundPerimeterRulesAllowed",
               "NspPublicInboundPerimeterRulesDenied"
             ]
+          },
+          "provisioningIssues": [
+            {
+              "name": "ConfigurationPropagationFailure",
+              "properties": {
+                "description": "Failed to update Network Security Perimeter association.",
+                "issueType": "ConfigurationPropagationFailure",
+                "severity": "Error"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "resourceAssociation": {
+            "name": "resourceAssociation1",
+            "accessMode": "Enforced"
           }
         }
       }
     }
-  }
+  },
+  "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+  "title": "NetworkSecurityPerimeterConfigurationGet"
 }

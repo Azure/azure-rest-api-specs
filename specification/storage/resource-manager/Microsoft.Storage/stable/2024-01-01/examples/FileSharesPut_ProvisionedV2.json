@@ -1,47 +1,49 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res346",
     "accountName": "sto666",
-    "shareName": "share1235",
     "api-version": "2024-01-01",
-    "monitor": "true",
     "fileShare": {
       "properties": {
-        "shareQuota": 100,
+        "provisionedBandwidthMibps": 200,
         "provisionedIops": 5000,
-        "provisionedBandwidthMibps": 200
+        "shareQuota": 100
       }
-    }
+    },
+    "monitor": "true",
+    "resourceGroupName": "res346",
+    "shareName": "share1235",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res346/providers/Microsoft.Storage/storageAccounts/sto666/fileServices/default/shares/share1235",
         "name": "share1235",
         "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res346/providers/Microsoft.Storage/storageAccounts/sto666/fileServices/default/shares/share1235",
         "properties": {
-          "shareQuota": 100,
-          "provisionedIops": 5000,
-          "provisionedBandwidthMibps": 200,
           "includedBurstIops": 15000,
-          "maxBurstCreditsForIops": 36000000
+          "maxBurstCreditsForIops": 36000000,
+          "provisionedBandwidthMibps": 200,
+          "provisionedIops": 5000,
+          "shareQuota": 100
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res346/providers/Microsoft.Storage/storageAccounts/sto666/fileServices/default/shares/share1235",
         "name": "share1235",
         "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res346/providers/Microsoft.Storage/storageAccounts/sto666/fileServices/default/shares/share1235",
         "properties": {
-          "shareQuota": 100,
-          "provisionedIops": 5000,
-          "provisionedBandwidthMibps": 200,
           "includedBurstIops": 15000,
-          "maxBurstCreditsForIops": 36000000
+          "maxBurstCreditsForIops": 36000000,
+          "provisionedBandwidthMibps": 200,
+          "provisionedIops": 5000,
+          "shareQuota": 100
         }
       }
     }
-  }
+  },
+  "operationId": "FileShares_Create",
+  "title": "PutSharesProvisionedV2"
 }
