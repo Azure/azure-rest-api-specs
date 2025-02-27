@@ -1,0 +1,47 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-12-09-preview",
+    "title": "ConfidentialLedgerClient",
+    "description": "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service."
+  },
+  "paths": {},
+  "definitions": {
+    "ConfidentialLedgerError": {
+      "description": "An error response from Confidential Ledger.",
+      "properties": {
+        "error": {
+          "readOnly": true,
+          "$ref": "#/definitions/ConfidentialLedgerErrorBody"
+        }
+      },
+      "type": "object"
+    },
+    "ConfidentialLedgerErrorBody": {
+      "description": "An error response from Confidential Ledger.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error message."
+        }
+      },
+      "x-nullable": true,
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    }
+  }
+}
