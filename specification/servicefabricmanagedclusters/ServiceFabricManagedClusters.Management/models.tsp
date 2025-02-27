@@ -1260,11 +1260,15 @@ model RollingUpgradeMonitoringPolicy {
   /**
    * The amount of time to wait after completing an upgrade domain before applying health policies. It is interpreted as a string representing an ISO 8601 duration with following format "hh:mm:ss.fff".
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+  @OpenAPI.extension("x-ms-format", "duration-constant")
   healthCheckWaitDuration: string;
 
   /**
    * The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is interpreted as a string representing an ISO 8601 duration with following format "hh:mm:ss.fff".
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+  @OpenAPI.extension("x-ms-format", "duration-constant")
   healthCheckStableDuration: string;
 
   /**
@@ -2240,11 +2244,15 @@ model ClusterMonitoringPolicy {
   /**
    * The length of time to wait after completing an upgrade domain before performing health checks. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+  @OpenAPI.extension("x-ms-format", "duration-constant")
   healthCheckWaitDuration: string;
 
   /**
    * The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+  @OpenAPI.extension("x-ms-format", "duration-constant")
   healthCheckStableDuration: string;
 
   /**
