@@ -59,6 +59,23 @@ model FleetMemberProperties {
   @added(Versions.v2025_03_01)
   @doc("The labels for the fleet member.")
   labels?: Record<string>;
+
+  @added(Versions.v2025_03_01)
+  @visibility("read")
+  @doc("Status information of the last operation for fleet member.")
+  status?: FleetMemberStatus;
+}
+
+@added(Versions.v2025_03_01)
+@doc("Status information for the fleet member")
+model FleetMemberStatus {
+  @visibility("read")
+  @doc("The last operation ID for the fleet member")
+  lastOperationId?: string;
+
+  @visibility("read")
+  @doc("The last operation error of the fleet member")
+  lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @lroStatus
