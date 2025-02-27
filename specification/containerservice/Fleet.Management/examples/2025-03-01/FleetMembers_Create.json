@@ -9,7 +9,10 @@
     "fleetMemberName": "member-1",
     "resource": {
       "properties": {
-        "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1"
+        "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1",
+        "labels": {
+          "environment": "production"
+        }
       }
     }
   },
@@ -35,7 +38,10 @@
         "eTag": "23ujdflewrj3=",
         "properties": {
           "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "labels": {
+            "environment": "production"
+          }
         }
       }
     },
@@ -67,6 +73,9 @@
               "code": "None",
               "message": "No error"
             }
+          },
+          "labels": {
+            "environment": "production"
           }
         }
       }
