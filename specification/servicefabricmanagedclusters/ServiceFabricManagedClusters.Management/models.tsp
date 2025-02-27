@@ -3638,16 +3638,22 @@ model StatefulServiceProperties extends ServiceResourceProperties {
   /**
    * The duration between when a replica goes down and when a new replica is created, represented in ISO 8601 format "hh:mm:ss".
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+  @OpenAPI.extension("x-ms-format", "duration-constant")
   replicaRestartWaitDuration?: string;
 
   /**
    * The maximum duration for which a partition is allowed to be in a state of quorum loss, represented in ISO 8601 format "hh:mm:ss".
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+  @OpenAPI.extension("x-ms-format", "duration-constant")
   quorumLossWaitDuration?: string;
 
   /**
    * The definition on how long StandBy replicas should be maintained before being removed, represented in ISO 8601 format "hh:mm:ss".
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+  @OpenAPI.extension("x-ms-format", "duration-constant")
   standByReplicaKeepDuration?: string;
 
   /**
