@@ -300,10 +300,83 @@
         },
         "connectivityCapabilities": {
           "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/connectivityCapabilitiesItem"
+          "description": "Collection of additional settings to enhance specific topology behaviors of the connectivity configuration resource.",
+          "properties": {
+            "connectedGroupPrivateEndpointScale": {
+              "type": "string",
+              "enum": [
+                "Standard",
+                "HighScale"
+              ],
+              "x-ms-enum": {
+                "name": "ConnectedGroupPrivateEndpointScale",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Standard",
+                    "description": "Default. Allows for up to 2K private endpoints in the connected group."
+                  },
+                  {
+                    "value": "HighScale",
+                    "description": "Allows for up to 20K private endpoints in the connected group."
+                  }
+                ]
+              },
+              "description": "Option indicating the scale of private endpoints allowed in the connected group of the connectivity configuration.",
+              "default": "Standard"
+            },
+            "connectedGroupAddressOverlap": {
+              "type": "string",
+              "enum": [
+                "Allowed",
+                "Disallowed"
+              ],
+              "x-ms-enum": {
+                "name": "ConnectedGroupAddressOverlap",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Allowed",
+                    "description": "Default. Allows connected group members to have overlapping IP address space."
+                  },
+                  {
+                    "value": "Disallowed",
+                    "description": "Strictly disallows connected group members from having overlapping IP address space. Prevents the addition of a virtual network with overlapping address to the connected group, blocks peering between a virtual network and a connected group member if any connected group member has an overlapping range, and restricts address space modifications that would introduce overlap."
+                  }
+                ]
+              },
+              "description": "Behavior to handle overlapped IP address space among members of the connected group of the connectivity configuration.",
+              "default": "Allowed"
+            },
+            "peeringEnforcement": {
+              "type": "string",
+              "enum": [
+                "Unenforced",
+                "Enforced"
+              ],
+              "x-ms-enum": {
+                "name": "PeeringEnforcement",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Unenforced",
+                    "description": "Default. Peerings created by the connectivity configuration may be modified or deleted outside of the network manager."
+                  },
+                  {
+                    "value": "Enforced",
+                    "description": "Peerings created by the connectivity configuration will not be modifiable or deletable outside of the network manager."
+                  }
+                ]
+              },
+              "description": "Option indicating enforcement of peerings created by the connectivity configuration.",
+              "default": "Unenforced"
+            }
           },
-          "description": "Collection of additional settings to enhance specific topology behaviors of the connectivity configuration resource."
+          "required": [
+            "connectedGroupPrivateEndpointScale",
+            "connectedGroupAddressOverlap",
+            "peeringEnforcement"
+          ]
         },
         "appliesToGroups": {
           "type": "array",
@@ -357,81 +430,6 @@
         }
       },
       "description": "Hub Item."
-    },
-    "connectivityCapabilitiesItem": {
-      "type": "object",
-      "properties": {
-        "connectedGroupPrivateEndpointScale": {
-          "type": "string",
-          "enum": [
-            "Standard",
-            "HighScale"
-          ],
-          "x-ms-enum": {
-            "name": "ConnectedGroupPrivateEndpointScale",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Standard",
-                "description": "Default. Allows for up to 2K private endpoints in the connected group."
-              },
-              {
-                "value": "HighScale",
-                "description": "Allows for up to 20K private endpoints in the connected group."
-              }
-            ]
-          },
-          "description": "Option indicating the scale of private endpoints allowed in the connected group of the connectivity configuration.",
-          "default": "Standard"
-        },
-        "connectedGroupAddressOverlap": {
-          "type": "string",
-          "enum": [
-            "Allowed",
-            "Disallowed"
-          ],
-          "x-ms-enum": {
-            "name": "ConnectedGroupAddressOverlap",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Allowed",
-                "description": "Default. Allows connected group members to have overlapping IP address space."
-              },
-              {
-                "value": "Disallowed",
-                "description": "Strictly disallows connected group members from having overlapping IP address space. Prevents the addition of a virtual network with overlapping address to the connected group, blocks peering between a virtual network and a connected group member if any connected group member has an overlapping range, and restricts address space modifications that would introduce overlap."
-              }
-            ]
-          },
-          "description": "Behavior to handle overlapped IP address space among members of the connected group of the connectivity configuration.",
-          "default": "Allowed"
-        },
-        "peeringEnforcement": {
-          "type": "string",
-          "enum": [
-            "Unenforced",
-            "Enforced"
-          ],
-          "x-ms-enum": {
-            "name": "PeeringEnforcement",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Unenforced",
-                "description": "Default. Peerings created by the connectivity configuration may be modified or deleted outside of the network manager."
-              },
-              {
-                "value": "Enforced",
-                "description": "Peerings created by the connectivity configuration will not be modifiable or deletable outside of the network manager."
-              }
-            ]
-          },
-          "description": "Option indicating enforcement of peerings created by the connectivity configuration.",
-          "default": "Unenforced"
-        }
-      },
-      "description": "Connectivity capabilities item."
     },
     "connectivityGroupItem": {
       "type": "object",
