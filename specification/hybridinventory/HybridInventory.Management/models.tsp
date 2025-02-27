@@ -500,6 +500,11 @@ union Language {
    * PLXSLT edition.
    */
   PLXSLT: "PLXSLT",
+
+  /**
+   * INTERNAL edition.
+   */
+  INTERNAL: "INTERNAL",
 }
 
 /**
