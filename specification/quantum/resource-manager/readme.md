@@ -136,13 +136,17 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ```yaml
 directive:
   - suppress: EnumInsteadOfBoolean
-    where: $.definitions.operation.properties.isDataAction
     from: quantum.json
+    where: $.definitions.operation.properties.isDataAction
     reason: 'This property is really a boolean, there are no plans to have more than two values in the future.'
   - suppress: AvoidNestedProperties
-    where: $.definitions.ProviderDescription.properties.properties
     from: quantum.json
+    where: $.definitions.ProviderDescription.properties.properties
     reason: We don't have end customers making direct API calls and this is a breaking change for our existing clients.
+  - suppress: PatchIdentityProperty
+    from: quantum.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}"].patch.parameters[4]
+    reason: We do not support updating the Identity property.
 suppressions:
   - code: EnumInsteadOfBoolean
     where:
