@@ -28,13 +28,13 @@ openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2025-03-30
 ```
-### Tag: package-2025-09-30
+### Tag: package-2025-03-30
 
 These settings apply only when `--tag=package-2025-03-30` is specified on the command line.
 
 ```yaml $(tag) == 'package-2025-03-30'
 input-file:
-- Microsoft.CodeSigning/preview/2025-03-30/codeSigningAccount.json
+- Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json
 ```
 
 ### Tag: package-2024-09-30-preview
