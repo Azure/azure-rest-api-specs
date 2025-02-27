@@ -41,9 +41,9 @@ using Microsoft.KeyVault;
 
 @@clientName(Secrets.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Secrets.update::parameters.properties, "parameters");
-@@clientName(ManagedHsmsOperations.checkMhsmNameAvailability::parameters.body,
+@@clientName(ManagedHsmsOperationGroup.checkMhsmNameAvailability::parameters.body,
   "mhsName"
 );
-@@clientName(VaultsOperations.checkNameAvailability::parameters.body,
+@@clientName(VaultsOperationGroup.checkNameAvailability::parameters.body,
   "vaultName"
 );

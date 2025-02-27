@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.KeyVault;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface VaultsOperations {
+interface VaultsOperationGroup {
   /**
    * Gets information about the deleted vaults in a subscription.
    */
@@ -69,7 +69,7 @@ interface VaultsOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ManagedHsmsOperations {
+interface ManagedHsmsOperationGroup {
   /**
    * The List operation gets information about the deleted managed HSMs associated with the subscription.
    */
@@ -97,6 +97,6 @@ interface ManagedHsmsOperations {
   >;
 }
 
-@@doc(VaultsOperations.checkNameAvailability::parameters.body,
+@@doc(VaultsOperationGroup.checkNameAvailability::parameters.body,
   "The name of the vault."
 );
