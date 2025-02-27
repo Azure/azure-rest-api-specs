@@ -68,6 +68,18 @@ directive:
       - $.definitions.ServiceResource.properties
     reason:
       - Currently systemData is not allowed.
+  - from: servicefabricmanagedclusters.json
+    where: definitions.ClusterMonitoringPolicy.properties.HealthCheckWaitDuration
+    transform: $["format"] = "duration"
+  - from: servicefabricmanagedclusters.json
+    where: definitions.ClusterMonitoringPolicy.properties.healthCheckStableDuration
+    transform: $["format"] = "duration"
+  - from: servicefabricmanagedclusters.json
+    where: definitions.RollingUpgradeMonitoringPolicy.properties.HealthCheckWaitDuration
+    transform: $["format"] = "duration"
+  - from: servicefabricmanagedclusters.json
+    where: definitions.RollingUpgradeMonitoringPolicy.properties.HealthCheckWaitDuration
+    transform: $["format"] = "duration"
 ```
 
 ### Tag: package-2024-11-preview
