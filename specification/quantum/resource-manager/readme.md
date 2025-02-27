@@ -134,19 +134,6 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## Suppressions
 
 ```yaml
-directive:
-  - suppress: EnumInsteadOfBoolean
-    from: quantum.json
-    where: $.definitions.operation.properties.isDataAction
-    reason: 'This property is really a boolean, there are no plans to have more than two values in the future.'
-  - suppress: AvoidNestedProperties
-    from: quantum.json
-    where: $.definitions.ProviderDescription.properties.properties
-    reason: We don't have end customers making direct API calls and this is a breaking change for our existing clients.
-  - suppress: PatchIdentityProperty
-    from: quantum.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}"].patch.parameters[4]
-    reason: We do not support updating the Identity property.
 suppressions:
   - code: EnumInsteadOfBoolean
     where:
@@ -164,6 +151,8 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}"].patch.parameters[4]
     reason: We do not support updating the Identity property.
   - code: ProvisioningStateMustBeReadOnly
+    where:
+      - $.definitions.Provider.properties.provisioningState
     reason: The provisioningState being flagged is not the ARM resource provisioningState, but the field for our ProviderStatus. Currently, this cannot be readOnly, or it will cause livesite issue and workspace does not behave correctly. We have on our roadmap to fix this issue, but this needs to be settable for control plane to work properly.
   - code: AvoidAnonymousTypes
     where: 
