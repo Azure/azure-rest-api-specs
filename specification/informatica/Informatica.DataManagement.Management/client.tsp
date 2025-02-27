@@ -9,7 +9,10 @@ using Azure.ClientGenerator.Core;
 );
 
 @@clientName(Informatica.DataManagement, "InformaticaDataMgmt", "python");
-@@clientName(Informatica.DataManagement, "InformaticaDataManagementClient", "java");
+@@clientName(Informatica.DataManagement,
+  "InformaticaDataManagementClient",
+  "java"
+);
 
 namespace Informatica.DataManagement {
   @@access(Operations.list, Access.internal);
