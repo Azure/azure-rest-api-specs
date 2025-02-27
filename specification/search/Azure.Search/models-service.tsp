@@ -7311,28 +7311,28 @@ model LimitTokenFilter extends TokenFilter {
   `@odata.type`: "#Microsoft.Azure.Search.LimitTokenFilter";
 }
 
-/**
- * Generates n-grams of the given size(s). This token filter is implemented using
- * Apache Lucene.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-model NGramTokenFilter extends TokenFilter {
-  /**
-   * The minimum n-gram length. Default is 1. Must be less than the value of maxGram.
-   */
-  minGram?: int32 = 1;
+// /**
+//  * Generates n-grams of the given size(s). This token filter is implemented using
+//  * Apache Lucene.
+//  */
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+// model NGramTokenFilter extends TokenFilter {
+//   /**
+//    * The minimum n-gram length. Default is 1. Must be less than the value of maxGram.
+//    */
+//   minGram?: int32 = 1;
 
-  /**
-   * The maximum n-gram length. Default is 2.
-   */
-  maxGram?: int32 = 2;
+//   /**
+//    * The maximum n-gram length. Default is 2.
+//    */
+//   maxGram?: int32 = 2;
 
-  /**
-   * A URI fragment specifying the type of token filter.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  `@odata.type`: "#Microsoft.Azure.Search.NGramTokenFilter";
-}
+//   /**
+//    * A URI fragment specifying the type of token filter.
+//    */
+//   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+//   `@odata.type`: "#Microsoft.Azure.Search.NGramTokenFilter";
+// }
 
 /**
  * Generates n-grams of the given size(s). This token filter is implemented using
