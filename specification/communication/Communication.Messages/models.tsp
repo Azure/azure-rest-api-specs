@@ -14,7 +14,7 @@ using Azure.Core.Traits;
 @versioned(Azure.Communication.MessagesService.Versions)
 namespace Azure.Communication.MessagesService;
 
-@doc("The type of message. Supports text, image, template.")
+@doc("The type of message.")
 union CommunicationMessageKind {
   string,
 
@@ -24,8 +24,78 @@ union CommunicationMessageKind {
   @doc("Image message type.")
   image: "image",
 
+  @added(Versions.c2024_08_30)
+  @doc("Image message type. Legacy image type for `MediaNotificationContent` which is being deprecated")
+  image_v0: "image_v0",
+
+  @added(Versions.c2024_08_30)
+  @doc("Document message type.")
+  document: "document",
+
+  @added(Versions.c2024_08_30)
+  @doc("Video message type.")
+  video: "video",
+
+  @added(Versions.c2024_08_30)
+  @doc("Audio message type.")
+  audio: "audio",
+
   @doc("Template message type.")
   template: "template",
+
+  @added(Versions.c2025_01_15_Preview)
+  @doc("Sticker message type.")
+  sticker: "sticker",
+
+  @added(Versions.c2025_01_15_Preview)
+  @doc("Reaction message type.")
+  reaction: "reaction",
+
+  @added(Versions.c2025_01_15_Preview)
+  @doc("Interactive Actionable message type.")
+  interactive: "interactive",
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The Kind of interactive message channel action binding like WhatsAppListAction.")
+union MessageActionBindingKind {
+  string,
+
+  @doc("The WhatsApp List action binding kind.")
+  whatsAppListAction: "whatsAppListAction",
+
+  @doc("The WhatsApp Button action binding kind.")
+  whatsAppButtonAction: "whatsAppButtonAction",
+
+  @doc("The WhatsApp Url action binding kind.")
+  whatsAppUrlAction: "whatsAppUrlAction",
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The kind of Interactive message content.")
+union MessageContentKind {
+  string,
+
+  @doc("The text content type.")
+  text: "text",
+
+  @doc("The image content type.")
+  image: "image",
+
+  @doc("The video content type.")
+  video: "video",
+
+  @doc("The document content type.")
+  document: "document",
+
+  @doc("The ActionSet content type.")
+  group: "group",
+
+  @doc("The ButtonSet content type.")
+  buttonSet: "buttonSet",
+
+  @doc("The Url content type.")
+  url: "url",
 }
 
 @doc("The WhatsApp button sub type.")
@@ -117,17 +187,283 @@ model TextNotificationContent extends NotificationContent {
   content: string;
 }
 
-@doc("A request to send a media notification.")
+@added(Versions.c2024_08_30)
+@doc("A request to send a media notification. Could be an image, document or video.")
+model MediaNotificationContentBase {
+  @clientName("mediaUrl", "java")
+  @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
+  mediaUri: url;
+}
+
+#deprecated "`MediaNotificationContent` is being deprecated, we encourage you to use the new `ImageNotificationContent` for sending images instead."
+@access(Access.internal, "python")
+@added(Versions.c2024_08_30)
+@doc("@deprecated A request to send an image notification.")
 model MediaNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
-  kind: CommunicationMessageKind.image;
+  kind: CommunicationMessageKind.image_v0;
 
   @doc("Optional text content.")
   content?: string;
 
-  @clientName("mediaUrl", "java")
-  @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
+  ...MediaNotificationContentBase;
+}
+
+@renamedFrom(Versions.c2024_08_30, "MediaNotificationContent")
+@doc("A request to send an image notification.")
+model ImageNotificationContent extends NotificationContent {
+  @doc("Message notification type is image.")
+  kind: CommunicationMessageKind.image;
+
+  @renamedFrom(Versions.c2024_08_30, "content")
+  @clientName("content", "python")
+  @doc("Optional text content.")
+  caption?: string;
+
+  ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2024_08_30)
+@doc("A request to send a document notification.")
+model DocumentNotificationContent extends NotificationContent {
+  @doc("Message notification type is image.")
+  kind: CommunicationMessageKind.document;
+
+  @doc("Optional text content.")
+  caption?: string;
+
+  @doc("Optional name for the file.")
+  fileName?: string;
+
+  ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2024_08_30)
+@doc("A request to send a video notification.")
+model VideoNotificationContent extends NotificationContent {
+  @doc("Message notification type is image.")
+  kind: CommunicationMessageKind.video;
+
+  @doc("Optional text content.")
+  caption?: string;
+
+  ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2024_08_30)
+@doc("A request to send an audio notification.")
+model AudioNotificationContent extends NotificationContent {
+  @doc("Message notification type is audio.")
+  kind: CommunicationMessageKind.audio;
+
+  ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("A request to send a Reaction notification.")
+model ReactionNotificationContent extends NotificationContent {
+  @doc("Message notification type is reaction.")
+  kind: CommunicationMessageKind.reaction;
+
+  @doc("emoji content like \\uD83D\\uDE00.")
+  emoji: string;
+
+  @doc("ID of the previous message you want to reply to.")
+  messageId: string;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("A request to send a Sticker notification.")
+model StickerNotificationContent extends NotificationContent {
+  @doc("Message notification type is sticker.")
+  kind: CommunicationMessageKind.sticker;
+
+  ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("A request to send an Interactive message notification.")
+model InteractiveNotificationContent extends NotificationContent {
+  @doc("Message notification type is Interactive.")
+  kind: CommunicationMessageKind.interactive;
+
+  @doc("The interactive message content.")
+  interactiveMessage: InteractiveMessage;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The Interactive message content to which user can read and respond.")
+model InteractiveMessage {
+  @doc("Gets or Sets Header content. Supports the following types:text, images etc.")
+  header?: MessageContent;
+
+  @doc("Gets or Sets Message body content. Emojis, markdown, and links are supported.")
+  body: TextMessageContent;
+
+  @doc("Gets or Sets Message footer content. Emojis, markdown, and links are supported.")
+  footer?: TextMessageContent;
+
+  @doc("The binding object to get or set Action which describes options user have to respond to message.")
+  action: ActionBindings;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@discriminator("kind")
+@doc("The message content object used to create interactive messages components.")
+model MessageContent {
+  @doc("Kind of MessageContent.")
+  kind: MessageContentKind;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type text information.")
+model TextMessageContent extends MessageContent {
+  @doc("Message content kind is text.")
+  kind: MessageContentKind.text;
+
+  @doc("The text value.")
+  text: string;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type document information.")
+model DocumentMessageContent extends MessageContent {
+  @doc("Message content kind is document.")
+  kind: MessageContentKind.document;
+
+  ...MediaMessageContent;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type image information.")
+model ImageMessageContent extends MessageContent {
+  @doc("Message content kind is image.")
+  kind: MessageContentKind.image;
+
+  ...MediaMessageContent;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type video information.")
+model VideoMessageContent extends MessageContent {
+  @doc("Message content kind is video.")
+  kind: MessageContentKind.video;
+
+  ...MediaMessageContent;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type Button information.")
+model ButtonContent {
+  @doc("Unique Id of the button content.")
+  id: string;
+
+  @doc("Title of the button content.")
+  title: string;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type ButtonSet/ List of buttons information.")
+model ButtonSetContent extends MessageContent {
+  @doc("Message content kind is Button.")
+  kind: MessageContentKind.buttonSet;
+
+  @doc("Unique Id of the button content.")
+  buttons: ButtonContent[];
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type Url information.")
+model LinkContent extends MessageContent {
+  @doc("Message content kind is url.")
+  kind: MessageContentKind.url;
+
+  @doc("Title of the url content.")
+  title: string;
+
+  @doc("The url in the content.")
+  url: url;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The action content of type ActionGroup.")
+model ActionGroupContent extends MessageContent {
+  @doc("Message content kind is actionGroup.")
+  kind: MessageContentKind.group;
+
+  @doc("Title of the actionGroup content.")
+  title: string;
+
+  @doc("Set or group of actions.")
+  groups: ActionGroup[];
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The Action Group content.")
+model ActionGroup {
+  @doc("Title of the ActionGroup.")
+  title: string;
+
+  @doc("Array of items in ActionGroup.")
+  items: ActionGroupItem[];
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The Action group item in the content.")
+model ActionGroupItem {
+  @doc("Id of the Item.")
+  id: string;
+
+  @doc("Title of the Item.")
+  title: string;
+
+  @doc("Description of the Item.")
+  description: string;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The media content.")
+model MediaMessageContent {
+  @doc("MediaUri of the media content.")
   mediaUri: url;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@discriminator("kind")
+@doc("Binding actions to the interactive message.")
+model ActionBindings {
+  @doc("Kind of the MessageActionBinding.")
+  kind: MessageActionBindingKind;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("WhatsApp List Binding actions to the interactive message.")
+model WhatsAppListActionBindings extends ActionBindings {
+  @doc("Message action binding type is WhatsAppListAction.")
+  kind: MessageActionBindingKind.whatsAppListAction;
+
+  @doc("Action content of Interactive message.")
+  content: ActionGroupContent;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("WhatsApp Binding actions to the interactive message.")
+model WhatsAppButtonActionBindings extends ActionBindings {
+  @doc("Message action binding type is WhatsAppButtonAction.")
+  kind: MessageActionBindingKind.whatsAppButtonAction;
+
+  @doc("Action content of Interactive message.")
+  content: ButtonSetContent;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("WhatsApp Binding actions to the interactive message.")
+model WhatsAppUrlActionBindings extends ActionBindings {
+  @doc("Message action binding type is WhatsAppUrlAction.")
+  kind: MessageActionBindingKind.whatsAppUrlAction;
+
+  @doc("Action content of Interactive message.")
+  content: LinkContent;
 }
 
 @doc("A request to send a template notification.")
@@ -368,16 +704,24 @@ alias ListTemplatesQueryParams = ListQueryParametersTrait<{
   maxpagesize?: int32;
 }>;
 
-@doc("Azure Communication Messages Versions")
-enum Versions {
-  @doc("Azure Communication Messages 2024-02-01 api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  c2024_02_01: "2024-02-01",
-}
-
 @doc("Notification messages send request body.")
 model NotificationMessagesSendRequestBody {
   @doc("Details of the message to send.")
   @bodyRoot
   body: NotificationContent;
+}
+
+@doc("Azure Communication Messages Versions")
+enum Versions {
+  @doc("Azure Communication Messages 2024-02-01 api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024_02_01: "2024-02-01",
+
+  @doc("Azure Communication Messages 2024-08-30 api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024_08_30: "2024-08-30",
+
+  @doc("Azure Communication Messages 2025-01-15-preview api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2025_01_15_Preview: "2025-01-15-preview",
 }

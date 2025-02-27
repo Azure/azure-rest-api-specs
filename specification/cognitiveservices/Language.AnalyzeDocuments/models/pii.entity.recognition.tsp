@@ -21,8 +21,13 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   /** Enumeration of PII categories to be excluded in the response. */
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
-  /** Character to be used for redaction. Default in '*'. */
-  redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
+  /** Redaction policy to be used when redacting from documents */
+  @added(Versions.v2024_11_15_preview)
+  redactionPolicy?: BaseRedactionPolicy;
+
+  /** Boolean to indicate if entities should be excluded from the response json stored in the customer's storage. */
+  @added(Versions.v2024_11_15_preview)
+  excludeExtractionData?: boolean;
 }
 
 /** Contains the analyze text PIIEntityRecognition LRO task. */
@@ -53,6 +58,48 @@ union PiiDomain {
   none: "none",
 }
 
+/** The abstract base class for RedactionPolicy. */
+@discriminator("policyKind")
+model BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind;
+}
+
+/** Represents the policy of redacting with a redaction character */
+model CharacterMaskPolicy extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.characterMask;
+
+  /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
+  redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
+}
+
+/** Represents the policy of not redacting found PII. */
+model NoMaskPolicy extends BaseRedactionPolicy {
+  /** The entity RedactionPolicy object kind. */
+  policyKind: RedactionPolicyKind.noMask;
+}
+
+/** Represents the policy of redacting PII with the entity type. */
+model EntityMaskPolicy extends BaseRedactionPolicy {
+  /** The entity OverlapPolicy object kind. */
+  policyKind: RedactionPolicyKind.entityMask;
+}
+
+/** Kinds of redaction policies supported. */
+union RedactionPolicyKind {
+  string,
+
+  /** Do not redact detected entities. */
+  noMask: "noMask",
+
+  /** React detected entities with redaction character. */
+  characterMask: "characterMask",
+
+  /** Redact detected entities with entity type. */
+  entityMask: "entityMask",
+}
+
 /** Contains the PII results. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiEntitiesDocumentResult is DocumentResult {
@@ -74,20 +121,29 @@ model Entity {
   /** Entity text as appears in the request. */
   text: string;
 
-  /** Entity type. */
-  category: string;
-
-  /** (Optional) Entity sub type. */
-  subcategory?: string;
-
-  /** Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned. */
-  offset: int32;
-
   /** Length for the entity text. Use of different 'stringIndexType' values can affect the length returned. */
   length: int32;
 
   /** Confidence score between 0 and 1 of the extracted entity. */
   confidenceScore: float64;
+
+  /** Most granular type of the entity detected */
+  type: string;
+
+  /** An identifier for mappping the extracted entity with the redacted data in the original document. */
+  entityId: string;
+
+  /** List of entity tags. Tags are to express some similarities/affinity between entities. */
+  tags: Array<EntityTag>;
+}
+
+/** Entity tag expresses any affinity or association the entity has. Example if it part of a broarding grouping like a Numeric or Location entity, etc. */
+model EntityTag {
+  /** Name of the tag. Entity Tag names will be unique globally. */
+  name: string;
+
+  /** Detection score between 0 and 1 of the entity tag. */
+  confidenceScore?: float64;
 }
 
 /** (Optional) describes the PII categories to return */

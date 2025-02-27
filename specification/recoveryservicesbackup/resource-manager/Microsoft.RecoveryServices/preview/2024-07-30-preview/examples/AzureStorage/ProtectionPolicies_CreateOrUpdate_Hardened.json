@@ -1,0 +1,187 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "SwaggerTestRg",
+    "vaultName": "swaggertestvault",
+    "policyName": "newPolicyV2",
+    "api-version": "2024-07-30-preview",
+    "parameters": {
+      "properties": {
+        "backupManagementType": "AzureStorage",
+        "workLoadType": "AzureFileShare",
+        "schedulePolicy": {
+          "schedulePolicyType": "SimpleSchedulePolicy",
+          "scheduleRunFrequency": "Daily",
+          "scheduleRunTimes": [
+            "2023-07-18T09:30:00.000Z"
+          ]
+        },
+        "timeZone": "UTC",
+        "vaultRetentionPolicy": {
+          "snapshotRetentionInDays": 5,
+          "vaultRetention": {
+            "retentionPolicyType": "LongTermRetentionPolicy",
+            "dailySchedule": {
+              "retentionTimes": [
+                "2023-07-18T09:30:00.000Z"
+              ],
+              "retentionDuration": {
+                "count": 30,
+                "durationType": "Days"
+              }
+            },
+            "weeklySchedule": {
+              "daysOfTheWeek": [
+                "Sunday"
+              ],
+              "retentionTimes": [
+                "2023-07-18T09:30:00.000Z"
+              ],
+              "retentionDuration": {
+                "count": 12,
+                "durationType": "Weeks"
+              }
+            },
+            "monthlySchedule": {
+              "retentionScheduleFormatType": "Weekly",
+              "retentionScheduleDaily": null,
+              "retentionScheduleWeekly": {
+                "daysOfTheWeek": [
+                  "Sunday"
+                ],
+                "weeksOfTheMonth": [
+                  "First"
+                ]
+              },
+              "retentionTimes": [
+                "2023-07-18T09:30:00.000Z"
+              ],
+              "retentionDuration": {
+                "count": 60,
+                "durationType": "Months"
+              }
+            },
+            "yearlySchedule": {
+              "retentionScheduleFormatType": "Weekly",
+              "monthsOfYear": [
+                "January"
+              ],
+              "retentionScheduleDaily": null,
+              "retentionScheduleWeekly": {
+                "daysOfTheWeek": [
+                  "Sunday"
+                ],
+                "weeksOfTheMonth": [
+                  "First"
+                ]
+              },
+              "retentionTimes": [
+                "2023-07-18T09:30:00.000Z"
+              ],
+              "retentionDuration": {
+                "count": 10,
+                "durationType": "Years"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupPolicies/newPolicyV2",
+        "name": "newPolicyV2",
+        "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+        "properties": {
+          "backupManagementType": "AzureStorage",
+          "schedulePolicy": {
+            "schedulePolicyType": "SimpleSchedulePolicy",
+            "scheduleRunFrequency": "Daily",
+            "scheduleRunTimes": [
+              "2023-07-18T09:30:00.000Z"
+            ]
+          },
+          "vaultRetentionPolicy": {
+            "snapshotRetentionInDays": 5,
+            "vaultRetention": {
+              "retentionPolicyType": "LongTermRetentionPolicy",
+              "dailySchedule": {
+                "retentionTimes": [
+                  "2023-07-18T09:30:00.000Z"
+                ],
+                "retentionDuration": {
+                  "count": 30,
+                  "durationType": "Days"
+                }
+              },
+              "weeklySchedule": {
+                "daysOfTheWeek": [
+                  "Sunday"
+                ],
+                "retentionTimes": [
+                  "2023-07-18T09:30:00.000Z"
+                ],
+                "retentionDuration": {
+                  "count": 12,
+                  "durationType": "Weeks"
+                }
+              },
+              "monthlySchedule": {
+                "retentionScheduleFormatType": "Weekly",
+                "retentionScheduleDaily": null,
+                "retentionScheduleWeekly": {
+                  "daysOfTheWeek": [
+                    "Sunday"
+                  ],
+                  "weeksOfTheMonth": [
+                    "First"
+                  ]
+                },
+                "retentionTimes": [
+                  "2023-07-18T09:30:00.000Z"
+                ],
+                "retentionDuration": {
+                  "count": 60,
+                  "durationType": "Months"
+                }
+              },
+              "yearlySchedule": {
+                "retentionScheduleFormatType": "Weekly",
+                "monthsOfYear": [
+                  "January"
+                ],
+                "retentionScheduleDaily": null,
+                "retentionScheduleWeekly": {
+                  "daysOfTheWeek": [
+                    "Sunday"
+                  ],
+                  "weeksOfTheMonth": [
+                    "First"
+                  ]
+                },
+                "retentionTimes": [
+                  "2023-07-18T09:30:00.000Z"
+                ],
+                "retentionDuration": {
+                  "count": 10,
+                  "durationType": "Years"
+                }
+              }
+            }
+          },
+          "timeZone": "UTC",
+          "protectedItemsCount": 0
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupPolicies/newPolicyV2/operationResults/00000000-0000-0000-0000-000000000000?api-version=2024-07-30-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupPolicies/newPolicyV2/operations/00000000-0000-0000-0000-000000000000?api-version=2024-07-30-preview",
+        "Retry-After": 60
+      }
+    }
+  }
+}
