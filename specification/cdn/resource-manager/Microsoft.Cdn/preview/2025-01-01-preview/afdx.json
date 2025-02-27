@@ -6667,6 +6667,11 @@
             "name": "EnabledState",
             "modelAsString": true
           }
+        },
+        "authentication": {
+          "type": "object",
+          "$ref": "#/definitions/OriginAuthenticationProperties",
+          "description": "Authentication settings for origin."
         }
       }
     },
@@ -6688,6 +6693,33 @@
           "description": "The additional latency in milliseconds for probes to fall into the lowest latency bucket",
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "OriginAuthenticationProperties": {
+      "description": "The JSON object that contains the properties of the origin authentication settings.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the authentication for the origin.",
+          "enum": [
+            "SystemAssignedIdentity",
+            "UserAssignedIdentity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OriginAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentity": {
+          "description": "The user assigned managed identity to use for the origin authentication if type is UserAssignedIdentity.",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "scope": {
+          "description": "The scope used when requesting token from Microsoft Entra. For example, for Azure Blob Storage, scope could be \"https://storage.azure.com/.default\".",
+          "type": "string"
         }
       }
     },
