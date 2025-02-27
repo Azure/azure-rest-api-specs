@@ -23,56 +23,58 @@ namespace ClientCustomizations;
     },
     "csharp"
   )
-  @operationGroup
-    interface KeyVaultAccessControlRestClient{
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        deleteRoleDefinition is KeyVault.RoleDefinitions.delete;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        createOrUpdateRoleDefinition is KeyVault.RoleDefinitions.createOrUpdate;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        getRoleDefinition is KeyVault.RoleDefinitions.get;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        listRoleDefinitions is KeyVault.RoleDefinitions.list;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        deleteRoleAssignment is KeyVault.RoleAssignments.delete;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        createRoleAssignment is KeyVault.RoleAssignments.create;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        getRoleAssignment is KeyVault.RoleAssignments.get;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        listRoleAssignments is KeyVault.RoleAssignments.listForScope;
-    }
+interface KeyVaultAccessControlRestClient{
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  deleteRoleDefinition is KeyVault.RoleDefinitions.delete;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  createOrUpdateRoleDefinition is KeyVault.RoleDefinitions.createOrUpdate;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getRoleDefinition is KeyVault.RoleDefinitions.get;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  listRoleDefinitions is KeyVault.RoleDefinitions.list;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  deleteRoleAssignment is KeyVault.RoleAssignments.delete;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  createRoleAssignment is KeyVault.RoleAssignments.create;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getRoleAssignment is KeyVault.RoleAssignments.get;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  listRoleAssignments is KeyVault.RoleAssignments.listForScope;
+}
 
-    @client(
-        {
-        name: "KeyVaultRestClient",
-        service: KeyVault,
-        }, 
-        "csharp")
-      interface KeyVaultClient {
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        fullBackup is KeyVault.fullBackup;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        preFullBackup is KeyVault.preFullBackup;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        fullRestoreOperation is KeyVault.fullRestoreOperation;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        preFullRestoreOperation is KeyVault.preFullRestoreOperation;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        fullBackupStatus is KeyVault.fullBackupStatus;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        restoreStatus is KeyVault.restoreStatus;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        selectiveKeyRestoreStatus is KeyVault.selectiveKeyRestoreStatus;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        selectiveKeyRestoreOperation is KeyVault.selectiveKeyRestoreOperation;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        updateSetting is KeyVault.updateSetting;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        getSetting is KeyVault.getSetting;
-        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-        getSettings is KeyVault.getSettings;
-      }
+@client(
+  {
+  name: "KeyVaultRestClient",
+  service: KeyVault,
+  }, 
+  "csharp")
+interface KeyVaultClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  fullBackup is KeyVault.fullBackup;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  preFullBackup is KeyVault.preFullBackup;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  fullRestoreOperation is KeyVault.fullRestoreOperation;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  preFullRestoreOperation is KeyVault.preFullRestoreOperation;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+  fullBackupStatus is KeyVault.fullBackupStatus;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+  restoreStatus is KeyVault.restoreStatus;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+  selectiveKeyRestoreStatus is KeyVault.selectiveKeyRestoreStatus;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  selectiveKeyRestoreOperation is KeyVault.selectiveKeyRestoreOperation;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  updateSetting is KeyVault.updateSetting;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getSetting is KeyVault.getSetting;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getSettings is KeyVault.getSettings;
+}
 
 @@access(KeyVault.fullBackup, Access.internal, "csharp");
 @@access(KeyVault.fullRestoreOperation, Access.internal, "csharp");
