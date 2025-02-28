@@ -21,17 +21,18 @@ runs:
         node-version: ${{ inputs.node-version }}
 
     - run: |
-        echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+        echo "cache-dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+        echo "package-lock=$(npm root)/../package-lock.json" >> ${GITHUB_OUTPUT}
       shell: bash
-      name: Get npm cache directory
-      id: npm-cache-dir
+      name: Get npm cache-dir and package-lock
+      id: npm-config
       working-directory: ${{ inputs.working-directory }}
 
     - id: npm-cache
       uses: actions/cache@v4
       with:
-        path: ${{ steps.npm-cache-dir.outputs.dir }}
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        path: ${{ steps.npm-config.outputs.cache-dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles(steps.npm-config.outputs.package-lock) }}
         restore-keys: |
           ${{ runner.os }}-node-
 
