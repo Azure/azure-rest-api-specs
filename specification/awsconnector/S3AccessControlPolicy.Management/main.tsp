@@ -73,7 +73,7 @@ model S3AccessControlPolicyProperties {
 @doc("Definition of awsS3AccessControlPolicy")
 model AwsS3AccessControlPolicyProperties {
   @doc("<p>A list of grants.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   grants?: Grant[];
 
   @doc("<p>Container for the bucket owner's display name and ID.</p>")
