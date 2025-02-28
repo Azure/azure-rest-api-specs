@@ -39,7 +39,7 @@ input-file:
   - Microsoft.ManufacturingPlatform/stable/2025-03-01/manufacturingplatform.json
 suppressions:
   - code: AvoidAnonymousTypes
-    from: Microsoft.ManufacturingPlatform/stable/2025-03-01/manufacturingplatform.json
+    from: manufacturingplatform.json
     reason: Swagger LintDiff false positive 
 ```
 ---
