@@ -74,7 +74,8 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "summary": "Lists all of the available Service Fabric resource provider API operations.",
+        "description": "Get the list of available Service Fabric resource provider API operations.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -84,7 +85,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -137,7 +138,7 @@
               "Windows"
             ],
             "x-ms-enum": {
-              "name": "Environment",
+              "name": "ManagedClusterVersionEnvironment",
               "modelAsString": true,
               "values": [
                 {
@@ -207,7 +208,7 @@
               "Windows"
             ],
             "x-ms-enum": {
-              "name": "Environment",
+              "name": "ManagedClusterVersionEnvironment",
               "modelAsString": true,
               "values": [
                 {
@@ -4348,6 +4349,28 @@
         ]
       }
     },
+    "AvailableOperationDisplay": {
+      "type": "object",
+      "description": "Operation supported by the Service Fabric resource provider",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The name of the provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource on which the operation is performed"
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that can be performed."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description"
+        }
+      }
+    },
     "AveragePartitionLoadScalingTrigger": {
       "type": "object",
       "description": "Represents a scaling trigger related to an average load of a metric/resource of a partition.",
@@ -6295,7 +6318,7 @@
           "type": "array",
           "description": "Set of extensions that should be installed onto the virtual machines.",
           "items": {
-            "$ref": "#/definitions/VmssExtension"
+            "$ref": "#/definitions/VMSSExtension"
           },
           "x-ms-identifiers": [
             "name"
@@ -6700,6 +6723,54 @@
             "description": "Protocol applies to ESP."
           }
         ]
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Describes the result of the request to list Service Fabric resource provider operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OperationResult items on this page",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationResult": {
+      "type": "object",
+      "description": "Available operation list result",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/AvailableOperationDisplay",
+          "description": "The object that represents the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin result"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
       }
     },
     "OsType": {
@@ -7941,6 +8012,90 @@
         }
       }
     },
+    "VMSSExtension": {
+      "type": "object",
+      "description": "Specifies set of extensions that should be installed onto the virtual machines.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extension."
+        },
+        "properties": {
+          "$ref": "#/definitions/VMSSExtensionProperties",
+          "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "VMSSExtensionProperties": {
+      "type": "object",
+      "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Json formatted public settings for the extension.",
+          "additionalProperties": {}
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.",
+          "additionalProperties": {}
+        },
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "description": "Collection of extension names after which this extension needs to be provisioned.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response.",
+          "readOnly": true
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
+        },
+        "setupOrder": {
+          "type": "array",
+          "description": "Indicates the setup order for the extension.",
+          "items": {
+            "$ref": "#/definitions/VmssExtensionSetupOrder"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "publisher",
+        "type",
+        "typeHandlerVersion"
+      ]
+    },
     "VMSize": {
       "type": "object",
       "description": "VM Sizes properties.",
@@ -8169,90 +8324,6 @@
         "diskSizeGB",
         "diskType",
         "diskLetter"
-      ]
-    },
-    "VmssExtension": {
-      "type": "object",
-      "description": "Specifies set of extensions that should be installed onto the virtual machines.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the extension."
-        },
-        "properties": {
-          "$ref": "#/definitions/VmssExtensionProperties",
-          "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "name",
-        "properties"
-      ]
-    },
-    "VmssExtensionProperties": {
-      "type": "object",
-      "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
-      "properties": {
-        "publisher": {
-          "type": "string",
-          "description": "The name of the extension handler publisher."
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler."
-        },
-        "autoUpgradeMinorVersion": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
-        },
-        "settings": {
-          "type": "object",
-          "description": "Json formatted public settings for the extension.",
-          "additionalProperties": {}
-        },
-        "protectedSettings": {
-          "type": "object",
-          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.",
-          "additionalProperties": {}
-        },
-        "forceUpdateTag": {
-          "type": "string",
-          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
-        },
-        "provisionAfterExtensions": {
-          "type": "array",
-          "description": "Collection of extension names after which this extension needs to be provisioned.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state, which only appears in the response.",
-          "readOnly": true
-        },
-        "enableAutomaticUpgrade": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
-        },
-        "setupOrder": {
-          "type": "array",
-          "description": "Indicates the setup order for the extension.",
-          "items": {
-            "$ref": "#/definitions/VmssExtensionSetupOrder"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "publisher",
-        "type",
-        "typeHandlerVersion"
       ]
     },
     "VmssExtensionSetupOrder": {

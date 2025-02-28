@@ -115,7 +115,7 @@ interface ManagedClusterVersion {
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
-    environment: Environment,
+    environment: ManagedClusterVersionEnvironment,
 
     /**
      * The cluster code version.
@@ -152,7 +152,7 @@ interface ManagedClusterVersion {
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
-    environment: Environment,
+    environment: ManagedClusterVersionEnvironment,
   ): ArmResponse<ManagedClusterCodeVersionListResult> | ErrorResponse;
 }
 
@@ -169,7 +169,7 @@ model ManagedClusterCodeVersionListResult {
 /**
  * The operating system of the cluster. The default means all.
  */
-union Environment {
+union ManagedClusterVersionEnvironment {
   string,
 
   /**

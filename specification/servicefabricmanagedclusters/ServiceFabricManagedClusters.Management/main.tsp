@@ -33,13 +33,27 @@ using TypeSpec.Versioning;
 /**
  * Service Fabric Managed Clusters Management Client
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Custom operations spec definition for backwards compatibility"
 @armProviderNamespace
 @service({
   title: "ServiceFabricManagedClustersManagementClient",
 })
 @versioned(Versions)
 namespace Microsoft.ServiceFabric;
-interface Operations extends Azure.ResourceManager.Operations {}
+
+@armResourceOperations
+interface Operations {
+  /**
+   * Get the list of available Service Fabric resource provider API operations.
+   */
+  @summary("Lists all of the available Service Fabric resource provider API operations.")
+  @route("/providers/Microsoft.ServiceFabric/operations")
+  @get
+  @armResourceList(OperationListResult)
+  list(
+    ...ApiVersionParameter,
+  ): ArmResponse<OperationListResult> | ErrorResponse;
+}
 
 /**
  * The available API versions.

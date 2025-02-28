@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ServiceFabric;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VmssExtension.properties);
+@@flattenProperty(VMSSExtension.properties);
 
 @@clientName(ApplicationTypes.createOrUpdate::parameters.resource,
   "parameters"

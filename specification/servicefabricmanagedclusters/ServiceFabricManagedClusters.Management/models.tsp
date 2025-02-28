@@ -1559,6 +1559,11 @@ model AvailableOperationDisplay {
 }
 
 /**
+ * Describes the result of the request to list Service Fabric resource provider operations.
+ */
+model OperationListResult is Azure.Core.Page<OperationResult>;
+
+/**
  * The detail of the Service Fabric runtime version result
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource, no provisioning"
@@ -2282,53 +2287,6 @@ model Sku {
 }
 
 /**
- * The resource model definition.
- */
-model Resource {
-  /**
-   * Azure resource identifier.
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Azure resource name.
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Azure resource type.
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Azure resource location.
-   */
-  @visibility("read", "create")
-  location: string;
-
-  /**
-   * Azure resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
-  tags?: Record<string>;
-
-  /**
-   * Azure resource etag.
-   */
-  @visibility("read")
-  etag?: string;
-
-  /**
-   * Metadata pertaining to creation and last modification of the resource.
-   */
-  @visibility("read")
-  systemData?: SystemData;
-}
-
-/**
  * Managed cluster update request
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Not adding skus property as this API is for updating tags only"
@@ -2653,7 +2611,7 @@ model NodeTypeProperties {
    * Set of extensions that should be installed onto the virtual machines.
    */
   @OpenAPI.extension("x-ms-identifiers", ["name"])
-  vmExtensions?: VmssExtension[];
+  vmExtensions?: VMSSExtension[];
 
   /**
    * Identities to assign to the virtual machine scale set under the node type.
@@ -2929,7 +2887,8 @@ model VaultCertificate {
 /**
  * Specifies set of extensions that should be installed onto the virtual machines.
  */
-model VmssExtension {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Backwards compatibility, VMSS is a well-known acronym"
+model VMSSExtension {
   /**
    * The name of the extension.
    */
@@ -2940,13 +2899,13 @@ model VmssExtension {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Backwards compatibility with existing flatten"
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties: VmssExtensionProperties;
+  properties: VMSSExtensionProperties;
 }
-
 /**
  * Describes the properties of a Virtual Machine Scale Set Extension.
  */
-model VmssExtensionProperties {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Backwards compatibility, VMSS is a well-known acronym"
+model VMSSExtensionProperties {
   /**
    * The name of the extension handler publisher.
    */
