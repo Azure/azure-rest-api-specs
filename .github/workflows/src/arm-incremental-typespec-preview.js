@@ -1,7 +1,6 @@
 // @ts-check
 
-import { readFile } from "fs/promises";
-import { dirname, join } from "path";
+import { dirname } from "path";
 import { getChangedResourceManagerSwaggerFiles } from "./changed-files.js";
 import { lsTree, show } from "./git.js";
 
@@ -9,7 +8,7 @@ import { lsTree, show } from "./git.js";
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<boolean>}
  */
-export default async function incrementalTypespec({ github, context, core }) {
+export default async function incrementalTypeSpec({ github, context, core }) {
   const changedRmSwaggerFiles = await getChangedResourceManagerSwaggerFiles(
     core,
     "HEAD^",
@@ -26,12 +25,28 @@ export default async function incrementalTypespec({ github, context, core }) {
 
   // If any changed file is not typespec-generated, return false
   for (const file of changedRmSwaggerFiles) {
-    const swagger = await readFile(
-      join(process.env.GITHUB_WORKSPACE || "", file),
-      { encoding: "utf8" },
-    );
+    let swagger;
+    try {
+      swagger = await show("HEAD", file, core);
+    } catch (e) {
+      if (e instanceof Error && e.message.includes("does not exist")) {
+        // To simplify logic, if PR deletes a swagger file, it's not "incremental typespec"
+        core.info(`File "${file}" has been deleted`);
+        return false;
+      } else {
+        // Unknown error
+        throw e;
+      }
+    }
 
-    const swaggerObj = JSON.parse(swagger);
+    let swaggerObj;
+    try {
+      swaggerObj = JSON.parse(swagger);
+    } catch {
+      // If swagger cannot be parsed as JSON, it's not "incremental typespec"
+      core.info(`File "${file}" cannot be parsed as JSON`);
+      return false;
+    }
 
     if (!swaggerObj["info"]?.["x-typespec-generated"]) {
       core.info(`File "${file}" does not contain "info.x-typespec-generated"`);
@@ -70,7 +85,7 @@ export default async function incrementalTypespec({ github, context, core }) {
       return false;
     }
 
-    let containsTypespecGeneratedSwagger = false;
+    let containsTypeSpecGeneratedSwagger = false;
     // TODO: Add lint rule to prevent using "for...in" instead of "for...of"
     for (const file of specRmSwaggerFilesBaseBranch) {
       const baseSwagger = await show("HEAD^", file, core);
@@ -79,12 +94,12 @@ export default async function incrementalTypespec({ github, context, core }) {
         core.info(
           `Spec folder '${changedSpecDir}' in base branch contains typespec-generated swagger: '${file}'`,
         );
-        containsTypespecGeneratedSwagger = true;
-        continue;
+        containsTypeSpecGeneratedSwagger = true;
+        break;
       }
     }
 
-    if (!containsTypespecGeneratedSwagger) {
+    if (!containsTypeSpecGeneratedSwagger) {
       core.info(
         `Spec folder '${changedSpecDir}' in base branch does not contain any typespec-generated swagger.  PR may be a TypeSpec conversion.`,
       );
