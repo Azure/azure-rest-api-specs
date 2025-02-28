@@ -79,47 +79,6 @@
       }
     },
     "/widgets/{widgetName}": {
-      "get": {
-        "operationId": "Widgets_GetWidgetSecure",
-        "description": "Fetch a Widget by name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "widgetName",
-            "in": "path",
-            "description": "The widget name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/WidgetSuite"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get widget by widget name.": {
-            "$ref": "./examples/Widgets_GetWidgetSample.json"
-          }
-        }
-      },
       "patch": {
         "operationId": "Widgets_CreateOrUpdateWidget",
         "description": "Creates or updates a Widget asynchronously.",
