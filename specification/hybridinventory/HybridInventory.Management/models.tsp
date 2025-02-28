@@ -505,6 +505,11 @@ union Language {
    * INTERNAL edition.
    */
   INTERNAL: "INTERNAL",
+
+  /**
+   * C edition.
+   */
+  C: "C",
 }
 
 /**
