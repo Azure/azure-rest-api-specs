@@ -250,7 +250,7 @@ test("yaml array not suppression", () => {
   );
 });
 
-test("suppression with sub rules", () => {
+test("suppression with rules", () => {
   let suppressions: Suppression[] = getSuppressionsFromYaml(
     "TestTool",
     "foo",
