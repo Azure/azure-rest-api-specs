@@ -53,12 +53,12 @@ namespace Quantum.Workspace {
   /**
    * Provides the custom 'orderBy' query parameter for list operations.
    */
-  @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
-  model CustomOrderByQueryParameter {
+  alias CustomOrderByQueryParameter = {
     /**
      * The order of returned items.
      */
+    @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
     @query("orderby")
     orderby?: string;
-  }
+  };
 }
