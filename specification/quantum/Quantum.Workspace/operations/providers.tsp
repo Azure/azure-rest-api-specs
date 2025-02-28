@@ -73,7 +73,6 @@ model TargetStatus {
   statusPage?: string;
 }
 
-@useDependency(DefaultAzureCoreVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface ProviderOperations {

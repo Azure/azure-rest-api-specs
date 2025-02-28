@@ -4,6 +4,7 @@
 // --------------------------------------------------------------------------------------------
 
 import "./operations.tsp";
+import "../common/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -122,13 +123,12 @@ model JobDetails extends ItemDetails {
 /** A Paged List of JobDetails. */ // Used by workspace/jobs and sesssions/{sessionId}/jobs
 alias PagedJobDetails = Azure.Core.Page<JobDetails>;
 
-@useDependency(DefaultAzureCoreVersion)
-@versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface JobOperations {
     /** Create a new job. */
-    createOrReplace is CreateOperation<JobDetails>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+    create is CreateOperation<JobDetails>;
 
     /** Update job properties. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
@@ -138,8 +138,8 @@ namespace Quantum.Workspace.Operations {
       """
     update is PatchOperation<JobDetails>;
 
-    /** Request the cancellation of an existing job. */
-    delete is CancelOperation<JobDetails>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+    cancel is CancelOperation<JobDetails>;
 
     /** Get job by its id. */
     get is GetOperation<JobDetails>;
@@ -160,52 +160,4 @@ namespace Quantum.Workspace.Operations {
       }
     >;
   }
-}
-
-/**
- * Provides the custom 'filter' query parameter for list operations
- */
-@added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
-model CustomFilterQueryParameter {
-  /**
-   * Filter the result list using the given expression
-   */
-  @query("filter")
-  filter?: string;
-}
-
-/**
- * Provides the custom 'skip' query parameter for list operations.
- */
-@added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
-model CustomSkipQueryParameter {
-  /**
-   * The number of result items to skip.
-   */
-  @query("skip")
-  skip?: int32;
-}
-
-/**
- * Provides the custom 'top' query parameter for list operations.
- */
-@added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
-model CustomTopQueryParameter {
-  /**
-   * The number of jobs taken.
-   */
-  @query("top")
-  top?: int32;
-}
-
-/**
- * Provides the custom 'orderBy' query parameter for list operations.
- */
-@added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
-model CustomOrderByQueryParameter {
-  /**
-   * The order of returned items.
-   */
-  @query("orderby")
-  orderby?: string;
 }

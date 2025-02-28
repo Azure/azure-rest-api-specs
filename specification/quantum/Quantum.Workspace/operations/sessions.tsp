@@ -70,13 +70,11 @@ model SessionDetails extends ItemDetails {
 /** A Paged List of SessionDetails. */ // Used by workspace/sesssions
 alias PagedSessionDetails = Azure.Core.Page<SessionDetails>;
 
-@useDependency(DefaultAzureCoreVersion)
-@versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface SessionOperations {
-    /** Open a new session. */
-    createOrReplace is CreateOperation<SessionDetails>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+    open is CreateOperation<SessionDetails>;
 
     /** Close an existing session. */
     close is ActionOperation<SessionDetails>;

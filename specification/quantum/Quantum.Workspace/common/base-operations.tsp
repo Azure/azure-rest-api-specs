@@ -18,7 +18,6 @@ alias DefaultServiceTraits = NoRepeatableRequests &
   NoClientRequestId;
 alias AzureCoreOperations = Azure.Core.ResourceOperations<DefaultServiceTraits>;
 
-@useDependency(DefaultAzureCoreVersion)
 namespace Quantum.Workspace.BaseOperations {
   alias ResourceOkOrNoContentResponse<Resource extends TypeSpec.Reflection.Model> = Azure.Core.Foundations.ResourceOkResponse<Resource> | TypeSpec.Http.NoContentResponse;
 

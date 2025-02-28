@@ -114,16 +114,34 @@
             "x-ms-parameter-location": "client"
           },
           {
-            "$ref": "#/parameters/CustomFilterQueryParameter"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/CustomSkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/CustomTopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "The number of jobs taken.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/CustomOrderByQueryParameter"
+            "name": "orderby",
+            "in": "query",
+            "description": "The order of returned items.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -234,7 +252,7 @@
         }
       },
       "put": {
-        "operationId": "Jobs_CreateOrReplace",
+        "operationId": "Jobs_Create",
         "description": "Create a new job.",
         "parameters": [
           {
@@ -320,7 +338,7 @@
         },
         "x-ms-examples": {
           "Creates a job.": {
-            "$ref": "./examples/Jobs_CreateOrReplace.json"
+            "$ref": "./examples/Jobs_Create.json"
           }
         }
       },
@@ -416,8 +434,8 @@
         }
       },
       "delete": {
-        "operationId": "Jobs_Delete",
-        "description": "Request the cancellation of an existing job.",
+        "operationId": "Jobs_Cancel",
+        "description": "Resource delete operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -484,7 +502,7 @@
         },
         "x-ms-examples": {
           "Cancels a job.": {
-            "$ref": "./examples/Jobs_Delete.json"
+            "$ref": "./examples/Jobs_Cancel.json"
           }
         }
       }
@@ -675,16 +693,34 @@
             "x-ms-parameter-location": "client"
           },
           {
-            "$ref": "#/parameters/CustomFilterQueryParameter"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/CustomSkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/CustomTopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "The number of jobs taken.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/CustomOrderByQueryParameter"
+            "name": "orderby",
+            "in": "query",
+            "description": "The order of returned items.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -795,8 +831,8 @@
         }
       },
       "put": {
-        "operationId": "Sessions_CreateOrReplace",
-        "description": "Open a new session.",
+        "operationId": "Sessions_Open",
+        "description": "Create or replace operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -881,7 +917,7 @@
         },
         "x-ms-examples": {
           "Open a session.": {
-            "$ref": "./examples/Sessions_CreateOrReplace.json"
+            "$ref": "./examples/Sessions_Open.json"
           }
         }
       }
@@ -1015,16 +1051,34 @@
             "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
           },
           {
-            "$ref": "#/parameters/CustomFilterQueryParameter"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/CustomSkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/CustomTopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "The number of jobs taken.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/CustomOrderByQueryParameter"
+            "name": "orderby",
+            "in": "query",
+            "description": "The order of returned items.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1153,16 +1207,34 @@
             "x-ms-parameter-location": "client"
           },
           {
-            "$ref": "#/parameters/CustomFilterQueryParameter"
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/CustomSkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/CustomTopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "The number of jobs taken.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/CustomOrderByQueryParameter"
+            "name": "orderby",
+            "in": "query",
+            "description": "The order of returned items.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2291,40 +2363,6 @@
       "maxLength": 50,
       "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
       "x-ms-parameter-location": "client"
-    },
-    "CustomFilterQueryParameter": {
-      "name": "filter",
-      "in": "query",
-      "description": "Filter the result list using the given expression",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "CustomOrderByQueryParameter": {
-      "name": "orderby",
-      "in": "query",
-      "description": "The order of returned items.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "CustomSkipQueryParameter": {
-      "name": "skip",
-      "in": "query",
-      "description": "The number of result items to skip.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "CustomTopQueryParameter": {
-      "name": "top",
-      "in": "query",
-      "description": "The number of jobs taken.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
     }
   }
 }
