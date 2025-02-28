@@ -40,7 +40,7 @@ model WidgetSuite {
 
 interface Widgets {
   @doc("Fetch a Widget by name.")
-  getWidgetSecure is ResourceRead<WidgetSuite>;
+  getWidget is ResourceRead<WidgetSuite>;
 
   @doc("Gets status of a Widget operation.")
   getWidgetOperationStatus is GetResourceOperationStatus<WidgetSuite>;
