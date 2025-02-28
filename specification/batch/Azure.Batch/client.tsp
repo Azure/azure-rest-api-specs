@@ -3,8 +3,6 @@ import "./main.tsp";
 import "./java-client.tsp";
 
 using Azure.ClientGenerator.Core;
-using global.Azure.Core.Foundations;
-using TypeSpec.Http;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2024_07_01)
@@ -17,8 +15,8 @@ namespace Client;
   service: Azure.Batch,
 })
 interface BatchClient {
-  listApplications is Azure.Batch.Applications.listApplications;
-  getApplication is Azure.Batch.Applications.getApplication;
+  listApplications is Azure.Batch.Applications.listApplicationsOp;
+  getApplication is Azure.Batch.Applications.getApplicationOp;
 
   listPoolUsageMetrics is Azure.Batch.Pools.listPoolUsageMetrics;
   createPool is Azure.Batch.Pools.createPool;
@@ -281,8 +279,6 @@ interface BatchClient {
 @@clientName(BatchClient.listNodeFiles, "listNodeFilesInternal", "java");
 
 // operation overrides
-@@access(Azure.Batch.ListOperation, Access.internal, "java");
-@@access(Azure.Batch.ReadOperation, Access.internal, "java");
 @@access(Azure.Batch.DeleteOperation, Access.internal, "java");
 @@access(Azure.Batch.CreateOperation, Access.internal, "java");
 @@access(Azure.Batch.UpdateOperation, Access.internal, "java");
