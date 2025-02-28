@@ -9,7 +9,10 @@
       "properties": {
         "tlsSettings": {
           "certificateType": "CustomerCertificate",
-          "minimumTlsVersion": "TLS12"
+          "minimumTlsVersion": "TLS12",
+          "secret": {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/mysecert"
+          }
         },
         "mtlsSettings": {
           "secrets": [
@@ -28,7 +31,7 @@
           "ocsp": "Enabled"
         },
         "azureDnsZone": {
-          "id": ""
+          "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/mydnszone"
         }
       }
     }
@@ -43,7 +46,7 @@
           "profileName": "profile1",
           "hostName": "www.contoso.com",
           "tlsSettings": {
-            "certificateType": "ManagedCertificate",
+            "certificateType": "CustomerCertificate",
             "minimumTlsVersion": "TLS12",
             "secret": {
               "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/mysecert"
@@ -66,11 +69,9 @@
             "ocsp": "Enabled"
           },
           "azureDnsZone": {
-            "id": ""
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/mydnszone"
           },
-          "preValidatedCustomDomainResourceId": {
-            "id": ""
-          },
+          "preValidatedCustomDomainResourceId": null,
           "validationProperties": {
             "validationToken": "8c9912db-c615-4eeb-8465",
             "expirationDate": "2009-06-15T13:45:43.0000000Z"
@@ -93,7 +94,7 @@
           "profileName": "profile1",
           "hostName": "www.contoso.com",
           "tlsSettings": {
-            "certificateType": "ManagedCertificate",
+            "certificateType": "CustomerCertificate",
             "minimumTlsVersion": "TLS12",
             "secret": {
               "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/mysecert"
@@ -116,11 +117,9 @@
             "ocsp": "Enabled"
           },
           "azureDnsZone": {
-            "id": ""
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/mydnszone"
           },
-          "preValidatedCustomDomainResourceId": {
-            "id": ""
-          },
+          "preValidatedCustomDomainResourceId": null,
           "validationProperties": {
             "validationToken": "8c9912db-c615-4eeb-8465",
             "expirationDate": "2009-06-15T13:45:43.0000000Z"
