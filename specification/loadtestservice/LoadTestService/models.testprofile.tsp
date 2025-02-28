@@ -273,7 +273,7 @@ model ListTestProfileQueryParams {
 model ListTestProfileRunQueryParams {
   @doc("Maximum number of results to include in a single response.")
   @query
-  maxpagesize?: int32;
+  maxpagesize: int32;
 
   @doc("""
     Minimum Start DateTime(RFC 3339 literal format) of the test profile runs to filter on.
