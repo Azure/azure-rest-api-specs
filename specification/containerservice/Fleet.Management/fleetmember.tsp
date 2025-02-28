@@ -106,9 +106,7 @@ interface FleetMembers {
   @operationId("FleetMembers_Update")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "original-uri",
-    }
+    #{ `final-state-via`: "original-uri" }
   )
   updateAsync is ArmCustomPatchAsync<
     FleetMember,

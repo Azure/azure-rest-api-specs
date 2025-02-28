@@ -40,7 +40,7 @@ model ImpactCategoryProperties is ResourceProperties {
   description?: string;
 
   @doc("The workloadImpact properties which are required when reporting with the impact category")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   requiredImpactProperties?: RequiredImpactProperties[];
 }
 

@@ -251,7 +251,7 @@ model CertificateProfileProperties {
   #suppress "deprecated" "Legacy flatten"
   @doc("List of renewed certificates.")
   @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   @Azure.ClientGenerator.Core.flattenProperty
   certificates?: Certificate[];
 }

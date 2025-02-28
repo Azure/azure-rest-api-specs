@@ -138,7 +138,7 @@ model AwsRdsDBSnapshotProperties {
   port?: int32;
 
   @doc("<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.</p>")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   processorFeatures?: ProcessorFeature[];
 
   @doc("<p>Specifies when the snapshot was taken in Coordinated Universal Time (UTC). Changes for the copy when the snapshot is copied.</p>")
@@ -169,7 +169,7 @@ model AwsRdsDBSnapshotProperties {
   storageType?: string;
 
   @doc("Property tagList")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   tagList?: Tag[];
 
   @doc("<p>The ARN from the key store with which to associate the instance for TDE encryption.</p>")

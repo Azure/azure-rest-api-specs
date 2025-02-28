@@ -74,7 +74,7 @@ model GitHubOrganizationProfile extends OrganizationProfile {
   kind: "GitHub";
 
   @doc("The list of GitHub organizations/repositories the pool should be present in.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   organizations: GitHubOrganization[];
 }
 @doc("Defines a GitHub organization")
@@ -92,7 +92,7 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   kind: "AzureDevOps";
 
   @doc("The list of Azure DevOps organizations the pool should be present in.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   organizations: Organization[];
 
   @doc("The type of permission which determines which accounts are admins on the Azure DevOps pool.")
@@ -152,7 +152,7 @@ model VmssFabricProfile extends FabricProfile {
   sku: DevOpsAzureSku;
 
   @doc("The VM images of the machines in the pool.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   images: PoolImage[];
 
   @doc("The OS profile of the machines in the pool.")
@@ -177,7 +177,7 @@ model StorageProfile {
   osDiskStorageAccountType?: OsDiskStorageAccountType;
 
   @doc("A list of empty data disks to attach.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   dataDisks?: DataDisk[];
 }
 
@@ -625,7 +625,7 @@ model ResourceSkuLocationInfo {
   zones: string[];
 
   @doc("Gets details of capabilities available to a SKU in specific zones.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   zoneDetails: ResourceSkuZoneDetails[];
 }
 
@@ -635,7 +635,7 @@ model ResourceSkuZoneDetails {
   name: string[];
 
   @doc("A list of capabilities that are available for the SKU in the specified list of zones.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   capabilities: ResourceSkuCapabilities[];
 }
 
@@ -670,15 +670,15 @@ model ResourceSkuProperties {
   locations: azureLocation[];
 
   @doc("A list of locations and availability zones in those locations where the SKU is available")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   locationInfo: ResourceSkuLocationInfo[];
 
   @doc("Name value pairs to describe the capability.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   capabilities: ResourceSkuCapabilities[];
 
   @doc("The restrictions of the SKU.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   restrictions: ResourceSkuRestrictions[];
 }
 

@@ -130,7 +130,7 @@ model EndpointDependency {
 
   @doc("The list of connection details for this endpoint.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["port"])
+  @extension("x-ms-identifiers", #["port"])
   endpointDetails?: EndpointDetail[];
 }
 
@@ -142,7 +142,7 @@ model OutboundEnvironmentEndpoint {
 
   @doc("The endpoints for this service to which the Batch service makes outbound calls.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["domainName"])
+  @extension("x-ms-identifiers", #["domainName"])
   endpoints?: EndpointDependency[];
 }
 
