@@ -26,8 +26,10 @@
           },
           "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
           "authentication": {
-            "type": "SystemAssignedIdentity",
-            "userAssignedIdentity": null,
+            "type": "UserAssignedIdentity",
+            "userAssignedIdentity": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id-1"
+            },
             "scope": "https://www.contoso.com/.default"
           },
           "provisioningState": "Succeeded",
