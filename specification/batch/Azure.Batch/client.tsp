@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "./java-client.tsp";
 
 using Azure.ClientGenerator.Core;
 
@@ -13,8 +14,8 @@ namespace Client;
   service: Azure.Batch,
 })
 interface BatchClient {
-  listApplications is Azure.Batch.Applications.listApplications;
-  getApplication is Azure.Batch.Applications.getApplication;
+  listApplications is Azure.Batch.Applications.listApplicationsOp;
+  getApplication is Azure.Batch.Applications.getApplicationOp;
 
   listPoolUsageMetrics is Azure.Batch.Pools.listPoolUsageMetrics;
   createPool is Azure.Batch.Pools.createPool;
@@ -107,11 +108,7 @@ interface BatchClient {
   "csharp"
 );
 
-/* JAVA OVERRIDES */
 // client name overrides
-@@clientName(BatchClient.listApplications, "listApplicationsInternal", "java");
-@@clientName(BatchClient.getApplication, "getApplicationInternal", "java");
-
 @@clientName(BatchClient.listPoolUsageMetrics,
   "listPoolUsageMetricsInternal",
   "java"
@@ -260,8 +257,6 @@ interface BatchClient {
 @@clientName(BatchClient.listNodeFiles, "listNodeFilesInternal", "java");
 
 // operation overrides
-@@access(Azure.Batch.ListOperation, Access.internal, "java");
-@@access(Azure.Batch.ReadOperation, Access.internal, "java");
 @@access(Azure.Batch.DeleteOperation, Access.internal, "java");
 @@access(Azure.Batch.CreateOperation, Access.internal, "java");
 @@access(Azure.Batch.UpdateOperation, Access.internal, "java");
