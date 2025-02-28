@@ -6,7 +6,7 @@ This is the AutoRest configuration file for Code Signing service.
 
 ## Getting Started
 
-To build the SDKs for TrustedSigning Cluster API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+To build the SDKs for TrustedSigning API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
 
