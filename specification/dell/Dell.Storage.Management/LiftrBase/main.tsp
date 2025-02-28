@@ -12,7 +12,7 @@ namespace LiftrBase;
  */
 enum Versions {
   /**
-   * The 2024-08-28-preview API version.
+   * The 2025-02-11-preview API version.
    */
   v2_preview: "2025-02-11-preview",
 }
@@ -119,6 +119,16 @@ model MarketplaceDetails {
    * Publisher Id
    */
   publisherId?: string;
+
+  /**
+   * Private Offer Id
+   */
+  privateOfferId?: string;
+
+  /**
+   * Plan Name
+   */
+  planName: string;
 
   /**
    * Marketplace subscription status
