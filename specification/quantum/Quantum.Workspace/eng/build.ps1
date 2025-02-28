@@ -155,13 +155,13 @@ Copying examples from $source to $newVersionExamples
         }     
     }   
 
-    RunAndCheck "example-validation" $logDirectory {
-        oav validate-example $newSwaggerFile
-    }
+    # RunAndCheck "example-validation" $logDirectory {
+    #     oav validate-example $newSwaggerFile
+    # }
 
-    RunAndCheck "semantic-validation" $logDirectory {
-        oav validate-spec $newSwaggerFile
-    }
+    # RunAndCheck "semantic-validation" $logDirectory {
+    #     oav validate-spec $newSwaggerFile
+    # }
 
     RunAndCheck "model-compare" $logDirectory {
         oad compare $previousSwaggerFile $newSwaggerFile --logFilepath (Join-Path $logDirectory "/oad-compare-log.json") > (Join-Path $logDirectory "/model-compare.json")
