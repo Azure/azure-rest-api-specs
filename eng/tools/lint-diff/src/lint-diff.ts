@@ -1,10 +1,10 @@
-import { readFile } from "fs/promises";
-import { exec } from "node:child_process";
+import { readFile, readdir } from "fs/promises";
+// import { exec } from "node:child_process";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { getOpenapiType, getAllTags, getInputFiles } from "./markdown-parser.js";
 import { sep, dirname, join } from "path";
 import { pathExists, getPathToDependency } from "./util.js";
-// import $RefParser from "@apidevtools/json-schema-ref-parser";
+import $RefParser from "@apidevtools/json-schema-ref-parser";
 
 // 64 MiB max ouptut buffers for exec
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
@@ -96,12 +96,15 @@ async function runLintDiff(
   outFile: string,
 ) {
   // TODO: Should filter happen here or upstream? (probably upstream)
-  // TODO: NEED TO PARSE TAG CHANGES STILL
-  // Basic filtering until tag parsing is brought over
-
   // Read changed files, exclude any files that should be ignored
   const ignoreFilesWith = ["/examples/", "/quickstart-templates/", "/scenarios/"];
-  const changedFiles = (await readFileList(changedFilesPath)).filter((file) => {
+  const changedSpecFiles = (await readFileList(changedFilesPath)).filter((file) => {
+    // File is in specification/ folder
+    if (!file.startsWith(`specification${sep}`)) {
+      return false;
+    }
+
+    // File is not ignored
     for (const ignore of ignoreFilesWith) {
       if (file.includes(ignore)) {
         return false;
@@ -113,45 +116,79 @@ async function runLintDiff(
   for (const rootPath in [beforePath, afterPath]) {
     // Filter changed files to include only those that exist in the rootPath
     const existingChangedFiles = [];
-    for (const file of changedFiles) {
+    for (const file of changedSpecFiles) {
       if (await pathExists(join(rootPath, file))) {
         existingChangedFiles.push(file);
       }
     }
 
+    // Get affected services from changed files
+    // e.g. specification/service1/readme.md -> specification/service1
+    const affectedServiceDirectories = await getAffectedServices(existingChangedFiles);
+
+    // TODO: Use set or array?
+    const affectedSwaggerMap = new Map<string, string[]>();
+    for (const serviceDir of affectedServiceDirectories) {
+      const changedServiceFiles = existingChangedFiles.filter((file) =>
+        file.startsWith(serviceDir),
+      );
+      const serviceDependencyMap = await getSwaggerDependenciesMap(rootPath, serviceDir);
+
+      affectedSwaggerMap.set(
+        serviceDir,
+        await getAffectedSwaggers(changedServiceFiles, serviceDependencyMap),
+      );
+    }
+
     const affectedReadmes = await getAffectedReadmes(existingChangedFiles, rootPath);
 
-    // Get the affected swagger files from the existing changed files
-    // const affectedSwaggers = await getAffectedSwaggers(existingChangedFiles, rootPath);
-    // const deduplicatedAffectedFiles = Array.from(
-    //   new Set([...existingChangedFiles, ...affectedSwaggers]),
-    // );
+    const readmeTags = new Map<string, Set<string>>();
+    // TODO: This builds from existing functionality. This can be done more
+    // efficiently.
+    for (const readme of affectedReadmes) {
+      const readmeService = await getService(readme);
+      if (!affectedSwaggerMap.has(readmeService)) {
+        continue;
+      }
 
-    // TODO: Fix
-    const affectedTags = await getAffectedTags(affectedReadmes, [""], rootPath);
+      const readmeContent = await readFile(join(rootPath, readme), { encoding: "utf-8" });
+      for (const tag of getAllTags(readmeContent)) {
+        const inputFiles = await getInputFiles(readmeContent, tag);
+        if (inputFiles === undefined || inputFiles.length === 0) {
+          continue;
+        }
 
-    // console.log(`Affected tags:\n${JSON.stringify(affectedTags)}`);
-    // console.log(`Changed files:\n${changedReadMeFiles.join("\n")}`);
+        // Readme + Tag Combo
 
-    // if (changedReadMeFiles.length === 0) {
-    //   console.log("No readme files changed, exiting");
-    //   return;
-    // }
+        // TODO: ensure ! is correct to do here
+        for (const swagger of affectedSwaggerMap.get(readmeService)!) {
+          if (inputFiles.includes(swagger)) {
+            if (!readmeTags.has(readme)) {
+              readmeTags.set(readme, new Set<string>());
+            }
+            readmeTags.get(readme)?.add(tag);
+          }
+        }
+      }
+    }
 
     const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
     const changedFileAndTagsMap = new Map<string, string[]>();
-    for (const readmeAndTags of affectedTags) {
+    for (const [readme, tags] of readmeTags.entries()) {
       const dedupedTags = await deduplicateTags(
-        readmeAndTags.tags,
-        await readFile(join(afterPath, readmeAndTags.readme), { encoding: "utf-8" }),
+        [...tags],
+        await readFile(join(afterPath, readme), { encoding: "utf-8" }),
       );
 
-      changedFileAndTagsMap.set(readmeAndTags.readme, dedupedTags);
+      changedFileAndTagsMap.set(readme, dedupedTags);
     }
 
-    // TODO:
-    for (const file of changedFileAndTagsMap.keys()) {
-      const changedFilePath = `${afterPath}/${file}`;
+    // TODO: How do we ensure directly edited readme.md files are handled
+    // properly? e.g. is the whole file scanned or is it constrained to
+    // specific tags?
+
+    for (const [readme, tags] of changedFileAndTagsMap.entries()) {
+      const changedFilePath = `${afterPath}/${readme}`;
       console.log(`Linting ${changedFilePath}`);
 
       let openApiType = await getOpenapiType(changedFilePath);
@@ -164,7 +201,7 @@ async function runLintDiff(
       let openApiSubType = openApiType;
 
       // TODO: Is there a more syntactically graceful way to handle empty tags?
-      for (const tag of changedFileAndTagsMap.get(file) || [null]) {
+      for (const tag of tags || [null]) {
         // TODO: See tag specified in momentOfTruth.ts:executeAutoRestWithLintDiff
         let tagArg = tag ? `--tag=${tag} ` : "";
 
@@ -183,12 +220,12 @@ async function runLintDiff(
           `${changedFilePath}`;
 
         console.log(`autorest command: ${autorestCommand}`);
-        let lintDiffResult = await executeCommand(autorestCommand);
+        // let lintDiffResult = await executeCommand(autorestCommand);
 
-        if (lintDiffResult.error) {
-          console.error("Error running autorest", lintDiffResult.error);
-          process.exit(1);
-        }
+        // if (lintDiffResult.error) {
+        //   console.error("Error running autorest", lintDiffResult.error);
+        //   process.exit(1);
+        // }
 
         // console.log("Lint diff result:", lintDiffResult.stdout);
         console.log("Results would be written to: ", outFile);
@@ -197,20 +234,20 @@ async function runLintDiff(
   }
 }
 
-async function executeCommand(
-  command: string,
-  cwd: string = ".",
-): Promise<{ error: Error | null; stdout: string; stderr: string }> {
-  return new Promise((resolve) => {
-    exec(
-      command,
-      { cwd, encoding: "utf-8", maxBuffer: MAX_EXEC_BUFFER },
-      (error, stdout, stderr) => {
-        resolve({ error, stdout, stderr });
-      },
-    );
-  });
-}
+// async function executeCommand(
+//   command: string,
+//   cwd: string = ".",
+// ): Promise<{ error: Error | null; stdout: string; stderr: string }> {
+//   return new Promise((resolve) => {
+//     exec(
+//       command,
+//       { cwd, encoding: "utf-8", maxBuffer: MAX_EXEC_BUFFER },
+//       (error, stdout, stderr) => {
+//         resolve({ error, stdout, stderr });
+//       },
+//     );
+//   });
+// }
 
 async function readFileList(changedFilesPath: string): Promise<string[]> {
   const data = await readFile(changedFilesPath, { encoding: "utf-8" });
@@ -258,7 +295,7 @@ export async function getAffectedReadmes(
     let dir = dirname(specFile);
     // Exclude '.' as it is outside the specification folder for purposes of
     // this function (avoid including root readme.md file)
-    while (!visitedFolders.has(dir) && dir !== ".") {
+    while (!visitedFolders.has(dir) && dir !== "specification") {
       visitedFolders.add(dir);
       // TODO: Case sensitivity??
       const readmeFile = join(repoRoot, dir, "readme.md");
@@ -272,31 +309,113 @@ export async function getAffectedReadmes(
   return [...readmeFiles];
 }
 
-type ReadmeAndTags = {
-  readme: string;
-  tags: string[];
-};
-
-async function getAffectedTags(
-  affectedReadmes: string[],
-  affectedSwaggers: string[],
-  rootPath: string,
-): Promise<ReadmeAndTags[]> {
-  console.log(affectedSwaggers);
-  let affectedTags: ReadmeAndTags[] = [];
-
-  for (const readmePath of affectedReadmes) {
-    console.log(`Reading ${readmePath}`);
-    let content = await readFile(join(rootPath, readmePath), { encoding: "utf-8" });
-    // TODO: Refactor?
-    let readmeTags = getAllTags(content);
-    affectedTags = affectedTags.concat({ readme: readmePath, tags: readmeTags });
+/**
+ * Returns the service of a file path of the form "specification/<service>"
+ * @param filePath Path to a file of the form "specification/<service>/.../file.json"
+ * @returns Service path of the form "specification/<service>"
+ */
+export async function getService(filePath: string): Promise<string> {
+  const splitPath = filePath.split(sep);
+  if (splitPath.length >= 2) {
+    // TODO: Verify result is a directory or remove async
+    return splitPath.slice(0, 2).join(sep);
   }
-
-  return affectedTags;
+  return "";
 }
 
-// async function getAffectedSwaggers(changedFiles: string[], rootPath: string): Promise<string[]> {}
+export async function getAffectedServices(changedFiles: string[]) {
+  const affectedServices = new Set<string>();
+  for (const file of changedFiles) {
+    const service = await getService(file);
+    if (service) {
+      affectedServices.add(service);
+    }
+  }
+  return affectedServices;
+}
+
+export function getAffectedSwaggers(
+  changedFiles: string[],
+  dependencies: Map<string, Set<string>>,
+): string[] {
+  const affectedSwaggers = new Set<string>(changedFiles);
+
+  for (const changedFile of changedFiles) {
+    for (const [file, deps] of dependencies.entries()) {
+      if (affectedSwaggers.has(file)) {
+        continue;
+      }
+
+      if (deps.has(changedFile)) {
+        affectedSwaggers.add(file);
+      }
+    }
+  }
+
+  return [...affectedSwaggers];
+}
+
+export async function getSwaggerDependenciesMap(
+  rootPath: string,
+  directory: string,
+): Promise<NonNullable<Map<string, Set<string>>>> {
+  const swaggerFiles = await enumerateFiles(rootPath, directory, ".json");
+  const swaggerDependencies = new Map<string, Set<string>>();
+  const rootAndDirectoryPath = join(rootPath, directory);
+
+  for (const file of swaggerFiles) {
+    // TODO: Use a single parser?
+    let parser = new $RefParser();
+    await parser.resolve(join(rootPath, file), {
+      resolve: { http: false },
+    });
+    // TODO: filter should exclude URLs
+    const refs = parser.$refs
+      .paths()
+      .filter(
+        (ref) =>
+          ref.startsWith(rootAndDirectoryPath) && // Inside the target directory
+          !ref.includes(`${sep}examples${sep}`), // Exclude examples
+      )
+      .map((ref) => ref.substring(rootPath.length + 1)) // Relative to rootPath
+      .filter((ref) => ref !== file); // Exclude self-reference
+
+    swaggerDependencies.set(file, new Set(refs));
+  }
+
+  return swaggerDependencies;
+}
+
+// TODO: Extract to common utils
+/**
+ * Given a root path and directory, find all files whose name ends with a given
+ * string. (e.g. ".json")
+ * @param rootPath Root path of starting directory
+ * @param dir Starting directory
+ * @param endsWith a file extension to search for
+ * @returns A list of files with paths relative to rootPath
+ */
+async function enumerateFiles(rootPath: string, dir: string, endsWith: string): Promise<string[]> {
+  let results: string[] = [];
+  let stack: string[] = [dir];
+
+  while (stack.length > 0) {
+    const currentDir = stack.pop()!;
+    const list = await readdir(join(rootPath, currentDir), { withFileTypes: true });
+
+    for (const file of list) {
+      if (file.isDirectory()) {
+        stack.push(join(currentDir, file.name));
+      } else {
+        if (file.name.endsWith(endsWith)) {
+          results.push(join(currentDir, file.name));
+        }
+      }
+    }
+  }
+
+  return results;
+}
 
 /**
  * Given a list of tags and the content of a readme file, find the input files
