@@ -50,6 +50,23 @@ interface RAISvc {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get the attack objectives.")
+  @route("/simulation/attackobjectives")
+  @get
+  getAttackObjectives is Azure.Core.Foundations.Operation<
+    {
+      @doc("Risk types for the attack objectives dataset")
+      @query
+      riskTypes: string[];
+
+      @doc("The language for the attack objectives dataset, defaults to 'en'")
+      @query
+      lang: string;
+    },
+    string
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Get the jailbreak dataset.")
   @route("/simulation/jailbreak/")
   @get
