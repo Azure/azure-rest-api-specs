@@ -66,9 +66,7 @@ interface VirtualMachineInstances {
   @summary("Updates a virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
@@ -79,9 +77,7 @@ interface VirtualMachineInstances {
   @summary("Deletes an virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineInstance,

@@ -42,7 +42,7 @@ model SimPolicyPropertiesFormat {
 
   @doc("The allowed slices and the settings to use for them. The list must not contain duplicate items and must contain at least one item.")
   @minItems(1)
-  @extension("x-ms-identifiers", ["slice"])
+  @extension("x-ms-identifiers", #["slice"])
   sliceConfigurations: SliceConfiguration[];
 
   @doc("The name of the endpoint security group to use for this SIM policy.")
@@ -59,7 +59,7 @@ model SliceConfiguration {
 
   @doc("The allowed data networks and the settings to use for them. The list must not contain duplicate items and must contain at least one item.")
   @minItems(1)
-  @extension("x-ms-identifiers", ["dataNetwork"])
+  @extension("x-ms-identifiers", #["dataNetwork"])
   dataNetworkConfigurations: DataNetworkConfiguration[];
 }
 

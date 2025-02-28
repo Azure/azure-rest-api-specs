@@ -61,12 +61,12 @@ model EdgeNetworkSecurityGroupPropertiesFormat {
   description?: string;
 
   @doc("A collection of security rules of the network security group.")
-  @extension("x-ms-identifiers", ["ruleName"])
+  @extension("x-ms-identifiers", #["ruleName"])
   securityRules?: EdgeSecurityRule[];
 
   @doc("The default security rules of network security group.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["ruleName"])
+  @extension("x-ms-identifiers", #["ruleName"])
   defaultSecurityRules?: EdgeSecurityRule[];
 }
 

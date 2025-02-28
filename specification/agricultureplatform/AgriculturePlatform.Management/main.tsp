@@ -85,12 +85,12 @@ model AgriServiceResourceProperties {
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   @doc("Data connector credentials of AgriService instance.")
-  @OpenAPI.extension("x-ms-identifiers", ["key"])
+  @OpenAPI.extension("x-ms-identifiers", #["key"])
   @visibility("read", "create", "update")
   dataConnectorCredentials?: DataConnectorCredentialMap[];
 
   @doc("AgriService installed solutions.")
-  @OpenAPI.extension("x-ms-identifiers", ["key"])
+  @OpenAPI.extension("x-ms-identifiers", #["key"])
   @visibility("read", "create", "update")
   installedSolutions?: InstalledSolutionMap[];
 }
@@ -279,7 +279,7 @@ op ArmResourceListActionSync<
 @doc("The list of available agri solutions.")
 model AvailableAgriSolutionListResult {
   @doc("Agri solutions list.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   solutions: DataManagerForAgricultureSolution[];
 }
 

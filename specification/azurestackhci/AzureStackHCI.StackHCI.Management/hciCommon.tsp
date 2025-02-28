@@ -102,7 +102,7 @@ model EceActionStatus {
 
   @doc("List of steps of Edge device job.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   steps?: Step[];
 }
 
@@ -134,7 +134,7 @@ model Step {
 
   @doc("List of nested steps during job execution..")
   @visibility("read")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   steps?: Step[];
 
   @doc("List of exceptions in job execution.")
@@ -145,11 +145,11 @@ model Step {
 @doc("The HostNetwork of a cluster.")
 model DeploymentHostNetwork {
   @doc("The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   intents?: DeploymentIntents[];
 
   @doc("List of StorageNetworks config to deploy AzureStackHCI Cluster.")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   storageNetworks?: DeploymentStorageNetworks[];
 
   @doc("Defines how the storage adapters between nodes are connected either switch or switch less..")
@@ -198,7 +198,7 @@ model LocalAvailabilityZones {
   localAvailabilityZoneMode?: LocalAvailabilityZoneMode;
 
   @doc("Nodes belonging to a particular zone")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   nodes?: string[];
 }
 
@@ -251,7 +251,7 @@ model DeploymentStorageNetworks {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @doc("List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.")
-  @OpenAPI.extension("x-ms-identifiers", ["physicalNode"])
+  @OpenAPI.extension("x-ms-identifiers", #["physicalNode"])
   storageAdapterIPInfo?: DeploymentStorageAdapterIPInfo[];
 }
 
@@ -401,7 +401,7 @@ model DeviceConfiguration {
 
 @doc("Network configuration.")
 model NetworkConfiguration {
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of network adapters.")
   networkAdapters: NetworkAdapter[];
 }

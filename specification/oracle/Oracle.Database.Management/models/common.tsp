@@ -96,7 +96,7 @@ union LicenseModel {
 @doc("ExadataIormConfig for cloud vm cluster")
 model ExadataIormConfig {
   @doc("An array of IORM settings for all the database in the Exadata DB system.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   dbPlans?: DbIormConfig[];
 
   @doc("Additional information about the current lifecycleState.")

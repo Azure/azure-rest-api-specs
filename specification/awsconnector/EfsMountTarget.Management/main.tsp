@@ -81,7 +81,7 @@ model AwsEfsMountTargetProperties {
   ipAddress?: string;
 
   @doc("Up to five VPC security group IDs, of the form ``sg-xxxxxxxx``. These must be for the same VPC as subnet specified.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   securityGroups?: string[];
 
   @doc("The ID of the subnet to add the mount target in. For One Zone file systems, use the subnet that is associated with the file system's Availability Zone.")

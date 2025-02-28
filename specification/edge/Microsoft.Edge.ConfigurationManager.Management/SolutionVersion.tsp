@@ -54,7 +54,7 @@ model SolutionVersionProperties {
   solutionInstanceName?: string;
 
   @doc("Solution Dependency Context")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   @visibility("read")
   solutionDependencies?: SolutionDependency[];
 
@@ -94,7 +94,7 @@ model SolutionDependency {
   targetId: string;
 
   @doc("Solution dependencies")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   dependencies?: SolutionDependency[];
 }
 

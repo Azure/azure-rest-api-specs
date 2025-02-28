@@ -59,7 +59,7 @@ model ExecutionStatus {
   statusMessage?: string;
 
   @doc("target resource statuses")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   stageHistory?: StageStatus[];
 }
 
@@ -76,7 +76,7 @@ model ExecutionProperties {
 
   @doc("Status of Execution")
   @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   status?: ExecutionStatus;
 
   @doc("Provisioning state of resource")

@@ -24,12 +24,12 @@ model AppProtectManagedRuleSetManifestProperties {
 
   @doc("Defines the default managed rule sets for all supported pillar types.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["pillarType"])
+  @extension("x-ms-identifiers", #["pillarType"])
   defaultRuleSets: PillarTypeDefaultRuleSet[];
 
   @doc("List of available managed rule set definitions.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["ruleSetType", "ruleSetVersion"])
+  @extension("x-ms-identifiers", #["ruleSetType", "ruleSetVersion"])
   availableRuleSets: ManagedRuleSetDefinition[];
 }
 
@@ -48,7 +48,7 @@ model ManagedRuleSetDefinition {
 
   @doc("List of managed rule groups in the rule set.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["ruleGroupName"])
+  @extension("x-ms-identifiers", #["ruleGroupName"])
   ruleGroups: ManagedRuleGroupDefinition[];
 
   @doc("Define the rule set pillar type")
@@ -91,7 +91,7 @@ model ManagedRuleGroupDefinition {
 
   @doc("List of rules within the managed rule group.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["ruleId"])
+  @extension("x-ms-identifiers", #["ruleId"])
   rules: ManagedRuleDefinition[];
 }
 

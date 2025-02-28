@@ -586,7 +586,7 @@ model PgsqlSitesResourcePatch {
   /**
    * Resource tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
   tags?: Tag[];
 
   /**
@@ -668,7 +668,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["name", "locale", "collationProvider", "isDeterministic"]
+    #["name", "locale", "collationProvider", "isDeterministic"]
   )
   collations?: Collation[];
 
@@ -676,7 +676,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
    * Dictionary of server parameters for the instance
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
   serverParameters?: ServerParameter[];
 
   /**
@@ -702,7 +702,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
   tags?: Tag[];
 }
 
@@ -774,7 +774,7 @@ model PgsqlInstanceResourcePatch {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["name", "locale", "collationProvider", "isDeterministic"]
+    #["name", "locale", "collationProvider", "isDeterministic"]
   )
   collations?: Collation[];
 
@@ -801,7 +801,7 @@ model PgsqlInstanceResourcePatch {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
   tags?: Tag[];
 }
 
@@ -888,7 +888,7 @@ model Collation {
 //   /**
 //    * Resource tags.
 //    */
-//   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+//   @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
 //   tags?: Tag[];
 // }
 
@@ -916,14 +916,14 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["name", "locale", "collationProvider", "isDeterministic"]
+    #["name", "locale", "collationProvider", "isDeterministic"]
   )
   collations?: Collation[];
 
   /**
    * The list of extensions in the database.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "version"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "version"])
   extensions?: Extension[];
 
   /**
@@ -954,7 +954,7 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
   tags?: Tag[];
 }
 
@@ -987,14 +987,14 @@ model PgsqlDatabaseResourcePatch {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["name", "locale", "collationProvider", "isDeterministic"]
+    #["name", "locale", "collationProvider", "isDeterministic"]
   )
   collations?: Collation[];
 
   /**
    * The list of extensions in the database.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "version"])
+  @OpenAPI.extension("x-ms-identifiers", #["name", "version"])
   extensions?: Extension[];
 
   /**
@@ -1025,7 +1025,7 @@ model PgsqlDatabaseResourcePatch {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
   tags?: Tag[];
 }
 
@@ -1051,7 +1051,7 @@ model Extension {
 //   /**
 //    * Resource tags
 //    */
-//   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+//   @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
 //   tags?: Tag[];
 // }
 

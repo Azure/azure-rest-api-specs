@@ -88,7 +88,7 @@ model NodePropertyForTheCategory {
   edgeNodeCategoryUid: string;
 
   @doc("The list of node models")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   nodeModels: NodeModelDetails[];
 
   @doc("The count of nodes")
@@ -104,7 +104,7 @@ model EdgeNodePoolResourceProperties {
   poolType: PoolTypeEnum;
 
   @doc("Properties of the pool")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   poolProperties: NodePropertyForTheCategory[];
 
   @doc("Allowed node categories for the pool based on the pool type")

@@ -98,7 +98,7 @@ model ErrorDefinition {
 
   @doc("The error details.")
   @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   details?: ErrorDefinition[];
 }
 

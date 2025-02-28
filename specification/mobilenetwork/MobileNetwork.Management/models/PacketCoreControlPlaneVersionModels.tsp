@@ -58,7 +58,7 @@ model PacketCoreControlPlaneVersionPropertiesFormat {
   provisioningState?: ProvisioningState;
 
   @doc("Platform specific packet core control plane version properties.")
-  @extension("x-ms-identifiers", ["platformType"])
+  @extension("x-ms-identifiers", #["platformType"])
   platforms?: Platform[];
 }
 

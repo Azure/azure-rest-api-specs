@@ -381,7 +381,7 @@ model ConfigurationValidationResultsProperties {
    */
   @doc("Error details related to the configuration check execution.")
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   errorDetails?: ErrorDetails[];
 
   /**
@@ -389,7 +389,7 @@ model ConfigurationValidationResultsProperties {
    * their outcomes.
    */
   @doc("The results of the configuration validation.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @renamedFrom(Versions.v2024_11_01_preview, "configurationResults")
   evaluationResults: EvaluationResults[];
 

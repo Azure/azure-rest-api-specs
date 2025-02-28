@@ -31,7 +31,7 @@ model RadioAccessNetworkProperties {
   metricsIngestion?: MetricsIngestion;
 
   @doc("A list of Access Points for this radio access network.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   accessPoints?: AccessPoint[];
 }
 

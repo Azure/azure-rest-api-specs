@@ -36,15 +36,15 @@ model DstsServiceAccountResourceProperties {
   groupName?: string;
 
   @doc("list of authentication requirements.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   authenticationRequirements?: Array<DstsAuthenticationRequirement>;
 
   @doc("list of realms.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   realms?: Array<DstsRealm>;
 
   @doc("list of claim mappings.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   claimMappings?: Array<DstsClaimMapping>;
 
   @doc("Tags to add to the account.")

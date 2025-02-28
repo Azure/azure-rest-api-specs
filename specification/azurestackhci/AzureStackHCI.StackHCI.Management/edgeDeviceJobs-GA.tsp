@@ -113,7 +113,7 @@ model LogCollectionReportedProperties {
 
   @doc("Details of the log collection session.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["correlationId"])
+  @extension("x-ms-identifiers", #["correlationId"])
   logCollectionSessionDetails?: LogCollectionSession[];
 }
 
@@ -229,7 +229,7 @@ model RemoteSupportReportedProperties {
 
   @doc("Details of the remote support session.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["sessionId"])
+  @extension("x-ms-identifiers", #["sessionId"])
   sessionDetails?: RemoteSupportSession[];
 }
 

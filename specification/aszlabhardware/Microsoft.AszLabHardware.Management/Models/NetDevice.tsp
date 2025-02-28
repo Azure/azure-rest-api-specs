@@ -29,6 +29,6 @@ model NetDevice {
   netDeviceMacs: string[];
 
   @doc("Information of individual ports on network device")
-  @extension("x-ms-identifiers", ["portId"])
+  @extension("x-ms-identifiers", #["portId"])
   ports: Port[];
 }

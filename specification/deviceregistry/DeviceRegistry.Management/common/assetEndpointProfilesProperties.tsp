@@ -107,7 +107,7 @@ model X509Credentials {
 @removed(Versions.v2024_07_01_preview)
 model TransportAuthentication {
   @doc("Defines a reference to a secret which contains all certificates and private keys that can be used by the southbound connector connecting to the shop floor/OT device. The accepted extensions are .der for certificates and .pfx/.pem for private keys.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   @removed(Versions.v2024_07_01_preview)
   ownCertificates: OwnCertificate[];
 }
@@ -130,7 +130,7 @@ model OwnCertificate {
 model AssetEndpointProfileStatus {
   @doc("Array object to transfer and persist errors that originate from the Edge.")
   @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   errors?: AssetEndpointProfileStatusError[];
 }
 

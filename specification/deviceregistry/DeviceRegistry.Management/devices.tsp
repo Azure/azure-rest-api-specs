@@ -99,11 +99,11 @@ model DeviceIdentity {
 @doc("Property bag containing the device's unassigned and assigned endpoints.")
 model DeviceEndpoints {
   @doc("Actively used endpoints a device can use to connect to several services.")
-  @extension("x-ms-identifiers", ["type", "address"])
+  @extension("x-ms-identifiers", #["type", "address"])
   assigned: Endpoint[];
 
   @doc("List of most recently removed endpoints.")
-  @extension("x-ms-identifiers", ["type", "address"])
+  @extension("x-ms-identifiers", #["type", "address"])
   @visibility("read", "create")
   unassigned?: Endpoint[];
 }

@@ -29,11 +29,11 @@ model InstanceHealthDefinitionProperties is ResourceCommonProperties {
   compatibleArchitectures?: string[];
 
   /** The health definitions for the supported workload components */
-  @extension("x-ms-identifiers", ["type", "role"])
+  @extension("x-ms-identifiers", #["type", "role"])
   componentHealthDefinitions: ComponentHealthDefinition[];
 
   /** The common resource signal definitions that are applicable across the components. */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   commonSignalDefinitionMappings?: ResourceSignalDefinitionMapping[];
 }
 

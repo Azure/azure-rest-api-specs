@@ -29,7 +29,7 @@ model NetworkAnalyticsProductsProperties {
   provisioningState?: ProvisioningState;
 
   @doc("The network analytics product information")
-  @extension("x-ms-identifiers", ["productName"])
+  @extension("x-ms-identifiers", #["productName"])
   @visibility("create", "read")
   networkAnalyticsProductInformation: NetworkAnalyticsProductInformation[];
 }
@@ -47,7 +47,7 @@ model NetworkAnalyticsProductInformation {
   productVersions: string[];
 
   @doc("The connectors supported by the product")
-  @extension("x-ms-identifiers", ["connectorName"])
+  @extension("x-ms-identifiers", #["connectorName"])
   productConnectors: NetworkAnalyticsProductConnectorInformation[];
 }
 

@@ -175,7 +175,7 @@ model ConsortiumProperties {
   /**
    * Gets or sets the list of members to be added to the consortium.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   members?: ConsortiumMember[];
 
   /**
@@ -223,7 +223,7 @@ model ManagedOnBehalfOfConfiguration {
   /**
    * Managed-On-Behalf-Of broker resources
    */
-  @OpenAPI.extension("x-ms-identifiers", ["id"])
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   moboBrokerResources?: MoboBrokerResource[];
 }
 

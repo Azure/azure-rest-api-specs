@@ -39,7 +39,7 @@ model GenericGenevaActionsResourceProperties {
   azureLocation?: azureLocation;
 
   @doc("The parameter list for geneva action")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   parameters?: Array<Parameter>;
 
   @doc("Provisioning status of the resource.")

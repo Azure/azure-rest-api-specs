@@ -18,7 +18,7 @@ model IpPrefixProperties {
   ]>;
 
   @doc("The list of IP Prefix Rules.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   ipPrefixRules: IpPrefixRule[];
 
   @doc("Details of the last operation performed on the resource")
@@ -56,7 +56,7 @@ model IpPrefixRule {
   condition?: Condition;
 
   @doc("SubnetMaskLength gives the minimum NetworkPrefix length to be matched. Possible values for IPv4 are 1 - 32 . Possible values of IPv6 are 1 - 128.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   subnetMaskLength?: string;
 }
 
@@ -73,7 +73,7 @@ model IpPrefixPatchProperties {
   ...AnnotationResource;
 
   @doc("The list of IP Prefix Rules.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   ipPrefixRules?: IpPrefixRule[];
 }
 

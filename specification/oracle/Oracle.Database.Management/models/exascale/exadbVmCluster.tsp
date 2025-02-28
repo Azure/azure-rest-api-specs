@@ -113,7 +113,7 @@ model ExadbVmClusterProperties {
 
   @doc("CIDR blocks for additional NSG ingress rules. The VNET CIDRs used to provision the VM Cluster will be added by default.")
   @visibility("create", "read")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   nsgCidrs?: NsgCidr[];
 
   @doc("The OCID of the zone the Exadata VM cluster on Exascale Infrastructure is associated with.")
@@ -223,7 +223,7 @@ model ExadbVmClusterStorageDetails {
 @doc("Details of removing Virtual Machines from the Exadata VM cluster on Exascale Infrastructure. Applies to Exadata Database Service on Exascale Infrastructure only.")
 model RemoveVirtualMachineFromExadbVmClusterDetails {
   @doc("The list of ExaCS DB nodes for the Exadata VM cluster on Exascale Infrastructure to be removed.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   dbNodes: Array<DbNodeDetails>;
 }
 

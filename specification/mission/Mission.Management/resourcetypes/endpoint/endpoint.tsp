@@ -68,7 +68,7 @@ model EndpointProperties {
   @doc("Endpoint Description.")
   description?: string;
 
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @doc("Endpoint Rule Collection.")
   endpointRuleCollection?: EndpointRule[];
 

@@ -11,6 +11,6 @@ model DriveCollection {
   totalDriveCapacityBytes: int64;
 
   @doc("Information about individual disk drives")
-  @extension("x-ms-identifiers", ["diskId"])
+  @extension("x-ms-identifiers", #["diskId"])
   drives: Drive[];
 }

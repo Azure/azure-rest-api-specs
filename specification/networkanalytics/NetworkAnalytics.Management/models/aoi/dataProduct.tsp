@@ -30,7 +30,7 @@ model DataProductNetworkAcls {
   @added(Versions.v2023_11_15)
   @madeOptional(Versions.v2024_04_01_preview)
   @doc("IP rule with specific IP or IP range in CIDR format.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   ipRules?: IPRules[];
 
   @added(Versions.v2023_11_15)
@@ -344,7 +344,7 @@ model ListRoleAssignments {
   count: int32;
 
   @doc("list of role assignments")
-  @extension("x-ms-identifiers", ["roleAssignmentId"])
+  @extension("x-ms-identifiers", #["roleAssignmentId"])
   roleAssignmentResponse: RoleAssignmentDetail[];
 }
 
@@ -355,9 +355,9 @@ enum DataProductUserRole {
   Reader,
 
   @doc("""
-Field to specify user of type SensitiveReader.
-This user has privileged access to read sensitive data of a data product.
-""")
+    Field to specify user of type SensitiveReader.
+    This user has privileged access to read sensitive data of a data product.
+    """)
   SensitiveReader,
 }
 
@@ -452,9 +452,7 @@ interface DataProducts {
   @armResourceCollectionAction
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
+    #{ `final-state-via`: "location" }
   )
   getRegionalCapacity(
     ...ApiVersionParameter,

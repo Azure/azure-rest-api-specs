@@ -18,6 +18,6 @@ model Manager {
 
   @visibility("read")
   @doc("List of BMC accounts")
-  @extension("x-ms-identifiers", ["username"])
+  @extension("x-ms-identifiers", #["username"])
   accounts?: InventoryLocalAccount[];
 }

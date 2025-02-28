@@ -39,7 +39,7 @@ model BrokerListenerProperties {
   serviceName?: string = "aio-mq-dmqtt-frontend";
 
   @doc("Ports on which this listener accepts client connections.")
-  @OpenAPI.extension("x-ms-identifiers", ["port"])
+  @OpenAPI.extension("x-ms-identifiers", #["port"])
   ports: ListenerPort[];
 
   @doc("Kubernetes Service type of this listener.")

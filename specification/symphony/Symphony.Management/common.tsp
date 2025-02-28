@@ -56,7 +56,7 @@ model ComponentProperties {
   constraints?: string;
 
   @doc("Dependencies of the component.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   dependencies?: Array<string>;
 
   @doc("Component type.")
@@ -79,7 +79,7 @@ model BindingProperties {
 @doc("Defines a desired runtime topology")
 model TopologyProperties {
   @doc("The bindings of the Topology")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   bindings?: Array<BindingProperties>;
 }
 
@@ -172,7 +172,7 @@ model StageHistoryProperties {
 @doc("Defines a ActivationStatus")
 model ActivationStatusProperties {
   @doc("The execution history Activation")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @added(Versions.v2024_08_01_preview)
   stageHistory?: Array<StageHistoryProperties>;
 

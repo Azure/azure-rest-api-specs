@@ -17,7 +17,7 @@ model IpCommunityProperties {
   ]>;
 
   @doc("List of IP Community Rules.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   ipCommunityRules: IpCommunityRule[];
 
   @doc("Details of the last operation performed on the resource")
@@ -41,7 +41,7 @@ model IpCommunityProperties {
 @doc("IP Community patchable properties.")
 model IpCommunityPatchableProperties {
   @doc("List of IP Community Rules.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   ipCommunityRules?: IpCommunityRule[];
 }
 
