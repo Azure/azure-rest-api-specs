@@ -47,11 +47,10 @@ interface ApplicationTypeVersions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ApplicationTypeVersionResource,
-    Response = ArmResourceUpdatedResponse<ApplicationTypeVersionResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<ApplicationTypeVersionResource> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
       @bodyRoot
       _: ApplicationTypeVersionResource;
-    }),
-    LroHeaders = ArmLroLocationHeader
+    })
   >;
 
   /**
@@ -68,7 +67,7 @@ interface ApplicationTypeVersions {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ApplicationTypeVersionResource,
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**

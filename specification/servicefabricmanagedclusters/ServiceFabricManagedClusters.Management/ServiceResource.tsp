@@ -47,7 +47,7 @@ interface Services {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ServiceResource,
-    Response = ArmResourceUpdatedResponse<ServiceResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<ServiceResource> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
       @bodyRoot
       _: ServiceResource;
     })
@@ -67,7 +67,7 @@ interface Services {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceResource,
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    LroHeaders = ArmCombinedLroHeaders
   >;
 
   /**

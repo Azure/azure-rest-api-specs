@@ -51,11 +51,10 @@ interface ManagedClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ManagedCluster,
-    Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
       @bodyRoot
       _: ManagedCluster;
-    }),
-    LroHeaders = ArmLroLocationHeader
+    })
   >;
 
   /**
@@ -70,7 +69,10 @@ interface ManagedClusters {
   /**
    * Delete a Service Fabric managed cluster resource with the specified name.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ManagedCluster>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ManagedCluster,
+    LroHeaders = ArmCombinedLroHeaders
+  >;
 
   /**
    * Gets all Service Fabric cluster resources created or in the process of being created in the resource group.
@@ -108,7 +110,7 @@ interface ManagedClusters {
     FaultSimulationParameters,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
-      Azure.Core.Foundations.RetryAfterHeader
+      ArmAsyncOperationHeader
   >;
 
   /**
@@ -119,7 +121,7 @@ interface ManagedClusters {
     FaultSimulationIdParameters,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
-      Azure.Core.Foundations.RetryAfterHeader
+      ArmAsyncOperationHeader
   >;
 
   /**

@@ -61,7 +61,10 @@ interface ApplicationTypes {
    * Delete a Service Fabric managed application type name resource with the specified name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
-  delete is ArmResourceDeleteWithoutOkAsync<ApplicationTypeResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ApplicationTypeResource,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Gets all application type name resources created or in the process of being created in the Service Fabric managed cluster resource.

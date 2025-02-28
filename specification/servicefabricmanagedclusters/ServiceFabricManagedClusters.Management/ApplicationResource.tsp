@@ -52,11 +52,10 @@ interface Applications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ApplicationResource,
-    Response = ArmResourceUpdatedResponse<ApplicationResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<ApplicationResource> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
       @bodyRoot
       _: ApplicationResource;
-    }),
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    })
   >;
 
   /**
@@ -73,7 +72,7 @@ interface Applications {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ApplicationResource,
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -88,7 +87,12 @@ interface Applications {
    * Get the status of the latest application upgrade. It will query the cluster to find the status of the latest application upgrade.
    */
   @action("fetchUpgradeStatus")
-  readUpgrade is ArmResourceActionAsync<ApplicationResource, void, never>;
+  readUpgrade is ArmResourceActionAsync<
+    ApplicationResource,
+    void,
+    never,
+    LroHeaders = ArmCombinedLroHeaders
+  >;
 
   /**
    * Send a request to resume the current application upgrade. This will resume the application upgrade from where it was paused.
@@ -96,13 +100,19 @@ interface Applications {
   resumeUpgrade is ArmResourceActionAsync<
     ApplicationResource,
     RuntimeResumeApplicationUpgradeParameters,
-    never
+    never,
+    LroHeaders = ArmCombinedLroHeaders
   >;
 
   /**
    * Send a request to start a rollback of the current application upgrade. This will start rolling back the application to the previous version.
    */
-  startRollback is ArmResourceActionAsync<ApplicationResource, void, never>;
+  startRollback is ArmResourceActionAsync<
+    ApplicationResource,
+    void,
+    never,
+    LroHeaders = ArmCombinedLroHeaders
+  >;
 }
 
 @@doc(ApplicationResource.name, "The name of the application resource.");

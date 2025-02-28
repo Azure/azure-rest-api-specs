@@ -2929,14 +2929,14 @@ model VMSSExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass dictionary"
-  settings?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Day 0 property"
+  settings?: {};
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass dictionary"
-  protectedSettings?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Day 0 property"
+  protectedSettings?: {};
 
   /**
    * If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed.

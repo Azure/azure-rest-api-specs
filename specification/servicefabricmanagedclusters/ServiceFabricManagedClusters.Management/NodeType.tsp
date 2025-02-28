@@ -45,11 +45,10 @@ interface NodeTypes {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     NodeType,
-    Response = ArmResourceUpdatedResponse<NodeType> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<NodeType> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
       @bodyRoot
       _: NodeType;
-    }),
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    })
   >;
 
   /**
@@ -59,7 +58,7 @@ interface NodeTypes {
   update is ArmCustomPatchAsync<
     NodeType,
     PatchModel = NodeTypeUpdateParameters,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders
   >;
 
   /**
@@ -67,7 +66,7 @@ interface NodeTypes {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     NodeType,
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    LroHeaders = ArmCombinedLroHeaders
   >;
 
   /**
@@ -81,7 +80,8 @@ interface NodeTypes {
   deallocate is ArmResourceActionAsync<
     NodeType,
     NodeTypeActionParameters,
-    never
+    never,
+    LroHeaders = ArmCombinedLroHeaders
   >;
 
   /**
@@ -90,28 +90,49 @@ interface NodeTypes {
   deleteNode is ArmResourceActionAsync<
     NodeType,
     NodeTypeActionParameters,
-    never
+    never,
+    LroHeaders = ArmCombinedLroHeaders
   >;
 
   /**
    * Redeploys one or more nodes on the node type. It will disable the fabric nodes, trigger a shut down on the VMs, move them to a new node, and power them back on.
    */
-  redeploy is ArmResourceActionAsync<NodeType, NodeTypeActionParameters, never>;
+  redeploy is ArmResourceActionAsync<
+    NodeType,
+    NodeTypeActionParameters,
+    never,
+    LroHeaders = ArmCombinedLroHeaders
+  >;
 
   /**
    * Reimages one or more nodes on the node type. It will disable the fabric nodes, trigger a reimage on the VMs and activate the nodes back again.
    */
-  reimage is ArmResourceActionAsync<NodeType, NodeTypeActionParameters, never>;
+  reimage is ArmResourceActionAsync<
+    NodeType,
+    NodeTypeActionParameters,
+    never,
+    LroHeaders = ArmCombinedLroHeaders
+  >;
 
   /**
    * Restarts one or more nodes on the node type. It will disable the fabric nodes, trigger a restart on the VMs and activate the nodes back again.
    */
-  restart is ArmResourceActionAsync<NodeType, NodeTypeActionParameters, never>;
+  restart is ArmResourceActionAsync<
+    NodeType,
+    NodeTypeActionParameters,
+    never,
+    LroHeaders = ArmCombinedLroHeaders
+  >;
 
   /**
    * Starts one or more nodes on the node type. It will trigger an allocation of the fabric node if needed and activate them.
    */
-  start is ArmResourceActionAsync<NodeType, NodeTypeActionParameters, never>;
+  start is ArmResourceActionAsync<
+    NodeType,
+    NodeTypeActionParameters,
+    never,
+    LroHeaders = ArmCombinedLroHeaders
+  >;
 
   /**
    * Starts a fault simulation on the node type.
@@ -121,7 +142,7 @@ interface NodeTypes {
     FaultSimulationParameters,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
-      Azure.Core.Foundations.RetryAfterHeader
+      ArmAsyncOperationHeader
   >;
 
   /**
@@ -132,7 +153,7 @@ interface NodeTypes {
     FaultSimulationIdParameters,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
-      Azure.Core.Foundations.RetryAfterHeader
+      ArmAsyncOperationHeader
   >;
 
   /**
