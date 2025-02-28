@@ -143,7 +143,7 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   targetType?: string;
 
   @doc("The targets.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   targets?: TargetDescription[];
 
   @doc("The number of consecutive health check failures required before considering a target unhealthy.")

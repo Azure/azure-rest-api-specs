@@ -39,7 +39,7 @@ model StandbyContainerGroupPoolRuntimeViewResource
 model StandbyContainerGroupPoolRuntimeViewResourceProperties {
   @doc("A list containing the counts of container groups in each possible state, as known by the StandbyPool resource provider.")
   @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   instanceCountSummary: ContainerGroupInstanceCountSummary[];
 
   @doc("Displays the provisioning state of the standby pool")
