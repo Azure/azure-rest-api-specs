@@ -138,6 +138,7 @@ namespace Quantum.Workspace.Operations {
       """
     update is PatchOperation<JobDetails>;
 
+    /** Request the cancellation of an existing job. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     cancel is CancelOperation<JobDetails>;
 

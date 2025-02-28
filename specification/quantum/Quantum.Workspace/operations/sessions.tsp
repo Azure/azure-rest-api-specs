@@ -73,6 +73,7 @@ alias PagedSessionDetails = Azure.Core.Page<SessionDetails>;
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface SessionOperations {
+    /** Open a new session. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     open is CreateOperation<SessionDetails>;
 
