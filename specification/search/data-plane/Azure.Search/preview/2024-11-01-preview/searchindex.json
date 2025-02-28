@@ -1314,10 +1314,10 @@
           "x-nullable": true,
           "description": "The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'."
         },
-        "@search.debugInfo": {
+        "@search.debug": {
           "$ref": "#/definitions/DebugInfo",
           "readOnly": true,
-          "x-ms-client-name": "DebugInfo",
+          "x-ms-client-name": "Debug",
           "x-nullable": true,
           "description": "Debug information that applies to the search results as a whole."
         },
@@ -3221,6 +3221,11 @@
     "QueryRewritesValuesDebugInfo": {
       "type": "object",
       "properties": {
+        "inputQuery": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The input text to the generative query rewriting model. There may be cases where the user query and the input to the generative model are not identical."
+        },
         "rewrites": {
           "type": "array",
           "items": {

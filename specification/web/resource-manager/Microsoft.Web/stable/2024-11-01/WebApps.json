@@ -25709,7 +25709,7 @@
           "type": "string"
         },
         "value": {
-          "description": "Environment variable value",
+          "description": "The value of this environment variable must be the name of an AppSetting. The actual value of the environment variable in container will be retrieved from the specified AppSetting at runtime. If the AppSetting is not found, the value will be set to an empty string in the container at runtime.",
           "type": "string"
         }
       }
@@ -25725,6 +25725,29 @@
         "code": {
           "type": "string",
           "description": "The error code."
+        }
+      }
+    },
+    "ErrorPage": {
+      "description": "A custom error page for a specific status returned by a web app.",
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "description": "The status code for which the error page will be used",
+          "type": "integer",
+          "format": "int32"
+        },
+        "content": {
+          "description": "The content of the error page. There is a 10kb limit imposed on custom error page content.",
+          "type": "string"
+        },
+        "contentType": {
+          "description": "The content type of the error page. For example, 'text/html'",
+          "type": "string"
+        },
+        "alwaysUse": {
+          "description": "If true, the error page will be shown for all requests with a matching status code, regardless of whether they failed on the App Service FrontEnd load balancer or on the app itself.",
+          "type": "boolean"
         }
       }
     },
@@ -28857,6 +28880,10 @@
               "items": {
                 "$ref": "#/definitions/VolumeMount"
               }
+            },
+            "inheritAppSettingsAndConnectionStrings": {
+              "description": "<code>true</code> if all AppSettings and ConnectionStrings have to be passed to the container as environment variables; <code>false</code> otherwise.",
+              "type": "boolean"
             },
             "environmentVariables": {
               "description": "List of environment variables",
