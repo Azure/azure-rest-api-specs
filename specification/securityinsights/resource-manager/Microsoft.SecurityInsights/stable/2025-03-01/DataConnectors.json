@@ -1,0 +1,1856 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2025-03-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
+      "get": {
+        "x-ms-examples": {
+          "Get all data connectors.": {
+            "$ref": "./examples/dataConnectors/GetDataConnectors.json"
+          }
+        },
+        "tags": [
+          "Data Connectors"
+        ],
+        "description": "Gets all data connectors.",
+        "operationId": "DataConnectors_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an Office365 data connector.": {
+            "$ref": "./examples/dataConnectors/GetOfficeDataConnetorById.json"
+          },
+          "Get a TI data connector.": {
+            "$ref": "./examples/dataConnectors/GetThreatIntelligenceById.json"
+          },
+          "Get a MCAS data connector.": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftCloudAppSecurityById.json"
+          },
+          "Get a ASC data connector.": {
+            "$ref": "./examples/dataConnectors/GetAzureSecurityCenterById.json"
+          },
+          "Get an AAD data connector.": {
+            "$ref": "./examples/dataConnectors/GetAzureActiveDirectoryById.json"
+          },
+          "Get an AwsCloudTrail data connector.": {
+            "$ref": "./examples/dataConnectors/GetAmazonWebServicesCloudTrailById.json"
+          },
+          "Get an AATP data connector.": {
+            "$ref": "./examples/dataConnectors/GetAzureAdvancedThreatProtectionById.json"
+          },
+          "Get a MDATP data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
+          },
+          "Get a RestApiPoller data connector": {
+            "$ref": "./examples/dataConnectors/GetRestApiPollerById.json"
+          },
+          "Get a MicrosoftThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftThreatIntelligenceById.json"
+          },
+          "Get a PremiumMicrosoftDefenderForThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/GetPremiumMicrosoftDefenderForThreatIntelligenceById.json"
+          }
+        },
+        "tags": [
+          "Data Connectors"
+        ],
+        "description": "Gets a data connector.",
+        "operationId": "DataConnectors_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/DataConnectorId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/DataConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-azure-resource": true,
+        "x-ms-examples": {
+          "Creates or updates an Office365 data connector.": {
+            "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
+          },
+          "Creates or updates an Threat Intelligence Platform data connector.": {
+            "$ref": "./examples/dataConnectors/CreateThreatIntelligenceDataConnector.json"
+          },
+          "Creates or updates a MicrosoftThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/CreateMicrosoftThreatIntelligenceDataConnector.json"
+          },
+          "Creates or updates a PremiumMicrosoftDefenderForThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/CreatePremiumMicrosoftDefenderForThreatIntelligenceDataConnector.json"
+          }
+        },
+        "tags": [
+          "Data Connectors"
+        ],
+        "description": "Creates or updates the data connector.",
+        "operationId": "DataConnectors_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/DataConnectorId"
+          },
+          {
+            "$ref": "#/parameters/DataConnector"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/DataConnector"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an Office365 data connector.": {
+            "$ref": "./examples/dataConnectors/DeleteOfficeDataConnetor.json"
+          },
+          "Delete an MicrosoftThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/DeleteMicrosoftThreatIntelligenceDataConnector.json"
+          },
+          "Deletes a PremiumMicrosoftDefenderForThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/DeletePremiumMicrosoftDefenderForThreatIntelligenceDataConnector.json"
+          }
+        },
+        "tags": [
+          "Data Connectors"
+        ],
+        "description": "Delete the data connector.",
+        "operationId": "DataConnectors_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/DataConnectorId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AADDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents AAD (Azure Active Directory) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AADDataConnectorProperties",
+          "description": "AAD (Azure Active Directory) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureActiveDirectory"
+    },
+    "AADDataConnectorProperties": {
+      "description": "AAD (Azure Active Directory) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "AATPDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents AATP (Azure Advanced Threat Protection) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AATPDataConnectorProperties",
+          "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureAdvancedThreatProtection"
+    },
+    "AATPDataConnectorProperties": {
+      "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "ASCDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents ASC (Azure Security Center) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ASCDataConnectorProperties",
+          "description": "ASC (Azure Security Center) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureSecurityCenter"
+    },
+    "ASCDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
+        }
+      ],
+      "description": "ASC (Azure Security Center) data connector properties.",
+      "properties": {
+        "subscriptionId": {
+          "description": "The subscription id to connect to, and get the data from.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AlertsDataTypeOfDataConnector": {
+      "description": "Alerts data type for data connectors.",
+      "properties": {
+        "alerts": {
+          "$ref": "#/definitions/DataConnectorDataTypeCommon",
+          "description": "Alerts data type connection.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "AwsCloudTrailDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Amazon Web Services CloudTrail data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AwsCloudTrailDataConnectorProperties",
+          "description": "Amazon Web Services CloudTrail data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AmazonWebServicesCloudTrail"
+    },
+    "AwsCloudTrailDataConnectorDataTypes": {
+      "description": "The available data types for Amazon Web Services CloudTrail data connector.",
+      "properties": {
+        "logs": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Logs data type.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "AwsCloudTrailDataConnectorProperties": {
+      "description": "Amazon Web Services CloudTrail data connector properties.",
+      "properties": {
+        "awsRoleArn": {
+          "description": "The Aws Role Arn (with CloudTrailReadOnly policy) that is used to access the Aws account.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AwsCloudTrailDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "RestApiPollerDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Rest Api Poller data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RestApiPollerDataConnectorProperties",
+          "description": "Rest Api Poller data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "RestApiPoller"
+    },
+    "RestApiPollerDataConnectorProperties": {
+      "description": "Rest Api Poller data connector properties.",
+      "properties": {
+        "connectorDefinitionName": {
+          "description": "The connector definition name (the dataConnectorDefinition resource id).",
+          "type": "string"
+        },
+        "auth": {
+          "description": "The a authentication model.",
+          "$ref": "#/definitions/CcpAuthConfig"
+        },
+        "request": {
+          "description": "The request configuration.",
+          "$ref": "#/definitions/RestApiPollerRequestConfig"
+        },
+        "dcrConfig": {
+          "description": "The DCR related properties.",
+          "$ref": "#/definitions/DCRConfiguration"
+        },
+        "isActive": {
+          "description": "Indicates whether the connector is active or not.",
+          "type": "boolean"
+        },
+        "dataType": {
+          "description": "The Log Analytics table destination.",
+          "type": "string"
+        },
+        "response": {
+          "description": "The response configuration.",
+          "$ref": "#/definitions/CcpResponseConfig"
+        },
+        "paging": {
+          "description": "The paging configuration.",
+          "$ref": "#/definitions/RestApiPollerRequestPagingConfig"
+        },
+        "addOnAttributes": {
+          "description": "The add on attributes. The key name will become attribute name (a column) and the value will become the attribute value in the payload.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "connectorDefinitionName",
+        "auth",
+        "request"
+      ]
+    },
+    "RestApiPollerRequestConfig": {
+      "type": "object",
+      "description": "The request configuration.",
+      "properties": {
+        "apiEndpoint": {
+          "description": "The API endpoint.",
+          "type": "string"
+        },
+        "rateLimitQPS": {
+          "description": "The Rate limit queries per second for the request..",
+          "type": "integer",
+          "x-nullable": true,
+          "format": "int32"
+        },
+        "queryWindowInMin": {
+          "description": "The query window in minutes for the request.",
+          "type": "integer",
+          "x-nullable": true,
+          "format": "int32"
+        },
+        "httpMethod": {
+          "description": "The HTTP method, default value GET.",
+          "enum": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "httpMethodVerb"
+          }
+        },
+        "queryTimeFormat": {
+          "description": "The query time format. A remote server can have a query to pull data from range 'start' to 'end'. This property indicate what is the expected time format the remote server know to parse.",
+          "example": "UnixTimestamp, UnixTimestampInMills, or more specific formats, for example: yyyy-MM-ddTHH:mm:ssZ",
+          "type": "string"
+        },
+        "retryCount": {
+          "description": "The retry count.",
+          "type": "integer",
+          "x-nullable": true,
+          "format": "int32"
+        },
+        "timeoutInSeconds": {
+          "description": "The timeout in seconds.",
+          "type": "integer",
+          "x-nullable": true,
+          "format": "int32"
+        },
+        "isPostPayloadJson": {
+          "description": "Flag to indicate if HTTP POST payload is in JSON format (vs form-urlencoded).",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "headers": {
+          "description": "The header for the request for the remote server.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "queryParameters": {
+          "description": "The HTTP query parameters to RESTful API.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "queryParametersTemplate": {
+          "description": "the query parameters template. Defines the query parameters template to use when passing query parameters in advanced scenarios.",
+          "type": "string"
+        },
+        "startTimeAttributeName": {
+          "description": "The query parameter name which the remote server expect to start query. This property goes hand to hand with `endTimeAttributeName`.",
+          "type": "string"
+        },
+        "endTimeAttributeName": {
+          "description": "The query parameter name which the remote server expect to end query. This property goes hand to hand with `startTimeAttributeName`",
+          "type": "string"
+        },
+        "queryTimeIntervalAttributeName": {
+          "description": "The query parameter name which we need to send the server for query logs in time interval. Should be defined with `queryTimeIntervalPrepend` and `queryTimeIntervalDelimiter`",
+          "type": "string"
+        },
+        "queryTimeIntervalPrepend": {
+          "description": "The string prepend to the value of the query parameter in `queryTimeIntervalAttributeName`.",
+          "type": "string"
+        },
+        "queryTimeIntervalDelimiter": {
+          "description": "The delimiter string between 2 QueryTimeFormat in the query parameter `queryTimeIntervalAttributeName`.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apiEndpoint"
+      ]
+    },
+    "RestApiPollerRequestPagingKind": {
+      "type": "string",
+      "enum": [
+        "LinkHeader",
+        "NextPageToken",
+        "NextPageUrl",
+        "PersistentToken",
+        "PersistentLinkHeader",
+        "Offset",
+        "CountBasedPaging"
+      ],
+      "description": "Type of paging",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "RestApiPollerRequestPagingKind",
+        "values": [
+          {
+            "value": "LinkHeader"
+          },
+          {
+            "value": "NextPageToken"
+          },
+          {
+            "value": "NextPageUrl"
+          },
+          {
+            "value": "PersistentToken"
+          },
+          {
+            "value": "PersistentLinkHeader"
+          },
+          {
+            "value": "Offset"
+          },
+          {
+            "value": "CountBasedPaging"
+          }
+        ]
+      }
+    },
+    "RestApiPollerRequestPagingConfig": {
+      "description": "The request paging configuration.",
+      "type": "object",
+      "properties": {
+        "pagingType": {
+          "type": "string",
+          "$ref": "#/definitions/RestApiPollerRequestPagingKind",
+          "description": "Type of paging"
+        },
+        "pageSize": {
+          "type": "integer",
+          "description": "Page size",
+          "format": "int32"
+        },
+        "pageSizeParameterName": {
+          "type": "string",
+          "description": "Page size parameter name"
+        }
+      },
+      "x-ms-discriminator": {
+        "propertyName": "pagingType",
+        "mapping": {
+          "LinkHeader": "#/components/schemas/RestApiPollerRequestPagingLinkHeaderConfig",
+          "NextPageToken": "#/components/schemas/RestApiPollerRequestPagingTokenConfig",
+          "NextPageUrl": "#/components/schemas/RestApiPollerRequestPagingNextPageUrlConfig",
+          "PersistentToken": "#/components/schemas/RestApiPollerRequestPagingTokenConfig",
+          "PersistentLinkHeader": "#/components/schemas/RestApiPollerRequestPagingLinkHeaderConfig",
+          "Offset": "#/components/schemas/RestApiPollerRequestPagingOffsetConfig",
+          "CountBasedPaging": "#/components/schemas/RestApiPollerRequestPagingCountBaseConfig"
+        }
+      },
+      "required": [
+        "pagingType"
+      ]
+    },
+    "RestApiPollerRequestPagingLinkHeaderConfig": {
+      "description": "The request paging configuration for LinkHeader and PersistentLinkHeader paging type parameters.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestApiPollerRequestPagingConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "linkHeaderTokenJsonPath": {
+          "type": "string",
+          "description": "JSON path of link header token in HTTP response payload"
+        },
+        "linkHeaderRelLinkName": {
+          "type": "string",
+          "description": "Rel link name from the link header"
+        }
+      }
+    },
+    "RestApiPollerRequestPagingTokenConfig": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestApiPollerRequestPagingConfig"
+        }
+      ],
+      "description": "The request paging configuration for NextPageToken and PersistentToken paging type parameters.",
+      "type": "object",
+      "properties": {
+        "nextPageTokenJsonPath": {
+          "type": "string",
+          "description": "JSON path of next page token in HTTP response payload"
+        },
+        "hasNextFlagJsonPath": {
+          "type": "string",
+          "description": "JSON path of flag in HTTP response payload to indicate more pages"
+        },
+        "nextPageTokenResponseHeader": {
+          "type": "string",
+          "description": "HTTP response header name of next page token"
+        },
+        "nextPageParaName": {
+          "type": "string",
+          "description": "Next page parameter name in HTTP request"
+        },
+        "nextPageRequestHeader": {
+          "type": "string",
+          "description": "Next page header name in the request"
+        }
+      }
+    },
+    "RestApiPollerRequestPagingNextPageUrlConfig": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestApiPollerRequestPagingConfig"
+        }
+      ],
+      "description": "The request paging configuration for NextPageUrl paging type parameters.",
+      "type": "object",
+      "properties": {
+        "nextPageUrl": {
+          "type": "string",
+          "description": "Next page URL"
+        },
+        "nextPageUrlQueryParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Query parameters of next page URL"
+        },
+        "nextPageUrlQueryParametersTemplate": {
+          "type": "string",
+          "description": "Paging query parameters in string template format"
+        },
+        "nextPageParaName": {
+          "type": "string",
+          "description": "Next page parameter name in HTTP request"
+        },
+        "nextPageRequestHeader": {
+          "type": "string",
+          "description": "Next page header name in the request"
+        },
+        "hasNextFlagJsonPath": {
+          "type": "string",
+          "description": "JSON path of flag in HTTP response payload to indicate more pages"
+        }
+      }
+    },
+    "RestApiPollerRequestPagingOffsetConfig": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestApiPollerRequestPagingConfig"
+        }
+      ],
+      "description": "The request paging configuration for Offset paging type parameters.",
+      "type": "object",
+      "properties": {
+        "offsetParaName": {
+          "type": "string",
+          "description": "Offset parameter name in HTTP request"
+        }
+      }
+    },
+    "RestApiPollerRequestPagingCountBaseConfig": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestApiPollerRequestPagingConfig"
+        }
+      ],
+      "description": "The request paging configuration for Count base paging type parameters.",
+      "type": "object",
+      "properties": {
+        "zeroBasedIndexing": {
+          "type": "boolean",
+          "description": "Indicates whether the count is zero based"
+        },
+        "pageCountJsonPath": {
+          "type": "string",
+          "description": "JSON path of page count in HTTP response payload"
+        },
+        "pageNumberParaName": {
+          "type": "string",
+          "description": "Parameter name of page number in HTTP request"
+        },
+        "pageNumberJsonPath": {
+          "type": "string",
+          "description": "JSON path of page number in HTTP response payload"
+        },
+        "totalResultsJsonPath": {
+          "type": "string",
+          "description": "JSON path of total number of results in HTTP response payload"
+        }
+      }
+    },
+    "DCRConfiguration": {
+      "description": "The configuration of the destination of the data.",
+      "properties": {
+        "dataCollectionEndpoint": {
+          "description": "Represents the data collection ingestion endpoint in log analytics.",
+          "type": "string"
+        },
+        "dataCollectionRuleImmutableId": {
+          "description": "The data collection rule immutable id, the rule defines the transformation and data destination.",
+          "type": "string"
+        },
+        "streamName": {
+          "description": "The stream we are sending the data to.",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "dataCollectionEndpoint",
+        "dataCollectionRuleImmutableId",
+        "streamName"
+      ]
+    },
+    "CcpAuthType": {
+      "type": "string",
+      "enum": [
+        "Basic",
+        "APIKey",
+        "OAuth2",
+        "AWS",
+        "GCP",
+        "Session",
+        "JwtToken",
+        "GitHub",
+        "ServiceBus",
+        "Oracle",
+        "None"
+      ],
+      "description": "Type of paging",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "CcpAuthType",
+        "values": [
+          {
+            "value": "Basic"
+          },
+          {
+            "value": "APIKey"
+          },
+          {
+            "value": "OAuth2"
+          },
+          {
+            "value": "AWS"
+          },
+          {
+            "value": "GCP"
+          },
+          {
+            "value": "Session"
+          },
+          {
+            "value": "JwtToken"
+          },
+          {
+            "value": "GitHub"
+          },
+          {
+            "value": "ServiceBus"
+          },
+          {
+            "value": "Oracle"
+          },
+          {
+            "value": "None"
+          }
+        ]
+      }
+    },
+    "CcpAuthConfig": {
+      "description": "Base Model for API authentication.",
+      "properties": {
+        "type": {
+          "description": "The auth type",
+          "$ref": "#/definitions/CcpAuthType",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "ApiKeyAuthModel": {
+      "description": "Model for authentication with the API Key. Will result in additional header on the request (default behavior) to the remote server: 'ApiKeyName: ApiKeyIdentifier ApiKey'. If 'IsApiKeyInPostPayload' is true it will send it in the body of the request and not the header.",
+      "example": "ApiKey = placeholderApiKey, ApiKeyName = 'Authorization', ApiKeyIdentifier = 'token', IsApiKeyInPostPayload = false. will result in a new header on the request: 'Authorization: token placeholderApiKey'",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "type": "string",
+          "description": "API Key for the user secret key credential",
+          "x-secret": true
+        },
+        "apiKeyName": {
+          "type": "string",
+          "description": "API Key name"
+        },
+        "apiKeyIdentifier": {
+          "type": "string",
+          "description": "API Key Identifier"
+        },
+        "isApiKeyInPostPayload": {
+          "type": "boolean",
+          "description": "Flag to indicate if API key is set in HTTP POST payload"
+        }
+      },
+      "required": [
+        "apiKey",
+        "apiKeyName"
+      ],
+      "x-ms-discriminator-value": "APIKey"
+    },
+    "AWSAuthModel": {
+      "description": "Model for API authentication with AWS.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "roleArn": {
+          "type": "string",
+          "description": "AWS STS assume role ARN",
+          "example": "arn:aws:iam::123456789012:role/your-role-name"
+        },
+        "externalId": {
+          "type": "string",
+          "description": "AWS STS assume role external ID. This is used to prevent the confused deputy problem: 'https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html'"
+        }
+      },
+      "required": [
+        "roleArn"
+      ],
+      "x-ms-discriminator-value": "AWS"
+    },
+    "BasicAuthModel": {
+      "description": "Model for API authentication with basic flow - user name + password.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "The user name."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password",
+          "x-secret": true
+        }
+      },
+      "required": [
+        "userName",
+        "password"
+      ],
+      "x-ms-discriminator-value": "Basic"
+    },
+    "GCPAuthModel": {
+      "description": "Model for API authentication for all GCP kind connectors.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "serviceAccountEmail": {
+          "type": "string",
+          "description": "GCP Service Account Email"
+        },
+        "projectNumber": {
+          "type": "string",
+          "description": "GCP Project Number"
+        },
+        "workloadIdentityProviderId": {
+          "type": "string",
+          "description": "GCP Workload Identity Provider ID"
+        }
+      },
+      "required": [
+        "serviceAccountEmail",
+        "projectNumber",
+        "workloadIdentityProviderId"
+      ],
+      "x-ms-discriminator-value": "GCP"
+    },
+    "GenericBlobSbsAuthModel": {
+      "description": "Model for API authentication for working with service bus or storage account.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "credentialsConfig": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Credentials for service bus namespace, keyvault uri for access key"
+        },
+        "storageAccountCredentialsConfig": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Credentials for storage account, keyvault uri for access key"
+        }
+      },
+      "x-ms-discriminator-value": "ServiceBus"
+    },
+    "GitHubAuthModel": {
+      "description": "Model for API authentication for GitHub. For this authentication first we need to approve the Router app (Microsoft Security DevOps) to access the GitHub account, Then we only need the InstallationId to get the access token from https://api.github.com/app/installations/{installId}/access_tokens.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "installationId": {
+          "type": "string",
+          "description": "The GitHubApp auth installation id."
+        }
+      },
+      "x-ms-discriminator-value": "GitHub"
+    },
+    "NoneAuthModel": {
+      "description": "Model for API authentication with no authentication method - public API.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "None"
+    },
+    "JwtAuthModel": {
+      "description": "Model for API authentication with JWT. Simple exchange between user name + password to access token.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "properties": {
+        "tokenEndpoint": {
+          "type": "string",
+          "description": "Token endpoint to request JWT"
+        },
+        "userName": {
+          "description": "The user name. If user name and password sent in header request we only need to populate the `value` property with the user name (Same as basic auth). If user name and password sent in body request we need to specify the `Key` and `Value`.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "password": {
+          "description": "The password",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-secret": true
+        },
+        "queryParameters": {
+          "description": "The custom query parameter we want to add once we send request to token endpoint.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "headers": {
+          "description": "The custom headers we want to add once we send request to token endpoint.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isCredentialsInHeaders": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Flag indicating whether we want to send the user name and password to token endpoint in the headers."
+        },
+        "isJsonRequest": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": false,
+          "description": "Flag indicating whether the body request is JSON (header Content-Type = application/json), meaning its a Form URL encoded request (header Content-Type = application/x-www-form-urlencoded)."
+        },
+        "requestTimeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "default": 100,
+          "maximum": 180,
+          "description": "Request timeout in seconds."
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "JwtToken",
+      "required": [
+        "tokenEndpoint",
+        "userName",
+        "password"
+      ]
+    },
+    "OAuthModel": {
+      "description": "Model for API authentication with OAuth2.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "properties": {
+        "authorizationCode": {
+          "type": "string",
+          "description": "The user's authorization code.",
+          "x-secret": true
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "The Application (client) secret that the OAuth provider assigned to your app.",
+          "x-secret": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The Application (client) ID that the OAuth provider assigned to your app."
+        },
+        "isCredentialsInHeaders": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": false,
+          "description": "Indicating whether we want to send the clientId and clientSecret to token endpoint in the headers."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The Application (client) Scope that the OAuth provider assigned to your app."
+        },
+        "redirectUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Application redirect url that the user config in the OAuth provider."
+        },
+        "grantType": {
+          "type": "string",
+          "description": "The grant type, usually will be 'authorization code'."
+        },
+        "tokenEndpoint": {
+          "type": "string",
+          "description": "The token endpoint. Defines the OAuth2 refresh token."
+        },
+        "tokenEndpointHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The token endpoint headers."
+        },
+        "tokenEndpointQueryParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The token endpoint query parameters."
+        },
+        "authorizationEndpoint": {
+          "type": "string",
+          "description": "The authorization endpoint."
+        },
+        "authorizationEndpointHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The authorization endpoint headers."
+        },
+        "authorizationEndpointQueryParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The authorization endpoint query parameters."
+        },
+        "isJwtBearerFlow": {
+          "type": "boolean",
+          "description": "A value indicating whether it's a JWT flow."
+        },
+        "accessTokenPrepend": {
+          "type": "string",
+          "description": "Access token prepend. Default is 'Bearer'."
+        }
+      },
+      "required": [
+        "clientSecret",
+        "clientId",
+        "grantType",
+        "tokenEndpoint"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "OAuth2"
+    },
+    "OracleAuthModel": {
+      "description": "Model for API authentication for Oracle.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Oracle tenant ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Oracle user ID"
+        },
+        "publicFingerprint": {
+          "type": "string",
+          "description": "Public Fingerprint"
+        },
+        "pemFile": {
+          "type": "string",
+          "description": "Content of the PRM file"
+        }
+      },
+      "type": "object",
+      "required": [
+        "tenantId",
+        "userId",
+        "publicFingerprint",
+        "pemFile"
+      ],
+      "x-ms-discriminator-value": "Oracle"
+    },
+    "SessionAuthModel": {
+      "description": "Model for API authentication with session cookie.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CcpAuthConfig"
+        }
+      ],
+      "properties": {
+        "userName": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user name attribute key value."
+        },
+        "password": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The password attribute name.",
+          "x-secret": true
+        },
+        "queryParameters": {
+          "type": "object",
+          "additionalProperties": {},
+          "description": "Query parameters to session service endpoint."
+        },
+        "isPostPayloadJson": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Indicating whether API key is set in HTTP POST payload."
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "HTTP request headers to session service endpoint."
+        },
+        "sessionTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "Session timeout in minutes."
+        },
+        "sessionIdName": {
+          "type": "string",
+          "description": "Session id attribute name from HTTP response header."
+        },
+        "sessionLoginRequestUri": {
+          "type": "string",
+          "description": "HTTP request URL to session service endpoint."
+        }
+      },
+      "type": "object",
+      "required": [
+        "userName",
+        "password"
+      ],
+      "x-ms-discriminator-value": "Session"
+    },
+    "CcpResponseConfig": {
+      "description": "A custom response configuration for a rule.",
+      "properties": {
+        "eventsJsonPaths": {
+          "description": "The json paths, '$' char is the json root.",
+          "example": "'$', '$.someProperty'",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "successStatusJsonPath": {
+          "description": "The value where the status message/code should appear in the response.",
+          "type": "string"
+        },
+        "successStatusValue": {
+          "description": "The status value.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "isGzipCompressed": {
+          "description": "The value indicating whether the remote server support Gzip and we should expect Gzip response.",
+          "type": "boolean"
+        },
+        "compressionAlgo": {
+          "description": "The compression algorithm. For Example: 'gzip', 'multi-gzip', 'deflate'.",
+          "type": "string",
+          "default": "gzip"
+        },
+        "format": {
+          "description": "The response format. possible values are json,csv,xml",
+          "type": "string",
+          "default": "json"
+        },
+        "csvDelimiter": {
+          "description": "The csv delimiter, in case the response format is CSV.",
+          "type": "string"
+        },
+        "hasCsvBoundary": {
+          "description": "The value indicating whether the response has CSV boundary in case the response in CSV format.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "hasCsvHeader": {
+          "description": "The value indicating whether the response has headers in case the response in CSV format.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "convertChildPropertiesToArray": {
+          "description": "The value indicating whether the response isn't an array of events / logs.  By setting this flag to true it means the remote server will response with an object which each property has as a value an array of events / logs.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "csvEscape": {
+          "description": "The character used to escape characters in CSV.",
+          "type": "string",
+          "x-nullable": true,
+          "default": "\"",
+          "minLength": 1,
+          "maxLength": 1
+        }
+      },
+      "type": "object",
+      "required": [
+        "eventsJsonPaths"
+      ]
+    },
+    "DataConnector": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Data connector.",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DataConnectorKind",
+          "description": "The data connector kind"
+        }
+      },
+      "type": "object"
+    },
+    "DataConnectorKind": {
+      "description": "The kind of the data connector",
+      "enum": [
+        "AzureActiveDirectory",
+        "AzureSecurityCenter",
+        "MicrosoftCloudAppSecurity",
+        "ThreatIntelligence",
+        "MicrosoftThreatIntelligence",
+        "PremiumMicrosoftDefenderForThreatIntelligence",
+        "Office365",
+        "AmazonWebServicesCloudTrail",
+        "AzureAdvancedThreatProtection",
+        "MicrosoftDefenderAdvancedThreatProtection",
+        "RestApiPoller"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DataConnectorKind",
+        "values": [
+          {
+            "value": "AzureActiveDirectory"
+          },
+          {
+            "value": "AzureSecurityCenter"
+          },
+          {
+            "value": "MicrosoftCloudAppSecurity"
+          },
+          {
+            "value": "ThreatIntelligence"
+          },
+          {
+            "value": "MicrosoftThreatIntelligence"
+          },
+          {
+            "value": "PremiumMicrosoftDefenderForThreatIntelligence"
+          },
+          {
+            "value": "Office365"
+          },
+          {
+            "value": "AmazonWebServicesCloudTrail"
+          },
+          {
+            "value": "AzureAdvancedThreatProtection"
+          },
+          {
+            "value": "MicrosoftDefenderAdvancedThreatProtection"
+          },
+          {
+            "value": "RestApiPoller"
+          }
+        ]
+      }
+    },
+    "DataConnectorList": {
+      "description": "List all the data connectors.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of data connectors.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of data connectors.",
+          "items": {
+            "$ref": "#/definitions/DataConnector"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "DataConnectorDataTypeCommon": {
+      "description": "Common field for data type in data connectors.",
+      "properties": {
+        "state": {
+          "description": "Describe whether this data type connection is enabled or not.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DataTypeState"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "DataConnectorTenantId": {
+      "description": "Properties data connector on tenant level.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DataConnectorWithAlertsProperties": {
+      "description": "Data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "MCASDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents MCAS (Microsoft Cloud App Security) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MCASDataConnectorProperties",
+          "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftCloudAppSecurity"
+    },
+    "MCASDataConnectorDataTypes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector"
+        }
+      ],
+      "description": "The available data types for MCAS (Microsoft Cloud App Security) data connector.",
+      "properties": {
+        "alerts": {
+          "$ref": "#/definitions/DataConnectorDataTypeCommon",
+          "description": "Alerts data type connection."
+        },
+        "discoveryLogs": {
+          "$ref": "#/definitions/DataConnectorDataTypeCommon",
+          "description": "Discovery log data type connection."
+        }
+      },
+      "type": "object"
+    },
+    "MCASDataConnectorProperties": {
+      "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/MCASDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "MDATPDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents MDATP (Microsoft Defender Advanced Threat Protection) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MDATPDataConnectorProperties",
+          "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection"
+    },
+    "MDATPDataConnectorProperties": {
+      "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "TIDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents threat intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TIDataConnectorProperties",
+          "description": "TI (Threat Intelligence) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligence"
+    },
+    "TIDataConnectorDataTypes": {
+      "description": "The available data types for TI (Threat Intelligence) data connector.",
+      "properties": {
+        "indicators": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Data type for indicators connection.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "TIDataConnectorProperties": {
+      "description": "TI (Threat Intelligence) data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "tipLookbackPeriod": {
+          "description": "The lookback period for the feed to be imported.",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/TIDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "MSTIDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSTIDataConnectorProperties",
+          "description": "Microsoft Threat Intelligence data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MSTIDataConnectorDataTypes": {
+      "description": "The available data types for Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "microsoftEmergingThreatFeed": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "properties": {
+            "lookbackPeriod": {
+              "description": "The lookback period for the feed to be imported. The date-time to begin importing the feed from, for example: 2024-01-01T00:00:00.000Z.",
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "description": "Data type for Microsoft Threat Intelligence data connector.",
+          "type": "object",
+          "required": [
+            "lookbackPeriod"
+          ]
+        }
+      },
+      "type": "object",
+      "required": [
+        "microsoftEmergingThreatFeed"
+      ]
+    },
+    "MSTIDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Threat Intelligence data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MSTIDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "required": [
+        "dataTypes"
+      ],
+      "type": "object"
+    },
+    "PremiumMicrosoftDefenderForThreatIntelligence": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Premium Microsoft Defender for Threat Intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PremiumMdtiDataConnectorProperties",
+          "description": "Premium Microsoft Defender for Threat Intelligence data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "PremiumMicrosoftDefenderForThreatIntelligence"
+    },
+    "PremiumMdtiDataConnectorDataTypes": {
+      "description": "The available data types for Premium Microsoft Defender for Threat Intelligence data connector.",
+      "properties": {
+        "connector": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Data type for Premium Microsoft Defender for Threat Intelligence data connector.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "connector"
+      ]
+    },
+    "PremiumMdtiDataConnectorProperties": {
+      "description": "Premium Microsoft Defender for Threat Intelligence data connector properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "properties": {
+        "lookbackPeriod": {
+          "description": "The lookback period for the feed to be imported. The date-time to begin importing the feed from, for example: 2024-01-01T00:00:00.000Z.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "requiredSKUsPresent": {
+          "description": "The flag to indicate whether the tenant has the premium SKU required to access this connector.",
+          "type": "boolean"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/PremiumMdtiDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "required": [
+        "dataTypes",
+        "lookbackPeriod"
+      ],
+      "type": "object"
+    },
+    "OfficeDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents office data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfficeDataConnectorProperties",
+          "description": "Office data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Office365"
+    },
+    "OfficeDataConnectorDataTypes": {
+      "description": "The available data types for office data connector.",
+      "properties": {
+        "exchange": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Exchange data type connection.",
+          "type": "object"
+        },
+        "sharePoint": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "SharePoint data type connection.",
+          "type": "object"
+        },
+        "teams": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Teams data type connection.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "OfficeDataConnectorProperties": {
+      "description": "Office data connector properties.",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/OfficeDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "DataConnector": {
+      "description": "The data connector",
+      "in": "body",
+      "name": "dataConnector",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/DataConnector"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "DataConnectorId": {
+      "description": "Connector ID",
+      "in": "path",
+      "name": "dataConnectorId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
