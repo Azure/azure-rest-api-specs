@@ -30,7 +30,7 @@ export default async function incrementalTypeSpec({ github, context, core }) {
       swagger = await show("HEAD", file, core);
     } catch (e) {
       if (e instanceof Error && e.message.includes("does not exist")) {
-        // To simplify the logic, if a PR deletes a swagger file, it's not "incremental typespec"
+        // To simplify logic, if PR deletes a swagger file, it's not "incremental typespec"
         core.info(`File "${file}" has been deleted`);
         return false;
       } else {
