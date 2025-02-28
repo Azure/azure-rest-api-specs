@@ -192,6 +192,56 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/templates/{templateName}/versions/{templateVersion}/generate": {
+      "post": {
+        "tags": [
+          "VersionedTemplate"
+        ],
+        "operationId": "VersionedTemplate_Generate",
+        "summary": "Gets a VersionedTemplate.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/GenerateVersionedTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GenerateVersionedTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate VersionedTemplate": {
+            "$ref": "./examples/VersionedTemplate_Generate.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -618,6 +668,26 @@
           "description": "The URL to the next set of VersionedTemplate results.",
           "readOnly": true
         }
+      }
+    },
+    "GenerateVersionedTemplateResponse": {
+      "type": "object",
+      "description": "Generated template files returned as a map<path string,content string>",
+      "properties": {
+        "generatedFiles": {
+          "type": "object",
+          "description": "files returned as a map<path string,content string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GenerateVersionedTemplateRequest": {
+      "type": "object",
+      "description": "Generated template parameter input as a map<string,string>",
+      "additionalProperties": {
+        "type": "string"
       }
     }
   },
