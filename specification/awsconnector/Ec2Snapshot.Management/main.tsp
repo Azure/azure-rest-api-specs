@@ -117,7 +117,7 @@ model AwsEc2SnapshotProperties {
   storageTier?: StorageTierEnumValue;
 
   @doc("<p>Any tags assigned to the snapshot.</p>")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("<p>The ID of the volume that was used to create the snapshot. Snapshots created by the <a>CopySnapshot</a> action have an arbitrary volume ID that should not be used for any purpose.</p>")

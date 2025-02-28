@@ -51,7 +51,7 @@ model StandbyContainerGroupPoolRuntimeViewResourceProperties {
 @doc("Displays the counts of container groups in each state, as known by the StandbyPool resource provider.")
 model ContainerGroupInstanceCountSummary {
   @doc("The count of pooled resources in each state.")
-  @extension("x-ms-identifiers", #["state"])
+  @identifiers(#["state"])
   instanceCountsByState: PoolResourceStateCount[];
 }
 

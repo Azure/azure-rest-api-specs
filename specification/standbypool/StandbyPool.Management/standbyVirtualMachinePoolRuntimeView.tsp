@@ -54,7 +54,7 @@ model VirtualMachineInstanceCountSummary {
   zone?: int64;
 
   @doc("The count of pooled resources in each state for the given zone.")
-  @extension("x-ms-identifiers", #["state"])
+  @identifiers(#["state"])
   instanceCountsByState: PoolResourceStateCount[];
 }
 

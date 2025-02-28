@@ -78,11 +78,10 @@ model AwsIamVirtualMFADeviceProperties {
   serialNumber?: string;
 
   @doc("Property tags")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("Property users")
-  @extension("x-ms-identifiers", #[])
   users?: string[];
 
   @doc("Property virtualMfaDeviceName")
