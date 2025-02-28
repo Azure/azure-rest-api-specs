@@ -61,7 +61,7 @@ describe("incrementalTypeSpec", () => {
 
   it("returns false if swagger deleted", async () => {
     const swaggerPath =
-      "/specification/contosowidgetmanager2/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
+      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
     vi.spyOn(
       changedFiles,
@@ -77,7 +77,7 @@ describe("incrementalTypeSpec", () => {
 
   it("returns false if tsp conversion", async () => {
     const swaggerPath =
-      "/specification/contosowidgetmanager2/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
+      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
     vi.spyOn(
       changedFiles,
