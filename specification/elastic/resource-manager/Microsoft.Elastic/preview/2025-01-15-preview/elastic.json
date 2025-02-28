@@ -2550,7 +2550,7 @@
     },
     "ProjectType": {
       "enum": [
-        "Search",
+        "Elasticsearch",
         "Observability",
         "Security",
         "NotApplicable"
@@ -2564,8 +2564,8 @@
     "ConfigurationType": {
       "enum": [
         "GeneralPurpose",
-        "VectorOptimized",
-        "TimeSeriesOptimized",
+        "Vector",
+        "TimeSeries",
         "NotApplicable"
       ],
       "type": "string",
@@ -3368,6 +3368,16 @@
         "marketplaceSaasInfo": {
           "description": "Marketplace SaaS Info of the resource.",
           "$ref": "#/definitions/MarketplaceSaaSInfo",
+          "readOnly": true
+        },
+        "projectType": {
+          "description": "Project Type - Applicable for Serverless only.",
+          "type": "string",
+          "readOnly": true
+        },
+        "configurationType": {
+          "description": "ConfigurationType Type - Applicable for Serverless only.",
+          "type": "string",
           "readOnly": true
         }
       }

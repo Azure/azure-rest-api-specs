@@ -11,9 +11,9 @@ using TypeSpec.OpenAPI;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
-@doc("Configuration for SqlServerSqlSourceConnector")
+@doc("Configuration for SqlServerSourceConnector")
 model SqlServerSourceConnectorProperties extends DataSourceProperties {
-  @doc("Type of SqlServerSqlSourceConnector")
+  @doc("Type of SqlServerSourceConnector")
   connectorType: ConnectorType.SqlServerSource;
 
   @doc("HostName for SqlServer.")

@@ -158,5 +158,8 @@ union ConnectorType {
   @doc("SolacePubsub source connector.")
   SolacePubsubSource: "SolacePubsubSource",
 
+  @doc("ManagedAzureMapsWeatherSource source connector.")
+  ManagedAzureMapsWeatherSource: "ManagedAzureMapsWeatherSource",
+
   string,
 }

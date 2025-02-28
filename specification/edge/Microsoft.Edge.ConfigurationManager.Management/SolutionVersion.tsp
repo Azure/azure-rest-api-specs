@@ -19,6 +19,10 @@ namespace Microsoft.Edge;
 
 @doc("Solution Version Properties")
 model SolutionVersionProperties {
+  @doc("Solution Template Version Id")
+  @visibility("read")
+  solutionTemplateVersionId?: string;
+
   @doc("Revision number of resolved config for this solution version")
   @visibility("read")
   revision?: int32;
@@ -44,6 +48,16 @@ model SolutionVersionProperties {
   @visibility("read")
   state?: State;
 
+  @doc("Solution instance name")
+  @visibility("read")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  solutionInstanceName?: string;
+
+  @doc("Solution Dependency Context")
+  @extension("x-ms-identifiers", [])
+  @visibility("read")
+  solutionDependencies?: SolutionDependency[];
+
   @doc("Provisioning state of resource")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -57,7 +71,7 @@ model SolutionVersion
   // Name will be set to solutionTemplateVersion-revision
   @doc("Name of the solution version")
   @maxLength(61)
-  @minLength(3)
+  @minLength(7)
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   @path
   @key("solutionVersionName")
@@ -66,6 +80,22 @@ model SolutionVersion
 
   ...ExtendedLocationProperty;
   ...EntityTagProperty;
+}
+
+@doc("Solution Dependency Context")
+model SolutionDependency {
+  @doc("Solution Version Id")
+  solutionVersionId: string;
+
+  @doc("Solution Template Version Id")
+  solutionTemplateVersionId: string;
+
+  @doc("Target Id")
+  targetId: string;
+
+  @doc("Solution dependencies")
+  @extension("x-ms-identifiers", [])
+  dependencies?: SolutionDependency[];
 }
 
 @armResourceOperations

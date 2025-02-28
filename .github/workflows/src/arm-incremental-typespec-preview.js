@@ -1,7 +1,6 @@
 // @ts-check
 
-import { readFile } from "fs/promises";
-import { dirname, join } from "path";
+import { dirname } from "path";
 import { getChangedResourceManagerSwaggerFiles } from "./changed-files.js";
 import { lsTree, show } from "./git.js";
 
@@ -9,7 +8,7 @@ import { lsTree, show } from "./git.js";
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<boolean>}
  */
-export default async function incrementalTypespec({ github, context, core }) {
+export default async function incrementalTypeSpec({ github, context, core }) {
   const changedRmSwaggerFiles = await getChangedResourceManagerSwaggerFiles(
     core,
     "HEAD^",
@@ -26,10 +25,7 @@ export default async function incrementalTypespec({ github, context, core }) {
 
   // If any changed file is not typespec-generated, return false
   for (const file of changedRmSwaggerFiles) {
-    const swagger = await readFile(
-      join(process.env.GITHUB_WORKSPACE || "", file),
-      { encoding: "utf8" },
-    );
+    const swagger = await show("HEAD", file, core);
 
     const swaggerObj = JSON.parse(swagger);
 
@@ -70,7 +66,7 @@ export default async function incrementalTypespec({ github, context, core }) {
       return false;
     }
 
-    let containsTypespecGeneratedSwagger = false;
+    let containsTypeSpecGeneratedSwagger = false;
     // TODO: Add lint rule to prevent using "for...in" instead of "for...of"
     for (const file of specRmSwaggerFilesBaseBranch) {
       const baseSwagger = await show("HEAD^", file, core);
@@ -79,12 +75,12 @@ export default async function incrementalTypespec({ github, context, core }) {
         core.info(
           `Spec folder '${changedSpecDir}' in base branch contains typespec-generated swagger: '${file}'`,
         );
-        containsTypespecGeneratedSwagger = true;
-        continue;
+        containsTypeSpecGeneratedSwagger = true;
+        break;
       }
     }
 
-    if (!containsTypespecGeneratedSwagger) {
+    if (!containsTypeSpecGeneratedSwagger) {
       core.info(
         `Spec folder '${changedSpecDir}' in base branch does not contain any typespec-generated swagger.  PR may be a TypeSpec conversion.`,
       );

@@ -51,7 +51,7 @@ union ResourceType {
   Database: "Database",
 
   /** Elastic pool resource type. */
-  ElasticPool: "ElasticPool",
+  Pool: "Pool",
 }
 
 /**
@@ -321,6 +321,24 @@ model FirewallRuleProperties {
 }
 
 /**
+ * An update to a Database Fleet.
+ */
+model FleetUpdate {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @visibility("read", "create", "update")
+  tags?: Record<string>;
+
+  /**
+   * The Database Fleet properties.
+   */
+  @visibility("read", "create", "update")
+  properties?: FleetProperties;
+}
+
+/**
  * The Database Fleet properties.
  */
 model FleetProperties {
@@ -348,10 +366,10 @@ model DestinationTierOverride {
   resourceType: ResourceType;
 
   /**
-   * Destination tier.
+   * Destination tier name.
    */
   @visibility("read", "create")
-  destinationTier: string;
+  tierName: string;
 
   /**
    * Resource name.

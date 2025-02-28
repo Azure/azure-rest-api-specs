@@ -19,7 +19,7 @@ model EdgeMachine
     Resource = EdgeMachine,
     KeyName = "edgeMachineName",
     SegmentName = "edgeMachines",
-    NamePattern = "^[a-zA-Z0-9-]{3,63}$"
+    NamePattern = "^[a-zA-Z0-9-_]{3,63}$"
   >;
   ...ManagedServiceIdentityProperty;
 }
@@ -103,11 +103,7 @@ model EdgeMachineProperties {
 
   @doc("A machine can only be assigned to single device pool")
   @visibility("read")
-  devicePoolResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.AzureStackHCI/devicePools";
-    }
-  ]>;
+  devicePoolResourceId?: string;
 
   @doc("OS configuration status details ")
   @visibility("read")
@@ -123,7 +119,7 @@ model EdgeMachineProperties {
 
   @doc("Tracks the ID of the consuming resource, marking the machine as in-use.")
   @visibility("read")
-  claimedBy?: Azure.Core.armResourceIdentifier;
+  claimedBy?: string;
 
   @doc("Reported properties for edge machine.")
   @visibility("read")

@@ -27,7 +27,7 @@ These are the global settings for the scom.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-12-10-preview
+tag: package-2025-02-03-preview
 ```
 
 ### Tag: package-2021-06-30-preview
@@ -165,6 +165,19 @@ input-file:
   - Microsoft.Scom/preview/2024-12-10-preview/managedGateways.json
   - Microsoft.Scom/preview/2024-12-10-preview/commonTypes.json
   - Microsoft.Scom/preview/2024-12-10-preview/linkedGrafanaInstances.json
+```
+
+### Tag: package-2025-02-03-preview
+
+These settings apply only when `--tag=2025-02-03-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-03-preview'
+input-file:
+  - Microsoft.Scom/preview/2025-02-03-preview/scom.json
+  - Microsoft.Scom/preview/2025-02-03-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2025-02-03-preview/managedGateways.json
+  - Microsoft.Scom/preview/2025-02-03-preview/commonTypes.json
+  - Microsoft.Scom/preview/2025-02-03-preview/linkedGrafanaInstances.json
 ```
 
 ---

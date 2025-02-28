@@ -21,7 +21,7 @@ model EdgeMachineJob
     Resource = EdgeMachineJob,
     KeyName = "jobsName",
     SegmentName = "jobs",
-    NamePattern = "^[a-zA-Z0-9-]{3,63}$"
+    NamePattern = "^[a-zA-Z0-9-_]{3,63}$"
   >;
 }
 
