@@ -40,7 +40,6 @@ input-file:
 suppressions:
   - code: AvoidAnonymousTypes
     from: Microsoft.ManufacturingPlatform/stable/2025-03-01/manufacturingplatform.json
-    where: $.definitions.Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate
     reason: Swagger LintDiff false positive 
 ```
 ---
