@@ -25,7 +25,19 @@ export default async function incrementalTypeSpec({ github, context, core }) {
 
   // If any changed file is not typespec-generated, return false
   for (const file of changedRmSwaggerFiles) {
-    const swagger = await show("HEAD", file, core);
+    let swagger;
+    try {
+      swagger = await show("HEAD", file, core);
+    } catch (e) {
+      if (e instanceof Error && e.message.includes("does not exist")) {
+        // To simplify logic, if PR deletes a swagger file, it's not "incremental typespec"
+        core.info(`File "${file}" has been deleted`);
+        return false;
+      } else {
+        // Unknown error
+        throw e;
+      }
+    }
 
     const swaggerObj = JSON.parse(swagger);
 
