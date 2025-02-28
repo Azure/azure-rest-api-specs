@@ -1,10 +1,10 @@
 import { readdir } from "node:fs/promises";
-import { join, dirname } from "node:path";
+import { dirname, join } from "node:path";
 import { ParseArgsConfig, parseArgs } from "node:util";
 import { Suppression, getSuppressions } from "suppressions";
-import { TsvRunnerHost } from "./tsv-runner-host.js";
 import { fileURLToPath } from "url";
 import { Rule } from "./rule.js";
+import { TsvRunnerHost } from "./tsv-runner-host.js";
 
 export async function main() {
   const host = new TsvRunnerHost();
@@ -78,14 +78,14 @@ function getSubRules(ruleMap: Map<string, Rule>, suppressions: Suppression[]) {
   const subRuleMap = new Map<string, Set<string>>();
   for (const suppression of suppressions) {
     if (
-      ruleMap.has(suppression.rule) &&
+      ruleMap.has(suppression.rules[0]) &&
       (!suppression["subRules"] || suppression["subRules"].length == 0)
     ) {
-      ruleMap.delete(suppression.rule);
+      ruleMap.delete(suppression.rules[0]);
     }
     const subRules = suppression["subRules"];
     if (subRules && subRules.length > 0)
-      subRuleMap.set(suppression.rule, new Set<string>([...subRules]));
+      subRuleMap.set(suppression.rules[0], new Set<string>([...subRules]));
   }
   return subRuleMap;
 }
