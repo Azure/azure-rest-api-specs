@@ -822,6 +822,18 @@
             "type": "string"
           },
           {
+            "name": "maxPageSize",
+            "in": "query",
+            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000,\nDefault Value = 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 10,
+            "maximum": 1000,
+            "x-ms-client-name": "maximumPageSize"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -866,6 +878,18 @@
             "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "maxPageSize",
+            "in": "query",
+            "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000,\nDefault Value = 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 10,
+            "maximum": 1000,
+            "x-ms-client-name": "maximumPageSize"
           },
           {
             "name": "body",

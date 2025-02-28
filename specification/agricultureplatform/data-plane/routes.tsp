@@ -252,16 +252,16 @@ interface ItemsOperations {
     Item,
     ItemQuery,
     ItemListResponse,
-    // QueryParametersTrait<{
-    //   /**
-    //    * Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000,
-    //    * Default Value = 50.
-    //    */
-    //   @maxValue(1000)
-    //   @minValue(10)
-    //   @query("maxPageSize")
-    //   maxPageSize?: int32 = 50;
-    // }>
+    QueryParametersTrait<{
+      /**
+       * Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000,
+       * Default Value = 50.
+       */
+      @maxValue(1000)
+      @minValue(10)
+      @query("maxPageSize")
+      maximumPageSize?: int32 = 50;
+    }>
   >;
 
   /**
@@ -271,7 +271,17 @@ interface ItemsOperations {
   searchAcrossCollection is Operations.ResourceCollectionAction<
     ItemsinCatalog,
     CrossCollectionItemSearchQuery,
-    ItemListResponse
+    ItemListResponse,
+    QueryParametersTrait<{
+      /**
+       * Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000,
+       * Default Value = 50.
+       */
+      @maxValue(1000)
+      @minValue(10)
+      @query("maxPageSize")
+      maximumPageSize?: int32 = 50;
+    }>
   >;
 }
 
