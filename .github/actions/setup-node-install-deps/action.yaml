@@ -22,7 +22,7 @@ runs:
 
     - run: |
         echo "cache-dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
-        echo "package-lock=$(npm root)/../package-lock.json" >> ${GITHUB_OUTPUT}
+        echo "package-lock=$(npm root | sed 's|/[^/]*$||')/package-lock.json" >> ${GITHUB_OUTPUT}
       shell: bash
       name: Get npm cache-dir and package-lock
       id: npm-config
