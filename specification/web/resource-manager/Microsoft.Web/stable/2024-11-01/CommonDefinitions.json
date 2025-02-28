@@ -812,11 +812,13 @@
               "description": "Resource ID of the associated App Service plan.",
               "type": "string",
               "format": "arm-id",
-              "x-ms-arm-id-details": [
-                {
-                  "type": "Microsoft.Web/serverfarms"
-                }
-              ]
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.Web/serverfarms"
+                  }
+                ]
+              }
             },
             "canonicalName": {
               "description": "CNAME of the certificate to be issued via free certificate",
