@@ -1,97 +1,170 @@
 import { execa } from "execa";
-import { test, vi } from "vitest";
-import { getAffectedReadmes } from "../src/lint-diff.js";
-import { beforeEach, describe } from "node:test";
-import { vol } from "memfs";
-// import exp from "constants";
+import { test, describe } from "vitest";
+import {
+  getSwaggerDependenciesMap,
+  getAffectedSwaggers,
+  getAffectedServices,
+} from "../src/lint-diff.js";
+import { join } from "node:path";
 
 // TODO: Actual tests
 describe("e2e", () => {
   test.concurrent("Executes", async ({ expect }) => {
     const { exitCode } = await execa("npm", ["exec", "--no", "--", "lint-diff"], { reject: false });
-
     expect(exitCode).toBe(1);
   });
 });
 
-describe("getAffectedReadmes", () => {
-  // TODO: Does the mock need to be cleaned up?
-  vi.mock("fs/promises", async () => {
-    // TODO: Why does memfs need to be imported here manually?
-    const memfs = await import("memfs");
-    return {
-      ...memfs.fs.promises,
-    };
+describe("getSwaggerDependenciesMap", () => {
+  test.concurrent("empty set on no .json files", async ({ expect }) => {
+    const __dirname = new URL(".", import.meta.url).pathname;
+    const dependencyMap = await getSwaggerDependenciesMap(
+      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
+      "specification/empty",
+    );
+
+    expect(dependencyMap.size).toEqual(0);
   });
 
-  beforeEach(() => {
-    vol.reset();
+  test.concurrent("d has no dependencies", async ({ expect }) => {
+    const __dirname = new URL(".", import.meta.url).pathname;
+    const dependencyMap = await getSwaggerDependenciesMap(
+      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
+      "specification/1",
+    );
+
+    expect(dependencyMap.has("specification/1/d.json")).toEqual(true);
+    expect(dependencyMap.get("specification/1/d.json")).toEqual(new Set<string>());
   });
 
-  test.concurrent("includes expected changed file", async ({ expect }) => {
-    const files = {
-      "./specification/a/readme.md": "a",
-      "./specification/b/readme.md": "b",
-    };
-    vol.fromJSON(files, ".");
+  test.concurrent("a depends on b and c (and d transitively)", async ({ expect }) => {
+    const __dirname = new URL(".", import.meta.url).pathname;
+    const dependencyMap = await getSwaggerDependenciesMap(
+      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
+      "specification/1",
+    );
 
-    const changedFiles = ["specification/a/readme.md"];
-    const affectedReadmes = await getAffectedReadmes(changedFiles, ".");
-    expect(affectedReadmes).toEqual(["specification/a/readme.md"]);
+    expect(dependencyMap.has("specification/1/a.json")).toEqual(true);
+    expect(dependencyMap.get("specification/1/a.json")).toEqual(
+      new Set<string>([
+        "specification/1/nesting/b.json",
+        "specification/1/c.json",
+        // d.json is a dependency of a.json through b.json
+        "specification/1/d.json",
+      ]),
+    );
   });
 
-  test.concurrent("excludes non-changed file outside of scope", async ({ expect }) => {
-    const files = {
-      "./specification/a/readme.md": "a",
-      "./specification/b/readme.md": "b",
-    };
-    vol.fromJSON(files, ".");
+  test.concurrent("b depends on c and d", async ({ expect }) => {
+    const __dirname = new URL(".", import.meta.url).pathname;
+    const dependencyMap = await getSwaggerDependenciesMap(
+      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
+      "specification/1",
+    );
 
-    const changedFiles = ["specification/a/readme.md"];
-    const affectedReadmes = await getAffectedReadmes(changedFiles, ".");
-    expect(affectedReadmes).not.toContain(["specification/b/readme.md"]);
+    expect(dependencyMap.has("specification/1/nesting/b.json")).toEqual(true);
+    expect(dependencyMap.get("specification/1/nesting/b.json")).toEqual(
+      new Set<string>(["specification/1/c.json", "specification/1/d.json"]),
+    );
+  });
+});
+
+describe("getAffectedSwaggers", () => {
+  test.concurrent("a affects only a", async ({ expect }) => {
+    const __dirname = new URL(".", import.meta.url).pathname;
+    const dependencyMap = await getSwaggerDependenciesMap(
+      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
+      "specification/1",
+    );
+
+    const affectedSwaggers = getAffectedSwaggers(["specification/1/a.json"], dependencyMap);
+
+    expect(affectedSwaggers).toEqual(["specification/1/a.json"]);
   });
 
-  test.concurrent("includes files up the heirarchy", async ({ expect }) => {
-    const files = {
-      "./specification/a/readme.md": "a",
-      "./specification/a/b/c/readme.md": "c",
-    };
-    vol.fromJSON(files, ".");
+  test.concurrent("b affects a and b", async ({ expect }) => {
+    const __dirname = new URL(".", import.meta.url).pathname;
+    const dependencyMap = await getSwaggerDependenciesMap(
+      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
+      "specification/1",
+    );
 
-    const changedFiles = ["specification/a/b/c/readme.md"];
-    const affectedReadmes = await getAffectedReadmes(changedFiles, ".");
-    expect(affectedReadmes).toEqual(["specification/a/b/c/readme.md", "specification/a/readme.md"]);
+    const affectedSwaggers = getAffectedSwaggers(["specification/1/nesting/b.json"], dependencyMap);
+
+    expect(affectedSwaggers).toEqual(["specification/1/nesting/b.json", "specification/1/a.json"]);
   });
 
-  test.concurrent(
-    "lists reademe files in folders with affected swagger files",
-    async ({ expect }) => {
-      const files = {
-        "./specification/service1/readme.md": "a",
-        "./specification/service1/b/c/swagger.json": "{}",
-        "./specification/service2/readme.md": "b",
-        "./specification/service2/swagger.json": "{}",
-      };
-      vol.fromJSON(files, ".");
+  test.concurrent("c affects a, b, c", async ({ expect }) => {
+    const __dirname = new URL(".", import.meta.url).pathname;
+    const dependencyMap = await getSwaggerDependenciesMap(
+      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
+      "specification/1",
+    );
 
-      const changedFiles = ["specification/service1/b/c/swagger.json"];
-      const affectedReadmes = await getAffectedReadmes(changedFiles, ".");
-      expect(affectedReadmes).toEqual(["specification/service1/readme.md"]);
-    },
-  );
+    const affectedSwaggers = getAffectedSwaggers(["specification/1/c.json"], dependencyMap);
 
-  test.concurrent("excludes files outside of specification/", async ({ expect }) => {
-    const files = {
-      "./repo-root/specification/a/readme.md": "a",
-      "./repo-root/specification/b/readme.md": "b",
-      "./repo-root/readme.md": "root",
-      "./repo-root/some.json": "{}",
-    };
-    vol.fromJSON(files, ".");
+    expect(affectedSwaggers).toEqual([
+      "specification/1/c.json",
+      "specification/1/a.json",
+      "specification/1/nesting/b.json",
+    ]);
+  });
 
-    const changedFiles = ["some.json", "readme.md", "specification/a/readme.md"];
-    const affectedReadmes = await getAffectedReadmes(changedFiles, "./repo-root");
-    expect(affectedReadmes).toEqual(["specification/a/readme.md"]);
+  test.concurrent("d affects a, b, d", async ({ expect }) => {
+    const __dirname = new URL(".", import.meta.url).pathname;
+    const dependencyMap = await getSwaggerDependenciesMap(
+      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
+      "specification/1",
+    );
+
+    const affectedSwaggers = getAffectedSwaggers(["specification/1/d.json"], dependencyMap);
+
+    expect(affectedSwaggers).toEqual([
+      "specification/1/d.json",
+      "specification/1/a.json",
+      "specification/1/nesting/b.json",
+    ]);
+  });
+
+  test.concurrent("d, c affects a, b, c, d", async ({ expect }) => {
+    const __dirname = new URL(".", import.meta.url).pathname;
+    const dependencyMap = await getSwaggerDependenciesMap(
+      join(__dirname, "fixtures/getSwaggerDependenciesMap"),
+      "specification/1",
+    );
+
+    const affectedSwaggers = getAffectedSwaggers(
+      ["specification/1/d.json", "specification/1/c.json"],
+      dependencyMap,
+    );
+
+    expect(affectedSwaggers).toEqual([
+      "specification/1/d.json",
+      "specification/1/c.json",
+      "specification/1/a.json",
+      "specification/1/nesting/b.json",
+    ]);
+  });
+});
+
+describe("getAffectedServices", () => {
+  test.concurrent("returns single service with multiple files", async ({ expect }) => {
+    const changedFiles = ["specification/service1/file1.json", "specification/service1/file2.json"];
+    const affectedServices = await getAffectedServices(changedFiles);
+
+    expect(affectedServices).toEqual(new Set<string>(["specification/service1"]));
+  });
+
+  test.concurrent("returns multiple services", async ({ expect }) => {
+    const changedFiles = [
+      "specification/service1/file1.json",
+      "specification/service1/file2.json",
+      "specification/service2/file1.json",
+    ];
+    const affectedServices = await getAffectedServices(changedFiles);
+
+    expect(affectedServices).toEqual(
+      new Set<string>(["specification/service1", "specification/service2"]),
+    );
   });
 });
