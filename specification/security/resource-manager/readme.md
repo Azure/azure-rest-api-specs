@@ -570,7 +570,6 @@ input-file:
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
 - Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
-- Microsoft.Security/preview/2024-05-15-preview/securityConnectorsDevOps.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
@@ -595,6 +594,7 @@ input-file:
 - Microsoft.Security/stable/2024-08-01/securityStandards.json
 - Microsoft.Security/stable/2024-08-01/standardAssignments.json
 - Microsoft.Security/stable/2024-08-01/customRecommedations.json
+- Microsoft.Security/stable/2025-03-01/securityConnectorsDevOps.json
 
 # Autorest suppressions
 suppressions:
