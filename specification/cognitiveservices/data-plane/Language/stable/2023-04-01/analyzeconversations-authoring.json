@@ -110,7 +110,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}": {
       "get": {
-        "operationId": "ConversationAuthoringProjects_GetProject",
+        "operationId": "ConversationAuthoringProject_GetProject",
         "description": "Gets the details of a project.",
         "parameters": [
           {
@@ -144,15 +144,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful Get Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetProject.json"
-          }
         }
       },
       "patch": {
-        "operationId": "ConversationAuthoringProjects_CreateProject",
+        "operationId": "ConversationAuthoringProject_CreateProject",
         "description": "Creates a new project or updates an existing one.",
         "consumes": [
           "application/merge-patch+json"
@@ -204,15 +199,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful Create Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCreateProject.json"
-          }
         }
       },
       "delete": {
-        "operationId": "ConversationAuthoringProjects_DeleteProject",
+        "operationId": "ConversationAuthoringProject_DeleteProject",
         "description": "Deletes a project.",
         "parameters": [
           {
@@ -251,17 +241,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Delete Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/:export": {
       "post": {
-        "operationId": "ConversationAuthoringProjects_Export",
+        "operationId": "ConversationAuthoringProject_Export",
         "description": "Triggers a job to export a project's data.",
         "parameters": [
           {
@@ -373,17 +358,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Export Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulExportProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/:import": {
       "post": {
-        "operationId": "ConversationAuthoringProjects_Import",
+        "operationId": "ConversationAuthoringProject_Import",
         "description": "Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.",
         "parameters": [
           {
@@ -459,17 +439,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Import Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulImportProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/:train": {
       "post": {
-        "operationId": "ConversationAuthoringProjects_Train",
+        "operationId": "ConversationAuthoringProject_Train",
         "description": "Triggers a training job for a project.",
         "parameters": [
           {
@@ -515,11 +490,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Train Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulTrainProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -583,7 +553,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}": {
       "get": {
-        "operationId": "ConversationAuthoringDeployments_GetDeployment",
+        "operationId": "ConversationAuthoringDeployment_GetDeployment",
         "description": "Gets the details of a deployment.",
         "parameters": [
           {
@@ -624,15 +594,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful Get Deployment": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetDeployment.json"
-          }
         }
       },
       "put": {
-        "operationId": "ConversationAuthoringDeployments_DeployProject",
+        "operationId": "ConversationAuthoringDeployment_DeployProject",
         "description": "Creates a new deployment or replaces an existing one.",
         "parameters": [
           {
@@ -687,15 +652,10 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Deploy Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeployProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "ConversationAuthoringDeployments_DeleteDeployment",
+        "operationId": "ConversationAuthoringDeployment_DeleteDeployment",
         "description": "Deletes a project deployment.",
         "parameters": [
           {
@@ -741,17 +701,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Delete Deployment": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteDeployment.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringDeployments_GetDeploymentStatus",
+        "operationId": "ConversationAuthoringDeployment_GetDeploymentStatus",
         "description": "Gets the status of an existing deployment job.",
         "parameters": [
           {
@@ -799,17 +754,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful Get Deployment Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetDeploymentStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/:swap": {
       "post": {
-        "operationId": "ConversationAuthoringDeployments_SwapDeployments",
+        "operationId": "ConversationAuthoringDeployment_SwapDeployments",
         "description": "Swaps two existing deployments with each other.",
         "parameters": [
           {
@@ -857,17 +807,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Swap Deployments": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulSwapDeployments.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/swap/jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringDeployments_GetSwapDeploymentsStatus",
+        "operationId": "ConversationAuthoringDeployment_GetSwapDeploymentsStatus",
         "description": "Gets the status of an existing swap deployment job.",
         "parameters": [
           {
@@ -908,17 +853,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful Get Swap Deployments Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSwapDeploymentsStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringProjects_GetExportStatus",
+        "operationId": "ConversationAuthoringProject_GetExportStatus",
         "description": "Gets the status of an export job. Once job completes, returns the project metadata, and assets.",
         "parameters": [
           {
@@ -959,17 +899,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful Get Export Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetExportStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringProjects_GetImportStatus",
+        "operationId": "ConversationAuthoringProject_GetImportStatus",
         "description": "Gets the status for an import.",
         "parameters": [
           {
@@ -1009,11 +944,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Import Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetImportStatus.json"
           }
         }
       }
@@ -1430,7 +1360,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringProjects_GetTrainingStatus",
+        "operationId": "ConversationAuthoringProject_GetTrainingStatus",
         "description": "Gets the status for a training job.",
         "parameters": [
           {
@@ -1471,17 +1401,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful Get Train Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetTrainStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel": {
       "post": {
-        "operationId": "ConversationAuthoringProjects_CancelTrainingJob",
+        "operationId": "ConversationAuthoringProject_CancelTrainingJob",
         "description": "Triggers a cancellation for a running training job.",
         "parameters": [
           {
@@ -1527,17 +1452,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Cancel Training Job": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCancelTrainingJob.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringProjects_GetProjectDeletionStatus",
+        "operationId": "ConversationAuthoringProject_GetProjectDeletionStatus",
         "description": "Gets the status for a project deletion job.",
         "parameters": [
           {
@@ -1569,11 +1489,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Project Deletion Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetProjectDeletionStatus.json"
           }
         }
       }
