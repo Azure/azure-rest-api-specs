@@ -132,6 +132,21 @@ override-info:
   title: PolicyClient
 ```
 
+### Tag: package-policy-2024-12-preview
+
+These settings apply only when `--tag=package-policy-2024-12-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2024-12-preview'
+input-file:
+- Microsoft.Authorization/preview/2024-12-01-preview/policyExemptions.json
+- Microsoft.Authorization/preview/2024-12-01-preview/policyVariables.json
+- Microsoft.Authorization/preview/2024-12-01-preview/policyVariableValues.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-policy-2024-05
 
 These settings apply only when `--tag=package-policy-2024-05` is specified on the command line.
