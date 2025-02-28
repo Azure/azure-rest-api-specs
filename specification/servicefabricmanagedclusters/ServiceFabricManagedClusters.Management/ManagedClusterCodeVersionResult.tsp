@@ -176,9 +176,4 @@ union Environment {
    * Indicates os is Windows.
    */
   Windows: "Windows",
-
-  /**
-   * Indicates os is Linux.
-   */
-  Linux: "Linux",
 }
