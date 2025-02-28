@@ -11,8 +11,8 @@ export interface Suppression {
   tool: string;
   // Output only exposes "paths".  For input, if "path" is defined, it is inserted at the start of "paths".
   paths: string[];
-  rules: string[];
-  subRules: string[];
+  rules?: string[];
+  subRules?: string[];
   reason: string;
 }
 
