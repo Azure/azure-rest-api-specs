@@ -14,6 +14,9 @@ export async function execRoot(command, core) {
   // TODO: Handle errors
   const result = await exec(command, {
     cwd: process.env.GITHUB_WORKSPACE,
+    // Default is 1024 * 1024, which is too small for some git commands returning many entities or large file content.
+    // To support "git show", should be larger than the largest swagger file in the repo (2.5 MB as of 2/28/2025).
+    maxBuffer: 16 * 1024 * 1024
   });
 
   core.debug(`stdout: '${result.stdout}'`);
