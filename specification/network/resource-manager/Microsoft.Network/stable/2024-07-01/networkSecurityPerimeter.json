@@ -547,7 +547,7 @@
         "tags": [
           "NetworkSecurityPerimeterAccessRules"
         ],
-        "operationId": "NNetworkSecurityPerimeterAccessRules_Delete",
+        "operationId": "NetworkSecurityPerimeterAccessRules_Delete",
         "description": "Deletes an NSP access rule.",
         "responses": {
           "200": {
@@ -1175,7 +1175,7 @@
         "tags": [
           "NetworkSecurityPerimeterLinkReferences"
         ],
-        "operationId": "NNetworkSecurityPerimeterLinkReferences_Get",
+        "operationId": "NetworkSecurityPerimeterLinkReferences_Get",
         "description": "Gets the specified NSP linkReference resource.",
         "responses": {
           "200": {
@@ -1201,7 +1201,7 @@
         "tags": [
           "NetworkSecurityPerimeterLinkReferences"
         ],
-        "operationId": "NNetworkSecurityPerimeterLinkReferences_Delete",
+        "operationId": "NetworkSecurityPerimeterLinkReferences_Delete",
         "description": "Deletes an NSP LinkReference resource.",
         "responses": {
           "200": {
@@ -2392,7 +2392,8 @@
       "required": true,
       "type": "string",
       "description": "The operation id of the async operation.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[{(]?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}[)}]?$"
     }
   }
 }
