@@ -2301,7 +2301,7 @@ model ManagedClusterUpdateParameters {
 /**
  * Parameters for Fault Simulation id.
  */
-model FaultSimulationIdParameters {
+model FaultSimulationIdContent {
   /**
    * unique identifier for the fault simulation.
    */
@@ -2361,7 +2361,7 @@ model FaultSimulationDetails {
   /**
    * Fault simulation parameters.
    */
-  parameters?: FaultSimulationParameters;
+  parameters?: FaultSimulationContent;
 }
 
 /**
@@ -2393,7 +2393,7 @@ model NodeTypeFaultSimulation {
  * Parameters for Fault Simulation action.
  */
 @discriminator("faultKind")
-model FaultSimulationParameters {
+model FaultSimulationContent {
   /**
    * The kind of fault to be simulated.
    */
@@ -3684,7 +3684,7 @@ model UniformInt64RangePartitionScheme extends Partition {
 /**
  * Parameters for Zone Fault Simulation action.
  */
-model ZoneFaultSimulationParameters extends FaultSimulationParameters {
+model ZoneFaultSimulationContent extends FaultSimulationContent {
   /**
    * Indicates the zones of the fault simulation.
    */

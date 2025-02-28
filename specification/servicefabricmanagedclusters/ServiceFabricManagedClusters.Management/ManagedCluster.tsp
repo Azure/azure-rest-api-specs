@@ -89,7 +89,7 @@ interface ManagedClusters {
    */
   getFaultSimulation is ArmResourceActionSync<
     ManagedCluster,
-    FaultSimulationIdParameters,
+    FaultSimulationIdContent,
     ArmResponse<FaultSimulation>
   >;
 
@@ -107,7 +107,7 @@ interface ManagedClusters {
    */
   startFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
-    FaultSimulationParameters,
+    FaultSimulationContent,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
       ArmAsyncOperationHeader
@@ -118,7 +118,7 @@ interface ManagedClusters {
    */
   stopFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
-    FaultSimulationIdParameters,
+    FaultSimulationIdContent,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
       ArmAsyncOperationHeader

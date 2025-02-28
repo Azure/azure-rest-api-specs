@@ -139,7 +139,7 @@ interface NodeTypes {
    */
   startFaultSimulation is ArmResourceActionAsync<
     NodeType,
-    FaultSimulationParameters,
+    FaultSimulationContent,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
       ArmAsyncOperationHeader
@@ -150,7 +150,7 @@ interface NodeTypes {
    */
   stopFaultSimulation is ArmResourceActionAsync<
     NodeType,
-    FaultSimulationIdParameters,
+    FaultSimulationIdContent,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
       ArmAsyncOperationHeader
@@ -161,7 +161,7 @@ interface NodeTypes {
    */
   getFaultSimulation is ArmResourceActionSync<
     NodeType,
-    FaultSimulationIdParameters,
+    FaultSimulationIdContent,
     ArmResponse<FaultSimulation>
   >;
 

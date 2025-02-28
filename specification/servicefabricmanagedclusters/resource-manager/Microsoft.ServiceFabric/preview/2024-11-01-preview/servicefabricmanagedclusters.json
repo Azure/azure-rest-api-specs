@@ -2436,7 +2436,7 @@
             "description": "parameter with fault simulation id.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FaultSimulationIdParameters"
+              "$ref": "#/definitions/FaultSimulationIdContent"
             }
           }
         ],
@@ -3138,7 +3138,7 @@
             "description": "parameter with fault simulation id.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FaultSimulationIdParameters"
+              "$ref": "#/definitions/FaultSimulationIdContent"
             }
           }
         ],
@@ -3614,7 +3614,7 @@
             "description": "parameters describing the fault simulation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FaultSimulationParameters"
+              "$ref": "#/definitions/FaultSimulationContent"
             }
           }
         ],
@@ -3688,7 +3688,7 @@
             "description": "parameter with fault simulation id.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FaultSimulationIdParameters"
+              "$ref": "#/definitions/FaultSimulationIdContent"
             }
           }
         ],
@@ -3755,7 +3755,7 @@
             "description": "parameters describing the fault simulation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FaultSimulationParameters"
+              "$ref": "#/definitions/FaultSimulationContent"
             }
           }
         ],
@@ -3822,7 +3822,7 @@
             "description": "parameter with fault simulation id.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FaultSimulationIdParameters"
+              "$ref": "#/definitions/FaultSimulationIdContent"
             }
           }
         ],
@@ -4838,6 +4838,28 @@
         }
       }
     },
+    "FaultSimulationContent": {
+      "type": "object",
+      "description": "Parameters for Fault Simulation action.",
+      "properties": {
+        "faultKind": {
+          "$ref": "#/definitions/FaultKind",
+          "description": "The kind of fault to be simulated."
+        },
+        "force": {
+          "type": "boolean",
+          "description": "Force the action to go through without any check on the cluster."
+        },
+        "constraints": {
+          "$ref": "#/definitions/FaultSimulationConstraints",
+          "description": "Constraints for Fault Simulation action."
+        }
+      },
+      "discriminator": "faultKind",
+      "required": [
+        "faultKind"
+      ]
+    },
     "FaultSimulationDetails": {
       "type": "object",
       "description": "Details for Fault Simulation.",
@@ -4861,12 +4883,12 @@
           ]
         },
         "parameters": {
-          "$ref": "#/definitions/FaultSimulationParameters",
+          "$ref": "#/definitions/FaultSimulationContent",
           "description": "Fault simulation parameters."
         }
       }
     },
-    "FaultSimulationIdParameters": {
+    "FaultSimulationIdContent": {
       "type": "object",
       "description": "Parameters for Fault Simulation id.",
       "properties": {
@@ -4899,28 +4921,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "FaultSimulationParameters": {
-      "type": "object",
-      "description": "Parameters for Fault Simulation action.",
-      "properties": {
-        "faultKind": {
-          "$ref": "#/definitions/FaultKind",
-          "description": "The kind of fault to be simulated."
-        },
-        "force": {
-          "type": "boolean",
-          "description": "Force the action to go through without any check on the cluster."
-        },
-        "constraints": {
-          "$ref": "#/definitions/FaultSimulationConstraints",
-          "description": "Constraints for Fault Simulation action."
-        }
-      },
-      "discriminator": "faultKind",
-      "required": [
-        "faultKind"
       ]
     },
     "FaultSimulationStatus": {
@@ -8362,7 +8362,7 @@
         ]
       }
     },
-    "ZoneFaultSimulationParameters": {
+    "ZoneFaultSimulationContent": {
       "type": "object",
       "description": "Parameters for Zone Fault Simulation action.",
       "properties": {
@@ -8376,7 +8376,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/FaultSimulationParameters"
+          "$ref": "#/definitions/FaultSimulationContent"
         }
       ],
       "x-ms-discriminator-value": "Zone"
