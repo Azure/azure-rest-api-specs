@@ -1309,7 +1309,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}": {
       "get": {
-        "operationId": "ConversationAuthoringModels_GetExportedModel",
+        "operationId": "ConversationAuthoringExportedModel_GetExportedModel",
         "description": "Gets the details of an exported model.",
         "parameters": [
           {
@@ -1350,15 +1350,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful Get Exported Model": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetExportedModel.json"
-          }
         }
       },
       "put": {
-        "operationId": "ConversationAuthoringModels_CreateOrUpdateExportedModel",
+        "operationId": "ConversationAuthoringExportedModel_CreateOrUpdateExportedModel",
         "description": "Creates a new exported model or replaces an existing one.",
         "parameters": [
           {
@@ -1412,15 +1407,10 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Create Exported Model": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCreateExportedModel.json"
-          }
-        },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "ConversationAuthoringModels_DeleteExportedModel",
+        "operationId": "ConversationAuthoringExportedModel_DeleteExportedModel",
         "description": "Deletes an existing exported model.",
         "parameters": [
           {
@@ -1465,17 +1455,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Delete Exported Model": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteExportedModel.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}/jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringModels_GetExportedModelJobStatus",
+        "operationId": "ConversationAuthoringExportedModel_GetExportedModelJobStatus",
         "description": "Gets the status for an existing job to create or update an exported model.",
         "parameters": [
           {
@@ -1522,11 +1507,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Exported Model Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetExportedModelStatus.json"
           }
         }
       }
@@ -1640,7 +1620,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}": {
       "get": {
-        "operationId": "ConversationAuthoringModels_GetTrainedModel",
+        "operationId": "ConversationAuthoringTrainedModel_GetTrainedModel",
         "description": "Gets the details of a trained model.",
         "parameters": [
           {
@@ -1681,15 +1661,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful Get Model": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetModel.json"
-          }
         }
       },
       "delete": {
-        "operationId": "ConversationAuthoringModels_DeleteTrainedModel",
+        "operationId": "ConversationAuthoringTrainedModel_DeleteTrainedModel",
         "description": "Deletes an existing trained model.",
         "parameters": [
           {
@@ -1727,17 +1702,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful Delete Model": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteModel.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
       "post": {
-        "operationId": "ConversationAuthoringModels_EvaluateModel",
+        "operationId": "ConversationAuthoringTrainedModel_EvaluateModel",
         "description": "Triggers evaluation operation on a trained model.",
         "parameters": [
           {
@@ -1792,17 +1762,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Evaluation Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulEvaluationProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
-        "operationId": "ConversationAuthoringModels_LoadSnapshot",
+        "operationId": "ConversationAuthoringTrainedModel_LoadSnapshot",
         "description": "Restores the snapshot of this trained model to be the current working directory of the project.",
         "parameters": [
           {
@@ -1848,17 +1813,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Load Snapshot": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulLoadSnapshot.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringModels_GetEvaluationStatus",
+        "operationId": "ConversationAuthoringTrainedModel_GetEvaluationStatus",
         "description": "Gets the status for an evaluation job.",
         "parameters": [
           {
@@ -1906,17 +1866,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful Get Evaluation Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetEvaluationStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
       "get": {
-        "operationId": "ConversationAuthoringModels_GetModelEvaluationResults",
+        "operationId": "ConversationAuthoringTrainedModel_GetModelEvaluationResults",
         "description": "Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.",
         "parameters": [
           {
@@ -1970,11 +1925,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Get Model Evaluation": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetModelEvaluation.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1982,7 +1932,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
       "get": {
-        "operationId": "ConversationAuthoringModels_GetModelEvaluationSummary",
+        "operationId": "ConversationAuthoringTrainedModel_GetModelEvaluationSummary",
         "description": "Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model e.g., F1, Precision, Recall, etc.",
         "parameters": [
           {
@@ -2023,17 +1973,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Successful Get Model Evaluation Summary": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetModelEvaluationSummary.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringModels_GetLoadSnapshotStatus",
+        "operationId": "ConversationAuthoringTrainedModel_GetLoadSnapshotStatus",
         "description": "Gets the status for loading a snapshot.",
         "parameters": [
           {
@@ -2080,11 +2025,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Load Snapshot Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetLoadSnapshotStatus.json"
           }
         }
       }
