@@ -1,14 +1,10 @@
+import "./common.tsp";
+import "./routes.tsp";
 import "@azure-tools/typespec-client-generator-core";
-import "./main.tsp";
-import "@typespec/versioning";
 
-using Azure.ClientGenerator.Core;
 using global.Azure.Core.Foundations;
-using TypeSpec.Http;
-using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2024_07_01)
 namespace JavaClient;
 
 // Get Application Operation
@@ -26,14 +22,12 @@ op getApplicationCustomization(
   options?: GetApplicationOptions,
 
   ...ApiVersionParameter,
-): Azure.Batch.BatchApplication;
+): void;
 
-@@override(Azure.Batch.Applications.getApplication,
+@@override(Azure.Batch.Applications.getApplicationOp,
   getApplicationCustomization,
   "java"
 );
-
-@@access(JavaClient.GetApplicationOptions, Access.public, "java");
 
 // List Applications Operation
 
@@ -49,11 +43,9 @@ op listApplicationsCustomization(
   options?: ListBatchApplicationsOptions,
 
   ...ApiVersionParameter,
-): Azure.Batch.BatchApplicationListResult;
+): void;
 
-@@override(Azure.Batch.Applications.listApplications,
+@@override(Azure.Batch.Applications.listApplicationsOp,
   listApplicationsCustomization,
   "java"
 );
-
-@@access(JavaClient.ListBatchApplicationsOptions, Access.public, "java");

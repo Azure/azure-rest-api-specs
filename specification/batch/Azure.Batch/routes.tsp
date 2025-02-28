@@ -5,7 +5,6 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "./common.tsp";
-import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -38,7 +37,7 @@ interface Applications {
     API.
     """)
   @route("/applications")
-  listApplications is ListOperation<{}, BatchApplicationListResult>;
+  listApplicationsOp is ListOperation<{}, BatchApplicationListResult>;
 
   @summary("Gets information about the specified Application.")
   @doc("""
@@ -49,9 +48,9 @@ interface Applications {
     API.
     """)
   @route("/applications/{applicationId}")
-  getApplication is ReadOperation<
+  getApplicationOp is ReadOperation<
     {
-      ...Azure.Batch.GetApplicationRequiredParameters;
+      ...GetApplicationRequiredParameters;
     },
     BatchApplication
   >;
