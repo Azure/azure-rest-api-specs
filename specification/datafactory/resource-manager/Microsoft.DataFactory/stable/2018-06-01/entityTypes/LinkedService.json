@@ -1766,10 +1766,7 @@
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
-      },
-      "required": [
-        "connectionString"
-      ]
+      }
     },
     "AmazonRdsForOracleLinkedService": {
       "x-ms-discriminator-value": "AmazonRdsForOracle",
@@ -8470,8 +8467,8 @@
       ]
     },
     "LakeHouseLinkedService": {
-      "x-ms-discriminator-value": "LakeHouse",
-      "description": "Microsoft Fabric LakeHouse linked service.",
+      "x-ms-discriminator-value": "Lakehouse",
+      "description": "Microsoft Fabric Lakehouse linked service.",
       "type": "object",
       "allOf": [
         {
@@ -8480,7 +8477,7 @@
       ],
       "properties": {
         "typeProperties": {
-          "description": "Microsoft Fabric LakeHouse linked service properties.",
+          "description": "Microsoft Fabric Lakehouse linked service properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LakeHouseLinkedServiceTypeProperties"
         }
@@ -8490,7 +8487,7 @@
       ]
     },
     "LakeHouseLinkedServiceTypeProperties": {
-      "description": "Microsoft Fabric LakeHouse linked service properties.",
+      "description": "Microsoft Fabric Lakehouse linked service properties.",
       "type": "object",
       "properties": {
         "workspaceId": {
@@ -8501,15 +8498,15 @@
         "artifactId": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The ID of Microsoft Fabric LakeHouse artifact. Type: string (or Expression with resultType string)."
+          "description": "The ID of Microsoft Fabric Lakehouse artifact. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalId": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The ID of the application used to authenticate against Microsoft Fabric LakeHouse. Type: string (or Expression with resultType string)."
+          "description": "The ID of the application used to authenticate against Microsoft Fabric Lakehouse. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalKey": {
-          "description": "The Key of the application used to authenticate against Microsoft Fabric LakeHouse.",
+          "description": "The Key of the application used to authenticate against Microsoft Fabric Lakehouse.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "tenant": {
