@@ -4,6 +4,8 @@ parameters:
   "dependencies":
     "additionalDirectories": []
     default: ""
+  "csharp-sdk-folder":
+    default: "{project-root}/azure-sdk-for-net/"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -34,6 +36,16 @@ options:
     package-dir: "azure-microsoft-app-dynamicsessions"
     namespace: com.microsoft.app.dynamicsessions
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/microsoftappdynamicsessions"
+    package-dir: "microsoftappdynamicsessions"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
