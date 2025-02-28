@@ -25,6 +25,7 @@ export default async function incrementalTypeSpec({ github, context, core }) {
 
   // If any changed file is not typespec-generated, return false
   for (const file of changedRmSwaggerFiles) {
+    /** @type string */
     let swagger;
     try {
       swagger = await show("HEAD", file, core);
