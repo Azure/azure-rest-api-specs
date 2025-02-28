@@ -2084,10 +2084,12 @@
     },
     "PhoneNumbersReservation": {
       "type": "object",
+      "description": "Represents a reservation for phone numbers. A reservation is a temporary hold on phone numbers that can later be purchased. The reservation has a limited lifetime after which the phone numbers are released if not purchased.",
       "properties": {
         "id": {
           "description": "The id of the reservation.",
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         },
         "expiresAt": {
