@@ -7,9 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 /** Traffic Controller Provider management API. */
 @armProviderNamespace
 @armCommonTypesVersion("v3")
-@service({
-  title: "TrafficController",
-})
+@service(#{ title: "TrafficController" })
 @versioned(Versions)
 namespace Microsoft.ServiceNetworking;
 

@@ -10,9 +10,7 @@ import "./sqlVmTarget.tsp";
 import "./sharedPrivateLinkResource.tsp";
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Using invalid versions of ManagedIdentity"
-@service({
-  title: "Microsoft.DatabaseWatcher",
-})
+@service(#{ title: "Microsoft.DatabaseWatcher" })
 @versioned(Microsoft.DatabaseWatcher.Versions)
 @armProviderNamespace
 namespace Microsoft.DatabaseWatcher;

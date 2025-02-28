@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.Community")
-@service({
-  title: "Microsoft.Community",
-})
+@service(#{ title: "Microsoft.Community" })
 @versioned(Versions)
 namespace Microsoft.Community;
 

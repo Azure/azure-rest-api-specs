@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 @armProviderNamespace
-@service({
-  title: "Managed DevOps Infrastructure",
-})
+@service(#{ title: "Managed DevOps Infrastructure" })
 @versioned(Versions)
 namespace Microsoft.DevOpsInfrastructure;
 
