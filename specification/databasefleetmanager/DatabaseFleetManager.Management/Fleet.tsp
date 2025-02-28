@@ -33,34 +33,13 @@ interface Fleets {
   /**
    * Creates or updates a fleet resource.
    */
-  @removed(Versions.v2025_02_01_preview)
-  @sharedRoute
-  @renamedFrom(Versions.v2025_02_01_preview, "createOrUpdate")
-  createOrUpdateOld is ArmResourceCreateOrReplaceSync<Fleet>;
-
-  /**
-   * Creates or updates a fleet resource.
-   */
-  @added(Versions.v2025_02_01_preview)
-  @sharedRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Fleet>;
 
   /**
    * Modifies a fleet resource.
    */
-  @removed(Versions.v2025_02_01_preview)
-  @sharedRoute
-  @renamedFrom(Versions.v2025_02_01_preview, "update")
   @parameterVisibility
-  updateOld is ArmCustomPatchSync<Fleet, Fleet>;
-
-  /**
-   * Modifies a fleet resource.
-   */
-  @added(Versions.v2025_02_01_preview)
-  @sharedRoute
-  @parameterVisibility
-  update is ArmCustomPatchAsync<Fleet, Fleet>;
+  update is ArmCustomPatchAsync<Fleet, FleetUpdate>;
 
   /**
    * Deletes a fleet.

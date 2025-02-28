@@ -1,0 +1,22 @@
+{
+  "name": "@azure-tools/spec-gen-sdk-runner",
+  "private": true,
+  "type": "module",
+  "main": "dist/src/index.js",
+  "version": "0.0.1",
+  "bin": {
+    "spec-gen-sdk-runner": "cmd/spec-gen-sdk-runner.js"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "lint": "eslint . -c eslint.config.js --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . -c eslint.config.js --fix"
+  },
+  "engines": {
+    "node": ">= 18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.31",
+    "typescript": "~5.6.2"
+  }
+}

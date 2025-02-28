@@ -20,7 +20,7 @@ model DevicePool
     Resource = DevicePool,
     KeyName = "devicePoolName",
     SegmentName = "devicePools",
-    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+    NamePattern = "^[a-zA-Z0-9-_]{3,63}$"
   >;
   ...ManagedServiceIdentityProperty;
 }
@@ -91,7 +91,7 @@ model ClaimDeviceRequest {
   devices: string[];
 
   @doc("Resource Id of group device belongs to.")
-  claimedBy?: Azure.Core.armResourceIdentifier;
+  claimedBy?: string;
 }
 
 @doc("Properties for device pool.")
@@ -128,5 +128,5 @@ model DeviceDetail {
 
   @doc("Resource Id of group device belongs to.")
   @visibility("read")
-  claimedBy?: Azure.Core.armResourceIdentifier;
+  claimedBy?: string;
 }

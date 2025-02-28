@@ -51,7 +51,7 @@ union ResourceType {
   Database: "Database",
 
   /** Elastic pool resource type. */
-  ElasticPool: "ElasticPool",
+  Pool: "Pool",
 }
 
 /**
@@ -65,22 +65,6 @@ union ZoneRedundancy {
 
   /** Zone redundancy disabled. */
   Disabled: "Disabled",
-}
-
-/**
- * SQL user type of the authorized principal. Extra: Database user, Sever: Server user, Default: Server admin
- */
-union SQLUserType {
-  string,
-
-  /** Server admin. */
-  Default: "Default",
-
-  /** Database user.. */
-  Extra: "Extra",
-
-  /** Server user. */
-  Server: "Server",
 }
 
 /**
@@ -110,53 +94,6 @@ union IdentityType {
 
   /** User assigned identity. */
   UserAssigned: "UserAssigned",
-}
-
-/**
- * A database fleet manager authorized principal properties.
- */
-model AuthorizedPrincipalProperties {
-  /**
-   * Application Id of the authorized principal.
-   */
-  @visibility("read", "create")
-  applicationId?: uuid;
-
-  /**
-   * Object Id of the authorized principal.
-   */
-  @visibility("read", "create")
-  objectId?: uuid;
-
-  /**
-   * Tenant Id of the authorized principal.
-   */
-  @visibility("read", "create")
-  tenantId?: uuid;
-
-  /**
-   * Principal type of the authorized principal.
-   */
-  @visibility("read", "create")
-  principalType?: PrincipalType;
-
-  /**
-   * SQL user type of the authorized principal. Extra: Database user, Sever: Server user, Default: Server admin
-   */
-  @visibility("read", "create")
-  sqlUserType?: SQLUserType;
-
-  /**
-   * Role assigned to the authorized principal.
-   */
-  @visibility("read", "create")
-  role?: string;
-
-  /**
-   * Provisioning state.
-   */
-  @visibility("read")
-  provisioningState?: AzureProvisioningState;
 }
 
 /**
@@ -384,6 +321,24 @@ model FirewallRuleProperties {
 }
 
 /**
+ * An update to a Database Fleet.
+ */
+model FleetUpdate {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @visibility("read", "create", "update")
+  tags?: Record<string>;
+
+  /**
+   * The Database Fleet properties.
+   */
+  @visibility("read", "create", "update")
+  properties?: FleetProperties;
+}
+
+/**
  * The Database Fleet properties.
  */
 model FleetProperties {
@@ -411,10 +366,10 @@ model DestinationTierOverride {
   resourceType: ResourceType;
 
   /**
-   * Destination tier.
+   * Destination tier name.
    */
   @visibility("read", "create")
-  destinationTier: string;
+  tierName: string;
 
   /**
    * Resource name.

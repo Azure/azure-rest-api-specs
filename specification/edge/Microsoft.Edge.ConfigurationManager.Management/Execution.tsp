@@ -17,28 +17,50 @@ using Azure.ResourceManager.CommonTypes;
 namespace Microsoft.Edge;
 
 @doc("Result of Stage execution")
-model StageResult {
+model StageStatus {
   @doc("Deployment status")
-  status: string;
+  status?: int32;
 
-  @doc("status details")
-  statusDetails: string;
+  @doc("Status message")
+  statusMessage?: string;
+
+  @doc("Current stage")
+  stage?: string;
+
+  @doc("Next stage")
+  nextstage?: string;
+
+  @doc("Error message")
+  errorMessage?: string;
+
+  @doc("whether this stage is active or inactive")
+  isActive?: ActiveState;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
+  @doc("The inputs of the StageHistory, Inputs holds a key-value map of user-defined parameters for the initial stage")
+  inputs?: Record<unknown>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
+  @doc("The outputs of the StageHistory, it is different as the different input stages.")
+  outputs?: Record<unknown>;
 }
 
 @doc("Execution Status")
 model ExecutionStatus {
-  @doc("The lastModified of the Status")
-  lastModified: utcDateTime;
+  @doc("The lastModified timestamp of the Status")
+  updateTime?: utcDateTime;
 
   @doc("Deployment status")
-  status: string;
+  status?: int32;
 
   @doc("status details")
-  statusDetails: string;
+  statusMessage?: string;
 
   @doc("target resource statuses")
   @extension("x-ms-identifiers", [])
-  stageHistory?: StageResult[];
+  stageHistory?: StageStatus[];
 }
 
 @doc("Execution Properties")
@@ -50,12 +72,12 @@ model ExecutionProperties {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
   @doc("Execution specification")
-  specification: Record<unknown>;
+  specification?: Record<unknown>;
 
   @doc("Status of Execution")
   @visibility("read")
   @extension("x-ms-identifiers", [])
-  status: ExecutionStatus;
+  status?: ExecutionStatus;
 
   @doc("Provisioning state of resource")
   @visibility("read")
@@ -68,7 +90,7 @@ model Execution is Azure.ResourceManager.ProxyResource<ExecutionProperties> {
   @doc("The name of the Execution.")
   @maxLength(61)
   @minLength(3)
-  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   @path
   @key("executionName")
   @segment("executions")

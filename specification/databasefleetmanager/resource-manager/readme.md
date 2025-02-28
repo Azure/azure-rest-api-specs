@@ -43,15 +43,6 @@ input-file:
   - Microsoft.DatabaseFleetManager/preview/2025-02-01-preview/databasefleetmanager.json
 ```
 
-### Tag: package-2024-10-01-preview
-
-These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-10-01-preview'
-input-file:
-  - Microsoft.DatabaseFleetManager/preview/2024-10-01-preview/databasefleetmanager.json
-```
-
 ---
 
 # Code Generation
@@ -100,19 +91,21 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ```yaml
 suppressions:
-  - code: PatchBodyParametersSchema
-    from: databasefleetmanager.json 
-    reason: False alarm stating that there should be no required property in PATCH operations, but location property is required for tracked resources.
   - code: GuidUsage
     from: databasefleetmanager.json
     reason: We are using GUID for references to Azure Active Directory IDs which are GUIDs.
-  - code: BodyTopLevelProperties
-    from: databasefleetmanager.json
-    reason: False alarm for pagination response schema.
+    where: $.definitions["Azure.Core.uuid"].format
   - code: AvoidAdditionalProperties
     from: databasefleetmanager.json
     reason: A custom object is needed for passing underlying SQL resource tags.
+    where: $.definitions.FleetDatabaseProperties.properties.resourceTags
   - code: EnumInsteadOfBoolean
     from: databasefleetmanager.json
     reason: These booleans are never expected to expand.
+    where:
+      - $.definitions.FleetDatabaseProperties.properties.recoverable
+      - $.definitions.FleetTierProperties.properties.disabled
+      - $.definitions.FleetTierProperties.properties.serverless
+      - $.definitions.FleetTierProperties.properties.pooled
+      - $.definitions.TransparentDataEncryption.properties.enableAutoRotation
 ```

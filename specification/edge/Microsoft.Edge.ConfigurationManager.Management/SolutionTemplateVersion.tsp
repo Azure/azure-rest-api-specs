@@ -36,20 +36,12 @@ model SolutionTemplateVersionProperties {
   @doc("Orchestrator type")
   orchestratorType: OrchestratorType;
 
-  @doc("List of capabilities")
-  @visibility("read")
-  capabilities: string[];
-
-  @doc("Is this resource deprecated")
-  @visibility("read")
-  isDeprecated?: boolean;
-
   @doc("Provisioning state of resource")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("Solution Template Version Resource")
+@doc("Solution Template Version Resource. Contains configurations that use expressions which can be resolved hierarchically along with edge specifications.")
 @parentResource(SolutionTemplate)
 @resource("versions")
 model SolutionTemplateVersion
@@ -65,15 +57,6 @@ model SolutionTemplateVersion
 interface SolutionTemplateVersions {
   @doc("Get a Solution Template Version Resource")
   get is ArmResourceRead<SolutionTemplateVersion>;
-
-  @doc("Delete a Solution Template Version Resource")
-  delete is ArmResourceDeleteWithoutOkAsync<SolutionTemplateVersion>;
-
-  @doc("Deprecate resource")
-  deprecate is ArmResourceActionNoResponseContentAsync<
-    SolutionTemplateVersion,
-    void
-  >;
 
   @doc("List Solution Template Version Resources")
   listBySolutionTemplate is ArmResourceListByParent<SolutionTemplateVersion>;

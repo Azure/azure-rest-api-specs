@@ -2523,23 +2523,34 @@
         }
       }
     },
-    "ServerlessProjectDetails": {
+    "HostingType": {
+      "enum": [
+        "Hosted",
+        "Serverless"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "HostingType"
+      }
+    },
+    "ProjectDetails": {
       "description": "Project details of the monitor resource IF it belongs to Serverless offer kind.",
       "type": "object",
       "properties": {
         "projectType": {
           "description": "Project type; ex: Search / Observability / Security",
-          "$ref": "#/definitions/ServerlessProjectType"
+          "$ref": "#/definitions/ProjectType"
         },
         "configurationType": {
           "description": "Publisher ID of the plan",
-          "$ref": "#/definitions/ServerlessProjectConfigurationType"
+          "$ref": "#/definitions/ConfigurationType"
         }
       }
     },
-    "ServerlessProjectType": {
+    "ProjectType": {
       "enum": [
-        "Search",
+        "Elasticsearch",
         "Observability",
         "Security",
         "NotApplicable"
@@ -2547,20 +2558,20 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "ServerlessProjectType"
+        "name": "ProjectType"
       }
     },
-    "ServerlessProjectConfigurationType": {
+    "ConfigurationType": {
       "enum": [
         "GeneralPurpose",
-        "VectorOptimized",
-        "TimeSeriesOptimized",
+        "Vector",
+        "TimeSeries",
         "NotApplicable"
       ],
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "ServerlessProjectConfigurationType"
+        "name": "ConfigurationType"
       }
     },
     "LiftrResourceCategories": {
@@ -2635,9 +2646,13 @@
           "description": "Flag to determine if User API Key has to be generated and shared.",
           "type": "boolean"
         },
-        "serverlessProjectDetails": {
+        "hostingType": {
+          "description": "Hosting type of the monitor resource - either Hosted deployments OR Serverless Projects.",
+          "$ref": "#/definitions/HostingType"
+        },
+        "projectDetails": {
           "description": "Project details of the monitor resource IF it belongs to Serverless offer kind.",
-          "$ref": "#/definitions/ServerlessProjectDetails"
+          "$ref": "#/definitions/ProjectDetails"
         }
       }
     },
@@ -3353,6 +3368,16 @@
         "marketplaceSaasInfo": {
           "description": "Marketplace SaaS Info of the resource.",
           "$ref": "#/definitions/MarketplaceSaaSInfo",
+          "readOnly": true
+        },
+        "projectType": {
+          "description": "Project Type - Applicable for Serverless only.",
+          "type": "string",
+          "readOnly": true
+        },
+        "configurationType": {
+          "description": "ConfigurationType Type - Applicable for Serverless only.",
+          "type": "string",
           "readOnly": true
         }
       }

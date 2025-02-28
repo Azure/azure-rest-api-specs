@@ -27,13 +27,17 @@ enum Versions {
   @doc("The 2024-02-01-preview version.")
   @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_02_01_preview: "2024-02-01-preview",
+
+  @doc("The 2025-03-01 version.")
+  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2025_03_01: "2025-03-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A ManufacturingPlatformProviderHub resource")
 model MdsResource is TrackedResource<MdsResourceProperties> {
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,23}$")
   @key("mdsResourceName")
   @segment("manufacturingDataServices")
   @doc("Name.")
@@ -74,6 +78,30 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
+@doc("The current state of the resource")
+@added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+union ResourceState {
+  string,
+
+  /** Resource is in active state */
+  Active: "Active",
+
+  /** Resource is in inactive state */
+  Inactive: "Inactive",
+}
+
+@doc("The redundancy state of the resource")
+@added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+union RedundancyState {
+  string,
+
+  /** Resource is zone redundant */
+  Zonal: "Zonal",
+
+  /** Resource is not redundant */
+  None: "None",
+}
+
 @doc("Details of the ManufacturingPlatform MdsResource.")
 model MdsResourceProperties {
   @visibility("read")
@@ -86,6 +114,7 @@ model MdsResourceProperties {
 
   @visibility("read", "create", "update")
   @doc("Enable Teams Notification.")
+  @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
   enableTeamsNotification?: boolean;
 
   @visibility("read", "create", "update")
@@ -111,6 +140,7 @@ model MdsResourceProperties {
   @visibility("read", "create")
   @doc("Continuous Export Period.")
   @madeOptional(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
   continuousExportPeriod?: int32 = 0;
 
   @visibility("read")
@@ -184,16 +214,19 @@ model MdsResourceProperties {
   @visibility("read", "create", "update")
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("Profile of Azure Machine Learning Resource.")
+  @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
   amlProfile?: AmlProfile;
 
   @doc("Profile of User Managed Database.")
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @visibility("read", "create")
+  @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
   userManagedDatabaseProfile?: UserManagedDatabaseProfile;
 
   @doc("Profile of User Managed Adx.")
   @added(Versions.v2024_02_01_preview)
   @visibility("read", "create")
+  @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
   userManagedAdxProfile?: UserManagedAdxProfile;
 
   @visibility("read", "create")
@@ -216,6 +249,16 @@ model MdsResourceProperties {
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @visibility("read", "update")
   denyAssignmentExclusions?: DenyAssignmentExclusion[];
+
+  @doc("State of the resource")
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @visibility("read", "update")
+  resourceState?: ResourceState;
+
+  @doc("Zone redundancy state for resources")
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @visibility("read", "create")
+  redundancyState?: RedundancyState;
 }
 
 @doc("The properties related to Aks Resource")
@@ -269,6 +312,7 @@ model AdtProfile {
 
 @doc("The properties related to User Managed Database Resource")
 @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+@removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
 model UserManagedDatabaseProfile {
   @doc("Resource Id of Cosmos Resource")
   @visibility("read", "create")
@@ -277,6 +321,7 @@ model UserManagedDatabaseProfile {
 
 @doc("The properties related to User Managed Azure Data Explorer (Adx) Resource")
 @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+@removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
 model UserManagedAdxProfile {
   @doc("Resource Id of Adx Resource")
   @visibility("read", "create")
@@ -445,6 +490,7 @@ model MoboBrokerResource {
 
 @doc("The properties related to Azure Machine Learning Resource")
 @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+@removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
 model AmlProfile {
   @doc("Resource Id of Azure Machine Learning Resource")
   @visibility("read", "create", "update")

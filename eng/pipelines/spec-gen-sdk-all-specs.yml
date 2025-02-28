@@ -1,0 +1,18 @@
+parameters:
+  - name: SpecBatchTypes
+    type: string
+    values:
+      - 'all-specs'
+      - 'all-typespecs'
+      - 'all-openapis'
+      - 'sample-typespecs'
+    default: 'sample-typespecs'
+    displayName: 'Batch Specs to Run'
+
+extends:
+  template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
+  parameters:
+    SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
+    SdkRepoUrl: $(SdkRepoUrl)
+    SpecBatchTypes: ${{ parameters.SpecBatchTypes }}
+    SkipPullRequestCreation: true

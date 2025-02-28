@@ -944,10 +944,6 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
@@ -980,19 +976,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
+          "200": {
+            "description": "Resource deleted successfully."
           },
           "204": {
             "description": "The Agent resource is already deleted or not found"
@@ -1003,10 +988,6 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "patch": {
@@ -1054,30 +1035,12 @@
               "$ref": "#/definitions/Agent"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -1305,7 +1268,7 @@
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "description": "Resource properties.",
           "$ref": "#/definitions/MySQLSiteProperties"
         },
@@ -1385,7 +1348,7 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "description": "Resource properties.",
           "$ref": "#/definitions/MySQLServerProperties"
         },
@@ -1412,7 +1375,7 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "description": "Resource properties.",
           "$ref": "#/definitions/SummariesProperties"
         },
@@ -1439,7 +1402,7 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "description": "Resource properties.",
           "$ref": "#/definitions/ErrorSummariesProperties"
         },
@@ -1690,7 +1653,7 @@
           "description": "Resource tags."
         },
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/MySQLServerProperties",
           "description": "The MySQLServer resource definition."
         }
@@ -1708,7 +1671,7 @@
           "description": "Resource tags."
         },
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/MySQLSiteProperties",
           "description": "The MySQLSites resource definition."
         }
@@ -1742,7 +1705,7 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "description": "Resource properties.",
           "$ref": "#/definitions/AgentProperties"
         }
@@ -1772,6 +1735,14 @@
           "type": "string",
           "description": "Name of the appliance on which agent is running."
         },
+        "fabricSiteName": {
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "type": "string",
+          "description": "Name of the site which enables fabric discovery."
+        },
         "healthDetails": {
           "$ref": "#/definitions/AgentHealthProperties",
           "description": "Health details of the agent."
@@ -1797,14 +1768,15 @@
       },
       "required": [
         "servicePrincipalIdentityDetails",
-        "migrateApplianceName"
+        "migrateApplianceName",
+        "fabricSiteName"
       ]
     },
     "AgentResourcePatch": {
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/AgentResourcePatchProperties",
           "description": "The Agent properties resource definition."
         }
