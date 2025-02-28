@@ -52,50 +52,6 @@ model QuantumComputingData {
   count: int64;
 }
 
-/**
- * Provides the custom 'filter' query parameter for list operations
- */
-model CustomFilterQueryParameter {
-  /**
-   * Filter the result list using the given expression
-   */
-  @query("filter")
-  filter?: string;
-}
-
-/**
- * Provides the custom 'skip' query parameter for list operations.
- */
-model CustomSkipQueryParameter {
-  /**
-   * The number of result items to skip.
-   */
-  @query("skip")
-  skip?: int32;
-}
-
-/**
- * Provides the custom 'top' query parameter for list operations.
- */
-model CustomTopQueryParameter {
-  /**
-   * The number of jobs taken.
-   */
-  @query("top")
-  top?: int32;
-}
-
-/**
- * Provides the custom 'orderBy' query parameter for list operations.
- */
-model CustomOrderByQueryParameter {
-  /**
-   * The order of returned items.
-   */
-  @query("orderby")
-  orderby?: string;
-}
-
 /** A job to be run in the workspace. */
 @resource("jobs")
 @parentResource(QuantumWorkspace)
@@ -167,6 +123,7 @@ model JobDetails extends ItemDetails {
 alias PagedJobDetails = Azure.Core.Page<JobDetails>;
 
 @useDependency(DefaultAzureCoreVersion)
+@versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface JobOperations {
@@ -203,4 +160,52 @@ namespace Quantum.Workspace.Operations {
       }
     >;
   }
+}
+
+/**
+ * Provides the custom 'filter' query parameter for list operations
+ */
+@added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+model CustomFilterQueryParameter {
+  /**
+   * Filter the result list using the given expression
+   */
+  @query("filter")
+  filter?: string;
+}
+
+/**
+ * Provides the custom 'skip' query parameter for list operations.
+ */
+@added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+model CustomSkipQueryParameter {
+  /**
+   * The number of result items to skip.
+   */
+  @query("skip")
+  skip?: int32;
+}
+
+/**
+ * Provides the custom 'top' query parameter for list operations.
+ */
+@added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+model CustomTopQueryParameter {
+  /**
+   * The number of jobs taken.
+   */
+  @query("top")
+  top?: int32;
+}
+
+/**
+ * Provides the custom 'orderBy' query parameter for list operations.
+ */
+@added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+model CustomOrderByQueryParameter {
+  /**
+   * The order of returned items.
+   */
+  @query("orderby")
+  orderby?: string;
 }

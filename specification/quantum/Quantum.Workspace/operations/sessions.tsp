@@ -71,6 +71,7 @@ model SessionDetails extends ItemDetails {
 alias PagedSessionDetails = Azure.Core.Page<SessionDetails>;
 
 @useDependency(DefaultAzureCoreVersion)
+@versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface SessionOperations {

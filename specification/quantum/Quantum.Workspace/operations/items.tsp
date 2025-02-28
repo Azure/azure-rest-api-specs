@@ -83,6 +83,7 @@ model ItemDetails {
 alias PagedItemDetails = Azure.Core.Page<ItemDetails>;
 
 @useDependency(DefaultAzureCoreVersion)
+@versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
 
