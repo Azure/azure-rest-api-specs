@@ -3,14 +3,14 @@ description: Uses specified Node version and installs dependencies (typically us
 
 inputs:
   node-version:
-    description: 'Node version to use'
+    description: "Node version to use"
     default: 22.x
   install-command:
-    description: 'Command to install dependencies'
-    default: 'npm ci'
+    description: "Command to install dependencies"
+    default: "npm ci"
   working-directory:
-    description: 'Working directory'
-    default: '.'
+    description: "Working directory"
+    default: "."
 
 runs:
   using: "composite"
@@ -19,6 +19,21 @@ runs:
     - uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
+
+    - run: |
+        echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      shell: bash
+      name: Get npm cache directory
+      id: npm-cache-dir
+      working-directory: ${{ inputs.working-directory }}
+
+    - id: npm-cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.npm-cache-dir.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
 
     - run: |
         echo "::group::$INSTALL_COMMAND"
