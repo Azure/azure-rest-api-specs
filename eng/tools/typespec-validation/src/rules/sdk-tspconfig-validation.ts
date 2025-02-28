@@ -1,7 +1,7 @@
 import { join } from "path";
 import { parse as yamlParse } from "yaml";
-import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
+import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
 
 type ExpectedValueType = string | boolean | RegExp;
