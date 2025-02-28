@@ -4,3 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.DatabaseWatcher, "DatabaseWatcherMgmt", "python");
+@@clientName(Microsoft.DatabaseWatcher,
+  "DatabaseWatcherManagementClient",
+  "java"
+);
