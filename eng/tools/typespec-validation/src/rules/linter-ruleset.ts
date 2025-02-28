@@ -1,7 +1,7 @@
 import { join } from "path";
 import { parse as yamlParse } from "yaml";
-import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
+import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
 
 // Maps deprecated rulesets to the replacement rulesets
@@ -105,5 +105,3 @@ export class LinterRulesetRule implements Rule {
     };
   }
 }
-
-export default LinterRulesetRule;

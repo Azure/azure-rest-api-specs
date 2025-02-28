@@ -1,6 +1,6 @@
 import { parse as yamlParse } from "yaml";
-import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
+import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
 
 export class FlavorAzureRule implements Rule {
@@ -51,5 +51,3 @@ export class FlavorAzureRule implements Rule {
     return regex.test(name);
   }
 }
-
-export default FlavorAzureRule;

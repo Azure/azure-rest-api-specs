@@ -1,7 +1,7 @@
 import { join } from "path";
 import { parse as yamlParse } from "yaml";
-import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
+import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
 
 export class EmitAutorestRule implements Rule {
@@ -41,5 +41,3 @@ export class EmitAutorestRule implements Rule {
     };
   }
 }
-
-export default EmitAutorestRule;

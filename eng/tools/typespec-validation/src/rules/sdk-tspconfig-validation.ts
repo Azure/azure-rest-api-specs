@@ -1,8 +1,8 @@
+import { join } from "path";
+import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
-import { join } from "path";
-import { parse as yamlParse } from "yaml";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };
@@ -479,5 +479,3 @@ export class SdkTspConfigValidationRule implements Rule {
     };
   }
 }
-
-export default SdkTspConfigValidationRule;

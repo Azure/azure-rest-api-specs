@@ -1,6 +1,6 @@
 import path from "path";
-import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
+import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
 
 export class CompileRule implements Rule {
@@ -60,5 +60,3 @@ export class CompileRule implements Rule {
     };
   }
 }
-
-export default CompileRule;

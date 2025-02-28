@@ -1,5 +1,5 @@
-import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
+import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
 
 export class FormatRule implements Rule {
@@ -50,5 +50,3 @@ export class FormatRule implements Rule {
     };
   }
 }
-
-export default FormatRule;
