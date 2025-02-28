@@ -39,7 +39,14 @@ export default async function incrementalTypeSpec({ github, context, core }) {
       }
     }
 
-    const swaggerObj = JSON.parse(swagger);
+    let swaggerObj;
+    try {
+      swaggerObj = JSON.parse(swagger);
+    } catch {
+      // If swagger cannot be parsed as JSON, it's not "incremental typespec"
+      core.info(`File "${file}" cannot be parsed as JSON`);
+      return false;
+    }
 
     if (!swaggerObj["info"]?.["x-typespec-generated"]) {
       core.info(`File "${file}" does not contain "info.x-typespec-generated"`);

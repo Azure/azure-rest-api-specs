@@ -75,6 +75,20 @@ describe("incrementalTypeSpec", () => {
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
   });
 
+  it("returns false if swagger cannot be parsed as JSON", async () => {
+    const swaggerPath =
+      "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
+
+    vi.spyOn(
+      changedFiles,
+      "getChangedResourceManagerSwaggerFiles",
+    ).mockResolvedValue([swaggerPath]);
+
+    vi.spyOn(git, "show").mockResolvedValue("not } valid { json");
+
+    await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
+  });
+
   it("returns false if tsp conversion", async () => {
     const swaggerPath =
       "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
