@@ -6,8 +6,8 @@ import { sep, dirname, join } from "path";
 import { pathExists, getPathToDependency } from "./util.js";
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 
-// 64 MiB max ouptut buffers for exec
-const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
+// 64 MiB max output buffers for exec
+// const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 
 function usage() {
   console.log("TODO: Write up usage");
