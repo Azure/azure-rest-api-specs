@@ -2231,13 +2231,13 @@
             "type": "string"
           }
         },
-        "callDetails": {
-          "$ref":"#/definitions/CallDetails",
+        "teamsPhoneCallDetails": {
+          "$ref":"#/definitions/TeamsPhoneCallDetails",
           "description": "Custom calling context call details headers"
         }
       }
     },
-    "CallDetails": {
+    "TeamsPhoneCallDetails": {
       "description": "The call details which will be sent to the target",
       "type": "object",
       "properties": {
@@ -2273,7 +2273,7 @@
           "description": "Sentiment of the call thus far.",
           "type": "string"
         },
-        "SuggestedActions ": {
+        "suggestedActions ": {
           "description": "Recommendations for resolving the issue based on the customer’s intent and interaction history.",
           "type": "string"
         }
@@ -2295,11 +2295,11 @@
           "description": "Caller’s screen pop url. ",
           "type": "string"
         },
-        "IsAuthenticated": {
+        "isAuthenticated": {
           "description": "Bit indicating whether the caller was authenticated.",
           "type": "boolean"
         },
-        "AdditionalCallerInformation ": {
+        "additionalCallerInformation ": {
           "description": "A set of key value pairs (max 10, any additional entries would be ignored) which a bot author wants to pass to the Teams Client for display to the agent. ",
           "type": "dictionary",
           "items": {
