@@ -144,7 +144,7 @@ model ExperimentExecutionDetailsPropertiesRunInformation {
    * The steps of the experiment run.
    */
   @visibility("read")
-  @identifiers(#["stepName"])
+  @OpenAPI.extension("x-ms-identifiers", ["stepName"])
   steps?: StepStatus[];
 }
 
@@ -174,7 +174,7 @@ model StepStatus {
    * The array of branches.
    */
   @visibility("read")
-  @identifiers(#["branchName"])
+  @OpenAPI.extension("x-ms-identifiers", ["branchName"])
   branches?: BranchStatus[];
 }
 
@@ -204,7 +204,7 @@ model BranchStatus {
    * The array of actions.
    */
   @visibility("read")
-  @identifiers(#["actionId"])
+  @OpenAPI.extension("x-ms-identifiers", ["actionId"])
   actions?: ActionStatus[];
 }
 
@@ -246,7 +246,7 @@ model ActionStatus {
    * The array of targets.
    */
   @visibility("read")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   targets?: ExperimentExecutionActionTargetDetailsProperties[];
 }
 
