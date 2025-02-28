@@ -1,6 +1,6 @@
+import { join } from "path";
 import { expect, test } from "vitest";
 import { Suppression, getSuppressions } from "../src/suppressions.js";
-import { join } from "path";
 
 /**
  * Returns the suppressions for a tool (default "TestTool") applicable to a path under folder "e2e".
@@ -155,15 +155,15 @@ test.concurrent("merge, get foo.json", async () => {
 
 test.concurrent("suppress with sub rules", async () => {
   const suppressions: Suppression[] = await getTestSuppressions(
-    "subRuleSuppressionsYaml",
+    join("subRuleSuppressionsYaml", "foo.json"),
     "TypeSpecValidation",
   );
   expect(suppressions).toEqual([
     {
       tool: "TypeSpecValidation",
-      paths: ["."],
+      paths: ["foo.json"],
       reason: "test",
-      rule: "SdkTspConfigValidation",
+      rules: ["SdkTspConfigValidation"],
       subRules: ["parameters.service-dir.default"],
     },
   ]);

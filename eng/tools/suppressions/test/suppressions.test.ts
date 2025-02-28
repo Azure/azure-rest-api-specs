@@ -258,7 +258,7 @@ test("suppression with sub rules", () => {
     `
 - tool: TestTool
   path: foo
-  rule: my-rule
+  rules: [my-rule]
   sub-rules:
     - my.option.a
     - my.option.b
@@ -269,7 +269,7 @@ test("suppression with sub rules", () => {
     {
       tool: "TestTool",
       paths: ["foo"],
-      rule: "my-rule",
+      rules: ["my-rule"],
       subRules: ["my.option.a", "my.option.b"],
       reason: "test",
     },
