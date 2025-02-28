@@ -569,7 +569,7 @@ model ConnectionStringType {
   medium?: string;
 
   @doc("A list of connection string profiles to allow clients to group, filter and select connection string values based on structured metadata.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   profiles?: ProfileType[];
 }
 
@@ -749,7 +749,7 @@ model AutonomousDatabaseBaseProperties {
 
   @doc("Customer Contacts.")
   @visibility("create", "read", "update")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   customerContacts?: CustomerContact[];
 
   @doc("The quantity of data in the database, in terabytes.")
