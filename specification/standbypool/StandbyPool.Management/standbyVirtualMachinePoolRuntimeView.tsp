@@ -39,7 +39,7 @@ model StandbyVirtualMachinePoolRuntimeViewResource
 model StandbyVirtualMachinePoolRuntimeViewResourceProperties {
   @doc("A list containing the counts of virtual machines in each possible power state for each zone if enabled, as known by the StandbyPool resource provider. If zones are not enabled on the attached VMSS, the list will contain a single entry without zone values. Note: any resources in the Running state may still be installing extensions / not fully provisioned.")
   @visibility("read")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   instanceCountSummary: VirtualMachineInstanceCountSummary[];
 
   @doc("Displays the provisioning state of the standby pool")
