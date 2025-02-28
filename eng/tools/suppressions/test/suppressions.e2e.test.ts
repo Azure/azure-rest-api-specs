@@ -153,18 +153,18 @@ test.concurrent("merge, get foo.json", async () => {
   ]);
 });
 
-test.concurrent("suppress with sub rules", async () => {
+test.concurrent("suppress rules", async () => {
   const suppressions: Suppression[] = await getTestSuppressions(
-    join("subRuleSuppressionsYaml", "foo.json"),
-    "TypeSpecValidation",
+    join("suppressRules", "foo.json"),
+    "TestTool",
   );
   expect(suppressions).toEqual([
     {
-      tool: "TypeSpecValidation",
+      tool: "TestTool",
       paths: ["foo.json"],
       reason: "test",
-      rules: ["SdkTspConfigValidation"],
-      subRules: ["parameters.service-dir.default"],
+      rules: ["rule-1"],
+      subRules: ["sub-rule-1"],
     },
   ]);
 });
