@@ -1008,9 +1008,11 @@ model BatchPoolResourceStatistics {
   peakDiskGiB: float32;
 
   @doc("The total number of disk read operations across all Compute Nodes in the Pool.")
+  @encode(string)
   diskReadIOps: int64;
 
   @doc("The total number of disk write operations across all Compute Nodes in the Pool.")
+  @encode(string)
   diskWriteIOps: int64;
 
   @doc("The total amount of data in GiB of disk reads across all Compute Nodes in the Pool.")
@@ -1050,9 +1052,11 @@ model BatchJobStatistics {
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by all Tasks in the Job.")
+  @encode(string)
   readIOps: int64;
 
   @doc("The total number of disk write operations made by all Tasks in the Job.")
+  @encode(string)
   writeIOps: int64;
 
   @doc("The total amount of data in GiB read from disk by all Tasks in the Job.")
@@ -1062,12 +1066,15 @@ model BatchJobStatistics {
   writeIOGiB: float32;
 
   @doc("The total number of Tasks successfully completed in the Job during the given time range. A Task completes successfully if it returns exit code 0.")
+  @encode(string)
   numSucceededTasks: int64;
 
   @doc("The total number of Tasks in the Job that failed during the given time range. A Task fails if it exhausts its maximum retry count without returning exit code 0.")
+  @encode(string)
   numFailedTasks: int64;
 
   @doc("The total number of retries on all the Tasks in the Job during the given time range.")
+  @encode(string)
   numTaskRetries: int64;
 
   @doc("The total wait time of all Tasks in the Job. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.) This value is only reported in the Account lifetime statistics; it is not included in the Job statistics.")
@@ -1123,7 +1130,8 @@ model FileProperties {
   lastModified: utcDateTime;
 
   @doc("The length of the file.")
-  contentLength: string;
+  @encode(string)
+  contentLength: int64;
 
   @doc("The content type of the file.")
   contentType?: string;
@@ -2305,9 +2313,11 @@ model BatchJobScheduleStatistics {
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by all Tasks in all Jobs created under the schedule.")
+  @encode(string)
   readIOps: int64;
 
   @doc("The total number of disk write operations made by all Tasks in all Jobs created under the schedule.")
+  @encode(string)
   writeIOps: int64;
 
   @doc("The total gibibytes read from disk by all Tasks in all Jobs created under the schedule.")
@@ -2317,12 +2327,15 @@ model BatchJobScheduleStatistics {
   writeIOGiB: float32;
 
   @doc("The total number of Tasks successfully completed during the given time range in Jobs created under the schedule. A Task completes successfully if it returns exit code 0.")
+  @encode(string)
   numSucceededTasks: int64;
 
   @doc("The total number of Tasks that failed during the given time range in Jobs created under the schedule. A Task fails if it exhausts its maximum retry count without returning exit code 0.")
+  @encode(string)
   numFailedTasks: int64;
 
   @doc("The total number of retries during the given time range on all Tasks in all Jobs created under the schedule.")
+  @encode(string)
   numTaskRetries: int64;
 
   @doc("The total wait time of all Tasks in all Jobs created under the schedule. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). This value is only reported in the Account lifetime statistics; it is not included in the Job statistics.")
@@ -2800,7 +2813,7 @@ model BatchPool {
   @visibility("read")
   allocationStateTransitionTime?: utcDateTime;
 
-  @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available VM sizes, see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).")
+  @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available VM sizes, see Sizes for Virtual Machines in Azure (https://learn.microsoft.com/azure/virtual-machines/sizes/overview). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).")
   @visibility("read")
   vmSize?: string;
 
@@ -2914,7 +2927,7 @@ model BatchPoolCreateContent {
   @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   displayName?: string;
 
-  @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available VM sizes for Pools using Images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration), see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).")
+  @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available VM sizes for Pools using Images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration), see Sizes for Virtual Machines in Azure (https://learn.microsoft.com/azure/virtual-machines/sizes/overview). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).")
   vmSize: string;
 
   @doc("The virtual machine configuration for the Pool. This property must be specified.")
@@ -2935,7 +2948,7 @@ model BatchPoolCreateContent {
   @doc("Whether the Pool size should automatically adjust over time. If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false.")
   enableAutoScale?: boolean;
 
-  @doc("A formula for the desired number of Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch Pool' (https://azure.microsoft.com/documentation/articles/batch-automatic-scaling/).")
+  @doc("A formula for the desired number of Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch Pool' (https://learn.microsoft.com/azure/batch/batch-automatic-scaling).")
   autoScaleFormula?: string;
 
   @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
@@ -3121,7 +3134,7 @@ model BatchPoolEnableAutoScaleContent {
 
 @doc("Parameters for evaluating an automatic scaling formula on an Azure Batch Pool.")
 model BatchPoolEvaluateAutoScaleContent {
-  @doc("The formula for the desired number of Compute Nodes in the Pool. The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://azure.microsoft.com/documentation/articles/batch-automatic-scaling).")
+  @doc("The formula for the desired number of Compute Nodes in the Pool. The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-automatic-scaling).")
   autoScaleFormula: string;
 }
 
@@ -3291,7 +3304,7 @@ model BatchTaskCreateContent {
   @doc("How the Batch service should respond when the Task completes.")
   exitConditions?: ExitConditions;
 
-  @doc("The command line of the Task. For multi-instance Tasks, the command line is executed as the primary Task, after the primary Task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).")
+  @doc("The command line of the Task. For multi-instance Tasks, the command line is executed as the primary Task, after the primary Task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables).")
   commandLine: string;
 
   @doc("The settings for the container under which the Task runs. If the Pool that will run this Task has containerConfiguration set, this must be set as well. If the Pool that will run this Task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all Task environment variables are mapped into the container, and the Task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files.")
@@ -3496,9 +3509,11 @@ model BatchTaskStatistics {
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by the Task.")
+  @encode(string)
   readIOps: int64;
 
   @doc("The total number of disk write operations made by the Task.")
+  @encode(string)
   writeIOps: int64;
 
   @doc("The total gibibytes read from disk by the Task.")

@@ -2051,7 +2051,7 @@
     },
     "DiagnosticItem": {
       "type": "object",
-      "description": "A config diagnostic object found during the analysis of an NGINX configuration that can be a warning or recommendation.",
+      "description": "A diagnostic is a message associated with an NGINX config. The Analyzer returns diagnostics with a level indicating the importance of the diagnostic with optional category.",
       "required": [
         "directive",
         "description",
@@ -2064,7 +2064,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the error"
+          "description": "Unique identifier for the diagnostic."
         },
         "directive": {
           "type": "string",
@@ -2072,11 +2072,11 @@
         },
         "description": {
           "type": "string",
-          "example": "Directives outside the http context are not allowed"
+          "example": "Some directives cannot be overridden by the user provided configuration."
         },
         "file": {
           "type": "string",
-          "description": "the filepath of the most relevant config file",
+          "description": "The filepath of the most relevant config file.",
           "example": "nginx.conf"
         },
         "line": {
@@ -2085,11 +2085,11 @@
         },
         "message": {
           "type": "string",
-          "example": "You are not allowed to set the worker_processes directive"
+          "example": "The value will be overridden with `4000`."
         },
         "rule": {
           "type": "string",
-          "example": "nginx-azure-load-balancer-allowed-directives"
+          "example": "overridden directives"
         },
         "level": {
           "type": "string",
@@ -2106,7 +2106,7 @@
         },
         "category": {
           "type": "string",
-          "description": "category of warning",
+          "description": "Category of warning like Best-practices, Recommendation, Security etc.",
           "example": "Security"
         }
       }
@@ -2214,7 +2214,8 @@
       "description": "The resource name of the API key",
       "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
