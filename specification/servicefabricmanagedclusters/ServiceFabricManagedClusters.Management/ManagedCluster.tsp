@@ -106,7 +106,9 @@ interface ManagedClusters {
   startFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
     FaultSimulationParameters,
-    never
+    never,
+    LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -115,7 +117,9 @@ interface ManagedClusters {
   stopFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
     FaultSimulationIdParameters,
-    never
+    never,
+    LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

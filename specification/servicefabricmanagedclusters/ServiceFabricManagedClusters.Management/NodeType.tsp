@@ -58,7 +58,8 @@ interface NodeTypes {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     NodeType,
-    PatchModel = NodeTypeUpdateParameters
+    PatchModel = NodeTypeUpdateParameters,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -118,7 +119,9 @@ interface NodeTypes {
   startFaultSimulation is ArmResourceActionAsync<
     NodeType,
     FaultSimulationParameters,
-    never
+    never,
+    LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -127,7 +130,9 @@ interface NodeTypes {
   stopFaultSimulation is ArmResourceActionAsync<
     NodeType,
     FaultSimulationIdParameters,
-    never
+    never,
+    LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
