@@ -19,7 +19,7 @@ options:
     clear-output-folder: true
     use-write-core: true
     namespace: "{package-dir}"
-    api-version: "2024-09-01-preview"
+    api-version: "2024-11-01"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-deviceregistry"
     flavor: "azure"
@@ -42,7 +42,16 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
-    api-version: "2024-09-01-preview"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/deviceregistry"
+    package-dir: "armdeviceregistry"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
