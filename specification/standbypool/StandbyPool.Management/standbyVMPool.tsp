@@ -63,6 +63,10 @@ union VirtualMachineState {
 
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off.")
   Deallocated: "Deallocated",
+
+  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @doc("The virtual machine has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation.")
+  Hibernated: "Hibernated",
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
