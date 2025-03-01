@@ -1142,15 +1142,12 @@ directive:
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyExemptions.json
-    where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyVariables.json
-    where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyVariableValues.json
-    where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: BodyTopLevelProperties
     from: policyAssignments.json
@@ -1501,6 +1498,15 @@ directive:
   - suppress: TenantLevelAPIsNotAllowed
     from: policyAssignments.json
     reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policyExemptions.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policyVariables.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policyVariableValues.json
+    reason: Linter rule limitation. The API has always supported management group scope.
   - suppress: XmsPageableForListCalls
     from: resources.json
     reason: Shared swagger with other teams. We cannot make changes to the API as we don't own it.
@@ -1626,6 +1632,15 @@ directive:
     reason: Using common types for management group name
   - suppress: ResourceNameRestriction
     from: policySetDefinitionVersions.json
+    reason: Using common types for management group name
+  - suppress: ResourceNameRestriction
+    from: policyExemptions.json
+    reason: Using common types for management group name
+  - suppress: ResourceNameRestriction
+    from: policyVariables.json
+    reason: Using common types for management group name
+  - suppress: ResourceNameRestriction
+    from: policyVariableValues.json
     reason: Using common types for management group name
   - suppress: TenantLevelAPIsNotAllowed
     from: dataBoundaries.json
