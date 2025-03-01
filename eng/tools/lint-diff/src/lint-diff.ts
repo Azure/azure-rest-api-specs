@@ -46,11 +46,13 @@ export async function main() {
     },
   } = parseArgs(config);
 
+  // TODO: Handle trailing slashes properly
   if (!beforeArg || !(await pathExists(beforeArg as string))) {
     validArgs = false;
     console.log(`--before must be a valid path. Value passed: ${beforeArg || "<empty>"}`);
   }
 
+  // TODO: Handle trailing slashes properly
   if (!afterArg || !(await pathExists(afterArg as string))) {
     validArgs = false;
     console.log(`--after must be a valid path. Value passed: ${afterArg || "<empty>"}`);
@@ -113,7 +115,7 @@ async function runLintDiff(
     return true;
   });
 
-  for (const rootPath in [beforePath, afterPath]) {
+  for (const rootPath of [beforePath, afterPath]) {
     // Filter changed files to include only those that exist in the rootPath
     const existingChangedFiles = [];
     for (const file of changedSpecFiles) {
@@ -177,7 +179,7 @@ async function runLintDiff(
     for (const [readme, tags] of readmeTags.entries()) {
       const dedupedTags = await deduplicateTags(
         [...tags],
-        await readFile(join(afterPath, readme), { encoding: "utf-8" }),
+        await readFile(join(rootPath, readme), { encoding: "utf-8" }),
       );
 
       changedFileAndTagsMap.set(readme, dedupedTags);
@@ -188,7 +190,7 @@ async function runLintDiff(
     // specific tags?
 
     for (const [readme, tags] of changedFileAndTagsMap.entries()) {
-      const changedFilePath = `${afterPath}/${readme}`;
+      const changedFilePath = `${rootPath}/${readme}`;
       console.log(`Linting ${changedFilePath}`);
 
       let openApiType = await getOpenapiType(changedFilePath);
