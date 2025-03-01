@@ -1762,7 +1762,7 @@ model ManagedClusterProperties {
   /**
    * Indicates if the cluster has zone resiliency.
    */
-  zonalResiliency?: boolean;
+  zonalResiliency?: boolean = false;
 
   /**
    * The policy used to clean up unused versions.
@@ -2150,7 +2150,7 @@ model ClusterUpgradePolicy {
   /**
    * If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).
    */
-  forceRestart?: boolean;
+  forceRestart?: boolean = false;
 
   /**
    * The cluster health policy defines a health policy used to evaluate the health of the cluster during a cluster upgrade.
@@ -2193,8 +2193,9 @@ model ClusterHealthPolicy {
    * In large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.
    *
    */
+  @minValue(0)
   @maxValue(100)
-  maxPercentUnhealthyNodes: int32;
+  maxPercentUnhealthyNodes: int32 = 0;
 
   /**
    * The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10.
@@ -2205,8 +2206,9 @@ model ClusterHealthPolicy {
    * The computation rounds up to tolerate one failure on small numbers of applications. Default percentage is zero.
    *
    */
+  @minValue(0)
   @maxValue(100)
-  maxPercentUnhealthyApplications: int32;
+  maxPercentUnhealthyApplications: int32 = 0;
 }
 
 /**
@@ -2621,12 +2623,12 @@ model NodeTypeProperties {
   /**
    * Indicates if the node type can only host Stateless workloads.
    */
-  isStateless?: boolean;
+  isStateless?: boolean = false;
 
   /**
    * Indicates if scale set associated with the node type can be composed of multiple placement groups.
    */
-  multiplePlacementGroups?: boolean;
+  multiplePlacementGroups?: boolean = false;
 
   /**
    * Indicates the node type uses its own frontend configurations instead of the default one for the cluster. This setting can only be specified for non-primary node types and can not be added or removed after the node type is created.
@@ -2649,7 +2651,7 @@ model NodeTypeProperties {
   /**
    * Enable or disable the Host Encryption for the virtual machines on the node type. This will enable the encryption for all the disks including Resource/Temp disk at host itself. Default: The Encryption at host will be disabled unless this property is set to true for the resource.
    */
-  enableEncryptionAtHost?: boolean;
+  enableEncryptionAtHost?: boolean = false;
 
   /**
    * The provisioning state of the node type resource.
