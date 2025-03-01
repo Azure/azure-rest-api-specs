@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "30000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "discountName": "testprimarydiscount",
+    "api-version": "2024-11-01-preview",
+    "body": {
+      "properties": {
+        "displayName": "Virtual Machines D Series"
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2023-11-01-preview",
+        "Azure-Asyncoperation": "https://management.azure.com/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2023-11-01-preview",
+        "Retry-After": "5"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/discounts/testprimarydiscount",
+        "name": "testprimarydiscount",
+        "type": "Microsoft.BillingBenefits/discounts",
+        "properties": {
+          "displayName": "Virtual Machines D Series",
+          "entityType": "Primary",
+          "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+          "startAt": "2023-07-01T00:00:00Z",
+          "endAt": "2024-07-01T23:59:59Z",
+          "systemId": "13810867107109237",
+          "provisioningState": "Succeeded",
+          "status": "Active",
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31",
+          "billingProfileResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/billingProfiles/KPSV-DWNE-BG7-TGB",
+          "customerResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/customers/40000000-0000-0000-0000-000000000000",
+          "appliedScopeType": "BillingAccount",
+          "discountTypeProperties": {
+            "discountType": "Sku",
+            "applyDiscountOn": "Purchase",
+            "productFamilyName": "Azure",
+            "productId": "DZH318Z0BQ35",
+            "skuId": "0001",
+            "discountPercentage": 14,
+            "conditions": [
+              {
+                "type": "equalAny",
+                "conditionName": "Cloud",
+                "value": [
+                  "US-Sec"
+                ]
+              }
+            ]
+          }
+        },
+        "location": "global",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  }
+}
