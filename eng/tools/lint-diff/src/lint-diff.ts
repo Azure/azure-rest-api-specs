@@ -144,7 +144,10 @@ async function runLintDiff(
       );
     }
 
-    const affectedReadmes = await getAffectedReadmes(existingChangedFiles, rootPath);
+    // Use changedSpecFiles (which might not be present in the branch) to get
+    // a set of affected readme files.
+    // TODO: Is this even useful?
+    const affectedReadmes = await getAffectedReadmes(changedSpecFiles, rootPath);
 
     const readmeTags = new Map<string, Set<string>>();
     for (const readme of affectedReadmes) {
@@ -202,8 +205,8 @@ async function runLintDiff(
     }
 
     if (changedFileAndTagsMap.size === 0) {
-      console.log("No readme or swagger files changed. Exiting.");
-      return;
+      console.log(`No readme or swagger files changed in ${rootPath}`);
+      continue;
     }
 
     for (const [readme, tags] of changedFileAndTagsMap.entries()) {
