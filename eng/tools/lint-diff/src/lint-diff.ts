@@ -32,6 +32,7 @@ export async function main() {
       "out-file": {
         type: "string",
         short: "o",
+        default: "lint-diff.json",
       },
     },
     strict: true,
@@ -128,6 +129,7 @@ async function runLintDiff(
     // e.g. specification/service1/readme.md -> specification/service1
     const affectedServiceDirectories = await getAffectedServices(existingChangedFiles);
 
+    // Get a map of a service's swagger files and their dependencies
     // TODO: Use set or array?
     const affectedSwaggerMap = new Map<string, string[]>();
     for (const serviceDir of affectedServiceDirectories) {
@@ -145,17 +147,19 @@ async function runLintDiff(
     const affectedReadmes = await getAffectedReadmes(existingChangedFiles, rootPath);
 
     const readmeTags = new Map<string, Set<string>>();
-    // TODO: This builds from existing functionality. This can be done more
-    // efficiently.
     for (const readme of affectedReadmes) {
       const readmeService = await getService(readme);
       if (!affectedSwaggerMap.has(readmeService)) {
         continue;
       }
 
+      // TODO: The parser is used twice to get tags and input files. This can be
+      // made more efficient.
       const readmeContent = await readFile(join(rootPath, readme), { encoding: "utf-8" });
       for (const tag of getAllTags(readmeContent)) {
-        const inputFiles = await getInputFiles(readmeContent, tag);
+        const inputFiles = (await getInputFiles(readmeContent, tag))?.map((file) =>
+          join(dirname(readme), file),
+        );
         if (inputFiles === undefined || inputFiles.length === 0) {
           continue;
         }
@@ -183,6 +187,11 @@ async function runLintDiff(
       );
 
       changedFileAndTagsMap.set(readme, dedupedTags);
+    }
+
+    if (changedFileAndTagsMap.size === 0) {
+      console.log("No readme or swagger files changed. Exiting.");
+      return;
     }
 
     // TODO: How do we ensure directly edited readme.md files are handled
@@ -230,10 +239,11 @@ async function runLintDiff(
         // }
 
         // console.log("Lint diff result:", lintDiffResult.stdout);
-        console.log("Results would be written to: ", outFile);
       }
     }
   }
+
+  console.log("Results would be written to: ", outFile);
 }
 
 // async function executeCommand(
