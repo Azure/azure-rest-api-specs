@@ -96,7 +96,10 @@ namespace Quantum.Workspace.Operations {
       Resource = ItemDetails,
       Response = PagedItemDetails,
       Parameters = {
-        ...CustomQueryParameters;
+        ...CustomFilterQueryParameter;
+        ...CustomSkipQueryParameter;
+        ...CustomTopQueryParameter;
+        ...CustomOrderByQueryParameter;
       }
     >;
   }

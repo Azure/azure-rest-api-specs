@@ -15,30 +15,45 @@ alias DefaultAzureCoreVersion = Azure.Core.Versions.v1_0_Preview_2;
 @versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace {
   /**
-   * Provides the custom query parameters for list operations
+   * Provides the custom 'filter' query parameter for list operations
    */
-  model CustomQueryParameters {
+  model CustomFilterQueryParameter {
     /**
      * Filter the result list using the given expression
      */
     @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
     @query("filter")
     filter?: string;
+  }
 
+  /**
+   * Provides the custom 'skip' query parameter for list operations.
+   */
+  model CustomSkipQueryParameter {
     /**
      * The number of result items to skip.
      */
     @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
     @query("skip")
     skip?: int32;
+  }
 
+  /**
+   * Provides the custom 'top' query parameter for list operations.
+   */
+  model CustomTopQueryParameter {
     /**
      * The number of jobs taken.
      */
     @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
     @query("top")
     top?: int32;
+  }
 
+  /**
+   * Provides the custom 'orderBy' query parameter for list operations.
+   */
+  model CustomOrderByQueryParameter {
     /**
      * The order of returned items.
      */
