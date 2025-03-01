@@ -189,14 +189,22 @@ async function runLintDiff(
       changedFileAndTagsMap.set(readme, dedupedTags);
     }
 
+    // TODO: How do we ensure directly edited readme.md files are handled
+    // properly? e.g. is the whole file scanned or is it constrained to
+    // specific tags?
+
+    // For readme files that have changed but there are no affected swaggers,
+    // add them to the map with no tags
+    for (const changedReadme of affectedReadmes) {
+      if (!changedFileAndTagsMap.has(changedReadme)) {
+        changedFileAndTagsMap.set(changedReadme, []);
+      }
+    }
+
     if (changedFileAndTagsMap.size === 0) {
       console.log("No readme or swagger files changed. Exiting.");
       return;
     }
-
-    // TODO: How do we ensure directly edited readme.md files are handled
-    // properly? e.g. is the whole file scanned or is it constrained to
-    // specific tags?
 
     for (const [readme, tags] of changedFileAndTagsMap.entries()) {
       const changedFilePath = `${rootPath}/${readme}`;
@@ -211,8 +219,9 @@ async function runLintDiff(
       // and overriding openapi-type with it.
       let openApiSubType = openApiType;
 
-      // TODO: Is there a more syntactically graceful way to handle empty tags?
-      for (const tag of tags || [null]) {
+      // If the tags array is empty run the loop once but with a null tag
+      const coalescedTags = tags?.length ? tags : [null];
+      for (const tag of coalescedTags) {
         // TODO: See tag specified in momentOfTruth.ts:executeAutoRestWithLintDiff
         let tagArg = tag ? `--tag=${tag} ` : "";
 
