@@ -114,27 +114,16 @@
             "x-ms-parameter-location": "client"
           },
           {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter the result list using the given expression",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Quantum.Workspace.CustomFilterQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Quantum.Workspace.CustomSkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The number of jobs taken.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Quantum.Workspace.CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Quantum.Workspace.CustomOrderByQueryParameter"
           }
         ],
         "responses": {
@@ -686,27 +675,16 @@
             "x-ms-parameter-location": "client"
           },
           {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter the result list using the given expression",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Quantum.Workspace.CustomFilterQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Quantum.Workspace.CustomSkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The number of jobs taken.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Quantum.Workspace.CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Quantum.Workspace.CustomOrderByQueryParameter"
           }
         ],
         "responses": {
@@ -1037,27 +1015,16 @@
             "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
           },
           {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter the result list using the given expression",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Quantum.Workspace.CustomFilterQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Quantum.Workspace.CustomSkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The number of jobs taken.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Quantum.Workspace.CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Quantum.Workspace.CustomOrderByQueryParameter"
           }
         ],
         "responses": {
@@ -1186,27 +1153,16 @@
             "x-ms-parameter-location": "client"
           },
           {
-            "name": "filter",
-            "in": "query",
-            "description": "Filter the result list using the given expression",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Quantum.Workspace.CustomFilterQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Quantum.Workspace.CustomSkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The number of jobs taken.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Quantum.Workspace.CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Quantum.Workspace.CustomOrderByQueryParameter"
           }
         ],
         "responses": {
@@ -2335,6 +2291,40 @@
       "maxLength": 50,
       "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
       "x-ms-parameter-location": "client"
+    },
+    "Quantum.Workspace.CustomFilterQueryParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Quantum.Workspace.CustomOrderByQueryParameter": {
+      "name": "orderby",
+      "in": "query",
+      "description": "The order of returned items.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Quantum.Workspace.CustomSkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Quantum.Workspace.CustomTopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of jobs taken.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     }
   }
 }
