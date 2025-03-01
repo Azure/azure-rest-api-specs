@@ -690,7 +690,7 @@ model LogicalNetworkProperties {
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
   @doc("Subnet - list of subnets under the logical network")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subnets?: Subnet[];
 
   @doc("Provisioning state of the logical network.")
@@ -735,7 +735,7 @@ model SubnetProperties {
   ipAllocationMethod?: IpAllocationMethodEnum;
 
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipConfigurationReferences?: SubnetIpConfigurationReference[];
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
@@ -745,7 +745,7 @@ model SubnetProperties {
   routeTable?: RouteTable;
 
   @doc("network associated pool of IP Addresses")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipPools?: IPPool[];
 
   @doc("Vlan to use for the subnet")
@@ -775,7 +775,7 @@ model RouteTable {
 @doc("RouteTablePropertiesFormat - Route Table resource.")
 model RouteTableProperties {
   @doc("Collection of routes contained within a route table.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   routes?: Route[];
 }
 
@@ -914,7 +914,7 @@ model SecurityRuleProperties {
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipConfigurations?: IPConfiguration[];
 
   @doc("MacAddress - The MAC address of the network interface.")
@@ -1410,7 +1410,7 @@ model VirtualMachineInstancePropertiesHardwareProfile {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
   @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 
@@ -1490,7 +1490,7 @@ model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
 @doc("SSH configuration for Linux based VMs running on Azure")
 model SshConfiguration {
   @doc("The list of SSH public keys used to authenticate with linux based VMs.")
-  @extension("x-ms-identifiers", #["path"])
+  @identifiers(#["path"])
   publicKeys?: SshPublicKey[];
 }
 
@@ -1617,7 +1617,7 @@ model VirtualMachineConfigAgentInstanceView {
   vmConfigAgentVersion?: string;
 
   @doc("The resource status information.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -1741,7 +1741,7 @@ model HardwareProfileUpdate {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
   @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - updated list of GPUs on the virtual machine instance")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 

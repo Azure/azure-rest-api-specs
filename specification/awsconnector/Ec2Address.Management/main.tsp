@@ -109,7 +109,7 @@ model AwsEc2AddressProperties {
   publicIpv4Pool?: string;
 
   @doc("<p>Any tags assigned to the Elastic IP address.</p>")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 }
 

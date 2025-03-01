@@ -73,14 +73,13 @@ model AwsRdsDBClusterProperties {
   allocatedStorage?: int32;
 
   @doc("Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   associatedRoles?: DBClusterRole[];
 
   @doc("A value that indicates whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.")
   autoMinorVersionUpgrade?: boolean;
 
   @doc("A list of Availability Zones (AZs) where instances in the DB cluster can be created. For information on AWS Regions and Availability Zones, see Choosing the Regions and Availability Zones in the Amazon Aurora User Guide.")
-  @extension("x-ms-identifiers", #[])
   availabilityZones?: string[];
 
   @doc("The target backtrack window, in seconds. To disable backtracking, set this value to 0.")
@@ -129,7 +128,6 @@ model AwsRdsDBClusterProperties {
   domainIAMRoleName?: string;
 
   @doc("The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.")
-  @extension("x-ms-identifiers", #[])
   enableCloudwatchLogsExports?: string[];
 
   @doc("Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.")
@@ -241,14 +239,13 @@ model AwsRdsDBClusterProperties {
   storageType?: string;
 
   @doc("An array of key-value pairs to apply to this resource.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("A value that indicates whether to restore the DB cluster to the latest restorable backup time. By default, the DB cluster is not restored to the latest restorable backup time.")
   useLatestRestorableTime?: boolean;
 
   @doc("A list of EC2 VPC security groups to associate with this DB cluster.")
-  @extension("x-ms-identifiers", #[])
   vpcSecurityGroupIds?: string[];
 }
 

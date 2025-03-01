@@ -73,7 +73,7 @@ model AwsEc2NetworkAclProperties {
   id?: string;
 
   @doc("The tags for the network ACL.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The ID of the VPC for the network ACL.")

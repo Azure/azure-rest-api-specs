@@ -77,7 +77,6 @@ model AwsNetworkFirewallFirewallProperties {
   description?: string;
 
   @doc("Property endpointIds")
-  @extension("x-ms-identifiers", #[])
   endpointIds?: string[];
 
   @doc("A resource ARN.")
@@ -99,11 +98,11 @@ model AwsNetworkFirewallFirewallProperties {
   subnetChangeProtection?: boolean;
 
   @doc("Property subnetMappings")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subnetMappings?: SubnetMapping[];
 
   @doc("Property tags")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("Property vpcId")

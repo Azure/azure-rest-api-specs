@@ -76,7 +76,7 @@ model AwsGuardDutyDetectorProperties {
   enable?: boolean;
 
   @doc("Property features")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   features?: CFNFeatureConfiguration[];
 
   @doc("Property findingPublishingFrequency")
@@ -86,7 +86,7 @@ model AwsGuardDutyDetectorProperties {
   id?: string;
 
   @doc("Property tags")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: TagItem[];
 }
 
@@ -113,7 +113,7 @@ model CFNDataSourceConfigurations {
 @doc("Definition of CFNFeatureConfiguration")
 model CFNFeatureConfiguration {
   @doc("Property additionalConfiguration")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   additionalConfiguration?: CFNFeatureAdditionalConfiguration[];
 
   @doc("Property name")

@@ -86,7 +86,7 @@ model AwsEc2VPCPeeringConnectionProperties {
   peerVpcId?: string;
 
   @doc("Property tags")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The ID of the VPC.")

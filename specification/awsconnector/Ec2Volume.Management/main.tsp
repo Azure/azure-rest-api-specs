@@ -97,7 +97,7 @@ model AwsEc2VolumeProperties {
   snapshotId?: string;
 
   @doc("The tags to apply to the volume during creation.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The throughput to provision for a volume, with a maximum of 1,000 MiB/s. This parameter is valid only for ``gp3`` volumes. The default value is 125. Valid Range: Minimum value of 125. Maximum value of 1000.")

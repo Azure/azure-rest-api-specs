@@ -79,18 +79,18 @@ model AwsEc2SecurityGroupProperties {
   groupName?: string;
 
   @doc("<p>The inbound rules associated with the security group.</p>")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipPermissions?: IpPermission[];
 
   @doc("<p>The outbound rules associated with the security group.</p>")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipPermissionsEgress?: IpPermission[];
 
   @doc("<p>The Amazon Web Services account ID of the owner of the security group.</p>")
   ownerId?: string;
 
   @doc("<p>Any tags assigned to the security group.</p>")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("<p>The ID of the VPC for the security group.</p>")
@@ -110,22 +110,22 @@ model IpPermission {
   ipProtocol?: string;
 
   @doc("<p>The IPv4 address ranges.</p>")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRanges?: IpRange[];
 
   @doc("<p>The IPv6 address ranges.</p>")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipv6Ranges?: Ipv6Range[];
 
   @doc("<p>The prefix list IDs.</p>")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   prefixListIds?: PrefixListId[];
 
   @doc("<p>If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).</p>")
   toPort?: int32;
 
   @doc("<p>The security group and Amazon Web Services account ID pairs.</p>")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   userIdGroupPairs?: UserIdGroupPair[];
 }
 
