@@ -3,11 +3,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // --------------------------------------------------------------------------------------------
 
-// --------------------------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-// --------------------------------------------------------------------------------------------
-
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
@@ -29,7 +24,6 @@ using TypeSpec.Versioning;
 using OpenAPI;
 
 /** Azure Quantum Workspace Services */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Non standard use of openapi info metadata for azure spec"
 @service({
   title: "Azure Quantum Workspace Services",
 })
@@ -46,11 +40,6 @@ using OpenAPI;
     serviceBaseUrl: string = "quantum.azure.com",
   }
 )
-@OpenAPI.info({
-  contact: {
-    email: "azqengg@microsoft.com",
-  },
-})
 namespace Quantum.Workspace.Services {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
     There is no support for JsonPatch in Azure.Core.

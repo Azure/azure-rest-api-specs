@@ -5,8 +5,12 @@
 
 import "./operations.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+
+@versioned(QuantumWorkspaceAPIVersion)
+namespace Quantum.Workspace;
 
 /** A key-value pair. */
 model KeyValue<Value = string> {
@@ -77,15 +81,50 @@ model ItemDetails {
 
   /** Error information. */
   @visibility("read")
-  errorData?: Errors.WorkspaceItemError;
+  errorData?: WorkspaceItemError;
 }
 
-@useDependency(DefaultAzureCoreVersion)
-namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
+/** Operation to list a resource with filters and pages. */
+model PaginatedItemsParameters {
+  /**
+   * Filter the result list using the given expression
+   */
+  @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+  @query("filter")
+  filter?: string;
 
+  /**
+   * The number of result items to skip.
+   */
+  @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+  @query("skip")
+  skip?: int32;
+
+  /**
+   * The number of items taken.
+   */
+  @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+  @query("top")
+  top?: int32;
+
+  /**
+   * The order of returned items.
+   */
+  @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+  @query("orderby")
+  orderby?: string;
+}
+
+@versioned(QuantumWorkspaceAPIVersion)
+namespace Quantum.Workspace.Operations {
   interface ItemsOperations {
     /** List top-level items. */
-    list is ListOperation<ItemDetails>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
+      We had to use a custom operation to support versioned parameters for pagination.
+      """
+    list is CustomListOperation<
+      Resource = ItemDetails,
+      Parameters = PaginatedItemsParameters
+    >;
   }
 }

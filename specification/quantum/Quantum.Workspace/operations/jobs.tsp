@@ -8,8 +8,8 @@ import "./operations.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-using TypeSpec.Http;
-using OpenAPI;
+@versioned(QuantumWorkspaceAPIVersion)
+namespace Quantum.Workspace;
 
 /** The type of the job. */
 union JobType {
@@ -119,12 +119,8 @@ model JobDetails extends ItemDetails {
   outputDataFormat?: string;
 }
 
-/** A Paged List of JobDetails. */ // Used by workspace/jobs and sesssions/{sessionId}/jobs
-alias PagedJobDetails = Azure.Core.Page<JobDetails>;
-
-@useDependency(DefaultAzureCoreVersion)
+@versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
   interface JobOperations {
     /** Create a new job. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
@@ -152,7 +148,7 @@ namespace Quantum.Workspace.Operations {
       """
     list is CustomListOperation<
       Resource = JobDetails,
-      Response = PagedJobDetails
+      Parameters = PaginatedItemsParameters
     >;
   }
 }

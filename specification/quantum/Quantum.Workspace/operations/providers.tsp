@@ -8,6 +8,9 @@ import "./operations.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
+@versioned(QuantumWorkspaceAPIVersion)
+namespace Quantum.Workspace;
+
 /** Provider availability. */
 union ProviderAvailability {
   string,
@@ -73,9 +76,8 @@ model TargetStatus {
   statusPage?: string;
 }
 
-@useDependency(DefaultAzureCoreVersion)
+@versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
   interface ProviderOperations {
     /** List all providers in the workspace with their respective status. */
     list is ListOperation<ProviderStatus>;

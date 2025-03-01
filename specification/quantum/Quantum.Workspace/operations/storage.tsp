@@ -7,8 +7,10 @@ import "./operations.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-
 using TypeSpec.Http;
+
+@versioned(QuantumWorkspaceAPIVersion)
+namespace Quantum.Workspace;
 
 /** The details (name and container) of the blob to store or download data. */
 model BlobDetails {
@@ -34,9 +36,8 @@ alias BlobDetailsParam = {
   blobDetails: BlobDetails;
 };
 
-@useDependency(DefaultAzureCoreVersion)
+@versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
   @autoRoute
   interface StorageOperations {
     /** Gets a URL with SAS token for a container/blob in the storage account associated with the workspace. The SAS URL can be used to upload job input and/or download job output. */
