@@ -92,10 +92,7 @@ namespace Quantum.Workspace.Operations {
       Resource = SessionDetails,
       Response = PagedSessionDetails,
       Parameters = {
-        ...CustomFilterQueryParameter;
-        ...CustomSkipQueryParameter;
-        ...CustomTopQueryParameter;
-        ...CustomOrderByQueryParameter;
+        ...CustomQueryParameters;
       }
     >;
 
@@ -116,10 +113,7 @@ namespace Quantum.Workspace.Operations {
         @segment("sessions")
         sessionId: WorkspaceItemId;
 
-        ...CustomFilterQueryParameter;
-        ...CustomSkipQueryParameter;
-        ...CustomTopQueryParameter;
-        ...CustomOrderByQueryParameter;
+        ...CustomQueryParameters;
       }
     >;
   }

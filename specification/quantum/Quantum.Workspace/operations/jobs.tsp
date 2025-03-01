@@ -154,10 +154,7 @@ namespace Quantum.Workspace.Operations {
       Resource = JobDetails,
       Response = PagedJobDetails,
       Parameters = {
-        ...CustomFilterQueryParameter;
-        ...CustomSkipQueryParameter;
-        ...CustomTopQueryParameter;
-        ...CustomOrderByQueryParameter;
+        ...CustomQueryParameters;
       }
     >;
   }
