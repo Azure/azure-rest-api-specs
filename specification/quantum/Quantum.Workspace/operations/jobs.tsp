@@ -119,9 +119,6 @@ model JobDetails extends ItemDetails {
   outputDataFormat?: string;
 }
 
-/** A Paged List of JobDetails. */ // Used by workspace/jobs and sesssions/{sessionId}/jobs
-alias PagedJobDetails = Azure.Core.Page<JobDetails>;
-
 @versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace.Operations {
   interface JobOperations {
@@ -151,7 +148,7 @@ namespace Quantum.Workspace.Operations {
       """
     list is CustomListOperation<
       Resource = JobDetails,
-      Response = PagedJobDetails
+      Parameters = PaginatedItemsParameters
     >;
   }
 }

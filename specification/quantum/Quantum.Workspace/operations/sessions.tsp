@@ -83,7 +83,13 @@ namespace Quantum.Workspace.Operations {
     get is GetOperation<SessionDetails>;
 
     /** List all Sessions. */
-    list is ListOperation<SessionDetails>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
+      We had to use a custom operation to support versioned parameters for pagination.
+      """
+    list is CustomListOperation<
+      Resource = SessionDetails,
+      Parameters = PaginatedItemsParameters
+    >;
 
     /** List jobs in a session. */
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" ""
@@ -96,12 +102,13 @@ namespace Quantum.Workspace.Operations {
     @operationId("SessionsJobs_List")
     jobsList is CustomListOperation<
       Resource = JobDetails,
-      Response = PagedJobDetails,
       Parameters = {
         /** Id of the session to list jobs from. */
         @path
         @segment("sessions")
         sessionId: WorkspaceItemId;
+
+        ...PaginatedItemsParameters;
       }
     >;
   }
