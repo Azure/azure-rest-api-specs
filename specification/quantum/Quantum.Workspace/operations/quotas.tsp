@@ -69,7 +69,6 @@ model Quota {
   period: MeterPeriod;
 }
 
-@useDependency(DefaultAzureCoreVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface QuotaOperations {

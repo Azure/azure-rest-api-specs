@@ -34,7 +34,6 @@ alias BlobDetailsParam = {
   blobDetails: BlobDetails;
 };
 
-@useDependency(DefaultAzureCoreVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   @autoRoute
