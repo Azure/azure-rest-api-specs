@@ -5,10 +5,10 @@
 
 import "./common.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Rest.Resource;
-using OpenAPI;
+using TypeSpec.Versioning;
+
+@versioned(QuantumWorkspaceAPIVersion)
+namespace Quantum.Workspace;
 
 /** The operation to be performed. */
 union JsonPatchOperation {

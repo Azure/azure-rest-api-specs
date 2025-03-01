@@ -5,8 +5,12 @@
 
 import "./operations.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+
+@versioned(QuantumWorkspaceAPIVersion)
+namespace Quantum.Workspace;
 
 /** A key-value pair. */
 model KeyValue<Value = string> {
@@ -77,13 +81,11 @@ model ItemDetails {
 
   /** Error information. */
   @visibility("read")
-  errorData?: Errors.WorkspaceItemError;
+  errorData?: WorkspaceItemError;
 }
 
-@useDependency(DefaultAzureCoreVersion)
+@versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
-
   interface ItemsOperations {
     /** List top-level items. */
     list is ListOperation<ItemDetails>;

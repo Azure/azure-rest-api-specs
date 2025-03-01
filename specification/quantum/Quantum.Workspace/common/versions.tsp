@@ -7,6 +7,9 @@ import "./common.tsp";
 
 using TypeSpec.Versioning;
 
+@versioned(QuantumWorkspaceAPIVersion)
+namespace Quantum.Workspace;
+
 alias DefaultAzureCoreVersion = Azure.Core.Versions.v1_0_Preview_2;
 
 /** The Azure Quantum Workspace REST API version. */

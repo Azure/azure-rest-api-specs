@@ -8,8 +8,10 @@ import "./operations.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-
 using OpenAPI;
+
+@versioned(QuantumWorkspaceAPIVersion)
+namespace Quantum.Workspace;
 
 /** Policy controlling the behavior of the Session when a job in the session fails. */
 union SessionJobFailurePolicy {
@@ -67,9 +69,8 @@ model SessionDetails extends ItemDetails {
   status?: SessionStatus;
 }
 
-@useDependency(DefaultAzureCoreVersion)
+@versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
   interface SessionOperations {
     /** Open a new session. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"

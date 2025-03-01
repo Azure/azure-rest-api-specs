@@ -8,6 +8,9 @@ import "./operations.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
+@versioned(QuantumWorkspaceAPIVersion)
+namespace Quantum.Workspace;
+
 /** The scope at which the quota is applied to. */
 union DimensionScope {
   string,
@@ -69,9 +72,8 @@ model Quota {
   period: MeterPeriod;
 }
 
-@useDependency(DefaultAzureCoreVersion)
+@versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
   interface QuotaOperations {
     /** List quotas for the given workspace. */
     list is ListOperation<Quota>;
