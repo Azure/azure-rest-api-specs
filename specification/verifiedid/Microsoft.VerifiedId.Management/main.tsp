@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.VerifiedId")
-@service({
-  title: "VerifiedIdMgmtClient",
-})
+@service(#{ title: "VerifiedIdMgmtClient" })
 @doc("VerifiedId Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.VerifiedId;

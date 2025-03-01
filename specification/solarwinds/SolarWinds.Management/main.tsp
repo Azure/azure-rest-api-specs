@@ -2,9 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
-@service({
-  title: "SolarWinds.Observability",
-})
+@service(#{ title: "SolarWinds.Observability" })
 @versioned(Versions)
 namespace SolarWinds.Observability;
 

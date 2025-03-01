@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "IndexManagementClient",
-})
+@service(#{ title: "IndexManagementClient" })
 @doc("CognitiveSearch Resource Provider management API.")
 namespace Microsoft.CognitiveSearch;
 

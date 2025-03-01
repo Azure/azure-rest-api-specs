@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "SecurityPlatformClient",
-})
+@service(#{ title: "SecurityPlatformClient" })
 @doc("SecurityPlatform Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.SecurityPlatform;

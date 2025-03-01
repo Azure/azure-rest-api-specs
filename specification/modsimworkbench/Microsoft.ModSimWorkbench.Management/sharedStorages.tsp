@@ -16,9 +16,7 @@ using Azure.ResourceManager;
 using OpenAPI;
 
 @armProviderNamespace("Microsoft.ModSimWorkbench")
-@service({
-  title: "ModSimWorkbench Control Plane API",
-})
+@service(#{ title: "ModSimWorkbench Control Plane API" })
 @armProviderNamespace
 @versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;

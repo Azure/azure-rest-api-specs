@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
 
 @armProviderNamespace
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@service({
+@service(#{
   title: "Microsoft.RiskReputation",
   version: "2015-02-28-preview",
   preview: true,

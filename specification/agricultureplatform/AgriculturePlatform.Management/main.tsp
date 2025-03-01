@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AgriculturePlatform")
-@service({
-  title: "Microsoft.AgriculturePlatform",
-})
+@service(#{ title: "Microsoft.AgriculturePlatform" })
 @versioned(Microsoft.AgriculturePlatform.Versions)
 namespace Microsoft.AgriculturePlatform;
 

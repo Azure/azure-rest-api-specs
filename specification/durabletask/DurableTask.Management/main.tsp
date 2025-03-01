@@ -11,9 +11,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.DurableTask",
-})
+@service(#{ title: "Microsoft.DurableTask" })
 @versioned(Versions)
 namespace Microsoft.DurableTask;
 

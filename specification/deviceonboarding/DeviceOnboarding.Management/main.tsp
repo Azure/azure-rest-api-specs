@@ -15,9 +15,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.DeviceOnboarding",
-})
+@service(#{ title: "Microsoft.DeviceOnboarding" })
 @versioned(Versions)
 namespace Microsoft.DeviceOnboarding;
 

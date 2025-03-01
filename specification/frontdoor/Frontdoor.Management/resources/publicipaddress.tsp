@@ -12,9 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.Frontdoor management service",
-})
+@service(#{ title: "Microsoft.Frontdoor management service" })
 namespace Microsoft.Frontdoor;
 
 @parentResource(TenantLocationResource)

@@ -13,9 +13,7 @@ using TypeSpec.Versioning;
 
 // The Azure Storage Management API.
 @armProviderNamespace
-@service({
-  title: "StorageDiscoveryClient",
-})
+@service(#{ title: "StorageDiscoveryClient" })
 @versioned(ApiVersion)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.StorageDiscovery;

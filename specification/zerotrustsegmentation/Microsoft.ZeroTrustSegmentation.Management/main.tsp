@@ -12,9 +12,7 @@ using Azure.Core.Foundations;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "ZeroTrustSegmentationClient",
-})
+@service(#{ title: "ZeroTrustSegmentationClient" })
 @versioned(Versions)
 @doc("ZeroTrustSegmentation resource provider API.")
 namespace Microsoft.ZeroTrustSegmentation;

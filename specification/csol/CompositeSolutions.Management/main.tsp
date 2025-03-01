@@ -8,9 +8,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.CompositeSolutions",
-})
+@service(#{ title: "Microsoft.CompositeSolutions" })
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @versioned(Versions)
 namespace Microsoft.CompositeSolutions;

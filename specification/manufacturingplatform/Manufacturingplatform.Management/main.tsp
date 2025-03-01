@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.ManufacturingPlatform")
-@service({
-  title: "Microsoft.ManufacturingPlatform",
-})
+@service(#{ title: "Microsoft.ManufacturingPlatform" })
 @versioned(Microsoft.ManufacturingPlatform.Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.ManufacturingPlatform;

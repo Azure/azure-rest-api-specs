@@ -12,7 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
+@service(#{
   title: "Hardware Resource Provider",
   version: "2023-07-12-preview",
 })

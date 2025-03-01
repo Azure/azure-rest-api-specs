@@ -12,7 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
+@service(#{
   title: "Microsoft.ManagedStorageClass",
   version: "2023-02-01-preview",
 })

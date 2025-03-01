@@ -11,9 +11,7 @@ using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Partial service; operations not needed"
 @armProviderNamespace("Microsoft.Orbital")
-@service({
-  title: "Microsoft.Orbital.AOPC",
-})
+@service(#{ title: "Microsoft.Orbital.AOPC" })
 @doc("MPC Pro Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)

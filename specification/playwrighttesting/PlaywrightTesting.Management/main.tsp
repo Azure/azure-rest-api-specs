@@ -11,9 +11,7 @@ using Azure.ResourceManager;
 using Azure.Core;
 
 @armProviderNamespace("Microsoft.AzurePlaywrightService")
-@service({
-  title: "Microsoft AzurePlaywrightService Management API",
-})
+@service(#{ title: "Microsoft AzurePlaywrightService Management API" })
 @versioned(Versions)
 @doc("Microsoft.AzurePlaywrightService Resource Provider management API.")
 namespace Microsoft.AzurePlaywrightService;

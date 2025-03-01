@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.SustainabilityServices")
-@service({
-  title: "Microsoft.SustainabilityServices",
-})
+@service(#{ title: "Microsoft.SustainabilityServices" })
 @versioned(Microsoft.SustainabilityServices.Versions)
 namespace Microsoft.SustainabilityServices;
 

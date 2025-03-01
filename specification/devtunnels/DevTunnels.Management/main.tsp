@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Azure Dev Tunnels",
-})
+@service(#{ title: "Azure Dev Tunnels" })
 @versioned(Versions)
 namespace Microsoft.DevTunnels;
 

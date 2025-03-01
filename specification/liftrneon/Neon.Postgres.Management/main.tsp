@@ -19,7 +19,7 @@ using LiftrBase;
 using LiftrBase.Data;
 
 @armProviderNamespace
-@service({
+@service(#{
   title: "Neon.Postgres",
   description: "Azure Native Services Integration for Neon Postgres",
 })

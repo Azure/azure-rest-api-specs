@@ -10,9 +10,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Managed DevOps Infrastructure",
-})
+@service(#{ title: "Managed DevOps Infrastructure" })
 @versioned(Versions)
 namespace Microsoft.DevOpsInfrastructure;
 

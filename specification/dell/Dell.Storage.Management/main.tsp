@@ -21,9 +21,7 @@ using TypeSpec.Versioning;
  * Dell Storage service
  */
 @armProviderNamespace
-@service({
-  title: "Dell.Storage",
-})
+@service(#{ title: "Dell.Storage" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Dell.Storage;

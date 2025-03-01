@@ -15,9 +15,7 @@ using OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "legacy"
 @armProviderNamespace("Microsoft.ConnectedCredentials")
-@service({
-  title: "Microsoft.ConnectedCredentials",
-})
+@service(#{ title: "Microsoft.ConnectedCredentials" })
 @doc("Connected Credentials Provider management API.")
 @versioned(Versions)
 namespace Microsoft.ConnectedCredentials;

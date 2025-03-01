@@ -13,9 +13,7 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 
-@service({
-  title: "ModSimWorkbench Control Plane API",
-})
+@service(#{ title: "ModSimWorkbench Control Plane API" })
 @versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
 

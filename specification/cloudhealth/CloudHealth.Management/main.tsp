@@ -12,9 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace(ProviderName)
-@service({
-  title: ProviderName,
-})
+@service(#{ title: ProviderName })
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 @versioned(Versions)
 namespace Microsoft.CloudHealth;

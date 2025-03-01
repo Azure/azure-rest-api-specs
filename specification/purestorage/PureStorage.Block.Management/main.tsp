@@ -4,9 +4,7 @@ import "@typespec/openapi";
 @armProviderNamespace
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @useLibraryNamespace(LiftrBase.Storage)
-@service({
-  title: "PureStorage.Block",
-})
+@service(#{ title: "PureStorage.Block" })
 @versioned(PureStorage.Block.Versions)
 namespace PureStorage.Block;
 

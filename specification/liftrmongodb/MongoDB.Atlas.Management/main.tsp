@@ -15,9 +15,7 @@ using LiftrBase;
 
 /* MongoDB.Atlas Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "MongoDB.Atlas",
-})
+@service(#{ title: "MongoDB.Atlas" })
 @versioned(MongoDB.Atlas.Versions)
 namespace MongoDB.Atlas;
 

@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
-@service({
+@service(#{
   title: "Informatica.DataManagement",
   description: "Azure Native Services Informatica DataManagement",
 })

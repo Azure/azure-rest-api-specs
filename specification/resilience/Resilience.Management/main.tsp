@@ -12,9 +12,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.Resilience Resource Provider management API. */
 @armProviderNamespace(ProviderName)
-@service({
-  title: ProviderName,
-})
+@service(#{ title: ProviderName })
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 @versioned(Versions)
 namespace Microsoft.Resilience;

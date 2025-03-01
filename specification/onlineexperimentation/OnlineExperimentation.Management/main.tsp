@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.OnlineExperimentation Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.OnlineExperimentation management service",
-})
+@service(#{ title: "Microsoft.OnlineExperimentation management service" })
 @versioned(Microsoft.OnlineExperimentation.Versions)
 namespace Microsoft.OnlineExperimentation;
 

@@ -12,9 +12,7 @@ using Azure.ResourceManager;
 using OpenAPI;
 
 @versioned(ApiVersion)
-@service({
-  title: "StorageInsightsClient",
-})
+@service(#{ title: "StorageInsightsClient" })
 @armProviderNamespace
 @doc("Storage Insights resource provider API.")
 namespace Microsoft.StorageInsights;

@@ -10,9 +10,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.Relationships Management Service",
-})
+@service(#{ title: "Microsoft.Relationships Management Service" })
 @doc("Microsoft.Relationships Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.Relationships;

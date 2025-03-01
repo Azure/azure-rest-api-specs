@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "SecurityCopilotClient",
-})
+@service(#{ title: "SecurityCopilotClient" })
 @doc("SecurityCopilot Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.SecurityCopilot;

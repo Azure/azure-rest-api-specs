@@ -18,7 +18,7 @@ using OpenAPI;
 
 // Documentation: https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type
 @armProviderNamespace
-@service({
+@service(#{
   title: "Secret Management Test Service",
   version: "2022-08-01-preview",
 })

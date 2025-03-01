@@ -11,9 +11,7 @@ using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "legacy"
 @armProviderNamespace("Microsoft.Community")
-@service({
-  title: "Microsoft.Community",
-})
+@service(#{ title: "Microsoft.Community" })
 @versioned(Versions)
 namespace Microsoft.Community;
 

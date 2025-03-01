@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 using OpenAPI;
 
 @armProviderNamespace
-@service({
-  title: "Carbon",
-})
+@service(#{ title: "Carbon" })
 @doc("Carbon Report Resource Provider query API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)

@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace("Microsoft.FairfieldGardens")
-@service({
+@service(#{
   title: "Microsoft.FairfieldGardens",
   version: "2023-12-01-preview",
 })

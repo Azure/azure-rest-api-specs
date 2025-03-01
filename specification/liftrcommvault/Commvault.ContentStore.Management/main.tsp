@@ -14,9 +14,7 @@ using Azure.Core;
 
 @armProviderNamespace
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-@service({
-  title: "Commvault.ContentStore",
-})
+@service(#{ title: "Commvault.ContentStore" })
 @versioned(Commvault.ContentStore.Versions)
 namespace Commvault.ContentStore;
 

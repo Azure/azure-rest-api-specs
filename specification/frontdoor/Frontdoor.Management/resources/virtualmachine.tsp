@@ -12,9 +12,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft Azure Frontdoor Inventory",
-})
+@service(#{ title: "Microsoft Azure Frontdoor Inventory" })
 @versioned(Microsoft.Frontdoor.Versions)
 @doc("Azure Frontdoor VM management API.")
 namespace Microsoft.Frontdoor;

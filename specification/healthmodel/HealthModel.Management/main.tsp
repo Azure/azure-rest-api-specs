@@ -12,7 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
+@service(#{
   title: "HealthModel ProviderHub Client",
   version: "2022-11-01-preview",
 })
@@ -51,7 +51,11 @@ model HealthModelProperties {
   provisioningState?: ResourceProvisioningState;
 
   @doc("The list of nodes in the health model")
+<<<<<<< HEAD
+  @extension("x-ms-identifiers", ["nodeId"])
+=======
   @extension("x-ms-identifiers", #["nodeId"])
+>>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   nodes?: Node[];
 }
 
@@ -104,7 +108,11 @@ model Node {
   impact?: NodeImpact = NodeImpact.Standard;
 
   @doc("List of queries")
+<<<<<<< HEAD
+  @extension("x-ms-identifiers", ["queryId"])
+=======
   @extension("x-ms-identifiers", #["queryId"])
+>>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   queries?: Query[];
 
   @doc("Optional query endpoint to use for queries of this node. If not specified, the default endpoint for the respective query will be used.")
@@ -141,7 +149,13 @@ model AzureResourceNode extends Node {
   @doc("Log Analytics resource ID")
   @extension(
     "x-ms-arm-id-details",
+<<<<<<< HEAD
+    {
+      allowedResources: ["Microsoft.OperationalInsights/workspaces"],
+    }
+=======
     #{ allowedResources: ["Microsoft.OperationalInsights/workspaces"] }
+>>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   )
   logAnalyticsResourceId?: ResourceIdentifier;
 
@@ -158,7 +172,13 @@ model LogAnalyticsNode extends Node {
   @doc("Log Analytics resource ID")
   @extension(
     "x-ms-arm-id-details",
+<<<<<<< HEAD
+    {
+      allowedResources: ["Microsoft.OperationalInsights/workspaces"],
+    }
+=======
     #{ allowedResources: ["Microsoft.OperationalInsights/workspaces"] }
+>>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   )
   logAnalyticsResourceId: ResourceIdentifier;
 
@@ -175,7 +195,13 @@ model PrometheusNode extends Node {
   @doc("Azure Monitor workspace resource ID")
   @extension(
     "x-ms-arm-id-details",
+<<<<<<< HEAD
+    {
+      allowedResources: ["Microsoft.Monitor/accounts"],
+    }
+=======
     #{ allowedResources: ["Microsoft.Monitor/accounts"] }
+>>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   )
   azureMonitorWorkspaceResourceId: ResourceIdentifier;
 }
@@ -188,14 +214,26 @@ model ApplicationInsightsNode extends Node {
   @doc("Application Insights resource ID")
   @extension(
     "x-ms-arm-id-details",
+<<<<<<< HEAD
+    {
+      allowedResources: ["Microsoft.Insights/components"],
+    }
+=======
     #{ allowedResources: ["Microsoft.Insights/components"] }
+>>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   )
   applicationInsightsResourceId: ResourceIdentifier;
 
   @doc("Log Analytics resource ID")
   @extension(
     "x-ms-arm-id-details",
+<<<<<<< HEAD
+    {
+      allowedResources: ["Microsoft.OperationalInsights/workspaces"],
+    }
+=======
     #{ allowedResources: ["Microsoft.OperationalInsights/workspaces"] }
+>>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   )
   logAnalyticsResourceId: ResourceIdentifier;
 
@@ -418,7 +456,11 @@ model HealthModelVersionProperties {
   provisioningState?: ResourceProvisioningState;
 
   @doc("The list of nodes in the health model")
+<<<<<<< HEAD
+  @extension("x-ms-identifiers", ["nodeId"])
+=======
   @extension("x-ms-identifiers", #["nodeId"])
+>>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   @visibility("read")
   nodes?: Node[];
 }
@@ -498,11 +540,19 @@ model SnapshotProperties {
   executionDuration: string;
 
   @doc("List of node states in the snapshot")
+<<<<<<< HEAD
+  @extension("x-ms-identifiers", ["nodeId"])
+  nodeStates?: NodeState[];
+
+  @doc("List of query results in the snapshot")
+  @extension("x-ms-identifiers", ["nodeId", "queryId"])
+=======
   @extension("x-ms-identifiers", #["nodeId"])
   nodeStates?: NodeState[];
 
   @doc("List of query results in the snapshot")
   @extension("x-ms-identifiers", #["nodeId", "queryId"])
+>>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   queryResults?: QueryResult[];
 
   @visibility("read")
@@ -528,7 +578,11 @@ model NodeStatePointInTime {
   healthScore: float32;
 
   @doc("List of query states in the snapshot")
+<<<<<<< HEAD
+  @extension("x-ms-identifiers", ["queryId"])
+=======
   @extension("x-ms-identifiers", #["queryId"])
+>>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   queryStates?: QueryState[];
 }
 
