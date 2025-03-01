@@ -28,7 +28,7 @@ using TypeSpec.Versioning;
  * Chaos Management Client
  */
 @armProviderNamespace
-@service({
+@service(#{
   title: "ChaosManagementClient",
   description: "Chaos Management Client",
 })

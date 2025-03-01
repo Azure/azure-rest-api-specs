@@ -16,9 +16,7 @@ import "@azure-tools/typespec-azure-core";
     }
   ]>
 )
-@service({
-  title: "Azure.Messaging.EventGridClient",
-})
+@service(#{ title: "Azure.Messaging.EventGridClient" })
 
 //
 // Supported operations.
