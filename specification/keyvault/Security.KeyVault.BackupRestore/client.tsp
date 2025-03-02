@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.5`)
+@TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.6_preview.2`)
 namespace ClientCustomizations;
 
 @client({
@@ -20,11 +20,5 @@ interface Client {
 }
 
 @@clientName(KeyVault.SASTokenParameter, "SASTokenParameters", "go");
-@@clientName(KeyVault.RestoreOperationParameters.sasTokenParameters,
-  "SASTokenParameters",
-  "go"
-);
-@@clientName(KeyVault.SelectiveKeyRestoreOperationParameters.sasTokenParameters,
-  "SASTokenParameters",
-  "go"
-);
+@@clientName(KeyVault.RestoreOperationParameters.sasTokenParameters, "SASTokenParameters", "go");
+@@clientName(KeyVault.SelectiveKeyRestoreOperationParameters.sasTokenParameters, "SASTokenParameters", "go");
