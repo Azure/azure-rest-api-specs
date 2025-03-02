@@ -1,0 +1,201 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "eastus",
+    "api-version": "2025-02-01-preview",
+    "attributeBasedVMSizeRecommenderInput": {
+      "regularPriorityProfile": {
+        "targetCapacity": 1,
+        "capacityUnitType": "VMInstanceCount"
+      },
+      "spotPriorityProfile": {
+        "targetCapacity": 1,
+        "capacityUnitType": "VMInstanceCount",
+        "maxPricePerVM": 0.200
+      },
+      "recommendationProperties": {
+        "restrictionsFilter": "QuotaAndOfferRestrictions"
+      },
+      "resourceProperties": {
+        "vmAttributes": {
+          "vCpuCount": {
+            "Min": 0,
+            "Max": 0
+          },
+          "memoryInMiB": {
+            "Min": 0,
+            "Max": 0
+          },
+          "vmCategories": [
+            "General Purpose"
+          ],
+          "architectureTypes": [
+            "x86",
+            "arm64"
+          ],
+          "cpuManufacturers": [
+            "Intel",
+            "AMD"
+          ],
+          "localStorageSupport": "included",
+          "ultraSSDSupport": "included",
+          "localStorageTypes": [
+            "SSD",
+            "HDD"
+          ],
+          "localStorageInMiB": {
+            "Min": 0,
+            "Max": 0
+          },
+          "dataDiskCount": {
+            "Min": 0,
+            "Max": 4
+          },
+          "hibernationSupport": "included",
+          "hyperVGenerations": [
+            "Gen1",
+            "Gen2"
+          ],
+          "networkInterfaceCount": {
+            "Min": 0,
+            "Max": 4
+          },
+          "networkBandwidthInMbps": {
+            "Min": 0,
+            "Max": 0
+          },
+          "confidentialVMSupport": "included",
+          "burstableSupport": "included",
+          "acceleratorSupport": "included",
+          "acceleratorTypes": [
+            "FPGA",
+            "GPU"
+          ],
+          "acceleratorManufacturers": [
+            "Intel",
+            "AMD",
+            "NVidia"
+          ],
+          "acceleratorCount": {
+            "Min": 0,
+            "Max": 0
+          },
+          "acceleratedNetworkingSupport": "included",
+          "rdmaSupport": "included",
+          "rdmaNetworkInterfaceCount": {
+            "Min": 0,
+            "Max": 0
+          },
+          "osType": [
+            "Windows",
+            "Linux"
+          ],
+          "allowedVMSizes": [],
+          "excludeVMSizes": []
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "recommendedVMSizes": {
+          "regularVMSizes": [
+            {
+              "name": "Standard_D4ds_v5",
+              "size": "D4ds_v5",
+              "family": "standardDDSv5Family",
+              "attributes": {
+                "vCPUs": 4,
+                "memoryGB": 16,
+                "cpuArchitecture": "x86",
+                "cpuManufacturer": "Intel",
+                "networkBandwidthInMbps": "12500",
+                "localStorageSupport": "Included",
+                "localStorageType": "SSD",
+                "localStorageInGb": 150,
+                "dataDiskCount": 4,
+                "networkInterfaceCount": 4
+              },
+              "restrictions": {
+                "offerRestrictions": [
+                  {
+                    "type": "Location",
+                    "values": [
+                      "westus"
+                    ],
+                    "restrictionInfo": {
+                      "location": [
+                        "westus"
+                      ],
+                      "zones": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
+                    },
+                    "reasonCode": "NotAvailableForSubscription"
+                  }
+                ],
+                "quotaRestrictions": [
+                  {
+                    "type": "RegionalVCpu"
+                  }
+                ]
+              }
+            }
+          ],
+          "spotVMSizes": [
+            {
+              "name": "Standard_D4ds_v6",
+              "size": "D4ds_v5",
+              "family": "standardDDSv6Family",
+              "attributes": {
+                "vCPUs": 4,
+                "memoryGB": 16,
+                "cpuArchitecture": "x86",
+                "cpuManufacturer": "Intel",
+                "networkBandwidthInMbps": "12500",
+                "localStorageSupport": "Included",
+                "localStorageType": "SSD",
+                "localStorageInGb": 150,
+                "dataDiskCount": 4,
+                "networkInterfaceCount": 4
+              },
+              "restrictions": {
+                "offerRestrictions": [
+                  {
+                    "type": "Location",
+                    "values": [
+                      "westus"
+                    ],
+                    "restrictionInfo": {
+                      "location": [
+                        "westus"
+                      ],
+                      "zones": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
+                    },
+                    "reasonCode": "NotAvailableForSubscription"
+                  }
+                ],
+                "quotaRestrictions": [
+                  {
+                    "type": "RegionalVCpu"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "headers": {
+        "x-ms-request-id": "57b891ab-1fb7-4f5a-b002-71eb6854961f",
+        "location": "https://management.azure.com/subscriptions/be23ca13-8eb4-4d0e-be10-b00451817956/providers/Microsoft.Compute/locations/eastus/vmSizeRecommendations/vmAttributeBased/generate?api-version=2025-02-01-preview"
+      }
+    }
+  }
+}

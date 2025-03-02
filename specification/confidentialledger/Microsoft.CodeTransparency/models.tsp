@@ -67,7 +67,7 @@ model EntryIds {
   transactionIds: string[];
 
   @doc("Path to the next page of results")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 

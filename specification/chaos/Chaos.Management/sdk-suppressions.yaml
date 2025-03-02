@@ -1,0 +1,85 @@
+suppressions:
+  azure-sdk-for-js:
+    - package: "@azure/arm-chaos"
+      breaking-changes:
+      - Class ChaosManagementClient has a new signature
+      - Class ChaosManagementClient no longer has parameter $host
+      - Class ChaosManagementClient no longer has parameter apiVersion
+      - Class ChaosManagementClient no longer has parameter subscriptionId
+      - Enum KnownOrigin no longer has value System
+      - Enum KnownOrigin no longer has value User
+      - Enum KnownOrigin no longer has value UserSystem
+      - Interface Capability no longer has parameter description
+      - Interface Capability no longer has parameter parametersSchema
+      - Interface Capability no longer has parameter publisher
+      - Interface Capability no longer has parameter systemData
+      - Interface Capability no longer has parameter targetType
+      - Interface Capability no longer has parameter urn
+      - Interface CapabilityType no longer has parameter azureRbacActions
+      - Interface CapabilityType no longer has parameter azureRbacDataActions
+      - Interface CapabilityType no longer has parameter description
+      - Interface CapabilityType no longer has parameter displayName
+      - Interface CapabilityType no longer has parameter kind
+      - Interface CapabilityType no longer has parameter location
+      - Interface CapabilityType no longer has parameter parametersSchema
+      - Interface CapabilityType no longer has parameter publisher
+      - Interface CapabilityType no longer has parameter runtimeProperties
+      - Interface CapabilityType no longer has parameter systemData
+      - Interface CapabilityType no longer has parameter targetType
+      - Interface CapabilityType no longer has parameter urn
+      - Interface ChaosManagementClientOptionalParams no longer has parameter $host
+      - Interface ChaosManagementClientOptionalParams no longer has parameter endpoint
+      - Interface Experiment has a new required parameter properties
+      - Interface Experiment no longer has parameter provisioningState
+      - Interface Experiment no longer has parameter selectors
+      - Interface Experiment no longer has parameter steps
+      - Interface Experiment no longer has parameter systemData
+      - Interface ExperimentExecution no longer has parameter id
+      - Interface ExperimentExecution no longer has parameter name
+      - Interface ExperimentExecution no longer has parameter startedAt
+      - Interface ExperimentExecution no longer has parameter status
+      - Interface ExperimentExecution no longer has parameter stoppedAt
+      - Interface ExperimentExecution no longer has parameter type
+      - Interface ExperimentExecutionDetails no longer has parameter failureReason
+      - Interface ExperimentExecutionDetails no longer has parameter lastActionAt
+      - Interface ExperimentExecutionDetails no longer has parameter runInformation
+      - Interface ExperimentExecutionDetails no longer has parameter startedAt
+      - Interface ExperimentExecutionDetails no longer has parameter status
+      - Interface ExperimentExecutionDetails no longer has parameter stoppedAt
+      - Interface ExperimentsCancelOptionalParams no longer has parameter resumeFrom
+      - Interface ExperimentsCreateOrUpdateOptionalParams no longer has parameter resumeFrom
+      - Interface ExperimentsDeleteOptionalParams no longer has parameter resumeFrom
+      - Interface ExperimentsStartOptionalParams no longer has parameter resumeFrom
+      - Interface ExperimentsUpdateOptionalParams no longer has parameter resumeFrom
+      - Interface Target no longer has parameter systemData
+      - Interface TargetType has a new required parameter properties
+      - Interface TargetType no longer has parameter description
+      - Interface TargetType no longer has parameter displayName
+      - Interface TargetType no longer has parameter location
+      - Interface TargetType no longer has parameter propertiesSchema
+      - Interface TargetType no longer has parameter resourceTypes
+      - Interface TargetType no longer has parameter systemData
+      - Removed function getContinuationToken
+      - Removed operation Experiments.beginCancel
+      - Removed operation Experiments.beginCancelAndWait
+      - Removed operation Experiments.beginCreateOrUpdate
+      - Removed operation Experiments.beginCreateOrUpdateAndWait
+      - Removed operation Experiments.beginDelete
+      - Removed operation Experiments.beginDeleteAndWait
+      - Removed operation Experiments.beginStart
+      - Removed operation Experiments.beginStartAndWait
+      - Removed operation Experiments.beginUpdate
+      - Removed operation Experiments.beginUpdateAndWait
+      - Removed operation Experiments.executionDetails
+      - Removed operation Experiments.getExecution
+      - Removed operation Experiments.listAllExecutions
+      - Removed operation Operations.listAll
+      - Type of parameter identity of interface Experiment is changed from ResourceIdentity to ManagedServiceIdentity
+      - Type of parameter identity of interface ExperimentUpdate is changed from ResourceIdentity to ManagedServiceIdentity
+      - Type of parameter info of interface ErrorAdditionalInfo is changed from Record<string, unknown> to Record<string, any>
+      - "Type of parameter properties of interface Target is changed from {\n        [propertyName: string]: any;\n    } to Record<string, any>"
+      - "Type of parameter tags of interface ExperimentUpdate is changed from {\n        [propertyName: string]: string;\n    } to Record<string, string>"
+      - "Type of parameter tags of interface TrackedResource is changed from {\n        [propertyName: string]: string;\n    } to Record<string, string>"
+      - Type of parameter type of interface ChaosExperimentAction is changed from "delay" | "discrete" | "continuous" to ExperimentActionType
+      - Type of parameter type of interface ChaosTargetFilter is changed from "Simple" to FilterType
+      - Type of parameter type of interface ChaosTargetSelector is changed from "List" | "Query" to SelectorType

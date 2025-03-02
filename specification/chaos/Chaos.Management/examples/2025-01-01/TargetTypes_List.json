@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "continuationToken": null,
+    "location": "westus2",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/targetTypes?continuationToken=&api-version=2024-11-01-preview",
+        "value": [
+          {
+            "name": "Microsoft-Agent",
+            "type": "Microsoft.Chaos/locations/targetTypes",
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/targetTypes/Microsoft-Agent",
+            "properties": {
+              "description": "A target represents Chaos Agent.",
+              "displayName": "Chaos Agent",
+              "propertiesSchema": "https://schema.centralus.chaos-prod.azure.com/targets/Microsoft-VirtualMachine.json",
+              "resourceTypes": [
+                "Microsoft.Compute/virtualMachines",
+                "Microsoft.Compute/virtualMachineScaleSets"
+              ]
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "TargetTypes_List",
+  "title": "List all Target Types for westus2 location."
+}

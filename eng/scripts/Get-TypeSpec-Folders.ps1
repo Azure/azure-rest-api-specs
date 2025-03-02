@@ -1,8 +1,9 @@
 [CmdletBinding()]
 param (
+  [switch]$IgnoreCoreFiles = $false,
   [switch]$CheckAll = $false,
   [string]$BaseCommitish = "HEAD^",
-  [string]$TargetCommitish = "HEAD"
+  [string]$HeadCommitish = "HEAD"
 )
 Set-StrictMode -Version 3
 
@@ -18,10 +19,10 @@ if ($CheckAll) {
   $checkedAll = $true
 }
 else {
-  $changedFiles = @(Get-ChangedFiles -baseCommitish $BaseCommitish -targetCommitish $TargetCommitish -diffFilter "")
+  $changedFiles = @(Get-ChangedFiles -baseCommitish $BaseCommitish -headCommitish $HeadCommitish -diffFilter "")
   $coreChangedFiles = Get-ChangedCoreFiles $changedFiles
 
-  if ($coreChangedFiles) {
+  if ($coreChangedFiles -and !$IgnoreCoreFiles) {
     Write-Verbose "Found changes to core eng or root files so checking all specs."
     $changedFiles = $checkAllPath
     $checkedAll = $true
@@ -51,6 +52,8 @@ foreach ($skippedTypespecFolder in $skippedTypespecFolders | Select-Object -Uniq
   Write-Host "Cannot find directory $skippedTypespecFolder"
 }
 
-$typespecFolders = $typespecFolders | ForEach-Object { [IO.Path]::GetRelativePath($repoPath, $_) -replace '\\', '/' } | Sort-Object -Unique
+if ($typespecFolders.Length) {
+  $typespecFolders = $typespecFolders | ForEach-Object { [IO.Path]::GetRelativePath($repoPath, $_) -replace '\\', '/' } | Sort-Object -Unique
+}
 
 return @($typespecFolders, $checkedAll)

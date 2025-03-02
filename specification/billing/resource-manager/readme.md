@@ -291,6 +291,29 @@ input-file:
   - Microsoft.Billing/preview/2020-09-01-preview/billingOperations.json
 ```
 
+### Tag: package-2024-08-preview
+
+These settings apply only when `--tag=package-2024-08-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-preview'
+input-file:
+  - Microsoft.Billing/preview/2024-08-01-preview/migration.json
+  - Microsoft.Billing/preview/2024-08-01-preview/operation.json
+  - Microsoft.Billing/preview/2024-08-01-preview/types.json
+suppressions:
+  - code: PutResponseCodes
+    from: migration.json
+    reason: 201 is returned as a part of response
+  - code: PutRequestResponseSchemeArm
+    from: migration.json
+    reason: PATCH operation is not needed
+  - code: OperationsApiSchemaUsesCommonTypes
+    from: operation.json
+    reason: Service design that generates API definition. Type defined in local types.json
+  - code: TenantLevelAPIsNotAllowed
+    reason: Specific validation rules do not apply to this service. Microsoft.Billing is a tenant level RP
+```
+
 ### Tag: package-2020-11-preview
 
 These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
@@ -358,7 +381,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

@@ -12,23 +12,23 @@ across all ARN system topic events
 */
 model ResourceNotificationsResourceUpdatedDetails {
   /** id of the resource for which the event is being emitted */
-  id?: string;
+  id: string;
 
   /** name of the resource for which the event is being emitted */
-  name?: string;
+  name: string;
 
   /** the type of the resource for which the event is being emitted */
-  type?: string;
+  type: string;
 
   /** the location of the resource for which the event is being emitted */
   location?: string;
 
   /** the tags on the resource for which the event is being emitted */
-  tags: Record<string>;
+  tags?: Record<string>;
 
   /** properties in the payload of the resource for which the event is being emitted */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties object"
-  properties: Record<unknown>;
+  properties?: Record<unknown>;
 }
 
 /** details of operational info */
@@ -48,7 +48,7 @@ model ResourceNotificationsResourceUpdatedEventData {
   operationalInfo: ResourceNotificationsOperationalDetails;
 
   /** api version of the resource properties bag */
-  apiVersion?: string;
+  apiVersion: string;
 }
 
 /**
@@ -57,13 +57,13 @@ across all ARN system topic delete events
 */
 model ResourceNotificationsResourceDeletedDetails {
   /** id of the resource for which the event is being emitted */
-  id?: string;
+  id: string;
 
   /** name of the resource for which the event is being emitted */
-  name?: string;
+  name: string;
 
   /** the type of the resource for which the event is being emitted */
-  type?: string;
+  type: string;
 }
 
 /**
