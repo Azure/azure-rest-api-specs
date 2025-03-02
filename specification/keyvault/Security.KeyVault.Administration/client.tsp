@@ -103,7 +103,4 @@ interface KeyVaultClient {
 @@access(KeyVault, Access.internal, "csharp");
 
 // JavaScript customizations
-@@clientName(KeyVault.FullBackupOperation.azureStorageBlobContainerUri,
-  "folderUri",
-  "javascript"
-);
+@@clientName(KeyVault.FullBackupOperation.azureStorageBlobContainerUri, "folderUri", "javascript");
