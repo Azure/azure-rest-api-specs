@@ -68,10 +68,7 @@ using KeyVault;
 @@clientName(JsonWebKeySignatureAlgorithm.RSNULL, "Rsnull", "javascript");
 @@clientName(JsonWebKeySignatureAlgorithm.ES256_K, "ES256K", "javascript");
 @@clientName(JsonWebKeyEncryptionAlgorithm.RSA_OAEP, "RSAOaep", "javascript");
-@@clientName(JsonWebKeyEncryptionAlgorithm.RSA_OAEP256,
-  "RSAOaep256",
-  "javascript"
-);
+@@clientName(JsonWebKeyEncryptionAlgorithm.RSA_OAEP256, "RSAOaep256", "javascript");
 @@clientName(JsonWebKeyEncryptionAlgorithm.RSA1_5, "RSA15", "javascript");
 @@clientName(JsonWebKeyEncryptionAlgorithm.A128_GCM, "A128GCM", "javascript");
 @@clientName(JsonWebKeyEncryptionAlgorithm.A192_GCM, "A192GCM", "javascript");
@@ -82,39 +79,15 @@ using KeyVault;
 @@clientName(JsonWebKeyEncryptionAlgorithm.A128_CBC, "A128CBC", "javascript");
 @@clientName(JsonWebKeyEncryptionAlgorithm.A192_CBC, "A192CBC", "javascript");
 @@clientName(JsonWebKeyEncryptionAlgorithm.A256_CBC, "A256CBC", "javascript");
-@@clientName(JsonWebKeyEncryptionAlgorithm.A128_CBCPAD,
-  "A128Cbcpad",
-  "javascript"
-);
-@@clientName(JsonWebKeyEncryptionAlgorithm.A192_CBCPAD,
-  "A192Cbcpad",
-  "javascript"
-);
-@@clientName(JsonWebKeyEncryptionAlgorithm.A256_CBCPAD,
-  "A256Cbcpad",
-  "javascript"
-);
-@@clientName(JsonWebKeyEncryptionAlgorithm.CKM_AES_KEY_WRAP,
-  "CkmAesKeyWrap",
-  "javascript"
-);
-@@clientName(JsonWebKeyEncryptionAlgorithm.CKM_AES_KEY_WRAP_PAD,
-  "CkmAesKeyWrapPad",
-  "javascript"
-);
+@@clientName(JsonWebKeyEncryptionAlgorithm.A128_CBCPAD, "A128Cbcpad", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.A192_CBCPAD, "A192Cbcpad", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.A256_CBCPAD, "A256Cbcpad", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.CKM_AES_KEY_WRAP, "CkmAesKeyWrap", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.CKM_AES_KEY_WRAP_PAD, "CkmAesKeyWrapPad", "javascript");
 @@clientName(JsonWebKeyType.EC_HSM, "ECHSM", "javascript");
 @@clientName(JsonWebKeyType.RSA_HSM, "RSAHSM", "javascript");
 @@clientName(JsonWebKeyType.oct_HSM, "OctHSM", "javascript");
 @@clientName(JsonWebKeyType.oct, "Oct", "javascript");
-@@clientName(KeyEncryptionAlgorithm.CKM_RSA_AES_KEY_WRAP,
-  "CkmRsaAesKeyWrap",
-  "javascript"
-);
-@@clientName(KeyEncryptionAlgorithm.RSA_AES_KEY_WRAP_256,
-  "RsaAesKeyWrap256",
-  "javascript"
-);
-@@clientName(KeyEncryptionAlgorithm.RSA_AES_KEY_WRAP_384,
-  "RsaAesKeyWrap384",
-  "javascript"
-);
+@@clientName(KeyEncryptionAlgorithm.CKM_RSA_AES_KEY_WRAP, "CkmRsaAesKeyWrap", "javascript");
+@@clientName(KeyEncryptionAlgorithm.RSA_AES_KEY_WRAP_256, "RsaAesKeyWrap256", "javascript");
+@@clientName(KeyEncryptionAlgorithm.RSA_AES_KEY_WRAP_384, "RsaAesKeyWrap384", "javascript");
