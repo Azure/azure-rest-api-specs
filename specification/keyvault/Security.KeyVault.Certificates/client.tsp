@@ -31,14 +31,8 @@ using KeyVault;
 @@clientName(CertificateIssuerSetParameters, "SetIssuerParameters", "go");
 @@clientName(CertificateIssuerUpdateParameters, "UpdateIssuerParameters", "go");
 @@clientName(CertificateMergeParameters, "MergeCertificateParameters", "go");
-@@clientName(CertificateOperationUpdateParameter,
-  "UpdateCertificateOperationParameter",
-  "go"
-);
-@@clientName(CertificateRestoreParameters,
-  "RestoreCertificateParameters",
-  "go"
-);
+@@clientName(CertificateOperationUpdateParameter, "UpdateCertificateOperationParameter", "go");
+@@clientName(CertificateRestoreParameters, "RestoreCertificateParameters", "go");
 @@clientName(CertificateUpdateParameters, "UpdateCertificateParameters", "go");
 
 @@clientName(getCertificates, "ListCertificateProperties", "go");
@@ -46,10 +40,7 @@ using KeyVault;
 @@clientName(getCertificateVersions, "ListCertificatePropertiesVersions", "go");
 @@clientName(getDeletedCertificates, "ListDeletedCertificateProperties", "go");
 @@clientName(CertificateListResult, "CertificatePropertiesListResult", "go");
-@@clientName(DeletedCertificateListResult,
-  "DeletedCertificatePropertiesListResult",
-  "go"
-);
+@@clientName(DeletedCertificateListResult, "DeletedCertificatePropertiesListResult", "go");
 
 @@clientName(getCertificateContacts, "GetContacts", "go");
 @@clientName(deleteCertificateContacts, "DeleteContacts", "go");
@@ -67,10 +58,7 @@ using KeyVault;
 @@clientName(DeletedCertificateItem, "DeletedCertificateProperties", "go");
 @@clientName(IssuerBundle, "Issuer", "go");
 @@clientName(CertificateIssuerItem, "IssuerProperties", "go");
-@@clientName(CertificateRestoreParameters.certificateBundleBackup,
-  "CertificateBackup",
-  "go"
-);
+@@clientName(CertificateRestoreParameters.certificateBundleBackup, "CertificateBackup", "go");
 
 @@clientName(AdministratorDetails, "AdministratorContact", "go");
 @@clientName(OrganizationDetails.admin_details, "AdminContacts", "go");
