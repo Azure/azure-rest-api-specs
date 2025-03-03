@@ -920,7 +920,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{blobServicesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default": {
       "get": {
         "operationId": "BlobServices_GetServiceProperties",
         "tags": [
@@ -946,13 +946,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1002,13 +995,6 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "parameters",
             "in": "body",
             "description": "The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
@@ -1045,7 +1031,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{blobServicesName}/containers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers": {
       "get": {
         "operationId": "BlobContainers_List",
         "tags": [
@@ -1071,13 +1057,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "$maxpagesize",
@@ -1141,7 +1120,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{blobServicesName}/containers/{containerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}": {
       "get": {
         "operationId": "BlobContainers_Get",
         "tags": [
@@ -1167,13 +1146,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "containerName",
@@ -1233,13 +1205,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "containerName",
@@ -1319,13 +1284,6 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
@@ -1391,13 +1349,6 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
@@ -1428,7 +1379,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{blobServicesName}/containers/{containerName}/clearLegalHold": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold": {
       "post": {
         "operationId": "BlobContainers_ClearLegalHold",
         "tags": [
@@ -1454,13 +1405,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "containerName",
@@ -1502,7 +1446,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{blobServicesName}/containers/{containerName}/immutabilityPolicies/{ImmutabilityPolicyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{ImmutabilityPolicyName}": {
       "get": {
         "operationId": "BlobContainers_GetImmutabilityPolicy",
         "tags": [
@@ -1528,13 +1472,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "containerName",
@@ -1612,13 +1549,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "containerName",
@@ -1710,13 +1640,6 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
@@ -1768,7 +1691,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{blobServicesName}/containers/{containerName}/immutabilityPolicies/{ImmutabilityPolicyName}/extend": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{ImmutabilityPolicyName}/extend": {
       "post": {
         "operationId": "BlobContainers_ExtendImmutabilityPolicy",
         "tags": [
@@ -1794,13 +1717,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "containerName",
@@ -1863,7 +1779,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{blobServicesName}/containers/{containerName}/immutabilityPolicies/{ImmutabilityPolicyName}/lock": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{ImmutabilityPolicyName}/lock": {
       "post": {
         "operationId": "BlobContainers_LockImmutabilityPolicy",
         "tags": [
@@ -1889,13 +1805,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "containerName",
@@ -1949,7 +1858,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{blobServicesName}/containers/{containerName}/lease": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/lease": {
       "post": {
         "operationId": "BlobContainers_Lease",
         "tags": [
@@ -1975,13 +1884,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "containerName",
@@ -2026,7 +1928,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{blobServicesName}/containers/{containerName}/migrate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/migrate": {
       "post": {
         "operationId": "BlobContainers_ObjectLevelWorm",
         "tags": [
@@ -2052,13 +1954,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "containerName",
@@ -2106,7 +2001,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{blobServicesName}/containers/{containerName}/setLegalHold": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold": {
       "post": {
         "operationId": "BlobContainers_SetLegalHold",
         "tags": [
@@ -2132,13 +2027,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "blobServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "containerName",

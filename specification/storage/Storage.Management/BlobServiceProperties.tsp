@@ -14,6 +14,7 @@ namespace Microsoft.Storage;
 /**
  * The properties of a storage account’s Blob service.
  */
+@singleton("default")
 @parentResource(StorageAccount)
 model BlobServiceProperties
   is Azure.ResourceManager.ProxyResource<BlobServicePropertiesProperties> {
