@@ -11,6 +11,16 @@ options:
     flavor: azure
     clear-output-folder: true
     namespace: "Azure.ResourceManager.Compute"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/compute"
+    package-dir: "armcompute"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
