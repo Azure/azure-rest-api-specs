@@ -249,7 +249,7 @@ suppressions:
       - $.definitions.SecretReferenceVolume
   - code: GetCollectionResponseSchema
     reason: We do not return instanceView property in our ContainerGroups_List operation, however we do return this 
-            property for individual Get operations on container groups. 
+            property for individual Get operations on container groups. This change has been part of our stable api versions for the last couple of years. 
     from:
       - containerInstance.json
     where:
