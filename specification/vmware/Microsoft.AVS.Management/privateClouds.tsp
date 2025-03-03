@@ -244,10 +244,6 @@ model PrivateCloudUpdateProperties {
 
   @doc("The type of DNS zone to use.")
   dnsZoneType?: DnsZoneType;
-
-  @doc("Display name of the resource.")
-  @added(Versions.v2024_09_01)
-  displayName?: string;
 }
 
 @doc("The properties of a private cloud resource")
@@ -352,10 +348,6 @@ model PrivateCloudProperties {
 
   @doc("The type of DNS zone to use.")
   dnsZoneType?: DnsZoneType;
-
-  @doc("Display name of the resource.")
-  @added(Versions.v2024_09_01)
-  displayName?: string;
 }
 
 @doc("An ExpressRoute Circuit")
