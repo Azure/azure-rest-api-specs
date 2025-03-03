@@ -68,3 +68,10 @@ model BlobServiceClientParameters {
 
 @@clientName(MetadataHeaders, "metadata", "rust");
 @@clientName(ObjectReplicationHeaders, "objectReplicationHeaders", "rust");
+
+@@alternateType(BlobPropertiesInternal.contentLength, uint64, "rust");
+@@alternateType(BlobContentLengthRequired.blobContentLength, uint64, "rust");
+@@alternateType(ContentLengthResponseHeader.contentLength, uint64, "rust");
+@@alternateType(ContentLengthParameter.contentLength, uint64, "rust");
+@@alternateType(StructuredContentLengthParameter.structuredContentLength, uint64, "rust");
+@@alternateType(StructuredContentLengthResponseHeader.structuredContentLength, uint64, "rust");
