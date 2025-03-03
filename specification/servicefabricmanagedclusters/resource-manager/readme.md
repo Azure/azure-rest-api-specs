@@ -9,7 +9,9 @@ Azure Service Fabric Managed Clusters are an evolution of the Azure Service Fabr
 [Azure Service Fabric](http://aka.ms/ServiceFabric) is a distributed systems platform that makes it easy to package, deploy, and manage scalable and reliable microservices.
 
 ---
+
 ## Getting Started
+
 To build the SDK for ServiceFabricManagedClustersManagementClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -66,7 +68,6 @@ directive:
       - $.definitions.ServiceResource.properties
     reason:
       - Currently systemData is not allowed.
-
 ```
 
 ### Tag: package-2024-11-preview
@@ -75,9 +76,7 @@ These settings apply only when `--tag=package-2024-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2024-11-preview'
 input-file:
-- Microsoft.ServiceFabric/preview/2024-11-01-preview/managedapplication.json
-- Microsoft.ServiceFabric/preview/2024-11-01-preview/managedcluster.json
-- Microsoft.ServiceFabric/preview/2024-11-01-preview/nodetype.json
+- Microsoft.ServiceFabric/preview/2024-11-01-preview/servicefabricmanagedclusters.json
 ```
 
 ### Tag: package-2024-09-preview
@@ -301,6 +300,7 @@ input-file:
 ```
 
 ### AutoRest v3 Suppressions
+
 ``` yaml
 suppressions:
     
@@ -315,8 +315,8 @@ suppressions:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -330,6 +330,8 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-java
 ```
 
 ## Python
