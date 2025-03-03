@@ -30,11 +30,18 @@ enum Versions {
 
 alias ProviderName = "Microsoft.CloudHealth";
 
-// Regex for all our resource name validations. Up to 260 characters, alphanumeric and hyphens, must start and end with an alphanumeric character
-alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$";
+// Regex for our health model resource name validations. Between 3 and 44 characters, alphanumeric and hyphens, must start with an alphabetic character and end with an alphanumeric character
+alias modelResourceNameRegex = "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$";
 
-@pattern(resourceNameRegex)
-@doc("String with regex validation to match the resource name requirements")
+@pattern(modelResourceNameRegex)
+@doc("String with regex validation to match the health model resource name requirements")
+scalar stringModelResourceName extends string;
+
+// Regex for all our proxy resource name validations. Up to 260 characters, alphanumeric and hyphens, must start and end with an alphanumeric character
+alias proxyResourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$";
+
+@pattern(proxyResourceNameRegex)
+@doc("String with regex validation to match the proxy resource name requirements")
 scalar stringResourceName extends string;
 
 @maxLength(4096)
@@ -49,7 +56,7 @@ model HealthModel is TrackedResource<HealthModelProperties> {
   @key("healthModelName")
   @path
   @segment("healthmodels")
-  name: stringResourceName;
+  name: stringModelResourceName;
 
   ...ManagedServiceIdentityProperty;
 }
