@@ -1,63 +1,83 @@
 @doc("Entity representing a Skillset.")
-@visibility("public")
+
 model SkillsetDescriptor {
+    @visibility(Lifecycle.Public)
     @doc("Namespace for the skillset")
     `namespace`: string;
 
+    @visibility(Lifecycle.Public)
     @doc("The name of the Skillset")
     name: string;
 
+    @visibility(Lifecycle.Public)
     @doc("The description of the Skillset")
     description: string;
 
+    @visibility(Lifecycle.Public)
     @doc("The description of the skillset that's displayed TODO postman/dev figure out where this is displayed")
     descriptionDisplay: string;
 
+    @visibility(Lifecycle.Public)
     @doc("The Skillset name that's displayed in the portal")
     disaplyName: string;
 
+    @visibility(Lifecycle.Public)
     @doc("The icon displayed for the skillset in the console")
     icon: string;
 
+    @visibility(Lifecycle.Public)
     @doc("The category of the Skillset")
     category: SkillsetCategory;
 
+    @visibility(Lifecycle.Public)
     @doc("CatalogScope of the Skillset")
     catalogScope: SkillsetCatalogScope;
 
+    @visibility(Lifecycle.Public)
     @doc("Whether the skillset is enabled TODO how is this different than Hidden")
     enabled: boolean;
 
+    @visibility(Lifecycle.Public)
     @doc("Whether the skillset is hidden TODO how is this different than enabled")
     hidden: boolean;
 
+    @visibility(Lifecycle.Public)
     @doc("The prerequisites of a skillset TODO what does this mean")
     prerequisites: string[] | null;
 
+    @visibility(Lifecycle.Public)
     @doc("The settings of a skillset")
     settings: SkillsetSetting[];
 
+    @visibility(Lifecycle.Public)
     @doc("The settings of a skillset")
     authorization: SkillsetAuth;
 
+    @visibility(Lifecycle.Public)
     @doc("The types of authentication supported by the skillset")
     supportedAuthTypes: SkillsetAuthType[];
 
+    @visibility(Lifecycle.Public)
     @doc("A list of feature flags. At least one of the feature flags is required to enabled in the prompt context in order for the skillset to be available")
     userVisibilityFeatureFlags: string[];
 
+    @visibility(Lifecycle.Public)
     @doc("Controls the conditions under which the users can see or use this skillset")
     userVisibility: SkillVisibility;
 
+    @visibility(Lifecycle.Public)
     @doc("Visibility flags required for the planner to user the skillset TODO confirm what this does")
     plannerVisibilityFeatureFlags: string[];
 
+    @visibility(Lifecycle.Public)
     @doc("Controls the conditions under a prompt can use this skillset")
     plannerVisibility: SkillVisibility;
 
+    @visibility(Lifecycle.Public)
     @doc("The user ID of the user who created this skillset.")
     creatorUserId: string;
 
+    @visibility(Lifecycle.Public)
     @doc("The ID of an Entra group that contains the owners for this Skillset")
     ownersGroupId: string;
 }
