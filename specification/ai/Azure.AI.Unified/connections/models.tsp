@@ -40,19 +40,6 @@ model Connection {
   target: string;
 }
 
-@doc("Paged collection of ModelVersion items.")
-@pagedResult
-model PagedConnection {
-  @doc("The list of connections.")
-  @extension("x-ms-identifiers", [])
-  @items
-  value: Connection[];
-
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: ResourceLocation<Connection>;
-}
-
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType
 @doc("The Type (or category) of the connection")
 union ConnectionCategory {
