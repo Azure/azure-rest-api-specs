@@ -111,8 +111,6 @@ op listExportedModels is languageOperations.ResourceList<
 >;
 
 interface ConversationAuthoringDeployment {
-  
-
   /**
    * Gets the details of a deployment.
    */
@@ -230,8 +228,7 @@ interface ConversationAuthoringDeployment {
 }
 
 interface ConversationAuthoringProject {
-
-/**
+  /**
    * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -325,8 +322,8 @@ interface ConversationAuthoringProject {
     {},
     Foundations.ErrorResponse
   >;
-  
-/**
+
+  /**
    * Swaps two existing deployments with each other.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -354,7 +351,7 @@ interface ConversationAuthoringProject {
     Foundations.ErrorResponse
   >;
 
-/**
+  /**
    * Gets the status of an existing swap deployment job.
    */
   getSwapDeploymentsStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringSwapDeploymentsJobState>;
