@@ -15,8 +15,8 @@ namespace Client;
   service: Azure.Batch,
 })
 interface BatchClient {
-  listApplications is Azure.Batch.Applications.listApplicationsOp;
-  getApplication is Azure.Batch.Applications.getApplicationOp;
+  listApplications is Azure.Batch.Applications.listApplications;
+  getApplication is Azure.Batch.Applications.getApplication;
 
   listPoolUsageMetrics is Azure.Batch.Pools.listPoolUsageMetrics;
   createPool is Azure.Batch.Pools.createPool;

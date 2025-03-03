@@ -24,7 +24,7 @@ op getApplicationCustomization(
   ...ApiVersionParameter,
 ): void;
 
-@@override(Azure.Batch.Applications.getApplicationOp,
+@@override(Azure.Batch.Applications.getApplication,
   getApplicationCustomization,
   "java"
 );
@@ -45,7 +45,7 @@ op listApplicationsCustomization(
   ...ApiVersionParameter,
 ): void;
 
-@@override(Azure.Batch.Applications.listApplicationsOp,
+@@override(Azure.Batch.Applications.listApplications,
   listApplicationsCustomization,
   "java"
 );
