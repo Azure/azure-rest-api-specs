@@ -11,14 +11,17 @@ namespace Microsoft.AgriculturePlatform;
  */
 union RelationshipType {
   string,
+
   /**
    * DerivedFrom.
    */
   DerivedFrom: "DerivedFrom",
+
   /**
    * Contains.
    */
   Child: "Child",
+
   /**
    * Parent.
    */
@@ -30,18 +33,22 @@ union RelationshipType {
  */
 union DestinationType {
   string,
+
   /**
    * Catalog.
    */
   Catalog: "Catalog",
+
   /**
    * Collection.
    */
   Collection: "Collection",
+
   /**
    * Item.
    */
   Item: "Item",
+
   /**
    * Asset.
    */
@@ -53,14 +60,17 @@ union DestinationType {
  */
 union DataFormat {
   string,
+
   /**
    * Image.
    */
   Image: "Image",
+
   /**
    * Shapefile.
    */
   Shapefile: "Shapefile",
+
   /**
    * Binary
    */
@@ -72,14 +82,17 @@ union DataFormat {
  */
 union GeoJsonObjectType {
   string,
+
   /**
    * Point.
    */
   Point: "Point",
+
   /**
    * Polygon.
    */
   Polygon: "Polygon",
+
   /**
    * MultiPolygon.
    */
@@ -91,10 +104,12 @@ union GeoJsonObjectType {
  */
 union AuthCredentialsKind {
   string,
+
   /**
    * OAuthClientCredentials.
    */
   OAuthClientCredentials: "OAuthClientCredentials",
+
   /**
    * ApiKeyAuthCredentials.
    */
@@ -106,6 +121,7 @@ union AuthCredentialsKind {
  */
 union ImageFormat {
   string,
+
   /**
    * TIF.
    */
@@ -120,10 +136,12 @@ model CatalogListResponse {
    * List of Catalogs.
    */
   value: Catalog[];
+
   /**
    * Skip token for getting next set of results.
    */
   skipToken?: string;
+
   /**
    * URL to do the POST request with same filters,
    * to get next set of items.
@@ -316,10 +334,12 @@ model CollectionListResponse {
    * List of Collections.
    */
   value: Collection[];
+
   /**
    * Skip token for getting next set of results.
    */
   skipToken?: string;
+
   /**
    * URL to do the POST request with same filters,
    * to get next set of items.
@@ -594,13 +614,11 @@ model ItemParameters {
    */
   // @visibility("read")
   // catalogId?: string;
-
   /**
    * CollectionId.
    */
   // @visibility("read")
   // collectionId?: string;
-
   /**
    * Assets.
    */
@@ -897,10 +915,12 @@ model ItemListResponse {
    * List of Items.
    */
   value: Item[];
+
   /**
    * Skip token for getting next set of results.
    */
   skipToken?: string;
+
   /**
    * URL to do the POST request with same filters,
    * to get next set of items.
@@ -1393,10 +1413,12 @@ model SchemaListResponse {
    * List of Schemas.
    */
   value: Schema[];
+
   /**
    * Skip token for getting next set of results.
    */
   skipToken?: string;
+
   /**
    * URL to do the POST request with same filters,
    * to get next set of items.
@@ -1514,10 +1536,10 @@ model CatalogCollection {
   collectionId?: string;
 }
 
-@resource("external/solutions")
 /**
  * Represents a resource solution in the Agriculture Platform Service.
  */
+@resource("external/solutions")
 model SolutionResource {
   /**
    * Dummy key for solution resource

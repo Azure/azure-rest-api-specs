@@ -11,7 +11,9 @@ using Azure.Core.Traits;
 
 namespace Microsoft.AgriculturePlatform;
 
-alias ServiceTraits = SupportsRepeatableRequests & NoClientRequestId & NoConditionalRequests;
+alias ServiceTraits = SupportsRepeatableRequests &
+  NoClientRequestId &
+  NoConditionalRequests;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
@@ -19,76 +21,77 @@ interface CatalogsOperations {
   /**
    * Returns a paginated list of Catalog resources.
    */
-  list is Operations.ResourceList<Catalog,QueryParametersTrait<
-  {
-    /**
-     * Names of the resource.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-    @query(#{ name: "names", explode: true })
-    names?: string[];
+  list is Operations.ResourceList<
+    Catalog,
+    QueryParametersTrait<{
+      /**
+       * Names of the resource.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+      @query(#{ name: "names", explode: true })
+      names?: string[];
 
-    /**
-     * Filters on key-value pairs within the Properties object.
-     * eg. "{testKey} eq {testValue}".
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-    @query(#{ name: "propertyFilters", explode: true })
-    propertyFilters?: string[];
+      /**
+       * Filters on key-value pairs within the Properties object.
+       * eg. "{testKey} eq {testValue}".
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+      @query(#{ name: "propertyFilters", explode: true })
+      propertyFilters?: string[];
 
-    /**
-     * Statuses of the resource.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-    @query(#{ name: "statuses", explode: true })
-    statuses?: string[];
+      /**
+       * Statuses of the resource.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+      @query(#{ name: "statuses", explode: true })
+      statuses?: string[];
 
-    /**
-     * Ids of the resource.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-    @query(#{ name: "ids", explode: true })
-    ids?: string[];
+      /**
+       * Ids of the resource.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+      @query(#{ name: "ids", explode: true })
+      ids?: string[];
 
-    /**
-     * Minimum creation date of resource (inclusive).
-     */
-    @query("minCreatedDateTime")
-    minCreatedDateTime?: utcDateTime;
+      /**
+       * Minimum creation date of resource (inclusive).
+       */
+      @query("minCreatedDateTime")
+      minCreatedDateTime?: utcDateTime;
 
-    /**
-     * Maximum creation date of resource (inclusive).
-     */
-    @query("maxCreatedDateTime")
-    maxCreatedDateTime?: utcDateTime;
+      /**
+       * Maximum creation date of resource (inclusive).
+       */
+      @query("maxCreatedDateTime")
+      maxCreatedDateTime?: utcDateTime;
 
-    /**
-     * Minimum last modified date of resource (inclusive).
-     */
-    @query("minLastModifiedDateTime")
-    minLastModifiedDateTime?: utcDateTime;
+      /**
+       * Minimum last modified date of resource (inclusive).
+       */
+      @query("minLastModifiedDateTime")
+      minLastModifiedDateTime?: utcDateTime;
 
-    /**
-     * Maximum last modified date of resource (inclusive).
-     */
-    @query("maxLastModifiedDateTime")
-    maxLastModifiedDateTime?: utcDateTime;
+      /**
+       * Maximum last modified date of resource (inclusive).
+       */
+      @query("maxLastModifiedDateTime")
+      maxLastModifiedDateTime?: utcDateTime;
 
-    /**
-     * Maximum number of items needed (inclusive).
-     * Minimum = 10, Maximum = 1000, Default value = 50.
-     */
-    @maxValue(1000)
-    @minValue(10)
-    @query("maxPageSize")
-    maxPageSize?: int32 = 50;
+      /**
+       * Maximum number of items needed (inclusive).
+       * Minimum = 10, Maximum = 1000, Default value = 50.
+       */
+      @maxValue(1000)
+      @minValue(10)
+      @query("maxPageSize")
+      maxPageSize?: int32 = 50;
 
-    /**
-     * Skip token for getting next set of results.
-     */
-    @query("skipToken")
-    skipToken?: string;
-  }>
+      /**
+       * Skip token for getting next set of results.
+       */
+      @query("skipToken")
+      skipToken?: string;
+    }>
   >;
 
   /**
@@ -111,76 +114,77 @@ interface CollectionsOperations {
   /**
    * Returns a paginated list of Collection resources.
    */
-  list is Operations.ResourceList<Collection,QueryParametersTrait<
-  {
-    /**
-     * Names of the resource.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-    @query(#{ name: "names", explode: true })
-    names?: string[];
+  list is Operations.ResourceList<
+    Collection,
+    QueryParametersTrait<{
+      /**
+       * Names of the resource.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+      @query(#{ name: "names", explode: true })
+      names?: string[];
 
-    /**
-     * Filters on key-value pairs within the Properties object.
-     * eg. "{testKey} eq {testValue}".
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-    @query(#{ name: "propertyFilters", explode: true })
-    propertyFilters?: string[];
+      /**
+       * Filters on key-value pairs within the Properties object.
+       * eg. "{testKey} eq {testValue}".
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+      @query(#{ name: "propertyFilters", explode: true })
+      propertyFilters?: string[];
 
-    /**
-     * Statuses of the resource.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-    @query(#{ name: "statuses", explode: true })
-    statuses?: string[];
+      /**
+       * Statuses of the resource.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+      @query(#{ name: "statuses", explode: true })
+      statuses?: string[];
 
-    /**
-     * Ids of the resource.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-    @query(#{ name: "ids", explode: true })
-    ids?: string[];
+      /**
+       * Ids of the resource.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+      @query(#{ name: "ids", explode: true })
+      ids?: string[];
 
-    /**
-     * Minimum creation date of resource (inclusive).
-     */
-    @query("minCreatedDateTime")
-    minCreatedDateTime?: utcDateTime;
+      /**
+       * Minimum creation date of resource (inclusive).
+       */
+      @query("minCreatedDateTime")
+      minCreatedDateTime?: utcDateTime;
 
-    /**
-     * Maximum creation date of resource (inclusive).
-     */
-    @query("maxCreatedDateTime")
-    maxCreatedDateTime?: utcDateTime;
+      /**
+       * Maximum creation date of resource (inclusive).
+       */
+      @query("maxCreatedDateTime")
+      maxCreatedDateTime?: utcDateTime;
 
-    /**
-     * Minimum last modified date of resource (inclusive).
-     */
-    @query("minLastModifiedDateTime")
-    minLastModifiedDateTime?: utcDateTime;
+      /**
+       * Minimum last modified date of resource (inclusive).
+       */
+      @query("minLastModifiedDateTime")
+      minLastModifiedDateTime?: utcDateTime;
 
-    /**
-     * Maximum last modified date of resource (inclusive).
-     */
-    @query("maxLastModifiedDateTime")
-    maxLastModifiedDateTime?: utcDateTime;
+      /**
+       * Maximum last modified date of resource (inclusive).
+       */
+      @query("maxLastModifiedDateTime")
+      maxLastModifiedDateTime?: utcDateTime;
 
-    /**
-     * Maximum number of items needed (inclusive).
-     * Minimum = 10, Maximum = 1000, Default value = 50.
-     */
-    @maxValue(1000)
-    @minValue(10)
-    @query("maxPageSize")
-    maxPageSize?: int32 = 50;
+      /**
+       * Maximum number of items needed (inclusive).
+       * Minimum = 10, Maximum = 1000, Default value = 50.
+       */
+      @maxValue(1000)
+      @minValue(10)
+      @query("maxPageSize")
+      maxPageSize?: int32 = 50;
 
-    /**
-     * Skip token for getting next set of results.
-     */
-    @query("skipToken")
-    skipToken?: string;
-  }>
+      /**
+       * Skip token for getting next set of results.
+       */
+      @query("skipToken")
+      skipToken?: string;
+    }>
   >;
 
   /**
@@ -204,7 +208,11 @@ interface FileOperations {
    * Deletes file.
    */
   @action("delete")
-  delete is Operations.ResourceCollectionAction<FileResource, File, NoContentResponse>;
+  delete is Operations.ResourceCollectionAction<
+    FileResource,
+    File,
+    NoContentResponse
+  >;
 
   /**
    * Downloads and returns file Stream as response for the given input filePath.
@@ -227,7 +235,7 @@ interface FileOperations {
    * Uploads a file.
    */
   @action("upload")
-  upload is Operations.ResourceCollectionAction<FileResource, {} , File>;
+  upload is Operations.ResourceCollectionAction<FileResource, {}, File>;
 }
 
 interface ItemsOperations {
@@ -235,7 +243,11 @@ interface ItemsOperations {
    * Creates or updates a Item resource.
    */
   @action("create")
-  create is Operations.ResourceCollectionAction<Item, ItemParameters, ItemResponse>;
+  create is Operations.ResourceCollectionAction<
+    Item,
+    ItemParameters,
+    ItemResponse
+  >;
 
   /**
    * Gets a specified Item resource.
@@ -299,11 +311,10 @@ interface SatelliteOperations {
    */
   @action("fetch")
   fetchItems is Operations.ResourceCollectionAction<
-  SatelliteResource,
+    SatelliteResource,
     SatelliteFetchRequest,
     SatelliteFetchResponse,
-    QueryParametersTrait<
-    {
+    QueryParametersTrait<{
       /**
        * Maximum number of items needed (inclusive). Minimum = 1, Maximum = 100, Default
        * value = 10.
@@ -320,10 +331,8 @@ interface SatelliteOperations {
       @minValue(1)
       @query("skip")
       skip?: int32;
-    }
-    >
+    }>
   >;
-  
 
   /**
    * Searches for STAC items by collection id, bbox, intersecting geometry, start
@@ -331,29 +340,27 @@ interface SatelliteOperations {
    */
   @action("stac")
   searchItems is Operations.ResourceCollectionAction<
-  SatelliteResource,
+    SatelliteResource,
     SatelliteStacRequest,
     SearchFeaturesResponse,
-    QueryParametersTrait<
-      {
-        /**
-         * Maximum number of items needed (inclusive). Minimum = 1, Maximum = 100, Default
-         * value = 10.
-         */
-        @maxValue(100)
-        @minValue(1)
-        @query("maxpagesize")
-        maxpagesize?: int32 = 10;
+    QueryParametersTrait<{
+      /**
+       * Maximum number of items needed (inclusive). Minimum = 1, Maximum = 100, Default
+       * value = 10.
+       */
+      @maxValue(100)
+      @minValue(1)
+      @query("maxpagesize")
+      maxpagesize?: int32 = 10;
 
-        /**
-         * Skip token for getting next set of results.
-         */
-        @maxValue(2147483647)
-        @minValue(1)
-        @query("skip")
-        skip?: int32;
-      }
-    >
+      /**
+       * Skip token for getting next set of results.
+       */
+      @maxValue(2147483647)
+      @minValue(1)
+      @query("skip")
+      skip?: int32;
+    }>
   >;
 }
 
@@ -361,76 +368,77 @@ interface SchemasOperations {
   /**
    * Returns a paginated list of Schema resources.
    */
-  list is Operations.ResourceList<Schema,QueryParametersTrait<
-  {
-    /**
-     * Names of the resource.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-    @query(#{ name: "names", explode: true })
-    names?: string[];
+  list is Operations.ResourceList<
+    Schema,
+    QueryParametersTrait<{
+      /**
+       * Names of the resource.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+      @query(#{ name: "names", explode: true })
+      names?: string[];
 
-    /**
-     * Filters on key-value pairs within the Properties object.
-     * eg. "{testKey} eq {testValue}".
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-    @query(#{ name: "propertyFilters", explode: true })
-    propertyFilters?: string[];
+      /**
+       * Filters on key-value pairs within the Properties object.
+       * eg. "{testKey} eq {testValue}".
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+      @query(#{ name: "propertyFilters", explode: true })
+      propertyFilters?: string[];
 
-    /**
-     * Statuses of the resource.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-    @query(#{ name: "statuses", explode: true })
-    statuses?: string[];
+      /**
+       * Statuses of the resource.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+      @query(#{ name: "statuses", explode: true })
+      statuses?: string[];
 
-    /**
-     * Ids of the resource.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-    @query(#{ name: "ids", explode: true })
-    ids?: string[];
+      /**
+       * Ids of the resource.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+      @query(#{ name: "ids", explode: true })
+      ids?: string[];
 
-    /**
-     * Minimum creation date of resource (inclusive).
-     */
-    @query("minCreatedDateTime")
-    minCreatedDateTime?: utcDateTime;
+      /**
+       * Minimum creation date of resource (inclusive).
+       */
+      @query("minCreatedDateTime")
+      minCreatedDateTime?: utcDateTime;
 
-    /**
-     * Maximum creation date of resource (inclusive).
-     */
-    @query("maxCreatedDateTime")
-    maxCreatedDateTime?: utcDateTime;
+      /**
+       * Maximum creation date of resource (inclusive).
+       */
+      @query("maxCreatedDateTime")
+      maxCreatedDateTime?: utcDateTime;
 
-    /**
-     * Minimum last modified date of resource (inclusive).
-     */
-    @query("minLastModifiedDateTime")
-    minLastModifiedDateTime?: utcDateTime;
+      /**
+       * Minimum last modified date of resource (inclusive).
+       */
+      @query("minLastModifiedDateTime")
+      minLastModifiedDateTime?: utcDateTime;
 
-    /**
-     * Maximum last modified date of resource (inclusive).
-     */
-    @query("maxLastModifiedDateTime")
-    maxLastModifiedDateTime?: utcDateTime;
+      /**
+       * Maximum last modified date of resource (inclusive).
+       */
+      @query("maxLastModifiedDateTime")
+      maxLastModifiedDateTime?: utcDateTime;
 
-    /**
-     * Maximum number of items needed (inclusive).
-     * Minimum = 10, Maximum = 1000, Default value = 50.
-     */
-    @maxValue(1000)
-    @minValue(10)
-    @query("maxPageSize")
-    maxPageSize?: int32 = 50;
+      /**
+       * Maximum number of items needed (inclusive).
+       * Minimum = 10, Maximum = 1000, Default value = 50.
+       */
+      @maxValue(1000)
+      @minValue(10)
+      @query("maxPageSize")
+      maxPageSize?: int32 = 50;
 
-    /**
-     * Skip token for getting next set of results.
-     */
-    @query("skipToken")
-    skipToken?: string;
-  }>
+      /**
+       * Skip token for getting next set of results.
+       */
+      @query("skipToken")
+      skipToken?: string;
+    }>
   >;
 
   /**
