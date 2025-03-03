@@ -47,7 +47,7 @@
   "paths": {
     "/catalogs": {
       "get": {
-        "operationId": "CatalogsOperations_Catalogs_List",
+        "operationId": "CatalogsOperations_List",
         "description": "Returns a paginated list of Catalog resources.",
         "parameters": [
           {
@@ -168,6 +168,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Catalogs_List": {
+            "$ref": "./examples/Catalogs_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -175,7 +180,7 @@
     },
     "/catalogs/{catalogId}": {
       "get": {
-        "operationId": "CatalogsOperations_Catalogs_Get",
+        "operationId": "CatalogsOperations_Get",
         "description": "Gets a specified Catalog resource.",
         "parameters": [
           {
@@ -208,10 +213,15 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Catalogs_Get": {
+            "$ref": "./examples/Catalogs_Get.json"
+          }
         }
       },
       "patch": {
-        "operationId": "CatalogsOperations_Catalogs_CreateOrUpdate",
+        "operationId": "CatalogsOperations_CreateOrUpdate",
         "description": "Creates or updates a Catalog resource.",
         "consumes": [
           "application/merge-patch+json"
@@ -228,6 +238,12 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "The resource instance.",
@@ -242,12 +258,64 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Catalog"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Catalog"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -262,10 +330,15 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Catalogs_CreateOrUpdate": {
+            "$ref": "./examples/Catalogs_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
-        "operationId": "CatalogsOperations_Catalogs_Delete",
+        "operationId": "CatalogsOperations_Delete",
         "description": "Deletes Catalog for given Catalog id.",
         "parameters": [
           {
@@ -277,11 +350,43 @@
             "description": "Id of the Catalog.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -295,12 +400,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Catalogs_Delete": {
+            "$ref": "./examples/Catalogs_Delete.json"
+          }
         }
       }
     },
     "/catalogs/{catalogId}/collections": {
       "get": {
-        "operationId": "CollectionsOperations_Collections_List",
+        "operationId": "CollectionsOperations_List",
         "description": "Returns a paginated list of Collection resources.",
         "parameters": [
           {
@@ -428,6 +538,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Collections_List": {
+            "$ref": "./examples/Collections_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -435,7 +550,7 @@
     },
     "/catalogs/{catalogId}/collections/{collectionId}": {
       "get": {
-        "operationId": "CollectionsOperations_Collections_Get",
+        "operationId": "CollectionsOperations_Get",
         "description": "Gets a specified Collection resource.",
         "parameters": [
           {
@@ -475,10 +590,15 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Collections_Get": {
+            "$ref": "./examples/Collections_Get.json"
+          }
         }
       },
       "patch": {
-        "operationId": "CollectionsOperations_Collections_CreateOrUpdate",
+        "operationId": "CollectionsOperations_CreateOrUpdate",
         "description": "Creates or updates a Collection resource.",
         "consumes": [
           "application/merge-patch+json"
@@ -502,6 +622,12 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "The resource instance.",
@@ -516,12 +642,64 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Collection"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Collection"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -536,10 +714,15 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Collections_CreateOrUpdate": {
+            "$ref": "./examples/Collections_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
-        "operationId": "CollectionsOperations_Collections_Delete",
+        "operationId": "CollectionsOperations_Delete",
         "description": "Deletes Collection for given Collection id.",
         "parameters": [
           {
@@ -558,11 +741,43 @@
             "description": "Id of the Collection.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -576,12 +791,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Collections_Delete": {
+            "$ref": "./examples/Collections_Delete.json"
+          }
         }
       }
     },
     "/catalogs/{catalogId}/collections/{collectionId}/items/{itemId}": {
       "get": {
-        "operationId": "ItemsOperations_Items_Get",
+        "operationId": "ItemsOperations_Get",
         "description": "Gets a specified Item resource.",
         "parameters": [
           {
@@ -628,10 +848,15 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Items_Get": {
+            "$ref": "./examples/Items_Get.json"
+          }
         }
       },
       "patch": {
-        "operationId": "ItemsOperations_Items_CreateOrUpdate",
+        "operationId": "ItemsOperations_CreateOrUpdate",
         "description": "Creates or updates a Item resource.",
         "consumes": [
           "application/merge-patch+json"
@@ -662,6 +887,12 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "The resource instance.",
@@ -676,12 +907,64 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Item"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Item"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -696,10 +979,15 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Items_CreateOrUpdate": {
+            "$ref": "./examples/Items_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
-        "operationId": "ItemsOperations_Items_Delete",
+        "operationId": "ItemsOperations_Delete",
         "description": "Deletes Item for given Item id.",
         "parameters": [
           {
@@ -725,11 +1013,43 @@
             "description": "Id of the Item.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -742,6 +1062,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Items_Delete": {
+            "$ref": "./examples/Items_Delete.json"
           }
         }
       }
@@ -769,6 +1094,12 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -782,6 +1113,32 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ItemResponse"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -795,6 +1152,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Items_Create": {
+            "$ref": "./examples/Items_Create.json"
           }
         }
       }
@@ -834,6 +1196,12 @@
             "x-ms-client-name": "maximumPageSize"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -847,6 +1215,32 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ItemListResponse"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -860,6 +1254,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Items_GetAllUnderCollection": {
+            "$ref": "./examples/Items_GetAllUnderCollection.json"
           }
         }
       }
@@ -892,6 +1291,12 @@
             "x-ms-client-name": "maximumPageSize"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -905,6 +1310,32 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ItemListResponse"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -918,6 +1349,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Items_SearchAcrossCollection": {
+            "$ref": "./examples/Items_SearchAcrossCollection.json"
           }
         }
       }
@@ -952,6 +1388,12 @@
             "maximum": 2147483647
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -965,6 +1407,32 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SatelliteFetchResponse"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -978,6 +1446,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Sattelite_FetchItems": {
+            "$ref": "./examples/Satellite_FetchItems.json"
           }
         }
       }
@@ -1012,6 +1485,12 @@
             "maximum": 2147483647
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -1025,6 +1504,32 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SearchFeaturesResponse"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -1038,6 +1543,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Sattelite_SearchItems": {
+            "$ref": "./examples/Satellite_SearchItems.json"
           }
         }
       }
@@ -1051,6 +1561,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -1064,6 +1580,32 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SamplePartnerResponse"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -1077,6 +1619,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_CancelJob": {
+            "$ref": "./examples/Solutions_CancelJob.json"
           }
         }
       }
@@ -1090,6 +1637,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -1103,6 +1656,32 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SamplePartnerResponse"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -1116,6 +1695,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_CreateJob": {
+            "$ref": "./examples/Solutions_CreateJob.json"
           }
         }
       }
@@ -1129,6 +1713,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -1142,6 +1732,32 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SamplePartnerResponse"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -1156,6 +1772,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Solution_GetData": {
+            "$ref": "./examples/Solutions_GetData.json"
+          }
         }
       }
     },
@@ -1166,6 +1787,12 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
           },
           {
             "name": "body",
@@ -1181,6 +1808,32 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SamplePartnerResponse"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -1195,6 +1848,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Solution_GetJob": {
+            "$ref": "./examples/Solutions_GetJob.json"
+          }
         }
       }
     },
@@ -1205,6 +1863,12 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
           },
           {
             "name": "body",
@@ -1220,6 +1884,32 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/WeatherResponse"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -1251,6 +1941,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -1261,7 +1957,33 @@
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1274,6 +1996,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "File_Delete": {
+            "$ref": "./examples/File_Delete.json"
           }
         }
       }
@@ -1300,6 +2027,12 @@
             }
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -1310,7 +2043,33 @@
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1323,6 +2082,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "File_Download": {
+            "$ref": "./examples/File_Download.json"
           }
         }
       }
@@ -1334,6 +2098,12 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
           }
         ],
         "responses": {
@@ -1341,6 +2111,32 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/File"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -1355,12 +2151,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "File_Upload": {
+            "$ref": "./examples/File_Upload.json"
+          }
         }
       }
     },
     "/schemas": {
       "get": {
-        "operationId": "SchemasOperations_Schemas_List",
+        "operationId": "SchemasOperations_List",
         "description": "Returns a paginated list of Schema resources.",
         "parameters": [
           {
@@ -1481,6 +2282,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Schemas_List": {
+            "$ref": "./examples/Schemas_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1488,7 +2294,7 @@
     },
     "/schemas/{schemaId}": {
       "get": {
-        "operationId": "SchemasOperations_Schemas_Get",
+        "operationId": "SchemasOperations_Get",
         "description": "Gets a specified Schema resource.",
         "parameters": [
           {
@@ -1521,10 +2327,15 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Schemas_Get": {
+            "$ref": "./examples/Schemas_Get.json"
+          }
         }
       },
       "patch": {
-        "operationId": "SchemasOperations_Schemas_CreateOrUpdate",
+        "operationId": "SchemasOperations_CreateOrUpdate",
         "description": "Creates or updates a Schema resource.",
         "consumes": [
           "application/merge-patch+json"
@@ -1541,6 +2352,12 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "The resource instance.",
@@ -1555,12 +2372,64 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Schema"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Schema"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -1575,10 +2444,15 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Schemas_CreateOrUpdate": {
+            "$ref": "./examples/Schemas_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
-        "operationId": "SchemasOperations_Schemas_Delete",
+        "operationId": "SchemasOperations_Delete",
         "description": "Deletes Schema for given Schema id.",
         "parameters": [
           {
@@ -1590,11 +2464,43 @@
             "description": "Id of the Schema.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1607,6 +2513,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Schemas_Delete": {
+            "$ref": "./examples/Schemas_Delete.json"
           }
         }
       }
@@ -1629,7 +2540,8 @@
         {
           "$ref": "#/definitions/AuthCredentials"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ApiKeyAuthCredentials"
     },
     "Asset": {
       "type": "object",
@@ -1658,6 +2570,7 @@
           "description": "Enum for different types of AuthCredentials supported."
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ]
@@ -1675,11 +2588,13 @@
         "values": [
           {
             "name": "OAuthClientCredentials",
-            "value": "OAuthClientCredentials"
+            "value": "OAuthClientCredentials",
+            "description": "OAuthClientCredentials."
           },
           {
             "name": "ApiKeyAuthCredentials",
-            "value": "ApiKeyAuthCredentials"
+            "value": "ApiKeyAuthCredentials",
+            "description": "ApiKeyAuthCredentials."
           }
         ]
       }
@@ -1878,18 +2793,22 @@
     },
     "CatalogListResponse": {
       "type": "object",
+      "description": "CatalogListResponse.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "List of Catalogs.",
           "items": {
             "$ref": "#/definitions/Catalog"
           }
         },
         "skipToken": {
-          "type": "string"
+          "type": "string",
+          "description": "Skip token for getting next set of results."
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "URL to do the POST request with same filters,\nto get next set of items."
         }
       },
       "required": [
@@ -2029,18 +2948,22 @@
     },
     "CollectionListResponse": {
       "type": "object",
+      "description": "Represents a response containing a list of collections.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "List of Collections.",
           "items": {
             "$ref": "#/definitions/Collection"
           }
         },
         "skipToken": {
-          "type": "string"
+          "type": "string",
+          "description": "Skip token for getting next set of results."
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "URL to do the POST request with same filters,\nto get next set of items."
         }
       },
       "required": [
@@ -2131,15 +3054,18 @@
         "values": [
           {
             "name": "Image",
-            "value": "Image"
+            "value": "Image",
+            "description": "Image."
           },
           {
             "name": "Shapefile",
-            "value": "Shapefile"
+            "value": "Shapefile",
+            "description": "Shapefile."
           },
           {
             "name": "Binary",
-            "value": "Binary"
+            "value": "Binary",
+            "description": "Binary"
           }
         ]
       }
@@ -2159,19 +3085,23 @@
         "values": [
           {
             "name": "Catalog",
-            "value": "Catalog"
+            "value": "Catalog",
+            "description": "Catalog."
           },
           {
             "name": "Collection",
-            "value": "Collection"
+            "value": "Collection",
+            "description": "Collection."
           },
           {
             "name": "Item",
-            "value": "Item"
+            "value": "Item",
+            "description": "Item."
           },
           {
             "name": "Asset",
-            "value": "Asset"
+            "value": "Asset",
+            "description": "Asset."
           }
         ]
       }
@@ -2203,7 +3133,7 @@
           "x-ms-identifiers": []
         },
         "innererror": {
-          "$ref": "#/definitions/InnerError",
+          "$ref": "#/definitions/InnerErrorModel",
           "description": "Inner error containing list of errors.See\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object\nfor InnerError reference document."
         }
       },
@@ -2269,7 +3199,8 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Dummy key for file resource"
+          "description": "Dummy key for file resource",
+          "readOnly": true
         }
       },
       "required": [
@@ -2281,8 +3212,8 @@
       "description": "GeoJSON (For more details: https://geojson.org/). Note: Coordinates are\nexpected in [Longitude, Latitude] format.",
       "properties": {
         "type": {
-          "type": "string",
-          "description": "Discriminator property for GeoJsonObject."
+          "$ref": "#/definitions/GeoJsonObjectType",
+          "description": "Type of GeoJSON object."
         }
       },
       "discriminator": "type",
@@ -2304,15 +3235,18 @@
         "values": [
           {
             "name": "Point",
-            "value": "Point"
+            "value": "Point",
+            "description": "Point."
           },
           {
             "name": "Polygon",
-            "value": "Polygon"
+            "value": "Polygon",
+            "description": "Polygon."
           },
           {
             "name": "MultiPolygon",
-            "value": "MultiPolygon"
+            "value": "MultiPolygon",
+            "description": "MultiPolygon."
           }
         ]
       }
@@ -2356,12 +3290,13 @@
         "values": [
           {
             "name": "TIF",
-            "value": "TIF"
+            "value": "TIF",
+            "description": "TIF."
           }
         ]
       }
     },
-    "InnerError": {
+    "InnerErrorModel": {
       "type": "object",
       "description": "Inner error containing list of errors.See\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object\nfor InnerError reference document.",
       "properties": {
@@ -2370,7 +3305,7 @@
           "description": "Specific error code than was provided by the containing error."
         },
         "innererror": {
-          "$ref": "#/definitions/InnerError",
+          "$ref": "#/definitions/InnerErrorModel",
           "description": "Inner error containing list of errors.See\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object\nfor InnerError reference document."
         }
       }
@@ -2537,18 +3472,22 @@
     },
     "ItemListResponse": {
       "type": "object",
+      "description": "Represents a response containing a list of items.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "List of Items.",
           "items": {
             "$ref": "#/definitions/Item"
           }
         },
         "skipToken": {
-          "type": "string"
+          "type": "string",
+          "description": "Skip token for getting next set of results."
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "URL to do the POST request with same filters,\nto get next set of items."
         }
       },
       "required": [
@@ -2557,6 +3496,7 @@
     },
     "ItemParameters": {
       "type": "object",
+      "description": "ItemParameters model for Items api.",
       "properties": {
         "links": {
           "type": "array",
@@ -2711,6 +3651,7 @@
     },
     "ItemResponse": {
       "type": "object",
+      "description": "ItemResponse model for Items api.",
       "properties": {
         "links": {
           "type": "array",
@@ -3015,7 +3956,7 @@
       ],
       "x-ms-discriminator-value": "MultiPolygon"
     },
-    "OAuthClientCredentials": {
+    "OauthClientCredentials": {
       "type": "object",
       "description": "OAuthClientCredentials for clientId clientSecret auth.",
       "properties": {
@@ -3037,7 +3978,8 @@
         {
           "$ref": "#/definitions/AuthCredentials"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "OAuthClientCredentials"
     },
     "PagedCatalog": {
       "type": "object",
@@ -3170,15 +4112,18 @@
         "values": [
           {
             "name": "DerivedFrom",
-            "value": "DerivedFrom"
+            "value": "DerivedFrom",
+            "description": "DerivedFrom."
           },
           {
             "name": "Child",
-            "value": "Child"
+            "value": "Child",
+            "description": "Contains."
           },
           {
             "name": "Parent",
-            "value": "Parent"
+            "value": "Parent",
+            "description": "Parent."
           }
         ]
       }
@@ -3345,7 +4290,7 @@
           "description": "Start Date."
         },
         "credentials": {
-          "$ref": "#/definitions/OAuthClientCredentials",
+          "$ref": "#/definitions/OauthClientCredentials",
           "description": "OAuthClientCredentials for clientId clientSecret auth."
         },
         "endDateTime": {
@@ -3404,7 +4349,8 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Dummy key for satellite resource"
+          "description": "Dummy key for satellite resource",
+          "readOnly": true
         }
       },
       "required": [
@@ -3421,7 +4367,7 @@
           "description": "Start datetime of the time interval in which to search for Items."
         },
         "credentials": {
-          "$ref": "#/definitions/OAuthClientCredentials",
+          "$ref": "#/definitions/OauthClientCredentials",
           "description": "OAuthClientCredentials for clientId clientSecret auth."
         },
         "provider": {
@@ -3586,18 +4532,22 @@
     },
     "SchemaListResponse": {
       "type": "object",
+      "description": "Represents a response containing a list of schemas.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "List of Schemas.",
           "items": {
             "$ref": "#/definitions/Schema"
           }
         },
         "skipToken": {
-          "type": "string"
+          "type": "string",
+          "description": "Skip token for getting next set of results."
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "URL to do the POST request with same filters,\nto get next set of items."
         }
       },
       "required": [
@@ -3697,10 +4647,12 @@
     },
     "SolutionResource": {
       "type": "object",
+      "description": "Represents a resource solution in the Agriculture Platform Service.",
       "properties": {
         "key": {
           "type": "string",
-          "description": "Dummy key for solution resource"
+          "description": "Dummy key for solution resource",
+          "readOnly": true
         }
       },
       "required": [
@@ -4128,7 +5080,8 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Dummy key for satellite resource"
+          "description": "Dummy key for satellite resource",
+          "readOnly": true
         }
       },
       "required": [
@@ -4175,6 +5128,25 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {
+      "name": "Repeatability-First-Sent",
+      "in": "header",
+      "description": "Specifies the date and time at which the request was first created.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityFirstSent"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId": {
+      "name": "Repeatability-Request-ID",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityRequestId"
     }
   }
 }
