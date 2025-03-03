@@ -253,7 +253,7 @@ suppressions:
     from:
       - containerInstance.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroups"].get.operationId
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroups"].get.responses
 ```
 
 ---
