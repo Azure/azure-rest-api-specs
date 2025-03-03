@@ -260,7 +260,7 @@ model ListConnectionStringsResult {
 /** Connection string for the mongo cluster */
 model ConnectionString {
   /** Value of the connection string */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @clientName("uri", "csharp")
   connectionString?: string;
 
