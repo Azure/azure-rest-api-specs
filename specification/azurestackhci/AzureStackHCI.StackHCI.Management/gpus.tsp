@@ -110,7 +110,7 @@ model HciGpuDesiredProperties {
 model HciGpuReportedProperties {
   @doc("List of GPU details for this edge device.")
   @visibility("read")
-  @extension("x-ms-identifiers", #["gpuId"])
+  @Azure.ResourceManager.identifiers(#["gpuId"])
   gpuDetails?: GpuDetails[];
 }
 
@@ -189,7 +189,7 @@ model GpuDetails {
   assignmentStatus?: string;
 
   @visibility("read")
-  @extension("x-ms-identifiers", #["workloadName"])
+  @Azure.ResourceManager.identifiers(#["workloadName"])
   @doc("workload details to which GPU is assigned.")
   workloads?: WorkloadDetails[];
 }
@@ -213,7 +213,7 @@ model WorkloadDetails {
   workloadType?: string;
 
   @doc("The partition details for a workload using GPU-P.")
-  @extension("x-ms-identifiers", #["uniqueId"])
+  @Azure.ResourceManager.identifiers(#["uniqueId"])
   @visibility("read")
   partitionDetails?: PartitionDetails[];
 

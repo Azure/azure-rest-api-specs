@@ -102,7 +102,7 @@ model CommunityEndpointDestinationRule is EndpointRuleBase {
 model CommunityEndpointProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
   @added(Microsoft.Mission.Versions.v2023_11_01_preview)
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("Community Endpoint Rule Collection.")
   ruleCollection: CommunityEndpointDestinationRule[];
 

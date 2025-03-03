@@ -198,7 +198,6 @@ model LocalAvailabilityZones {
   localAvailabilityZoneMode?: LocalAvailabilityZoneMode;
 
   @doc("Nodes belonging to a particular zone")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   nodes?: string[];
 }
 
@@ -251,7 +250,7 @@ model DeploymentStorageNetworks {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @doc("List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.")
-  @OpenAPI.extension("x-ms-identifiers", #["physicalNode"])
+  @Azure.ResourceManager.identifiers(#["physicalNode"])
   storageAdapterIPInfo?: DeploymentStorageAdapterIPInfo[];
 }
 
@@ -401,7 +400,7 @@ model DeviceConfiguration {
 
 @doc("Network configuration.")
 model NetworkConfiguration {
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("List of network adapters.")
   networkAdapters: NetworkAdapter[];
 }

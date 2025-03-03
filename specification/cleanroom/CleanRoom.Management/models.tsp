@@ -175,7 +175,7 @@ model ConsortiumProperties {
   /**
    * Gets or sets the list of members to be added to the consortium.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   members?: ConsortiumMember[];
 
   /**

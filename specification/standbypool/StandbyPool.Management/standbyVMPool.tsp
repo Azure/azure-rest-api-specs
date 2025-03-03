@@ -44,7 +44,6 @@ model StandbyVirtualMachinePoolResourceProperties {
   elasticityProfile?: StandbyVirtualMachinePoolElasticityProfile;
 
   @doc("Specifies the desired state of virtual machines in the pool.")
-  @extension("x-ms-identifiers", #["vmState"])
   virtualMachineState: VirtualMachineState;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"

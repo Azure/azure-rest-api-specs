@@ -130,7 +130,7 @@ model CompositeSolutionProperties {
   // This isn't actually a secret, but a reference to a secret in AKV, so is it safe to return back in the read request?
   @visibility("read", "create", "update")
   @doc("Array of secret")
-  @OpenAPI.extension("x-ms-identifiers", #["credentialName"])
+  @Azure.ResourceManager.identifiers(#["credentialName"])
   credentials?: Array<KeyVaultSecretReference>;
 
   // TODO: Do we need this?
@@ -250,7 +250,7 @@ model Parameter {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
   @doc("Allowed values")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   allowedValues?: Array<{}>;
 }
 
@@ -279,7 +279,7 @@ model Credential {
 model DetailedStatusResponse {
   @doc("Array of responses")
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @Azure.ResourceManager.identifiers(#["resourceId"])
   value: Array<MixinDetailedStatus>;
 }
 

@@ -513,7 +513,7 @@ scalar AllocationEndpointResourceId
 //  @doc("List of endpoints for geoBased allocation type.")
 //  @maxItems(10)
 //  @minItems(1)
-//  @extension("x-ms-identifiers", #["resourceId"])
+//  @Azure.ResourceManager.identifiers(#["resourceId"])
 //  endpoints: Array<GeoBasedAllocationEndpoint>;
 //}
 
@@ -525,7 +525,7 @@ scalar AllocationEndpointResourceId
 //  @doc("List of endpoints for evenly weighted allocation type.")
 //  @maxItems(10)
 //  @minItems(1)
-//  @extension("x-ms-identifiers", #["resourceId"])
+//  @Azure.ResourceManager.identifiers(#["resourceId"])
 //  endpoints: Array<AllocationEndpoint>;
 //  // todo no optional (to be tested)
 //}
@@ -538,7 +538,7 @@ model EvenlyDistributedAllocationRule extends AllocationRule {
   @doc("List of endpoints for evenly distributed allocation type.")
   @maxItems(10)
   @minItems(1)
-  @extension("x-ms-identifiers", #["resourceId"])
+  @Azure.ResourceManager.identifiers(#["resourceId"])
   endpoints: Array<AllocationEndpoint>;
 }
 
@@ -914,7 +914,7 @@ model PatchEvenlyDistributedAllocationRule extends AllocationRulePatch {
   @doc("List of endpoints for evenly distributed allocation type.")
   @maxItems(10)
   @minItems(1)
-  @extension("x-ms-identifiers", #["resourceId"])
+  @Azure.ResourceManager.identifiers(#["resourceId"])
   endpoints?: Array<PatchAllocationEndpoint>;
 }
 

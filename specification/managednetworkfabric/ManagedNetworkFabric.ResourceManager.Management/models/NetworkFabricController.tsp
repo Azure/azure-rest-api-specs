@@ -10,11 +10,11 @@ model NetworkFabricControllerProperties {
   ...AnnotationResource;
 
   @doc("As part of an update, the Infrastructure ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Infrastructure services. (This is a Mandatory attribute)")
-  @OpenAPI.extension("x-ms-identifiers", #["expressRouteCircuitId"])
+  @Azure.ResourceManager.identifiers(#["expressRouteCircuitId"])
   infrastructureExpressRouteConnections?: ExpressRouteConnectionInformation[];
 
   @doc("As part of an update, the workload ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Workload services. (This is a Mandatory attribute).")
-  @OpenAPI.extension("x-ms-identifiers", #["expressRouteCircuitId"])
+  @Azure.ResourceManager.identifiers(#["expressRouteCircuitId"])
   workloadExpressRouteConnections?: ExpressRouteConnectionInformation[];
 
   @doc("InfrastructureServices IP ranges.")
@@ -117,11 +117,11 @@ model NetworkFabricControllerPatch {
 @doc("Network Fabric Controller patch properties.")
 model NetworkFabricControllerPatchProperties {
   @doc("As part of an update, the Infrastructure ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Infrastructure services. (This is a Mandatory attribute)")
-  @OpenAPI.extension("x-ms-identifiers", #["expressRouteCircuitId"])
+  @Azure.ResourceManager.identifiers(#["expressRouteCircuitId"])
   infrastructureExpressRouteConnections?: ExpressRouteConnectionInformation[];
 
   @doc("As part of an update, the workload ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Workload services. (This is a Mandatory attribute).")
-  @OpenAPI.extension("x-ms-identifiers", #["expressRouteCircuitId"])
+  @Azure.ResourceManager.identifiers(#["expressRouteCircuitId"])
   workloadExpressRouteConnections?: ExpressRouteConnectionInformation[];
 }
 

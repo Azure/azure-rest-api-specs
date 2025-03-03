@@ -46,7 +46,7 @@ model SecurityConfigurationProperties {
   scenario: Scenario;
 
   @doc("References for the secrets from keyvault")
-  @extension("x-ms-identifiers", #["secretUri"])
+  @Azure.ResourceManager.identifiers(#["secretUri"])
   secretReferences: SecretReference[];
 }
 

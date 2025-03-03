@@ -120,7 +120,7 @@ model LogCollectionReportedProperties {
 
   @doc("Details of the log collection session.")
   @visibility("read")
-  @extension("x-ms-identifiers", #["correlationId"])
+  @Azure.ResourceManager.identifiers(#["correlationId"])
   logCollectionSessionDetails?: LogCollectionSession[];
 }
 
@@ -351,7 +351,7 @@ model RemoteSupportReportedProperties {
 
   @doc("Details of the remote support session.")
   @visibility("read")
-  @extension("x-ms-identifiers", #["sessionId"])
+  @Azure.ResourceManager.identifiers(#["sessionId"])
   sessionDetails?: RemoteSupportSession[];
 }
 

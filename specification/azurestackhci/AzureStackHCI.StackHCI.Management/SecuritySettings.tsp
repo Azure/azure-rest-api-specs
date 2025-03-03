@@ -100,11 +100,11 @@ model SecurityProperties {
   securityComplianceStatus: SecurityComplianceStatus;
 
   @doc("Desired security settings")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   desiredSettings: Array<DesiredSetting>;
 
   @doc("Reported compliance states for security settings")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @visibility("read")
   reportedComplianceStates: Array<ReportedComplianceState>;
 
@@ -138,7 +138,7 @@ model ReportedComplianceState {
   value: ComplianceStatus;
 
   @doc("Per machine compliance state value and reason for it")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @visibility("read")
   perMachineStates: Array<MachineComplianceState>;
 }
@@ -205,7 +205,7 @@ model SecurityBaseline {
   percentScore: string;
 
   @doc("Per machine compliance state value and reason for it")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @visibility("read")
   perMachineStates: Array<MachineComplianceState>;
 }

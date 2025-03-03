@@ -34,7 +34,7 @@ model OccurrenceResultSummary {
   total: int32;
 
   @doc("The summarized status of the resources.")
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @Azure.ResourceManager.identifiers(#["code"])
   statuses: ResourceResultSummary[];
 }
 

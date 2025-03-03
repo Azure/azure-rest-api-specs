@@ -114,7 +114,7 @@ model EdgeMachineProperties {
   connectivityStatus?: EdgeMachineConnectivityStatus;
 
   @doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
-  @OpenAPI.extension("x-ms-identifiers", #["labelName"])
+  @Azure.ResourceManager.identifiers(#["labelName"])
   labels?: Labels[];
 
   @doc("Tracks the ID of the consuming resource, marking the machine as in-use.")
@@ -231,7 +231,7 @@ model EdgeMachinePatchProperties {
   siteDetails?: SiteDetails;
 
   @doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
-  @OpenAPI.extension("x-ms-identifiers", #["labelName"])
+  @Azure.ResourceManager.identifiers(#["labelName"])
   labels?: Labels[];
 }
 
@@ -351,12 +351,12 @@ model ReportedProperties {
 model NetworkProfile {
   @doc("List of NIC Details of edge machine.")
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #["adapterName"])
+  @Azure.ResourceManager.identifiers(#["adapterName"])
   nicDetails?: NicDetail[];
 
   @doc("List of switch Details of edge machine.")
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #["switchName"])
+  @Azure.ResourceManager.identifiers(#["switchName"])
   switchDetails?: SwitchDetail[];
 }
 
@@ -408,7 +408,6 @@ model NicDetail {
    * DNS Servers for NIC
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dnsServers?: string[];
 
   /**
@@ -478,7 +477,7 @@ model SwitchDetail {
    * This represents extensions installed on virtualSwitch.
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #["extensionName"])
+  @Azure.ResourceManager.identifiers(#["extensionName"])
   extensions?: SwitchExtension[];
 }
 
@@ -642,7 +641,7 @@ model ExtensionProfile {
    * List of Arc extensions installed on edge device.
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #["extensionName"])
+  @Azure.ResourceManager.identifiers(#["extensionName"])
   extensions?: Extension[];
 }
 
@@ -666,7 +665,7 @@ model Extension {
    * Error details while installing Arc extension.
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   errorDetails?: ErrorDetailModel[];
 
   /**

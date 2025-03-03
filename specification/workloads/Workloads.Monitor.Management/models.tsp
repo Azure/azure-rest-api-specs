@@ -482,13 +482,13 @@ model Db2JobConfigurationsProperties {
   /**
    * Gets or sets the list of Configuration parameters.
    */
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   parameters?: ConfigurationParameter[];
 
   /**
    * Gets or sets the list of actions
    */
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   actions?: ActionsParameter[];
 }
 
@@ -519,7 +519,7 @@ model ActionsParameter {
   /**
    * Gets or sets the list of function Name.
    */
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   parameters?: ConfigurationParameter[];
 }
 
@@ -1395,7 +1395,7 @@ model ComponentHealthDefinition {
   dependenciesSignalDefinition?: DependenciesSignalDefinition;
 
   /** The resource signal definition mappings. */
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   resourceSignalDefinitionMappings?: ResourceSignalDefinitionMapping[];
 }
 

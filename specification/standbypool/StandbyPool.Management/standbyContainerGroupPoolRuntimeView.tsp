@@ -39,7 +39,7 @@ model StandbyContainerGroupPoolRuntimeViewResource
 model StandbyContainerGroupPoolRuntimeViewResourceProperties {
   @doc("A list containing the counts of container groups in each possible state, as known by the StandbyPool resource provider.")
   @visibility("read")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   instanceCountSummary: ContainerGroupInstanceCountSummary[];
 
   @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
@@ -60,7 +60,7 @@ model ContainerGroupInstanceCountSummary {
   zone?: int64;
 
   @doc("The count of pooled container groups in each state.")
-  @extension("x-ms-identifiers", #["state"])
+  @Azure.ResourceManager.identifiers(#["state"])
   @removed(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   @renamedFrom(
     Microsoft.StandbyPool.Versions.`2024-08-01-preview`,
@@ -69,7 +69,7 @@ model ContainerGroupInstanceCountSummary {
   oldinstanceCountsByState: PoolResourceStateCount[];
 
   @doc("The count of pooled container groups in each state for the given zone.")
-  @extension("x-ms-identifiers", #["state"])
+  @Azure.ResourceManager.identifiers(#["state"])
   @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   instanceCountsByState: PoolContainerGroupStateCount[];
 }

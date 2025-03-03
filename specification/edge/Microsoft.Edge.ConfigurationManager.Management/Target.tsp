@@ -38,7 +38,7 @@ model SolutionTemplateParameter {
   solutionInstanceName?: string;
 
   @doc("Solution Dependencies")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   solutionDependencies?: SolutionDependencyParameter[];
 }
 
@@ -74,7 +74,7 @@ model SolutionDependencyParameter {
   targetId?: string;
 
   @doc("Solution dependencies")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   dependencies?: SolutionDependencyParameter[];
 }
 

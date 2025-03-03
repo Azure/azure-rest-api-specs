@@ -80,14 +80,12 @@ interface DevicePools {
 @doc("Request for Add/Remove Devices to the pool.")
 model AddDeviceRequest {
   @doc("List of resource ids of the devices to be modified")
-  @extension("x-ms-identifiers", #[])
   devices: string[];
 }
 
 @doc("Request for claiming/releasing devices of the pool.")
 model ClaimDeviceRequest {
   @doc("List of resource ids of the devices to be modified")
-  @extension("x-ms-identifiers", #[])
   devices: string[];
 
   @doc("Resource Id of group device belongs to.")
@@ -101,7 +99,7 @@ model DevicePoolProperties {
   provisioningState?: ProvisioningState;
 
   @doc("List of machines in device pool.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   devices?: DeviceDetail[];
 
   @doc("Custom Location Resource Id for the pool")

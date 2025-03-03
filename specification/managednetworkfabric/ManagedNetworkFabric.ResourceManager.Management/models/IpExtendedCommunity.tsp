@@ -18,7 +18,7 @@ model IpExtendedCommunityProperties {
   ]>;
 
   @doc("List of IP Extended Community Rules.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   ipExtendedCommunityRules: IpExtendedCommunityRule[];
 
   @doc("Details of the last operation performed on the resource")
@@ -67,6 +67,6 @@ model IpExtendedCommunityPatchProperties {
   ...AnnotationResource;
 
   @doc("List of IP Extended Community Rules.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   ipExtendedCommunityRules?: IpExtendedCommunityRule[];
 }

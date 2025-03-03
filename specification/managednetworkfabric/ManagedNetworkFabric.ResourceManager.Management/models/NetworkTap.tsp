@@ -24,7 +24,7 @@ model NetworkTapProperties {
   ]>;
 
   @doc("List of destinations to send the filter traffic.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   destinations: DestinationProperties[];
 
   @doc("Polling type.")
@@ -140,7 +140,7 @@ model NetworkTapPatchProperties {
   pollingType?: PollingType;
 
   @doc("List of destination properties to send the filter traffic.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   destinations?: DestinationPatchProperties[];
 }
 

@@ -348,7 +348,7 @@ model LinuxProfilePropertiesSsh {
   /**
    * The list of SSH public keys used to authenticate with VMs. A maximum of 1 key may be specified.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["keyData"])
+  @Azure.ResourceManager.identifiers(#["keyData"])
   publicKeys?: LinuxProfilePropertiesSshPublicKeysItem[];
 }
 
@@ -840,7 +840,7 @@ model ProvisionedClusterPoolUpgradeProfile {
   /**
    * List of available kubernetes versions for upgrade.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["kubernetesVersion", "isPreview"])
+  @Azure.ResourceManager.identifiers(#["kubernetesVersion", "isPreview"])
   upgrades?: ProvisionedClusterPoolUpgradeProfileProperties[];
 }
 
@@ -998,7 +998,7 @@ model ListCredentialResponseProperties {
    * Base64-encoded Kubernetes configuration file.
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #["name", "value"])
+  @Azure.ResourceManager.identifiers(#["name", "value"])
   kubeconfigs?: CredentialResult[];
 }
 
@@ -1144,7 +1144,7 @@ model VmSkuProperties {
    * The list of name-value pairs to describe VM SKU capabilities like MemoryGB, vCPUs, etc.
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #["name", "value"])
+  @Azure.ResourceManager.identifiers(#["name", "value"])
   capabilities?: VmSkuCapabilities[];
 
   /**
@@ -1195,13 +1195,13 @@ model VirtualNetworkProperties {
   /**
    * Range of IP Addresses for Kubernetes API Server and services if using HA Proxy load balancer
    */
-  @OpenAPI.extension("x-ms-identifiers", #["startIP", "endIP"])
+  @Azure.ResourceManager.identifiers(#["startIP", "endIP"])
   vipPool?: VirtualNetworkPropertiesVipPoolItem[];
 
   /**
    * Range of IP Addresses for Kubernetes node VMs
    */
-  @OpenAPI.extension("x-ms-identifiers", #["startIP", "endIP"])
+  @Azure.ResourceManager.identifiers(#["startIP", "endIP"])
   vmipPool?: VirtualNetworkPropertiesVmipPoolItem[];
 
   /**

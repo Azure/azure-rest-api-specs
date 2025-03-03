@@ -72,7 +72,7 @@ model PackageVersionProperties {
   subpath: string;
 
   /** Extra qualifying data for a package such as an OS, architecture, a distro, etc */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   qualifiers?: QualifierProperties[];
 
   /** The package url as per the https://github.com/package-url/purl-spec spec */

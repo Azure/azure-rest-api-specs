@@ -179,7 +179,7 @@ model ApprovalSettings {
   notificationOnApprovalDeletion?: ApprovalPolicy;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
+  @Azure.ResourceManager.identifiers(#["approverEntraId"])
   @doc("List of mandatory approvers for the approval request")
   mandatoryApprovers?: MandatoryApprover[];
 

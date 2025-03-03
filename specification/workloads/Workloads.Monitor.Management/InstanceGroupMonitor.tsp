@@ -35,11 +35,11 @@ model InstanceGroupMonitorProperties is ResourceCommonProperties {
   ]>;
 
   /** The discovery configurations */
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   discoveryConfigurations: DiscoveryConfiguration[];
 
   /** The group configurations */
-  @extension("x-ms-identifiers", #["groupBy"])
+  @Azure.ResourceManager.identifiers(#["groupBy"])
   groupConfigurations?: GroupConfiguration[];
 }
 

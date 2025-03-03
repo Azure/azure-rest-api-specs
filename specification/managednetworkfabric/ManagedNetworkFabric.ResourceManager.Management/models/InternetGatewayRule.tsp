@@ -47,7 +47,7 @@ model RuleProperties {
 
   @doc("List of header Name and source addresses associated with the header.")
   @added(Versions.v2024_06_15_preview)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   headerAddressList?: HeaderAddressProperties[];
 }
 

@@ -503,14 +503,14 @@ model WindowsClusterProperties {
   lastBillingTimestamp?: utcDateTime;
 
   @doc("List of secret locations.")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   secretsLocations?: SecretsLocationDetails[];
 
   @visibility("read")
   @doc("Supported Storage Type for HCI Cluster")
   clusterPattern?: ClusterPattern;
 
-  @extension("x-ms-identifiers", #["localAvailabilityZoneName"])
+  @Azure.ResourceManager.identifiers(#["localAvailabilityZoneName"])
   @doc("Local Availability Zone information for HCI cluster")
   localAvailabilityZones?: LocalAvailabilityZones[];
 
@@ -560,7 +560,7 @@ model LogCollectionProperties {
 
   @visibility("read")
   @doc("Log collection session details.")
-  @OpenAPI.extension("x-ms-identifiers", #["logStartTime"])
+  @Azure.ResourceManager.identifiers(#["logStartTime"])
   logCollectionSessionDetails?: ClusterLogCollectionSession[];
 }
 
@@ -634,12 +634,12 @@ model ClusterRemoteSupportProperties {
   remoteSupportType?: RemoteSupportType;
 
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("Remote Support node settings of the cluster.")
   remoteSupportNodeSettings?: ClusterRemoteSupportNodeSettings[];
 
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("Remote Support session details of the cluster.")
   remoteSupportSessionDetails?: PerNodeRemoteSupportSession[];
 }
@@ -777,7 +777,7 @@ model AzureLinuxClusterReportedProperties {
 
   @doc("List of nodes reported by the cluster.")
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #["edgeDeviceResourceId"])
+  @Azure.ResourceManager.identifiers(#["edgeDeviceResourceId"])
   nodes?: AzureLinuxClusterNode[];
 }
 
@@ -971,7 +971,7 @@ model SecretsLocationsChangeRequest {
   /**
    * List of secret locations
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   properties?: SecretsLocationDetails[];
 }
 

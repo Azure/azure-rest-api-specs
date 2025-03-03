@@ -586,7 +586,7 @@ model PgsqlSitesResourcePatch {
   /**
    * Resource tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
+  @Azure.ResourceManager.identifiers(#["key", "value"])
   tags?: Tag[];
 
   /**
@@ -676,7 +676,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
    * Dictionary of server parameters for the instance
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
+  @Azure.ResourceManager.identifiers(#["key", "value"])
   serverParameters?: ServerParameter[];
 
   /**
@@ -702,7 +702,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
+  @Azure.ResourceManager.identifiers(#["key", "value"])
   tags?: Tag[];
 }
 
@@ -801,7 +801,7 @@ model PgsqlInstanceResourcePatch {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
+  @Azure.ResourceManager.identifiers(#["key", "value"])
   tags?: Tag[];
 }
 
@@ -888,7 +888,7 @@ model Collation {
 //   /**
 //    * Resource tags.
 //    */
-//   @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
+//   @Azure.ResourceManager.identifiers(#["key", "value"])
 //   tags?: Tag[];
 // }
 
@@ -923,7 +923,7 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * The list of extensions in the database.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "version"])
+  @Azure.ResourceManager.identifiers(#["name", "version"])
   extensions?: Extension[];
 
   /**
@@ -954,7 +954,7 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
+  @Azure.ResourceManager.identifiers(#["key", "value"])
   tags?: Tag[];
 }
 
@@ -994,7 +994,7 @@ model PgsqlDatabaseResourcePatch {
   /**
    * The list of extensions in the database.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "version"])
+  @Azure.ResourceManager.identifiers(#["name", "version"])
   extensions?: Extension[];
 
   /**
@@ -1025,7 +1025,7 @@ model PgsqlDatabaseResourcePatch {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
+  @Azure.ResourceManager.identifiers(#["key", "value"])
   tags?: Tag[];
 }
 
@@ -1051,7 +1051,7 @@ model Extension {
 //   /**
 //    * Resource tags
 //    */
-//   @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
+//   @Azure.ResourceManager.identifiers(#["key", "value"])
 //   tags?: Tag[];
 // }
 

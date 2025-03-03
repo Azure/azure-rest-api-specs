@@ -31,7 +31,7 @@ model PolicyProperties {
   policySettings?: PolicySettings;
 
   @doc("The list of endpoints this policy protects")
-  @extension("x-ms-identifiers", #["endpointId"])
+  @Azure.ResourceManager.identifiers(#["endpointId"])
   @maxItems(MaxProtectedEndpointsCount)
   protectedEndpoints?: ProtectedEndpoint[] = #[];
 

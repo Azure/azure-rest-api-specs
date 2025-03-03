@@ -98,7 +98,7 @@ model CredentialProperties {
   data?: Data[];
 
   @visibility("read")
-  @extension("x-ms-identifiers", #["type"])
+  @Azure.ResourceManager.identifiers(#["type"])
   @doc("The resource status information.")
   statuses?: ResourceStatus[];
 }

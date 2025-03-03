@@ -73,7 +73,7 @@ model AwsEc2AccountAttributeProperties {
   attributeName?: string;
 
   @doc("<p>The values for the account attribute.</p>")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   attributeValues?: AccountAttributeValue[];
 }
 

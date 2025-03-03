@@ -312,7 +312,7 @@ model ErrorDefinition {
    * Internal error details.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   details?: ErrorDefinition[];
 }
 

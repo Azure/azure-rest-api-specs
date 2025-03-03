@@ -115,7 +115,7 @@ model ReservationBillingUsageReport {
   timestamp: string;
 
   @doc("A list of detailed billing usage properties")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   billingUsageProperties: BillingUsageProperty[];
 
   @doc("Overall status message of the billing usage report")
@@ -144,7 +144,7 @@ model BillingUsageProperty {
   statusMessage?: string;
 
   @doc("Optional list of sub-properties providing additional details")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   subProperties?: BillingUsageProperty[];
 }
 
@@ -657,7 +657,7 @@ model Avs {
   vasaProviderUrls: string[];
 
   @doc("Array of iSCSI endpoint and IQN.")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   vasaIscsiEndpoints: VasaIscsiEndpoints[];
 }
 
@@ -689,7 +689,7 @@ model HealthResponse {
   health: HealthDetails;
 
   @doc("List of health alerts")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   alerts: Alert[];
 }
 

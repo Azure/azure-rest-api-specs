@@ -647,7 +647,7 @@ model SAPSupportedResourceSkusResult {
   /**
    * Gets the list of SAP supported SKUs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   supportedSkus?: SAPSupportedSku[];
 }
 
@@ -733,7 +733,7 @@ model SAPDiskConfiguration {
   /**
    * The list of supported disks for a given VM Sku.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   supportedConfigurations?: DiskDetails[];
 }
 
@@ -838,7 +838,7 @@ model SAPAvailabilityZoneDetailsResult {
   /**
    * Gets the list of availability zone pairs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   availabilityZonePairs?: SAPAvailabilityZonePair[];
 }
 
@@ -975,7 +975,7 @@ model ErrorDefinition {
    * Internal error details.
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   details?: ErrorDefinition[];
 }
 
@@ -1100,7 +1100,7 @@ model SAPCentralServerProperties {
    * The list of virtual machines corresponding to the Central Services instance.
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: CentralServerVmDetails[];
 
   /**
@@ -1365,7 +1365,7 @@ model SAPDatabaseProperties {
    * The list of virtual machines corresponding to the Database resource.
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: DatabaseVmDetails[];
 
   /**
@@ -1498,7 +1498,7 @@ model SAPApplicationServerProperties {
    * The list of virtual machines.
    */
   @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: ApplicationServerVmDetails[];
 
   /**
@@ -1656,7 +1656,7 @@ model SshConfiguration {
   /**
    * The list of SSH public keys used to authenticate with linux based VMs.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   publicKeys?: SshPublicKey[];
 }
 
@@ -2123,7 +2123,7 @@ model VirtualMachineResourceNames {
   /**
    * The list of network interface name objects for the selected virtual machine. Currently, only one network interface is supported per virtual machine.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   networkInterfaces?: NetworkInterfaceResourceNames[];
 
   /**
@@ -2185,7 +2185,7 @@ model CentralServerFullResourceNames {
   /**
    * The list of names for all ASCS virtual machines to be deployed. The number of entries in this list should be equal to the number VMs to be created for ASCS layer. At maximum, there can be two virtual machines at this layer: ASCS and ERS.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   virtualMachines?: VirtualMachineResourceNames[];
 
   /**
@@ -2231,7 +2231,7 @@ model ApplicationServerFullResourceNames {
   /**
    * The list of virtual machine naming details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   virtualMachines?: VirtualMachineResourceNames[];
 
   /**
@@ -2247,7 +2247,7 @@ model DatabaseServerFullResourceNames {
   /**
    * The list of virtual machine naming details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   virtualMachines?: VirtualMachineResourceNames[];
 
   /**

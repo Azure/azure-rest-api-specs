@@ -67,12 +67,12 @@ model L3IsolationDomainProperties {
 @doc("List of IPv4 and IPv6 aggregate routes.")
 model AggregateRouteConfiguration {
   @doc("List of IPv4 Route prefixes.")
-  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   ipv4Routes?: AggregateRoute[];
 
   @doc("List of Ipv6Routes prefixes.")
-  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   ipv6Routes?: AggregateRoute[];
 }
@@ -80,12 +80,12 @@ model AggregateRouteConfiguration {
 @doc("List of IPv4 and IPv6 aggregate routes.")
 model AggregateRoutePatchConfiguration {
   @doc("List of IPv4 Route prefixes.")
-  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   ipv4Routes?: AggregateRoute[];
 
   @doc("List of Ipv6Routes prefixes.")
-  @OpenAPI.extension("x-ms-identifiers", #["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   ipv6Routes?: AggregateRoute[];
 }

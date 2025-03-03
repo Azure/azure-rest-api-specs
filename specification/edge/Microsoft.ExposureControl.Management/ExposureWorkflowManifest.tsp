@@ -26,7 +26,7 @@ model ExposureWorkflowManifestProperties {
   @doc("Overrides default start ring.")
   overrideDefaultStartRing?: string;
 
-  @extension("x-ms-identifiers", #["ringName"])
+  @Azure.ResourceManager.identifiers(#["ringName"])
   @doc("ring configuration properties.")
   ringConfigurations: Array<RingConfigurationProperties>;
 

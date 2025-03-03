@@ -38,11 +38,11 @@ model TargetVersionProperties {
   scope?: string;
 
   @doc("Defines the device topology for a target or instance.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   topologies?: TopologyProperties[];
 
   @doc("A list of components.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   components?: ComponentProperties[];
 
   @doc("The reconciliationPolicy of the TargetVersion.")

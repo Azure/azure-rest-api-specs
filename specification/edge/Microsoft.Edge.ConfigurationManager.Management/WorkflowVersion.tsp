@@ -40,7 +40,7 @@ model WorkflowVersionProperties {
   @visibility("read")
   configuration?: string;
 
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("A list of stage specs")
   @visibility("read")
   stageSpec: StageSpec[];

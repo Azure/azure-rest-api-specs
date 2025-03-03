@@ -141,6 +141,6 @@ model ExportResult {
   skippedResources?: string[];
 
   @doc("A list of errors derived during exporting each resource")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   errors?: ErrorDetail[];
 }

@@ -37,7 +37,7 @@ model LandingZoneConfigurationProperties {
   ]>;
 
   @doc("Array of tag objects in format of {'name':'a tag name', 'value':'a tag value'}.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tags[];
 
   @doc("To deploy firewall, choose the Standard/Premium based on the desired SKU. Choose None for no firewall and UseExisting for a pre existing one.")
@@ -71,7 +71,7 @@ model LandingZoneConfigurationProperties {
   azureBastionSubnetCidrBlock?: string;
 
   @doc("Landing zone children management group properties")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   landingZonesMgChildren?: LandingZoneManagementGroupProperties[];
 
   @doc("This will be applied to the root of the landing zone deployment.")

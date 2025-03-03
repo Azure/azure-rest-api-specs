@@ -42,12 +42,12 @@ model TargetProperties {
   scope?: string;
 
   @doc("Defines the device topology for a target or instance.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @added(Versions.v2024_08_01_preview)
   topologies?: TopologyProperties[];
 
   @doc("A list of components.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @added(Versions.v2024_08_01_preview)
   components?: ComponentProperties[];
 

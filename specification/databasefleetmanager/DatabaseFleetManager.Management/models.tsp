@@ -226,7 +226,7 @@ model Identity {
    * User identity ids
    */
   @visibility("read", "create", "update")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   userAssignedIdentities?: DatabaseIdentity[];
 
   /**
@@ -468,7 +468,7 @@ model RegisterServerDefinition {
    * Destination tier overrides.
    */
   @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   destinationTierOverrides?: DestinationTierOverride[];
 }
 

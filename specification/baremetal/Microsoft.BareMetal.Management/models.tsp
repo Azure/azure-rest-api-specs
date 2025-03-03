@@ -190,7 +190,7 @@ model ClusterPage<T extends {}> {
    * Items on this page
    */
   @Azure.Core.items
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   clusters: T[];
 }
 
@@ -274,7 +274,7 @@ model UpdateRoutesOnVirtualNetworkProperties {
   /**
    * List of Routes that needs to updated for VirtualNetwork.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["vnetId", "routeAddress"])
+  @Azure.ResourceManager.identifiers(#["vnetId", "routeAddress"])
   routesToVirtualNetwork: RoutesToVirtualNetworkOperationsProperties[];
 
   /**
@@ -369,7 +369,7 @@ model PeeringSettingProperties {
   /**
    * Peering links from a source vnet to remote vnet(s).
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   remotePeeringLinks: RemotePeeringLink[];
 
   /**

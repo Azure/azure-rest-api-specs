@@ -233,7 +233,7 @@ model WorkloadComponentProperties {
   /**
    * Resources that are part of the component. The entries in this list should be unique and correspond to a single Azure resource.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   resources: ResourceConfiguration[];
 
   /**
@@ -294,7 +294,7 @@ model UpdateWorkloadComponentProperties {
   /**
    * Resources that are part of the component.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   resources?: ResourceConfiguration[];
 
   /**

@@ -95,7 +95,7 @@ model OfferProperties {
   provisioningState?: ResourceProvisioningState;
 
   @doc("The marketplace skus")
-  @extension("x-ms-identifiers", #["marketplaceSkuId"])
+  @Azure.ResourceManager.identifiers(#["marketplaceSkuId"])
   marketplaceSkus?: MarketplaceSku[];
 }
 

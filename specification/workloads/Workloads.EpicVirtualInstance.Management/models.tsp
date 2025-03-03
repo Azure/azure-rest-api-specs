@@ -378,7 +378,7 @@ model ErrorDefinition {
    * Internal error details.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   details?: ErrorDefinition[];
 }
 
@@ -390,7 +390,7 @@ model WssServerProperties {
    * The list of virtual machines corresponding to the Wss Services instance.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: WssServerVmDetails[];
 
   /**
@@ -443,7 +443,7 @@ model DatabaseServerProperties {
    * The list of virtual machines corresponding to the Database resource.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: DatabaseServerVmDetails[];
 
   /**
@@ -496,7 +496,7 @@ model HyperspaceWebServerProperties {
    * The list of virtual machines.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: HyperspaceWebServerVmDetails[];
 
   /**
@@ -549,7 +549,7 @@ model PresentationServerProperties {
    * The list of virtual machines.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: PresentationServerVmDetails[];
 
   /**
@@ -602,7 +602,7 @@ model SharedServerProperties {
    * The list of virtual machines.
    */
   @visibility("read")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: SharedServerVmDetails[];
 
   /**

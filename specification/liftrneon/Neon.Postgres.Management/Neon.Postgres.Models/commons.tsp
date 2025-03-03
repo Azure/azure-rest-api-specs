@@ -31,7 +31,7 @@ model BaseEntity {
   provisioningState?: ResourceProvisioningState;
 
   @doc("Additional attributes for the entity")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   attributes?: Attributes[];
 }
 

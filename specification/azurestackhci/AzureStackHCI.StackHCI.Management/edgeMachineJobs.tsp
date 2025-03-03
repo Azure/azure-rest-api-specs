@@ -180,7 +180,7 @@ model ProvisioningRequest {
   osProfile: OsProvisionProfile;
 
   @doc("User configuration.")
-  @extension("x-ms-identifiers", #["userName"])
+  @Azure.ResourceManager.identifiers(#["userName"])
   userDetails: UserDetails[];
 
   @doc("Onboarding configuration.")
@@ -223,7 +223,7 @@ model RemoteSupportReportedProperties {
 
   @doc("Details of the remote support session.")
   @visibility("read")
-  @extension("x-ms-identifiers", #["sessionId"])
+  @Azure.ResourceManager.identifiers(#["sessionId"])
   sessionDetails?: RemoteSupportSession[];
 }
 
@@ -326,7 +326,7 @@ model LogCollectionReportedProperties {
 
   @doc("Details of the log collection session.")
   @visibility("read")
-  @extension("x-ms-identifiers", #["correlationId"])
+  @Azure.ResourceManager.identifiers(#["correlationId"])
   logCollectionSessionDetails?: LogCollectionSession[];
 }
 
@@ -523,7 +523,7 @@ model DeviceConfiguration {
 
 @doc("Network configuration.")
 model NetworkConfiguration {
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("List of network adapters.")
   networkAdapters: NetworkAdapter[];
 }

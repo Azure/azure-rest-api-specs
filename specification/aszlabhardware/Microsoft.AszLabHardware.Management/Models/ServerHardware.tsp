@@ -37,21 +37,21 @@ model ServerHardware {
 
   @visibility("read")
   @doc("The processors of the server")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   processors?: ServerHardwareProcessor[];
 
   @visibility("read")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("The drives of the server")
   drives?: ServerHardwareDrive[];
 
   @visibility("read")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("The GPUs of the server")
   graphicsCards?: ServerHardwareGraphicsCard[];
 
   @visibility("read")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("The network cards of the server")
   networkCards?: ServerHardwareNetworkCard[];
 }

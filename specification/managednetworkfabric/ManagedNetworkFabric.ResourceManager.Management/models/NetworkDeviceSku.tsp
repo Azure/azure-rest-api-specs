@@ -11,14 +11,14 @@ model NetworkDeviceSkuProperties {
   manufacturer?: string;
 
   @doc("List of supported version details of network device.")
-  @OpenAPI.extension("x-ms-identifiers", #["version"])
+  @Azure.ResourceManager.identifiers(#["version"])
   supportedVersions?: SupportedVersionProperties[];
 
   @doc("Available roles for the network device.")
   supportedRoleTypes?: NetworkDeviceRoleName[];
 
   @doc("List of network device interfaces.")
-  @OpenAPI.extension("x-ms-identifiers", #["identifier"])
+  @Azure.ResourceManager.identifiers(#["identifier"])
   interfaces?: DeviceInterfaceProperties[];
 
   @doc("Provisioning state of the resource.")
@@ -50,7 +50,7 @@ model DeviceInterfaceProperties {
   interfaceType?: string;
 
   @doc("List of supported connector types.")
-  @OpenAPI.extension("x-ms-identifiers", #["connectorType"])
+  @Azure.ResourceManager.identifiers(#["connectorType"])
   supportedConnectorTypes?: SupportedConnectorProperties[];
 }
 

@@ -244,6 +244,5 @@ model NetworkMonitorPatch {
 @doc("The Network Monitor Patch Properties.")
 model NetworkMonitorPatchProperties {
   @doc("BGP Monitoring Protocol (BMP) Configurations for the Network Monitor.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   bmpConfiguration?: BmpConfigurationPatchProperties;
 }

@@ -11,7 +11,7 @@ model RoutePolicyProperties {
   defaultAction?: CommunityActionTypes = CommunityActionTypes.Deny;
 
   @doc("Route Policy statements.")
-  @OpenAPI.extension("x-ms-identifiers", #["sequenceNumber"])
+  @Azure.ResourceManager.identifiers(#["sequenceNumber"])
   statements: RoutePolicyStatementProperties[];
 
   @doc("Arm Resource ID of Network Fabric.")
@@ -49,7 +49,7 @@ model RoutePolicyPatchableProperties {
   defaultAction?: CommunityActionTypes;
 
   @doc("Route Policy statements.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   statements?: RoutePolicyStatementPatchProperties[];
 }
 
@@ -66,7 +66,6 @@ model RoutePolicyStatementProperties {
   condition: StatementConditionProperties;
 
   @doc("Route policy action properties.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   action: StatementActionProperties;
 }
 
@@ -83,7 +82,6 @@ model RoutePolicyStatementPatchProperties {
   condition: StatementConditionPatchProperties;
 
   @doc("Route policy action properties.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   action: StatementActionPatchProperties;
 }
 

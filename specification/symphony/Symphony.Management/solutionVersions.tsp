@@ -19,7 +19,7 @@ model SolutionVersionProperties {
   provisioningState?: ProvisioningState;
 
   @doc("A list of components.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   components?: ComponentProperties[];
 
   @doc("The display name of the SolutionVersion resource.")

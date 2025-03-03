@@ -41,11 +41,11 @@ model Hierarchy {
 @doc("Context Properties")
 model ContextProperties {
   @doc("List of Capabilities")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   capabilities: Capability[];
 
   @doc("List of Hierarchies")
-  @extension("x-ms-identifiers", #[])
+  @Azure.ResourceManager.identifiers(#[])
   hierarchies: Hierarchy[];
 
   @doc("Provisioning state of resource")

@@ -226,7 +226,7 @@ model AutoActionResource {
   resourceId: ValidAutoActionResourceId;
 
   @doc("The desired notification settings for the specified resource.")
-  @OpenAPI.extension("x-ms-identifiers", #["destination"])
+  @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings?: Array<NotificationProperties>;
 }
 
@@ -262,7 +262,7 @@ model AutoActionProperties {
   schedule: AutoActionSchedule;
 
   @doc("The notification settings for the auto action")
-  @OpenAPI.extension("x-ms-identifiers", #["destination"])
+  @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings: Array<NotificationProperties>;
 
   @doc("Tell if the auto action is disabled or not")
