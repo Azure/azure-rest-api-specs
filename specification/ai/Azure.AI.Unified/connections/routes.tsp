@@ -13,11 +13,11 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Unified;
 
-alias ServiceTraits = SupportsClientRequestId &
+alias ConnectionServiceTraits = SupportsClientRequestId &
   SupportsRepeatableRequests &
   SupportsConditionalRequests;
 
-alias ConnectionOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias ConnectionOperations = Azure.Core.ResourceOperations<ConnectionServiceTraits>;
 
 interface Connections {
   @doc("Get a connection by name.")

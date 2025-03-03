@@ -16,16 +16,16 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Unified;
 
-alias ServiceTraits = SupportsClientRequestId &
+alias ModelServiceTraits = SupportsClientRequestId &
   SupportsRepeatableRequests &
   SupportsConditionalRequests;
 
-alias ModelOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias ModelOperations = Azure.Core.ResourceOperations<ModelServiceTraits>;
 
 interface Models {
 
   @doc("Get a deployed model.")
-  get is ModelOperations.ResourceRead<Model>
+  get is ModelOperations.ResourceRead<Model>;
 
   @doc("List all deployed models in the project")
   list is ModelOperations.ResourceList<
