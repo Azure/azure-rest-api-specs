@@ -29,7 +29,6 @@ using Microsoft.ServiceNetworking;
 @@flattenProperty(TrafficController.properties, "csharp");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(SecurityPolicy.properties, "csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@clientName(SecurityPolicy,
   "ApplicationGatewayForContainersSecurityPolicy",
   "csharp"
