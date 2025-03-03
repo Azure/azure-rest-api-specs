@@ -98,6 +98,9 @@ async function runLintDiff(
   changedFilesPath: string,
   outFile: string,
 ) {
+  // TODO: Does this belong in more global state?
+  const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
+
   // TODO: Should filter happen here or upstream? (probably upstream)
   // Read changed files, exclude any files that should be ignored
   const ignoreFilesWith = ["/examples/", "/quickstart-templates/", "/scenarios/"];
@@ -116,99 +119,14 @@ async function runLintDiff(
     return true;
   });
 
+  // In the future, the loop involving [beforePath, afterPath] can be eliminated
+  // as well as beforeState
+  const beforeState = await buildState(changedSpecFiles, beforePath);
+  const afterState = await buildState(changedSpecFiles, afterPath);
+
+  const changedFileAndTagsMap = await reconcileChangedFilesAndTags(beforeState, afterState);
+
   for (const rootPath of [beforePath, afterPath]) {
-    // Filter changed files to include only those that exist in the rootPath
-    const existingChangedFiles = [];
-    for (const file of changedSpecFiles) {
-      if (await pathExists(join(rootPath, file))) {
-        existingChangedFiles.push(file);
-      }
-    }
-
-    // Get affected services from changed files
-    // e.g. specification/service1/readme.md -> specification/service1
-    const affectedServiceDirectories = await getAffectedServices(existingChangedFiles);
-
-    // Get a map of a service's swagger files and their dependencies
-    // TODO: Use set or array?
-    const affectedSwaggerMap = new Map<string, string[]>();
-    for (const serviceDir of affectedServiceDirectories) {
-      const changedServiceFiles = existingChangedFiles.filter((file) =>
-        file.startsWith(serviceDir),
-      );
-      const serviceDependencyMap = await getSwaggerDependenciesMap(rootPath, serviceDir);
-
-      affectedSwaggerMap.set(
-        serviceDir,
-        await getAffectedSwaggers(changedServiceFiles, serviceDependencyMap),
-      );
-    }
-
-    // Use changedSpecFiles (which might not be present in the branch) to get
-    // a set of affected readme files.
-    // TODO: Is this even useful?
-    const affectedReadmes = await getAffectedReadmes(changedSpecFiles, rootPath);
-
-    const readmeTags = new Map<string, Set<string>>();
-    for (const readme of affectedReadmes) {
-      const readmeService = await getService(readme);
-      if (!affectedSwaggerMap.has(readmeService)) {
-        continue;
-      }
-
-      // TODO: The parser is used twice to get tags and input files. This can be
-      // made more efficient.
-      const readmeContent = await readFile(join(rootPath, readme), { encoding: "utf-8" });
-      for (const tag of getAllTags(readmeContent)) {
-        const inputFiles = (await getInputFiles(readmeContent, tag))?.map((file) =>
-          join(dirname(readme), file),
-        );
-        if (inputFiles === undefined || inputFiles.length === 0) {
-          continue;
-        }
-
-        // Readme + Tag Combo
-
-        // TODO: ensure ! is correct to do here
-        for (const swagger of affectedSwaggerMap.get(readmeService)!) {
-          if (inputFiles.includes(swagger)) {
-            if (!readmeTags.has(readme)) {
-              readmeTags.set(readme, new Set<string>());
-            }
-            readmeTags.get(readme)?.add(tag);
-          }
-        }
-      }
-    }
-
-    const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
-    const changedFileAndTagsMap = new Map<string, string[]>();
-    for (const [readme, tags] of readmeTags.entries()) {
-      const dedupedTags = await deduplicateTags(
-        [...tags],
-        await readFile(join(rootPath, readme), { encoding: "utf-8" }),
-      );
-
-      changedFileAndTagsMap.set(readme, dedupedTags);
-    }
-
-    // TODO: How do we ensure directly edited readme.md files are handled
-    // properly? e.g. is the whole file scanned or is it constrained to
-    // specific tags?
-
-    // For readme files that have changed but there are no affected swaggers,
-    // add them to the map with no tags
-    for (const changedReadme of affectedReadmes) {
-      if (!changedFileAndTagsMap.has(changedReadme)) {
-        changedFileAndTagsMap.set(changedReadme, []);
-      }
-    }
-
-    if (changedFileAndTagsMap.size === 0) {
-      console.log(`No readme or swagger files changed in ${rootPath}`);
-      continue;
-    }
-
     for (const [readme, tags] of changedFileAndTagsMap.entries()) {
       const changedFilePath = `${rootPath}/${readme}`;
       console.log(`Linting ${changedFilePath}`);
@@ -279,6 +197,153 @@ async function readFileList(changedFilesPath: string): Promise<string[]> {
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
+}
+
+type State = {
+  // Things needed to do the work
+  rootPath: string;
+  existingChangedFiles: string[];
+  affectedServiceDirectories: Set<string>;
+  affectedSwaggerMap: Map<string, string[]>;
+  affectedReadmes: string[];
+  readmeTags: Map<string, Set<string>>;
+
+  // Final list of things to work on
+  changedFileAndTagsMap: Map<string, string[]>;
+};
+
+export async function buildState(changedSpecFiles: string[], rootPath: string): Promise<State> {
+  // Filter changed files to include only those that exist in the rootPath
+  const existingChangedFiles = [];
+  for (const file of changedSpecFiles) {
+    if (await pathExists(join(rootPath, file))) {
+      existingChangedFiles.push(file);
+    }
+  }
+
+  // Get affected services from changed files
+  // e.g. specification/service1/readme.md -> specification/service1
+  const affectedServiceDirectories = await getAffectedServices(existingChangedFiles);
+
+  // Get a map of a service's swagger files and their dependencies
+  // TODO: Use set or array?
+  const affectedSwaggerMap = new Map<string, string[]>();
+  for (const serviceDir of affectedServiceDirectories) {
+    const changedServiceFiles = existingChangedFiles.filter((file) => file.startsWith(serviceDir));
+    const serviceDependencyMap = await getSwaggerDependenciesMap(rootPath, serviceDir);
+
+    affectedSwaggerMap.set(
+      serviceDir,
+      await getAffectedSwaggers(changedServiceFiles, serviceDependencyMap),
+    );
+  }
+
+  // Use changedSpecFiles (which might not be present in the branch) to get
+  // a set of affected readme files.
+  // TODO: Is this even useful?
+  const affectedReadmes = await getAffectedReadmes(changedSpecFiles, rootPath);
+
+  const readmeTags = new Map<string, Set<string>>();
+  for (const readme of affectedReadmes) {
+    const readmeService = await getService(readme);
+    if (!affectedSwaggerMap.has(readmeService)) {
+      continue;
+    }
+
+    // TODO: The parser is used twice to get tags and input files. This can be
+    // made more efficient.
+    const readmeContent = await readFile(join(rootPath, readme), { encoding: "utf-8" });
+    for (const tag of getAllTags(readmeContent)) {
+      const inputFiles = (await getInputFiles(readmeContent, tag))?.map((file) =>
+        join(dirname(readme), file),
+      );
+      if (inputFiles === undefined || inputFiles.length === 0) {
+        continue;
+      }
+
+      // Readme + Tag Combo
+
+      // TODO: ensure ! is correct to do here
+      for (const swagger of affectedSwaggerMap.get(readmeService)!) {
+        if (inputFiles.includes(swagger)) {
+          if (!readmeTags.has(readme)) {
+            readmeTags.set(readme, new Set<string>());
+          }
+          readmeTags.get(readme)?.add(tag);
+        }
+      }
+    }
+  }
+
+  // TODO: Deduplicate inside or outside state building?
+  const changedFileAndTagsMap = new Map<string, string[]>();
+  for (const [readme, tags] of readmeTags.entries()) {
+    const dedupedTags = await deduplicateTags(
+      [...tags],
+      await readFile(join(rootPath, readme), { encoding: "utf-8" }),
+    );
+
+    changedFileAndTagsMap.set(readme, dedupedTags);
+  }
+
+  // TODO: How do we ensure directly edited readme.md files are handled
+  // properly? e.g. is the whole file scanned or is it constrained to
+  // specific tags?
+
+  // For readme files that have changed but there are no affected swaggers,
+  // add them to the map with no tags
+  for (const changedReadme of affectedReadmes) {
+    if (!changedFileAndTagsMap.has(changedReadme)) {
+      changedFileAndTagsMap.set(changedReadme, []);
+    }
+  }
+
+  return {
+    rootPath,
+    existingChangedFiles,
+    affectedServiceDirectories,
+    affectedSwaggerMap,
+    affectedReadmes,
+    readmeTags,
+    changedFileAndTagsMap,
+  };
+}
+
+/**
+ * Build a map of changed readmes and tags to scan by examining state of the
+ * repo before and after the change
+ * @param before before the change
+ * @param after after the change
+ * @returns a map of readme files and tags to scan
+ */
+export async function reconcileChangedFilesAndTags(
+  before: State,
+  after: State,
+): Promise<Map<string, string[]>> {
+  const result = new Map<string, string[]>();
+
+  // Start with the state of "after"
+  for (const [readme, tags] of after.changedFileAndTagsMap.entries()) {
+    result.set(readme, tags);
+  }
+
+  // If a tag is deleted in after and exists in before, do NOT scan the tag
+  for (const [readme, tags] of before.changedFileAndTagsMap.entries()) {
+    if (!after.changedFileAndTagsMap.has(readme)) {
+      continue;
+    }
+
+    const afterTags = after.changedFileAndTagsMap.get(readme)!;
+    const deletedTags = tags.filter((tag) => !afterTags.includes(tag));
+    for (const deletedTag of deletedTags) {
+      result.set(
+        readme,
+        tags.filter((tag) => tag !== deletedTag),
+      );
+    }
+  }
+
+  return result;
 }
 
 /**
