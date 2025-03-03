@@ -1,5 +1,5 @@
 @doc("Entity representing a Skillset.")
-
+@access("public")
 model SkillsetDescriptor {
     @visibility("public")
     @doc("Namespace for the skillset")
