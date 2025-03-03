@@ -124,11 +124,16 @@ async function runLintDiff(
   const beforeState = await buildState(changedSpecFiles, beforePath);
   const afterState = await buildState(changedSpecFiles, afterPath);
 
-  const changedFileAndTagsMap = await reconcileChangedFilesAndTags(beforeState, afterState);
+  // TODO: Name
+  const [beforeMap, afterMap] = await reconcileChangedFilesAndTags(beforeState, afterState);
 
-  for (const rootPath of [beforePath, afterPath]) {
-    for (const [readme, tags] of changedFileAndTagsMap.entries()) {
-      const changedFilePath = `${rootPath}/${readme}`;
+  // TODO: Structure properly
+  for (const { path, map } of [
+    { path: beforePath, map: beforeMap },
+    { path: afterPath, map: afterMap },
+  ]) {
+    for (const [readme, tags] of map.entries()) {
+      const changedFilePath = `${path}/${readme}`;
       console.log(`Linting ${changedFilePath}`);
 
       let openApiType = await getOpenapiType(changedFilePath);
@@ -319,31 +324,37 @@ export async function buildState(changedSpecFiles: string[], rootPath: string): 
 export async function reconcileChangedFilesAndTags(
   before: State,
   after: State,
-): Promise<Map<string, string[]>> {
-  const result = new Map<string, string[]>();
+): Promise<Map<string, string[]>[]> {
+  const beforeFinal = new Map<string, string[]>();
+  const afterFinal = new Map<string, string[]>();
 
-  // Start with the state of "after"
+  // Establish base final state
+  // TODO: Ensure tags are properly copied and not mutated
+  for (const [readme, tags] of before.changedFileAndTagsMap.entries()) {
+    beforeFinal.set(readme, tags);
+  }
   for (const [readme, tags] of after.changedFileAndTagsMap.entries()) {
-    result.set(readme, tags);
+    afterFinal.set(readme, tags);
   }
 
   // If a tag is deleted in after and exists in before, do NOT scan the tag
-  for (const [readme, tags] of before.changedFileAndTagsMap.entries()) {
-    if (!after.changedFileAndTagsMap.has(readme)) {
+  for (const [readme, tags] of beforeFinal.entries()) {
+    // TODO: A deleted readme might also be cause to remove from scanning
+    if (!afterFinal.has(readme)) {
       continue;
     }
 
-    const afterTags = after.changedFileAndTagsMap.get(readme)!;
+    const afterTags = afterFinal.get(readme)!;
     const deletedTags = tags.filter((tag) => !afterTags.includes(tag));
     for (const deletedTag of deletedTags) {
-      result.set(
+      beforeFinal.set(
         readme,
         tags.filter((tag) => tag !== deletedTag),
       );
     }
   }
 
-  return result;
+  return [beforeFinal, afterFinal];
 }
 
 /**
