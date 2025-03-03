@@ -19,7 +19,6 @@ alias ServiceTraits = SupportsClientRequestId &
 
 alias ConnectionOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-@route("/connections")
 interface Connections {
   @doc("Get a connection by name.")
   get is ConnectionOperations.ResourceRead<Connection>;
