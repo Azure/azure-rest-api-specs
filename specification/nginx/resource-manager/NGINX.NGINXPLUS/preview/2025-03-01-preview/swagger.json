@@ -1053,7 +1053,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/wafPolicies/{wafPolicyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/wafPolicies/{wafPolicyName}": {
       "get": {
         "tags": [
           "NginxWafPolicy"
@@ -1071,18 +1071,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "The name of targeted Nginx deployment",
-            "required": true,
-            "type": "string"
+            "#/parameters/DeploymentNameParameter"
           },
           {
-            "in": "path",
-            "name": "wafPolicyName",
-            "description": "The name of Waf Policy",
-            "required": true,
-            "type": "string"
+            "#/parameters/WafPolicyNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1128,18 +1120,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "The name of targeted Nginx deployment",
-            "required": true,
-            "type": "string"
+            "#/parameters/DeploymentNameParameter"
           },
           {
-            "in": "path",
-            "name": "wafPolicyName",
-            "description": "The name of Waf Policy",
-            "required": true,
-            "type": "string"
+            "#/parameters/WafPolicyNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1211,27 +1195,16 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "The name of targeted Nginx deployment",
-            "required": true,
-            "type": "string"
+            "#/parameters/DeploymentNameParameter"
           },
           {
-            "in": "path",
-            "name": "wafPolicyName",
-            "description": "The name of Waf Policy",
-            "required": true,
-            "type": "string"
+            "#/parameters/WafPolicyNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the custom Waf Policy"
-          },
           "202": {
             "description": "Custom Waf Policy deletion accepted",
             "headers": {
@@ -1264,7 +1237,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/listDefaultWafPolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/listDefaultWafPolicies": {
       "post": {
         "tags": [
           "NginxWafPolicy"
@@ -1282,11 +1255,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "The name of targeted Nginx deployment",
-            "required": true,
-            "type": "string"
+            "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1313,7 +1282,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/wafPolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/wafPolicies": {
       "get": {
         "tags": [
           "NginxWafPolicy"
@@ -1331,11 +1300,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "The name of targeted Nginx deployment",
-            "required": true,
-            "type": "string"
+            "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2531,6 +2496,7 @@
     },
     "NginxDeploymentWafPolicyRequest": {
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string"
@@ -2562,6 +2528,7 @@
     },
     "NginxDeploymentWafPolicyResponse": {
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -2854,6 +2821,15 @@
       "in": "path",
       "name": "apiKeyName",
       "description": "The resource name of the API key",
+      "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WafPolicyNameParameter": {
+      "in": "path",
+      "name": "wafPolicyName",
+      "description": "The name of Waf Policy",
       "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$",
       "required": true,
       "type": "string",
