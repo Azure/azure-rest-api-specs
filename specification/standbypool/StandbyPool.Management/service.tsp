@@ -75,11 +75,11 @@ model PoolResourceStateCount {
 @doc("Displays StandbyPool status.")
 model PoolStatus {
   @doc("Displays the healthy state of the StandbyPool.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code: HealthStateCode;
 
   @doc("Displays the StandbyPool health state details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
