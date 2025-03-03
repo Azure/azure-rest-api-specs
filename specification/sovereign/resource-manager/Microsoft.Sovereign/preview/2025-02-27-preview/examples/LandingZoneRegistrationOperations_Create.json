@@ -9,10 +9,11 @@
     "landingZoneRegistrationName": "ExampleLZR",
     "resource": {
       "properties": {
-        "existingTopLevelMgId": "/providers/Microsoft.Management/managementGroups/mcfs",
-        "existingLandingZoneConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/TestResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA/landingZoneConfigurations/ExampleLZC",
+        "existingTopLevelMgId": "/providers/Microsoft.Management/managementGroups/mg-example",
+        "existingLandingZoneConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA/landingZoneConfigurations/ExampleLZC",
         "managedIdentity": {
-          "type": "SystemAssigned"
+          "type": "UserAssigned",
+          "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-example"
         }
       }
     }
@@ -22,13 +23,14 @@
       "body": {
         "properties": {
           "provisioningState": "Succeeded",
-          "existingTopLevelMgId": "/providers/Microsoft.Management/managementGroups/mcfs",
-          "existingLandingZoneConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/TestResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA/landingZoneConfigurations/ExampleLZC",
+          "existingTopLevelMgId": "/providers/Microsoft.Management/managementGroups/mg-example",
+          "existingLandingZoneConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA/landingZoneConfigurations/ExampleLZC",
           "managedIdentity": {
-            "type": "SystemAssigned"
+            "type": "UserAssigned",
+            "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-example"
           }
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/TestResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/LZAtestSI37/landingZoneRegistrations/ExampleLZR",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA/landingZoneRegistrations/ExampleLZR",
         "name": "ExampleLZR",
         "type": "microsoft.sovereign/landingzoneaccounts/landingzoneconfigurations",
         "systemData": {
@@ -47,14 +49,14 @@
       },
       "body": {
         "properties": {
-          "provisioningState": "Succeeded",
-          "existingTopLevelMgId": "/providers/Microsoft.Management/managementGroups/mcfs",
-          "existingLandingZoneConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/TestResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA/landingZoneConfigurations/ExampleLZC",
+          "provisioningState": "Accepted",
+          "existingTopLevelMgId": "/providers/Microsoft.Management/managementGroups/mg-example",
+          "existingLandingZoneConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA/landingZoneConfigurations/ExampleLZC",
           "managedIdentity": {
             "type": "SystemAssigned"
           }
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/TestResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/LZAtestSI37/landingZoneRegistrations/ExampleLZR",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA/landingZoneRegistrations/ExampleLZR",
         "name": "ExampleLZR",
         "type": "microsoft.sovereign/landingzoneaccounts/landingzoneconfigurations",
         "systemData": {
