@@ -179,7 +179,7 @@ export class TspConfigJavaAzPackageDirectorySubRule extends TspconfigEmitterOpti
 }
 
 // ----- TS management modular sub rules -----
-export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class _TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-ts", "generateMetadata", true);
   }
@@ -188,7 +188,16 @@ export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends Tspconfig
   }
 }
 
-export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "generate-metadata", true);
+  }
+  protected skip(config: any, folder: string) {
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
+export class _TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-ts", "hierarchyClient", false);
   }
@@ -197,7 +206,16 @@ export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends Tspconfig
   }
 }
 
-export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "hierarchy-client", false);
+  }
+  protected skip(config: any, folder: string) {
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
+export class _TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-ts", "experimentalExtensibleEnums", true);
   }
@@ -206,9 +224,27 @@ export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extend
   }
 }
 
-export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "experimental-extensible-enums", true);
+  }
+  protected skip(config: any, folder: string) {
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
+export class _TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-ts", "enableOperationGroup", true);
+  }
+  protected skip(config: any, folder: string) {
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
+export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "enable-operation-group", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -224,11 +260,24 @@ export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmit
   }
 }
 
-export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class _TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
       "@azure-tools/typespec-ts",
       "packageDetails.name",
+      new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
+    );
+  }
+  protected skip(config: any, folder: string) {
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
+export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-ts",
+      "[package-details].name",
       new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
     );
   }
@@ -414,11 +463,16 @@ export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzPackageDirectorySubRule(),
   new TspConfigTsMgmtModularGenerateMetadataTrueSubRule(),
+  new _TspConfigTsMgmtModularGenerateMetadataTrueSubRule(),
   new TspConfigTsMgmtModularHierarchyClientFalseSubRule(),
+  new _TspConfigTsMgmtModularHierarchyClientFalseSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
+  new _TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule(),
+  new _TspConfigTsMgmtModularEnableOperationGroupTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
+  new _TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),
