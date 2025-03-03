@@ -28,7 +28,7 @@ namespace MdsSolution.QueryApis {
   op queryEntityData is Operations.ResourceCollectionAction<
     PagedQueryRequest,
     PagedQueryRequest,
-    PagedResult<QueryResult>
+    PagedQueryResult
   >;
 
   @doc("Query the related nodes.")
@@ -37,7 +37,7 @@ namespace MdsSolution.QueryApis {
   op queryRelatedNodes is Operations.ResourceCollectionAction<
     QueryRequestRelatedNodes,
     QueryRequestRelatedNodes,
-    PagedResult<RelatedNodeResult>
+    PagedRelatedNodeResult
   >;
 
   @doc("Query the related entities data.")
@@ -46,7 +46,7 @@ namespace MdsSolution.QueryApis {
   op queryRelatedEntities is Operations.ResourceCollectionAction<
     QueryRequestRelatedEntitiesData,
     QueryRequestRelatedEntitiesData,
-    PagedResult<RelatedEntityData>
+    PagedRelatedEntityData
   >;
 
   @doc("Query the related entities data history.")
@@ -55,6 +55,6 @@ namespace MdsSolution.QueryApis {
   op queryRelatedEntitiesDataHistory is Operations.ResourceCollectionAction<
     QueryRequestRelatedEntitiesData,
     QueryRequestRelatedEntitiesData,
-    PagedResult<RelatedEntityData>
+    PagedRelatedEntityData
   >;
 }

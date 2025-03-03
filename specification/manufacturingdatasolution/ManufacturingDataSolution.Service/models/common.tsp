@@ -6,13 +6,6 @@ using Azure.Core;
 
 namespace MdsCommon;
 
-@doc("Represents a paginated result.")
-model PagedResult<T> {
-  @doc("The list of items.")
-  @pageItems
-  value: T[];
-}
-
 @doc("Represents a long running operation response.")
 model CommonAcceptedResponse {
   @statusCode

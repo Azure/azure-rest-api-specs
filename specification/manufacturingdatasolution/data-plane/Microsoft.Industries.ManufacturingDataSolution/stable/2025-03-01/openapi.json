@@ -301,13 +301,13 @@
                 "format": "uri",
                 "description": "The location of an instance of DataVersion"
               },
+              "Operation-Location": {
+                "type": "string",
+                "description": "The background job location."
+              },
               "background-jobid": {
                 "type": "string",
                 "description": "The background job identifier."
-              },
-              "operation-location": {
-                "type": "string",
-                "description": "The background job location."
               }
             }
           },
@@ -1179,20 +1179,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Represents a paginated result.",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The list of items.",
-                  "items": {
-                    "$ref": "#/definitions/QueryModels.QueryResult"
-                  }
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/QueryModels.PagedQueryResult"
             }
           },
           "default": {
@@ -1236,20 +1223,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Represents a paginated result.",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The list of items.",
-                  "items": {
-                    "$ref": "#/definitions/QueryModels.RelatedEntityData"
-                  }
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/QueryModels.PagedRelatedEntityData"
             }
           },
           "default": {
@@ -1293,20 +1267,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Represents a paginated result.",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The list of items.",
-                  "items": {
-                    "$ref": "#/definitions/QueryModels.RelatedEntityData"
-                  }
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/QueryModels.PagedRelatedEntityData"
             }
           },
           "default": {
@@ -1350,21 +1311,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Represents a paginated result.",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The list of items.",
-                  "items": {
-                    "$ref": "#/definitions/QueryModels.RelatedNodeResult"
-                  },
-                  "x-ms-identifiers": []
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/QueryModels.PagedRelatedNodeResult"
             }
           },
           "default": {
@@ -1968,6 +1915,55 @@
       "required": [
         "entityName",
         "pageIndex"
+      ]
+    },
+    "QueryModels.PagedQueryResult": {
+      "type": "object",
+      "description": "Represents a paged result of query results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of query results.",
+          "items": {
+            "$ref": "#/definitions/QueryModels.QueryResult"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QueryModels.PagedRelatedEntityData": {
+      "type": "object",
+      "description": "Represents a paged result of related entity data.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of related entity data.",
+          "items": {
+            "$ref": "#/definitions/QueryModels.RelatedEntityData"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QueryModels.PagedRelatedNodeResult": {
+      "type": "object",
+      "description": "Represents a paged result of related node results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of related node results.",
+          "items": {
+            "$ref": "#/definitions/QueryModels.RelatedNodeResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "QueryModels.QueryNextOperator": {

@@ -93,6 +93,14 @@ model PagedQueryRequest is QueryRequest {
   pageIndex: int32 = 1;
 }
 
+@doc("Represents a paged result of query results.")
+@pagedResult
+model PagedQueryResult {
+  @doc("The list of query results.")
+  @pageItems
+  value: QueryResult[];
+}
+
 @doc("Represents the result of a query.")
 model QueryResult {
   @doc("The unique identifier for the entity.")
@@ -150,6 +158,14 @@ model QueryRequestRelatedNodes is BasicQueryRequest {
   pageIndex: int32 = 1;
 }
 
+@doc("Represents a paged result of related entity data.")
+@pagedResult
+model PagedRelatedEntityData {
+  @doc("The list of related entity data.")
+  @pageItems
+  value: RelatedEntityData[];
+}
+
 @doc("Represents a related entity data.")
 model RelatedEntityData {
   @doc("The unique identifier of the related entity.")
@@ -181,6 +197,14 @@ model RelatedEntityData {
 
   @doc("The level of the equipment.")
   equipmentLevel?: string;
+}
+
+@doc("Represents a paged result of related node results.")
+@pagedResult
+model PagedRelatedNodeResult {
+  @doc("The list of related node results.")
+  @pageItems
+  value: RelatedNodeResult[];
 }
 
 @doc("Represents a related node result.")
@@ -222,18 +246,6 @@ model QueryRequestRelatedEntitiesData is BasicQueryRequest {
   @pageIndex
   pageIndex: int32 = 1;
 }
-
-// @doc("Represents a secondary query request.")
-// @resource("queryRequest")
-// model SecondaryQueryRequest {
-//   @doc("The name of the entity.")
-//   @key
-//   @visibility(Lifecycle.Read, Lifecycle.Update)
-//   entityName: string;
-
-//   @doc("The filters for the query.")
-//   filters?: Filter[];
-// }
 
 @doc("Represents a filter for a query.")
 model Filter {

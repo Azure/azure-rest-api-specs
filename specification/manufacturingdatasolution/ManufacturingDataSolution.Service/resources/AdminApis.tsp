@@ -31,7 +31,7 @@ namespace MdsSolution.AdminApis {
   alias CreateJobHeaders = ResponseHeadersTrait<
     {
       @doc("The background job location.")
-      @header
+      @header("Operation-Location")
       @pollingLocation
       operationLocation: string;
 
@@ -64,8 +64,8 @@ namespace MdsSolution.AdminApis {
     switchVersion is Operations.LongRunningResourceCollectionAction<
       DataVersion,
       {
-        @body
         @doc("The identifier for the data version.")
+        @body
         versionId: string;
       },
       BackgroundJobHeaders
