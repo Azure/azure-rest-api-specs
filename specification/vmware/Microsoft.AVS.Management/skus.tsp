@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_09_01)
 interface Skus {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
   @doc("A list of SKUs.")

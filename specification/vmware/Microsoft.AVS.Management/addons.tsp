@@ -99,7 +99,7 @@ model AddonVrProperties extends AddonProperties {
   addonType: AddonType.VR;
 
   @doc("VR replicationNetwork network.")
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   replicationNetwork?: string;
 }
 
@@ -112,11 +112,11 @@ model AddonHcxProperties extends AddonProperties {
   addonType: AddonType.HCX;
 
   @doc("HCX management network.")
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   managementNetwork?: string;
 
   @doc("HCX uplink network")
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   uplinkNetwork?: string;
 }
 

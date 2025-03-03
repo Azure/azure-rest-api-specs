@@ -9,16 +9,16 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface PureStoragePolicies {
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   list is ArmResourceListByParent<PureStoragePolicy>;
 
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   get is ArmResourceRead<PureStoragePolicy>;
 
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PureStoragePolicy>;
 
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   delete is ArmResourceDeleteWithoutOkAsync<PureStoragePolicy>;
 }
 

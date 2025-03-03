@@ -10,7 +10,7 @@ interface Maintenances {
   @doc("List {name} resources by subscription ID", Maintenance)
   @segmentOf(Maintenance)
   @armResourceList(Maintenance)
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   @get
   list(
     ...ResourceParentParameters<Maintenance>,
@@ -31,11 +31,11 @@ interface Maintenances {
     @doc("date till which result should be returned. i.e. scheduledStartTime <= to")
     to?: utcDateTime,
   ): ArmResponse<ResourceListResult<Maintenance>> | ErrorResponse;
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   get is ArmResourceRead<Maintenance>;
 
   @doc("Reschedule a maintenance")
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   reschedule is ArmResourceActionSync<
     Maintenance,
     MaintenanceReschedule,
@@ -43,7 +43,7 @@ interface Maintenances {
   >;
 
   @doc("Schedule a maintenance")
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   schedule is ArmResourceActionSync<
     Maintenance,
     MaintenanceSchedule,
@@ -51,7 +51,7 @@ interface Maintenances {
   >;
 
   @doc("Initiate maintenance readiness checks")
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   initiateChecks is ArmResourceActionSyncNoRequestBody<
     Maintenance,
     Maintenance

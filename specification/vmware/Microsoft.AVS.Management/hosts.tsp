@@ -9,10 +9,10 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface Hosts {
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   list is ArmResourceListByParent<Host>;
 
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   get is ArmResourceRead<Host>;
 }
 

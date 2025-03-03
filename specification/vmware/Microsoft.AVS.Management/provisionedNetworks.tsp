@@ -8,10 +8,10 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface ProvisionedNetworks {
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   list is ArmResourceListByParent<ProvisionedNetwork>;
 
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   get is ArmResourceRead<ProvisionedNetwork>;
 }
 

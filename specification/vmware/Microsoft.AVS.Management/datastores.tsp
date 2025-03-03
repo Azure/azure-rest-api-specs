@@ -116,7 +116,7 @@ model DatastoreProperties {
   @doc("An Elastic SAN volume")
   elasticSanVolume?: ElasticSanVolume;
 
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   @doc("A Pure Storage volume")
   pureStorageVolume?: PureStorageVolume;
 

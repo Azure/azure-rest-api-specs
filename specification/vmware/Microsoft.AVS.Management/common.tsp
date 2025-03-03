@@ -26,7 +26,7 @@ model ResourceSkuRequired {
 @doc("Availability zones envelope.")
 model AvailabilityZones {
   @doc("The availability zones.")
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   zones?: string[];
 }
 

@@ -246,7 +246,7 @@ model PrivateCloudUpdateProperties {
   dnsZoneType?: DnsZoneType;
 
   @doc("Display name of the resource.")
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   displayName?: string;
 }
 
@@ -354,7 +354,7 @@ model PrivateCloudProperties {
   dnsZoneType?: DnsZoneType;
 
   @doc("Display name of the resource.")
-  @added(Versions.v2024_09_01_preview)
+  @added(Versions.v2024_09_01)
   displayName?: string;
 }
 
