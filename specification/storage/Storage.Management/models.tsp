@@ -2326,6 +2326,7 @@ model ServiceSpecification {
   /**
    * Metric specifications of operation.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   metricSpecifications?: MetricSpecification[];
 }
 
@@ -2356,6 +2357,7 @@ model MetricSpecification {
   /**
    * Dimensions of blobs, including blob type and access tier.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   dimensions?: Dimension[];
 
   /**
@@ -2404,6 +2406,7 @@ model StorageSkuListResult {
    */
   @visibility("read")
   @items
+  @OpenAPI.extension("x-ms-identifiers", [])
   value?: SkuInformation[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
@@ -2448,6 +2451,7 @@ model SkuInformation {
    * The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   capabilities?: SKUCapability[];
 
   /**
@@ -3975,6 +3979,7 @@ model UsageListResult {
    * Gets or sets the list of Storage Resource Usages.
    */
   @items
+  @OpenAPI.extension("x-ms-identifiers", [])
   value?: Usage[];
 }
 
@@ -4270,6 +4275,7 @@ model ManagementPolicySchema {
   /**
    * The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   rules: ManagementPolicyRule[];
 }
 
@@ -4485,6 +4491,7 @@ model ManagementPolicyFilter {
   /**
    * An array of blob index tag based filters, there can be at most 10 tag filters
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   blobIndexMatch?: TagFilter[];
 }
 
@@ -4552,6 +4559,7 @@ model BlobInventoryPolicySchema {
   /**
    * The storage account blob inventory policy rules. The rule is applied when it is enabled.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   rules: BlobInventoryPolicyRule[];
 }
 
