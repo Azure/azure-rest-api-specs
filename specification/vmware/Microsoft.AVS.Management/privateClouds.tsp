@@ -303,10 +303,12 @@ model PrivateCloudProperties {
   @visibility("read")
   vmotionNetwork?: string;
 
+  #deprecated "It is recommended to let the system generate the password when the private cloud is created."
   @doc("Optionally, set the vCenter admin password when the private cloud is created")
   @secret
   vcenterPassword?: string;
 
+  #deprecated "It is recommended to let the system generate the password when the private cloud is created."
   @doc("Optionally, set the NSX-T Manager password when the private cloud is created")
   @secret
   nsxtPassword?: string;
