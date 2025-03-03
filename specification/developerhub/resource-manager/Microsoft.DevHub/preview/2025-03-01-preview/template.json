@@ -144,6 +144,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List VersionedTemplate": {
             "$ref": "./examples/VersionedTemplate_List.json"
@@ -366,7 +369,7 @@
     },
     "Parameter": {
       "type": "object",
-      "description": "Parameter",
+      "description": "Parameter for the template.",
       "properties": {
         "name": {
           "type": "string",
@@ -396,7 +399,7 @@
     },
     "ParameterDefault": {
       "type": "object",
-      "description": "ParameterDefault",
+      "description": "A reference to a default parameter value or a reference parameter to take the value from.",
       "properties": {
         "value": {
           "type": "string",
