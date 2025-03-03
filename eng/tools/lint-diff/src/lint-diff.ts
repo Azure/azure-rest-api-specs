@@ -344,14 +344,11 @@ export async function reconcileChangedFilesAndTags(
       continue;
     }
 
-    const afterTags = afterFinal.get(readme)!;
-    const deletedTags = tags.filter((tag) => !afterTags.includes(tag));
-    for (const deletedTag of deletedTags) {
-      beforeFinal.set(
-        readme,
-        tags.filter((tag) => tag !== deletedTag),
-      );
-    }
+    const afterTags = new Set(afterFinal.get(readme)!);
+    beforeFinal.set(
+      readme,
+      tags.filter((tag) => afterTags.has(tag)),
+    );
   }
 
   return [beforeFinal, afterFinal];
