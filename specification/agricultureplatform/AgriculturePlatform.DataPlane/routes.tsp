@@ -11,7 +11,7 @@ using Azure.Core.Traits;
 
 namespace Microsoft.AgriculturePlatform;
 
-alias ServiceTraits = SupportsRepeatableRequests &
+alias ServiceTraits = NoRepeatableRequests &
   NoClientRequestId &
   NoConditionalRequests;
 
