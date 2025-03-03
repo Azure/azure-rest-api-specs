@@ -18,98 +18,100 @@ alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
 
-alias languageOperations = ResourceOperations<ServiceTraits, Foundations.ErrorResponse>;
+alias languageOperations = ResourceOperations<
+  ServiceTraits,
+  Foundations.ErrorResponse
+>;
 
 /**
-   * Lists the existing projects.
-   */
-op  listProjects is languageOperations.ResourceList<
-    TextAnalysisAuthoringProjectMetadata,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+ * Lists the existing projects.
+ */
+op listProjects is languageOperations.ResourceList<
+  TextAnalysisAuthoringProjectMetadata,
+  ListQueryParametersTrait<StandardListQueryParameters>
+>;
 
 /**
-   * Lists the deployments belonging to a project.
-   */
- op listDeployments is languageOperations.ResourceList<
-    TextAnalysisAuthoringProjectDeployment,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+ * Lists the deployments belonging to a project.
+ */
+op listDeployments is languageOperations.ResourceList<
+  TextAnalysisAuthoringProjectDeployment,
+  ListQueryParametersTrait<StandardListQueryParameters>
+>;
 
-  /**
-   * Lists the exported models belonging to a project.
-   */
-  @added(Versions.v2023_04_15_preview)
-op  listExportedModels is languageOperations.ResourceList<
-    TextAnalysisAuthoringExportedTrainedModel,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+/**
+ * Lists the exported models belonging to a project.
+ */
+@added(Versions.v2023_04_15_preview)
+op listExportedModels is languageOperations.ResourceList<
+  TextAnalysisAuthoringExportedTrainedModel,
+  ListQueryParametersTrait<StandardListQueryParameters>
+>;
 
-  /**
-   * Lists the trained models belonging to a project.
-   */
+/**
+ * Lists the trained models belonging to a project.
+ */
 op listTrainedModels is languageOperations.ResourceList<
-    TextAnalysisAuthoringProjectTrainedModel,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-
- /**
-   * Lists the deployments resources assigned to the project.
-   */
-  @added(Versions.v2023_04_15_preview)
-op  listDeploymentResources is languageOperations.ResourceList<
-    TextAnalysisAuthoringAssignedDeploymentResource,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+  TextAnalysisAuthoringProjectTrainedModel,
+  ListQueryParametersTrait<StandardListQueryParameters>
+>;
 
 /**
-   * Lists the non-expired training jobs created for a project.
-   */
+ * Lists the deployments resources assigned to the project.
+ */
+@added(Versions.v2023_04_15_preview)
+op listDeploymentResources is languageOperations.ResourceList<
+  TextAnalysisAuthoringAssignedDeploymentResource,
+  ListQueryParametersTrait<StandardListQueryParameters>
+>;
+
+/**
+ * Lists the non-expired training jobs created for a project.
+ */
 op listTrainingJobs is languageOperations.ResourceList<
-    TextAnalysisAuthoringTrainingJobState,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+  TextAnalysisAuthoringTrainingJobState,
+  ListQueryParametersTrait<StandardListQueryParameters>
+>;
 
 /**
-   * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
-   */
-  @added(Versions.v2023_04_15_preview)
-op  listAssignedResourceDeployments is languageOperations.ResourceList<
-    TextAnalysisAuthoringAssignedProjectDeploymentsMetadata,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
+ * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
+ */
+@added(Versions.v2023_04_15_preview)
+op listAssignedResourceDeployments is languageOperations.ResourceList<
+  TextAnalysisAuthoringAssignedProjectDeploymentsMetadata,
+  ListQueryParametersTrait<StandardListQueryParameters>
+>;
 
-  /**
-   * Lists the supported languages.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-op  getSupportedLanguages is languageOperations.ResourceList<
-    TextAnalysisAuthoringSupportedLanguage,
-    ListQueryParametersTrait<ProjectKindQueryParameter &
-      StandardListQueryParameters>
-  >;
+/**
+ * Lists the supported languages.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+op getSupportedLanguages is languageOperations.ResourceList<
+  TextAnalysisAuthoringSupportedLanguage,
+  ListQueryParametersTrait<ProjectKindQueryParameter &
+    StandardListQueryParameters>
+>;
 
-  /**
-   * Lists the supported prebuilt entities that can be used while creating composed entities.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-  @added(Versions.v2023_04_15_preview)
-op  getSupportedPrebuiltEntities is languageOperations.ResourceList<
-    TextAnalysisAuthoringPrebuiltEntity,
-    SupportedPrebuiltEntitiesQueryParameter & StandardListQueryParameters
-  >;
+/**
+ * Lists the supported prebuilt entities that can be used while creating composed entities.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+@added(Versions.v2023_04_15_preview)
+op getSupportedPrebuiltEntities is languageOperations.ResourceList<
+  TextAnalysisAuthoringPrebuiltEntity,
+  SupportedPrebuiltEntitiesQueryParameter & StandardListQueryParameters
+>;
 
-  /**
-   * Lists the support training config version for a given project type.
-   */
- op listTrainingConfigVersions is languageOperations.ResourceList<
-    TextAnalysisAuthoringTrainingConfigVersion,
-    ListQueryParametersTrait<ProjectKindQueryParameter &
-      StandardListQueryParameters>
-  >;
+/**
+ * Lists the support training config version for a given project type.
+ */
+op listTrainingConfigVersions is languageOperations.ResourceList<
+  TextAnalysisAuthoringTrainingConfigVersion,
+  ListQueryParametersTrait<ProjectKindQueryParameter &
+    StandardListQueryParameters>
+>;
 
 interface TextAuthoringProject {
-
   /**
    * Gets the status for an import.
    */
@@ -118,15 +120,14 @@ interface TextAuthoringProject {
   /**
    * Gets the status of an export job. Once job completes, returns the project metadata, and assets.
    */
- getExportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportProjectJobState>;
+  getExportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportProjectJobState>;
 
   /**
    * Gets the details of a project.
    */
   getProject is languageOperations.ResourceRead<TextAnalysisAuthoringProjectMetadata>;
- 
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
   @createsOrUpdatesResource(TextAnalysisAuthoringProjectMetadata)
   @parameterVisibility
   @patch
@@ -372,13 +373,13 @@ interface TextAuthoringProject {
     Foundations.ErrorResponse
   >;
 
- /**
+  /**
    * Gets the status of an existing unassign deployment resources job.
    */
   @added(Versions.v2023_04_15_preview)
   getUnassignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringUnassignDeploymentResourcesJobState>;
 
-/**
+  /**
    * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -405,7 +406,7 @@ interface TextAuthoringProject {
     Foundations.ErrorResponse
   >;
 
-/**
+  /**
    * Gets the status of an existing assign deployment resources job.
    */
   @added(Versions.v2023_04_15_preview)
@@ -520,8 +521,6 @@ interface TextAuthoringDeployment {
    * Gets the status of an existing deployment job.
    */
   getDeploymentStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentJobState>;
-  
-
 
   /**
    * Creates a new deployment or replaces an existing one.
@@ -553,11 +552,10 @@ interface TextAuthoringDeployment {
     AcceptedResponse,
     {},
     Foundations.ErrorResponse
-  >; 
+  >;
 }
 
-interface TextAuthoringExportedModel { 
-
+interface TextAuthoringExportedModel {
   /**
    * Gets the details of an exported model.
    */
@@ -657,7 +655,7 @@ interface TextAuthoringExportedModel {
   >;
 }
 
-interface TextAuthoringTrainedModel { 
+interface TextAuthoringTrainedModel {
   /**
    * Gets the details of a trained model.
    */
@@ -769,6 +767,4 @@ interface TextAuthoringTrainedModel {
    * Gets the status for loading a snapshot.
    */
   getLoadSnapshotStatus is languageOperations.ResourceRead<TextAnalysisAuthoringLoadSnapshotJobState>;
-
-  
 }
