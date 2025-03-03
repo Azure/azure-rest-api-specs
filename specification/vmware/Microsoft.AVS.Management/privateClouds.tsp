@@ -244,10 +244,6 @@ model PrivateCloudUpdateProperties {
 
   @doc("The type of DNS zone to use.")
   dnsZoneType?: DnsZoneType;
-
-  @doc("Display name of the resource.")
-  @added(Versions.v2024_09_01)
-  displayName?: string;
 }
 
 @doc("The properties of a private cloud resource")
@@ -352,10 +348,6 @@ model PrivateCloudProperties {
 
   @doc("The type of DNS zone to use.")
   dnsZoneType?: DnsZoneType;
-
-  @doc("Display name of the resource.")
-  @added(Versions.v2024_09_01)
-  displayName?: string;
 }
 
 @doc("An ExpressRoute Circuit")
@@ -419,7 +411,7 @@ model IdentitySource {
   @doc("The domain's NetBIOS name")
   `alias`?: string;
 
-  @doc("The domain's DNS name")
+  @doc("The domain's dns name")
   domain?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
