@@ -14,7 +14,7 @@ using Azure.Core.Traits;
 namespace Language.Conversations.Authoring;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationsAuthoringProjectKind", "csharp")
+@clientName("ConversationAuthoringProjectKind", "csharp")
 union ProjectKind {
   string,
 
@@ -39,7 +39,7 @@ union ProjectKind {
  * Human-readable error code.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationsAuthoringErrorCode", "csharp")
+@clientName("ConversationAuthoringErrorCode", "csharp")
 union ErrorCode {
   string,
   InvalidRequest: "InvalidRequest",
@@ -66,7 +66,7 @@ union ErrorCode {
  * Human-readable error code.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationsAuthoringInnerErrorCode", "csharp")
+@clientName("ConversationAuthoringInnerErrorCode", "csharp")
 @clientNamespace("Language.Conversations.Authoring.Common")
 union InnerErrorCode {
   string,
@@ -102,7 +102,7 @@ union StringIndexType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationsAuthoringExportedProjectFormat", "csharp")
+@clientName("ConversationAuthoringExportedProjectFormat", "csharp")
 @clientNamespace("Language.Conversations.Authoring.Common")
 union ExportedProjectFormat {
   string,
@@ -119,7 +119,7 @@ union ExportedProjectFormat {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationsAuthoringTrainingMode", "csharp")
+@clientName("ConversationAuthoringTrainingMode", "csharp")
 @clientNamespace("Language.Conversations.Authoring.Common")
 union TrainingMode {
   string,
@@ -136,7 +136,7 @@ union TrainingMode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationsAuthoringEvaluationKind", "csharp")
+@clientName("ConversationAuthoringEvaluationKind", "csharp")
 @clientNamespace("Language.Conversations.Authoring.Common")
 union EvaluationKind {
   string,
@@ -174,7 +174,7 @@ union JobStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationsAuthoringCompositionMode", "csharp")
+@clientName("ConversationAuthoringCompositionMode", "csharp")
 @clientNamespace("Language.Conversations.Authoring.Common")
 union CompositionSetting {
   string,
