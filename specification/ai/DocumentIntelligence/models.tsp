@@ -428,7 +428,6 @@ model DocumentIntelligenceError {
   innererror?: DocumentIntelligenceInnerError;
 }
 
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
 @doc("An object containing more specific information about the error.")
 model DocumentIntelligenceInnerError {
   @doc("One of a server-defined set of error codes.")
