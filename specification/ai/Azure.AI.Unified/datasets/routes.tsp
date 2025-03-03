@@ -1,0 +1,132 @@
+import "@typespec/rest";
+import "@azure-tools/typespec-autorest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "../common/models.tsp";
+import "./models.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
+using Azure.Core.Foundations;
+
+namespace Azure.AI.Unified;
+
+interface Datasets {
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("List datasets in a project.")
+  @route("/datasets")
+  @get
+  listDatasets(
+    @doc("Continuation token for pagination.")
+    @query("$skip")
+    $skip?: string,
+
+    @doc("View type for including/excluding (for example) archived entities.")
+    @query("listViewType")
+    listViewType?: ListViewType,
+  ): PagedDatasetContainer;
+
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Delete container.")
+  @route("/datasets/{name}")
+  @delete
+  delete(
+    @doc("Name of Azure Machine Learning workspace.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
+
+    @doc("Container name.")
+    @path
+    name: string,
+  ): void;
+
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("List data versions in the data container")
+  @route("/data/{name}/versions")
+  @get
+  listDatasetVersions(
+    @doc("Container name.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
+
+    @doc("Please choose OrderBy value from ['createdtime', 'modifiedtime']")
+    @query("$orderBy")
+    $orderBy?: string,
+
+    @doc("Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned")
+    @query("$top")
+    $top?: int32,
+
+    @doc("Continuation token for pagination.")
+    @query("$skip")
+    $skip?: string,
+
+    @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2")
+    @query("$tags")
+    $tags?: string,
+
+    @doc("[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All] View type for including/excluding (for example) archived entities.")
+    @query("listViewType")
+    listViewType?: ListViewType,
+  ): PagedDatasetVersion;
+
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Delete version.")
+  @route("/data/{name}/versions/{version}")
+  @delete
+  deleteVersion(
+    @doc("Container name.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
+
+    @doc("Version identifier.")
+    @path
+    version: string,
+  ): void;
+
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get dataset version.")
+  @route("/datasets/{name}/versions/{version}")
+  @get
+  getVersion(
+    @doc("Container name.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
+
+    @doc("Version identifier.")
+    @path
+    version: string,
+  ): DatasetVersion;
+
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Create or update version.")
+  @route("/datasets/{name}/versions/{version}")
+  @put
+  createOrUpdate(
+    @doc("Container name.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
+
+    @doc("Version identifier.")
+    @path
+    version: string,
+
+    @doc("Version entity to create or update.")
+    @body
+    body: DatasetVersion,
+  ): DatasetVersion;
+}
