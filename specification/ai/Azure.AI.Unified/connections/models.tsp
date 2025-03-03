@@ -16,6 +16,7 @@ using Azure.Core.Traits;
 namespace Azure.AI.Unified;
 
 @doc("Response from the listSecrets operation")
+@resource("connections")
 model Connection {
   @doc("Fully qualified resource identifier")
   @visibility("read")
@@ -23,6 +24,7 @@ model Connection {
 
   @doc("The name of the resource")
   @visibility("read")
+  @key("connectionName")
   name: string;
 
   @doc("Credential used to connect to the external resource.")

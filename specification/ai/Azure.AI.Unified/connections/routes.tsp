@@ -17,7 +17,7 @@ alias ServiceTraits = SupportsClientRequestId &
   SupportsRepeatableRequests &
   SupportsConditionalRequests;
 
-alias ConnectionOperations = Azure.Core.ResourceOperations<ServiceTraits>
+alias ConnectionOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @route("/connections")
 interface Connections {
@@ -25,8 +25,7 @@ interface Connections {
   get is ConnectionOperations.ResourceRead<Connection>;
 
   @doc("Get connection with secrets by name.")
-  getWithCredentials is ConnectionOperations.ResourceAction<Connection>
-
+  getWithCredentials is ConnectionOperations.ResourceAction<Connection, void, Connection>;
 
   @doc("List all connections in the project")
   list is ConnectionOperations.ResourceList<
@@ -39,5 +38,5 @@ interface Connections {
 
         ...StandardListQueryParameters;
       }
-    >;
+    >,
   >;
