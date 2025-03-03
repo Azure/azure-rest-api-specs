@@ -185,6 +185,7 @@ union EncryptionVersionType {
 model PrivateCloud is TrackedResource<PrivateCloudProperties> {
   ...ResourceSkuRequired;
   ...ManagedSystemAssignedIdentityProperty;
+  ...AvailabilityZones;
 
   @doc("Name of the private cloud")
   @pattern("^[-\\w\\._]+$")
