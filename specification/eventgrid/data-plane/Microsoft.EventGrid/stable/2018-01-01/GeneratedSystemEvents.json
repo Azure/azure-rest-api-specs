@@ -6038,14 +6038,23 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the target dataset time series that resulted in drift detection."
+          "description": "The start time of the target dataset time series that resulted in drift detection.",
+          "x-nullable": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the target dataset time series that resulted in drift detection."
+          "description": "The end time of the target dataset time series that resulted in drift detection.",
+          "x-nullable": true
         }
-      }
+      },
+      "required": [
+        "dataDriftId",
+        "dataDriftName",
+        "runId",
+        "baseDatasetId",
+        "targetDatasetId"
+      ]
     },
     "MachineLearningServicesModelDeployedEventData": {
       "type": "object",
@@ -6075,8 +6084,9 @@
         }
       },
       "required": [
-        "serviceTags",
-        "serviceProperties"
+        "serviceName",
+        "serviceComputeType",
+        "modelIds"
       ]
     },
     "MachineLearningServicesModelRegisteredEventData": {
@@ -6103,8 +6113,8 @@
         }
       },
       "required": [
-        "modelTags",
-        "modelProperties"
+        "modelName",
+        "modelVersion"
       ]
     },
     "MachineLearningServicesRunCompletedEventData": {
@@ -6139,8 +6149,10 @@
         }
       },
       "required": [
-        "runTags",
-        "runProperties"
+        "experimentId",
+        "experimentName",
+        "runId",
+        "runType"
       ]
     },
     "MachineLearningServicesRunStatusChangedEventData": {
@@ -6179,8 +6191,11 @@
         }
       },
       "required": [
-        "runTags",
-        "runProperties"
+        "experimentId",
+        "experimentName",
+        "runId",
+        "runType",
+        "runStatus"
       ]
     },
     "MapsGeofenceEnteredEventData": {
