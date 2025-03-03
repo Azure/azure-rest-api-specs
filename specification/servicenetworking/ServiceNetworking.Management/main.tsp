@@ -92,7 +92,7 @@ model AssociationUpdateProperties {
 /** Association Subnet. */
 model AssociationSubnetUpdate {
   /** Association ID. */
-  id: string;
+  id?: string;
 }
 
 /** Association Properties. */
