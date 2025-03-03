@@ -26,6 +26,10 @@ model SiteProperties {
     }
   ]>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
+
   @doc("Provisioning state of last operation")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
@@ -45,6 +49,10 @@ model SiteUpdateProperties {
       type: "Microsoft.EdgeOrder/addresses";
     }
   ]>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
 }
 
 @doc("The type used for update operations of the Site.")

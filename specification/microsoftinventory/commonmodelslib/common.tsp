@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./commonipaddress.tsp";
+import "./commonprivateipaddress.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -36,4 +37,29 @@ union Cloud {
 
   @doc("Mooncake cloud")
   Mooncake: "Mooncake",
+}
+
+@doc("Enum for AllocationType")
+union AllocationType {
+  string,
+
+  @doc("Unicast AllocationType")
+  Unicast: "Unicast",
+
+  @doc("Multicast AllocationType")
+  Multicast: "Multicast",
+
+  @doc("Anycast AllocationType")
+  Anycast: "Anycast",
+}
+
+@doc("Enum for the IP Version")
+union IpVersion {
+  string,
+
+  @doc("IPv4 version")
+  IPv4: "IPv4",
+
+  @doc("IPv6 version")
+  IPv6: "IPv6",
 }
