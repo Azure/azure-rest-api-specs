@@ -101,25 +101,25 @@ model EstimatedPatchingTime {
   @doc("The estimated time required in minutes for database server patching.")
   @minValue(1)
   @maxValue(3000)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   estimatedDbServerPatchingTime?: int32;
 
   @doc("The estimated time required in minutes for network switch patching.")
   @minValue(1)
   @maxValue(3000)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   estimatedNetworkSwitchesPatchingTime?: int32;
 
   @doc("The estimated time required in minutes for storage server patching.")
   @minValue(1)
   @maxValue(3000)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   estimatedStorageServerPatchingTime?: int32;
 
   @doc("The estimated total time required in minutes for all patching operations.")
   @minValue(1)
   @maxValue(3000)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   totalEstimatedPatchingTime?: int32;
 }
 
@@ -141,129 +141,129 @@ model CloudExadataInfrastructure
 @doc("CloudExadataInfrastructure resource model")
 model CloudExadataInfrastructureProperties {
   @doc("Exadata infra ocid")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ocid?: Ocid;
 
   @doc("The number of compute servers for the cloud Exadata infrastructure.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   computeCount?: int32;
 
   @doc("The number of storage servers for the cloud Exadata infrastructure.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   storageCount?: int32;
 
   @doc("The total storage allocated to the cloud Exadata infrastructure resource, in gigabytes (GB).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   totalStorageSizeInGbs?: int32;
 
   @doc("The available storage can be allocated to the cloud Exadata infrastructure resource, in gigabytes (GB).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   availableStorageSizeInGbs?: int32;
 
   @doc("The date and time the cloud Exadata infrastructure resource was created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeCreated?: string;
 
   @doc("Additional information about the current lifecycle state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lifecycleDetails?: string;
 
   @doc("maintenanceWindow property")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   maintenanceWindow?: MaintenanceWindow;
 
   @doc("The estimated total time required in minutes for all patching operations (database server, storage server, and network switch patching).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   estimatedPatchingTime?: EstimatedPatchingTime;
 
   @doc("The list of customer email addresses that receive information from Oracle about the specified OCI Database service resource. Oracle uses these email addresses to send notifications about planned and unplanned software maintenance updates, information about system hardware, and other information needed by administrators. Up to 10 email addresses can be added to the customer contacts for a cloud Exadata infrastructure instance. ")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @extension("x-ms-identifiers", #[])
-  @visibility("create", "read", "update")
   customerContacts?: CustomerContact[];
 
   @doc("CloudExadataInfrastructure provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AzureResourceProvisioningState;
 
   @doc("CloudExadataInfrastructure lifecycle state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lifecycleState?: CloudExadataInfrastructureLifecycleState;
 
   @doc("The model name of the cloud Exadata infrastructure resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   shape: string;
 
   @doc("HTTPS link to OCI resources exposed to Azure Customer via Azure Interface.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ociUrl?: url;
 
   @doc("The total number of CPU cores allocated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cpuCount?: int32;
 
   @doc("The total number of CPU cores available.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxCpuCount?: int32;
 
   @doc("The memory allocated in GBs.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   memorySizeInGbs?: int32;
 
   @doc("The total memory available in GBs.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxMemoryInGbs?: int32;
 
   @doc("The local node storage to be allocated in GBs.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dbNodeStorageSizeInGbs?: int32;
 
   @doc("The total local node storage available in GBs.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxDbNodeStorageSizeInGbs?: int32;
 
   @doc("The quantity of data in the database, in terabytes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataStorageSizeInTbs?: float64;
 
   @doc("The total available DATA disk group size.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxDataStorageInTbs?: float64;
 
   @doc("The software version of the database servers (dom0) in the Exadata infrastructure.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dbServerVersion?: string;
 
   @doc("The software version of the storage servers (cells) in the Exadata infrastructure.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageServerVersion?: string;
 
   @doc("The requested number of additional storage servers activated for the Exadata infrastructure.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   activatedStorageCount?: int32;
 
   @doc("The requested number of additional storage servers for the Exadata infrastructure.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   additionalStorageCount?: int32;
 
   @doc("The name for the Exadata infrastructure.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @minLength(1)
   @maxLength(255)
   displayName: string;
 
   @doc("The OCID of the last maintenance run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastMaintenanceRunId?: Ocid;
 
   @doc("The OCID of the next maintenance run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextMaintenanceRunId?: Ocid;
 
   @doc("Monthly Db Server version")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   monthlyDbServerVersion?: string;
 
   @doc("Monthly Storage Server version")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   monthlyStorageServerVersion?: string;
 }

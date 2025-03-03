@@ -97,10 +97,10 @@ model WorkloadNetworkPublicIPProperties {
   numberOfPublicIPs?: int64;
 
   @doc("CIDR Block of the Public IP Block.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publicIPBlock?: string;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkPublicIPProvisioningState;
 }

@@ -98,7 +98,7 @@ model ExperimentProperties {
   /**
    * Most recent provisioning state for the given experiment resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**

@@ -27,7 +27,7 @@ model FleetUpdateStrategy is ProxyResource<FleetUpdateStrategyProperties> {
   @minLength(1)
   @maxLength(50)
   @path
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
@@ -41,11 +41,11 @@ union FleetUpdateStrategyProvisioningState {
 
 @doc("The properties of the UpdateStrategy.")
 model FleetUpdateStrategyProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the UpdateStrategy resource.")
   provisioningState?: FleetUpdateStrategyProvisioningState;
 
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @doc("Defines the update sequence of the clusters.")
   strategy: UpdateRunStrategy;
 }

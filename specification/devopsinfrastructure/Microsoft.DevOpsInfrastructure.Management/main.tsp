@@ -446,7 +446,7 @@ interface Pools {
     Pool,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Pool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<Pool, PoolProperties>
@@ -469,7 +469,7 @@ model ResourceDetailsObject is ProxyResource<ResourceDetailsObjectProperties> {
   @doc("The name of the resource.")
   @key("resourceName")
   @segment("resources")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -644,7 +644,7 @@ model ResourceSku is ProxyResource<ResourceSkuProperties> {
   @doc("The name of the SKU.")
   @key("skuName")
   @segment("skus")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -689,7 +689,6 @@ model Location is ProxyResource<LocationProperties> {
   @path
   @segment("locations")
   @doc("Name of the location.")
-  @visibility("public")
   name: string;
 }
 
@@ -723,7 +722,7 @@ interface SubscriptionUsages {
 @parentResource(Location)
 model Quota {
   @doc("The name of the quota.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: QuotaName;
 
   @doc("Fully qualified ARM resource id")
@@ -757,7 +756,7 @@ model Image is ProxyResource<ImageProperties> {
   @path
   @segment("images")
   @doc("Name of the image.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -790,7 +789,7 @@ model ImageVersion is ProxyResource<ImageVersionProperties> {
   @doc("The name of the image version.")
   @key("imageVersionName")
   @segment("versions")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

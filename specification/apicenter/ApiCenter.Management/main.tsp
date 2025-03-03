@@ -124,8 +124,8 @@ enum Versions {
 
 @@clientName(Services.exportMetadataSchema::parameters.body, "payload");
 
-@@visibility(Azure.Core.Page.nextLink, "read");
-@@visibility(Azure.Core.Page.value, "read");
+@@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
+@@visibility(Azure.Core.Page.value, Lifecycle.Read);
 /**
  * A resource list operation, at the scope of the resource's parent
  * @template TResource the resource being patched

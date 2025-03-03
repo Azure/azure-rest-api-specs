@@ -18,7 +18,7 @@ model WorkloadImpact is ProxyResource<WorkloadImpactProperties> {
   @key("workloadImpactName")
   @segment("workloadImpacts")
   @doc("workloadImpact resource ")
-  @visibility("Read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -35,12 +35,12 @@ model WorkloadImpactProperties is ResourceProperties {
   impactedResourceId: string;
 
   @doc("Unique ID of the impact (UUID)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")
   impactUniqueId?: string;
 
   @doc("Time at which impact is reported")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedTimeUtc?: utcDateTime;
 
   @doc("Category of the impact,  details can found from /impactCategories API")

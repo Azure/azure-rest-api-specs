@@ -25,7 +25,7 @@ model StandbyVirtualMachinePoolResource
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("standbyVirtualMachinePoolName")
   @segment("standbyVirtualMachinePools")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Name of the standby virtual machine pool")
   @path
   name: string;
@@ -50,7 +50,7 @@ model StandbyVirtualMachinePoolResourceProperties {
   ]>;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -94,7 +94,7 @@ interface StandbyVirtualMachinePools {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     StandbyVirtualMachinePoolResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

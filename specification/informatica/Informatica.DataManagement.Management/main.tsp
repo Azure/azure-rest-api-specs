@@ -259,7 +259,7 @@ model InformaticaServerlessRuntimeResource
 
 @doc("Properties specific to the Informatica DataManagement Organization resource.")
 model OrganizationProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource.")
   provisioningState?: ProvisioningState;
 
@@ -392,7 +392,7 @@ model ServerlessMetadataResponse {
 
 @doc("Serverless Runtime properties.")
 model InformaticaServerlessRuntimeProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource.")
   provisioningState?: ProvisioningState;
 

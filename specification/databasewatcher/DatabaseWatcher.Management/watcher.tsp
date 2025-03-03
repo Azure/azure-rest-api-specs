@@ -67,10 +67,10 @@ model WatcherProperties {
   datastore?: Datastore;
 
   @doc("The monitoring collection status of the watcher.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: WatcherStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the resource watcher.")
   provisioningState?: DatabaseWatcherProvisioningState;
 

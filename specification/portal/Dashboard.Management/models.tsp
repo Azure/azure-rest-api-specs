@@ -64,19 +64,19 @@ model ErrorDefinition {
   /**
    * Service specific error code which serves as the substatus for the HTTP error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: int32;
 
   /**
    * Description of the error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * Internal error details.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @identifiers(#["code"])
   details?: ErrorDefinition[];
 }
@@ -86,7 +86,7 @@ model DashboardPropertiesWithProvisioningState {
   ...DashboardProperties;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -213,19 +213,19 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 

@@ -22,7 +22,7 @@ model VirtualHardDisk is TrackedResource<VirtualHardDiskProperties> {
   @path
   @key("virtualHardDiskName")
   @segment("virtualHardDisks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")
@@ -49,7 +49,7 @@ interface VirtualHardDisks {
   updateOld is ArmTagsPatchAsync<VirtualHardDisk>;
 
   @doc("The operation to update a virtual hard disk.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @added(Versions.v2025_02_01_preview)
   @sharedRoute
   update is ArmCustomPatchAsync<VirtualHardDisk, VirtualHardDisksUpdateRequest>;

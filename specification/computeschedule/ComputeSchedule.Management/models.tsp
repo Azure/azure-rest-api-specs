@@ -296,7 +296,7 @@ model DeallocateResourceOperationResponse {
   type: string;
 
   @doc("The location of the deallocate request eg westus")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   @extension("x-ms-identifiers", #["resourceId"])
@@ -329,7 +329,7 @@ model StartResourceOperationResponse {
   type: string;
 
   @doc("The location of the start request eg westus")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   @extension("x-ms-identifiers", #["resourceId"])
@@ -362,7 +362,7 @@ model HibernateResourceOperationResponse {
   type: string;
 
   @doc("The location of the Hibernate request eg westus")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   @extension("x-ms-identifiers", #["resourceId"])

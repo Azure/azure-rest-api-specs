@@ -71,7 +71,7 @@ union ProvisioningState {
 
 @doc("Details of the Compute Fleet.")
 model FleetProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
@@ -97,11 +97,11 @@ model FleetProperties {
   computeProfile: ComputeProfile;
 
   @doc("Specifies the time at which the Compute Fleet is created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
 
   @doc("Specifies the ID which uniquely identifies a Compute Fleet.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueId?: string;
 }
 
@@ -534,7 +534,7 @@ interface Fleets {
     Fleet,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Fleet, FleetUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Fleet>;
   listByResourceGroup is ArmResourceListByParent<Fleet>;
