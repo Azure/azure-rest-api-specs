@@ -17,7 +17,7 @@ namespace Azure.AI.Unified;
 
 @doc("Response from the listSecrets operation")
 model Connection {
-  @doc("A unique identifier for the connection")
+  @doc("Fully qualified resource identifier")
   @visibility("read")
   id: string;
 
@@ -31,7 +31,7 @@ model Connection {
 
   @doc("Category of the connection")
   @visibility("read")
-  category: ConnectionType;
+  category: ConnectionCategory;
 
   @doc("The connection URL to be used for this service")
   @visibility("read")
@@ -52,21 +52,19 @@ model PagedConnection {
 }
 
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType
-#suppress "@azure-tools/typespec-azure-core/no-enum"
 @doc("The Type (or category) of the connection")
-enum ConnectionType {
+union ConnectionCategory {
+  string,
+
   @doc("Azure OpenAI Service")
   AzureOpenAI: "AzureOpenAI", //TODO: In Python this results in .AZURE_OPEN_AI. How do I make it .AZURE_OPENAI?
-
-  @doc("Serverless API Service")
-  Serverless: "Serverless",
 
   @doc("Azure Blob Storage")
   AzureBlobStorage: "AzureBlob",
 
-  @doc("Azure AI Services")
-  AzureAIServices: "AIServices",
-
   @doc("Azure AI Search")
   AzureAISearch: "CognitiveSearch",
+
+  @doc("Generic connection that uses API Key authentication")
+  APIKey: "ApiKey",
 }

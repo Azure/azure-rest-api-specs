@@ -17,7 +17,7 @@ namespace Azure.AI.Unified;
 interface Datasets {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("List datasets in a project.")
+  @doc("List latest version of each dataset in a project.")
   @route("/datasets")
   @get
   listLatestDatasets(
@@ -32,8 +32,8 @@ interface Datasets {
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("List data versions in the data container")
-  @route("/data/{name}/versions")
+  @doc("List dataset versions of a specific dataset")
+  @route("/datasets/{name}/versions")
   @get
   listDatasetVersions(
     @doc("Container name.")
@@ -65,7 +65,7 @@ interface Datasets {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Delete version.")
-  @route("/data/{name}/versions/{version}")
+  @route("/datasets/{name}/versions/{version}")
   @delete
   deleteVersion(
     @doc("Container name.")
@@ -111,7 +111,7 @@ interface Datasets {
 
     @doc("Version entity to create or update.")
     @body
-    body: DatasetVersion,
+    datasetVersion: DatasetVersion,
   ): DatasetVersion;
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
@@ -131,6 +131,6 @@ interface Datasets {
 
     @doc("Pensing upload request.")
     @body
-    body: PendingUploadRequestDto
+    pendingUploadRequest: PendingUploadRequestDto
   ): PendingUploadResponseDto;
 }
