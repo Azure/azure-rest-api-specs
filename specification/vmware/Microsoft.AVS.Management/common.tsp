@@ -21,6 +21,15 @@ model ResourceSkuRequired {
   sku: Foundations.Sku;
 }
 
+// https://github.com/Azure/typespec-azure/issues/438
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+@doc("Availability zones envelope.")
+model AvailabilityZones {
+  @doc("The availability zones.")
+  @added(Versions.v2024_09_01_preview)
+  zones?: string[];
+}
+
 @doc("The response of a {name} list operation.", Resource)
 @friendlyName(FriendlyNameFormat, Resource)
 model ResourceList<
