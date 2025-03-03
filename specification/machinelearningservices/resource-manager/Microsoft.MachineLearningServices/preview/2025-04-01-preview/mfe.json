@@ -17241,6 +17241,22 @@
       },
       "additionalProperties": false
     },
+    "DatasetReference": {
+      "description": "Dataset reference object.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the dataset reference.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "id": {
+          "description": "The fully qualified ARM id of the dataset reference.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
     "DataType": {
       "description": "Enum to determine the type of data.",
       "enum": [
@@ -22559,6 +22575,13 @@
           "description": "Stage in the model lifecycle assigned to this model",
           "type": "string",
           "x-nullable": true
+        },
+        "datasets": {
+          "description": "Array of dataset references",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetReference"
+          }
         }
       },
       "x-ms-client-name": "ModelVersionProperties",
@@ -27838,4 +27861,3 @@
     }
   }
 }
-
