@@ -62,7 +62,7 @@ tag: package-resources-2024-11
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2025-04
+tag: package-resources-2025-03
 ```
 
 ``` yaml $(package-subscriptions)
@@ -240,13 +240,13 @@ input-file:
   - Microsoft.Resources/stable/2024-11-01/resources.json
 ```
 
-### Tag: package-resources-2025-04
+### Tag: package-resources-2025-03
 
-These settings apply only when `--tag=package-resources-2025-04` is specified on the command line.
+These settings apply only when `--tag=package-resources-2025-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2025-04'
+``` yaml $(tag) == 'package-resources-2025-03'
 input-file:
-  - Microsoft.Resources/stable/2025-04-01/resources.json
+  - Microsoft.Resources/stable/2025-03-01/resources.json
 ```
 
 ### Tag: package-2022-12
