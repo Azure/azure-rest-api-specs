@@ -21,7 +21,16 @@ These are the global settings for the VMware Solution API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-09-01
+tag: package-2024-09-01
+```
+
+### Tag: package-2024-09-01
+
+These settings apply only when `--tag=package-2024-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09-01'
+input-file:
+- Microsoft.AVS/stable/2024-09-01/vmware.json
 ```
 
 ### Tag: package-2023-09-01
