@@ -3505,6 +3505,10 @@
         "securityProfile": {
           "$ref": "#/definitions/AgentPoolSecurityProfile",
           "description": "The security settings of an agent pool."
+        },
+        "gpuProfile": {
+          "$ref": "#/definitions/GPUProfile",
+          "description": "GPU settings for the Agent Pool."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -6662,6 +6666,33 @@
         "modelAsString": true
       },
       "description": "GPUInstanceProfile to be used to specify GPU MIG instance profile for supported GPU VM SKU."
+    },
+    "GPUProfile": {
+      "type": "object",
+      "description": "GPU settings for the Agent Pool.",
+      "properties": {
+         "driver": {
+         "type": "string",
+         "description": "Whether to install GPU drivers. When it's not specified, default is Install.",
+         "enum": [
+            "Install",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "GPUDriver",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Install",
+                "description": "Install driver."
+              },
+              {
+                "value": "None",
+                "description": "Skip driver install."
+              }
+            ]
+          }
+      }
     },
     "ExtendedLocationType": {
       "type": "string",
