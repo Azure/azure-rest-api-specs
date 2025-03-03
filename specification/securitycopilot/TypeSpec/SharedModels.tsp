@@ -80,6 +80,27 @@ model SkillsetDescriptor {
     @visibility("create")
     @doc("The ID of an Entra group that contains the owners for this Skillset")
     ownersGroupId: string;
+
+    constructor(
+        `namespace`: string,
+        name: string,
+        description: string,
+        descriptionDisplay: string,
+        disaplyName: string,
+        icon: string,
+        category: SkillsetCategory,
+        catalogScope: SkillsetCatalogScope,
+        enabled: boolean,
+        hidden: boolean,
+        prerequisites: string[] | null,
+        settings: SkillsetSetting[],
+        authorization: SkillsetAuth,
+        supportedAuthTypes: SkillsetAuthType[],
+        userVisibilityFeatureFlags: string[],
+        userVisibility: SkillVisibility,
+        plannerVisibilityFeatureFlags: string[],
+        plannerVisibility: SkillVisibility,
+    );
 }
 
 @doc("Defines the settings of a skillset")
