@@ -627,7 +627,7 @@ interface ConversationAuthoringProject {
 }
 
 interface ConversationAuthoringExportedModel {
-    /**
+  /**
    * Gets the details of an exported model.
    */
   @added(Versions.v2024_11_15_preview)
@@ -639,7 +639,9 @@ interface ConversationAuthoringExportedModel {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
-  @pollingOperation(ConversationAuthoringExportedModel.getExportedModelJobStatus)
+  @pollingOperation(
+    ConversationAuthoringExportedModel.getExportedModelJobStatus
+  )
   @added(Versions.v2024_11_15_preview)
   deleteExportedModel is Foundations.LongRunningOperation<
     {
@@ -665,7 +667,9 @@ interface ConversationAuthoringExportedModel {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
   @put
-  @pollingOperation(ConversationAuthoringExportedModel.getExportedModelJobStatus)
+  @pollingOperation(
+    ConversationAuthoringExportedModel.getExportedModelJobStatus
+  )
   @added(Versions.v2024_11_15_preview)
   createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
@@ -816,6 +820,4 @@ interface ConversationAuthoringTrainedModel {
    * Gets the status for loading a snapshot.
    */
   getLoadSnapshotStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringLoadSnapshotJobState>;
-
-  
 }
