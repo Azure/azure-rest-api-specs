@@ -71,7 +71,6 @@ export async function getLabelActionImpl({
       owner,
       repo,
       event: "pull_request",
-      status: "completed",
       head_sha,
       per_page: PER_PAGE_MAX,
     },
@@ -82,48 +81,57 @@ export async function getLabelActionImpl({
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
-  const wfName = "ARM Incremental Typespec (Preview)";
+  const wfName = "ARM Incremental TypeSpec (Preview)";
   const incrementalTspRuns = workflowRuns.filter((wf) => wf.name == wfName);
 
   if (incrementalTspRuns.length == 0) {
     core.info(
-      `Found no completed runs for workflow '${wfName}'.  May still be in-progress.`,
+      `Found no runs for workflow '${wfName}'.  Assuming workflow trigger was skipped, which should be treated equal to "completed false".`,
     );
-    return labelActions[LabelAction.None];
+    return labelActions[LabelAction.Remove];
   } else if (incrementalTspRuns.length > 1) {
     throw `Unexpected number of runs for workflow '${wfName}': ${incrementalTspRuns.length}`;
   } else {
     const run = incrementalTspRuns[0];
 
-    if (run.conclusion != "success") {
-      core.info(
-        `Run for workflow '${wfName}' did not succeed: '${run.conclusion}'`,
+    if (run.status == "completed") {
+      if (run.conclusion != "success") {
+        core.info(
+          `Run for workflow '${wfName}' did not succeed: '${run.conclusion}'`,
+        );
+        return labelActions[LabelAction.Remove];
+      }
+
+      const artifacts = await github.paginate(
+        github.rest.actions.listWorkflowRunArtifacts,
+        {
+          owner,
+          repo,
+          run_id: run.id,
+          per_page: PER_PAGE_MAX,
+        },
       );
-      return labelActions[LabelAction.Remove];
-    }
+      const artifactNames = artifacts.map((a) => a.name);
 
-    const artifacts = await github.paginate(
-      github.rest.actions.listWorkflowRunArtifacts,
-      {
-        owner,
-        repo,
-        run_id: run.id,
-        per_page: PER_PAGE_MAX,
-      },
-    );
-    const artifactNames = artifacts.map((a) => a.name);
+      core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
-    core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
-
-    if (artifactNames.includes("incremental-typespec=false")) {
-      core.info("Spec is not an incremental change to an existing TypeSpec RP");
-      return labelActions[LabelAction.Remove];
-    } else if (artifactNames.includes("incremental-typespec=true")) {
-      core.info("Spec is an incremental change to an existing TypeSpec RP");
-      // Continue checking other requirements
+      if (artifactNames.includes("incremental-typespec=false")) {
+        core.info(
+          "Spec is not an incremental change to an existing TypeSpec RP",
+        );
+        return labelActions[LabelAction.Remove];
+      } else if (artifactNames.includes("incremental-typespec=true")) {
+        core.info("Spec is an incremental change to an existing TypeSpec RP");
+        // Continue checking other requirements
+      } else {
+        // If workflow succeeded, it should have one workflow or the other
+        throw `Workflow artifacts did not contain 'incremental-typespec': ${JSON.stringify(artifactNames)}`;
+      }
     } else {
-      // If workflow succeeded, it should have one workflow or the other
-      throw `Workflow artifacts did not contain 'incremental-typespec': ${JSON.stringify(artifactNames)}`;
+      core.info(
+        `Workflow '${wfName}' is still in-progress: status='${run.status}'`,
+      );
+      return labelActions[LabelAction.None];
     }
   }
 
@@ -136,7 +144,7 @@ export async function getLabelActionImpl({
   });
   const labelNames = labels.map((label) => label.name);
 
-  core.info(`Labels: ${labels}`);
+  core.info(`Labels: ${labelNames}`);
 
   // TODO: Also require label "ARMBestPracticesAcknowledgement"
   const allLabelsMatch =
