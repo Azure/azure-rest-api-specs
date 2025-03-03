@@ -99,7 +99,7 @@ tag: package-bicep-2023-11
 
 ### Tag: package-policy-2025-03-stable
 
-These settings apply only when `--tag=package-2025-03-01` is specified on the command line.
+These settings apply only when `--tag=package-policy-2025-03-stable` is specified on the command line.
 
 ```yaml $(tag) == 'package-policy-2025-03-stable'
 input-file:
