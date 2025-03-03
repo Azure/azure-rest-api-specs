@@ -107,10 +107,8 @@ async function runLintDiff(
   changedFilesPath: string,
   outFile: string,
 ) {
-  // TODO: Does this belong in more global state?
   const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
 
-  // TODO: Should filter happen here or upstream? (probably upstream)
   // Read changed files, exclude any files that should be ignored
   const ignoreFilesWith = ["/examples/", "/quickstart-templates/", "/scenarios/"];
   const changedSpecFiles = (await readFileList(changedFilesPath)).filter((file) => {
@@ -136,13 +134,13 @@ async function runLintDiff(
   // TODO: Name
   const [beforeMap, afterMap] = await reconcileChangedFilesAndTags(beforeState, afterState);
 
-  // TODO: Structure properly
+  // TODO: Structure legibly
   for (const { path, map } of [
     { path: beforePath, map: beforeMap },
     { path: afterPath, map: afterMap },
   ]) {
     for (const [readme, tags] of map.entries()) {
-      const changedFilePath = `${path}/${readme}`;
+      const changedFilePath = join(path, readme);
       console.log(`Linting ${changedFilePath}`);
 
       let openApiType = await getOpenapiType(changedFilePath);
