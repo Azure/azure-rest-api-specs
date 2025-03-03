@@ -34,7 +34,7 @@ model ManagedCluster
    * The sku of the managed cluster
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  sku?: Sku;
+  sku: Sku;
 }
 
 @armResourceOperations

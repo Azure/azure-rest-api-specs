@@ -5280,6 +5280,9 @@
           "description": "The sku of the managed cluster"
         }
       },
+      "required": [
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -5652,6 +5655,7 @@
         },
         "supportExpiryUtc": {
           "type": "string",
+          "format": "date-time",
           "description": "The date of expiry of support of the version."
         },
         "osType": {
@@ -7043,15 +7047,18 @@
         },
         "healthCheckRetryTimeout": {
           "type": "string",
-          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
+          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
+          "x-ms-format": "duration-constant"
         },
         "upgradeTimeout": {
           "type": "string",
-          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
+          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
+          "x-ms-format": "duration-constant"
         },
         "upgradeDomainTimeout": {
           "type": "string",
-          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
+          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
+          "x-ms-format": "duration-constant"
         }
       },
       "required": [
@@ -7466,8 +7473,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServiceResourceProperties",
-          "description": "The service resource properties.",
-          "x-ms-client-flatten": true
+          "description": "The service resource properties."
         },
         "tags": {
           "type": "object",

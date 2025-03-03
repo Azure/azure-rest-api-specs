@@ -1274,16 +1274,22 @@ model RollingUpgradeMonitoringPolicy {
   /**
    * The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is interpreted as a string representing an ISO 8601 duration with following format "hh:mm:ss.fff".
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+  @OpenAPI.extension("x-ms-format", "duration-constant")
   healthCheckRetryTimeout: string;
 
   /**
    * The amount of time the overall upgrade has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format "hh:mm:ss.fff".
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+  @OpenAPI.extension("x-ms-format", "duration-constant")
   upgradeTimeout: string;
 
   /**
    * The amount of time each upgrade domain has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format "hh:mm:ss.fff".
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+  @OpenAPI.extension("x-ms-format", "duration-constant")
   upgradeDomainTimeout: string;
 }
 
@@ -1576,7 +1582,7 @@ model ManagedClusterVersionDetails {
   /**
    * The date of expiry of support of the version.
    */
-  supportExpiryUtc?: string;
+  supportExpiryUtc?: utcDateTime;
 
   /**
    * Cluster operating system, the default will be Windows
