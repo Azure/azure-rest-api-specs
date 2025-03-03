@@ -1,4 +1,5 @@
 @doc("Entity representing a Skillset.")
+@defaultVisibility(Lifecycle.Create)
 model SkillsetDescriptor {
     @doc("Namespace for the skillset")
     `namespace`: string;
