@@ -4,15 +4,27 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace AzureAgFoodPlatformDataPlaneService;
+namespace Microsoft.AgriculturePlatform;
 
 /**
  * Type of relationship.
  */
 union RelationshipType {
   string,
+
+  /**
+   * DerivedFrom.
+   */
   DerivedFrom: "DerivedFrom",
+
+  /**
+   * Contains.
+   */
   Child: "Child",
+
+  /**
+   * Parent.
+   */
   Parent: "Parent",
 }
 
@@ -21,9 +33,25 @@ union RelationshipType {
  */
 union DestinationType {
   string,
+
+  /**
+   * Catalog.
+   */
   Catalog: "Catalog",
+
+  /**
+   * Collection.
+   */
   Collection: "Collection",
+
+  /**
+   * Item.
+   */
   Item: "Item",
+
+  /**
+   * Asset.
+   */
   Asset: "Asset",
 }
 
@@ -32,8 +60,20 @@ union DestinationType {
  */
 union DataFormat {
   string,
+
+  /**
+   * Image.
+   */
   Image: "Image",
+
+  /**
+   * Shapefile.
+   */
   Shapefile: "Shapefile",
+
+  /**
+   * Binary
+   */
   Binary: "Binary",
 }
 
@@ -42,8 +82,20 @@ union DataFormat {
  */
 union GeoJsonObjectType {
   string,
+
+  /**
+   * Point.
+   */
   Point: "Point",
+
+  /**
+   * Polygon.
+   */
   Polygon: "Polygon",
+
+  /**
+   * MultiPolygon.
+   */
   MultiPolygon: "MultiPolygon",
 }
 
@@ -52,7 +104,15 @@ union GeoJsonObjectType {
  */
 union AuthCredentialsKind {
   string,
+
+  /**
+   * OAuthClientCredentials.
+   */
   OAuthClientCredentials: "OAuthClientCredentials",
+
+  /**
+   * ApiKeyAuthCredentials.
+   */
   ApiKeyAuthCredentials: "ApiKeyAuthCredentials",
 }
 
@@ -61,18 +121,38 @@ union AuthCredentialsKind {
  */
 union ImageFormat {
   string,
+
+  /**
+   * TIF.
+   */
   TIF: "TIF",
 }
 
+/**
+ * CatalogListResponse.
+ */
 model CatalogListResponse {
+  /**
+   * List of Catalogs.
+   */
   value: Catalog[];
+
+  /**
+   * Skip token for getting next set of results.
+   */
   skipToken?: string;
+
+  /**
+   * URL to do the POST request with same filters,
+   * to get next set of items.
+   */
   nextLink?: string;
 }
 
 /**
  * Catalog.
  */
+@resource("catalogs")
 model Catalog {
   /**
    * Links for referencing other objects.
@@ -80,10 +160,11 @@ model Catalog {
   links?: Link[];
 
   /**
-   * Unique resource ID.
+   * Id of the Catalog.
    */
   @visibility("read")
-  id?: string;
+  @key("catalogId")
+  id: string;
 
   /**
    * The ETag value to implement optimistic concurrency.
@@ -150,6 +231,7 @@ model Catalog {
    * string,
    * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   properties?: Record<unknown>;
 }
 
@@ -222,7 +304,7 @@ model Error {
    * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object
    * for InnerError reference document.
    */
-  innererror?: InnerError;
+  innererror?: InnerErrorModel;
 }
 
 /**
@@ -230,7 +312,7 @@ model Error {
  * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object
  * for InnerError reference document.
  */
-model InnerError {
+model InnerErrorModel {
   /**
    * Specific error code than was provided by the containing error.
    */
@@ -241,18 +323,35 @@ model InnerError {
    * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object
    * for InnerError reference document.
    */
-  innererror?: InnerError;
+  innererror?: InnerErrorModel;
 }
 
+/**
+ * Represents a response containing a list of collections.
+ */
 model CollectionListResponse {
+  /**
+   * List of Collections.
+   */
   value: Collection[];
+
+  /**
+   * Skip token for getting next set of results.
+   */
   skipToken?: string;
+
+  /**
+   * URL to do the POST request with same filters,
+   * to get next set of items.
+   */
   nextLink?: string;
 }
 
 /**
  * Collection.
  */
+@resource("collections")
+@parentResource(Catalog)
 model Collection {
   /**
    * Schema Foreign Key.
@@ -261,10 +360,11 @@ model Collection {
   schemaId: string;
 
   /**
-   * CatalogId.
+   * Id of the Collection.
    */
+  @key("collectionId")
   @visibility("read")
-  catalogId?: string;
+  collectionId: string;
 
   /**
    * Links for referencing other objects.
@@ -342,7 +442,21 @@ model Collection {
    * string,
    * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   properties?: Record<unknown>;
+}
+
+/**
+ * Resource model for File API.
+ */
+@resource("file")
+model FileResource {
+  /**
+   * Dummy key for file resource
+   */
+  @key("key")
+  @visibility("read")
+  key: string;
 }
 
 /**
@@ -359,6 +473,8 @@ model File {
 /**
  * Item.
  */
+@parentResource(Collection)
+@resource("items")
 model Item {
   /**
    * Links.
@@ -368,6 +484,234 @@ model Item {
   /**
    * Schema for records under the dataset.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
+  data: Record<unknown>;
+
+  /**
+   * Owner Item Ids of the resource
+   */
+  ownerItemId?: string;
+
+  /**
+   * Id of the Catalog resource.
+   */
+  @visibility("read")
+  catalogId?: string;
+
+  /**
+   * Id of the Collection resource.
+   */
+  @visibility("read")
+  collectionId?: string;
+
+  /**
+   * Assets.
+   */
+  assets?: Asset[];
+
+  /**
+   * Id of the Item.
+   */
+  @key("itemId")
+  @visibility("read")
+  id: string;
+
+  /**
+   * The ETag value to implement optimistic concurrency.
+   */
+  @visibility("read")
+  eTag?: string;
+
+  /**
+   * Status of the resource.
+   */
+  @maxLength(100)
+  status?: string;
+
+  /**
+   * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
+   */
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime?: utcDateTime;
+
+  /**
+   * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
+   */
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  modifiedDateTime?: utcDateTime;
+
+  /**
+   * Source of the resource.
+   */
+  @maxLength(100)
+  @minLength(2)
+  source?: string;
+
+  /**
+   * Name to identify resource.
+   */
+  @maxLength(100)
+  name?: string;
+
+  /**
+   * Textual description of the resource.
+   */
+  @maxLength(500)
+  description?: string;
+
+  /**
+   * Created by user/tenant id.
+   */
+  @visibility("read")
+  createdBy?: string;
+
+  /**
+   * Modified by user/tenant id.
+   */
+  @visibility("read")
+  modifiedBy?: string;
+
+  /**
+   * A collection of key value pairs that belongs to the resource.
+   * Each pair must not have a key greater than 50 characters
+   * and must not have a value greater than 150 characters.
+   * Note: A maximum of 25 key value pairs can be provided for a resource and only
+   * string,
+   * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
+   */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
+  properties?: Record<unknown>;
+}
+
+@parentResource(Catalog)
+@resource("items")
+model ItemsinCatalog is Item;
+
+/**
+ * ItemParameters model for Items api.
+ */
+model ItemParameters {
+  /**
+   * Links.
+   */
+  links?: Link[];
+
+  /**
+   * Schema for records under the dataset.
+   */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
+  data: Record<unknown>;
+
+  /**
+   * OwnerItemId.
+   */
+  ownerItemId?: string;
+
+  /**
+   * CatalogId.
+   */
+  // @visibility("read")
+  // catalogId?: string;
+  /**
+   * CollectionId.
+   */
+  // @visibility("read")
+  // collectionId?: string;
+  /**
+   * Assets.
+   */
+  assets?: Asset[];
+
+  /**
+   * Unique resource ID.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The ETag value to implement optimistic concurrency.
+   */
+  @visibility("read")
+  eTag?: string;
+
+  /**
+   * Status of the resource.
+   */
+  @maxLength(100)
+  status?: string;
+
+  /**
+   * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
+   */
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime?: utcDateTime;
+
+  /**
+   * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
+   */
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  modifiedDateTime?: utcDateTime;
+
+  /**
+   * Source of the resource.
+   */
+  @maxLength(100)
+  @minLength(2)
+  source?: string;
+
+  /**
+   * Name to identify resource.
+   */
+  @maxLength(100)
+  name?: string;
+
+  /**
+   * Textual description of the resource.
+   */
+  @maxLength(500)
+  description?: string;
+
+  /**
+   * Created by user/tenant id.
+   */
+  @visibility("read")
+  createdBy?: string;
+
+  /**
+   * Modified by user/tenant id.
+   */
+  @visibility("read")
+  modifiedBy?: string;
+
+  /**
+   * A collection of key value pairs that belongs to the resource.
+   * Each pair must not have a key greater than 50 characters
+   * and must not have a value greater than 150 characters.
+   * Note: A maximum of 25 key value pairs can be provided for a resource and only
+   * string,
+   * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
+   */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
+  properties?: Record<unknown>;
+}
+
+/**
+ * ItemResponse model for Items api.
+ */
+model ItemResponse {
+  /**
+   * Links.
+   */
+  links?: Link[];
+
+  /**
+   * Schema for records under the dataset.
+   */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   data: Record<unknown>;
 
   /**
@@ -463,6 +807,7 @@ model Item {
    * string,
    * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   properties?: Record<unknown>;
 }
 
@@ -555,11 +900,31 @@ model ItemQuery {
  * expected in [Longitude, Latitude] format.
  */
 @discriminator("type")
-model GeoJsonObject {}
+model GeoJsonObject {
+  /**
+   * Type of GeoJSON object.
+   */
+  type: GeoJsonObjectType;
+}
 
+/**
+ * Represents a response containing a list of items.
+ */
 model ItemListResponse {
+  /**
+   * List of Items.
+   */
   value: Item[];
+
+  /**
+   * Skip token for getting next set of results.
+   */
   skipToken?: string;
+
+  /**
+   * URL to do the POST request with same filters,
+   * to get next set of items.
+   */
   nextLink?: string;
 }
 
@@ -645,7 +1010,7 @@ model SatelliteFetchRequest {
   /**
    * OAuthClientCredentials for clientId clientSecret auth.
    */
-  credentials: OAuthClientCredentials;
+  credentials: OauthClientCredentials;
 
   /**
    * End Date.
@@ -685,8 +1050,9 @@ model SatelliteFetchRequest {
 /**
  * OAuthClientCredentials for clientId clientSecret auth.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model OAuthClientCredentials extends AuthCredentials {
+// #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+// @discriminator("kind")
+model OauthClientCredentials extends AuthCredentials {
   /**
    * ClientId associated with the provider.
    */
@@ -697,6 +1063,11 @@ model OAuthClientCredentials extends AuthCredentials {
    * Properties of the key vault.
    */
   clientSecret: KeyVaultProperties;
+
+  /**
+   * Type of AuthCredentials.
+   */
+  kind: AuthCredentialsKind.OAuthClientCredentials;
 }
 
 /**
@@ -728,6 +1099,7 @@ model KeyVaultProperties {
 /**
  * AuthCredentials abstract base class for Auth Purpose.
  */
+@discriminator("kind")
 model AuthCredentials {
   /**
    * Enum for different types of AuthCredentials supported.
@@ -735,6 +1107,18 @@ model AuthCredentials {
   kind: AuthCredentialsKind;
 }
 
+/**
+ * Resource model for Satellite API.
+ */
+@resource("external/satellite")
+model SatelliteResource {
+  /**
+   * Dummy key for satellite resource
+   */
+  @key("key")
+  @visibility("read")
+  key: string;
+}
 /**
  * Data Model for SatelliteIngestionJobRequest.
  */
@@ -846,7 +1230,7 @@ model SatelliteStacRequest {
   /**
    * OAuthClientCredentials for clientId clientSecret auth.
    */
-  credentials: OAuthClientCredentials;
+  credentials: OauthClientCredentials;
 
   /**
    * Provider of satellite data. Available Value: SentinelHub.
@@ -936,6 +1320,7 @@ model StacItem {
    * Defines the full footprint of the asset represented by this item.
    * Its a GeoJSON geometry.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
   geometry?: unknown;
 
   /**
@@ -946,6 +1331,7 @@ model StacItem {
   /**
    * A dictionary of additional metadata for the item.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
   properties: unknown;
 
   /**
@@ -1019,15 +1405,31 @@ model StacAsset {
   roles?: string[];
 }
 
+/**
+ * Represents a response containing a list of schemas.
+ */
 model SchemaListResponse {
+  /**
+   * List of Schemas.
+   */
   value: Schema[];
+
+  /**
+   * Skip token for getting next set of results.
+   */
   skipToken?: string;
+
+  /**
+   * URL to do the POST request with same filters,
+   * to get next set of items.
+   */
   nextLink?: string;
 }
 
 /**
  * SchemaModel.
  */
+@resource("schemas")
 model Schema {
   /**
    * Dependent Collections.
@@ -1038,13 +1440,15 @@ model Schema {
   /**
    * Schema.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   schemaModel: Record<unknown>;
 
   /**
-   * Unique resource ID.
+   * Id of the Schema.
    */
+  @key("schemaId")
   @visibility("read")
-  id?: string;
+  id: string;
 
   /**
    * The ETag value to implement optimistic concurrency.
@@ -1111,6 +1515,7 @@ model Schema {
    * string,
    * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   properties?: Record<unknown>;
 }
 
@@ -1132,6 +1537,18 @@ model CatalogCollection {
 }
 
 /**
+ * Represents a resource solution in the Agriculture Platform Service.
+ */
+@resource("external/solutions")
+model SolutionResource {
+  /**
+   * Dummy key for solution resource
+   */
+  @key("key")
+  @visibility("read")
+  key: string;
+}
+/**
  * Solution.
  */
 model Solution {
@@ -1150,11 +1567,13 @@ model Solution {
   /**
    * Properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   partnerRequestBody: Record<unknown>;
 
   /**
    * Properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   partnerRequestHeaders: Record<unknown>;
 }
 
@@ -1260,6 +1679,7 @@ model SolutionData {
   /**
    * Input Data.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   inputData: Record<unknown>;
 
   /**
@@ -1277,14 +1697,28 @@ model SolutionData {
   /**
    * Properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   partnerRequestBody: Record<unknown>;
 
   /**
    * Properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   partnerRequestHeaders: Record<unknown>;
 }
 
+/**
+ * Resource model for Weather API.
+ */
+@resource("external/weather")
+model WeatherResource {
+  /**
+   * Dummy key for satellite resource
+   */
+  @key("key")
+  @visibility("read")
+  key: string;
+}
 /**
  * WeatherRequest.
  */
@@ -1332,12 +1766,16 @@ model WeatherRequest {
 /**
  * Api Key Auth Credentials class for API Key based Auth.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ApiKeyAuthCredentials extends AuthCredentials {
   /**
    * Properties of the key vault.
    */
   apiKey: KeyVaultProperties;
+
+  /**
+   * Enum for different types of AuthCredentials.
+   */
+  kind: AuthCredentialsKind.ApiKeyAuthCredentials;
 }
 
 /**
@@ -1460,6 +1898,7 @@ model WeatherData {
    * than 250 characters. Note: A maximum of 100 key value pairs can be provided for
    * a resource and only string and numeral values are supported.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   additionalAttributes?: Record<unknown>;
 
   /**

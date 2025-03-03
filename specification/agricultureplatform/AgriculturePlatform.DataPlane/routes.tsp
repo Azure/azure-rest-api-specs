@@ -1,23 +1,33 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using Azure.Core;
+using Azure.Core.Traits;
 
-namespace AzureAgFoodPlatformDataPlaneService;
+namespace Microsoft.AgriculturePlatform;
+
+alias ServiceTraits = NoRepeatableRequests &
+  NoClientRequestId &
+  NoConditionalRequests;
+
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface CatalogsOperations {
   /**
    * Returns a paginated list of Catalog resources.
    */
-  @route("/catalogs")
-  @get
-  list is Azure.Core.Foundations.Operation<
-    {
+  list is Operations.ResourceList<
+    Catalog,
+    QueryParametersTrait<{
       /**
        * Names of the resource.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
       @query(#{ name: "names", explode: true })
       names?: string[];
 
@@ -25,18 +35,21 @@ interface CatalogsOperations {
        * Filters on key-value pairs within the Properties object.
        * eg. "{testKey} eq {testValue}".
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
       @query(#{ name: "propertyFilters", explode: true })
       propertyFilters?: string[];
 
       /**
        * Statuses of the resource.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
       @query(#{ name: "statuses", explode: true })
       statuses?: string[];
 
       /**
        * Ids of the resource.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
       @query(#{ name: "ids", explode: true })
       ids?: string[];
 
@@ -78,82 +91,36 @@ interface CatalogsOperations {
        */
       @query("skipToken")
       skipToken?: string;
-    },
-    CatalogListResponse
+    }>
   >;
 
   /**
    * Gets a specified Catalog resource.
    */
-  @route("/catalogs/{catalogId}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Catalog.
-       */
-      @path
-      catalogId: string;
-    },
-    Catalog
-  >;
+  get is Operations.ResourceRead<Catalog>;
 
   /**
    * Creates or updates a Catalog resource.
    */
-  @route("/catalogs/{catalogId}")
-  @patch
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Catalog resource.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Catalog resource payload to create or update.
-       */
-      @body
-      catalog: Catalog;
-    },
-    Catalog
-  >;
+  createOrUpdate is Operations.ResourceCreateOrUpdate<Catalog>;
 
   /**
    * Deletes Catalog for given Catalog id.
    */
-  @route("/catalogs/{catalogId}")
-  @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of Catalog to be deleted.
-       */
-      @path
-      catalogId: string;
-    },
-    void
-  >;
+  delete is Operations.ResourceDelete<Catalog>;
 }
 
 interface CollectionsOperations {
   /**
    * Returns a paginated list of Collection resources.
    */
-  @route("/catalogs/{catalogId}/collections")
-  @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Catalog.
-       */
-      @path
-      catalogId: string;
-
+  list is Operations.ResourceList<
+    Collection,
+    QueryParametersTrait<{
       /**
        * Names of the resource.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
       @query(#{ name: "names", explode: true })
       names?: string[];
 
@@ -161,18 +128,21 @@ interface CollectionsOperations {
        * Filters on key-value pairs within the Properties object.
        * eg. "{testKey} eq {testValue}".
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
       @query(#{ name: "propertyFilters", explode: true })
       propertyFilters?: string[];
 
       /**
        * Statuses of the resource.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
       @query(#{ name: "statuses", explode: true })
       statuses?: string[];
 
       /**
        * Ids of the resource.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
       @query(#{ name: "ids", explode: true })
       ids?: string[];
 
@@ -214,259 +184,95 @@ interface CollectionsOperations {
        */
       @query("skipToken")
       skipToken?: string;
-    },
-    CollectionListResponse
+    }>
   >;
 
   /**
    * Gets a specified Collection resource.
    */
-  @route("/catalogs/{catalogId}/collections/{collectionId}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Catalog.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Id of the Collection.
-       */
-      @path
-      collectionId: string;
-    },
-    Collection
-  >;
+  get is Operations.ResourceRead<Collection>;
 
   /**
    * Creates or updates a Collection resource.
    */
-  @route("/catalogs/{catalogId}/collections/{collectionId}")
-  @patch
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Collection resource.
-       */
-      @path
-      collectionId: string;
-
-      /**
-       * Id of the Catalog resource.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Collection resource payload to create or update.
-       */
-      @body
-      collection: Collection;
-    },
-    Collection
-  >;
+  createOrUpdate is Operations.ResourceCreateOrUpdate<Collection>;
 
   /**
    * Deletes Collection for given Collection id.
    */
-  @route("/catalogs/{catalogId}/collections/{collectionId}")
-  @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of Catalog.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Id of Collection to be deleted.
-       */
-      @path
-      collectionId: string;
-    },
-    void
-  >;
+  delete is Operations.ResourceDelete<Collection>;
 }
 
 interface FileOperations {
   /**
    * Deletes file.
    */
-  @route("/file:delete")
-  @post
-  delete is Azure.Core.Foundations.Operation<File, void>;
+  @action("delete")
+  delete is Operations.ResourceCollectionAction<
+    FileResource,
+    File,
+    NoContentResponse
+  >;
 
   /**
    * Downloads and returns file Stream as response for the given input filePath.
    */
-  @route("/file:download")
-  @post
-  download is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * request.
-       */
-      @body
-      request: File;
-
+  @action("download")
+  download is Operations.ResourceCollectionAction<
+    FileResource,
+    File,
+    NoContentResponse,
+    RequestHeadersTrait<{
       /**
        * Accept header
        */
       @header
       accept: "application/json, application/octet-stream";
-    },
-    void
+    }>
   >;
 
   /**
    * Uploads a file.
    */
-  @route("/file:upload")
-  @post
-  upload is Azure.Core.Foundations.Operation<{}, File>;
+  @action("upload")
+  upload is Operations.ResourceCollectionAction<FileResource, {}, File>;
 }
 
 interface ItemsOperations {
   /**
    * Creates or updates a Item resource.
    */
-  @route("/catalogs/{catalogId}/collections/{collectionId}/items/:create")
-  @post
-  create is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Collection resource.
-       */
-      @path
-      collectionId: string;
-
-      /**
-       * Id of the Catalog resource.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Collection resource payload to create or update.
-       */
-      @body
-      item: Item;
-    },
-    Item
+  @action("create")
+  create is Operations.ResourceCollectionAction<
+    Item,
+    ItemParameters,
+    ItemResponse
   >;
 
   /**
    * Gets a specified Item resource.
    */
-  @route("/catalogs/{catalogId}/collections/{collectionId}/items/{itemId}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Catalog.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Id of the Collection.
-       */
-      @path
-      collectionId: string;
-
-      /**
-       * Id of the Item.
-       */
-      @path
-      itemId: string;
-    },
-    Item
-  >;
+  get is Operations.ResourceRead<Item>;
 
   /**
    * Creates or updates a Item resource.
    */
-  @route("/catalogs/{catalogId}/collections/{collectionId}/items/{itemId}")
-  @patch
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Item resource.
-       */
-      @path
-      itemId: string;
-
-      /**
-       * Id of the Collection resource.
-       */
-      @path
-      collectionId: string;
-
-      /**
-       * Id of the Catalog resource.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Item resource payload to create or update.
-       */
-      @body
-      item: Item;
-    },
-    Item
-  >;
+  createOrUpdate is Operations.ResourceCreateOrUpdate<Item>;
 
   /**
    * Deletes Item for given Item id.
    */
-  @route("/catalogs/{catalogId}/collections/{collectionId}/items/{itemId}")
-  @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of Catalog.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * Id of Collection.
-       */
-      @path
-      collectionId: string;
-
-      /**
-       * Id of Item to be deleted.
-       */
-      @path
-      itemId: string;
-    },
-    void
-  >;
+  delete is Operations.ResourceDelete<Item>;
 
   /**
    * Search for Items across all parties by intersecting geometry.
    */
-  @route("/catalogs/{catalogId}/collections/{collectionId}/items:search")
-  @post
-  getAllUnderCollection is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * catalogId.
-       */
-      @path
-      catalogId: string;
-
-      /**
-       * collectionId.
-       */
-      @path
-      collectionId: string;
-
+  @action("search")
+  getAllUnderCollection is Operations.ResourceCollectionAction<
+    Item,
+    ItemQuery,
+    ItemListResponse,
+    QueryParametersTrait<{
       /**
        * Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000,
        * Default Value = 50.
@@ -474,30 +280,19 @@ interface ItemsOperations {
       @maxValue(1000)
       @minValue(10)
       @query("maxPageSize")
-      maxPageSize?: int32 = 50;
-
-      /**
-       * Query filters.
-       */
-      @body
-      searchItemQuery: ItemQuery;
-    },
-    ItemListResponse
+      maximumPageSize?: int32 = 50;
+    }>
   >;
 
   /**
    * Search for Items across all collections.
    */
-  @route("/catalogs/{catalogId}/items:search")
-  @post
-  searchAcrossCollection is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * catalogId.
-       */
-      @path
-      catalogId: string;
-
+  @action("search")
+  searchAcrossCollection is Operations.ResourceCollectionAction<
+    ItemsinCatalog,
+    CrossCollectionItemSearchQuery,
+    ItemListResponse,
+    QueryParametersTrait<{
       /**
        * Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000,
        * Default Value = 50.
@@ -505,15 +300,8 @@ interface ItemsOperations {
       @maxValue(1000)
       @minValue(10)
       @query("maxPageSize")
-      maxPageSize?: int32 = 50;
-
-      /**
-       * Query filters.
-       */
-      @body
-      searchItemQuery: CrossCollectionItemSearchQuery;
-    },
-    ItemListResponse
+      maximumPageSize?: int32 = 50;
+    }>
   >;
 }
 
@@ -521,10 +309,12 @@ interface SatelliteOperations {
   /**
    * Fetches Satellite data.
    */
-  @route("/external/satellite:fetch")
-  @post
-  fetchItems is Azure.Core.Foundations.Operation<
-    {
+  @action("fetch")
+  fetchItems is Operations.ResourceCollectionAction<
+    SatelliteResource,
+    SatelliteFetchRequest,
+    SatelliteFetchResponse,
+    QueryParametersTrait<{
       /**
        * Maximum number of items needed (inclusive). Minimum = 1, Maximum = 100, Default
        * value = 10.
@@ -541,24 +331,19 @@ interface SatelliteOperations {
       @minValue(1)
       @query("skip")
       skip?: int32;
-
-      /**
-       * Query filters.
-       */
-      @body
-      searchItemsQuery: SatelliteFetchRequest;
-    },
-    SatelliteFetchResponse
+    }>
   >;
 
   /**
    * Searches for STAC items by collection id, bbox, intersecting geometry, start
    * and end datetime.
    */
-  @route("/external/satellite:stac")
-  @post
-  searchItems is Azure.Core.Foundations.Operation<
-    {
+  @action("stac")
+  searchItems is Operations.ResourceCollectionAction<
+    SatelliteResource,
+    SatelliteStacRequest,
+    SearchFeaturesResponse,
+    QueryParametersTrait<{
       /**
        * Maximum number of items needed (inclusive). Minimum = 1, Maximum = 100, Default
        * value = 10.
@@ -575,14 +360,7 @@ interface SatelliteOperations {
       @minValue(1)
       @query("skip")
       skip?: int32;
-
-      /**
-       * Request.
-       */
-      @body
-      request: SatelliteStacRequest;
-    },
-    SearchFeaturesResponse
+    }>
   >;
 }
 
@@ -590,13 +368,13 @@ interface SchemasOperations {
   /**
    * Returns a paginated list of Schema resources.
    */
-  @route("/schemas")
-  @get
-  list is Azure.Core.Foundations.Operation<
-    {
+  list is Operations.ResourceList<
+    Schema,
+    QueryParametersTrait<{
       /**
        * Names of the resource.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
       @query(#{ name: "names", explode: true })
       names?: string[];
 
@@ -604,18 +382,21 @@ interface SchemasOperations {
        * Filters on key-value pairs within the Properties object.
        * eg. "{testKey} eq {testValue}".
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
       @query(#{ name: "propertyFilters", explode: true })
       propertyFilters?: string[];
 
       /**
        * Statuses of the resource.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
       @query(#{ name: "statuses", explode: true })
       statuses?: string[];
 
       /**
        * Ids of the resource.
        */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
       @query(#{ name: "ids", explode: true })
       ids?: string[];
 
@@ -657,72 +438,32 @@ interface SchemasOperations {
        */
       @query("skipToken")
       skipToken?: string;
-    },
-    SchemaListResponse
+    }>
   >;
 
   /**
    * Gets a specified Schema resource.
    */
-  @route("/schemas/{schemaId}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Schema.
-       */
-      @path
-      schemaId: string;
-    },
-    Schema
-  >;
+  get is Operations.ResourceRead<Schema>;
 
   /**
    * Creates or updates a Schema resource.
    */
-  @route("/schemas/{schemaId}")
-  @patch
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of the Schema resource.
-       */
-      @path
-      schemaId: string;
-
-      /**
-       * Schema resource payload to create or update.
-       */
-      @body
-      schema: Schema;
-    },
-    Schema
-  >;
+  createOrUpdate is Operations.ResourceCreateOrUpdate<Schema>;
 
   /**
    * Deletes Schema for given Schema id.
    */
-  @route("/schemas/{schemaId}")
-  @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Id of Schema to be deleted.
-       */
-      @path
-      schemaId: string;
-    },
-    void
-  >;
+  delete is Operations.ResourceDelete<Schema>;
 }
 
 interface SolutionsOperations {
   /**
    * Cancel Solution job Async.
    */
-  @route("/external/solutions:cancel-job")
-  @post
-  cancelJob is Azure.Core.Foundations.Operation<
+  @action("cancel-job")
+  cancelJob is Operations.ResourceCollectionAction<
+    SolutionResource,
     Solution,
     SamplePartnerResponse
   >;
@@ -730,9 +471,9 @@ interface SolutionsOperations {
   /**
    * Creates solution job async.
    */
-  @route("/external/solutions:create-job")
-  @post
-  createJob is Azure.Core.Foundations.Operation<
+  @action("create-job")
+  createJob is Operations.ResourceCollectionAction<
+    SolutionResource,
     SolutionData,
     SamplePartnerResponse
   >;
@@ -740,9 +481,9 @@ interface SolutionsOperations {
   /**
    * Gets solution Data async.
    */
-  @route("/external/solutions:get-data")
-  @post
-  getData is Azure.Core.Foundations.Operation<
+  @action("get-data")
+  getData is Operations.ResourceCollectionAction<
+    SolutionResource,
     SolutionData,
     SamplePartnerResponse
   >;
@@ -750,16 +491,22 @@ interface SolutionsOperations {
   /**
    * Gets Solution get job response async.
    */
-  @route("/external/solutions:get-job")
-  @post
-  getJob is Azure.Core.Foundations.Operation<Solution, SamplePartnerResponse>;
+  @action("get-job")
+  getJob is Operations.ResourceCollectionAction<
+    SolutionResource,
+    Solution,
+    SamplePartnerResponse
+  >;
 }
 
 interface WeatherOperations {
   /**
    * Returns a list of WeatherData.
    */
-  @route("/external/weather:fetch")
-  @post
-  get is Azure.Core.Foundations.Operation<WeatherRequest, WeatherResponse>;
+  @action("fetch")
+  get is Operations.ResourceCollectionAction<
+    WeatherResource,
+    WeatherRequest,
+    WeatherResponse
+  >;
 }
