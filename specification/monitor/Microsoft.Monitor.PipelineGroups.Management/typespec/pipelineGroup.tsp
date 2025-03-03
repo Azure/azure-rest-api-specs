@@ -39,22 +39,22 @@ model PipelineGroupProperties {
   replicas?: int32;
 
   @doc("The receivers specified for a pipeline group instance.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   receivers: Receiver[];
 
   @doc("The processors specified for a pipeline group instance.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   processors: Processor[];
 
   @doc("The exporters specified for a pipeline group instance.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   exporters: Exporter[];
 
   @doc("The service section for a given pipeline group instance.")
   service: Service;
 
   @doc("Networking configurations for the pipeline group instance.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   networkingConfigurations?: NetworkingConfiguration[];
 
   @doc("The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.")
@@ -152,11 +152,11 @@ union ExporterType {
 @doc("Service Info.")
 model Service {
   @doc("Pipelines belonging to a given pipeline group.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   pipelines: Pipeline[];
 
   @doc("Persistence options to all pipelines in the instance.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   persistence?: PersistenceConfigurations;
 }
 
@@ -170,15 +170,15 @@ model Pipeline {
   type: PipelineType;
 
   @doc("Reference to receivers configured for the pipeline.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   receivers: string[];
 
   @doc("Reference to processors configured for the pipeline.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   processors?: string[];
 
   @doc("Reference to exporters configured for the pipeline.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   exporters: string[];
 }
 
@@ -200,7 +200,7 @@ model NetworkingConfiguration {
   host?: string;
 
   @doc("Networking routes configuration.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   routes: NetworkingRoute[];
 }
 

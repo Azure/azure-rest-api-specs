@@ -128,7 +128,7 @@ model MongoClusterProperties {
   publicNetworkAccess?: PublicNetworkAccess;
 
   /** The list of node group specs in the cluster. */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   @removed(Versions.v2024_07_01)
   nodeGroupSpecs?: NodeGroupSpec[];
 
@@ -253,7 +253,7 @@ model BackupProperties {
 model ListConnectionStringsResult {
   /** An array that contains the connection strings for a mongo cluster. */
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   connectionStrings?: ConnectionString[];
 }
 

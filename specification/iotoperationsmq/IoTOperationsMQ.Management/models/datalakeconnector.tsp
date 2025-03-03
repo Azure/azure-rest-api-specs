@@ -241,7 +241,7 @@ model DataLakeConnectorMap {
 @doc("Delta table properties")
 model DeltaTable {
   @doc("Schema list supported.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   schema: DeltaTableSchema[];
 
   @doc("Delta table name.")

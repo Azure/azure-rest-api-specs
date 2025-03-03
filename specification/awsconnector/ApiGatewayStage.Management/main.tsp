@@ -96,7 +96,7 @@ model AwsApiGatewayStageProperties {
   documentationVersion?: string;
 
   @doc("A map that defines the method settings for a Stage resource. Keys (designated as ``/{method_setting_key`` below) are method paths defined as ``{resource_path}/{http_method}`` for an individual method override, or ``/\\*/\\*`` for overriding all methods in the stage.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   methodSettings?: MethodSetting[];
 
   @doc("The string identifier of the associated RestApi.")
@@ -106,7 +106,7 @@ model AwsApiGatewayStageProperties {
   stageName?: string;
 
   @doc("The collection of tags. Each tag element is associated with a given resource.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   tags?: Tag[];
 
   @doc("Specifies whether active tracing with X-ray is enabled for the Stage.")

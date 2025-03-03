@@ -49,7 +49,7 @@ model HealthValidationProperties {
   status: validationStatus;
 
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("The list of issues found by health validation.")
   issues: ValidationIssue[];
 

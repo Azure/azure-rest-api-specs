@@ -101,7 +101,7 @@ model NodeImageSelection {
 
   @added(Versions.v2024_05_02_preview)
   @doc("Custom node image versions to upgrade the nodes to. This field is required if node image selection type is Custom. Otherwise, it must be empty. For each node image family (e.g., 'AKSUbuntu-1804gen2containerd'), this field can contain at most one version (e.g., only one of 'AKSUbuntu-1804gen2containerd-2023.01.12' or 'AKSUbuntu-1804gen2containerd-2023.02.12', not both). If the nodes belong to a family without a matching image version in this field, they are not upgraded.")
-  @extension("x-ms-identifiers", ["version"])
+  @extension("x-ms-identifiers", #["version"])
   customNodeImageVersions?: NodeImageVersion[];
 }
 
@@ -200,7 +200,7 @@ model UpdateRunStatus {
   status?: UpdateStatus;
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @doc("The stages composing an update run. Stages are run sequentially withing an UpdateRun.")
   stages?: UpdateStageStatus[];
 
@@ -213,8 +213,8 @@ model UpdateRunStatus {
 @doc("The node image upgrade specs for the update run.")
 @added(Versions.v2023_06_15_preview)
 model NodeImageSelectionStatus {
-  @extension("x-ms-identifiers", ["version"])
   @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #["version"])
   @doc("The image versions to upgrade the nodes to.")
   selectedNodeImageVersions?: NodeImageVersion[];
 }
@@ -238,7 +238,7 @@ model UpdateStageStatus {
   name?: string;
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @doc("The list of groups to be updated as part of this UpdateStage.")
   groups?: UpdateGroupStatus[];
 
@@ -258,7 +258,7 @@ model UpdateGroupStatus {
   name?: string;
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @doc("The list of member this UpdateGroup updates.")
   members?: MemberUpdateStatus[];
 }
@@ -334,7 +334,7 @@ model SkipTarget {
 @added(Versions.v2024_02_02_preview)
 model SkipProperties {
   @doc("The targets to skip.")
-  @extension("x-ms-identifiers", ["type", "name"])
+  @extension("x-ms-identifiers", #["type", "name"])
   targets: SkipTarget[];
 }
 
