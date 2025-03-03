@@ -8,10 +8,13 @@
     "landingZoneAccountName": "ExampleLZA",
     "resource": {
       "properties": {
-        "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/TestStorageAccount/providers/Microsoft.Storage/storageAccounts/teststorageaccount"
+        "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-examplegroup/providers/Microsoft.Storage/storageAccounts/saexample"
       },
       "identity": {
-        "type": "SystemAssigned"
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-examplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-testidentity": {}
+        }
       },
       "tags": {
         "tag1": "MCFS"
@@ -24,17 +27,23 @@
       "body": {
         "properties": {
           "provisioningState": "Succeeded",
-          "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SampleResourceGroup/providers/Microsoft.Storage/storageAccounts/teststorageaccount"
+          "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-examplegroup/providers/Microsoft.Storage/storageAccounts/saexample"
         },
         "identity": {
-          "principalId": "e7953ada-b215-4c82-9a4c-7b8dd6e09beb",
-          "tenantId": "8a7a0a60-587f-4774-af1f-4cbf9f1edb6b",
-          "type": "SystemAssigned"
+          "principalId": "00000000-0000-0000-0000-000000000001",
+          "tenantId": "00000000-0000-0000-0000-000000000002",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-examplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-exampleidentity": {
+              "principalId": "00000000-0000-0000-0000-000000000003",
+              "clientId": "00000000-0000-0000-0000-000000000004"
+            }
+          }
         },
         "tags": {
           "tag1": "MCFS"
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SampleResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-examplegroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA",
         "name": "ExampleLZA",
         "type": "microsoft.sovereign/landingzoneaccounts",
         "location": "northeurope",
@@ -55,17 +64,23 @@
       "body": {
         "properties": {
           "provisioningState": "Succeeded",
-          "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SampleResourceGroup/providers/Microsoft.Storage/storageAccounts/teststorageaccount"
+          "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-examplegroup/providers/Microsoft.Storage/storageAccounts/saexample"
         },
         "identity": {
-          "principalId": "00000000-0000-0000-0000-000000000002",
+          "principalId": "00000000-0000-0000-0000-000000000001",
           "tenantId": "00000000-0000-0000-0000-000000000002",
-          "type": "SystemAssigned"
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-examplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-exampleidentity": {
+              "principalId": "00000000-0000-0000-0000-000000000003",
+              "clientId": "00000000-0000-0000-0000-000000000004"
+            }
+          }
         },
         "tags": {
           "tag1": "MCFS"
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SampleResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-examplegroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA",
         "name": "ExampleLZA",
         "type": "microsoft.sovereign/landingzoneaccounts",
         "location": "northeurope",
