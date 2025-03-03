@@ -3626,6 +3626,8 @@ model StatefulServiceProperties extends ServiceResourceProperties {
   /**
    * The duration for which replicas can stay InBuild before reporting that build is stuck, represented in ISO 8601 format "hh:mm:ss".
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+  @OpenAPI.extension("x-ms-format", "duration-constant")
   servicePlacementTimeLimit?: string;
 
   /**
