@@ -1,10 +1,19 @@
-import { readFile, readdir } from "fs/promises";
+import { readFile } from "fs/promises";
 // import { exec } from "node:child_process";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { getOpenapiType, getAllTags, getInputFiles } from "./markdown-parser.js";
+import { getOpenapiType, getAllTags, getInputFiles } from "./markdown-utils.js";
 import { sep, dirname, join } from "path";
-import { pathExists, getPathToDependency } from "./util.js";
-import $RefParser from "@apidevtools/json-schema-ref-parser";
+import {
+  pathExists,
+  getPathToDependency,
+  readFileList,
+  getAffectedServices,
+  getSwaggerDependenciesMap,
+  getAffectedSwaggers,
+  getAffectedReadmes,
+  getService,
+  deduplicateTags,
+} from "./util.js";
 
 // 64 MiB max output buffers for exec
 // const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
@@ -148,7 +157,6 @@ async function runLintDiff(
       // If the tags array is empty run the loop once but with a null tag
       const coalescedTags = tags?.length ? tags : [null];
       for (const tag of coalescedTags) {
-        // TODO: See tag specified in momentOfTruth.ts:executeAutoRestWithLintDiff
         let tagArg = tag ? `--tag=${tag} ` : "";
 
         let autorestCommand =
@@ -167,12 +175,6 @@ async function runLintDiff(
 
         console.log(`autorest command: ${autorestCommand}`);
         // let lintDiffResult = await executeCommand(autorestCommand);
-
-        // if (lintDiffResult.error) {
-        //   console.error("Error running autorest", lintDiffResult.error);
-        //   process.exit(1);
-        // }
-
         // console.log("Lint diff result:", lintDiffResult.stdout);
       }
     }
@@ -196,16 +198,10 @@ async function runLintDiff(
 //   });
 // }
 
-async function readFileList(changedFilesPath: string): Promise<string[]> {
-  const data = await readFile(changedFilesPath, { encoding: "utf-8" });
-  return data
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line.length > 0);
-}
-
 type State = {
   // Things needed to do the work
+  // TODO: Narrow this object to specific properties that are used in later
+  // steps.
   rootPath: string;
   existingChangedFiles: string[];
   affectedServiceDirectories: Set<string>;
@@ -245,7 +241,6 @@ export async function buildState(changedSpecFiles: string[], rootPath: string): 
 
   // Use changedSpecFiles (which might not be present in the branch) to get
   // a set of affected readme files.
-  // TODO: Is this even useful?
   const affectedReadmes = await getAffectedReadmes(changedSpecFiles, rootPath);
 
   const readmeTags = new Map<string, Set<string>>();
@@ -280,7 +275,8 @@ export async function buildState(changedSpecFiles: string[], rootPath: string): 
     }
   }
 
-  // TODO: Deduplicate inside or outside state building?
+  // TODO: Deduplicate inside or outside state building? It's possible that
+  // later processing like that in reconcileChangedFilesAndTags
   const changedFileAndTagsMap = new Map<string, string[]>();
   for (const [readme, tags] of readmeTags.entries()) {
     const dedupedTags = await deduplicateTags(
@@ -328,18 +324,18 @@ export async function reconcileChangedFilesAndTags(
   const beforeFinal = new Map<string, string[]>();
   const afterFinal = new Map<string, string[]>();
 
-  // Establish base final state
-  // TODO: Ensure tags are properly copied and not mutated
+  // Clone the maps so that changes to maps do not affect original object
   for (const [readme, tags] of before.changedFileAndTagsMap.entries()) {
-    beforeFinal.set(readme, tags);
+    beforeFinal.set(readme, [...tags]);
   }
   for (const [readme, tags] of after.changedFileAndTagsMap.entries()) {
-    afterFinal.set(readme, tags);
+    afterFinal.set(readme, [...tags]);
   }
 
   // If a tag is deleted in after and exists in before, do NOT scan the tag
   for (const [readme, tags] of beforeFinal.entries()) {
-    // TODO: A deleted readme might also be cause to remove from scanning
+    // TODO: A deleted readme might also be cause to remove from scanning,
+    // which this currently does not do.
     if (!afterFinal.has(readme)) {
       continue;
     }
@@ -352,196 +348,4 @@ export async function reconcileChangedFilesAndTags(
   }
 
   return [beforeFinal, afterFinal];
-}
-
-/**
- * Get the list of readme files that are affected by the changed files by
- * searching for readme files in each higher directory up to the "specification/"
- * directory.
- *
- * @param changedFiles List of changed files.
- */
-export async function getAffectedReadmes(
-  changedFiles: string[],
-  repoRoot: string,
-): Promise<string[]> {
-  const changedFilesInSpecDir = changedFiles.filter((file) =>
-    file.startsWith(`specification${sep}`),
-  );
-
-  // TODO: Case sensitivity??
-  const changedReadmeFiles = [];
-  for (const file of changedFilesInSpecDir) {
-    if (file.endsWith(`${sep}readme.md`) && (await pathExists(join(repoRoot, file)))) {
-      changedReadmeFiles.push(file);
-    }
-  }
-
-  // TODO: Case sensitivity??
-  const changedSpecFiles = changedFilesInSpecDir.filter((f) =>
-    [".md", ".json", ".yaml", ".yml"].some((p) => f.endsWith(p)),
-  );
-
-  const readmeFiles = new Set<string>(changedReadmeFiles);
-  const visitedFolders = new Set<string>();
-
-  // For each changed spec file, walk up the directory tree collecting readme
-  // files until reaching the "specification/" directory (already filtered in
-  // changedFilesInSpecDir)
-  for (const specFile of changedSpecFiles) {
-    let dir = dirname(specFile);
-    // Exclude '.' as it is outside the specification folder for purposes of
-    // this function (avoid including root readme.md file)
-    while (!visitedFolders.has(dir) && dir !== "specification") {
-      visitedFolders.add(dir);
-      // TODO: Case sensitivity??
-      const readmeFile = join(repoRoot, dir, "readme.md");
-      if (await pathExists(readmeFile)) {
-        readmeFiles.add(join(dir, "readme.md"));
-      }
-      dir = dirname(dir);
-    }
-  }
-
-  return [...readmeFiles];
-}
-
-/**
- * Returns the service of a file path of the form "specification/<service>"
- * @param filePath Path to a file of the form "specification/<service>/.../file.json"
- * @returns Service path of the form "specification/<service>"
- */
-export async function getService(filePath: string): Promise<string> {
-  const splitPath = filePath.split(sep);
-  if (splitPath.length >= 2) {
-    // TODO: Verify result is a directory or remove async
-    return splitPath.slice(0, 2).join(sep);
-  }
-  return "";
-}
-
-export async function getAffectedServices(changedFiles: string[]) {
-  const affectedServices = new Set<string>();
-  for (const file of changedFiles) {
-    const service = await getService(file);
-    if (service) {
-      affectedServices.add(service);
-    }
-  }
-  return affectedServices;
-}
-
-export function getAffectedSwaggers(
-  changedFiles: string[],
-  dependencies: Map<string, Set<string>>,
-): string[] {
-  const affectedSwaggers = new Set<string>(changedFiles);
-
-  for (const changedFile of changedFiles) {
-    for (const [file, deps] of dependencies.entries()) {
-      if (affectedSwaggers.has(file)) {
-        continue;
-      }
-
-      if (deps.has(changedFile)) {
-        affectedSwaggers.add(file);
-      }
-    }
-  }
-
-  return [...affectedSwaggers];
-}
-
-export async function getSwaggerDependenciesMap(
-  rootPath: string,
-  directory: string,
-): Promise<NonNullable<Map<string, Set<string>>>> {
-  const swaggerFiles = await enumerateFiles(rootPath, directory, ".json");
-  const swaggerDependencies = new Map<string, Set<string>>();
-  const rootAndDirectoryPath = join(rootPath, directory);
-
-  for (const file of swaggerFiles) {
-    // TODO: Use a single parser?
-    let parser = new $RefParser();
-    await parser.resolve(join(rootPath, file), {
-      resolve: { http: false },
-    });
-    // TODO: filter should exclude URLs
-    const refs = parser.$refs
-      .paths()
-      .filter(
-        (ref) =>
-          ref.startsWith(rootAndDirectoryPath) && // Inside the target directory
-          !ref.includes(`${sep}examples${sep}`), // Exclude examples
-      )
-      .map((ref) => ref.substring(rootPath.length + 1)) // Relative to rootPath
-      .filter((ref) => ref !== file); // Exclude self-reference
-
-    swaggerDependencies.set(file, new Set(refs));
-  }
-
-  return swaggerDependencies;
-}
-
-// TODO: Extract to common utils
-/**
- * Given a root path and directory, find all files whose name ends with a given
- * string. (e.g. ".json")
- * @param rootPath Root path of starting directory
- * @param dir Starting directory
- * @param endsWith a file extension to search for
- * @returns A list of files with paths relative to rootPath
- */
-async function enumerateFiles(rootPath: string, dir: string, endsWith: string): Promise<string[]> {
-  let results: string[] = [];
-  let stack: string[] = [dir];
-
-  while (stack.length > 0) {
-    const currentDir = stack.pop()!;
-    const list = await readdir(join(rootPath, currentDir), { withFileTypes: true });
-
-    for (const file of list) {
-      if (file.isDirectory()) {
-        stack.push(join(currentDir, file.name));
-      } else {
-        if (file.name.endsWith(endsWith)) {
-          results.push(join(currentDir, file.name));
-        }
-      }
-    }
-  }
-
-  return results;
-}
-
-/**
- * Given a list of tags and the content of a readme file, find the input files
- * for that readme
- *
- * @param tags
- * @param readmeContent
- * @returns
- */
-async function deduplicateTags(tags: string[], readmeContent: string) {
-  type TagInputFile = { tagName: string; inputFiles: readonly string[] };
-  const tagResults: TagInputFile[] = [];
-  for (const tag of tags) {
-    const inputFiles = (await getInputFiles(readmeContent, tag)) || [];
-    if (inputFiles.length > 0) {
-      tagResults.push({ tagName: tag, inputFiles });
-    }
-  }
-
-  // TODO: This was ported straight across and can probably be done more cleanly
-  const sortedTags = tagResults.sort((a, b) => a.inputFiles.length - b.inputFiles.length);
-  return sortedTags
-    .filter((tag, index) => {
-      for (const restTag of sortedTags.slice(index + 1)) {
-        if (tag.inputFiles.every((file) => restTag.inputFiles.includes(file))) {
-          return false;
-        }
-      }
-      return true;
-    })
-    .map((tag) => tag.tagName);
 }
