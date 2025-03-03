@@ -111,33 +111,7 @@ op listExportedModels is languageOperations.ResourceList<
 >;
 
 interface ConversationAuthoringDeployment {
-  /**
-   * Swaps two existing deployments with each other.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/:swap")
-  @post
-  @pollingOperation(ConversationAuthoringDeployment.getSwapDeploymentsStatus)
-  swapDeployments is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job object to swap two deployments.
-       */
-      @body
-      @clientName("details", "csharp")
-      body: AnalyzeConversationAuthoringSwapDeploymentsOptions;
-    },
-    AcceptedResponse,
-    {},
-    Foundations.ErrorResponse
-  >;
+  
 
   /**
    * Gets the details of a deployment.
@@ -253,20 +227,18 @@ interface ConversationAuthoringDeployment {
    * Gets the status of an existing deployment job.
    */
   getDeploymentStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentJobState>;
+}
 
-  /**
-   * Gets the status of an existing swap deployment job.
-   */
-  getSwapDeploymentsStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringSwapDeploymentsJobState>;
+interface ConversationAuthoringProject {
 
-  /**
+/**
    * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
   @post
   @pollingOperation(
-    ConversationAuthoringDeployment.getAssignDeploymentResourcesStatus
+    ConversationAuthoringProject.getAssignDeploymentResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
   assignDeploymentResources is Foundations.LongRunningOperation<
@@ -297,7 +269,7 @@ interface ConversationAuthoringDeployment {
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
   @post
   @pollingOperation(
-    ConversationAuthoringDeployment.getUnassignDeploymentResourcesStatus
+    ConversationAuthoringProject.getUnassignDeploymentResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
   unassignDeploymentResources is Foundations.LongRunningOperation<
@@ -353,9 +325,39 @@ interface ConversationAuthoringDeployment {
     {},
     Foundations.ErrorResponse
   >;
-}
+  
+/**
+   * Swaps two existing deployments with each other.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/:swap")
+  @post
+  @pollingOperation(ConversationAuthoringProject.getSwapDeploymentsStatus)
+  swapDeployments is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
 
-interface ConversationAuthoringProject {
+      /**
+       * The job object to swap two deployments.
+       */
+      @body
+      @clientName("details", "csharp")
+      body: AnalyzeConversationAuthoringSwapDeploymentsOptions;
+    },
+    AcceptedResponse,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+/**
+   * Gets the status of an existing swap deployment job.
+   */
+  getSwapDeploymentsStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringSwapDeploymentsJobState>;
   /**
    * Gets the details of a project.
    */
