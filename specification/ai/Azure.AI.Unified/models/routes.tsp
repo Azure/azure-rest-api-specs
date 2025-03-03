@@ -16,43 +16,35 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Unified;
 
+alias ServiceTraits = SupportsClientRequestId &
+  SupportsRepeatableRequests &
+  SupportsConditionalRequests;
+
+alias ModelOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+
 interface Models {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+
   @doc("Get a deployed model.")
-  @route("/models/{name}")
-  @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      @doc("Name of the model container.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-      @maxLength(254)
-      @path
-      name: string;
-    },
-    Model
-  >;
+  get is ModelOperations.ResourceRead<Model>
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("List all deployed models in the project.")
-  @route("/models")
-  @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      @doc("Model publisher to filter models by")
-      @query("$modelPublisher")
-      modelPublisher?: string,
-
-      @doc("Model name (the publisher specific name) to filter models by")
-      @query("$modelName")
-      modelName?: string,
-
-      @doc("Flag to include models from connections in response.")
-      @query("$includeConnectedModels")
-      includeConnectionModels?: boolean,
-
-      ...StandardListQueryParameters;
-    },
-    Model
+  @doc("List all deployed models in the project")
+  list is ModelOperations.ResourceList<
+    Model,
+    ListQueryParametersTrait<{
+        @doc("Model publisher to filter models by")
+        @query("$modelPublisher")
+        modelPublisher?: string,
+  
+        @doc("Model name (the publisher specific name) to filter models by")
+        @query("$modelName")
+        modelName?: string,
+  
+        @doc("Flag to include models from connections in response.")
+        @query("$includeConnectedModels")
+        includeConnectionModels?: boolean,
+  
+        ...StandardListQueryParameters;
+      }>,
   >;
 
   @doc("""

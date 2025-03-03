@@ -15,12 +15,13 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Unified;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Model Deployment Definition")
+@resource("models")
 model Model {
   @doc("Name of the deployment for the model")
   @visibility("read")
-  name: string;
+  @key("deploymentName")
+  deploymentName: string;
 
   @doc("Publisher-specific name of the model")
   @visibility("read")
