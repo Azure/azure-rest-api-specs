@@ -185,6 +185,7 @@ union EncryptionVersionType {
 model PrivateCloud is TrackedResource<PrivateCloudProperties> {
   ...ResourceSkuRequired;
   ...ManagedSystemAssignedIdentityProperty;
+  ...AvailabilityZones;
 
   @doc("Name of the private cloud")
   @pattern("^[-\\w\\._]+$")
@@ -243,6 +244,10 @@ model PrivateCloudUpdateProperties {
 
   @doc("The type of DNS zone to use.")
   dnsZoneType?: DnsZoneType;
+
+  @doc("Display name of the resource.")
+  @added(Versions.v2024_09_01)
+  displayName?: string;
 }
 
 @doc("The properties of a private cloud resource")
@@ -302,10 +307,12 @@ model PrivateCloudProperties {
   @visibility("read")
   vmotionNetwork?: string;
 
+  #deprecated "It is recommended to let the system generate the password when the private cloud is created."
   @doc("Optionally, set the vCenter admin password when the private cloud is created")
   @secret
   vcenterPassword?: string;
 
+  #deprecated "It is recommended to let the system generate the password when the private cloud is created."
   @doc("Optionally, set the NSX-T Manager password when the private cloud is created")
   @secret
   nsxtPassword?: string;
@@ -345,6 +352,10 @@ model PrivateCloudProperties {
 
   @doc("The type of DNS zone to use.")
   dnsZoneType?: DnsZoneType;
+
+  @doc("Display name of the resource.")
+  @added(Versions.v2024_09_01)
+  displayName?: string;
 }
 
 @doc("An ExpressRoute Circuit")
@@ -408,7 +419,7 @@ model IdentitySource {
   @doc("The domain's NetBIOS name")
   `alias`?: string;
 
-  @doc("The domain's dns name")
+  @doc("The domain's DNS name")
   domain?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
