@@ -20,7 +20,8 @@ Generate all API versions currently shipped for this package
 multiapi: true
 default-api-version: "2023-07-01"
 batch:
-  - tag: package-2025-03-preview-only
+  - tag: package-2025-03-preview-core-registry
+  - tag: package-2025-03-preview-tasks
   - tag: package-2024-11-preview-only
   - tag: package-2023-11-preview-only
   - tag: package-2023-01-preview-only
@@ -38,12 +39,22 @@ output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregis
 perform-load: false
 ```
 
-### Tag: package-2025-03-preview-only and python
+### Tag: package-2025-03-preview-core-registry and python
 
-These settings apply only when `--tag=package-2025-03-preview-only --python` is specified on the command line.
+These settings apply only when `--tag=package-2025-03-preview-core-registry --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2025-03-preview-only' && $(python)
+``` yaml $(tag) == 'package-2025-03-preview-core-registry' && $(python)
+namespace: azure.mgmt.containerregistry.v2025_03_01_preview
+output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2025_03_01_preview
+```
+
+### Tag: package-2025-03-preview-tasks and python
+
+These settings apply only when `--tag=package-2025-03-preview-tasks --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2025-03-preview-tasks' && $(python)
 namespace: azure.mgmt.containerregistry.v2025_03_01_preview
 output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2025_03_01_preview
 ```
