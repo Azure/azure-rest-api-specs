@@ -49,7 +49,7 @@ suppressions:
     reason: False positive error for Collection Get API
     from: workflow.json
   - code: AvoidAdditionalProperties
-    reason: Templates need additional properties for input/reponses.
+    reason: Templates need additional properties for input/responses.
     from: template.json
 ```
 
