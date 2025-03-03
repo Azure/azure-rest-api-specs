@@ -3,4 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.AgriculturePlatform, "AgriculturePlatformMgmtClient", "python");
+@@clientName(Microsoft.AgriculturePlatform,
+  "AgriculturePlatformMgmtClient",
+  "python"
+);
