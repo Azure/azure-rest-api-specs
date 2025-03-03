@@ -141,7 +141,7 @@ using Microsoft.Storage;
   "parameters"
 );
 
-@@clientName(StorageAccountsOperations.checkNameAvailability::parameters.body,
+@@clientName(StorageAccountsResourceGroup.checkNameAvailability::parameters.body,
   "accountName"
 );
 @@clientName(CorsRules, "StorageCorsRules", "csharp");

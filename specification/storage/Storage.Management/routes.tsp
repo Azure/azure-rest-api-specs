@@ -32,7 +32,7 @@ interface SkusOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface StorageAccountsOperations {
+interface StorageAccountsResourceGroup {
   /**
    * Checks that the storage account name is valid and is not already in use.
    */
@@ -48,7 +48,7 @@ interface StorageAccountsOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface DeletedAccountsOperations {
+interface DeletedAccountsResourceGroup {
   /**
    * Lists deleted accounts under the subscription.
    */
@@ -82,6 +82,6 @@ interface UsagesOperations {
     Parameters = LocationParameter
   >;
 }
-@@doc(StorageAccountsOperations.checkNameAvailability::parameters.body,
+@@doc(StorageAccountsResourceGroup.checkNameAvailability::parameters.body,
   "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
 );
