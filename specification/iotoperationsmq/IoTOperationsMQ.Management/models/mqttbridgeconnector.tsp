@@ -148,7 +148,7 @@ model MqttBridgeTopicMapProperties {
   mqttBridgeConnectorRef: string;
 
   @doc("The route details for MqttBridge connector.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   routes?: MqttBridgeRoutes[];
 
   @visibility(Lifecycle.Read)

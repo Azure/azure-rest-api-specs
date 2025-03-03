@@ -11,9 +11,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-@service({
-  title: "Microsoft.VoiceServices.Provisioning",
-})
+@service(#{ title: "Microsoft.VoiceServices.Provisioning" })
 @useAuth(
   [
     OAuth2Auth<[

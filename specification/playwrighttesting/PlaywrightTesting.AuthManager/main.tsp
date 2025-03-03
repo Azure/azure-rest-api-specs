@@ -46,9 +46,7 @@ using Microsoft.PlaywrightTesting.Shared;
     ]>
   ]
 )
-@service({
-  title: "Microsoft PlaywrightTesting AuthManager Service API",
-})
+@service(#{ title: "Microsoft PlaywrightTesting AuthManager Service API" })
 @versioned(Microsoft.PlaywrightTesting.AuthManager.Versions)
 namespace Microsoft.PlaywrightTesting.AuthManager;
 

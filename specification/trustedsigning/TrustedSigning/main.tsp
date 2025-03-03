@@ -16,7 +16,7 @@ using Azure.Core;
     }
   ]>
 )
-@service({
+@service(#{
   title: "Azure Trusted Signing",
   summary: "Azure Trusted Signing is a service that provides managed artifact signing for all.",
 })

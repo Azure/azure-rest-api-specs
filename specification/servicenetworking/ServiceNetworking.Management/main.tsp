@@ -7,9 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 /** Traffic Controller Provider management API. */
 @armProviderNamespace
 @armCommonTypesVersion("v3")
-@service({
-  title: "TrafficController",
-})
+@service(#{ title: "TrafficController" })
 @versioned(Versions)
 namespace Microsoft.ServiceNetworking;
 
@@ -207,7 +205,6 @@ model TrafficControllerProperties {
 
   /** Security Policy Configuration */
   @added(Versions.v2024_05_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   securityPolicyConfigurations?: SecurityPolicyConfigurations;
 
   /** The status of the last operation. */

@@ -232,7 +232,7 @@ model ErrorDefinition {
    * Internal error details.
    */
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: ErrorDefinition[];
 }
 

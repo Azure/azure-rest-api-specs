@@ -83,11 +83,11 @@ model DiscoveredAssetProperties {
   defaultTopic?: Topic;
 
   @doc("Array of datasets that are part of the asset. Each dataset spec describes the data points that make up the set.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   datasets?: DiscoveredDataset[];
 
   @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   events?: DiscoveredEvent[];
 
   @doc("Provisioning state of the resource.")
@@ -109,7 +109,7 @@ model DiscoveredDataset {
   topic?: Topic;
 
   @doc("Array of data points that are part of the dataset. Each data point can have per-data point configuration.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataPoints?: DiscoveredDataPoint[];
 }
 

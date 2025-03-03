@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.EdgeZones")
-@service({
-  title: "Microsoft.EdgeZones",
-})
+@service(#{ title: "Microsoft.EdgeZones" })
 @versioned(Versions)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.EdgeZones;

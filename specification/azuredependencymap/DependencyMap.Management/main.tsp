@@ -12,9 +12,7 @@ using Azure.ResourceManager;
 using Azure.Core;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.DependencyMap management service",
-})
+@service(#{ title: "Microsoft.DependencyMap management service" })
 @doc("Microsoft.DependencyMap management service")
 @versioned(Microsoft.DependencyMap.Versions)
 @armCommonTypesVersion("v3")
