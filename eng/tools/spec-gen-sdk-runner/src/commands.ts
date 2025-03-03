@@ -6,9 +6,11 @@ import {
   getArgumentValue,
   runSpecGenSdkCommand,
   getAllTypeSpecPaths,
+  resetGitRepo,
 } from "./utils.js";
 import { LogLevel, logMessage, vsoAddAttachment } from "./log.js";
 import { SpecGenSdkCmdInput } from "./types.js";
+import { detectChangedSpecConfigFiles } from "./change-files.js";
 
 export async function generateSdkForSingleSpec(): Promise<number> {
   // Parse the arguments
@@ -44,8 +46,71 @@ export async function generateSdkForSingleSpec(): Promise<number> {
   return statusCode;
 }
 
+/* Generate SDKs for spec pull request */
+export async function generateSdkForSpecPr(): Promise<number> {
+  // Parse the arguments
+  const commandInput: SpecGenSdkCmdInput = parseArguments();
+  // Construct the spec-gen-sdk command
+  const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
+  // Get the spec paths from the changed files
+  const changedSpecs = detectChangedSpecConfigFiles(commandInput);
+
+  let statusCode = 0;
+  let pushedSpecConfigCount;
+  for (const changedSpec of changedSpecs) {
+    if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
+      logMessage("No spec config file found in the changed files", LogLevel.Warn);
+      continue;
+    }
+    pushedSpecConfigCount = 0;
+    if (changedSpec.typespecProject) {
+      specGenSdkCommand.push("--tsp-config-relative-path", changedSpec.typespecProject);
+      pushedSpecConfigCount++;
+    }
+    if (changedSpec.readmeMd) {
+      specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
+      pushedSpecConfigCount++;
+    }
+    const changedSpecPath = changedSpec.typespecProject ?? changedSpec.readmeMd;
+    logMessage(`Generating SDK from ${changedSpecPath}`, LogLevel.Group);
+    logMessage(`Command:${specGenSdkCommand.join(" ")}`);
+
+    try {
+      await resetGitRepo(commandInput.localSdkRepoPath);
+      await runSpecGenSdkCommand(specGenSdkCommand);
+      logMessage("Command executed successfully");
+    } catch (error) {
+      logMessage(`Error executing command:${error}`, LogLevel.Error);
+      statusCode = 1;
+    }
+    // Pop the spec config path from specGenSdkCommand
+    for (let index = 0; index < pushedSpecConfigCount * 2; index++) {
+      specGenSdkCommand.pop();
+    }
+    // Read the execution report to determine if the generation was successful
+    const executionReportPath = path.join(
+      commandInput.workingFolder,
+      `${commandInput.sdkRepoName}_tmp/execution-report.json`,
+    );
+    try {
+      const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      const executionResult = executionReport.executionResult;
+      logMessage(`Execution Result:${executionResult}`);
+    } catch (error) {
+      logMessage(
+        `Error reading execution report at ${executionReportPath}:${error}`,
+        LogLevel.Error,
+      );
+      statusCode = 1;
+    }
+    logMessage("ending group logging", LogLevel.EndGroup);
+  }
+  return statusCode;
+}
+
 /**
- * Generate SDKs for all specs.
+ * Generate SDKs for batch specs.
  */
 export async function generateSdkForBatchSpecs(runMode: string): Promise<number> {
   // Parse the arguments
@@ -60,9 +125,9 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
   let markdownContent = "\n";
   let failedContent = `## Spec Failures in the Generation Process\n`;
   let succeededContent = `## Successful Specs in the Generation Process\n`;
-  let undefinedContent = `## Disabled Specs in the Generation Process\n`;
+  let notEnabledContent = `## Specs with SDK Not Enabled\n`;
   let failedCount = 0;
-  let undefinedCount = 0;
+  let notEnabledCount = 0;
   let succeededCount = 0;
 
   // Generate SDKs for each spec
@@ -75,6 +140,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
     }
     logMessage(`Command:${specGenSdkCommand.join(" ")}`);
     try {
+      await resetGitRepo(commandInput.localSdkRepoPath);
       await runSpecGenSdkCommand(specGenSdkCommand);
       logMessage("Command executed successfully");
     } catch (error) {
@@ -96,12 +162,12 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       const executionResult = executionReport.executionResult;
       logMessage(`Execution Result:${executionResult}`);
 
-      if (executionResult === "succeeded") {
+      if (executionResult === "succeeded" || executionResult === "warning") {
         succeededContent += `${specConfigPath},`;
         succeededCount++;
-      } else if (executionResult === undefined) {
-        undefinedContent += `${specConfigPath},`;
-        undefinedCount++;
+      } else if (executionResult === "notEnabled") {
+        notEnabledContent += `${specConfigPath},`;
+        notEnabledCount++;
       } else {
         failedContent += `${specConfigPath},`;
         failedCount++;
@@ -118,15 +184,15 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
   }
-  if (undefinedCount > 0) {
-    markdownContent += `${undefinedContent}\n`;
+  if (notEnabledCount > 0) {
+    markdownContent += `${notEnabledContent}\n`;
   }
   if (succeededCount > 0) {
     markdownContent += `${succeededContent}\n`;
   }
   markdownContent += failedCount ? `## Total Failed Specs\n ${failedCount}\n` : "";
-  markdownContent += undefinedCount
-    ? `## Total Disabled Specs in the Configuration\n ${undefinedCount}\n`
+  markdownContent += notEnabledCount
+    ? `## Total Specs with SDK not enabled in the Configuration\n ${notEnabledCount}\n`
     : "";
   markdownContent += succeededCount ? `## Total Successful Specs\n ${succeededCount}\n` : "";
   markdownContent += `## Total Specs Count\n ${specConfigPaths.length}\n\n`;
@@ -251,7 +317,10 @@ function getSpecPaths(runMode: string, specRepoPath: string): string[] {
       break;
     }
     case "sample-typespecs": {
-      specConfigPaths.push("specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml");
+      specConfigPaths.push(
+        "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+        "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
+      );
     }
   }
   return specConfigPaths;
