@@ -862,9 +862,6 @@
           },
           "202": {
             "description": "Deployment PATCH accepted",
-            "schema": {
-              "$ref": "#/definitions/NginxDeployment"
-            }
           },
           "default": {
             "description": "Default error response.",
@@ -881,7 +878,10 @@
             "$ref": "./examples/Deployments_UpdateSubnet.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -1470,7 +1470,7 @@
           "$ref": "#/definitions/NginxCertificateProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -1626,7 +1626,7 @@
           "$ref": "#/definitions/NginxConfigurationResponseProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -1651,7 +1651,7 @@
           "$ref": "#/definitions/NginxConfigurationRequestProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -1768,6 +1768,7 @@
     },
     "NginxFrontendIPConfiguration": {
       "type": "object",
+      "title": "Nginx Frontend IP Configuration",
       "properties": {
         "publicIPAddresses": {
           "type": "array",
@@ -1787,6 +1788,7 @@
     },
     "NginxNetworkInterfaceConfiguration": {
       "type": "object",
+      "title": "Nginx Network Interface Configuration",
       "properties": {
         "subnetId": {
           "type": "string"
@@ -1794,6 +1796,7 @@
       }
     },
     "NginxNetworkProfile": {
+      "title": "Nginx Network Profile",
       "type": "object",
       "properties": {
         "frontEndIPConfiguration": {
@@ -1806,6 +1809,7 @@
     },
     "NginxStorageAccount": {
       "type": "object",
+      "title": "Nginx Storage Account",
       "properties": {
         "accountName": {
           "type": "string"
@@ -1817,6 +1821,7 @@
     },
     "NginxLogging": {
       "type": "object",
+      "title": "Nginx Logging",
       "properties": {
         "storageAccount": {
           "$ref": "#/definitions/NginxStorageAccount"
@@ -1853,6 +1858,7 @@
     },
     "NginxDeploymentUserProfile": {
       "type": "object",
+      "title": "Nginx Deployment User Profile",
       "properties": {
         "preferredEmail": {
           "type": "string",
@@ -1869,6 +1875,7 @@
     },
     "NginxDeploymentProperties": {
       "type": "object",
+      "title": "Nginx Deployment Properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -1906,6 +1913,7 @@
           "required": [
             "webApplicationFirewallSettings"
           ],
+          "x-ms-client-flatten": true,
           "properties": {
             "webApplicationFirewallSettings": {
               "$ref": "#/definitions/WebApplicationFirewallSettings"
@@ -1926,6 +1934,7 @@
     "NginxDeployment": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "title": "Nginx Deployment",
       "properties": {
         "id": {
           "type": "string",
@@ -1963,13 +1972,14 @@
           "description": "The geo-location where the resource lives"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
     },
     "NginxDeploymentUpdateProperties": {
       "type": "object",
+      "title": "Nginx Deployment Update Properties",
       "properties": {
         "enableDiagnosticsSupport": {
           "type": "boolean"
@@ -1992,6 +2002,7 @@
         "nginxAppProtect": {
           "type": "object",
           "description": "Update settings for NGINX App Protect (NAP)",
+          "x-ms-client-flatten": true,
           "properties": {
             "webApplicationFirewallSettings": {
               "$ref": "#/definitions/WebApplicationFirewallSettings"
@@ -2002,6 +2013,7 @@
     },
     "NginxDeploymentUpdateParameters": {
       "type": "object",
+      "title": "Nginx Deployment Update Parameters",
       "properties": {
         "identity": {
           "$ref": "#/definitions/IdentityProperties"
@@ -2030,6 +2042,7 @@
     },
     "NginxDeploymentListResponse": {
       "type": "object",
+      "title": "Nginx Deployment List Response",
       "properties": {
         "value": {
           "type": "array",
@@ -2044,6 +2057,7 @@
     },
     "NginxDeploymentApiKeyRequestProperties": {
       "type": "object",
+      "title": "Nginx Deployment Api Key Request Properties",
       "properties": {
         "secretText": {
           "type": "string",
@@ -2060,6 +2074,7 @@
     },
     "NginxDeploymentApiKeyResponseProperties": {
       "type": "object",
+      "title": "Nginx Deployment Api Key Response Properties",
       "properties": {
         "hint": {
           "type": "string",
@@ -2076,6 +2091,7 @@
     "NginxDeploymentApiKeyRequest": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "title": "Nginx Deployment Api Key Request",
       "properties": {
         "id": {
           "type": "string",
@@ -2093,7 +2109,7 @@
           "$ref": "#/definitions/NginxDeploymentApiKeyRequestProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -2101,6 +2117,7 @@
     "NginxDeploymentApiKeyResponse": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "title": "Nginx Deployment Api Key Response",
       "properties": {
         "id": {
           "type": "string",
@@ -2118,13 +2135,14 @@
           "$ref": "#/definitions/NginxDeploymentApiKeyResponseProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
     },
     "NginxDeploymentApiKeyListResponse": {
       "type": "object",
+      "title": "Nginx Deployment Api Key List Response",
       "properties": {
         "value": {
           "type": "array",
@@ -2459,6 +2477,7 @@
     "NginxDeploymentWafPolicyRequest": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "title": "Nginx Deployment Waf Policy Request",
       "properties": {
         "id": {
           "type": "string"
@@ -2473,7 +2492,7 @@
           "$ref": "#/definitions/NginxDeploymentWafPolicyPropertiesRequest"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -2481,6 +2500,7 @@
     "NginxDeploymentWafPolicyResponse": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "title": "Nginx Deployment Waf Policy Response",
       "properties": {
         "id": {
           "type": "string",
@@ -2498,7 +2518,7 @@
           "$ref": "#/definitions/NginxDeploymentWafPolicyPropertiesResponse"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -2506,6 +2526,7 @@
     "NginxDeploymentWafPolicyMetadata": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "title": "Nginx Deployment Waf Policy Metadata",
       "properties": {
         "id": {
           "type": "string",
@@ -2523,13 +2544,14 @@
           "$ref": "#/definitions/NginxDeploymentWafPolicyMetadataProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
     },
     "NginxDeploymentWafPolicyApplyingStatus": {
       "type": "object",
+      "title": "Nginx Deployment Waf Policy Applying Status",
       "properties": {
         "code": {
           "$ref": "#/definitions/NginxDeploymentWafPolicyApplyingStatusCode"
@@ -2587,6 +2609,7 @@
     },
     "NginxDeploymentWafPolicyCompilingStatus": {
       "type": "object",
+      "title": "Nginx Deployment Waf Policy Compiling Status",
       "properties": {
         "code": {
           "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatusCode"
@@ -2639,12 +2662,14 @@
     },
     "NginxDeploymentDefaultWafPolicyListResponse": {
       "type": "object",
+      "title": "Nginx Deployment Default Waf Policy List Response",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/NginxDeploymentDefaultWafPolicyProperties"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string"
@@ -2653,6 +2678,7 @@
     },
     "NginxDeploymentWafPolicyListResponse": {
       "type": "object",
+      "title": "Nginx Deployment Waf Policy List Response",
       "properties": {
         "value": {
           "type": "array",
@@ -2667,6 +2693,7 @@
     },
     "NginxDeploymentWafPolicyPropertiesRequest": {
       "type": "object",
+      "title": "Nginx Deployment Waf Policy Properties Request",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -2684,6 +2711,7 @@
     },
     "NginxDeploymentWafPolicyPropertiesResponse": {
       "type": "object",
+      "title": "Nginx Deployment Waf Policy Properties Response",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -2709,6 +2737,7 @@
     },
     "NginxDeploymentWafPolicyMetadataProperties": {
       "type": "object",
+      "title": "Nginx Deployment Waf Policy Metadata Properties",
       "properties": {
         "filepath": {
           "type": "string",
@@ -2727,6 +2756,7 @@
     },
     "NginxDeploymentDefaultWafPolicyProperties": {
       "type": "object",
+      "title": "Nginx Deployment Default Waf Policy Properties",
       "properties": {
         "content": {
           "format": "byte",
