@@ -4,6 +4,7 @@ import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
   TspConfigTsMgmtModularGenerateMetadataTrueSubRule,
+  _TspConfigTsMgmtModularGenerateMetadataTrueSubRule,
   TspConfigTsMgmtModularHierarchyClientFalseSubRule,
   TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
   TspConfigTsMgmtModularEnableOperationGroupTrueSubRule,
@@ -175,10 +176,19 @@ const commonAzureServiceDirTestCases = createParameterTestCases(
 const tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "generateMetadata",
+  "generate-metadata",
   true,
   false,
   [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
+);
+
+const _tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  managementTspconfigFolder,
+  "generateMetadata",
+  true,
+  false,
+  [new _TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
 );
 
 const tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
@@ -431,6 +441,7 @@ describe("tspconfig", function () {
     ...commonAzureServiceDirTestCases,
     // ts
     ...tsManagementGenerateMetadataTestCases,
+    ..._tsManagementGenerateMetadataTestCases,
     ...tsManagementHierarchyClientTestCases,
     ...tsManagementExperimentalExtensibleEnumsTestCases,
     ...tsManagementEnableOperationGroupTestCases,
