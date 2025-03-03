@@ -785,6 +785,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The Nginx deployment",
             "schema": {
               "$ref": "#/definitions/NginxDeployment"
             }
@@ -848,6 +849,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The Nginx deployment update parameters",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentUpdateParameters"
             }
@@ -861,7 +863,10 @@
             }
           },
           "202": {
-            "description": "Deployment PATCH accepted"
+            "description": "Deployment PATCH accepted",
+            "schema": {
+              "$ref": "#/definitions/NginxDeployment"
+            }
           },
           "default": {
             "description": "Default error response.",
@@ -1311,7 +1316,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -1340,7 +1345,6 @@
         "name",
         "capacity"
       ],
-      "x-ms-client-flatten": true,
       "properties": {
         "name": {
           "type": "string",
@@ -1353,6 +1357,7 @@
             "max"
           ],
           "description": "The capacity parameters of the profile.",
+          "x-ms-client-flatten": true,
           "properties": {
             "min": {
               "type": "integer",
@@ -1397,6 +1402,7 @@
         "NotSpecified"
       ],
       "type": "string",
+      "title": "Provisioning State",
       "readOnly": true,
       "x-ms-enum": {
         "modelAsString": true,
@@ -1405,6 +1411,7 @@
     },
     "NginxCertificateProperties": {
       "type": "object",
+      "title": "Nginx Certificate Properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -1441,6 +1448,7 @@
     },
     "NginxCertificateErrorResponseBody": {
       "type": "object",
+      "title": "Nginx Certificate Error Response Body",
       "properties": {
         "code": {
           "type": "string"
@@ -1453,6 +1461,7 @@
     "NginxCertificate": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "title": "Nginx Certificate",
       "properties": {
         "id": {
           "type": "string",
@@ -1477,6 +1486,7 @@
     },
     "NginxCertificateListResponse": {
       "type": "object",
+      "title": "Nginx Certificate List Response",
       "properties": {
         "value": {
           "type": "array",
@@ -1491,6 +1501,7 @@
     },
     "NginxConfigurationFile": {
       "type": "object",
+      "title": "Nginx Configuration File",
       "properties": {
         "content": {
           "type": "string"
@@ -1502,6 +1513,7 @@
     },
     "NginxConfigurationProtectedFileRequest": {
       "type": "object",
+      "title": "Nginx Configuration Protected File Request",
       "properties": {
         "content": {
           "type": "string",
@@ -1522,6 +1534,7 @@
     },
     "NginxConfigurationProtectedFileResponse": {
       "type": "object",
+      "title": "Nginx Configuration Protected File Response",
       "properties": {
         "virtualPath": {
           "type": "string",
@@ -1537,6 +1550,7 @@
     },
     "NginxConfigurationPackage": {
       "type": "object",
+      "title": "Nginx Configuration Package",
       "properties": {
         "data": {
           "type": "string"
@@ -1552,6 +1566,7 @@
     },
     "NginxConfigurationResponseProperties": {
       "type": "object",
+      "title": "Nginx Configuration Response Properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -1580,6 +1595,7 @@
     },
     "NginxConfigurationRequestProperties": {
       "type": "object",
+      "title": "Nginx Configuration Request Properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -1609,6 +1625,7 @@
     "NginxConfigurationResponse": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "title": "Nginx Configuration Response",
       "properties": {
         "id": {
           "type": "string",
@@ -1634,6 +1651,7 @@
     "NginxConfigurationRequest": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "title": "Nginx Configuration Request",
       "properties": {
         "id": {
           "type": "string",
@@ -1659,6 +1677,7 @@
     "NginxConfigurationListResponse": {
       "description": "Response of a list operation.",
       "type": "object",
+      "title": "Nginx Configuration List Response",
       "properties": {
         "value": {
           "description": "Results of a list operation.",
@@ -1681,6 +1700,7 @@
         "None"
       ],
       "type": "string",
+      "title": "Identity Type",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "IdentityType"
@@ -1688,6 +1708,7 @@
     },
     "UserIdentityProperties": {
       "type": "object",
+      "title": "User Identity Properties",
       "properties": {
         "principalId": {
           "type": "string",
@@ -1704,6 +1725,7 @@
         "name"
       ],
       "type": "object",
+      "title": "Resource Sku",
       "properties": {
         "name": {
           "description": "Name of the SKU.",
@@ -1713,6 +1735,7 @@
     },
     "IdentityProperties": {
       "type": "object",
+      "title": "Identity Properties",
       "properties": {
         "principalId": {
           "type": "string",
@@ -1739,6 +1762,7 @@
         "Dynamic"
       ],
       "type": "string",
+      "title": "Nginx Private IP Allocation Method",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "NginxPrivateIPAllocationMethod"
@@ -1746,6 +1770,7 @@
     },
     "NginxPrivateIPAddress": {
       "type": "object",
+      "title": "Nginx Private IP Address",
       "properties": {
         "privateIPAddress": {
           "type": "string"
@@ -1760,6 +1785,7 @@
     },
     "NginxPublicIPAddress": {
       "type": "object",
+      "title": "Nginx Public IP Address",
       "properties": {
         "id": {
           "type": "string"
@@ -2219,6 +2245,7 @@
       "properties": {
         "config": {
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "rootFile": {
               "type": "string",
@@ -2261,6 +2288,7 @@
         },
         "data": {
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "errors": {
               "type": "array",
