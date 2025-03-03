@@ -1,11 +1,11 @@
 @doc("Entity representing a Skillset.")
 
 model SkillsetDescriptor {
-    @visibility("create")
+    @visibility("public")
     @doc("Namespace for the skillset")
     `namespace`: string;
 
-    @visibility("create")
+    @visibility("public")
     @doc("The name of the Skillset")
     name: string;
 
