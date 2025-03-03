@@ -99,6 +99,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulListProjects": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListProjects.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -138,6 +143,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetProject": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetProject.json"
           }
         }
       },
@@ -193,6 +203,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulCreateProject": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulCreateProject.json"
+          }
         }
       },
       "delete": {
@@ -232,6 +247,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulDeleteProject": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -279,6 +299,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulCopyProjectAuthorization": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulCopyProjectAuthorization.json"
           }
         }
       }
@@ -330,6 +355,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulCopyProject": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulCopyProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -410,6 +440,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulExportProject": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulExportProject.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -469,6 +504,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulImportProject": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulImportProject.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -521,6 +561,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulTrainProject": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulTrainProject.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -565,6 +610,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetCopyProjectStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetCopyProjectStatus.json"
           }
         }
       }
@@ -614,6 +664,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulListDeployments": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListDeployments.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -660,6 +715,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetDeployment": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeployment.json"
           }
         }
       },
@@ -718,6 +778,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulDeployProject": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeployProject.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -764,6 +829,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulDeleteDeployment": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteDeployment.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -877,6 +947,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetDeploymentDeleteFromResourcesStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeploymentDeleteFromResourcesStatus.json"
+          }
         }
       }
     },
@@ -929,12 +1004,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetDeploymentStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeploymentStatus.json"
+          }
         }
       }
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/:swap": {
       "post": {
-        "operationId": "TextAuthoringDeployment_SwapDeployments",
+        "operationId": "TextAuthoringProject_SwapDeployments",
         "description": "Swaps two existing deployments with each other.",
         "parameters": [
           {
@@ -981,12 +1061,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulSwapDeployments": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulSwapDeployments.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/swap/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringDeployment_GetSwapDeploymentsStatus",
+        "operationId": "TextAuthoringProject_GetSwapDeploymentsStatus",
         "description": "Gets the status of an existing swap deployment job.",
         "parameters": [
           {
@@ -1025,6 +1110,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetSwapDeploymentsStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetSwapDeploymentsStatus.json"
           }
         }
       }
@@ -1070,6 +1160,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetExportStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetExportStatus.json"
           }
         }
       }
@@ -1166,6 +1261,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetExportedModel": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetExportedModel.json"
+          }
         }
       },
       "put": {
@@ -1223,6 +1323,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulCreateExportedModel": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulCreateExportedModel.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1269,6 +1374,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulDeleteExportedModel": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteExportedModel.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1323,6 +1433,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetExportedModelStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetExportedModelStatus.json"
+          }
         }
       }
     },
@@ -1368,6 +1483,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetExportedModelManifest": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetExportedModelManifest.json"
+          }
         }
       }
     },
@@ -1412,6 +1532,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetImportStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetImportStatus.json"
           }
         }
       }
@@ -1461,6 +1586,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulListModels": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListModels.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1508,6 +1638,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetModel": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetModel.json"
+          }
         }
       },
       "delete": {
@@ -1547,6 +1682,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulDeleteModel": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteModel.json"
           }
         }
       }
@@ -1607,6 +1747,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulEvaluationProject": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulEvaluationProject.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1655,6 +1800,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulLoadSnapshot": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulLoadSnapshot.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1708,6 +1858,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetEvaluationStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetEvaluationStatus.json"
           }
         }
       }
@@ -1767,6 +1922,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulGetModelEvaluation": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetModelEvaluation.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1813,6 +1973,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetModelEvaluationSummary": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetModelEvaluationSummary.json"
           }
         }
       }
@@ -1866,6 +2031,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetLoadSnapshotStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetLoadSnapshotStatus.json"
+          }
         }
       }
     },
@@ -1914,6 +2084,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulListDeploymentResources": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListDeploymentResources.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1921,7 +2096,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/resources/:assign": {
       "post": {
-        "operationId": "TextAuthoringDeployment_AssignDeploymentResources",
+        "operationId": "TextAuthoringProject_AssignDeploymentResources",
         "description": "Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
         "parameters": [
           {
@@ -1968,12 +2143,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful Assign Deployment Resources": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulAssignDeploymentResources.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-text/projects/{projectName}/resources/:unassign": {
       "post": {
-        "operationId": "TextAuthoringDeployment_UnassignDeploymentResources",
+        "operationId": "TextAuthoringProject_UnassignDeploymentResources",
         "description": "Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.",
         "parameters": [
           {
@@ -2020,12 +2200,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulUnassignDeploymentResources": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulUnassignDeploymentResources.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-text/projects/{projectName}/resources/assign/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringDeployment_GetAssignDeploymentResourcesStatus",
+        "operationId": "TextAuthoringProject_GetAssignDeploymentResourcesStatus",
         "description": "Gets the status of an existing assign deployment resources job.",
         "parameters": [
           {
@@ -2065,12 +2250,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetAssignDeploymentResourcesStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetAssignDeploymentResourcesStatus.json"
+          }
         }
       }
     },
     "/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAuthoringDeployment_GetUnassignDeploymentResourcesStatus",
+        "operationId": "TextAuthoringProject_GetUnassignDeploymentResourcesStatus",
         "description": "Gets the status of an existing unassign deployment resources job.",
         "parameters": [
           {
@@ -2109,6 +2299,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetUnassignDeploymentResourcesStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetUnassignDeploymentResourcesStatus.json"
           }
         }
       }
@@ -2158,6 +2353,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulListTrainingJobs": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListTrainingJobs.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2204,6 +2404,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetTrainStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetTrainStatus.json"
           }
         }
       }
@@ -2255,6 +2460,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful Cancel Training Job": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulCancelTrainingJob.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -2292,6 +2502,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetProjectDeletionStatus": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetProjectDeletionStatus.json"
           }
         }
       }
@@ -2332,6 +2547,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulListAssignedResourceDeployments": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListAssignedResourceDeployments.json"
           }
         },
         "x-ms-pageable": {
@@ -2380,6 +2600,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulGetSupportedLanguages": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetSupportedLanguages.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2412,6 +2637,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetSupportedPrebuiltEntities": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetSupportedPrebuiltEntities.json"
           }
         },
         "x-ms-pageable": {
@@ -2458,6 +2688,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetSupportedTrainingConfigVersions": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetSupportedTrainingConfigVersions.json"
           }
         },
         "x-ms-pageable": {
