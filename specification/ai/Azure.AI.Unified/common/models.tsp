@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "../credentials/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -251,27 +252,6 @@ model AssetBase  {
   systemData?: SystemData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@doc("AssetContainer definition")
-model AssetContainer {
-  @doc("The next auto incremental version")
-  @visibility("read")
-  nextVersion?: string;
-
-  @doc("Key is label name, value is version.")
-  @visibility("read, update")
-  labels: Record<string>;
-
-  @doc("A unique identifier for the asset, assetId probably?")
-  @visibility("read")
-  id?: string;
-
-  @doc("The name of the resource")
-  @visibility("read")
-  name?: string;
-}
-
-
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
   T;
@@ -318,43 +298,30 @@ alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<2
     SAS,
   }
   
-  model PendingUploadRequestDto {
+  model PendingUploadRequest {
     /// If PendingUploadId is not provided, a random guid will be used.
     pendingUploadId?: string;
     /// TemporaryBlobReference is the only supported type.
-    pendingUploadType: PendingUploadType = PendingUploadType.TemporaryBlobReference;
+    pendingUploadType: PendingUploadType.TemporaryBlobReference;
   }
   
-  model PendingUploadResponseDto {
+  model PendingUploadResponse {
     /// Container-level read, write, list SAS.
-    blobReferenceForConsumption: BlobReferenceForConsumptionDto;
+    blobReferenceForConsumption: BlobReferenceForConsumption;
     /// ID for this upload request.
     pendingUploadId: string;
     /// TemporaryBlobReference is the only supported type.
-    pendingUploadType: PendingUploadType = PendingUploadType.TemporaryBlobReference;
+    pendingUploadType: PendingUploadType.TemporaryBlobReference;
   }
   
-  /// Use a discriminated union to represent the abstract credential DTO.
-  /// The “credentialType” property acts as the discriminator.
-  @discriminator("credentialType")
-  union PendingUploadCredentialDto = SASCredentialDto;
-  
-  model SASCredentialDto {
-    /// The credential type is always SAS.
-    credentialType: PendingUploadCredentialType = PendingUploadCredentialType.SAS;
-    /// Full SAS Uri, including the storage, container/blob path and SAS token.
-    /// (SwaggerSecret attribute from C# can be noted here as a comment or using a custom decorator if needed.)
-    sasUri: Uri;
-  }
-  
-  model BlobReferenceForConsumptionDto {
+  model BlobReferenceForConsumption {
     /// Blob URI path for client to upload data.
     /// Example: https://blob.windows.core.net/Container/Path
     blobUri: Uri;
     /// ARM ID of the storage account to use.
     storageAccountArmId: string;
     /// Credential info to access the storage account.
-    credential: PendingUploadCredentialDto;
+    credential: SasCredential;
   }
 
 @doc("""

@@ -16,12 +16,6 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Unified;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@doc("DataContainer Definition")
-model DatasetContainer extends AssetContainer {
-
-}
-
 @doc("Enum to determine the type of data.")
 union DatasetType {
   string,

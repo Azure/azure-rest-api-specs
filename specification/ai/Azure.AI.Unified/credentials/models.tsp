@@ -24,10 +24,8 @@ union CredentialType {
 @doc("Base Credential definition")
 @discriminator("type")
 model BaseCredential {
-  @doc("Credential name")
+  @doc("Type of credential. Possible values are: AAD, SAS, ApiKey")
   @visibility("read")
-  name: string;
-
   type: CredentialType;
 }
 
@@ -37,12 +35,14 @@ model ApiKeyCredential extends BaseCredential {
   @visibility("read")
   apiKey: string;
 
+  @visibility("read")
   type: CredentialType.ApiKey;
 }
 
 @doc("AAD Credential definition")
 model AadCredential extends BaseCredential {
   // No properties need to be stored for this case
+  @visibility("read")
   type: CredentialType.AAD;
 }
 
@@ -52,5 +52,6 @@ model SasCredential extends BaseCredential {
   @visibility("read")
   sasToken: string;
 
+  @visibility("read")
   type: CredentialType.SAS;
 }
