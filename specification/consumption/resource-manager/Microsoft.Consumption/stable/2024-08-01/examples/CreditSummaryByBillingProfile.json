@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "billingAccountId": "1234:5678",
+    "billingProfileId": "2468"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/billingProfiles/2468/providers/Microsoft.Consumption/credits/balanceSummary1",
+        "name": "balanceSummary1",
+        "type": "Microsoft.Consumption/credits/balanceSummary",
+        "properties": {
+          "creditCurrency": "USD",
+          "billingCurrency": "USD",
+          "balanceSummary": {
+            "estimatedBalance": {
+              "currency": "USD",
+              "value": 600.00
+            },
+            "currentBalance": {
+              "currency": "USD",
+              "value": 100.00
+            }
+          },
+          "pendingCreditAdjustments": {
+            "currency": "USD",
+            "value": 500.00
+          },
+          "expiredCredit": {
+            "currency": "USD",
+            "value": 0.00
+          },
+          "pendingEligibleCharges": {
+            "currency": "USD",
+            "value": 0.00
+          },
+          "reseller": {
+            "resellerId": "/providers/Microsoft.Billing/billingAccounts/1234:5678/billingProfiles/2468/providers/Microsoft.Consumption/reseller/reseller1",
+            "resellerDescription": "Reseller information."
+          },
+          "isEstimatedBalance": false
+        }
+      }
+    },
+    "204": {}
+  }
+}

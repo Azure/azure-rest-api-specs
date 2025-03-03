@@ -1,0 +1,63 @@
+parameters:
+  "python-sdk-folder":
+    default: "{project-root}/azure-sdk-for-python/"
+  "java-sdk-folder":
+    default: "{project-root}/azure-sdk-for-java/"
+  "js-sdk-folder":
+    default: "{project-root}/azure-sdk-for-js/"
+  "csharp-sdk-folder":
+    default: "{project-root}/azure-sdk-for-net/"
+  "service-directory-name":
+    default: "communication"
+  "service-dir":
+    default: "sdk/communication"
+  "python-output-dir":
+    default: "azure/communication/jobrouter/_generated"
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    output-file: "{azure-resource-provider-folder}/JobRouter/{version-status}/{version}/communicationservicejobrouter.json"
+    emitter-output-dir: "{project-root}/.."
+    omit-unreachable-types: true
+  "@azure-tools/typespec-csharp":
+    clear-output-folder: true
+    model-namespace: false
+    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
+    namespace: Azure.Communication.JobRouter
+    package-dir: "Azure.Communication.JobRouter"
+    flavor: azure
+  "@azure-tools/typespec-python":
+    package-pprint-name: '"Communication JobRouter"'
+    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-dir: "azure-communication-jobrouter"
+    package-name: "{package-dir}"
+    package-version: 1.1.0b1
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-communication-jobrouter"
+    package-dir: "azure-communication-jobrouter"
+    namespace: com.azure.communication.jobrouter
+    partial-update: true
+    service-name: JobRouter
+    custom-types-subpackage: "implementation.models"
+    custom-types: "CancelJobResultInternal,CloseJobResultInternal,CompleteJobResultInternal,DeclineJobOfferResultInternal,ReclassifyJobOptionsInternal,ReclassifyJobResultInternal"
+    customization-class: customization/src/main/java/JobRouterSdkCustomization.java
+    use-object-for-unknown: true
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/communication-job-router-rest"
+    package-dir: "communication-job-router-rest"
+    packageDetails:
+      name: "@azure-rest/communication-job-router"
+      description: "Azure client library for Azure Communication Job Router services"
+    flavor: azure

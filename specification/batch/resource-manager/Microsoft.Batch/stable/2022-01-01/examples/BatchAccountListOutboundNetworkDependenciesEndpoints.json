@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "api-version": "2022-01-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "category": "Azure Batch",
+            "endpoints": [
+              {
+                "domainName": "sampleacct.japaneast.batch.azure.com",
+                "description": "Applicable to job manager tasks, tasks that use job scoped authentication, or any task that makes calls to Batch.",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              },
+              {
+                "domainName": "japaneast.service.batch.azure.com",
+                "description": "Applicable to all Azure Batch pools.",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Azure Storage",
+            "endpoints": [
+              {
+                "domainName": "autostorageaccountname.blob.core.windows.net",
+                "description": "AutoStorage endpoint for this Batch account. Applicable to all Azure Batch pools under this account.",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              },
+              {
+                "domainName": "*.blob.core.windows.net",
+                "description": "Applicable to all Azure Batch pools.",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              },
+              {
+                "domainName": "*.table.core.windows.net",
+                "description": "Applicable to all Azure Batch pools.",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              },
+              {
+                "domainName": "*.queue.core.windows.net",
+                "description": "Applicable to all Azure Batch pools.",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Microsoft Package Repository",
+            "endpoints": [
+              {
+                "domainName": "packages.microsoft.com",
+                "description": "Only applicable to pools containing a Mount Configuration. Learn about Mount Configurations in Batch at https://docs.microsoft.com/azure/batch/virtual-file-mount.",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Azure Key Vault",
+            "endpoints": [
+              {
+                "domainName": "*.vault.azure.net",
+                "description": "Only applicable to pools containing a Disk Encryption Configuration and whose VM size does not support encryption at host. Learn more about disk encryption in Azure Batch at https://docs.microsoft.com/azure/batch/disk-encryption. Learn more about encryption at host and supported VM sizes at https://docs.microsoft.com/azure/virtual-machines/disks-enable-host-based-encryption-portal.",
+                "endpointDetails": [
+                  {
+                    "port": 443
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,983 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "InstanceMetadataClient",
+    "description": "The Azure Instance Metadata Client",
+    "version": "2021-10-01"
+  },
+  "host": "169.254.169.254",
+  "basePath": "/metadata",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "basic_auth": {
+      "type": "basic",
+      "description": "A Basic authentication flow"
+    }
+  },
+  "paths": {
+    "/instance": {
+      "get": {
+        "operationId": "Instances_GetMetadata",
+        "description": "Get Instance Metadata for the Virtual Machine.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MetadataParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Instance Metadata for the VM": {
+            "$ref": "./examples/GetInstanceMetadata.json"
+          }
+        }
+      }
+    },
+    "/attested/document": {
+      "get": {
+        "operationId": "Attested_GetDocument",
+        "description": "Get Attested Data for the Virtual Machine.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "nonce",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "This is a string of up to 32 random alphanumeric characters."
+          },
+          {
+            "$ref": "#/parameters/MetadataParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AttestedData"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Attested Data for the VM": {
+            "$ref": "./examples/GetAttestedData.json"
+          }
+        }
+      }
+    },
+    "/identity/oauth2/token": {
+      "get": {
+        "tags": [
+          "Get token"
+        ],
+        "description": "Get a Token from Azure AD",
+        "operationId": "Identity_GetToken",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {},
+          {
+            "basic_auth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/MetadataParameter"
+          },
+          {
+            "name": "resource",
+            "in": "query",
+            "type": "string",
+            "description": "This is the urlencoded identifier URI of the sink resource for the requested Azure AD token. The resulting token contains the corresponding aud for this resource.",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "client_id",
+            "in": "query",
+            "type": "string",
+            "description": "This identifies, by Azure AD client id, a specific explicit identity to use when authenticating to Azure AD. Mutually exclusive with object_id and msi_res_id.",
+            "required": false
+          },
+          {
+            "name": "object_id",
+            "in": "query",
+            "type": "string",
+            "description": "This identifies, by Azure AD object id, a specific explicit identity to use when authenticating to Azure AD. Mutually exclusive with client_id and msi_res_id.",
+            "required": false
+          },
+          {
+            "name": "msi_res_id",
+            "in": "query",
+            "type": "string",
+            "description": "This identifies, by urlencoded ARM resource id, a specific explicit identity to use when authenticating to Azure AD. Mutually exclusive with client_id and object_id.",
+            "required": false
+          },
+          {
+            "name": "authority",
+            "in": "query",
+            "type": "string",
+            "description": "This indicates the authority to request AAD tokens from. Defaults to the known authority of the identity to be used.",
+            "required": false
+          },
+          {
+            "name": "bypass_cache",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "true"
+            ],
+            "description": "If provided, the value must be 'true'. This indicates to the server that the token must be retrieved from Azure AD and cannot be retrieved from an internal cache.",
+            "required": false,
+            "x-ms-enum": {
+              "name": "BypassCache",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/IdentityTokenResponse"
+            }
+          },
+          "default": {
+            "headers": {
+              "Www-Authenticate": {
+                "type": "string",
+                "description": "This is the response header containing a challenge for the Basic scheme with a realm value"
+              }
+            },
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/IdentityErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Identity Token for the VM": {
+            "$ref": "./examples/GetIdentityToken.json"
+          }
+        }
+      }
+    },
+    "/identity/info": {
+      "get": {
+        "tags": [
+          "Get metadata information"
+        ],
+        "description": "Get information about AAD Metadata",
+        "operationId": "Identity_GetInfo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/MetadataParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/IdentityInfoResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/IdentityErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Identity Info for the VM": {
+            "$ref": "./examples/GetIdentityInfo.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Compute": {
+      "type": "object",
+      "properties": {
+        "azEnvironment": {
+          "type": "string",
+          "description": "This is the name of the environment in which the VM is running."
+        },
+        "evictionPolicy": {
+          "type": "string",
+          "description": "Describes how the VM will be evicted if space needs to be freed up. Only applicable to Spot VMs. For a non-spot VM, this will be an empty string."
+        },
+        "extendedLocation": {
+          "type": "object",
+          "description": "Describes the extended location of the VM",
+          "$ref": "#/definitions/ExtendedLocationProperties"
+        },
+        "isHostCompatibilityLayerVm": {
+          "type": "string",
+          "description": "Identifies if the VM runs on the Host Compatibility Layer."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Type of license for Azure Hybrid Benefit. Note that this is only present for AHB-enabled VMs."
+        },
+        "location": {
+          "type": "string",
+          "description": "This is the Azure Region in which the VM is running."
+        },
+        "name": {
+          "type": "string",
+          "description": "This is the name of the VM."
+        },
+        "offer": {
+          "type": "string",
+          "description": "This is the offer information for the VM image. This value is only present for images deployed from the Azure Image Gallery."
+        },
+        "osProfile": {
+          "type": "object",
+          "description": "This contains the data about the OS.",
+          "$ref": "#/definitions/OsProfile"
+        },
+        "osType": {
+          "type": "string",
+          "description": "This value indicates the type of OS the VM is running, either Linux or Windows."
+        },
+        "placementGroupId": {
+          "type": "string",
+          "description": "This is the placement group of your Virtual Machine Scale Set."
+        },
+        "plan": {
+          "type": "object",
+          "description": "This contains the data about the plan.",
+          "$ref": "#/definitions/PlanProperties"
+        },
+        "publicKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublicKeysProperties"
+          },
+          "description": "This is information about the SSH certificate"
+        },
+        "platformFaultDomain": {
+          "type": "string",
+          "description": "This is the fault domain the VM resides in."
+        },
+        "platformSubFaultDomain": {
+          "type": "string",
+          "description": "This is the sub fault domain the VM resides in, if applicable."
+        },
+        "platformUpdateDomain": {
+          "type": "string",
+          "description": "This is the update domain the VM resides in."
+        },
+        "priority": {
+          "type": "string",
+          "description": "This is the priority of the VM."
+        },
+        "provider": {
+          "type": "string",
+          "description": "This is the provider of the VM."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "This is the publisher of the VM image."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "This is the resource group for the VM."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "This is the fully qualified ID for the VM."
+        },
+        "securityProfile": {
+          "description": "This contains the data about the security profile associated with the VM.",
+          "$ref": "#/definitions/SecurityProfile"
+        },
+        "sku": {
+          "type": "string",
+          "description": "This is the specific SKU for the VM image."
+        },
+        "storageProfile": {
+          "type": "object",
+          "description": "This contains the data about the storage disks associated with the VM.",
+          "$ref": "#/definitions/StorageProfile"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "This is the Azure subscription for the VM."
+        },
+        "tags": {
+          "type": "string",
+          "description": "This is the list of tags for your VM."
+        },
+        "tagsList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagsProperties"
+          },
+          "description": "This is the list of tags for your VM formatted as a JSON array for easier programmatic parsing."
+        },
+        "userData": {
+          "type": "string",
+          "description": "The set of data specified when the VM was created for use during or after provisioning (Base64 encoded)"
+        },
+        "version": {
+          "type": "string",
+          "description": "This is the version of the VM image."
+        },
+        "virtualMachineScaleSet": {
+          "type": "object",
+          "description": "Information about the VMSS the VM belongs to (if applicable)",
+          "$ref": "#/definitions/VirtualMachineScaleSet"
+        },
+        "vmId": {
+          "type": "string",
+          "description": "This is the unique identifier for the VM."
+        },
+        "vmScaleSetName": {
+          "type": "string",
+          "description": "This is the resource name of the VMSS."
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "This is the size of the VM."
+        },
+        "zone": {
+          "type": "string",
+          "description": "This is the availability zone of the VM."
+        }
+      },
+      "description": "Compute Metadata"
+    },
+    "Network": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "array",
+          "description": "This contains data about the network interface.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/NetworkInterface"
+          }
+        }
+      },
+      "description": "Network Metadata"
+    },
+    "ExtendedLocationProperties": {
+      "type": "object",
+      "description": "Describes the extended location of the VM",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the extended location of the VM"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location of the VM"
+        }
+      }
+    },
+    "NetworkInterface": {
+      "type": "object",
+      "description": "This contains data about the network interface.",
+      "properties": {
+        "ipv4": {
+          "type": "object",
+          "description": "This contains the IPv4 address.",
+          "properties": {
+            "ipAddress": {
+              "type": "array",
+              "description": "This is the IP address",
+              "items": {
+                "type": "object",
+                "description": "This contains the IPv4 properties.",
+                "$ref": "#/definitions/Ipv4Properties"
+              }
+            },
+            "subnet": {
+              "type": "array",
+              "description": "This is the subnet",
+              "items": {
+                "type": "object",
+                "description": "This contains the subnet properties.",
+                "$ref": "#/definitions/SubnetProperties"
+              }
+            }
+          }
+        },
+        "ipv6": {
+          "type": "object",
+          "description": "This contains the IPv6 address.",
+          "properties": {
+            "ipAddress": {
+              "type": "array",
+              "description": "This is the IP address",
+              "items": {
+                "type": "object",
+                "description": "This contains the IPv6 properties.",
+                "$ref": "#/definitions/Ipv6Properties"
+              }
+            }
+          }
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "This is the MAC address of the interface."
+        }
+      }
+    },
+    "OsProfile": {
+      "type": "object",
+      "description": "This contains the data about the OS.",
+      "properties": {
+        "adminUsername": {
+          "type": "string",
+          "description": "This is admin account."
+        },
+        "computerName": {
+          "type": "string",
+          "description": "This is the name of the VM."
+        },
+        "disablePasswordAuthentication": {
+          "type": "string",
+          "description": "This specifies whether or not password authentication is disabled. Note that this is present only for Linux VMs. For a Windows VM, this value will be the empty string."
+        }
+      }
+    },
+    "PlanProperties": {
+      "type": "object",
+      "description": "This contains the data about the plan.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "This is the Plan ID."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "This is the publisher ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "This is the product of the image from the Marketplace."
+        }
+      }
+    },
+    "PublicKeysProperties": {
+      "type": "object",
+      "description": "This contains the data about the public key.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "This specifies the full path on the VM where the SSH public key is stored."
+        },
+        "keyData": {
+          "type": "string",
+          "description": "This is the SSH public key certificate used to authenticate with the VM."
+        }
+      }
+    },
+    "TagsProperties": {
+      "type": "object",
+      "description": "This contains the properties of the tags in a tagsList.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "This is the name of the tag. It is equivalent to the key in the key-value pair format."
+        },
+        "value": {
+          "type": "string",
+          "description": "This is the value of the tag. It is, as expected, equivalent to the value in the key-value pair format."
+        }
+      }
+    },
+    "Ipv4Properties": {
+      "type": "object",
+      "description": "This contains the IPv4 properties.",
+      "properties": {
+        "privateIpAddress": {
+          "type": "string",
+          "description": "This is the private IP address assigned to the interface."
+        },
+        "publicIpAddress": {
+          "type": "string",
+          "description": "This is the public IP address assigned to the interface."
+        }
+      }
+    },
+    "Ipv6Properties": {
+      "type": "object",
+      "description": "This contains the IPv6 properties.",
+      "properties": {
+        "privateIpAddress": {
+          "type": "string",
+          "description": "This is the private IPv6 address assigned to the interface."
+        }
+      }
+    },
+    "SubnetProperties": {
+      "type": "object",
+      "description": "This contains the properties of the subnet.",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "This is the address range of the subnet."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "This is the prefix of the subnet."
+        }
+      }
+    },
+    "SecurityProfile": {
+      "type": "object",
+      "description": "This contains the data about the security profile associated with the VM.",
+      "properties": {
+        "secureBootEnabled": {
+          "type": "string",
+          "description": "Identifies if UEFI secure boot is enabled on the VM"
+        },
+        "virtualTpmEnabled": {
+          "type": "string",
+          "description": "Identifies if the virtual Trusted Platform Module (TPM) is enabled on the VM"
+        }
+      }
+    },
+    "StorageProfile": {
+      "type": "object",
+      "description": "This contains the data about the storage disks associated with the VM.",
+      "properties": {
+        "imageReference": {
+          "type": "object",
+          "$ref": "#/definitions/ImageReference",
+          "description": "Image information"
+        },
+        "osDisk": {
+          "type": "object",
+          "$ref": "#/definitions/OsDisk",
+          "description": "OS disk information"
+        },
+        "dataDisks": {
+          "type": "array",
+          "description": "Data disk information",
+          "items": {
+            "type": "object",
+            "description": "This contains information about the data disk.",
+            "$ref": "#/definitions/DataDisk"
+          }
+        },
+        "resourceDisk": {
+          "type": "object",
+          "description": "This contains data for the size of local temp disk of the VM, if it exists.",
+          "properties": {
+            "size": {
+              "type": "string",
+              "description": "The size of the local temp disk of the VM if it exists, in kilobytes. If the VM has no local temp disk, this value is 0."
+            }
+          }
+        }
+      }
+    },
+    "ImageReference": {
+      "type": "object",
+      "description": "This contains information about the OS image.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "This is the resource ID."
+        },
+        "offer": {
+          "type": "string",
+          "description": "This is the offer of the platform or marketplace image."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "This is the image publisher."
+        },
+        "sku": {
+          "type": "string",
+          "description": "This is the image SKU."
+        },
+        "version": {
+          "type": "string",
+          "description": "This is the version of the platform or marketplace image."
+        }
+      }
+    },
+    "OsDisk": {
+      "type": "object",
+      "description": "This contains information about the OS disk used by the VM.",
+      "properties": {
+        "caching": {
+          "type": "string",
+          "description": "This is the caching requirements."
+        },
+        "createOption": {
+          "type": "string",
+          "description": "This is information about how the VM was created."
+        },
+        "diffDiskSettings": {
+          "type": "object",
+          "description": "This is the ephemeral disk settings.",
+          "$ref": "#/definitions/DiffDiskSettings"
+        },
+        "diskSizeGB": {
+          "type": "string",
+          "description": "This is the size of the disk in GB."
+        },
+        "encryptionSettings": {
+          "type": "object",
+          "description": "This is the encryption settings for the disk.",
+          "$ref": "#/definitions/EncryptionSettings"
+        },
+        "image": {
+          "type": "object",
+          "description": "This is the source user image virtual hard disk.",
+          "$ref": "#/definitions/DiskImage"
+        },
+        "managedDisk": {
+          "type": "object",
+          "description": "This is managed disk parameters.",
+          "$ref": "#/definitions/ManagedDisk"
+        },
+        "name": {
+          "type": "string",
+          "description": "This is the disk name."
+        },
+        "osType": {
+          "type": "string",
+          "description": "This is the type of OS included in the disk."
+        },
+        "vhd": {
+          "type": "object",
+          "description": "This is the virtual hard disk.",
+          "$ref": "#/definitions/VirtualHardDisk"
+        },
+        "writeAcceleratorEnabled": {
+          "type": "string",
+          "description": "This specifies whether or not writeAccelerator is enabled on the disk."
+        }
+      }
+    },
+    "DataDisk": {
+      "type": "object",
+      "description": "This contains information about the data disk.",
+      "properties": {
+        "bytesPerSecondThrottle": {
+          "type": "string",
+          "description": "Disk read/write quota in bytes; only populated for Ultra Disks"
+        },
+        "caching": {
+          "type": "string",
+          "description": "This is the caching requirements."
+        },
+        "createOption": {
+          "type": "string",
+          "description": "This is information about how the VM was created."
+        },
+        "diskCapacityBytes": {
+          "type": "string",
+          "description": "Size of disk in bytes; only populated for Ultra Disks"
+        },
+        "diskSizeGB": {
+          "type": "string",
+          "description": "This is the size of the disk in GB."
+        },
+        "image": {
+          "type": "object",
+          "description": "This is the source user image virtual hard disk.",
+          "$ref": "#/definitions/DiskImage"
+        },
+        "isSharedDisk": {
+          "type": "string",
+          "description": "Identifies if the disk is shared between resources; only populated for Ultra Disks"
+        },
+        "isUltraDisk": {
+          "type": "string",
+          "description": "Identifies if the data disk is an Ultra Disk"
+        },
+        "lun": {
+          "type": "string",
+          "description": "This is the logical unit number of the disk."
+        },
+        "managedDisk": {
+          "type": "object",
+          "description": "This is managed disk parameters.",
+          "$ref": "#/definitions/ManagedDisk"
+        },
+        "name": {
+          "type": "string",
+          "description": "This is the disk name."
+        },
+        "opsPerSecondThrottle": {
+          "type": "string",
+          "description": "Disk read/write quota in IOPS; only populated for Ultra Disks"
+        },
+        "vhd": {
+          "type": "object",
+          "description": "This is the virtual hard disk.",
+          "$ref": "#/definitions/VirtualHardDisk"
+        },
+        "writeAcceleratorEnabled": {
+          "type": "string",
+          "description": "This specifies whether or not writeAccelerator is enabled on the disk."
+        }
+      }
+    },
+    "EncryptionSettings": {
+      "type": "object",
+      "description": "This is the encryption settings for the disk.",
+      "properties": {
+        "enabled": {
+          "type": "string",
+          "description": "This specifies whether or not disk encryption is enabled on the VM."
+        }
+      }
+    },
+    "DiffDiskSettings": {
+      "type": "object",
+      "description": "This is the ephemeral disk settings.",
+      "properties": {
+        "option": {
+          "type": "string",
+          "description": "This specifies the ephemeral disk settings."
+        }
+      }
+    },
+    "DiskImage": {
+      "type": "object",
+      "description": "This is the source user image virtual hard disk.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "This is the uri of the virtual hard disk."
+        }
+      }
+    },
+    "ManagedDisk": {
+      "type": "object",
+      "description": "This is managed disk parameters.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "This is the resource ID."
+        },
+        "storageAccountType": {
+          "type": "string",
+          "description": "This is the storage account type for the managed disk."
+        }
+      }
+    },
+    "VirtualHardDisk": {
+      "type": "object",
+      "description": "This is the virtual hard disk.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "This is the uri of the virtual hard disk."
+        }
+      }
+    },
+    "VirtualMachineScaleSet": {
+      "type": "object",
+      "description": "Information about the VMSS the VM belongs to (if applicable)",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "This is the ID of the VMSS the VM belongs to (if applicable)"
+        }
+      }
+    },
+    "ApplicationResponse": {
+      "type": "string",
+      "description": "This is a binary string containing the application."
+    },
+    "Instance": {
+      "type": "object",
+      "description": "This is the response from the Instance_GetMetadata operation.",
+      "properties": {
+        "compute": {
+          "$ref": "#/definitions/Compute",
+          "description": "Compute Metadata"
+        },
+        "network": {
+          "$ref": "#/definitions/Network",
+          "description": "Network Metadata"
+        }
+      }
+    },
+    "AttestedData": {
+      "type": "object",
+      "description": "This is the response from the Attested_GetDocument operation.",
+      "properties": {
+        "signature": {
+          "type": "string",
+          "description": "This is the encoded string containing the VM ID, SKU, plan information, public key, timestamp, and nonce value."
+        },
+        "encoding": {
+          "type": "string",
+          "description": "This is the encoding scheme of the signature."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "This is the response from an operation in the case an error occurs.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "IdentityErrorResponse": {
+      "type": "object",
+      "description": "This is the response from an Identity operation in the case an error occurs.",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Error code",
+          "enum": [
+            "invalid_request",
+            "unauthorized_client",
+            "access_denied",
+            "unsupported_response_type",
+            "invalid_scope",
+            "server_error",
+            "service_unavailable",
+            "bad_request",
+            "forbidden",
+            "not_found",
+            "method_not_allowed",
+            "too_many_requests"
+          ],
+          "x-ms-enum": {
+            "name": "Error",
+            "modelAsString": true
+          }
+        },
+        "error_description": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
+    "IdentityTokenResponse": {
+      "type": "object",
+      "description": "This is the response from the Identity_GetToken operation.",
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "description": "This is the requested access token. The app can use this token to authenticate to the sink resource."
+        },
+        "expires_in": {
+          "type": "string",
+          "description": "This is how long the access token is valid (in seconds)."
+        },
+        "expires_on": {
+          "type": "string",
+          "description": "This is the time when the access token expires. The date is represented as the number of seconds from 1970-01-01T0:0:0Z UTC until the expiration time. This value is used to determine the lifetime of cached tokens."
+        },
+        "ext_expires_in": {
+          "type": "string",
+          "description": "This indicates the extended lifetime of the token (in seconds)."
+        },
+        "not_before": {
+          "type": "string",
+          "description": "This is the time when the access token becomes effective. The date is represented as the number of seconds from 1970-01-01T0:0:0Z UTC until the expiration time."
+        },
+        "resource": {
+          "type": "string",
+          "description": "This is the app ID URI of the sink resource."
+        },
+        "token_type": {
+          "type": "string",
+          "description": "This indicates the token type value."
+        },
+        "client_id": {
+          "type": "string",
+          "description": "This is the client_id specified in the request, if any."
+        },
+        "object_id": {
+          "type": "string",
+          "description": "This is the object_id specified in the request, if any."
+        },
+        "msi_res_id": {
+          "type": "string",
+          "description": "This is the msi_res_id specified in the request, if any."
+        }
+      }
+    },
+    "IdentityInfoResponse": {
+      "type": "object",
+      "description": "This is the response from the Identity_GetInfo operation.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "This is the AAD tenantId of the identity of the system assigned managed identity."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "type": "string",
+      "description": "Version of the API to be used with the client request.",
+      "required": true
+    },
+    "MetadataParameter": {
+      "name": "Metadata",
+      "in": "header",
+      "type": "string",
+      "enum": [
+        "true"
+      ],
+      "description": "This must be set to 'true'.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

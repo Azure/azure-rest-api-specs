@@ -1,0 +1,485 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "routeDirectionsRequest": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "coordinates": [
+              -122.201399,
+              47.608678
+            ],
+            "type": "Point"
+          },
+          "properties": {
+            "pointIndex": 0,
+            "pointType": "waypoint"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "coordinates": [
+              -122.20687,
+              47.612002
+            ],
+            "type": "Point"
+          },
+          "properties": {
+            "pointIndex": 1,
+            "pointType": "viaWaypoint"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "coordinates": [
+              -122.201669,
+              47.615076
+            ],
+            "type": "Point"
+          },
+          "properties": {
+            "pointIndex": 2,
+            "pointType": "waypoint"
+          }
+        }
+      ],
+      "optimizeRoute": "fastestWithTraffic",
+      "routeOutputOptions": [
+        "routePath"
+      ],
+      "maxRouteCount": 3,
+      "travelMode": "driving"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.20147,
+                47.608676
+              ]
+            },
+            "properties": {
+              "type": "Waypoint",
+              "routePathPoint": {
+                "legIndex": 0,
+                "pointIndex": 0
+              },
+              "order": {
+                "inputIndex": 0
+              },
+              "compassDirection": "north",
+              "instruction": {
+                "formattedText": "<Action>Head</Action> <CmpsDir>north</CmpsDir> on <RoadName>Bellevue Way SE</RoadName> toward <Toward>SE 1st St</Toward>",
+                "maneuverType": "DepartStart",
+                "text": "Head north on Bellevue Way SE toward SE 1st St"
+              },
+              "sideOfStreet": "Unknown",
+              "towardsRoadName": "SE 1st St",
+              "distanceInMeters": 98.2,
+              "durationInSeconds": 19,
+              "steps": [
+                {
+                  "routePathRange": {
+                    "legIndex": 0,
+                    "range": [
+                      0,
+                      1
+                    ]
+                  },
+                  "maneuverType": "DepartStart",
+                  "compassDegrees": 358,
+                  "roadType": "Arterial",
+                  "names": [
+                    "Bellevue Way SE"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.201495,
+                47.610109
+              ]
+            },
+            "properties": {
+              "type": "ManeuverPoint",
+              "routePathPoint": {
+                "legIndex": 0,
+                "pointIndex": 1
+              },
+              "compassDirection": "north",
+              "instruction": {
+                "formattedText": "<Action>Turn</Action> <TurnDir>left</TurnDir> onto <RoadName>Main st</RoadName>",
+                "maneuverType": "TurnLeft",
+                "text": "Turn left onto Main st"
+              },
+              "sideOfStreet": "Unknown",
+              "distanceInMeters": 253.5,
+              "durationInSeconds": 81,
+              "steps": [
+                {
+                  "routePathRange": {
+                    "legIndex": 0,
+                    "range": [
+                      1,
+                      3
+                    ]
+                  },
+                  "maneuverType": "TurnLeft",
+                  "compassDegrees": 358,
+                  "roadType": "Arterial",
+                  "names": [
+                    "Main st"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.206817,
+                47.610185
+              ]
+            },
+            "properties": {
+              "type": "ManeuverPoint",
+              "routePathPoint": {
+                "legIndex": 0,
+                "pointIndex": 3
+              },
+              "compassDirection": "north",
+              "instruction": {
+                "formattedText": "<Action>Turn</Action> <TurnDir>right</TurnDir> onto <RoadName>100th Ave NE</RoadName>",
+                "maneuverType": "TurnRight",
+                "text": "Turn right onto 100th Ave NE"
+              },
+              "sideOfStreet": "Unknown",
+              "distanceInMeters": 252.9,
+              "durationInSeconds": 49,
+              "steps": [
+                {
+                  "routePathRange": {
+                    "legIndex": 0,
+                    "range": [
+                      3,
+                      5
+                    ]
+                  },
+                  "maneuverType": "TurnRight",
+                  "compassDegrees": 357,
+                  "roadType": "Arterial",
+                  "names": [
+                    "100th Ave NE"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.206971,
+                47.61384
+              ]
+            },
+            "properties": {
+              "type": "ManeuverPoint",
+              "routePathPoint": {
+                "legIndex": 0,
+                "pointIndex": 6
+              },
+              "compassDirection": "east",
+              "instruction": {
+                "formattedText": "<Action>Turn</Action> <TurnDir>right</TurnDir> onto <RoadName>NE 4th St</RoadName>",
+                "maneuverType": "TurnRight",
+                "text": "Turn right onto NE 4th St"
+              },
+              "sideOfStreet": "Unknown",
+              "distanceInMeters": 247.9,
+              "durationInSeconds": 77,
+              "steps": [
+                {
+                  "routePathRange": {
+                    "legIndex": 0,
+                    "range": [
+                      6,
+                      9
+                    ]
+                  },
+                  "maneuverType": "TurnRight",
+                  "compassDegrees": 90,
+                  "roadType": "Arterial",
+                  "names": [
+                    "NE 4th St"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.201664,
+                47.61386
+              ]
+            },
+            "properties": {
+              "type": "ManeuverPoint",
+              "routePathPoint": {
+                "legIndex": 0,
+                "pointIndex": 9
+              },
+              "compassDirection": "east",
+              "instruction": {
+                "formattedText": "<Action>Turn</Action> <TurnDir>left</TurnDir> onto <RoadName>Bellevue Way NE</RoadName>",
+                "maneuverType": "TurnLeft",
+                "text": "Turn left onto Bellevue Way NE"
+              },
+              "sideOfStreet": "Unknown",
+              "distanceInMeters": 94.4,
+              "durationInSeconds": 38,
+              "steps": [
+                {
+                  "routePathRange": {
+                    "legIndex": 0,
+                    "range": [
+                      9,
+                      11
+                    ]
+                  },
+                  "maneuverType": "TurnLeft",
+                  "compassDegrees": 91,
+                  "roadType": "Arterial",
+                  "names": [
+                    "Bellevue Way NE"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.201603,
+                47.615137
+              ]
+            },
+            "properties": {
+              "type": "Waypoint",
+              "routePathPoint": {
+                "legIndex": 0,
+                "pointIndex": 11
+              },
+              "order": {
+                "inputIndex": 2
+              },
+              "compassDirection": "north",
+              "instruction": {
+                "formattedText": "<Action>Arrive</Action> at <WaypointName>Bellevue Way NE</WaypointName>",
+                "maneuverType": "ArriveFinish",
+                "text": "Arrive at Bellevue Way NE",
+                "hints": [
+                  {
+                    "hintType": "PreviousIntersection",
+                    "text": "The last intersection before your destination is NE 4th St"
+                  }
+                ]
+              },
+              "sideOfStreet": "Unknown",
+              "distanceInMeters": 0.0,
+              "durationInSeconds": 0,
+              "steps": [
+                {
+                  "routePathRange": {
+                    "legIndex": 0,
+                    "range": [
+                      11,
+                      11
+                    ]
+                  },
+                  "maneuverType": "ArriveFinish",
+                  "compassDegrees": 357,
+                  "roadType": "Arterial",
+                  "names": [
+                    "Bellevue Way NE"
+                  ]
+                }
+              ],
+              "travelMode": "driving"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.206894,
+                47.612001
+              ]
+            },
+            "properties": {
+              "type": "ViaWaypoint",
+              "names": [
+                "100th Ave NE"
+              ],
+              "routePathPoint": {
+                "pointIndex": 5,
+                "legIndex": 0
+              },
+              "order": {
+                "inputIndex": 1
+              }
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "MultiLineString",
+              "coordinates": [
+                [
+                  [
+                    -122.20147,
+                    47.608675
+                  ],
+                  [
+                    -122.201494,
+                    47.610108
+                  ],
+                  [
+                    -122.201496,
+                    47.610196
+                  ],
+                  [
+                    -122.206817,
+                    47.610185
+                  ],
+                  [
+                    -122.206824,
+                    47.610369
+                  ],
+                  [
+                    -122.206893,
+                    47.612001
+                  ],
+                  [
+                    -122.20697,
+                    47.613839
+                  ],
+                  [
+                    -122.206832,
+                    47.613839
+                  ],
+                  [
+                    -122.204428,
+                    47.61379
+                  ],
+                  [
+                    -122.201664,
+                    47.61386
+                  ],
+                  [
+                    -122.201547,
+                    47.613857
+                  ],
+                  [
+                    -122.201603,
+                    47.615137
+                  ]
+                ]
+              ]
+            },
+            "bbox": [
+              47.608676,
+              -122.206971,
+              47.615137,
+              -122.20147
+            ],
+            "properties": {
+              "type": "RoutePath",
+              "resourceId": "v70,h-1241513931,i0,a0,cen-US,dAMA8xD0s2wg1,y1,s3,m1,o1,t4,wuOUjKenNR0CdnKG444xewA2~AISjUSdxkDoBAADgAdG_yz4A0~QmVsbGV2dWUgV2F5IFNF0~~~~~~~~v12,wFYvfFFbOR0CBIatbPY1ewA2~AISjUScpizoBAADgARBojT4A0~MTAwdGggQXZlIE5F0~~~1~~~~~v12,w-kZ0z7rOR0B95xcl6IxewA2~AISjUSchJDoBAADgAQAAgD8A0~QmVsbGV2dWUgV2F5IE5F0~~~~~~~~v12,k0,qatt:1",
+              "distanceInMeters": 947.0,
+              "durationInSeconds": 266,
+              "durationTrafficInSeconds": 295,
+              "trafficDataUsed": "None",
+              "trafficCongestion": "Mild",
+              "departureTime": "2023-08-28T18:00:00+00:00",
+              "arrivalTime": "2023-08-28T18:04:55+00:00",
+              "legs": [
+                {
+                  "description": "100th Ave NE, NE 4th St",
+                  "routePathRange": {
+                    "range": [
+                      0,
+                      11
+                    ],
+                    "legIndex": 0
+                  },
+                  "subLegs": [
+                    {
+                      "routePathRange": {
+                        "range": [
+                          0,
+                          5
+                        ],
+                        "legIndex": 0
+                      },
+                      "distanceInMeters": 477.8,
+                      "durationInSeconds": 128,
+                      "durationTrafficInSeconds": 138
+                    },
+                    {
+                      "routePathRange": {
+                        "range": [
+                          5,
+                          11
+                        ],
+                        "legIndex": 0
+                      },
+                      "distanceInMeters": 469.1,
+                      "durationInSeconds": 137,
+                      "durationTrafficInSeconds": 157
+                    }
+                  ],
+                  "distanceInMeters": 947.0,
+                  "durationInSeconds": 266,
+                  "durationTrafficInSeconds": 295,
+                  "departureTime": "2023-08-28T18:00:00+00:00",
+                  "arrivalTime": "2023-08-28T18:04:55+00:00"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroupName",
+    "name": "myMachineName",
+    "api-version": "2024-07-31-preview",
+    "installPatchesInput": {
+      "maximumDuration": "PT4H",
+      "rebootSetting": "IfRequired",
+      "windowsParameters": {
+        "classificationsToInclude": [
+          "Critical",
+          "Security"
+        ],
+        "maxPatchPublishDate": "2021-08-19T02:36:43.0539904+00:00"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "installationActivityId": "68f8b292-dfc2-4646-9781-33cc88631968",
+        "rebootStatus": "Completed",
+        "maintenanceWindowExceeded": false,
+        "excludedPatchCount": 0,
+        "notSelectedPatchCount": 0,
+        "pendingPatchCount": 2,
+        "installedPatchCount": 3,
+        "failedPatchCount": 0,
+        "startDateTime": "2021-08-22T02:15:06.9740000Z",
+        "lastModifiedDateTime": "2021-08-22T02:16:06.9740000Z",
+        "startedBy": "User",
+        "osType": "Windows",
+        "errorDetails": null
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "eastus2euap"
+      }
+    }
+  }
+}

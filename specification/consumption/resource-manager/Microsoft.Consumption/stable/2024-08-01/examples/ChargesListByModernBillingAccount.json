@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "startDate": "2019-09-01",
+    "endDate": "2019-10-31",
+    "scope": "providers/Microsoft.Billing/billingAccounts/1234:56789"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:56789/providers/Microsoft.Consumption/charges/chargeSummaryId1",
+            "name": "chargeSummaryId1",
+            "type": "Microsoft.Consumption/charges",
+            "kind": "modern",
+            "properties": {
+              "isInvoiced": false,
+              "billingPeriodId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/providers/Microsoft.Billing/billingPeriods/201910",
+              "usageStart": "2019-09-01",
+              "usageEnd": "2019-10-31",
+              "azureCharges": {
+                "currency": "USD",
+                "value": 0.0
+              },
+              "chargesBilledSeparately": {
+                "currency": "USD",
+                "value": 265.09
+              },
+              "marketplaceCharges": {
+                "currency": "USD",
+                "value": 0.0
+              },
+              "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/1234:56789",
+              "billingProfileId": null,
+              "invoiceSectionId": null
+            }
+          }
+        ]
+      }
+    }
+  }
+}

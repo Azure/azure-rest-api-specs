@@ -1,0 +1,55 @@
+{
+  "title": "List dashboards",
+  "description": "List all dashboards in your application.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "api-version": "2022-10-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "urn:homepageView:uqxri3i7x",
+            "displayName": "My Dashboard",
+            "personal": false,
+            "tiles": [
+              {
+                "displayName": "My Line Chart",
+                "configuration": {
+                  "devices": [
+                    "myDevice"
+                  ],
+                  "group": "myGroupId",
+                  "type": "lineChart",
+                  "format": {
+                    "xAxisEnabled": true,
+                    "yAxisEnabled": true,
+                    "legendEnabled": true
+                  },
+                  "capabilities": [
+                    {
+                      "capability": "componentName.telemetryName",
+                      "aggregateFunction": "avg"
+                    }
+                  ],
+                  "queryRange": {
+                    "type": "time",
+                    "duration": "P1W",
+                    "resolution": "PT12H"
+                  }
+                },
+                "x": 0,
+                "y": 0,
+                "width": 3,
+                "height": 3
+              }
+            ],
+            "favorite": false
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,4134 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-01-31-preview",
+    "title": "HealthcareApisClient",
+    "description": "Use this API to manage Microsoft HealthcareApis services in your Azure subscription."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}": {
+      "get": {
+        "tags": [
+          "Resource"
+        ],
+        "description": "Get the metadata of a service instance.",
+        "operationId": "Services_Get",
+        "x-ms-examples": {
+          "Get metadata": {
+            "$ref": "./examples/legacy/ServiceGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains all of the properties of the service instance.",
+            "schema": {
+              "$ref": "#/definitions/ServicesDescription"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Resource"
+        ],
+        "description": "Create or update the metadata of a service instance.",
+        "operationId": "Services_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or Update a service with all parameters": {
+            "$ref": "./examples/legacy/ServiceCreate.json"
+          },
+          "Create or Update a service with minimum parameters": {
+            "$ref": "./examples/legacy/ServiceCreateMinimum.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "name": "serviceDescription",
+            "in": "body",
+            "description": "The service instance metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Put request accepted and an existing resource is being updated; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ServicesDescription"
+            }
+          },
+          "201": {
+            "description": "Created - Put request accepted and a new resource was created; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ServicesDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Resource"
+        ],
+        "description": "Update the metadata of a service instance.",
+        "operationId": "Services_Update",
+        "x-ms-examples": {
+          "Patch service": {
+            "$ref": "./examples/legacy/ServicePatch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "name": "servicePatchDescription",
+            "in": "body",
+            "description": "The service instance metadata and security metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesPatchDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The tags for the resource were updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServicesDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Resource"
+        ],
+        "description": "Delete a service instance.",
+        "operationId": "Services_Delete",
+        "x-ms-examples": {
+          "Delete service": {
+            "$ref": "./examples/legacy/ServiceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - Delete request accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The resource does not exist."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/services": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Get all the service instances in a subscription.",
+        "operationId": "Services_List",
+        "x-ms-examples": {
+          "List all services in subscription": {
+            "$ref": "./examples/legacy/ServiceList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the service instances in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ServicesDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Get all the service instances in a resource group.",
+        "operationId": "Services_ListByResourceGroup",
+        "x-ms-examples": {
+          "List all services in resource group": {
+            "$ref": "./examples/legacy/ServiceListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the service instances in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/ServicesDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Proxy"
+        ],
+        "description": "Check if a service instance name is available.",
+        "operationId": "Services_CheckNameAvailability",
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/CheckNameAvailabilityPost.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "checkNameAvailabilityInputs",
+            "in": "body",
+            "description": "Set the name parameter in the CheckNameAvailabilityParameters structure to the name of the service instance to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the service name is available. If the name is not available, the body contains the reason.",
+            "schema": {
+              "$ref": "#/definitions/ServicesNameAvailabilityInfo"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_ListByService",
+        "description": "Lists all private endpoint connections for a service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResultDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_List": {
+            "$ref": "./examples/legacy/ServiceListPrivateEndpointConnections.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "description": "Gets the specified private endpoint connection associated with the service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_GetConnection": {
+            "$ref": "./examples/legacy/ServiceGetPrivateEndpointConnection.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "description": "Update the state of the specified private endpoint connection associated with the service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The private endpoint connection properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_CreateOrUpdate": {
+            "$ref": "./examples/legacy/ServiceCreatePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/legacy/ServiceDeletePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_ListByService",
+        "description": "Gets the private link resources that need to be created for a service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResultDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListGroupIds": {
+            "$ref": "./examples/legacy/PrivateLinkResourcesListByService.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}/privateLinkResources/{groupName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_Get",
+        "description": "Gets a private link resource that need to be created for a service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The name of the private link resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/legacy/PrivateLinkResourceGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Lists all the available workspaces under the specified subscription.",
+        "operationId": "Workspaces_ListBySubscription",
+        "x-ms-examples": {
+          "Get workspaces by subscription": {
+            "$ref": "./examples/workspaces/Workspaces_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the workspaces in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Lists all the available workspaces under the specified resource group.",
+        "operationId": "Workspaces_ListByResourceGroup",
+        "x-ms-examples": {
+          "Get workspaces by resource group": {
+            "$ref": "./examples/workspaces/Workspaces_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the workspaces in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Gets the properties of the specified workspace.",
+        "operationId": "Workspaces_Get",
+        "x-ms-examples": {
+          "Get workspace": {
+            "$ref": "./examples/workspaces/Workspaces_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Creates or updates a workspace resource with the specified parameters.",
+        "operationId": "Workspaces_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a workspace": {
+            "$ref": "./examples/workspaces/Workspaces_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "workspace",
+            "description": "The parameters for creating or updating a healthcare workspace.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Put request accepted and an existing resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "Created - Put request accepted and an existing resource is being created asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "202": {
+            "description": "Accepted - Put request accepted and an existing resource is being updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Patch workspace details.",
+        "operationId": "Workspaces_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a workspace": {
+            "$ref": "./examples/workspaces/Workspaces_Patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "workspacePatchResource",
+            "description": "The parameters for updating a specified workspace.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspacePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Patch request accepted and an existing resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "202": {
+            "description": "Accepted - Patch request accepted and an existing resource is being updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Deletes a specified workspace.",
+        "operationId": "Workspaces_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a workspace": {
+            "$ref": "./examples/workspaces/Workspaces_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted."
+          },
+          "202": {
+            "description": "Delete request accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices": {
+      "get": {
+        "tags": [
+          "DicomServices"
+        ],
+        "description": "Lists all DICOM Services for the given workspace",
+        "operationId": "DicomServices_ListByWorkspace",
+        "x-ms-examples": {
+          "List dicomservices": {
+            "$ref": "./examples/dicomservices/DicomServices_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of DICOM Services.",
+            "schema": {
+              "$ref": "#/definitions/DicomServiceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}": {
+      "get": {
+        "tags": [
+          "DicomServices"
+        ],
+        "description": "Gets the properties of the specified DICOM Service.",
+        "operationId": "DicomServices_Get",
+        "x-ms-examples": {
+          "Get a dicomservice": {
+            "$ref": "./examples/dicomservices/DicomServices_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/dicomServiceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/DicomService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DicomServices"
+        ],
+        "description": "Creates or updates a DICOM Service resource with the specified parameters.",
+        "operationId": "DicomServices_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a Dicom Service": {
+            "$ref": "./examples/dicomservices/DicomServices_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/dicomServiceName"
+          },
+          {
+            "name": "dicomservice",
+            "description": "The parameters for creating or updating a Dicom Service resource.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DicomService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Put request accepted and an existing resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/DicomService"
+            }
+          },
+          "201": {
+            "description": "Created - Put request accepted and an existing resource is being created asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DicomService"
+            }
+          },
+          "202": {
+            "description": "Accepted - Put request accepted and an existing resource is being updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DicomService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DicomServices"
+        ],
+        "description": "Patch DICOM Service details.",
+        "operationId": "DicomServices_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a dicomservice": {
+            "$ref": "./examples/dicomservices/DicomServices_Patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/dicomServiceName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "dicomservicePatchResource",
+            "description": "The parameters for updating a Dicom Service.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DicomServicePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Patch request accepted and an existing resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/DicomService"
+            }
+          },
+          "202": {
+            "description": "Accepted - Patch request accepted and an existing resource is being updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DicomService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DicomServices"
+        ],
+        "description": "Deletes a DICOM Service.",
+        "operationId": "DicomServices_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a dicomservice": {
+            "$ref": "./examples/dicomservices/DicomServices_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dicomServiceName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted."
+          },
+          "202": {
+            "description": "Delete request accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/iotconnectors": {
+      "get": {
+        "tags": [
+          "IotConnectors"
+        ],
+        "description": "Lists all IoT Connectors for the given workspace",
+        "operationId": "IotConnectors_ListByWorkspace",
+        "x-ms-examples": {
+          "List iotconnectors": {
+            "$ref": "./examples/iotconnectors/iotconnector_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of IoT Connectors.",
+            "schema": {
+              "$ref": "#/definitions/IotConnectorCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/iotconnectors/{iotConnectorName}": {
+      "get": {
+        "tags": [
+          "IotConnectors"
+        ],
+        "description": "Gets the properties of the specified IoT Connector.",
+        "operationId": "IotConnectors_Get",
+        "x-ms-examples": {
+          "Get an IoT Connector": {
+            "$ref": "./examples/iotconnectors/iotconnector_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/iotConnectorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/IotConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IotConnectors"
+        ],
+        "description": "Creates or updates an IoT Connector resource with the specified parameters.",
+        "operationId": "IotConnectors_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create an IoT Connector": {
+            "$ref": "./examples/iotconnectors/iotconnector_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/iotConnectorName"
+          },
+          {
+            "name": "iotConnector",
+            "description": "The parameters for creating or updating an IoT Connectors resource.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IotConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Put request accepted and an existing resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/IotConnector"
+            }
+          },
+          "201": {
+            "description": "Created - Put request accepted and an existing resource is being created asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/IotConnector"
+            }
+          },
+          "202": {
+            "description": "Accepted - Put request accepted and an existing resource is being updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/IotConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "IotConnectors"
+        ],
+        "description": "Patch an IoT Connector.",
+        "operationId": "IotConnectors_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Patch an IoT Connector": {
+            "$ref": "./examples/iotconnectors/iotconnector_Patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/iotConnectorName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "iotConnectorPatchResource",
+            "description": "The parameters for updating an IoT Connector.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IotConnectorPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Patch request accepted and an existing resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/IotConnector"
+            }
+          },
+          "202": {
+            "description": "Accepted - Patch request accepted and an existing resource is being updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/IotConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IotConnectors"
+        ],
+        "description": "Deletes an IoT Connector.",
+        "operationId": "IotConnectors_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete an IoT Connector": {
+            "$ref": "./examples/iotconnectors/iotconnector_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/iotConnectorName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted."
+          },
+          "202": {
+            "description": "Delete request accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/iotconnectors/{iotConnectorName}/fhirdestinations": {
+      "get": {
+        "tags": [
+          "IotConnectors"
+        ],
+        "description": "Lists all FHIR destinations for the given IoT Connector",
+        "operationId": "FhirDestinations_ListByIotConnector",
+        "x-ms-examples": {
+          "List IoT Connectors": {
+            "$ref": "./examples/iotconnectors/iotconnector_fhirdestination_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/iotConnectorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of IoT Connector FHIR destinations.",
+            "schema": {
+              "$ref": "#/definitions/IotFhirDestinationCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/iotconnectors/{iotConnectorName}/fhirdestinations/{fhirDestinationName}": {
+      "get": {
+        "tags": [
+          "IotConnectors"
+        ],
+        "description": "Gets the properties of the specified Iot Connector FHIR destination.",
+        "operationId": "IotConnectorFhirDestination_Get",
+        "x-ms-examples": {
+          "Get an IoT Connector destination": {
+            "$ref": "./examples/iotconnectors/iotconnector_fhirdestination_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/iotConnectorName"
+          },
+          {
+            "$ref": "#/parameters/fhirDestinationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/IotFhirDestination"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IotConnectors"
+        ],
+        "description": "Creates or updates an IoT Connector FHIR destination resource with the specified parameters.",
+        "operationId": "IotConnectorFhirDestination_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update an Iot Connector FHIR destination": {
+            "$ref": "./examples/iotconnectors/iotconnector_fhirdestination_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/iotConnectorName"
+          },
+          {
+            "$ref": "#/parameters/fhirDestinationName"
+          },
+          {
+            "name": "iotFhirDestination",
+            "description": "The parameters for creating or updating an IoT Connector FHIR destination resource.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IotFhirDestination"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Put request accepted and an existing resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/IotFhirDestination"
+            }
+          },
+          "201": {
+            "description": "Created - Put request accepted and an existing resource is being created asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/IotFhirDestination"
+            }
+          },
+          "202": {
+            "description": "Accepted - Put request accepted and an existing resource is being updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/IotFhirDestination"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IotConnectors"
+        ],
+        "description": "Deletes an IoT Connector FHIR destination.",
+        "operationId": "IotConnectorFhirDestination_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete an IoT Connector destination": {
+            "$ref": "./examples/iotconnectors/iotconnector_fhirdestination_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/iotConnectorName"
+          },
+          {
+            "$ref": "#/parameters/fhirDestinationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted."
+          },
+          "202": {
+            "description": "Delete request accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/fhirservices": {
+      "get": {
+        "tags": [
+          "FhirServices"
+        ],
+        "description": "Lists all FHIR Services for the given workspace",
+        "operationId": "FhirServices_ListByWorkspace",
+        "x-ms-examples": {
+          "List fhirservices": {
+            "$ref": "./examples/fhirservices/FhirServices_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of FHIR Services.",
+            "schema": {
+              "$ref": "#/definitions/FhirServiceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/fhirservices/{fhirServiceName}": {
+      "get": {
+        "tags": [
+          "FhirServices"
+        ],
+        "description": "Gets the properties of the specified FHIR Service.",
+        "operationId": "FhirServices_Get",
+        "x-ms-examples": {
+          "Get a Fhir Service": {
+            "$ref": "./examples/fhirservices/FhirServices_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/fhirServiceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/FhirService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FhirServices"
+        ],
+        "description": "Creates or updates a FHIR Service resource with the specified parameters.",
+        "operationId": "FhirServices_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a Fhir Service": {
+            "$ref": "./examples/fhirservices/FhirServices_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/fhirServiceName"
+          },
+          {
+            "name": "fhirservice",
+            "description": "The parameters for creating or updating a Fhir Service resource.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FhirService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Put request accepted and an existing resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/FhirService"
+            }
+          },
+          "201": {
+            "description": "Created - Put request accepted and an existing resource is being created asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/FhirService"
+            }
+          },
+          "202": {
+            "description": "Accepted - Put request accepted and an existing resource is being updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/FhirService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "FhirServices"
+        ],
+        "description": "Patch FHIR Service details.",
+        "operationId": "FhirServices_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a Fhir Service": {
+            "$ref": "./examples/fhirservices/FhirServices_Patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/fhirServiceName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "fhirservicePatchResource",
+            "description": "The parameters for updating a Fhir Service.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FhirServicePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Patch request accepted and an existing resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/FhirService"
+            }
+          },
+          "202": {
+            "description": "Accepted - Patch request accepted and an existing resource is being updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/FhirService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FhirServices"
+        ],
+        "description": "Deletes a FHIR Service.",
+        "operationId": "FhirServices_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a Fhir Service": {
+            "$ref": "./examples/fhirservices/FhirServices_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/fhirServiceName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted."
+          },
+          "202": {
+            "description": "Delete request accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "WorkspacePrivateEndpointConnections"
+        ],
+        "operationId": "WorkspacePrivateEndpointConnections_ListByWorkspace",
+        "description": "Lists all private endpoint connections for a workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResultDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePrivateEndpointConnection_List": {
+            "$ref": "./examples/privatelink/WorkspaceListPrivateEndpointConnections.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "WorkspacePrivateEndpointConnections"
+        ],
+        "operationId": "WorkspacePrivateEndpointConnections_Get",
+        "description": "Gets the specified private endpoint connection associated with the workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePrivateEndpointConnection_GetConnection": {
+            "$ref": "./examples/privatelink/WorkspaceGetPrivateEndpointConnection.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WorkspacePrivateEndpointConnections"
+        ],
+        "operationId": "WorkspacePrivateEndpointConnections_CreateOrUpdate",
+        "description": "Update the state of the specified private endpoint connection associated with the workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionDescription"
+            },
+            "description": "The private endpoint connection properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePrivateEndpointConnection_CreateOrUpdate": {
+            "$ref": "./examples/privatelink/WorkspaceCreatePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "WorkspacePrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection.",
+        "operationId": "WorkspacePrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePrivateEndpointConnections_Delete": {
+            "$ref": "./examples/privatelink/WorkspaceDeletePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "WorkspacePrivateLinkResources"
+        ],
+        "operationId": "WorkspacePrivateLinkResources_ListByWorkspace",
+        "description": "Gets the private link resources that need to be created for a workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResultDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePrivateLinkResources_ListGroupIds": {
+            "$ref": "./examples/privatelink/PrivateLinkResourcesListByWorkspace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/privateLinkResources/{groupName}": {
+      "get": {
+        "tags": [
+          "WorkspacePrivateLinkResources"
+        ],
+        "operationId": "WorkspacePrivateLinkResources_Get",
+        "description": "Gets a private link resource that need to be created for a workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The name of the private link resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePrivateLinkResources_Get": {
+            "$ref": "./examples/privatelink/WorkspacePrivateLinkResourceGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.HealthcareApis/operations": {
+      "get": {
+        "tags": [
+          "Proxy"
+        ],
+        "description": "Lists all of the available operations supported by Microsoft Healthcare resource provider.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListOperations"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/locations/{locationName}/operationresults/{operationResultId}": {
+      "get": {
+        "tags": [
+          "Proxy"
+        ],
+        "description": "Get the operation result for a long running operation.",
+        "operationId": "OperationResults_Get",
+        "x-ms-examples": {
+          "Get operation result": {
+            "$ref": "./examples/OperationResultsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/locationName"
+          },
+          {
+            "$ref": "#/parameters/operationResultId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains all of the properties of the operation result.",
+            "schema": {
+              "$ref": "#/definitions/OperationResultsDescription"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServicesProperties": {
+      "description": "The properties of a service instance.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "accessPolicies": {
+          "$ref": "#/definitions/ServiceAccessPoliciesInfo",
+          "description": "The access policies of the service instance."
+        },
+        "cosmosDbConfiguration": {
+          "$ref": "#/definitions/ServiceCosmosDbConfigurationInfo",
+          "description": "The settings for the Cosmos DB database backing the service."
+        },
+        "authenticationConfiguration": {
+          "$ref": "#/definitions/ServiceAuthenticationConfigurationInfo",
+          "description": "The authentication configuration for the service instance."
+        },
+        "corsConfiguration": {
+          "$ref": "#/definitions/ServiceCorsConfigurationInfo",
+          "description": "The settings for the CORS configuration of the service instance."
+        },
+        "exportConfiguration": {
+          "$ref": "#/definitions/ServiceExportConfigurationInfo",
+          "description": "The settings for the export operation of the service instance."
+        },
+        "privateEndpointConnections": {
+          "description": "The list of private endpoint connections that are set up for this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "acrConfiguration": {
+          "$ref": "#/definitions/ServiceAcrConfigurationInfo",
+          "description": "The azure container registry settings used for convert data operation of the service instance."
+        },
+        "importConfiguration": {
+          "$ref": "#/definitions/ServiceImportConfigurationInfo",
+          "description": "The settings for the import operation of the service instance."
+        }
+      }
+    },
+    "ServiceAccessPoliciesInfo": {
+      "description": "The access policies of the service instance.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServiceAccessPolicyEntry"
+      }
+    },
+    "ServiceAccessPolicyEntry": {
+      "description": "An access policy entry.",
+      "properties": {
+        "objectId": {
+          "description": "An Azure AD object ID (User or Apps) that is allowed access to the FHIR service.",
+          "type": "string",
+          "pattern": "^(([0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}){1})+$"
+        }
+      },
+      "required": [
+        "objectId"
+      ]
+    },
+    "ServiceCosmosDbConfigurationInfo": {
+      "description": "The settings for the Cosmos DB database backing the service.",
+      "type": "object",
+      "properties": {
+        "offerThroughput": {
+          "type": "integer",
+          "description": "The provisioned throughput for the backing database.",
+          "readOnly": false,
+          "minimum": 400,
+          "maximum": 10000
+        },
+        "keyVaultKeyUri": {
+          "type": "string",
+          "description": "The URI of the customer-managed key for the backing database.",
+          "readOnly": false
+        }
+      }
+    },
+    "ServiceAuthenticationConfigurationInfo": {
+      "description": "Authentication configuration information",
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "The authority url for the service",
+          "readOnly": false
+        },
+        "audience": {
+          "type": "string",
+          "description": "The audience url for the service",
+          "readOnly": false
+        },
+        "smartProxyEnabled": {
+          "type": "boolean",
+          "description": "If the SMART on FHIR proxy is enabled",
+          "readOnly": false
+        }
+      }
+    },
+    "ServiceCorsConfigurationInfo": {
+      "description": "The settings for the CORS configuration of the service instance.",
+      "type": "object",
+      "properties": {
+        "origins": {
+          "type": "array",
+          "description": "The origins to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/ServiceCorsConfigurationOriginEntry"
+          }
+        },
+        "headers": {
+          "type": "array",
+          "description": "The headers to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/ServiceCorsConfigurationHeaderEntry"
+          }
+        },
+        "methods": {
+          "type": "array",
+          "description": "The methods to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/ServiceCorsConfigurationMethodEntry"
+          }
+        },
+        "maxAge": {
+          "type": "integer",
+          "description": "The max age to be allowed via CORS.",
+          "readOnly": false,
+          "minimum": 0,
+          "maximum": 99999
+        },
+        "allowCredentials": {
+          "type": "boolean",
+          "description": "If credentials are allowed via CORS.",
+          "readOnly": false
+        }
+      }
+    },
+    "ServiceExportConfigurationInfo": {
+      "description": "Export operation configuration information",
+      "type": "object",
+      "properties": {
+        "storageAccountName": {
+          "type": "string",
+          "description": "The name of the default export storage account.",
+          "readOnly": false
+        }
+      }
+    },
+    "ServiceImportConfigurationInfo": {
+      "description": "Import operation configuration information",
+      "type": "object",
+      "properties": {
+        "integrationDataStore": {
+          "type": "string",
+          "description": "The name of the default integration storage account.",
+          "readOnly": false
+        },
+        "initialImportMode": {
+          "type": "boolean",
+          "description": "If the FHIR service is in InitialImportMode.",
+          "readOnly": false
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "If the import operation is enabled.",
+          "readOnly": false
+        }
+      }
+    },
+    "ServiceAcrConfigurationInfo": {
+      "description": "Azure container registry configuration information",
+      "type": "object",
+      "properties": {
+        "loginServers": {
+          "type": "array",
+          "description": "The list of the ACR login servers.",
+          "readOnly": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "ociArtifacts": {
+          "type": "array",
+          "description": "The list of Open Container Initiative (OCI) artifacts.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/ServiceOciArtifactEntry"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ServiceCorsConfigurationOriginEntry": {
+      "description": "An origin for CORS.",
+      "type": "string",
+      "pattern": "^(?:(?:(?:[hH][tT][tT][pP](?:[sS]|))\\:\\/\\/(?:[a-zA-Z0-9-]+[.]?)+(?:\\:[0-9]{1,5})?|[*]))$"
+    },
+    "ServiceCorsConfigurationHeaderEntry": {
+      "description": "A header for CORS.",
+      "type": "string"
+    },
+    "ServiceCorsConfigurationMethodEntry": {
+      "description": "A method for CORS.",
+      "type": "string"
+    },
+    "ServicesDescription": {
+      "description": "The description of the service.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "The common properties of a service.",
+          "$ref": "#/definitions/ServicesProperties"
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServicesResource"
+        }
+      ]
+    },
+    "ServicesPatchDescription": {
+      "description": "The description of the service.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Instance tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ServicesPropertiesUpdateParameters",
+          "description": "The properties for updating a service instance.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServicesResource": {
+      "description": "The common properties of a service.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name.",
+          "pattern": "^[a-z0-9][a-z0-9-]{1,21}[a-z0-9]$"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "kind": {
+          "readOnly": false,
+          "type": "string",
+          "description": "The kind of the service.",
+          "enum": [
+            "fhir",
+            "fhir-Stu3",
+            "fhir-R4"
+          ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": false
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        },
+        "etag": {
+          "description": "An etag associated with the resource, used for optimistic concurrency when editing it.",
+          "type": "string"
+        },
+        "identity": {
+          "type": "object",
+          "description": "Setting indicating whether the service has a managed identity associated with it.",
+          "properties": {
+            "principalId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The principal ID of the resource identity."
+            },
+            "tenantId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The tenant ID of the resource."
+            },
+            "type": {
+              "description": "Type of identity being specified, currently SystemAssigned and None are allowed.",
+              "type": "string",
+              "enum": [
+                "SystemAssigned",
+                "None"
+              ],
+              "x-ms-enum": {
+                "name": "ManagedServiceIdentityType",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      },
+      "x-ms-azure-resource": true,
+      "required": [
+        "location",
+        "kind"
+      ]
+    },
+    "ServicesDescriptionListResult": {
+      "description": "A list of service description objects with a next link.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of service description objects.",
+          "type": "string"
+        },
+        "value": {
+          "description": "A list of service description objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServicesDescription"
+          }
+        }
+      }
+    },
+    "ServicesPropertiesUpdateParameters": {
+      "description": "The properties for updating a service instance.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CheckNameAvailabilityParameters": {
+      "description": "Input values.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the service instance to check.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The fully qualified resource type which includes provider namespace.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "ServicesNameAvailabilityInfo": {
+      "description": "The properties indicating whether a given service name is available.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "The value which indicates whether the provided name is available.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason for unavailability.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ServiceNameUnavailabilityReason",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "description": "The detailed reason message.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionDescription": {
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
+    },
+    "PrivateLinkResourceDescription": {
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
+    },
+    "PrivateEndpointConnectionListResultDescription": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionDescription"
+          }
+        }
+      },
+      "description": "List of private endpoint connection associated with the specified storage account"
+    },
+    "PrivateLinkResourceListResultDescription": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResourceDescription"
+          }
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "Error": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error details",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error details",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetailsInternal": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ListOperations": {
+      "description": "Available operations of the service",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "Service REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Default value is 'user,system'."
+        },
+        "actionType": {
+          "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Service provider: Microsoft.HealthcareApis"
+        },
+        "resource": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Type: Services"
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Friendly description for the operation,"
+        }
+      }
+    },
+    "OperationResultsDescription": {
+      "description": "The properties indicating the operation result of an operation on a service.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the operation returned.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the operation result.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the operation being performed.",
+          "enum": [
+            "Canceled",
+            "Succeeded",
+            "Failed",
+            "Requested",
+            "Running"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationResultStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "The time that the operation was started.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "endTime": {
+          "description": "The time that the operation finished.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "Additional properties of the operation result.",
+          "type": "object"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Extra Operation properties",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specifications of the operation"
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Service specification payload",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Specifications of the Log for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": []
+        },
+        "metricSpecifications": {
+          "description": "Specifications of the Metrics for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Specifications of the Log for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the log",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Blob duration of the log",
+          "type": "string"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Specifications of the Metrics for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the metric",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the metric",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "Localized friendly description of the metric",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Unit that makes sense for the metric",
+          "type": "string"
+        },
+        "category": {
+          "description": "Name of the metric category that the metric belongs to. A metric can only belong to a single category.",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count.",
+          "type": "string"
+        },
+        "supportedAggregationTypes": {
+          "description": "Supported aggregation types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "description": "Supported time grain types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fillGapWithZero": {
+          "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.",
+          "type": "boolean"
+        },
+        "dimensions": {
+          "description": "Dimensions of the metric",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "x-ms-identifiers": []
+        },
+        "sourceMdmNamespace": {
+          "description": "Name of the MDM namespace. Optional.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricDimension": {
+      "description": "Specifications of the Dimension of metrics",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the dimension",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the dimension",
+          "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "Whether this dimension should be included for the Shoebox export scenario",
+          "type": "boolean"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "description": "The provisioning state.",
+      "enum": [
+        "Deleting",
+        "Succeeded",
+        "Creating",
+        "Accepted",
+        "Verifying",
+        "Updating",
+        "Failed",
+        "Canceled",
+        "Deprovisioned",
+        "Moving",
+        "Suspended",
+        "Warned",
+        "SystemMaintenance"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "provisioningState",
+        "modelAsString": true
+      }
+    },
+    "ResourceTags": {
+      "type": "object",
+      "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    },
+    "ResourceCore": {
+      "type": "object",
+      "description": "The common properties for any resource, tracked or proxy.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name.",
+          "pattern": "^[a-z0-9][a-z0-9-]{1,21}[a-z0-9]$"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "etag": {
+          "description": "An etag associated with the resource, used for optimistic concurrency when editing it.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "LocationBasedResource": {
+      "type": "object",
+      "description": "The common properties for any location based resource, tracked or proxy.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCore"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TaggedResource": {
+      "type": "object",
+      "description": "The common properties of tracked resources in the service.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceTags"
+        },
+        {
+          "$ref": "#/definitions/LocationBasedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "ServiceManagedIdentity": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "identity": {
+          "type": "object",
+          "description": "Setting indicating whether the service has a managed identity associated with it.",
+          "properties": {
+            "type": {
+              "description": "Type of identity being specified, currently SystemAssigned and None are allowed.",
+              "type": "string",
+              "enum": [
+                "None",
+                "SystemAssigned",
+                "UserAssigned",
+                "SystemAssigned,UserAssigned"
+              ],
+              "x-ms-enum": {
+                "name": "ServiceManagedIdentityType",
+                "modelAsString": true
+              }
+            },
+            "principalId": {
+              "readOnly": true,
+              "format": "uuid",
+              "type": "string",
+              "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity."
+            },
+            "tenantId": {
+              "readOnly": true,
+              "format": "uuid",
+              "type": "string",
+              "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity."
+            },
+            "userAssignedIdentities": {
+              "$ref": "#/definitions/UserAssignedIdentities"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "User assigned identity properties",
+      "properties": {
+        "principalId": {
+          "description": "The principal ID of the assigned identity.",
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "The client ID of the assigned identity.",
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UserAssignedIdentities": {
+      "title": "User-Assigned Identities",
+      "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedIdentity"
+      }
+    },
+    "Workspace": {
+      "type": "object",
+      "description": "Workspace resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaggedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "type": "object",
+          "description": "Workspaces resource specific properties.",
+          "x-ms-azure-resource": true,
+          "properties": {
+            "provisioningState": {
+              "description": "The provisioning state.",
+              "$ref": "#/definitions/ProvisioningState"
+            },
+            "privateEndpointConnections": {
+              "description": "The list of private endpoint connections that are set up for this resource.",
+              "type": "array",
+              "items": {
+                "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              },
+              "readOnly": true
+            },
+            "publicNetworkAccess": {
+              "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+              "$ref": "#/definitions/ResourcePublicNetworkAccess"
+            }
+          }
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "#/definitions/systemData"
+        }
+      }
+    },
+    "WorkspacePatchResource": {
+      "type": "object",
+      "description": "Workspace patch properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceTags"
+        }
+      ]
+    },
+    "WorkspaceList": {
+      "description": "Collection of workspace object with a next link",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        }
+      }
+    },
+    "DicomService": {
+      "type": "object",
+      "description": "The description of Dicom Service",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaggedResource"
+        },
+        {
+          "$ref": "#/definitions/ServiceManagedIdentity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Dicom Service configuration.",
+          "$ref": "#/definitions/DicomServiceProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "#/definitions/systemData"
+        }
+      }
+    },
+    "DicomServicePatchResource": {
+      "type": "object",
+      "description": "Dicom Service patch properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceTags"
+        },
+        {
+          "$ref": "#/definitions/ServiceManagedIdentity"
+        }
+      ]
+    },
+    "DicomServiceCollection": {
+      "description": "The collection of Dicom Services.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Dicom Services.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Dicom Services.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DicomService"
+          }
+        }
+      }
+    },
+    "DicomServiceProperties": {
+      "description": "Dicom Service properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "authenticationConfiguration": {
+          "description": "Dicom Service authentication configuration.",
+          "$ref": "#/definitions/DicomServiceAuthenticationConfiguration"
+        },
+        "serviceUrl": {
+          "description": "The url of the Dicom Services.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "The list of private endpoint connections that are set up for this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "$ref": "#/definitions/ResourcePublicNetworkAccess"
+        }
+      }
+    },
+    "DicomServiceAuthenticationConfiguration": {
+      "description": "Authentication configuration information",
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "The authority url for the service",
+          "readOnly": true
+        },
+        "audiences": {
+          "type": "array",
+          "description": "The audiences for the service",
+          "items": {
+            "$ref": "#/definitions/DicomAudience"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DicomAudience": {
+      "description": "The audience for Dicom Service",
+      "type": "string",
+      "readOnly": true
+    },
+    "IotConnector": {
+      "type": "object",
+      "description": "IoT Connector definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaggedResource"
+        },
+        {
+          "$ref": "#/definitions/ServiceManagedIdentity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "IoT Connector configuration.",
+          "$ref": "#/definitions/IotConnectorProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "#/definitions/systemData"
+        }
+      }
+    },
+    "IotConnectorPatchResource": {
+      "type": "object",
+      "description": "Iot Connector patch properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceTags"
+        },
+        {
+          "$ref": "#/definitions/ServiceManagedIdentity"
+        }
+      ]
+    },
+    "IotConnectorCollection": {
+      "description": "A collection of IoT Connectors.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of IoT Connectors.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of IoT Connectors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotConnector"
+          }
+        }
+      }
+    },
+    "IotConnectorProperties": {
+      "description": "IoT Connector properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "ingestionEndpointConfiguration": {
+          "description": "Source configuration.",
+          "$ref": "#/definitions/IotEventHubIngestionEndpointConfiguration"
+        },
+        "deviceMapping": {
+          "description": "Device Mappings.",
+          "$ref": "#/definitions/IotMappingProperties"
+        }
+      }
+    },
+    "IotEventHubIngestionEndpointConfiguration": {
+      "type": "object",
+      "properties": {
+        "eventHubName": {
+          "type": "string",
+          "description": "Event Hub name to connect to."
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "Consumer group of the event hub to connected to."
+        },
+        "fullyQualifiedEventHubNamespace": {
+          "type": "string",
+          "description": "Fully qualified namespace of the Event Hub to connect to."
+        }
+      },
+      "description": "Event Hub ingestion endpoint configuration"
+    },
+    "IotMappingProperties": {
+      "description": "The mapping content.",
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "The mapping.",
+          "type": "object"
+        }
+      }
+    },
+    "IotIdentityResolutionType": {
+      "description": "The type of IoT identity resolution to use with the destination.",
+      "enum": [
+        "Create",
+        "Lookup"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IotIdentityResolutionType",
+        "modelAsString": true
+      }
+    },
+    "IotDestinationProperties": {
+      "type": "object",
+      "description": "Common IoT Connector destination properties.",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IotFhirDestinationProperties": {
+      "required": [
+        "resourceIdentityResolutionType",
+        "fhirServiceResourceId",
+        "fhirMapping"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IotDestinationProperties"
+        }
+      ],
+      "description": "IoT Connector destination properties for an Azure FHIR service.",
+      "properties": {
+        "resourceIdentityResolutionType": {
+          "description": "Determines how resource identity is resolved on the destination.",
+          "$ref": "#/definitions/IotIdentityResolutionType"
+        },
+        "fhirServiceResourceId": {
+          "type": "string",
+          "description": "Fully qualified resource id of the FHIR service to connect to."
+        },
+        "fhirMapping": {
+          "description": "FHIR Mappings",
+          "$ref": "#/definitions/IotMappingProperties"
+        }
+      }
+    },
+    "IotFhirDestination": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "description": "IoT Connector FHIR destination definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LocationBasedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "IoT FHIR Destination settings.",
+          "$ref": "#/definitions/IotFhirDestinationProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "#/definitions/systemData"
+        }
+      }
+    },
+    "IotFhirDestinationCollection": {
+      "description": "A collection of IoT Connector FHIR destinations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of IoT FHIR destinations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of IoT Connector FHIR destinations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotFhirDestination"
+          }
+        }
+      }
+    },
+    "FhirServiceCollection": {
+      "description": "A collection of Fhir services.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Fhir Services.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Fhir Services.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FhirService"
+          }
+        }
+      }
+    },
+    "FhirService": {
+      "type": "object",
+      "description": "The description of Fhir Service",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaggedResource"
+        },
+        {
+          "$ref": "#/definitions/ServiceManagedIdentity"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "readOnly": false,
+          "type": "string",
+          "description": "The kind of the service.",
+          "enum": [
+            "fhir-Stu3",
+            "fhir-R4"
+          ],
+          "x-ms-enum": {
+            "name": "fhirServiceKind",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "description": "Fhir Service configuration.",
+          "$ref": "#/definitions/FhirServiceProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "#/definitions/systemData"
+        }
+      }
+    },
+    "FhirServicePatchResource": {
+      "type": "object",
+      "description": "FhirService patch properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceTags"
+        },
+        {
+          "$ref": "#/definitions/ServiceManagedIdentity"
+        }
+      ]
+    },
+    "FhirServiceProperties": {
+      "description": "Fhir Service properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "accessPolicies": {
+          "description": "Fhir Service access policies.",
+          "$ref": "#/definitions/FhirServiceAccessPolicies"
+        },
+        "acrConfiguration": {
+          "description": "Fhir Service Azure container registry configuration.",
+          "$ref": "#/definitions/FhirServiceAcrConfiguration"
+        },
+        "authenticationConfiguration": {
+          "description": "Fhir Service authentication configuration.",
+          "$ref": "#/definitions/FhirServiceAuthenticationConfiguration"
+        },
+        "corsConfiguration": {
+          "description": "Fhir Service Cors configuration.",
+          "$ref": "#/definitions/FhirServiceCorsConfiguration"
+        },
+        "exportConfiguration": {
+          "description": "Fhir Service export configuration.",
+          "$ref": "#/definitions/FhirServiceExportConfiguration"
+        },
+        "privateEndpointConnections": {
+          "description": "The list of private endpoint connections that are set up for this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "$ref": "#/definitions/ResourcePublicNetworkAccess"
+        },
+        "eventState": {
+          "description": "Fhir Service event support status.",
+          "$ref": "#/definitions/ResourceEventState"
+        },
+        "resourceVersionPolicyConfiguration": {
+          "description": "Determines tracking of history for resources.",
+          "$ref": "#/definitions/ResourceVersionPolicyConfiguration"
+        },
+        "importConfiguration": {
+          "description": "Fhir Service import configuration.",
+          "$ref": "#/definitions/FhirServiceImportConfiguration"
+        }
+      }
+    },
+    "ResourceVersionPolicyConfiguration": {
+      "description": "The settings for history tracking for FHIR resources.",
+      "type": "object",
+      "properties": {
+        "default": {
+          "description": "The default value for tracking history across all resources.",
+          "$ref": "#/definitions/FhirResourceVersionPolicy"
+        },
+        "resourceTypeOverrides": {
+          "description": "A list of FHIR Resources and their version policy overrides.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FhirResourceVersionPolicy"
+          }
+        }
+      }
+    },
+    "FhirResourceVersionPolicy": {
+      "type": "string",
+      "description": "Controls how resources are versioned on the FHIR service",
+      "enum": [
+        "no-version",
+        "versioned",
+        "versioned-update"
+      ],
+      "x-ms-enum": {
+        "name": "FhirResourceVersionPolicy",
+        "modelAsString": true
+      }
+    },
+    "FhirServiceAccessPolicies": {
+      "description": "The access policies of the service instance.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/FhirServiceAccessPolicyEntry"
+      }
+    },
+    "FhirServiceAccessPolicyEntry": {
+      "type": "object",
+      "description": "An access policy entry.",
+      "properties": {
+        "objectId": {
+          "description": "An Azure AD object ID (User or Apps) that is allowed access to the FHIR service.",
+          "type": "string",
+          "pattern": "^(([0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}){1})+$"
+        }
+      },
+      "required": [
+        "objectId"
+      ]
+    },
+    "FhirServiceAcrConfiguration": {
+      "description": "Azure container registry configuration information",
+      "type": "object",
+      "properties": {
+        "loginServers": {
+          "type": "array",
+          "description": "The list of the Azure container registry login servers.",
+          "readOnly": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "ociArtifacts": {
+          "type": "array",
+          "description": "The list of Open Container Initiative (OCI) artifacts.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/ServiceOciArtifactEntry"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FhirServiceAuthenticationConfiguration": {
+      "description": "Authentication configuration information",
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "The authority url for the service",
+          "readOnly": false
+        },
+        "audience": {
+          "type": "string",
+          "description": "The audience url for the service",
+          "readOnly": false
+        },
+        "smartProxyEnabled": {
+          "type": "boolean",
+          "description": "If the SMART on FHIR proxy is enabled",
+          "readOnly": false
+        }
+      }
+    },
+    "FhirServiceCorsConfiguration": {
+      "description": "The settings for the CORS configuration of the service instance.",
+      "type": "object",
+      "properties": {
+        "origins": {
+          "type": "array",
+          "description": "The origins to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/CorsConfigurationOriginEntry"
+          }
+        },
+        "headers": {
+          "type": "array",
+          "description": "The headers to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/CorsConfigurationHeaderEntry"
+          }
+        },
+        "methods": {
+          "type": "array",
+          "description": "The methods to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/CorsConfigurationMethodEntry"
+          }
+        },
+        "maxAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max age to be allowed via CORS.",
+          "readOnly": false,
+          "minimum": 0,
+          "maximum": 99999
+        },
+        "allowCredentials": {
+          "type": "boolean",
+          "description": "If credentials are allowed via CORS.",
+          "readOnly": false
+        }
+      }
+    },
+    "CorsConfigurationOriginEntry": {
+      "description": "An origin for CORS.",
+      "type": "string",
+      "pattern": "^(?:(?:(?:[hH][tT][tT][pP](?:[sS]|))\\:\\/\\/(?:[a-zA-Z0-9-]+[.]?)+(?:\\:[0-9]{1,5})?|[*]))$"
+    },
+    "CorsConfigurationHeaderEntry": {
+      "description": "A header for CORS.",
+      "type": "string"
+    },
+    "CorsConfigurationMethodEntry": {
+      "description": "A method for CORS.",
+      "type": "string"
+    },
+    "ServiceOciArtifactEntry": {
+      "description": "An Open Container Initiative (OCI) artifact.",
+      "type": "object",
+      "properties": {
+        "loginServer": {
+          "description": "The Azure Container Registry login server.",
+          "type": "string"
+        },
+        "imageName": {
+          "description": "The artifact name.",
+          "type": "string"
+        },
+        "digest": {
+          "description": "The artifact digest.",
+          "type": "string"
+        }
+      }
+    },
+    "FhirServiceExportConfiguration": {
+      "description": "Export operation configuration information",
+      "type": "object",
+      "properties": {
+        "storageAccountName": {
+          "type": "string",
+          "description": "The name of the default export storage account.",
+          "readOnly": false
+        }
+      }
+    },
+    "FhirServiceImportConfiguration": {
+      "description": "Import operation configuration information",
+      "type": "object",
+      "properties": {
+        "integrationDataStore": {
+          "type": "string",
+          "description": "The name of the default integration storage account.",
+          "readOnly": false
+        },
+        "initialImportMode": {
+          "type": "boolean",
+          "description": "If the FHIR service is in InitialImportMode.",
+          "readOnly": false
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "If the import operation is enabled.",
+          "readOnly": false
+        }
+      }
+    },
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
+    "ResourcePublicNetworkAccess": {
+      "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        }
+      },
+      "description": "List of private endpoint connection associated with the specified storage account"
+    },
+    "ResourceEventState": {
+      "type": "string",
+      "description": "Indicates the current status of event support for the resource.",
+      "enum": [
+        "Disabled",
+        "Enabled",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceEventState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the service instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "locationName": {
+      "name": "locationName",
+      "in": "path",
+      "description": "The location of the operation.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "operationResultId": {
+      "name": "operationResultId",
+      "in": "path",
+      "description": "The ID of the operation result to get.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "workspaceName": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of workspace resource.",
+      "x-ms-parameter-location": "method",
+      "minLength": 3,
+      "maxLength": 24
+    },
+    "dicomServiceName": {
+      "name": "dicomServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of DICOM Service resource.",
+      "x-ms-parameter-location": "method",
+      "minLength": 3,
+      "maxLength": 24
+    },
+    "iotConnectorName": {
+      "name": "iotConnectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of IoT Connector resource.",
+      "x-ms-parameter-location": "method",
+      "minLength": 3,
+      "maxLength": 24
+    },
+    "fhirDestinationName": {
+      "name": "fhirDestinationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of IoT Connector FHIR destination resource.",
+      "x-ms-parameter-location": "method",
+      "minLength": 3,
+      "maxLength": 24
+    },
+    "fhirServiceName": {
+      "name": "fhirServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of FHIR Service resource.",
+      "x-ms-parameter-location": "method",
+      "minLength": 3,
+      "maxLength": 24
+    },
+    "resourceName": {
+      "name": "resourceName",
+      "in": "path",
+      "description": "The name of the service instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "minLength": 3,
+      "maxLength": 24
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}

@@ -1,0 +1,1113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used to manage the network function deployment in a Hybrid Network resource provider.",
+    "version": "2024-04-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions/{networkFunctionName}": {
+      "delete": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_Delete",
+        "description": "Deletes the specified network function resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed successfully."
+          },
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request is successful. Resource with the specified name does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete network function resource": {
+            "$ref": "./examples/NetworkFunctionDelete.json"
+          },
+          "Delete virtual network function resource on AzureOperatorNexus": {
+            "$ref": "./examples/AzureOperatorNexus/VirtualNetworkFunctionDelete.json"
+          },
+          "Delete virtual network function resource on AzureCore": {
+            "$ref": "./examples/AzureCore/VirtualNetworkFunctionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_Get",
+        "description": "Gets information about the specified network function resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkFunctionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network function resource."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation is successful. The operation returns the resulting network function resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network function resource": {
+            "$ref": "./examples/NetworkFunctionGet.json"
+          },
+          "Get virtual network function resource on AzureOperatorNexus": {
+            "$ref": "./examples/AzureOperatorNexus/VirtualNetworkFunctionGet.json"
+          },
+          "Get virtual network function resource on AzureCore": {
+            "$ref": "./examples/AzureCore/VirtualNetworkFunctionGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_CreateOrUpdate",
+        "description": "Creates or updates a network function resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkFunctionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource name for the network function resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkFunction"
+            },
+            "description": "Parameters supplied in the body to the create or update network function operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update operation has been completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunction"
+            }
+          },
+          "201": {
+            "description": "Create or update operation has been completed successfully. The header contains 'Azure-AsyncOperation' header pointing to an operation resource. The operation URI can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create network function resource": {
+            "$ref": "./examples/NetworkFunctionCreate.json"
+          },
+          "Create network function resource with secrets": {
+            "$ref": "./examples/NetworkFunctionCreateSecret.json"
+          },
+          "Create first party network function resource": {
+            "$ref": "./examples/NetworkFunctionFirstPartyCreate.json"
+          },
+          "Create virtual network function resource on AzureOperatorNexus": {
+            "$ref": "./examples/AzureOperatorNexus/VirtualNetworkFunctionCreate.json"
+          },
+          "Create virtual network function resource on AzureCore": {
+            "$ref": "./examples/AzureCore/VirtualNetworkFunctionCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_UpdateTags",
+        "description": "Updates the tags for the network function resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkFunctionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource name for the network function resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the update network function tags operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update is completed successfully. The operation returns the resulting network function resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update tags for network function resource": {
+            "$ref": "./examples/NetworkFunctionUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/networkFunctions": {
+      "get": {
+        "description": "Lists all the network functions in a subscription.",
+        "operationId": "NetworkFunctions_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of network function resources.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "x-ms-examples": {
+          "List all network function resources in subscription.": {
+            "$ref": "./examples/NetworkFunctionListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions": {
+      "get": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_ListByResourceGroup",
+        "description": "Lists all the network function resources in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of network function resources.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List network function in resource group": {
+            "$ref": "./examples/NetworkFunctionListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions/{networkFunctionName}/executeRequest": {
+      "post": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_ExecuteRequest",
+        "description": "Execute a request to services on a containerized network function.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteRequestParameters"
+            },
+            "description": "Payload for execute request post call."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Send request to  network function services": {
+            "$ref": "./examples/NetworkFunctionsExecuteRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions/{networkFunctionName}/components/{componentName}": {
+      "get": {
+        "tags": [
+          "Components"
+        ],
+        "operationId": "Components_Get",
+        "description": "Gets information about the specified application instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionComponentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation is successful. The operation returns the resulting component resource.",
+            "schema": {
+              "$ref": "#/definitions/Component"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get component resource": {
+            "$ref": "./examples/ComponentGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions/{networkFunctionName}/components": {
+      "get": {
+        "tags": [
+          "Components"
+        ],
+        "operationId": "Components_ListByNetworkFunction",
+        "description": "Lists all the component resources in a network function.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of component resources.",
+            "schema": {
+              "$ref": "#/definitions/ComponentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List components in network function": {
+            "$ref": "./examples/ComponentListByNetworkFunction.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkFunction": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/NetworkFunctionPropertiesFormat",
+          "description": "Network function properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed identity of the network function."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Network function resource response."
+    },
+    "NetworkFunctionPropertiesFormat": {
+      "type": "object",
+      "description": "Network function properties.",
+      "required": [
+        "configurationType"
+      ],
+      "discriminator": "configurationType",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the network function resource."
+        },
+        "publisherName": {
+          "type": "string",
+          "description": "The publisher name for the network function."
+        },
+        "publisherScope": {
+          "$ref": "./common.json#/definitions/PublisherScope",
+          "description": "The scope of the publisher."
+        },
+        "networkFunctionDefinitionGroupName": {
+          "type": "string",
+          "description": "The network function definition group name for the network function."
+        },
+        "networkFunctionDefinitionVersion": {
+          "type": "string",
+          "description": "The network function definition version for the network function."
+        },
+        "networkFunctionDefinitionOfferingLocation": {
+          "type": "string",
+          "description": "The location of the network function definition offering."
+        },
+        "networkFunctionDefinitionVersionResourceReference": {
+          "$ref": "./common.json#/definitions/DeploymentResourceIdReference",
+          "description": "The network function definition version resource reference."
+        },
+        "nfviType": {
+          "$ref": "./common.json#/definitions/NFVIType",
+          "description": "The nfvi type for the network function."
+        },
+        "nfviId": {
+          "type": "string",
+          "description": "The nfviId for the network function."
+        },
+        "allowSoftwareUpdate": {
+          "type": "boolean",
+          "description": "Indicates if software updates are allowed during deployment."
+        },
+        "configurationType": {
+          "$ref": "#/definitions/NetworkFunctionConfigurationType",
+          "description": "The value which indicates if NF  values are secrets"
+        },
+        "roleOverrideValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleOverrideValues"
+          },
+          "description": "The role configuration override values from the user."
+        }
+      }
+    },
+    "NetworkFunctionValueWithSecrets": {
+      "description": "NetworkFunction with secrets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionPropertiesFormat"
+        }
+      ],
+      "properties": {
+        "secretDeploymentValues": {
+          "type": "string",
+          "description": "The JSON-serialized secret deployment values from the user. This contains secrets like passwords,keys etc",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Secret"
+    },
+    "NetworkFunctionValueWithoutSecrets": {
+      "description": "NetworkFunction with no secrets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionPropertiesFormat"
+        }
+      ],
+      "properties": {
+        "deploymentValues": {
+          "type": "string",
+          "description": "The JSON-serialized deployment values from the user."
+        }
+      },
+      "x-ms-discriminator-value": "Open"
+    },
+    "NetworkFunctionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkFunction"
+          },
+          "description": "A list of network function resources in a subscription or resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for network function API service call."
+    },
+    "NetworkFunctionConfigurationType": {
+      "type": "string",
+      "description": "The secret type which indicates if secret or not.",
+      "enum": [
+        "Unknown",
+        "Secret",
+        "Open"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkFunctionConfigurationType",
+        "modelAsString": true
+      }
+    },
+    "RoleOverrideValues": {
+      "type": "string",
+      "description": "The JSON-serialized role configuration override values."
+    },
+    "Component": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/ComponentProperties",
+          "description": "The component properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The component sub resource."
+    },
+    "ComponentProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the component resource."
+        },
+        "deploymentProfile": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The JSON-serialized deployment profile of the component resource."
+        },
+        "deploymentStatus": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "#/definitions/DeploymentStatusProperties",
+          "description": "The deployment status of the component resource."
+        }
+      },
+      "description": "The component properties of the network function."
+    },
+    "DeploymentStatusProperties": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the component resource."
+        },
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "The resource related to the component resource."
+        },
+        "nextExpectedUpdateAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The next expected update of deployment status."
+        }
+      },
+      "description": "The deployment status properties of the network function component."
+    },
+    "Status": {
+      "type": "string",
+      "description": "The component resource deployment status.",
+      "enum": [
+        "Unknown",
+        "Deployed",
+        "Uninstalled",
+        "Superseded",
+        "Failed",
+        "Uninstalling",
+        "Pending-Install",
+        "Pending-Upgrade",
+        "Pending-Rollback",
+        "Downloading",
+        "Installing",
+        "Reinstalling",
+        "Rollingback",
+        "Upgrading"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true
+      }
+    },
+    "Resources": {
+      "type": "object",
+      "properties": {
+        "deployments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Deployment"
+          },
+          "description": "Deployments that are related to component resource.",
+          "x-ms-identifiers": []
+        },
+        "pods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pod"
+          },
+          "description": "Pods related to component resource.",
+          "x-ms-identifiers": []
+        },
+        "replicaSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicaSet"
+          },
+          "description": "Replica sets related to component resource.",
+          "x-ms-identifiers": []
+        },
+        "statefulSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatefulSet"
+          },
+          "description": "Stateful sets related to component resource.",
+          "x-ms-identifiers": []
+        },
+        "daemonSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaemonSet"
+          },
+          "description": "Daemonsets related to component resource.",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "The resources of the network function component."
+    },
+    "Deployment": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the deployment."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the deployment."
+        },
+        "desired": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired number of pods"
+        },
+        "ready": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of ready pods."
+        },
+        "upToDate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of upto date pods."
+        },
+        "available": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of available pods."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation Time of deployment."
+        }
+      },
+      "description": "Helm Deployment status properties."
+    },
+    "Pod": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Pod."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the Pod."
+        },
+        "desired": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired number of containers"
+        },
+        "ready": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of ready containers."
+        },
+        "status": {
+          "$ref": "#/definitions/PodStatus",
+          "description": "The status of a pod."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation Time of Pod."
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PodEvent"
+          },
+          "description": "Last 5 Pod events.",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "Helm Pod status properties."
+    },
+    "PodStatus": {
+      "type": "string",
+      "description": "The status of a Pod.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Running",
+        "Pending",
+        "Terminating",
+        "NotReady"
+      ],
+      "x-ms-enum": {
+        "name": "PodStatus",
+        "modelAsString": true
+      }
+    },
+    "PodEvent": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PodEventType",
+          "description": "The type of pod event."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Event reason."
+        },
+        "message": {
+          "type": "string",
+          "description": "Event message."
+        },
+        "lastSeenTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Event Last seen."
+        }
+      },
+      "description": "Pod Event  properties."
+    },
+    "PodEventType": {
+      "type": "string",
+      "description": "The type of pod event.",
+      "enum": [
+        "Normal",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "PodEventType",
+        "modelAsString": true
+      }
+    },
+    "ReplicaSet": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the replicaSet."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the replicaSet."
+        },
+        "desired": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired number of pods"
+        },
+        "ready": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of ready pods."
+        },
+        "current": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of current pods."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation Time of replicaSet."
+        }
+      },
+      "description": "Helm ReplicaSet status properties."
+    },
+    "StatefulSet": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the statefulset."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the statefulset."
+        },
+        "desired": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired number of pods"
+        },
+        "ready": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of ready pods."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation Time of statefulset."
+        }
+      },
+      "description": "Helm StatefulSet status properties."
+    },
+    "DaemonSet": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the daemonSet."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the daemonSet."
+        },
+        "desired": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired number of pods"
+        },
+        "current": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current number of pods"
+        },
+        "ready": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Ready pods"
+        },
+        "upToDate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of  upto date pods"
+        },
+        "available": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of available pods."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation Time of daemonSet."
+        }
+      },
+      "description": "Helm DaemonSet status properties."
+    },
+    "ComponentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Component"
+          },
+          "description": "A list of component resources in a networkFunction."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for list component API service call."
+    },
+    "ExecuteRequestParameters": {
+      "type": "object",
+      "properties": {
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "The endpoint of service to call."
+        },
+        "requestMetadata": {
+          "$ref": "#/definitions/RequestMetadata",
+          "description": "The request metadata."
+        }
+      },
+      "required": [
+        "serviceEndpoint",
+        "requestMetadata"
+      ],
+      "description": "Payload for execute request post call."
+    },
+    "RequestMetadata": {
+      "type": "object",
+      "properties": {
+        "relativePath": {
+          "type": "string",
+          "description": "The relative path of the request."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "The http method of the request.",
+          "enum": [
+            "Unknown",
+            "Post",
+            "Put",
+            "Get",
+            "Patch",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "HttpMethod",
+            "modelAsString": true
+          }
+        },
+        "serializedBody": {
+          "type": "string",
+          "description": "The serialized body of the request."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The api version of the request."
+        }
+      },
+      "required": [
+        "relativePath",
+        "httpMethod",
+        "serializedBody"
+      ],
+      "description": "Request metadata of execute request post call payload."
+    }
+  }
+}

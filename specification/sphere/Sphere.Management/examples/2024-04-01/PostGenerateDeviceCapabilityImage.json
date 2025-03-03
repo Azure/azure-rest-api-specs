@@ -1,0 +1,32 @@
+{
+  "operationId": "Devices_GenerateCapabilityImage",
+  "title": "Devices_GenerateCapabilityImage",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "productName": "MyProduct1",
+    "deviceGroupName": "myDeviceGroup1",
+    "deviceName": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "generateDeviceCapabilityRequest": {
+      "capabilities": [
+        "ApplicationDevelopment"
+      ]
+    },
+    "api-version": "2024-04-01"
+  },
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "image": "TheDeviceCapabilityImage"
+      }
+    },
+    "202": {
+      "description": "Resource operation accepted.",
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      }
+    }
+  }
+}

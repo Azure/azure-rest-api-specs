@@ -9,4 +9,6 @@ typescript:
   package-name: "@azure/arm-datafactory"
   output-folder: "$(typescript-sdks-folder)/sdk/datafactory/arm-datafactory"
   generate-metadata: true
+modelerfour:
+  treat-type-object-as-anything: true
 ```

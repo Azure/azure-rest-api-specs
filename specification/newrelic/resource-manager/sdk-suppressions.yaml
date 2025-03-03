@@ -1,0 +1,14 @@
+suppressions:
+  azure-sdk-for-python:
+    - package: azure-mgmt-newrelicobservability
+      breaking-changes:
+        - Removed operation MonitoredSubscriptionsOperations.begin_createor_update
+        - Renamed operation MonitorsOperations.update to MonitorsOperations.begin_update
+  azure-sdk-for-js:
+    - package: "@azure/arm-newrelicobservability"
+      breaking-changes:
+        - Removed Enum KnownBillingCycle
+        - Removed operation MonitoredSubscriptions.beginCreateorUpdate
+        - Removed operation MonitoredSubscriptions.beginCreateorUpdateAndWait
+        - Removed operation Monitors.update
+        - Type of parameter billingCycle of interface PlanData is changed from BillingCycle to string

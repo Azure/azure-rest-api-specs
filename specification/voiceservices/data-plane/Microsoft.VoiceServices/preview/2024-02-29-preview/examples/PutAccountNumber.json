@@ -1,0 +1,76 @@
+{
+  "title": "Create or replace a Number.",
+  "operationId": "Accounts_CreateOrReplaceNumber",
+  "parameters": {
+    "api-version": "2024-02-29-preview",
+    "accountName": "contoso",
+    "telephoneNumber": "+15105850321",
+    "resource": {
+      "telephoneNumber": "+15105850321",
+      "accountName": "contoso",
+      "serviceDetails": {
+        "teamsOperatorConnect": {
+          "enabled": true,
+          "assignmentStatus": "assigned",
+          "configuration": {
+            "usage": "CallingUserAssignment",
+            "choosableCapabilities": [
+              "InboundCalling"
+            ]
+          }
+        }
+      },
+      "configuration": {
+        "customSipHeader": "contoso-commsgw"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "telephoneNumber": "+15105850321",
+        "accountName": "contoso",
+        "serviceDetails": {
+          "teamsOperatorConnect": {
+            "enabled": true,
+            "assignmentStatus": "assigned",
+            "configuration": {
+              "usage": "CallingUserAssignment",
+              "choosableCapabilities": [
+                "InboundCalling"
+              ]
+            }
+          }
+        },
+        "configuration": {
+          "customSipHeader": "contoso-commsgw"
+        },
+        "serviceProvisioningStatus": "pending",
+        "serviceProvisioningErrors": []
+      }
+    },
+    "201": {
+      "body": {
+        "telephoneNumber": "+15105850321",
+        "accountName": "contoso",
+        "serviceDetails": {
+          "teamsOperatorConnect": {
+            "enabled": true,
+            "assignmentStatus": "assigned",
+            "configuration": {
+              "usage": "CallingUserAssignment",
+              "choosableCapabilities": [
+                "InboundCalling"
+              ]
+            }
+          }
+        },
+        "configuration": {
+          "customSipHeader": "contoso-commsgw"
+        },
+        "serviceProvisioningStatus": "pending",
+        "serviceProvisioningErrors": []
+      }
+    }
+  }
+}

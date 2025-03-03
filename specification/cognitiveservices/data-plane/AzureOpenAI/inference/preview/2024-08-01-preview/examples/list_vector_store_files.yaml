@@ -1,0 +1,21 @@
+title: Returns a list of vector store files.
+parameters:
+  endpoint: "{endpoint}"
+  api-version: 2024-08-01-preview
+  vector_store_id: vs_abc123
+responses:
+  "200":
+    body:
+      object: list
+      data:
+        - id: file-abc123
+          object: vector_store.file
+          created_at: 1699061776
+          vector_store_id: vs_abc123
+        - id: file-abc456
+          object: vector_store.file
+          created_at: 1699061776
+          vector_store_id: vs_abc123
+      first_id: file-abc123
+      last_id: file-abc456
+      has_more: false

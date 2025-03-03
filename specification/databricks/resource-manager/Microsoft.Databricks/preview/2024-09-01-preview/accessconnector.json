@@ -1,0 +1,413 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DatabricksAccessConnectorClient",
+    "version": "2024-09-01-preview",
+    "description": "These APIs allow end users to operate on Azure Databricks Access Connector resources."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors/{connectorName}": {
+      "get": {
+        "tags": [
+          "AccessConnector"
+        ],
+        "operationId": "AccessConnectors_Get",
+        "description": "Gets an Azure Databricks Access Connector.",
+        "x-ms-examples": {
+          "Get an Azure Databricks Access Connector": {
+            "$ref": "./examples/AccessConnectorGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the Access Connector.",
+            "schema": {
+              "$ref": "#/definitions/AccessConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AccessConnector"
+        ],
+        "operationId": "AccessConnectors_Delete",
+        "description": "Deletes the Azure Databricks Access Connector.",
+        "x-ms-examples": {
+          "Delete an Azure Databricks Access Connector": {
+            "$ref": "./examples/AccessConnectorDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "AccessConnector"
+        ],
+        "operationId": "AccessConnectors_CreateOrUpdate",
+        "description": "Creates or updates Azure Databricks Access Connector.",
+        "x-ms-examples": {
+          "Create an Azure Databricks Access Connector with SystemAssigned Identity": {
+            "$ref": "./examples/AccessConnectorCreateOrUpdate.json"
+          },
+          "Create an Azure Databricks Access Connector with UserAssigned Identity": {
+            "$ref": "./examples/AccessConnectorCreateOrUpdateWithUserAssigned.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessConnector"
+            },
+            "description": "Parameters supplied to the create or update an Azure Databricks Access Connector."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Returns information about the Azure Databricks Access Connector.",
+            "schema": {
+              "$ref": "#/definitions/AccessConnector"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the Azure Databricks Access Connector.",
+            "schema": {
+              "$ref": "#/definitions/AccessConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "AccessConnector"
+        ],
+        "operationId": "AccessConnectors_Update",
+        "description": "Updates an Azure Databricks Access Connector.",
+        "x-ms-examples": {
+          "Update an Azure Databricks Access Connector": {
+            "$ref": "./examples/AccessConnectorPatchUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessConnectorUpdate"
+            },
+            "description": "The update to the Azure Databricks Access Connector."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectorName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "200": {
+            "description": "Successfully updated the Azure Databricks Access Connector.",
+            "schema": {
+              "$ref": "#/definitions/AccessConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors": {
+      "get": {
+        "tags": [
+          "AccessConnector"
+        ],
+        "operationId": "AccessConnectors_ListByResourceGroup",
+        "description": "Gets all the Azure Databricks Access Connectors within a resource group.",
+        "x-ms-examples": {
+          "Lists Azure Databricks Access Connectors within a resource group": {
+            "$ref": "./examples/AccessConnectorsListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of Azure Databricks Access Connectors.",
+            "schema": {
+              "$ref": "#/definitions/AccessConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Databricks/accessConnectors": {
+      "get": {
+        "tags": [
+          "AccessConnector"
+        ],
+        "operationId": "AccessConnectors_ListBySubscription",
+        "description": "Gets all the Azure Databricks Access Connectors within a subscription.",
+        "x-ms-examples": {
+          "Lists all the Azure Databricks Access Connectors within a subscription.": {
+            "$ref": "./examples/AccessConnectorsListBySubscriptionId.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of Azure Databricks Access Connectors.",
+            "schema": {
+              "$ref": "#/definitions/AccessConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessConnector": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "description": "Azure Databricks Access Connector properties",
+          "$ref": "#/definitions/AccessConnectorProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../preview/2022-04-01-preview/databricks.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Information about Azure Databricks Access Connector."
+    },
+    "AccessConnectorProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning status of the Access Connector.",
+          "readOnly": true,
+          "enum": [
+            "Deleted",
+            "Failed",
+            "Succeeded"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "referedBy": {
+          "description": "List of workspaces referring this Access Connector.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AccessConnectorUpdate": {
+      "description": "An update to an Azure Databricks Access Connector.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        }
+      }
+    },
+    "AccessConnectorListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessConnector"
+          },
+          "description": "The array of Azure Databricks Access Connector."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of Azure Databricks Access Connector."
+    }
+  },
+  "parameters": {
+    "ConnectorName": {
+      "name": "connectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure Databricks Access Connector.",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

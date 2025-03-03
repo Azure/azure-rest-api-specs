@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2024-04-01",
+    "id": "my-batch-synthesis-job-text-input-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "my-batch-synthesis-job-text-input-1",
+        "status": "Succeeded",
+        "createdDateTime": "2024-03-15T06:19:18.0059236Z",
+        "lastActionDateTime": "2024-03-15T06:19:19.0306365",
+        "inputKind": "PlainText",
+        "customVoices": {},
+        "properties": {
+          "timeToLiveInHours": 744,
+          "outputFormat": "riff-24khz-16bit-mono-pcm",
+          "concatenateResult": false,
+          "decompressOutputFiles": false,
+          "wordBoundaryEnabled": false,
+          "sentenceBoundaryEnabled": false,
+          "sizeInBytes": 120000,
+          "succeededAudioCount": 1,
+          "failedAudioCount": 0,
+          "durationInMilliseconds": 2500,
+          "billingDetails": {
+            "neuralCharacters": 29
+          }
+        },
+        "synthesisConfig": {
+          "voice": "en-US-JennyNeural"
+        },
+        "outputs": {
+          "result": "https://stttssvcuse.blob.core.windows.net/batchsynthesis-output/29f2105f997c4bfea176d39d05ff201e/my-batch-synthesis-job-text-input-1/results.zip?SAS_Token"
+        }
+      }
+    }
+  }
+}

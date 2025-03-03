@@ -1,0 +1,44 @@
+{
+  "title": "ScriptExecutions_GetExecutionLogs",
+  "operationId": "ScriptExecutions_GetExecutionLogs",
+  "parameters": {
+    "api-version": "2023-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "scriptExecutionName": "addSsoServer",
+    "scriptOutputStreamType": [
+      "Information",
+      "Warnings",
+      "Errors",
+      "Output"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/scriptExecutions/addSsoServer",
+        "name": "addSsoServer",
+        "properties": {
+          "timeout": "P0Y0M0D0H060M0S",
+          "output": [
+            "Most recent output",
+            "Second most recent output"
+          ],
+          "errors": [
+            "Most recent error output",
+            "Second most error recent output"
+          ],
+          "warnings": [
+            "Most recent warning output",
+            "Second most recent warning output"
+          ],
+          "information": [
+            "Most recent information output",
+            "Second most recent information output"
+          ]
+        }
+      }
+    }
+  }
+}

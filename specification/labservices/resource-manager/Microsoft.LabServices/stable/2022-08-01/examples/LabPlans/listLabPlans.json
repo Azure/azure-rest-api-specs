@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.LabServices/labPlans/testlabplan",
+            "name": "testlabplan",
+            "type": "Microsoft.LabServices/LabPlan",
+            "location": "westus",
+            "systemData": {
+              "createdBy": "identity123",
+              "createdByType": "User",
+              "createdAt": "2020-05-01T10:00:00Z",
+              "lastModifiedBy": "identity123",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-06-01T09:12:28Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "defaultConnectionProfile": {
+                "webSshAccess": "None",
+                "webRdpAccess": "None",
+                "clientSshAccess": "Public",
+                "clientRdpAccess": "Public"
+              },
+              "defaultAutoShutdownProfile": {
+                "shutdownOnDisconnect": "Enabled",
+                "shutdownWhenNotConnected": "Enabled",
+                "shutdownOnIdle": "UserAbsence",
+                "disconnectDelay": "PT5M",
+                "noConnectDelay": "PT15M",
+                "idleDelay": "PT15M"
+              },
+              "defaultNetworkProfile": {
+                "subnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/default"
+              },
+              "sharedGalleryId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Compute/galleries/testsig",
+              "supportInfo": {
+                "url": "help.contoso.com",
+                "email": "help@contoso.com",
+                "phone": "+1-202-555-0123",
+                "instructions": "Contact support for help."
+              }
+            },
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "a799d834-d3c9-4554-ba5d-3771a995aa6a",
+              "tenantId": "8c33e124-0581-45e0-84d4-f80d59de7806"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

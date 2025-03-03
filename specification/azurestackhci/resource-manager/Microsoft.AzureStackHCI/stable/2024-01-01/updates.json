@@ -1,0 +1,660 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-01",
+    "title": "AzureStackHCI",
+    "description": "Azure Stack HCI management service"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/apply": {
+      "post": {
+        "operationId": "Updates_Post",
+        "description": "Apply Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List available updates": {
+            "$ref": "./examples/PostUpdates.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates": {
+      "get": {
+        "operationId": "Updates_List",
+        "description": "List all Updates",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List available updates": {
+            "$ref": "./examples/ListUpdates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}": {
+      "delete": {
+        "operationId": "Updates_Delete",
+        "description": "Delete specified Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete an Update": {
+            "$ref": "./examples/DeleteUpdates.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Updates_Put",
+        "description": "Put specified Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "updateProperties",
+            "in": "body",
+            "description": "Properties of the Updates object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put a specific update": {
+            "$ref": "./examples/PutUpdates.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Updates_Get",
+        "description": "Get specified Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a specific update": {
+            "$ref": "./examples/GetUpdates.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UpdateList": {
+      "description": "List of Updates",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Updates",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Update"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdatePrerequisite": {
+      "description": "If update State is HasPrerequisite, this property contains an array of objects describing prerequisite updates before installing this update. Otherwise, it is empty.",
+      "type": "object",
+      "properties": {
+        "updateType": {
+          "description": "Updatable component type.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the prerequisite.",
+          "type": "string"
+        },
+        "packageName": {
+          "description": "Friendly name of the prerequisite.",
+          "type": "string"
+        }
+      }
+    },
+    "Update": {
+      "description": "Update details",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "description": "Update properties",
+          "type": "object",
+          "$ref": "#/definitions/UpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UpdateProperties": {
+      "description": "Details of a singular Update in HCI Cluster",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the Updates proxy resource.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "installedDate": {
+          "description": "Date that the update was installed.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "description": "Description of the update.",
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the update as it relates to this stamp.",
+          "type": "string",
+          "enum": [
+            "HasPrerequisite",
+            "Obsolete",
+            "Ready",
+            "NotApplicableBecauseAnotherUpdateIsInProgress",
+            "Preparing",
+            "Installing",
+            "Installed",
+            "PreparationFailed",
+            "InstallationFailed",
+            "Invalid",
+            "Recalled",
+            "Downloading",
+            "DownloadFailed",
+            "HealthChecking",
+            "HealthCheckFailed",
+            "ReadyToInstall",
+            "ScanInProgress",
+            "ScanFailed",
+            "AdditionalContentRequired"
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          }
+        },
+        "prerequisites": {
+          "description": "If update State is HasPrerequisite, this property contains an array of objects describing prerequisite updates before installing this update. Otherwise, it is empty.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdatePrerequisite"
+          },
+          "x-ms-identifiers": [
+            "packageName"
+          ]
+        },
+        "componentVersions": {
+          "description": "An array of component versions for a Solution Bundle update, and an empty array otherwise.  ",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackageVersionInfo"
+          },
+          "x-ms-client-flatten": true,
+          "x-ms-identifiers": [
+            "version"
+          ]
+        },
+        "rebootRequired": {
+          "type": "object",
+          "$ref": "#/definitions/RebootRequirement",
+          "x-ms-client-flatten": true
+        },
+        "healthState": {
+          "description": "Overall health state for update-specific health checks.",
+          "type": "object",
+          "$ref": "#/definitions/HealthState",
+          "x-ms-client-flatten": true
+        },
+        "healthCheckResult": {
+          "description": "An array of PrecheckResult objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrecheckResult"
+          },
+          "x-ms-client-flatten": true
+        },
+        "healthCheckDate": {
+          "description": "Last time the package-specific checks were run.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "packagePath": {
+          "description": "Path where the update package is available.",
+          "type": "string"
+        },
+        "packageSizeInMb": {
+          "description": "Size of the package. This value is a combination of the size from update metadata and size of the payload that results from the live scan operation for OS update content.",
+          "type": "number"
+        },
+        "displayName": {
+          "description": "Display name of the Update",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the update.",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "Publisher of the update package.",
+          "type": "string"
+        },
+        "releaseLink": {
+          "description": "Link to release notes for the update.",
+          "type": "string"
+        },
+        "availabilityType": {
+          "description": "Indicates the way the update content can be downloaded.",
+          "type": "string",
+          "enum": [
+            "Local",
+            "Online",
+            "Notify"
+          ],
+          "x-ms-enum": {
+            "name": "availabilityType",
+            "modelAsString": true
+          }
+        },
+        "packageType": {
+          "description": "Customer-visible type of the update.",
+          "type": "string"
+        },
+        "additionalProperties": {
+          "description": "Extensible KV pairs serialized as a string. This is currently used to report the stamp OEM family and hardware model information when an update is flagged as Invalid for the stamp based on OEM type.",
+          "type": "string"
+        },
+        "updateStateProperties": {
+          "description": "Additional information regarding the state of the update. See definition of UpdateStateProperties type below for more details on this property.",
+          "type": "object",
+          "$ref": "#/definitions/UpdateStateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UpdateStateProperties": {
+      "description": "Additional information regarding the state of the update. See definition of UpdateStateProperties type below for more details on this property.",
+      "type": "object",
+      "properties": {
+        "progressPercentage": {
+          "description": "Progress percentage of ongoing operation. Currently this property is only valid when the update is in the Downloading state, where it maps to how much of the update content has been downloaded.",
+          "type": "number"
+        },
+        "notifyMessage": {
+          "description": "Brief message with instructions for updates of AvailabilityType Notify.",
+          "type": "string"
+        }
+      }
+    },
+    "PackageVersionInfo": {
+      "description": "Current version of each updatable component.",
+      "type": "object",
+      "properties": {
+        "packageType": {
+          "description": "Package type",
+          "type": "string"
+        },
+        "version": {
+          "description": "Package version",
+          "type": "string"
+        },
+        "lastUpdated": {
+          "description": "Last time this component was updated.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "RebootRequirement": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "True",
+        "False"
+      ],
+      "x-ms-enum": {
+        "name": "RebootRequirement",
+        "modelAsString": true
+      }
+    },
+    "HealthState": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Success",
+        "Failure",
+        "Warning",
+        "Error",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true
+      }
+    },
+    "PrecheckResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the individual test/rule/alert that was executed. Unique, not exposed to the customer.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The health check DisplayName localized of the individual test executed.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Key-value pairs that allow grouping/filtering individual tests.",
+          "type": "object",
+          "properties": {
+            "key": {
+              "description": "Key that allow grouping/filtering individual tests.",
+              "type": "string"
+            },
+            "value": {
+              "description": "Value of the key that allow grouping/filtering individual tests.",
+              "type": "string"
+            }
+          }
+        },
+        "title": {
+          "description": "User-facing name; one or more sentences indicating the direct issue.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the check running (i.e. Failed, Succeeded, In Progress). This answers whether the check ran, and passed or failed.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "severity": {
+          "description": "Severity of the result (Critical, Warning, Informational, Hidden). This answers how important the result is. Critical is the only update-blocking severity.",
+          "type": "string",
+          "enum": [
+            "Critical",
+            "Warning",
+            "Informational",
+            "Hidden"
+          ],
+          "x-ms-enum": {
+            "name": "severity",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Detailed overview of the issue and what impact the issue has on the stamp.",
+          "type": "string"
+        },
+        "remediation": {
+          "description": "Set of steps that can be taken to resolve the issue found.",
+          "type": "string"
+        },
+        "targetResourceID": {
+          "description": "The unique identifier for the affected resource (such as a node or drive).",
+          "type": "string"
+        },
+        "targetResourceName": {
+          "description": "The name of the affected resource.",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "The Time in which the HealthCheck was called.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "additionalData": {
+          "description": "Property bag of key value pairs for additional information.",
+          "type": "string"
+        },
+        "healthCheckSource": {
+          "description": "The name of the services called for the HealthCheck (I.E. Test-AzureStack, Test-Cluster).",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateNameParameter": {
+      "name": "updateName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Update",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "operationId": "OncoPhenotype_GetJob",
+  "title": "Gets the status and details of the Onco Phenotype job.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2023-09-01-preview",
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "createdDateTime": "2021-11-26T17:22:27.386Z",
+        "expirationDateTime": "2021-11-26T17:22:27.386Z",
+        "lastUpdateDateTime": "2021-11-26T17:22:27.386Z",
+        "status": "succeeded",
+        "result": {
+          "patientResults": [
+            {
+              "patientId": "Patient ID Example 1",
+              "inferences": [
+                {
+                  "type": "histology",
+                  "value": "8561",
+                  "description": "Adenolymphoma",
+                  "confidenceScore": 0.85,
+                  "evidence": [
+                    {
+                      "patientDataEvidence": {
+                        "id": "1",
+                        "text": "string",
+                        "offset": 70,
+                        "length": 135
+                      },
+                      "importance": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "clinicalStageT",
+                  "value": "T3",
+                  "description": "Locally advanced disease at risk for micrometastases",
+                  "confidenceScore": 0.88,
+                  "evidence": [
+                    {
+                      "patientDataEvidence": {
+                        "id": "2",
+                        "text": "string",
+                        "offset": 12,
+                        "length": 9
+                      },
+                      "importance": 1
+                    }
+                  ],
+                  "caseId": "1"
+                }
+              ]
+            }
+          ],
+          "modelVersion": "2021-11-26"
+        }
+      }
+    }
+  }
+}

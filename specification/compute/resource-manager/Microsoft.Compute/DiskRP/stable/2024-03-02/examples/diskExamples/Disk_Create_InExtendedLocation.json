@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2024-03-02",
+    "diskName": "myDisk",
+    "disk": {
+      "location": "West US",
+      "extendedLocation": {
+        "type": "EdgeZone",
+        "name": "{edge-zone-id}"
+      },
+      "properties": {
+        "creationData": {
+          "createOption": "Empty"
+        },
+        "diskSizeGB": 200
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk",
+        "extendedLocation": {
+          "type": "EdgeZone",
+          "name": "{edge-zone-id}"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk",
+        "extendedLocation": {
+          "type": "EdgeZone",
+          "name": "{edge-zone-id}"
+        }
+      }
+    }
+  }
+}

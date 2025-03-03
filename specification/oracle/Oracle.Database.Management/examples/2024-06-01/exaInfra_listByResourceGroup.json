@@ -1,0 +1,93 @@
+{
+  "operationId": "CloudExadataInfrastructures_listByResourceGroup",
+  "title": "CloudExadataInfrastructures_listByResourceGroup",
+  "parameters": {
+    "api-version": "2024-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/cloudExadataInfrastructures/infra1",
+            "type": "Oracle.Database/cloudExadataInfrastructures",
+            "location": "eastus",
+            "tags": {
+              "tagK1": "tagV1"
+            },
+            "properties": {
+              "ocid": "ocid1..aaaaaa",
+              "computeCount": 100,
+              "storageCount": 10,
+              "totalStorageSizeInGbs": 1000,
+              "availableStorageSizeInGbs": 1000,
+              "timeCreated": "2023-02-01T01:01:00",
+              "lifecycleDetails": "none",
+              "maintenanceWindow": {
+                "preference": "NoPreference",
+                "months": [
+                  {
+                    "name": "January"
+                  }
+                ],
+                "weeksOfMonth": [
+                  0
+                ],
+                "daysOfWeek": [
+                  {
+                    "name": "Monday"
+                  }
+                ],
+                "hoursOfDay": [
+                  0
+                ],
+                "leadTimeInWeeks": 0,
+                "patchingMode": "Rolling",
+                "customActionTimeoutInMins": 120,
+                "isCustomActionTimeoutEnabled": true,
+                "isMonthlyPatchingEnabled": true
+              },
+              "estimatedPatchingTime": {
+                "estimatedDbServerPatchingTime": 3000,
+                "estimatedNetworkSwitchesPatchingTime": 3000,
+                "estimatedStorageServerPatchingTime": 3000,
+                "totalEstimatedPatchingTime": 3000
+              },
+              "customerContacts": [
+                {
+                  "email": "noreply@oracle.com"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "shape": "EXADATA.X9M",
+              "ociUrl": "https://url",
+              "cpuCount": 10,
+              "maxCpuCount": 100,
+              "memorySizeInGbs": 100,
+              "maxMemoryInGbs": 1000,
+              "dbNodeStorageSizeInGbs": 10,
+              "maxDbNodeStorageSizeInGbs": 10,
+              "dataStorageSizeInTbs": 10,
+              "maxDataStorageInTbs": 1000,
+              "dbServerVersion": "19.0.0.0",
+              "storageServerVersion": "0.0",
+              "activatedStorageCount": 1,
+              "additionalStorageCount": 1,
+              "displayName": "infra 1",
+              "lastMaintenanceRunId": "ocid1..aaaaa",
+              "nextMaintenanceRunId": "ocid1..aaaaaa",
+              "monthlyDbServerVersion": "aaaa",
+              "monthlyStorageServerVersion": "aaaa"
+            },
+            "zones": [
+              "1"
+            ]
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

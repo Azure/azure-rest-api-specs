@@ -19,10 +19,31 @@ To see additional help and options, run:
 
 ## Configuration
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: R2059
+  - suppress: PutResponseCodes
+    from: subscriptions.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeTenantRequest/default"].put
+    reason: Not supposed to return 201 as the response code for the below API since existing api with new version change, got exceptions from ARM reviewer.
+  - suppress: PutRequestResponseSchemeArm
+    from: subscriptions.json
+    reason: The models designed in new version of this existing api in which put request, need not be same in response, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29042001", to take this item in future ref for next set of changes.
+  - suppress: LroExtension
+    from: subscriptions.json
+    where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get
+    reason: Avoid Lro changes on this api to return 202.
+  - suppress: GetOperation200
+    from: subscriptions.json
+    where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get.responses["202"]
+    reason: This api will return 200 and 202 response.
+  - suppress: DeleteResponseCodes
+    from: subscriptions.json
+    reason: The delete subscription changed directory expected to return 200 on every user's request, once it's deleted it will return 404, since it's a change on the existing api with new version, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29188912", to refactor the call on delete request and will return 204 as no content in such cases to take this item in future ref.
+  - suppress: DeleteOperationResponses
+    from: subscriptions.json
+    reason: The delete operation response for subscription changed directory expected to return 200 on every user's request, once it's deleted it will return 404, since it's a change on the existing api with new version, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29188912", to refactor the call on delete request and will return 204 as no content in such cases to take this item in future ref.
 ```
 
 
@@ -31,8 +52,67 @@ These are the global settings for the Subscription API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-03-preview
+tag: package-2021-10
 ```
+
+### Tag: package-2024-08-preview
+
+These settings apply only when `--tag=package-2024-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-08-preview'
+input-file:
+- Microsoft.Subscription/preview/2024-08-01-preview/subscriptions.json
+title: Initiate, Get and Accept Subscription Changed Directory
+description: Initiate, Get and Accept Subscription Changed Directory
+```
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+input-file:
+- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+- Microsoft.Subscription/stable/2021-10-01/subscriptions.json
+title: SubscriptionClient
+description: The subscription client
+```
+
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09'
+input-file:
+- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+- Microsoft.Subscription/stable/2020-09-01/subscriptions.json
+title: SubscriptionClient
+description: The subscription client
+```
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01'
+input-file:
+- Microsoft.Subscription/stable/2020-01-01/subscriptions.json
+title: SubscriptionClient
+description: The subscription client
+```
+
+### Tag: package-2019-10-preview
+
+These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10-preview'
+input-file:
+- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+- Microsoft.Subscription/preview/2019-10-01-preview/subscriptions.json
+title: SubscriptionClient
+description: The subscription client
+```
+
 ### Tag: package-2019-03-preview
 
 These settings apply only when `--tag=package-2019-03-preview` is specified on the command line.
@@ -41,7 +121,6 @@ These settings apply only when `--tag=package-2019-03-preview` is specified on t
 input-file:
 - Microsoft.Subscription/preview/2019-03-01-preview/subscriptions.json
 - Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json
-- Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json
 - Microsoft.Subscription/preview/2018-03-01-preview/operations.json
 - Microsoft.Subscription/stable/2016-06-01/subscriptions.json
 title: SubscriptionClient
@@ -97,8 +176,14 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
+## Python
+
+See configuration in [readme.Python.md](./readme.python.md)
 
 ## Go
 
@@ -122,7 +207,21 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-subscription
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-10-preview
   - tag: package-2017-11-preview
+```
+
+### Tag: package-2019-10-preview and java
+
+These settings apply only when `--tag=package-2019-10-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-10-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.subscription.v2019_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/subscription/mgmt-v2019_10_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2017-11-preview and java
@@ -133,7 +232,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-11-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.subscription.v2017_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/subscription/resource-manager/v2017_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/subscription/mgmt-v2017_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -150,32 +249,5 @@ description: The subscription client
 ```
 
 
-## Multi-API/Profile support for AutoRest v3 generators 
 
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.Subscription/preview/2019-03-01-preview/subscriptions.json
-  - $(this-folder)/Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json
-  - $(this-folder)/Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json
-  - $(this-folder)/Microsoft.Subscription/preview/2018-03-01-preview/operations.json
-  - $(this-folder)/Microsoft.Subscription/stable/2016-06-01/subscriptions.json
-  - $(this-folder)/Microsoft.Subscription/preview/2017-11-01-preview/subscriptionDefinitions.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
 

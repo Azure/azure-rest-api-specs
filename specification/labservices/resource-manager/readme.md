@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for LabServices.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for LabServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,89 @@ To build the SDK for LabServices, simply [Install AutoRest](https://aka.ms/autor
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the LabServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-10
+tag: package-2023-06
 ```
 
+
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.LabServices/stable/2023-06-07/Images.json
+  - Microsoft.LabServices/stable/2023-06-07/LabPlans.json
+  - Microsoft.LabServices/stable/2023-06-07/LabServices.json
+  - Microsoft.LabServices/stable/2023-06-07/Labs.json
+  - Microsoft.LabServices/stable/2023-06-07/OperationResults.json
+  - Microsoft.LabServices/stable/2023-06-07/Schedules.json
+  - Microsoft.LabServices/stable/2023-06-07/Skus.json
+  - Microsoft.LabServices/stable/2023-06-07/Usages.json
+  - Microsoft.LabServices/stable/2023-06-07/Users.json
+  - Microsoft.LabServices/stable/2023-06-07/VirtualMachines.json
+```
+### Tag: package-2022-08
+
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08'
+input-file:
+  - Microsoft.LabServices/stable/2022-08-01/Images.json
+  - Microsoft.LabServices/stable/2022-08-01/LabPlans.json
+  - Microsoft.LabServices/stable/2022-08-01/LabServices.json
+  - Microsoft.LabServices/stable/2022-08-01/Labs.json
+  - Microsoft.LabServices/stable/2022-08-01/OperationResults.json
+  - Microsoft.LabServices/stable/2022-08-01/Schedules.json
+  - Microsoft.LabServices/stable/2022-08-01/Skus.json
+  - Microsoft.LabServices/stable/2022-08-01/Usages.json
+  - Microsoft.LabServices/stable/2022-08-01/Users.json
+  - Microsoft.LabServices/stable/2022-08-01/VirtualMachines.json
+```
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.LabServices/preview/2021-11-15-preview/Images.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/LabPlans.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/LabServices.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Labs.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/OperationResults.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Schedules.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Users.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/VirtualMachines.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Usages.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Skus.json
+```
+
+### Tag: package-preview-2021-10
+
+These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-10'
+input-file:
+  - Microsoft.LabServices/preview/2021-10-01-preview/LabServices.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/OperationResults.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/LabPlans.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/Images.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/Labs.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/Users.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/VirtualMachines.json
+  - Microsoft.LabServices/preview/2021-10-01-preview/Schedules.json
+```
 
 ### Tag: package-2018-10
 
@@ -40,8 +109,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -59,49 +128,13 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_labservices']
-```
-
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.LabServices
-  output-folder: $(csharp-sdks-folder)/labservices/Microsoft.Azure.Management.LabServices/src/Generated
-  clear-output-folder: true
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.labservices
-  package-name: azure-mgmt-labservices
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/labservices/azure-mgmt-labservices/azure/mgmt/labservices
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/labservices/azure-mgmt-labservices
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -136,35 +169,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.labservices.v2018_10_15
-  output-folder: $(azure-libraries-for-java-folder)/labservices/resource-manager/v2018_10_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/labservices/mgmt-v2018_10_15
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.LabServices/stable/2018-10-15/ML.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
-

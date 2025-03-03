@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "subid",
+    "apiId": "swagger-petstore",
+    "operationId": "loginUser"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/swagger-petstore/operations/loginUser",
+        "type": "Microsoft.ApiManagement/service/apis/operations",
+        "name": "loginUser",
+        "properties": {
+          "displayName": "Logs user into the system",
+          "method": "GET",
+          "urlTemplate": "/user/login?username={username}&password={password}",
+          "templateParameters": [
+            {
+              "name": "username",
+              "description": "The user name for login",
+              "type": "string",
+              "required": true,
+              "values": []
+            },
+            {
+              "name": "password",
+              "description": "The password for login in clear text",
+              "type": "string",
+              "required": true,
+              "values": []
+            }
+          ],
+          "description": "",
+          "request": {
+            "queryParameters": [],
+            "headers": [],
+            "representations": []
+          },
+          "responses": [
+            {
+              "statusCode": 200,
+              "description": "successful operation",
+              "representations": [
+                {
+                  "contentType": "application/xml",
+                  "schemaId": "5ba91a35f373b513a0bf31c6",
+                  "typeName": "UserLoginGet200ApplicationXmlResponse"
+                },
+                {
+                  "contentType": "application/json",
+                  "schemaId": "5ba91a35f373b513a0bf31c6",
+                  "typeName": "UserLoginGet200ApplicationJsonResponse"
+                }
+              ],
+              "headers": [
+                {
+                  "name": "X-Rate-Limit",
+                  "description": "calls per hour allowed by the user",
+                  "type": "integer",
+                  "values": []
+                },
+                {
+                  "name": "X-Expires-After",
+                  "description": "date in UTC when token expires",
+                  "type": "string",
+                  "values": []
+                }
+              ]
+            },
+            {
+              "statusCode": 400,
+              "description": "Invalid username/password supplied",
+              "representations": [
+                {
+                  "contentType": "application/xml"
+                },
+                {
+                  "contentType": "application/json"
+                }
+              ],
+              "headers": []
+            }
+          ]
+        }
+      }
+    }
+  }
+}

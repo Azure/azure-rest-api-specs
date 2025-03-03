@@ -1,0 +1,17 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/network/armnetwork'
+      breaking-changes:
+        - Field `Etag` of struct `AdminRuleCollection` has been removed
+        - Field `Etag` of struct `AdminRule` has been removed
+        - Field `Etag` of struct `BaseAdminRule` has been removed
+        - Field `Etag` of struct `DefaultAdminRule` has been removed
+        - Field `Etag` of struct `SecurityAdminConfiguration` has been removed
+  azure-sdk-for-js:
+    - package: '@azure/arm-network'
+      breaking-changes:
+        - Interface AdminRuleCollection no longer has parameter systemData
+        - Interface BaseAdminRule no longer has parameter systemData
+        - Interface SecurityAdminConfiguration no longer has parameter systemData
+
+        

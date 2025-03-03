@@ -1,0 +1,80 @@
+{
+  "title": "Creates a completion for the provided Mongo DB.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-08-01-preview",
+    "deployment-id": "<deployment-id>",
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "can you tell me how to care for a dog?"
+        }
+      ],
+      "data_sources": [
+        {
+          "type": "mongo_db",
+          "parameters": {
+            "authentication": {
+              "type": "username_and_password",
+              "username": "<username>",
+              "password": "<password>"
+            },
+            "endpoint": "<endpoint_name>",
+            "app_name": "<application name>",
+            "database_name": "sampledb",
+            "collection_name": "samplecollection",
+            "index_name": "sampleindex",
+            "embedding_dependency": {
+              "type": "deployment_name",
+              "deployment_name": "{embedding deployment name}"
+            },
+            "fields_mapping": {
+              "content_fields": [
+                "content"
+              ],
+              "vector_fields": [
+                "contentvector"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "chatcmpl-7R1nGnsXO8n4oi9UPz2f3UHdgAYMn",
+        "created": 1686676106,
+        "choices": [
+          {
+            "index": 0,
+            "finish_reason": "stop",
+            "message": {
+              "role": "assistant",
+              "content": "Content of the completion [doc1].",
+              "context": {
+                "citations": [
+                  {
+                    "content": "Citation content.",
+                    "title": "Citation Title",
+                    "filepath": "contoso.txt",
+                    "url": "https://contoso.blob.windows.net/container/contoso.txt",
+                    "chunk_id": "0"
+                  }
+                ],
+                "intent": "dog care"
+              }
+            }
+          }
+        ],
+        "usage": {
+          "completion_tokens": 557,
+          "prompt_tokens": 33,
+          "total_tokens": 590
+        }
+      }
+    }
+  }
+}

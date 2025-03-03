@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "metricId": "22222222-2222-2222-2222-000000000001",
+    "Content-Type": "application/json",
+    "body": {
+      "startTime": "2020-01-01T00:00:00.000Z",
+      "endTime": "2020-02-01T00:00:00.000Z"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "@nextLink": "https://localhost/metrics/22222222-2222-2222-2222-000000000001/status/enrichment/anomalyDetection/query?$skip=2&$maxpagesize=2",
+        "value": [
+          {
+            "timestamp": "2020-01-01T00:00:00.000Z",
+            "status": "Succeeded",
+            "message": ""
+          },
+          {
+            "timestamp": "2020-01-02T00:00:00.000Z",
+            "status": "Succeeded",
+            "message": ""
+          }
+        ]
+      }
+    }
+  }
+}

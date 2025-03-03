@@ -1,0 +1,465 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions": {
+      "get": {
+        "tags": [
+          "DatabaseExtensions"
+        ],
+        "description": "List database extension. This will return an empty list as it is not supported.",
+        "operationId": "DatabaseExtensions_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List extensions import/export operations. This will return an empty list as it is not supported.",
+            "schema": {
+              "$ref": "#/definitions/ImportExportExtensionsOperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List database extensions.": {
+            "$ref": "./examples/ListDatabaseExtensions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}": {
+      "get": {
+        "tags": [
+          "DatabaseExtensions"
+        ],
+        "description": "Gets a database extension. This will return resource not found as it is not supported.",
+        "operationId": "DatabaseExtensions_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get extensions import/export operation. This will return resource not found as it is not supported."
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-examples": {
+          "Get database extensions.": {
+            "$ref": "./examples/GetDatabaseExtensions.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DatabaseExtensions"
+        ],
+        "description": "Perform a database extension operation, like database import, database export, or polybase import",
+        "operationId": "DatabaseExtensions_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The database import request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseExtensions"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully completed import/export operation.",
+            "schema": {
+              "$ref": "#/definitions/ImportExportExtensionsOperationResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 InvalidImportExportInputParameter - The import/export request failed due to an invalid input parameter.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 DatabaseExtensionsInvalidOperationMode - Invalid operationMode parameter for database extension.\n\n * 400 DatabaseExtensionsInvalidStorageKeyType - The storage key type must by 'StorageAccessKey'.\n\n * 400 DatabaseExtensionsMissingStorageUri - Storage URI cannot be empty.\n\n * 400 InvalidMaxSizeTierCombination - The specified tier does not support the specified database max size.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 400 ImportExportJobError - The ImportExport operation has failed.\n\n * 400 BlockedByOutboundFirewall - The outbound firewall rules blocked the request.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
+          },
+          "202": {
+            "description": "Import/Export operation is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or Update database extensions.": {
+            "$ref": "./examples/CreateOrUpdateDatabaseExtensions.json"
+          },
+          "Import database using database extension.": {
+            "$ref": "./examples/ImportDatabaseUsingDatabaseExtensions.json"
+          },
+          "Export database using database extension.": {
+            "$ref": "./examples/ExportDatabaseUsingDatabaseExtensions.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DatabaseExtensions": {
+      "description": "An Import, Export, or PolybaseImport resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseExtensionsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DatabaseExtensionsProperties": {
+      "description": "Contains the database information after a successful Import, Export, or PolybaseImport",
+      "required": [
+        "operationMode",
+        "storageKeyType",
+        "storageKey",
+        "storageUri"
+      ],
+      "type": "object",
+      "properties": {
+        "operationMode": {
+          "description": "Operation mode of the operation: Import, Export, or PolybaseImport.",
+          "enum": [
+            "PolybaseImport",
+            "Import",
+            "Export"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageKeyType": {
+          "description": "Storage key type: StorageAccessKey or SharedAccessKey.",
+          "enum": [
+            "SharedAccessKey",
+            "StorageAccessKey"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageKeyType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageKey": {
+          "description": "Storage key for the storage account.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageUri": {
+          "description": "Storage Uri for the storage account.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLogin": {
+          "description": "Administrator login name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "description": "Administrator login password.",
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "authenticationType": {
+          "description": "Authentication type: SQL authentication or AD password.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "databaseEdition": {
+          "description": "Database edition for the newly created database in the case of an import operation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "serviceObjectiveName": {
+          "description": "Database service level objective for the newly created database in the case of an import operation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "maxSizeBytes": {
+          "description": "Database max size in bytes for the newly created database in the case of an import operation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "networkIsolation": {
+          "$ref": "#/definitions/NetworkIsolationSettings",
+          "description": "Optional resource information to enable network isolation for request.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "ImportExportExtensionsOperationListResult": {
+      "description": "Import export operation extensions list.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImportExportExtensionsOperationResult"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImportExportExtensionsOperationResult": {
+      "description": "An Extension operation result resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImportExportExtensionsOperationResultProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ImportExportExtensionsOperationResultProperties": {
+      "description": "Contains the operation result properties for import/export operation.",
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "format": "uuid",
+          "description": "Request Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestType": {
+          "description": "Request type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "description": "Last modified time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverName": {
+          "description": "Server name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseName": {
+          "description": "Database name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queuedTime": {
+          "description": "Queued time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobUri": {
+          "description": "Blob URI.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "Gets the status of private endpoints associated with this request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionRequestStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkIsolationSettings": {
+      "description": "Contains the ARM resources for which to create private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "storageAccountResourceId": {
+          "description": "The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for StorageUri parameter.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sqlServerResourceId": {
+          "description": "The resource id for the SQL server which is the target of this request. If set, private endpoint connection will be created for the SQL server. Must match server which is target of the operation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "PrivateEndpointConnectionRequestStatus": {
+      "description": "Contains the private endpoint connection requests status.",
+      "type": "object",
+      "properties": {
+        "privateLinkServiceId": {
+          "description": "Resource id for which the private endpoint is created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnectionName": {
+          "description": "The connection name for the private endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of this private endpoint connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "containerAppName": "testWorkerApp0",
+    "api-version": "2024-08-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
+        "name": "testcontainerApp0",
+        "type": "Microsoft.App/containerApps",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "workloadProfileName": "My-GP-01",
+          "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
+          "configuration": {
+            "ingress": {
+              "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "external": true,
+              "targetPort": 3000,
+              "transport": "auto",
+              "customDomains": [
+                {
+                  "name": "www.my-name.com",
+                  "bindingType": "SniEnabled",
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+                },
+                {
+                  "name": "www.my--other-name.com",
+                  "bindingType": "SniEnabled",
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+                }
+              ],
+              "traffic": [
+                {
+                  "weight": 80,
+                  "revisionName": "testcontainerApp0-ab1234"
+                },
+                {
+                  "weight": 20,
+                  "revisionName": "testcontainerApp0-ab4321",
+                  "label": "staging"
+                }
+              ],
+              "ipSecurityRestrictions": [
+                {
+                  "name": "Allow work IP A subnet",
+                  "description": "Allowing all IP's within the subnet below to access containerapp",
+                  "ipAddressRange": "192.168.1.1/32",
+                  "action": "Allow"
+                },
+                {
+                  "name": "Allow work IP B subnet",
+                  "description": "Allowing all IP's within the subnet below to access containerapp",
+                  "ipAddressRange": "192.168.1.1/8",
+                  "action": "Allow"
+                }
+              ],
+              "targetPortHttpScheme": "http"
+            },
+            "dapr": {
+              "enabled": true,
+              "appPort": 3000,
+              "appProtocol": "http",
+              "httpReadBufferSize": 30,
+              "httpMaxRequestSize": 10,
+              "logLevel": "debug",
+              "enableApiLogging": true
+            },
+            "runtime": {
+              "java": {
+                "enableMetrics": true,
+                "javaAgent": {
+                  "enabled": true,
+                  "logging": {
+                    "loggerSettings": [
+                      {
+                        "logger": "org.springframework.boot",
+                        "level": "debug"
+                      }
+                    ]
+                  }
+                }
+              },
+              "dotnet": {
+                "autoConfigureDataProtection": true
+              }
+            },
+            "maxInactiveRevisions": 10
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerApp0:v4",
+                "name": "testcontainerApp0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerApp0:v4",
+                "name": "testinitcontainerApp0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 5,
+              "rules": [
+                {
+                  "name": "httpscalingrule",
+                  "http": {
+                    "metadata": {
+                      "concurrentRequests": "50"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "eventStreamEndpoint": "testEndpoint"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.App/containerApps/testWorkerApp0/operationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2024-08-02-preview"
+      }
+    }
+  }
+}

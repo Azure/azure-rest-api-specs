@@ -1,0 +1,104 @@
+{
+  "operationId": "DocumentClassifiers_GetClassifyResult",
+  "title": "Get Classify Document Result",
+  "parameters": {
+    "endpoint": "https://myendpoint.cognitiveservices.azure.com",
+    "api-version": "2024-07-31-preview",
+    "classifierId": "myClassifier",
+    "resultId": "3b31320d-8bab-4f88-b19c-2322a7f11034"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "succeeded",
+        "createdDateTime": "2021-09-24T13:00:46Z",
+        "lastUpdatedDateTime": "2021-09-24T13:00:49Z",
+        "analyzeResult": {
+          "apiVersion": "2024-07-31-preview",
+          "modelId": "myClassifier",
+          "stringIndexType": "textElements",
+          "contentFormat": "text",
+          "content": "",
+          "pages": [
+            {
+              "pageNumber": 1,
+              "width": 8.5,
+              "height": 11,
+              "unit": "inch",
+              "spans": []
+            },
+            {
+              "pageNumber": 2,
+              "width": 8.5,
+              "height": 11,
+              "unit": "inch",
+              "spans": []
+            },
+            {
+              "pageNumber": 3,
+              "width": 8.5,
+              "height": 11,
+              "unit": "inch",
+              "spans": []
+            }
+          ],
+          "documents": [
+            {
+              "docType": "formA",
+              "boundingRegions": [
+                {
+                  "pageNumber": 1,
+                  "polygon": [
+                    0,
+                    0,
+                    8.5,
+                    0,
+                    8.5,
+                    11,
+                    0,
+                    11
+                  ]
+                },
+                {
+                  "pageNumber": 2,
+                  "polygon": [
+                    0,
+                    0,
+                    8.5,
+                    0,
+                    8.5,
+                    11,
+                    0,
+                    11
+                  ]
+                }
+              ],
+              "confidence": 0.97,
+              "spans": []
+            },
+            {
+              "docType": "formB",
+              "boundingRegions": [
+                {
+                  "pageNumber": 3,
+                  "polygon": [
+                    0,
+                    0,
+                    8.5,
+                    0,
+                    8.5,
+                    11,
+                    0,
+                    11
+                  ]
+                }
+              ],
+              "confidence": 0.97,
+              "spans": []
+            }
+          ]
+        }
+      }
+    }
+  }
+}

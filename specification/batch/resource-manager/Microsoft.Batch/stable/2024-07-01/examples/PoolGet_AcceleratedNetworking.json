@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2024-07-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "etag": "W/\"0x8D4EDFEBFADF4AB\"",
+        "properties": {
+          "lastModified": "2023-04-28T02:32:32.8696419Z",
+          "creationTime": "2023-04-28T02:32:32.8696419Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2023-04-28T02:32:32.8696419Z",
+          "allocationState": "Steady",
+          "allocationStateTransitionTime": "2023-04-28T02:33:40.82831Z",
+          "vmSize": "STANDARD_D1_V2",
+          "interNodeCommunication": "Disabled",
+          "taskSlotsPerNode": 1,
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2016-datacenter-smalldisk",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.windows amd64"
+            }
+          },
+          "networkConfiguration": {
+            "dynamicVnetAssignmentScope": "none",
+            "enableAcceleratedNetworking": true
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "targetDedicatedNodes": 1,
+              "targetLowPriorityNodes": 0,
+              "resizeTimeout": "PT15M"
+            }
+          },
+          "resizeOperationStatus": {
+            "targetDedicatedNodes": 1,
+            "nodeDeallocationOption": "Requeue",
+            "resizeTimeout": "PT15M",
+            "startTime": "2023-04-28T02:32:32.8696419Z"
+          },
+          "currentDedicatedNodes": 1,
+          "currentLowPriorityNodes": 0,
+          "currentNodeCommunicationMode": "Classic"
+        }
+      }
+    }
+  }
+}

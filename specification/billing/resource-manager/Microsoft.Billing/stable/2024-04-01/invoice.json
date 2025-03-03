@@ -1,0 +1,1364 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2024-04-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Lists the invoices for a billing profile for a given start date and end date. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_ListByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "in": "query",
+            "name": "periodStartDate",
+            "description": "The start date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.",
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "query",
+            "name": "periodEndDate",
+            "description": "The end date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.",
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of invoices.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoicesListByBillingProfile": {
+            "$ref": "./examples/invoicesListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/downloadDocuments": {
+      "post": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Gets a URL to download multiple invoice documents (invoice pdf, tax receipts, credit notes) as a zip file. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_DownloadDocumentsByBillingAccount",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "A list of download details for individual documents.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DocumentDownloadRequest"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A secure URL that can be used to download a an entity until the URL expires.",
+            "schema": {
+              "$ref": "#/definitions/DocumentDownloadResult"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InvoicesDownloadDocumentsByBillingAccount": {
+            "$ref": "./examples/invoicesDownloadDocumentsByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/amend": {
+      "post": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Regenerate an invoice by billing account name and invoice name. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_Amend",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InvoicesAmend": {
+            "$ref": "./examples/invoicesAmend.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/download": {
+      "post": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Gets a URL to download an invoice document. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_DownloadByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "in": "query",
+            "name": "documentName",
+            "description": "The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt.",
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A secure URL that can be used to download a an entity until the URL expires.",
+            "schema": {
+              "$ref": "#/definitions/DocumentDownloadResult"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InvoicesDownloadByBillingAccount": {
+            "$ref": "./examples/invoicesDownloadByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/downloadSummary": {
+      "post": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Gets a URL to download the summary document for an invoice. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_DownloadSummaryByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A secure URL that can be used to download a an entity until the URL expires.",
+            "schema": {
+              "$ref": "#/definitions/DocumentDownloadResult"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InvoicesDownloadSummaryByBillingAccount": {
+            "$ref": "./examples/invoicesDownloadSummaryByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Gets an invoice by billing account name and ID. The operation is supported for all billing account types.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_GetByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of invoices.",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoicesGetByBillingAccount": {
+            "$ref": "./examples/invoicesGetByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Lists the invoices for a billing account for a given start date and end date. The operation is supported for all billing account types.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_ListByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "query",
+            "name": "periodStartDate",
+            "description": "The start date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.",
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "query",
+            "name": "periodEndDate",
+            "description": "The end date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.",
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of invoices.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoicesListByBillingAccount": {
+            "$ref": "./examples/invoicesListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/downloadDocuments": {
+      "post": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Gets a URL to download multiple invoice documents (invoice pdf, tax receipts, credit notes) as a zip file. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_DownloadDocumentsByBillingSubscription",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "A list of download details for individual documents.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DocumentDownloadRequest"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A secure URL that can be used to download a an entity until the URL expires.",
+            "schema": {
+              "$ref": "#/definitions/DocumentDownloadResult"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InvoicesDownloadDocumentsByBillingSubscription": {
+            "$ref": "./examples/invoicesDownloadDocumentsByBillingSubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}/download": {
+      "post": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Gets a URL to download an invoice by billing subscription. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_DownloadByBillingSubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "in": "query",
+            "name": "documentName",
+            "description": "The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt.",
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A secure URL that can be used to download a an entity until the URL expires.",
+            "schema": {
+              "$ref": "#/definitions/DocumentDownloadResult"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InvoicesDownloadByBillingSubscription": {
+            "$ref": "./examples/invoicesDownloadByBillingSubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/{invoiceName}": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Gets an invoice by subscription ID and invoice ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_GetByBillingSubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An invoice.",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoicesGetByBillingSubscription": {
+            "$ref": "./examples/invoicesGetByBillingSubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Lists the invoices for a subscription. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_ListByBillingSubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/subscriptionId"
+          },
+          {
+            "in": "query",
+            "name": "periodStartDate",
+            "description": "The start date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.",
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "query",
+            "name": "periodEndDate",
+            "description": "The end date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.",
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of invoices.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoicesListByBillingSubscription": {
+            "$ref": "./examples/invoicesListByBillingSubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/default/invoices/{invoiceName}": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Gets an invoice by ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An invoice.",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoicesGet": {
+            "$ref": "./examples/invoicesGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DocumentDownloadRequest": {
+      "description": "A list of download details for individual documents.",
+      "type": "object",
+      "properties": {
+        "documentName": {
+          "description": "The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt. If omitted, the most recent invoice PDF for the invoice will be returned.",
+          "type": "string"
+        },
+        "invoiceName": {
+          "description": "The ID that uniquely identifies an invoice.",
+          "type": "string"
+        }
+      }
+    },
+    "DocumentDownloadResult": {
+      "description": "A secure URL that can be used to download a an entity until the URL expires.",
+      "type": "object",
+      "properties": {
+        "expiryTime": {
+          "description": "The time in UTC when the download URL will expire.",
+          "type": "string",
+          "readOnly": true
+        },
+        "url": {
+          "description": "The URL to the PDF or .zip file.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FailedPayment": {
+      "description": "A failed payment.",
+      "type": "object",
+      "properties": {
+        "date": {
+          "format": "date-time",
+          "description": "The date when the payment was attempted.",
+          "type": "string",
+          "readOnly": true
+        },
+        "failedPaymentReason": {
+          "description": "The reason that the payment failed.",
+          "enum": [
+            "Other",
+            "BankDeclined",
+            "CardExpired",
+            "IncorrectCardDetails"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "FailedPaymentReason",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Invoice": {
+      "description": "An invoice.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InvoiceProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "InvoiceDocument": {
+      "description": "The properties of a document.",
+      "type": "object",
+      "properties": {
+        "documentNumbers": {
+          "description": "The document numbers for the invoice document.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "externalUrl": {
+          "description": "The URL to download the invoice document if the source is external to Microsoft.Billing.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "The type of the document.",
+          "enum": [
+            "Other",
+            "Invoice",
+            "VoidNote",
+            "TaxReceipt",
+            "CreditNote",
+            "Summary",
+            "Transactions"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoiceDocumentType",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The ID that uniquely identifies an invoice document. This ID may be an identifier for an invoice PDF, a credit note, or a tax receipt.",
+          "type": "string",
+          "readOnly": true
+        },
+        "url": {
+          "description": "The URL to download the invoice document if the source is internal to Microsoft.Billing.",
+          "type": "string",
+          "readOnly": true
+        },
+        "source": {
+          "description": "The source of the document. ENF for Brazil and DRS for rest of the world.",
+          "enum": [
+            "Other",
+            "DRS",
+            "ENF"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DocumentSource",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "InvoiceListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Invoice"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "InvoiceProperties": {
+      "description": "An invoice.",
+      "type": "object",
+      "properties": {
+        "amountDue": {
+          "description": "The amount due as of now.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "azurePrepaymentApplied": {
+          "description": "The amount of Azure prepayment applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "billedAmount": {
+          "description": "The total charges for the invoice billing period.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "billedDocumentId": {
+          "description": "The Id of the active invoice which is originally billed after this invoice was voided. This field is applicable to the void invoices only.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile for which the invoice is generated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "The ID of the billing profile for which the invoice is generated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creditAmount": {
+          "description": "The total refund for returns and cancellations during the invoice billing period. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "creditForDocumentId": {
+          "description": "The Id of the invoice which got voided and this credit note was issued as a result. This field is applicable to the credit notes only.",
+          "type": "string",
+          "readOnly": true
+        },
+        "documents": {
+          "description": "List of documents available to download and view such as invoice, credit note, or tax receipt.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvoiceDocument"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "documentType": {
+          "description": "The type of the document.",
+          "enum": [
+            "Other",
+            "Invoice",
+            "VoidNote",
+            "TaxReceipt",
+            "CreditNote",
+            "Summary",
+            "Transactions"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoiceDocumentType",
+            "modelAsString": true
+          }
+        },
+        "dueDate": {
+          "format": "date-time",
+          "description": "The due date for the invoice.",
+          "type": "string",
+          "readOnly": true
+        },
+        "failedPayments": {
+          "description": "List of failed payments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FailedPayment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "freeAzureCreditApplied": {
+          "description": "The amount of free Azure credits applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "invoiceDate": {
+          "format": "date-time",
+          "description": "The date when the invoice was generated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoicePeriodEndDate": {
+          "format": "date-time",
+          "description": "The end date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoicePeriodStartDate": {
+          "format": "date-time",
+          "description": "The start date of the billing period for which the invoice is generated. The date is in MM-DD-YYYY format.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceType": {
+          "description": "Invoice type.",
+          "enum": [
+            "Other",
+            "AzureServices",
+            "AzureMarketplace",
+            "AzureSupport"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoiceType",
+            "modelAsString": true
+          }
+        },
+        "isMonthlyInvoice": {
+          "description": "Specifies if the invoice is generated as part of monthly invoicing cycle or not. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "payments": {
+          "description": "List of payments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Payment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "purchaseOrderNumber": {
+          "description": "An optional purchase order number for the invoice.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rebillDetails": {
+          "description": "Rebill details for an invoice.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RebillDetails"
+            }
+          ]
+        },
+        "status": {
+          "description": "The current status of the invoice.",
+          "enum": [
+            "Other",
+            "Due",
+            "OverDue",
+            "Paid",
+            "Void",
+            "Locked"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoiceStatus",
+            "modelAsString": true
+          }
+        },
+        "subscriptionDisplayName": {
+          "description": "The name of the billing subscription for which the invoice is generated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "The ID of the subscription for which the invoice is generated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "specialTaxationType": {
+          "description": "Identifies the type of tax calculation used for the invoice. The field is applicable only to invoices with special tax calculation logic.",
+          "enum": [
+            "SubtotalLevel",
+            "InvoiceLevel"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SpecialTaxationType",
+            "modelAsString": true
+          }
+        },
+        "subTotal": {
+          "description": "The pre-tax amount due. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "taxAmount": {
+          "description": "The amount of tax charged for the billing period. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "totalAmount": {
+          "description": "The amount due when the invoice was generated. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "refundDetails": {
+          "description": "The details of a refund request.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RefundDetailsSummary"
+            }
+          ]
+        }
+      }
+    },
+    "Payment": {
+      "description": "An invoice payment.",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "description": "The paid amount.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "date": {
+          "format": "date-time",
+          "description": "The date when the payment was made.",
+          "type": "string",
+          "readOnly": true
+        },
+        "paymentMethodId": {
+          "description": "The ID that uniquely identifies the payment method used for the invoice.",
+          "type": "string",
+          "readOnly": true
+        },
+        "paymentMethodFamily": {
+          "description": "The family of payment method.",
+          "enum": [
+            "Other",
+            "None",
+            "CreditCard",
+            "Credits",
+            "CheckWire",
+            "EWallet",
+            "TaskOrder",
+            "DirectDebit"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PaymentMethodFamily",
+            "modelAsString": true
+          }
+        },
+        "paymentMethodType": {
+          "description": "The type of payment method.",
+          "type": "string",
+          "readOnly": true
+        },
+        "paymentType": {
+          "description": "The type of payment.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
+    "RebillDetails": {
+      "description": "The rebill details of an invoice.",
+      "type": "object",
+      "properties": {
+        "invoiceDocumentId": {
+          "description": "The ID of invoice.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creditNoteDocumentId": {
+          "description": "The ID of credit note.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rebillDetails": {
+          "$ref": "#/definitions/RebillDetails"
+        }
+      },
+      "readOnly": true
+    },
+    "RefundDetailsSummary": {
+      "description": "The details of refund request.",
+      "type": "object",
+      "properties": {
+        "requestedOn": {
+          "format": "date-time",
+          "description": "Date when the refund was requested.",
+          "type": "string",
+          "readOnly": true
+        },
+        "approvedOn": {
+          "format": "date-time",
+          "description": "Date when the refund was approved.",
+          "type": "string",
+          "readOnly": true
+        },
+        "completedOn": {
+          "format": "date-time",
+          "description": "Date when the refund was completed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "amountRequested": {
+          "description": "The amount of refund requested.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "amountRefunded": {
+          "description": "The amount refunded.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "rebillInvoiceId": {
+          "description": "The invoice ID of the rebill invoice for a refund.",
+          "type": "string",
+          "readOnly": true
+        },
+        "transactionCount": {
+          "format": "int32",
+          "description": "The number of transactions refunded.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "refundStatus": {
+          "description": "The status of refund request.",
+          "enum": [
+            "Other",
+            "Pending",
+            "Approved",
+            "Declined",
+            "Cancelled",
+            "Completed",
+            "Expired"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "RefundStatus",
+            "modelAsString": true
+          }
+        },
+        "refundOperationId": {
+          "description": "The ID of refund operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "refundReason": {
+          "description": "The reason for refund.",
+          "enum": [
+            "Other",
+            "AccidentalConversion",
+            "UnclearPricing",
+            "AccidentalPurchase",
+            "ForgotToCancel",
+            "UnclearDocumentation"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "RefundReasonCode",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}
