@@ -37,7 +37,7 @@ interface Applications {
     API.
     """)
   @route("/applications")
-  listApplicationsOp is ListOperation<{}, BatchApplicationListResult>;
+  listApplications is ListOperation<{}, BatchApplicationListResult>;
 
   @summary("Gets information about the specified Application.")
   @doc("""
@@ -48,7 +48,7 @@ interface Applications {
     API.
     """)
   @route("/applications/{applicationId}")
-  getApplicationOp is ReadOperation<
+  getApplication is ReadOperation<
     {
       ...GetApplicationRequiredParameters;
     },
