@@ -3666,7 +3666,10 @@
           "type": "string",
           "description": "The Kubernetes version of the ManagedCluster resource"
         }
-      }
+      },
+      "required": [
+        "kubernetesVersion"
+      ]
     },
     "ContainerServiceNewKubernetesVersionAvailableEventData": {
       "type": "object",
@@ -3688,7 +3691,12 @@
           "type": "string",
           "description": "The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event"
         }
-      }
+      },
+      "required": [
+        "latestSupportedKubernetesVersion",
+        "latestStableKubernetesVersion",
+        "lowestMinorKubernetesVersion"
+      ]
     },
     "ContainerServiceNodePoolRollingEventData": {
       "type": "object",
@@ -3698,7 +3706,10 @@
           "type": "string",
           "description": "The name of the node pool in the ManagedCluster resource"
         }
-      }
+      },
+      "required": [
+        "nodePoolName"
+      ]
     },
     "ContainerServiceNodePoolRollingFailedEventData": {
       "type": "object",
