@@ -101,7 +101,7 @@ model FullBackupOperation {
 /**
  * The authentication method and location for the backup operation.
  */
-@added(KeyVault.Versions.`v7.6_preview.1`)
+@added(KeyVault.Versions.`v7.6_preview.2`)
 model PreBackupOperationParameters {
   /**
    * Azure Blob storage container Uri
@@ -122,7 +122,7 @@ model PreBackupOperationParameters {
 /**
  * The authentication method and location for the restore operation.
  */
-@added(KeyVault.Versions.`v7.6_preview.1`)
+@added(KeyVault.Versions.`v7.6_preview.2`)
 model PreRestoreOperationParameters {
   /**
    * A user-provided SAS token to an Azure blob storage container.
