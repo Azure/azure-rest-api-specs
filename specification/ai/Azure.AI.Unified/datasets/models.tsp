@@ -22,18 +22,17 @@ model DatasetContainer extends AssetContainer {
 
 }
 
-@doc("PagedDataContainer Definition")
-@pagedResult
-model PagedDatasetContainer {
-  @doc("The list of DatasetContainers.")
-  @extension("x-ms-identifiers", [])
-  @items
-  value: DatasetContainer[];
+@doc("Enum to determine the type of data.")
+union DatasetType {
+  string,
 
-  @doc("The link to the next page of results, if any.")
-  @nextLink
-  nextLink?: string;
+  @doc("URI file.")
+  uri_file: "uri_file",
+
+  @doc("URI folder.")
+  uri_folder: "uri_folder",
 }
+
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DatasetVersion Definition")

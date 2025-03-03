@@ -223,46 +223,12 @@ model OutputPathAssetReference extends AssetReferenceBase {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Base definition for an asset.")
-model AssetBase extends ResourceBase {
-  @doc("If the name version are system generated (anonymous registration).")
-  @visibility("read", "create")
-  isAnonymous?: boolean;
-
-  @doc("Is the asset archived?")
+model AssetBase  {
+  @doc("Asset stage")
   @visibility("read", "create", "update")
-  isArchived?: boolean;
-}
+  stage?: string;
 
-@doc("Enum to determine the type of data.")
-union DatasetType {
-  string,
-
-  @doc("URI file.")
-  uri_file: "uri_file",
-
-  @doc("URI folder.")
-  uri_folder: "uri_folder",
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@doc("AssetContainer definition")
-model AssetContainer extends ResourceBase {
-  @doc("Is the asset archived?")
-  @visibility("read", "create", "update")
-  isArchived?: boolean;
-
-  @doc("The latest version inside this container.")
-  @visibility("read")
-  latestVersion?: string;
-
-  @doc("The next auto incremental version")
-  @visibility("read")
-  nextVersion?: string;
-}
-
-@doc("ResourceBase definition")
-model ResourceBase {
-  @doc("A unique identifier for the asset")
+  @doc("A unique identifier for the asset, assetId probably?")
   @visibility("read")
   id?: string;
 
@@ -270,11 +236,12 @@ model ResourceBase {
   @visibility("read")
   name?: string;
 
+  @doc("The version of the resource")
+  @visibility("read")
+  version?: string;
+
   @doc("The asset description text.")
   description?: string;
-
-  @doc("The asset property dictionary.")
-  properties?: Record<string>;
 
   @doc("Tag dictionary. Tags can be added, removed, and updated.")
   tags?: Record<string>;
@@ -283,6 +250,27 @@ model ResourceBase {
   @visibility("read")
   systemData?: SystemData;
 }
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@doc("AssetContainer definition")
+model AssetContainer {
+  @doc("The next auto incremental version")
+  @visibility("read")
+  nextVersion?: string;
+
+  @doc("Key is label name, value is version.")
+  @visibility("read, update")
+  labels: Record<string>;
+
+  @doc("A unique identifier for the asset, assetId probably?")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+}
+
 
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
@@ -316,8 +304,59 @@ alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<2
     pass_through: "pass-through",
   }
 
+  // Pending upload spec
 
+  // Define a URI alias for clarity.
+  alias Uri = string;
   
+  enum PendingUploadType {
+    None,
+    TemporaryBlobReference,
+  }
+  
+  enum PendingUploadCredentialType {
+    SAS,
+  }
+  
+  model PendingUploadRequestDto {
+    /// If PendingUploadId is not provided, a random guid will be used.
+    pendingUploadId?: string;
+    /// TemporaryBlobReference is the only supported type.
+    pendingUploadType: PendingUploadType = PendingUploadType.TemporaryBlobReference;
+  }
+  
+  model PendingUploadResponseDto {
+    /// Container-level read, write, list SAS.
+    blobReferenceForConsumption: BlobReferenceForConsumptionDto;
+    /// ID for this upload request.
+    pendingUploadId: string;
+    /// TemporaryBlobReference is the only supported type.
+    pendingUploadType: PendingUploadType = PendingUploadType.TemporaryBlobReference;
+  }
+  
+  /// Use a discriminated union to represent the abstract credential DTO.
+  /// The “credentialType” property acts as the discriminator.
+  @discriminator("credentialType")
+  union PendingUploadCredentialDto = SASCredentialDto;
+  
+  model SASCredentialDto {
+    /// The credential type is always SAS.
+    credentialType: PendingUploadCredentialType = PendingUploadCredentialType.SAS;
+    /// Full SAS Uri, including the storage, container/blob path and SAS token.
+    /// (SwaggerSecret attribute from C# can be noted here as a comment or using a custom decorator if needed.)
+    sasUri: Uri;
+  }
+  
+  model BlobReferenceForConsumptionDto {
+    /// Blob URI path for client to upload data.
+    /// Example: https://blob.windows.core.net/Container/Path
+    blobUri: Uri;
+    /// ARM ID of the storage account to use.
+    storageAccountArmId: string;
+    /// Credential info to access the storage account.
+    credential: PendingUploadCredentialDto;
+  }
+
 @doc("""
   The definition of a caller-specified function that chat completions may invoke in response to matching user input.
   """)
