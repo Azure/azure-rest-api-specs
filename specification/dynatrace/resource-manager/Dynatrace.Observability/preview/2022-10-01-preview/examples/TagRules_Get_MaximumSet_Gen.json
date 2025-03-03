@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "ruleSetName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "logRules": {
+            "sendAadLogs": "Enabled",
+            "sendSubscriptionLogs": "Enabled",
+            "sendActivityLogs": "Enabled",
+            "filteringTags": [
+              {
+                "name": "Environment",
+                "value": "Prod",
+                "action": "Include"
+              },
+              {
+                "name": "Environment",
+                "value": "Dev",
+                "action": "Exclude"
+              }
+            ]
+          },
+          "metricRules": {
+            "filteringTags": [
+              {
+                "name": "Environment",
+                "value": "Prod",
+                "action": "Include"
+              }
+            ]
+          },
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdBy": "alice@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2021-07-16T04:25:21.040Z",
+          "lastModifiedBy": "alice@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-07-16T04:25:21.040Z"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Dynatrace.Observability/monitors/myMonitor/tagRules/default",
+        "name": "default",
+        "type": "Dynatrace.Observability/monitors/tagRules"
+      }
+    }
+  }
+}
