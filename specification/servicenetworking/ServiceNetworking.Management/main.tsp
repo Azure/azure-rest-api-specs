@@ -49,20 +49,6 @@ model Frontend is TrackedResource<FrontendProperties> {
   name: string;
 }
 
-/** SecurityPolicyConfigurations of Frontend. */
-@added(Versions.v2025_03_01_preview)
-model FrontendSecurityPolicyConfigurations {
-  /** Contains reference to a IpAccessRules-type security policy that is applied at the Traffic Controller level. */
-  ipAccessRulesSecurityPolicy?: IpAccessRulesSecurityPolicy;
-}
-
-/** IpAccessRules Security Policy */
-@added(Versions.v2025_03_01_preview)
-model IpAccessRulesSecurityPolicy {
-  /** Resource ID of the Ip Access Rules Security Policy */
-  id: string;
-}
-
 /** Frontend Properties. */
 model FrontendProperties {
   /** The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend. */
@@ -72,7 +58,7 @@ model FrontendProperties {
   /** Frontend Security Policy Configuration */
   @added(Versions.v2025_03_01_preview)
   @OpenAPI.extension("x-ms-identifiers", [])
-  securityPolicyConfigurations?: FrontendSecurityPolicyConfigurations;
+  securityPolicyConfigurations?: SecurityPolicyConfigurations;
 
   /** Provisioning State of Traffic Controller Frontend Resource */
   @visibility("read")
@@ -232,15 +218,25 @@ union IpAccessRuleAction {
 }
 
 /** SecurityPolicyConfigurations Subresource of Traffic Controller. */
-@parentResource(TrafficController)
 model SecurityPolicyConfigurations {
   /** Contains reference to a WAF-type security policy that is applied at the Traffic Controller level. */
   wafSecurityPolicy?: WafSecurityPolicy;
+
+  /** Contains reference to a IpAccessRules-type security policy that is applied at the Frontend level. */
+  @added(Versions.v2025_03_01_preview)
+  ipAccessRulesSecurityPolicy?: IpAccessRulesSecurityPolicy;
 }
 
 /** Web Application Firewall Security Policy */
 model WafSecurityPolicy {
   /** Resource ID of the Waf Security Policy */
+  id: string;
+}
+
+/** IpAccessRules Security Policy */
+@added(Versions.v2025_03_01_preview)
+model IpAccessRulesSecurityPolicy {
+  /** Resource ID of the Ip Access Rules Security Policy */
   id: string;
 }
 

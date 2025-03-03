@@ -1534,7 +1534,7 @@
           "readOnly": true
         },
         "securityPolicyConfigurations": {
-          "$ref": "#/definitions/FrontendSecurityPolicyConfigurations",
+          "$ref": "#/definitions/SecurityPolicyConfigurations",
           "description": "Frontend Security Policy Configuration",
           "x-ms-identifiers": []
         },
@@ -1542,26 +1542,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State of Traffic Controller Frontend Resource",
           "readOnly": true
-        }
-      }
-    },
-    "FrontendSecurityPolicyConfigurations": {
-      "type": "object",
-      "description": "SecurityPolicyConfigurations of Frontend.",
-      "properties": {
-        "ipAccessRulesSecurityPolicy": {
-          "$ref": "#/definitions/IpAccessRulesSecurityPolicy",
-          "description": "Contains reference to a IpAccessRules-type security policy that is applied at the Traffic Controller level."
-        }
-      }
-    },
-    "FrontendSecurityPolicyConfigurationsUpdate": {
-      "type": "object",
-      "description": "SecurityPolicyConfigurations of Frontend.",
-      "properties": {
-        "ipAccessRulesSecurityPolicy": {
-          "$ref": "#/definitions/IpAccessRulesSecurityPolicyUpdate",
-          "description": "Contains reference to a IpAccessRules-type security policy that is applied at the Traffic Controller level."
         }
       }
     },
@@ -1588,7 +1568,7 @@
       "description": "The updatable properties of the Frontend.",
       "properties": {
         "securityPolicyConfigurations": {
-          "$ref": "#/definitions/FrontendSecurityPolicyConfigurationsUpdate",
+          "$ref": "#/definitions/SecurityPolicyConfigurationsUpdate",
           "description": "Frontend Security Policy Configuration",
           "x-ms-identifiers": []
         }
@@ -1806,6 +1786,10 @@
         "wafSecurityPolicy": {
           "$ref": "#/definitions/WafSecurityPolicy",
           "description": "Contains reference to a WAF-type security policy that is applied at the Traffic Controller level."
+        },
+        "ipAccessRulesSecurityPolicy": {
+          "$ref": "#/definitions/IpAccessRulesSecurityPolicy",
+          "description": "Contains reference to a IpAccessRules-type security policy that is applied at the Frontend level."
         }
       }
     },
@@ -1816,6 +1800,10 @@
         "wafSecurityPolicy": {
           "$ref": "#/definitions/WafSecurityPolicyUpdate",
           "description": "Contains reference to a WAF-type security policy that is applied at the Traffic Controller level."
+        },
+        "ipAccessRulesSecurityPolicy": {
+          "$ref": "#/definitions/IpAccessRulesSecurityPolicyUpdate",
+          "description": "Contains reference to a IpAccessRules-type security policy that is applied at the Frontend level."
         }
       }
     },
