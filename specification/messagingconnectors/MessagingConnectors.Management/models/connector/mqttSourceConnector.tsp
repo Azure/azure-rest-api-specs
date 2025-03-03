@@ -11,6 +11,17 @@ using TypeSpec.OpenAPI;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
+@doc("Version for Mqtt server")
+union MqttVersion {
+  @doc("Mqtt v5")
+  V5: "V5",
+
+  @doc("Mqtt v3 and below")
+  V3AndBelow: "V3AndBelow",
+
+  string,
+}
+
 @doc("Configuration for MqttSourceConnector")
 model MqttSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of MqttSourceConnector")
@@ -25,21 +36,10 @@ model MqttSourceConnectorProperties extends DataSourceProperties {
   @doc("URL of the broker where to establish the connection.")
   brokerUrl: string;
 
-  @doc("Username to use when connecting to the MQTT v5 compliant broker.")
+  @doc("Username to use when connecting to the Mqtt v5 compliant broker.")
   username?: string;
 
-  @doc("Password to use when connecting to the MQTT v5 compliant broker.")
+  @doc("Password to use when connecting to the Mqtt v5 compliant broker.")
   @secret
   password?: string;
-}
-
-@doc("Version for Mqtt server")
-union MqttVersion {
-  @doc("Mqtt v5")
-  V5: "V5",
-
-  @doc("Mqtt v3 and below")
-  V3AndBelow: "V3AndBelow",
-
-  string,
 }

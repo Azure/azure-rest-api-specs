@@ -31,6 +31,15 @@ model SolutionTemplateParameter {
 
   @doc("Solution Template Version Name")
   solutionTemplateVersion: string;
+
+  @doc("Solution Instance Name")
+  @maxLength(24)
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  solutionInstanceName?: string;
+
+  @doc("Solution Dependencies")
+  @extension("x-ms-identifiers", [])
+  solutionDependencies?: SolutionDependencyParameter[];
 }
 
 @doc("Solution Version Parameter")
@@ -43,6 +52,39 @@ model SolutionVersionParameter {
 
   @doc("Review ID")
   reviewId: string;
+}
+
+@doc("Solution Dependency Context")
+model SolutionDependencyParameter {
+  @doc("Solution Version Id")
+  solutionVersionId?: string;
+
+  @doc("Solution Template Id")
+  solutionTemplateId?: string;
+
+  @doc("Solution Template Version")
+  solutionTemplateVersion?: string;
+
+  @doc("Solution Instance Name")
+  @maxLength(24)
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  solutionInstanceName?: string;
+
+  @doc("Target Id")
+  targetId?: string;
+
+  @doc("Solution dependencies")
+  @extension("x-ms-identifiers", [])
+  dependencies?: SolutionDependencyParameter[];
+}
+
+@doc("Install Solution Parameter")
+model InstallSolutionParameter {
+  @doc("Solution Name")
+  solution: string;
+
+  @doc("Solution Version Name")
+  solutionVersion: string;
 }
 
 @doc("Solution Parameter")
@@ -136,7 +178,7 @@ interface Targets {
   @doc("Post request to deploy")
   installSolution is ArmResourceActionNoResponseContentAsync<
     Target,
-    SolutionVersionParameter
+    InstallSolutionParameter
   >;
 
   @doc("Post request to uninstall")

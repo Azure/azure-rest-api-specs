@@ -20,8 +20,8 @@ model ConnectorProperties {
   @doc("System-generated identifier for the Storage Connector. Not a valid input parameter when creating.")
   uniqueId?: string;
 
-  @doc("State - Enabled or Disabled. Whether or not the Storage Connector should start as enabled (default: Enabled) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)")
-  state?: State = State.Enabled;
+  @doc("State - Active or Inactive. Whether or not the Storage Connector should start as active (default: Active) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)")
+  state?: State = State.Active;
 
   @visibility("read")
   @doc("System-generated creation time for the Storage Connector. Not a valid input parameter when creating.")
@@ -31,11 +31,11 @@ model ConnectorProperties {
   @maxLength(250)
   description?: string;
 
-  @visibility("create")
+  @visibility("create", "update")
   @doc("Test connection to backing data source before creating the storage connector.")
   testConnection?: boolean = false;
 
-  @visibility("create")
+  @visibility("create", "read")
   @doc("The source of the backing data source.")
   dataSourceType: DataSourceType;
 
@@ -61,12 +61,14 @@ model BucketSource extends Source {
   type: SourceType.Bucket;
 
   @doc("Details for how to connect to the backing data store.")
+  @visibility("create", "read")
   connection: Connection;
 
   @doc("Details for how to authenticate to the backing data store.")
   authProperties: AuthProperties;
 
   @doc("The host to use when computing the signature for requests to the backing data store. If not provided, defaults to what is provided in the endpoint for the connection.")
+  @visibility("create", "read")
   hostOverride?: string;
 }
 
@@ -74,7 +76,7 @@ model BucketSource extends Source {
 @discriminator("type")
 @doc("Details related to the type of bucket connection")
 model Connection {
-  @doc("Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object.")
+  @doc("Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object. Not mutable once the Storage Connector is created.")
   type: ConnectionType;
 }
 
@@ -95,6 +97,7 @@ model EndpointConnection extends Connection {
 @discriminator("type")
 @doc("The auth properties for bucket connection.")
 model AuthProperties {
+  @doc("The auth type for bucket connection.")
   type: AuthType;
 }
 
@@ -126,15 +129,14 @@ model TestExistingConnectionRequest {
 // Test connection response
 @doc("The test connection response")
 model TestConnectionResponse {
-  @doc("Which request attempt failed. Valid values are List and GetBlob.")
+  @doc("Indicates the method used to validate the connection to the backing data store. Valid values are `GetBlob` and `ListBlobs` for failure, and `TestExistingConnection` for success.")
   @minLength(1)
   storageConnectorMethodName: string;
 
-  @doc("A string representing the error received from the backing data store. Format will vary depending on the data store type.  This will be capped at 1 MB in size.")
-  @minLength(1)
-  storageConnectorErrorMessage: string;
+  @doc("A string representing the error received from the backing data store. Format will vary depending on the data store type and will be capped at 1 MB in size. The error message will be empty if the connection was successful.")
+  storageConnectorErrorMessage?: string;
 
-  @doc("The request ID associated with the request sent to the backing data store for validation.")
+  @doc("The request Id associated with the request sent to the backing data store for validation.")
   @minLength(1)
   storageConnectorRequestId: string;
 }
