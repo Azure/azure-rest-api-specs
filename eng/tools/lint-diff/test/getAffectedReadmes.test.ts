@@ -1,4 +1,4 @@
-import { getAffectedReadmes } from "../src/lint-diff.js";
+import { getAffectedReadmes } from "../src/util.js";
 import { vol } from "memfs";
 import { beforeEach, vi, test, describe } from "vitest";
 
