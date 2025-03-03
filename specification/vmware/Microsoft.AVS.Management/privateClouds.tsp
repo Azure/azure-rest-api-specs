@@ -411,7 +411,7 @@ model IdentitySource {
   @doc("The domain's NetBIOS name")
   `alias`?: string;
 
-  @doc("The domain's dns name")
+  @doc("The domain's DNS name")
   domain?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."

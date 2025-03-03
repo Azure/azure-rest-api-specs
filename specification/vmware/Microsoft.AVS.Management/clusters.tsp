@@ -136,6 +136,10 @@ model ClusterUpdateProperties {
 
   @doc("The hosts")
   hosts?: string[];
+
+  @doc("Name of the vsan datastore associated with the cluster")
+  @added(Versions.v2024_09_01)
+  vsanDatastoreName?: string;
 }
 
 @doc("List of all zones and associated hosts for a cluster")
