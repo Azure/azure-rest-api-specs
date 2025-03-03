@@ -37,34 +37,29 @@ namespace Azure.AI {
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://management.azure.com/.default"],
+      scopes: ["https://cognitiveservices.azure.com/.default"],
     }
   ]>
 )
 @service({
-  title: "Azure AI Data Plane",
+  title: "Azure AI",
 })
 @server(
-  "{endpoint}/projects/{projectName}",
-  "Azure AI Data Plane APIs",
+  "{endpoint}",
+  "Azure AI",
   {
     @doc("""
-      Global endpoint in the form of: https://[hub-id]/api.ai.azure.com
+      Project endpoint in the form of: https://<aiservices-id>.services.ai.azure.com/projects/<project-name>
       """)
     endpoint: url,
-
-    @doc("The name of the AI project.")
-    projectName: string,
   }
 )
 @versioned(Versions)
 namespace Azure.AI.Unified {
   @doc("Azure AI API versions")
   enum Versions {
-    @doc("Azure AI API version 2024-07-01-preview.")
-    @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+    @doc("Azure AI API version 2025-05-01-preview.")
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    `2024-07-01-preview`,
+    `2025-05-01-preview`,
   }
 }
