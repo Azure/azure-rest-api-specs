@@ -37,6 +37,20 @@ These settings apply only when `--tag=package-preview-2025-03-01-preview` is spe
 input-file:
   - Microsoft.DevHub/preview/2025-03-01-preview/iac.json
   - Microsoft.DevHub/preview/2025-03-01-preview/workflow.json
+  - Microsoft.DevHub/preview/2025-03-01-preview/template.json
+suppressions:
+  - code: XmsPageableForListCalls
+    reason: False positive error for singleton resource Get API.
+    from: workflow.json
+  - code: AvoidAdditionalProperties
+    reason: Removing additionalProperties from the models will result in breaking changes.
+    from: workflow.json
+  - code: BodyTopLevelProperties
+    reason: False positive error for Collection Get API
+    from: workflow.json
+  - code: AvoidAdditionalProperties
+    reason: Templates need additional properties for input/reponses.
+    from: template.json
 ```
 
 ### Tag: package-preview-2024-08

@@ -923,7 +923,6 @@
     },
     "RepositoryProviderType": {
       "type": "string",
-      "readOnly": true,
       "enum": [
         "github",
         "ado"
@@ -1583,7 +1582,15 @@
       "properties": {
         "templateId": {
           "type": "string",
-          "description": "user making request"
+          "description": "The versioned template arm resource id.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DevHub/templates/versions"
+              }
+            ]
+          }
         },
         "destination": {
           "type": "string",
