@@ -29,6 +29,8 @@ openapi-type: data-plane
 tag: package-rooms-2025-03-13
 input-file:
   - stable/2025-03-13/communicationservicesrooms.json
+suppressions:
+  - code: INVALID_TYPE
 ```
 
 ### Tag: package-rooms-2025-03-13
