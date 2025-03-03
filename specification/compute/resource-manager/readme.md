@@ -308,7 +308,6 @@ These settings apply only when `--tag=package-2024-11-04` is specified on the co
 
 ```yaml $(tag) == 'package-2024-11-04'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/ComputeRP.json
   - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
