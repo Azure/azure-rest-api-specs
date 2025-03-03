@@ -44,6 +44,9 @@ model Index is AssetVersion {
 
   @doc("Embedding configuration")
   embeddingConfiguration: EmbeddingConfiguration;
+
+  @doc("Type of index")
+  indexType: IndexType
 }
 
 @doc("Paged collection of IndexVersion items.")
@@ -65,14 +68,17 @@ model IndexConfiguration {
   @doc("Connection id of indexing service")
   connectionId: string;
 
+  @doc("Name of database")
+  databaseName: string;
+
+  @doc("Name of container")
+  containerName: string;
+
   @doc("Name of index")
   indexName: string;
 
   @doc("Vector store id")
   vectorStoreId: string;
-
-  @doc("Type of index")
-  indexType: IndexType
 }
 
 @doc("Embedding configuration class")
@@ -81,10 +87,7 @@ model EmbeddingConfiguration {
   connectionId: string;
 
   @doc("Deployment name of embedding model")
-  deploymentName: string;
-
-  @doc("Dimension")
-  dimension: int64;
+  deploymentName: string; 
 
   @doc("Embedding field")
   embeddingField: string;
