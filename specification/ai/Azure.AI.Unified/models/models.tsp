@@ -46,6 +46,10 @@ model Model {
   @visibility("read")
   sku: Sku;
 
+  @doc("Name of the connection the model comes from")
+  @visibility("read")
+  connectionName?: string;
+
   @doc("System data of the resource")
   @visibility("read")
   systemData: SystemData;
@@ -70,4 +74,3 @@ model Sku {
   @doc("Sku tier")
   tier: string;
 }
-

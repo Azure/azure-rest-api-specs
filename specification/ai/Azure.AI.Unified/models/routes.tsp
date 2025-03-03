@@ -40,15 +40,15 @@ interface Models {
     {
       @doc("Model publisher to filter models by")
       @query("$modelPublisher")
-      modelPublisher: string,
+      modelPublisher?: string,
 
       @doc("Model name (the publisher specific name) to filter models by")
       @query("$modelName")
-      modelName: string,
+      modelName?: string,
 
-      @doc("Flag to include models from connections in response. Accepted values are 'true' and 'false'")
-      @query("$includeConnectionModels")
-      includeConnectionModels: string,
+      @doc("Flag to include models from connections in response.")
+      @query("$includeConnectedModels")
+      includeConnectionModels?: boolean,
 
       ...StandardListQueryParameters;
     },

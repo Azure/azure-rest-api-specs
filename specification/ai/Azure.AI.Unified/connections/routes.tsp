@@ -52,7 +52,7 @@ interface Connections {
     {
       @doc("Specific type of connection to return in list")
       @query("$connectionType")
-      connectionType: string,
+      connectionType?: string,
 
       ...StandardListQueryParameters;
     },
