@@ -34,6 +34,21 @@ namespace Customizations;
   "regionalLoadTestConfiguration",
   "csharp,java"
 );
+@@clientName(TestInputArtifacts.userPropFileInfo,
+  "userPropertyFileInfo",
+  "csharp,java"
+);
+@@clientName(TestRunInputArtifacts.userPropFileInfo,
+  "userPropertyFileInfo",
+  "csharp,java"
+);
+
+// Suggestion to rename certain models to not have very generic names
+@@clientName(Secret, "TestSecret", "csharp,java");
+@@clientName(ManagedIdentityType,
+  "LoadTestingManagedIdentityType",
+  "csharp,java"
+);
 
 // Suggestion to fix casing for acronyms
 @@clientName(LoadTestConfiguration.splitAllCSVs,

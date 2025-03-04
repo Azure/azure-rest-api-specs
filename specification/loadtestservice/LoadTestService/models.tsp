@@ -318,14 +318,14 @@ union TestKind {
   string,
 
   @doc("URL Test")
-  "URL",
+  Url: "URL",
 
   @doc("JMX Test")
-  "JMX",
+  Jmx: "JMX",
 
   @added(APIVersions.v2024_03_01_preview)
   @doc("Locust Test")
-  "Locust",
+  Locust: "Locust",
 }
 
 @added(APIVersions.v2024_07_01_preview)
