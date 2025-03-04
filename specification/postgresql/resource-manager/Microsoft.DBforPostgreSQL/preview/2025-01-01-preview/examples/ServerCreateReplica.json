@@ -18,7 +18,7 @@
         "pointInTimeUTC": "2021-06-27T00:04:59.4078005+00:00",
         "dataEncryption": {
           "type": "AzureKeyVault",
-          "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
+          "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
           "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
           "geoBackupKeyURI": "",
           "geoBackupUserAssignedIdentityId": ""
@@ -30,23 +30,24 @@
     "201": {
       "body": {
         "sku": {
-          "name": "Standard_D4s_v3",
+          "name": "Standard_D4ds_v5",
           "tier": "GeneralPurpose"
         },
         "identity": {
           "userAssignedIdentities": {
             "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {
-              "principalId": "0a4e0c6e-7751-4078-ae1f-a477306c11e9",
-              "clientId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+              "principalId": "pppppppp-pppp-pppp-pppp-pppppppppppp",
+              "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
             }
           },
-          "type": "UserAssigned"
+          "type": "UserAssigned",
+          "tenantId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
         },
         "properties": {
           "fullyQualifiedDomainName": "pgtestsvc5rep.postgres.database.azure.com",
-          "version": "12",
+          "version": "16",
           "minorVersion": "6",
-          "administratorLogin": "cloudsa",
+          "administratorLogin": "login",
           "state": "Ready",
           "availabilityZone": "2",
           "storage": {
@@ -57,7 +58,7 @@
           },
           "dataEncryption": {
             "type": "AzureKeyVault",
-            "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
+            "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
             "primaryEncryptionKeyStatus": "Valid"
           },
@@ -68,7 +69,7 @@
           "backup": {
             "backupRetentionDays": 7,
             "geoRedundantBackup": "Disabled",
-            "earliestRestoreDate": "2021-05-27T00:28:17.7279547+00:00"
+            "earliestRestoreDate": "2025-03-03T00:28:17.7279547+00:00"
           },
           "network": {
             "publicNetworkAccess": "Enabled"
@@ -104,23 +105,24 @@
     "200": {
       "body": {
         "sku": {
-          "name": "Standard_D4s_v3",
+          "name": "Standard_D4ds_v5",
           "tier": "GeneralPurpose"
         },
         "identity": {
           "userAssignedIdentities": {
             "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {
-              "principalId": "0a4e0c6e-7751-4078-ae1f-a477306c11e9",
-              "clientId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+              "principalId": "pppppppp-pppp-pppp-pppp-pppppppppppp",
+              "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
             }
           },
-          "type": "UserAssigned"
+          "type": "UserAssigned",
+          "tenantId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
         },
         "properties": {
           "fullyQualifiedDomainName": "pgtestsvc5rep.postgres.database.azure.com",
-          "version": "12",
+          "version": "16",
           "minorVersion": "6",
-          "administratorLogin": "cloudsa",
+          "administratorLogin": "login",
           "state": "Ready",
           "availabilityZone": "2",
           "storage": {
@@ -131,7 +133,7 @@
           },
           "dataEncryption": {
             "type": "AzureKeyVault",
-            "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
+            "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
             "primaryEncryptionKeyStatus": "Valid"
           },
@@ -142,7 +144,7 @@
           "backup": {
             "backupRetentionDays": 7,
             "geoRedundantBackup": "Disabled",
-            "earliestRestoreDate": "2021-05-27T00:28:17.7279547+00:00"
+            "earliestRestoreDate": "2025-03-03T00:28:17.7279547+00:00"
           },
           "network": {
             "publicNetworkAccess": "Enabled"

@@ -1,18 +1,18 @@
 {
   "parameters": {
-    "serverName": "pgtestsvc4",
+    "serverName": "testpgflex",
     "resourceGroupName": "testrg",
     "api-version": "2025-01-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
-      "location": "westus",
+      "location": "eastus",
       "sku": {
         "tier": "GeneralPurpose",
-        "name": "Standard_D4s_v3"
+        "name": "Standard_D4ds_v5"
       },
       "properties": {
-        "administratorLogin": "cloudsa",
-        "administratorLoginPassword": "password",
+        "administratorLogin": "login",
+        "administratorLoginPassword": "Password1",
         "version": "16",
         "availabilityZone": "1",
         "createMode": "Create",
@@ -23,18 +23,18 @@
         },
         "backup": {
           "backupRetentionDays": 7,
-          "geoRedundantBackup": "Disabled"
+          "geoRedundantBackup": "Enabled"
         },
         "network": {
-          "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
-          "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourcegroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com"
+          "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-subnet",
+          "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/testpgflex.private.postgres.database"
         },
         "highAvailability": {
           "mode": "ZoneRedundant"
         }
       },
       "tags": {
-        "ElasticServer": "1"
+        "VNetServer": "1"
       }
     }
   },
@@ -42,16 +42,29 @@
     "201": {
       "body": {
         "sku": {
-          "name": "Standard_D4s_v3",
+          "name": "Standard_D4ds_v5",
           "tier": "GeneralPurpose"
         },
+        "systemData": {
+          "createdAt": "2025-03-03T17:44:30.7095047Z"
+        },
         "properties": {
-          "fullyQualifiedDomainName": "c7d7483a8ceb.test-private-dns-zone.postgres.database.azure.com",
-          "version": "16",
-          "minorVersion": "4",
-          "administratorLogin": "cloudsa",
-          "state": "Ready",
-          "availabilityZone": "1",
+          "replica": {
+            "role": "Primary",
+            "capacity": 5
+          },
+          "storage": {
+            "type": "",
+            "iops": 2300,
+            "tier": "P20",
+            "storageSizeGB": 512,
+            "autoGrow": "Disabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled",
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-subnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/testpgflex.private.postgres.database.azure.com"
+          },
           "dataEncryption": {
             "type": "SystemManaged"
           },
@@ -59,21 +72,16 @@
             "activeDirectoryAuth": "Disabled",
             "passwordAuth": "Enabled"
           },
-          "storage": {
-            "storageSizeGB": 512,
-            "autoGrow": "Disabled",
-            "tier": "P20",
-            "iops": 2300
-          },
+          "fullyQualifiedDomainName": "testpgflex.postgres.database.azure.com",
+          "version": "16",
+          "minorVersion": "8",
+          "administratorLogin": "login",
+          "state": "Ready",
+          "availabilityZone": "1",
           "backup": {
             "backupRetentionDays": 7,
-            "geoRedundantBackup": "Disabled",
-            "earliestRestoreDate": "2024-10-08T01:08:06.7197478+00:00"
-          },
-          "network": {
-            "publicNetworkAccess": "Disabled",
-            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
-            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com"
+            "geoRedundantBackup": "Enabled",
+            "earliestRestoreDate": "2025-03-03T17:49:56.9406043+00:00"
           },
           "highAvailability": {
             "mode": "ZoneRedundant",
@@ -85,30 +93,45 @@
             "dayOfWeek": 0,
             "startHour": 0,
             "startMinute": 0
-          }
+          },
+          "replicationRole": "Primary",
+          "replicaCapacity": 5
         },
-        "location": "westus",
+        "location": "East US",
         "tags": {
-          "ElasticServer": "1"
+          "VnetServer": "1"
         },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
-        "name": "pgtestsvc4",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testpgflex",
+        "name": "testpgflex",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
       }
     },
     "200": {
       "body": {
         "sku": {
-          "name": "Standard_D4s_v3",
+          "name": "Standard_D4ds_v5",
           "tier": "GeneralPurpose"
         },
+        "systemData": {
+          "createdAt": "2025-03-03T17:44:30.7095047Z"
+        },
         "properties": {
-          "fullyQualifiedDomainName": "c7d7483a8ceb.test-private-dns-zone.postgres.database.azure.com",
-          "version": "16",
-          "minorVersion": "4",
-          "administratorLogin": "cloudsa",
-          "state": "Ready",
-          "availabilityZone": "1",
+          "replica": {
+            "role": "Primary",
+            "capacity": 5
+          },
+          "storage": {
+            "type": "",
+            "iops": 2300,
+            "tier": "P20",
+            "storageSizeGB": 512,
+            "autoGrow": "Disabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled",
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-subnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/testpgflex.private.postgres.database.azure.com"
+          },
           "dataEncryption": {
             "type": "SystemManaged"
           },
@@ -116,21 +139,16 @@
             "activeDirectoryAuth": "Disabled",
             "passwordAuth": "Enabled"
           },
-          "storage": {
-            "storageSizeGB": 512,
-            "autoGrow": "Disabled",
-            "tier": "P20",
-            "iops": 2300
-          },
+          "fullyQualifiedDomainName": "testpgflex.postgres.database.azure.com",
+          "version": "16",
+          "minorVersion": "8",
+          "administratorLogin": "login",
+          "state": "Ready",
+          "availabilityZone": "1",
           "backup": {
             "backupRetentionDays": 7,
-            "geoRedundantBackup": "Disabled",
-            "earliestRestoreDate": "2024-10-08T01:08:06.7197478+00:00"
-          },
-          "network": {
-            "publicNetworkAccess": "Disabled",
-            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
-            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com"
+            "geoRedundantBackup": "Enabled",
+            "earliestRestoreDate": "2025-03-03T17:49:56.9406043+00:00"
           },
           "highAvailability": {
             "mode": "ZoneRedundant",
@@ -142,14 +160,16 @@
             "dayOfWeek": 0,
             "startHour": 0,
             "startMinute": 0
-          }
+          },
+          "replicationRole": "Primary",
+          "replicaCapacity": 5
         },
-        "location": "westus",
+        "location": "East US",
         "tags": {
-          "ElasticServer": "1"
+          "VnetServer": "1"
         },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
-        "name": "pgtestsvc4",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testpgflex",
+        "name": "testpgflex",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
       }
     },

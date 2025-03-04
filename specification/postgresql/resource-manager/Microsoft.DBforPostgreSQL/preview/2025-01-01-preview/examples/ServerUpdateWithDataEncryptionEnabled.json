@@ -21,9 +21,9 @@
         "createMode": "Update",
         "dataEncryption": {
           "type": "AzureKeyVault",
-          "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
+          "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
           "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
-          "geoBackupKeyURI": "https://test-geo-kv.vault.azure.net/keys/test-key1/66f57315bab34b0189daa113fbc78787",
+          "geoBackupKeyURI": "https://test-geo-kv.vault.azure.net/keys/test-key1/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
           "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity"
         },
         "backup": {
@@ -42,25 +42,26 @@
         "identity": {
           "userAssignedIdentities": {
             "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {
-              "principalId": "0a4e0c6e-7751-4078-ae1f-a477306c11e9",
-              "clientId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+              "principalId": "pppppppp-pppp-pppp-pppp-pppppppppppp",
+              "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
             },
             "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity-1": {
               "principalId": "90008082-e024-4cc3-8fcf-63bcdb9cf6b6",
-              "clientId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+              "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
             },
             "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity": {
-              "principalId": "0a4e0c6e-7751-4078-ae1f-a477306c11e9",
-              "clientId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+              "principalId": "pppppppp-pppp-pppp-pppp-pppppppppppp",
+              "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
             }
           },
-          "type": "UserAssigned"
+          "type": "UserAssigned",
+          "tenantId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
         },
         "properties": {
-          "fullyQualifiedDomainName": "c7d7483a8ceb.test-private-dns-zone.postgres.database.azure.com",
-          "version": "12",
+          "fullyQualifiedDomainName": "pgtestsvc4.test-private-dns-zone.postgres.database.azure.com",
+          "version": "16",
           "minorVersion": "6",
-          "administratorLogin": "cloudsa",
+          "administratorLogin": "login",
           "state": "Ready",
           "availabilityZone": "1",
           "authConfig": {
@@ -69,9 +70,9 @@
           },
           "dataEncryption": {
             "type": "AzureKeyVault",
-            "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
+            "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
-            "geoBackupKeyURI": "https://test-geo-kv.vault.azure.net/keys/test-key1/66f57315bab34b0189daa113fbc78787",
+            "geoBackupKeyURI": "https://test-geo-kv.vault.azure.net/keys/test-key1/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
             "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity",
             "primaryEncryptionKeyStatus": "Valid",
             "geoBackupEncryptionKeyStatus": "Valid"
@@ -85,7 +86,7 @@
           "backup": {
             "backupRetentionDays": 20,
             "geoRedundantBackup": "Enabled",
-            "earliestRestoreDate": "2021-05-26T01:16:58.3723361+00:00"
+            "earliestRestoreDate": "2025-02-26T01:16:58.3723361+00:00"
           },
           "network": {
             "publicNetworkAccess": "Disabled",
