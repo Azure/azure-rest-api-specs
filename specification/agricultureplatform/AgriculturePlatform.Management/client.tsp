@@ -22,9 +22,27 @@ using Microsoft.AgriculturePlatform;
 @@clientName(Solution, "AgricultureSolution", "csharp");
 @@clientName(AgriServiceConfig, "AgricultureServiceConfig", "csharp");
 @@alternateType(AgriServiceConfig.instanceUri, url, "csharp");
-@@alternateType(AgriServiceConfig.appServiceResourceId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(AgriServiceConfig.cosmosDbResourceId, Azure.Core.armResourceIdentifier, "csharp");
-@@clientName(AgriServiceConfig.cosmosDbResourceId, "cosmosDBResourceId", "csharp");
-@@alternateType(AgriServiceConfig.storageAccountResourceId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(AgriServiceConfig.keyVaultResourceId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(AgriServiceConfig.redisCacheResourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(AgriServiceConfig.appServiceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AgriServiceConfig.cosmosDbResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(AgriServiceConfig.cosmosDbResourceId,
+  "cosmosDBResourceId",
+  "csharp"
+);
+@@alternateType(AgriServiceConfig.storageAccountResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AgriServiceConfig.keyVaultResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AgriServiceConfig.redisCacheResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
