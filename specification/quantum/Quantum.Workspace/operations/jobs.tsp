@@ -4,6 +4,7 @@
 // --------------------------------------------------------------------------------------------
 
 import "./operations.tsp";
+import "../common/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -122,7 +123,6 @@ model JobDetails extends ItemDetails {
 /** A Paged List of JobDetails. */ // Used by workspace/jobs and sesssions/{sessionId}/jobs
 alias PagedJobDetails = Azure.Core.Page<JobDetails>;
 
-@useDependency(DefaultAzureCoreVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface JobOperations {
@@ -152,7 +152,13 @@ namespace Quantum.Workspace.Operations {
       """
     list is CustomListOperation<
       Resource = JobDetails,
-      Response = PagedJobDetails
+      Response = PagedJobDetails,
+      Parameters = {
+        ...CustomFilterQueryParameter;
+        ...CustomSkipQueryParameter;
+        ...CustomTopQueryParameter;
+        ...CustomOrderByQueryParameter;
+      }
     >;
   }
 }
