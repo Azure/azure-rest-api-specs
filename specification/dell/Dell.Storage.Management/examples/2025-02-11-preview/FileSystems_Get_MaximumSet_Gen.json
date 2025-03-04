@@ -29,7 +29,16 @@
           "privateIPs": [
             "psvbyikvkueujmcqyk"
           ],
-          "dellReferenceNumber": "fhewkj"
+          "smartConnectFqdn": "fqdn",
+          "dellReferenceNumber": "fhewkj",
+          "encryption": {
+            "encryptionType": "CMK",
+            "keyUrl": "https://contoso.com/keyurl/keyVersion",
+            "encryptionIdentityProperties": {
+              "identityType": "UserAssigned",
+              "identityResourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}"
+            }
+          }
         },
         "identity": {
           "principalId": "11111111-1111-1111-1111-111111111111",

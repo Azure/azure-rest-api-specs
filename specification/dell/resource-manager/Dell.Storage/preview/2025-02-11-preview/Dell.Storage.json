@@ -444,6 +444,44 @@
         "value"
       ]
     },
+    "LiftrBase.EncryptionIdentityProperties": {
+      "type": "object",
+      "description": "EncryptionIdentityProperties of Dell FileSystem resource",
+      "properties": {
+        "identityType": {
+          "type": "string",
+          "description": "Identity type - SystemAssigned/UserAssigned - Only UserAssigned is supported now"
+        },
+        "identityResourceId": {
+          "type": "string",
+          "description": "User-assigned identity resource id - Only when user opts for UserAssigned identity and hence optional"
+        }
+      },
+      "required": [
+        "identityType"
+      ]
+    },
+    "LiftrBase.EncryptionProperties": {
+      "type": "object",
+      "description": "EncryptionProperties of Dell FileSystem resource",
+      "properties": {
+        "encryptionType": {
+          "type": "string",
+          "description": "Encryption Type - MMK/CMK"
+        },
+        "keyUrl": {
+          "type": "string",
+          "description": "Versioned Encryption Key Url - Only when user opts for CMK and hence optional"
+        },
+        "encryptionIdentityProperties": {
+          "$ref": "#/definitions/LiftrBase.EncryptionIdentityProperties",
+          "description": "Identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault - Only when user opts for CMK and hence optional"
+        }
+      },
+      "required": [
+        "encryptionType"
+      ]
+    },
     "LiftrBase.MarketplaceDetails": {
       "type": "object",
       "description": "MarketplaceDetails of Dell FileSystem resource",
@@ -648,9 +686,17 @@
             "type": "string"
           }
         },
+        "smartConnectFqdn": {
+          "type": "string",
+          "description": "Smart Connect FQDN of the resource"
+        },
         "dellReferenceNumber": {
           "type": "string",
           "description": "DellReferenceNumber of the resource"
+        },
+        "encryption": {
+          "$ref": "#/definitions/LiftrBase.EncryptionProperties",
+          "description": "EncryptionProperties of the resource"
         }
       },
       "required": [
@@ -659,7 +705,8 @@
         "delegatedSubnetId",
         "delegatedSubnetCidr",
         "userDetails",
-        "dellReferenceNumber"
+        "dellReferenceNumber",
+        "encryption"
       ]
     },
     "LiftrBase.Storage.FileSystemResourceUpdate": {
@@ -695,6 +742,10 @@
           "type": "integer",
           "format": "int64",
           "description": "Initial capacity for Dell Filesystem in bytes"
+        },
+        "encryption": {
+          "$ref": "#/definitions/LiftrBase.EncryptionProperties",
+          "description": "Encryption Details of the resource"
         }
       }
     },

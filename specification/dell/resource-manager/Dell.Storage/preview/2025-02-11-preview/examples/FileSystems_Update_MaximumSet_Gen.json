@@ -6,7 +6,7 @@
     "subscriptionId": "4B6E265D-57CF-4A9D-8B35-3CC68ED9D208",
     "resourceGroupName": "rgDell",
     "filesystemName": "abcd",
-    "properties": {
+    "resource": {
       "identity": {
         "type": "None",
         "userAssignedIdentities": {
@@ -18,7 +18,15 @@
       },
       "properties": {
         "delegatedSubnetId": "bfpuabdz",
-        "initialCapacity": 27
+        "initialCapacity": 27,
+        "encryption": {
+          "encryptionType": "CMK",
+          "keyUrl": "https://contoso.com/keyurl/keyVersion",
+          "encryptionIdentityProperties": {
+            "identityType": "UserAssigned",
+            "identityResourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}"
+          }
+        }
       }
     }
   },
@@ -44,7 +52,16 @@
           "privateIPs": [
             "psvbyikvkueujmcqyk"
           ],
-          "dellReferenceNumber": "fhewkj"
+          "smartConnectFqdn": "fqdn",
+          "dellReferenceNumber": "fhewkj",
+          "encryption": {
+            "encryptionType": "CMK",
+            "keyUrl": "https://contoso.com/keyurl/keyVersion",
+            "encryptionIdentityProperties": {
+              "identityType": "UserAssigned",
+              "identityResourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}"
+            }
+          }
         },
         "identity": {
           "principalId": "11111111-1111-1111-1111-111111111111",

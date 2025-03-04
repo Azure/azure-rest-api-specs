@@ -70,9 +70,19 @@ model FileSystemResourceProperties {
   privateIPs?: string[];
 
   /**
+   * Smart Connect FQDN of the resource
+   */
+  smartConnectFqdn?: string;
+
+  /**
    * DellReferenceNumber of the resource
    */
   dellReferenceNumber: string;
+
+  /** 
+   * EncryptionProperties of the resource
+  */
+  encryption: LiftrBase.EncryptionProperties;
 }
 
 /**
@@ -154,6 +164,11 @@ model FileSystemResourceUpdateProperties {
    * Initial capacity for Dell Filesystem in bytes
    */
   initialCapacity?: int64;
+
+  /**
+   * Encryption Details of the resource
+   */
+  encryption?: LiftrBase.EncryptionProperties;
 }
 
 /**
