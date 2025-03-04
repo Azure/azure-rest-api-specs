@@ -3,7 +3,7 @@
   "title": "SearchServiceCreateDataSource",
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
-    "api-version": "2025-03-01-preview",
+    "api-version": "2024-11-01-preview",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "dataSource": {
       "name": "tempdatasource",
@@ -16,9 +16,6 @@
         "name": "doc-extraction-skillset",
         "query": "E2E_Dsat"
       },
-      "identity": {
-        "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
-      },
       "dataChangeDetectionPolicy": {
         "highWaterMarkColumnName": "metadata_storage_last_modified",
         "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy"
@@ -28,7 +25,6 @@
         "softDeleteMarkerValue": "true",
         "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy"
       },
-      "@odata.etag": "0x1234568AE7E58A1",
       "encryptionKey": {
         "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
         "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
@@ -70,9 +66,6 @@
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": "<applicationSecret>"
           }
-        },
-        "identity": {
-          "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
         }
       }
     }

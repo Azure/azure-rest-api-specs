@@ -4,7 +4,7 @@
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
     "indexerName": "myindexer",
-    "api-version": "2025-03-01-preview",
+    "api-version": "2024-11-01-preview",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -22,29 +22,12 @@
           "startTime": "2024-06-06T00:01:50.265Z"
         },
         "parameters": {
-          "batchSize": 10,
           "maxFailedItems": 10,
           "maxFailedItemsPerBatch": 5,
           "configuration": {}
         },
-        "fieldMappings": [
-          {
-            "sourceFieldName": "/document",
-            "targetFieldName": "name",
-            "mappingFunction": {
-              "name": "base64Encode"
-            }
-          }
-        ],
-        "outputFieldMappings": [
-          {
-            "sourceFieldName": "/document",
-            "targetFieldName": "name",
-            "mappingFunction": {
-              "name": "base64Encode"
-            }
-          }
-        ],
+        "fieldMappings": [],
+        "outputFieldMappings": [],
         "encryptionKey": {
           "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",

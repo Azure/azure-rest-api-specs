@@ -3,7 +3,7 @@
   "title": "SearchServiceCreateSkillset",
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
-    "api-version": "2025-03-01-preview",
+    "api-version": "2024-11-01-preview",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "skillset": {
       "name": "tempskillset",
@@ -126,10 +126,8 @@
       "cognitiveServices": {
         "key": "myKey",
         "subdomainUrl": "https://mySubdomainName.cognitiveservices.azure.com",
-        "@odata.type": "#Microsoft.Azure.Search.AIServicesByKey",
-        "description": "Description of the Azure AI service resource attached to a skillset"
+        "@odata.type": "#Microsoft.Azure.Search.AIServicesByKey"
       },
-      "@odata.etag": "0x1234568AE7E58A1",
       "encryptionKey": {
         "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
         "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
@@ -272,7 +270,6 @@
         ],
         "cognitiveServices": {
           "@odata.type": "#Microsoft.Azure.Search.AIServicesByKey",
-          "description": "Description of the Azure AI service resource attached to a skillset",
           "key": "myKey",
           "subdomainUrl": "https://mySubdomainName.cognitiveservices.azure.com"
         },

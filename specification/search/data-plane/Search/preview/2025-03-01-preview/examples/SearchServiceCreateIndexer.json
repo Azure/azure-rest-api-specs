@@ -3,7 +3,7 @@
   "title": "SearchServiceCreateIndexer",
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
-    "api-version": "2025-03-01-preview",
+    "api-version": "2024-11-01-preview",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "indexer": {
       "name": "myindexer",
@@ -12,53 +12,19 @@
       "skillsetName": "myskillset",
       "targetIndexName": "preview-test",
       "schedule": {
-        "interval": "P1D",
-        "startTime": "2025-01-07T19:30:00Z"
+        "interval": "P1D"
       },
       "parameters": {
-        "batchSize": 10,
         "maxFailedItems": 10,
         "maxFailedItemsPerBatch": 5,
         "configuration": {
           "parsingMode": "markdown",
-          "excludedFileNameExtensions": ".png,.mp4",
-          "indexedFileNameExtensions": ".docx,.pptx",
-          "failOnUnsupportedContentType": true,
-          "failOnUnprocessableDocument": false,
-          "indexStorageMetadataOnlyForOversizedDocuments": true,
-          "delimitedTextHeaders": "Header1,Header2",
-          "delimitedTextDelimiter": "|",
-          "firstLineContainsHeaders": true,
-          "markdownParsingSubmode": "oneToMany",
-          "markdownHeaderDepth": "h6",
-          "documentRoot": "/root",
-          "dataToExtract": "storageMetadata",
-          "imageAction": "none",
-          "allowSkillsetToReadFileData": false,
-          "pdfTextRotationAlgorithm": "none",
-          "executionEnvironment": "standard"
+          "markdownParsingSubmode": "oneToMany"
         }
       },
-      "fieldMappings": [
-        {
-          "sourceFieldName": "/document",
-          "targetFieldName": "name",
-          "mappingFunction": {
-            "name": "base64Encode"
-          }
-        }
-      ],
-      "outputFieldMappings": [
-        {
-          "sourceFieldName": "/document",
-          "targetFieldName": "name",
-          "mappingFunction": {
-            "name": "base64Encode"
-          }
-        }
-      ],
+      "fieldMappings": [],
+      "outputFieldMappings": [],
       "disabled": false,
-      "@odata.etag": "0x1234568AE7E58A1",
       "encryptionKey": {
         "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
         "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
@@ -66,13 +32,6 @@
         "accessCredentials": {
           "applicationId": "00000000-0000-0000-0000-000000000000",
           "applicationSecret": "<applicationSecret>"
-        }
-      },
-      "cache": {
-        "storageConnectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
-        "enableReprocessing": true,
-        "identity": {
-          "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
         }
       }
     }
@@ -91,55 +50,15 @@
           "startTime": "2024-06-06T00:01:50.265Z"
         },
         "parameters": {
-          "batchSize": 10,
           "maxFailedItems": 10,
           "maxFailedItemsPerBatch": 5,
           "configuration": {
             "parsingMode": "markdown",
-            "excludedFileNameExtensions": ".png,.mp4",
-            "indexedFileNameExtensions": ".docx,.pptx",
-            "failOnUnsupportedContentType": true,
-            "failOnUnprocessableDocument": false,
-            "indexStorageMetadataOnlyForOversizedDocuments": true,
-            "delimitedTextHeaders": "Header1,Header2",
-            "delimitedTextDelimiter": "|",
-            "firstLineContainsHeaders": true,
-            "markdownParsingSubmode": "oneToMany",
-            "markdownHeaderDepth": "h6",
-            "documentRoot": "/root",
-            "dataToExtract": "storageMetadata",
-            "imageAction": "none",
-            "allowSkillsetToReadFileData": false,
-            "pdfTextRotationAlgorithm": "none",
-            "executionEnvironment": "standard"
+            "markdownParsingSubmode": "oneToMany"
           }
         },
-        "fieldMappings": [
-          {
-            "sourceFieldName": "/document",
-            "targetFieldName": "name",
-            "mappingFunction": {
-              "name": "base64Encode"
-            }
-          }
-        ],
-        "outputFieldMappings": [
-          {
-            "sourceFieldName": "/document",
-            "targetFieldName": "name",
-            "mappingFunction": {
-              "name": "base64Encode"
-            }
-          }
-        ],
-        "cache": {
-          "id": "00000000-0000-0000-0000-000000000000",
-          "enableReprocessing": true,
-          "storageConnectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
-          "identity": {
-            "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
-          }
-        },
+        "fieldMappings": [],
+        "outputFieldMappings": [],
         "encryptionKey": {
           "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
