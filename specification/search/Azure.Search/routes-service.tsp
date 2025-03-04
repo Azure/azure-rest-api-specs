@@ -24,7 +24,7 @@ interface DataSources {
       /**
        * Ignores cache reset requirements.
        */
-      @added(Versions.v2024_11_01_preview)
+      @added(Versions.v2025_03_01_preview)
       @query("ignoreResetRequirements")
       skipIndexerResetRequirementForCache?: boolean;
 
@@ -128,7 +128,7 @@ interface Indexers {
    * the indexer.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   @route("/indexers('{indexerName}')/search.resetdocs")
   @post
   resetDocs is SearchIndexerOperation<
@@ -189,14 +189,14 @@ interface Indexers {
       /**
        * Ignores cache reset requirements.
        */
-      @added(Versions.v2024_11_01_preview)
+      @added(Versions.v2025_03_01_preview)
       @query("ignoreResetRequirements")
       skipIndexerResetRequirementForCache?: boolean;
 
       /**
        * Disables cache reprocessing change detection.
        */
-      @added(Versions.v2024_11_01_preview)
+      @added(Versions.v2025_03_01_preview)
       @query("disableCacheReprocessingChangeDetection")
       disableCacheReprocessingChangeDetection?: boolean;
 
@@ -304,14 +304,14 @@ interface Skillsets {
       /**
        * Ignores cache reset requirements.
        */
-      @added(Versions.v2024_11_01_preview)
+      @added(Versions.v2025_03_01_preview)
       @query("ignoreResetRequirements")
       skipIndexerResetRequirementForCache?: boolean;
 
       /**
        * Disables cache reprocessing change detection.
        */
-      @added(Versions.v2024_11_01_preview)
+      @added(Versions.v2025_03_01_preview)
       @query("disableCacheReprocessingChangeDetection")
       disableCacheReprocessingChangeDetection?: boolean;
 
@@ -397,7 +397,7 @@ interface Skillsets {
    * Reset an existing skillset in a search service.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   @route("/skillsets('{skillsetName}')/search.resetskills")
   @post
   resetSkills is SearchSkillsetOperation<
@@ -634,7 +634,7 @@ interface Indexes {
   >;
 }
 
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 interface AliasesOperations {
   /**
    * Creates a new search alias.

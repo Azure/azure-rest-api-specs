@@ -49,7 +49,7 @@ union SearchIndexerDataSourceType {
   /**
    * Indicates a Microsoft Fabric OneLake datasource.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   OneLake: "onelake",
 }
 
@@ -94,7 +94,7 @@ union BlobIndexerParsingMode {
   /**
    * Set to markdown to extract content from markdown files.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   Markdown: "markdown",
 }
 
@@ -103,7 +103,7 @@ union BlobIndexerParsingMode {
  * parsed into exactly one search document or multiple search documents. Default
  * is `oneToMany`.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union MarkdownParsingSubmode {
   string,
 
@@ -125,7 +125,7 @@ union MarkdownParsingSubmode {
  * Specifies the max header depth that will be considered while grouping markdown
  * content. Default is `h6`.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union MarkdownHeaderDepth {
   string,
 
@@ -272,7 +272,7 @@ union IndexerExecutionEnvironment {
 /**
  * Details the status of an individual indexer execution.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union IndexerExecutionStatusDetail {
   string,
 
@@ -285,7 +285,7 @@ union IndexerExecutionStatusDetail {
 /**
  * Represents the mode the indexer is executing in.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union IndexingMode {
   string,
 
@@ -884,7 +884,7 @@ union LexicalAnalyzerName {
 /**
  * Defines the names of all text normalizers supported by the search engine.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union LexicalNormalizerName {
   string,
 
@@ -972,14 +972,14 @@ union VectorSearchVectorizerKind {
    * Generate embeddings for an image or text input at query time using the Azure AI
    * Services Vision Vectorize API.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   AIServicesVision: "aiServicesVision",
 
   /**
    * Generate embeddings using an Azure Machine Learning endpoint deployed via the
    * Azure AI Studio Model Catalog at query time.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   AML: "aml",
 }
 
@@ -1010,7 +1010,7 @@ union VectorSearchCompressionKind {
  * The storage method for the original full-precision vectors used for rescoring
  * and internal index operations.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union VectorSearchCompressionRescoreStorageMethod {
   string,
 
@@ -1470,7 +1470,7 @@ union AzureOpenAIModelName {
  * The name of the embedding model from the Azure AI Studio Catalog that will be
  * called.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union AIStudioModelCatalogName {
   string,
 
@@ -3263,7 +3263,7 @@ union TextSplitMode {
 /**
  * A value indicating which unit to use.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union SplitSkillUnit {
   string,
 
@@ -3282,7 +3282,7 @@ union SplitSkillUnit {
 /**
  * A value indicating which tokenizer to use.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union SplitSkillEncoderModelName {
   string,
 
@@ -3731,7 +3731,7 @@ union TextTranslationSkillLanguage {
 /**
  * Controls the cardinality of the output produced by the skill. Default is 'oneToMany'
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union DocumentIntelligenceLayoutSkillOutputMode {
   string,
 
@@ -3744,7 +3744,7 @@ union DocumentIntelligenceLayoutSkillOutputMode {
 /**
  * The depth of headers in the markdown output. Default is h6.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union DocumentIntelligenceLayoutSkillMarkdownHeaderDepth {
   string,
 
@@ -5087,7 +5087,7 @@ model SearchIndexerDataSource {
    * identity is used. If not specified, the value remains unchanged. If "none" is
    * specified, the value of this property is cleared.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   identity?: SearchIndexerDataIdentity;
 
   /**
@@ -5209,7 +5209,7 @@ model SearchResourceEncryptionKey {
    * unspecified, it remains unchanged. If "none" is specified, the value of this
    * property is cleared.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   identity?: SearchIndexerDataIdentity;
 }
 
@@ -5246,7 +5246,7 @@ model ListDataSourcesResult {
 /**
  * The type of the keysOrIds.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model DocumentKeysOrIds {
   /**
    * document keys to be reset
@@ -5339,7 +5339,7 @@ model SearchIndexer {
    * Adds caching to an enrichment pipeline to allow for incremental modification
    * steps without having to rebuild the index every time.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   cache?: SearchIndexerCache;
 }
 
@@ -5461,14 +5461,14 @@ model IndexingParametersConfiguration {
    * parsed into exactly one search document or multiple search documents. Default
    * is `oneToMany`.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   markdownParsingSubmode?: MarkdownParsingSubmode = MarkdownParsingSubmode.OneToMany;
 
   /**
    * Specifies the max header depth that will be considered while grouping markdown
    * content. Default is `h6`.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   markdownHeaderDepth?: MarkdownHeaderDepth = MarkdownHeaderDepth.h6;
 
   /**
@@ -5560,7 +5560,7 @@ model FieldMappingFunction {
 /**
  * The type of the cache.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model SearchIndexerCache {
   /**
    * The connection string to the storage account where the cache data will be
@@ -5632,14 +5632,14 @@ model IndexerExecutionResult {
    * The outcome of this indexer execution.
    */
   @visibility("read")
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   statusDetail?: IndexerExecutionStatusDetail;
 
   /**
    * All of the state that defines and dictates the indexer's current execution.
    */
   @visibility("read")
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   currentState?: IndexerCurrentState;
 
   /**
@@ -5694,7 +5694,7 @@ model IndexerExecutionResult {
  * Represents all of the state that defines and dictates the indexer's current
  * execution.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model IndexerCurrentState {
   /**
    * The mode the indexer is running in.
@@ -6024,7 +6024,7 @@ model SearchIndexerKnowledgeStore {
    * the value remains unchanged. If set to "none", the value of this property is
    * cleared.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   identity?: SearchIndexerDataIdentity;
 
   /**
@@ -6032,7 +6032,7 @@ model SearchIndexerKnowledgeStore {
    * the name of a specific property. Each value must be of a primitive type.
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   parameters?: SearchIndexerKnowledgeStoreParameters;
 }
 
@@ -6199,7 +6199,7 @@ model ListSkillsetsResult {
  * The type of the skill names.
  */
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model SkillNames {
   /**
    * the names of skills to be reset.
@@ -6318,7 +6318,7 @@ model SearchIndex {
   /**
    * The normalizers for the index.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   normalizers?: LexicalNormalizer[];
 
   /**
@@ -6496,7 +6496,7 @@ model SearchField {
    * normalizer is chosen, it cannot be changed for the field. Must be null for
    * complex fields.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   normalizer?: LexicalNormalizerName;
 
   /**
@@ -6715,7 +6715,7 @@ model CharFilter {
 /**
  * Base type for normalizers.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 @discriminator("@odata.type")
 model LexicalNormalizer {
   /** The discriminator for derived types. */
@@ -6939,7 +6939,7 @@ model VectorSearchCompression {
   /**
    * Contains the options for rescoring.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   rescoringOptions?: RescoringOptions;
 
   /**
@@ -6951,7 +6951,7 @@ model VectorSearchCompression {
    * text-embedding-3-large (small). The default value is null, which means no
    * truncation.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   truncationDimension?: int32;
 
   /**
@@ -6963,7 +6963,7 @@ model VectorSearchCompression {
 /**
  * Contains the options for rescoring.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model RescoringOptions {
   /**
    * If set to true, after the initial search on the compressed vectors, the
@@ -7047,7 +7047,7 @@ model AnalyzeRequest {
   /**
    * The name of the normalizer to use to normalize the given text.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   normalizer?: LexicalNormalizerName;
 
   /**
@@ -7106,7 +7106,7 @@ model AnalyzedTokenInfo {
  * index. The alias name can be used in place of the index name for supported
  * operations.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model SearchAlias {
   /**
    * The name of the alias.
@@ -7129,7 +7129,7 @@ model SearchAlias {
  * Response from a List Aliases request. If successful, it includes the associated
  * index mappings for all aliases.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 @pagedResult
 model ListAliasesResult {
   /**
@@ -7163,7 +7163,7 @@ model SearchServiceCounters {
   /**
    * Total number of aliases.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   aliasesCount: ResourceCounter;
 
   /**
@@ -7370,7 +7370,7 @@ model StopAnalyzer extends LexicalAnalyzer {
  * configuration consisting of at least one or more filters, which modify the
  * token that is stored.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model CustomNormalizer extends LexicalNormalizer {
   /**
    * A list of token filters used to filter out or modify the input token. For
@@ -8733,7 +8733,7 @@ model WebApiVectorizerParameters {
  * Clears the identity property of a datasource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model AIServicesVisionVectorizer extends VectorSearchVectorizer {
   /**
    * Contains the parameters specific to AI Services Vision embedding vectorization.
@@ -8752,7 +8752,7 @@ model AIServicesVisionVectorizer extends VectorSearchVectorizer {
  * text.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model AIServicesVisionParameters {
   /**
    * The version of the model to use when calling the AI Services Vision service. It
@@ -8785,7 +8785,7 @@ model AIServicesVisionParameters {
  * Model Catalog for generating the vector embedding of a query string.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model AMLVectorizer extends VectorSearchVectorizer {
   /**
    * Specifies the properties of the AML vectorizer.
@@ -8803,7 +8803,7 @@ model AMLVectorizer extends VectorSearchVectorizer {
  * Specifies the properties for connecting to an AML vectorizer.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model AMLParameters {
   /**
    * (Required for no authentication or key authentication) The scoring URI of the
@@ -8927,7 +8927,7 @@ model SoftDeleteColumnDeletionDetectionPolicy
  * Defines a data deletion detection policy utilizing Azure Blob Storage's native
  * soft delete feature for deletion detection.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model NativeBlobSoftDeleteDeletionDetectionPolicy
   extends DataDeletionDetectionPolicy {
   /**
@@ -9113,7 +9113,7 @@ model CognitiveServicesAccountKey extends CognitiveServicesAccount {
  * to be used with the resource's subdomain.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model AIServicesAccountKey extends CognitiveServicesAccount {
   /**
    * The key used to provision the Azure AI service resource attached to a skillset.
@@ -9138,7 +9138,7 @@ model AIServicesAccountKey extends CognitiveServicesAccount {
  * skillset.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model AIServicesAccountIdentity extends CognitiveServicesAccount {
   /**
    * The user-assigned managed identity used for connections to AI Service. If not
@@ -9680,7 +9680,7 @@ model SplitSkill extends SearchIndexerSkill {
    * pageOverlapLength) measurement. The default is 'characters', which means the
    * length will be measured by character.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   unit?: SplitSkillUnit;
 
   /**
@@ -9689,7 +9689,7 @@ model SplitSkill extends SearchIndexerSkill {
    * parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   azureOpenAITokenizerParameters?: AzureOpenAITokenizerParameters;
 
   /**
@@ -9703,7 +9703,7 @@ model SplitSkill extends SearchIndexerSkill {
  * Azure OpenAI Tokenizer parameters.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model AzureOpenAITokenizerParameters {
   /**
    * Only applies if the unit is set to azureOpenAITokens. Options include
@@ -9827,7 +9827,7 @@ model DocumentExtractionSkill extends SearchIndexerSkill {
  * A skill that extracts content and layout information (as markdown), via Azure
  * AI Services, from files within the enrichment pipeline.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
   /**
    * Controls the cardinality of the output produced by the skill. Default is 'oneToMany'.
@@ -9913,7 +9913,7 @@ model WebApiSkill extends SearchIndexerSkill {
  * Learning (AML) model. Once an AML model is trained and deployed, an AML skill
  * integrates it into AI enrichment.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model AzureMachineLearningSkill extends SearchIndexerSkill {
   /**
    * (Required for no authentication or key authentication) The scoring URI of the
@@ -9987,7 +9987,7 @@ model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
  * Allows you to generate a vector embedding for a given image or text input using
  * the Azure AI Services Vision Vectorize API.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model VisionVectorizeSkill extends SearchIndexerSkill {
   /**
    * The version of the model to use when calling the AI Services Vision service. It

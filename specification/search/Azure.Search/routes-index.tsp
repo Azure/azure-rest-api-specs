@@ -254,7 +254,7 @@ interface Documents {
        * `generative|count-3`. Defaults to `None`. This parameter is only valid if the
        * query type is `semantic`.
        */
-      @added(Versions.v2024_11_01_preview)
+      @added(Versions.v2025_03_01_preview)
       @query
       queryRewrites?: QueryRewritesType;
 
@@ -262,28 +262,28 @@ interface Documents {
        * Enables a debugging tool that can be used to further explore your search
        * results.
        */
-      @added(Versions.v2024_11_01_preview)
+      @added(Versions.v2025_03_01_preview)
       @query
       debug?: QueryDebugMode;
 
       /**
        * The language of the query.
        */
-      @added(Versions.v2024_11_01_preview)
+      @added(Versions.v2025_03_01_preview)
       @query
       queryLanguage?: QueryLanguage;
 
       /**
        * Improve search recall by spell-correcting individual search query terms.
        */
-      @added(Versions.v2024_11_01_preview)
+      @added(Versions.v2025_03_01_preview)
       @query
       speller?: QuerySpellerType;
 
       /**
        * The list of field names used for semantic ranking.
        */
-      @added(Versions.v2024_11_01_preview)
+      @added(Versions.v2025_03_01_preview)
       @query
       semanticFields?: string[];
     },

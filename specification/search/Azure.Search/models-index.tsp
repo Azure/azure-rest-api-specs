@@ -90,7 +90,7 @@ union QueryCaptionType {
  * character `|` followed by the `count-<number of rewrites>` option, such as
  * `generative|count-3`. Defaults to `None`.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union QueryRewritesType {
   string,
 
@@ -110,7 +110,7 @@ union QueryRewritesType {
  * results. You can enable multiple debug modes simultaneously by separating them
  * with a | character, for example: semantic|queryRewrites.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union QueryDebugMode {
   string,
 
@@ -144,7 +144,7 @@ union QueryDebugMode {
 /**
  * The language of the query.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union QueryLanguage {
   string,
 
@@ -512,7 +512,7 @@ union QueryLanguage {
 /**
  * Improve search recall by spell-correcting individual search query terms.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union QuerySpellerType {
   string,
 
@@ -548,21 +548,21 @@ union VectorQueryKind {
    * Vector query where an url that represents an image value that needs to be
    * vectorized is provided.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   ImageUrl: "imageUrl",
 
   /**
    * Vector query where a base 64 encoded binary of an image that needs to be
    * vectorized is provided.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   ImageBinary: "imageBinary",
 }
 
 /**
  * The kind of vector query being performed.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union VectorThresholdKind {
   string,
 
@@ -607,7 +607,7 @@ union VectorFilterMode {
  * matched the search query, or only the documents that are retrieved within the 'maxTextRecallSize'
  * window. The default value is 'countAllResults'.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union HybridCountAndFacetMode {
   string,
 
@@ -628,7 +628,7 @@ union HybridCountAndFacetMode {
 /**
  * The way the field was used for the semantic enrichment process.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union SemanticFieldState {
   string,
 
@@ -693,7 +693,7 @@ union SemanticSearchResultsType {
 /**
  * Type of query rewrite that was used for this request.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 union SemanticQueryRewritesResultType {
   string,
 
@@ -879,7 +879,7 @@ model SearchDocumentsResult {
   /**
    * Debug information that applies to the search results as a whole.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   @visibility("read")
   @encodedName("application/json", "@search.debug")
   debugInfo?: DebugInfo;
@@ -922,7 +922,7 @@ model SearchDocumentsResult {
   /**
    * Type of query rewrite that was used to retrieve documents.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   @visibility("read")
   @encodedName("application/json", "@search.semanticQueryRewritesResultType")
   semanticQueryRewritesResultType?: SemanticQueryRewritesResultType;
@@ -946,7 +946,7 @@ model FacetResult is Record<unknown> {
    * collection of buckets for each faceted field; null if the query did not contain
    * any nested facets.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   @visibility("read")
   @encodedName("application/json", "@search.facets")
   facets?: Record<FacetResult[]>;
@@ -986,7 +986,7 @@ model QueryAnswerResult is Record<unknown> {
  * Contains debugging information that can be used to further explore your search
  * results.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model DebugInfo {
   /**
    * Contains debugging information specific to query rewrites.
@@ -998,7 +998,7 @@ model DebugInfo {
 /**
  * Contains debugging information specific to query rewrites.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model QueryRewritesDebugInfo {
   /**
    * List of query rewrites generated for the text query.
@@ -1016,7 +1016,7 @@ model QueryRewritesDebugInfo {
 /**
  * Contains debugging information specific to query rewrites.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model QueryRewritesValuesDebugInfo {
   /**
    * The input text to the generative query rewriting model. There may be cases
@@ -1136,7 +1136,7 @@ model SearchRequest {
    * Enables a debugging tool that can be used to further explore your reranked
    * results.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   debug?: QueryDebugMode;
 
   /**
@@ -1162,14 +1162,14 @@ model SearchRequest {
   /**
    * A value that specifies the language of the search query.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   queryLanguage?: QueryLanguage;
 
   /**
    * A value that specified the type of the speller to use to spell-correct
    * individual search query terms.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   speller?: QuerySpellerType;
 
   /**
@@ -1238,13 +1238,13 @@ model SearchRequest {
    * A value that specifies whether query rewrites should be generated to augment
    * the search query.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   queryRewrites?: QueryRewritesType;
 
   /**
    * The comma-separated list of field names used for semantic ranking.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   semanticFields?: string;
 
   /**
@@ -1261,7 +1261,7 @@ model SearchRequest {
   /**
    * The query parameters to configure hybrid search behaviors.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   hybridSearch?: HybridSearch;
 }
 
@@ -1310,7 +1310,7 @@ model VectorQuery {
   /**
    * The threshold used for vector queries. Note this can only be set if all 'fields' use the same similarity metric.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   threshold?: VectorThreshold;
 
   /**
@@ -1318,7 +1318,7 @@ model VectorQuery {
    * filter expression is defined at the vector level, the expression defined in the
    * top level filter parameter is used instead.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   filterOverride?: string;
 
   /**
@@ -1330,7 +1330,7 @@ model VectorQuery {
 /**
  * The threshold used for vector queries.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 @discriminator("kind")
 model VectorThreshold {
   /**
@@ -1342,7 +1342,7 @@ model VectorThreshold {
 /**
  * TThe query parameters to configure hybrid search behaviors.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model HybridSearch {
   /**
    * Determines the maximum number of documents to be retrieved by the text query
@@ -1404,7 +1404,7 @@ model SearchResult {
    * Contains debugging information that can be used to further explore your search
    * results.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   @visibility("read")
   @encodedName("application/json", "@search.documentDebugInfo")
   documentDebugInfo?: DocumentDebugInfo[];
@@ -1436,7 +1436,7 @@ model QueryCaptionResult {
  * Contains debugging information that can be used to further explore your search
  * results.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model DocumentDebugInfo {
   /**
    * Contains debugging information specific to semantic ranking requests.
@@ -1454,7 +1454,7 @@ model DocumentDebugInfo {
 /**
  * Contains debugging information specific to semantic ranking requests.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model SemanticDebugInfo {
   /**
    * The title field that was sent to the semantic enrichment process, as well as
@@ -1488,7 +1488,7 @@ model SemanticDebugInfo {
  * Description of fields that were sent to the semantic enrichment process, as
  * well as how they were used
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model QueryResultDocumentSemanticField {
   /**
    * The name of the field that was sent to the semantic enrichment process
@@ -1507,7 +1507,7 @@ model QueryResultDocumentSemanticField {
 /**
  * The raw concatenated strings that were sent to the semantic enrichment process.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model QueryResultDocumentRerankerInput {
   /**
    * The raw string for the title field that was used for semantic enrichment.
@@ -1533,7 +1533,7 @@ model QueryResultDocumentRerankerInput {
 /**
  * "Contains debugging information specific to vector and hybrid search.")
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model VectorsDebugInfo {
   /**
    * The breakdown of subscores of the document prior to the chosen result set
@@ -1548,7 +1548,7 @@ model VectorsDebugInfo {
  * search query for this document. Each vector query is shown as a separate object
  * in the same order they were received.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model QueryResultDocumentSubscores {
   /**
    * The BM25 or Classic score for the text portion of the query.
@@ -1572,7 +1572,7 @@ model QueryResultDocumentSubscores {
 /**
  * The BM25 or Classic score for the text portion of the query.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model TextResult {
   /**
    * The BM25 or Classic score for the text portion of the query.
@@ -1585,7 +1585,7 @@ model TextResult {
  * A single vector field result. Both \@search.score and vector similarity values
  * are returned. Vector similarity is related to \@search.score by an equation.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model SingleVectorFieldResult {
   /**
    * The \@search.score value that is calculated from the vector similarity score.
@@ -1931,7 +1931,7 @@ model VectorizableTextQuery extends VectorQuery {
    * Can be configured to let a generative model rewrite the query before sending it
    * to be vectorized.
    */
-  @added(Versions.v2024_11_01_preview)
+  @added(Versions.v2025_03_01_preview)
   queryRewrites?: QueryRewritesType;
 
   /**
@@ -1944,7 +1944,7 @@ model VectorizableTextQuery extends VectorQuery {
  * The query parameters to use for vector search when an url that represents an
  * image value that needs to be vectorized is provided.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model VectorizableImageUrlQuery extends VectorQuery {
   /**
    * The URL of an image to be vectorized to perform a vector search query.
@@ -1961,7 +1961,7 @@ model VectorizableImageUrlQuery extends VectorQuery {
  * The query parameters to use for vector search when a base 64 encoded binary of
  * an image that needs to be vectorized is provided.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model VectorizableImageBinaryQuery extends VectorQuery {
   /**
    * The base 64 encoded binary of an image to be vectorized to perform a vector
@@ -1981,7 +1981,7 @@ model VectorizableImageBinaryQuery extends VectorQuery {
  * version. The threshold direction (larger or smaller) will be chosen
  * automatically according to the metric used by the field.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model VectorSimilarityThreshold extends VectorThreshold {
   /**
    * The threshold will filter based on the similarity metric value. Note this is
@@ -2002,7 +2002,7 @@ model VectorSimilarityThreshold extends VectorThreshold {
  * Note this is the \@search.score returned as part of the search response. The
  * threshold direction will be chosen for higher \@search.score.
  */
-@added(Versions.v2024_11_01_preview)
+@added(Versions.v2025_03_01_preview)
 model SearchScoreThreshold extends VectorThreshold {
   /**
    * The threshold will filter based on the '\@search.score' value. Note this is the
