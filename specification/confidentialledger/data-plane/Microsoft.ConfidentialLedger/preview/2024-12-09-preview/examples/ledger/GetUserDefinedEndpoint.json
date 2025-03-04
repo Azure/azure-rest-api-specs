@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2024-12-09-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "The custom endpoint.",
+      "body": {
+        "metadata": {
+          "endpoints": {
+            "/content": {
+              "get": {
+                "forwarding_required": "always",
+                "authn_policies": [
+                  {}
+                ]
+              }
+            }
+          }
+        },
+        "modules": {
+          "name": "test.js",
+          "module": "TESTJS"
+        }
+      }
+    }
+  }
+}
