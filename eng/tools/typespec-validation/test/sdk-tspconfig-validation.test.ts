@@ -198,10 +198,10 @@ const _tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
 const _tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "hierarchy-client",
+  "hierarchyClient",
   false,
   true,
-  [new TspConfigTsMgmtModularHierarchyClientFalseSubRule()],
+  [new _TspConfigTsMgmtModularHierarchyClientFalseSubRule()],
 );
 
 const tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
@@ -270,7 +270,7 @@ const _tsManagementPackageNameTestCases = createEmitterOptionTestCases(
 const tsManagementPackageNameTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "[package-Details].name",
+  "package-details.name",
   "@azure/arm-aaa-bbb",
   "@azure/aaa-bbb",
   [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
