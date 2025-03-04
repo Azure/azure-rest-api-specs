@@ -66,9 +66,15 @@ input-file:
   - Microsoft.App/stable/2025-01-01/ManagedEnvironments.json
   - Microsoft.App/stable/2025-01-01/ManagedEnvironmentsDaprComponents.json
   - Microsoft.App/stable/2025-01-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2025-01-01/SessionPools.json
   - Microsoft.App/stable/2025-01-01/SourceControls.json
   - Microsoft.App/stable/2025-01-01/Subscriptions.json
   - Microsoft.App/stable/2025-01-01/Usages.json
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: SessionPools.json
+    reason: |
+      Session Pool is using managed identity. While the type is a required property, this rule prevent it being present in the patch request body.
 ```
 
 ### Tag: package-preview-2024-10
