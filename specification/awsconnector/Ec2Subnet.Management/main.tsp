@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -99,7 +97,6 @@ model AwsEc2SubnetProperties {
   ipv6CidrBlock?: string;
 
   @doc("The IPv6 network ranges for the subnet, in CIDR notation.")
-  @extension("x-ms-identifiers", [])
   ipv6CidrBlocks?: string[];
 
   @doc("An IPv6 IPAM pool ID for the subnet.")
@@ -127,7 +124,7 @@ model AwsEc2SubnetProperties {
   subnetId?: string;
 
   @doc("Any tags assigned to the subnet.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The ID of the VPC the subnet is in. If you update this property, you must also update the ``CidrBlock`` property.")

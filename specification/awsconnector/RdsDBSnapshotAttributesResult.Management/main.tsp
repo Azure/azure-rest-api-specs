@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -79,7 +77,7 @@ model RdsDBSnapshotAttributesResultProperties {
 @doc("Definition of awsRdsDBSnapshotAttributesResult")
 model AwsRdsDBSnapshotAttributesResultProperties {
   @doc("<p>The list of attributes and values for the manual DB snapshot.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   dbSnapshotAttributes?: DBSnapshotAttribute[];
 
   @doc("<p>The identifier of the manual DB snapshot that the attributes apply to.</p>")
@@ -96,7 +94,6 @@ model DBSnapshotAttribute {
   attributeName?: string;
 
   @doc("<p>The value or values for the manual DB snapshot attribute.</p> <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this element returns a list of IDs of the Amazon Web Services accounts that are authorized to copy or restore the manual DB snapshot. If a value of <code>all</code> is in the list, then the manual DB snapshot is public and available for any Amazon Web Services account to copy or restore.</p>")
-  @extension("x-ms-identifiers", [])
   attributeValues?: string[];
 }
 

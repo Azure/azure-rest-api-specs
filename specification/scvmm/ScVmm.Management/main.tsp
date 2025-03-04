@@ -22,9 +22,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /** The Microsoft.ScVmm Rest API spec. */
 @armProviderNamespace
-@service({
-  title: "ScVmm",
-})
+@service(#{ title: "ScVmm" })
 @versioned(Versions)
 namespace Microsoft.ScVmm;
 

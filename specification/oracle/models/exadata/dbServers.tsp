@@ -37,21 +37,21 @@ union DbServerPatchingStatus {
 @doc("DbServer Patching Properties")
 model DbServerPatchingDetails {
   @doc("Estimated Patch Duration")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minValue(1)
   @maxValue(3000)
   estimatedPatchDuration?: int32;
 
   @doc("Patching Status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   patchingStatus?: DbServerPatchingStatus;
 
   @doc("Time Patching Ended")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timePatchingEnded?: utcDateTime;
 
   @doc("Time Patching Started")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timePatchingStarted?: utcDateTime;
 }
 
@@ -59,87 +59,87 @@ model DbServerPatchingDetails {
 @doc("DbServer resource properties")
 model DbServerProperties {
   @doc("Db server name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ocid?: Ocid;
 
   @doc("The name for the Db Server.")
   @minLength(1)
   @maxLength(255)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   @doc("The OCID of the compartment.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   compartmentId?: Ocid;
 
   @doc("The OCID of the Exadata infrastructure.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   exadataInfrastructureId?: Ocid;
 
   @doc("The number of CPU cores enabled on the Db server.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cpuCoreCount?: int32;
 
   @doc("dbServerPatching details of the Db server.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dbServerPatchingDetails?: DbServerPatchingDetails;
 
   @doc("The total memory available in GBs.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxMemoryInGbs?: int32;
 
   @doc("The allocated local node storage in GBs on the Db server.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dbNodeStorageSizeInGbs?: int32;
 
   @doc("The OCID of the VM Clusters associated with the Db server.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmClusterIds?: Ocid[];
 
   @doc("The OCID of the Db nodes associated with the Db server.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dbNodeIds?: Ocid[];
 
   @doc("Lifecycle details of dbServer.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lifecycleDetails?: string;
 
   @doc("DbServer provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lifecycleState?: DbServerProvisioningState;
 
   @doc("The total number of CPU cores available.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxCpuCount?: int32;
 
   @doc("The list of OCIDs of the Autonomous VM Clusters associated with the Db server.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autonomousVmClusterIds?: Ocid[];
 
   @doc("The list of OCIDs of the Autonomous Virtual Machines associated with the Db server.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autonomousVirtualMachineIds?: Ocid[];
 
   @doc("The total max dbNode storage in GBs.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxDbNodeStorageInGbs?: int32;
 
   @doc("The total memory size in GBs.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   memorySizeInGbs?: int32;
 
   @doc("The shape of the Db server. The shape determines the amount of CPU, storage, and memory resources available.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minLength(1)
   @maxLength(255)
   shape?: string;
 
   @doc("The date and time that the Db Server was created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
 
   @doc("Azure resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

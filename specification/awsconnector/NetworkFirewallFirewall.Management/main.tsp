@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -79,7 +77,6 @@ model AwsNetworkFirewallFirewallProperties {
   description?: string;
 
   @doc("Property endpointIds")
-  @extension("x-ms-identifiers", [])
   endpointIds?: string[];
 
   @doc("A resource ARN.")
@@ -101,11 +98,11 @@ model AwsNetworkFirewallFirewallProperties {
   subnetChangeProtection?: boolean;
 
   @doc("Property subnetMappings")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   subnetMappings?: SubnetMapping[];
 
   @doc("Property tags")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("Property vpcId")

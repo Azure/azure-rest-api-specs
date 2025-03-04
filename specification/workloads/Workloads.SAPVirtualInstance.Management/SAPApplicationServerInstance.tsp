@@ -39,7 +39,7 @@ interface SAPApplicationServerInstances {
   /**
    * Puts the SAP Application Server Instance resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     SAPApplicationServerInstance,
     UpdateSAPApplicationInstanceRequest

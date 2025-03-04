@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -72,7 +70,7 @@ model EmrClusterProperties {
 @doc("Definition of awsEmrCluster")
 model AwsEmrClusterProperties {
   @doc("<p>The applications installed on this cluster.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   applications?: Application[];
 
   @doc("<p>An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate Amazon EC2 instances in an instance group.</p>")
@@ -85,7 +83,7 @@ model AwsEmrClusterProperties {
   clusterArn?: string;
 
   @doc("<p>Applies only to Amazon EMR releases 4.x and later. The list of configurations that are supplied to the Amazon EMR cluster.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   configurations?: Configuration[];
 
   @doc("<p>Available only in Amazon EMR releases 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI if the cluster uses a custom AMI.</p>")
@@ -134,7 +132,7 @@ model AwsEmrClusterProperties {
   outpostArn?: string;
 
   @doc("<p>Placement group configured for an Amazon EMR cluster.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   placementGroups?: PlacementGroupConfig[];
 
   @doc("<p>The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version such as <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application versions and features, see <a href='https://docs.aws.amazon.com/emr/latest/ReleaseGuide/'>https://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases version 4.0 and later. Earlier versions use <code>AmiVersion</code>.</p>")
@@ -165,7 +163,7 @@ model AwsEmrClusterProperties {
   stepConcurrencyLevel?: int32;
 
   @doc("<p>A list of tags associated with a cluster.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("<p>Indicates whether Amazon EMR will lock the cluster to prevent the Amazon EC2 instances from being terminated by an API call or user intervention, or in the event of a cluster error.</p>")
@@ -230,7 +228,6 @@ model Application {
   additionalInfo?: Record<string>;
 
   @doc("<p>Arguments for Amazon EMR to pass to the application.</p>")
-  @extension("x-ms-identifiers", [])
   args?: string[];
 
   @doc("<p>The name of the application.</p>")
@@ -271,7 +268,7 @@ model Configuration {
   classification?: string;
 
   @doc("<p>A list of additional configurations to apply within a configuration object.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   configurations?: Configuration[];
 
   @doc("<p>A set of properties specified within a configuration classification.</p>")
@@ -285,11 +282,9 @@ model Configuration {
 @doc("Definition of Ec2InstanceAttributes")
 model Ec2InstanceAttributes {
   @doc("<p>A list of additional Amazon EC2 security group IDs for the master node.</p>")
-  @extension("x-ms-identifiers", [])
   additionalMasterSecurityGroups?: string[];
 
   @doc("<p>A list of additional Amazon EC2 security group IDs for the core and task nodes.</p>")
-  @extension("x-ms-identifiers", [])
   additionalSlaveSecurityGroups?: string[];
 
   @doc("<p>The Availability Zone in which the cluster will run. </p>")
@@ -311,11 +306,9 @@ model Ec2InstanceAttributes {
   iamInstanceProfile?: string;
 
   @doc("<p>Applies to clusters configured with the instance fleets option. Specifies one or more Availability Zones in which to launch Amazon EC2 cluster instances when the EC2-Classic network configuration is supported. Amazon EMR chooses the Availability Zone with the best fit from among the list of <code>RequestedEc2AvailabilityZones</code>, and then launches all cluster instances within that Availability Zone. If you do not specify this value, Amazon EMR chooses the Availability Zone for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.</p>")
-  @extension("x-ms-identifiers", [])
   requestedEc2AvailabilityZones?: string[];
 
   @doc("<p>Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch Amazon EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the Amazon EC2 subnet with the best fit from among the list of <code>RequestedEc2SubnetIds</code>, and then launches all cluster instances within that Subnet. If this value is not specified, and the account and Region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses <code>RequestedEc2AvailabilityZones</code> instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.</p>")
-  @extension("x-ms-identifiers", [])
   requestedEc2SubnetIds?: string[];
 
   @doc("<p>The identifier of the Amazon EC2 security group for the Amazon EMR service to access clusters in VPC private subnets.</p>")
@@ -388,7 +381,7 @@ model InstanceRoleTypeEnumValue {
 @doc("Definition of ClusterStatus")
 model ClusterStatus {
   @doc("<p>A list of tuples that provides information about the errors that caused a cluster to terminate. This structure can contain up to 10 different <code>ErrorDetail</code> tuples.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   errorDetails?: ErrorDetail[];
 
   @doc("<p>The current state of the cluster.</p>")
@@ -487,7 +480,7 @@ model ErrorDetail {
   errorCode?: string;
 
   @doc("<p>A list of key value pairs that provides contextual information about why an error occured.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   errorData?: StringMap[];
 
   @doc("<p>A message that describes the error.</p>")

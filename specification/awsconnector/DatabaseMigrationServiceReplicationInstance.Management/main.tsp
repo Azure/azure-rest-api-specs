@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -128,21 +126,18 @@ model AwsDatabaseMigrationServiceReplicationInstanceProperties {
   replicationInstanceIdentifier?: string;
 
   @doc("<p>One or more IPv6 addresses for the replication instance.</p>")
-  @extension("x-ms-identifiers", [])
   replicationInstanceIpv6Addresses?: string[];
 
   @doc("<p>The private IP address of the replication instance.</p>")
   replicationInstancePrivateIpAddress?: string;
 
   @doc("<p>One or more private IP addresses for the replication instance.</p>")
-  @extension("x-ms-identifiers", [])
   replicationInstancePrivateIpAddresses?: string[];
 
   @doc("<p>The public IP address of the replication instance.</p>")
   replicationInstancePublicIpAddress?: string;
 
   @doc("<p>One or more public IP addresses for the replication instance.</p>")
-  @extension("x-ms-identifiers", [])
   replicationInstancePublicIpAddresses?: string[];
 
   @doc("<p>The status of the replication instance. The possible return values include:</p> <ul> <li> <p> <code>'available'</code> </p> </li> <li> <p> <code>'creating'</code> </p> </li> <li> <p> <code>'deleted'</code> </p> </li> <li> <p> <code>'deleting'</code> </p> </li> <li> <p> <code>'failed'</code> </p> </li> <li> <p> <code>'modifying'</code> </p> </li> <li> <p> <code>'upgrading'</code> </p> </li> <li> <p> <code>'rebooting'</code> </p> </li> <li> <p> <code>'resetting-master-credentials'</code> </p> </li> <li> <p> <code>'storage-full'</code> </p> </li> <li> <p> <code>'incompatible-credentials'</code> </p> </li> <li> <p> <code>'incompatible-network'</code> </p> </li> <li> <p> <code>'maintenance'</code> </p> </li> </ul>")
@@ -155,7 +150,7 @@ model AwsDatabaseMigrationServiceReplicationInstanceProperties {
   secondaryAvailabilityZone?: string;
 
   @doc("<p>The VPC security group for the instance.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   vpcSecurityGroups?: VpcSecurityGroupMembership[];
 }
 
@@ -197,11 +192,10 @@ model ReplicationSubnetGroup {
   subnetGroupStatus?: string;
 
   @doc("<p>The subnets that are in the subnet group.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   subnets?: Subnet[];
 
   @doc("<p>The IP addressing protocol supported by the subnet group. This is used by a replication instance with values such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.</p>")
-  @extension("x-ms-identifiers", [])
   supportedNetworkTypes?: string[];
 
   @doc("<p>The ID of the VPC.</p>")

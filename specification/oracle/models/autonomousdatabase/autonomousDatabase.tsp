@@ -569,7 +569,7 @@ model ConnectionStringType {
   medium?: string;
 
   @doc("A list of connection string profiles to allow clients to group, filter and select connection string values based on structured metadata.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   profiles?: ProfileType[];
 }
 
@@ -614,35 +614,35 @@ model AutonomousDatabaseCloneProperties
   dataBaseType: DataBaseType.Clone;
 
   @doc("The source of the database.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   source?: SourceType;
 
   @doc("The Azure resource ID of the Autonomous Database that was cloned to create the current Autonomous Database.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   sourceId: AutonomousDatabaseId;
 
   @doc("The Autonomous Database clone type.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   cloneType: CloneType;
 
   @doc("Indicates if the refreshable clone can be reconnected to its source database.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isReconnectCloneEnabled?: boolean;
 
   @doc("Indicates if the Autonomous Database is a refreshable clone.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isRefreshableClone?: boolean;
 
   @doc("The refresh mode of the clone.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   refreshableModel?: RefreshableModelType;
 
   @doc("The refresh status of the clone.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   refreshableStatus?: RefreshableStatusType;
 
   @doc("The time and date as an RFC3339 formatted string, e.g., 2022-01-01T12:00:00.000Z, to set the limit for a refreshable clone to be reconnected to its source database.")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   timeUntilReconnectCloneEnabled?: string;
 }
 
@@ -654,29 +654,29 @@ model AutonomousDatabaseCrossRegionDisasterRecoveryProperties
   dataBaseType: DataBaseType.CrossRegionDisasterRecovery;
 
   @doc("The source of the database.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   source: SourceType.CrossRegionDisasterRecovery;
 
   @doc("The Azure resource ID of the source Autonomous Database that will be used to create a new peer database for the DR association.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   sourceId: AutonomousDatabaseId;
 
   @doc("The name of the region where source Autonomous Database exists.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   sourceLocation?: string;
 
   @doc("The source database ocid")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   @minLength(1)
   @maxLength(255)
   sourceOcid?: string;
 
   @doc("Indicates the cross-region disaster recovery (DR) type of the standby Autonomous Database Serverless instance. Autonomous Data Guard (ADG) DR type provides business critical DR with a faster recovery time objective (RTO) during failover or switchover. Backup-based DR type provides lower cost DR with a slower RTO during failover or switchover.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   remoteDisasterRecoveryType: DisasterRecoveryType;
 
   @doc("If true, 7 days worth of backups are replicated across regions for Cross-Region ADB or Backup-Based DR between Primary and Standby. If false, the backups taken on the Primary are not replicated to the Standby database.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   isReplicateAutomaticBackups?: boolean;
 }
 
@@ -688,23 +688,23 @@ model AutonomousDatabaseFromBackupTimestampProperties
   dataBaseType: DataBaseType.CloneFromBackupTimestamp;
 
   @doc("The source of the database.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   source: SourceType.BackupFromTimestamp;
 
   @doc("The ID of the source Autonomous Database that you will clone to create a new Autonomous Database.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   sourceId: AutonomousDatabaseId;
 
   @doc("The Autonomous Database clone type.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   cloneType: CloneType;
 
   @doc("The timestamp specified for the point-in-time clone of the source Autonomous Database. The timestamp must be in the past.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   timestamp?: utcDateTime;
 
   @doc("Clone from latest available backup timestamp.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   useLatestAvailableBackupTimeStamp?: boolean;
 }
 
@@ -712,341 +712,341 @@ model AutonomousDatabaseFromBackupTimestampProperties
 @doc("Autonomous Database base resource model.")
 model AutonomousDatabaseBaseProperties {
   @doc("Admin password.")
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @minLength(12)
   @maxLength(30)
   adminPassword?: Password;
 
   @doc("Database type to be created.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   dataBaseType: DataBaseType;
 
   @doc("The maintenance schedule type of the Autonomous Database Serverless.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   autonomousMaintenanceScheduleType?: AutonomousMaintenanceScheduleType;
 
   @doc("The character set for the autonomous database.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @minLength(1)
   @maxLength(255)
   characterSet?: string;
 
   @doc("The compute amount (CPUs) available to the database.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @minValue(0.1)
   @maxValue(512)
   computeCount?: float32;
 
   @doc("The compute model of the Autonomous Database.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   computeModel?: ComputeModel;
 
   @doc("The number of CPU cores to be made available to the database.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @minValue(1)
   @maxValue(128)
   cpuCoreCount?: int32;
 
   @doc("Customer Contacts.")
-  @visibility("create", "read", "update")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   customerContacts?: CustomerContact[];
 
   @doc("The quantity of data in the database, in terabytes.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @minValue(1)
   @maxValue(384)
   dataStorageSizeInTbs?: int32;
 
   @doc("The size, in gigabytes, of the data volume that will be created and attached to the database.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @minValue(20)
   @maxValue(393216)
   dataStorageSizeInGbs?: int32;
 
   @doc("A valid Oracle Database version for Autonomous Database.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @minLength(1)
   @maxLength(255)
   dbVersion?: string;
 
   @doc("The Autonomous Database workload type")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   dbWorkload?: WorkloadType;
 
   @doc("The user-friendly name for the Autonomous Database.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @minLength(1)
   @maxLength(255)
   displayName?: string;
 
   @doc("Indicates if auto scaling is enabled for the Autonomous Database CPU core count.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isAutoScalingEnabled?: boolean;
 
   @doc("Indicates if auto scaling is enabled for the Autonomous Database storage.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isAutoScalingForStorageEnabled?: boolean;
 
   @doc("The list of Azure resource IDs of standby databases located in Autonomous Data Guard remote regions that are associated with the source database. Note that for Autonomous Database Serverless instances, standby databases located in the same region as the source primary database do not have Azure IDs.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   peerDbIds?: string[];
 
   @doc("The Azure resource ID of the Disaster Recovery peer database, which is located in a different region from the current peer database.")
-  @visibility("update")
+  @visibility(Lifecycle.Update)
   @minLength(1)
   @maxLength(255)
   peerDbId?: string;
 
   @doc("Indicates whether the Autonomous Database has local or called in-region Data Guard enabled.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isLocalDataGuardEnabled?: boolean;
 
   @doc("Indicates whether the Autonomous Database has Cross Region Data Guard enabled.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isRemoteDataGuardEnabled?: boolean;
 
   @doc("Indicates the local disaster recovery (DR) type of the Autonomous Database Serverless instance.Autonomous Data Guard (ADG) DR type provides business critical DR with a faster recovery time objective (RTO) during failover or switchover.Backup-based DR type provides lower cost DR with a slower RTO during failover or switchover.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   localDisasterRecoveryType?: DisasterRecoveryType;
 
   @added(Versions.v20241001_preview)
   @doc("The date and time the Disaster Recovery role was switched for the standby Autonomous Database.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeDisasterRecoveryRoleChanged?: utcDateTime;
 
   @added(Versions.v20241001_preview)
   @doc("Indicates remote disaster recovery configuration")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   remoteDisasterRecoveryConfiguration?: DisasterRecoveryConfigurationDetails;
 
   @doc("Local Autonomous Disaster Recovery standby database details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   localStandbyDb?: AutonomousDatabaseStandbySummary;
 
   @doc("Indicates the number of seconds of data loss for a Data Guard failover.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   failedDataRecoveryInSeconds?: int32;
 
   @doc("Specifies if the Autonomous Database requires mTLS connections.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   isMtlsConnectionRequired?: boolean;
 
   @doc("Specifies if the Autonomous Database preview version is being provisioned.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   isPreviewVersionWithServiceTermsAccepted?: boolean;
 
   @doc("The Oracle license model that applies to the Oracle Autonomous Database. The default is LICENSE_INCLUDED.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   licenseModel?: LicenseModel;
 
   @doc("The character set for the Autonomous Database.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @minLength(1)
   @maxLength(255)
   ncharacterSet?: string;
 
   @doc("Additional information about the current lifecycle state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lifecycleDetails?: string;
 
   @doc("Azure resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AzureResourceProvisioningState;
 
   @doc("Views lifecycleState")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lifecycleState?: AutonomousDatabaseLifecycleState;
 
   @doc("The list of scheduled operations.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   scheduledOperations?: ScheduledOperationsType;
 
   @doc("The private endpoint Ip address for the resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   privateEndpointIp?: string;
 
   @doc("The resource's private endpoint label.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   privateEndpointLabel?: string;
 
   @doc("HTTPS link to OCI resources exposed to Azure Customer via Azure Interface.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ociUrl?: string;
 
   @doc("Client subnet")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   subnetId?: SubnetId;
 
   @doc("VNET for network connectivity")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   vnetId?: VnetId;
 
   @doc("The date and time that the database was created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
 
   @doc("The date and time when maintenance will begin.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeMaintenanceBegin?: utcDateTime;
 
   @doc("The date and time when maintenance will end.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeMaintenanceEnd?: utcDateTime;
 
   @doc("The current amount of storage in use for user and system data, in terabytes (TB).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   actualUsedDataStorageSizeInTbs?: float64;
 
   @doc("The amount of storage currently allocated for the database tables and billed for, rounded up.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   allocatedStorageSizeInTbs?: float64;
 
   @doc("Information about Oracle APEX Application Development.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   apexDetails?: ApexDetailsType;
 
   @doc("List of Oracle Database versions available for a database upgrade. If there are no version upgrades available, this list is empty.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   availableUpgradeVersions?: string[];
 
   @doc("The connection string used to connect to the Autonomous Database.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionStrings?: ConnectionStringType;
 
   @doc("The URLs for accessing Oracle Application Express (APEX) and SQL Developer Web with a browser from a Compute instance within your VCN or that has a direct connection to your VCN. ")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionUrls?: ConnectionUrlType;
 
   @doc("Status of the Data Safe registration for this Autonomous Database.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataSafeStatus?: DataSafeStatusType;
 
   @doc("The Oracle Database Edition that applies to the Autonomous databases.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   databaseEdition?: DatabaseEditionType;
 
   @doc("Autonomous Database ID")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   autonomousDatabaseId?: AutonomousDatabaseId;
 
   @doc("The area assigned to In-Memory tables in Autonomous Database.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inMemoryAreaInGbs?: int32;
 
   @doc("The date and time when the next long-term backup would be created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextLongTermBackupTimeStamp?: utcDateTime;
 
   @doc("Details for the long-term backup schedule.")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   longTermBackupSchedule?: LongTermBackUpScheduleDetails;
 
   @doc("Indicates if the Autonomous Database version is a preview version.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isPreview?: boolean;
 
   @doc("Parameter that allows users to select an acceptable maximum data loss limit in seconds, up to which Automatic Failover will be triggered when necessary for a Local Autonomous Data Guard")
-  @visibility("update", "read")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
   @minValue(0)
   @maxValue(3600)
   localAdgAutoFailoverMaxDataLossLimit?: int32;
 
   @doc("The amount of memory (in GBs) enabled per ECPU or OCPU.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   memoryPerOracleComputeUnitInGbs?: int32;
 
   @doc("Indicates the Autonomous Database mode.")
-  @visibility("update", "read")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
   openMode?: OpenModeType;
 
   @doc("Status of Operations Insights for this Autonomous Database.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operationsInsightsStatus?: OperationsInsightsStatusType;
 
   @doc("The Autonomous Database permission level.")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   permissionLevel?: PermissionLevelType;
 
   @doc("The private endpoint for the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpoint?: string;
 
   @doc("An array of CPU values that an Autonomous Database can be scaled to.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisionableCpus?: int32[];
 
   @doc("The Data Guard role of the Autonomous Container Database or Autonomous Database, if Autonomous Data Guard is enabled.")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   role?: RoleType;
 
   @doc("The URL of the Service Console for the Autonomous Database.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minLength(10)
   @maxLength(255)
   serviceConsoleUrl?: string;
 
   @doc("The SQL Web Developer URL for the Oracle Autonomous Database.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minLength(10)
   @maxLength(2048)
   sqlWebDeveloperUrl?: string;
 
   @doc("The list of regions that support the creation of an Autonomous Database clone or an Autonomous Data Guard standby database.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxItems(50)
   supportedRegionsToCloneTo?: string[];
 
   @doc("The date and time the Autonomous Data Guard role was switched for the Autonomous Database.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeDataGuardRoleChanged?: string;
 
   @doc("The date and time the Always Free database will be automatically deleted because of inactivity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeDeletionOfFreeAutonomousDatabase?: string;
 
   @doc("The date and time that Autonomous Data Guard was enabled for an Autonomous Database where the standby was provisioned in the same region as the primary database.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeLocalDataGuardEnabled?: string;
 
   @doc("The timestamp of the last failover operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeOfLastFailover?: string;
 
   @doc("The date and time when last refresh happened.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeOfLastRefresh?: string;
 
   @doc("The refresh point timestamp (UTC).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeOfLastRefreshPoint?: string;
 
   @doc("The timestamp of the last switchover operation for the Autonomous Database.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeOfLastSwitchover?: string;
 
   @doc("The date and time the Always Free database will be stopped because of inactivity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeReclamationOfFreeAutonomousDatabase?: string;
 
   @doc("The storage space consumed by Autonomous Database in GBs.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   usedDataStorageSizeInGbs?: int32;
 
   @doc("The amount of storage that has been used, in terabytes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   usedDataStorageSizeInTbs?: int32;
 
   @doc("Database ocid")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ocid?: Ocid;
 
   @doc("Retention period, in days, for long-term backups")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   backupRetentionPeriodInDays?: int32;
 
   @doc("The client IP access control list (ACL). This is an array of CIDR notations and/or IP addresses. Values should be separate strings, separated by commas. Example: ['1.1.1.1','1.1.1.0/24','1.1.2.25']")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   whitelistedIps?: aclString[];
 }
 

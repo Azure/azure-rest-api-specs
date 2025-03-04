@@ -17,7 +17,7 @@ model MongoCluster is TrackedResource<MongoClusterProperties> {
   @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
   @key("mongoClusterName")
   @segment("mongoClusters")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -34,7 +34,7 @@ interface MongoClusters {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Updates an existing mongo cluster. The request body can contain one to many of the properties present in the normal mongo cluster definition. */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     MongoCluster,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -77,25 +77,25 @@ scalar MongoClusterResourceId
 /** The properties of a mongo cluster. */
 model MongoClusterProperties {
   /** The mode to create a mongo cluster. */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   createMode?: CreateMode;
 
   /** The parameters to create a point-in-time restore mongo cluster. */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   restoreParameters?: MongoClusterRestoreParameters;
 
   /** The parameters to create a replica mongo cluster. */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   replicaParameters?: MongoClusterReplicaParameters;
 
   /** The administrator's login for the mongo cluster. */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @removed(Versions.v2024_07_01)
   administratorLogin?: string;
 
   /** The password of the administrator login. */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @removed(Versions.v2024_07_01)
   @secret
   administratorLoginPassword?: string;
@@ -108,27 +108,27 @@ model MongoClusterProperties {
   serverVersion?: string;
 
   /** The default mongo connection string for the cluster. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionString?: string;
 
   /** Earliest restore timestamp in UTC ISO8601 format. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @removed(Versions.v2024_07_01)
   earliestRestoreTime?: string;
 
   /** The provisioning state of the mongo cluster. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /** The status of the mongo cluster. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clusterStatus?: MongoClusterStatus;
 
   /** Whether or not public endpoint access is allowed for this mongo cluster. */
   publicNetworkAccess?: PublicNetworkAccess;
 
   /** The list of node group specs in the cluster. */
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   @removed(Versions.v2024_07_01)
   nodeGroupSpecs?: NodeGroupSpec[];
 
@@ -157,7 +157,7 @@ model MongoClusterProperties {
   dataApi?: DataApiProperties;
 
   /** List of private endpoint connections. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /** List of private endpoint connections. */
@@ -166,12 +166,12 @@ model MongoClusterProperties {
 
   /** The replication properties for the mongo cluster */
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replica?: ReplicationProperties;
 
   /** The infrastructure version the cluster is provisioned on. */
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   infrastructureVersion?: string;
 }
 
@@ -245,15 +245,15 @@ union HighAvailabilityMode {
 @added(Versions.v2024_07_01)
 model BackupProperties {
   /** Earliest restore timestamp in UTC ISO8601 format. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   earliestRestoreTime?: string;
 }
 
 /** The connection strings for the given mongo cluster. */
 model ListConnectionStringsResult {
   /** An array that contains the connection strings for a mongo cluster. */
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
   connectionStrings?: ConnectionString[];
 }
 
@@ -261,16 +261,16 @@ model ListConnectionStringsResult {
 model ConnectionString {
   /** Value of the connection string */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @clientName("uri", "csharp")
   connectionString?: string;
 
   /** Description of the connection string */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   /** Name of the connection string. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_07_01)
   name?: string;
 }
@@ -364,15 +364,15 @@ union PromoteMode {
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 model ReplicationProperties {
   /** The resource id the source cluster for the replica cluster. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceResourceId?: MongoClusterResourceId;
 
   /** The replication role of the cluster */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   role?: ReplicationRole;
 
   /** The replication link state of the replica cluster. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replicationState?: ReplicationState;
 }
 
@@ -459,11 +459,11 @@ union NodeKind {
 @added(Versions.v2024_07_01)
 model AdministratorProperties {
   /** The administrator user name. */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   userName?: string;
 
   /** The administrator password. */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   password?: string;
 }

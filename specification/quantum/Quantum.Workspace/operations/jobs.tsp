@@ -48,7 +48,7 @@ union JobStatus {
 /** Quantum computing data. */
 model QuantumComputingData {
   /** The number of quantum computing items in the job. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   count: int64;
 }
 
@@ -59,63 +59,63 @@ model JobDetails extends ItemDetails {
   /** Id of the job. */
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "False-positive"
   @key("jobId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: WorkspaceItemId;
 
   /** Type of the Quantum Workspace item is Job. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   itemType: ItemType.Job;
 
   /** The type of job. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobType?: JobType;
 
   /** The ID of the session that the job is part of. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sessionId?: string;
 
   /** The blob container SAS uri, the container is used to host job data. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   containerUri: string;
 
   /** The input blob URI, if specified, it will override the default input blob in the container. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inputDataUri?: string;
 
   /** The format of the input data. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inputDataFormat?: string;
 
   /** The status of the job. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: JobStatus;
 
   /** The job metadata. Metadata provides client the ability to store client-specific information */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   metadata?: {};
 
   /** The time when a job was successfully cancelled. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cancellationTime?: utcDateTime;
 
   /** List of user-supplied tags associated with the job. */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: string[];
 
   /** Quantum computing data. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   quantumComputingData?: QuantumComputingData;
 
   /** The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inputParams?: {};
 
   /** The output blob uri. When a job finishes successfully, results will be uploaded to this blob. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   outputDataUri?: string;
 
   /** The format of the output data. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   outputDataFormat?: string;
 }
 

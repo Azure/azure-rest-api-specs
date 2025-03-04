@@ -27,7 +27,7 @@ model SnapshotResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @path
   @key("snapshotName")
   @segment("snapshots")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9-_]{1,64}$")
   name: string;
 

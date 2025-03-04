@@ -113,7 +113,7 @@ model CompanyDetails {
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
   @doc("Marketplace details of the resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   marketplaceDetails: MarketplaceDetails;
 
   @doc("Details of the user.")
@@ -123,7 +123,7 @@ model BaseResourceProperties {
   companyDetails: CompanyDetails;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

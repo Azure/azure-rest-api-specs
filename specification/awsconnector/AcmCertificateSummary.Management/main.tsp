@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -85,7 +83,6 @@ model AwsAcmCertificateSummaryProperties {
   exported?: boolean;
 
   @doc("<p>Contains a list of Extended Key Usage X.509 v3 extension objects. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier (OID). </p>")
-  @extension("x-ms-identifiers", [])
   extendedKeyUsages?: ExtendedKeyUsageName[];
 
   @doc("<p>When called by <a href='https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html'>ListCertificates</a>, indicates whether the full list of subject alternative names has been included in the response. If false, the response includes all of the subject alternative names included in the certificate. If true, the response only includes the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use <a href='https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html'>DescribeCertificate</a>.</p>")
@@ -104,7 +101,6 @@ model AwsAcmCertificateSummaryProperties {
   keyAlgorithm?: KeyAlgorithmEnumValue;
 
   @doc("<p>A list of Key Usage X.509 v3 extension objects. Each object is a string value that identifies the purpose of the public key contained in the certificate. Possible extension values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT, NON_REPUDIATION, and more.</p>")
-  @extension("x-ms-identifiers", [])
   keyUsages?: KeyUsageName[];
 
   @doc("<p>The time after which the certificate is not valid.</p>")
@@ -123,7 +119,6 @@ model AwsAcmCertificateSummaryProperties {
   status?: CertificateStatusEnumValue;
 
   @doc("<p>One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website. </p> <p>When called by <a href='https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html'>ListCertificates</a>, this parameter will only return the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use <a href='https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html'>DescribeCertificate</a>.</p>")
-  @extension("x-ms-identifiers", [])
   subjectAlternativeNameSummaries?: string[];
 
   @doc("<p>The source of the certificate. For certificates provided by ACM, this value is <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide <a href='https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html'>managed renewal</a> for imported certificates. For more information about the differences between certificates that you import and those that ACM provides, see <a href='https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html'>Importing Certificates</a> in the <i>Certificate Manager User Guide</i>. </p>")
