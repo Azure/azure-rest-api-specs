@@ -312,7 +312,7 @@ model Investigation {
   result?: InvestigationResult;
 
   @doc("Child investigations.")
-  @Azure.ResourceManager.identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   healthChecks?: Investigation[];
 }
 
