@@ -29,11 +29,11 @@ using OpenAPI;
 
 /** Azure Quantum Workspace Services */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Non standard use of openapi info metadata for azure spec"
+#suppress "@azure-tools/typespec-azure-core/require-versioned"
 @service({
   title: "Azure Quantum Workspace Services",
 })
 @useAuth(AzureEntraAuth | AzureApiKeyAuth)
-@versioned(QuantumWorkspaceAPIVersion)
 @server(
   "https://{region}.{serviceBaseUrl}",
   "Endpoint for the Azure Quantum",
