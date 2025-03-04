@@ -1122,71 +1122,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/{artifactType}/{artifactName}/versions": {
-      "get": {
-        "operationId": "SoftDeletedResource_ListByArtifactName",
-        "tags": [
-          "Galleries"
-        ],
-        "description": "List soft-deleted resources of an artifact in the gallery, such as soft-deleted gallery image version of an image.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "description": "The name of the Shared Image Gallery.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "artifactType",
-            "in": "path",
-            "description": "The type of the artifact to be listed, such as gallery image version.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$"
-          },
-          {
-            "name": "artifactName",
-            "in": "path",
-            "description": "The artifact name to be listed. If artifact type is Images, then the artifact name should be the gallery image name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/GallerySoftDeletedResourceList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List soft-deleted resources of an artifact in the gallery.": {
-            "$ref": "./examples/galleryExamples/GallerySoftDeletedResource_ListByArtifactName.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications": {
       "get": {
         "operationId": "GalleryApplications_ListByGallery",
@@ -3503,6 +3438,71 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/softdeletedartifacttypes/{artifactType}/artifacts/{artifactName}/versions": {
+      "get": {
+        "operationId": "SoftDeletedResource_ListByArtifactName",
+        "tags": [
+          "Galleries"
+        ],
+        "description": "List soft-deleted resources of an artifact in the gallery, such as soft-deleted gallery image version of an image.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactType",
+            "in": "path",
+            "description": "The type of the artifact to be listed, such as gallery image version.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$"
+          },
+          {
+            "name": "artifactName",
+            "in": "path",
+            "description": "The artifact name to be listed. If artifact type is Images, then the artifact name should be the gallery image name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GallerySoftDeletedResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List soft-deleted resources of an artifact in the gallery.": {
+            "$ref": "./examples/galleryExamples/GallerySoftDeletedResource_ListByArtifactName.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     }
   },

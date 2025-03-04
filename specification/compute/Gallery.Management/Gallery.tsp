@@ -121,6 +121,7 @@ interface Galleries {
        */
       @pattern("^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$")
       @path
+      @segment("softdeletedartifacttypes")
       artifactType: string;
 
       /**
@@ -128,6 +129,7 @@ interface Galleries {
        */
       @pattern("^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$")
       @path
+      @segment("artifacts")
       artifactName: string;
     }
   >;

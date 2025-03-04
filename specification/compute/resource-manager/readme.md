@@ -255,6 +255,24 @@ directive:
   - suppress: ResourceNameRestriction
     from: dedicatedHost.json
     reason: there is no dedicated host naming requirement. It only follows ARM resource naming requirement.
+# Do suppression for generated swagger
+  - suppress: XmsResourceInPutResponse
+    from: ComputeRP.json
+    reason: x-ms-azure-resource tag makes 'ID' property required. However, VmssExtension is part of the VMSS property, not necessary a resource. So it does not always have ID.
+  - suppress: ResourceNameRestriction
+    from: ComputeRP.json
+    reason: there is no VMSS naming requirement. It only follows ARM resource naming requirement.
+  - suppress: ResourceNameRestriction
+    from: ComputeRP.json
+    reason: there is no Compute VM naming requirement. It only follows ARM resource naming requirement.
+  - suppress: ArmResourcePropertiesBag
+    reason: This was an existing definition. Too much impact to go through breaking change to address this.
+    from: ComputeRP.json
+    where:
+      - $.definitions.VirtualMachineScaleSetVMExtension
+  - suppress: ResourceNameRestriction
+    from: ComputeRP.json
+    reason: there is no dedicated host naming requirement. It only follows ARM resource naming requirement.
 
 suppressions:
   - code: OperationsAPIImplementation
@@ -290,6 +308,23 @@ suppressions:
     where: $.definitions.AccessControlRulesPrivilege.properties.queryParameters
   - code: GetCollectionOnlyHasValueAndNextLink
     from: gallery.json
+    reason: Existing issue from last version.
+# Do suppression for generated swagger
+  - code: PatchResponseCodes
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: GalleryRP.json
+  - code: PatchBodyParametersSchema
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: GalleryRP.json
+  - code: LroPatch202
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: GalleryRP.json
+  - code: AvoidAdditionalProperties
+    reason: The gallery backend service just treats this as a bag of properties to pass to downstream services.
+    from: GalleryRP.json
+    where: $.definitions.AccessControlRulesPrivilege.properties.queryParameters
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: GalleryRP.json
     reason: Existing issue from last version.
 ```
 
