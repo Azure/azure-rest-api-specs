@@ -99,10 +99,6 @@ model CommonClusterProperties {
 
   @doc("Name of the vsan datastore associated with the cluster")
   vsanDatastoreName?: string;
-
-  @doc("Display name of the resource.")
-  @added(Versions.v2024_09_01)
-  displayName?: string;
 }
 
 @doc("A cluster resource")
@@ -140,14 +136,6 @@ model ClusterUpdateProperties {
 
   @doc("The hosts")
   hosts?: string[];
-
-  @doc("Display name of the resource.")
-  @added(Versions.v2024_09_01)
-  displayName?: string;
-
-  @doc("Name of the vsan datastore associated with the cluster")
-  @added(Versions.v2024_09_01)
-  vsanDatastoreName?: string;
 }
 
 @doc("List of all zones and associated hosts for a cluster")
