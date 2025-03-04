@@ -48,8 +48,9 @@ interface Applications {
     API.
     """)
   @route("/applications/{applicationId}")
-  getApplication is ReadOperation<
+  getApplication is ReadOperationNew<
     {
+      ...BatchClientRequestHeaders;
       ...GetApplicationRequiredParameters;
     },
     BatchApplication

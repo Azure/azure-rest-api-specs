@@ -36,6 +36,19 @@ op ReadOperation<
   BatchError
 >;
 
+// TODO: Once we migrate everything in routes.tsp to use this, delete original ReadOperation (above) and rename this to ReadOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@get
+op ReadOperationNew<
+  TPathParams extends TypeSpec.Reflection.Model,
+  TResource
+> is Azure.Core.RpcOperation<
+  TPathParams,
+  TResource & BatchResponseHeaders,
+  NoFilter,
+  BatchError
+>;
+
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @get
 op FileOperation<
