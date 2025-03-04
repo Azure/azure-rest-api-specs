@@ -168,7 +168,7 @@ model FileSystemResourceUpdateProperties {
   /**
    * Encryption Details of the resource
    */
-  encryption?: LiftrBase.EncryptionProperties;
+  encryption?: LiftrBase.EncryptionUpdateProperties;
 }
 
 /**

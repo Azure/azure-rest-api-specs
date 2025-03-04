@@ -461,6 +461,20 @@
         "identityType"
       ]
     },
+    "LiftrBase.EncryptionIdentityUpdateProperties": {
+      "type": "object",
+      "description": "EncryptionIdentityUpdateProperties of Dell FileSystem resource",
+      "properties": {
+        "identityType": {
+          "type": "string",
+          "description": "Identity type - SystemAssigned/UserAssigned - Only UserAssigned is supported now"
+        },
+        "identityResourceId": {
+          "type": "string",
+          "description": "User-assigned identity resource id - Only when user opts for UserAssigned identity and hence optional"
+        }
+      }
+    },
     "LiftrBase.EncryptionProperties": {
       "type": "object",
       "description": "EncryptionProperties of Dell FileSystem resource",
@@ -481,6 +495,24 @@
       "required": [
         "encryptionType"
       ]
+    },
+    "LiftrBase.EncryptionUpdateProperties": {
+      "type": "object",
+      "description": "EncryptionUpdateProperties of Dell FileSystem resource",
+      "properties": {
+        "encryptionType": {
+          "type": "string",
+          "description": "Encryption Type - MMK/CMK"
+        },
+        "keyUrl": {
+          "type": "string",
+          "description": "Versioned Encryption Key Url - Only when user opts for CMK and hence optional"
+        },
+        "encryptionIdentityProperties": {
+          "$ref": "#/definitions/LiftrBase.EncryptionIdentityUpdateProperties",
+          "description": "Identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault - Only when user opts for CMK and hence optional"
+        }
+      }
     },
     "LiftrBase.MarketplaceDetails": {
       "type": "object",
@@ -744,7 +776,7 @@
           "description": "Initial capacity for Dell Filesystem in bytes"
         },
         "encryption": {
-          "$ref": "#/definitions/LiftrBase.EncryptionProperties",
+          "$ref": "#/definitions/LiftrBase.EncryptionUpdateProperties",
           "description": "Encryption Details of the resource"
         }
       }

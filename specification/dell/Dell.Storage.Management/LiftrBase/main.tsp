@@ -153,6 +153,21 @@ model EncryptionIdentityProperties {
 }
 
 /**
+ * EncryptionIdentityUpdateProperties of Dell FileSystem resource
+ */
+model EncryptionIdentityUpdateProperties {
+  /**
+   * Identity type - SystemAssigned/UserAssigned - Only UserAssigned is supported now
+   */
+  identityType?: string;
+
+  /**
+   * User-assigned identity resource id - Only when user opts for UserAssigned identity and hence optional
+   */
+  identityResourceId?: string;
+}
+
+/**
  * EncryptionProperties of Dell FileSystem resource
  */
 model EncryptionProperties {
@@ -170,6 +185,26 @@ model EncryptionProperties {
    * Identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault - Only when user opts for CMK and hence optional
    */
   encryptionIdentityProperties?: EncryptionIdentityProperties;
+}
+
+/**
+ * EncryptionUpdateProperties of Dell FileSystem resource
+ */
+model EncryptionUpdateProperties {
+  /**
+   * Encryption Type - MMK/CMK
+   */
+  encryptionType?: string;
+
+  /**
+   * Versioned Encryption Key Url - Only when user opts for CMK and hence optional
+   */
+  keyUrl?: string;
+
+  /**
+   * Identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault - Only when user opts for CMK and hence optional
+   */
+  encryptionIdentityProperties?: EncryptionIdentityUpdateProperties;
 }
 
 /**
