@@ -277,7 +277,7 @@ export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends Tspcon
   constructor() {
     super(
       "@azure-tools/typespec-ts",
-      "[package-details].name",
+      "package-details.name",
       new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
     );
   }
