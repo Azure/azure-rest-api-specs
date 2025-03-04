@@ -61,14 +61,14 @@ model BucketSource extends Source {
   type: SourceType.Bucket;
 
   @doc("Details for how to connect to the backing data store.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   connection: Connection;
 
   @doc("Details for how to authenticate to the backing data store.")
   authProperties: AuthProperties;
 
   @doc("The host to use when computing the signature for requests to the backing data store. If not provided, defaults to what is provided in the endpoint for the connection.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   hostOverride?: string;
 }
 
