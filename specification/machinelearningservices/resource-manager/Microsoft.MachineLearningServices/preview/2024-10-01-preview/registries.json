@@ -638,22 +638,16 @@
           "x-nullable": true
         },
         "syndicatedRegistries": {
-          "description": "List of tuples containing Guid and SyndicatedRegistry",
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "syndicatedRegistryGuid": {
-                "description": "The Guid of the syndicated registry",
+              "registryId": {
+                "description": "Registry id guid of a destination registry that this registry can syndicate to ",
                 "type": "string",
                 "x-nullable": true
-              },
-              "syndicatedRegistry": {
-                "$ref": "#/definitions/SyndicatedRegistry",
-                "x-nullable": true
               }
-            },
-            "x-nullable": true
+            }
           },
           "x-nullable": true
         },
@@ -733,18 +727,6 @@
         }
       },
       "additionalProperties": false
-    },
-    "SyndicatedRegistry": {
-      "description": "A registry that is syndicated",
-      "type": "object",
-      "properties": {
-        "registryId": {
-          "description": "The Registry Id of the syndicated Registry",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "x-nullable": true
     },
     "ManagedResourceGroupAssignedIdentities": {
       "description": "Details for managed resource group assigned identities.",
