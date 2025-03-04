@@ -54,8 +54,8 @@ model InstanceProperties {
   @doc("The reference to the Schema Registry for this AIO Instance.")
   schemaRegistryRef: SchemaRegistryRef;
 
-  @doc("The features of the AIO Instance.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("The features of the AIO Instance.")
   features?: Record<OperationalMode>;
 }
 
