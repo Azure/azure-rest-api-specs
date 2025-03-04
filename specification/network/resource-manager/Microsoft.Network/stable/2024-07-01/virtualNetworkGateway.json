@@ -917,6 +917,144 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getResiliencyInformation": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetResiliencyInformation",
+        "description": "This operation retrieves the resiliency information for an Express Route Gateway, including the gateway's current resiliency score and recommendations to further improve the score",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "attemptRefresh",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Attempt to recalculate the Resiliency Information for the gateway"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resiliency information for the gateway",
+            "schema": {
+              "$ref": "#/definitions/GatewayResiliencyInformation"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkGatewayResiliencyInformation": {
+            "$ref": "./examples/VirtualNetworkGatewayGetResiliencyInformation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getRoutesInformation": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetRoutesInformation",
+        "description": "This operation retrieves the route set information for an Express Route Gateway based on their resiliency",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "attemptRefresh",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Attempt to recalculate the Route Sets Information for the gateway"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of route sets learned by the gateway based on their resiliency",
+            "schema": {
+              "$ref": "#/definitions/GatewayRouteSetsInformation"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkGatewayRoutesInformation": {
+            "$ref": "./examples/VirtualNetworkGatewayGetRoutesInformation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/setvpnclientipsecparameters": {
       "post": {
         "tags": [
@@ -3704,6 +3842,190 @@
         }
       },
       "description": "List of virtual network gateway routes."
+    },
+    "GatewayResiliencyInformation": {
+      "type": "object",
+      "properties": {
+        "overallScore": {
+          "type": "string",
+          "description": "Current Resiliency Score for the gateway"
+        },
+        "scoreChange": {
+          "type": "string",
+          "description": "Update in the Resiliency Score for the gateway from the last computed score"
+        },
+        "minScoreFromRecommendations": {
+          "type": "string",
+          "description": "Minimum increase expected in the score if the at least one of the recommendations is applied for the gateway"
+        },
+        "maxScoreFromRecommendations": {
+          "type": "string",
+          "description": "Maximum increase expected in the score if all of the recommendations are applied for the gateway"
+        },
+        "lastComputedTime": {
+          "type": "string",
+          "description": "Timestamp denoting the last time when the resiliency score was computed for the gateway"
+        },
+        "nextEligibleComputeTime": {
+          "type": "string",
+          "description": "Timestamp denoting the next eligible time to re-compute the resiliency score for the gateway"
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResiliencyRecommendationComponents"
+          },
+          "description": "List of Resiliency based Recommendation Components for the gateway"
+        }
+      },
+      "description": "Gateway Resiliency Information"
+    },
+    "ResiliencyRecommendationComponents": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Resiliency based Recommendation Component"
+        },
+        "currentScore": {
+          "type": "string",
+          "description": "Current Score of the gateway"
+        },
+        "maxScore": {
+          "type": "string",
+          "description": "Max score that the gateway can achieve if the specified recommendation is applied"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayResiliencyRecommendation"
+          },
+          "description": "List of Gateway Resiliency based Recommendations"
+        }
+      },
+      "description": "Gateway Resiliency based Recommendations"
+    },
+    "GatewayResiliencyRecommendation": {
+      "type": "object",
+      "properties": {
+        "recommendationTitle": {
+          "type": "string",
+          "description": "Recommendation Title"
+        },
+        "recommendationId": {
+          "type": "string",
+          "description": "Recommendation Id"
+        },
+        "severity": {
+          "type": "string",
+          "description": "Impact associated with the recommendation"
+        },
+        "recommendationText": {
+          "type": "string",
+          "description": "Recommendation details"
+        },
+        "callToActionText": {
+          "type": "string",
+          "description": "Acton items to apply the recommendation"
+        },
+        "callToActionLink": {
+          "type": "string",
+          "description": "Link to the public documentation for the associated recommendation"
+        }
+      },
+      "description": "Resiliency Recommendation details"
+    },
+    "RouteSourceDetails": {
+      "type": "object",
+      "properties": {
+        "circuit": {
+          "type": "string",
+          "description": "Express Route Circuit identifier"
+        },
+        "pri": {
+          "type": "string",
+          "description": "Flag to indicate if the route learned from the primary device is active or passive"
+        },
+        "sec": {
+          "type": "string",
+          "description": "Flag to indicate if the route learned from the secondary device is active or passive"
+        }
+      }
+    },
+    "CircuitMetadataMap": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Express Route Circuit Name"
+        },
+        "link": {
+          "type": "string",
+          "description": "Link to the Express Route circuit"
+        },
+        "location": {
+          "type": "string",
+          "description": "Peering location of the Express Route Circuit"
+        }
+      }
+    },
+    "GatewayRouteSet": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Route Set name"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of different locations from where the routes are learned"
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RouteSourceDetails"
+            }
+          },
+          "description": "List of different Route Sources"
+        }
+      }
+    },
+    "GatewayRouteSetsInformation": {
+      "type": "object",
+      "properties": {
+        "lastComputedTime": {
+          "type": "string",
+          "description": "Timestamp denoting the last time when the route sets were computed for the gateway"
+        },
+        "nextEligibleComputeTime": {
+          "type": "string",
+          "description": "Timestamp denoting the next eligible time to re-compute the route sets for the gateway"
+        },
+        "routeSetVersion": {
+          "type": "string",
+          "description": "Version for the route set"
+        },
+        "routeSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayRouteSet"
+          },
+          "description": "List of Gateway Route Sets"
+        },
+        "circuitsMetadataMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CircuitMetadataMap"
+          },
+          "description": "Dictionary containing map of the circuit id and circuit details"
+        }
+      },
+      "description": "Gateway Route Sets Information"
     },
     "TunnelConnectionHealth": {
       "properties": {
