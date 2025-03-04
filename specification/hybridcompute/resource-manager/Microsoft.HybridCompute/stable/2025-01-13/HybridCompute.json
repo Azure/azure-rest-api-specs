@@ -3742,9 +3742,17 @@
           "type": "string",
           "description": "Public Key that the client provides to be used during initial resource onboarding"
         },
-        "tpmEnabled": {
-          "type": "boolean",
-          "description": "Specifies if machine is enabled to use the Trusted Platform Module (TPM)"
+        "identityKeyStore": {
+          "description": "Specifies if machine is enabled to use the Trusted Platform Module (TPM)",
+          "type": "string",
+          "enum": [
+            "TPM",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "ProgramYear",
+            "modelAsString": true
+          }
         },
         "tpmEkCertificate": {
           "type": "string",
