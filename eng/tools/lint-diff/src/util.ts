@@ -204,22 +204,20 @@ export async function getSwaggerDependenciesMap(
   const rootAndDirectoryPath = join(rootPath, directory);
 
   for (const file of swaggerFiles) {
-    // TODO: Use a single parser?
-    let parser = new $RefParser();
-    await parser.resolve(join(rootPath, file), {
+    let parsedRefs = await $RefParser.resolve(join(rootPath, file), {
       resolve: { http: false },
     });
     // TODO: filter should exclude URLs
-    const refs = parser.$refs
+    const refs = parsedRefs
       .paths()
       .filter(
-        (ref) =>
+        (ref: string) =>
           ref.startsWith(rootAndDirectoryPath) && // Inside the target directory
           !ref.includes(`${sep}examples${sep}`), // Exclude examples
       )
       // TODO: +1 requires proper handling of trailing slashes
-      .map((ref) => ref.substring(rootPath.length + 1)) // Relative to rootPath
-      .filter((ref) => ref !== file); // Exclude self-reference
+      .map((ref: string) => ref.substring(rootPath.length + 1)) // Relative to rootPath
+      .filter((ref: string) => ref !== file); // Exclude self-reference
 
     swaggerDependencies.set(file, new Set(refs));
   }
