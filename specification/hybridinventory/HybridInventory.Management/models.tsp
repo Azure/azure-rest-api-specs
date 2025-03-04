@@ -500,6 +500,16 @@ union Language {
    * PLXSLT edition.
    */
   PLXSLT: "PLXSLT",
+
+  /**
+   * INTERNAL edition.
+   */
+  INTERNAL: "INTERNAL",
+
+  /**
+   * C edition.
+   */
+  C: "C",
 }
 
 /**
@@ -624,6 +634,11 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   ]>;
 
   /**
+   * The host machine properties.
+   */
+  hostMachineProperties?: HostMachineProperties;
+
+  /**
    * PGSQL Server port number
    */
   portNumber: int64;
@@ -631,7 +646,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * The pgsql server version.
    */
-  pgsqlVersion?: string;
+  version?: string;
 
   /**
    * The number of database.
@@ -735,9 +750,14 @@ model PgsqlInstanceResourcePatch {
   ]>;
 
   /**
+   * The host machine properties.
+   */
+  hostMachineProperties?: HostMachineProperties;
+
+  /**
    * The pgsql server version.
    */
-  pgsqlVersion?: string;
+  version?: string;
 
   /**
    * The number of database.
@@ -907,6 +927,15 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   databaseDisplayName?: string;
 
   /**
+   * discovered PGSQL Instance Id
+   */
+  pgSqlInstanceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridInventory/PGSQLSites/PGSQLInstances";
+    }
+  ]>;
+
+  /**
    * PGSQL database encoding.
    */
   encoding?: Encoding;
@@ -976,6 +1005,15 @@ model PgsqlDatabaseResourcePatch {
    * The database name.
    */
   databaseDisplayName?: string;
+
+  /**
+   * discovered PGSQL Instance Id
+   */
+  pgSqlInstanceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridInventory/PGSQLSites/PGSQLInstances";
+    }
+  ]>;
 
   /**
    * PGSQL database encoding.
@@ -1080,6 +1118,12 @@ model AgentProperties is AzureResourceProperties {
    * Health details of the agent.
    */
   healthDetails?: AgentHealthProperties;
+
+  /**
+   * Name of the appliance on which agent is running.
+   */
+  @visibility("read", "create")
+  fabricSiteName: string;
 }
 
 /**
@@ -1141,4 +1185,19 @@ model AgentResourcePatchProperties {
 @doc("The Site Tags patch resource definition.")
 model SiteTagsPatch {
   ...TagsUpdate;
+}
+
+/**
+ * Represents a Collation in PostgreSQL.
+ */
+model HostMachineProperties {
+  /**
+   * The machine vCore count.
+   */
+  vCores?: int64;
+
+  /**
+   * The allocated RAM in Machine.
+   */
+  allocatedMemoryInMb?: int64;
 }
