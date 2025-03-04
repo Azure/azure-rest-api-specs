@@ -68,7 +68,10 @@ jobs:
           # Convert placeholder string 'default' to '', which tells the action to checkout the default ref.
           ref: ${{ matrix.ref == 'next' && 'typespec-next' || '' }}
           # Checkout all history for all branches.  Required to merge origin/main.
-          fetch-depth: 0
+          fetch-depth: 1
+
+      - name: Fetch main branch
+        run: git fetch origin main --depth=1 # Fetch only the latest commit from main
 
       - name: git merge origin/main
         run: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge -Xours origin/main
