@@ -13,11 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # Checkout all history for all branches.  Required to merge origin/main.
-          fetch-depth: 0
-
-      - name: git merge origin/main
-        run: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge -Xours origin/main
+          fetch-depth: 2
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
@@ -28,5 +24,5 @@ jobs:
           # step as failed. 
           $ErrorActionPreference = 'Continue'
 
-          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -BaseCommitish:HEAD~1 -HeadCommitish:HEAD~2
+          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
         shell: pwsh
