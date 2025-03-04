@@ -30,9 +30,18 @@ These are the global settings for the CognitiveServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-10
+tag: package-preview-2025-04-01
 ```
 
+
+### Tag: package-preview-2025-04-01-preview
+
+These settings apply only when `--tag=package-preview-2025-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-04-01-preview'
+input-file:
+  - Microsoft.CognitiveServices/preview/2025-04-01-preview/cognitiveservices.json
+```
 
 ### Tag: package-2024-10
 These settings apply only when `--tag=package-2024-10` is specified on the command line.
