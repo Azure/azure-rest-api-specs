@@ -19,12 +19,8 @@ model SiteProperties {
   @doc("Description of Site resource")
   description?: string;
 
-  @doc("AddressResource ArmId of Site resource")
-  addressResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.EdgeOrder/addresses";
-    }
-  ]>;
+  @doc("Physical address of the site")
+  siteAddress?: SiteAddressProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Key-value pairs for labeling the site resource.")
@@ -35,6 +31,27 @@ model SiteProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
+@doc("Site address properties")
+model SiteAddressProperties {
+  @doc("First line of the street address")
+  streetAddress1?: string;
+
+  @doc("Second line of the street address")
+  streetAddress2?: string;
+
+  @doc("City of the address")
+  city?: string;
+
+  @doc("State or province of the address")
+  stateOrProvince?: string;
+
+  @doc("Country of the address")
+  country?: string;
+
+  @doc("Postal or ZIP code of the address")
+  postalCode?: string;
+}
+
 @doc("The updatable properties of the Site.")
 model SiteUpdateProperties {
   @doc("displayName of Site resource")
@@ -43,12 +60,8 @@ model SiteUpdateProperties {
   @doc("Description of Site resource")
   description?: string;
 
-  @doc("AddressResource ArmId of Site resource")
-  addressResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.EdgeOrder/addresses";
-    }
-  ]>;
+  @doc("Physical address of the site")
+  siteAddress?: SiteAddressProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Key-value pairs for labeling the site resource.")
