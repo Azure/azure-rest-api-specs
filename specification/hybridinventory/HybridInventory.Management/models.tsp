@@ -1122,7 +1122,7 @@ model AgentProperties is AzureResourceProperties {
   /**
    * Name of the appliance on which agent is running.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   fabricSiteName: string;
 }
 
