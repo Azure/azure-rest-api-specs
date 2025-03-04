@@ -322,6 +322,7 @@ input-file:
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/futureCapacityReservation.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
   - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
