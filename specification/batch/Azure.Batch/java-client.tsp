@@ -1,10 +1,15 @@
 import "./common.tsp";
+import "./main.tsp";
 import "./routes.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
 
 using global.Azure.Core.Foundations;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Http;
 
+@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
+@TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2024_07_01)
 namespace JavaClient;
 
 // Get Application Operation
@@ -13,16 +18,18 @@ model GetApplicationOptions {
   ...Azure.Batch.BatchClientRequestHeaders;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Application operation.")
-op getApplicationCustomization(
-  ...Azure.Batch.GetApplicationRequiredParameters,
+@route("/applications/{applicationId}")
+op getApplicationCustomization is Azure.Batch.ReadOperationNew<
+  {
+    ...Azure.Batch.GetApplicationRequiredParameters,
 
-  @doc("Optional parameters for Get Application operation.")
-  options?: GetApplicationOptions,
-
-  ...ApiVersionParameter,
-): void;
+    @doc("Optional parameters for Get Application operation.")
+    options?: GetApplicationOptions,
+  },
+  Azure.Batch.BatchApplication
+>;
 
 @@override(Azure.Batch.Applications.getApplication,
   getApplicationCustomization,
