@@ -12,12 +12,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          # Checkout all history for all branches.  Required to merge origin/main.
-          fetch-depth: 0
 
-      - name: git merge origin/main
-        run: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge -Xours origin/main
+      - name: git rebase origin/main
+        run:  |
+          git fetch origin/main
+          git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" rebase -Xtheirs origin/main
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
