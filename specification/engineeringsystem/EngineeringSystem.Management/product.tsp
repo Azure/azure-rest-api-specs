@@ -18,7 +18,7 @@ model Product is ProxyResource<ProductProperties> {
 /** The properties of Product resource. */
 model ProductProperties {
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
