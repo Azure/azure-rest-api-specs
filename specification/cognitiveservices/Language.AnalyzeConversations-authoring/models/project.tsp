@@ -121,7 +121,7 @@ model AnalyzeConversationAuthoringProjectSettings {
 /**
  * An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
  */
-@clientName("AnalyzeConversationInnerErrorModel", "csharp")
+@clientName("ConversationAuthoringInnerErrorModel", "csharp")
 model InnerErrorModel {
   /**
    * One of a server-defined set of error codes.
@@ -877,14 +877,14 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("AnalyzeConversationConfusionMatrixRow", "csharp")
+@clientName("ConversationAuthoringConfusionMatrixRow", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrixRow
   is Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
 
 /**
  * Represents a cell in a confusion matrix.
  */
-@clientName("AnalyzeConversationConfusionMatrixCell", "csharp")
+@clientName("ConversationAuthoringConfusionMatrixCell", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrixCell {
   /**
    * Represents normalized value in percentages.
