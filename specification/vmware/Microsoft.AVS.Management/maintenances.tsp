@@ -140,9 +140,13 @@ model MaintenanceState {
 union MaintenanceStateName {
   string,
 
-  @doc("Maintenance NotScheduled")
+  @doc("Maintenance Not Scheduled")
   NotScheduled: "NotScheduled",
 
+  @doc("Maintenance Scheduled")
+  Scheduled: "Scheduled",
+
+  #deprecated "Use Scheduled instead"
   @doc("Maintenance Planned")
   Planned: "Planned",
 
