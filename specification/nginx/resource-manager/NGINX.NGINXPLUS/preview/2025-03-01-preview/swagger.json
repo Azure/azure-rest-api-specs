@@ -1048,7 +1048,7 @@
           "200": {
             "description": "Successfully retrieved the custom Waf Policy",
             "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicyResponse"
+              "$ref": "#/definitions/NginxDeploymentWafPolicy"
             }
           },
           "default": {
@@ -1097,7 +1097,7 @@
             "name": "body",
             "description": "The Nginx Deployment Waf Policy",
             "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicyRequest"
+              "$ref": "#/definitions/NginxDeploymentWafPolicy"
             }
           }
         ],
@@ -1105,7 +1105,7 @@
           "200": {
             "description": "Successfully Created or Updated the custom Waf Policy",
             "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicyResponse"
+              "$ref": "#/definitions/NginxDeploymentWafPolicy"
             }
           },
           "201": {
@@ -1122,7 +1122,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicyResponse"
+              "$ref": "#/definitions/NginxDeploymentWafPolicy"
             }
           },
           "default": {
@@ -2499,10 +2499,10 @@
         }
       }
     },
-    "NginxDeploymentWafPolicyRequest": {
+    "NginxDeploymentWafPolicy": {
       "type": "object",
       "x-ms-azure-resource": true,
-      "title": "Nginx Deployment Waf Policy Request",
+      "title": "Nginx Deployment Waf Policy",
       "properties": {
         "id": {
           "type": "string"
@@ -2514,33 +2514,7 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyPropertiesRequest"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "readOnly": true
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyResponse": {
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "title": "Nginx Deployment Waf Policy Response",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyPropertiesResponse"
+          "$ref": "#/definitions/NginxDeploymentWafPolicyProperties"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
@@ -2577,6 +2551,7 @@
     "NginxDeploymentWafPolicyApplyingStatus": {
       "type": "object",
       "title": "Nginx Deployment Waf Policy Applying Status",
+      "readOnly": true
       "properties": {
         "code": {
           "$ref": "#/definitions/NginxDeploymentWafPolicyApplyingStatusCode"
@@ -2635,6 +2610,7 @@
     "NginxDeploymentWafPolicyCompilingStatus": {
       "type": "object",
       "title": "Nginx Deployment Waf Policy Compiling Status",
+      "readOnly": true
       "properties": {
         "code": {
           "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatusCode"
@@ -2716,9 +2692,9 @@
         }
       }
     },
-    "NginxDeploymentWafPolicyPropertiesRequest": {
+    "NginxDeploymentWafPolicyProperties": {
       "type": "object",
-      "title": "Nginx Deployment Waf Policy Properties Request",
+      "title": "Nginx Deployment Waf Policy Properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -2731,26 +2707,6 @@
         "filepath": {
           "type": "string",
           "description": "The file path where the Policy is to be saved"
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyPropertiesResponse": {
-      "type": "object",
-      "title": "Nginx Deployment Waf Policy Properties Response",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
-        },
-        "content": {
-          "format": "byte",
-          "type": "string",
-          "description": "The byte content of the Policy",
-          "readOnly": true
-        },
-        "filepath": {
-          "type": "string",
-          "description": "The file path where the Policy is to be saved",
-          "readOnly": true
         },
         "compilingState": {
           "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatus"
