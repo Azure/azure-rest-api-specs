@@ -48,7 +48,7 @@
   "paths": {
     "/aliases": {
       "get": {
-        "operationId": "AliasesOperations_List",
+        "operationId": "Aliases_List",
         "description": "Lists all aliases available for a search service.",
         "parameters": [
           {
@@ -71,15 +71,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceListAliases": {
-            "$ref": "./examples/SearchServiceListAliases.json"
-          }
         }
       },
       "post": {
-        "operationId": "AliasesOperations_Create",
+        "operationId": "Aliases_Create",
         "description": "Creates a new search alias.",
         "parameters": [
           {
@@ -111,17 +106,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceCreateAlias": {
-            "$ref": "./examples/SearchServiceCreateAlias.json"
-          }
         }
       }
     },
     "/aliases('{aliasName}')": {
       "get": {
-        "operationId": "AliasesOperations_Get",
+        "operationId": "Aliases_Get",
         "description": "Retrieves an alias definition.",
         "parameters": [
           {
@@ -151,15 +141,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceGetAlias": {
-            "$ref": "./examples/SearchServiceGetAlias.json"
-          }
         }
       },
       "put": {
-        "operationId": "AliasesOperations_CreateOrUpdate",
+        "operationId": "Aliases_CreateOrUpdate",
         "description": "Creates a new search alias or updates an alias if it already exists.",
         "parameters": [
           {
@@ -234,15 +219,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceCreateOrUpdateAlias": {
-            "$ref": "./examples/SearchServiceCreateOrUpdateAlias.json"
-          }
         }
       },
       "delete": {
-        "operationId": "AliasesOperations_Delete",
+        "operationId": "Aliases_Delete",
         "description": "Deletes a search alias and its associated mapping to an index. This operation\nis permanent, with no recovery option. The mapped index is untouched by this\noperation.",
         "parameters": [
           {
@@ -287,11 +267,6 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "SearchServiceDeleteAlias": {
-            "$ref": "./examples/SearchServiceDeleteAlias.json"
           }
         }
       }

@@ -635,7 +635,7 @@ interface Indexes {
 }
 
 @added(Versions.v2025_03_01_preview)
-interface AliasesOperations {
+interface Aliases {
   /**
    * Creates a new search alias.
    */
