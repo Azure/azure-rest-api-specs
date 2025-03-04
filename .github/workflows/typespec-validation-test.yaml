@@ -18,6 +18,9 @@ on:
       - eng/tools/typespec-validation/**
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   typespec-validation:
     uses: ./.github/workflows/_reusable-eng-tools-test.yaml
