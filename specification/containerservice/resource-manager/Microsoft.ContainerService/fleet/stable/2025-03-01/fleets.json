@@ -2553,6 +2553,11 @@
           "$ref": "#/definitions/FleetMemberProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/FleetMemberStatus",
+          "description": "Status information of the last operation for fleet member.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2608,6 +2613,22 @@
       },
       "readOnly": true
     },
+    "FleetMemberStatus": {
+      "type": "object",
+      "description": "Status information for the fleet member",
+      "properties": {
+        "lastOperationId": {
+          "type": "string",
+          "description": "The last operation ID for the fleet member",
+          "readOnly": true
+        },
+        "lastOperationError": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "The last operation error of the fleet member",
+          "readOnly": true
+        }
+      }
+    },
     "FleetMemberUpdate": {
       "type": "object",
       "description": "The type used for update operations of the FleetMember.",
@@ -2661,6 +2682,11 @@
         "hubProfile": {
           "$ref": "#/definitions/FleetHubProfile",
           "description": "The FleetHubProfile configures the Fleet's hub."
+        },
+        "status": {
+          "$ref": "#/definitions/FleetStatus",
+          "description": "Status information for the fleet.",
+          "readOnly": true
         }
       }
     },
@@ -2712,6 +2738,22 @@
         ]
       },
       "readOnly": true
+    },
+    "FleetStatus": {
+      "type": "object",
+      "description": "Status information for the fleet.",
+      "properties": {
+        "lastOperationId": {
+          "type": "string",
+          "description": "The last operation ID for the fleet.",
+          "readOnly": true
+        },
+        "lastOperationError": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "The last operation error for the fleet.",
+          "readOnly": true
+        }
+      }
     },
     "FleetUpdateStrategy": {
       "type": "object",
