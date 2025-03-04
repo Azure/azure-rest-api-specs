@@ -27,7 +27,7 @@ These are the global settings for the azurearcdata.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-03-01
+tag: package-preview-2025-03
 ```
 
 ``` yaml
@@ -44,11 +44,11 @@ directive:
     reason: No Unicode support for attribute pattern regex on sqlServerInstanceName and others. This should be fixed by tooling.
 ```
 
-### Tag: package-preview-2025-03-01-preview
+### Tag: package-preview-2025-03
 
 These settings apply only when `--tag=package-preview-2025-03-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-03-01-preview'
+```yaml $(tag) == 'package-preview-2025-03'
 input-file:
   - Microsoft.AzureArcData/preview/2025-03-01-preview/activeDirectoryConnectors.json
   - Microsoft.AzureArcData/preview/2025-03-01-preview/azurearcdata.json
