@@ -51,17 +51,17 @@ model DstsServiceClientIdentityResourceProperties {
   azureLocation: azureLocation;
 
   @doc("Provisioning status of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: DscmProvisioningState;
 
   @added(Versions.v2024_06_24_preview)
   @doc("Request ID; a part of provisioning ResultData output.")
-  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   requestId?: string;
 
   @added(Versions.v2024_06_24_preview)
   @doc("Service Client Identity ID; a part of provisioning ResultData output.")
-  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   serviceClientIdentity?: string;
 }
 
@@ -106,7 +106,7 @@ model DstsServiceClientIdentityResource
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
   @segment("dstsServiceClientIdentities") // Start with lower case. Should be plural
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -125,4 +125,7 @@ interface DstsServiceClientIdentity {
   get is ArmResourceRead<DstsServiceClientIdentityResource>;
 }
 
-@@visibility(DstsServiceClientIdentityResource.properties, "read", "create");
+@@visibility(DstsServiceClientIdentityResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);

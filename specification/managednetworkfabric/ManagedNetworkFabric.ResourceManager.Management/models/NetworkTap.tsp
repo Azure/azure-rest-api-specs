@@ -8,7 +8,7 @@ model NetworkTapProperties {
   ...AnnotationResource;
 
   @doc("ARM resource ID of the Network Packet Broker.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   networkPacketBrokerId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkFabrics";
@@ -16,7 +16,7 @@ model NetworkTapProperties {
   ]>;
 
   @doc("Source Tap Rule Id. ARM Resource ID of the Network Tap Rule.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceTapRuleId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkTapRules";
@@ -31,20 +31,20 @@ model NetworkTapProperties {
   pollingType?: PollingType = PollingType.Pull;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Gets the configurations state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provides you the latest status of the NFC service, whether it is Accepted, updating, Succeeded or Failed. During this process, the states keep changing based on the status of Network Tap provisioning.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource. Example -Enabled/Disabled")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 

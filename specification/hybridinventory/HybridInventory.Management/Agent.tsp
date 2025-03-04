@@ -39,7 +39,7 @@ interface Agents {
   /**
    * Patch the Agents resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Agent, PatchModel = AgentResourcePatch>;
 
   /**

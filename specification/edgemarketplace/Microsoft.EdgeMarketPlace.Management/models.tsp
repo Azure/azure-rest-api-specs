@@ -75,7 +75,7 @@ union OfferLaunchType {
 @doc("Publisher properties")
 model PublisherProperties {
   @doc("The resource provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -91,7 +91,7 @@ model OfferProperties {
   offerContent: OfferContent;
 
   @doc("The resource provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("The marketplace skus")

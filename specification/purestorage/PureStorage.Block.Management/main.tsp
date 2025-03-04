@@ -217,7 +217,7 @@ model StoragePool is TrackedResource<StoragePoolProperties> {
   @doc("Name of the storage pool")
   @segment("storagePools")
   @key("storagePoolName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @minLength(1)
   @maxLength(127)
@@ -230,38 +230,38 @@ model StoragePool is TrackedResource<StoragePoolProperties> {
 @doc("Properties of a storage pool")
 model StoragePoolProperties {
   @doc("Pure Storage's internal ID of the storage pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storagePoolInternalId?: string;
 
   @doc("Azure Availability Zone the Pool is located in")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   availabilityZone: string;
 
   @doc("Network properties of the storage pool")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   vnetInjection: VnetInjection;
 
   @doc("How long a destroyed object is kept before being eradicated, in seconds")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataRetentionPeriod?: int64;
 
   @doc("Total bandwidth provisioned for the pool, in MB/s")
   provisionedBandwidthMbPerSec: int64;
 
   @doc("Total I/O operations per second (IOPS) provisioned for the pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisionedIops?: int64;
 
   @doc("AVS connection state summary")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   avs?: AzureVmwareService;
 
   @doc("Provisioning state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Azure resource ID of the Pure Storage Cloud service (reservation resource) this storage pool belongs to")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   reservationResourceId: string;
 }
 
@@ -859,7 +859,7 @@ model AvsStorageContainer is ProxyResource<AvsStorageContainerProperties> {
   @doc("Name of the storage container")
   @segment("avsStorageContainers")
   @key("storageContainerName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
   name: string;
@@ -868,12 +868,12 @@ model AvsStorageContainer is ProxyResource<AvsStorageContainerProperties> {
 @doc("AVS storage container properties")
 model AvsStorageContainerProperties {
   @doc("Storage space usage")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   space?: Space;
 
   @doc("Name of the storage used.")
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @madeOptional(Versions.v3_preview)
   @removed(Versions.v5_preview)
   storageName?: string;
@@ -881,27 +881,27 @@ model AvsStorageContainerProperties {
   @added(Versions.v3_preview)
   @doc("Name of the storage container")
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceName: string;
 
   @removed(Versions.v4_preview)
   @doc("Provisioning state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("Maximum amount of bytes that can be provisioned in this storage container; it must be a multiple of 512; each time a volume is provisioned in this container, its provisionedSize will be counted against the provisionLimit and the provisioning will fail if it goes over (minimum: 1048576 (1MiB), maximum: 4503599627370496 (4PiB)); by default it is unrestricted")
-  @visibility("create", "update", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   provisionedLimit?: int64;
 
   @added(Versions.v4_preview)
   @doc("VMware datastore associated with this storage container (if any)")
   @pattern("(^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9])?$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   datastore?: string;
 
   @added(Versions.v4_preview)
   @doc("Whether the datastore is mounted in VMware or not")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   mounted?: boolean;
 }
 
@@ -943,62 +943,62 @@ model AvsStorageContainerVolume is ProxyResource<VolumeProperties> {
 @doc("Volume properties")
 model VolumeProperties {
   @doc("Pure Storage's internal ID for the storage pool containing the volume")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storagePoolInternalId?: string;
 
   @doc("Azure Resource ID of the storage pool containing this volume")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storagePoolResourceId?: string;
 
   @doc("Pure Storage's internal ID for the volume")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   volumeInternalId?: string;
 
   @doc("Human-readable name of the volume")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   @doc("Storage space usage")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   space?: Space;
 
   @removed(Versions.v4_preview)
   @doc("Name of the Performance Policy applied to the Volume.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   performancePolicy?: VolumePerformancePolicy;
 
   @doc("Volume's soft-deletion state")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   softDeletion: SoftDeletion;
 
   @removed(Versions.v4_preview)
   @doc("Consistency Group the Volume belongs to.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   consistencyGroup?: VolumeConsistencyGroup;
 
   @doc("Volume creation date, as an RFC 3339 timestamp")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdTimestamp?: string;
 
   @doc("Currently provisioned size of the volume, in bytes")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisionedSize?: int64;
 
   @doc("Specify which control plane handles the lifecycle of the volume")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   volumeType?: VolumeType;
 
   @doc("AVS-specific volume information")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   avs?: AvsDiskDetails;
 
   @removed(Versions.v4_preview)
   @doc("Azure Volume Group assigned to the volume.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   azure?: AzureProperties;
 
   @doc("Provisioning state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -1012,16 +1012,16 @@ model VolumePerformancePolicy {
 @doc("Soft-deletion state")
 model SoftDeletion {
   @doc("If false, the resource is active; if true, the resource has been destroyed; resources can be soft-deleted by setting destroyed to true, and recovered by setting it to false")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   destroyed: boolean;
 
   @doc("Date at which the resource will be eradicated and impossible to recover, as an RFC 3339 timestamp; invalid if destroyed is false;")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eradicationTimestamp?: string;
 
   @removed(Versions.v4_preview)
   @doc("Set to the previous volumeResourceId for this volume if destroyed is true, and this used to be a VolumeGroup/Volume, the former Azure resourceId for that VolumeGroup/Volume before it was delete.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   previousResourceId?: string;
 }
 
@@ -1109,39 +1109,39 @@ model AvsVm is ProxyResource<AvsVmProperties> {
 @doc("AVS VM properties")
 model AvsVmProperties {
   @doc("Pure Storage's internal ID for the storage pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storagePoolInternalId?: string;
 
   @doc("Azure resource ID of the storage pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storagePoolResourceId?: string;
 
   @doc("Human-readable name of the AVS VM")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   @doc("Date at which the AVS VM was created, as an RFC 3339 timestamp")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdTimestamp?: string;
 
   @doc("AVS VM's soft-deletion state")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   softDeletion?: SoftDeletion;
 
   @doc("Specify which control plane handles the lifecycle of the volume container")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   volumeContainerType?: VolumeContainerType;
 
   @doc("AVS VM details")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   avs?: AvsVmDetails;
 
   @doc("Contains properties related to used Flash space")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   space?: Space;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

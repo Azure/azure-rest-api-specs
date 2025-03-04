@@ -37,6 +37,6 @@ model DiscoveredAssetEndpointProfileProperties {
   version: int64;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

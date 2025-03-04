@@ -77,7 +77,7 @@ model StorageDiscoveryWorkspaceProperties {
   @madeOptional(ApiVersion.v2025_03_01_preview)
   destinations?: StorageDiscoveryDestination;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ResourceProvisioningState;
 }
@@ -222,7 +222,6 @@ interface StorageDiscoveryWorkspaces {
     StorageDiscoveryWorkspace,
     StorageDiscoveryWorkspaceProperties
   >;
-  @parameterVisibility
   delete is ArmResourceDeleteSync<StorageDiscoveryWorkspace>;
   listByResourceGroup is ArmResourceListByParent<StorageDiscoveryWorkspace>;
   listBySubscription is ArmListBySubscription<StorageDiscoveryWorkspace>;

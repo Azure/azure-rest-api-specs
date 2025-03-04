@@ -30,7 +30,7 @@ model ExposureWorkflowManifestProperties {
   @doc("ring configuration properties.")
   ringConfigurations: Array<RingConfigurationProperties>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

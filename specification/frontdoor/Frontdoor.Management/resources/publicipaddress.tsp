@@ -22,7 +22,7 @@ model PublicIpAddress
   @pattern("[a-zA-Z0-9-]{3,32}")
   @segment("publicIpAddresses")
   @key("publicIpAddress")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

@@ -81,7 +81,7 @@ model Approver {
 @doc("Approvals Resource Properties")
 model ApprovalProperties {
   @doc("Provisioning State.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Parameter for optimizing query results")

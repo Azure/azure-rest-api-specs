@@ -115,15 +115,15 @@ model PublicCloudConnectorProperties {
   awsCloudProfile: AwsCloudProfile;
 
   @doc("Host cloud the public cloud connector.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   hostType: HostType;
 
   @doc("The resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("Connector primary identifier.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectorPrimaryIdentifier?: string;
 }
 
@@ -138,14 +138,14 @@ union HostType {
 @doc("cloud profile for AWS.")
 model AwsCloudProfile {
   @doc("Account id for the AWS account.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   accountId: string;
 
   @doc("List of AWS accounts which need to be excluded.")
   excludedAccounts?: string[];
 
   @doc("Boolean value that indicates whether the account is organizational or not. True represents organization account, whereas false represents a single account.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   isOrganizationalAccount?: boolean = false;
 }
 
@@ -166,7 +166,7 @@ model SolutionConfiguration
 @doc("Solution configuration resource.")
 model SolutionConfigurationProperties {
   @doc("The resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("The type of the solution")
@@ -176,15 +176,15 @@ model SolutionConfigurationProperties {
   solutionSettings?: SolutionSettings;
 
   @doc("The status of solution configurations")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: SolutionConfigurationStatus;
 
   @doc("The detailed message of status details")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   statusDetails?: string;
 
   @doc("The last time resources were inventoried")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastSyncTime?: utcDateTime;
 }
 
@@ -262,7 +262,7 @@ model InventoryResource is ProxyResource<InventoryProperties> {
   @doc("Inventory resource")
   @segment("inventory")
   @key("inventoryId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -285,7 +285,7 @@ model InventoryProperties {
   statusDetails?: string;
 
   @doc("The resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

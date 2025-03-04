@@ -23,19 +23,19 @@ union SimState {
 @doc("Common SIM properties.")
 model CommonSimPropertiesFormat {
   @doc("The provisioning state of the SIM resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The state of the SIM resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   simState?: SimState;
 
   @doc("A dictionary of sites to the provisioning state of this SIM on that site.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   siteProvisioningState?: SiteProvisioning;
 
   @doc("The international mobile subscriber identity (IMSI) for the SIM.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[0-9]{5,15}$")
   internationalMobileSubscriberIdentity: string;
 
@@ -55,11 +55,11 @@ model CommonSimPropertiesFormat {
   staticIpConfiguration?: SimStaticIpProperties[];
 
   @doc("The name of the SIM vendor who provided this SIM, if any.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vendorName?: string;
 
   @doc("The public key fingerprint of the SIM vendor who provided this SIM, if any.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vendorKeyFingerprint?: string;
 }
 
@@ -86,13 +86,13 @@ model SimStaticIpPropertiesStaticIp {
 model SimPropertiesFormat extends CommonSimPropertiesFormat {
   @doc("The Ki value for the SIM.")
   @extension("x-ms-secret", true)
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @pattern("^[0-9a-fA-F]{32}$")
   authenticationKey?: string;
 
   @doc("The Opc value for the SIM.")
   @extension("x-ms-secret", true)
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @pattern("^[0-9a-fA-F]{32}$")
   operatorKeyCode?: string;
 }

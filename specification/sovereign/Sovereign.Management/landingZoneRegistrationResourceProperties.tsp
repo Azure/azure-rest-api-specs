@@ -7,7 +7,7 @@ namespace Microsoft.Sovereign;
 @added(Versions.Preview20241031)
 @doc("The properties of landing zone registration resource type.")
 model LandingZoneRegistrationResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of a user-initiated, control-plane operation on the landing Zone registration resource type.")
   provisioningState?: provisioningState;
 

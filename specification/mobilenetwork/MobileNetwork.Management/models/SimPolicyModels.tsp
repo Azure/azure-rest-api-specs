@@ -20,11 +20,11 @@ union PduSessionType {
 @doc("SIM policy properties. Must be created in the same location as its parent mobile network.")
 model SimPolicyPropertiesFormat {
   @doc("The provisioning state of the SIM policy resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("A dictionary of sites to the provisioning state of this SIM policy on that site.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   siteProvisioningState?: SiteProvisioning;
 
   @doc("Aggregate maximum bit rate across all non-GBR QoS flows of all PDU sessions of a given UE. See 3GPP TS23.501 section 5.7.2.6 for a full description of the UE-AMBR.")

@@ -253,7 +253,7 @@ model AnnotationResource {
 @added(Versions.v2024_06_15_preview)
 model LastOperationProperties {
   @doc("Details status of the last operation performed on the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   details?: string;
 }
 
@@ -426,19 +426,19 @@ model PortGroupPatchProperties is PortGroupProperties;
 @doc("Common fields that are returned in the response for all Azure Resource Manager resources")
 model Resource {
   @doc("Fully qualified resource ID for the resource. E.g. '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   @doc("The name of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("The type of the resource. E.g. 'Microsoft.Compute/virtualMachines' or 'Microsoft.Storage/storageAccounts'")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -461,7 +461,7 @@ model CommonPostActionResponseForStateUpdate {
   ...ErrorResponse;
 
   @doc("Gets the configuration state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 }
 
@@ -470,7 +470,7 @@ model ValidateConfigurationResponse {
   ...ErrorResponse;
 
   @doc("Gets the configuration state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("URL for the details of the response.")
@@ -482,7 +482,7 @@ model CommonPostActionResponseForDeviceUpdate {
   ...ErrorResponse;
 
   @doc("Gets the configuration state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("List of ARM Resource IDs for which the given action applied successfully.")
@@ -511,7 +511,7 @@ model CommonPostActionResponseForDeviceROCommands {
   ...ErrorResponse;
 
   @doc("Gets the configuration state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Predefined link containing Device RO Command output.")
@@ -531,7 +531,7 @@ model CommonPostActionResponseForDeviceRWCommands {
   ...ErrorResponse;
 
   @doc("Gets the configuration state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Predefined link containing Device Rw Command output.")
@@ -621,15 +621,15 @@ model ExportRoutePolicyInformationPatch is ExportRoutePolicyInformation;
 @doc("ProxyResourceBase with no property bag")
 model ProxyResourceBase {
   @doc("Fully qualified resource ID for the resource. E.g. '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   @doc("The type of the resource. E.g. 'Microsoft.Compute/virtualMachines' or 'Microsoft.Storage/storageAccounts'")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -671,7 +671,7 @@ model Layer3IpPrefixProperties {
 @doc("BFD configuration properties")
 model BfdConfiguration {
   @doc("Administrative state of the BfdConfiguration. Example: Enabled | Disabled.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: BfdAdministrativeState = BfdAdministrativeState.Disabled;
 
   @doc("Interval in milliseconds. Example: 300.")
@@ -684,7 +684,7 @@ model BfdConfiguration {
 @doc("BFD configuration properties")
 model BfdPatchConfiguration {
   @doc("Administrative state of the BfdConfiguration. Example: Enabled | Disabled.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: BfdAdministrativeState;
 
   @doc("Interval in milliseconds. Example: 300.")

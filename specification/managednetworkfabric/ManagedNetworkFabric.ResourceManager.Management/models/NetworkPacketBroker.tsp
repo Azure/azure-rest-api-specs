@@ -6,7 +6,7 @@ namespace Microsoft.ManagedNetworkFabric;
 @doc("Network Packet Broker Properties defines the properties of the resource.")
 model NetworkPacketBrokerProperties {
   @doc("ARM resource ID of the Network Fabric.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   networkFabricId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkFabrics";
@@ -14,7 +14,7 @@ model NetworkPacketBrokerProperties {
   ]>;
 
   @doc("List of ARM resource IDs of Network Devices [NPB].")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkDeviceIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkDevices";
@@ -22,7 +22,7 @@ model NetworkPacketBrokerProperties {
   ]>[];
 
   @doc("List of network interfaces across NPB devices that are used to mirror source traffic.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceInterfaceIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkDevices/networkInterfaces";
@@ -30,7 +30,7 @@ model NetworkPacketBrokerProperties {
   ]>[];
 
   @doc("List of network Tap IDs configured on NPB.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkTapIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkTaps";
@@ -38,7 +38,7 @@ model NetworkPacketBrokerProperties {
   ]>[];
 
   @doc("List of neighbor group IDs configured on NPB.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   neighborGroupIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkTaps";
@@ -46,12 +46,12 @@ model NetworkPacketBrokerProperties {
   ]>[];
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

@@ -22,7 +22,7 @@ model NetworkDeviceSkuProperties {
   interfaces?: DeviceInterfaceProperties[];
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

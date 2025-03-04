@@ -64,7 +64,7 @@ enum ProvisioningState {
 @doc("The properties of WeatherForecastResource")
 model WeatherForecastResourceProperties {
   @doc("Provisioning state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @extension("x-ms-identifiers", #["city"])
@@ -78,7 +78,7 @@ model WeatherForecastResource
   @doc("Weather forecast resource name")
   @key("weatherForecastResourceName")
   @segment("forecasts")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

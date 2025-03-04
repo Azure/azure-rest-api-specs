@@ -76,14 +76,14 @@ model TagRule is ProxyResource<MonitoringTagRulesProperties> {
   @pattern("^[a-zA-Z0-9_-]*$")
   @doc("Name of the TagRule")
   @path
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
 @doc("Model for patching TagRules")
 model TagsPatchModel {
   @doc("TagRule name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("TagRule properties")
@@ -110,11 +110,11 @@ interface TagRules {
 
 @doc("Properties specific to the SolarWinds Observability Organization resource")
 model OrganizationProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource")
   provisioningState?: ProvisioningState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("MonitoringStatus of the resource")
   monitoringStatus?: MonitoringStatus;
 
@@ -136,11 +136,11 @@ model OrganizationProperties {
   @doc("Existing Resource Id")
   existingResourceId?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Liftr resource category")
   liftrResourceCategory?: LiftrResourceCategories;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Liftr resource preference. The priority of the resource.")
   liftrResourcePreference?: int32;
 }
@@ -303,7 +303,7 @@ model MetricsStatusResponse {
 
 @doc("The resource-specific properties for this resource.")
 model MonitoringTagRulesProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource")
   provisioningState?: ProvisioningState;
 

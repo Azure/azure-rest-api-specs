@@ -34,7 +34,7 @@ model Pool is TrackedResource<PoolProperties> {
 @doc("Pool properties")
 model PoolProperties {
   @doc("The status of the current operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @minValue(1)

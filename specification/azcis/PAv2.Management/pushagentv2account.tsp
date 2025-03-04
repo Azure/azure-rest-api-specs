@@ -57,7 +57,7 @@ model PushAgentV2AccountResourceProperties {
   tenantId: string;
 
   @doc("Provisioning status of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: PushAgentV2AccountProvisioningState;
 }
 
@@ -68,7 +68,7 @@ model PushAgentV2AccountResource
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
   @segment("pushAgentV2Accounts") // Start with lower case. Should be plural
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -87,4 +87,7 @@ interface PushAgentV2Account {
   get is ArmResourceRead<PushAgentV2AccountResource>;
 }
 
-@@visibility(PushAgentV2AccountResource.properties, "read", "create");
+@@visibility(PushAgentV2AccountResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);

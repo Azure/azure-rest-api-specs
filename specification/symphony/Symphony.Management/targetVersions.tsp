@@ -16,7 +16,7 @@ namespace Microsoft.ToolchainOrchestrator;
 @removed(Versions.v2024_08_01_preview)
 model TargetVersionProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
@@ -49,7 +49,7 @@ model TargetVersionProperties {
   reconciliationPolicy?: ReconciliationPolicyProperties;
 
   @doc("The status of the TargetVersion.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: InstanceTargetStatusProperties;
 }
 
@@ -70,7 +70,7 @@ model TargetVersion is TrackedResource<TargetVersionProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 

@@ -24,7 +24,7 @@ alias MaxManagedRulesCount = 10;
 @doc("The policy properties")
 model PolicyProperties {
   @doc("The status of the last operation")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Global settings for the policy")
@@ -53,7 +53,7 @@ model PolicyProperties {
   managedRulesCustomization?: ManagedRulesCustomization;
 
   @doc("Policy revision. Incremented on each change, starting from 0.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   revision?: int32 = 0;
 }
 

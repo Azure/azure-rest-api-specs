@@ -112,34 +112,34 @@ model EceDeploymentSecrets {
 @discriminator("jobType")
 model ClusterJobProperties {
   @doc("Job Type to support polymorphic resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   jobType: HciJobType;
 
   @doc("Deployment mode to trigger job.")
   deploymentMode?: DeploymentMode = DeploymentMode.Deploy;
 
   @doc("Job provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Unique, immutable job id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   jobId?: string;
 
   @doc("The UTC date and time at which the job started.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTimeUtc?: utcDateTime;
 
   @doc("The UTC date and time at which the job completed.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTimeUtc?: utcDateTime;
 
   @doc("Status of Cluster job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: JobStatus;
 
   @doc("Reported properties for job")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedProperties?: JobReportedProperties;
 }
 

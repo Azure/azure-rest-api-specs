@@ -36,7 +36,7 @@ model AccountLink is TrackedResource<AccountLinkProperties> {
 
 @doc("AccountLink properties")
 model AccountLinkProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

@@ -31,13 +31,13 @@ model ExtensionManager is TrackedResource<ExtensionManagerProperties> {
 model ManagedIdentity {
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @doc("The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-format"
   @doc("The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
 
@@ -54,14 +54,14 @@ enum ManagedIdentityType {
 @doc("The properties of Extension Manager resource")
 model ExtensionManagerProperties {
   @doc("Provisioning state of Extension Manager resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("ARM ID of the custom location resource deployed on the Onboarding Appliance")
   extendedLocation: string;
 
   @doc("ARM ID of the host associated with the extended location")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostResourceId?: string;
 
   @doc("Scenario profile of the extension manager resource.")
@@ -69,7 +69,7 @@ model ExtensionManagerProperties {
   scenarioProfile?: ScenarioProfileObject[];
 
   @doc("Extension profile of the extension manager resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", #["name"])
   extensionProfile?: ExtensionObject[];
 }
@@ -89,7 +89,7 @@ model ExtensionObject {
   name: string;
 
   @doc("List of custom locations associated with the extension. All entries will be unique.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customLocations?: string[];
 
   @doc("Flag to enable/disable the extension")

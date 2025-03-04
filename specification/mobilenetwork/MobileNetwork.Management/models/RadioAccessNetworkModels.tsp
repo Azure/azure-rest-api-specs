@@ -21,7 +21,7 @@ union MetricsIngestionEnabled {
 @doc("Radio access network properties.")
 model RadioAccessNetworkProperties {
   @doc("The provisioning state of the radio access network resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Site in which this radio access network is deployed.")

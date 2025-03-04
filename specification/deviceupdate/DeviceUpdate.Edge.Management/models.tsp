@@ -367,7 +367,7 @@ model UpdateAccountProperties {
   /**
    * Provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -383,7 +383,7 @@ model UpdateAccountProperties {
   /**
    * Device Update update account primary and failover location details
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#[])
   locations?: Location[];
 
@@ -403,7 +403,7 @@ model UpdateAccountProperties {
   /**
    * Subscription or resource group used for device enrollment.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   deviceEnrollmentScope: string;
 
   /**
@@ -517,25 +517,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -586,50 +586,50 @@ model ActiveDeploymentProperties {
    * Provisioning state.
    */
   @added(Versions.v2024_10_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * The deployment Id
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   deploymentId: string;
 
   /**
    * The start date for the active deployment
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime: utcDateTime;
 
   /**
    * The device class Id
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   deviceClassId: string;
 
   /**
    * The update protocol
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   updateProtocol: UpdateProtocol;
 
   /**
    * The deployment workflow metadata
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   workflow: DeploymentWorkflow;
 
   /**
    * The update manifest that contains all of the metadata for the active deployment
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   updateManifest: string;
 
   /**
    * The update manifest signature that is used to validate the integrity of the update manifest
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   updateManifestSignature: string;
 }
 
@@ -678,13 +678,13 @@ model AgentProperties {
    * Provisioning state.
    */
   @added(Versions.v2024_10_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * This is the external device Id of the Microsoft.Devices/Device resource referenced by this agent
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   agentId?: string;
 
   /**
@@ -720,7 +720,7 @@ model AgentProperties {
   /**
    * Enrollment status
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   enrollmentStatus: AgentEnrollmentStatus;
 
   /**
@@ -773,7 +773,7 @@ model DeploymentInfo {
   /**
    * The state the agent is in this deployment
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   state?: DeviceDeploymentState;
 
   /**
@@ -865,7 +865,7 @@ model AgentEnrollmentStatus {
   /**
    * The agent enrollment state.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   state: AgentEnrollmentState;
 
   /**
@@ -945,32 +945,32 @@ model DeploymentProperties {
    * Provisioning state.
    */
   @added(Versions.v2024_10_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * The caller-provided deployment identifier. This cannot be longer than 73 characters, must be all lower-case, and cannot contain '&', '^', '[', ']', '{', '}', '|', '<', '>', forward slash, backslash, or double quote.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   deploymentId: string;
 
   /**
    * The deployment start datetime.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime: utcDateTime;
 
   /**
    * UpdateId that is deployed as part of this deployment.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   updateId: UpdateId;
 
   /**
    * The device classes the deployment is compatible with. This is not provided by the caller during creating the deployment but is automatically determined by Device Update
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   deviceClasses?: string[];
 }
 
@@ -1001,7 +1001,7 @@ model DeploymentDeviceState {
   /**
    * Deployment device state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deviceState: DeviceDeploymentState;
 }
 
@@ -1086,13 +1086,13 @@ model DeviceClassProperties {
    * Provisioning state.
    */
   @added(Versions.v2024_10_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * This is the ID of the Device Class
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   deviceClassId: string;
 
   /**
@@ -1223,7 +1223,7 @@ model UpdateProperties {
    * Provisioning state.
    */
   @added(Versions.v2024_10_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**

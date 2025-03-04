@@ -82,7 +82,7 @@ model EnclaveEndpointProperties {
   resourceCollection?: string[];
 
   @doc("Provisioning State.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)

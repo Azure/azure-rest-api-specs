@@ -27,7 +27,7 @@ model AccessControlListProperties {
   dynamicMatchConfigurations?: CommonDynamicMatchConfiguration[];
 
   @doc("The last synced timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastSyncedTime?: utcDateTime;
 
   @doc("Access Control List (ACL) Type")
@@ -43,20 +43,20 @@ model AccessControlListProperties {
   globalAccessControlListActions?: GlobalAccessControlListActionProperties;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 

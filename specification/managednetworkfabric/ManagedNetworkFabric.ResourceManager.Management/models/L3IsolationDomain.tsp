@@ -27,7 +27,7 @@ model L3IsolationDomainProperties {
   connectedSubnetRoutePolicy?: ConnectedSubnetRoutePolicy;
 
   @doc("ARM Resource ID of the Network Fabric.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   networkFabricId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkFabrics";
@@ -47,20 +47,20 @@ model L3IsolationDomainProperties {
   routePrefixLimit?: RoutePrefixLimitProperties;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 
@@ -268,6 +268,6 @@ model RoutePrefixLimitPatchProperties is RoutePrefixLimitProperties;
 model L3UniqueRouteDistinguisherProperties {
   @doc("List of Unique Route Distinguisher addresses.")
   @added(Versions.v2024_06_15_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueRds?: string[];
 }

@@ -10,7 +10,7 @@ model IpPrefixProperties {
 
   @added(Versions.v2024_06_15_preview)
   @doc("ARM Resource ID of the Network Fabric.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkFabricId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkFabrics";
@@ -22,20 +22,20 @@ model IpPrefixProperties {
   ipPrefixRules: IpPrefixRule[];
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 

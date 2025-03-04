@@ -20,35 +20,35 @@ model Server is TrackedResource<ServerProperties> {
 
 @doc("Details of the AszLabHw Server.")
 model ServerProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The current status of the GoalState")
   resourceManager?: ResourceManager;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @doc("User name of the account credential to authenticate to the server.")
   userName?: string;
 
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @doc("Keyvault Uri for the password of the account credential to authenticate to the server.")
   userPasswordKeyVaultUri?: url;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Server association with LabServer status.")
   associationStatus?: UserLabResourceAssociationStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("IP address of the associated LabServer's BMC.")
   bmcIpAddress?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Inventory Information of the associated LabServer.")
   inventory?: System;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Maintenance status of the associated LabServer.")
   maintenanceStatus?: UserLabResourceMaintenanceStatus;
 }

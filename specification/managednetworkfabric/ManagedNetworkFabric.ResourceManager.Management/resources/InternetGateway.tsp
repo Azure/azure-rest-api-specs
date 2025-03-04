@@ -18,7 +18,7 @@ model InternetGateway
   @path
   @key("internetGatewayName")
   @segment("internetGateways")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The Internet Gateway Properties */
@@ -34,7 +34,7 @@ interface InternetGateways {
   create is ArmResourceCreateOrReplaceAsync<InternetGateway>;
 
   @doc("Execute patch on Network Fabric Service Internet Gateway.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<InternetGateway, InternetGatewayPatch>;
 
   @doc("Execute a delete on Network Fabric Service Internet Gateway.")

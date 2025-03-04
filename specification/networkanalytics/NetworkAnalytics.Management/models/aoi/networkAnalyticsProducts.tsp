@@ -25,12 +25,12 @@ model NetworkAnalyticsProducts
 @removed(Versions.v2023_11_15)
 model NetworkAnalyticsProductsProperties {
   @doc("The network analytics product provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The network analytics product information")
   @extension("x-ms-identifiers", #["productName"])
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   networkAnalyticsProductInformation: NetworkAnalyticsProductInformation[];
 }
 

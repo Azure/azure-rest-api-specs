@@ -27,7 +27,7 @@ model DataPreview is TrackedResource<DataPreviewProperties> {
   @path
   @key("dataPreview")
   @segment("dataPreview")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^default$")
   name: string;
 }

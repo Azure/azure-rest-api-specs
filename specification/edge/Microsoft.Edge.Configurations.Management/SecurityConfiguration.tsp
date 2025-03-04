@@ -39,7 +39,7 @@ model SecurityConfiguration is ProxyResource<SecurityConfigurationProperties> {
 @doc("SecurityConfiguration Properties")
 model SecurityConfigurationProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("Scenario in which this configuration is used")
@@ -60,7 +60,7 @@ model SecretReference {
   ]>;
 
   @doc("vaultUri of the keyvault")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vaultUri: url;
 
   @doc("uri of the secret")

@@ -66,7 +66,7 @@ union ProvisioningState {
 @doc("Common properties for all azure tracked and proxy resources.")
 model AzureResourceProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -557,25 +557,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -675,7 +675,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * Dictionary of server parameters for the instance
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["key", "value"])
   serverParameters?: ServerParameter[];
 
@@ -1067,13 +1067,13 @@ model AgentProperties is AzureResourceProperties {
   /**
    * Service principal identity details used by agent for communication to the service.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   servicePrincipalIdentityDetails: AgentSpnProperties;
 
   /**
    * Name of the appliance on which agent is running.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   migrateApplianceName: string;
 
   /**

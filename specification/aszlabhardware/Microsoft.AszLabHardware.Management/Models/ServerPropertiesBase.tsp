@@ -11,19 +11,19 @@ union PhysicalLocation {
 
 @doc("AszLabHardware.Lab/Server properties")
 model ServerPropertiesBase {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The Serial Number of the Server.")
   serialNumber: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Asset tag of the server")
   assetTag: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Server Hardware Information")
   hardware?: HardwareInfo;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Physical location of the server")
   physicalLocation?: PhysicalLocation;
 }

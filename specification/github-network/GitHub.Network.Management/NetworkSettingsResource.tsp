@@ -26,7 +26,7 @@ model NetworkSettingsResource
   @path
   @key("networkSettingsName")
   @segment("networkSettings")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
@@ -46,7 +46,8 @@ interface NetworkSettingsResources {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @doc("Updates the properties of an existing GitHub.Network networkSettings resource with the specified update parameters.")
-  @parameterVisibility("read")
+  @parameterVisibility(Lifecycle.Read)
+  @patch(#{ implicitOptionality: false })
   @operationId("networkSettings_Update")
   update is ArmResourcePatchSync<
     NetworkSettingsResource,

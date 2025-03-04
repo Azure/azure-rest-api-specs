@@ -18,41 +18,41 @@ namespace Microsoft.DeviceRegistry;
 @doc("Defines the device base properties.")
 model DeviceBaseProperties {
   @doc("Gets a unique identifier for this resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uuid?: string;
 
   @doc("Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.")
   enabled?: boolean = true;
 
   @doc("Gets the device Id provided by customer.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   externalDeviceId?: string;
 
   @doc("Device Template Id used to create a device.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   deviceTemplateId?: string;
 
   @doc("The Microsoft Entra ID group the device is a member of.")
   deviceGroupId?: string;
 
   @doc("Hardware manufacturer name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   manufacturer?: string;
 
   @doc("Hardware model name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `model`?: string;
 
   @doc("operating system name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operatingSystem?: string;
 
   @doc("operating system version.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   operatingSystemVersion?: string;
 
   @doc("Identity for the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   identity?: DeviceIdentity;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
@@ -60,7 +60,7 @@ model DeviceBaseProperties {
   attributes?: Record<unknown>;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

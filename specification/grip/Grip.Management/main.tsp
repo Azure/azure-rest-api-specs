@@ -408,7 +408,7 @@ model JobDefinitionProperties {
   tier: int32;
 
   @doc("Provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -417,7 +417,7 @@ model JobDefinitionResource is ProxyResource<JobDefinitionProperties> {
   @pattern("^[a-zA-Z0-9-]{3,50}$")
   @key("jobName")
   @segment("jobs")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

@@ -43,7 +43,7 @@ interface DevicePools {
   delete is ArmResourceDeleteWithoutOkAsync<DevicePool>;
 
   @doc("Update a devicePool")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<DevicePool, DevicePoolPatch>;
 
   @doc("List all device pools in a resource group.")
@@ -95,7 +95,7 @@ model ClaimDeviceRequest {
 @doc("Properties for device pool.")
 model DevicePoolProperties {
   @doc("The provisioning state of a resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("List of machines in device pool.")
@@ -103,7 +103,7 @@ model DevicePoolProperties {
   devices?: DeviceDetail[];
 
   @doc("Custom Location Resource Id for the pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customLocationResourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Custom Location Name for the pool, default: <DevicePoolName>-CL")
@@ -125,6 +125,6 @@ model DeviceDetail {
   deviceResourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Resource Id of group device belongs to.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   claimedBy?: string;
 }

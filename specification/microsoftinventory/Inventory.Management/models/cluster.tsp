@@ -12,6 +12,6 @@ model ClusterProperties {
   datacenterId: DatacenterResourceId;
 
   @doc("Provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

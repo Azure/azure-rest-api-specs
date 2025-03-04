@@ -59,7 +59,7 @@ model MqttBridgeConnectorProperties {
   @doc("The protocol to use for connecting with Brokers.")
   protocol: MqttProtocol;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
@@ -150,7 +150,7 @@ model MqttBridgeTopicMapProperties {
   @OpenAPI.extension("x-ms-identifiers", #[])
   routes?: MqttBridgeRoutes[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

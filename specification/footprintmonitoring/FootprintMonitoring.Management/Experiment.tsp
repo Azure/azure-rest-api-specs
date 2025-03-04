@@ -26,7 +26,7 @@ model Experiment is Azure.ResourceManager.ProxyResource<ExperimentProperties> {
   /**
    * The type of the resource.
    */
-  // @visibility("read")
+  //@visibility(Lifecycle.Read)
   // type?: string;
 }
 

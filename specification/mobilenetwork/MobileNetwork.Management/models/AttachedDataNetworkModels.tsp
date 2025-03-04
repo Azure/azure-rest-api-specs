@@ -20,7 +20,7 @@ union NaptEnabled {
 @doc("Data network properties.")
 model AttachedDataNetworkPropertiesFormat {
   @doc("The provisioning state of the attached data network resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The user plane interface on the data network. For 5G networks, this is the N6 interface. For 4G networks, this is the SGi interface.")

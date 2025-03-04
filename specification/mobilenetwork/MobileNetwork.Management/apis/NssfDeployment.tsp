@@ -23,7 +23,7 @@ model NssfDeploymentResource
   @key("nssfDeploymentName")
   @path
   @segment("nssfDeployments")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 

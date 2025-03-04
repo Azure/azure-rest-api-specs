@@ -76,18 +76,18 @@ model Index is TrackedResource<IndexProperties> {
   @path
   @key("name")
   @segment("indexes")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The name of the index resource.")
   name: string;
 }
 
 @doc("The properties of the index.")
 model IndexProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The current provisioning state of the index.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The endpoint at which the index can be accessed.")
   endpoint?: string;
 

@@ -92,20 +92,20 @@ model NetworkToNetworkInterconnectProperties {
   conditionalDefaultRouteConfiguration?: ConditionalDefaultRouteProperties;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 
@@ -241,7 +241,7 @@ model OptionBLayer3ConfigurationPatchProperties {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("ASN of CE devices for CE/PE connectivity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricASN?: int64;
 
   @doc("Provider Edge (PE) Loopback IP Address.")
@@ -278,7 +278,7 @@ model OptionBLayer3Configuration {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("ASN of CE devices for CE/PE connectivity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricASN?: int64;
 
   @doc("Provider Edge (PE) Loopback IP Address.")

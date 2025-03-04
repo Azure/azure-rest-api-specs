@@ -180,21 +180,21 @@ model SharedParameters {
    * Name of the property. This can be updated by Author only. Not allowed for customization.
    */
   @doc("Name of the property.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /**
    * Data type of the value. This can be updated by Author only. Not allowed for customization.
    */
   @doc("Data type of the value.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataType: DataType;
 
   /**
    * Unit of the property. This can be updated by Author only. Not allowed for customization.
    */
   @doc("Unit of the property.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   unit: string;
 
   /**
@@ -237,7 +237,7 @@ model CheckConfiguration {
    * The origin of how the check applied at the role level in the virtual instance.
    */
   @doc("The origin of how the check applied at the role level in the virtual instance.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   originType?: CheckOriginType;
 
   /**
@@ -267,7 +267,7 @@ model RoleConfiguration {
    * Name of the role. This can be updated by Author only. Not allowed for customization.
    */
   @doc("Name of the role.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   roleName: string;
 
   /**
@@ -337,7 +337,7 @@ model ConfigurationChecksTemplateProperties {
    * The provisioning state of the resource.
    */
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ConfigurationChecksTemplateProvisioningState;
 
   /**

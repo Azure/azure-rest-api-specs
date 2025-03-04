@@ -11,11 +11,11 @@ namespace Microsoft.MobileNetwork;
 @doc("Cluster Service Properties.")
 model ClusterServiceResourceProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Cluster type (Lab or Production)")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   deploymentType: SkuDeploymentType;
 
   @doc("Azure for Operators 5G Core Release Version.  This is applied to all platform as a service (PaaS) components and running workloads in this cluster")
@@ -37,12 +37,12 @@ model ClusterServiceResourceProperties {
   uamiResourceId: UamiIdPropertyIdProperty;
 
   @doc("Operational status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operationalStatus?: OperationalStatus;
 
   @added(Versions.v2024_05_15_preview)
   @doc("Associated cluster workload resource identifiers")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   associatedWorkloadResources?: AssociatedClusterWorkloadIdProperty[];
 }
 

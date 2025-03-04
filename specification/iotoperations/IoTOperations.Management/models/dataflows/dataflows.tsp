@@ -28,7 +28,7 @@ model DataFlowResource is ProxyResource<DataFlowProperties> {
   // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
@@ -44,7 +44,7 @@ model DataFlowProperties {
   @OpenAPI.extension("x-ms-identifiers", #[])
   operations: DataFlowOperation[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

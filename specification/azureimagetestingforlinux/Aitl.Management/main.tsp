@@ -42,7 +42,7 @@ namespace Microsoft.AzureImageTestingForLinux;
 @doc("General resource properties.")
 model ResourceProperties {
   @doc("Resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @lroStatus
   provisioningState?: ProvisioningState;
 }

@@ -315,7 +315,7 @@ model InformaticaServerlessRuntimeResource
 
 @doc("Properties specific to the Informatica DataManagement Organization resource.")
 model OrganizationProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource.")
   provisioningState?: ProvisioningState;
 
@@ -362,7 +362,7 @@ model MarketplaceDetails {
   marketplaceSubscriptionId?: string;
 
   @added(Versions.v2024_11_29_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Marketplace subscription status of a resource")
   marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
 
@@ -453,7 +453,7 @@ model ServerlessMetadataResponse {
 
 @doc("Serverless Runtime properties.")
 model InformaticaServerlessRuntimeProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource.")
   provisioningState?: ProvisioningState;
 
@@ -747,7 +747,7 @@ model MarketplaceDetailsUpdate {
   marketplaceSubscriptionId?: string;
 
   @added(Versions.v2024_11_29_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Marketplace subscription status of a resource")
   marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
 

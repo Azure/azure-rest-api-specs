@@ -7,11 +7,11 @@ union ExternalReference {
 
 @doc("The OneAsset id backing a resource")
 model OneAssetReference {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("OneAsset type")
   type: "OneAsset";
 
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The OneAsset configuration id")
   configId?: string;
 }

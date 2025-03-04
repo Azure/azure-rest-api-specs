@@ -71,7 +71,7 @@ model BrokerProperties {
   @doc("The Running Mode of the Broker Deployment.")
   mode: RunMode;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -413,7 +413,7 @@ model BrokerListenerProperties {
   @doc("Defines configuration of a TLS server certificate. NOTE Enum - Only one TLS Cert method is supported")
   tls?: TlsCertMethod;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -507,7 +507,7 @@ model BrokerAuthenticationProperties {
   @doc("The array of listener Resources it supports.")
   listenerRef: string[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -640,7 +640,7 @@ model BrokerAuthorizationProperties {
   @doc("The array of listener Resources it supports.")
   listenerRef: string[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

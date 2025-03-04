@@ -76,7 +76,7 @@ model BgpPeerProperties {
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   nodeSelector?: Label[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Resource provision state")
   provisioningState?: ProvisioningState;
 }

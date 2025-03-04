@@ -26,7 +26,7 @@ model VirtualizedMmeDeploymentResource
   @key("virtualizedMmeDeploymentName")
   @path
   @segment("virtualizedMmeDeployments")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 

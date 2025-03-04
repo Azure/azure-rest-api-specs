@@ -21,7 +21,7 @@ model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
 @added(Versions.v2023_11_15)
 model DataProductsCatalogProperties {
   @doc("The data catalog provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The data product publisher information.")

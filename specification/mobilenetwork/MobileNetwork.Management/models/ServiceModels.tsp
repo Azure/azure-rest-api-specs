@@ -34,7 +34,7 @@ union SdfDirection {
 @doc("Service properties.")
 model ServicePropertiesFormat {
   @doc("The provisioning state of the service resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("A precedence value that is used to decide between services when identifying the QoS values to use for a particular SIM. A lower value means a higher priority. This value should be unique among all services configured in the mobile network.")

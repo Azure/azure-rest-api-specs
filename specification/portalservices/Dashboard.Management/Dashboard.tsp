@@ -20,7 +20,7 @@ model Dashboard
   @key("dashboardName")
   @segment("dashboards")
   @path
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

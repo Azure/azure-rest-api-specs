@@ -9,7 +9,7 @@ namespace Microsoft.MobileNetwork;
 @doc("Edge Virtual Network Properties")
 model EdgeVirtualNetworkPropertiesFormat {
   @doc("The provisioning state of the Edge Virtual Network resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("A list of edge subnets in a Virtual Network.")

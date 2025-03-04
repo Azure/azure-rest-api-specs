@@ -55,7 +55,7 @@ interface FileSystems {
   /**
    * Update a FileSystemResource
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     LiftrBase.Storage.FileSystemResource,
     LiftrBase.Storage.FileSystemResourceUpdate

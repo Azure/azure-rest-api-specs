@@ -42,11 +42,11 @@ model HealthModelProperties {
   @doc("Active state of the health model")
   activeState: ActiveState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Version number of the model")
   versionNumber?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ResourceProvisioningState;
 
@@ -319,7 +319,7 @@ model LogQuery extends Query {
   dataType: ResultDataType;
 
   @doc("Query Text in encoded format")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   encodedQuery?: string;
 }
 
@@ -445,13 +445,13 @@ model HealthModelVersion is ProxyResource<HealthModelVersionProperties> {
   @segment("versions")
   @path
   @doc("Version number of a health model")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
 @doc("HealthModel properties")
 model HealthModelVersionProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ResourceProvisioningState;
 
@@ -461,7 +461,7 @@ model HealthModelVersionProperties {
 =======
   @extension("x-ms-identifiers", #["nodeId"])
 >>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nodes?: Node[];
 }
 
@@ -521,7 +521,7 @@ model Snapshot is ProxyResource<SnapshotProperties> {
   @segment("snapshots")
   @path
   @doc("Id of the snapshot. Use 'latest' to get the latest snapshot.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -555,7 +555,7 @@ model SnapshotProperties {
 >>>>>>> df72356ecde5888624c1e6d9ecd108188fcb38f3
   queryResults?: QueryResult[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ResourceProvisioningState;
 }

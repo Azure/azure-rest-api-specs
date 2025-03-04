@@ -9,7 +9,7 @@ namespace Microsoft.MobileNetwork;
 @doc("Mobile network properties.")
 model MobileNetworkPropertiesFormat {
   @doc("The provisioning state of the mobile network resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The unique public land mobile network identifier for the network. If both 'publicLandMobileNetworks' and 'publicLandMobileNetworkIdentifier' are specified, then the 'publicLandMobileNetworks' will take precedence.")
@@ -22,7 +22,7 @@ model MobileNetworkPropertiesFormat {
   publicLandMobileNetworks?: PublicLandMobileNetwork[];
 
   @doc("The mobile network resource identifier")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serviceKey?: string;
 
   @doc("The list of endpoint security groups used in the mobile network.")

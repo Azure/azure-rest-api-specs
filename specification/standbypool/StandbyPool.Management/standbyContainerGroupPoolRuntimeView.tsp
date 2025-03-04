@@ -28,7 +28,7 @@ model StandbyContainerGroupPoolRuntimeViewResource
   @pattern("^[a-zA-Z0-9-]{0,24}$")
   @key("runtimeView")
   @segment("runtimeViews")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The unique identifier for the runtime view. The input string should be the word 'latest', which will get the latest runtime view of the pool, otherwise the request will fail with NotFound exception.")
   @path
   name: string;
@@ -38,17 +38,17 @@ model StandbyContainerGroupPoolRuntimeViewResource
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
 model StandbyContainerGroupPoolRuntimeViewResourceProperties {
   @doc("A list containing the counts of container groups in each possible state, as known by the StandbyPool resource provider.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#[])
   instanceCountSummary: ContainerGroupInstanceCountSummary[];
 
   @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   @doc("Display status of the standby pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: PoolStatus;
 
   @doc("Displays the provisioning state of the standby pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

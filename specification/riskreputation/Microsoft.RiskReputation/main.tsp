@@ -36,7 +36,7 @@ model PaymentTrustScore is ProxyResource<PaymentTrustScoreProperties> {
   @key
   @segment("paymentTrustScores")
   @path
-  @visibility("query")
+  @visibility(Lifecycle.Query)
   name: "default";
 }
 

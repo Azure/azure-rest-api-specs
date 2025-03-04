@@ -20,43 +20,43 @@ model LabServerV1 is TrackedResource<LabServerV1Properties> {
 
 @doc("Details of the AszLabHw LabServer.")
 model LabServerV1Properties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The current status of the GoalState")
   resourceManager?: ResourceManager;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The Serial Number of the LabServer.")
   serialNumber: string;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("IP address of the LabServer's BMC.")
   bmcIpAddress: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("LabServer Inventory Information")
   inventory?: System;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Physical location of the LabServer.")
   physicalLocation?: string;
 
-  @visibility("create", "update", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   @doc("LabServer availability for reservation.")
   availableForReservationState?: LabResourceAvailableForReservationState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("LabServer reservation status.")
   reservationStatus?: LabResourceReservationStatus;
 
-  @visibility("create", "update", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   @doc("LabServer maintenance request state.")
   maintenanceRequestState?: LabResourceMaintenanceRequestState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("LabServer maintenance status.")
   maintenanceStatus?: LabResourceMaintenanceStatus;
 }

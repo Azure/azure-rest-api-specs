@@ -28,7 +28,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("Details of the HealthPlatform Account.")
 model AccountProperties {
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

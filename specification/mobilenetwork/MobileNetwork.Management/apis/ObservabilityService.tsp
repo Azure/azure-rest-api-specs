@@ -23,7 +23,7 @@ model ObservabilityServiceResource
   @key("observabilityServiceName")
   @path
   @segment("observabilityServices")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 

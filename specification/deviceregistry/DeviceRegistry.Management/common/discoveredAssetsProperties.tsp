@@ -19,7 +19,7 @@ namespace Microsoft.DeviceRegistry;
 @added(Versions.v2024_07_01_preview)
 model DiscoveredAssetProperties {
   @doc("A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must provide asset endpoint profile name.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   assetEndpointProfileRef: string;
 
   @doc("Identifier used to detect changes in the asset.")
@@ -70,7 +70,7 @@ model DiscoveredAssetProperties {
   events?: DiscoveredEvent[];
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

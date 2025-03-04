@@ -80,25 +80,25 @@ union ProvisioningState {
 
 @doc("Details of the CompositeSolutionDefinition.")
 model CompositeSolutionDefinitionProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Bundle Profile.")
   bundleProfile: BundleProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Parameters for the composite solution")
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   parameters?: Array<Parameter>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Credentials for the composite solution")
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   credentials?: Array<Credential>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("List of mixins used in the composite solution package")
   mixins?: Array<string>;
 }
@@ -114,35 +114,35 @@ model CrpMetadata {
 
 @doc("Details of the CompositeSolution.")
 model CompositeSolutionProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("compositeSolutionDefinition resource identifier indicating which solution to deploy")
   compositeSolutionDefinitionId: string;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Bundle Parameters.")
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   parameters: Array<ParameterValue>;
 
   // This isn't actually a secret, but a reference to a secret in AKV, so is it safe to return back in the read request?
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Array of secret")
   @Azure.ResourceManager.identifiers(#["credentialName"])
   credentials?: Array<KeyVaultSecretReference>;
 
   // TODO: Do we need this?
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Bundle Outputs.")
   outputs?: Array<string>; // TODO: Array or Record?
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Bundle Friendly Name.")
   friendlyName?: string;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Solution Center Offer ID.")
   saasOfferId?: string;
 }
@@ -278,7 +278,7 @@ model Credential {
 @doc("Detailed Status Response")
 model DetailedStatusResponse {
   @doc("Array of responses")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["resourceId"])
   value: Array<MixinDetailedStatus>;
 }
@@ -322,11 +322,11 @@ model MixinDetailedStatus {
 @doc("The properties related to Bundle")
 model BundleProfile {
   @doc("OCI repository of the current bundle")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   repository: string;
 
   @doc("OCI tag of the current bundle definition.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tag?: string;
 }
 

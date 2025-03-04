@@ -30,7 +30,7 @@ union ProvisioningState {
 @doc("Details of the Message Catalog.")
 model MessagingCatalogProperties {
   @doc("A unique absolute URL for an catalog.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   self?: string;
 
   @doc("A summary of the purpose of the catalog.")
@@ -44,31 +44,31 @@ model MessagingCatalogProperties {
   labels?: ResourceLabel[];
 
   @doc("A unique absolute URL for the list of endpoints for this catalog.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endpointsUrl?: string;
 
   @doc("A count of the amount of endpoints in this catalog.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endpointsCount?: int32;
 
   @doc("A unique absolute URL for the list of message groups for this catalog.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   messageGroupsUrl?: string;
 
   @doc("A count of the amount of message groups in this catalog.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   messageGroupsCount?: int32;
 
   @doc("A unique absolute URL for the list of schema groups for this catalog.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   schemaGroupsUrl?: string;
 
   @doc("A count of the amount of schema groups in this catalog.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   schemaGroupsCount?: int32;
 
   @doc("The provisioning state of the application rule collection resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

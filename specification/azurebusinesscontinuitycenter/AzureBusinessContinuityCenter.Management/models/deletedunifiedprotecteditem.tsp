@@ -16,7 +16,7 @@ model DeletedUnifiedProtectedItemResource
   @key("deletedUnifiedProtectedItemsName")
   @segment("deletedUnifiedProtectedItems")
   @path
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The name of the deleted unified protected item.")
   @pattern("^[a-zA-Z0-9;/_]+$")
   name: string;

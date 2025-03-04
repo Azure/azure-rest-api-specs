@@ -64,7 +64,7 @@ interface Profiles {
       },
     }
   )
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Profile, ProfilePatch>;
 
   /**

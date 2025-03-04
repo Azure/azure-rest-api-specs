@@ -31,7 +31,7 @@ model SiteProperties {
   labels?: Record<string>;
 
   @doc("Provisioning state of last operation")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -68,26 +68,26 @@ model SiteAwareResourceTypeProperties {
   supportedResourceTypes?: SiteAwareResourceTypeDetails[];
 
   @doc("Provisioning state of last operation")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
 @doc("The properties and availability status of each resource type on which aggregations will be performed over Site.")
 model SiteAwareResourceTypeDetails {
   @doc("Name of the resource-type")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   @doc("fully qualified name of the resource-type")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   @doc("Distinguishes whether RP is already Supported or ComingSoon")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   availabilityStatus?: AvailabilityStatus;
 
   @doc("Aggregation properties for the resource-type")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   supportedCapabilities?: string[];
 }
 

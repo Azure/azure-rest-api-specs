@@ -25,7 +25,7 @@ model InvestigationResource is ExtensionResource<InvestigationProperties> {
   @path
   @key("investigationId")
   @segment("investigations")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // Should be 255-2 charachters long, without any of these invalid chars- :@/#%&+*<>?\\
   @pattern("^[^:@/#&+*<>\\?]{2,253}$")
   name: string;
@@ -237,11 +237,11 @@ model InvestigationProperties {
   runConfiguration?: InvestigationRunConfiguration;
 
   @doc("Denotes the state of the investigation operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: InvestigationProvisioningState;
 
   @doc("The investigation that ran on the given scope.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   investigation?: Investigation;
 }
 
@@ -308,7 +308,7 @@ model Investigation {
   execution?: Execution;
 
   @doc("The investigation result.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   result?: InvestigationResult;
 
   @doc("Child investigations.")
@@ -326,7 +326,7 @@ model Execution {
   completedOn?: utcDateTime;
 
   @doc("Denotes the state of the investigation operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: InvestigationProvisioningState;
 }
 
@@ -376,25 +376,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: Foundations.SystemData;
 }
 

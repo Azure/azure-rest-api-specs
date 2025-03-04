@@ -54,7 +54,7 @@ union ObsoleteVersion {
 @doc("Packet core control plane version properties.")
 model PacketCoreControlPlaneVersionPropertiesFormat {
   @doc("The provisioning state of the packet core control plane version resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Platform specific packet core control plane version properties.")

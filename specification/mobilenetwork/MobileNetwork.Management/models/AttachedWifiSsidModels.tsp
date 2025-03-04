@@ -9,7 +9,7 @@ namespace Microsoft.MobileNetwork;
 @doc("Wi-Fi Attached SSID properties.")
 model AttachedWifiSsidPropertiesFormat {
   @doc("The provisioning state of the Wi-Fi Attached SSID resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The interface on the access side which receives traffic for this SSID.")

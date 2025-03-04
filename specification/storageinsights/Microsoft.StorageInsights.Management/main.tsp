@@ -55,7 +55,7 @@ model StorageCollectionRuleProperties {
   @doc("The configuration of the storage collection rule.")
   configuration: StorageCollectionRuleConfiguration;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ResourceProvisioningState;
 }

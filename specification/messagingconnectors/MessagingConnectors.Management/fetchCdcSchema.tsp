@@ -27,7 +27,7 @@ model SchemaResource is TrackedResource<SchemaRequestProperties> {
   @path
   @key("schema")
   @segment("schema")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^default$")
   name: string;
 }

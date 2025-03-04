@@ -33,7 +33,7 @@ model EnclaveListItem {
   createdBy?: string;
 
   @doc("Provisioning State.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -94,7 +94,7 @@ model GovernedServiceItem {
   id: ServiceIdentifier;
 
   @doc("service name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable).")
@@ -107,7 +107,7 @@ model GovernedServiceItem {
   auditOnly?: boolean;
 
   @doc("initiatives associated with this service")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   initiatives?: string[];
 }
 
@@ -202,7 +202,7 @@ model CommunityProperties {
   dnsServers?: string[];
 
   @doc("Provisioning State.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("List of resource ids created by communities.")

@@ -21,7 +21,7 @@ model EdgeNodePoolResource is TrackedResource<EdgeNodePoolResourceProperties> {
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @segment("edgeNodePools")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -120,6 +120,6 @@ model EdgeNodePoolResourceProperties {
   k8sClusterList: string[];
 
   @doc("Provisioning state of the storage container")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

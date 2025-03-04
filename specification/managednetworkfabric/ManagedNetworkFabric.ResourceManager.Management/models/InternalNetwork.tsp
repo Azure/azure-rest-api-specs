@@ -121,20 +121,20 @@ model InternalNetworkProperties {
   nativeIpv6PrefixLimit?: NativeIpv6PrefixLimitProperties;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 
@@ -160,7 +160,7 @@ model BgpConfiguration {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("ASN of Network Fabric. Example: 65048.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricASN?: int64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
@@ -218,7 +218,7 @@ model BgpPatchConfiguration {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("ASN of Network Fabric. Example: 65048.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricASN?: int64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
@@ -262,16 +262,16 @@ model NeighborAddress {
 
   @doc("BFD Administrative State for each Neighbor Address. Example: Enabled | Disabled.")
   @added(Versions.v2024_06_15_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bfdAdministrativeState?: BfdAdministrativeState;
 
   @doc("BGP Administrative State for each Neighbor Address. Example: Enabled | Disabled.")
   @added(Versions.v2024_06_15_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpAdministrativeState?: BgpAdministrativeState;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 }
 

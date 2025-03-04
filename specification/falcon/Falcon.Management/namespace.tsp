@@ -20,14 +20,24 @@ model NamespaceProperties {
   /** Name of the falcon fleet namespace. IMMUTABLE */
   @minLength(1)
   @maxLength(26)
-  @visibility("read", "create", "query", "delete")
+  @visibility(
+    Lifecycle.Read,
+    Lifecycle.Create,
+    Lifecycle.Query,
+    Lifecycle.Delete
+  )
   falconNamespace: string;
 
   /** This is an existing namespace that manages this one and has all the same permissions for this namespace
    *  as the current namespace itself. IMMUTABLE
    */
   @maxLength(26)
-  @visibility("read", "create", "query", "delete")
+  @visibility(
+    Lifecycle.Read,
+    Lifecycle.Create,
+    Lifecycle.Query,
+    Lifecycle.Delete
+  )
   managingNamespace?: string;
 
   /** Description of the purpose of the name space */
@@ -53,7 +63,7 @@ model NamespaceProperties {
   adminGroup: string;
 
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
