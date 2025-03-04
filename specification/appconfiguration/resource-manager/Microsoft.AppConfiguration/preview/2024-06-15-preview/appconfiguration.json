@@ -213,8 +213,8 @@
           "ConfigurationStores_Create_With_Data_Plane_Proxy": {
             "$ref": "./examples/ConfigurationStoresCreateWithDataPlaneProxy.json"
           },
-          "ConfigurationStores_Create_With_Telemetry_And_Experimentation": {
-            "$ref": "./examples/ConfigurationStoresCreateWithTelemetryAndExperimentation.json"
+          "ConfigurationStores_Create_With_Telemetry": {
+            "$ref": "./examples/ConfigurationStoresCreateWithTelemetry.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -244,7 +244,22 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for the operation result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Indicates how long the client should wait before polling the URL in the Location or Azure-AsyncOperation header."
+              }
+            }
           },
           "204": {
             "description": "No Content - the specified resource was not found."
@@ -900,7 +915,7 @@
             "name": "keyValueParameters",
             "in": "body",
             "description": "The parameters for creating a key-value.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/KeyValue"
             }
@@ -1389,7 +1404,7 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Gets the properties of the specified snapshot. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
+        "description": "Gets the properties of the specified snapshot. NOTE: This operation is intended for use in Azure Resource Manager (ARM) Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
         "operationId": "Snapshots_Get",
         "parameters": [
           {
@@ -1432,7 +1447,7 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Creates a snapshot. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
+        "description": "Creates a snapshot. NOTE: This operation is intended for use in Azure Resource Manager (ARM) Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
         "operationId": "Snapshots_Create",
         "parameters": [
           {
@@ -1609,6 +1624,11 @@
           "default": 7,
           "description": "The amount of time in days that the configuration store will be retained when it is soft deleted."
         },
+        "defaultKeyValueRevisionRetentionPeriodInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
+        },
         "enablePurgeProtection": {
           "type": "boolean",
           "default": false,
@@ -1636,10 +1656,6 @@
         "telemetry": {
           "$ref": "#/definitions/TelemetryProperties",
           "description": "Property specifying the configuration of telemetry for this configuration store"
-        },
-        "experimentation": {
-          "$ref": "#/definitions/ExperimentationProperties",
-          "description": "Property specifying the configuration of experimentation for this configuration store"
         }
       }
     },
@@ -1700,13 +1716,13 @@
               },
               {
                 "value": "Pass-through",
-                "description": "The pass-through authentication mode. User identity will be passed through from ARM, requiring user to have data plane action permissions (Available via App Configuration Data Owner/ App Configuration Data Reader)."
+                "description": "The pass-through authentication mode. User identity will be passed through from Azure Resource Manager (ARM), requiring user to have data plane action permissions (Available via App Configuration Data Owner/ App Configuration Data Reader)."
               }
             ]
           }
         },
         "privateLinkDelegation": {
-          "description": "The data plane proxy private link delegation. This property manages if a request from delegated ARM private link is allowed when the data plane resource requires private link.",
+          "description": "The data plane proxy private link delegation. This property manages if a request from delegated Azure Resource Manager (ARM) private link is allowed when the data plane resource requires private link.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1718,7 +1734,7 @@
             "values": [
               {
                 "value": "Enabled",
-                "description": "ARM private endpoint is required if the resource requires private link."
+                "description": "Azure Resource Manager (ARM) private endpoint is required if the resource requires private link."
               },
               {
                 "value": "Disabled",
@@ -1805,9 +1821,10 @@
           "$ref": "#/definitions/TelemetryProperties",
           "description": "Property specifying the configuration of telemetry to update for this configuration store"
         },
-        "experimentation": {
-          "$ref": "#/definitions/ExperimentationProperties",
-          "description": "Property specifying the configuration of experimentation to update for this configuration store"
+        "defaultKeyValueRevisionRetentionPeriodInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
         }
       }
     },
@@ -2688,6 +2705,7 @@
         "id": {
           "description": "The resource ID.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "name": {
@@ -2805,7 +2823,7 @@
           "readOnly": true
         },
         "tags": {
-          "description": "The tags of the snapshot. NOTE: These are data plane tags, not ARM tags.",
+          "description": "The tags of the snapshot. NOTE: These are data plane tags, not Azure Resource Manager (ARM) tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2843,22 +2861,6 @@
           "description": "Resource ID of a resource enabling telemetry collection",
           "type": "string",
           "format": "arm-id"
-        }
-      }
-    },
-    "ExperimentationProperties": {
-      "description": "Experimentation settings",
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "Resource ID of a resource enabling experimentation",
-          "type": "string",
-          "format": "arm-id"
-        },
-        "dataPlaneEndpoint": {
-          "description": "The data plane endpoint of the Split experimentation workspace resource where experimentation data can be retrieved",
-          "type": "string",
-          "format": "uri"
         }
       }
     }
@@ -2934,4 +2936,3 @@
     }
   ]
 }
-
