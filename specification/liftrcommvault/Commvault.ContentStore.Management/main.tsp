@@ -548,9 +548,9 @@ model ProtectionGroupResources {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   matchRules?: {
     @doc("rules to match")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @Azure.ResourceManager.identifiers(#[])
-  rules: Rule[];
+    @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+    @Azure.ResourceManager.identifiers(#[])
+    rules: Rule[];
 
     @doc("match Type all or any")
     @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)

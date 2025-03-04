@@ -1,8 +1,8 @@
-@discriminator("type")
+@discriminated(#{ discriminatorPropertyName: "type", envelope: "none" })
 @doc("The backing data source")
 union ExternalReference {
   @doc("OneAsset backing data source")
-  oneAssetReference: OneAssetReference,
+  OneAsset: OneAssetReference,
 }
 
 @doc("The OneAsset id backing a resource")

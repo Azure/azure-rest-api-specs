@@ -2,11 +2,11 @@ import "./OneAssetPhysicalLocation.tsp";
 import "./ServerHardware.tsp";
 import "./HardwareInfo.tsp";
 
-@discriminator("type")
+@discriminated(#{ discriminatorPropertyName: "type", envelope: "none" })
 @doc("The model describing the physical location")
 union PhysicalLocation {
   @doc("OneAsset physical location")
-  oneAssetPhysicalLocation: OneAssetPhysicalLocation,
+  OneAsset: OneAssetPhysicalLocation,
 }
 
 @doc("AszLabHardware.Lab/Server properties")
