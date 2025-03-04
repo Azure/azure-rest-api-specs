@@ -1785,11 +1785,11 @@
       "properties": {
         "wafSecurityPolicy": {
           "$ref": "#/definitions/WafSecurityPolicy",
-          "description": "Contains reference to a WAF-type security policy that is applied at the Traffic Controller level."
+          "description": "Contains reference to a WAF-type security policy."
         },
         "ipAccessRulesSecurityPolicy": {
           "$ref": "#/definitions/IpAccessRulesSecurityPolicy",
-          "description": "Contains reference to a IpAccessRules-type security policy that is applied at the Frontend level."
+          "description": "Contains reference to a IpAccessRules-type security policy."
         }
       }
     },
@@ -1799,11 +1799,11 @@
       "properties": {
         "wafSecurityPolicy": {
           "$ref": "#/definitions/WafSecurityPolicyUpdate",
-          "description": "Contains reference to a WAF-type security policy that is applied at the Traffic Controller level."
+          "description": "Contains reference to a WAF-type security policy."
         },
         "ipAccessRulesSecurityPolicy": {
           "$ref": "#/definitions/IpAccessRulesSecurityPolicyUpdate",
-          "description": "Contains reference to a IpAccessRules-type security policy that is applied at the Frontend level."
+          "description": "Contains reference to a IpAccessRules-type security policy."
         }
       }
     },
@@ -1839,11 +1839,11 @@
         },
         "wafPolicy": {
           "$ref": "#/definitions/WafPolicy",
-          "description": "Web Application Firewall Policy of the Traffic Controller Security Policy. If this property is set then ipAccessRulesPolicy property cannot be set."
+          "description": "Web Application Firewall Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
         },
         "ipAccessRulesPolicy": {
           "$ref": "#/definitions/IpAccessRulesPolicy",
-          "description": "Ip Access Policy of the Traffic Controller Security Policy. If this property is set then wafPolicy property cannot be set."
+          "description": "Ip Access Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1876,11 +1876,11 @@
       "properties": {
         "wafPolicy": {
           "$ref": "#/definitions/WafPolicyUpdate",
-          "description": "Web Application Firewall Policy of the Traffic Controller Security Policy. If this property is set then ipAccessRulesPolicy property cannot be set."
+          "description": "Web Application Firewall Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
         },
         "ipAccessRulesPolicy": {
           "$ref": "#/definitions/IpAccessRulesPolicy",
-          "description": "Ip Access Policy of the Traffic Controller Security Policy. If this property is set then wafPolicy property cannot be set."
+          "description": "Ip Access Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
         }
       }
     },
