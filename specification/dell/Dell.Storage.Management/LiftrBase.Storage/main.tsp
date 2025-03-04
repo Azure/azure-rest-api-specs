@@ -79,9 +79,9 @@ model FileSystemResourceProperties {
    */
   dellReferenceNumber: string;
 
-  /** 
+  /**
    * EncryptionProperties of the resource
-  */
+   */
   encryption: LiftrBase.EncryptionProperties;
 }
 

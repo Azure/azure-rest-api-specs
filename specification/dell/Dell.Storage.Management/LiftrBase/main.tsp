@@ -156,7 +156,6 @@ model EncryptionIdentityProperties {
  * EncryptionProperties of Dell FileSystem resource
  */
 model EncryptionProperties {
-
   /**
    * Encryption Type - MMK/CMK
    */
