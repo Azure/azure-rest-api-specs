@@ -21,7 +21,6 @@ using Microsoft.AgriculturePlatform;
 );
 @@clientName(Solution, "AgricultureSolution", "csharp");
 @@clientName(AgriServiceConfig, "AgricultureServiceConfig", "csharp");
-@@alternateType(AgriServiceConfig.instanceUri, url, "csharp");
 @@alternateType(AgriServiceConfig.appServiceResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -43,6 +42,10 @@ using Microsoft.AgriculturePlatform;
   "csharp"
 );
 @@alternateType(AgriServiceConfig.redisCacheResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(MoboBrokerResource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
