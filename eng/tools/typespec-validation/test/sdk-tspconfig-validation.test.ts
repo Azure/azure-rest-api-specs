@@ -14,9 +14,12 @@ import {
   TspConfigGoMgmtModuleEqualStringSubRule,
   TspConfigGoMgmtFixConstStutteringTrueSubRule,
   TspConfigGoMgmtGenerateExamplesTrueSubRule,
-  TspConfigGoMgmtGenerateFakesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
-  TspConfigGoMgmtInjectSpansTrueSubRule,
+  TspConfigGoAzGenerateFakesTrueSubRule,
+  TspConfigGoAzInjectSpansTrueSubRule,
+  TspConfigGoDpModuleMatchPatternSubRule,
+  TspConfigGoDpPackageDirectoryMatchPatternSubRule,
+  TspConfigGoDpServiceDirMatchPatternSubRule,
   TspConfigJavaAzPackageDirectorySubRule,
   TspConfigPythonMgmtPackageDirectorySubRule,
   TspConfigPythonMgmtPackageNameEqualStringSubRule,
@@ -105,31 +108,38 @@ function createEmitterOptionTestCases(
   validValue: boolean | string,
   invalidValue: boolean | string,
   subRules: TspconfigSubRuleBase[],
+  allowUndefined: boolean = false,
 ): Case[] {
-  const cases: Case[] = [
-    {
-      description: `Validate ${emitterName}'s option:${key} with valid value ${validValue}`,
-      folder,
-      tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: validValue }),
-      success: true,
-      subRules,
-    },
-    {
-      description: `Validate ${emitterName}'s option:${key} with invalid value ${invalidValue}`,
-      folder,
-      tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: invalidValue }),
-      success: false,
-      subRules,
-    },
-    {
-      description: `Validate ${emitterName}'s option:${key} with undefined value`,
-      folder,
-      tspconfigContent: createEmitterOptionExample(emitterName),
-      success: false,
-      subRules,
-    },
-  ];
-  if (key.includes(".")) {
+  const cases: Case[] = [];
+
+  cases.push({
+    description: `Validate ${emitterName}'s option:${key} with valid value ${validValue}`,
+    folder,
+    tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: validValue }),
+    success: true,
+    subRules,
+  });
+
+  cases.push({
+    description: `Validate ${emitterName}'s option:${key} with invalid value ${invalidValue}`,
+    folder,
+    tspconfigContent: createEmitterOptionExample(emitterName, {
+      key: key,
+      value: invalidValue,
+    }),
+    success: false,
+    subRules,
+  });
+
+  cases.push({
+    description: `Validate ${emitterName}'s option:${key} with undefined value`,
+    folder,
+    tspconfigContent: createEmitterOptionExample(emitterName),
+    success: allowUndefined ? true : false,
+    subRules,
+  });
+
+  if (!allowUndefined && key.includes(".")) {
     cases.push({
       description: `Validate ${emitterName}'s option:${key} with incomplete key`,
       folder,
@@ -267,7 +277,16 @@ const goManagementGenerateFakesTestCases = createEmitterOptionTestCases(
   "generate-fakes",
   true,
   false,
-  [new TspConfigGoMgmtGenerateFakesTrueSubRule()],
+  [new TspConfigGoAzGenerateFakesTrueSubRule()],
+);
+
+const goDpGenerateFakesTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "generate-fakes",
+  true,
+  false,
+  [new TspConfigGoAzGenerateFakesTrueSubRule()],
 );
 
 const goManagementHeadAsBooleanTestCases = createEmitterOptionTestCases(
@@ -285,7 +304,44 @@ const goManagementInjectSpansTestCases = createEmitterOptionTestCases(
   "inject-spans",
   true,
   false,
-  [new TspConfigGoMgmtInjectSpansTrueSubRule()],
+  [new TspConfigGoAzInjectSpansTrueSubRule()],
+);
+
+const goDpInjectSpansTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "inject-spans",
+  true,
+  false,
+  [new TspConfigGoAzInjectSpansTrueSubRule()],
+);
+
+const goDpModuleTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "module",
+  "github.com/Azure/azure-sdk-for-go/aaa",
+  "github.com/Azure/azure-sdk-for-cpp/bbb",
+  [new TspConfigGoDpModuleMatchPatternSubRule()],
+  true,
+);
+
+const goDpPackageDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "package-dir",
+  "az1/2/3",
+  "bzasd",
+  [new TspConfigGoDpPackageDirectoryMatchPatternSubRule()],
+);
+
+const goDpServiceDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "service-dir",
+  "sdk/2/3",
+  "sd/k",
+  [new TspConfigGoDpServiceDirMatchPatternSubRule()],
 );
 
 const javaManagementPackageDirTestCases = createEmitterOptionTestCases(
@@ -389,6 +445,11 @@ describe("tspconfig", function () {
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
+    ...goDpGenerateFakesTestCases,
+    ...goDpInjectSpansTestCases,
+    ...goDpModuleTestCases,
+    ...goDpPackageDirTestCases,
+    ...goDpServiceDirTestCases,
     // java
     ...javaManagementPackageDirTestCases,
     // python

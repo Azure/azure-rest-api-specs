@@ -1,0 +1,46 @@
+import "./../main.tsp";
+
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
+using LiftrBase.Data;
+
+namespace Neon.Postgres.Models;
+
+// Define a reusable base resource model for all sub entities
+@doc("Base model for all tracked resources")
+@added(Neon.Postgres.Versions.v2_preview)
+model BaseEntity {
+  @doc("Unique identifier for the entity")
+  entityId?: string;
+
+  @doc("Name of the resource")
+  entityName?: string;
+
+  @doc("Timestamp indicating when the entity was created")
+  @visibility("read")
+  createdAt?: string;
+
+  @doc("Provisioning state of the resource.")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
+
+  @doc("Additional attributes for the entity")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  attributes?: Attributes[];
+}
+
+@doc("Additional attributes specific to Neon Resources")
+@added(Neon.Postgres.Versions.v2_preview)
+model Attributes {
+  @doc("Name of the attribute")
+  name: string;
+
+  @doc("Value of the attribute")
+  value: string;
+}
