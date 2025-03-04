@@ -29,5 +29,13 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_05_preview: "2024-02-05-preview",
 
+  @doc("The 2024-09-30-preview API version.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_09_30_preview: "2024-09-30-preview",
+
+  @doc("The 2025-03-30 GA API version.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_03_30: "2025-03-30",
 }
