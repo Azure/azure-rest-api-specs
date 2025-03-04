@@ -53,7 +53,14 @@ options:
       name: "@azure/eventgrid"
     flavor: azure
   "@azure-tools/typespec-go":
+    service-dir: "sdk/messaging/eventgrid"
+    package-dir: "aznamespaces"
     module: "github.com/Azure/azure-sdk-for-go/sdk/messaging/eventgrid/aznamespaces"
-    module-version: "0.0.1"
     emitter-output-dir: "{project-root}"
     slice-elements-byval: true
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
