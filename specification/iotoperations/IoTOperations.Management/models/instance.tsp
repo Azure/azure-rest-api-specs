@@ -53,6 +53,19 @@ model InstanceProperties {
 
   @doc("The reference to the Schema Registry for this AIO Instance.")
   schemaRegistryRef: SchemaRegistryRef;
+
+  @doc("The features of the AIO Instance.")
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  features?: InstanceFeature[];
+}
+
+@doc("The features of the AIO Instance.")
+model InstanceFeature {
+  @doc("The name of the feature.")
+  name: string;
+
+  @doc("The value of the feature.")
+  value?: OperationalMode;
 }
 
 @doc("The reference to the Schema Registry for this AIO Instance.")
