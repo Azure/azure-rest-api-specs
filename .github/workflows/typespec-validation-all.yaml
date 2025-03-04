@@ -70,7 +70,7 @@ jobs:
           # Checkout all history for all branches.  Required to merge origin/main.
           fetch-depth: 0
       - name: git merge origin/RPSaaSMaster
-        run: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge -Xours origin/main
+        run: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge -Xours origin/RPSaaSMaster
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
