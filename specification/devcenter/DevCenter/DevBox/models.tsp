@@ -562,7 +562,7 @@ model PoolActiveHoursConfiguration {
   autoStartEnableStatus: AutoStartEnableStatus;
 
   @doc("The default IANA timezone id of the active hours.")
-  defaultTimezone?: string;
+  defaultTimeZone?: string;
 
   @doc("The default start time of the active hours.")
   defaultStartTimeHour?: int32;
@@ -611,7 +611,7 @@ union AutoStartEnableStatus {
 @added(APIVersions.v2025_03_01_preview)
 model UserActiveHoursConfiguration {
   @doc("The timezone of the active hours.")
-  timezone?: string;
+  timeZone?: string;
 
   @doc("The start time of the active hours.")
   startTimeHour?: int32;
