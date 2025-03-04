@@ -14,59 +14,32 @@ using TypeSpec.Versioning;
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService.AliasDictionary;
 
-/**
- * Represents a request model for alias dictionary.
- */
 @resource("aliases")
+@doc("This is the request model for Alias")
 model Alias {
-  /** Id for the alias */
+  @doc("Id for the alias")
   @key("id")
   @visibility("read")
   id: string;
 
-  /** Key for the alias */
-  @visibility("read")
   @doc("Key for the alias")
   name: string;
 
-  @visibility("read")
-  /** List of aliases */
+  @doc("List of aliases")
   aliases: string[];
 
-  /** Indicates if the alias is enabled */
+  @doc("Indicates if the alias is enabled")
   @visibility("read")
   isCustom: boolean = true;
 
-  /** status of the alias */
-  @visibility("update")
+  @doc("Indicates if the alias is enabled")
+  @visibility("read")
   enabled: boolean;
 }
 
-@resource("aliases")
-@doc("Alias Create or Update Request model")
-model AliasCreateOrUpdateRequest {
-  /** Key for the alias */
-  /** Id for the alias */
-  @key("id")
-  @visibility("read")
-  id: string;
-
-  /** unique key for the alias e.g. production, person */
-  key: string;
-
-  /** List of aliases */
-  aliases: string[];
-}
-
-@resource("aliases")
 @doc("This is the patch request to update the status of Alias")
-model UpdateAliasStatus {
-  /** Id for the alias */
-  @key("id")
-  @visibility("read")
-  id: string;
-
-  /** status of the alias */
+model ActivateAlias {
+  @doc("status of the alias")
   enabled: boolean;
 }
 
@@ -77,20 +50,25 @@ alias ServiceTraits = SupportsRepeatableRequests &
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface Aliases {
-  /** Fetch an alias by Id. */
+  @doc("Get an alias by Id")
   getAlias is Operations.ResourceRead<Alias>;
 
-  /** Creates or updates an alias */
-  createOrReplaceAlias is Operations.ResourceCreateOrReplace<AliasCreateOrUpdateRequest>;
+  @doc("Create an alias")
+  createAlias is Operations.ResourceCreateWithServiceProvidedName<Alias>;
 
-  /** Delete an alias */
+  @doc("Delete an alias")
   deleteAlias is Operations.ResourceDelete<Alias>;
 
-  /** List Alias resources */
+  @doc("List all aliases")
   listAliases is Operations.ResourceList<Alias>;
 
-  /** update alias status */
-  updateAliasStatus is Operations.ResourceCreateOrUpdate<UpdateAliasStatus>;
+  @doc("Update the status of an alias")
+  updateAliasStatus is Operations.ResourceCreateOrUpdate<Alias>;
 
-  activeAlias is Operations.ResourceCollectionAction<Alias, Alias, {}>;
+  @doc("Deactivate an alias")
+  activateAlias is Operations.ResourceAction<
+    Alias,
+    ActivateAlias,
+    ActivateAlias
+  >;
 }

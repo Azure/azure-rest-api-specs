@@ -1,10 +1,15 @@
-// import "@typespec/rest";
-// import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/http";
 
-// using TypeSpec.Rest;
-// using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 
-// namespace CopilotCommon;
+namespace MdsSolution.Copilot.Common;
+
+// @doc("The response model for a no content response.")
+// model NoContentResponse {
+//   statusCode: 204;
+// }
 
 // /**
 //  * The server received too many requests from the client.

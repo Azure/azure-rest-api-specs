@@ -1,126 +1,301 @@
-// import "@typespec/rest";
-// import "@typespec/http";
-// import "@typespec/openapi3";
-// import "@typespec/versioning";
-// import "@azure-tools/typespec-azure-core";
-// import "./../models/copilotmodels.tsp";
-// import "./../models/common.tsp";
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/openapi3";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+//import "./../models/common.tsp";
 
-// using TypeSpec.Rest;
-// using TypeSpec.Http;
-// using CopilotModels;
-// using CopilotCommon;
-// using Azure.Core;
-// using Azure.Core.Traits;
-// using TypeSpec.Versioning;
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.Core;
+using Azure.Core.Traits;
+using TypeSpec.Versioning;
 
-// #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" ""
-// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-// @versioned(MdsSolution.CopilotService.Versions)
-// namespace MdsSolution.CopilotService.Instructions {
-//   alias ServiceTraits = SupportsRepeatableRequests &
-//     SupportsConditionalRequests &
-//     SupportsClientRequestId;
+@versioned(MdsSolution.CopilotService.Versions)
+namespace MdsSolution.CopilotService.Instructions;
 
-//   alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
+@doc("Instruction Info Response Model")
+model InstructionInfoResponse {
+  @doc("List of Instruction Info objects")
+  instructionInfoList: InstructionInfo[];
+}
 
-//   @route("/dmm/copilot")
-//   namespace Instructions {
-//     /**
-//      * Get the instructions.
-//      * @param showOnlyActive filter to show only active instructions. Default is false.
-//      */
-//     @route("/v3/instructions")
-//     @get
-//     @added(MdsSolution.CopilotService.Versions.V3)
-//     op getInstructions(
-//       @query("showOnlyActive") showOnlyActive: boolean = false,
-//     ): Azure.Core.ResourceRead<InstructionInfoResponse> | NoContentResponse;
+@doc("Base Instruction Model")
+model BaseInstructionModel {
+  @doc("The unique identifier of the instruction.")
+  instructionId: string;
 
-//     /**
-//      * Get the instruction resource.
-//      * @param instructionId The ID of the instruction to get the status for.
-//      * @param version The version of the instruction to get the status for.
-//      */
-//     @route("/v3/instructions/{instructionId}")
-//     @get
-//     op getInstructionResource(
-//       @path instructionId: string,
-//       @query("version") version: string = "",
-//     ): Azure.Core.ResourceRead<InstructionResponseModel> | NotFoundResponse;
+  @doc("The version of the instruction.")
+  instructionVersion: string;
 
-//     /**
-//      * Upsert instructions.
-//      * @param instructionRequestList The list of instructions to create or update.
-//      */
-//     @route("/v3/instructions")
-//     @put
-//     op replaceOrInsertInstructions(
-//       @body instructionRequestList: InstructionRequestModelList,
-//     ): RpcOperation<
-//       {},
-//       {
-//         statusCode: 202;
-//       },
-//       ServiceTraits
-//     > | BadRequestResponse;
+  @doc("The status of the instruction.")
+  stauses: InstructionStatusEnum;
 
-//     /**
-//      * Patch instructions.
-//      * @param instructionId The ID of the instruction to patch.
-//      * @param instructionVersion The version of the instruction to patch.
-//      * @param instructionPatchRequest The patch request.
-//      */
-//     @route("/v3/instructions/{instructionId}/versions/{instructionVersion}")
-//     @patch
-//     op patchInstruction(
-//       @path instructionId: string,
-//       @path instructionVersion: string,
-//       @body instructionPatchRequest: InstructionPatchRequest,
-//     ): RpcOperation<
-//       {},
-//       {
-//         statusCode: 202;
-//       },
-//       ServiceTraits
-//     > | NotFoundResponse;
+  @doc("The domain of the instruction.")
+  domain: InstrustionDomainEnum;
 
-//     /**
-//      * Delete instructions.
-//      * @param instructionId The ID of the instruction to delete.
-//      * @param instructionVersion The version of the instruction to delete.
-//      */
-//     @delete
-//     @route("/v3/instructions/{instructionId}/versions/{instructionVersion}")
-//     op deleteInstructionByVersion(
-//       @path instructionId: string,
-//       @path instructionVersion: string,
-//     ): RpcOperation<
-//       {},
-//       {
-//         statusCode: 202;
-//       },
-//       ServiceTraits
-//     > | NotFoundResponse;
+  @doc("The sub-domain of the instruction.")
+  subDomain: InstructionSubDomainEnum;
 
-//     /**
-//      * Bulk Delete instructions.
-//      * @param instructionId The ID of the instruction to delete.
-//      * @param forceDelete Force delete the instruction.
-//      * @param deleteAll Delete all versions of the instruction.
-//      */
-//     @delete
-//     @route("/v3/instructions/{instructionId}")
-//     op deleteInstructionCustomVersionInBulk(
-//       @path instructionId: string,
-//       @query("forceDelete") forceDelete: boolean = false,
-//       @query("deleteAll") deleteAll: boolean = false,
-//     ): RpcOperation<
-//       {},
-//       {
-//         statusCode: 202;
-//       },
-//       ServiceTraits
-//     > | NotFoundResponse;
-//   }
-// }
+  @doc("The category of the instruction.")
+  category: InstructionCategoryEnum;
+
+  @doc("The language of the instruction.")
+  language: InstructionLanguageEnum;
+
+  @doc("The retrieval properties of the instruction.")
+  retrieval: RetrievalProperties;
+
+  @doc("The content properties of the instruction.")
+  content: ContentProperties;
+
+  @doc("The relationships of the instruction.")
+  relationships: Relationships;
+}
+
+@doc("Instruction Request Model")
+@parentResource(BaseInstructionModel)
+model InstructionRequestModel {
+  @doc("The comment for the instruction.")
+  comment: string;
+}
+
+@doc("Instruction Info Model")
+model InstructionInfo {
+  @doc("The instruction identifier.")
+  instructionId: string;
+
+  @doc("The instruction version.")
+  version: string;
+
+  @doc("The instruction status.")
+  status: InstructionStatusEnum;
+}
+
+@doc("Instruction Patch Request")
+model InstructionPatchRequest {
+  @doc("The instruction status.")
+  status: InstructionStatusEnum;
+}
+
+@doc("Instruction Request Model List")
+model InstructionRequestModelList {
+  @doc("The list of instruction request models.")
+  instructionRequestModels: InstructionRequestModel[];
+}
+
+@doc("This is the response model for Instruction")
+@parentResource(BaseInstructionModel)
+model InstructionResponseModel {
+  @doc("The administrative information of the instruction.")
+  administrative: string;
+}
+
+@doc("Instruction Status Enums")
+union InstructionStatusEnum {
+  @doc("Instruction is active")
+  Active: "Active",
+
+  @doc("Instruction is inactive")
+  Inactive: "Inactive",
+
+  @doc("Extensible status type")
+  string,
+}
+
+@doc("Instruction Sub Domain Enums")
+union InstrustionDomainEnum {
+  @doc("Manufacturing Operations Management")
+  MOM: "MOM",
+
+  @doc("Supply Chain Management")
+  SCM: "SCM",
+
+  @doc("Digital Engineering")
+  DE: "DE",
+
+  @doc("Extensible domain type")
+  string,
+}
+
+@doc("Instruction Sub Domain Enums")
+union InstructionSubDomainEnum {
+  @doc("Production sub-domain")
+  Production: "Production",
+
+  @doc("Quality sub-domain")
+  Quality: "Quality",
+
+  @doc("Maintenance sub-domain")
+  Maintenance: "Maintenance",
+
+  @doc("Inventory sub-domain")
+  Inventory: "Inventory",
+
+  @doc("Downtime sub-domain")
+  Downtime: "Downtime",
+
+  @doc("Scrap sub-domain")
+  Scrap: "Scrap",
+
+  @doc("Mixed sub-domain")
+  Mixed: "Mixed",
+
+  @doc("Extensible sub-domain type")
+  string,
+}
+
+@doc("Instruction Category Enums")
+union InstructionCategoryEnum {
+  @doc("Transactional instruction category")
+  Transactional: "Transactional",
+
+  @doc("Analytical instruction category")
+  Analytical: "Analytical",
+
+  @doc("Trend instruction category")
+  Trend: "Trend",
+
+  @doc("KPI instruction category")
+  KPI: "KPI",
+
+  @doc("Extensible category type")
+  string,
+}
+
+@doc("Instruction Language Enums")
+union InstructionLanguageEnum {
+  @doc("English")
+  EN: "EN",
+
+  @doc("Extensible language type")
+  string,
+}
+
+@doc("Instruction Source Enums")
+union InstructionSourceEnum {
+  @doc("Internal Instruction")
+  outOfTheBox: "outOfTheBox",
+
+  @doc("Custom Instruction")
+  custom: "custom",
+
+  @doc("Extensible status type")
+  string,
+}
+
+@doc("Relationships")
+model Relationships {
+  @doc("List of dependent instructions")
+  dependencies: string[];
+
+  @doc("List of InstructionIds to be excluded")
+  exclusions: string[];
+}
+
+@doc("The retrieval properties of the instruction.")
+model RetrievalProperties {
+  @doc("The sub-topics related to the instruction.")
+  subTopics: string[];
+
+  @doc("The keywords associated with the instruction.")
+  keywords: string[];
+
+  @doc("The sample questions for the instruction.")
+  sampleQuestions: string[];
+}
+
+@doc("The content properties of the instruction.")
+model ContentProperties {
+  @doc("The semantic content of the instruction.")
+  semanticContent: string;
+}
+
+@resource("instruction")
+@doc("This is the request model for Instruction")
+model Instruction {
+  @key("id")
+  @visibility("read")
+  @doc("Id for the instruction")
+  id: string;
+
+  @doc("intruction Id for the instruction")
+  @visibility("update")
+  instructionId: string;
+
+  @doc("Version for the instruction")
+  @visibility("update")
+  instructionVersion: string;
+
+  @doc("Status for the instruction")
+  @visibility("read")
+  status: InstructionStatusEnum;
+
+  @doc("Domain for the instruction")
+  @visibility("read")
+  domain: InstrustionDomainEnum;
+
+  @doc("Sub-domain for the instruction")
+  @visibility("read")
+  subDomain: InstructionSubDomainEnum;
+
+  @doc("Category for the instruction")
+  @visibility("read")
+  category: InstructionCategoryEnum;
+
+  @doc("The language of the instruction.")
+  language: InstructionLanguageEnum;
+
+  @doc("The retrieval properties of the instruction.")
+  retrieval: RetrievalProperties;
+
+  @doc("The relationships of the instruction.")
+  relationships: Relationships;
+
+  @doc("The comment for the instruction.")
+  comment: string;
+}
+
+@doc("This is the patch request to update the status of instruction")
+model UpdateStatusRequest {
+  @doc("status of the instruction")
+  status: InstructionStatusEnum;
+}
+
+alias ServiceTraits = SupportsRepeatableRequests &
+  SupportsConditionalRequests &
+  SupportsClientRequestId;
+
+alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+
+@doc("Instructions")
+interface Instructions {
+  @doc("Get the instructions.")
+  getInstructions is apiOperations.ResourceRead<Instruction>;
+
+  @doc("List Instruction resources")
+  listInstructions is apiOperations.ResourceList<
+    Instruction,
+    QueryParametersTrait<{
+      @doc("The instruction status.")
+      @query
+      showActive: boolean;
+    }>
+  >;
+
+  @doc("Create an instruction.")
+  createInstructure is apiOperations.ResourceCreateWithServiceProvidedName<Instruction>;
+
+  @doc("update instructions.")
+  updateInstruction is apiOperations.ResourceCreateOrUpdate<Instruction>;
+
+  @doc("Delete instructions.")
+  deleteInstruction is apiOperations.ResourceDelete<Instruction>;
+
+  @doc("Update instruction status.")
+  updateStatus is apiOperations.ResourceAction<
+    Instruction,
+    UpdateStatusRequest,
+    UpdateStatusRequest
+  >;
+}
