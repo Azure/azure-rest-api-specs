@@ -84,11 +84,19 @@ namespace Quantum.Workspace.Operations {
     get is GetOperation<SessionDetails>;
 
     /** List all Sessions. */
+    @sharedRoute
+    @added(QuantumWorkspaceAPIVersion.v2024_03_01_preview)
+    @removed(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+    list is ListOperation<SessionDetails>;
+
+    /** List all Sessions. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
       We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
       See https://github.com/Azure/typespec-azure/issues/494
       """
-    list is CustomListOperation<
+    @sharedRoute
+    @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+    listv2 is CustomListOperation<
       Resource = SessionDetails,
       Response = PagedSessionDetails,
       Parameters = {
