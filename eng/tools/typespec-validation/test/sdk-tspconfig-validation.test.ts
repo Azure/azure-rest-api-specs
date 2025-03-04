@@ -4,11 +4,16 @@ import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
   TspConfigTsMgmtModularGenerateMetadataTrueSubRule,
+  _TspConfigTsMgmtModularGenerateMetadataTrueSubRule,
   TspConfigTsMgmtModularHierarchyClientFalseSubRule,
+  _TspConfigTsMgmtModularHierarchyClientFalseSubRule,
   TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
+  _TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
   TspConfigTsMgmtModularEnableOperationGroupTrueSubRule,
+  _TspConfigTsMgmtModularEnableOperationGroupTrueSubRule,
   TspConfigTsMgmtModularPackageDirectorySubRule,
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
+  _TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
@@ -175,34 +180,70 @@ const commonAzureServiceDirTestCases = createParameterTestCases(
 const tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "generateMetadata",
+  "generate-metadata",
   true,
   false,
   [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
 );
 
-const tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
+const _tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  managementTspconfigFolder,
+  "generateMetadata",
+  true,
+  false,
+  [new _TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
+);
+
+const _tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
   "hierarchyClient",
   false,
   true,
+  [new _TspConfigTsMgmtModularHierarchyClientFalseSubRule()],
+);
+
+const tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  managementTspconfigFolder,
+  "hierarchy-client",
+  false,
+  true,
   [new TspConfigTsMgmtModularHierarchyClientFalseSubRule()],
 );
 
-const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
+const _tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
   "experimentalExtensibleEnums",
   true,
   false,
+  [new _TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
+);
+
+const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  managementTspconfigFolder,
+  "experimental-extensible-enums",
+  true,
+  false,
   [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
+);
+
+const _tsManagementEnableOperationGroupTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  managementTspconfigFolder,
+  "enableOperationGroup",
+  true,
+  false,
+  [new _TspConfigTsMgmtModularEnableOperationGroupTrueSubRule()],
 );
 
 const tsManagementEnableOperationGroupTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "enableOperationGroup",
+  "enable-operation-group",
   true,
   false,
   [new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule()],
@@ -217,10 +258,19 @@ const tsManagementPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigTsMgmtModularPackageDirectorySubRule()],
 );
 
-const tsManagementPackageNameTestCases = createEmitterOptionTestCases(
+const _tsManagementPackageNameTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
   "packageDetails.name",
+  "@azure/arm-aaa-bbb",
+  "@azure/aaa-bbb",
+  [new _TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
+);
+
+const tsManagementPackageNameTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  managementTspconfigFolder,
+  "package-details.name",
   "@azure/arm-aaa-bbb",
   "@azure/aaa-bbb",
   [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
@@ -431,11 +481,16 @@ describe("tspconfig", function () {
     ...commonAzureServiceDirTestCases,
     // ts
     ...tsManagementGenerateMetadataTestCases,
+    ..._tsManagementGenerateMetadataTestCases,
     ...tsManagementHierarchyClientTestCases,
+    ..._tsManagementHierarchyClientTestCases,
     ...tsManagementExperimentalExtensibleEnumsTestCases,
+    ..._tsManagementExperimentalExtensibleEnumsTestCases,
     ...tsManagementEnableOperationGroupTestCases,
+    ..._tsManagementEnableOperationGroupTestCases,
     ...tsManagementPackageDirTestCases,
     ...tsManagementPackageNameTestCases,
+    ..._tsManagementPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
