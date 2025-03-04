@@ -29,21 +29,13 @@ openapi-type: arm
 tag: package-2025-03-preview
 ```
 
-### Tag: package-2025-03-preview-core-registry
+### Tag: package-2025-03-preview-only
 
-These settings apply only when `--tag=package-2025-03-preview-core-registry` is specified on the command line.
+These settings apply only when `--tag=package-2025-03-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-03-preview-core-registry'
+``` yaml $(tag) == 'package-2025-03-preview-only'
 input-file:
   - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry.json
-```
-
-### Tag: package-2025-03-preview-tasks
-
-These settings apply only when `--tag=package-2025-03-preview-tasks` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-03-preview-tasks'
-input-file:
   - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry_build.json
 ```
 
