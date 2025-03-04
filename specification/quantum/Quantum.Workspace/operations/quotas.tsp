@@ -36,36 +36,36 @@ union MeterPeriod {
 model Quota {
   /** Quota faux key. */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // A faux key is needed to tag the Quota as a resource.
   key: never;
 
   /** The name of the dimension associated with the quota. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dimension: string;
 
   /** The scope at which the quota is applied. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scope: DimensionScope;
 
   /** The unique identifier for the provider. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   providerId: string;
 
   /** The amount of the usage that has been applied for the current period. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   utilization: float32;
 
   /** The amount of the usage that has been reserved but not applied for the current period. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   holds: float32;
 
   /** The maximum amount of usage allowed for the current period. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   limit: float32;
 
   /** The time period in which the quota's underlying meter is accumulated. Based on calendar year. 'None' is used for concurrent quotas. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   period: MeterPeriod;
 }
 

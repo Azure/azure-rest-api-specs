@@ -36,9 +36,7 @@ interface PlacementPolicies {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
+    #{ `final-state-via`: "location" }
   )
   @armResourceUpdate(PlacementPolicy)
   @patch
@@ -149,7 +147,7 @@ model PlacementPolicyProperties {
   displayName?: string;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: PlacementPolicyProvisioningState;
 }
 

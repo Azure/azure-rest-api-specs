@@ -40,43 +40,43 @@ scalar WorkspaceItemId extends string;
 model ItemDetails {
   /** Id of the item. */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: WorkspaceItemId;
 
   /** The name of the item. It is not required for the name to be unique and it's only used for display purposes. */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   name: string;
 
   /** The unique identifier for the provider. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   providerId: string;
 
   /** The target identifier to run the job. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   target: string;
 
   /** Type of the Quantum Workspace item */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   itemType: ItemType;
 
   /** The creation time of the item. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   creationTime?: utcDateTime;
 
   /** The time when the item began execution. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   beginExecutionTime?: utcDateTime;
 
   /** The time when the item finished execution. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endExecutionTime?: utcDateTime;
 
   /** Cost estimate. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   costEstimate?: CostEstimate;
 
   /** Error information. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorData?: Errors.WorkspaceItemError;
 }
 

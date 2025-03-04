@@ -314,7 +314,6 @@ interface BatchClient {
 @@access(Azure.Batch.BatchTaskAddCollectionResult, Access.public, "java");
 @@access(Azure.Batch.BatchTask, Access.public, "java");
 @@access(Azure.Batch.BatchTaskListSubtasksResult, Access.public, "java");
-@@access(Azure.Batch.BatchTaskFileClientPathContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeFileListResult, Access.public, "java");
 @@access(Azure.Batch.BatchNodeUserCreateContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeUserUpdateContent, Access.public, "java");
@@ -329,6 +328,5 @@ interface BatchClient {
 @@access(Azure.Batch.BatchNodeListResult, Access.public, "java");
 @@access(Azure.Batch.BatchNodeVMExtension, Access.public, "java");
 @@access(Azure.Batch.BatchNodeVMExtensionListResult, Access.public, "java");
-@@access(Azure.Batch.BatchNodeFileClientPathContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeFileListResult, Access.public, "java");
 @@access(Azure.Batch.BatchError, Access.public, "java");

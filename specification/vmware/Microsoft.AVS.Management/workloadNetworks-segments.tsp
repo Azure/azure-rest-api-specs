@@ -31,7 +31,7 @@ interface WorkloadNetworkSegments {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateSegments")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<WorkloadNetworkSegment, WorkloadNetworkSegment>;
 
   #suppress "deprecated"
@@ -91,15 +91,15 @@ model WorkloadNetworkSegmentProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Port Vif which segment is associated with.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   portVif?: WorkloadNetworkSegmentPortVif[];
 
   @doc("Segment status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: SegmentStatusEnum;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkSegmentProvisioningState;
 
   @doc("NSX revision number.")

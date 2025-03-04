@@ -15,11 +15,11 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("The Microsoft Fabric capacity properties.")
 model FabricCapacityProperties {
   @doc("The current deployment state of Microsoft Fabric resource. The provisioningState is to indicate states for resource provisioning.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The current state of Microsoft Fabric resource. The state is to indicate more states outside of resource provisioning.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: ResourceState;
 
   @doc("The capacity administration")
@@ -172,7 +172,7 @@ model CapacityNameParameter {
 @doc("Describes Resource Quota")
 model Quota {
   @doc("The name of the quota.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: QuotaName;
 
   @doc("The unit of usage measurement.")

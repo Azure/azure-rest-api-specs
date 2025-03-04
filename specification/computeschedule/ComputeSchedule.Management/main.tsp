@@ -12,9 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.ComputeSchedule",
-})
+@service(#{ title: "Microsoft.ComputeSchedule" })
 @doc("Microsoft.ComputeSchedule Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.ComputeSchedule;

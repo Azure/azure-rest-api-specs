@@ -312,7 +312,7 @@ model AtlasEntity {
   homeId?: string;
 
   @doc("The collection ID of the entity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   collectionId?: string;
 
   @doc("Whether it is a shell entity")

@@ -13,7 +13,7 @@ namespace Face;
 @resource("facelists")
 model FaceList is BaseCollection {
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.")
   faceListId: collectionId;
 
@@ -35,7 +35,7 @@ model FaceListFace is BaseFace;
 @resource("largefacelists")
 model LargeFaceList is BaseCollection {
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.")
   largeFaceListId: collectionId;
 }

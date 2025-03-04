@@ -77,7 +77,7 @@ model AddonProperties {
   addonType: AddonType;
 
   @doc("The state of the addon provisioning")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AddonProvisioningState;
 }
 

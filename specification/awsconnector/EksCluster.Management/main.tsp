@@ -17,9 +17,7 @@ using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -82,7 +80,7 @@ model AwsEksClusterProperties {
   createdAt?: utcDateTime;
 
   @doc("<p>The encryption configuration for the cluster.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   encryptionConfig?: EncryptionConfig[];
 
   @doc("<p>The endpoint for your Kubernetes API server.</p>")
@@ -240,7 +238,6 @@ model EncryptionConfig {
   provider?: Provider;
 
   @doc("<p>Specifies the resources to be encrypted. The only supported value is <code>secrets</code>.</p>")
-  @extension("x-ms-identifiers", [])
   resources?: string[];
 }
 
@@ -251,7 +248,7 @@ model EncryptionConfig {
 @doc("Definition of ClusterHealth")
 model ClusterHealth {
   @doc("<p>An object representing the health issues of your local Amazon EKS cluster on an Amazon Web Services Outpost.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   issues?: ClusterIssue[];
 }
 
@@ -309,7 +306,7 @@ model IpFamilyEnumValue {
 @doc("Definition of Logging")
 model Logging {
   @doc("<p>The cluster control plane logging configuration for your cluster.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   clusterLogging?: LogSetup[];
 }
 
@@ -326,7 +323,6 @@ model OutpostConfigResponse {
   controlPlanePlacement?: ControlPlanePlacementResponse;
 
   @doc("<p>The ARN of the Outpost that you specified for use with your local Amazon EKS cluster on Outposts.</p>")
-  @extension("x-ms-identifiers", [])
   outpostArns?: string[];
 }
 
@@ -346,15 +342,12 @@ model VpcConfigResponse {
   endpointPublicAccess?: boolean;
 
   @doc("<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint.</p>")
-  @extension("x-ms-identifiers", [])
   publicAccessCidrs?: string[];
 
   @doc("<p>The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your nodes and the Kubernetes control plane.</p>")
-  @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
   @doc("<p>The subnets associated with your cluster.</p>")
-  @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 
   @doc("<p>The VPC associated with your cluster.</p>")
@@ -384,7 +377,6 @@ model ClusterIssue {
   message?: string;
 
   @doc("<p>The resource IDs that the issue relates to.</p>")
-  @extension("x-ms-identifiers", [])
   resourceIds?: string[];
 }
 
@@ -480,7 +472,6 @@ model LogSetup {
   enabled?: boolean;
 
   @doc("<p>The available cluster control plane log types.</p>")
-  @extension("x-ms-identifiers", [])
   types?: LogType[];
 }
 

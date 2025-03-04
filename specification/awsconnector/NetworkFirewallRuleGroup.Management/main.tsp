@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -91,7 +89,7 @@ model AwsNetworkFirewallRuleGroupProperties {
   ruleGroupName?: string;
 
   @doc("Property tags")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("Property type")
@@ -177,7 +175,7 @@ model RulesSource {
   rulesString?: string;
 
   @doc("Property statefulRules")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   statefulRules?: StatefulRule[];
 
   @doc("Property statelessRulesAndCustomActions")
@@ -222,7 +220,6 @@ model IPSetReference {
 @doc("Definition of IPSet")
 model IPSet {
   @doc("Property definition")
-  @extension("x-ms-identifiers", [])
   definition?: string[];
 }
 
@@ -233,7 +230,6 @@ model IPSet {
 @doc("Definition of PortSet")
 model PortSet {
   @doc("Property definition")
-  @extension("x-ms-identifiers", [])
   definition?: string[];
 }
 
@@ -247,11 +243,9 @@ model RulesSourceList {
   generatedRulesType?: RulesSourceListGeneratedRulesType;
 
   @doc("Property targetTypes")
-  @extension("x-ms-identifiers", [])
   targetTypes?: string[];
 
   @doc("Property targets")
-  @extension("x-ms-identifiers", [])
   targets?: string[];
 }
 
@@ -279,7 +273,7 @@ model StatefulRule {
   header?: Header;
 
   @doc("Property ruleOptions")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   ruleOptions?: RuleOption[];
 }
 
@@ -307,11 +301,11 @@ union StatefulRuleAction {
 @doc("Definition of StatelessRulesAndCustomActions")
 model StatelessRulesAndCustomActions {
   @doc("Property customActions")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   customActions?: CustomAction[];
 
   @doc("Property statelessRules")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   statelessRules?: StatelessRule[];
 }
 
@@ -361,7 +355,6 @@ model RuleOption {
   keyword?: string;
 
   @doc("Property settings")
-  @extension("x-ms-identifiers", [])
   settings?: string[];
 }
 
@@ -470,7 +463,6 @@ model ActionDefinition {
 @doc("Definition of RuleDefinition")
 model RuleDefinition {
   @doc("Property actions")
-  @extension("x-ms-identifiers", [])
   actions?: string[];
 
   @doc("Property matchAttributes")
@@ -484,7 +476,7 @@ model RuleDefinition {
 @doc("Definition of PublishMetricAction")
 model PublishMetricAction {
   @doc("Property dimensions")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   dimensions?: Dimension[];
 }
 
@@ -495,27 +487,26 @@ model PublishMetricAction {
 @doc("Definition of MatchAttributes")
 model MatchAttributes {
   @doc("Property destinationPorts")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   destinationPorts?: PortRange[];
 
   @doc("Property destinations")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   destinations?: Address[];
 
   @doc("Property protocols")
-  @extension("x-ms-identifiers", [])
   protocols?: int32[];
 
   @doc("Property sourcePorts")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   sourcePorts?: PortRange[];
 
   @doc("Property sources")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   sources?: Address[];
 
   @doc("Property tcpFlags")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tcpFlags?: TCPFlagField[];
 }
 
@@ -559,11 +550,9 @@ model Address {
 @doc("Definition of TCPFlagField")
 model TCPFlagField {
   @doc("Property flags")
-  @extension("x-ms-identifiers", [])
   flags?: string[];
 
   @doc("Property masks")
-  @extension("x-ms-identifiers", [])
   masks?: string[];
 }
 

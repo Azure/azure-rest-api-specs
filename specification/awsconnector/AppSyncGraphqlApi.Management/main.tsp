@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -72,7 +70,7 @@ model AppSyncGraphqlApiProperties {
 @doc("Definition of awsAppSyncGraphqlApi")
 model AwsAppSyncGraphqlApiProperties {
   @doc("<p>A list of additional authentication providers for the <code>GraphqlApi</code> API.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   additionalAuthenticationProviders?: AdditionalAuthenticationProvider[];
 
   @doc("<p>The API ID.</p>")

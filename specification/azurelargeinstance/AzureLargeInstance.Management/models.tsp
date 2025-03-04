@@ -295,7 +295,7 @@ model AzureLargeInstanceProperties {
   @removed(Versions.v2024_08_01_preview)
   @renamedFrom(Versions.v2024_08_01_preview, "azureLargeInstanceId")
   @doc("Specifies the Azure Large Instance unique ID.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   azureLargeInstanceIdOld?: string;
 
   @added(Versions.v2024_08_01_preview)
@@ -305,7 +305,7 @@ model AzureLargeInstanceProperties {
   @removed(Versions.v2024_08_01_preview)
   @renamedFrom(Versions.v2024_08_01_preview, "powerState")
   @doc("Resource power state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   powerStateOld?: AzureLargeInstancePowerStateEnum;
 
   @added(Versions.v2024_08_01_preview)
@@ -315,7 +315,7 @@ model AzureLargeInstanceProperties {
   @removed(Versions.v2024_08_01_preview)
   @renamedFrom(Versions.v2024_08_01_preview, "proximityPlacementGroup")
   @doc("Resource proximity placement group")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   proximityPlacementGroupOld?: string;
 
   @added(Versions.v2024_08_01_preview)
@@ -325,7 +325,7 @@ model AzureLargeInstanceProperties {
   @removed(Versions.v2024_08_01_preview)
   @renamedFrom(Versions.v2024_08_01_preview, "hwRevision")
   @doc("Hardware revision of an Azure Large Instance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hwRevisionOld?: string;
 
   @added(Versions.v2024_08_01_preview)
@@ -340,7 +340,7 @@ model AzureLargeInstanceProperties {
   partnerNodeId?: string;
 
   @doc("State of provisioning of the AzureLargeInstance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AzureLargeInstanceProvisioningStatesEnum;
 }
 
@@ -349,7 +349,7 @@ model HardwareProfile {
   @removed(Versions.v2024_08_01_preview)
   @renamedFrom(Versions.v2024_08_01_preview, "hardwareType")
   @doc("Name of the hardware type (vendor and/or their product name)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hardwareTypeOld?: AzureLargeInstanceHardwareTypeNamesEnum;
 
   @added(Versions.v2024_08_01_preview)
@@ -359,7 +359,7 @@ model HardwareProfile {
   @removed(Versions.v2024_08_01_preview)
   @renamedFrom(Versions.v2024_08_01_preview, "azureLargeInstanceSize")
   @doc("Specifies the Azure Large Instance SKU.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   azureLargeInstanceSizeOld?: AzureLargeInstanceSizeNamesEnum;
 
   @added(Versions.v2024_08_01_preview)
@@ -372,7 +372,7 @@ model StorageProfile {
   @removed(Versions.v2024_08_01_preview)
   @renamedFrom(Versions.v2024_08_01_preview, "nfsIpAddress")
   @doc("IP Address to connect to storage.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nfsIpAddressOld?: string;
 
   @added(Versions.v2024_08_01_preview)
@@ -383,7 +383,7 @@ model StorageProfile {
     Specifies information about the operating system disk used by Azure Large
     Instance.
     """)
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   osDisks?: Disk[];
 }
 
@@ -401,7 +401,7 @@ model Disk {
     identify data disks within the VM and therefore must be unique for each data
     disk attached to a VM.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lun?: int32;
 }
 
@@ -413,7 +413,7 @@ model OsProfile {
   @removed(Versions.v2024_08_01_preview)
   @renamedFrom(Versions.v2024_08_01_preview, "osType")
   @doc("This property allows you to specify the type of the OS.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osTypeOld?: string;
 
   @added(Versions.v2024_08_01_preview)
@@ -423,7 +423,7 @@ model OsProfile {
   @removed(Versions.v2024_08_01_preview)
   @renamedFrom(Versions.v2024_08_01_preview, "version")
   @doc("Specifies version of operating system.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   versionOld?: string;
 
   @added(Versions.v2024_08_01_preview)
@@ -437,13 +437,13 @@ model OsProfile {
 @doc("Specifies the network settings for the Azure Large Instance disks.")
 model NetworkProfile {
   @doc("Specifies the network interfaces for the Azure Large Instance.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   networkInterfaces?: IpAddress[];
 
   @removed(Versions.v2024_08_01_preview)
   @doc("Specifies the circuit id for connecting to express route.")
   @renamedFrom(Versions.v2024_08_01_preview, "circuitId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   circuitIdOld?: string;
 
   @added(Versions.v2024_08_01_preview)

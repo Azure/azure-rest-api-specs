@@ -99,7 +99,7 @@ model NotificationRule {
   @minLength(2)
   @pattern("^[a-z0-9_-]*$")
   @doc("The unique identifier of the notification rule.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   notificationRuleId: string;
 
   @maxLength(50)

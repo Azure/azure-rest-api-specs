@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -78,7 +76,7 @@ model AwsGuardDutyDetectorProperties {
   enable?: boolean;
 
   @doc("Property features")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   features?: CFNFeatureConfiguration[];
 
   @doc("Property findingPublishingFrequency")
@@ -88,7 +86,7 @@ model AwsGuardDutyDetectorProperties {
   id?: string;
 
   @doc("Property tags")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: TagItem[];
 }
 
@@ -115,7 +113,7 @@ model CFNDataSourceConfigurations {
 @doc("Definition of CFNFeatureConfiguration")
 model CFNFeatureConfiguration {
   @doc("Property additionalConfiguration")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   additionalConfiguration?: CFNFeatureAdditionalConfiguration[];
 
   @doc("Property name")

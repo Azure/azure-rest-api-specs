@@ -47,7 +47,7 @@ interface EnterpriseMccCacheNodesOperations {
 }
 
 @@visibility(Azure.ResourceManager.TrackedResource.properties,
-  "create",
-  "update",
-  "read"
+  Lifecycle.Create,
+  Lifecycle.Update,
+  Lifecycle.Read
 );

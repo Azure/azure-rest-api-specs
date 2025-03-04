@@ -7,13 +7,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AgriculturePlatform")
-@service({
-  title: "Microsoft.AgriculturePlatform",
-})
+@service(#{ title: "Microsoft.AgriculturePlatform" })
 @versioned(Microsoft.AgriculturePlatform.Versions)
 namespace Microsoft.AgriculturePlatform;
 
@@ -35,7 +32,7 @@ model AgriServiceResource is TrackedResource<AgriServiceResourceProperties> {
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("agriServiceResourceName")
   @segment("agriServices")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 
@@ -72,26 +69,26 @@ union ProvisioningState {
 
 @doc("Details of the Agriculture AgriDataManager.")
 model AgriServiceResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
   @doc("Config of the AgriService instance.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   config?: AgriServiceConfig;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Managed On Behalf Of Configuration.")
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   @doc("Data connector credentials of AgriService instance.")
-  @OpenAPI.extension("x-ms-identifiers", ["key"])
-  @visibility("read", "create", "update")
+  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   dataConnectorCredentials?: DataConnectorCredentialMap[];
 
   @doc("AgriService installed solutions.")
-  @OpenAPI.extension("x-ms-identifiers", ["key"])
-  @visibility("read", "create", "update")
+  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   installedSolutions?: InstalledSolutionMap[];
 }
 
@@ -116,39 +113,39 @@ model InstalledSolutionMap {
 @doc("Config of the AgriService resource instance.")
 model AgriServiceConfig {
   @doc("Instance URI of the AgriService instance.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minLength(2)
   @maxLength(256)
   instanceUri?: string;
 
   @doc("Version of AgriService instance.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minLength(2)
   @maxLength(256)
   version?: string;
 
   @doc("App service resource Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minLength(2)
   appServiceResourceId?: string;
 
   @doc("Cosmos Db resource Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minLength(2)
   cosmosDbResourceId?: string;
 
   @doc("Storage account resource Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minLength(2)
   storageAccountResourceId?: string;
 
   @doc("Key vault resource Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minLength(2)
   keyVaultResourceId?: string;
 
   @doc("Redis cache resource Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minLength(2)
   redisCacheResourceId?: string;
 }
@@ -156,26 +153,26 @@ model AgriServiceConfig {
 @doc("The properties related to an AgriService data connector.")
 model DataConnectorCredentials {
   @doc("Type of credential.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   kind?: AuthCredentialsKind;
 
   @doc("Client Id associated with the provider, if type of credentials is OAuthClientCredentials.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(2)
   clientId?: string;
 
   @doc("Uri of the key vault")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(2)
   keyVaultUri?: string;
 
   @doc("Name of the key vault key.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(2)
   keyName?: string;
 
   @doc("Version of the key vault key.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(2)
   keyVersion?: string;
 }
@@ -194,39 +191,39 @@ union AuthCredentialsKind {
 @doc("Installed data manager for Agriculture solution detail.")
 model Solution {
   @doc("Application name of the solution.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(2)
   applicationName?: string;
 
   @doc("Partner Id.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(2)
   partnerId?: string;
 
   @doc("Marketplace publisher Id.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(2)
   marketPlacePublisherId?: string;
 
   @doc("Saas subscription Id.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(2)
   saasSubscriptionId?: string;
 
   @doc("Saas subscription name.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(2)
   saasSubscriptionName?: string;
 
   @doc("Plan Id.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minLength(2)
   planId?: string;
 }
 
 @doc("Configuration of the managed on behalf of resource.")
 model ManagedOnBehalfOfConfiguration {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Associated MoboBrokerResources.")
   moboBrokerResources: MoboBrokerResource[];
 }
@@ -237,7 +234,7 @@ model MoboBrokerResource {
    * The fully qualified resource ID of the MoboBroker resource.
    * Example: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 }
 
@@ -279,7 +276,7 @@ op ArmResourceListActionSync<
 @doc("The list of available agri solutions.")
 model AvailableAgriSolutionListResult {
   @doc("Agri solutions list.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   solutions: DataManagerForAgricultureSolution[];
 }
 

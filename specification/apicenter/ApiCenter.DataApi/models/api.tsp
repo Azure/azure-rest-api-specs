@@ -35,7 +35,7 @@ model Api {
   kind: ApiKind;
 
   @doc("Current lifecycle stage of the API.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lifecycleStage?: LifecycleStage;
 
   @doc("Terms of service for the API.")
@@ -54,7 +54,7 @@ model Api {
   customProperties?: {};
 
   @doc("Last updated date and time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastUpdated?: utcDateTime;
 }
 

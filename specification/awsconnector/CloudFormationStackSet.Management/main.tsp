@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -82,7 +80,6 @@ model AwsCloudFormationStackSetProperties {
   callAs?: CallAs;
 
   @doc("In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.")
-  @extension("x-ms-identifiers", [])
   capabilities?: string[];
 
   @doc("A description of the stack set. You can use the description to identify the stack set's purpose or other important information.")
@@ -98,14 +95,14 @@ model AwsCloudFormationStackSetProperties {
   operationPreferences?: OperationPreferences;
 
   @doc("The input parameters for the stack set template.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   parameters?: Parameter[];
 
   @doc("Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified.")
   permissionModel?: PermissionModel;
 
   @doc("A group of stack instances with parameters in some specific accounts and regions.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   stackInstancesGroup?: StackInstances[];
 
   @doc("The ID of the stack set that you're creating.")
@@ -115,7 +112,7 @@ model AwsCloudFormationStackSetProperties {
   stackSetName?: string;
 
   @doc("The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.")
@@ -193,7 +190,6 @@ model OperationPreferences {
   regionConcurrencyType?: OperationPreferencesRegionConcurrencyType;
 
   @doc("Property regionOrder")
-  @extension("x-ms-identifiers", [])
   regionOrder?: string[];
 }
 
@@ -231,11 +227,10 @@ model StackInstances {
   deploymentTargets?: DeploymentTargets;
 
   @doc("A list of stack set parameters whose values you want to override in the selected stack instances.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   parameterOverrides?: Parameter[];
 
   @doc("The names of one or more Regions where you want to create stack instances using the specified AWS account(s).")
-  @extension("x-ms-identifiers", [])
   regions?: string[];
 }
 
@@ -262,14 +257,12 @@ model DeploymentTargets {
   accountFilterType?: DeploymentTargetsAccountFilterType;
 
   @doc("AWS accounts that you want to create stack instances in the specified Region(s) for.")
-  @extension("x-ms-identifiers", [])
   accounts?: string[];
 
   @doc("Returns the value of the AccountsUrl property.")
   accountsUrl?: string;
 
   @doc("The organization root ID or organizational unit (OU) IDs to which StackSets deploys.")
-  @extension("x-ms-identifiers", [])
   organizationalUnitIds?: string[];
 }
 

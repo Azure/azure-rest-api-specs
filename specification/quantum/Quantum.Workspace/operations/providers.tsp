@@ -41,35 +41,35 @@ union TargetAvailability {
 @parentResource(QuantumWorkspace)
 model ProviderStatus {
   /** Provider id. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key
   id: string;
 
   /** Current provider availability. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentAvailability: ProviderAvailability;
 
   /** Current target statuses. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targets: TargetStatus[];
 }
 
 /** Target status. */
 model TargetStatus {
   /** Target id. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   /** Current target availability. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentAvailability: TargetAvailability;
 
   /** Average queue time in seconds. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   averageQueueTime: int64;
 
   /** A page with detailed status of the provider. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   statusPage?: string;
 }
 

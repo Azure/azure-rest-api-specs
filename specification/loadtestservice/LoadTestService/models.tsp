@@ -309,7 +309,7 @@ model Test {
   baselineTestRunId?: string;
 
   @doc("The input artifacts for the test.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inputArtifacts?: TestInputArtifacts;
 
   ...TestIdPathParameter;
@@ -399,11 +399,11 @@ model PassFailMetric {
   action?: PFAction = PFAction.continue;
 
   @doc("The actual value of the client metric for the test run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   actualValue?: float64;
 
   @doc("Outcome of the test run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   result?: PFResult;
 }
 
@@ -431,11 +431,11 @@ model PassFailServerMetric {
   action?: PFAction = PFAction.continue;
 
   @doc("The actual value of the server metric ")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   actualValue?: float64;
 
   @doc("Outcome of the test run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   result?: PFResult;
 }
 
@@ -560,7 +560,7 @@ model TestInputArtifacts {
   urlTestConfigFileInfo?: TestFileInfo;
 
   @doc("Additional supported files for the test run")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   additionalFileInfo?: TestFileInfo[];
 }
 
@@ -573,23 +573,23 @@ model FileInfo {
 
   @doc("File URL.")
   //update description
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   url?: url;
 
   @doc("File type")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fileType?: FileType;
 
   @doc("Expiry time of the file (RFC 3339 literal format)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expireDateTime?: utcDateTime;
 
   @doc("Validation status of the file")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   validationStatus?: FileStatus;
 
   @doc("Validation failure error details")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   validationFailureDetails?: string;
 }
 
@@ -603,7 +603,7 @@ model TestAppComponents {
   components: Record<AppComponent>;
 
   @doc("Test identifier")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testId?: string;
 
   ...SystemMetaData;
@@ -616,7 +616,7 @@ model AppComponent {
   @doc("""
     fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceId: string;
 
   @doc("Azure resource name, required while creating the app component.")
@@ -629,11 +629,11 @@ model AppComponent {
   displayName?: string;
 
   @doc("Resource group name of the Azure resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceGroup?: string;
 
   @doc("Subscription Id of the Azure resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subscriptionId?: string;
 
   @doc("Kind of Azure resource type")
@@ -643,7 +643,7 @@ model AppComponent {
 @doc("Test server metrics configuration")
 model TestServerMetricConfig {
   @doc("Test identifier")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testId?: string;
 
   @doc("""
@@ -663,7 +663,7 @@ model TestServerMetricConfig {
   """)
 model ResourceMetric {
   @doc("Unique name for metric.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("Azure resource id.")
@@ -716,7 +716,7 @@ model TestRun {
   environmentVariables?: Record<string>;
 
   @doc("Error details if there is any failure in load test run")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorDetails?: ErrorDetails[];
 
   @doc("""
@@ -724,7 +724,7 @@ model TestRun {
     The sampler name is the same as the name mentioned in the test script.
     Sampler name "Total" represents the aggregated statistics of all the samplers.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testRunStatistics?: Record<TestRunStatistics>;
 
   @doc("""
@@ -732,24 +732,24 @@ model TestRun {
     The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
     The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(APIVersions.v2024_03_01_preview)
   regionalStatistics?: Record<TestRunStatistics>;
 
   @doc("The load test configuration.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   loadTestConfiguration?: LoadTestConfiguration;
 
   @doc("Collection of test run artifacts")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testArtifacts?: TestRunArtifacts;
 
   @doc("Test result for pass/Fail criteria used during the test run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testResult?: PFTestResult;
 
   @doc("Number of virtual users, for which test has been run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualUsers?: int32;
 
   @maxLength(50)
@@ -767,41 +767,41 @@ model TestRun {
   description?: string;
 
   @doc("The test run status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: Status;
 
   @doc("The test run start DateTime(RFC 3339 literal format).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startDateTime?: utcDateTime;
 
   @doc("The test run end DateTime(RFC 3339 literal format).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endDateTime?: utcDateTime;
 
   @doc("Test run initiated time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   executedDateTime?: utcDateTime;
 
   @doc("Portal url.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   portalUrl?: string;
 
   @doc("Test run duration in milliseconds.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   duration?: int64;
 
   @doc("Virtual user hours consumed by the test run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(APIVersions.v2024_07_01_preview)
   virtualUserHours?: float64;
 
   @doc("Subnet ID on which the load test instances should run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subnetId?: string;
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("Type of test.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kind?: TestKind;
 
   @added(APIVersions.v2024_05_01_preview)
@@ -815,7 +815,7 @@ model TestRun {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
   @added(APIVersions.v2023_04_01_preview)
   @doc("Inject load test engines without deploying public IP for outbound access")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publicIPDisabled?: boolean;
 
   @added(APIVersions.v2024_07_01_preview)
@@ -828,105 +828,105 @@ model TestRun {
 @doc("Error details if there is any failure in load test run")
 model ErrorDetails {
   @doc("Error details in case test run was not successfully run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
 @doc("Test run statistics.")
 model TestRunStatistics {
   @doc("Transaction name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   transaction?: string;
 
   @doc("Sampler count.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sampleCount?: float64;
 
   @doc("Error count.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorCount?: float64;
 
   @doc("Error percentage.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorPct?: float64;
 
   @doc("Mean response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   meanResTime?: float64;
 
   @doc("Median response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   medianResTime?: float64;
 
   @doc("Max response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxResTime?: float64;
 
   @doc("Minimum response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   minResTime?: float64;
 
   @doc("90 percentile response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct1ResTime?: float64;
 
   @doc("95 percentile response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct2ResTime?: float64;
 
   @doc("99 percentile response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct3ResTime?: float64;
 
   @added(APIVersions.v2024_05_01_preview)
   @doc("75 percentile response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct75ResTime?: float64;
 
   @added(APIVersions.v2024_05_01_preview)
   @doc("96 percentile response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct96ResTime?: float64;
 
   @added(APIVersions.v2024_05_01_preview)
   @doc("97 percentile response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct97ResTime?: float64;
 
   @added(APIVersions.v2024_05_01_preview)
   @doc("98 percentile response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct98ResTime?: float64;
 
   @added(APIVersions.v2024_05_01_preview)
   @doc("99.9 percentile response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct999ResTime?: float64;
 
   @added(APIVersions.v2024_05_01_preview)
   @doc("99.99 percentile response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct9999ResTime?: float64;
 
   @doc("Throughput.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   throughput?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "KBytes is expected"
   @doc("Received network bytes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   receivedKBytesPerSec?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "KBytes is expected"
   @doc("Send network bytes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sentKBytesPerSec?: float64;
 }
 
 @doc("Collection of test run artifacts")
 model TestRunArtifacts {
   @doc("The input artifacts for the test run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inputArtifacts?: TestRunInputArtifacts;
 
   @doc("The output artifacts for the test run.")
@@ -952,7 +952,7 @@ model TestRunInputArtifacts {
   urlTestConfigFileInfo?: TestRunFileInfo;
 
   @doc("Additional supported files for the test run")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   additionalFileInfo?: TestRunFileInfo[];
 }
 
@@ -1107,7 +1107,7 @@ model DimensionValue {
 @pagedResult
 model DimensionValueList {
   @doc("The dimension name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(APIVersions.v2023_04_01_preview)
   name?: string;
 
@@ -1151,7 +1151,7 @@ model TestRunAppComponents {
   components: Record<AppComponent>;
 
   @doc("Test run identifier")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testRunId?: string;
 
   ...SystemMetaData;
@@ -1160,7 +1160,7 @@ model TestRunAppComponents {
 @doc("Test run server metrics configuration")
 model TestRunServerMetricConfig {
   @doc("Test run identifier")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testRunId?: string;
 
   @doc("""
@@ -1260,19 +1260,19 @@ model ListTestQueryParams {
 @doc("System metadata.")
 model SystemMetaData {
   @doc("The creation datetime(RFC 3339 literal format).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdDateTime?: utcDateTime;
 
   @doc("The user that created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   @doc("The last Modified datetime(RFC 3339 literal format).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedDateTime?: utcDateTime;
 
   @doc("The user that last modified.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedBy?: string;
 }
 
@@ -1282,7 +1282,7 @@ model TestIdPathParameter {
   @maxLength(50)
   @minLength(2)
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-z0-9_-]*$")
   testId: string;
 }
@@ -1290,7 +1290,7 @@ model TestIdPathParameter {
 @doc("Test run Id path parameter.")
 model TestRunIdPathParameter {
   @doc("Unique test run identifier for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(50)
   @minLength(2)
   @key

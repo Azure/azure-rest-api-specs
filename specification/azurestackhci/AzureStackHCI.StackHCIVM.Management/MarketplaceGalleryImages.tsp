@@ -22,7 +22,7 @@ model MarketplaceGalleryImage
   @path
   @key("marketplaceGalleryImageName")
   @segment("marketplaceGalleryImages")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")
@@ -43,7 +43,7 @@ interface MarketplaceGalleryImages {
   >;
 
   @doc("The operation to update a marketplace gallery image.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<MarketplaceGalleryImage>;
 
   @doc("The operation to delete a marketplace gallery image.")

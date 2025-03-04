@@ -13,18 +13,18 @@ using TypeSpec.Http;
 /** The details (name and container) of the blob to store or download data. */
 model BlobDetails {
   /** The container name. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   containerName: string;
 
   /** The blob name. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   blobName?: string;
 }
 
 /** SAS URI operation response. */
 model SasUriResponse {
   /** A URL with a SAS token to upload a blob for execution in the given workspace. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sasUri: string;
 }
 

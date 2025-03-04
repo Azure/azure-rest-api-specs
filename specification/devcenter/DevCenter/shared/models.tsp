@@ -15,7 +15,7 @@ namespace DevCenterService;
 @parentResource(Project)
 model OperationStatus {
   @doc("Fully qualified ID for the operation status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("The operation id name.")
@@ -23,7 +23,7 @@ model OperationStatus {
   @minLength(36)
   @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
   @key("operationId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: Azure.Core.uuid;
 
   @doc("Provisioning state of the resource.")
@@ -63,7 +63,7 @@ model Project {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Description of the project.")
@@ -90,7 +90,7 @@ model User {
   @minLength(2)
   @maxLength(36)
   @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userId: string;
 }
 

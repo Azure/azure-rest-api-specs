@@ -48,7 +48,7 @@ interface Fabric {
   /**
    * Performs update on the fabric.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<FabricModel, FabricModelUpdate>;
 
   /**

@@ -64,23 +64,23 @@ union VirtualMachineProvisioningState {
 @doc("Virtual Machine Properties")
 model VirtualMachineProperties {
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: VirtualMachineProvisioningState;
 
   @doc("Display name of the VM.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   @doc("Virtual machine managed object reference id")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   moRefId?: string;
 
   @doc("Path to virtual machine's folder starting from datacenter virtual machine folder")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   folderPath?: string;
 
   @doc("Whether VM DRS-driven movement is restricted (enabled) or not (disabled)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   restrictMovement?: VirtualMachineRestrictMovementState;
 }
 

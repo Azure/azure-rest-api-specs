@@ -17,9 +17,7 @@ using TypeSpec.Versioning;
 using OpenAPI;
 
 @armProviderNamespace("Microsoft.StandbyPool")
-@service({
-  title: "Microsoft.StandbyPool",
-})
+@service(#{ title: "Microsoft.StandbyPool" })
 @versioned(Microsoft.StandbyPool.Versions)
 namespace Microsoft.StandbyPool;
 
@@ -77,11 +75,11 @@ model PoolResourceStateCount {
 @doc("Displays StandbyPool status.")
 model PoolStatus {
   @doc("Displays the healthy state of the StandbyPool.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code: HealthStateCode;
 
   @doc("Displays the StandbyPool health state details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 

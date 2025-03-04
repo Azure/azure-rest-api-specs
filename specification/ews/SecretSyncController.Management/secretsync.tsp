@@ -46,15 +46,15 @@ model SecretSyncProperties {
 
   @doc("An array of SecretObjectData that maps secret data from the external secret provider to the Kubernetes secret. Each entry specifies the source secret in the external provider and the corresponding key in the Kubernetes secret.")
   @minItems(1)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   objectSecretMapping: KubernetesSecretObjectMapping[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("SecretSyncStatus defines the observed state of the secret synchronization process.")
   status?: SecretSyncStatus;
 
   @doc("Provisioning state of the SecretSync instance.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -106,12 +106,12 @@ union StatusConditionType {
 @doc("SecretSyncStatus defines the observed state of the secret synchronization process.")
 model SecretSyncStatus {
   @doc("LastSuccessfulSyncTime represents the last time the secret was retrieved from the Provider and updated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastSuccessfulSyncTime?: utcDateTime;
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   @doc("Conditions represent the status of the secret create and update processes. The status can be True, False, or Unknown with various reasons and messages explaining the state. Examples of reasons include CreateSucceeded, ProviderError, InvalidClusterSecretLabelError, InvalidClusterSecretAnnotationError, UnknownError, ValidatingAdmissionPolicyCheckFailed, UserInputValidationFailed, ControllerSpcError, ControllerInternalError, NoValueChange, and ValueChangeOrForceUpdateDetected.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   conditions?: SecretSyncCondition[];
 
   // Not including syncHash at the moment for security concerns TODO #28507544 https://msazure.visualstudio.com/One/_workitems/edit/28507544
@@ -120,30 +120,30 @@ model SecretSyncStatus {
 @doc("A condition represents the status of the secret create and update processes.")
 model SecretSyncCondition {
   @doc("LastTransitionTime is the last time the condition transitioned from one status to another. This should be when the underlying condition changed. If that is not known, then using the time when the API field changed is acceptable.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastTransitionTime?: utcDateTime;
 
   @doc("Message is a human readable message indicating details about the transition. This may be an empty string.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message: string;
 
   @doc("ObservedGeneration represents the .metadata.generation that the condition was set based upon. For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date with respect to the current state of the instance.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   observedGeneration?: int64;
 
   @doc("Reason contains a programmatic identifier indicating the reason for the condition's last transition. Producers of specific condition types may define expected values and meanings for this field, and whether the values are considered a guaranteed API. The value should be a CamelCase string. This field may not be empty.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minLength(1)
   @maxLength(1024)
   @pattern("^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$")
   reason: string;
 
   @doc("Status of the condition, one of True, False, Unknown.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status: StatusConditionType;
 
   @doc("Type of condition in CamelCase or in foo.example.com/CamelCase. Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be useful (see .node.status.conditions), the ability to de-conflict is important. The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(316)
   @pattern("^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$")
   type: string;

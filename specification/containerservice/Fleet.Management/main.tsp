@@ -13,9 +13,7 @@ using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 @armProviderNamespace
-@service({
-  title: "ContainerServiceFleetClient",
-})
+@service(#{ title: "ContainerServiceFleetClient" })
 @doc("Azure Kubernetes Fleet Manager api client.")
 @versioned(Versions)
 namespace Microsoft.ContainerService;
