@@ -73,8 +73,8 @@ jobs:
       - name: Fetch main branch
         run: git fetch origin main --depth=1 # Fetch only the latest commit from main
 
-      - name: git merge origin/main
-        run: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge -Xours origin/main
+      - name: git rebase origin/main
+        run: git rebase -Xtheirs origin/main
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
