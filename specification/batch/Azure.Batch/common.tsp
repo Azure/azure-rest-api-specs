@@ -24,6 +24,19 @@ op ListOperation<TFilter, TResponse> is Azure.Core.RpcOperation<
   BatchError
 >;
 
+// TODO: Once we migrate all ListOperation methods in routes.tsp to use this, delete original ListOperation (above) and rename this to ListOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@get
+op ListOperationNew<
+  TFilter extends TypeSpec.Reflection.Model,
+  TResponse
+> is Azure.Core.RpcOperation<
+  TFilter,
+  BatchResponseHeaders & TResponse,
+  NoFilter,
+  BatchError
+>;
+
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @get
 op ReadOperation<
@@ -36,7 +49,7 @@ op ReadOperation<
   BatchError
 >;
 
-// TODO: Once we migrate everything in routes.tsp to use this, delete original ReadOperation (above) and rename this to ReadOperation
+// TODO: Once we migrate all ReadOperation methods in routes.tsp to use this, delete original ReadOperation (above) and rename this to ReadOperation
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @get
 op ReadOperationNew<

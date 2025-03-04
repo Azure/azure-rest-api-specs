@@ -23,10 +23,10 @@ model GetApplicationOptions {
 @route("/applications/{applicationId}")
 op getApplicationCustomization is Azure.Batch.ReadOperationNew<
   {
-    ...Azure.Batch.GetApplicationRequiredParameters,
+    ...Azure.Batch.GetApplicationRequiredParameters;
 
     @doc("Optional parameters for Get Application operation.")
-    options?: GetApplicationOptions,
+    options?: GetApplicationOptions;
   },
   Azure.Batch.BatchApplication
 >;
@@ -45,12 +45,14 @@ model ListBatchApplicationsOptions {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Custom override for List Applications operation.")
-op listApplicationsCustomization(
-  @doc("Optional parameters for List Applications operation.")
-  options?: ListBatchApplicationsOptions,
-
-  ...ApiVersionParameter,
-): void;
+@route("/applications")
+op listApplicationsCustomization is Azure.Batch.ListOperationNew<
+  {
+    @doc("Optional parameters for List Applications operation.")
+    options?: ListBatchApplicationsOptions;
+  },
+  Azure.Batch.BatchApplicationListResult
+>;
 
 @@override(Azure.Batch.Applications.listApplications,
   listApplicationsCustomization,
