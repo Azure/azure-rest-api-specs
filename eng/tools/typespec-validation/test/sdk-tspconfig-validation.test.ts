@@ -162,6 +162,7 @@ interface Case {
   subRules: TspconfigSubRuleBase[];
   tspconfigContent: string;
   success: boolean;
+  ignoredOptions?: Set<string>;
 }
 
 const managementTspconfigFolder = "contosowidgetmanager/Contoso.Management/";
@@ -463,6 +464,32 @@ const csharpMgmtPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpMgmtPackageDirectorySubRule()],
 );
 
+const suppressSubRuleTestCases: Case[] = [
+  {
+    description: "Suppress parameter",
+    folder: "",
+    subRules: [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
+    tspconfigContent: `
+parameters:
+  service-dir-x: ""
+`,
+    success: true,
+    ignoredOptions: new Set(["parameters.service-dir.default"]),
+  },
+  {
+    description: "Suppress option",
+    folder: managementTspconfigFolder,
+    subRules: [new TspConfigTsMgmtModularPackageDirectorySubRule()],
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    package-dir: "*@#$%(@)*$#@!()#*&"
+`,
+    success: true,
+    ignoredOptions: new Set(["options.@azure-tools/typespec-ts.package-dir"]),
+  },
+];
+
 describe("tspconfig", function () {
   it.each([
     // common
@@ -504,6 +531,8 @@ describe("tspconfig", function () {
     ...csharpAzNamespaceTestCases,
     ...csharpAzClearOutputFolderTestCases,
     ...csharpMgmtPackageDirTestCases,
+    // suppression
+    ...suppressSubRuleTestCases,
   ])(`$description`, async (c: Case) => {
     let host = new TsvTestHost();
     host.checkFileExists = async (file: string) => {
@@ -511,7 +540,7 @@ describe("tspconfig", function () {
     };
     host.readTspConfig = async (_folder: string) => c.tspconfigContent;
     const rule = new SdkTspConfigValidationRule(c.subRules);
-    const result = await rule.execute(host, c.folder);
+    const result = await rule.execute(host, c.folder, c.ignoredOptions);
     strictEqual(result.success, true);
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
