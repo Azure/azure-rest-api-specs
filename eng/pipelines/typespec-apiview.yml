@@ -20,6 +20,11 @@ jobs:
   - checkout: self
     fetchDepth: 0
 
+  - task: NodeTool@0
+    inputs:
+      versionSpec: 22.x
+    displayName: "Use Node 22.x"
+
   - pwsh: |
       . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
       New-TypeSpecAPIViewTokens `
