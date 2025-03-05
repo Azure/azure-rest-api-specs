@@ -54,18 +54,27 @@ model InstanceProperties {
   @doc("The reference to the Schema Registry for this AIO Instance.")
   schemaRegistryRef: SchemaRegistryRef;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("The features of the AIO Instance.")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
-  features?: InstanceFeature[];
+  features?: Record<InstanceFeature>;
 }
 
 @doc("The features of the AIO Instance.")
 model InstanceFeature {
-  @doc("The name of the feature.")
-  name: string;
+  @doc("The state of the feature.")
+  mode?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("The value of the feature.")
-  value?: OperationalMode;
+  configSettings?: Record<string>;
+}
+
+@doc("The enum defining state of a feature.")
+union InstanceFeatureState {
+  OperationalMode,
+
+  @doc("The feature is in preview mode.")
+ "Preview",
 }
 
 @doc("The reference to the Schema Registry for this AIO Instance.")
