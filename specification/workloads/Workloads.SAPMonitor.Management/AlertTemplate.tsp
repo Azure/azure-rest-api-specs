@@ -16,7 +16,7 @@ model AlertTemplate is ProxyResource<AlertTemplateProperties> {
   @path
   @key("alertTemplateName")
   @segment("alertTemplates")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
