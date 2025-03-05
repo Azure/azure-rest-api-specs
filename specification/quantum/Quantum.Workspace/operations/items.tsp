@@ -75,7 +75,7 @@ model ItemDetails {
 
   /** Cost estimate. */
   @visibility(Lifecycle.Read)
-  costEstimate?: Quantum.Workspace.CostEstimate;
+  costEstimate?: Quantum.Workspace.Services.CostEstimate;
 
   /** Error information. */
   @visibility(Lifecycle.Read)
