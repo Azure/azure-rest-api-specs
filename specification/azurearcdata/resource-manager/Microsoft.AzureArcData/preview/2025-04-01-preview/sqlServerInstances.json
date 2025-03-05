@@ -1422,8 +1422,11 @@
           }
         },
         "databaseName": {
-          "type": "string",
-          "description": "The name of the database to be replicated to the Azure SQL Managed Instance."
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of strings, where each value represents the name of a database to be replicated to the Azure SQL Managed Instance."
         },
         "availabilityGroupName": {
           "type": "string",
