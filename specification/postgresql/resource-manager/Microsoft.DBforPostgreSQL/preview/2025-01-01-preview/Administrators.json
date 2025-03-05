@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -41,7 +41,7 @@
         ],
         "operationId": "Administrators_Create",
         "x-ms-examples": {
-          "Adds an Active DIrectory Administrator for the server": {
+          "Adds an Microsoft Entra Administrator for the server": {
             "$ref": "./examples/AdministratorAdd.json"
           }
         },
@@ -69,7 +69,7 @@
             "schema": {
               "$ref": "#/definitions/ActiveDirectoryAdministratorAdd"
             },
-            "description": "The required parameters for adding an active directory administrator for a server."
+            "description": "The required parameters for adding an Microsoft Entra Administrator for a server."
           }
         ],
         "responses": {
@@ -115,7 +115,7 @@
             "$ref": "./examples/AdministratorDelete.json"
           }
         },
-        "description": "Deletes an Active Directory Administrator associated with the server.",
+        "description": "Deletes an Microsoft Entra Administrator associated with the server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -257,17 +257,17 @@
         "properties": {
           "$ref": "#/definitions/AdministratorPropertiesForAdd",
           "x-ms-client-flatten": true,
-          "description": "Properties of the active directory administrator."
+          "description": "Properties of the Microsoft Entra Administrator."
         }
       },
-      "description": "Represents an Active Directory administrator."
+      "description": "Represents an Microsoft Entra Administrator."
     },
     "AdministratorPropertiesForAdd": {
       "type": "object",
       "properties": {
         "principalType": {
           "type": "string",
-          "description": "The principal type used to represent the type of Active Directory Administrator.",
+          "description": "The principal type used to represent the type of Microsoft Entra Administrator.",
           "enum": [
             "Unknown",
             "User",
@@ -286,7 +286,7 @@
         },
         "principalName": {
           "type": "string",
-          "description": "Active Directory administrator principal name.",
+          "description": "Microsoft Entra Administrator principal name.",
           "x-ms-mutability": [
             "create",
             "update",
@@ -295,21 +295,21 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "The tenantId of the Active Directory administrator.",
+          "description": "The tenantId of the Microsoft Entra Administrator.",
           "x-ms-mutability": [
             "create",
             "update"
           ]
         }
       },
-      "description": "The properties of an Active Directory administrator."
+      "description": "The properties of an Microsoft Entra Administrator."
     },
     "AdministratorProperties": {
       "type": "object",
       "properties": {
         "principalType": {
           "type": "string",
-          "description": "The principal type used to represent the type of Active Directory Administrator.",
+          "description": "The principal type used to represent the type of Microsoft Entra Administrator.",
           "enum": [
             "Unknown",
             "User",
@@ -328,7 +328,7 @@
         },
         "principalName": {
           "type": "string",
-          "description": "Active Directory administrator principal name.",
+          "description": "Microsoft Entra Administrator principal name.",
           "x-ms-mutability": [
             "create",
             "update",
@@ -337,7 +337,7 @@
         },
         "objectId": {
           "type": "string",
-          "description": "The objectId of the Active Directory administrator.",
+          "description": "The objectId of the Microsoft Entra Administrator.",
           "x-ms-mutability": [
             "create",
             "update",
@@ -346,7 +346,7 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "The tenantId of the Active Directory administrator.",
+          "description": "The tenantId of the Microsoft Entra Administrator.",
           "x-ms-mutability": [
             "create",
             "update",
@@ -354,7 +354,7 @@
           ]
         }
       },
-      "description": "The properties of an Active Directory administrator."
+      "description": "The properties of an Microsoft Entra Administrator."
     },
     "ActiveDirectoryAdministrator": {
       "type": "object",
@@ -362,7 +362,7 @@
         "properties": {
           "$ref": "#/definitions/AdministratorProperties",
           "x-ms-client-flatten": true,
-          "description": "Properties of the active directory administrator."
+          "description": "Properties of the Microsoft Entra Administrator."
         }
       },
       "allOf": [
@@ -373,7 +373,7 @@
       "required": [
         "properties"
       ],
-      "description": "Represents an Active Directory administrator."
+      "description": "Represents an Microsoft Entra Administrator."
     },
     "AdministratorListResult": {
       "type": "object",
@@ -383,14 +383,14 @@
           "items": {
             "$ref": "#/definitions/ActiveDirectoryAdministrator"
           },
-          "description": "The list of active directory administrators"
+          "description": "The list of Microsoft Entra Administrators"
         },
         "nextLink": {
-          "description": "The link used to get the next page of active directory.",
+          "description": "The link used to get the next page of Microsoft Entra administrators.",
           "type": "string"
         }
       },
-      "description": "A list of active directory administrators."
+      "description": "A list of Microsoft Entra Administrators."
     }
   },
   "parameters": {

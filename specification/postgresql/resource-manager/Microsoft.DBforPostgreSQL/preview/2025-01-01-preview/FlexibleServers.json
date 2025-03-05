@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -44,7 +44,7 @@
           "Create a new server": {
             "$ref": "./examples/ServerCreate.json"
           },
-          "Create a new server with active directory authentication enabled": {
+          "Create a new server with Microsoft Entra authentication enabled": {
             "$ref": "./examples/ServerCreateWithMicrosoftEntraEnabled.json"
           },
           "ServerCreateWithDataEncryptionEnabled": {
@@ -700,7 +700,7 @@
         },
         "version": {
           "$ref": "#/definitions/ServerVersion",
-          "description": "PostgreSQL Server version. Version 16 is currently not supported for MVU."
+          "description": "PostgreSQL Server version. Version 17 is currently not supported for MVU."
         },
         "storage": {
           "$ref": "#/definitions/Storage",
@@ -897,7 +897,7 @@
         "iops": {
           "type": "integer",
           "format": "int32",
-          "description": "Storage tier IOPS quantity. This property is required to be set for storage Type PremiumV2_LRS and UltraSSD_LRS."
+          "description": "Storage IOPS quantity. This property is required to be set for storage Type PremiumV2_LRS and UltraSSD_LRS."
         },
         "throughput": {
           "type": "integer",
@@ -925,7 +925,7 @@
       "properties": {
         "activeDirectoryAuth": {
           "type": "string",
-          "description": "If Enabled, Azure Active Directory authentication is enabled.",
+          "description": "If Enabled, Microsoft Entra authentication is enabled.",
           "enum": [
             "Enabled",
             "Disabled"
