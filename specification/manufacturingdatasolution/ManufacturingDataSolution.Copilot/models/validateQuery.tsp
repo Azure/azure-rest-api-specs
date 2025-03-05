@@ -119,7 +119,7 @@ model TestCaseResult {
 @resource("validate")
 model ValidateTestSummary {
   @key
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   @doc("The unique identifier of the test.")
   testId: string;
 
