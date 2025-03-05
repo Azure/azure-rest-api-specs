@@ -28,7 +28,7 @@ namespace Microsoft.AppComplianceAutomation;
 model ScopingConfigurationResource extends Foundations.ProxyResource {
   @key("scopingConfiguration")
   @segment("scopingConfigurations")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @doc("The scoping configuration of the specific report.")
   @pattern("^[a-zA-Z0-9_]*$")

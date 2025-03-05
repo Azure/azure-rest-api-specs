@@ -153,19 +153,19 @@ model VirtualInstanceProperties {
   /**
    * Defines the compliance state of the virtual instance, as per the corresponding workload definition and architecture.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   complianceState?: WorkloadComplianceState;
 
   /**
    * Defines the virtual instance provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   /**
    * Indicates any errors on the Virtual Instance resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: CommonTypes.ErrorDetail;
 }
 
@@ -233,7 +233,7 @@ model WorkloadComponentProperties {
   /**
    * Resources that are part of the component. The entries in this list should be unique and correspond to a single Azure resource.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   resources: ResourceConfiguration[];
 
   /**
@@ -245,19 +245,19 @@ model WorkloadComponentProperties {
   /**
    * Defines the compliance state of the workload component, as per the corresponding workload definition and architecture.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   complianceState?: WorkloadComplianceState;
 
   /**
    * Defines the workload component provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   /**
    * Indicates any errors on the workload component resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: CommonTypes.ErrorDetail;
 }
 
@@ -294,7 +294,7 @@ model UpdateWorkloadComponentProperties {
   /**
    * Resources that are part of the component.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   resources?: ResourceConfiguration[];
 
   /**

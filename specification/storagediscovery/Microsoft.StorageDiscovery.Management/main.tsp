@@ -13,9 +13,7 @@ using TypeSpec.Versioning;
 
 // The Azure Storage Management API.
 @armProviderNamespace
-@service({
-  title: "StorageDiscoveryClient",
-})
+@service(#{ title: "StorageDiscoveryClient" })
 @versioned(ApiVersion)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.StorageDiscovery;
@@ -63,12 +61,12 @@ model StorageDiscoveryWorkspaceProperties {
   ]>[];
 
   @doc("The scope of the storage discovery workspace.")
-  @extension("x-ms-identifiers", ["displayName"])
+  @Azure.ResourceManager.identifiers(#["displayName"])
   @removed(ApiVersion.v2025_01_01_preview)
   scopes: StorageDiscoveryScopeV1[];
 
   @doc("The storage discovery resource collections.")
-  @extension("x-ms-identifiers", ["displayName"])
+  @Azure.ResourceManager.identifiers(#["displayName"])
   @added(ApiVersion.v2025_01_01_preview)
   @renamedFrom(ApiVersion.v2025_03_01_preview, "storageCollections")
   discoveryScopes: StorageDiscoveryScope[];
@@ -79,7 +77,7 @@ model StorageDiscoveryWorkspaceProperties {
   @madeOptional(ApiVersion.v2025_03_01_preview)
   destinations?: StorageDiscoveryDestination;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ResourceProvisioningState;
 }
@@ -224,7 +222,6 @@ interface StorageDiscoveryWorkspaces {
     StorageDiscoveryWorkspace,
     StorageDiscoveryWorkspaceProperties
   >;
-  @parameterVisibility
   delete is ArmResourceDeleteSync<StorageDiscoveryWorkspace>;
   listByResourceGroup is ArmResourceListByParent<StorageDiscoveryWorkspace>;
   listBySubscription is ArmListBySubscription<StorageDiscoveryWorkspace>;

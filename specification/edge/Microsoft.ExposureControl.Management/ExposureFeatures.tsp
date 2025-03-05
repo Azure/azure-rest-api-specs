@@ -31,7 +31,7 @@ model ExposureFeatureProperties {
   @doc("Exposure Feature description.")
   description?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

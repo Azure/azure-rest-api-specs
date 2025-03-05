@@ -9,23 +9,23 @@ model NetworkInterfaceProperties {
   ...AnnotationResource;
 
   @doc("Physical Identifier of the network interface.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   physicalIdentifier?: string;
 
   @doc("The ARM resource id of the interface or compute server its connected to.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectedTo?: string;
 
   @doc("The Interface Type. Example: Management/Data")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   interfaceType?: InterfaceType;
 
   @doc("IPv4Address of the interface.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipv4Address?: string;
 
   @doc("IPv6Address of the interface.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipv6Address?: string;
 
   @added(Versions.v2024_06_15_preview)
@@ -37,16 +37,16 @@ model NetworkInterfaceProperties {
   additionalDescription?: string;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 

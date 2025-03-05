@@ -18,7 +18,7 @@ model PackageType is ProxyResource<PackageTypeProperties> {
 /** The properties of PackageType resource. */
 model PackageTypeProperties {
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -30,7 +30,7 @@ model Package is ExtensionResource<PackageNameProperties> {
 /** The properties of PackageName resource. */
 model PackageNameProperties {
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -69,7 +69,7 @@ model PackageVersionProperties {
   license?: string;
 
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

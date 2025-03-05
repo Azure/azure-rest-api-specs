@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.CapacityAllocation Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.CapacityAllocation management service",
-})
+@service(#{ title: "Microsoft.CapacityAllocation management service" })
 @versioned(Microsoft.CapacityAllocation.Versions)
 namespace Microsoft.CapacityAllocation;
 

@@ -24,21 +24,21 @@ model PrivateEndpointConnection
   @key("privateEndpointConnectionName")
   @path
   @segment("privateEndpointConnections")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
 @doc("PrivateEndpointConnection Properties")
 model PrivateEndpointConnectionProperties {
   @doc("Private Endpoint")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpoint: PrivateEndpoint;
 
   @doc("Private Link Service Connection State")
   privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
 
   @doc("Provisioning State")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

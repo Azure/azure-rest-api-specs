@@ -14,9 +14,7 @@ using Azure.ResourceManager;
 
 /** microsoft.azurebusinesscontinuity Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.AzureBusinessContinuity management service.",
-})
+@service(#{ title: "Microsoft.AzureBusinessContinuity management service." })
 @versioned(Microsoft.AzureBusinessContinuity.Versions)
 namespace Microsoft.AzureBusinessContinuity;
 

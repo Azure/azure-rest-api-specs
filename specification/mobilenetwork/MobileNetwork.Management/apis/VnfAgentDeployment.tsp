@@ -26,7 +26,7 @@ model VnfAgentDeploymentResource
   @key("vnfAgentDeploymentName")
   @path
   @segment("vnfAgentDeployment")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 

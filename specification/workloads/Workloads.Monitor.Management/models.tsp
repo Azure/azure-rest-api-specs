@@ -340,13 +340,13 @@ model MonitorProperties {
   /**
    * State of provisioning of the SAP monitor.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadMonitorProvisioningState;
 
   /**
    * Defines the SAP monitor errors.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: ErrorDetail;
 
   /**
@@ -387,24 +387,24 @@ model MonitorProperties {
   /**
    * The ARM ID of the MSI used for SAP monitoring.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   msiArmId?: string;
 
   /**
    * The ARM ID of the Storage account used for SAP monitoring.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageAccountArmId?: string;
 }
 
 /** The resource common properties */
 model ResourceCommonProperties {
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadMonitorProvisioningState;
 
   /** The error details of last operation on the resource */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: ErrorDetail;
 }
 
@@ -449,7 +449,7 @@ model Db2JobConfigurationsProperties {
   /**
    * State of provisioning of the DB2 job configurations.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadMonitorProvisioningState;
 
   /**
@@ -482,13 +482,13 @@ model Db2JobConfigurationsProperties {
   /**
    * Gets or sets the list of Configuration parameters.
    */
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   parameters?: ConfigurationParameter[];
 
   /**
    * Gets or sets the list of actions
    */
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   actions?: ActionsParameter[];
 }
 
@@ -519,7 +519,7 @@ model ActionsParameter {
   /**
    * Gets or sets the list of function Name.
    */
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   parameters?: ConfigurationParameter[];
 }
 
@@ -530,19 +530,19 @@ model ProviderInstanceProperties {
   /**
    * State of provisioning of the provider instance
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadMonitorProvisioningState;
 
   /**
    * Resource health details
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: Health;
 
   /**
    * Defines the provider instance errors.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: ErrorDetail;
 
   /**
@@ -558,13 +558,13 @@ model Health {
   /**
    * Health state of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   healthState?: WorkloadProviderInstanceHealthState;
 
   /**
    * Reasons impacting health state
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   impactingReasons?: string;
 }
 
@@ -577,7 +577,7 @@ model ProviderSpecificProperties {
    * The provider type. For example, the value can be SapHana.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   providerType: string;
 }
 
@@ -588,7 +588,7 @@ model SapLandscapeMonitorProperties {
   /**
    * State of provisioning of the SAP monitor.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: SapLandscapeMonitorProvisioningState;
 
   /**
@@ -600,7 +600,7 @@ model SapLandscapeMonitorProperties {
    * Gets or sets the list Top Metric Thresholds for SAP Landscape Monitor Dashboard
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   topMetricsThresholds?: SapLandscapeMonitorMetricThresholds[];
 }
 
@@ -612,14 +612,14 @@ model SapLandscapeMonitorPropertiesGrouping {
    * Gets or sets the list of landscape to SID mappings.
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   landscape?: SapLandscapeMonitorSidMapping[];
 
   /**
    * Gets or sets the list of Sap Applications to SID mappings.
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   sapApplication?: SapLandscapeMonitorSidMapping[];
 }
 
@@ -1039,13 +1039,13 @@ model AlertProperties {
   /**
    * Defines the alert instance errors.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: ErrorDetail;
 
   /**
    * ID of the alert rule resource created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   alertRuleResourceId?: armResourceIdentifier;
 
   /**
@@ -1071,7 +1071,7 @@ model AlertProperties {
   /**
    * State of provisioning of the alert instance
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadMonitorProvisioningState;
 }
 
@@ -1144,7 +1144,7 @@ model AlertRuleProperties {
   /**
    * The alert query parameters.
    */
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   alertQueryParameters?: AlertQueryParameter[];
 }
 
@@ -1170,13 +1170,13 @@ model AlertTemplateProperties {
   /**
    * Defines the SAP monitor Alert Template errors.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: ErrorDetail;
 
   /**
    * State of provisioning of the Alert Template.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadMonitorProvisioningState;
 
   /**
@@ -1245,7 +1245,7 @@ model AlertTemplateProperties {
    * Describes the Query Input Parameter properties in alerts template.
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   queryInputParameters?: AlertTemplateQueryInputParameter[];
 }
 
@@ -1342,7 +1342,7 @@ model GroupConfiguration {
 /** Health definition details */
 model HealthDefinitionDetails {
   /** The health definition resource version. This will be used to determine the drift in health definition */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   /** The health definition resource Id used for creating health model */
@@ -1395,7 +1395,7 @@ model ComponentHealthDefinition {
   dependenciesSignalDefinition?: DependenciesSignalDefinition;
 
   /** The resource signal definition mappings. */
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   resourceSignalDefinitionMappings?: ResourceSignalDefinitionMapping[];
 }
 
@@ -1444,7 +1444,7 @@ model InstanceGroupHealthStatusResponse {
   healthSnapshotId: string;
 
   /** The instances health status. */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   instances: InstanceHealthStatusResponse[];
 
   /** The link to the next page of results. */

@@ -25,21 +25,21 @@ model StageProgression is ProxyResource<StageProgressionProperties> {
 
 @doc("Detailed properties of the StageProgression resource.")
 model StageProgressionProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Stage name relevant to hierarchical StageMap.")
   @minLength(3)
   @maxLength(200)
   stageReference: string;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("StageProgression resource state.")
   state: StageProgressionState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The sequence of the stage within the ChangeStage parent resource.")
   @minValue(1)
   sequence?: int32;
@@ -47,10 +47,10 @@ model StageProgressionProperties {
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
   @doc("Parameters to apply on the change of that stage. Key value pairs of parameter and values.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   parameterValues: Record<string | int32>;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Comments about the update to the resource.")
   @maxLength(2000)
   comments?: string;

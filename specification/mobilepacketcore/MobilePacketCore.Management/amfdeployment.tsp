@@ -26,14 +26,14 @@ model AmfDeploymentResource
   @key("amfDeploymentName")
   @path
   @segment("amfDeployments")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 
 @doc("AMF Deployment Properties.")
 model AmfDeploymentResourceProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Azure for Operators 5G Core AMF component parameters")
@@ -41,19 +41,19 @@ model AmfDeploymentResourceProperties {
 
   @doc("Azure for Operators 5G Core AMF secrets parameters")
   @secret
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secretsParameters?: ComponentDeploymentSecrets;
 
   @doc("Reference to cluster where the Network Function is deployed")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   clusterService: ClusterServiceIdProperty;
 
   @doc("Release version. This is inherited from the cluster")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   releaseVersion?: ReleaseVersion;
 
   @doc("Operational status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operationalStatus?: OperationalStatus;
 }
 

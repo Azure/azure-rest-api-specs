@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.KubernetesRuntime")
-@service({
-  title: "Microsoft.KubernetesRuntime",
-})
+@service(#{ title: "Microsoft.KubernetesRuntime" })
 @versioned(Microsoft.KubernetesRuntime.Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.KubernetesRuntime;

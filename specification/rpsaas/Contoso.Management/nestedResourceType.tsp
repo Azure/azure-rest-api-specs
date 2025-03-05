@@ -43,7 +43,7 @@ model NestedResourceTypeProperties {
   lastName: string;
 
   /** Identification number of NestedResourceType assigned at creation */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   identificationNumber?: string;
 
   /** Group of NestedResourceType */
@@ -53,7 +53,7 @@ model NestedResourceTypeProperties {
   likesTea: likesTea;
 
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

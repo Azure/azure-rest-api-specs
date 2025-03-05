@@ -14,9 +14,7 @@ using Azure.Core;
 
 @armProviderNamespace
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-@service({
-  title: "Commvault.ContentStore",
-})
+@service(#{ title: "Commvault.ContentStore" })
 @versioned(Commvault.ContentStore.Versions)
 namespace Commvault.ContentStore;
 
@@ -57,7 +55,7 @@ interface CloudAccounts {
 @doc("Properties specific to Commvault Cloud Account resource")
 model CloudAccountProperties is BaseResourceProperties {
   @doc("SSO URL for the Commvault Cloud Account")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ssoUrl?: string;
 }
 
@@ -77,7 +75,7 @@ model Storage is ProxyResource<StorageProperties> {
 @doc("The properties of Commvault Storage")
 model StorageProperties {
   @doc("Location of the Commvault Storage")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @maxLength(50)
   location: string;
@@ -92,7 +90,7 @@ model StorageProperties {
   class: StorageClassType;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -147,31 +145,31 @@ model CommvaultPlan is ProxyResource<PlanProperties> {
 @doc("The properties of Commvault Plan")
 model PlanProperties {
   @doc("Location of the Commvault Plan")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @maxLength(50)
   location: string;
 
   @doc("The storage plans associated with the Commvault Plan")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minItems(1)
   @maxItems(11)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   storagePlans: StoragePlan[];
 
   @doc("The Commvault Plan Schedule")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @minItems(1)
   @maxItems(11)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   schedules?: Schedule[];
 
   @doc("The Commvault Plan Retention")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   retention?: Retention;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -199,7 +197,7 @@ model StoragePlan {
   backupRuleType?: BackupRuleType;
 
   @doc("Extended Retention Policy")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   extendedRetention?: ExtendedRetentionTime[];
 }
 
@@ -282,7 +280,6 @@ model Schedule {
   dayOfMonth?: int32;
 
   @doc("Weekly Days List")
-  @OpenAPI.extension("x-ms-identifiers", [])
   weeklyDays?: WeeklyDays[];
 
   @doc("Time of Retention")
@@ -309,11 +306,11 @@ union BackUpType {
 @doc("Schedule Details")
 model ScheduleDetails {
   @doc("Frequency of backups")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   frequency: Frequency;
 
   @doc("Time of backups")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   time: string; //should have zone info as well
 }
 
@@ -462,7 +459,7 @@ union WeeklyDays {
 @doc("A Commvault Plan Retention Model")
 model Retention {
   @doc("Number of Snapshots")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   numberOfSnapshots?: int32;
 }
 
@@ -490,31 +487,31 @@ model ProtectionGroup is ProxyResource<ProtectionGroupProperties> {
 @doc("The properties of Commvault Protection Group")
 model ProtectionGroupProperties {
   @doc("The datasource type of Commvault Protection Group")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   dataSourceType: "AzureVM";
 
   @doc("The Commvault Plan to be associated with the Protection Group")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   plan: string;
 
   @doc("The resources to be protected under Protection Group")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   resources: ProtectionGroupResources;
 
   @doc("The protection group schedule")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   protectionStatus: ProtectionStatus; //Check what values can it have
 
   @doc("The number of ProtectedItems under the Protection Group")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   numberOfProtectedItems: int32;
 
   @doc("The Commvault Protection Group backup time")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastBackUpTime: int64;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -544,19 +541,19 @@ union ProtectionStatus {
 @doc("The resources to be protected under Protection Group")
 model ProtectionGroupResources {
   @doc("The items to be protected under Protection Group")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   manual?: string[];
 
   @doc("Rules to match resources")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   matchRules?: {
     @doc("rules to match")
-    @visibility("read", "create", "update")
-    @OpenAPI.extension("x-ms-identifiers", [])
+    @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+    @Azure.ResourceManager.identifiers(#[])
     rules: Rule[];
 
     @doc("match Type all or any")
-    @visibility("read", "create", "update")
+    @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
     matchType: MatchType;
   };
 }
@@ -575,15 +572,15 @@ union MatchType {
 @doc("The rules to match resources")
 model Rule {
   @doc("property of the rule")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   property: RuleProperty;
 
   @doc("property of the rule")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   operator: Operator;
 
   @doc("property of the rule")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   value: string;
 }
 
@@ -636,11 +633,11 @@ union Operator {
 @doc("The properties of StopBackupProtectionGroupRequest")
 model StopBackupProtectionGroupRequest {
   @doc("The reason for stopping the backup")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   reason: string;
 
   @doc("Any further comments")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   comment?: string;
 }
 
@@ -670,7 +667,7 @@ model ProtectedItem is ProxyResource<ProtectedItemProperties> {
   @doc("The protectedItem Id, name of 2 protected items can be same under a PG if they belong to different resource group or even different data source types VM/DB/AKS, etc; and name is mandatory in Azure Typespec, hence using name parameter for id in Commvault In case of Vm it will be vmGuid")
   @segment("protectedItems")
   @key("protectedItemName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -679,24 +676,24 @@ model ProtectedItem is ProxyResource<ProtectedItemProperties> {
 @doc("The properties of Commvault Protected Item")
 model ProtectedItemProperties {
   @doc("The Name of the commvault protected item")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceName: string;
 
   @doc("The Commvault Protected Item backup time")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastBackUpTime: int64;
 
   @doc("The resource group of the protected item")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceGroup: string;
 
   @doc("The location of the protected item")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location: string;
 
   @doc("The GUID of VM")
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmGuid: string;
 }
 
@@ -726,75 +723,75 @@ model VmTag {
 @doc("The properties of information of a VM")
 model VmInfo {
   @doc("The GUID of VM to be restored.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceVmGuid: string;
 
   @doc("The storage account to be used for restore.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   storageAccountId: string;
 
   @doc("The identifier to check if VM needs to be powered on.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   powerOnVmAfterRestore?: boolean;
 
   @doc("The name of the VM.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   name?: string;
 
   @doc("The resource group of the VM.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   resourceGroup?: string;
 
   @doc("The region of the VM.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   region?: string;
 
   @doc("The network Id of the VM.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   networkId?: string;
 
   @doc("The subnet Id of the VM.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   subnetId?: string;
 
   @doc("The identifier to check if to attach and swap disk of the VM.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   attachAndSwapOsDisk?: boolean;
 
   @doc("The GUID of target VM used in DISK ATTACH.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   targetVmGuid?: string;
 
   @doc("The vmTag of the VM.")
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @Azure.ResourceManager.identifiers(#[])
   vmtag?: VmTag[];
 }
 
 @doc("The properties of VmDestinationInfo")
 model VmDestinationInfo {
   @doc("List of information on VMs")
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @Azure.ResourceManager.identifiers(#[])
   vmInfoList: VmInfo[];
 }
 
 @doc("The properties of RestoreProtectionItemRequest")
 model RestoreProtectionItemRequest {
   @doc("Check whether inplace or out of place restore.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inPlaceRestore: boolean;
 
   @doc("Type of Restore")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   restoreType?: RestoreType;
 
   @doc("Time to restore")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   toTime?: string;
 
   @doc("The vm destination details of the VM.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   vmDestinationInfo: VmDestinationInfo;
 }
 
@@ -827,17 +824,17 @@ interface ProtectedItems {
 @doc("Restore points of a Protected Item")
 model RestorePoints {
   @doc("The Commvault Protected Item Restore points")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   restoreTimes: int64[];
 }
 
 @doc("Restore resource response for a Protected Item")
 model RestoreProtectionItemResponse {
   @doc("The Commvault response for taskId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   taskId: int32;
 
   @doc("The jobIds returned from Commvault.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   jobIds: string[];
 }

@@ -21,9 +21,7 @@ using Autorest;
 using OpenAPI;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.NetworkAnalytics",
-})
+@service(#{ title: "Microsoft.NetworkAnalytics" })
 @versioned(Microsoft.NetworkAnalytics.Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.NetworkAnalytics;

@@ -20,19 +20,19 @@ model GroupProperties {
   /**
    * Provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * This is the ID of the Group
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   groupId: string;
 
   /**
    * This is the Type of the Group
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   groupType: GroupType;
 }
 

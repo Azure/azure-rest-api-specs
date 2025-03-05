@@ -11,9 +11,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft Azure DevOps Platform",
-})
+@service(#{ title: "Microsoft Azure DevOps Platform" })
 @doc("Azure DevOps Platform Management API")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)

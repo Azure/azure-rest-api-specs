@@ -115,7 +115,7 @@ model NetworkDeviceProperties {
   additionalIpsArmId: Array<armResourceIdentifier>;
 
   @doc("Provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

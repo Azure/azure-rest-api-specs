@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.SecureExchange Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.SecureExchange management service",
-})
+@service(#{ title: "Microsoft.SecureExchange management service" })
 @versioned(Microsoft.SecureExchange.Versions)
 namespace Microsoft.SecureExchange;
 

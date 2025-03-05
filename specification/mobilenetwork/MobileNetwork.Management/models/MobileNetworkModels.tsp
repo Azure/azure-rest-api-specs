@@ -9,7 +9,7 @@ namespace Microsoft.MobileNetwork;
 @doc("Mobile network properties.")
 model MobileNetworkPropertiesFormat {
   @doc("The provisioning state of the mobile network resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The unique public land mobile network identifier for the network. If both 'publicLandMobileNetworks' and 'publicLandMobileNetworkIdentifier' are specified, then the 'publicLandMobileNetworks' will take precedence.")
@@ -18,16 +18,16 @@ model MobileNetworkPropertiesFormat {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @doc("A list of public land mobile networks including their identifiers. If both 'publicLandMobileNetworks' and 'publicLandMobileNetworkIdentifier' are specified, then the 'publicLandMobileNetworks' will take precedence.")
   @minItems(1)
-  @extension("x-ms-identifiers", ["mcc", "mnc"])
+  @extension("x-ms-identifiers", #["mcc", "mnc"])
   publicLandMobileNetworks?: PublicLandMobileNetwork[];
 
   @doc("The mobile network resource identifier")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serviceKey?: string;
 
   @doc("The list of endpoint security groups used in the mobile network.")
   @minItems(1)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   endpointSecurityGroups?: EndpointSecurityGroup[];
 }
 

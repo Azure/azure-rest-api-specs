@@ -68,11 +68,11 @@ model EndpointProperties {
   @doc("Endpoint Description.")
   description?: string;
 
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @doc("Endpoint Rule Collection.")
   endpointRuleCollection?: EndpointRule[];
 
   @doc("Provisioning State.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

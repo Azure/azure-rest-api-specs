@@ -13,7 +13,7 @@ union WifiVendor {
 @doc("Wi-Fi SSID properties.")
 model WifiSsidPropertiesFormat {
   @doc("The provisioning state of the Wi-Fi SSID resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("An optional description for this Wi-Fi SSID.")

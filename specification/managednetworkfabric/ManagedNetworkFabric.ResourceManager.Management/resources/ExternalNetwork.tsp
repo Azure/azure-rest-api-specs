@@ -19,7 +19,7 @@ model ExternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
   @path
   @key("externalNetworkName")
   @segment("externalNetworks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** External Network Properties */
@@ -36,7 +36,7 @@ interface ExternalNetworks {
   create is ArmResourceCreateOrReplaceAsync<ExternalNetwork>;
 
   @doc("API to update certain properties of the ExternalNetworks resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<ExternalNetwork, ExternalNetworkPatch>;
 
   @doc("Implements ExternalNetworks DELETE method.")

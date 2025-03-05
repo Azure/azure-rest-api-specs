@@ -17,7 +17,7 @@ model NetworkDevice extends Azure.ResourceManager.Foundations.TrackedResource {
   @path
   @key("networkDeviceName")
   @segment("networkDevices")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkDevice properties */
@@ -34,7 +34,7 @@ interface NetworkDevices {
   create is ArmResourceCreateOrReplaceAsync<NetworkDevice>;
 
   @doc("Update certain properties of the Network Device resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkDevice, NetworkDevicePatchParameters>;
 
   @doc("Delete the Network Device resource.")

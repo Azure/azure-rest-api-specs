@@ -20,7 +20,7 @@ model DataCenter is ProxyResource<DataCenterProperties> {
   @doc("The DataCenter name")
   @segment("datacenters")
   @key("datacenterName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z]{2,5}[0-9]{0,3}$")
   @path
   name: string;
@@ -52,7 +52,7 @@ model DataCenterProperties {
   azExceptions?: AZException[];
 
   /** The provisioning state of resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

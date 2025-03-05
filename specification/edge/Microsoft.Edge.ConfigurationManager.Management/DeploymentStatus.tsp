@@ -32,7 +32,7 @@ model TargetStatus {
   status?: string;
 
   @doc("Component statuses")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   componentStatuses?: ComponentStatus[];
 }
 
@@ -60,6 +60,6 @@ model DeploymentStatus {
   generation?: int32;
 
   @doc("Target resource statuses")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   targetStatuses?: TargetStatus[];
 }

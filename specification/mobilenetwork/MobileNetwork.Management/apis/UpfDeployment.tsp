@@ -23,7 +23,7 @@ model UpfDeploymentResource
   @key("upfDeploymentName")
   @path
   @segment("upfDeployments")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 

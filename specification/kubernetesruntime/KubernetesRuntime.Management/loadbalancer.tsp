@@ -51,7 +51,7 @@ model LoadBalancerProperties {
   @added(Versions.v2024_08_01)
   communities?: string[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Resource provision state")
   provisioningState?: ProvisioningState;
 }

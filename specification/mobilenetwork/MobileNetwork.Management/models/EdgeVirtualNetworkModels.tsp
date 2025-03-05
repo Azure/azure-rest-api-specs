@@ -9,12 +9,12 @@ namespace Microsoft.MobileNetwork;
 @doc("Edge Virtual Network Properties")
 model EdgeVirtualNetworkPropertiesFormat {
   @doc("The provisioning state of the Edge Virtual Network resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("A list of edge subnets in a Virtual Network.")
   @minItems(1)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   subnets?: EdgeSubnet[];
 
   @doc("Default interface to which traffic is routed from this Virtual Network")
@@ -30,7 +30,7 @@ model EdgeSubnet {
 
   @doc("List of address prefixes for the subnet.")
   @minItems(1)
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   addressPrefixes: EdgeSubnetPrefix[];
 
   @doc("The reference to the NetworkSecurityGroup resource.")

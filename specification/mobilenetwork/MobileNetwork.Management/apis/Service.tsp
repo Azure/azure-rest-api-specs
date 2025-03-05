@@ -23,7 +23,7 @@ model Service is TrackedResource<ServicePropertiesFormat> {
   @path
   @key("serviceName")
   @segment("services")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -36,7 +36,7 @@ interface Services {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Service>;
 
   @doc("Updates service tags.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<Service, TagsObject>;
 
   @doc("Deletes the specified service.")

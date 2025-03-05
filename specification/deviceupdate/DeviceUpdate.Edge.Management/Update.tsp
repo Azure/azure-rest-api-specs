@@ -39,7 +39,7 @@ interface Updates {
   /**
    * Update update tags.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   modify is ArmCustomPatchSync<Update, TagUpdate>;
 
   /**
