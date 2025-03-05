@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 /**
  * Microsoft Marketplace Rating And Reviews API
  */
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Marketplace")
 @service({
   title: "Microsoft Marketplace Rating And Reviews API",
 })

@@ -25,7 +25,6 @@ model Product is ProxyResource<ProductProperties> {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 model ProductProperties {
   /** The unique product id */
-  @visibility("read")
   uniqueProductId: string;
 }
 
@@ -36,13 +35,11 @@ model UserHasReview {
   /**
    * Indicates whether user has already submitted a review.
    */
-  @visibility("read")
   hasReview: boolean;
 
   /**
    * The date and time when the review was last updated.
    */
-  @visibility("read")
   updatedAt: string;
 }
 
