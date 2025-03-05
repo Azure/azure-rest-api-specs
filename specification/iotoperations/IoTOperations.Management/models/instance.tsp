@@ -62,19 +62,19 @@ model InstanceProperties {
 @doc("The features of the AIO Instance.")
 model InstanceFeature {
   @doc("The state of the feature.")
-  mode?: InstanceFeatureState;
+  mode?: InstanceFeatureMode = OperationalMode.Enabled;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("The value of the feature.")
-  configSettings?: Record<string>;
+  configSettings?: Record<OperationalMode>;
 }
 
 @doc("The enum defining state of a feature.")
-union InstanceFeatureState {
+union InstanceFeatureMode {
   OperationalMode,
 
   @doc("The feature is in preview mode.")
- "Preview",
+  "Preview",
 }
 
 @doc("The reference to the Schema Registry for this AIO Instance.")
