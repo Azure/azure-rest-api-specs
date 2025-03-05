@@ -1,15 +1,15 @@
-parameters:
-- name: NodeVersion
-  type: string
-  default: 20.x
-steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: ${{ parameters.NodeVersion }}
-    displayName: "Use Node ${{ parameters.NodeVersion }}"
+variables:
+  - template: /eng/pipelines/templates/variables/globals.yml
 
-  - script: npm --version --loglevel info
-    displayName: npm --version
+parameters:
+  - name: NodeVersion
+    type: string
+    default: $(NodeVersion)
+
+steps:
+  - template: /eng/pipelines/templates/steps/use-node-version.yml
+    parameters:
+      NodeVersion: ${{ parameters.NodeVersion }}
 
   - script: npm ci
     displayName: npm ci
