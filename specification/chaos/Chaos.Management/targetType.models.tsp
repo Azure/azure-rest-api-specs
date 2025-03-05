@@ -35,26 +35,26 @@ model TargetTypeProperties {
   /**
    * Localized string of the display name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   /**
    * Localized string of the description.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   /**
    * URL to retrieve JSON schema of the Target Type properties.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(2048)
   propertiesSchema?: string;
 
   /**
    * List of resource types this Target Type can extend.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceTypes?: string[];
 }
 
