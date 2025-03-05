@@ -50,7 +50,7 @@ interface Applications {
   @route("/applications/{applicationId}")
   getApplication is ReadOperationNew<
     {
-      ...BatchClientRequestHeaders;
+      ...CommonParameters;
       ...GetApplicationRequiredParameters;
     },
     BatchApplication
@@ -174,7 +174,7 @@ interface Pools {
   @route("/pools/{poolId}")
   @clientName("poolExistsInternal", "java")
   poolExists is ResourceInfoOperationWithAdditionalResponse<
-    BatchClientRequestHeaders & BatchPoolHeaders,
+    CommonParameters & BatchPoolHeaders,
     PoolDoesNotExistResponseHeaders,
     PoolDoesExistResponseHeaders
   >;
@@ -825,7 +825,7 @@ interface JobSchedules {
   @route("/jobschedules/{jobScheduleId}")
   @clientName("jobScheduleExistsInternal", "java")
   jobScheduleExists is ResourceInfoOperationWithAdditionalResponse<
-    BatchClientRequestHeaders &
+    CommonParameters &
       BatchMatchHeaders & {
         @doc("The ID of the Job Schedule which you want to check.")
         @path

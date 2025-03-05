@@ -15,7 +15,7 @@ namespace JavaClient;
 // Get Application Operation
 @doc("Optional parameters for Get Application operation.")
 model GetApplicationOptions {
-  ...Azure.Batch.BatchClientRequestHeaders;
+  ...Azure.Batch.CommonParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
