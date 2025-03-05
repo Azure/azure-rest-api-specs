@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -102,7 +100,7 @@ model AwsCodeBuildProjectProperties {
   environment?: ProjectEnvironment;
 
   @doc("<p> An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System. </p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   fileSystemLocations?: ProjectFileSystemLocation[];
 
   @doc("<p>When the build project's settings were last modified, expressed in Unix time format.</p>")
@@ -127,15 +125,15 @@ model AwsCodeBuildProjectProperties {
   resourceAccessRole?: string;
 
   @doc("<p>An array of <code>ProjectArtifacts</code> objects. </p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   secondaryArtifacts?: ProjectArtifacts[];
 
   @doc("<p>An array of <code>ProjectSourceVersion</code> objects. If <code>secondarySourceVersions</code> is specified at the build level, then they take over these <code>secondarySourceVersions</code> (at the project level). </p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   secondarySourceVersions?: ProjectSourceVersion[];
 
   @doc("<p>An array of <code>ProjectSource</code> objects. </p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   secondarySources?: ProjectSource[];
 
   @doc("<p>The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.</p>")
@@ -148,7 +146,7 @@ model AwsCodeBuildProjectProperties {
   sourceVersion?: string;
 
   @doc("<p>A list of tag key and value pairs associated with this build project.</p> <p>These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("<p>How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.</p>")
@@ -354,7 +352,6 @@ model ProjectCache {
   location?: string;
 
   @doc("<p>An array of strings that specify the local cache modes. You can use one or more local cache modes at the same time. This is only used for <code>LOCAL</code> cache types.</p> <p>Possible values are:</p> <dl> <dt>LOCAL_SOURCE_CACHE</dt> <dd> <p>Caches Git metadata for primary and secondary sources. After the cache is created, subsequent builds pull only the change between commits. This mode is a good choice for projects with a clean working directory and a source that is a large Git repository. If you choose this option and your project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket), the option is ignored. </p> </dd> <dt>LOCAL_DOCKER_LAYER_CACHE</dt> <dd> <p>Caches existing Docker layers. This mode is a good choice for projects that build or pull large Docker images. It can prevent the performance issues caused by pulling large Docker images down from the network. </p> <note> <ul> <li> <p>You can use a Docker layer cache in the Linux environment only. </p> </li> <li> <p>The <code>privileged</code> flag must be set so that your project has the required Docker permissions. </p> </li> <li> <p>You should consider the security implications before you use a Docker layer cache. </p> </li> </ul> </note> </dd> <dt>LOCAL_CUSTOM_CACHE</dt> <dd> <p>Caches directories you specify in the buildspec file. This mode is a good choice if your build scenario is not suited to one of the other three local cache modes. If you use a custom cache: </p> <ul> <li> <p>Only directories can be specified for caching. You cannot specify individual files. </p> </li> <li> <p>Symlinks are used to reference cached directories. </p> </li> <li> <p>Cached directories are linked to your build before it downloads its project sources. Cached items are overridden if a source item has the same name. Directories are specified using cache paths in the buildspec file. </p> </li> </ul> </dd> </dl>")
-  @extension("x-ms-identifiers", [])
   modes?: CacheMode[];
 
   @doc("<p>The type of cache used by the build project. Valid values include:</p> <ul> <li> <p> <code>NO_CACHE</code>: The build project does not use any cache.</p> </li> <li> <p> <code>S3</code>: The build project reads and writes from and to S3.</p> </li> <li> <p> <code>LOCAL</code>: The build project stores a cache locally on a build host that is only available to that build host.</p> </li> </ul>")
@@ -419,7 +416,7 @@ model ProjectEnvironment {
   computeType?: ComputeTypeEnumValue;
 
   @doc("<p>A set of environment variables to make available to builds for this build project.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   environmentVariables?: EnvironmentVariable[];
 
   @doc("<p>A ProjectFleet object to use for this build project.</p>")
@@ -732,11 +729,9 @@ model Tag {
 @doc("Definition of VpcConfig")
 model VpcConfig {
   @doc("<p>A list of one or more security groups IDs in your Amazon VPC.</p>")
-  @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
   @doc("<p>A list of one or more subnet IDs in your Amazon VPC.</p>")
-  @extension("x-ms-identifiers", [])
   subnets?: string[];
 
   @doc("<p>The ID of the Amazon VPC.</p>")
@@ -756,7 +751,7 @@ model Webhook {
   buildType?: WebhookBuildTypeEnumValue;
 
   @doc("<p>An array of arrays of <code>WebhookFilter</code> objects used to determine which webhooks are triggered. At least one <code>WebhookFilter</code> in the array must specify <code>EVENT</code> as its <code>type</code>. </p> <p>For a build to be triggered, at least one filter group in the <code>filterGroups</code> array must pass. For a filter group to pass, each of its filters must pass. </p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   filterGroups?: FilterGroup[];
 
   @doc("<p>A timestamp that indicates the last time a repository's secret token was modified. </p>")
@@ -800,7 +795,6 @@ model WebhookBuildTypeEnumValue {
 @doc("Definition of BatchRestrictions")
 model BatchRestrictions {
   @doc("<p>An array of strings that specify the compute types that are allowed for the batch build. See <a href='https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html'>Build environment compute types</a> in the <i>CodeBuild User Guide</i> for these values. </p>")
-  @extension("x-ms-identifiers", [])
   computeTypesAllowed?: string[];
 
   @doc("<p>Specifies the maximum number of builds allowed.</p>")
