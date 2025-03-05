@@ -1093,7 +1093,7 @@
       }
     },
     "LakeHouseReadSettings": {
-      "description": "Microsoft Fabric LakeHouse Files read settings.",
+      "description": "Microsoft Fabric Lakehouse Files read settings.",
       "type": "object",
       "allOf": [
         {
@@ -1109,12 +1109,12 @@
         "wildcardFolderPath": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Microsoft Fabric LakeHouse Files wildcardFolderPath. Type: string (or Expression with resultType string)."
+          "description": "Microsoft Fabric Lakehouse Files wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Microsoft Fabric LakeHouse Files wildcardFileName. Type: string (or Expression with resultType string)."
+          "description": "Microsoft Fabric Lakehouse Files wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
@@ -1257,7 +1257,7 @@
       ]
     },
     "LakeHouseWriteSettings": {
-      "description": "Microsoft Fabric LakeHouse Files write settings.",
+      "description": "Microsoft Fabric Lakehouse Files write settings.",
       "type": "object",
       "allOf": [
         {
@@ -4300,7 +4300,7 @@
       }
     },
     "LakeHouseTableSource": {
-      "description": "A copy activity source for Microsoft Fabric LakeHouse Table.",
+      "description": "A copy activity source for Microsoft Fabric Lakehouse Table.",
       "type": "object",
       "allOf": [
         {
@@ -5959,7 +5959,7 @@
       }
     },
     "LakeHouseTableSink": {
-      "description": "A copy activity for Microsoft Fabric LakeHouse Table sink.",
+      "description": "A copy activity for Microsoft Fabric Lakehouse Table sink.",
       "type": "object",
       "allOf": [
         {
@@ -5970,7 +5970,7 @@
         "tableActionOption": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The type of table action for LakeHouse Table sink. Possible values include: \"None\", \"Append\", \"Overwrite\"."
+          "description": "The type of table action for Lakehouse Table sink. Possible values include: \"None\", \"Append\", \"Overwrite\"."
         },
         "partitionOption": {
           "type": "object",
@@ -6070,6 +6070,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The format for TimeSpan values. Type: string (or Expression with resultType string)."
+        },
+        "timeFormat": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The format for Time values. Type: string (or Expression with resultType string)."
+        },
+        "dateFormat": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The format for Date values. Type: string (or Expression with resultType string)."
         },
         "culture": {
           "type": "object",

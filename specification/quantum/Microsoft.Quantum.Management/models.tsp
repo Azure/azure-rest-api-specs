@@ -106,7 +106,7 @@ model ProviderDescription {
   /**
    * Provider's display name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
@@ -122,25 +122,25 @@ model ProviderProperties {
   /**
    * A description about this provider.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   /**
    * Provider type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   providerType?: string;
 
   /**
    * Company name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   company?: string;
 
   /**
    * Provider's default endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   defaultEndpoint?: string;
 
   /**
@@ -181,13 +181,13 @@ model ProviderPropertiesAad {
   /**
    * Provider's application id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   applicationId?: string;
 
   /**
    * Provider's tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 }
 
@@ -198,13 +198,13 @@ model ProviderPropertiesManagedApplication {
   /**
    * Provider's publisher id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publisherId?: string;
 
   /**
    * Provider's offer id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   offerId?: string;
 }
 
@@ -370,19 +370,19 @@ model WorkspaceResourceProperties {
   /**
    * List of Providers selected for this Workspace
    */
-  @OpenAPI.extension("x-ms-identifiers", ["providerId"])
+  @identifiers(#["providerId"])
   providers?: Provider[];
 
   /**
    * Whether the current workspace is ready to accept Jobs.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   usable?: UsableStatus;
 
   /**
    * Provisioning status field
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkspaceProvisioningStatus;
 
   /**
@@ -393,7 +393,7 @@ model WorkspaceResourceProperties {
   /**
    * The URI of the workspace endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endpointUri?: string;
 
   /**
@@ -438,47 +438,6 @@ model Provider {
 }
 
 /**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-   */
-  @visibility("read")
-  id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The name of the resource
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility("read")
-  systemData?: SystemData;
-}
-
-/**
- * Tags object for patch operations.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" ""
-model TagsObject {
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
-  tags?: Record<string>;
-}
-
-/**
  * Result of list Api keys and connection strings.
  */
 model ListKeysResult {
@@ -500,13 +459,13 @@ model ListKeysResult {
   /**
    * The connection string of the primary api key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   primaryConnectionString?: string;
 
   /**
    * The connection string of the secondary api key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   secondaryConnectionString?: string;
 }
 
@@ -522,7 +481,7 @@ model ApiKey {
   /**
    * The Api key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   key?: string;
 }
 
