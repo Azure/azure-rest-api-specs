@@ -37,7 +37,7 @@ interface Applications {
   @route("/applications")
   listApplications is ListOperationNew<
     {
-      ...BatchCommonListHeaders;
+      ...CommonListParameters;
     },
     BatchApplicationListResult
   >;
@@ -108,7 +108,7 @@ interface Pools {
   @route("/poolusagemetrics")
   listPoolUsageMetrics is ListOperationNew<
     {
-      ...BatchCommonListHeaders;
+      ...CommonListParameters;
       ...ListPoolUsageMetricsParameters;
     },
     BatchPoolListUsageMetricsResult

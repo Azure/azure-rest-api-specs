@@ -18,7 +18,7 @@ namespace Azure.Batch;
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @get
 op ListOperation<TFilter, TResponse> is Azure.Core.RpcOperation<
-  BatchCommonListHeaders & TFilter,
+  CommonListParameters & TFilter,
   BatchResponseHeaders & TResponse,
   NoFilter,
   BatchError
@@ -359,7 +359,7 @@ alias DeleteResponseHeaders = {
   requestid?: string;
 };
 
-alias BatchCommonListHeaders = {
+alias CommonListParameters = {
   ...CommonParameters;
 
   @doc("""
