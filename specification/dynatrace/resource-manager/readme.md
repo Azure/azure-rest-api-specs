@@ -37,6 +37,19 @@ These settings apply only when `--tag=package-2024-04-24` is specified on the co
 ```yaml $(tag) == 'package-2024-04-24'
 input-file:
   - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+suppressions:
+    - code: ProvisioningStateMustBeReadOnly
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: UnSupportedPatchProperties
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: BodyTopLevelProperties
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixing this causes breaking changes.
+    - code: PatchBodyParametersSchema
+      from: dynatrace.json
+      reason: Empty object can still be passed, properties are not mandatory for the update schema.
 ```
 
 ### Tag: package-2023-04-27
@@ -94,6 +107,24 @@ suppressions:
     from: Dynatrace.Observability/preview/2021-06-01-preview/dynatrace.json
     where: $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
     reason: Secrets are OK to return in a POST response.
+
+directive:
+  - suppress: ProvisioningStateMustBeReadOnly
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+  - suppress: UnSupportedPatchProperties
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: Breaking change to remove provisioningState property.
+  - suppress: BodyTopLevelProperties
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - suppress: PatchBodyParametersSchema
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: Empty object can still be passed, properties are not mandatory for the update schema.
 ```
 
 ## Go
