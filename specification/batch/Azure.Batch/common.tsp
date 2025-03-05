@@ -101,7 +101,20 @@ op DeleteOperation<
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @post
 op CreateOperation<TResource, TResponse> is RpcOperation<
-  CommonParameters & MinimalMetadata & TResource,
+  CommonJsonParameters & TResource,
+  Created<TResponse> & BatchResponseHeaders,
+  NoFilter,
+  BatchError
+>;
+
+// TODO: Once we migrate all CreateOperation methods in routes.tsp to use this, delete original CreateOperation (above) and rename this to CreateOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@post
+op CreateOperationNew<
+  TResource extends TypeSpec.Reflection.Model,
+  TResponse
+> is RpcOperation<
+  TResource,
   Created<TResponse> & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -110,7 +123,7 @@ op CreateOperation<TResource, TResponse> is RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @patch
 op UpdateOperation<TResource, TResponse> is RpcOperation<
-  CommonParameters & MinimalMetadata & TResource,
+  CommonJsonParameters & TResource,
   TResponse & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -119,7 +132,7 @@ op UpdateOperation<TResource, TResponse> is RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @put
 op ReplaceOperation<TResource, TResponse> is RpcOperation<
-  CommonParameters & MinimalMetadata & TResource,
+  CommonJsonParameters & TResource,
   TResponse & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -165,8 +178,11 @@ alias Created<T> = {
   @header("DataServiceId")
   @doc("The OData ID of the resource to which the request applied.")
   dataServiceId: string;
+};
 
-  ...T;
+alias CommonJsonParameters = {
+  ...CommonParameters;
+  ...MinimalMetadata;
 };
 
 // headers ////////////////////
