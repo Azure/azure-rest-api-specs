@@ -1,0 +1,18 @@
+- tool: TypeSpecValidation
+  path: .
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    - parameters.service-dir.default
+  reason: "suppress all options validation in SdkTspConfigValidation, only validate parameters"
+- tool: TypeSpecValidation
+  path: .
+  rules:
+    - FolderStructure
+    - Compile
+    - EmitAutorest
+    - FlavorAzure
+    - Format
+    - LinterRuleset
+    - NpmPrefix
+  reason: "suppress rules: FolderStructure, Compile, EmitAutorest, FlavorAzure, Format, LinterRuleset, NpmPrefix"

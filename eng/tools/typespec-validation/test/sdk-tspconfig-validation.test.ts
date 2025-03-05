@@ -35,6 +35,7 @@ import { TsvTestHost } from "./tsv-test-host.js";
 import { join } from "path";
 import { strictEqual } from "node:assert";
 import { stringify } from "yaml";
+import { Suppression } from "suppressions";
 
 export function createParameterExample(...pairs: { key: string; value: string | boolean | {} }[]) {
   const obj: Record<string, any> = { parameters: {} };
@@ -160,7 +161,7 @@ interface Case {
   subRules: TspconfigSubRuleBase[];
   tspconfigContent: string;
   success: boolean;
-  ignoredOptions?: Set<string>;
+  ignoredKeyPaths?: string[];
 }
 
 const managementTspconfigFolder = "contosowidgetmanager/Contoso.Management/";
@@ -436,7 +437,7 @@ parameters:
   service-dir-x: ""
 `,
     success: true,
-    ignoredOptions: new Set(["parameters.service-dir.default"]),
+    ignoredKeyPaths: ["parameters.service-dir.default"],
   },
   {
     description: "Suppress option",
@@ -448,7 +449,7 @@ options:
     package-dir: "*@#$%(@)*$#@!()#*&"
 `,
     success: true,
-    ignoredOptions: new Set(["options.@azure-tools/typespec-ts.package-dir"]),
+    ignoredKeyPaths: ["options.@azure-tools/typespec-ts.package-dir"],
   },
 ];
 
@@ -497,8 +498,17 @@ describe("tspconfig", function () {
       return file === join(c.folder, "tspconfig.yaml");
     };
     host.readTspConfig = async (_folder: string) => c.tspconfigContent;
-    const rule = new SdkTspConfigValidationRule(c.subRules);
-    const result = await rule.execute(host, c.folder, c.ignoredOptions);
+    const suppressions: Suppression[] = [
+      {
+        tool: "",
+        paths: [],
+        reason: "",
+        rules: ["SdkTspConfigValidation"],
+        subRules: c.ignoredKeyPaths,
+      },
+    ];
+    const rule = new SdkTspConfigValidationRule(suppressions, c.subRules);
+    const result = await rule.execute(host, c.folder);
     strictEqual(result.success, true);
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);

@@ -3,6 +3,7 @@ import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
+import { Suppression } from "suppressions";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };
@@ -451,22 +452,21 @@ export const defaultRules = [
 
 export class SdkTspConfigValidationRule implements Rule {
   private subRules: TspconfigSubRuleBase[] = [];
+  private suppressedKeyPaths: Set<string> = new Set();
   name = "SdkTspConfigValidation";
   description = "Validate the SDK tspconfig.yaml file";
 
-  constructor(subRules?: TspconfigSubRuleBase[]) {
-    this.subRules = subRules || defaultRules;
+  constructor(suppressions: Suppression[] = [], subRules: TspconfigSubRuleBase[] = defaultRules) {
+    this.subRules = subRules;
+    this.setSuppressedKeyPaths(suppressions);
   }
-  async execute(
-    host?: TsvHost,
-    folder?: string,
-    ignoredOptions?: Set<string>,
-  ): Promise<RuleResult> {
+
+  async execute(host?: TsvHost, folder?: string): Promise<RuleResult> {
     const failedResults = [];
     let success = true;
     for (const subRule of this.subRules) {
-      if (ignoredOptions && ignoredOptions.has(subRule.getPathOfKeyToValidate())) continue;
-      console.log(subRule.getPathOfKeyToValidate());
+      // TODO: support wildcard
+      if (this.suppressedKeyPaths.has(subRule.getPathOfKeyToValidate())) continue;
       const result = await subRule.execute(host!, folder!);
       if (!result.success) failedResults.push(result);
       success &&= result.success;
@@ -477,5 +477,13 @@ export class SdkTspConfigValidationRule implements Rule {
       success: true,
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${failedResults.map((r) => r.errorOutput).join("\n")}`,
     };
+  }
+
+  private setSuppressedKeyPaths(suppressions: Suppression[]) {
+    this.suppressedKeyPaths = new Set<string>();
+    for (const suppression of suppressions) {
+      if (!suppression.rules?.includes(this.name)) continue;
+      for (const ignoredKey of suppression.subRules ?? []) this.suppressedKeyPaths.add(ignoredKey);
+    }
   }
 }
