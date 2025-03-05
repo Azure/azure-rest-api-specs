@@ -217,7 +217,7 @@ model AnalyzeConversationAuthoringCopyAuthorizationOptions {
  * Represents the options for copying an existing project to another Azure resource.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("CopyProjectDetails", "csharp")
+@clientName("ConversationAuthoringCopyProjectDetails", "csharp")
 model AnalyzeConversationAuthoringCopiedProjectOptions {
   /**
    * Represents the project kind.
