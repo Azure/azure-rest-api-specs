@@ -11,11 +11,11 @@ namespace Microsoft.KubernetesRuntime;
 @doc("Properties for the service resource")
 model ServiceProperties {
   @doc("The object id of the service principal of the RP provisioned in the tenant")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   rpObjectId?: uuid;
 
   @doc("Resource provision state")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 

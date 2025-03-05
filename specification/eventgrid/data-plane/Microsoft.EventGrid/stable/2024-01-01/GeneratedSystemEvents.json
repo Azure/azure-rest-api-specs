@@ -2967,13 +2967,7 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      },
-      "required": [
-        "key",
-        "label",
-        "etag",
-        "syncToken"
-      ]
+      }
     },
     "AppConfigurationKeyValueModifiedEventData": {
       "type": "object",
@@ -2985,8 +2979,7 @@
         },
         "label": {
           "type": "string",
-          "description": "The label, if any, used to identify the key-value that was modified.",
-          "x-nullable": true
+          "description": "The label, if any, used to identify the key-value that was modified."
         },
         "etag": {
           "type": "string",
@@ -2996,13 +2989,7 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      },
-      "required": [
-        "key",
-        "label",
-        "etag",
-        "syncToken"
-      ]
+      }
     },
     "AppConfigurationSnapshotCreatedEventData": {
       "type": "object",
@@ -3029,12 +3016,7 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      },
-      "required": [
-        "name",
-        "etag",
-        "syncToken"
-      ]
+      }
     },
     "AppConfigurationSnapshotModifiedEventData": {
       "type": "object",
@@ -3752,10 +3734,7 @@
           "type": "string",
           "description": "The Kubernetes version of the ManagedCluster resource"
         }
-      },
-      "required": [
-        "kubernetesVersion"
-      ]
+      }
     },
     "ContainerServiceNewKubernetesVersionAvailableEventData": {
       "type": "object",
@@ -3777,12 +3756,7 @@
           "type": "string",
           "description": "The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event"
         }
-      },
-      "required": [
-        "latestSupportedKubernetesVersion",
-        "latestStableKubernetesVersion",
-        "lowestMinorKubernetesVersion"
-      ]
+      }
     },
     "ContainerServiceNodePoolRollingEventData": {
       "type": "object",
@@ -3792,10 +3766,7 @@
           "type": "string",
           "description": "The name of the node pool in the ManagedCluster resource"
         }
-      },
-      "required": [
-        "nodePoolName"
-      ]
+      }
     },
     "ContainerServiceNodePoolRollingFailedEventData": {
       "type": "object",
@@ -4429,13 +4400,6 @@
         }
       },
       "required": [
-        "fileUrl",
-        "fileType",
-        "partitionId",
-        "sizeInBytes",
-        "eventCount",
-        "firstSequenceNumber",
-        "lastSequenceNumber",
         "firstEnqueueTime",
         "lastEnqueueTime"
       ]
@@ -6161,23 +6125,15 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the target dataset time series that resulted in drift detection.",
-          "x-nullable": true
+          "description": "The start time of the target dataset time series that resulted in drift detection."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the target dataset time series that resulted in drift detection.",
-          "x-nullable": true
+          "description": "The end time of the target dataset time series that resulted in drift detection."
         }
       },
       "required": [
-        "dataDriftId",
-        "dataDriftName",
-        "runId",
-        "baseDatasetId",
-        "targetDatasetId",
-        "driftCoefficient",
         "startTime",
         "endTime"
       ]
@@ -6210,9 +6166,8 @@
         }
       },
       "required": [
-        "serviceName",
-        "serviceComputeType",
-        "modelIds"
+        "serviceTags",
+        "serviceProperties"
       ]
     },
     "MachineLearningServicesModelRegisteredEventData": {
@@ -6239,8 +6194,8 @@
         }
       },
       "required": [
-        "modelName",
-        "modelVersion"
+        "modelTags",
+        "modelProperties"
       ]
     },
     "MachineLearningServicesRunCompletedEventData": {
@@ -6275,10 +6230,8 @@
         }
       },
       "required": [
-        "experimentId",
-        "experimentName",
-        "runId",
-        "runType"
+        "runTags",
+        "runProperties"
       ]
     },
     "MachineLearningServicesRunStatusChangedEventData": {
@@ -6317,11 +6270,8 @@
         }
       },
       "required": [
-        "experimentId",
-        "experimentName",
-        "runId",
-        "runType",
-        "runStatus"
+        "runTags",
+        "runProperties"
       ]
     },
     "MapsGeofenceEnteredEventData": {

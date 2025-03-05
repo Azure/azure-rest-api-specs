@@ -39,7 +39,7 @@ model SessionCodeExecutionResult {
 @doc("The session code execution resource.")
 @resource("executions")
 model SessionCodeExecutionResource {
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Session code execution id.")
   @key("executionId")
   id: string;

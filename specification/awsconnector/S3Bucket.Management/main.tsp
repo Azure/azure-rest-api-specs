@@ -19,7 +19,9 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service(#{ title: "Microsoft.AwsConnector" })
+@service({
+  title: "Microsoft.AwsConnector",
+})
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -76,7 +78,7 @@ model AwsS3BucketProperties {
   accessControl?: AccessControl;
 
   @doc("Specifies the configuration and any analyses for the analytics filter of an Amazon S3 bucket.")
-  @extension("x-ms-identifiers", #[])
+  @extension("x-ms-identifiers", [])
   analyticsConfigurations?: AnalyticsConfiguration[];
 
   @doc("the Amazon Resource Name (ARN) of the specified bucket.")
@@ -98,11 +100,11 @@ model AwsS3BucketProperties {
   dualStackDomainName?: string;
 
   @doc("Defines how Amazon S3 handles Intelligent-Tiering storage.")
-  @extension("x-ms-identifiers", #[])
+  @extension("x-ms-identifiers", [])
   intelligentTieringConfigurations?: IntelligentTieringConfiguration[];
 
   @doc("Specifies the inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*.")
-  @extension("x-ms-identifiers", #[])
+  @extension("x-ms-identifiers", [])
   inventoryConfigurations?: InventoryConfiguration[];
 
   @doc("Specifies the lifecycle configuration for objects in an Amazon S3 bucket. For more information, see [Object Lifecycle Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in the *Amazon S3 User Guide*. Specifies the lifecycle configuration for objects in an Amazon S3 bucket. For more information, see [Object Lifecycle Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in the *Amazon S3 User Guide*.")
@@ -112,7 +114,7 @@ model AwsS3BucketProperties {
   loggingConfiguration?: LoggingConfiguration;
 
   @doc("Specifies a metrics configuration for the CloudWatch request metrics (specified by the metrics configuration ID) from an Amazon S3 bucket. If you're updating an existing metrics configuration, note that this is a full replacement of the existing metrics configuration. If you don't include the elements you want to keep, they are erased. For more information, see [PutBucketMetricsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html).")
-  @extension("x-ms-identifiers", #[])
+  @extension("x-ms-identifiers", [])
   metricsConfigurations?: MetricsConfiguration[];
 
   @doc("Configuration that defines how Amazon S3 handles bucket notifications. Describes the notification configuration for an Amazon S3 bucket.  If you create the target resource and related permissions in the same template, you might have a circular dependency. For example, you might use the ``AWS::Lambda::Permission`` resource to grant the bucket permission to invoke an AWS Lambda function. However, AWS CloudFormation can't create the bucket until the bucket has permission to invoke the function (AWS CloudFormation checks whether the bucket can invoke the function). If you're using Refs to pass the bucket name, this leads to a circular dependency. To avoid this dependency, you can create all resources without specifying the notification configuration. Then, update the stack with a notification configuration. For more information on permissions, see [AWS::Lambda::Permission](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html) and [Granting Permissions to Publish Event Notification Messages to a Destination](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#grant-destinations-permissions-to-s3).")
@@ -137,7 +139,7 @@ model AwsS3BucketProperties {
   replicationConfiguration?: ReplicationConfiguration;
 
   @doc("An arbitrary set of tags (key-value pairs) for this S3 bucket.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
   @doc("Enables multiple versions of all objects in this bucket. You might enable versioning to prevent objects from being deleted or overwritten by mistake or to archive objects so that you can retrieve previous versions of them. Describes the versioning state of an Amazon S3 bucket. For more information, see [PUT Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html) in the *Amazon S3 API Reference*.")
@@ -216,7 +218,7 @@ model AnalyticsConfiguration {
   storageClassAnalysis?: StorageClassAnalysis;
 
   @doc("The tags to use when evaluating an analytics filter. The analytics only includes objects that meet the filter's criteria. If no filter is specified, all of the contents of the bucket are included in the analysis.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   tagFilters?: TagFilter[];
 }
 
@@ -227,7 +229,7 @@ model AnalyticsConfiguration {
 @doc("Definition of BucketEncryption")
 model BucketEncryption {
   @doc("Specifies the default server-side-encryption configuration.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   serverSideEncryptionConfiguration?: ServerSideEncryptionRule[];
 }
 
@@ -238,7 +240,7 @@ model BucketEncryption {
 @doc("Definition of CorsConfiguration")
 model CorsConfiguration {
   @doc("A set of origins and methods (cross-origin access that you want to allow). You can add up to 100 rules to the configuration.")
-  @extension("x-ms-identifiers", #[])
+  @extension("x-ms-identifiers", [])
   corsRules?: CorsRule[];
 }
 
@@ -258,11 +260,11 @@ model IntelligentTieringConfiguration {
   status?: IntelligentTieringConfigurationStatus;
 
   @doc("A container for a key-value pair.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   tagFilters?: TagFilter[];
 
   @doc("Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ``ARCHIVE_ACCESS`` and ``DEEP_ARCHIVE_ACCESS``.  You only need Intelligent Tiering Configuration enabled on a bucket if you want to automatically move objects stored in the Intelligent-Tiering storage class to Archive Access or Deep Archive Access tiers.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   tierings?: Tiering[];
 }
 
@@ -296,6 +298,7 @@ model InventoryConfiguration {
   includedObjectVersions?: InventoryConfigurationIncludedObjectVersions;
 
   @doc("Contains the optional fields that are included in the inventory results.")
+  @extension("x-ms-identifiers", [])
   optionalFields?: InventoryConfigurationOptionalFields[];
 
   @doc("Specifies the inventory filter prefix.")
@@ -334,7 +337,7 @@ union InventoryConfigurationScheduleFrequency {
 @doc("Definition of LifecycleConfiguration")
 model LifecycleConfiguration {
   @doc("A lifecycle rule for individual objects in an Amazon S3 bucket.")
-  @extension("x-ms-identifiers", #[])
+  @extension("x-ms-identifiers", [])
   rules?: Rule[];
 }
 
@@ -420,7 +423,7 @@ model MetricsConfiguration {
   prefix?: string;
 
   @doc("Specifies a list of tag filters to use as a metrics configuration filter. The metrics configuration includes only objects that meet the filter's criteria.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   tagFilters?: TagFilter[];
 }
 
@@ -434,15 +437,15 @@ model NotificationConfiguration {
   eventBridgeConfiguration?: EventBridgeConfiguration;
 
   @doc("Describes the LAMlong functions to invoke and the events for which to invoke them.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   lambdaConfigurations?: LambdaConfiguration[];
 
   @doc("The Amazon Simple Queue Service queues to publish messages to and the events for which to publish messages.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   queueConfigurations?: QueueConfiguration[];
 
   @doc("The topic to which notifications are sent and the events for which notifications are generated.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   topicConfigurations?: TopicConfiguration[];
 }
 
@@ -466,7 +469,7 @@ model ObjectLockConfiguration {
 @doc("Definition of OwnershipControls")
 model OwnershipControls {
   @doc("Specifies the container element for Object Ownership rules.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   rules?: OwnershipControlsRule[];
 }
 
@@ -499,7 +502,7 @@ model ReplicationConfiguration {
   role?: string;
 
   @doc("A container for one or more replication rules. A replication configuration must have at least one rule and can contain a maximum of 1,000 rules.")
-  @extension("x-ms-identifiers", #[])
+  @extension("x-ms-identifiers", [])
   rules?: ReplicationRule[];
 }
 
@@ -553,7 +556,7 @@ model WebsiteConfiguration {
   redirectAllRequestsTo?: RedirectAllRequestsTo;
 
   @doc("Rules that define when a redirect is applied and the redirect behavior.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   routingRules?: RoutingRule[];
 }
 
@@ -600,15 +603,19 @@ model ServerSideEncryptionRule {
 @doc("Definition of CorsRule")
 model CorsRule {
   @doc("Headers that are specified in the ``Access-Control-Request-Headers`` header. These headers are allowed in a preflight OPTIONS request. In response to any preflight OPTIONS request, Amazon S3 returns any requested headers that are allowed.")
+  @extension("x-ms-identifiers", [])
   allowedHeaders?: string[];
 
   @doc("An HTTP method that you allow the origin to run.  *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``")
+  @extension("x-ms-identifiers", [])
   allowedMethods?: CorsRuleAllowedMethods[];
 
   @doc("One or more origins you want customers to be able to access the bucket from.")
+  @extension("x-ms-identifiers", [])
   allowedOrigins?: string[];
 
   @doc("One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript ``XMLHttpRequest`` object).")
+  @extension("x-ms-identifiers", [])
   exposedHeaders?: string[];
 
   @doc("A unique identifier for this rule. The value must be no more than 255 characters.")
@@ -726,7 +733,7 @@ model Rule {
   noncurrentVersionTransition?: NoncurrentVersionTransition;
 
   @doc("For buckets with versioning enabled (or suspended), one or more transition rules that specify when non-current objects transition to a specified storage class. If you specify a transition and expiration time, the expiration time must be later than the transition time. If you specify this property, don't specify the ``NoncurrentVersionTransition`` property.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   noncurrentVersionTransitions?: NoncurrentVersionTransition[];
 
   @doc("Specifies the minimum object size in bytes for this rule to apply to. Objects must be larger than this value in bytes. For more information about size based rules, see [Lifecycle configuration using size-based rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-configuration-examples.html#lc-size-rules) in the *Amazon S3 User Guide*.")
@@ -742,14 +749,14 @@ model Rule {
   status?: RuleStatus;
 
   @doc("Tags to use to identify a subset of objects to which the lifecycle rule applies.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   tagFilters?: TagFilter[];
 
   @doc("(Deprecated.) Specifies when an object transitions to a specified storage class. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time. If you specify this property, don't specify the ``Transitions`` property. Specifies when an object transitions to a specified storage class. For more information about Amazon S3 lifecycle configuration rules, see [Transitioning Objects Using Amazon S3 Lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html) in the *Amazon S3 User Guide*.")
   transition?: Transition;
 
   @doc("One or more transition rules that specify when an object transitions to a specified storage class. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time. If you specify this property, don't specify the ``Transition`` property.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   transitions?: Transition[];
 }
 
@@ -1307,7 +1314,7 @@ model RoutingRuleCondition {
 @doc("Definition of S3KeyFilter")
 model S3KeyFilter {
   @doc("A list of containers for the key-value pair that defines the criteria for the filter rule.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   rules?: FilterRule[];
 }
 
@@ -1389,7 +1396,7 @@ model ReplicationRuleAndOperator {
   prefix?: string;
 
   @doc("An array of tags containing key and value pairs.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   tagFilters?: TagFilter[];
 }
 

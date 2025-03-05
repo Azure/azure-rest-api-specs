@@ -36,7 +36,8 @@ interface TextAnalysisAuthoring {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
   @createsOrUpdatesResource(TextAnalysisAuthoringProjectMetadata)
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
+  @patch
   createProject is Foundations.ResourceOperation<
     TextAnalysisAuthoringProjectMetadata,
     {

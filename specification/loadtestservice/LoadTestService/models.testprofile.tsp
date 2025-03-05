@@ -17,7 +17,7 @@ model TestProfileIdPathParameter {
   @maxLength(50)
   @minLength(2)
   @key
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @pattern("^[a-z0-9_-]*$")
   testProfileId: string;
 }
@@ -26,7 +26,7 @@ model TestProfileIdPathParameter {
 @added(APIVersions.v2024_05_01_preview)
 model TestProfileRunIdPathParameter {
   @doc("Unique identifier for the test profile run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @maxLength(50)
   @minLength(2)
   @key
@@ -120,7 +120,7 @@ model TestProfileRunRecommendation {
 @discriminator("kind")
 model TargetResourceConfigurations {
   @doc("Kind of the resource for which the configurations apply.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility("create", "read")
   kind: ResourceKind;
 }
 
@@ -155,11 +155,11 @@ model TestProfile {
   description?: string;
 
   @doc("Associated test ID for the test profile. This property is required for creating a Test Profile and it's not allowed to be updated.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility("create", "read")
   testId?: string;
 
   @doc("Target resource ID on which the test profile is created. This property is required for creating a Test Profile and it's not allowed to be updated.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility("create", "read")
   targetResourceId?: string;
 
   @doc("Configurations of the target resource on which testing would be done.")
@@ -186,52 +186,52 @@ model TestProfileRun {
   description?: string;
 
   @doc("Associated test profile ID for the test profile run. This is required to create a test profile run and can't be updated.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility("create", "read")
   testProfileId?: string;
 
   // End section: Properties provided by user
 
   // Begin section: Properties populated from Test Profile
   @doc("Target resource ID on which the test profile run is created")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   targetResourceId?: string;
 
   @doc("Configurations of the target resource on which the test profile ran.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   targetResourceConfigurations?: TargetResourceConfigurations;
 
   // End section: Properties populated from Test Profile
 
   // Begin section: Test profile Run specific information
   @doc("The test profile run status.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   status?: TestProfileRunStatus;
 
   @doc("Error details if there is any failure in test profile run. These errors are specific to the Test Profile Run.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   errorDetails?: ErrorDetails[];
 
   @doc("The test profile run start DateTime(RFC 3339 literal format).")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   startDateTime?: utcDateTime;
 
   @doc("The test profile run end DateTime(RFC 3339 literal format).")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   endDateTime?: utcDateTime;
 
   @doc("Test profile run duration in seconds.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   durationInSeconds?: int64;
 
   @doc("""
     Details of the test runs ran as part of the test profile run.
     Key is the testRunId of the corresponding testRun.
     """)
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   testRunDetails?: Record<TestRunDetail>;
 
   @doc("Recommendations provided based on a successful test profile run.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   recommendations?: TestProfileRunRecommendation[];
 
   // End section: Test profile run specific information

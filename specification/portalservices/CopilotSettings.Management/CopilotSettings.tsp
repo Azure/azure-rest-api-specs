@@ -14,7 +14,7 @@ model CopilotSettingsResource is ProxyResource<CopilotSettingsProperties> {
   @doc("The default copilot settings, applying to entire tenant.")
   @segment("copilotSettings")
   @key
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;

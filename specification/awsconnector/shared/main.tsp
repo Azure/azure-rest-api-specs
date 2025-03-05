@@ -26,7 +26,7 @@ alias AwsCommonProperties = {
   @doc("AWS Tags")
   awsTags?: Record<string>;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 };

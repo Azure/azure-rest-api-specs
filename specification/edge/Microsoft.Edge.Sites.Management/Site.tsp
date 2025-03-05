@@ -18,7 +18,7 @@ model Site is ProxyResource<SiteProperties> {
   @path
   @key("siteName")
   @segment("sites")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 }
 

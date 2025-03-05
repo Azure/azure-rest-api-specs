@@ -106,7 +106,7 @@ model ProviderDescription {
   /**
    * Provider's display name.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name?: string;
 
   /**
@@ -122,25 +122,25 @@ model ProviderProperties {
   /**
    * A description about this provider.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   description?: string;
 
   /**
    * Provider type.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   providerType?: string;
 
   /**
    * Company name.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   company?: string;
 
   /**
    * Provider's default endpoint.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   defaultEndpoint?: string;
 
   /**
@@ -181,13 +181,13 @@ model ProviderPropertiesAad {
   /**
    * Provider's application id.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   applicationId?: string;
 
   /**
    * Provider's tenant id.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   tenantId?: string;
 }
 
@@ -198,13 +198,13 @@ model ProviderPropertiesManagedApplication {
   /**
    * Provider's publisher id.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   publisherId?: string;
 
   /**
    * Provider's offer id.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   offerId?: string;
 }
 
@@ -370,19 +370,19 @@ model WorkspaceResourceProperties {
   /**
    * List of Providers selected for this Workspace
    */
-  @identifiers(#["providerId"])
+  @OpenAPI.extension("x-ms-identifiers", ["providerId"])
   providers?: Provider[];
 
   /**
    * Whether the current workspace is ready to accept Jobs.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   usable?: UsableStatus;
 
   /**
    * Provisioning status field
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: WorkspaceProvisioningStatus;
 
   /**
@@ -393,7 +393,7 @@ model WorkspaceResourceProperties {
   /**
    * The URI of the workspace endpoint.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   endpointUri?: string;
 
   /**
@@ -459,13 +459,13 @@ model ListKeysResult {
   /**
    * The connection string of the primary api key.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   primaryConnectionString?: string;
 
   /**
    * The connection string of the secondary api key.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   secondaryConnectionString?: string;
 }
 
@@ -481,7 +481,7 @@ model ApiKey {
   /**
    * The Api key.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   key?: string;
 }
 

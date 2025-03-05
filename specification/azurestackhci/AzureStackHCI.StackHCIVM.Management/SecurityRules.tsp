@@ -18,7 +18,7 @@ model SecurityRule is ProxyResource<SecurityRuleProperties> {
   @path
   @key("securityRuleName")
   @segment("securityRules")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 
   @doc("The extendedLocation of the resource.")

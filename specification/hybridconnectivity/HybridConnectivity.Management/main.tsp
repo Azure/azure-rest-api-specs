@@ -27,7 +27,9 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 @versioned(Versions)
-@service(#{ title: "Hybrid Connectivity Management API" })
+@service({
+  title: "Hybrid Connectivity Management API",
+})
 @doc("REST API for public clouds.")
 namespace Microsoft.HybridConnectivity;
 

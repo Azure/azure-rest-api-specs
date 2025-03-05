@@ -21,7 +21,7 @@ model GalleryImage is TrackedResource<GalleryImageProperties> {
   @path
   @key("galleryImageName")
   @segment("galleryImages")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 
   @doc("The extendedLocation of the resource.")
@@ -42,7 +42,7 @@ interface GalleryImages {
   >;
 
   @doc("The operation to update a gallery image.")
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<GalleryImage>;
 
   @doc("The operation to delete a gallery image.")

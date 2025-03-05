@@ -12,19 +12,19 @@ namespace Microsoft.MachineLearningServices;
 
 @doc("Metadata pertaining to creation and last modification of the resource.")
 model SystemData {
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The timestamp the resource was created at.")
   createdAt?: utcDateTime;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The identity that created the resource.")
   createdBy?: string;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The identity type that created the resource.")
   createdByType?: string;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The timestamp of resource last modification (UTC)")
   lastModifiedAt?: utcDateTime;
 }

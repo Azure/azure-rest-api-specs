@@ -17,7 +17,7 @@ model Device is ProxyResource<DeviceProperties> {
   @path
   @key("deviceName")
   @segment("devices")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 }
 
@@ -42,7 +42,7 @@ interface Devices {
    * Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     Device,
     DeviceUpdate,

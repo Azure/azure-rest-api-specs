@@ -40,7 +40,7 @@ interface FleetTiers {
   /**
    * Updates a tier.
    */
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<FleetTier, FleetTier>;
 
   /**

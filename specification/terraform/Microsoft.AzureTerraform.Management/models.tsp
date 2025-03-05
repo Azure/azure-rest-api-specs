@@ -132,6 +132,6 @@ model ExportResult {
   skippedResources?: armResourceIdentifier[];
 
   @doc("A list of errors derived during exporting each resource")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   errors?: ErrorDetail[];
 }

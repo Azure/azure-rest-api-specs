@@ -28,7 +28,7 @@ model DataflowEndpointResource is ProxyResource<DataflowEndpointProperties> {
   // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   extendedLocation: ExtendedLocation;
 }
 
@@ -55,7 +55,7 @@ model DataflowEndpointProperties {
   @doc("Broker endpoint.")
   mqttSettings?: DataflowEndpointMqtt;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

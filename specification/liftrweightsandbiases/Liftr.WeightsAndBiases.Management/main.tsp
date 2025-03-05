@@ -14,7 +14,9 @@ using LiftrBase;
 
 /* Microsoft.WeightsAndBiases Resource Provider management API. */
 @armProviderNamespace
-@service(#{ title: "Microsoft.WeightsAndBiases management service" })
+@service({
+  title: "Microsoft.WeightsAndBiases management service",
+})
 @versioned(Microsoft.WeightsAndBiases.Versions)
 namespace Microsoft.WeightsAndBiases;
 

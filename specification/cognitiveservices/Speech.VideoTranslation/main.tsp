@@ -12,7 +12,9 @@ using TypeSpec.OpenAPI;
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Keeping this in the spec for now"
 @doc("Video translation API to translate video from source locale to target locale.")
 @versioned(VideoTranslation.ApiVersions)
-@service(#{ title: "Video Translation" })
+@service({
+  title: "Video Translation",
+})
 @server(
   "{endpoint}/videotranslation",
   "Translate video from source locale to target locale.",
@@ -23,12 +25,14 @@ using TypeSpec.OpenAPI;
 )
 @useAuth(KeyAuth | AADToken)
 @tag("VideoTranslation")
-@info(#{
-  contact: #{
+@info({
+  contact: {
     name: "Azure AI - Speech Services",
     url: "https://learn.microsoft.com/azure/ai-services/speech-service/",
   },
-  license: #{ name: "Copyright (c) Microsoft. All rights reserved." },
+  license: {
+    name: "Copyright (c) Microsoft. All rights reserved.",
+  },
 })
 namespace Microsoft.Speech.VideoTranslation;
 
@@ -184,7 +188,7 @@ model IterationInput {
 model OperationIdHeader {
   @doc("Operation ID.")
   @header("Operation-Id")
-  @visibility(Lifecycle.Create)
+  @visibility("create")
   operationId: resourceId;
 }
 
@@ -193,7 +197,7 @@ model OperationIdHeader {
 model Translation {
   @doc("Translation resource ID.")
   @key("translationId")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: resourceId;
 
   @doc("Translation input.")
@@ -206,19 +210,19 @@ model Translation {
   description?: string;
 
   @doc("The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   createdDateTime?: utcDateTime;
 
   @doc("Latest iteration of the translation.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   latestIteration?: Iteration;
 
   @doc("Latest completed iteration of the translation.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   latestSucceededIteration?: Iteration;
 
   @doc("Translation failure reason")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   failureReason?: string;
 }
 
@@ -228,7 +232,7 @@ model Translation {
 model Iteration {
   @doc("Iteration ID")
   @key("iterationId")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: resourceId;
 
   @doc("Iteration input.")
@@ -238,23 +242,23 @@ model Iteration {
   description?: string;
 
   @doc("Iteration status")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   status?: Status;
 
   @doc("Iteration failure reason")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   failureReason?: string;
 
   @doc("The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   createdDateTime?: utcDateTime;
 
   @doc("The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   lastActionDateTime?: utcDateTime;
 
   @doc("Iteration result.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   result?: IterationResult;
 }
 
@@ -263,7 +267,7 @@ model Iteration {
 model Operation {
   @doc("Operation ID")
   @key("operationId")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: resourceId;
 
   @doc("Operation status")

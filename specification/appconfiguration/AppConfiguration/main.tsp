@@ -7,7 +7,9 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@service(#{ title: "Azure App Configuration" })
+@service({
+  title: "Azure App Configuration",
+})
 @versioned(Versions)
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Connection String"> | OAuth2Auth<[

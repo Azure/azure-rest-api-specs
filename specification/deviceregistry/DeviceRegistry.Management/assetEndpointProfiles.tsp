@@ -29,14 +29,14 @@ model AssetEndpointProfile is TrackedResource<AssetEndpointProfileProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The extended location.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   extendedLocation: ExtendedLocation;
 }
 
 @doc("Defines the Asset Endpoint Profile properties.")
 model AssetEndpointProfileProperties {
   @doc("Globally unique, immutable, non-reusable id.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   uuid?: string;
 
   @doc("The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration.")
@@ -62,17 +62,17 @@ model AssetEndpointProfileProperties {
   additionalConfiguration?: string;
 
   @doc("Reference to a discovered asset endpoint profile. Populated only if the asset endpoint profile has been created from discovery flow. Discovered asset endpoint profile name must be provided.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   @added(Versions.v2024_09_01_preview)
   discoveredAssetEndpointProfileRef?: string;
 
   @doc("Read only object to reflect changes that have occurred on the Edge. Similar to Kubernetes status property for custom resources.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @added(Versions.v2024_09_01_preview)
   status?: AssetEndpointProfileStatus;
 
   @doc("Provisioning state of the resource.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -125,7 +125,7 @@ model X509Credentials {
 @removed(Versions.v2024_09_01_preview)
 model TransportAuthentication {
   @doc("Defines a reference to a secret which contains all certificates and private keys that can be used by the southbound connector connecting to the shop floor/OT device. The accepted extensions are .der for certificates and .pfx/.pem for private keys.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   @removed(Versions.v2024_09_01_preview)
   ownCertificates: OwnCertificate[];
 }
@@ -147,8 +147,8 @@ model OwnCertificate {
 @added(Versions.v2024_09_01_preview)
 model AssetEndpointProfileStatus {
   @doc("Array object to transfer and persist errors that originate from the Edge.")
-  @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @visibility("read")
+  @extension("x-ms-identifiers", [])
   errors?: AssetEndpointProfileStatusError[];
 }
 
@@ -156,11 +156,11 @@ model AssetEndpointProfileStatus {
 @added(Versions.v2024_09_01_preview)
 model AssetEndpointProfileStatusError {
   @doc("Error code for classification of errors (ex: 400, 404, 500, etc.).")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   code?: int32;
 
   @doc("Human readable helpful error message to provide additional context for error (ex: “targetAddress 'foo' is not a valid url”).")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   message?: string;
 }
 

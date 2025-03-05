@@ -32,7 +32,7 @@ model ScopingConfigurationResource
   extends Azure.ResourceManager.Foundations.ProxyResource {
   @key("scopingConfigurationName")
   @segment("scopingConfigurations")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The scoping configuration of the specific report.")
   @pattern("^[a-zA-Z0-9_]*$")
   @path

@@ -10,7 +10,9 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-@service(#{ title: "Image Analysis" })
+@service({
+  title: "Image Analysis",
+})
 @versioned(ImageAnalysis.Versions)
 @useAuth(
   ApiKeyAuth<

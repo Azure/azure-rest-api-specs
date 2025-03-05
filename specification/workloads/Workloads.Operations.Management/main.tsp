@@ -11,7 +11,9 @@ using TypeSpec.Versioning;
  * Workloads client provides access to various workload operations.
  */
 @armProviderNamespace
-@service(#{ title: "Workloads Client" })
+@service({
+  title: "Workloads Client",
+})
 @versioned(Versions)
 namespace Microsoft.Workloads;
 

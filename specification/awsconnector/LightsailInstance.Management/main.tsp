@@ -19,7 +19,9 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service(#{ title: "Microsoft.AwsConnector" })
+@service({
+  title: "Microsoft.AwsConnector",
+})
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -70,7 +72,7 @@ model LightsailInstanceProperties {
 @doc("Definition of awsLightsailInstance")
 model AwsLightsailInstanceProperties {
   @doc("An array of objects representing the add-ons to enable for the new instance.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   addOns?: AddOn[];
 
   @doc("The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.")
@@ -122,7 +124,7 @@ model AwsLightsailInstanceProperties {
   supportCode?: string;
 
   @doc("An array of key-value pairs to apply to this resource.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
   @doc("A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.")
@@ -184,7 +186,7 @@ model Hardware {
   cpuCount?: int32;
 
   @doc("Disks attached to the Instance.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   disks?: Disk[];
 
   @doc("RAM Size of the Instance.")
@@ -214,7 +216,7 @@ model Networking {
   monthlyTransfer?: MonthlyTransfer;
 
   @doc("Ports to the Instance.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   ports?: Port[];
 }
 
@@ -308,9 +310,11 @@ model Port {
   accessType?: string;
 
   @doc("cidr List Aliases")
+  @extension("x-ms-identifiers", [])
   cidrListAliases?: string[];
 
   @doc("Property cidrs")
+  @extension("x-ms-identifiers", [])
   cidrs?: string[];
 
   @doc("CommonName for Protocol of the Instance.")
@@ -320,6 +324,7 @@ model Port {
   fromPort?: int32;
 
   @doc("IPv6 Cidrs")
+  @extension("x-ms-identifiers", [])
   ipv6Cidrs?: string[];
 
   @doc("Port Protocol of the Instance.")

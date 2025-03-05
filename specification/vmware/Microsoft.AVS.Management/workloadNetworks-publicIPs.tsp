@@ -41,7 +41,9 @@ interface WorkloadNetworkPublicIps {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "location" }
+    {
+      `final-state-via`: "location",
+    }
   )
   delete(
     ...Foundations.BaseParameters<WorkloadNetworkPublicIP>,
@@ -97,10 +99,10 @@ model WorkloadNetworkPublicIPProperties {
   numberOfPublicIPs?: int64;
 
   @doc("CIDR Block of the Public IP Block.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   publicIPBlock?: string;
 
   @doc("The provisioning state")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: WorkloadNetworkPublicIPProvisioningState;
 }

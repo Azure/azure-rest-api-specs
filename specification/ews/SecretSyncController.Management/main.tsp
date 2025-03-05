@@ -13,7 +13,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.SecretSyncController")
-@service(#{ title: "Microsoft.SecretSyncController" })
+@service({
+  title: "Microsoft.SecretSyncController",
+})
 @doc("Microsoft.SecretSyncController resource provider.")
 @versioned(Microsoft.SecretSyncController.Versions)
 namespace Microsoft.SecretSyncController;

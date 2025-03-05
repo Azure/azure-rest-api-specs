@@ -22,7 +22,7 @@ model Gateway is Azure.ResourceManager.TrackedResource<GatewayProperties> {
   @path
   @key("gatewayName")
   @segment("gateways")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 }
 
@@ -33,7 +33,7 @@ model GatewayProperties {
   /**
    * List of Operator API Connections selected by the user
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   operatorApiConnections?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ProgrammableConnectivity/operatorApiConnections";
@@ -43,13 +43,13 @@ model GatewayProperties {
   /**
    * Base URL of the Gateway resource. This is the URL that the users would use to make Open API Gateway requests to the Operators via Azure.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   gatewayBaseUrl?: string;
 
   /**
    * The status of the last operation on the Gateway resource.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 

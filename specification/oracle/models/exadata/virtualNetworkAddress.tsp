@@ -46,39 +46,39 @@ model VirtualNetworkAddress is ProxyResource<VirtualNetworkAddressProperties> {
 @doc("virtualNetworkAddress resource properties")
 model VirtualNetworkAddressProperties {
   @doc("Virtual network Address address.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility("create", "read")
   ipAddress?: string;
 
   @doc("Virtual Machine OCID.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility("create", "read")
   vmOcid?: Ocid;
 
   @doc("Application VIP OCID.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   ocid?: Ocid;
 
   @doc("Virtual network address fully qualified domain name.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   domain?: string;
 
   @doc("Additional information about the current lifecycle state of the application virtual IP (VIP) address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   lifecycleDetails?: string;
 
   //Subnet should be retrieved from the VM Cluster
   // @doc("Client subnet")
-  //@visibility(Lifecycle.Create, Lifecycle.Read)
+  // @visibility("create", "read")
   // subnetId?: SubnetId;
 
   @doc("Azure resource provisioning state.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: AzureResourceProvisioningState;
 
   @doc("virtual network address lifecycle state.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   lifecycleState?: VirtualNetworkAddressLifecycleState;
 
   @doc("The date and time when the create operation for the application virtual IP (VIP) address completed.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   timeAssigned?: utcDateTime;
 }

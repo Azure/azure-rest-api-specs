@@ -36,7 +36,7 @@ interface SAPVirtualInstances {
   /**
    * Updates a Virtual Instance for SAP solutions resource
    */
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     SAPVirtualInstance,
     UpdateSAPVirtualInstanceRequest

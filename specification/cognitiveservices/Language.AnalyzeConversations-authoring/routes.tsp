@@ -366,7 +366,8 @@ interface ConversationAuthoringProjects {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
   @createsOrUpdatesResource(AnalyzeConversationAuthoringProjectMetadata)
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
+  @patch
   createProject is Foundations.ResourceOperation<
     AnalyzeConversationAuthoringProjectMetadata,
     {

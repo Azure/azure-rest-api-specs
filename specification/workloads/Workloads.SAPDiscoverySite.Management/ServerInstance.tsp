@@ -15,7 +15,7 @@ model ServerInstance is ProxyResource<ServerInstanceProperties> {
   @path
   @key("serverInstanceName")
   @segment("serverInstances")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 }
 
@@ -39,7 +39,7 @@ interface ServerInstances {
   /**
    * Updates the Server Instance resource. This operation on a resource by end user will return a Bad Request error.
    */
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchSync<ServerInstance, UpdateServerInstanceRequest>;
 
   /**

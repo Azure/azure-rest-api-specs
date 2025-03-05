@@ -15,7 +15,7 @@ namespace HealthDataAIServices.DeidServices;
 model DeidentificationJob {
   @key
   @doc("The name of a job.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @maxLength(36)
   @minLength(3) // Must be 3 to match regex
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
@@ -36,12 +36,12 @@ model DeidentificationJob {
   // Readonly Properties
 
   @doc("Current status of a job.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @pollingOperationParameter
   status: Azure.Core.Foundations.OperationState;
 
   @doc("Error when job fails in it's entirety.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   error?: Azure.Core.Foundations.Error;
 
   @doc("""
@@ -51,19 +51,19 @@ model DeidentificationJob {
     
     If the job failed, this is the time when the job failed.
     """)
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   lastUpdatedAt: utcDateTime;
 
   @doc("Date and time when the job was created.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   createdAt: utcDateTime;
 
   @doc("Date and time when the job was started.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   startedAt?: utcDateTime;
 
   @doc("Summary of a job. Exists only when the job is completed.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   summary?: DeidentificationJobSummary;
 }
 
@@ -96,7 +96,7 @@ model DeidentificationJobSummary {
 model DeidentificationDocumentDetails {
   @key
   @doc("Id of the document details.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: string;
 
   @doc("Location for the input.")

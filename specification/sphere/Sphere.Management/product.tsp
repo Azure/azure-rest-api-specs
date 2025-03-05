@@ -23,7 +23,7 @@ model Product is ProxyResource<ProductProperties> {
   @path
   @key("productName")
   @segment("products")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 }
 
@@ -47,7 +47,7 @@ interface Products {
   /**
    * Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<Product, ProductUpdate>;
 
   /**

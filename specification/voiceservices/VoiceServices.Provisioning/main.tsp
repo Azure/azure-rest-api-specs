@@ -11,7 +11,9 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-@service(#{ title: "Microsoft.VoiceServices.Provisioning" })
+@service({
+  title: "Microsoft.VoiceServices.Provisioning",
+})
 @useAuth(
   [
     OAuth2Auth<[
@@ -61,11 +63,11 @@ union ServiceProvisioningStatus {
 
 alias ProvisioningStatus = {
   @doc("The status of the provisioning action associated with this resource.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   serviceProvisioningStatus?: ServiceProvisioningStatus;
 
   @doc("Any errors pertaining to the provisioning of this resource.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   serviceProvisioningErrors?: Azure.Core.Foundations.Error[];
 };
 
@@ -75,14 +77,14 @@ model NumberIdentifier {
   @minLength(3)
   @maxLength(16)
   @pattern("^\\+[1-9]\\d+$")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   telephoneNumber: string;
 }
 
 @doc("A list identifiers for a Number resource.")
 model NumberIdentifiers {
   @doc("Array containing a list of identifiers for Number resources.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   numbers: NumberIdentifier[];
 }
 
@@ -93,19 +95,19 @@ model NumberIdentifiers {
 
 alias ServiceSyncEnabled = {
   @doc("Boolean indicating if data is being provisioned through the backend service.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   syncEnabled: boolean;
 };
 
 alias ServiceEnabled = {
   @doc("Boolean indicating if the service is enabled on this Account.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   enabled: boolean;
 };
 
 alias ServiceNumberCount = {
   @doc("The count of telephone numbers associated with this account that have this backend service enabled.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   numberCount?: int64;
 };
 
@@ -122,14 +124,14 @@ model TeamsDirectRoutingSubdomainTokens {
   @minLength(1)
   @maxLength(100)
   @pattern("^([A-Za-z0-9=_-]+)$")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   region1Token: string;
 
   @doc("DNS TXT value for the second region, as provided by the enterprise admin from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.")
   @minLength(1)
   @maxLength(100)
   @pattern("^([A-Za-z0-9=_-]+)$")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   region2Token: string;
 }
 
@@ -150,18 +152,18 @@ union TeamsDirectRoutingSubdomainProvisioningStatus {
 @doc("Configuration specific to Teams Direct Routing.")
 model TeamsDirectRoutingAccountConfig {
   @doc("Enables/disables caller ID screening for the account. Caller ID screening is enabled by default.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   callScreening: boolean;
 
   @doc("Enterprise-specific domain name label. Can only contain letters, numbers, underscores and dashes. Can be up to 10 characters in length.")
   @minLength(1)
   @maxLength(10)
   @pattern("^([A-Za-z0-9_-]+)$")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   subdomain: string;
 
   @doc("DNS TXT value for the Direct Routing regions, as provided by the customer from their Microsoft 365 Admin Center.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   subdomainTokens: TeamsDirectRoutingSubdomainTokens;
 }
 
@@ -172,11 +174,11 @@ model TeamsDirectRoutingAccountDetails {
   ...ServiceNumberCount;
 
   @doc("The configuration for Teams Direct Routing on this account.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   configuration?: TeamsDirectRoutingAccountConfig;
 
   @doc("The provisioning status of the domains.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   subdomainStatus: TeamsDirectRoutingSubdomainProvisioningStatus;
 }
 
@@ -203,27 +205,27 @@ model AzureOperatorCallProtectionAccountDetails {
 @doc("Details of the backend services associated with this Account.")
 model AccountServiceDetails {
   @doc("The Microsoft Teams Tenant ID of the Account. This can only be updated if no Operator Connect or Teams Phone Mobile numbers are configured in this account.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   teamsTenantId?: string;
 
   @doc("Details for the Teams Operator Connect service on this Account.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   teamsOperatorConnect?: TeamsOperatorConnectAccountDetails;
 
   @doc("Details for the Teams Direct Routing service on this Account.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   teamsDirectRouting?: TeamsDirectRoutingAccountDetails;
 
   @doc("Details for the Teams Phone Mobile service on this Account.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   teamsPhoneMobile?: TeamsPhoneMobileAccountDetails;
 
   @doc("Details for the Zoom Phone Cloud Peering service on this Account.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   zoomPhoneCloudPeering?: ZoomPhoneCloudPeeringAccountDetails;
 
   @doc("Details for the Azure Operator Call Protection service on this Account.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   azureOperatorCallProtection?: AzureOperatorCallProtectionAccountDetails;
 }
 
@@ -236,16 +238,16 @@ model AccountResource {
   @minLength(1)
   @maxLength(100)
   @pattern("^([A-Za-z0-9_-]+)$")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   @key("accountName")
   name: string;
 
   @doc("A user defined identifier used for correlating with external systems.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   correlationId?: string;
 
   @doc("The details of the account.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   serviceDetails?: AccountServiceDetails;
 }
 
@@ -257,41 +259,41 @@ model AccountResource {
 @doc("The Teams capabilities available for numbers with Operator Connect or Teams Phone Mobile services enabled.")
 model TeamsAvailableCapabilities {
   @doc("The available capabilities for the numbers specified with Operator Connect or Teams Phone Mobile services enabled.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   availableCapabilities: string[];
 }
 
 @doc("A teams capability plan for a given usage.")
 model TeamsCapabilityPlan {
   @doc("The capability plan name.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 
   @doc("The offer types available.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   offerTypes?: string[];
 
   @doc("The telephone number usage.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   usage: string;
 
   @doc("Mandatory capabilities for telephone numbers.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   mandatoryCapabilities?: string[];
 
   @doc("Choosable capabilities for telephone numbers.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   choosableCapabilities?: string[];
 
   @doc("Boolean indicating if Toll free is supported.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   supportsTollFree: boolean;
 }
 
 @doc("The Teams telephone number upload usages for this account.")
 model TeamsCapabilityPlans {
   @doc("A list of telephone number upload usages.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   capabilityPlans: TeamsCapabilityPlan[];
 }
 
@@ -315,28 +317,28 @@ union ValidationStatus {
 model Location {
   @minLength(1)
   @doc("The ID of the location.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: string;
 
   @minLength(1)
   @doc("The civic address ID of the location.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   civicAddressId: string;
 
   @doc("The description of the location.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   description?: string;
 
   @doc("The additional information of the location.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   additionalInfo?: string;
 
   @doc("Flag indicating whether the location is default or not.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   isDefault?: boolean;
 
   @doc("The elin (Emergency Location Identification Number) of the location.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   elin?: string;
 }
 
@@ -347,96 +349,96 @@ model TeamsCivicAddressResource {
   @minLength(1)
   @doc("The ID of the civic address.")
   @key("civicAddressId")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: string;
 
   @doc("The country of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   country?: string;
 
   @doc("The house number of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   houseNumber?: string;
 
   @doc("The house number suffix of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   houseNumberSuffix?: string;
 
   @doc("The pre directional of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   preDirectional?: string;
 
   @doc("The street name of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   streetName?: string;
 
   @doc("The street suffix of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   streetSuffix?: string;
 
   @doc("The post directional of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   postDirectional?: string;
 
   @doc("The state or province of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   stateOrProvince?: string;
 
   @doc("The county or district of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   countyOrDistrict?: string;
 
   @doc("The city or town of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   cityOrTown?: string;
 
   @doc("The city or town alias of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   cityOrTownAlias?: string;
 
   @doc("The postal or zip code of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   postalOrZipCode?: string;
 
   @doc("The description of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   description?: string;
 
   @doc("The company name of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   companyName?: string;
 
   @doc("The company ID of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   companyId?: string;
 
   @minLength(1)
   @doc("The default location ID of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   defaultLocationId: string;
 
   @doc("The validation status of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   validationStatus?: ValidationStatus;
 
   @doc("The customer tenant ID of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   tenantId?: string;
 
   @doc("The partner ID of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   partnerId?: string;
 
   @doc("The list of locations associated with the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   locations?: Location[];
 
   @doc("The latitude of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   latitude?: string;
 
   @doc("The longitude of the civic address.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   longitude?: string;
 }
 
@@ -458,52 +460,52 @@ union TelephoneNumberAssignmentStatus {
 
 alias NumberAssignmentStatus = {
   @doc("The assignment status of this Number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   assignmentStatus?: TelephoneNumberAssignmentStatus;
 };
 
 @doc("Telephone number configuration for Teams Operator Connect and Teams Phone Mobile telephone numbers.")
 model TeamsCommonNumberConfig {
   @doc("The usage for this telephone number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   usage: string;
 
   @doc("The choosable capabilities for this telephone number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   choosableCapabilities: string[];
 
   @doc("The acquired capabilities for this telephone number.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   acquiredCapabilities?: string[];
 
   @doc("The available capabilities for this telephone number.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   availableCapabilities?: string[];
 
   @doc("The additional usages for this telephone number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   additionalUsages?: string[];
 
   @doc("The ID of the civic address to be used as the emergency address for this telephone number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   civicAddressId?: string;
 
   @doc("The ID of the location to be used as the emergency address for this telephone number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   locationId?: string;
 
   @doc("If the enterprise is allowed to update the address for this telephone number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   allowTenantAddressUpdate?: boolean = false;
 
   @doc("The country code to be displayed with this telephone number")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   displayedCountryCode?: string;
 }
 
 alias NumberServiceEnabled = {
   @doc("Boolean indicating if the service is enabled on this Number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   enabled: boolean;
 };
 
@@ -518,7 +520,7 @@ model TeamsOperatorConnectNumberDetails {
   ...NumberAssignmentStatus;
 
   @doc("The configuration for Teams Operator Connect on this number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   configuration?: TeamsOperatorConnectNumberConfig;
 }
 
@@ -538,7 +540,7 @@ model TeamsPhoneMobileNumberDetails {
   ...NumberAssignmentStatus;
 
   @doc("The configuration for Teams Phone Mobile on this number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   configuration?: TeamsPhoneMobileNumberConfig;
 }
 
@@ -555,23 +557,23 @@ model AzureOperatorCallProtectionNumberDetails {
 @doc("Configuration of backend services for a telephone number.")
 model NumberServiceDetails {
   @doc("Details for the Teams Operator Connect service on this Number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   teamsOperatorConnect?: TeamsOperatorConnectNumberDetails;
 
   @doc("Details for the Teams Direct Routing service on this Number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   teamsDirectRouting?: TeamsDirectRoutingNumberDetails;
 
   @doc("Details for the Teams Phone Mobile service on this Number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   teamsPhoneMobile?: TeamsPhoneMobileNumberDetails;
 
   @doc("Details for the Zoom Phone Cloud Peering service on this Number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   zoomPhoneCloudPeering?: ZoomPhoneCloudPeeringNumberDetails;
 
   @doc("Details for the Azure Operator Call Protection service on this Number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   azureOperatorCallProtection?: AzureOperatorCallProtectionNumberDetails;
 }
 
@@ -581,7 +583,7 @@ model NumberConfiguration {
   @minLength(1)
   @maxLength(100)
   @pattern("^([A-Za-z0-9_-])+$")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   customSipHeader?: string;
 }
 
@@ -595,7 +597,7 @@ model NumberResource {
   @minLength(1)
   @maxLength(16)
   @pattern("^\\+[1-9]\\d+$")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   @key("telephoneNumber")
   telephoneNumber: string;
 
@@ -603,15 +605,15 @@ model NumberResource {
   @minLength(1)
   @maxLength(100)
   @pattern("^([A-Za-z0-9_-]+)$")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   accountName: string;
 
   @doc("Configuration of the individual backend services for this number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   serviceDetails: NumberServiceDetails;
 
   @doc("Configuration for this number.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   configuration?: NumberConfiguration;
 }
 
@@ -619,7 +621,7 @@ model NumberResource {
 model BatchNumbers {
   @doc("The list of numbers to upload. At most 100 can be uploaded in one request.")
   @maxItems(100)
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   numbers: NumberResource[];
 }
 
@@ -627,7 +629,7 @@ model BatchNumbers {
 model BatchNumbersDelete {
   @doc("The list of number to delete. At most 100 can be deleted in one request.")
   @maxItems(100)
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   numbers: NumberIdentifier[];
 }
 
@@ -656,39 +658,39 @@ union TeamsConsentStatus {
 model ContactDetails {
   @doc("The full name of the contact detail.")
   @minLength(1)
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   fullName: string;
 
   @doc("The email of the contact detail.")
   @minLength(1)
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   email: string;
 
   @doc("The telephone number of the contact detail.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   telephoneNumber?: string;
 
   @doc("The company name of the contact detail.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   companyName?: string;
 
   @doc("The company size of the contact detail.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   companySize?: string;
 }
 
 @doc("Details of a customer relationship.")
 model CustomerRelationship {
   @doc("The status of the customer relationship.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   status?: string;
 
   @doc("The time (ISO8601 format) when the customer relationship is last modified.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   lastModifiedOn?: utcDateTime;
 
   @doc("The comment of the customer relationship.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   comment?: string;
 }
 
@@ -698,7 +700,7 @@ model RequestForInformationResource {
   ...ProvisioningStatus;
 
   @doc("The ID of the Request for Information.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id?: string;
 
   @doc("The Teams tenant ID which generated this Request for Information.")
@@ -706,43 +708,43 @@ model RequestForInformationResource {
   @maxLength(36)
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   @key("tenantId")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   tenantId: string;
 
   @doc("The name of the account associated with this Request for Information.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   accountName?: string;
 
   @doc("Will always be 'teams'.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   productContext?: string;
 
   @doc("The operator ID of the operator consent.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   operatorId?: string;
 
   @doc("The status of the operator consent.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   status?: TeamsConsentStatus;
 
   @doc("The time (ISO8601 format) when the operator consent is created.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   consentedOn?: utcDateTime;
 
   @doc("The time (ISO8601 format) when the operator consent is last modified.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   lastModifiedOn?: utcDateTime;
 
   @doc("The list of consented countries.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   consentedCountries?: string[];
 
   @doc("The list of tenant contacts.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   contacts?: ContactDetails[];
 
   @doc("The customer relationship of the operator consent.")
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @visibility("read", "update", "create")
   customerRelationship?: CustomerRelationship;
 }
 

@@ -26,7 +26,7 @@ model InstanceResource is TrackedResource<InstanceProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   extendedLocation: ExtendedLocation;
 
   ...ManagedServiceIdentityProperty;
@@ -44,11 +44,11 @@ model InstanceProperties {
   description?: string;
 
   @doc("The status of the last operation.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   @doc("The Azure IoT Operations version.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   version?: string;
 
   @doc("The reference to the Schema Registry for this AIO Instance.")

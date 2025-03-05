@@ -70,7 +70,7 @@ model BrokerProperties {
   @doc("The Running Mode of the Broker Deployment.")
   mode: RunMode;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -250,6 +250,7 @@ model DiskBackedMessageBufferSettings {
 @doc("VolumeClaimSpec properties")
 model VolumeClaimSpec {
   @doc("AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1")
+  @OpenAPI.extension("x-ms-identifiers", [])
   accessModes?: string[];
 
   @doc("This field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field.")
@@ -316,7 +317,7 @@ model VolumeClaimResourceRequirements {
 @doc("VolumeClaimSpecSelector properties")
 model VolumeClaimSpecSelector {
   @doc("MatchExpressions is a list of label selector requirements. The requirements are ANDed.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   matchExpressions?: VolumeClaimSpecSelectorMatchExpressions[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
@@ -418,7 +419,7 @@ model BrokerListenerProperties {
   @doc("Defines configuration of a TLS server certificate. NOTE Enum - Only one TLS Cert method is supported")
   tls?: TlsCertMethod;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -508,13 +509,13 @@ model BrokerAuthenticationResource
 model BrokerAuthenticationProperties {
   // GENERATION FIX TEMP - add "minProperties": 1 and "maxProperties": 1 to this property after creation.
   @doc("The list of authentication methods supported by the Authentication Resource. For each array element, NOTE - Enum only authenticator type supported.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   authenticationMethods: BrokerAuthenticatorMethods[];
 
   @doc("The array of listener Resources it supports.")
   listenerRef: string[];
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -648,7 +649,7 @@ model BrokerAuthorizationProperties {
   @doc("The array of listener Resources it supports.")
   listenerRef: string[];
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -659,14 +660,14 @@ model AuthorizationConfig {
   enableCache?: boolean = true;
 
   @doc("Authorization Rules to be used. If no rule is set, but Authorization Resource is used that would mean DenyAll.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   rules?: AuthorizationBasicRule[];
 }
 
 @doc("BasicRules of AuthorizationConfig Polar rules are not supported")
 model AuthorizationBasicRule {
   @doc("This subfield defines the broker resources that the Basic Rule is applied on.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   brokerResources: ResourceInfoDefinition[];
 
   @doc("This subfield defines the identities that represent the clients.")
@@ -677,7 +678,7 @@ model AuthorizationBasicRule {
 model PrincipalDefinition {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("A list of key-value pairs that match the attributes of the clients. The attributes are case-sensitive and must match the attributes provided by the clients during authentication.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   attributes?: Record<string>[] = #[];
 
   @doc("A list of client IDs that match the clients. The client IDs are case-sensitive and must match the client IDs provided by the clients during connection.")

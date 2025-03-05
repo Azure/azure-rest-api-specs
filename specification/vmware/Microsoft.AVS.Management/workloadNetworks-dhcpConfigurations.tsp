@@ -41,7 +41,7 @@ interface WorkloadNetworkDhcpConfigurations {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDhcp")
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcp>;
 
   #suppress "deprecated"
@@ -107,11 +107,11 @@ model WorkloadNetworkDhcpEntity {
   displayName?: string;
 
   @doc("NSX Segments consuming DHCP.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   segments?: string[];
 
   @doc("The provisioning state")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: WorkloadNetworkDhcpProvisioningState;
 
   @doc("NSX revision number.")

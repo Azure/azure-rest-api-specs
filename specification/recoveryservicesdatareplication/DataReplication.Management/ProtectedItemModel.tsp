@@ -51,7 +51,7 @@ interface ProtectedItem {
   /**
    * Performs update on the protected item.
    */
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<ProtectedItemModel, ProtectedItemModelUpdate>;
 
   /**

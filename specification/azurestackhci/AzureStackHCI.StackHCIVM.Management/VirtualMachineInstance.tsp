@@ -21,7 +21,7 @@ model VirtualMachineInstance
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @key("virtualMachineInstance")
   @segment("virtualMachineInstances")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @path
   name: string;
 
@@ -45,7 +45,7 @@ interface VirtualMachineInstances {
   >;
 
   @doc("The operation to update a virtual machine instance.")
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
     VirtualMachineInstanceUpdateRequest

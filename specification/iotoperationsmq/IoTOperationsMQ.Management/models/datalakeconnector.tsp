@@ -62,7 +62,7 @@ model DataLakeConnectorProperties {
   @doc("The protocol to use for connecting with Brokers. NOTE - Enum only storage is supported at at time.")
   target: DataLakeTargetStorage;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -203,7 +203,7 @@ model DataLakeConnectorTopicMapProperties {
   @doc("TopicMap for DataLake connector.")
   mapping: DataLakeConnectorMap;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -241,7 +241,7 @@ model DataLakeConnectorMap {
 @doc("Delta table properties")
 model DeltaTable {
   @doc("Schema list supported.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   schema: DeltaTableSchema[];
 
   @doc("Delta table name.")

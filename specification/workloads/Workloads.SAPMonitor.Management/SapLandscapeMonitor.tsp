@@ -25,7 +25,7 @@ model SapLandscapeMonitorResource
   @key
   @path
   @segment("sapLandscapeMonitor")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 }
 
@@ -44,7 +44,7 @@ interface SapLandscapeMonitor {
   /**
    * Patches the SAP Landscape Monitor Dashboard for the specified subscription, resource group, and SAP monitor name.
    */
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchSync<
     SapLandscapeMonitorResource,
     SapLandscapeMonitorResource

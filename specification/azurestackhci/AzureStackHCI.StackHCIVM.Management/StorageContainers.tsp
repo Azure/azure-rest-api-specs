@@ -20,7 +20,7 @@ model StorageContainer is TrackedResource<StorageContainerProperties> {
   @path
   @key("storageContainerName")
   @segment("storageContainers")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 
   @doc("The extendedLocation of the resource.")

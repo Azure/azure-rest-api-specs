@@ -18,7 +18,9 @@ using LiftrBase;
 
 @armProviderNamespace
 @useLibraryNamespace(LiftrBase.Storage)
-@service(#{ title: "Qumulo.Storage" })
+@service({
+  title: "Qumulo.Storage",
+})
 @versioned(Versions)
 namespace Qumulo.Storage;
 
@@ -62,7 +64,7 @@ interface FileSystems {
    * Update a FileSystemResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   @operationId("FileSystems_Update")
   update is ArmCustomPatchSync<FileSystemResource, FileSystemResourceUpdate>;
 

@@ -16,7 +16,10 @@ using Azure.Core;
     }
   ]>
 )
-@service(#{ title: "Azure Trusted Signing" })
+@service({
+  title: "Azure Trusted Signing",
+  summary: "Azure Trusted Signing is a service that provides managed artifact signing for all.",
+})
 @versioned(Azure.Developer.TrustedSigning.Versions)
 @server(
   "https://{region}.codesigning.azure.net/",
@@ -111,7 +114,7 @@ union SignatureAlgorithm {
 @resource("codesigningaccounts")
 model SigningAccount {
   @key("accountName")
-  @visibility(Lifecycle.Read, Lifecycle.Update)
+  @visibility("read", "update")
   @doc("Azure Trusted Signing account name.")
   accountName: string;
 }
@@ -121,7 +124,7 @@ model SigningAccount {
 @parentResource(SigningAccount)
 model CertificateProfileName {
   @key("certificateProfile")
-  @visibility(Lifecycle.Read, Lifecycle.Update)
+  @visibility("read", "update")
   @doc("Azure Trusted Signing certificate profile name under an account.")
   certificateProfile: string;
 }
@@ -169,7 +172,7 @@ model SigningOptions {
 @parentResource(CertificateProfileName)
 model ExtendedKeyUsage {
   @key("eku")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("An oid string that represents an eku.")
   eku: string;
 }

@@ -17,7 +17,7 @@ model NetworkSecurityGroup is TrackedResource<NetworkSecurityGroupProperties> {
   @path
   @key("networkSecurityGroupName")
   @segment("networkSecurityGroups")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 
   @doc("The extendedLocation of the resource.")

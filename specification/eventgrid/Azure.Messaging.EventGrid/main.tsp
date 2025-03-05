@@ -16,7 +16,9 @@ import "@azure-tools/typespec-azure-core";
     }
   ]>
 )
-@service(#{ title: "Azure.Messaging.EventGridClient" })
+@service({
+  title: "Azure.Messaging.EventGridClient",
+})
 
 //
 // Supported operations.
@@ -206,7 +208,7 @@ namespace Microsoft.EventGrid {
   model Topic {
     @key
     @doc("Topic Name.")
-    @visibility(Lifecycle.Read)
+    @visibility("read")
     topicName: string;
   }
 
@@ -216,7 +218,7 @@ namespace Microsoft.EventGrid {
   model EventSubscription {
     @key
     @doc("Event Subscription Name.")
-    @visibility(Lifecycle.Read)
+    @visibility("read")
     eventSubscriptionName: string;
   }
 

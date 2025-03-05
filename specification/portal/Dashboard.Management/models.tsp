@@ -64,20 +64,20 @@ model ErrorDefinition {
   /**
    * Service specific error code which serves as the substatus for the HTTP error code.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   code?: int32;
 
   /**
    * Description of the error.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   message?: string;
 
   /**
    * Internal error details.
    */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["code"])
+  @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["code"])
   details?: ErrorDefinition[];
 }
 
@@ -86,7 +86,7 @@ model DashboardPropertiesWithProvisioningState {
   ...DashboardProperties;
 
   @doc("The status of the last operation.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -97,7 +97,7 @@ model DashboardProperties {
   /**
    * The dashboard lenses.
    */
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   lenses?: DashboardLens[];
 
   /**
@@ -119,7 +119,7 @@ model DashboardLens {
   /**
    * The dashboard parts.
    */
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   parts: DashboardParts[];
 
   /**
@@ -213,19 +213,19 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   type?: string;
 }
 
@@ -237,7 +237,7 @@ model MarkdownPartMetadata extends DashboardPartMetadata {
    * Input to dashboard part.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   inputs?: {}[];
 
   /**

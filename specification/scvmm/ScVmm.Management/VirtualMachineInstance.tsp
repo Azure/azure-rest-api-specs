@@ -17,7 +17,7 @@ model VirtualMachineInstance
   /** Name of the virtual machine instance. */
   @key
   @segment("virtualMachineInstances")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @maxLength(54)
   @minLength(1)
   @pattern("[a-zA-Z0-9-_\\.]")
@@ -26,7 +26,7 @@ model VirtualMachineInstance
 
   /** Gets or sets the extended location. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is allowed but not recognized by the linter"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   extendedLocation: ExtendedLocation;
 }
 
@@ -71,7 +71,9 @@ interface VirtualMachineInstances {
   @summary("Updates a virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
+    {
+      `final-state-via`: "azure-async-operation",
+    }
   )
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
@@ -82,7 +84,9 @@ interface VirtualMachineInstances {
   @summary("Deletes an virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
+    {
+      `final-state-via`: "azure-async-operation",
+    }
   )
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineInstance,

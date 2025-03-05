@@ -30,7 +30,9 @@ using OpenAPI;
 
 /** Azure Quantum Workspace Services */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Non standard use of openapi info metadata for azure spec"
-@service(#{ title: "Azure Quantum Workspace Services" })
+@service({
+  title: "Azure Quantum Workspace Services",
+})
 @useAuth(AzureEntraAuth | AzureApiKeyAuth)
 @versioned(QuantumWorkspaceAPIVersion)
 @server(
@@ -44,7 +46,11 @@ using OpenAPI;
     serviceBaseUrl: string = "quantum.azure.com",
   }
 )
-@OpenAPI.info(#{ contact: #{ email: "azqengg@microsoft.com" } })
+@OpenAPI.info({
+  contact: {
+    email: "azqengg@microsoft.com",
+  },
+})
 namespace Quantum.Workspace.Services {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
     There is no support for JsonPatch in Azure.Core.

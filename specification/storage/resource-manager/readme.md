@@ -26,7 +26,6 @@ These are the global settings for the Storage API.
 
 ``` yaml
 openapi-type: arm
-openapi-subtype: rpaas
 tag: package-2024-01
 ```
 

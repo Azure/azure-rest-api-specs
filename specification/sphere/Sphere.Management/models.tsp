@@ -297,13 +297,13 @@ model CatalogProperties {
   /**
    * The Azure Sphere tenant ID associated with the catalog.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   tenantId?: string;
 
   /**
    * The status of the last operation.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -314,25 +314,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   systemData?: SystemData;
 }
 
@@ -354,45 +354,45 @@ model CertificateProperties {
   /**
    * The certificate as a UTF-8 encoded base 64 string.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   certificate?: string;
 
   /**
    * The certificate status.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   status?: CertificateStatus;
 
   /**
    * The certificate subject.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   subject?: string;
 
   /**
    * The certificate thumbprint.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   thumbprint?: string;
 
   /**
    * The certificate expiry date.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryUtc?: utcDateTime;
 
   /**
    * The certificate not before date.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   notBeforeUtc?: utcDateTime;
 
   /**
    * The status of the last operation.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -403,7 +403,7 @@ model CertificateChainResponse {
   /**
    * The certificate chain.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   certificateChain?: string;
 }
 
@@ -448,55 +448,55 @@ model ImageProperties {
   /**
    * Image as a UTF-8 encoded base 64 string on image create. This field contains the image URI on image reads.
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   image?: string;
 
   /**
    * Image ID
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   imageId?: string;
 
   /**
    * Image name
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   imageName?: string;
 
   /**
    * Regional data boundary for an image
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   regionalDataBoundary?: RegionalDataBoundary;
 
   /**
    * Location the image
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   uri?: string;
 
   /**
    * The image description.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   description?: string;
 
   /**
    * The image component id.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   componentId?: string;
 
   /**
    * The image type.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   imageType?: ImageType;
 
   /**
    * The status of the last operation.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -507,26 +507,26 @@ model DeploymentProperties {
   /**
    * Deployment ID
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   deploymentId?: string;
 
   /**
    * Images deployed
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   deployedImages?: Image[];
 
   /**
    * Deployment date UTC
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deploymentDateUtc?: utcDateTime;
 
   /**
    * The status of the last operation.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -572,13 +572,13 @@ model DeviceGroupProperties {
   /**
    * Deployment status for the device group.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   hasDeployment?: boolean;
 
   /**
    * The status of the last operation.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -641,45 +641,45 @@ model DeviceProperties {
   /**
    * Device ID
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   deviceId?: string;
 
   /**
    * SKU of the chip
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   chipSku?: string;
 
   /**
    * OS version available for installation when update requested
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   lastAvailableOsVersion?: string;
 
   /**
    * OS version running on device when update requested
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   lastInstalledOsVersion?: string;
 
   /**
    * Time when update requested and new OS version available
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastOsUpdateUtc?: utcDateTime;
 
   /**
    * Time when update was last requested
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdateRequestUtc?: utcDateTime;
 
   /**
    * The status of the last operation.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -695,7 +695,7 @@ model ProductProperties {
   /**
    * The status of the last operation.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -812,7 +812,7 @@ model SignedCapabilityImageResponse {
   /**
    * The signed device capability image as a UTF-8 encoded base 64 string.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   image?: string;
 }
 

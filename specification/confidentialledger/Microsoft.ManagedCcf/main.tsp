@@ -8,7 +8,9 @@ import "./service_state.tsp";
 import "./transactions.tsp";
 
 #suppress "@azure-tools/typespec-azure-core/auth-required" "!!FIXME!!"
-@service(#{ title: "Managed CCF Governance" })
+@service({
+  title: "Managed CCF Governance",
+})
 @TypeSpec.Versioning.versioned(Microsoft.ManagedCcf.Versions)
 namespace Microsoft.ManagedCcf;
 

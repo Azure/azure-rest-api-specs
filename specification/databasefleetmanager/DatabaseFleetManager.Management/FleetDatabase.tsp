@@ -40,7 +40,7 @@ interface FleetDatabases {
   /**
    * Updates a fleet database.
    */
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<FleetDatabase, FleetDatabase>;
 
   /**

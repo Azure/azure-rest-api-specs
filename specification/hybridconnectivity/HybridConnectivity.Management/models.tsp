@@ -74,7 +74,7 @@ model EndpointProperties {
    * The resource provisioning state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: string;
 }
 
@@ -85,25 +85,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   systemData?: SystemData;
 }
 
@@ -134,7 +134,7 @@ model ServiceConfigurationProperties {
   /**
    * The resource provisioning state.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -208,7 +208,7 @@ model RelayNamespaceAccessProperties {
   /**
    * Access key for hybrid connection.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   accessKey?: string;
 
   /**

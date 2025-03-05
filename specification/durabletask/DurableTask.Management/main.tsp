@@ -10,7 +10,9 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
-@service(#{ title: "Microsoft.DurableTask" })
+@service({
+  title: "Microsoft.DurableTask",
+})
 @versioned(Versions)
 namespace Microsoft.DurableTask;
 
@@ -39,12 +41,12 @@ model Scheduler is Azure.ResourceManager.TrackedResource<SchedulerProperties> {
 @doc("Details of the Scheduler")
 @added(Versions.v2024_10_01_Preview)
 model SchedulerProperties {
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation")
   provisioningState?: ProvisioningState;
 
   @doc("URL of the durable task scheduler")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   endpoint?: string;
 
   @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
@@ -64,7 +66,7 @@ model SchedulerSku {
   capacity?: int32;
 
   @doc("Indicates whether the current SKU configuration is zone redundant")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   redundancyState?: RedundancyState;
 }
 
@@ -93,12 +95,12 @@ union RedundancyState {
 
 @doc("The properties of Task Hub")
 model TaskHubProperties {
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation")
   provisioningState?: ProvisioningState;
 
   @doc("URL of the durable task scheduler dashboard")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   dashboardUrl?: url;
 }
 

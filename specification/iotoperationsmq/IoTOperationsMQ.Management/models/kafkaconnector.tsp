@@ -57,7 +57,7 @@ model KafkaConnectorProperties {
   @doc("The Node Tolerations for the Bridge Connector pods.")
   nodeTolerations?: NodeTolerations;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -206,10 +206,10 @@ model KafkaTopicMapProperties {
   partitionStrategy?: KafkaPartitionStrategy = KafkaPartitionStrategy.default;
 
   @doc("The route details for Kafka connector.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   routes: KafkaRoutes[];
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

@@ -19,7 +19,7 @@ model DeviceGroup is ProxyResource<DeviceGroupProperties> {
   @path
   @key("deviceGroupName")
   @segment("deviceGroups")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 }
 
@@ -43,7 +43,7 @@ interface DeviceGroups {
   /**
    * Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<DeviceGroup, DeviceGroupUpdate>;
 
   /**

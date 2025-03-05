@@ -11,7 +11,9 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service(#{ title: "Azure-ContainerStorageRP" })
+@service({
+  title: "Azure-ContainerStorageRP",
+})
 @versioned(Versions)
 @doc("Azure Container Storage Resource Provider API.")
 namespace Microsoft.ContainerStorage;

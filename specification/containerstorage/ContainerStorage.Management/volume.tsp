@@ -16,7 +16,9 @@ interface Volumes {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DOT NOT COPY - migrate to LRO apis"
   @extension(
     "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "location" }
+    {
+      `final-state-via`: "location",
+    }
   )
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -48,12 +50,12 @@ model Volume is ProxyResource<VolumeProperties> {
 
 @doc("Volume Properties")
 model VolumeProperties {
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
   @doc("The status of the resource.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   status?: ResourceOperationalStatus;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
@@ -65,14 +67,14 @@ model VolumeProperties {
   @minValue(1)
   capacityGiB: int64;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Properties of the volume")
   volumeType?: VolumeType;
 }
 
 @doc("Properties of the volume")
 model VolumeType {
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Properties of the ElasticSAN iSCSI target")
   elasticSan?: ElasticSanVolumeProperties;
 }

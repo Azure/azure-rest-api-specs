@@ -16,7 +16,9 @@ interface Pools {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DOT NOT COPY - migrate to LRO apis"
   @extension(
     "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "location" }
+    {
+      `final-state-via`: "location",
+    }
   )
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -47,14 +49,14 @@ model Pool is TrackedResource<PoolProperties> {
 @doc("Pool Properties")
 model PoolProperties {
   @doc("The status of the last operation.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   @doc("The operational status of the resource")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   status?: ResourceOperationalStatus;
 
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   @maxItems(3)
   @doc("List of availability zones that resources can be created in.")
   zones?: Zone[];
@@ -66,7 +68,7 @@ model PoolProperties {
   poolType: PoolType;
 
   @doc("ReclaimPolicy defines what happens to the backend storage when StoragePool is deleted")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   reclaimPolicy?: ReclaimPolicy;
 
   @doc("List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For ElasticSAN there can be many.")
@@ -135,16 +137,16 @@ model Disk {
 
 @doc("Properties shared between azureDisk and elasticSan")
 model ProvisionedPoolProperties<SkuType> {
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Managed resource group for the pool.")
   resourceGroup?: string;
 
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   @doc("Sku name")
   skuName?: SkuType;
 
   @doc("Encryption specifies the encryption configuration for the Azure Disk pool")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   encryption?: Encryption;
 }
 

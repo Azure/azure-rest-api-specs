@@ -89,7 +89,7 @@ model DbNodeProperties {
   vnicId: Ocid;
 
   @doc("Azure resource provisioning state.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ResourceProvisioningState;
 }
 

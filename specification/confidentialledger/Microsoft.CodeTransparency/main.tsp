@@ -12,7 +12,9 @@ using Azure.Core;
 using Azure.Core.Traits;
 
 #suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
-@service(#{ title: "Microsoft Code Transparency Service" })
+@service({
+  title: "Microsoft Code Transparency Service",
+})
 @useAuth(BearerAuth)
 @server(
   "{endpoint}",

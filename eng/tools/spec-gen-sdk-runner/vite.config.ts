@@ -5,9 +5,9 @@ export default defineConfig({
   test: {
     ...configDefaults,
     // eslint-disable-next-line unicorn/numeric-separators-style
-    testTimeout: 20000,
+    testTimeout: 2400000,
     coverage: {
-      provider: "v8",
+      provider: "v8", // or 'c8'
       reporter: ["text", "json", "html"],
     },
   },

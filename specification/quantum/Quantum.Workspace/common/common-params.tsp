@@ -70,12 +70,7 @@ model CommonParams {
 model Subscription {
   /** The Azure subscription ID. */
   @key
-  @visibility(
-    Lifecycle.Read,
-    Lifecycle.Create,
-    Lifecycle.Update,
-    Lifecycle.Delete
-  )
+  @visibility("read", "create", "update", "delete")
   subscriptionId: SubscriptionId;
 }
 
@@ -85,12 +80,7 @@ model Subscription {
 model ResourceGroup {
   /** Name of the Azure resource group. */
   @key
-  @visibility(
-    Lifecycle.Read,
-    Lifecycle.Create,
-    Lifecycle.Update,
-    Lifecycle.Delete
-  )
+  @visibility("read", "create", "update", "delete")
   resourceGroupName: ResourceGroupName;
 }
 
@@ -100,12 +90,7 @@ model ResourceGroup {
 model ResourceProvider {
   /** The Azure Quantum resource provider. */
   @key
-  @visibility(
-    Lifecycle.Read,
-    Lifecycle.Create,
-    Lifecycle.Update,
-    Lifecycle.Delete
-  )
+  @visibility("read", "create", "update", "delete")
   providerName: ResourceProviderName;
 }
 
@@ -115,11 +100,6 @@ model ResourceProvider {
 model QuantumWorkspace {
   /** Name of the Azure Quantum workspace. */
   @key
-  @visibility(
-    Lifecycle.Read,
-    Lifecycle.Create,
-    Lifecycle.Update,
-    Lifecycle.Delete
-  )
+  @visibility("read", "create", "update", "delete")
   workspaceName: WorkspaceName;
 }

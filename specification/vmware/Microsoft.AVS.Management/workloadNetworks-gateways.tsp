@@ -36,13 +36,13 @@ model WorkloadNetworkGateway
 @doc("Properties of a NSX Gateway.")
 model WorkloadNetworkGatewayProperties {
   @doc("The provisioning state of the resource.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: WorkloadNetworkProvisioningState;
 
   @doc("Display name of the DHCP entity.")
   displayName?: string;
 
   @doc("NSX Gateway Path.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   path?: string;
 }

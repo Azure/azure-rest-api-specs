@@ -34,7 +34,7 @@ interface CodeSigningAccounts {
   >;
 
   @doc("Update a trusted signing account.")
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<CodeSigningAccount, CodeSigningAccountPatch>;
 
   @doc("Delete a trusted signing account.")

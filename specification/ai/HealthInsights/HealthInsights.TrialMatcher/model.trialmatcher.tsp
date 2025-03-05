@@ -35,11 +35,11 @@ model TrialMatcherModelConfiguration {
 @resource("trial-matcher/jobs")
 model TrialMatcherJob {
   @doc("The request data for the operation.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   jobData?: TrialMatcherData;
 
   @doc("The result of the operation.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   result?: TrialMatcherInferenceResult;
 
   ...HealthInsightsJobBase;

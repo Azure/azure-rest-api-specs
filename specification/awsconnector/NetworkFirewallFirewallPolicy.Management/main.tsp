@@ -19,7 +19,9 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service(#{ title: "Microsoft.AwsConnector" })
+@service({
+  title: "Microsoft.AwsConnector",
+})
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -92,7 +94,7 @@ model AwsNetworkFirewallFirewallPolicyProperties {
   firewallPolicyName?: string;
 
   @doc("Property tags")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
 
@@ -106,27 +108,30 @@ model FirewallPolicy {
   policyVariables?: RuleVariablesModel;
 
   @doc("Property statefulDefaultActions")
+  @extension("x-ms-identifiers", [])
   statefulDefaultActions?: string[];
 
   @doc("Property statefulEngineOptions")
   statefulEngineOptions?: StatefulEngineOptions;
 
   @doc("Property statefulRuleGroupReferences")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   statefulRuleGroupReferences?: StatefulRuleGroupReference[];
 
   @doc("Property statelessCustomActions")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   statelessCustomActions?: CustomAction[];
 
   @doc("Property statelessDefaultActions")
+  @extension("x-ms-identifiers", [])
   statelessDefaultActions?: string[];
 
   @doc("Property statelessFragmentDefaultActions")
+  @extension("x-ms-identifiers", [])
   statelessFragmentDefaultActions?: string[];
 
   @doc("Property statelessRuleGroupReferences")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   statelessRuleGroupReferences?: StatelessRuleGroupReference[];
 
   @doc("A resource ARN.")
@@ -244,6 +249,7 @@ model StatelessRuleGroupReference {
 @doc("Definition of IPSet")
 model IPSet {
   @doc("Property definition")
+  @extension("x-ms-identifiers", [])
   definition?: string[];
 }
 
@@ -282,7 +288,7 @@ model ActionDefinition {
 @doc("Definition of PublishMetricAction")
 model PublishMetricAction {
   @doc("Property dimensions")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   dimensions?: Dimension[];
 }
 

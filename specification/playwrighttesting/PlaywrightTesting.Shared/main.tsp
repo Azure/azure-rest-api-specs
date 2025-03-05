@@ -25,51 +25,51 @@ model Account {
   @doc("The account id.")
   @maxLength(64)
   @pattern("[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: string;
 
   @doc("The fully-qualified Azure resource id for the account.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   resourceId: string;
 
   @doc("The account name.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 
   @doc("The state of account - Active | Inactive")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   state: AccountState;
 
   @doc("The Azure subscription id for the account.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   subscriptionId: uuid;
 
   @doc("The Azure subscription state - Registered | Unregistered | Warned | Suspended | Deleted")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   subscriptionState: SubscriptionState;
 
   @doc("The Azure tenant id of the account.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   tenantId: uuid;
 
   @doc("The account resource location in Azure, for eg. eastus, southeastasia.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   location: string;
 
   @doc("This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   regionalAffinity?: EnablementStatus = EnablementStatus.Enabled;
 
   @doc("When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   scalableExecution?: EnablementStatus = EnablementStatus.Enabled;
 
   @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   reporting?: EnablementStatus = EnablementStatus.Enabled;
 
   @doc("When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   localAuth?: EnablementStatus = EnablementStatus.Disabled;
 }
 

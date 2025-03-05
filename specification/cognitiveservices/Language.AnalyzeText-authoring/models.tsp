@@ -231,7 +231,7 @@ model TextAnalysisAuthoringProjectMetadata {
    * The new project name.
    */
   @key("projectName")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   projectName: string;
 
   /**
@@ -599,7 +599,7 @@ model TextAnalysisAuthoringJobState {
    * The job ID.
    */
   @key("jobId")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   jobId: string;
 
   /**
@@ -676,7 +676,7 @@ model TextAnalysisAuthoringProjectDeployment {
    * Represents deployment name.
    */
   @key("deploymentName")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   deploymentName: string;
 
   /**
@@ -844,7 +844,7 @@ model TextAnalysisAuthoringExportedTrainedModel {
    * The exported model name.
    */
   @key("exportedModelName")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   exportedModelName: string;
 
   /**
@@ -960,7 +960,7 @@ model TextAnalysisAuthoringProjectTrainedModel {
    * The trained model label.
    */
   @key("trainedModelLabel")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   label: string;
 
   /**
@@ -1061,7 +1061,7 @@ model TextAnalysisAuthoringDocumentEvaluationResult {
    * Represents the project kind.
    */
   @key
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   projectKind: ProjectKind;
 
   /**
@@ -1172,7 +1172,7 @@ model TextAnalysisAuthoringAssignedDeploymentResource {
    * The resource ID.
    */
   @key
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   azureResourceId: string;
 
   /**
@@ -1372,7 +1372,7 @@ model TextAnalysisAuthoringAssignedProjectDeploymentsMetadata {
    * Represents the project name.
    */
   @key
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   projectName: string;
 
   /**
@@ -1428,7 +1428,7 @@ model TextAnalysisAuthoringSupportedLanguage {
    * The language name.
    */
   @key
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   languageName: string;
 
   /**
@@ -1465,7 +1465,7 @@ model TextAnalysisAuthoringPrebuiltEntity {
    * The prebuilt entity category.
    */
   @key
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   category: string;
 
   /**
@@ -1505,7 +1505,7 @@ model TextAnalysisAuthoringTrainingConfigVersion {
    * Represents the version of the config.
    */
   @key
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   trainingConfigVersion: string;
 
   /**

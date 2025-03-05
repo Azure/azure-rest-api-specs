@@ -17,7 +17,9 @@ using TypeSpec.Versioning;
  * Azure Programmable Connectivity Provider management API.
  */
 @armProviderNamespace
-@service(#{ title: "ProgrammableConnectivity" })
+@service({
+  title: "ProgrammableConnectivity",
+})
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.ProgrammableConnectivity;

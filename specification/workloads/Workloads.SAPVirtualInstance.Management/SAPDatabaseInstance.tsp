@@ -38,7 +38,7 @@ interface SAPDatabaseInstances {
   /**
    * Updates the Database resource.
    */
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchSync<
     SAPDatabaseInstance,
     UpdateSAPDatabaseInstanceRequest

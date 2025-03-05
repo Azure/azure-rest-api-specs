@@ -36,7 +36,7 @@ interface Dashboards {
   /**
    * Updates an existing Dashboard.
    */
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchSync<Dashboard, PatchableDashboard>;
 
   /**

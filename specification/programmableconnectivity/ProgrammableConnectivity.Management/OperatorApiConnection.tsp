@@ -23,7 +23,7 @@ model OperatorApiConnection
   @path
   @key("operatorApiConnectionName")
   @segment("operatorApiConnections")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   name: string;
 }
 
@@ -34,7 +34,7 @@ model OperatorApiConnectionProperties {
   /**
    * Reference to the Operator API Plan Resource ID.
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility("read", "create", "update")
   operatorApiPlanId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ProgrammableConnectivity/operatorApiPlans";
@@ -44,25 +44,25 @@ model OperatorApiConnectionProperties {
   /**
    * Details about the SaaS offer purchased from the marketplace.
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility("read", "create", "update")
   saasProperties?: SaasProperties;
 
   /**
    * Details about the Application that would use the Operator's Network APIs.
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility("read", "create", "update")
   configuredApplication?: ApplicationProperties;
 
   /**
    * Application ID of the App Developer that is registered with the Operator in a specific country/region.
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility("read", "create", "update")
   appId?: string;
 
   /**
    * Reference to the APC Gateway resource ID.
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   gatewayId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ProgrammableConnectivity/gateways";
@@ -72,38 +72,38 @@ model OperatorApiConnectionProperties {
   /**
    * Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged.
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   accountType: AccountType;
 
   /**
    * Application secret linked to the 'appId'. This should be stored securely and is not returned back when the resource information is read.
    */
-  @visibility(Lifecycle.Create, Lifecycle.Update)
+  @visibility("create", "update")
   @secret
   appSecret?: string;
 
   /**
    * Name of the Operator in the linked Operator API Plan belongs to.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   operatorName?: string;
 
   /**
    * The Network API for the current operator in the country/region provided in the linked Operator API Plan.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   camaraApiName?: string;
 
   /**
    * The status of the last operation.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   /**
    * The status of the OperatorApiConnection resource.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   status?: Status;
 }
 

@@ -16,7 +16,9 @@ using Azure.Core.Traits;
     "Authorization"
   >
 )
-@service(#{ title: "CommunicationMessagesClient" })
+@service({
+  title: "CommunicationMessagesClient",
+})
 @server(
   "{endpoint}",
   "Azure Communication Messages Service",

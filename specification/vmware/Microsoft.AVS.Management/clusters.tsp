@@ -32,7 +32,9 @@ interface Clusters {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "location" }
+    {
+      `final-state-via`: "location",
+    }
   )
   @armResourceUpdate(Cluster)
   @patch
@@ -85,11 +87,11 @@ model CommonClusterProperties {
   clusterSize?: int32;
 
   @doc("The state of the cluster provisioning")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ClusterProvisioningState;
 
   @doc("The identity")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   clusterId?: int32;
 
   @doc("The hosts")
@@ -146,10 +148,10 @@ model ClusterZoneList {
 @doc("Zone and associated hosts info")
 model ClusterZone {
   @doc("List of hosts belonging to the availability zone in a cluster")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   hosts?: string[];
 
   @doc("Availability zone identifier")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   zone?: string;
 }

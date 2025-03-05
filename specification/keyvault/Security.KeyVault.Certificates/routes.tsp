@@ -395,9 +395,10 @@ op getCertificate is KeyVaultOperation<
  * Updates a certificate creation operation that is already in progress. This operation requires the certificates/update permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-@patch(#{ implicitOptionality: false })
+@parameterVisibility
 @summary("Updates a certificate operation.")
 @route("/certificates/{certificate-name}/pending")
+@patch
 op updateCertificateOperation is KeyVaultOperation<
   {
     /**

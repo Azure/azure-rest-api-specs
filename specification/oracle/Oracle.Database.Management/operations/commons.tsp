@@ -65,7 +65,9 @@ interface ListActions {
   @doc("Generic Async Get operation")
   @extension(
     "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "location" }
+    {
+      `final-state-via`: "location",
+    }
   )
   @autoRoute
   @armResourceAction(TResource)

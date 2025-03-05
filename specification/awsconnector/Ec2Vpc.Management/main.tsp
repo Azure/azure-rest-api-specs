@@ -19,7 +19,9 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service(#{ title: "Microsoft.AwsConnector" })
+@service({
+  title: "Microsoft.AwsConnector",
+})
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -73,6 +75,7 @@ model AwsEc2VpcProperties {
   cidrBlock?: string;
 
   @doc("Property cidrBlockAssociations")
+  @extension("x-ms-identifiers", [])
   cidrBlockAssociations?: string[];
 
   @doc("Property defaultNetworkAcl")
@@ -97,10 +100,11 @@ model AwsEc2VpcProperties {
   ipv4NetmaskLength?: int32;
 
   @doc("Property ipv6CidrBlocks")
+  @extension("x-ms-identifiers", [])
   ipv6CidrBlocks?: string[];
 
   @doc("The tags for the VPC.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
   @doc("Property vpcId")

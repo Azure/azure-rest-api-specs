@@ -27,7 +27,9 @@ using Azure.Core;
     }
   ]>
 )
-@service(#{ title: "KeyVaultClient" })
+@service({
+  title: "KeyVaultClient",
+})
 @versioned(Versions)
 @server(
   "{vaultBaseUrl}",

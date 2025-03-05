@@ -18,7 +18,9 @@ using Azure.Core;
     }
   ]>
 )
-@service(#{ title: "Azure Schema Registry" })
+@service({
+  title: "Azure Schema Registry",
+})
 
 // Supported operations.
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
@@ -273,7 +275,7 @@ model SchemaVersions {
 model SchemaGroup {
   @key("groupName")
   @doc("Name of schema group.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   groupName: string;
 }
 
@@ -283,7 +285,7 @@ model SchemaGroup {
 model SchemasName {
   @key("schemaName")
   @doc("Name of schema.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @maxLength(50)
   @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
   schemaName: string;

@@ -117,11 +117,11 @@ model StorageClassProperties {
   mountOptions?: string[];
 
   @doc("Provisioner name")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   provisioner?: string;
 
   @doc("Binding mode of volumes: Immediate, WaitForFirstConsumer")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   volumeBindingMode?: VolumeBindingMode;
 
   @doc("The access mode: [ReadWriteOnce, ReadWriteMany] or [ReadWriteOnce]")
@@ -144,11 +144,11 @@ model StorageClassProperties {
 
   @doc("Properties of the StorageClass")
   // prevent generation of buggy StorageClassPropertiesUpdate model
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   typeProperties: StorageClassTypeProperties;
 
   @doc("Resource provision state")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 

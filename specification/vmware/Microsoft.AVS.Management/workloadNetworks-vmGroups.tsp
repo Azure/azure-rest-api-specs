@@ -34,7 +34,7 @@ interface WorkloadNetworkVmGroups {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateVMGroup")
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<WorkloadNetworkVMGroup, WorkloadNetworkVMGroup>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "VmGroupIdParameter should be last, but it is breaking to correct it."
@@ -47,7 +47,9 @@ interface WorkloadNetworkVmGroups {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "location" }
+    {
+      `final-state-via`: "location",
+    }
   )
   delete(
     ...Foundations.BaseParameters<WorkloadNetworkVMGroup>,
@@ -116,11 +118,11 @@ model WorkloadNetworkVMGroupProperties {
   members?: string[];
 
   @doc("VM Group status.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   status?: VMGroupStatusEnum;
 
   @doc("The provisioning state")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: WorkloadNetworkVMGroupProvisioningState;
 
   @doc("NSX revision number.")

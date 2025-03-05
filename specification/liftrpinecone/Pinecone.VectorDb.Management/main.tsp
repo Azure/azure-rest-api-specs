@@ -14,7 +14,9 @@ using LiftrBase;
 
 /* Pinecone Resource Provider management API. */
 @armProviderNamespace
-@service(#{ title: "Pinecone management service" })
+@service({
+  title: "Pinecone management service",
+})
 @versioned(Pinecone.VectorDb.Versions)
 namespace Pinecone.VectorDb;
 

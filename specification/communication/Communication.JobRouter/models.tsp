@@ -19,7 +19,7 @@ namespace AzureCommunicationRoutingService;
 @doc("Provides the 'Last-Modified' header to enable conditional (cached) requests")
 model LastModifiedResponseEnvelope {
   @header("Last-Modified")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The last modified timestamp.")
   @encode("rfc7231")
   lastModifiedTimestamp?: utcDateTime;
@@ -29,24 +29,12 @@ model LastModifiedResponseEnvelope {
 
 @doc("Provides the 'If-*' headers to enable conditional (cached) responses for JobRouter.")
 model RouterConditionalRequestHeaders {
-  @visibility(
-    Lifecycle.Read,
-    Lifecycle.Query,
-    Lifecycle.Create,
-    Lifecycle.Update,
-    Lifecycle.Delete
-  )
+  @visibility("read", "query", "create", "update", "delete")
   @header("If-Match")
   @doc("The request should only proceed if an entity matches this string.")
   ifMatch?: string;
 
-  @visibility(
-    Lifecycle.Read,
-    Lifecycle.Query,
-    Lifecycle.Create,
-    Lifecycle.Update,
-    Lifecycle.Delete
-  )
+  @visibility("read", "query", "create", "update", "delete")
   @header("If-Unmodified-Since")
   @doc("The request should only proceed if the entity was not modified after this time.")
   @encode("rfc7231")
@@ -372,7 +360,7 @@ model ClassificationPolicy {
 
   @key("classificationPolicyId")
   @doc("Id of a classification policy.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: string;
 
   @doc("Friendly name of this policy.")
@@ -412,7 +400,7 @@ model DistributionPolicy {
 
   @key("distributionPolicyId")
   @doc("Id of a distribution policy.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: string;
 
   @doc("Friendly name of this policy.")
@@ -448,7 +436,7 @@ model ExceptionPolicy {
 
   @key("exceptionPolicyId")
   @doc("Id of an exception policy.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: string;
 
   @doc("Friendly name of this policy.")
@@ -493,18 +481,18 @@ model RouterJob {
 
   @key("jobId")
   @doc("Id of a job.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: string;
 
   @doc("Reference to an external parent context, eg. call ID.")
   channelReference?: string;
 
   @doc("The status of the job.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   status?: RouterJobStatus;
 
   @doc("Timestamp a job was queued in UTC.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   enqueuedAt?: utcDateTime;
 
   @doc("The channel identifier. eg. voice, chat, etc.")
@@ -526,7 +514,7 @@ model RouterJob {
   requestedWorkerSelectors?: RouterWorkerSelector[];
 
   @doc("A collection of worker selectors attached by a classification policy, which a worker must satisfy in order to process this job.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   attachedWorkerSelectors?: RouterWorkerSelector[];
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
@@ -534,7 +522,7 @@ model RouterJob {
   labels?: Record<unknown>;
 
   @doc("A collection of the assignments of the job. Key is AssignmentId.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   assignments?: Record<RouterJobAssignment>;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
@@ -545,7 +533,7 @@ model RouterJob {
   notes?: RouterJobNote[];
 
   @doc("If set, job will be scheduled to be enqueued at a given time.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   scheduledAt?: utcDateTime;
 
   @doc("If provided, will determine how job matching will be carried out. Default mode: QueueAndMatchMode.")
@@ -571,11 +559,11 @@ model RouterWorkerSelector {
   expedite?: boolean;
 
   @doc("Status of the worker selector.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   status?: RouterWorkerSelectorStatus;
 
   @doc("The time at which this worker selector expires in UTC.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   expiresAt?: utcDateTime;
 }
 
@@ -585,7 +573,7 @@ model RouterWorkerSelector {
 model RouterJobAssignment {
   @key
   @doc("Id of a job assignment.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   assignmentId: string;
 
   @doc("Id of the Worker assigned to the job.")
@@ -727,7 +715,7 @@ model RouterQueue {
 
   @key("queueId")
   @doc("Id of a queue.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: string;
 
   @doc("Friendly name of this queue.")
@@ -766,11 +754,11 @@ model RouterWorker {
 
   @key("workerId")
   @doc("Id of a worker.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: string;
 
   @doc("Current state of a worker.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   state?: RouterWorkerState;
 
   @doc("Collection of queue(s) that this worker can receive work from.")
@@ -791,15 +779,15 @@ model RouterWorker {
   channels?: RouterChannel[];
 
   @doc("A list of active offers issued to this worker.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   offers?: RouterJobOffer[];
 
   @doc("A list of assigned jobs attached to this worker.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   assignedJobs?: RouterWorkerAssignment[];
 
   @doc("A value indicating the workers capacity. A value of '1' means all capacity is consumed. A value of '0' means no capacity is currently consumed.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   loadRatio?: float64;
 
   @doc("A flag indicating this worker is open to receive offers or not.")
@@ -828,7 +816,7 @@ model RouterChannel {
 model RouterJobOffer {
   @key
   @doc("Id of an offer.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   offerId: string;
 
   @doc("Id of the job.")

@@ -21,7 +21,9 @@ using Azure.Core.Traits;
     }
   ]>
 )
-@service(#{ title: "Live Metrics REST APIs for client SDKs." })
+@service({
+  title: "Live Metrics REST APIs for client SDKs.",
+})
 @server(
   "{endpoint}",
   "Existing Live Metrics global endpoint.",

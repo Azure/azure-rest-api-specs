@@ -19,7 +19,9 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service(#{ title: "Microsoft.AwsConnector" })
+@service({
+  title: "Microsoft.AwsConnector",
+})
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -73,7 +75,7 @@ model AwsEc2ImageProperties {
   architecture?: ArchitectureValuesEnumValue;
 
   @doc("<p>Any block device mapping entries.</p>")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   blockDeviceMappings?: BlockDeviceMapping[];
 
   @doc("<p>The boot mode of the image. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>")
@@ -131,7 +133,7 @@ model AwsEc2ImageProperties {
   platformDetails?: string;
 
   @doc("<p>Any product codes associated with the AMI.</p>")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   productCodes?: ProductCode[];
 
   @doc("<p>Indicates whether the image has public launch permissions. The value is <code>true</code> if this image has public launch permissions or <code>false</code> if it has only implicit and explicit launch permissions.</p>")
@@ -159,7 +161,7 @@ model AwsEc2ImageProperties {
   stateReason?: StateReason;
 
   @doc("<p>Any tags assigned to the image.</p>")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
   @doc("<p>If the image is configured for NitroTPM support, the value is <code>v2.0</code>. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html'>NitroTPM</a> in the <i>Amazon EC2 User Guide</i>.</p>")

@@ -17,7 +17,7 @@ model SAPInstance is TrackedResource<SAPInstanceProperties> {
   @path
   @key("sapInstanceName")
   @segment("sapInstances")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 }
 
@@ -42,7 +42,7 @@ interface SAPInstances {
   /**
    * Updates the SAP Instance resource.
    */
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmTagsPatchSync<SAPInstance>;
 
   /**

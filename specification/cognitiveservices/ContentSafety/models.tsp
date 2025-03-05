@@ -159,7 +159,7 @@ model TextBlocklist {
   @doc("Text blocklist name.")
   @pattern("^[0-9A-Za-z._~-]+$")
   @key("blocklistName")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Query)
+  @visibility("read", "create", "query")
   @maxLength(64)
   @clientName("Name", "csharp")
   @clientName("name", "java")
@@ -176,7 +176,7 @@ model TextBlocklist {
 model TextBlocklistItem {
   @doc("The service will generate a BlocklistItemId, which will be a UUID.")
   @key("blocklistItemId")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @maxLength(64)
   blocklistItemId: string;
 

@@ -13,7 +13,9 @@ namespace Azure.AI {
 }
 
 @doc("Azure APIs for the Azure Chat protocol.")
-@service(#{ title: "Azure ML Chat" })
+@service({
+  title: "Azure ML Chat",
+})
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
     {

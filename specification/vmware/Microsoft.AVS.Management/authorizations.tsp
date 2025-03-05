@@ -59,15 +59,15 @@ model ExpressRouteAuthorization
 @doc("The properties of an ExpressRoute Circuit Authorization resource")
 model ExpressRouteAuthorizationProperties {
   @doc("The state of the ExpressRoute Circuit Authorization provisioning")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ExpressRouteAuthorizationProvisioningState;
 
   @doc("The ID of the ExpressRoute Circuit Authorization")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   expressRouteAuthorizationId?: string;
 
   @doc("The key of the ExpressRoute Circuit Authorization")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   expressRouteAuthorizationKey?: string;
 
   @doc("The ID of the ExpressRoute Circuit")

@@ -35,7 +35,9 @@ namespace Azure.AI.OpenAI {
     }
   ]>
 )
-@service(#{ title: "Azure OpenAI" })
+@service({
+  title: "Azure OpenAI",
+})
 @server(
   "{endpoint}",
   "Azure OpenAI APIs for Assistants.",

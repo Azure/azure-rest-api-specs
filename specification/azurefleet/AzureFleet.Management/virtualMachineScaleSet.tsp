@@ -18,7 +18,7 @@ model VirtualMachineScaleSet {
   @doc("The name of the virtualMachineScaleSet")
   @key("virtualMachineScaleSetName")
   @segment("virtualMachineScaleSets")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @path
   name: string;
 
@@ -26,26 +26,26 @@ model VirtualMachineScaleSet {
     The compute RP resource id of the virtualMachineScaleSet 
     "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}"
     """)
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: armResourceIdentifier;
 
   @doc("Type of the virtualMachineScaleSet")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   type?: string;
 
   @removed(Versions.v2024_05_01_preview)
   @doc("This represents the Provisioning State of the VMSS in response to the last operation that was performed on it by Azure Fleet resource.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState: ProvisioningState;
 
   @added(Versions.v2024_05_01_preview)
   @doc("This represents the operationStatus of the VMSS in response to the last operation that was performed on it by Azure Fleet resource.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   operationStatus: ProvisioningState;
 
   @added(Versions.v2024_05_01_preview)
   @doc("Error Information when `operationStatus` is `Failed`")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   error?: ApiError;
 }
 

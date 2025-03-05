@@ -84,13 +84,13 @@ model OperationStatus extends ErrorResponse {
   /**
    * The start time of the operation.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   startTime?: utcDateTime;
 
   /**
    * The end time of the operation.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   endTime?: utcDateTime;
 
   /**

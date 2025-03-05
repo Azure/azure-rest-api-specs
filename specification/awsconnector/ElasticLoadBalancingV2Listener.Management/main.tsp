@@ -19,7 +19,9 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service(#{ title: "Microsoft.AwsConnector" })
+@service({
+  title: "Microsoft.AwsConnector",
+})
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -78,14 +80,15 @@ model ElasticLoadBalancingV2ListenerProperties {
 @doc("Definition of awsElasticLoadBalancingV2Listener")
 model AwsElasticLoadBalancingV2ListenerProperties {
   @doc("[TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN) policy.")
+  @extension("x-ms-identifiers", [])
   alpnPolicy?: string[];
 
   @doc("The default SSL server certificate for a secure listener. You must provide exactly one certificate if the listener protocol is HTTPS or TLS. To create a certificate list for a secure listener, use [AWS::ElasticLoadBalancingV2::ListenerCertificate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html).")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   certificates?: Certificate[];
 
   @doc("The actions for the default rule. You cannot define a condition for a default rule. To create additional rules for an Application Load Balancer, use [AWS::ElasticLoadBalancingV2::ListenerRule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html).")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   defaultActions?: Action[];
 
   @doc("Property listenerArn")
@@ -264,7 +267,7 @@ model ForwardConfig {
   targetGroupStickinessConfig?: TargetGroupStickinessConfig;
 
   @doc("Information about how traffic will be distributed between multiple target groups in a forward rule.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", [])
   targetGroups?: TargetGroupTuple[];
 }
 

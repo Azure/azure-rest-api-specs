@@ -112,7 +112,7 @@ union type {
 
 @doc("Details about the connection between the Batch service and the endpoint.")
 model EndpointDetail {
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The port an endpoint is connected to.")
   port?: int32;
 }
@@ -120,29 +120,29 @@ model EndpointDetail {
 @doc("A domain name and connection details used to access a dependency.")
 model EndpointDependency {
   @doc("The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @key
   domainName: string;
 
   @doc("Human-readable supplemental information about the dependency and when it is applicable.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   description?: string;
 
   @doc("The list of connection details for this endpoint.")
-  @visibility(Lifecycle.Read)
-  @identifiers(#["port"])
+  @visibility("read")
+  @extension("x-ms-identifiers", ["port"])
   endpointDetails?: EndpointDetail[];
 }
 
 @doc("A collection of related endpoints from the same service for which the Batch service requires outbound access.")
 model OutboundEnvironmentEndpoint {
   @doc("The type of service that Azure Load Testing connects to.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   category?: string;
 
   @doc("The endpoints for this service to which the Batch service makes outbound calls.")
-  @visibility(Lifecycle.Read)
-  @identifiers(#["domainName"])
+  @visibility("read")
+  @extension("x-ms-identifiers", ["domainName"])
   endpoints?: EndpointDependency[];
 }
 
@@ -176,7 +176,7 @@ model QuotaResourceProperties {
   usage?: int32;
 
   @doc("Resource provisioning state.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ResourceState;
 }
 
@@ -196,16 +196,16 @@ model QuotaResource is ProxyResource<QuotaResourceProperties> {
 model MaxMonthlyVirtualUserHoursResourceProperties {
   @doc("Current limit value, with -1 indicating that there is no limit.")
   @minValue(-1)
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   limit?: int32;
 
   @doc("Current usage value.")
   @minValue(0)
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   usage?: int32;
 
   @doc("Resource provisioning state.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ResourceState;
 }
 
@@ -238,12 +238,12 @@ model LoadTestProperties {
   @doc("Description of the resource.")
   description?: string;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Resource provisioning state.")
   provisioningState?: ResourceState;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "URI is an abbervation and should be upper case"
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @maxLength(2083)
   @doc("Resource data plane URI.")
   dataPlaneURI?: string;
@@ -255,19 +255,19 @@ model LoadTestProperties {
 @doc("Check quota availability response object.")
 model CheckQuotaAvailabilityResponse {
   @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id: string;
 
   @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   type: string;
 
   @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 
   @doc("The name of the resource.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name?: string;
 
   #suppress "deprecated" "Legacy flatten"

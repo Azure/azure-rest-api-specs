@@ -40,7 +40,7 @@ interface Fleetspaces {
   /**
    * Modifies a fleetspace resource.
    */
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<Fleetspace, Fleetspace>;
 
   /**

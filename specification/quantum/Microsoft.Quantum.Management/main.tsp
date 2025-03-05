@@ -26,7 +26,9 @@ using Azure.ResourceManager.Foundations;
  * Microsoft.Quantum Resource Provider Management API
  */
 @armProviderNamespace
-@service(#{ title: "Azure Quantum Management API" })
+@service({
+  title: "Azure Quantum Management API",
+})
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Quantum;

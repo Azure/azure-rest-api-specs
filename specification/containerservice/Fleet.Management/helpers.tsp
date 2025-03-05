@@ -51,7 +51,9 @@ op FleetCustomPatchSync<
 @extension("x-ms-long-running-operation", true)
 @extension(
   "x-ms-long-running-operation-options",
-  #{ `final-state-via`: "azure-async-operation" }
+  {
+    `final-state-via`: "azure-async-operation",
+  }
 )
 @armResourceCreateOrUpdate(TResource)
 @put
@@ -74,7 +76,9 @@ op FleetArmResourceCreateOrUpdateAsync<
 @doc("Delete a {name}", TResource)
 @extension(
   "x-ms-long-running-operation-options",
-  #{ `final-state-via`: "azure-async-operation" }
+  {
+    `final-state-via`: "azure-async-operation",
+  }
 )
 @armResourceDelete(TResource)
 @delete

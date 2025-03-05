@@ -13,7 +13,7 @@ namespace Face;
 @doc("Person resource for person directory")
 model PersonDirectoryPerson {
   @key
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Person ID of the person.")
   personId: uuid;
 
@@ -24,7 +24,7 @@ model PersonDirectoryPerson {
 @doc("Long running operation resource for person directory.")
 model OperationResult {
   @key
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Operation ID of the operation.")
   operationId: uuid;
 
@@ -50,7 +50,7 @@ model OperationResult {
 model PersonDirectoryRecognitionModel {
   @key
   @doc("The 'recognitionModel' associated with faces.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility("create", "read")
   recognitionModel: RecognitionModel;
 }
 
@@ -63,7 +63,7 @@ model PersonDirectoryFace is BaseFace;
 @resource("dynamicpersongroups")
 model DynamicPersonGroup {
   @key
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("ID of the dynamic person group.")
   dynamicPersonGroupId: collectionId;
 

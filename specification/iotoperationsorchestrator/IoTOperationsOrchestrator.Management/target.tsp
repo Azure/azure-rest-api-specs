@@ -25,21 +25,21 @@ model Target is TrackedResource<TargetProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   extendedLocation: ExtendedLocation;
 }
 
 @doc("The properties of a Target resource.")
 model TargetProperties {
   @doc("A list of components.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   components?: ComponentProperties[];
 
   @doc("Deployment scope (such as Kubernetes namespace).")
   scope?: string;
 
   @doc("Defines the device topology for a target or instance.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   topologies?: TopologiesProperties[];
 
   @doc("Reconciliation Policy.")
@@ -49,14 +49,14 @@ model TargetProperties {
   version?: string;
 
   @doc("The status of the last operation.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
 @doc("Defines a desired runtime component.")
 model TopologiesProperties {
   @doc("bindings description.")
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   bindings?: BindingProperties[];
 }
 

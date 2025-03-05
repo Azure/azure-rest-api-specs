@@ -98,7 +98,7 @@ class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
 }
 
 class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
-  protected emitterName: string;
+  private emitterName: string;
 
   constructor(emitterName: string, keyToValidate: string, expectedValue: ExpectedValueType) {
     super(keyToValidate, expectedValue);
@@ -141,14 +141,7 @@ function isManagementSdk(folder: string): boolean {
 function skipForDataPlane(folder: string): SkipResult {
   return {
     shouldSkip: !isManagementSdk(folder),
-    reason: "This rule is only applicable for management plane SDKs.",
-  };
-}
-
-function skipForManagementPlane(folder: string): SkipResult {
-  return {
-    shouldSkip: isManagementSdk(folder),
-    reason: "This rule is only applicable for data plane SDKs.",
+    reason: "This rule is only applicable for management SDKs.",
   };
 }
 
@@ -237,43 +230,7 @@ export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends Tspcon
   }
 }
 
-// ----- Go data plane sub rules -----
-export class TspConfigGoDpServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-go", "service-dir", new RegExp(/^sdk\/.*$/));
-  }
-  protected skip(_: any, folder: string) {
-    return skipForManagementPlane(folder);
-  }
-}
-
-export class TspConfigGoDpPackageDirectoryMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-go", "package-dir", new RegExp(/^az.*$/));
-  }
-  protected skip(_: any, folder: string) {
-    return skipForManagementPlane(folder);
-  }
-}
-
-export class TspConfigGoDpModuleMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super(
-      "@azure-tools/typespec-go",
-      "module",
-      new RegExp(/^github.com\/Azure\/azure-sdk-for-go\/.*$/),
-    );
-  }
-  protected validate(config: any): RuleResult {
-    let module = config?.options?.[this.emitterName]?.module;
-    if (module === undefined) return { success: true };
-    return super.validate(config);
-  }
-  protected skip(_: any, folder: string) {
-    return skipForManagementPlane(folder);
-  }
-}
-
+// ----- Go management sub rules -----
 export class TspConfigGoMgmtServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "service-dir", new RegExp(/^sdk\/resourcemanager\/[^\/]*$/));
@@ -323,6 +280,15 @@ export class TspConfigGoMgmtGenerateExamplesTrueSubRule extends TspconfigEmitter
   }
 }
 
+export class TspConfigGoMgmtGenerateFakesTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-go", "generate-fakes", true);
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
 export class TspConfigGoMgmtHeadAsBooleanTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "head-as-boolean", true);
@@ -332,20 +298,16 @@ export class TspConfigGoMgmtHeadAsBooleanTrueSubRule extends TspconfigEmitterOpt
   }
 }
 
-// ----- Go az sub rules -----
-export class TspConfigGoAzGenerateFakesTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-go", "generate-fakes", true);
-  }
-}
-
-export class TspConfigGoAzInjectSpansTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigGoMgmtInjectSpansTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "inject-spans", true);
   }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
 }
 
-// ----- Python management plane sub rules -----
+// ----- Python management sub rules -----
 export class TspConfigPythonMgmtPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-python", "package-dir", new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/));
@@ -355,32 +317,30 @@ export class TspConfigPythonMgmtPackageDirectorySubRule extends TspconfigEmitter
   }
 }
 
-// ----- Python data plane sub rules -----
-export class TspConfigPythonDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-python", "package-dir", new RegExp(/^azure(-[a-z]+){1,3}$/));
-  }
-  protected skip(_: any, folder: string) {
-    return skipForManagementPlane(folder);
-  }
-}
-
-// ----- Python azure sub rules -----
-export class TspConfigPythonAzPackageNameEqualStringSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigPythonMgmtPackageNameEqualStringSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-python", "package-name", "{package-dir}");
   }
-}
-
-export class TspConfigPythonAzGenerateTestTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-python", "generate-test", true);
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
   }
 }
 
-export class TspConfigPythonAzGenerateSampleTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigPythonMgmtGenerateTestTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-python", "generate-test", true);
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
+export class TspConfigPythonMgmtGenerateSampleTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-python", "generate-sample", true);
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
   }
 }
 
@@ -426,17 +386,13 @@ export const defaultRules = [
   new TspConfigGoMgmtModuleEqualStringSubRule(),
   new TspConfigGoMgmtFixConstStutteringTrueSubRule(),
   new TspConfigGoMgmtGenerateExamplesTrueSubRule(),
-  new TspConfigGoAzGenerateFakesTrueSubRule(),
+  new TspConfigGoMgmtGenerateFakesTrueSubRule(),
   new TspConfigGoMgmtHeadAsBooleanTrueSubRule(),
-  new TspConfigGoAzInjectSpansTrueSubRule(),
-  new TspConfigGoDpServiceDirMatchPatternSubRule(),
-  new TspConfigGoDpPackageDirectoryMatchPatternSubRule(),
-  new TspConfigGoDpModuleMatchPatternSubRule(),
+  new TspConfigGoMgmtInjectSpansTrueSubRule(),
   new TspConfigPythonMgmtPackageDirectorySubRule(),
-  new TspConfigPythonDpPackageDirectorySubRule(),
-  new TspConfigPythonAzPackageNameEqualStringSubRule(),
-  new TspConfigPythonAzGenerateTestTrueSubRule(),
-  new TspConfigPythonAzGenerateSampleTrueSubRule(),
+  new TspConfigPythonMgmtPackageNameEqualStringSubRule(),
+  new TspConfigPythonMgmtGenerateTestTrueSubRule(),
+  new TspConfigPythonMgmtGenerateSampleTrueSubRule(),
   new TspConfigCsharpAzPackageDirectorySubRule(),
   new TspConfigCsharpAzNamespaceEqualStringSubRule(),
   new TspConfigCsharpAzClearOutputFolderTrueSubRule(),

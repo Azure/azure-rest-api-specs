@@ -243,19 +243,19 @@ model RoleDefinition {
   /**
    * The role definition ID.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id?: string;
 
   /**
    * The role definition name.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name?: string;
 
   /**
    * The role definition type.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   type?: RoleDefinitionType;
 
   /**
@@ -357,19 +357,19 @@ model RoleAssignment {
   /**
    * The role assignment ID.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   id?: string;
 
   /**
    * The role assignment name.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name?: string;
 
   /**
    * The role assignment type.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   type?: string;
 
   /**

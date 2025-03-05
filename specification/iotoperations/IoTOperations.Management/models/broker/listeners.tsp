@@ -26,7 +26,7 @@ model BrokerListenerResource is ProxyResource<BrokerListenerProperties> {
   // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility("read", "create")
   extendedLocation: ExtendedLocation;
 }
 
@@ -36,13 +36,13 @@ model BrokerListenerProperties {
   serviceName?: string;
 
   @doc("Ports on which this listener accepts client connections.")
-  @OpenAPI.extension("x-ms-identifiers", #["port"])
+  @OpenAPI.extension("x-ms-identifiers", ["port"])
   ports: ListenerPort[];
 
   @doc("Kubernetes Service type of this listener.")
   serviceType?: ServiceType = ServiceType.ClusterIp;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

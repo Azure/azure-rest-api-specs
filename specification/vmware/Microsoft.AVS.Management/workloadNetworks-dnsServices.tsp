@@ -37,7 +37,7 @@ interface WorkloadNetworkDnsServices {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsService")
-  @patch(#{ implicitOptionality: false })
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkDnsService,
     WorkloadNetworkDnsService
@@ -53,7 +53,9 @@ interface WorkloadNetworkDnsServices {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "location" }
+    {
+      `final-state-via`: "location",
+    }
   )
   delete(
     ...Foundations.BaseParameters<WorkloadNetworkDnsService>,
@@ -149,11 +151,11 @@ model WorkloadNetworkDnsServiceProperties {
   logLevel?: DnsServiceLogLevelEnum;
 
   @doc("DNS Service status.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   status?: DnsServiceStatusEnum;
 
   @doc("The provisioning state")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: WorkloadNetworkDnsServiceProvisioningState;
 
   @doc("NSX revision number.")

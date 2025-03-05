@@ -51,6 +51,6 @@ union WorkloadNetworkProvisioningState {
 @doc("The properties of a workload network")
 model WorkloadNetworkProperties {
   @doc("The provisioning state of the resource.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: WorkloadNetworkProvisioningState;
 }

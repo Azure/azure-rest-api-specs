@@ -22,7 +22,7 @@ model VmInstanceHybridIdentityMetadata
   @minLength(1)
   @pattern("[a-zA-Z0-9-_\\.]")
   @path
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   name: string;
 }
 

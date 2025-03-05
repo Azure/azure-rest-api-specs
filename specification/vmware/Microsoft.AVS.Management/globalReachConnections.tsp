@@ -71,14 +71,14 @@ model GlobalReachConnection is ProxyResource<GlobalReachConnectionProperties> {
 @doc("The properties of a global reach connection")
 model GlobalReachConnectionProperties {
   @doc("The state of the  ExpressRoute Circuit Authorization provisioning")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: GlobalReachConnectionProvisioningState;
 
   @doc("""
     The network used for global reach carved out from the original network block
     provided for the private cloud
     """)
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   addressPrefix?: string;
 
   @doc("""
@@ -88,7 +88,7 @@ model GlobalReachConnectionProperties {
   authorizationKey?: string;
 
   @doc("The connection status of the global reach connection")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   circuitConnectionStatus?: GlobalReachConnectionStatus;
 
   @doc("""

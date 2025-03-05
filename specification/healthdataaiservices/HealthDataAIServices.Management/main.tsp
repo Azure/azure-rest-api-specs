@@ -11,7 +11,9 @@ using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Using the AI acronym similar to what was done for OpenAI"
 @armProviderNamespace("Microsoft.HealthDataAIServices")
-@service(#{ title: "Microsoft.HealthDataAIServices" })
+@service({
+  title: "Microsoft.HealthDataAIServices",
+})
 @versioned(Microsoft.HealthDataAIServices.Versions)
 namespace Microsoft.HealthDataAIServices;
 
@@ -99,16 +101,16 @@ enum PublicNetworkAccess {
 
 @doc("Details of the HealthDataAIServices DeidService.")
 model DeidServiceProperties {
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Deid service url.")
   serviceUrl?: string;
 
   @doc("List of private endpoint connections.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   @doc("Gets or sets allow or disallow public network access to resource")

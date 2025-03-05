@@ -26,19 +26,9 @@ These are the global settings for the Advisor API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-09-preview
+tag: package-2023-01
 ```
 
-### Tag: package-2023-09-preview
-
-These settings apply only when `--tag=package-2023-09-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-09-preview'
-input-file:
-  - Microsoft.Advisor/preview/2023-09-01-preview/advisor.json
-  - Microsoft.Advisor/preview/2023-09-01-preview/assessments.json
-  - Microsoft.Advisor/preview/2023-09-01-preview/resiliencyReviews.json
-```
 
 ### Tag: package-2023-01
 
@@ -48,7 +38,6 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 input-file:
   - Microsoft.Advisor/stable/2023-01-01/advisor.json
 ```
-
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.

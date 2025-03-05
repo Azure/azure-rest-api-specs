@@ -9,7 +9,9 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-@service(#{ title: "ContentSafety Service" })
+@service({
+  title: "ContentSafety Service",
+})
 @versioned(ContentSafety.Versions)
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[

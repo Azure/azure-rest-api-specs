@@ -10,7 +10,9 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.EdgeZones")
-@service(#{ title: "Microsoft.EdgeZones" })
+@service({
+  title: "Microsoft.EdgeZones",
+})
 @versioned(Versions)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.EdgeZones;
@@ -62,47 +64,47 @@ union RegistrationState {
 
 @doc("The properties of an Extended Zone resource.")
 model ExtendedZoneProperties {
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Status of the last operation performed by the subscription on the Edge Zone resource")
   provisioningState?: ProvisioningState;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Indicates the Azure Extended Zone registration’s approval status.")
   registrationState?: RegistrationState;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Display name of the Azure Extended Zone.")
   displayName: string;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Regional display name of the Azure Extended Zone.")
   regionalDisplayName: string;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Type of region for the Azure Extended Zone.")
   regionType: string;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Category of region for the Azure Extended Zone.")
   regionCategory: string;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("Geography of the Azure Extended Zone.")
   geography: string;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The Geography Group of the Azure Extended Zone.")
   geographyGroup: string;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The Longitude of the Azure Extended Zone.")
   longitude: string;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The Latitude of the Azure Extended Zone.")
   latitude: string;
 
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @doc("The Home Location of the Azure Extended Zone.")
   homeLocation: string;
 }

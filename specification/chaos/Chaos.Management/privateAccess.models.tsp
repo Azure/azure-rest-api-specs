@@ -41,13 +41,13 @@ model PrivateAccessProperties {
   /**
    * Most recent provisioning state for the given privateAccess resource.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   /**
    * A readonly collection of private endpoint connection. Currently only one endpoint connection is supported.
    */
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /**
