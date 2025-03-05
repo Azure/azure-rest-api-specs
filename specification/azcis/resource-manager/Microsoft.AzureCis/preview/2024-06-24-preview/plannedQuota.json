@@ -240,24 +240,6 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
-    "FulfilledPlan": {
-      "type": "object",
-      "description": "Fulfilled Plan details after fulfilling the quota of the plan.",
-      "properties": {
-        "arm": {
-          "type": "object",
-          "description": "Same as the \"arm\" node in the plan for the corresponding Subscription."
-        },
-        "rdfe": {
-          "type": "object",
-          "description": "Same as the \"rdfe\" node in the plan for the corresponding Subscription."
-        },
-        "isAzEnabled": {
-          "type": "boolean",
-          "description": "Indicates whether AZ is enabled."
-        }
-      }
-    },
     "PlannedQuotaProvisioningState": {
       "type": "string",
       "description": "Provisioning status of the resource.",
@@ -380,8 +362,13 @@
           "description": "Provisioning status of the resource.",
           "readOnly": true
         },
+        "requestId": {
+          "type": "string",
+          "description": "The planned quota request identifier; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
         "fulfilledPlan": {
-          "$ref": "#/definitions/FulfilledPlan",
+          "type": "object",
           "description": "Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.",
           "readOnly": true
         },
