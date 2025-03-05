@@ -17,12 +17,14 @@ namespace Azure.Batch;
 
 // Interfaces ////////////////////
 
+// Application Parameter Aliases
 alias GetApplicationRequiredParameters = {
   @doc("The ID of the Application")
   @path
   applicationId: string;
 };
 
+// Application Interface
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @tag("Applications")
 interface Applications {
@@ -60,6 +62,8 @@ interface Applications {
   >;
 }
 
+// Pool Parameter Aliases
+
 alias ListPoolUsageMetricsParameters = {
   @doc("""
     The earliest time from which to include metrics. This must be at least two and
@@ -92,6 +96,28 @@ alias CreatePoolParameters = {
   @doc("The Pool to be created.")
   pool: BatchPoolCreateContent;
 };
+
+alias ListPoolsParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+// Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -138,26 +164,10 @@ interface Pools {
   @summary("Lists all of the Pools which be mounted.")
   @doc("Lists all of the Pools which be mounted.")
   @route("/pools")
-  @clientName("listPoolsInternal", "java")
-  listPools is ListOperation<
+  listPools is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListPoolsParameters;
     },
     BatchPoolListResult
   >;
