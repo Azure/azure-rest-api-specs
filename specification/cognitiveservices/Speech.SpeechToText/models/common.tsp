@@ -3,7 +3,6 @@ import "@typespec/rest";
 import "@typespec/http";
 
 using Azure.Core;
-using TypeSpec.Http;
 using Azure.Core.Traits;
 using Azure.Core.Traits.Private;
 using TypeSpec.Rest;
@@ -18,11 +17,11 @@ model EntityReference {
 
 @doc("EntityError")
 model EntityError {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The code of this error.")
   code?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The message for this error.")
   message?: string;
 }
@@ -52,12 +51,12 @@ model SpeechToTextCustomPage<
   Traits extends TypeSpec.Reflection.Model = {}
 > {
   @doc("A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @items
   values?: Array<Resource>;
 
   @doc("A link to the next set of paginated results if there are more entities available; otherwise null.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @nextLink
   `@nextLink`?: ResourceLocation<Resource>;
 

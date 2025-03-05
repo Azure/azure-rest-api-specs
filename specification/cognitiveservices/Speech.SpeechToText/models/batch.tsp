@@ -3,7 +3,6 @@ import "./common.tsp";
 
 using Azure.Core;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 namespace SpeechToText.BatchTranscriptionClient;
 
@@ -18,11 +17,11 @@ model TranscriptionJob {
 
   @doc("The id of this entity.")
   @key("id")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pollingOperationParameter("getTranscription")
   id: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The location of this entity.")
   @pollingLocation
   self: url;
@@ -53,15 +52,15 @@ model TranscriptionJob {
   @doc("The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.")
   customProperties?: Record<string>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
   lastActionDateTime?: utcDateTime;
 
   @doc("The status of the object")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status: JobStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
   createdDateTime?: utcDateTime;
 }
@@ -74,7 +73,7 @@ model TranscriptionProperties {
   @doc("A value indicating whether word level timestamps for the display form are requested. The default value is false.")
   displayFormWordLevelTimestampsEnabled?: boolean;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The duration in milliseconds of the transcription.\nDurations larger than 2^53-1 are not supported to ensure compatibility with JavaScript integers.")
   durationMilliseconds?: int32;
 
@@ -125,7 +124,7 @@ union JobStatus {
 
 @doc("TranscriptionLinks")
 model TranscriptionLinks {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The location to get all files of this entity. See operation \"Transcriptions_ListFiles\" for more details.")
   files?: url;
 }
@@ -201,7 +200,7 @@ model TranscriptionFile {
   properties: FileProperties;
 
   @doc("The location of this entity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key
   self: url;
 }
