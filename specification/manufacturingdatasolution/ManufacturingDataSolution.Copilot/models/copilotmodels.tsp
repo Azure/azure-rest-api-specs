@@ -526,8 +526,6 @@
 //   exampleQueries: ExampleQuery[];
 // }
 
-
-
 // /**
 //  * Represents the response model for an alias.
 //  */
@@ -693,5 +691,3 @@
 //    */
 //   string,
 // }
-
-

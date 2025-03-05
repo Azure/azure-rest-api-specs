@@ -21,39 +21,35 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-alias additionalHeaders = RequestHeadersTrait<
+alias additionalHeaders = RequestHeadersTrait<{
+  @header("Conversation-Id")
+  @doc("Conversation-Id header")
+  conversationId?: string;
+
+  @header("Accept-Language")
+  @doc("Accept-Language header")
+  acceptLanguage: string;
+}>;
+
+alias additionalQueryParams = QueryParametersTrait<{
+  @doc("maxRetry")
+  @query
+  maxRetry?: int32 = 2;
+
+  @doc("Include summary in the response.")
+  @query
+  includeSummary?: boolean = false;
+}>;
+
+interface QueryApi {
+  @doc("execute the query")
+  execute is apiOperations.ResourceCollectionAction<
+    QueryRequest,
     {
-      @header("Conversation-Id")
-      @doc("Conversation-Id header")
-      conversationId?: string;
-
-      @header("Accept-Language")
-      @doc("Accept-Language header")
-      acceptLanguage: string;
-    }
+      @doc("Natural language query")
+      ask?: string;
+    },
+    QueryResponse,
+    additionalHeaders & additionalQueryParams
   >;
-
-alias additionalQueryParams = QueryParametersTrait<
-    {
-      @doc("maxRetry")
-      @query
-      maxRetry?: int32 = 2;
-
-      @doc("Include summary in the response.")
-      @query
-      includeSummary?: boolean = false;
-    }
-  >;
-
-interface QueryApi { 
-    @doc("execute the query")
-    execute is apiOperations.ResourceCollectionAction<
-      QueryRequest,
-      {
-        @doc("Natural language query")
-        ask?: string;
-      },
-      QueryResponse,
-      additionalHeaders & additionalQueryParams
-    >;
 }

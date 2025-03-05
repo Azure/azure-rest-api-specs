@@ -29,4 +29,3 @@ model QueryResponse {
   @doc("Summary of the Resultant Query Query or Query query execution response (JArray string)")
   summary?: string;
 }
-

@@ -22,13 +22,13 @@ alias ServiceTraits = NoRepeatableRequests &
 alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 alias jobLocationResponseHeaders = ResponseHeadersTrait<
-{
-  @doc("The background job location.")
-  @header
-  @pollingLocation
-  operationLocation: string;
-},
-TraitContext.Create | TraitContext.Update | TraitContext.Delete
+  {
+    @doc("The background job location.")
+    @header
+    @pollingLocation
+    operationLocation: string;
+  },
+  TraitContext.Create | TraitContext.Update | TraitContext.Delete
 >;
 
 @doc("Instructions")
@@ -47,21 +47,30 @@ interface Instructions {
   >;
 
   @doc("Create an instruction.")
-  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult)
+  @pollingOperation(
+    MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
+  )
   createInstruction is apiOperations.LongRunningResourceCreateWithServiceProvidedName<
     Instruction,
-    jobLocationResponseHeaders>;
+    jobLocationResponseHeaders
+  >;
 
   @doc("update instructions.")
-  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult)
+  @pollingOperation(
+    MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
+  )
   updateInstruction is apiOperations.LongRunningResourceCreateOrUpdate<Instruction>;
 
   @doc("Delete instructions.")
-  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult)
+  @pollingOperation(
+    MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
+  )
   deleteInstruction is apiOperations.LongRunningResourceDelete<Instruction>;
 
   @doc("Update instruction status.")
-  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult)
+  @pollingOperation(
+    MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
+  )
   updateStatus is apiOperations.LongRunningResourceAction<
     Instruction,
     UpdateStatusRequest,

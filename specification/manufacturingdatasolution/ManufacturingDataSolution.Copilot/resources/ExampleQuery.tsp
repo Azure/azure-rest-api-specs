@@ -26,7 +26,8 @@ interface ExampleQueryOperations {
   getExample is apiOperations.ResourceRead<ExampleQueryRequest>;
 
   @doc("get all example queries")
-  listAllExamples is apiOperations.ResourceList<ExampleQueryRequest, 
+  listAllExamples is apiOperations.ResourceList<
+    ExampleQueryRequest,
     QueryParametersTrait<{
       @doc("Instruction id.")
       @query

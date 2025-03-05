@@ -52,6 +52,5 @@ union QueryEndpoint {
   @doc("Assistant endpoint")
   Assistant: "Assistant",
 
-  string
+  string,
 }
-

@@ -22,13 +22,13 @@ alias ServiceTraits = NoRepeatableRequests &
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 alias jobLocationResponseHeaders = ResponseHeadersTrait<
-{
-  @doc("The background job location.")
-  @header
-  @pollingLocation
-  operationLocation: string;
-},
-TraitContext.Create | TraitContext.Update | TraitContext.Delete
+  {
+    @doc("The background job location.")
+    @header
+    @pollingLocation
+    operationLocation: string;
+  },
+  TraitContext.Create | TraitContext.Update | TraitContext.Delete
 >;
 
 interface Aliases {
@@ -36,11 +36,18 @@ interface Aliases {
   getAlias is Operations.ResourceRead<Alias>;
 
   @doc("Create an alias")
-  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult)
-  createAlias is Operations.LongRunningResourceCreateWithServiceProvidedName<Alias, jobLocationResponseHeaders>;
+  @pollingOperation(
+    MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
+  )
+  createAlias is Operations.LongRunningResourceCreateWithServiceProvidedName<
+    Alias,
+    jobLocationResponseHeaders
+  >;
 
   @doc("Update an alias")
-  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult)
+  @pollingOperation(
+    MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
+  )
   updateAlias is Operations.LongRunningResourceCreateOrUpdate<Alias>;
 
   @doc("Delete an alias")

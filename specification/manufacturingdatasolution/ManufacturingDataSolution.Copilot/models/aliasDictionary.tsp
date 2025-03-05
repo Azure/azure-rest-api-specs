@@ -40,4 +40,3 @@ model ActivateAlias {
   @doc("status of the alias")
   enabled: boolean;
 }
-
