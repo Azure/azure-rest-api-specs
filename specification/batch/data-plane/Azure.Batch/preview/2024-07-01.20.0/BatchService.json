@@ -2584,6 +2584,7 @@
             "headers": {
               "Content-Length": {
                 "type": "string",
+                "format": "int64",
                 "description": "The length of the file."
               },
               "ETag": {
@@ -2828,6 +2829,7 @@
             "headers": {
               "Content-Length": {
                 "type": "string",
+                "format": "int64",
                 "description": "The length of the file."
               },
               "ETag": {
@@ -7179,6 +7181,7 @@
             "headers": {
               "Content-Length": {
                 "type": "string",
+                "format": "int64",
                 "description": "The length of the file."
               },
               "ETag": {
@@ -7423,6 +7426,7 @@
             "headers": {
               "Content-Length": {
                 "type": "string",
+                "format": "int64",
                 "description": "The length of the file."
               },
               "ETag": {
@@ -10758,12 +10762,12 @@
           "description": "The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries."
         },
         "readIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk read operations made by all Tasks in all Jobs created under the schedule."
         },
         "writeIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk write operations made by all Tasks in all Jobs created under the schedule."
         },
@@ -10778,17 +10782,17 @@
           "description": "The total gibibytes written to disk by all Tasks in all Jobs created under the schedule."
         },
         "numSucceededTasks": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of Tasks successfully completed during the given time range in Jobs created under the schedule. A Task completes successfully if it returns exit code 0."
         },
         "numFailedTasks": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of Tasks that failed during the given time range in Jobs created under the schedule. A Task fails if it exhausts its maximum retry count without returning exit code 0."
         },
         "numTaskRetries": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of retries during the given time range on all Tasks in all Jobs created under the schedule."
         },
@@ -11111,12 +11115,12 @@
           "description": "The total wall clock time of all Tasks in the Job.  The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries."
         },
         "readIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk read operations made by all Tasks in the Job."
         },
         "writeIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk write operations made by all Tasks in the Job."
         },
@@ -11131,17 +11135,17 @@
           "description": "The total amount of data in GiB written to disk by all Tasks in the Job."
         },
         "numSucceededTasks": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of Tasks successfully completed in the Job during the given time range. A Task completes successfully if it returns exit code 0."
         },
         "numFailedTasks": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of Tasks in the Job that failed during the given time range. A Task fails if it exhausts its maximum retry count without returning exit code 0."
         },
         "numTaskRetries": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of retries on all the Tasks in the Job during the given time range."
         },
@@ -12818,12 +12822,12 @@
           "description": "The peak used disk space in GiB across all Compute Nodes in the Pool."
         },
         "diskReadIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk read operations across all Compute Nodes in the Pool."
         },
         "diskWriteIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk write operations across all Compute Nodes in the Pool."
         },
@@ -14447,12 +14451,12 @@
           "description": "The total wall clock time of the Task. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If the Task was retried, this includes the wall clock time of all the Task retries."
         },
         "readIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk read operations made by the Task."
         },
         "writeIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk write operations made by the Task."
         },
@@ -15083,6 +15087,7 @@
         },
         "contentLength": {
           "type": "string",
+          "format": "int64",
           "description": "The length of the file."
         },
         "contentType": {
