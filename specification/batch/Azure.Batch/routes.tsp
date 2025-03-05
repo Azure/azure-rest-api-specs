@@ -37,7 +37,12 @@ interface Applications {
     API.
     """)
   @route("/applications")
-  listApplications is ListOperation<{}, BatchApplicationListResult>;
+  listApplications is ListOperationNew<
+    {
+      ...BatchCommonListHeaders;
+    },
+    BatchApplicationListResult
+  >;
 
   @summary("Gets information about the specified Application.")
   @doc("""
