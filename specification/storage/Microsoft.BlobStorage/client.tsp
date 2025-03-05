@@ -71,8 +71,8 @@ model BlobServiceClientParameters {
   "ImmutabilityPolicyExpiresOn"
 );
 
-@@clientName(MetadataHeaders, "metadata", "rust");
-@@clientName(ObjectReplicationHeaders, "objectReplicationHeaders", "rust");
+@@clientName(MetadataHeaders.metadata, "metadata", "rust");
+@@clientName(ObjectReplicationHeaders.objectReplicationRules, "objectReplicationRules", "rust");
 
 @@alternateType(BlobPropertiesInternal.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.blobContentLength, uint64, "rust");
