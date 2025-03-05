@@ -12,7 +12,6 @@ simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, r
 
 > `autorest`
 To see additional help and options, run:
-
 > `autorest --help`
 ---
 
