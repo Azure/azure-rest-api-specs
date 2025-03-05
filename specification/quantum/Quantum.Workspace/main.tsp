@@ -55,23 +55,23 @@ namespace Quantum.Workspace {
     We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
     See https://github.com/Azure/typespec-azure/issues/494
     """
-  interface Jobs extends Quantum.Workspace.Services.JobOperations {}
+  interface Jobs {}
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
     We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
     See https://github.com/Azure/typespec-azure/issues/494
     """
-  interface Sessions extends Quantum.Workspace.Services.SessionOperations {}
+  interface Sessions {}
 
-  interface Providers extends Quantum.Workspace.Services.ProviderOperations {}
+  interface Providers {}
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
-  interface Storage extends Quantum.Workspace.Services.StorageOperations {}
+  interface Storage {}
 
-  interface Quotas extends Quantum.Workspace.Services.QuotaOperations {}
+  interface Quotas {}
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
       We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
     """
-  interface TopLevelItems extends Quantum.Workspace.Services.ItemsOperations {}
+  interface TopLevelItems {}
 }
