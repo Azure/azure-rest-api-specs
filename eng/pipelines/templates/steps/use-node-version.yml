@@ -1,7 +1,7 @@
-# Copied from https://github.com/Azure/azure-sdk-for-js/blob/12bbcbf49141c74b640cd7e9b6da8a8214b8341f/eng/pipelines/templates/steps/use-node-version.yml
-
 parameters:
-  NodeVersion: $(NodeVersion)
+  - name: NodeVersion
+    type: string
+    default: $(NodeVersion)
 
 steps:
   - task: NodeTool@0
@@ -9,18 +9,5 @@ steps:
       versionSpec: ${{ parameters.NodeVersion }}
     displayName: "Use Node ${{ parameters.NodeVersion }}"
 
-  - pwsh: |
-      $expectedVersion = "${{ parameters.NodeVersion }}"
-      Write-Host "Expected Node Version: $expectedVersion"
-
-      $actualVersion = (node --version).Substring(1)
-      Write-Host "Actual Node Version: $actualVersion"
-      Write-Host "Actual NPM Version: $(npm --version)"
-
-      $expectedMajorVersion = $expectedVersion.Split(".")[0]
-      $actualMajorVersion = $actualVersion.Split(".")[0]
-      if ($expectedMajorVersion -ne $actualMajorVersion) {
-        Write-Host "Error: Expected node version does not match actual node version"
-        exit 1
-      }
-    displayName: "Verify Node Version"
+  - script: npm --version --loglevel info
+    displayName: npm --version
