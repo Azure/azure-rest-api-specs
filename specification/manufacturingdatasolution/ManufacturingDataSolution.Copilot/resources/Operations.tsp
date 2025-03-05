@@ -21,6 +21,7 @@ alias DefaultServiceTraits = NoRepeatableRequests &
 alias apiOperations = Azure.Core.ResourceOperations<DefaultServiceTraits>;
 
 @doc("Operation Status")
+@lroStatus
 union OperationStatusValue {
   @doc("The operation is Accepted.")
   Accepted: "Accepted",
@@ -57,7 +58,7 @@ union OperationStatusValue {
 model OperationResultQuery {
   @doc("The operation status.")
   @visibility("read")
-  operationStatus: OperationStatusValue;
+  status: OperationStatusValue;
 
   @doc("The operation id.")
   @key("operationId")
