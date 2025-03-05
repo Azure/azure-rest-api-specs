@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -73,7 +71,6 @@ model Wafv2LoggingConfigurationProperties {
 @doc("Definition of awsWafv2LoggingConfiguration")
 model AwsWafv2LoggingConfigurationProperties {
   @doc("The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.")
-  @extension("x-ms-identifiers", [])
   logDestinationConfigs?: string[];
 
   @doc("Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.")
@@ -83,7 +80,7 @@ model AwsWafv2LoggingConfigurationProperties {
   managedByFirewallManager?: boolean;
 
   @doc("The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   redactedFields?: FieldToMatch[];
 
   @doc("The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.")
@@ -100,7 +97,7 @@ model LoggingFilterModelProperties {
   defaultBehavior?: DefaultBehavior;
 
   @doc("The filters that you want to apply to the logs.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   filters?: Filter[];
 }
 
@@ -144,7 +141,7 @@ model Filter {
   behavior?: FilterBehavior;
 
   @doc("Match conditions for the filter.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   conditions?: Condition[];
 
   @doc("Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.")
