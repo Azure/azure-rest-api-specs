@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
+    "resourceGroupName": "monitorRG",
+    "ruleName": "dynamicAlertRule",
+    "api-version": "2024-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Insights/metricAlerts/dynamicAlertRule",
+        "name": "dynamicAlertRule",
+        "type": "Microsoft.Insights/metricAlerts",
+        "location": "global",
+        "tags": {
+          "environment": "production"
+        },
+        "kind": "Query",
+        "properties": {
+          "description": "This is a dynamic query alert rule",
+          "severity": 2,
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Storage/storageAccounts/storageAccount1"
+          ],
+          "evaluationFrequency": "PT5M",
+          "criteria": {
+            "query": "Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m)"
+          },
+          "resolveConfiguration": {
+            "autoResolved": true,
+            "timeToResolve": "PT15M"
+          },
+          "targetResourceType": "Microsoft.Storage/storageAccounts",
+          "targetResourceRegion": "eastus",
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Insights/actionGroups/actionGroup1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
