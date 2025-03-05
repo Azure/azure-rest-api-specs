@@ -14,8 +14,9 @@ const repoRoot = path.resolve(path.dirname(currentFilePath), "../../../../../");
 describe("Utils", () => {
   describe("findFilesRecursive", () => {
     test("finds all tspconfig.yaml files recursively", () => {
+      const searchPath = path.normalize(`${repoRoot}/specification/contosowidgetmanager`);
       const results = findFilesRecursive(
-        `${repoRoot}/specification/contosowidgetmanager`,
+        searchPath,
         "tspconfig.yaml",
       );
       expect(results).toHaveLength(2);
@@ -46,7 +47,8 @@ describe("Utils", () => {
 
   describe("findReadmeFiles", () => {
     test("finds all readme.md files in directory", () => {
-      const results = findReadmeFiles(`${repoRoot}/specification/contosowidgetmanager`);
+      const searchPath = path.normalize(`${repoRoot}/specification/contosowidgetmanager`);
+      const results = findReadmeFiles(searchPath);
       expect(results).toHaveLength(2);
       expect(results).toContain(path.normalize(`${repoRoot}/specification/contosowidgetmanager/resource-manager/readme.md`));
       expect(results).toContain(path.normalize(`${repoRoot}/specification/contosowidgetmanager/data-plane/readme.md`));
