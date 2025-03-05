@@ -262,19 +262,9 @@ model MarkdownPartMetadataSettings {
 }
 
 /**
- * The content of markdown part.
+ * The settings content of markdown part.
  */
 model MarkdownPartMetadataSettingsContent {
-  /**
-   * The setting of the content of markdown part.
-   */
-  settings?: MarkdownPartMetadataSettingsContentSettings;
-}
-
-/**
- * The setting of the content of markdown part.
- */
-model MarkdownPartMetadataSettingsContentSettings {
   /**
    * The content of the markdown part.
    */
