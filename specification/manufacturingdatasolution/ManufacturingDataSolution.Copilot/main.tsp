@@ -21,9 +21,7 @@ using Azure.Core.Traits;
 //#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
 //#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 
-@service(with #{
-  title: "Microsoft.Industry.Manufacturing.MDS.Copilot",
-})
+@service(#{ title: "Microsoft.Industry.Manufacturing.MDS.Copilot" })
 
 @server(
   "https://mds-{mdsUniqueId}.{location}.cloudapp.azure.com/",
