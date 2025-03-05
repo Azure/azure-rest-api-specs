@@ -16,7 +16,7 @@ namespace Azure.AI.Unified;
 
 @doc("Index resource Definition")
 @discriminator("indexType")
-model Index extends AssetBase {
+model IndexVersion extends AssetBase {
   @doc("Type of index")
   indexType: IndexType;
 }
@@ -35,7 +35,7 @@ model PagedIndex {
 }
 
 @doc("Azure AI Search Index Definition")
-model AzureAISearchIndex extends AssetBase {
+model AzureAISearchIndex extends IndexVersion {
   @doc("Type of index")
   indexType: IndexType.azureSearch;
 
@@ -47,7 +47,7 @@ model AzureAISearchIndex extends AssetBase {
 }
 
 @doc("Managed Azure AI Search Index Definition")
-model ManagedAzureAISearchIndex extends AssetBase {
+model ManagedAzureAISearchIndex extends IndexVersion {
   @doc("Type of index")
   indexType: IndexType.managedAzureSearch;
 
@@ -56,7 +56,7 @@ model ManagedAzureAISearchIndex extends AssetBase {
 }
 
 @doc("CosmosDB Vector Store Index Definition")
-model ManagedAzureAISearchIndex extends AssetBase {
+model CosmosDBIndex extends AssetBase {
   @doc("Type of index")
   indexType: IndexType.cosmosDB;
 
