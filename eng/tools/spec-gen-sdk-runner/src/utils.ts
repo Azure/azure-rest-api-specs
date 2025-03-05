@@ -380,10 +380,14 @@ export function groupPathsByService(
   return serviceMap;
 }
 
-export function getLastPathSegment(path: string): string {
-  const segments = path.split("/");
-  // eslint-disable-next-line unicorn/prefer-at
-  return segments[segments.length - 1];
+export function getLastPathSegment(pathString: string): string {
+  if (pathString === "") {
+    return "";
+  }
+  // Normalize path separators and handle both Windows and Unix paths
+  const normalized = path.normalize(pathString);
+  const segments = normalized.split(path.sep);
+  return segments?.pop() ?? "";
 }
 
 export type SpecResults = {
