@@ -38,9 +38,7 @@ using TypeSpec.Versioning;
  * This Typespec represents the Desktop Virtualization API interfaces.
  */
 @armProviderNamespace
-@service({
-  title: "Desktop Virtualization API Client",
-})
+@service(#{ title: "Desktop Virtualization API Client" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.DesktopVirtualization;

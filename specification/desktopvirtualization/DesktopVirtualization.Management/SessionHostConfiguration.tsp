@@ -39,7 +39,7 @@ interface SessionHostConfigurations {
   /**
    * Update a SessionHostConfiguration.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     SessionHostConfiguration,
     SessionHostConfigurationPatch,

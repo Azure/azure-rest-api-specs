@@ -51,7 +51,7 @@ interface MSIXPackages {
   /**
    * Update an  MSIX Package.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.ArmCustomPatchSync<
     MSIXPackage,
     MSIXPackagePatch,

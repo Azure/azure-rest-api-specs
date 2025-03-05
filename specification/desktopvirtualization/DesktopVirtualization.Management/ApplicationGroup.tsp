@@ -78,7 +78,7 @@ interface ApplicationGroups {
   /**
    * Update an applicationGroup.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ApplicationGroup,
     ApplicationGroupPatch,

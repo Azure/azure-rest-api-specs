@@ -40,7 +40,7 @@ interface Applications {
   /**
    * Update an application.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Application,
     ApplicationPatch,

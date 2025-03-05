@@ -44,7 +44,7 @@ interface Workspaces {
   /**
    * Update a workspace.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Workspace,
     WorkspacePatch,

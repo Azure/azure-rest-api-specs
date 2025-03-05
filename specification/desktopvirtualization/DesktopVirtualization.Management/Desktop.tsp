@@ -34,7 +34,7 @@ interface Desktops {
   /**
    * Update a desktop.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Desktop,
     DesktopPatch,

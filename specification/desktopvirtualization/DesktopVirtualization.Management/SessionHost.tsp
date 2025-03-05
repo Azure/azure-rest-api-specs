@@ -35,7 +35,7 @@ interface SessionHosts {
   /**
    * Update a session host.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     SessionHost,
     SessionHostPatch,

@@ -75,7 +75,7 @@ interface SessionHostManagements {
   /**
    * Update a SessionHostManagement.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     SessionHostManagement,
     Response = SessionHostManagement,

@@ -38,7 +38,7 @@ interface AppAttachPackages {
   /**
    * Update an App Attach Package
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AppAttachPackage,
     AppAttachPackagePatch,

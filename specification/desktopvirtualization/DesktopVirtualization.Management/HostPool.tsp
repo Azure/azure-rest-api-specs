@@ -138,7 +138,7 @@ interface HostPools {
   /**
    * Update a host pool.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     HostPool,
     HostPoolPatch,

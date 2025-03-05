@@ -43,7 +43,7 @@ interface ScalingPlanPooledSchedules {
   /**
    * Update a ScalingPlanPooledSchedule.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ScalingPlanPooledSchedule,
     ScalingPlanPooledSchedulePatch,

@@ -1155,7 +1155,7 @@ model ServiceSpecification {
   /**
    * Specifications of the Log for Azure Monitoring
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -1217,7 +1217,7 @@ model AppAttachPackageProperties {
   /**
    * The provisioning state of the App Attach Package.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -1309,7 +1309,7 @@ model AppAttachPackageInfoProperties {
   /**
    * List of package dependencies.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   packageDependencies?: MsixPackageDependencies[];
 
   /**
@@ -1325,7 +1325,7 @@ model AppAttachPackageInfoProperties {
   /**
    * List of package applications.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   packageApplications?: MsixPackageApplications[];
 
   /**
@@ -1754,7 +1754,7 @@ model ActiveSessionHostConfigurationProperties {
   /**
    * The timestamp of the last update.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: utcDateTime;
 
   /**
@@ -1933,7 +1933,7 @@ model ApplicationGroupProperties {
   /**
    * ObjectId of ApplicationGroup. (internal use)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectId?: string;
 
   /**
@@ -1954,7 +1954,7 @@ model ApplicationGroupProperties {
   /**
    * Workspace arm path of ApplicationGroup.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   workspaceArmPath?: string;
 
   /**
@@ -1965,7 +1965,7 @@ model ApplicationGroupProperties {
   /**
    * Is cloud pc resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cloudPcResource?: boolean;
 
   /**
@@ -1983,20 +1983,20 @@ model ResourceModelWithAllowedPropertySet
   /**
    * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   managedBy?: string;
 
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. E.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[-\\w\\._,\\(\\)]+$")
   kind?: string;
 
   /**
    * The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
@@ -2029,13 +2029,13 @@ model Identity {
   /**
    * The principal ID of resource identity. The value must be an UUID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The tenant ID of resource. The value must be an UUID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
@@ -2131,7 +2131,7 @@ model HostPoolProperties {
   /**
    * ObjectId of HostPool. (internal use)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectId?: string;
 
   /**
@@ -2192,13 +2192,13 @@ model HostPoolProperties {
   /**
    * List of applicationGroup links.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   applicationGroupReferences?: string[];
 
   /**
    * List of App Attach Package links.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   appAttachPackageReferences?: string[];
 
   /**
@@ -2235,7 +2235,7 @@ model HostPoolProperties {
   /**
    * Is cloud pc resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cloudPcResource?: boolean;
 
   /**
@@ -2251,7 +2251,7 @@ model HostPoolProperties {
   /**
    * List of private endpoint connection associated with the specified resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /**
@@ -2326,7 +2326,7 @@ model AgentUpdateProperties {
   /**
    * List of maintenance windows. Maintenance windows are 2 hours long.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   maintenanceWindows?: MaintenanceWindowProperties[];
 }
 
@@ -2364,7 +2364,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The group ids for the private endpoint resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupIds?: string[];
 
   /**
@@ -2380,7 +2380,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
 
@@ -2391,7 +2391,7 @@ model PrivateEndpoint {
   /**
    * The ARM identifier for private endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -2428,7 +2428,7 @@ model ScalingPlanProperties {
   /**
    * ObjectId of scaling plan. (internal use)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectId?: string;
 
   /**
@@ -2459,13 +2459,13 @@ model ScalingPlanProperties {
   /**
    * List of ScalingPlanPooledSchedule definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   schedules?: ScalingSchedule[];
 
   /**
    * List of ScalingHostPoolReference definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["hostPoolArmPath"])
+  @OpenAPI.extension("x-ms-identifiers", #["hostPoolArmPath"])
   hostPoolReferences?: ScalingHostPoolReference[];
 }
 
@@ -2619,7 +2619,7 @@ model WorkspaceProperties {
   /**
    * ObjectId of Workspace. (internal use)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectId?: string;
 
   /**
@@ -2640,7 +2640,7 @@ model WorkspaceProperties {
   /**
    * Is cloud pc resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cloudPcResource?: boolean;
 
   /**
@@ -2651,7 +2651,7 @@ model WorkspaceProperties {
   /**
    * List of private endpoint connection associated with the specified resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
 }
 
@@ -2760,7 +2760,7 @@ model ApplicationProperties {
   /**
    * ObjectId of Application. (internal use)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectId?: string;
 
   /**
@@ -2781,19 +2781,19 @@ model ApplicationProperties {
   /**
    * Specifies the package family name for MSIX applications
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   msixPackageFamilyName?: string;
 
   /**
    * Specifies the package application Id for MSIX applications
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   msixPackageApplicationId?: string;
 
   /**
    * Resource Type of Application.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   applicationType?: RemoteApplicationType;
 
   /**
@@ -2824,13 +2824,13 @@ model ApplicationProperties {
   /**
    * Hash of the icon.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   iconHash?: string;
 
   /**
    * the icon a 64 bit string as a byte array.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   iconContent?: bytes;
 }
 
@@ -2927,7 +2927,7 @@ model DesktopProperties {
   /**
    * ObjectId of Desktop. (internal use)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectId?: string;
 
   /**
@@ -2943,13 +2943,13 @@ model DesktopProperties {
   /**
    * Hash of the icon.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   iconHash?: string;
 
   /**
    * The icon a 64 bit string as a byte array.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   iconContent?: bytes;
 }
 
@@ -3255,7 +3255,7 @@ model AgentUpdatePatchProperties {
   /**
    * List of maintenance windows. Maintenance windows are 2 hours long.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   maintenanceWindows?: MaintenanceWindowPatchProperties[];
 }
 
@@ -3357,7 +3357,7 @@ model ExpandMsixImageProperties {
   /**
    * List of package dependencies.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["dependencyName"])
+  @OpenAPI.extension("x-ms-identifiers", #["dependencyName"])
   packageDependencies?: MsixPackageDependencies[];
 
   /**
@@ -3373,7 +3373,7 @@ model ExpandMsixImageProperties {
   /**
    * List of package applications.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["appId"])
+  @OpenAPI.extension("x-ms-identifiers", #["appId"])
   packageApplications?: MsixPackageApplications[];
 
   /**
@@ -3409,13 +3409,13 @@ model RegistrationTokenList {
   /**
    * List of RegistrationToken definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   value?: RegistrationTokenMinimal[];
 
   /**
    * Link to the next page of results.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 
@@ -3463,13 +3463,13 @@ model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupId?: string;
 
   /**
    * The private link resource required member names.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
@@ -3491,7 +3491,7 @@ model SessionHostProperties {
   /**
    * ObjectId of SessionHost. (internal use)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectId?: string;
 
   /**
@@ -3517,13 +3517,13 @@ model SessionHostProperties {
   /**
    * Virtual Machine Id of SessionHost's underlying virtual machine.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachineId?: string;
 
   /**
    * Resource Id of SessionHost's underlying virtual machine.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceId?: string;
 
   /**
@@ -3544,7 +3544,7 @@ model SessionHostProperties {
   /**
    * The timestamp of the status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   statusTimestamp?: utcDateTime;
 
   /**
@@ -3566,7 +3566,7 @@ model SessionHostProperties {
   /**
    * The timestamp of the last update.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastUpdateTime?: utcDateTime;
 
   /**
@@ -3577,20 +3577,20 @@ model SessionHostProperties {
   /**
    * The last time update was completed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastSessionHostUpdateTime?: utcDateTime;
 
   /**
    * SessionHostConfiguration version reference at the time the update is initiated, in the format of date time. Example: 2024-04-26T04:56:45Z
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sessionHostConfiguration?: string;
 
   /**
    * List of SessionHostHealthCheckReports
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["healthCheckName"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["healthCheckName"])
   sessionHostHealthCheckResults?: SessionHostHealthCheckReport[];
 }
 
@@ -3601,19 +3601,19 @@ model SessionHostHealthCheckReport {
   /**
    * Represents the name of the health check operation performed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   healthCheckName?: HealthCheckName;
 
   /**
    * Represents the Health state of the health check we performed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   healthCheckResult?: HealthCheckResult;
 
   /**
    * Additional detailed information on the failure.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   additionalFailureDetails?: SessionHostHealthCheckFailureDetails;
 }
 
@@ -3624,19 +3624,19 @@ model SessionHostHealthCheckFailureDetails {
   /**
    * Failure message: hints on what is wrong and how to recover.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * Error code corresponding for the failure.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorCode?: int32;
 
   /**
    * The timestamp of the last update.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastHealthCheckDateTime?: utcDateTime;
 }
 
@@ -3684,7 +3684,7 @@ model UserSessionProperties {
   /**
    * ObjectId of user session. (internal use)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectId?: string;
 
   /**
@@ -3772,13 +3772,13 @@ model ScalingPlanPatchProperties {
   /**
    * List of ScalingSchedule definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   schedules?: ScalingSchedule[];
 
   /**
    * List of ScalingHostPoolReference definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["hostPoolArmPath"])
+  @OpenAPI.extension("x-ms-identifiers", #["hostPoolArmPath"])
   hostPoolReferences?: ScalingHostPoolReference[];
 }
 
@@ -4373,7 +4373,7 @@ model SessionHostConfigurationProperties {
   /**
    * The timestamp of the last update.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: utcDateTime;
 
   /**
@@ -4385,7 +4385,7 @@ model SessionHostConfigurationProperties {
   /**
    * Provisioning state of the Session Host Configuration.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateSHC;
 
   /**
@@ -4649,7 +4649,7 @@ model MSIXPackageProperties {
   /**
    * List of package dependencies.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["dependencyName"])
+  @OpenAPI.extension("x-ms-identifiers", #["dependencyName"])
   packageDependencies?: MsixPackageDependencies[];
 
   /**
@@ -4665,7 +4665,7 @@ model MSIXPackageProperties {
   /**
    * List of package applications.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["appId"])
+  @OpenAPI.extension("x-ms-identifiers", #["appId"])
   packageApplications?: MsixPackageApplications[];
 }
 
@@ -4719,7 +4719,7 @@ model MSIXPackagePatchProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "It is a valid property"
 model etagProperty {
   @doc("If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 }
 

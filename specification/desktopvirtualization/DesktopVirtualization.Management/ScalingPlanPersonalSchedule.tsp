@@ -43,7 +43,7 @@ interface ScalingPlanPersonalSchedules {
   /**
    * Update a ScalingPlanPersonalSchedule.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ScalingPlanPersonalSchedule,
     ScalingPlanPersonalSchedulePatch,

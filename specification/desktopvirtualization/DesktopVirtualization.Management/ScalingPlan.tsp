@@ -45,7 +45,7 @@ interface ScalingPlans {
   /**
    * Update a scaling plan.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ScalingPlan,
     ScalingPlanPatch,
