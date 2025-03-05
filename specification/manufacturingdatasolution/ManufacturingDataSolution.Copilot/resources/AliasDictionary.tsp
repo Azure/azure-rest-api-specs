@@ -3,58 +3,45 @@ import "@typespec/http";
 import "@typespec/openapi3";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./../models/common.tsp";
+import "./../models/aliasDictionary.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using MdsSolution.CopilotService.AliasDictionary.Models;
 
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService.AliasDictionary;
 
-@resource("aliases")
-@doc("This is the request model for Alias")
-model Alias {
-  @doc("Id for the alias")
-  @key("id")
-  @visibility("read")
-  id: string;
-
-  @doc("Key for the alias")
-  name: string;
-
-  @doc("List of aliases")
-  aliases: string[];
-
-  @doc("Indicates if the alias is enabled")
-  @visibility("read")
-  isCustom: boolean = true;
-
-  @doc("Indicates if the alias is enabled")
-  @visibility("read")
-  enabled: boolean;
-}
-
-@doc("This is the patch request to update the status of Alias")
-model ActivateAlias {
-  @doc("status of the alias")
-  enabled: boolean;
-}
-
-alias ServiceTraits = SupportsRepeatableRequests &
-  SupportsConditionalRequests &
-  SupportsClientRequestId;
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
+
+alias jobLocationResponseHeaders = ResponseHeadersTrait<
+{
+  @doc("The background job location.")
+  @header
+  @pollingLocation
+  operationLocation: string;
+},
+TraitContext.Create | TraitContext.Update | TraitContext.Delete
+>;
 
 interface Aliases {
   @doc("Get an alias by Id")
   getAlias is Operations.ResourceRead<Alias>;
 
   @doc("Create an alias")
-  createAlias is Operations.ResourceCreateWithServiceProvidedName<Alias>;
+  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult)
+  createAlias is Operations.LongRunningResourceCreateWithServiceProvidedName<Alias, jobLocationResponseHeaders>;
+
+  @doc("Update an alias")
+  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult)
+  updateAlias is Operations.LongRunningResourceCreateOrUpdate<Alias>;
 
   @doc("Delete an alias")
   deleteAlias is Operations.ResourceDelete<Alias>;

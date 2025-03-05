@@ -4,7 +4,6 @@ import "@typespec/openapi3";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./../models/copilotmodels.tsp";
-import "./../models/common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -15,9 +14,9 @@ using TypeSpec.Versioning;
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService.TestQueryService;
 
-alias ServiceTraits = SupportsRepeatableRequests &
-SupportsConditionalRequests &
-SupportsClientRequestId;
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
 
 alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
