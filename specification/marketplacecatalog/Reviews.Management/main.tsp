@@ -14,10 +14,7 @@ using TypeSpec.Versioning;
  * Microsoft Marketplace Rating And Reviews API
  */
 @armProviderNamespace("Microsoft.Marketplace")
-@service(#{
-  title: "Microsoft Marketplace Rating And Reviews API",
-  version: "2023-01-01-preview",
-})
+@service(#{ title: "Microsoft Marketplace Rating And Reviews API" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Marketplace;
