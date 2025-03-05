@@ -40,7 +40,7 @@ op getApplicationCustomization is Azure.Batch.ReadOperationNew<
 
 @doc("Optional parameters for List Applications operation.")
 model ListBatchApplicationsOptions {
-  ...Azure.Batch.BatchCommonListHeaders;
+  ...Azure.Batch.CommonListParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
@@ -62,7 +62,7 @@ op listApplicationsCustomization is Azure.Batch.ListOperationNew<
 // List Pool Usage Metrics Operation
 @doc("Optional parameters for List Pool Usage Metrics operation.")
 model ListBatchPoolUsageMetricsOptions {
-  ...Azure.Batch.BatchCommonListHeaders;
+  ...Azure.Batch.CommonListParameters;
   ...Azure.Batch.ListPoolUsageMetricsParameters;
 }
 
