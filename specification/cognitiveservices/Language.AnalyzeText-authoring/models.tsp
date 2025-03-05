@@ -84,7 +84,6 @@ union ErrorCode {
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("TextAuthoringInnerErrorCode", "csharp")
-@clientNamespace("Language.Text.Authoring.Common")
 union InnerErrorCode {
   string,
   InvalidRequest: "InvalidRequest",
@@ -105,7 +104,6 @@ union InnerErrorCode {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("StringIndexType", "csharp")
-@clientNamespace("Language.Text.Authoring.Common")
 union StringIndexType {
   string,
 
@@ -163,7 +161,6 @@ union Sentiment {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("TextAuthoringCompositionMode", "csharp")
-@clientNamespace("Language.Text.Authoring.Common")
 union CompositionSetting {
   string,
 
