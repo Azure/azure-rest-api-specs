@@ -2,13 +2,14 @@ import "@typespec/http";
 import "@typespec/openapi3";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./resources/QueryApi.tsp";
+import "./resources/query.tsp";
 import "./resources/Operations.tsp";
 import "./resources/Instructions.tsp";
 import "./resources/ExampleQuery.tsp";
 import "./resources/AliasDictionary.tsp";
 import "./resources/Health.tsp";
 import "./resources/TestQuery.tsp";
+import "./resources/Feedback.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -17,7 +18,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 
 //using MdsSolution.CopilotService.Health;
-//using MdsSolution.CopilotService.QueryApis;
+using MdsSolution.CopilotService.QueryService;
 using MdsSolution.CopilotService.OperationStatus;
 using MdsSolution.CopilotService.Instructions;
 //using MdsSolution.CopilotService.ExampleQueryService;
@@ -31,7 +32,6 @@ using MdsSolution.CopilotService.TestQueryService;
 @service({
   title: "Microsoft.Industry.Manufacturing.MDS.Copilot",
 })
-
 @server("https://localhost:8002") //TODO: Add the correct url
 //TODO: Add the correct url
 @useAuth(AadOauth2Auth<["https://azure-mds-service/.default"]>)

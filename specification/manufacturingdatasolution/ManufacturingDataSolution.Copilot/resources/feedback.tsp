@@ -8,8 +8,6 @@ import "./../models/common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using CopilotModels;
-using CopilotCommon;
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Versioning;
@@ -18,45 +16,55 @@ using TypeSpec.Versioning;
 namespace MdsSolution.CopilotService.FeedbackService;
 
 alias ServiceTraits = SupportsRepeatableRequests &
-    SupportsConditionalRequests &
-    SupportsClientRequestId;
+  SupportsConditionalRequests &
+  SupportsClientRequestId;
 
 alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-@doc("feedbackRequest") 
+@doc("feedbackRequest")
+@resource("feedback")
 model FeedbackRequest {
-    @doc("The query id")
-    operationId: string;
+  @doc("The query id")
+  operationId: string;
 
-    @doc("conversation id")
-    conversationId: string;
+  @doc("conversation id")
+  conversationId: string;
 
-    @doc("The feedback")
-    feedback: FeedbackCategory;
+  @key
+  @doc("The feedback")
+  @visibility("create")
+  feedback: FeedbackCategory;
 
-    @doc("QueryEndpoint")
-    queryEndpoint: QueryEndpoint;
+  @doc("QueryEndpoint")
+  queryEndpoint: QueryEndpoint;
 }
 
 @doc("Feedback category")
-enum FeedbackCategory {
-  @doc
+union FeedbackCategory {
+  @doc("Neutral feedback.")
   Neutral: "Neutral",
 
-  @doc
+  @doc("Positive feedback.")
   ThumbUp: "ThumbUp",
 
   @doc("Negative feedback.")
-  ThumbDown: "ThumbDown",  
+  ThumbDown: "ThumbDown",
+
+  string,
 }
 
 @doc("Query endpoint")
-enum QueryEndpoint {
-    V3: "V3",
-    Assistant: "Assistant"
+union QueryEndpoint {
+  @doc("V3 endpoint")
+  V3: "V3",
+
+  @doc("Assistant endpoint")
+  Assistant: "Assistant",
+
+  string
 }
 
-interface Feedback { 
-    @doc("Send feedback for a query")
-    submitFeedback is apiOperations.ResourceCreateOrUpdate<FeedbackRequest>; 
+interface Feedback {
+  @doc("Send feedback for a query")
+  submitFeedback is apiOperations.ResourceCreateWithServiceProvidedName<FeedbackRequest>;
 }

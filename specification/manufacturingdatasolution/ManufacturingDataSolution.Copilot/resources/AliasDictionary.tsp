@@ -62,8 +62,6 @@ interface Aliases {
   @doc("List all aliases")
   listAliases is Operations.ResourceList<Alias>;
 
-  @doc("Update the status of an alias")
-  updateAliasStatus is Operations.ResourceCreateOrUpdate<Alias>;
 
   @doc("Deactivate an alias")
   activateAlias is Operations.ResourceAction<
