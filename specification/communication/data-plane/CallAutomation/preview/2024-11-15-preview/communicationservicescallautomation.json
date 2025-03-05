@@ -2233,7 +2233,7 @@
         },
         "teamsPhoneCallDetails": {
           "$ref":"#/definitions/TeamsPhoneCallDetails",
-          "description": "Custom calling context call details headers"
+          "description": "Custom calling context for Teams Phone Call Details"
         }
       }
     },
@@ -2241,13 +2241,13 @@
       "description": "The call details which will be sent to the target",
       "type": "object",
       "properties": {
-        "callerDetails": {
+        "teamsPhoneCallerDetails": {
           "description": "Container for details relating to the original caller of the call.",
-          "$ref": "#/definitions/CallerDetails"
+          "$ref": "#/definitions/TeamsPhoneCallerDetails"
         },
-        "sourceDetails": {
+        "teamsPhoneSourceDetails": {
           "description": "Container for details relating to the entity responsible for the creation of these call details.",
-          "$ref": "#/definitions/SourceDetails"
+          "$ref": "#/definitions/TeamsPhoneSourceDetails"
         },
         "sessionId": {
           "description": "Id to exclusively identify this call session. IVR will use this for their telemetry/reporting.",
@@ -2273,13 +2273,13 @@
           "description": "Sentiment of the call thus far.",
           "type": "string"
         },
-        "suggestedActions ": {
+        "suggestedActions": {
           "description": "Recommendations for resolving the issue based on the customer’s intent and interaction history.",
           "type": "string"
         }
       }
     },
-    "CallerDetails": {
+    "TeamsPhoneCallerDetails": {
       "description": "Container for details relating to the original caller of the call.",
       "type": "object",
       "properties": {
@@ -2296,19 +2296,19 @@
           "type": "string"
         },
         "isAuthenticated": {
-          "description": "Bit indicating whether the caller was authenticated.",
+          "description": "Indicating whether the caller was authenticated.",
           "type": "boolean"
         },
         "additionalCallerInformation ": {
           "description": "A set of key value pairs (max 10, any additional entries would be ignored) which a bot author wants to pass to the Teams Client for display to the agent. ",
-          "type": "dictionary",
-          "items": {
-            "type": "string"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TeamsPhoneParticipantProperties"
           }
         }
       }
     },
-    "SourceDetails": {
+    "TeamsPhoneSourceDetails": {
       "description": "Container for details relating to the entity responsible for the creation of these call details.",
       "type": "object",
       "properties": {
@@ -2317,8 +2317,9 @@
           "$ref": "#/definitions/CommunicationIdentifierModel"
         },
         "language": {
-          "description": "Language of the source entity passing along the call details.",
-          "type": "string"
+          "description": "Language of the source entity passing along the call details, passed in the ISO-639 standard.",
+          "type": "string",
+          "example": "en-US"
         },
         "status": {
           "description": "Status of the source entity passing along the call details.",
@@ -2326,11 +2327,36 @@
         },
         "intendedTargets": {
           "description": "Intended targets of the source entity passing along the call details.",
-          "type": "dictionary",
-          "items": {
-            "type": "string",
-            "$ref": "#/definitions/CommunicationIdentifierModel"
-          }
+          "type": "object",
+          "$ref": "#/definitions/TeamsPhoneIntendedTargets"
+        }
+      }
+    },
+    "TeamsPhoneParticipantProperties": {
+      "description": "Properties of a participant",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Key of the property",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of the property",
+          "type": "string"
+        }
+      }
+    },
+    "TeamsPhoneIntendedTargets": {
+      "description": "Intended targets of the source entity passing along the call details.",
+      "type": "object",
+      "properties": {
+        "target": {
+          "description": "Target of the source entity passing along the call details.",
+          "$ref": "#/definitions/CommunicationIdentifierModel"
+        },
+        "status": {
+          "description": "Status of the target of the source entity passing along the call details.",
+          "type": "string"
         }
       }
     },
