@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Dynatrace.Observability",
-    "version": "2023-04-20-preview"
+    "version": "2023-08-14-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1330,6 +1330,9 @@
             "update",
             "create"
           ]
+        },
+        "properties": {
+          "$ref": "#/definitions/MonitorUpdateProperties"
         }
       },
       "description": "The updatable properties of the MonitorResource."
@@ -1585,6 +1588,16 @@
         "name": "LogModule",
         "modelAsString": true
       }
+    },
+    "MonitorUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "planData": {
+          "$ref": "#/definitions/PlanData",
+          "description": "The new Billing plan information."
+        }
+      },
+      "description": "The set of properties that can be updated in a PATCH request to a monitor resource."
     },
     "MonitorProperties": {
       "type": "object",

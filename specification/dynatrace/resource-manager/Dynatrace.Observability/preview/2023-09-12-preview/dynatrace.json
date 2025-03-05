@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Dynatrace.Observability",
-    "version": "2023-08-22-preview"
+    "version": "2023-09-12-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1047,6 +1047,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/upgradePlan": {
+      "post": {
+        "operationId": "Monitors_UpgradePlan",
+        "summary": "Upgrades the billing Plan for Dynatrace monitor resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpgradePlanParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Monitors"
+        ],
+        "x-ms-examples": {
+          "Monitors_UpgradePlan_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_UpgradePlan_MaximumSet_Gen.json"
+          },
+          "Monitors_UpgradePlan_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_UpgradePlan_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/getSSODetails": {
       "post": {
         "operationId": "Monitors_GetSSODetails",
@@ -1604,6 +1656,16 @@
         }
       },
       "description": "The set of properties that can be updated in a PATCH request to a monitor resource."
+    },
+    "UpgradePlanRequest": {
+      "type": "object",
+      "properties": {
+        "planData": {
+          "$ref": "#/definitions/PlanData",
+          "description": "The new Billing plan information."
+        }
+      },
+      "description": "The billing plan properties for the upgrade plan call."
     },
     "MonitorProperties": {
       "type": "object",
@@ -2274,6 +2336,16 @@
       "description": "The details of the log status request.",
       "schema": {
         "$ref": "#/definitions/LogStatusRequest"
+      }
+    },
+    "UpgradePlanParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "request",
+      "in": "body",
+      "required": true,
+      "description": "The details of the upgrade plan request.",
+      "schema": {
+        "$ref": "#/definitions/UpgradePlanRequest"
       }
     },
     "MetricStatusRequestParameter": {

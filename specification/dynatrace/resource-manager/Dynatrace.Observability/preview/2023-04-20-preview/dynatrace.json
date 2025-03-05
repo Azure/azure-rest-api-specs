@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Dynatrace.Observability",
-    "version": "2023-03-01-preview"
+    "version": "2023-04-20-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -944,6 +944,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/getMetricStatus": {
+      "post": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_GetMetricStatus",
+        "description": "Get metric status",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitors resource",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_GetMetricStatus_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_GetMetricStatus_MaximumSet_Gen.json"
+          },
+          "Monitors_GetMetricStatus_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_GetMetricStatus_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listAppServices": {
       "post": {
         "operationId": "Monitors_ListAppServices",
@@ -1206,6 +1255,20 @@
         }
       },
       "description": "Details of App Services having Dynatrace OneAgent installed"
+    },
+    "MetricsStatusResponse": {
+      "type": "object",
+      "properties": {
+        "azureResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Azure resource IDs"
+        }
+      },
+      "description": "Response of get metrics status operation"
     },
     "AppServiceListResponse": {
       "type": "object",

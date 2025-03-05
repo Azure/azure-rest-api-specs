@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Dynatrace.Observability",
-    "version": "2021-09-01-preview"
+    "version": "2022-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -47,51 +47,6 @@
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/getAccountCredentials": {
-      "post": {
-        "operationId": "Monitors_GetAccountCredentials",
-        "summary": "Gets the user account credentials for a Monitor",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Dynatrace account API Key",
-            "schema": {
-              "$ref": "#/definitions/AccountInfoSecure"
-            }
-          },
-          "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "tags": [
-          "Monitors"
-        ],
-        "x-ms-examples": {
-          "Monitors_GetAccountCredentials_MaximumSet_Gen": {
-            "$ref": "./examples/Monitors_GetAccountCredentials_MaximumSet_Gen.json"
-          },
-          "Monitors_GetAccountCredentials_MinimumSet_Gen": {
-            "$ref": "./examples/Monitors_GetAccountCredentials_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listMonitoredResources": {
       "post": {
         "operationId": "Monitors_ListMonitoredResources",
@@ -632,61 +587,6 @@
           }
         }
       },
-      "patch": {
-        "operationId": "TagRules_Update",
-        "summary": "Update a TagRule",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RuleSetNameParameter"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "required": true,
-            "description": "The resource properties to be updated.",
-            "schema": {
-              "$ref": "#/definitions/TagRuleUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TagRule"
-            }
-          },
-          "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "tags": [
-          "TagRules"
-        ],
-        "x-ms-examples": {
-          "TagRules_Update_MaximumSet_Gen": {
-            "$ref": "./examples/TagRules_Update_MaximumSet_Gen.json"
-          },
-          "TagRules_Update_MinimumSet_Gen": {
-            "$ref": "./examples/TagRules_Update_MinimumSet_Gen.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "TagRules_Delete",
         "x-ms-long-running-operation": true,
@@ -953,7 +853,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listHosts": {
       "post": {
         "operationId": "Monitors_ListHosts",
-        "summary": "List the compute resources currently being monitored by the Dynatrace resource.",
+        "summary": "List the VM/VMSS resources currently being monitored by the Dynatrace resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -1151,27 +1051,6 @@
     }
   },
   "definitions": {
-    "AccountInfoSecure": {
-      "type": "object",
-      "properties": {
-        "accountId": {
-          "type": "string",
-          "description": "Account Id of the account this environment is linked to",
-          "readOnly": true
-        },
-        "apiKey": {
-          "$ref": "#/definitions/SecureString",
-          "description": "API Key of the user account",
-          "readOnly": true
-        },
-        "regionId": {
-          "type": "string",
-          "description": "Region in which the account is created",
-          "readOnly": true
-        }
-      },
-      "description": "Dynatrace account API Key"
-    },
     "MonitoredResourceListResponse": {
       "type": "object",
       "properties": {
@@ -1288,10 +1167,6 @@
         "properties": {
           "$ref": "#/definitions/MonitorProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
           "x-ms-client-flatten": true
         },
         "systemData": {
@@ -1328,26 +1203,6 @@
             "update",
             "create"
           ]
-        },
-        "monitoringStatus": {
-          "$ref": "#/definitions/MonitoringStatus",
-          "description": "Status of the monitor."
-        },
-        "marketplaceSubscriptionStatus": {
-          "$ref": "#/definitions/MarketplaceSubscriptionStatus",
-          "description": "Marketplace subscription status."
-        },
-        "dynatraceEnvironmentProperties": {
-          "$ref": "#/definitions/DynatraceEnvironmentProperties",
-          "description": "Properties of the Dynatrace environment."
-        },
-        "userInfo": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "User info."
-        },
-        "planData": {
-          "$ref": "#/definitions/PlanData",
-          "description": "Billing plan information."
         }
       },
       "description": "The updatable properties of the MonitorResource."
@@ -1368,7 +1223,10 @@
           "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a MonitorResource list operation."
+      "description": "The response of a MonitorResource list operation.",
+      "required": [
+        "value"
+      ]
     },
     "TagRule": {
       "type": "object",
@@ -1376,10 +1234,6 @@
         "properties": {
           "$ref": "#/definitions/MonitoringTagRulesProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
           "x-ms-client-flatten": true
         },
         "systemData": {
@@ -1398,20 +1252,6 @@
         }
       ]
     },
-    "TagRuleUpdate": {
-      "type": "object",
-      "properties": {
-        "logRules": {
-          "$ref": "#/definitions/LogRules",
-          "description": "Set of rules for sending logs for the Monitor resource."
-        },
-        "metricRules": {
-          "$ref": "#/definitions/MetricRules",
-          "description": "Set of rules for sending metrics for the Monitor resource."
-        }
-      },
-      "description": "The updatable properties of the TagRule."
-    },
     "TagRuleListResult": {
       "type": "object",
       "properties": {
@@ -1428,7 +1268,10 @@
           "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a TagRule list operation."
+      "description": "The response of a TagRule list operation.",
+      "required": [
+        "value"
+      ]
     },
     "DynatraceSingleSignOnResource": {
       "type": "object",
@@ -1436,10 +1279,6 @@
         "properties": {
           "$ref": "#/definitions/DynatraceSingleSignOnProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
           "x-ms-client-flatten": true
         },
         "systemData": {
@@ -1474,13 +1313,10 @@
           "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a DynatraceSingleSignOnResource list operation."
-    },
-    "SecureString": {
-      "type": "string",
-      "format": "password",
-      "x-ms-secret": true,
-      "description": "Credential string."
+      "description": "The response of a DynatraceSingleSignOnResource list operation.",
+      "required": [
+        "value"
+      ]
     },
     "MonitoredResource": {
       "type": "object",
@@ -1745,11 +1581,11 @@
       "type": "object",
       "properties": {
         "firstName": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "First Name of the user"
         },
         "lastName": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "Last Name of the user"
         },
         "emailAddress": {
@@ -1772,15 +1608,15 @@
       "type": "object",
       "properties": {
         "usageType": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "different usage type like PAYG/COMMITTED. this could be enum"
         },
         "billingCycle": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "different billing cycles like MONTHLY/WEEKLY. this could be enum"
         },
         "planDetails": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "plan id as published by Dynatrace"
         },
         "effectiveDate": {
@@ -1841,6 +1677,10 @@
       "description": "Set of rules for sending metrics for the Monitor resource.",
       "type": "object",
       "properties": {
+        "sendingMetrics": {
+          "$ref": "#/definitions/SendingMetricsStatus",
+          "description": "Flag specifying if metrics from Azure resources should be sent for the Monitor resource."
+        },
         "filteringTags": {
           "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
           "type": "array",
@@ -2020,7 +1860,12 @@
           "type": "string",
           "description": "Azure region in which we want to link the environment"
         }
-      }
+      },
+      "required": [
+        "tenantId",
+        "userPrincipal",
+        "region"
+      ]
     },
     "LinkableEnvironmentResponse": {
       "description": "Response for getting all the linkable environments",
@@ -2066,7 +1911,10 @@
           "type": "string",
           "description": "user principal id of the user"
         }
-      }
+      },
+      "required": [
+        "userPrincipal"
+      ]
     },
     "SSODetailsResponse": {
       "type": "object",
@@ -2111,11 +1959,6 @@
         "name": "SSOStatus",
         "modelAsString": true
       }
-    },
-    "MediumString": {
-      "type": "string",
-      "maxLength": 50,
-      "description": "Shorthand for setting length limit."
     },
     "email": {
       "type": "string",

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Dynatrace.Observability",
-    "version": "2023-09-20-preview"
+    "version": "2023-11-11-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -484,6 +484,51 @@
           },
           "Monitors_GetVMHostPayload_MinimumSet_Gen": {
             "$ref": "./examples/Monitors_GetVMHostPayload_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/updateAgentStatus": {
+      "post": {
+        "operationId": "Monitors_UpdateAgentStatus",
+        "summary": "Create/Update the list of all resources that have Dynatrace agent installed through the Liftr experience.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentStatusParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Monitors"
+        ],
+        "x-ms-examples": {
+          "Monitors_UpdateAgentStatus_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_UpdateAgentStatus_MaximumSet_Gen.json"
+          },
+          "Monitors_UpdateAgentStatus_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_UpdateAgentStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -1962,6 +2007,28 @@
       },
       "description": "Details of resource being monitored by Dynatrace monitor resource"
     },
+    "AgentStatus": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM id of the resource."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "liftrResourceId": {
+          "type": "string",
+          "description": "Resource Id of the associated Dynatrace monitor resource."
+        },
+        "dynatraceEnvironmentId": {
+          "type": "string",
+          "description": "Environment Id of the associated Dynatrace monitor resource."
+        }
+      },
+      "description": "Details of resource that has Dynatrace agent installed through the Liftr experience."
+    },
     "VMInfo": {
       "type": "object",
       "properties": {
@@ -2194,6 +2261,18 @@
       ],
       "x-ms-enum": {
         "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true
+      }
+    },
+    "Action": {
+      "type": "string",
+      "description": "Install/Uninstall action.",
+      "enum": [
+        "Install",
+        "Uninstall"
+      ],
+      "x-ms-enum": {
+        "name": "Action",
         "modelAsString": true
       }
     },
@@ -2873,6 +2952,27 @@
       "required": [
         "marketplaceSubscriptionId"
       ]
+    },
+    "AgentStatusRequest": {
+      "description": "Request for updating resources given in list according to action.",
+      "type": "object",
+      "properties": {
+        "agentStatusList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentStatus"
+          },
+          "description": "The list of resources."
+        },
+        "action": {
+          "$ref": "#/definitions/Action",
+          "description": "Install/Uninstall action."
+        }
+      },
+      "required": [
+        "agentStatusList",
+        "action"
+      ]
     }
   },
   "parameters": {
@@ -2909,6 +3009,16 @@
       "description": "Marketplace Subscription Id",
       "schema": {
         "$ref": "#/definitions/MarketplaceSubscriptionIdRequest"
+      }
+    },
+    "AgentStatusParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "request",
+      "in": "body",
+      "required": true,
+      "description": "List of resources and action",
+      "schema": {
+        "$ref": "#/definitions/AgentStatusRequest"
       }
     },
     "DynatraceEnvironmentId": {

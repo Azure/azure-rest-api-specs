@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Dynatrace.Observability",
-    "version": "2023-11-24-preview"
+    "version": "2024-04-24-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -371,10 +371,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/DynatraceEnvironmentId"
@@ -390,7 +390,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -413,10 +413,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/DynatraceEnvironmentId"
@@ -432,7 +432,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -491,7 +491,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/updateAgentStatus": {
       "post": {
         "operationId": "Monitors_UpdateAgentStatus",
-        "summary": "Create/Update the list of all resources that have Dynatrace agent installed through the Liftr experience.",
+        "summary": "Create/Update the list of all resources that have Dynatrace agent installed through the Azure Dynatrace resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -713,9 +713,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted."
           },
@@ -1005,9 +1002,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted."
           },
@@ -1148,10 +1142,6 @@
             "schema": {
               "$ref": "#/definitions/MarketplaceSaaSResourceDetailsResponse"
             }
-          },
-          "404": {
-            "description": "No Marketplace SaaS resource found for the given tenant Id",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1564,10 +1554,6 @@
               "$ref": "#/definitions/SSODetailsResponse"
             }
           },
-          "401": {
-            "description": "User has insufficient permissions to update SSO configuration",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
@@ -1866,6 +1852,10 @@
         },
         "properties": {
           "$ref": "#/definitions/MonitorUpdateProperties"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "description": "The updatable properties of the MonitorResource."
@@ -2018,7 +2008,7 @@
           "type": "string",
           "description": "The type of Azure resource."
         },
-        "liftrResourceId": {
+        "dynatraceResourceId": {
           "type": "string",
           "description": "Resource Id of the associated Dynatrace monitor resource."
         },
@@ -2027,7 +2017,7 @@
           "description": "Environment Id of the associated Dynatrace monitor resource."
         }
       },
-      "description": "Details of resource that has Dynatrace agent installed through the Liftr experience."
+      "description": "Details of resource that has Dynatrace agent installed through the Azure Dynatrace resource."
     },
     "VMInfo": {
       "type": "object",
@@ -2076,7 +2066,8 @@
       "description": "The monitoring mode of OneAgent",
       "enum": [
         "CLOUD_INFRASTRUCTURE",
-        "FULL_STACK"
+        "FULL_STACK",
+        "DISCOVERY"
       ],
       "x-ms-enum": {
         "name": "MonitoringType",
@@ -2230,7 +2221,7 @@
         "userAssignedIdentities": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
           },
           "description": "The identities assigned to this resource by the user."
         }
@@ -2257,7 +2248,8 @@
       "description": "Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.",
       "enum": [
         "Active",
-        "Suspended"
+        "Suspended",
+        "Unsubscribed"
       ],
       "x-ms-enum": {
         "name": "MarketplaceSubscriptionStatus",
@@ -2523,24 +2515,6 @@
         "modelAsString": true
       }
     },
-    "UserAssignedIdentity": {
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "The active directory client identifier for this principal."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier for this principal."
-        }
-      },
-      "description": "A managed identity assigned by the user.",
-      "required": [
-        "clientId",
-        "principalId"
-      ]
-    },
     "AccountInfo": {
       "type": "object",
       "properties": {
@@ -2716,7 +2690,7 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "Operation"
+            "name": "SubscriptionListOperation"
           },
           "x-ms-mutability": [
             "create",
@@ -2995,7 +2969,8 @@
       "in": "path",
       "required": true,
       "description": "Monitor resource name",
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-zA-Z]*$"
     },
     "ConfigurationNameParameter": {
       "x-ms-parameter-location": "method",
@@ -3003,7 +2978,8 @@
       "in": "path",
       "required": true,
       "description": "Single Sign On Configuration Name",
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-zA-Z]*$"
     },
     "MarketplaceSubscriptionParameter": {
       "x-ms-parameter-location": "method",

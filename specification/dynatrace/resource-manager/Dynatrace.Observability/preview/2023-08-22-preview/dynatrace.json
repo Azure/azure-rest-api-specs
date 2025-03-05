@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Dynatrace.Observability",
-    "version": "2023-08-14-preview"
+    "version": "2023-08-22-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -63,6 +63,9 @@
           },
           {
             "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LogStatusRequestParameter"
           }
         ],
         "responses": {
@@ -967,6 +970,9 @@
             "required": true,
             "description": "Name of the Monitors resource",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/MetricStatusRequestParameter"
           }
         ],
         "responses": {
@@ -2043,6 +2049,32 @@
         }
       }
     },
+    "LogStatusRequest": {
+      "description": "Request for getting log status for given monitored resource Ids",
+      "type": "object",
+      "properties": {
+        "monitoredResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of azure resource Id of monitored resources for which we get the log status"
+        }
+      }
+    },
+    "MetricStatusRequest": {
+      "description": "Request for getting metric status for given monitored resource Ids",
+      "type": "object",
+      "properties": {
+        "monitoredResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of azure resource Id of monitored resources for which we get the metric status"
+        }
+      }
+    },
     "MarketplaceSaaSResourceDetailsRequest": {
       "description": "Request for getting Marketplace SaaS resource details for a tenant Id",
       "type": "object",
@@ -2232,6 +2264,26 @@
       "description": "The details of the linkable environment request.",
       "schema": {
         "$ref": "#/definitions/LinkableEnvironmentRequest"
+      }
+    },
+    "LogStatusRequestParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "request",
+      "in": "body",
+      "required": false,
+      "description": "The details of the log status request.",
+      "schema": {
+        "$ref": "#/definitions/LogStatusRequest"
+      }
+    },
+    "MetricStatusRequestParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "request",
+      "in": "body",
+      "required": false,
+      "description": "The details of the metric status request.",
+      "schema": {
+        "$ref": "#/definitions/MetricStatusRequest"
       }
     },
     "SSODetailsRequestParameter": {
