@@ -8,6 +8,8 @@ import "./common.tsp";
 import "./models.tsp";
 import "./models-items.tsp";
 
+namespace Quantum.Workspace;
+
 /** The details (name and container) of the blob to store or download data. */
 model BlobDetails {
   /** The container name. */
