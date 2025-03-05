@@ -30,6 +30,69 @@ openapi-subtype: rpaas
 tag: package-2023-04-27
 ```
 
+### Tag: package-2024-04-24-preview
+
+These settings apply only when `--tag=package-2024-04-24-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-24-preview'
+input-file:
+  - Dynatrace.Observability/preview/2024-04-24-preview/dynatrace.json
+```
+
+### Tag: package-2023-11-24-preview
+
+These settings apply only when `--tag=package-2023-11-24-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11-24-preview'
+input-file:
+  - Dynatrace.Observability/preview/2023-11-24-preview/dynatrace.json
+```
+
+### Tag: package-2023-11-11-preview
+
+These settings apply only when `--tag=package-2023-11-11-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11-11-preview'
+input-file:
+  - Dynatrace.Observability/preview/2023-11-11-preview/dynatrace.json
+```
+
+### Tag: package-2023-09-20-preview
+
+These settings apply only when `--tag=package-2023-09-20-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09-20-preview'
+input-file:
+  - Dynatrace.Observability/preview/2023-09-20-preview/dynatrace.json
+```
+
+### Tag: package-2023-09-12-preview
+
+These settings apply only when `--tag=package-2023-09-12-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09-12-preview'
+input-file:
+  - Dynatrace.Observability/preview/2023-09-12-preview/dynatrace.json
+```
+
+### Tag: package-2023-08-22-preview
+
+These settings apply only when `--tag=package-2023-08-22-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08-22-preview'
+input-file:
+  - Dynatrace.Observability/preview/2023-08-22-preview/dynatrace.json
+```
+
+### Tag: package-2023-08-14-preview
+
+These settings apply only when `--tag=package-2023-08-14-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08-14-preview'
+input-file:
+  - Dynatrace.Observability/preview/2023-08-14-preview/dynatrace.json
+```
+
 ### Tag: package-2023-04-27
 
 These settings apply only when `--tag=package-2023-04-27` is specified on the command line.
@@ -46,6 +109,33 @@ These settings apply only when `--tag=package-2021-09-01` is specified on the co
 ```yaml $(tag) == 'package-2021-09-01'
 input-file:
   - Dynatrace.Observability/stable/2021-09-01/dynatrace.json
+```
+
+### Tag: package-2022-10-01-preview
+
+These settings apply only when `--tag=package-2022-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10-01-preview'
+input-file:
+  - Dynatrace.Observability/preview/2022-10-01-preview/dynatrace.json
+```
+
+### Tag: package-2023-03-01-preview
+
+These settings apply only when `--tag=package-2023-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03-01-preview'
+input-file:
+  - Dynatrace.Observability/preview/2023-03-01-preview/dynatrace.json
+```
+
+### Tag: package-2023-04-20-preview
+
+These settings apply only when `--tag=package-2023-04-20-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package--2023-04-20-preview'
+input-file:
+  - Dynatrace.Observability/preview/2023-04-20-preview/dynatrace.json
 ```
 
 ### Tag: package-2021-09-01-preview
