@@ -1,12 +1,7 @@
-variables:
-  - template: /eng/pipelines/templates/variables/globals.yml
+# Copied from https://github.com/Azure/azure-sdk-for-js/blob/12bbcbf49141c74b640cd7e9b6da8a8214b8341f/eng/pipelines/templates/steps/use-node-version.yml
 
 parameters:
-  - name: NodeVersion
-    type: string
-    default: $(NodeVersion)
-
-# Following copied from https://github.com/Azure/azure-sdk-for-js/blob/12bbcbf49141c74b640cd7e9b6da8a8214b8341f/eng/pipelines/templates/steps/use-node-version.yml
+  NodeVersion: $(NodeVersion)
 
 steps:
   - task: NodeTool@0
