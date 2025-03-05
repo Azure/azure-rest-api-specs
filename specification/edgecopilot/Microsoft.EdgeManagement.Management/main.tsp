@@ -16,9 +16,7 @@ using TypeSpec.Versioning;
  */
 @armProviderNamespace
 // @useAuth(AadOauth2Auth<["user_impersonation"]>)
-@service({
-  title: "Edge Copilot",
-})
+@service(#{ title: "Edge Copilot" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.EdgeManagement;

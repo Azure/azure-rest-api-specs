@@ -19,7 +19,7 @@ model Cluster is ProxyResource<ClusterProperties> {
   @doc("The Cluster Name")
   @segment("clusters")
   @key("clusterName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9]{2,25}$")
   @path
   name: string;
@@ -43,7 +43,7 @@ model ClusterProperties {
   azExceptions?: AZException[];
 
   /** The provisioning state of resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

@@ -23,7 +23,7 @@ model SchemaProperties {
   currentVersion: string;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

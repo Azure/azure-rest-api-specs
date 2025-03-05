@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Azure Dev Tunnels",
-})
+@service(#{ title: "Azure Dev Tunnels" })
 @versioned(Versions)
 namespace Microsoft.DevTunnels;
 
@@ -47,11 +45,11 @@ model TunnelPlanProperties {
   billingTier: string;
 
   @doc("Cluster ID where the TunnelPlan resides, used for data-plane operations")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clusterId?: string;
 
   @doc("The provisioning state of the plan")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -60,7 +58,7 @@ model TunnelPlanResource is TrackedResource<TunnelPlanProperties> {
   @key("planName")
   @segment("tunnelPlans")
   @doc("The name of the Tunnel Plan")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
@@ -107,7 +105,7 @@ model BillingTierProperties {
   description: string;
 
   @doc("The provisioning state of the plan")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -115,7 +113,7 @@ model BillingTierProperties {
 model BillingTierResource is ProxyResource<BillingTierProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Legacy"
   @doc("Billing Tier Name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key
   @path
   @segment("billingTiers")

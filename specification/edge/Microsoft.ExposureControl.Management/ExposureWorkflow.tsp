@@ -38,9 +38,9 @@ model ExposureWorkflowProperties {
   @doc("Workflow manifest Id.")
   exposureWorkflowManifestId?: string;
 
-  @extension("x-ms-identifiers", ["ringName"])
+  @Azure.ResourceManager.identifiers(#["ringName"])
   @doc("Ring configuration details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rings: Array<ExposureWorkflowRingConfigurationProperties>;
 
   @doc("overrides default start Ring.")
@@ -50,10 +50,10 @@ model ExposureWorkflowProperties {
   currentRingStatus?: RingStatus;
 
   @doc("Exposure workflow status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   workflowStatus: ExposureWorkflowStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -81,23 +81,23 @@ union ExposureWorkflowStatus {
 @doc("Exposure workflow ring configuration Properties")
 model ExposureWorkflowRingConfigurationProperties {
   @doc("Unique ring identifier.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ringName: string;
 
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("Exposure Group Properties.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   exposureGroupProperties: Array<ExposureGroupProperties>;
 
   @doc("Ring status.")
   status: RingStatus;
 
   @doc("Number of retries attempted. Retry policy is service configured")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   retryAttempts: int32;
 
   @doc("Progression settings.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   progressionSetting: ProgressionSetting;
 }
 

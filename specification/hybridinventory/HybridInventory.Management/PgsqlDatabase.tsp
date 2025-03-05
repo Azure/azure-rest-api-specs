@@ -40,12 +40,12 @@ interface PgsqlDatabases {
   /**
    * Patch the PGSQLDatabases resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     PgsqlDatabase,
     PgsqlDatabaseResourcePatchProperties
   >;
-  // @parameterVisibility
+  // @patch(#{ implicitOptionality: false })
   // update is ArmCustomPatchAsync<
   //   PgsqlDatabase,
   //   PatchModel = PgsqlDatabaseResourcePatch

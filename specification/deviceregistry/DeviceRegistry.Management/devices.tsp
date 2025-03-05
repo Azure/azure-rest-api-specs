@@ -28,7 +28,7 @@ model Device is TrackedResource<DeviceProperties> {
   // etag not included in TrackedResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Resource Tag.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 }
 
@@ -36,41 +36,41 @@ model Device is TrackedResource<DeviceProperties> {
 @doc("Defines the device properties.")
 model DeviceProperties {
   @doc("Gets a unique identifier for this resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uuid?: string;
 
   @doc("Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.")
   enabled?: boolean = true;
 
   @doc("Gets the device Id provided by customer.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   externalDeviceId?: string;
 
   @doc("Device Template Id used to create a device.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   deviceTemplateId?: string;
 
   @doc("The Microsoft Entra ID group the device is a member of.")
   deviceGroupId?: string;
 
   @doc("Hardware manufacturer name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   manufacturer?: string;
 
   @doc("Hardware model name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `model`?: string;
 
   @doc("operating system name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operatingSystem?: string;
 
   @doc("operating system version.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   operatingSystemVersion?: string;
 
   @doc("Identity for the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   identity?: DeviceIdentity;
 
   @doc("Property bag containing the device's unassigned and assigned endpoints.")
@@ -81,30 +81,30 @@ model DeviceProperties {
   attributes?: Record<unknown>;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
 @doc("The backing Microsoft Entra ID for the device used for authentication to other services.")
 model DeviceIdentity {
   @doc("Principal id for the device resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   @doc("Tenant id for the Microsoft Entra ID tenant.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 }
 
 @doc("Property bag containing the device's unassigned and assigned endpoints.")
 model DeviceEndpoints {
   @doc("Actively used endpoints a device can use to connect to several services.")
-  @extension("x-ms-identifiers", ["type", "address"])
+  @Azure.ResourceManager.identifiers(#["type", "address"])
   assigned: Endpoint[];
 
   @doc("List of most recently removed endpoints.")
-  @extension("x-ms-identifiers", ["type", "address"])
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @Azure.ResourceManager.identifiers(#["type", "address"])
   unassigned?: Endpoint[];
 }
 

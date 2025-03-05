@@ -12,9 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace(ProviderName)
-@service({
-  title: ProviderName,
-})
+@service(#{ title: ProviderName })
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 @versioned(Versions)
 namespace Microsoft.CloudHealth;
@@ -63,11 +61,11 @@ model HealthModel is TrackedResource<HealthModelProperties> {
 
 @doc("HealthModel properties")
 model HealthModelProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The data plane endpoint for interacting with health data")
   dataplaneEndpoint?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
 }
@@ -103,7 +101,7 @@ union SignalKind {
 @doc("SignalDefinition properties")
 @discriminator("signalKind")
 model SignalDefinitionProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
 
@@ -130,7 +128,7 @@ model SignalDefinitionProperties {
   @doc("Evaluation rules for the signal definition")
   evaluationRules: EvaluationRule;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Date when the signal definition was (soft-)deleted")
   deletionDate?: utcDateTime;
 }
@@ -347,7 +345,7 @@ union AuthenticationKind {
 @doc("Authentication setting properties")
 @discriminator("authenticationKind")
 model AuthenticationSettingProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
 
@@ -384,7 +382,7 @@ model Entity is ProxyResource<EntityProperties> {
 
 @doc("Properties which are common across all kinds of entities")
 model EntityProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
 
@@ -419,15 +417,15 @@ model EntityProperties {
   @doc("Signal groups which are assigned to this entity")
   signals?: SignalGroup;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Discovered by which discovery rule. If set, the entity cannot be deleted manually.")
   discoveredBy?: stringResourceName;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Date when the entity was (soft-)deleted")
   deletionDate?: utcDateTime;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Health state of this entity")
   healthState?: HealthState;
 
@@ -538,7 +536,7 @@ union DependenciesAggregationType {
 @doc("A grouping of signal assignments and link to a data source")
 model SignalAssignmentGroup {
   @doc("Signal definitions which are assigned to this signal group. All assignments are combined with an OR operator.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @maxItems(50)
   signalAssignments?: SignalAssignment[];
 
@@ -642,7 +640,7 @@ model Relationship is ProxyResource<RelationshipProperties> {
 
 @doc("Relationship properties")
 model RelationshipProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
 
@@ -652,22 +650,22 @@ model RelationshipProperties {
   displayName?: string;
 
   @doc("Resource name of the parent entity")
-  @visibility("create", "read") // this cannot be changed
+  @visibility(Lifecycle.Create, Lifecycle.Read) // this cannot be changed
   parentEntityName: stringResourceName;
 
   @doc("Resource name of the child entity")
-  @visibility("create", "read") // this cannot be changed
+  @visibility(Lifecycle.Create, Lifecycle.Read) // this cannot be changed
   childEntityName: stringResourceName;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   @doc("Optional set of labels (key-value pairs)") // Since Relationship is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Discovered by which discovery rule. If set, the relationship cannot be deleted manually.")
   discoveredBy?: stringResourceName;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Date when the relationship was (soft-)deleted")
   deletionDate?: utcDateTime;
 }
@@ -684,7 +682,7 @@ model DiscoveryRule is ProxyResource<DiscoveryRuleProperties> {
 
 @doc("Discovery rule properties")
 model DiscoveryRuleProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
 
@@ -707,19 +705,19 @@ model DiscoveryRuleProperties {
   @doc("Whether to add all recommended signals to the discovered entities.")
   addRecommendedSignals: DiscoveryRuleRecommendedSignalsBehavior;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Date when the discovery rule was (soft-)deleted.")
   deletionDate?: utcDateTime;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Error message if the last discovery operation failed.")
   errorMessage?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Number of discovered entities in the last discovery operation.")
   numberOfDiscoveredEntities?: int32;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Name of the entity which represents the discovery rule. Note: It might take a few minutes after creating the discovery rule until the entity is created.")
   entityName: string;
 }

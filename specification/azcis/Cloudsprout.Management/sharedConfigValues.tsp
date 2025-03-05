@@ -28,7 +28,7 @@ model SharedConfigValuesResourceProperties {
   cloudSproutEnv?: string;
 
   @doc("Resource Provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: SharedConfigValuesProvisioningState;
 }
 
@@ -39,7 +39,7 @@ model SharedConfigValuesResource
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("resourceName")
   @segment("sharedConfigValues") // start with lower case
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

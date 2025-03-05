@@ -25,7 +25,7 @@ model StandbyVirtualMachinePoolResource
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("standbyVirtualMachinePoolName")
   @segment("standbyVirtualMachinePools")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Name of the standby virtual machine pool")
   @path
   name: string;
@@ -44,7 +44,6 @@ model StandbyVirtualMachinePoolResourceProperties {
   elasticityProfile?: StandbyVirtualMachinePoolElasticityProfile;
 
   @doc("Specifies the desired state of virtual machines in the pool.")
-  @extension("x-ms-identifiers", ["vmState"])
   virtualMachineState: VirtualMachineState;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
@@ -61,7 +60,7 @@ model StandbyVirtualMachinePoolResourceProperties {
   ]>;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

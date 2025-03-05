@@ -8,7 +8,7 @@ model VmProperties {
   virtualMachineName: string;
 
   @doc("Provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: Microsoft.Frontdoor.ProvisioningState;
 
   @doc("Name of the physical server/machine this VM is running atop of")

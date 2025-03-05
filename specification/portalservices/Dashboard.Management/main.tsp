@@ -12,9 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 @armProviderNamespace
-@service({
-  title: "Microsoft.PortalServices",
-})
+@service(#{ title: "Microsoft.PortalServices" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @doc("Azure Portal Services API Reference")

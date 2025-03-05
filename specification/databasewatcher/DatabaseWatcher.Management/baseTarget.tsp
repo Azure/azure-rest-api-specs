@@ -45,7 +45,7 @@ model TargetProperties {
   @doc("The target collection status.")
   targetCollectionStatus?: TargetCollectionStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the resource.")
   provisioningState?: ResourceProvisioningState;
 }

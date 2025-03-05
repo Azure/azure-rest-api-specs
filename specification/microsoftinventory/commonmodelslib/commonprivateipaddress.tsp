@@ -36,7 +36,7 @@ model PrivateIpAddressPropertiesBase {
   assignedResource: AssignedResource;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

@@ -23,7 +23,7 @@ model SmfDeploymentResource
   @key("smfDeploymentName")
   @path
   @segment("smfDeployment")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 

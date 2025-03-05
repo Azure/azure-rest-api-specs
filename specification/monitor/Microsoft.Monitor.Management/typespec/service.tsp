@@ -12,9 +12,7 @@ using Azure.ResourceManager;
 using OpenAPI;
 
 @armProviderNamespace("Microsoft.Monitor")
-@service({
-  title: "Azure Monitor Control Plane API",
-})
+@service(#{ title: "Azure Monitor Control Plane API" })
 @doc("Provides operations for working with Azure Monitor")
 @versioned(Microsoft.Monitor.Versions)
 namespace Microsoft.Monitor;

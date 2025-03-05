@@ -21,7 +21,7 @@ model RadioAccessNetwork is TrackedResource<RadioAccessNetworkProperties> {
   @path
   @key("radioAccessNetworkName")
   @segment("radioAccessNetworks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -34,7 +34,7 @@ interface RadioAccessNetworks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<RadioAccessNetwork>;
 
   @doc("Updates a radio access network.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<RadioAccessNetwork, TagsObject>;
 
   @doc("Deletes the specified radio access network.")

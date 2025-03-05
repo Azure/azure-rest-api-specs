@@ -18,9 +18,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.EngineeringSystem Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.EngineeringSystem management service.",
-})
+@service(#{ title: "Microsoft.EngineeringSystem management service." })
 @versioned(Microsoft.EngineeringSystem.Versions)
 namespace Microsoft.EngineeringSystem;
 

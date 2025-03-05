@@ -24,7 +24,7 @@ model AttachedDataNetwork
   @path
   @key("attachedDataNetworkName")
   @segment("attachedDataNetworks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -37,7 +37,7 @@ interface AttachedDataNetworks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<AttachedDataNetwork>;
 
   @doc("Updates an attached data network tags.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<AttachedDataNetwork, TagsObject>;
 
   @doc("Deletes the specified attached data network.")

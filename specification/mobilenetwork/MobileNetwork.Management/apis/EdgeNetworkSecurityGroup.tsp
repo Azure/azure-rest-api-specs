@@ -24,7 +24,7 @@ model EdgeNetworkSecurityGroup
   @path
   @key("edgeNetworkSecurityGroupName")
   @segment("edgeNetworkSecurityGroups")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -37,7 +37,7 @@ interface EdgeNetworkSecurityGroups {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EdgeNetworkSecurityGroup>;
 
   @doc("Updates Edge Network Security Group.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<EdgeNetworkSecurityGroup, TagsObject>;
 
   @doc("Deletes the specified Edge Network Security Group.")

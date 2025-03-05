@@ -26,7 +26,7 @@ model Collaboration
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[-\\w\\._,\\(\\)]+$")
   kind?: string;
 }
@@ -46,7 +46,7 @@ interface Collaborations {
   /**
    * Updates tags on a collaboration.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Collaboration,
     PatchModel = ResourceTags,

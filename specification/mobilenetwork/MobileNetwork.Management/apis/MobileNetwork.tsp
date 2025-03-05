@@ -21,7 +21,7 @@ model MobileNetwork is TrackedResource<MobileNetworkPropertiesFormat> {
   @path
   @key("mobileNetworkName")
   @segment("mobileNetworks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
@@ -38,7 +38,7 @@ interface MobileNetworks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MobileNetwork>;
 
   @doc("Updates mobile network tags and managed identity.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<MobileNetwork, IdentityAndTagsObject>;
 
   @doc("Deletes the specified mobile network.")

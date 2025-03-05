@@ -517,77 +517,77 @@ union ProvisioningState {
 @doc("Definition of unified protected item properties.")
 model UnifiedProtectedItemProperties {
   @doc("Unified property item schema version.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   upiSchemaVersion: UPISchemaVersion;
 
   @doc("The friendly name of the protected item.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   friendlyName: string;
 
   @doc("Data source information of protected item.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataSourceInformation: DataSourceInformation;
 
   @doc("Linked resource information of the protected item.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   linkedResourceInformation: LinkedResourceInformation;
 
   @doc("Datasource is protected in primary region or not.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isProtectedInPrimaryRegion: boolean;
 
   @doc("Datasource is protected in secondary region or not.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isProtectedInSecondaryRegion: boolean;
 
   @doc("Protection status of Datasource in primary region.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   protectionStatusInPrimaryRegion: UPIProtectionStatus;
 
   @doc("Protection status of Datasource in secondary region.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   protectionStatusInSecondaryRegion: UPIProtectionStatus;
 
   @doc("Security Level of protected item")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maximumBcdrDataSecurity: BCDRDataSecurityLevel;
 
   @doc("Primary region properties of protected item.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   primaryRegionProtectionDetails: RegionSpecificPropertiesForUnifiedProtectedItem;
 
   @doc("Secondary region properties of protected item.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   secondaryRegionProtectionDetails?: RegionSpecificPropertiesForUnifiedProtectedItem;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
   @doc("Dictionary for solution specific properties.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   solutionSpecificProtectionProperties: Record<SolutionSpecificProtectionProperties>;
 
   @doc("Detail of protected item.")
-  @extension("x-ms-identifiers", [])
-  @visibility("read")
+  @extension("x-ms-identifiers", #[])
+  @visibility(Lifecycle.Read)
   protectedItems: SolutionSpecificProtectedItem[];
 
   @doc("List of distinct solution provider names.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   distinctBcdrSolutionProviderNames: string[];
 
   @doc("List of distinct solution names.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   distinctSolutionNames: string[];
 
   @doc("TenantId of the protected items.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
   @doc("Map of deleted protected item Id to last event time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deletedPiLastEventTimeMap: Record<utcDateTime>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -598,7 +598,7 @@ model UnifiedProtectedItemResource
   @key("unifiedProtectedItemsName")
   @segment("unifiedProtectedItems")
   @path
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The name of the unified protected item.")
   @pattern("^[a-zA-Z0-9;/_]+$")
   name: string;

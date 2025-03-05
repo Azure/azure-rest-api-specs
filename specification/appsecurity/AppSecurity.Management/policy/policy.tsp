@@ -24,14 +24,14 @@ alias MaxManagedRulesCount = 10;
 @doc("The policy properties")
 model PolicyProperties {
   @doc("The status of the last operation")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Global settings for the policy")
   policySettings?: PolicySettings;
 
   @doc("The list of endpoints this policy protects")
-  @extension("x-ms-identifiers", ["endpointId"])
+  @Azure.ResourceManager.identifiers(#["endpointId"])
   @maxItems(MaxProtectedEndpointsCount)
   protectedEndpoints?: ProtectedEndpoint[] = #[];
 
@@ -39,7 +39,7 @@ model PolicyProperties {
   logScrubbing?: LogScrubbing;
 
   @doc("User defined rules")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @maxItems(MaxCustomRulesCount) // AppGW custom rules limitation is 100
   customRules?: CustomRule[] = #[];
 
@@ -53,7 +53,7 @@ model PolicyProperties {
   managedRulesCustomization?: ManagedRulesCustomization;
 
   @doc("Policy revision. Incremented on each change, starting from 0.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   revision?: int32 = 0;
 }
 

@@ -14,9 +14,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.AzureCoreExperiencesAssistant Resource Provider management API */
 @armProviderNamespace("Microsoft.PortalServices")
-@service({
-  title: "Microsoft.PortalServices",
-})
+@service(#{ title: "Microsoft.PortalServices" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.PortalServices;

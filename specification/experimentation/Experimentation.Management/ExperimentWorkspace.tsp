@@ -32,7 +32,7 @@ model ExperimentWorkspace
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The standard kind does not support list of enum values"
   @doc("Metadata used by portal/service to render different experiences for resources of the same type. Supported values are Regular and Advanced.")
   @pattern("^[-\\w\\._,\\(\\\\\\)]+$")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   kind?: ExperimentWorkspaceKind;
 }
 
@@ -51,7 +51,7 @@ interface ExperimentWorkspaces {
   /**
    * Update an experiment workspace
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<ExperimentWorkspace, ExperimentWorkspacePatch>;
 
   /**

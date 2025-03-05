@@ -21,11 +21,11 @@ model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
 @added(Versions.v2023_11_15)
 model DataProductsCatalogProperties {
   @doc("The data catalog provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The data product publisher information.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   publishers: PublisherInformation[];
 }
 
@@ -36,7 +36,7 @@ model PublisherInformation {
   publisherName: string;
 
   @doc("Data product information.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   dataProducts: DataProductInformation[];
 }
 
@@ -50,7 +50,7 @@ model DataProductInformation {
   description: string;
 
   @doc("Version information of data product.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   dataProductVersions: DataProductVersion[];
 }
 

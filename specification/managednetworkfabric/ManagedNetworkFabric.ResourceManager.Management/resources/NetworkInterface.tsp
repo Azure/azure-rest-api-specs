@@ -19,7 +19,7 @@ model NetworkInterface extends Azure.ResourceManager.Foundations.ProxyResource {
   @path
   @key("networkInterfaceName")
   @segment("networkInterfaces")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkInterface properties */
@@ -36,7 +36,7 @@ interface NetworkInterfaces {
   create is ArmResourceCreateOrReplaceAsync<NetworkInterface>;
 
   @doc("Update certain properties of the Network Interface resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkInterface, NetworkInterfacePatch>;
 
   @doc("Delete the Network Interface resource.")

@@ -23,7 +23,7 @@ model NrfDeploymentResource
   @key("nrfDeploymentName")
   @path
   @segment("nrfDeployments")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 

@@ -53,6 +53,6 @@ model EdgeDeviceMetadataProperties {
   validatedRecipe?: string;
 
   @doc("Provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

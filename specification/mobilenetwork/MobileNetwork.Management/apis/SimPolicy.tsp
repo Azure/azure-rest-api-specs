@@ -23,7 +23,7 @@ model SimPolicy is TrackedResource<SimPolicyPropertiesFormat> {
   @path
   @key("simPolicyName")
   @segment("simPolicies")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -36,7 +36,7 @@ interface SimPolicies {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SimPolicy>;
 
   @doc("Updates SIM policy tags.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<SimPolicy, TagsObject>;
 
   @doc("Deletes the specified SIM policy.")

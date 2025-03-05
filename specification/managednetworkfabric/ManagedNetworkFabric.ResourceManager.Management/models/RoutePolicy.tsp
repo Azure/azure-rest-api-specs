@@ -11,7 +11,7 @@ model RoutePolicyProperties {
   defaultAction?: CommunityActionTypes = CommunityActionTypes.Deny;
 
   @doc("Route Policy statements.")
-  @OpenAPI.extension("x-ms-identifiers", ["sequenceNumber"])
+  @Azure.ResourceManager.identifiers(#["sequenceNumber"])
   statements: RoutePolicyStatementProperties[];
 
   @doc("Arm Resource ID of Network Fabric.")
@@ -25,20 +25,20 @@ model RoutePolicyProperties {
   addressFamilyType?: AddressFamilyType = AddressFamilyType.IPv4;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 
@@ -49,7 +49,7 @@ model RoutePolicyPatchableProperties {
   defaultAction?: CommunityActionTypes;
 
   @doc("Route Policy statements.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   statements?: RoutePolicyStatementPatchProperties[];
 }
 
@@ -66,7 +66,6 @@ model RoutePolicyStatementProperties {
   condition: StatementConditionProperties;
 
   @doc("Route policy action properties.")
-  @OpenAPI.extension("x-ms-identifiers", [])
   action: StatementActionProperties;
 }
 
@@ -83,7 +82,6 @@ model RoutePolicyStatementPatchProperties {
   condition: StatementConditionPatchProperties;
 
   @doc("Route policy action properties.")
-  @OpenAPI.extension("x-ms-identifiers", [])
   action: StatementActionPatchProperties;
 }
 

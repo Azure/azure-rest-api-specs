@@ -21,7 +21,7 @@ model SimGroup is TrackedResource<SimGroupPropertiesFormat> {
   @path
   @key("simGroupName")
   @segment("simGroups")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
@@ -38,7 +38,7 @@ interface SimGroups {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SimGroup>;
 
   @doc("Patch SIM group resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<SimGroup, IdentityAndTagsObject>;
 
   @doc("Deletes the specified SIM group.")

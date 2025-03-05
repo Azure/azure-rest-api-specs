@@ -42,7 +42,7 @@ interface Deployments {
   /**
    * Updates Deployment.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Deployment, TagUpdate>;
 
   /**

@@ -42,7 +42,7 @@ model EdgeDeviceJob is Azure.ResourceManager.ExtensionResource<{}> {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
   @doc("Edge Solution type to support polymorphic resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   kind: EdgeDeviceKind;
 }
 
@@ -112,35 +112,35 @@ model LogCollectionReportedProperties {
   ...JobReportedProperties;
 
   @doc("Details of the log collection session.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["correlationId"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["correlationId"])
   logCollectionSessionDetails?: LogCollectionSession[];
 }
 
 @doc("Represents a session for collecting logs from an edge device.")
 model LogCollectionSession {
   @doc("The timestamp when log collection started, in ISO 8601 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTime?: string;
 
   @doc("The timestamp when log collection ended, in ISO 8601 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTime?: string;
 
   @doc("The total time logs were collected for, in ISO 8601 duration format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeCollected?: string;
 
   @doc("The size of the collected logs in bytes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   logSize?: int32;
 
   @doc("The status of the log collection session.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: DeviceLogCollectionStatus;
 
   @doc("A unique identifier for correlating this log collection session with other operations or sessions.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   correlationId?: string;
 }
 
@@ -171,7 +171,7 @@ model AzureLinuxEdgeDeviceJobProperties {
   ...EdgeDeviceJobProperties;
 
   @doc("Job Type to support polymorphic resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   jobType: AzureLinuxEdgeDeviceJobType;
 }
 
@@ -181,23 +181,23 @@ model EdgeDeviceJobProperties {
   deploymentMode?: DeploymentMode;
 
   @doc("Job provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Unique, immutable job id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   jobId?: string;
 
   @doc("The UTC date and time at which the job started.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTimeUtc?: utcDateTime;
 
   @doc("The UTC date and time at which the job completed.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTimeUtc?: utcDateTime;
 
   @doc("Status of Edge device job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: JobStatus;
 }
 
@@ -224,58 +224,58 @@ model RemoteSupportReportedProperties {
   ...JobReportedProperties;
 
   @doc("Optional settings for configuring the node for remote support.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nodeSettings?: RemoteSupportNodeSettings;
 
   @doc("Details of the remote support session.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["sessionId"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["sessionId"])
   sessionDetails?: RemoteSupportSession[];
 }
 
 @doc("Represents the settings of a remote support node.")
 model RemoteSupportNodeSettings {
   @doc("The state of the remote support node.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: string;
 
   @doc("The timestamp when the node settings were created, in UTC.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdAt?: utcDateTime;
 
   @doc("The timestamp when the node settings were last updated, in UTC.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updatedAt?: utcDateTime;
 
   @doc("The current connection status of the remote support session.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionStatus?: string;
 
   @doc("The error message, if any, from the last connection attempt.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionErrorMessage?: string;
 }
 
 @doc("Represents a remote support session.")
 model RemoteSupportSession {
   @doc("Unique session Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sessionId?: string;
 
   @doc("The start time of the remote support session, in UTC.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sessionStartTime?: utcDateTime;
 
   @doc("The end time of the remote support session, in UTC.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sessionEndTime?: utcDateTime;
 
   @doc("The level of access granted during the remote support session.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accessLevel?: RemoteSupportAccessLevel;
 
   @doc("The location where the session transcript is stored.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   transcriptLocation?: string;
 }
 
@@ -288,11 +288,11 @@ model CollectLogJobProperties {
   toDate: utcDateTime;
 
   @doc("To date for log collection.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastLogGenerated?: utcDateTime;
 
   @doc("log collection job reported properties.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedProperties?: LogCollectionReportedProperties;
 }
 
@@ -310,7 +310,7 @@ model HciEdgeDeviceJobProperties {
   ...EdgeDeviceJobProperties;
 
   @doc("Job Type to support polymorphic resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   jobType: HciEdgeDeviceJobType;
 }
 
@@ -343,6 +343,6 @@ model RemoteSupportJobProperties {
   type: RemoteSupportType;
 
   @doc("log collection job reported properties.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedProperties?: RemoteSupportReportedProperties;
 }

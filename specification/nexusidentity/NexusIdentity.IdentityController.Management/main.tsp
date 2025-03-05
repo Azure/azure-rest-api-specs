@@ -15,9 +15,7 @@ using Azure.ResourceManager;
 @doc("Microsoft.NexusIdentity Resource Provider management API.")
 @armProviderNamespace("Microsoft.NexusIdentity")
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-@service({
-  title: "Microsoft.NexusIdentity management service",
-})
+@service(#{ title: "Microsoft.NexusIdentity management service" })
 @versioned(Versions)
 namespace Microsoft.NexusIdentity;
 

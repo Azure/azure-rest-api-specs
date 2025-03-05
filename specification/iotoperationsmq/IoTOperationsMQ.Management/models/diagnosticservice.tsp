@@ -62,7 +62,7 @@ model DiagnosticServiceProperties {
   @doc("The destination to collect traces. Diagnostic service will push traces to this endpoint")
   openTelemetryTracesCollectorAddr?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
