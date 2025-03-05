@@ -154,7 +154,7 @@ model CopilotTestCase {
 model TestQuery {
   @key
   @doc("The unique identifier of the test query.")
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   testQueryId: string;
 
   @doc("start date of test run")

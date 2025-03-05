@@ -226,19 +226,19 @@ model Instruction {
   instructionVersion: string;
 
   @doc("Status for the instruction")
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   status: InstructionStatusEnum;
 
   @doc("Domain for the instruction")
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   domain: InstrustionDomainEnum;
 
   @doc("Sub-domain for the instruction")
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   subDomain: InstructionSubDomainEnum;
 
   @doc("Category for the instruction")
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   category: InstructionCategoryEnum;
 
   @doc("The language of the instruction.")

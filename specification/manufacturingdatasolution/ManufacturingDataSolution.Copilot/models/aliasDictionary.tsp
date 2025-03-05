@@ -17,7 +17,7 @@ namespace MdsSolution.CopilotService.AliasDictionary.Models;
 model Alias {
   @doc("Id for the alias")
   @key("id")
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Key for the alias")
@@ -27,11 +27,11 @@ model Alias {
   aliases: string[];
 
   @doc("Indicates if the alias is enabled")
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   isCustom: boolean = true;
 
   @doc("Indicates if the alias is enabled")
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   enabled: boolean;
 }
 

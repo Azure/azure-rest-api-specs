@@ -49,15 +49,15 @@ union OperationStatusValue {
 @resource("operation")
 model OperationResultQuery {
   @doc("The operation status.")
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   status: OperationStatusValue;
 
   @doc("The operation id.")
   @key("operationId")
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   operationId: string;
 
   @doc("The error message.")
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   errorMessage: string[];
 }
