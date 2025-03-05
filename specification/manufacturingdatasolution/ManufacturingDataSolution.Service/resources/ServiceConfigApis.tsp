@@ -25,8 +25,9 @@ namespace MdsSolution.ServiceApis {
   @doc("Get the status of an entity job.")
   op getEntityJobStatus is Operations.ResourceRead<JobStatusResponse>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
   @doc("Get all entities.")
-  op listAllEntities is Operations.ResourceList<EntityInfo>;
+  op listAllEntities is Azure.Core.Foundations.NonPagedResourceList<EntityInfo>;
 
   @doc("Create a new entity.")
   @pollingOperation(getEntityJobStatus)

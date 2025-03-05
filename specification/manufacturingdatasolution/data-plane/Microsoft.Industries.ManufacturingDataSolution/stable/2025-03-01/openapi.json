@@ -239,8 +239,8 @@
     },
     "/admin/version": {
       "get": {
-        "operationId": "DataVersionApis_List",
-        "description": "Resource list operation template.",
+        "operationId": "DataVersionApis_ListAllVersions",
+        "description": "Operation that lists resources in a non-paginated way.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -250,7 +250,11 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedDataVersion"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AdminModels.DataVersion"
+              },
+              "x-ms-identifiers": []
             }
           },
           "default": {
@@ -267,12 +271,9 @@
           }
         },
         "x-ms-examples": {
-          "DataVersionApis_List": {
-            "$ref": "./examples/DataVersionApis_List.json"
+          "DataVersionApis_ListAllVersions": {
+            "$ref": "./examples/DataVersionApis_ListAllVersions.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -567,7 +568,11 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedEntityInfo"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ServiceModels.EntityInfo"
+              },
+              "x-ms-identifiers": []
             }
           },
           "default": {
@@ -587,9 +592,6 @@
           "ServiceApis_ListAllEntities": {
             "$ref": "./examples/ServiceApis_ListAllEntities.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1588,50 +1590,6 @@
           }
         ]
       }
-    },
-    "PagedDataVersion": {
-      "type": "object",
-      "description": "Paged collection of DataVersion items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DataVersion items on this page",
-          "items": {
-            "$ref": "#/definitions/AdminModels.DataVersion"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedEntityInfo": {
-      "type": "object",
-      "description": "Paged collection of EntityInfo items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The EntityInfo items on this page",
-          "items": {
-            "$ref": "#/definitions/ServiceModels.EntityInfo"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "PagedOpcuaMappingModel": {
       "type": "object",

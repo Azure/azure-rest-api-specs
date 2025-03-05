@@ -50,7 +50,8 @@ namespace MdsSolution.AdminApis {
   op getCleanupStatus is Operations.ResourceRead<CleanupJobStatusResponse>;
 
   interface DataVersionApis {
-    list is Operations.ResourceList<DataVersion>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
+    listAllVersions is Azure.Core.Foundations.NonPagedResourceList<DataVersion>;
 
     @pollingOperation(getJobStatus)
     createVersion is Operations.LongRunningResourceCreateWithServiceProvidedName<
