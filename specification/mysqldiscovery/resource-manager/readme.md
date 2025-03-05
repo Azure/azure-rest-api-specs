@@ -39,11 +39,22 @@ input-file:
   - Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
 suppressions:
   - code: PathResourceTypeNameCamelCase
-    from: mysqldiscovery.json
     reason: MySQL is a technical term and cannot follow camel case rule.
-  - code: AvoidAdditionalProperties
-    from: mysqldiscovery.json
-    reason: ARM team will deliver TagsV2 towards the end of 2024. TagsV2 will support Top-level tags on proxy resources.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.MySQLDiscovery/MySQLSites"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers/{serverName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/errorSummaries"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/errorSummaries/{errorSummaryName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/refresh"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/summaries"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/summaries/{summaryName}"]
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: MySQL is a technical term and cannot follow camel case rule.
+    where:
+      - $.definitions.MysqlServerProperties.properties.MysqlVersion
 ```
 ---
 
