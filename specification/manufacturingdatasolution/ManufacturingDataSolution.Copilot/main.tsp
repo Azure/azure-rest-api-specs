@@ -21,12 +21,19 @@ using Azure.Core.Traits;
 //#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
 //#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 
-@service({
+@service(with #{
   title: "Microsoft.Industry.Manufacturing.MDS.Copilot",
 })
 
-@server("https://localhost:8002") //TODO: Add the correct url
-//TODO: Add the correct url
+@server(
+  "https://mds-{mdsUniqueId}.{location}.cloudapp.azure.com/",
+  "Manufacturing Data Solution global endpoint.",
+  {
+    mdsUniqueId: string,
+    location: string = "mds.azure.com",
+  }
+)
+
 @useAuth(AadOauth2Auth<["https://azure-mds-service/.default"]>)
 
 // as per doc https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step10/#versioning-your-service
