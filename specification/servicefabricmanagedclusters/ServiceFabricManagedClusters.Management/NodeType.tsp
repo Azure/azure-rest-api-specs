@@ -54,7 +54,7 @@ interface NodeTypes {
   /**
    * Update the configuration of a node type of a given managed cluster, only updating tags.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     NodeType,
     PatchModel = NodeTypeUpdateParameters,

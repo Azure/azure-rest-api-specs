@@ -25,10 +25,7 @@ import "./NodeType.tsp";
 import "./Operations.tsp";
 import "./legacy.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
@@ -36,9 +33,7 @@ using TypeSpec.Versioning;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Custom operations spec definition for backwards compatibility"
 @armProviderNamespace
-@service({
-  title: "ServiceFabricManagedClustersManagementClient",
-})
+@service(#{ title: "ServiceFabricManagedClustersManagementClient" })
 @versioned(Versions)
 namespace Microsoft.ServiceFabric;
 

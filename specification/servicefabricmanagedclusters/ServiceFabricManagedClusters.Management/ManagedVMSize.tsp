@@ -20,25 +20,25 @@ model ManagedVMSize {
   /**
    * Describes a VM Sizes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   properties?: VMSize;
 
   /**
    * VM Size id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Vm Size name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * VM Size type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 

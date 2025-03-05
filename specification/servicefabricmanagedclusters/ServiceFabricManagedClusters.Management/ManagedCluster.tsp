@@ -8,7 +8,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -28,7 +27,7 @@ model ManagedCluster
    * If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
@@ -61,7 +60,7 @@ interface ManagedClusters {
   /**
    * Update the tags of of a Service Fabric managed cluster resource with the specified name.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ManagedCluster,
     PatchModel = ManagedClusterUpdateParameters

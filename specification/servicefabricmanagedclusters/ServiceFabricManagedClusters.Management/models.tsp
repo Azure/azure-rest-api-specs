@@ -3,11 +3,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-
 namespace Microsoft.ServiceFabric;
 
 /**
@@ -997,7 +992,7 @@ model ApplicationTypeResourceProperties {
    * The current deployment or provisioning state, which only appears in the response.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Day 0 property, keep as string for backwards compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
 
@@ -1026,7 +1021,7 @@ model ApplicationTypeVersionResourceProperties {
    * The current deployment or provisioning state, which only appears in the response
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Day 0 property, keep as string for backwards compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -1058,13 +1053,13 @@ model ManagedIdentity {
   /**
    * The principal id of the managed identity. This property will only be provided for a system assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The tenant id of the managed identity. This property will only be provided for a system assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
@@ -1088,13 +1083,13 @@ model UserAssignedIdentity {
   /**
    * The principal id of user assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The client id of user assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clientId?: string;
 }
 
@@ -1106,7 +1101,7 @@ model ApplicationResourceProperties {
    * The current deployment or provisioning state, which only appears in the response
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Day 0 property, keep as string for backwards compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -1130,7 +1125,7 @@ model ApplicationResourceProperties {
   /**
    * List of user assigned identities for the application, each mapped to a friendly name.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   managedIdentities?: ApplicationUserAssignedIdentity[];
 }
 
@@ -1335,7 +1330,7 @@ model ServiceResourceProperties extends ServiceResourcePropertiesBase {
    * The current deployment or provisioning state, which only appears in the response
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Day 0 property, keep as string for backwards compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -1387,19 +1382,19 @@ model ServiceResourcePropertiesBase {
   /**
    * A list that describes the correlation of the service with other services.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   correlationScheme?: ServiceCorrelation[];
 
   /**
    * The service load metrics is given as an array of ServiceLoadMetric objects.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   serviceLoadMetrics?: ServiceLoadMetric[];
 
   /**
    * A list that describes the correlation of the service with other services.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   servicePlacementPolicies?: ServicePlacementPolicy[];
 
   /**
@@ -1410,7 +1405,7 @@ model ServiceResourcePropertiesBase {
   /**
    * Scaling policies for this service.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   scalingPolicies?: ScalingPolicy[];
 }
 
@@ -1634,7 +1629,7 @@ model VMSize {
   /**
    * VM Size name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   size?: string;
 }
 
@@ -1650,31 +1645,31 @@ model ManagedClusterProperties {
   /**
    * The fully qualified domain name associated with the public load balancer of the cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fqdn?: string;
 
   /**
    * The IPv4 address associated with the public load balancer of the cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipv4Address?: string;
 
   /**
    * A service generated unique identifier for the cluster resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clusterId?: string;
 
   /**
    * The current state of the cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clusterState?: ClusterState;
 
   /**
    * List of thumbprints of the cluster certificates.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clusterCertificateThumbprints?: string[];
 
   /**
@@ -1701,7 +1696,7 @@ model ManagedClusterProperties {
   /**
    * Load balancing rules that are applied to the public load balancer of the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   loadBalancingRules?: LoadBalancingRule[];
 
   /**
@@ -1712,13 +1707,13 @@ model ManagedClusterProperties {
   /**
    * Custom Network Security Rules that are applied to the Virtual Network of the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   networkSecurityRules?: NetworkSecurityRule[];
 
   /**
    * Client certificates that are allowed to manage the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   clients?: ClientCertificate[];
 
   /**
@@ -1729,13 +1724,13 @@ model ManagedClusterProperties {
   /**
    * The list of custom fabric settings to configure the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   fabricSettings?: SettingsSectionDescription[];
 
   /**
    * The provisioning state of the managed cluster resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ManagedResourceProvisioningState;
 
   /**
@@ -1788,13 +1783,13 @@ model ManagedClusterProperties {
   /**
    * The list of IP tags associated with the default public IP address of the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   ipTags?: IpTag[];
 
   /**
    * IPv6 address for the cluster if IPv6 is enabled.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipv6Address?: string;
 
   /**
@@ -1806,13 +1801,13 @@ model ManagedClusterProperties {
   /**
    * Auxiliary subnets for the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   auxiliarySubnets?: Subnet[];
 
   /**
    * Service endpoints for subnets in the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   serviceEndpoints?: ServiceEndpoint[];
 
   /**
@@ -2060,7 +2055,7 @@ model SettingsSectionDescription {
   /**
    * The collection of parameters in the section.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   parameters: SettingsParameterDescription[];
 }
 
@@ -2363,7 +2358,7 @@ model FaultSimulationDetails {
   /**
    * List of node type simulations associated with the cluster fault simulation.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["nodeTypeName"])
+  @OpenAPI.extension("x-ms-identifiers", #["nodeTypeName"])
   nodeTypeFaultSimulation?: NodeTypeFaultSimulation[];
 
   /**
@@ -2435,46 +2430,46 @@ model ManagedMaintenanceWindowStatusContent {
   /**
    * If maintenance window is enabled on this cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isWindowEnabled?: boolean;
 
   /**
    * Indicates if the region is ready to configure maintenance windows.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isRegionReady?: boolean;
 
   /**
    * If maintenance window is active.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isWindowActive?: boolean;
 
   /**
    * If updates can be applied.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   canApplyUpdates?: boolean;
 
   /**
    * Last window update time in UTC.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UTC is a well known abbreviation"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastWindowStatusUpdateAtUTC?: utcDateTime;
 
   /**
    * Last window start time in UTC.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UTC is a well known abbreviation"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastWindowStartTimeUTC?: utcDateTime;
 
   /**
    * Last window end time in UTC.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UTC is a well known abbreviation"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastWindowEndTimeUTC?: utcDateTime;
 }
 
@@ -2485,13 +2480,13 @@ model ManagedAzResiliencyStatusContent {
   /**
    * List of Managed VM Sizes for Service Fabric Managed Clusters.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   baseResourceStatus?: ResourceAzStatus[];
 
   /**
    * URL to get the next set of Managed VM Sizes if there are any.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isClusterZoneResilient?: boolean;
 }
 
@@ -2502,25 +2497,25 @@ model ResourceAzStatus {
   /**
    * VM Size properties.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceName?: string;
 
   /**
    * VM Size id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
    * VM Size name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isZoneResilient?: boolean;
 
   /**
    * Zone resiliency status details for the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   details?: string;
 }
 
@@ -2612,13 +2607,13 @@ model NodeTypeProperties {
   /**
    * The secrets to install in the virtual machines.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["sourceVault"])
+  @OpenAPI.extension("x-ms-identifiers", #["sourceVault"])
   vmSecrets?: VaultSecretGroup[];
 
   /**
    * Set of extensions that should be installed onto the virtual machines.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   vmExtensions?: VMSSExtension[];
 
   /**
@@ -2639,19 +2634,19 @@ model NodeTypeProperties {
   /**
    * Indicates the node type uses its own frontend configurations instead of the default one for the cluster. This setting can only be specified for non-primary node types and can not be added or removed after the node type is created.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   frontendConfigurations?: FrontendConfiguration[];
 
   /**
    * The Network Security Rules for this node type. This setting can only be specified for node types that are configured with frontend configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   networkSecurityRules?: NetworkSecurityRule[];
 
   /**
    * Additional managed data disks.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  @OpenAPI.extension("x-ms-identifiers", #["lun"])
   additionalDataDisks?: VmssDataDisk[];
 
   /**
@@ -2662,7 +2657,7 @@ model NodeTypeProperties {
   /**
    * The provisioning state of the node type resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ManagedResourceProvisioningState;
 
   /**
@@ -2792,7 +2787,7 @@ model NodeTypeProperties {
   /**
    * Specifies the NAT configuration on default public Load Balancer for the node type. This is only supported for node types use the default public Load Balancer.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   natConfigurations?: NodeTypeNatConfig[];
 
   /**
@@ -2821,7 +2816,7 @@ model NodeTypeProperties {
   /**
    * Specifies the settings for any additional secondary network interfaces to attach to the node type.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   additionalNetworkInterfaceConfigurations?: AdditionalNetworkInterfaceConfiguration[];
 
   /**
@@ -2832,7 +2827,7 @@ model NodeTypeProperties {
   /**
    * Specifies the gallery applications that should be made available to the underlying VMSS.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   vmApplications?: VmApplication[];
 }
 
@@ -2863,7 +2858,7 @@ model VaultSecretGroup {
   /**
    * The list of key vault references in SourceVault which contain certificates.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   vaultCertificates: VaultCertificate[];
 }
 
@@ -2959,7 +2954,7 @@ model VMSSExtensionProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -2970,7 +2965,7 @@ model VMSSExtensionProperties {
   /**
    * Indicates the setup order for the extension.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   setupOrder?: VmssExtensionSetupOrder[];
 }
 
@@ -3114,7 +3109,7 @@ model AdditionalNetworkInterfaceConfiguration {
   /**
    * Specifies the IP configurations of the network interface.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   ipConfigurations: IpConfiguration[];
 }
 
@@ -3173,7 +3168,7 @@ model IpConfigurationPublicIPAddressConfiguration {
   /**
    * Specifies the list of IP tags associated with the public IP address.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   ipTags?: IpTag[];
 
   /**
@@ -3292,19 +3287,19 @@ model NodeTypeAvailableSku {
   /**
    * The type of resource the sku applies to. Value: Microsoft.ServiceFabric/managedClusters/nodeTypes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
    * The supported SKU for a for node type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sku?: NodeTypeSupportedSku;
 
   /**
    * Provides information about how the node count can be scaled.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   capacity?: NodeTypeSkuCapacity;
 }
 
@@ -3315,13 +3310,13 @@ model NodeTypeSupportedSku {
   /**
    * The sku name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Specifies the tier of the node type. Possible Values: **Standard**
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier?: string;
 }
 
@@ -3332,25 +3327,25 @@ model NodeTypeSkuCapacity {
   /**
    * Lowest permitted node count in a node type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   minimum?: int32;
 
   /**
    * Highest permitted node count in a node type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maximum?: int32;
 
   /**
    * Default node count in a node type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   default?: int32;
 
   /**
    * Node type capacity scale type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scaleType?: NodeTypeSkuScaleType = NodeTypeSkuScaleType.None;
 }
 

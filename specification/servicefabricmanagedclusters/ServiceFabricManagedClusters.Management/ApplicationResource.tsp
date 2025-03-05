@@ -7,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -34,7 +33,7 @@ model ApplicationResource
    * The geo-location where the resource lives
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 }
 
@@ -61,7 +60,7 @@ interface Applications {
   /**
    * Updates the tags of an application resource of a given managed cluster.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ApplicationResource,
     PatchModel = ApplicationUpdateParameters

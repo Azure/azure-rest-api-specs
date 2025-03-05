@@ -28,7 +28,7 @@ model ApplicationTypeResource
    * The geo-location where the resource lives
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 }
 
@@ -51,7 +51,7 @@ interface ApplicationTypes {
   /**
    * Updates the tags of an application type resource of a given managed cluster.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ApplicationTypeResource,
     PatchModel = ApplicationTypeUpdateParameters
