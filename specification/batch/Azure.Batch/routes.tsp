@@ -87,6 +87,12 @@ alias ListPoolUsageMetricsParameters = {
   $filter?: string;
 };
 
+alias CreatePoolParameters = {
+  @body
+  @doc("The Pool to be created.")
+  pool: BatchPoolCreateContent;
+};
+
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
@@ -121,12 +127,10 @@ interface Pools {
     to Microsoft Support engineers.
     """)
   @route("/pools")
-  @clientName("createPoolInternal", "java")
-  createPool is CreateOperation<
+  createPool is CreateOperationNew<
     {
-      @bodyRoot
-      @doc("The Pool to be created.")
-      pool: BatchPoolCreateContent;
+      ...CommonJsonParameters;
+      ...CreatePoolParameters;
     },
     {}
   >;

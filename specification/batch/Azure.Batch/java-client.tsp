@@ -81,3 +81,24 @@ op listPoolUsageMetricsCustomization is Azure.Batch.ListOperationNew<
   listPoolUsageMetricsCustomization,
   "java"
 );
+
+// Create Pool Operation
+@doc("Optional parameters for Create Pool operation.")
+model CreateBatchPoolOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@doc("Custom override for Create Pool operation.")
+@route("/pools")
+op createPoolCustomization is Azure.Batch.CreateOperationNew<
+  {
+    ...Azure.Batch.CreatePoolParameters;
+
+    @doc("Optional parameters for Create Pool operation.")
+    options?: CreateBatchPoolOptions;
+  },
+  void
+>;
+
+@@override(Azure.Batch.Pools.createPool, createPoolCustomization, "java");
