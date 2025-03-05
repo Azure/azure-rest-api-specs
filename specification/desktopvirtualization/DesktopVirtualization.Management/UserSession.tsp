@@ -125,7 +125,7 @@ interface UserSessions {
     Request = {
       @bodyRoot sendMessage?: SendMessage;
     },
-    Response = void
+    Response = OkResponse
   >;
 }
 
