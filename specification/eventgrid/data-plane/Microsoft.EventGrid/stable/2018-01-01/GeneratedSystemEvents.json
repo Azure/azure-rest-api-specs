@@ -682,13 +682,9 @@
           "type": "string",
           "description": "The recipient Email Address"
         },
-        "internetMessageId": {
-          "type": "string",
-          "description": "The Internet Message Id of the email that has been sent"
-        },
         "messageId": {
           "type": "string",
-          "description": "The Id of the email that has been sent"
+          "description": "The Id of the email been sent"
         },
         "status": {
           "$ref": "#/definitions/AcsEmailDeliveryReportStatus",
@@ -705,9 +701,6 @@
         }
       },
       "required": [
-        "sender",
-        "recipient",
-        "internetMessageId",
         "deliveryStatusDetails"
       ]
     },
@@ -766,10 +759,6 @@
         "statusMessage": {
           "type": "string",
           "description": "Detailed status message"
-        },
-        "recipientMailServerHostName": {
-          "type": "string",
-          "description": "Recipient mail server host name"
         }
       }
     },
@@ -1064,8 +1053,7 @@
         }
       },
       "required": [
-        "from",
-        "to"
+        "error"
       ]
     },
     "AcsMessageInteractiveButtonReplyContent": {
@@ -1100,7 +1088,11 @@
           "$ref": "#/definitions/AcsMessageInteractiveListReplyContent",
           "description": "The Message Sent when a customer selects an item from a list"
         }
-      }
+      },
+      "required": [
+        "buttonReply",
+        "listReply"
+      ]
     },
     "AcsMessageInteractiveListReplyContent": {
       "type": "object",
@@ -1127,47 +1119,22 @@
       "properties": {
         "mimeType": {
           "type": "string",
-          "description": "Required. The MIME type of the file this media represents"
+          "description": "The MIME type of the file this media represents"
         },
         "id": {
           "type": "string",
-          "description": "Required. The media identifier",
+          "description": "The media identifier",
           "x-ms-client-name": "mediaId"
         },
         "fileName": {
           "type": "string",
-          "description": "Optional. The filename of the underlying media file as specified when uploaded"
+          "description": "The filename of the underlying media file as specified when uploaded"
         },
         "caption": {
           "type": "string",
-          "description": "Optional. The caption for the media object, if supported and provided"
-        },
-        "animated": {
-          "type": "boolean",
-          "description": "Optional. Set to true if the sticker is animated; false otherwise."
+          "description": "The caption for the media object, if supported and provided"
         }
-      },
-      "required": [
-        "mimeType",
-        "id"
-      ]
-    },
-    "AcsMessageReactionContent": {
-      "type": "object",
-      "description": "Message Reaction Content",
-      "properties": {
-        "messageId": {
-          "type": "string",
-          "description": "Required. WhatsApp message ID of the message that the emoji is applied to"
-        },
-        "emoji": {
-          "type": "string",
-          "description": "Optional. Unicode escape sequence of the emoji."
-        }
-      },
-      "required": [
-        "messageId"
-      ]
+      }
     },
     "AcsMessageReceivedEventData": {
       "type": "object",
@@ -1175,46 +1142,38 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "Optional. The message content"
-        },
-        "messageId": {
-          "type": "string",
-          "description": "Optional. Message ID. Format is Guid as string."
+          "description": "The message content"
         },
         "channelType": {
           "$ref": "#/definitions/AcsMessageChannelKind",
-          "description": "Required. The message channel type",
+          "description": "The message channel type",
           "x-ms-client-name": "channelKind"
-        },
-        "messageType": {
-          "type": "string",
-          "description": "Required. Whatsapp message type"
         },
         "media": {
           "$ref": "#/definitions/AcsMessageMediaContent",
-          "description": "Optional. The received message media content",
+          "description": "The received message media content",
           "x-ms-client-name": "mediaContent"
-        },
-        "reaction": {
-          "$ref": "#/definitions/AcsMessageReactionContent",
-          "description": "Optional. The received message reaction content"
         },
         "context": {
           "$ref": "#/definitions/AcsMessageContext",
-          "description": "Optional. The received message context"
+          "description": "The received message context"
         },
         "button": {
           "$ref": "#/definitions/AcsMessageButtonContent",
-          "description": "Optional. The received message button content"
+          "description": "The received message button content"
         },
         "interactive": {
           "$ref": "#/definitions/AcsMessageInteractiveContent",
-          "description": "Optional. The received message interactive content",
+          "description": "The received message interactive content",
           "x-ms-client-name": "interactiveContent"
         }
       },
       "required": [
-        "messageType"
+        "channelType",
+        "media",
+        "context",
+        "button",
+        "interactive"
       ],
       "allOf": [
         {
@@ -2470,16 +2429,8 @@
           "type": "string",
           "format": "date-time",
           "description": "The time at which the SMS was received"
-        },
-        "segmentCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of segments in the message"
         }
       },
-      "required": [
-        "segmentCount"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsSmsEventBaseProperties"
@@ -6195,9 +6146,7 @@
         }
       },
       "required": [
-        "expiredGeofenceGeometryId",
-        "geometries",
-        "invalidPeriodGeofenceGeometryId"
+        "geometries"
       ]
     },
     "MapsGeofenceExitedEventData": {
@@ -6240,11 +6189,7 @@
           "type": "string",
           "description": "The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API."
         }
-      },
-      "required": [
-        "deviceId",
-        "geometryId"
-      ]
+      }
     },
     "MapsGeofenceResultEventData": {
       "type": "object",

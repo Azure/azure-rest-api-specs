@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -30,7 +29,6 @@ model ExperimentExecution
 /**
  * Model that represents the execution properties of an Experiment.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Unused property, avoids breaking changes in SDK."
 model ExperimentExecutionProperties {
   /**
    * The status of the execution.
@@ -53,7 +51,6 @@ model ExperimentExecutionProperties {
   /**
    * Resource provisioning state. Not currently in use for executions.
    */
-  @removed(Microsoft.Chaos.Versions.v2025_01_01)
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
@@ -113,7 +110,6 @@ model ExperimentExecutionDetailsProperties {
   /**
    * Resource provisioning state. Not currently in use for executions.
    */
-  @removed(Microsoft.Chaos.Versions.v2025_01_01)
   @visibility("read")
   provisioningState?: ProvisioningState;
 

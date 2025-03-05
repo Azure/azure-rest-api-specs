@@ -283,7 +283,7 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentExtended"
             }
           },
           "202": {
@@ -292,7 +292,7 @@
           "400": {
             "description": "The template deployment validation detected failures.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentValidationError"
             }
           },
           "default": {
@@ -593,7 +593,7 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentExtended"
             }
           },
           "202": {
@@ -602,7 +602,7 @@
           "400": {
             "description": "The template deployment validation detected failures.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentValidationError"
             }
           },
           "default": {
@@ -977,7 +977,7 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentExtended"
             }
           },
           "202": {
@@ -986,7 +986,7 @@
           "400": {
             "description": "The template deployment validation detected failures.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentValidationError"
             }
           },
           "default": {
@@ -1370,7 +1370,7 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentExtended"
             }
           },
           "202": {
@@ -1379,7 +1379,7 @@
           "400": {
             "description": "The template deployment validation detected failures.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentValidationError"
             }
           },
           "default": {
@@ -1832,7 +1832,7 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentExtended"
             }
           },
           "202": {
@@ -1841,7 +1841,7 @@
           "400": {
             "description": "The template deployment validation detected failures.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentValidationError"
             }
           },
           "default": {
@@ -5521,34 +5521,13 @@
       },
       "description": "Deployment on error behavior with additional details."
     },
-    "DeploymentValidateResult": {
+    "DeploymentValidationError": {
       "properties": {
         "error": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
-          "description": "The deployment validation error."
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ID of the deployment."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the deployment."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the deployment."
-        },
-        "properties": {
-          "$ref": "#/definitions/DeploymentPropertiesExtended",
-          "description": "The template deployment properties."
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail"
         }
       },
-      "description": "Information from validate template deployment response."
+      "description": "The template deployment validation detected failures."
     },
     "DeploymentExtended": {
       "properties": {

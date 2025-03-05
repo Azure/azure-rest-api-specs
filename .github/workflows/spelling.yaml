@@ -2,13 +2,10 @@ name: SpellCheck
 
 on: pull_request
 
-permissions:
-  contents: read
-
 jobs:
   spellcheck:
     name: SpellCheck
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -22,7 +19,6 @@ jobs:
               -CSpellConfigPath 'cspell.json' `
               -SourceCommittish HEAD `
               -TargetCommittish HEAD^ `
-              -SpellCheckRoot (Resolve-Path specification) `
               -ExitWithError
           if ($LASTEXITCODE) {
             Write-Host "Spelling errors found in changed files. See https://aka.ms/ci-fix#spell-check"

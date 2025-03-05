@@ -743,11 +743,10 @@ function Get4dMatrixIndex([int]$index, [Array]$dimensions) {
 function GenerateMatrixForConfig {
     param (
       [Parameter(Mandatory = $true)][string] $ConfigPath,
-      [Parameter(Mandatory = $true)][string] $Selection,
+      [Parameter(Mandatory = $True)][string] $Selection,
       [Parameter(Mandatory = $false)][string] $DisplayNameFilter,
       [Parameter(Mandatory = $false)][array] $Filters,
-      [Parameter(Mandatory = $false)][array] $Replace,
-      [Parameter(Mandatory = $false)][Array] $NonSparseParameters = @()
+      [Parameter(Mandatory = $false)][array] $Replace
     )
     $matrixFile = Join-Path $PSScriptRoot ".." ".." ".." ".." $ConfigPath
 
@@ -762,8 +761,7 @@ function GenerateMatrixForConfig {
       -selectFromMatrixType $Selection `
       -displayNameFilter $DisplayNameFilter `
       -filters $Filters `
-      -replace $Replace `
-      -nonSparseParameters $NonSparseParameters
+      -replace $Replace
 
     return , $matrix
 }

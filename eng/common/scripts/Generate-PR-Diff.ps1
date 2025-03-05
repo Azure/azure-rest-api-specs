@@ -16,10 +16,7 @@ Param (
   [Parameter(Mandatory = $True)]
   [string] $ArtifactPath,
   [Parameter(Mandatory = $True)]
-  [string] $TargetPath,
-  [Parameter(Mandatory=$false)]
-  [AllowEmptyCollection()]
-  [array] $ExcludePaths
+  [string] $TargetPath
 )
 
 . (Join-Path $PSScriptRoot "Helpers" "git-helpers.ps1")
@@ -48,33 +45,13 @@ $changedFiles = @()
 $changedServices = @()
 
 $changedFiles = Get-ChangedFiles -DiffPath $TargetPath
-$deletedFiles = Get-ChangedFiles -DiffPath $TargetPath -DiffFilterType "D"
-
 if ($changedFiles) {
   $changedServices = Get-ChangedServices -ChangedFiles $changedFiles
 }
-else {
-  # ensure we default this to an empty array if not set
-  $changedFiles = @()
-}
 
-# ExcludePaths is an object array with the default of [] which evaluates to null.
-# If the value is null, set it to empty list to ensure that the empty list is
-# stored in the json
-if (-not $ExcludePaths) {
-  $ExcludePaths = @()
-}
-if (-not $deletedFiles) {
-  $deletedFiles = @()
-}
-if (-not $changedServices) {
-  $changedServices = @()
-}
 $result = [PSCustomObject]@{
   "ChangedFiles"    = $changedFiles
   "ChangedServices" = $changedServices
-  "ExcludePaths"    = $ExcludePaths
-  "DeletedFiles"    = $deletedFiles
   "PRNumber"        = if ($env:SYSTEM_PULLREQUEST_PULLREQUESTNUMBER) { $env:SYSTEM_PULLREQUEST_PULLREQUESTNUMBER } else { "-1" }
 }
 

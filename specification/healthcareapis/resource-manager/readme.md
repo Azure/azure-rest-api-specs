@@ -28,19 +28,10 @@ These are the global settings for HealthcareApis service.
 title: HealthcareApisManagementClient
 description: Azure Healthcare APIs Client
 openapi-type: arm
-tag: package-preview-2025-03-01
+tag: package-2024-03-31
 azure-arm: true
 ```
 
-
-### Tag: package-preview-2025-03-01
-
-These settings apply only when `--tag=package-preview-2025-03-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-03-01'
-input-file:
-  - Microsoft.HealthcareApis/preview/2025-03-01-preview/healthcare-apis.json
-```
 
 ### Tag: package-2024-03-31
 
@@ -212,7 +203,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

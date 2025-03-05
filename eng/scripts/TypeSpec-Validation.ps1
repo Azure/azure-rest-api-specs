@@ -6,7 +6,7 @@ param (
   [switch]$GitClean = $false,
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
-  [string]$HeadCommitish = "HEAD"
+  [string]$TargetCommitish = "HEAD"
 )
 
 if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) { 
@@ -19,7 +19,7 @@ if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) {
 
 $typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
   -BaseCommitish:$BaseCommitish `
-  -HeadCommitish:$HeadCommitish `
+  -TargetCommitish:$TargetCommitish `
   -CheckAll:$CheckAll
 
 if ($TotalShards -gt 1 -and $TotalShards -le $typespecFolders.Count) { 

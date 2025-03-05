@@ -46,7 +46,6 @@ namespace Microsoft.Fabric {
     "FabricCapacityAdministration",
     "csharp"
   );
-  @@clientName(Quota, "FabricQuota", "csharp");
 }
 
 @@clientName(Microsoft.Fabric, "FabricMgmtClient", "python");

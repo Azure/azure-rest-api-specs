@@ -26,16 +26,7 @@ These are the global settings for the Managed Service Identity API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-11-30
-```
-
-### Tag: package-2024-11-30
-
-These settings apply only when `--tag=package-2024-11-30` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-11-30'
-input-file:
-  - Microsoft.ManagedIdentity/stable/2024-11-30/ManagedIdentity.json
+tag: package-2023-01-31
 ```
 
 ### Tag: package-2023-07-31-preview
@@ -115,7 +106,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

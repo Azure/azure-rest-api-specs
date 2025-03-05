@@ -1,6 +1,4 @@
-import { ParseArgsConfig, parseArgs } from "node:util";
-import { Suppression, getSuppressions } from "suppressions";
-
+import { parseArgs, ParseArgsConfig } from "node:util";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
 import { FlavorAzureRule } from "./rules/flavor-azure.js";
@@ -8,8 +6,8 @@ import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
-import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
+import { getSuppressions, Suppression } from "suppressions";
 
 export async function main() {
   const host = new TsvRunnerHost();
@@ -49,7 +47,6 @@ export async function main() {
     new LinterRulesetRule(),
     new CompileRule(),
     new FormatRule(),
-    new SdkTspConfigValidationRule(),
   ];
   let success = true;
   for (let i = 0; i < rules.length; i++) {

@@ -1,4 +1,4 @@
-﻿import "@typespec/versioning";
+import "@typespec/versioning";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
@@ -221,9 +221,6 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   /** The time at which the SMS was received */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   receivedTimestamp: utcDateTime;
-
-  /** Number of segments in the message */
-  segmentCount: int32;
 }
 
 //TODO: This might need some fixing
@@ -258,15 +255,12 @@ model AcsRecordingFileStatusUpdatedEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event. */
 model AcsEmailDeliveryReportReceivedEventData {
   /** The Sender Email Address */
-  sender: string;
+  sender?: string;
 
   /** The recipient Email Address */
-  recipient: string;
+  recipient?: string;
 
-  /** The Internet Message Id of the email that has been sent */
-  internetMessageId: string;
-
-  /** The Id of the email that has been sent */
+  /** The Id of the email been sent */
   messageId?: string;
 
   /** The status of the email. Any value other than Delivered is considered failed. */
@@ -902,9 +896,6 @@ union AcsEmailDeliveryReportStatus {
 model AcsEmailDeliveryReportStatusDetails {
   /** Detailed status message */
   statusMessage?: string;
-
-  /** Recipient mail server host name */
-  recipientMailServerHostName?: string;
 }
 
 /** Schema of common properties of all chat thread events */
@@ -1194,60 +1185,38 @@ model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsMessageReceivedEventData extends AcsMessageEventData {
-  /** Optional. The message content */
+  /** The message content */
   content?: string;
 
-  /** Optional. Message ID. Format is Guid as string. */
-  messageId?: string;
-
-  /** Required. The message channel type */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
+  /** The message channel type */
   channelType: AcsMessageChannelKind;
 
-  /** Required. Whatsapp message type */
-  messageType: string;
+  /** The received message media content */
+  media: AcsMessageMediaContent;
 
-  /** Optional. The received message media content */
-  media?: AcsMessageMediaContent;
+  /** The received message context */
+  context: AcsMessageContext;
 
-  /** Optional. The received message reaction content */
-  reaction?: AcsMessageReactionContent;
+  /** The received message button content */
+  button: AcsMessageButtonContent;
 
-  /** Optional. The received message context */
-  context?: AcsMessageContext;
-
-  /** Optional. The received message button content */
-  button?: AcsMessageButtonContent;
-
-  /** Optional. The received message interactive content */
-  interactive?: AcsMessageInteractiveContent;
+  /** The received message interactive content */
+  interactive: AcsMessageInteractiveContent;
 }
 
 /** Message Media Content */
 model AcsMessageMediaContent {
-  /** Required. The MIME type of the file this media represents */
-  mimeType: string;
+  /** The MIME type of the file this media represents */
+  mimeType?: string;
 
-  /** Required. The media identifier */
-  id: string;
+  /** The media identifier */
+  id?: string;
 
-  /** Optional. The filename of the underlying media file as specified when uploaded */
+  /** The filename of the underlying media file as specified when uploaded */
   fileName?: string;
 
-  /** Optional. The caption for the media object, if supported and provided */
+  /** The caption for the media object, if supported and provided */
   caption?: string;
-
-  /** Optional. Set to true if the sticker is animated; false otherwise. */
-  animated?: boolean;
-}
-
-/** Message Reaction Content */
-model AcsMessageReactionContent {
-  /** Required. WhatsApp message ID of the message that the emoji is applied to */
-  messageId: string;
-
-  /** Optional. Unicode escape sequence of the emoji. */
-  emoji?: string;
 }
 
 /** Message Context */
@@ -1275,10 +1244,10 @@ model AcsMessageInteractiveContent {
   type: AcsInteractiveReplyKind;
 
   /** The Message Sent when a customer clicks a button */
-  buttonReply?: AcsMessageInteractiveButtonReplyContent;
+  buttonReply: AcsMessageInteractiveButtonReplyContent;
 
   /** The Message Sent when a customer selects an item from a list */
-  listReply?: AcsMessageInteractiveListReplyContent;
+  listReply: AcsMessageInteractiveListReplyContent;
 }
 
 /** Message Interactive button reply content for a user to business message */
@@ -1305,17 +1274,17 @@ model AcsMessageInteractiveListReplyContent {
 /** Schema of common properties of all chat thread events */
 model AcsMessageEventData {
   /** The message sender */
-  from: string;
+  from?: string;
 
   /** The message recipient */
-  to: string;
+  to?: string;
 
   /** The time message was received */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   receivedTimeStamp: utcDateTime;
 
   /** The channel event error */
-  error?: AcsMessageChannelEventError;
+  error: AcsMessageChannelEventError;
 }
 
 /** Message Channel Event Error */

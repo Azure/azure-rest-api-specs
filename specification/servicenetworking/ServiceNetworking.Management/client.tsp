@@ -8,11 +8,3 @@ using Azure.ClientGenerator.Core;
   "ServiceNetworkingManagementClient",
   "javascript"
 );
-@@clientName(Microsoft.ServiceNetworking,
-  "TrafficControllerManagementClient",
-  "java"
-);
-@@clientNamespace(Microsoft.ServiceNetworking,
-  "com.azure.resourcemanager.servicenetworking",
-  "java"
-);

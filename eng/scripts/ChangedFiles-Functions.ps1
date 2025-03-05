@@ -1,4 +1,4 @@
-function Get-ChangedFiles($baseCommitish = "HEAD^", $headCommitish = "HEAD", $diffFilter = "d") {
+function Get-ChangedFiles($baseCommitish = "HEAD^", $targetCommitish = "HEAD", $diffFilter = "d") {
   # diff-filter=d is to exclude any deleted files as we don't generally 
   # want to do work against files that no longer exist.
   # https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---diff-filterACDMRTUXB82308203
@@ -9,7 +9,7 @@ function Get-ChangedFiles($baseCommitish = "HEAD^", $headCommitish = "HEAD", $di
   # Get all the files that have changed between HEAD and the commit before head
   # For PR's that last commit is always a merge commit so HEAD^ will get the parent
   # commit of the base branch and as such will diff HEAD against HEAD^
-  $changedFiles = git -c core.quotepath=off diff --name-only --diff-filter=$diffFilter $baseCommitish $headCommitish
+  $changedFiles = git -c core.quotepath=off diff --name-only --diff-filter=$diffFilter $baseCommitish $targetCommitish
   $changedFiles = $changedFiles | Where-Object { !$_.Contains("ChangedFiles-Functions") }
 
   Write-Verbose "Changed files:"

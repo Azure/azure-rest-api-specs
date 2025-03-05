@@ -3,7 +3,7 @@ param (
   [switch]$IgnoreCoreFiles = $false,
   [switch]$CheckAll = $false,
   [string]$BaseCommitish = "HEAD^",
-  [string]$HeadCommitish = "HEAD"
+  [string]$TargetCommitish = "HEAD"
 )
 Set-StrictMode -Version 3
 
@@ -19,7 +19,7 @@ if ($CheckAll) {
   $checkedAll = $true
 }
 else {
-  $changedFiles = @(Get-ChangedFiles -baseCommitish $BaseCommitish -headCommitish $HeadCommitish -diffFilter "")
+  $changedFiles = @(Get-ChangedFiles -baseCommitish $BaseCommitish -targetCommitish $TargetCommitish -diffFilter "")
   $coreChangedFiles = Get-ChangedCoreFiles $changedFiles
 
   if ($coreChangedFiles -and !$IgnoreCoreFiles) {
