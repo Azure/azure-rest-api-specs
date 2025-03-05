@@ -5,7 +5,7 @@
     "api-version": "2025-01-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "tuningOption": "index",
-    "$recommendationType": "CreateIndex"
+    "recommendationType": "CreateIndex"
   },
   "responses": {
     "200": {
@@ -56,7 +56,9 @@
                 "table": "partsupp",
                 "indexType": "BTREE",
                 "indexName": "ps_suppkey_idx",
-                "indexColumns": "\"partsupp\".\"ps_suppkey\""
+                "indexColumns": [
+                  "\"partsupp\".\"ps_suppkey\""
+                ]
               }
             },
             "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestrecs/tuningOptions/index/recommendations/1",
@@ -108,7 +110,9 @@
                 "table": "partsupp",
                 "indexType": "BTREE",
                 "indexName": "ps_partkey_idx",
-                "indexColumns": "\"partsupp\".\"ps_partkey\""
+                "indexColumns": [
+                  "\"partsupp\".\"ps_partkey\""
+                ]
               }
             },
             "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestrecs/tuningOptions/index/recommendations/2",

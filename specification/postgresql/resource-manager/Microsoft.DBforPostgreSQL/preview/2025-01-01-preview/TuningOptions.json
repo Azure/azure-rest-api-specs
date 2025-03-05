@@ -228,11 +228,22 @@
           "description": "Index name."
         },
         "indexColumns": {
-          "type": "string",
-          "description": "Index columns. These will be semi-column separated."
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Index columns."
+        },
+        "includedColumns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Index included columns."
         }
       },
-      "description": "Recommendation details for the recommended action."
+      "description": "Recommendation details for the recommended action.",
+      "readOnly": true
     },
     "IndexRecommendationResourceProperties": {
       "type": "object",
@@ -268,7 +279,8 @@
           "type": "string",
           "enum": [
             "CreateIndex",
-            "DropIndex"
+            "DropIndex",
+            "ReIndex"
           ],
           "x-ms-enum": {
             "name": "RecommendationTypeEnum",
@@ -327,7 +339,8 @@
           "description": "Stores recommendation details for the recommended action."
         }
       },
-      "description": "Index recommendation properties."
+      "description": "Index recommendation properties.",
+      "readOnly": true
     },
     "IndexRecommendationResource": {
       "type": "object",
@@ -414,7 +427,7 @@
       "x-ms-parameter-location": "method"
     },
     "RecommendationTypeParameter": {
-      "name": "$recommendationType",
+      "name": "recommendationType",
       "in": "query",
       "required": false,
       "type": "string",
