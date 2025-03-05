@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.Impact",
-})
+@service(#{ title: "Microsoft.Impact" })
 @versioned(Versions)
 @armCommonTypesVersion(CommonTypes.Versions.v3)
 namespace Microsoft.Impact;
