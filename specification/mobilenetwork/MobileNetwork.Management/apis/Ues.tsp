@@ -22,7 +22,7 @@ model UeInfo is ProxyResource<UeInfoPropertiesFormat> {
   @path
   @key("ueId")
   @segment("ues")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

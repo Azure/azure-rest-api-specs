@@ -22,7 +22,7 @@ model PacketCoreControlPlane
   @path
   @key("packetCoreControlPlaneName")
   @segment("packetCoreControlPlanes")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
@@ -39,7 +39,7 @@ interface PacketCoreControlPlanes {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PacketCoreControlPlane>;
 
   @doc("Patch packet core control plane resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     PacketCoreControlPlane,
     IdentityAndTagsObject

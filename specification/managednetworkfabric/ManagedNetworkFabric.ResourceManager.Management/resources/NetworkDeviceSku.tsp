@@ -18,7 +18,7 @@ model NetworkDeviceSku extends Azure.ResourceManager.Foundations.ProxyResource {
   @path
   @key("networkDeviceSkuName")
   @segment("networkDeviceSkus")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkDeviceSku properties */

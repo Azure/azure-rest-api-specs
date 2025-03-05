@@ -42,14 +42,14 @@ model SubscriptionInternalProperties {
   createdTime?: utcDateTime;
 
   @doc("Subscription Provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
 @doc("List of promotions")
 model PromotionsList {
   @doc("Promotions that are offered to the subscription")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   value: PromotionData[];
 }
 

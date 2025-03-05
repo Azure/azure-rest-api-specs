@@ -17,7 +17,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
+@service(#{
   title: "Microsoft.AlicespringsDataplane management service",
   version: "2023-10-04-preview",
 })

@@ -25,33 +25,33 @@ model NetworkFunctionResource
   @key("networkFunctionName")
   @path
   @segment("networkFunctions")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 
 @doc("Network Function Properties.")
 model NetworkFunctionResourceProperties {
   @doc("Provisioned SKU Value.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   sku: SkuDefinitions;
 
   @doc("Type of network function")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   networkFunctionType: NetworkFunctionType;
 
   @doc("Administrative state of the network function")
   networkFunctionAdministrativeState: NetworkFunctionAdministrativeState;
 
   @doc("Operational state of the network function")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkFunctionOperationalStatus?: NetworkFunctionOperationalStatus;
 
   @doc("Count of infrastructure elements used by this network function (vCPUs, in units of 8)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   infrastructureElementCount?: int32;
 
   @doc("Capacity of the network function in units of 10000.  This represents the session count or the Simultaneously Attached Users (SAU) count as applicable")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   capacity?: int32;
 
   @doc("User provided description")
@@ -61,7 +61,7 @@ model NetworkFunctionResourceProperties {
   deploymentNotes?: string;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

@@ -15,9 +15,7 @@ using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Suppress missing operations endpoint as the same is defined ../operations/ChangeControl.Management/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.ChangeSafety management service",
-})
+@service(#{ title: "Microsoft.ChangeSafety management service" })
 @versioned(Microsoft.ChangeSafety.Versions)
 namespace Microsoft.ChangeSafety;
 

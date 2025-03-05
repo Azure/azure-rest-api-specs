@@ -42,11 +42,11 @@ model SharedPrivateLinkResourceProperties {
   @doc("The DNS zone to be included in the DNS name of the shared private link. Value is service-specific.")
   dnsZone?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Status of the shared private link resource. Can be Pending, Approved, Rejected or Disconnected.")
   status?: SharedPrivateLinkResourceStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the resource.")
   provisioningState?: ResourceProvisioningState;
 }

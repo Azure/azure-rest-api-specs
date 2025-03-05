@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.PowerPlatformConnector Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.PowerPlatformConnector management service",
-})
+@service(#{ title: "Microsoft.PowerPlatformConnector management service" })
 @versioned(Microsoft.PowerPlatformConnector.Versions)
 namespace Microsoft.PowerPlatformConnector;
 

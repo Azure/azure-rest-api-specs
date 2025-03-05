@@ -23,7 +23,7 @@ model DataNetwork is TrackedResource<DataNetworkPropertiesFormat> {
   @path
   @key("dataNetworkName")
   @segment("dataNetworks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -36,7 +36,7 @@ interface DataNetworks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DataNetwork>;
 
   @doc("Updates data network tags.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<DataNetwork, TagsObject>;
 
   @doc("Deletes the specified data network.")

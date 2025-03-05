@@ -17,9 +17,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.SoftwareSupplyChain Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.SoftwareSupplyChain management service",
-})
+@service(#{ title: "Microsoft.SoftwareSupplyChain management service" })
 @versioned(Microsoft.SoftwareSupplyChain.Versions)
 namespace Microsoft.SoftwareSupplyChain;
 

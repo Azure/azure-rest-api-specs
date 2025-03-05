@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft Inventory",
-})
+@service(#{ title: "Microsoft Inventory" })
 @versioned(Microsoft.Inventory.Versions)
 namespace Microsoft.Inventory;
 

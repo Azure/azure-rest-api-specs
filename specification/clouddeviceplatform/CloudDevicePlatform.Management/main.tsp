@@ -14,9 +14,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.CloudDevicePlatform Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.CloudDevicePlatform management service",
-})
+@service(#{ title: "Microsoft.CloudDevicePlatform management service" })
 @versioned(Versions)
 namespace Microsoft.CloudDevicePlatform;
 

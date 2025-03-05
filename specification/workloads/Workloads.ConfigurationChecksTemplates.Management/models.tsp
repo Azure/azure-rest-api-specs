@@ -180,21 +180,21 @@ model SharedParameters {
    * Name of the property. This can be updated by Author only. Not allowed for customization.
    */
   @doc("Name of the property.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /**
    * Data type of the value. This can be updated by Author only. Not allowed for customization.
    */
   @doc("Data type of the value.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataType: DataType;
 
   /**
    * Unit of the property. This can be updated by Author only. Not allowed for customization.
    */
   @doc("Unit of the property.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   unit: string;
 
   /**
@@ -237,7 +237,7 @@ model CheckConfiguration {
    * The origin of how the check applied at the role level in the virtual instance.
    */
   @doc("The origin of how the check applied at the role level in the virtual instance.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   originType?: CheckOriginType;
 
   /**
@@ -250,14 +250,14 @@ model CheckConfiguration {
    * List of input parameters to be used in the check.
    */
   @doc("List of input parameters to be used in the check.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   inputParameters?: SharedParameters[];
 
   /**
    * List of output parameters to be used in the check.
    */
   @doc("List of output parameters to be used in the check.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   outputParameters: OutputParameters[];
 }
 
@@ -267,14 +267,14 @@ model RoleConfiguration {
    * Name of the role. This can be updated by Author only. Not allowed for customization.
    */
   @doc("Name of the role.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   roleName: string;
 
   /**
    * List of checks to be executed for the role.
    */
   @doc("List of checks to be executed for the role.")
-  @OpenAPI.extension("x-ms-identifiers", ["checkId"])
+  @Azure.ResourceManager.identifiers(#["checkId"])
   checks: CheckConfiguration[];
 }
 
@@ -290,7 +290,7 @@ model WorkloadComponents {
    * List of roles managed at the component level.
    */
   @doc("List of roles managed at the component level.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   roles: RoleConfiguration[];
 }
 
@@ -312,14 +312,14 @@ model Configuration {
    * List of components managed at the workload level.
    */
   @doc("List of components managed at the workload level.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   components?: WorkloadComponents[];
 
   /**
    * List of common checks to be executed for all the components (or) at parent resource level.
    */
   @doc("List of common checks to be executed for all the components (or) at parent resource level.")
-  @OpenAPI.extension("x-ms-identifiers", ["checkId"])
+  @Azure.ResourceManager.identifiers(#["checkId"])
   commonChecks?: CheckConfiguration[];
 }
 
@@ -337,7 +337,7 @@ model ConfigurationChecksTemplateProperties {
    * The provisioning state of the resource.
    */
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ConfigurationChecksTemplateProvisioningState;
 
   /**

@@ -18,7 +18,7 @@ model Geography is ProxyResource<GeographyProperties> {
   @doc("The geography short id")
   @segment("geographies")
   @key("geographyShortId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z-]{2,5}$")
   @path
   name: string;
@@ -38,7 +38,7 @@ model GeographyProperties {
   cloudResourceId: string;
 
   /** The provisioning state of resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

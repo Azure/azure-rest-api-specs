@@ -12,9 +12,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.AccessPoint Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.AccessPoint management service",
-})
+@service(#{ title: "Microsoft.AccessPoint management service" })
 @versioned(Microsoft.AccessPoint.Versions)
 namespace Microsoft.AccessPoint;
 

@@ -24,7 +24,7 @@ model DelegatedIdentity is TrackedResource<DelegatedIdentityProperties> {
 @doc("Represents the properties of a CloudDevicePlatform delegated identity resource.")
 model DelegatedIdentityProperties {
   @doc("The status of the last provisioning operation performed on the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

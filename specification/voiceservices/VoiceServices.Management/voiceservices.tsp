@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.VoiceServices")
-@service({
-  title: "Microsoft.VoiceServices",
-})
+@service(#{ title: "Microsoft.VoiceServices" })
 @versioned(Versions)
 namespace Microsoft.VoiceServices;
 
@@ -77,7 +75,7 @@ union ResourceProvisioningState {
 @doc("General resource properties.")
 model ResourceProperties {
   @doc("Resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

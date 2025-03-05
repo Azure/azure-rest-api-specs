@@ -76,7 +76,7 @@ model CollaborationProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -87,7 +87,7 @@ model CollaborationMember {
   /**
    * Identifier of the member.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   identifier?: string;
 
   /**
@@ -108,25 +108,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -163,31 +163,31 @@ model ConsortiumProperties {
   /**
    * Gets or sets the endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endpoint?: string;
 
   /**
    * Gets or sets the public service certificate in PEM format.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serviceCertificatePem?: string;
 
   /**
    * Gets or sets the list of members to be added to the consortium.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   members?: ConsortiumMember[];
 
   /**
    * Gets or sets the managed on-behalf-of configuration.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -223,7 +223,7 @@ model ManagedOnBehalfOfConfiguration {
   /**
    * Managed-On-Behalf-Of broker resources
    */
-  @OpenAPI.extension("x-ms-identifiers", ["id"])
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   moboBrokerResources?: MoboBrokerResource[];
 }
 
@@ -250,18 +250,18 @@ model ContractProperties {
   /**
    * Gets or sets the contract Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   contractId: string;
 
   /**
    * Gets or sets the deployment policy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deploymentPolicy?: string;
 
   /**
    * Gets or sets the deployment template.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deploymentTemplate?: string;
 }

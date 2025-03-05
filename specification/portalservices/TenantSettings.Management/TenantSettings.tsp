@@ -25,7 +25,7 @@ model SettingsResource
   @doc("Azure Portal settings that apply to the entire tenant.")
   @segment("settings")
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;

@@ -25,12 +25,12 @@ model NetworkAnalyticsProducts
 @removed(Versions.v2023_11_15)
 model NetworkAnalyticsProductsProperties {
   @doc("The network analytics product provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The network analytics product information")
-  @extension("x-ms-identifiers", ["productName"])
-  @visibility("create", "read")
+  @extension("x-ms-identifiers", #["productName"])
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   networkAnalyticsProductInformation: NetworkAnalyticsProductInformation[];
 }
 
@@ -47,7 +47,7 @@ model NetworkAnalyticsProductInformation {
   productVersions: string[];
 
   @doc("The connectors supported by the product")
-  @extension("x-ms-identifiers", ["connectorName"])
+  @extension("x-ms-identifiers", #["connectorName"])
   productConnectors: NetworkAnalyticsProductConnectorInformation[];
 }
 

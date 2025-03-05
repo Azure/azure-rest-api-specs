@@ -19,7 +19,7 @@ model Organization is ProxyResource<OrganizationProperties> {
   @key("organizationName")
   @segment("organizations")
   @doc("Unique name of the organization")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

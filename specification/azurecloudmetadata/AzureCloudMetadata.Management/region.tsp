@@ -19,7 +19,7 @@ model Region is ProxyResource<RegionProperties> {
   @doc("The region name")
   @segment("regions")
   @key("regionName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
@@ -90,7 +90,7 @@ model RegionProperties {
   geographyResourceId: string;
 
   /** The provisioning state of resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

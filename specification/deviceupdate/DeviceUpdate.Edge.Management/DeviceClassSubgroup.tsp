@@ -47,7 +47,7 @@ interface DeviceClassSubgroups {
   /**
    * Updates a Device Class Subgroup.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<DeviceClassSubgroup, TagUpdate>;
 
   /**

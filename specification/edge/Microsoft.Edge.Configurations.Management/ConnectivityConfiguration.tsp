@@ -41,7 +41,7 @@ model ConnectivityConfiguration
 @doc("ConnectivityConfigurationProperties Properties")
 model ConnectivityConfigurationProperties {
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("Scenario in which this configuration is used")

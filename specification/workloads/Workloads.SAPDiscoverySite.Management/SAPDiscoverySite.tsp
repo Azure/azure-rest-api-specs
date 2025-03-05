@@ -17,7 +17,7 @@ model SAPDiscoverySite is TrackedResource<SAPDiscoverySiteProperties> {
   @path
   @key("sapDiscoverySiteName")
   @segment("sapDiscoverySites")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /**
@@ -42,7 +42,7 @@ interface SAPDiscoverySites {
   /**
    * Updates a SAP Migration discovery site resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmTagsPatchSync<SAPDiscoverySite>;
 
   /**

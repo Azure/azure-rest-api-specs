@@ -23,15 +23,15 @@ model PolicySettings {
   customBlockResponse?: CustomBlockResponse;
 
   @doc("Request body inspection settings overrides for endpoint types")
-  @extension("x-ms-identifiers", ["endpointType"])
+  @Azure.ResourceManager.identifiers(#["endpointType"])
   requestBodyInspections?: RequestBodyInspection[] = #[];
 
   @doc("Request body size limitation settings overrides for endpoint types")
-  @extension("x-ms-identifiers", ["endpointType"])
+  @Azure.ResourceManager.identifiers(#["endpointType"])
   requestBodySizeLimitations?: RequestBodySizeLimitation[] = #[];
 
   @doc("File upload size limitation settings overrides for endpoint types")
-  @extension("x-ms-identifiers", ["endpointType"])
+  @Azure.ResourceManager.identifiers(#["endpointType"])
   fileUploadSizeLimitations?: FileUploadSizeLimitation[] = #[];
 }
 

@@ -23,7 +23,7 @@ model Sim is ProxyResource<SimPropertiesFormat> {
   @path
   @key("simName")
   @segment("sims")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

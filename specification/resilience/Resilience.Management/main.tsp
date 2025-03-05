@@ -12,9 +12,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.Resilience Resource Provider management API. */
 @armProviderNamespace(ProviderName)
-@service({
-  title: ProviderName,
-})
+@service(#{ title: ProviderName })
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 @versioned(Versions)
 namespace Microsoft.Resilience;
@@ -52,7 +50,7 @@ model ResilienceResource is ExtensionResource<ResilienceProperties> {
   @doc("The resilience resource name")
   @segment("resilienceStates")
   @key("resilienceState")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @pattern(resourceNameRegex)
   name: string;
@@ -61,25 +59,25 @@ model ResilienceResource is ExtensionResource<ResilienceProperties> {
 @doc("Resilience Properties")
 model ResilienceProperties {
   @doc("Type of event that triggered the resilience evaluation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eventType: ArnEventType;
 
   @added(Versions.v2024_11_01_preview)
   @doc("Tenant ID of the resource(s) being evaluated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId: string;
 
   @added(Versions.v2024_11_01_preview)
   @doc("Resilience state of the resource after evaluating all its related resources' resilience states.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resilienceState: ResilienceState;
 
   @doc("Resilience evaluation for the resource and all its related resources.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resilienceProfiles: ResourceResilienceProfile[];
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -92,7 +90,7 @@ model ResourceResilienceProfile {
   @doc("Resource Type of the resource being evaluated.")
   type: string;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Location of the resource being evaluated.")
   location: string;
 

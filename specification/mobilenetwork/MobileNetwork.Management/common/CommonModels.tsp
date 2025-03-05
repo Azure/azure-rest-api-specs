@@ -136,11 +136,11 @@ model UserAssignedIdentities {
 @doc("User assigned identity properties.")
 model UserAssignedIdentity {
   @doc("The principal ID of the assigned identity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: uuid;
 
   @doc("The client ID of the assigned identity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clientId?: uuid;
 }
 
@@ -208,7 +208,7 @@ model UeIpAddress {
 @doc("Managed-On-Behalf-Of configuration properties. This configuration exists for the resources where a resource provider manages those resources on behalf of the resource owner.")
 model ManagedOnBehalfOfConfiguration {
   @doc("Managed-On-Behalf-Of broker resources")
-  @extension("x-ms-identifiers", ["id"])
+  @extension("x-ms-identifiers", #["id"])
   moboBrokerResources?: MoboBrokerResource[];
 }
 
@@ -228,11 +228,11 @@ model VirtualNetworkResourceId {
 @doc("Operational Status of the resource")
 model OperationalStatus {
   @doc("Status of the deployed workload")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   workload?: string;
 
   @doc("Health check results")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   healthCheck?: string;
 }
 
@@ -245,7 +245,7 @@ model QualifiedComponentDeploymentParameters {
   parameters?: ComponentDeploymentParameters;
 
   @doc("Deployment secrets")
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets?: ComponentDeploymentSecrets;
 }
 

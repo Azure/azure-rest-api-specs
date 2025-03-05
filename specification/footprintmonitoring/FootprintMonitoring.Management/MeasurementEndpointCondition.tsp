@@ -27,7 +27,7 @@ model MeasurementEndpointCondition
   /**
    * The type of the resource.
    */
-  // @visibility("read")
+  //@visibility(Lifecycle.Read)
   // type?: string;
 }
 
@@ -39,8 +39,8 @@ interface MeasurementEndpointConditions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `Get a Footprint measurement endpoint condition (max).`: {
+    #{
+      `Get a Footprint measurement endpoint condition (max).`: #{
         $ref: "./examples/MeasurementEndpointConditions_Get_MaximumSet_Gen.json",
       },
     }
@@ -53,8 +53,8 @@ interface MeasurementEndpointConditions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `Create or update a Footprint measurement endpoint condition (max).`: {
+    #{
+      `Create or update a Footprint measurement endpoint condition (max).`: #{
         $ref: "./examples/MeasurementEndpointConditions_CreateOrUpdate_MaximumSet_Gen.json",
       },
     }
@@ -67,8 +67,8 @@ interface MeasurementEndpointConditions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `Delete a Footprint measurement endpoint condition (max).`: {
+    #{
+      `Delete a Footprint measurement endpoint condition (max).`: #{
         $ref: "./examples/MeasurementEndpointConditions_Delete_MaximumSet_Gen.json",
       },
     }
@@ -89,8 +89,8 @@ interface MeasurementEndpointConditions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `List all Footprint measurement endpoint conditions (max).`: {
+    #{
+      `List all Footprint measurement endpoint conditions (max).`: #{
         $ref: "./examples/MeasurementEndpointConditions_ListByMeasurementEndpoint_MaximumSet_Gen.json",
       },
     }

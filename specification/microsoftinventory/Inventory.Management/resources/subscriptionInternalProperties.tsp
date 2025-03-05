@@ -12,9 +12,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft Inventory",
-})
+@service(#{ title: "Microsoft Inventory" })
 @versioned(Microsoft.Inventory.Versions)
 namespace Microsoft.Inventory;
 

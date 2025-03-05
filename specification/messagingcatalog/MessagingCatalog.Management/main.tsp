@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.MessagingCatalog",
-})
+@service(#{ title: "Microsoft.MessagingCatalog" })
 @doc("Messaging Catalog management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)

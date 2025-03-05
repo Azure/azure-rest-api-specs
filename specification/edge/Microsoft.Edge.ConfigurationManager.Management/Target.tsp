@@ -38,7 +38,7 @@ model SolutionTemplateParameter {
   solutionInstanceName?: string;
 
   @doc("Solution Dependencies")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   solutionDependencies?: SolutionDependencyParameter[];
 }
 
@@ -74,7 +74,7 @@ model SolutionDependencyParameter {
   targetId?: string;
 
   @doc("Solution dependencies")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   dependencies?: SolutionDependencyParameter[];
 }
 
@@ -113,7 +113,7 @@ model TargetProperties {
   hierarchyLevel: string;
 
   @doc("Status of target")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: DeploymentStatus;
 
   @doc("Scope of the target resource")
@@ -123,7 +123,7 @@ model TargetProperties {
   state?: ResourceState;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

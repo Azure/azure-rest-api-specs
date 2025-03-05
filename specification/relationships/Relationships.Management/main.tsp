@@ -10,9 +10,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.Relationships Management Service",
-})
+@service(#{ title: "Microsoft.Relationships Management Service" })
 @doc("Microsoft.Relationships Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.Relationships;
@@ -33,11 +31,11 @@ enum Versions {
 @doc("Provides information about the relationship properties.")
 model RelationshipMetadata {
   @doc("The type of the relationship source resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceType: string;
 
   @doc("The type of the relationship target resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetType: string;
 }
 
@@ -61,11 +59,11 @@ union RelationshipOrigins {
 @doc("Provides information about the origin of a relationship.")
 model RelationshipOriginInformation {
   @doc("Identifies the origin type of the relationship.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   relationshipOriginType: RelationshipOrigins;
 
   @doc("The name of the discovery engine that created the relationship.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   discoveryEngine?: string;
 }
 
@@ -92,7 +90,7 @@ union ProvisioningState {
 @doc("Base relationship properties.")
 model BaseRelationshipProperties<AllowedTargetResourceTypes extends ArmResourceIdentifierAllowedResource[] = never> {
   @doc("The relationship source resource id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceId: armResourceIdentifier;
 
   @doc("The relationship target resource id.")
@@ -102,15 +100,15 @@ model BaseRelationshipProperties<AllowedTargetResourceTypes extends ArmResourceI
   targetTenant?: string;
 
   @doc("Information about the origin of the relationship.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   originInformation: RelationshipOriginInformation;
 
   @doc("Metadata about the relationship.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   metadata: RelationshipMetadata;
 
   @doc("The provisioning state of the relationship.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -126,7 +124,7 @@ model DependencyOfRelationship
   is ExtensionResource<DependencyOfRelationshipProperties> {
   @doc("Name of dependencyOf relationship.")
   @pattern("^[a-zA-Z0-9]{3,64}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key
   @path
   @segment("dependencyOf")
@@ -151,7 +149,7 @@ model ServiceGroupMemberRelationship
   is ExtensionResource<ServiceGroupMemberRelationshipProperties> {
   @doc("Name of ServiceGroupMember relationship.")
   @pattern("^[a-zA-Z0-9]{3,64}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key
   @path
   @segment("serviceGroupMember")

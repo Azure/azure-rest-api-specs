@@ -10,7 +10,7 @@ model Library is TrackedResource<LibraryProperties> {
   @key("libraryName")
   @segment("libraries")
   @path
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[\\w\\-]{3,24}$")
   name: string;
 }
@@ -21,7 +21,7 @@ model LibraryProperties {
   container: url;
 
   @doc("Provisioning state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -32,7 +32,7 @@ model Sample is TrackedResource<SampleProperties> {
   @key("sampleName")
   @segment("samples")
   @path
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[\\w\\-]{3,24}$")
   name: string;
 }
@@ -46,7 +46,7 @@ model SampleProperties {
   paths: Array<string>;
 
   @doc("Provisioning state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -57,38 +57,38 @@ model Analysis is TrackedResource<AnalysisProperties> {
   @key("analysisName")
   @segment("analyses")
   @path
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[\\w\\-]{3,24}$")
   name: string;
 }
 
 @doc("The properties of Analysis")
 model AnalysisProperties {
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The sample names being analyzed")
   samples: Array<string>;
 
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The settings for the analysis")
   settings: AnalysisSettings;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The time this analysis started")
   startedAt?: utcDateTime;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The time this analysis finished")
   finishedAt?: utcDateTime;
 
   @doc("Provisioning state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AnalysisState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The result if the analysis succeeded")
   result?: AnalysisResult;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The error if the analysis failed")
   error?: {
     code: string;

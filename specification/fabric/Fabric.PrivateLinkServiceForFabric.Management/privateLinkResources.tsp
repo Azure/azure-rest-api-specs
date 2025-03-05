@@ -23,7 +23,7 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   @key("privateLinkResourceName")
   @path
   @segment("privateLinkResources")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -31,14 +31,14 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
 @doc("PrivateLinkResource Properties")
 model PrivateLinkResourceProperties {
   @doc("Group Id")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupId: string;
 
   @doc("Required Members")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requiredMembers: string[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Required Zone Names")
   requiredZoneNames: string[];
 }

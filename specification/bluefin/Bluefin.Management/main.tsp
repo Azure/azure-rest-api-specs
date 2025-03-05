@@ -15,7 +15,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
+@service(#{
   title: "Microsoft.Bluefin management service.",
   version: "2023-06-26-preview",
 })

@@ -27,9 +27,7 @@ using TypeSpec.Versioning;
  * The Microsoft.HybridInventory Rest API spec.
  */
 @armProviderNamespace
-@service({
-  title: "Azure API for OffAzure Inventory",
-})
+@service(#{ title: "Azure API for OffAzure Inventory" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.HybridInventory;

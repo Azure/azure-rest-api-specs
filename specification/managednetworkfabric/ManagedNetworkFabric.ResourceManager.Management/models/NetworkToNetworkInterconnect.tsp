@@ -92,20 +92,20 @@ model NetworkToNetworkInterconnectProperties {
   conditionalDefaultRouteConfiguration?: ConditionalDefaultRouteProperties;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 
@@ -241,7 +241,7 @@ model OptionBLayer3ConfigurationPatchProperties {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("ASN of CE devices for CE/PE connectivity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricASN?: int64;
 
   @doc("Provider Edge (PE) Loopback IP Address.")
@@ -256,7 +256,7 @@ model OptionBLayer3ConfigurationPatchProperties {
   @doc("OptionB Layer3 prefix limit configuration.")
   @added(Versions.v2024_06_15_preview)
   @minItems(1)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   prefixLimits?: OptionBLayer3PrefixLimitPatchProperties[];
 }
 
@@ -278,7 +278,7 @@ model OptionBLayer3Configuration {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("ASN of CE devices for CE/PE connectivity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricASN?: int64;
 
   @doc("Provider Edge (PE) Loopback IP Address.")
@@ -293,7 +293,7 @@ model OptionBLayer3Configuration {
   @doc("OptionB Layer3 prefix limit configuration.")
   @added(Versions.v2024_06_15_preview)
   @minItems(1)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   prefixLimits?: OptionBLayer3PrefixLimitProperties[];
 }
 
@@ -303,13 +303,13 @@ model NpbStaticRouteConfiguration {
   bfdConfiguration?: BfdConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   ipv4Routes?: StaticRouteProperties[];
 
   @doc("List of IPv6 Routes.")
   @minItems(1)
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv6Routes?: StaticRouteProperties[];
 }
 
@@ -319,13 +319,13 @@ model NpbStaticRouteConfigurationPatch {
   bfdConfiguration?: BfdPatchConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   ipv4Routes?: StaticRoutePatchProperties[];
 
   @doc("List of IPv6 Routes.")
   @minItems(1)
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv6Routes?: StaticRoutePatchProperties[];
 }
 
@@ -392,11 +392,11 @@ model NniStaticRouteConfiguration {
   bfdConfiguration?: BfdConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv4Routes?: StaticRouteProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv6Routes?: StaticRouteProperties[];
 }
 
@@ -407,11 +407,11 @@ model NniStaticRoutePatchConfiguration {
   bfdConfiguration?: BfdPatchConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv4Routes?: StaticRoutePatchProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv6Routes?: StaticRoutePatchProperties[];
 }
 
@@ -431,11 +431,11 @@ union MicroBfdState {
 @added(Versions.v2024_06_15_preview)
 model ConditionalDefaultRouteProperties {
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv4Routes?: StaticRouteProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv6Routes?: StaticRouteProperties[];
 }
 

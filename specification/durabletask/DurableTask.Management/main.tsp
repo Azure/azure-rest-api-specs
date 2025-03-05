@@ -11,9 +11,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.DurableTask",
-})
+@service(#{ title: "Microsoft.DurableTask" })
 @versioned(Versions)
 namespace Microsoft.DurableTask;
 
@@ -48,12 +46,12 @@ model Scheduler is Azure.ResourceManager.TrackedResource<SchedulerProperties> {
 @doc("Details of the Scheduler")
 @added(Versions.v2024_10_01_Preview)
 model SchedulerProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation")
   provisioningState?: ProvisioningState;
 
   @doc("URL of the durable task scheduler")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endpoint?: string;
 
   @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
@@ -73,7 +71,7 @@ model SchedulerSku {
   capacity?: int32;
 
   @doc("Indicates whether the current SKU configuration is zone redundant")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   redundancyState: RedundancyState;
 }
 
@@ -102,12 +100,12 @@ union RedundancyState {
 
 @doc("The properties of Task Hub")
 model TaskHubProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation")
   provisioningState?: ProvisioningState;
 
   @doc("URL of the durable task scheduler dashboard")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dashboardUrl?: url;
 }
 
@@ -183,16 +181,16 @@ model Namespace is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
 @added(Versions.v2024_02_01_Preview)
 @removed(Versions.v2024_10_01_Preview)
 model NamespaceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
   @doc("URL of the durable task service")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   url?: string;
 
   @doc("URL of the durable task service dashboard")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dashboardUrl?: string;
 
   @doc("IP allow list for durable task service. Values can be Pv4, IPv6 or CIDR")

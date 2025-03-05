@@ -32,7 +32,7 @@ model ExposureGroupProperties {
   @doc("filter conditions.")
   filterConditions: Array<FilterCondition>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

@@ -24,7 +24,7 @@ model EdgeVirtualNetwork
   @path
   @key("edgeVirtualNetworkName")
   @segment("edgeVirtualNetworks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -37,7 +37,7 @@ interface EdgeVirtualNetworks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EdgeVirtualNetwork>;
 
   @doc("Update Edge Virtual Network resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<EdgeVirtualNetwork, TagsObject>;
 
   @doc("Deletes the specified Edge Virtual Network.")

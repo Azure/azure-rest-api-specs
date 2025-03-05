@@ -39,7 +39,7 @@ interface WindowsImages {
   /**
    * Update the tags for the windows Image
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<WindowsImage, WindowsImageTagUpdateParameters>;
 
   /**

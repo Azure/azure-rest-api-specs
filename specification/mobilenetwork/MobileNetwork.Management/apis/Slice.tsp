@@ -23,7 +23,7 @@ model Slice is TrackedResource<SlicePropertiesFormat> {
   @path
   @key("sliceName")
   @segment("slices")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -36,7 +36,7 @@ interface Slices {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Slice>;
 
   @doc("Updates slice tags.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<Slice, TagsObject>;
 
   @doc("Deletes the specified network slice.")

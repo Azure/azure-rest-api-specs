@@ -22,7 +22,7 @@ model SiteAwareResourceType is ProxyResource<SiteAwareResourceTypeProperties> {
   @path
   @key("siteAwareResourceType")
   @segment("siteAwareResourceTypes")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^default$")
   name: string;
 }

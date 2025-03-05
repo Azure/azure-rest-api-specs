@@ -62,9 +62,7 @@ using TypeSpec.Versioning;
 @doc("Self service experience for Azure Network Fabric API.")
 @armProviderNamespace("Microsoft.ManagedNetworkFabric")
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-@service({
-  title: "Azure Network Fabric Management Service API",
-})
+@service(#{ title: "Azure Network Fabric Management Service API" })
 @versioned(Versions)
 namespace Microsoft.ManagedNetworkFabric;
 
