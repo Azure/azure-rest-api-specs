@@ -8,7 +8,7 @@ import "./resources/Instructions.tsp";
 import "./resources/ExampleQuery.tsp";
 import "./resources/AliasDictionary.tsp";
 import "./resources/Health.tsp";
-import "./resources/TestQuery.tsp";
+import "./resources/validateQuery.tsp";
 import "./resources/Feedback.tsp";
 
 using TypeSpec.Http;
@@ -17,13 +17,13 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-//using MdsSolution.CopilotService.Health;
-using MdsSolution.CopilotService.QueryService;
-using MdsSolution.CopilotService.OperationStatus;
-using MdsSolution.CopilotService.Instructions;
-//using MdsSolution.CopilotService.ExampleQueryService;
-using MdsSolution.CopilotService.AliasDictionary;
-using MdsSolution.CopilotService.TestQueryService;
+// //using MdsSolution.CopilotService.Health;
+// using MdsSolution.CopilotService.QueryService;
+// using MdsSolution.CopilotService.OperationStatus;
+// using MdsSolution.CopilotService.Instructions;
+// //using MdsSolution.CopilotService.ExampleQueryService;
+// using MdsSolution.CopilotService.AliasDictionary;
+// using MdsSolution.CopilotService.TestQueryService;
 
 //#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" ""
 //#suppress "@azure-tools/typespec-azure-core/documentation-required" ""

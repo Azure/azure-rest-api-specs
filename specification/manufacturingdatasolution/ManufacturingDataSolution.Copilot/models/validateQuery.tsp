@@ -3,22 +3,14 @@ import "@typespec/http";
 import "@typespec/openapi3";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./../models/copilotmodels.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@versioned(MdsSolution.CopilotService.Versions)
-namespace MdsSolution.CopilotService.TestQueryService;
-
-alias ServiceTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId;
-
-alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+namespace MdsSolution.CopilotService.ValidateQuery.Models;
 
 /**
  * Represents a request for validation.
@@ -93,7 +85,6 @@ model ValidateResponse {
   entityExtractionPromptTokens?: string;
 }
 
-
 /**
  * Represents the result of a test case.
  */
@@ -125,10 +116,11 @@ model TestCaseResult {
 }
 
 @doc("Validate Test Response")
+@resource("validate")
 model ValidateTestSummary {
-  /**
-   * The unique identifier of the test.
-   */
+  @key
+  @visibility("read")
+  @doc("The unique identifier of the test.")
   testId: string;
 
   /**
@@ -152,7 +144,7 @@ model CopilotTestCase {
 
   @doc("The expected query for the test case.")
   expectedQuery?: string;
-  
+
   @doc("The expected entities for the test case.")
   expectedEntities?: string;
 }
@@ -160,31 +152,31 @@ model CopilotTestCase {
 @resource("testquery")
 @doc("Test Query")
 model TestQuery {
-    @key
-    @doc("The unique identifier of the test query.")
-    @visibility("read")  
-    testQueryId: string;
+  @key
+  @doc("The unique identifier of the test query.")
+  @visibility("read")
+  testQueryId: string;
 
-    @doc("start date of test run")
-    fromDate?: utcDateTime;
+  @doc("start date of test run")
+  fromDate?: utcDateTime;
 
-    @doc("end date of test run")
-    toDate?: utcDateTime;
+  @doc("end date of test run")
+  toDate?: utcDateTime;
 }
 
 @doc("Test Query Request")
 model TestQueryRequest {
-    @doc("The name of the test query.")
-    testName: string;
-    
-    @doc("The test cases for the query.")
-    testCases: CopilotTestCase[];
-    
-    @doc("The run in conversation context.")
-    runInConversationContext: boolean = false;
+  @doc("The name of the test query.")
+  testName: string;
 
-    @doc("coversation Id")
-    conversationId?: string;
+  @doc("The test cases for the query.")
+  testCases: CopilotTestCase[];
+
+  @doc("The run in conversation context.")
+  runInConversationContext: boolean = false;
+
+  @doc("coversation Id")
+  conversationId?: string;
 }
 
 @doc("Operation Status")
@@ -234,43 +226,32 @@ union OperationStatus {
    */
   Skipped: "Skipped",
 
-  string
+  string,
 }
 
 @doc("test response")
 model TestResponse {
-    @doc("Test Run Id")
-    testRunId: string;
+  @doc("Test Run Id")
+  testRunId: string;
 
-    @doc("Test Run Status")
-    testRunStatus: string;
+  @doc("Test Run Status")
+  testRunStatus: string;
 
-    @doc("creation date")
-    createdDateTime: utcDateTime;
+  @doc("creation date")
+  createdDateTime: utcDateTime;
 
-    @doc("created by")
-    createdBy: string;
+  @doc("created by")
+  createdBy: string;
 }
 
 @doc("Test Details Response")
 model TestDetailsResponse {
-    @doc("Test Id")
-    testId: string;
-  
-    @doc("Test Run Status")
-    testRunStatus: string;
-  
-    @doc("Test Results")
-    testResults: TestCaseResult[];
-  }
+  @doc("Test Id")
+  testId: string;
 
-interface TestQueryApi { 
-    @doc("Validate a query")
-    execute is apiOperations.ResourceAction<TestQuery, TestQueryRequest, TestResponse>;
-    
-    @doc("Get the details of a validate test")
-    getValidateTestDetails is apiOperations.ResourceRead<TestQuery, TestDetailsResponse>;
-    
-    @doc("List validate test requests")
-    listValidateTestRequests is apiOperations.ResourceList<TestQuery, ValidateTestSummary>;
+  @doc("Test Run Status")
+  testRunStatus: string;
+
+  @doc("Test Results")
+  testResults: TestCaseResult[];
 }

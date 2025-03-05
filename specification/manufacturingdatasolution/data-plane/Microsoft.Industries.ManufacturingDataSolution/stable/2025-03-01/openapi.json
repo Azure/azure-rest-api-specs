@@ -1082,89 +1082,9 @@
         }
       }
     },
-    "/testquery": {
-      "get": {
-        "operationId": "TestQueryApi_ListValidateTestRequests",
-        "description": "List validate test requests",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedTestQuery"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/testquery/{testQueryId}:execute": {
-      "post": {
-        "operationId": "TestQueryApi_Execute",
-        "description": "Validate a query",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "testQueryId",
-            "in": "path",
-            "description": "The unique identifier of the test query.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TestQueryService.TestQueryRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TestQueryService.TestResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/testquery/{testQueryId}": {
       "get": {
-        "operationId": "TestQueryApi_GetValidateTestDetails",
+        "operationId": "ValidateQueryApi_GetValidateTestDetails",
         "description": "Get the details of a validate test",
         "parameters": [
           {
@@ -1182,7 +1102,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TestQueryService.TestQuery"
+              "$ref": "#/definitions/ValidateQuery.Models.TestQuery"
             }
           },
           "default": {
@@ -1197,6 +1117,103 @@
               }
             }
           }
+        }
+      }
+    },
+    "/testquery:execute": {
+      "post": {
+        "operationId": "ValidateQueryApi_Execute",
+        "description": "Validate a query",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateQuery.Models.TestQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateQuery.Models.TestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/validate": {
+      "get": {
+        "operationId": "ValidateQueryApi_ListValidateTestRequests",
+        "description": "List validate test requests",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "start date",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "end date",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "testRunId",
+            "in": "query",
+            "description": "start date",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedValidateTestSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -2107,15 +2124,15 @@
         "value"
       ]
     },
-    "PagedTestQuery": {
+    "PagedValidateTestSummary": {
       "type": "object",
-      "description": "Paged collection of TestQuery items",
+      "description": "Paged collection of ValidateTestSummary items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TestQuery items on this page",
+          "description": "The ValidateTestSummary items on this page",
           "items": {
-            "$ref": "#/definitions/TestQueryService.TestQuery"
+            "$ref": "#/definitions/ValidateQuery.Models.ValidateTestSummary"
           },
           "x-ms-identifiers": []
         },
@@ -2143,7 +2160,7 @@
         }
       }
     },
-    "TestQueryService.CopilotTestCase": {
+    "ValidateQuery.Models.CopilotTestCase": {
       "type": "object",
       "description": "Test Case for Test run",
       "properties": {
@@ -2161,7 +2178,7 @@
         }
       }
     },
-    "TestQueryService.TestQuery": {
+    "ValidateQuery.Models.TestQuery": {
       "type": "object",
       "description": "Test Query",
       "properties": {
@@ -2185,7 +2202,7 @@
         "testQueryId"
       ]
     },
-    "TestQueryService.TestQueryRequest": {
+    "ValidateQuery.Models.TestQueryRequest": {
       "type": "object",
       "description": "Test Query Request",
       "properties": {
@@ -2197,7 +2214,7 @@
           "type": "array",
           "description": "The test cases for the query.",
           "items": {
-            "$ref": "#/definitions/TestQueryService.CopilotTestCase"
+            "$ref": "#/definitions/ValidateQuery.Models.CopilotTestCase"
           },
           "x-ms-identifiers": []
         },
@@ -2217,7 +2234,7 @@
         "runInConversationContext"
       ]
     },
-    "TestQueryService.TestResponse": {
+    "ValidateQuery.Models.TestResponse": {
       "type": "object",
       "description": "test response",
       "properties": {
@@ -2243,6 +2260,30 @@
         "testRunId",
         "testRunStatus",
         "createdDateTime",
+        "createdBy"
+      ]
+    },
+    "ValidateQuery.Models.ValidateTestSummary": {
+      "type": "object",
+      "description": "Validate Test Response",
+      "properties": {
+        "testId": {
+          "type": "string",
+          "description": "The unique identifier of the test.",
+          "readOnly": true
+        },
+        "createdTime": {
+          "type": "string",
+          "description": "The time when the test was created."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The user who created the test."
+        }
+      },
+      "required": [
+        "testId",
+        "createdTime",
         "createdBy"
       ]
     }
