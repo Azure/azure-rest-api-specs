@@ -34,7 +34,16 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-09
+tag: package-2024-10
+```
+
+### Tag: package-2024-10
+
+These settings apply only when `--tag=package-2024-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-10'
+input-file:
+  - stable/2024-10-01/managedClusters.json
 ```
 
 ### Tag: package-2024-09
@@ -1189,7 +1198,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
