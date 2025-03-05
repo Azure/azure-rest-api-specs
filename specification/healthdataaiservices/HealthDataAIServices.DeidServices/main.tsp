@@ -11,9 +11,7 @@ using Azure.Core.Traits;
 
 // Official Name: Azure Health Data Services de-identification service
 @useAuth(AadToken)
-@service({
-  title: "Azure Health Data Services de-identification service",
-})
+@service(#{ title: "Azure Health Data Services de-identification service" })
 @server(
   "{endpoint}",
   "De-identification Service service endpoint",
