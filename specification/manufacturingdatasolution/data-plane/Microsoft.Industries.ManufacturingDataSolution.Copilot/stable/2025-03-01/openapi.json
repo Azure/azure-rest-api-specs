@@ -12,7 +12,25 @@
   "schemes": [
     "https"
   ],
-  "host": "localhost:8002",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://mds-{mdsUniqueId}.{location}.cloudapp.azure.com/",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "mdsUniqueId",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "location",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "default": "mds.azure.com"
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],
