@@ -9,6 +9,8 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
+namespace Quantum.Workspace.Services;
+
 /** Provider availability. */
 union ProviderAvailability {
   string,
@@ -74,9 +76,7 @@ model TargetStatus {
   statusPage?: string;
 }
 
-namespace Quantum.Workspace.Services {
-  interface ProviderOperations {
-    /** List all providers in the workspace with their respective status. */
-    list is ListOperation<ProviderStatus>;
-  }
+interface ProviderOperations {
+  /** List all providers in the workspace with their respective status. */
+  list is ListOperation<ProviderStatus>;
 }

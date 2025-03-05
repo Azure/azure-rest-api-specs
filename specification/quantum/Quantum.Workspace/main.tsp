@@ -29,7 +29,6 @@ using OpenAPI;
 
 /** Azure Quantum Workspace Services */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Non standard use of openapi info metadata for azure spec"
-#suppress "@azure-tools/typespec-azure-core/require-versioned"
 @service(#{ title: "Azure Quantum Workspace Services" })
 @useAuth(AzureEntraAuth | AzureApiKeyAuth)
 @server(
@@ -55,23 +54,23 @@ namespace Quantum.Workspace {
     We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
     See https://github.com/Azure/typespec-azure/issues/494
     """
-  interface Jobs {}
+  interface Jobs extends Quantum.Workspace.Services.JobOperations {}
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
     We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
     See https://github.com/Azure/typespec-azure/issues/494
     """
-  interface Sessions {}
+  interface Sessions extends Quantum.Workspace.Services.SessionOperations {}
 
-  interface Providers {}
+  interface Providers extends Quantum.Workspace.Services.ProviderOperations {}
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
-  interface Storage {}
+  interface Storage extends Quantum.Workspace.Services.StorageOperations {}
 
-  interface Quotas {}
+  interface Quotas extends Quantum.Workspace.Services.QuotaOperations {}
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
       We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
     """
-  interface TopLevelItems {}
+  interface TopLevelItems extends Quantum.Workspace.Services.ItemsOperations {}
 }

@@ -10,6 +10,8 @@ using TypeSpec.Rest;
 using TypeSpec.Rest.Resource;
 using OpenAPI;
 
+using TypeSpec.Versioning;
+
 namespace Quantum.Workspace;
 
 /** The operation to be performed. */

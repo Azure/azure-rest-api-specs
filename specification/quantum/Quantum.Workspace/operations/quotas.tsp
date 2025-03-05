@@ -9,6 +9,8 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
+namespace Quantum.Workspace.Services;
+
 /** The scope at which the quota is applied to. */
 union DimensionScope {
   string,
@@ -70,9 +72,7 @@ model Quota {
   period: MeterPeriod;
 }
 
-namespace Quantum.Workspace.Services {
-  interface QuotaOperations {
-    /** List quotas for the given workspace. */
-    list is ListOperation<Quota>;
-  }
+interface QuotaOperations {
+  /** List quotas for the given workspace. */
+  list is ListOperation<Quota>;
 }

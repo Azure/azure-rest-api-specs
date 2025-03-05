@@ -6,6 +6,7 @@
 import "./common.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Quantum.Workspace;
 
