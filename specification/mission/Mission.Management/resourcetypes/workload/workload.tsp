@@ -40,7 +40,7 @@ model WorkloadProperties {
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Managed resource group configuration.")
-  managedResourceGroupConfiguration: ManagedResourceGroupConfiguration;
+  managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
