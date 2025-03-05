@@ -1167,57 +1167,6 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers/{offerId}/plans": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "PrivateStores"
-        ],
-        "operationId": "PrivateStoreCollectionOfferPlansList",
-        "description": "Get a list of offer plans for given collection, considering the provided contexts.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PrivateStoreIdParameter"
-          },
-          {
-            "$ref": "#/parameters/CollectionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/OfferIdPathParameter"
-          },
-          {
-            "in": "body",
-            "name": "payload",
-            "schema": {
-              "$ref": "#/definitions/CollectionOffersByAllContextsPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieve offer's plans considering the provided contexts.",
-            "schema": {
-              "$ref": "#/definitions/PlanListResponse"
-            }
-          },
-          "default": {
-            "description": "Microsoft.Marketplace error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpsertOfferWithMultiContext": {
-            "$ref": "./examples/GetCollectionOfferPlansWithContexts.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers/{offerId}/upsertOfferWithMultiContext": {
       "parameters": [
         {
@@ -2489,25 +2438,6 @@
           "description": "Stack type (classic or arm)",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "PlanListResponse": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Plan"
-          },
-          "x-ms-identifiers": [
-            "planId"
-          ]
-        },
-        "nextLink": {
-          "description": "URL to get the next set of plan list results if there are any.",
-          "type": "string"
         }
       }
     },
