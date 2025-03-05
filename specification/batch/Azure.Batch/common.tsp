@@ -43,7 +43,7 @@ op ReadOperation<
   TPathParams extends TypeSpec.Reflection.Model,
   TResource
 > is Azure.Core.RpcOperation<
-  BatchClientRequestHeaders & TPathParams,
+  CommonParameters & TPathParams,
   TResource & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -68,7 +68,7 @@ op FileOperation<
   TPathParams extends TypeSpec.Reflection.Model,
   TResource
 > is Azure.Core.RpcOperation<
-  BatchClientRequestHeaders & TPathParams,
+  CommonParameters & TPathParams,
   TResource & FileResponseHeaders,
   NoFilter,
   BatchError
@@ -80,7 +80,7 @@ op HeadFileOperation<
   TPathParams extends TypeSpec.Reflection.Model,
   TResource
 > is Azure.Core.RpcOperation<
-  BatchClientRequestHeaders & TPathParams,
+  CommonParameters & TPathParams,
   TResource & FileResponseHeaders,
   NoFilter,
   BatchError
@@ -92,7 +92,7 @@ op DeleteOperation<
   TFilter,
   TResponse extends TypeSpec.Reflection.Model
 > is Azure.Core.RpcOperation<
-  BatchClientRequestHeaders & TFilter,
+  CommonParameters & TFilter,
   TResponse,
   NoFilter,
   BatchError
@@ -101,7 +101,7 @@ op DeleteOperation<
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @post
 op CreateOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & MinimalMetadata & TResource,
+  CommonParameters & MinimalMetadata & TResource,
   Created<TResponse> & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -110,7 +110,7 @@ op CreateOperation<TResource, TResponse> is RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @patch
 op UpdateOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & MinimalMetadata & TResource,
+  CommonParameters & MinimalMetadata & TResource,
   TResponse & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -119,7 +119,7 @@ op UpdateOperation<TResource, TResponse> is RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @put
 op ReplaceOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & MinimalMetadata & TResource,
+  CommonParameters & MinimalMetadata & TResource,
   TResponse & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -143,7 +143,7 @@ op ResourceInfoOperationWithAdditionalResponse<
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @post
 op PostOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & TResource,
+  CommonParameters & TResource,
   TResponse & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -360,7 +360,7 @@ alias DeleteResponseHeaders = {
 };
 
 alias BatchCommonListHeaders = {
-  ...BatchClientRequestHeaders;
+  ...CommonParameters;
 
   @doc("""
     The maximum number of items to return in the response. A maximum of 1000
@@ -402,7 +402,7 @@ alias BatchTaskFileClientPathContent = {
   filePath: string;
 };
 
-alias BatchClientRequestHeaders = {
+alias CommonParameters = {
   @doc("""
     The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.".
     """)
