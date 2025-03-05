@@ -39,13 +39,13 @@ model ExternalConnectionProperties {
   state?: ExternalConnectionState;
 
   @doc("Community Resource Id.")
-  communityResourceId: CommunityResourceId;
+  communityResourceId?: CommunityResourceId;
 
   @doc("The enclaves' resource IDs.")
-  enclaveIds: VirtualEnclaveResourceId[];
+  enclaveIds?: VirtualEnclaveResourceId[];
 
   @doc("The external CIDR IP addresses.")
-  externalCidrs: string[];
+  externalCidrs?: string[];
 
   @doc("List of resource ids modified by externalConnections.")
   resourceCollection?: string[];
