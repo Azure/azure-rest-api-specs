@@ -20,7 +20,7 @@ jobs:
   - checkout: self
     fetchDepth: 0
 
-  - template: /eng/pipelines/templates/steps/node-tool.yml
+  - template: /eng/pipelines/templates/steps/use-node-version.yml
 
   - pwsh: |
       . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
