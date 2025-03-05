@@ -213,16 +213,16 @@ model ContentProperties {
 @doc("This is the request model for Instruction")
 model Instruction {
   @key("id")
-  @visibility(Lifecyle.Read)
+  @visibility(Lifecycle.Read)
   @doc("Id for the instruction")
   id: string;
 
   @doc("intruction Id for the instruction")
-  @visibility("update")
+  @visibility(Lifecycle.Update)
   instructionId: string;
 
   @doc("Version for the instruction")
-  @visibility("update")
+  @visibility(Lifecycle.Update)
   instructionVersion: string;
 
   @doc("Status for the instruction")
