@@ -130,19 +130,18 @@ interface ManagedClusters {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Day 0 property, tagging for sdk generation"
-interface ManagedGetAzResiliencyStatus {
+@armResourceOperations
+interface ManagedAzResiliencyStatus {
   /**
    * Action to get Az Resiliency Status of all the Base resources constituting Service Fabric Managed Clusters.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @action("getazresiliencystatus")
-  @tag("ManagedAzResiliencyStatus")
   @operationId("managedAzResiliencyStatus_Get")
   managedAzResiliencyStatusGet is ArmResourceActionSync<
     ManagedCluster,
     void,
-    ArmResponse<ManagedAzResiliencyStatus>
+    ArmResponse<ManagedAzResiliencyStatusContent>
   >;
 }
 
@@ -157,19 +156,18 @@ interface ManagedApplyMaintenanceWindow {
   post is ArmResourceActionSync<ManagedCluster, void, OkResponse>;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Day 0 property, tagging for sdk generation"
-interface ManagedGetMaintenanceWindowStatus {
+@armResourceOperations
+interface ManagedMaintenanceWindowStatus {
   /**
    * Action to get Maintenance Window Status of the Service Fabric Managed Clusters.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
-  @tag("ManagedMaintenanceWindowStatus")
   @action("getMaintenanceWindowStatus")
   @operationId("managedMaintenanceWindowStatus_Get")
   managedMaintenanceWindowStatusGet is ArmResourceActionSync<
     ManagedCluster,
     void,
-    ArmResponse<ManagedMaintenanceWindowStatus>
+    ArmResponse<ManagedMaintenanceWindowStatusContent>
   >;
 }
 

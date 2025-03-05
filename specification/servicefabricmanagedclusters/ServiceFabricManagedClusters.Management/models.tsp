@@ -2431,7 +2431,7 @@ model FaultSimulationConstraints {
 /**
  * Describes the maintenance window status of the Service Fabric Managed Cluster.
  */
-model ManagedMaintenanceWindowStatus {
+model ManagedMaintenanceWindowStatusContent {
   /**
    * If maintenance window is enabled on this cluster.
    */
@@ -2481,7 +2481,7 @@ model ManagedMaintenanceWindowStatus {
 /**
  * Describes the result of the request to list Managed VM Sizes for Service Fabric Managed Clusters.
  */
-model ManagedAzResiliencyStatus {
+model ManagedAzResiliencyStatusContent {
   /**
    * List of Managed VM Sizes for Service Fabric Managed Clusters.
    */
