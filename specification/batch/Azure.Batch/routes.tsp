@@ -15,15 +15,13 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.Batch;
 
-//Aliases
+// Interfaces ////////////////////
 
 alias GetApplicationRequiredParameters = {
   @doc("The ID of the Application")
   @path
   applicationId: string;
 };
-
-// Interfaces ////////////////////
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @tag("Applications")
@@ -62,6 +60,33 @@ interface Applications {
   >;
 }
 
+alias ListPoolUsageMetricsParameters = {
+  @doc("""
+    The earliest time from which to include metrics. This must be at least two and
+    a half hours before the current time. If not specified this defaults to the
+    start time of the last aggregation interval currently available.
+    """)
+  @query
+  @clientName("starttime", "csharp,python,javascript,go")
+  startTime?: utcDateTime;
+
+  @doc("""
+    The latest time from which to include metrics. This must be at least two hours
+    before the current time. If not specified this defaults to the end time of the
+    last aggregation interval currently available.
+    """)
+  @query
+  endtime?: utcDateTime;
+
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+};
+
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
@@ -81,33 +106,10 @@ interface Pools {
     last aggregation interval is returned.
     """)
   @route("/poolusagemetrics")
-  @clientName("listPoolUsageMetricsInternal", "java")
-  listPoolUsageMetrics is ListOperation<
+  listPoolUsageMetrics is ListOperationNew<
     {
-      @doc("""
-        The earliest time from which to include metrics. This must be at least two and
-        a half hours before the current time. If not specified this defaults to the
-        start time of the last aggregation interval currently available.
-        """)
-      @query
-      @clientName("starttime", "csharp,python,javascript,go")
-      startTime?: utcDateTime;
-
-      @doc("""
-        The latest time from which to include metrics. This must be at least two hours
-        before the current time. If not specified this defaults to the end time of the
-        last aggregation interval currently available.
-        """)
-      @query
-      endtime?: utcDateTime;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
+      ...BatchCommonListHeaders;
+      ...ListPoolUsageMetricsParameters;
     },
     BatchPoolListUsageMetricsResult
   >;
