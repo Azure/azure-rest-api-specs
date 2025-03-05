@@ -37,6 +37,19 @@ These settings apply only when `--tag=package-2024-04-24-preview` is specified o
 ```yaml $(tag) == 'package-2024-04-24-preview'
 input-file:
   - Dynatrace.Observability/preview/2024-04-24-preview/dynatrace.json
+suppressions:
+    - code: UnSupportedPatchProperties
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: ProvisioningStateMustBeReadOnly
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: BodyTopLevelProperties
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixing this causes breaking changes.
+    - code: PatchBodyParametersSchema
+      from: dynatrace.json
+      reason: Empty object can still be passed, properties are not mandatory for the update schema.
 ```
 
 ### Tag: package-2023-11-24-preview
@@ -46,6 +59,16 @@ These settings apply only when `--tag=package-2023-11-24-preview` is specified o
 ```yaml $(tag) == 'package-2023-11-24-preview'
 input-file:
   - Dynatrace.Observability/preview/2023-11-24-preview/dynatrace.json
+suppressions:
+    - code: UnSupportedPatchProperties
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: ProvisioningStateMustBeReadOnly
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: BodyTopLevelProperties
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixing this causes breaking changes.
 ```
 
 ### Tag: package-2023-11-11-preview
@@ -55,6 +78,16 @@ These settings apply only when `--tag=package-2023-11-11-preview` is specified o
 ```yaml $(tag) == 'package-2023-11-11-preview'
 input-file:
   - Dynatrace.Observability/preview/2023-11-11-preview/dynatrace.json
+suppressions:
+    - code: UnSupportedPatchProperties
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: ProvisioningStateMustBeReadOnly
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: BodyTopLevelProperties
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixing this causes breaking changes.
 ```
 
 ### Tag: package-2023-09-20-preview
@@ -64,6 +97,16 @@ These settings apply only when `--tag=package-2023-09-20-preview` is specified o
 ```yaml $(tag) == 'package-2023-09-20-preview'
 input-file:
   - Dynatrace.Observability/preview/2023-09-20-preview/dynatrace.json
+suppressions:
+    - code: PostResponseCodes
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
+    - code: LroExtension
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
+    - code: ResourceNameRestriction
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
 ```
 
 ### Tag: package-2023-09-12-preview
@@ -73,6 +116,16 @@ These settings apply only when `--tag=package-2023-09-12-preview` is specified o
 ```yaml $(tag) == 'package-2023-09-12-preview'
 input-file:
   - Dynatrace.Observability/preview/2023-09-12-preview/dynatrace.json
+suppressions:
+    - code: ProvisioningStateMustBeReadOnly
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: UnSupportedPatchProperties
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: BodyTopLevelProperties
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixing this causes breaking changes.
 ```
 
 ### Tag: package-2023-08-22-preview
@@ -118,6 +171,22 @@ These settings apply only when `--tag=package-2022-10-01-preview` is specified o
 ``` yaml $(tag) == 'package-2022-10-01-preview'
 input-file:
   - Dynatrace.Observability/preview/2022-10-01-preview/dynatrace.json
+suppressions:
+    - code: ProvisioningStateMustBeReadOnly
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: ResourceNameRestriction
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
+    - code: OperationIdNounVerb
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
+    - code: PatchIdentityProperty
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
+    - code: DeleteResponseCodes
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
 ```
 
 ### Tag: package-2023-03-01-preview
@@ -127,6 +196,28 @@ These settings apply only when `--tag=package-2023-03-01-preview` is specified o
 ``` yaml $(tag) == 'package-2023-03-01-preview'
 input-file:
   - Dynatrace.Observability/preview/2023-03-01-preview/dynatrace.json
+suppressions:
+    - code: PostResponseCodes
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
+    - code: ProvisioningStateMustBeReadOnly
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: ResourceNameRestriction
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
+    - code: OperationIdNounVerb
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
+    - code: PatchIdentityProperty
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
+    - code: DeleteResponseCodes
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
+    - code: NoErrorCodeResponses
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixed in latest version.
 ```
 
 ### Tag: package-2023-04-20-preview
