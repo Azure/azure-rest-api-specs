@@ -62,7 +62,7 @@ model InstanceProperties {
 @doc("The features of the AIO Instance.")
 model InstanceFeature {
   @doc("The state of the feature.")
-  mode?: string;
+  mode?: InstanceFeatureState;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("The value of the feature.")
