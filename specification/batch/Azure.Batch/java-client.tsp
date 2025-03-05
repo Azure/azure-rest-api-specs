@@ -58,3 +58,26 @@ op listApplicationsCustomization is Azure.Batch.ListOperationNew<
   listApplicationsCustomization,
   "java"
 );
+
+// List Pool Usage Metrics Operation
+@doc("Optional parameters for List Pool Usage Metrics operation.")
+model ListBatchPoolUsageMetricsOptions {
+  ...Azure.Batch.BatchCommonListHeaders;
+  ...Azure.Batch.ListPoolUsageMetricsParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@doc("Custom override for List Pool Usage Metrics operation.")
+@route("/poolusagemetrics")
+op listPoolUsageMetricsCustomization is Azure.Batch.ListOperationNew<
+  {
+    @doc("Optional parameters for List Pool Usage Metrics operation.")
+    options?: ListBatchPoolUsageMetricsOptions;
+  },
+  Azure.Batch.BatchPoolListUsageMetricsResult
+>;
+
+@@override(Azure.Batch.Pools.listPoolUsageMetrics,
+  listPoolUsageMetricsCustomization,
+  "java"
+);
