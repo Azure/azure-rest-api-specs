@@ -149,10 +149,10 @@ model SecurityPolicyProperties {
   @visibility("read")
   policyType?: PolicyType;
 
-  /** Web Application Firewall Policy of the Traffic Controller Security Policy. If this property is set then ipAccessRulesPolicy property cannot be set. */
+  /** Web Application Firewall Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set. */
   wafPolicy?: WafPolicy;
 
-  /** Ip Access Policy of the Traffic Controller Security Policy. If this property is set then wafPolicy property cannot be set. */
+  /** Ip Access Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set. */
   @added(Versions.v2025_03_01_preview)
   ipAccessRulesPolicy?: IpAccessRulesPolicy;
 
@@ -219,10 +219,10 @@ union IpAccessRuleAction {
 
 /** SecurityPolicyConfigurations Subresource of Traffic Controller. */
 model SecurityPolicyConfigurations {
-  /** Contains reference to a WAF-type security policy that is applied at the Traffic Controller level. */
+  /** Contains reference to a WAF-type security policy. */
   wafSecurityPolicy?: WafSecurityPolicy;
 
-  /** Contains reference to a IpAccessRules-type security policy that is applied at the Frontend level. */
+  /** Contains reference to a IpAccessRules-type security policy. */
   @added(Versions.v2025_03_01_preview)
   ipAccessRulesSecurityPolicy?: IpAccessRulesSecurityPolicy;
 }
