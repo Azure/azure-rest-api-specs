@@ -67,7 +67,6 @@ union ErrorCode {
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConversationAuthoringInnerErrorCode", "csharp")
-@clientNamespace("Language.Conversations.Authoring.Common")
 union InnerErrorCode {
   string,
   InvalidRequest: "InvalidRequest",
@@ -88,7 +87,6 @@ union InnerErrorCode {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("StringIndexType", "csharp")
-@clientNamespace("Language.Conversations.Authoring.Common")
 union StringIndexType {
   string,
 
@@ -103,7 +101,6 @@ union StringIndexType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConversationAuthoringExportedProjectFormat", "csharp")
-@clientNamespace("Language.Conversations.Authoring.Common")
 union ExportedProjectFormat {
   string,
 
@@ -120,7 +117,6 @@ union ExportedProjectFormat {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConversationAuthoringTrainingMode", "csharp")
-@clientNamespace("Language.Conversations.Authoring.Common")
 union TrainingMode {
   string,
 
@@ -137,7 +133,6 @@ union TrainingMode {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConversationAuthoringEvaluationKind", "csharp")
-@clientNamespace("Language.Conversations.Authoring.Common")
 union EvaluationKind {
   string,
 
@@ -175,7 +170,6 @@ union JobStatus {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConversationAuthoringCompositionMode", "csharp")
-@clientNamespace("Language.Conversations.Authoring.Common")
 union CompositionSetting {
   string,
 
@@ -202,7 +196,6 @@ union CompositionSetting {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("OrchestrationTargetProjectKind", "csharp")
-@clientNamespace("Language.Conversations.Authoring.Common")
 union OrchestrationTargetProjectKind {
   string,
   Luis: "Luis",
