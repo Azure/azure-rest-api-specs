@@ -64,7 +64,22 @@
       "name": "ManagedClusters"
     },
     {
+      "name": "FaultSimulation"
+    },
+    {
+      "name": "ManagedAzResiliencyStatus"
+    },
+    {
+      "name": "ManagedApplyMaintenanceWindow"
+    },
+    {
+      "name": "ManagedMaintenanceWindowStatus"
+    },
+    {
       "name": "NodeTypes"
+    },
+    {
+      "name": "NodeTypeSkus"
     }
   ],
   "paths": {
@@ -2367,7 +2382,7 @@
       "post": {
         "operationId": "managedApplyMaintenanceWindow_Post",
         "tags": [
-          "ManagedClusters"
+          "ManagedApplyMaintenanceWindow"
         ],
         "description": "Action to Apply Maintenance window on the Service Fabric Managed Clusters, right now. Any pending update will be applied.",
         "parameters": [
@@ -2410,7 +2425,8 @@
       "post": {
         "operationId": "ManagedClusters_GetFaultSimulation",
         "tags": [
-          "ManagedClusters"
+          "ManagedClusters",
+          "FaultSimulation"
         ],
         "description": "Gets a fault simulation by the simulationId.",
         "parameters": [
@@ -2465,7 +2481,7 @@
       "post": {
         "operationId": "managedMaintenanceWindowStatus_Get",
         "tags": [
-          "ManagedClusters"
+          "ManagedMaintenanceWindowStatus"
         ],
         "description": "Action to get Maintenance Window Status of the Service Fabric Managed Clusters.",
         "parameters": [
@@ -2511,7 +2527,7 @@
       "post": {
         "operationId": "managedAzResiliencyStatus_Get",
         "tags": [
-          "ManagedClusters"
+          "ManagedAzResiliencyStatus"
         ],
         "description": "Action to get Az Resiliency Status of all the Base resources constituting Service Fabric Managed Clusters.",
         "parameters": [
@@ -2557,7 +2573,8 @@
       "post": {
         "operationId": "ManagedClusters_ListFaultSimulation",
         "tags": [
-          "ManagedClusters"
+          "ManagedClusters",
+          "FaultSimulation"
         ],
         "description": "Gets the list of recent fault simulations for the cluster.",
         "parameters": [
@@ -3105,7 +3122,8 @@
       "post": {
         "operationId": "NodeTypes_GetFaultSimulation",
         "tags": [
-          "NodeTypes"
+          "NodeTypes",
+          "FaultSimulation"
         ],
         "description": "Gets a fault simulation by the simulationId.",
         "parameters": [
@@ -3167,7 +3185,8 @@
       "post": {
         "operationId": "NodeTypes_ListFaultSimulation",
         "tags": [
-          "NodeTypes"
+          "NodeTypes",
+          "FaultSimulation"
         ],
         "description": "Gets the list of recent fault simulations for the node type.",
         "parameters": [
@@ -3451,7 +3470,7 @@
       "get": {
         "operationId": "NodeTypeSkus_List",
         "tags": [
-          "NodeTypes"
+          "NodeTypeSkus"
         ],
         "description": "Get a Service Fabric node type supported SKUs.",
         "parameters": [
@@ -3581,7 +3600,8 @@
       "post": {
         "operationId": "NodeTypes_StartFaultSimulation",
         "tags": [
-          "NodeTypes"
+          "NodeTypes",
+          "FaultSimulation"
         ],
         "description": "Starts a fault simulation on the node type.",
         "parameters": [
@@ -3655,7 +3675,8 @@
       "post": {
         "operationId": "NodeTypes_StopFaultSimulation",
         "tags": [
-          "NodeTypes"
+          "NodeTypes",
+          "FaultSimulation"
         ],
         "description": "Stops a fault simulation on the node type.",
         "parameters": [
@@ -3729,7 +3750,8 @@
       "post": {
         "operationId": "ManagedClusters_StartFaultSimulation",
         "tags": [
-          "ManagedClusters"
+          "ManagedClusters",
+          "FaultSimulation"
         ],
         "description": "Starts a fault simulation on the cluster.",
         "parameters": [
@@ -3796,7 +3818,8 @@
       "post": {
         "operationId": "ManagedClusters_StopFaultSimulation",
         "tags": [
-          "ManagedClusters"
+          "ManagedClusters",
+          "FaultSimulation"
         ],
         "description": "Stops a fault simulation on the cluster.",
         "parameters": [

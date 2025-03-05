@@ -87,6 +87,7 @@ interface ManagedClusters {
   /**
    * Gets a fault simulation by the simulationId.
    */
+  @tag("FaultSimulation")
   getFaultSimulation is ArmResourceActionSync<
     ManagedCluster,
     FaultSimulationIdContent,
@@ -96,6 +97,7 @@ interface ManagedClusters {
   /**
    * Gets the list of recent fault simulations for the cluster.
    */
+  @tag("FaultSimulation")
   listFaultSimulation is ArmResourceActionSync<
     ManagedCluster,
     void,
@@ -105,6 +107,7 @@ interface ManagedClusters {
   /**
    * Starts a fault simulation on the cluster.
    */
+  @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
     FaultSimulationContent,
@@ -116,6 +119,7 @@ interface ManagedClusters {
   /**
    * Stops a fault simulation on the cluster.
    */
+  @tag("FaultSimulation")
   stopFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
     FaultSimulationIdContent,
@@ -123,7 +127,27 @@ interface ManagedClusters {
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
       ArmAsyncOperationHeader
   >;
+}
 
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Day 0 property, tagging for sdk generation"
+interface ManagedGetAzResiliencyStatus {
+  /**
+   * Action to get Az Resiliency Status of all the Base resources constituting Service Fabric Managed Clusters.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
+  @action("getazresiliencystatus")
+  @tag("ManagedAzResiliencyStatus")
+  @operationId("managedAzResiliencyStatus_Get")
+  managedAzResiliencyStatusGet is ArmResourceActionSync<
+    ManagedCluster,
+    void,
+    ArmResponse<ManagedAzResiliencyStatus>
+  >;
+}
+
+@armResourceOperations
+interface ManagedApplyMaintenanceWindow {
   /**
    * Action to Apply Maintenance window on the Service Fabric Managed Clusters, right now. Any pending update will be applied.
    */
@@ -131,29 +155,21 @@ interface ManagedClusters {
   @action("applyMaintenanceWindow")
   @operationId("managedApplyMaintenanceWindow_Post")
   post is ArmResourceActionSync<ManagedCluster, void, OkResponse>;
+}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Day 0 property, tagging for sdk generation"
+interface ManagedGetMaintenanceWindowStatus {
   /**
    * Action to get Maintenance Window Status of the Service Fabric Managed Clusters.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
+  @tag("ManagedMaintenanceWindowStatus")
   @action("getMaintenanceWindowStatus")
   @operationId("managedMaintenanceWindowStatus_Get")
   managedMaintenanceWindowStatusGet is ArmResourceActionSync<
     ManagedCluster,
     void,
     ArmResponse<ManagedMaintenanceWindowStatus>
-  >;
-
-  /**
-   * Action to get Az Resiliency Status of all the Base resources constituting Service Fabric Managed Clusters.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
-  @action("getazresiliencystatus")
-  @operationId("managedAzResiliencyStatus_Get")
-  managedAzResiliencyStatusGet is ArmResourceActionSync<
-    ManagedCluster,
-    void,
-    ArmResponse<ManagedAzResiliencyStatus>
   >;
 }
 

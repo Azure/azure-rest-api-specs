@@ -44,7 +44,7 @@ model ManagedVMSize {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Necessary to avoid standard routing"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well-known abbreviation"
-interface ManagedVMSizes {
+interface ManagedUnsupportedVMSizes {
   /**
    * Get unsupported vm size for Service Fabric Managed Clusters.
    */

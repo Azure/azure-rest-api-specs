@@ -137,6 +137,7 @@ interface NodeTypes {
   /**
    * Starts a fault simulation on the node type.
    */
+  @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     NodeType,
     FaultSimulationContent,
@@ -148,6 +149,7 @@ interface NodeTypes {
   /**
    * Stops a fault simulation on the node type.
    */
+  @tag("FaultSimulation")
   stopFaultSimulation is ArmResourceActionAsync<
     NodeType,
     FaultSimulationIdContent,
@@ -159,6 +161,7 @@ interface NodeTypes {
   /**
    * Gets a fault simulation by the simulationId.
    */
+  @tag("FaultSimulation")
   getFaultSimulation is ArmResourceActionSync<
     NodeType,
     FaultSimulationIdContent,
@@ -168,12 +171,16 @@ interface NodeTypes {
   /**
    * Gets the list of recent fault simulations for the node type.
    */
+  @tag("FaultSimulation")
   listFaultSimulation is ArmResourceActionSync<
     NodeType,
     void,
     ArmResponse<FaultSimulationListResult>
   >;
+}
 
+@armResourceOperations
+interface NodeTypeSkus {
   /**
    * Get a Service Fabric node type supported SKUs.
    */
