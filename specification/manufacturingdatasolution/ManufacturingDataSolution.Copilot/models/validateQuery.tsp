@@ -119,7 +119,7 @@ model TestCaseResult {
 @resource("validate")
 model ValidateTestSummary {
   @key
-  @visibility("read")
+  @visibility(Lifecyle.Read)
   @doc("The unique identifier of the test.")
   testId: string;
 
@@ -154,7 +154,7 @@ model CopilotTestCase {
 model TestQuery {
   @key
   @doc("The unique identifier of the test query.")
-  @visibility("read")
+  @visibility(Lifecyle.Read)
   testQueryId: string;
 
   @doc("start date of test run")

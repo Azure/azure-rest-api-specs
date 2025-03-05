@@ -213,7 +213,7 @@ model ContentProperties {
 @doc("This is the request model for Instruction")
 model Instruction {
   @key("id")
-  @visibility("read")
+  @visibility(Lifecyle.Read)
   @doc("Id for the instruction")
   id: string;
 
@@ -226,19 +226,19 @@ model Instruction {
   instructionVersion: string;
 
   @doc("Status for the instruction")
-  @visibility("read")
+  @visibility(Lifecyle.Read)
   status: InstructionStatusEnum;
 
   @doc("Domain for the instruction")
-  @visibility("read")
+  @visibility(Lifecyle.Read)
   domain: InstrustionDomainEnum;
 
   @doc("Sub-domain for the instruction")
-  @visibility("read")
+  @visibility(Lifecyle.Read)
   subDomain: InstructionSubDomainEnum;
 
   @doc("Category for the instruction")
-  @visibility("read")
+  @visibility(Lifecyle.Read)
   category: InstructionCategoryEnum;
 
   @doc("The language of the instruction.")

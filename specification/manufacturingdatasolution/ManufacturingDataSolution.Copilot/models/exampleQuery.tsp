@@ -26,7 +26,7 @@ model SampleQuery {
 model ExampleQueryRequest {
   @key("exampleId")
   @doc("The ID of the example query.")
-  @visibility("read")
+  @visibility(Lifecyle.Read)
   exampleId: string;
 
   @doc("The user question associated with the example.")

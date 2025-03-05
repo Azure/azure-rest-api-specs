@@ -23,7 +23,7 @@ model FeedbackRequest {
 
   @key
   @doc("The feedback")
-  @visibility("create")
+  @visibility(Lifecycle.Update)
   feedback: FeedbackCategory;
 
   @doc("QueryEndpoint")
