@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -130,6 +131,7 @@ interface ManagedClusters {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Day 0 property, tagging for sdk generation"
+@client({name: "ManagedAzResiliencyStatusClient", service: Microsoft.ServiceFabric})
 interface ManagedGetAzResiliencyStatus {
   /**
    * Action to get Az Resiliency Status of all the Base resources constituting Service Fabric Managed Clusters.
@@ -157,6 +159,7 @@ interface ManagedApplyMaintenanceWindow {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Day 0 property, tagging for sdk generation"
+@client({name: "ManagedMaintenanceWindowStatusClient", service: Microsoft.ServiceFabric})
 interface ManagedGetMaintenanceWindowStatus {
   /**
    * Action to get Maintenance Window Status of the Service Fabric Managed Clusters.
