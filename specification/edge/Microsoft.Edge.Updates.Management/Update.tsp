@@ -21,7 +21,7 @@ model Update is ExtensionResource<UpdateProperties> {
   @path
   @key("updateName")
   @segment("updates")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -44,7 +44,7 @@ interface Updates {
   /**
    * Update a Update
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   modify is ArmCustomPatchSync<Update, ModifyUpdate>;
 
   /**

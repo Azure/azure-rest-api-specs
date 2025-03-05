@@ -24,31 +24,31 @@ model DataType is ProxyResource<DataTypeProperties> {
 @added(Versions.v2023_11_15)
 model DataTypeProperties {
   @doc("Latest provisioning state  of data product.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("State of data type.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   state?: DataTypeState;
 
   @doc("Reason for the state of data type.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stateReason?: string;
 
   @doc("Field for storage output retention in days.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   storageOutputRetention?: int32;
 
   @doc("Field for database cache retention in days.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   databaseCacheRetention?: int32;
 
   @doc("Field for database data retention in days.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   databaseRetention?: int32;
 
   @doc("Url for data visualization.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   visualizationUrl?: string;
 }
 

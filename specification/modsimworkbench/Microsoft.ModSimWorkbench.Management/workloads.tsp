@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.ModSimWorkbench")
-@service({
-  title: "ModSimWorkbench Control Plane API",
-})
+@service(#{ title: "ModSimWorkbench Control Plane API" })
 @armProviderNamespace
 @versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
@@ -31,22 +29,22 @@ model WorkloadProperties {
   ...PowerStateProperty;
   ...RestartAtProperty;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The virtual machine size of the chamber workload. For more information about virtual machine sizes, see [Sizes for virtual machines](https://learn.microsoft.com/azure/virtual-machines/sizes).<br/>The available chamber workload VM sizes depend on region.<br/>For a list of available sizes use these APIs: [List all available virtual machine sizes in a region](https://learn.microsoft.com/rest/api/compute/virtualmachinesizes/list), [List all available virtual machine sizes for resizing](https://learn.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes).*")
   vmSize: string; // TODO: Eventually deprecate. Use top-level sku.
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Application type.")
   edaType: EdaType;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Fixing this would be a breaking change."
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The chamber workload private IP address.")
   privateIP?: string; // TODO: Should be "privateIp";
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "zones needs to be removed from workload property level"
   @removed(Versions.`2024-05-01-preview`)
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The chamber workload zone.")
   zones?: Array<string>;
 }
@@ -55,7 +53,7 @@ model WorkloadProperties {
 @parentResource(Chamber)
 model Workload is TrackedResource<WorkloadProperties> {
   @doc("The name of the workload")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @segment("workloads")
   @key("workloadName")
   @TypeSpec.Http.path
@@ -64,13 +62,13 @@ model Workload is TrackedResource<WorkloadProperties> {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Availability Zones are a valid envelope property"
   @added(Versions.`2024-05-01-preview`)
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The availability zones.")
   zones?: Array<string>;
 
   // #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Sku is a valid envelope property"
   // @added(Versions.`2024-05-01-preview`)
-  // @visibility("read", "create", "update")
+  //@visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   // @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
   // sku: Azure.ResourceManager.Foundations.Sku;
 }

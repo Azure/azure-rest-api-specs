@@ -29,7 +29,7 @@ model CanonicalNameRecordResourceProperties {
   azureLocation?: azureLocation;
 
   @doc("Provisioning status of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: CanonicalNameRecordProvisioningState;
 }
 
@@ -41,7 +41,7 @@ model CanonicalNameRecordResource
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
   @segment("canonicalNameRecords") // start with lower case
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

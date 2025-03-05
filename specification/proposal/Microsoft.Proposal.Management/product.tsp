@@ -22,7 +22,7 @@ model ProductResource is ExtensionResource<ProductResourceProperties> {
 
 @doc("Details of the Proposal Product Item.")
 model ProductResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 

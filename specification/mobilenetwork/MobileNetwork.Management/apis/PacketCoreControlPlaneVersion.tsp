@@ -22,7 +22,7 @@ model PacketCoreControlPlaneVersion
   @path
   @key("versionName")
   @segment("packetCoreControlPlaneVersions")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

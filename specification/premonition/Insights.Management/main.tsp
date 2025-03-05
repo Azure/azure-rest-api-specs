@@ -9,9 +9,7 @@ using Azure.ResourceManager;
 
 @armProviderNamespace
 @versioned(Microsoft.Premonition.Versions)
-@service({
-  title: "Microsoft Premonition Insights",
-})
+@service(#{ title: "Microsoft Premonition Insights" })
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Premonition;
 

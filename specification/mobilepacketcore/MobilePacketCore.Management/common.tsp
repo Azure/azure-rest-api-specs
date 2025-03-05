@@ -27,9 +27,7 @@ namespace Microsoft.MobilePacketCore;
 @OpenAPI.extension("x-ms-long-running-operation", true)
 @OpenAPI.extension(
   "x-ms-long-running-operation-options",
-  {
-    `final-state-via`: "azure-async-operation",
-  }
+  #{ `final-state-via`: "azure-async-operation" }
 )
 @armResourceCreateOrUpdate(TResource)
 @put
@@ -93,11 +91,11 @@ scalar CustomLocationIdProperty
 @doc("Operational Status of the resource")
 model OperationalStatus {
   @doc("Status of the deployed workload")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   workload?: string;
 
   @doc("Health check results")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   healthCheck?: string;
 }
 
@@ -156,18 +154,18 @@ model QualifiedComponentDeploymentParameters {
 
   @doc("Deployment secrets")
   @secret
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secrets?: ComponentDeploymentSecrets;
 }
 
 @doc("ManagedResourceGroupConfiguration represents the configuration of the resource group managed by Azure.")
 model ManagedResourceGroupConfiguration {
   @doc("The name for the managed resource group. If not specified, the unique name is automatically generated.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @maxLength(75)
   name?: string;
 
   @doc("The location of the managed resource group. If not specified, the location of the parent resource is chosen.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 }

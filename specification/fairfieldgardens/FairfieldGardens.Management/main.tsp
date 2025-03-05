@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace("Microsoft.FairfieldGardens")
-@service({
+@service(#{
   title: "Microsoft.FairfieldGardens",
   version: "2023-12-01-preview",
 })
@@ -41,30 +41,30 @@ model ProvisioningResource is TrackedResource<ProvisioningResourceProperties> {
 
 @doc("Details of the EdgeProvisioning ProvisioningResource.")
 model ProvisioningResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning service endpoints.")
   deviceEndpoints?: DeviceEndpoints;
 
   @doc("Selecting 'yes' will enable a Microsoft managed PKI to issue certificates. Setting up of the CA and policies for certificate management will be while defining the bumblebee provisioning policy.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   enableOperationalCertificates: boolean;
 }
 
 @doc("Device endpoints.")
 model DeviceEndpoints { // TODO: follow up with DP and PM on the definition of the endpoints for ignite
   @doc("The default endpoint.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   default?: DeviceEndpoint;
 }
 
 @doc("The device endpoint.")
 model DeviceEndpoint {
   @doc("Hostname of the Endpoint.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostName?: string;
 }
 
@@ -122,7 +122,7 @@ model ProvisioningPolicyProperties {
   @doc("The policy status")
   status: boolean;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
@@ -130,7 +130,7 @@ model ProvisioningPolicyProperties {
   bootstrapAuthentication: BootstrapAuthenticationRule;
 
   @doc("Allocation rules.")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @maxItems(1)
   allocations?: Array<AllocationRule>;
 
@@ -149,7 +149,7 @@ model ProvisioningPolicyPatchProperties {
   @doc("The policy status")
   status?: boolean;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
@@ -157,7 +157,7 @@ model ProvisioningPolicyPatchProperties {
   bootstrapAuthentication?: BootstrapAuthenticationRule;
 
   @doc("Allocation rules.")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @maxItems(1)
   allocations?: Array<AllocationRule>;
 
@@ -250,11 +250,11 @@ model X509Certificate {
   certificate: string;
 
   @doc("Thumbprint extracted from the certificate.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   thumbprint?: string;
 
   @doc("Expiry date for the certificate.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expiryDate?: utcDateTime;
 }
 
@@ -378,7 +378,7 @@ scalar AllocationEndpointResourceId
 //  @doc("List of endpoints for geoBased allocation type.")
 //  @maxItems(10)
 //  @minItems(1)
-//  @extension("x-ms-identifiers", ["resourceId"])
+//  @extension("x-ms-identifiers", #["resourceId"])
 //  endpoints: Array<GeoBasedAllocationEndpoint>;
 //}
 
@@ -390,7 +390,7 @@ scalar AllocationEndpointResourceId
 //  @doc("List of endpoints for evenly weighted allocation type.")
 //  @maxItems(10)
 //  @minItems(1)
-//  @extension("x-ms-identifiers", ["resourceId"])
+//  @extension("x-ms-identifiers", #["resourceId"])
 //  endpoints: Array<AllocationEndpoint>;
 //  // todo no optional (to be tested)
 //}
@@ -403,7 +403,7 @@ model EvenlyDistributedAllocationRule extends AllocationRule {
   @doc("List of endpoints for evenly distributed allocation type.")
   @maxItems(10)
   @minItems(1)
-  @extension("x-ms-identifiers", ["resourceId"])
+  @extension("x-ms-identifiers", #["resourceId"])
   endpoints: Array<AllocationEndpoint>;
 }
 
@@ -450,7 +450,7 @@ enum SupportedIssuingAuthority {
 @doc("The configuration for setting up a CA.")
 model CaConfig {
   @doc("System-generated value for referencing the CA.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("Certificate properties.")
@@ -463,21 +463,21 @@ model CertificateProperties {
   keyType: SupportedKeyType;
 
   @doc("Certificate subject.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subject?: string;
 
   @doc("System-assigned validity period.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxValue(366)
   @minValue(365)
   validityPeriodInDays?: int32;
 
   @doc("Certificate is valid not before this date. Format ISO8601. Generated based on on validity period.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   validityNotBefore?: utcDateTime;
 
   @doc("Certificate is valid not after this date. Format ISO8601. Generated based on validity period.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   validityNotAfter?: utcDateTime;
 }
 
@@ -508,18 +508,18 @@ model IdentityInfo {
   certificateIssuance?: CertificateIssuanceRule; // For PKI
 
   @doc("Guid of the device template.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   deviceTemplateId: string;
 
   @doc("Guid for static AAD group.")
   staticGroupId: string;
 
   //  @doc("Guid for MTLS Oauth Config.")
-  //  @visibility("read", "create")
+  // @visibility(Lifecycle.Read, Lifecycle.Create)
   //  mtlsOauthConfigurationId: string;
 
   //  @doc("Guid of the devices Tenant.")
-  //  @visibility("read", "create")
+  // @visibility(Lifecycle.Read, Lifecycle.Create)
   //  deviceTenantId: string;
 
   //@doc("The identity info to return to device.")
@@ -546,7 +546,7 @@ model ProvisioningRule {
 model ResourceMetadata {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This is arbitrary JSON to provide custom attributes"
   @doc("Custom attributes")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   customAttributes?: Record<unknown>;
 }
 
@@ -555,7 +555,8 @@ interface ProvisioningPolicies {
   get is ArmResourceRead<ProvisioningPolicy>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ProvisioningPolicy>;
   delete is ArmResourceDeleteSync<ProvisioningPolicy>;
-  @parameterVisibility("read")
+  @patch(#{ implicitOptionality: false })
+  @parameterVisibility(Lifecycle.Read)
   update is ArmResourcePatchAsync<
     ProvisioningPolicy,
     ProvisioningPolicyPatchProperties
@@ -598,13 +599,13 @@ model AllocatedEndpoint {
 
 @doc("Details of the DeviceProvisioningState")
 model DeviceProvisioningStateProperties {
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Unique identifier for the device. Allow alphanumeric and '-', '.', '_', ':' only. Last character can only be alphanumeric and '-'")
   @maxLength(128)
   @pattern("^([a-z0-9-._:]{0,127}[a-z0-9-])$")
   registrationId: string;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Onboarding status of the resource this DeviceProvisioningState extends")
   onboardingStatus: OnboardingStatus;
 
@@ -616,10 +617,10 @@ model DeviceProvisioningStateProperties {
 
   @doc("Array of previously allocated endpoints")
   @maxItems(1)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   allocatedEndpoints?: Array<AllocatedEndpoint>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

@@ -16,9 +16,7 @@ using Azure.ResourceManager;
 using OpenAPI;
 
 @armProviderNamespace("Microsoft.ModSimWorkbench")
-@service({
-  title: "ModSimWorkbench Control Plane API",
-})
+@service(#{ title: "ModSimWorkbench Control Plane API" })
 @armProviderNamespace
 @versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
@@ -37,7 +35,7 @@ union SharedStoragePerformanceTier {
 @doc("List of chambers connected to a shared storage.")
 model ConnectedChamber {
   @doc("Fully qualified resource ID for the chamber resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   id: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ModSimWorkbench/chamber";
@@ -49,12 +47,12 @@ model ConnectedChamber {
 model SharedStorageProperties {
   ...StorageBaseProperties;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("List of Chambers connected to the shared storage.")
-  @extension("x-ms-identifiers", ["id"])
+  @extension("x-ms-identifiers", #["id"])
   chambers: Array<ConnectedChamber>;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Performance tier of the chamber storage.")
   performanceTier?: SharedStoragePerformanceTier; // TODO: Deprecated. Use top-level sku.
 }
@@ -63,7 +61,7 @@ model SharedStorageProperties {
 @parentResource(Workbench)
 model SharedStorage is TrackedResource<SharedStorageProperties> {
   @doc("The name of the shared storage")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @segment("sharedStorages")
   @key("sharedStorageName")
   @TypeSpec.Http.path
@@ -72,13 +70,13 @@ model SharedStorage is TrackedResource<SharedStorageProperties> {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Availability Zones are a valid envelope property"
   @added(Versions.`2024-05-01-preview`)
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The availability zones.")
   zones?: Array<string>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Sku is a valid envelope property"
   @added(Versions.`2024-05-01-preview`)
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
   sku: StorageSku;
 }

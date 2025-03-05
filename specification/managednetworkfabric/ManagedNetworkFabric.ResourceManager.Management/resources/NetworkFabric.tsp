@@ -18,7 +18,7 @@ model NetworkFabric extends Azure.ResourceManager.Foundations.TrackedResource {
   @path
   @key("networkFabricName")
   @segment("networkFabrics")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkFabric Properties */
@@ -40,7 +40,7 @@ interface NetworkFabrics {
   create is ArmResourceCreateOrReplaceAsync<NetworkFabric>;
 
   @doc("Update certain properties of the Network Fabric resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkFabric, NetworkFabricPatch>;
 
   @doc("Delete Network Fabric resource.")

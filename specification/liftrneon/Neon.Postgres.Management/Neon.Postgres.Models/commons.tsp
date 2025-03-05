@@ -23,15 +23,15 @@ model BaseEntity {
   entityName?: string;
 
   @doc("Timestamp indicating when the entity was created")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdAt?: string;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("Additional attributes for the entity")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   attributes?: Attributes[];
 }
 

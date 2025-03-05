@@ -17,7 +17,7 @@ model Pool is TrackedResource<PoolProperties> {
 
 @doc("Details of the AszLabHw Pool.")
 model PoolProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

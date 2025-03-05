@@ -23,7 +23,7 @@ model SiteReferenceProperties {
   siteId: string;
 
   @doc("Provisioning State")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

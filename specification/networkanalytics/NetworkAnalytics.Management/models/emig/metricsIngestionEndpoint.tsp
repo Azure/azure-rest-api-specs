@@ -27,11 +27,11 @@ model MetricsIngestionEndpointResources
 @removed(Versions.v2023_11_15)
 model MetricsIngestionEndpointProperties {
   @doc("Name of the External Metrics Ingress Gateway region where the compute should be deployed")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   ingressRegionName: string;
 
   @doc("Parent resource identifier for which this metrics ingestion endpoint is being created")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   targetResourceId: ResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/radioAccessNetworks";
@@ -41,36 +41,36 @@ model MetricsIngestionEndpointProperties {
     }
   ]>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Event Hub URL to which the metrics should be sent for this resource")
   eventHubUrl?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Event Hub name to which the metrics should be sent for this resource")
   eventHubName?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Key Vault URL where the connection string exists for authentication")
   keyVaultUrl?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Resource id of KeyVault")
   keyVaultResourceId?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Resource id of user assigned managed identity")
   userManagedIdentityResourceId?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Principal id of user assigned managed identity created under managed resource group")
   userManagedIdentityPrincipalId?: string;
 
   @doc("The status of the last operation")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Managed Resource Group Configuration")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 }
 

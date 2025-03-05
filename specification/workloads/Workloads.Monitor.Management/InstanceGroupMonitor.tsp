@@ -17,7 +17,7 @@ model InstanceGroupMonitor is TrackedResource<InstanceGroupMonitorProperties> {
 /** Instance Group Monitor properties */
 model InstanceGroupMonitorProperties is ResourceCommonProperties {
   /** The resource ID of the health model that represent the instance group or landscape. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   healthModelId?: armResourceIdentifier<[
     {
       type: "Microsoft.CloudHealth/healthModels";
@@ -35,11 +35,11 @@ model InstanceGroupMonitorProperties is ResourceCommonProperties {
   ]>;
 
   /** The discovery configurations */
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   discoveryConfigurations: DiscoveryConfiguration[];
 
   /** The group configurations */
-  @extension("x-ms-identifiers", ["groupBy"])
+  @Azure.ResourceManager.identifiers(#["groupBy"])
   groupConfigurations?: GroupConfiguration[];
 }
 

@@ -281,7 +281,7 @@ model EpicVirtualInstanceProperties {
   /**
    * Defines the environment type - Production/Non Production.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environment: EpicEnvironmentType;
 
   /**
@@ -297,31 +297,31 @@ model EpicVirtualInstanceProperties {
   /**
    * Defines the Epic Instance status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: EpicVirtualInstanceStatus;
 
   /**
    * Defines the health of Epic Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: EpicHealthState;
 
   /**
    * Defines the Virtual Instance for Epic state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: EpicVirtualInstanceState;
 
   /**
    * Defines the provisioning states.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: EpicVirtualInstanceProvisioningState;
 
   /**
    * Indicates any errors on the Virtual Instance for Epic solutions resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: EpicVirtualInstanceError;
 }
 
@@ -365,20 +365,20 @@ model ErrorDefinition {
   /**
    * Service specific error code which serves as the substatus for the HTTP error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * Description of the error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * Internal error details.
    */
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   details?: ErrorDefinition[];
 }
 
@@ -389,32 +389,32 @@ model WssServerProperties {
   /**
    * The list of virtual machines corresponding to the Wss Services instance.
    */
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: WssServerVmDetails[];
 
   /**
    * Defines the Epic Instance status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: EpicVirtualInstanceStatus;
 
   /**
    * Defines the health of Epic Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: EpicHealthState;
 
   /**
    * Defines the provisioning states.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: EpicVirtualInstanceProvisioningState;
 
   /**
    * Defines the errors related to Epic WSS server Instance resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: EpicVirtualInstanceError;
 }
 
@@ -425,13 +425,13 @@ model WssServerVmDetails {
   /**
    * The unique identifier of the virtual machine.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachineId?: string;
 
   /**
    * The role of the Wss VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   role?: WssRole;
 }
 
@@ -442,32 +442,32 @@ model DatabaseServerProperties {
   /**
    * The list of virtual machines corresponding to the Database resource.
    */
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: DatabaseServerVmDetails[];
 
   /**
    * Defines the health of Epic Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: EpicHealthState;
 
   /**
    * Defines the Epic Instance status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: EpicVirtualInstanceStatus;
 
   /**
    * Defines the provisioning states.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: EpicVirtualInstanceProvisioningState;
 
   /**
    * Defines the errors related to Database resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: EpicVirtualInstanceError;
 }
 
@@ -478,13 +478,13 @@ model DatabaseServerVmDetails {
   /**
    * The unique identifier of the virtual machine.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachineId?: string;
 
   /**
    * The role of the database VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   role?: DatabaseVmRole;
 }
 
@@ -495,32 +495,32 @@ model HyperspaceWebServerProperties {
   /**
    * The list of virtual machines.
    */
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: HyperspaceWebServerVmDetails[];
 
   /**
    * Defines the Epic Instance status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: EpicVirtualInstanceStatus;
 
   /**
    * Defines the health of Epic Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: EpicHealthState;
 
   /**
    * Defines the provisioning states.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: EpicVirtualInstanceProvisioningState;
 
   /**
    * Defines the HyperspaceWeb Instance errors.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: EpicVirtualInstanceError;
 }
 
@@ -531,13 +531,13 @@ model HyperspaceWebServerVmDetails {
   /**
    * The unique identifier of the virtual machine.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachineId?: string;
 
   /**
    * The role of the Wss VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   role?: WssRole;
 }
 
@@ -548,32 +548,32 @@ model PresentationServerProperties {
   /**
    * The list of virtual machines.
    */
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: PresentationServerVmDetails[];
 
   /**
    * Defines the Epic Instance status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: EpicVirtualInstanceStatus;
 
   /**
    * Defines the health of Epic Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: EpicHealthState;
 
   /**
    * Defines the provisioning states.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: EpicVirtualInstanceProvisioningState;
 
   /**
    * Defines the Presentation Instance errors.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: EpicVirtualInstanceError;
 }
 
@@ -584,13 +584,13 @@ model PresentationServerVmDetails {
   /**
    * The unique identifier of the virtual machine.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachineId?: string;
 
   /**
    * The role of the Presentation VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   role?: PresentationRole;
 }
 
@@ -601,32 +601,32 @@ model SharedServerProperties {
   /**
    * The list of virtual machines.
    */
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   vmDetails?: SharedServerVmDetails[];
 
   /**
    * Defines the Epic Instance status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: EpicVirtualInstanceStatus;
 
   /**
    * Defines the health of Epic Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: EpicHealthState;
 
   /**
    * Defines the provisioning states.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: EpicVirtualInstanceProvisioningState;
 
   /**
    * Defines the Shared Instance errors.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: EpicVirtualInstanceError;
 }
 
@@ -637,13 +637,13 @@ model SharedServerVmDetails {
   /**
    * The unique identifier of the virtual machine.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachineId?: string;
 
   /**
    * The role of the Shared VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   role?: SharedRole;
 }
 

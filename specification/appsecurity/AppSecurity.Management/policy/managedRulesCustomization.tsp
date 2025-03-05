@@ -7,11 +7,11 @@ namespace Microsoft.AppSecurity;
 @doc("Defines managed rules customization (including exclusions and overrides)")
 model ManagedRulesCustomization {
   @doc("List of exclusions to be applied to the managed rules inspection. If not specified, then no exclusions are applied")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   exclusions?: ManagedRulesExclusion[] = #[];
 
   @doc("List of managed rule set overrides. If not specified, then no overrides are applied")
-  @extension("x-ms-identifiers", ["ruleSetType", "ruleSetVersion"])
+  @Azure.ResourceManager.identifiers(#["ruleSetType", "ruleSetVersion"])
   overrides?: ManagedRuleSetOverride[] = #[];
 }
 
@@ -21,11 +21,11 @@ model ManagedRulesExclusion {
   name: string;
 
   @doc("The exclusion conditions")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   conditions: ExclusionCondition[];
 
   @doc("The scope of the exclusion. If not specified, then the exclusion is applied to all managed rules")
-  @extension("x-ms-identifiers", ["ruleSetType", "ruleSetVersion"])
+  @Azure.ResourceManager.identifiers(#["ruleSetType", "ruleSetVersion"])
   scope?: ManagedRuleSetScope[] = #[];
 }
 
@@ -46,7 +46,7 @@ model ManagedRuleSetScope {
   ...ManagedRuleSetId;
 
   @doc("Exclusion scope. If not specified, then the exclusion is applied to the entire rule set")
-  @extension("x-ms-identifiers", ["ruleGroupName"])
+  @Azure.ResourceManager.identifiers(#["ruleGroupName"])
   @maxItems(100)
   ruleGroups?: RuleGroupScope[] = #[];
 }
@@ -66,7 +66,7 @@ model ManagedRuleSetOverride {
   ...ManagedRuleSetId;
 
   @doc("Rule group level overrides")
-  @extension("x-ms-identifiers", ["ruleGroupName"])
+  @Azure.ResourceManager.identifiers(#["ruleGroupName"])
   ruleGroupOverrides?: RuleGroupOverride[] = #[];
 }
 
@@ -82,7 +82,7 @@ model RuleGroupOverride {
   groupOverride?: StateAndActionOverride;
 
   @doc("List of rule level overrides")
-  @extension("x-ms-identifiers", ["ruleId"])
+  @Azure.ResourceManager.identifiers(#["ruleId"])
   @maxItems(100)
   rules?: RuleOverride[] = #[];
 }

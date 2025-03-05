@@ -66,7 +66,7 @@ union ProvisioningState {
 @doc("Common properties for all azure tracked and proxy resources.")
 model AzureResourceProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -500,6 +500,16 @@ union Language {
    * PLXSLT edition.
    */
   PLXSLT: "PLXSLT",
+
+  /**
+   * INTERNAL edition.
+   */
+  INTERNAL: "INTERNAL",
+
+  /**
+   * C edition.
+   */
+  C: "C",
 }
 
 /**
@@ -557,25 +567,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -586,7 +596,7 @@ model PgsqlSitesResourcePatch {
   /**
    * Resource tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  @Azure.ResourceManager.identifiers(#["key", "value"])
   tags?: Tag[];
 
   /**
@@ -624,6 +634,11 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   ]>;
 
   /**
+   * The host machine properties.
+   */
+  hostMachineProperties?: HostMachineProperties;
+
+  /**
    * PGSQL Server port number
    */
   portNumber: int64;
@@ -631,7 +646,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * The pgsql server version.
    */
-  pgsqlVersion?: string;
+  version?: string;
 
   /**
    * The number of database.
@@ -668,15 +683,15 @@ model PgsqlInstanceProperties is AzureResourceProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["name", "locale", "collationProvider", "isDeterministic"]
+    #["name", "locale", "collationProvider", "isDeterministic"]
   )
   collations?: Collation[];
 
   /**
    * Dictionary of server parameters for the instance
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["key", "value"])
   serverParameters?: ServerParameter[];
 
   /**
@@ -702,7 +717,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  @Azure.ResourceManager.identifiers(#["key", "value"])
   tags?: Tag[];
 }
 
@@ -735,9 +750,14 @@ model PgsqlInstanceResourcePatch {
   ]>;
 
   /**
+   * The host machine properties.
+   */
+  hostMachineProperties?: HostMachineProperties;
+
+  /**
    * The pgsql server version.
    */
-  pgsqlVersion?: string;
+  version?: string;
 
   /**
    * The number of database.
@@ -774,7 +794,7 @@ model PgsqlInstanceResourcePatch {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["name", "locale", "collationProvider", "isDeterministic"]
+    #["name", "locale", "collationProvider", "isDeterministic"]
   )
   collations?: Collation[];
 
@@ -801,7 +821,7 @@ model PgsqlInstanceResourcePatch {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  @Azure.ResourceManager.identifiers(#["key", "value"])
   tags?: Tag[];
 }
 
@@ -888,7 +908,7 @@ model Collation {
 //   /**
 //    * Resource tags.
 //    */
-//   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+//   @Azure.ResourceManager.identifiers(#["key", "value"])
 //   tags?: Tag[];
 // }
 
@@ -907,6 +927,15 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   databaseDisplayName?: string;
 
   /**
+   * discovered PGSQL Instance Id
+   */
+  pgSqlInstanceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridInventory/PGSQLSites/PGSQLInstances";
+    }
+  ]>;
+
+  /**
    * PGSQL database encoding.
    */
   encoding?: Encoding;
@@ -916,14 +945,14 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["name", "locale", "collationProvider", "isDeterministic"]
+    #["name", "locale", "collationProvider", "isDeterministic"]
   )
   collations?: Collation[];
 
   /**
    * The list of extensions in the database.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "version"])
+  @Azure.ResourceManager.identifiers(#["name", "version"])
   extensions?: Extension[];
 
   /**
@@ -954,7 +983,7 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  @Azure.ResourceManager.identifiers(#["key", "value"])
   tags?: Tag[];
 }
 
@@ -978,6 +1007,15 @@ model PgsqlDatabaseResourcePatch {
   databaseDisplayName?: string;
 
   /**
+   * discovered PGSQL Instance Id
+   */
+  pgSqlInstanceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridInventory/PGSQLSites/PGSQLInstances";
+    }
+  ]>;
+
+  /**
    * PGSQL database encoding.
    */
   encoding?: Encoding;
@@ -987,14 +1025,14 @@ model PgsqlDatabaseResourcePatch {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["name", "locale", "collationProvider", "isDeterministic"]
+    #["name", "locale", "collationProvider", "isDeterministic"]
   )
   collations?: Collation[];
 
   /**
    * The list of extensions in the database.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "version"])
+  @Azure.ResourceManager.identifiers(#["name", "version"])
   extensions?: Extension[];
 
   /**
@@ -1025,7 +1063,7 @@ model PgsqlDatabaseResourcePatch {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+  @Azure.ResourceManager.identifiers(#["key", "value"])
   tags?: Tag[];
 }
 
@@ -1051,7 +1089,7 @@ model Extension {
 //   /**
 //    * Resource tags
 //    */
-//   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
+//   @Azure.ResourceManager.identifiers(#["key", "value"])
 //   tags?: Tag[];
 // }
 
@@ -1067,19 +1105,25 @@ model AgentProperties is AzureResourceProperties {
   /**
    * Service principal identity details used by agent for communication to the service.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   servicePrincipalIdentityDetails: AgentSpnProperties;
 
   /**
    * Name of the appliance on which agent is running.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   migrateApplianceName: string;
 
   /**
    * Health details of the agent.
    */
   healthDetails?: AgentHealthProperties;
+
+  /**
+   * Name of the appliance on which agent is running.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  fabricSiteName: string;
 }
 
 /**
@@ -1141,4 +1185,19 @@ model AgentResourcePatchProperties {
 @doc("The Site Tags patch resource definition.")
 model SiteTagsPatch {
   ...TagsUpdate;
+}
+
+/**
+ * Represents a Collation in PostgreSQL.
+ */
+model HostMachineProperties {
+  /**
+   * The machine vCore count.
+   */
+  vCores?: int64;
+
+  /**
+   * The allocated RAM in Machine.
+   */
+  allocatedMemoryInMb?: int64;
 }

@@ -10,9 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.ModSimWorkbench")
-@service({
-  title: "ModSimWorkbench Control Plane API",
-})
+@service(#{ title: "ModSimWorkbench Control Plane API" })
 @armProviderNamespace
 @versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
@@ -40,12 +38,12 @@ model StorageProperties {
 
   // @removed(Versions.`2024-05-01-preview`)
   // @renamedFrom(Versions.`2024-05-01-preview`, "performanceTier")
-  // @visibility("read", "create")
+  //@visibility(Lifecycle.Read, Lifecycle.Create)
   // @doc("Performance tier of the chamber storage.")
   // oldPerformanceTier: StoragePerformanceTier = StoragePerformanceTier.Standard;
 
   // @added(Versions.`2024-05-01-preview`)
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Performance tier of the chamber storage.")
   performanceTier?: StoragePerformanceTier; // TODO: Deprecated. Use top-level sku.
 }
@@ -54,7 +52,7 @@ model StorageProperties {
 @parentResource(Chamber)
 model Storage is TrackedResource<StorageProperties> {
   @doc("The name of the storage")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @segment("storages")
   @key("storageName")
   @TypeSpec.Http.path
@@ -63,13 +61,13 @@ model Storage is TrackedResource<StorageProperties> {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Availability Zones are a valid envelope property"
   @added(Versions.`2024-05-01-preview`)
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The availability zones.")
   zones?: Array<string>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Sku is a valid envelope property"
   @added(Versions.`2024-05-01-preview`)
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
   sku: StorageSku;
 }

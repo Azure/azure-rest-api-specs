@@ -15,9 +15,7 @@ using OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "legacy"
 @armProviderNamespace("Microsoft.ConnectedCredentials")
-@service({
-  title: "Microsoft.ConnectedCredentials",
-})
+@service(#{ title: "Microsoft.ConnectedCredentials" })
 @doc("Connected Credentials Provider management API.")
 @versioned(Versions)
 namespace Microsoft.ConnectedCredentials;
@@ -63,74 +61,74 @@ union ProvisioningState {
 
 @doc("The extended location.")
 model ExtendedLocation {
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The extended location type.")
   type?: string;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The extended location name.")
   name?: string;
 }
 
 @doc("Details of the ConnectedCredentials Credential.")
 model CredentialProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Used to configure the provider.")
   providerType?: string;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The friendly name of the credential.")
   friendlyName?: string;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Provider specific settings.")
   azureKvProvider?: AzureKvProvider;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Details of the target K8s secret.")
   target?: Target;
 
-  @visibility("read", "create", "update")
-  @extension("x-ms-identifiers", ["remoteRef"])
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @extension("x-ms-identifiers", #["remoteRef"])
   @doc(" Data defines the connection between the Kubernetes Secret keys and the Provider data, Array.")
   data?: Data[];
 
-  @visibility("read")
-  @extension("x-ms-identifiers", ["type"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["type"])
   @doc("The resource status information.")
   statuses?: ResourceStatus[];
 }
 
 @doc("Provider specific settings.")
 model AzureKvProvider {
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Vault Url from which the secrets to be fetched from.")
   vaultUrl?: string;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Whether to delete the secret from the source or other delete behavior customizations.")
   deleteOption?: string;
 }
 
 @doc("Details of the target K8s secret.")
 model Target {
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Name defines the name of the Secret resource to be managed. Defaults to the name of the credentials CR name.")
   name?: string;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Secret type, Defaults to Opaque")
   type?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Secret resource namespace, should be same as CL namespace.")
   `namespace`?: string;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Metadata associated with credentials.")
   metadata?: Metadata;
 }
@@ -138,57 +136,57 @@ model Target {
 @doc("Metadata of credential resource.")
 model Metadata {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Annotations of credential resource.")
   annotations?: Record<string>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Labels of credential resource.")
   labels?: Record<string>;
 }
 
 @doc("The data defines the connection between the Kubernetes Secret keys and the Provider data.")
 model Data {
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("SecretKey defines the key in which the controller stores the value.")
   secretKey?: string;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Identifier of the secret in the provider.")
   remoteRef?: RemoteRef;
 }
 
 @doc("Identifier of the secret in the provider.")
 model RemoteRef {
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The key of the secret identifier.")
   key?: string;
 }
 
 @doc("The resource status information")
 model ResourceStatus {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The type of the condition.")
   type?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Status of the condition.")
   status?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The reason for the condition's status.")
   reason?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("A human readable message indicating details about the status.")
   message?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Severity with which to treat failures of this type of condition.")
   severity?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The last update time for this condition")
   lastUpdatedAt?: utcDateTime;
 }

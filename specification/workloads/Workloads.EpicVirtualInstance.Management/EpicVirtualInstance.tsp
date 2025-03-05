@@ -21,7 +21,7 @@ model EpicVirtualInstance is TrackedResource<EpicVirtualInstanceProperties> {
   @path
   @key("epicVirtualInstanceName")
   @segment("epicVirtualInstances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -40,7 +40,7 @@ interface EpicVirtualInstances {
   /**
    * Updates a Virtual Instance for Epic solutions resource
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmTagsPatchSync<EpicVirtualInstance>;
 
   /**

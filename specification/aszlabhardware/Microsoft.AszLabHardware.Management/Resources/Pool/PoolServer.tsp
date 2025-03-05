@@ -19,11 +19,11 @@ model PoolServer is ProxyResource<PoolServerProperties> {
 model PoolServerProperties {
   ...ServerPropertiesBase;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Endpoint for managing the server")
   managementEndpoint?: string;
 }

@@ -20,9 +20,7 @@ using TypeSpec.Versioning;
  * The Microsoft.HybridContainerService Rest API spec.
  */
 @armProviderNamespace
-@service({
-  title: "HybridContainerService",
-})
+@service(#{ title: "HybridContainerService" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.HybridContainerService;

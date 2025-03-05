@@ -18,22 +18,22 @@ model InstanceHealthDefinition
 /** The instance health definition properties */
 model InstanceHealthDefinitionProperties is ResourceCommonProperties {
   /** The health definition version. It changes when there is a change in health definition. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   /** The workload kind this health definition applicable for. Ex: SAP */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   workloadKind?: string;
 
   /** The compatible workload architectures */
   compatibleArchitectures?: string[];
 
   /** The health definitions for the supported workload components */
-  @extension("x-ms-identifiers", ["type", "role"])
+  @Azure.ResourceManager.identifiers(#["type", "role"])
   componentHealthDefinitions: ComponentHealthDefinition[];
 
   /** The common resource signal definitions that are applicable across the components. */
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   commonSignalDefinitionMappings?: ResourceSignalDefinitionMapping[];
 }
 

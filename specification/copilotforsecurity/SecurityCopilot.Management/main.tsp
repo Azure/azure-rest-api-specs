@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "SecurityCopilotClient",
-})
+@service(#{ title: "SecurityCopilotClient" })
 @doc("SecurityCopilot Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.SecurityCopilot;
@@ -49,10 +47,10 @@ model CapacityProperties {
   crossGeoCompute: IsAllowed;
 
   @doc("Geo location of the capacity unit")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   geo: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 

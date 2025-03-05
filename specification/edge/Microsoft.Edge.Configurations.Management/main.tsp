@@ -22,9 +22,7 @@ using Azure.ResourceManager;
 /** Microsoft.Edge Resource Provider management API. */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is published as part of same RP in edge folder."
 @armProviderNamespace
-@service({
-  title: "Microsoft.Edge",
-})
+@service(#{ title: "Microsoft.Edge" })
 @versioned(Versions)
 namespace Microsoft.Edge;
 

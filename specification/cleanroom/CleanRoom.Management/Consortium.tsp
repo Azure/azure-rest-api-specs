@@ -26,7 +26,7 @@ model Consortium
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[-\\w\\._,\\(\\)]+$")
   kind?: string;
 }
@@ -46,7 +46,7 @@ interface Consortiums {
   /**
    * Updates tags on a consortium.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Consortium,
     PatchModel = ResourceTags,

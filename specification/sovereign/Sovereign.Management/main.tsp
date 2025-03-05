@@ -19,9 +19,7 @@ using Azure.ResourceManager;
 using Azure.Core;
 using OpenAPI;
 
-@service({
-  title: "Cloud for Sovereignty Resource Provider.",
-})
+@service(#{ title: "Cloud for Sovereignty Resource Provider." })
 @versioned(Versions)
 @armProviderNamespace
 @armCommonTypesVersion("v5")
@@ -116,7 +114,7 @@ model LandingZoneAccountResource
   @segment("landingZoneAccounts")
   @key("landingZoneAccountName")
   @pattern("^[a-zA-Z0-9-]{3,64}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 
@@ -151,7 +149,7 @@ model LandingZoneConfigurationResource
   @doc("The landing zone configuration name")
   @segment("landingZoneConfigurations")
   @key("landingZoneConfigurationName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9-]{3,64}$")
   @path
   name: string;
