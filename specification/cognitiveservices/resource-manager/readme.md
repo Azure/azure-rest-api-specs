@@ -41,6 +41,41 @@ These settings apply only when `--tag=package-preview-2025-04-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-04-01-preview'
 input-file:
   - Microsoft.CognitiveServices/preview/2025-04-01-preview/cognitiveservices.json
+suppressions: 
+- code: PutResponseCodes
+  reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
+  where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].put
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].put
+- code: PatchResponseCodes
+  reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
+  where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch
+- code: PatchBodyParametersSchema
+  reason: this is a required field for in a optional property this experience exist in other stable schemas as well.
+  where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].patch.parameters.schema.properties.properties
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters.schema.properties.properties
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].patch.parameters.schema.properties.properties
+- code: GuidUsage
+  reason: Approved to be suppressed in AML swagger.
+  where:
+    - $.definitions.ConnectionOAuth2.properties.clientId.format
+- code: DeleteResponseCodes
+  reason: Behavior is align with other existing API for this RP
+  where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete
+    
+- code: AvoidAdditionalProperties
+  reason: Approved to be suppressed in AML swagger
+  where:
+    - $.definitions.ConnectionPropertiesV2.properties.metadata
+    - $.definitions.CustomKeys.properties.keys
+- code: NestedResourcesMustHaveListOperation
+  reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
+  where:
+    - $.definitions["CapabilityHostResource"]
 ```
 
 ### Tag: package-2024-10
