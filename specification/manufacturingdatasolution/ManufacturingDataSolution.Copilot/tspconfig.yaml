@@ -34,6 +34,16 @@ options:
     package-dir: "azure-microsoft-industry-manufacturing-mds-copilot"
     namespace: "com.azure.microsoft.industry.manufacturing.mds.copilot"
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/dataplane/microsoft-industries-manufacturingdatasolution-copilot"
+    package-dir: "microsoft-industries-manufacturingdatasolution-copilot"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
