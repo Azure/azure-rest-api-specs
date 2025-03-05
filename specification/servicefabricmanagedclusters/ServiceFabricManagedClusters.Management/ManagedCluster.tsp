@@ -129,7 +129,6 @@ interface ManagedClusters {
   >;
 }
 
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Day 0 property, tagging for sdk generation"
 interface ManagedGetAzResiliencyStatus {
   /**
