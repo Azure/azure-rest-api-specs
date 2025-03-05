@@ -55,7 +55,7 @@ model QuantumComputingData {
 
 /** A job to be run in the workspace. */
 @resource("jobs")
-@parentResource(QuantumWorkspace)
+@parentResource(Quantum.Workspace.QuantumWorkspace)
 model JobDetails extends ItemDetails {
   /** Id of the job. */
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "False-positive"
@@ -123,8 +123,7 @@ model JobDetails extends ItemDetails {
 /** A Paged List of JobDetails. */ // Used by workspace/jobs and sesssions/{sessionId}/jobs
 alias PagedJobDetails = Azure.Core.Page<JobDetails>;
 
-namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
+namespace Quantum.Workspace.Services {
   interface JobOperations {
     /** Create a new job. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"

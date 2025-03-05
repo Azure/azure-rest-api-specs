@@ -43,8 +43,9 @@ using OpenAPI;
     serviceBaseUrl: string = "quantum.azure.com",
   }
 )
+@versioned(QuantumWorkspaceAPIVersion)
 @OpenAPI.info(#{ contact: #{ email: "azqengg@microsoft.com" } })
-namespace Quantum.Workspace.Services {
+namespace Quantum.Workspace {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
     There is no support for JsonPatch in Azure.Core.
     The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
@@ -54,24 +55,23 @@ namespace Quantum.Workspace.Services {
     We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
     See https://github.com/Azure/typespec-azure/issues/494
     """
-  interface Jobs extends Quantum.Workspace.Operations.JobOperations {}
+  interface Jobs extends Quantum.Workspace.Services.JobOperations {}
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
     We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
     See https://github.com/Azure/typespec-azure/issues/494
     """
-  interface Sessions extends Quantum.Workspace.Operations.SessionOperations {}
+  interface Sessions extends Quantum.Workspace.Services.SessionOperations {}
 
-  interface Providers extends Quantum.Workspace.Operations.ProviderOperations {}
+  interface Providers extends Quantum.Workspace.Services.ProviderOperations {}
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
-  interface Storage extends Quantum.Workspace.Operations.StorageOperations {}
+  interface Storage extends Quantum.Workspace.Services.StorageOperations {}
 
-  interface Quotas extends Quantum.Workspace.Operations.QuotaOperations {}
+  interface Quotas extends Quantum.Workspace.Services.QuotaOperations {}
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
       We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
     """
-  interface TopLevelItems
-    extends Quantum.Workspace.Operations.ItemsOperations {}
+  interface TopLevelItems extends Quantum.Workspace.Services.ItemsOperations {}
 }

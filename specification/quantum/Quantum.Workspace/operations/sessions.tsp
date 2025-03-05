@@ -47,7 +47,7 @@ union SessionStatus {
 
 /** Session, a logical grouping of jobs. */
 @resource("sessions")
-@parentResource(QuantumWorkspace)
+@parentResource(Quantum.Workspace.QuantumWorkspace)
 model SessionDetails extends ItemDetails {
   /** Id of the session. */
   @key("sessionId")
@@ -70,8 +70,7 @@ model SessionDetails extends ItemDetails {
 /** A Paged List of SessionDetails. */ // Used by workspace/sesssions
 alias PagedSessionDetails = Azure.Core.Page<SessionDetails>;
 
-namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
+namespace Quantum.Workspace.Services {
   interface SessionOperations {
     /** Open a new session. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"

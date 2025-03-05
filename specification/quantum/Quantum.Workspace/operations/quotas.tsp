@@ -5,6 +5,7 @@
 
 import "./operations.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
@@ -32,7 +33,7 @@ union MeterPeriod {
 
 /** Quota information. */
 @resource("quotas")
-@parentResource(QuantumWorkspace)
+@parentResource(Quantum.Workspace.QuantumWorkspace)
 model Quota {
   /** Quota faux key. */
   @key
@@ -69,8 +70,7 @@ model Quota {
   period: MeterPeriod;
 }
 
-namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
+namespace Quantum.Workspace.Services {
   interface QuotaOperations {
     /** List quotas for the given workspace. */
     list is ListOperation<Quota>;

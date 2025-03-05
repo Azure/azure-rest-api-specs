@@ -12,7 +12,6 @@ using OpenAPI;
 
 alias DefaultAzureCoreVersion = Azure.Core.Versions.v1_0_Preview_2;
 
-@versioned(QuantumWorkspaceAPIVersion)
 namespace Quantum.Workspace {
   /**
    * Provides the custom 'filter' query parameter for list operations

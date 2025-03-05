@@ -5,6 +5,7 @@
 
 import "./operations.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
@@ -38,7 +39,7 @@ union TargetAvailability {
 
 /** Provider status. */
 @resource("providerStatus")
-@parentResource(QuantumWorkspace)
+@parentResource(Quantum.Workspace.QuantumWorkspace)
 model ProviderStatus {
   /** Provider id. */
   @visibility(Lifecycle.Read)
@@ -73,8 +74,7 @@ model TargetStatus {
   statusPage?: string;
 }
 
-namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
+namespace Quantum.Workspace.Services {
   interface ProviderOperations {
     /** List all providers in the workspace with their respective status. */
     list is ListOperation<ProviderStatus>;

@@ -10,6 +10,8 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 
+namespace Quantum.Workspace;
+
 /** The REST API version. */
 @minLength(10)
 @maxLength(18)

@@ -34,8 +34,7 @@ alias BlobDetailsParam = {
   blobDetails: BlobDetails;
 };
 
-namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
+namespace Quantum.Workspace.Services {
   @autoRoute
   interface StorageOperations {
     /** Gets a URL with SAS token for a container/blob in the storage account associated with the workspace. The SAS URL can be used to upload job input and/or download job output. */

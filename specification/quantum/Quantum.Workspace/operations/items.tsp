@@ -38,7 +38,7 @@ scalar WorkspaceItemId extends string;
 /** A workspace item. */
 @discriminator("itemType")
 @resource("topLevelItems")
-@parentResource(QuantumWorkspace)
+@parentResource(Quantum.Workspace.QuantumWorkspace)
 model ItemDetails {
   /** Id of the item. */
   @key
@@ -75,7 +75,7 @@ model ItemDetails {
 
   /** Cost estimate. */
   @visibility(Lifecycle.Read)
-  costEstimate?: CostEstimate;
+  costEstimate?: Quantum.Workspace.CostEstimate;
 
   /** Error information. */
   @visibility(Lifecycle.Read)
@@ -84,9 +84,7 @@ model ItemDetails {
 
 alias PagedItemDetails = Azure.Core.Page<ItemDetails>;
 
-namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
-
+namespace Quantum.Workspace.Services {
   interface ItemsOperations {
     /** List top-level items. */
     @sharedRoute
