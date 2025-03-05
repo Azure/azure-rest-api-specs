@@ -42,17 +42,15 @@ options:
     flavor: azure
     isModularLibrary: true
   "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     service-dir: "sdk/messaging/eventgrid"
     package-dir: "azsystemevents"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
-    emitter-output-dir: "{project-root}"
-    slice-elements-byval: true
-    fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
     generate-fakes: true
-    head-as-boolean: true
     inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+
   "@azure-tools/typespec-java":
     emitter-output-dir: "{project-root}"
     namespace: com.azure.messaging.eventgrid
