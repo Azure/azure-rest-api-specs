@@ -14,39 +14,11 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Unified;
 
-@doc("AssetVersion Definition")
-model AssetVersion {
-  @doc("Fully qualified resource Id: azureml://workspace/{workspaceName}/indexes/{name}/versions/{version} of the index.")
-  @visibility("read")
-  id: string;
-
-  @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
-  stage?: string = "Development";
-
-  @doc("Description information of the asset.")
-  description?: string;
-
-  @doc("Metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
-  systemData?: SystemData;
-
-  @doc("Asset's tags. Unlike properties, tags are fully mutable.")
-  tags?: Record<string>;
-
-  @doc("Asset's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
-  properties?: Record<string>;
-}
-
 @doc("Index resource Definition")
-model Index is AssetVersion {
-  @doc("Index configuration")
-  indexConfiguration: IndexConfiguration;
-
-  @doc("Embedding configuration")
-  embeddingConfiguration: EmbeddingConfiguration;
-
+@discriminator("indexType")
+model Index extends AssetBase {
   @doc("Type of index")
-  indexType: IndexType
+  indexType: IndexType;
 }
 
 @doc("Paged collection of IndexVersion items.")
@@ -62,23 +34,43 @@ model PagedIndex {
   nextLink?: ResourceLocation<Index>;
 }
 
+@doc("Azure AI Search Index Definition")
+model AzureAISearchIndex extends AssetBase {
+  @doc("Type of index")
+  indexType: IndexType.azureSearch;
 
-@doc("Index configuration class")
-model IndexConfiguration {
-  @doc("Connection id of indexing service")
+  @doc("Connection id to Azure AI Search")
   connectionId: string;
 
-  @doc("Name of database")
+  @doc("Name of index in Azure AI Search resource to attach")
+  indexName: string;
+}
+
+@doc("Managed Azure AI Search Index Definition")
+model ManagedAzureAISearchIndex extends AssetBase {
+  @doc("Type of index")
+  indexType: IndexType.managedAzureSearch;
+
+  @doc("Vector store id of managed index")
+  vectorStoreId: string;
+}
+
+@doc("CosmosDB Vector Store Index Definition")
+model ManagedAzureAISearchIndex extends AssetBase {
+  @doc("Type of index")
+  indexType: IndexType.cosmosDB;
+
+  @doc("Connection id to CosmosDB")
+  connectionId: string;
+
+  @doc("Name of the CosmosDB Database")
   databaseName: string;
 
-  @doc("Name of container")
+  @doc("Name of CosmosDB Container")
   containerName: string;
 
-  @doc("Name of index")
-  indexName: string;
-
-  @doc("Vector store id")
-  vectorStoreId: string;
+  @doc("Embedding model configuration")
+  embeddingConfiguration: EmbeddingConfiguration;
 }
 
 @doc("Embedding configuration class")
@@ -100,7 +92,7 @@ union IndexType {
   azureSearch: "AzureSearch",
 
   @doc("CosmosDB")
-  cosmosDB: "CosmosDB",
+  cosmosDB: "CosmosDBNoSqlVectorStore",
 
   @doc("Managed Azure Search")
   managedAzureSearch: "ManagedAzureSearch",
