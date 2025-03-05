@@ -20,10 +20,10 @@ describe("Utils", () => {
       );
       expect(results).toHaveLength(2);
       expect(results).toContain(
-        "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+        path.normalize(`${repoRoot}/specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml`),
       );
       expect(results).toContain(
-        "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
+        path.normalize(`${repoRoot}/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml`),
       );
     });
 
@@ -48,8 +48,8 @@ describe("Utils", () => {
     test("finds all readme.md files in directory", () => {
       const results = findReadmeFiles(`${repoRoot}/specification/contosowidgetmanager`);
       expect(results).toHaveLength(2);
-      expect(results).toContain("specification/contosowidgetmanager/resource-manager/readme.md");
-      expect(results).toContain("specification/contosowidgetmanager/data-plane/readme.md");
+      expect(results).toContain(path.normalize(`${repoRoot}/specification/contosowidgetmanager/resource-manager/readme.md`));
+      expect(results).toContain(path.normalize(`${repoRoot}/specification/contosowidgetmanager/data-plane/readme.md`));
     });
 
     test("returns empty array for directory without readme files", () => {
