@@ -16,12 +16,12 @@ namespace Azure.AI.Unified;
 
 @doc("Index resource Definition")
 @discriminator("indexType")
-model IndexVersion extends AssetBase {
+model Index extends AssetBase {
   @doc("Type of index")
   indexType: IndexType;
 }
 
-@doc("Paged collection of IndexVersion items.")
+@doc("Paged collection of Index items.")
 @pagedResult
 model PagedIndex {
   @doc("The list of Indexes.")
@@ -35,7 +35,7 @@ model PagedIndex {
 }
 
 @doc("Azure AI Search Index Definition")
-model AzureAISearchIndex extends IndexVersion {
+model AzureAISearchIndex extends Index {
   @doc("Type of index")
   indexType: IndexType.azureSearch;
 
@@ -47,7 +47,7 @@ model AzureAISearchIndex extends IndexVersion {
 }
 
 @doc("Managed Azure AI Search Index Definition")
-model ManagedAzureAISearchIndex extends IndexVersion {
+model ManagedAzureAISearchIndex extends Index {
   @doc("Type of index")
   indexType: IndexType.managedAzureSearch;
 
