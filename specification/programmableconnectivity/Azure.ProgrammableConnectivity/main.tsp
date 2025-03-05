@@ -18,9 +18,7 @@ using Azure.Core;
     ]>
   ]
 )
-@service({
-  title: "Programmable Connectivity",
-})
+@service(#{ title: "Programmable Connectivity" })
 @server(
   "{endpoint}",
   "Azure Programmable Connectivity Endpoint.",
