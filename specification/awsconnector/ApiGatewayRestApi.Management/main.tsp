@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -75,7 +73,6 @@ model AwsApiGatewayRestApiProperties {
   apiKeySourceType?: string;
 
   @doc("The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads.")
-  @extension("x-ms-identifiers", [])
   binaryMediaTypes?: string[];
 
   @doc("An OpenAPI specification that defines a set of RESTful APIs in JSON format. For YAML templates, you can also provide the specification in YAML format.")
@@ -121,7 +118,7 @@ model AwsApiGatewayRestApiProperties {
   rootResourceId?: string;
 
   @doc("The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:``. The tag value can be up to 256 characters.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 }
 
@@ -151,11 +148,9 @@ model S3Location {
 @doc("Definition of EndpointConfiguration")
 model EndpointConfiguration {
   @doc("A list of endpoint types of an API (RestApi) or its custom domain name (DomainName). For an edge-optimized API and its custom domain name, the endpoint type is ``'EDGE'``. For a regional API and its custom domain name, the endpoint type is ``REGIONAL``. For a private API, the endpoint type is ``PRIVATE``.")
-  @extension("x-ms-identifiers", [])
   types?: string[];
 
   @doc("A list of VpcEndpointIds of an API (RestApi) against which to create Route53 ALIASes. It is only supported for ``PRIVATE`` endpoint type.")
-  @extension("x-ms-identifiers", [])
   vpcEndpointIds?: string[];
 }
 
