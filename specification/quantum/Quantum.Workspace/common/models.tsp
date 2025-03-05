@@ -1,3 +1,8 @@
+// --------------------------------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+// --------------------------------------------------------------------------------------------
+
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
@@ -5,10 +10,8 @@ import "@typespec/versioning";
 
 import "./versions.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using OpenAPI;
 
 namespace Quantum.Workspace;
 

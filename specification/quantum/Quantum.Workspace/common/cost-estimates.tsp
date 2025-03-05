@@ -3,12 +3,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // --------------------------------------------------------------------------------------------
 
-import "./operations.tsp";
+import "./common.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-
-namespace Quantum.Workspace.Services;
+namespace Quantum.Workspace;
 
 /** The job cost billed by the provider. The final cost on your bill might be slightly different due to added taxes and currency conversion rates. */
 model CostEstimate {
