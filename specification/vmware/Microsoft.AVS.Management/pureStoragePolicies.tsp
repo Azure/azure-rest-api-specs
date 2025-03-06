@@ -42,7 +42,7 @@ model PureStoragePolicyProperties {
   storagePoolId: string;
 
   @doc("The state of the Pure Storage Policy Based Management policy provisioning")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: PureStoragePolicyProvisioningState;
 }
 

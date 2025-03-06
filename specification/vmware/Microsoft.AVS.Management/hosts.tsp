@@ -41,30 +41,30 @@ union HostKind {
 @discriminator("kind")
 model HostProperties {
   @doc("The kind of host")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   kind: HostKind;
 
   @doc("The state of the host provisioning.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: HostProvisioningState;
 
   @doc("Display name of the host in VMware vCenter.")
   displayName?: string;
 
   @doc("vCenter managed object reference ID of the host.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   moRefId?: string;
 
   @doc("Fully qualified domain name of the host.")
   @maxLength(255)
   @minLength(1)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fqdn?: string;
 
   @doc("If provided, the host is in maintenance. The value is the reason for maintenance.")
   maintenance?: HostMaintenance;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   faultDomain?: string;
 }
 

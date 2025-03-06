@@ -17,7 +17,6 @@ import "./hcxEnterpriseSites.tsp";
 import "./hosts.tsp";
 import "./iscsiPaths.tsp";
 import "./locations.tsp";
-import "./maintenances.tsp";
 import "./placementPolicies.tsp";
 import "./privateClouds.tsp";
 import "./provisionedNetworks.tsp";
