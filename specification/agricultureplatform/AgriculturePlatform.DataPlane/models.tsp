@@ -134,14 +134,14 @@ union ImageFormat {
  */
 @trait
 model ListOperationResponseTraits {
-  @traitContext(TraitContext.List)
   /**
    * Represents the additional traits in response from resourceList operations.
    */
+  @traitContext(TraitContext.List)
   response: {
     @traitLocation(TraitLocation.Response)
-    properties: { 
-      skipToken?: string
+    properties: {
+      skipToken?: string;
     };
   };
 }

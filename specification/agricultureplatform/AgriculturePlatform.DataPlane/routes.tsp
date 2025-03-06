@@ -21,7 +21,8 @@ interface CatalogsOperations {
    */
   list is Operations.ResourceList<
     Catalog,
-    QueryParametersTrait<ListOperationQueryParameters> & ListOperationResponseTraits
+    QueryParametersTrait<ListOperationQueryParameters> &
+      ListOperationResponseTraits
   >;
 
   /**
@@ -46,7 +47,8 @@ interface CollectionsOperations {
    */
   list is Operations.ResourceList<
     Collection,
-    QueryParametersTrait<ListOperationQueryParameters> & ListOperationResponseTraits
+    QueryParametersTrait<ListOperationQueryParameters> &
+      ListOperationResponseTraits
   >;
 
   /**
@@ -232,7 +234,8 @@ interface SchemasOperations {
    */
   list is Operations.ResourceList<
     Schema,
-    QueryParametersTrait<ListOperationQueryParameters> & ListOperationResponseTraits
+    QueryParametersTrait<ListOperationQueryParameters> &
+      ListOperationResponseTraits
   >;
 
   /**
