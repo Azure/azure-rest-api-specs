@@ -1,5 +1,4 @@
 import "@typespec/http";
-import "@typespec/openapi3";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./resources/queryApi.tsp";
@@ -17,11 +16,8 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-//#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" ""
-//#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-//#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-
-@service({ title: "Microsoft.Industry.Manufacturing.MDS.Copilot" })
+@route("/copilot")
+@service(#{ title: "Microsoft.Industry.Manufacturing.MDS.Copilot" })
 
 @server(
   "https://mds-{mdsUniqueId}.{location}.cloudapp.azure.com/",
@@ -34,7 +30,6 @@ using Azure.Core.Traits;
 
 @useAuth(AadOauth2Auth<["https://azure-mds-service/.default"]>)
 
-// as per doc https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step10/#versioning-your-service
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService;
 
