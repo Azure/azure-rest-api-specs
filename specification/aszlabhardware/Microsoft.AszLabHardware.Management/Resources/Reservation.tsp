@@ -20,21 +20,21 @@ model Reservation is TrackedResource<ReservationProperties> {
 
 @doc("Details of the AszLabHw Reservation.")
 model ReservationProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The current status of the GoalState")
   resourceManager?: ResourceManager;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The set of Servers to create the reservation.")
-  @extension("x-ms-identifiers", ["server"])
+  @extension("x-ms-identifiers", #["server"])
   serverAssociations?: ServerAssociation[];
 
   @doc("List of reserved pool servers")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   servers: PoolServerResourceId[];
 }
 

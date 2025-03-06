@@ -16,7 +16,7 @@ model IpCommunity extends Azure.ResourceManager.Foundations.TrackedResource {
   @path
   @key("ipCommunityName")
   @segment("ipCommunities")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The IP Community Properties */
@@ -32,7 +32,7 @@ interface IpCommunities {
   create is ArmResourceCreateOrReplaceAsync<IpCommunity>;
 
   @doc("API to update certain properties of the IP Community resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<IpCommunity, IpCommunityPatch>;
 
   @doc("Implements IP Community DELETE method.")

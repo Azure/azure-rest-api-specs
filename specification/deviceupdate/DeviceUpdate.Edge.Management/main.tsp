@@ -29,9 +29,7 @@ using Azure.ResourceManager;
  * Microsoft Device Update resource provider.
  */
 @armProviderNamespace
-@service({
-  title: "DeviceUpdate",
-})
+@service(#{ title: "DeviceUpdate" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.DeviceUpdate;

@@ -17,7 +17,7 @@ model NetworkPacketBroker
   @path
   @key("networkPacketBrokerName")
   @segment("networkPacketBrokers")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkPacketBroker properties */
@@ -33,7 +33,7 @@ interface NetworkPacketBrokers {
   create is ArmResourceCreateOrReplaceAsync<NetworkPacketBroker>;
 
   @doc("API to update certain properties of the Network Packet Broker resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkPacketBroker, NetworkPacketBrokerPatch>;
 
   @doc("Deletes Network Packet Broker.")

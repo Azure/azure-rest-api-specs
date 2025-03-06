@@ -23,7 +23,7 @@ model Site is TrackedResource<SitePropertiesFormat> {
   @path
   @key("siteName")
   @segment("sites")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -36,7 +36,7 @@ interface Sites {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
 
   @doc("Updates site tags.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<Site, TagsObject>;
 
   @doc("Deletes the specified mobile network site. This will also delete any network functions that are a part of this site.")

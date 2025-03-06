@@ -44,22 +44,22 @@ model AadApplicationResourceProperties {
   azureLocation?: azureLocation;
 
   @doc("Provisioning status of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AadApplicationProvisioningState;
 
   @added(Versions.v2024_06_24_preview)
   @doc("Application ID; a part of provisioning ResultData output.")
-  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   applicationId?: string;
 
   @added(Versions.v2024_06_24_preview)
   @doc("Object ID; a part of provisioning ResultData output.")
-  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   objectId?: string;
 
   @added(Versions.v2024_06_24_preview)
   @doc("Service Principal Object ID; a part of provisioning ResultData output.")
-  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   servicePrincipalObjectId?: string;
 }
 
@@ -70,7 +70,7 @@ model AadApplicationResource
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
   @segment("aadApplications") // Start with lower case. Should be plural.
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -89,4 +89,7 @@ interface AadApplication {
   listBySubscription is ArmListBySubscription<AadApplicationResource>;
 }
 
-@@visibility(AadApplicationResource.properties, "read", "create");
+@@visibility(AadApplicationResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);

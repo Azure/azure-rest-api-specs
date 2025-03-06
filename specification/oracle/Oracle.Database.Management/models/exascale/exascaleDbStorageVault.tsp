@@ -29,57 +29,57 @@ model ExascaleDbStorageVault
 model ExascaleDbStorageVaultProperties {
   @doc("The size of additional Flash Cache in percentage of High Capacity database storage.")
   @minValue(0)
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   additionalFlashCacheInPercent?: int32;
 
   @doc("Exadata Database Storage Vault description.")
   @minLength(1)
   @maxLength(400)
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   description?: string;
 
   @doc("The user-friendly name for the Exadata Database Storage Vault. The name does not need to be unique.")
   @minLength(1)
   @maxLength(255)
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   displayName: string;
 
   @doc("Create exadata Database Storage Details")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   highCapacityDatabaseStorageInput: ExascaleDbStorageInputDetails;
 
   @doc("Response exadata Database Storage Details")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   highCapacityDatabaseStorage?: ExascaleDbStorageDetails;
 
   @doc("The time zone that you want to use for the Exadata Database Storage Vault")
   @minLength(1)
   @maxLength(255)
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   timeZone?: string;
 
   @doc("Exadata Database Storage Vault provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AzureResourceProvisioningState;
 
   @doc("Exadata Database Storage Vault lifecycle state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lifecycleState?: ExascaleDbStorageVaultLifecycleState;
 
   @doc("Additional information about the current lifecycle state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lifecycleDetails?: string;
 
   @doc("The number of Exadata VM clusters used the Exadata Database Storage Vault.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmClusterCount?: int32;
 
   @doc("The OCID of the Exadata Database Storage Vault.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ocid?: Ocid;
 
   @doc("HTTPS link to OCI resources exposed to Azure Customer via Azure Interface.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ociUrl?: url;
 }
 

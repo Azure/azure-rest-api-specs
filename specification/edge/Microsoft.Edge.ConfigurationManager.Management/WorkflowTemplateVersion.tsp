@@ -36,12 +36,12 @@ model WorkflowTemplateVersionProperties {
   @doc("Config expressions for this workflow version")
   configurations?: string;
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("workflow template specification")
   stageSpecTemplate: StageSpecTemplate[];
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

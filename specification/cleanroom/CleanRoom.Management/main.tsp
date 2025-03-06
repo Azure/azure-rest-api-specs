@@ -26,9 +26,7 @@ using TypeSpec.Versioning;
  * Azure Clean Room API
  */
 @armProviderNamespace
-@service({
-  title: "Azure Clean Room API",
-})
+@service(#{ title: "Azure Clean Room API" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.CleanRoom;

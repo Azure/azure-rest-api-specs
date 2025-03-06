@@ -164,13 +164,13 @@ model WindowsImageProperties {
   /**
    * Specifies the properties used to describe the customization steps of the image, like Image source etc
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   customize?: WindowsImageCustomizer[];
 
   /**
    * The distribution targets where the image output needs to go to.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   distribute: WindowsImageDistributor[];
 
   /**
@@ -181,13 +181,13 @@ model WindowsImageProperties {
   /**
    * Provisioning state of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * Provisioning error, if any
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningError?: ProvisioningError;
 }
 
@@ -281,7 +281,7 @@ model WindowsImageDistributor {
   /**
    * The target regions where the distributed Image Version is going to be replicated to. This object supersedes replicationRegions and can be specified only if replicationRegions is not specified.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   targetRegions?: TargetRegion[];
 }
 
@@ -344,25 +344,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -394,7 +394,7 @@ model WindowsImageTagUpdateParametersProperties {
   /**
    * The distribution targets where the image output needs to go to.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   distribute?: WindowsImageDistributor[];
 }
 

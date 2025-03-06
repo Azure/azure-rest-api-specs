@@ -13,9 +13,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.Storage")
-@service({
-  title: "Storage Data Management Resource Provider",
-})
+@service(#{ title: "Storage Data Management Resource Provider" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Storage;

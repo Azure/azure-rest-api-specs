@@ -41,7 +41,7 @@ model TimeServerConfiguration
 @doc("ArcGatewayConfigurationProperties Properties")
 model TimeServerConfigurationProperties {
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("Scenario in which this configuration is used")

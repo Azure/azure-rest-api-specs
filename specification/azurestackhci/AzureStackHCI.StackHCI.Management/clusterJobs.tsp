@@ -112,34 +112,34 @@ model EceDeploymentSecrets {
 @discriminator("jobType")
 model ClusterJobProperties {
   @doc("Job Type to support polymorphic resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   jobType: HciJobType;
 
   @doc("Deployment mode to trigger job.")
   deploymentMode?: DeploymentMode = DeploymentMode.Deploy;
 
   @doc("Job provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Unique, immutable job id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   jobId?: string;
 
   @doc("The UTC date and time at which the job started.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTimeUtc?: utcDateTime;
 
   @doc("The UTC date and time at which the job completed.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTimeUtc?: utcDateTime;
 
   @doc("Status of Cluster job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: JobStatus;
 
   @doc("Reported properties for job")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedProperties?: JobReportedProperties;
 }
 
@@ -161,11 +161,11 @@ model AddServerJobServerDetails {
 @doc("Properties for adding a server in the cluster.")
 model HciAddServerJobProperties extends ClusterJobProperties {
   @doc("List of protected parameters to pass to trigger the job for the cluster.")
-  @extension("x-ms-identifiers", ["secretName"])
+  @Azure.ResourceManager.identifiers(#["secretName"])
   secrets?: EceDeploymentSecrets[];
 
   @doc("Details of servers to be added to the cluster")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   addServerJobServerDetails: AddServerJobServerDetails[];
 
   @doc("Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. Only allowed values are 'Cloud', 'FileShare'")
@@ -184,7 +184,7 @@ model HciAddServerJobProperties extends ClusterJobProperties {
 @doc("Properties for pausing a server in the cluster.")
 model HciPauseServerJobProperties extends ClusterJobProperties {
   @doc("Details of servers to be paused in the cluster")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   pauseServerJobServerDetails: PauseServerJobServerDetails[];
 
   @doc("ClusterJob Type to support polymorphic resource.")
@@ -194,11 +194,11 @@ model HciPauseServerJobProperties extends ClusterJobProperties {
 @doc("Properties for repairing a server in the cluster.")
 model HciRepairServerJobProperties extends ClusterJobProperties {
   @doc("Details of servers to be repaired in the cluster")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   repairServerJobServerDetails: RepairServerJobServerDetails[];
 
   @doc("List of protected parameters to pass to trigger job for cluster.")
-  @extension("x-ms-identifiers", ["secretName"])
+  @Azure.ResourceManager.identifiers(#["secretName"])
   secrets?: EceDeploymentSecrets[];
 
   @doc("ClusterJob Type to support polymorphic resource.")
@@ -208,7 +208,7 @@ model HciRepairServerJobProperties extends ClusterJobProperties {
 @doc("Properties for resuming a server in the cluster.")
 model HciResumeServerJobProperties extends ClusterJobProperties {
   @doc("Details of servers to be resumed in the cluster")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   resumeServerJobServerDetails: ResumeServerJobServerDetails[];
 
   @doc("ClusterJob Type to support polymorphic resource.")
@@ -218,11 +218,11 @@ model HciResumeServerJobProperties extends ClusterJobProperties {
 @doc("Properties for adding network intent to a cluster.")
 model HciAddNetworkIntentJobProperties extends ClusterJobProperties {
   @doc("List of protected parameters to pass to trigger job for cluster.")
-  @extension("x-ms-identifiers", ["secretName"])
+  @Azure.ResourceManager.identifiers(#["secretName"])
   secrets?: EceDeploymentSecrets[];
 
   @doc("Host and Network details for which the intent has to be added.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   addNetworkIntentJobDetails: AddNetworkIntentJobDetails[];
 
   @doc("ClusterJob Type to support polymorphic resource.")

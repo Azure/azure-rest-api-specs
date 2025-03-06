@@ -20,7 +20,7 @@ model TestLine is TrackedResource<TestLineProperties> {
   @key("testLineName")
   @segment("testLines")
   @doc("Unique identifier for this test line")
-  @visibility("Read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -39,11 +39,11 @@ union TestLinePurpose {
 @doc("Details of the TestLine resource.")
 model TestLineProperties is ResourceProperties {
   @doc("The phone number")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   phoneNumber: string;
 
   @doc("Purpose of this test line, e.g. automated or manual testing")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   purpose: TestLinePurpose;
 }
 
@@ -67,7 +67,7 @@ model CommunicationsGateway
   @key("communicationsGatewayName")
   @segment("communicationsGateways")
   @doc("Unique identifier for this deployment")
-  @visibility("Read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 
@@ -139,7 +139,7 @@ union Connectivity {
 @added(Versions.v2024_02_05_preview)
 model AiVoiceServices {
   @doc("Azure Operator Call Protection details")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @added(Versions.v2024_02_05_preview)
   callProtection?: CallProtectionDetails;
 }
@@ -148,12 +148,12 @@ model AiVoiceServices {
 @added(Versions.v2024_02_05_preview)
 model CallProtectionDetails {
   @doc("Whether Azure Operator Call Protection is enabled or not. Defaults to false.")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @added(Versions.v2024_02_05_preview)
   enabled?: boolean;
 
   @doc("Resource ID of the storage account to write Azure Operator Call Protection logs to.")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @added(Versions.v2024_02_05_preview)
   logStorageAccountId?: string;
 }
@@ -228,36 +228,36 @@ union MCPProtocols {
 @added(Versions.v2024_02_16_preview)
 model Peer {
   @doc("Unique name of peer")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @minLength(1)
   @maxLength(10)
   @pattern("^[a-zA-Z0-9-]+$")
   peerName?: string;
 
   @doc("Type of the Peer")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   peerType?: PeerType;
 
   @doc("Connection details containing the IP address and port number")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  @visibility("read", "update", "create")
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   ipsAndPorts?: IpAndPortDetails[];
 
   @doc("Connection details containing the address records and port number")
-  @visibility("read", "update", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   aRecordsAndPorts?: ArecordAndPortDetails[];
 
   @doc("The DNS SRV record of Operator Network, where Azure Communication Gateway will connect SIP Peers")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   srvRecord?: string;
 
   @doc("The allowed source IP addresses or CIDR ranges for signaling")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   allowedSignalingSourceAddressPrefixes?: string[] = [];
 
   @doc("The allowed source IP addresses or CIDR ranges for media")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   allowedMediaSourceAddressPrefixes?: string[] = [];
 }
 
@@ -265,12 +265,12 @@ model Peer {
 @added(Versions.v2024_02_16_preview)
 model CallPolicy {
   @doc("The default mapping between Services and peer groups")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   defaultMappings?: DefaultMappings;
 
   @doc("Routing priorities on a per-peer group and per-serviceLocation basis")
-  @visibility("read", "update", "create")
-  @OpenAPI.extension("x-ms-identifiers", ["peerGroupName"])
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #["peerGroupName"])
   peerGroupRoutings?: PeerGroupRouting[];
 }
 
@@ -278,15 +278,15 @@ model CallPolicy {
 @added(Versions.v2024_02_16_preview)
 model PeerGroupRouting {
   @doc("The name of the peer group used for mapping")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @minLength(1)
   @maxLength(10)
   @pattern("^[a-zA-Z0-9-]+$")
   peerGroupName?: string;
 
   @doc("Routing Details about which service location would use which peer and at what priority")
-  @visibility("read", "update", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   routings?: RoutingDetails[];
 }
 
@@ -294,18 +294,18 @@ model PeerGroupRouting {
 @added(Versions.v2024_02_16_preview)
 model RoutingDetails {
   @doc("The name of peer defined earlier in peer group-->peers properties")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @minLength(1)
   @maxLength(10)
   @pattern("^[a-zA-Z0-9-]+$")
   peerName?: string;
 
   @doc("The service location name where resources are deployed for communication services")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   serviceLocation?: string;
 
   @doc("Priority defined, where 0 being the highest priority")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @minValue(0)
   @maxValue(100)
   priority?: int64;
@@ -315,13 +315,13 @@ model RoutingDetails {
 @added(Versions.v2024_02_16_preview)
 model DefaultMappings {
   @doc("Service to peer group mappings which tells what would be the default peer group for particular service")
-  @visibility("read", "update", "create")
-  @OpenAPI.extension("x-ms-identifiers", ["service"])
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #["service"])
   serviceToPeerGroup?: ServiceToPeerGroup[];
 
   @doc("peer group to Service mappings which tells what would be the default service for particular peer group")
-  @visibility("read", "update", "create")
-  @OpenAPI.extension("x-ms-identifiers", ["peerGroup"])
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #["peerGroup"])
   peerGroupToService?: PeerGroupToService[];
 }
 
@@ -329,11 +329,11 @@ model DefaultMappings {
 @added(Versions.v2024_02_16_preview)
 model ServiceToPeerGroup {
   @doc("Name of the backend service")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   service?: CommunicationsPlatform;
 
   @doc("Name of the default peer group for service")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   defaultPeerGroup?: string;
 }
 
@@ -341,14 +341,14 @@ model ServiceToPeerGroup {
 @added(Versions.v2024_02_16_preview)
 model PeerGroupToService {
   @doc("Name of the peer group")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @minLength(1)
   @maxLength(10)
   @pattern("^[a-zA-Z0-9-]+$")
   peerGroup?: string;
 
   @doc("Name of the default Communication Platform for peer group")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   defaultService?: CommunicationsPlatform;
 }
 
@@ -356,11 +356,11 @@ model PeerGroupToService {
 @added(Versions.v2024_02_16_preview)
 model IpAndPortDetails {
   @doc("IP address identifying the peer of Operator Network")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   ipAddress?: string;
 
   @doc("Port identifying the peer of Operator Network")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @minValue(1)
   @maxValue(65535)
   port?: int64;
@@ -370,11 +370,11 @@ model IpAndPortDetails {
 @added(Versions.v2024_02_16_preview)
 model ArecordAndPortDetails {
   @doc("Address record identifying the peer of Operator Network")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   aRecord?: string;
 
   @doc("Port identifying the peer of Operator Network")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @minValue(1)
   @maxValue(65535)
   port?: int64;
@@ -387,15 +387,15 @@ model AcgAddressRanges {
   signalingForBackendServices?: string[];
 
   @doc("Azure Communication Gateway IP addresses or address ranges for sending signalling traffic to Operator Network")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   signalingForOperator?: string[];
 
   @doc("Azure Communication Gateway IP address/FQDN for receiving signalling traffic from communications services")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   mediaForBackendServices?: string[];
 
   @doc("Azure Communication Gateway IP addresses or address ranges for media traffic between Operator Network and Azure Communication Gateway ")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   mediaForOperator?: string[];
 }
 
@@ -403,13 +403,13 @@ model AcgAddressRanges {
 @added(Versions.v2024_02_16_preview)
 model AcgContactInfo {
   @doc("Azure Communication Gateway contact Peer details")
-  @OpenAPI.extension("x-ms-identifiers", ["peerGroupName"])
-  @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", #["peerGroupName"])
+  @visibility(Lifecycle.Read)
   peerGroups?: AcgContactPeerGroupDetails[];
 
   @doc("Azure Communication Gateway contact BackendServices details")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   backendServices?: AcgContactBackendServiceDetails[];
 }
 
@@ -417,22 +417,22 @@ model AcgContactInfo {
 @added(Versions.v2024_02_16_preview)
 model AcgContactPeerGroupDetails {
   @doc("Name of the peer group defined in the peer groups property")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minLength(1)
   @maxLength(10)
   @pattern("^[a-zA-Z0-9-]+$")
   peerGroupName?: string;
 
   @doc("IP addresses allocated for peer group")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipAddresses?: string[];
 
   @doc("SRV record (created on basis of the peer group's peerGroupName and DNS hash)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   srvRecord?: string;
 
   @doc("Port number to be used by customer to connect with Azure Communication Gateway")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minValue(1)
   @maxValue(65535)
   port?: int64;
@@ -442,19 +442,19 @@ model AcgContactPeerGroupDetails {
 @added(Versions.v2024_02_16_preview)
 model AcgContactBackendServiceDetails {
   @doc("Operator's chosen communication service/platform")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serviceName?: CommunicationsPlatform;
 
   @doc("Allocated IP addresses used by communication services")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipAddresses?: string[];
 
   @doc("SRV record (created on basis of the backend service's serviceName and DNS hash)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   srvRecord?: string;
 
   @doc("Port number to be used by communication services to connect with Azure Communication Gateway")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minValue(1)
   @maxValue(65535)
   port?: int64;
@@ -463,21 +463,21 @@ model AcgContactBackendServiceDetails {
 @doc("The service region configuration needed for Teams Callings.")
 model ServiceRegionProperties {
   @doc("The name of the region in which the resources needed for Teams Calling will be deployed.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   name: string;
 
   @doc("The configuration used in this region as primary, and other regions as backup.")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   primaryRegionProperties: PrimaryRegionProperties;
 
   @doc("Azure Communication Gateway IP addresses or address ranges for sending signalling traffic to communication services/Operator")
   @added(Versions.v2024_02_16_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   acgAddressRanges?: AcgAddressRanges;
 
   @doc("Azure Communication Gateway contact information used by operator/communication services to connect to Azure Communication Gateway")
   @added(Versions.v2024_02_16_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   acgContactInfo?: AcgContactInfo;
 }
 
@@ -485,47 +485,47 @@ model ServiceRegionProperties {
 @added(Versions.v2024_02_16_preview)
 model PeerGroupProperties {
   @doc("The name of the Peer Group")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @maxLength(10)
   @pattern("^[a-zA-Z0-9-]+$")
   peerGroupName?: string;
 
   @doc("The point at the edge of an Operator Network, where Azure Communication Gateway will connect SIP Peers")
-  @visibility("read", "update", "create")
-  @OpenAPI.extension("x-ms-identifiers", ["peerName"])
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #["peerName"])
   peers?: Peer[];
 
   //Needed to add String value rather than using Union Value because of bug https://github.com/Azure/typespec-azure-pr/issues/4163
   @doc("Supported signaling protocol")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   signalingProtocol?: SignalingProtocols = "TLS";
 
   @doc("Supported media protocol")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   mediaProtocol?: MediaProtocols = "SRTP";
 
   @doc("Voice codecs to support per Communication Services")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   codecs?: TeamsCodecs[];
 }
 
 @doc("The configuration used in this region as primary, and other regions as backup.")
 model PrimaryRegionProperties {
   @doc("IP address to use to contact the Operator Network from this region")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   operatorAddresses: string[];
 
   @doc("IP address to use to contact the ESRP from this region")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   esrpAddresses?: string[];
 
   @doc("The allowed source IP addresses or CIDR ranges for signaling")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   allowedSignalingSourceAddressPrefixes?: string[] = [];
 
   @doc("The allowed source IP addresses or CIDR ranges for media")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   allowedMediaSourceAddressPrefixes?: string[] = [];
 }
 
@@ -594,7 +594,7 @@ union ZoomRegion {
 @added(Versions.v2023_09_21)
 model ZoomTestLine {
   @doc("Phone number for the test line.")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   phoneNumber: string;
 }
 
@@ -602,29 +602,29 @@ model ZoomTestLine {
 @added(Versions.v2023_09_21)
 model ZoomConfig {
   @doc("Zoom platform test lines.")
-  @OpenAPI.extension("x-ms-identifiers", ["phoneNumber"])
-  @visibility("read", "update", "create")
+  @OpenAPI.extension("x-ms-identifiers", #["phoneNumber"])
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   testLines: ZoomTestLine[];
 
   @doc("The Zoom region to which this Communications Gateway is connected.")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   region: ZoomRegion;
 }
 
 @doc("Configuration of the API Bridge.")
 model ApiBridgeProperties {
   @doc("The activation state of the API Bridge for this Communications Gateway")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @added(Versions.v2023_09_01)
   configureApiBridge?: ApiBridgeActivationState = "disabled";
 
   @doc("FQDNs for sending requests to the API Bridge endpoint")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2023_09_01)
   endpointFqdns?: string[];
 
   @doc("The allowed source IP addresses or CIDR ranges for accessing the API Bridge")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @added(Versions.v2023_09_01)
   allowedAddressPrefixes?: string[];
 }
@@ -633,12 +633,12 @@ model ApiBridgeProperties {
 @added(Versions.v2023_09_01)
 model DnsDelegationProperties {
   @doc("Domain name to delegate")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @added(Versions.v2023_09_01)
   domain?: string;
 
   @doc("The Azure-hosted DNS Name Servers for the delegated DNS Zones")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2023_09_01)
   nameServers?: string[];
 }
@@ -647,8 +647,8 @@ model DnsDelegationProperties {
 @added(Versions.v2023_09_01)
 model DnsDelegationsProperties {
   @doc("DNS Domains to delegate for the creation of DNS Zones by the Azure Communications Gateway")
-  @visibility("read", "update", "create")
-  @OpenAPI.extension("x-ms-identifiers", ["domain"])
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #["domain"])
   @added(Versions.v2023_09_01)
   delegations?: DnsDelegationProperties[];
 }
@@ -657,7 +657,7 @@ model DnsDelegationsProperties {
 @added(Versions.v2023_09_01)
 model CustomSipHeader {
   @doc("The name of the Custom SIP Header")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @added(Versions.v2023_09_01)
   name?: string;
 }
@@ -666,8 +666,8 @@ model CustomSipHeader {
 @added(Versions.v2023_09_01)
 model CustomSipHeadersProperties {
   @doc("The Custom SIP Headers to apply to the calls which traverse the Communications Gateway")
-  @visibility("read", "update", "create")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   @added(Versions.v2023_09_01)
   headers?: CustomSipHeader[];
 }
@@ -692,112 +692,112 @@ union AutoGeneratedDomainNameLabelScope {
 @doc("Details of the CommunicationsGateway resource.")
 model CommunicationsGatewayProperties is ResourceProperties {
   @doc("The current status of the deployment.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: Status;
 
   @doc("The regions in which to deploy the resources needed for Teams Calling")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
-  @visibility("read", "update", "create")
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   serviceLocations: ServiceRegionProperties[];
 
   @doc("Logical SIP connection with specific properties connecting Azure Communication Gateway to an Operator’s Network, used to connect sessions for a specified service ")
   @added(Versions.v2024_02_16_preview)
-  @OpenAPI.extension("x-ms-identifiers", ["peerGroupName"])
-  @visibility("read", "update", "create")
+  @OpenAPI.extension("x-ms-identifiers", #["peerGroupName"])
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   peerGroups?: PeerGroupProperties[];
 
   @doc("Define the mapping between backend services and Peer as well as routing priorities")
   @added(Versions.v2024_02_16_preview)
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   callPolicy?: CallPolicy;
 
   @doc("How to connect back to the Operator Network, e.g. MAPS")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   connectivity: Connectivity;
 
   @doc("Indicate whether peer group and routing configuration would be used or not")
   @added(Versions.v2024_02_16_preview)
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   operatorPeerGroupConfigScheme?: OperatorPeerGroupConfigSchemeValue = "UseStaticDefaultConfig";
 
   @doc("Voice codecs to support")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   codecs: TeamsCodecs[];
 
   @doc("How to handle 911 calls")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   e911Type: E911Type;
 
   @doc("What platforms to support")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @minItems(1)
   platforms: CommunicationsPlatform[];
 
   @doc("Details of API bridge functionality, if required")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   apiBridge?: ApiBridgeProperties;
 
   @doc("The scope at which the auto-generated domain name can be re-used")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   autoGeneratedDomainNameLabelScope?: AutoGeneratedDomainNameLabelScope = "TenantReuse";
 
   @doc("The autogenerated label used as part of the FQDNs for accessing the Communications Gateway")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoGeneratedDomainNameLabel?: string;
 
   @doc("This number is used in Teams Phone Mobile scenarios for access to the voicemail IVR from the native dialer.")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   teamsVoicemailPilotNumber?: string;
 
   @doc("Whether an on-premises Mobile Control Point is in use.")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   onPremMcpEnabled?: boolean = false;
 
   @added(Versions.v2023_04_03)
   @doc("Whether an integrated Mobile Control Point is in use.")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   integratedMcpEnabled?: boolean = false;
 
   @added(Versions.v2024_02_16_preview)
   @doc("Signaling protocol for MCP, if integrated MCP is enabled.")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   signalingProtocolForMcp?: MCPProtocols = "TLS";
 
   @doc("A list of dial strings used for emergency calling.")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   emergencyDialStrings?: string[] = ["911", "933"];
 
   // Added 2023-09-01
 
   @doc("Details of DNS Domains to delegate to the Communications Gateway.")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @added(Versions.v2023_09_01)
   dnsDelegations?: DnsDelegationsProperties;
 
   @doc("Custom SIP Header to add to any subscriber with a custom_header value, if required.")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @added(Versions.v2023_09_01)
   customSipHeaders?: CustomSipHeadersProperties;
 
   @doc("A list of IP allocated prefixes which may be used to receive signaling data from this Communications Gateway.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2023_09_01)
   allocatedSignalingAddressPrefixes?: string[];
 
   @doc("A list of allocated IP prefixes which may be used to receive media data from this Communications Gateway.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2023_09_01)
   allocatedMediaAddressPrefixes?: string[];
 
   // Added 2023-09-21
 
   @doc("Configuration for Zoom platform")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @added(Versions.v2023_09_21)
   zoomConfig?: ZoomConfig;
 
   @doc("Configuration for AI Voice services")
-  @visibility("read", "update", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   @added(Versions.v2024_02_05_preview)
   aiVoiceServices?: AiVoiceServices;
 }

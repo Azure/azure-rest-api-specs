@@ -33,7 +33,7 @@ model NamespaceAssetEndpointProfile
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The extended location.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 

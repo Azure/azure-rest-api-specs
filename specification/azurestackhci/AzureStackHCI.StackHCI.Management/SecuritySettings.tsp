@@ -24,7 +24,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
 @doc("The provisioning state of a resource.")
 model ClusterProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -92,20 +92,20 @@ interface SecuritySettings {
 @doc("Security properties of the resource")
 model SecurityProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Security Compliance Status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   securityComplianceStatus: SecurityComplianceStatus;
 
   @doc("Desired security settings")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   desiredSettings: Array<DesiredSetting>;
 
   @doc("Reported compliance states for security settings")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   reportedComplianceStates: Array<ReportedComplianceState>;
 
   @doc("Secured Core Compliance Assignment")
@@ -130,35 +130,35 @@ model DesiredSetting {
 @doc("Reported compliance state of a security setting")
 model ReportedComplianceState {
   @doc("Name of the setting")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   settingName: string;
 
   @doc("Aggregated compliance state value of the setting across all nodes of the cluster")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value: ComplianceStatus;
 
   @doc("Per machine compliance state value and reason for it")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   perMachineStates: Array<MachineComplianceState>;
 }
 
 @doc("Compliance state on single machine")
 model MachineComplianceState {
   @doc("Name of the machine")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   machineName: string;
 
   @doc("Compliance state value of the setting")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value: ComplianceStatus;
 
   @doc("Compliance score of the setting")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   percentScore?: string;
 
   @doc("Reason for the compliance state of the machine")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reason: string;
 }
 
@@ -171,27 +171,27 @@ model Recommendation {
 @doc("Security compliance properties of the resource")
 model SecurityComplianceStatus {
   @doc("Indicates whether HCI hosts meets secured-core server requirements.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   securedCoreCompliance: ComplianceStatus;
 
   @doc("Indicates whether HCI hosts have enforced consistent Windows Defender Application Control.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   wdacCompliance: ComplianceStatus;
 
   @doc("Indicates whether data at-rest encryption is enabled on Azure Stack HCI clustered volumes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataAtRestEncrypted: ComplianceStatus;
 
   @doc("Indicates whether HCI cluster has data in-transit protection.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataInTransitProtected: ComplianceStatus;
 
   @doc("Contains details about HCI cluster's compliance with security baseline.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   securityBaseline: SecurityBaseline;
 
   @doc("Time in UTC when compliance status was last updated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastUpdated: string;
 }
 
@@ -201,12 +201,12 @@ model SecurityBaseline {
   securityBaselineCompliance: ComplianceStatus;
 
   @doc("Aggregated compliance score across cluster nodes")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   percentScore: string;
 
   @doc("Per machine compliance state value and reason for it")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   perMachineStates: Array<MachineComplianceState>;
 }
 

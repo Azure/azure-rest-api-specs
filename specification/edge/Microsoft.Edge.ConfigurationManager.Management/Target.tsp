@@ -38,7 +38,7 @@ model SolutionTemplateParameter {
   solutionInstanceName?: string;
 
   @doc("Solution Dependencies")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   solutionDependencies?: SolutionDependencyParameter[];
 }
 
@@ -65,12 +65,26 @@ model SolutionDependencyParameter {
   @doc("Solution Template Version")
   solutionTemplateVersion?: string;
 
+  @doc("Solution Instance Name")
+  @maxLength(24)
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  solutionInstanceName?: string;
+
   @doc("Target Id")
   targetId?: string;
 
   @doc("Solution dependencies")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   dependencies?: SolutionDependencyParameter[];
+}
+
+@doc("Install Solution Parameter")
+model InstallSolutionParameter {
+  @doc("Solution Name")
+  solution: string;
+
+  @doc("Solution Version Name")
+  solutionVersion: string;
 }
 
 @doc("Solution Parameter")
@@ -99,7 +113,7 @@ model TargetProperties {
   hierarchyLevel: string;
 
   @doc("Status of target")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: DeploymentStatus;
 
   @doc("Scope of the target resource")
@@ -109,7 +123,7 @@ model TargetProperties {
   state?: ResourceState;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -164,7 +178,7 @@ interface Targets {
   @doc("Post request to deploy")
   installSolution is ArmResourceActionNoResponseContentAsync<
     Target,
-    SolutionVersionParameter
+    InstallSolutionParameter
   >;
 
   @doc("Post request to uninstall")

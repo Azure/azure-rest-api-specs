@@ -110,7 +110,7 @@ union LocationProvisioningState {
 @doc("The properties of a location resource")
 model LocationProperties {
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: LocationProvisioningState;
 }
 
@@ -127,7 +127,7 @@ model BareMetalConnection is TrackedResource<BareMetalConnectionProperties> {
   @path
   @key("connectionName")
   @segment("bareMetalConnections")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /**
@@ -149,7 +149,7 @@ model BareMetalConnectionProperties {
   /**
    * VLAN ID assigned to the subnet of the associated BareMetal Connection.  Assigned by resource provider.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vlanId?: string;
 
   /**
@@ -166,7 +166,7 @@ model BareMetalConnectionProperties {
   /**
    * The current provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -178,7 +178,7 @@ model BareMetalConnectionUpdate {
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Type exists as previously approved by ARM"
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
 
@@ -190,7 +190,7 @@ model ClusterPage<T extends {}> {
    * Items on this page
    */
   @Azure.Core.items
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   clusters: T[];
 }
 
@@ -211,49 +211,49 @@ model ClusterProperties {
   /**
    * Number of Virtual Routing and Forwarding currently on the cluster
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vrfCount?: int32;
 
   /**
    * Max number of Virtual Routing and Forwarding for the cluster
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vrfLimit?: int32;
 
   /**
    * Number of routes currently on the cluster
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   routeCount?: int32;
 
   /**
    * Max number of routes for the cluster
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   routeLimit?: int32;
 
   /**
    * Potential number of routes for the cluster
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   allocatedRoutes?: int32;
 
   /**
    * Alias of the T2 device
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier2Alias?: string;
 
   /**
    * Placement of the SDN Appliance
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sdnAppliancePlacement?: SdnAppliancePlacement;
 
   /**
    * True if Rotterdam, else False
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sdnApplianceEnabled?: boolean;
 }
 
@@ -274,7 +274,7 @@ model UpdateRoutesOnVirtualNetworkProperties {
   /**
    * List of Routes that needs to updated for VirtualNetwork.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["vnetId", "routeAddress"])
+  @Azure.ResourceManager.identifiers(#["vnetId", "routeAddress"])
   routesToVirtualNetwork: RoutesToVirtualNetworkOperationsProperties[];
 
   /**
@@ -315,13 +315,13 @@ model RoutesToVirtualNetworkOperationsProperties {
   /**
    * Status of the route.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: RouteToVirtualNetworkOperationStatus;
 
   /**
    * The error detail.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
@@ -338,7 +338,7 @@ model PeeringSetting is TrackedResource<PeeringSettingProperties> {
   @path
   @key("peeringSettingName")
   @segment("peeringSettings")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /**
@@ -369,13 +369,13 @@ model PeeringSettingProperties {
   /**
    * Peering links from a source vnet to remote vnet(s).
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   remotePeeringLinks: RemotePeeringLink[];
 
   /**
    * The current provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -391,7 +391,7 @@ model RemotePeeringLink {
   /**
    * The current provisioning state for a peering link.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoSyncProvisioningStatus?: PeeringLinkProvisioningState;
 }
 
@@ -403,6 +403,6 @@ model PeeringSettingUpdate {
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Type exists as previously approved by ARM"
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }

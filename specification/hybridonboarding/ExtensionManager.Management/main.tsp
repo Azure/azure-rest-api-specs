@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.HybridOnboarding Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.HybridOnboarding management service",
-})
+@service(#{ title: "Microsoft.HybridOnboarding management service" })
 @versioned(Microsoft.HybridOnboarding.Versions)
 namespace Microsoft.HybridOnboarding;
 

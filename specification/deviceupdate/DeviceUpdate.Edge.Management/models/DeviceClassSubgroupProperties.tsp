@@ -20,24 +20,24 @@ model DeviceClassSubgroupProperties {
   /**
    * Provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * This is the ID of the parent Group resource
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   groupId: string;
 
   /**
    * This is the Device Class ID of this Subgroup
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   deviceClassId: string;
 
   /**
    * Active deployment ID for this Subgroup
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   activeDeploymentId?: string;
 }

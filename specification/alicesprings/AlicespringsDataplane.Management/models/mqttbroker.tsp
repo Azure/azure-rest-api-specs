@@ -62,7 +62,7 @@ model BrokerProperties {
   @doc("The Running Mode of the Broker Deployment.")
   mode: RunMode;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -269,7 +269,7 @@ model BrokerListenerProperties {
   @doc("Defines configuration of a TLS server certificate. NOTE Enum - Only one TLS Cert method is supported")
   tls?: TlsCertMethod;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -354,13 +354,13 @@ model BrokerAuthenticationResource
 model BrokerAuthenticationProperties {
   // GENERATION FIX TEMP - add "minProperties": 1 and "maxProperties": 1 to this property after creation.
   @doc("The list of authentication methods supported by the Authentication Resource. For each array element, NOTE - Enum only authenticator type supported.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   authenticationMethods: BrokerAuthenticatorMethods[];
 
   @doc("The array of listener Resources it supports.")
   listenerRef: string[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -480,7 +480,7 @@ model BrokerAuthorizationProperties {
   @doc("The array of listener Resources it supports.")
   listenerRef: string[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -491,7 +491,7 @@ model AuthorizationConfig {
   enableCache?: boolean = true;
 
   @doc("Authorization Rules to be used. If no rule is set, but Authorization Resource is used that would mean DenyAll.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   rules?: AuthorizationBasicRule[];
 }
 
@@ -501,14 +501,14 @@ model AuthorizationBasicRule {
   principals: PrincipalDefinition;
 
   @doc("This subfield defines the objects that represent the actions or topics. Such as - method.Connect, method.Publish etc.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   resources: ResourceInfoDefinition[];
 }
 
 @doc("PrincipalDefinition properties of Basic Rule")
 model PrincipalDefinition {
   @doc("A list of key-value pairs that match the attributes of the clients. The attributes are case-sensitive and must match the attributes provided by the clients during authentication.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   attributes?: Record<string>[] = [];
 
   @doc("A list of client IDs that match the clients. The client IDs are case-sensitive and must match the client IDs provided by the clients during connection.")

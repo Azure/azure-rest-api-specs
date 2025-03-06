@@ -15,11 +15,11 @@ model InternetGatewayProperties {
   ]>;
 
   @doc("IPv4 Address of Internet Gateway.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipv4Address?: string;
 
   @doc("Port number of Internet Gateway.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   port?: int32;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "This is a valid property name."
@@ -39,12 +39,12 @@ model InternetGatewayProperties {
   ]>;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Provisioning state of resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

@@ -18,9 +18,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.AzureCloudMetadata Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.AzureCloudMetadata management service",
-})
+@service(#{ title: "Microsoft.AzureCloudMetadata management service" })
 @versioned(Microsoft.AzureCloudMetadata.Versions)
 namespace Microsoft.AzureCloudMetadata;
 

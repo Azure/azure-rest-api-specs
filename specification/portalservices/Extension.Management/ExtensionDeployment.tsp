@@ -28,7 +28,7 @@ model ExtensionDeployment
   @path
   @key("deploymentName")
   @segment("deployments")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

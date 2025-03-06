@@ -19,7 +19,7 @@ model L3IsolationDomain
   @path
   @key("l3IsolationDomainName")
   @segment("l3IsolationDomains")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The L3 Isolation Domain Properties */
@@ -36,7 +36,7 @@ interface L3IsolationDomains {
   create is ArmResourceCreateOrReplaceAsync<L3IsolationDomain>;
 
   @doc("API to update certain properties of the L3 Isolation Domain resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<L3IsolationDomain, L3IsolationDomainPatch>;
 
   @doc("Deletes layer 3 connectivity between compute nodes by managed by named L3 Isolation name.")

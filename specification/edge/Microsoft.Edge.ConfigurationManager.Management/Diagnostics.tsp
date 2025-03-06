@@ -15,7 +15,7 @@ namespace Microsoft.Edge;
 @doc("The properties of a Diagnostic resource.")
 model DiagnosticProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
