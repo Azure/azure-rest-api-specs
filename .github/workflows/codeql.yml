@@ -14,8 +14,14 @@ name: "CodeQL Advanced"
 on:
   push:
     branches: [ "main", "release-*" ]
+    paths:
+    - .github
+    - eng/tools
   pull_request:
     branches: [ "main", "release-*" ]
+    paths:
+    - .github
+    - eng/tools
   schedule:
     - cron: '27 4 * * 1'
 
