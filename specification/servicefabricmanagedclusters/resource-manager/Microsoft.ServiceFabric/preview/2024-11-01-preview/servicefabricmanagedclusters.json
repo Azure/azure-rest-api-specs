@@ -5058,6 +5058,52 @@
         }
       }
     },
+    "IPConfigurationPublicIPAddressConfiguration": {
+      "type": "object",
+      "description": "The public IP address configuration of the network interface.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network interface."
+        },
+        "ipTags": {
+          "type": "array",
+          "description": "Specifies the list of IP tags associated with the public IP address.",
+          "items": {
+            "$ref": "#/definitions/IpTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "publicIPAddressVersion": {
+          "type": "string",
+          "description": "Specifies whether the IP configuration's public IP is IPv4 or IPv6. Default is IPv4.",
+          "default": "IPv4",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "PublicIPAddressVersion",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "IPv4",
+                "value": "IPv4",
+                "description": "The IP configuration's public IP is IPv4."
+              },
+              {
+                "name": "IPv6",
+                "value": "IPv6",
+                "description": "The IP configuration's public IP is IPv6."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "IpConfiguration": {
       "type": "object",
       "description": "Specifies an IP configuration of the network interface.",
@@ -5117,7 +5163,7 @@
           }
         },
         "publicIPAddressConfiguration": {
-          "$ref": "#/definitions/PublicIPAddressConfiguration",
+          "$ref": "#/definitions/IPConfigurationPublicIPAddressConfiguration",
           "description": "The public IP address configuration of the network interface."
         }
       },
@@ -6959,52 +7005,6 @@
           }
         ]
       }
-    },
-    "PublicIPAddressConfiguration": {
-      "type": "object",
-      "description": "The public IP address configuration of the network interface.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the network interface."
-        },
-        "ipTags": {
-          "type": "array",
-          "description": "Specifies the list of IP tags associated with the public IP address.",
-          "items": {
-            "$ref": "#/definitions/IpTag"
-          },
-          "x-ms-identifiers": []
-        },
-        "publicIPAddressVersion": {
-          "type": "string",
-          "description": "Specifies whether the IP configuration's public IP is IPv4 or IPv6. Default is IPv4.",
-          "default": "IPv4",
-          "enum": [
-            "IPv4",
-            "IPv6"
-          ],
-          "x-ms-enum": {
-            "name": "PublicIPAddressVersion",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "IPv4",
-                "value": "IPv4",
-                "description": "The IP configuration's public IP is IPv4."
-              },
-              {
-                "name": "IPv6",
-                "value": "IPv6",
-                "description": "The IP configuration's public IP is IPv6."
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "name"
-      ]
     },
     "ResourceAzStatus": {
       "type": "object",

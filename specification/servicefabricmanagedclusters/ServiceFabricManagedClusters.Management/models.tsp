@@ -3152,14 +3152,14 @@ model IpConfiguration {
    * The public IP address configuration of the network interface.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
-  publicIPAddressConfiguration?: PublicIPAddressConfiguration;
+  publicIPAddressConfiguration?: IPConfigurationPublicIPAddressConfiguration;
 }
 
 /**
  * The public IP address configuration of the network interface.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
-model PublicIPAddressConfiguration {
+model IPConfigurationPublicIPAddressConfiguration {
   /**
    * Name of the network interface.
    */

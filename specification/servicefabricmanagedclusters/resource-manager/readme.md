@@ -388,6 +388,19 @@ suppressions:
     reason: Backwards compatability with previously approved specs. Model did not change.
     where:
       - $.definitions.LongRunningOperationResult
+  
+  - code: PatchBodyParametersSchema
+    reason: Backards compatability with previously approved specs. Model did not change.
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}"].patch.parameters.5.schema.properties.sku
+  
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Backwards compatability with previously approved specs. Models did not change. Results are not of type resource, validation may be incorrectly marking as violation.
+    where:
+      - $.definitions.OperationListResult
+      - $.definitions.ManagedClusterCodeVersionResult
+      - $.definitions.LongRunningOperationResult
+      - $.definitions.NodeTypeListSkuResult
 ```
 
 ---
