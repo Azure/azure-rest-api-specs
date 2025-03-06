@@ -16,9 +16,6 @@ model FaceList is BaseCollection {
   @visibility(Lifecycle.Read)
   @doc("Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.")
   faceListId: collectionId;
-
-  @doc("Face ids of registered faces in the face list.")
-  persistedFaces?: FaceListFace[];
 }
 
 @doc("Face list item for list face list.")
