@@ -871,6 +871,14 @@ interface Certificates {
   >;
 }
 
+// Job Schedule Parameter Aliases
+alias CreateJobScheduleParameters = {
+  @doc("The Job Schedule to be created.")
+  @bodyRoot
+  jobSchedule: BatchJobScheduleCreateContent;
+};
+
+// Job Schedule Interface
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" ""
@@ -1029,12 +1037,10 @@ interface JobSchedules {
   @summary("Creates a Job Schedule to the specified Account.")
   @doc("Creates a Job Schedule to the specified Account.")
   @route("/jobschedules")
-  @clientName("createJobScheduleInternal", "java")
-  createJobSchedule is CreateOperation<
+  createJobSchedule is CreateOperationNew<
     {
-      @doc("The Job Schedule to be created.")
-      @bodyRoot
-      jobSchedule: BatchJobScheduleCreateContent;
+      ...CommonJsonParameters;
+      ...CreateJobScheduleParameters;
     },
     {}
   >;
