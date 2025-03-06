@@ -36,9 +36,9 @@ suppressions:
     where: $.paths./query:execute.post.parameters[5].schema
   - code: AvoidAnonymousTypes
     from: openapi.json
-    where: $.paths./instruction/{id}.delete.responses.202.schema
+    where: $.paths./copilot/instruction/{id}.delete.responses.202.schema
   - code: AvoidAnonymousParameter
-    where: $.paths./query:execute.post.parameters[5].schema
+    where: $.paths./copilot/query:execute.post.parameters[5].schema
 ```
 
 ### Tag: package-2025-03-01
