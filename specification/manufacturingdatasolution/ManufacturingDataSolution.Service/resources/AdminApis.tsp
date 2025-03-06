@@ -6,14 +6,11 @@ import "./../models/adminmodels.tsp";
 import "./../models/common.tsp";
 
 using TypeSpec.Rest;
-using AdminModels;
-using MdsCommon;
-
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.Core.Traits;
+using AdminModels;
 
 @versioned(MdsSolution.Versions)
 @route("/admin/")

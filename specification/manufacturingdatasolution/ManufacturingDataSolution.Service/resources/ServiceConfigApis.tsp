@@ -5,13 +5,11 @@ import "@azure-tools/typespec-azure-core";
 import "./../models/common.tsp";
 import "./../models/servicemodels.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using MdsCommon;
 using TypeSpec.Http;
 using ServiceModels;
 using Azure.Core;
-using Azure.Core.Traits;
 
 @versioned(MdsSolution.Versions)
 namespace MdsSolution.ServiceApis {

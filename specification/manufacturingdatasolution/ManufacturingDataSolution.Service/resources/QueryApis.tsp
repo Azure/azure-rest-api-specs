@@ -10,8 +10,6 @@ using MdsCommon;
 using QueryModels;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
 
 @versioned(MdsSolution.Versions)
 namespace MdsSolution.QueryApis {

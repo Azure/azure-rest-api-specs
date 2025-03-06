@@ -7,16 +7,11 @@ import "./resources/AdminApis.tsp";
 import "./resources/ServiceConfigApis.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using QueryApis;
-using AdminApis;
 
-@service({
-  title: "Microsoft.Industry.Manufacturing.MDS.Solution",
-})
+@service(#{ title: "Microsoft.Industry.Manufacturing.MDS.Solution" })
 @server(
   "https://mds-{mdsUniqueId}.{location}.cloudapp.azure.com/",
   "Manufacturing Data Solution global endpoint.",
