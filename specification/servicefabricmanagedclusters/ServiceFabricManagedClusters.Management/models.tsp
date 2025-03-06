@@ -3152,14 +3152,14 @@ model IpConfiguration {
    * The public IP address configuration of the network interface.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
-  publicIPAddressConfiguration?: IpConfigurationPublicIPAddressConfiguration;
+  publicIPAddressConfiguration?: PublicIPAddressConfiguration;
 }
 
 /**
  * The public IP address configuration of the network interface.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a well known abbreviation"
-model IpConfigurationPublicIPAddressConfiguration {
+model PublicIPAddressConfiguration {
   /**
    * Name of the network interface.
    */
@@ -3236,7 +3236,7 @@ model NodeTypeSku {
    */
   @maxValue(2147483647)
   @minValue(1)
-  capacity?: int32;
+  capacity: int32;
 }
 
 /**

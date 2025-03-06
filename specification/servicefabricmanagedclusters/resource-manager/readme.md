@@ -323,7 +323,7 @@ suppressions:
     reason: Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215) but its going to take some time because we generate the swagger from an internal repo that currently can't reference the common types.
 
   - code: LatestVersionOfCommonTypesMustBeUsed
-    reason: Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215), but our current definition for arm id is not compatible with the validation for the latest common type, we were recommended to use v3 for now
+    reason: Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215), but our current definition for arm id is not compatible with the validation for the latest common type, we were recommended to use v3 for now.
 
   - code: XmsPageableForListCalls
     reason: Backwards compatibility with previously approved spec for service.
@@ -337,7 +337,7 @@ suppressions:
       - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterOperationResults/{operationId}"].get
 
   - code: ProvisioningStateSpecifiedForLROPut
-    reason: Backward compatibility with previously approved spec
+    reason: Backward compatibility with previously approved spec. ProvisiongState is provided as part of the ManagedCluster.ManagedClusterProperties model.
     where:
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}"].put
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}"].put
@@ -346,17 +346,17 @@ suppressions:
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/services/{serviceName}"].put
       
   - code: PatchSkuProperty
-    reason: Backwards compatability with previously approved specs
+    reason: Backwards compatability with previously approved specs. Service does not support sku change in patch.
     where:
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}"].patch.parameters.4
       
   - code: PatchIdentityProperty
-    reason: Backwards compatability with previously approved specs
+    reason: Backwards compatability with previously approved specs. Service does not support identity change in patch.
     where:
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}"].patch.parameters.5
   
   - code: PostOperationIdContainsUrlVerb
-    reason: Backwards compatability with previously approved specs
+    reason: Backwards compatability with previously approved specs.
     where:
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/getazresiliencystatus"].post.operationId
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/getMaintenanceWindowStatus"].post.operationId
@@ -364,7 +364,7 @@ suppressions:
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/fetchUpgradeStatus"].post.operationId
     
   - code: PutResponseCodes
-    reason: Backwards compatability with previously approved specs
+    reason: Backwards compatability with previously approved specs. 
     where:
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}"].put
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applicationTypes/{applicationTypeName}"].put
@@ -374,7 +374,7 @@ suppressions:
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}"].put
   
   - code: AvoidAdditionalProperties
-    reason: Backwards compatability with previously approved specs
+    reason: Backwards compatability with previously approved specs.
     where:
       - $.definitions.ApplicationParameterList
       - $.definitions.ApplicationHealthPolicy.properties.serviceTypeHealthPolicyMap
@@ -385,7 +385,7 @@ suppressions:
       - $.definitions.UserAssignedIdentityMap
       
   - code: BodyTopLevelProperties
-    reason: Backwards compatability with previously approved specs
+    reason: Backwards compatability with previously approved specs. Model did not change.
     where:
       - $.definitions.LongRunningOperationResult
 ```
