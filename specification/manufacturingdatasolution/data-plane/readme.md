@@ -24,6 +24,16 @@ These are the global settings for the Manufacturing Data Solution Copilot servic
 ```yaml
 openapi-type: data-plane
 tag: package-2025-03-01
+suppressions:
+  - code: AvoidAnonymousTypes
+    from: openapi.json
+    where: $.paths["/admin/version/{versionId}"].delete.responses.202.schema
+  - code: AvoidAnonymousTypes
+    from: openapi.json
+    where: $.paths["/admin/version:switch"].post.responses.202.schema
+  - code: AvoidAnonymousTypes
+    from: openapi.json
+    where: $.paths["/admin/cleanup/{entityName}"].delete.responses.202.schema
 ```
 
 ### Tag: package-2025-03-01

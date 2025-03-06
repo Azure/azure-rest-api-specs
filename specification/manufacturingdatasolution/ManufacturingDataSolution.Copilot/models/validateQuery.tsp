@@ -149,13 +149,13 @@ model CopilotTestCase {
   expectedEntities?: string;
 }
 
-@resource("testquery")
+@resource("validate")
 @doc("Test Query")
 model TestQuery {
   @key
   @doc("The unique identifier of the test query.")
   @visibility(Lifecycle.Read)
-  testQueryId: string;
+  validateTestId: string;
 
   @doc("start date of test run")
   fromDate?: utcDateTime;

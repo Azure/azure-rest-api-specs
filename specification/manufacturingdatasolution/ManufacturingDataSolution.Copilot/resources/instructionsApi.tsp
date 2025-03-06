@@ -34,7 +34,7 @@ alias jobLocationResponseHeaders = ResponseHeadersTrait<
 @doc("Instructions")
 interface Instructions {
   @doc("Gets single instruction.")
-  getInstructions is apiOperations.ResourceRead<Instruction>;
+  get is apiOperations.ResourceRead<Instruction>;
 
   @doc("List Instruction resources")
   list is apiOperations.ResourceList<
@@ -50,7 +50,7 @@ interface Instructions {
   @pollingOperation(
     MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
   )
-  createInstruction is apiOperations.LongRunningResourceCreateWithServiceProvidedName<
+  create is apiOperations.LongRunningResourceCreateWithServiceProvidedName<
     Instruction,
     jobLocationResponseHeaders
   >;
@@ -59,13 +59,13 @@ interface Instructions {
   @pollingOperation(
     MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
   )
-  updateInstruction is apiOperations.LongRunningResourceCreateOrUpdate<Instruction>;
+  update is apiOperations.LongRunningResourceCreateOrUpdate<Instruction>;
 
   @doc("Delete instructions.")
   @pollingOperation(
     MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
   )
-  deleteInstruction is apiOperations.LongRunningResourceDelete<Instruction>;
+  delete is apiOperations.LongRunningResourceDelete<Instruction>;
 
   @doc("Update instruction status.")
   @pollingOperation(

@@ -743,7 +743,7 @@
         }
       },
       "post": {
-        "operationId": "Instructions_CreateInstruction",
+        "operationId": "Instructions_Create",
         "description": "Create an instruction.",
         "parameters": [
           {
@@ -787,6 +787,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Instructions_Create_MaximumSet": {
+            "$ref": "./examples/Instructions_Create_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -795,7 +800,7 @@
     },
     "/instruction/{id}": {
       "get": {
-        "operationId": "Instructions_GetInstructions",
+        "operationId": "Instructions_Get",
         "description": "Gets single instruction.",
         "parameters": [
           {
@@ -830,13 +835,13 @@
           }
         },
         "x-ms-examples": {
-          "Instructions_GetInstructions_MaximumSet": {
-            "$ref": "./examples/Instructions_GetInstructions_MaximumSet_Gen.json"
+          "Instructions_Get_MaximumSet": {
+            "$ref": "./examples/Instructions_Get_MaximumSet_Gen.json"
           }
         }
       },
       "patch": {
-        "operationId": "Instructions_UpdateInstruction",
+        "operationId": "Instructions_Update",
         "description": "update instructions.",
         "consumes": [
           "application/merge-patch+json"
@@ -903,8 +908,8 @@
           }
         },
         "x-ms-examples": {
-          "Instructions_UpdateInstruction_MaximumSet": {
-            "$ref": "./examples/Instructions_UpdateInstruction_MaximumSet_Gen.json"
+          "Instructions_Update_MaximumSet": {
+            "$ref": "./examples/Instructions_Update_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -913,7 +918,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Instructions_DeleteInstruction",
+        "operationId": "Instructions_Delete",
         "description": "Delete instructions.",
         "parameters": [
           {
@@ -974,8 +979,8 @@
           }
         },
         "x-ms-examples": {
-          "Instructions_DeleteInstruction_MaximumSet": {
-            "$ref": "./examples/Instructions_DeleteInstruction_MaximumSet_Gen.json"
+          "Instructions_Delete_MaximumSet": {
+            "$ref": "./examples/Instructions_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1195,93 +1200,6 @@
         }
       }
     },
-    "/testquery/{testQueryId}": {
-      "get": {
-        "operationId": "ValidateQueryApi_GetValidateTestDetails",
-        "description": "Get the details of a validate test",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "testQueryId",
-            "in": "path",
-            "description": "The unique identifier of the test query.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ValidateQuery.Models.TestQuery"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ValidateQueryApi_GetValidateTestDetails_MaximumSet": {
-            "$ref": "./examples/ValidateQueryApi_GetValidateTestDetails_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/testquery:execute": {
-      "post": {
-        "operationId": "ValidateQueryApi_Execute",
-        "description": "Validate a query",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ValidateQuery.Models.TestQueryRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ValidateQuery.Models.TestResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ValidateQueryApi_Execute_MaximumSet": {
-            "$ref": "./examples/ValidateQueryApi_Execute_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/validate": {
       "get": {
         "operationId": "ValidateQueryApi_ListValidateTestRequests",
@@ -1342,6 +1260,93 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/validate/{validateTestId}": {
+      "get": {
+        "operationId": "ValidateQueryApi_GetValidateTestDetails",
+        "description": "Get the details of a validate test",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "validateTestId",
+            "in": "path",
+            "description": "The unique identifier of the test query.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateQuery.Models.TestQuery"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateQueryApi_GetValidateTestDetails_MaximumSet": {
+            "$ref": "./examples/ValidateQueryApi_GetValidateTestDetails_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/validate:execute": {
+      "post": {
+        "operationId": "ValidateQueryApi_Execute",
+        "description": "Validate a query",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateQuery.Models.TestQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateQuery.Models.TestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateQueryApi_Execute_MaximumSet": {
+            "$ref": "./examples/ValidateQueryApi_Execute_MaximumSet_Gen.json"
+          }
         }
       }
     }
@@ -2310,7 +2315,7 @@
       "type": "object",
       "description": "Test Query",
       "properties": {
-        "testQueryId": {
+        "validateTestId": {
           "type": "string",
           "description": "The unique identifier of the test query.",
           "readOnly": true
@@ -2327,7 +2332,7 @@
         }
       },
       "required": [
-        "testQueryId"
+        "validateTestId"
       ]
     },
     "ValidateQuery.Models.TestQueryRequest": {
