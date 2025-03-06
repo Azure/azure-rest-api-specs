@@ -4,9 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./../models/validateQuery.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Versioning;
 using MdsSolution.CopilotService.ValidateQuery.Models;

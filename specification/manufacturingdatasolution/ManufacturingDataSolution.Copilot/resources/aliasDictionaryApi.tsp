@@ -6,7 +6,6 @@ import "./../models/aliasDictionary.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using MdsSolution.CopilotService.AliasDictionary.Models;

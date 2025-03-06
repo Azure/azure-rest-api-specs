@@ -3,11 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
-using Azure.Core;
-using Azure.Core.Traits;
 using TypeSpec.Rest;
-using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace MdsSolution.CopilotService.Instructions.Models;
 
