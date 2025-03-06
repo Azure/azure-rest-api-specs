@@ -153,7 +153,7 @@ interface ItemsOperations {
    */
   @action("search")
   searchAcrossCollection is Operations.ResourceCollectionAction<
-    ItemsinCatalog,
+    ItemsInCatalog,
     CrossCollectionItemSearchQuery,
     ItemListResponse,
     QueryParametersTrait<{
