@@ -28,7 +28,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.Mission")
-@service({
+@service(#{
   title: "Microsoft Mission",
 })
 @versioned(Microsoft.Mission.Versions)

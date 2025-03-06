@@ -69,7 +69,7 @@ model TransitOption {
 @doc("Describes the properties of an Transit Hub.")
 model TransitHubProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The state of the transitHub.")

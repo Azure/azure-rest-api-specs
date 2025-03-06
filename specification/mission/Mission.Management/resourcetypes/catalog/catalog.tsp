@@ -56,7 +56,7 @@ model Package {
 @doc("Catalog properties")
 model CatalogProperties {
   @doc("Provisioning State.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Owning Resource of the Catalog.")

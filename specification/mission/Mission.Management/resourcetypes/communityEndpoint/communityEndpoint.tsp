@@ -102,13 +102,13 @@ model CommunityEndpointDestinationRule is EndpointRuleBase {
 model CommunityEndpointProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   @doc("Community Endpoint Rule Collection.")
   ruleCollection?: CommunityEndpointDestinationRule[];
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
   @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @doc("Destination Rule Collection.")
   destinationRuleCollection?: DestinationRule[];
 
@@ -117,7 +117,7 @@ model CommunityEndpointProperties {
   resourceCollection?: string[];
 
   @doc("Provisioning State.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)

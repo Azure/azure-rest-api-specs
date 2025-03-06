@@ -81,7 +81,7 @@ model Approver {
 @doc("Approvals Resource Properties")
 model ApprovalProperties {
   @doc("Provisioning State.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Parameter for optimizing query results")
@@ -94,13 +94,13 @@ model ApprovalProperties {
   requestMetadata?: RequestMetadata;
 
   @added(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", ["approverEntraId"])
+  @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
   @doc("List of approvers for the approval request")
   approvers?: Approver[];
 
   @added(Microsoft.Mission.Versions.v2024_10_01_preview)
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", ["approverEntraId"])
+  @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
   @doc("List of mandatory approvers for the approval request")
   mandatoryApprovers?: Approver[];
 

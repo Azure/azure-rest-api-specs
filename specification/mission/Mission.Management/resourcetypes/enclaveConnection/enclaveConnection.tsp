@@ -62,7 +62,7 @@ model EnclaveConnectionProperties {
   destinationEndpointId?: DestinationEndpointResourceId;
 
   @doc("Provisioning State.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("List of resource ids modified by enclave Connections.")

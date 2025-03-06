@@ -40,7 +40,7 @@ model SubnetConfiguration {
   name: string;
 
   @doc("Subnet ID.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   @doc("Network prefix size.")
@@ -50,11 +50,11 @@ model SubnetConfiguration {
   subnetDelegation?: string;
 
   @doc("Address prefix.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   addressPrefix?: string;
 
   @doc("Network security group ID.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkSecurityGroupId?: Azure.Core.armResourceIdentifier;
 }
 
@@ -139,14 +139,14 @@ model VirtualEnclaveProperties {
   description?: string;
 
   @doc("Provisioning State.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Virtual Network.")
   enclaveVirtualNetwork?: EnclaveVirtualNetwork;
 
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Enclave Address Spaces")
   enclaveAddressSpaces?: EnclaveAddressSpaces;
 
