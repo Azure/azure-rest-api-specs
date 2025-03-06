@@ -97,10 +97,6 @@ model AddonVrProperties extends AddonProperties {
 
   @doc("The type of private cloud addon")
   addonType: AddonType.VR;
-
-  @doc("VR replicationNetwork network.")
-  @added(Versions.v2024_09_01)
-  replicationNetwork?: string;
 }
 
 @doc("The properties of an HCX addon")
