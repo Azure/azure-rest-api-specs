@@ -1733,6 +1733,42 @@
                 }
               }
             },
+            "ingressConfiguration": {
+              "description": "Settings for the ingress component, including workload profile, scaling, and connection handling.",
+              "type": "object",
+              "properties": {
+                "workloadProfileName": {
+                  "description": "Name of the workload profile used by the ingress component.",
+                  "type": "string"
+                },
+                "scale": {
+                  "description": "Scaling configuration for the ingress component.",
+                  "type": "object",
+                  "properties": {
+                    "minReplicas": {
+                      "description": "Minimum number of ingress replicas.",
+                      "type": "integer"
+                    },
+                    "maxReplicas": {
+                      "description": "Maximum number of ingress replicas.",
+                      "type": "integer"
+                    }
+                  }
+                },
+                "terminationGracePeriodSeconds": {
+                  "description": "Time (in seconds) to allow active connections to complete on termination.",
+                  "type": "integer"
+                },
+                "headerCountLimit": {
+                  "description": "Maximum number of headers per request allowed by the ingress.",
+                  "type": "integer"
+                },
+                "requestIdleTimeout": {
+                  "description": "Duration (in minutes) before idle requests are timed out.",
+                  "type": "integer"
+                }
+              }
+            },
             "privateEndpointConnections": {
               "description": "Private endpoint connections to the resource.",
               "type": "array",
@@ -1938,4 +1974,3 @@
     }
   ]
 }
-
