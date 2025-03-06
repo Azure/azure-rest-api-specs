@@ -69,15 +69,6 @@ input-file:
 
 ---
 
-## suppressions
-
-```yaml
-suppressions:
- - code: PatchBodyParametersSchema
-    from: EventGrid.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/communities/{communityName}"].patch.parameters[4].schema.properties.identity
-```
-
 # Code Generation
 
 ## Swagger to SDK
