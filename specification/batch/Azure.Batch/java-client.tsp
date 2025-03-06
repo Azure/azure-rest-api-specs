@@ -262,3 +262,27 @@ op listJobPreparationAndReleaseTaskStatusCustomization is Azure.Batch.ListOperat
   listJobPreparationAndReleaseTaskStatusCustomization,
   "java"
 );
+
+// Get Job Task Counts Operation
+@doc("Optional parameters for Get Job Task Counts operation.")
+model GetBatchJobTaskCountsOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Get Job Task Counts operation.")
+@route("/jobs/{jobId}/taskcounts")
+op getJobTaskCountsCustomization is Azure.Batch.ReadOperationNew<
+  {
+    ...Azure.Batch.getJobTaskCountsParameters;
+
+    @doc("Optional parameters for Get Job Task Counts operation.")
+    options?: GetBatchJobTaskCountsOptions;
+  },
+  Azure.Batch.BatchTaskCountsResult
+>;
+
+@@override(Azure.Batch.Jobs.getJobTaskCounts,
+  getJobTaskCountsCustomization,
+  "java"
+);

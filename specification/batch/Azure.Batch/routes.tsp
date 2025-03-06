@@ -486,6 +486,12 @@ alias ListJobPreparationAndReleaseTaskStatusParameters = {
   $select?: string[];
 };
 
+alias getJobTaskCountsParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+};
+
 // Job Interface
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -734,12 +740,10 @@ interface Jobs {
     up to date. If you need exact task counts, use a list query.
     """)
   @route("/jobs/{jobId}/taskcounts")
-  @clientName("getJobTaskCountsInternal", "java")
-  getJobTaskCounts is ReadOperation<
+  getJobTaskCounts is ReadOperationNew<
     {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
+      ...CommonParameters;
+      ...getJobTaskCountsParameters;
     },
     BatchTaskCountsResult
   >;
