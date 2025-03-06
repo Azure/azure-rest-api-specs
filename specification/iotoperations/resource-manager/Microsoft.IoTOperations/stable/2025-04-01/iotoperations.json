@@ -5247,37 +5247,10 @@
       "description": "The features of the AIO Instance.",
       "properties": {
         "mode": {
-          "type": "string",
-          "description": "The state of the feature.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled",
-            "Preview"
-          ],
-          "x-ms-enum": {
-            "name": "InstanceFeatureMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Enabled is equivalent to True"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Disabled is equivalent to False."
-              },
-              {
-                "name": "Preview",
-                "value": "Preview",
-                "description": "The feature is in preview mode."
-              }
-            ]
-          }
+          "$ref": "#/definitions/InstanceFeatureMode",
+          "description": "The state of the feature."
         },
-        "configSettings": {
+        "settings": {
           "type": "object",
           "description": "The value of the feature.",
           "additionalProperties": {

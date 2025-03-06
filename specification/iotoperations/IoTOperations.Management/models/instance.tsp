@@ -64,11 +64,11 @@ model InstanceProperties {
 @added(Versions.v2025_04_01)
 model InstanceFeature {
   @doc("The state of the feature.")
-  mode?: InstanceFeatureMode = OperationalMode.Enabled;
+  mode?: InstanceFeatureMode;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("The value of the feature.")
-  configSettings?: Record<OperationalMode>;
+  settings?: Record<OperationalMode>;
 }
 
 @doc("The enum defining state of a feature.")
