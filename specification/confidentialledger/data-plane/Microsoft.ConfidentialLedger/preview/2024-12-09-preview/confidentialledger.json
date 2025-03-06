@@ -224,7 +224,7 @@
             "$ref": "#/parameters/CollectionIdParameter"
           },
           {
-            "$ref": "#/parameters/TagIdParameter"
+            "$ref": "#/parameters/TagsIdParameter"
           },
           {
             "in": "body",
@@ -2101,11 +2101,19 @@
       "type": "string"
     },
     "TagIdParameter": {
+      "name": "tag",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "Single tag.",
+      "type": "string"
+    },
+    "TagsIdParameter": {
       "name": "tags",
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method",
-      "description": "comma separated tags.",
+      "description": "Comma separated tags.",
       "type": "string"
     },
     "TransactionIdParameter": {
