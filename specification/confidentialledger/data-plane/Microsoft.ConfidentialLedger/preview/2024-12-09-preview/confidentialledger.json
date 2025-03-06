@@ -183,13 +183,13 @@
             "$ref": "#/parameters/CollectionIdParameter"
           },
           {
-            "$ref": "#/parameters/TagIdParameter"
-          },
-          {
             "$ref": "#/parameters/TransactionIdFromParameter"
           },
           {
             "$ref": "#/parameters/TransactionIdToParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
           }
         ],
         "responses": {
@@ -224,9 +224,6 @@
             "$ref": "#/parameters/CollectionIdParameter"
           },
           {
-            "$ref": "#/parameters/TagsIdParameter"
-          },
-          {
             "in": "body",
             "name": "entry",
             "description": "Ledger entry.",
@@ -234,6 +231,9 @@
             "schema": {
               "$ref": "#/definitions/LedgerEntry"
             }
+          },
+          {
+            "$ref": "#/parameters/TagsIdParameter"
           }
         ],
         "responses": {
