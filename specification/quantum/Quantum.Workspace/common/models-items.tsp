@@ -11,15 +11,6 @@ using TypeSpec.Rest;
 
 namespace Quantum.Workspace;
 
-/** A key-value pair. */
-model KeyValue<Value = string> {
-  /** Key. */
-  key: string;
-
-  /** Value. */
-  value: Value;
-}
-
 /** The type of the workspace item. */
 union ItemType {
   string,
