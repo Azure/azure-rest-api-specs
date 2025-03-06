@@ -306,7 +306,13 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/ConfigTuningRequestParameter"
+            "name": "configTuningRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigTuningRequestParameter"
+            },
+            "description": "The parameters for tuning request."
           }
         ],
         "responses": {
@@ -848,6 +854,28 @@
           "type": "string"
         }
       }
+    },
+    "ConfigTuningRequestParameter": {
+      "type": "object",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "The name of server."
+        },
+        "allowServerRestarts": {
+          "type": "boolean",
+          "description": "Indicates whether PG should be restarted during a tuning session."
+        },
+        "targetImprovementMetric": {
+          "type": "string",
+          "description": "The target metric the tuning session is trying to improve."
+        },
+        "configTuningUsageMode": {
+          "type": "boolean",
+          "description": "The mode with which the feature will be enabled."
+        }
+      },
+      "description": "Config tuning request parameters."
     }
   },
   "parameters": {
@@ -881,31 +909,6 @@
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"
-    },
-    "ConfigTuningRequestParameter": {
-      "name": "configTuningRequest",
-      "in": "body",
-      "required": true,
-      "type": "object",
-      "properties": {
-        "serverName": {
-          "type": "string",
-          "description": "The name of server."
-        },
-        "allowServerRestarts": {
-          "type": "boolean",
-          "description": "Indicates whether PG should be restarted during a tuning session."
-        },
-        "targetImprovementMetric": {
-          "type": "string",
-          "description": "The target metric the tuning session is trying to improve."
-        },
-        "configTuningUsageMode": {
-          "type": "boolean",
-          "description": "The mode with which the feature will be enabled."
-        }
-      },
-      "description": "Config tuning request parameters."
     },
     "SessionIdParameter": {
       "name": "sessionId",
