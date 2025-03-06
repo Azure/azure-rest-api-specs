@@ -6,10 +6,7 @@ import "@azure-tools/typespec-azure-core";
 import "./../models/common.tsp";
 
 using Azure.Core;
-using Azure.Core.Traits;
 using TypeSpec.Rest;
-using TypeSpec.Http;
-using TypeSpec.Versioning;
 using MdsCommon;
 
 namespace AdminModels;

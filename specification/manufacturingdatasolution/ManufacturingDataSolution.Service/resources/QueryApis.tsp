@@ -1,5 +1,4 @@
 import "@typespec/http";
-import "@typespec/openapi3";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./../models/common.tsp";

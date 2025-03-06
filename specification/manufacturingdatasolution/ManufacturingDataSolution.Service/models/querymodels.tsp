@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 using TypeSpec.Rest;
-using TypeSpec.Http;
 
 namespace QueryModels;
 

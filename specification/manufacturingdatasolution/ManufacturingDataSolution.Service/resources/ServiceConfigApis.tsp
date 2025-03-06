@@ -1,5 +1,4 @@
 import "@typespec/http";
-import "@typespec/openapi3";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./../models/common.tsp";
@@ -10,6 +9,7 @@ using MdsCommon;
 using TypeSpec.Http;
 using ServiceModels;
 using Azure.Core;
+using Azure.Core.Traits;
 
 @versioned(MdsSolution.Versions)
 namespace MdsSolution.ServiceApis {
@@ -25,7 +25,14 @@ namespace MdsSolution.ServiceApis {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
   @doc("Get all entities.")
-  op listAllEntities is Azure.Core.Foundations.NonPagedResourceList<EntityInfo>;
+  op listAllEntities is Azure.Core.Foundations.NonPagedResourceList<
+    EntityInfo,
+    QueryParametersTrait<{
+      @query("top")
+      @doc("Return up to the specified number of items from the top. Default is 10.")
+      top?: int32 = 10;
+    }>
+  >;
 
   @doc("Create a new entity.")
   @pollingOperation(getEntityJobStatus)
@@ -43,6 +50,16 @@ namespace MdsSolution.ServiceApis {
   @doc("Delete an entity schema by name.")
   op deleteEntity is Operations.ResourceDelete<Entity>;
 
+  @doc("Get NormalizationTable.")
+  op getNormalizationTable is Operations.ResourceRead<
+    NormalizationTable,
+    QueryParametersTrait<{
+      @query("version")
+      @doc("Version of the table.")
+      version?: string;
+    }>
+  >;
+
   @doc("Create a NormalizationTable.")
   op createOrReplaceNormalizationTable is Operations.ResourceCreateOrReplace<NormalizationTable>;
 
@@ -50,10 +67,31 @@ namespace MdsSolution.ServiceApis {
   op updateNormalizationTable is Operations.ResourceCreateOrUpdate<NormalizationTable>;
 
   @doc("Delete NormalizationTable.")
-  op deleteNormalizationTable is Operations.ResourceDelete<NormalizationTable>;
+  op deleteNormalizationTable is Operations.ResourceDelete<
+    NormalizationTable,
+    QueryParametersTrait<
+      {
+        @query("version")
+        @doc("Version of the table.")
+        version: string;
+
+        @query("force-delete")
+        @doc("Force delete the resource.")
+        forceDelete: boolean;
+      },
+      TraitContext.Delete
+    >
+  >;
 
   @doc("Get OPC UA mappings.")
-  op listOpcuaMapping is Operations.ResourceList<OpcuaMappingModel>;
+  op listOpcuaMapping is Operations.ResourceList<
+    OpcuaMappingModel,
+    QueryParametersTrait<{
+      @query("entityName")
+      @doc("The name of the entity.")
+      entityName: string;
+    }>
+  >;
 
   @doc("Create OPC UA mappings.")
   op createOrReplaceOpcuaMapping is Operations.ResourceCreateOrReplace<OpcuaMappingModel>;

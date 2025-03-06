@@ -4,7 +4,6 @@ import "./common.tsp";
 
 using Azure.Core;
 using MdsCommon;
-using TypeSpec.Http;
 using TypeSpec.Rest;
 
 namespace ServiceModels;
@@ -48,65 +47,25 @@ model MdsHealthSetupInfo {
   adxFunctionsCreationStatus: OperationStatus;
 }
 
-// @doc("Represents a response for an entity registration.")
-// model RegisterEntityResponse {
-//   @doc("Response message.")
-//   message?: string;
-
-//   @doc("The operation status.")
-//   operationStatus: OperationStatus;
-// }
-
-// @doc("Represents a patch for an entity.")
-// model EntityPatch {
-//   @doc("The name of the entity.")
-//   name: string;
-
-//   @doc("The columns of the entity.")
-//   columns: BaseColumn[] = #[];
-// }
-
 @doc("Represents a mappings table model.")
 @resource("normalizationTable")
-model NormalizationTable {
-  @doc("The name of the table.")
-  @key
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  name: string;
+model NormalizationTable is EntityInfo {
+  @doc("Tags associated with the table.")
+  tags?: Record<string>;
 
   @doc("The version of the table.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   version: string = "";
 
   @doc("The mapping table records.")
-  mappingsTable: Record<unknown>[] = #[];
+  mappingsTable?: Record<unknown>[] = #[];
 
   @doc("The available versions of the table.")
-  availableVersions: Record<string>;
+  availableVersions?: Record<string>;
+
+  @doc("Indicates if the column is semantically relevant.")
+  semanticRelevantFlag?: boolean;
 }
-
-// @doc("Represents a request model for OPC UA mapping.")
-// model OpcuaMappingRequestModel {
-//   @doc("The target entity for the mapping.")
-//   targetEntity?: string;
-
-//   @doc("Indicates if related nodes should be updated.")
-//   updateRelatedNode: boolean;
-
-//   @doc("The mapping data for OPC UA.")
-//   mappingData?: OpcuaMappingTwin[];
-
-//   @doc("The type of relationship for the mapping.")
-//   relationshipType?: string;
-// }
-
-// @doc("Represents a twin in OPC UA mapping.")
-// model OpcuaMappingTwin {
-//   @doc("The DMM keys for the twin.")
-//   dmmKeys?: Record<unknown>[];
-
-//   @doc("The OPC UA name for the twin.")
-//   opcuaName?: string;
-// }
 
 @doc("Represents a response model for OPC UA mapping.")
 @resource("opcuamapping")
@@ -136,27 +95,6 @@ model OpcuaMappingModel {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   relationshipType?: string;
 }
-
-// @doc("Represents a response schema for an entity update.")
-// model UpdateEntityResponse {
-//   @doc("Name of the Entity")
-//   entityName?: string;
-
-//   @doc("List of Columns to be added")
-//   columnsToBeAdded?: string[];
-
-//   @doc("List of Columns to be deleted")
-//   columnsToBeDeleted?: string[];
-
-//   @doc("List of Relationships to be added")
-//   relationshipsToBeAdded?: string[];
-
-//   @doc("List of Relationships to be deleted")
-//   relationshipsToBeDeleted?: string[];
-
-//   @doc("Flag to indicate if DTDL change is required")
-//   dtdlChangeRequired: boolean = false;
-// }
 
 /**
  * Represents the status response of an entity update job.

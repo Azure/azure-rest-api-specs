@@ -562,6 +562,15 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Return up to the specified number of items from the top. Default is 10.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
           }
         ],
         "responses": {
@@ -830,6 +839,54 @@
       }
     },
     "/normalizationTable/{name}": {
+      "get": {
+        "operationId": "ServiceApis_GetNormalizationTable",
+        "description": "Get NormalizationTable.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the entity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Version of the table.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ServiceModels.NormalizationTable"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceApis_GetNormalizationTable": {
+            "$ref": "./examples/ServiceApis_GetNormalizationTable.json"
+          }
+        }
+      },
       "put": {
         "operationId": "ServiceApis_CreateOrReplaceNormalizationTable",
         "description": "Create a NormalizationTable.",
@@ -840,7 +897,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the table.",
+            "description": "The name of the entity.",
             "required": true,
             "type": "string"
           },
@@ -899,7 +956,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the table.",
+            "description": "The name of the entity.",
             "required": true,
             "type": "string"
           },
@@ -955,9 +1012,24 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the table.",
+            "description": "The name of the entity.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Version of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "force-delete",
+            "in": "query",
+            "description": "Force delete the resource.",
+            "required": true,
+            "type": "boolean",
+            "x-ms-client-name": "forceDelete"
           }
         ],
         "responses": {
@@ -991,6 +1063,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "entityName",
+            "in": "query",
+            "description": "The name of the entity.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2965,17 +3044,41 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the table.",
+          "description": "The name of the entity.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
         },
+        "columns": {
+          "type": "array",
+          "description": "The columns associated with the entity.",
+          "items": {
+            "$ref": "#/definitions/ServiceModels.Column"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags associated with the table.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "version": {
           "type": "string",
           "description": "The version of the table.",
-          "default": ""
+          "default": "",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "mappingsTable": {
           "type": "array",
@@ -2993,13 +3096,15 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "semanticRelevantFlag": {
+          "type": "boolean",
+          "description": "Indicates if the column is semantically relevant."
         }
       },
       "required": [
         "name",
-        "version",
-        "mappingsTable",
-        "availableVersions"
+        "version"
       ]
     },
     "ServiceModels.NormalizationTableCreateOrUpdate": {
@@ -3008,17 +3113,41 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the table.",
+          "description": "The name of the entity.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
         },
+        "columns": {
+          "type": "array",
+          "description": "The columns associated with the entity.",
+          "items": {
+            "$ref": "#/definitions/ServiceModels.Column"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags associated with the table.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "version": {
           "type": "string",
           "description": "The version of the table.",
-          "default": ""
+          "default": "",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "mappingsTable": {
           "type": "array",
@@ -3036,6 +3165,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "semanticRelevantFlag": {
+          "type": "boolean",
+          "description": "Indicates if the column is semantically relevant."
         }
       }
     },
