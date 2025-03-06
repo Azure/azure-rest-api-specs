@@ -11,9 +11,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.HealthPlatform Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.HealthPlatform management service",
-})
+@service(#{ title: "Microsoft.HealthPlatform management service" })
 @versioned(Versions)
 namespace Microsoft.HealthPlatform;
 
