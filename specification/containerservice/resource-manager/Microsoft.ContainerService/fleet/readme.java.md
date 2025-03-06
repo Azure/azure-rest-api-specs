@@ -18,6 +18,7 @@ description: "Azure Kubernetes Fleet Manager Client"
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2025-04-preview
   - tag: package-2024-05-preview
   - tag: package-2024-04
   - tag: package-2024-02-preview
