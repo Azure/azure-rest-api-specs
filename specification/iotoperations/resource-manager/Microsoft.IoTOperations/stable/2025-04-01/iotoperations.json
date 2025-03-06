@@ -5252,7 +5252,7 @@
         },
         "settings": {
           "type": "object",
-          "description": "The value of the feature.",
+          "description": "The settings of the feature.",
           "additionalProperties": {
             "$ref": "#/definitions/OperationalMode"
           }
@@ -5261,30 +5261,30 @@
     },
     "InstanceFeatureMode": {
       "type": "string",
-      "description": "The enum defining state of a feature.",
+      "description": "The enum defining mode of a feature.",
       "enum": [
-        "Enabled",
-        "Disabled",
-        "Preview"
+        "Stable",
+        "Preview",
+        "Disabled"
       ],
       "x-ms-enum": {
         "name": "InstanceFeatureMode",
         "modelAsString": true,
         "values": [
           {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enabled is equivalent to True"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled is equivalent to False."
+            "name": "Stable",
+            "value": "Stable",
+            "description": "Opt in to enable a stable feature"
           },
           {
             "name": "Preview",
             "value": "Preview",
-            "description": "The feature is in preview mode."
+            "description": "Opt in to enable a preview feature"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Opt out of a feature"
           }
         ]
       }
