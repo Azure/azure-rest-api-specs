@@ -103,7 +103,7 @@ model DatabaseChangeTierDefinition {
   /**
    * A target tier name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   targetTierName?: string;
 }
 
@@ -114,101 +114,101 @@ model FleetDatabaseProperties {
   /**
    * Resource identifier for the underlying database resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   originalDatabaseId?: string;
 
   /**
    * Database state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AzureProvisioningState;
 
   /**
    * Create mode. Available options: Default - Create a database. Copy - Copy the source database (source database name must be specified) PointInTimeRestore - Create a database by restoring source database from a point in time (source database name and restore from time must be specified)
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   createMode?: DatabaseCreateMode;
 
   /**
    * Name of the tier this database belongs to.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   tierName?: string;
 
   /**
    * Connection string to connect to the database with.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionString?: string;
 
   /**
    * If true, database is recoverable.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoverable?: boolean;
 
   /**
    * Restore from time when CreateMode is PointInTimeRestore.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   restoreFromTime?: utcDateTime;
 
   /**
    * Earliest restore time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   earliestRestoreTime?: utcDateTime;
 
   /**
    * Latest restore time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   latestRestoreTime?: utcDateTime;
 
   /**
    * Backup retention in days.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   backupRetentionDays?: int32;
 
   /**
    * Maximum database size in Gb.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   databaseSizeGbMax?: int32;
 
   /**
    * Source database name used when CreateMode is Copy or PointInTimeRestore.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceDatabaseName?: string;
 
   /**
    * Additional database properties to be applied as the underlying database resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   resourceTags?: Record<string>;
 
   /**
    * Identity property.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   identity?: Identity;
 
   /**
    * Transparent Data Encryption properties
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   transparentDataEncryption?: TransparentDataEncryption;
 
   /**
    * Database collation.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   collation?: string;
 }
 
@@ -219,20 +219,20 @@ model Identity {
   /**
    * Identity type of the main principal.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   identityType?: IdentityType;
 
   /**
    * User identity ids
    */
-  @visibility("read", "create", "update")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   userAssignedIdentities?: DatabaseIdentity[];
 
   /**
    * The federated client id for the SQL Database. It is used for cross tenant CMK scenario.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   federatedClientId?: uuid;
 }
 
@@ -243,7 +243,7 @@ model DatabaseIdentity {
   /**
    * Resource Id of the database identity.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   resourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -253,13 +253,13 @@ model DatabaseIdentity {
   /**
    * Principal Id of the database identity.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   principalId?: uuid;
 
   /**
    * Client Id of the database identity.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   clientId?: uuid;
 }
 
@@ -270,19 +270,19 @@ model TransparentDataEncryption {
   /**
    * Customer Managed Key (CMK) Uri.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   keyUri?: url;
 
   /**
    * Additional Keys
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   keys?: string[];
 
   /**
    * Enable key auto rotation
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   enableAutoRotation?: boolean;
 }
 
@@ -293,7 +293,7 @@ model DatabaseRenameDefinition {
   /**
    * New database name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   newName?: string;
 }
 
@@ -304,19 +304,19 @@ model FirewallRuleProperties {
   /**
    * Start IP address.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   startIpAddress?: string;
 
   /**
    * End IP address.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   endIpAddress?: string;
 
   /**
    * Provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AzureProvisioningState;
 }
 
@@ -328,13 +328,13 @@ model FleetUpdate {
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
   /**
    * The Database Fleet properties.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   properties?: FleetProperties;
 }
 
@@ -345,13 +345,13 @@ model FleetProperties {
   /**
    * Fleet description.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   description?: string;
 
   /**
    * Provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AzureProvisioningState;
 }
 
@@ -362,19 +362,19 @@ model DestinationTierOverride {
   /**
    * Resource type.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   resourceType: ResourceType;
 
   /**
    * Destination tier name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   tierName: string;
 
   /**
    * Resource name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   resourceName: string;
 }
 
@@ -385,31 +385,31 @@ model MainPrincipal {
   /**
    * Login name of the main principal.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   login?: string;
 
   /**
    * Application Id of the main principal.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   applicationId?: uuid;
 
   /**
    * Object Id of the main principal.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   objectId?: uuid;
 
   /**
    * Tenant Id of the main principal.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   tenantId?: uuid;
 
   /**
    * Principal type of the main principal.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   principalType?: PrincipalType;
 }
 
@@ -420,19 +420,19 @@ model FleetspaceProperties {
   /**
    * Fleetspace state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AzureProvisioningState;
 
   /**
    * Maximum number of vCores database fleet manager is allowed to provision in the fleetspace.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   capacityMax?: int32;
 
   /**
    * Main Microsoft Entra ID principal that has admin access to all databases in the fleetspace.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   mainPrincipal?: MainPrincipal;
 }
 
@@ -443,32 +443,32 @@ model RegisterServerDefinition {
   /**
    * Destination tier name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   tierName?: string;
 
   /**
    * Source subscription id.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceSubscriptionId?: string;
 
   /**
    * Source resource group name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceResourceGroupName?: string;
 
   /**
    * Source SQL Server name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceServerName?: string;
 
   /**
    * Destination tier overrides.
    */
-  @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   destinationTierOverrides?: DestinationTierOverride[];
 }
 
@@ -479,79 +479,79 @@ model FleetTierProperties {
   /**
    * If true, tier is disabled.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   disabled?: boolean;
 
   /**
    * If true, serverless resources are provisioned in the tier.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   serverless?: boolean;
 
   /**
    * If true, databases are pooled.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   pooled?: boolean;
 
   /**
    * Service tier of provisioned resources. Supported values: GeneralPurpose, Hyperscale.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceTier?: string;
 
   /**
    * Family of provisioned resources, for example Gen5.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   family?: string;
 
   /**
    * Capacity of provisioned resources in the tier, in units matching the specified service tier, for example vCore for GeneralPurpose.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   capacity?: int32;
 
   /**
    * Maximum number of databases per pool.
    */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   poolNumOfDatabasesMax?: int32;
 
   /**
    * Number of high availability replicas for databases in this tier.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   highAvailabilityReplicaCount?: int32;
 
   /**
    * Enable zone redundancy for all databases in this tier.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   zoneRedundancy?: ZoneRedundancy;
 
   /**
    * Minimum allocated capacity per database, in units matching the specified service tier.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   databaseCapacityMin?: float64;
 
   /**
    * Maximum allocated capacity per database, in units matching the specified service tier.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   databaseCapacityMax?: float64;
 
   /**
    * Maximum database size in Gb.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   databaseSizeGbMax?: int32;
 
   /**
    * Provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AzureProvisioningState;
 }
 
@@ -562,6 +562,6 @@ model FleetDatabaseFilterParameters {
   /**
    * Filter on database tier name.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   tierName?: string;
 }
