@@ -64,19 +64,19 @@ model AnalyzeConversationAuthoringProjectMetadata {
   /**
    * Represents the project kind.
    */
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   projectKind: ProjectKind;
 
   /**
    * The project settings.
    */
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   settings?: AnalyzeConversationAuthoringProjectSettings;
 
   /**
    * The storage container name in case of conversation summarization.
    */
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @added(Versions.v2023_04_15_preview)
   storageInputContainerName?: string;
 
@@ -84,26 +84,26 @@ model AnalyzeConversationAuthoringProjectMetadata {
    * The new project name.
    */
   @key("projectName")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @maxLength(100)
   projectName: string;
 
   /**
    * Whether the project would be used for multiple languages or not.
    */
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   multilingual?: boolean;
 
   /**
    * The project description.
    */
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   description?: string;
 
   /**
    * The project language. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   language: string;
 }
 
@@ -355,7 +355,7 @@ model AnalyzeConversationAuthoringJobState {
    * The job ID.
    */
   @key("jobId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   jobId: string;
 
   /**
@@ -419,7 +419,7 @@ model AnalyzeConversationAuthoringProjectDeployment {
    * Represents deployment name.
    */
   @key("deploymentName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deploymentName: string;
 
   /**
@@ -600,7 +600,7 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
    * The trained model label.
    */
   @key("trainedModelLabel")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   label: string;
 
   /**
@@ -737,7 +737,7 @@ model AnalyzeConversationAuthoringUtteranceEvaluationResult {
    * Represents the utterance text.
    */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   text: string;
 
   /**
@@ -1064,7 +1064,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResource {
    * The resource ID.
    */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @clientName("resourceId", "csharp")
   azureResourceId: string;
 
@@ -1263,7 +1263,7 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
    * Represents the project name.
    */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   projectName: string;
 
   /**
@@ -1321,7 +1321,7 @@ model AnalyzeConversationAuthoringSupportedLanguage {
    * The language name.
    */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   languageName: string;
 
   /**
@@ -1356,7 +1356,7 @@ model AnalyzeConversationAuthoringPrebuiltEntity {
    * The prebuilt entity category.
    */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   category: string;
 
   /**
@@ -1396,7 +1396,7 @@ model AnalyzeConversationAuthoringTrainingConfigVersion {
    * Represents the version of the config.
    */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   trainingConfigVersion: string;
 
   /**
@@ -1851,7 +1851,7 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
    * The exported model name.
    */
   @key("exportedModelName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   exportedModelName: string;
 
   /**

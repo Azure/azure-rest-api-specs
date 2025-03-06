@@ -625,7 +625,7 @@ model JobState {
 
   /** job ID */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   jobId: uuid;
 
   /** last updated date and time */
