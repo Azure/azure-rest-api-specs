@@ -286,3 +286,27 @@ op getJobTaskCountsCustomization is Azure.Batch.ReadOperationNew<
   getJobTaskCountsCustomization,
   "java"
 );
+
+// Create Job Schedule Operation
+@doc("Optional parameters for Create Job Schedule operation.")
+model CreateBatchJobScheduleOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@doc("Custom override for Create Job Schedule operation.")
+@route("/jobschedules")
+op createJobScheduleCustomization is Azure.Batch.CreateOperationNew<
+  {
+    ...Azure.Batch.CreateJobScheduleParameters;
+
+    @doc("Optional parameters for Create Job Schedule operation.")
+    options?: CreateBatchJobScheduleOptions;
+  },
+  void
+>;
+
+@@override(Azure.Batch.JobSchedules.createJobSchedule,
+  createJobScheduleCustomization,
+  "java"
+);
