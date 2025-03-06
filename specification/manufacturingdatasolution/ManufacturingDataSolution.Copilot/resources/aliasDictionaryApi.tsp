@@ -33,7 +33,7 @@ alias jobLocationResponseHeaders = ResponseHeadersTrait<
 
 interface Aliases {
   @doc("Get an alias by Id")
-  getAlias is Operations.ResourceRead<Alias>;
+  get is Operations.ResourceRead<Alias>;
 
   @doc("Create an alias")
   @pollingOperation(
