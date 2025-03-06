@@ -37,7 +37,7 @@ model ImpactCategoryProperties is ResourceProperties {
   parentCategoryId?: string;
 
   @doc("Description of the category")
-  description?: string;
+  descriptions?: string;
 
   @doc("The workloadImpact properties which are required when reporting with the impact category")
   @identifiers(#[])
