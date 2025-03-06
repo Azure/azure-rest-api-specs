@@ -166,10 +166,6 @@ interface BatchClient {
   "terminateJobScheduleInternal",
   "java"
 );
-@@clientName(BatchClient.createJobSchedule,
-  "createJobScheduleInternal",
-  "java"
-);
 @@clientName(BatchClient.listJobSchedules, "listJobSchedulesInternal", "java");
 
 @@clientName(BatchClient.createTask, "createTaskInternal", "java");
