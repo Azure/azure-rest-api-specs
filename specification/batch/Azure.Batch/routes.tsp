@@ -418,6 +418,28 @@ interface Pools {
   >;
 }
 
+// Job Parameter Aliases
+alias ListJobsParameters = {
+  @doc("""
+        An OData $filter clause. For more information on constructing this filter, see
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
+        """)
+      @query
+      @clientName("filter", "!autorest")
+      $filter?: string;
+
+      @doc("An OData $select clause.")
+      @query
+      @clientName("select", "!autorest")
+      $select?: string[];
+
+      @doc("An OData $expand clause.")
+      @query
+      @clientName("expand", "!autorest")
+      $expand?: string[];
+};
+
+// Job Interface
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 @tag("Jobs")
@@ -615,26 +637,10 @@ interface Jobs {
   @summary("Lists all of the Jobs in the specified Account.")
   @doc("Lists all of the Jobs in the specified Account.")
   @route("/jobs")
-  @clientName("listJobsInternal", "java")
-  listJobs is ListOperation<
+  listJobs is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters,
+      ...ListJobsParameters;
     },
     BatchJobListResult
   >;
