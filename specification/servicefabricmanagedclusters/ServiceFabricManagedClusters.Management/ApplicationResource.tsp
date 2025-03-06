@@ -51,7 +51,7 @@ interface Applications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ApplicationResource,
-    Response = ArmResourceUpdatedResponse<ApplicationResource> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
+    Response = ArmResourceUpdatedResponse<ApplicationResource> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
       @bodyRoot
       _: ApplicationResource;
     })

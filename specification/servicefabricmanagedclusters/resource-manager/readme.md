@@ -323,7 +323,7 @@ suppressions:
     reason: Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215) but its going to take some time because we generate the swagger from an internal repo that currently can't reference the common types.
 
   - code: LatestVersionOfCommonTypesMustBeUsed
-    reason: Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215), but our current definition for armid is not compatible with the validation for the latest common type, we were recommended to use v3 for now
+    reason: Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215), but our current definition for arm id is not compatible with the validation for the latest common type, we were recommended to use v3 for now
 
   - code: XmsPageableForListCalls
     reason: Backwards compatibility with previously approved spec for service.

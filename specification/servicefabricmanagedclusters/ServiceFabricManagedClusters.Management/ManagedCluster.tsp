@@ -51,7 +51,7 @@ interface ManagedClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ManagedCluster,
-    Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
+    Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
       @bodyRoot
       _: ManagedCluster;
     })
@@ -137,7 +137,7 @@ interface ManagedAzResiliencyStatus {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @action("getazresiliencystatus")
   @operationId("managedAzResiliencyStatus_Get")
-  managedAzResiliencyStatusGet is ArmResourceActionSync<
+  get is ArmResourceActionSync<
     ManagedCluster,
     void,
     ArmResponse<ManagedAzResiliencyStatusContent>
@@ -163,7 +163,7 @@ interface ManagedMaintenanceWindowStatus {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @action("getMaintenanceWindowStatus")
   @operationId("managedMaintenanceWindowStatus_Get")
-  managedMaintenanceWindowStatusGet is ArmResourceActionSync<
+  get is ArmResourceActionSync<
     ManagedCluster,
     void,
     ArmResponse<ManagedMaintenanceWindowStatusContent>
