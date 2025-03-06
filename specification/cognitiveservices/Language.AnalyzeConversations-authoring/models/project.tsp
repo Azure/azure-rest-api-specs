@@ -1389,6 +1389,7 @@ model AnalyzeConversationAuthoringTrainingConfigVersions {
 /**
  * Represents a training config version.
  */
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "TODO: This client name renaming explicitly makes us run into the csharp issue. Please fix."
 @clientName("TrainingConfigVersion", "csharp")
 @resource("authoring/analyze-conversations/projects/global/training-config-versions")
 model AnalyzeConversationAuthoringTrainingConfigVersion {
