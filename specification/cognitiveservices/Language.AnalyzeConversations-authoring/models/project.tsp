@@ -1239,7 +1239,10 @@ model AnalyzeConversationAuthoringProjectDeletionJobState {
  * Represents the metadata for deployments assigned to a resource.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("ConversationAuthoringAssignedResourceDeploymentsMetadata", "csharp")
+@clientName(
+  "ConversationAuthoringAssignedResourceDeploymentsMetadata",
+  "csharp"
+)
 model AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata {
   /**
    * The list of retrieved assigned project deployments.
