@@ -120,10 +120,6 @@ interface BatchClient {
 @@clientName(BatchClient.poolExists, "poolExistsInternal", "java");
 @@clientName(BatchClient.getPool, "getPoolInternal", "java");
 @@clientName(BatchClient.updatePool, "updatePoolInternal", "java");
-@@clientName(BatchClient.disablePoolAutoScale,
-  "disablePoolAutoScaleInternal",
-  "java"
-);
 @@clientName(BatchClient.enablePoolAutoScale,
   "enablePoolAutoScaleInternal",
   "java"
