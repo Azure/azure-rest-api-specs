@@ -1523,11 +1523,6 @@
           },
           "x-ms-identifiers": []
         },
-        "id": {
-          "type": "string",
-          "description": "Id of the Catalog.",
-          "readOnly": true
-        },
         "eTag": {
           "type": "string",
           "description": "The ETag value to implement optimistic concurrency.",
@@ -1580,6 +1575,11 @@
           "type": "object",
           "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "additionalProperties": {}
+        },
+        "id": {
+          "type": "string",
+          "description": "Id of the Catalog.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1646,6 +1646,67 @@
       "type": "object",
       "description": "Collection.",
       "properties": {
+        "links": {
+          "type": "array",
+          "description": "Links for referencing other objects.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-identifiers": []
+        },
+        "eTag": {
+          "type": "string",
+          "description": "The ETag value to implement optimistic concurrency.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the resource.",
+          "maxLength": 100
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "readOnly": true
+        },
+        "modifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "readOnly": true
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the resource.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "name": {
+          "type": "string",
+          "description": "Name to identify resource.",
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "Textual description of the resource.",
+          "maxLength": 500
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Created by user/tenant id.",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "Modified by user/tenant id.",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "additionalProperties": {}
+        },
         "schemaId": {
           "type": "string",
           "description": "Schema Foreign Key.",
@@ -1656,6 +1717,21 @@
           "description": "Id of the Collection.",
           "readOnly": true
         },
+        "id": {
+          "type": "string",
+          "description": "Unique resource ID.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "schemaId",
+        "collectionId"
+      ]
+    },
+    "CollectionCreateOrUpdate": {
+      "type": "object",
+      "description": "Collection.",
+      "properties": {
         "links": {
           "type": "array",
           "description": "Links for referencing other objects.",
@@ -1664,10 +1740,50 @@
           },
           "x-ms-identifiers": []
         },
-        "id": {
+        "status": {
           "type": "string",
-          "description": "Unique resource ID.",
-          "readOnly": true
+          "description": "Status of the resource.",
+          "maxLength": 100
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the resource.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "name": {
+          "type": "string",
+          "description": "Name to identify resource.",
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "Textual description of the resource.",
+          "maxLength": 500
+        },
+        "properties": {
+          "type": "object",
+          "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "additionalProperties": {}
+        },
+        "schemaId": {
+          "type": "string",
+          "description": "Schema Foreign Key.",
+          "minLength": 1
+        }
+      }
+    },
+    "CommonProps": {
+      "type": "object",
+      "description": "Common properties for resources.",
+      "properties": {
+        "links": {
+          "type": "array",
+          "description": "Links for referencing other objects.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-identifiers": []
         },
         "eTag": {
           "type": "string",
@@ -1722,68 +1838,12 @@
           "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "additionalProperties": {}
         }
-      },
-      "required": [
-        "schemaId",
-        "collectionId"
-      ]
-    },
-    "CollectionCreateOrUpdate": {
-      "type": "object",
-      "description": "Collection.",
-      "properties": {
-        "schemaId": {
-          "type": "string",
-          "description": "Schema Foreign Key.",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "description": "Links for referencing other objects.",
-          "items": {
-            "$ref": "#/definitions/Link"
-          },
-          "x-ms-identifiers": []
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the resource.",
-          "maxLength": 100
-        },
-        "source": {
-          "type": "string",
-          "description": "Source of the resource.",
-          "minLength": 2,
-          "maxLength": 100
-        },
-        "name": {
-          "type": "string",
-          "description": "Name to identify resource.",
-          "maxLength": 100
-        },
-        "description": {
-          "type": "string",
-          "description": "Textual description of the resource.",
-          "maxLength": 500
-        },
-        "properties": {
-          "type": "object",
-          "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
-          "additionalProperties": {}
-        }
       }
     },
     "CrossCollectionItemSearchQuery": {
       "type": "object",
       "description": "CrossCatalogItemSearchQuery.",
       "properties": {
-        "collectionIds": {
-          "type": "array",
-          "description": "Owner Item Ids of the resource.",
-          "items": {
-            "type": "string"
-          }
-        },
         "ownerItemIds": {
           "type": "array",
           "description": "Owner Item Ids of the resource.",
@@ -1840,6 +1900,13 @@
         "skipToken": {
           "type": "string",
           "description": "Skip token for getting next set of results."
+        },
+        "collectionIds": {
+          "type": "array",
+          "description": "Owner Item Ids of the resource.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2069,43 +2136,11 @@
       "properties": {
         "links": {
           "type": "array",
-          "description": "Links.",
+          "description": "Links for referencing other objects.",
           "items": {
             "$ref": "#/definitions/Link"
           },
           "x-ms-identifiers": []
-        },
-        "data": {
-          "type": "object",
-          "description": "Schema for records under the dataset.",
-          "additionalProperties": {}
-        },
-        "ownerItemId": {
-          "type": "string",
-          "description": "Owner Item Ids of the resource"
-        },
-        "catalogId": {
-          "type": "string",
-          "description": "Id of the Catalog resource.",
-          "readOnly": true
-        },
-        "collectionId": {
-          "type": "string",
-          "description": "Id of the Collection resource.",
-          "readOnly": true
-        },
-        "assets": {
-          "type": "array",
-          "description": "Assets.",
-          "items": {
-            "$ref": "#/definitions/Asset"
-          },
-          "x-ms-identifiers": []
-        },
-        "id": {
-          "type": "string",
-          "description": "Id of the Item.",
-          "readOnly": true
         },
         "eTag": {
           "type": "string",
@@ -2159,6 +2194,38 @@
           "type": "object",
           "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "additionalProperties": {}
+        },
+        "data": {
+          "type": "object",
+          "description": "Schema for records under the dataset.",
+          "additionalProperties": {}
+        },
+        "ownerItemId": {
+          "type": "string",
+          "description": "Owner Item Ids of the resource"
+        },
+        "catalogId": {
+          "type": "string",
+          "description": "Id of the Catalog resource.",
+          "readOnly": true
+        },
+        "collectionId": {
+          "type": "string",
+          "description": "Id of the Collection resource.",
+          "readOnly": true
+        },
+        "assets": {
+          "type": "array",
+          "description": "Assets.",
+          "items": {
+            "$ref": "#/definitions/Asset"
+          },
+          "x-ms-identifiers": []
+        },
+        "id": {
+          "type": "string",
+          "description": "Id of the Item.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2172,26 +2239,9 @@
       "properties": {
         "links": {
           "type": "array",
-          "description": "Links.",
+          "description": "Links for referencing other objects.",
           "items": {
             "$ref": "#/definitions/Link"
-          },
-          "x-ms-identifiers": []
-        },
-        "data": {
-          "type": "object",
-          "description": "Schema for records under the dataset.",
-          "additionalProperties": {}
-        },
-        "ownerItemId": {
-          "type": "string",
-          "description": "Owner Item Ids of the resource"
-        },
-        "assets": {
-          "type": "array",
-          "description": "Assets.",
-          "items": {
-            "$ref": "#/definitions/Asset"
           },
           "x-ms-identifiers": []
         },
@@ -2220,6 +2270,23 @@
           "type": "object",
           "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "additionalProperties": {}
+        },
+        "data": {
+          "type": "object",
+          "description": "Schema for records under the dataset.",
+          "additionalProperties": {}
+        },
+        "ownerItemId": {
+          "type": "string",
+          "description": "Owner Item Ids of the resource"
+        },
+        "assets": {
+          "type": "array",
+          "description": "Assets.",
+          "items": {
+            "$ref": "#/definitions/Asset"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2253,33 +2320,11 @@
       "properties": {
         "links": {
           "type": "array",
-          "description": "Links.",
+          "description": "Links for referencing other objects.",
           "items": {
             "$ref": "#/definitions/Link"
           },
           "x-ms-identifiers": []
-        },
-        "data": {
-          "type": "object",
-          "description": "Schema for records under the dataset.",
-          "additionalProperties": {}
-        },
-        "ownerItemId": {
-          "type": "string",
-          "description": "OwnerItemId."
-        },
-        "assets": {
-          "type": "array",
-          "description": "CatalogId.CollectionId.Assets.",
-          "items": {
-            "$ref": "#/definitions/Asset"
-          },
-          "x-ms-identifiers": []
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique resource ID.",
-          "readOnly": true
         },
         "eTag": {
           "type": "string",
@@ -2333,6 +2378,28 @@
           "type": "object",
           "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "additionalProperties": {}
+        },
+        "data": {
+          "type": "object",
+          "description": "Schema for records under the dataset.",
+          "additionalProperties": {}
+        },
+        "ownerItemId": {
+          "type": "string",
+          "description": "OwnerItemId."
+        },
+        "assets": {
+          "type": "array",
+          "description": "Assets.",
+          "items": {
+            "$ref": "#/definitions/Asset"
+          },
+          "x-ms-identifiers": []
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique resource ID.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2408,11 +2475,64 @@
       "properties": {
         "links": {
           "type": "array",
-          "description": "Links.",
+          "description": "Links for referencing other objects.",
           "items": {
             "$ref": "#/definitions/Link"
           },
           "x-ms-identifiers": []
+        },
+        "eTag": {
+          "type": "string",
+          "description": "The ETag value to implement optimistic concurrency.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the resource.",
+          "maxLength": 100
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "readOnly": true
+        },
+        "modifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "readOnly": true
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the resource.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "name": {
+          "type": "string",
+          "description": "Name to identify resource.",
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "Textual description of the resource.",
+          "maxLength": 500
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Created by user/tenant id.",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "Modified by user/tenant id.",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "additionalProperties": {}
         },
         "data": {
           "type": "object",
@@ -2445,6 +2565,86 @@
           "type": "string",
           "description": "Unique resource ID.",
           "readOnly": true
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "ItemsCommonProps": {
+      "type": "object",
+      "description": "Common properties for items api's.",
+      "properties": {
+        "ownerItemIds": {
+          "type": "array",
+          "description": "Owner Item Ids of the resource.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataFilters": {
+          "type": "array",
+          "description": "Filters on key-value pairs within the Data object.\ne.g. \"{testKey} eq {testValue}\".",
+          "items": {
+            "type": "string"
+          }
+        },
+        "intersectsWithGeometry": {
+          "$ref": "#/definitions/GeoJsonObject",
+          "description": "GeoJSON (For more details: https://geojson.org/). Note: Coordinates are\nexpected in [Longitude, Latitude] format."
+        },
+        "ids": {
+          "type": "array",
+          "description": "Ids of the resource.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "minCreatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Minimum creation date of resource (inclusive)."
+        },
+        "maxCreatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Maximum creation date of resource (inclusive)."
+        },
+        "minLastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Minimum last modified date of resource (inclusive)."
+        },
+        "maxLastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Maximum last modified date of resource (inclusive)."
+        },
+        "maxPageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+          "default": 50,
+          "minimum": 10,
+          "maximum": 1000
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "Skip token for getting next set of results."
+        }
+      }
+    },
+    "ItemsInCatalog": {
+      "type": "object",
+      "description": "Item.",
+      "properties": {
+        "links": {
+          "type": "array",
+          "description": "Links for referencing other objects.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-identifiers": []
         },
         "eTag": {
           "type": "string",
@@ -2498,23 +2698,6 @@
           "type": "object",
           "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "additionalProperties": {}
-        }
-      },
-      "required": [
-        "data"
-      ]
-    },
-    "ItemsinCatalog": {
-      "type": "object",
-      "description": "Item.",
-      "properties": {
-        "links": {
-          "type": "array",
-          "description": "Links.",
-          "items": {
-            "$ref": "#/definitions/Link"
-          },
-          "x-ms-identifiers": []
         },
         "data": {
           "type": "object",
@@ -2547,59 +2730,6 @@
           "type": "string",
           "description": "Id of the Item.",
           "readOnly": true
-        },
-        "eTag": {
-          "type": "string",
-          "description": "The ETag value to implement optimistic concurrency.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the resource.",
-          "maxLength": 100
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "readOnly": true
-        },
-        "modifiedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "readOnly": true
-        },
-        "source": {
-          "type": "string",
-          "description": "Source of the resource.",
-          "minLength": 2,
-          "maxLength": 100
-        },
-        "name": {
-          "type": "string",
-          "description": "Name to identify resource.",
-          "maxLength": 100
-        },
-        "description": {
-          "type": "string",
-          "description": "Textual description of the resource.",
-          "maxLength": 500
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "Created by user/tenant id.",
-          "readOnly": true
-        },
-        "modifiedBy": {
-          "type": "string",
-          "description": "Modified by user/tenant id.",
-          "readOnly": true
-        },
-        "properties": {
-          "type": "object",
-          "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
-          "additionalProperties": {}
         }
       },
       "required": [
@@ -3203,24 +3333,13 @@
       "type": "object",
       "description": "SchemaModel.",
       "properties": {
-        "dependentCollections": {
+        "links": {
           "type": "array",
-          "description": "Dependent Collections.",
+          "description": "Links for referencing other objects.",
           "items": {
-            "$ref": "#/definitions/CatalogCollection"
+            "$ref": "#/definitions/Link"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
-        },
-        "schemaModel": {
-          "type": "object",
-          "description": "Schema.",
-          "additionalProperties": {}
-        },
-        "id": {
-          "type": "string",
-          "description": "Id of the Schema.",
-          "readOnly": true
         },
         "eTag": {
           "type": "string",
@@ -3274,6 +3393,25 @@
           "type": "object",
           "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "additionalProperties": {}
+        },
+        "dependentCollections": {
+          "type": "array",
+          "description": "Dependent Collections.",
+          "items": {
+            "$ref": "#/definitions/CatalogCollection"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "schemaModel": {
+          "type": "object",
+          "description": "Schema.",
+          "additionalProperties": {}
+        },
+        "id": {
+          "type": "string",
+          "description": "Id of the Schema.",
+          "readOnly": true
         }
       },
       "required": [
@@ -3285,10 +3423,13 @@
       "type": "object",
       "description": "SchemaModel.",
       "properties": {
-        "schemaModel": {
-          "type": "object",
-          "description": "Schema.",
-          "additionalProperties": {}
+        "links": {
+          "type": "array",
+          "description": "Links for referencing other objects.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "x-ms-identifiers": []
         },
         "status": {
           "type": "string",
@@ -3314,6 +3455,11 @@
         "properties": {
           "type": "object",
           "description": "A collection of key value pairs that belongs to the resource.\nEach pair must not have a key greater than 50 characters\nand must not have a value greater than 150 characters.\nNote: A maximum of 25 key value pairs can be provided for a resource and only\nstring,\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "additionalProperties": {}
+        },
+        "schemaModel": {
+          "type": "object",
+          "description": "Schema.",
           "additionalProperties": {}
         }
       }
@@ -3371,15 +3517,10 @@
         "partnerRequestHeaders"
       ]
     },
-    "SolutionData": {
+    "SolutionCommonProps": {
       "type": "object",
-      "description": "SolutionData.",
+      "description": "Common properties for solutions api's.",
       "properties": {
-        "inputData": {
-          "type": "object",
-          "description": "Input Data.",
-          "additionalProperties": {}
-        },
         "solutionId": {
           "type": "string",
           "description": "SolutionId.",
@@ -3402,11 +3543,48 @@
         }
       },
       "required": [
-        "inputData",
         "solutionId",
         "requestPath",
         "partnerRequestBody",
         "partnerRequestHeaders"
+      ]
+    },
+    "SolutionData": {
+      "type": "object",
+      "description": "SolutionData.",
+      "properties": {
+        "solutionId": {
+          "type": "string",
+          "description": "SolutionId.",
+          "minLength": 1
+        },
+        "requestPath": {
+          "type": "string",
+          "description": "RequestPath.",
+          "minLength": 1
+        },
+        "partnerRequestBody": {
+          "type": "object",
+          "description": "Properties.",
+          "additionalProperties": {}
+        },
+        "partnerRequestHeaders": {
+          "type": "object",
+          "description": "Properties.",
+          "additionalProperties": {}
+        },
+        "inputData": {
+          "type": "object",
+          "description": "Input Data.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "solutionId",
+        "requestPath",
+        "partnerRequestBody",
+        "partnerRequestHeaders",
+        "inputData"
       ]
     },
     "SolutionResource": {
@@ -3542,6 +3720,40 @@
           "description": "The title of the link. Optional."
         }
       }
+    },
+    "WeatherCommonProps": {
+      "type": "object",
+      "description": "Common parameters for weather-related api's.",
+      "properties": {
+        "providerName": {
+          "type": "string",
+          "description": "Weather provider name.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "providerApiName": {
+          "type": "string",
+          "description": "Provider's api name to which request is to be made.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "language": {
+          "type": "string",
+          "description": "Language (IETF BCP 47 language tag) in which search results should be returned\nby the data provider. Examples: 'en-US', 'es', 'es-MX', 'fr-FR'.",
+          "default": "en-US",
+          "maxLength": 100
+        },
+        "units": {
+          "type": "string",
+          "description": "Units for which request to data provider is to be sent. Supported values are\n'e' for English units, 'm' for Metric units, 'h' for Hybrid units (UK) and 's'\nfor Metric SI units.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "providerName",
+        "providerApiName",
+        "units"
+      ]
     },
     "WeatherData": {
       "type": "object",
@@ -3756,11 +3968,6 @@
       "type": "object",
       "description": "Schema of Weather Metadata.",
       "properties": {
-        "weatherDataType": {
-          "type": "string",
-          "description": "Type of weather data (forecast/historical).",
-          "minLength": 1
-        },
         "providerName": {
           "type": "string",
           "description": "Weather provider name.",
@@ -3783,19 +3990,47 @@
           "type": "string",
           "description": "Units for which request to data provider is to be sent. Supported values are\n'e' for English units, 'm' for Metric units, 'h' for Hybrid units (UK) and 's'\nfor Metric SI units.",
           "minLength": 1
+        },
+        "weatherDataType": {
+          "type": "string",
+          "description": "Type of weather data (forecast/historical).",
+          "minLength": 1
         }
       },
       "required": [
-        "weatherDataType",
         "providerName",
         "providerApiName",
-        "units"
+        "units",
+        "weatherDataType"
       ]
     },
     "WeatherRequest": {
       "type": "object",
       "description": "WeatherRequest.",
       "properties": {
+        "providerName": {
+          "type": "string",
+          "description": "Weather provider name.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "providerApiName": {
+          "type": "string",
+          "description": "Provider's api name to which request is to be made.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "language": {
+          "type": "string",
+          "description": "Language (IETF BCP 47 language tag) in which search results should be returned\nby the data provider. Examples: 'en-US', 'es', 'es-MX', 'fr-FR'.",
+          "default": "en-US",
+          "maxLength": 100
+        },
+        "units": {
+          "type": "string",
+          "description": "Units for which request to data provider is to be sent. Supported values are\n'e' for English units, 'm' for Metric units, 'h' for Hybrid units (UK) and 's'\nfor Metric SI units.",
+          "minLength": 1
+        },
         "credentials": {
           "$ref": "#/definitions/ApiKeyAuthCredentials",
           "description": "Api Key Auth Credentials class for API Key based Auth."
@@ -3807,29 +4042,6 @@
             "$ref": "#/definitions/WeatherLocation"
           },
           "x-ms-identifiers": []
-        },
-        "providerName": {
-          "type": "string",
-          "description": "Weather provider name.",
-          "minLength": 2,
-          "maxLength": 100
-        },
-        "providerApiName": {
-          "type": "string",
-          "description": "Provider's api name to which request is to be made.",
-          "minLength": 2,
-          "maxLength": 100
-        },
-        "language": {
-          "type": "string",
-          "description": "Language (IETF BCP 47 language tag) in which search results should be returned\nby the data provider. Examples: 'en-US', 'es', 'es-MX', 'fr-FR'.",
-          "default": "en-US",
-          "maxLength": 100
-        },
-        "units": {
-          "type": "string",
-          "description": "Units for which request to data provider is to be sent. Supported values are\n'e' for English units, 'm' for Metric units, 'h' for Hybrid units (UK) and 's'\nfor Metric SI units.",
-          "minLength": 1
         }
       },
       "required": [

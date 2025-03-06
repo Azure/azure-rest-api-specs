@@ -219,21 +219,13 @@ model ListOperationQueryParameters {
   skipToken?: string;
 }
 /**
- * Catalog.
+ * Common properties for resources.
  */
-@resource("catalogs")
-model Catalog {
+model CommonProps {
   /**
    * Links for referencing other objects.
    */
   links?: Link[];
-
-  /**
-   * Id of the Catalog.
-   */
-  @visibility(Lifecycle.Read)
-  @key("catalogId")
-  id: string;
 
   /**
    * The ETag value to implement optimistic concurrency.
@@ -302,6 +294,21 @@ model Catalog {
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   properties?: Record<unknown>;
+}
+
+/**
+ * Catalog.
+ */
+@resource("catalogs")
+model Catalog {
+  ...CommonProps;
+
+  /**
+   * Id of the Catalog.
+   */
+  @visibility(Lifecycle.Read)
+  @key("catalogId")
+  id: string;
 }
 
 /**
@@ -348,6 +355,8 @@ model ErrorResponse {
 @resource("collections")
 @parentResource(Catalog)
 model Collection {
+  ...CommonProps;
+
   /**
    * Schema Foreign Key.
    */
@@ -362,83 +371,10 @@ model Collection {
   collectionId: string;
 
   /**
-   * Links for referencing other objects.
-   */
-  links?: Link[];
-
-  /**
    * Unique resource ID.
    */
   @visibility(Lifecycle.Read)
   id?: string;
-
-  /**
-   * The ETag value to implement optimistic concurrency.
-   */
-  @visibility(Lifecycle.Read)
-  eTag?: string;
-
-  /**
-   * Status of the resource.
-   */
-  @maxLength(100)
-  status?: string;
-
-  /**
-   * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdDateTime?: utcDateTime;
-
-  /**
-   * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  modifiedDateTime?: utcDateTime;
-
-  /**
-   * Source of the resource.
-   */
-  @maxLength(100)
-  @minLength(2)
-  source?: string;
-
-  /**
-   * Name to identify resource.
-   */
-  @maxLength(100)
-  name?: string;
-
-  /**
-   * Textual description of the resource.
-   */
-  @maxLength(500)
-  description?: string;
-
-  /**
-   * Created by user/tenant id.
-   */
-  @visibility(Lifecycle.Read)
-  createdBy?: string;
-
-  /**
-   * Modified by user/tenant id.
-   */
-  @visibility(Lifecycle.Read)
-  modifiedBy?: string;
-
-  /**
-   * A collection of key value pairs that belongs to the resource.
-   * Each pair must not have a key greater than 50 characters
-   * and must not have a value greater than 150 characters.
-   * Note: A maximum of 25 key value pairs can be provided for a resource and only
-   * string,
-   * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
-  properties?: Record<unknown>;
 }
 
 /**
@@ -471,10 +407,7 @@ model File {
 @parentResource(Collection)
 @resource("items")
 model Item {
-  /**
-   * Links.
-   */
-  links?: Link[];
+  ...CommonProps;
 
   /**
    * Schema for records under the dataset.
@@ -510,88 +443,17 @@ model Item {
   @key("itemId")
   @visibility(Lifecycle.Read)
   id: string;
-
-  /**
-   * The ETag value to implement optimistic concurrency.
-   */
-  @visibility(Lifecycle.Read)
-  eTag?: string;
-
-  /**
-   * Status of the resource.
-   */
-  @maxLength(100)
-  status?: string;
-
-  /**
-   * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdDateTime?: utcDateTime;
-
-  /**
-   * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  modifiedDateTime?: utcDateTime;
-
-  /**
-   * Source of the resource.
-   */
-  @maxLength(100)
-  @minLength(2)
-  source?: string;
-
-  /**
-   * Name to identify resource.
-   */
-  @maxLength(100)
-  name?: string;
-
-  /**
-   * Textual description of the resource.
-   */
-  @maxLength(500)
-  description?: string;
-
-  /**
-   * Created by user/tenant id.
-   */
-  @visibility(Lifecycle.Read)
-  createdBy?: string;
-
-  /**
-   * Modified by user/tenant id.
-   */
-  @visibility(Lifecycle.Read)
-  modifiedBy?: string;
-
-  /**
-   * A collection of key value pairs that belongs to the resource.
-   * Each pair must not have a key greater than 50 characters
-   * and must not have a value greater than 150 characters.
-   * Note: A maximum of 25 key value pairs can be provided for a resource and only
-   * string,
-   * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
-  properties?: Record<unknown>;
 }
 
 @parentResource(Catalog)
 @resource("items")
-model ItemsinCatalog is Item;
+model ItemsInCatalog is Item;
 
 /**
  * ItemParameters model for Items api.
  */
 model ItemParameters {
-  /**
-   * Links.
-   */
-  links?: Link[];
+  ...CommonProps;
 
   /**
    * Schema for records under the dataset.
@@ -605,16 +467,6 @@ model ItemParameters {
   ownerItemId?: string;
 
   /**
-   * CatalogId.
-   */
-  // @visibility(Lifecycle.Read)
-  // catalogId?: string;
-  /**
-   * CollectionId.
-   */
-  // @visibility(Lifecycle.Read)
-  // collectionId?: string;
-  /**
    * Assets.
    */
   assets?: Asset[];
@@ -624,84 +476,13 @@ model ItemParameters {
    */
   @visibility(Lifecycle.Read)
   id?: string;
-
-  /**
-   * The ETag value to implement optimistic concurrency.
-   */
-  @visibility(Lifecycle.Read)
-  eTag?: string;
-
-  /**
-   * Status of the resource.
-   */
-  @maxLength(100)
-  status?: string;
-
-  /**
-   * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdDateTime?: utcDateTime;
-
-  /**
-   * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  modifiedDateTime?: utcDateTime;
-
-  /**
-   * Source of the resource.
-   */
-  @maxLength(100)
-  @minLength(2)
-  source?: string;
-
-  /**
-   * Name to identify resource.
-   */
-  @maxLength(100)
-  name?: string;
-
-  /**
-   * Textual description of the resource.
-   */
-  @maxLength(500)
-  description?: string;
-
-  /**
-   * Created by user/tenant id.
-   */
-  @visibility(Lifecycle.Read)
-  createdBy?: string;
-
-  /**
-   * Modified by user/tenant id.
-   */
-  @visibility(Lifecycle.Read)
-  modifiedBy?: string;
-
-  /**
-   * A collection of key value pairs that belongs to the resource.
-   * Each pair must not have a key greater than 50 characters
-   * and must not have a value greater than 150 characters.
-   * Note: A maximum of 25 key value pairs can be provided for a resource and only
-   * string,
-   * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
-  properties?: Record<unknown>;
 }
 
 /**
  * ItemResponse model for Items api.
  */
 model ItemResponse {
-  /**
-   * Links.
-   */
-  links?: Link[];
+  ...CommonProps;
 
   /**
    * Schema for records under the dataset.
@@ -736,74 +517,6 @@ model ItemResponse {
    */
   @visibility(Lifecycle.Read)
   id?: string;
-
-  /**
-   * The ETag value to implement optimistic concurrency.
-   */
-  @visibility(Lifecycle.Read)
-  eTag?: string;
-
-  /**
-   * Status of the resource.
-   */
-  @maxLength(100)
-  status?: string;
-
-  /**
-   * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdDateTime?: utcDateTime;
-
-  /**
-   * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  modifiedDateTime?: utcDateTime;
-
-  /**
-   * Source of the resource.
-   */
-  @maxLength(100)
-  @minLength(2)
-  source?: string;
-
-  /**
-   * Name to identify resource.
-   */
-  @maxLength(100)
-  name?: string;
-
-  /**
-   * Textual description of the resource.
-   */
-  @maxLength(500)
-  description?: string;
-
-  /**
-   * Created by user/tenant id.
-   */
-  @visibility(Lifecycle.Read)
-  createdBy?: string;
-
-  /**
-   * Modified by user/tenant id.
-   */
-  @visibility(Lifecycle.Read)
-  modifiedBy?: string;
-
-  /**
-   * A collection of key value pairs that belongs to the resource.
-   * Each pair must not have a key greater than 50 characters
-   * and must not have a value greater than 150 characters.
-   * Note: A maximum of 25 key value pairs can be provided for a resource and only
-   * string,
-   * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
-  properties?: Record<unknown>;
 }
 
 /**
@@ -827,9 +540,9 @@ model Asset {
 }
 
 /**
- * CatalogQuery.
+ * Common properties for items api's.
  */
-model ItemQuery {
+model ItemsCommonProps {
   /**
    * Owner Item Ids of the resource.
    */
@@ -888,6 +601,13 @@ model ItemQuery {
    * Skip token for getting next set of results.
    */
   skipToken?: string;
+}
+
+/**
+ * CatalogQuery.
+ */
+model ItemQuery {
+  ...ItemsCommonProps;
 }
 
 /**
@@ -927,69 +647,12 @@ model ItemListResponse {
  * CrossCatalogItemSearchQuery.
  */
 model CrossCollectionItemSearchQuery {
+  ...ItemsCommonProps;
+
   /**
    * Owner Item Ids of the resource.
    */
   collectionIds?: string[];
-
-  /**
-   * Owner Item Ids of the resource.
-   */
-  ownerItemIds?: string[];
-
-  /**
-   * Filters on key-value pairs within the Data object.
-   * e.g. "{testKey} eq {testValue}".
-   */
-  dataFilters?: string[];
-
-  /**
-   * GeoJSON (For more details: https://geojson.org/). Note: Coordinates are
-   * expected in [Longitude, Latitude] format.
-   */
-  intersectsWithGeometry?: GeoJsonObject;
-
-  /**
-   * Ids of the resource.
-   */
-  ids?: string[];
-
-  /**
-   * Minimum creation date of resource (inclusive).
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  minCreatedDateTime?: utcDateTime;
-
-  /**
-   * Maximum creation date of resource (inclusive).
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  maxCreatedDateTime?: utcDateTime;
-
-  /**
-   * Minimum last modified date of resource (inclusive).
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  minLastModifiedDateTime?: utcDateTime;
-
-  /**
-   * Maximum last modified date of resource (inclusive).
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  maxLastModifiedDateTime?: utcDateTime;
-
-  /**
-   * Maximum number of items needed (inclusive).
-   * Minimum = 10, Maximum = 1000, Default value = 50.
-   */
-  @maxValue(1000)
-  @minValue(10)
-  maxPageSize?: int32 = 50;
-
-  /**
-   * Skip token for getting next set of results.
-   */
-  skipToken?: string;
 }
 
 /**
@@ -1405,6 +1068,8 @@ model StacAsset {
  */
 @resource("schemas")
 model Schema {
+  ...CommonProps;
+
   /**
    * Dependent Collections.
    */
@@ -1423,74 +1088,6 @@ model Schema {
   @key("schemaId")
   @visibility(Lifecycle.Read)
   id: string;
-
-  /**
-   * The ETag value to implement optimistic concurrency.
-   */
-  @visibility(Lifecycle.Read)
-  eTag?: string;
-
-  /**
-   * Status of the resource.
-   */
-  @maxLength(100)
-  status?: string;
-
-  /**
-   * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdDateTime?: utcDateTime;
-
-  /**
-   * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  modifiedDateTime?: utcDateTime;
-
-  /**
-   * Source of the resource.
-   */
-  @maxLength(100)
-  @minLength(2)
-  source?: string;
-
-  /**
-   * Name to identify resource.
-   */
-  @maxLength(100)
-  name?: string;
-
-  /**
-   * Textual description of the resource.
-   */
-  @maxLength(500)
-  description?: string;
-
-  /**
-   * Created by user/tenant id.
-   */
-  @visibility(Lifecycle.Read)
-  createdBy?: string;
-
-  /**
-   * Modified by user/tenant id.
-   */
-  @visibility(Lifecycle.Read)
-  modifiedBy?: string;
-
-  /**
-   * A collection of key value pairs that belongs to the resource.
-   * Each pair must not have a key greater than 50 characters
-   * and must not have a value greater than 150 characters.
-   * Note: A maximum of 25 key value pairs can be provided for a resource and only
-   * string,
-   * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
-  properties?: Record<unknown>;
 }
 
 /**
@@ -1522,10 +1119,11 @@ model SolutionResource {
   @visibility(Lifecycle.Read)
   key: string;
 }
+
 /**
- * Solution.
+ * Common properties for solutions api's.
  */
-model Solution {
+model SolutionCommonProps {
   /**
    * SolutionId.
    */
@@ -1549,6 +1147,13 @@ model Solution {
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   partnerRequestHeaders: Record<unknown>;
+}
+
+/**
+ * Solution.
+ */
+model Solution {
+  ...SolutionCommonProps;
 }
 
 /**
@@ -1650,35 +1255,13 @@ model SamplePartnerRequestBody {
  * SolutionData.
  */
 model SolutionData {
+  ...SolutionCommonProps;
+
   /**
    * Input Data.
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   inputData: Record<unknown>;
-
-  /**
-   * SolutionId.
-   */
-  @minLength(1)
-  solutionId: string;
-
-  /**
-   * RequestPath.
-   */
-  @minLength(1)
-  requestPath: string;
-
-  /**
-   * Properties.
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
-  partnerRequestBody: Record<unknown>;
-
-  /**
-   * Properties.
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
-  partnerRequestHeaders: Record<unknown>;
 }
 
 /**
@@ -1693,20 +1276,11 @@ model WeatherResource {
   @visibility(Lifecycle.Read)
   key: string;
 }
+
 /**
- * WeatherRequest.
+ * Common parameters for weather-related api's.
  */
-model WeatherRequest {
-  /**
-   * Api Key Auth Credentials class for API Key based Auth.
-   */
-  credentials?: ApiKeyAuthCredentials;
-
-  /**
-   * List of locations for which weather data need to be fetched from the provider.
-   */
-  locations?: WeatherLocation[];
-
+model WeatherCommonProps {
   /**
    * Weather provider name.
    */
@@ -1735,6 +1309,23 @@ model WeatherRequest {
    */
   @minLength(1)
   units: string;
+}
+
+/**
+ * WeatherRequest.
+ */
+model WeatherRequest {
+  ...WeatherCommonProps;
+
+  /**
+   * Api Key Auth Credentials class for API Key based Auth.
+   */
+  credentials?: ApiKeyAuthCredentials;
+
+  /**
+   * List of locations for which weather data need to be fetched from the provider.
+   */
+  locations?: WeatherLocation[];
 }
 
 /**
@@ -1800,40 +1391,13 @@ model WeatherResponse {
  * Schema of Weather Metadata.
  */
 model WeatherMetadata {
+  ...WeatherCommonProps;
+
   /**
    * Type of weather data (forecast/historical).
    */
   @minLength(1)
   weatherDataType: string;
-
-  /**
-   * Weather provider name.
-   */
-  @maxLength(100)
-  @minLength(2)
-  providerName: string;
-
-  /**
-   * Provider's api name to which request is to be made.
-   */
-  @maxLength(100)
-  @minLength(2)
-  providerApiName: string;
-
-  /**
-   * Language (IETF BCP 47 language tag) in which search results should be returned
-   * by the data provider. Examples: 'en-US', 'es', 'es-MX', 'fr-FR'.
-   */
-  @maxLength(100)
-  language?: string = "en-US";
-
-  /**
-   * Units for which request to data provider is to be sent. Supported values are
-   * 'e' for English units, 'm' for Metric units, 'h' for Hybrid units (UK) and 's'
-   * for Metric SI units.
-   */
-  @minLength(1)
-  units: string;
 }
 
 /**
