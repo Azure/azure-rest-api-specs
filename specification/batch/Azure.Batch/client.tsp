@@ -135,10 +135,6 @@ interface BatchClient {
   "java"
 );
 @@clientName(BatchClient.removeNodes, "removeNodesInternal", "java");
-@@clientName(BatchClient.listSupportedImages,
-  "listSupportedImagesInternal",
-  "java"
-);
 @@clientName(BatchClient.listPoolNodeCounts,
   "listPoolNodeCountsInternal",
   "java"

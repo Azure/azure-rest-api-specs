@@ -123,6 +123,16 @@ alias DisablePoolAutoscaleParameters = {
   poolId: string;
 };
 
+alias ListSupportedImagesParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+};
+
 // Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -375,16 +385,10 @@ interface Pools {
   @summary("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @doc("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @route("/supportedimages")
-  @clientName("listSupportedImagesInternal", "java")
-  listSupportedImages is ListOperation<
+  listSupportedImages is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
+      ...CommonListParameters;
+      ...ListSupportedImagesParameters;
     },
     BatchAccountListSupportedImagesResult
   >;
