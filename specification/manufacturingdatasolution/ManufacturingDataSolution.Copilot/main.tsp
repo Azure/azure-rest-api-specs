@@ -17,8 +17,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 
 @route("/copilot")
-@service(#{ title: "Microsoft.Industry.Manufacturing.MDS.Copilot" })
-
+@service(#{ title: "Microsoft.Industry.Manufacturing.MDS.Copilot", })
 @server(
   "https://mds-{mdsUniqueId}.{location}.cloudapp.azure.com/",
   "Manufacturing Data Solution global endpoint.",
@@ -27,9 +26,7 @@ using Azure.Core.Traits;
     location: string = "mds.azure.com",
   }
 )
-
 @useAuth(AadOauth2Auth<["https://azure-mds-service/.default"]>)
-
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService;
 
