@@ -54,98 +54,34 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "names",
-            "in": "query",
-            "description": "Names of the resource.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "$ref": "#/parameters/ListOperationQueryParameters.names"
           },
           {
-            "name": "propertyFilters",
-            "in": "query",
-            "description": "Filters on key-value pairs within the Properties object.\neg. \"{testKey} eq {testValue}\".",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "$ref": "#/parameters/ListOperationQueryParameters.propertyFilters"
           },
           {
-            "name": "statuses",
-            "in": "query",
-            "description": "Statuses of the resource.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "$ref": "#/parameters/ListOperationQueryParameters.statuses"
           },
           {
-            "name": "ids",
-            "in": "query",
-            "description": "Ids of the resource.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "$ref": "#/parameters/ListOperationQueryParameters.ids"
           },
           {
-            "name": "minCreatedDateTime",
-            "in": "query",
-            "description": "Minimum creation date of resource (inclusive).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/ListOperationQueryParameters.minCreatedDateTime"
           },
           {
-            "name": "maxCreatedDateTime",
-            "in": "query",
-            "description": "Maximum creation date of resource (inclusive).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/ListOperationQueryParameters.maxCreatedDateTime"
           },
           {
-            "name": "minLastModifiedDateTime",
-            "in": "query",
-            "description": "Minimum last modified date of resource (inclusive).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/ListOperationQueryParameters.minLastModifiedDateTime"
           },
           {
-            "name": "maxLastModifiedDateTime",
-            "in": "query",
-            "description": "Maximum last modified date of resource (inclusive).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/ListOperationQueryParameters.maxLastModifiedDateTime"
           },
           {
-            "name": "maxPageSize",
-            "in": "query",
-            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 50,
-            "minimum": 10,
-            "maximum": 1000
+            "$ref": "#/parameters/ListOperationQueryParameters.maxPageSize"
           },
           {
-            "name": "skipToken",
-            "in": "query",
-            "description": "Skip token for getting next set of results.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ListOperationQueryParameters.skipToken"
           }
         ],
         "responses": {
@@ -158,13 +94,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -204,13 +134,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -263,13 +187,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -301,13 +219,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -334,98 +246,34 @@
             "type": "string"
           },
           {
-            "name": "names",
-            "in": "query",
-            "description": "Names of the resource.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "$ref": "#/parameters/ListOperationQueryParameters.names"
           },
           {
-            "name": "propertyFilters",
-            "in": "query",
-            "description": "Filters on key-value pairs within the Properties object.\neg. \"{testKey} eq {testValue}\".",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "$ref": "#/parameters/ListOperationQueryParameters.propertyFilters"
           },
           {
-            "name": "statuses",
-            "in": "query",
-            "description": "Statuses of the resource.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "$ref": "#/parameters/ListOperationQueryParameters.statuses"
           },
           {
-            "name": "ids",
-            "in": "query",
-            "description": "Ids of the resource.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "$ref": "#/parameters/ListOperationQueryParameters.ids"
           },
           {
-            "name": "minCreatedDateTime",
-            "in": "query",
-            "description": "Minimum creation date of resource (inclusive).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/ListOperationQueryParameters.minCreatedDateTime"
           },
           {
-            "name": "maxCreatedDateTime",
-            "in": "query",
-            "description": "Maximum creation date of resource (inclusive).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/ListOperationQueryParameters.maxCreatedDateTime"
           },
           {
-            "name": "minLastModifiedDateTime",
-            "in": "query",
-            "description": "Minimum last modified date of resource (inclusive).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/ListOperationQueryParameters.minLastModifiedDateTime"
           },
           {
-            "name": "maxLastModifiedDateTime",
-            "in": "query",
-            "description": "Maximum last modified date of resource (inclusive).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/ListOperationQueryParameters.maxLastModifiedDateTime"
           },
           {
-            "name": "maxPageSize",
-            "in": "query",
-            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 50,
-            "minimum": 10,
-            "maximum": 1000
+            "$ref": "#/parameters/ListOperationQueryParameters.maxPageSize"
           },
           {
-            "name": "skipToken",
-            "in": "query",
-            "description": "Skip token for getting next set of results.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ListOperationQueryParameters.skipToken"
           }
         ],
         "responses": {
@@ -438,13 +286,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -491,13 +333,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -557,13 +393,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -602,13 +432,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -659,13 +483,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -732,13 +550,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -784,13 +596,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -842,13 +648,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -912,13 +712,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -975,13 +769,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1040,13 +828,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1105,13 +887,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1149,13 +925,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1193,13 +963,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1237,13 +1001,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1281,13 +1039,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1325,13 +1077,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1366,13 +1112,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1420,13 +1160,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1456,13 +1190,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1482,98 +1210,34 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "names",
-            "in": "query",
-            "description": "Names of the resource.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "$ref": "#/parameters/ListOperationQueryParameters.names"
           },
           {
-            "name": "propertyFilters",
-            "in": "query",
-            "description": "Filters on key-value pairs within the Properties object.\neg. \"{testKey} eq {testValue}\".",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "$ref": "#/parameters/ListOperationQueryParameters.propertyFilters"
           },
           {
-            "name": "statuses",
-            "in": "query",
-            "description": "Statuses of the resource.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "$ref": "#/parameters/ListOperationQueryParameters.statuses"
           },
           {
-            "name": "ids",
-            "in": "query",
-            "description": "Ids of the resource.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
+            "$ref": "#/parameters/ListOperationQueryParameters.ids"
           },
           {
-            "name": "minCreatedDateTime",
-            "in": "query",
-            "description": "Minimum creation date of resource (inclusive).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/ListOperationQueryParameters.minCreatedDateTime"
           },
           {
-            "name": "maxCreatedDateTime",
-            "in": "query",
-            "description": "Maximum creation date of resource (inclusive).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/ListOperationQueryParameters.maxCreatedDateTime"
           },
           {
-            "name": "minLastModifiedDateTime",
-            "in": "query",
-            "description": "Minimum last modified date of resource (inclusive).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/ListOperationQueryParameters.minLastModifiedDateTime"
           },
           {
-            "name": "maxLastModifiedDateTime",
-            "in": "query",
-            "description": "Maximum last modified date of resource (inclusive).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/ListOperationQueryParameters.maxLastModifiedDateTime"
           },
           {
-            "name": "maxPageSize",
-            "in": "query",
-            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 50,
-            "minimum": 10,
-            "maximum": 1000
+            "$ref": "#/parameters/ListOperationQueryParameters.maxPageSize"
           },
           {
-            "name": "skipToken",
-            "in": "query",
-            "description": "Skip token for getting next set of results.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ListOperationQueryParameters.skipToken"
           }
         ],
         "responses": {
@@ -1586,13 +1250,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1632,13 +1290,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1691,13 +1343,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1729,13 +1375,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1855,19 +1495,6 @@
       "required": [
         "code",
         "message"
-      ]
-    },
-    "Azure.Core.Foundations.ErrorResponse": {
-      "type": "object",
-      "description": "A response containing error details.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
       ]
     },
     "Azure.Core.Foundations.InnerError": {
@@ -2015,30 +1642,6 @@
         }
       }
     },
-    "CatalogListResponse": {
-      "type": "object",
-      "description": "CatalogListResponse.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of Catalogs.",
-          "items": {
-            "$ref": "#/definitions/Catalog"
-          }
-        },
-        "skipToken": {
-          "type": "string",
-          "description": "Skip token for getting next set of results."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to do the POST request with same filters,\nto get next set of items."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "Collection": {
       "type": "object",
       "description": "Collection.",
@@ -2169,30 +1772,6 @@
           "additionalProperties": {}
         }
       }
-    },
-    "CollectionListResponse": {
-      "type": "object",
-      "description": "Represents a response containing a list of collections.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of Collections.",
-          "items": {
-            "$ref": "#/definitions/Collection"
-          }
-        },
-        "skipToken": {
-          "type": "string",
-          "description": "Skip token for getting next set of results."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to do the POST request with same filters,\nto get next set of items."
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "CrossCollectionItemSearchQuery": {
       "type": "object",
@@ -2330,42 +1909,6 @@
         ]
       }
     },
-    "Error": {
-      "type": "object",
-      "description": "An error from the Azure AgPlatform service.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Server-defined set of error codes.",
-          "minLength": 1
-        },
-        "message": {
-          "type": "string",
-          "description": "Human-readable representation of the error.",
-          "minLength": 1
-        },
-        "target": {
-          "type": "string",
-          "description": "Target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "Array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerErrorModel",
-          "description": "Inner error containing list of errors.See\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object\nfor InnerError reference document."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
     "ErrorForLocation": {
       "type": "object",
       "description": "Model for error information for a failed location.",
@@ -2394,7 +1937,7 @@
       "description": "An error response from the Azure AgPlatform service. See\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses\nfor ErrorResponse reference document.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "An error from the Azure AgPlatform service."
         },
         "traceId": {
@@ -2518,20 +2061,6 @@
             "description": "TIF."
           }
         ]
-      }
-    },
-    "InnerErrorModel": {
-      "type": "object",
-      "description": "Inner error containing list of errors.See\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object\nfor InnerError reference document.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Specific error code than was provided by the containing error."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerErrorModel",
-          "description": "Inner error containing list of errors.See\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object\nfor InnerError reference document."
-        }
       }
     },
     "Item": {
@@ -3125,6 +2654,32 @@
         }
       }
     },
+    "ListOperationResponseTraits": {
+      "type": "object",
+      "description": "Additional traits for ListResponse.",
+      "properties": {
+        "response": {
+          "type": "object",
+          "description": "Represents the additional traits in response from resourceList operations.",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "skipToken": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": [
+            "properties"
+          ]
+        }
+      },
+      "required": [
+        "response"
+      ]
+    },
     "Measures": {
       "type": "object",
       "description": "Schema for storing measurement readings and unit.",
@@ -3220,6 +2775,9 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "skipToken": {
+          "type": "string"
         }
       },
       "required": [
@@ -3241,6 +2799,9 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "skipToken": {
+          "type": "string"
         }
       },
       "required": [
@@ -3262,6 +2823,9 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "skipToken": {
+          "type": "string"
         }
       },
       "required": [
@@ -3753,30 +3317,6 @@
           "additionalProperties": {}
         }
       }
-    },
-    "SchemaListResponse": {
-      "type": "object",
-      "description": "Represents a response containing a list of schemas.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of Schemas.",
-          "items": {
-            "$ref": "#/definitions/Schema"
-          }
-        },
-        "skipToken": {
-          "type": "string",
-          "description": "Skip token for getting next set of results."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to do the POST request with same filters,\nto get next set of items."
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "SearchFeaturesResponse": {
       "type": "object",
@@ -4352,6 +3892,110 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "ListOperationQueryParameters.ids": {
+      "name": "ids",
+      "in": "query",
+      "description": "Ids of the resource.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
+    "ListOperationQueryParameters.maxCreatedDateTime": {
+      "name": "maxCreatedDateTime",
+      "in": "query",
+      "description": "Maximum creation date of resource (inclusive).",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListOperationQueryParameters.maxLastModifiedDateTime": {
+      "name": "maxLastModifiedDateTime",
+      "in": "query",
+      "description": "Maximum last modified date of resource (inclusive).",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListOperationQueryParameters.maxPageSize": {
+      "name": "maxPageSize",
+      "in": "query",
+      "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 50,
+      "minimum": 10,
+      "maximum": 1000,
+      "x-ms-parameter-location": "method"
+    },
+    "ListOperationQueryParameters.minCreatedDateTime": {
+      "name": "minCreatedDateTime",
+      "in": "query",
+      "description": "Minimum creation date of resource (inclusive).",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListOperationQueryParameters.minLastModifiedDateTime": {
+      "name": "minLastModifiedDateTime",
+      "in": "query",
+      "description": "Minimum last modified date of resource (inclusive).",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListOperationQueryParameters.names": {
+      "name": "names",
+      "in": "query",
+      "description": "Names of the resource.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
+    "ListOperationQueryParameters.propertyFilters": {
+      "name": "propertyFilters",
+      "in": "query",
+      "description": "Filters on key-value pairs within the Properties object.\neg. \"{testKey} eq {testValue}\".",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
+    "ListOperationQueryParameters.skipToken": {
+      "name": "skipToken",
+      "in": "query",
+      "description": "Skip token for getting next set of results.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListOperationQueryParameters.statuses": {
+      "name": "statuses",
+      "in": "query",
+      "description": "Statuses of the resource.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
     }
   }
 }
