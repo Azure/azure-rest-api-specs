@@ -27,17 +27,12 @@ tag: package-2025-03-01
 suppressions:
   - code: AvoidAnonymousTypes
     from: openapi.json
-    where: $.paths["/instruction/{instructionId}"].delete.responses.202.schema
-  - code: AvoidAnonymousTypes
-    from: openapi.json
-    where: $.paths["/instruction/{id}:updateStatus"].post.responses.202.schema
-  - code: AvoidAnonymousTypes
-    from: openapi.json
-    where: $.paths./query:execute.post.parameters[5].schema
+    where: $.paths./copilot/instruction/{id}:updateStatus.post.responses.202.schema
   - code: AvoidAnonymousTypes
     from: openapi.json
     where: $.paths./copilot/instruction/{id}.delete.responses.202.schema
   - code: AvoidAnonymousParameter
+    from: openapi.json
     where: $.paths./copilot/query:execute.post.parameters[5].schema
 ```
 
