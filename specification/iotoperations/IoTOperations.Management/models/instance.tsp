@@ -56,10 +56,12 @@ model InstanceProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("The features of the AIO Instance.")
+  @added(Versions.v2025_04_01)
   features?: Record<InstanceFeature>;
 }
 
 @doc("The features of the AIO Instance.")
+@added(Versions.v2025_04_01)
 model InstanceFeature {
   @doc("The state of the feature.")
   mode?: InstanceFeatureMode = OperationalMode.Enabled;
@@ -70,6 +72,7 @@ model InstanceFeature {
 }
 
 @doc("The enum defining state of a feature.")
+@added(Versions.v2025_04_01)
 union InstanceFeatureMode {
   OperationalMode,
 

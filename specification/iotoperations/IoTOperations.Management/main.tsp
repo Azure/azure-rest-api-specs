@@ -33,10 +33,15 @@ namespace Microsoft.IoTOperations;
 
 /** Api versions */
 enum Versions {
+  /** 2024-11-01 version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2024-11-01`,
+
   /** 2025-04-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2025-04-01`,
+  v2025_04_01: "2025-04-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
