@@ -3236,7 +3236,7 @@ model NodeTypeSku {
    */
   @maxValue(2147483647)
   @minValue(1)
-  capacity: int32;
+  capacity?: int32;
 }
 
 /**

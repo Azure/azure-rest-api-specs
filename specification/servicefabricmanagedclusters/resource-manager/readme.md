@@ -38,20 +38,10 @@ directive:
     reason: The validation tools do not properly recognize 202 as a supported response code.
   - suppress: SummaryAndDescriptionMustNotBeSame
     reason: There are a lot of APIs with missing summary content. While it is being worked on disabling this to ensure that we catch and fix other violations.
-  - suppress: TrackedResourceListByImmediateParent
-    reason: Proxy resources are not properly evaluated by the validation toolset.
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: Modifying the operation names would break the backwards compatibility of the API.
   - suppress: EnumInsteadOfBoolean
     reason: The boolean properties are actually boolean value in the Service Fabric's application model.
-  - suppress: TrackedResourceGetOperation
-    reason: Proxy resources are not properly evaluated by the validation toolset.
-  - suppress: TrackedResourcePatchOperation
-    reason: Proxy resources are not properly evaluated by the validation toolset.
-  - suppress: TrackedResourceListByResourceGroup
-    reason: Proxy resources are not properly evaluated by the validation toolset.
-  - suppress: TrackedResourceListBySubscription
-    reason: Proxy resources are not properly evaluated by the validation toolset.
   - suppress: DescriptionAndTitleMissing
     reason: There are a lot of APIs with missing titles. While it is being worked on disabling this to ensure that we catch and fix other violations.
   - suppress: Example Validations
@@ -68,6 +58,25 @@ directive:
       - $.definitions.ServiceResource.properties
     reason:
       - Currently systemData is not allowed.
+  - suppress: ParameterNotUsingCommonTypes
+    reason: Common type operationId and location parameters have minLength and required properties that are not included in our existing spec. Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215)
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterVersions"].get.parameters.2.name
+      - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterVersions/{clusterVersion}"].get.parameters.2.name
+      - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/managedClusterVersions"].get.parameters.2.name
+      - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/managedClusterVersions/{clusterVersion}"].get.parameters.2.name
+      - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedUnsupportedVMSizes"].get.parameters.2.name
+      - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedUnsupportedVMSizes/{vmSize}"].get.parameters.2.name
+      - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterOperations/{operationId}"].get.parameters.3.name
+      - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterOperationResults/{operationId}"].get.parameters.3.name
+  - suppress: ParameterNotUsingCommonTypes
+    reason: Bug in validator is incorrectly associating any non-common type parameters with the wrong expected common type parameter
+    where:
+      - $.parameters.subscriptionId.name
+      - $.parameters.api-version.name
+      - $.parameters.resourceGroupNameParameter.name
+  - suppress: OperationsApiSchemaUsesCommonTypes
+    reason: Common type operations api schema is not compatible with existing API spec. Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215)
 ```
 
 ### Tag: package-2024-11-preview
@@ -312,6 +321,73 @@ suppressions:
   
   - code: LroErrorContent
     reason: Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215) but its going to take some time because we generate the swagger from an internal repo that currently can't reference the common types.
+
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    reason: Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215), but our current definition for armid is not compatible with the validation for the latest common type, we were recommended to use v3 for now
+
+  - code: XmsPageableForListCalls
+    reason: Backwards compatibility with previously approved spec for service.
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterVersions"].get
+      - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/managedClusterVersions"].get
+      
+  - code: GetResponseCodes
+    reason: Backwards compatibility with previously approved spec for service.
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterOperationResults/{operationId}"].get
+
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Backward compatibility with previously approved spec
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}"].put
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}"].put
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applicationTypes/{applicationTypeName}/versions/{version}"].put
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}"].put
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/services/{serviceName}"].put
+      
+  - code: PatchSkuProperty
+    reason: Backwards compatability with previously approved specs
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}"].patch.parameters.4
+      
+  - code: PatchIdentityProperty
+    reason: Backwards compatability with previously approved specs
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}"].patch.parameters.5
+  
+  - code: PostOperationIdContainsUrlVerb
+    reason: Backwards compatability with previously approved specs
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/getazresiliencystatus"].post.operationId
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/getMaintenanceWindowStatus"].post.operationId
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applyMaintenanceWindow"].post.operationId
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/fetchUpgradeStatus"].post.operationId
+    
+  - code: PutResponseCodes
+    reason: Backwards compatability with previously approved specs
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}"].put
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applicationTypes/{applicationTypeName}"].put
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applicationTypes/{applicationTypeName}/versions/{version}"].put
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}"].put
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/services/{serviceName}"].put
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}"].put
+  
+  - code: AvoidAdditionalProperties
+    reason: Backwards compatability with previously approved specs
+    where:
+      - $.definitions.ApplicationParameterList
+      - $.definitions.ApplicationHealthPolicy.properties.serviceTypeHealthPolicyMap
+      - $.definitions.ApplicationResourceProperties.properties.parameters
+      - $.definitions.NodeTypeProperties.properties.placementProperties
+      - $.definitions.NodeTypeProperties.properties.capacities
+      - $.definitions.ServiceTypeHealthPolicyMap
+      - $.definitions.UserAssignedIdentityMap
+      
+  - code: BodyTopLevelProperties
+    reason: Backwards compatability with previously approved specs
+    where:
+      - $.definitions.LongRunningOperationResult
 ```
 
 ---
