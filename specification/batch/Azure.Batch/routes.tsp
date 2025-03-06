@@ -465,6 +465,27 @@ alias ListJobsFromScheduleParameters = {
   $expand?: string[];
 };
 
+alias ListJobPreparationAndReleaseTaskStatusRequiredParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+};
+
+alias ListJobPreparationAndReleaseTaskStatusParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+};
+
 // Job Interface
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -696,25 +717,11 @@ interface Jobs {
     JobPreparationTaskNotSpecified.
     """)
   @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
-  @clientName("listJobPreparationAndReleaseTaskStatusInternal", "java")
-  listJobPreparationAndReleaseTaskStatus is ListOperation<
+  listJobPreparationAndReleaseTaskStatus is ListOperationNew<
     {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
+      ...CommonListParameters;
+      ...ListJobPreparationAndReleaseTaskStatusRequiredParameters;
+      ...ListJobPreparationAndReleaseTaskStatusParameters;
     },
     BatchJobPreparationAndReleaseTaskStatusListResult
   >;

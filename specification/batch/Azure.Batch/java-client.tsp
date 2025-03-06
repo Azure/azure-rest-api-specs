@@ -237,3 +237,28 @@ op listJobsFromScheduleCustomization is Azure.Batch.ListOperationNew<
   listJobsFromScheduleCustomization,
   "java"
 );
+
+// List Jobs Preparation and Release Task Status Operation
+@doc("Optional parameters for List Jobs From Schedule operation.")
+model ListBatchJobPreparationAndReleaseTaskStatusOptions {
+  ...Azure.Batch.CommonListParameters;
+  ...Azure.Batch.ListJobPreparationAndReleaseTaskStatusParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for List Jobs Preparation and Release Task Status operation.")
+@route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
+op listJobPreparationAndReleaseTaskStatusCustomization is Azure.Batch.ListOperationNew<
+  {
+    ...Azure.Batch.ListJobPreparationAndReleaseTaskStatusRequiredParameters;
+
+    @doc("Optional parameters for List Jobs Preparation and Release Task Status operation.")
+    options?: ListBatchJobPreparationAndReleaseTaskStatusOptions;
+  },
+  Azure.Batch.BatchJobPreparationAndReleaseTaskStatusListResult
+>;
+
+@@override(Azure.Batch.Jobs.listJobPreparationAndReleaseTaskStatus,
+  listJobPreparationAndReleaseTaskStatusCustomization,
+  "java"
+);
