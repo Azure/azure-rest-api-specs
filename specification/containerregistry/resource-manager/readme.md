@@ -45,9 +45,7 @@ These settings apply only when `--tag=package-2025-04` is specified on the comma
 ``` yaml $(tag) == 'package-2025-04'
 input-file:
   - Microsoft.ContainerRegistry/stable/2025-04-01/containerregistry.json
-  - Microsoft.ContainerRegistry/preview/2024-11-01-preview/containerregistry.json
   - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
-  - Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
 ```
 
 ### Tag: package-2024-11-preview-only
