@@ -5,8 +5,6 @@ import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using Azure.Core;
 using Azure.Core.Traits;
 
 namespace Microsoft.AgriculturePlatform;
@@ -15,7 +13,7 @@ alias ServiceTraits = NoRepeatableRequests &
   NoClientRequestId &
   NoConditionalRequests;
 
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits, ErrorResponse>;
 
 interface CatalogsOperations {
   /**
@@ -23,75 +21,7 @@ interface CatalogsOperations {
    */
   list is Operations.ResourceList<
     Catalog,
-    QueryParametersTrait<{
-      /**
-       * Names of the resource.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-      @query(#{ name: "names", explode: true })
-      names?: string[];
-
-      /**
-       * Filters on key-value pairs within the Properties object.
-       * eg. "{testKey} eq {testValue}".
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-      @query(#{ name: "propertyFilters", explode: true })
-      propertyFilters?: string[];
-
-      /**
-       * Statuses of the resource.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-      @query(#{ name: "statuses", explode: true })
-      statuses?: string[];
-
-      /**
-       * Ids of the resource.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-      @query(#{ name: "ids", explode: true })
-      ids?: string[];
-
-      /**
-       * Minimum creation date of resource (inclusive).
-       */
-      @query("minCreatedDateTime")
-      minCreatedDateTime?: utcDateTime;
-
-      /**
-       * Maximum creation date of resource (inclusive).
-       */
-      @query("maxCreatedDateTime")
-      maxCreatedDateTime?: utcDateTime;
-
-      /**
-       * Minimum last modified date of resource (inclusive).
-       */
-      @query("minLastModifiedDateTime")
-      minLastModifiedDateTime?: utcDateTime;
-
-      /**
-       * Maximum last modified date of resource (inclusive).
-       */
-      @query("maxLastModifiedDateTime")
-      maxLastModifiedDateTime?: utcDateTime;
-
-      /**
-       * Maximum number of items needed (inclusive).
-       * Minimum = 10, Maximum = 1000, Default value = 50.
-       */
-      @maxValue(1000)
-      @minValue(10)
-      @query("maxPageSize")
-      maxPageSize?: int32 = 50;
-
-      /**
-       * Skip token for getting next set of results.
-       */
-      @query("skipToken")
-      skipToken?: string;
-    }>
+    QueryParametersTrait<ListOperationQueryParameters> & ListOperationResponseTraits
   >;
 
   /**
@@ -116,75 +46,7 @@ interface CollectionsOperations {
    */
   list is Operations.ResourceList<
     Collection,
-    QueryParametersTrait<{
-      /**
-       * Names of the resource.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-      @query(#{ name: "names", explode: true })
-      names?: string[];
-
-      /**
-       * Filters on key-value pairs within the Properties object.
-       * eg. "{testKey} eq {testValue}".
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-      @query(#{ name: "propertyFilters", explode: true })
-      propertyFilters?: string[];
-
-      /**
-       * Statuses of the resource.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-      @query(#{ name: "statuses", explode: true })
-      statuses?: string[];
-
-      /**
-       * Ids of the resource.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-      @query(#{ name: "ids", explode: true })
-      ids?: string[];
-
-      /**
-       * Minimum creation date of resource (inclusive).
-       */
-      @query("minCreatedDateTime")
-      minCreatedDateTime?: utcDateTime;
-
-      /**
-       * Maximum creation date of resource (inclusive).
-       */
-      @query("maxCreatedDateTime")
-      maxCreatedDateTime?: utcDateTime;
-
-      /**
-       * Minimum last modified date of resource (inclusive).
-       */
-      @query("minLastModifiedDateTime")
-      minLastModifiedDateTime?: utcDateTime;
-
-      /**
-       * Maximum last modified date of resource (inclusive).
-       */
-      @query("maxLastModifiedDateTime")
-      maxLastModifiedDateTime?: utcDateTime;
-
-      /**
-       * Maximum number of items needed (inclusive).
-       * Minimum = 10, Maximum = 1000, Default value = 50.
-       */
-      @maxValue(1000)
-      @minValue(10)
-      @query("maxPageSize")
-      maxPageSize?: int32 = 50;
-
-      /**
-       * Skip token for getting next set of results.
-       */
-      @query("skipToken")
-      skipToken?: string;
-    }>
+    QueryParametersTrait<ListOperationQueryParameters> & ListOperationResponseTraits
   >;
 
   /**
@@ -370,75 +232,7 @@ interface SchemasOperations {
    */
   list is Operations.ResourceList<
     Schema,
-    QueryParametersTrait<{
-      /**
-       * Names of the resource.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-      @query(#{ name: "names", explode: true })
-      names?: string[];
-
-      /**
-       * Filters on key-value pairs within the Properties object.
-       * eg. "{testKey} eq {testValue}".
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-      @query(#{ name: "propertyFilters", explode: true })
-      propertyFilters?: string[];
-
-      /**
-       * Statuses of the resource.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-      @query(#{ name: "statuses", explode: true })
-      statuses?: string[];
-
-      /**
-       * Ids of the resource.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
-      @query(#{ name: "ids", explode: true })
-      ids?: string[];
-
-      /**
-       * Minimum creation date of resource (inclusive).
-       */
-      @query("minCreatedDateTime")
-      minCreatedDateTime?: utcDateTime;
-
-      /**
-       * Maximum creation date of resource (inclusive).
-       */
-      @query("maxCreatedDateTime")
-      maxCreatedDateTime?: utcDateTime;
-
-      /**
-       * Minimum last modified date of resource (inclusive).
-       */
-      @query("minLastModifiedDateTime")
-      minLastModifiedDateTime?: utcDateTime;
-
-      /**
-       * Maximum last modified date of resource (inclusive).
-       */
-      @query("maxLastModifiedDateTime")
-      maxLastModifiedDateTime?: utcDateTime;
-
-      /**
-       * Maximum number of items needed (inclusive).
-       * Minimum = 10, Maximum = 1000, Default value = 50.
-       */
-      @maxValue(1000)
-      @minValue(10)
-      @query("maxPageSize")
-      maxPageSize?: int32 = 50;
-
-      /**
-       * Skip token for getting next set of results.
-       */
-      @query("skipToken")
-      skipToken?: string;
-    }>
+    QueryParametersTrait<ListOperationQueryParameters> & ListOperationResponseTraits
   >;
 
   /**

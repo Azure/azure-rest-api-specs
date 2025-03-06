@@ -11,7 +11,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -19,7 +18,7 @@ using TypeSpec.Versioning;
  * APIs documentation for Azure AgPlatform DataPlane Service.
  */
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Authorization">)
-@service({
+@service(#{
   title: "Azure AgriculturePlatform Data Platform Service",
 })
 @versioned(AgriculturePlatform.Versions)

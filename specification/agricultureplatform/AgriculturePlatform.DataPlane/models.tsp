@@ -3,6 +3,7 @@ import "@typespec/http";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core.Traits;
 
 namespace Microsoft.AgriculturePlatform;
 
@@ -129,26 +130,94 @@ union ImageFormat {
 }
 
 /**
- * CatalogListResponse.
+ * Additional traits for ListResponse.
  */
-model CatalogListResponse {
+@trait
+model ListOperationResponseTraits {
+  @traitContext(TraitContext.List)
   /**
-   * List of Catalogs.
+   * Represents the additional traits in response from resourceList operations.
    */
-  value: Catalog[];
+  response: {
+    @traitLocation(TraitLocation.Response)
+    properties: { 
+      skipToken?: string
+    };
+  };
+}
+
+/**
+ * Model representing the query parameters for a list operations.
+ */
+model ListOperationQueryParameters {
+  /**
+   * Names of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+  @query(#{ name: "names", explode: true })
+  names?: string[];
+
+  /**
+   * Filters on key-value pairs within the Properties object.
+   * eg. "{testKey} eq {testValue}".
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+  @query(#{ name: "propertyFilters", explode: true })
+  propertyFilters?: string[];
+
+  /**
+   * Statuses of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+  @query(#{ name: "statuses", explode: true })
+  statuses?: string[];
+
+  /**
+   * Ids of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" ""
+  @query(#{ name: "ids", explode: true })
+  ids?: string[];
+
+  /**
+   * Minimum creation date of resource (inclusive).
+   */
+  @query("minCreatedDateTime")
+  minCreatedDateTime?: utcDateTime;
+
+  /**
+   * Maximum creation date of resource (inclusive).
+   */
+  @query("maxCreatedDateTime")
+  maxCreatedDateTime?: utcDateTime;
+
+  /**
+   * Minimum last modified date of resource (inclusive).
+   */
+  @query("minLastModifiedDateTime")
+  minLastModifiedDateTime?: utcDateTime;
+
+  /**
+   * Maximum last modified date of resource (inclusive).
+   */
+  @query("maxLastModifiedDateTime")
+  maxLastModifiedDateTime?: utcDateTime;
+
+  /**
+   * Maximum number of items needed (inclusive).
+   * Minimum = 10, Maximum = 1000, Default value = 50.
+   */
+  @maxValue(1000)
+  @minValue(10)
+  @query("maxPageSize")
+  maxPageSize?: int32 = 50;
 
   /**
    * Skip token for getting next set of results.
    */
+  @query("skipToken")
   skipToken?: string;
-
-  /**
-   * URL to do the POST request with same filters,
-   * to get next set of items.
-   */
-  nextLink?: string;
 }
-
 /**
  * Catalog.
  */
@@ -162,14 +231,14 @@ model Catalog {
   /**
    * Id of the Catalog.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key("catalogId")
   id: string;
 
   /**
    * The ETag value to implement optimistic concurrency.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eTag?: string;
 
   /**
@@ -181,14 +250,14 @@ model Catalog {
   /**
    * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   modifiedDateTime?: utcDateTime;
 
@@ -214,13 +283,13 @@ model Catalog {
   /**
    * Created by user/tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * Modified by user/tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modifiedBy?: string;
 
   /**
@@ -265,86 +334,12 @@ model ErrorResponse {
   /**
    * An error from the Azure AgPlatform service.
    */
-  error?: Error;
+  error?: Azure.Core.Foundations.Error;
 
   /**
    * Unique trace Id.
    */
   traceId?: string;
-}
-
-/**
- * An error from the Azure AgPlatform service.
- */
-model Error {
-  /**
-   * Server-defined set of error codes.
-   */
-  @minLength(1)
-  code: string;
-
-  /**
-   * Human-readable representation of the error.
-   */
-  @minLength(1)
-  message: string;
-
-  /**
-   * Target of the error.
-   */
-  target?: string;
-
-  /**
-   * Array of details about specific errors that led to this reported error.
-   */
-  details?: Error[];
-
-  /**
-   * Inner error containing list of errors.See
-   * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object
-   * for InnerError reference document.
-   */
-  innererror?: InnerErrorModel;
-}
-
-/**
- * Inner error containing list of errors.See
- * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object
- * for InnerError reference document.
- */
-model InnerErrorModel {
-  /**
-   * Specific error code than was provided by the containing error.
-   */
-  code?: string;
-
-  /**
-   * Inner error containing list of errors.See
-   * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object
-   * for InnerError reference document.
-   */
-  innererror?: InnerErrorModel;
-}
-
-/**
- * Represents a response containing a list of collections.
- */
-model CollectionListResponse {
-  /**
-   * List of Collections.
-   */
-  value: Collection[];
-
-  /**
-   * Skip token for getting next set of results.
-   */
-  skipToken?: string;
-
-  /**
-   * URL to do the POST request with same filters,
-   * to get next set of items.
-   */
-  nextLink?: string;
 }
 
 /**
@@ -363,7 +358,7 @@ model Collection {
    * Id of the Collection.
    */
   @key("collectionId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   collectionId: string;
 
   /**
@@ -374,13 +369,13 @@ model Collection {
   /**
    * Unique resource ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The ETag value to implement optimistic concurrency.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eTag?: string;
 
   /**
@@ -392,14 +387,14 @@ model Collection {
   /**
    * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   modifiedDateTime?: utcDateTime;
 
@@ -425,13 +420,13 @@ model Collection {
   /**
    * Created by user/tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * Modified by user/tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modifiedBy?: string;
 
   /**
@@ -455,7 +450,7 @@ model FileResource {
    * Dummy key for file resource
    */
   @key("key")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   key: string;
 }
 
@@ -495,13 +490,13 @@ model Item {
   /**
    * Id of the Catalog resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   catalogId?: string;
 
   /**
    * Id of the Collection resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   collectionId?: string;
 
   /**
@@ -513,13 +508,13 @@ model Item {
    * Id of the Item.
    */
   @key("itemId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   /**
    * The ETag value to implement optimistic concurrency.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eTag?: string;
 
   /**
@@ -531,14 +526,14 @@ model Item {
   /**
    * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   modifiedDateTime?: utcDateTime;
 
@@ -564,13 +559,13 @@ model Item {
   /**
    * Created by user/tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * Modified by user/tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modifiedBy?: string;
 
   /**
@@ -612,12 +607,12 @@ model ItemParameters {
   /**
    * CatalogId.
    */
-  // @visibility("read")
+  // @visibility(Lifecycle.Read)
   // catalogId?: string;
   /**
    * CollectionId.
    */
-  // @visibility("read")
+  // @visibility(Lifecycle.Read)
   // collectionId?: string;
   /**
    * Assets.
@@ -627,13 +622,13 @@ model ItemParameters {
   /**
    * Unique resource ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The ETag value to implement optimistic concurrency.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eTag?: string;
 
   /**
@@ -645,14 +640,14 @@ model ItemParameters {
   /**
    * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   modifiedDateTime?: utcDateTime;
 
@@ -678,13 +673,13 @@ model ItemParameters {
   /**
    * Created by user/tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * Modified by user/tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modifiedBy?: string;
 
   /**
@@ -722,13 +717,13 @@ model ItemResponse {
   /**
    * CatalogId.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   catalogId?: string;
 
   /**
    * CollectionId.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   collectionId?: string;
 
   /**
@@ -739,13 +734,13 @@ model ItemResponse {
   /**
    * Unique resource ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The ETag value to implement optimistic concurrency.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eTag?: string;
 
   /**
@@ -757,14 +752,14 @@ model ItemResponse {
   /**
    * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   modifiedDateTime?: utcDateTime;
 
@@ -790,13 +785,13 @@ model ItemResponse {
   /**
    * Created by user/tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * Modified by user/tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modifiedBy?: string;
 
   /**
@@ -1116,7 +1111,7 @@ model SatelliteResource {
    * Dummy key for satellite resource
    */
   @key("key")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   key: string;
 }
 /**
@@ -1283,7 +1278,7 @@ model SearchFeaturesResponse {
    * URL to do the POST request with same filters,
    * to get next set of items.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 
@@ -1406,27 +1401,6 @@ model StacAsset {
 }
 
 /**
- * Represents a response containing a list of schemas.
- */
-model SchemaListResponse {
-  /**
-   * List of Schemas.
-   */
-  value: Schema[];
-
-  /**
-   * Skip token for getting next set of results.
-   */
-  skipToken?: string;
-
-  /**
-   * URL to do the POST request with same filters,
-   * to get next set of items.
-   */
-  nextLink?: string;
-}
-
-/**
  * SchemaModel.
  */
 @resource("schemas")
@@ -1434,7 +1408,7 @@ model Schema {
   /**
    * Dependent Collections.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dependentCollections?: CatalogCollection[];
 
   /**
@@ -1447,13 +1421,13 @@ model Schema {
    * Id of the Schema.
    */
   @key("schemaId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   /**
    * The ETag value to implement optimistic concurrency.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eTag?: string;
 
   /**
@@ -1465,14 +1439,14 @@ model Schema {
   /**
    * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
    * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   modifiedDateTime?: utcDateTime;
 
@@ -1498,13 +1472,13 @@ model Schema {
   /**
    * Created by user/tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
    * Modified by user/tenant id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modifiedBy?: string;
 
   /**
@@ -1526,13 +1500,13 @@ model CatalogCollection {
   /**
    * Catalog Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   catalogId?: string;
 
   /**
    * Collection Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   collectionId?: string;
 }
 
@@ -1545,7 +1519,7 @@ model SolutionResource {
    * Dummy key for solution resource
    */
   @key("key")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   key: string;
 }
 /**
@@ -1716,7 +1690,7 @@ model WeatherResource {
    * Dummy key for satellite resource
    */
   @key("key")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   key: string;
 }
 /**
