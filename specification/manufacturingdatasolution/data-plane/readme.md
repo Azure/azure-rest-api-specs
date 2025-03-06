@@ -27,13 +27,13 @@ tag: package-2025-03-01
 suppressions:
   - code: AvoidAnonymousTypes
     from: openapi.json
-    where: $.paths["/admin/version/{versionId}"].delete.responses.202.schema
+    where: $.paths["/instruction/{instructionId}"].delete.responses.202.schema
   - code: AvoidAnonymousTypes
     from: openapi.json
-    where: $.paths["/admin/version:switch"].post.responses.202.schema
+    where: $.paths["/instruction/{id}:updateStatus"].post.responses.202.schema
   - code: AvoidAnonymousTypes
     from: openapi.json
-    where: $.paths["/admin/cleanup/{entityName}"].delete.responses.202.schema
+    where: $.paths./query:execute.post.parameters[5].schema
 ```
 
 ### Tag: package-2025-03-01
