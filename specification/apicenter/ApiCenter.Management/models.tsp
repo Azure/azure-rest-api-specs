@@ -732,7 +732,7 @@ model AnalyzerConfigProperties {
   /**
    *The state of the API analyzer ruleset.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: AnalyzerRulesetState;
 
   /**
@@ -840,18 +840,18 @@ model AnalyzerFilter {
   /**
    * API filter conditions.
    */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   apis: AnalyzerFilterCondition[];
 
   /**
    * APi version filter conditions.
    */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   apiVersions: AnalyzerFilterCondition[];
 
   /**
    * Api definition filter conditions.
    */
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   apiDefinitions: AnalyzerFilterCondition[];
 }
