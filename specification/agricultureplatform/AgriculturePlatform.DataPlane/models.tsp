@@ -223,75 +223,75 @@ model ListOperationQueryParameters {
  */
 model CommonProps {
   /**
-  * Links for referencing other objects.
-  */
+   * Links for referencing other objects.
+   */
   links?: Link[];
 
   /**
-  * The ETag value to implement optimistic concurrency.
-  */
+   * The ETag value to implement optimistic concurrency.
+   */
   @visibility(Lifecycle.Read)
   eTag?: string;
 
   /**
-  * Status of the resource.
-  */
+   * Status of the resource.
+   */
   @maxLength(100)
   status?: string;
 
   /**
-  * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
-  */
+   * Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.
+   */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
   /**
-  * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
-  */
+   * Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.
+   */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   modifiedDateTime?: utcDateTime;
 
   /**
-  * Source of the resource.
-  */
+   * Source of the resource.
+   */
   @maxLength(100)
   @minLength(2)
   source?: string;
 
   /**
-  * Name to identify resource.
-  */
+   * Name to identify resource.
+   */
   @maxLength(100)
   name?: string;
 
   /**
-  * Textual description of the resource.
-  */
+   * Textual description of the resource.
+   */
   @maxLength(500)
   description?: string;
 
   /**
-  * Created by user/tenant id.
-  */
+   * Created by user/tenant id.
+   */
   @visibility(Lifecycle.Read)
   createdBy?: string;
 
   /**
-  * Modified by user/tenant id.
-  */
+   * Modified by user/tenant id.
+   */
   @visibility(Lifecycle.Read)
   modifiedBy?: string;
 
   /**
-  * A collection of key value pairs that belongs to the resource.
-  * Each pair must not have a key greater than 50 characters
-  * and must not have a value greater than 150 characters.
-  * Note: A maximum of 25 key value pairs can be provided for a resource and only
-  * string,
-  * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
-  */
+   * A collection of key value pairs that belongs to the resource.
+   * Each pair must not have a key greater than 50 characters
+   * and must not have a value greater than 150 characters.
+   * Note: A maximum of 25 key value pairs can be provided for a resource and only
+   * string,
+   * numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
+   */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   properties?: Record<unknown>;
 }
@@ -301,7 +301,6 @@ model CommonProps {
  */
 @resource("catalogs")
 model Catalog {
-
   ...CommonProps;
 
   /**
@@ -356,7 +355,6 @@ model ErrorResponse {
 @resource("collections")
 @parentResource(Catalog)
 model Collection {
-
   ...CommonProps;
 
   /**
@@ -409,7 +407,6 @@ model File {
 @parentResource(Collection)
 @resource("items")
 model Item {
-
   ...CommonProps;
 
   /**
@@ -456,7 +453,6 @@ model ItemsInCatalog is Item;
  * ItemParameters model for Items api.
  */
 model ItemParameters {
-
   ...CommonProps;
 
   /**
@@ -486,7 +482,6 @@ model ItemParameters {
  * ItemResponse model for Items api.
  */
 model ItemResponse {
-
   ...CommonProps;
 
   /**
@@ -549,43 +544,51 @@ model Asset {
  */
 model ItemsCommonProps {
   /**
-    * Owner Item Ids of the resource.
+   * Owner Item Ids of the resource.
    */
   ownerItemIds?: string[];
+
   /**
    * Filters on key-value pairs within the Data object.
    * e.g. "{testKey} eq {testValue}".
    */
   dataFilters?: string[];
+
   /**
    * GeoJSON (For more details: https://geojson.org/). Note: Coordinates are
    * expected in [Longitude, Latitude] format.
    */
   intersectsWithGeometry?: GeoJsonObject;
+
   /**
    * Ids of the resource.
    */
   ids?: string[];
+
   /**
    * Minimum creation date of resource (inclusive).
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   minCreatedDateTime?: utcDateTime;
+
   /**
    * Maximum creation date of resource (inclusive).
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   maxCreatedDateTime?: utcDateTime;
+
   /**
    * Minimum last modified date of resource (inclusive).
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   minLastModifiedDateTime?: utcDateTime;
+
   /**
    * Maximum last modified date of resource (inclusive).
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   maxLastModifiedDateTime?: utcDateTime;
+
   /**
    * Maximum number of items needed (inclusive).
    * Minimum = 10, Maximum = 1000, Default value = 50.
@@ -593,18 +596,17 @@ model ItemsCommonProps {
   @maxValue(1000)
   @minValue(10)
   maxPageSize?: int32 = 50;
+
   /**
    * Skip token for getting next set of results.
    */
   skipToken?: string;
-
 }
 
 /**
  * CatalogQuery.
  */
 model ItemQuery {
-
   ...ItemsCommonProps;
 }
 
@@ -645,8 +647,8 @@ model ItemListResponse {
  * CrossCatalogItemSearchQuery.
  */
 model CrossCollectionItemSearchQuery {
-
   ...ItemsCommonProps;
+
   /**
    * Owner Item Ids of the resource.
    */
@@ -1066,7 +1068,6 @@ model StacAsset {
  */
 @resource("schemas")
 model Schema {
-
   ...CommonProps;
 
   /**
@@ -1128,16 +1129,19 @@ model SolutionCommonProps {
    */
   @minLength(1)
   solutionId: string;
+
   /**
    * RequestPath.
    */
   @minLength(1)
   requestPath: string;
+
   /**
    * Properties.
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   partnerRequestBody: Record<unknown>;
+
   /**
    * Properties.
    */
@@ -1149,7 +1153,6 @@ model SolutionCommonProps {
  * Solution.
  */
 model Solution {
-
   ...SolutionCommonProps;
 }
 
@@ -1252,7 +1255,6 @@ model SamplePartnerRequestBody {
  * SolutionData.
  */
 model SolutionData {
-
   ...SolutionCommonProps;
 
   /**
@@ -1280,23 +1282,26 @@ model WeatherResource {
  */
 model WeatherCommonProps {
   /**
- * Weather provider name.
- */
+   * Weather provider name.
+   */
   @maxLength(100)
   @minLength(2)
   providerName: string;
+
   /**
    * Provider's api name to which request is to be made.
    */
   @maxLength(100)
   @minLength(2)
   providerApiName: string;
+
   /**
    * Language (IETF BCP 47 language tag) in which search results should be returned
    * by the data provider. Examples: 'en-US', 'es', 'es-MX', 'fr-FR'.
    */
   @maxLength(100)
   language?: string = "en-US";
+
   /**
    * Units for which request to data provider is to be sent. Supported values are
    * 'e' for English units, 'm' for Metric units, 'h' for Hybrid units (UK) and 's'
@@ -1310,7 +1315,6 @@ model WeatherCommonProps {
  * WeatherRequest.
  */
 model WeatherRequest {
-
   ...WeatherCommonProps;
 
   /**
@@ -1387,8 +1391,8 @@ model WeatherResponse {
  * Schema of Weather Metadata.
  */
 model WeatherMetadata {
-
   ...WeatherCommonProps;
+
   /**
    * Type of weather data (forecast/historical).
    */
