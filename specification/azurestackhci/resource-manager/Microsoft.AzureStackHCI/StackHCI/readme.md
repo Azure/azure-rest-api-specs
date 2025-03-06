@@ -258,6 +258,7 @@ input-file:
   - preview/2025-02-01-preview/updateRuns.json
   - preview/2025-02-01-preview/updates.json
   - preview/2025-02-01-preview/updateSummaries.json
+  - preview/2025-02-01-preview/validatedSolutionRecipes.json
 ```
 
 ### Tag: package-preview-2024-12-01-preview
