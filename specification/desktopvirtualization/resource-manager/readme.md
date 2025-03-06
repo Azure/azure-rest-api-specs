@@ -134,23 +134,6 @@ input-file:
   - Microsoft.DesktopVirtualization/stable/2023-09-05/desktopvirtualization.json
 ```
 
-### Tag: package-preview-2023-07
-
-These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-07'
-input-file:
-  - Microsoft.DesktopVirtualization/preview/2023-07-07-preview/desktopvirtualization.json
-
-suppressions:
-  - code: ResourceNameRestriction
-    reason:
-      ScalingPlan was already implemented in previous versions of the API and
-      we cannot change naming pattern now.
-  - code: PatchIdentityProperty
-    reason: There is an error loop with the identity property. We received approval to suppress this error, but we still need to investigate error loop.
-```
-
 ### Tag: package-preview-2022-10
 
 These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
