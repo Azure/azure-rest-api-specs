@@ -11,10 +11,8 @@ import "./resources/validateQueryApi.tsp";
 import "./resources/feedbackApi.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.Core.Traits;
 
 @route("/copilot")
 @service(#{ title: "Microsoft.Industry.Manufacturing.MDS.Copilot" })
