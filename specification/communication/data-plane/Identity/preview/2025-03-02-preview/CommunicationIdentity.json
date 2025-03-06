@@ -3,7 +3,7 @@
   "info": {
     "title": "CommunicationIdentityClient",
     "description": "Azure Communication Identity Service",
-    "version": "2023-10-01"
+    "version": "2025-03-02-preview"
   },
   "paths": {
     "/identities": {
@@ -41,6 +41,12 @@
           },
           "201": {
             "description": "Created - Returns the created identity.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
+            }
+          },
+          "200": {
+            "description": "OK - Returns the existing identity for an externalId if any.",
             "schema": {
               "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
             }
@@ -89,6 +95,47 @@
         "x-ms-examples": {
           "Delete an identity": {
             "$ref": "./examples/DeleteIdentity.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Get an identity by its id.",
+        "operationId": "CommunicationIdentity_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identifier of the identity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentity"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an identity.": {
+            "$ref": "./examples/GetIdentity.json"
           }
         }
       }
@@ -245,8 +292,17 @@
       ],
       "type": "object",
       "properties": {
+        "externalId": {
+          "description": "The external Id if one has been associated with the identity.",
+          "type": "string"
+        },
         "id": {
           "description": "Identifier of the identity.",
+          "type": "string"
+        },
+        "lastTokenIssuedAt": {
+          "format": "date-time",
+          "description": "Last time a token has been issued for the identity.",
           "type": "string"
         }
       }
@@ -305,12 +361,23 @@
         },
         "accessToken": {
           "$ref": "#/definitions/CommunicationIdentityAccessToken"
+        },
+        "lastTokenIssuedAt": {
+          "format": "date-time",
+          "description": "Last time a token has been issued for the identity.",
+          "type": "string"
         }
       }
     },
     "CommunicationIdentityCreateRequest": {
       "type": "object",
       "properties": {
+        "externalId": {
+          "description": "Set to tag the identity with your own id.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
         "createTokenWithScopes": {
           "description": "Also create access token for the created identity.",
           "type": "array",
