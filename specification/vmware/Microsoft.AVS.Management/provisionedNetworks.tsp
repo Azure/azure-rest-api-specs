@@ -35,15 +35,15 @@ union ProvisionedNetworkProvisioningState {
 @doc("The properties of a provisioned network.")
 model ProvisionedNetworkProperties {
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisionedNetworkProvisioningState;
 
   @doc("The address prefixes of the provisioned network in CIDR notation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   addressPrefix?: string;
 
   @doc("The type of network provisioned.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkType?: ProvisionedNetworkTypes;
 }
 
