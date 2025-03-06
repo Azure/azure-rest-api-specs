@@ -143,10 +143,6 @@ interface BatchClient {
 @@clientName(BatchClient.enableJob, "enableJobInternal", "java");
 @@clientName(BatchClient.terminateJob, "terminateJobInternal", "java");
 @@clientName(BatchClient.createJob, "createJobInternal", "java");
-@@clientName(BatchClient.listJobsFromSchedule,
-  "listJobsFromScheduleInternal",
-  "java"
-);
 @@clientName(BatchClient.listJobPreparationAndReleaseTaskStatus,
   "listJobPreparationAndReleaseTaskStatusInternal",
   "java"
