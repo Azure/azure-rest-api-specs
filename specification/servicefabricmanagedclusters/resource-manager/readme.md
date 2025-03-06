@@ -337,7 +337,7 @@ suppressions:
       - $.paths.["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterOperationResults/{operationId}"].get
 
   - code: ProvisioningStateSpecifiedForLROPut
-    reason: Backward compatibility with previously approved spec. ProvisiongState is provided as part of the ManagedCluster.ManagedClusterProperties model.
+    reason: Backward compatibility with previously approved spec. ProvisioningState is provided as part of the ManagedCluster.ManagedClusterProperties model.
     where:
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}"].put
       - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}"].put
