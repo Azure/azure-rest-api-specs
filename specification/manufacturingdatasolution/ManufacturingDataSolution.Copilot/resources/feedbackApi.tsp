@@ -23,7 +23,7 @@ alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface Feedback {
   @doc("Send feedback for a query")
-  submitFeedback is apiOperations.ResourceCreateWithServiceProvidedName<
+  submit is apiOperations.ResourceCreateWithServiceProvidedName<
     FeedbackRequest,
     ResponseHeadersTrait<{
       @doc("operation Id.")

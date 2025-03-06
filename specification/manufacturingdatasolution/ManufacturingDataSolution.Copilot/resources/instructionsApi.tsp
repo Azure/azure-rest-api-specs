@@ -37,7 +37,7 @@ interface Instructions {
   getInstructions is apiOperations.ResourceRead<Instruction>;
 
   @doc("List Instruction resources")
-  listInstructions is apiOperations.ResourceList<
+  list is apiOperations.ResourceList<
     Instruction,
     QueryParametersTrait<{
       @doc("The instruction status.")
