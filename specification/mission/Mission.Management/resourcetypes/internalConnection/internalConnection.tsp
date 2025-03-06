@@ -60,25 +60,25 @@ model InternalConnectionProperties {
   provisioningState?: ProvisioningState;
 
   @doc("Specifies the type of internal connection. \n Possible values are:\n PrivateLink \n NetworkSecurityGroup")
-  connectionType: InternalConnectionType;
+  connectionType?: InternalConnectionType;
 
   @doc("The state of the internalConnection.")
   state?: InternalConnectionState;
 
   @doc("Community Resource Id.")
-  communityResourceId: CommunityResourceId;
+  communityResourceId?: CommunityResourceId;
 
   @doc("The destination enclave's resource ID.")
-  destinationEnclaveId: VirtualEnclaveResourceId;
+  destinationEnclaveId?: VirtualEnclaveResourceId;
 
   @doc("The destination endpoint's resource ID.")
-  destinationEndpointId: EndpointResourceId;
+  destinationEndpointId?: EndpointResourceId;
 
   @doc("The source enclave's resource ID.")
-  sourceEnclaveId: VirtualEnclaveResourceId;
+  sourceEnclaveId?: VirtualEnclaveResourceId;
 
   @doc("The source CIDR IP addresses.")
-  sourceCidrs: string[];
+  sourceCidrs?: string[];
 
   @doc("List of resource ids modified by internalConnections.")
   resourceCollection?: string[];

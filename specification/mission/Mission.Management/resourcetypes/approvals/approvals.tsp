@@ -50,7 +50,7 @@ union ActionPerformed {
 @doc("Request Metadata for approvals request.")
 model RequestMetadata {
   @doc("Resource Action of the item being approved or declined.")
-  resourceAction: string;
+  resourceAction?: string;
 
   @doc("Approval status.")
   approvalStatus?: ApprovalStatus;
@@ -91,7 +91,7 @@ model ApprovalProperties {
   parent2?: string;
 
   @doc("Request metadata for the approval request.")
-  requestMetadata: RequestMetadata;
+  requestMetadata?: RequestMetadata;
 
   @added(Microsoft.Mission.Versions.v2024_10_01_preview)
   @OpenAPI.extension("x-ms-identifiers", ["approverEntraId"])

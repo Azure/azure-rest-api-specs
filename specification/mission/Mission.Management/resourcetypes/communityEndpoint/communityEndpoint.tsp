@@ -104,13 +104,13 @@ model CommunityEndpointProperties {
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @extension("x-ms-identifiers", [])
   @doc("Community Endpoint Rule Collection.")
-  ruleCollection: CommunityEndpointDestinationRule[];
+  ruleCollection?: CommunityEndpointDestinationRule[];
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
   @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   @extension("x-ms-identifiers", ["name"])
   @doc("Destination Rule Collection.")
-  destinationRuleCollection: DestinationRule[];
+  destinationRuleCollection?: DestinationRule[];
 
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of resource ids created by community endpoint.")

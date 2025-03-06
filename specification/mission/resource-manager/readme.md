@@ -66,7 +66,17 @@ These settings apply only when `--tag=package-2024-06-01-preview` is specified o
 input-file:
   - Microsoft.Mission/preview/2024-06-01-preview/openapi.json
 ```
+
 ---
+
+## suppressions
+
+```yaml
+suppressions:
+ - code: PatchBodyParametersSchema
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/communities/{communityName}"].patch.parameters[4].schema.properties.identity
+```
 
 # Code Generation
 
