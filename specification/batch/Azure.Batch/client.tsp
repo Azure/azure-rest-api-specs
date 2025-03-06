@@ -128,11 +128,6 @@ interface BatchClient {
   "java"
 );
 @@clientName(BatchClient.removeNodes, "removeNodesInternal", "java");
-@@clientName(BatchClient.listPoolNodeCounts,
-  "listPoolNodeCountsInternal",
-  "java"
-);
-
 @@clientName(BatchClient.deleteJob, "deleteJobInternal", "java");
 @@clientName(BatchClient.getJob, "getJobInternal", "java");
 @@clientName(BatchClient.updateJob, "updateJobInternal", "java");
