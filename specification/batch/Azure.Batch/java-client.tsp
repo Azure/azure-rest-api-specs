@@ -192,3 +192,27 @@ op listPoolNodeCountsCustomization is Azure.Batch.ListOperationNew<
   listPoolNodeCountsCustomization,
   "java"
 );
+
+// List Jobs Operation
+@doc("Optional parameters for List Jobs operation.")
+model ListBatchJobsOptions {
+  ...Azure.Batch.CommonListParameters;
+  ...Azure.Batch.ListJobsParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for List Jobs operation.")
+@route("/jobs")
+op listJobsCustomization is Azure.Batch.ListOperationNew<
+  {
+    @doc("Optional parameters for List Jobs operation.")
+    options?: ListBatchJobsOptions;
+  },
+  Azure.Batch.BatchJobListResult
+>;
+
+@@override(Azure.Batch.Jobs.listJobs,
+  listJobsCustomization,
+  "java"
+);
+
