@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "policyDefinitionName": "RandomizeVMAllocation",
+    "api-version": "2025-03-01",
+    "parameters": {
+      "properties": {
+        "mode": "Indexed",
+        "displayName": "Randomize VM Allocation",
+        "description": "Randomly disable VM allocation in eastus by having policy rule reference the outcome of invoking an external endpoint using the CoinFlip endpoint that returns random values.",
+        "metadata": {
+          "category": "VM"
+        },
+        "policyRule": {
+          "if": {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Compute/virtualMachines"
+              },
+              {
+                "field": "location",
+                "equals": "eastus"
+              },
+              {
+                "value": "[claims().isValid]",
+                "equals": "false"
+              }
+            ]
+          },
+          "then": {
+            "effect": "deny"
+          }
+        },
+        "externalEvaluationEnforcementSettings": {
+          "missingTokenAction": "audit",
+          "endpointSettings": {
+            "kind": "CoinFlip",
+            "details": {
+              "successProbability": 0.5
+            }
+          },
+          "roleDefinitionIds": [
+            "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/roleDefinitions/f0cc2aea-b517-48f6-8f9e-0c01c687907b"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/RandomizeVMAllocation",
+        "type": "Microsoft.Authorization/policyDefinitions",
+        "name": "RandomizeVMAllocation",
+        "properties": {
+          "mode": "Indexed",
+          "displayName": "Randomize VM Allocation",
+          "description": "Randomly disable VM allocation in eastus by having policy rule reference the outcome of invoking an external endpoint using the CoinFlip endpoint that returns random values.",
+          "metadata": {
+            "category": "VM"
+          },
+          "version": "1.2.1",
+          "versions": [
+            "1.2.1",
+            "1.0.0"
+          ],
+          "policyRule": {
+            "if": {
+              "allOf": [
+                {
+                  "field": "type",
+                  "equals": "Microsoft.Compute/virtualMachines"
+                },
+                {
+                  "field": "location",
+                  "equals": "eastus"
+                },
+                {
+                  "value": "[claims().isValid]",
+                  "equals": "false"
+                }
+              ]
+            },
+            "then": {
+              "effect": "deny"
+            }
+          },
+          "externalEvaluationEnforcementSettings": {
+            "missingTokenAction": "audit",
+            "endpointSettings": {
+              "kind": "CoinFlip",
+              "details": {
+                "successProbability": 0.5
+              }
+            },
+            "roleDefinitionIds": [
+              "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/roleDefinitions/f0cc2aea-b517-48f6-8f9e-0c01c687907b"
+            ]
+          },
+          "policyType": "Custom"
+        }
+      }
+    }
+  }
+}

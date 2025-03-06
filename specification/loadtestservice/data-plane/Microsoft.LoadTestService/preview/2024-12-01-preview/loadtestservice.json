@@ -1369,6 +1369,9 @@
           "List the dimension values for the given metric dimension name.": {
             "$ref": "./examples/ListMetricDimensionValues.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3268,6 +3271,30 @@
         }
       }
     },
+    "ManagedIdentityType": {
+      "type": "string",
+      "description": "Managed identity type.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System-assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identity."
+          }
+        ]
+      }
+    },
     "MetricAvailability": {
       "type": "object",
       "description": "Metric availability specifies the time grain (aggregation interval or frequency)",
@@ -4947,29 +4974,8 @@
           "description": "Resource Id of the managed identity referencing the metrics."
         },
         "engineBuiltInIdentityType": {
-          "type": "string",
-          "description": "Type of the managed identity built in load test engines",
-          "default": "SystemAssigned",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "ManagedIdentityType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "SystemAssigned",
-                "value": "SystemAssigned",
-                "description": "System-assigned managed identity."
-              },
-              {
-                "name": "UserAssigned",
-                "value": "UserAssigned",
-                "description": "User-assigned managed identity."
-              }
-            ]
-          }
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "Type of the managed identity built in load test engines"
         },
         "engineBuiltInIdentityIds": {
           "type": "array",
@@ -5160,29 +5166,8 @@
           "description": "Resource Id of the managed identity referencing the metrics."
         },
         "engineBuiltInIdentityType": {
-          "type": "string",
-          "description": "Type of the managed identity built in load test engines",
-          "default": "SystemAssigned",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "ManagedIdentityType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "SystemAssigned",
-                "value": "SystemAssigned",
-                "description": "System-assigned managed identity."
-              },
-              {
-                "name": "UserAssigned",
-                "value": "UserAssigned",
-                "description": "User-assigned managed identity."
-              }
-            ]
-          }
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "Type of the managed identity built in load test engines"
         },
         "engineBuiltInIdentityIds": {
           "type": "array",
@@ -5690,7 +5675,8 @@
         },
         "loadTestConfiguration": {
           "$ref": "#/definitions/LoadTestConfiguration",
-          "description": "The load test configuration."
+          "description": "The load test configuration.",
+          "readOnly": true
         },
         "testArtifacts": {
           "$ref": "#/definitions/TestRunArtifacts",
@@ -5919,10 +5905,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "loadTestConfiguration": {
-          "$ref": "#/definitions/LoadTestConfiguration",
-          "description": "The load test configuration."
         },
         "displayName": {
           "type": "string",
@@ -6897,7 +6879,11 @@
       "in": "query",
       "description": "Comma separated list IDs of the tests which should be associated with the test profiles to fetch.",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ListTestProfileQueryParams.testProfileIds": {
@@ -6905,7 +6891,11 @@
       "in": "query",
       "description": "Comma separated list of IDs of the test profiles to filter.",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ListTestProfileRunQueryParams.createdDateEndTime": {
@@ -6976,7 +6966,11 @@
       "in": "query",
       "description": "Comma separated list of Statuses of the test profile runs to filter.",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ListTestProfileRunQueryParams.testProfileIds": {
@@ -6984,7 +6978,11 @@
       "in": "query",
       "description": "Comma separated IDs of the test profiles which should be associated with the test profile runs to fetch.",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ListTestProfileRunQueryParams.testProfileRunIds": {
@@ -6992,7 +6990,11 @@
       "in": "query",
       "description": "Comma separated list of IDs of the test profile runs to filter.",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ListTestQueryParams.lastModifiedEndTime": {

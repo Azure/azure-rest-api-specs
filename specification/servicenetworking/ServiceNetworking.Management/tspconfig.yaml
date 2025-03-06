@@ -25,6 +25,7 @@ options:
     hierarchyClient: false
     experimentalExtensibleEnums: true
     enableOperationGroup: true
+    generateSample: true
     package-dir: "arm-servicenetworking"
     flavor: "azure"
     packageDetails:
@@ -35,7 +36,23 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/servicenetworking"
+    package-dir: "armservicenetworking"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-servicenetworking"
     flavor: "azure"
     service-name: "Traffic Controller"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.ServiceNetworking"
+    clear-output-folder: true
+    use-write-core: true
+    namespace: "{package-dir}"

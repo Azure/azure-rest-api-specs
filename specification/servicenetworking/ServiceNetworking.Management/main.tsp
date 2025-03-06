@@ -7,9 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 /** Traffic Controller Provider management API. */
 @armProviderNamespace
 @armCommonTypesVersion("v3")
-@service({
-  title: "TrafficController",
-})
+@service(#{ title: "TrafficController" })
 @versioned(Versions)
 namespace Microsoft.ServiceNetworking;
 
@@ -38,7 +36,7 @@ using Azure.ResourceManager;
 model Frontend is TrackedResource<FrontendProperties> {
   /** Frontends */
   @key("frontendName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @segment("frontends")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
@@ -48,11 +46,11 @@ model Frontend is TrackedResource<FrontendProperties> {
 /** Frontend Properties. */
 model FrontendProperties {
   /** The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fqdn?: string;
 
   /** Provisioning State of Traffic Controller Frontend Resource */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -62,11 +60,37 @@ model FrontendProperties {
 model Association is TrackedResource<AssociationProperties> {
   /** Name of Association */
   @key("associationName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @segment("associations")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
   name: string;
+}
+
+/** The type used for update operations of the Association. */
+model AssociationUpdate {
+  /** Resource tags. */
+  tags?: TrackedResource.tags;
+
+  /** The resource-specific properties for this resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: AssociationUpdateProperties;
+}
+
+/** The updatable properties of the Association. */
+model AssociationUpdateProperties {
+  /** Association Type */
+  associationType?: AssociationType;
+
+  /** Association Subnet */
+  subnet?: AssociationSubnetUpdate;
+}
+
+/** Association Subnet. */
+model AssociationSubnetUpdate {
+  /** Association ID. */
+  id?: string;
 }
 
 /** Association Properties. */
@@ -78,7 +102,7 @@ model AssociationProperties {
   subnet?: AssociationSubnet;
 
   /** Provisioning State of Traffic Controller Association Resource */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -101,7 +125,7 @@ model AssociationSubnet {
 model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
   /** SecurityPolicy */
   @key("securityPolicyName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @segment("securityPolicies")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
@@ -111,14 +135,14 @@ model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
 /** SecurityPolicy Properties. */
 model SecurityPolicyProperties {
   /** Type of the Traffic Controller Security Policy */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   policyType?: PolicyType;
 
   /** Web Application Firewall Policy of the Traffic Controller Security Policy */
   wafPolicy?: WafPolicy;
 
   /** Provisioning State of Traffic Controller SecurityPolicy Resource */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -163,29 +187,28 @@ model TrafficController is TrackedResource<TrafficControllerProperties> {
 /** Traffic Controller Properties. */
 model TrafficControllerProperties {
   /** Configuration Endpoints. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationEndpoints?: string[];
 
   /** Frontends References List */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   frontends?: ResourceId[];
 
   /** Associations References List */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   associations?: ResourceId[];
 
   /** Security Policies References List */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_05_01_preview)
   securityPolicies?: ResourceId[];
 
   /** Security Policy Configuration */
   @added(Versions.v2024_05_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", [])
   securityPolicyConfigurations?: SecurityPolicyConfigurations;
 
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -232,13 +255,7 @@ interface AssociationsInterface {
     Association,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmCustomPatchSync<
-    Association,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Association,
-      AssociationProperties
-    >
-  >;
+  update is ArmCustomPatchSync<Association, AssociationUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Association>;
   listByTrafficController is ArmResourceListByParent<Association>;
 }
