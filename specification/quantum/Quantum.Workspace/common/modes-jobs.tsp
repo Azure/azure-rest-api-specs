@@ -92,9 +92,8 @@ model JobDetails extends ItemDetails {
   status?: JobStatus;
 
   /** The job metadata. Metadata provides client the ability to store client-specific information */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  metadata?: Record<unknown>;
+  metadata?: {};
 
   /** The time when a job was successfully cancelled. */
   @visibility(Lifecycle.Read)
@@ -109,9 +108,8 @@ model JobDetails extends ItemDetails {
   quantumComputingData?: QuantumComputingData;
 
   /** The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data. */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  inputParams?: Record<unknown>;
+  inputParams?: {};
 
   /** The output blob uri. When a job finishes successfully, results will be uploaded to this blob. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
