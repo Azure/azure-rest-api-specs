@@ -23081,21 +23081,17 @@
     },
     "MonitoringSignalType": {
       "enum": [
-        "Custom",
         "DataDrift",
         "PredictionDrift",
         "DataQuality",
-        "FeatureAttributionDrift"
+        "FeatureAttributionDrift",
+        "Custom"
       ],
       "type": "string",
       "x-ms-enum": {
         "name": "MonitoringSignalType",
         "modelAsString": true,
         "values": [
-          {
-            "value": "Custom",
-            "description": "Tracks a custom signal provided by users."
-          },
           {
             "value": "DataDrift",
             "description": "Tracks model input data distribution change, comparing against training data or past production data."
@@ -23111,6 +23107,10 @@
           {
             "value": "FeatureAttributionDrift",
             "description": "Tracks feature importance change in production, comparing against feature importance at training time."
+          },
+          {
+            "value": "Custom",
+            "description": "Tracks a custom signal provided by users."
           }
         ]
       },
