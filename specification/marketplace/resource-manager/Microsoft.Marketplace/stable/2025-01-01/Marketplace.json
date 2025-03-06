@@ -1167,6 +1167,57 @@
         }
       }
     },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers/{offerId}/contextsView": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreCollectionOffer_ContextsView",
+        "description": "Retrieve offer information with plans under required contexts restrictions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferIdPathParameter"
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/CollectionOffersByAllContextsPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieve offer information with plans under required contexts restrictions.",
+            "schema": {
+              "$ref": "#/definitions/Offer"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateStoreCollectionOfferContextsView": {
+            "$ref": "./examples/GetPrivateStoreCollectionOfferContextsView.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers/{offerId}/upsertOfferWithMultiContext": {
       "parameters": [
         {
@@ -2385,6 +2436,11 @@
             "type": "string"
           }
         },
+        "isStopSell": {
+          "description": "Indicating whether the offer is stop sell or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "plans": {
           "description": "Offer plans",
           "type": "array",
@@ -2437,6 +2493,11 @@
         "stackType": {
           "description": "Stack type (classic or arm)",
           "type": "string",
+          "readOnly": true
+        },
+        "isStopSell": {
+          "description": "Indicating whether the plan is stop sell or not.",
+          "type": "boolean",
           "readOnly": true
         }
       }
