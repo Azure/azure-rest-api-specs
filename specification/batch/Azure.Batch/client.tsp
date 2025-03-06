@@ -136,7 +136,6 @@ interface BatchClient {
 @@clientName(BatchClient.enableJob, "enableJobInternal", "java");
 @@clientName(BatchClient.terminateJob, "terminateJobInternal", "java");
 @@clientName(BatchClient.createJob, "createJobInternal", "java");
-@@clientName(BatchClient.getJobTaskCounts, "getJobTaskCountsInternal", "java");
 
 @@clientName(BatchClient.jobScheduleExists,
   "jobScheduleExistsInternal",
