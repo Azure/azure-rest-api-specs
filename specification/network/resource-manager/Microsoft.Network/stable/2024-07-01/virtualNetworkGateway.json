@@ -2901,7 +2901,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Request received successfully. Prepare migration in progress; follow the Location header to poll for final outcome."
+            "description": "Request received successfully. Prepare migration in progress; follow the Location header to poll for final outcome.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2949,7 +2954,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Request received successfully. Execute migration in progress; follow the Location header to poll for final outcome."
+            "description": "Request received successfully. Execute migration in progress; follow the Location header to poll for final outcome.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2997,7 +3007,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Request received successfully. Commit migration in progress; follow the Location header to poll for final outcome."
+            "description": "Request received successfully. Commit migration in progress; follow the Location header to poll for final outcome.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3045,7 +3060,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Request received successfully. Abort migration in progress; follow the Location header to poll for final outcome."
+            "description": "Request received successfully. Abort migration in progress; follow the Location header to poll for final outcome.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
