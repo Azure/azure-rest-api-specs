@@ -60,7 +60,7 @@
   "paths": {
     "/aliases": {
       "get": {
-        "operationId": "Aliases_ListAliases",
+        "operationId": "Aliases_List",
         "description": "List all aliases",
         "parameters": [
           {
@@ -87,17 +87,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Aliases_ListAliases_MaximumSet": {
-            "$ref": "./examples/Aliases_ListAliases_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       },
       "post": {
-        "operationId": "Aliases_CreateAlias",
+        "operationId": "Aliases_Create",
         "description": "Create an alias",
         "parameters": [
           {
@@ -139,11 +134,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Aliases_CreateAlias_MaximumSet": {
-            "$ref": "./examples/Aliases_CreateAlias_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -195,7 +185,7 @@
         }
       },
       "patch": {
-        "operationId": "Aliases_UpdateAlias",
+        "operationId": "Aliases_Update",
         "description": "Update an alias",
         "consumes": [
           "application/merge-patch+json"
@@ -261,18 +251,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Aliases_UpdateAlias_MaximumSet": {
-            "$ref": "./examples/Aliases_UpdateAlias_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Aliases_DeleteAlias",
+        "operationId": "Aliases_Delete",
         "description": "Delete an alias",
         "parameters": [
           {
@@ -302,17 +287,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Aliases_DeleteAlias_MaximumSet": {
-            "$ref": "./examples/Aliases_DeleteAlias_MaximumSet_Gen.json"
-          }
         }
       }
     },
-    "/aliases/{id}:activateAlias": {
+    "/aliases/{id}:activate": {
       "post": {
-        "operationId": "Aliases_ActivateAlias",
+        "operationId": "Aliases_Activate",
         "description": "Deactivate an alias",
         "parameters": [
           {

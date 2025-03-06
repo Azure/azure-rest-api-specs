@@ -39,7 +39,7 @@ interface Aliases {
   @pollingOperation(
     MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
   )
-  createAlias is Operations.LongRunningResourceCreateWithServiceProvidedName<
+  create is Operations.LongRunningResourceCreateWithServiceProvidedName<
     Alias,
     jobLocationResponseHeaders
   >;
@@ -48,16 +48,16 @@ interface Aliases {
   @pollingOperation(
     MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
   )
-  updateAlias is Operations.LongRunningResourceCreateOrUpdate<Alias>;
+  update is Operations.LongRunningResourceCreateOrUpdate<Alias>;
 
   @doc("Delete an alias")
-  deleteAlias is Operations.ResourceDelete<Alias>;
+  delete is Operations.ResourceDelete<Alias>;
 
   @doc("List all aliases")
-  listAliases is Operations.ResourceList<Alias>;
+  list is Operations.ResourceList<Alias>;
 
   @doc("Deactivate an alias")
-  activateAlias is Operations.ResourceAction<
+  activate is Operations.ResourceAction<
     Alias,
     ActivateAlias,
     ActivateAlias
