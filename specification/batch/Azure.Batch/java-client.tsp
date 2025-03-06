@@ -122,3 +122,27 @@ op listPoolsCustomization is Azure.Batch.ListOperationNew<
 >;
 
 @@override(Azure.Batch.Pools.listPools, listPoolsCustomization, "java");
+
+// Disable Pool Autoscale
+@doc("Optional parameters for Disable Pool AutoScale operation.")
+model DisableBatchPoolAutoScaleOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Disable Pool AutoScale operation.")
+@route("/pools/{poolId}/disableautoscale")
+op disablePoolAutoScaleCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.DisablePoolAutoscaleParameters;
+
+    @doc("Optional parameters for Disable Pool AutoScale operation.")
+    options?: DisableBatchPoolAutoScaleOptions;
+  },
+  Azure.Batch.RequestSuccessResponseHeaders
+>;
+
+@@override(Azure.Batch.Pools.disablePoolAutoScale,
+  disablePoolAutoScaleCustomization,
+  "java"
+);

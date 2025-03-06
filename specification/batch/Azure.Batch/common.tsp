@@ -162,6 +162,19 @@ op PostOperation<TResource, TResponse> is RpcOperation<
   BatchError
 >;
 
+// TODO: Once we migrate all PostOperation methods in routes.tsp to use this, delete original PostOperation (above) and rename this to PostOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@post
+op PostOperationNew<
+  TResource extends TypeSpec.Reflection.Model,
+  TResponse
+> is RpcOperation<
+  TResource,
+  TResponse & BatchResponseHeaders,
+  NoFilter,
+  BatchError
+>;
+
 // Templates
 alias NoFilter = {};
 alias MinimalMetadata = {
