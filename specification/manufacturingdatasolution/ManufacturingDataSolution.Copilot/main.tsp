@@ -17,7 +17,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 
 @route("/copilot")
-@service(#{ title: "Microsoft.Industry.Manufacturing.MDS.Copilot", })
+@service(#{ title: "Microsoft.Industry.Manufacturing.MDS.Copilot" })
 @server(
   "https://mds-{mdsUniqueId}.{location}.cloudapp.azure.com/",
   "Manufacturing Data Solution global endpoint.",
