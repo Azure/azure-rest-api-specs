@@ -146,3 +146,26 @@ op disablePoolAutoScaleCustomization is Azure.Batch.PostOperationNew<
   disablePoolAutoScaleCustomization,
   "java"
 );
+
+// List Supported Images Parameters
+@doc("Optional parameters for List Supported Images operation.")
+model ListSupportedBatchImagesOptions {
+  ...Azure.Batch.CommonListParameters;
+  ...Azure.Batch.ListSupportedImagesParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for List Supported Images operation.")
+@route("/supportedimages")
+op listSupportedImagesCustomization is Azure.Batch.ListOperationNew<
+  {
+    @doc("Optional parameters for List Supported Images operation.")
+    options?: ListSupportedBatchImagesOptions;
+  },
+  Azure.Batch.BatchAccountListSupportedImagesResult
+>;
+
+@@override(Azure.Batch.Pools.listSupportedImages,
+  listSupportedImagesCustomization,
+  "java"
+);
