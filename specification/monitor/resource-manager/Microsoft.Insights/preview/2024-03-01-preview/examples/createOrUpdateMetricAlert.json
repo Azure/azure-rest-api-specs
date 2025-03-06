@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
+    "resourceGroupName": "monitorRG",
+    "ruleName": "metricAlertRule",
+    "api-version": "2024-03-01-preview",
+    "parameters": {
+      "location": "global",
+      "tags": {
+        "environment": "production"
+      },
+      "kind": "Metric",
+      "properties": {
+        "description": "This is a metric alert rule",
+        "severity": 2,
+        "enabled": true,
+        "scopes": [
+          "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Storage/storageAccounts/storageAccount1"
+        ],
+        "evaluationFrequency": "PT5M",
+        "windowSize": "PT15M",
+        "criteria": {
+          "threshold": 90,
+          "operator": "GreaterThan"
+        },
+        "autoMitigate": true,
+        "targetResourceType": "Microsoft.Storage/storageAccounts",
+        "targetResourceRegion": "eastus",
+        "actions": [
+          {
+            "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Insights/actionGroups/actionGroup1"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Insights/metricAlerts/metricAlertRule",
+        "name": "metricAlertRule",
+        "type": "Microsoft.Insights/metricAlerts",
+        "location": "global",
+        "tags": {
+          "environment": "production"
+        },
+        "kind": "Metric",
+        "properties": {
+          "description": "This is a metric alert rule",
+          "severity": 2,
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Storage/storageAccounts/storageAccount1"
+          ],
+          "evaluationFrequency": "PT5M",
+          "windowSize": "PT15M",
+          "criteria": {
+            "threshold": 90,
+            "operator": "GreaterThan"
+          },
+          "autoMitigate": true,
+          "targetResourceType": "Microsoft.Storage/storageAccounts",
+          "targetResourceRegion": "eastus",
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Insights/actionGroups/actionGroup1"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Insights/metricAlerts/metricAlertRule",
+        "name": "metricAlertRule",
+        "type": "Microsoft.Insights/metricAlerts",
+        "location": "global",
+        "tags": {
+          "environment": "production"
+        },
+        "kind": "Metric",
+        "properties": {
+          "description": "This is a metric alert rule",
+          "severity": 2,
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Storage/storageAccounts/storageAccount1"
+          ],
+          "evaluationFrequency": "PT5M",
+          "windowSize": "PT15M",
+          "criteria": {
+            "threshold": 90,
+            "operator": "GreaterThan"
+          },
+          "autoMitigate": true,
+          "targetResourceType": "Microsoft.Storage/storageAccounts",
+          "targetResourceRegion": "eastus",
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Insights/actionGroups/actionGroup1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
