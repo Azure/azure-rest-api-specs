@@ -123,7 +123,7 @@ op listPoolsCustomization is Azure.Batch.ListOperationNew<
 
 @@override(Azure.Batch.Pools.listPools, listPoolsCustomization, "java");
 
-// Disable Pool Autoscale
+// Disable Pool Autoscale Operation
 @doc("Optional parameters for Disable Pool AutoScale operation.")
 model DisableBatchPoolAutoScaleOptions {
   ...Azure.Batch.CommonParameters;
@@ -147,7 +147,7 @@ op disablePoolAutoScaleCustomization is Azure.Batch.PostOperationNew<
   "java"
 );
 
-// List Supported Images Parameters
+// List Supported Images Operation
 @doc("Optional parameters for List Supported Images operation.")
 model ListSupportedBatchImagesOptions {
   ...Azure.Batch.CommonListParameters;
@@ -167,5 +167,28 @@ op listSupportedImagesCustomization is Azure.Batch.ListOperationNew<
 
 @@override(Azure.Batch.Pools.listSupportedImages,
   listSupportedImagesCustomization,
+  "java"
+);
+
+// List Pool Node Counts Operation
+@doc("Optional parameters for List Pool Node Counts operation.")
+model ListBatchPoolNodeCountsOptions {
+  ...Azure.Batch.CommonListParameters;
+  ...Azure.Batch.ListPoolNodeCountsParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for List Pool Node Counts operation.")
+@route("/nodecounts")
+op listPoolNodeCountsCustomization is Azure.Batch.ListOperationNew<
+  {
+    @doc("Optional parameters for List Pool Node Counts operation.")
+    options?: ListBatchPoolNodeCountsOptions;
+  },
+  Azure.Batch.BatchPoolNodeCountsListResult
+>;
+
+@@override(Azure.Batch.Pools.listPoolNodeCounts,
+  listPoolNodeCountsCustomization,
   "java"
 );
