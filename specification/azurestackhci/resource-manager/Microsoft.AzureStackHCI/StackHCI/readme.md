@@ -108,6 +108,7 @@ suppressions:
       - edgeDevices.json
       - securitySettings.json
       - edgeDeviceJobs.json
+      - validatedSolutionRecipes.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change

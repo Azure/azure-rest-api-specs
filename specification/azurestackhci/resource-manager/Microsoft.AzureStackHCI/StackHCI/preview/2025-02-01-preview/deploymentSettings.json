@@ -318,6 +318,10 @@
           "type": "string",
           "description": "For Azure blob service endpoint type, select either Default or Custom domain. If you selected **Custom domain, enter the domain for the blob service in this format core.windows.net."
         },
+        "clusterPattern": {
+          "$ref": "./hciCommon.json#/definitions/ClusterPattern",
+          "description": "Cluster Pattern supported."
+        },
         "hardwareClass": {
           "$ref": "./hciCommon.json#/definitions/HardwareClass",
           "description": "Hardware class of the cluster.",
@@ -422,6 +426,16 @@
         "optionalServices": {
           "$ref": "#/definitions/OptionalServices",
           "description": "OptionalServices config to deploy AzureStackHCI Cluster."
+        },
+        "localAvailabilityZones": {
+          "type": "array",
+          "items": {
+            "$ref": "./hciCommon.json#/definitions/LocalAvailabilityZones"
+          },
+          "description": "Local Availability Zone information for HCI cluster",
+          "x-ms-identifiers": [
+            "localAvailabilityZoneName"
+          ]
         },
         "assemblyInfo": {
           "$ref": "#/definitions/AssemblyInfo",

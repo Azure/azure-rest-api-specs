@@ -177,6 +177,48 @@
         }
       }
     },
+    "ClusterPattern": {
+      "type": "string",
+      "description": "Supported Storage Pattern for HCI Cluster",
+      "enum": [
+        "Standard",
+        "RackAware"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterPattern",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard cluster."
+          },
+          {
+            "name": "RackAware",
+            "value": "RackAware",
+            "description": "RackAware cluster."
+          }
+        ]
+      }
+    },
+    "LocalAvailabilityZones": {
+      "type": "object",
+      "description": "Local Availability Zone information for HCI cluster",
+      "properties": {
+        "localAvailabilityZoneName": {
+          "type": "string",
+          "description": "Local Availability Zone name for HCI cluster"
+        },
+        "nodes": {
+          "type": "array",
+          "description": "Nodes belonging to a particular zone",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "EceSecrets": {
       "type": "string",
       "description": "Secret names allowed for Enterprise Cloud Engine (ECE) deployment.",

@@ -889,6 +889,21 @@
             "$ref": "#/definitions/SecretsLocationDetails"
           },
           "x-ms-identifiers": []
+        },
+        "clusterPattern": {
+          "$ref": "./hciCommon.json#/definitions/ClusterPattern",
+          "description": "Supported Storage Type for HCI Cluster",
+          "readOnly": true
+        },
+        "localAvailabilityZones": {
+          "type": "array",
+          "description": "Local Availability Zone information for HCI cluster",
+          "items": {
+            "$ref": "./hciCommon.json#/definitions/LocalAvailabilityZones"
+          },
+          "x-ms-identifiers": [
+            "localAvailabilityZoneName"
+          ]
         }
       }
     },
