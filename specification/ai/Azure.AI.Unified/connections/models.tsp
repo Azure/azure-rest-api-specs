@@ -54,6 +54,9 @@ union ConnectionCategory {
   @doc("Azure AI Search")
   AzureAISearch: "CognitiveSearch",
 
+  @doc("CosmosDB"):
+  CosmosDB: "CosmosDB",
+
   @doc("Generic connection that uses API Key authentication")
   APIKey: "ApiKey",
 }

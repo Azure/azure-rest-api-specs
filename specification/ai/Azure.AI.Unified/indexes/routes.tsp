@@ -50,19 +50,15 @@ interface Indexes {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Creates or updates a IndexVersion.")
-  @route("/indexes/{name}/versions/{version}")
-  @put
-  createOrUpdate is Azure.Core.Foundations.Operation<
+  @route("/indexes/{name}:create")
+  @post
+  createIndex is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
       @maxLength(254)
       @path
       name: string;
-
-      @doc("Version of the index.")
-      @path
-      version: string;
 
       @doc("Properties of an Index Version.")
       @bodyRoot

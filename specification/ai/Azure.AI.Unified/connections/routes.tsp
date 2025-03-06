@@ -32,7 +32,7 @@ interface Connections {
     ListQueryParametersTrait<{
         @doc("Specific type of connection to return in list")
         @query("$connectionCategory")
-        connectionCategory?: string,
+        connectionCategory?: ConnectionCategory,
 
         ...StandardListQueryParameters;
       }>
