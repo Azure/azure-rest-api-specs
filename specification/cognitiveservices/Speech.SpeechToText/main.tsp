@@ -15,9 +15,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 
-@service({
-  title: "Azure Speech Services SpeechToText API",
-})
+@service(#{ title: "Azure Speech Services SpeechToText API" })
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
   "{endpoint}/speechtotext",
