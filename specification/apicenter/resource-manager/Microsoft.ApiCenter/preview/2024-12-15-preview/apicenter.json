@@ -4531,54 +4531,7 @@
     },
     "AnalyzerFilterCondition": {
       "type": "object",
-      "description": "Analyzer filter condition.",
-      "properties": {
-        "property": {
-          "type": "string",
-          "description": "The property to filter on, e.g. \"lifecycleStage\"."
-        },
-        "operator": {
-          "$ref": "#/definitions/AnalyzerFilterOperator",
-          "description": "The operator to use for the filter, e.g. \"equals\"."
-        },
-        "value": {
-          "$ref": "#/definitions/AnalyzerFilterValue",
-          "description": "The value to filter on, e.g. \"production\"."
-        }
-      },
-      "required": [
-        "property",
-        "operator",
-        "value"
-      ]
-    },
-    "AnalyzerFilterOperator": {
-      "type": "string",
-      "description": "Allowed analyzer filter operator values.",
-      "enum": [
-        "equals",
-        "contains"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzerFilterOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Equals",
-            "value": "equals",
-            "description": "In operator."
-          },
-          {
-            "name": "Contains",
-            "value": "contains",
-            "description": "Contains operator."
-          }
-        ]
-      }
-    },
-    "AnalyzerFilterValue": {
-      "type": "object",
-      "description": "Analyzer filter value. The value type of which depends on selected filter property."
+      "description": "Analyzer filter condition."
     },
     "AnalyzerRulesetState": {
       "type": "string",

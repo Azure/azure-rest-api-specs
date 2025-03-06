@@ -826,46 +826,11 @@ model RulesetExportResult {
 }
 
 /**
- * Analyzer filter value. The value type of which depends on selected filter property.
+ * Analyzer filter condition.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing service"
 @added(Versions.v2024_12_15_preview)
-model AnalyzerFilterValue {}
-
-/**
- * Allowed analyzer filter operator values.
- */
-@added(Versions.v2024_12_15_preview)
-union AnalyzerFilterOperator {
-  string,
-
-  @doc("In operator.")
-  Equals: "equals",
-
-  @doc("Contains operator.")
-  Contains: "contains",
-}
-
-/**
- * Analyzer filter condition.
- */
-@added(Versions.v2024_12_15_preview)
-model AnalyzerFilterCondition {
-  /**
-   * The property to filter on, e.g. "lifecycleStage".
-   */
-  property: string;
-
-  /**
-   * The operator to use for the filter, e.g. "equals".
-   */
-  operator: AnalyzerFilterOperator;
-
-  /**
-   * The value to filter on, e.g. "production".
-   */
-  value: AnalyzerFilterValue;
-}
+model AnalyzerFilterCondition {}
 
 /**
  * The API analyzer filter, used to select API definitions for static analysis. All the conditions get applied with the logical AND operator.
