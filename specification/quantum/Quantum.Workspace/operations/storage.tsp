@@ -7,8 +7,9 @@ import "./operations.tsp";
 import "../common/models-storage.tsp";
 
 using TypeSpec.Rest;
-
 using TypeSpec.Http;
+
+using Quantum.Workspace;
 
 alias BlobDetailsParam = {
   /** The details (name and container) of the blob. */
