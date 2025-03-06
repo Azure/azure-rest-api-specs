@@ -211,8 +211,29 @@ op listJobsCustomization is Azure.Batch.ListOperationNew<
   Azure.Batch.BatchJobListResult
 >;
 
-@@override(Azure.Batch.Jobs.listJobs,
-  listJobsCustomization,
+@@override(Azure.Batch.Jobs.listJobs, listJobsCustomization, "java");
+
+// List Jobs From Schedule Operation
+@doc("Optional parameters for List Jobs From Schedule operation.")
+model ListBatchJobsFromScheduleOptions {
+  ...Azure.Batch.CommonListParameters;
+  ...Azure.Batch.ListJobsFromScheduleParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for List Jobs From Schedule operation.")
+@route("/jobschedules/{jobScheduleId}/jobs")
+op listJobsFromScheduleCustomization is Azure.Batch.ListOperationNew<
+  {
+    ...Azure.Batch.ListJobsFromScheduleRequiredParameters;
+
+    @doc("Optional parameters for List Jobs From Schedule operation.")
+    options?: ListBatchJobsFromScheduleOptions;
+  },
+  Azure.Batch.BatchJobListResult
+>;
+
+@@override(Azure.Batch.Jobs.listJobsFromSchedule,
+  listJobsFromScheduleCustomization,
   "java"
 );
-

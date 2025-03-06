@@ -421,22 +421,48 @@ interface Pools {
 // Job Parameter Aliases
 alias ListJobsParameters = {
   @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
 
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
 
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+alias ListJobsFromScheduleRequiredParameters = {
+  @doc("The ID of the Job Schedule from which you want to get a list of Jobs.")
+  @path
+  jobScheduleId: string;
+};
+
+alias ListJobsFromScheduleParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
 };
 
 // Job Interface
@@ -639,7 +665,7 @@ interface Jobs {
   @route("/jobs")
   listJobs is ListOperationNew<
     {
-      ...CommonListParameters,
+      ...CommonListParameters;
       ...ListJobsParameters;
     },
     BatchJobListResult
@@ -648,30 +674,11 @@ interface Jobs {
   @summary("Lists the Jobs that have been created under the specified Job Schedule.")
   @doc("Lists the Jobs that have been created under the specified Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/jobs")
-  @clientName("listJobsFromScheduleInternal", "java")
-  listJobsFromSchedule is ListOperation<
+  listJobsFromSchedule is ListOperationNew<
     {
-      @doc("The ID of the Job Schedule from which you want to get a list of Jobs.")
-      @path
-      jobScheduleId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListJobsFromScheduleRequiredParameters;
+      ...ListJobsFromScheduleParameters;
     },
     BatchJobListResult
   >;
