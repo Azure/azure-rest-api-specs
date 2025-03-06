@@ -1431,6 +1431,21 @@
         "availabilityGroupName": {
           "type": "string",
           "description": "The name of the availability group to be used for the database replication."
+        },
+        "assessmentCategories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "NetworkConnectivity",
+              "BoxMiPrerequisites"
+            ],
+            "x-ms-enum": {
+              "name": "assessmentCategory",
+              "modelAsString": true
+            }
+          },
+          "description": "An array of strings, where each value represents the category of the assessment to be performed."
         }
       },
       "required": [
