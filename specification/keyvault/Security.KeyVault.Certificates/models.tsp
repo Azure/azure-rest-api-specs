@@ -155,7 +155,7 @@ model CertificateListResult {
    * The URL to get the next set of certificates.
    */
   @TypeSpec.nextLink
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 
@@ -196,13 +196,13 @@ model CertificateAttributes {
   /**
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete enabled, otherwise 0.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoverableDays?: int32;
 
   /**
    * Reflects the deletion recovery level currently in effect for certificates in the current vault. If it contains 'Purgeable', the certificate can be permanently deleted by a privileged user; otherwise, only the system can purge the certificate, at the end of the retention interval.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoveryLevel?: DeletionRecoveryLevel;
 }
 
@@ -234,14 +234,14 @@ model Attributes {
   /**
    * Creation time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   updated?: utcDateTime;
 }
@@ -260,14 +260,14 @@ model DeletedCertificateBundle {
   /**
    * The time when the certificate is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the certificate was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   deletedDate?: utcDateTime;
 }
@@ -279,26 +279,26 @@ model CertificateBundle {
   /**
    * The certificate id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The key id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kid?: string;
 
   /**
    * The secret id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sid?: string;
 
   /**
    * Thumbprint of the certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "x5t")
   @encode("base64url")
   X509Thumbprint?: bytes;
@@ -306,7 +306,7 @@ model CertificateBundle {
   /**
    * The management policy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   policy?: CertificatePolicy;
 
   /**
@@ -343,7 +343,7 @@ model CertificatePolicy {
   /**
    * The certificate id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -560,7 +560,7 @@ model Contacts {
   /**
    * Identifier for the contacts collection.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -602,14 +602,14 @@ model CertificateIssuerListResult {
    * A response message containing a list of certificate issuers in the key vault along with a link to the next page of certificate issuers.
    */
   @items
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: CertificateIssuerItem[];
 
   /**
    * The URL to get the next set of certificate issuers.
    */
   @TypeSpec.nextLink
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 
@@ -729,14 +729,14 @@ model IssuerAttributes {
   /**
    * Creation time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   updated?: utcDateTime;
 }
@@ -748,7 +748,7 @@ model IssuerBundle {
   /**
    * Identifier for the issuer object.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -834,7 +834,7 @@ model CertificateOperation {
   /**
    * The certificate id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -991,7 +991,7 @@ model BackupCertificateResult {
   /**
    * The backup blob containing the backed up certificate.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("base64url")
   value?: bytes;
 }
@@ -1017,14 +1017,14 @@ model DeletedCertificateListResult {
    * A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates.
    */
   @items
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: DeletedCertificateItem[];
 
   /**
    * The URL to get the next set of deleted certificates.
    */
   @TypeSpec.nextLink
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 
@@ -1042,14 +1042,14 @@ model DeletedCertificateItem {
   /**
    * The time when the certificate is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the certificate was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   deletedDate?: utcDateTime;
 }
@@ -1061,6 +1061,6 @@ model PendingCertificateSigningRequestResult {
   /**
    * The pending certificate signing request as Base64 encoded string.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 }
