@@ -700,6 +700,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/availabilityGroups/{availabilityGroupName}/deleteMiLink": {
+      "post": {
+        "tags": [
+          "SqlServerAvailabilityGroups"
+        ],
+        "description": "Deletes the MI Link between an Azure Arc-enabled SQL Server and an Azure SQL Managed Instance.",
+        "operationId": "SqlServerAvailabilityGroups_deleteMiLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "$ref": "#/parameters/availabilityGroupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MI Link deletion request has been accepted and is being processed asynchronously.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header indicates how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\nMore details can be found in https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Fail over from an Arc Sql Server availability group to a Managed Instance.": {
+            "$ref": "./examples/DeleteMiLink.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/availabilityGroups/{availabilityGroupName}/removeDatabases": {
       "post": {
         "tags": [
@@ -1772,4 +1833,3 @@
     }
   }
 }
-
