@@ -82,6 +82,61 @@ model Dataset extends InputData {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
+@doc("Abstract class for model configuration.")
+@discriminator("type")
+model ModelConfig {
+  @doc("Type of the model configuration.")
+  type: ModelConfigType;
+
+  @doc("String representation of the model configuration.")
+  toString(): string;
+}
+
+@doc("Azure OpenAI model configuration.")
+model AOAIModelConfig extends ModelConfig {
+  @visibility("read")
+  type: "AOAI";
+
+  @doc("Endpoint URL for AOAI model.")
+  EndpointUrl: string;
+
+  @doc("API Key for AOAI model.")
+  ApiKey: string;
+}
+
+@doc("MaaS model configuration.")
+model MAASModelConfig extends ModelConfig {
+  @visibility("read")
+  type: "MAAS";
+
+  @doc("Endpoint URL for MaaS model.")
+  EndpointUrl: string;
+
+  @doc("API Key for MaaS model.")
+  ApiKey: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
+@doc("Model parameters for the evaluation configuration.")
+model ModelParams {
+  @doc("A dictionary of parameters for the model.")
+  Params: Dictionary<string, object> = new Dictionary<string, object>();
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
+@doc("Target for the evaluation process.")
+model EvaluationTarget {
+  @doc("System message related to the evaluation target.")
+  systemMessage: string;
+
+  @doc("Model configuration for the evaluation.")
+  modelConfig: ModelConfig;
+
+  @doc("Model parameters associated with the evaluation target.")
+  modelParams: ModelParams;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
 @doc("Abstract data class for input data configuration.")
 @discriminator("type")
 model Trigger {
@@ -128,6 +183,10 @@ model Evaluation {
   @doc("Data for evaluation.")
   @visibility("read", "create")
   data: InputData;
+
+  @doc("Evaluation target specifying the model config and parameters")
+  @visibility("read", "create")
+  target?: EvaluationTarget;
 
   @doc("Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.")
   displayName?: string;
