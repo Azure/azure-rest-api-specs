@@ -117,6 +117,12 @@ alias ListPoolsParameters = {
   $expand?: string[];
 };
 
+alias DisablePoolAutoscaleParameters = {
+  @doc("The ID of the Pool on which to disable automatic scaling.")
+  @path
+  poolId: string;
+};
+
 // Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -238,12 +244,10 @@ interface Pools {
   @summary("Disables automatic scaling for a Pool.")
   @doc("Disables automatic scaling for a Pool.")
   @route("/pools/{poolId}/disableautoscale")
-  @clientName("disablePoolAutoScaleInternal", "java")
-  disablePoolAutoScale is PostOperation<
+  disablePoolAutoScale is PostOperationNew<
     {
-      @doc("The ID of the Pool on which to disable automatic scaling.")
-      @path
-      poolId: string;
+      ...CommonParameters;
+      ...DisablePoolAutoscaleParameters;
     },
     RequestSuccessResponseHeaders
   >;
