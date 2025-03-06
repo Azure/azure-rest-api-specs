@@ -76,7 +76,7 @@ model CosmosDBIndex extends AssetBase {
 @doc("Embedding configuration class")
 model EmbeddingConfiguration {
   @doc("Connection id to embedding model")
-  connectionId: string;
+  connectionId?: string;
 
   @doc("Deployment name of embedding model")
   deploymentName: string; 
