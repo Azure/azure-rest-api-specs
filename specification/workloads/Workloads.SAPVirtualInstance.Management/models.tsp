@@ -640,7 +640,7 @@ model SAPSupportedResourceSkusResult {
   /**
    * Gets the list of SAP supported SKUs.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   supportedSkus?: SAPSupportedSku[];
 }
 
@@ -726,7 +726,7 @@ model SAPDiskConfiguration {
   /**
    * The list of supported disks for a given VM Sku.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   supportedConfigurations?: DiskDetails[];
 }
 
@@ -831,7 +831,7 @@ model SAPAvailabilityZoneDetailsResult {
   /**
    * Gets the list of availability zone pairs.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   availabilityZonePairs?: SAPAvailabilityZonePair[];
 }
 
@@ -859,13 +859,13 @@ model SAPVirtualInstanceProperties {
   /**
    * Defines the environment type - Production/Non Production.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environment: SAPEnvironmentType;
 
   /**
    * Defines the SAP Product type.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sapProduct: SAPProductType;
 
   /**
@@ -886,31 +886,31 @@ model SAPVirtualInstanceProperties {
   /**
    * Defines the SAP Instance status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: SAPVirtualInstanceStatus;
 
   /**
    * Defines the health of SAP Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: SAPHealthState;
 
   /**
    * Defines the Virtual Instance for SAP state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: SAPVirtualInstanceState;
 
   /**
    * Defines the provisioning states.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: SapVirtualInstanceProvisioningState;
 
   /**
    * Indicates any errors on the Virtual Instance for SAP solutions resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: SAPVirtualInstanceError;
 }
 
@@ -955,20 +955,20 @@ model ErrorDefinition {
   /**
    * Service specific error code which serves as the substatus for the HTTP error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * Description of the error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * Internal error details.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   details?: ErrorDefinition[];
 }
 
@@ -979,25 +979,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -1042,13 +1042,13 @@ model SAPCentralServerProperties {
   /**
    * The central services instance number.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceNo?: string;
 
   /**
    * The central services instance subnet.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subnet?: string;
 
   /**
@@ -1074,50 +1074,50 @@ model SAPCentralServerProperties {
   /**
    * The central services instance Kernel Version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kernelVersion?: string;
 
   /**
    * The central services instance Kernel Patch level.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kernelPatch?: string;
 
   /**
    * The Load Balancer details such as LoadBalancer ID attached to ASCS Virtual Machines
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   loadBalancerDetails?: LoadBalancerDetails;
 
   /**
    * The list of virtual machines corresponding to the Central Services instance.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   vmDetails?: CentralServerVmDetails[];
 
   /**
    * Defines the SAP Instance status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: SAPVirtualInstanceStatus;
 
   /**
    * Defines the health of SAP Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: SAPHealthState;
 
   /**
    * Defines the provisioning states.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: SapVirtualInstanceProvisioningState;
 
   /**
    * Defines the errors related to SAP Central Services Instance resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: SAPVirtualInstanceError;
 }
 
@@ -1128,43 +1128,43 @@ model MessageServerProperties {
   /**
    * message server port.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   msPort?: int64;
 
   /**
    * message server internal MS port.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   internalMsPort?: int64;
 
   /**
    * message server HTTP Port.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   httpPort?: int64;
 
   /**
    * message server HTTPS Port.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   httpsPort?: int64;
 
   /**
    * message server SAP Hostname.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostname?: string;
 
   /**
    * message server IP Address.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipAddress?: string;
 
   /**
    * Defines the health of SAP Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: SAPHealthState;
 }
 
@@ -1175,25 +1175,25 @@ model EnqueueServerProperties {
   /**
    * Enqueue Server SAP Hostname.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostname?: string;
 
   /**
    * Enqueue Server SAP IP Address.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipAddress?: string;
 
   /**
    * Enqueue Server Port.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   port?: int64;
 
   /**
    * Defines the health of SAP Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: SAPHealthState;
 }
 
@@ -1204,13 +1204,13 @@ model GatewayServerProperties {
   /**
    * Gateway Port.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   port?: int64;
 
   /**
    * Defines the health of SAP Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: SAPHealthState;
 }
 
@@ -1221,43 +1221,43 @@ model EnqueueReplicationServerProperties {
   /**
    * Defines the type of Enqueue Replication Server.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ersVersion?: EnqueueReplicationServerType;
 
   /**
    * ERS Instance Number.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceNo?: string;
 
   /**
    * ERS SAP Hostname.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostname?: string;
 
   /**
    * ERS SAP Kernel Version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kernelVersion?: string;
 
   /**
    * ERS SAP Kernel Patch level.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kernelPatch?: string;
 
   /**
    * ERS SAP IP Address.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipAddress?: string;
 
   /**
    * Defines the health of SAP Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: SAPHealthState;
 }
 
@@ -1268,7 +1268,7 @@ model LoadBalancerDetails {
   /**
    * Fully qualified resource ID for the load balancer.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -1279,20 +1279,20 @@ model CentralServerVmDetails {
   /**
    * Defines the type of central server VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: CentralServerVirtualMachineType;
 
   /**
    * The virtual machine id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachineId?: string;
 
   /**
    * Storage details of all the Storage Accounts attached to the ASCS Virtual Machine. For e.g. NFS on AFS Shared Storage.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   storageDetails?: StorageInformation[];
 }
 
@@ -1303,7 +1303,7 @@ model StorageInformation {
   /**
    * Fully qualified resource ID for the storage account.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -1327,56 +1327,56 @@ model SAPDatabaseProperties {
   /**
    * Database subnet.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subnet?: string;
 
   /**
    * Database SID name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   databaseSid?: string;
 
   /**
    * Database type, that is if the DB is HANA, DB2, Oracle, SAP ASE, Max DB or MS SQL Server.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   databaseType?: string;
 
   /**
    * Database IP Address.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipAddress?: string;
 
   /**
    * The Load Balancer details such as LoadBalancer ID attached to Database Virtual Machines
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   loadBalancerDetails?: LoadBalancerDetails;
 
   /**
    * The list of virtual machines corresponding to the Database resource.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   vmDetails?: DatabaseVmDetails[];
 
   /**
    * Defines the SAP Instance status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: SAPVirtualInstanceStatus;
 
   /**
    * Defines the provisioning states.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: SapVirtualInstanceProvisioningState;
 
   /**
    * Defines the errors related to Database resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: SAPVirtualInstanceError;
 }
 
@@ -1387,20 +1387,20 @@ model DatabaseVmDetails {
   /**
    * The virtual machine id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachineId?: string;
 
   /**
    * Defines the SAP Instance status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: SAPVirtualInstanceStatus;
 
   /**
    * Storage details of all the Storage Accounts attached to the Database Virtual Machine. For e.g. NFS on AFS Shared Storage.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   storageDetails?: StorageInformation[];
 }
 
@@ -1424,98 +1424,98 @@ model SAPApplicationServerProperties {
   /**
    * Application server Instance Number.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceNo?: string;
 
   /**
    * Application server Subnet.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subnet?: string;
 
   /**
    * Application server instance SAP hostname.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostname?: string;
 
   /**
    *  Application server instance SAP Kernel Version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kernelVersion?: string;
 
   /**
    * Application server instance SAP Kernel Patch level.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kernelPatch?: string;
 
   /**
    *  Application server instance SAP IP Address.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipAddress?: string;
 
   /**
    * Application server instance gateway Port.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   gatewayPort?: int64;
 
   /**
    * Application server instance ICM HTTP Port.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   icmHttpPort?: int64;
 
   /**
    * Application server instance ICM HTTPS Port.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   icmHttpsPort?: int64;
 
   /**
    * Application server instance dispatcher status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dispatcherStatus?: string;
 
   /**
    * The Load Balancer details such as LoadBalancer ID attached to Application Server Virtual Machines
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   loadBalancerDetails?: LoadBalancerDetails;
 
   /**
    * The list of virtual machines.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   vmDetails?: ApplicationServerVmDetails[];
 
   /**
    * Defines the SAP Instance status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: SAPVirtualInstanceStatus;
 
   /**
    * Defines the health of SAP Instances.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: SAPHealthState;
 
   /**
    * Defines the provisioning states.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: SapVirtualInstanceProvisioningState;
 
   /**
    * Defines the Application Instance errors.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: SAPVirtualInstanceError;
 }
 
@@ -1526,20 +1526,20 @@ model ApplicationServerVmDetails {
   /**
    * Defines the type of application server VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: ApplicationServerVirtualMachineType;
 
   /**
    * The virtual machine id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualMachineId?: string;
 
   /**
    * Storage details of all the Storage Accounts attached to the App Virtual Machine. For e.g. NFS on AFS Shared Storage.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   storageDetails?: StorageInformation[];
 }
 
@@ -1649,7 +1649,7 @@ model SshConfiguration {
   /**
    * The list of SSH public keys used to authenticate with linux based VMs.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   publicKeys?: SshPublicKey[];
 }
 
@@ -2116,7 +2116,7 @@ model VirtualMachineResourceNames {
   /**
    * The list of network interface name objects for the selected virtual machine. Currently, only one network interface is supported per virtual machine.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   networkInterfaces?: NetworkInterfaceResourceNames[];
 
   /**
@@ -2178,7 +2178,7 @@ model CentralServerFullResourceNames {
   /**
    * The list of names for all ASCS virtual machines to be deployed. The number of entries in this list should be equal to the number VMs to be created for ASCS layer. At maximum, there can be two virtual machines at this layer: ASCS and ERS.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   virtualMachines?: VirtualMachineResourceNames[];
 
   /**
@@ -2224,7 +2224,7 @@ model ApplicationServerFullResourceNames {
   /**
    * The list of virtual machine naming details.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   virtualMachines?: VirtualMachineResourceNames[];
 
   /**
@@ -2240,7 +2240,7 @@ model DatabaseServerFullResourceNames {
   /**
    * The list of virtual machine naming details.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   virtualMachines?: VirtualMachineResourceNames[];
 
   /**
@@ -2403,7 +2403,7 @@ model DiscoveryConfiguration extends SAPConfiguration {
   /**
    * The geo-location where the SAP system exists.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   appLocation?: string;
 
   /**
