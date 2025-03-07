@@ -75,7 +75,7 @@ model InstanceFeature {
 @added(Versions.v2025_04_01)
 union InstanceFeatureMode {
   string,
-  
+
   @doc("Opt in to enable a stable feature")
   "Stable",
 
