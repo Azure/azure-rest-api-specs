@@ -47,10 +47,10 @@ model EnclaveConnectionProperties {
   state?: EnclaveConnectionState;
 
   @doc("Community Resource Id.")
-  communityResourceId?: CommunityResourceId;
+  communityResourceId: CommunityResourceId;
 
   @doc("Source Resource Id.")
-  sourceResourceId?: EnclaveConnectionSourceResourceId;
+  sourceResourceId: EnclaveConnectionSourceResourceId;
 
   @doc("Source CIDR.")
   sourceCidr?: string;
@@ -59,7 +59,7 @@ model EnclaveConnectionProperties {
   ipGroup?: IPGroupResourceId;
 
   @doc("Destination Endpoint Resource Id.")
-  destinationEndpointId?: DestinationEndpointResourceId;
+  destinationEndpointId: DestinationEndpointResourceId;
 
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)

@@ -4378,7 +4378,10 @@
           "$ref": "#/definitions/RequestMetadata",
           "description": "Request metadata for the approval request."
         }
-      }
+      },
+      "required": [
+        "requestMetadata"
+      ]
     },
     "ApprovalResource": {
       "type": "object",
@@ -4560,7 +4563,10 @@
           "type": "boolean",
           "description": "Whether approval is needed for the connection (True or False)."
         }
-      }
+      },
+      "required": [
+        "ruleCollection"
+      ]
     },
     "CommunityEndpointProtocol": {
       "type": "string",
@@ -4925,7 +4931,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "communityResourceId",
+        "sourceResourceId",
+        "destinationEndpointId"
+      ]
     },
     "EnclaveConnectionResource": {
       "type": "object",
@@ -5128,7 +5139,10 @@
           "type": "boolean",
           "description": "Whether approval is needed for the connection (True or False)."
         }
-      }
+      },
+      "required": [
+        "ruleCollection"
+      ]
     },
     "EnclaveEndpointProtocol": {
       "type": "string",
@@ -5538,7 +5552,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "communityResourceId",
+        "enclaveIds",
+        "externalCidrs"
+      ]
     },
     "ExternalConnectionState": {
       "type": "string",
@@ -5770,7 +5789,15 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "connectionType",
+        "communityResourceId",
+        "destinationEnclaveId",
+        "destinationEndpointId",
+        "sourceEnclaveId",
+        "sourceCidrs"
+      ]
     },
     "InternalConnectionState": {
       "type": "string",
@@ -5897,7 +5924,10 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "required": [
+        "mode"
+      ]
     },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
@@ -6040,7 +6070,10 @@
           "$ref": "#/definitions/ApprovalStatus",
           "description": "Approval status."
         }
-      }
+      },
+      "required": [
+        "resourceAction"
+      ]
     },
     "ServiceIdentifier": {
       "type": "string",
@@ -6410,7 +6443,10 @@
           "$ref": "#/definitions/RequestMetadata",
           "description": "Request metadata for the approval request."
         }
-      }
+      },
+      "required": [
+        "requestMetadata"
+      ]
     },
     "UpdateCommunityEndpointPatchProperties": {
       "type": "object",
@@ -6440,7 +6476,10 @@
           "type": "boolean",
           "description": "Whether approval is needed for the connection (True or False)."
         }
-      }
+      },
+      "required": [
+        "ruleCollection"
+      ]
     },
     "UpdateCommunityPatchProperties": {
       "type": "object",
@@ -6522,7 +6561,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "communityResourceId",
+        "sourceResourceId",
+        "destinationEndpointId"
+      ]
     },
     "UpdateEnclaveEndpointPatchProperties": {
       "type": "object",
@@ -6552,7 +6596,10 @@
           "type": "boolean",
           "description": "Whether approval is needed for the connection (True or False)."
         }
-      }
+      },
+      "required": [
+        "ruleCollection"
+      ]
     },
     "UpdateEndpointPatchProperties": {
       "type": "object",
@@ -6613,7 +6660,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "communityResourceId",
+        "enclaveIds",
+        "externalCidrs"
+      ]
     },
     "UpdateInternalConnectionProperties": {
       "type": "object",
@@ -6662,7 +6714,15 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "connectionType",
+        "communityResourceId",
+        "destinationEnclaveId",
+        "destinationEndpointId",
+        "sourceEnclaveId",
+        "sourceCidrs"
+      ]
     },
     "UpdateTransitHubPatchProperties": {
       "type": "object",
@@ -6735,7 +6795,11 @@
           "type": "boolean",
           "description": "Deploy Bastion service (True or False)."
         }
-      }
+      },
+      "required": [
+        "enclaveVirtualNetwork",
+        "communityResourceId"
+      ]
     },
     "UpdateWorkloadPatchProperties": {
       "type": "object",
@@ -6821,7 +6885,11 @@
           "type": "boolean",
           "description": "Deploy Bastion service (True or False)."
         }
-      }
+      },
+      "required": [
+        "enclaveVirtualNetwork",
+        "communityResourceId"
+      ]
     },
     "VirtualEnclaveResourceId": {
       "type": "string",

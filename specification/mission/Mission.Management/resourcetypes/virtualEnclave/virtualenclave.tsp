@@ -122,7 +122,7 @@ model EnclaveAddressSpaces {
 @doc("Maintenance Mode")
 model MaintenanceModeConfiguration {
   @doc("Current mode of Maintenance Mode Configuration")
-  mode?: "On" | "CanNotDelete" | "Off" | string;
+  mode: "On" | "CanNotDelete" | "Off" | string;
 
   @doc("The user, group or service principal object affected by Maintenance Mode")
   principals?: Principal[];
@@ -133,17 +133,12 @@ model MaintenanceModeConfiguration {
 
 @doc("Virtual Enclave Resource properties")
 model VirtualEnclaveProperties {
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @doc("Virtual Enclave Description.")
-  description?: string;
-
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Virtual Network.")
-  enclaveVirtualNetwork?: EnclaveVirtualNetwork;
+  enclaveVirtualNetwork: EnclaveVirtualNetwork;
 
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @visibility(Lifecycle.Read)
@@ -151,7 +146,7 @@ model VirtualEnclaveProperties {
   enclaveAddressSpaces?: EnclaveAddressSpaces;
 
   @doc("Community Resource Id.")
-  communityResourceId?: CommunityResourceId;
+  communityResourceId: CommunityResourceId;
 
   @doc("Default Settings")
   enclaveDefaultSettings?: EnclaveDefaultSettings;

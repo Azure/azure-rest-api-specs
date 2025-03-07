@@ -4925,7 +4925,10 @@
           "format": "date-time",
           "description": "Approval request state change time, time at which approval request state changed from pending to approved or rejected."
         }
-      }
+      },
+      "required": [
+        "requestMetadata"
+      ]
     },
     "ApprovalResource": {
       "type": "object",
@@ -5223,7 +5226,10 @@
           "description": "Provisioning State.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "ruleCollection"
+      ]
     },
     "CommunityEndpointProtocol": {
       "type": "string",
@@ -5603,7 +5609,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "communityResourceId",
+        "sourceResourceId",
+        "destinationEndpointId"
+      ]
     },
     "EnclaveConnectionResource": {
       "type": "object",
@@ -5802,7 +5813,10 @@
           "description": "Provisioning State.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "ruleCollection"
+      ]
     },
     "EnclaveEndpointProtocol": {
       "type": "string",
@@ -6212,7 +6226,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "communityResourceId",
+        "enclaveIds",
+        "externalCidrs"
+      ]
     },
     "ExternalConnectionState": {
       "type": "string",
@@ -6444,7 +6463,15 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "connectionType",
+        "communityResourceId",
+        "destinationEnclaveId",
+        "destinationEndpointId",
+        "sourceEnclaveId",
+        "sourceCidrs"
+      ]
     },
     "InternalConnectionState": {
       "type": "string",
@@ -6571,7 +6598,10 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "required": [
+        "mode"
+      ]
     },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
@@ -6735,7 +6765,10 @@
           "type": "string",
           "description": "Payload to be sent upon any action on approval request"
         }
-      }
+      },
+      "required": [
+        "resourceAction"
+      ]
     },
     "RoleAssignmentItem": {
       "type": "object",
@@ -7149,7 +7182,10 @@
           "format": "date-time",
           "description": "Approval request state change time, time at which approval request state changed from pending to approved or rejected."
         }
-      }
+      },
+      "required": [
+        "requestMetadata"
+      ]
     },
     "UpdateCommunityEndpointPatchProperties": {
       "type": "object",
@@ -7175,7 +7211,10 @@
           "description": "Provisioning State.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "ruleCollection"
+      ]
     },
     "UpdateCommunityPatchProperties": {
       "type": "object",
@@ -7272,7 +7311,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "communityResourceId",
+        "sourceResourceId",
+        "destinationEndpointId"
+      ]
     },
     "UpdateEnclaveEndpointPatchProperties": {
       "type": "object",
@@ -7298,7 +7342,10 @@
           "description": "Provisioning State.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "ruleCollection"
+      ]
     },
     "UpdateEndpointPatchProperties": {
       "type": "object",
@@ -7359,7 +7406,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "communityResourceId",
+        "enclaveIds",
+        "externalCidrs"
+      ]
     },
     "UpdateInternalConnectionProperties": {
       "type": "object",
@@ -7408,7 +7460,15 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "connectionType",
+        "communityResourceId",
+        "destinationEnclaveId",
+        "destinationEndpointId",
+        "sourceEnclaveId",
+        "sourceCidrs"
+      ]
     },
     "UpdateTransitHubPatchProperties": {
       "type": "object",
@@ -7495,7 +7555,11 @@
             "$ref": "#/definitions/RoleAssignmentItem"
           }
         }
-      }
+      },
+      "required": [
+        "enclaveVirtualNetwork",
+        "communityResourceId"
+      ]
     },
     "UpdateWorkloadPatchProperties": {
       "type": "object",
@@ -7595,7 +7659,11 @@
             "$ref": "#/definitions/RoleAssignmentItem"
           }
         }
-      }
+      },
+      "required": [
+        "enclaveVirtualNetwork",
+        "communityResourceId"
+      ]
     },
     "VirtualEnclaveResourceId": {
       "type": "string",
