@@ -2554,6 +2554,13 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
+        "labels": {
+          "type": "object",
+          "description": "The labels for the fleet member.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "status": {
           "$ref": "#/definitions/FleetMemberStatus",
           "description": "Status information of the last operation for fleet member.",
@@ -2650,6 +2657,13 @@
           "minLength": 1,
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "labels": {
+          "type": "object",
+          "description": "The labels for the fleet member.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
