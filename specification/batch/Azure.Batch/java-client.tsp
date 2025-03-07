@@ -422,3 +422,25 @@ op listSubTasksCustomization is Azure.Batch.ReadOperationNew<
 >;
 
 @@override(Azure.Batch.Tasks.listSubTasks, listSubTasksCustomization, "java");
+
+// List Task Files Operation
+@doc("Optional parameters for List Task Files operation.")
+model ListBatchTaskFilesOptions {
+  ...Azure.Batch.CommonListParameters;
+  ...Azure.Batch.ListTaskFilesOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for List Task Files operation.")
+@route("/jobs/{jobId}/tasks/{taskId}/files")
+op listTaskFilesCustomization is Azure.Batch.ListOperationNew<
+  {
+    ...Azure.Batch.ListTaskFilesRequiredParameters;
+
+    @doc("Optional parameters for List Task Files operation.")
+    options?: ListBatchTaskFilesOptions;
+  },
+  Azure.Batch.BatchNodeFileListResult
+>;
+
+@@override(Azure.Batch.Tasks.listTaskFiles, listTaskFilesCustomization, "java");

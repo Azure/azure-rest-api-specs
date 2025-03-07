@@ -200,7 +200,6 @@ interface BatchClient {
   "getTaskFilePropertiesInternal",
   "java"
 );
-@@clientName(BatchClient.listTaskFiles, "listTaskFilesInternal", "java");
 
 @@clientName(BatchClient.createNodeUser, "createNodeUserInternal", "java");
 @@clientName(BatchClient.deleteNodeUser, "deleteNodeUserInternal", "java");

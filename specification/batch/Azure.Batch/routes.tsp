@@ -1141,6 +1141,33 @@ alias ListSubTasksParameters = {
   $select?: string[];
 };
 
+alias ListTaskFilesRequiredParameters = {
+  @doc("The ID of the Job that contains the Task.")
+  @path
+  jobId: string;
+
+  @doc("The ID of the Task whose files you want to list.")
+  @path
+  taskId: string;
+};
+
+alias ListTaskFilesOptionalParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-task-files.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("""
+    Whether to list children of the Task directory. This parameter can be used in
+    combination with the filter parameter to list specific type of files.
+    """)
+  @query
+  recursive?: boolean;
+};
+
 // Task Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1405,31 +1432,11 @@ interface Tasks {
   @summary("Lists the files in a Task's directory on its Compute Node.")
   @doc("Lists the files in a Task's directory on its Compute Node.")
   @route("/jobs/{jobId}/tasks/{taskId}/files")
-  @clientName("listTaskFilesInternal", "java")
-  listTaskFiles is ListOperation<
+  listTaskFiles is ListOperationNew<
     {
-      @doc("The ID of the Job that contains the Task.")
-      @path
-      jobId: string;
-
-      @doc("The ID of the Task whose files you want to list.")
-      @path
-      taskId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-task-files.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("""
-        Whether to list children of the Task directory. This parameter can be used in
-        combination with the filter parameter to list specific type of files.
-        """)
-      @query
-      recursive?: boolean;
+      ...CommonListParameters;
+      ...ListTaskFilesRequiredParameters;
+      ...ListTaskFilesOptionalParameters;
     },
     BatchNodeFileListResult
   >;
