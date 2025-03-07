@@ -11,5 +11,6 @@ model ManagedResourceGroupConfiguration {
   name?: string;
 
   @doc("The geo-location where the resource lives")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: Azure.Core.azureLocation;
 }
