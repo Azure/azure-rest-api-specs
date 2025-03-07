@@ -14,7 +14,6 @@ namespace Microsoft.MySQLDiscovery;
 /**
  * The MySQLServer resource definition.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 @parentResource(MySQLSite)
 model MySQLServer
   is Azure.ResourceManager.ProxyResource<MySQLServerProperties, false> {
@@ -28,12 +27,9 @@ model MySQLServer
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For Backward compatibility"
   tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 @armResourceOperations
 interface MySQLServers {
   /**

@@ -94,13 +94,11 @@ union Edition {
 /**
  * List of Sites.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 model MySQLSiteList is Azure.Core.Page<MySQLSite>;
 
 /**
  * MySQL Site properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 model MySQLSiteProperties {
   /**
    * The mapped master Site Id.
@@ -174,12 +172,10 @@ model Resource {
 /**
  * Object containing tags updates for patch operations.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 model MySQLSitesResourcePatch {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For Backward compatibility"
   tags?: Record<string>;
 
   /**
@@ -191,13 +187,11 @@ model MySQLSitesResourcePatch {
 /**
  * List of Servers.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 model MySQLServerList is Azure.Core.Page<MySQLServer>;
 
 /**
  * MySQL Server properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 model MySQLServerProperties {
   /**
    * The Server IP/host name.
@@ -262,7 +256,6 @@ model MySQLServerProperties {
   /**
    * Resource labels.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For Backward compatibility"
   labels?: Record<string>;
 }
 
@@ -320,12 +313,10 @@ model Error {
 /**
  * Object containing tags updates for patch operations.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 model MySQLServerResourcePatch {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For Backward compatibility"
   tags?: Record<string>;
 
   /**

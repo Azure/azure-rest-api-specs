@@ -13,7 +13,6 @@ namespace Microsoft.MySQLDiscovery;
 /**
  * The MySQLSite resource definition.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 model MySQLSite
   is Azure.ResourceManager.TrackedResource<MySQLSiteProperties, false> {
   ...ResourceNameParameter<
@@ -26,11 +25,9 @@ model MySQLSite
   /**
    * The extended location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For Backward compatibility"
   extendedLocation: ExtendedLocation;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" " MySQL is a technical term and cannot follow pascal case rule."
 @armResourceOperations
 interface MySQLSites {
   /**
