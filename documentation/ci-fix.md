@@ -22,8 +22,6 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
     - [Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)](#diagnosing-apiview-failure-for-sdk-language-not-swagger-or-typespec)
   - [`Swagger ApiDocPreview`](#swagger-apidocpreview)
   - [`Swagger Avocado`](#swagger-avocado)
-    - [Get help fixing Avocado validation failures](#get-help-fixing-avocado-validation-failures)
-    - [Run avocado locally](#run-avocado-locally)
   - [`Swagger BreakingChange` and `BreakingChange(Cross-Version)`](#swagger-breakingchange-and-breakingchangecross-version)
     - [Run `oad` locally](#run-oad-locally)
   - [`Swagger LintDiff` and `Swagger Lint(RPaaS)`](#swagger-lintdiff-and-swagger-lintrpaas)
