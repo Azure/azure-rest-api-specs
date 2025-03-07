@@ -4651,52 +4651,12 @@
         "value"
       ]
     },
-    "CommunityPatchProperties": {
-      "type": "object",
-      "description": "Community Patch Properties",
-      "properties": {
-        "addressSpace": {
-          "type": "string",
-          "description": "Address Space."
-        },
-        "dnsServers": {
-          "type": "array",
-          "description": "Dns Servers.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by communities.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration."
-        },
-        "governedServiceList": {
-          "type": "array",
-          "description": "List of services governed by a community.",
-          "items": {
-            "$ref": "#/definitions/GovernedServiceItem"
-          }
-        }
-      }
-    },
     "CommunityPatchResource": {
       "type": "object",
       "description": "Community Patch Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CommunityPatchProperties",
+          "$ref": "#/definitions/CommunityProperties",
           "description": "Community Patch properties"
         },
         "tags": {
@@ -6136,38 +6096,12 @@
         "networkPrefixSize"
       ]
     },
-    "TransitHubPatchProperties": {
-      "type": "object",
-      "description": "Describes the properties of an Transit Hub.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/TransitHubState",
-          "description": "The state of the transitHub."
-        },
-        "transitOption": {
-          "$ref": "#/definitions/TransitOption",
-          "description": "The TransitOption of the transitHub."
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids modified by transitHubs.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "TransitHubPatchResource": {
       "type": "object",
       "description": "TH Patch Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/TransitHubPatchProperties",
+          "$ref": "#/definitions/TransitHubProperties",
           "description": "The TransitHub resource."
         },
         "tags": {
@@ -6352,59 +6286,12 @@
         ]
       }
     },
-    "VirtualEnclavePatchProperties": {
-      "type": "object",
-      "description": "Virtual Enclave Patch properties",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
-        },
-        "enclaveVirtualNetwork": {
-          "$ref": "#/definitions/EnclaveVirtualNetwork",
-          "description": "Virtual Network."
-        },
-        "enclaveAddressSpaces": {
-          "$ref": "#/definitions/EnclaveAddressSpaces",
-          "description": "Enclave Address Spaces",
-          "readOnly": true
-        },
-        "communityResourceId": {
-          "$ref": "#/definitions/CommunityResourceId",
-          "description": "Community Resource Id."
-        },
-        "enclaveDefaultSettings": {
-          "$ref": "#/definitions/EnclaveDefaultSettings",
-          "description": "Default Settings"
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by Virtual Enclave.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration."
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfiguration",
-          "description": "Maintenance Mode configuration."
-        },
-        "bastionEnabled": {
-          "type": "boolean",
-          "description": "Deploy Bastion service (True or False)."
-        }
-      }
-    },
     "VirtualEnclavePatchResource": {
       "type": "object",
       "description": "Virtual Enclave Patch Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VirtualEnclavePatchProperties",
+          "$ref": "#/definitions/VirtualEnclaveProperties",
           "description": "Virtual Enclave Patch properties"
         },
         "tags": {
@@ -6476,30 +6363,12 @@
         ]
       }
     },
-    "WorkloadPatchProperties": {
-      "type": "object",
-      "description": "Workload Patch properties",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
-        },
-        "resourceGroupCollection": {
-          "type": "array",
-          "description": "List of resource group ids.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "WorkloadPatchResource": {
       "type": "object",
       "description": "Workload Patch Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/WorkloadPatchProperties",
+          "$ref": "#/definitions/WorkloadProperties",
           "description": "Workload Patch properties"
         },
         "tags": {

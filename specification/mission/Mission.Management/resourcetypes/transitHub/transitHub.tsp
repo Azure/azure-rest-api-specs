@@ -83,13 +83,9 @@ model TransitHubProperties {
   resourceCollection?: string[];
 }
 
-@doc("Describes the properties of an Transit Hub.")
-model TransitHubPatchProperties is TransitHubProperties{
-}
-
 @doc("TH Patch Resource")
 model TransitHubPatchResource {
   @doc("The TransitHub resource.")
-  properties?: TransitHubPatchProperties;
+  properties?: TransitHubProperties;
   ...TagsProperty;
 }
