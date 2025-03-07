@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "TrafficController",
-    "version": "2024-05-01-preview",
+    "version": "2025-03-01-preview",
     "description": "Traffic Controller Provider management API.",
     "x-typespec-generated": [
       {
@@ -1207,8 +1207,11 @@
           }
         },
         "x-ms-examples": {
-          "Put SecurityPolicy": {
-            "$ref": "./examples/SecurityPolicyPut.json"
+          "Put IpAccessRules SecurityPolicy": {
+            "$ref": "./examples/IpAccessRulesSecurityPolicyPut.json"
+          },
+          "Put WAF SecurityPolicy": {
+            "$ref": "./examples/WafSecurityPolicyPut.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1273,8 +1276,11 @@
           }
         },
         "x-ms-examples": {
-          "Update SecurityPolicy": {
-            "$ref": "./examples/SecurityPolicyPatch.json"
+          "Update IpAccessRules SecurityPolicy": {
+            "$ref": "./examples/IpAccessRulesSecurityPolicyPatch.json"
+          },
+          "Update WAF SecurityPolicy": {
+            "$ref": "./examples/WafSecurityPolicyPatch.json"
           }
         }
       },
@@ -1527,6 +1533,10 @@
           "description": "The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.",
           "readOnly": true
         },
+        "securityPolicyConfigurations": {
+          "$ref": "#/definitions/SecurityPolicyConfigurations",
+          "description": "Frontend Security Policy Configuration"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State of Traffic Controller Frontend Resource",
@@ -1544,6 +1554,118 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/FrontendUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FrontendUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Frontend.",
+      "properties": {
+        "securityPolicyConfigurations": {
+          "$ref": "#/definitions/SecurityPolicyConfigurationsUpdate",
+          "description": "Frontend Security Policy Configuration"
+        }
+      }
+    },
+    "IpAccessRule": {
+      "type": "object",
+      "description": "Ip Access Policy Rules",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Ip Access Rule"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. The value can be between 1 and 500. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.",
+          "minimum": 1,
+          "maximum": 500
+        },
+        "sourceAddressPrefixes": {
+          "type": "array",
+          "description": "Source Address Prefixed Applied by the Rule. Asterisk '*' can also be used to match all source IPs.",
+          "maxItems": 50,
+          "items": {
+            "type": "string"
+          }
+        },
+        "action": {
+          "$ref": "#/definitions/IpAccessRuleAction",
+          "description": "Action of the Rule"
+        }
+      },
+      "required": [
+        "name",
+        "priority",
+        "sourceAddressPrefixes",
+        "action"
+      ]
+    },
+    "IpAccessRuleAction": {
+      "type": "string",
+      "description": "Action of Ip Access Rule",
+      "enum": [
+        "allow",
+        "deny"
+      ],
+      "x-ms-enum": {
+        "name": "IpAccessRuleAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "allow",
+            "description": "Allow Source Ip Prefixes"
+          },
+          {
+            "name": "Deny",
+            "value": "deny",
+            "description": "Deny Source Ip Prefixes"
+          }
+        ]
+      }
+    },
+    "IpAccessRulesPolicy": {
+      "type": "object",
+      "description": "Ip Access Policy",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "description": "Ip Access Policy Rules List",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/IpAccessRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "IpAccessRulesSecurityPolicy": {
+      "type": "object",
+      "description": "IpAccessRules Security Policy",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the Ip Access Rules Security Policy"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "IpAccessRulesSecurityPolicyUpdate": {
+      "type": "object",
+      "description": "IpAccessRules Security Policy",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the Ip Access Rules Security Policy"
         }
       }
     },
@@ -1551,7 +1673,8 @@
       "type": "string",
       "description": "Policy Type of the Security Policy",
       "enum": [
-        "waf"
+        "waf",
+        "ipAccessRules"
       ],
       "x-ms-enum": {
         "name": "PolicyType",
@@ -1561,6 +1684,11 @@
             "name": "WAF",
             "value": "waf",
             "description": "Policy of Type WAF"
+          },
+          {
+            "name": "IpAccessRules",
+            "value": "ipAccessRules",
+            "description": "Policy of Type IpAccessRules"
           }
         ]
       }
@@ -1656,6 +1784,10 @@
         "wafSecurityPolicy": {
           "$ref": "#/definitions/WafSecurityPolicy",
           "description": "Contains reference to a WAF-type security policy."
+        },
+        "ipAccessRulesSecurityPolicy": {
+          "$ref": "#/definitions/IpAccessRulesSecurityPolicy",
+          "description": "Contains reference to a IpAccessRules-type security policy."
         }
       }
     },
@@ -1666,6 +1798,10 @@
         "wafSecurityPolicy": {
           "$ref": "#/definitions/WafSecurityPolicyUpdate",
           "description": "Contains reference to a WAF-type security policy."
+        },
+        "ipAccessRulesSecurityPolicy": {
+          "$ref": "#/definitions/IpAccessRulesSecurityPolicyUpdate",
+          "description": "Contains reference to a IpAccessRules-type security policy."
         }
       }
     },
@@ -1703,6 +1839,10 @@
           "$ref": "#/definitions/WafPolicy",
           "description": "Web Application Firewall Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
         },
+        "ipAccessRulesPolicy": {
+          "$ref": "#/definitions/IpAccessRulesPolicy",
+          "description": "Ip Access Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State of Traffic Controller SecurityPolicy Resource",
@@ -1735,6 +1875,10 @@
         "wafPolicy": {
           "$ref": "#/definitions/WafPolicyUpdate",
           "description": "Web Application Firewall Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
+        },
+        "ipAccessRulesPolicy": {
+          "$ref": "#/definitions/IpAccessRulesPolicy",
+          "description": "Ip Access Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
         }
       }
     },
