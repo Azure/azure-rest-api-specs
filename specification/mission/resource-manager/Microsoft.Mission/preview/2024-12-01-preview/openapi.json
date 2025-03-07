@@ -1972,7 +1972,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransitHubResource"
+              "$ref": "#/definitions/TransitHubPatchProperties"
             }
           }
         ],
@@ -5104,6 +5104,19 @@
         "lastUpdatedAt"
       ]
     },
+    "Azure.ResourceManager.Foundations.ArmTagsProperty": {
+      "type": "object",
+      "description": "Standard type definition for Azure Resource Manager Tags property.\n\nIt is included in the TrackedResource template definition.The Azure Resource Manager Resource tags.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "CheckAddressSpaceAvailabilityRequest": {
       "type": "object",
       "description": "Request to the action call to check address space availability.",
@@ -6446,7 +6459,7 @@
         },
         "location": {
           "type": "string",
-          "description": "Managed Resource Group location"
+          "description": "The geo-location where the resource lives"
         }
       }
     },
@@ -6769,6 +6782,37 @@
         "name",
         "networkPrefixSize"
       ]
+    },
+    "TransitHubPatchProperties": {
+      "type": "object",
+      "description": "Describes the properties of an Transit Hub.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/TransitHubState",
+          "description": "The state of the transitHub."
+        },
+        "transitOption": {
+          "$ref": "#/definitions/TransitOption",
+          "description": "The TransitOption of the transitHub."
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids modified by transitHubs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmTagsProperty",
+          "description": "Tags associated with the resource.",
+          "x-ms-identifiers": []
+        }
+      }
     },
     "TransitHubProperties": {
       "type": "object",

@@ -6,6 +6,6 @@ model ManagedResourceGroupConfiguration {
   @doc("Name of managed resource group")
   name?: string;
 
-  @doc("Managed Resource Group location")
+  @doc("The geo-location where the resource lives")
   location?: string;
 }

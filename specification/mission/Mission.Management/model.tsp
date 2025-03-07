@@ -199,7 +199,7 @@ interface Workload {
       ArmAsyncOperationHeader
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<WorkloadResource, WorkloadResource>;
+  update is ArmResourcePatchAsync<WorkloadResource, WorkloadProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<WorkloadResource>;
@@ -361,7 +361,7 @@ interface TransitHub {
       ArmAsyncOperationHeader
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<TransitHubResource, TransitHubResource>;
+  update is ArmCustomPatchAsync<TransitHubResource, PatchModel = TransitHubPatchProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<TransitHubResource>;
