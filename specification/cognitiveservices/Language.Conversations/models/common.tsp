@@ -399,6 +399,36 @@ model AnalyzeConversationTaskResult {
   kind: AnalyzeConversationTaskResultsKind;
 }
 
+model ConversationalAITask extends AnalyzeConversationTask {
+  /** Task kind. */
+  kind: AnalyzeConversationTaskKind.ConversationalAI;
+
+  /** The input ConversationItem and its optional parameters */
+  analysisInput: ConversationalAIAnalysisOptions;
+
+  /** Input parameters necessary for a Conversation language understanding task. */
+  parameters: BaseConversationTaskParameters;
+}
+
+model ConversationalAIAnalysisOptions {
+  /** List of multiple conversations */
+  conversations: Conversation[];
+}
+
+model Conversations {
+  /** The ID of the conversation. */
+  id: string;
+
+  /** Default modality for all conversation items. */
+  modality: InputModality;
+
+  /** Default language for all conversation items in BCP 47 language representation. */
+  language: string;
+
+  /** List of conversation items. */
+  conversationItems: ConversationItemBase[];
+}
+
 /** The input for a conversation language understanding task. */
 model ConversationalTask extends AnalyzeConversationTask {
   /** Task kind. */
@@ -425,12 +455,9 @@ model ConversationItemBase {
   /** The participant ID of a conversation item. */
   participantId: string;
 
-  /** The override language of a conversation item in BCP 47 language representation. */
-  language?: string;
-
-  /** Enumeration of supported conversational modalities. */
-  modality?: InputModality;
-
+  /** The text input */
+  text: string;
+  
   /** Role of the participant. */
   @added(Versions.v2023_04_01)
   role?: role;
@@ -439,8 +466,12 @@ model ConversationItemBase {
 /** The text modality of an input conversation. */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 model TextConversationItem is ConversationItemBase {
-  /** The text input */
-  text: string;
+  /** The override language of a conversation item in BCP 47 language representation. */
+  language?: string;
+
+  /** Enumeration of supported conversational modalities. */
+  modality?: InputModality;
+
 }
 
 /** This is the parameter set of either the Orchestration project itself or one of the target services. */
@@ -523,6 +554,18 @@ model ConversationResult {
 model ConversationPrediction extends BasePrediction {
   /** Represents the prediction section of a Conversation project. */
   projectKind: projectKind.Conversation;
+
+  /** The intent classification results. */
+  intents: Array<ConversationIntent>;
+
+  /** The entity extraction results. */
+  entities: Array<ConversationEntity>;
+}
+
+/** Represents the prediction section of a Conversation project. */
+model ConversationalAIPrediction extends BasePrediction {
+  /** Represents the prediction section of a Conversation project. */
+  projectKind: projectKind.ConversationalAI;
 
   /** The intent classification results. */
   intents: Array<ConversationIntent>;
@@ -958,9 +1001,6 @@ model TranscriptConversationItem is ConversationItemBase {
   /** Inverse-text-normalized format with profanity masking applied. */
   maskedItn: string;
 
-  /** Display form of the recognized text from the speech-to-text API, with punctuation and capitalization added. */
-  text: string;
-
   /** Lexical form of the recognized text from the speech-to-text API, with the actual words recognized. */
   lexical: string;
 
@@ -1044,13 +1084,19 @@ model ConversationRequestStatistics is RequestStatistics {
 @added(Versions.v2023_04_01)
 model ConversationItemLevelTiming is AudioTiming;
 
-/** Input parameters necessary for a Conversation task. */
-model ConversationTaskParameters {
+model BaseConversationTaskParameters {
   /** The name of the project to use. */
   projectName: string;
 
   /** The name of the deployment to use. */
   deploymentName: string;
+
+  /** Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets. */
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
+}
+
+/** Input parameters necessary for a Conversation task. */
+model ConversationTaskParameters is BaseConversationTaskParameters{
 
   /** If true, the service will return more detailed information in the response. */
   verbose?: boolean;
@@ -1058,14 +1104,90 @@ model ConversationTaskParameters {
   /** If true, the service will keep the query for further review. */
   isLoggingEnabled?: boolean;
 
-  /** Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets. */
-  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
-
   /** The name of a target project to forward the request to. */
   directTarget?: string;
 
   /** A dictionary representing the parameters for each target project. */
   targetProjectParameters?: Record<AnalysisParameters>;
+}
+
+/** The results of a ConversationalAI task. */
+model ConversationalAITaskResult extends AnalyzeConversationTaskResult {
+  /** The results of a Conversational AI task. */
+  kind: AnalyzeConversationTaskResultsKind.ConversationalAIResult;
+
+  /** Represents the conversational analysis response. */
+  result: ConversationalAIResult;
+}
+
+model ConversationalAIResult {
+  /** Multiple multi-turn conversations analyzed. */
+  conversations: ConversationalAIAnalysis[];
+
+  /** Any warnings encountered during processing. */
+  warnings?: string[];
+}
+
+model ConversationalAIAnalysis {
+  /** The ID of the conversation. */
+  id: string;
+
+  /** The intent classification results for this conversation. */
+  intents: Array<ConversationalAIIntent>;
+
+  /** Global entities that are matched but not associated with any specific intent. */
+  entities?: Array<ConversationalAIEntity>;
+}
+
+model ConversationalAIIntent {
+  /** The name of the detected intent. */
+  name: string;
+
+  /** The type of intent, either "action" or "question". */
+  type: string;
+
+  /** The ranges of conversation items where this intent was identified. */
+  conversationItemRanges: Array<ConversationItemRange>;
+
+  /** The entities associated with this intent. */
+  entities: Array<ConversationalAIEntity>;
+}
+
+model ConversationItemRange {
+  /** The starting index of the intent occurrence within the conversation. */
+  offset: int32;
+
+  /** The number of continuous conversation items for this intent. */
+  length: int32;
+}
+
+model ConversationalAIEntity {
+  /** The entity name or category. */
+  name: string;
+
+  /** The detected text of the entity. */
+  text: string;
+
+  /** The confidence score of the entity detection (0.0 to 1.0). */
+  confidenceScore: float32;
+
+  /** The starting index of the entity in the query. */
+  offset: int32;
+
+  /** The length of the detected entity text. */
+  length: int32;
+
+  /** The ID of the conversation item where the entity appears. */
+  conversationItemId: string;
+
+  /** The index of the conversation item where the entity appears. */
+  conversationItemIndex: int32;
+
+  /** Entity resolution details, if available. */
+  resolutions?: Array<BaseResolution>;
+
+  /** Additional entity metadata. */
+  extraInformation?: Array<BaseExtraInformation>;
 }
 
 /** The results of a Conversation task. */
