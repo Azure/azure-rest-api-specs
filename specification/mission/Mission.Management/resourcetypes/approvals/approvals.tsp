@@ -123,6 +123,7 @@ model ApprovalProperties {
 }
 
 @doc("Approvals properties for patching")
-model ApprovalPatchProperties is ApprovalProperties {
-  ...TagsProperty;
+model ApprovalPatchResource {
+  @doc("Approval Patch properties")
+  properties: ApprovalProperties;
 }

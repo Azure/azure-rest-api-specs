@@ -245,8 +245,14 @@ model CommunityProperties {
   maintenanceModeConfiguration?: MaintenanceModeConfiguration;
 }
 
-model CommunityPatchProperties {
-  properties: CommunityProperties;
+@doc("Community Patch Properties")
+model CommunityPatchProperties is CommunityProperties {
+}
+
+@doc("Community Patch Resource")
+model CommunityPatchResource {
+  @doc("Community Patch properties")
+  properties: CommunityPatchProperties;
   ...TagsProperty;
   ...ManagedServiceIdentityProperty;
 }

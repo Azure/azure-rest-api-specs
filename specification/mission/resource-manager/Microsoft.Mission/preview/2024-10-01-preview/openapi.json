@@ -258,7 +258,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApprovalResource"
+              "$ref": "#/definitions/ApprovalPatchResource"
             }
           }
         ],
@@ -1088,7 +1088,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunityPatchProperties"
+              "$ref": "#/definitions/CommunityPatchResource"
             }
           }
         ],
@@ -1808,7 +1808,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransitHubPatchProperties"
+              "$ref": "#/definitions/TransitHubPatchResource"
             }
           }
         ],
@@ -3148,7 +3148,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualEnclavePatchProperties"
+              "$ref": "#/definitions/VirtualEnclavePatchResource"
             }
           }
         ],
@@ -4148,7 +4148,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkloadPatchProperties"
+              "$ref": "#/definitions/WorkloadPatchResource"
             }
           }
         ],
@@ -4369,6 +4369,19 @@
       },
       "required": [
         "message"
+      ]
+    },
+    "ApprovalPatchResource": {
+      "type": "object",
+      "description": "Approvals properties for patching",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApprovalProperties",
+          "description": "Approval Patch properties"
+        }
+      },
+      "required": [
+        "properties"
       ]
     },
     "ApprovalProperties": {
@@ -4716,9 +4729,58 @@
     },
     "CommunityPatchProperties": {
       "type": "object",
+      "description": "Community Patch Properties",
+      "properties": {
+        "addressSpace": {
+          "type": "string",
+          "description": "Address Space."
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "Dns Servers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by communities.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed resource group configuration."
+        },
+        "governedServiceList": {
+          "type": "array",
+          "description": "List of services governed by a community.",
+          "items": {
+            "$ref": "#/definitions/GovernedServiceItem"
+          }
+        },
+        "communityRoleAssignments": {
+          "type": "array",
+          "description": "Community role assignments",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentItem"
+          }
+        }
+      }
+    },
+    "CommunityPatchResource": {
+      "type": "object",
+      "description": "Community Patch Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CommunityProperties"
+          "$ref": "#/definitions/CommunityPatchProperties",
+          "description": "Community Patch properties"
         },
         "tags": {
           "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmTagsProperty",
@@ -6210,12 +6272,25 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "TransitHubPatchResource": {
+      "type": "object",
+      "description": "TH Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TransitHubPatchProperties",
+          "description": "The TransitHub resource."
         },
         "tags": {
           "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmTagsProperty",
           "description": "Tags associated with the resource."
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "TransitHubProperties": {
       "type": "object",
@@ -6451,6 +6526,16 @@
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
           }
+        }
+      }
+    },
+    "VirtualEnclavePatchResource": {
+      "type": "object",
+      "description": "Virtual Enclave Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualEnclavePatchProperties",
+          "description": "Virtual Enclave Patch properties"
         },
         "tags": {
           "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmTagsProperty",
@@ -6460,7 +6545,10 @@
           "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "VirtualEnclaveProperties": {
       "type": "object",
@@ -6550,12 +6638,25 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "WorkloadPatchResource": {
+      "type": "object",
+      "description": "Workload Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkloadPatchProperties",
+          "description": "Workload Patch properties"
         },
         "tags": {
           "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmTagsProperty",
           "description": "Tags associated with the resource."
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "WorkloadProperties": {
       "type": "object",

@@ -51,5 +51,11 @@ model WorkloadProperties {
 
 @doc("Workload Patch properties")
 model WorkloadPatchProperties is WorkloadProperties {
+}
+
+@doc("Workload Patch Resource")
+model WorkloadPatchResource {
+  @doc("Workload Patch properties")
+  properties: WorkloadPatchProperties;
   ...TagsProperty;
 }

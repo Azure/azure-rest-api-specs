@@ -199,7 +199,7 @@ interface Workload {
       ArmAsyncOperationHeader
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<WorkloadResource, PatchModel = WorkloadPatchProperties>;
+  update is ArmCustomPatchAsync<WorkloadResource, PatchModel = WorkloadPatchResource>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<WorkloadResource>;
@@ -237,7 +237,7 @@ interface VirtualEnclave {
       ArmAsyncOperationHeader
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<EnclaveResource, PatchModel = VirtualEnclavePatchProperties>;
+  update is ArmCustomPatchAsync<EnclaveResource, PatchModel = VirtualEnclavePatchResource>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<EnclaveResource>;
@@ -287,7 +287,7 @@ interface Community {
       ArmAsyncOperationHeader
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<CommunityResource, PatchModel = CommunityPatchProperties>;
+  update is ArmCustomPatchAsync<CommunityResource, PatchModel = CommunityPatchResource>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<CommunityResource>;
@@ -361,7 +361,7 @@ interface TransitHub {
       ArmAsyncOperationHeader
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<TransitHubResource, PatchModel = TransitHubPatchProperties>;
+  update is ArmCustomPatchAsync<TransitHubResource, PatchModel = TransitHubPatchResource>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<TransitHubResource>;
@@ -521,7 +521,7 @@ interface Approval {
   >;
   listByParent is ArmResourceListByParent<ApprovalResource>;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<ApprovalResource, ApprovalResource>;
+  update is ArmCustomPatchAsync<ApprovalResource, PatchModel = ApprovalPatchResource>;
   delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;
   @doc("Upon receiving approval or rejection from approver, this facilitates actions on approval resource")
   @armResourceAction(ApprovalResource)

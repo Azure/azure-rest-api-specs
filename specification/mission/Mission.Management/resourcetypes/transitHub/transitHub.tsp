@@ -85,5 +85,11 @@ model TransitHubProperties {
 
 @doc("Describes the properties of an Transit Hub.")
 model TransitHubPatchProperties is TransitHubProperties{
+}
+
+@doc("TH Patch Resource")
+model TransitHubPatchResource {
+  @doc("The TransitHub resource.")
+  properties: TransitHubPatchProperties;
   ...TagsProperty;
 }
