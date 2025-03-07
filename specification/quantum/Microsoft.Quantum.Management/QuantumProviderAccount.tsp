@@ -33,7 +33,7 @@ model QuantumProviderAccount
 @added(Versions.v2025_02_15_preview)
 model ProviderAccountProperties {
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AccountProvisioningState;
 
   /** The ProviderId which will be referenced by and that can be added to Azure Quantum Workspaces. */
@@ -63,7 +63,7 @@ model ProviderAccountProperties {
   targets?: ProviderAccountTarget[];
 
   /** Managed On Behalf Of configuration. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 }
 
