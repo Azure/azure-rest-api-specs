@@ -39,24 +39,6 @@ These settings apply only when `--tag=package-2024-12-01-preview` is specified o
 input-file:
   - Microsoft.Mission/preview/2024-12-01-preview/openapi.json
 ```
-<!-- 
-### Tag: package-2024-11-01-preview
-
-These settings apply only when `--tag=package-2024-11-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-11-01-preview'
-input-file:
-  - Microsoft.Mission/preview/2024-11-01-preview/openapi.json
-```
-
-### Tag: package-2024-10-01-preview
-
-These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-10-01-preview'
-input-file:
-  - Microsoft.Mission/preview/2024-10-01-preview/openapi.json
-``` -->
 
 ### Tag: package-2024-06-01-preview
 
