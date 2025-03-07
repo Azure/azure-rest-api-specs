@@ -57,7 +57,7 @@ interface Instructions {
   @pollingOperation(
     MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
   )
-  update is apiOperations.LongRunningResourceCreateOrUpdate<Instruction>;
+  createOrReplace is apiOperations.LongRunningResourceCreateOrReplace<Instruction>;
 
   @doc("Delete instructions.")
   @pollingOperation(
