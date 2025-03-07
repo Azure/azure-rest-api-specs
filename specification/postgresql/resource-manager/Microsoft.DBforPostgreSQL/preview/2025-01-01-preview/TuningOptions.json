@@ -205,9 +205,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -256,9 +253,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -316,9 +310,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -367,9 +358,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -753,11 +741,9 @@
     "SessionResource": {
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SessionResourceProperties",
-          "x-ms-client-flatten": true,
-          "description": "Properties of SessionResource."
-        }
+        "$ref": "#/definitions/SessionResourceProperties",
+        "x-ms-client-flatten": true,
+        "description": "Properties of SessionResource."
       },
       "allOf": [
         {
@@ -821,11 +807,9 @@
     "SessionDetailsResource": {
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SessionDetailsProperties",
-          "x-ms-client-flatten": true,
-          "description": "Properties of SessionDetails."
-        }
+        "$ref": "#/definitions/SessionDetailsProperties",
+        "x-ms-client-flatten": true,
+        "description": "Properties of SessionDetails."
       },
       "allOf": [
         {
@@ -912,7 +896,7 @@
     },
     "SessionIdParameter": {
       "name": "sessionId",
-      "in": "path",
+      "in": "query",
       "required": true,
       "type": "string",
       "description": "Guid of the objectId for the session.",
