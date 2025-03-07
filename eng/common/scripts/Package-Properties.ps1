@@ -240,6 +240,7 @@ function Get-PrPkgProperties([string]$InputDiffJson) {
             # handle direct changes to packages
             $shouldInclude = $filePath -like (Join-Path "$pkgDirectory" "*")
 
+            #should we only do this if $shouldInclude is false?  i.e. no reason to include as indirect if already included
             # handle changes to files that are RELATED to each package
             foreach($triggerPath in $triggeringPaths) {
                 $resolvedRelativePath = (Join-Path $RepoRoot $triggerPath)
@@ -249,6 +250,8 @@ function Get-PrPkgProperties([string]$InputDiffJson) {
 
                 # if we are including this package due to one of its additional trigger paths, we need
                 # to ensure we're counting it as included for validation, not as an actual package change
+
+                # $resolvedRelativePath will always be truthy here.
                 if ($resolvedRelativePath) {
                     $includedForValidation = $filePath -like (Join-Path "$resolvedRelativePath" "*")
                     $shouldInclude = $shouldInclude -or $includedForValidation
@@ -256,6 +259,7 @@ function Get-PrPkgProperties([string]$InputDiffJson) {
                         $pkg.IncludedForValidation = $true
                     }
                     break
+                    # so we'll process only 1 triggeringPath
                 }
             }
 
@@ -265,6 +269,8 @@ function Get-PrPkgProperties([string]$InputDiffJson) {
             # there is a single ci.yml in that directory, we can assume that any file change in that directory
             # will apply to all packages that exist in that directory.
             $triggeringCIYmls = $triggeringPaths | Where-Object { $_ -like "*ci*.yml" }
+
+            # what would happen if someone included a ci.yml in the triggering paths?
 
             foreach($yml in $triggeringCIYmls) {
                 # given that this path is coming from the populated triggering paths in the artifact,
@@ -281,6 +287,11 @@ function Get-PrPkgProperties([string]$InputDiffJson) {
                 }
 
                 if ($soleCIYml -and $filePath.Replace("`\", "/").StartsWith($directory)) {
+                    #  `sdk/computefleet/Azure.ResourceManager.ComputeFleet/CHANGELOG.md` exists
+                    # and `sdk\compute\ci.mgmt.yml` exists
+                    # does this mean that when `sdk/computefleet/Azure.ResourceManager.ComputeFleet/CHANGELOG.md` changes, the projects under `sdk/compute/ci.mgmt.yml` will be triggered?
+                    # because `sdk/computefleet/Azure.ResourceManager.ComputeFleet/CHANGELOG.md` starts with `sdk/compute`
+
                     if (-not $shouldInclude) {
                         $pkg.IncludedForValidation = $true
                         $shouldInclude = $true
