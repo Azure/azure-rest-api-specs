@@ -202,6 +202,8 @@ async function runLintDiff(
       throw new Error(`Duplicate key found correlating autorest runs: ${key}`);
     }
 
+    // TODO: In some cases there's nothing to run against, net new is OK
+    // make sure that case is handled.
     const beforeCandidates = reportMap
       .get("before")!
       .filter((r) => r.readme === readme && r.tag === tag);
