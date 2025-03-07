@@ -90,6 +90,6 @@ model TransitHubPatchProperties is TransitHubProperties{
 @doc("TH Patch Resource")
 model TransitHubPatchResource {
   @doc("The TransitHub resource.")
-  properties: TransitHubPatchProperties;
+  properties?: TransitHubPatchProperties;
   ...TagsProperty;
 }

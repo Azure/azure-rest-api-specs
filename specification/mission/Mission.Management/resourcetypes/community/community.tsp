@@ -252,7 +252,7 @@ model CommunityPatchProperties is CommunityProperties {
 @doc("Community Patch Resource")
 model CommunityPatchResource {
   @doc("Community Patch properties")
-  properties: CommunityPatchProperties;
+  properties?: CommunityPatchProperties;
   ...TagsProperty;
   ...ManagedServiceIdentityProperty;
 }
