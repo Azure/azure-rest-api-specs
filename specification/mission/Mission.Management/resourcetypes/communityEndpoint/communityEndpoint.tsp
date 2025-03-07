@@ -127,12 +127,12 @@ model CommunityEndpointProperties {
 }
 
 @doc("Community Endpoint Patch properties")
-model CommunityEndpointPatchProperties is CommunityEndpointProperties {
-}
+model CommunityEndpointPatchProperties is CommunityEndpointProperties;
 
 @doc("Community Endpoint Patch Resource")
 model CommunityEndpointPatchResource {
   @doc("Community Endpoint Patch properties")
   properties?: CommunityEndpointPatchProperties;
+
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

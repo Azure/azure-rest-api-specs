@@ -52,11 +52,11 @@ model ExternalConnectionProperties {
 }
 
 @doc("External Connection Resource properties")
-model ExternalConnectionPatchProperties is ExternalConnectionProperties {
-}
+model ExternalConnectionPatchProperties is ExternalConnectionProperties;
 @doc("External Connection Patch Resource")
 model ExternalConnectionPatchResource {
   @doc("External Connection properties")
   properties?: ExternalConnectionPatchProperties;
+
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

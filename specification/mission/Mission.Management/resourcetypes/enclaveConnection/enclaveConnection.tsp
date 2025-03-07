@@ -70,12 +70,12 @@ model EnclaveConnectionProperties {
 }
 
 @doc("Enclave Connection Patch properties")
-model EnclaveConnectionPatchProperties is EnclaveConnectionProperties {
-}
+model EnclaveConnectionPatchProperties is EnclaveConnectionProperties;
 
 @doc("Enclave Connection Patch Resource")
 model EnclaveConnectionPatchResource {
   @doc("Enclave Connection Patch properties")
   properties?: EnclaveConnectionPatchProperties;
+
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

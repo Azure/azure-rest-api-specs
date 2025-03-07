@@ -187,13 +187,13 @@ model VirtualEnclaveProperties {
 }
 
 @doc("Virtual Enclave Patch properties")
-model VirtualEnclavePatchProperties is VirtualEnclaveProperties {
-}
+model VirtualEnclavePatchProperties is VirtualEnclaveProperties;
 
 @doc("Virtual Enclave Patch Resource")
 model VirtualEnclavePatchResource {
   @doc("Virtual Enclave Patch properties")
   properties?: VirtualEnclavePatchProperties;
+
   ...ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

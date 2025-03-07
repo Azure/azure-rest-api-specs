@@ -76,11 +76,11 @@ model CatalogProperties {
 }
 
 @doc("Catalog Patch properties")
-model CatalogPatchProperties is CatalogProperties {
-}
+model CatalogPatchProperties is CatalogProperties;
 @doc("Catalog Patch Resource")
 model CatalogPatchResource {
   @doc("Catalog Patch properties")
   properties?: CatalogPatchProperties;
+
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
