@@ -28,12 +28,12 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu, windows]
-        node-version: [18, 22]
+        node-version: [20, 22]
         exclude:
           - os: ubuntu
             node-version: 22
           - os: windows
-            node-version: 18
+            node-version: 20
 
     runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
