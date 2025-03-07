@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "../shared/provisioningstate.tsp";
+import "../shared/tags.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -83,20 +84,6 @@ model TransitHubProperties {
 }
 
 @doc("Describes the properties of an Transit Hub.")
-model TransitHubPatchProperties {
-  @doc("The status of the last operation.")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  @doc("The state of the transitHub.")
-  state?: TransitHubState;
-
-  @doc("The TransitOption of the transitHub.")
-  transitOption?: TransitOption;
-
-  @doc("List of resource ids modified by transitHubs.")
-  resourceCollection?: string[];
-
-  @doc("Tags associated with the resource.")
-  tags?: Azure.ResourceManager.Foundations.ArmTagsProperty;
+model TransitHubPatchProperties is TransitHubProperties{
+  ...TagsProperty;
 }

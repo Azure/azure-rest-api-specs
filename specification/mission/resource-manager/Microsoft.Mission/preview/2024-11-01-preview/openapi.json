@@ -3312,7 +3312,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnclaveResource"
+              "$ref": "#/definitions/VirtualEnclavePatchProperties"
             }
           }
         ],
@@ -4624,7 +4624,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkloadResource"
+              "$ref": "#/definitions/WorkloadPatchProperties"
             }
           }
         ],
@@ -6961,6 +6961,75 @@
         ]
       }
     },
+    "VirtualEnclavePatchProperties": {
+      "type": "object",
+      "description": "Virtual Enclave Patch properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "enclaveVirtualNetwork": {
+          "$ref": "#/definitions/EnclaveVirtualNetwork",
+          "description": "Virtual Network."
+        },
+        "enclaveAddressSpaces": {
+          "$ref": "#/definitions/EnclaveAddressSpaces",
+          "description": "Enclave Address Spaces",
+          "readOnly": true
+        },
+        "communityResourceId": {
+          "$ref": "#/definitions/CommunityResourceId",
+          "description": "Community Resource Id."
+        },
+        "enclaveDefaultSettings": {
+          "$ref": "#/definitions/EnclaveDefaultSettings",
+          "description": "Default Settings"
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by Virtual Enclave.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed resource group configuration."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfiguration",
+          "description": "Maintenance Mode configuration."
+        },
+        "bastionEnabled": {
+          "type": "boolean",
+          "description": "Deploy Bastion service (True or False)."
+        },
+        "enclaveRoleAssignments": {
+          "type": "array",
+          "description": "Enclave role assignments",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentItem"
+          }
+        },
+        "workloadRoleAssignments": {
+          "type": "array",
+          "description": "Workload role assignments",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentItem"
+          }
+        },
+        "tags": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmTagsProperty",
+          "description": "Tags associated with the resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
     "VirtualEnclaveProperties": {
       "type": "object",
       "description": "Virtual Enclave Resource properties",
@@ -7032,6 +7101,28 @@
             "type": "Microsoft.Mission/virtualEnclaves"
           }
         ]
+      }
+    },
+    "WorkloadPatchProperties": {
+      "type": "object",
+      "description": "Workload Patch properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "resourceGroupCollection": {
+          "type": "array",
+          "description": "List of resource group ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmTagsProperty",
+          "description": "Tags associated with the resource."
+        }
       }
     },
     "WorkloadProperties": {

@@ -9,6 +9,7 @@ import "../shared/resourceid.tsp";
 import "../shared/managedresourcegroupconfiguration.tsp";
 import "../shared/principal.tsp";
 import "../shared/roleassignmentitem.tsp";
+import "../shared/tags.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -183,4 +184,10 @@ model VirtualEnclaveProperties {
   @madeOptional(Microsoft.Mission.Versions.v2024_10_01_preview)
   @doc("Workload role assignments")
   workloadRoleAssignments?: RoleAssignmentItem[];
+}
+
+@doc("Virtual Enclave Patch properties")
+model VirtualEnclavePatchProperties is VirtualEnclaveProperties {
+  ...TagsProperty;
+  ...ManagedServiceIdentityProperty;
 }

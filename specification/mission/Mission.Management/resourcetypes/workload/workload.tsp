@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 import "../shared/provisioningstate.tsp";
 import "../shared/resourceid.tsp";
+import "../shared/tags.tsp";
 import "../virtualEnclave/virtualenclave.tsp";
 
 using TypeSpec.Rest;
@@ -46,4 +47,9 @@ model WorkloadProperties {
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of resource group ids.")
   resourceGroupCollection?: string[];
+}
+
+@doc("Workload Patch properties")
+model WorkloadPatchProperties is WorkloadProperties {
+  ...TagsProperty;
 }

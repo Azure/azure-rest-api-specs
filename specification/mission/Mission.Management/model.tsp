@@ -199,7 +199,7 @@ interface Workload {
       ArmAsyncOperationHeader
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmResourcePatchAsync<WorkloadResource, WorkloadProperties>;
+  update is ArmCustomPatchAsync<WorkloadResource, PatchModel = WorkloadPatchProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<WorkloadResource>;
@@ -237,7 +237,7 @@ interface VirtualEnclave {
       ArmAsyncOperationHeader
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<EnclaveResource, EnclaveResource>;
+  update is ArmCustomPatchAsync<EnclaveResource, PatchModel = VirtualEnclavePatchProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<EnclaveResource>;
