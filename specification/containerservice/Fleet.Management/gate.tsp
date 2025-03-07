@@ -69,7 +69,7 @@ model GateProperties {
   gateType: GateType;
 
   @doc("The status of the Gate.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   status: GateStatus;
 }
 

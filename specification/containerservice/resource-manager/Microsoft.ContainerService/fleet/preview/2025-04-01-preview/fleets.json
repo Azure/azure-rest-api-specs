@@ -3158,6 +3158,7 @@
           "description": "The status of the Gate.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         }
@@ -3170,7 +3171,18 @@
     },
     "GatePropertiesUpdate": {
       "type": "object",
-      "description": "A Gate controls the progression during a staged rollout, e.g. in an Update Run."
+      "description": "A Gate controls the progression during a staged rollout, e.g. in an Update Run.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/GateStatus",
+          "description": "The status of the Gate.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
     },
     "GateProvisioningState": {
       "type": "string",
