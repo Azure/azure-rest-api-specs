@@ -2,12 +2,32 @@ import "@typespec/versioning";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Policy events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
+  const MicrosoftPolicyInsightsPolicyStateCreatedExample: PolicyInsightsPolicyStateCreatedEventData = #{
+    timestamp: utcDateTime.fromISO("2021-03-27T18:37:42.4496956Z"),
+    policyAssignmentId: "{policy-assignment-scope}/providers/microsoft.authorization/policyassignments/{policy-assignment-name}",
+    policyDefinitionId: "{policy-definition-scope}/providers/microsoft.authorization/policydefinitions/{policy-definition-name}",
+    policyDefinitionReferenceId: "",
+    complianceState: "NonCompliant",
+    subscriptionId: "{subscription-id}",
+    complianceReasonCode: "",
+  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateCreated event. */
+  @example(MicrosoftPolicyInsightsPolicyStateCreatedExample)
   model PolicyInsightsPolicyStateCreatedEventData {
     ...PolicyInsightsBaseEventData;
   }
 
+  const MicrosoftPolicyInsightsPolicyStateChangedExample: PolicyInsightsPolicyStateChangedEventData = #{
+    timestamp: utcDateTime.fromISO("2021-03-27T18:37:42.4496956Z"),
+    policyAssignmentId: "{policy-assignment-scope}/providers/microsoft.authorization/policyassignments/{policy-assignment-name}",
+    policyDefinitionId: "{policy-definition-scope}/providers/microsoft.authorization/policydefinitions/{policy-definition-name}",
+    policyDefinitionReferenceId: "",
+    complianceState: "NonCompliant",
+    subscriptionId: "{subscription-id}",
+    complianceReasonCode: "",
+  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.PolicyInsights.PolicyStateChanged event. */
+  @example(MicrosoftPolicyInsightsPolicyStateChangedExample)
   model PolicyInsightsPolicyStateChangedEventData {
     ...PolicyInsightsBaseEventData;
   }
