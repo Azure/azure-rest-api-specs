@@ -36,4 +36,4 @@ input-file:
   - Microsoft.Contoso/preview/2021-10-01-preview/contoso.json
 ```
 
---- 
+---
