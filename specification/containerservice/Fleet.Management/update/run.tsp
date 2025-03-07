@@ -50,6 +50,13 @@ scalar AutoUpgradeProfileId
     }
   ]>;
 
+scalar GateResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/fleets/gates",
+    }
+  ]>;
+
 @doc("The properties of the UpdateRun.")
 model UpdateRunProperties {
   @visibility("read")
@@ -255,6 +262,18 @@ model UpdateStageStatus {
   groups?: UpdateGroupStatus[];
 
   @visibility("read")
+  @extension("x-ms-identifiers", ["displayName"])
+  @doc("The list of Gates that will run before this UpdateStage.")
+  @added(Versions.v2025_04_01_preview)
+  beforeGates?: UpdateGateStatus[];
+
+  @visibility("read")
+  @extension("x-ms-identifiers", ["displayName"])
+  @doc("The list of Gates that will run after this UpdateStage.")
+  @added(Versions.v2025_04_01_preview)
+  afterGates?: UpdateGateStatus[];
+
+  @visibility("read")
   @doc("The status of the wait period configured on the UpdateStage.")
   afterStageWaitStatus?: WaitStatus;
 }
@@ -273,6 +292,18 @@ model UpdateGroupStatus {
   @extension("x-ms-identifiers", ["name"])
   @doc("The list of member this UpdateGroup updates.")
   members?: MemberUpdateStatus[];
+
+  @visibility("read")
+  @extension("x-ms-identifiers", ["displayName"])
+  @doc("The list of Gates that will run before this UpdateGroup.")
+  @added(Versions.v2025_04_01_preview)
+  beforeGates?: UpdateGateStatus[];
+
+  @visibility("read")
+  @extension("x-ms-identifiers", ["displayName"])
+  @doc("The list of Gates that will run after this UpdateGroup.")
+  @added(Versions.v2025_04_01_preview)
+  afterGates?: UpdateGateStatus[];
 }
 
 @doc("The status of the wait duration.")
@@ -284,6 +315,25 @@ model WaitStatus {
   @visibility("read")
   @doc("The wait duration configured in seconds.")
   waitDurationInSeconds?: int32;
+}
+
+@doc("The status of the Gate, as represented in the Update Run.")
+@added(Versions.v2025_04_01_preview)
+model UpdateGateStatus {
+  @doc("The human-readable display name of the Gate.")
+  @visibility("read")
+  @pattern("^[A-Za-z0-9].*$")
+  @minLength(1)
+  @maxLength(100)
+  displayName: string;
+
+  @doc("The status of the Gate.")
+  @visibility("read")
+  status?: UpdateStatus;
+
+  @doc("The resource id of the Gate.")
+  @visibility("read")
+  gateId?: GateResourceId;
 }
 
 @doc("The status of a member update operation.")
