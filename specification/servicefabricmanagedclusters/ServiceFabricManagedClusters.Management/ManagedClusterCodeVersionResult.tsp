@@ -156,6 +156,27 @@ interface ManagedClusterVersion {
 }
 
 /**
+ * The detail of the Service Fabric runtime version result
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource, no provisioning"
+model ManagedClusterVersionDetails {
+  /**
+   * The Service Fabric runtime version of the cluster.
+   */
+  clusterCodeVersion?: string;
+
+  /**
+   * The date of expiry of support of the version.
+   */
+  supportExpiryUtc?: utcDateTime;
+
+  /**
+   * Cluster operating system, the default will be Windows
+   */
+  osType?: OsType;
+}
+
+/**
  * The list results of the Service Fabric runtime versions.
  */
 model ManagedClusterCodeVersionListResult {
@@ -169,6 +190,18 @@ model ManagedClusterCodeVersionListResult {
  * The operating system of the cluster. The default means all.
  */
 union ManagedClusterVersionEnvironment {
+  string,
+
+  /**
+   * Indicates os is Windows.
+   */
+  Windows: "Windows",
+}
+
+/**
+ * Cluster operating system, the default will be Windows
+ */
+union OsType {
   string,
 
   /**

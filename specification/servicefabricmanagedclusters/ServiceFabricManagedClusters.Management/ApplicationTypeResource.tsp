@@ -7,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -87,3 +86,31 @@ interface ApplicationTypes {
 @@doc(ApplicationTypes.update::parameters.properties,
   "The application type resource updated tags."
 );
+
+/**
+ * The application type name properties
+ */
+model ApplicationTypeResourceProperties {
+  /**
+   * The current deployment or provisioning state, which only appears in the response.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Day 0 property, keep as string for backwards compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+}
+
+/**
+ * The list of application type names.
+ */
+model ApplicationTypeResourceList is Azure.Core.Page<ApplicationTypeResource>;
+
+/**
+ * Application type update request
+ */
+model ApplicationTypeUpdateParameters {
+  /**
+   * Application type update parameters
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
+  tags?: Record<string>;
+}

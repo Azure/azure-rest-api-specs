@@ -106,3 +106,16 @@ model ManagedVMSizesResult is Azure.Core.Page<ManagedVMSize>;
 
 @@doc(ManagedVMSize.name, "VM Size name.");
 @@doc(ManagedVMSize.properties, "VM Size properties.");
+
+/**
+ * VM Sizes properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource, no provisioning"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well known abbreviation"
+model VMSize {
+  /**
+   * VM Size name.
+   */
+  @visibility(Lifecycle.Read)
+  size?: string;
+}

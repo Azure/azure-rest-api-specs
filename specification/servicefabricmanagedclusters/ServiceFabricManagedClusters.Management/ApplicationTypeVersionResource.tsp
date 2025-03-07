@@ -88,3 +88,37 @@ interface ApplicationTypeVersions {
 @@doc(ApplicationTypeVersions.update::parameters.properties,
   "The application type version resource updated tags."
 );
+
+/**
+ * The properties of the application type version resource.
+ */
+model ApplicationTypeVersionResourceProperties {
+  /**
+   * The current deployment or provisioning state, which only appears in the response
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Day 0 property, keep as string for backwards compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * The URL to the application package
+   */
+  appPackageUrl: string;
+}
+
+/**
+ * The list of application type version resources for the specified application type name resource.
+ */
+model ApplicationTypeVersionResourceList
+  is Azure.Core.Page<ApplicationTypeVersionResource>;
+
+/**
+ * Application type version update request
+ */
+model ApplicationTypeVersionUpdateParameters {
+  /**
+   * Application type version update parameters
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
+  tags?: Record<string>;
+}
