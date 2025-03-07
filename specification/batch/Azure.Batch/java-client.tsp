@@ -310,3 +310,26 @@ op createJobScheduleCustomization is Azure.Batch.CreateOperationNew<
   createJobScheduleCustomization,
   "java"
 );
+
+// List Job Schedules Operation
+@doc("Optional parameters for List Job Schedules operation.")
+model ListBatchJobSchedulesOptions {
+  ...Azure.Batch.CommonListParameters;
+  ...Azure.Batch.ListJobSchedulesParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@doc("Custom override for List Job Schedules operation.")
+@route("/jobschedules")
+op listJobSchedulesCustomization is Azure.Batch.ListOperationNew<
+  {
+    @doc("Optional parameters for List Job Schedules operation.")
+    options?: ListBatchJobSchedulesOptions;
+  },
+  Azure.Batch.BatchJobScheduleListResult
+>;
+
+@@override(Azure.Batch.JobSchedules.listJobSchedules,
+  listJobSchedulesCustomization,
+  "java"
+);
