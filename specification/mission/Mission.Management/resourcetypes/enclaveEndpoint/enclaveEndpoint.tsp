@@ -94,6 +94,7 @@ model EnclaveEndpointProperties {
 @doc("Enclave Endpoint Patch properties")
 model EnclaveEndpointPatchProperties is EnclaveEndpointProperties {
 }
+
 @doc("Enclave Endpoint Patch Resource")
 model EnclaveEndpointPatchResource {
   @doc("Enclave Endpoint Patch properties")

@@ -56,7 +56,6 @@ model RequestMetadata {
   approvalStatus?: ApprovalStatus;
 
   @added(Microsoft.Mission.Versions.v2024_11_01_preview)
-  @madeOptional(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Route name for the approval callback")
   approvalCallbackRoute?: string;
 

@@ -66,7 +66,7 @@ model EnclaveVirtualNetwork {
   name?: string;
 
   @doc("Network Size.")
-  networkSize?: string;
+  networkSize: string;
 
   @doc("Custom CIDR Range.")
   customCidrRange?: string;
@@ -123,7 +123,7 @@ model EnclaveAddressSpaces {
 @doc("Maintenance Mode")
 model MaintenanceModeConfiguration {
   @doc("Current mode of Maintenance Mode Configuration")
-  mode?: "On" | "CanNotDelete" | "Off" | string;
+  mode: "On" | "CanNotDelete" | "Off" | string;
 
   @doc("The user, group or service principal object affected by Maintenance Mode")
   principals?: Principal[];
