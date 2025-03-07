@@ -1,6 +1,9 @@
+import "@azure-tools/typespec-client-generator-core";
+
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Sovereign;
 
@@ -255,6 +258,7 @@ model GenerateLandingZoneRequest {
 }
 
 @doc("The response payload for generating infrastructure-as-code for the landing zone.")
+@clientName("GenerateLandingZoneResult", "csharp")
 model GenerateLandingZoneResponse {
   @doc("The parent management group name of the landing zone deployment.")
   topLevelMgDisplayName: string;
@@ -290,6 +294,7 @@ model UpdateAuthoringStatusRequest {
 }
 
 @doc("The response for authoring status update request.")
+@clientName("UpdateAuthoringStatusResult", "csharp")
 model UpdateAuthoringStatusResponse {
   @doc("The name of the landing zone configuration resource.")
   landingZoneConfigurationName: string;
@@ -376,6 +381,7 @@ model CreateLandingZoneConfigurationCopyRequest {
 }
 
 @doc("The response of the create duplicate landing zone configuration.")
+@clientName("CreateLandingZoneConfigurationCopyResult", "csharp")
 model CreateLandingZoneConfigurationCopyResponse {
   @doc("The ID of the duplicate landing zone configuration resource.")
   copiedLandingZoneConfigurationId: armResourceIdentifier<[
