@@ -10,3 +10,41 @@ options:
     azure-resource-provider-folder: "resource-manager"
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/sovereign.json"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.RegulatedEnvironmentManagement"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-regulatedenvironmentmanagement"
+    package-name: "{package-dir}"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-regulatedenvironmentmanagement"
+    namespace: "com.azure.resourcemanager.regulatedenvironmentmanagement"
+    service-name: "Regulated Environment Management "
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-regulatedenvironmentmanagement"
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    flavor: "azure"
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    packageDetails:
+      name: "@azure/arm-regulatedenvironmentmanagement"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/regulatedenvironmentmanagement"
+    package-dir: "armregulatedenvironmentmanagement"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
