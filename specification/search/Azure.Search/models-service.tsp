@@ -6785,7 +6785,7 @@ model SemanticConfiguration {
    */
   prioritizedFields: SemanticPrioritizedFields;
 
-  /** 
+  /**
    * Determines how which semantic or query rewrite models to use during model flighting/upgrades.
    */
   @added(Versions.v2025_03_01_preview)
@@ -10014,7 +10014,6 @@ model VisionVectorizeSkill extends SearchIndexerSkill {
   `@odata.type`: "#Microsoft.Skills.Vision.VectorizeSkill";
 }
 
-
 /**
  * Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.
  */
@@ -10045,7 +10044,6 @@ model IndexStatisticsSummary {
   @visibility("read")
   vectorIndexSize?: int64;
 }
-
 
 /**
  * Response from a request to retrieve stats summary of all indexes. If successful, it includes the stats of each index in the service.
