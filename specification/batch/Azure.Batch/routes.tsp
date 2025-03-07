@@ -1077,6 +1077,19 @@ interface JobSchedules {
   >;
 }
 
+// Task Parameter Aliases
+alias CreateTaskRequiredParameters = {
+  @doc("The ID of the Job to which the Task is to be created.")
+  @path
+  jobId: string;
+
+  @doc("The Task to be created.")
+  @bodyRoot
+  task: BatchTaskCreateContent;
+};
+
+// Task Interface
+
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
@@ -1089,16 +1102,10 @@ interface Tasks {
     the Batch service and left in whatever state it was in at that time.
     """)
   @route("/jobs/{jobId}/tasks")
-  @clientName("createTaskInternal", "java")
-  createTask is CreateOperation<
+  createTask is CreateOperationNew<
     {
-      @doc("The ID of the Job to which the Task is to be created.")
-      @path
-      jobId: string;
-
-      @doc("The Task to be created.")
-      @bodyRoot
-      task: BatchTaskCreateContent;
+      ...CommonJsonParameters;
+      ...CreateTaskRequiredParameters;
     },
     {}
   >;
