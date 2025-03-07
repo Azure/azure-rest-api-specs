@@ -396,4 +396,29 @@ op createTaskCollectionCustomization is Azure.Batch.PostOperationNew<
   Azure.Batch.BatchTaskAddCollectionResult
 >;
 
-@@override(Azure.Batch.Tasks.createTaskCollection, createTaskCollectionCustomization, "java");
+@@override(Azure.Batch.Tasks.createTaskCollection,
+  createTaskCollectionCustomization,
+  "java"
+);
+
+// List SubTasks Operation
+@doc("Optional parameters for List SubTasks operation.")
+model ListBatchSubTasksOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.ListSubTasksParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for List SubTasks operation.")
+@route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
+op listSubTasksCustomization is Azure.Batch.ReadOperationNew<
+  {
+    ...Azure.Batch.ListSubTasksRequiredParameters;
+
+    @doc("Optional parameters for List SubTasks operation.")
+    options?: ListBatchSubTasksOptions;
+  },
+  Azure.Batch.BatchTaskListSubtasksResult
+>;
+
+@@override(Azure.Batch.Tasks.listSubTasks, listSubTasksCustomization, "java");
