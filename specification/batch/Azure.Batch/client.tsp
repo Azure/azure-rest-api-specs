@@ -189,7 +189,6 @@ interface BatchClient {
   "java"
 );
 
-@@clientName(BatchClient.listTasks, "listTasksInternal", "java");
 @@clientName(BatchClient.createTaskCollection,
   "createTaskCollectionInternal",
   "java"
