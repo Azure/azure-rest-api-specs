@@ -5114,6 +5114,10 @@
         "lastUpdatedAt"
       ]
     },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "CheckAddressSpaceAvailabilityRequest": {
       "type": "object",
       "description": "Request to the action call to check address space availability.",
@@ -6788,7 +6792,7 @@
           "description": "Name of managed resource group"
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The geo-location where the resource lives"
         }
       }
