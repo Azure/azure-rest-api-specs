@@ -5121,6 +5121,29 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      }
+    },
     "CheckAddressSpaceAvailabilityRequest": {
       "type": "object",
       "description": "Request to the action call to check address space availability.",
@@ -5344,7 +5367,7 @@
           }
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
         }
       }
@@ -6603,6 +6626,43 @@
         "mode"
       ]
     },
+    "MaintenanceModeConfigurationUpdate": {
+      "type": "object",
+      "description": "Maintenance Mode",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Current mode of Maintenance Mode Configuration",
+          "enum": [
+            "On",
+            "CanNotDelete",
+            "Off"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "principals": {
+          "type": "array",
+          "description": "The user, group or service principal object affected by Maintenance Mode",
+          "items": {
+            "$ref": "#/definitions/Principal"
+          }
+        },
+        "justification": {
+          "type": "string",
+          "description": "Justification for entering or exiting Maintenance Mode",
+          "enum": [
+            "Networking",
+            "Governance",
+            "Off"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
       "description": "ManagedResourceGroup related properties",
@@ -6769,6 +6829,28 @@
       "required": [
         "resourceAction"
       ]
+    },
+    "RequestMetadataUpdate": {
+      "type": "object",
+      "description": "Request Metadata for approvals request.",
+      "properties": {
+        "resourceAction": {
+          "type": "string",
+          "description": "Resource Action of the item being approved or declined."
+        },
+        "approvalStatus": {
+          "$ref": "#/definitions/ApprovalStatus",
+          "description": "Approval status."
+        },
+        "approvalCallbackRoute": {
+          "type": "string",
+          "description": "Route name for the approval callback"
+        },
+        "approvalCallbackPayload": {
+          "type": "string",
+          "description": "Payload to be sent upon any action on approval request"
+        }
+      }
     },
     "RoleAssignmentItem": {
       "type": "object",
@@ -7141,11 +7223,6 @@
       "type": "object",
       "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
-        },
         "parent1": {
           "type": "string",
           "description": "Parameter for optimizing query results"
@@ -7155,7 +7232,7 @@
           "description": "Parameter for optimizing query results"
         },
         "requestMetadata": {
-          "$ref": "#/definitions/RequestMetadata",
+          "$ref": "#/definitions/RequestMetadataUpdate",
           "description": "Request metadata for the approval request."
         },
         "approvers": {
@@ -7182,10 +7259,7 @@
           "format": "date-time",
           "description": "Approval request state change time, time at which approval request state changed from pending to approved or rejected."
         }
-      },
-      "required": [
-        "requestMetadata"
-      ]
+      }
     },
     "UpdateCommunityEndpointPatchProperties": {
       "type": "object",
@@ -7205,16 +7279,8 @@
           "items": {
             "type": "string"
           }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
         }
-      },
-      "required": [
-        "ruleCollection"
-      ]
+      }
     },
     "UpdateCommunityPatchProperties": {
       "type": "object",
@@ -7230,11 +7296,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
         },
         "resourceCollection": {
           "type": "array",
@@ -7266,7 +7327,7 @@
           "description": "Approval requirements for various actions on the community's resources."
         },
         "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfiguration",
+          "$ref": "#/definitions/MaintenanceModeConfigurationUpdate",
           "description": "Maintenance Mode configuration."
         }
       }
@@ -7299,11 +7360,6 @@
           "$ref": "#/definitions/DestinationEndpointResourceId",
           "description": "Destination Endpoint Resource Id."
         },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
-        },
         "resourceCollection": {
           "type": "array",
           "description": "List of resource ids modified by enclave Connections.",
@@ -7311,12 +7367,7 @@
             "type": "string"
           }
         }
-      },
-      "required": [
-        "communityResourceId",
-        "sourceResourceId",
-        "destinationEndpointId"
-      ]
+      }
     },
     "UpdateEnclaveEndpointPatchProperties": {
       "type": "object",
@@ -7336,16 +7387,8 @@
           "items": {
             "type": "string"
           }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
         }
-      },
-      "required": [
-        "ruleCollection"
-      ]
+      }
     },
     "UpdateEndpointPatchProperties": {
       "type": "object",
@@ -7372,11 +7415,6 @@
       "type": "object",
       "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
         "state": {
           "$ref": "#/definitions/ExternalConnectionState",
           "description": "The state of the externalConnection."
@@ -7406,22 +7444,12 @@
             "type": "string"
           }
         }
-      },
-      "required": [
-        "communityResourceId",
-        "enclaveIds",
-        "externalCidrs"
-      ]
+      }
     },
     "UpdateInternalConnectionProperties": {
       "type": "object",
       "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
         "connectionType": {
           "$ref": "#/definitions/InternalConnectionType",
           "description": "Specifies the type of internal connection. \n Possible values are:\n PrivateLink \n NetworkSecurityGroup"
@@ -7460,15 +7488,7 @@
             "type": "string"
           }
         }
-      },
-      "required": [
-        "connectionType",
-        "communityResourceId",
-        "destinationEnclaveId",
-        "destinationEndpointId",
-        "sourceEnclaveId",
-        "sourceCidrs"
-      ]
+      }
     },
     "UpdateTransitHubPatchProperties": {
       "type": "object",
@@ -7500,19 +7520,9 @@
       "type": "object",
       "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
-        },
         "enclaveVirtualNetwork": {
           "$ref": "#/definitions/EnclaveVirtualNetwork",
           "description": "Virtual Network."
-        },
-        "enclaveAddressSpaces": {
-          "$ref": "#/definitions/EnclaveAddressSpaces",
-          "description": "Enclave Address Spaces",
-          "readOnly": true
         },
         "communityResourceId": {
           "$ref": "#/definitions/CommunityResourceId",
@@ -7534,7 +7544,7 @@
           "description": "Managed resource group configuration."
         },
         "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfiguration",
+          "$ref": "#/definitions/MaintenanceModeConfigurationUpdate",
           "description": "Maintenance Mode configuration."
         },
         "bastionEnabled": {
@@ -7555,11 +7565,7 @@
             "$ref": "#/definitions/RoleAssignmentItem"
           }
         }
-      },
-      "required": [
-        "enclaveVirtualNetwork",
-        "communityResourceId"
-      ]
+      }
     },
     "UpdateWorkloadPatchProperties": {
       "type": "object",
@@ -7588,7 +7594,7 @@
           "description": "Virtual Enclave Patch properties"
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {

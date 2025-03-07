@@ -198,7 +198,6 @@ interface Workload {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     WorkloadResource,
     PatchModel = WorkloadPatchResource
@@ -220,7 +219,6 @@ interface Endpoint {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     EndpointResource,
     PatchModel = EndpointPatchResource
@@ -242,7 +240,6 @@ interface VirtualEnclave {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     EnclaveResource,
     PatchModel = VirtualEnclavePatchResource
@@ -295,7 +292,6 @@ interface Community {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     CommunityResource,
     PatchModel = CommunityPatchResource
@@ -333,7 +329,6 @@ interface CatalogInterface {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     CatalogResource,
     PatchModel = CatalogPatchResource
@@ -355,7 +350,6 @@ interface InternalConnections {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     InternalConnection,
     PatchModel = InternalConnectionPatchResource
@@ -378,7 +372,6 @@ interface TransitHub {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     TransitHubResource,
     PatchModel = TransitHubPatchResource
@@ -401,7 +394,6 @@ interface EnclaveConnection {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     EnclaveConnectionResource,
     PatchModel = EnclaveConnectionPatchResource
@@ -441,7 +433,6 @@ interface EnclaveEndpoints {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     EnclaveEndpointResource,
     PatchModel = EnclaveEndpointPatchResource
@@ -481,7 +472,6 @@ interface CommunityEndpoints {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     CommunityEndpointResource,
     PatchModel = CommunityEndpointPatchResource
@@ -520,7 +510,6 @@ interface ExternalConnections {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ExternalConnection,
     PatchModel = ExternalConnectionPatchResource
@@ -544,7 +533,6 @@ interface Approval {
       ArmAsyncOperationHeader
   >;
   listByParent is ArmResourceListByParent<ApprovalResource>;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ApprovalResource,
     PatchModel = ApprovalPatchResource
