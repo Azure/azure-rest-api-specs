@@ -8,3 +8,9 @@ using Microsoft.ServiceFabric;
   "ManagedMaintenanceWindowStatus"
 );
 @@clientName(ManagedAzResiliencyStatusContent, "ManagedAzResiliencyStatus");
+
+@@clientName(ManagedAzResiliencyStatus, "ManagedAzResiliencyStatuses", "java");
+@@clientName(ManagedMaintenanceWindowStatus,
+  "ManagedMaintenanceWindowStatuses",
+  "java"
+);
