@@ -994,12 +994,29 @@ alias ListTasksParameters = {
 
 alias CreateTaskCollectionParameters = {
   @doc("The ID of the Job to which the Task collection is to be added.")
-      @path
-      jobId: string;
+  @path
+  jobId: string;
 
-      @doc("The Tasks to be added.")
-      @bodyRoot
-      taskCollection: BatchTaskGroup;
+  @doc("The Tasks to be added.")
+  @bodyRoot
+  taskCollection: BatchTaskGroup;
+};
+
+alias ListSubTasksRequiredParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+
+  @doc("The ID of the Task.")
+  @path
+  taskId: string;
+};
+
+alias ListSubTasksParameters = {
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
 };
 
 // Task Interface
@@ -1059,9 +1076,9 @@ interface Tasks {
     """)
   @route("/jobs/{jobId}/addtaskcollection")
   createTaskCollection is PostOperationNew<
-   {
-      ...CommonJsonParameters,
-      ...CreateTaskCollectionParameters,
+    {
+      ...CommonJsonParameters;
+      ...CreateTaskCollectionParameters;
     },
     BatchTaskAddCollectionResult
   >;
@@ -1151,21 +1168,11 @@ interface Tasks {
     """)
   @doc("If the Task is not a multi-instance Task then this returns an empty collection.")
   @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
-  @clientName("listSubTasksInternal", "java")
-  listSubTasks is ReadOperation<
+  listSubTasks is ReadOperationNew<
     {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
-
-      @doc("The ID of the Task.")
-      @path
-      taskId: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
+      ...CommonParameters;
+      ...ListSubTasksRequiredParameters;
+      ...ListSubTasksParameters;
     },
     BatchTaskListSubtasksResult
   >;
