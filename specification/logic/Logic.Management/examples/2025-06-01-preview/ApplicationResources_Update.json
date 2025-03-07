@@ -1,0 +1,47 @@
+{
+  "operationId": "ApplicationResources_Update",
+  "title": "UpdateApplicationResource",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroup1",
+    "api-version": "2025-06-01-preview",
+    "spaceName": "Space1",
+    "applicationName": "Application1",
+    "resourceName": "Resource1",
+    "properties": {
+      "properties": {
+        "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Web/sites/LogicApp2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.IntegrationSpaces/spaces/Space1/applications/Application1/resources/Resource1",
+        "name": "Resource1",
+        "type": "Microsoft.IntegrationSpaces/spaces/applications/resources",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Web/sites/LogicApp2",
+          "resourceType": "Microsoft.Web/sites",
+          "resourceKind": "Logicapp",
+          "alerts": {
+            "defaults": {
+              "verbose": {
+                "actionGroups": [
+                  "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/microsoft.insights/actiongroups/actionGroup1",
+                  "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/microsoft.insights/actiongroups/actionGroup2"
+                ]
+              }
+            },
+            "alertRules": [
+              {
+                "alertRuleId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/microsoft.insights/metricalerts/metricalert1"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
