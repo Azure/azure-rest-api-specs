@@ -83,3 +83,13 @@ model InternalConnectionProperties {
   @doc("List of resource ids modified by internalConnections.")
   resourceCollection?: string[];
 }
+
+@doc("Internal Connection Patch properties")
+model InternalConnectionPatchProperties is InternalConnectionProperties {
+}
+@doc("Internal Connection Patch Resource")
+model InternalConnectionPatchResource {
+  @doc("Internal Connection properties")
+  properties?: InternalConnectionProperties;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+}

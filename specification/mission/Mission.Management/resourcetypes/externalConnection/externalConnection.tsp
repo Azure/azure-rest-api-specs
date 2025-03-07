@@ -50,3 +50,13 @@ model ExternalConnectionProperties {
   @doc("List of resource ids modified by externalConnections.")
   resourceCollection?: string[];
 }
+
+@doc("External Connection Resource properties")
+model ExternalConnectionPatchProperties is ExternalConnectionProperties {
+}
+@doc("External Connection Patch Resource")
+model ExternalConnectionPatchResource {
+  @doc("External Connection properties")
+  properties?: ExternalConnectionPatchProperties;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+}

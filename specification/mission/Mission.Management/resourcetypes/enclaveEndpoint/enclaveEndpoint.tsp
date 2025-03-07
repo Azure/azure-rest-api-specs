@@ -90,3 +90,13 @@ model EnclaveEndpointProperties {
   @doc("Whether approval is needed for the connection (True or False).")
   approvalRequired?: boolean;
 }
+
+@doc("Enclave Endpoint Patch properties")
+model EnclaveEndpointPatchProperties is EnclaveEndpointProperties {
+}
+@doc("Enclave Endpoint Patch Resource")
+model EnclaveEndpointPatchResource {
+  @doc("Enclave Endpoint Patch properties")
+  properties?: EnclaveEndpointPatchProperties;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+}

@@ -76,3 +76,13 @@ model EndpointProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
+
+@doc("Endpoint Patch properties")
+model EndpointPatchProperties is EndpointProperties {
+}
+@doc("Endpoint Patch Resource")
+model EndpointPatchResource {
+  @doc("Endpoint Patch properties")
+  properties?: EndpointPatchProperties;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+}

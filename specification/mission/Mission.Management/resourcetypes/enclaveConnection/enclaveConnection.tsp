@@ -68,3 +68,14 @@ model EnclaveConnectionProperties {
   @doc("List of resource ids modified by enclave Connections.")
   resourceCollection?: string[];
 }
+
+@doc("Enclave Connection Patch properties")
+model EnclaveConnectionPatchProperties is EnclaveConnectionProperties {
+}
+
+@doc("Enclave Connection Patch Resource")
+model EnclaveConnectionPatchResource {
+  @doc("Enclave Connection Patch properties")
+  properties?: EnclaveConnectionPatchProperties;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+}

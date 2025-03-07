@@ -1472,7 +1472,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunityEndpointResource"
+              "$ref": "#/definitions/CommunityEndpointPatchResource"
             }
           }
         ],
@@ -2112,7 +2112,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnclaveConnectionResource"
+              "$ref": "#/definitions/EnclaveConnectionPatchResource"
             }
           }
         ],
@@ -2556,7 +2556,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExternalConnection"
+              "$ref": "#/definitions/ExternalConnectionPatchResource"
             }
           }
         ],
@@ -2852,7 +2852,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InternalConnection"
+              "$ref": "#/definitions/InternalConnectionPatchResource"
             }
           }
         ],
@@ -3476,7 +3476,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnclaveEndpointResource"
+              "$ref": "#/definitions/EnclaveEndpointPatchResource"
             }
           }
         ],
@@ -3812,7 +3812,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EndpointResource"
+              "$ref": "#/definitions/EndpointPatchResource"
             }
           }
         ],
@@ -4584,6 +4584,53 @@
         }
       }
     },
+    "CommunityEndpointPatchProperties": {
+      "type": "object",
+      "description": "Community Endpoint Patch properties",
+      "properties": {
+        "ruleCollection": {
+          "type": "array",
+          "description": "Community Endpoint Rule Collection.",
+          "items": {
+            "$ref": "#/definitions/CommunityEndpointDestinationRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by community endpoint.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "Whether approval is needed for the connection (True or False)."
+        }
+      }
+    },
+    "CommunityEndpointPatchResource": {
+      "type": "object",
+      "description": "Community Endpoint Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CommunityEndpointPatchProperties",
+          "description": "Community Endpoint Patch properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "CommunityEndpointProperties": {
       "type": "object",
       "description": "Community Endpoint Resource properties",
@@ -4974,6 +5021,65 @@
         }
       }
     },
+    "EnclaveConnectionPatchProperties": {
+      "type": "object",
+      "description": "Enclave Connection Patch properties",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/EnclaveConnectionState",
+          "description": "The state of the enclaveConnection."
+        },
+        "communityResourceId": {
+          "$ref": "#/definitions/CommunityResourceId",
+          "description": "Community Resource Id."
+        },
+        "sourceResourceId": {
+          "$ref": "#/definitions/EnclaveConnectionSourceResourceId",
+          "description": "Source Resource Id."
+        },
+        "sourceCidr": {
+          "type": "string",
+          "description": "Source CIDR."
+        },
+        "ipGroup": {
+          "$ref": "#/definitions/IPGroupResourceId",
+          "description": "Source IP group Resource Id."
+        },
+        "destinationEndpointId": {
+          "$ref": "#/definitions/DestinationEndpointResourceId",
+          "description": "Destination Endpoint Resource Id."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids modified by enclave Connections.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EnclaveConnectionPatchResource": {
+      "type": "object",
+      "description": "Enclave Connection Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnclaveConnectionPatchProperties",
+          "description": "Enclave Connection Patch properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "EnclaveConnectionProperties": {
       "type": "object",
       "description": "Enclave Connection Resource properties",
@@ -5172,6 +5278,53 @@
         }
       }
     },
+    "EnclaveEndpointPatchProperties": {
+      "type": "object",
+      "description": "Enclave Endpoint Patch properties",
+      "properties": {
+        "ruleCollection": {
+          "type": "array",
+          "description": "Enclave Endpoint Rule Collection.",
+          "items": {
+            "$ref": "#/definitions/EnclaveEndpointDestinationRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by community endpoint.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "Whether approval is needed for the connection (True or False)."
+        }
+      }
+    },
+    "EnclaveEndpointPatchResource": {
+      "type": "object",
+      "description": "Enclave Endpoint Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnclaveEndpointPatchProperties",
+          "description": "Enclave Endpoint Patch properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "EnclaveEndpointProperties": {
       "type": "object",
       "description": "Enclave Endpoint Resource properties",
@@ -5361,6 +5514,44 @@
         }
       }
     },
+    "EndpointPatchProperties": {
+      "type": "object",
+      "description": "Endpoint Patch properties",
+      "properties": {
+        "endpointRuleCollection": {
+          "type": "array",
+          "description": "Endpoint Rule Collection.",
+          "items": {
+            "$ref": "#/definitions/EndpointRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        }
+      }
+    },
+    "EndpointPatchResource": {
+      "type": "object",
+      "description": "Endpoint Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EndpointPatchProperties",
+          "description": "Endpoint Patch properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "EndpointProperties": {
       "type": "object",
       "description": "Endpoint Resource properties",
@@ -5537,6 +5728,63 @@
       "required": [
         "value"
       ]
+    },
+    "ExternalConnectionPatchProperties": {
+      "type": "object",
+      "description": "External Connection Resource properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/ExternalConnectionState",
+          "description": "The state of the externalConnection."
+        },
+        "communityResourceId": {
+          "$ref": "#/definitions/CommunityResourceId",
+          "description": "Community Resource Id."
+        },
+        "enclaveIds": {
+          "type": "array",
+          "description": "The enclaves' resource IDs.",
+          "items": {
+            "$ref": "#/definitions/VirtualEnclaveResourceId"
+          }
+        },
+        "externalCidrs": {
+          "type": "array",
+          "description": "The external CIDR IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids modified by externalConnections.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExternalConnectionPatchResource": {
+      "type": "object",
+      "description": "External Connection Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExternalConnectionPatchProperties",
+          "description": "External Connection properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "ExternalConnectionProperties": {
       "type": "object",
@@ -5743,6 +5991,23 @@
       "required": [
         "value"
       ]
+    },
+    "InternalConnectionPatchResource": {
+      "type": "object",
+      "description": "Internal Connection Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InternalConnectionProperties",
+          "description": "Internal Connection properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "InternalConnectionProperties": {
       "type": "object",
