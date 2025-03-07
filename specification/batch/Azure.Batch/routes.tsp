@@ -1114,6 +1114,16 @@ alias ListTasksParameters = {
   $expand?: string[];
 };
 
+alias CreateTaskCollectionParameters = {
+  @doc("The ID of the Job to which the Task collection is to be added.")
+      @path
+      jobId: string;
+
+      @doc("The Tasks to be added.")
+      @bodyRoot
+      taskCollection: BatchTaskGroup;
+};
+
 // Task Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1170,16 +1180,10 @@ interface Tasks {
     service and left in whatever state it was in at that time.
     """)
   @route("/jobs/{jobId}/addtaskcollection")
-  @clientName("createTaskCollectionInternal", "java")
-  createTaskCollection is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Job to which the Task collection is to be added.")
-      @path
-      jobId: string;
-
-      @doc("The Tasks to be added.")
-      @bodyRoot
-      taskCollection: BatchTaskGroup;
+  createTaskCollection is PostOperationNew<
+   {
+      ...CommonJsonParameters,
+      ...CreateTaskCollectionParameters,
     },
     BatchTaskAddCollectionResult
   >;
