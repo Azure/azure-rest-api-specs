@@ -194,12 +194,9 @@
           }
         }
       },
-      "patch": {
-        "operationId": "Aliases_Update",
+      "put": {
+        "operationId": "Aliases_CreateOrReplace",
         "description": "Update an alias",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -217,7 +214,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AliasDictionary.Models.AliasCreateOrUpdate"
+              "$ref": "#/definitions/AliasDictionary.Models.Alias"
             }
           }
         ],
@@ -262,8 +259,8 @@
           }
         },
         "x-ms-examples": {
-          "Aliases_Update_MaximumSet": {
-            "$ref": "./examples/Aliases_Update_MaximumSet_Gen.json"
+          "Aliases_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/Aliases_CreateOrReplace_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1426,23 +1423,6 @@
         "isCustom",
         "enabled"
       ]
-    },
-    "AliasDictionary.Models.AliasCreateOrUpdate": {
-      "type": "object",
-      "description": "This is the request model for Alias",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Key for the alias"
-        },
-        "aliases": {
-          "type": "array",
-          "description": "List of aliases",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",

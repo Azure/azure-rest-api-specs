@@ -46,7 +46,7 @@ interface Aliases {
   @pollingOperation(
     MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
   )
-  update is Operations.LongRunningResourceCreateOrUpdate<Alias>;
+  createOrReplace is Operations.LongRunningResourceCreateOrReplace<Alias>;
 
   @doc("Delete an alias")
   delete is Operations.ResourceDelete<Alias>;
