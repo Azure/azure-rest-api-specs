@@ -408,14 +408,14 @@ model WorkspaceResourceProperties {
    * Managed On Behalf Of configuration.
    */
   @added(Versions.v2025_01_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   /**
    * ARM Resource Id of the managed storage account associated with this workspace.
    */
   @added(Versions.v2025_01_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedStorageAccount?: StorageAccountResourceId;
 }
 
