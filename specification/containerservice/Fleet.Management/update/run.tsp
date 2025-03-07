@@ -24,7 +24,7 @@ model UpdateRun is ProxyResource<UpdateRunProperties> {
   @minLength(1)
   @maxLength(50)
   @path
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
@@ -45,7 +45,7 @@ scalar FleetUpdateStrategyResourceId
 
 @doc("The properties of the UpdateRun.")
 model UpdateRunProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the UpdateRun resource.")
   provisioningState?: UpdateRunProvisioningState;
 
@@ -76,7 +76,7 @@ model UpdateRunProperties {
   @doc("The update to be applied to all clusters in the UpdateRun. The managedClusterUpdate can be modified until the run is started.")
   managedClusterUpdate: ManagedClusterUpdate;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the UpdateRun.")
   status?: UpdateRunStatus;
 }
@@ -86,7 +86,7 @@ model ManagedClusterUpdate {
   @doc("The upgrade to apply to the ManagedClusters.")
   upgrade: ManagedClusterUpgradeSpec;
 
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The node image upgrade to be applied to the target nodes in update run.")
   @added(Versions.v2023_06_15_preview)
   nodeImageSelection?: NodeImageSelection;
@@ -95,13 +95,13 @@ model ManagedClusterUpdate {
 @doc("The node image upgrade to be applied to the target nodes in update run.")
 @added(Versions.v2023_06_15_preview)
 model NodeImageSelection {
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The node image upgrade type.")
   type: NodeImageSelectionType;
 
   @added(Versions.v2024_05_02_preview)
   @doc("Custom node image versions to upgrade the nodes to. This field is required if node image selection type is Custom. Otherwise, it must be empty. For each node image family (e.g., 'AKSUbuntu-1804gen2containerd'), this field can contain at most one version (e.g., only one of 'AKSUbuntu-1804gen2containerd-2023.01.12' or 'AKSUbuntu-1804gen2containerd-2023.02.12', not both). If the nodes belong to a family without a matching image version in this field, they are not upgraded.")
-  @extension("x-ms-identifiers", ["version"])
+  @identifiers(#["version"])
   customNodeImageVersions?: NodeImageVersion[];
 }
 
@@ -176,35 +176,35 @@ union UpdateState {
 
 @doc("The status for an operation or group of operations.")
 model UpdateStatus {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The time the operation or group was started.")
   startTime?: utcDateTime;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The time the operation or group was completed.")
   completedTime?: utcDateTime;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The State of the operation or group.")
   state?: UpdateState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The error details when a failure is encountered.")
   error?: Azure.ResourceManager.Foundations.ErrorDetail; // https://github.com/Azure/azure-rest-api-specs/blob/1de0b5315d62e1b40052bad2c9a2f2c89d84ff0f/specification/common-types/resource-management/v5/types.json#L260
 }
 
 @doc("The status of a UpdateRun.")
 model UpdateRunStatus {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the UpdateRun.")
   status?: UpdateStatus;
 
-  @visibility("read")
-  @extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #["name"])
   @doc("The stages composing an update run. Stages are run sequentially withing an UpdateRun.")
   stages?: UpdateStageStatus[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The node image upgrade specs for the update run. It is only set in update run when `NodeImageSelection.type` is `Consistent`.")
   @added(Versions.v2023_06_15_preview)
   nodeImageSelection?: NodeImageSelectionStatus;
@@ -213,8 +213,8 @@ model UpdateRunStatus {
 @doc("The node image upgrade specs for the update run.")
 @added(Versions.v2023_06_15_preview)
 model NodeImageSelectionStatus {
-  @extension("x-ms-identifiers", ["version"])
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  @identifiers(#["version"])
   @doc("The image versions to upgrade the nodes to.")
   selectedNodeImageVersions?: NodeImageVersion[];
 }
@@ -222,77 +222,77 @@ model NodeImageSelectionStatus {
 @doc("The node upgrade image version.")
 @added(Versions.v2023_06_15_preview)
 model NodeImageVersion {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The image version to upgrade the nodes to (e.g., 'AKSUbuntu-1804gen2containerd-2022.12.13').")
   version?: string;
 }
 
 @doc("The status of a UpdateStage.")
 model UpdateStageStatus {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the UpdateStage.")
   status?: UpdateStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The name of the UpdateStage.")
   name?: string;
 
-  @visibility("read")
-  @extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #["name"])
   @doc("The list of groups to be updated as part of this UpdateStage.")
   groups?: UpdateGroupStatus[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the wait period configured on the UpdateStage.")
   afterStageWaitStatus?: WaitStatus;
 }
 
 @doc("The status of a UpdateGroup.")
 model UpdateGroupStatus {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the UpdateGroup.")
   status?: UpdateStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The name of the UpdateGroup.")
   name?: string;
 
-  @visibility("read")
-  @extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #["name"])
   @doc("The list of member this UpdateGroup updates.")
   members?: MemberUpdateStatus[];
 }
 
 @doc("The status of the wait duration.")
 model WaitStatus {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the wait duration.")
   status?: UpdateStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The wait duration configured in seconds.")
   waitDurationInSeconds?: int32;
 }
 
 @doc("The status of a member update operation.")
 model MemberUpdateStatus {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the MemberUpdate operation.")
   status?: UpdateStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The name of the FleetMember.")
   name?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The Azure resource id of the target Kubernetes cluster.")
   clusterResourceId?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The operation resource id of the latest attempt to perform the operation.")
   operationId?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status message after processing the member update operation.")
   @added(Versions.v2023_06_15_preview)
   message?: string;
@@ -334,7 +334,7 @@ model SkipTarget {
 @added(Versions.v2024_02_02_preview)
 model SkipProperties {
   @doc("The targets to skip.")
-  @extension("x-ms-identifiers", ["type", "name"])
+  @identifiers(#["type", "name"])
   targets: SkipTarget[];
 }
 

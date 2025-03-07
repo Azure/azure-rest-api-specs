@@ -64,14 +64,14 @@ union HcxEnterpriseSiteProvisioningState {
 @doc("The properties of an HCX Enterprise Site")
 model HcxEnterpriseSiteProperties {
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: HcxEnterpriseSiteProvisioningState;
 
   @doc("The activation key")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   activationKey?: string;
 
   @doc("The status of the HCX Enterprise Site")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: HcxEnterpriseSiteStatus;
 }
