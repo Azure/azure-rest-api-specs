@@ -8,8 +8,8 @@ import {
   getAllTypeSpecPaths,
   resetGitRepo,
 } from "./utils.js";
-import { LogLevel, logMessage, vsoAddAttachment } from "./log.js";
-import { SpecGenSdkCmdInput } from "./types.js";
+import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
+import { CommandLog, SpecGenSdkCmdInput } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 
 export async function generateSdkForSingleSpec(): Promise<number> {
@@ -43,6 +43,9 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     statusCode = 1;
   }
   logMessage("ending group logging", LogLevel.EndGroup);
+
+  logIssuesToADO(commandInput, specConfigPath || '');
+  
   return statusCode;
 }
 
@@ -105,6 +108,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
+
+    logIssuesToADO(commandInput, changedSpecPath || '');
   }
   return statusCode;
 }
@@ -180,6 +185,8 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
+    
+    logIssuesToADO(commandInput, specConfigPath || '');
   }
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
@@ -324,4 +331,66 @@ function getSpecPaths(runMode: string, specRepoPath: string): string[] {
     }
   }
   return specConfigPaths;
+}
+
+/**
+ * Extract and format the prefix from tspConfigPath or readmePath.
+ * @param {string | undefined} tspConfigPath The tspConfigPath to extract the prefix from.
+ * @param {string | undefined} readmePath The readmePath to extract the prefix from.
+ * @returns {string} The formatted prefix.
+ */
+function extractPathFromSpecConfig(tspConfigPath: string | undefined, readmePath: string | undefined): string {
+  let prefix = '';
+  if (tspConfigPath) {
+    const match = tspConfigPath.match(/specification\/(.+)\/tspconfig\.yaml$/);
+    if (match) {
+      const segments = match[1].split('/');
+      prefix = segments.join('-').toLowerCase().replace(/\./g, '-');
+    }
+  } else if (readmePath) {
+    const match = readmePath.match(/specification\/(.+?)\/readme\.md$/i);
+    if (match) {
+      const segments = match[1].split('/');
+      prefix = segments.join('-').toLowerCase().replace(/\./g, '-');
+    }
+  }
+  return prefix;
+}
+
+/**
+ * Generates file paths for different log files based on the given command input.
+ * @param {SpecGenSdkCmdInput} commandInput 
+ * @returns An object containing the full log file path, filtered log file path, and HTML log file path.
+ */
+function getLogsPath(commandInput: SpecGenSdkCmdInput): { fullLogFileName: string, filteredLogFileName: string, htmlLogFileName: string } {
+  const fileNamePrefix = extractPathFromSpecConfig(commandInput.tspConfigPath, commandInput.readmePath)
+  const logFolder = path.join(commandInput.workingFolder, 'out/logs');
+  const fullLogFileName = path.join(logFolder, `${fileNamePrefix}-full.log`);
+  const filteredLogFileName = path.join(logFolder, `${fileNamePrefix}-filtered.log`);
+  const htmlLogFileName = path.join(logFolder, `${fileNamePrefix}-${commandInput.sdkRepoName.substring("azure-sdk-for-".length)}-gen-result.html`);
+  return { fullLogFileName, filteredLogFileName, htmlLogFileName };
+}
+
+/**
+ * Logs SDK generation issues to Azure DevOps (ADO)
+ * @param commandInput 
+ * @param specConfigPath 
+ */
+function logIssuesToADO(commandInput: SpecGenSdkCmdInput, specConfigPath: string): void {
+  const logPath = getLogsPath(commandInput).filteredLogFileName;
+  let logIssues:CommandLog[] = []
+  try {
+    const log = JSON.parse(fs.readFileSync(logPath, "utf8"));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    logIssues = log.logIssues;
+  } catch (error) {
+    logMessage(`Error reading log at ${logPath}:${error}`, LogLevel.Error);
+  }
+
+  if(logIssues.length > 0) {
+    logMessage(`Error generating SDK from ${specConfigPath}`, LogLevel.Group);
+    const logIssuesList = logIssues.flatMap(entry => [`Get log issues from script ${entry.command} `, ...entry.logIssues]);;
+    vsoLogIssue(logIssuesList.join('%0D%0A'));
+    logMessage("ending group logging", LogLevel.EndGroup);
+  }
 }
