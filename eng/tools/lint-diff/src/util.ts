@@ -1,7 +1,8 @@
 import { access, constants, readFile, readdir } from "node:fs/promises";
 import { dirname, join, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { getInputFiles } from "./markdown-utils.js";
+import { getInputFiles, MarkdownType } from "./markdown-utils.js";
+import { ExecException } from "node:child_process";
 
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 
@@ -284,3 +285,124 @@ export async function deduplicateTags(tags: string[], readmeContent: string) {
     })
     .map((tag) => tag.tagName);
 }
+
+export type AutorestRunResult = {
+  autorestCommand: string;
+  rootPath: string;
+
+  readme: string;
+  tag: string;
+  // TODO: Not sure if this is useful, may also require sub type
+  openApiType: MarkdownType;
+
+  // TODO: Is there a shorthand way to mix in the output of executeCommand?
+  error: ExecException | null;
+  stdout: string;
+  stderr: string;
+};
+
+// TODO: Name
+export type BeforeAfter = {
+  before: AutorestRunResult;
+  after: AutorestRunResult;
+};
+
+export function logAutorestExecutionErrors(runResult: AutorestRunResult) {
+  const errorIsNotNull = runResult.error !== null;
+  const autoRestPrefix = `{`;
+  const stdoutContainsLevelError = runResult.stdout.includes(`${autoRestPrefix}"level":"error"`);
+  const stdoutContainsLevelFatal = runResult.stdout.includes(`${autoRestPrefix}"level":"fatal"`);
+  const stderrContainsLevelError = runResult.stderr.includes(`${autoRestPrefix}"level":"error"`);
+  const stderrContainsLevelFatal = runResult.stderr.includes(`${autoRestPrefix}"level":"fatal"`);
+  if (errorIsNotNull) {
+    // TODO: Clean up output formatting to be consistent with new output standards
+    console.log(
+      `Execution of AutoRest with LintDiff done. ` +
+        `Error is not null: ${errorIsNotNull}, ` +
+        `stdout contains AutoRest 'error': ${stdoutContainsLevelError}, ` +
+        `stdout contains AutoRest 'fatal': ${stdoutContainsLevelFatal}, ` +
+        `stderr contains AutoRest 'error': ${stderrContainsLevelError}, ` +
+        `stderr contains AutoRest 'fatal': ${stderrContainsLevelFatal}`,
+    );
+  } else {
+    // TODO: Include markdown type?
+    console.log(
+      `::debug:: Execution completed with no errors for tag: ${runResult.tag}, markdown: ${runResult.readme}, rootPath: ${runResult.rootPath}`,
+    );
+  }
+}
+
+export type Source = {
+  document: string;
+  position: {
+    line: number;
+    colomn: number;
+  };
+};
+
+export type LintingResultMessage = {
+  level: string;
+  code: string;
+  message: string;
+  source: Source[];
+  validationCategory?: string;
+  details: {
+    jsonpath: (string | number)[];
+    validationCategory?: string;
+  };
+};
+
+export type LintDiffViolation = LintingResultMessage & {
+  groupName?: string;
+  filePath?: string;
+  lineNumber?: number;
+  armRpcs?: string[];
+};
+
+// Ensure that diagnostic information emitted by azure-openapi-validator
+// to stdout is not interpreted as a diff occurrence.
+// Assume that all messages emitted as "information" or "debug" or "verbose" are
+// diagnostic output and hence can be excluded, and that all diagnostic output
+// is emitted as "information" or "debug" or "verbose", so we don't have to
+// exclude anything beyond these levels.
+const diagnosticLevelStrings: string[] = [
+  '"level":"information"',
+  '"level":"debug"',
+  '"level":"verbose"',
+];
+
+export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffViolation[] {
+  const violations: LintDiffViolation[] = [];
+
+  for (const line of (runResult.stderr + runResult.stdout).split("\n")) {
+    if (!line.includes('"extensionName":"@microsoft.azure/openapi-validator"')) {
+      continue;
+    }
+
+    // Ignore all lines that are "diagnostic" output from autorest
+    if (!diagnosticLevelStrings.some((level) => line.includes(level))) {
+      continue;
+    }
+
+    const result = JSON.parse(line.trim());
+    if (result.code == undefined) {
+      // Here we are assuming that lack of code denotes fatal error. For example [1].
+      // We must set this to some value because if it would stay undefined, the downstream code would blow up in several places.
+      result.code = "FATAL";
+    }
+    violations.push(result as LintDiffViolation);
+  }
+
+  return violations;
+}
+
+export interface AutoRestMessage {
+  level: "information" | "warning" | "error" | "debug" | "verbose" | "fatal";
+  code?: any;
+  message: string;
+  readme?: string;
+  tag?: string;
+  groupName?: string;
+}
+
+// export function getAutorestViolations(runResult: AutorestRunResult) {}
