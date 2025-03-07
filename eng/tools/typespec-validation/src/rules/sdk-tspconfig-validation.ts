@@ -181,7 +181,7 @@ export class TspConfigJavaAzPackageDirectorySubRule extends TspconfigEmitterOpti
 // ----- TS management modular sub rules -----
 export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "generateMetadata", true);
+    super("@azure-tools/typespec-ts", "generate-metadata", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -190,7 +190,7 @@ export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends Tspconfig
 
 export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "hierarchyClient", false);
+    super("@azure-tools/typespec-ts", "hierarchy-client", false);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -199,7 +199,7 @@ export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends Tspconfig
 
 export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "experimentalExtensibleEnums", true);
+    super("@azure-tools/typespec-ts", "experimental-extensible-enums", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -208,7 +208,7 @@ export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extend
 
 export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "enableOperationGroup", true);
+    super("@azure-tools/typespec-ts", "enable-operation-group", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -228,7 +228,7 @@ export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends Tspcon
   constructor() {
     super(
       "@azure-tools/typespec-ts",
-      "packageDetails.name",
+      "package-details.name",
       new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
     );
   }

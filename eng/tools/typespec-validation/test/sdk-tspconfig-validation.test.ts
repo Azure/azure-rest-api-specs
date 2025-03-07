@@ -177,7 +177,7 @@ const commonAzureServiceDirTestCases = createParameterTestCases(
 const tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "generateMetadata",
+  "generate-metadata",
   true,
   false,
   [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
@@ -186,7 +186,7 @@ const tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
 const tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "hierarchyClient",
+  "hierarchy-client",
   false,
   true,
   [new TspConfigTsMgmtModularHierarchyClientFalseSubRule()],
@@ -195,7 +195,7 @@ const tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
 const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "experimentalExtensibleEnums",
+  "experimental-extensible-enums",
   true,
   false,
   [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
@@ -204,7 +204,7 @@ const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTest
 const tsManagementEnableOperationGroupTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "enableOperationGroup",
+  "enable-operation-group",
   true,
   false,
   [new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule()],
@@ -222,7 +222,7 @@ const tsManagementPackageDirTestCases = createEmitterOptionTestCases(
 const tsManagementPackageNameTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "packageDetails.name",
+  "package-details.name",
   "@azure/arm-aaa-bbb",
   "@azure/aaa-bbb",
   [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
