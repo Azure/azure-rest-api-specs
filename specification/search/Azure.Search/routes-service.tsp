@@ -737,6 +737,7 @@ op getServiceStatistics is SearchOperation<{}, SearchServiceStatistics>;
  * Retrieves a summary of statistics for all indexes in the search service.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
 @added(Versions.v2025_03_01_preview)
 @route("/indexstats")
 @get
