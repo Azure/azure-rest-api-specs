@@ -82,7 +82,6 @@ model TransitHubProperties {
   resourceCollection?: string[];
 }
 
-
 @doc("Describes the properties of an Transit Hub.")
 model TransitHubPatchProperties {
   @doc("The status of the last operation.")
@@ -98,7 +97,6 @@ model TransitHubPatchProperties {
   @doc("List of resource ids modified by transitHubs.")
   resourceCollection?: string[];
 
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("Tags associated with the resource.")
   tags?: Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
