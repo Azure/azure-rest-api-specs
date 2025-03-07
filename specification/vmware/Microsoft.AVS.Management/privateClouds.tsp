@@ -183,6 +183,7 @@ union EncryptionVersionType {
 model PrivateCloud is TrackedResource<PrivateCloudProperties> {
   ...ResourceSkuRequired;
   ...ManagedSystemAssignedIdentityProperty;
+  ...AvailabilityZones;
 
   @doc("Name of the private cloud")
   @pattern("^[-\\w\\._]+$")
@@ -300,10 +301,12 @@ model PrivateCloudProperties {
   @visibility(Lifecycle.Read)
   vmotionNetwork?: string;
 
+  #deprecated "It is recommended to let the system generate the password when the private cloud is created."
   @doc("Optionally, set the vCenter admin password when the private cloud is created")
   @secret
   vcenterPassword?: string;
 
+  #deprecated "It is recommended to let the system generate the password when the private cloud is created."
   @doc("Optionally, set the NSX-T Manager password when the private cloud is created")
   @secret
   nsxtPassword?: string;
@@ -406,7 +409,7 @@ model IdentitySource {
   @doc("The domain's NetBIOS name")
   `alias`?: string;
 
-  @doc("The domain's dns name")
+  @doc("The domain's DNS name")
   domain?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
