@@ -39,22 +39,22 @@ union ScriptPackageProvisioningState {
 @doc("Properties of a Script Package subresource")
 model ScriptPackageProperties {
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ScriptPackageProvisioningState;
 
   @doc("User friendly description of the package")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   @doc("Module version")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   @doc("Company that created and supports the package")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   company?: string;
 
   @doc("Link to support by the package vendor")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uri?: string;
 }
