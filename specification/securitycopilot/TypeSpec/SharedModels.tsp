@@ -1,106 +1,66 @@
 @doc("Entity representing a Skillset.")
-@access("public")
 model SkillsetDescriptor {
     @visibility("public")
     @doc("Namespace for the skillset")
     `namespace`: string;
 
-    @visibility("public")
     @doc("The name of the Skillset")
     name: string;
 
-    @visibility("create")
     @doc("The description of the Skillset")
     description: string;
 
-    @visibility("create")
     @doc("The description of the skillset that's displayed TODO postman/dev figure out where this is displayed")
     descriptionDisplay: string;
 
-    @visibility("create")
     @doc("The Skillset name that's displayed in the portal")
     disaplyName: string;
 
-    @visibility("create")
     @doc("The icon displayed for the skillset in the console")
     icon: string;
 
-    @visibility("create")
     @doc("The category of the Skillset")
     category: SkillsetCategory;
 
-    @visibility("create")
     @doc("CatalogScope of the Skillset")
     catalogScope: SkillsetCatalogScope;
 
-    @visibility("create")
     @doc("Whether the skillset is enabled TODO how is this different than Hidden")
     enabled: boolean;
 
-    @visibility("create")
     @doc("Whether the skillset is hidden TODO how is this different than enabled")
     hidden: boolean;
 
-    @visibility("create")
     @doc("The prerequisites of a skillset TODO what does this mean")
     prerequisites: string[] | null;
 
-    @visibility("create")
     @doc("The settings of a skillset")
     settings: SkillsetSetting[];
 
-    @visibility("create")
     @doc("The settings of a skillset")
     authorization: SkillsetAuth;
 
-    @visibility("create")
     @doc("The types of authentication supported by the skillset")
     supportedAuthTypes: SkillsetAuthType[];
 
-    @visibility("create")
     @doc("A list of feature flags. At least one of the feature flags is required to enabled in the prompt context in order for the skillset to be available")
     userVisibilityFeatureFlags: string[];
 
-    @visibility("create")
     @doc("Controls the conditions under which the users can see or use this skillset")
     userVisibility: SkillVisibility;
 
-    @visibility("create")
     @doc("Visibility flags required for the planner to user the skillset TODO confirm what this does")
     plannerVisibilityFeatureFlags: string[];
 
-    @visibility("create")
     @doc("Controls the conditions under a prompt can use this skillset")
     plannerVisibility: SkillVisibility;
 
-    @visibility("create")
     @doc("The user ID of the user who created this skillset.")
     creatorUserId: string;
 
     @visibility("create")
     @doc("The ID of an Entra group that contains the owners for this Skillset")
     ownersGroupId: string;
-
-    constructor(
-        `namespace`: string,
-        name: string,
-        description: string,
-        descriptionDisplay: string,
-        disaplyName: string,
-        icon: string,
-        category: SkillsetCategory,
-        catalogScope: SkillsetCatalogScope,
-        enabled: boolean,
-        hidden: boolean,
-        prerequisites: string[] | null,
-        settings: SkillsetSetting[],
-        authorization: SkillsetAuth,
-        supportedAuthTypes: SkillsetAuthType[],
-        userVisibilityFeatureFlags: string[],
-        userVisibility: SkillVisibility,
-        plannerVisibilityFeatureFlags: string[],
-        plannerVisibility: SkillVisibility,
-    );
 }
 
 @doc("Defines the settings of a skillset")
