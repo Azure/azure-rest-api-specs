@@ -76,6 +76,12 @@ suppressions:
   reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
   where:
     - $.definitions["CapabilityHostResource"]
+- code: LroLocationHeader
+  reason: Align with existing API behavior in other APIs
+  where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put.responses.202
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.responses.202
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete.responses.202
 ```
 
 ### Tag: package-2024-10
