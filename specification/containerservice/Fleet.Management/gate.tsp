@@ -22,7 +22,7 @@ model Gate is ProxyResource<GateProperties> {
   @key("gateName")
   @path
   @segment("gates")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
@@ -37,9 +37,9 @@ union GateType {
   Approval: "Approval",
 }
 
-@doc("The status of the Gate.")
+@doc("The state of the Gate.")
 @added(Versions.v2025_04_01_preview)
-union GateStatus {
+union GateState {
   string,
 
   @doc("A Pending Gate will continue to block the staged rollout process it is controlling.")
@@ -56,9 +56,16 @@ model GateProperties {
   // omitting it for now as response headers do not impact SDK generation.
   // ...EtagResponseEnvelope;
 
-  @visibility("read")
   @doc("The provisioning state of the Gate resource.")
+  @visibility(Lifecycle.Read)
   provisioningState?: GateProvisioningState;
+
+  @doc("The human-readable display name of the Gate.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @pattern("^[A-Za-z0-9].*$")
+  @minLength(1)
+  @maxLength(100)
+  displayName: string;
 
   @doc("The target that the Gate is controlling, e.g. an Update Run.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -70,7 +77,7 @@ model GateProperties {
 
   @doc("The status of the Gate.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  status: GateStatus;
+  status: GateState;
 }
 
 @doc("The type of staged rollout that the Gate is targeting.")

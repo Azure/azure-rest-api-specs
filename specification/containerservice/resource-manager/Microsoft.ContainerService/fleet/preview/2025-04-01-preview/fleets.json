@@ -3107,6 +3107,27 @@
         }
       ]
     },
+    "GateConfiguration": {
+      "type": "object",
+      "description": "GateConfiguration is used to define where Gates should be placed within the Update Run.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The human-readable display name of the Gate.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[A-Za-z0-9].*$"
+        },
+        "type": {
+          "$ref": "#/definitions/GateType",
+          "description": "The type of the Gate determines how it is completed."
+        }
+      },
+      "required": [
+        "displayName",
+        "type"
+      ]
+    },
     "GateListResult": {
       "type": "object",
       "description": "The response of a Gate list operation.",
@@ -3137,6 +3158,17 @@
           "description": "The provisioning state of the Gate resource.",
           "readOnly": true
         },
+        "displayName": {
+          "type": "string",
+          "description": "The human-readable display name of the Gate.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[A-Za-z0-9].*$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "target": {
           "$ref": "#/definitions/GateTarget",
           "description": "The target that the Gate is controlling, e.g. an Update Run.",
@@ -3154,7 +3186,7 @@
           ]
         },
         "status": {
-          "$ref": "#/definitions/GateStatus",
+          "$ref": "#/definitions/GateState",
           "description": "The status of the Gate.",
           "x-ms-mutability": [
             "read",
@@ -3164,6 +3196,7 @@
         }
       },
       "required": [
+        "displayName",
         "target",
         "gateType",
         "status"
@@ -3174,7 +3207,7 @@
       "description": "A Gate controls the progression during a staged rollout, e.g. in an Update Run.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/GateStatus",
+          "$ref": "#/definitions/GateState",
           "description": "The status of the Gate.",
           "x-ms-mutability": [
             "read",
@@ -3215,15 +3248,27 @@
       },
       "readOnly": true
     },
-    "GateStatus": {
+    "GateResourceId": {
       "type": "string",
-      "description": "The status of the Gate.",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/fleets/gates"
+          }
+        ]
+      }
+    },
+    "GateState": {
+      "type": "string",
+      "description": "The state of the Gate.",
       "enum": [
         "Pending",
         "Completed"
       ],
       "x-ms-enum": {
-        "name": "GateStatus",
+        "name": "GateState",
         "modelAsString": true,
         "values": [
           {
@@ -3585,6 +3630,33 @@
         ]
       }
     },
+    "UpdateGateStatus": {
+      "type": "object",
+      "description": "The status of the Gate, as represented in the Update Run.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The human-readable display name of the Gate.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[A-Za-z0-9].*$",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The status of the Gate.",
+          "readOnly": true
+        },
+        "gateId": {
+          "$ref": "#/definitions/GateResourceId",
+          "description": "The resource id of the Gate.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "displayName"
+      ]
+    },
     "UpdateGroup": {
       "type": "object",
       "description": "A group to be updated.",
@@ -3595,6 +3667,26 @@
           "minLength": 1,
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "beforeGates": {
+          "type": "array",
+          "description": "A list of Gates that will be created before this Group is updated.",
+          "items": {
+            "$ref": "#/definitions/GateConfiguration"
+          },
+          "x-ms-identifiers": [
+            "displayName"
+          ]
+        },
+        "afterGates": {
+          "type": "array",
+          "description": "A list of Gates that will be created after this Group is updated.",
+          "items": {
+            "$ref": "#/definitions/GateConfiguration"
+          },
+          "x-ms-identifiers": [
+            "displayName"
+          ]
         }
       },
       "required": [
@@ -3624,6 +3716,28 @@
           "readOnly": true,
           "x-ms-identifiers": [
             "name"
+          ]
+        },
+        "beforeGates": {
+          "type": "array",
+          "description": "The list of Gates that will run before this UpdateGroup.",
+          "items": {
+            "$ref": "#/definitions/UpdateGateStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "displayName"
+          ]
+        },
+        "afterGates": {
+          "type": "array",
+          "description": "The list of Gates that will run after this UpdateGroup.",
+          "items": {
+            "$ref": "#/definitions/UpdateGateStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "displayName"
           ]
         }
       }
@@ -3863,6 +3977,26 @@
           "type": "integer",
           "format": "int32",
           "description": "The time in seconds to wait at the end of this stage before starting the next one. Defaults to 0 seconds if unspecified."
+        },
+        "beforeGates": {
+          "type": "array",
+          "description": "A list of Gates that will be created before this Stage is updated.",
+          "items": {
+            "$ref": "#/definitions/GateConfiguration"
+          },
+          "x-ms-identifiers": [
+            "displayName"
+          ]
+        },
+        "afterGates": {
+          "type": "array",
+          "description": "A list of Gates that will be created after this Stage is updated.",
+          "items": {
+            "$ref": "#/definitions/GateConfiguration"
+          },
+          "x-ms-identifiers": [
+            "displayName"
+          ]
         }
       },
       "required": [
@@ -3892,6 +4026,28 @@
           "readOnly": true,
           "x-ms-identifiers": [
             "name"
+          ]
+        },
+        "beforeGates": {
+          "type": "array",
+          "description": "The list of Gates that will run before this UpdateStage.",
+          "items": {
+            "$ref": "#/definitions/UpdateGateStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "displayName"
+          ]
+        },
+        "afterGates": {
+          "type": "array",
+          "description": "The list of Gates that will run after this UpdateStage.",
+          "items": {
+            "$ref": "#/definitions/UpdateGateStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "displayName"
           ]
         },
         "afterStageWaitStatus": {
