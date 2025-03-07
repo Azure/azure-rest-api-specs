@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.ManufacturingPlatform")
-@service({
+@service(#{
   title: "Microsoft.ManufacturingPlatform",
 })
 @versioned(Microsoft.ManufacturingPlatform.Versions)
@@ -34,7 +34,7 @@ model MdsResource is TrackedResource<MdsResourceProperties> {
   @segment("manufacturingDataServices")
   @doc("Name.")
   @path
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   ...ManagedServiceIdentityProperty;
@@ -92,172 +92,172 @@ union RedundancyState {
 
 @doc("Details of the ManufacturingPlatform MdsResource.")
 model MdsResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
   @doc("Mds Resource Version.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   version?: string;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Enable Copilot.")
   enableCopilot?: boolean;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Enable Diagnostic Settings.")
   enableDiagnosticSettings?: boolean;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("AAD Application Id.")
   @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
   aadApplicationId: string;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("AKS Admin Group Id.")
   @pattern("^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^$")
   aksAdminGroupId?: string = "00000000-0000-0000-0000-000000000000";
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Service Url")
   serviceUrl?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of AKS Created.")
   aksProfile?: AksProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Storage Created.")
   storageProfile?: StorageProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Database Created.")
   databaseProfile?: DatabaseProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Adx Created.")
   adxProfile?: AdxProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Azure Redis Created.")
   redisProfile?: RedisProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Monitoring Resource Created.")
   monitoringProfile?: MonitoringProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of EventHub Resource.")
   eventHubProfile?: EventHubProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Function App Resource.")
   functionAppProfile?: FunctionAppProfile;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is a well-known abbreviation"
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Profile of OpenAI Resource.")
   openAIProfile?: OpenAIProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Configuration of the managed resource group associated with the resource.")
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Managed On Behalf Of Configuration.")
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Profile of CMK Settings.")
   cmkProfile?: CmkProfile;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Profile of Fabric resources.")
   fabricProfile?: FabricProfile;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is a well-known abbreviation"
   @doc("Profile of User Managed OpenAI Resource.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   userManagedOpenAIProfile?: UserManagedOpenAIProfile;
 
   @doc("Deny Assignments exclusion list.")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   denyAssignmentExclusions?: DenyAssignmentExclusion[];
 
   @doc("State of the resource")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   resourceState?: ResourceState;
 
   @doc("Zone redundancy state for resources")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   redundancyState?: RedundancyState;
 }
 
 @doc("The properties related to Aks Resource")
 model AksProfile {
   @doc("Resource Id of AKS Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
 @doc("The properties related to Storage Resource")
 model StorageProfile {
   @doc("Resource Id of Storage Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
 @doc("The properties related to Database Resource")
 model DatabaseProfile {
   @doc("Resource Id of Cosmos Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cosmosId?: string;
 }
 
 @doc("The properties related to Azure Data Explorer (Adx) Resource")
 model AdxProfile {
   @doc("Resource Id of Adx Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("Uri of Adx Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uri?: string;
 
   @doc("Data Ingestion Uri of Adx Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataIngestionUri?: string;
 }
 
 @doc("The properties related to Azure Redis Cache Resource")
 model RedisProfile {
   @doc("Resource Id of Azure Redis Cache Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
 @doc("The properties related to Monitoring Resource")
 model MonitoringProfile {
   @doc("Resource Id of Application Insights Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
 @doc("The properties related to EventHub Resource")
 model EventHubProfile {
   @doc("Resource Id of Adx Instance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   adxInstanceId?: string;
 
   @doc("Host Name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostName?: string;
 }
 
 @doc("The properties related to Azure Function App Resource")
 model FunctionAppProfile {
   @doc("Resource Id of Azure Function App Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -265,50 +265,50 @@ model FunctionAppProfile {
 @doc("The properties related to OpenAI Resource")
 model OpenAIProfile {
   @doc("Resource Id of OpenAI Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("GPT Model Name")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   gptModelName?: string;
 
   @doc("GPT Model Version")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   gptModelVersion?: string;
 
   @doc("GPT Model Capacity")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   gptModelCapacity?: int32;
 
   @doc("GPT Model SKU Name")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   gptModelSkuName?: string;
 
   @doc("Embedding Model Name")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   embeddingModelName?: string;
 
   @doc("Embedding Model Version")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   embeddingModelVersion?: string;
 
   @doc("Embedding Model SKU Name")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   embeddingModelSkuName?: string;
 
   @doc("Embedding Model Capacity")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   embeddingModelCapacity?: int32;
 }
 
 @doc("The properties related to Deny Assignment Exclusions")
 model DenyAssignmentExclusion {
   @doc("Object Id of Identity")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   id: string;
 
   @doc("Type of Identity")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   type: string;
 }
 
@@ -323,14 +323,14 @@ model ManagedResourceGroupConfiguration {
 
 @doc("Configuration of the managed on behalf of resource.")
 model ManagedOnBehalfOfConfiguration {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Associated MoboBrokerResources.")
   moboBrokerResources: MoboBrokerResource[];
 }
 
 @doc("MoboBroker resource.")
 model MoboBrokerResource {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Resource Id of MoboBrokerResource")
   id: string;
 }
@@ -338,22 +338,22 @@ model MoboBrokerResource {
 @doc("The properties related to CMK")
 model CmkProfile {
   @doc("URI of Key in AKV")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   keyUri: string;
 }
 
 @doc("The properties related to Fabric")
 model FabricProfile {
   @doc("Azure Key Vault Uri")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   keyUri: string;
 
   @doc("URI of One Lake")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   oneLakeUri: string;
 
   @doc("One Lake Path")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   oneLakePath: string;
 }
 
@@ -361,19 +361,19 @@ model FabricProfile {
 @doc("The properties related to User Managed OpenAI Resource")
 model UserManagedOpenAIProfile {
   @doc("Resource Id of OpenAI Resource")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   id: string;
 
   @doc("GPT Model Deployment Name")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   gptModelDeploymentName: string;
 
   @doc("Embedding Model Deployment Name")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   embeddingModelDeploymentName: string;
 
   @doc("Embedding Model Type")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   embeddingModelType?: string;
 }
 
