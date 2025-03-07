@@ -6,13 +6,6 @@ using Azure.Core;
 
 namespace MdsCommon;
 
-@doc("Represents a long running operation response.")
-model CommonAcceptedResponse {
-  @statusCode
-  @doc("The status code.")
-  statusCode: 202;
-}
-
 @doc("Represents a generic response.")
 model GenericOkResponse<T> {
   @statusCode

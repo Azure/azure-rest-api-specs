@@ -512,49 +512,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/entities/status/{jobId}": {
-      "get": {
-        "operationId": "ServiceApis_GetEntityJobStatus",
-        "description": "Get the status of an entity job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The identifier of the job.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ServiceModels.JobStatusResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServiceApis_GetEntityJobStatus": {
-            "$ref": "./examples/ServiceApis_GetEntityJobStatus.json"
-          }
-        }
-      }
-    },
     "/entity": {
       "get": {
         "operationId": "ServiceApis_ListAllEntities",
@@ -602,6 +559,56 @@
             "$ref": "./examples/ServiceApis_ListAllEntities.json"
           }
         }
+      },
+      "post": {
+        "operationId": "ServiceApis_CreateEntity",
+        "description": "Create a new entity.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceModels.Entity"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of Entity"
+              },
+              "Operation-Location": {
+                "type": "string",
+                "description": "The background job location."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/entity/{name}": {
@@ -645,80 +652,6 @@
             "$ref": "./examples/ServiceApis_GetEntity.json"
           }
         }
-      },
-      "put": {
-        "operationId": "ServiceApis_CreateOrReplaceEntity",
-        "description": "Create a new entity.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the entity.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ServiceModels.Entity"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ServiceModels.Entity"
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/ServiceModels.Entity"
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServiceApis_CreateOrReplaceEntity": {
-            "$ref": "./examples/ServiceApis_CreateOrReplaceEntity.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "ServiceApis_UpdateEntity",
@@ -814,6 +747,49 @@
         "x-ms-examples": {
           "ServiceApis_DeleteEntity": {
             "$ref": "./examples/ServiceApis_DeleteEntity.json"
+          }
+        }
+      }
+    },
+    "/entity/status/{jobId}": {
+      "get": {
+        "operationId": "ServiceApis_GetEntityJobStatus",
+        "description": "Get the status of an entity job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The identifier of the job.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ServiceModels.JobStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceApis_GetEntityJobStatus": {
+            "$ref": "./examples/ServiceApis_GetEntityJobStatus.json"
           }
         }
       }

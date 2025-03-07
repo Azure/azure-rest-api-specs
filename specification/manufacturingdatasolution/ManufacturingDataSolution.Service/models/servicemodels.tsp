@@ -122,7 +122,7 @@ model UpdateEntityJobStatusResponse {
 }
 
 @doc("Represents the status response of a job.")
-@resource("entities/status")
+@resource("entity/status")
 model JobStatusResponse {
   @key
   @doc("The identifier of the job.")
@@ -338,7 +338,6 @@ model EntityInfo {
 }
 
 @doc("Represents an entity in the MDS.")
-@parentResource(EntityInfo)
 model Entity is EntityInfo {
   @doc("The identifier for the entity.")
   id?: string;

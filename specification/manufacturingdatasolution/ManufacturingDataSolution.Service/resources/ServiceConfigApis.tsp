@@ -36,9 +36,14 @@ namespace MdsSolution.ServiceApis {
 
   @doc("Create a new entity.")
   @pollingOperation(getEntityJobStatus)
-  op createOrReplaceEntity is Operations.LongRunningResourceCreateOrReplace<
+  op createEntity is Operations.LongRunningResourceCreateWithServiceProvidedName<
     Entity,
-    CommonAcceptedResponse
+    ResponseHeadersTrait<{
+      @doc("The background job location.")
+      @header("Operation-Location")
+      @pollingLocation
+      operationLocation: string;
+    }>
   >;
 
   @doc("Patch an existing entity.")
