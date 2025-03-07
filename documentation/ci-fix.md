@@ -136,29 +136,7 @@ Refer to [troubleshooting REST API documentation](https://eng.ms/docs/products/a
 
 ## `Swagger Avocado`
 
-> [!IMPORTANT]
-> `Swagger Avocado` check is not a blocking for merging your PR, even if it fails.
-> It is left to the discretion of the PR reviewer if the Avocado failure actually
-> needs to be addressed or suppressed.
-
-### Get help fixing Avocado validation failures
-
-Refer to [Avocado README](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
-
-### Run avocado locally
-
-``` powershell
-npm install -g @azure/avocado
-
-avocado
-```
-
-When type avocado in command line, avocado will validate in the current directory.
-
-Note: When running in OpenAPI spec PR pipeline, Avocado only report errors with file updates in the PR, but ignore the errors existing in base. However when running Avocado against local directory, it reports all errors existing in the files.
-
-- Run all specs: Clone the repo `azure/azure-rest-api-specs` and run "avocado" in folder `azure/azure-rest-api-specs`.
-- Run single service specs: create a folder `specification`. and move your service specs folder in `specification`. run "avocado"
+Moved to https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-Avocado
 
 ## `Swagger BreakingChange` and `BreakingChange(Cross-Version)`
 
