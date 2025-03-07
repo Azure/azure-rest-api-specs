@@ -187,6 +187,9 @@
           },
           {
             "$ref": "#/parameters/TransactionIdToParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
           }
         ],
         "responses": {
@@ -228,6 +231,9 @@
             "schema": {
               "$ref": "#/definitions/LedgerEntry"
             }
+          },
+          {
+            "$ref": "#/parameters/TagsIdParameter"
           }
         ],
         "responses": {
@@ -2092,6 +2098,22 @@
       "required": false,
       "x-ms-parameter-location": "method",
       "description": "The collection id.",
+      "type": "string"
+    },
+    "TagIdParameter": {
+      "name": "tag",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "Single tag.",
+      "type": "string"
+    },
+    "TagsIdParameter": {
+      "name": "tags",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "Comma separated tags.",
       "type": "string"
     },
     "TransactionIdParameter": {
