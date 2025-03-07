@@ -30,9 +30,8 @@ These are the global settings for the CognitiveServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-04-01
+tag: package-preview-2025-04-01-preview
 ```
-
 
 ### Tag: package-preview-2025-04-01-preview
 
