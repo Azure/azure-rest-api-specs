@@ -333,3 +333,24 @@ op listJobSchedulesCustomization is Azure.Batch.ListOperationNew<
   listJobSchedulesCustomization,
   "java"
 );
+
+// Create Task Operation
+@doc("Optional parameters for Create Task operation.")
+model CreateBatchTaskOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Create Task operation.")
+@route("/jobs/{jobId}/tasks")
+op createTaskCustomization is Azure.Batch.CreateOperationNew<
+  {
+    ...Azure.Batch.CreateTaskRequiredParameters;
+
+    @doc("Optional parameters for Create Task operation.")
+    options?: CreateBatchTaskOptions;
+  },
+  void
+>;
+
+@@override(Azure.Batch.Tasks.createTask, createTaskCustomization, "java");
