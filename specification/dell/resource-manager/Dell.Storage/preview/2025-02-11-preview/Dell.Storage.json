@@ -449,7 +449,7 @@
       "description": "EncryptionIdentityProperties of Dell FileSystem resource",
       "properties": {
         "identityType": {
-          "type": "string",
+          "$ref": "#/definitions/LiftrBase.EncryptionIdentityType",
           "description": "Identity type - SystemAssigned/UserAssigned - Only UserAssigned is supported now"
         },
         "identityResourceId": {
@@ -461,12 +461,36 @@
         "identityType"
       ]
     },
+    "LiftrBase.EncryptionIdentityType": {
+      "type": "string",
+      "description": "Identity type of ManagedIdentity Associated with Dell FileSystem resource",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System Assigned Managed identity"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User Assigned managed identity"
+          }
+        ]
+      }
+    },
     "LiftrBase.EncryptionIdentityUpdateProperties": {
       "type": "object",
       "description": "EncryptionIdentityUpdateProperties of Dell FileSystem resource",
       "properties": {
         "identityType": {
-          "type": "string",
+          "$ref": "#/definitions/LiftrBase.EncryptionIdentityType",
           "description": "Identity type - SystemAssigned/UserAssigned - Only UserAssigned is supported now"
         },
         "identityResourceId": {
@@ -480,7 +504,7 @@
       "description": "EncryptionProperties of Dell FileSystem resource",
       "properties": {
         "encryptionType": {
-          "type": "string",
+          "$ref": "#/definitions/LiftrBase.ResourceEncryptionType",
           "description": "Encryption Type - MMK/CMK"
         },
         "keyUrl": {
@@ -501,7 +525,7 @@
       "description": "EncryptionUpdateProperties of Dell FileSystem resource",
       "properties": {
         "encryptionType": {
-          "type": "string",
+          "$ref": "#/definitions/LiftrBase.ResourceEncryptionType",
           "description": "Encryption Type - MMK/CMK"
         },
         "keyUrl": {
@@ -656,6 +680,30 @@
         ]
       },
       "readOnly": true
+    },
+    "LiftrBase.ResourceEncryptionType": {
+      "type": "string",
+      "description": "Identity type of ManagedIdentity Associated with Dell FileSystem resource",
+      "enum": [
+        "ENCRYPTION_AT_REST_WITH_MICROSOFT_KEY",
+        "ENCRYPTION_AT_REST_WITH_CUSTOMER_KEY"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceEncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ENCRYPTION_AT_REST_WITH_MICROSOFT_KEY",
+            "value": "ENCRYPTION_AT_REST_WITH_MICROSOFT_KEY",
+            "description": "Microsoft Managed key"
+          },
+          {
+            "name": "ENCRYPTION_AT_REST_WITH_CUSTOMER_KEY",
+            "value": "ENCRYPTION_AT_REST_WITH_CUSTOMER_KEY",
+            "description": "Customer Managed key"
+          }
+        ]
+      }
     },
     "LiftrBase.Storage.FileSystemResource": {
       "type": "object",

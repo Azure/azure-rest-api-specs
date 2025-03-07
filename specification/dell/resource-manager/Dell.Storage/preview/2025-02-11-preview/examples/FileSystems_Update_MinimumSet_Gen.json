@@ -16,6 +16,17 @@
   "responses": {
     "200": {
       "body": {
+        "identity": {
+          "principalId": "11111111-1111-1111-1111-111111111111",
+          "tenantId": "11111111-1111-1111-1111-111111111111",
+          "type": "SystemAssigned,UserAssigned",
+          "userAssignedIdentities": {
+            "key7644": {
+              "principalId": "11111111-1111-1111-1111-111111111111",
+              "clientId": "11111111-1111-1111-1111-111111111111"
+            }
+          }
+        },
         "properties": {
           "initialCapacity": 22,
           "marketplaceDetails": {
@@ -30,7 +41,7 @@
           "userDetails": {},
           "dellReferenceNumber": "fhewkj",
           "encryption": {
-            "encryptionType": "CMK",
+            "encryptionType": "ENCRYPTION_AT_REST_WITH_CUSTOMER_KEY",
             "keyUrl": "https://contoso.com/keyurl/keyVersion",
             "encryptionIdentityProperties": {
               "identityType": "UserAssigned",

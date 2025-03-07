@@ -138,13 +138,47 @@ model MarketplaceDetails {
 }
 
 /**
+ * Identity type of ManagedIdentity Associated with Dell FileSystem resource
+ */
+union ResourceEncryptionType {
+  string,
+
+  /**
+   * Microsoft Managed key
+   */
+  ENCRYPTION_AT_REST_WITH_MICROSOFT_KEY: "ENCRYPTION_AT_REST_WITH_MICROSOFT_KEY",
+
+  /**
+   * Customer Managed key
+   */
+  ENCRYPTION_AT_REST_WITH_CUSTOMER_KEY: "ENCRYPTION_AT_REST_WITH_CUSTOMER_KEY",
+}
+
+/**
+ * Identity type of ManagedIdentity Associated with Dell FileSystem resource
+ */
+union EncryptionIdentityType {
+  string,
+
+  /**
+   * System Assigned Managed identity
+   */
+  SystemAssigned: "SystemAssigned",
+
+  /**
+   * User Assigned managed identity
+   */
+  UserAssigned: "UserAssigned",
+}
+
+/**
  * EncryptionIdentityProperties of Dell FileSystem resource
  */
 model EncryptionIdentityProperties {
   /**
    * Identity type - SystemAssigned/UserAssigned - Only UserAssigned is supported now
    */
-  identityType: string;
+  identityType: EncryptionIdentityType;
 
   /**
    * User-assigned identity resource id - Only when user opts for UserAssigned identity and hence optional
@@ -159,7 +193,7 @@ model EncryptionIdentityUpdateProperties {
   /**
    * Identity type - SystemAssigned/UserAssigned - Only UserAssigned is supported now
    */
-  identityType?: string;
+  identityType?: EncryptionIdentityType;
 
   /**
    * User-assigned identity resource id - Only when user opts for UserAssigned identity and hence optional
@@ -174,7 +208,7 @@ model EncryptionProperties {
   /**
    * Encryption Type - MMK/CMK
    */
-  encryptionType: string;
+  encryptionType: ResourceEncryptionType;
 
   /**
    * Versioned Encryption Key Url - Only when user opts for CMK and hence optional
@@ -194,7 +228,7 @@ model EncryptionUpdateProperties {
   /**
    * Encryption Type - MMK/CMK
    */
-  encryptionType?: string;
+  encryptionType?: ResourceEncryptionType;
 
   /**
    * Versioned Encryption Key Url - Only when user opts for CMK and hence optional
