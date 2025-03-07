@@ -1088,7 +1088,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunityResource"
+              "$ref": "#/definitions/CommunityPatchProperties"
             }
           }
         ],
@@ -4639,6 +4639,25 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "CommunityPatchProperties": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CommunityProperties"
+        },
+        "tags": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmTagsProperty",
+          "description": "Tags associated with the resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "required": [
+        "properties"
       ]
     },
     "CommunityProperties": {

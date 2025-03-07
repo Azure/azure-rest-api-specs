@@ -287,7 +287,7 @@ interface Community {
       ArmAsyncOperationHeader
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<CommunityResource, CommunityResource>;
+  update is ArmCustomPatchAsync<CommunityResource, PatchModel = CommunityPatchProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<CommunityResource>;

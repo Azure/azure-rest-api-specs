@@ -244,3 +244,9 @@ model CommunityProperties {
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfiguration;
 }
+
+model CommunityPatchProperties {
+  properties: CommunityProperties;
+  ...TagsProperty;
+  ...ManagedServiceIdentityProperty;
+}

@@ -121,3 +121,8 @@ model ApprovalProperties {
   @doc("Approval request state change time, time at which approval request state changed from pending to approved or rejected.")
   stateChangedAt?: utcDateTime;
 }
+
+@doc("Approvals properties for patching")
+model ApprovalPatchProperties is ApprovalProperties {
+  ...TagsProperty;
+}
