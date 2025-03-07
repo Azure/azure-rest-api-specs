@@ -6,7 +6,7 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Search;
 
-@TypeSpec.Versioning.useDependency(Search.Versions.v2024_07_01)
+@TypeSpec.Versioning.useDependency(Search.Versions.v2025_03_01_preview)
 namespace Customizations;
 
 @@access(VectorSearchAlgorithmKind, Access.public);
@@ -209,3 +209,4 @@ namespace Customizations;
 @@clientName(AzureOpenAIEmbeddingSkill.`@odata.type`, "odataType");
 @@clientName(VisionVectorizeSkill.`@odata.type`, "odataType");
 @@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odataType");
+@@clientName(ListIndexStatsSummary.value, "IndexesStatistics");

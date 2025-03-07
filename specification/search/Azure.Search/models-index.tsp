@@ -950,6 +950,13 @@ model FacetResult is Record<unknown> {
   @visibility("read")
   @encodedName("application/json", "@search.facets")
   facets?: Record<FacetResult[]>;
+
+  /**
+   * The resulting total sum for the facet when a sum metric is requested.
+   */
+  @added(Versions.v2025_03_01_preview)
+  @visibility("read")
+  sum?: int64;
 }
 
 /**

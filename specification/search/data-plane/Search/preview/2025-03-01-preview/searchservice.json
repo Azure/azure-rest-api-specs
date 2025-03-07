@@ -1353,6 +1353,39 @@
         }
       }
     },
+    "/indexstats": {
+      "get": {
+        "operationId": "GetIndexStatsSummary",
+        "description": "Retrieves a summary of statistics for all indexes in the search service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListIndexStatsSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceGetIndexStatsSummary": {
+            "$ref": "./examples/SearchServiceGetIndexStatsSummary.json"
+          }
+        }
+      }
+    },
     "/servicestats": {
       "get": {
         "operationId": "GetServiceStatistics",
@@ -1963,6 +1996,54 @@
     }
   },
   "definitions": {
+    "AIFoundryModelCatalogName": {
+      "type": "string",
+      "description": "The name of the embedding model from the Azure AI Foundry Catalog that will be\ncalled.",
+      "enum": [
+        "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32",
+        "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336",
+        "Facebook-DinoV2-Image-Embeddings-ViT-Base",
+        "Facebook-DinoV2-Image-Embeddings-ViT-Giant",
+        "Cohere-embed-v3-english",
+        "Cohere-embed-v3-multilingual"
+      ],
+      "x-ms-enum": {
+        "name": "AIFoundryModelCatalogName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OpenAICLIPImageTextEmbeddingsVitBasePatch32",
+            "value": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32",
+            "description": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32"
+          },
+          {
+            "name": "OpenAICLIPImageTextEmbeddingsViTLargePatch14336",
+            "value": "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336",
+            "description": "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336"
+          },
+          {
+            "name": "FacebookDinoV2ImageEmbeddingsViTBase",
+            "value": "Facebook-DinoV2-Image-Embeddings-ViT-Base",
+            "description": "Facebook-DinoV2-Image-Embeddings-ViT-Base"
+          },
+          {
+            "name": "FacebookDinoV2ImageEmbeddingsViTGiant",
+            "value": "Facebook-DinoV2-Image-Embeddings-ViT-Giant",
+            "description": "Facebook-DinoV2-Image-Embeddings-ViT-Giant"
+          },
+          {
+            "name": "CohereEmbedV3English",
+            "value": "Cohere-embed-v3-english",
+            "description": "Cohere-embed-v3-english"
+          },
+          {
+            "name": "CohereEmbedV3Multilingual",
+            "value": "Cohere-embed-v3-multilingual",
+            "description": "Cohere-embed-v3-multilingual"
+          }
+        ]
+      }
+    },
     "AIServicesAccountIdentity": {
       "type": "object",
       "description": "The multi-region account of an Azure AI service resource that's attached to a\nskillset.",
@@ -1977,7 +2058,6 @@
         }
       },
       "required": [
-        "identity",
         "subdomainUrl"
       ],
       "allOf": [
@@ -2054,54 +2134,6 @@
       ],
       "x-ms-discriminator-value": "aiServicesVision"
     },
-    "AIStudioModelCatalogName": {
-      "type": "string",
-      "description": "The name of the embedding model from the Azure AI Studio Catalog that will be\ncalled.",
-      "enum": [
-        "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32",
-        "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336",
-        "Facebook-DinoV2-Image-Embeddings-ViT-Base",
-        "Facebook-DinoV2-Image-Embeddings-ViT-Giant",
-        "Cohere-embed-v3-english",
-        "Cohere-embed-v3-multilingual"
-      ],
-      "x-ms-enum": {
-        "name": "AIStudioModelCatalogName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "OpenAICLIPImageTextEmbeddingsVitBasePatch32",
-            "value": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32",
-            "description": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32"
-          },
-          {
-            "name": "OpenAICLIPImageTextEmbeddingsViTLargePatch14336",
-            "value": "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336",
-            "description": "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336"
-          },
-          {
-            "name": "FacebookDinoV2ImageEmbeddingsViTBase",
-            "value": "Facebook-DinoV2-Image-Embeddings-ViT-Base",
-            "description": "Facebook-DinoV2-Image-Embeddings-ViT-Base"
-          },
-          {
-            "name": "FacebookDinoV2ImageEmbeddingsViTGiant",
-            "value": "Facebook-DinoV2-Image-Embeddings-ViT-Giant",
-            "description": "Facebook-DinoV2-Image-Embeddings-ViT-Giant"
-          },
-          {
-            "name": "CohereEmbedV3English",
-            "value": "Cohere-embed-v3-english",
-            "description": "Cohere-embed-v3-english"
-          },
-          {
-            "name": "CohereEmbedV3Multilingual",
-            "value": "Cohere-embed-v3-multilingual",
-            "description": "Cohere-embed-v3-multilingual"
-          }
-        ]
-      }
-    },
     "AMLParameters": {
       "type": "object",
       "description": "Specifies the properties for connecting to an AML vectorizer.",
@@ -2129,8 +2161,8 @@
           "description": "(Optional for token authentication). The region the AML service is deployed in."
         },
         "modelName": {
-          "$ref": "#/definitions/AIStudioModelCatalogName",
-          "description": "The name of the embedding model from the Azure AI Studio Catalog that is\ndeployed at the provided endpoint."
+          "$ref": "#/definitions/AIFoundryModelCatalogName",
+          "description": "The name of the embedding model from the Azure AI Foundry Catalog that is\ndeployed at the provided endpoint."
         }
       },
       "required": [
@@ -2139,7 +2171,7 @@
     },
     "AMLVectorizer": {
       "type": "object",
-      "description": "Specifies an Azure Machine Learning endpoint deployed via the Azure AI Studio\nModel Catalog for generating the vector embedding of a query string.",
+      "description": "Specifies an Azure Machine Learning endpoint deployed via the Azure AI Foundry\nModel Catalog for generating the vector embedding of a query string.",
       "properties": {
         "amlParameters": {
           "$ref": "#/definitions/AMLParameters",
@@ -4468,6 +4500,40 @@
         ]
       }
     },
+    "IndexStatisticsSummary": {
+      "type": "object",
+      "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the index.",
+          "readOnly": true
+        },
+        "documentCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of documents in the index.",
+          "readOnly": true
+        },
+        "storageSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of storage in bytes consumed by the index.",
+          "readOnly": true
+        },
+        "vectorIndexSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of memory in bytes consumed by vectors in the index.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "documentCount",
+        "storageSize"
+      ]
+    },
     "IndexerCurrentState": {
       "type": "object",
       "description": "Represents all of the state that defines and dictates the indexer's current\nexecution.",
@@ -6147,6 +6213,24 @@
           "items": {
             "$ref": "#/definitions/SearchIndexerDataSource"
           },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListIndexStatsSummary": {
+      "type": "object",
+      "description": "Response from a request to retrieve stats summary of all indexes. If successful, it includes the stats of each index in the service.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Statistics summary of all indexes in the Search service.",
+          "items": {
+            "$ref": "#/definitions/IndexStatisticsSummary"
+          },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -9209,6 +9293,10 @@
         "identity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "description": "The user-assigned managed identity used for connections to the enrichment\ncache.  If the connection string indicates an identity (ResourceId) and it's\nnot specified, the system-assigned managed identity is used. On updates to the\nindexer, if the identity is unspecified, the value remains unchanged. If set to\n\"none\", the value of this property is cleared."
+        },
+        "id": {
+          "type": "string",
+          "description": "A guid for the SearchIndexerCache."
         }
       }
     },
@@ -9832,7 +9920,6 @@
       },
       "required": [
         "keyVaultKeyName",
-        "keyVaultKeyVersion",
         "keyVaultUri"
       ]
     },
@@ -9981,6 +10068,10 @@
         "prioritizedFields": {
           "$ref": "#/definitions/SemanticPrioritizedFields",
           "description": "Describes the title, content, and keyword fields to be used for semantic\nranking, captions, highlights, and answers. At least one of the three sub\nproperties (titleField, prioritizedKeywordsFields and prioritizedContentFields)\nneed to be set."
+        },
+        "flightingOptIn": {
+          "type": "boolean",
+          "description": "Determines how which semantic or query rewrite models to use during model flighting/upgrades."
         }
       },
       "required": [
@@ -12141,7 +12232,7 @@
           {
             "name": "CjkWidth",
             "value": "cjk_width",
-            "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the\nequivalent basic Latin, and half-width Katakana variants into the equivalent\nKana. See\nhttp://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html"
+            "description": "Normalizes CJK width differences. Folds full-width ASCII variants into the\nequivalent basic Latin, and half-width Katakana variants into the equivalent\nKana. See\nhttp://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html"
           },
           {
             "name": "Classic",
@@ -12660,7 +12751,7 @@
           {
             "name": "AML",
             "value": "aml",
-            "description": "Generate embeddings using an Azure Machine Learning endpoint deployed via the\nAzure AI Studio Model Catalog at query time."
+            "description": "Generate embeddings using an Azure Machine Learning endpoint deployed via the\nAzure AI Foundry Model Catalog at query time."
           }
         ]
       }

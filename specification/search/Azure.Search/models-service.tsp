@@ -977,7 +977,7 @@ union VectorSearchVectorizerKind {
 
   /**
    * Generate embeddings using an Azure Machine Learning endpoint deployed via the
-   * Azure AI Studio Model Catalog at query time.
+   * Azure AI Foundry Model Catalog at query time.
    */
   @added(Versions.v2025_03_01_preview)
   AML: "aml",
@@ -1150,7 +1150,7 @@ union TokenFilterName {
   CjkBigram: "cjk_bigram",
 
   /**
-   * Normalizes CJK width differences. Folds fullwidth ASCII variants into the
+   * Normalizes CJK width differences. Folds full-width ASCII variants into the
    * equivalent basic Latin, and half-width Katakana variants into the equivalent
    * Kana. See
    * http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html
@@ -1467,11 +1467,11 @@ union AzureOpenAIModelName {
 }
 
 /**
- * The name of the embedding model from the Azure AI Studio Catalog that will be
+ * The name of the embedding model from the Azure AI Foundry Catalog that will be
  * called.
  */
 @added(Versions.v2025_03_01_preview)
-union AIStudioModelCatalogName {
+union AIFoundryModelCatalogName {
   string,
 
   /**
@@ -5187,7 +5187,8 @@ model SearchResourceEncryptionKey {
   /**
    * The version of your Azure Key Vault key to be used to encrypt your data at rest.
    */
-  keyVaultKeyVersion: string;
+  @madeOptional(Versions.v2025_03_01_preview)
+  keyVaultKeyVersion?: string;
 
   /**
    * The URI of your Azure Key Vault, also referred to as DNS name, that contains
@@ -5581,6 +5582,11 @@ model SearchIndexerCache {
    * "none", the value of this property is cleared.
    */
   identity?: SearchIndexerDataIdentity;
+
+  /**
+   * A guid for the SearchIndexerCache.
+   */
+  id?: string;
 }
 
 /**
@@ -6778,6 +6784,12 @@ model SemanticConfiguration {
    * need to be set.
    */
   prioritizedFields: SemanticPrioritizedFields;
+
+  /** 
+   * Determines how which semantic or query rewrite models to use during model flighting/upgrades.
+   */
+  @added(Versions.v2025_03_01_preview)
+  flightingOptIn?: boolean;
 }
 
 /**
@@ -8781,7 +8793,7 @@ model AIServicesVisionParameters {
 }
 
 /**
- * Specifies an Azure Machine Learning endpoint deployed via the Azure AI Studio
+ * Specifies an Azure Machine Learning endpoint deployed via the Azure AI Foundry
  * Model Catalog for generating the vector embedding of a query string.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
@@ -8836,10 +8848,10 @@ model AMLParameters {
   region?: string;
 
   /**
-   * The name of the embedding model from the Azure AI Studio Catalog that is
+   * The name of the embedding model from the Azure AI Foundry Catalog that is
    * deployed at the provided endpoint.
    */
-  modelName?: AIStudioModelCatalogName;
+  modelName?: AIFoundryModelCatalogName;
 }
 
 /**
@@ -9146,7 +9158,7 @@ model AIServicesAccountIdentity extends CognitiveServicesAccount {
    * skillset, if the identity is unspecified, the value remains unchanged. If set
    * to "none", the value of this property is cleared.
    */
-  identity: SearchIndexerDataIdentity;
+  identity?: SearchIndexerDataIdentity;
 
   /**
    * The subdomain url for the corresponding AI Service.
@@ -10000,4 +10012,51 @@ model VisionVectorizeSkill extends SearchIndexerSkill {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Vision.VectorizeSkill";
+}
+
+
+/**
+ * Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.
+ */
+@added(Versions.v2025_03_01_preview)
+model IndexStatisticsSummary {
+  /**
+   * The name of the index.
+   */
+  @key
+  @visibility("read")
+  name: string;
+
+  /**
+   * The number of documents in the index.
+   */
+  @visibility("read")
+  documentCount: int64;
+
+  /**
+   * The amount of storage in bytes consumed by the index.
+   */
+  @visibility("read")
+  storageSize: int64;
+
+  /**
+   * The amount of memory in bytes consumed by vectors in the index.
+   */
+  @visibility("read")
+  vectorIndexSize?: int64;
+}
+
+
+/**
+ * Response from a request to retrieve stats summary of all indexes. If successful, it includes the stats of each index in the service.
+ */
+@added(Versions.v2025_03_01_preview)
+@pagedResult
+model ListIndexStatsSummary {
+  /**
+   * The Statistics summary of all indexes in the Search service.
+   */
+  @visibility("read")
+  @items
+  value: IndexStatisticsSummary[];
 }
