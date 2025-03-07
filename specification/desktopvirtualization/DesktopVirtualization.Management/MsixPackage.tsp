@@ -42,6 +42,8 @@ interface MSIXPackages {
   /**
    * Create or update a MSIX package.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
+  @OpenAPI.operationId("MSIXPackages_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     MSIXPackage,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
@@ -50,6 +52,8 @@ interface MSIXPackages {
   /**
    * Update an  MSIX Package.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
+  @OpenAPI.operationId("MSIXPackages_Update")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.ArmCustomPatchSync<
     MSIXPackage,
@@ -60,6 +64,8 @@ interface MSIXPackages {
   /**
    * Remove an MSIX Package.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
+  @OpenAPI.operationId("MSIXPackages_Delete")
   delete is ArmResourceDeleteSync<
     MSIXPackage,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
