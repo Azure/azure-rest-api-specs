@@ -1088,6 +1088,32 @@ alias CreateTaskRequiredParameters = {
   task: BatchTaskCreateContent;
 };
 
+alias ListTasksRequiredParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+};
+
+alias ListTasksParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
 // Task Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1117,30 +1143,11 @@ interface Tasks {
     information about subtasks.
     """)
   @route("/jobs/{jobId}/tasks")
-  @clientName("listTasksInternal", "java")
-  listTasks is ListOperation<
+  listTasks is ListOperationNew<
     {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListTasksRequiredParameters;
+      ...ListTasksParameters;
     },
     BatchTaskListResult
   >;
