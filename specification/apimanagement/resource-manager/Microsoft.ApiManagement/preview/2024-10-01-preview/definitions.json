@@ -2353,6 +2353,23 @@
         "acceptRetryAfter": {
           "type": "boolean",
           "description": "flag to accept Retry-After header from the backend."
+        },
+        "failureResponse": {
+          "$ref": "#/definitions/BackendFailureResponse",
+          "description": "The response of the backend when the circuit breaker gets open."
+        }
+      }
+    },
+    "BackendFailureResponse": {
+      "type": "object",
+      "description": "The response to be returned when a backend fails to respond",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The status code of the response.",
+          "minimum": 100,
+          "maximum": 599
         }
       }
     },
@@ -2431,6 +2448,10 @@
           "example": {
             "services": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends"
           }
+        },
+        "failureResponse": {
+          "$ref": "#/definitions/BackendFailureResponse",
+          "description": "The response of the backend when the circuit breaker gets open."
         }
       }
     },
