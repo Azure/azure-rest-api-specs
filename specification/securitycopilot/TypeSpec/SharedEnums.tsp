@@ -42,3 +42,19 @@ enum TokenCredentialEnum {
   @doc("ServiceTokenCredential type")
   ServiceTokenCredential,
 }
+
+@doc("Type of prompt")
+enum PromptType
+{
+    @doc("Unknown")
+    Unknown,
+
+    @doc("context")
+    Context,
+
+    @doc("Skill type prompt")
+    Prompt,
+
+    @doc("Skill type Skill")
+    Skill
+}

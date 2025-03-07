@@ -346,6 +346,9 @@ namespace SkillContext
 
 		@doc("Prompt response returned by the prompt evaluation")
 		response: string | null;
+
+		@doc("Type of prompt")
+		promptType: PromptType;
 	}
 
 	@doc("The progress message to log during a skill invocation")
