@@ -84,13 +84,13 @@
         "tags": [
           "TuningOptions"
         ],
-        "operationId": "TuningOptions_ListRecommendations",
+        "operationId": "TuningIndex_ListRecommendations",
         "x-ms-examples": {
-          "TuningOptions_ListRecommendations": {
-            "$ref": "./examples/Tuning_GetRecommendedIndexes.json"
+          "TuningIndex_ListRecommendations": {
+            "$ref": "./examples/TuningIndex_GetRecommendations.json"
           },
-          "TuningOptions_ListFilteredRecommendations": {
-            "$ref": "./examples/Tuning_GetFilteredRecommendedIndexes.json"
+          "TuningIndex_ListFilteredRecommendations": {
+            "$ref": "./examples/TuningIndex_GetFilteredRecommendations.json"
           }
         },
         "description": "Retrieve the list of available tuning index recommendations.",
@@ -178,7 +178,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/configuration/enable": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/enable": {
       "post": {
         "tags": [
           "TuningOptions"
@@ -226,7 +226,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/configuration/disable": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/disable": {
       "post": {
         "tags": [
           "TuningOptions"
@@ -274,7 +274,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/configuration/startSession": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/startSession": {
       "post": {
         "tags": [
           "TuningOptions"
@@ -331,7 +331,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/configuration/stopSession": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/stopSession": {
       "post": {
         "tags": [
           "TuningOptions"
@@ -379,7 +379,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/configuration/sessions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/sessions": {
       "get": {
         "tags": [
           "TuningOptions"
@@ -424,7 +424,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/configuration/sessionDetails": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/sessionDetails": {
       "get": {
         "tags": [
           "TuningOptions"
@@ -869,7 +869,8 @@
       "required": true,
       "type": "string",
       "enum": [
-        "index"
+        "index",
+        "configuration"
       ],
       "description": "The name of the tuning option.",
       "x-ms-enum": {

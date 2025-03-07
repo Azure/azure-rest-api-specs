@@ -67,7 +67,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ActiveDirectoryAdministratorAdd"
+              "$ref": "#/definitions/ActiveDirectoryAdministrator"
             },
             "description": "The required parameters for adding an Microsoft Entra Administrator for a server."
           }
@@ -251,59 +251,6 @@
     }
   },
   "definitions": {
-    "ActiveDirectoryAdministratorAdd": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AdministratorPropertiesForAdd",
-          "x-ms-client-flatten": true,
-          "description": "Properties of the Microsoft Entra Administrator."
-        }
-      },
-      "description": "Represents an Microsoft Entra Administrator."
-    },
-    "AdministratorPropertiesForAdd": {
-      "type": "object",
-      "properties": {
-        "principalType": {
-          "type": "string",
-          "description": "The principal type used to represent the type of Microsoft Entra Administrator.",
-          "enum": [
-            "Unknown",
-            "User",
-            "Group",
-            "ServicePrincipal"
-          ],
-          "x-ms-enum": {
-            "name": "PrincipalType",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create",
-            "update",
-            "read"
-          ]
-        },
-        "principalName": {
-          "type": "string",
-          "description": "Microsoft Entra Administrator principal name.",
-          "x-ms-mutability": [
-            "create",
-            "update",
-            "read"
-          ]
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenantId of the Microsoft Entra Administrator.",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
-        }
-      },
-      "description": "The properties of an Microsoft Entra Administrator."
-    },
     "AdministratorProperties": {
       "type": "object",
       "properties": {
