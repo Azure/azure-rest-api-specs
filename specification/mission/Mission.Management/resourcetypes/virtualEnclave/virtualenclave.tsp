@@ -9,7 +9,6 @@ import "../shared/resourceid.tsp";
 import "../shared/managedresourcegroupconfiguration.tsp";
 import "../shared/principal.tsp";
 import "../shared/roleassignmentitem.tsp";
-import "../shared/tags.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -192,7 +191,7 @@ model VirtualEnclavePatchProperties is VirtualEnclaveProperties;
 @doc("Virtual Enclave Patch Resource")
 model VirtualEnclavePatchResource {
   @doc("Virtual Enclave Patch properties")
-  properties?: VirtualEnclavePatchProperties;
+  properties?: Update<VirtualEnclavePatchProperties>;
 
   ...ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;

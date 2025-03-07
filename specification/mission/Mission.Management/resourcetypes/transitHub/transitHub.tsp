@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "../shared/provisioningstate.tsp";
-import "../shared/tags.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -89,7 +88,7 @@ model TransitHubPatchProperties is TransitHubProperties;
 @doc("TH Patch Resource")
 model TransitHubPatchResource {
   @doc("The TransitHub resource.")
-  properties?: TransitHubPatchProperties;
+  properties?: Update<TransitHubPatchProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

@@ -97,7 +97,7 @@ model EnclaveEndpointPatchProperties is EnclaveEndpointProperties;
 @doc("Enclave Endpoint Patch Resource")
 model EnclaveEndpointPatchResource {
   @doc("Enclave Endpoint Patch properties")
-  properties?: EnclaveEndpointPatchProperties;
+  properties?: Update<EnclaveEndpointPatchProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

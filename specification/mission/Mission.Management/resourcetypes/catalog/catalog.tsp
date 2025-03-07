@@ -81,7 +81,7 @@ model CatalogPatchProperties is CatalogProperties;
 @doc("Catalog Patch Resource")
 model CatalogPatchResource {
   @doc("Catalog Patch properties")
-  properties?: CatalogPatchProperties;
+  properties?: Update<CatalogPatchProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

@@ -90,7 +90,7 @@ model InternalConnectionPatchProperties is InternalConnectionProperties;
 @doc("Internal Connection Patch Resource")
 model InternalConnectionPatchResource {
   @doc("Internal Connection properties")
-  properties?: InternalConnectionProperties;
+  properties?: Update<InternalConnectionProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

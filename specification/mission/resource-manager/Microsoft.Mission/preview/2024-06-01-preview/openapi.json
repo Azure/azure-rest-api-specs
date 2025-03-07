@@ -231,6 +231,75 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "Approval_Update",
+        "tags": [
+          "Approval"
+        ],
+        "description": "Update a ApprovalResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalName",
+            "in": "path",
+            "description": "The name of the approvals resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approval_Update": {
+            "$ref": "./examples/Approvals_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "Approval_Delete",
         "tags": [
@@ -281,80 +350,6 @@
         "x-ms-examples": {
           "Approval_Delete": {
             "$ref": "./examples/Approvals_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.Mission/approvals/{approvalName}/approvals/{name}": {
-      "patch": {
-        "operationId": "Approval_Update",
-        "tags": [
-          "Approval"
-        ],
-        "description": "Update a ApprovalResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "approvalName",
-            "in": "path",
-            "description": "The name of the approvals resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/ApprovalResource.name"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateApprovalResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ApprovalResource"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Approval_Update": {
-            "$ref": "./examples/Approvals_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1063,6 +1058,78 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "Community_Update",
+        "tags": [
+          "Community"
+        ],
+        "description": "Update a CommunityResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communityName",
+            "in": "path",
+            "description": "The name of the communityResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommunityPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommunityResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Community_Update": {
+            "$ref": "./examples/Community_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "Community_Delete",
         "tags": [
@@ -1178,83 +1245,6 @@
             "$ref": "./examples/Community_PostCheckAddressSpaceAvailability.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/communities/{communityName}/communities/{name}": {
-      "patch": {
-        "operationId": "Community_Update",
-        "tags": [
-          "Community"
-        ],
-        "description": "Update a CommunityResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "communityName",
-            "in": "path",
-            "description": "The name of the communityResource Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/CommunityResource.name"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateCommunityResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CommunityResource"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Community_Update": {
-            "$ref": "./examples/Community_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/communities/{communityName}/communityEndpoints": {
@@ -1444,6 +1434,86 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "CommunityEndpoints_Update",
+        "tags": [
+          "CommunityEndpoints"
+        ],
+        "description": "Update a CommunityEndpointResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communityName",
+            "in": "path",
+            "description": "The name of the communityResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "communityEndpointName",
+            "in": "path",
+            "description": "The name of the Community Endpoint Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommunityEndpointPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommunityEndpointResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CommunityEndpoints_Update": {
+            "$ref": "./examples/CommunityEndpoints_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "CommunityEndpoints_Delete",
         "tags": [
@@ -1505,91 +1575,6 @@
         "x-ms-examples": {
           "CommunityEndpoints_Delete": {
             "$ref": "./examples/CommunityEndpoints_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/communities/{communityName}/communityEndpoints/{communityEndpointName}/communityEndpoints/{name}": {
-      "patch": {
-        "operationId": "CommunityEndpoints_Update",
-        "tags": [
-          "CommunityEndpoints"
-        ],
-        "description": "Update a CommunityEndpointResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "communityName",
-            "in": "path",
-            "description": "The name of the communityResource Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "communityEndpointName",
-            "in": "path",
-            "description": "The name of the Community Endpoint Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/CommunityEndpointResource.name"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateCommunityEndpointResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CommunityEndpointResource"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CommunityEndpoints_Update": {
-            "$ref": "./examples/CommunityEndpoints_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1785,6 +1770,86 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "TransitHub_Update",
+        "tags": [
+          "TransitHub"
+        ],
+        "description": "Update a TransitHubResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communityName",
+            "in": "path",
+            "description": "The name of the communityResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "transitHubName",
+            "in": "path",
+            "description": "The name of the TransitHub Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransitHubPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TransitHubResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TransitHub_Update": {
+            "$ref": "./examples/TransitHub_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "TransitHub_Delete",
         "tags": [
@@ -1846,91 +1911,6 @@
         "x-ms-examples": {
           "TransitHub_Delete": {
             "$ref": "./examples/TransitHub_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/communities/{communityName}/transitHubs/{transitHubName}/transitHubs/{name}": {
-      "patch": {
-        "operationId": "TransitHub_Update",
-        "tags": [
-          "TransitHub"
-        ],
-        "description": "Update a TransitHubResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "communityName",
-            "in": "path",
-            "description": "The name of the communityResource Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "transitHubName",
-            "in": "path",
-            "description": "The name of the TransitHub Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/TransitHubResource.name"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateTransitHubResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TransitHubResource"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TransitHub_Update": {
-            "$ref": "./examples/TransitHub_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2099,6 +2079,78 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "EnclaveConnection_Update",
+        "tags": [
+          "EnclaveConnection"
+        ],
+        "description": "Update a EnclaveConnectionResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enclaveConnectionName",
+            "in": "path",
+            "description": "The name of the Enclave Connection Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnclaveConnectionPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnclaveConnectionResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnclaveConnection_Update": {
+            "$ref": "./examples/EnclaveConnection_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -2311,83 +2363,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/enclaveConnections/{enclaveConnectionName}/enclaveConnections/{name}": {
-      "patch": {
-        "operationId": "EnclaveConnection_Update",
-        "tags": [
-          "EnclaveConnection"
-        ],
-        "description": "Update a EnclaveConnectionResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "enclaveConnectionName",
-            "in": "path",
-            "description": "The name of the Enclave Connection Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/EnclaveConnectionResource.name"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateEnclaveConnectionResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EnclaveConnectionResource"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EnclaveConnection_Update": {
-            "$ref": "./examples/EnclaveConnection_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/externalConnections": {
       "get": {
         "operationId": "ExternalConnections_ListByResourceGroup",
@@ -2551,6 +2526,78 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "ExternalConnections_Update",
+        "tags": [
+          "ExternalConnections"
+        ],
+        "description": "Update a ExternalConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "externalConnectionName",
+            "in": "path",
+            "description": "The name of the external connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExternalConnectionPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExternalConnection"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExternalConnections_Update": {
+            "$ref": "./examples/ExternalConnections_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "ExternalConnections_Delete",
         "tags": [
@@ -2604,83 +2651,6 @@
         "x-ms-examples": {
           "ExternalConnections_Delete": {
             "$ref": "./examples/ExternalConnections_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/externalConnections/{externalConnectionName}/externalConnections/{name}": {
-      "patch": {
-        "operationId": "ExternalConnections_Update",
-        "tags": [
-          "ExternalConnections"
-        ],
-        "description": "Update a ExternalConnection",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "externalConnectionName",
-            "in": "path",
-            "description": "The name of the external connection.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/ExternalConnection.name"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateExternalConnection"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ExternalConnection"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExternalConnections_Update": {
-            "$ref": "./examples/ExternalConnections_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2852,6 +2822,78 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "InternalConnections_Update",
+        "tags": [
+          "InternalConnections"
+        ],
+        "description": "Update a InternalConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "internalConnectionName",
+            "in": "path",
+            "description": "The name of the internal connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InternalConnectionPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InternalConnection"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InternalConnections_Update": {
+            "$ref": "./examples/InternalConnections_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "InternalConnections_Delete",
         "tags": [
@@ -2905,83 +2947,6 @@
         "x-ms-examples": {
           "InternalConnections_Delete": {
             "$ref": "./examples/InternalConnections_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/internalConnections/{internalConnectionName}/internalConnections/{name}": {
-      "patch": {
-        "operationId": "InternalConnections_Update",
-        "tags": [
-          "InternalConnections"
-        ],
-        "description": "Update a InternalConnection",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "internalConnectionName",
-            "in": "path",
-            "description": "The name of the internal connection.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/InternalConnection.name"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateInternalConnection"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/InternalConnection"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "InternalConnections_Update": {
-            "$ref": "./examples/InternalConnections_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3150,6 +3115,78 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualEnclave_Update",
+        "tags": [
+          "VirtualEnclave"
+        ],
+        "description": "Update a EnclaveResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualEnclaveName",
+            "in": "path",
+            "description": "The name of the enclaveResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualEnclavePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnclaveResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualEnclave_Update": {
+            "$ref": "./examples/VirtualEnclave_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -3401,6 +3438,86 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "EnclaveEndpoints_Update",
+        "tags": [
+          "EnclaveEndpoints"
+        ],
+        "description": "Update a EnclaveEndpointResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualEnclaveName",
+            "in": "path",
+            "description": "The name of the enclaveResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "enclaveEndpointName",
+            "in": "path",
+            "description": "The name of the Enclave Endpoint Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnclaveEndpointPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnclaveEndpointResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnclaveEndpoints_Update": {
+            "$ref": "./examples/EnclaveEndpoints_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "EnclaveEndpoints_Delete",
         "tags": [
@@ -3462,91 +3579,6 @@
         "x-ms-examples": {
           "EnclaveEndpoints_Delete": {
             "$ref": "./examples/EnclaveEndpoints_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/virtualEnclaves/{virtualEnclaveName}/enclaveEndpoints/{enclaveEndpointName}/enclaveEndpoints/{name}": {
-      "patch": {
-        "operationId": "EnclaveEndpoints_Update",
-        "tags": [
-          "EnclaveEndpoints"
-        ],
-        "description": "Update a EnclaveEndpointResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualEnclaveName",
-            "in": "path",
-            "description": "The name of the enclaveResource Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "enclaveEndpointName",
-            "in": "path",
-            "description": "The name of the Enclave Endpoint Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/EnclaveEndpointResource.name"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateEnclaveEndpointResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EnclaveEndpointResource"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EnclaveEndpoints_Update": {
-            "$ref": "./examples/EnclaveEndpoints_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3742,6 +3774,86 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "Endpoint_Update",
+        "tags": [
+          "Endpoint"
+        ],
+        "description": "Update a EndpointResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualEnclaveName",
+            "in": "path",
+            "description": "The name of the enclaveResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the endpointResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EndpointPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoint_Update": {
+            "$ref": "./examples/Endpoint_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "Endpoint_Delete",
         "tags": [
@@ -3803,168 +3915,6 @@
         "x-ms-examples": {
           "Endpoint_Delete": {
             "$ref": "./examples/Endpoint_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/virtualEnclaves/{virtualEnclaveName}/endpoints/{endpointName}/endpoints/{name}": {
-      "patch": {
-        "operationId": "Endpoint_Update",
-        "tags": [
-          "Endpoint"
-        ],
-        "description": "Update a EndpointResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualEnclaveName",
-            "in": "path",
-            "description": "The name of the enclaveResource Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "The name of the endpointResource Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/EndpointResource.name"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateEndpointResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EndpointResource"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Endpoint_Update": {
-            "$ref": "./examples/Endpoint_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/virtualEnclaves/{virtualEnclaveName}/virtualEnclaves/{name}": {
-      "patch": {
-        "operationId": "VirtualEnclave_Update",
-        "tags": [
-          "VirtualEnclave"
-        ],
-        "description": "Update a EnclaveResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualEnclaveName",
-            "in": "path",
-            "description": "The name of the enclaveResource Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/EnclaveResource.name"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateEnclaveResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EnclaveResource"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualEnclave_Update": {
-            "$ref": "./examples/VirtualEnclave_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4160,6 +4110,86 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "Workload_Update",
+        "tags": [
+          "Workload"
+        ],
+        "description": "Update a WorkloadResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualEnclaveName",
+            "in": "path",
+            "description": "The name of the enclaveResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "workloadName",
+            "in": "path",
+            "description": "The name of the workloadResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workload_Update": {
+            "$ref": "./examples/Workload_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "Workload_Delete",
         "tags": [
@@ -4221,91 +4251,6 @@
         "x-ms-examples": {
           "Workload_Delete": {
             "$ref": "./examples/Workload_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/virtualEnclaves/{virtualEnclaveName}/workloads/{workloadName}/workloads/{name}": {
-      "patch": {
-        "operationId": "Workload_Update",
-        "tags": [
-          "Workload"
-        ],
-        "description": "Update a WorkloadResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualEnclaveName",
-            "in": "path",
-            "description": "The name of the enclaveResource Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "workloadName",
-            "in": "path",
-            "description": "The name of the workloadResource Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "#/parameters/WorkloadResource.name"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateWorkloadResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/WorkloadResource"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Workload_Update": {
-            "$ref": "./examples/Workload_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4401,6 +4346,16 @@
       "required": [
         "message"
       ]
+    },
+    "ApprovalPatchResource": {
+      "type": "object",
+      "description": "Approvals properties for patching",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateApprovalProperties",
+          "description": "Approval Patch properties"
+        }
+      }
     },
     "ApprovalProperties": {
       "type": "object",
@@ -4560,6 +4515,23 @@
         }
       }
     },
+    "CommunityEndpointPatchResource": {
+      "type": "object",
+      "description": "Community Endpoint Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateCommunityEndpointPatchProperties",
+          "description": "Community Endpoint Patch properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "CommunityEndpointProperties": {
       "type": "object",
       "description": "Community Endpoint Resource properties",
@@ -4686,6 +4658,27 @@
       "required": [
         "value"
       ]
+    },
+    "CommunityPatchResource": {
+      "type": "object",
+      "description": "Community Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateCommunityPatchProperties",
+          "description": "Community Patch properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
     },
     "CommunityProperties": {
       "type": "object",
@@ -4872,6 +4865,23 @@
         "managedAddressSpace": {
           "type": "string",
           "description": "Managed Address Space"
+        }
+      }
+    },
+    "EnclaveConnectionPatchResource": {
+      "type": "object",
+      "description": "Enclave Connection Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateEnclaveConnectionPatchProperties",
+          "description": "Enclave Connection Patch properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5073,6 +5083,23 @@
         }
       }
     },
+    "EnclaveEndpointPatchResource": {
+      "type": "object",
+      "description": "Enclave Endpoint Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateEnclaveEndpointPatchProperties",
+          "description": "Enclave Endpoint Patch properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "EnclaveEndpointProperties": {
       "type": "object",
       "description": "Enclave Endpoint Resource properties",
@@ -5262,6 +5289,23 @@
         }
       }
     },
+    "EndpointPatchResource": {
+      "type": "object",
+      "description": "Endpoint Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateEndpointPatchProperties",
+          "description": "Endpoint Patch properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "EndpointProperties": {
       "type": "object",
       "description": "Endpoint Resource properties",
@@ -5438,6 +5482,23 @@
       "required": [
         "value"
       ]
+    },
+    "ExternalConnectionPatchResource": {
+      "type": "object",
+      "description": "External Connection Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateExternalConnectionPatchProperties",
+          "description": "External Connection properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "ExternalConnectionProperties": {
       "type": "object",
@@ -5644,6 +5705,23 @@
       "required": [
         "value"
       ]
+    },
+    "InternalConnectionPatchResource": {
+      "type": "object",
+      "description": "Internal Connection Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateInternalConnectionProperties",
+          "description": "Internal Connection properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "InternalConnectionProperties": {
       "type": "object",
@@ -6118,6 +6196,23 @@
         "networkPrefixSize"
       ]
     },
+    "TransitHubPatchResource": {
+      "type": "object",
+      "description": "TH Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateTransitHubPatchProperties",
+          "description": "The TransitHub resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "TransitHubProperties": {
       "type": "object",
       "description": "Describes the properties of an Transit Hub.",
@@ -6294,195 +6389,383 @@
         ]
       }
     },
-    "UpdateApprovalResource": {
+    "UpdateApprovalProperties": {
       "type": "object",
       "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ApprovalProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "parent1": {
+          "type": "string",
+          "description": "Parameter for optimizing query results"
+        },
+        "parent2": {
+          "type": "string",
+          "description": "Parameter for optimizing query results"
+        },
+        "requestMetadata": {
+          "$ref": "#/definitions/RequestMetadata",
+          "description": "Request metadata for the approval request."
         }
       }
     },
-    "UpdateCommunityEndpointResource": {
+    "UpdateCommunityEndpointPatchProperties": {
       "type": "object",
       "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/CommunityEndpointProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+        "ruleCollection": {
+          "type": "array",
+          "description": "Community Endpoint Rule Collection.",
+          "items": {
+            "$ref": "#/definitions/CommunityEndpointDestinationRule"
+          },
+          "x-ms-identifiers": []
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by community endpoint.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "Whether approval is needed for the connection (True or False)."
+        }
+      }
+    },
+    "UpdateCommunityPatchProperties": {
+      "type": "object",
+      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
+      "properties": {
+        "addressSpace": {
+          "type": "string",
+          "description": "Address Space."
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "Dns Servers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by communities.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed resource group configuration."
+        },
+        "governedServiceList": {
+          "type": "array",
+          "description": "List of services governed by a community.",
+          "items": {
+            "$ref": "#/definitions/GovernedServiceItem"
+          }
+        }
+      }
+    },
+    "UpdateEnclaveConnectionPatchProperties": {
+      "type": "object",
+      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/EnclaveConnectionState",
+          "description": "The state of the enclaveConnection."
+        },
+        "communityResourceId": {
+          "$ref": "#/definitions/CommunityResourceId",
+          "description": "Community Resource Id."
+        },
+        "sourceResourceId": {
+          "$ref": "#/definitions/EnclaveConnectionSourceResourceId",
+          "description": "Source Resource Id."
+        },
+        "sourceCidr": {
+          "type": "string",
+          "description": "Source CIDR."
+        },
+        "ipGroup": {
+          "$ref": "#/definitions/IPGroupResourceId",
+          "description": "Source IP group Resource Id."
+        },
+        "destinationEndpointId": {
+          "$ref": "#/definitions/DestinationEndpointResourceId",
+          "description": "Destination Endpoint Resource Id."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids modified by enclave Connections.",
+          "items": {
             "type": "string"
           }
         }
       }
     },
-    "UpdateCommunityResource": {
+    "UpdateEnclaveEndpointPatchProperties": {
       "type": "object",
       "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
       "properties": {
+        "ruleCollection": {
+          "type": "array",
+          "description": "Enclave Endpoint Rule Collection.",
+          "items": {
+            "$ref": "#/definitions/EnclaveEndpointDestinationRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by community endpoint.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "Whether approval is needed for the connection (True or False)."
+        }
+      }
+    },
+    "UpdateEndpointPatchProperties": {
+      "type": "object",
+      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
+      "properties": {
+        "endpointRuleCollection": {
+          "type": "array",
+          "description": "Endpoint Rule Collection.",
+          "items": {
+            "$ref": "#/definitions/EndpointRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateExternalConnectionPatchProperties": {
+      "type": "object",
+      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/ExternalConnectionState",
+          "description": "The state of the externalConnection."
+        },
+        "communityResourceId": {
+          "$ref": "#/definitions/CommunityResourceId",
+          "description": "Community Resource Id."
+        },
+        "enclaveIds": {
+          "type": "array",
+          "description": "The enclaves' resource IDs.",
+          "items": {
+            "$ref": "#/definitions/VirtualEnclaveResourceId"
+          }
+        },
+        "externalCidrs": {
+          "type": "array",
+          "description": "The external CIDR IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids modified by externalConnections.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateInternalConnectionProperties": {
+      "type": "object",
+      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "connectionType": {
+          "$ref": "#/definitions/InternalConnectionType",
+          "description": "Specifies the type of internal connection. \n Possible values are:\n PrivateLink \n NetworkSecurityGroup"
+        },
+        "state": {
+          "$ref": "#/definitions/InternalConnectionState",
+          "description": "The state of the internalConnection."
+        },
+        "communityResourceId": {
+          "$ref": "#/definitions/CommunityResourceId",
+          "description": "Community Resource Id."
+        },
+        "destinationEnclaveId": {
+          "$ref": "#/definitions/VirtualEnclaveResourceId",
+          "description": "The destination enclave's resource ID."
+        },
+        "destinationEndpointId": {
+          "$ref": "#/definitions/EndpointResourceId",
+          "description": "The destination endpoint's resource ID."
+        },
+        "sourceEnclaveId": {
+          "$ref": "#/definitions/VirtualEnclaveResourceId",
+          "description": "The source enclave's resource ID."
+        },
+        "sourceCidrs": {
+          "type": "array",
+          "description": "The source CIDR IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids modified by internalConnections.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateTransitHubPatchProperties": {
+      "type": "object",
+      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/TransitHubState",
+          "description": "The state of the transitHub."
+        },
+        "transitOption": {
+          "$ref": "#/definitions/TransitOption",
+          "description": "The TransitOption of the transitHub."
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids modified by transitHubs.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateVirtualEnclavePatchProperties": {
+      "type": "object",
+      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "enclaveVirtualNetwork": {
+          "$ref": "#/definitions/EnclaveVirtualNetwork",
+          "description": "Virtual Network."
+        },
+        "enclaveAddressSpaces": {
+          "$ref": "#/definitions/EnclaveAddressSpaces",
+          "description": "Enclave Address Spaces",
+          "readOnly": true
+        },
+        "communityResourceId": {
+          "$ref": "#/definitions/CommunityResourceId",
+          "description": "Community Resource Id."
+        },
+        "enclaveDefaultSettings": {
+          "$ref": "#/definitions/EnclaveDefaultSettings",
+          "description": "Default Settings"
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by Virtual Enclave.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed resource group configuration."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfiguration",
+          "description": "Maintenance Mode configuration."
+        },
+        "bastionEnabled": {
+          "type": "boolean",
+          "description": "Deploy Bastion service (True or False)."
+        }
+      }
+    },
+    "UpdateWorkloadPatchProperties": {
+      "type": "object",
+      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "resourceGroupCollection": {
+          "type": "array",
+          "description": "List of resource group ids.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VirtualEnclavePatchResource": {
+      "type": "object",
+      "description": "Virtual Enclave Patch Resource",
+      "properties": {
         "properties": {
-          "$ref": "#/definitions/CommunityProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/UpdateVirtualEnclavePatchProperties",
+          "description": "Virtual Enclave Patch properties"
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateEnclaveConnectionResource": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EnclaveConnectionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateEnclaveEndpointResource": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EnclaveEndpointProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateEnclaveResource": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VirtualEnclaveProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateEndpointResource": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EndpointProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateExternalConnection": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ExternalConnectionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateInternalConnection": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/InternalConnectionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateTransitHubResource": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TransitHubProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateWorkloadResource": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WorkloadProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
         },
         "tags": {
           "type": "object",
@@ -6552,6 +6835,23 @@
         ]
       }
     },
+    "WorkloadPatchResource": {
+      "type": "object",
+      "description": "Workload Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateWorkloadPatchProperties",
+          "description": "Workload Patch properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "WorkloadProperties": {
       "type": "object",
       "description": "Workload Resource properties",
@@ -6609,15 +6909,6 @@
     }
   },
   "parameters": {
-    "ApprovalResource.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the approvals resource.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
-      "x-ms-parameter-location": "method"
-    },
     "Azure.ResourceManager.ResourceUriParameter": {
       "name": "resourceUri",
       "in": "path",
@@ -6626,96 +6917,6 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
-    },
-    "CommunityEndpointResource.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the Community Endpoint Resource",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
-      "x-ms-parameter-location": "method"
-    },
-    "CommunityResource.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the communityResource Resource",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
-      "x-ms-parameter-location": "method"
-    },
-    "EnclaveConnectionResource.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the Enclave Connection Resource",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
-      "x-ms-parameter-location": "method"
-    },
-    "EnclaveEndpointResource.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the Enclave Endpoint Resource",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
-      "x-ms-parameter-location": "method"
-    },
-    "EnclaveResource.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the enclaveResource Resource",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
-      "x-ms-parameter-location": "method"
-    },
-    "EndpointResource.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the endpointResource Resource",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
-      "x-ms-parameter-location": "method"
-    },
-    "ExternalConnection.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the external connection.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
-      "x-ms-parameter-location": "method"
-    },
-    "InternalConnection.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the internal connection.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
-      "x-ms-parameter-location": "method"
-    },
-    "TransitHubResource.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the TransitHub Resource",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
-      "x-ms-parameter-location": "method"
-    },
-    "WorkloadResource.name": {
-      "name": "name",
-      "in": "path",
-      "description": "The name of the workloadResource Resource",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
-      "x-ms-parameter-location": "method"
     }
   }
 }

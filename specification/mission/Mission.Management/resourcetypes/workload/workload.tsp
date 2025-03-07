@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 import "../shared/provisioningstate.tsp";
 import "../shared/resourceid.tsp";
-import "../shared/tags.tsp";
 import "../virtualEnclave/virtualenclave.tsp";
 
 using TypeSpec.Rest;
@@ -55,7 +54,7 @@ model WorkloadPatchProperties is WorkloadProperties;
 @doc("Workload Patch Resource")
 model WorkloadPatchResource {
   @doc("Workload Patch properties")
-  properties?: WorkloadPatchProperties;
+  properties?: Update<WorkloadPatchProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

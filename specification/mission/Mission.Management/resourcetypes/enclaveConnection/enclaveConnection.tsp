@@ -75,7 +75,7 @@ model EnclaveConnectionPatchProperties is EnclaveConnectionProperties;
 @doc("Enclave Connection Patch Resource")
 model EnclaveConnectionPatchResource {
   @doc("Enclave Connection Patch properties")
-  properties?: EnclaveConnectionPatchProperties;
+  properties?: Update<EnclaveConnectionPatchProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

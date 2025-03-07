@@ -79,10 +79,11 @@ model EndpointProperties {
 
 @doc("Endpoint Patch properties")
 model EndpointPatchProperties is EndpointProperties;
+
 @doc("Endpoint Patch Resource")
 model EndpointPatchResource {
   @doc("Endpoint Patch properties")
-  properties?: EndpointPatchProperties;
+  properties?: Update<EndpointPatchProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

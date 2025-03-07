@@ -126,19 +126,13 @@ model CommunityEndpointProperties {
   approvalRequired?: boolean;
 }
 
-// @doc("Community Endpoint Create properties")
-// model CommunityEndpointCreateProperties {
-//   ruleCollection: CommunityEndpointDestinationRule[];
-//   ...CommunityEndpointProperties;
-// }
-
 @doc("Community Endpoint Patch properties")
 model CommunityEndpointPatchProperties is CommunityEndpointProperties;
 
 @doc("Community Endpoint Patch Resource")
 model CommunityEndpointPatchResource {
   @doc("Community Endpoint Patch properties")
-  properties?: CommunityEndpointPatchProperties;
+  properties?: Update<CommunityEndpointPatchProperties>;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
