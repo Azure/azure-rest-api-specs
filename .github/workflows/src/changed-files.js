@@ -76,3 +76,21 @@ export async function getChangedResourceManagerSwaggerFiles(
   );
   return changedResourceManagerSwaggerFiles;
 }
+
+/**
+ * @param {import('github-script').AsyncFunctionArguments['core']} core
+ * @param {string} [baseCommitish] Defaults to "HEAD^".
+ * @param {string} [headCommitish] Defaults to "HEAD".
+ * @param {string} [diffFilter] Defaults to "d".
+ * @returns {Promise<string[]>}
+ */
+export async function getChangedSuppressionFiles(
+  core,
+  baseCommitish = "HEAD^",
+  headCommitish = "HEAD",
+  diffFilter = "d",
+) {
+  return (
+    await getChangedFiles(core, baseCommitish, headCommitish, diffFilter)
+  ).filter((f) => f.endsWith("sdk-suppressions.yaml"));
+}
