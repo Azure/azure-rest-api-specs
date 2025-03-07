@@ -133,51 +133,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions": {
-      "get": {
-        "tags": [
-          "TuningOptions"
-        ],
-        "operationId": "TuningOptions_ListByServer",
-        "x-ms-examples": {
-          "TuningOptions_ListByServer": {
-            "$ref": "./examples/Tuning_ListTuningOptions.json"
-          }
-        },
-        "description": "Retrieve the list of available tuning options.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TuningOptionsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/enable": {
       "post": {
         "tags": [
@@ -202,6 +157,9 @@
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TuningOptionParameter"
           }
         ],
         "responses": {
@@ -250,6 +208,9 @@
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TuningOptionParameter"
           }
         ],
         "responses": {
@@ -298,6 +259,9 @@
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TuningOptionParameter"
           },
           {
             "name": "configTuningRequest",
@@ -355,6 +319,9 @@
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TuningOptionParameter"
           }
         ],
         "responses": {
@@ -403,6 +370,9 @@
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TuningOptionParameter"
           }
         ],
         "responses": {
@@ -450,6 +420,9 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
+            "$ref": "#/parameters/TuningOptionParameter"
+          },
+          {
             "$ref": "#/parameters/SessionIdParameter"
           }
         ],
@@ -458,6 +431,51 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SessionDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions": {
+      "get": {
+        "tags": [
+          "TuningOptions"
+        ],
+        "operationId": "TuningOptions_ListByServer",
+        "x-ms-examples": {
+          "TuningOptions_ListByServer": {
+            "$ref": "./examples/Tuning_ListTuningOptions.json"
+          }
+        },
+        "description": "Retrieve the list of available tuning options.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TuningOptionsListResult"
             }
           },
           "default": {
