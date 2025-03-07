@@ -702,6 +702,26 @@
         }
       }
     },
+    "/copilot/health": {
+      "get": {
+        "operationId": "HealthService_GetHealthStatus",
+        "description": "Get the health status of the service.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Represents a generic response.",
+            "schema": {
+              "$ref": "#/definitions/Health.Models.CopilotHealth"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HealthService_GetHealthStatus_MaximumSet": {
+            "$ref": "./examples/HealthService_GetHealthStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/copilot/instruction": {
       "get": {
         "operationId": "Instructions_List",
@@ -1099,7 +1119,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Operations.Models.OperationResultQuery"
+              "$ref": "#/definitions/Operation.Models.OperationResultQuery"
             }
           },
           "default": {
@@ -1530,6 +1550,72 @@
         ]
       }
     },
+    "Common.Models.OperationStatusValue": {
+      "type": "string",
+      "description": "Operation Status",
+      "enum": [
+        "Accepted",
+        "InProgress",
+        "TransientFailure",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Canceled",
+        "Unknown",
+        "Skipped"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatusValue",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation is Accepted."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is InProgress."
+          },
+          {
+            "name": "TransientFailure",
+            "value": "TransientFailure",
+            "description": "The operation is in a transient failure state."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation is Succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation is Failed."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The operation is Canceling."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation is Canceled."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The operation is in a permanent failure state."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "The operation is Skipped."
+          }
+        ]
+      }
+    },
     "ExampleQuery.Models.ExampleQueryRequest": {
       "type": "object",
       "description": "The example query resource.",
@@ -1714,6 +1800,70 @@
           }
         ]
       }
+    },
+    "Health.Models.CopilotHealth": {
+      "type": "object",
+      "description": "Copilot Health Response",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The message."
+        },
+        "operationStatus": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "The operation status."
+        },
+        "copilotSetupInfo": {
+          "$ref": "#/definitions/Health.Models.CopilotSetupInfo",
+          "description": "copilot setup info"
+        },
+        "errorMessage": {
+          "type": "array",
+          "description": "The error message.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "message",
+        "operationStatus",
+        "copilotSetupInfo",
+        "errorMessage"
+      ]
+    },
+    "Health.Models.CopilotSetupInfo": {
+      "type": "object",
+      "description": "Copilot Setup Info",
+      "properties": {
+        "createAzureDataExplorerFunctionJobStatus": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "create ADX function job status"
+        },
+        "registerInBuiltInstructionJobStatus": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "register in built instruction job status"
+        },
+        "regusterInbuiltExampleQueryJobStatus": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "register in built example query job status"
+        },
+        "registerInBuiltAliasJobStatus": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "register in built example query job status"
+        },
+        "registerAssistantViewJobStatus": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "register in built example query job status"
+        }
+      },
+      "required": [
+        "createAzureDataExplorerFunctionJobStatus",
+        "registerInBuiltInstructionJobStatus",
+        "regusterInbuiltExampleQueryJobStatus",
+        "registerInBuiltAliasJobStatus",
+        "registerAssistantViewJobStatus"
+      ]
     },
     "Instructions.Models.Instruction": {
       "type": "object",
@@ -2103,12 +2253,12 @@
         "status"
       ]
     },
-    "Operations.Models.OperationResultQuery": {
+    "Operation.Models.OperationResultQuery": {
       "type": "object",
       "description": "Operation Response Model",
       "properties": {
         "status": {
-          "$ref": "#/definitions/Operations.Models.OperationStatusValue",
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
           "description": "The operation status.",
           "readOnly": true
         },
@@ -2131,72 +2281,6 @@
         "operationId",
         "errorMessage"
       ]
-    },
-    "Operations.Models.OperationStatusValue": {
-      "type": "string",
-      "description": "Operation Status",
-      "enum": [
-        "Accepted",
-        "InProgress",
-        "TransientFailure",
-        "Succeeded",
-        "Failed",
-        "Deleting",
-        "Canceled",
-        "Unknown",
-        "Skipped"
-      ],
-      "x-ms-enum": {
-        "name": "OperationStatusValue",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The operation is Accepted."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The operation is InProgress."
-          },
-          {
-            "name": "TransientFailure",
-            "value": "TransientFailure",
-            "description": "The operation is in a transient failure state."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation is Succeeded."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation is Failed."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The operation is Canceling."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation is Canceled."
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The operation is in a permanent failure state."
-          },
-          {
-            "name": "Skipped",
-            "value": "Skipped",
-            "description": "The operation is Skipped."
-          }
-        ]
-      }
     },
     "PagedAlias": {
       "type": "object",

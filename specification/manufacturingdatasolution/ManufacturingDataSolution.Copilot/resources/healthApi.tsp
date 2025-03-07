@@ -1,31 +1,38 @@
-// import "@typespec/rest";
-// import "@typespec/http";
-// import "@typespec/openapi3";
-// import "@typespec/versioning";
-// import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/openapi3";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "./../models/health.tsp";
 
-// using TypeSpec.Rest;
-// using TypeSpec.Http;
-// using Azure.Core;
-// using Azure.Core.Traits;
-// using TypeSpec.Versioning;
+using TypeSpec.Http;
+using Azure.Core.Traits;
+using TypeSpec.Versioning;
+using MdsSolution.CopilotService.Health.Models;
 
-// #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" ""
-// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-// @versioned(MdsSolution.CopilotService.Versions)
-// namespace MdsSolution.CopilotService.Health {
-//   alias DefaultServiceTraits = NoRepeatableRequests &
-//     NoConditionalRequests &
-//     NoClientRequestId;
-//   alias AzureCoreOperations = Azure.Core.ResourceOperations<DefaultServiceTraits>;
-//   @route("/dmm/copilot")
-//   namespace Health {
-//     @get
-//     @route("/health")
-//     @doc("Get the health status of the service.")
-//     op getHealthStatus(): {
-//       @statusCode statusCode: 200;
-//       @body data: QueryResponseResult;
-//     };
-//   }
-// }
+@versioned(MdsSolution.CopilotService.Versions)
+namespace MdsSolution.CopilotService.HealthService;
+
+alias DefaultServiceTraits = NoRepeatableRequests &
+    NoConditionalRequests &
+    NoClientRequestId;
+
+alias apiOperations = Azure.Core.ResourceOperations<DefaultServiceTraits>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is not a versioned operation"
+
+@doc("Get the health status of the service.")
+@route("/health")
+@get
+op getHealthStatus() : GenericOkResponse<CopilotHealth>;
+
+@doc("Represents a generic response.")
+model GenericOkResponse<T> {
+  @statusCode
+  statusCode: 200;
+
+  @doc("The response data.")
+  @body
+  data: T;
+}
