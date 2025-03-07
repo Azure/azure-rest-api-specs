@@ -189,10 +189,6 @@ interface BatchClient {
   "java"
 );
 
-@@clientName(BatchClient.createTaskCollection,
-  "createTaskCollectionInternal",
-  "java"
-);
 @@clientName(BatchClient.deleteTask, "deleteTaskInternal", "java");
 @@clientName(BatchClient.getTask, "getTaskInternal", "java");
 @@clientName(BatchClient.replaceTask, "replaceTaskInternal", "java");
