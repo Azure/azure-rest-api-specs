@@ -25,11 +25,11 @@ union ApprovalStatus {
   @doc("ApprovalStatus Type Pending")
   Pending: "Pending",
 
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("ApprovalStatus Type Deleted")
   Deleted: "Deleted",
 
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("ApprovalStatus Type Expired")
   Expired: "Expired",
 
@@ -55,11 +55,11 @@ model RequestMetadata {
   @doc("Approval status.")
   approvalStatus?: ApprovalStatus;
 
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Route name for the approval callback")
   approvalCallbackRoute?: string;
 
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Payload to be sent upon any action on approval request")
   approvalCallbackPayload?: string;
 }
@@ -92,18 +92,18 @@ model ApprovalProperties {
   @doc("Request metadata for the approval request.")
   requestMetadata?: RequestMetadata;
 
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
   @doc("List of approvers for the approval request")
   approvers?: Approver[];
 
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
   @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
   @doc("List of mandatory approvers for the approval request")
   mandatoryApprovers?: Approver[];
 
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Minimum number of approvers required for the approval request")
   minimumApproversRequired?: int64;

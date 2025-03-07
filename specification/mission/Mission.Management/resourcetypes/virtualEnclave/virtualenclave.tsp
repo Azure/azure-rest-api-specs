@@ -175,13 +175,13 @@ model VirtualEnclaveProperties {
   @doc("Deploy Bastion service (True or False).")
   bastionEnabled?: boolean;
 
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @madeOptional(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
+  @madeOptional(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Enclave role assignments")
   enclaveRoleAssignments?: RoleAssignmentItem[];
 
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @madeOptional(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
+  @madeOptional(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Workload role assignments")
   workloadRoleAssignments?: RoleAssignmentItem[];
 }

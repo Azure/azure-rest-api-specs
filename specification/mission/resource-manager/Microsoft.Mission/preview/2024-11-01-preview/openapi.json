@@ -5123,6 +5123,27 @@
         "value"
       ]
     },
+    "CommunityEndpointCreateProperties": {
+      "type": "object",
+      "description": "Community Endpoint Create properties",
+      "properties": {
+        "ruleCollection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunityEndpointDestinationRule"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "ruleCollection"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommunityEndpointProperties"
+        }
+      ]
+    },
     "CommunityEndpointDestinationRule": {
       "type": "object",
       "description": "Base type for destination rules.",

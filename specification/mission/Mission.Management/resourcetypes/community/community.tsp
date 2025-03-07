@@ -111,7 +111,7 @@ model GovernedServiceItem {
   initiatives?: string[];
 }
 
-@added(Microsoft.Mission.Versions.v2024_11_01_preview)
+@added(Microsoft.Mission.Versions.v2024_12_01_preview)
 @doc("Approval Policy.")
 union ApprovalPolicy {
   string,
@@ -130,7 +130,7 @@ model MandatoryApprover {
   approverEntraId: string;
 }
 
-@added(Microsoft.Mission.Versions.v2024_11_01_preview)
+@added(Microsoft.Mission.Versions.v2024_12_01_preview)
 @doc("ApprovalSettings Properties")
 model ApprovalSettings {
   @doc("Approval required for endpoint creation (Required or NotRequired).")
@@ -231,16 +231,16 @@ model CommunityProperties {
   @doc("List of services governed by a community.")
   governedServiceList?: GovernedServiceItem[];
 
-  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
-  @madeOptional(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
+  @madeOptional(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")
   communityRoleAssignments?: RoleAssignmentItem[];
 
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval requirements for various actions on the community's resources.")
   approvalSettings?: ApprovalSettings;
 
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfiguration;
 }

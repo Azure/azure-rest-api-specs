@@ -126,6 +126,12 @@ model CommunityEndpointProperties {
   approvalRequired?: boolean;
 }
 
+// @doc("Community Endpoint Create properties")
+// model CommunityEndpointCreateProperties {
+//   ruleCollection: CommunityEndpointDestinationRule[];
+//   ...CommunityEndpointProperties;
+// }
+
 @doc("Community Endpoint Patch properties")
 model CommunityEndpointPatchProperties is CommunityEndpointProperties;
 

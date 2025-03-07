@@ -86,6 +86,7 @@ model InternalConnectionProperties {
 
 @doc("Internal Connection Patch properties")
 model InternalConnectionPatchProperties is InternalConnectionProperties;
+
 @doc("Internal Connection Patch Resource")
 model InternalConnectionPatchResource {
   @doc("Internal Connection properties")

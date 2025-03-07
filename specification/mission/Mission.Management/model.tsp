@@ -269,7 +269,7 @@ interface VirtualEnclave {
 
   @doc("Callback that triggers on approval state change.")
   @armResourceAction(EnclaveResource)
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   approvalCallback is ArmResourceActionAsync<
     EnclaveResource,
     ApprovalCallbackRequest,
@@ -277,7 +277,7 @@ interface VirtualEnclave {
   >;
   @doc("Callback that triggers on approval deletion state change.")
   @armResourceAction(EnclaveResource)
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   approvalDeletionCallback is ArmResourceActionAsync<
     EnclaveResource,
     ApprovalDeletionCallbackRequest,
@@ -454,7 +454,7 @@ interface EnclaveEndpoints {
 
   @doc("Callback that triggers on approval state change.")
   @armResourceAction(EnclaveEndpointResource)
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   approvalCallback is ArmResourceActionAsync<
     EnclaveEndpointResource,
     ApprovalCallbackRequest,
@@ -462,7 +462,7 @@ interface EnclaveEndpoints {
   >;
   @doc("Callback that triggers on approval deletion state change.")
   @armResourceAction(EnclaveEndpointResource)
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   approvalDeletionCallback is ArmResourceActionAsync<
     EnclaveEndpointResource,
     ApprovalDeletionCallbackRequest,
@@ -494,7 +494,7 @@ interface CommunityEndpoints {
 
   @doc("Callback that triggers on approval state change.")
   @armResourceAction(CommunityEndpointResource)
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   approvalCallback is ArmResourceActionAsync<
     CommunityEndpointResource,
     ApprovalCallbackRequest,
@@ -502,7 +502,7 @@ interface CommunityEndpoints {
   >;
   @doc("Callback that triggers on approval deletion state change.")
   @armResourceAction(CommunityEndpointResource)
-  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   approvalDeletionCallback is ArmResourceActionAsync<
     CommunityEndpointResource,
     ApprovalDeletionCallbackRequest,
