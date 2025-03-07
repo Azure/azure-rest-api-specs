@@ -721,7 +721,7 @@
         }
       }
     },
-    "SessionResourceProperties": {
+    "SessionResource": {
       "type": "object",
       "properties": {
         "sessionStartTime": {
@@ -753,20 +753,6 @@
           "description": "The post tuning tps."
         }
       },
-      "description": "Session resource properties.",
-      "readOnly": true
-    },
-    "SessionResource": {
-      "type": "object",
-      "properties": {
-        "$ref": "#/definitions/SessionResourceProperties",
-        "description": "Properties of SessionResource."
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ],
       "description": "Session resource properties."
     },
     "SessionsListResult": {
@@ -781,7 +767,7 @@
             "$ref": "#/definitions/SessionResource"
           },
           "x-ms-identifiers": [
-            "name"
+            "sessionId"
           ]
         },
         "nextLink": {
@@ -790,7 +776,7 @@
         }
       }
     },
-    "SessionDetailsProperties": {
+    "SessionDetailsResource": {
       "type": "object",
       "properties": {
         "iterationId": {
@@ -818,20 +804,6 @@
           "description": "The tps for the iteration."
         }
       },
-      "description": "Session details.",
-      "readOnly": true
-    },
-    "SessionDetailsResource": {
-      "type": "object",
-      "properties": {
-        "$ref": "#/definitions/SessionDetailsProperties",
-        "description": "Properties of SessionDetails."
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ],
       "description": "Session details properties."
     },
     "SessionDetailsListResult": {
@@ -846,7 +818,7 @@
             "$ref": "#/definitions/SessionDetailsResource"
           },
           "x-ms-identifiers": [
-            "name"
+            "iterationId"
           ]
         },
         "nextLink": {
