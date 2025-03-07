@@ -245,10 +245,14 @@ model CommunityProperties {
   maintenanceModeConfiguration?: MaintenanceModeConfiguration;
 }
 
+@doc("Community Patch Properties")
+model CommunityPatchProperties is CommunityProperties {
+}
+
 @doc("Community Patch Resource")
 model CommunityPatchResource {
   @doc("Community Patch properties")
-  properties?: CommunityProperties;
-  ...TagsProperty;
+  properties?: CommunityPatchProperties;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...ManagedServiceIdentityProperty;
 }

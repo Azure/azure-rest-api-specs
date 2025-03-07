@@ -186,10 +186,14 @@ model VirtualEnclaveProperties {
   workloadRoleAssignments?: RoleAssignmentItem[];
 }
 
+@doc("Virtual Enclave Patch properties")
+model VirtualEnclavePatchProperties is VirtualEnclaveProperties {
+}
+
 @doc("Virtual Enclave Patch Resource")
 model VirtualEnclavePatchResource {
   @doc("Virtual Enclave Patch properties")
-  properties?: VirtualEnclaveProperties;
-  ...TagsProperty;
+  properties?: VirtualEnclavePatchProperties;
   ...ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
