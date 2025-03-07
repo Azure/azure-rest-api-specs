@@ -87,3 +87,5 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmt", "python");
 @@alternateType(AADProfileProperties.serverId, uuid, "csharp");
 @@alternateType(AADProfileProperties.tenantId, uuid, "csharp");
+
+@@clientName(AADProfileProperties, "AadProfileProperties", "java");
