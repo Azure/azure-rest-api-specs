@@ -567,6 +567,7 @@ union ServiceScalingMechanismKind {
 model ScalingMechanism {
   kind: ServiceScalingMechanismKind;
 }
+
 /**
  * Represents a scaling mechanism for adding or removing named partitions of a stateless service. Partition names are in the format '0','1'...'N-1'.
  */

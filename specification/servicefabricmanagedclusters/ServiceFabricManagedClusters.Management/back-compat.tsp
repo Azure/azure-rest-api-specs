@@ -14,3 +14,8 @@ using Microsoft.ServiceFabric;
   "ManagedMaintenanceWindowStatuses",
   "java"
 );
+
+@@clientName(PublicIPAddressConfiguration,
+  "ServiceFabricManagedClusterPublicIPAddressConfiguration",
+  "csharp"
+);
