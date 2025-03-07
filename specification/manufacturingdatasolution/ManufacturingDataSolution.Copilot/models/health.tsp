@@ -32,7 +32,7 @@ model CopilotSetupInfo {
     registerInBuiltInstructionJobStatus: OperationStatusValue;
 
     @doc("register in built example query job status")
-    regusterInbuiltExampleQueryJobStatus: OperationStatusValue;
+    registerInbuiltExampleQueryJobStatus: OperationStatusValue;
 
     @doc("register in built example query job status")
     registerInBuiltAliasJobStatus: OperationStatusValue;
