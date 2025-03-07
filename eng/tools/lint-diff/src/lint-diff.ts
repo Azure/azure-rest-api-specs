@@ -1,5 +1,5 @@
-import { readFile } from "fs/promises";
-// import { exec } from "node:child_process";
+import { readFile, writeFile } from "fs/promises";
+import { exec, ExecException } from "node:child_process";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { getOpenapiType, getAllTags, getInputFiles } from "./markdown-utils.js";
 import { sep, dirname, join } from "path";
@@ -13,10 +13,13 @@ import {
   getAffectedReadmes,
   getService,
   deduplicateTags,
+  AutorestRunResult,
+  logAutorestExecutionErrors,
+  BeforeAfter,
 } from "./util.js";
 
 // 64 MiB max output buffers for exec
-// const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
+const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 
 function usage() {
   console.log("TODO: Write up usage");
@@ -41,7 +44,7 @@ export async function main() {
       "out-file": {
         type: "string",
         short: "o",
-        default: "lint-diff.json",
+        default: "lint-diff.md",
       },
     },
     strict: true,
@@ -95,12 +98,6 @@ export async function main() {
   );
 }
 
-export type DiffResult<T> = {
-  additions?: T[];
-  deletions?: T[];
-  changes?: T[];
-};
-
 async function runLintDiff(
   beforePath: string,
   afterPath: string,
@@ -108,6 +105,7 @@ async function runLintDiff(
   outFile: string,
 ) {
   const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
+  const dependencyVersion = await getDependencyVersion(dependenciesDir);
 
   // Read changed files, exclude any files that should be ignored
   const ignoreFilesWith = ["/examples/", "/quickstart-templates/", "/scenarios/"];
@@ -134,10 +132,12 @@ async function runLintDiff(
   // TODO: Name
   const [beforeMap, afterMap] = await reconcileChangedFilesAndTags(beforeState, afterState);
 
+  const reportMap = new Map<"before" | "after", AutorestRunResult[]>();
+
   // TODO: Structure legibly
-  for (const { path, map } of [
-    { path: beforePath, map: beforeMap },
-    { path: afterPath, map: afterMap },
+  for (const { path, map, state } of [
+    { path: beforePath, map: beforeMap, state: "before" },
+    { path: afterPath, map: afterMap, state: "after" },
   ]) {
     for (const [readme, tags] of map.entries()) {
       const changedFilePath = join(path, readme);
@@ -172,32 +172,110 @@ async function runLintDiff(
           `${changedFilePath}`;
 
         console.log(`autorest command: ${autorestCommand}`);
-        // let lintDiffResult = await executeCommand(autorestCommand);
-        // console.log("Lint diff result:", lintDiffResult.stdout);
+        const executionResult = await executeCommand(autorestCommand);
+        const lintDiffResult = {
+          autorestCommand,
+          rootPath: path,
+          readme,
+          tag: tag ? tag : "",
+          openApiType,
+          ...executionResult,
+        };
+        logAutorestExecutionErrors(lintDiffResult);
+        if (!reportMap.has(state as "before" | "after")) {
+          reportMap.set(state as "before" | "after", []);
+        }
+
+        reportMap.get(state as "before" | "after")!.push(lintDiffResult);
+        console.log("Lint diff result length:", lintDiffResult.stdout.length);
       }
     }
   }
 
-  console.log("Results would be written to: ", outFile);
+  // Build map of compared readmes and tags from autorest runs. This can be
+  // removed when "before" state is removed.
+  const runCorrelations = new Map<string, BeforeAfter>();
+  for (const results of reportMap.get("after")!) {
+    const { readme, tag } = results;
+    const key = tag ? `${readme}#${tag}` : readme;
+    if (runCorrelations.has(key)) {
+      throw new Error(`Duplicate key found correlating autorest runs: ${key}`);
+    }
+
+    const beforeCandidates = reportMap
+      .get("before")!
+      .filter((r) => r.readme === readme && r.tag === tag);
+    if (beforeCandidates.length === 1) {
+      runCorrelations.set(key, {
+        before: beforeCandidates[0],
+        after: results,
+      });
+      continue;
+    } else if (beforeCandidates.length > 1) {
+      throw new Error(`Multiple before candidates found for key ${key}`);
+    }
+
+    // No before candidates found, find the run with matching readme
+    const beforeReadmeCandidates = reportMap.get("before")!.filter((r) => r.readme === readme);
+    if (beforeReadmeCandidates.length === 1) {
+      runCorrelations.set(key, {
+        before: beforeReadmeCandidates[0],
+        after: results,
+      });
+      continue;
+    } else if (beforeReadmeCandidates.length > 1) {
+      throw new Error(`Multiple before candidates found for key ${key}`);
+    } else {
+      throw new Error(`No before candidates found for key ${key}`);
+    }
+  }
+
+  // See unifiedPipelineHelper.ts:386
+  // Compared specs (link to npm package: @microsoft.azure/openapi-validator/v/<version>)
+  let outputMarkdown = `| Compared specs ([v${dependencyVersion}](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/${dependencyVersion})) | new version | base version |\n`;
+  outputMarkdown += `| --- | --- | --- |\n`;
+
+  // Compared Specs | New Version | Base Version
+  // <tag name> | link: readme.md#tag-<tag-name> | link: readme.md#tag-<tag-name>
+  // ... | ... | ...
+  for (const [_, { before, after }] of runCorrelations.entries()) {
+    // TODO: DRY
+    const afterName = after.tag ? after.tag : "default";
+    const beforeName = before.tag ? before.tag : "default";
+    const afterPath = after.tag ? `${after.readme}#tag-${after.tag}` : after.readme;
+    const beforePath = before.tag ? `${before.readme}#tag-${before.tag}` : before.readme;
+
+    outputMarkdown += `| ${afterName} | link: [${afterName}](${afterPath}) | link: [${beforeName}](${beforePath}) |\n`;
+  }
+
+  // MUST FIX Following errors/warnings are introduced by the current PR
+  // Rule | Message | Related RPC [For API reviewers]
+  // for (const )
+
+  // The following errors/warnings exist before current PR submission
+  // Rule | Message | Location (link to file, line # at SHA)
+
+  await writeFile(outFile, outputMarkdown);
 }
 
-// async function executeCommand(
-//   command: string,
-//   cwd: string = ".",
-// ): Promise<{ error: Error | null; stdout: string; stderr: string }> {
-//   return new Promise((resolve) => {
-//     exec(
-//       command,
-//       { cwd, encoding: "utf-8", maxBuffer: MAX_EXEC_BUFFER },
-//       (error, stdout, stderr) => {
-//         resolve({ error, stdout, stderr });
-//       },
-//     );
-//   });
-// }
+async function executeCommand(
+  command: string,
+  cwd: string = ".",
+): Promise<{ error: ExecException | null; stdout: string; stderr: string }> {
+  return new Promise((resolve) => {
+    exec(
+      command,
+      { cwd, encoding: "utf-8", maxBuffer: MAX_EXEC_BUFFER },
+      (error, stdout, stderr) => {
+        resolve({ error, stdout, stderr });
+      },
+    );
+  });
+}
+
+export function getAutorestViolations() {}
 
 type State = {
-  // Things needed to do the work
   // TODO: Narrow this object to specific properties that are used in later
   // steps.
   rootPath: string;
@@ -309,11 +387,12 @@ export async function buildState(changedSpecFiles: string[], rootPath: string): 
 }
 
 /**
- * Build a map of changed readmes and tags to scan by examining state of the
- * repo before and after the change
+ * Build mappings of changed readmes and tags to scan by examining state of the
+ * repo before and after the change. This function is not necessary when
+ * "before" is removed.
  * @param before before the change
  * @param after after the change
- * @returns a map of readme files and tags to scan
+ * @returns maps of readme files and tags to scan
  */
 export async function reconcileChangedFilesAndTags(
   before: State,
@@ -346,4 +425,14 @@ export async function reconcileChangedFilesAndTags(
   }
 
   return [beforeFinal, afterFinal];
+}
+
+export async function getDependencyVersion(dependenciesDir: string): Promise<string> {
+  const packageJsonPath = join(dependenciesDir, "package.json");
+  const packageJson = JSON.parse(await readFile(packageJsonPath, { encoding: "utf-8" }));
+  const version = packageJson.version;
+  if (!version) {
+    throw new Error(`Version not found in package.json at ${packageJsonPath}`);
+  }
+  return version;
 }
