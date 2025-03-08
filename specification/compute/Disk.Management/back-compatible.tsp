@@ -52,7 +52,7 @@ using Microsoft.Compute;
   "Snapshots.update::parameters.properties",
   "snapshot"
 );
-@@clientName(Snapshots.grantAccess,
+@@clientName(Snapshots.begingetAccess,
   "Snapshots.grantAccess::parameters.body",
   "grantAccessData"
 );
@@ -76,4 +76,4 @@ using Microsoft.Compute;
 @@clientName(DiskRestorePoints.grantAccess::parameters.body, "grantAccessData");
 @@clientName(Snapshots.createOrUpdate::parameters.resource, "snapshot");
 @@clientName(Snapshots.update::parameters.properties, "snapshot");
-@@clientName(Snapshots.grantAccess::parameters.body, "grantAccessData");
+@@clientName(Snapshots.begingetAccess::parameters.body, "grantAccessData");
