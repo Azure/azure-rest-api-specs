@@ -3884,7 +3884,6 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
   /**
    * The name of the extension.
    */
-  @visibility("read")
   name?: string;
 
   /**
@@ -5571,6 +5570,16 @@ model VirtualMachineExtensionUpdateProperties {
    * The extensions protected settings that are passed by reference, and consumed from key vault
    */
   protectedSettingsFromKeyVault?: KeyVaultSecretReference;
+
+  /**
+   * Collection of extension names after which this extension needs to be provisioned.
+   */
+  provisionAfterExtensions?: string[];
+
+  /**
+   * The provisioning state, which only appears in the response.
+   */
+  provisioningState?: string;
 }
 
 /**

@@ -86,7 +86,7 @@ interface DiskAccesses {
    * Gets the private link resources possible under disk access resource
    */
   @get
-  getPrivateLinkResources is ComputeResourceActionSync<
+  privateLinkResources is ComputeResourceActionSync<
     DiskAccess,
     void,
     PrivateLinkResourceListResult

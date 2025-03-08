@@ -97,7 +97,7 @@ interface Snapshots {
   /**
    * Grants access to a snapshot.
    */
-  grantAccess is ComputeResourceActionAsync<
+  begingetAccess is ComputeResourceActionAsync<
     Snapshot,
     GrantAccessData,
     AccessUri
@@ -106,7 +106,7 @@ interface Snapshots {
   /**
    * Revokes access to a snapshot.
    */
-  revokeAccess is ComputeResourceActionAsync<Snapshot, void, OkResponse>;
+  endgetAccess is ComputeResourceActionAsync<Snapshot, void, OkResponse>;
 }
 
 @@doc(Snapshot.name,
@@ -119,6 +119,6 @@ interface Snapshots {
 @@doc(Snapshots.update::parameters.properties,
   "Snapshot object supplied in the body of the Patch snapshot operation."
 );
-@@doc(Snapshots.grantAccess::parameters.body,
+@@doc(Snapshots.begingetAccess::parameters.body,
   "Access data object supplied in the body of the get snapshot access operation."
 );

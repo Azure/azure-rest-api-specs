@@ -343,12 +343,13 @@ namespace Azure.ResourceManager.Legacy {
       ParentFriendlyName extends valueof string = "",
       Parameters extends {} = {},
       Response extends {} = ArmResponse<ResourceListResult<Resource>>,
-      Error extends {} = ErrorResponse
+      Error extends {} = Microsoft.Compute.CloudError
     > is Azure.ResourceManager.Foundations.ArmReadOperation<
       ResourceParentParameters<Resource, BaseParameters> & Parameters,
       Response,
       Error
     >;
+
   }
   /**
    * @dev Get the provider namespace key-value pair
