@@ -1449,6 +1449,23 @@ interface Tasks {
   >;
 }
 
+// Nodes Parameter Aliases
+alias CreateNodeUserRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the machine on which you want to create a user Account.")
+  @path
+  nodeId: string;
+
+  @doc("The options to use for creating the user.")
+  @bodyRoot
+  user: BatchNodeUserCreateContent;
+};
+
+// Node Interface
+
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
@@ -1460,20 +1477,10 @@ interface Nodes {
     running state.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/users")
-  @clientName("createNodeUserInternal", "java")
-  createNodeUser is CreateOperation<
+  createNodeUser is CreateOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the machine on which you want to create a user Account.")
-      @path
-      nodeId: string;
-
-      @doc("The options to use for creating the user.")
-      @bodyRoot
-      user: BatchNodeUserCreateContent;
+      ...CommonJsonParameters;
+      ...CreateNodeUserRequiredParameters;
     },
     {}
   >;
