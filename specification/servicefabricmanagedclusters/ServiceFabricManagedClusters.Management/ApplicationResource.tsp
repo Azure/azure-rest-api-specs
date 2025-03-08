@@ -180,7 +180,7 @@ model ApplicationUpgradePolicy {
   /**
    * If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).
    */
-  forceRestart?: boolean;
+  forceRestart?: boolean = false;
 
   /**
    * The policy used for monitoring the application upgrade

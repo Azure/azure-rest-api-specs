@@ -751,6 +751,7 @@ model ClusterUpgradeDeltaHealthPolicy {
    * The check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.
    *
    */
+  @minValue(0)
   @maxValue(100)
   maxPercentDeltaUnhealthyNodes: int32;
 
@@ -760,6 +761,7 @@ model ClusterUpgradeDeltaHealthPolicy {
    * The check is performed after every upgrade domain upgrade completion for all completed upgrade domains to make sure the state of the upgrade domains is within tolerated limits.
    *
    */
+  @minValue(0)
   @maxValue(100)
   maxPercentUpgradeDomainDeltaUnhealthyNodes?: int32;
 
@@ -770,6 +772,7 @@ model ClusterUpgradeDeltaHealthPolicy {
    * NOTE: This value will overwrite the value specified in properties.UpgradeDescription.HealthPolicy.MaxPercentUnhealthyApplications
    *
    */
+  @minValue(0)
   @maxValue(100)
   maxPercentDeltaUnhealthyApplications?: int32;
 }
@@ -1247,5 +1250,6 @@ model ApplicationTypeVersionsCleanupPolicy {
   /**
    * Number of unused versions per application type to keep.
    */
+  @minValue(0)
   maxUnusedVersionsToKeep: int32;
 }

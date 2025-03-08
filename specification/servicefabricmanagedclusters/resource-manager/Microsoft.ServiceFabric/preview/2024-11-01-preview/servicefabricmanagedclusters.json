@@ -4264,7 +4264,8 @@
         "maxUnusedVersionsToKeep": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of unused versions per application type to keep."
+          "description": "Number of unused versions per application type to keep.",
+          "minimum": 0
         }
       },
       "required": [
@@ -4294,7 +4295,8 @@
         },
         "forceRestart": {
           "type": "boolean",
-          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data)."
+          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).",
+          "default": false
         },
         "rollingUpgradeMonitoringPolicy": {
           "$ref": "#/definitions/RollingUpgradeMonitoringPolicy",
@@ -4663,18 +4665,21 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the nodes at the beginning of upgrade and the state of the nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.",
+          "minimum": 0,
           "maximum": 100
         },
         "maxPercentUpgradeDomainDeltaUnhealthyNodes": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of upgrade domain nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the upgrade domain nodes at the beginning of upgrade and the state of the upgrade domain nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion for all completed upgrade domains to make sure the state of the upgrade domains is within tolerated limits.",
+          "minimum": 0,
           "maximum": 100
         },
         "maxPercentDeltaUnhealthyApplications": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of applications health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the applications at the beginning of upgrade and the state of the applications at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits. System services are not included in this.\nNOTE: This value will overwrite the value specified in properties.UpgradeDescription.HealthPolicy.MaxPercentUnhealthyApplications",
+          "minimum": 0,
           "maximum": 100
         }
       },
@@ -4955,6 +4960,9 @@
       },
       "required": [
         "value"
+      ],
+      "x-ms-identifiers": [
+        "simulationId"
       ]
     },
     "FaultSimulationStatus": {
@@ -7691,18 +7699,21 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of unhealthy services.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.\nIf the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.\nThe computation rounds up to tolerate one failure on small numbers of services.",
+          "minimum": 0,
           "maximum": 100
         },
         "maxPercentUnhealthyPartitionsPerService": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of unhealthy partitions per service.\n\nThe percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error.\nIf the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service.\nThe computation rounds up to tolerate one failure on small numbers of partitions.",
+          "minimum": 0,
           "maximum": 100
         },
         "maxPercentUnhealthyReplicasPerPartition": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of unhealthy replicas per partition.\n\nThe percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error.\nIf the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition.\nThe computation rounds up to tolerate one failure on small numbers of replicas.",
+          "minimum": 0,
           "maximum": 100
         }
       },

@@ -374,6 +374,7 @@ model ServiceTypeHealthPolicy {
    * The computation rounds up to tolerate one failure on small numbers of services.
    *
    */
+  @minValue(0)
   @maxValue(100)
   maxPercentUnhealthyServices: int32;
 
@@ -386,6 +387,7 @@ model ServiceTypeHealthPolicy {
    * The computation rounds up to tolerate one failure on small numbers of partitions.
    *
    */
+  @minValue(0)
   @maxValue(100)
   maxPercentUnhealthyPartitionsPerService: int32;
 
@@ -399,6 +401,7 @@ model ServiceTypeHealthPolicy {
    *
    */
   @maxValue(100)
+  @minValue(0)
   maxPercentUnhealthyReplicasPerPartition: int32;
 }
 
