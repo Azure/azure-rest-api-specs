@@ -5149,7 +5149,7 @@
       "description": "Request to the action call to check address space availability.",
       "properties": {
         "communityResourceId": {
-          "type": "string",
+          "$ref": "#/definitions/CommunityResourceId",
           "description": "Resource Id of the Community"
         },
         "enclaveVirtualNetwork": {
@@ -6694,6 +6694,18 @@
         "approverEntraId"
       ]
     },
+    "NsgResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/networkSecurityGroups"
+          }
+        ]
+      }
+    },
     "Principal": {
       "type": "object",
       "description": "Principal for maintenance mode or role assignments",
@@ -6995,8 +7007,7 @@
           "description": "Subnet name."
         },
         "id": {
-          "type": "string",
-          "format": "arm-id",
+          "$ref": "#/definitions/SubnetResourceId",
           "description": "Subnet ID.",
           "readOnly": true
         },
@@ -7015,8 +7026,7 @@
           "readOnly": true
         },
         "networkSecurityGroupId": {
-          "type": "string",
-          "format": "arm-id",
+          "$ref": "#/definitions/NsgResourceId",
           "description": "Network security group ID.",
           "readOnly": true
         }
@@ -7025,6 +7035,18 @@
         "name",
         "networkPrefixSize"
       ]
+    },
+    "SubnetResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
+      }
     },
     "TransitHubPatchResource": {
       "type": "object",
@@ -7184,7 +7206,7 @@
           "description": "Transit Option Params scaleUnits."
         },
         "remoteVirtualNetworkId": {
-          "type": "string",
+          "$ref": "#/definitions/VirtualNetworkResourceId",
           "description": "Transit Option Params remoteVirtualNetworkId."
         }
       }
@@ -7536,7 +7558,9 @@
           "type": "array",
           "description": "List of resource ids created by Virtual Enclave.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "managedResourceGroupConfiguration": {
@@ -7636,7 +7660,9 @@
           "type": "array",
           "description": "List of resource ids created by Virtual Enclave.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "managedResourceGroupConfiguration": {
@@ -7679,6 +7705,18 @@
         "allowedResources": [
           {
             "type": "Microsoft.Mission/virtualEnclaves"
+          }
+        ]
+      }
+    },
+    "VirtualNetworkResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks"
           }
         ]
       }

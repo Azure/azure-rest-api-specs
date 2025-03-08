@@ -41,7 +41,7 @@ model SubnetConfiguration {
 
   @doc("Subnet ID.")
   @visibility(Lifecycle.Read)
-  id?: Azure.Core.armResourceIdentifier;
+  id?: SubnetResourceId;
 
   @doc("Network prefix size.")
   networkPrefixSize: int32;
@@ -55,7 +55,7 @@ model SubnetConfiguration {
 
   @doc("Network security group ID.")
   @visibility(Lifecycle.Read)
-  networkSecurityGroupId?: Azure.Core.armResourceIdentifier;
+  networkSecurityGroupId?: NsgResourceId;
 }
 
 @doc("Enclave Virtual Network Properties")
@@ -152,7 +152,7 @@ model VirtualEnclaveProperties {
   enclaveDefaultSettings?: EnclaveDefaultSettings;
 
   @doc("List of resource ids created by Virtual Enclave.")
-  resourceCollection?: string[];
+  resourceCollection?: armResourceIdentifier[];
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)

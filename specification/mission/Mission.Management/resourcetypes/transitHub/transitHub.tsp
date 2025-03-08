@@ -54,7 +54,7 @@ model TransitOptionParams {
   scaleUnits?: int64;
 
   @doc("Transit Option Params remoteVirtualNetworkId.")
-  remoteVirtualNetworkId?: string;
+  remoteVirtualNetworkId?: VirtualNetworkResourceId;
 }
 
 @doc("TransitOption Properties")
