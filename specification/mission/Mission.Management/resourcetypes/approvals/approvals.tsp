@@ -69,7 +69,7 @@ model RequestMetadata {
 @doc("Approver Metadata for approvals request.")
 model Approver {
   @doc("EntraId of the approver")
-  approverEntraId: uuid;
+  approverEntraId: string;
 
   @doc("Action Performed by approver")
   actionPerformed: ActionPerformed;
