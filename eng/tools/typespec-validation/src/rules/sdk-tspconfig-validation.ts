@@ -459,18 +459,21 @@ export class SdkTspConfigValidationRule implements Rule {
   name = "SdkTspConfigValidation";
   description = "Validate the SDK tspconfig.yaml file";
 
-  constructor(suppressions: Suppression[] = [], subRules: TspconfigSubRuleBase[] = defaultRules) {
+  constructor(subRules: TspconfigSubRuleBase[] = defaultRules) {
     this.subRules = subRules;
-    this.setSuppressedKeyPaths(suppressions);
   }
 
-  async execute(host?: TsvHost, folder?: string): Promise<RuleResult> {
+  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+    const tspConfigPath = join(folder, "tspconfig.yaml");
+    const suppressions = await host.getSuppressions(tspConfigPath);
+    this.setSuppressedKeyPaths(suppressions);
+
     const failedResults = [];
     let success = true;
     for (const subRule of this.subRules) {
       // TODO: support wildcard
       if (this.suppressedKeyPaths.has(subRule.getPathOfKeyToValidate())) continue;
-      const result = await subRule.execute(host!, folder!);
+      const result = await subRule.execute(host, folder!);
       if (!result.success) failedResults.push(result);
       success &&= result.success;
     }

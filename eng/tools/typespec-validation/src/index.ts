@@ -1,6 +1,5 @@
 import { ParseArgsConfig, parseArgs } from "node:util";
-import { Suppression, getSuppressions } from "suppressions";
-
+import { Suppression } from "suppressions";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
 import { FlavorAzureRule } from "./rules/flavor-azure.js";
@@ -34,12 +33,12 @@ export async function main() {
   }
   console.log("Running TypeSpecValidation on folder: ", absolutePath);
 
-  const suppressions: Suppression[] = await getSuppressions("TypeSpecValidation", absolutePath);
+  const suppressions: Suppression[] = await host.getSuppressions(absolutePath);
 
-  const suppressionWithoutRules = suppressions.some(
-    (s) => s.rules === undefined || s.rules.length === 0,
-  );
-  if (suppressionWithoutRules) {
+  // Suppressions for the whole tool must have no rules or sub-rules
+  const toolSuppressions = suppressions.filter((s) => !s.rules?.length && !s.subRules?.length);
+
+  if (toolSuppressions && toolSuppressions[0]) {
     // Use reason from first matching suppression and ignore rest
     console.log(`  Suppressed: ${suppressions[0].reason}`);
     return;
@@ -53,19 +52,8 @@ export async function main() {
     new LinterRulesetRule(),
     new CompileRule(),
     new FormatRule(),
-    new SdkTspConfigValidationRule(suppressions),
+    new SdkTspConfigValidationRule(),
   ];
-
-  const suppressedRuleNames = new Set<string>();
-  for (const suppression of suppressions) {
-    const ruleNames = suppression.rules!;
-    const hasSubRules = suppression.subRules !== undefined && suppression.subRules.length > 0;
-    if (hasSubRules) continue;
-    for (const ruleName of ruleNames) suppressedRuleNames.add(ruleName);
-  }
-
-  rules.splice(0, rules.length, ...rules.filter((r) => !suppressedRuleNames.has(r.name)));
-
   let success = true;
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];

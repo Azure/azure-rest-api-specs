@@ -540,16 +540,16 @@ describe("tspconfig", function () {
       return file === join(c.folder, "tspconfig.yaml");
     };
     host.readTspConfig = async (_folder: string) => c.tspconfigContent;
-    const suppressions: Suppression[] = [
+    host.getSuppressions = async (_path: string) => [
       {
-        tool: "",
-        paths: [],
-        reason: "",
+        tool: "TypeSpecValidation",
+        paths: ["tspconfig.yaml"],
+        reason: "Test reason",
         rules: ["SdkTspConfigValidation"],
         subRules: c.ignoredKeyPaths,
       },
     ];
-    const rule = new SdkTspConfigValidationRule(suppressions, c.subRules);
+    const rule = new SdkTspConfigValidationRule(c.subRules);
     const result = await rule.execute(host, c.folder);
     strictEqual(result.success, true);
     if (c.success)
