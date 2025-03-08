@@ -1,7 +1,5 @@
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
 
-using Azure.Core;
 using TypeSpec.Versioning;
 
 @doc("Microsoft Mission Resource Provider management API.")

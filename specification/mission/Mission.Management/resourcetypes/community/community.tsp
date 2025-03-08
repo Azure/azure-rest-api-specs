@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "../shared/provisioningstate.tsp";
@@ -127,7 +126,7 @@ union ApprovalPolicy {
 @doc("Approver Metadata for approvals request.")
 model MandatoryApprover {
   @doc("EntraId of the approver")
-  approverEntraId: Azure.Core.uuid;
+  approverEntraId: string;
 }
 
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
