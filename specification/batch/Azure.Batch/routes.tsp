@@ -17,6 +17,14 @@ namespace Azure.Batch;
 
 // Interfaces ////////////////////
 
+// Application Parameter Aliases
+alias GetApplicationRequiredParameters = {
+  @doc("The ID of the Application")
+  @path
+  applicationId: string;
+};
+
+// Application Interface
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @tag("Applications")
 interface Applications {
@@ -29,8 +37,12 @@ interface Applications {
     API.
     """)
   @route("/applications")
-  @clientName("listApplicationsInternal", "java")
-  listApplications is ListOperation<{}, BatchApplicationListResult>;
+  listApplications is ListOperationNew<
+    {
+      ...CommonListParameters;
+    },
+    BatchApplicationListResult
+  >;
 
   @summary("Gets information about the specified Application.")
   @doc("""
@@ -41,16 +53,97 @@ interface Applications {
     API.
     """)
   @route("/applications/{applicationId}")
-  @clientName("getApplicationInternal", "java")
-  getApplication is ReadOperation<
+  getApplication is ReadOperationNew<
     {
-      @doc("The ID of the Application")
-      @path
-      applicationId: string;
+      ...CommonParameters;
+      ...GetApplicationRequiredParameters;
     },
     BatchApplication
   >;
 }
+
+// Pool Parameter Aliases
+
+alias ListPoolUsageMetricsParameters = {
+  @doc("""
+    The earliest time from which to include metrics. This must be at least two and
+    a half hours before the current time. If not specified this defaults to the
+    start time of the last aggregation interval currently available.
+    """)
+  @query
+  @clientName("starttime", "csharp,python,javascript,go")
+  startTime?: utcDateTime;
+
+  @doc("""
+    The latest time from which to include metrics. This must be at least two hours
+    before the current time. If not specified this defaults to the end time of the
+    last aggregation interval currently available.
+    """)
+  @query
+  endtime?: utcDateTime;
+
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+};
+
+alias CreatePoolParameters = {
+  @body
+  @doc("The Pool to be created.")
+  pool: BatchPoolCreateContent;
+};
+
+alias ListPoolsParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+alias DisablePoolAutoscaleParameters = {
+  @doc("The ID of the Pool on which to disable automatic scaling.")
+  @path
+  poolId: string;
+};
+
+alias ListSupportedImagesParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+};
+
+alias ListPoolNodeCountsParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+};
+
+// Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -71,33 +164,10 @@ interface Pools {
     last aggregation interval is returned.
     """)
   @route("/poolusagemetrics")
-  @clientName("listPoolUsageMetricsInternal", "java")
-  listPoolUsageMetrics is ListOperation<
+  listPoolUsageMetrics is ListOperationNew<
     {
-      @doc("""
-        The earliest time from which to include metrics. This must be at least two and
-        a half hours before the current time. If not specified this defaults to the
-        start time of the last aggregation interval currently available.
-        """)
-      @query
-      @clientName("starttime", "csharp,python,javascript,go")
-      startTime?: utcDateTime;
-
-      @doc("""
-        The latest time from which to include metrics. This must be at least two hours
-        before the current time. If not specified this defaults to the end time of the
-        last aggregation interval currently available.
-        """)
-      @query
-      endtime?: utcDateTime;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
+      ...CommonListParameters;
+      ...ListPoolUsageMetricsParameters;
     },
     BatchPoolListUsageMetricsResult
   >;
@@ -109,12 +179,10 @@ interface Pools {
     to Microsoft Support engineers.
     """)
   @route("/pools")
-  @clientName("createPoolInternal", "java")
-  createPool is CreateOperation<
+  createPool is CreateOperationNew<
     {
-      @bodyRoot
-      @doc("The Pool to be created.")
-      pool: BatchPoolCreateContent;
+      ...CommonJsonParameters;
+      ...CreatePoolParameters;
     },
     {}
   >;
@@ -122,26 +190,10 @@ interface Pools {
   @summary("Lists all of the Pools which be mounted.")
   @doc("Lists all of the Pools which be mounted.")
   @route("/pools")
-  @clientName("listPoolsInternal", "java")
-  listPools is ListOperation<
+  listPools is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListPoolsParameters;
     },
     BatchPoolListResult
   >;
@@ -169,7 +221,7 @@ interface Pools {
   @route("/pools/{poolId}")
   @clientName("poolExistsInternal", "java")
   poolExists is ResourceInfoOperationWithAdditionalResponse<
-    BatchClientRequestHeaders & BatchPoolHeaders,
+    CommonParameters & BatchPoolHeaders,
     PoolDoesNotExistResponseHeaders,
     PoolDoesExistResponseHeaders
   >;
@@ -212,12 +264,10 @@ interface Pools {
   @summary("Disables automatic scaling for a Pool.")
   @doc("Disables automatic scaling for a Pool.")
   @route("/pools/{poolId}/disableautoscale")
-  @clientName("disablePoolAutoScaleInternal", "java")
-  disablePoolAutoScale is PostOperation<
+  disablePoolAutoScale is PostOperationNew<
     {
-      @doc("The ID of the Pool on which to disable automatic scaling.")
-      @path
-      poolId: string;
+      ...CommonParameters;
+      ...DisablePoolAutoscaleParameters;
     },
     RequestSuccessResponseHeaders
   >;
@@ -345,16 +395,10 @@ interface Pools {
   @summary("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @doc("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @route("/supportedimages")
-  @clientName("listSupportedImagesInternal", "java")
-  listSupportedImages is ListOperation<
+  listSupportedImages is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
+      ...CommonListParameters;
+      ...ListSupportedImagesParameters;
     },
     BatchAccountListSupportedImagesResult
   >;
@@ -365,21 +409,90 @@ interface Pools {
     use a list query.
     """)
   @route("/nodecounts")
-  @clientName("listPoolNodeCountsInternal", "java")
-  listPoolNodeCounts is ListOperation<
+  listPoolNodeCounts is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
+      ...CommonListParameters;
+      ...ListPoolNodeCountsParameters;
     },
     BatchPoolNodeCountsListResult
   >;
 }
 
+// Job Parameter Aliases
+alias ListJobsParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+alias ListJobsFromScheduleRequiredParameters = {
+  @doc("The ID of the Job Schedule from which you want to get a list of Jobs.")
+  @path
+  jobScheduleId: string;
+};
+
+alias ListJobsFromScheduleParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+alias ListJobPreparationAndReleaseTaskStatusRequiredParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+};
+
+alias ListJobPreparationAndReleaseTaskStatusParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+};
+
+alias getJobTaskCountsParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+};
+
+// Job Interface
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 @tag("Jobs")
@@ -577,26 +690,10 @@ interface Jobs {
   @summary("Lists all of the Jobs in the specified Account.")
   @doc("Lists all of the Jobs in the specified Account.")
   @route("/jobs")
-  @clientName("listJobsInternal", "java")
-  listJobs is ListOperation<
+  listJobs is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListJobsParameters;
     },
     BatchJobListResult
   >;
@@ -604,30 +701,11 @@ interface Jobs {
   @summary("Lists the Jobs that have been created under the specified Job Schedule.")
   @doc("Lists the Jobs that have been created under the specified Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/jobs")
-  @clientName("listJobsFromScheduleInternal", "java")
-  listJobsFromSchedule is ListOperation<
+  listJobsFromSchedule is ListOperationNew<
     {
-      @doc("The ID of the Job Schedule from which you want to get a list of Jobs.")
-      @path
-      jobScheduleId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListJobsFromScheduleRequiredParameters;
+      ...ListJobsFromScheduleParameters;
     },
     BatchJobListResult
   >;
@@ -645,25 +723,11 @@ interface Jobs {
     JobPreparationTaskNotSpecified.
     """)
   @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
-  @clientName("listJobPreparationAndReleaseTaskStatusInternal", "java")
-  listJobPreparationAndReleaseTaskStatus is ListOperation<
+  listJobPreparationAndReleaseTaskStatus is ListOperationNew<
     {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
+      ...CommonListParameters;
+      ...ListJobPreparationAndReleaseTaskStatusRequiredParameters;
+      ...ListJobPreparationAndReleaseTaskStatusParameters;
     },
     BatchJobPreparationAndReleaseTaskStatusListResult
   >;
@@ -676,17 +740,43 @@ interface Jobs {
     up to date. If you need exact task counts, use a list query.
     """)
   @route("/jobs/{jobId}/taskcounts")
-  @clientName("getJobTaskCountsInternal", "java")
-  getJobTaskCounts is ReadOperation<
+  getJobTaskCounts is ReadOperationNew<
     {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
+      ...CommonParameters;
+      ...getJobTaskCountsParameters;
     },
     BatchTaskCountsResult
   >;
 }
 
+// Job Schedule Parameter Aliases
+alias CreateJobScheduleParameters = {
+  @doc("The Job Schedule to be created.")
+  @bodyRoot
+  jobSchedule: BatchJobScheduleCreateContent;
+};
+
+alias ListJobSchedulesParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+// Job Schedule Interface
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" ""
@@ -698,7 +788,7 @@ interface JobSchedules {
   @route("/jobschedules/{jobScheduleId}")
   @clientName("jobScheduleExistsInternal", "java")
   jobScheduleExists is ResourceInfoOperationWithAdditionalResponse<
-    BatchClientRequestHeaders &
+    CommonParameters &
       BatchMatchHeaders & {
         @doc("The ID of the Job Schedule which you want to check.")
         @path
@@ -845,12 +935,10 @@ interface JobSchedules {
   @summary("Creates a Job Schedule to the specified Account.")
   @doc("Creates a Job Schedule to the specified Account.")
   @route("/jobschedules")
-  @clientName("createJobScheduleInternal", "java")
-  createJobSchedule is CreateOperation<
+  createJobSchedule is CreateOperationNew<
     {
-      @doc("The Job Schedule to be created.")
-      @bodyRoot
-      jobSchedule: BatchJobScheduleCreateContent;
+      ...CommonJsonParameters;
+      ...CreateJobScheduleParameters;
     },
     {}
   >;
@@ -858,30 +946,124 @@ interface JobSchedules {
   @summary("Lists all of the Job Schedules in the specified Account.")
   @doc("Lists all of the Job Schedules in the specified Account.")
   @route("/jobschedules")
-  @clientName("listJobSchedulesInternal", "java")
-  listJobSchedules is ListOperation<
+  listJobSchedules is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListJobSchedulesParameters;
     },
     BatchJobScheduleListResult
   >;
 }
+
+// Task Parameter Aliases
+alias CreateTaskRequiredParameters = {
+  @doc("The ID of the Job to which the Task is to be created.")
+  @path
+  jobId: string;
+
+  @doc("The Task to be created.")
+  @bodyRoot
+  task: BatchTaskCreateContent;
+};
+
+alias ListTasksRequiredParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+};
+
+alias ListTasksParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+alias CreateTaskCollectionParameters = {
+  @doc("The ID of the Job to which the Task collection is to be added.")
+  @path
+  jobId: string;
+
+  @doc("The Tasks to be added.")
+  @bodyRoot
+  taskCollection: BatchTaskGroup;
+};
+
+alias ListSubTasksRequiredParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+
+  @doc("The ID of the Task.")
+  @path
+  taskId: string;
+};
+
+alias ListSubTasksParameters = {
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+};
+
+alias ListTaskFilesRequiredParameters = {
+  @doc("The ID of the Job that contains the Task.")
+  @path
+  jobId: string;
+
+  @doc("The ID of the Task whose files you want to list.")
+  @path
+  taskId: string;
+};
+
+alias ListTaskFilesOptionalParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-task-files.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("""
+    Whether to list children of the Task directory. This parameter can be used in
+    combination with the filter parameter to list specific type of files.
+    """)
+  @query
+  recursive?: boolean;
+};
+
+alias DeleteTaskFileOptionalParameters = {
+  @doc("""
+    Whether to delete children of a directory. If the filePath parameter represents
+    a directory instead of a file, you can set recursive to true to delete the
+    directory and all of the files and subdirectories in it. If recursive is false
+    then the directory must be empty or deletion will fail.
+    """)
+  @query
+  recursive?: boolean;
+};
+
+alias DeleteTaskFileResponse = BatchClientResponseHeaders & {
+  @doc("A process exit code.")
+  @statusCode
+  code: "200";
+};
+
+// Task Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -895,16 +1077,10 @@ interface Tasks {
     the Batch service and left in whatever state it was in at that time.
     """)
   @route("/jobs/{jobId}/tasks")
-  @clientName("createTaskInternal", "java")
-  createTask is CreateOperation<
+  createTask is CreateOperationNew<
     {
-      @doc("The ID of the Job to which the Task is to be created.")
-      @path
-      jobId: string;
-
-      @doc("The Task to be created.")
-      @bodyRoot
-      task: BatchTaskCreateContent;
+      ...CommonJsonParameters;
+      ...CreateTaskRequiredParameters;
     },
     {}
   >;
@@ -916,30 +1092,11 @@ interface Tasks {
     information about subtasks.
     """)
   @route("/jobs/{jobId}/tasks")
-  @clientName("listTasksInternal", "java")
-  listTasks is ListOperation<
+  listTasks is ListOperationNew<
     {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListTasksRequiredParameters;
+      ...ListTasksParameters;
     },
     BatchTaskListResult
   >;
@@ -962,16 +1119,10 @@ interface Tasks {
     service and left in whatever state it was in at that time.
     """)
   @route("/jobs/{jobId}/addtaskcollection")
-  @clientName("createTaskCollectionInternal", "java")
-  createTaskCollection is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Job to which the Task collection is to be added.")
-      @path
-      jobId: string;
-
-      @doc("The Tasks to be added.")
-      @bodyRoot
-      taskCollection: BatchTaskGroup;
+  createTaskCollection is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...CreateTaskCollectionParameters;
     },
     BatchTaskAddCollectionResult
   >;
@@ -1061,21 +1212,11 @@ interface Tasks {
     """)
   @doc("If the Task is not a multi-instance Task then this returns an empty collection.")
   @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
-  @clientName("listSubTasksInternal", "java")
-  listSubTasks is ReadOperation<
+  listSubTasks is ReadOperationNew<
     {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
-
-      @doc("The ID of the Task.")
-      @path
-      taskId: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
+      ...CommonParameters;
+      ...ListSubTasksRequiredParameters;
+      ...ListSubTasksParameters;
     },
     BatchTaskListSubtasksResult
   >;
@@ -1132,23 +1273,13 @@ interface Tasks {
   @summary("Deletes the specified Task file from the Compute Node where the Task ran.")
   @doc("Deletes the specified Task file from the Compute Node where the Task ran.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
-  @clientName("deleteTaskFileInternal", "java")
-  deleteTaskFile is DeleteOperation<
-    BatchTaskFileClientPathContent & {
-      @doc("""
-        Whether to delete children of a directory. If the filePath parameter represents
-        a directory instead of a file, you can set recursive to true to delete the
-        directory and all of the files and subdirectories in it. If recursive is false
-        then the directory must be empty or deletion will fail.
-        """)
-      @query
-      recursive?: boolean;
+  deleteTaskFile is DeleteOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchTaskFileClientPathContent;
+      ...DeleteTaskFileOptionalParameters;
     },
-    BatchClientResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode
-      code: "200";
-    }
+    DeleteTaskFileResponse
   >;
 
   @doc("Returns the content of the specified Task file.")
@@ -1186,35 +1317,32 @@ interface Tasks {
   @summary("Lists the files in a Task's directory on its Compute Node.")
   @doc("Lists the files in a Task's directory on its Compute Node.")
   @route("/jobs/{jobId}/tasks/{taskId}/files")
-  @clientName("listTaskFilesInternal", "java")
-  listTaskFiles is ListOperation<
+  listTaskFiles is ListOperationNew<
     {
-      @doc("The ID of the Job that contains the Task.")
-      @path
-      jobId: string;
-
-      @doc("The ID of the Task whose files you want to list.")
-      @path
-      taskId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-task-files.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("""
-        Whether to list children of the Task directory. This parameter can be used in
-        combination with the filter parameter to list specific type of files.
-        """)
-      @query
-      recursive?: boolean;
+      ...CommonListParameters;
+      ...ListTaskFilesRequiredParameters;
+      ...ListTaskFilesOptionalParameters;
     },
     BatchNodeFileListResult
   >;
 }
+
+// Nodes Parameter Aliases
+alias CreateNodeUserRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the machine on which you want to create a user Account.")
+  @path
+  nodeId: string;
+
+  @doc("The options to use for creating the user.")
+  @bodyRoot
+  user: BatchNodeUserCreateContent;
+};
+
+// Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -1227,20 +1355,10 @@ interface Nodes {
     running state.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/users")
-  @clientName("createNodeUserInternal", "java")
-  createNodeUser is CreateOperation<
+  createNodeUser is CreateOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the machine on which you want to create a user Account.")
-      @path
-      nodeId: string;
-
-      @doc("The options to use for creating the user.")
-      @bodyRoot
-      user: BatchNodeUserCreateContent;
+      ...CommonJsonParameters;
+      ...CreateNodeUserRequiredParameters;
     },
     {}
   >;
