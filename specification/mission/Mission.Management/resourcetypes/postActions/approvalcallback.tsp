@@ -16,7 +16,7 @@ namespace Microsoft.Mission;
 model ApprovalCallbackRequest {
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Resource Id of the item being approved or rejected")
-  resourceId: string;
+  resourceId: armResourceIdentifier;
 
   @doc("Resource request action indicating action which needed to be performed upon calling approval-callback post action")
   resourceRequestAction: "Create" | "Delete" | "Update" | "Reset" | string;

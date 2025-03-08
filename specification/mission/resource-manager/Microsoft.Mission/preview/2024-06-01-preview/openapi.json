@@ -4267,6 +4267,7 @@
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Resource Id of the item being approved or rejected"
         },
         "resourceRequestAction": {
@@ -4453,6 +4454,11 @@
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
@@ -6024,7 +6030,7 @@
       "description": "Principal for maintenance mode or role assignments",
       "properties": {
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The object id associated with the principal"
         },
         "type": {

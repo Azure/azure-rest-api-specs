@@ -5098,7 +5098,7 @@
       "description": "Approver Metadata for approvals request.",
       "properties": {
         "approverEntraId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "EntraId of the approver"
         },
         "actionPerformed": {
@@ -5120,6 +5120,11 @@
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
@@ -6686,7 +6691,7 @@
       "description": "Approver Metadata for approvals request.",
       "properties": {
         "approverEntraId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "EntraId of the approver"
         }
       },
@@ -6711,7 +6716,7 @@
       "description": "Principal for maintenance mode or role assignments",
       "properties": {
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The object id associated with the principal"
         },
         "type": {
@@ -6869,7 +6874,7 @@
       "description": "Role assignment item that indicates which principals should be assigned this role definition",
       "properties": {
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Role definition identifier"
         },
         "principals": {

@@ -8,6 +8,7 @@ import "../shared/provisioningstate.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 
 @doc("Microsoft Mission Resource Provider management API.")
@@ -68,7 +69,7 @@ model RequestMetadata {
 @doc("Approver Metadata for approvals request.")
 model Approver {
   @doc("EntraId of the approver")
-  approverEntraId: string;
+  approverEntraId: uuid;
 
   @doc("Action Performed by approver")
   actionPerformed: ActionPerformed;

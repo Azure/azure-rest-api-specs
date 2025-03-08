@@ -127,7 +127,7 @@ union ApprovalPolicy {
 @doc("Approver Metadata for approvals request.")
 model MandatoryApprover {
   @doc("EntraId of the approver")
-  approverEntraId: string;
+  approverEntraId: Azure.Core.uuid;
 }
 
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
