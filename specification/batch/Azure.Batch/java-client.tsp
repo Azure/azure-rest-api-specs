@@ -423,6 +423,31 @@ op listSubTasksCustomization is Azure.Batch.ReadOperationNew<
 
 @@override(Azure.Batch.Tasks.listSubTasks, listSubTasksCustomization, "java");
 
+// Delete Task File Operation
+@doc("Optional parameters for Delete Task File operation.")
+model DeleteBatchTaskFileOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.DeleteTaskFileOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Delete Task File operation.")
+@route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
+op deleteTaskFileCustomization is Azure.Batch.DeleteOperationNew<
+  {
+    ...Azure.Batch.BatchTaskFileClientPathContent;
+
+    @doc("Optional parameters for Delete Task File operation.")
+    options?: DeleteBatchTaskFileOptions;
+  },
+  Azure.Batch.DeleteTaskFileResponse
+>;
+
+@@override(Azure.Batch.Tasks.deleteTaskFile,
+  deleteTaskFileCustomization,
+  "java"
+);
+
 // List Task Files Operation
 @doc("Optional parameters for List Task Files operation.")
 model ListBatchTaskFilesOptions {

@@ -98,6 +98,14 @@ op DeleteOperation<
   BatchError
 >;
 
+// TODO: Once we migrate all DeleteOperation methods in routes.tsp to use this, delete original DeleteOperation (above) and rename this to DeleteOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@delete
+op DeleteOperationNew<
+  TFilter extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model
+> is Azure.Core.RpcOperation<TFilter, TResponse, NoFilter, BatchError>;
+
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @post
 op CreateOperation<TResource, TResponse> is RpcOperation<

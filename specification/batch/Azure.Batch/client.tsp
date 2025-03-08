@@ -194,7 +194,6 @@ interface BatchClient {
 @@clientName(BatchClient.replaceTask, "replaceTaskInternal", "java");
 @@clientName(BatchClient.terminateTask, "terminateTaskInternal", "java");
 @@clientName(BatchClient.reactivateTask, "reactivateTaskInternal", "java");
-@@clientName(BatchClient.deleteTaskFile, "deleteTaskFileInternal", "java");
 @@clientName(BatchClient.getTaskFile, "getTaskFileInternal", "java");
 @@clientName(BatchClient.getTaskFileProperties,
   "getTaskFilePropertiesInternal",
