@@ -71,8 +71,9 @@
   "paths": {
     "/traffic/incident": {
       "get": {
-        "summary": "Use to get information on traffic incidents inside a given bounding box.",
-        "description": "\n\nThe `Traffic Incident` API is an HTTP `GET` request that provides information on traffic incidents inside a given bounding box.",
+        "summary": "The Traffic Incident API provides traffic incidents like construction, traffic congestion and accidents, etc. within a bounding box. It also provides traffic metadata for detailed information about each incident.",
+        : null,
+        "description": "\n\nThe API provides a GeoJSON feature collection of traffic incidents. Each incident includes two point features: the location where you encounter the incident and the end location of a traffic incident like the end of a construction zone. For traffic incident coverage by country/region, see [traffic coverage](https://learn.microsoft.com/azure/azure-maps/traffic-coverage). ",
         "operationId": "Traffic_GetTrafficIncident",
         "x-ms-examples": {
           "Request information about a traffic incident": {
@@ -89,7 +90,7 @@
           {
             "name": "incidentType",
             "in": "query",
-            "description": "Specifies the type of traffic incident to return. Multiple incident types are allowed. \n\nFor example, '&incidentType=Accident' or '&incidentType=Accident,Construction'. \n\nWill return all the available incident types if not specified.",
+            "description": "Specifies the type of traffic incident to be returned. Multiple incident types within a single request are supported. If not specified, the results will include all incident types within the provided bounding box. \n\nExample, '&incidentType=Accident' or '&incidentType=Accident,Construction'. \n\nWill return all the available incident types if not specified.",
             "required": false,
             "type": "string",
             "enum": [
@@ -159,7 +160,7 @@
           {
             "name": "bbox",
             "in": "query",
-            "description": "A bounding box for the area of interest. It must conform to GeoJSON format [minLon, minLat, maxLon, maxLat].\n\nEither height or width of the area bounding box should not smaller than 12m.\n\nEither height or width of the area bounding box should not exceed 500km. A maximum limit of 30 degrees for either width or height is enforced. (maxLon - minLon should <= 30 and maxLat - minLat should <= 30).",
+            "description": "A rectangular area for the area of interest on the Earth. The sides of the rectangles are defined by longitude and latitude values. It must conform to the GeoJSON format [minLon, minLat, maxLon, maxLat]. For more information, see RFC 7946, Section 5. \n\n The height or width of the bounding box should be at least 12m and not exceed 500,000m. A maximum limit of 30 degrees for either width or height is enforced. (maxLon - minLon should <= 30 and maxLat - minLat should <= 30). \n\nExample: bbox=-105,37,-94,45"
             "required": true,
             "type": "array",
             "items": {
@@ -191,6 +192,7 @@
   "definitions": {
     "IncidentTypeEnum": {
       "type": "string",
+      "description": "Specifies the type of traffic incident. This can be used to request and differentiate between various types of incidents. ",
       "enum": [
         "Accident",
         "Congestion",
@@ -290,31 +292,31 @@
       }
     },
     "TrafficIncidentFeatureProperties": {
-      "description": "Traffic Incident properties.",
+      "description": "Specifies detailed information about the traffic incidents.",
       "type": "object",
       "properties": {
         "description": {
-          "description": "A description of the incident. \n\n Examples: \n\n• W 95th St between Switzer Rd and Bluejacket Dr - construction \n\n• WB Johnson Dr at I-435 - bridge repair",
+          "description": "A description of the incident that includes the road name and the event impacting the traffic flow. \n\n Examples: \n\n• W 95th St between Switzer Rd and Bluejacket Dr - construction \n\n• WB Johnson Dr at I-435 - bridge repair",
           "type": "string"
         },
         "startTime": {
-          "description": "The date time the incident occurred. The time is specified in the format of RFC3339.",
+          "description": "The date and time in UTC when the incident occurred, formatted as a dateTime value as defined in [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).",
           "type": "string"
         },
         "endTime": {
-          "description": "The date time that the traffic incident will end. The time is specified in the format of RFC3339.",
+          "description": "The date and time in UTC when the traffic incident will end, formatted as a dateTime value as defined in [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).",
           "type": "string"
         },
-        "lastModified": {
-          "description": "The date time the incident information was last updated. The time is specified in the format of RFC3339.",
+        "lastModifiedTime": {
+          "description": "The date and time in UTC when the incident information was last updated, formatted as a dateTime value as defined in [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).",
           "type": "string"
         },
         "isRoadClosed": {
-          "description": "A value of 'true' indicates that there is a road closure.",
+          "description": "A value of `true` indicates that there is a road closure.",
           "type": "boolean"
         },
         "severity": {
-          "description": "Specifies the level of importance of incident.\n\n - 1: LowImpact \n\n - 2: Minor \n\n - 3: Moderate \n\n- 4: Serious",
+          "description": "Specifies the level of importance of the incident.\n\n - 1: LowImpact \n\n - 2: Minor \n\n - 3: Moderate \n\n- 4: Serious",
           "type": "integer",
           "format": "int32"
         },
@@ -322,27 +324,27 @@
           "$ref": "#/definitions/IncidentTypeEnum"
         },
         "title": {
-          "description": "Names and direction of affected roads.",
+          "description": "Specifies the road names and direction of affected roads.",
           "type": "string"
         },
         "delay": {
-          "description": "Delay.",
+          "description": "The delay caused by the incident in seconds. If no delay or not applicable, it returns zero.",
           "type": "number",
           "format": "double"
         },
         "endPoint": {
-          "description": "endPoint of the traffic incident, In the Point format of GeoJson",
+          "description": "A GeoJson Point object that specified the end location of a traffic incident such as end of a construction zone. \n\n This location is part of the incident properties object and by default, cannot be interpreted by parsers for display on the map.",
           "type": "object"
         },
         "isTrafficJam": {
-          "description": "Flag indicating that the area of road covered by this incident is experiencing abnormal traffic conditions resulting in non-typical delays.",
+          "description": "A value of `true` indicates that the area of road covered by this incident is experiencing abnormal traffic conditions resulting in non-typical delays.",
           "type": "boolean"
         }
       }
     },
     "TrafficIncidentFeaturesItem": {
       "type": "object",
-      "description": "GeoJSON feature object that contains Geometry object and additional properties of traffic incidents.",
+      "description": "Specifies the traffic incident GeoJSON feature object including the geometry and additional properties.",
       "allOf": [
         {
           "type": "object",
@@ -367,7 +369,7 @@
       ]
     },
     "TrafficIncidentResponse": {
-      "description": "This object is returned from a successful Traffic incident call",
+      "description": "A GeoJSON feature collection object that contains a list of traffic incidents features.",
       "type": "object",
       "properties": {
         "type": {
