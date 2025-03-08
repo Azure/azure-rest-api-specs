@@ -36,7 +36,6 @@ import { TsvTestHost } from "./tsv-test-host.js";
 import { join } from "path";
 import { strictEqual } from "node:assert";
 import { stringify } from "yaml";
-import { Suppression } from "suppressions";
 
 export function createParameterExample(...pairs: { key: string; value: string | boolean | {} }[]) {
   const obj: Record<string, any> = { parameters: {} };
