@@ -1046,6 +1046,23 @@ alias ListTaskFilesOptionalParameters = {
   recursive?: boolean;
 };
 
+alias DeleteTaskFileOptionalParameters = {
+  @doc("""
+    Whether to delete children of a directory. If the filePath parameter represents
+    a directory instead of a file, you can set recursive to true to delete the
+    directory and all of the files and subdirectories in it. If recursive is false
+    then the directory must be empty or deletion will fail.
+    """)
+  @query
+  recursive?: boolean;
+};
+
+alias DeleteTaskFileResponse = BatchClientResponseHeaders & {
+  @doc("A process exit code.")
+  @statusCode
+  code: "200";
+};
+
 // Task Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1256,23 +1273,13 @@ interface Tasks {
   @summary("Deletes the specified Task file from the Compute Node where the Task ran.")
   @doc("Deletes the specified Task file from the Compute Node where the Task ran.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
-  @clientName("deleteTaskFileInternal", "java")
-  deleteTaskFile is DeleteOperation<
-    BatchTaskFileClientPathContent & {
-      @doc("""
-        Whether to delete children of a directory. If the filePath parameter represents
-        a directory instead of a file, you can set recursive to true to delete the
-        directory and all of the files and subdirectories in it. If recursive is false
-        then the directory must be empty or deletion will fail.
-        """)
-      @query
-      recursive?: boolean;
+  deleteTaskFile is DeleteOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchTaskFileClientPathContent;
+      ...DeleteTaskFileOptionalParameters;
     },
-    BatchClientResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode
-      code: "200";
-    }
+    DeleteTaskFileResponse
   >;
 
   @doc("Returns the content of the specified Task file.")
