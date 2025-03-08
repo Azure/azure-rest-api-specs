@@ -10,6 +10,9 @@ jobs:
   - template: /eng/pipelines/templates/variables/globals.yml
 
   steps:
+  - checkout: self
+    fetchDepth: 1
+
   - template: /eng/pipelines/templates/steps/npm-install.yml
 
   - pwsh: |
