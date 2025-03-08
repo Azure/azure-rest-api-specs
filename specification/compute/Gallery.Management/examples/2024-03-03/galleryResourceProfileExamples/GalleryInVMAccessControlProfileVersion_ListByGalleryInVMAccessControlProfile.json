@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2024-03-03",
+    "galleryName": "myGalleryName",
+    "inVMAccessControlProfileName": "myInVMAccessControlProfileName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://svchost:99/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/inVMAccessControlProfiles/myInVMAccessControlProfileName/versions?$skiptoken={token}/Subscriptions/{subscriptionId}/ResourceGroups/myResourceGroup/galleries/myGalleryName/inVMAccessControlProfiles/myInVMAccessControlProfileName/versions/myInVMAccessControlProfileVersionName",
+        "value": [
+          {
+            "name": "1.0.0",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery/inVMAccessControlProfiles/myInVMAccessControlProfileName/versions/1.0.0",
+            "location": "West US",
+            "properties": {
+              "defaultAccess": "Allow",
+              "excludeFromLatest": false,
+              "mode": "Audit",
+              "provisioningState": "Succeeded",
+              "publishedDate": "2024-01-01T00:00:00Z",
+              "rules": {
+                "identities": [
+                  {
+                    "name": "WinPA",
+                    "exePath": "C:\\Windows\\System32\\cscript.exe",
+                    "groupName": "Administrators",
+                    "processName": "cscript",
+                    "userName": "SYSTEM"
+                  }
+                ],
+                "privileges": [
+                  {
+                    "name": "GoalState",
+                    "path": "/machine",
+                    "queryParameters": {
+                      "comp": "goalstate"
+                    }
+                  }
+                ],
+                "roleAssignments": [
+                  {
+                    "identities": [
+                      "WinPA"
+                    ],
+                    "role": "Provisioning"
+                  }
+                ],
+                "roles": [
+                  {
+                    "name": "Provisioning",
+                    "privileges": [
+                      "GoalState"
+                    ]
+                  }
+                ]
+              },
+              "targetLocations": [
+                {
+                  "name": "West US"
+                },
+                {
+                  "name": "South Central US"
+                },
+                {
+                  "name": "East US"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "GalleryInVMAccessControlProfileVersions_ListByGalleryInVMAccessControlProfile",
+  "title": "List gallery inVMAccessControlProfile versions in a gallery inVMAccessControlProfile."
+}

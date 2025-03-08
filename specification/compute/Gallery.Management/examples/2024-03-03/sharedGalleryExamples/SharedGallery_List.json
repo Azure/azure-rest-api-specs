@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2024-03-03",
+    "location": "myLocation",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://svchost:99/subscriptions/{subscriptionId}/providers/Microsoft.Compute/sharedGalleries?$skiptoken={token}/Subscriptions/{subscriptionId}/galleries/galleryUniqueName",
+        "value": [
+          {
+            "name": "galleryUniqueName",
+            "identifier": {
+              "uniqueId": "/SharedGalleries/galleryUniqueName"
+            },
+            "location": "myLocation",
+            "properties": {
+              "artifactTags": {
+                "ShareTag-Official1PGallery": "Official1PGallery"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SharedGalleries_List",
+  "title": "List shared galleries."
+}

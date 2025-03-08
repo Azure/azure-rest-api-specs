@@ -1,87 +1,89 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-03-03",
+    "galleryImageName": "myGalleryImageName",
     "galleryName": "myGalleryName",
-    "galleryImageName": "myGalleryImageName"
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "http://svchost:99/subscriptions/subscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/images/myGalleryImageName/versions?$skiptoken=token/Subscriptions/subscriptionId/ResourceGroups/myResourceGroup/galleries/myGalleryName/images/myGalleryImageName/versions/myGalleryImageVersionName",
         "value": [
           {
+            "name": "1.0.0",
             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/locations/westus/Galleries/myGalleryName/Images/myGalleryImageName/Versions/1.0.0",
+            "location": "West US",
             "properties": {
+              "provisioningState": "Succeeded",
               "publishingProfile": {
+                "publishedDate": "2018-01-01T00:00:00Z",
+                "replicaCount": 1,
+                "storageAccountType": "Standard_LRS",
                 "targetRegions": [
                   {
                     "name": "West US",
-                    "regionalReplicaCount": 1,
-                    "storageAccountType": "Standard_LRS",
                     "encryption": {
-                      "osDiskImage": {
-                        "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
-                      },
                       "dataDiskImages": [
                         {
-                          "lun": 0,
-                          "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet"
+                          "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet",
+                          "lun": 0
                         },
                         {
-                          "lun": 1,
-                          "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                          "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet",
+                          "lun": 1
                         }
-                      ]
+                      ],
+                      "osDiskImage": {
+                        "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                      }
                     },
-                    "excludeFromLatest": false
+                    "excludeFromLatest": false,
+                    "regionalReplicaCount": 1,
+                    "storageAccountType": "Standard_LRS"
                   },
                   {
                     "name": "East US",
+                    "excludeFromLatest": false,
                     "regionalReplicaCount": 2,
-                    "storageAccountType": "Standard_LRS",
-                    "excludeFromLatest": false
-                  }
-                ],
-                "replicaCount": 1,
-                "publishedDate": "2018-01-01T00:00:00Z",
-                "storageAccountType": "Standard_LRS"
-              },
-              "storageProfile": {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
-                },
-                "osDiskImage": {
-                  "sizeInGB": 10,
-                  "hostCaching": "ReadOnly"
-                },
-                "dataDiskImages": [
-                  {
-                    "lun": 1,
-                    "sizeInGB": 10,
-                    "hostCaching": "None"
+                    "storageAccountType": "Standard_LRS"
                   }
                 ]
               },
               "safetyProfile": {
                 "allowDeletionOfReplicatedLocations": false,
-                "reportedForPolicyViolation": true,
+                "blockDeletionBeforeEndOfLife": false,
                 "policyViolations": [
                   {
                     "category": "ImageFlaggedUnsafe",
                     "details": "This is the policy violation details."
                   }
                 ],
-                "blockDeletionBeforeEndOfLife": false
+                "reportedForPolicyViolation": true
               },
-              "provisioningState": "Succeeded"
-            },
-            "location": "West US",
-            "name": "1.0.0"
+              "storageProfile": {
+                "dataDiskImages": [
+                  {
+                    "hostCaching": "None",
+                    "lun": 1,
+                    "sizeInGB": 10
+                  }
+                ],
+                "osDiskImage": {
+                  "hostCaching": "ReadOnly",
+                  "sizeInGB": 10
+                },
+                "source": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+                }
+              }
+            }
           }
-        ],
-        "nextLink": "http://svchost:99/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/images/myGalleryImageName/versions?$skiptoken={token}/Subscriptions/{subscriptionId}/ResourceGroups/myResourceGroup/galleries/myGalleryName/images/myGalleryImageName/versions/myGalleryImageVersionName"
+        ]
       }
     }
-  }
+  },
+  "operationId": "GalleryImageVersions_ListByGalleryImage",
+  "title": "List gallery image versions in a gallery image definition."
 }
