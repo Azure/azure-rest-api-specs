@@ -469,3 +469,27 @@ op listTaskFilesCustomization is Azure.Batch.ListOperationNew<
 >;
 
 @@override(Azure.Batch.Tasks.listTaskFiles, listTaskFilesCustomization, "java");
+
+// Create Node User Operation
+@doc("Optional parameters for Create Node User operation.")
+model CreateBatchNodeUserOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@doc("Custom override for Create Node User operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/users")
+op createNodeUserCustomization is Azure.Batch.CreateOperationNew<
+  {
+    ...Azure.Batch.CreateNodeUserRequiredParameters;
+
+    @doc("Optional parameters for Create Node User operation.")
+    options?: CreateBatchNodeUserOptions;
+  },
+  void
+>;
+
+@@override(Azure.Batch.Nodes.createNodeUser,
+  createNodeUserCustomization,
+  "java"
+);
