@@ -100,7 +100,7 @@ interface VirtualMachineScaleSetExtensions {
   "The name of the VM scale set extension."
 );
 @@doc(VirtualMachineScaleSetExtension.properties,
-  "Describes the properties of a Virtual Machine Scale Set Extension THREE."
+  "Describes the properties of a Virtual Machine Scale Set Extension."
 );
 @@doc(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create VM scale set Extension operation."

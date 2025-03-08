@@ -121,6 +121,6 @@ interface Snapshots {
 @@doc(Snapshots.update::parameters.properties,
   "Snapshot object supplied in the body of the Patch snapshot operation."
 );
-@@doc(Snapshots.begingetAccess::parameters.body,
+@@doc(Snapshots.grantAccess::parameters.body,
   "Access data object supplied in the body of the get snapshot access operation."
 );
