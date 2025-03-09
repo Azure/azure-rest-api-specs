@@ -5,7 +5,7 @@
  *   isFullCompatible: false
  *   guessResourceKey: false
  * Version: 0.10.9
- * Date: 2025-03-05T11:31:44.223Z
+ * Date: 2025-03-09T15:37:55.875Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -26,9 +26,12 @@ using TypeSpec.Versioning;
 /**
  * The Microsoft.MySQLDiscovery Rest API spec.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MySQL is a technical term cannot follow pascal case"
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
-@service({})
+@service(#{
+  title: "Azure API for MySQLDiscovery",
+})
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.MySQLDiscovery;
@@ -44,3 +47,5 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_09_30_preview: "2024-09-30-preview",
 }
+
+interface Operations extends Azure.ResourceManager.Operations {}

@@ -94,11 +94,13 @@ union Edition {
 /**
  * List of Sites.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MySQL is a technical term cannot follow pascal case"
 model MySQLSiteList is Azure.Core.Page<MySQLSite>;
 
 /**
  * MySQL Site properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MySQL is a technical term cannot follow pascal case"
 model MySQLSiteProperties {
   /**
    * The mapped master Site Id.
@@ -121,7 +123,7 @@ model MySQLSiteProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -147,35 +149,38 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
 /**
  * Object containing tags updates for patch operations.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MySQL is a technical term cannot follow pascal case"
 model MySQLSitesResourcePatch {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For Backward compatibility"
   tags?: Record<string>;
 
   /**
@@ -187,11 +192,13 @@ model MySQLSitesResourcePatch {
 /**
  * List of Servers.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MySQL is a technical term cannot follow pascal case"
 model MySQLServerList is Azure.Core.Page<MySQLServer>;
 
 /**
  * MySQL Server properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MySQL is a technical term cannot follow pascal case"
 model MySQLServerProperties {
   /**
    * The Server IP/host name.
@@ -250,12 +257,14 @@ model MySQLServerProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * Resource labels.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For Backward compatibility"
   labels?: Record<string>;
 }
 
@@ -313,10 +322,13 @@ model Error {
 /**
  * Object containing tags updates for patch operations.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MySQL is a technical term cannot follow pascal case"
 model MySQLServerResourcePatch {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For Backward compatibility"
   tags?: Record<string>;
 
   /**
@@ -347,7 +359,7 @@ model ErrorSummariesProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -373,6 +385,6 @@ model SummariesProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

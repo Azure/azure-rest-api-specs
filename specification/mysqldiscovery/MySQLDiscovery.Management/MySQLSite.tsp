@@ -13,6 +13,7 @@ namespace Microsoft.MySQLDiscovery;
 /**
  * The MySQLSite resource definition.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MySQL is a technical term cannot follow pascal case"
 model MySQLSite
   is Azure.ResourceManager.TrackedResource<MySQLSiteProperties, false> {
   ...ResourceNameParameter<
@@ -25,9 +26,12 @@ model MySQLSite
   /**
    * The extended location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For Backward compatibility"
   extendedLocation: ExtendedLocation;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MySQL is a technical term cannot follow pascal case"
 @armResourceOperations
 interface MySQLSites {
   /**
@@ -43,7 +47,7 @@ interface MySQLSites {
   /**
    * Patch the MySQLSites resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     MySQLSite,
     PatchModel = MySQLSitesResourcePatch
@@ -55,7 +59,7 @@ interface MySQLSites {
   delete is ArmResourceDeleteSync<MySQLSite>;
 
   /**
-   * Lits the MySQLSites resource in a resource group.
+   * Lists the MySQLSites resource in a resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     MySQLSite,
