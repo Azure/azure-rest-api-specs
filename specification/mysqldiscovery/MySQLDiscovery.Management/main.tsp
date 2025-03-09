@@ -29,9 +29,7 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MySQL is a technical term cannot follow pascal case"
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
-@service(#{
-  title: "Azure API for MySQLDiscovery",
-})
+@service(#{ title: "Azure API for MySQLDiscovery" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.MySQLDiscovery;
