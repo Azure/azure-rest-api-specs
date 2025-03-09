@@ -15,6 +15,7 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits, ErrorResponse>;
 
+@tag("Catalogs")
 interface CatalogsOperations {
   /**
    * Returns a paginated list of Catalog resources.
@@ -41,6 +42,7 @@ interface CatalogsOperations {
   delete is Operations.ResourceDelete<Catalog>;
 }
 
+@tag("Collections")
 interface CollectionsOperations {
   /**
    * Returns a paginated list of Collection resources.
@@ -67,6 +69,7 @@ interface CollectionsOperations {
   delete is Operations.ResourceDelete<Collection>;
 }
 
+@tag("File")
 interface FileOperations {
   /**
    * Deletes file.
@@ -85,13 +88,13 @@ interface FileOperations {
   download is Operations.ResourceCollectionAction<
     FileResource,
     File,
-    NoContentResponse,
+    FileDownloadResponse,
     RequestHeadersTrait<{
       /**
        * Accept header
        */
       @header
-      accept: "application/json, application/octet-stream";
+      accept: "application/json" | "application/octet-stream" | string;
     }>
   >;
 
@@ -102,6 +105,7 @@ interface FileOperations {
   upload is Operations.ResourceCollectionAction<FileResource, {}, File>;
 }
 
+@tag("Items")
 interface ItemsOperations {
   /**
    * Creates or updates a Item resource.
@@ -169,6 +173,7 @@ interface ItemsOperations {
   >;
 }
 
+@tag("Satellite")
 interface SatelliteOperations {
   /**
    * Fetches Satellite data.
@@ -228,6 +233,7 @@ interface SatelliteOperations {
   >;
 }
 
+@tag("Schemas")
 interface SchemasOperations {
   /**
    * Returns a paginated list of Schema resources.
@@ -254,6 +260,7 @@ interface SchemasOperations {
   delete is Operations.ResourceDelete<Schema>;
 }
 
+@tag("Solutions")
 interface SolutionsOperations {
   /**
    * Cancel Solution job Async.
@@ -262,7 +269,7 @@ interface SolutionsOperations {
   cancelJob is Operations.ResourceCollectionAction<
     SolutionResource,
     Solution,
-    SamplePartnerResponse
+    SamplePartnerOkResponse
   >;
 
   /**
@@ -272,7 +279,7 @@ interface SolutionsOperations {
   createJob is Operations.ResourceCollectionAction<
     SolutionResource,
     SolutionData,
-    SamplePartnerResponse
+    SamplePartnerAcceptedResponse
   >;
 
   /**
@@ -282,7 +289,7 @@ interface SolutionsOperations {
   getData is Operations.ResourceCollectionAction<
     SolutionResource,
     SolutionData,
-    SamplePartnerResponse
+    SamplePartnerOkResponse
   >;
 
   /**
@@ -296,6 +303,7 @@ interface SolutionsOperations {
   >;
 }
 
+@tag("Weather")
 interface WeatherOperations {
   /**
    * Returns a list of WeatherData.
