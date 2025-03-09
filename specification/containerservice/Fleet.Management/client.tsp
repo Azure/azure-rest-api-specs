@@ -3,6 +3,8 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
+@@clientName(Microsoft.ContainerService, "ContainerServiceFleetMgmt", "python");
+
 @@clientName(Microsoft.ContainerService,
   "ContainerServiceFleetManagementClient",
   "java"
