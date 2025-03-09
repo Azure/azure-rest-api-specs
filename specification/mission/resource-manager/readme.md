@@ -41,7 +41,7 @@ input-file:
 suppressions:
   - code: AvoidAnonymousTypes
     from: openapi.json
-    where: $.definitions."Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate".properties.userAssignedIdentities.additionalProperties
+    where: $.definitions['Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate'].properties.userAssignedIdentities.additionalProperties
     reason: This is an incorrect failure due to a bug in the tool (https://github.com/Azure/typespec-azure/issues/1163)
 ```
 
@@ -55,7 +55,7 @@ input-file:
 suppressions:
   - code: AvoidAnonymousTypes
     from: openapi.json
-    where: $.definitions."Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate".properties.userAssignedIdentities.additionalProperties
+    where: $.definitions['Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate'].properties.userAssignedIdentities.additionalProperties
     reason: This is an incorrect failure due to a bug in the tool (https://github.com/Azure/typespec-azure/issues/1163)
 ```
 
