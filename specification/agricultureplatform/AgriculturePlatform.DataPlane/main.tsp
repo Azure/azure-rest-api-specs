@@ -7,7 +7,6 @@
  * Version: 0.10.9
  * Date: 2025-02-17T08:52:03.812Z
  */
-
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";

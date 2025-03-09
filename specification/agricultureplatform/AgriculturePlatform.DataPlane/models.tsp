@@ -394,10 +394,10 @@ model FileResource {
  * Represents the response for a file download operation.
  */
 model FileDownloadResponse {
-  @body 
   /**
    * The binary data of the file.
    */
+  @body
   data: bytes;
 }
 /**
