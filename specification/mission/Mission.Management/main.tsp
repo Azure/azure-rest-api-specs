@@ -21,6 +21,7 @@ import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
 import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
 import "./version.tsp";
 import "./model.tsp";
+import "./routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
