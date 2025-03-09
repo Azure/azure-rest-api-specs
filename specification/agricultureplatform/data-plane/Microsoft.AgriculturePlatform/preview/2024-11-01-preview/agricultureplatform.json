@@ -43,11 +43,39 @@
       "in": "header"
     }
   },
-  "tags": [],
+  "tags": [
+    {
+      "name": "Catalogs"
+    },
+    {
+      "name": "Collections"
+    },
+    {
+      "name": "File"
+    },
+    {
+      "name": "Items"
+    },
+    {
+      "name": "Satellite"
+    },
+    {
+      "name": "Schemas"
+    },
+    {
+      "name": "Solutions"
+    },
+    {
+      "name": "Weather"
+    }
+  ],
   "paths": {
     "/catalogs": {
       "get": {
         "operationId": "CatalogsOperations_List",
+        "tags": [
+          "Catalogs"
+        ],
         "description": "Returns a paginated list of Catalog resources.",
         "parameters": [
           {
@@ -111,6 +139,9 @@
     "/catalogs/{catalogId}": {
       "get": {
         "operationId": "CatalogsOperations_Get",
+        "tags": [
+          "Catalogs"
+        ],
         "description": "Gets a specified Catalog resource.",
         "parameters": [
           {
@@ -146,6 +177,9 @@
       },
       "patch": {
         "operationId": "CatalogsOperations_CreateOrUpdate",
+        "tags": [
+          "Catalogs"
+        ],
         "description": "Creates or updates a Catalog resource.",
         "consumes": [
           "application/merge-patch+json"
@@ -162,7 +196,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "The resource instance.",
             "required": true,
@@ -199,6 +233,9 @@
       },
       "delete": {
         "operationId": "CatalogsOperations_Delete",
+        "tags": [
+          "Catalogs"
+        ],
         "description": "Deletes Catalog for given Catalog id.",
         "parameters": [
           {
@@ -233,6 +270,9 @@
     "/catalogs/{catalogId}/collections": {
       "get": {
         "operationId": "CollectionsOperations_List",
+        "tags": [
+          "Collections"
+        ],
         "description": "Returns a paginated list of Collection resources.",
         "parameters": [
           {
@@ -303,6 +343,9 @@
     "/catalogs/{catalogId}/collections/{collectionId}": {
       "get": {
         "operationId": "CollectionsOperations_Get",
+        "tags": [
+          "Collections"
+        ],
         "description": "Gets a specified Collection resource.",
         "parameters": [
           {
@@ -318,7 +361,7 @@
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Id of the Collection.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           }
@@ -345,6 +388,9 @@
       },
       "patch": {
         "operationId": "CollectionsOperations_CreateOrUpdate",
+        "tags": [
+          "Collections"
+        ],
         "description": "Creates or updates a Collection resource.",
         "consumes": [
           "application/merge-patch+json"
@@ -363,12 +409,12 @@
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Id of the Collection.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "The resource instance.",
             "required": true,
@@ -405,6 +451,9 @@
       },
       "delete": {
         "operationId": "CollectionsOperations_Delete",
+        "tags": [
+          "Collections"
+        ],
         "description": "Deletes Collection for given Collection id.",
         "parameters": [
           {
@@ -420,7 +469,7 @@
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Id of the Collection.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           }
@@ -446,6 +495,9 @@
     "/catalogs/{catalogId}/collections/{collectionId}/items/{itemId}": {
       "get": {
         "operationId": "ItemsOperations_Get",
+        "tags": [
+          "Items"
+        ],
         "description": "Gets a specified Item resource.",
         "parameters": [
           {
@@ -461,7 +513,7 @@
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Id of the Collection.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           },
@@ -495,6 +547,9 @@
       },
       "patch": {
         "operationId": "ItemsOperations_CreateOrUpdate",
+        "tags": [
+          "Items"
+        ],
         "description": "Creates or updates a Item resource.",
         "consumes": [
           "application/merge-patch+json"
@@ -513,7 +568,7 @@
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Id of the Collection.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           },
@@ -525,7 +580,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "The resource instance.",
             "required": true,
@@ -562,6 +617,9 @@
       },
       "delete": {
         "operationId": "ItemsOperations_Delete",
+        "tags": [
+          "Items"
+        ],
         "description": "Deletes Item for given Item id.",
         "parameters": [
           {
@@ -577,7 +635,7 @@
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Id of the Collection.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           },
@@ -610,6 +668,9 @@
     "/catalogs/{catalogId}/collections/{collectionId}/items:create": {
       "post": {
         "operationId": "ItemsOperations_Create",
+        "tags": [
+          "Items"
+        ],
         "description": "Creates or updates a Item resource.",
         "parameters": [
           {
@@ -625,7 +686,7 @@
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Id of the Collection.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           },
@@ -641,6 +702,12 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ItemResponse"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/ItemResponse"
             }
@@ -662,6 +729,9 @@
     "/catalogs/{catalogId}/collections/{collectionId}/items:search": {
       "post": {
         "operationId": "ItemsOperations_GetAllUnderCollection",
+        "tags": [
+          "Items"
+        ],
         "description": "Search for Items across all parties by intersecting geometry.",
         "parameters": [
           {
@@ -677,7 +747,7 @@
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Id of the Collection.",
+            "description": "Unique resource ID.",
             "required": true,
             "type": "string"
           },
@@ -726,6 +796,9 @@
     "/catalogs/{catalogId}/items:search": {
       "post": {
         "operationId": "ItemsOperations_SearchAcrossCollection",
+        "tags": [
+          "Items"
+        ],
         "description": "Search for Items across all collections.",
         "parameters": [
           {
@@ -783,6 +856,9 @@
     "/external/satellite:fetch": {
       "post": {
         "operationId": "SatelliteOperations_FetchItems",
+        "tags": [
+          "Satellite"
+        ],
         "description": "Fetches Satellite data.",
         "parameters": [
           {
@@ -842,6 +918,9 @@
     "/external/satellite:stac": {
       "post": {
         "operationId": "SatelliteOperations_SearchItems",
+        "tags": [
+          "Satellite"
+        ],
         "description": "Searches for STAC items by collection id, bbox, intersecting geometry, start\nand end datetime.",
         "parameters": [
           {
@@ -901,6 +980,9 @@
     "/external/solutions:cancel-job": {
       "post": {
         "operationId": "SolutionsOperations_CancelJob",
+        "tags": [
+          "Solutions"
+        ],
         "description": "Cancel Solution job Async.",
         "parameters": [
           {
@@ -939,6 +1021,9 @@
     "/external/solutions:create-job": {
       "post": {
         "operationId": "SolutionsOperations_CreateJob",
+        "tags": [
+          "Solutions"
+        ],
         "description": "Creates solution job async.",
         "parameters": [
           {
@@ -954,8 +1039,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/SamplePartnerResponse"
             }
@@ -977,6 +1062,9 @@
     "/external/solutions:get-data": {
       "post": {
         "operationId": "SolutionsOperations_GetData",
+        "tags": [
+          "Solutions"
+        ],
         "description": "Gets solution Data async.",
         "parameters": [
           {
@@ -1015,6 +1103,9 @@
     "/external/solutions:get-job": {
       "post": {
         "operationId": "SolutionsOperations_GetJob",
+        "tags": [
+          "Solutions"
+        ],
         "description": "Gets Solution get job response async.",
         "parameters": [
           {
@@ -1053,6 +1144,9 @@
     "/external/weather:fetch": {
       "post": {
         "operationId": "WeatherOperations_Get",
+        "tags": [
+          "Weather"
+        ],
         "description": "Returns a list of WeatherData.",
         "parameters": [
           {
@@ -1091,6 +1185,9 @@
     "/file:delete": {
       "post": {
         "operationId": "FileOperations_Delete",
+        "tags": [
+          "File"
+        ],
         "description": "Deletes file.",
         "parameters": [
           {
@@ -1126,6 +1223,9 @@
     "/file:download": {
       "post": {
         "operationId": "FileOperations_Download",
+        "tags": [
+          "File"
+        ],
         "description": "Downloads and returns file Stream as response for the given input filePath.",
         "parameters": [
           {
@@ -1138,10 +1238,11 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/json, application/octet-stream"
+              "application/json",
+              "application/octet-stream"
             ],
             "x-ms-enum": {
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           {
@@ -1154,8 +1255,12 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1174,6 +1279,9 @@
     "/file:upload": {
       "post": {
         "operationId": "FileOperations_Upload",
+        "tags": [
+          "File"
+        ],
         "description": "Uploads a file.",
         "parameters": [
           {
@@ -1204,6 +1312,9 @@
     "/schemas": {
       "get": {
         "operationId": "SchemasOperations_List",
+        "tags": [
+          "Schemas"
+        ],
         "description": "Returns a paginated list of Schema resources.",
         "parameters": [
           {
@@ -1267,6 +1378,9 @@
     "/schemas/{schemaId}": {
       "get": {
         "operationId": "SchemasOperations_Get",
+        "tags": [
+          "Schemas"
+        ],
         "description": "Gets a specified Schema resource.",
         "parameters": [
           {
@@ -1302,6 +1416,9 @@
       },
       "patch": {
         "operationId": "SchemasOperations_CreateOrUpdate",
+        "tags": [
+          "Schemas"
+        ],
         "description": "Creates or updates a Schema resource.",
         "consumes": [
           "application/merge-patch+json"
@@ -1318,7 +1435,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "The resource instance.",
             "required": true,
@@ -1355,6 +1472,9 @@
       },
       "delete": {
         "operationId": "SchemasOperations_Delete",
+        "tags": [
+          "Schemas"
+        ],
         "description": "Deletes Schema for given Schema id.",
         "parameters": [
           {
@@ -1712,9 +1832,9 @@
           "description": "Schema Foreign Key.",
           "minLength": 1
         },
-        "collectionId": {
+        "catalogId": {
           "type": "string",
-          "description": "Id of the Collection.",
+          "description": "Id of the Catalog.",
           "readOnly": true
         },
         "id": {
@@ -1725,7 +1845,7 @@
       },
       "required": [
         "schemaId",
-        "collectionId"
+        "id"
       ]
     },
     "CollectionCreateOrUpdate": {
@@ -2025,6 +2145,20 @@
       },
       "required": [
         "filePath"
+      ]
+    },
+    "FileDownloadResponse": {
+      "type": "object",
+      "description": "Represents the response for a file download operation.",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "description": "The binary data of the file."
+        }
+      },
+      "required": [
+        "data"
       ]
     },
     "FileResource": {
@@ -3044,6 +3178,80 @@
             "description": "Parent."
           }
         ]
+      }
+    },
+    "SamplePartnerAcceptedResponse": {
+      "type": "object",
+      "description": "Represents a successful 202 response from the Solutions API.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status."
+        },
+        "jobCreatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "JobCreatedDateTime."
+        },
+        "jobLastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "JobLastActionDateTime."
+        },
+        "e2eid": {
+          "type": "string",
+          "description": "E2eid.",
+          "x-ms-client-name": "e2Eid"
+        },
+        "partnerRequestBody": {
+          "$ref": "#/definitions/SamplePartnerRequestBody",
+          "description": "SamplePartnerRequestBody."
+        }
+      }
+    },
+    "SamplePartnerOkResponse": {
+      "type": "object",
+      "description": "Represents a successful 200 response from the Solutions API.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status."
+        },
+        "jobCreatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "JobCreatedDateTime."
+        },
+        "jobLastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "JobLastActionDateTime."
+        },
+        "e2eid": {
+          "type": "string",
+          "description": "E2eid.",
+          "x-ms-client-name": "e2Eid"
+        },
+        "partnerRequestBody": {
+          "$ref": "#/definitions/SamplePartnerRequestBody",
+          "description": "SamplePartnerRequestBody."
+        }
       }
     },
     "SamplePartnerRequestBody": {

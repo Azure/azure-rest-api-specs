@@ -364,17 +364,17 @@ model Collection {
   schemaId: string;
 
   /**
-   * Id of the Collection.
+   * Id of the Catalog.
    */
-  @key("collectionId")
   @visibility(Lifecycle.Read)
-  collectionId: string;
+  catalogId?: string;
 
   /**
    * Unique resource ID.
    */
+  @key("collectionId")
   @visibility(Lifecycle.Read)
-  id?: string;
+  id: string;
 }
 
 /**
@@ -390,6 +390,16 @@ model FileResource {
   key: string;
 }
 
+/**
+ * Represents the response for a file download operation.
+ */
+model FileDownloadResponse {
+  /**
+   * The binary data of the file.
+   */
+  @body
+  data: bytes;
+}
 /**
  * File.
  */
@@ -482,6 +492,11 @@ model ItemParameters {
  * ItemResponse model for Items api.
  */
 model ItemResponse {
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" ""
+  @doc("Response status code.")
+  @statusCode
+  statusCode: 200 | 201;
+
   ...CommonProps;
 
   /**
@@ -1199,6 +1214,29 @@ model SamplePartnerResponse {
   partnerRequestBody?: SamplePartnerRequestBody;
 }
 
+/**
+ * Represents a successful 200 response from the Solutions API.
+ */
+model SamplePartnerOkResponse {
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" ""
+  @doc("Response status code.")
+  @statusCode
+  statusCode: 200;
+
+  ...SamplePartnerResponse;
+}
+
+/**
+ * Represents a successful 202 response from the Solutions API.
+ */
+model SamplePartnerAcceptedResponse {
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" ""
+  @doc("Response status code.")
+  @statusCode
+  statusCode: 202;
+
+  ...SamplePartnerResponse;
+}
 /**
  * SamplePartnerRequestBody.
  */
