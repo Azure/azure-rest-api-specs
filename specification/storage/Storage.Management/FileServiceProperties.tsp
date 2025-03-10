@@ -58,38 +58,6 @@ interface FileServices {
     FileServiceProperties,
     Response = ArmResponse<FileServiceItems>
   >;
-
-  /**
-   * Lists all shares.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @get
-  @action("shares")
-  @operationId("FileShares_List")
-  fileSharesList is ArmResourceActionSync<
-    FileServiceProperties,
-    void,
-    ArmResponse<FileShareItems>,
-    Parameters = {
-      /**
-       * Optional. Specified maximum number of shares that can be included in the list.
-       */
-      @query("$maxpagesize")
-      $maxpagesize?: string;
-
-      /**
-       * Optional. When specified, only share names starting with the filter will be listed.
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * Optional, used to expand the properties within share's properties. Valid values are: deleted, snapshots. Should be passed as a string with delimiter ','
-       */
-      @query("$expand")
-      $expand?: string;
-    }
-  >;
 }
 
 @@doc(FileServiceProperties.name, "");

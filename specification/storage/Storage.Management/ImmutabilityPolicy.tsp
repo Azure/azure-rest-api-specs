@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.Storage;
 /**
@@ -23,8 +24,15 @@ model ImmutabilityPolicy
     SegmentName = "immutabilityPolicies",
     NamePattern = ""
   >;
+  ...ImmutabilityPolicyEtag;
 }
-
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+model ImmutabilityPolicyEtag {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  @doc("Resource Etag.")
+  @visibility("read")
+  etag?: string;
+}
 @armResourceOperations
 interface ImmutabilityPolicies {
   /**
@@ -40,7 +48,7 @@ interface ImmutabilityPolicies {
        * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
        */
       @header
-      `If-Match`?: string;
+      `If-Match`?: eTag;
     },
     Response = ArmResponse<ImmutabilityPolicy> & {
       /**
@@ -65,7 +73,7 @@ interface ImmutabilityPolicies {
        * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
        */
       @header
-      `If-Match`?: string;
+      `If-Match`?: eTag;
     },
     Response = ArmResponse<ImmutabilityPolicy> & {
       /**
@@ -90,7 +98,7 @@ interface ImmutabilityPolicies {
        * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
        */
       @header
-      `If-Match`: string;
+      `If-Match`: eTag;
     },
     Response = ArmResponse<ImmutabilityPolicy> & {
       /**
@@ -116,7 +124,7 @@ interface ImmutabilityPolicies {
        * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
        */
       @header
-      `If-Match`: string;
+      `If-Match`: eTag;
     },
     Response = ArmResponse<ImmutabilityPolicy> & {
       /**
@@ -148,7 +156,7 @@ interface ImmutabilityPolicies {
        * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
        */
       @header
-      `If-Match`: string;
+      `If-Match`: eTag;
     },
     Response = ArmResponse<ImmutabilityPolicy> & {
       /**

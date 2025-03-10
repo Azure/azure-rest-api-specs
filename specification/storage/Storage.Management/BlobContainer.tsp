@@ -23,9 +23,16 @@ model BlobContainer
     SegmentName = "containers",
     NamePattern = ""
   >;
-  ...EntityTagProperty;
+  ...BlobEtag;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+model BlobEtag {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  @doc("Resource Etag.")
+  @visibility("read")
+  etag?: string;
+}
 @armResourceOperations
 interface BlobContainers {
   /**
@@ -87,6 +94,34 @@ interface BlobContainers {
    */
   @action("migrate")
   objectLevelWorm is ArmResourceActionAsync<BlobContainer, void, OkResponse>;
+
+  /**
+   * Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.
+   */
+  list is ArmResourceListByParent<
+    BlobContainer,
+    Parameters = {
+      /**
+       * Optional. Specified maximum number of containers that can be included in the list.
+       */
+      @maxValue(5000)
+      @minValue(1)
+      @query("$maxpagesize")
+      $maxpagesize?: int32;
+
+      /**
+       * Optional. When specified, only container names starting with the filter will be listed.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Optional, used to include the properties for soft deleted blob containers.
+       */
+      @query("$include")
+      $include?: ListContainersInclude;
+    }
+  >;
 }
 
 @@maxLength(BlobContainer.name, 63);
@@ -107,3 +142,4 @@ interface BlobContainers {
 @@doc(BlobContainers.clearLegalHold::parameters.body,
   "The LegalHold property that will be clear from a blob container."
 );
+// @@doc(BlobContainer.eTag, "Resource Etag.");

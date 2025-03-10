@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Storage;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface SkusOperations {
+interface Skus {
   /**
    * Lists the available SKUs supported by Microsoft.Storage for given subscription.
    */

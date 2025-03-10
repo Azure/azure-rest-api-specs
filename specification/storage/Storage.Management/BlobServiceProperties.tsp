@@ -9,8 +9,10 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.Storage;
+
 /**
  * The properties of a storage account’s Blob service.
  */
@@ -56,38 +58,6 @@ interface BlobServices {
   list is ArmResourceListByParent<
     BlobServiceProperties,
     Response = ArmResponse<BlobServiceItems>
-  >;
-
-  /**
-   * Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @get
-  @action("containers")
-  @operationId("BlobContainers_List")
-  blobContainersList is ArmResourceActionSync<
-    BlobServiceProperties,
-    void,
-    ArmResponse<ListContainerItems>,
-    Parameters = {
-      /**
-       * Optional. Specified maximum number of containers that can be included in the list.
-       */
-      @query("$maxpagesize")
-      $maxpagesize?: string;
-
-      /**
-       * Optional. When specified, only container names starting with the filter will be listed.
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * Optional, used to include the properties for soft deleted blob containers.
-       */
-      @query("$include")
-      $include?: ListContainersInclude;
-    }
   >;
 }
 

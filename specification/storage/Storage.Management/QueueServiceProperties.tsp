@@ -77,7 +77,6 @@ interface QueueServices {
     }
   >;
 }
-
 @@doc(QueueServiceProperties.name, "");
 @@doc(QueueServiceProperties.properties,
   "The properties of a storage account’s Queue service."

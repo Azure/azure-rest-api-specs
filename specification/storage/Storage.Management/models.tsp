@@ -739,9 +739,9 @@ union ListLocalUserIncludeParam {
 union EncryptionScopeSource {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `Microsoft.Storage`: "Microsoft.Storage",
+  Storage: "Microsoft.Storage",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `Microsoft.KeyVault`: "Microsoft.KeyVault",
+  KeyVault: "Microsoft.KeyVault",
 }
 
 /**
@@ -970,9 +970,6 @@ model BlobServiceItems {
   @visibility("read")
   @items
   value?: BlobServiceProperties[];
-
-  @nextLink
-  nextlink?: string;
 }
 
 /**
@@ -4682,10 +4679,6 @@ model ListBlobInventoryPolicy {
   @visibility("read")
   @items
   value?: BlobInventoryPolicy[];
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-  @nextLink
-  nextlink?: string;
 }
 
 /**
@@ -4698,10 +4691,6 @@ model PrivateEndpointConnectionListResult {
    */
   @items
   value?: PrivateEndpointConnection[];
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-  @nextLink
-  nextlink?: string;
 }
 
 /**

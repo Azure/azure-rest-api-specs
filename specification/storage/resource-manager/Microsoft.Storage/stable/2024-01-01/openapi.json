@@ -914,9 +914,6 @@
           "ListBlobServices": {
             "$ref": "./examples/BlobServicesList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextlink"
         }
       }
     },
@@ -1035,7 +1032,7 @@
       "get": {
         "operationId": "BlobContainers_List",
         "tags": [
-          "BlobServices"
+          "BlobContainers"
         ],
         "description": "Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.",
         "parameters": [
@@ -1063,7 +1060,10 @@
             "in": "query",
             "description": "Optional. Specified maximum number of containers that can be included in the list.",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 5000
           },
           {
             "name": "$filter",
@@ -1097,7 +1097,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ListContainerItems"
+              "$ref": "#/definitions/BlobContainerListResult"
             }
           },
           "default": {
@@ -2611,7 +2611,7 @@
       "get": {
         "operationId": "FileShares_List",
         "tags": [
-          "FileServices"
+          "FileShares"
         ],
         "description": "Lists all shares.",
         "parameters": [
@@ -2639,7 +2639,8 @@
             "in": "query",
             "description": "Optional. Specified maximum number of shares that can be included in the list.",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -2660,7 +2661,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FileShareItems"
+              "$ref": "#/definitions/FileShareListResult"
             }
           },
           "default": {
@@ -3380,9 +3381,6 @@
           "StorageAccountGetBlobInventoryPolicy": {
             "$ref": "./examples/StorageAccountListBlobInventoryPolicy.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextlink"
         }
       }
     },
@@ -4866,9 +4864,6 @@
           "StorageAccountListPrivateEndpointConnections": {
             "$ref": "./examples/StorageAccountListPrivateEndpointConnections.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextlink"
         }
       }
     },
@@ -7230,9 +7225,9 @@
           "description": "Properties of the blob container.",
           "x-ms-client-flatten": true
         },
-        "eTag": {
+        "etag": {
           "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "description": "Resource Etag.",
           "readOnly": true
         }
       },
@@ -7240,6 +7235,27 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "BlobContainerListResult": {
+      "type": "object",
+      "description": "The response of a BlobContainer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BlobContainer items on this page",
+          "items": {
+            "$ref": "#/definitions/BlobContainer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "BlobInventoryCreationTime": {
@@ -7532,9 +7548,6 @@
             "$ref": "#/definitions/BlobServiceProperties"
           },
           "readOnly": true
-        },
-        "nextlink": {
-          "type": "string"
         }
       }
     },
@@ -8268,11 +8281,11 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Microsoft.Storage",
+            "name": "Storage",
             "value": "Microsoft.Storage"
           },
           {
-            "name": "Microsoft.KeyVault",
+            "name": "KeyVault",
             "value": "Microsoft.KeyVault"
           }
         ]
@@ -8602,9 +8615,9 @@
           "description": "Properties of the file share.",
           "x-ms-client-flatten": true
         },
-        "eTag": {
+        "etag": {
           "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "description": "Resource Etag.",
           "readOnly": true
         }
       },
@@ -8628,27 +8641,6 @@
         {
           "$ref": "#/definitions/AzureEntityResource"
         }
-      ]
-    },
-    "FileShareItems": {
-      "type": "object",
-      "description": "Response schema. Contains list of shares returned, and if paging is requested or required, a URL to next page of shares.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The FileShareItem items on this page",
-          "items": {
-            "$ref": "#/definitions/FileShareItem"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "FileShareLimits": {
@@ -8694,6 +8686,27 @@
           "readOnly": true
         }
       }
+    },
+    "FileShareListResult": {
+      "type": "object",
+      "description": "The response of a FileShare list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FileShare items on this page",
+          "items": {
+            "$ref": "#/definitions/FileShare"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "FileShareProperties": {
       "type": "object",
@@ -9089,6 +9102,11 @@
           "$ref": "#/definitions/ImmutabilityPolicyProperty",
           "description": "The properties of an ImmutabilityPolicy of a blob container.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
         }
       },
       "required": [
@@ -9775,9 +9793,6 @@
             "$ref": "#/definitions/BlobInventoryPolicy"
           },
           "readOnly": true
-        },
-        "nextlink": {
-          "type": "string"
         }
       }
     },
@@ -9795,27 +9810,6 @@
         {
           "$ref": "#/definitions/AzureEntityResource"
         }
-      ]
-    },
-    "ListContainerItems": {
-      "type": "object",
-      "description": "Response schema. Contains list of blobs returned, and if paging is requested or required, a URL to next page of containers.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ListContainerItem items on this page",
-          "items": {
-            "$ref": "#/definitions/ListContainerItem"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ListQueue": {
@@ -11057,9 +11051,6 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
-        },
-        "nextlink": {
-          "type": "string"
         }
       }
     },

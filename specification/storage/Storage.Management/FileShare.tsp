@@ -22,9 +22,15 @@ model FileShare is Azure.ResourceManager.ProxyResource<FileShareProperties> {
     SegmentName = "shares",
     NamePattern = ""
   >;
-  ...EntityTagProperty;
+  ...FileServiceEtag;
 }
-
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+model FileServiceEtag {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  @doc("Resource Etag.")
+  @visibility("read")
+  etag?: string;
+}
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface FileShares {
@@ -48,6 +54,31 @@ interface FileShares {
     }
   >;
 
+  /**
+   * Lists all shares.
+   */
+  list is ArmResourceListByParent<
+    FileShare,
+    Parameters = {
+      /**
+       * Optional. Specified maximum number of shares that can be included in the list.
+       */
+      @query("$maxpagesize")
+      $maxpagesize?: int32;
+
+      /**
+       * Optional. When specified, only share names starting with the filter will be listed.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Optional, used to expand the properties within share's properties. Valid values are: deleted, snapshots. Should be passed as a string with delimiter ','
+       */
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
   /**
    * Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share.
    */
