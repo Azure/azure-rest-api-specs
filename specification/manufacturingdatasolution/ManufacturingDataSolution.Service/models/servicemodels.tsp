@@ -49,22 +49,24 @@ model MdsHealthSetupInfo {
 
 @doc("Represents a mappings table model.")
 @resource("normalizationTable")
-model NormalizationTable is EntityInfo {
-  @doc("Tags associated with the table.")
-  tags?: Record<string>;
+model NormalizationTable {
+  @doc("The name of the entity.")
+  @key
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  name: string;
 
   @doc("The version of the table.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read)
   version: string = "";
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
   @doc("The mapping table records.")
-  mappingsTable?: Record<unknown>[] = #[];
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  mappingsTable: Record<unknown>;
 
   @doc("The available versions of the table.")
+  @visibility(Lifecycle.Read)
   availableVersions?: Record<string>;
-
-  @doc("Indicates if the column is semantically relevant.")
-  semanticRelevantFlag?: boolean;
 }
 
 @doc("Represents a response model for OPC UA mapping.")
@@ -75,13 +77,9 @@ model OpcuaMappingModel {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   entityName: string;
 
-  @doc("The DMM keys for the response.")
-  @visibility(Lifecycle.Read)
-  dmmKeys?: [];
-
-  @doc("The OPC UA name for the response.")
-  @visibility(Lifecycle.Read)
-  opcuaName?: string;
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @doc("Mapping Data")
+  mappingData: OpcuaMappingData[];
 
   @doc("The target entity for the response.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -94,6 +92,17 @@ model OpcuaMappingModel {
   @doc("The type of relationship for the response.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   relationshipType?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+model OpcuaMappingData {
+  @doc("The DMM keys for the response.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  dmmKeys: [];
+
+  @doc("The OPC UA name for the response.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  opcuaName: string;
 }
 
 /**

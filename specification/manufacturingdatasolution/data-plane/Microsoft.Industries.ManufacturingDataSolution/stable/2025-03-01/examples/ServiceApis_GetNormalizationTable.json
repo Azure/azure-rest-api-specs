@@ -3,135 +3,15 @@
   "operationId": "ServiceApis_GetNormalizationTable",
   "parameters": {
     "api-version": "2025-03-01",
-    "name": "Equipment",
-    "version": "1"
+    "name": "Equipment"
   },
   "responses": {
     "200": {
       "body": {
         "name": "Equipment",
-        "tags": {
-          "ingestionFormat": "Batch",
-          "ingestionRate": "Hourly"
-        },
-        "columns": [
-          {
-            "mappingTableForNormalization": "",
-            "isProperNoun": true,
-            "displayName": "",
-            "description": "A unique identification of a specific piece of equipment, within the scope of the information exchanged (manufacturing operations definition, scheduling, capability and performance). Required attribute. The equipment ID is used in other parts of the model when the equipment needs to be identified, such as the operations capability for a piece of equipment, or an operations response identifying the equipment used.",
-            "type": "String",
-            "mandatory": true,
-            "semanticRelevantFlag": true,
-            "primaryKey": true,
-            "groupBy": false,
-            "name": "id"
-          },
-          {
-            "mappingTableForNormalization": "",
-            "isProperNoun": true,
-            "displayName": "",
-            "description": "Additional information about the equipment.",
-            "type": "String",
-            "mandatory": false,
-            "semanticRelevantFlag": true,
-            "primaryKey": false,
-            "groupBy": false,
-            "name": "description"
-          },
-          {
-            "mappingTableForNormalization": "",
-            "isProperNoun": false,
-            "displayName": "",
-            "description": "Identifies where the exchanged information fits within the role-based equipment hierarchy. Optionally, hierarchy scope defines the scope of the equipment class definition, such as the site or area where it is defined.",
-            "type": "String",
-            "mandatory": false,
-            "semanticRelevantFlag": true,
-            "primaryKey": false,
-            "groupBy": false,
-            "name": "hierarchyScope"
-          },
-          {
-            "mappingTableForNormalization": "",
-            "isProperNoun": true,
-            "displayName": "",
-            "description": "An identification of the level in the role-based equipment hierarchy.",
-            "type": "Enum",
-            "mandatory": false,
-            "semanticRelevantFlag": true,
-            "primaryKey": false,
-            "groupBy": false,
-            "enumValues": [
-              "enterprise",
-              "site",
-              "area",
-              "workCenter",
-              "workUnit",
-              "processCell",
-              "unit",
-              "productionLine",
-              "productionUnit",
-              "workCell",
-              "storageZone",
-              "Storage Unit"
-            ],
-            "name": "equipmentLevel"
-          },
-          {
-            "mappingTableForNormalization": "",
-            "isProperNoun": false,
-            "displayName": "",
-            "description": "Identifies the operational location of the equipment.",
-            "type": "String",
-            "mandatory": false,
-            "semanticRelevantFlag": true,
-            "primaryKey": false,
-            "groupBy": false,
-            "name": "operationalLocation"
-          },
-          {
-            "mappingTableForNormalization": "",
-            "isProperNoun": false,
-            "displayName": "",
-            "description": "Indicates whether the operational location attribute refers to an operational location object or contains a description of the operational location. Mandatory where an operational location attribute is specified. Defined values are operational location: operational location attribute references an operational location; description: operational location attribute contains a description of the operational location, such as a street address.",
-            "type": "Enum",
-            "mandatory": false,
-            "semanticRelevantFlag": true,
-            "primaryKey": false,
-            "groupBy": false,
-            "enumValues": [
-              "Description",
-              "Operational Location"
-            ],
-            "name": "operationalLocationType"
-          },
-          {
-            "mappingTableForNormalization": "",
-            "isProperNoun": false,
-            "displayName": "",
-            "description": "Asset/ERP System of Record Identifier for Equipment (AssetID)",
-            "type": "Alphanumeric",
-            "mandatory": false,
-            "semanticRelevantFlag": false,
-            "primaryKey": false,
-            "groupBy": false,
-            "name": "assetsystemrefid"
-          },
-          {
-            "mappingTableForNormalization": "",
-            "isProperNoun": false,
-            "displayName": "",
-            "description": "Manufacturing system Ref ID (MES Person Referrence ID)",
-            "type": "Alphanumeric",
-            "mandatory": false,
-            "semanticRelevantFlag": false,
-            "primaryKey": false,
-            "groupBy": false,
-            "name": "messystemrefid"
-          }
-        ],
-        "semanticRelevantFlag": true,
-        "version": "1"
+        "version": "1",
+        "mappingsTable": {},
+        "availableVersions": {}
       }
     }
   }

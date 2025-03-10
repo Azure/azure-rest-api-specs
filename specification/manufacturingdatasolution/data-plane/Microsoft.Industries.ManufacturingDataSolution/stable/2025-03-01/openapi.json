@@ -3036,64 +3036,38 @@
           "description": "The name of the entity.",
           "x-ms-mutability": [
             "read",
-            "update",
-            "create"
+            "update"
           ]
-        },
-        "columns": {
-          "type": "array",
-          "description": "The columns associated with the entity.",
-          "items": {
-            "$ref": "#/definitions/ServiceModels.Column"
-          },
-          "x-ms-identifiers": [],
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags associated with the table.",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "version": {
           "type": "string",
           "description": "The version of the table.",
           "default": "",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "mappingsTable": {
-          "type": "array",
+          "type": "object",
           "description": "The mapping table records.",
-          "default": [],
-          "items": {
-            "type": "object",
-            "additionalProperties": {}
-          },
-          "x-ms-identifiers": []
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "availableVersions": {
           "type": "object",
           "description": "The available versions of the table.",
           "additionalProperties": {
             "type": "string"
-          }
-        },
-        "semanticRelevantFlag": {
-          "type": "boolean",
-          "description": "Indicates if the column is semantically relevant."
+          },
+          "readOnly": true
         }
       },
       "required": [
         "name",
-        "version"
+        "version",
+        "mappingsTable"
       ]
     },
     "ServiceModels.NormalizationTableCreateOrUpdate": {
@@ -3105,61 +3079,48 @@
           "description": "The name of the entity.",
           "x-ms-mutability": [
             "read",
-            "update",
-            "create"
-          ]
-        },
-        "columns": {
-          "type": "array",
-          "description": "The columns associated with the entity.",
-          "items": {
-            "$ref": "#/definitions/ServiceModels.Column"
-          },
-          "x-ms-identifiers": [],
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags associated with the table.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the table.",
-          "default": "",
-          "x-ms-mutability": [
-            "read",
-            "create"
+            "update"
           ]
         },
         "mappingsTable": {
-          "type": "array",
-          "description": "The mapping table records.",
-          "default": [],
-          "items": {
-            "type": "object",
-            "additionalProperties": {}
-          },
-          "x-ms-identifiers": []
-        },
-        "availableVersions": {
           "type": "object",
-          "description": "The available versions of the table.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "semanticRelevantFlag": {
-          "type": "boolean",
-          "description": "Indicates if the column is semantically relevant."
+          "description": "The mapping table records.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
+    },
+    "ServiceModels.OpcuaMappingData": {
+      "type": "object",
+      "properties": {
+        "dmmKeys": {
+          "type": "array",
+          "description": "The DMM keys for the response.",
+          "items": {},
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "opcuaName": {
+          "type": "string",
+          "description": "The OPC UA name for the response.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "dmmKeys",
+        "opcuaName"
+      ]
     },
     "ServiceModels.OpcuaMappingModel": {
       "type": "object",
@@ -3173,16 +3134,17 @@
             "create"
           ]
         },
-        "dmmKeys": {
+        "mappingData": {
           "type": "array",
-          "description": "The DMM keys for the response.",
-          "items": {},
-          "readOnly": true
-        },
-        "opcuaName": {
-          "type": "string",
-          "description": "The OPC UA name for the response.",
-          "readOnly": true
+          "description": "Mapping Data",
+          "items": {
+            "$ref": "#/definitions/ServiceModels.OpcuaMappingData"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "targetEntity": {
           "type": "string",
@@ -3211,6 +3173,7 @@
       },
       "required": [
         "entityName",
+        "mappingData",
         "updateRelatedNode"
       ]
     },
@@ -3221,6 +3184,18 @@
         "entityName": {
           "type": "string",
           "description": "The name of the entity.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "mappingData": {
+          "type": "array",
+          "description": "Mapping Data",
+          "items": {
+            "$ref": "#/definitions/ServiceModels.OpcuaMappingData"
+          },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
