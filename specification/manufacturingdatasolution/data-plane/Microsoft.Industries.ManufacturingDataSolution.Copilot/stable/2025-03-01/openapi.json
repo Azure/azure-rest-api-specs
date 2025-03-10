@@ -669,7 +669,7 @@
         }
       }
     },
-    "/copilot/instruction": {
+    "/copilot/instructions": {
       "get": {
         "operationId": "Instructions_List",
         "description": "List Instruction resources",
@@ -680,9 +680,10 @@
           {
             "name": "showActive",
             "in": "query",
-            "description": "The instruction status.",
+            "description": "Get all active instructions",
             "required": true,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -770,7 +771,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/copilot/instruction/{id}": {
+    "/copilot/instructions/{id}": {
       "get": {
         "operationId": "Instructions_Get",
         "description": "Gets single instruction.",
@@ -958,7 +959,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/copilot/instruction/{id}:updateStatus": {
+    "/copilot/instructions/{id}:updateStatus": {
       "post": {
         "operationId": "Instructions_UpdateStatus",
         "description": "Update instruction status.",
@@ -1756,6 +1757,53 @@
         "registerAssistantViewJobStatus"
       ]
     },
+    "Instructions.Models.AdministrativeDetails": {
+      "type": "object",
+      "description": "The administrative details of the instruction.",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The source of the instruction."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The comment for the instruction."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The comment for the instruction."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation date of the instruction."
+        },
+        "comment": {
+          "type": "string",
+          "description": "any closing comments"
+        }
+      },
+      "required": [
+        "source",
+        "createdBy",
+        "lastModifiedBy",
+        "createdAt",
+        "comment"
+      ]
+    },
+    "Instructions.Models.ContentProperties": {
+      "type": "object",
+      "description": "The content properties of the instruction.",
+      "properties": {
+        "semanticContent": {
+          "$ref": "#/definitions/Instructions.Models.SemanticContent",
+          "description": "The semantic content of the instruction."
+        }
+      },
+      "required": [
+        "semanticContent"
+      ]
+    },
     "Instructions.Models.Instruction": {
       "type": "object",
       "description": "This is the request model for Instruction",
@@ -1807,13 +1855,17 @@
           "$ref": "#/definitions/Instructions.Models.RetrievalProperties",
           "description": "The retrieval properties of the instruction."
         },
+        "content": {
+          "$ref": "#/definitions/Instructions.Models.ContentProperties",
+          "description": "The content properties of the instruction."
+        },
         "relationships": {
           "$ref": "#/definitions/Instructions.Models.Relationships",
           "description": "The relationships of the instruction."
         },
-        "comment": {
-          "type": "string",
-          "description": "The comment for the instruction."
+        "administrativeDetails": {
+          "$ref": "#/definitions/Instructions.Models.AdministrativeDetails",
+          "description": "audit record for the instruction"
         }
       },
       "required": [
@@ -1826,8 +1878,9 @@
         "category",
         "language",
         "retrieval",
+        "content",
         "relationships",
-        "comment"
+        "administrativeDetails"
       ]
     },
     "Instructions.Models.InstructionCategoryEnum": {
@@ -2046,6 +2099,24 @@
         "subTopics",
         "keywords",
         "sampleQuestions"
+      ]
+    },
+    "Instructions.Models.SemanticContent": {
+      "type": "object",
+      "description": "The semantic content of the instruction.",
+      "properties": {
+        "context": {
+          "type": "string",
+          "description": "The content of the instruction."
+        },
+        "steps": {
+          "type": "string",
+          "description": "The source of the instruction."
+        }
+      },
+      "required": [
+        "context",
+        "steps"
       ]
     },
     "Instructions.Models.UpdateStatusRequest": {

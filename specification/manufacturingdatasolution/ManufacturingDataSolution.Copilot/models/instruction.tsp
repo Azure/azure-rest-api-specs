@@ -7,30 +7,36 @@ using TypeSpec.Rest;
 
 namespace MdsSolution.CopilotService.Instructions.Models;
 
-@doc("Instruction Info Response Model")
-model InstructionInfoResponse {
-  @doc("List of Instruction Info objects")
-  instructionInfoList: InstructionInfo[];
-}
+@resource("instructions")
+@doc("This is the request model for Instruction")
+model Instruction {
+  @key("id")
+  @visibility(Lifecycle.Read)
+  @doc("Id for the instruction")
+  id: string;
 
-@doc("Base Instruction Model")
-model BaseInstructionModel {
-  @doc("The unique identifier of the instruction.")
+  @doc("intruction Id for the instruction")
+  @visibility(Lifecycle.Update)
   instructionId: string;
 
-  @doc("The version of the instruction.")
+  @doc("Version for the instruction")
+  @visibility(Lifecycle.Update)
   instructionVersion: string;
 
-  @doc("The status of the instruction.")
-  stauses: InstructionStatusEnum;
+  @doc("Status for the instruction")
+  @visibility(Lifecycle.Read)
+  status: InstructionStatusEnum;
 
-  @doc("The domain of the instruction.")
+  @doc("Domain for the instruction")
+  @visibility(Lifecycle.Read)
   domain: InstrustionDomainEnum;
 
-  @doc("The sub-domain of the instruction.")
+  @doc("Sub-domain for the instruction")
+  @visibility(Lifecycle.Read)
   subDomain: InstructionSubDomainEnum;
 
-  @doc("The category of the instruction.")
+  @doc("Category for the instruction")
+  @visibility(Lifecycle.Read)
   category: InstructionCategoryEnum;
 
   @doc("The language of the instruction.")
@@ -44,44 +50,15 @@ model BaseInstructionModel {
 
   @doc("The relationships of the instruction.")
   relationships: Relationships;
-}
 
-@doc("Instruction Request Model")
-@parentResource(BaseInstructionModel)
-model InstructionRequestModel {
-  @doc("The comment for the instruction.")
-  comment: string;
-}
-
-@doc("Instruction Info Model")
-model InstructionInfo {
-  @doc("The instruction identifier.")
-  instructionId: string;
-
-  @doc("The instruction version.")
-  version: string;
-
-  @doc("The instruction status.")
-  status: InstructionStatusEnum;
+  @doc("audit record for the instruction")
+  administrativeDetails: AdministrativeDetails;
 }
 
 @doc("Instruction Patch Request")
 model InstructionPatchRequest {
   @doc("The instruction status.")
   status: InstructionStatusEnum;
-}
-
-@doc("Instruction Request Model List")
-model InstructionRequestModelList {
-  @doc("The list of instruction request models.")
-  instructionRequestModels: InstructionRequestModel[];
-}
-
-@doc("This is the response model for Instruction")
-@parentResource(BaseInstructionModel)
-model InstructionResponseModel {
-  @doc("The administrative information of the instruction.")
-  administrative: string;
 }
 
 @doc("Instruction Status Enums")
@@ -201,51 +178,33 @@ model RetrievalProperties {
 @doc("The content properties of the instruction.")
 model ContentProperties {
   @doc("The semantic content of the instruction.")
-  semanticContent: string;
+  semanticContent: SemanticContent;
 }
 
-@resource("instruction")
-@doc("This is the request model for Instruction")
-model Instruction {
-  @key("id")
-  @visibility(Lifecycle.Read)
-  @doc("Id for the instruction")
-  id: string;
+@doc("The semantic content of the instruction.")
+model SemanticContent {
+  @doc("The content of the instruction.")
+  context: string;
 
-  @doc("intruction Id for the instruction")
-  @visibility(Lifecycle.Update)
-  instructionId: string;
+  @doc("The source of the instruction.")
+  steps: string;
+}
 
-  @doc("Version for the instruction")
-  @visibility(Lifecycle.Update)
-  instructionVersion: string;
-
-  @doc("Status for the instruction")
-  @visibility(Lifecycle.Read)
-  status: InstructionStatusEnum;
-
-  @doc("Domain for the instruction")
-  @visibility(Lifecycle.Read)
-  domain: InstrustionDomainEnum;
-
-  @doc("Sub-domain for the instruction")
-  @visibility(Lifecycle.Read)
-  subDomain: InstructionSubDomainEnum;
-
-  @doc("Category for the instruction")
-  @visibility(Lifecycle.Read)
-  category: InstructionCategoryEnum;
-
-  @doc("The language of the instruction.")
-  language: InstructionLanguageEnum;
-
-  @doc("The retrieval properties of the instruction.")
-  retrieval: RetrievalProperties;
-
-  @doc("The relationships of the instruction.")
-  relationships: Relationships;
+@doc("The administrative details of the instruction.")
+model AdministrativeDetails {
+  @doc("The source of the instruction.")
+  source: string;
 
   @doc("The comment for the instruction.")
+  createdBy: string;
+
+  @doc("The comment for the instruction.")
+  lastModifiedBy: string;
+
+  @doc("Creation date of the instruction.")
+  createdAt: utcDateTime;
+
+  @doc("any closing comments")
   comment: string;
 }
 
