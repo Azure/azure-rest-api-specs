@@ -24,9 +24,7 @@ using OpenAPI;
 
 @doc("APIs to manage AppSecurity resources")
 @armProviderNamespace("Microsoft.AppSecurity")
-@service({
-  title: "Microsoft.AppSecurity",
-})
+@service(#{ title: "Microsoft.AppSecurity" })
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @versioned(Versions)
 namespace Microsoft.AppSecurity;

@@ -19,7 +19,7 @@ model NetworkMonitor extends Azure.ResourceManager.Foundations.TrackedResource {
   @path
   @key("networkMonitorName")
   @segment("networkMonitors")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkFabric Properties */
@@ -37,7 +37,7 @@ interface NetworkMonitors {
   create is ArmResourceCreateOrReplaceAsync<NetworkMonitor>;
 
   @doc("API to update certain properties of the NetworkMonitor resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkMonitor, NetworkMonitorPatch>;
 
   @doc("Deletes layer 2 connectivity between compute nodes by managed by named NetworkMonitor name.")

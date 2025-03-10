@@ -82,57 +82,57 @@ union RegistrationStatus {
 
 @doc("The winfield properties")
 model WinfieldProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The resource provisioning state")
   provisioningState?: ResourceProvisioningState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The stamp Id")
   stampId: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The billing model")
   billingModel: BillingModel;
 
   @doc("The connection intent")
   connectionIntent: ConnectionIntent;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The connection status")
   connectionStatus?: ConnectionStatus;
 
   @doc("The registration intent")
-  @visibility("update", "read")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
   registrationStatus?: RegistrationStatus;
 
   @doc("The device version")
-  @visibility("update", "read")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
   deviceVersion?: string;
 }
 
 @doc("The winfield manifest")
 model WinfieldDeploymentManifest {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The resource Id")
   resourceId: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The resource name")
   resourceName: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The stamp Id")
   stampId: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The resource location")
   location: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The billing model")
   billingModel: BillingModel;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The connection intent")
   connectionIntent: ConnectionIntent;
 }
@@ -158,70 +158,70 @@ union ReleaseType {
 
 @doc("The winfield image properties")
 model ImageProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The resource provisioning state")
   provisioningState?: ResourceProvisioningState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The release version")
   releaseVersion: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The release name")
   releaseDisplayName: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The release notes")
   releaseNotes: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The release date")
   releaseDate: plainDate;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The release type")
   releaseType: ReleaseType;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The compatible versions")
   compatibleVersions?: Array<string>;
 }
 
 @doc("The winfield image download properties")
 model ImageDownloadResponse {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The release version")
   releaseVersion: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The release name")
   releaseDisplayName: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The release notes")
   releaseNotes: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The release date")
   releaseDate: plainDate;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The compatible versions")
   compatibleVersions?: Array<string>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The transaction Id")
   transactionId: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The download uri")
   downloadLink: url;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The release type")
   releaseType: ReleaseType;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The download link expiry time")
   linkExpiry: utcDateTime;
 }

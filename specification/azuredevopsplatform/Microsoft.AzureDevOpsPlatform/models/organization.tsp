@@ -26,6 +26,6 @@ model OrganizationProperties {
   organizationScope: OrganizationScope;
 
   @doc("Provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

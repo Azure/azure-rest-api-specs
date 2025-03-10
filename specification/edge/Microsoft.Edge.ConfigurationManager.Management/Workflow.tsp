@@ -19,11 +19,11 @@ namespace Microsoft.Edge;
 @doc("Workflow Properties")
 model WorkflowProperties {
   @doc("Workflow template Id")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   workflowTemplateId?: string;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

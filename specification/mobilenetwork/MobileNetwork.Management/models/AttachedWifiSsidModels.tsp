@@ -9,7 +9,7 @@ namespace Microsoft.MobileNetwork;
 @doc("Wi-Fi Attached SSID properties.")
 model AttachedWifiSsidPropertiesFormat {
   @doc("The provisioning state of the Wi-Fi Attached SSID resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The interface on the access side which receives traffic for this SSID.")
@@ -17,6 +17,6 @@ model AttachedWifiSsidPropertiesFormat {
 
   @doc("The address pool used by the Wi-Fi Access Point for this SSID when allocating an IP address to a UE.")
   @minItems(1)
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   wifiUserEquipmentAddressPoolSubnet?: UserEquipmentAddressPool[];
 }

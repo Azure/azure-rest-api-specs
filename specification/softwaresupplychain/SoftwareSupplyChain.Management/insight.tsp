@@ -18,7 +18,7 @@ model Insight is TrackedResource<InsightProperties> {
 /** The properties of Insight resource */
 model InsightProperties {
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

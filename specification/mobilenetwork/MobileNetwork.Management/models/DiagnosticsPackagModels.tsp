@@ -22,14 +22,14 @@ union DiagnosticsPackageStatus {
 @doc("Diagnostics package properties.")
 model DiagnosticsPackagePropertiesFormat {
   @doc("The provisioning state of the diagnostics package resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The status of the diagnostics package collection.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: DiagnosticsPackageStatus;
 
   @doc("The reason for the current state of the diagnostics package collection.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reason?: string;
 }

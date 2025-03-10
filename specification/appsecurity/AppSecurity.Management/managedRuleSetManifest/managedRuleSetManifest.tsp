@@ -15,21 +15,21 @@ namespace Microsoft.AppSecurity;
 @doc("Manifest containing the available managed rule sets.")
 model AppProtectManagedRuleSetManifestProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The version of the manifest.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version: string;
 
   @doc("Defines the default managed rule sets for all supported pillar types.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["pillarType"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["pillarType"])
   defaultRuleSets: PillarTypeDefaultRuleSet[];
 
   @doc("List of available managed rule set definitions.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["ruleSetType", "ruleSetVersion"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["ruleSetType", "ruleSetVersion"])
   availableRuleSets: ManagedRuleSetDefinition[];
 }
 
@@ -47,8 +47,8 @@ model ManagedRuleSetDefinition {
   ...ManagedRuleSetId;
 
   @doc("List of managed rule groups in the rule set.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["ruleGroupName"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["ruleGroupName"])
   ruleGroups: ManagedRuleGroupDefinition[];
 
   @doc("Define the rule set pillar type")
@@ -58,7 +58,7 @@ model ManagedRuleSetDefinition {
   supportedActions: ManagedRuleActionType[];
 
   @doc("Describes the anomaly scoring default configuration, where it is a supported action.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   anomalyScoring?: AnomalyScoringDefaultConfiguration;
 }
 
@@ -82,39 +82,39 @@ union PillarType {
 @doc("Definition of a managed rule group.")
 model ManagedRuleGroupDefinition {
   @doc("The managed rule group name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ruleGroupName: string;
 
   @doc("Description of the managed rule group.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description: string;
 
   @doc("List of rules within the managed rule group.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["ruleId"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["ruleId"])
   rules: ManagedRuleDefinition[];
 }
 
 @doc("Definition of a managed rule definition.")
 model ManagedRuleDefinition {
   @doc("The managed rule ID")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ruleId: string;
 
   @doc("Describes the functionality of the managed rule.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description: string;
 
   @doc("Describes the default state for the managed rule.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   defaultState: EnabledState;
 
   @doc("Describes the default action to be applied when the managed rule matches.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   defaultAction: ManagedRuleActionType;
 
   @doc("The default severity level assigned to a rule in anomaly scoring mode. Required for managed rules that support the anomaly scoring action type. When a rule matches, this severity value is added to the total anomaly score.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   defaultAnomalyScoringSeverity?: AnomalyScoringSeverity;
 }
 
@@ -138,11 +138,11 @@ union AnomalyScoringSeverity {
 @doc("Defines default configuration for anomaly scoring mode.")
 model AnomalyScoringDefaultConfiguration {
   @doc("The default threshold for anomaly scoring. If anomaly scoring is enabled, this value determines the threshold score. When the calculated score exceeds this value, the specified anomaly scoring action will be applied.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   defaultThreshold: int32;
 
   @doc("The default action to be triggered when the anomaly scoring threshold is exceeded. This action defines how the system responds to detected anomalies.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   defaultAction: AnomalyScoringActionType;
 }
 
@@ -172,7 +172,7 @@ model AppProtectManagedRuleSetManifest
   @doc("The default managed rule set manifest name")
   @segment("appProtectManagedRuleSetManifests")
   @key("managedRuleSetManifestName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

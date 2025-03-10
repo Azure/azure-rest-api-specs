@@ -12,22 +12,22 @@ namespace Microsoft.MobileNetwork;
 @doc("SDM Deployment Properties.")
 model SdmDeploymentResourceProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Azure for Operators 5G Core Subscriber Data Management component parameters.  One set per component type")
-  @extension("x-ms-identifiers", ["type"])
+  @extension("x-ms-identifiers", #["type"])
   componentParameters: QualifiedComponentDeploymentParameters[];
 
   @doc("Reference to cluster where the Network Function is deployed")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   clusterService: ClusterServiceIdProperty;
 
   @doc("Release version. This is inherited from the cluster")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   releaseVersion?: ReleaseVersion;
 
   @doc("Operational status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operationalStatus?: OperationalStatus;
 }

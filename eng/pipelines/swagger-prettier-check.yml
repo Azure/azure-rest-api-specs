@@ -6,6 +6,9 @@ jobs:
     name: azsdk-pool-x64
     demands: ImageOverride -equals ubuntu-22.04
 
+  variables:
+  - template: /eng/pipelines/templates/variables/globals.yml
+
   steps:
   - template: /eng/pipelines/templates/steps/npm-install.yml
 

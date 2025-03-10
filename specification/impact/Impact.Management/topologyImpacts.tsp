@@ -18,7 +18,7 @@ model TopologyImpact is ProxyResource<TopologyImpactProperties> {
   @key("topologyImpactName")
   @segment("topologyImpacts")
   @doc("topologyImpact resource ")
-  @visibility("Read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -32,16 +32,16 @@ model TopologyImpactProperties is ResourceProperties {
   endDateTime?: utcDateTime;
 
   @doc("list of impacted resources and associated arm correlation ids")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   impactedResources: ImpactedResources[];
 
   @doc("Unique ID of the impact (UUID)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")
   topologyImpactUniqueId?: string;
 
   @doc("Time at which impact is reported")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedTimeUtc?: utcDateTime;
 
   @doc("Category of the impact,  if not provided default category would be considered as dataplane impact")
@@ -57,7 +57,7 @@ model TopologyImpactProperties is ResourceProperties {
   errorDetails?: ErrorDetailProperties;
 
   @doc("Details about performance issue. Applicable for performance impacts.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   performance?: Performance[];
 
   @doc("Information about the impacted workload")

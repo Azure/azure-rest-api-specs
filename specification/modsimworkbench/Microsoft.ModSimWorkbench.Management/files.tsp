@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.ModSimWorkbench")
-@service({
-  title: "ModSimWorkbench Control Plane API",
-})
+@service(#{ title: "ModSimWorkbench Control Plane API" })
 @armProviderNamespace
 @versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
@@ -73,11 +71,11 @@ model FileProperties {
   ...ProvisioningStateProperty;
   ...TimestampProperty;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The direction of the chamber data pipeline where the file is located.")
   dataPipeline: DataPipelineDirection;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The resource ID of the chamber data pipeline request. Populated only if requested.")
   requestId?: Azure.Core.armResourceIdentifier<[
     {
@@ -85,15 +83,15 @@ model FileProperties {
     }
   ]>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The Linux File System path for the chamber data pipeline file.")
   filePath: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The size of the file.")
   size: int64;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The MD5 hash of the file.")
   checksum: string;
 }

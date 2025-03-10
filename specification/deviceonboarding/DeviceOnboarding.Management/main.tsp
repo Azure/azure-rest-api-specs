@@ -15,9 +15,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.DeviceOnboarding",
-})
+@service(#{ title: "Microsoft.DeviceOnboarding" })
 @versioned(Versions)
 namespace Microsoft.DeviceOnboarding;
 
@@ -61,38 +59,38 @@ model OnboardingService
 
 @doc("Details of the EdgeProvisioning OnboardingService.")
 model OnboardingServiceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The onboarding service device endpoints.")
   deviceEndpoints?: DeviceEndpoints;
 
   @doc("Selecting 'true' will enable a Microsoft managed PKI to issue certificates. Setting up of the CA and policies for certificate management will be while defining the onboarding policy.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   enableCertificateManagement: boolean;
 
   @doc("Allow public network access to private links.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   publicNetworkAccess?: PublicNetworkAccessOptions;
 
   @doc("The private endpoint connections.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: Array<PrivateEndpointConnection>;
 }
 
 @doc("Device endpoints.")
 model DeviceEndpoints {
   @doc("The default endpoint.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   default?: DeviceEndpoint;
 }
 
 @doc("The device endpoint.")
 model DeviceEndpoint {
   @doc("Hostname of the Endpoint.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostName?: string;
 }
 
@@ -147,7 +145,7 @@ model PolicyProperties {
   @doc("The policy status")
   status: PolicyStatusOptions;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
@@ -155,7 +153,7 @@ model PolicyProperties {
   bootstrapAuthentication: BootstrapAuthenticationRule;
 
   @doc("Allocation rules.")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @maxItems(1)
   allocations?: Array<AllocationRule>;
 
@@ -307,7 +305,7 @@ model FdoBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
   @doc("The type of authentication rule.")
   type: BootstrapAuthenticationType.FDO;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Per policy public key(s) to extend ownership voucher to the customer.")
   publicKeys?: FdoPublicKeys;
 
@@ -322,7 +320,7 @@ model FdoBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
 @added(Versions.v2024_12_01_preview)
 model FdoPublicKeys {
   @doc("Public key as x5C with encryption type SECP256R1.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   secp256R1?: FdoPublicKey;
 
   // SECP384R1 // TODO: SECP384R1 is not supported by some hardwares, we may need to add support for SECP256R1
@@ -332,7 +330,7 @@ model FdoPublicKeys {
 @added(Versions.v2024_12_01_preview)
 model FdoPublicKey {
   @doc("x5Chain representation of the public key.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   default?: bytes[];
   // status: boolean; // To be added later.
 }
@@ -388,11 +386,11 @@ model X509Certificate {
   certificate: bytes;
 
   @doc("Thumbprint extracted from the certificate.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   thumbprint?: string;
 
   @doc("Expiry date for the certificate.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expiryDate?: utcDateTime;
 }
 
@@ -515,7 +513,7 @@ scalar AllocationEndpointResourceId
 //  @doc("List of endpoints for geoBased allocation type.")
 //  @maxItems(10)
 //  @minItems(1)
-//  @extension("x-ms-identifiers", ["resourceId"])
+//  @Azure.ResourceManager.identifiers(#["resourceId"])
 //  endpoints: Array<GeoBasedAllocationEndpoint>;
 //}
 
@@ -527,7 +525,7 @@ scalar AllocationEndpointResourceId
 //  @doc("List of endpoints for evenly weighted allocation type.")
 //  @maxItems(10)
 //  @minItems(1)
-//  @extension("x-ms-identifiers", ["resourceId"])
+//  @Azure.ResourceManager.identifiers(#["resourceId"])
 //  endpoints: Array<AllocationEndpoint>;
 //  // todo no optional (to be tested)
 //}
@@ -540,7 +538,7 @@ model EvenlyDistributedAllocationRule extends AllocationRule {
   @doc("List of endpoints for evenly distributed allocation type.")
   @maxItems(10)
   @minItems(1)
-  @extension("x-ms-identifiers", ["resourceId"])
+  @Azure.ResourceManager.identifiers(#["resourceId"])
   endpoints: Array<AllocationEndpoint>;
 }
 
@@ -591,7 +589,7 @@ union SupportedIssuingAuthority {
 @doc("The configuration for setting up a CA.")
 model CaConfig {
   @doc("System-generated value for referencing the CA.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("Certificate properties.")
@@ -604,21 +602,21 @@ model CertificateProperties {
   keyType: SupportedKeyType;
 
   @doc("Certificate subject.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subject?: string;
 
   @doc("System-assigned validity period.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxValue(366)
   @minValue(365)
   validityPeriodInDays?: int32;
 
   @doc("Certificate is valid not before this date. Format ISO8601. Generated based on on validity period.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   validityNotBefore?: utcDateTime;
 
   @doc("Certificate is valid not after this date. Format ISO8601. Generated based on validity period.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   validityNotAfter?: utcDateTime;
 }
 
@@ -651,18 +649,18 @@ model IdentityInfo {
   certificateIssuance?: CertificateIssuanceRule; // For PKI
 
   @doc("Guid of the device template.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   deviceTemplateId: string;
 
   @doc("Guid for static AAD group.")
   staticGroupId: string;
 
   //  @doc("Guid for MTLS Oauth Config.")
-  //  @visibility("read", "create")
+  // @visibility(Lifecycle.Read, Lifecycle.Create)
   //  mtlsOauthConfigurationId: string;
 
   //  @doc("Guid of the devices Tenant.")
-  //  @visibility("read", "create")
+  // @visibility(Lifecycle.Read, Lifecycle.Create)
   //  deviceTenantId: string;
 
   //@doc("The identity info to return to device.")
@@ -674,7 +672,7 @@ model ResourceMetadata {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This is arbitrary JSON to provide custom attributes"
   @doc("Custom attributes")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   //  The typespec is not able to support List of Object datatype so we use Record<unknown> as datatype to generate the swagger file for now.
   //  However, this fails the providerhub generation (TypeError: Cannot read properties of undefined) hence all models are not generated.
   //  The workaround is to change the datatype of customAttributes to something like string.
@@ -687,7 +685,7 @@ interface Policies {
   get is ArmResourceRead<Policy>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Policy>;
   delete is ArmResourceDeleteWithoutOkAsync<Policy>;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Policy, PolicyPatch>;
   listByParent is ArmResourceListByParent<Policy>;
 }
@@ -712,7 +710,7 @@ model PolicyPatchProperties {
   @doc("The policy status")
   status?: PolicyStatusOptions;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
@@ -720,7 +718,7 @@ model PolicyPatchProperties {
   bootstrapAuthentication?: PatchBootstrapAuthenticationRule;
 
   @doc("Allocation rules.")
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @maxItems(1)
   allocations?: Array<AllocationRulePatch>;
 
@@ -762,11 +760,11 @@ model PatchX509Certificate {
   certificate?: bytes;
 
   @doc("Thumbprint extracted from the certificate.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   thumbprint?: string;
 
   @doc("Expiry date for the certificate.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expiryDate?: utcDateTime;
 }
 
@@ -795,7 +793,7 @@ model PatchFdoBootstrapAuthenticationRule
   @doc("The type of authentication rule.")
   type: BootstrapAuthenticationType.FDO;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Per policy public keys to represent this policy")
   publicKeys?: FdoPublicKeys;
 
@@ -916,7 +914,7 @@ model PatchEvenlyDistributedAllocationRule extends AllocationRulePatch {
   @doc("List of endpoints for evenly distributed allocation type.")
   @maxItems(10)
   @minItems(1)
-  @extension("x-ms-identifiers", ["resourceId"])
+  @Azure.ResourceManager.identifiers(#["resourceId"])
   endpoints?: Array<PatchAllocationEndpoint>;
 }
 
@@ -967,7 +965,7 @@ model AllocatedEndpoint {
 
 @doc("Details of the DeviceState")
 model DeviceStateProperties {
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Unique identifier for the device. Allow alphanumeric and '-', '.', '_', ':' only. Last character can only be alphanumeric and '-'")
   @maxLength(128)
   @pattern("^([a-z0-9-._:]{0,127}[a-z0-9-])$")
@@ -976,7 +974,7 @@ model DeviceStateProperties {
   @doc("Indicates if the device is enabled for discovery")
   discoveryEnabled?: DiscoveryOptions;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Onboarding status of the resource this DeviceState extends")
   onboardingStatus: OnboardingStatus;
 
@@ -985,15 +983,15 @@ model DeviceStateProperties {
 
   @doc("Array of previously allocated endpoints")
   @maxItems(1)
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   allocatedEndpoints?: Array<AllocatedEndpoint>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
   @added(Versions.v2024_12_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Indicates the maximum date and time by which a device can be onboarded, in utcDateTime format")
   onboardUntilDate?: utcDateTime;
 }

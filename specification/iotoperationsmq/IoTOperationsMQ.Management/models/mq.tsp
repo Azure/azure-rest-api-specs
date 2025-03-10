@@ -32,7 +32,7 @@ model MqResource is TrackedResource<MqProperties> {
 
 @doc("MQ Resource properties")
 model MqProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

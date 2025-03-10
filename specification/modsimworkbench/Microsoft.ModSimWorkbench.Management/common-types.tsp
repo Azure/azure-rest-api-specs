@@ -13,9 +13,7 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 
-@service({
-  title: "ModSimWorkbench Control Plane API",
-})
+@service(#{ title: "ModSimWorkbench Control Plane API" })
 @versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
 
@@ -63,7 +61,7 @@ union ProvisioningState {
 
 @doc("The property for specifying the status of the last operation.")
 model ProvisioningStateProperty {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -87,21 +85,21 @@ union PowerState {
 
 @doc("The property for specifying the power state.")
 model PowerStateProperty {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Power state.")
   powerState?: PowerState; // TODO: Change this as not optional for public release.
 }
 
 @doc("The property for specifying capacity allocated.")
 model CapacityAllocatedProperty {
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Provisioned size: Capacity allocated to the storage volume in terabytes.")
   capacityAllocated: int64;
 }
 
 @doc("The property for specifying capacity used.")
 model CapacityUsedProperty {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Capacity used in the storage volume in gigabytes.")
   capacityUsed?: int64;
 }
@@ -114,12 +112,12 @@ model CapacityUsedProperty {
 @added(Versions.`2024-05-01-preview`)
 model BaseSku {
   /** The name of the SKU. Ex - P3. It is typically a letter+number code */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Sku name.")
   name: string;
 
   /** This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Sku tier.")
   tier?: string;
 }
@@ -136,16 +134,16 @@ model StorageSku {
   ...BaseSku;
 
   /** The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. */
-  // @visibility("read")
+  //@visibility(Lifecycle.Read)
   // @doc("Sku size.")
   // size?: string;
   /** If the service has different generations of hardware, for the same SKU, then that can be captured here. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Sku family.")
   family?: string;
 
   /** If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted. */
-  // @visibility("read")
+  //@visibility(Lifecycle.Read)
   // @doc("Sku capacity.")
   // capacity?: int32;
 }
@@ -159,21 +157,21 @@ model StorageBaseProperties {
   ...CapacityUsedProperty;
 
   @removed(Versions.`2024-05-01-preview`)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Directory where the storage volume is mounted.")
   localMountPath?: string;
 }
 
 @doc("The property for specifying timestamp when restart is required.")
 model RestartAtProperty {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Timestamp when restart is required.")
   restartAt?: utcDateTime;
 }
 
 @doc("Property for timestamp.")
 model TimestampProperty {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Timestamp in UTC format")
   timestamp: utcDateTime;
 }

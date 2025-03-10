@@ -7,7 +7,7 @@ namespace Microsoft.Sovereign;
 @doc("The properties of the Transparency Log resource type.")
 @added(Versions.Preview20240331)
 model TransparencyLogProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of a user-initiated, control-plane operation on the Transparency Log.")
   provisioningState?: ResourceProvisioningState;
 

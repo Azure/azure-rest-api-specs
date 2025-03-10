@@ -65,10 +65,10 @@ model AssetPropertiesUpdate {
   defaultTopic?: TopicUpdate;
 
   @doc("Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   datasets?: Dataset[];
 
   @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   events?: Event[];
 }

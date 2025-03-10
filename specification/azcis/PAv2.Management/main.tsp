@@ -6,9 +6,7 @@ using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCaseTypeSpec"
 @armProviderNamespace
-@service({
-  title: "Azure CIS FRP",
-})
+@service(#{ title: "Azure CIS FRP" })
 @doc("PushAgentV2Account Provider")
 @versioned(Microsoft.AzureCis.Versions)
 namespace Microsoft.AzureCis;

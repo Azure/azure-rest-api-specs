@@ -7,51 +7,51 @@ using OpenAPI;
 
 @doc("The hardware information about the server")
 model ServerHardware {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The manufacturer of the server")
   manufacturer?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The model of the server")
   `model`?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Powerstate of the server")
   powerState: PowerState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The serial number of the server")
   serialNumber?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The total RAM capacity of the server")
   memoryGb?: int32;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The total SSD capacity (SATA + NVME) of the server")
   ssdCapacityGb?: int32;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The total HDD capacity of the server")
   hddCapacityGb?: int32;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The processors of the server")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   processors?: ServerHardwareProcessor[];
 
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   @doc("The drives of the server")
   drives?: ServerHardwareDrive[];
 
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   @doc("The GPUs of the server")
   graphicsCards?: ServerHardwareGraphicsCard[];
 
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   @doc("The network cards of the server")
   networkCards?: ServerHardwareNetworkCard[];
 }

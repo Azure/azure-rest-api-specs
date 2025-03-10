@@ -18,7 +18,7 @@ model NetworkRackProperties {
   ]>;
 
   @doc("List of network device ARM resource IDs.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkDevices?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkDevices";
@@ -26,12 +26,12 @@ model NetworkRackProperties {
   ]>[];
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

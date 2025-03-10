@@ -23,7 +23,7 @@ model SharedServerInstance is TrackedResource<SharedServerProperties> {
   @path
   @key("sharedInstanceName")
   @segment("sharedInstances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -42,7 +42,7 @@ interface SharedServerInstances {
   /**
    * Updates the Epic Shared Services Instance resource. &lt;br&gt;&lt;br&gt;This can be used to update tags on the resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmTagsPatchSync<SharedServerInstance>;
 
   /**

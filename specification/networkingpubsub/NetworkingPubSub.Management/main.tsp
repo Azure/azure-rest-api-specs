@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.NetworkingPubSub Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.NetworkingPubSub management service",
-})
+@service(#{ title: "Microsoft.NetworkingPubSub management service" })
 @versioned(Microsoft.NetworkingPubSub.Versions)
 namespace Microsoft.NetworkingPubSub;
 

@@ -30,7 +30,7 @@ model Agent is Azure.ResourceManager.TrackedResource<AgentProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the Agent.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2025_04_01_preview)
   extendedLocation?: ExtendedLocation;
 }
@@ -50,7 +50,7 @@ interface Agents {
   /**
    * Updates Agent.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Agent, TagUpdate>;
 
   /**

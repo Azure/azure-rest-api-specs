@@ -47,7 +47,7 @@ model CatalogCloudEventsConfig extends CloudEventsConfig {
   autoRegisterSchemas: boolean;
 
   @doc("Catalog schemaIds.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   catalogSchemaIds: CatalogSchemaId[];
 
   @doc("access token.")

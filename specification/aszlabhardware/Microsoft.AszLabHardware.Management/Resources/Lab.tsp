@@ -17,7 +17,7 @@ model Lab is TrackedResource<LabProperties> {
 
 @doc("Details of the AszLabHw Lab.")
 model LabProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

@@ -27,7 +27,7 @@ model L3IsolationDomainProperties {
   connectedSubnetRoutePolicy?: ConnectedSubnetRoutePolicy;
 
   @doc("ARM Resource ID of the Network Fabric.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   networkFabricId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkFabrics";
@@ -47,32 +47,32 @@ model L3IsolationDomainProperties {
   routePrefixLimit?: RoutePrefixLimitProperties;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 
 @doc("List of IPv4 and IPv6 aggregate routes.")
 model AggregateRouteConfiguration {
   @doc("List of IPv4 Route prefixes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   ipv4Routes?: AggregateRoute[];
 
   @doc("List of Ipv6Routes prefixes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   ipv6Routes?: AggregateRoute[];
 }
@@ -80,12 +80,12 @@ model AggregateRouteConfiguration {
 @doc("List of IPv4 and IPv6 aggregate routes.")
 model AggregateRoutePatchConfiguration {
   @doc("List of IPv4 Route prefixes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   ipv4Routes?: AggregateRoute[];
 
   @doc("List of Ipv6Routes prefixes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   ipv6Routes?: AggregateRoute[];
 }
@@ -268,6 +268,6 @@ model RoutePrefixLimitPatchProperties is RoutePrefixLimitProperties;
 model L3UniqueRouteDistinguisherProperties {
   @doc("List of Unique Route Distinguisher addresses.")
   @added(Versions.v2024_06_15_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueRds?: string[];
 }

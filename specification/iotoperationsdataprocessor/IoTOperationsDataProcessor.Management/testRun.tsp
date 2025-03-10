@@ -33,11 +33,11 @@ model TestRunRequest {
 @added(Versions.Preview20240201)
 model TestRunResponse {
   @doc("Unordered list of every message state seen at a stages input and output.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   messages?: Message[];
 
   @doc("Unordered list of the results from an individual stage processing a message.")
-  @extension("x-ms-identifiers", ["stage"])
+  @extension("x-ms-identifiers", #["stage"])
   executions?: ExecutionResult[];
 }
 
@@ -108,7 +108,7 @@ model DataSourceMessages extends DataSourceBase {
   type: DataSourceType.messages;
 
   @doc("Messages retrieved from a previous test run.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   messages: Message[];
 }
 

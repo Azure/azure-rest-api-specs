@@ -10,26 +10,26 @@ model NetworkFabricControllerProperties {
   ...AnnotationResource;
 
   @doc("As part of an update, the Infrastructure ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Infrastructure services. (This is a Mandatory attribute)")
-  @OpenAPI.extension("x-ms-identifiers", ["expressRouteCircuitId"])
+  @Azure.ResourceManager.identifiers(#["expressRouteCircuitId"])
   infrastructureExpressRouteConnections?: ExpressRouteConnectionInformation[];
 
   @doc("As part of an update, the workload ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Workload services. (This is a Mandatory attribute).")
-  @OpenAPI.extension("x-ms-identifiers", ["expressRouteCircuitId"])
+  @Azure.ResourceManager.identifiers(#["expressRouteCircuitId"])
   workloadExpressRouteConnections?: ExpressRouteConnectionInformation[];
 
   @doc("InfrastructureServices IP ranges.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   infrastructureServices?: ControllerServices;
 
   @doc("WorkloadServices IP ranges.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   workloadServices?: ControllerServices;
 
   @doc("Managed Resource Group configuration properties.")
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 
   @doc("The NF-ID will be an input parameter used by the NF to link and get associated with the parent NFC Service.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkFabricIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkFabrics";
@@ -37,7 +37,7 @@ model NetworkFabricControllerProperties {
   ]>[];
 
   @doc("A workload management network is required for all the tenant (workload) traffic. This traffic is only dedicated for Tenant workloads which are required to access internet or any other MSFT/Public endpoints. This is used for the backward compatibility.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @removed(Versions.v2024_06_15_preview)
   workloadManagementNetwork?: boolean = true;
 
@@ -45,7 +45,7 @@ model NetworkFabricControllerProperties {
   isWorkloadManagementNetworkEnabled?: IsWorkloadManagementNetworkEnabled = IsWorkloadManagementNetworkEnabled.True;
 
   @doc("List of tenant InternetGateway resource IDs")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantInternetGatewayIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/internetGateways";
@@ -64,12 +64,12 @@ model NetworkFabricControllerProperties {
   nfcSku?: NfcSku = NfcSku.Standard;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Provides you the latest status of the NFC service, whether it is Accepted, updating, Succeeded or Failed. During this process, the states keep changing based on the status of NFC provisioning.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -88,7 +88,7 @@ model ManagedResourceGroupConfiguration {
   name?: string;
 
   @doc("Managed resource group location.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 }
 
@@ -117,11 +117,11 @@ model NetworkFabricControllerPatch {
 @doc("Network Fabric Controller patch properties.")
 model NetworkFabricControllerPatchProperties {
   @doc("As part of an update, the Infrastructure ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Infrastructure services. (This is a Mandatory attribute)")
-  @OpenAPI.extension("x-ms-identifiers", ["expressRouteCircuitId"])
+  @Azure.ResourceManager.identifiers(#["expressRouteCircuitId"])
   infrastructureExpressRouteConnections?: ExpressRouteConnectionInformation[];
 
   @doc("As part of an update, the workload ExpressRoute CircuitID should be provided to create and Provision a NFC. This Express route is dedicated for Workload services. (This is a Mandatory attribute).")
-  @OpenAPI.extension("x-ms-identifiers", ["expressRouteCircuitId"])
+  @Azure.ResourceManager.identifiers(#["expressRouteCircuitId"])
   workloadExpressRouteConnections?: ExpressRouteConnectionInformation[];
 }
 

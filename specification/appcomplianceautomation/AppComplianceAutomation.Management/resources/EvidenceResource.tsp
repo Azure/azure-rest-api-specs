@@ -28,7 +28,7 @@ model EvidenceResource extends Foundations.ProxyResource {
   @path
   @key("evidenceName")
   @segment("evidences")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9-_.]+$")
   name: string;
 

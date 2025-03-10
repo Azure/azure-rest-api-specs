@@ -7,6 +7,8 @@ import "@typespec/openapi";
 import "./ConfigurationModel.tsp";
 import "./ConfigurationType.tsp";
 import "./ProvisioningState.tsp";
+import "./SchemaVersion.tsp";
+import "./VersionParameter.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -20,11 +22,20 @@ namespace Microsoft.Edge;
 @doc("Schema Properties")
 model SchemaProperties {
   @doc("Current Version of schema")
-  currentVersion: string;
+  currentVersion?: string;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+@doc("Schema Version With Update Type")
+model SchemaVersionWithUpdateType {
+  @doc("Update type")
+  updateType?: UpdateType;
+
+  @doc("Schema Version")
+  schemaVersion: SchemaVersion;
 }
 
 @doc("Schema Resource")
@@ -47,6 +58,19 @@ interface Schemas {
 
   @doc("Delete a Schema Resource")
   delete is ArmResourceDeleteWithoutOkAsync<Schema>;
+
+  @doc("Create a Schema Version Resource")
+  createVersion is ArmResourceActionAsync<
+    Schema,
+    SchemaVersionWithUpdateType,
+    SchemaVersion
+  >;
+
+  @doc("Remove Schema Version Resource")
+  removeVersion is ArmResourceActionNoResponseContentAsync<
+    Schema,
+    VersionParameter
+  >;
 
   @doc("List by specified resource group")
   listByResourceGroup is ArmResourceListByParent<Schema>;

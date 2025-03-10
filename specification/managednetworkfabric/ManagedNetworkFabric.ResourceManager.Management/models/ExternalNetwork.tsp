@@ -67,20 +67,20 @@ model ExternalNetworkProperties {
   staticRouteConfiguration?: ExternalNetworkStaticRouteConfiguration;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 
@@ -127,7 +127,7 @@ model ExternalNetworkPropertiesOptionAProperties {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("Fabric ASN number. Example 65001")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxValue(4294967295)
   @minValue(1)
   fabricASN?: int64;
@@ -280,7 +280,7 @@ model ExternalNetworkPatchPropertiesOptionAProperties {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("Fabric ASN number. Example 65001")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxValue(4294967295)
   @minValue(1)
   fabricASN?: int64;
@@ -390,11 +390,11 @@ model ExternalNetworkStaticRouteConfiguration {
   bfdConfiguration?: BfdConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv4Routes?: StaticRouteProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv6Routes?: StaticRouteProperties[];
 }
 
@@ -405,11 +405,11 @@ model ExternalNetworkStaticRoutePatchConfiguration {
   bfdConfiguration?: BfdPatchConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv4Routes?: StaticRoutePatchProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv6Routes?: StaticRoutePatchProperties[];
 }
 

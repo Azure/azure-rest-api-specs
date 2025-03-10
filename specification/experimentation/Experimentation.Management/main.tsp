@@ -21,9 +21,7 @@ using TypeSpec.Versioning;
  * Rest API for Experimentation Service.
  */
 @armProviderNamespace
-@service({
-  title: "Experimentation",
-})
+@service(#{ title: "Experimentation" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Experimentation;

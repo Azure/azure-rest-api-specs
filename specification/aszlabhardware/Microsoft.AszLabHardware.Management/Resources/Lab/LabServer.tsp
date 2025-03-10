@@ -28,31 +28,31 @@ model LabServer is ProxyResource<LabServerProperties> {
 model LabServerProperties {
   ...ServerPropertiesBase;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("update", "read")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
   @doc("The Pool Azure Resource this server is assigned to")
   poolResourceId?: PoolResourceId;
 
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Server management information bag")
   management: ManagementInformation;
 
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The backing data source for this resource")
   externalReference: ExternalReference;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Maintenance status")
   maintenanceStatus: MaintenanceStatus;
 
-  @visibility("update", "read")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
   @doc("Maintenance state")
   maintenanceState?: MaintenanceState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Reservation status")
   reservationStatus: ReservationStatus;
 }

@@ -38,7 +38,7 @@ model OwnershipVoucherPublicKeyProperties {
   @doc("Public key.")
   publicKeyDetails: PublicKeyDetails;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

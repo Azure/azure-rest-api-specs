@@ -14,9 +14,7 @@ using LiftrBase;
 
 /* LambdaTest.HyperExecute Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "LambdaTest.HyperExecute management service",
-})
+@service(#{ title: "LambdaTest.HyperExecute management service" })
 @versioned(LambdaTest.HyperExecute.Versions)
 namespace LambdaTest.HyperExecute;
 

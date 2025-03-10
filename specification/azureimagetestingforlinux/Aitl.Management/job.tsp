@@ -16,7 +16,7 @@ model Job is TrackedResource<JobResourceProperties> {
   @pattern("^[a-zA-Z0-9-_]{3,60}$")
   @key("jobName")
   @segment("jobs")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -42,15 +42,15 @@ model JobResourceProperties is ResourceProperties {
   keepFailedEnvironment?: boolean = false;
 
   @doc("Test results once job is completed.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   results?: TestResultProperties[];
 
   @doc("Test duration in format 5h 10m 2s")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   duration?: string;
 
   @doc("URL to see test logs")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   logUrl?: string;
 }
 

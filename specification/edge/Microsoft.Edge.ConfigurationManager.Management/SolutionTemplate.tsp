@@ -28,14 +28,14 @@ model SolutionTemplateProperties {
   capabilities: string[];
 
   @doc("Latest solution template version")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   latestVersion?: string;
 
   @doc("State of resource")
   state?: ResourceState;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -49,7 +49,7 @@ model SolutionTemplate
 @doc("Solution Template Version With Update Type")
 model SolutionTemplateVersionWithUpdateType {
   @doc("Update type")
-  updateType: UpdateType;
+  updateType?: UpdateType;
 
   @doc("Solution Template Version")
   solutionTemplateVersion: SolutionTemplateVersion;

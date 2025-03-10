@@ -29,7 +29,7 @@ interface CodeSigningAccounts {
   create is ArmResourceCreateOrReplaceAsync<CodeSigningAccount>;
 
   @doc("Update a trusted signing account.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<CodeSigningAccount, CodeSigningAccountPatch>;
 
   @doc("Delete a trusted signing account.")

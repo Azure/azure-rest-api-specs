@@ -11,9 +11,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.HealthPlatform Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.HealthPlatform management service",
-})
+@service(#{ title: "Microsoft.HealthPlatform management service" })
 @versioned(Versions)
 namespace Microsoft.HealthPlatform;
 
@@ -30,7 +28,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("Details of the HealthPlatform Account.")
 model AccountProperties {
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -49,6 +47,7 @@ model Account is TrackedResource<AccountProperties> {
 interface Accounts {
   get is ArmResourceRead<Account>;
   list is ArmResourceListByParent<Account>;
+  listBySubscription is ArmListBySubscription<Account>;
   create is ArmResourceCreateOrReplaceSync<Account>;
   update is ArmResourcePatchSync<Account, AccountProperties>;
   delete is ArmResourceDeleteSync<Account>;

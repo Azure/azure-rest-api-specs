@@ -16,49 +16,49 @@ model NetworkDeviceProperties {
   serialNumber: string;
 
   @doc("Current version of the device as defined in SKU.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   @doc("Network Device SKU name.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   networkDeviceSku?: string;
 
   @doc("NetworkDeviceRole is the device role: Example: CE | ToR.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkDeviceRole?: NetworkDeviceRole;
 
   @doc("Reference to network rack resource id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkRackId?: string;
 
   @doc("Management IPv4 Address.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managementIpv4Address?: string;
 
   @doc("Management IPv6 Address.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managementIpv6Address?: string;
 
   @doc("User configured read-write configuration applied on the network devices.")
   @added(Versions.v2024_06_15_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rwDeviceConfig?: string;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 

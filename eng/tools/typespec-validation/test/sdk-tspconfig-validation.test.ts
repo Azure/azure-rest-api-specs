@@ -22,14 +22,15 @@ import {
   TspConfigGoDpServiceDirMatchPatternSubRule,
   TspConfigJavaAzPackageDirectorySubRule,
   TspConfigPythonMgmtPackageDirectorySubRule,
-  TspConfigPythonMgmtPackageNameEqualStringSubRule,
-  TspConfigPythonMgmtGenerateTestTrueSubRule,
-  TspConfigPythonMgmtGenerateSampleTrueSubRule,
+  TspConfigPythonAzPackageNameEqualStringSubRule,
+  TspConfigPythonAzGenerateTestTrueSubRule,
+  TspConfigPythonAzGenerateSampleTrueSubRule,
   TspConfigCsharpAzPackageDirectorySubRule,
   TspConfigCsharpAzNamespaceEqualStringSubRule,
   TspConfigCsharpAzClearOutputFolderTrueSubRule,
   TspConfigCsharpMgmtPackageDirectorySubRule,
   TspconfigSubRuleBase,
+  TspConfigPythonDpPackageDirectorySubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { join } from "path";
@@ -112,8 +113,9 @@ function createEmitterOptionTestCases(
 ): Case[] {
   const cases: Case[] = [];
 
+  const language = emitterName.split("-").pop();
   cases.push({
-    description: `Validate ${emitterName}'s option:${key} with valid value ${validValue}`,
+    description: `Validate ${language}'s option:${key} with valid value ${validValue}`,
     folder,
     tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: validValue }),
     success: true,
@@ -121,7 +123,7 @@ function createEmitterOptionTestCases(
   });
 
   cases.push({
-    description: `Validate ${emitterName}'s option:${key} with invalid value ${invalidValue}`,
+    description: `Validate ${language}'s option:${key} with invalid value ${invalidValue}`,
     folder,
     tspconfigContent: createEmitterOptionExample(emitterName, {
       key: key,
@@ -132,7 +134,7 @@ function createEmitterOptionTestCases(
   });
 
   cases.push({
-    description: `Validate ${emitterName}'s option:${key} with undefined value`,
+    description: `Validate ${language}'s option:${key} with undefined value`,
     folder,
     tspconfigContent: createEmitterOptionExample(emitterName),
     success: allowUndefined ? true : false,
@@ -141,7 +143,7 @@ function createEmitterOptionTestCases(
 
   if (!allowUndefined && key.includes(".")) {
     cases.push({
-      description: `Validate ${emitterName}'s option:${key} with incomplete key`,
+      description: `Validate ${language}'s option:${key} with incomplete key`,
       folder,
       tspconfigContent: createEmitterOptionExample(emitterName, {
         key: key.split(".").slice(0, -1).join("."),
@@ -368,7 +370,7 @@ const pythonManagementPackageNameTestCases = createEmitterOptionTestCases(
   "package-name",
   "{package-dir}",
   "aaa",
-  [new TspConfigPythonMgmtPackageNameEqualStringSubRule()],
+  [new TspConfigPythonAzPackageNameEqualStringSubRule()],
 );
 
 const pythonManagementGenerateTestTestCases = createEmitterOptionTestCases(
@@ -377,7 +379,7 @@ const pythonManagementGenerateTestTestCases = createEmitterOptionTestCases(
   "generate-test",
   true,
   false,
-  [new TspConfigPythonMgmtGenerateTestTrueSubRule()],
+  [new TspConfigPythonAzGenerateTestTrueSubRule()],
 );
 
 const pythonManagementGenerateSampleTestCases = createEmitterOptionTestCases(
@@ -386,7 +388,43 @@ const pythonManagementGenerateSampleTestCases = createEmitterOptionTestCases(
   "generate-sample",
   true,
   false,
-  [new TspConfigPythonMgmtGenerateSampleTrueSubRule()],
+  [new TspConfigPythonAzGenerateSampleTrueSubRule()],
+);
+
+const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-python",
+  "",
+  "package-dir",
+  "azure-aaa-bbb-ccc",
+  "azure-aa-b-c-d",
+  [new TspConfigPythonDpPackageDirectorySubRule()],
+);
+
+const pythonAzPackageNameTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-python",
+  "",
+  "package-name",
+  "{package-dir}",
+  "aaa",
+  [new TspConfigPythonAzPackageNameEqualStringSubRule()],
+);
+
+const pythonAzGenerateTestTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-python",
+  "",
+  "generate-test",
+  true,
+  false,
+  [new TspConfigPythonAzGenerateTestTrueSubRule()],
+);
+
+const pythonAzGenerateSampleTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-python",
+  "",
+  "generate-sample",
+  true,
+  false,
+  [new TspConfigPythonAzGenerateSampleTrueSubRule()],
 );
 
 const csharpAzPackageDirTestCases = createEmitterOptionTestCases(
@@ -457,6 +495,10 @@ describe("tspconfig", function () {
     ...pythonManagementPackageNameTestCases,
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
+    ...pythonDpPackageDirTestCases,
+    ...pythonAzPackageNameTestCases,
+    ...pythonAzGenerateTestTestCases,
+    ...pythonAzGenerateSampleTestCases,
     // csharp
     ...csharpAzPackageDirTestCases,
     ...csharpAzNamespaceTestCases,

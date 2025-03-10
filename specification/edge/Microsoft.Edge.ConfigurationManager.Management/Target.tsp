@@ -38,7 +38,7 @@ model SolutionTemplateParameter {
   solutionInstanceName?: string;
 
   @doc("Solution Dependencies")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   solutionDependencies?: SolutionDependencyParameter[];
 }
 
@@ -74,7 +74,7 @@ model SolutionDependencyParameter {
   targetId?: string;
 
   @doc("Solution dependencies")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   dependencies?: SolutionDependencyParameter[];
 }
 
@@ -87,10 +87,22 @@ model InstallSolutionParameter {
   solutionVersion: string;
 }
 
-@doc("Solution Parameter")
-model SolutionParameter {
+@doc("Uninstall Solution Parameter")
+model UninstallSolutionParameter {
   @doc("Solution Name")
   solutionName: string;
+
+  @doc("Solution Instance Name")
+  solutionInstanceName?: string;
+}
+
+@doc("Install Solution Parameter")
+model RemoveRevisionParameter {
+  @doc("Solution Name")
+  solution: string;
+
+  @doc("Solution Version Name")
+  solutionVersion: string;
 }
 
 @doc("Target Properties")
@@ -113,7 +125,7 @@ model TargetProperties {
   hierarchyLevel: string;
 
   @doc("Status of target")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: DeploymentStatus;
 
   @doc("Scope of the target resource")
@@ -123,7 +135,7 @@ model TargetProperties {
   state?: ResourceState;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -184,13 +196,13 @@ interface Targets {
   @doc("Post request to uninstall")
   uninstallSolution is ArmResourceActionNoResponseContentAsync<
     Target,
-    SolutionParameter
+    UninstallSolutionParameter
   >;
 
   @doc("Post request to remove solution version revision")
   removeRevision is ArmResourceActionNoResponseContentAsync<
     Target,
-    SolutionTemplateParameter
+    RemoveRevisionParameter
   >;
 
   @doc("Post request to resolve configuration")

@@ -15,9 +15,7 @@ using LiftrBase;
 
 /* MongoDB.Atlas Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "MongoDB.Atlas",
-})
+@service(#{ title: "MongoDB.Atlas" })
 @versioned(MongoDB.Atlas.Versions)
 namespace MongoDB.Atlas;
 
@@ -56,14 +54,14 @@ model UserDetails {
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
   @doc("Marketplace details of the resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   marketplace: MarketplaceDetails;
 
   @doc("Details of the user.")
   user: UserDetails;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

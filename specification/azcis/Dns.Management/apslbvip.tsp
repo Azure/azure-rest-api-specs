@@ -23,11 +23,11 @@ model ApSlbVipResourceProperties {
   azureLocation?: azureLocation;
 
   @doc("Provisioning status of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ApSlbVipProvisioningState;
 
   @doc("IP address of an Ap Dns; a part of provisioning ResultData output.")
-  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   assignedVip?: string;
 }
 
@@ -38,7 +38,7 @@ model ApSlbVipResource is ProxyResource<ApSlbVipResourceProperties> {
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
   @segment("autoPilotSoftwareLoadBalanceVirtualIps") // start with lower case
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

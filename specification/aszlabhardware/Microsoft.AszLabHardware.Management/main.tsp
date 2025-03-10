@@ -19,8 +19,6 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "AszLabHardware Resource Provider",
-})
+@service(#{ title: "AszLabHardware Resource Provider" })
 @versioned(AszLabHardwareCurrentVersion)
 namespace Microsoft.AszLabHardware;

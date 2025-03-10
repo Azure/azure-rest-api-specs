@@ -48,7 +48,7 @@ model CustomRule {
   // Use the following doc for RateBased custom rule
   // @doc("The list of conditions that must be met for an incoming request to be included in the rate calculation")
   @doc("A list of conditions that must be met for the actions to be executed")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @minItems(MinCustomRuleConditionsCount)
   @maxItems(MaxCustomRuleConditionsCount)
   matchConditions: CustomRuleCondition[];

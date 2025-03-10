@@ -60,7 +60,7 @@ export function getArgumentValue(args: string[], flag: string, defaultValue: str
  * Get the relative path from the specification folder
  */
 export function getRelativePathFromSpecification(absolutePath: string): string {
-  const specificationIndex = absolutePath.indexOf("specification/");
+  const specificationIndex = absolutePath.indexOf(path.normalize("specification/"));
   if (specificationIndex !== -1) {
     return absolutePath.slice(Math.max(0, specificationIndex));
   }
@@ -380,10 +380,14 @@ export function groupPathsByService(
   return serviceMap;
 }
 
-export function getLastPathSegment(path: string): string {
-  const segments = path.split("/");
-  // eslint-disable-next-line unicorn/prefer-at
-  return segments[segments.length - 1];
+export function getLastPathSegment(pathString: string): string {
+  if (pathString === "") {
+    return "";
+  }
+  // Normalize path separators and handle both Windows and Unix paths
+  const normalized = path.normalize(pathString);
+  const segments = normalized.split(path.sep);
+  return segments?.pop() ?? "";
 }
 
 export type SpecResults = {

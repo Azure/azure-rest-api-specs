@@ -19,9 +19,7 @@ using TypeSpec.Versioning;
  * Allows creation and deletion of Azure portal extensions.
  */
 @armProviderNamespace
-@service({
-  title: "Microsoft.PortalServices",
-})
+@service(#{ title: "Microsoft.PortalServices" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.PortalServices;

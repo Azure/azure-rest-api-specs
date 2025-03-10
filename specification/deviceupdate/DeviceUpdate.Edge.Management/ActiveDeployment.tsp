@@ -31,7 +31,7 @@ model ActiveDeployment
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the ActiveDeployment.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2025_04_01_preview)
   extendedLocation?: ExtendedLocation;
 }
@@ -51,7 +51,7 @@ interface ActiveDeployments {
   /**
    * Updates Active Deployment.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<ActiveDeployment, TagUpdate>;
 
   /**

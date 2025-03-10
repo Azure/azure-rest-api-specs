@@ -28,7 +28,7 @@ model StandbyVirtualMachinePoolRuntimeViewResource
   @pattern("^[a-zA-Z0-9-]{0,24}$")
   @key("runtimeView")
   @segment("runtimeViews")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The unique identifier for the runtime view. The input string should be the word 'latest', which will get the latest runtime view of the pool, otherwise the request will fail with NotFound exception.")
   @path
   name: string;
@@ -38,17 +38,17 @@ model StandbyVirtualMachinePoolRuntimeViewResource
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
 model StandbyVirtualMachinePoolRuntimeViewResourceProperties {
   @doc("A list containing the counts of virtual machines in each possible power state for each zone if enabled, as known by the StandbyPool resource provider.\nIf zones are not enabled on the attached VMSS, the list will contain a single entry without zone values.\nNote: any resources in the Running state may still be installing extensions / not fully provisioned.")
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   instanceCountSummary: VirtualMachineInstanceCountSummary[];
 
   @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   @doc("Display status of the standby pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: PoolStatus;
 
   @doc("Displays the provisioning state of the standby pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -59,7 +59,7 @@ model VirtualMachineInstanceCountSummary {
   zone?: int64;
 
   @doc("The count of pooled virtual machines in each state for the given zone.")
-  @extension("x-ms-identifiers", ["state"])
+  @Azure.ResourceManager.identifiers(#["state"])
   @removed(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   @renamedFrom(
     Microsoft.StandbyPool.Versions.`2024-08-01-preview`,
@@ -68,7 +68,7 @@ model VirtualMachineInstanceCountSummary {
   oldinstanceCountsByState: PoolResourceStateCount[];
 
   @doc("The count of pooled virtual machines in each state for the given zone.")
-  @extension("x-ms-identifiers", ["state"])
+  @Azure.ResourceManager.identifiers(#["state"])
   @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   instanceCountsByState: PoolVirtualMachineStateCount[];
 }

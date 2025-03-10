@@ -38,13 +38,13 @@ interface PgsqlSites {
   // /**
   //  * Patch the PGSQLSites resource.
   //  */
-  // @parameterVisibility
+  // @patch(#{ implicitOptionality: false })
   // update is ArmResourcePatchAsync<PgsqlSite, PgsqlSiteProperties>;
 
   /**
    * Patch the PGSQLSites resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<PgsqlSite, SiteTagsPatch>;
 
   /**

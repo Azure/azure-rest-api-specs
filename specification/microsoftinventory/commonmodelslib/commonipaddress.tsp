@@ -57,7 +57,7 @@ model PublicIpAddressPropertiesBase {
   dcCode: string;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

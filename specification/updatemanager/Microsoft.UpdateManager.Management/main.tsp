@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.UpdateManager Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.UpdateManager service",
-})
+@service(#{ title: "Microsoft.UpdateManager service" })
 @versioned(Microsoft.UpdateManager.Versions)
 namespace Microsoft.UpdateManager;
 

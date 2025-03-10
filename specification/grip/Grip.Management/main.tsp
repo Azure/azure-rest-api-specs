@@ -14,10 +14,7 @@ using Azure.ResourceManager.Foundations;
 using OpenAPI;
 
 @armProviderNamespace
-@service({
-  title: "GRIP Service",
-  version: "2023-07-13",
-})
+@service(#{ title: "GRIP Service", version: "2023-07-13" })
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.Grip;
@@ -411,7 +408,7 @@ model JobDefinitionProperties {
   tier: int32;
 
   @doc("Provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -420,7 +417,7 @@ model JobDefinitionResource is ProxyResource<JobDefinitionProperties> {
   @pattern("^[a-zA-Z0-9-]{3,50}$")
   @key("jobName")
   @segment("jobs")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

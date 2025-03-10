@@ -34,7 +34,7 @@ model OccurrenceResultSummary {
   total: int32;
 
   @doc("The summarized status of the resources.")
-  @OpenAPI.extension("x-ms-identifiers", ["code"])
+  @Azure.ResourceManager.identifiers(#["code"])
   statuses: ResourceResultSummary[];
 }
 
@@ -42,15 +42,15 @@ model OccurrenceResultSummary {
 @doc("Properties for an occurrence")
 model OccurrenceProperties {
   @doc("The time the occurrence was initial scheduled for. Actual scheduled time for resources can change by calling the delay API")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   initialScheduledTime: utcDateTime;
 
   @doc("The result for occurrences that achieved a terminal state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resultSummary: OccurrenceResultSummary;
 
   @doc("The aggregated provisioning state of the occurrence")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: OccurrenceState;
 }
 
@@ -67,15 +67,15 @@ model Occurrence is ProxyResource<OccurrenceProperties> {
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 model OccurrenceResource is AutoActionResource {
   @doc("The time the occurrence is scheduled for the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scheduledTime: utcDateTime;
 
   @doc("The current state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("Error details for the resource. Only populated if resource is in failed state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorDetails?: Azure.Core.Foundations.Error;
 }
 

@@ -19,7 +19,7 @@ namespace Microsoft.Edge;
 @doc("ArcGatewayConfigurationProperties Properties")
 model ArcGatewayConfigurationProperties {
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("Scenario in which this configuration is used")

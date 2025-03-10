@@ -50,7 +50,7 @@ model ValidatedSolutionRecipeContent {
   capabilities?: ValidatedSolutionRecipeCapabilities;
 
   @doc("Represents components available in a validated solution recipe.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   components: Array<ValidatedSolutionRecipeComponent>;
 }
 
@@ -66,11 +66,11 @@ model ValidatedSolutionRecipeInfo {
 @doc("Represents capabilities available in a validated solution recipe.")
 model ValidatedSolutionRecipeCapabilities {
   @doc("Represents the cluster capabilities.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   clusterCapabilities: Array<ValidatedSolutionRecipeCapability>;
 
   @doc("Represents the node capabilities.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   nodeCapabilities: Array<ValidatedSolutionRecipeCapability>;
 }
 
@@ -98,7 +98,7 @@ model ValidatedSolutionRecipeComponent {
   tags: Array<string>;
 
   @doc("Represents the component's payloads.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   payloads?: Array<ValidatedSolutionRecipeComponentPayload>;
 
   @doc("Represents the component's metadata.")

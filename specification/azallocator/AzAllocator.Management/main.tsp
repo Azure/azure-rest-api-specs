@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.AzAllocator Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.AzAllocator management service",
-})
+@service(#{ title: "Microsoft.AzAllocator management service" })
 @versioned(Microsoft.AzAllocator.Versions)
 namespace Microsoft.AzAllocator;
 

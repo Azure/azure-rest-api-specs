@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.ManufacturingPlatform")
-@service({
-  title: "Microsoft.ManufacturingPlatform",
-})
+@service(#{ title: "Microsoft.ManufacturingPlatform" })
 @versioned(Microsoft.ManufacturingPlatform.Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.ManufacturingPlatform;
@@ -42,7 +40,7 @@ model MdsResource is TrackedResource<MdsResourceProperties> {
   @segment("manufacturingDataServices")
   @doc("Name.")
   @path
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   ...ManagedServiceIdentityProperty;
@@ -104,114 +102,114 @@ union RedundancyState {
 
 @doc("Details of the ManufacturingPlatform MdsResource.")
 model MdsResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
   @doc("Mds Resource Version.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   version?: string;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Enable Teams Notification.")
   @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
   enableTeamsNotification?: boolean;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Enable Copilot.")
   enableCopilot?: boolean;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @added(Versions.v2024_02_01_preview)
   @doc("Enable Diagnostic Settings.")
   enableDiagnosticSettings?: boolean;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("AAD Application Id.")
   @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
   aadApplicationId: string;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("AKS Admin Group Id.")
   @pattern("^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^$")
   @madeOptional(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   aksAdminGroupId?: string = "00000000-0000-0000-0000-000000000000";
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Continuous Export Period.")
   @madeOptional(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
   continuousExportPeriod?: int32 = 0;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Service Url")
   serviceUrl?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of AKS Created.")
   aksProfile?: AksProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Storage Created.")
   storageProfile?: StorageProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Database Created.")
   databaseProfile?: DatabaseProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Adx Created.")
   adxProfile?: AdxProfile;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is removed in 2024-02-01-preview version"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Akv Created.")
   @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   akvProfile?: AkvProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Azure Redis Created.")
   redisProfile?: RedisProfile;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is removed in 2024-02-01-preview version"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Adt Created.")
   @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   adtProfile?: AdtProfile;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is removed in 2024-02-01-preview version"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Synapse Created.")
   @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   synapseProfile?: SynapseProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Monitoring Resource Created.")
   monitoringProfile?: MonitoringProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of EventHub Resource.")
   eventHubProfile?: EventHubProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Profile of Function App Resource.")
   functionAppProfile?: FunctionAppProfile;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is a well-known abbreviation"
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Profile of OpenAI Resource.")
   openAIProfile?: OpenAIProfile;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Configuration of the managed resource group associated with the resource.")
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Managed On Behalf Of Configuration.")
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("Profile of Azure Machine Learning Resource.")
   @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
@@ -219,22 +217,22 @@ model MdsResourceProperties {
 
   @doc("Profile of User Managed Database.")
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
   userManagedDatabaseProfile?: UserManagedDatabaseProfile;
 
   @doc("Profile of User Managed Adx.")
   @added(Versions.v2024_02_01_preview)
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
   userManagedAdxProfile?: UserManagedAdxProfile;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("Profile of CMK Settings.")
   cmkProfile?: CmkProfile;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("Profile of Fabric resources.")
   fabricProfile?: FabricProfile;
@@ -242,58 +240,58 @@ model MdsResourceProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is a well-known abbreviation"
   @doc("Profile of User Managed OpenAI Resource.")
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   userManagedOpenAIProfile?: UserManagedOpenAIProfile;
 
   @doc("Deny Assignments exclusion list.")
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   denyAssignmentExclusions?: DenyAssignmentExclusion[];
 
   @doc("State of the resource")
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   resourceState?: ResourceState;
 
   @doc("Zone redundancy state for resources")
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   redundancyState?: RedundancyState;
 }
 
 @doc("The properties related to Aks Resource")
 model AksProfile {
   @doc("Resource Id of AKS Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
 @doc("The properties related to Storage Resource")
 model StorageProfile {
   @doc("Resource Id of Storage Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
 @doc("The properties related to Database Resource")
 model DatabaseProfile {
   @doc("Resource Id of Cosmos Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cosmosId?: string;
 }
 
 @doc("The properties related to Azure Data Explorer (Adx) Resource")
 model AdxProfile {
   @doc("Resource Id of Adx Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("Uri of Adx Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uri?: string;
 
   @doc("Data Ingestion Uri of Adx Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataIngestionUri?: string;
 }
 
@@ -302,11 +300,11 @@ model AdxProfile {
 @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
 model AdtProfile {
   @doc("Resource Id of Adt Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("Host Name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostName?: string;
 }
 
@@ -315,7 +313,7 @@ model AdtProfile {
 @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
 model UserManagedDatabaseProfile {
   @doc("Resource Id of Cosmos Resource")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   cosmosId: string;
 }
 
@@ -324,15 +322,15 @@ model UserManagedDatabaseProfile {
 @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
 model UserManagedAdxProfile {
   @doc("Resource Id of Adx Resource")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   id: string;
 
   @doc("Uri of Adx Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uri?: string;
 
   @doc("Data Ingestion Uri of Adx Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataIngestionUri?: string;
 }
 
@@ -341,21 +339,21 @@ model UserManagedAdxProfile {
 @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
 model AkvProfile {
   @doc("Resource Id of Akv Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
 @doc("The properties related to Azure Redis Cache Resource")
 model RedisProfile {
   @doc("Resource Id of Azure Redis Cache Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
 @doc("The properties related to Monitoring Resource")
 model MonitoringProfile {
   @doc("Resource Id of Application Insights Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -364,11 +362,11 @@ model MonitoringProfile {
 @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
 model SynapseProfile {
   @doc("Resource Id of Synapse Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("Synapse Development Endpoint")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   devEndpoint?: string;
 }
 
@@ -376,30 +374,30 @@ model SynapseProfile {
 model EventHubProfile {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is removed in 2024-02-01-preview version"
   @doc("Resource Id of Ingestion Instance EventHub Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   ingestionInstanceId?: string;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is removed in 2024-02-01-preview version"
   @doc("Resource Id of Data History Instance EventHub Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   dhInstanceId?: string;
 
   @doc("Resource Id of Adx Instance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   adxInstanceId?: string;
 
   @doc("Host Name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostName?: string;
 }
 
 @doc("The properties related to Azure Function App Resource")
 model FunctionAppProfile {
   @doc("Resource Id of Azure Function App Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -407,47 +405,47 @@ model FunctionAppProfile {
 @doc("The properties related to OpenAI Resource")
 model OpenAIProfile {
   @doc("Resource Id of OpenAI Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("GPT Model Name")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   gptModelName?: string;
 
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("GPT Model Version")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   gptModelVersion?: string;
 
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("GPT Model Capacity")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   gptModelCapacity?: int32;
 
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("GPT Model SKU Name")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   gptModelSkuName?: string;
 
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("Embedding Model Name")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   embeddingModelName?: string;
 
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("Embedding Model Version")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   embeddingModelVersion?: string;
 
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("Embedding Model SKU Name")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   embeddingModelSkuName?: string;
 
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("Embedding Model Capacity")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   embeddingModelCapacity?: int32;
 }
 
@@ -455,11 +453,11 @@ model OpenAIProfile {
 @doc("The properties related to Deny Assignment Exclusions")
 model DenyAssignmentExclusion {
   @doc("Object Id of Identity")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   id: string;
 
   @doc("Type of Identity")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   type: string;
 }
 
@@ -475,7 +473,7 @@ model ManagedResourceGroupConfiguration {
 @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
 @doc("Configuration of the managed on behalf of resource.")
 model ManagedOnBehalfOfConfiguration {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Associated MoboBrokerResources.")
   moboBrokerResources: MoboBrokerResource[];
 }
@@ -483,7 +481,7 @@ model ManagedOnBehalfOfConfiguration {
 @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
 @doc("MoboBroker resource.")
 model MoboBrokerResource {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Resource Id of MoboBrokerResource")
   id: string;
 }
@@ -493,11 +491,11 @@ model MoboBrokerResource {
 @removed(Microsoft.ManufacturingPlatform.Versions.v2025_03_01)
 model AmlProfile {
   @doc("Resource Id of Azure Machine Learning Resource")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   id: string;
 
   @doc("Custom Ner Service Uri")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   customNerServiceUri: string;
 }
 
@@ -505,7 +503,7 @@ model AmlProfile {
 @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
 model CmkProfile {
   @doc("URI of Key in AKV")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   keyUri: string;
 }
 
@@ -513,15 +511,15 @@ model CmkProfile {
 @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
 model FabricProfile {
   @doc("Azure Key Vault Uri")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   keyUri: string;
 
   @doc("URI of One Lake")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   oneLakeUri: string;
 
   @doc("One Lake Path")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   oneLakePath: string;
 }
 
@@ -530,19 +528,19 @@ model FabricProfile {
 @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
 model UserManagedOpenAIProfile {
   @doc("Resource Id of OpenAI Resource")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   id: string;
 
   @doc("GPT Model Deployment Name")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   gptModelDeploymentName: string;
 
   @doc("Embedding Model Deployment Name")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   embeddingModelDeploymentName: string;
 
   @doc("Embedding Model Type")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   embeddingModelType?: string;
 }
 
@@ -586,7 +584,7 @@ op ArmResourceListActionSync<
 @doc("The list of available versions")
 model AvailableVersionListResult {
   @doc("The list of versions")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   versions: ApplicationVersion[];
 }
 

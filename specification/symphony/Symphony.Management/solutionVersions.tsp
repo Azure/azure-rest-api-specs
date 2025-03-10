@@ -15,11 +15,11 @@ namespace Microsoft.ToolchainOrchestrator;
 @doc("The properties of a SolutionVersion resource.")
 model SolutionVersionProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("A list of components.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   components?: ComponentProperties[];
 
   @doc("The display name of the SolutionVersion resource.")
@@ -46,7 +46,7 @@ model SolutionVersion is TrackedResource<SolutionVersionProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @madeOptional(Versions.v2024_08_01_preview)
   extendedLocation?: ExtendedLocation;
 }

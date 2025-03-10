@@ -19,7 +19,7 @@ namespace Microsoft.AzureTerraform;
 @tag("ExportTerraform")
 @extension(
   "x-ms-long-running-operation-options",
-  {
+  #{
     `final-state-via`: "azure-async-operation",
     `final-state-schema`: "#/definitions/OperationStatus",
   }

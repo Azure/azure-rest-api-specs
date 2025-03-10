@@ -46,7 +46,7 @@ interface Groups {
   /**
    * Updates Group.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Group, TagUpdate>;
 
   /**
