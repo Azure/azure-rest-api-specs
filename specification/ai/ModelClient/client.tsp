@@ -26,7 +26,6 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 // say we still want the models they use to be public, since they will be used by hand-written operator methods.
 @@access(AI.Model.ChatChoice, Access.public);
 @@access(AI.Model.ChatCompletions, Access.public);
-@@access(AI.Model.ChatCompletionsOptions, Access.public, "java");
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
 @@access(AI.Model.ChatCompletionsNamedToolChoice, Access.public);
