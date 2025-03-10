@@ -8,14 +8,14 @@ import {
   getAllTypeSpecPaths,
   resetGitRepo,
 } from "./utils.js";
-import { LogLevel, logMessage, vsoAddAttachment } from "./log.js";
-import { SpecGenSdkCmdInput } from "./types.js";
+import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
+import { CommandLog, SpecGenSdkCmdInput } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 
 export async function generateSdkForSingleSpec(): Promise<number> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
-  const specConfigPath = commandInput.tspConfigPath ?? commandInput.readmePath;
+  const specConfigPath = `${commandInput.tspConfigPath} ${commandInput.readmePath}`;
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
   logMessage(`Generating SDK from ${specConfigPath}`, LogLevel.Group);
@@ -43,6 +43,9 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     statusCode = 1;
   }
   logMessage("ending group logging", LogLevel.EndGroup);
+
+  logIssuesToPipeline(commandInput, specConfigPath);
+  
   return statusCode;
 }
 
@@ -71,7 +74,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
       pushedSpecConfigCount++;
     }
-    const changedSpecPath = changedSpec.typespecProject ?? changedSpec.readmeMd;
+    const changedSpecPath = `${changedSpec.typespecProject} ${changedSpec.readmeMd}`;
     logMessage(`Generating SDK from ${changedSpecPath}`, LogLevel.Group);
     logMessage(`Command:${specGenSdkCommand.join(" ")}`);
 
@@ -105,6 +108,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
+
+    logIssuesToPipeline(commandInput, changedSpecPath);
   }
   return statusCode;
 }
@@ -180,6 +185,8 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
+    
+    logIssuesToPipeline(commandInput, specConfigPath || '');
   }
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
@@ -324,4 +331,58 @@ function getSpecPaths(runMode: string, specRepoPath: string): string[] {
     }
   }
   return specConfigPaths;
+}
+
+/**
+ * Extract and format the prefix from tspConfigPath or readmePath.
+ * This function is copied from 'spec-gen-sdk'.
+ * Source code: [Azure SDK Tools - spec-gen-sdk](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/utils/utils.ts#L171)
+ * @param {string | undefined} tspConfigPath The tspConfigPath to extract the prefix from.
+ * @param {string | undefined} readmePath The readmePath to extract the prefix from.
+ * @returns {string} The formatted prefix.
+ */
+function extractPathFromSpecConfig(tspConfigPath: string | undefined, readmePath: string | undefined): string {
+  let prefix = '';
+  if (tspConfigPath) {
+    const regex = /specification\/(.+)\/tspconfig\.yaml$/
+    const match = regex.exec(tspConfigPath);
+    if (match) {
+      const segments = match[1].split('/');
+      prefix = segments.join('-').toLowerCase().replaceAll('.', '-');
+    }
+  } else if (readmePath) {
+    const regex = /specification\/(.+?)\/readme\.md$/i
+    const match = regex.exec(readmePath);
+    if (match) {
+      const segments = match[1].split('/');
+      prefix = segments.join('-').toLowerCase().replaceAll('.', '-');
+    }
+  }
+  return prefix;
+}
+
+/**
+ * Logs SDK generation issues to Azure DevOps (ADO)
+ * @param commandInput 
+ * @param specConfigPath 
+ */
+function logIssuesToPipeline(commandInput: SpecGenSdkCmdInput, specConfigPath: string): void {
+  const fileNamePrefix = extractPathFromSpecConfig(commandInput.tspConfigPath, commandInput.readmePath)
+  const logFolder = path.join(commandInput.workingFolder, 'out/logs');
+  const logPath = path.join(logFolder, `${fileNamePrefix}-filtered.log`);
+  let logIssues:CommandLog[] = []
+  try {
+    const log = JSON.parse(fs.readFileSync(logPath, "utf8"));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    logIssues = log.logIssues;
+  } catch (error) {
+    logMessage(`Error reading log at ${logPath}:${error}`, LogLevel.Error);
+  }
+
+  if(logIssues.length > 0) {
+    logMessage(`Error generating SDK from ${specConfigPath}`, LogLevel.Group);
+    const logIssuesList = logIssues.flatMap(entry => [`Get log issues from script ${entry.command} `, ...entry.logIssues]);;
+    vsoLogIssue(logIssuesList.join('%0D%0A'));
+    logMessage("ending group logging", LogLevel.EndGroup);
+  }
 }
