@@ -201,7 +201,6 @@ interface BatchClient {
 );
 
 @@clientName(BatchClient.rebootNode, "rebootNodeInternal", "java");
-@@clientName(BatchClient.startNode, "startNodeInternal", "java");
 @@clientName(BatchClient.reimageNode, "reimageNodeInternal", "java");
 @@clientName(BatchClient.deallocateNode, "deallocateNodeInternal", "java");
 @@clientName(BatchClient.disableNodeScheduling,

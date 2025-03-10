@@ -562,3 +562,24 @@ op getNodeCustomization is Azure.Batch.ReadOperationNew<
 >;
 
 @@override(Azure.Batch.Nodes.getNode, getNodeCustomization, "java");
+
+// Start Node Operation
+@doc("Optional parameters for Start Node operation.")
+model StartBatchNodeOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Start Node operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/start")
+op startNodeCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.StartNodeRequiredParameters;
+
+    @doc("Optional parameters for Start Node operation.")
+    options?: StartBatchNodeOptions;
+  },
+  Azure.Batch.AcceptedProcessingResponseHeaders
+>;
+
+@@override(Azure.Batch.Nodes.startNode, startNodeCustomization, "java");

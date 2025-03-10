@@ -1514,6 +1514,16 @@ alias GetNodeOptionalParameters = {
   $select?: string[];
 };
 
+alias StartNodeRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node that you want to restart.")
+  @path
+  nodeId: string;
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1603,16 +1613,10 @@ interface Nodes {
   @summary("Starts the specified Compute Node.")
   @doc("You can start a Compute Node only if it has been deallocated.")
   @route("/pools/{poolId}/nodes/{nodeId}/start")
-  @clientName("startNodeInternal", "java")
-  startNode is PostOperation<
+  startNode is PostOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node that you want to restart.")
-      @path
-      nodeId: string;
+      ...CommonParameters;
+      ...StartNodeRequiredParameters;
     },
     AcceptedProcessingResponseHeaders
   >;
