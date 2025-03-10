@@ -36,6 +36,9 @@
   "tags": [
     {
       "name": "ValidatedSolutionRecipes"
+    },
+    {
+      "name": "ResourceGroupValidatedSolutionRecipes"
     }
   ],
   "paths": {
@@ -124,6 +127,101 @@
         "x-ms-examples": {
           "ValidatedSolutionRecipes_Get": {
             "$ref": "./examples/ValidatedSolutionRecipes_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/locations/{location}/resourceGroupValidatedSolutionRecipes": {
+      "get": {
+        "operationId": "ResourceGroupValidatedSolutionRecipes_ListByResourceGroupLocationResource",
+        "tags": [
+          "ResourceGroupValidatedSolutionRecipes"
+        ],
+        "description": "List all validated solution recipes.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceGroupValidatedSolutionRecipeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceGroupValidatedSolutionRecipes_ListByResourceGroupLocationResource_MaximumSet": {
+            "$ref": "./examples/ResourceGroupValidatedSolutionRecipes_ListByResourceGroupLocationResource_MaximumSet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/locations/{location}/resourceGroupValidatedSolutionRecipes/{resourceGroupValidatedSolutionRecipeName}": {
+      "get": {
+        "operationId": "ResourceGroupValidatedSolutionRecipes_Get",
+        "tags": [
+          "ResourceGroupValidatedSolutionRecipes"
+        ],
+        "description": "Get a validated solution recipe.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "resourceGroupValidatedSolutionRecipeName",
+            "in": "path",
+            "description": "The name of the ResourceGroupValidatedSolutionRecipe",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceGroupValidatedSolutionRecipe"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceGroupValidatedSolutionRecipes_Get_MaximumSet": {
+            "$ref": "./examples/ResourceGroupValidatedSolutionRecipes_Get_MaximumSet.json"
           }
         }
       }
