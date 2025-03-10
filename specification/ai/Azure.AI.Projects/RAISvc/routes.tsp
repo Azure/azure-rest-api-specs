@@ -63,7 +63,7 @@ interface RAISvc {
       @query
       lang?: string;
 
-      @doc("The pyrit strategy")
+      @doc("The strategy")
       @query
       strategy?: string;
     },
