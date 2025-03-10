@@ -75,6 +75,18 @@ directive:
     from: SessionPools.json
     reason: |
       Session Pool is using managed identity. While the type is a required property, this rule prevent it being present in the patch request body.
+  - suppress: PutResponseCodes
+    from: ConnectedEnvironmentsCertificates.json
+    reason: |
+      Do not introduce breaking changes in GA services 
+  - suppress: PutResponseCodes
+    from: ConnectedEnvironmentsDaprComponents.json
+    reason: |
+      Do not introduce breaking changes in GA services 
+  - suppress: PutResponseCodes
+    from: ConnectedEnvironmentsStorages.json
+    reason: |
+      Do not introduce breaking changes in GA services 
 ```
 
 ### Tag: package-preview-2024-10
