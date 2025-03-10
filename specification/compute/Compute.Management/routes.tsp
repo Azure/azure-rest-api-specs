@@ -10,7 +10,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
-using Azure.Core;
 
 namespace Microsoft.Compute;
 
@@ -93,7 +92,9 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @get
   @action("publishers")
   listPublishers is ComputeProviderActionSync<
-    Response = Page<VirtualMachineImageResource>,
+    Response = {
+      @bodyRoot _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -115,7 +116,9 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @get
   @action("artifacttypes/vmimage/offers")
   listOffers is ComputeProviderActionSync<
-    Response = Page<VirtualMachineImageResource>,
+    Response = {
+      @bodyRoot _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -144,7 +147,9 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @get
   @action("skus")
   listSkus is ComputeProviderActionSync<
-    Response = Page<VirtualMachineImageResource>,
+    Response = {
+      @bodyRoot _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -187,7 +192,9 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @get
   @action("versions")
   list is ComputeProviderActionSync<
-    Response = Page<VirtualMachineImageResource>,
+    Response = {
+      @bodyRoot _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -324,7 +331,9 @@ interface VirtualMachineImagesOperations {
   @get
   @action("publishers")
   listPublishers is ComputeProviderActionSync<
-    Response = Page<VirtualMachineImageResource>,
+    Response = {
+      @bodyRoot _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
@@ -337,7 +346,9 @@ interface VirtualMachineImagesOperations {
   @get
   @action("artifacttypes/vmimage/offers")
   listOffers is ComputeProviderActionSync<
-    Response = Page<VirtualMachineImageResource>,
+    Response = {
+      @bodyRoot _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -359,7 +370,9 @@ interface VirtualMachineImagesOperations {
   @get
   @action("skus")
   listSkus is ComputeProviderActionSync<
-    Response = Page<VirtualMachineImageResource>,
+    Response = {
+      @bodyRoot _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -395,7 +408,9 @@ interface VirtualMachineImagesOperations {
   @get
   @action("versions")
   list is ComputeProviderActionSync<
-    Response = Page<VirtualMachineImageResource>,
+    Response = {
+      @bodyRoot _: VirtualMachineImageResource[];
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
