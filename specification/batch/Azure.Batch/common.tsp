@@ -142,6 +142,19 @@ op ReplaceOperation<TResource, TResponse> is RpcOperation<
   BatchError
 >;
 
+// TODO: Once we migrate all ReplaceOperation methods in routes.tsp to use this, delete original ReplaceOperation (above) and rename this to ReplaceOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@put
+op ReplaceOperationNew<
+  TResource extends TypeSpec.Reflection.Model,
+  TResponse
+> is RpcOperation<
+  TResource,
+  TResponse & BatchResponseHeaders,
+  NoFilter,
+  BatchError
+>;
+
 #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Azure REST API guidelines recommend using 'default' error response for all error cases. Avoid defining custom 4xx or 5xx error cases."
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @doc("New rpc operation allowing multiple responses")
