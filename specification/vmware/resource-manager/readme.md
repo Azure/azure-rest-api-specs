@@ -137,7 +137,7 @@ directive:
 
 suppressions:
     
-  - suppress: RequiredPropertiesMissingInResourceModel
+  - code: RequiredPropertiesMissingInResourceModel
     reason: False positive for paged response.
     from: vmware.json
     where:
