@@ -13,7 +13,7 @@ namespace Microsoft.CodeSigning;
 @doc("Trusted signing account resource.")
 model CodeSigningAccount is TrackedResource<CodeSigningAccountProperties> {
   @doc("Trusted Signing account name.")
-  @pattern("^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
+  @pattern("^(?!.*--)[A-Za-z][A-Za-z0-9-]{1,22}[A-Za-z0-9]$")
   @path
   @key("accountName")
   @segment("codeSigningAccounts")
