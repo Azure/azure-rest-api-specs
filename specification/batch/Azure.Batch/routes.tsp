@@ -1497,6 +1497,23 @@ alias ReplaceNodeUserRequiredParameters = {
   content: BatchNodeUserUpdateContent;
 };
 
+alias GetNodeRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node that you want to get information about.")
+  @path
+  nodeId: string;
+};
+
+alias GetNodeOptionalParameters = {
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1553,21 +1570,11 @@ interface Nodes {
   @summary("Gets information about the specified Compute Node.")
   @doc("Gets information about the specified Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}")
-  @clientName("getNodeInternal", "java")
-  getNode is ReadOperation<
+  getNode is ReadOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node that you want to get information about.")
-      @path
-      nodeId: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
+      ...CommonParameters;
+      ...GetNodeRequiredParameters;
+      ...GetNodeOptionalParameters;
     },
     BatchNode
   >;
