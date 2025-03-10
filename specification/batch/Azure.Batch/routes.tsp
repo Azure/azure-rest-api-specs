@@ -1459,6 +1459,26 @@ alias CreateNodeUserRequiredParameters = {
   user: BatchNodeUserCreateContent;
 };
 
+alias DeleteNodeUserRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the machine on which you want to delete a user Account.")
+  @path
+  nodeId: string;
+
+  @doc("The name of the user Account to delete.")
+  @path
+  userName: string;
+};
+
+alias DeleteNodeUserResponse = BatchClientResponseHeaders & {
+  @doc("A process exit code.")
+  @statusCode
+  code: "200";
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1486,26 +1506,12 @@ interface Nodes {
     running state.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
-  @clientName("deleteNodeUserInternal", "java")
-  deleteNodeUser is DeleteOperation<
+  deleteNodeUser is DeleteOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the machine on which you want to delete a user Account.")
-      @path
-      nodeId: string;
-
-      @doc("The name of the user Account to delete.")
-      @path
-      userName: string;
+      ...CommonParameters;
+      ...DeleteNodeUserRequiredParameters;
     },
-    BatchClientResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode
-      code: "200";
-    }
+    DeleteNodeUserResponse
   >;
 
   @summary("""

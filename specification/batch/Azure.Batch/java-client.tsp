@@ -492,3 +492,27 @@ op createNodeUserCustomization is Azure.Batch.CreateOperationNew<
   createNodeUserCustomization,
   "java"
 );
+
+// Delete Node User Operation
+@doc("Optional parameters for Delete Node User operation.")
+model DeleteBatchNodeUserOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Delete Node User operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
+op deleteNodeUserCustomization is Azure.Batch.DeleteOperationNew<
+  {
+    ...Azure.Batch.DeleteNodeUserRequiredParameters;
+
+    @doc("Optional parameters for Delete Node User operation.")
+    options?: DeleteBatchNodeUserOptions;
+  },
+  Azure.Batch.DeleteNodeUserResponse
+>;
+
+@@override(Azure.Batch.Nodes.deleteNodeUser,
+  deleteNodeUserCustomization,
+  "java"
+);
