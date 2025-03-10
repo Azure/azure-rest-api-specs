@@ -137,6 +137,12 @@ directive:
 
 suppressions:
     
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: False positive for paged response.
+    from: vmware.json
+    where:
+      - $.definitions.PagedResourceSku
+
   - code: pathresourceprovidernamepascalcase
     reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
     from: vmware.json
