@@ -15,7 +15,7 @@ import { detectChangedSpecConfigFiles } from "./change-files.js";
 export async function generateSdkForSingleSpec(): Promise<number> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
-  const specConfigPath = commandInput.tspConfigPath ?? commandInput.readmePath;
+  const specConfigPath = `${commandInput.tspConfigPath} ${commandInput.readmePath}`;
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
   logMessage(`Generating SDK from ${specConfigPath}`, LogLevel.Group);
@@ -44,7 +44,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
   }
   logMessage("ending group logging", LogLevel.EndGroup);
 
-  logIssuesToADO(commandInput, specConfigPath || '');
+  logIssuesToPipeline(commandInput, specConfigPath);
   
   return statusCode;
 }
@@ -74,7 +74,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
       pushedSpecConfigCount++;
     }
-    const changedSpecPath = changedSpec.typespecProject ?? changedSpec.readmeMd;
+    const changedSpecPath = `${changedSpec.typespecProject} ${changedSpec.readmeMd}`;
     logMessage(`Generating SDK from ${changedSpecPath}`, LogLevel.Group);
     logMessage(`Command:${specGenSdkCommand.join(" ")}`);
 
@@ -109,7 +109,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
     }
     logMessage("ending group logging", LogLevel.EndGroup);
 
-    logIssuesToADO(commandInput, changedSpecPath || '');
+    logIssuesToPipeline(commandInput, changedSpecPath);
   }
   return statusCode;
 }
@@ -186,7 +186,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
     }
     logMessage("ending group logging", LogLevel.EndGroup);
     
-    logIssuesToADO(commandInput, specConfigPath || '');
+    logIssuesToPipeline(commandInput, specConfigPath || '');
   }
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
@@ -335,6 +335,8 @@ function getSpecPaths(runMode: string, specRepoPath: string): string[] {
 
 /**
  * Extract and format the prefix from tspConfigPath or readmePath.
+ * This function is copied from 'spec-gen-sdk'.
+ * Source code: [Azure SDK Tools - spec-gen-sdk](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/utils/utils.ts#L171)
  * @param {string | undefined} tspConfigPath The tspConfigPath to extract the prefix from.
  * @param {string | undefined} readmePath The readmePath to extract the prefix from.
  * @returns {string} The formatted prefix.
@@ -342,33 +344,21 @@ function getSpecPaths(runMode: string, specRepoPath: string): string[] {
 function extractPathFromSpecConfig(tspConfigPath: string | undefined, readmePath: string | undefined): string {
   let prefix = '';
   if (tspConfigPath) {
-    const match = tspConfigPath.match(/specification\/(.+)\/tspconfig\.yaml$/);
+    const regex = /specification\/(.+)\/tspconfig\.yaml$/
+    const match = regex.exec(tspConfigPath);
     if (match) {
       const segments = match[1].split('/');
-      prefix = segments.join('-').toLowerCase().replace(/\./g, '-');
+      prefix = segments.join('-').toLowerCase().replaceAll('.', '-');
     }
   } else if (readmePath) {
-    const match = readmePath.match(/specification\/(.+?)\/readme\.md$/i);
+    const regex = /specification\/(.+?)\/readme\.md$/i
+    const match = regex.exec(readmePath);
     if (match) {
       const segments = match[1].split('/');
-      prefix = segments.join('-').toLowerCase().replace(/\./g, '-');
+      prefix = segments.join('-').toLowerCase().replaceAll('.', '-');
     }
   }
   return prefix;
-}
-
-/**
- * Generates file paths for different log files based on the given command input.
- * @param {SpecGenSdkCmdInput} commandInput 
- * @returns An object containing the full log file path, filtered log file path, and HTML log file path.
- */
-function getLogsPath(commandInput: SpecGenSdkCmdInput): { fullLogFileName: string, filteredLogFileName: string, htmlLogFileName: string } {
-  const fileNamePrefix = extractPathFromSpecConfig(commandInput.tspConfigPath, commandInput.readmePath)
-  const logFolder = path.join(commandInput.workingFolder, 'out/logs');
-  const fullLogFileName = path.join(logFolder, `${fileNamePrefix}-full.log`);
-  const filteredLogFileName = path.join(logFolder, `${fileNamePrefix}-filtered.log`);
-  const htmlLogFileName = path.join(logFolder, `${fileNamePrefix}-${commandInput.sdkRepoName.substring("azure-sdk-for-".length)}-gen-result.html`);
-  return { fullLogFileName, filteredLogFileName, htmlLogFileName };
 }
 
 /**
@@ -376,8 +366,10 @@ function getLogsPath(commandInput: SpecGenSdkCmdInput): { fullLogFileName: strin
  * @param commandInput 
  * @param specConfigPath 
  */
-function logIssuesToADO(commandInput: SpecGenSdkCmdInput, specConfigPath: string): void {
-  const logPath = getLogsPath(commandInput).filteredLogFileName;
+function logIssuesToPipeline(commandInput: SpecGenSdkCmdInput, specConfigPath: string): void {
+  const fileNamePrefix = extractPathFromSpecConfig(commandInput.tspConfigPath, commandInput.readmePath)
+  const logFolder = path.join(commandInput.workingFolder, 'out/logs');
+  const logPath = path.join(logFolder, `${fileNamePrefix}-filtered.log`);
   let logIssues:CommandLog[] = []
   try {
     const log = JSON.parse(fs.readFileSync(logPath, "utf8"));
