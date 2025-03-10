@@ -62,6 +62,10 @@ interface RAISvc {
       @doc("The language for the attack objectives dataset, defaults to 'en'")
       @query
       lang?: string;
+
+      @doc("The pyrit strategy")
+      @query
+      strategy?: string;
     },
     Array<AttackObjective>
   >;
