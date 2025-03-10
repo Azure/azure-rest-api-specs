@@ -2328,6 +2328,17 @@
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
           "description": "The list of shared private link resources managed by the search service."
+        },
+        "upgradeAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Indicates whether or not the search service has an upgrade available."
+        },
+        "serviceUpgradeDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the search service was last upgraded. This field will be null until the service gets upgraded for the first time."
         }
       },
       "description": "Properties of the search service."
