@@ -4,7 +4,6 @@ import "./routes.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/http";
 
-using global.Azure.Core.Foundations;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
@@ -476,7 +475,7 @@ model CreateBatchNodeUserOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Create Node User operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/users")
 op createNodeUserCustomization is Azure.Batch.CreateOperationNew<
