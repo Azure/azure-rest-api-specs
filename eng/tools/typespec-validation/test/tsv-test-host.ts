@@ -1,7 +1,8 @@
+import defaultPath, { PlatformPath } from "path";
+import { Suppression } from "suppressions";
 import { RuleResult } from "../src/rule-result.js";
 import { IGitOperation, TsvHost } from "../src/tsv-host.js";
 import { normalizePath } from "../src/utils.js";
-import defaultPath, { PlatformPath } from "path";
 
 export { IGitOperation } from "../src/tsv-host.js";
 
@@ -85,5 +86,9 @@ options:
 
   async globby(patterns: string[]): Promise<string[]> {
     return Promise.resolve(patterns);
+  }
+
+  async getSuppressions(_path: string): Promise<Suppression[]> {
+    return Promise.resolve([]);
   }
 }
