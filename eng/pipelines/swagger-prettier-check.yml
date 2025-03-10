@@ -11,8 +11,8 @@ jobs:
 
   steps:
   - checkout: self
-    # Only need head commit
-    fetchDepth: 1
+    # Required to compare head commit with base commit
+    fetchDepth: 2
 
   - template: /eng/pipelines/templates/steps/npm-install.yml
 
