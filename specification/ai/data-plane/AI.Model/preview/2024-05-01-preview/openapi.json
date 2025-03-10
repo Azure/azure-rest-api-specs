@@ -831,13 +831,13 @@
         "function"
       ]
     },
-    "ChatMessageAudioContentItem": {
+    "ChatMessageAudioDataContentItem": {
       "type": "object",
-      "description": "A structured chat content item containing an audio content.",
+      "description": "A structured chat content item for audio content passed as base64 encoded data.",
       "properties": {
         "input_audio": {
           "$ref": "#/definitions/ChatMessageInputAudio",
-          "description": "The details of the input audio.",
+          "description": "The details of the input audio data.",
           "x-ms-client-name": "inputAudio"
         }
       },
@@ -850,6 +850,26 @@
         }
       ],
       "x-ms-discriminator-value": "input_audio"
+    },
+    "ChatMessageAudioUrlContentItem": {
+      "type": "object",
+      "description": "A structured chat content item for audio content passed as a url.",
+      "properties": {
+        "audio_url": {
+          "$ref": "#/definitions/ChatMessageInputAudioUrl",
+          "description": "The details of the audio url.",
+          "x-ms-client-name": "audioUrl"
+        }
+      },
+      "required": [
+        "audio_url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "audio_url"
     },
     "ChatMessageContentItem": {
       "type": "object",
@@ -934,7 +954,7 @@
     },
     "ChatMessageInputAudio": {
       "type": "object",
-      "description": "The details of an audio chat message content part.",
+      "description": "The details of the input audio data.",
       "properties": {
         "data": {
           "type": "string",
@@ -948,6 +968,19 @@
       "required": [
         "data",
         "format"
+      ]
+    },
+    "ChatMessageInputAudioUrl": {
+      "type": "object",
+      "description": "The details of the audio url.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the audio content."
+        }
+      },
+      "required": [
+        "url"
       ]
     },
     "ChatMessageTextContentItem": {

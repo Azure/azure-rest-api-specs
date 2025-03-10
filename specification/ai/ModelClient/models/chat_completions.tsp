@@ -626,17 +626,33 @@ union ChatMessageImageDetailLevel {
   high: "high",
 }
 
-@doc("A structured chat content item containing an audio content.")
-model ChatMessageAudioContentItem extends ChatMessageContentItem {
+@doc("A structured chat content item for audio content passed as a url.")
+model ChatMessageAudioUrlContentItem extends ChatMessageContentItem {
+  @doc("The discriminated object type: always 'audio_url' for this type.")
+  type: "audio_url";
+
+  @doc("The details of the audio url.")
+  @encodedName("application/json", "audio_url")
+  audioUrl: ChatMessageInputAudioUrl;
+}
+
+@doc("A structured chat content item for audio content passed as base64 encoded data.")
+model ChatMessageAudioDataContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'input_audio' for this type.")
   type: "input_audio";
 
-  @doc("The details of the input audio.")
+  @doc("The details of the input audio data.")
   @encodedName("application/json", "input_audio")
   inputAudio: ChatMessageInputAudio;
 }
 
-@doc("The details of an audio chat message content part.")
+@doc("The details of the audio url.")
+model ChatMessageInputAudioUrl {
+  @doc("The URL of the audio content.")
+  url: string;
+}
+
+@doc("The details of the input audio data.")
 model ChatMessageInputAudio {
   @doc("Base64 encoded audio data")
   data: string;
