@@ -57,13 +57,13 @@ interface RAISvc {
     {
       @doc("Risk types for the attack objectives dataset")
       @query
-      riskTypes: string[];
+      riskTypes?: string[];
 
       @doc("The language for the attack objectives dataset, defaults to 'en'")
       @query
-      lang: string;
+      lang?: string;
     },
-    string
+    Array<AttackObjective>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
