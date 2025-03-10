@@ -2035,7 +2035,7 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The SKU of the search service, which determines billing rate and capacity limits. This property is required when creating a new search service.",
+          "description": "The SKU of the search service, which determines price tier and capacity limits. This property is required when creating a new search service.",
           "externalDocs": {
             "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
           }
@@ -2043,6 +2043,11 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "Azure Resource Manager metadata of the search service containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -2050,7 +2055,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "Describes a search service and its current state."
+      "description": "Describes an Azure AI Search service and its current state."
     },
     "SearchServiceUpdate": {
       "properties": {
@@ -2387,6 +2392,22 @@
               "type": "string"
             }
           }
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "x-nullable": true,
+          "readOnly": true,
+          "description": "Describes if the specified operation is a data plane API operation. Operations where this value is not true are supported directly by the resource provider."
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Describes which originating entities are allowed to invoke this operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Describes additional properties for this operation.",
+          "readOnly": true
         }
       }
     },
@@ -2512,7 +2533,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the search service associated with the specified resource group.",
+      "pattern": "^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "The name of the Azure AI Search service associated with the specified resource group.",
       "x-ms-parameter-location": "method"
     },
     "PrivateEndpointConnectionNameParameter": {
