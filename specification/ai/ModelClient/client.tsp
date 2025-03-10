@@ -90,6 +90,11 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatRequestToolMessage, Access.internal, "python");
 @@access(AI.Model.ChatRequestUserMessage, Access.internal, "python");
 
+@@clientName(AI.Model.ChatCompletionsResponseFormatJsonObject,
+  "ChatCompletionsResponseFormatJSON",
+  "javascript"
+);
+
 @@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
   "JsonSchemaFormat",
   "python"
