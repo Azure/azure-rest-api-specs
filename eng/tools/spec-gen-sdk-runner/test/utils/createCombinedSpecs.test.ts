@@ -1,5 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { createCombinedSpecs, type SpecResults } from "../../src/utils.js";
+import path from "node:path";
 
 describe("createCombinedSpecs", () => {
   test("combines specs from readme and typespec paths", () => {
@@ -26,9 +27,9 @@ describe("createCombinedSpecs", () => {
     expect(result[0].specs).toContain("api.json");
     expect(result[0].specs).toContain("main.tsp");
     expect(result[0].specs).toContain("client.tsp");
-    expect(result[0].readmeMd).toBe("specification/apicenter/data-plane/readme.md");
+    expect(result[0].readmeMd).toBe(path.normalize("specification/apicenter/data-plane/readme.md"));
     expect(result[0].typespecProject).toBe(
-      "specification/apicenter/ApiCenter.DataApi/tspconfig.yaml",
+      path.normalize("specification/apicenter/ApiCenter.DataApi/tspconfig.yaml"),
     );
   });
 

@@ -43,7 +43,7 @@ model ConfigTemplate
 @doc("Config Template Version With Update Type")
 model ConfigTemplateVersionWithUpdateType {
   @doc("Update type")
-  updateType: UpdateType;
+  updateType?: UpdateType;
 
   @doc("Config Template Version")
   configTemplateVersion: ConfigTemplateVersion;

@@ -36,6 +36,12 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2025-01-01-preview")
   v2025_01_01_preview: "2025-01-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("2025-03-01-preview")
+  v2025_03_01_preview: "2025-03-01-preview",
 }
 
 alias ProviderName = "Microsoft.Resilience";
@@ -89,6 +95,14 @@ model ResourceResilienceProfile {
 
   @doc("Resource Type of the resource being evaluated.")
   type: string;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("Subscription ID of the resource(s) being evaluated.")
+  subscriptionId: string;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("Resource Group Name of the resource(s) being evaluated.")
+  resourceGroupName: string;
 
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Location of the resource being evaluated.")
