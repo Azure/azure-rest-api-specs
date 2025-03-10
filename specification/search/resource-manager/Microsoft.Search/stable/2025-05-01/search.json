@@ -2411,6 +2411,143 @@
         }
       }
     },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Describes additional properties for this operation.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationServiceSpecification",
+          "description": "Specifications of the service for this operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationServiceSpecification": {
+      "type": "object",
+      "description": "Specifications of the service for this operation.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationMetricsSpecification"
+          },
+          "description": "Specifications of metrics for this operation."
+        },
+        "logSpecifications": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationLogsSpecification"
+          },
+          "description": "Specifications of logs for this operation."
+        }
+      }
+    },
+    "OperationMetricsSpecification": {
+      "type": "object",
+      "description": "Specifications of one type of metric for this operation.",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the metric specification."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display description of the metric specification."
+        },
+        "unit": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unit for the metric specification."
+        },
+        "aggregationType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of aggregation for the metric specification."
+        },
+        "dimensions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationMetricDimension"
+          },
+          "description": "Dimensions for the metric specification."
+        },
+        "availabilities": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationAvailability"
+          },
+          "description": "Availabilities for the metric specification."
+        }
+      }
+    },
+    "OperationMetricDimension": {
+      "type": "object",
+      "description": "Describes a particular dimension for the metric specification.",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the dimension."
+        }
+      }
+    },
+    "OperationAvailability": {
+      "type": "object",
+      "description": "Describes a particular availability for the metric specification.",
+      "readOnly": true,
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The time grain for the dimension."
+        },
+        "blobDuration": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The blob duration for the dimension."
+        }
+      }
+    },
+    "OperationLogsSpecification": {
+      "type": "object",
+      "description": "Specifications of one type of log for this operation.",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the log specification."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the log specification."
+        },
+        "blobDuration": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The blob duration for the log specification."
+        }
+      }
+    },
     "OperationListResult": {
       "description": "The result of the request to list REST API operations. It contains a list of operations and a URL to get the next set of results.",
       "properties": {
