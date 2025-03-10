@@ -540,3 +540,25 @@ op replaceNodeUserCustomization is Azure.Batch.ReplaceOperationNew<
   replaceNodeUserCustomization,
   "java"
 );
+
+// Get Node Operation
+@doc("Optional parameters for Get Node operation.")
+model GetBatchNodeOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.GetNodeOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Get Node operation.")
+@route("/pools/{poolId}/nodes/{nodeId}")
+op getNodeCustomization is Azure.Batch.ReadOperationNew<
+  {
+    ...Azure.Batch.GetNodeRequiredParameters;
+
+    @doc("Optional parameters for Get Node operation.")
+    options?: GetBatchNodeOptions;
+  },
+  Azure.Batch.BatchNode
+>;
+
+@@override(Azure.Batch.Nodes.getNode, getNodeCustomization, "java");
