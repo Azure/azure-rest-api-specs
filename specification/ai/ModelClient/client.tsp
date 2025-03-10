@@ -68,6 +68,8 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.FunctionDefinition, Access.public);
 @@access(AI.Model.ModelInfo, Access.public);
 @@access(AI.Model.ModelType, Access.public);
+@@access(AI.Model.StreamingChatChoiceUpdate, Access.public);
+@@access(AI.Model.StreamingChatCompletionsUpdate, Access.public);
 @@access(AI.Model.ChatMessageContentItem, Access.public);
 @@access(AI.Model.ChatMessageTextContentItem, Access.public);
 @@access(AI.Model.ChatMessageImageContentItem, Access.public);
@@ -92,6 +94,11 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatRequestUserMessage, Access.internal, "python");
 @@access(AI.Model.ChatRequestDeveloperMessage, Access.internal, "python");
 
+@@clientName(AI.Model.ChatCompletionsResponseFormatJsonObject,
+  "ChatCompletionsResponseFormatJSON",
+  "javascript"
+);
+
 @@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
   "JsonSchemaFormat",
   "python"
@@ -107,10 +114,6 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@clientName(AI.Model.ChatMessageImageUrl, "ImageUrl", "python");
 @@clientName(AI.Model.ChatMessageImageDetailLevel,
   "ImageDetailLevel",
-  "python"
-);
-@@clientName(AI.Model.ChatMessageAudioContentItem,
-  "AudioContentItem",
   "python"
 );
 @@clientName(AI.Model.ChatMessageInputAudio, "InputAudio", "python");
