@@ -8,7 +8,6 @@ import "./resources/ServiceConfigApis.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.Core.Traits;
 
 @service(#{ title: "Microsoft.Industry.Manufacturing.MDS.Solution" })
@@ -20,7 +19,7 @@ using Azure.Core.Traits;
     location: string = "mds.azure.com",
   }
 )
-@useAuth(AadOauth2Auth<["https://azure-mds-service/.default"]>)
+@useAuth(AadToken)
 @versioned(MdsSolution.Versions)
 namespace MdsSolution;
 
@@ -40,3 +39,14 @@ enum Versions {
   @useDependency(DefaultAzureCoreVersion)
   `2025-03-01`,
 }
+
+@doc("The Azure Active Directory OAuth2 Flow")
+model AadToken
+  is OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit;
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token";
+      scopes: ["https://mds.azure.com/.default"];
+    }
+  ]>;

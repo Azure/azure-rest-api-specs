@@ -39,19 +39,19 @@
   ],
   "security": [
     {
-      "AadOauth2Auth": [
-        "https://azure-mds-service/.default"
+      "AadToken": [
+        "https://mds.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "AadOauth2Auth": {
+    "AadToken": {
       "type": "oauth2",
       "description": "The Azure Active Directory OAuth2 Flow",
-      "flow": "accessCode",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
-        "https://azure-mds-service/.default": ""
+        "https://mds.azure.com/.default": ""
       },
       "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
