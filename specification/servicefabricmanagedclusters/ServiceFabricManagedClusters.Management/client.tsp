@@ -60,3 +60,7 @@ using Microsoft.ServiceFabric;
 @@clientName(NodeTypes.stopFaultSimulation::parameters.body, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(NodeType.properties);
+
+@@Azure.ResourceManager.identifiers(FaultSimulationListResult.value,
+  #["simulationId"]
+);

@@ -445,7 +445,6 @@ model FaultSimulationConstraints {
 /**
  * Fault simulation list results
  */
-@OpenAPI.extension("x-ms-identifiers", #["simulationId"])
 model FaultSimulationListResult is Azure.Core.Page<FaultSimulation>;
 
 /**
