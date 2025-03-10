@@ -200,7 +200,6 @@ interface BatchClient {
   "java"
 );
 
-@@clientName(BatchClient.deleteNodeUser, "deleteNodeUserInternal", "java");
 @@clientName(BatchClient.replaceNodeUser, "replaceNodeUserInternal", "java");
 @@clientName(BatchClient.getNode, "getNodeInternal", "java");
 @@clientName(BatchClient.rebootNode, "rebootNodeInternal", "java");
