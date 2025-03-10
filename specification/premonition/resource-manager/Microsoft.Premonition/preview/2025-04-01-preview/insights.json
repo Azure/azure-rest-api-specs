@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Premonition Insights",
-    "version": "2024-09-01-preview",
+    "version": "2025-04-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -1182,21 +1182,9 @@
           "description": "The result if the analysis succeeded",
           "readOnly": true
         },
-        "error": {
-          "type": "object",
+        "failureReason": {
+          "$ref": "#/definitions/AnalysisError",
           "description": "The error if the analysis failed",
-          "properties": {
-            "code": {
-              "type": "string"
-            },
-            "message": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "code",
-            "message"
-          ],
           "readOnly": true
         }
       },
@@ -1410,10 +1398,13 @@
       "type": "object",
       "description": "The properties of Library",
       "properties": {
-        "container": {
+        "storageAccount": {
           "type": "string",
-          "format": "uri",
-          "description": "The blob container URL where data files are stored"
+          "description": "Full qualified URL or connection string to an Azure storage account"
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Container name where all samples/analyses data will be stored"
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -1422,17 +1413,21 @@
         }
       },
       "required": [
-        "container"
+        "storageAccount",
+        "containerName"
       ]
     },
     "LibraryPropertiesUpdate": {
       "type": "object",
       "description": "The properties of Library",
       "properties": {
-        "container": {
+        "storageAccount": {
           "type": "string",
-          "format": "uri",
-          "description": "The blob container URL where data files are stored"
+          "description": "Full qualified URL or connection string to an Azure storage account"
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Container name where all samples/analyses data will be stored"
         }
       }
     },
@@ -1543,6 +1538,21 @@
             "type": "string"
           }
         },
+        "contentLengths": {
+          "type": "array",
+          "description": "Byte size of the data files, used for validation",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "contentHashMd5": {
+          "type": "array",
+          "description": "MD5 hash of the data files, used for validation",
+          "items": {
+            "type": "string"
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the resource",
@@ -1564,6 +1574,21 @@
         "paths": {
           "type": "array",
           "description": "Path to the data files in the Library container. Supported formats: fa fasta fq fastq fa.gz fasta.gz fq.gz fastq.gz bam",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contentLengths": {
+          "type": "array",
+          "description": "Byte size of the data files, used for validation",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "contentHashMd5": {
+          "type": "array",
+          "description": "MD5 hash of the data files, used for validation",
           "items": {
             "type": "string"
           }
