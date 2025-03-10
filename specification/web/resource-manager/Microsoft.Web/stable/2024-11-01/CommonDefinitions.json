@@ -3256,21 +3256,9 @@
               "$ref": "#/definitions/SiteDnsConfig",
               "description": "Property to configure various DNS related settings for a site."
             },
-            "vnetRouteAllEnabled": {
-              "description": "Virtual Network Route All enabled. This causes all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied.",
-              "type": "boolean"
-            },
-            "vnetImagePullEnabled": {
-              "description": "To enable pulling image over Virtual Network",
-              "type": "boolean"
-            },
-            "vnetContentShareEnabled": {
-              "description": "To enable accessing content over virtual network",
-              "type": "boolean"
-            },
-            "vnetBackupRestoreEnabled": {
-              "description": "To enable Backup and Restore operations over virtual network",
-              "type": "boolean"
+            "outboundVnetRouting": {
+              "$ref": "#/definitions/OutboundVnetRouting",
+              "description": "Property to configure various outbound traffic routing options over virtual network for a site"
             },
             "siteConfig": {
               "$ref": "#/definitions/SiteConfig",
@@ -3320,6 +3308,14 @@
             },
             "clientAffinityEnabled": {
               "description": "<code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.",
+              "type": "boolean"
+            },
+            "clientAffinityPartitioningEnabled": {
+              "description": "<code>true</code> to enable client affinity partitioning using CHIPS cookies, this will add the <code>partitioned</code> property to the affinity cookies; <code>false</code> to stop sending partitioned affinity cookies. Default is <code>false</code>.",
+              "type": "boolean"
+            },
+            "clientAffinityProxyEnabled": {
+              "description": "<code>true</code> to override client affinity cookie domain with X-Forwarded-Host request header. <code>false</code> to use default domain. Default is <code>false</code>.",
               "type": "boolean"
             },
             "clientCertEnabled": {
@@ -4237,6 +4233,32 @@
           "description": "Indicates that sites using Virtual network custom DNS servers are still sorting the list of DNS servers. Read-Only.",
           "type": "boolean",
           "readOnly": true
+        }
+      }
+    },
+    "OutboundVnetRouting": {
+      "description": "Outbound traffic options over virtual network.",
+      "type": "object",
+      "properties": {
+        "allTraffic": {
+          "description": "Enables all other routing options defined in OutboundVnetRouting if this setting is set to true.",
+          "type": "boolean"
+        },
+        "applicationTraffic": {
+          "description": "This causes all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied. Previously called VnetRouteAllEnabled.",
+          "type": "boolean"
+        },
+        "contentShareTraffic": {
+          "description": "Enables accessing content over virtual network. Previously called VnetContentShareEnabled",
+          "type": "boolean"
+        },
+        "imagePullTraffic": {
+          "description": "Enables pulling image over Virtual Network. Previously called VnetImagePullEnabled.",
+          "type": "boolean"
+        },
+        "backupRestoreTraffic": {
+          "description": "Enables Backup and Restore operations over virtual network. Previously called VnetBackupRestoreEnabled",
+          "type": "boolean"
         }
       }
     },
