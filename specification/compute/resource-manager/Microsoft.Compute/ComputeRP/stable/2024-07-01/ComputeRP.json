@@ -18018,6 +18018,17 @@
         "protectedSettingsFromKeyVault": {
           "$ref": "#/definitions/KeyVaultSecretReference",
           "description": "The extensions protected settings that are passed by reference, and consumed from key vault"
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "description": "Collection of extension names after which this extension needs to be provisioned.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
         }
       }
     },
@@ -19148,6 +19159,17 @@
           "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties",
           "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
           "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the extension.",
+          "x-ms-client-name": "extensionName"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true,
+          "x-ms-client-name": "extensionType"
         }
       },
       "allOf": [
@@ -19256,8 +19278,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the extension.",
-          "readOnly": true
+          "description": "The name of the extension."
         },
         "type": {
           "type": "string",
@@ -20603,6 +20624,17 @@
             "read",
             "create"
           ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the extension.",
+          "x-ms-client-name": "extensionName"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true,
+          "x-ms-client-name": "extensionType"
         }
       },
       "allOf": [
