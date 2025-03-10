@@ -117,7 +117,7 @@ model QueryResult {
 
   @doc("Name of the entity.")
   @visibility(Lifecycle.Read)
-  name?: string;
+  name: string;
 
   @doc("Location of the operation ")
   @visibility(Lifecycle.Read)
@@ -180,7 +180,7 @@ model RelatedEntityData {
   target: string;
 
   @doc("Number of hops.")
-  noOfHops: int32;
+  noOfHops?: int32;
 
   @doc("The path of the relationship.")
   path?: string[];

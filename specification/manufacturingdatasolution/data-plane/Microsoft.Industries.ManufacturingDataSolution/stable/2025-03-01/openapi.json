@@ -770,6 +770,14 @@
             "description": "The identifier of the job.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The type of entity operation (create/update).",
+            "required": false,
+            "type": "string",
+            "default": "create"
           }
         ],
         "responses": {
@@ -2219,6 +2227,7 @@
       },
       "required": [
         "id",
+        "name",
         "dtId",
         "timestamp"
       ]
@@ -2278,7 +2287,6 @@
         "modelId",
         "source",
         "target",
-        "noOfHops",
         "type",
         "timestamp"
       ]

@@ -21,7 +21,14 @@ namespace MdsSolution.ServiceApis {
   op getServiceHealth(): GenericOkResponse<MdsHealth>;
 
   @doc("Get the status of an entity job.")
-  op getEntityJobStatus is Operations.ResourceRead<JobStatusResponse>;
+  op getEntityJobStatus is Operations.ResourceRead<
+    JobStatusResponse,
+    QueryParametersTrait<{
+      @query("type")
+      @doc("The type of entity operation (create/update).")
+      type?: string = "create";
+    }>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
   @doc("Get all entities.")
