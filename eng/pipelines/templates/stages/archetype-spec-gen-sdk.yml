@@ -43,8 +43,8 @@ extends:
             value: '3.13'
           - name: SpecGenSdkVersion
             value: 'latest'
-          - name: SdkArtifactName
-            value: SDK_Artifact
+          - name: PipelineArtifactsName
+            value: 'packages'
 
         pool:
           name: $(LINUXPOOL)
@@ -54,16 +54,6 @@ extends:
         templateContext:
           outputParentDirectory: $(System.DefaultWorkingDirectory)/out
           outputs:
-            - output: pipelineArtifact
-              displayName: Publish SDK artifacts to Pipeline Artifacts
-              condition: and(ne(variables['ValidationResult'], ''), eq(variables['HasSDKArtifact'], 'true'))
-              artifactName: $(sdkArtifactName)
-              targetPath: "$(System.DefaultWorkingDirectory)/out/stagedArtifacts"
-            - output: pipelineArtifact
-              displayName: Publish API View artifacts to Pipeline Artifacts
-              condition: and(ne(variables['ValidationResult'], ''), eq(variables['HasApiViewArtifact'], 'true'))
-              artifactName: $(ArtifactName)
-              targetPath: "$(System.DefaultWorkingDirectory)/out/stagedArtifacts"
             - output: pipelineArtifact
               displayName: Publish logs to Pipeline Artifacts
               condition: ne(variables['ValidationResult'], '')
@@ -205,60 +195,84 @@ extends:
                 $optional_params
             displayName: 'Generate SDK'
 
-          - task: PowerShell@2
-            displayName: Add label to the spec PR
-            condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'add'))
+          - task: Powershell@2
             inputs:
+              filePath: $(SdkRepoDirectory)/eng/common/scripts/Save-Package-Properties.ps1
+              arguments: >
+                -ServiceDirectory $(GeneratedSDK.ServiceName)
+                -OutDirectory $(GeneratedSDK.StagedArtifactsFolder)/PackageInfo
               pwsh: true
               workingDirectory: $(SdkRepoDirectory)
-              filePath: $(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1
-              arguments: >
-                -RepoOwner $(SpecRepoOwner)
-                -RepoName $(SpecRepoName)
-                -IssueNumber "$(System.PullRequest.PullRequestNumber)"
-                -Labels $(BreakingChangeLabel)
-                -AuthToken "$(azuresdk-github-pat)"
+            displayName: Dump Package properties
 
-          - task: PowerShell@2
-            displayName: Remove label from the spec PR
-            condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'remove'))
-            inputs:
-              pwsh: true
-              workingDirectory: $(SdkRepoDirectory)
-              filePath: $(SdkRepoDirectory)/eng/common/scripts/Remove-IssueLabel.ps1
-              arguments: >
-                -RepoOwner $(SpecRepoOwner)
-                -RepoName $(SpecRepoName)
-                -IssueNumber "$(System.PullRequest.PullRequestNumber)"
-                -LabelName $(BreakingChangeLabel)
-                -AuthToken "$(azuresdk-github-pat)"
+          - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
+            parameters:
+              ArtifactName: $(PipelineArtifactsName)
+              ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
 
-          - ${{ if eq(parameters.SkipPullRequestCreation, false) }}:
-            - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
-              parameters:
-                BaseRepoBranch: $(PrBranch)-$(Build.BuildId)
-                BaseRepoOwner: azure-sdk
-                CommitMsg: $(GeneratedSDKInformation)
-                TargetRepoOwner: $(SdkRepoOwner)
-                TargetRepoName: $(SdkRepoName)
-                PushArgs: "--force"
-                WorkingDirectory: $(SdkRepoDirectory)
-                ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
-
+          - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
             - task: PowerShell@2
-              displayName: Create pull request
-              condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+              displayName: Add label to the spec PR
+              condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'add'))
               inputs:
                 pwsh: true
                 workingDirectory: $(SdkRepoDirectory)
-                filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
+                filePath: $(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1
                 arguments: >
-                  -RepoOwner "$(SdkRepoOwner)"
-                  -RepoName "$(SdkRepoName)"
-                  -BaseBranch "main"
-                  -PROwner "azure-sdk"
-                  -PRBranch "$(PrBranch)-$(Build.BuildId)"
+                  -RepoOwner $(SpecRepoOwner)
+                  -RepoName $(SpecRepoName)
+                  -IssueNumber "$(System.PullRequest.PullRequestNumber)"
+                  -Labels $(BreakingChangeLabel)
                   -AuthToken "$(azuresdk-github-pat)"
-                  -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-                  -PRBody "$(GeneratedSDKInformation)"
-                  -OpenAsDraft $true
+
+            - task: PowerShell@2
+              displayName: Remove label from the spec PR
+              condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'remove'))
+              inputs:
+                pwsh: true
+                workingDirectory: $(SdkRepoDirectory)
+                filePath: $(SdkRepoDirectory)/eng/common/scripts/Remove-IssueLabel.ps1
+                arguments: >
+                  -RepoOwner $(SpecRepoOwner)
+                  -RepoName $(SpecRepoName)
+                  -IssueNumber "$(System.PullRequest.PullRequestNumber)"
+                  -LabelName $(BreakingChangeLabel)
+                  -AuthToken "$(azuresdk-github-pat)"
+
+            - ${{ if eq(parameters.SkipPullRequestCreation, false) }}:
+              - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
+                parameters:
+                  BaseRepoBranch: $(PrBranch)-$(Build.BuildId)
+                  BaseRepoOwner: azure-sdk
+                  CommitMsg: $(GeneratedSDKInformation)
+                  TargetRepoOwner: $(SdkRepoOwner)
+                  TargetRepoName: $(SdkRepoName)
+                  PushArgs: "--force"
+                  WorkingDirectory: $(SdkRepoDirectory)
+                  ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
+
+              - ${{ if not(endsWith(variables['SdkRepoName'], '-pr')) }}:
+                - task: PowerShell@2
+                  displayName: Create pull request
+                  condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+                  inputs:
+                    pwsh: true
+                    workingDirectory: $(SdkRepoDirectory)
+                    filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
+                    arguments: >
+                      -RepoOwner "$(SdkRepoOwner)"
+                      -RepoName "$(SdkRepoName)"
+                      -BaseBranch "main"
+                      -PROwner "azure-sdk"
+                      -PRBranch "$(PrBranch)-$(Build.BuildId)"
+                      -AuthToken "$(azuresdk-github-pat)"
+                      -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
+                      -PRBody "$(GeneratedSDKInformation)"
+                      -OpenAsDraft $true
+
+            - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+              - template: /eng/common/pipelines/templates/steps/detect-api-changes.yml
+                parameters:
+                  ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
+                  ArtifactName: $(PipelineArtifactsName)
+                  RepoRoot: $(SdkRepoDirectory)

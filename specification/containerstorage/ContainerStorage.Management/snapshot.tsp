@@ -16,9 +16,7 @@ interface Snapshots {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DOT NOT COPY - migrate to LRO apis"
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
+    #{ `final-state-via`: "location" }
   )
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -43,18 +41,18 @@ model Snapshot is ProxyResource<SnapshotProperties> {
 
 @doc("Volume Snapshot Properties")
 model SnapshotProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
   @doc("The status of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: ResourceOperationalStatus;
 
   @doc("Reference to the source volume")
   @minLength(3)
   @maxLength(253)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   source: string;
 }
