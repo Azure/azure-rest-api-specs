@@ -495,6 +495,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "ExampleQueryOperations_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/ExampleQueryOperations_CreateOrReplace_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -1164,9 +1169,52 @@
         }
       }
     },
-    "/copilot/validate": {
+    "/copilot/validation-job/{testId}": {
       "get": {
-        "operationId": "ValidateQueryApi_ListValidateTestRequests",
+        "operationId": "ValidateQueryApi_GetQueryValidationJobDetails",
+        "description": "Get the details of a validation job",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testId",
+            "in": "path",
+            "description": "Test Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateQuery.Models.QueryValidationJobDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateQueryApi_GetQueryValidationJobDetails_MaximumSet": {
+            "$ref": "./examples/ValidateQueryApi_GetQueryValidationJobDetails_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/copilot/validation-job/runs": {
+      "get": {
+        "operationId": "ValidateQueryApi_ListQueryValidationJobHistory",
         "description": "List validate test requests",
         "parameters": [
           {
@@ -1201,7 +1249,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedValidateTestSummary"
+              "$ref": "#/definitions/PagedQueryValidationJobRun"
             }
           },
           "default": {
@@ -1218,8 +1266,8 @@
           }
         },
         "x-ms-examples": {
-          "ValidateQueryApi_ListValidateTestRequests_MaximumSet": {
-            "$ref": "./examples/ValidateQueryApi_ListValidateTestRequests_MaximumSet_Gen.json"
+          "ValidateQueryApi_ListQueryValidationJobHistory_MaximumSet": {
+            "$ref": "./examples/ValidateQueryApi_ListQueryValidationJobHistory_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1227,52 +1275,9 @@
         }
       }
     },
-    "/copilot/validate/{validateTestId}": {
-      "get": {
-        "operationId": "ValidateQueryApi_GetValidateTestDetails",
-        "description": "Get the details of a validate test",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "validateTestId",
-            "in": "path",
-            "description": "The unique identifier of the test query.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ValidateQuery.Models.TestQuery"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ValidateQueryApi_GetValidateTestDetails_MaximumSet": {
-            "$ref": "./examples/ValidateQueryApi_GetValidateTestDetails_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/copilot/validate:execute": {
+    "/copilot/validation-job:schedule": {
       "post": {
-        "operationId": "ValidateQueryApi_Execute",
+        "operationId": "ValidateQueryApi_Schedule",
         "description": "Validate a query",
         "parameters": [
           {
@@ -1283,7 +1288,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ValidateQuery.Models.TestQueryRequest"
+              "$ref": "#/definitions/ValidateQuery.Models.QueryValidationJobRequest"
             }
           }
         ],
@@ -1291,7 +1296,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ValidateQuery.Models.TestResponse"
+              "$ref": "#/definitions/ValidateQuery.Models.QueryValidationJobScheduleConfirmation"
             }
           },
           "default": {
@@ -1308,8 +1313,8 @@
           }
         },
         "x-ms-examples": {
-          "ValidateQueryApi_Execute_MaximumSet": {
-            "$ref": "./examples/ValidateQueryApi_Execute_MaximumSet_Gen.json"
+          "ValidateQueryApi_Schedule_MaximumSet": {
+            "$ref": "./examples/ValidateQueryApi_Schedule_MaximumSet_Gen.json"
           }
         }
       }
@@ -2149,15 +2154,15 @@
         "value"
       ]
     },
-    "PagedValidateTestSummary": {
+    "PagedQueryValidationJobRun": {
       "type": "object",
-      "description": "Paged collection of ValidateTestSummary items",
+      "description": "Paged collection of QueryValidationJobRun items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ValidateTestSummary items on this page",
+          "description": "The QueryValidationJobRun items on this page",
           "items": {
-            "$ref": "#/definitions/ValidateQuery.Models.ValidateTestSummary"
+            "$ref": "#/definitions/ValidateQuery.Models.QueryValidationJobRun"
           },
           "x-ms-identifiers": []
         },
@@ -2185,72 +2190,123 @@
         }
       }
     },
-    "ValidateQuery.Models.CopilotTestCase": {
-      "type": "object",
-      "description": "Test Case for Test run",
-      "properties": {
-        "naturalLanguage": {
-          "type": "string",
-          "description": "The natural language input for the test case."
-        },
-        "expectedQuery": {
-          "type": "string",
-          "description": "The expected query for the test case."
-        },
-        "expectedEntities": {
-          "type": "string",
-          "description": "The expected entities for the test case."
-        }
+    "ValidateQuery.Models.OperationStatus": {
+      "type": "string",
+      "description": "Operation Status",
+      "enum": [
+        "Accepted",
+        "InProgress",
+        "TransientFailure",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Canceled",
+        "Unknown",
+        "Skipped"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation is accepeted."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "TransientFailure",
+            "value": "TransientFailure",
+            "description": "The operation encountered a transient failure."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The operation is being deleted."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The status of the operation is unknown."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "The operation was skipped."
+          }
+        ]
       }
     },
-    "ValidateQuery.Models.TestQuery": {
+    "ValidateQuery.Models.QueryValidationJobDetails": {
       "type": "object",
-      "description": "Test Query",
+      "description": "Test Details Response",
       "properties": {
-        "validateTestId": {
+        "testId": {
           "type": "string",
-          "description": "The unique identifier of the test query.",
+          "description": "Test Id",
           "readOnly": true
         },
-        "fromDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "start date of test run"
+        "testRunStatus": {
+          "$ref": "#/definitions/ValidateQuery.Models.OperationStatus",
+          "description": "Test Run Status"
         },
-        "toDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "end date of test run"
+        "testResults": {
+          "type": "array",
+          "description": "Test Results",
+          "items": {
+            "$ref": "#/definitions/ValidateQuery.Models.QueryValidationTestCaseResult"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
-        "validateTestId"
+        "testId",
+        "testRunStatus",
+        "testResults"
       ]
     },
-    "ValidateQuery.Models.TestQueryRequest": {
+    "ValidateQuery.Models.QueryValidationJobRequest": {
       "type": "object",
-      "description": "Test Query Request",
+      "description": "Validate job Request",
       "properties": {
         "testName": {
           "type": "string",
-          "description": "The name of the test query."
+          "description": "The unique identifier of the test.",
+          "x-ms-mutability": [
+            "update"
+          ]
         },
         "testCases": {
           "type": "array",
-          "description": "The test cases for the query.",
+          "description": "The test cases for validation.",
           "items": {
-            "$ref": "#/definitions/ValidateQuery.Models.CopilotTestCase"
+            "$ref": "#/definitions/ValidateQuery.Models.QueryValidationTestCase"
           },
           "x-ms-identifiers": []
         },
         "runInConversationContext": {
           "type": "boolean",
-          "description": "The run in conversation context.",
+          "description": "run in the conversation context",
           "default": false
-        },
-        "conversationId": {
-          "type": "string",
-          "description": "coversation Id"
         }
       },
       "required": [
@@ -2259,19 +2315,43 @@
         "runInConversationContext"
       ]
     },
-    "ValidateQuery.Models.TestResponse": {
+    "ValidateQuery.Models.QueryValidationJobRun": {
       "type": "object",
-      "description": "test response",
+      "description": "Validate Test Response",
+      "properties": {
+        "testId": {
+          "type": "string",
+          "description": "The unique identifier of the test.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Date of test run"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Test onwer"
+        }
+      },
+      "required": [
+        "testId",
+        "createdAt",
+        "createdBy"
+      ]
+    },
+    "ValidateQuery.Models.QueryValidationJobScheduleConfirmation": {
+      "type": "object",
+      "description": "Validate Response",
       "properties": {
         "testRunId": {
           "type": "string",
           "description": "Test Run Id"
         },
-        "testRunStatus": {
-          "type": "string",
+        "status": {
+          "$ref": "#/definitions/ValidateQuery.Models.OperationStatus",
           "description": "Test Run Status"
         },
-        "createdDateTime": {
+        "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "creation date"
@@ -2283,33 +2363,128 @@
       },
       "required": [
         "testRunId",
-        "testRunStatus",
-        "createdDateTime",
+        "status",
+        "createdAt",
         "createdBy"
       ]
     },
-    "ValidateQuery.Models.ValidateTestSummary": {
+    "ValidateQuery.Models.QueryValidationTestCase": {
       "type": "object",
-      "description": "Validate Test Response",
+      "description": "Test Case for Test run",
       "properties": {
-        "testId": {
+        "ask": {
           "type": "string",
-          "description": "The unique identifier of the test.",
-          "readOnly": true
+          "description": "The natural language input for the test case."
         },
-        "createdTime": {
+        "expectedKqlQuery": {
           "type": "string",
-          "description": "The time when the test was created."
+          "description": "The expected query for the test case."
         },
-        "createdBy": {
-          "type": "string",
-          "description": "The user who created the test."
+        "skipTestRun": {
+          "type": "boolean",
+          "description": "The expected entities for the test case.",
+          "default": false
         }
       },
       "required": [
-        "testId",
-        "createdTime",
-        "createdBy"
+        "skipTestRun"
+      ]
+    },
+    "ValidateQuery.Models.QueryValidationTestCaseResult": {
+      "type": "object",
+      "description": "Test Case Result",
+      "properties": {
+        "ask": {
+          "type": "string",
+          "description": "The query to be asked."
+        },
+        "expectedKqlQuery": {
+          "type": "string",
+          "description": "The expected KQL query."
+        },
+        "consolidatedScore": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The consolidated score of the test case.",
+          "default": 0
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation.",
+          "default": "InProgress",
+          "enum": [
+            "Accepted",
+            "InProgress",
+            "TransientFailure",
+            "Succeeded",
+            "Failed",
+            "Deleting",
+            "Canceled",
+            "Unknown",
+            "Skipped"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Accepted",
+                "value": "Accepted",
+                "description": "The operation is accepeted."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "The operation is in progress."
+              },
+              {
+                "name": "TransientFailure",
+                "value": "TransientFailure",
+                "description": "The operation encountered a transient failure."
+              },
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The operation succeeded."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The operation failed."
+              },
+              {
+                "name": "Deleting",
+                "value": "Deleting",
+                "description": "The operation is being deleted."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "The operation was canceled."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "The status of the operation is unknown."
+              },
+              {
+                "name": "Skipped",
+                "value": "Skipped",
+                "description": "The operation was skipped."
+              }
+            ]
+          }
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message, if any."
+        }
+      },
+      "required": [
+        "ask",
+        "expectedKqlQuery",
+        "consolidatedScore",
+        "status"
       ]
     }
   },

@@ -7,246 +7,124 @@ using TypeSpec.Rest;
 
 namespace MdsSolution.CopilotService.ValidateQuery.Models;
 
-/**
- * Represents a request for validation.
- */
-model ValidateRequest {
-  /**
-   * The name of the test.
-   */
+@doc("Validate job Request")
+@resource("validation-job")
+model QueryValidationJobRequest {
+  @key
+  @visibility(Lifecycle.Update)
+  @doc("The unique identifier of the test.")
   testName: string;
 
-  /**
-   * The test cases for validation.
-   */
-  testCases: CopilotTestCase[];
+  @doc("The test cases for validation.")
+  testCases: QueryValidationTestCase[];
 
   @doc("run in the conversation context")
   runInConversationContext: boolean = false;
 }
 
-/**
- * Represents a response for validation.
- */
-model ValidateResponse {
-  /**
-   * The natural language input.
-   */
-  naturalLanguage?: string;
-
-  /**
-   * The expected query.
-   */
-  expectedQuery?: string;
-
-  /**
-   * The actual query.
-   */
-  actualQuery?: string;
-
-  /**
-   * The consolidated score.
-   */
-  consolidatedScore: float64;
-
-  /**
-   * The actual data.
-   */
-  actualData?: string;
-
-  /**
-   * The expected data.
-   */
-  expectedData?: string;
-
-  /**
-   * The expected entities.
-   */
-  expectedEntities?: string;
-
-  /**
-   * The actual entities.
-   */
-  actualEntities?: string;
-
-  /**
-   * The prompt tokens.
-   */
-  promptTokens?: string;
-
-  /**
-   * The entity extraction prompt tokens.
-   */
-  entityExtractionPromptTokens?: string;
-}
-
-/**
- * Represents the result of a test case.
- */
-model TestCaseResult {
-  /**
-   * The query to be asked.
-   */
-  ask: string;
-
-  /**
-   * The expected KQL query.
-   */
-  expectedKqlQuery: string;
-
-  /**
-   * The consolidated score of the test case.
-   */
-  consolidatedScore: int64 = 0;
-
-  /**
-   * The status of the operation.
-   */
-  status: OperationStatus = OperationStatus.InProgress;
-
-  /**
-   * The error message, if any.
-   */
-  errorMessage?: string;
-}
-
-@doc("Validate Test Response")
-@resource("validate")
-model ValidateTestSummary {
-  @key
-  @visibility(Lifecycle.Read)
-  @doc("The unique identifier of the test.")
-  testId: string;
-
-  /**
-   * The time when the test was created.
-   */
-  createdTime: string;
-
-  /**
-   * The user who created the test.
-   */
-  createdBy: string;
-}
-
-/**
- * Represents a test case for Copilot.
- */
 @doc("Test Case for Test run")
-model CopilotTestCase {
+model QueryValidationTestCase {
   @doc("The natural language input for the test case.")
-  naturalLanguage?: string;
+  ask?: string;
 
   @doc("The expected query for the test case.")
-  expectedQuery?: string;
+  expectedKqlQuery?: string;
 
   @doc("The expected entities for the test case.")
-  expectedEntities?: string;
+  skipTestRun: boolean = false;
 }
 
-@resource("validate")
-@doc("Test Query")
-model TestQuery {
-  @key
-  @doc("The unique identifier of the test query.")
-  @visibility(Lifecycle.Read)
-  validateTestId: string;
-
-  @doc("start date of test run")
-  fromDate?: utcDateTime;
-
-  @doc("end date of test run")
-  toDate?: utcDateTime;
-}
-
-@doc("Test Query Request")
-model TestQueryRequest {
-  @doc("The name of the test query.")
-  testName: string;
-
-  @doc("The test cases for the query.")
-  testCases: CopilotTestCase[];
-
-  @doc("The run in conversation context.")
-  runInConversationContext: boolean = false;
-
-  @doc("coversation Id")
-  conversationId?: string;
-}
-
-@doc("Operation Status")
-union OperationStatus {
-  /**
-   * The operation has been accepted.
-   */
-  Accepted: "Accepted",
-
-  /**
-   * The operation is in progress.
-   */
-  InProgress: "InProgress",
-
-  /**
-   * The operation encountered a transient failure.
-   */
-  TransientFailure: "TransientFailure",
-
-  /**
-   * The operation succeeded.
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * The operation failed.
-   */
-  Failed: "Failed",
-
-  /**
-   * The operation is being deleted.
-   */
-  Deleting: "Deleting",
-
-  /**
-   * The operation was canceled.
-   */
-  Canceled: "Canceled",
-
-  /**
-   * The status of the operation is unknown.
-   */
-  Unknown: "Unknown",
-
-  /**
-   * The operation was skipped.
-   */
-  Skipped: "Skipped",
-
-  string,
-}
-
-@doc("test response")
-model TestResponse {
+@doc("Validate Response")
+model QueryValidationJobScheduleConfirmation {
   @doc("Test Run Id")
   testRunId: string;
 
   @doc("Test Run Status")
-  testRunStatus: string;
+  status: OperationStatus;
 
   @doc("creation date")
-  createdDateTime: utcDateTime;
+  createdAt: utcDateTime;
 
   @doc("created by")
   createdBy: string;
 }
 
 @doc("Test Details Response")
-model TestDetailsResponse {
+@resource("validation-job")
+model QueryValidationJobDetails {
   @doc("Test Id")
+  @key
+  @visibility(Lifecycle.Read)
   testId: string;
 
   @doc("Test Run Status")
-  testRunStatus: string;
+  testRunStatus: OperationStatus;
 
   @doc("Test Results")
-  testResults: TestCaseResult[];
+  testResults: QueryValidationTestCaseResult[];
+}
+
+@doc("Test Case Result")
+model QueryValidationTestCaseResult {
+  @doc("The query to be asked.")
+  ask: string;
+
+  @doc("The expected KQL query.")
+  expectedKqlQuery: string;
+
+  @doc("The consolidated score of the test case.")
+  consolidatedScore: int64 = 0;
+
+  @doc("The status of the operation.")
+  status: OperationStatus = OperationStatus.InProgress;
+
+  @doc("The error message, if any.")
+  errorMessage?: string;
+}
+
+@doc("Validate Test Response")
+@resource("validation-job/runs")
+model QueryValidationJobRun {
+  @key
+  @visibility(Lifecycle.Read)
+  @doc("The unique identifier of the test.")
+  testId: string;
+
+  @doc("Date of test run")
+  createdAt: string;
+
+  @doc("Test onwer")
+  createdBy: string;
+}
+
+@doc("Operation Status")
+union OperationStatus {
+  @doc("The operation is accepeted.")
+  Accepted: "Accepted",
+
+  @doc("The operation is in progress.")
+  InProgress: "InProgress",
+
+  @doc("The operation encountered a transient failure.")
+  TransientFailure: "TransientFailure",
+
+  @doc("The operation succeeded.")
+  Succeeded: "Succeeded",
+
+  @doc("The operation failed.")
+  Failed: "Failed",
+
+  @doc("The operation is being deleted.")
+  Deleting: "Deleting",
+
+  @doc("The operation was canceled.")
+  Canceled: "Canceled",
+
+  @doc("The status of the operation is unknown.")
+  Unknown: "Unknown",
+
+  @doc("The operation was skipped.")
+  Skipped: "Skipped",
+
+  string,
 }

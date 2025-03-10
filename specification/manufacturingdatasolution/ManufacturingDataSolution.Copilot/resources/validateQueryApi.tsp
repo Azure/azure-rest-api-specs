@@ -20,21 +20,18 @@ alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface ValidateQueryApi {
   @doc("Validate a query")
-  execute is apiOperations.ResourceCollectionAction<
-    TestQuery,
-    TestQueryRequest,
-    TestResponse
+  schedule is apiOperations.ResourceCollectionAction<
+    QueryValidationJobRequest,
+    QueryValidationJobRequest,
+    QueryValidationJobScheduleConfirmation
   >;
 
-  @doc("Get the details of a validate test")
-  getValidateTestDetails is apiOperations.ResourceRead<
-    TestQuery,
-    TestDetailsResponse
-  >;
+  @doc("Get the details of a validation job")
+  getQueryValidationJobDetails is apiOperations.ResourceRead<QueryValidationJobDetails>;
 
   @doc("List validate test requests")
-  listValidateTestRequests is apiOperations.ResourceList<
-    ValidateTestSummary,
+  listQueryValidationJobHistory is apiOperations.ResourceList<
+    QueryValidationJobRun,
     QueryParametersTrait<{
       @doc("start date")
       @query
