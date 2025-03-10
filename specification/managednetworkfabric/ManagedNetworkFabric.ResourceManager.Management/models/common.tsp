@@ -986,7 +986,7 @@ model PrefixLimitPatchProperties {
   maximumRoutes?: int32;
 
   @doc("Limit at which route prefixes a warning is generate.")
-  softLimit?: int32;
+  threshold?: int32;
 
   @doc("Idle time expiry in seconds.")
   idleTimeExpiry?: int32;

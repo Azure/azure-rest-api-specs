@@ -1,0 +1,335 @@
+{
+  "operationId": "Slis_CreateOrUpdate",
+  "title": "CreateSli",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "name": "testSli",
+    "resourceUri": "providers/Microsoft.Management/ServiceGroups/testSG",
+    "resource": {
+      "properties": {
+        "description": "Measures the performance characteristics of the GetContosoUsers() API. ",
+        "category": "Latency",
+        "evaluationType": "WindowBased",
+        "destinationAmwAccounts": [
+          {
+            "resourceId": "/subscriptions/<subId>/resourcegroups/<rgId>/providers/microsoft.monitor/accounts/<dest>",
+            "identity": "/subscriptions/<subId>/resourcegroups/<rgId>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<idName>"
+          }
+        ],
+        "sloProperties": {
+          "target": {
+            "value": 99,
+            "comparator": "gte",
+            "compliancePeriodDays": 30,
+            "complianceCalculationType": "CalendarDays"
+          }
+        },
+        "sliProperties": {
+          "windowUptimeCriteria": {
+            "target": 95,
+            "comparator": "gte"
+          },
+          "signals": {
+            "signalSources": [
+              {
+                "signalSourceId": "A",
+                "sourceAmwAccountManagedIdentity": "sourceAccountIdentity",
+                "sourceAmwAccountResourceId": "/source/Account/Resource",
+                "metricNamespace": "ContosoMetricsWest",
+                "metricName": "Stamp1Latency",
+                "filters": [
+                  {
+                    "logic": "AND",
+                    "conditions": [
+                      {
+                        "dimensionName": "ApiName",
+                        "operator": "eq",
+                        "value": "GetContosoUsers"
+                      }
+                    ]
+                  }
+                ],
+                "spatialAggregation": {
+                  "type": "Average",
+                  "dimensions": [
+                    "Region",
+                    "ResponseCode"
+                  ]
+                },
+                "temporalAggregation": {
+                  "type": "Average",
+                  "windowSizeMinutes": 5
+                }
+              },
+              {
+                "signalSourceId": "B",
+                "sourceAmwAccountManagedIdentity": "sourceAccountIdentity",
+                "sourceAmwAccountResourceId": "/source/Account/Resource",
+                "metricNamespace": "ContosoMetricsEast",
+                "metricName": "Stamp2Latency",
+                "filters": [
+                  {
+                    "logic": "AND",
+                    "conditions": [
+                      {
+                        "dimensionName": "ApiName",
+                        "operator": "eq",
+                        "value": "GetContosoUsers"
+                      }
+                    ]
+                  }
+                ],
+                "spatialAggregation": {
+                  "type": "Average",
+                  "dimensions": [
+                    "Region",
+                    "ResponseCode"
+                  ]
+                },
+                "temporalAggregation": {
+                  "type": "Average",
+                  "windowSizeMinutes": 5
+                }
+              }
+            ],
+            "signalFormula": "(A + B) /2"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/ServiceGroups/testSG/providers/Microsoft.Monitor/slis/testSli",
+        "name": "testSli",
+        "type": "Microsoft.Monitor/testSli",
+        "properties": {
+          "description": "Measures the performance characteristics of the GetContosoUsers() API. ",
+          "category": "Latency",
+          "evaluationType": "WindowBased",
+          "provisioningState": "Succeeded",
+          "executionState": {
+            "message": "",
+            "state": "Succeeded"
+          },
+          "destinationAmwAccounts": [
+            {
+              "resourceId": "/subscriptions/<subId>/resourcegroups/<rgId>/providers/microsoft.monitor/accounts/<dest>",
+              "identity": "/subscriptions/<subId>/resourcegroups/<rgId>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<idName>"
+            }
+          ],
+          "destinationMetrics": [
+            {
+              "metricNamespace": "ContosoMetricsOut",
+              "metricName": "Get API Latency:Uptime"
+            },
+            {
+              "metricNamespace": "ContosoMetricsOut",
+              "metricName": "Get API Latency:Downtime"
+            },
+            {
+              "metricNamespace": "ContosoMetricsOut",
+              "metricName": "Get API Latency:Value"
+            }
+          ],
+          "sloProperties": {
+            "target": {
+              "value": 99,
+              "comparator": "gte",
+              "compliancePeriodDays": 30,
+              "complianceCalculationType": "CalendarDays"
+            }
+          },
+          "sliProperties": {
+            "windowUptimeCriteria": {
+              "target": 95,
+              "comparator": "gte"
+            },
+            "signals": {
+              "signalSources": [
+                {
+                  "signalSourceId": "A",
+                  "sourceAmwAccountManagedIdentity": "sourceAccountIdentity",
+                  "sourceAmwAccountResourceId": "/source/Account/Resource",
+                  "metricNamespace": "ContosoMetricsWest",
+                  "metricName": "Stamp1Latency",
+                  "filters": [
+                    {
+                      "logic": "AND",
+                      "conditions": [
+                        {
+                          "dimensionName": "ApiName",
+                          "operator": "eq",
+                          "value": "GetContosoUsers"
+                        }
+                      ]
+                    }
+                  ],
+                  "spatialAggregation": {
+                    "type": "Average",
+                    "dimensions": [
+                      "Region",
+                      "ResponseCode"
+                    ]
+                  },
+                  "temporalAggregation": {
+                    "type": "Average",
+                    "windowSizeMinutes": 5
+                  }
+                },
+                {
+                  "signalSourceId": "B",
+                  "sourceAmwAccountManagedIdentity": "sourceAccountIdentity",
+                  "sourceAmwAccountResourceId": "/source/Account/Resource",
+                  "metricNamespace": "ContosoMetricsEast",
+                  "metricName": "Stamp2Latency",
+                  "filters": [
+                    {
+                      "logic": "AND",
+                      "conditions": [
+                        {
+                          "dimensionName": "ApiName",
+                          "operator": "eq",
+                          "value": "GetContosoUsers"
+                        }
+                      ]
+                    }
+                  ],
+                  "spatialAggregation": {
+                    "type": "Average",
+                    "dimensions": [
+                      "Region",
+                      "ResponseCode"
+                    ]
+                  },
+                  "temporalAggregation": {
+                    "type": "Average",
+                    "windowSizeMinutes": 5
+                  }
+                }
+              ],
+              "signalFormula": "(A + B) /2"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Management/ServiceGroups/testSG/providers/Microsoft.Monitor/slis/testSli",
+        "name": "testSli",
+        "type": "Microsoft.Monitor/testSli",
+        "properties": {
+          "description": "Measures the performance characteristics of the GetContosoUsers() API. ",
+          "category": "Latency",
+          "evaluationType": "WindowBased",
+          "provisioningState": "Succeeded",
+          "executionState": {
+            "message": "",
+            "state": "Succeeded"
+          },
+          "destinationAmwAccounts": [
+            {
+              "resourceId": "/subscriptions/<subId>/resourcegroups/<rgId>/providers/microsoft.monitor/accounts/<dest>",
+              "identity": "/subscriptions/<subId>/resourcegroups/<rgId>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<idName>"
+            }
+          ],
+          "destinationMetrics": [
+            {
+              "metricNamespace": "ContosoMetricsOut",
+              "metricName": "Get API Latency:Uptime"
+            },
+            {
+              "metricNamespace": "ContosoMetricsOut",
+              "metricName": "Get API Latency:Downtime"
+            },
+            {
+              "metricNamespace": "ContosoMetricsOut",
+              "metricName": "Get API Latency:Value"
+            }
+          ],
+          "sloProperties": {
+            "target": {
+              "value": 99,
+              "comparator": "gte",
+              "compliancePeriodDays": 30,
+              "complianceCalculationType": "CalendarDays"
+            }
+          },
+          "sliProperties": {
+            "windowUptimeCriteria": {
+              "target": 95,
+              "comparator": "gte"
+            },
+            "signals": {
+              "signalSources": [
+                {
+                  "signalSourceId": "A",
+                  "sourceAmwAccountManagedIdentity": "sourceAccountIdentity",
+                  "sourceAmwAccountResourceId": "/source/Account/Resource",
+                  "metricNamespace": "ContosoMetricsWest",
+                  "metricName": "Stamp1Latency",
+                  "filters": [
+                    {
+                      "logic": "AND",
+                      "conditions": [
+                        {
+                          "dimensionName": "ApiName",
+                          "operator": "eq",
+                          "value": "GetContosoUsers"
+                        }
+                      ]
+                    }
+                  ],
+                  "spatialAggregation": {
+                    "type": "Average",
+                    "dimensions": [
+                      "Region",
+                      "ResponseCode"
+                    ]
+                  },
+                  "temporalAggregation": {
+                    "type": "Average",
+                    "windowSizeMinutes": 5
+                  }
+                },
+                {
+                  "signalSourceId": "B",
+                  "sourceAmwAccountManagedIdentity": "sourceAccountIdentity",
+                  "sourceAmwAccountResourceId": "/source/Account/Resource",
+                  "metricNamespace": "ContosoMetricsEast",
+                  "metricName": "Stamp2Latency",
+                  "filters": [
+                    {
+                      "logic": "AND",
+                      "conditions": [
+                        {
+                          "dimensionName": "ApiName",
+                          "operator": "eq",
+                          "value": "GetContosoUsers"
+                        }
+                      ]
+                    }
+                  ],
+                  "spatialAggregation": {
+                    "type": "Average",
+                    "dimensions": [
+                      "Region",
+                      "ResponseCode"
+                    ]
+                  },
+                  "temporalAggregation": {
+                    "type": "Average",
+                    "windowSizeMinutes": 5
+                  }
+                }
+              ],
+              "signalFormula": "(A + B) /2"
+            }
+          }
+        }
+      }
+    }
+  }
+}

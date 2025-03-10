@@ -49,7 +49,7 @@ model SolutionTemplate
 @doc("Solution Template Version With Update Type")
 model SolutionTemplateVersionWithUpdateType {
   @doc("Update type")
-  updateType: UpdateType;
+  updateType?: UpdateType;
 
   @doc("Solution Template Version")
   solutionTemplateVersion: SolutionTemplateVersion;
