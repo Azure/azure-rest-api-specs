@@ -329,6 +329,106 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources/{recommendationResourceId}": {
+      "get": {
+        "tags": [
+          "triageResources"
+        ],
+        "summary": "Get existing triage resource.",
+        "description": "Get a triage resource for a given review and recommendation.",
+        "operationId": "triageResources_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/reviewIdParameter"
+          },
+          {
+            "$ref": "#/parameters/recommendationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/recommendationResourceIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/triageResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "GetTriageResource": {
+            "$ref": "./examples/TriageResourcesGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources": {
+      "get": {
+        "tags": [
+          "triageResources"
+        ],
+        "summary": "List triage resources based on a review and recommendation.",
+        "description": "List all triage resources that belong to a review and recommendation.",
+        "operationId": "triageResources_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/reviewIdParameter"
+          },
+          {
+            "$ref": "#/parameters/recommendationIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/triageResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListTriageResources": {
+            "$ref": "./examples/TriageResourcesList.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -530,6 +630,99 @@
         }
       }
     },
+    "triageResourceCollection": {
+      "description": "Collection of Advisor triage resources.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of triage resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/triageResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of triage resources, if there are any."
+        }
+      }
+    },
+    "triageResource": {
+      "description": "Triage resource data structure.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/ResiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendation/{recommendationId}\".",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name E.g. \"{guid}\".",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type E.g. \"Microsoft.Advisor/resiliencyReviews\".",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/triageResourceProperties",
+          "description": "Triage resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "triageResourceProperties": {
+      "description": "Triage resource properties.",
+      "type": "object",
+      "properties": {
+        "reviewId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique identifier for the review resource this triageResource belongs to."
+        },
+        "recommendationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique identifier for the recommendation resource this triageResource belongs to."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique identifier for the subscription resource this triageResource belongs to."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the resource group this triageResource belongs to."
+        },
+        "resourceType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource this triageResource corresponds to e.g. \"Cosmos DB\"."
+        },
+        "resourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Full Azure Resource Id path of the resource this triageResource corresponds to."
+        },
+        "resourceName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the resource this triageResource corresponds to."
+        }
+      }
+    },
     "priorityName": {
       "description": "Recommendation priority name enum.",
       "type": "string",
@@ -665,6 +858,14 @@
       "name": "recommendationId",
       "in": "path",
       "description": "Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "recommendationResourceIdParameter": {
+      "name": "recommendationResourceId",
+      "in": "path",
+      "description": "Existing recommendation triage resource associated with a triage recommendation. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
