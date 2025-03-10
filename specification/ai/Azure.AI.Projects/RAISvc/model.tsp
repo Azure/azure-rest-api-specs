@@ -16,6 +16,52 @@ enum SimulationType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("Message")
+model Message {
+  @doc("The role.")
+  Role?: string;
+
+  @doc("The content.")
+  Content?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("Target Harm")
+model TargetHarm {
+  @doc("The risk type.")
+  RiskType?: string;
+
+  @doc("The risk sub type.")
+  RiskSubType?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("Metadata")
+model Metadata {
+  @doc("List of target harms.")
+  TargetHarms: Array<TargetHarm>;
+
+  @doc("The language")
+  Language: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("Attack Objective")
+model AttackObjective {
+  @doc("The metadata.")
+  Metadata?: Metadata;
+
+  @doc("List of sources.")
+  Source: Array<string>;
+
+  @doc("The modality.")
+  Modality: string;
+
+  @doc("The messages.")
+  Messages: Array<Message>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("Customization Parameters")
 model CustomizationParameters {
   @doc("Application scenario.")
