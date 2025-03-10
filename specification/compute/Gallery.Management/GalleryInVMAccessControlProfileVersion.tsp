@@ -64,7 +64,11 @@ interface GalleryInVMAccessControlProfileVersions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("GalleryInVMAccessControlProfileVersions_Delete")
-  delete is ComputeResourceDeleteAsync<GalleryInVMAccessControlProfileVersion>;
+  delete is ComputeResourceDeleteAsync<
+    GalleryInVMAccessControlProfileVersion,
+    Response = ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List gallery inVMAccessControlProfile versions in a gallery inVMAccessControlProfile

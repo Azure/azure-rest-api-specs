@@ -138,12 +138,18 @@ interface Galleries {
    * Update sharing profile of a gallery.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   @action("share")
   @operationId("GallerySharingProfile_Update")
-  gallerySharingProfileUpdate is ComputeResourceActionAsync<
+  gallerySharingProfileUpdate is ComputeResourceActionAsyncBase<
     Gallery,
     SharingUpdate,
-    ArmResponse<SharingUpdate>
+    ArmResponse<SharingUpdate> | (ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      @bodyRoot _: SharingUpdate;
+    })
   >;
 }
 
