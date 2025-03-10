@@ -189,9 +189,27 @@ export class TspConfigJavaAzPackageDirectorySubRule extends TspconfigEmitterOpti
 }
 
 // ----- TS management modular sub rules -----
+export class _TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "generateMetadata", true);
+  }
+  protected skip(config: any, folder: string) {
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
 export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-ts", "generate-metadata", true);
+  }
+  protected skip(config: any, folder: string) {
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
+export class _TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "hierarchyClient", false);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -207,9 +225,27 @@ export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends Tspconfig
   }
 }
 
+export class _TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "experimentalExtensibleEnums", true);
+  }
+  protected skip(config: any, folder: string) {
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
 export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-ts", "experimental-extensible-enums", true);
+  }
+  protected skip(config: any, folder: string) {
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
+export class _TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "enableOperationGroup", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -228,6 +264,19 @@ export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends Tspco
 export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^arm(?:-[a-z]+)+$/));
+  }
+  protected skip(config: any, folder: string) {
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
+export class _TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-ts",
+      "packageDetails.name",
+      new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
+    );
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -426,11 +475,16 @@ export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzPackageDirectorySubRule(),
   new TspConfigTsMgmtModularGenerateMetadataTrueSubRule(),
+  new _TspConfigTsMgmtModularGenerateMetadataTrueSubRule(),
   new TspConfigTsMgmtModularHierarchyClientFalseSubRule(),
+  new _TspConfigTsMgmtModularHierarchyClientFalseSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
+  new _TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule(),
+  new _TspConfigTsMgmtModularEnableOperationGroupTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
+  new _TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),
