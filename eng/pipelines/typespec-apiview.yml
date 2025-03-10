@@ -13,12 +13,17 @@ parameters:
 jobs:
 - job:
   pool:
-    name: azsdk-pool-x64
+    name: azsdk-pool
     demands: ImageOverride -equals ubuntu-22.04
+
+  variables:
+  - template: /eng/pipelines/templates/variables/globals.yml
 
   steps:
   - checkout: self
     fetchDepth: 0
+
+  - template: /eng/pipelines/templates/steps/use-node-version.yml
 
   - pwsh: |
       . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
