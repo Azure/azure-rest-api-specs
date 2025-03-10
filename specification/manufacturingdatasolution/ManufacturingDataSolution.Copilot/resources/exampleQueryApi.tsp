@@ -33,13 +33,10 @@ interface ExampleQueryOperations {
   >;
 
   @doc("update the example query")
-  updateExample is apiOperations.ResourceCreateOrUpdate<ExampleQueryRequest>;
+  createOrReplace is apiOperations.ResourceCreateOrReplace<ExampleQueryRequest>;
 
   @doc("delete the example query")
   deleteExample is apiOperations.ResourceDelete<ExampleQueryRequest>;
-
-  @doc("create the example query")
-  createExample is apiOperations.ResourceCreateWithServiceProvidedName<ExampleQueryRequest>;
 
   @doc("Update instruction status.")
   linkInstruction is apiOperations.ResourceAction<

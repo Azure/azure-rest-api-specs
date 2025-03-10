@@ -402,53 +402,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-      "post": {
-        "operationId": "ExampleQueryOperations_CreateExample",
-        "description": "create the example query",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExampleQuery.Models.ExampleQueryRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of ExampleQueryRequest"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExampleQueryOperations_CreateExample_MaximumSet": {
-            "$ref": "./examples/ExampleQueryOperations_CreateExample_MaximumSet_Gen.json"
-          }
-        }
       }
     },
     "/copilot/exampleQuery/{exampleId}": {
@@ -493,12 +446,9 @@
           }
         }
       },
-      "patch": {
-        "operationId": "ExampleQueryOperations_UpdateExample",
+      "put": {
+        "operationId": "ExampleQueryOperations_CreateOrReplace",
         "description": "update the example query",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -516,7 +466,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExampleQuery.Models.ExampleQueryRequestCreateOrUpdate"
+              "$ref": "#/definitions/ExampleQuery.Models.ExampleQueryRequest"
             }
           }
         ],
@@ -544,11 +494,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "ExampleQueryOperations_UpdateExample_MaximumSet": {
-            "$ref": "./examples/ExampleQueryOperations_UpdateExample_MaximumSet_Gen.json"
           }
         }
       },
@@ -1625,27 +1570,6 @@
         "sampleQuery"
       ]
     },
-    "ExampleQuery.Models.ExampleQueryRequestCreateOrUpdate": {
-      "type": "object",
-      "description": "The example query resource.",
-      "properties": {
-        "userQuestion": {
-          "type": "string",
-          "description": "The user question associated with the example."
-        },
-        "linkedInstructions": {
-          "type": "array",
-          "description": "The linked instructions for the example query.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "sampleQuery": {
-          "$ref": "#/definitions/ExampleQuery.Models.SampleQueryCreateOrUpdate",
-          "description": "The sample query for the example."
-        }
-      }
-    },
     "ExampleQuery.Models.LinkInstructionRequest": {
       "type": "object",
       "description": "The patch request for the example query.",
@@ -1677,21 +1601,6 @@
         "language",
         "query"
       ]
-    },
-    "ExampleQuery.Models.SampleQueryCreateOrUpdate": {
-      "type": "object",
-      "description": "The sample query resource.",
-      "properties": {
-        "language": {
-          "type": "string",
-          "description": "The query language.",
-          "default": "KQL"
-        },
-        "query": {
-          "type": "string",
-          "description": "The query string."
-        }
-      }
     },
     "Feedback.Models.FeedbackCategory": {
       "type": "string",
