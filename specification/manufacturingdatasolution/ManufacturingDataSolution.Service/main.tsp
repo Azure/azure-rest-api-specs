@@ -44,7 +44,7 @@ enum Versions {
 model AadToken
   is OAuth2Auth<[
     {
-      type: OAuth2FlowType.implicit;
+      type: OAuth2FlowType.authorizationCode;
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
       tokenUrl: "https://login.microsoftonline.com/common/oauth2/token";
       scopes: ["https://mds.azure.com/.default"];

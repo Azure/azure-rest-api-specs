@@ -40,11 +40,11 @@ suppressions:
     where: $.paths["/admin/cleanup/{entityName}"].delete.responses.202.schema
 ```
 
-### Tag: package-2025-03-01-preview
+### Tag: package-2025-03-01
 
 These settings apply only when `--tag=package-2025-03-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-09-30-preview'
+```yaml $(tag) == 'package-2025-03-01'
 input-file:
   - Microsoft.Industries.ManufacturingDataSolution/stable/2025-03-01/openapi.json
 ```
