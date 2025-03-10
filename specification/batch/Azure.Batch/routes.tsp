@@ -1479,6 +1479,24 @@ alias DeleteNodeUserResponse = BatchClientResponseHeaders & {
   code: "200";
 };
 
+alias ReplaceNodeUserRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the machine on which you want to update a user Account.")
+  @path
+  nodeId: string;
+
+  @doc("The name of the user Account to update.")
+  @path
+  userName: string;
+
+  @doc("The options to use for updating the user.")
+  @bodyRoot
+  content: BatchNodeUserUpdateContent;
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1524,24 +1542,10 @@ interface Nodes {
     Account on a Compute Node only when it is in the idle or running state.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
-  @clientName("replaceNodeUserInternal", "java")
-  replaceNodeUser is ReplaceOperation<
+  replaceNodeUser is ReplaceOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the machine on which you want to update a user Account.")
-      @path
-      nodeId: string;
-
-      @doc("The name of the user Account to update.")
-      @path
-      userName: string;
-
-      @doc("The options to use for updating the user.")
-      @bodyRoot
-      content: BatchNodeUserUpdateContent;
+      ...CommonJsonParameters;
+      ...ReplaceNodeUserRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;

@@ -516,3 +516,27 @@ op deleteNodeUserCustomization is Azure.Batch.DeleteOperationNew<
   deleteNodeUserCustomization,
   "java"
 );
+
+// Replace Node User Operation
+@doc("Optional parameters for Replace Node User operation.")
+model ReplaceBatchNodeUserOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Replace Node User operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
+op replaceNodeUserCustomization is Azure.Batch.ReplaceOperationNew<
+  {
+    ...Azure.Batch.ReplaceNodeUserRequiredParameters;
+
+    @doc("Optional parameters for Replace Node User operation.")
+    options?: ReplaceBatchNodeUserOptions;
+  },
+  Azure.Batch.RequestSuccessResponseHeaders
+>;
+
+@@override(Azure.Batch.Nodes.replaceNodeUser,
+  replaceNodeUserCustomization,
+  "java"
+);
