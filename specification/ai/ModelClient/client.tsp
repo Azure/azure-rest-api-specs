@@ -111,10 +111,6 @@ namespace Customizations; // The actual name here doesn't matter and is here for
   "ImageDetailLevel",
   "python"
 );
-@@clientName(AI.Model.ChatMessageAudioContentItem,
-  "AudioContentItem",
-  "python"
-);
 @@clientName(AI.Model.ChatMessageInputAudio, "InputAudio", "python");
 
 @client({
