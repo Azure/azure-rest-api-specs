@@ -32,6 +32,14 @@ export async function getChangedFiles(
 }
 
 /**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function resourceManager(file) {
+  return typeof file === "string" && file.includes("/resource-manager/");
+}
+
+/**
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} [baseCommitish] Defaults to "HEAD^".
  * @param {string} [headCommitish] Defaults to "HEAD".
