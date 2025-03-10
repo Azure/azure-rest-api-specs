@@ -93,13 +93,13 @@ model QueryValidationJobRun {
   @doc("Date of test run")
   createdAt: string;
 
-  @doc("Test onwer")
+  @doc("Test owner")
   createdBy: string;
 }
 
 @doc("Operation Status")
 union OperationStatus {
-  @doc("The operation is accepeted.")
+  @doc("The operation is Accepted.")
   Accepted: "Accepted",
 
   @doc("The operation is in progress.")
