@@ -13,18 +13,16 @@ using Azure.ResourceManager;
 
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 @armProviderNamespace
-@service({
-  title: "Managed DevOps Infrastructure",
-})
+@service(#{ title: "Managed DevOps Infrastructure" })
 @versioned(Versions)
 namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
-  /** 2024-10-19 version */
+  /** 2025-01-21 version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2024-10-19`,
+  `2025-01-21`,
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -74,7 +72,7 @@ model GitHubOrganizationProfile extends OrganizationProfile {
   kind: "GitHub";
 
   @doc("The list of GitHub organizations/repositories the pool should be present in.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   organizations: GitHubOrganization[];
 }
 @doc("Defines a GitHub organization")
@@ -92,12 +90,13 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   kind: "AzureDevOps";
 
   @doc("The list of Azure DevOps organizations the pool should be present in.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   organizations: Organization[];
 
   @doc("The type of permission which determines which accounts are admins on the Azure DevOps pool.")
   permissionProfile?: AzureDevOpsPermissionProfile;
 }
+
 @doc("Defines an Azure DevOps organization.")
 model Organization {
   @doc("The Azure DevOps organization URL in which the pool should be created.")
@@ -108,6 +107,9 @@ model Organization {
 
   @doc("How many machines can be created at maximum in this organization out of the maximumConcurrency of the pool.")
   parallelism?: int32;
+
+  @doc("Determines if the pool should have open access to all projects in this organization.")
+  openAccess?: boolean;
 }
 @doc("Defines the type of Azure DevOps pool permission.")
 model AzureDevOpsPermissionProfile {
@@ -148,7 +150,7 @@ model VmssFabricProfile extends FabricProfile {
   sku: DevOpsAzureSku;
 
   @doc("The VM images of the machines in the pool.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   images: PoolImage[];
 
   @doc("The OS profile of the machines in the pool.")
@@ -173,7 +175,7 @@ model StorageProfile {
   osDiskStorageAccountType?: OsDiskStorageAccountType;
 
   @doc("A list of empty data disks to attach.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   dataDisks?: DataDisk[];
 }
 
@@ -240,6 +242,20 @@ union OsDiskStorageAccountType {
   StandardSSD: "StandardSSD",
 }
 
+@doc("The type of Ephemeral option the pool will use on underlying VMs when loading this image.")
+union EphemeralType {
+  string,
+
+  @doc("Ephemeral is handled by Managed DevOps Pools service.")
+  Automatic: "Automatic",
+
+  @doc("CacheDisk ephemeral only, requires that the SKU has a cache that is large enough for the image.")
+  CacheDisk: "CacheDisk",
+
+  @doc("ResourceDisk ephemeral only, requires only that the SKU supports it.")
+  ResourceDisk: "ResourceDisk",
+}
+
 @doc("The VM image of the machines in the pool.")
 model PoolImage {
   @doc("The resource id of the image.")
@@ -253,6 +269,9 @@ model PoolImage {
 
   @doc("The percentage of the buffer to be allocated to this image.")
   buffer?: string = "*";
+
+  @doc("The ephemeral type of the image.")
+  ephemeralType?: EphemeralType;
 }
 
 @doc("The OS profile of the machines in the pool.")
@@ -264,10 +283,24 @@ model OsProfile {
   logonType?: LogonType;
 }
 
+@doc("The certificate store name type")
+union CertificateStoreNameOption {
+  string,
+
+  @doc("The X.509 certificate store for personal certificates.")
+  "My",
+
+  @doc("The X.509 certificate store for trusted root certificate authorities (CAs).")
+  "Root",
+}
+
 @doc("The secret management settings of the machines in the pool.")
 model SecretsManagementSettings {
   @doc("Where to store certificates on the machine.")
   certificateStoreLocation?: string;
+
+  @doc("Name of the certificate store to use on the machine, currently 'My' and 'Root' are supported.")
+  certificateStoreName?: CertificateStoreNameOption;
 
   @doc("The list of certificates to install on all machines in the pool.")
   observedCertificates: url[];
@@ -413,7 +446,7 @@ interface Pools {
     Pool,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Pool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<Pool, PoolProperties>
@@ -436,7 +469,7 @@ model ResourceDetailsObject is ProxyResource<ResourceDetailsObjectProperties> {
   @doc("The name of the resource.")
   @key("resourceName")
   @segment("resources")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -590,7 +623,7 @@ model ResourceSkuLocationInfo {
   zones: string[];
 
   @doc("Gets details of capabilities available to a SKU in specific zones.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   zoneDetails: ResourceSkuZoneDetails[];
 }
 
@@ -600,7 +633,7 @@ model ResourceSkuZoneDetails {
   name: string[];
 
   @doc("A list of capabilities that are available for the SKU in the specified list of zones.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   capabilities: ResourceSkuCapabilities[];
 }
 
@@ -611,7 +644,7 @@ model ResourceSku is ProxyResource<ResourceSkuProperties> {
   @doc("The name of the SKU.")
   @key("skuName")
   @segment("skus")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -635,15 +668,15 @@ model ResourceSkuProperties {
   locations: azureLocation[];
 
   @doc("A list of locations and availability zones in those locations where the SKU is available")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   locationInfo: ResourceSkuLocationInfo[];
 
   @doc("Name value pairs to describe the capability.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   capabilities: ResourceSkuCapabilities[];
 
   @doc("The restrictions of the SKU.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   restrictions: ResourceSkuRestrictions[];
 }
 
@@ -656,7 +689,6 @@ model Location is ProxyResource<LocationProperties> {
   @path
   @segment("locations")
   @doc("Name of the location.")
-  @visibility("public")
   name: string;
 }
 
@@ -690,7 +722,7 @@ interface SubscriptionUsages {
 @parentResource(Location)
 model Quota {
   @doc("The name of the quota.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: QuotaName;
 
   @doc("Fully qualified ARM resource id")
@@ -724,7 +756,7 @@ model Image is ProxyResource<ImageProperties> {
   @path
   @segment("images")
   @doc("Name of the image.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -757,7 +789,7 @@ model ImageVersion is ProxyResource<ImageVersionProperties> {
   @doc("The name of the image version.")
   @key("imageVersionName")
   @segment("versions")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

@@ -2584,6 +2584,7 @@
             "headers": {
               "Content-Length": {
                 "type": "string",
+                "format": "int64",
                 "description": "The length of the file."
               },
               "ETag": {
@@ -2828,6 +2829,7 @@
             "headers": {
               "Content-Length": {
                 "type": "string",
+                "format": "int64",
                 "description": "The length of the file."
               },
               "ETag": {
@@ -7179,6 +7181,7 @@
             "headers": {
               "Content-Length": {
                 "type": "string",
+                "format": "int64",
                 "description": "The length of the file."
               },
               "ETag": {
@@ -7423,6 +7426,7 @@
             "headers": {
               "Content-Length": {
                 "type": "string",
+                "format": "int64",
                 "description": "The length of the file."
               },
               "ETag": {
@@ -10758,12 +10762,12 @@
           "description": "The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries."
         },
         "readIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk read operations made by all Tasks in all Jobs created under the schedule."
         },
         "writeIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk write operations made by all Tasks in all Jobs created under the schedule."
         },
@@ -10778,17 +10782,17 @@
           "description": "The total gibibytes written to disk by all Tasks in all Jobs created under the schedule."
         },
         "numSucceededTasks": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of Tasks successfully completed during the given time range in Jobs created under the schedule. A Task completes successfully if it returns exit code 0."
         },
         "numFailedTasks": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of Tasks that failed during the given time range in Jobs created under the schedule. A Task fails if it exhausts its maximum retry count without returning exit code 0."
         },
         "numTaskRetries": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of retries during the given time range on all Tasks in all Jobs created under the schedule."
         },
@@ -11111,12 +11115,12 @@
           "description": "The total wall clock time of all Tasks in the Job.  The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries."
         },
         "readIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk read operations made by all Tasks in the Job."
         },
         "writeIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk write operations made by all Tasks in the Job."
         },
@@ -11131,17 +11135,17 @@
           "description": "The total amount of data in GiB written to disk by all Tasks in the Job."
         },
         "numSucceededTasks": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of Tasks successfully completed in the Job during the given time range. A Task completes successfully if it returns exit code 0."
         },
         "numFailedTasks": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of Tasks in the Job that failed during the given time range. A Task fails if it exhausts its maximum retry count without returning exit code 0."
         },
         "numTaskRetries": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of retries on all the Tasks in the Job during the given time range."
         },
@@ -12202,7 +12206,7 @@
         },
         "vmSize": {
           "type": "string",
-          "description": "The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available VM sizes, see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).",
+          "description": "The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available VM sizes, see Sizes for Virtual Machines in Azure (https://learn.microsoft.com/azure/virtual-machines/sizes/overview). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).",
           "readOnly": true
         },
         "virtualMachineConfiguration": {
@@ -12378,7 +12382,7 @@
         },
         "vmSize": {
           "type": "string",
-          "description": "The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available VM sizes for Pools using Images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration), see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available VM sizes for Pools using Images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration), see Sizes for Virtual Machines in Azure (https://learn.microsoft.com/azure/virtual-machines/sizes/overview). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfiguration",
@@ -12412,7 +12416,7 @@
         },
         "autoScaleFormula": {
           "type": "string",
-          "description": "A formula for the desired number of Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch Pool' (https://azure.microsoft.com/documentation/articles/batch-automatic-scaling/)."
+          "description": "A formula for the desired number of Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch Pool' (https://learn.microsoft.com/azure/batch/batch-automatic-scaling)."
         },
         "autoScaleEvaluationInterval": {
           "type": "string",
@@ -12540,7 +12544,7 @@
       "properties": {
         "autoScaleFormula": {
           "type": "string",
-          "description": "The formula for the desired number of Compute Nodes in the Pool. The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://azure.microsoft.com/documentation/articles/batch-automatic-scaling)."
+          "description": "The formula for the desired number of Compute Nodes in the Pool. The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-automatic-scaling)."
         }
       },
       "required": [
@@ -12818,12 +12822,12 @@
           "description": "The peak used disk space in GiB across all Compute Nodes in the Pool."
         },
         "diskReadIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk read operations across all Compute Nodes in the Pool."
         },
         "diskWriteIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk write operations across all Compute Nodes in the Pool."
         },
@@ -14006,7 +14010,7 @@
         },
         "commandLine": {
           "type": "string",
-          "description": "The command line of the Task. For multi-instance Tasks, the command line is executed as the primary Task, after the primary Task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables)."
+          "description": "The command line of the Task. For multi-instance Tasks, the command line is executed as the primary Task, after the primary Task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/BatchTaskContainerSettings",
@@ -14447,12 +14451,12 @@
           "description": "The total wall clock time of the Task. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If the Task was retried, this includes the wall clock time of all the Task retries."
         },
         "readIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk read operations made by the Task."
         },
         "writeIOps": {
-          "type": "integer",
+          "type": "string",
           "format": "int64",
           "description": "The total number of disk write operations made by the Task."
         },
@@ -15083,6 +15087,7 @@
         },
         "contentLength": {
           "type": "string",
+          "format": "int64",
           "description": "The length of the file."
         },
         "contentType": {
