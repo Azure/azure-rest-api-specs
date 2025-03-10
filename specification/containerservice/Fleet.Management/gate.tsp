@@ -84,7 +84,7 @@ model GateProperties {
 @added(Versions.v2025_04_01_preview)
 union GateTargetType {
   @doc("The Gate is controlling the staged rollout of an Update Run.")
-  updateRun: UpdateRunGateTargetType;
+  updateRun: UpdateRunGateTargetType,
 }
 
 @doc("Whether the Gate is placed before or after the target.")
@@ -139,19 +139,19 @@ scalar UpdateRunResourceId
 @added(Versions.v2025_04_01_preview)
 union GateTargetId {
   @doc("The Gate is controlling the staged rollout of an Update Run.")
-  updateRun: UpdateRunResourceId;
+  updateRun: UpdateRunResourceId,
 }
 
 @doc("The target that the Gate is controlling, e.g. an Update Run.")
 @added(Versions.v2025_04_01_preview)
 model GateTarget {
-    @doc("The status of the Gate.")
-    @visibility(Lifecycle.Create, Lifecycle.Read)
-    id: GateTargetId;
+  @doc("The status of the Gate.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  id: GateTargetId;
 
-    @doc("The status of the Gate.")
-    @visibility(Lifecycle.Create, Lifecycle.Read)
-    type: GateTargetType;
+  @doc("The status of the Gate.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  type: GateTargetType;
 }
 
 @doc("The provisioning state of the Gate resource.")
@@ -175,7 +175,7 @@ interface Gates {
     GateProperties,
     Azure.ResourceManager.Foundations.BaseParameters<Gate> &
       IfMatchParameters<Gate> &
-      IfNoneMatchParameters<Gate>,
+      IfNoneMatchParameters<Gate>
   >;
 
   listByFleet is ArmResourceListByParent<Gate>;
