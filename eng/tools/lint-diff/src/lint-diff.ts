@@ -16,6 +16,10 @@ import {
   AutorestRunResult,
   logAutorestExecutionErrors,
   BeforeAfter,
+  getLintDiffViolations,
+  isFailure,
+  isWarning,
+  getNewItems,
 } from "./util.js";
 
 // 64 MiB max output buffers for exec
@@ -242,6 +246,7 @@ async function runLintDiff(
   // ... | ... | ...
   for (const [_, { before, after }] of runCorrelations.entries()) {
     // TODO: DRY
+    // TODO: Include SHA in the link
     const afterName = after.tag ? after.tag : "default";
     const beforeName = before.tag ? before.tag : "default";
     const afterPath = after.tag ? `${after.readme}#tag-${after.tag}` : after.readme;
@@ -252,7 +257,20 @@ async function runLintDiff(
 
   // MUST FIX Following errors/warnings are introduced by the current PR
   // Rule | Message | Related RPC [For API reviewers]
-  // for (const )
+  for (const [_, { before, after }] of runCorrelations.entries()) {
+    // TODO: May need to do some filtering of unrelated swaggers, see
+    // momentOfTruthPostProcessing.ts:421
+    const beforeViolations = getLintDiffViolations(before).filter(
+      (v) => isFailure(v.level) || isWarning(v.level),
+    );
+    const afterViolations = getLintDiffViolations(after).filter(
+      (v) => isFailure(v.level) || isWarning(v.level),
+    );
+
+    const [newViolations, existingViolations] = getNewItems(beforeViolations, afterViolations);
+    console.log(`New violations: ${newViolations.length}`);
+    console.log(`Existing violations: ${existingViolations.length}`);
+  }
 
   // The following errors/warnings exist before current PR submission
   // Rule | Message | Location (link to file, line # at SHA)

@@ -1,5 +1,5 @@
 import { access, constants, readFile, readdir } from "node:fs/promises";
-import { dirname, join, sep } from "node:path";
+import { dirname, join, sep, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { getInputFiles, MarkdownType } from "./markdown-utils.js";
 import { ExecException } from "node:child_process";
@@ -403,6 +403,67 @@ export interface AutoRestMessage {
   readme?: string;
   tag?: string;
   groupName?: string;
+}
+
+export function isFailure(level: string) {
+  if (level === undefined) {
+    return false;
+  }
+
+  return ["error", "fatal"].includes(level.toLowerCase());
+}
+
+export function isWarning(level: string) {
+  if (level === undefined) {
+    return false;
+  }
+
+  return level.toLowerCase() === "warning";
+}
+
+export function getNewItems(
+  before: LintDiffViolation[],
+  after: LintDiffViolation[],
+): [LintDiffViolation[], LintDiffViolation[]] {
+  const newItems = [];
+  const existingItems = [];
+
+  for (const afterViolation of after) {
+    let errorIsNew = false;
+
+    // Always treat fatal errors as new
+    if (afterViolation.level.toLowerCase() === "fatal") {
+      newItems.push(afterViolation);
+      continue;
+    }
+
+    // Search through "before" to find a matching violation
+    for (const beforeViolation of before) {
+      if (
+        beforeViolation.level == afterViolation.level &&
+        beforeViolation.code == afterViolation.code &&
+        beforeViolation.message == afterViolation.message &&
+        beforeViolation.source?.length == afterViolation.source?.length &&
+        // TODO: this is a direct copy, see if there is a better way
+        basename(beforeViolation.source?.[0]?.document) ==
+          basename(afterViolation.source?.[0]?.document) &&
+        // TODO: _.isEqual() was used her previously. Is this OK
+        beforeViolation.details?.jsonpath == afterViolation.details?.jsonpath
+      ) {
+        errorIsNew = false;
+        existingItems.push(afterViolation);
+        // Only need to find one match
+        break;
+      }
+    }
+
+    // If no match is found, add to new
+    if (errorIsNew) {
+      newItems.push(afterViolation);
+    }
+  }
+
+  return [newItems, existingItems];
 }
 
 // export function getAutorestViolations(runResult: AutorestRunResult) {}
