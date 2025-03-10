@@ -481,6 +481,30 @@
     }
   },
   "definitions": {
+    "AudioContentFormat": {
+      "type": "string",
+      "description": "A representation of the possible audio formats for audio.",
+      "enum": [
+        "wav",
+        "mp3"
+      ],
+      "x-ms-enum": {
+        "name": "AudioContentFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "wav",
+            "value": "wav",
+            "description": "Specifies audio in WAV format."
+          },
+          {
+            "name": "mp3",
+            "value": "mp3",
+            "description": "Specifies audio in MP3 format."
+          }
+        ]
+      }
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -584,10 +608,6 @@
           "type": "string",
           "description": "The model used for the chat completion."
         },
-        "usage": {
-          "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation."
-        },
         "choices": {
           "type": "array",
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -596,14 +616,18 @@
             "$ref": "#/definitions/ChatChoice"
           },
           "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
         }
       },
       "required": [
         "id",
         "created",
         "model",
-        "usage",
-        "choices"
+        "choices",
+        "usage"
       ]
     },
     "ChatCompletionsNamedToolChoice": {
@@ -688,7 +712,7 @@
     },
     "ChatCompletionsResponseFormatJsonSchemaDefinition": {
       "type": "object",
-      "description": "Defines the response format for chat completions as JSON with a given schema. The AI model\nwill need to adhere to this schema when generating completions.",
+      "description": "Defines the response format for chat completions as JSON with a given schema.\nThe AI model will need to adhere to this schema when generating completions.",
       "properties": {
         "name": {
           "type": "string",
@@ -696,7 +720,7 @@
         },
         "schema": {
           "type": "object",
-          "description": "The definition of the JSON schema. See https://json-schema.org/overview/what-is-jsonschema.\nNote that AI models usually only support a subset of the keywords defined by JSON schema. Consult your AI model documentation\nto determine what is supported.",
+          "description": "The definition of the JSON schema. See https://json-schema.org/overview/what-is-jsonschema.\nNote that AI models usually only support a subset of the keywords defined by JSON schema.\nConsult your AI model documentation to determine what is supported.",
           "additionalProperties": {}
         },
         "description": {
@@ -705,7 +729,7 @@
         },
         "strict": {
           "type": "boolean",
-          "description": "If set to true, the service will error out if the provided JSON schema contains keywords\nnot supported by the AI model. An example of such keyword may be `maxLength` for JSON type `string`.\nIf false, and the provided JSON schema contains keywords not supported\nby the AI model, the AI model will not error out. Instead it will ignore the unsupported keywords.",
+          "description": "If set to true, the service will error out if the provided JSON schema contains keywords\nnot supported by the AI model. An example of such keyword may be `maxLength` for JSON type `string`.\nIf false, and the provided JSON schema contains keywords not supported by the AI model,\nthe AI model will not error out. Instead it will ignore the unsupported keywords.",
           "default": false
         }
       },
@@ -807,6 +831,26 @@
         "function"
       ]
     },
+    "ChatMessageAudioContentItem": {
+      "type": "object",
+      "description": "A structured chat content item containing an audio content.",
+      "properties": {
+        "input_audio": {
+          "$ref": "#/definitions/ChatMessageInputAudio",
+          "description": "The details of the input audio.",
+          "x-ms-client-name": "inputAudio"
+        }
+      },
+      "required": [
+        "input_audio"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio"
+    },
     "ChatMessageContentItem": {
       "type": "object",
       "description": "An abstract representation of a structured content item within a chat message.",
@@ -886,6 +930,24 @@
       },
       "required": [
         "url"
+      ]
+    },
+    "ChatMessageInputAudio": {
+      "type": "object",
+      "description": "The details of an audio chat message content part.",
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "Base64 encoded audio data"
+        },
+        "format": {
+          "$ref": "#/definitions/AudioContentFormat",
+          "description": "The audio format of the audio content."
+        }
+      },
+      "required": [
+        "data",
+        "format"
       ]
     },
     "ChatMessageTextContentItem": {
@@ -1477,10 +1539,6 @@
           "type": "string",
           "description": "The model used for the chat completion."
         },
-        "usage": {
-          "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation."
-        },
         "choices": {
           "type": "array",
           "description": "An update to the collection of completion choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -1489,13 +1547,16 @@
             "$ref": "#/definitions/StreamingChatChoiceUpdate"
           },
           "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
         }
       },
       "required": [
         "id",
         "created",
         "model",
-        "usage",
         "choices"
       ]
     },

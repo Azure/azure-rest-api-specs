@@ -34,11 +34,23 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
 @@access(AI.Model.ChatCompletionsToolChoicePreset, Access.public);
-@@access(AI.Model.ChatRequestAssistantMessage, Access.public);
-@@access(AI.Model.ChatRequestMessage, Access.public);
-@@access(AI.Model.ChatRequestSystemMessage, Access.public);
-@@access(AI.Model.ChatRequestToolMessage, Access.public);
-@@access(AI.Model.ChatRequestUserMessage, Access.public);
+@@access(AI.Model.ChatRequestMessage, Access.public, "csharp,java,javascript");
+@@access(AI.Model.ChatRequestAssistantMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
+@@access(AI.Model.ChatRequestSystemMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
+@@access(AI.Model.ChatRequestToolMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
+@@access(AI.Model.ChatRequestUserMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
 @@access(AI.Model.ChatResponseMessage, Access.public);
 @@access(AI.Model.ChatRole, Access.public);
 @@access(AI.Model.CompletionsFinishReason, Access.public);
@@ -69,29 +81,23 @@ namespace Customizations; // The actual name here doesn't matter and is here for
   "python"
 );
 
+// In Python we hand-write the 4 input message classes, so we make them internal here.
+// The base class ChatRequestMessage has to have the same access as the derived classes,
+// so we make it internal as well. However the Python code will make it public again without changes.
+@@access(AI.Model.ChatRequestMessage, Access.internal, "python");
+@@access(AI.Model.ChatRequestAssistantMessage, Access.internal, "python");
+@@access(AI.Model.ChatRequestSystemMessage, Access.internal, "python");
+@@access(AI.Model.ChatRequestToolMessage, Access.internal, "python");
+@@access(AI.Model.ChatRequestUserMessage, Access.internal, "python");
+
 @@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
   "JsonSchemaFormat",
   "python"
 );
 
-@@clientName(AI.Model.ChatCompletionsResponseFormatJsonObject,
-  "ChatCompletionsResponseFormatJSON",
-  "javascript"
-);
-
 // We use shorter names in the Python client library
-@@clientName(AI.Model.ChatRequestSystemMessage, "SystemMessage", "python");
-@@clientName(AI.Model.ChatRequestUserMessage, "UserMessage", "python");
-@@clientName(AI.Model.ChatRequestAssistantMessage,
-  "AssistantMessage",
-  "python"
-);
-@@clientName(AI.Model.ChatRequestToolMessage, "ToolMessage", "python");
 @@clientName(AI.Model.ChatMessageContentItem, "ContentItem", "python");
-@@clientName(AI.Model.ChatMessageTextContentItem,
-  "TextContentItem",
-  "python"
-);
+@@clientName(AI.Model.ChatMessageTextContentItem, "TextContentItem", "python");
 @@clientName(AI.Model.ChatMessageImageContentItem,
   "ImageContentItem",
   "python"
@@ -101,6 +107,11 @@ namespace Customizations; // The actual name here doesn't matter and is here for
   "ImageDetailLevel",
   "python"
 );
+@@clientName(AI.Model.ChatMessageAudioContentItem,
+  "AudioContentItem",
+  "python"
+);
+@@clientName(AI.Model.ChatMessageInputAudio, "InputAudio", "python");
 
 @client({
   name: "ChatCompletionsClient",

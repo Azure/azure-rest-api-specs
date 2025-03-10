@@ -138,11 +138,6 @@ alias ChatCompletionsCommon = {
 
   @doc("The model used for the chat completion.")
   `model`: string;
-
-  @doc("""
-    Usage information for tokens processed and generated as part of this completions operation.
-    """)
-  usage: CompletionsUsage;
 };
 
 @doc("""
@@ -160,6 +155,11 @@ model ChatCompletions {
     """)
   @minItems(1)
   choices: ChatChoice[];
+
+  @doc("""
+    Usage information for tokens processed and generated as part of this completions operation.
+    """)
+  usage: CompletionsUsage;
 }
 
 @doc("""
@@ -178,6 +178,11 @@ model StreamingChatCompletionsUpdate {
     """)
   @minItems(1)
   choices: StreamingChatChoiceUpdate[];
+
+  @doc("""
+    Usage information for tokens processed and generated as part of this completions operation.
+    """)
+  usage?: CompletionsUsage;
 }
 
 @doc("""
@@ -259,7 +264,6 @@ model ChatCompletionsResponseFormatText extends ChatCompletionsResponseFormat {
   Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
   via a system or user message.
   """)
-@clientName("ChatCompletionsResponseFormatJSON", "javascript")
 model ChatCompletionsResponseFormatJsonObject
   extends ChatCompletionsResponseFormat {
   @doc("Response format type: always 'json_object' for this object.")
@@ -267,8 +271,8 @@ model ChatCompletionsResponseFormatJsonObject
 }
 
 @doc("""
-  Defines the response format for chat completions as JSON with a given schema. The AI model
-  will need to adhere to this schema when generating completions.
+  Defines the response format for chat completions as JSON with a given schema.
+  The AI model will need to adhere to this schema when generating completions.
   """)
 model ChatCompletionsResponseFormatJsonSchemaDefinition {
   @doc("""
@@ -278,8 +282,8 @@ model ChatCompletionsResponseFormatJsonSchemaDefinition {
 
   @doc("""
     The definition of the JSON schema. See https://json-schema.org/overview/what-is-jsonschema.
-    Note that AI models usually only support a subset of the keywords defined by JSON schema. Consult your AI model documentation
-    to determine what is supported.
+    Note that AI models usually only support a subset of the keywords defined by JSON schema.
+    Consult your AI model documentation to determine what is supported.
     """)
   schema: Record<unknown>;
 
@@ -291,8 +295,8 @@ model ChatCompletionsResponseFormatJsonSchemaDefinition {
   @doc("""
     If set to true, the service will error out if the provided JSON schema contains keywords
     not supported by the AI model. An example of such keyword may be `maxLength` for JSON type `string`.
-    If false, and the provided JSON schema contains keywords not supported
-    by the AI model, the AI model will not error out. Instead it will ignore the unsupported keywords.
+    If false, and the provided JSON schema contains keywords not supported by the AI model,
+    the AI model will not error out. Instead it will ignore the unsupported keywords.
     """)
   strict?: boolean = false;
 }
@@ -605,4 +609,34 @@ union ChatMessageImageDetailLevel {
     images but may also be slower and consume more tokens.
     """)
   high: "high",
+}
+
+@doc("A structured chat content item containing an audio content.")
+model ChatMessageAudioContentItem extends ChatMessageContentItem {
+  @doc("The discriminated object type: always 'input_audio' for this type.")
+  type: "input_audio";
+
+  @doc("The details of the input audio.")
+  @encodedName("application/json", "input_audio")
+  inputAudio: ChatMessageInputAudio;
+}
+
+@doc("The details of an audio chat message content part.")
+model ChatMessageInputAudio {
+  @doc("Base64 encoded audio data")
+  data: string;
+
+  @doc("The audio format of the audio content.")
+  format: AudioContentFormat;
+}
+
+@doc("A representation of the possible audio formats for audio.")
+union AudioContentFormat {
+  string,
+
+  @doc("Specifies audio in WAV format.")
+  wav: "wav",
+
+  @doc("Specifies audio in MP3 format.")
+  mp3: "mp3",
 }
