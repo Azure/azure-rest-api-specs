@@ -275,6 +275,8 @@ interface SolutionsOperations {
   /**
    * Creates solution job async.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "need to migrate to LRO apis for future versions"
+  @OpenAPI.extension("x-ms-long-running-operation", true)
   @action("create-job")
   createJob is Operations.ResourceCollectionAction<
     SolutionResource,
