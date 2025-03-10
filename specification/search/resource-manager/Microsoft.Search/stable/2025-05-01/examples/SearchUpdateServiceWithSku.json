@@ -9,11 +9,8 @@
         "app-name": "My e-commerce app",
         "new-tag": "Adding a new tag"
       },
-      "properties": {
-        "replicaCount": 2,
-        "encryptionWithCmk": {
-          "enforcement": "Enabled"
-        }
+      "sku": {
+        "name": "standard2"
       }
     }
   },
@@ -29,29 +26,31 @@
           "new-tag": "Adding a new tag"
         },
         "sku": {
-          "name": "standard"
+          "name": "standard2"
         },
         "properties": {
-          "replicaCount": 2,
+          "replicaCount": 1,
           "partitionCount": 1,
           "status": "provisioning",
           "statusDetails": "",
           "hostingMode": "default",
-          "provisioningState": "provisioning",
+          "provisioningState": "Provisioning",
           "publicNetworkAccess": "enabled",
           "networkRuleSet": {
-            "ipRules": []
+            "ipRules": [],
+            "bypass": "None"
           },
           "privateEndpointConnections": [],
           "sharedPrivateLinkResources": [],
           "encryptionWithCmk": {
-            "enforcement": "Enabled",
+            "enforcement": "Unspecified",
             "encryptionComplianceStatus": "Compliant"
           },
           "disableLocalAuth": false,
           "authOptions": {
             "apiKeyOnly": {}
           },
+          "disabledDataExfiltrationOptions": [],
           "upgradeAvailable": true
         },
         "systemData": {
