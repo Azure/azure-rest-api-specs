@@ -16,6 +16,6 @@ using Microsoft.ServiceFabric;
 );
 
 @@clientName(PublicIPAddressConfiguration,
-  "ServiceFabricManagedClusterPublicIPAddressConfiguration",
-  "csharp"
+  "IPConfigurationPublicIPAddressConfiguration",
+  "go, java, javascript, python"
 );
