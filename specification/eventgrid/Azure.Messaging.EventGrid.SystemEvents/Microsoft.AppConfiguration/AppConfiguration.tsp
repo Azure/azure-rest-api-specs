@@ -4,43 +4,44 @@ namespace Microsoft.EventGrid.SystemEvents;
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event. */
 model AppConfigurationKeyValueModifiedEventData {
   /** The key used to identify the key-value that was modified. */
-  key?: string;
+  key: string;
 
   /** The label, if any, used to identify the key-value that was modified. */
-  label?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "This property does return null."
+  label: string | null;
 
   /** The etag representing the new state of the key-value. */
-  etag?: string;
+  etag: string;
 
   /** The sync token representing the server state after the event. */
-  syncToken?: string;
+  syncToken: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event. */
 model AppConfigurationKeyValueDeletedEventData {
   /** The key used to identify the key-value that was deleted. */
-  key?: string;
+  key: string;
 
   /** The label, if any, used to identify the key-value that was deleted. */
-  label?: string;
+  label: string;
 
   /** The etag representing the key-value that was deleted. */
-  etag?: string;
+  etag: string;
 
   /** The sync token representing the server state after the event. */
-  syncToken?: string;
+  syncToken: string;
 }
 
 /** Schema of common properties of snapshot events */
 model AppConfigurationSnapshotEventData {
   /** The name of the snapshot. */
-  name?: string;
+  name: string;
 
   /** The etag representing the new state of the snapshot. */
-  etag?: string;
+  etag: string;
 
   /** The sync token representing the server state after the event. */
-  syncToken?: string;
+  syncToken: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotCreated event. */
