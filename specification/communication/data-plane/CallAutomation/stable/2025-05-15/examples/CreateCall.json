@@ -15,28 +15,24 @@
       "operationContext": "string",
       "callIntelligenceOptions": {
         "cognitiveServicesEndpoint": "string"
-      },"transportOptions": {
-        "type": "websocket",
-        "config":{
-          "websocketTransportOptions": {
-            "mediaStreamingOptions": {
-              "transportUrl": "wss://contosowebsocketserver.com/",
-              "transportType": "websocket",
-              "contentType": "audio",
-              "audioChannelType": "mixed",
-              "startMediaStreaming": true,
-              "enableBidirectional": true,
-              "audioFormat": "pcm16KMono"
-            },
-            "transcriptionOptions": {
-              "transportUrl": "wss://contosowebsocketserver.com/",
-              "transportType": "websocket",
-              "locale": "en-ca",
-              "speechRecognitionModelEndpointId": "afa0669c-a01e-4693-ae3a-93baf40f26d6",
-              "startTranscription": true,
-              "enableIntermediateResults": true
-            }
-          }
+      },
+      "websocketTransportOptions": {
+        "mediaStreamingOptions": {
+          "transportUrl": "wss://contosowebsocketserver.com/",
+          "transportType": "websocket",
+          "contentType": "audio",
+          "audioChannelType": "mixed",
+          "startMediaStreaming": true,
+          "enableBidirectional": true,
+          "audioFormat": "pcm16KMono"
+        },
+        "transcriptionOptions": {
+          "transportUrl": "wss://contosowebsocketserver.com/",
+          "transportType": "websocket",
+          "locale": "en-ca",
+          "speechRecognitionModelEndpointId": "afa0669c-a01e-4693-ae3a-93baf40f26d6",
+          "startTranscription": true,
+          "enableIntermediateResults": true
         }
       }
     }
