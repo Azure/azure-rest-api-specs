@@ -9,9 +9,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 
 @useAuth(AadOauth2Auth<["https://exp.azure.net/.default"]>)
-@service(#{
-  title: "Azure.Analytics.OnlineExperimentation service",
-})
+@service(#{ title: "Azure.Analytics.OnlineExperimentation service" })
 @versioned(Azure.Analytics.OnlineExperimentation.Versions)
 namespace Azure.Analytics.OnlineExperimentation;
 
@@ -180,11 +178,11 @@ model PercentileDefinition extends MetricDefinition {
   percentile: int32;
 }
 
-@doc("A workspace object that describes the experimentation workspace.")
+@doc("A workspace object that describes the Online Experimentation workspace.")
 @resource("workspaces")
 model Workspace {
   @key("workspaceId")
-  @doc("An ID used to uniquely identify and reference the experimentation workspace.")
+  @doc("An ID used to uniquely identify and reference the Online Experimentation workspace.")
   @visibility(Lifecycle.Read)
   @pattern("^[a-z0-9][a-z0-9-]*$")
   workspaceId: string;
