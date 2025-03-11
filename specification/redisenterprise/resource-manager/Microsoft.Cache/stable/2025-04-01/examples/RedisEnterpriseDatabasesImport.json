@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "databaseName": "default",
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f",
+    "parameters": {
+      "sasUris": [
+        "https://contosostorage.blob.core.window.net/urltoBlobFile1?sasKeyParameters",
+        "https://contosostorage.blob.core.window.net/urltoBlobFile2?sasKeyParameters"
+      ]
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/providers/Microsoft.Cache/...pathToOperationStatus...",
+        "Location": "https://management.azure.com/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/providers/Microsoft.Cache/...pathToOperationResult..."
+      }
+    }
+  }
+}
