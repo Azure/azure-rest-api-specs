@@ -24,17 +24,21 @@ interface Connections {
   get is ConnectionOperations.ResourceRead<Connection>;
 
   @doc("Get connection with secrets by name.")
-  getWithCredentials is ConnectionOperations.ResourceAction<Connection, {}, Connection>;
+  getWithCredentials is ConnectionOperations.ResourceAction<
+    Connection,
+    {},
+    Connection
+  >;
 
   @doc("List all connections in the project")
   list is ConnectionOperations.ResourceList<
     Connection,
     ListQueryParametersTrait<{
-        @doc("Specific type of connection to return in list")
-        @query("$connectionCategory")
-        connectionCategory?: ConnectionCategory,
+      @doc("Specific type of connection to return in list")
+      @query("$connectionCategory")
+      connectionCategory?: ConnectionCategory;
 
-        ...StandardListQueryParameters;
-      }>
+      ...StandardListQueryParameters;
+    }>
   >;
 }

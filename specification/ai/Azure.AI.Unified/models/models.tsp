@@ -56,7 +56,6 @@ model Model {
   systemData: SystemData;
 }
 
-
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Sku information")
 model Sku {
