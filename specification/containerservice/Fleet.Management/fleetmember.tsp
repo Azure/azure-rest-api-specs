@@ -55,6 +55,11 @@ model FleetMemberProperties {
   @doc("The status of the last operation.")
   provisioningState?: FleetMemberProvisioningState;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
+  @added(Versions.v2025_04_01_preview)
+  @doc("The labels for the fleet member.")
+  labels?: Record<string>;
+
   @added(Versions.v2025_03_01)
   @visibility(Lifecycle.Read)
   @doc("Status information of the last operation for fleet member.")
