@@ -1,12 +1,12 @@
-# Experimentation
+# Azure Online Experimentation
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Experimentation
+This is the AutoRest configuration file for Azure Online Experimentation
 
 ## Getting Started
 
-To build the SDKs for Experimentation, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+To build the SDKs for Azure Online Experimentation, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest`
 
@@ -22,10 +22,10 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the Experimentation.
+These are the global settings for Azure Online Experimentation.
 
 ```yaml
-title: Azure ExP Data Plane
+title: Azure Online Experimentation Data Plane
 openapi-type: data-plane
 ```
 
@@ -36,5 +36,5 @@ These settings apply only when `--tag=package-2024-11-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-11-30-preview'
 input-file:
-  - Microsoft.Experimentation/preview/2024-11-30-preview/experimentation.json
+  - Microsoft.OnlineExperimentation/preview/2024-11-30-preview/onlineexperimentation.json
 ```
