@@ -3,4 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(ArizeAi.ObservabilityEval, "ArizeAIObservabilityEvalMgmt", "python");
+@@clientName(ArizeAi.ObservabilityEval,
+  "ArizeAIObservabilityEvalMgmt",
+  "python"
+);
