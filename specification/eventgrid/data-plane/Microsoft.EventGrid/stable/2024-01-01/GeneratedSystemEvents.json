@@ -706,9 +706,13 @@
           "type": "string",
           "description": "The recipient Email Address"
         },
+        "internetMessageId": {
+          "type": "string",
+          "description": "The Internet Message Id of the email that has been sent"
+        },
         "messageId": {
           "type": "string",
-          "description": "The Id of the email been sent"
+          "description": "The Id of the email that has been sent"
         },
         "status": {
           "$ref": "#/definitions/AcsEmailDeliveryReportStatus",
@@ -725,6 +729,9 @@
         }
       },
       "required": [
+        "sender",
+        "recipient",
+        "internetMessageId",
         "status",
         "deliveryStatusDetails",
         "deliveryAttemptTimestamp"
@@ -785,6 +792,10 @@
         "statusMessage": {
           "type": "string",
           "description": "Detailed status message"
+        },
+        "recipientMailServerHostName": {
+          "type": "string",
+          "description": "Recipient mail server host name"
         }
       }
     },
@@ -1087,8 +1098,9 @@
         }
       },
       "required": [
-        "receivedTimeStamp",
-        "error"
+        "from",
+        "to",
+        "receivedTimeStamp"
       ]
     },
     "AcsMessageInteractiveButtonReplyContent": {
@@ -1125,9 +1137,7 @@
         }
       },
       "required": [
-        "type",
-        "buttonReply",
-        "listReply"
+        "type"
       ]
     },
     "AcsMessageInteractiveListReplyContent": {
@@ -1155,22 +1165,47 @@
       "properties": {
         "mimeType": {
           "type": "string",
-          "description": "The MIME type of the file this media represents"
+          "description": "Required. The MIME type of the file this media represents"
         },
         "id": {
           "type": "string",
-          "description": "The media identifier",
+          "description": "Required. The media identifier",
           "x-ms-client-name": "mediaId"
         },
         "fileName": {
           "type": "string",
-          "description": "The filename of the underlying media file as specified when uploaded"
+          "description": "Optional. The filename of the underlying media file as specified when uploaded"
         },
         "caption": {
           "type": "string",
-          "description": "The caption for the media object, if supported and provided"
+          "description": "Optional. The caption for the media object, if supported and provided"
+        },
+        "animated": {
+          "type": "boolean",
+          "description": "Optional. Set to true if the sticker is animated; false otherwise."
         }
-      }
+      },
+      "required": [
+        "mimeType",
+        "id"
+      ]
+    },
+    "AcsMessageReactionContent": {
+      "type": "object",
+      "description": "Message Reaction Content",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "Required. WhatsApp message ID of the message that the emoji is applied to"
+        },
+        "emoji": {
+          "type": "string",
+          "description": "Optional. Unicode escape sequence of the emoji."
+        }
+      },
+      "required": [
+        "messageId"
+      ]
     },
     "AcsMessageReceivedEventData": {
       "type": "object",
@@ -1178,38 +1213,47 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "The message content"
+          "description": "Optional. The message content"
+        },
+        "messageId": {
+          "type": "string",
+          "description": "Optional. Message ID. Format is Guid as string."
         },
         "channelType": {
           "$ref": "#/definitions/AcsMessageChannelKind",
-          "description": "The message channel type",
+          "description": "Required. The message channel type",
           "x-ms-client-name": "channelKind"
+        },
+        "messageType": {
+          "type": "string",
+          "description": "Required. Whatsapp message type"
         },
         "media": {
           "$ref": "#/definitions/AcsMessageMediaContent",
-          "description": "The received message media content",
+          "description": "Optional. The received message media content",
           "x-ms-client-name": "mediaContent"
+        },
+        "reaction": {
+          "$ref": "#/definitions/AcsMessageReactionContent",
+          "description": "Optional. The received message reaction content"
         },
         "context": {
           "$ref": "#/definitions/AcsMessageContext",
-          "description": "The received message context"
+          "description": "Optional. The received message context"
         },
         "button": {
           "$ref": "#/definitions/AcsMessageButtonContent",
-          "description": "The received message button content"
+          "description": "Optional. The received message button content"
         },
         "interactive": {
           "$ref": "#/definitions/AcsMessageInteractiveContent",
-          "description": "The received message interactive content",
+          "description": "Optional. The received message interactive content",
           "x-ms-client-name": "interactiveContent"
         }
       },
       "required": [
         "channelType",
-        "media",
-        "context",
-        "button",
-        "interactive"
+        "messageType"
       ],
       "allOf": [
         {
@@ -2482,10 +2526,16 @@
           "type": "string",
           "format": "date-time",
           "description": "The time at which the SMS was received"
+        },
+        "segmentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of segments in the message"
         }
       },
       "required": [
-        "receivedTimestamp"
+        "receivedTimestamp",
+        "segmentCount"
       ],
       "allOf": [
         {
@@ -2917,7 +2967,13 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      }
+      },
+      "required": [
+        "key",
+        "label",
+        "etag",
+        "syncToken"
+      ]
     },
     "AppConfigurationKeyValueModifiedEventData": {
       "type": "object",
@@ -2929,7 +2985,8 @@
         },
         "label": {
           "type": "string",
-          "description": "The label, if any, used to identify the key-value that was modified."
+          "description": "The label, if any, used to identify the key-value that was modified.",
+          "x-nullable": true
         },
         "etag": {
           "type": "string",
@@ -2939,7 +2996,13 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      }
+      },
+      "required": [
+        "key",
+        "label",
+        "etag",
+        "syncToken"
+      ]
     },
     "AppConfigurationSnapshotCreatedEventData": {
       "type": "object",
@@ -2966,7 +3029,12 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      }
+      },
+      "required": [
+        "name",
+        "etag",
+        "syncToken"
+      ]
     },
     "AppConfigurationSnapshotModifiedEventData": {
       "type": "object",
@@ -3418,9 +3486,11 @@
         }
       },
       "required": [
+        "id",
         "timestamp",
-        "target",
-        "connectedRegistry"
+        "action",
+        "location",
+        "target"
       ]
     },
     "ContainerRegistryArtifactEventTarget": {
@@ -3456,7 +3526,11 @@
           "type": "string",
           "description": "The version of the artifact."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "repository"
+      ]
     },
     "ContainerRegistryChartDeletedEventData": {
       "type": "object",
@@ -3494,7 +3568,10 @@
           "type": "string",
           "description": "The name of the connected registry that generated this event."
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "ContainerRegistryEventData": {
       "type": "object",
@@ -3539,12 +3616,11 @@
         }
       },
       "required": [
+        "id",
         "timestamp",
-        "target",
-        "request",
-        "actor",
-        "source",
-        "connectedRegistry"
+        "action",
+        "location",
+        "target"
       ]
     },
     "ContainerRegistryEventRequest": {
@@ -3571,7 +3647,12 @@
           "type": "string",
           "description": "The user agent header of the request."
         }
-      }
+      },
+      "required": [
+        "id",
+        "host",
+        "method"
+      ]
     },
     "ContainerRegistryEventSource": {
       "type": "object",
@@ -3621,7 +3702,11 @@
           "type": "string",
           "description": "The tag name."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "repository"
+      ]
     },
     "ContainerRegistryImageDeletedEventData": {
       "type": "object",
@@ -3667,7 +3752,10 @@
           "type": "string",
           "description": "The Kubernetes version of the ManagedCluster resource"
         }
-      }
+      },
+      "required": [
+        "kubernetesVersion"
+      ]
     },
     "ContainerServiceNewKubernetesVersionAvailableEventData": {
       "type": "object",
@@ -3689,7 +3777,12 @@
           "type": "string",
           "description": "The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event"
         }
-      }
+      },
+      "required": [
+        "latestSupportedKubernetesVersion",
+        "latestStableKubernetesVersion",
+        "lowestMinorKubernetesVersion"
+      ]
     },
     "ContainerServiceNodePoolRollingEventData": {
       "type": "object",
@@ -3699,7 +3792,10 @@
           "type": "string",
           "description": "The name of the node pool in the ManagedCluster resource"
         }
-      }
+      },
+      "required": [
+        "nodePoolName"
+      ]
     },
     "ContainerServiceNodePoolRollingFailedEventData": {
       "type": "object",
@@ -4333,6 +4429,13 @@
         }
       },
       "required": [
+        "fileUrl",
+        "fileType",
+        "partitionId",
+        "sizeInBytes",
+        "eventCount",
+        "firstSequenceNumber",
+        "lastSequenceNumber",
         "firstEnqueueTime",
         "lastEnqueueTime"
       ]
@@ -6058,15 +6161,23 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the target dataset time series that resulted in drift detection."
+          "description": "The start time of the target dataset time series that resulted in drift detection.",
+          "x-nullable": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the target dataset time series that resulted in drift detection."
+          "description": "The end time of the target dataset time series that resulted in drift detection.",
+          "x-nullable": true
         }
       },
       "required": [
+        "dataDriftId",
+        "dataDriftName",
+        "runId",
+        "baseDatasetId",
+        "targetDatasetId",
+        "driftCoefficient",
         "startTime",
         "endTime"
       ]
@@ -6099,8 +6210,9 @@
         }
       },
       "required": [
-        "serviceTags",
-        "serviceProperties"
+        "serviceName",
+        "serviceComputeType",
+        "modelIds"
       ]
     },
     "MachineLearningServicesModelRegisteredEventData": {
@@ -6127,8 +6239,8 @@
         }
       },
       "required": [
-        "modelTags",
-        "modelProperties"
+        "modelName",
+        "modelVersion"
       ]
     },
     "MachineLearningServicesRunCompletedEventData": {
@@ -6163,8 +6275,10 @@
         }
       },
       "required": [
-        "runTags",
-        "runProperties"
+        "experimentId",
+        "experimentName",
+        "runId",
+        "runType"
       ]
     },
     "MachineLearningServicesRunStatusChangedEventData": {
@@ -6203,8 +6317,11 @@
         }
       },
       "required": [
-        "runTags",
-        "runProperties"
+        "experimentId",
+        "experimentName",
+        "runId",
+        "runType",
+        "runStatus"
       ]
     },
     "MapsGeofenceEnteredEventData": {
@@ -6248,7 +6365,10 @@
         }
       },
       "required": [
-        "geometries"
+        "expiredGeofenceGeometryId",
+        "geometries",
+        "invalidPeriodGeofenceGeometryId",
+        "isEventPublished"
       ]
     },
     "MapsGeofenceExitedEventData": {
@@ -6291,7 +6411,14 @@
           "type": "string",
           "description": "The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API."
         }
-      }
+      },
+      "required": [
+        "deviceId",
+        "distance",
+        "geometryId",
+        "nearestLat",
+        "nearestLon"
+      ]
     },
     "MapsGeofenceResultEventData": {
       "type": "object",
@@ -7014,7 +7141,12 @@
           "type": "string",
           "description": "the type of the resource for which the event is being emitted"
         }
-      }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
     },
     "ResourceNotificationsResourceDeletedEventData": {
       "type": "object",
@@ -7088,8 +7220,9 @@
         }
       },
       "required": [
-        "tags",
-        "properties"
+        "id",
+        "name",
+        "type"
       ]
     },
     "ResourceNotificationsResourceUpdatedEventData": {
@@ -7113,7 +7246,8 @@
       },
       "required": [
         "resourceInfo",
-        "operationalInfo"
+        "operationalInfo",
+        "apiVersion"
       ]
     },
     "ResourceWriteCancelEventData": {
@@ -7477,7 +7611,9 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "hubName",
+        "connectionId"
       ]
     },
     "SignalRServiceClientConnectionDisconnectedEventData": {
@@ -7507,7 +7643,9 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "hubName",
+        "connectionId"
       ]
     },
     "StampKind": {

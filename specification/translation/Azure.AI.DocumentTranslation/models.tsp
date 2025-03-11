@@ -274,7 +274,7 @@ model TranslationError {
     For example it would be \"documents\" or
     \"document id\" in case of invalid document.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   @doc("""
@@ -308,7 +308,7 @@ model InnerTranslationError {
     For example it would be \"documents\" or
     \"document id\" in case of invalid document.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   @doc("""
@@ -330,7 +330,7 @@ model TranslationsStatus {
   value: TranslationStatus[];
 
   @doc("Url for the next page.  Null if no more pages available")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 
@@ -447,7 +447,7 @@ model DocumentsStatus {
   value: DocumentStatus[];
 
   @doc("Url for the next page.  Null if no more pages available")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 

@@ -10,6 +10,10 @@ suppressions:
         - Type of `ComputeStartStopSchedule.Cron` has been changed from `*CronTrigger` to `*Cron`
         - Type of `ComputeStartStopSchedule.Recurrence` has been changed from `*RecurrenceTrigger` to `*Recurrence`
         - Type of `ComputeStartStopSchedule.TriggerType` has been changed from `*TriggerType` to `*ComputeTriggerType`
+        - Field `UserCreatedAcrAccount` of struct `AcrDetails` has been removed
+        - Field `UserCreatedStorageAccount` of struct `StorageAccountDetails` has been removed
+        - Struct `UserCreatedAcrAccount` has been removed
+        - Struct `UserCreatedStorageAccount` has been removed
   azure-sdk-for-python:
     - package: 'azure-mgmt-machinelearningservices'
       breaking-changes:
@@ -168,3 +172,5 @@ suppressions:
         - Type of parameter cron of interface ComputeStartStopSchedule is changed from CronTrigger to Cron
         - Type of parameter recurrence of interface ComputeStartStopSchedule is changed from RecurrenceTrigger to Recurrence
         - Type of parameter triggerType of interface ComputeStartStopSchedule is changed from TriggerType to ComputeTriggerType
+        - Interface AcrDetails no longer has parameter userCreatedAcrAccount
+        - Interface StorageAccountDetails no longer has parameter userCreatedStorageAccount
