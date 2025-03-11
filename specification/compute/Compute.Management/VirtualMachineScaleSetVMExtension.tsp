@@ -28,7 +28,7 @@ model VirtualMachineScaleSetVMExtension
    * The location of the extension.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
   /**
@@ -42,7 +42,7 @@ model VirtualMachineScaleSetVMExtension
    * Resource type.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "type")
   extensionType?: string;
 }
@@ -79,7 +79,7 @@ interface VirtualMachineScaleSetVMExtensions {
    * The operation to update the VMSS VM extension.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("VirtualMachineScaleSetVMExtensions_Update")
   update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,

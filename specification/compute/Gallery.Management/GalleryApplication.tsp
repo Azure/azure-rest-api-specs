@@ -51,7 +51,7 @@ interface GalleryApplications {
   /**
    * Update a gallery Application Definition.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false }) 
   update is ComputeCustomPatchAsync<
     GalleryApplication,
     PatchModel = GalleryApplicationUpdate,

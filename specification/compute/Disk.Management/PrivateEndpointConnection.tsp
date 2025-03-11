@@ -24,28 +24,28 @@ model PrivateEndpointConnection
     NamePattern = ""
   >;
 
-    /**
+  /**
    * Private endpoint connection name
    */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-    @encodedName("application/json", "name")
-    connectionName?: string;
-  
-    /**
-     * Private endpoint connection type
-     */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-    @visibility("read")
-    @encodedName("application/json", "type")
-    connectionType?: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @encodedName("application/json", "name")
+  connectionName?: string;
 
-     /**
-     * Private endpoint connection Id
-     */
-     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-     @visibility("read")
-     @encodedName("application/json", "id")
-     connectionId?: string;
+  /**
+   * Private endpoint connection type
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "type")
+  connectionType?: string;
+
+  /**
+   * Private endpoint connection Id
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "id")
+  connectionId?: string;
 }
 
 @armResourceOperations

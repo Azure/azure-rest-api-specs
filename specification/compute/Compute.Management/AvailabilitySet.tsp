@@ -48,7 +48,7 @@ interface AvailabilitySets {
   /**
    * Update an availability set.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false }) 
   update is ComputeCustomPatchSync<AvailabilitySet, AvailabilitySetUpdate>;
 
   /**

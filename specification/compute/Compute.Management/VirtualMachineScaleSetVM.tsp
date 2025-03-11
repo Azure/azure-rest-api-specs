@@ -28,14 +28,14 @@ model VirtualMachineScaleSetVM
    * The virtual machine instance ID.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceId?: string;
 
   /**
    * The virtual machine SKU.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sku?: Sku;
 
   /**
@@ -48,14 +48,14 @@ model VirtualMachineScaleSetVM
    * The virtual machine child extension resources.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resources?: VirtualMachineExtension[];
 
   /**
    * The virtual machine zones.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   zones?: string[];
 
   /**
@@ -68,7 +68,7 @@ model VirtualMachineScaleSetVM
    * Etag is property returned in Update/Get response of the VMSS VM, so that customer can supply it in the header to ensure optimistic updates.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 }
 

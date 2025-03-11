@@ -32,7 +32,7 @@ model VirtualMachine
    * The virtual machine child extension resources.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resources?: VirtualMachineExtension[];
 
   /**
@@ -57,14 +57,14 @@ model VirtualMachine
    * ManagedBy is set to Virtual Machine Scale Set(VMSS) flex ARM resourceID, if the VM is part of the VMSS. This property is used by platform for internal resource group delete optimization.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedBy?: string;
 
   /**
    * Etag is property returned in Create/Update/Get response of the VM, so that customer can supply it in the header to ensure optimistic updates.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 }
 
@@ -109,7 +109,7 @@ interface VirtualMachines {
   /**
    * The operation to update a virtual machine.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false }) 
   update is ComputeCustomPatchAsync<
     VirtualMachine,
     VirtualMachineUpdate,

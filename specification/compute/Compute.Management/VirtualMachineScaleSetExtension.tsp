@@ -35,10 +35,9 @@ model VirtualMachineScaleSetExtension
    * Resource type.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "type")
   extensionType?: string;
-
 }
 
 @armResourceOperations
@@ -68,7 +67,7 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to update an extension.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false }) 
   update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetExtension,
     VirtualMachineScaleSetExtensionUpdate,
