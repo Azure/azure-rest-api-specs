@@ -49,6 +49,7 @@ namespace Customizations;
   "LoadTestingManagedIdentityType",
   "csharp,java"
 );
+@@clientName(AppComponent, "LoadTestingAppComponent", "csharp,java");
 
 // Suggestion to fix casing for acronyms
 @@clientName(LoadTestConfiguration.splitAllCSVs,
@@ -103,6 +104,10 @@ namespace Customizations;
   "percentile9999ResponseTime",
   "csharp,java"
 );
+
+// Suggestion to rename properties to better names
+@@clientName(ArtifactsContainerInfo.expireDateTime, "expiresOn", "csharp,java");
+@@clientName(FileInfo.expireDateTime, "expiresOn", "csharp,java");
 
 // Suggestion to rename `Url` to `Uri` for csharp
 @@clientName(FileInfo.url, "uri", "csharp");
