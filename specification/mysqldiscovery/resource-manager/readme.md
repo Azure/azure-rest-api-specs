@@ -63,7 +63,7 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/refresh"].post
   - code: AvoidAdditionalProperties
-    reason:
+    reason: Existing API
     where:
       - $.definitions.MysqlServerProperties.properties.labels
 ```
