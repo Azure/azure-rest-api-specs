@@ -38,6 +38,7 @@ Generate all API versions currently shipped for this package
 multiapi: true
 default-api-version: "2024-11-04"
 batch:
+  - tag: package-2025-02-01-only
   - tag: package-2024-11-04-only
   - tag: package-2024-07-01-only
   - tag: package-2024-03-02-only
@@ -64,6 +65,16 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/
 perform-load: false
+```
+
+### Tag: package-2025-02-01-only
+
+These settings apply only when `--tag=package-2025-02-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2025-02-01-only'
+namespace: azure.mgmt.compute.v2024_11_04
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2024_11_04
 ```
 
 ### Tag: package-2024-11-04-only
