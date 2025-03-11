@@ -23,22 +23,6 @@ model VirtualMachineScaleSetExtension
     SegmentName = "extensions",
     NamePattern = ""
   >;
-
-  /**
-   * The name of the extension.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @encodedName("application/json", "name")
-  extensionName?: string;
-
-  /**
-   * Resource type.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
-  @encodedName("application/json", "type")
-  extensionType?: string;
-
 }
 
 @armResourceOperations

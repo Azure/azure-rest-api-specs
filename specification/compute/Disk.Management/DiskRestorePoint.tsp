@@ -21,29 +21,6 @@ model DiskRestorePoint
     SegmentName = "diskRestorePoints",
     NamePattern = ""
   >;
-
-    /**
-     * Resource name
-     */
-      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-      @encodedName("application/json", "name")
-      resourceName?: string;
-    
-      /**
-       * Resource type
-       */
-      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-      @visibility("read")
-      @encodedName("application/json", "type")
-      resourceType?: string;
-  
-       /**
-       * Resource Id
-       */
-       #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-       @visibility("read")
-       @encodedName("application/json", "id")
-       resourceId?: string;
 }
 
 model DiskRestorePointListResult is Azure.Core.Page<DiskRestorePoint>;
