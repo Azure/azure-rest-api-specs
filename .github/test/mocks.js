@@ -44,6 +44,7 @@ export function createMockCore() {
   return {
     debug: vi.fn(console.debug),
     info: vi.fn(console.log),
+    isDebug: vi.fn().mockReturnValue(false),
     setOutput: vi.fn((name, value) =>
       console.log(`setOutput('${name}', '${value}')`),
     ),
