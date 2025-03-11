@@ -109,7 +109,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
     }
     logMessage("ending group logging", LogLevel.EndGroup);
 
-    logIssuesToPipeline(commandInput, changedSpecPath);
+    const commandInputUpdatedSpec = {...commandInput, tspConfigPath: changedSpec.typespecProject, readmePath: changedSpec.readmeMd}
+    logIssuesToPipeline(commandInputUpdatedSpec, changedSpecPath);
   }
   return statusCode;
 }
@@ -186,7 +187,8 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
     }
     logMessage("ending group logging", LogLevel.EndGroup);
     
-    logIssuesToPipeline(commandInput, specConfigPath || '');
+    const commandInputUpdatedSpec = {...commandInput, tspConfigPath: specConfigPath, readmePath: specConfigPath}
+    logIssuesToPipeline(commandInputUpdatedSpec, specConfigPath || '');
   }
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
