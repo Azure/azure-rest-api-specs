@@ -3001,9 +3001,354 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/prepareMigration": {
+      "post": {
+        "operationId": "VirtualNetworkGateways_InvokePrepareMigration",
+        "description": "Trigger prepare migration for the basic virtual network gateway.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the virtual network gateway."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "migrationParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayMigrationParameters"
+            },
+            "description": "Parameters supplied to the Begin Prepare migration on basic vpn gateway through Network resource provider."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request received successfully. Prepare migration in progress; follow the Location header to poll for final outcome.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworkGatewayPrepareMigration": {
+            "$ref": "./examples/VirtualNetworkGatewayPrepareMigration.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/executeMigration": {
+      "post": {
+        "operationId": "VirtualNetworkGateways_InvokeExecuteMigration",
+        "description": "Trigger execute migration for the basic virtual network gateway.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the virtual network gateway."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request received successfully. Execute migration in progress; follow the Location header to poll for final outcome.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworkGatewayExecuteMigration": {
+            "$ref": "./examples/VirtualNetworkGatewayExecuteMigration.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/commitMigration": {
+      "post": {
+        "operationId": "VirtualNetworkGateways_InvokeCommitMigration",
+        "description": "Trigger commit migration for the basic virtual network gateway.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the virtual network gateway."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request received successfully. Commit migration in progress; follow the Location header to poll for final outcome.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworkGatewayCommitMigration": {
+            "$ref": "./examples/VirtualNetworkGatewayCommitMigration.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/abortMigration": {
+      "post": {
+        "operationId": "VirtualNetworkGateways_InvokeAbortMigration",
+        "description": "Trigger abort migration for the basic virtual network gateway.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the virtual network gateway."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request received successfully. Abort migration in progress; follow the Location header to poll for final outcome.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworkGatewayAbortMigration": {
+            "$ref": "./examples/VirtualNetworkGatewayAbortMigration.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
+    "VirtualNetworkGatewayMigrationParameters": {
+      "type": "object",
+      "properties": {
+        "migrationType": {
+          "$ref": "#/definitions/VirtualNetworkGatewayMigrationType"
+        },
+        "resourceUrl": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to the public IP resource."
+        }
+      },
+      "required": [
+        "migrationType"
+      ],
+      "description": "Virtual network gateway migration parameters."
+    },
+    "VirtualNetworkGatewayMigrationType": {
+      "type": "string",
+      "enum": [
+        "UpgradeDeploymentToStandardIP"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkGatewayMigrationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "UpgradeDeploymentToStandardIP",
+            "name": "UpgradeDeploymentToStandardIP",
+            "description": "Indicates that it is a migration process from basic IP CSES to standard IP VMSS."
+          }
+        ]
+      },
+      "description": "MigrationType for the virtual network gateway."
+    },
+    "VirtualNetworkGatewayMigrationStatus": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "Represent the current state of gateway migration.",
+          "enum": [
+            "None",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewayMigrationState",
+            "modelAsString": true
+          }
+        },
+        "phase": {
+          "type": "string",
+          "description": "Represent the current migration phase of gateway.",
+          "enum": [
+            "None",
+            "Prepare",
+            "PrepareSucceeded",
+            "Execute",
+            "ExecuteSucceeded",
+            "Commit",
+            "CommitSucceeded",
+            "AbortSucceeded",
+            "Abort"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkGatewayMigrationPhase",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "name": "None",
+                "description": "No migration phase set on gateway."
+              },
+              {
+                "value": "Prepare",
+                "name": "Prepare",
+                "description": "Gateway is going through prepare migration or prepare has failed. Please see state and error details for more information."
+              },
+              {
+                "value": "PrepareSucceeded",
+                "name": "PrepareSucceeded",
+                "description": "Prepare succeeded on gateway."
+              },
+              {
+                "value": "Execute",
+                "name": "Execute",
+                "description": "Gateway is going through execute migration or execute has failed. Please see state and error details for more information."
+              },
+              {
+                "value": "ExecuteSucceeded",
+                "name": "ExecuteSucceeded",
+                "description": "Execute succeeded on gateway."
+              },
+              {
+                "value": "Commit",
+                "name": "Commit",
+                "description": "Gateway is going through commit migration or commit has failed. Please see state and error details for more information."
+              },
+              {
+                "value": "CommitSucceeded",
+                "name": "CommitSucceeded",
+                "description": "Commit succeeded, represent migration is complete for the gateway."
+              },
+              {
+                "value": "AbortSucceeded",
+                "name": "AbortSucceeded",
+                "description": "Represent abort succeeded on gateway, start with prepare to retrigger migration."
+              },
+              {
+                "value": "Abort",
+                "name": "Abort",
+                "description": "Gateway is going through abort migration or abort has failed. Please see state and error details for more information."
+              }
+            ]
+          }
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error if any occurs during migration."
+        }
+      },
+      "description": "Migration status for the Virtual Network Gateway."
+    },
     "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
       "properties": {
         "privateIPAllocationMethod": {
@@ -3195,13 +3540,17 @@
           "type": "boolean",
           "description": "Whether private IP needs to be enabled on this gateway for connections or not."
         },
+        "virtualNetworkGatewayMigrationStatus": {
+          "$ref": "#/definitions/VirtualNetworkGatewayMigrationStatus",
+          "description": "The reference to the VirtualNetworkGatewayMigrationStatus which represents the status of migration."
+        },
         "activeActive": {
           "type": "boolean",
           "description": "ActiveActive flag."
         },
         "enableHighBandwidthVpnGateway": {
           "type": "boolean",
-          "description": "Flag for enabling creation of high bandwidth VPN gateway"
+          "description": "To enable Advanced Connectivity feature for VPN gateway"
         },
         "disableIPSecReplayProtection": {
           "type": "boolean",
@@ -4112,6 +4461,13 @@
         "connectionMode": {
           "$ref": "#/definitions/VirtualNetworkGatewayConnectionMode",
           "description": "The connection mode for this connection."
+        },
+        "tunnelProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayConnectionTunnelProperties"
+          },
+          "description": "Tunnel properties for virtual network gateway connection"
         },
         "sharedKey": {
           "type": "string",
@@ -5370,6 +5726,19 @@
         "customBgpIpAddress"
       ],
       "description": "GatewayCustomBgpIpAddressIpConfiguration for a virtual network gateway connection."
+    },
+    "VirtualNetworkGatewayConnectionTunnelProperties": {
+      "type": "object",
+      "properties": {
+        "tunnelIpAddress": {
+          "type": "string",
+          "description": "Tunnel remote IP address"
+        },
+        "bgpPeeringAddress": {
+          "type": "string",
+          "description": "Tunnel BGP peering address"
+        }
+      }
     }
   }
 }
