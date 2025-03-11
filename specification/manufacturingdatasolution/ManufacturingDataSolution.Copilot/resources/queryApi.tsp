@@ -18,14 +18,26 @@ namespace MdsSolution.CopilotService.QueryService;
 @doc("execute the query")
 op queryExecute(
   @doc("api-version to use")
-  @query("api-version") apiVersion: string,
+  @query("api-version")
+  apiVersion: string,
+
   @doc("conversation id")
-  @header("conversationId") conversationId?: string,
+  @header("conversationId")
+  conversationId?: string,
+
   @doc("Accept-Language header")
-  @header("Accept-Language") acceptLanguage?: string,
+  @header("Accept-Language")
+  acceptLanguage?: string,
+
   @doc("maximum number of retries")
-  @query("maxRetry") maxRetry?: int32 = 2,
+  @query("maxRetry")
+  maxRetry?: int32 = 2,
+
   @doc("Include summary in the response.")
-  @query("includeSummary") includeSummary?: boolean = false,
+  @query("includeSummary")
+  includeSummary?: boolean = false,
+
   @doc("request body")
-  @body request: QueryRequest) : QueryResponse;
+  @body
+  request: QueryRequest,
+): QueryResponse;
