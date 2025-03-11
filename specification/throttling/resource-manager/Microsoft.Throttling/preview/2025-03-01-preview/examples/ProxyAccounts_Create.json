@@ -1,0 +1,78 @@
+{
+  "operationId": "ProxyAccounts_Create",
+  "title": "ProxyAccounts_Create",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgthrottling",
+    "proxyAccountName": "fabrikam",
+    "resource": {
+      "properties": {
+        "authentication": {
+          "certificates": [
+            {
+              "subjectName": "fabrikam.throttling.azure.com"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Resource 'ProxyAccount' update operation succeeded",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgthrottling/providers/Microsoft.Throttling/proxyAccounts/fabrikam",
+        "type": "Microsoft.Throttling/proxyAccounts",
+        "name": "fabrikam",
+        "properties": {
+          "provisioningState": "Accepted",
+          "authentication": {
+            "certificates": [
+              {
+                "subjectName": "fabrikam.throttling.azure.com"
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdBy": "example@fabrikam.com",
+          "createdByType": "User",
+          "createdAt": "2022-05-05T19:48:34.573Z",
+          "lastModifiedBy": "example@fabrikam.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-05-05T19:48:34.573Z"
+        }
+      }
+    },
+    "201": {
+      "description": "Resource 'ProxyAccount' create operation succeeded",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgthrottling/providers/Microsoft.Throttling/proxyAccounts/fabrikam",
+        "type": "Microsoft.Throttling/proxyAccounts",
+        "name": "fabrikam",
+        "properties": {
+          "provisioningState": "Accepted",
+          "authentication": {
+            "certificates": [
+              {
+                "subjectName": "fabrikam.throttling.azure.com"
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdBy": "example@fabrikam.com",
+          "createdByType": "User",
+          "createdAt": "2022-05-05T19:48:34.573Z",
+          "lastModifiedBy": "example@fabrikam.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-05-05T19:48:34.573Z"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/locations/westus3/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2025-03-01-preview"
+      }
+    }
+  }
+}
