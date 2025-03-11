@@ -1,0 +1,50 @@
+{
+  "operationId": "Metrics_Get",
+  "title": "Get metric by metric name.",
+  "parameters": {
+    "api-version": "2024-11-30-preview",
+    "metricId": "events_purchase_creditcard",
+    "workspaceId": "00000000-0000-0000-0000-000000000000",
+    "If-Match": "vxexdn",
+    "If-None-Match": "ijchzdh",
+    "If-Unmodified-Since": "2024-08-22T02:02:11.418Z",
+    "If-Modified-Since": "2024-08-22T02:02:11.419Z",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "ETag",
+        "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+      },
+      "body": {
+        "id": "events_purchase_creditcard",
+        "displayName": "Number of purchases (credit card)",
+        "description": "The number of purchase transactions made with credit card. Refund transactions are excluded from this metric.",
+        "lifecycle": "Active",
+        "tags": [
+          "Monetization"
+        ],
+        "desiredDirection": "Increase",
+        "definition": {
+          "kind": "EventCount",
+          "event": {
+            "eventName": "Transaction",
+            "filter": "Revenue > 0 and ['payment.method'] == 'credit_card'"
+          }
+        },
+        "eTag": "ckswkavwgassdlocwuzxz",
+        "lastModifiedAt": "2024-08-28T20:27:13.652Z"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message",
+          "details": []
+        }
+      }
+    }
+  }
+}

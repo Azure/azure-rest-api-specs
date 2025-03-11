@@ -1,0 +1,1080 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure.Analytics.Experimentation service",
+    "version": "2024-11-30-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "https://exp.azure.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://exp.azure.net/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/workspaces/{workspaceId}/metrics": {
+      "get": {
+        "operationId": "Metrics_List",
+        "description": "List Metrics resources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "An ID used to uniquely identify and reference the experimentation workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedMetric"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Metrics_List": {
+            "$ref": "./examples/Metrics_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/workspaces/{workspaceId}/metrics/{metricId}": {
+      "get": {
+        "operationId": "Metrics_Get",
+        "description": "Fetch a Metric by Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "An ID used to uniquely identify and reference the experimentation workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          {
+            "name": "metricId",
+            "in": "path",
+            "description": "An ID used to uniquely identify and reference the metric.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z_][a-z0-9_]*$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Metric"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get metric by metric name.": {
+            "$ref": "./examples/Metrics_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Metrics_CreateOrUpdate",
+        "description": "Creates or updates a Metric asynchronously.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "An ID used to uniquely identify and reference the experimentation workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          {
+            "name": "metricId",
+            "in": "path",
+            "description": "An ID used to uniquely identify and reference the metric.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z_][a-z0-9_]*$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Metric"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Metric"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Metrics_CreateOrUpdate_Average": {
+            "$ref": "./examples/Metrics_CreateOrUpdate_Average.json"
+          },
+          "Metrics_CreateOrUpdate_EventCount": {
+            "$ref": "./examples/Metrics_CreateOrUpdate_EventCount.json"
+          },
+          "Metrics_CreateOrUpdate_EventRate": {
+            "$ref": "./examples/Metrics_CreateOrUpdate_EventRate.json"
+          },
+          "Metrics_CreateOrUpdate_Percentile": {
+            "$ref": "./examples/Metrics_CreateOrUpdate_Percentile.json"
+          },
+          "Metrics_CreateOrUpdate_Sum": {
+            "$ref": "./examples/Metrics_CreateOrUpdate_Sum.json"
+          },
+          "Metrics_CreateOrUpdate_UserCount": {
+            "$ref": "./examples/Metrics_CreateOrUpdate_UserCount.json"
+          },
+          "Metrics_CreateOrUpdate_UserRate": {
+            "$ref": "./examples/Metrics_CreateOrUpdate_UserRate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Metrics_Delete",
+        "description": "Delete a Metric asynchronously.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "An ID used to uniquely identify and reference the experimentation workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          {
+            "name": "metricId",
+            "in": "path",
+            "description": "An ID used to uniquely identify and reference the metric.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z_][a-z0-9_]*$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete metric by metric name using long-running operation.": {
+            "$ref": "./examples/Metrics_Delete.json"
+          }
+        }
+      }
+    },
+    "/workspaces/{workspaceId}/metrics/{metricId}:validate": {
+      "post": {
+        "operationId": "Metrics_Validate",
+        "description": "Validates a Metric.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "An ID used to uniquely identify and reference the experimentation workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          {
+            "name": "metricId",
+            "in": "path",
+            "description": "An ID used to uniquely identify and reference the metric.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z_][a-z0-9_]*$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Metric input to validate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Metric"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MetricValidateResult"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Metrics_Validate": {
+            "$ref": "./examples/Metrics_Validate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AggregatedValue": {
+      "type": "object",
+      "description": "An event property value aggregated by a metric.",
+      "properties": {
+        "eventName": {
+          "type": "string",
+          "description": "The name of the event.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "filter": {
+          "$ref": "#/definitions/EventCondition",
+          "description": "[Optional] A condition to filter events."
+        },
+        "eventProperty": {
+          "type": "string",
+          "description": "The key of the event property to aggregate.",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[a-zA-Z0-9_ -.]+$"
+        }
+      },
+      "required": [
+        "eventName",
+        "eventProperty"
+      ]
+    },
+    "AverageDefinition": {
+      "type": "object",
+      "description": "The definition of an Average metric. This metric kind measures the average of an event property.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/AggregatedValue",
+          "description": "The value to aggregate."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "Average"
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
+    "DesiredDirection": {
+      "type": "string",
+      "description": "Desired direction of the metric.",
+      "enum": [
+        "Increase",
+        "Decrease",
+        "Neutral"
+      ],
+      "x-ms-enum": {
+        "name": "DesiredDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Increase",
+            "value": "Increase",
+            "description": "An increase to the metric value is desired. E.g., Success rate, Total revenue."
+          },
+          {
+            "name": "Decrease",
+            "value": "Decrease",
+            "description": "A decrease to the metric value is desired. E.g., Error rate, Latency."
+          },
+          {
+            "name": "Neutral",
+            "value": "Neutral",
+            "description": "Neither an increase nor a decrease to the metric value is desired, or the desired direction depends on other factors. E.g., Number of video play attempts, Number of user feedbacks"
+          }
+        ]
+      }
+    },
+    "DiagnosticCode": {
+      "type": "string",
+      "description": "The diagnostic error codes.",
+      "enum": [
+        "FailedSchemaValidation",
+        "InvalidEventCondition",
+        "UnsupportedEventCondition",
+        "InvalidMetricDefinition"
+      ],
+      "x-ms-enum": {
+        "name": "DiagnosticCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FailedSchemaValidation",
+            "value": "FailedSchemaValidation",
+            "description": "The metric definition is not according to Json Schema."
+          },
+          {
+            "name": "InvalidEventCondition",
+            "value": "InvalidEventCondition",
+            "description": "The KQL filter condition is invalid."
+          },
+          {
+            "name": "UnsupportedEventCondition",
+            "value": "UnsupportedEventCondition",
+            "description": "The KQL filter condition is valid but not currently supported."
+          },
+          {
+            "name": "InvalidMetricDefinition",
+            "value": "InvalidMetricDefinition",
+            "description": "The metric definition provided is invalid. \nfor example, if the metric is defined to calculate the average of the Revenue property,\nbut also includes a filter such as Revenue == 'hello', this creates a type mismatch. \nThe system infers conflicting data types—numeric and string—resulting in a validation failure."
+          }
+        ]
+      }
+    },
+    "DiagnosticInfo": {
+      "type": "object",
+      "description": "The diagnostic information.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "code": {
+          "$ref": "#/definitions/DiagnosticCode",
+          "description": "The error code.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "message",
+        "code"
+      ]
+    },
+    "EventCondition": {
+      "type": "string",
+      "description": "A condition to filter events. Accepts a Kusto Query Language (KQL) filter predicate. \nAllowed expressions evaluate to a bool data type and use a subset of KQL syntax:\nEvent properties: plain or bracket notation.\nLiterals: bool, long, real, string.\nComparison operators: ==, !=, <, <=, >, >=.\nBoolean operators: and, or.\nGrouping operations: parentheses.",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "EventCountDefinition": {
+      "type": "object",
+      "description": "The definition of an EventCount metric. This metric kind counts the observations of an event. Experiment analysis accounts for unequal traffic allocation.",
+      "properties": {
+        "event": {
+          "$ref": "#/definitions/ObservedEvent",
+          "description": "Event to observe."
+        }
+      },
+      "required": [
+        "event"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "EventCount"
+    },
+    "EventRateDefinition": {
+      "type": "object",
+      "description": "The definition of an EventRate metric. This metric kind counts the percentage of events that satisfy a condition.",
+      "properties": {
+        "event": {
+          "$ref": "#/definitions/ObservedEvent",
+          "description": "Event to observe as the rate denominator."
+        },
+        "condition": {
+          "$ref": "#/definitions/EventCondition",
+          "description": "The event contributes to the rate numerator if it satisfies this condition."
+        }
+      },
+      "required": [
+        "event",
+        "condition"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "EventRate"
+    },
+    "LifecycleStage": {
+      "type": "string",
+      "description": "Lifecycle stages of a metric, which determines when the metric is calculated.",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "LifecycleStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Metric is included in experiment analysis"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Metric is not included in experiment analysis"
+          }
+        ]
+      }
+    },
+    "Metric": {
+      "type": "object",
+      "description": "A Metric object that describes the metric.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "An ID used to uniquely identify and reference the metric.",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[a-z_][a-z0-9_]*$",
+          "readOnly": true
+        },
+        "lifecycle": {
+          "$ref": "#/definitions/LifecycleStage",
+          "description": "The stage in the metric lifecycle, which determines when the metric is calculated."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "A display name for the metric to use for display rather than the ID.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the metric.",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "tags": {
+          "type": "array",
+          "description": "The tags of the metric.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        },
+        "desiredDirection": {
+          "$ref": "#/definitions/DesiredDirection",
+          "description": "Whether an increase or decrease to the metric value is desired."
+        },
+        "definition": {
+          "$ref": "#/definitions/MetricDefinition",
+          "description": "The metric definition, which determines how the metric value is calculated from event data."
+        },
+        "eTag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "ETag of the metric",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "lifecycle",
+        "displayName",
+        "description",
+        "tags",
+        "desiredDirection",
+        "definition",
+        "eTag",
+        "lastModifiedAt"
+      ]
+    },
+    "MetricCreateOrUpdate": {
+      "type": "object",
+      "description": "A Metric object that describes the metric.",
+      "properties": {
+        "lifecycle": {
+          "$ref": "#/definitions/LifecycleStage",
+          "description": "The stage in the metric lifecycle, which determines when the metric is calculated."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "A display name for the metric to use for display rather than the ID.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the metric.",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "tags": {
+          "type": "array",
+          "description": "The tags of the metric.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        },
+        "desiredDirection": {
+          "$ref": "#/definitions/DesiredDirection",
+          "description": "Whether an increase or decrease to the metric value is desired."
+        },
+        "definition": {
+          "$ref": "#/definitions/MetricDefinition",
+          "description": "The metric definition, which determines how the metric value is calculated from event data."
+        }
+      }
+    },
+    "MetricDefinition": {
+      "type": "object",
+      "description": "The metric definition, which determines how the metric value is calculated from event data.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for MetricDefinition."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "MetricValidateResult": {
+      "type": "object",
+      "description": "The result of validating a Metric.",
+      "properties": {
+        "diagnostics": {
+          "type": "array",
+          "description": "The validation result.",
+          "items": {
+            "$ref": "#/definitions/DiagnosticInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "result": {
+          "$ref": "#/definitions/ValidationResultOption",
+          "description": "Whether the metric is valid."
+        }
+      },
+      "required": [
+        "diagnostics",
+        "result"
+      ]
+    },
+    "ObservedEvent": {
+      "type": "object",
+      "description": "An event observed by a metric.",
+      "properties": {
+        "eventName": {
+          "type": "string",
+          "description": "The name of the event.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "filter": {
+          "$ref": "#/definitions/EventCondition",
+          "description": "[Optional] A condition to filter events."
+        }
+      },
+      "required": [
+        "eventName"
+      ]
+    },
+    "PagedMetric": {
+      "type": "object",
+      "description": "Paged collection of Metric items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Metric items on this page",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PercentileDefinition": {
+      "type": "object",
+      "description": "The definition of a Percentile metric. This metric kind measures the percentile of an event property.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/AggregatedValue",
+          "description": "The value to aggregate."
+        },
+        "percentile": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentile to measure."
+        }
+      },
+      "required": [
+        "value",
+        "percentile"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "Percentile"
+    },
+    "SumDefinition": {
+      "type": "object",
+      "description": "The definition of a Sum metric. This metric kind measures the sum of an event property. Experiment analysis accounts for unequal traffic allocation.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/AggregatedValue",
+          "description": "The value to aggregate."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "Sum"
+    },
+    "Tag": {
+      "type": "string",
+      "description": "A tag attached to the metric.",
+      "minLength": 1,
+      "maxLength": 30,
+      "pattern": "^[a-zA-Z0-9 _:()&-]+$"
+    },
+    "UserCountDefinition": {
+      "type": "object",
+      "description": "The definition of a UserCount metric. This metric kind counts the users who encounter an event. Experiment analysis accounts for unequal traffic allocation.",
+      "properties": {
+        "event": {
+          "$ref": "#/definitions/ObservedEvent",
+          "description": "Event to observe."
+        }
+      },
+      "required": [
+        "event"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "UserCount"
+    },
+    "UserRateDefinition": {
+      "type": "object",
+      "description": "The definition of a UserRate metric. This metric kind counts the percentage of users with the start event that then encounter the end event. The metric denominator counts the number of users who encounter the start event at least once. The metric numerator counts the number of users who encounter both the start and end events at least once. The computation is ordered, so the start event must occur before the end event.",
+      "properties": {
+        "startEvent": {
+          "$ref": "#/definitions/ObservedEvent",
+          "description": "The start event to observe as the rate denominator."
+        },
+        "endEvent": {
+          "$ref": "#/definitions/ObservedEvent",
+          "description": "The end event to observe, which is a condition for the rate numerator."
+        }
+      },
+      "required": [
+        "startEvent",
+        "endEvent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "UserRate"
+    },
+    "ValidationResultOption": {
+      "type": "string",
+      "description": "The result of validating a Metric.",
+      "enum": [
+        "Valid",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationResultOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Valid",
+            "value": "Valid",
+            "description": "The metric is valid."
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "The metric is invalid."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The request should only proceed if an entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
+      "name": "If-Modified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifModifiedSince"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "The request should only proceed if no entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
+      "name": "If-Unmodified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was not modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifUnmodifiedSince"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
