@@ -3,7 +3,12 @@
   "info": {
     "title": "Azure API for MySQLDiscovery",
     "version": "2024-09-30-preview",
-    "description": "The Microsoft.MySQLDiscovery Rest API spec."
+    "description": "The Microsoft.MySQLDiscovery Rest API spec.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
   "schemes": [
     "https"
@@ -33,6 +38,23 @@
       }
     }
   },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "MySQLSites"
+    },
+    {
+      "name": "MySQLServers"
+    },
+    {
+      "name": "ErrorSummaries"
+    },
+    {
+      "name": "Summaries"
+    }
+  ],
   "paths": {
     "/providers/Microsoft.MySQLDiscovery/operations": {
       "get": {
@@ -40,7 +62,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "Returns list of all operations.",
+        "description": "List the operations for the provider",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -48,21 +70,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -72,37 +89,31 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MySQLDiscovery/MySQLSites": {
       "get": {
-        "operationId": "MySQLSites_ListBySubscription",
+        "operationId": "MySqlSites_ListBySubscription",
         "tags": [
           "MySQLSites"
         ],
-        "summary": "Implements MySQLSites GET method in a subscription.",
         "description": "Lists the MySQLSites resource in a subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the MySQLSites resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MySQLSiteList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MySQLSites_ListBySubscription": {
-            "$ref": "./examples/MySQLSites_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -112,40 +123,34 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites": {
       "get": {
-        "operationId": "MySQLSites_ListByResourceGroup",
+        "operationId": "MySqlSites_ListByResourceGroup",
         "tags": [
           "MySQLSites"
         ],
-        "summary": "Implements MySQLSites GET method in a resource group.",
         "description": "Lits the MySQLSites resource in a resource group.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the MySQLSites resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MySQLSiteList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MySQLSites_ListByResourceGroup": {
-            "$ref": "./examples/MySQLSites_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -155,13 +160,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}": {
       "get": {
-        "operationId": "MySQLSites_Get",
+        "operationId": "MySqlSites_Get",
         "tags": [
           "MySQLSites"
         ],
-        "summary": "Implements MySQLSites GET method.",
         "description": "Gets the MySQLSites resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -169,40 +176,41 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the MySQLSites resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MySQLSite"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "MySQLSites_Get": {
-            "$ref": "./examples/MySQLSites_Get.json"
-          }
         }
       },
       "put": {
-        "operationId": "MySQLSites_CreateOrUpdate",
+        "operationId": "MySqlSites_CreateOrUpdate",
         "tags": [
           "MySQLSites"
         ],
-        "summary": "Implements MySQLSites PUT method.",
         "description": "Puts the MySQLSites resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -210,13 +218,17 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "description": "The machines to add to the assessment",
             "required": true,
@@ -227,27 +239,33 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated MySQLSite resource",
+            "description": "Resource 'MySQLSite' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/MySQLSite"
             }
           },
           "201": {
-            "description": "Created MySQLSite resource.",
+            "description": "Resource 'MySQLSite' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/MySQLSite"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MySQLSites_Create": {
-            "$ref": "./examples/MySQLSites_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -256,13 +274,15 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "MySQLSites_Update",
+        "operationId": "MySqlSites_Update",
         "tags": [
           "MySQLSites"
         ],
-        "summary": "Implements MySQLSites PATCH method.",
         "description": "Patch the MySQLSites resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -270,13 +290,17 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
+            "name": "properties",
             "in": "body",
             "description": "Clouds patch payload.",
             "required": true,
@@ -287,7 +311,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated the MySQLSites resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MySQLSite"
             }
@@ -307,15 +331,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MySQLSites_Update": {
-            "$ref": "./examples/MySQLSites_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -324,13 +343,15 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "MySQLSites_Delete",
+        "operationId": "MySqlSites_Delete",
         "tags": [
           "MySQLSites"
         ],
-        "summary": "Implements MySQLSites DELETE method.",
         "description": "Deletes the MySQLSites resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -338,42 +359,43 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deletes the MySQLSites resource."
+            "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "The MySQLSites resource is already deleted or not found"
+            "description": "Resource does not exist."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MySQLSites_Delete": {
-            "$ref": "./examples/MySQLSites_Delete.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers": {
       "get": {
-        "operationId": "MySQLServers_ListBySite",
+        "operationId": "MySqlServers_ListBySite",
         "tags": [
           "MySQLServers"
         ],
-        "summary": "Implements MySQLServers GET method.",
         "description": "Lists the MySQLServers resource in MySQLSites.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -381,29 +403,28 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the MySQLServers resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MySQLServerList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MySQLServers_ListBySite": {
-            "$ref": "./examples/MySQLServers_ListBySite.json"
           }
         },
         "x-ms-pageable": {
@@ -413,13 +434,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/MySQLServers/{serverName}": {
       "get": {
-        "operationId": "MySQLServers_Get",
+        "operationId": "MySqlServers_Get",
         "tags": [
           "MySQLServers"
         ],
-        "summary": "Implements MySQLServers GET method.",
         "description": "Gets the MySQLServers resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -427,43 +450,51 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of Server",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the MySQLServers resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MySQLServer"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "MySQLServers_Get": {
-            "$ref": "./examples/MySQLServers_Get.json"
-          }
         }
       },
       "put": {
-        "operationId": "MySQLServers_CreateOrUpdate",
+        "operationId": "MySqlServers_CreateOrUpdate",
         "tags": [
           "MySQLServers"
         ],
-        "summary": "Implements MySQLServers PUT method.",
         "description": "Puts the MySQLServers resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -471,16 +502,27 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of Server",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "description": "The machines to add to the assessment",
             "required": true,
@@ -491,38 +533,35 @@
         ],
         "responses": {
           "200": {
-            "description": "Update MySQLServer resource.",
+            "description": "Resource 'MySQLServer' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/MySQLServer"
             }
           },
           "201": {
-            "description": "Created MySQLServer resource.",
+            "description": "Resource 'MySQLServer' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/MySQLServer"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "MySQLServers_Create": {
-            "$ref": "./examples/MySQLServers_Create.json"
-          }
         }
       },
       "patch": {
-        "operationId": "MySQLServers_Update",
+        "operationId": "MySqlServers_Update",
         "tags": [
           "MySQLServers"
         ],
-        "summary": "Implements MySQLServers PATCH method.",
         "description": "Patch the MySQLServers resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -530,16 +569,27 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of Server",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
+            "name": "properties",
             "in": "body",
             "description": "Clouds patch payload.",
             "required": true,
@@ -550,7 +600,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated the MySQLServers resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MySQLServer"
             }
@@ -570,15 +620,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MySQLServers_Update": {
-            "$ref": "./examples/MySQLServers_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -587,13 +632,15 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "MySQLServers_Delete",
+        "operationId": "MySqlServers_Delete",
         "tags": [
           "MySQLServers"
         ],
-        "summary": "Implements MySQLServers DELETE method.",
         "description": "Deletes the MySQLServers resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -601,32 +648,38 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of Server",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deletes the MySQLServers resource."
+            "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "The MySQLServer resource is already deleted or not found"
+            "description": "Resource does not exist."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MySQLServers_Delete": {
-            "$ref": "./examples/MySQLServers_Delete.json"
           }
         }
       }
@@ -637,9 +690,11 @@
         "tags": [
           "ErrorSummaries"
         ],
-        "summary": "Implements ErrorSummaries GET method.",
         "description": "Lists the ErrorSummaries resource in MySQLSites.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -647,21 +702,25 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the ErrorSummaries resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ErrorSummaryList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
@@ -683,9 +742,11 @@
         "tags": [
           "ErrorSummaries"
         ],
-        "summary": "Implements ErrorSummaries GET method.",
         "description": "Gets the ErrorSummaries resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -693,7 +754,14 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
             "name": "errorSummaryName",
@@ -704,20 +772,17 @@
             "minLength": 3,
             "maxLength": 63,
             "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the ErrorSummaries resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ErrorSummary"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
@@ -732,13 +797,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/refresh": {
       "post": {
-        "operationId": "MySQLSites_TriggerRefresh",
+        "operationId": "MySqlSites_TriggerRefresh",
         "tags": [
           "MySQLSites"
         ],
-        "summary": "Implements Refresh POST method.",
         "description": "Trigger Refresh Refresh action",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -746,31 +813,39 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           }
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MySQLSites_TriggerRefresh": {
-            "$ref": "./examples/MySQLSites_TriggerRefresh.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -785,9 +860,11 @@
         "tags": [
           "Summaries"
         ],
-        "summary": "Implements Summaries GET method.",
         "description": "Lists the Summaries resource in MySQLSites.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -795,21 +872,25 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the Summaries resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SummaryList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
@@ -831,9 +912,11 @@
         "tags": [
           "Summaries"
         ],
-        "summary": "Implements Summaries GET method.",
         "description": "Gets the Summaries resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -841,7 +924,14 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SiteNameParameter"
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
             "name": "summaryName",
@@ -852,20 +942,17 @@
             "minLength": 3,
             "maxLength": 63,
             "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the Summaries resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Summary"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
@@ -880,6 +967,30 @@
     }
   },
   "definitions": {
+    "Edition": {
+      "type": "string",
+      "description": "mysql server edition.",
+      "enum": [
+        "Community",
+        "Enterprise"
+      ],
+      "x-ms-enum": {
+        "name": "Edition",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Community",
+            "value": "Community",
+            "description": "Community edition"
+          },
+          {
+            "name": "Enterprise",
+            "value": "Enterprise",
+            "description": "Enterprise edition"
+          }
+        ]
+      }
+    },
     "Error": {
       "type": "object",
       "description": "Defines the error.",
@@ -936,57 +1047,13 @@
           "type": "array",
           "description": "The list of errors.",
           "items": {
-            "$ref": "#/definitions/Error",
-            "description": "The error"
+            "$ref": "#/definitions/Error"
           }
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Gets or sets the provisioning state.",
-          "readOnly": true,
-          "enum": [
-            "Unknown",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Creating",
-            "Deleting",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Unknown",
-                "description": "Unknown Provisioning State"
-              },
-              {
-                "value": "Succeeded",
-                "description": "Succeeded Provisioning State"
-              },
-              {
-                "value": "Failed",
-                "description": "Failed Provisioning State"
-              },
-              {
-                "value": "Canceled",
-                "description": "Canceled Provisioning State"
-              },
-              {
-                "value": "Creating",
-                "description": "Creating Provisioning State"
-              },
-              {
-                "value": "Deleting",
-                "description": "Deleting Provisioning State"
-              },
-              {
-                "value": "Updating",
-                "description": "Updating Provisioning State"
-              }
-            ]
-          }
+          "readOnly": true
         }
       }
     },
@@ -996,8 +1063,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ErrorSummariesProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+          "description": "Resource properties."
         },
         "tags": {
           "type": "object",
@@ -1014,8 +1080,7 @@
         {
           "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
-      ],
-      "x-ms-azure-resource": true
+      ]
     },
     "ErrorSummaryList": {
       "type": "object",
@@ -1023,16 +1088,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of ErrorSummaries.",
+          "description": "The ErrorSummary items on this page",
           "items": {
             "$ref": "#/definitions/ErrorSummary"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "Url to follow for getting next page of resources."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ExtendedLocation": {
       "type": "object",
@@ -1054,8 +1123,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MySQLServerProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+          "description": "Resource properties."
         },
         "tags": {
           "type": "object",
@@ -1072,8 +1140,7 @@
         {
           "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
-      ],
-      "x-ms-azure-resource": true
+      ]
     },
     "MySQLServerList": {
       "type": "object",
@@ -1081,16 +1148,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of Servers.",
+          "description": "The MySQLServer items on this page",
           "items": {
             "$ref": "#/definitions/MySQLServer"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "Url to follow for getting next page of resources."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "MySQLServerProperties": {
       "type": "object",
@@ -1133,53 +1204,12 @@
           "description": "The number of database."
         },
         "supportStatus": {
-          "type": "string",
-          "description": "mysql version support status.",
-          "enum": [
-            "OutOfSupport",
-            "Extended",
-            "Mainstream"
-          ],
-          "x-ms-enum": {
-            "name": "supportStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "OutOfSupport",
-                "description": "Out of support"
-              },
-              {
-                "value": "Extended",
-                "description": "Extended support"
-              },
-              {
-                "value": "Mainstream",
-                "description": "Mainstream support"
-              }
-            ]
-          }
+          "$ref": "#/definitions/SupportStatus",
+          "description": "mysql version support status."
         },
         "edition": {
-          "type": "string",
-          "description": "mysql server edition.",
-          "enum": [
-            "Community",
-            "Enterprise"
-          ],
-          "x-ms-enum": {
-            "name": "edition",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Community",
-                "description": "Community edition"
-              },
-              {
-                "value": "Enterprise",
-                "description": "Enterprise edition"
-              }
-            ]
-          }
+          "$ref": "#/definitions/Edition",
+          "description": "mysql server edition."
         },
         "supportEndIn": {
           "type": "string",
@@ -1190,57 +1220,13 @@
           "type": "array",
           "description": "The list of errors.",
           "items": {
-            "$ref": "#/definitions/Error",
-            "description": "The error"
+            "$ref": "#/definitions/Error"
           }
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Gets or sets the provisioning state.",
-          "readOnly": true,
-          "enum": [
-            "Unknown",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Creating",
-            "Deleting",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Unknown",
-                "description": "Unknown Provisioning State"
-              },
-              {
-                "value": "Succeeded",
-                "description": "Succeeded Provisioning State"
-              },
-              {
-                "value": "Failed",
-                "description": "Failed Provisioning State"
-              },
-              {
-                "value": "Canceled",
-                "description": "Canceled Provisioning State"
-              },
-              {
-                "value": "Creating",
-                "description": "Creating Provisioning State"
-              },
-              {
-                "value": "Deleting",
-                "description": "Deleting Provisioning State"
-              },
-              {
-                "value": "Updating",
-                "description": "Updating Provisioning State"
-              }
-            ]
-          }
+          "readOnly": true
         },
         "labels": {
           "type": "object",
@@ -1268,8 +1254,7 @@
         },
         "properties": {
           "$ref": "#/definitions/MySQLServerProperties",
-          "description": "The MySQLServer resource definition.",
-          "x-ms-client-flatten": true
+          "description": "The MySQLServer resource definition."
         }
       }
     },
@@ -1279,8 +1264,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MySQLSiteProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+          "description": "Resource properties."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -1288,15 +1272,14 @@
         }
       },
       "required": [
-        "extendedLocation",
-        "properties"
+        "properties",
+        "extendedLocation"
       ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
         }
-      ],
-      "x-ms-azure-resource": true
+      ]
     },
     "MySQLSiteList": {
       "type": "object",
@@ -1304,16 +1287,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of Sites.",
+          "description": "The MySQLSite items on this page",
           "items": {
             "$ref": "#/definitions/MySQLSite"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "Url to follow for getting next page of resources."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "MySQLSiteProperties": {
       "type": "object",
@@ -1344,52 +1331,9 @@
           }
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Gets or sets the provisioning state.",
-          "readOnly": true,
-          "enum": [
-            "Unknown",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Creating",
-            "Deleting",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Unknown",
-                "description": "Unknown Provisioning State"
-              },
-              {
-                "value": "Succeeded",
-                "description": "Succeeded Provisioning State"
-              },
-              {
-                "value": "Failed",
-                "description": "Failed Provisioning State"
-              },
-              {
-                "value": "Canceled",
-                "description": "Canceled Provisioning State"
-              },
-              {
-                "value": "Creating",
-                "description": "Creating Provisioning State"
-              },
-              {
-                "value": "Deleting",
-                "description": "Deleting Provisioning State"
-              },
-              {
-                "value": "Updating",
-                "description": "Updating Provisioning State"
-              }
-            ]
-          }
+          "readOnly": true
         }
       },
       "required": [
@@ -1410,10 +1354,64 @@
         },
         "properties": {
           "$ref": "#/definitions/MySQLSiteProperties",
-          "description": "The MySQLSites resource definition.",
-          "x-ms-client-flatten": true
+          "description": "The MySQLSites resource definition."
         }
       }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Gets or sets the provisioning state.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown Provisioning State"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded Provisioning State"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed Provisioning State"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled Provisioning State"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating Provisioning State"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting Provisioning State"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating Provisioning State"
+          }
+        ]
+      },
+      "readOnly": true
     },
     "SummariesProperties": {
       "type": "object",
@@ -1428,57 +1426,13 @@
           "type": "array",
           "description": "The list of errors.",
           "items": {
-            "$ref": "#/definitions/Error",
-            "description": "The error"
+            "$ref": "#/definitions/Error"
           }
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Gets or sets the provisioning state.",
-          "readOnly": true,
-          "enum": [
-            "Unknown",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Creating",
-            "Deleting",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Unknown",
-                "description": "Unknown Provisioning State"
-              },
-              {
-                "value": "Succeeded",
-                "description": "Succeeded Provisioning State"
-              },
-              {
-                "value": "Failed",
-                "description": "Failed Provisioning State"
-              },
-              {
-                "value": "Canceled",
-                "description": "Canceled Provisioning State"
-              },
-              {
-                "value": "Creating",
-                "description": "Creating Provisioning State"
-              },
-              {
-                "value": "Deleting",
-                "description": "Deleting Provisioning State"
-              },
-              {
-                "value": "Updating",
-                "description": "Updating Provisioning State"
-              }
-            ]
-          }
+          "readOnly": true
         }
       }
     },
@@ -1488,8 +1442,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SummariesProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+          "description": "Resource properties."
         },
         "tags": {
           "type": "object",
@@ -1506,8 +1459,7 @@
         {
           "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
         }
-      ],
-      "x-ms-azure-resource": true
+      ]
     },
     "SummaryList": {
       "type": "object",
@@ -1515,38 +1467,51 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of Summaries.",
+          "description": "The Summary items on this page",
           "items": {
             "$ref": "#/definitions/Summary"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "Url to follow for getting next page of resources."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SupportStatus": {
+      "type": "string",
+      "description": "mysql version support status.",
+      "enum": [
+        "OutOfSupport",
+        "Extended",
+        "Mainstream"
+      ],
+      "x-ms-enum": {
+        "name": "SupportStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OutOfSupport",
+            "value": "OutOfSupport",
+            "description": "Out of support"
+          },
+          {
+            "name": "Extended",
+            "value": "Extended",
+            "description": "Extended support"
+          },
+          {
+            "name": "Mainstream",
+            "value": "Mainstream",
+            "description": "Mainstream support"
+          }
+        ]
       }
     }
   },
-  "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "description": "The name of Server",
-      "required": true,
-      "type": "string",
-      "minLength": 3,
-      "maxLength": 63,
-      "pattern": "^[a-zA-Z0-9-]*$"
-    },
-    "SiteNameParameter": {
-      "name": "siteName",
-      "in": "path",
-      "description": "The name of Site",
-      "required": true,
-      "type": "string",
-      "minLength": 3,
-      "maxLength": 63,
-      "pattern": "^[a-zA-Z0-9-]*$"
-    }
-  }
+  "parameters": {}
 }
