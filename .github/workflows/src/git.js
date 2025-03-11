@@ -2,8 +2,6 @@
 
 import { execRoot } from "./exec.js";
 
-const defaultConfig = "-c core.quotepath=off";
-
 /**
  * @param {string} baseCommitish
  * @param {string} headCommitish
@@ -12,8 +10,8 @@ const defaultConfig = "-c core.quotepath=off";
  * @returns {Promise<string>}
  */
 export async function diff(baseCommitish, headCommitish, core, options = "") {
-  return await execRoot(
-    `git ${defaultConfig} diff ${options} ${baseCommitish} ${headCommitish}`,
+  return await execGit(
+    `diff ${options} ${baseCommitish} ${headCommitish}`,
     core,
   );
 }
@@ -26,10 +24,7 @@ export async function diff(baseCommitish, headCommitish, core, options = "") {
  * @returns {Promise<string>}
  */
 export async function lsTree(treeIsh, path, core, options = "") {
-  return await execRoot(
-    `git ${defaultConfig} ls-tree ${options} ${treeIsh} ${path}`,
-    core,
-  );
+  return await execGit(`ls-tree ${options} ${treeIsh} ${path}`, core);
 }
 
 /**
@@ -40,8 +35,16 @@ export async function lsTree(treeIsh, path, core, options = "") {
  * @returns {Promise<string>}
  */
 export async function show(treeIsh, path, core, options = "") {
-  return await execRoot(
-    `git ${defaultConfig} show ${options} ${treeIsh}:${path}`,
-    core,
-  );
+  return await execGit(`show ${options} ${treeIsh}:${path}`, core);
+}
+
+/**
+ * @param {string} args
+ * @param {import('github-script').AsyncFunctionArguments['core']} core
+ * @returns {Promise<string>}
+ */
+async function execGit(args, core) {
+  // Ensure that git displays filenames as they are (without escaping)
+  const defaultConfig = "-c core.quotepath=off";
+  return await execRoot(`git ${defaultConfig} ${args}`, core);
 }
