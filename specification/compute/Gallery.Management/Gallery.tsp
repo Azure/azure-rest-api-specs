@@ -69,7 +69,7 @@ interface Galleries {
   /**
    * Update a Shared Image Gallery.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false }) 
   update is ComputeCustomPatchAsync<
     Gallery,
     PatchModel = GalleryUpdate,

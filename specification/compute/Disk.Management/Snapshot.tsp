@@ -64,7 +64,7 @@ interface Snapshots {
    * Updates (patches) a snapshot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false }) 
   update is ComputeCustomPatchAsync<
     Snapshot,
     SnapshotUpdate,

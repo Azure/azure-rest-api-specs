@@ -417,7 +417,7 @@ model GalleryProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: GalleryProvisioningState;
 
   /**
@@ -433,7 +433,7 @@ model GalleryProperties {
   /**
    * Sharing status of current gallery.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sharingStatus?: SharingStatus;
 }
 
@@ -444,7 +444,7 @@ model GalleryIdentifier {
   /**
    * The unique name of the Shared Image Gallery. This name is generated automatically by Azure.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueName?: string;
 }
 
@@ -460,8 +460,8 @@ model SharingProfile {
   /**
    * A list of sharing profile groups.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
   groups?: SharingProfileGroup[];
 
   /**
@@ -512,13 +512,13 @@ model CommunityGalleryInfo {
   /**
    * Contains info about whether community gallery sharing is enabled.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   communityGalleryEnabled?: boolean;
 
   /**
    * Community gallery public name list.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publicNames?: string[];
 }
 
@@ -539,13 +539,13 @@ model SharingStatus {
   /**
    * Aggregated sharing state of current gallery.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   aggregatedState?: SharingState;
 
   /**
    * Summary of all regional sharing status.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["region"])
+  @identifiers(#["region"])
   summary?: RegionalSharingStatus[];
 }
 
@@ -561,7 +561,7 @@ model RegionalSharingStatus {
   /**
    * Gallery sharing state in current region
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: SharingState;
 
   /**
@@ -577,13 +577,13 @@ model GalleryIdentity {
   /**
    * The principal id of the gallery identity. This property will only be provided for a system assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The AAD tenant id of the gallery identity. This property will only be provided for a system assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
@@ -603,13 +603,13 @@ model UserAssignedIdentitiesValue {
   /**
    * The principal id of user assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The client id of user assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clientId?: string;
 }
 
@@ -638,19 +638,19 @@ model UpdateResourceDefinition {
   /**
    * Resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -728,13 +728,13 @@ model GalleryImageProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: GalleryProvisioningState;
 
   /**
    * A list of gallery image features.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   features?: GalleryImageFeature[];
 
   /**
@@ -873,7 +873,7 @@ model GalleryImageVersionProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: GalleryProvisioningState;
 
   /**
@@ -889,7 +889,7 @@ model GalleryImageVersionProperties {
   /**
    * This is the replication status of the gallery image version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replicationStatus?: ReplicationStatus;
 
   /**
@@ -905,7 +905,7 @@ model GalleryImageVersionProperties {
   /**
    * This is the validations profile of a Gallery Image Version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   validationsProfile?: ValidationsProfile;
 }
 
@@ -924,7 +924,7 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * The target regions where the Image Version is going to be replicated to. This property is updatable.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   targetRegions?: TargetRegion[];
 
   /**
@@ -940,7 +940,7 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * The timestamp for when the gallery image version is published.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   publishedDate?: utcDateTime;
 
@@ -963,7 +963,7 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * The target extended locations where the Image Version is going to be replicated to. This property is updatable.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "extendedLocation/name"])
+  @identifiers(#["name", "extendedLocation/name"])
   targetExtendedLocations?: GalleryTargetExtendedLocation[];
 }
 
@@ -999,7 +999,7 @@ model TargetRegion {
   /**
    * List of storage sku with replica count to create direct drive replicas.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   additionalReplicaSets?: AdditionalReplicaSet[];
 }
 
@@ -1015,7 +1015,7 @@ model EncryptionImages {
   /**
    * A list of encryption specifications for data disk images.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  @identifiers(#["lun"])
   dataDiskImages?: DataDiskImageEncryption[];
 }
 
@@ -1139,7 +1139,7 @@ model GalleryImageVersionStorageProfile {
   /**
    * A list of data disk images.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  @identifiers(#["lun"])
   dataDiskImages?: GalleryDataDiskImage[];
 }
 
@@ -1183,7 +1183,7 @@ model GalleryDiskImage {
   /**
    * This property indicates the size of the VHD to be created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sizeInGB?: int32;
 
   /**
@@ -1233,14 +1233,14 @@ model GalleryImageVersionSafetyProfile
   /**
    * Indicates whether this image has been reported as violating Microsoft's policies.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedForPolicyViolation?: boolean;
 
   /**
    * A list of Policy Violations that have been reported for this Gallery Image Version.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
   policyViolations?: PolicyViolation[];
 
   /**
@@ -1281,14 +1281,14 @@ model ReplicationStatus {
   /**
    * This is the aggregated replication status based on all the regional replication status flags.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   aggregatedState?: AggregatedReplicationState;
 
   /**
    * This is a summary of replication status for each region.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["region"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["region"])
   summary?: RegionalReplicationStatus[];
 }
 
@@ -1299,25 +1299,25 @@ model RegionalReplicationStatus {
   /**
    * The region to which the gallery image version is being replicated to.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   region?: string;
 
   /**
    * This is the regional replication state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: ReplicationState;
 
   /**
    * The details of the replication status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   details?: string;
 
   /**
    * It indicates progress of the replication job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   progress?: int32;
 }
 
@@ -1338,7 +1338,6 @@ model GalleryImageVersionUefiSettings {
   /**
    * The name of the template(s) that contains default UEFI key signatures that will be added to the image.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
   signatureTemplateNames?: UefiSignatureTemplateName[];
 
   /**
@@ -1359,19 +1358,19 @@ model UefiKeySignatures {
   /**
    * The Key Encryption Keys of this image version.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   kek?: UefiKey[];
 
   /**
    * The database of UEFI keys for this image version.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   db?: UefiKey[];
 
   /**
    * The database of revoked UEFI keys for this image version.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   dbx?: UefiKey[];
 }
 
@@ -1387,7 +1386,6 @@ model UefiKey {
   /**
    * The value of the key signature.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
   value?: string[];
 }
 
@@ -1401,13 +1399,13 @@ model ValidationsProfile {
   validationEtag?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   executedValidations?: ExecutedValidation[];
 
   /**
    * This specifies the pub, offer, sku and version of the image version metadata
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   platformAttributes?: PlatformAttribute[];
 }
 
@@ -1444,13 +1442,13 @@ model PlatformAttribute {
   /**
    * This property specifies the name of the platformAttribute. It is read-only.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * This property specifies the value of the corresponding name property. It is read-only.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 }
 
@@ -1506,7 +1504,7 @@ model GalleryApplicationProperties {
   /**
    * A list of custom actions that can be performed with all of the Gallery Application Versions within this Gallery Application.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   customActions?: GalleryApplicationCustomAction[];
 }
 
@@ -1532,7 +1530,7 @@ model GalleryApplicationCustomAction {
   /**
    * The parameters that this custom action uses
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   parameters?: GalleryApplicationCustomActionParameter[];
 }
 
@@ -1596,13 +1594,13 @@ model GalleryApplicationVersionProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: GalleryProvisioningState;
 
   /**
    * This is the replication status of the gallery image version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replicationStatus?: ReplicationStatus;
 }
 
@@ -1639,7 +1637,7 @@ model GalleryApplicationVersionPublishingProfile
   /**
    * A list of custom actions that can be performed with this Gallery Application Version.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   customActions?: GalleryApplicationCustomAction[];
 }
 
@@ -1800,7 +1798,7 @@ model SharingUpdate {
   /**
    * A list of sharing profile groups.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   groups?: SharingProfileGroup[];
 }
 
@@ -1834,7 +1832,7 @@ model GalleryResourceProfilePropertiesBase {
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: GalleryProvisioningState;
 }
 
@@ -1879,25 +1877,25 @@ model AccessControlRules {
   /**
    * A list of privileges.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   privileges?: AccessControlRulesPrivilege[];
 
   /**
    * A list of roles.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   roles?: AccessControlRulesRole[];
 
   /**
    * A list of identities.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   identities?: AccessControlRulesIdentity[];
 
   /**
    * A list of role assignments.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["role"])
+  @identifiers(#["role"])
   roleAssignments?: AccessControlRulesRoleAssignment[];
 }
 
@@ -1989,7 +1987,7 @@ model GalleryResourceProfileVersionPropertiesBase {
   /**
    * The target regions where the Resource Profile version is going to be replicated to. This property is updatable.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   targetLocations?: TargetRegion[];
 
   /**
@@ -2000,20 +1998,20 @@ model GalleryResourceProfileVersionPropertiesBase {
   /**
    * The timestamp for when the Resource Profile Version is published.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   publishedDate?: utcDateTime;
 
   /**
    * The provisioning state, which only appears in the response.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: GalleryProvisioningState;
 
   /**
    * This is the replication status of the gallery image version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replicationStatus?: ReplicationStatus;
 }
 
@@ -2057,7 +2055,7 @@ model SharedGalleryProperties {
    * The artifact tags of a shared gallery resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   artifactTags?: Record<string>;
 }
 
@@ -2091,13 +2089,13 @@ model PirResource {
   /**
    * Resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource location
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 }
 
@@ -2150,7 +2148,7 @@ model SharedGalleryImageProperties {
   /**
    * A list of gallery image features.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   features?: GalleryImageFeature[];
 
   /**
@@ -2232,7 +2230,7 @@ model SharedGalleryImageVersionStorageProfile {
   /**
    * A list of data disk images.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  @identifiers(#["lun"])
   dataDiskImages?: SharedGalleryDataDiskImage[];
 }
 
@@ -2250,7 +2248,7 @@ model SharedGalleryDiskImage {
   /**
    * This property indicates the size of the VHD to be created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskSizeGB?: int32;
 
   /**
@@ -2329,19 +2327,19 @@ model PirCommunityGalleryResource {
   /**
    * Resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource location
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
    * Resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -2406,7 +2404,7 @@ model CommunityGalleryImageProperties {
   /**
    * A list of gallery image features.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @identifiers(#["name"])
   features?: GalleryImageFeature[];
 
   /**
@@ -2567,7 +2565,7 @@ model ProxyResourceCommunity<
    * The name of the parent resource.
    */
   @path
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @segment("parents")
   parentName: string;
 }
@@ -2593,7 +2591,7 @@ model ProxyResourceShared<
    * The name of the parent resource.
    */
   @path
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @segment("parents")
   parentName: string;
 }

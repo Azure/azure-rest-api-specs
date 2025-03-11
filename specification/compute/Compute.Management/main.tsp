@@ -45,7 +45,7 @@ using TypeSpec.Versioning;
  */
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
-@service({
+@service(#{
   title: "Azure Compute resource management API.",
 })
 @versioned(Versions)

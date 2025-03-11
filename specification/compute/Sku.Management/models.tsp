@@ -59,83 +59,83 @@ model ResourceSku {
   /**
    * The type of resource the SKU applies to.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
    * The name of SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier?: string;
 
   /**
    * The Size of the SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   size?: string;
 
   /**
    * The Family of this particular SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   family?: string;
 
   /**
    * The Kind of resources that are supported in this SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kind?: string;
 
   /**
    * Specifies the number of virtual machines in the scale set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   capacity?: ResourceSkuCapacity;
 
   /**
    * The set of locations that the SKU is available.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   locations?: string[];
 
   /**
    * A list of locations and availability zones in those locations where the SKU is available.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", ["location"])
   locationInfo?: ResourceSkuLocationInfo[];
 
   /**
    * The api versions that support this SKU.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   apiVersions?: string[];
 
   /**
    * Metadata for retrieving price info.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
   costs?: ResourceSkuCosts[];
 
   /**
    * A name value pair to describe the capability.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
   capabilities?: ResourceSkuCapabilities[];
 
   /**
    * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
   restrictions?: ResourceSkuRestrictions[];
 }
 
@@ -146,25 +146,25 @@ model ResourceSkuCapacity {
   /**
    * The minimum capacity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   minimum?: int64;
 
   /**
    * The maximum capacity that can be set.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maximum?: int64;
 
   /**
    * The default capacity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   default?: int64;
 
   /**
    * The scale type applicable to the sku.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scaleType?: ResourceSkuCapacityScaleType;
 }
 
@@ -175,32 +175,32 @@ model ResourceSkuLocationInfo {
   /**
    * Location of the SKU
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
    * List of availability zones where the SKU is supported.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   zones?: string[];
 
   /**
    * Details of capabilities available to a SKU in specific zones.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
   zoneDetails?: ResourceSkuZoneDetails[];
 
   /**
    * The names of extended locations.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extendedLocations?: string[];
 
   /**
    * The type of the extended location.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: ExtendedLocationType;
 }
 
@@ -211,14 +211,14 @@ model ResourceSkuZoneDetails {
   /**
    * The set of zones that the SKU is available in with the specified capabilities.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string[];
 
   /**
    * A list of capabilities that are available for the SKU in the specified list of zones.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
   capabilities?: ResourceSkuCapabilities[];
 }
 
@@ -229,13 +229,13 @@ model ResourceSkuCapabilities {
   /**
    * An invariant to describe the feature.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * An invariant if the feature is measured by quantity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 }
 
@@ -247,19 +247,19 @@ model ResourceSkuCosts {
    * Used for querying price from commerce.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "backwards compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   meterID?: string;
 
   /**
    * The multiplier is needed to extend the base metered cost.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   quantity?: int64;
 
   /**
    * An invariant to show the extended unit.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extendedUnit?: string;
 }
 
@@ -270,25 +270,25 @@ model ResourceSkuRestrictions {
   /**
    * The type of restrictions.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: ResourceSkuRestrictionsType;
 
   /**
    * The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   values?: string[];
 
   /**
    * The information about the restriction where the SKU cannot be used.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   restrictionInfo?: ResourceSkuRestrictionInfo;
 
   /**
    * The reason for restriction.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reasonCode?: ResourceSkuRestrictionsReasonCode;
 }
 
@@ -299,13 +299,13 @@ model ResourceSkuRestrictionInfo {
   /**
    * Locations where the SKU is restricted
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   locations?: string[];
 
   /**
    * List of availability zones where the SKU is restricted.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   zones?: string[];
 }
 
@@ -326,7 +326,7 @@ model ResourceSkuRestrictionInfo {
 //   /**
 //    * Resource Id
 //    */
-//   @visibility("read")
+//    @visibility(Lifecycle.Read)
 //   id?: string;
 // }
 
@@ -334,12 +334,12 @@ model ResourceSkuRestrictionInfo {
 //   /**
 //    * The principal id of user assigned identity.
 //    */
-//   @visibility("read")
+//    @visibility(Lifecycle.Read)
 //   principalId?: string;
 
 //   /**
 //    * The client id of user assigned identity.
 //    */
-//   @visibility("read")
+//    @visibility(Lifecycle.Read)
 //   clientId?: string;
 // }

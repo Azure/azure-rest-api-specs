@@ -79,7 +79,7 @@ interface VirtualMachineScaleSetVMExtensions {
    * The operation to update the VMSS VM extension.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false }) 
   @operationId("VirtualMachineScaleSetVMExtensions_Update")
   update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,

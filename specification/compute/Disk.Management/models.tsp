@@ -460,7 +460,7 @@ model DiskSku {
   /**
    * The sku tier.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier?: string;
 }
 
@@ -471,7 +471,7 @@ model DiskProperties {
   /**
    * The time when the disk was created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
 
   /**
@@ -509,13 +509,13 @@ model DiskProperties {
   /**
    * The size of the disk in bytes. This field is read only.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskSizeBytes?: int64;
 
   /**
    * Unique Guid identifying the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueId?: string;
 
   /**
@@ -527,7 +527,7 @@ model DiskProperties {
    * The disk provisioning state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -557,7 +557,7 @@ model DiskProperties {
   /**
    * The state of the disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskState?: DiskState;
 
   /**
@@ -573,8 +573,8 @@ model DiskProperties {
   /**
    * Details of the list of all VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["vmUri"])
+  @visibility(Lifecycle.Read)
+  @identifier(#["vmUri"])
   shareInfo?: ShareInfoElement[];
 
   /**
@@ -590,7 +590,7 @@ model DiskProperties {
   /**
    * Latest time when bursting was last enabled on a disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   burstingEnabledTime?: utcDateTime;
 
   /**
@@ -606,7 +606,7 @@ model DiskProperties {
   /**
    * Properties of the disk for which update is pending.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   propertyUpdatesInProgress?: PropertyUpdatesInProgress;
 
   /**
@@ -642,7 +642,7 @@ model DiskProperties {
   /**
    * The UTC time when the ownership state of the disk was last changed i.e., the time the disk was last attached or detached from a VM or the time when the VM to which the disk was attached was deallocated or started.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "LastOwnershipUpdateTime")
   lastOwnershipUpdateTime?: utcDateTime;
 }
@@ -729,7 +729,7 @@ model CreationData {
   /**
    * If this field is set, this is the unique id identifying the source of this resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceUniqueId?: string;
 
   /**
@@ -800,7 +800,7 @@ model EncryptionSettingsCollection {
   /**
    * A collection of encryption settings, one for each disk volume.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["diskEncryptionKey/sourceVault/id"])
+ @identifiers(#["diskEncryptionKey/sourceVault/id"])
   encryptionSettings?: EncryptionSettingsElement[];
 
   /**
@@ -884,7 +884,7 @@ model ShareInfoElement {
   /**
    * A relative URI containing the ID of the VM that has the disk attached.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmUri?: string;
 }
 
@@ -1024,7 +1024,7 @@ model DiskUpdateProperties {
   /**
    * Properties of the disk for which update is pending.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   propertyUpdatesInProgress?: PropertyUpdatesInProgress;
 
   /**
@@ -1082,14 +1082,14 @@ model AccessUri {
    * A SAS uri for accessing a disk.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accessSAS?: string;
 
   /**
    * A SAS uri for accessing a VM guest state.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   securityDataAccessSAS?: string;
 }
 
@@ -1103,20 +1103,20 @@ model DiskAccessProperties {
   /**
    * A readonly collection of private endpoint connections created on the disk. Currently only one endpoint connection is supported.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /**
    * The disk access resource provisioning state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
    * The time when the disk access was created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
 }
 
@@ -1127,7 +1127,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The resource of private end point.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpoint?: PrivateEndpoint;
 
   /**
@@ -1138,7 +1138,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
 
@@ -1149,7 +1149,7 @@ model PrivateEndpoint {
   /**
    * The ARM identifier for Private Endpoint
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -1214,19 +1214,19 @@ model PrivateLinkResource {
   /**
    * private link resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * private link resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * private link resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 
@@ -1237,13 +1237,13 @@ model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupId?: string;
 
   /**
    * The private link resource required member names.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
@@ -1269,13 +1269,13 @@ model EncryptionSetIdentity {
   /**
    * The object id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-identity-principal-id header in the PUT request if the resource has a systemAssigned(implicit) identity
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The tenant id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-client-tenant-id header in the PUT request if the resource has a systemAssigned(implicit) identity
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
@@ -1290,13 +1290,13 @@ model UserAssignedIdentitiesValue {
   /**
    * The principal id of user assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The client id of user assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clientId?: string;
 }
 
@@ -1315,15 +1315,15 @@ model EncryptionSetProperties {
   /**
    * A readonly collection of key vault keys previously used by this disk encryption set while a key rotation is in progress. It will be empty if there is no ongoing key rotation.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["sourceVault/id"])
+  @visibility(Lifecycle.Read)
+ @identifiers(#["sourceVault/id"])
   previousKeys?: KeyForDiskEncryptionSet[];
 
   /**
    * The disk encryption set provisioning state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -1334,13 +1334,13 @@ model EncryptionSetProperties {
   /**
    * The time when the active key of this disk encryption set was updated.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastKeyRotationTimestamp?: utcDateTime;
 
   /**
    * The error that was encountered during auto-key rotation. If an error is present, then auto-key rotation will not be attempted until the error on this disk encryption set is fixed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoKeyRotationError?: ApiError;
 
   /**
@@ -1446,19 +1446,19 @@ model DiskRestorePointProperties {
   /**
    * The timestamp of restorePoint creation
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
 
   /**
    * arm id of source disk or source disk restore point.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceResourceId?: string;
 
   /**
    * The Operating System type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: OperatingSystemTypes;
 
   /**
@@ -1480,19 +1480,19 @@ model DiskRestorePointProperties {
   /**
    * id of the backing snapshot's MIS family
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   familyId?: string;
 
   /**
    * unique incarnation id of the source disk
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceUniqueId?: string;
 
   /**
    * Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   encryption?: Encryption;
 
   /**
@@ -1523,13 +1523,13 @@ model DiskRestorePointProperties {
   /**
    * Replication state of disk restore point when source resource is from a different region.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replicationState?: string;
 
   /**
    * Location of source disk or source disk restore point when source resource is from a different region.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceResourceLocation?: string;
 
   /**
@@ -1540,7 +1540,7 @@ model DiskRestorePointProperties {
   /**
    * Logical sector size in bytes for disk restore points of UltraSSD_LRS and PremiumV2_LRS disks. Supported values are 512 and 4096. 4096 is the default.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   logicalSectorSize?: int32;
 }
 
@@ -1551,19 +1551,19 @@ model ProxyOnlyResource {
   /**
    * Resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 
@@ -1584,7 +1584,7 @@ model SnapshotSku {
   /**
    * The sku tier.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier?: string;
 }
 
@@ -1595,7 +1595,7 @@ model SnapshotProperties {
   /**
    * The time when the snapshot was created.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
 
   /**
@@ -1633,19 +1633,19 @@ model SnapshotProperties {
   /**
    * The size of the disk in bytes. This field is read only.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskSizeBytes?: int64;
 
   /**
    * The state of the snapshot.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskState?: DiskState;
 
   /**
    * Unique Guid identifying the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueId?: string;
 
   /**
@@ -1657,7 +1657,7 @@ model SnapshotProperties {
    * The disk provisioning state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: string;
 
   /**
@@ -1668,7 +1668,7 @@ model SnapshotProperties {
   /**
    * Incremental snapshots for a disk share an incremental snapshot family id. The Get Page Range Diff API can only be called on incremental snapshots with the same family id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   incrementalSnapshotFamilyId?: string;
 
   /**
