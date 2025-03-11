@@ -36,7 +36,7 @@ model DatasetVersion {
   @doc("Data type")
   datasetType: DatasetType;
 
-  ...AssetBase
+  ...AssetBase;
 }
 
 @doc("PagedDataVersionBase Definition")

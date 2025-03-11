@@ -20,7 +20,7 @@ model Index {
   @doc("Type of index")
   indexType: IndexType;
 
-  ...AssetBase
+  ...AssetBase;
 }
 
 @doc("Paged collection of Index items.")
