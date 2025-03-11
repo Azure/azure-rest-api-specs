@@ -47,6 +47,50 @@ describe("extractInputs", () => {
     });
   });
 
+  it("pull_request_target", async () => {
+    const context = {
+      eventName: "pull_request_target",
+      payload: {
+        action: "labeled",
+        repository: {
+          name: "TestRepoName",
+          owner: {
+            login: "TestRepoOwnerLogin",
+          },
+        },
+        pull_request: {
+          head: {
+            sha: "abc123",
+          },
+          number: 123,
+        },
+      },
+    };
+
+    const expected = {
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "abc123",
+      issue_number: 123,
+      run_id: NaN,
+    };
+
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).resolves.toEqual(expected);
+
+    context.payload.action = "unlabeled";
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).resolves.toEqual(expected);
+
+    // Action not yet supported
+    context.payload.action = "synchronize";
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).rejects.toThrow();
+  });
+
   it("issue_comment:edited", async () => {
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({
