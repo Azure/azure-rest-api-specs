@@ -12,6 +12,9 @@ using Azure.ClientGenerator.Core;
 
 namespace Storage.Blob;
 
+@encode(BytesKnownEncoding.base64)
+scalar base64Bytes extends bytes;
+
 /** The error response. */
 @error
 model StorageError {
@@ -26,7 +29,7 @@ model StorageError {
 model Block {
   /** The base64 encoded block ID. */
   @Xml.name("Name")
-  name: string;
+  name: base64Bytes;
 
   /** The block size in bytes. */
   @Xml.name("Size")
@@ -50,17 +53,17 @@ model BlockLookupList {
   /** The committed blocks */
   @Xml.unwrapped
   @Xml.name("Committed")
-  committed?: string[];
+  committed?: base64Bytes[];
 
   /** The uncommitted blocks */
   @Xml.unwrapped
   @Xml.name("Uncommitted")
-  uncommitted?: string[];
+  uncommitted?: base64Bytes[];
 
   /** The latest blocks */
   @Xml.unwrapped
   @Xml.name("Latest")
-  latest?: string[];
+  latest?: base64Bytes[];
 }
 
 /** Represents an array of signed identifiers */
@@ -343,7 +346,8 @@ model UserDelegationKey {
   @Xml.name("SignedVersion") signedVersion: string;
 
   /** The key as a base64 string. */
-  @Xml.name("Value") value: string;
+  @Xml.name("Value")
+  value: base64Bytes;
 }
 
 /** The public access types. */
@@ -1327,7 +1331,8 @@ alias BlockIdParameter = {
   /** A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block. */
   @query
   @clientName("blockId")
-  blockid: string;
+  @encode("base64url")
+  blockid: bytes;
 };
 
 /** The account kind response header. */
