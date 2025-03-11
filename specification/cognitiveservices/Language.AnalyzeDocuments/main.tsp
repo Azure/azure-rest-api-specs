@@ -16,16 +16,18 @@ using Azure.Core.Traits;
 
 /** The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.
  * The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering.
- * Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
+ * Further documentation can be found in <a href=\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
 @useAuth(
-  TypeSpec.Http.ApiKeyAuth<
-    TypeSpec.Http.ApiKeyLocation.header,
-    "Ocp-Apim-Subscription-Key"
-  >
+  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.authorizationCode,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
+      scopes: ["https://cognitiveservices.azure.com/.default"],
+    }
+  ]>
 )
-@service({
-  title: "Microsoft Cognitive Language Service - Document Analysis",
-})
+@service(#{ title: "Microsoft Cognitive Language Service - Document Analysis" })
 @server(
   "{Endpoint}/language",
   "Single server endpoint",

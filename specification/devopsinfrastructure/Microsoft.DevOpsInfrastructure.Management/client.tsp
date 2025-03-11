@@ -13,8 +13,6 @@ using Microsoft.DevOpsInfrastructure;
   "java"
 );
 
-@@access(Operations.list, Access.internal);
-
 /* Rename models */
 @@clientName(ImageVersion, "DevOpsImageVersion", "csharp");
 
