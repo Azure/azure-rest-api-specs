@@ -23,7 +23,6 @@ alias ModelServiceTraits = SupportsClientRequestId &
 alias ModelOperations = Azure.Core.ResourceOperations<ModelServiceTraits>;
 
 interface Models {
-
   @doc("Get a deployed model.")
   get is ModelOperations.ResourceRead<Model>;
 
@@ -31,31 +30,31 @@ interface Models {
   list is ModelOperations.ResourceList<
     Model,
     ListQueryParametersTrait<{
-        @doc("Model publisher to filter models by")
-        @query("$modelPublisher")
-        modelPublisher?: string,
-  
-        @doc("Model name (the publisher specific name) to filter models by")
-        @query("$modelName")
-        modelName?: string,
-  
-        @doc("Flag to include models from connections in response.")
-        @query("$includeConnectedModels")
-        includeConnectionModels?: boolean,
-  
-        ...StandardListQueryParameters;
-      }>,
+      @doc("Model publisher to filter models by")
+      @query("$modelPublisher")
+      modelPublisher?: string;
+
+      @doc("Model name (the publisher specific name) to filter models by")
+      @query("$modelName")
+      modelName?: string;
+
+      @doc("Flag to include models from connections in response.")
+      @query("$includeConnectedModels")
+      includeConnectionModels?: boolean;
+
+      ...StandardListQueryParameters;
+    }>
   >;
 
   @doc("""
-  Gets chat completions for the provided chat messages.
-  Completions support a wide variety of tasks and generate text that continues from or "completes"
-  provided prompt data. The method makes a REST API call to the `/chat/completions` route
-  on the given endpoint.
-  """)
+    Gets chat completions for the provided chat messages.
+    Completions support a wide variety of tasks and generate text that continues from or "completes"
+    provided prompt data. The method makes a REST API call to the `/chat/completions` route
+    on the given endpoint.
+    """)
   @actionSeparator("/")
   @route("models/chat/completions")
-  op getChatCompletions is Azure.Core.RpcOperation<
+  getChatCompletions is Azure.Core.RpcOperation<
     {
       @doc("The parameters of the chat completions request.")
       @body
@@ -72,7 +71,7 @@ interface Models {
     """)
   @actionSeparator("/")
   @route("models/embeddings")
-  op getEmbeddings is Azure.Core.RpcOperation<
+  getEmbeddings is Azure.Core.RpcOperation<
     {
       @doc("The parameters of the embeddings request.")
       @body
@@ -89,7 +88,7 @@ interface Models {
     """)
   @actionSeparator("/")
   @route("models/images/embeddings")
-  op getImageEmbeddings is Azure.Core.RpcOperation<
+  getImageEmbeddings is Azure.Core.RpcOperation<
     {
       @doc("The parameters of the image embeddings request.")
       @body

@@ -131,6 +131,6 @@ interface Datasets {
 
     @doc("Pensing upload request.")
     @body
-    pendingUploadRequest: PendingUploadRequest
+    pendingUploadRequest: PendingUploadRequest,
   ): PendingUploadResponse;
 }
