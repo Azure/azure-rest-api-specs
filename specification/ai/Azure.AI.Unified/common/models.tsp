@@ -222,9 +222,7 @@ model OutputPathAssetReference extends AssetReferenceBase {
   referenceType: "OutputPath";
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@doc("Base definition for an asset.")
-model AssetBase {
+alias AssetBase = {
   @doc("Asset stage")
   @visibility("read", "create", "update")
   stage?: string;

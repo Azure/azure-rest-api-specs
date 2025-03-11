@@ -16,9 +16,11 @@ namespace Azure.AI.Unified;
 
 @doc("Index resource Definition")
 @discriminator("indexType")
-model Index extends AssetBase {
+model Index {
   @doc("Type of index")
   indexType: IndexType;
+
+  ...AssetBase
 }
 
 @doc("Paged collection of Index items.")
@@ -56,7 +58,7 @@ model ManagedAzureAISearchIndex extends Index {
 }
 
 @doc("CosmosDB Vector Store Index Definition")
-model CosmosDBIndex extends AssetBase {
+model CosmosDBIndex extends Index {
   @doc("Type of index")
   indexType: IndexType.cosmosDB;
 

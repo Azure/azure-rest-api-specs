@@ -22,15 +22,11 @@ union DatasetType {
 
   @doc("URI file.")
   uri_file: "uri_file",
-
-  @doc("URI folder.")
-  uri_folder: "uri_folder",
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DatasetVersion Definition")
-@discriminator("datasetType")
-model DatasetVersion extends AssetBase {
+model DatasetVersion {
   @doc("[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330")
   @visibility("read", "create")
   @minLength(1)
@@ -39,6 +35,8 @@ model DatasetVersion extends AssetBase {
 
   @doc("Data type")
   datasetType: DatasetType;
+
+  ...AssetBase
 }
 
 @doc("PagedDataVersionBase Definition")
@@ -52,18 +50,4 @@ model PagedDatasetVersion {
   @doc("The link to the next page of results, if any.")
   @nextLink
   nextLink?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@doc("UriFileDatasetVersion Definition")
-model UriFileDatasetVersion extends DatasetVersion {
-  @doc("[Required] Specifies the type of data.")
-  datasetType: DatasetType.uri_file;
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@doc("UriFolderDatasetVersion Definition")
-model UriFolderDatasetVersion extends DatasetVersion {
-  @doc("[Required] Specifies the type of data.")
-  datasetType: DatasetType.uri_folder;
 }
