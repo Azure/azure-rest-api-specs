@@ -6,17 +6,19 @@ import { execRoot } from "./exec.js";
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} [baseCommitish] Defaults to "HEAD^".
  * @param {string} [headCommitish] Defaults to "HEAD".
- * @param {string} [diffFilter] Defaults to "d".
+ * @param {string} [diffFilter] Defaults to "".
  * @returns {Promise<string[]>}
  */
 export async function getChangedFiles(
   core,
   baseCommitish = "HEAD^",
   headCommitish = "HEAD",
-  diffFilter = "d",
+  diffFilter = "",
 ) {
+  const diffFilterArg = diffFilter ? `--diff-filter=${diffFilter}` : "";
+
   const result = await execRoot(
-    `git -c core.quotepath=off diff --name-only --diff-filter=${diffFilter} ${baseCommitish} ${headCommitish}`,
+    `git -c core.quotepath=off diff --name-only ${diffFilterArg} ${baseCommitish} ${headCommitish}`,
     core,
   );
 
@@ -31,30 +33,70 @@ export async function getChangedFiles(
   return files;
 }
 
+// Functions suitable for passing to string[].filter(), ordered roughly in order of increasing specificity
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function json(file) {
+  return typeof file === "string" && file.endsWith(".json");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function specification(file) {
+  return typeof file === "string" && file.includes("/specification/");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function dataPlane(file) {
+  return (
+    typeof file === "string" &&
+    specification(file) &&
+    file.includes("/data-plane/")
+  );
+}
+
 /**
  * @param {string} [file]
  * @returns {boolean}
  */
 export function resourceManager(file) {
-  return typeof file === "string" && file.includes("/resource-manager/");
+  return (
+    typeof file === "string" &&
+    specification(file) &&
+    file.includes("/resource-manager/")
+  );
 }
 
 /**
- * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @param {string} [baseCommitish] Defaults to "HEAD^".
- * @param {string} [headCommitish] Defaults to "HEAD".
- * @param {string} [diffFilter] Defaults to "d".
- * @returns {Promise<string[]>}
+ * @param {string} [file]
+ * @returns {boolean}
  */
-export async function getChangedSwaggerFiles(
-  core,
-  baseCommitish = "HEAD^",
-  headCommitish = "HEAD",
-  diffFilter = "d",
-) {
+export function example(file) {
   return (
-    await getChangedFiles(core, baseCommitish, headCommitish, diffFilter)
-  ).filter((f) => f.endsWith(".json"));
+    typeof file === "string" &&
+    specification(file) &&
+    file.includes("/examples/")
+  );
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function swagger(file) {
+  return (
+    typeof file === "string" &&
+    (dataPlane(file) || resourceManager(file)) &&
+    !example(file)
+  );
 }
 
 /**
@@ -70,15 +112,16 @@ export async function getChangedResourceManagerSwaggerFiles(
   headCommitish = "HEAD",
   diffFilter = "d",
 ) {
-  const changedSwaggerFiles = await getChangedSwaggerFiles(
+  const changedSwaggerFiles = await getChangedFiles(
     core,
     baseCommitish,
     headCommitish,
     diffFilter,
   );
-  const changedResourceManagerSwaggerFiles = changedSwaggerFiles.filter(
-    (f) => f.includes("/resource-manager/") && !f.includes("/examples/"),
-  );
+  const changedResourceManagerSwaggerFiles = changedSwaggerFiles
+    .filter(resourceManager)
+    .filter(swagger);
+
   core.info(
     `Changed files containing path '/resource-manager/': ${changedResourceManagerSwaggerFiles}`,
   );

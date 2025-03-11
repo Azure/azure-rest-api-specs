@@ -1,7 +1,7 @@
 // @ts-check
 
 import { dirname } from "path";
-import { getChangedResourceManagerSwaggerFiles } from "./changed-files.js";
+import { getChangedFiles, resourceManager, swagger } from "./changed-files.js";
 import { lsTree, show } from "./git.js";
 
 /**
@@ -9,12 +9,11 @@ import { lsTree, show } from "./git.js";
  * @returns {Promise<boolean>}
  */
 export default async function incrementalTypeSpec({ github, context, core }) {
-  const changedRmSwaggerFiles = await getChangedResourceManagerSwaggerFiles(
-    core,
-    "HEAD^",
-    "HEAD",
-    "",
-  );
+  const changedFiles = await getChangedFiles(core, "HEAD^", "HEAD", "");
+
+  const changedRmSwaggerFiles = changedFiles
+    .filter(resourceManager)
+    .filter(swagger);
 
   if (changedRmSwaggerFiles.length == 0) {
     core.info(
