@@ -26,7 +26,7 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2024-11-15-preview
+tag: package-2025-05-15
 ```
 
 ### Tag: package-2022-04-07-preview
@@ -142,6 +142,7 @@ suppressions:
     from: communicationservicescallautomation.json
     reason: Our LRO behavior does not fit the default behavior
 ```
+
 ---
 
 # Code Generation
