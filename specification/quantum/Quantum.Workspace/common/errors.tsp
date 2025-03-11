@@ -7,6 +7,8 @@ import "./common.tsp";
 
 using TypeSpec.Versioning;
 
+using Quantum.Workspace;
+
 /** A versioned namespace to use the Error model in the unversioned root namespace. */
 @useDependency(DefaultAzureCoreVersion)
 namespace Errors {
