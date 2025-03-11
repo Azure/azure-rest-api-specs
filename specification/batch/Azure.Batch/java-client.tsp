@@ -563,6 +563,28 @@ op getNodeCustomization is Azure.Batch.ReadOperationNew<
 
 @@override(Azure.Batch.Nodes.getNode, getNodeCustomization, "java");
 
+// Reboot Node Operation
+@doc("Optional parameters for Reboot Node operation.")
+model RebootBatchNodeOptions {
+  ...Azure.Batch.CommonJsonParameters;
+  ...Azure.Batch.RebootNodeOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Reboot Node operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/reboot")
+op rebootNodeCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.RebootNodeRequiredParameters;
+
+    @doc("Optional parameters for Reboot Node operation.")
+    options?: RebootBatchNodeOptions;
+  },
+  Azure.Batch.AcceptedProcessingResponseHeaders
+>;
+
+@@override(Azure.Batch.Nodes.rebootNode, rebootNodeCustomization, "java");
+
 // Start Node Operation
 @doc("Optional parameters for Start Node operation.")
 model StartBatchNodeOptions {
