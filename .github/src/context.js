@@ -101,13 +101,20 @@ export async function extractInputs(github, context, core) {
 
     let issue_number;
 
-    // TODO: Add support for pull_request_target.  Should be exactly the same as pull_request.  pull_requests will be set for non-fork PRs,
-    // and empty for fork PRs.
-    // - TODO: Test in non-fork PR
-    if (payload.workflow_run.event === "pull_request") {
-      // Extract the issue number from the payload itself, or by passing the head_sha to an API
-      // Do NOT attempt to extract the issue number from an artifact, since this could be modified
+    if (
+      payload.workflow_run.event === "pull_request" ||
+      payload.workflow_run.event == "pull_request_target"
+    ) {
+      // Other properties on payload.workflow_run should be the same for both pull_request and pull_request_target.
+
+      // Extract the issue number from the payload itself, or by passing the head_sha to an API.
+      //
+      // For pull_request, do NOT attempt to extract the issue number from an artifact, since this could be modified
       // in a fork PR.
+      //
+      // For pull_request_target, it might be safe to extract the issue number from an artifact, since the workflow runs
+      // on the target branch and can be trusted.  But it should also be unnecessary, since we should be able extract
+      // the issue number from the payload itself, just like pull_request.
 
       const pull_requests = payload.workflow_run.pull_requests;
       if (pull_requests && pull_requests.length > 0) {
@@ -139,6 +146,8 @@ export async function extractInputs(github, context, core) {
         if (pullRequests.length === 1) {
           issue_number = pullRequests[0].number;
         } else {
+          // TODO: Consider calling search API in target repo if we get an unexpected result from the head repo
+
           throw new Error(
             `Unexpected number of pull requests associated with commit '${head_sha}'. Expected: '1'. Actual: '${pullRequests.length}'.`,
           );
