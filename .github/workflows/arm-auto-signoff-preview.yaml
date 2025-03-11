@@ -69,7 +69,7 @@ jobs:
     steps:
       # *** IMPORTANT ***
       # For workflows that are triggered by the pull_request_target event, the workflow runs in the context of the base of the pull request.
-      # You should make sure that you do not check out, build, or run untrusted code from the pull request (head) with this event.
+      # You should make sure that you do not check out, build, or run untrusted code from the head of the pull request.
       - uses: actions/checkout@v4
         with:
           # Only needs .github folder for automation, not the files in the PR (analyzed in a separate workflow)
