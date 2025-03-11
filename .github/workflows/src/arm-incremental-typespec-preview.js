@@ -9,7 +9,7 @@ import { lsTree, show } from "./git.js";
  * @returns {Promise<boolean>}
  */
 export default async function incrementalTypeSpec({ github, context, core }) {
-  const changedFiles = await getChangedFiles(core, "HEAD^", "HEAD", "");
+  const changedFiles = await getChangedFiles(core);
 
   const changedRmSwaggerFiles = changedFiles
     .filter(resourceManager)
