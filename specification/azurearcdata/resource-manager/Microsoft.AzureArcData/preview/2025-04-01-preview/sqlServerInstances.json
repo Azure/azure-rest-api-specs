@@ -843,6 +843,63 @@
         ]
       }
     },
+    "MiLinkAssessmentCategory": {
+      "description": "Validation category for the MI Link prerequisites assessment.",
+      "type": "string",
+      "enum": [
+        "SqlInstance",
+        "SqlInstanceDatabase",
+        "ManagedInstance",
+        "ManagedInstanceDatabase",
+        "ManagedInstanceCrossValidation",
+        "Certificates",
+        "BoxToMiNetworkConnectivity",
+        "MiToBoxNetworkConnectivity",
+        "Dag"
+      ],
+      "x-ms-enum": {
+        "name": "miLinkAssessmentCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SQLInstance",
+            "description": "Assessments of the given instance on the on-premise SQL Server (box)."
+          },
+          {
+            "value": "SQLInstanceDatabase",
+            "description": "Assessments of the database(s) on the given instance on the on-premise SQL Server (box)."
+          },
+          {
+            "value": "ManagedInstance",
+            "description": "Assessments of the Managed Instance."
+          },
+          {
+            "value": "ManagedInstanceDatabase",
+            "description": "Assessments of the database(s) on the Managed Instance."
+          },
+          {
+            "value": "ManagedInstanceCrossValidation",
+            "description": "Assessments that use data from both the Managed Instance and the given instance of the on-premise SQL Server (box) for the validations."
+          },
+          {
+            "value": "Certificates",
+            "description": "Assessments of the necessary certificates configuration."
+          },
+          {
+            "value": "BoxToMiNetworkConnectivity",
+            "description": "Assessment of network connectivity from the on-premise SQL Server (box) to the Managed Instance."
+          },
+          {
+            "value": "MiToBoxNetworkConnectivity",
+            "description": "Assessments of network connectivity from the Managed Instance to the on-premise SQL Server (box)."
+          },
+          {
+            "value": "Dag",
+            "description": "Assessments of the Distributed Availability Group."
+          }
+        ]
+      }
+    },
     "ServerAssessments": {
       "description": "Issues and warnings impacting the migration of SQL Server instance to particular Azure Migration Target.",
       "readOnly": true,
@@ -1421,18 +1478,28 @@
             "modelAsString": true
           }
         },
-        "databaseName": {
-          "type": "string",
-          "description": "The name of the database to be replicated to the Azure SQL Managed Instance."
+        "databaseNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of strings, where each value represents the name of a database to be replicated to the Azure SQL Managed Instance."
         },
         "availabilityGroupName": {
           "type": "string",
           "description": "The name of the availability group to be used for the database replication."
+        },
+        "assessmentCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MiLinkAssessmentCategory"
+          },
+          "description": "An array of strings, where each value represents the category of the assessment to be run. If this field is not provided, all assessment categories will be run."
         }
       },
       "required": [
         "azureManagedInstanceResourceId",
-        "databaseName",
+        "databaseNames",
         "availabilityGroupName"
       ]
     },
@@ -1461,19 +1528,7 @@
           "description": "The name of the requirement."
         },
         "category": {
-          "type": "string",
-          "description": "The category of the requirement.",
-          "enum": [
-            "SQLServer",
-            "ManagedInstance",
-            "ManagedInstanceCrossValidation",
-            "Dag",
-            "Certificates"
-          ],
-          "x-ms-enum": {
-            "name": "assessmentCategory",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/MiLinkAssessmentCategory"
         },
         "status": {
           "type": "string",
@@ -1561,4 +1616,3 @@
     }
   }
 }
-
