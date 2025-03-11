@@ -1697,9 +1697,30 @@
         },
         "streamingTransportOptions": {
           "$ref": "#/definitions/StreamingTransportOptions",
-          "description": "Gets or sets the streaming transport options for the call."
+          "description": "Streaming transport options for the call."
         }
       }
+    },
+    "WebSocketTransportOptions": {
+      "description": "Represents the options for WebSocket transport.",
+      "required": [],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamingTransportOptions"
+        }
+      ],
+      "properties": {
+        "mediaStreamingOptions": {
+          "$ref": "#/definitions/MediaStreamingOptions",
+          "description": "Media streaming options."
+        },
+        "transcriptionOptions": {
+          "$ref": "#/definitions/TranscriptionOptions",
+          "description": "Transcription options."
+        }
+      },
+      "x-ms-discriminator-value": "websocket"
     },
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
@@ -1721,7 +1742,7 @@
       }
     },
     "StreamingTransportType": {
-      "description": "Gets or sets the type of streaming transport.",
+      "description": "The kind of streaming transport.",
       "enum": [
         "websocket"
       ],
@@ -1734,18 +1755,26 @@
     "StreamingTransportOptions": {
       "description": "Represents the options for streaming transport.",
       "required": [
-        "type",
-        "config"
+        "kind"
       ],
       "type": "object",
       "properties": {
-        "type": {
+        "kind": {
           "$ref": "#/definitions/StreamingTransportType"
-        },
-        "config": {
-          "$ref": "#/definitions/ITransportConfig",
-          "description": "Gets or sets the configuration for the transport."
         }
+      },
+      "discriminator": "kind"
+    },
+    "MediaStreamingAudioChannelType": {
+      "description": "Gets or sets the audio channel type to stream, e.g., unmixed audio, mixed audio.",
+      "enum": [
+        "mixed",
+        "unmixed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingAudioChannelType",
+        "modelAsString": true
       }
     },
     "MicrosoftTeamsUserIdentifierModel": {
@@ -1753,11 +1782,6 @@
     },
     "MicrosoftTeamsAppIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
-    },
-    "ITransportConfig": {
-      "description": "Represents the configuration settings for transport mechanisms.",
-      "type": "object",
-      "properties": {}
     },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
@@ -1959,7 +1983,7 @@
         },
         "streamingTransportOptions": {
           "$ref": "#/definitions/StreamingTransportOptions",
-          "description": "Gets or sets the streaming transport options for the call."
+          "description": "Streaming transport options for the call."
         }
       }
     },
@@ -4222,6 +4246,95 @@
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "AudioFormat": {
+      "description": "Gets or sets the audio format used for encoding, including sample rate and channel type. The default is Pcm16KMono.",
+      "enum": [
+        "pcm16KMono",
+        "pcm24KMono"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AudioFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pcm16KMono",
+            "description": "Pcm16KMono",
+            "value": "Pcm16KMono"
+          },
+          {
+            "name": "Pcm24KMono",
+            "description": "Pcm24KMono",
+            "value": "Pcm24KMono"
+          }
+        ]
+      }
+    },
+    "MediaStreamingOptions": {
+      "description": "Configuration options for media streaming.",
+      "required": [
+        "audioChannelType"
+      ],
+      "type": "object",
+      "properties": {
+        "transportUrl": {
+          "description": "Gets or sets the transport URL for media streaming.",
+          "type": "string"
+        },
+        "transportType": {
+          "$ref": "#/definitions/StreamingTransportType"
+        },
+        "contentType": {
+          "$ref": "#/definitions/MediaStreamingContentType"
+        },
+        "audioChannelType": {
+          "$ref": "#/definitions/MediaStreamingAudioChannelType"
+        },
+        "startMediaStreaming": {
+          "description": "Gets or sets a value indicating whether the media streaming should start immediately after the call is answered.",
+          "type": "boolean"
+        },
+        "enableBidirectional": {
+          "description": "Gets or sets a value indicating whether bidirectional streaming is enabled.",
+          "type": "boolean"
+        },
+        "audioFormat": {
+          "$ref": "#/definitions/AudioFormat"
+        }
+      }
+    },
+    "TranscriptionOptions": {
+      "description": "Configuration options for live transcription.",
+      "required": [
+        "locale"
+      ],
+      "type": "object",
+      "properties": {
+        "transportUrl": {
+          "description": "The URL used for live transcription transport.",
+          "type": "string"
+        },
+        "transportType": {
+          "$ref": "#/definitions/StreamingTransportType"
+        },
+        "locale": {
+          "description": "The locale for the transcription data, e.g., en-CA, en-AU.",
+          "type": "string"
+        },
+        "speechRecognitionModelEndpointId": {
+          "description": "The endpoint ID where the custom speech recognition model is deployed.",
+          "type": "string"
+        },
+        "startTranscription": {
+          "description": "Indicates whether the transcription should start immediately after the call is answered.",
+          "type": "boolean"
+        },
+        "enableIntermediateResults": {
+          "description": "Enables intermediate results for the transcribed speech.",
+          "type": "boolean"
         }
       }
     }
