@@ -47,7 +47,7 @@ interface RestorePointCollections {
   /**
    * The operation to update the restore point collection.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false }) 
   update is ComputeCustomPatchSync<
     RestorePointCollection,
     RestorePointCollectionUpdate

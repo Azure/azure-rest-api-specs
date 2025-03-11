@@ -48,7 +48,7 @@ interface GalleryInVMAccessControlProfileVersions {
    * Update a gallery inVMAccessControlProfile version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false }) 
   @operationId("GalleryInVMAccessControlProfileVersions_Update")
   update is ComputeCustomPatchAsync<
     GalleryInVMAccessControlProfileVersion,

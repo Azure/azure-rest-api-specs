@@ -350,7 +350,6 @@ namespace Azure.ResourceManager.Legacy {
       Response,
       Error
     >;
-
   }
   /**
    * @dev Get the provider namespace key-value pair
@@ -398,7 +397,7 @@ namespace Azure.ResourceManager.Legacy {
       SegmentName
     )
     @path
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     name: Type;
   }
 }

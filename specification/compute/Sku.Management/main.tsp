@@ -23,9 +23,7 @@ using TypeSpec.Versioning;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Already exist outside this subservice"
 @armProviderNamespace
-@service({
-  title: "Azure Compute resource management API.",
-})
+@service(#{ title: "Azure Compute resource management API." })
 @versioned(Versions)
 namespace Microsoft.Compute;
 

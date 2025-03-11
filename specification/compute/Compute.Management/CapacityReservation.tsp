@@ -64,7 +64,7 @@ interface CapacityReservations {
   /**
    * The operation to update a capacity reservation.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false }) 
   update is ComputeCustomPatchAsync<
     CapacityReservation,
     CapacityReservationUpdate,

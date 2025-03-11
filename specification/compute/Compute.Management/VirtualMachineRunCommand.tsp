@@ -76,7 +76,7 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to update the run command.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false }) 
   update is VirtualMachineRunCommandOps.CustomPatchAsync<
     VirtualMachineRunCommand,
     VirtualMachineRunCommandUpdate,

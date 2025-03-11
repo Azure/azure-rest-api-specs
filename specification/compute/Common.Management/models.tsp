@@ -20,7 +20,7 @@ model ApiError {
   /**
    * The Api error details
    */
-  @OpenAPI.extension("x-ms-identifiers", ["message", "target"])
+  @Azure.ResourceManager.identifiers(#["message", "target"])
   details?: ApiErrorBase[];
 
   /**
@@ -102,19 +102,19 @@ model ResourceWithOptionalLocation {
   /**
    * Resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Resource name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource type
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
@@ -137,7 +137,7 @@ model SubResourceReadOnly {
   /**
    * Resource Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 

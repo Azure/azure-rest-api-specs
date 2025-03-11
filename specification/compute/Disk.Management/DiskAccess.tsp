@@ -52,7 +52,7 @@ interface DiskAccesses {
    * Updates (patches) a disk access resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false }) 
   update is ComputeCustomPatchAsync<
     DiskAccess,
     DiskAccessUpdate,

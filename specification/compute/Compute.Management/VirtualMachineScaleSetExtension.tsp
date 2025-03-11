@@ -52,7 +52,7 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to update an extension.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetExtension,
     VirtualMachineScaleSetExtensionUpdate,
