@@ -3187,7 +3187,7 @@
         },
         "status": {
           "$ref": "#/definitions/GateState",
-          "description": "The status of the Gate.",
+          "description": "The state of the Gate.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3208,7 +3208,7 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/GateState",
-          "description": "The status of the Gate.",
+          "description": "The state of the Gate.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3290,15 +3290,15 @@
       "properties": {
         "id": {
           "$ref": "#/definitions/GateTargetId",
-          "description": "The status of the Gate.",
+          "description": "The resource id that the Gate is controlling the rollout of.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
         "type": {
-          "$ref": "#/definitions/GateTargetType",
-          "description": "The status of the Gate.",
+          "$ref": "#/definitions/GateTargetProperties",
+          "description": "Properties specific to the target of this Gate.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3314,12 +3314,12 @@
       "$ref": "#/definitions/UpdateRunResourceId",
       "x-nullable": false
     },
-    "GateTargetType": {
+    "GateTargetProperties": {
       "type": "object",
       "x-nullable": false,
       "allOf": [
         {
-          "$ref": "#/definitions/UpdateRunGateTargetType"
+          "$ref": "#/definitions/UpdateRunGateTargetProperties"
         }
       ]
     },
@@ -3763,7 +3763,7 @@
         }
       ]
     },
-    "UpdateRunGateTargetType": {
+    "UpdateRunGateTargetProperties": {
       "type": "object",
       "description": "The Gate is targeting an Update Run staged rollout.",
       "properties": {

@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2025-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-04-01-preview'
 input-file:
-  - stable/2025-04-01-preview/fleets.json
+  - preview/2025-04-01-preview/fleets.json
 ```
 
 ### Tag: package-2025-03-01

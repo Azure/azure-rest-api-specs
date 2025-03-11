@@ -75,16 +75,16 @@ model GateProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   gateType: GateType;
 
-  @doc("The status of the Gate.")
+  @doc("The state of the Gate.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   status: GateState;
 }
 
 @doc("The type of staged rollout that the Gate is targeting.")
 @added(Versions.v2025_04_01_preview)
-union GateTargetType {
+union GateTargetProperties {
   @doc("The Gate is controlling the staged rollout of an Update Run.")
-  updateRun: UpdateRunGateTargetType,
+  updateRun: UpdateRunGateTargetProperties,
 }
 
 @doc("Whether the Gate is placed before or after the target.")
@@ -101,7 +101,7 @@ union BeforeOrAfter {
 
 @doc("The Gate is targeting an Update Run staged rollout.")
 @added(Versions.v2025_04_01_preview)
-model UpdateRunGateTargetType {
+model UpdateRunGateTargetProperties {
   @doc("The name of the Update Run.")
   @visibility(Lifecycle.Read)
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
@@ -145,13 +145,13 @@ union GateTargetId {
 @doc("The target that the Gate is controlling, e.g. an Update Run.")
 @added(Versions.v2025_04_01_preview)
 model GateTarget {
-  @doc("The status of the Gate.")
+  @doc("The resource id that the Gate is controlling the rollout of.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   id: GateTargetId;
 
-  @doc("The status of the Gate.")
+  @doc("Properties specific to the target of this Gate.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  type: GateTargetType;
+  type: GateTargetProperties;
 }
 
 @doc("The provisioning state of the Gate resource.")
