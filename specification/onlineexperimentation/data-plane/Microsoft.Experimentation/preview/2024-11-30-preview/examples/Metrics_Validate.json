@@ -1,0 +1,40 @@
+{
+  "title": "Metrics_Validate",
+  "operationId": "Metrics_Validate",
+  "parameters": {
+    "api-version": "2024-11-30-preview",
+    "workspaceId": "00000000-0000-0000-0000-000000000000",
+    "metricId": "events_purchase_creditcard",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "body": {
+      "displayName": "Average revenue per purchase [USD]",
+      "description": "The average revenue per purchase transaction in USD. Refund transactions are excluded from this metric. The total revenue might increase while this metric decreases if the number of purchases increases.",
+      "lifecycle": "Active",
+      "tags": [
+        "Monetization"
+      ],
+      "desiredDirection": "Increase",
+      "definition": {
+        "kind": "Average",
+        "value": {
+          "eventName": "Transaction",
+          "eventProperty": "Revenue",
+          "filter": "Revenue >"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "diagnostics": [
+          {
+            "code": "InvalidEventCondition",
+            "message": "The filter condition 'Revenue >' is invalid"
+          }
+        ],
+        "result": "Invalid"
+      }
+    }
+  }
+}
