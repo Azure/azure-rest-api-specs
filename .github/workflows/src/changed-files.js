@@ -38,7 +38,17 @@ export async function getChangedFiles(
  * @returns {boolean}
  */
 export function json(file) {
-  return typeof file === "string" && file.endsWith(".json");
+  // Extension "json" with any case is a valid JSON file
+  return typeof file === "string" && file.toLowerCase().endsWith(".json");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function readme(file) {
+  // Filename "readme.md" with any case is a valid README file
+  return typeof file === "string" && file.toLowerCase().endsWith("readme.md");
 }
 
 /**
@@ -46,6 +56,7 @@ export function json(file) {
  * @returns {boolean}
  */
 export function specification(file) {
+  // Folder name "specification" should match case, since it already exists in repo
   return typeof file === "string" && file.startsWith("specification/");
 }
 
@@ -54,6 +65,7 @@ export function specification(file) {
  * @returns {boolean}
  */
 export function dataPlane(file) {
+  // Folder name "data-plane" should match case for consistency across specs
   return (
     typeof file === "string" &&
     specification(file) &&
@@ -66,6 +78,7 @@ export function dataPlane(file) {
  * @returns {boolean}
  */
 export function resourceManager(file) {
+  // Folder name "resource-manager" should match case for consistency across specs
   return (
     typeof file === "string" &&
     specification(file) &&
@@ -78,6 +91,7 @@ export function resourceManager(file) {
  * @returns {boolean}
  */
 export function example(file) {
+  // Folder name "examples" should match case for consistency across specs
   return (
     typeof file === "string" &&
     json(file) &&
