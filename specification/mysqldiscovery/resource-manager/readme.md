@@ -40,9 +40,9 @@ input-file:
 directive:
   - suppress:
       - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
-    - suppress: AvoidAdditionalProperties
-      where: $.definitions.MysqlServerProperties.properties.labels
-      reason: Existing API.
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.MysqlServerProperties.properties.labels
+    reason: Existing API.
 suppressions:
   - code: PathResourceTypeNameCamelCase
     reason: MySQL is a technical term and cannot follow camel case rule.
