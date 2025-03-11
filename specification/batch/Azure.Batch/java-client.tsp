@@ -605,3 +605,28 @@ op startNodeCustomization is Azure.Batch.PostOperationNew<
 >;
 
 @@override(Azure.Batch.Nodes.startNode, startNodeCustomization, "java");
+
+// Deallocate Node Operation
+@doc("Optional parameters for Deallocate Node operation.")
+model DeallocateBatchNodeOptions {
+  ...Azure.Batch.CommonJsonParameters;
+  ...Azure.Batch.DeallocateNodeOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Deallocate Node operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/deallocate")
+op deallocateNodeCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.DeallocateNodeRequiredParameters;
+
+    @doc("Optional parameters for Deallocate Node operation.")
+    options?: DeallocateBatchNodeOptions;
+  },
+  Azure.Batch.AcceptedProcessingResponseHeaders
+>;
+
+@@override(Azure.Batch.Nodes.deallocateNode,
+  deallocateNodeCustomization,
+  "java"
+);

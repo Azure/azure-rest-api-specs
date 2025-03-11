@@ -1540,6 +1540,22 @@ alias RebootNodeOptionalParameters = {
   parameters?: BatchNodeRebootContent;
 };
 
+alias DeallocateNodeRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node that you want to restart.")
+  @path
+  nodeId: string;
+};
+
+alias DeallocateNodeOptionalParameters = {
+  @doc("The options to use for deallocating the Compute Node.")
+  @bodyRoot
+  parameters?: BatchNodeDeallocateContent;
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1631,20 +1647,11 @@ interface Nodes {
   @summary("Deallocates the specified Compute Node.")
   @doc("You can deallocate a Compute Node only if it is in an idle or running state.")
   @route("/pools/{poolId}/nodes/{nodeId}/deallocate")
-  @clientName("deallocateNodeInternal", "java")
-  deallocateNode is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node that you want to restart.")
-      @path
-      nodeId: string;
-
-      @doc("The options to use for deallocating the Compute Node.")
-      @bodyRoot
-      parameters?: BatchNodeDeallocateContent;
+  deallocateNode is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...DeallocateNodeOptionalParameters;
+      ...DeallocateNodeRequiredParameters;
     },
     AcceptedProcessingResponseHeaders
   >;
