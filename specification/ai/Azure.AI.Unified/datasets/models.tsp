@@ -28,31 +28,13 @@ union DatasetType {
 }
 
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DatasetVersion Definition")
 @discriminator("datasetType")
-model DatasetVersion extends AssetBase {
-  @doc("[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330")
-  @visibility("read", "create")
-  @minLength(1)
-  @pattern("[a-zA-Z0-9_]")
+model DatasetVersion is ServicePatterns.Versioned<"datasets"> {
   datasetUri: string;
 
   @doc("Data type")
   datasetType: DatasetType;
-}
-
-@doc("PagedDataVersionBase Definition")
-@pagedResult
-model PagedDatasetVersion {
-  @doc("The list of DatasetVersions.")
-  @extension("x-ms-identifiers", [])
-  @items
-  value: DatasetVersion[];
-
-  @doc("The link to the next page of results, if any.")
-  @nextLink
-  nextLink?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
