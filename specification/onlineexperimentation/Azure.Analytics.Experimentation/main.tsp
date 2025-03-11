@@ -185,7 +185,7 @@ model PercentileDefinition extends MetricDefinition {
 model Workspace {
   @key("workspaceId")
   @doc("An ID used to uniquely identify and reference the experimentation workspace.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-z0-9][a-z0-9-]*$")
   workspaceId: string;
 }
@@ -212,7 +212,7 @@ union LifecycleStage {
 model Metric {
   @key("metricId")
   @doc("An ID used to uniquely identify and reference the metric.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(50)
   @minLength(1)
   @pattern("^[a-z_][a-z0-9_]*$")
@@ -241,11 +241,11 @@ model Metric {
   definition: MetricDefinition;
 
   @doc("ETag of the metric")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eTag: eTag;
 
   @doc("The timestamp of resource last modification (UTC)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedAt: utcDateTime;
 }
 
@@ -285,18 +285,18 @@ union DiagnosticCode {
 @doc("The diagnostic information.")
 model DiagnosticInfo {
   @doc("The error message.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message: string;
 
   @doc("The error code.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code: DiagnosticCode;
 }
 
 @doc("The result of validating a Metric.")
 model MetricValidateResult {
   @doc("The validation result.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diagnostics: DiagnosticInfo[];
 
   @doc("Whether the metric is valid.")
