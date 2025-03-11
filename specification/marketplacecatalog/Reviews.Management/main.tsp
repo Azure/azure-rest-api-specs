@@ -4,10 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./reviews.models.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
@@ -16,7 +12,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.Marketplace")
 @service(#{ title: "Microsoft Marketplace Rating And Reviews API" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Marketplace;
 
 /**

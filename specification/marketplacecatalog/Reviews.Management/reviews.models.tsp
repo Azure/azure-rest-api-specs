@@ -7,7 +7,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Marketplace;
@@ -28,10 +27,18 @@ model ProductProperties {
   uniqueProductId: string;
 }
 
+model UserHasReview is ProxyResource<UserHasReviewProperties> {
+  ...ResourceNameParameter<
+    Resource = UserHasReview,
+    KeyName = "uniqueProductId",
+    SegmentName = "products"
+  >;
+}
 /**
  * Get if the user has already submitted a review for the product.
  */
-model UserHasReview {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
+model UserHasReviewProperties {
   /**
    * Indicates whether user has already submitted a review.
    */
@@ -53,7 +60,7 @@ interface RatingAndReviewsOperations {
   @operationId("RatingAndReviews_GetUserHasReview")
   @action("reviews/userhasreview")
   getUserHasReview is ArmProviderActionSync<
-    Response = UserHasReview,
+    Response = ArmResponse<UserHasReview>,
     Parameters = {
       /**
        * Unique Product Id
