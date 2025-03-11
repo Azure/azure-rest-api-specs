@@ -58,7 +58,7 @@ interface DedicatedHosts {
   /**
    * Update a dedicated host .
    */
-  @patch(#{ implicitOptionality: false }) 
+  @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     DedicatedHost,
     DedicatedHostUpdate,

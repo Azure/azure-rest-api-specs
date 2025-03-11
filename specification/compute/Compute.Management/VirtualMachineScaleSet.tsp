@@ -63,7 +63,7 @@ model VirtualMachineScaleSet extends Foundations.TrackedResource {
    * Etag is property returned in Create/Update/Get response of the VMSS, so that customer can supply it in the header to ensure optimistic updates
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-   @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   etag?: string;
 }
 
@@ -107,7 +107,7 @@ interface VirtualMachineScaleSets {
   /**
    * Update a VM scale set.
    */
-  @patch(#{ implicitOptionality: false }) 
+  @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetUpdate,

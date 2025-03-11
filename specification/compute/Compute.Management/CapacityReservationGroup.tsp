@@ -53,7 +53,7 @@ interface CapacityReservationGroups {
   /**
    * The operation to update a capacity reservation group. When updating a capacity reservation group, only tags and sharing profile may be modified.
    */
-  @patch(#{ implicitOptionality: false }) 
+  @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchSync<
     CapacityReservationGroup,
     CapacityReservationGroupUpdate

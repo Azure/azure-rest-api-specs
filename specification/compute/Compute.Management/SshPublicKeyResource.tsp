@@ -43,7 +43,7 @@ interface SshPublicKeyResources {
    * Updates a new SSH public key resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @patch(#{ implicitOptionality: false }) 
+  @patch(#{ implicitOptionality: false })
   @operationId("SshPublicKeys_Update")
   update is ComputeCustomPatchSync<
     SshPublicKeyResource,

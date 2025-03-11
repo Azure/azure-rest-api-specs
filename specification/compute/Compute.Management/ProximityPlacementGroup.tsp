@@ -53,7 +53,7 @@ interface ProximityPlacementGroups {
   /**
    * Update a proximity placement group.
    */
-  @patch(#{ implicitOptionality: false }) 
+  @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchSync<
     ProximityPlacementGroup,
     ProximityPlacementGroupUpdate

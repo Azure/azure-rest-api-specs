@@ -53,7 +53,7 @@ interface DedicatedHostGroups {
   /**
    * Update an dedicated host group.
    */
-  @patch(#{ implicitOptionality: false }) 
+  @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchSync<
     DedicatedHostGroup,
     DedicatedHostGroupUpdate

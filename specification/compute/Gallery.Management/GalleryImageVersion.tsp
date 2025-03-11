@@ -60,7 +60,7 @@ interface GalleryImageVersions {
   /**
    * Update a gallery image version.
    */
-  @patch(#{ implicitOptionality: false }) 
+  @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     GalleryImageVersion,
     PatchModel = GalleryImageVersionUpdate,

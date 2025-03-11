@@ -51,7 +51,7 @@ interface GalleryImages {
   /**
    * Update a gallery image definition.
    */
-  @patch(#{ implicitOptionality: false }) 
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     GalleryImage,
     PatchModel = GalleryImageUpdate,

@@ -109,7 +109,7 @@ interface VirtualMachines {
   /**
    * The operation to update a virtual machine.
    */
-  @patch(#{ implicitOptionality: false }) 
+  @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     VirtualMachine,
     VirtualMachineUpdate,

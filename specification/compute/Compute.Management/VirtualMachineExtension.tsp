@@ -52,7 +52,7 @@ interface VirtualMachineExtensions {
   /**
    * The operation to update the extension.
    */
-  @patch(#{ implicitOptionality: false }) 
+  @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     VirtualMachineExtension,
     VirtualMachineExtensionUpdate,

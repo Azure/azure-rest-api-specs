@@ -55,7 +55,7 @@ interface Images {
   /**
    * Update an image.
    */
-  @patch(#{ implicitOptionality: false }) 
+  @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     Image,
     ImageUpdate,
