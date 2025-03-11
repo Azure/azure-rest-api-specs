@@ -16,36 +16,7 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Unified;
 
-alias ModelServiceTraits = SupportsClientRequestId &
-  SupportsRepeatableRequests &
-  SupportsConditionalRequests;
-
-alias ModelOperations = Azure.Core.ResourceOperations<ModelServiceTraits>;
-
 interface Models {
-  @doc("Get a deployed model.")
-  get is ModelOperations.ResourceRead<Model>;
-
-  @doc("List all deployed models in the project")
-  list is ModelOperations.ResourceList<
-    Model,
-    ListQueryParametersTrait<{
-      @doc("Model publisher to filter models by")
-      @query("$modelPublisher")
-      modelPublisher?: string;
-
-      @doc("Model name (the publisher specific name) to filter models by")
-      @query("$modelName")
-      modelName?: string;
-
-      @doc("Flag to include models from connections in response.")
-      @query("$includeConnectedModels")
-      includeConnectionModels?: boolean;
-
-      ...StandardListQueryParameters;
-    }>
-  >;
-
   @doc("""
     Gets chat completions for the provided chat messages.
     Completions support a wide variety of tasks and generate text that continues from or "completes"

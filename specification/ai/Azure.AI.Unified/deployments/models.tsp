@@ -16,8 +16,8 @@ using Azure.Core.Traits;
 namespace Azure.AI.Unified;
 
 @doc("Model Deployment Definition")
-@resource("models")
-model Model {
+@resource("deployments")
+model Deployment {
   @doc("Name of the deployment for the model")
   @visibility("read")
   @key("deploymentName")
