@@ -14,6 +14,8 @@ import { PER_PAGE_MAX } from "./github.js";
 export async function extractInputs(github, context, core) {
   core.info(`extractInputs(${context.eventName}, ${context.payload.action})`);
 
+  core.isDebug() && core.debug(JSON.stringify(context));
+
   /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number }} */
   let inputs;
 
