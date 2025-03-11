@@ -15,7 +15,7 @@ namespace Microsoft.CodeSigning;
 @parentResource(CodeSigningAccount)
 model CertificateProfile is ProxyResource<CertificateProfileProperties> {
   @doc("Certificate profile name.")
-  @pattern("^(?!.*--)[A-Za-z][A-Za-z0-9-]{3,98}[A-Za-z0-9]$")
+  @pattern("^(?=.{5,100}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
   @path
   @key("profileName")
   @segment("certificateProfiles")
