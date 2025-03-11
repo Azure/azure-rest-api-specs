@@ -282,6 +282,51 @@
           }
         }
       }
+    },
+    "/access/teamsPhone/:exchangeAccessToken": {
+      "post": {
+        "tags": [
+          "TeamsPhone"
+        ],
+        "summary": "Exchanges a Teams Phone token for an ACS user access token.",
+        "operationId": "ExchangeTeamsPhoneToken",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "TeamsPhoneExchangeTokenRequest we want to exchange.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsPhoneExchangeTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Exchange a Teams Phone token": {
+            "$ref": "./examples/ExchangeTeamsPhoneToken.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -452,6 +497,11 @@
           "description": "Object ID of an Azure AD user (Teams User) to be verified against the oid claim in the Azure AD access token.",
           "type": "string"
         }
+      }
+    },
+    "TeamsPhoneExchangeTokenRequest": {
+      "type": "object",
+      "properties": {
       }
     }
   },
