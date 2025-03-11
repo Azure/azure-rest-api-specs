@@ -6,7 +6,7 @@ import { diff } from "./git.js";
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} [baseCommitish] Defaults to "HEAD^".
  * @param {string} [headCommitish] Defaults to "HEAD".
- * @returns {Promise<string[]>}
+ * @returns {Promise<string[]>} List of changed files, relative to the repo root.  Example: ["specification/foo/Microsoft.Foo/main.tsp"]
  */
 export async function getChangedFiles(
   core,
@@ -46,7 +46,7 @@ export function json(file) {
  * @returns {boolean}
  */
 export function specification(file) {
-  return typeof file === "string" && file.includes("/specification/");
+  return typeof file === "string" && file.startsWith("specification/");
 }
 
 /**
@@ -80,6 +80,7 @@ export function resourceManager(file) {
 export function example(file) {
   return (
     typeof file === "string" &&
+    json(file) &&
     specification(file) &&
     file.includes("/examples/")
   );
@@ -92,6 +93,7 @@ export function example(file) {
 export function swagger(file) {
   return (
     typeof file === "string" &&
+    json(file) &&
     (dataPlane(file) || resourceManager(file)) &&
     !example(file)
   );
