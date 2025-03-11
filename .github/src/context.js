@@ -101,6 +101,9 @@ export async function extractInputs(github, context, core) {
 
     let issue_number;
 
+    // TODO: Add support for pull_request_target.  Should be exactly the same as pull_request.  pull_requests will be set for non-fork PRs,
+    // and empty for fork PRs.
+    // - TODO: Test in non-fork PR
     if (payload.workflow_run.event === "pull_request") {
       // Extract the issue number from the payload itself, or by passing the head_sha to an API
       // Do NOT attempt to extract the issue number from an artifact, since this could be modified
