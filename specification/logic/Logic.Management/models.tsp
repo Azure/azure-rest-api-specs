@@ -3,59 +3,92 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Logic;
+
+@doc("The flow run execution mode.")
+union FlowRunExecutionMode {
+  string,
+
+  @doc("The flow run execution mode is not specified.")
+  NotSpecified: "NotSpecified",
+
+  @doc("The flow run execution mode is static results.")
+  StaticResults: "StaticResults",
+
+  @doc("The flow run execution mode is resubmitted results.")
+  ResubmittedResults: "ResubmittedResults",
+}
 
 @doc("The workflow provisioning state.")
 union WorkflowProvisioningState {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a state where the workflow is accepted.")
   Accepted: "Accepted",
+
   @doc("Represents a state where the workflow is running.")
   Running: "Running",
+
   @doc("Represents a state where the workflow is ready.")
   Ready: "Ready",
+
   @doc("Represents a state where the workflow is creating.")
   Creating: "Creating",
+
   @doc("Represents a state where the workflow is created.")
   Created: "Created",
+
   @doc("Represents a state where the workflow is deleting.")
   Deleting: "Deleting",
+
   @doc("Represents a state where the workflow is deleted.")
   Deleted: "Deleted",
+
   @doc("Represents a state where the workflow is canceled.")
   Canceled: "Canceled",
+
   @doc("Represents a state where the workflow is failed.")
   Failed: "Failed",
+
   @doc("Represents a state where the workflow is succeeded.")
   Succeeded: "Succeeded",
+
   @doc("Represents a state where the workflow is moving.")
   Moving: "Moving",
+
   @doc("Represents a state where the workflow is updating.")
   Updating: "Updating",
+
   @doc("Represents a state where the workflow is registering.")
   Registering: "Registering",
+
   @doc("Represents a state where the workflow is registered.")
   Registered: "Registered",
+
   @doc("Represents a state where the workflow is unregistering.")
   Unregistering: "Unregistering",
+
   @doc("Represents a state where the workflow is unregistered.")
   Unregistered: "Unregistered",
+
   @doc("Represents a state where the workflow is completed.")
   Completed: "Completed",
+
   @doc("Represents a state where the workflow is renewing.")
   Renewing: "Renewing",
+
   @doc("Represents a state where the workflow is pending.")
   Pending: "Pending",
+
   @doc("Represents a state where the workflow is waiting.")
   Waiting: "Waiting",
+
   @doc("Represents a state where the workflow is in progress.")
   InProgress: "InProgress",
 }
@@ -63,16 +96,22 @@ union WorkflowProvisioningState {
 @doc("The workflow state.")
 union WorkflowState {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a state where the workflow is completed.")
   Completed: "Completed",
+
   @doc("Represents a state where the workflow is enabled.")
   Enabled: "Enabled",
+
   @doc("Represents a state where the workflow is disabled.")
   Disabled: "Disabled",
+
   @doc("Represents a state where the workflow is deleted.")
   Deleted: "Deleted",
+
   @doc("Represents a state where the workflow is suspended.")
   Suspended: "Suspended",
 }
@@ -80,6 +119,7 @@ union WorkflowState {
 @doc("Open authentication policy provider type.")
 union OpenAuthenticationProviderType {
   string,
+
   @doc("Represents Azure Active Directory (AAD) provider type.")
   AAD: "AAD",
 }
@@ -87,16 +127,22 @@ union OpenAuthenticationProviderType {
 @doc("The sku name.")
 union SkuName {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a free SKU.")
   Free: "Free",
+
   @doc("Represents a shared SKU.")
   Shared: "Shared",
+
   @doc("Represents a basic SKU.")
   Basic: "Basic",
+
   @doc("Represents a standard SKU.")
   Standard: "Standard",
+
   @doc("Represents a premium SKU.")
   Premium: "Premium",
 }
@@ -104,22 +150,31 @@ union SkuName {
 @doc("The parameter type.")
 union ParameterType {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a string parameter type.")
   String: "String",
+
   @doc("Represents a secure string parameter type.")
   SecureString: "SecureString",
+
   @doc("Represents an integer parameter type.")
   Int: "Int",
+
   @doc("Represents a float parameter type.")
   Float: "Float",
+
   @doc("Represents a boolean parameter type.")
   Bool: "Bool",
+
   @doc("Represents an array parameter type.")
   Array: "Array",
+
   @doc("Represents an object parameter type.")
   Object: "Object",
+
   @doc("Represents a secure object parameter type.")
   SecureObject: "SecureObject",
 }
@@ -127,10 +182,13 @@ union ParameterType {
 @doc("The key type.")
 union KeyType {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a primary key type.")
   Primary: "Primary",
+
   @doc("Represents a secondary key type.")
   Secondary: "Secondary",
 }
@@ -138,40 +196,58 @@ union KeyType {
 @doc("The workflow trigger provisioning state.")
 union WorkflowTriggerProvisioningState {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a state where the workflow trigger is accepted.")
   Accepted: "Accepted",
+
   @doc("Represents a state where the workflow trigger is running.")
   Running: "Running",
+
   @doc("Represents a state where the workflow trigger is ready.")
   Ready: "Ready",
+
   @doc("Represents a state where the workflow trigger is creating.")
   Creating: "Creating",
+
   @doc("Represents a state where the workflow trigger is created.")
   Created: "Created",
+
   @doc("Represents a state where the workflow trigger is deleting.")
   Deleting: "Deleting",
+
   @doc("Represents a state where the workflow trigger is deleted.")
   Deleted: "Deleted",
+
   @doc("Represents a state where the workflow trigger is canceled.")
   Canceled: "Canceled",
+
   @doc("Represents a state where the workflow trigger is failed.")
   Failed: "Failed",
+
   @doc("Represents a state where the workflow trigger is succeeded.")
   Succeeded: "Succeeded",
+
   @doc("Represents a state where the workflow trigger is moving.")
   Moving: "Moving",
+
   @doc("Represents a state where the workflow trigger is updating.")
   Updating: "Updating",
+
   @doc("Represents a state where the workflow trigger is registering.")
   Registering: "Registering",
+
   @doc("Represents a state where the workflow trigger is registered.")
   Registered: "Registered",
+
   @doc("Represents a state where the workflow trigger is unregistering.")
   Unregistering: "Unregistering",
+
   @doc("Represents a state where the workflow trigger is unregistered.")
   Unregistered: "Unregistered",
+
   @doc("Represents a state where the workflow trigger is completed.")
   Completed: "Completed",
 }
@@ -179,30 +255,43 @@ union WorkflowTriggerProvisioningState {
 @doc("The workflow status.")
 union WorkflowStatus {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a paused workflow status.")
   Paused: "Paused",
+
   @doc("Represents a running workflow status.")
   Running: "Running",
+
   @doc("Represents a waiting workflow status.")
   Waiting: "Waiting",
+
   @doc("Represents a succeeded workflow status.")
   Succeeded: "Succeeded",
+
   @doc("Represents a skipped workflow status.")
   Skipped: "Skipped",
+
   @doc("Represents a suspended workflow status.")
   Suspended: "Suspended",
+
   @doc("Represents a cancelled workflow status.")
   Cancelled: "Cancelled",
+
   @doc("Represents a failed workflow status.")
   Failed: "Failed",
+
   @doc("Represents a faulted workflow status.")
   Faulted: "Faulted",
+
   @doc("Represents a timed out workflow status.")
   TimedOut: "TimedOut",
+
   @doc("Represents an aborted workflow status.")
   Aborted: "Aborted",
+
   @doc("Represents an ignored workflow status.")
   Ignored: "Ignored",
 }
@@ -210,20 +299,28 @@ union WorkflowStatus {
 @doc("The recurrence frequency.")
 union RecurrenceFrequency {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a recurrence frequency of seconds.")
   Second: "Second",
+
   @doc("Represents a recurrence frequency of minutes.")
   Minute: "Minute",
+
   @doc("Represents a recurrence frequency of hours.")
   Hour: "Hour",
+
   @doc("Represents a recurrence frequency of days.")
   Day: "Day",
+
   @doc("Represents a recurrence frequency of weeks.")
   Week: "Week",
+
   @doc("Represents a recurrence frequency of months.")
   Month: "Month",
+
   @doc("Represents a recurrence frequency of years.")
   Year: "Year",
 }
@@ -231,12 +328,16 @@ union RecurrenceFrequency {
 @doc("The integration account sku name.")
 union IntegrationAccountSkuName {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a free integration account SKU.")
   Free: "Free",
+
   @doc("Represents a basic integration account SKU.")
   Basic: "Basic",
+
   @doc("Represents a standard integration account SKU.")
   Standard: "Standard",
 }
@@ -244,8 +345,10 @@ union IntegrationAccountSkuName {
 @doc("The track events operation options.")
 union TrackEventsOperationOptions {
   string,
+
   @doc("Represents no track events operation options.")
   None: "None",
+
   @doc("Represents disabling source info enrichment for track events operation.")
   DisableSourceInfoEnrich: "DisableSourceInfoEnrich",
 }
@@ -253,36 +356,52 @@ union TrackEventsOperationOptions {
 @doc("The tracking record type.")
 union TrackingRecordType {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a custom tracking record type.")
   Custom: "Custom",
+
   @doc("Represents an AS2 message tracking record type.")
   AS2Message: "AS2Message",
+
   @doc("Represents an AS2 MDN tracking record type.")
   AS2MDN: "AS2MDN",
+
   @doc("Represents an X12 interchange tracking record type.")
   X12Interchange: "X12Interchange",
+
   @doc("Represents an X12 functional group tracking record type.")
   X12FunctionalGroup: "X12FunctionalGroup",
+
   @doc("Represents an X12 transaction set tracking record type.")
   X12TransactionSet: "X12TransactionSet",
+
   @doc("Represents an X12 interchange acknowledgment tracking record type.")
   X12InterchangeAcknowledgment: "X12InterchangeAcknowledgment",
+
   @doc("Represents an X12 functional group acknowledgment tracking record type.")
   X12FunctionalGroupAcknowledgment: "X12FunctionalGroupAcknowledgment",
+
   @doc("Represents an X12 transaction set acknowledgment tracking record type.")
   X12TransactionSetAcknowledgment: "X12TransactionSetAcknowledgment",
+
   @doc("Represents an Edifact interchange tracking record type.")
   EdifactInterchange: "EdifactInterchange",
+
   @doc("Represents an Edifact functional group tracking record type.")
   EdifactFunctionalGroup: "EdifactFunctionalGroup",
+
   @doc("Represents an Edifact transaction set tracking record type.")
   EdifactTransactionSet: "EdifactTransactionSet",
+
   @doc("Represents an Edifact interchange acknowledgment tracking record type.")
   EdifactInterchangeAcknowledgment: "EdifactInterchangeAcknowledgment",
+
   @doc("Represents an Edifact functional group acknowledgment tracking record type.")
   EdifactFunctionalGroupAcknowledgment: "EdifactFunctionalGroupAcknowledgment",
+
   @doc("Represents an Edifact transaction set acknowledgment tracking record type.")
   EdifactTransactionSetAcknowledgment: "EdifactTransactionSetAcknowledgment",
 }
@@ -290,8 +409,10 @@ union TrackingRecordType {
 @doc("The schema type.")
 union SchemaType {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents an XML schema type.")
   Xml: "Xml",
 }
@@ -299,14 +420,19 @@ union SchemaType {
 @doc("The map type.")
 union MapType {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents an XSLT map type.")
   Xslt: "Xslt",
+
   @doc("Represents an XSLT 2.0 map type.")
   Xslt20: "Xslt20",
+
   @doc("Represents an XSLT 3.0 map type.")
   Xslt30: "Xslt30",
+
   @doc("Represents a Liquid map type.")
   Liquid: "Liquid",
 }
@@ -314,8 +440,10 @@ union MapType {
 @doc("The partner type.")
 union PartnerType {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a B2B partner type.")
   B2B: "B2B",
 }
@@ -323,18 +451,25 @@ union PartnerType {
 @doc("The signing or hashing algorithm.")
 union HashingAlgorithm {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents no hashing algorithm.")
   None: "None",
+
   @doc("Represents the MD5 hashing algorithm.")
   MD5: "MD5",
+
   @doc("Represents the SHA1 hashing algorithm.")
   SHA1: "SHA1",
+
   @doc("Represents the SHA2-256 hashing algorithm.")
   SHA2256: "SHA2256",
+
   @doc("Represents the SHA2-384 hashing algorithm.")
   SHA2384: "SHA2384",
+
   @doc("Represents the SHA2-512 hashing algorithm.")
   SHA2512: "SHA2512",
 }
@@ -342,18 +477,25 @@ union HashingAlgorithm {
 @doc("The encryption algorithm.")
 union EncryptionAlgorithm {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents no encryption algorithm.")
   None: "None",
+
   @doc("Represents the DES3 encryption algorithm.")
   DES3: "DES3",
+
   @doc("Represents the RC2 encryption algorithm.")
   RC2: "RC2",
+
   @doc("Represents the AES-128 encryption algorithm.")
   AES128: "AES128",
+
   @doc("Represents the AES-192 encryption algorithm.")
   AES192: "AES192",
+
   @doc("Represents the AES-256 encryption algorithm.")
   AES256: "AES256",
 }
@@ -361,16 +503,22 @@ union EncryptionAlgorithm {
 @doc("The signing or hashing algorithm.")
 union SigningAlgorithm {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents the default signing algorithm.")
   Default: "Default",
+
   @doc("Represents the SHA1 signing algorithm.")
   SHA1: "SHA1",
+
   @doc("Represents the SHA2-256 signing algorithm.")
   SHA2256: "SHA2256",
+
   @doc("Represents the SHA2-384 signing algorithm.")
   SHA2384: "SHA2384",
+
   @doc("Represents the SHA2-512 signing algorithm.")
   SHA2512: "SHA2512",
 }
@@ -378,12 +526,16 @@ union SigningAlgorithm {
 @doc("The trailing separator policy.")
 union TrailingSeparatorPolicy {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a policy where trailing separators are not allowed.")
   NotAllowed: "NotAllowed",
+
   @doc("Represents a policy where trailing separators are optional.")
   Optional: "Optional",
+
   @doc("Represents a policy where trailing separators are mandatory.")
   Mandatory: "Mandatory",
 }
@@ -391,12 +543,16 @@ union TrailingSeparatorPolicy {
 @doc("The X12 character set.")
 union X12CharacterSet {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents the basic X12 character set.")
   Basic: "Basic",
+
   @doc("Represents the extended X12 character set.")
   Extended: "Extended",
+
   @doc("Represents the UTF-8 X12 character set.")
   UTF8: "UTF8",
 }
@@ -404,10 +560,13 @@ union X12CharacterSet {
 @doc("The x12 date format.")
 union X12DateFormat {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents the CCYYMMDD date format.")
   CCYYMMDD: "CCYYMMDD",
+
   @doc("Represents the YYMMDD date format.")
   YYMMDD: "YYMMDD",
 }
@@ -415,14 +574,19 @@ union X12DateFormat {
 @doc("The x12 time format.")
 union X12TimeFormat {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents the HHMM time format.")
   HHMM: "HHMM",
+
   @doc("Represents the HHMMSS time format.")
   HHMMSS: "HHMMSS",
+
   @doc("Represents the HHMMSSdd time format.")
   HHMMSSdd: "HHMMSSdd",
+
   @doc("Represents the HHMMSSd time format.")
   HHMMSSd: "HHMMSSd",
 }
@@ -430,12 +594,16 @@ union X12TimeFormat {
 @doc("The usage indicator.")
 union UsageIndicator {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a test usage indicator.")
   Test: "Test",
+
   @doc("Represents an information usage indicator.")
   Information: "Information",
+
   @doc("Represents a production usage indicator.")
   Production: "Production",
 }
@@ -443,10 +611,13 @@ union UsageIndicator {
 @doc("The message filter type.")
 union MessageFilterType {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents an include message filter type.")
   Include: "Include",
+
   @doc("Represents an exclude message filter type.")
   Exclude: "Exclude",
 }
@@ -454,34 +625,49 @@ union MessageFilterType {
 @doc("The edifact character set.")
 union EdifactCharacterSet {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents the UNOB Edifact character set.")
   UNOB: "UNOB",
+
   @doc("Represents the UNOA Edifact character set.")
   UNOA: "UNOA",
+
   @doc("Represents the UNOC Edifact character set.")
   UNOC: "UNOC",
+
   @doc("Represents the UNOD Edifact character set.")
   UNOD: "UNOD",
+
   @doc("Represents the UNOE Edifact character set.")
   UNOE: "UNOE",
+
   @doc("Represents the UNOF Edifact character set.")
   UNOF: "UNOF",
+
   @doc("Represents the UNOG Edifact character set.")
   UNOG: "UNOG",
+
   @doc("Represents the UNOH Edifact character set.")
   UNOH: "UNOH",
+
   @doc("Represents the UNOI Edifact character set.")
   UNOI: "UNOI",
+
   @doc("Represents the UNOJ Edifact character set.")
   UNOJ: "UNOJ",
+
   @doc("Represents the UNOK Edifact character set.")
   UNOK: "UNOK",
+
   @doc("Represents the UNOX Edifact character set.")
   UNOX: "UNOX",
+
   @doc("Represents the UNOY Edifact character set.")
   UNOY: "UNOY",
+
   @doc("Represents the KECA Edifact character set.")
   KECA: "KECA",
 }
@@ -489,10 +675,13 @@ union EdifactCharacterSet {
 @doc("The integration service environment access endpoint type.")
 union IntegrationServiceEnvironmentAccessEndpointType {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents an external access endpoint type.")
   External: "External",
+
   @doc("Represents an internal access endpoint type.")
   Internal: "Internal",
 }
@@ -500,10 +689,13 @@ union IntegrationServiceEnvironmentAccessEndpointType {
 @doc("The integration service environment sku name.")
 union IntegrationServiceEnvironmentSkuName {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a premium integration service environment SKU.")
   Premium: "Premium",
+
   @doc("Represents a developer integration service environment SKU.")
   Developer: "Developer",
 }
@@ -511,10 +703,13 @@ union IntegrationServiceEnvironmentSkuName {
 @doc("The integration service environment sku scale type.")
 union IntegrationServiceEnvironmentSkuScaleType {
   string,
+
   @doc("Represents a manual scale type.")
   Manual: "Manual",
+
   @doc("Represents an automatic scale type.")
   Automatic: "Automatic",
+
   @doc("Represents no scale type.")
   None: "None",
 }
@@ -522,28 +717,40 @@ union IntegrationServiceEnvironmentSkuScaleType {
 @doc("The integration service environment network dependency category type.")
 union IntegrationServiceEnvironmentNetworkDependencyCategoryType {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents an Azure Storage network dependency category type.")
   AzureStorage: "AzureStorage",
+
   @doc("Represents an Azure Management network dependency category type.")
   AzureManagement: "AzureManagement",
+
   @doc("Represents an Azure Active Directory network dependency category type.")
   AzureActiveDirectory: "AzureActiveDirectory",
+
   @doc("Represents an SSL Certificate Verification network dependency category type.")
   SSLCertificateVerification: "SSLCertificateVerification",
+
   @doc("Represents a Diagnostic Logs and Metrics network dependency category type.")
   DiagnosticLogsAndMetrics: "DiagnosticLogsAndMetrics",
+
   @doc("Represents an Integration Service Environment Connectors network dependency category type.")
   IntegrationServiceEnvironmentConnectors: "IntegrationServiceEnvironmentConnectors",
+
   @doc("Represents a Redis Cache network dependency category type.")
   RedisCache: "RedisCache",
+
   @doc("Represents an Access Endpoints network dependency category type.")
   AccessEndpoints: "AccessEndpoints",
+
   @doc("Represents a Recovery Service network dependency category type.")
   RecoveryService: "RecoveryService",
+
   @doc("Represents a SQL network dependency category type.")
   SQL: "SQL",
+
   @doc("Represents a Regional Service network dependency category type.")
   RegionalService: "RegionalService",
 }
@@ -551,12 +758,16 @@ union IntegrationServiceEnvironmentNetworkDependencyCategoryType {
 @doc("The integration service environment network endpoint accessibility state.")
 union IntegrationServiceEnvironmentNetworkEndPointAccessibilityState {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents an unknown network endpoint accessibility state.")
   Unknown: "Unknown",
+
   @doc("Represents an available network endpoint accessibility state.")
   Available: "Available",
+
   @doc("Represents a not available network endpoint accessibility state.")
   NotAvailable: "NotAvailable",
 }
@@ -564,12 +775,16 @@ union IntegrationServiceEnvironmentNetworkEndPointAccessibilityState {
 @doc("The error response code.")
 union ErrorResponseCode {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents an Integration Service Environment Not Found error response code.")
   IntegrationServiceEnvironmentNotFound: "IntegrationServiceEnvironmentNotFound",
+
   @doc("Represents an Internal Server Error response code.")
   InternalServerError: "InternalServerError",
+
   @doc("Represents an Invalid Operation Id error response code.")
   InvalidOperationId: "InvalidOperationId",
 }
@@ -577,12 +792,16 @@ union ErrorResponseCode {
 @doc("The integration service environment network dependency health state.")
 union IntegrationServiceEnvironmentNetworkDependencyHealthState {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a healthy network dependency health state.")
   Healthy: "Healthy",
+
   @doc("Represents an unhealthy network dependency health state.")
   Unhealthy: "Unhealthy",
+
   @doc("Represents an unknown network dependency health state.")
   Unknown: "Unknown",
 }
@@ -590,10 +809,13 @@ union IntegrationServiceEnvironmentNetworkDependencyHealthState {
 @doc("The API type.")
 union ApiType {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a REST API type.")
   Rest: "Rest",
+
   @doc("Represents a SOAP API type.")
   Soap: "Soap",
 }
@@ -601,10 +823,13 @@ union ApiType {
 @doc("The WSDL import method.")
 union WsdlImportMethod {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a SOAP to REST WSDL import method.")
   SoapToRest: "SoapToRest",
+
   @doc("Represents a SOAP Pass Through WSDL import method.")
   SoapPassThrough: "SoapPassThrough",
 }
@@ -612,10 +837,13 @@ union WsdlImportMethod {
 @doc("The Api deployment parameter visibility.")
 union ApiDeploymentParameterVisibility {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a default API deployment parameter visibility.")
   Default: "Default",
+
   @doc("Represents an internal API deployment parameter visibility.")
   Internal: "Internal",
 }
@@ -623,12 +851,16 @@ union ApiDeploymentParameterVisibility {
 @doc("The Api tier.")
 union ApiTier {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents an enterprise API tier.")
   Enterprise: "Enterprise",
+
   @doc("Represents a standard API tier.")
   Standard: "Standard",
+
   @doc("Represents a premium API tier.")
   Premium: "Premium",
 }
@@ -636,10 +868,13 @@ union ApiTier {
 @doc("The status annotation.")
 union StatusAnnotation {
   string,
+
   @doc("Represents a state where the value is not specified.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a preview status annotation.")
   Preview: "Preview",
+
   @doc("Represents a production status annotation.")
   Production: "Production",
 }
@@ -647,20 +882,28 @@ union StatusAnnotation {
 @doc("The swagger schema type.")
 union SwaggerSchemaType {
   string,
+
   @doc("Represents a string schema type.")
   String: "String",
+
   @doc("Represents a number schema type.")
   Number: "Number",
+
   @doc("Represents an integer schema type.")
   Integer: "Integer",
+
   @doc("Represents a boolean schema type.")
   Boolean: "Boolean",
+
   @doc("Represents an array schema type.")
   Array: "Array",
+
   @doc("Represents a file schema type.")
   File: "File",
+
   @doc("Represents an object schema type.")
   Object: "Object",
+
   @doc("Represents a null schema type.")
   Null: "Null",
 }
@@ -668,12 +911,16 @@ union SwaggerSchemaType {
 @doc("The Azure async operation state.")
 union AzureAsyncOperationState {
   string,
+
   @doc("Represents a failed async operation state.")
   Failed: "Failed",
+
   @doc("Represents a succeeded async operation state.")
   Succeeded: "Succeeded",
+
   @doc("Represents a pending async operation state.")
   Pending: "Pending",
+
   @doc("Represents a canceled async operation state.")
   Canceled: "Canceled",
 }
@@ -681,18 +928,25 @@ union AzureAsyncOperationState {
 @doc("The days of a week.")
 union DaysOfWeek {
   string,
+
   @doc("Represents day of a week Sunday.")
   Sunday: "Sunday",
+
   @doc("Represents day of a week Monday.")
   Monday: "Monday",
+
   @doc("Represents day of a week Tuesday.")
   Tuesday: "Tuesday",
+
   @doc("Represents day of a week Wednesday.")
   Wednesday: "Wednesday",
+
   @doc("Represents day of a week Thursday.")
   Thursday: "Thursday",
+
   @doc("Represents day of a week Friday.")
   Friday: "Friday",
+
   @doc("Represents day of a week Saturday.")
   Saturday: "Saturday",
 }
@@ -700,18 +954,25 @@ union DaysOfWeek {
 @doc("The day of the week.")
 union DayOfWeek {
   string,
+
   @doc("Represents day of a week Sunday.")
   Sunday: "Sunday",
+
   @doc("Represents day of a week Monday.")
   Monday: "Monday",
+
   @doc("Represents day of a week Tuesday.")
   Tuesday: "Tuesday",
+
   @doc("Represents day of a week Wednesday.")
   Wednesday: "Wednesday",
+
   @doc("Represents day of a week Thursday.")
   Thursday: "Thursday",
+
   @doc("Represents day of a week Friday.")
   Friday: "Friday",
+
   @doc("Represents day of a week Saturday.")
   Saturday: "Saturday",
 }
@@ -719,16 +980,22 @@ union DayOfWeek {
 @doc("The event level.")
 union EventLevel {
   string,
+
   @doc("Represents a log always event level.")
   LogAlways: "LogAlways",
+
   @doc("Represents a critical event level.")
   Critical: "Critical",
+
   @doc("Represents an error event level.")
   Error: "Error",
+
   @doc("Represents a warning event level.")
   Warning: "Warning",
+
   @doc("Represents an information event level.")
   Informational: "Informational",
+
   @doc("Represents a verbose event level.")
   Verbose: "Verbose",
 }
@@ -736,12 +1003,16 @@ union EventLevel {
 @doc("The agreement type.")
 union AgreementType {
   string,
+
   @doc("Represents a not specified agreement type.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents an AS2 agreement type.")
   AS2: "AS2",
+
   @doc("Represents an X12 agreement type.")
   X12: "X12",
+
   @doc("Represents an Edifact agreement type.")
   Edifact: "Edifact",
 }
@@ -749,14 +1020,19 @@ union AgreementType {
 @doc("The segment terminator suffix.")
 union SegmentTerminatorSuffix {
   string,
+
   @doc("Represents a not specified segment terminator suffix.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a none segment terminator suffix.")
   None: "None",
+
   @doc("Represents a CR segment terminator suffix.")
   CR: "CR",
+
   @doc("Represents a LF segment terminator suffix.")
   LF: "LF",
+
   @doc("Represents a CRLF segment terminator suffix.")
   CRLF: "CRLF",
 }
@@ -764,10 +1040,13 @@ union SegmentTerminatorSuffix {
 @doc("The edifact decimal indicator.")
 union EdifactDecimalIndicator {
   string,
+
   @doc("Represents a not specified edifact decimal indicator.")
   NotSpecified: "NotSpecified",
+
   @doc("Represents a comma edifact decimal indicator.")
   Comma: "Comma",
+
   @doc("Represents a decimal edifact decimal indicator.")
   Decimal: "Decimal",
 }
@@ -816,10 +1095,11 @@ model WorkflowProperties {
   integrationServiceEnvironment?: ResourceReference;
 
   @doc("The definition.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   definition?: Record<unknown>;
 
-  @doc("The parameters.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The parameters.")
   parameters?: Record<WorkflowParameter>;
 }
 
@@ -882,8 +1162,8 @@ model IpAddressRange {
 
 @doc("AuthenticationPolicy of type Open.")
 model OpenAuthenticationAccessPolicies {
-  @doc("Open authentication policies.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("Open authentication policies.")
   policies?: Record<OpenAuthenticationAccessPolicy>;
 }
 
@@ -934,9 +1214,11 @@ model WorkflowParameter {
   @doc("The type.")
   type?: ParameterType;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("The value.")
   value?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("The metadata.")
   metadata?: Record<unknown>;
 
@@ -1013,8 +1295,9 @@ model WorkflowTriggerListCallbackUrlQueries {
   se?: string;
 }
 
-@doc("The workflow reference.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+@doc("The workflow reference.")
 model WorkflowReference extends ResourceReference {}
 
 @doc("The access key regenerate action content.")
@@ -1063,11 +1346,12 @@ model WorkflowVersionProperties {
   @doc("The integration account.")
   integrationAccount?: ResourceReference;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("The definition.")
   definition?: Record<unknown>;
 
-  @doc("The parameters.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The parameters.")
   parameters?: Record<WorkflowParameter>;
 }
 
@@ -1185,8 +1469,8 @@ model SetTriggerStateActionDefinition {
   source: WorkflowTriggerReference;
 }
 
-@doc("The workflow trigger reference.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The workflow trigger reference.")
 model WorkflowTriggerReference extends ResourceReference {
   @doc("The workflow name.")
   flowName?: string;
@@ -1200,7 +1484,7 @@ model WorkflowTriggerHistoryProperties {
   @doc("The provisioning state.")
   @visibility(Lifecycle.Read)
   provisioningState?: WorkflowProvisioningState;
-  
+
   @doc("Gets the start time.")
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -1224,6 +1508,7 @@ model WorkflowTriggerHistoryProperties {
   @visibility(Lifecycle.Read)
   code?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("Gets the error.")
   @visibility(Lifecycle.Read)
   error?: Record<unknown>;
@@ -1275,9 +1560,9 @@ model ContentLink {
   @visibility(Lifecycle.Read)
   contentHash?: ContentHash;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("The metadata.")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   metadata?: Record<unknown>;
 }
 
@@ -1321,6 +1606,7 @@ model WorkflowRunProperties {
 
   @doc("Gets the error.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   error?: Record<unknown>;
 
   @doc("Gets the correlation id.")
@@ -1338,9 +1624,9 @@ model WorkflowRunProperties {
   @visibility(Lifecycle.Read)
   trigger?: WorkflowRunTrigger;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("Gets the outputs.")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   outputs?: Record<WorkflowOutputParameter>;
 
   @doc("Gets the response of the flow run.")
@@ -1354,18 +1640,18 @@ model WorkflowRunTrigger {
   @visibility(Lifecycle.Read)
   name?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("Gets the inputs.")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   inputs?: Record<unknown>;
 
   @doc("Gets the link to inputs.")
   @visibility(Lifecycle.Read)
   inputsLink?: ContentLink;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("Gets the outputs.")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   outputs?: Record<unknown>;
 
   @doc("Gets the link to outputs.")
@@ -1402,21 +1688,23 @@ model WorkflowRunTrigger {
   @visibility(Lifecycle.Read)
   status?: WorkflowStatus;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("Gets the error.")
   @visibility(Lifecycle.Read)
   error?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("Gets the tracked properties.")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   trackedProperties?: Record<unknown>;
 }
 
-@doc("The workflow output parameter.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The workflow output parameter.")
 model WorkflowOutputParameter extends WorkflowParameter {
   @doc("Gets the error.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   error?: Record<unknown>;
 }
 
@@ -1446,6 +1734,7 @@ model WorkflowRunActionProperties {
 
   @doc("Gets the error.")
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   error?: Record<unknown>;
 
   @doc("Gets the tracking id.")
@@ -1463,9 +1752,9 @@ model WorkflowRunActionProperties {
   @visibility(Lifecycle.Read)
   outputsLink?: ContentLink;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("Gets the tracked properties.")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   trackedProperties?: Record<unknown>;
 
   @doc("Gets the retry histories.")
@@ -1473,8 +1762,8 @@ model WorkflowRunActionProperties {
   retryHistory?: RetryHistory[];
 }
 
-@doc("The workflow run action correlation properties.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The workflow run action correlation properties.")
 model RunActionCorrelation extends RunCorrelation {
   @doc("The action tracking identifier.")
   actionTrackingId?: string;
@@ -1521,8 +1810,8 @@ model ExpressionTraces {
   inputs?: ExpressionRoot[];
 }
 
-@doc("The expression root.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The expression root.")
 model ExpressionRoot extends Expression {
   @doc("The path.")
   path?: string;
@@ -1533,19 +1822,20 @@ model Expression {
   @doc("The text.")
   text?: string;
 
-  @doc("Anything")
-  value?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The expression value")
+  value?: Record<unknown>;
 
   @doc("The sub expressions.")
   @OpenAPI.extension("x-ms-identifiers", #[])
   subexpressions?: Expression[];
-  
+
   @doc("The azure resource error info.")
   error?: AzureResourceErrorInfo;
 }
 
-@doc("The error info.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The error info.")
 model AzureResourceErrorInfo extends ErrorInfo {
   @doc("The error message.")
   message: string;
@@ -1565,8 +1855,8 @@ model ErrorInfo {
 model WorkflowRunActionRepetitionDefinitionCollection
   is Azure.Core.Page<WorkflowRunActionRepetitionDefinition>;
 
-@doc("The workflow run action repetition properties definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The workflow run action repetition properties definition.")
 model WorkflowRunActionRepetitionProperties extends OperationResult {
   @doc("The provisioning state.")
   @visibility(Lifecycle.Read)
@@ -1586,13 +1876,14 @@ model RepetitionIndex {
   itemIndex: int32;
 }
 
-@doc("The operation result definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The operation result definition.")
 model OperationResult extends OperationResultProperties {
   @doc("Gets the tracking id.")
   @visibility(Lifecycle.Read)
   trackingId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("Gets the inputs.")
   @visibility(Lifecycle.Read)
   inputs?: Record<unknown>;
@@ -1601,6 +1892,7 @@ model OperationResult extends OperationResultProperties {
   @visibility(Lifecycle.Read)
   inputsLink?: ContentLink;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("Gets the outputs.")
   @visibility(Lifecycle.Read)
   outputs?: Record<unknown>;
@@ -1609,14 +1901,20 @@ model OperationResult extends OperationResultProperties {
   @visibility(Lifecycle.Read)
   outputsLink?: ContentLink;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("Gets the tracked properties.")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   trackedProperties?: Record<unknown>;
 
   @doc("Gets the retry histories.")
   @OpenAPI.extension("x-ms-identifiers", #[])
   retryHistory?: RetryHistory[];
+
+  @doc("Gets flow run execution mode.")
+  executionMode?: FlowRunExecutionMode;
+
+  @doc("Indicates whether operation can be resubmitted.")
+  canResubmit?: boolean;
 
   @doc("Gets the iteration count.")
   iterationCount?: int32;
@@ -1641,8 +1939,9 @@ model OperationResultProperties {
   @doc("The workflow scope repetition code.")
   code?: string;
 
-  @doc("Anything")
-  error?: unknown;
+  @doc("The error")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  error?: Record<unknown>;
 }
 
 @doc("The request history.")
@@ -1668,8 +1967,8 @@ model RequestHistoryProperties {
 
 @doc("A request.")
 model Request {
-  @doc("A list of all the headers attached to the request.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("A list of all the headers attached to the request.")
   headers?: Record<unknown>;
 
   @doc("The destination for the request.")
@@ -1681,8 +1980,8 @@ model Request {
 
 @doc("A response.")
 model Response {
-  @doc("A list of all the headers attached to the response.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("A list of all the headers attached to the response.")
   headers?: Record<unknown>;
 
   @doc("The status code of the response.")
@@ -1719,8 +2018,8 @@ model AssemblyCollection {
   value?: AssemblyDefinition[];
 }
 
-@doc("The assembly properties definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The assembly properties definition.")
 model AssemblyProperties extends ArtifactContentPropertiesDefinition {
   @doc("The provisioning state.")
   @visibility(Lifecycle.Read)
@@ -1739,11 +2038,12 @@ model AssemblyProperties extends ArtifactContentPropertiesDefinition {
   assemblyPublicKeyToken?: string;
 }
 
-@doc("The artifact content properties definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The artifact content properties definition.")
 model ArtifactContentPropertiesDefinition extends ArtifactProperties {
-  @doc("Anything")
-  content?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The artifact content")
+  content?: Record<unknown>;
 
   @doc("The content type.")
   contentType?: string;
@@ -1762,8 +2062,9 @@ model ArtifactProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   changedTime?: utcDateTime;
 
-  @doc("Anything")
-  metadata?: unknown;
+  @doc("The metadata")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  metadata?: Record<unknown>;
 }
 
 @doc("A collection of batch configurations.")
@@ -1774,8 +2075,8 @@ model BatchConfigurationCollection {
   value?: BatchConfiguration[];
 }
 
-@doc("The batch configuration properties definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The batch configuration properties definition.")
 model BatchConfigurationProperties extends ArtifactProperties {
   @doc("The provisioning state.")
   @visibility(Lifecycle.Read)
@@ -1815,8 +2116,9 @@ model ListKeyVaultKeysDefinition {
   skipToken?: string;
 }
 
-@doc("The key vault reference.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+@doc("The key vault reference.")
 model KeyVaultReference extends ResourceReference {}
 
 @doc("Collection of key vault keys.")
@@ -1877,8 +2179,8 @@ model TrackingEvent {
   @doc("The record type.")
   recordType: TrackingRecordType;
 
-  @doc("The record.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The record.")
   record?: Record<unknown>;
 
   @doc("The error.")
@@ -1922,8 +2224,8 @@ model IntegrationAccountSchemaProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   changedTime?: utcDateTime;
 
-  @doc("The metadata.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The metadata.")
   metadata?: Record<unknown>;
 
   @doc("The content.")
@@ -1969,8 +2271,8 @@ model IntegrationAccountMapProperties {
   @visibility(Lifecycle.Read)
   contentLink?: ContentLink;
 
-  @doc("The metadata.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The metadata.")
   metadata?: Record<unknown>;
 }
 
@@ -1999,8 +2301,8 @@ model IntegrationAccountPartnerProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   changedTime?: utcDateTime;
 
-  @doc("The metadata.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The metadata.")
   metadata?: Record<unknown>;
 
   @doc("The partner content.")
@@ -2045,8 +2347,8 @@ model IntegrationAccountAgreementProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   changedTime?: utcDateTime;
 
-  @doc("The metadata.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The metadata.")
   metadata?: Record<unknown>;
 
   @doc("The agreement type.")
@@ -3147,8 +3449,8 @@ model IntegrationAccountCertificateProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   changedTime?: utcDateTime;
 
-  @doc("The metadata.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The metadata.")
   metadata?: Record<unknown>;
 
   @doc("The key details in the key vault.")
@@ -3200,8 +3502,8 @@ model IntegrationAccountSessionProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   changedTime?: utcDateTime;
 
-  @doc("The session content.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The session content.")
   content?: Record<unknown>;
 }
 
@@ -3378,14 +3680,14 @@ model ExtendedErrorInfo {
   @OpenAPI.extension("x-ms-identifiers", #["code"])
   details?: ExtendedErrorInfo[];
 
-  @doc("The inner error.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   // FIXME: use built in arm error
+  @doc("The inner error.")
   innerError?: Record<unknown>;
 }
 
-@doc("The integration service environment managed api properties.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The integration service environment managed api properties.")
 model IntegrationServiceEnvironmentManagedApiProperties
   extends ApiResourceProperties {
   @doc("The integration service environment managed api deployment parameters.")
@@ -3400,9 +3702,9 @@ model IntegrationServiceEnvironmentManagedApiDeploymentParameters {
 
 @doc("The API resource properties.")
 model ApiResourceProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @doc("The connection parameters.")
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   connectionParameters?: Record<Record<unknown>>;
 
   @doc("The metadata.")
@@ -3460,8 +3762,8 @@ model ApiResourceMetadata {
   @doc("The hide key.")
   hideKey?: string;
 
-  @doc("The tags.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The tags.")
   tags?: Record<string>;
 
   @doc("The api type.")
@@ -3580,7 +3882,7 @@ model ApiOperationPropertiesDefinition {
   @doc("The provisioning state.")
   @visibility(Lifecycle.Read)
   provisioningState?: WorkflowProvisioningState;
-  
+
   @doc("The summary of the api operation.")
   summary?: string;
 
@@ -3608,8 +3910,8 @@ model ApiOperationPropertiesDefinition {
   @doc("The operation inputs definition schema.")
   inputsDefinition?: SwaggerSchema;
 
-  @doc("The operation responses definition schemas.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The operation responses definition schemas.")
   responsesDefinition?: Record<SwaggerSchema>;
 
   @doc("Indicates whether the API operation is webhook or not.")
@@ -3631,8 +3933,8 @@ model ApiOperationAnnotation {
   revision?: int32;
 }
 
-@doc("The Api reference.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The Api reference.")
 model ApiReference extends ResourceReference {
   @doc("The display name of the api.")
   displayName?: string;
@@ -3643,8 +3945,8 @@ model ApiReference extends ResourceReference {
   @doc("The icon uri of the api.")
   iconUri?: string;
 
-  @doc("The swagger of the api.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The swagger of the api.")
   swagger?: Record<unknown>;
 
   @doc("The brand color of the api.")
@@ -3671,12 +3973,12 @@ model SwaggerSchema {
   @doc("The items schema.")
   items?: SwaggerSchema;
 
-  @doc("The object properties")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The object properties")
   properties?: Record<SwaggerSchema>;
 
-  @doc("The additional properties.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The additional properties.")
   additionalProperties?: Record<unknown>;
 
   @doc("The object required properties.")
@@ -3704,8 +4006,8 @@ model SwaggerSchema {
   @doc("The external documentation.")
   externalDocs?: SwaggerExternalDocumentation;
 
-  @doc("The example value.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The example value.")
   example?: Record<unknown>;
 
   @doc("Indicates the notification url extension. If this is set, the property's value should be a callback url for a webhook.")
@@ -3741,8 +4043,8 @@ model SwaggerXml {
   @doc("Indicates whether the array elements are wrapped in a container element.")
   wrapped?: boolean;
 
-  @doc("The vendor extensions.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The vendor extensions.")
   extensions?: Record<Record<unknown>>;
 }
 
@@ -3754,8 +4056,8 @@ model SwaggerExternalDocumentation {
   @doc("The documentation Uri.")
   uri?: string;
 
-  @doc("The vendor extensions.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The vendor extensions.")
   extensions?: Record<Record<unknown>>;
 }
 
@@ -3767,8 +4069,8 @@ model SwaggerCustomDynamicSchema {
   @doc("Json pointer to the dynamic schema on the response body.")
   valuePath?: string;
 
-  @doc("The operation parameters.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The operation parameters.")
   parameters?: Record<Record<unknown>>;
 }
 
@@ -3780,8 +4082,8 @@ model SwaggerCustomDynamicProperties {
   @doc("Json pointer to the dynamic schema on the response body.")
   valuePath?: string;
 
-  @doc("The operation parameters.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The operation parameters.")
   parameters?: Record<SwaggerCustomDynamicProperties>;
 }
 
@@ -3802,8 +4104,8 @@ model SwaggerCustomDynamicList {
   @doc("The path to an item property which defines the display name of the item.")
   itemTitlePath?: string;
 
-  @doc("The parameters.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The parameters.")
   parameters?: Record<SwaggerCustomDynamicProperties>;
 }
 
@@ -3851,8 +4153,8 @@ model SwaggerCustomDynamicTreeCommand {
   @doc("The path to an item property which defines the display name of the item.")
   selectableFilter?: string;
 
-  @doc("Dictionary of <SwaggerCustomDynamicTreeParameter>")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("Dictionary of <SwaggerCustomDynamicTreeParameter>")
   parameters?: Record<SwaggerCustomDynamicTreeParameter>;
 }
 
@@ -3861,8 +4163,8 @@ model SwaggerCustomDynamicTreeParameter {
   @doc("Gets or sets a path to a property in the currently selected item to pass as a value to a parameter for the given operation.")
   selectedItemValuePath?: string;
 
-  @doc("The parameter value.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("The parameter value.")
   value?: Record<unknown>;
 
   @doc("The parameter reference.")
@@ -3911,8 +4213,8 @@ model ManagedApiListResult {
   nextLink?: string;
 }
 
-@doc("The managed api definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("The managed api definition.")
 model ManagedApi extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("The api resource properties.")
   properties?: ApiResourceProperties;

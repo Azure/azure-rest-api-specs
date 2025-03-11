@@ -7,14 +7,12 @@ import "./WorkflowRunActionRepetitionDefinition.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Logic;
+
 @doc("The request history.")
 @parentResource(WorkflowRunActionRepetitionDefinition)
-model RequestHistory
-  is Azure.ResourceManager.TrackedResource<RequestHistoryProperties> {
+model RequestHistory is ProxyResource<RequestHistoryProperties> {
   ...ResourceNameParameter<
     Resource = RequestHistory,
     KeyName = "requestHistoryName",

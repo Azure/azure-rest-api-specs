@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "integrationAccountName": "testIntegrationAccount",
+    "logTrackingEvents": {
+      "events": [
+        {
+          "error": {
+            "code": "NotFound",
+            "message": "Some error occurred"
+          },
+          "eventLevel": "Informational",
+          "eventTime": "2016-08-05T01:54:49.505567Z",
+          "record": {
+            "agreementProperties": {
+              "agreementName": "testAgreement",
+              "as2From": "testas2from",
+              "as2To": "testas2to",
+              "receiverPartnerName": "testPartner2",
+              "senderPartnerName": "testPartner1"
+            },
+            "messageProperties": {
+              "IsMessageEncrypted": false,
+              "IsMessageSigned": false,
+              "correlationMessageId": "Unique message identifier",
+              "direction": "Receive",
+              "dispositionType": "received-success",
+              "fileName": "test",
+              "isMdnExpected": true,
+              "isMessageCompressed": false,
+              "isMessageFailed": false,
+              "isNrrEnabled": true,
+              "mdnType": "Async",
+              "messageId": "12345"
+            }
+          },
+          "recordType": "AS2Message"
+        }
+      ],
+      "sourceType": "Microsoft.Logic/workflows"
+    },
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "IntegrationAccounts_LogTrackingEvents",
+  "title": "Log a tracked event"
+}

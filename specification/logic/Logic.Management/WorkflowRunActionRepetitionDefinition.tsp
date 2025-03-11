@@ -14,10 +14,7 @@ namespace Microsoft.Logic;
 @doc("The workflow run action repetition definition.")
 @parentResource(WorkflowRunAction)
 model WorkflowRunActionRepetitionDefinition
-  is Azure.ResourceManager.TrackedResource<
-    WorkflowRunActionRepetitionProperties,
-    false
-  > {
+  is Azure.ResourceManager.ProxyResource<WorkflowRunActionRepetitionProperties> {
   ...ResourceNameParameter<
     Resource = WorkflowRunActionRepetitionDefinition,
     KeyName = "repetitionName",

@@ -13,6 +13,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Workflow.tsp";
+import "./Template.tsp";
 import "./WorkflowVersion.tsp";
 import "./WorkflowTrigger.tsp";
 import "./WorkflowTriggerHistory.tsp";
@@ -40,7 +41,7 @@ using TypeSpec.Versioning;
 @service(#{
   title: "LogicManagementClient"
 })
-@versioned(Versions)
+@versioned(Microsoft.Logic.Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Logic;
 
@@ -51,12 +52,10 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2019_05_01: "2019-05-01",
 
-  // /**
-  //  * The 2025-06-01-preview API version.
-  //  */
-  // @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  // @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  // v2025_06_01_preview: "2025-06-01-preview",
+  @doc("The 2025-06-01-preview API version.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_06_01_preview: "2025-06-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

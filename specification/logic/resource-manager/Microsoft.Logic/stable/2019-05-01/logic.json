@@ -3759,7 +3759,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmTagsProperty"
             }
           }
         ],
@@ -6533,7 +6533,9 @@
       "description": "The artifact content properties definition.",
       "properties": {
         "content": {
-          "description": "Anything"
+          "type": "object",
+          "description": "The artifact content",
+          "additionalProperties": {}
         },
         "contentType": {
           "type": "string",
@@ -6565,7 +6567,9 @@
           "description": "The artifact changed time."
         },
         "metadata": {
-          "description": "Anything"
+          "type": "object",
+          "description": "The metadata",
+          "additionalProperties": {}
         }
       }
     },
@@ -6988,6 +6992,19 @@
           "$ref": "#/definitions/ArtifactContentPropertiesDefinition"
         }
       ]
+    },
+    "Azure.ResourceManager.Foundations.ArmTagsProperty": {
+      "type": "object",
+      "description": "Standard type definition for Azure Resource Manager Tags property.\n\nIt is included in the TrackedResource template definition.The Azure Resource Manager Resource tags.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "AzureResourceErrorInfo": {
       "type": "object",
@@ -8347,7 +8364,9 @@
           "description": "The text."
         },
         "value": {
-          "description": "Anything"
+          "type": "object",
+          "description": "The expression value",
+          "additionalProperties": {}
         },
         "subexpressions": {
           "type": "array",
@@ -8472,6 +8491,36 @@
           "$ref": "#/definitions/FlowEndpoints",
           "description": "The connector endpoints."
         }
+      }
+    },
+    "FlowRunExecutionMode": {
+      "type": "string",
+      "description": "The flow run execution mode.",
+      "enum": [
+        "NotSpecified",
+        "StaticResults",
+        "ResubmittedResults"
+      ],
+      "x-ms-enum": {
+        "name": "FlowRunExecutionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The flow run execution mode is not specified."
+          },
+          {
+            "name": "StaticResults",
+            "value": "StaticResults",
+            "description": "The flow run execution mode is static results."
+          },
+          {
+            "name": "ResubmittedResults",
+            "value": "ResubmittedResults",
+            "description": "The flow run execution mode is resubmitted results."
+          }
+        ]
       }
     },
     "GenerateUpgradedDefinitionParameters": {
@@ -10101,6 +10150,14 @@
           },
           "x-ms-identifiers": []
         },
+        "executionMode": {
+          "$ref": "#/definitions/FlowRunExecutionMode",
+          "description": "Gets flow run execution mode."
+        },
+        "canResubmit": {
+          "type": "boolean",
+          "description": "Indicates whether operation can be resubmitted."
+        },
         "iterationCount": {
           "type": "integer",
           "format": "int32",
@@ -10140,7 +10197,9 @@
           "description": "The workflow scope repetition code."
         },
         "error": {
-          "description": "Anything"
+          "type": "object",
+          "description": "The error",
+          "additionalProperties": {}
         }
       }
     },
@@ -10422,7 +10481,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -11904,12 +11963,9 @@
           "description": "The workflow run action repetition properties definition."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },

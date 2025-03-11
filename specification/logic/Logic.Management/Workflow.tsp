@@ -6,6 +6,7 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -29,8 +30,7 @@ interface Workflows {
   createOrUpdate is ArmResourceCreateOrReplaceSync<Workflow>;
 
   @doc("Updates a workflow.")
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Workflow, PatchModel = {}>;
+  update is ArmCustomPatchSync<Workflow, PatchModel = { ...ArmTagsProperty }>;
 
   @doc("Deletes a workflow.")
   delete is ArmResourceDeleteSync<Workflow>;
