@@ -187,7 +187,7 @@ const tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
 const newTsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "generateMetadata",
+  "generate-metadata",
   true,
   false,
   [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
