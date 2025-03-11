@@ -1,0 +1,78 @@
+{
+  "title": "CollectionAssets_Create",
+  "operationId": "CollectionAssets_Create",
+  "parameters": {
+    "api-version": "2024-01-31-preview",
+    "collectionId": "test-collection-d45537668d06",
+    "resource": "--0e1b7c6957c94afb66088fad21cf1052\r\nContent-Disposition: form-data; name=\"data\"\r\n\r\n{\"key\": \"visual\", \"type\": \"image/png\", \"roles\": [\"visual\", \"transaction\"], \"title\": \"visual\", \"description\": \"This is an example upload\"}\r\n--0e1b7c6957c94afb66088fad21cf1052\r\nContent-Disposition: form-data; name=\"file\"; filename=\"text.txt\"\r\nContent-Type: text/plain\r\n\r\nThis is some text\r\n--0e1b7c6957c94afb66088fad21cf1052--\r\n"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "type": "Collection",
+        "id": "test-collection-b07e7de4387b",
+        "stac_version": "1.0.0",
+        "description": "A collection for integration tests purposes",
+        "links": [
+          {
+            "rel": "items",
+            "type": "application/geo+json",
+            "href": "https://devdev3.cmbtazhseqhgeudd.uksouth.geocatalog.ppe.spatio.azure-test.net/api/collections/test-collection-b07e7de4387b/items"
+          },
+          {
+            "rel": "parent",
+            "type": "application/json",
+            "href": "https://devdev3.cmbtazhseqhgeudd.uksouth.geocatalog.ppe.spatio.azure-test.net/api/"
+          },
+          {
+            "rel": "root",
+            "type": "application/json",
+            "href": "https://devdev3.cmbtazhseqhgeudd.uksouth.geocatalog.ppe.spatio.azure-test.net/api/"
+          },
+          {
+            "rel": "self",
+            "type": "application/json",
+            "href": "https://devdev3.cmbtazhseqhgeudd.uksouth.geocatalog.ppe.spatio.azure-test.net/api/collections/test-collection-b07e7de4387b"
+          }
+        ],
+        "msft:_created": "2024-11-06T22:41:26.982611Z",
+        "msft:_updated": "2024-11-06T22:41:27.735413Z",
+        "title": "Test Collection b07e7de4387b",
+        "extent": {
+          "spatial": {
+            "bbox": [
+              [
+                -180,
+                -90,
+                180,
+                90
+              ]
+            ]
+          },
+          "temporal": {
+            "interval": [
+              [
+                "2020-01-01T00:00:00Z",
+                null
+              ]
+            ]
+          }
+        },
+        "license": "CC-BY-4.0",
+        "assets": {
+          "visual": {
+            "href": "https://ysuxzldatasa.blob.core.windows.net/test-collection-b07e7de4387b-61cc3d6e/collection-assets/visual/text.txt",
+            "type": "image/png",
+            "title": "visual",
+            "description": "This is an example upload",
+            "roles": [
+              "visual",
+              "transaction"
+            ]
+          }
+        }
+      }
+    },
+    "200": {}
+  }
+}
