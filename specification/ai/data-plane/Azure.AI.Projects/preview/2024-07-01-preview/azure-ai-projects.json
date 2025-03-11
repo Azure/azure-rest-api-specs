@@ -3402,6 +3402,35 @@
     }
   },
   "definitions": {
+    "AOAIModelConfig": {
+      "type": "object",
+      "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
+      "properties": {
+        "azureEndpoint": {
+          "type": "string",
+          "description": "Endpoint URL for AOAI model."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "API Key for AOAI model."
+        },
+        "azureDeployment": {
+          "type": "string",
+          "description": "Deployment name for AOAI model."
+        }
+      },
+      "required": [
+        "azureEndpoint",
+        "apiKey",
+        "azureDeployment"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetModelConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "AOAI"
+    },
     "Agents.Agent": {
       "type": "object",
       "description": "Represents an agent that can call the model and use tools.",
@@ -9135,6 +9164,14 @@
             "create"
           ]
         },
+        "target": {
+          "$ref": "#/definitions/EvaluationTarget",
+          "description": "Evaluation target specifying the model config and parameters",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "displayName": {
           "type": "string",
           "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
@@ -9266,6 +9303,29 @@
         "data",
         "evaluators",
         "trigger"
+      ]
+    },
+    "EvaluationTarget": {
+      "type": "object",
+      "description": "Target for the evaluation process.",
+      "properties": {
+        "systemMessage": {
+          "type": "string",
+          "description": "System message related to the evaluation target."
+        },
+        "modelConfig": {
+          "$ref": "#/definitions/TargetModelConfig",
+          "description": "Model configuration for the evaluation."
+        },
+        "modelParams": {
+          "type": "object",
+          "description": "A dictionary of parameters for the model.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "systemMessage",
+        "modelConfig"
       ]
     },
     "EvaluationUpdate": {
@@ -9532,6 +9592,30 @@
         "value"
       ]
     },
+    "MAASModelConfig": {
+      "type": "object",
+      "description": "MaaS model configuration. The API version would be selected by the service for querying the model.",
+      "properties": {
+        "azureEndpoint": {
+          "type": "string",
+          "description": "Endpoint URL for MAAS model."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "API Key for MAAS model."
+        }
+      },
+      "required": [
+        "azureEndpoint",
+        "apiKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetModelConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "MAAS"
+    },
     "PagedEvaluation": {
       "type": "object",
       "description": "Paged collection of Evaluation items",
@@ -9672,6 +9756,20 @@
           "readOnly": true
         }
       }
+    },
+    "TargetModelConfig": {
+      "type": "object",
+      "description": "Abstract class for model configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the model configuration."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
     },
     "Trigger": {
       "type": "object",
