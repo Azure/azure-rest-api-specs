@@ -23,10 +23,10 @@ using Azure.ClientGenerator.Core;
 @service(#{ title: "Azure AgriculturePlatform Data Platform Service" })
 @versioned(AgriculturePlatform.Versions)
 @server(
-  "{$host}",
+  "{endpoint}",
   "APIs documentation for Microsoft.AgriculturePlatform DataPlane Service.",
   {
-    $host: string,
+    endpoint: string,
   }
 )
 namespace Microsoft.AgriculturePlatform;
