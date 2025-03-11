@@ -40,6 +40,9 @@ input-file:
 directive:
   - suppress:
       - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
+    - suppress: AvoidAdditionalProperties
+      where: $.definitions.MysqlServerProperties.properties.labels
+      reason: Existing API.
 suppressions:
   - code: PathResourceTypeNameCamelCase
     reason: MySQL is a technical term and cannot follow camel case rule.
@@ -62,10 +65,6 @@ suppressions:
     reason: Existing API
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/refresh"].post
-  - code: AvoidAdditionalProperties
-    reason: Existing API
-    where:
-      - $.definitions.MysqlServerProperties.properties.labels
 ```
 
 ---
