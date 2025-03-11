@@ -39,7 +39,7 @@ input-file:
   - Microsoft.MySQLDiscovery/preview/2024-09-30-preview/mysqldiscovery.json
 directive:
   - suppress:
-    - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
+      - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
 suppressions:
   - code: PathResourceTypeNameCamelCase
     reason: MySQL is a technical term and cannot follow camel case rule.
@@ -58,7 +58,7 @@ suppressions:
     reason: MySQL is a technical term and cannot follow camel case rule.
     where:
       - $.definitions.MysqlServerProperties.properties.MysqlVersion
-   - code: PostResponseCodes
+  - code: PostResponseCodes
     reason: Existing API
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MySQLDiscovery/MySQLSites/{siteName}/refresh"].post
