@@ -21,7 +21,14 @@ options:
   "@typespec/openapi3":
     emitter-output-dir: "{project-root}/../"
     output-file: "{output-folder-base}/data-plane/OpenApi3/Microsoft.OnlineExperimentation/preview/{version}/onlineexperimentation.json"
+  "@azure-tools/typespec-go":
+    generate-fakes: true
+    inject-spans: true
+    service-dir: "sdk/onlineexperimentation"
+    package-dir: "azonlineexperimentation"
   "@azure-tools/typespec-python":
+    generate-test: true
+    generate-sample: true
     package-dir: "azure-analytics-onlineexperimentation"
     package-name: "{package-dir}"
     package-mode: dataplane
