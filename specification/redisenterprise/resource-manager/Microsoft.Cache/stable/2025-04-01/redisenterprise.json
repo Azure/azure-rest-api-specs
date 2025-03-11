@@ -1545,7 +1545,7 @@
         "description": "Forcibly recreates an existing database on the specified cluster, and rejoins it to an existing replication group. **IMPORTANT NOTE:** All data in this database will be discarded, and the database will temporarily be unavailable while rejoining the replication group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -1588,7 +1588,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -2587,7 +2587,7 @@
     },
     "ForceUnlinkParameters": {
       "title": "Forcibly unlink another database from this database.",
-      "description": "Parameters for a redis enterprise active geo-replication force unlink operation.",
+      "description": "Parameters for a Redis Enterprise Active Geo Replication Force Unlink operation.",
       "type": "object",
       "properties": {
         "ids": {
@@ -2636,16 +2636,16 @@
   "parameters": {
     "ClusterNameParameter": {
       "name": "clusterName",
-      "pattern": "^[A-Za-z0-9]{1,60}$",
+      "pattern": "^(?=.{1,60}$)[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Redis Enterprise cluster.",
+      "description": "The name of the Redis Enterprise cluster. Name must be 1-60 characters long. Allowed characters(A-Z, a-z, 0-9) and hyphen(-). There can be no leading nor trailing nor consecutive hyphens",
       "x-ms-parameter-location": "method"
     },
     "DatabaseNameParameter": {
       "name": "databaseName",
-      "pattern": "^[A-Za-z0-9]{1,60}$",
+      "pattern": "^(?=.{1,60}$)[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
       "in": "path",
       "required": true,
       "type": "string",
