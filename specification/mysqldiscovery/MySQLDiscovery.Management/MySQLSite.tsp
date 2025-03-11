@@ -85,7 +85,7 @@ interface MySQLSites {
 @@minLength(MySQLSite.name, 3);
 @@doc(MySQLSite.name, "The name of Site");
 @@doc(MySQLSite.properties, "Resource properties.");
-@@doc(MySQLSites.createOrUpdate::parameters.resource,
+@@doc(MySQLSites.createOrUpdate::parameters.body,
   "The machines to add to the assessment"
 );
 @@doc(MySQLSites.update::parameters.properties, "Clouds patch payload.");

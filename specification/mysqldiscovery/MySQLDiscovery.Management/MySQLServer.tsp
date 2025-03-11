@@ -73,7 +73,7 @@ interface MySQLServers {
 @@minLength(MySQLServer.name, 3);
 @@doc(MySQLServer.name, "The name of Server");
 @@doc(MySQLServer.properties, "Resource properties.");
-@@doc(MySQLServers.createOrUpdate::parameters.resource,
+@@doc(MySQLServers.createOrUpdate::parameters.body,
   "The machines to add to the assessment"
 );
 @@doc(MySQLServers.update::parameters.properties, "Clouds patch payload.");
