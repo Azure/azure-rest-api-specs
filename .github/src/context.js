@@ -12,7 +12,9 @@ import { PER_PAGE_MAX } from "./github.js";
  * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number: number, run_id: number }>}
  */
 export async function extractInputs(github, context, core) {
-  core.info(`extractInputs(${context.eventName}, ${context.payload.action})`);
+  core.info(
+    `extractInputs(${context.eventName}, ${context.payload.action}, ${context.payload.workflow_run?.event})`,
+  );
 
   core.isDebug() && core.debug(JSON.stringify(context));
 
