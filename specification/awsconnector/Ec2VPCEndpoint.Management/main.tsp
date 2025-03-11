@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -75,14 +73,12 @@ model AwsEc2VPCEndpointProperties {
   creationTimestamp?: string;
 
   @doc("Property dnsEntries")
-  @extension("x-ms-identifiers", [])
   dnsEntries?: string[];
 
   @doc("Property id")
   id?: string;
 
   @doc("Property networkInterfaceIds")
-  @extension("x-ms-identifiers", [])
   networkInterfaceIds?: string[];
 
   @doc("An endpoint policy, which controls access to the service from the VPC. The default endpoint policy allows full access to the service. Endpoint policies are supported only for gateway and interface endpoints. For CloudFormation templates in YAML, you can provide the policy in JSON or YAML format. CFNlong converts YAML policies to JSON format before calling the API to create or modify the VPC endpoint.")
@@ -92,18 +88,15 @@ model AwsEc2VPCEndpointProperties {
   privateDnsEnabled?: boolean;
 
   @doc("The IDs of the route tables. Routing is supported only for gateway endpoints.")
-  @extension("x-ms-identifiers", [])
   routeTableIds?: string[];
 
   @doc("The IDs of the security groups to associate with the endpoint network interfaces. If this parameter is not specified, we use the default security group for the VPC. Security groups are supported only for interface endpoints.")
-  @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
   @doc("The name of the endpoint service.")
   serviceName?: string;
 
   @doc("The IDs of the subnets in which to create endpoint network interfaces. You must specify this property for an interface endpoint or a Gateway Load Balancer endpoint. You can't specify this property for a gateway endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.")
-  @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 
   @doc("The type of endpoint. Default: Gateway")
