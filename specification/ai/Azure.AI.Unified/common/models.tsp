@@ -248,7 +248,7 @@ alias AssetBase = {
   @doc("System data of the resource")
   @visibility("read")
   systemData?: SystemData;
-}
+};
 
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &

@@ -21,7 +21,7 @@ alias DeploymentOperations = Azure.Core.ResourceOperations<DeploymentServiceTrai
 
 interface Deployments {
   @doc("Get a deployed model.")
-  get is DeploymentOperations.ResourceRead<Model>;
+  get is DeploymentOperations.ResourceRead<Deployment>;
 
   @doc("List all deployed models in the project")
   list is DeploymentOperations.ResourceList<

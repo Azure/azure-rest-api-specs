@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./models.tsp";
 import "./chat_completions.tsp";
 import "./embeddings.tsp";
 import "./image_embeddings.tsp";
