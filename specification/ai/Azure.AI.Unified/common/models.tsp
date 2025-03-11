@@ -224,7 +224,7 @@ model OutputPathAssetReference extends AssetReferenceBase {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Base definition for an asset.")
-model AssetBase  {
+model AssetBase {
   @doc("Asset stage")
   @visibility("read", "create", "update")
   stage?: string;
@@ -260,69 +260,74 @@ alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Ht
 alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
   T;
 
-  alias AdditionalInferenceRequestHeaders = {
-    @doc("""
-      Controls what happens if extra parameters, undefined by the REST API,
-      are passed in the JSON request payload.
-      This sets the HTTP request header `extra-parameters`.
-      """)
-    @header("extra-parameters")
-    extra_params?: ExtraParameters;
-  };
-  
-  @doc("Controls what happens if extra parameters, undefined by the REST API, are passed in the JSON request payload.")
-  union ExtraParameters {
-    string,
-  
-    @doc("The service will error if it detected extra parameters in the request payload. This is the service default.")
-    error: "error",
-  
-    @doc("The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model.")
-    drop: "drop",
-  
-    @doc("The service will pass extra parameters to the back-end AI model.")
-    pass_through: "pass-through",
-  }
+alias AdditionalInferenceRequestHeaders = {
+  @doc("""
+    Controls what happens if extra parameters, undefined by the REST API,
+    are passed in the JSON request payload.
+    This sets the HTTP request header `extra-parameters`.
+    """)
+  @header("extra-parameters")
+  extra_params?: ExtraParameters;
+};
 
-  // Pending upload spec
+@doc("Controls what happens if extra parameters, undefined by the REST API, are passed in the JSON request payload.")
+union ExtraParameters {
+  string,
 
-  // Define a URI alias for clarity.
-  alias Uri = string;
-  
-  enum PendingUploadType {
-    None,
-    TemporaryBlobReference,
-  }
-  
-  enum PendingUploadCredentialType {
-    SAS,
-  }
-  
-  model PendingUploadRequest {
-    /// If PendingUploadId is not provided, a random guid will be used.
-    pendingUploadId?: string;
-    /// TemporaryBlobReference is the only supported type.
-    pendingUploadType: PendingUploadType.TemporaryBlobReference;
-  }
-  
-  model PendingUploadResponse {
-    /// Container-level read, write, list SAS.
-    blobReferenceForConsumption: BlobReferenceForConsumption;
-    /// ID for this upload request.
-    pendingUploadId: string;
-    /// TemporaryBlobReference is the only supported type.
-    pendingUploadType: PendingUploadType.TemporaryBlobReference;
-  }
-  
-  model BlobReferenceForConsumption {
-    /// Blob URI path for client to upload data.
-    /// Example: https://blob.windows.core.net/Container/Path
-    blobUri: Uri;
-    /// ARM ID of the storage account to use.
-    storageAccountArmId: string;
-    /// Credential info to access the storage account.
-    credential: SasCredential;
-  }
+  @doc("The service will error if it detected extra parameters in the request payload. This is the service default.")
+  error: "error",
+
+  @doc("The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model.")
+  drop: "drop",
+
+  @doc("The service will pass extra parameters to the back-end AI model.")
+  pass_through: "pass-through",
+}
+
+// Pending upload spec
+
+// Define a URI alias for clarity.
+alias Uri = string;
+
+enum PendingUploadType {
+  None,
+  TemporaryBlobReference,
+}
+
+enum PendingUploadCredentialType {
+  SAS,
+}
+
+model PendingUploadRequest {
+  /// If PendingUploadId is not provided, a random guid will be used.
+  pendingUploadId?: string;
+
+  /// TemporaryBlobReference is the only supported type.
+  pendingUploadType: PendingUploadType.TemporaryBlobReference;
+}
+
+model PendingUploadResponse {
+  /// Container-level read, write, list SAS.
+  blobReferenceForConsumption: BlobReferenceForConsumption;
+
+  /// ID for this upload request.
+  pendingUploadId: string;
+
+  /// TemporaryBlobReference is the only supported type.
+  pendingUploadType: PendingUploadType.TemporaryBlobReference;
+}
+
+model BlobReferenceForConsumption {
+  /// Blob URI path for client to upload data.
+  /// Example: https://blob.windows.core.net/Container/Path
+  blobUri: Uri;
+
+  /// ARM ID of the storage account to use.
+  storageAccountArmId: string;
+
+  /// Credential info to access the storage account.
+  credential: SasCredential;
+}
 
 @doc("""
   The definition of a caller-specified function that chat completions may invoke in response to matching user input.

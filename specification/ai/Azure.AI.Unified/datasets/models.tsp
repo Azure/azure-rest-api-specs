@@ -27,7 +27,6 @@ union DatasetType {
   uri_folder: "uri_folder",
 }
 
-
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DatasetVersion Definition")
 @discriminator("datasetType")

@@ -79,7 +79,7 @@ model EmbeddingConfiguration {
   connectionId?: string;
 
   @doc("Deployment name of embedding model")
-  deploymentName: string; 
+  deploymentName: string;
 
   @doc("Embedding field")
   embeddingField: string;
