@@ -108,7 +108,7 @@ model ResourceSku {
    * A list of locations and availability zones in those locations where the SKU is available.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", ["location"])
+  @identifiers(#["location"])
   locationInfo?: ResourceSkuLocationInfo[];
 
   /**

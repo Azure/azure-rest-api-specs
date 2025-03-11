@@ -28,7 +28,7 @@ model VirtualMachineScaleSetVMExtension
    * The location of the extension.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
   /**
@@ -42,7 +42,7 @@ model VirtualMachineScaleSetVMExtension
    * Resource type.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "type")
   extensionType?: string;
 }

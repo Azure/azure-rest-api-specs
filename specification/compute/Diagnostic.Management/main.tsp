@@ -24,7 +24,7 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "existed in ComputeRP"
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
-@service({
+@service(#{
   title: "Azure Compute resource management API.",
 })
 @versioned(Versions)

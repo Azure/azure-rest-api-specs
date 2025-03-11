@@ -25,7 +25,7 @@ model Snapshot is Azure.ResourceManager.TrackedResource<SnapshotProperties> {
    * Unused. Always Null.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedBy?: string;
 
   /**

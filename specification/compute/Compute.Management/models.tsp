@@ -2280,7 +2280,7 @@ model VirtualMachineScaleSetStorageProfile {
   /**
    * Specifies the parameters that are used to add data disks to the virtual machines in the scale set. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
    */
-  @identifiers(#["name", "lun"]])
+  @identifiers(#["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -6261,7 +6261,6 @@ model VirtualMachineCaptureResult extends SubResource {
    * a list of resource items of the captured virtual machine
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   resources?: unknown[];
 }
 
