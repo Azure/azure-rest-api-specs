@@ -35,12 +35,12 @@ model UpdateStage {
   @doc("The time in seconds to wait at the end of this stage before starting the next one. Defaults to 0 seconds if unspecified.")
   afterStageWaitInSeconds?: int32;
 
-  @doc("A list of Gates that will be created before this Stage is updated.")
+  @doc("A list of Gates that will be created before this Stage is executed.")
   @added(Versions.v2025_04_01_preview)
   @extension("x-ms-identifiers", ["displayName"])
   beforeGates?: GateConfiguration[];
 
-  @doc("A list of Gates that will be created after this Stage is updated.")
+  @doc("A list of Gates that will be created after this Stage is executed.")
   @added(Versions.v2025_04_01_preview)
   @extension("x-ms-identifiers", ["displayName"])
   afterGates?: GateConfiguration[];
@@ -57,12 +57,12 @@ model UpdateGroup {
   @maxLength(50)
   name: string;
 
-  @doc("A list of Gates that will be created before this Group is updated.")
+  @doc("A list of Gates that will be created before this Group is executed.")
   @added(Versions.v2025_04_01_preview)
   @extension("x-ms-identifiers", ["displayName"])
   beforeGates?: GateConfiguration[];
 
-  @doc("A list of Gates that will be created after this Group is updated.")
+  @doc("A list of Gates that will be created after this Group is executed.")
   @added(Versions.v2025_04_01_preview)
   @extension("x-ms-identifiers", ["displayName"])
   afterGates?: GateConfiguration[];

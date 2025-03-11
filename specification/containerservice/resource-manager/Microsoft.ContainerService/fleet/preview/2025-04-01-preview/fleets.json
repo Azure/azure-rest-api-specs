@@ -3185,7 +3185,7 @@
             "create"
           ]
         },
-        "status": {
+        "state": {
           "$ref": "#/definitions/GateState",
           "description": "The state of the Gate.",
           "x-ms-mutability": [
@@ -3199,14 +3199,14 @@
         "displayName",
         "target",
         "gateType",
-        "status"
+        "state"
       ]
     },
     "GatePropertiesUpdate": {
       "type": "object",
       "description": "A Gate controls the progression during a staged rollout, e.g. in an Update Run.",
       "properties": {
-        "status": {
+        "state": {
           "$ref": "#/definitions/GateState",
           "description": "The state of the Gate.",
           "x-ms-mutability": [
@@ -3297,6 +3297,14 @@
           ]
         },
         "type": {
+          "$ref": "#/definitions/GateTargetType",
+          "description": "The type of the resource being targeted by this Gate.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
           "$ref": "#/definitions/GateTargetProperties",
           "description": "Properties specific to the target of this Gate.",
           "x-ms-mutability": [
@@ -3307,7 +3315,8 @@
       },
       "required": [
         "id",
-        "type"
+        "type",
+        "properties"
       ]
     },
     "GateTargetId": {
@@ -3322,6 +3331,24 @@
           "$ref": "#/definitions/UpdateRunGateTargetProperties"
         }
       ]
+    },
+    "GateTargetType": {
+      "type": "string",
+      "description": "The type of the Gate target.",
+      "enum": [
+        "UpdateRun"
+      ],
+      "x-ms-enum": {
+        "name": "GateTargetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UpdateRun",
+            "value": "UpdateRun",
+            "description": "The Gate targets an Update Run."
+          }
+        ]
+      }
     },
     "GateType": {
       "type": "string",
@@ -3630,33 +3657,6 @@
         ]
       }
     },
-    "UpdateGateStatus": {
-      "type": "object",
-      "description": "The status of the Gate, as represented in the Update Run.",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "The human-readable display name of the Gate.",
-          "minLength": 1,
-          "maxLength": 100,
-          "pattern": "^[A-Za-z0-9].*$",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/UpdateStatus",
-          "description": "The status of the Gate.",
-          "readOnly": true
-        },
-        "gateId": {
-          "$ref": "#/definitions/GateResourceId",
-          "description": "The resource id of the Gate.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "displayName"
-      ]
-    },
     "UpdateGroup": {
       "type": "object",
       "description": "A group to be updated.",
@@ -3670,7 +3670,7 @@
         },
         "beforeGates": {
           "type": "array",
-          "description": "A list of Gates that will be created before this Group is updated.",
+          "description": "A list of Gates that will be created before this Group is executed.",
           "items": {
             "$ref": "#/definitions/GateConfiguration"
           },
@@ -3680,7 +3680,7 @@
         },
         "afterGates": {
           "type": "array",
-          "description": "A list of Gates that will be created after this Group is updated.",
+          "description": "A list of Gates that will be created after this Group is executed.",
           "items": {
             "$ref": "#/definitions/GateConfiguration"
           },
@@ -3722,7 +3722,7 @@
           "type": "array",
           "description": "The list of Gates that will run before this UpdateGroup.",
           "items": {
-            "$ref": "#/definitions/UpdateGateStatus"
+            "$ref": "#/definitions/UpdateRunGateStatus"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -3733,7 +3733,7 @@
           "type": "array",
           "description": "The list of Gates that will run after this UpdateGroup.",
           "items": {
-            "$ref": "#/definitions/UpdateGateStatus"
+            "$ref": "#/definitions/UpdateRunGateStatus"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -3763,7 +3763,34 @@
         }
       ]
     },
-    "UpdateRunGateTargetProperties": {
+    "UpdateRunGateStatus": {
+      "type": "object",
+      "description": "The status of the Gate, as represented in the Update Run.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The human-readable display name of the Gate.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[A-Za-z0-9].*$",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The status of the Gate.",
+          "readOnly": true
+        },
+        "gateId": {
+          "$ref": "#/definitions/GateResourceId",
+          "description": "The resource id of the Gate.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "displayName"
+      ]
+    },
+    "UpdateRunGateTarget": {
       "type": "object",
       "description": "The Gate is targeting an Update Run staged rollout.",
       "properties": {
@@ -3804,6 +3831,19 @@
         "name",
         "stage",
         "beforeOrAfter"
+      ]
+    },
+    "UpdateRunGateTargetProperties": {
+      "type": "object",
+      "description": "Wrapper object around the Update Run Gate Target Properties.",
+      "properties": {
+        "updateRun": {
+          "$ref": "#/definitions/UpdateRunGateTarget",
+          "description": "Properties specific to the Update Run."
+        }
+      },
+      "required": [
+        "updateRun"
       ]
     },
     "UpdateRunListResult": {
@@ -3980,7 +4020,7 @@
         },
         "beforeGates": {
           "type": "array",
-          "description": "A list of Gates that will be created before this Stage is updated.",
+          "description": "A list of Gates that will be created before this Stage is executed.",
           "items": {
             "$ref": "#/definitions/GateConfiguration"
           },
@@ -3990,7 +4030,7 @@
         },
         "afterGates": {
           "type": "array",
-          "description": "A list of Gates that will be created after this Stage is updated.",
+          "description": "A list of Gates that will be created after this Stage is executed.",
           "items": {
             "$ref": "#/definitions/GateConfiguration"
           },
@@ -4032,7 +4072,7 @@
           "type": "array",
           "description": "The list of Gates that will run before this UpdateStage.",
           "items": {
-            "$ref": "#/definitions/UpdateGateStatus"
+            "$ref": "#/definitions/UpdateRunGateStatus"
           },
           "readOnly": true,
           "x-ms-identifiers": [
@@ -4043,7 +4083,7 @@
           "type": "array",
           "description": "The list of Gates that will run after this UpdateStage.",
           "items": {
-            "$ref": "#/definitions/UpdateGateStatus"
+            "$ref": "#/definitions/UpdateRunGateStatus"
           },
           "readOnly": true,
           "x-ms-identifiers": [

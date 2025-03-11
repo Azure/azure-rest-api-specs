@@ -77,31 +77,37 @@ model GateProperties {
 
   @doc("The state of the Gate.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  status: GateState;
+  state: GateState;
+}
+
+@doc("The type of the Gate target.")
+@added(Versions.v2025_04_01_preview)
+union GateTargetType {
+  string,
+
+  @doc("The Gate targets an Update Run.")
+  UpdateRun: "UpdateRun",
 }
 
 @doc("The type of staged rollout that the Gate is targeting.")
 @added(Versions.v2025_04_01_preview)
 union GateTargetProperties {
   @doc("The Gate is controlling the staged rollout of an Update Run.")
-  updateRun: UpdateRunGateTargetProperties,
+  updateRunProperties: UpdateRunGateTargetProperties,
 }
 
-@doc("Whether the Gate is placed before or after the target.")
+// A wrapper is needed because the union does not create one itself. Without it, properties of
+// all different types would end up in a single `properties` model.
+@doc("Wrapper object around the Update Run Gate Target Properties.")
 @added(Versions.v2025_04_01_preview)
-union BeforeOrAfter {
-  string,
-
-  @doc("The Gate is before the target.")
-  Before: "Before",
-
-  @doc("The Gate is after the target.")
-  After: "After",
+model UpdateRunGateTargetProperties {
+  @doc("Properties specific to the Update Run.")
+  updateRun: UpdateRunGateTarget;
 }
 
 @doc("The Gate is targeting an Update Run staged rollout.")
 @added(Versions.v2025_04_01_preview)
-model UpdateRunGateTargetProperties {
+model UpdateRunGateTarget {
   @doc("The name of the Update Run.")
   @visibility(Lifecycle.Read)
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
@@ -128,6 +134,18 @@ model UpdateRunGateTargetProperties {
   beforeOrAfter: BeforeOrAfter;
 }
 
+@doc("Whether the Gate is placed before or after the target.")
+@added(Versions.v2025_04_01_preview)
+union BeforeOrAfter {
+  string,
+
+  @doc("The Gate is before the target.")
+  Before: "Before",
+
+  @doc("The Gate is after the target.")
+  After: "After",
+}
+
 scalar UpdateRunResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -149,9 +167,13 @@ model GateTarget {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   id: GateTargetId;
 
+  @doc("The type of the resource being targeted by this Gate.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  type: GateTargetType;
+
   @doc("Properties specific to the target of this Gate.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  type: GateTargetProperties;
+  properties: GateTargetProperties;
 }
 
 @doc("The provisioning state of the Gate resource.")

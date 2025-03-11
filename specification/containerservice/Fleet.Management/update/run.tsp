@@ -265,13 +265,13 @@ model UpdateStageStatus {
   @extension("x-ms-identifiers", ["displayName"])
   @doc("The list of Gates that will run before this UpdateStage.")
   @added(Versions.v2025_04_01_preview)
-  beforeGates?: UpdateGateStatus[];
+  beforeGates?: UpdateRunGateStatus[];
 
   @visibility("read")
   @extension("x-ms-identifiers", ["displayName"])
   @doc("The list of Gates that will run after this UpdateStage.")
   @added(Versions.v2025_04_01_preview)
-  afterGates?: UpdateGateStatus[];
+  afterGates?: UpdateRunGateStatus[];
 
   @visibility("read")
   @doc("The status of the wait period configured on the UpdateStage.")
@@ -297,13 +297,13 @@ model UpdateGroupStatus {
   @extension("x-ms-identifiers", ["displayName"])
   @doc("The list of Gates that will run before this UpdateGroup.")
   @added(Versions.v2025_04_01_preview)
-  beforeGates?: UpdateGateStatus[];
+  beforeGates?: UpdateRunGateStatus[];
 
   @visibility("read")
   @extension("x-ms-identifiers", ["displayName"])
   @doc("The list of Gates that will run after this UpdateGroup.")
   @added(Versions.v2025_04_01_preview)
-  afterGates?: UpdateGateStatus[];
+  afterGates?: UpdateRunGateStatus[];
 }
 
 @doc("The status of the wait duration.")
@@ -319,7 +319,7 @@ model WaitStatus {
 
 @doc("The status of the Gate, as represented in the Update Run.")
 @added(Versions.v2025_04_01_preview)
-model UpdateGateStatus {
+model UpdateRunGateStatus {
   @doc("The human-readable display name of the Gate.")
   @visibility("read")
   @pattern("^[A-Za-z0-9].*$")
