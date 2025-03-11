@@ -2547,30 +2547,6 @@
       },
       "readOnly": true
     },
-    "BeforeOrAfter": {
-      "type": "string",
-      "description": "Whether the Gate is placed before or after the target.",
-      "enum": [
-        "Before",
-        "After"
-      ],
-      "x-ms-enum": {
-        "name": "BeforeOrAfter",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Before",
-            "value": "Before",
-            "description": "The Gate is before the target."
-          },
-          {
-            "name": "After",
-            "value": "After",
-            "description": "The Gate is after the target."
-          }
-        ]
-      }
-    },
     "ClusterResourceId": {
       "type": "string",
       "format": "arm-id",
@@ -3103,7 +3079,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -3124,7 +3100,6 @@
         }
       },
       "required": [
-        "displayName",
         "type"
       ]
     },
@@ -3196,7 +3171,6 @@
         }
       },
       "required": [
-        "displayName",
         "target",
         "gateType",
         "state"
@@ -3380,7 +3354,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -3657,6 +3631,30 @@
         ]
       }
     },
+    "Timing": {
+      "type": "string",
+      "description": "Whether the Gate is placed before or after the target.",
+      "enum": [
+        "Before",
+        "After"
+      ],
+      "x-ms-enum": {
+        "name": "Timing",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Before",
+            "value": "Before",
+            "description": "The Gate is before the target."
+          },
+          {
+            "name": "After",
+            "value": "After",
+            "description": "The Gate is after the target."
+          }
+        ]
+      }
+    },
     "UpdateGroup": {
       "type": "object",
       "description": "A group to be updated.",
@@ -3785,10 +3783,7 @@
           "description": "The resource id of the Gate.",
           "readOnly": true
         }
-      },
-      "required": [
-        "displayName"
-      ]
+      }
     },
     "UpdateRunGateTarget": {
       "type": "object",
@@ -3818,8 +3813,8 @@
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
           "readOnly": true
         },
-        "beforeOrAfter": {
-          "$ref": "#/definitions/BeforeOrAfter",
+        "timing": {
+          "$ref": "#/definitions/Timing",
           "description": "Whether the Gate is placed before or after the update itself.",
           "x-ms-mutability": [
             "read",
@@ -3830,7 +3825,7 @@
       "required": [
         "name",
         "stage",
-        "beforeOrAfter"
+        "timing"
       ]
     },
     "UpdateRunGateTargetProperties": {

@@ -14,7 +14,7 @@ namespace Microsoft.ContainerService;
 @added(Versions.v2025_04_01_preview)
 @resource("gate")
 @parentResource(Fleet)
-model Gate is ProxyResource<GateProperties> {
+model Gate is TrackedResource<GateProperties> {
   @doc("The name of the Gate resource, a GUID.")
   @pattern("^[0-9a-f]{8}[-][0-9a-f]{4}[-][0-9a-f]{4}[-][0-9a-f]{4}[-][0-9a-f]{12}$")
   @minLength(36)
@@ -65,7 +65,7 @@ model GateProperties {
   @pattern("^[A-Za-z0-9].*$")
   @minLength(1)
   @maxLength(100)
-  displayName: string;
+  displayName?: string;
 
   @doc("The target that the Gate is controlling, e.g. an Update Run.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -131,12 +131,12 @@ model UpdateRunGateTarget {
 
   @doc("Whether the Gate is placed before or after the update itself.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  beforeOrAfter: BeforeOrAfter;
+  timing: Timing;
 }
 
 @doc("Whether the Gate is placed before or after the target.")
 @added(Versions.v2025_04_01_preview)
-union BeforeOrAfter {
+union Timing {
   string,
 
   @doc("The Gate is before the target.")

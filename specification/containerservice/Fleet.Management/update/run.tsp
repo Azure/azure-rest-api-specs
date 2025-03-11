@@ -325,7 +325,7 @@ model UpdateRunGateStatus {
   @pattern("^[A-Za-z0-9].*$")
   @minLength(1)
   @maxLength(100)
-  displayName: string;
+  displayName?: string;
 
   @doc("The status of the Gate.")
   @visibility("read")

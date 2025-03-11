@@ -75,7 +75,7 @@ model GateConfiguration {
   @pattern("^[A-Za-z0-9].*$")
   @minLength(1)
   @maxLength(100)
-  displayName: string;
+  displayName?: string;
 
   @doc("The type of the Gate determines how it is completed.")
   type: GateType;
