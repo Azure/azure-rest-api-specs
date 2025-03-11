@@ -1,26 +1,24 @@
 // @ts-check
 
-import { execRoot } from "./exec.js";
+import { diff } from "./git.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} [baseCommitish] Defaults to "HEAD^".
  * @param {string} [headCommitish] Defaults to "HEAD".
- * @param {string} [diffFilter] Defaults to "".
  * @returns {Promise<string[]>}
  */
 export async function getChangedFiles(
   core,
   baseCommitish = "HEAD^",
   headCommitish = "HEAD",
-  diffFilter = "",
 ) {
-  const diffFilterArg = diffFilter ? `--diff-filter=${diffFilter}` : "";
-
-  const result = await execRoot(
-    `git -c core.quotepath=off diff --name-only ${diffFilterArg} ${baseCommitish} ${headCommitish}`,
-    core,
-  );
+  // TODO: If we need to filter based on status, instead of passing an argument to `--diff-filter,
+  // consider using "--name-status" instead of "--name-only", and return an array of objects like
+  // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
+  // Then add filter functions to filter based on status.  This is more flexible and lets consumers
+  // filter based on status with a single call to `git diff`.
+  const result = await diff(baseCommitish, headCommitish, core, "--name-only");
 
   const files = result.trim().split("\n");
 

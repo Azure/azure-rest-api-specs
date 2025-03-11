@@ -20,10 +20,7 @@ describe("incrementalTypeSpec", () => {
   });
 
   it("returns false if no changed RM files", async () => {
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([]);
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([]);
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
   });
@@ -32,10 +29,7 @@ describe("incrementalTypeSpec", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     vi.spyOn(git, "show").mockResolvedValue(swaggerHandWritten);
 
@@ -46,10 +40,7 @@ describe("incrementalTypeSpec", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager2/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     vi.spyOn(git, "show").mockResolvedValue(swaggerTypeSpecGenerated);
 
@@ -63,10 +54,7 @@ describe("incrementalTypeSpec", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     vi.spyOn(git, "show").mockRejectedValue(
       new Error("path contoso.json does not exist in 'HEAD'"),
@@ -79,10 +67,7 @@ describe("incrementalTypeSpec", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     vi.spyOn(git, "show").mockResolvedValue("not } valid { json");
 
@@ -93,10 +78,7 @@ describe("incrementalTypeSpec", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     vi.spyOn(git, "show").mockImplementation((treeIsh) =>
       treeIsh == "HEAD" ? swaggerTypeSpecGenerated : swaggerHandWritten,
@@ -117,10 +99,7 @@ describe("incrementalTypeSpec", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager2/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     vi.spyOn(git, "show").mockRejectedValue("string error");
 
@@ -131,10 +110,7 @@ describe("incrementalTypeSpec", () => {
     const swaggerPath =
       "/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
-    vi.spyOn(
-      changedFiles,
-      "getChangedResourceManagerSwaggerFiles",
-    ).mockResolvedValue([swaggerPath]);
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     vi.spyOn(git, "show").mockResolvedValue(swaggerTypeSpecGenerated);
 
