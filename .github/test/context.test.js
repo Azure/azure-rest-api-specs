@@ -47,6 +47,8 @@ describe("extractInputs", () => {
     });
   });
 
+  // TODO: Add tests for pull_request_target
+
   it("issue_comment:edited", async () => {
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({

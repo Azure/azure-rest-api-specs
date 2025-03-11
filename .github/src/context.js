@@ -32,6 +32,24 @@ export async function extractInputs(github, context, core) {
       run_id: NaN,
     };
   } else if (
+    context.eventName === "pull_request_target" &&
+    // "pull_request_target" is particularly dangerous, so only support actions as needed
+    (context.payload.action === "labeled" ||
+      context.payload.action === "unlabeled")
+  ) {
+    const payload =
+      /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (
+        context.payload
+      );
+
+    inputs = {
+      owner: payload.repository.owner.login,
+      repo: payload.repository.name,
+      head_sha: payload.pull_request.head.sha,
+      issue_number: payload.pull_request.number,
+      run_id: NaN,
+    };
+  } else if (
     context.eventName === "issue_comment" &&
     context.payload.action === "edited"
   ) {
