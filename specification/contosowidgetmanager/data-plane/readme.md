@@ -14,7 +14,31 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2022-11-01-preview
+tag: package-2022-12-01
+```
+
+### Tag: package-2022-12-01
+
+These settings apply only when `--tag=package-2022-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12-01'
+input-file:
+  - Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json
+```
+
+### Suppress non-TypeSpec SDK related linting rules
+
+These set of linting rules aren't applicable to the new TypeSpec SDK code generators so suppressing them here. Eventually we will
+opt-out these rules from running in the linting tools for TypeSpec generated swagger files.
+
+```yaml
+suppressions:
+  - code: AvoidAnonymousTypes
+  - code: PatchInOperationName
+  - code: OperationIdNounVerb
+  - code: RequiredReadOnlyProperties
+  - code: SchemaNamesConvention
+  - code: SchemaDescriptionOrTitle
 ```
 
 ### Tag: package-2022-11-01-preview
@@ -31,7 +55,7 @@ input-file:
 These set of linting rules aren't applicable to the new TypeSpec SDK code generators so suppressing them here. Eventually we will
 opt-out these rules from running in the linting tools for TypeSpec generated swagger files.
 
-``` yaml
+```yaml
 suppressions:
   - code: AvoidAnonymousTypes
   - code: PatchInOperationName
@@ -46,7 +70,7 @@ suppressions:
 These set of linting rules we expect to fixed in typespec-autorest emitter but for now suppressing.
 Github issue filed at https://github.com/Azure/typespec-azure/issues/2762
 
-``` yaml
+```yaml
 suppressions:
   - code: LroExtension
   - code: SchemaTypeAndFormat

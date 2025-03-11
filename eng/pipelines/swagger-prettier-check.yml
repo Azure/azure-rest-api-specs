@@ -10,6 +10,10 @@ jobs:
   - template: /eng/pipelines/templates/variables/globals.yml
 
   steps:
+  - checkout: self
+    # Required to compare head commit with base commit
+    fetchDepth: 2
+
   - template: /eng/pipelines/templates/steps/npm-install.yml
 
   - pwsh: |
