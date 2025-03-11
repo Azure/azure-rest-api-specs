@@ -1,8 +1,9 @@
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { TsvHost } from "../tsv-host.js";
 import { join } from "path";
 import { parse as yamlParse } from "yaml";
+import { Rule } from "../rule.js";
+import { RuleResult } from "../rule-result.js";
+import { TsvHost } from "../tsv-host.js";
+import { Suppression } from "suppressions";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };
@@ -48,8 +49,6 @@ export abstract class TspconfigSubRuleBase {
     return { shouldSkip: false };
   }
 
-  protected abstract validate(config: any): RuleResult;
-
   protected validateValue(
     actual: string | boolean | undefined,
     expected: ExpectedValueType,
@@ -72,6 +71,9 @@ export abstract class TspconfigSubRuleBase {
       errorOutput: `- ${error}. ${action}.`,
     };
   }
+
+  public abstract getPathOfKeyToValidate(): string;
+  protected abstract validate(config: any): RuleResult;
 }
 
 class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
@@ -94,6 +96,10 @@ class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
       );
 
     return { success: true };
+  }
+
+  public getPathOfKeyToValidate() {
+    return `parameters.${this.keyToValidate}.default`;
   }
 }
 
@@ -131,6 +137,10 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       );
 
     return { success: true };
+  }
+
+  public getPathOfKeyToValidate() {
+    return `options.${this.emitterName}.${this.keyToValidate}`;
   }
 }
 
@@ -444,18 +454,26 @@ export const defaultRules = [
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
-  private rules: TspconfigSubRuleBase[] = [];
+  private subRules: TspconfigSubRuleBase[] = [];
+  private suppressedKeyPaths: Set<string> = new Set();
   name = "SdkTspConfigValidation";
   description = "Validate the SDK tspconfig.yaml file";
 
-  constructor(rules?: TspconfigSubRuleBase[]) {
-    this.rules = rules || defaultRules;
+  constructor(subRules: TspconfigSubRuleBase[] = defaultRules) {
+    this.subRules = subRules;
   }
-  async execute(host?: TsvHost, folder?: string): Promise<RuleResult> {
+
+  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+    const tspConfigPath = join(folder, "tspconfig.yaml");
+    const suppressions = await host.getSuppressions(tspConfigPath);
+    this.setSuppressedKeyPaths(suppressions);
+
     const failedResults = [];
     let success = true;
-    for (const rule of this.rules) {
-      const result = await rule.execute(host!, folder!);
+    for (const subRule of this.subRules) {
+      // TODO: support wildcard
+      if (this.suppressedKeyPaths.has(subRule.getPathOfKeyToValidate())) continue;
+      const result = await subRule.execute(host, folder!);
       if (!result.success) failedResults.push(result);
       success &&= result.success;
     }
@@ -465,5 +483,13 @@ export class SdkTspConfigValidationRule implements Rule {
       success: true,
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${failedResults.map((r) => r.errorOutput).join("\n")}`,
     };
+  }
+
+  private setSuppressedKeyPaths(suppressions: Suppression[]) {
+    this.suppressedKeyPaths = new Set<string>();
+    for (const suppression of suppressions) {
+      if (!suppression.rules?.includes(this.name)) continue;
+      for (const ignoredKey of suppression.subRules ?? []) this.suppressedKeyPaths.add(ignoredKey);
+    }
   }
 }

@@ -74,7 +74,7 @@ model LivenessSessionData {
 model LivenessSessionItem {
   @doc("The unique ID to reference this session.")
   @key("sessionId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("DateTime when this session was created.")
@@ -351,7 +351,7 @@ model SessionImageStream {
 model LivenessSessionCommonData {
   @doc("The unique ID to reference this session.")
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sessionId: string;
 
   @doc("Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable.")
