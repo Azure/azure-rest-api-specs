@@ -1,6 +1,7 @@
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Premonition;
 
@@ -17,7 +18,16 @@ model Library is TrackedResource<LibraryProperties> {
 
 @doc("The properties of Library")
 model LibraryProperties {
+  @doc("Full qualified URL or connection string to an Azure storage account")
+  @added(Microsoft.Premonition.Versions.v2025_04_01_preview)
+  storageAccount: string;
+
+  @doc("Container name where all samples/analyses data will be stored")
+  @added(Microsoft.Premonition.Versions.v2025_04_01_preview)
+  containerName: string;
+
   @doc("The blob container URL where data files are stored")
+  @removed(Microsoft.Premonition.Versions.v2025_04_01_preview)
   container: url;
 
   @doc("Provisioning state of the resource")
@@ -42,8 +52,16 @@ model SampleProperties {
   @doc("Description of this sample, such as source, collection method, etc.")
   description?: string;
 
-  @doc("Location of the fastq files")
+  @doc("Path to the data files in the Library container. Supported formats: fa fasta fq fastq fa.gz fasta.gz fq.gz fastq.gz bam")
   paths: Array<string>;
+
+  @doc("Byte size of the data files, used for validation")
+  @added(Microsoft.Premonition.Versions.v2025_04_01_preview)
+  contentLengths?: Array<int64>;
+
+  @doc("MD5 hash of the data files, used for validation")
+  @added(Microsoft.Premonition.Versions.v2025_04_01_preview)
+  contentHashMd5?: Array<string>;
 
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
@@ -90,10 +108,25 @@ model AnalysisProperties {
 
   @visibility(Lifecycle.Read)
   @doc("The error if the analysis failed")
+  @removed(Microsoft.Premonition.Versions.v2025_04_01_preview)
   error?: {
     code: string;
     message: string;
   };
+
+  @visibility(Lifecycle.Read)
+  @doc("The error if the analysis failed")
+  @added(Microsoft.Premonition.Versions.v2025_04_01_preview)
+  failureReason?: AnalysisError;
+}
+
+@doc("The error emitted while running an analysis")
+model AnalysisError {
+  @doc("Diagnostic code")
+  code: string;
+
+  @doc("Readable error details")
+  message: string;
 }
 
 @doc("The status of an analysis")

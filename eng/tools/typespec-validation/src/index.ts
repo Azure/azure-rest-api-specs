@@ -1,6 +1,5 @@
 import { ParseArgsConfig, parseArgs } from "node:util";
-import { Suppression, getSuppressions } from "suppressions";
-
+import { Suppression } from "suppressions";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
 import { FlavorAzureRule } from "./rules/flavor-azure.js";
@@ -34,8 +33,12 @@ export async function main() {
   }
   console.log("Running TypeSpecValidation on folder: ", absolutePath);
 
-  const suppressions: Suppression[] = await getSuppressions("TypeSpecValidation", absolutePath);
-  if (suppressions && suppressions[0]) {
+  const suppressions: Suppression[] = await host.getSuppressions(absolutePath);
+
+  // Suppressions for the whole tool must have no rules or sub-rules
+  const toolSuppressions = suppressions.filter((s) => !s.rules?.length && !s.subRules?.length);
+
+  if (toolSuppressions && toolSuppressions[0]) {
     // Use reason from first matching suppression and ignore rest
     console.log(`  Suppressed: ${suppressions[0].reason}`);
     return;
