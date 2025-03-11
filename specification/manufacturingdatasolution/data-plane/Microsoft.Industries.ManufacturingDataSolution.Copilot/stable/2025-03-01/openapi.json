@@ -1087,34 +1087,38 @@
         }
       }
     },
-    "/copilot/query:execute": {
+    "/copilot/query": {
       "post": {
-        "operationId": "QueryApi_Execute",
+        "operationId": "QueryService_QueryExecute",
         "description": "execute the query",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "api-version",
+            "in": "query",
+            "description": "api-version to use",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "Conversation-Id",
+            "name": "conversationId",
             "in": "header",
-            "description": "Conversation-Id header",
+            "description": "conversation id",
             "required": false,
-            "type": "string",
-            "x-ms-client-name": "conversationId"
+            "type": "string"
           },
           {
             "name": "Accept-Language",
             "in": "header",
             "description": "Accept-Language header",
-            "required": true,
+            "required": false,
             "type": "string",
             "x-ms-client-name": "acceptLanguage"
           },
           {
             "name": "maxRetry",
             "in": "query",
-            "description": "maxRetry",
+            "description": "maximum number of retries",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1129,17 +1133,12 @@
             "default": false
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
+            "description": "request body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "ask": {
-                  "type": "string",
-                  "description": "Natural language query"
-                }
-              }
+              "$ref": "#/definitions/QueryService.QueryModels.QueryRequest"
             }
           }
         ],
@@ -1149,28 +1148,16 @@
             "schema": {
               "$ref": "#/definitions/QueryService.QueryModels.QueryResponse"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
           }
         },
         "x-ms-examples": {
-          "QueryApi_Execute_MaximumSet": {
-            "$ref": "./examples/QueryApi_Execute_MaximumSet_Gen.json"
+          "QueryService_QueryExecute_MaximumSet": {
+            "$ref": "./examples/QueryService_QueryExecute_MaximumSet_Gen.json"
           }
         }
       }
     },
-    "/copilot/validation-job/{testId}": {
+    "/copilot/validationJob/{testId}": {
       "get": {
         "operationId": "ValidateQueryApi_GetQueryValidationJobDetails",
         "description": "Get the details of a validation job",
@@ -1213,7 +1200,7 @@
         }
       }
     },
-    "/copilot/validation-job/runs": {
+    "/copilot/validationJob/runs": {
       "get": {
         "operationId": "ValidateQueryApi_ListQueryValidationJobHistory",
         "description": "List validate test requests",
@@ -1276,9 +1263,9 @@
         }
       }
     },
-    "/copilot/validation-job:schedule": {
+    "/copilot/validationJob:run": {
       "post": {
-        "operationId": "ValidateQueryApi_Schedule",
+        "operationId": "ValidateQueryApi_Run",
         "description": "Validate a query",
         "parameters": [
           {
@@ -1314,8 +1301,8 @@
           }
         },
         "x-ms-examples": {
-          "ValidateQueryApi_Schedule_MaximumSet": {
-            "$ref": "./examples/ValidateQueryApi_Schedule_MaximumSet_Gen.json"
+          "ValidateQueryApi_Run_MaximumSet": {
+            "$ref": "./examples/ValidateQueryApi_Run_MaximumSet_Gen.json"
           }
         }
       }
@@ -2245,6 +2232,23 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "QueryService.QueryModels.QueryRequest": {
+      "type": "object",
+      "description": "query request",
+      "properties": {
+        "ask": {
+          "type": "string",
+          "description": "User query in natural language",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "ask"
       ]
     },
     "QueryService.QueryModels.QueryResponse": {

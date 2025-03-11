@@ -20,7 +20,7 @@ alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface ValidateQueryApi {
   @doc("Validate a query")
-  schedule is apiOperations.ResourceCollectionAction<
+  run is apiOperations.ResourceCollectionAction<
     QueryValidationJobRequest,
     QueryValidationJobRequest,
     QueryValidationJobScheduleConfirmation

@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 namespace MdsSolution.CopilotService.ValidateQuery.Models;
 
 @doc("Validate job Request")
-@resource("validation-job")
+@resource("validationJob")
 model QueryValidationJobRequest {
   @key
   @visibility(Lifecycle.Update)
@@ -50,7 +50,7 @@ model QueryValidationJobScheduleConfirmation {
 }
 
 @doc("Test Details Response")
-@resource("validation-job")
+@resource("validationJob")
 model QueryValidationJobDetails {
   @doc("Test Id")
   @key
@@ -83,7 +83,7 @@ model QueryValidationTestCaseResult {
 }
 
 @doc("Validate Test Response")
-@resource("validation-job/runs")
+@resource("validationJob/runs")
 model QueryValidationJobRun {
   @key
   @visibility(Lifecycle.Read)
