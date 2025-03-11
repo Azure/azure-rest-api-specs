@@ -98,32 +98,3 @@ export function swagger(file) {
     !example(file)
   );
 }
-
-/**
- * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @param {string} [baseCommitish] Defaults to "HEAD^".
- * @param {string} [headCommitish] Defaults to "HEAD".
- * @param {string} [diffFilter] Defaults to "d".
- * @returns {Promise<string[]>}
- */
-export async function getChangedResourceManagerSwaggerFiles(
-  core,
-  baseCommitish = "HEAD^",
-  headCommitish = "HEAD",
-  diffFilter = "d",
-) {
-  const changedSwaggerFiles = await getChangedFiles(
-    core,
-    baseCommitish,
-    headCommitish,
-    diffFilter,
-  );
-  const changedResourceManagerSwaggerFiles = changedSwaggerFiles
-    .filter(resourceManager)
-    .filter(swagger);
-
-  core.info(
-    `Changed files containing path '/resource-manager/': ${changedResourceManagerSwaggerFiles}`,
-  );
-  return changedResourceManagerSwaggerFiles;
-}
