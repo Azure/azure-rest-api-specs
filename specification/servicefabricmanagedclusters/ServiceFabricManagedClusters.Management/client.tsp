@@ -4,14 +4,19 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ServiceFabric;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@clientName(Microsoft.ServiceFabric,
+  "ServiceFabricManagedClustersManagementClient",
+  "python"
+);
+
+#suppress "deprecated" "@flattenProperty decorator for backwards compatibility with existing spec"
 @@flattenProperty(VMSSExtension.properties);
 
 @@clientName(ApplicationTypes.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ApplicationTypes.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator for backwards compatibility with existing spec"
 @@flattenProperty(ApplicationTypeResource.properties);
 
 @@clientName(ApplicationTypeVersions.createOrUpdate::parameters.resource,
@@ -20,13 +25,13 @@ using Microsoft.ServiceFabric;
 @@clientName(ApplicationTypeVersions.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator for backwards compatibility with existing spec"
 @@flattenProperty(ApplicationTypeVersionResource.properties);
 
 @@clientName(Applications.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Applications.update::parameters.properties, "parameters");
 @@clientName(Applications.resumeUpgrade::parameters.body, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator for backwards compatibility with existing spec"
 @@flattenProperty(ApplicationResource.properties);
 
 @@clientName(Services.createOrUpdate::parameters.resource, "parameters");
@@ -41,10 +46,10 @@ using Microsoft.ServiceFabric;
 @@clientName(ManagedClusters.stopFaultSimulation::parameters.body,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator for backwards compatibility with existing spec"
 @@flattenProperty(ManagedCluster.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator for backwards compatibility with existing spec"
 @@flattenProperty(ManagedClusterCodeVersionResult.properties);
 
 @@clientName(NodeTypes.createOrUpdate::parameters.resource, "parameters");
@@ -58,7 +63,7 @@ using Microsoft.ServiceFabric;
 @@clientName(NodeTypes.start::parameters.body, "parameters");
 @@clientName(NodeTypes.startFaultSimulation::parameters.body, "parameters");
 @@clientName(NodeTypes.stopFaultSimulation::parameters.body, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator for backwards compatibility with existing spec"
 @@flattenProperty(NodeType.properties);
 
 @@Azure.ResourceManager.identifiers(FaultSimulationListResult.value,

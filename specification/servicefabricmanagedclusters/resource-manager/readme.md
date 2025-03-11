@@ -12,16 +12,19 @@ Azure Service Fabric Managed Clusters are an evolution of the Azure Service Fabr
 
 ## Getting Started
 
-To build the SDK for ServiceFabricManagedClustersManagementClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDKs for ServiceFabricManagedClustersManagementClient, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
-> `autorest`
-
+> `autorest readme.md`
 To see additional help and options, run:
 
 > `autorest --help`
+For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
+
 ---
 
 ## Configuration
+
+### Basic Information
 
 These are the global settings for the ServiceFabricManagedClustersManagementClient API.
 
@@ -418,19 +421,3 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Java
-
-See configuration in [readme.java.md](./readme.java.md)
