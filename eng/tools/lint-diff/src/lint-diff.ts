@@ -299,6 +299,8 @@ async function runLintDiff(
       const { level, code, message } = violation;
       outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />${getFile(violation)} ${getLine(violation)} | TODO |\n`;
     }
+
+    outputMarkdown += `\n\n`;
   }
 
   // The following errors/warnings exist before current PR submission
@@ -318,6 +320,8 @@ async function runLintDiff(
       const { level, code, message } = violation;
       outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />${getFile(violation)} ${getLine(violation)} |\n`;
     }
+
+    outputMarkdown += `\n\n`;
   }
 
   console.log(`Writing output to ${outFile}`);
