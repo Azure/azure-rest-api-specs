@@ -121,6 +121,17 @@ suppressions:
       - $.definitions.NspProfile
       - $.definitions.NspAccessRule
       - $.definitions.NspAssociation
+  - code: PatchIdentityProperty
+    reason: False alarm.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
+  - code: SystemDataDefinitionsCommonTypes
+    from: networkVerifier.json
+    reason: False alarm for common type errors.
+  - code: SystemDataDefinitionsCommonTypes
+    from: network.json
+    reason: False alarm.
 ```
 
 ### Tag: package-2024-06-preview
