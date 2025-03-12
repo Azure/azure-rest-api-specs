@@ -122,17 +122,3 @@ These settings apply only when `--tag=package-preview-2025-03-01` is specified o
 input-file:
   - NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json
 ```
-
-## Suppress by design Linting rules
-
-```yaml
-suppressions:
-  - code: GetCollectionResponseSchema
-    from: swagger-document
-    where: $.definitions.NginxDeploymentWafPolicyListResponse
-    reason: By design
-  - code: GetCollectionResponseSchema
-    from: swagger-document
-    where: $.definitions.NginxDeploymentWafPolicy
-    reason: By design
-```
