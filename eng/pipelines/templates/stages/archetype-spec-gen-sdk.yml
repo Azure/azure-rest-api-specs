@@ -208,19 +208,17 @@ extends:
                   Get-ChildItem $artifactPath -Recurse
                 }
 
-          - step:
-            template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
-            condition: and(succeeded(), ne(variables['AddBreakingChangeLabelArtifactName'], ''))
+          - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
               ArtifactName: $(AddBreakingChangeLabelArtifactName)
               ArtifactPath: "$(System.DefaultWorkingDirectory)/$(AddBreakingChangeLabelArtifactPath)"
+              CustomCondition: and(succeeded(), ne(variables['AddBreakingChangeLabelArtifactName'], ''))
 
-          - step:
-            template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
-            condition: and(succeeded(), ne(variables['RemoveBreakingChangeLabelArtifactName'], ''))
+          - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
               ArtifactName: $(RemoveBreakingChangeLabelArtifactName)
               ArtifactPath: "$(System.DefaultWorkingDirectory)/$(RemoveBreakingChangeLabelArtifactPath)"
+              CustomCondition: and(succeeded(), ne(variables['RemoveBreakingChangeLabelArtifactName'], ''))
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
