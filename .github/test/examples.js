@@ -1,3 +1,13 @@
+// @ts-check
+
+export const swaggerHandWritten = JSON.stringify("foo");
+
+export const swaggerTypeSpecGenerated = JSON.stringify({
+  info: {
+    "x-typespec-generated": [{ emitter: "@azure-tools/typespec-autorest" }],
+  },
+});
+
 export const contosoReadme = `
 # contosowidgetmanager
 

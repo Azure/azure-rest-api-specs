@@ -1,21 +1,17 @@
 import { describe, expect, it, vi } from "vitest";
 import * as changedFiles from "../../src/changed-files.js";
 import * as git from "../../src/git.js";
-import { contosoReadme } from "../../test/examples.js";
+import {
+  contosoReadme,
+  swaggerHandWritten,
+  swaggerTypeSpecGenerated,
+} from "../../test/examples.js";
 import { createMockCore } from "../../test/mocks.js";
 import incrementalTypeSpec from "../src/arm-incremental-typespec-preview.js";
 
 // TODO: Verify args to all calls to spyOn to catch bugs like passing wrong paths
 
 const core = createMockCore();
-
-const swaggerHandWritten = JSON.stringify("foo");
-
-const swaggerTypeSpecGenerated = JSON.stringify({
-  info: {
-    "x-typespec-generated": [{ emitter: "@azure-tools/typespec-autorest" }],
-  },
-});
 
 describe("incrementalTypeSpec", () => {
   it("rejects if inputs null", async () => {
