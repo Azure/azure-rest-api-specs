@@ -20763,6 +20763,11 @@
           "description": "The route to check the readiness of the inference server container.",
           "$ref": "#/definitions/Route"
         },
+        "startupRoute": {
+          "description": "The route to check the startup of the application in the container.",
+          "$ref": "#/definitions/Route",
+          "x-nullable": true
+        },
         "scoringRoute": {
           "description": "The port to send the scoring requests to, within the inference server container.",
           "$ref": "#/definitions/Route"
@@ -23674,6 +23679,11 @@
         },
         "readinessProbe": {
           "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.",
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
+        },
+        "startupProbe": {
+          "description": "Startup probe verify whether an application within a container has started successfully.",
           "$ref": "#/definitions/ProbeSettings",
           "x-nullable": true
         },

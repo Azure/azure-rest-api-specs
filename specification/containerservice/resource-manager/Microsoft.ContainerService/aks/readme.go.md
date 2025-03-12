@@ -14,6 +14,11 @@ module-name: sdk/resourcemanager/containerservice/armcontainerservice
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+- from: swagger-document
+  where: $.definitions.CloudErrorBody
+  transform: >
+    $["x-ms-external"] = false
 ```
 
 ### Go multi-api
