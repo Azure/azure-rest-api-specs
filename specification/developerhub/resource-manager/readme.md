@@ -45,10 +45,17 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: Removing additionalProperties from the models will result in breaking changes.
     from: workflow.json
+    where:
+      - $.definitions.TemplateReference.properties.parameters
+      - $.definitions.Deployment.properties.overrides
+      - $.definitions.GeneratePreviewArtifactsResponse
   - code: BodyTopLevelProperties
     reason: False positive error for Collection Get API
     from: workflow.json
   - code: AvoidAdditionalProperties
+    where:
+      - $.definitions.GenerateVersionedTemplateResponse.properties.generatedFiles
+      - $.definitions.GenerateVersionedTemplateRequest
     reason: Templates need additional properties for input/responses.
     from: template.json
 ```
