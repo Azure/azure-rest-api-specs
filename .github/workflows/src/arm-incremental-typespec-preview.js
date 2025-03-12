@@ -1,13 +1,15 @@
 // @ts-check
 
-import { dirname } from "path";
+import { dirname, join } from "path";
 import {
   example,
   getChangedFiles,
+  readme,
   resourceManager,
   swagger,
 } from "../../src/changed-files.js";
 import { lsTree, show } from "../../src/git.js";
+import { getInputFiles } from "../../src/readme.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -56,22 +58,40 @@ export default async function incrementalTypeSpec({ github, context, core }) {
     }
   }
 
-  const changedSpecDirs = new Set(
-    // TODO: Find spec dir differently based on each file type (swagger, example, readme)
-    // swagger -> dirname(dirname(dirname(f)))
-    // example -> dirname(dirname(dirname(dirname(f))))
-    // readme -> If parent is "resource-manager", return all dirs under "resource-manager".
-    //           Else, walk up until you are 1 below "resource-manager", then stop.
-    //           TODO: Verify works for all current readme.md in repo
-    [
-      ...changedRmFiles
-        .filter(swagger)
-        .map((f) => dirname(dirname(dirname(f)))),
-      ...changedRmFiles
-        .filter(example)
-        .map((f) => dirname(dirname(dirname(dirname(f))))),
-    ],
-  );
+  /** @type Set<string> */
+  const changedReadmeInputFiles = new Set();
+
+  for (const readmeFile of changedRmFiles.filter(readme)) {
+    let readmeText;
+    try {
+      readmeText = await show("HEAD", readmeFile, core);
+    } catch (e) {
+      if (e instanceof Error && e.message.includes("does not exist")) {
+        // To simplify logic, if PR deletes a readme file, it's not "incremental typespec"
+        core.info(`File "${readmeFile}" has been deleted`);
+        return false;
+      } else {
+        // Unknown error
+        throw e;
+      }
+    }
+
+    // If a readme is changed, to be conservative, handle as if every input file in the readme were changed
+    const inputFiles = await getInputFiles(readmeText, core);
+
+    inputFiles.forEach((f) => {
+      changedReadmeInputFiles.add(join(dirname(readmeFile), f));
+    });
+  }
+
+  const changedSpecDirs = new Set([
+    ...changedRmFiles.filter(swagger).map((f) => dirname(dirname(dirname(f)))),
+    ...changedRmFiles
+      .filter(example)
+      .map((f) => dirname(dirname(dirname(dirname(f))))),
+    // Readme input files should use the same path format as changed swagger files
+    ...[...changedReadmeInputFiles].map((f) => dirname(dirname(dirname(f)))),
+  ]);
 
   if (changedSpecDirs.size === 0) {
     core.info("Could not map changed files to any spec directories");
