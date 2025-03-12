@@ -6,7 +6,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.Core.Traits;
 
 @useAuth(AadOauth2Auth<["https://exp.azure.net/.default"]>)
 @service(#{ title: "Azure.Analytics.OnlineExperimentation service" })
