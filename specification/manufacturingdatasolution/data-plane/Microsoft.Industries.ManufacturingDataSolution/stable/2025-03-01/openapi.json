@@ -422,12 +422,11 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "versionId",
+            "name": "body",
             "in": "body",
-            "description": "The identifier for the data version.",
             "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/AdminModels.DataVersionId"
             }
           }
         ],
@@ -658,65 +657,6 @@
           }
         }
       },
-      "patch": {
-        "operationId": "ServiceApis_UpdateEntity",
-        "description": "Patch an existing entity.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the entity.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ServiceModels.EntityCreateOrUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ServiceModels.Entity"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/ServiceModels.Entity"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServiceApis_UpdateEntity": {
-            "$ref": "./examples/ServiceApis_UpdateEntity.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "ServiceApis_DeleteEntity",
         "description": "Delete an entity schema by name.",
@@ -770,14 +710,6 @@
             "description": "The identifier of the job.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "description": "The type of entity operation (create/update).",
-            "required": false,
-            "type": "string",
-            "default": "create"
           }
         ],
         "responses": {
@@ -805,6 +737,100 @@
             "$ref": "./examples/ServiceApis_GetEntityJobStatus.json"
           }
         }
+      }
+    },
+    "/entity:update": {
+      "post": {
+        "operationId": "ServiceApis_UpdateEntity",
+        "description": "Update an existing entity.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceModels.Entity"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "type": "object",
+                  "description": "Error object that describes the error when status is \"Failed\".",
+                  "properties": {
+                    "responseHeaders": {
+                      "type": "object",
+                      "properties": {
+                        "parameters": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "parameters"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "responseHeaders"
+                  ]
+                },
+                "result": {
+                  "type": "object",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceApis_UpdateEntity": {
+            "$ref": "./examples/ServiceApis_UpdateEntity.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/health": {
@@ -838,7 +864,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the entity.",
+            "description": "The name of the normalizationTable.",
             "required": true,
             "type": "string"
           },
@@ -886,7 +912,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the entity.",
+            "description": "The name of the normalizationTable.",
             "required": true,
             "type": "string"
           },
@@ -945,7 +971,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the entity.",
+            "description": "The name of the normalizationTable.",
             "required": true,
             "type": "string"
           },
@@ -1001,7 +1027,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the entity.",
+            "description": "The name of the normalizationTable.",
             "required": true,
             "type": "string"
           },
@@ -1212,7 +1238,63 @@
       "get": {
         "operationId": "QueryApis_GetIngestionStatus",
         "description": "Get the ingestion status.",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "operators",
+            "in": "query",
+            "description": "Time series operator.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "BETWEEN",
+              "EQ",
+              "LT",
+              "GT"
+            ],
+            "x-ms-enum": {
+              "name": "TimeSeriesOperator",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "BETWEEN",
+                  "value": "BETWEEN",
+                  "description": "Between operator."
+                },
+                {
+                  "name": "EQ",
+                  "value": "EQ",
+                  "description": "Equal to operator."
+                },
+                {
+                  "name": "LT",
+                  "value": "LT",
+                  "description": "Less than operator."
+                },
+                {
+                  "name": "GT",
+                  "value": "GT",
+                  "description": "Greater than operator."
+                }
+              ]
+            }
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Represents a generic response.",
@@ -1483,6 +1565,19 @@
       "required": [
         "versionId",
         "description"
+      ]
+    },
+    "AdminModels.DataVersionId": {
+      "type": "object",
+      "description": "Represents the Version Id",
+      "properties": {
+        "versionId": {
+          "type": "string",
+          "description": "The identifier for the data version."
+        }
+      },
+      "required": [
+        "versionId"
       ]
     },
     "AdminModels.MdsJobStatusResponse": {
@@ -1845,26 +1940,15 @@
           "$ref": "#/definitions/QueryModels.RelationshipsIngestionData",
           "description": "Ingestion status for relationships."
         },
-        "referenceData": {
-          "type": "array",
-          "description": "The reference data.",
-          "items": {
-            "$ref": "#/definitions/QueryModels.ModelCount"
-          },
-          "x-ms-identifiers": []
-        },
         "vectorizationDataCount": {
           "type": "object",
           "description": "The count of vectorization data.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         }
       },
       "required": [
         "twinsData",
         "relationshipsData",
-        "referenceData",
         "vectorizationDataCount"
       ]
     },
@@ -2188,9 +2272,9 @@
           "description": "Hierarchy scope of the entity.",
           "readOnly": true
         },
-        "name": {
+        "equipmentLevel": {
           "type": "string",
-          "description": "Name of the entity.",
+          "description": "Equipment level.",
           "readOnly": true
         },
         "operationLocation": {
@@ -2201,6 +2285,11 @@
         "operationLocationType": {
           "type": "string",
           "description": "Location type of the operation.",
+          "readOnly": true
+        },
+        "assetsystemrefid": {
+          "type": "string",
+          "description": "Asset ID for the HR system.",
           "readOnly": true
         },
         "hrsystemrefid": {
@@ -2227,7 +2316,6 @@
       },
       "required": [
         "id",
-        "name",
         "dtId",
         "timestamp"
       ]
@@ -2264,14 +2352,13 @@
             "type": "string"
           }
         },
-        "type": {
-          "type": "string",
-          "description": "The type of entity."
-        },
         "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp of the entity data."
+          "type": "array",
+          "description": "Timestamp of the entity data.",
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
         },
         "equipmentId": {
           "type": "string",
@@ -2287,7 +2374,6 @@
         "modelId",
         "source",
         "target",
-        "type",
         "timestamp"
       ]
     },
@@ -2682,75 +2768,6 @@
         "semanticRelevantFlag"
       ]
     },
-    "ServiceModels.EntityCreateOrUpdate": {
-      "type": "object",
-      "description": "Represents an entity in the MDS.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the entity.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "columns": {
-          "type": "array",
-          "description": "The columns associated with the entity.",
-          "items": {
-            "$ref": "#/definitions/ServiceModels.Column"
-          },
-          "x-ms-identifiers": [],
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "description": "The identifier for the entity."
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The version of the entity.",
-          "default": 1
-        },
-        "isDefault": {
-          "type": "boolean",
-          "description": "Indicates if the entity is the default entity."
-        },
-        "tags": {
-          "$ref": "#/definitions/ServiceModels.EntityMetadata",
-          "description": "The metadata tags associated with the entity."
-        },
-        "dtdlSchemaUrl": {
-          "type": "string",
-          "description": "The URL of the DTDL schema."
-        },
-        "dtdlSchema": {
-          "type": "object",
-          "description": "The DTDL schema of the entity.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "isBaseEntity": {
-          "type": "boolean",
-          "description": "Indicates if the entity is a base entity."
-        },
-        "storageInfo": {
-          "$ref": "#/definitions/ServiceModels.StorageInfoCreateOrUpdate",
-          "description": "The storage information of the entity."
-        },
-        "semanticRelevantFlag": {
-          "type": "boolean",
-          "description": "Indicates if the entity is semantically relevant."
-        }
-      }
-    },
     "ServiceModels.EntityDataType": {
       "type": "string",
       "description": "Represents the type of an entity.",
@@ -2950,7 +2967,6 @@
       },
       "required": [
         "jobId",
-        "type",
         "status"
       ]
     },
@@ -3033,7 +3049,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the entity.",
+          "description": "The name of the normalizationTable.",
           "x-ms-mutability": [
             "read",
             "update"
@@ -3045,10 +3061,13 @@
           "default": "",
           "readOnly": true
         },
-        "mappingsTable": {
-          "type": "object",
+        "normalizationRecords": {
+          "type": "array",
           "description": "The mapping table records.",
-          "additionalProperties": {},
+          "items": {
+            "$ref": "#/definitions/ServiceModels.NormalizationTableRecord"
+          },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "update",
@@ -3067,7 +3086,7 @@
       "required": [
         "name",
         "version",
-        "mappingsTable"
+        "normalizationRecords"
       ]
     },
     "ServiceModels.NormalizationTableCreateOrUpdate": {
@@ -3076,16 +3095,19 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the entity.",
+          "description": "The name of the normalizationTable.",
           "x-ms-mutability": [
             "read",
             "update"
           ]
         },
-        "mappingsTable": {
-          "type": "object",
+        "normalizationRecords": {
+          "type": "array",
           "description": "The mapping table records.",
-          "additionalProperties": {},
+          "items": {
+            "$ref": "#/definitions/ServiceModels.NormalizationTableRecord"
+          },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "update",
@@ -3093,6 +3115,46 @@
           ]
         }
       }
+    },
+    "ServiceModels.NormalizationTableRecord": {
+      "type": "object",
+      "description": "Represents a record in the normalization table.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the property.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the property.",
+          "default": "",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "usedInIngestion": {
+          "type": "boolean",
+          "description": "Flag indicating if used in Ingestion",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "key",
+        "value",
+        "usedInIngestion"
+      ]
     },
     "ServiceModels.OpcuaMappingData": {
       "type": "object",
@@ -3314,24 +3376,6 @@
         "defaultStore"
       ]
     },
-    "ServiceModels.StorageInfoCreateOrUpdate": {
-      "type": "object",
-      "description": "Represents storage information.",
-      "properties": {
-        "defaultStore": {
-          "$ref": "#/definitions/ServiceModels.DataStore",
-          "description": "The default data store."
-        },
-        "adtModelId": {
-          "type": "string",
-          "description": "The ADT model ID."
-        },
-        "adxTableName": {
-          "type": "string",
-          "description": "The ADX table name."
-        }
-      }
-    },
     "ServiceModels.StorageType": {
       "type": "string",
       "description": "Represents storage types.",
@@ -3432,10 +3476,6 @@
       "type": "object",
       "description": "Represents the status response of an entity update job.",
       "properties": {
-        "deleteCosmosPropertiesJobStatus": {
-          "type": "string",
-          "description": "The status of the job to delete Cosmos properties."
-        },
         "deleteAdxPropertiesJobStatus": {
           "type": "string",
           "description": "The status of the job to delete ADX properties."

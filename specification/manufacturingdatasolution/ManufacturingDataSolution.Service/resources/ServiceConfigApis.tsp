@@ -5,6 +5,7 @@ import "./../models/common.tsp";
 import "./../models/servicemodels.tsp";
 
 using TypeSpec.Versioning;
+using TypeSpec.Rest;
 using MdsCommon;
 using TypeSpec.Http;
 using ServiceModels;
@@ -21,14 +22,7 @@ namespace MdsSolution.ServiceApis {
   op getServiceHealth(): GenericOkResponse<MdsHealth>;
 
   @doc("Get the status of an entity job.")
-  op getEntityJobStatus is Operations.ResourceRead<
-    JobStatusResponse,
-    QueryParametersTrait<{
-      @query("type")
-      @doc("The type of entity operation (create/update).")
-      type?: string = "create";
-    }>
-  >;
+  op getEntityJobStatus is Operations.ResourceRead<JobStatusResponse>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
   @doc("Get all entities.")
@@ -53,8 +47,20 @@ namespace MdsSolution.ServiceApis {
     }>
   >;
 
-  @doc("Patch an existing entity.")
-  op updateEntity is Operations.ResourceCreateOrUpdate<Entity>;
+  @pollingOperation(getEntityJobStatus)
+  @doc("Update an existing entity.")
+  @action("update")
+  op updateEntity is Operations.LongRunningResourceCollectionAction<
+    Entity,
+    Entity,
+    {},
+    ResponseHeadersTrait<{
+      @doc("The background job location.")
+      @header("Operation-Location")
+      @pollingLocation
+      operationLocation: string;
+    }>
+  >;
 
   @doc("Get an entity schema by name.")
   op getEntity is Operations.ResourceRead<Entity>;

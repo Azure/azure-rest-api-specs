@@ -4,7 +4,7 @@
   "parameters": {
     "api-version": "2025-03-01",
     "name": "TestEntity",
-    "resource": {
+    "body": {
       "name": "TestEntity",
       "columns": [
         {
@@ -37,86 +37,15 @@
     }
   },
   "responses": {
-    "200": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://contoso.com/operationstatus"
+      },
       "body": {
-        "name": "dqvglnxsyloutzcjvef",
-        "columns": [
-          {
-            "name": "wfngcnemz",
-            "mappingTableForNormalization": "zberooebfw",
-            "isProperNoun": true,
-            "displayName": "oesvmlcwfnyztwlbxh",
-            "description": "asrousbljbqlzcfhdpuwbcciwxxg",
-            "type": "String",
-            "mandatory": true,
-            "semanticRelevantFlag": true,
-            "primaryKey": true,
-            "groupBy": true,
-            "enumValues": [
-              "xgqexydiymmepiwgxenosjhcud"
-            ]
-          }
-        ],
-        "id": "gemlxmvekrkaslrqw",
-        "version": 13,
-        "isDefault": true,
-        "tags": {
-          "entityDataType": "Undefined",
-          "ingestionFormat": "Undefined",
-          "ingestionRate": "Undefined",
-          "storageType": "Undefined",
-          "dataSamplingRate": "Undefined"
-        },
-        "dtdlSchemaUrl": "fwgvbpaqsjgdzc",
-        "dtdlSchema": {},
-        "isBaseEntity": true,
-        "storageInfo": {
-          "defaultStore": "ADX",
-          "adtModelId": "dohermhttksro",
-          "adxTableName": "djykpzwneujsfl"
-        },
-        "semanticRelevantFlag": true
-      }
-    },
-    "201": {
-      "body": {
-        "name": "dqvglnxsyloutzcjvef",
-        "columns": [
-          {
-            "name": "wfngcnemz",
-            "mappingTableForNormalization": "zberooebfw",
-            "isProperNoun": true,
-            "displayName": "oesvmlcwfnyztwlbxh",
-            "description": "asrousbljbqlzcfhdpuwbcciwxxg",
-            "type": "String",
-            "mandatory": true,
-            "semanticRelevantFlag": true,
-            "primaryKey": true,
-            "groupBy": true,
-            "enumValues": [
-              "xgqexydiymmepiwgxenosjhcud"
-            ]
-          }
-        ],
-        "id": "gemlxmvekrkaslrqw",
-        "version": 13,
-        "isDefault": true,
-        "tags": {
-          "entityDataType": "Undefined",
-          "ingestionFormat": "Undefined",
-          "ingestionRate": "Undefined",
-          "storageType": "Undefined",
-          "dataSamplingRate": "Undefined"
-        },
-        "dtdlSchemaUrl": "fwgvbpaqsjgdzc",
-        "dtdlSchema": {},
-        "isBaseEntity": true,
-        "storageInfo": {
-          "defaultStore": "ADX",
-          "adtModelId": "dohermhttksro",
-          "adxTableName": "djykpzwneujsfl"
-        },
-        "semanticRelevantFlag": true
+        "jobId": "testJobId",
+        "type": "create",
+        "message": "Operation started",
+        "status": "NotStarted"
       }
     }
   }

@@ -17,7 +17,19 @@ namespace MdsSolution.QueryApis {
   @doc("Get the ingestion status.")
   @route("query/ingestionStatus")
   @get
-  op getIngestionStatus(): GenericOkResponse<IngestionStatusResponse>;
+  op getIngestionStatus(
+    @doc("Time series operator.")
+    @query
+    operators?: TimeSeriesOperator,
+
+    @doc("Start time.")
+    @query
+    startTime?: utcDateTime,
+
+    @doc("End time.")
+    @query
+    endTime?: utcDateTime,
+  ): GenericOkResponse<IngestionStatusResponse>;
 
   @doc("Query the data.")
   @action("entityData")

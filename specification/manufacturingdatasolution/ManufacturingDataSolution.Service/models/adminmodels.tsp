@@ -11,6 +11,12 @@ using MdsCommon;
 
 namespace AdminModels;
 
+@doc("Represents the Version Id")
+model DataVersionId {
+  @doc("The identifier for the data version.")
+  versionId: string;
+}
+
 @doc("Represents a data version.")
 @resource("version")
 model DataVersion {

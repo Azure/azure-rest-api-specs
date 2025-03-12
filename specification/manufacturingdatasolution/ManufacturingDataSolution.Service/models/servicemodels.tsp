@@ -50,7 +50,7 @@ model MdsHealthSetupInfo {
 @doc("Represents a mappings table model.")
 @resource("normalizationTable")
 model NormalizationTable {
-  @doc("The name of the entity.")
+  @doc("The name of the normalizationTable.")
   @key
   @visibility(Lifecycle.Read, Lifecycle.Update)
   name: string;
@@ -62,11 +62,26 @@ model NormalizationTable {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
   @doc("The mapping table records.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  mappingsTable: Record<unknown>;
+  normalizationRecords: NormalizationTableRecord[];
 
   @doc("The available versions of the table.")
   @visibility(Lifecycle.Read)
   availableVersions?: Record<string>;
+}
+
+@doc("Represents a record in the normalization table.")
+model NormalizationTableRecord {
+  @doc("The name of the property.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  key: string;
+
+  @doc("The value of the property.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  value: string = "";
+
+  @doc("Flag indicating if used in Ingestion")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  usedInIngestion: boolean = false;
 }
 
 @doc("Represents a response model for OPC UA mapping.")
@@ -110,11 +125,6 @@ model OpcuaMappingData {
  */
 model UpdateEntityJobStatusResponse {
   /**
-   * The status of the job to delete Cosmos properties.
-   */
-  deleteCosmosPropertiesJobStatus?: string;
-
-  /**
    * The status of the job to delete ADX properties.
    */
   deleteAdxPropertiesJobStatus?: string;
@@ -140,7 +150,7 @@ model JobStatusResponse {
 
   @doc("The type of the job.")
   @visibility(Lifecycle.Read)
-  type: string;
+  type?: string;
 
   @doc("The message of the job status.")
   message?: UpdateEntityJobStatusResponse;

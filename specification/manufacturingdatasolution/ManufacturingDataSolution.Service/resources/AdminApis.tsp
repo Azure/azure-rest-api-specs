@@ -60,11 +60,7 @@ namespace MdsSolution.AdminApis {
     @action("switch")
     switchVersion is Operations.LongRunningResourceCollectionAction<
       DataVersion,
-      {
-        @doc("The identifier for the data version.")
-        @body
-        versionId: string;
-      },
+      DataVersionId,
       BackgroundJobHeaders
     >;
 

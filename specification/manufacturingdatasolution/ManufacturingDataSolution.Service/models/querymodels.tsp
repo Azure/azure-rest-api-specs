@@ -52,11 +52,9 @@ model IngestionStatusResponse {
   @doc("Ingestion status for relationships.")
   relationshipsData: RelationshipsIngestionData;
 
-  @doc("The reference data.")
-  referenceData: ModelCount[];
-
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "JsonObject array is not supported"
   @doc("The count of vectorization data.")
-  vectorizationDataCount: Record<string>;
+  vectorizationDataCount: Record<unknown>;
 }
 
 @doc("Represents a basic query request.")
@@ -115,9 +113,9 @@ model QueryResult {
   @visibility(Lifecycle.Read)
   hierarchyScope?: string;
 
-  @doc("Name of the entity.")
+  @doc("Equipment level.")
   @visibility(Lifecycle.Read)
-  name: string;
+  equipmentLevel?: string;
 
   @doc("Location of the operation ")
   @visibility(Lifecycle.Read)
@@ -126,6 +124,10 @@ model QueryResult {
   @doc("Location type of the operation.")
   @visibility(Lifecycle.Read)
   operationLocationType?: string;
+
+  @doc("Asset ID for the HR system.")
+  @visibility(Lifecycle.Read)
+  assetsystemrefid?: string;
 
   @doc("Reference ID for the HR system.")
   @visibility(Lifecycle.Read)
@@ -185,11 +187,8 @@ model RelatedEntityData {
   @doc("The path of the relationship.")
   path?: string[];
 
-  @doc("The type of entity.")
-  type: string;
-
   @doc("Timestamp of the entity data.")
-  timestamp: utcDateTime;
+  timestamp: utcDateTime[];
 
   @doc("The identifier for the equipment.")
   equipmentId?: string;
