@@ -865,4 +865,102 @@ namespace SkillContext
 		@doc("name of the flight")
 		configurationParameter?: string;
 	}
+	
+	// The following models are used for Dynamic Prompts controller
+	model DynamicPromptsSearchRequest {
+		@doc("The scenario name for the search.")
+		ScenarioName: string;
+		@doc("The index name for the search.")
+		IndexName: string;
+		@doc("The version of the index.")
+		Version: string;
+		@doc("The query string for the search.")
+		Query: string;
+		@doc("The search filter.")
+		SearchFilter?: string;
+		@doc("The number of top results to return.")
+		TopK: int32;
+		@doc("The score threshold for the search.")
+		ScoreThreshold: float32;
+		@doc("The number of nearest neighbors to consider.")
+		KNearestNeighborsCount: int32;
+	}
+
+	
+	model DynamicPromptsFilterRequest {
+		@doc("The selected columns for filtering.")
+		selectedColumns?: string[];
+		@doc("The filter string.")
+		filter?: string;
+	  }
+	
+	  model DynamicPromptsBaseRequest {
+		@doc("The scenario name for the request.")
+		scenarioName: string;
+		@doc("The index name for the request.")
+		indexName: string;
+		@doc("The version of the index.")
+		version: string;
+	  }
+	
+	  model DynamicPromptsIndexFilterRequest {
+		@doc("The scenario name for the index filter request.")
+		scenarioName: string;
+		@doc("The index name for the index filter request.")
+		indexName: string;
+		@doc("The version of the index.")
+		version: string;
+		@doc("The selected columns for filtering.")
+		selectedColumns?: string[];
+		@doc("The filter string.")
+		filter?: string;
+	  }
+	
+	  model DynamicPromptsSuggestedPromptsRequest {
+		@doc("The skillset name for the suggested prompts request.")
+		skillsetName: string;
+		@doc("The skill name for the suggested prompts request.")
+		skillName: string;
+		@doc("The prompt string.")
+		prompt: string;
+		@doc("The response string.")
+		response: string;
+	  }
+	
+	  model DynamicPromptsSearchResponse {
+		@doc("The search results.")
+		results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
+	  }
+	
+	  model DynamicPromptsFilterResponse {
+		@doc("The filter results.")
+		results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
+	  }
+	
+	  model DocumentCountResponse {
+		@doc("The document count.")
+		count: int64;
+	  }
+	
+	  model DynamicPromptsIndexFilterResponse {
+		@doc("The index filter results.")
+		results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
+	  }
+	
+	  model PhysicalIndexExistsResponse {
+		@doc("Indicates whether the physical index exists.")
+		exists: boolean;
+	  }
+	
+	  model SuggestedPromptsResponse {
+		@doc("The suggested prompts.")
+		prompts: SuggestedPrompt[];
+	  }
+	
+	  model ScoredDoc<T> {
+		@doc("The score of the document.")
+		score: float32;
+		@doc("The document.")
+		document: T;
+	  }
 }
