@@ -48,6 +48,9 @@ model Metadata {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("Attack Objective")
 model AttackObjective {
+  @doc("The unique identifier.")
+  Id: string;
+
   @doc("The metadata.")
   Metadata?: Metadata;
 
