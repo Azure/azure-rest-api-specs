@@ -9,6 +9,7 @@ namespace Microsoft.Sovereign;
 
 @added(Versions.Preview20250227)
 @doc("The properties of landing zone configuration resource type.")
+@clientName("LZConfigurationProperties", "!autorest")
 model LandingZoneConfigurationResourceProperties {
   @visibility("read")
   @doc("The state that reflects the current stage in the creation, updating, or deletion process of the landing zone configuration.")
@@ -153,6 +154,7 @@ model Tags {
 }
 
 @doc("The 'Landing Zones' management group properties..")
+@clientName("LZManagementGroupProperties", "!autorest")
 model LandingZoneManagementGroupProperties {
   ...ManagementGroupProperties;
 
@@ -258,7 +260,7 @@ model GenerateLandingZoneRequest {
 }
 
 @doc("The response payload for generating infrastructure-as-code for the landing zone.")
-@clientName("GenerateLandingZoneResult", "csharp")
+@clientName("GenerateLandingZoneResult", "!autorest")
 model GenerateLandingZoneResponse {
   @doc("The parent management group name of the landing zone deployment.")
   topLevelMgDisplayName: string;
@@ -294,7 +296,7 @@ model UpdateAuthoringStatusRequest {
 }
 
 @doc("The response for authoring status update request.")
-@clientName("UpdateAuthoringStatusResult", "csharp")
+@clientName("UpdateAuthoringStatusResult", "!autorest")
 model UpdateAuthoringStatusResponse {
   @doc("The name of the landing zone configuration resource.")
   landingZoneConfigurationName: string;
@@ -364,6 +366,7 @@ model CreateCopyRequest {
 }
 
 @doc("The response of the request for duplicate landing zone configuration.")
+@clientName("CreateCopyResult", "!autorest")
 model CreateCopyResponse {
   @doc("The ID of the duplicate landing zone configuration resource.")
   copiedLandingZoneConfigurationId: armResourceIdentifier<[
@@ -374,6 +377,7 @@ model CreateCopyResponse {
 }
 
 @doc("The request for create duplicate landing zone configuration.")
+@clientName("CreateLZConfigurationCopyRequest", "!autorest")
 model CreateLandingZoneConfigurationCopyRequest {
   @doc("The name of the duplicate landing zone configuration resource.")
   @pattern("^[a-zA-Z0-9-]{3,64}$")
@@ -381,7 +385,7 @@ model CreateLandingZoneConfigurationCopyRequest {
 }
 
 @doc("The response of the create duplicate landing zone configuration.")
-@clientName("CreateLandingZoneConfigurationCopyResult", "csharp")
+@clientName("CreateLZConfigurationCopyResult", "!autorest")
 model CreateLandingZoneConfigurationCopyResponse {
   @doc("The ID of the duplicate landing zone configuration resource.")
   copiedLandingZoneConfigurationId: armResourceIdentifier<[

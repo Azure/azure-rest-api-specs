@@ -1,11 +1,15 @@
+import "@azure-tools/typespec-client-generator-core";
+
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Sovereign;
 
 @added(Versions.Preview20250227)
 @doc("The properties of landing zone account resource type.")
+@clientName("LZAccountProperties", "!autorest")
 model LandingZoneAccountResourceProperties {
   @visibility("read")
   @doc("The state that reflects the current stage in the creation, updating, or deletion process of the landing zone account.")

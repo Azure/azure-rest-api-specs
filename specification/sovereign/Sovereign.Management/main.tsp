@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 import "./common.tsp";
 import "./landingZoneAccountResourceProperties.tsp";
@@ -15,6 +16,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using OpenAPI;
 
 @service({
@@ -30,6 +32,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("The Landing zone account resource type. A Landing zone account is the container for configuring, deploying and managing multiple landing zones.")
 @added(Versions.Preview20250227)
 @resource("landingZoneAccounts")
+@clientName("LZAccount", "!autorest")
 model LandingZoneAccountResource
   is TrackedResource<LandingZoneAccountResourceProperties> {
   @doc("The landing zone account.")
@@ -66,6 +69,7 @@ interface LandingZoneAccountOperations {
 @parentResource(LandingZoneAccountResource)
 @added(Versions.Preview20250227)
 @resource("landingZoneConfigurations")
+@clientName("LZConfiguration", "!autorest")
 model LandingZoneConfigurationResource
   is ProxyResource<LandingZoneConfigurationResourceProperties> {
   @doc("The landing zone configuration name")
@@ -132,6 +136,7 @@ interface LandingZoneConfigurationOperations {
 @added(Versions.Preview20250227)
 @resource("landingZoneRegistrations")
 @doc("The Landing zone registration resource type.")
+@clientName("LZRegistration", "!autorest")
 model LandingZoneRegistrationResource
   is ProxyResource<LandingZoneRegistrationResourceProperties> {
   @doc("The name of the landing zone registration resource.")
