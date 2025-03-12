@@ -33,7 +33,7 @@ model Gate is TrackedResource<GateProperties> {
 union GateType {
   string,
 
-  @doc("An Approval Gate is completed by patching its status.")
+  @doc("An approval gate is completed by setting its state to be Completed.")
   Approval: "Approval",
 }
 
@@ -120,7 +120,7 @@ model UpdateRunGateTarget {
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
   @maxLength(50)
-  stage: string;
+  stage?: string;
 
   @doc("The Update Group of the Update Run.")
   @visibility(Lifecycle.Read)

@@ -3352,7 +3352,7 @@
           {
             "name": "Approval",
             "value": "Approval",
-            "description": "An Approval Gate is completed by patching its status."
+            "description": "An approval gate is completed by setting its state to be Completed."
           }
         ]
       }
@@ -3788,14 +3788,14 @@
           "pattern": "^[A-Za-z0-9].*$",
           "readOnly": true
         },
-        "status": {
-          "$ref": "#/definitions/UpdateStatus",
-          "description": "The status of the Gate.",
-          "readOnly": true
-        },
         "gateId": {
           "$ref": "#/definitions/GateResourceId",
           "description": "The resource id of the Gate.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The status of the Gate.",
           "readOnly": true
         }
       }
@@ -3839,7 +3839,6 @@
       },
       "required": [
         "name",
-        "stage",
         "timing"
       ]
     },

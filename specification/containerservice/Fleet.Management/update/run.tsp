@@ -327,13 +327,13 @@ model UpdateRunGateStatus {
   @maxLength(100)
   displayName?: string;
 
-  @doc("The status of the Gate.")
-  @visibility("read")
-  status?: UpdateStatus;
-
   @doc("The resource id of the Gate.")
   @visibility("read")
   gateId?: GateResourceId;
+
+  @doc("The status of the Gate.")
+  @visibility("read")
+  status?: UpdateStatus;
 }
 
 @doc("The status of a member update operation.")
