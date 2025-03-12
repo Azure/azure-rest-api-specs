@@ -4615,6 +4615,28 @@
         "resourceId"
       ]
     },
+    "AzureApiManagementSourceImportApis": {
+      "type": "object",
+      "description": "API source configuration for Azure API Management.",
+      "properties": {
+        "sourceResourceIds": {
+          "type": "array",
+          "description": "An entity the metadata schema is requested for.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "msiResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "(Optional) The resource ID of the managed identity that has access to the API Management instance."
+        }
+      },
+      "required": [
+        "sourceResourceIds"
+      ]
+    },
     "Contact": {
       "type": "object",
       "description": "Contact information",
@@ -5094,7 +5116,7 @@
           "description": "API source type"
         },
         "azureApiManagementSource": {
-          "$ref": "#/definitions/AzureApiManagementSource",
+          "$ref": "#/definitions/AzureApiManagementSourceImportApis",
           "description": "API source configuration for Azure API Management."
         },
         "amazonApiGatewaySource": {
