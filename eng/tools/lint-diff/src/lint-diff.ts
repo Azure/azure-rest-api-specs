@@ -283,6 +283,9 @@ async function runLintDiff(
     existingViolations.push(...existingItems);
   }
 
+  newViolations.sort(compareLintDiffViolations);
+  existingViolations.sort(compareLintDiffViolations);
+
   // MUST FIX Following errors/warnings are introduced by the current PR
   // Rule | Message | Related RPC [For API reviewers]
   if (newViolations.length > 0) {
@@ -297,7 +300,7 @@ async function runLintDiff(
 
     for (const violation of newViolations.slice(0, 50)) {
       const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />${getFile(violation)} ${getLine(violation)} | TODO |\n`;
+      outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} | TODO |\n`;
     }
 
     outputMarkdown += `\n\n`;
@@ -318,7 +321,7 @@ async function runLintDiff(
 
     for (const violation of existingViolations.slice(0, 50)) {
       const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />${getFile(violation)} ${getLine(violation)} |\n`;
+      outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} |\n`;
     }
 
     outputMarkdown += `\n\n`;
@@ -343,7 +346,53 @@ async function executeCommand(
   });
 }
 
-export function getAutorestViolations() {}
+/**
+ * Compare two LintDiffViolation objects for sorting. First sort by level with
+ * error being higher than warning. Then sort by file name and line number.
+ * @param a
+ * @param b
+ */
+export function compareLintDiffViolations(a: LintDiffViolation, b: LintDiffViolation): number {
+  // Sort by level
+  if (isFailure(a.level) && isWarning(b.level)) {
+    return -1;
+  } else if (isWarning(a.level) && isFailure(b.level)) {
+    return 1;
+  }
+
+  // Sort by file name
+  if (getFile(a) !== getFile(b)) {
+    return getFile(a)!.localeCompare(getFile(b)!);
+  }
+
+  // Sort by line number
+  const lineA = getLine(a) || 0;
+  const lineB = getLine(b) || 0;
+
+  if (lineA < lineB) {
+    return -1;
+  } else if (lineA > lineB) {
+    return 1;
+  }
+
+  return 0;
+}
+
+/**
+ * Normalize a path to be relative to a given directory.
+ * @param path File path with separators from the current system
+ * @param by A directory name to treat as the root (e.g. /specification/)
+ */
+// TODO: maybe use a different name so as not to be confused with path normalize
+export function normalizePath(path: string, by: string = `${sep}specification${sep}`): string {
+  const indexOfBy = path.indexOf(by);
+  // TODO: how to handle case where `by` is not found?
+  if (indexOfBy === -1) {
+    return path;
+  }
+
+  return path.substring(indexOfBy);
+}
 
 export function getDocUrl(id: string) {
   if (id == "FATAL") {

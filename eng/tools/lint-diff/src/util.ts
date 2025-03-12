@@ -462,6 +462,7 @@ export function getNewItems(
         // TODO: this is a direct copy, see if there is a better way
         basename(beforeViolation.source?.[0]?.document) ==
           basename(afterViolation.source?.[0]?.document) &&
+        // TODO: details?
         arrayIsEqual(beforeViolation.details?.jsonpath, afterViolation.details?.jsonpath)
       ) {
         errorIsNew = false;
