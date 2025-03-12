@@ -320,6 +320,7 @@ async function runLintDiff(
     }
   }
 
+  console.log(`Writing output to ${outFile}`);
   await writeFile(outFile, outputMarkdown);
 }
 
