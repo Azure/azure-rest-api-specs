@@ -817,42 +817,42 @@
         "x-ms-examples": {
           "Get Private Link Resource": {
             "$ref": "./examples/FluidRelayPrivateEndpoint_GetPrivateLinkResource.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
           },
-          "parameters": [
-            {
-              "$ref": "#/parameters/SubscriptionId"
-            },
-            {
-              "$ref": "#/parameters/ResourceGroup"
-            },
-            {
-              "$ref": "#/parameters/FluidRelayServerName"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "name": "privateLinkResourceName",
-              "in": "path",
-              "description": "The name of the private link resource.",
-              "required": true,
-              "type": "string"
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/FluidRelayServerName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "The name of the private link resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
-              }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
-            "default": {
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-              },
-              "description": "Error in operation.",
-              "x-ms-error-response": true
-            }
+            "description": "Error in operation.",
+            "x-ms-error-response": true
           }
         }
       }
