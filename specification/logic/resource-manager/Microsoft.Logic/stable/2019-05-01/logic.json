@@ -46,6 +46,9 @@
       "name": "Workflows"
     },
     {
+      "name": "Templates"
+    },
+    {
       "name": "WorkflowVersions"
     },
     {
@@ -268,7 +271,8 @@
             "in": "path",
             "description": "The integration service environment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -309,7 +313,8 @@
             "in": "path",
             "description": "The integration service environment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "resource",
@@ -380,7 +385,8 @@
             "in": "path",
             "description": "The integration service environment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "properties",
@@ -399,6 +405,20 @@
               "$ref": "#/definitions/IntegrationServiceEnvironment"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -410,7 +430,11 @@
           "Patch an integration service environment": {
             "$ref": "./examples/IntegrationServiceEnvironments_Patch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "IntegrationServiceEnvironments_Delete",
@@ -430,7 +454,8 @@
             "in": "path",
             "description": "The integration service environment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -473,7 +498,8 @@
             "in": "path",
             "description": "The integration service environment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -519,14 +545,16 @@
             "in": "path",
             "description": "The integration service environment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "apiName",
             "in": "path",
             "description": "The api name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -567,14 +595,16 @@
             "in": "path",
             "description": "The integration service environment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "apiName",
             "in": "path",
             "description": "The api name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "resource",
@@ -645,14 +675,16 @@
             "in": "path",
             "description": "The integration service environment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "apiName",
             "in": "path",
             "description": "The api name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -710,14 +742,16 @@
             "in": "path",
             "description": "The integration service environment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "apiName",
             "in": "path",
             "description": "The api name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -758,7 +792,8 @@
             "in": "path",
             "description": "The integration service environment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -796,7 +831,8 @@
             "in": "path",
             "description": "The integration service environment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -836,7 +872,8 @@
             "in": "path",
             "description": "The integration service environment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -844,6 +881,55 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/IntegrationServiceEnvironmentSkuList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Logic/templates": {
+      "get": {
+        "operationId": "Templates_ListBySubscription",
+        "tags": [
+          "Templates"
+        ],
+        "description": "Gets a list of templates by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of items to be included in the result.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Options for filters include: State, Trigger, and ReferencedResourceId.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TemplateListResult"
             }
           },
           "default": {
@@ -984,7 +1070,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -1028,7 +1115,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "resource",
@@ -1087,7 +1175,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "properties",
@@ -1140,7 +1229,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -1186,7 +1276,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "$top",
@@ -1250,14 +1341,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "agreementName",
             "in": "path",
             "description": "The integration account agreement name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -1301,14 +1394,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "agreementName",
             "in": "path",
             "description": "The integration account agreement name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "resource",
@@ -1367,14 +1462,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "agreementName",
             "in": "path",
             "description": "The integration account agreement name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -1420,14 +1517,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "agreementName",
             "in": "path",
             "description": "The integration account agreement name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -1482,7 +1581,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -1523,14 +1623,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "assemblyArtifactName",
             "in": "path",
             "description": "The assembly artifact name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -1569,14 +1671,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "assemblyArtifactName",
             "in": "path",
             "description": "The assembly artifact name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "resource",
@@ -1630,14 +1734,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "assemblyArtifactName",
             "in": "path",
             "description": "The assembly artifact name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -1678,14 +1784,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "assemblyArtifactName",
             "in": "path",
             "description": "The assembly artifact name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -1726,7 +1834,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -1767,14 +1876,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "batchConfigurationName",
             "in": "path",
             "description": "The batch configuration name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -1813,14 +1924,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "batchConfigurationName",
             "in": "path",
             "description": "The batch configuration name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "resource",
@@ -1874,14 +1987,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "batchConfigurationName",
             "in": "path",
             "description": "The batch configuration name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -1922,7 +2037,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "$top",
@@ -1979,14 +2095,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "certificateName",
             "in": "path",
             "description": "The integration account certificate name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -2030,14 +2148,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "certificateName",
             "in": "path",
             "description": "The integration account certificate name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "resource",
@@ -2096,14 +2216,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "certificateName",
             "in": "path",
             "description": "The integration account certificate name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -2149,7 +2271,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -2204,7 +2327,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -2259,7 +2383,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -2311,7 +2436,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "$top",
@@ -2375,14 +2501,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "mapName",
             "in": "path",
             "description": "The integration account map name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -2426,14 +2554,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "mapName",
             "in": "path",
             "description": "The integration account map name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "resource",
@@ -2495,14 +2625,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "mapName",
             "in": "path",
             "description": "The integration account map name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -2548,14 +2680,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "mapName",
             "in": "path",
             "description": "The integration account map name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -2610,7 +2744,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "$top",
@@ -2674,14 +2809,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "partnerName",
             "in": "path",
             "description": "The integration account partner name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -2725,14 +2862,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "partnerName",
             "in": "path",
             "description": "The integration account partner name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "resource",
@@ -2791,14 +2930,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "partnerName",
             "in": "path",
             "description": "The integration account partner name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -2844,14 +2985,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "partnerName",
             "in": "path",
             "description": "The integration account partner name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -2906,7 +3049,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -2961,7 +3105,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "$top",
@@ -3025,14 +3170,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "schemaName",
             "in": "path",
             "description": "The integration account schema name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -3076,14 +3223,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "schemaName",
             "in": "path",
             "description": "The integration account schema name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "resource",
@@ -3142,14 +3291,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "schemaName",
             "in": "path",
             "description": "The integration account schema name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -3195,14 +3346,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "schemaName",
             "in": "path",
             "description": "The integration account schema name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -3257,7 +3410,8 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "$top",
@@ -3321,14 +3475,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "sessionName",
             "in": "path",
             "description": "The integration account session name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -3372,14 +3528,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "sessionName",
             "in": "path",
             "description": "The integration account session name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "resource",
@@ -3438,14 +3596,16 @@
             "in": "path",
             "description": "The integration account name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "sessionName",
             "in": "path",
             "description": "The integration account session name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -3569,6 +3729,244 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/templates": {
+      "get": {
+        "operationId": "Templates_ListByResourceGroup",
+        "tags": [
+          "Templates"
+        ],
+        "description": "Gets a list of templates by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of items to be included in the result.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Options for filters include: State, Trigger, and ReferencedResourceId.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TemplateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/templates/{templateName}": {
+      "get": {
+        "operationId": "Templates_Get",
+        "tags": [
+          "Templates"
+        ],
+        "description": "Gets a template.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "templateName",
+            "in": "path",
+            "description": "The template name.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Templates_CreateOrUpdate",
+        "tags": [
+          "Templates"
+        ],
+        "description": "Creates or updates a template.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "templateName",
+            "in": "path",
+            "description": "The template name.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The template.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Template' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "201": {
+            "description": "Resource 'Template' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Templates_Update",
+        "tags": [
+          "Templates"
+        ],
+        "description": "Updates a template.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "templateName",
+            "in": "path",
+            "description": "The template name.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TemplateUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Templates_Delete",
+        "tags": [
+          "Templates"
+        ],
+        "description": "Deletes a template.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "templateName",
+            "in": "path",
+            "description": "The template name.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows": {
       "get": {
         "operationId": "Workflows_ListByResourceGroup",
@@ -3648,7 +4046,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -3692,7 +4091,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "resource",
@@ -3751,7 +4151,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "properties",
@@ -3804,7 +4205,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -3850,7 +4252,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -3893,7 +4296,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -3936,7 +4340,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -3992,7 +4397,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -4047,7 +4453,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -4094,7 +4501,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -4164,7 +4572,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -4216,14 +4625,16 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "runName",
             "in": "path",
             "description": "The workflow run name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -4269,14 +4680,16 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "runName",
             "in": "path",
             "description": "The workflow run name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "$top",
@@ -4340,21 +4753,24 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "runName",
             "in": "path",
             "description": "The workflow run name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "actionName",
             "in": "path",
             "description": "The workflow action name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -4400,21 +4816,24 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "runName",
             "in": "path",
             "description": "The workflow run name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "actionName",
             "in": "path",
             "description": "The workflow action name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -4460,21 +4879,24 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "runName",
             "in": "path",
             "description": "The workflow run name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "actionName",
             "in": "path",
             "description": "The workflow action name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -4518,28 +4940,32 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "runName",
             "in": "path",
             "description": "The workflow run name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "actionName",
             "in": "path",
             "description": "The workflow action name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "repetitionName",
             "in": "path",
             "description": "The workflow repetition.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -4580,28 +5006,32 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "runName",
             "in": "path",
             "description": "The workflow run name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "actionName",
             "in": "path",
             "description": "The workflow action name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "repetitionName",
             "in": "path",
             "description": "The workflow repetition.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -4642,28 +5072,32 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "runName",
             "in": "path",
             "description": "The workflow run name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "actionName",
             "in": "path",
             "description": "The workflow action name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "repetitionName",
             "in": "path",
             "description": "The workflow repetition.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -4707,35 +5141,40 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "runName",
             "in": "path",
             "description": "The workflow run name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "actionName",
             "in": "path",
             "description": "The workflow action name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "repetitionName",
             "in": "path",
             "description": "The workflow repetition.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "requestHistoryName",
             "in": "path",
             "description": "The request history name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -5016,14 +5455,16 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "runName",
             "in": "path",
             "description": "The workflow run name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -5180,7 +5621,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "$top",
@@ -5244,14 +5686,16 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "triggerName",
             "in": "path",
             "description": "The workflow trigger name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -5297,14 +5741,16 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "triggerName",
             "in": "path",
             "description": "The workflow trigger name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "$top",
@@ -5368,21 +5814,24 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "triggerName",
             "in": "path",
             "description": "The workflow trigger name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "historyName",
             "in": "path",
             "description": "The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -5428,21 +5877,24 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "triggerName",
             "in": "path",
             "description": "The workflow trigger name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "historyName",
             "in": "path",
             "description": "The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -5500,14 +5952,16 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "triggerName",
             "in": "path",
             "description": "The workflow trigger name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -5553,14 +6007,16 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "triggerName",
             "in": "path",
             "description": "The workflow trigger name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -5606,14 +6062,16 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "triggerName",
             "in": "path",
             "description": "The workflow trigger name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -5656,14 +6114,16 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "triggerName",
             "in": "path",
             "description": "The workflow trigger name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -5724,14 +6184,16 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "triggerName",
             "in": "path",
             "description": "The workflow trigger name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -5783,7 +6245,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "body",
@@ -5835,7 +6298,8 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "$top",
@@ -5892,14 +6356,16 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "versionId",
             "in": "path",
             "description": "The workflow versionId.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           }
         ],
         "responses": {
@@ -5945,14 +6411,16 @@
             "in": "path",
             "description": "The workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "versionId",
             "in": "path",
             "description": "The workflow versionId.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
           },
           {
             "name": "triggerName",
@@ -6954,7 +7422,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -6990,6 +7458,24 @@
       "allOf": [
         {
           "$ref": "#/definitions/ArtifactContentPropertiesDefinition"
+        }
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ]
     },
@@ -7064,7 +7550,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8523,6 +9009,164 @@
         ]
       }
     },
+    "FlowTemplateConnectorDetails": {
+      "type": "object",
+      "description": "The template properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind."
+        }
+      }
+    },
+    "FlowTemplateDetails": {
+      "type": "object",
+      "description": "The template details.",
+      "properties": {
+        "by": {
+          "type": "string",
+          "description": "The template author."
+        },
+        "category": {
+          "type": "string",
+          "description": "The template category."
+        }
+      }
+    },
+    "FlowTemplateManifest": {
+      "type": "object",
+      "description": "The flow template manifest.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        },
+        "summary": {
+          "type": "string",
+          "description": "The summary."
+        },
+        "type": {
+          "$ref": "#/definitions/FlowTemplateType",
+          "description": "The flow template type."
+        },
+        "supportedSku": {
+          "$ref": "#/definitions/FlowTemplateSku",
+          "description": "The flow template supported sku."
+        },
+        "featuredConnectors": {
+          "$ref": "#/definitions/FlowTemplateConnectorDetails",
+          "description": "The flow template connector details."
+        },
+        "details": {
+          "$ref": "#/definitions/FlowTemplateDetails",
+          "description": "The flow template details."
+        }
+      }
+    },
+    "FlowTemplateSku": {
+      "type": "string",
+      "description": "The flow template sku.",
+      "enum": [
+        "None",
+        "Consumption",
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "FlowTemplateSku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The flow template sku is none."
+          },
+          {
+            "name": "Consumption",
+            "value": "Consumption",
+            "description": "The flow template sku is consumption."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The flow template sku is standard."
+          }
+        ]
+      }
+    },
+    "FlowTemplateState": {
+      "type": "string",
+      "description": "The flow template state.",
+      "enum": [
+        "NotSpecified",
+        "Development",
+        "Testing",
+        "Production"
+      ],
+      "x-ms-enum": {
+        "name": "FlowTemplateState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The flow template is in the draft state."
+          },
+          {
+            "name": "Development",
+            "value": "Development",
+            "description": "The flow template is in the development state."
+          },
+          {
+            "name": "Testing",
+            "value": "Testing",
+            "description": "The flow template is in the testing state."
+          },
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "The flow template is in the production state."
+          }
+        ]
+      }
+    },
+    "FlowTemplateType": {
+      "type": "string",
+      "description": "The flow template type.",
+      "enum": [
+        "NotSpecified",
+        "Workflow",
+        "Accelerator"
+      ],
+      "x-ms-enum": {
+        "name": "FlowTemplateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The flow template type is not specified."
+          },
+          {
+            "name": "Workflow",
+            "value": "Workflow",
+            "description": "The flow template type is workflow."
+          },
+          {
+            "name": "Accelerator",
+            "value": "Accelerator",
+            "description": "The flow template type is accelerator."
+          }
+        ]
+      }
+    },
     "GenerateUpgradedDefinitionParameters": {
       "type": "object",
       "description": "The parameters to generate upgraded definition.",
@@ -8635,7 +9279,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8734,7 +9378,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8830,7 +9474,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8931,7 +9575,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -9029,7 +9673,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -9128,7 +9772,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -11249,6 +11893,76 @@
         }
       }
     },
+    "Template": {
+      "type": "object",
+      "description": "The template type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TemplateProperties",
+          "description": "The template properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TemplateListResult": {
+      "type": "object",
+      "description": "The response of a Template list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Template items on this page",
+          "items": {
+            "$ref": "#/definitions/Template"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TemplateProperties": {
+      "type": "object",
+      "description": "The flow template connector details.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/WorkflowProvisioningState",
+          "description": "The provisioning state.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/FlowTemplateState",
+          "description": "The flow template state."
+        },
+        "manifest": {
+          "$ref": "#/definitions/FlowTemplateManifest",
+          "description": "The flow template type."
+        }
+      }
+    },
+    "TemplateUpdate": {
+      "type": "object",
+      "description": "The template type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TemplateProperties",
+          "description": "The template properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "TrackEventsOperationOptions": {
       "type": "string",
       "description": "The track events operation options.",
@@ -12781,7 +13495,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },

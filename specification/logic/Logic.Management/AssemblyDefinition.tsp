@@ -14,12 +14,12 @@ namespace Microsoft.Logic;
 @doc("The assembly definition.")
 @parentResource(IntegrationAccount)
 model AssemblyDefinition
-  is Azure.ResourceManager.TrackedResource<AssemblyProperties, false> {
+  is ProxyResource<AssemblyProperties, false> {
   ...ResourceNameParameter<
     Resource = AssemblyDefinition,
     KeyName = "assemblyArtifactName",
     SegmentName = "assemblies",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 

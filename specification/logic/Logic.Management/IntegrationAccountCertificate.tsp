@@ -14,7 +14,7 @@ namespace Microsoft.Logic;
 @doc("The integration account certificate.")
 @parentResource(IntegrationAccount)
 model IntegrationAccountCertificate
-  is Azure.ResourceManager.TrackedResource<
+  is ProxyResource<
     IntegrationAccountCertificateProperties,
     false
   > {
@@ -22,7 +22,7 @@ model IntegrationAccountCertificate
     Resource = IntegrationAccountCertificate,
     KeyName = "certificateName",
     SegmentName = "certificates",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 

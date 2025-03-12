@@ -19,7 +19,7 @@ model WorkflowTriggerHistory
     Resource = WorkflowTriggerHistory,
     KeyName = "historyName",
     SegmentName = "histories",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 

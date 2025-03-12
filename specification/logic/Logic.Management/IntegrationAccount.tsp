@@ -12,12 +12,12 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Logic;
 @doc("The integration account.")
 model IntegrationAccount
-  is Azure.ResourceManager.TrackedResource<IntegrationAccountProperties> {
+  is TrackedResource<IntegrationAccountProperties> {
   ...ResourceNameParameter<
     Resource = IntegrationAccount,
     KeyName = "integrationAccountName",
     SegmentName = "integrationAccounts",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 
   @doc("The sku.")

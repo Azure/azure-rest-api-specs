@@ -6,18 +6,17 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Logic;
 @doc("The workflow type.")
-model Workflow is Azure.ResourceManager.TrackedResource<WorkflowProperties> {
+model Workflow is TrackedResource<WorkflowProperties> {
   ...ResourceNameParameter<
     Resource = Workflow,
     KeyName = "workflowName",
     SegmentName = "workflows",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 
@@ -30,7 +29,7 @@ interface Workflows {
   createOrUpdate is ArmResourceCreateOrReplaceSync<Workflow>;
 
   @doc("Updates a workflow.")
-  update is ArmCustomPatchSync<Workflow, PatchModel = { ...ArmTagsProperty }>;
+  update is ArmCustomPatchSync<Workflow, PatchModel = { ...Azure.ResourceManager.Foundations.ArmTagsProperty }>;
 
   @doc("Deletes a workflow.")
   delete is ArmResourceDeleteSync<Workflow>;

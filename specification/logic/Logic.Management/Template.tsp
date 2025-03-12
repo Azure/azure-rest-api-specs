@@ -13,18 +13,18 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Logic;
 
-@added(Versions.v2025_06_01_preview)
+// @added(Versions.v2025_06_01_preview)
 @doc("The template type.")
-model Template is Azure.ResourceManager.TrackedResource<TemplateProperties> {
+model Template is TrackedResource<TemplateProperties> {
   ...ResourceNameParameter<
     Resource = Template,
     KeyName = "templateName",
     SegmentName = "templates",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 
-@added(Versions.v2025_06_01_preview)
+// @added(Versions.v2025_06_01_preview)
 @armResourceOperations
 interface Templates {
   @doc("Gets a template.")
@@ -42,6 +42,7 @@ interface Templates {
   @doc("Gets a list of templates by resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Template,
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
     Parameters = {
       @doc("The number of items to be included in the result.")
       @query("$top")
@@ -66,62 +67,8 @@ interface Templates {
       $filter?: string;
     }
   >;
-
-  @doc("Disables a template.")
-  disable is ArmResourceActionSync<Template, void, OkResponse>;
-
-  @doc("Enables a template.")
-  enable is ArmResourceActionSync<Template, void, OkResponse>;
-
-  @doc("Generates the upgraded definition for a template.")
-  generateUpgradedDefinition is ArmResourceActionSync<
-    Template,
-    GenerateUpgradedDefinitionParameters,
-    ArmResponse<Record<unknown>>
-  >;
-
-  @doc("Get the template callback Url.")
-  listCallbackUrl is ArmResourceActionSync<
-  Template,
-    GetCallbackUrlParameters,
-    ArmResponse<WorkflowTriggerCallbackUrl>
-  >;
-
-  @doc("Gets an OpenAPI definition for the template.")
-  listSwagger is ArmResourceActionSync<
-  Template,
-    void,
-    ArmResponse<Record<unknown>>
-  >;
-
-  @doc("Moves an existing template.")
-  move is ArmResourceActionAsync<Template, WorkflowReference, OkResponse>;
-
-  @doc("Regenerates the callback URL access key for request triggers.")
-  regenerateAccessKey is ArmResourceActionSync<
-  Template,
-    RegenerateActionParameter,
-    OkResponse
-  >;
-
-  @doc("Validates the template.")
-  @action("validate")
-  validateByResourceGroup is ArmResourceActionSync<
-  Template,
-    Workflow,
-    OkResponse
-  >;
 }
 
 @@doc(Template.name, "The template name.");
 @@doc(Template.properties, "The template properties.");
 @@doc(Templates.createOrUpdate::parameters.resource, "The template.");
-@@doc(Templates.generateUpgradedDefinition::parameters.body,
-  "Parameters for generating an upgraded definition."
-);
-@@doc(Templates.listCallbackUrl::parameters.body,
-  "Which callback url to list."
-);
-@@doc(Templates.move::parameters.body, "The template to move.");
-@@doc(Templates.regenerateAccessKey::parameters.body, "The access key type.");
-@@doc(Templates.validateByResourceGroup::parameters.body, "The template.");

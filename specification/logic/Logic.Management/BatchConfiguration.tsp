@@ -14,7 +14,7 @@ namespace Microsoft.Logic;
 @doc("The batch configuration resource definition.")
 @parentResource(IntegrationAccount)
 model BatchConfiguration
-  is Azure.ResourceManager.TrackedResource<
+  is ProxyResource<
     BatchConfigurationProperties,
     false
   > {
@@ -22,7 +22,7 @@ model BatchConfiguration
     Resource = BatchConfiguration,
     KeyName = "batchConfigurationName",
     SegmentName = "batchConfigurations",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 

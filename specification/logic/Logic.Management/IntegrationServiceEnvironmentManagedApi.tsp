@@ -14,12 +14,12 @@ namespace Microsoft.Logic;
 @doc("The integration service environment managed api.")
 @parentResource(IntegrationServiceEnvironment)
 model IntegrationServiceEnvironmentManagedApi
-  is Azure.ResourceManager.TrackedResource<IntegrationServiceEnvironmentManagedApiProperties> {
+  is TrackedResource<IntegrationServiceEnvironmentManagedApiProperties> {
   ...ResourceNameParameter<
     Resource = IntegrationServiceEnvironmentManagedApi,
     KeyName = "apiName",
     SegmentName = "managedApis",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 
@@ -30,7 +30,7 @@ model ApiOperation is Azure.ResourceManager.ProxyResource<ApiOperationProperties
     Resource = ApiOperation,
     KeyName = "apiOperationName",
     SegmentName = "apiOperations",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
     >;
 }
 

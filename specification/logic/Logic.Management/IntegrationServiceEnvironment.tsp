@@ -13,12 +13,12 @@ namespace Microsoft.Logic;
 @doc("The integration service environment.")
 @subscriptionResource
 model IntegrationServiceEnvironment
-  is Azure.ResourceManager.TrackedResource<IntegrationServiceEnvironmentProperties> {
+  is TrackedResource<IntegrationServiceEnvironmentProperties> {
   ...ResourceNameParameter<
     Resource = IntegrationServiceEnvironment,
     KeyName = "integrationServiceEnvironmentName",
     SegmentName = "integrationServiceEnvironments",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 
   @doc("The sku.")
@@ -29,32 +29,21 @@ model IntegrationServiceEnvironment
 @armResourceOperations
 interface IntegrationServiceEnvironments {
   @doc("Gets an integration service environment.")
-  get is ArmResourceRead<
-    IntegrationServiceEnvironment,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  get is ArmResourceRead<IntegrationServiceEnvironment>;
 
   @doc("Creates or updates an integration service environment.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     IntegrationServiceEnvironment,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    // BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Updates an integration service environment.")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    IntegrationServiceEnvironment,
-    PatchModel = IntegrationServiceEnvironment,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<IntegrationServiceEnvironment>
-  >;
+  update is ArmResourcePatchAsync<IntegrationServiceEnvironment,IntegrationServiceEnvironmentProperties>;
 
   @doc("Deletes an integration service environment.")
-  delete is ArmResourceDeleteSync<
-    IntegrationServiceEnvironment,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  delete is ArmResourceDeleteSync<IntegrationServiceEnvironment>;
 
   @doc("Gets a list of integration service environments by resource group.")
   listByResourceGroup is ArmResourceListByParent<
@@ -81,8 +70,8 @@ interface IntegrationServiceEnvironments {
   restart is ArmResourceActionSync<
     IntegrationServiceEnvironment,
     void,
-    OkResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    OkResponse
+    // BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   @doc("Gets a list of integration service environment Skus.")
@@ -91,8 +80,8 @@ interface IntegrationServiceEnvironments {
   list is ArmResourceActionSync<
     IntegrationServiceEnvironment,
     void,
-    ArmResponse<IntegrationServiceEnvironmentSkuList>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    ArmResponse<IntegrationServiceEnvironmentSkuList>
+    // BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   @doc("Gets the integration service environment network health.")
@@ -101,8 +90,8 @@ interface IntegrationServiceEnvironments {
   integrationServiceEnvironmentNetworkHealthGet is ArmResourceActionSync<
     IntegrationServiceEnvironment,
     void,
-    ArmResponse<IntegrationServiceEnvironmentNetworkHealth>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    ArmResponse<IntegrationServiceEnvironmentNetworkHealth>
+    // BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 }
 

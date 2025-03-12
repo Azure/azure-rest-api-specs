@@ -14,7 +14,7 @@ namespace Microsoft.Logic;
 @doc("The integration account partner.")
 @parentResource(IntegrationAccount)
 model IntegrationAccountPartner
-  is Azure.ResourceManager.TrackedResource<
+  is ProxyResource<
     IntegrationAccountPartnerProperties,
     false
   > {
@@ -22,7 +22,7 @@ model IntegrationAccountPartner
     Resource = IntegrationAccountPartner,
     KeyName = "partnerName",
     SegmentName = "partners",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 

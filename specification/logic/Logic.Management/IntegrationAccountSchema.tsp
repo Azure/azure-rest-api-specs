@@ -14,7 +14,7 @@ namespace Microsoft.Logic;
 @doc("The integration account schema.")
 @parentResource(IntegrationAccount)
 model IntegrationAccountSchema
-  is Azure.ResourceManager.TrackedResource<
+  is ProxyResource<
     IntegrationAccountSchemaProperties,
     false
   > {
@@ -22,7 +22,7 @@ model IntegrationAccountSchema
     Resource = IntegrationAccountSchema,
     KeyName = "schemaName",
     SegmentName = "schemas",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 

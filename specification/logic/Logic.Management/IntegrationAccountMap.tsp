@@ -14,7 +14,7 @@ namespace Microsoft.Logic;
 @doc("The integration account map.")
 @parentResource(IntegrationAccount)
 model IntegrationAccountMap
-  is Azure.ResourceManager.TrackedResource<
+  is ProxyResource<
     IntegrationAccountMapProperties,
     false
   > {
@@ -22,7 +22,7 @@ model IntegrationAccountMap
     Resource = IntegrationAccountMap,
     KeyName = "mapName",
     SegmentName = "maps",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 

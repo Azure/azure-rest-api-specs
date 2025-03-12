@@ -19,7 +19,7 @@ model WorkflowRunActionRepetitionDefinition
     Resource = WorkflowRunActionRepetitionDefinition,
     KeyName = "repetitionName",
     SegmentName = "repetitions",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 

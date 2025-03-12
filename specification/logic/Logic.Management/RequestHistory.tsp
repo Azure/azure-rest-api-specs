@@ -17,7 +17,7 @@ model RequestHistory is ProxyResource<RequestHistoryProperties> {
     Resource = RequestHistory,
     KeyName = "requestHistoryName",
     SegmentName = "requestHistories",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 

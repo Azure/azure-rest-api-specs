@@ -14,12 +14,12 @@ namespace Microsoft.Logic;
 @doc("The workflow version.")
 @parentResource(Workflow)
 model WorkflowVersion
-  is Azure.ResourceManager.TrackedResource<WorkflowVersionProperties> {
+  is ProxyResource<WorkflowVersionProperties> {
   ...ResourceNameParameter<
     Resource = WorkflowVersion,
     KeyName = "versionId",
     SegmentName = "versions",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 

@@ -19,7 +19,7 @@ model WorkflowTrigger
     Resource = WorkflowTrigger,
     KeyName = "triggerName",
     SegmentName = "triggers",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 

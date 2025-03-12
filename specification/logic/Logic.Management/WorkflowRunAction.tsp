@@ -19,7 +19,7 @@ model WorkflowRunAction
     Resource = WorkflowRunAction,
     KeyName = "actionName",
     SegmentName = "actions",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 

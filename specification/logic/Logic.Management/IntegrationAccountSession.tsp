@@ -14,7 +14,7 @@ namespace Microsoft.Logic;
 @doc("The integration account session.")
 @parentResource(IntegrationAccount)
 model IntegrationAccountSession
-  is Azure.ResourceManager.TrackedResource<
+  is ProxyResource<
     IntegrationAccountSessionProperties,
     false
   > {
@@ -22,7 +22,7 @@ model IntegrationAccountSession
     Resource = IntegrationAccountSession,
     KeyName = "sessionName",
     SegmentName = "sessions",
-    NamePattern = ""
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
   >;
 }
 
