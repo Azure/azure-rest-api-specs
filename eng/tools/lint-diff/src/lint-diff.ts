@@ -301,7 +301,7 @@ async function runLintDiff(
 
     for (const violation of newViolations.slice(0, 50)) {
       const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} | TODO |\n`;
+      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} | TODO |\n`;
     }
 
     outputMarkdown += "\n";
@@ -323,7 +323,7 @@ async function runLintDiff(
 
     for (const violation of existingViolations.slice(0, 50)) {
       const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} |\n`;
+      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} |\n`;
     }
 
     outputMarkdown += `\n`;
