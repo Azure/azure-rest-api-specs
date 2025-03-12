@@ -38,6 +38,9 @@ suppressions:
   - code: AvoidAnonymousTypes
     from: openapi.json
     where: $.paths["/admin/cleanup/{entityName}"].delete.responses.202.schema
+  - code: AvoidAnonymousTypes
+    from: openapi.json
+    where: $.paths["/entity:update"].post.responses.202.schema
 ```
 
 ### Tag: package-2025-03-01
