@@ -88,11 +88,6 @@ model EnclaveDefaultSettings {
   @doc("Key Vault Resource Id.")
   keyVaultResourceId?: KeyVaultResourceId;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @doc("Log Analytics Resource Id.")
-  logAnalyticsResourceId?: LogAnalyticsResourceId;
-
   @doc("Storage Account Resource Id.")
   storageAccountResourceId?: StorageAccountResourceId;
 
@@ -109,11 +104,9 @@ model EnclaveDefaultSettings {
 
 @doc("Enclave Address Spaces")
 model EnclaveAddressSpaces {
-  @madeOptional(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Enclave Address Space")
   enclaveAddressSpace?: string;
 
-  @madeOptional(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Managed Address Space")
   managedAddressSpace?: string;
 }
@@ -155,17 +148,13 @@ model VirtualEnclaveProperties {
   resourceCollection?: armResourceIdentifier[];
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @madeOptional(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Managed resource group configuration.")
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfiguration;
 
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Deploy Bastion service (True or False).")
   bastionEnabled?: boolean;
 

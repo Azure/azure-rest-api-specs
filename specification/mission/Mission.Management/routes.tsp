@@ -11,9 +11,6 @@ import "./resourcetypes/community/community.tsp";
 import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
 import "./resourcetypes/workload/workload.tsp";
 import "./resourcetypes/catalog/catalog.tsp";
-import "./resourcetypes/endpoint/endpoint.tsp";
-import "./resourcetypes/internalConnection/internalConnection.tsp";
-import "./resourcetypes/externalConnection/externalConnection.tsp";
 import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
 import "./resourcetypes/transitHub/transitHub.tsp";
 import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
@@ -59,27 +56,6 @@ interface Workload {
   listBySubscription is ArmListBySubscription<WorkloadResource>;
 }
 
-@doc("Endpoint Interface")
-@armResourceOperations
-interface Endpoint {
-  get is ArmResourceRead<EndpointResource>;
-  @useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    EndpointResource,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmAsyncOperationHeader
-  >;
-  update is ArmCustomPatchAsync<
-    EndpointResource,
-    PatchModel = EndpointPatchResource
-  >;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<EndpointResource>;
-  listByEnclaveResource is ArmResourceListByParent<EndpointResource>;
-  listBySubscription is ArmListBySubscription<EndpointResource>;
-}
-
 @doc("Virtual Enclave Interface")
 @armResourceOperations
 interface VirtualEnclave {
@@ -99,20 +75,6 @@ interface VirtualEnclave {
   delete is ArmResourceDeleteWithoutOkAsync<EnclaveResource>;
   listByResourceGroup is ArmResourceListByParent<EnclaveResource>;
   listBySubscription is ArmListBySubscription<EnclaveResource>;
-
-  @autoRoute
-  @doc("Checks that the IP Address Space to be allocated for this Virtual Enclave is available.")
-  @armResourceAction(EnclaveResource)
-  @post
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
-  checkAddressSpaceAvailability(
-    ...ResourceInstanceParameters<EnclaveResource>,
-
-    @doc("Check IP Address Space request body.")
-    @bodyRoot
-    checkAddressSpaceAvailabilityRequest: CheckAddressSpaceAvailabilityRequest,
-  ): ArmResponse<CheckAddressSpaceAvailabilityResponse> | ErrorResponse;
 
   @doc("Callback that triggers on approval state change.")
   @armResourceAction(EnclaveResource)
@@ -164,51 +126,6 @@ interface Community {
     @bodyRoot
     checkAddressSpaceAvailabilityRequest: CheckAddressSpaceAvailabilityRequest,
   ): ArmResponse<CheckAddressSpaceAvailabilityResponse> | ErrorResponse;
-}
-
-#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-@removed(Microsoft.Mission.Versions.v2024_06_01_preview)
-@doc("Catalog Interface")
-@armResourceOperations
-@renamedFrom(Microsoft.Mission.Versions.v2024_06_01_preview, "Catalog")
-interface CatalogInterface {
-  get is ArmResourceRead<CatalogResource>;
-  @useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    CatalogResource,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmAsyncOperationHeader
-  >;
-  update is ArmCustomPatchAsync<
-    CatalogResource,
-    PatchModel = CatalogPatchResource
-  >;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteAsync<CatalogResource>;
-  listByResourceGroup is ArmResourceListByParent<CatalogResource>;
-  listBySubscription is ArmListBySubscription<CatalogResource>;
-}
-
-@doc("Internal Connections")
-@armResourceOperations
-interface InternalConnections {
-  get is ArmResourceRead<InternalConnection>;
-  @useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    InternalConnection,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmAsyncOperationHeader
-  >;
-  update is ArmCustomPatchAsync<
-    InternalConnection,
-    PatchModel = InternalConnectionPatchResource
-  >;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<InternalConnection>;
-  listByResourceGroup is ArmResourceListByParent<InternalConnection>;
-  listBySubscription is ArmListBySubscription<InternalConnection>;
 }
 
 @added(Microsoft.Mission.Versions.v2024_06_01_preview)
@@ -348,27 +265,6 @@ interface CommunityEndpoints {
     ApprovalDeletionCallbackRequest,
     ApprovalDeletionCallbackResponse
   >;
-}
-
-@doc("External Connections")
-@armResourceOperations
-interface ExternalConnections {
-  get is ArmResourceRead<ExternalConnection>;
-  @useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    ExternalConnection,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmAsyncOperationHeader
-  >;
-  update is ArmCustomPatchAsync<
-    ExternalConnection,
-    PatchModel = ExternalConnectionPatchResource
-  >;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<ExternalConnection>;
-  listByResourceGroup is ArmResourceListByParent<ExternalConnection>;
-  listBySubscription is ArmListBySubscription<ExternalConnection>;
 }
 
 @added(Microsoft.Mission.Versions.v2024_06_01_preview)

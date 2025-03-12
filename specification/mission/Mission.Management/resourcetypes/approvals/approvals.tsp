@@ -99,17 +99,6 @@ model ApprovalProperties {
   approvers?: Approver[];
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
-  @doc("List of mandatory approvers for the approval request")
-  mandatoryApprovers?: Approver[];
-
-  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @doc("Minimum number of approvers required for the approval request")
-  minimumApproversRequired?: int64;
-
-  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Ticket ID for the approval request")
   ticketId?: string;
 

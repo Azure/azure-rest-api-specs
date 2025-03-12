@@ -40,23 +40,6 @@ union EnclaveEndpointProtocol {
   string,
 }
 
-#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-@removed(Microsoft.Mission.Versions.v2024_06_01_preview)
-@doc("Enclave Endpoint Rule Properties")
-model EnclaveEndpointRule {
-  @doc("Endpoint Rule Name.")
-  name?: string;
-
-  @doc("IP Address. Can include multiple CIDR/IP Addresses separated by commas.")
-  address?: string;
-
-  @doc("Port. Can include multiple ports separated by commas or a range indicated by a hyphen.")
-  port?: string;
-
-  @doc("Protocol. Options specified by Endpoint Protocol Enum.")
-  protocol?: EnclaveEndpointProtocol;
-}
-
 @doc("Enclave Endpoint Rule Properties")
 model EnclaveEndpointDestinationRule is EndpointRuleBase {
   @doc("Protocols. Options specified by Endpoint Protocol Enum.")
@@ -70,12 +53,6 @@ model EnclaveEndpointProperties {
   @extension("x-ms-identifiers", #[])
   @doc("Enclave Endpoint Rule Collection.")
   ruleCollection: EnclaveEndpointDestinationRule[];
-
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @extension("x-ms-identifiers", #["name"])
-  @doc("Endpoint Rule Collection.")
-  endpointRuleCollection?: EnclaveEndpointRule[];
 
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of resource ids created by community endpoint.")

@@ -11,9 +11,6 @@ import "./resourcetypes/community/community.tsp";
 import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
 import "./resourcetypes/workload/workload.tsp";
 import "./resourcetypes/catalog/catalog.tsp";
-import "./resourcetypes/endpoint/endpoint.tsp";
-import "./resourcetypes/internalConnection/internalConnection.tsp";
-import "./resourcetypes/externalConnection/externalConnection.tsp";
 import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
 import "./resourcetypes/transitHub/transitHub.tsp";
 import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
@@ -85,49 +82,6 @@ model WorkloadResource is TrackedResource<WorkloadProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-@removed(Microsoft.Mission.Versions.v2024_06_01_preview)
-@doc("Catalog Model Resource")
-model CatalogResource is TrackedResource<CatalogProperties> {
-  @key("catalogName")
-  @segment("catalogs")
-  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
-  @doc("The name of the catalogResource Resource")
-  @path
-  name: string;
-}
-
-@doc("Endpoint Model Resource")
-@parentResource(EnclaveResource)
-model EndpointResource is TrackedResource<EndpointProperties> {
-  @key("endpointName")
-  @segment("endpoints")
-  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
-  @path
-  @doc("The name of the endpointResource Resource")
-  name: string;
-}
-
-@doc("Describes an Internal Connection.")
-model InternalConnection is TrackedResource<InternalConnectionProperties> {
-  @key("internalConnectionName")
-  @segment("internalConnections")
-  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
-  @doc("The name of the internal connection.")
-  @path
-  name: string;
-}
-
-@doc("Describes an External Connection.")
-model ExternalConnection is TrackedResource<ExternalConnectionProperties> {
-  @key("externalConnectionName")
-  @segment("externalConnections")
-  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
-  @doc("The name of the external connection.")
-  @path
-  name: string;
-}
-
 @added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("TransitHub Model Resource")
 @parentResource(CommunityResource)
@@ -135,7 +89,7 @@ model TransitHubResource is TrackedResource<TransitHubProperties> {
   @key("transitHubName")
   @segment("transitHubs")
   @path
-  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @pattern("^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$")
   @doc("The name of the TransitHub Resource")
   name: string;
 }
@@ -147,7 +101,7 @@ model EnclaveConnectionResource
   @key("enclaveConnectionName")
   @segment("enclaveConnections")
   @path
-  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @pattern("^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$")
   @doc("The name of the Enclave Connection Resource")
   name: string;
 }
@@ -159,7 +113,7 @@ model EnclaveEndpointResource is TrackedResource<EnclaveEndpointProperties> {
   @key("enclaveEndpointName")
   @segment("enclaveEndpoints")
   @path
-  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @pattern("^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$")
   @doc("The name of the Enclave Endpoint Resource")
   name: string;
 }
@@ -172,7 +126,7 @@ model CommunityEndpointResource
   @key("communityEndpointName")
   @segment("communityEndpoints")
   @path
-  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @pattern("^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$")
   @doc("The name of the Community Endpoint Resource")
   name: string;
 }
