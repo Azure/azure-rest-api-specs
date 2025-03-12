@@ -92,6 +92,9 @@ suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: Backups.json
     reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: TuningOptions.json
+    reason: Suppression for this PR. The existing API contract is like this and not be able to changed.
 ```
 
 ### Tag: package-flexibleserver-2024-11-preview
