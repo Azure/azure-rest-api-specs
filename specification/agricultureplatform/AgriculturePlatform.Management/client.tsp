@@ -6,7 +6,12 @@ using Microsoft.AgriculturePlatform;
 
 @@clientName(Microsoft.AgriculturePlatform,
   "AgriculturePlatformMgmtClient",
-  "python"
+  "python,java"
+);
+
+@@clientNamespace(Microsoft.AgriculturePlatform,
+  "com.azure.resourcemanager.agricultureplatform",
+  "java"
 );
 
 // csharp
