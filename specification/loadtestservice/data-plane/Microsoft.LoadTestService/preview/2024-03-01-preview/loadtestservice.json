@@ -797,7 +797,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TestRunServerMetricConfig"
+              "$ref": "#/definitions/TestRunServerMetricsConfiguration"
             }
           },
           "default": {
@@ -849,7 +849,7 @@
             "description": "Server metric configuration model.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TestRunServerMetricConfig"
+              "$ref": "#/definitions/TestRunServerMetricsConfiguration"
             }
           }
         ],
@@ -857,13 +857,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TestRunServerMetricConfig"
+              "$ref": "#/definitions/TestRunServerMetricsConfiguration"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/TestRunServerMetricConfig"
+              "$ref": "#/definitions/TestRunServerMetricsConfiguration"
             }
           },
           "default": {
@@ -1381,32 +1381,32 @@
               "modelAsString": true,
               "values": [
                 {
-                  "name": "JMX_FILE",
+                  "name": "JmxFile",
                   "value": "JMX_FILE",
                   "description": "If the file is a JMX script."
                 },
                 {
-                  "name": "USER_PROPERTIES",
+                  "name": "UserProperties",
                   "value": "USER_PROPERTIES",
                   "description": "If the file is a user properties file."
                 },
                 {
-                  "name": "ADDITIONAL_ARTIFACTS",
+                  "name": "AdditionalArtifacts",
                   "value": "ADDITIONAL_ARTIFACTS",
                   "description": "If the file is not among any of the other supported file types."
                 },
                 {
-                  "name": "ZIPPED_ARTIFACTS",
+                  "name": "ZippedArtifacts",
                   "value": "ZIPPED_ARTIFACTS",
                   "description": "If the file is a compressed archive containing a collection of various artifacts or resources."
                 },
                 {
-                  "name": "URL_TEST_CONFIG",
+                  "name": "UrlTestConfig",
                   "value": "URL_TEST_CONFIG",
                   "description": "If the file is a JSON config file to define the requests for a URL test."
                 },
                 {
-                  "name": "TEST_SCRIPT",
+                  "name": "TestScript",
                   "value": "TEST_SCRIPT",
                   "description": "If the file is a test script."
                 }
@@ -1530,7 +1530,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TestServerMetricConfig"
+              "$ref": "#/definitions/TestServerMetricsConfiguration"
             }
           },
           "default": {
@@ -1582,7 +1582,7 @@
             "description": "Server metric configuration model.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TestServerMetricConfigUpdate"
+              "$ref": "#/definitions/TestServerMetricsConfigurationUpdate"
             }
           }
         ],
@@ -1590,13 +1590,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TestServerMetricConfig"
+              "$ref": "#/definitions/TestServerMetricsConfiguration"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/TestServerMetricConfig"
+              "$ref": "#/definitions/TestServerMetricsConfiguration"
             }
           },
           "default": {
@@ -1621,7 +1621,7 @@
     }
   },
   "definitions": {
-    "AggregationType": {
+    "Aggregation": {
       "type": "string",
       "description": "Aggregation type.",
       "enum": [
@@ -1634,7 +1634,7 @@
         "Percentile99"
       ],
       "x-ms-enum": {
-        "name": "AggregationType",
+        "name": "Aggregation",
         "modelAsString": true,
         "values": [
           {
@@ -1681,6 +1681,7 @@
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}",
           "readOnly": true
         },
@@ -1839,6 +1840,10 @@
         }
       }
     },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "CertificateMetadata": {
       "type": "object",
       "description": "Certificates metadata",
@@ -1868,7 +1873,7 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "AKV_CERT_URI",
+            "name": "KeyVaultCertificateUri",
             "value": "AKV_CERT_URI",
             "description": "If the certificate is stored in an Azure Key Vault."
           }
@@ -1940,48 +1945,6 @@
         }
       }
     },
-    "FileStatus": {
-      "type": "string",
-      "description": "File status.",
-      "enum": [
-        "NOT_VALIDATED",
-        "VALIDATION_SUCCESS",
-        "VALIDATION_FAILURE",
-        "VALIDATION_INITIATED",
-        "VALIDATION_NOT_REQUIRED"
-      ],
-      "x-ms-enum": {
-        "name": "FileStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NOT_VALIDATED",
-            "value": "NOT_VALIDATED",
-            "description": "File is not validated."
-          },
-          {
-            "name": "VALIDATION_SUCCESS",
-            "value": "VALIDATION_SUCCESS",
-            "description": "File is validated."
-          },
-          {
-            "name": "VALIDATION_FAILURE",
-            "value": "VALIDATION_FAILURE",
-            "description": "File validation is failed."
-          },
-          {
-            "name": "VALIDATION_INITIATED",
-            "value": "VALIDATION_INITIATED",
-            "description": "File validation is in progress."
-          },
-          {
-            "name": "VALIDATION_NOT_REQUIRED",
-            "value": "VALIDATION_NOT_REQUIRED",
-            "description": "Validation is not required."
-          }
-        ]
-      }
-    },
     "FileType": {
       "type": "string",
       "description": "Types of file supported.",
@@ -1998,34 +1961,76 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "JMX_FILE",
+            "name": "JmxFile",
             "value": "JMX_FILE",
             "description": "If the file is a JMX script."
           },
           {
-            "name": "USER_PROPERTIES",
+            "name": "UserProperties",
             "value": "USER_PROPERTIES",
             "description": "If the file is a user properties file."
           },
           {
-            "name": "ADDITIONAL_ARTIFACTS",
+            "name": "AdditionalArtifacts",
             "value": "ADDITIONAL_ARTIFACTS",
             "description": "If the file is not among any of the other supported file types."
           },
           {
-            "name": "ZIPPED_ARTIFACTS",
+            "name": "ZippedArtifacts",
             "value": "ZIPPED_ARTIFACTS",
             "description": "If the file is a compressed archive containing a collection of various artifacts or resources."
           },
           {
-            "name": "URL_TEST_CONFIG",
+            "name": "UrlTestConfig",
             "value": "URL_TEST_CONFIG",
             "description": "If the file is a JSON config file to define the requests for a URL test."
           },
           {
-            "name": "TEST_SCRIPT",
+            "name": "TestScript",
             "value": "TEST_SCRIPT",
             "description": "If the file is a test script."
+          }
+        ]
+      }
+    },
+    "FileValidationStatus": {
+      "type": "string",
+      "description": "File status.",
+      "enum": [
+        "NOT_VALIDATED",
+        "VALIDATION_SUCCESS",
+        "VALIDATION_FAILURE",
+        "VALIDATION_INITIATED",
+        "VALIDATION_NOT_REQUIRED"
+      ],
+      "x-ms-enum": {
+        "name": "FileValidationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotValidated",
+            "value": "NOT_VALIDATED",
+            "description": "File is not validated."
+          },
+          {
+            "name": "ValidationSuccess",
+            "value": "VALIDATION_SUCCESS",
+            "description": "File is validated."
+          },
+          {
+            "name": "ValidationFailure",
+            "value": "VALIDATION_FAILURE",
+            "description": "File validation is failed."
+          },
+          {
+            "name": "ValidationInitiated",
+            "value": "VALIDATION_INITIATED",
+            "description": "File validation is in progress."
+          },
+          {
+            "name": "ValidationNotRequired",
+            "value": "VALIDATION_NOT_REQUIRED",
+            "description": "Validation is not required."
           }
         ]
       }
@@ -2050,7 +2055,7 @@
           "default": false
         },
         "optionalLoadTestConfig": {
-          "$ref": "#/definitions/OptionalLoadTestConfig",
+          "$ref": "#/definitions/OptionalLoadTestConfiguration",
           "description": "Configuration for quick load test"
         },
         "regionalLoadTestConfig": {
@@ -2081,7 +2086,7 @@
           "type": "array",
           "description": "List of dimensions",
           "items": {
-            "$ref": "#/definitions/NameAndDesc"
+            "$ref": "#/definitions/NameAndDescription"
           },
           "x-ms-identifiers": []
         },
@@ -2098,7 +2103,7 @@
           "description": "The namespace the metric belongs to."
         },
         "primaryAggregationType": {
-          "$ref": "#/definitions/AggregationType",
+          "$ref": "#/definitions/Aggregation",
           "description": "The primary aggregation type value defining how to use the values for display."
         },
         "supportedAggregationTypes": {
@@ -2282,7 +2287,7 @@
         "value"
       ]
     },
-    "NameAndDesc": {
+    "NameAndDescription": {
       "type": "object",
       "description": "The name and description",
       "properties": {
@@ -2296,7 +2301,7 @@
         }
       }
     },
-    "OptionalLoadTestConfig": {
+    "OptionalLoadTestConfiguration": {
       "type": "object",
       "description": "Configuration for quick load test",
       "properties": {
@@ -2331,72 +2336,6 @@
         }
       }
     },
-    "PFAgFunc": {
-      "type": "string",
-      "description": "Aggregation functions for pass/fail criteria.",
-      "enum": [
-        "count",
-        "percentage",
-        "avg",
-        "p50",
-        "p90",
-        "p95",
-        "p99",
-        "min",
-        "max"
-      ],
-      "x-ms-enum": {
-        "name": "PFAgFunc",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "count",
-            "value": "count",
-            "description": "Criteria applies for count value."
-          },
-          {
-            "name": "percentage",
-            "value": "percentage",
-            "description": "Criteria applies for given percentage value."
-          },
-          {
-            "name": "avg",
-            "value": "avg",
-            "description": "Criteria applies for avg value."
-          },
-          {
-            "name": "p50",
-            "value": "p50",
-            "description": "Criteria applies for 50th percentile value."
-          },
-          {
-            "name": "p90",
-            "value": "p90",
-            "description": "Criteria applies for 90th percentile value."
-          },
-          {
-            "name": "p95",
-            "value": "p95",
-            "description": "Criteria applies for 95th percentile value."
-          },
-          {
-            "name": "p99",
-            "value": "p99",
-            "description": "Criteria applies for 99th percentile value."
-          },
-          {
-            "name": "min",
-            "value": "min",
-            "description": "Criteria applies for minimum value."
-          },
-          {
-            "name": "max",
-            "value": "max",
-            "description": "Criteria applies for maximum value."
-          }
-        ]
-      }
-    },
     "PFMetrics": {
       "type": "string",
       "description": "Metrics for pass/fail criteria.",
@@ -2412,89 +2351,29 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "response_time_ms",
+            "name": "ResponseTimeInMilliseconds",
             "value": "response_time_ms",
             "description": "Pass fail criteria for response time metric in milliseconds."
           },
           {
-            "name": "latency",
+            "name": "Latency",
             "value": "latency",
             "description": "Pass fail criteria for latency metric in milliseconds."
           },
           {
-            "name": "error",
+            "name": "Error",
             "value": "error",
             "description": "Pass fail criteria for error metric."
           },
           {
-            "name": "requests",
+            "name": "Requests",
             "value": "requests",
             "description": "Pass fail criteria for total requests."
           },
           {
-            "name": "requests_per_sec",
+            "name": "RequestsPerSecond",
             "value": "requests_per_sec",
             "description": "Pass fail criteria for request per second."
-          }
-        ]
-      }
-    },
-    "PFResult": {
-      "type": "string",
-      "description": "Pass/fail criteria result.",
-      "enum": [
-        "passed",
-        "undetermined",
-        "failed"
-      ],
-      "x-ms-enum": {
-        "name": "PFResult",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "passed",
-            "value": "passed",
-            "description": "Given pass fail criteria metric has passed."
-          },
-          {
-            "name": "undetermined",
-            "value": "undetermined",
-            "description": "Given pass fail criteria metric couldn't determine."
-          },
-          {
-            "name": "failed",
-            "value": "failed",
-            "description": "Given pass fail criteria metric has failed."
-          }
-        ]
-      }
-    },
-    "PFTestResult": {
-      "type": "string",
-      "description": "Test result based on pass/fail criteria.",
-      "enum": [
-        "PASSED",
-        "NOT_APPLICABLE",
-        "FAILED"
-      ],
-      "x-ms-enum": {
-        "name": "PFTestResult",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "PASSED",
-            "value": "PASSED",
-            "description": "Pass/fail criteria has passed."
-          },
-          {
-            "name": "NOT_APPLICABLE",
-            "value": "NOT_APPLICABLE",
-            "description": "Pass/fail criteria is not applicable."
-          },
-          {
-            "name": "FAILED",
-            "value": "FAILED",
-            "description": "Pass/fail criteria has failed."
           }
         ]
       }
@@ -2565,6 +2444,72 @@
         "value"
       ]
     },
+    "PassFailAggregationFunction": {
+      "type": "string",
+      "description": "Aggregation functions for pass/fail criteria.",
+      "enum": [
+        "count",
+        "percentage",
+        "avg",
+        "p50",
+        "p90",
+        "p95",
+        "p99",
+        "min",
+        "max"
+      ],
+      "x-ms-enum": {
+        "name": "PassFailAggregationFunction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Count",
+            "value": "count",
+            "description": "Criteria applies for count value."
+          },
+          {
+            "name": "Percentage",
+            "value": "percentage",
+            "description": "Criteria applies for given percentage value."
+          },
+          {
+            "name": "Average",
+            "value": "avg",
+            "description": "Criteria applies for avg value."
+          },
+          {
+            "name": "Percentile50",
+            "value": "p50",
+            "description": "Criteria applies for 50th percentile value."
+          },
+          {
+            "name": "Percentile90",
+            "value": "p90",
+            "description": "Criteria applies for 90th percentile value."
+          },
+          {
+            "name": "Percentile95",
+            "value": "p95",
+            "description": "Criteria applies for 95th percentile value."
+          },
+          {
+            "name": "Percentile99",
+            "value": "p99",
+            "description": "Criteria applies for 99th percentile value."
+          },
+          {
+            "name": "Minimum",
+            "value": "min",
+            "description": "Criteria applies for minimum value."
+          },
+          {
+            "name": "Maximum",
+            "value": "max",
+            "description": "Criteria applies for maximum value."
+          }
+        ]
+      }
+    },
     "PassFailCriteria": {
       "type": "object",
       "description": "Pass fail criteria for a test.",
@@ -2587,7 +2532,7 @@
           "description": "The client metric on which the criteria should be applied."
         },
         "aggregate": {
-          "$ref": "#/definitions/PFAgFunc",
+          "$ref": "#/definitions/PassFailAggregationFunction",
           "description": "The aggregation function to be applied on the client metric. Allowed functions\n- ‘percentage’ - for error metric , ‘avg’, percentiles like ‘p50’, ‘p90’, & so on, ‘min’,\n‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,\n‘count’ - for requests"
         },
         "condition": {
@@ -2612,7 +2557,7 @@
             "stop"
           ],
           "x-ms-enum": {
-            "name": "PFAction",
+            "name": "PassFailAction",
             "modelAsString": true,
             "values": [
               {
@@ -2635,10 +2580,70 @@
           "readOnly": true
         },
         "result": {
-          "$ref": "#/definitions/PFResult",
+          "$ref": "#/definitions/PassFailResult",
           "description": "Outcome of the test run.",
           "readOnly": true
         }
+      }
+    },
+    "PassFailResult": {
+      "type": "string",
+      "description": "Pass/fail criteria result.",
+      "enum": [
+        "passed",
+        "undetermined",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "PassFailResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "passed",
+            "value": "passed",
+            "description": "Given pass fail criteria metric has passed."
+          },
+          {
+            "name": "undetermined",
+            "value": "undetermined",
+            "description": "Given pass fail criteria metric couldn't determine."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "Given pass fail criteria metric has failed."
+          }
+        ]
+      }
+    },
+    "PassFailTestResult": {
+      "type": "string",
+      "description": "Test result based on pass/fail criteria.",
+      "enum": [
+        "PASSED",
+        "NOT_APPLICABLE",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "PassFailTestResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PASSED",
+            "value": "PASSED",
+            "description": "Pass/fail criteria has passed."
+          },
+          {
+            "name": "NOT_APPLICABLE",
+            "value": "NOT_APPLICABLE",
+            "description": "Pass/fail criteria is not applicable."
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "Pass/fail criteria has failed."
+          }
+        ]
       }
     },
     "RegionalConfiguration": {
@@ -2651,7 +2656,7 @@
           "description": "  The number of engine instances to execute load test in specified region. Supported values are in range of 1-400."
         },
         "region": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "Azure region name.\nThe region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as \"eastus\".\nThe region name must match one of the strings in the \"Name\" column returned from running the \"az account list-locations -o table\" Azure CLI command."
         }
       },
@@ -2671,6 +2676,7 @@
         },
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Azure resource id."
         },
         "metricNamespace": {
@@ -2712,6 +2718,7 @@
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Azure resource id."
         },
         "metricNamespace": {
@@ -2766,122 +2773,14 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "AKV_SECRET_URI",
+            "name": "KeyVaultSecretUri",
             "value": "AKV_SECRET_URI",
             "description": "If the secret is stored in an Azure Key Vault."
           },
           {
-            "name": "SECRET_VALUE",
+            "name": "SecretValue",
             "value": "SECRET_VALUE",
             "description": "If the secret value provided as plain text."
-          }
-        ]
-      }
-    },
-    "Status": {
-      "type": "string",
-      "description": "Test run status.",
-      "enum": [
-        "ACCEPTED",
-        "NOTSTARTED",
-        "PROVISIONING",
-        "PROVISIONED",
-        "CONFIGURING",
-        "CONFIGURED",
-        "EXECUTING",
-        "EXECUTED",
-        "DEPROVISIONING",
-        "DEPROVISIONED",
-        "DONE",
-        "CANCELLING",
-        "CANCELLED",
-        "FAILED",
-        "VALIDATION_SUCCESS",
-        "VALIDATION_FAILURE"
-      ],
-      "x-ms-enum": {
-        "name": "Status",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ACCEPTED",
-            "value": "ACCEPTED",
-            "description": "Test run request is accepted."
-          },
-          {
-            "name": "NOTSTARTED",
-            "value": "NOTSTARTED",
-            "description": "Test run is not yet started."
-          },
-          {
-            "name": "PROVISIONING",
-            "value": "PROVISIONING",
-            "description": "Test run is provisioning."
-          },
-          {
-            "name": "PROVISIONED",
-            "value": "PROVISIONED",
-            "description": "Test run is provisioned."
-          },
-          {
-            "name": "CONFIGURING",
-            "value": "CONFIGURING",
-            "description": "Test run is getting configured."
-          },
-          {
-            "name": "CONFIGURED",
-            "value": "CONFIGURED",
-            "description": "Test run configuration is done."
-          },
-          {
-            "name": "EXECUTING",
-            "value": "EXECUTING",
-            "description": "Test run has started executing."
-          },
-          {
-            "name": "EXECUTED",
-            "value": "EXECUTED",
-            "description": "Test run execution is completed."
-          },
-          {
-            "name": "DEPROVISIONING",
-            "value": "DEPROVISIONING",
-            "description": "Test run is getting deprovisioned."
-          },
-          {
-            "name": "DEPROVISIONED",
-            "value": "DEPROVISIONED",
-            "description": "Test run is deprovisioned."
-          },
-          {
-            "name": "DONE",
-            "value": "DONE",
-            "description": "Test run is completed."
-          },
-          {
-            "name": "CANCELLING",
-            "value": "CANCELLING",
-            "description": "Test run is being cancelled."
-          },
-          {
-            "name": "CANCELLED",
-            "value": "CANCELLED",
-            "description": "Test run request is cancelled."
-          },
-          {
-            "name": "FAILED",
-            "value": "FAILED",
-            "description": "Test run request is failed."
-          },
-          {
-            "name": "VALIDATION_SUCCESS",
-            "value": "VALIDATION_SUCCESS",
-            "description": "Test run JMX file is validated."
-          },
-          {
-            "name": "VALIDATION_FAILURE",
-            "value": "VALIDATION_FAILURE",
-            "description": "Test run JMX file validation is failed."
           }
         ]
       }
@@ -3148,7 +3047,7 @@
           "readOnly": true
         },
         "validationStatus": {
-          "$ref": "#/definitions/FileStatus",
+          "$ref": "#/definitions/FileValidationStatus",
           "description": "Validation status of the file",
           "readOnly": true
         },
@@ -3168,19 +3067,19 @@
       "properties": {
         "configFileInfo": {
           "$ref": "#/definitions/TestFileInfo",
-          "description": "File info"
+          "description": "The load test YAML file that contains the the test configuration"
         },
         "testScriptFileInfo": {
           "$ref": "#/definitions/TestFileInfo",
-          "description": "File info"
+          "description": "The test script file for the test run"
         },
         "userPropFileInfo": {
           "$ref": "#/definitions/TestFileInfo",
-          "description": "File info"
+          "description": "The user properties file"
         },
         "inputArtifactsZipFileInfo": {
           "$ref": "#/definitions/TestFileInfo",
-          "description": "File info"
+          "description": "The zip file with all input artifacts"
         },
         "urlTestConfigFileInfo": {
           "$ref": "#/definitions/TestFileInfo",
@@ -3210,12 +3109,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "URL",
+            "name": "Url",
             "value": "URL",
             "description": "URL Test"
           },
           {
-            "name": "JMX",
+            "name": "Jmx",
             "value": "JMX",
             "description": "JMX Test"
           },
@@ -3301,7 +3200,7 @@
           "readOnly": true
         },
         "testResult": {
-          "$ref": "#/definitions/PFTestResult",
+          "$ref": "#/definitions/PassFailTestResult",
           "description": "Test result for pass/Fail criteria used during the test run.",
           "readOnly": true
         },
@@ -3329,7 +3228,7 @@
           "maxLength": 100
         },
         "status": {
-          "$ref": "#/definitions/Status",
+          "$ref": "#/definitions/TestRunStatus",
           "description": "The test run status.",
           "readOnly": true
         },
@@ -3550,7 +3449,7 @@
           "readOnly": true
         },
         "validationStatus": {
-          "$ref": "#/definitions/FileStatus",
+          "$ref": "#/definitions/FileValidationStatus",
           "description": "Validation status of the file",
           "readOnly": true
         },
@@ -3570,19 +3469,19 @@
       "properties": {
         "configFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
-          "description": "File info"
+          "description": "The load test YAML file that contains the the test configuration"
         },
         "testScriptFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
-          "description": "File info"
+          "description": "The test script file for the test run"
         },
         "userPropFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
-          "description": "File info"
+          "description": "The user properties file"
         },
         "inputArtifactsZipFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
-          "description": "File info"
+          "description": "The zip file for all input artifacts"
         },
         "urlTestConfigFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
@@ -3605,11 +3504,11 @@
       "properties": {
         "resultFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
-          "description": "File info"
+          "description": "The test run results file"
         },
         "logsFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
-          "description": "File info"
+          "description": "The test run report with metrics"
         },
         "artifactsContainerInfo": {
           "$ref": "#/definitions/ArtifactsContainerInfo",
@@ -3617,7 +3516,7 @@
         }
       }
     },
-    "TestRunServerMetricConfig": {
+    "TestRunServerMetricsConfiguration": {
       "type": "object",
       "description": "Test run server metrics configuration",
       "properties": {
@@ -3746,7 +3645,115 @@
         }
       }
     },
-    "TestServerMetricConfig": {
+    "TestRunStatus": {
+      "type": "string",
+      "description": "Test run status.",
+      "enum": [
+        "ACCEPTED",
+        "NOTSTARTED",
+        "PROVISIONING",
+        "PROVISIONED",
+        "CONFIGURING",
+        "CONFIGURED",
+        "EXECUTING",
+        "EXECUTED",
+        "DEPROVISIONING",
+        "DEPROVISIONED",
+        "DONE",
+        "CANCELLING",
+        "CANCELLED",
+        "FAILED",
+        "VALIDATION_SUCCESS",
+        "VALIDATION_FAILURE"
+      ],
+      "x-ms-enum": {
+        "name": "TestRunStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "ACCEPTED",
+            "description": "Test run request is accepted."
+          },
+          {
+            "name": "NotStarted",
+            "value": "NOTSTARTED",
+            "description": "Test run is not yet started."
+          },
+          {
+            "name": "Provisioning",
+            "value": "PROVISIONING",
+            "description": "Test run is provisioning."
+          },
+          {
+            "name": "Provisioned",
+            "value": "PROVISIONED",
+            "description": "Test run is provisioned."
+          },
+          {
+            "name": "Configuring",
+            "value": "CONFIGURING",
+            "description": "Test run is getting configured."
+          },
+          {
+            "name": "Configured",
+            "value": "CONFIGURED",
+            "description": "Test run configuration is done."
+          },
+          {
+            "name": "Executing",
+            "value": "EXECUTING",
+            "description": "Test run has started executing."
+          },
+          {
+            "name": "Executed",
+            "value": "EXECUTED",
+            "description": "Test run execution is completed."
+          },
+          {
+            "name": "Deprovisioning",
+            "value": "DEPROVISIONING",
+            "description": "Test run is getting deprovisioned."
+          },
+          {
+            "name": "Deprovisioned",
+            "value": "DEPROVISIONED",
+            "description": "Test run is deprovisioned."
+          },
+          {
+            "name": "Done",
+            "value": "DONE",
+            "description": "Test run is completed."
+          },
+          {
+            "name": "Cancelling",
+            "value": "CANCELLING",
+            "description": "Test run is being cancelled."
+          },
+          {
+            "name": "Cancelled",
+            "value": "CANCELLED",
+            "description": "Test run request is cancelled."
+          },
+          {
+            "name": "Failed",
+            "value": "FAILED",
+            "description": "Test run request is failed."
+          },
+          {
+            "name": "ValidationSuccess",
+            "value": "VALIDATION_SUCCESS",
+            "description": "Test run JMX file is validated."
+          },
+          {
+            "name": "ValidationFailure",
+            "value": "VALIDATION_FAILURE",
+            "description": "Test run JMX file validation is failed."
+          }
+        ]
+      }
+    },
+    "TestServerMetricsConfiguration": {
       "type": "object",
       "description": "Test server metrics configuration",
       "properties": {
@@ -3789,7 +3796,7 @@
         "metrics"
       ]
     },
-    "TestServerMetricConfigUpdate": {
+    "TestServerMetricsConfigurationUpdate": {
       "type": "object",
       "description": "Test server metrics configuration",
       "properties": {
