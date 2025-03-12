@@ -582,7 +582,7 @@
           "Browse, reserve and purchase available phone numbers"
         ],
         "summary": "Starts the purchase of all phone numbers in the reservation.",
-        "description": "Starts a long running operation to purchase all of the phone numbers in the reservation. Purchase can only be started for active reservations that at least one phone number. If any of the phone numbers in the reservation is from a country where reselling is not permitted, do not resell consent is required. The response will include an 'Operation-Location' header that can be used to query the status of the operation.",
+        "description": "Starts a long running operation to purchase all of the phone numbers in the reservation. Purchase can only be started for active reservations that at least one phone number. If any of the phone numbers in the reservation is from a country where reselling is not permitted, do not resell agreement is required. The response will include an 'Operation-Location' header that can be used to query the status of the operation.",
         "produces": [
           "application/json"
         ],
@@ -1628,8 +1628,8 @@
           "description": "The search id.",
           "type": "string"
         },
-        "consentToNotResellNumbers": {
-          "description": "The consent to not resell numbers. Defaults to false if not provided.",
+        "agreeToNotResell": {
+          "description": "The agreement to not resell the phone numbers. Defaults to false if not provided.",
           "type": "boolean"
         }
       }
@@ -1743,8 +1743,8 @@
           "description": "The date that this search result expires and phone numbers are no longer on hold. A search result expires in less than 15min, e.g. 2020-11-19T16:31:49.048Z.",
           "type": "string"
         },
-        "isResellConsentRequired": {
-          "description": "Indicates if resell consent is required. If true, the phone number cannot be acquired unless the customer provides explicit constent to not resell it.",
+        "isDoNotResellAgreementRequired": {
+          "description": "Indicates if do not resell agreement is required. If true, the phone numbers cannot be acquired unless the customer provides explicit agreement to not resell it.",
           "type": "boolean"
         },
         "errorCode": {
@@ -2036,8 +2036,8 @@
             "modelAsString": true
           }
         },
-        "isResellConsentRequired": {
-          "description": "Indicates if resell consent is required. If true, the phone number cannot be acquired unless the customer provides explicit constent to not resell it.",
+        "isDoNotResellAgreementRequired": {
+          "description": "Indicates if do not resell agreement is required. If true, the phone numbers cannot be acquired unless the customer provides explicit agreement to not resell it.",
           "type": "boolean",
           "readOnly": true
         },
@@ -2126,8 +2126,8 @@
       "description": "The phone number search purchase request.",
       "type": "object",
       "properties": {
-        "consentToNotResellNumbers": {
-          "description": "The consent to not resell numbers. Defaults to false if not provided.",
+        "agreeToNotResell": {
+          "description": "The agreement to not resell the phone numbers. Defaults to false if not provided.",
           "type": "boolean"
         }
       }
