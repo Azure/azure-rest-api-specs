@@ -9,8 +9,6 @@ import {
 import { createMockCore } from "../../test/mocks.js";
 import incrementalTypeSpec from "../src/arm-incremental-typespec-preview.js";
 
-// TODO: Verify args to all calls to spyOn to catch bugs like passing wrong paths
-
 const core = createMockCore();
 
 describe("incrementalTypeSpec", () => {
@@ -30,23 +28,37 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
-    vi.spyOn(git, "show").mockResolvedValue(swaggerHandWritten);
+    const showSpy = vi.spyOn(git, "show").mockResolvedValue(swaggerHandWritten);
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
+
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
   });
 
   it("returns false if changed files add a new RP", async () => {
-    const swaggerPath =
-      "specification/contosowidgetmanager2/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
+    const specDir =
+      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso";
+    const swaggerPath = `${specDir}/preview/2021-10-01-preview/contoso.json`;
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
-    vi.spyOn(git, "show").mockResolvedValue(swaggerTypeSpecGenerated);
+    const showSpy = vi
+      .spyOn(git, "show")
+      .mockResolvedValue(swaggerTypeSpecGenerated);
 
     // "git ls-tree" returns "" if the spec folder doesn't exist in the base branch
-    vi.spyOn(git, "lsTree").mockResolvedValue("");
+    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue("");
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
+
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
+
+    expect(lsTreeSpy).toBeCalledWith(
+      "HEAD^",
+      specDir,
+      expect.anything(),
+      "-r --name-only",
+    );
   });
 
   it("returns false if swagger deleted", async () => {
@@ -55,11 +67,15 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
-    vi.spyOn(git, "show").mockRejectedValue(
-      new Error("path contoso.json does not exist in 'HEAD'"),
-    );
+    const showSpy = vi
+      .spyOn(git, "show")
+      .mockRejectedValue(
+        new Error("path contoso.json does not exist in 'HEAD'"),
+      );
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
+
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
   });
 
   it("returns false if swagger cannot be parsed as JSON", async () => {
@@ -68,30 +84,41 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
-    vi.spyOn(git, "show").mockResolvedValue("not } valid { json");
+    const showSpy = vi
+      .spyOn(git, "show")
+      .mockResolvedValue("not } valid { json");
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
+
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
   });
 
   it("returns false if tsp conversion", async () => {
-    const swaggerPath =
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
+    const specDir =
+      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso";
+    const swaggerPath = `${specDir}/preview/2021-10-01-preview/contoso.json`;
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
-    vi.spyOn(git, "show").mockImplementation((treeIsh) =>
-      treeIsh == "HEAD" ? swaggerTypeSpecGenerated : swaggerHandWritten,
-    );
+    const showSpy = vi
+      .spyOn(git, "show")
+      .mockImplementation((treeIsh) =>
+        treeIsh == "HEAD" ? swaggerTypeSpecGenerated : swaggerHandWritten,
+      );
 
-    vi.spyOn(git, "lsTree").mockImplementation(
-      async (_treeIsh, _path, _core, options) => {
-        return options?.includes("-r --name-only")
-          ? swaggerPath
-          : "040000 tree abc123 specification/contosowidgetmanager";
-      },
-    );
+    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue(swaggerPath);
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
+
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
+    expect(showSpy).toBeCalledWith("HEAD^", swaggerPath, expect.anything());
+
+    expect(lsTreeSpy).toBeCalledWith(
+      "HEAD^",
+      specDir,
+      expect.anything(),
+      "-r --name-only",
+    );
   });
 
   it("throws if git show returns unknown error", async () => {
@@ -100,28 +127,37 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
-    vi.spyOn(git, "show").mockRejectedValue("string error");
+    const showSpy = vi.spyOn(git, "show").mockRejectedValue("string error");
 
     await expect(incrementalTypeSpec({ core })).rejects.toThrowError();
+
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
   });
 
   it("returns true if changed files are incremental changes to an existing TypeSpec RP swagger", async () => {
-    const swaggerPath =
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
+    const specDir =
+      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso";
+    const swaggerPath = `${specDir}/preview/2021-10-01-preview/contoso.json`;
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
-    vi.spyOn(git, "show").mockResolvedValue(swaggerTypeSpecGenerated);
+    const showSpy = vi
+      .spyOn(git, "show")
+      .mockResolvedValue(swaggerTypeSpecGenerated);
 
-    vi.spyOn(git, "lsTree").mockImplementation(
-      async (_treeIsh, _path, _core, options) => {
-        return options?.includes("-r --name-only")
-          ? swaggerPath
-          : "040000 tree abc123 specification/contosowidgetmanager";
-      },
-    );
+    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue(swaggerPath);
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
+
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
+    expect(showSpy).toBeCalledWith("HEAD^", swaggerPath, expect.anything());
+
+    expect(lsTreeSpy).toBeCalledWith(
+      "HEAD^",
+      specDir,
+      expect.anything(),
+      "-r --name-only",
+    );
   });
 
   it("returns true if changed files are incremental changes to an existing TypeSpec RP readme", async () => {
@@ -135,8 +171,9 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
 
-    vi.spyOn(git, "show").mockImplementation(
-      async (_treeIsh, path, _core, _options) => {
+    const showSpy = vi
+      .spyOn(git, "show")
+      .mockImplementation(async (_treeIsh, path, _core, _options) => {
         if (path === swaggerPath) {
           return swaggerTypeSpecGenerated;
         } else if (path === readmePath) {
@@ -144,16 +181,14 @@ describe("incrementalTypeSpec", () => {
         } else {
           throw new Error("does not exist");
         }
-      },
-    );
+      });
 
-    const lsTreeSpy = vi
-      .spyOn(git, "lsTree")
-      .mockImplementation(
-        async (_treeIsh, _path, _core, _options) => swaggerPath,
-      );
+    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue(swaggerPath);
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
+
+    expect(showSpy).toBeCalledWith("HEAD", readmePath, expect.anything());
+    expect(showSpy).toBeCalledWith("HEAD^", swaggerPath, expect.anything());
 
     expect(lsTreeSpy).toHaveBeenCalledWith(
       "HEAD^",
@@ -164,32 +199,29 @@ describe("incrementalTypeSpec", () => {
   });
 
   it("returns true if changed files are incremental changes to an existing TypeSpec RP example", async () => {
-    const swaggerPath =
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
-
+    const specDir =
+      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso";
+    const swaggerPath = `${specDir}/preview/2021-10-01-preview/contoso.json`;
     const examplesPath =
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json";
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([examplesPath]);
 
-    vi.spyOn(git, "show").mockImplementation(
-      async (_treeIsh, path, _core, _options) => {
-        if (path === swaggerPath) {
-          return swaggerTypeSpecGenerated;
-        } else {
-          throw new Error("does not exist");
-        }
-      },
-    );
+    const showSpy = vi
+      .spyOn(git, "show")
+      .mockResolvedValue(swaggerTypeSpecGenerated);
 
-    vi.spyOn(git, "lsTree").mockImplementation(
-      async (_treeIsh, _path, _core, options) => {
-        return options?.includes("-r --name-only")
-          ? swaggerPath
-          : "040000 tree abc123 specification/contosowidgetmanager";
-      },
-    );
+    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue(swaggerPath);
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
+
+    expect(showSpy).toBeCalledWith("HEAD^", swaggerPath, expect.anything());
+
+    expect(lsTreeSpy).toHaveBeenCalledWith(
+      "HEAD^",
+      specDir,
+      expect.anything(),
+      "-r --name-only",
+    );
   });
 });
