@@ -1,4 +1,5 @@
 import "./main.tsp";
+import "./FileServiceProperties.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 
@@ -99,7 +100,7 @@ using Azure.Core;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ManagementPolicy.properties);
-@@clientName(BlobInventoryPolicies.createOrUpdate, "AAAUpdate", "csharp"); //能更新orepationid， 但就更新不了方法名字。
+
 @@clientName(BlobInventoryPolicies.createOrUpdate::parameters.resource,
   "properties"
 );
@@ -416,3 +417,88 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(QueueServiceProperties, "QueueService", "csharp");
+@@clientName(UsageName, "StorageUsageName", "csharp");
+@@clientName(UsageUnit, "StorageUsageUnit", "csharp");
+@@clientName(RunStatusEnum, "StorageTaskRunStatus", "csharp");
+@@clientName(AccountType, "ActiveDirectoryAccountType", "csharp");
+@@clientName(AccountUsageElements, "FileServiceAccountUsageElements", "csharp");
+@@clientName(GeoReplicationStats, "GeoReplicationStatistics", "csharp");
+@@clientName(ListAccountSasResponse, "GetAccountSasResult", "csharp");
+@@clientName(ListServiceSasResponse, "GetServiceSasResult", "csharp");
+@@clientName(Endpoints, "StorageAccountEndpoints", "csharp");
+@@clientName(StorageAccountListKeysResult,
+  "StorageAccountGetKeysResult",
+  "csharp"
+);
+@@clientName(IPRule, "StorageAccountIPRule", "csharp");
+@@clientName(KeyCreationTime, "StorageAccountKeyCreationTime", "csharp");
+@@clientName(StorageAccountCheckNameAvailabilityParameters,
+  "StorageAccountNameAvailabilityContent",
+  "csharp"
+);
+@@clientName(ResourceAccessRule, "StorageAccountResourceAccessRule", "csharp");
+@@clientName(AccountStatus, "StorageAccountStatus", "csharp");
+@@clientName(ProvisioningState, "StorageProvisioningState", "csharp");
+@@clientName(Restriction, "StorageSkuRestriction", "csharp");
+@@clientName(TableAccessPolicy, "StorageTableAccessPolicy", "csharp");
+@@clientName(StorageTaskAssignmentUpdateProperties,
+  "StorageTaskAssignmentPatchProperties",
+  "csharp"
+);
+@@clientName(RunResult, "StorageTaskRunResult", "csharp");
+@@clientName(AccessPolicy, "StorageServiceAccessPolicy", "csharp");
+@@clientName(RoutingChoice, "StorageTaskRoutingChoice", "csharp");
+@@clientName(AccessPolicy, "StorageServiceAccessPolicy", "csharp");
+@@clientName(RoutingChoice, "StorageTaskRoutingChoice", "csharp");
+@@clientName(SKUCapability, "StorageSkuCapability", "csharp");
+// @@clientName(ListKeyExpand, "StorageListKeyExpand", "csharp");
+@@clientName(Bypass, "StorageNetworkBypass", "csharp");
+@@clientName(DefaultAction, "StorageNetworkDefaultAction", "csharp");
+@@clientName(VirtualNetworkRule, "StorageAccountVirtualNetworkRule", "csharp");
+@@clientName(ReasonCode, "StorageRestrictionReasonCode", "csharp");
+@@clientName(State, "StorageAccountNetworkRuleState", "csharp");
+@@clientName(Reason, "StorageAccountNameUnavailableReason", "csharp");
+@@clientName(RoutingChoice, "StorageRoutingChoice", "csharp");
+@@clientName(ProvisioningIssue,
+  "NetworkSecurityPerimeterProvisioningIssue",
+  "csharp"
+);
+@@clientName(Severity,
+  "NetworkSecurityPerimeterProvisioningIssueSeverity",
+  "csharp"
+);
+// @@clientName(NetworkRuleAction, "StorageAccountNetworkRuleAction", "csharp");
+@@clientName(CheckNameAvailabilityResult,
+  "StorageAccountNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(ProvisioningIssueProperties,
+  "NetworkSecurityPerimeterProvisioningIssueProperties",
+  "csharp"
+);
+@@clientName(IssueType,
+  "NetworkSecurityPerimeterProvisioningIssueType",
+  "csharp"
+);
+@@clientName(FileServiceProperties, "FileService", "csharp");
+@@clientName(FileShareItem, "FileShareData", "csharp");
+
+// @@clientName(FailoverType, "StorageAccountFailoverType", "csharp");
+@@clientName(RestorePolicyProperties, "RestorePolicy", "csharp");
+@@clientName(ListQueue, "StorageQueueData", "csharp");
+@@alternateType(ListQueueResource.nextLink, string, "csharp");
+@@doc(ListQueueResource.nextLink,
+  "Request URL that can be used to list next page of queues."
+);
+@@doc(ListQueueResource.value, "List of queues returned.");
+@@clientName(ListContainerItem, "BlobContainerData", "csharp");
+@@alternateType(ListContainerItems.nextLink, string, "csharp");
+@@doc(ListContainerItems.nextLink,
+  "Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size."
+);
+@@doc(ListContainerItems.value, "List of blobs containers returned.");
+
+@@clientName(StorageAccountIPRuleAction,
+  "StorageAccountNetworkRuleAction",
+  "csharp"
+);

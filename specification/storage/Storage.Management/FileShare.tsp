@@ -59,6 +59,7 @@ interface FileShares {
    */
   list is ArmResourceListByParent<
     FileShare,
+    Response = ArmResponse<FileShareItems>,
     Parameters = {
       /**
        * Optional. Specified maximum number of shares that can be included in the list.

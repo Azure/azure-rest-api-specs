@@ -1097,7 +1097,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BlobContainerListResult"
+              "$ref": "#/definitions/ListContainerItems"
             }
           },
           "default": {
@@ -2661,7 +2661,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FileShareListResult"
+              "$ref": "#/definitions/FileShareItems"
             }
           },
           "default": {
@@ -7237,27 +7237,6 @@
         }
       ]
     },
-    "BlobContainerListResult": {
-      "type": "object",
-      "description": "The response of a BlobContainer list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The BlobContainer items on this page",
-          "items": {
-            "$ref": "#/definitions/BlobContainer"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "BlobInventoryCreationTime": {
       "type": "object",
       "description": "This property defines the creation time based filtering condition. Blob Inventory schema parameter 'Creation-Time' is mandatory with this filter.",
@@ -8643,6 +8622,27 @@
         }
       ]
     },
+    "FileShareItems": {
+      "type": "object",
+      "description": "Response schema. Contains list of shares returned, and if paging is requested or required, a URL to next page of shares.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FileShareItem items on this page",
+          "items": {
+            "$ref": "#/definitions/FileShareItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "FileShareLimits": {
       "type": "object",
       "description": "Minimum and maximum provisioned storage, IOPS and bandwidth limits for a file share in the storage account.",
@@ -8686,27 +8686,6 @@
           "readOnly": true
         }
       }
-    },
-    "FileShareListResult": {
-      "type": "object",
-      "description": "The response of a FileShare list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The FileShare items on this page",
-          "items": {
-            "$ref": "#/definitions/FileShare"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "FileShareProperties": {
       "type": "object",
@@ -9812,6 +9791,27 @@
         }
       ]
     },
+    "ListContainerItems": {
+      "type": "object",
+      "description": "Response schema. Contains list of blobs returned, and if paging is requested or required, a URL to next page of containers.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of blobs containers returned.",
+          "items": {
+            "$ref": "#/definitions/ListContainerItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ListQueue": {
       "type": "object",
       "properties": {
@@ -9846,7 +9846,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ListQueue items on this page",
+          "description": "List of queues returned.",
           "items": {
             "$ref": "#/definitions/ListQueue"
           }
@@ -9854,7 +9854,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Request URL that can be used to list next page of queues."
         }
       },
       "required": [

@@ -84,7 +84,7 @@ interface StorageTaskAssignments {
   @get
   @action("reports")
   @operationId("StorageTaskAssignmentInstancesReport_List")
-  storageTaskAssignmentInstancesReportList is ArmResourceActionSync<
+  getStorageTaskAssignmentInstancesReports is ArmResourceActionSync<
     StorageTaskAssignment,
     void,
     ArmResponse<StorageTaskReportSummary>,

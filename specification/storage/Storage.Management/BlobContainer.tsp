@@ -100,6 +100,7 @@ interface BlobContainers {
    */
   list is ArmResourceListByParent<
     BlobContainer,
+    Response = ArmResponse<ListContainerItems>,
     Parameters = {
       /**
        * Optional. Specified maximum number of containers that can be included in the list.
