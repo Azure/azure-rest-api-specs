@@ -3,6 +3,7 @@ import { exec, ExecException } from "node:child_process";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { getOpenapiType, getAllTags, getInputFiles } from "./markdown-utils.js";
 import { sep, dirname, join } from "path";
+import { kebabCase } from "change-case";
 import {
   pathExists,
   getPathToDependency,
@@ -20,6 +21,7 @@ import {
   isFailure,
   isWarning,
   getNewItems,
+  LintDiffViolation,
 } from "./util.js";
 
 // 64 MiB max output buffers for exec
@@ -229,10 +231,12 @@ async function runLintDiff(
         after: results,
       });
       continue;
-    } else if (beforeReadmeCandidates.length > 1) {
-      throw new Error(`Multiple before candidates found for key ${key}`);
     } else {
-      throw new Error(`No before candidates found for key ${key}`);
+      // TODO: Is this the best way to handle net new work?
+      runCorrelations.set(key, {
+        before: null,
+        after: results,
+      });
     }
   }
 
@@ -248,32 +252,73 @@ async function runLintDiff(
     // TODO: DRY
     // TODO: Include SHA in the link
     const afterName = after.tag ? after.tag : "default";
-    const beforeName = before.tag ? before.tag : "default";
+    const beforeName = before?.tag ? before?.tag : "default";
     const afterPath = after.tag ? `${after.readme}#tag-${after.tag}` : after.readme;
-    const beforePath = before.tag ? `${before.readme}#tag-${before.tag}` : before.readme;
+    const beforePath = before?.tag ? `${before?.readme}#tag-${before?.tag}` : before?.readme;
 
     outputMarkdown += `| ${afterName} | link: [${afterName}](${afterPath}) | link: [${beforeName}](${beforePath}) |\n`;
   }
 
-  // MUST FIX Following errors/warnings are introduced by the current PR
-  // Rule | Message | Related RPC [For API reviewers]
+  outputMarkdown += `\n\n`;
+
+  const newViolations: LintDiffViolation[] = [];
+  const existingViolations: LintDiffViolation[] = [];
+
   for (const [_, { before, after }] of runCorrelations.entries()) {
     // TODO: May need to do some filtering of unrelated swaggers, see
     // momentOfTruthPostProcessing.ts:421
-    const beforeViolations = getLintDiffViolations(before).filter(
-      (v) => isFailure(v.level) || isWarning(v.level),
-    );
+    // TODO: Trinary, should this happen?
+    const beforeViolations = before
+      ? getLintDiffViolations(before).filter((v) => isFailure(v.level) || isWarning(v.level))
+      : [];
     const afterViolations = getLintDiffViolations(after).filter(
       (v) => isFailure(v.level) || isWarning(v.level),
     );
 
-    const [newViolations, existingViolations] = getNewItems(beforeViolations, afterViolations);
-    console.log(`New violations: ${newViolations.length}`);
-    console.log(`Existing violations: ${existingViolations.length}`);
+    const [newitems, existingItems] = getNewItems(beforeViolations, afterViolations);
+    console.log(`New violations: ${newitems.length}`);
+    console.log(`Existing violations: ${existingItems.length}`);
+
+    newViolations.push(...newitems);
+    existingViolations.push(...existingItems);
+  }
+
+  // MUST FIX Following errors/warnings are introduced by the current PR
+  // Rule | Message | Related RPC [For API reviewers]
+  if (newViolations.length > 0) {
+    outputMarkdown += "**[must fix]The following errors/warnings are intorduced by current PR:**\n";
+    if (newViolations.length > 50) {
+      // TODO: Const
+      outputMarkdown += "Only 50 items are listed, please refer to log for more details.\n";
+    }
+
+    outputMarkdown += "| Rule | Message | Related RPC [For API reviewers] |\n";
+    outputMarkdown += "| ---- | ------- | ------------------------------- |\n";
+
+    for (const violation of newViolations.slice(0, 50)) {
+      const { level, code, message } = violation;
+      outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />${getFile(violation)} ${getLine(violation)} | TODO |\n`;
+    }
   }
 
   // The following errors/warnings exist before current PR submission
   // Rule | Message | Location (link to file, line # at SHA)
+  if (existingViolations.length > 0) {
+    outputMarkdown += "**The following errors/warnings exist before current PR submission:**\n";
+    if (existingViolations.length > 50) {
+      // TODO: Const
+      outputMarkdown += "Only 50 items are listed, please refer to log for more details.\n";
+    }
+
+    // TODO: ensure columns are correct
+    outputMarkdown += "| Rule | Message |\n";
+    outputMarkdown += "| ---- | ------- |\n";
+
+    for (const violation of existingViolations.slice(0, 50)) {
+      const { level, code, message } = violation;
+      outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />${getFile(violation)} ${getLine(violation)} |\n`;
+    }
+  }
 
   await writeFile(outFile, outputMarkdown);
 }
@@ -294,6 +339,47 @@ async function executeCommand(
 }
 
 export function getAutorestViolations() {}
+
+export function getDocUrl(id: string) {
+  if (id == "FATAL") {
+    return `N/A`;
+  }
+
+  return `https://github.com/Azure/azure-openapi-validator/blob/main/docs/${kebabCase(id)}.md`;
+}
+
+export function getFile(lintDiffViolation: LintDiffViolation) {
+  try {
+    return lintDiffViolation.source?.[0]?.document;
+  } catch (error) {
+    return undefined;
+  }
+}
+
+export function getLine(lintDiffViolation: LintDiffViolation): number | undefined {
+  try {
+    return lintDiffViolation.source?.[0]?.position?.line;
+  } catch (error) {
+    return undefined;
+  }
+}
+
+function iconFor(type: string, num: unknown = undefined) {
+  if (num === 0) {
+    return ":white_check_mark:";
+  }
+
+  if (type.toLowerCase().includes("error")) {
+    return ":x:";
+  } else {
+    return ":warning:";
+  }
+}
+
+// Example: https://github.com/Azure/azure-rest-api-specs/blob/77be1c04ec0374c5e0347e8f9e5a7d4d3028e812/specification/codesigning/resource-manager/Microsoft.CodeSigning/preview/2024-09-30-preview/codeSigningAccount.json#L1036
+// export function getFileLink(path: string, line: number, sha: string) {
+//   return `https://github.com/Azure/azure-rest-api-specs/blob/${sha}/${path}#L${line}`;
+// }
 
 type State = {
   // TODO: Narrow this object to specific properties that are used in later
