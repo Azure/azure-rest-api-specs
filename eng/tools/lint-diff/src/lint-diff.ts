@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "fs/promises";
 import { exec, ExecException } from "node:child_process";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { getOpenapiType, getAllTags, getInputFiles } from "./markdown-utils.js";
+import { getOpenapiType, getAllTags, getInputFiles, getDefaultTag } from "./markdown-utils.js";
 import { sep, dirname, join } from "path";
 import { kebabCase } from "change-case";
 import {
@@ -208,8 +208,6 @@ async function runLintDiff(
       throw new Error(`Duplicate key found correlating autorest runs: ${key}`);
     }
 
-    // TODO: In some cases there's nothing to run against, net new is OK
-    // make sure that case is handled.
     const beforeCandidates = reportMap
       .get("before")!
       .filter((r) => r.readme === readme && r.tag === tag);
@@ -223,21 +221,34 @@ async function runLintDiff(
       throw new Error(`Multiple before candidates found for key ${key}`);
     }
 
-    // No before candidates found, find the run with matching readme
-    const beforeReadmeCandidates = reportMap.get("before")!.filter((r) => r.readme === readme);
-    if (beforeReadmeCandidates.length === 1) {
-      runCorrelations.set(key, {
-        before: beforeReadmeCandidates[0],
-        after: results,
-      });
-      continue;
-    } else {
-      // TODO: Is this the best way to handle net new work?
-      runCorrelations.set(key, {
-        before: null,
-        after: results,
-      });
+    // Look for candidates with a matching default tag from the baseline
+    const beforeReadmePath = join(beforePath, readme);
+    if (await pathExists(beforeReadmePath)) {
+      const readmeContent = await readFile(beforeReadmePath, { encoding: "utf-8" });
+      const defaultTag = getDefaultTag(readmeContent);
+      if (!defaultTag) {
+        throw new Error(`No default tag found for readme ${readme} in before state`);
+      }
+      const beforeDefaultTagCandidates = reportMap
+        .get("before")!
+        .filter((r) => r.readme === readme && r.tag === defaultTag);
+
+      if (beforeDefaultTagCandidates.length === 1) {
+        runCorrelations.set(key, {
+          before: beforeDefaultTagCandidates[0],
+          after: results,
+        });
+        continue;
+      } else if (beforeDefaultTagCandidates.length > 1) {
+        throw new Error(
+          `Multiple before candidates found for key ${key} using default tag ${defaultTag}`,
+        );
+      }
     }
+
+    throw new Error(
+      `No before candidates found for key ${key} and no default tag found in readme. After state: ${key}`,
+    );
   }
 
   // See unifiedPipelineHelper.ts:386
@@ -275,13 +286,16 @@ async function runLintDiff(
       (v) => isFailure(v.level) || isWarning(v.level),
     );
 
-    const [newitems, existingItems] = getNewItems(beforeViolations, afterViolations);
+    const [newitems, existingItems] = await getNewItems(beforeViolations, afterViolations);
     console.log(`New violations: ${newitems.length}`);
     console.log(`Existing violations: ${existingItems.length}`);
 
     newViolations.push(...newitems);
     existingViolations.push(...existingItems);
   }
+
+  newViolations.sort(compareLintDiffViolations);
+  existingViolations.sort(compareLintDiffViolations);
 
   // MUST FIX Following errors/warnings are introduced by the current PR
   // Rule | Message | Related RPC [For API reviewers]
@@ -291,14 +305,17 @@ async function runLintDiff(
       // TODO: Const
       outputMarkdown += "Only 50 items are listed, please refer to log for more details.\n";
     }
+    outputMarkdown += "\n";
 
     outputMarkdown += "| Rule | Message | Related RPC [For API reviewers] |\n";
     outputMarkdown += "| ---- | ------- | ------------------------------- |\n";
 
     for (const violation of newViolations.slice(0, 50)) {
       const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />${getFile(violation)} ${getLine(violation)} | TODO |\n`;
+      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} | ${violation.armRpcs?.join(", ")} |\n`;
     }
+
+    outputMarkdown += "\n";
   }
 
   // The following errors/warnings exist before current PR submission
@@ -309,6 +326,7 @@ async function runLintDiff(
       // TODO: Const
       outputMarkdown += "Only 50 items are listed, please refer to log for more details.\n";
     }
+    outputMarkdown += "\n";
 
     // TODO: ensure columns are correct
     outputMarkdown += "| Rule | Message |\n";
@@ -316,10 +334,13 @@ async function runLintDiff(
 
     for (const violation of existingViolations.slice(0, 50)) {
       const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />${getFile(violation)} ${getLine(violation)} |\n`;
+      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} |\n`;
     }
+
+    outputMarkdown += `\n`;
   }
 
+  console.log(`Writing output to ${outFile}`);
   await writeFile(outFile, outputMarkdown);
 }
 
@@ -338,7 +359,53 @@ async function executeCommand(
   });
 }
 
-export function getAutorestViolations() {}
+/**
+ * Compare two LintDiffViolation objects for sorting. First sort by level with
+ * error being higher than warning. Then sort by file name and line number.
+ * @param a
+ * @param b
+ */
+export function compareLintDiffViolations(a: LintDiffViolation, b: LintDiffViolation): number {
+  // Sort by level
+  if (isFailure(a.level) && isWarning(b.level)) {
+    return -1;
+  } else if (isWarning(a.level) && isFailure(b.level)) {
+    return 1;
+  }
+
+  // Sort by file name
+  if (getFile(a) !== getFile(b)) {
+    return getFile(a)!.localeCompare(getFile(b)!);
+  }
+
+  // Sort by line number
+  const lineA = getLine(a) || 0;
+  const lineB = getLine(b) || 0;
+
+  if (lineA < lineB) {
+    return -1;
+  } else if (lineA > lineB) {
+    return 1;
+  }
+
+  return 0;
+}
+
+/**
+ * Normalize a path to be relative to a given directory.
+ * @param path File path with separators from the current system
+ * @param by A directory name to treat as the root (e.g. /specification/)
+ */
+// TODO: maybe use a different name so as not to be confused with path normalize
+export function normalizePath(path: string, by: string = `${sep}specification${sep}`): string {
+  const indexOfBy = path.indexOf(by);
+  // TODO: how to handle case where `by` is not found?
+  if (indexOfBy === -1) {
+    return path;
+  }
+
+  return path.substring(indexOfBy);
+}
 
 export function getDocUrl(id: string) {
   if (id == "FATAL") {
