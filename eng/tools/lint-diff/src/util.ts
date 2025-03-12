@@ -1,6 +1,8 @@
 import { access, constants, readFile, readdir } from "node:fs/promises";
 import { dirname, join, sep, basename } from "node:path";
 import { fileURLToPath } from "node:url";
+
+// Temporary workaround until there's a common set of entities
 import { getInputFiles, MarkdownType } from "./markdown-utils.js";
 import { ExecException } from "node:child_process";
 
@@ -303,7 +305,8 @@ export type AutorestRunResult = {
 
 // TODO: Name
 export type BeforeAfter = {
-  before: AutorestRunResult;
+  // TODO: This is nullable
+  before: AutorestRunResult | null;
   after: AutorestRunResult;
 };
 
@@ -380,7 +383,7 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
     }
 
     // Ignore all lines that are "diagnostic" output from autorest
-    if (!diagnosticLevelStrings.some((level) => line.includes(level))) {
+    if (diagnosticLevelStrings.some((level) => line.includes(level))) {
       continue;
     }
 
@@ -421,6 +424,18 @@ export function isWarning(level: string) {
   return level.toLowerCase() === "warning";
 }
 
+export function arrayIsEqual(a: any[], b: any[]) {
+  if (a.length !== b.length) {
+    return false;
+  }
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 export function getNewItems(
   before: LintDiffViolation[],
   after: LintDiffViolation[],
@@ -429,7 +444,7 @@ export function getNewItems(
   const existingItems = [];
 
   for (const afterViolation of after) {
-    let errorIsNew = false;
+    let errorIsNew = true;
 
     // Always treat fatal errors as new
     if (afterViolation.level.toLowerCase() === "fatal") {
@@ -447,8 +462,7 @@ export function getNewItems(
         // TODO: this is a direct copy, see if there is a better way
         basename(beforeViolation.source?.[0]?.document) ==
           basename(afterViolation.source?.[0]?.document) &&
-        // TODO: _.isEqual() was used her previously. Is this OK
-        beforeViolation.details?.jsonpath == afterViolation.details?.jsonpath
+        arrayIsEqual(beforeViolation.details?.jsonpath, afterViolation.details?.jsonpath)
       ) {
         errorIsNew = false;
         existingItems.push(afterViolation);
