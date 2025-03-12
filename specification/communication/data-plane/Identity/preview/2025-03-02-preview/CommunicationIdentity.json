@@ -327,6 +327,158 @@
           }
         }
       }
+    },
+    "/access/teamsPhone/tenants/{tenantId}/assignments/{objectId}": {
+      "get": {
+        "tags": [
+          "TeamsPhone"
+        ],
+        "summary": "Get Teams Phone access assignment by object id.",
+        "operationId": "GetTeamsPhoneAssignment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenantId",
+            "description": "Tenant ID we want to get the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "Object ID we want to get the assignment for.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamsPhoneAssignmentResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Assignment": {
+            "$ref": "./examples/GetTeamsPhoneAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TeamsPhone"
+        ],
+        "summary": "Creates or replaces a Teams Phone access assignment.",
+        "operationId": "CreateOrReplaceTeamsPhoneAssignment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenantId",
+            "description": "Tenant ID we want to update the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "Object ID we want to update the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Values we want to set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsPhoneAssignmentCreateOrUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamsPhoneAssignmentResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TeamsPhoneAssignmentResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Assignment": {
+            "$ref": "./examples/CreateOrReplaceTeamsPhoneAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TeamsPhone"
+        ],
+        "summary": "Removes a Teams Phone access assignment.",
+        "operationId": "DeleteTeamsPhoneAssignment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenantId",
+            "description": "Tenant ID we want to remove the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "Object ID we want to remove the assignment for.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Assignment": {
+            "$ref": "./examples/DeleteTeamsPhoneAssignment.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -502,6 +654,64 @@
     "TeamsPhoneExchangeTokenRequest": {
       "type": "object",
       "properties": {}
+    },
+    "TeamsPhoneAssignmentResponse": {
+      "description": "A Teams Phone assignment response.",
+      "required": [
+        "objectId",
+        "tenantId",
+        "principalType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "description": "Object ID of the assignment.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Tenant ID of the assignment.",
+          "type": "string"
+        },
+        "principalType": {
+          "description": "Principal type of the assignment.",
+          "type": "string",
+          "enum": [
+            "TeamsResourceAccount",
+            "User"
+          ]
+        },
+        "clientIds": {
+          "description": "Client IDs associated with the assignment.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TeamsPhoneAssignmentCreateOrUpdateRequest": {
+      "description": "A request to create or update a Teams Phone assignment.",
+      "required": [
+        "principalType"
+      ],
+      "type": "object",
+      "properties": {
+        "principalType": {
+          "description": "Principal type of the assignment.",
+          "type": "string",
+          "enum": [
+            "TeamsResourceAccount",
+            "User"
+          ]
+        },
+        "clientIds": {
+          "description": "Client IDs associated with the assignment.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
