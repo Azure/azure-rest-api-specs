@@ -8,12 +8,14 @@ on:
       check_run_id:
         description: 'Check run ID to process'
         required: false
-        default: '38335408598'
         type: string
 
+permissions:
+  contents: read
+
 jobs:
-  process-check-run:
-    name: SDK Breaking Change Labels
+  sdk-breaking-change-labels:
+    name: SDK Breaking Change Labels (Preview)
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4

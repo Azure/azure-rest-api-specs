@@ -85,14 +85,14 @@ export async function getLabelAndAction({ github, context, core }) {
             for (const artifact of artifacts.value) {
 
               // label artifact name example: 'spec-gen-sdk-azure-sdk-for-js-true'
-              if (artifact.name.startsWith("spec-gen-sdk-")) {
+              if (artifact.name.startsWith("spec-gen-sdk_")) {
                 core.info(`Artifact: ${artifact.name}`);
                 if(artifact.name.endsWith("true")) {
                   addLabel = true;
-                  language = artifact.name.split("-")[3];
+                  language = artifact.name.split("_")[1];
                 } else if(artifact.name.endsWith("false")) {
                   removeLabel = true;
-                  language = artifact.name.split("-")[3];
+                  language = artifact.name.split("_")[1];
                 }
               }
             }
@@ -104,7 +104,7 @@ export async function getLabelAndAction({ github, context, core }) {
               labelAction = LabelAction.Remove;
             }
             if (language) {
-              labelName = sdkLabels[`azure-sdk-for-${language}`].breakingChange;
+              labelName = sdkLabels[`${language}`].breakingChange;
             }
           } else {
             core.error(`Failed to fetch artifacts: ${response.status}, ${response.statusText}`);

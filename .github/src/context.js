@@ -96,7 +96,7 @@ export async function extractInputs(github, context, core) {
         context.payload
       );
 
-    let issue_number = NaN;
+    let issue_number;
 
     if (
       payload.workflow_run.event === "pull_request" ||
@@ -191,6 +191,10 @@ export async function extractInputs(github, context, core) {
             }
           }
         }
+      }
+      if (!issue_number) {
+        core.info(`Could not find 'issue-number' artifact, which is required to associate the triggering workflow run with a PR`);
+        issue_number = NaN;
       }
     } else {
       throw new Error(

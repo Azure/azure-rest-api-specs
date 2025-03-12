@@ -200,31 +200,25 @@ extends:
             inputs:
               targetType: 'inline'
               script: |
-                Get-ChildItem "$(System.DefaultWorkingDirectory)/out/breakingchangelabel/add" -Recurse
                 $artifactName = "$(AddBreakingChangeLabelArtifactName)"
                 $artifactPath = "$(System.DefaultWorkingDirectory)/$(AddBreakingChangeLabelArtifactPath)"
                 Write-Host "Artifact Name: $artifactName"
                 Write-Host "Artifact Path: $artifactPath"
                 if (Test-Path $artifactPath) {
                   Get-ChildItem $artifactPath -Recurse
-                } 
-                $artifactName = "$(RemoveBreakingChangeLabelArtifactName)"
-                $artifactPath = "$(System.DefaultWorkingDirectory)/$(RemoveBreakingChangeLabelArtifactPath)"
-                Write-Host "Artifact Name: $artifactName"
-                Write-Host "Artifact Path: $artifactPath"
-                if (Test-Path $artifactPath) {
-                  Get-ChildItem $artifactPath -Recurse
                 }
-          - ${{ if ne(variables['AddBreakingChangeLabelArtifactName'], '') }}:
-            - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
-              parameters:
-                ArtifactName: $(AddBreakingChangeLabelArtifactName)
-                ArtifactPath: "$(System.DefaultWorkingDirectory)/$(AddBreakingChangeLabelArtifactPath)"
-          - ${{ if ne(variables['RemoveBreakingChangeLabelArtifactName'], '') }}:
-            - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
-              parameters:
-                ArtifactName: $(RemoveBreakingChangeLabelArtifactName)
-                ArtifactPath: "$(System.DefaultWorkingDirectory)/$(RemoveBreakingChangeLabelArtifactPath)"
+
+          - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
+            condition: and(succeeded(), ne(variables['AddBreakingChangeLabelArtifactName'], ''))
+            parameters:
+              ArtifactName: $(AddBreakingChangeLabelArtifactName)
+              ArtifactPath: "$(System.DefaultWorkingDirectory)/$(AddBreakingChangeLabelArtifactPath)"
+
+          - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
+            condition: and(succeeded(), ne(variables['RemoveBreakingChangeLabelArtifactName'], ''))
+            parameters:
+              ArtifactName: $(RemoveBreakingChangeLabelArtifactName)
+              ArtifactPath: "$(System.DefaultWorkingDirectory)/$(RemoveBreakingChangeLabelArtifactPath)"
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
