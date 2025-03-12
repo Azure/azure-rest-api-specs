@@ -1,8 +1,12 @@
 // @ts-check
 
 import { dirname } from "path";
-import { getChangedFiles, resourceManager, swagger } from "./changed-files.js";
-import { lsTree, show } from "./git.js";
+import {
+  getChangedFiles,
+  resourceManager,
+  swagger,
+} from "../../src/changed-files.js";
+import { lsTree, show } from "../../src/git.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -11,23 +15,20 @@ import { lsTree, show } from "./git.js";
 export default async function incrementalTypeSpec({ github, context, core }) {
   const changedFiles = await getChangedFiles(core);
 
-  const changedRmSwaggerFiles = changedFiles
-    .filter(resourceManager)
-    .filter(swagger);
+  // Includes swaggers, readmes, and examples
+  const changedRmFiles = changedFiles.filter(resourceManager);
 
-  if (changedRmSwaggerFiles.length == 0) {
-    core.info(
-      "No changes to swagger files containing path '/resource-manager/'",
-    );
+  if (changedRmFiles.length == 0) {
+    core.info("No changes to files containing path '/resource-manager/'");
     return false;
   }
 
-  // If any changed file is not typespec-generated, return false
-  for (const file of changedRmSwaggerFiles) {
+  // If any changed swagger file is not typespec-generated, return false
+  for (const file of changedRmFiles.filter(swagger)) {
     /** @type string */
-    let swagger;
+    let swaggerText;
     try {
-      swagger = await show("HEAD", file, core);
+      swaggerText = await show("HEAD", file, core);
     } catch (e) {
       if (e instanceof Error && e.message.includes("does not exist")) {
         // To simplify logic, if PR deletes a swagger file, it's not "incremental typespec"
@@ -41,7 +42,7 @@ export default async function incrementalTypeSpec({ github, context, core }) {
 
     let swaggerObj;
     try {
-      swaggerObj = JSON.parse(swagger);
+      swaggerObj = JSON.parse(swaggerText);
     } catch {
       // If swagger cannot be parsed as JSON, it's not "incremental typespec"
       core.info(`File "${file}" cannot be parsed as JSON`);
@@ -55,8 +56,19 @@ export default async function incrementalTypeSpec({ github, context, core }) {
   }
 
   const changedSpecDirs = new Set(
-    changedRmSwaggerFiles.map((f) => dirname(dirname(dirname(f)))),
+    // TODO: Find spec dir differently based on each file type (swagger, example, readme)
+    // swagger -> dirname(dirname(dirname(f)))
+    // example -> dirname(dirname(dirname(dirname(f))))
+    // readme -> If parent is "resource-manager", return all dirs under "resource-manager".
+    //           Else, walk up until you are 1 below "resource-manager", then stop.
+    //           TODO: Verify works for all current readme.md in repo
+    changedRmFiles.filter(swagger).map((f) => dirname(dirname(dirname(f)))),
   );
+
+  if (changedSpecDirs.size === 0) {
+    core.info("Could not map changed files to any spec directories");
+    return false;
+  }
 
   // Ensure that each changed spec dir contained at least one typespec-generated swagger in the base commitish
   for (const changedSpecDir of changedSpecDirs) {

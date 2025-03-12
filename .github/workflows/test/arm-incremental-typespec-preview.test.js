@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
+import * as changedFiles from "../../src/changed-files.js";
+import * as git from "../../src/git.js";
 import { createMockCore } from "../../test/mocks.js";
 import incrementalTypeSpec from "../src/arm-incremental-typespec-preview.js";
-import * as changedFiles from "../src/changed-files.js";
-import * as git from "../src/git.js";
 
 const core = createMockCore();
 
@@ -106,13 +106,43 @@ describe("incrementalTypeSpec", () => {
     await expect(incrementalTypeSpec({ core })).rejects.toThrowError();
   });
 
-  it("returns true if changed files are incremental changes to an existing TypeSpec RP", async () => {
+  it("returns true if changed files are incremental changes to an existing TypeSpec RP swagger", async () => {
     const swaggerPath =
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     vi.spyOn(git, "show").mockResolvedValue(swaggerTypeSpecGenerated);
+
+    vi.spyOn(git, "lsTree").mockImplementation(
+      async (_treeIsh, _path, _core, options) => {
+        return options?.includes("-r --name-only")
+          ? swaggerPath.substring(1)
+          : "040000 tree abc123 specification/contosowidgetmanager";
+      },
+    );
+
+    await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
+  });
+
+  it("returns true if changed files are incremental changes to an existing TypeSpec RP readme", async () => {
+    const swaggerPath =
+      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
+
+    const readmePath =
+      "specification/contosowidgetmanager/resource-manager/readme.md";
+
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
+
+    vi.spyOn(git, "show").mockImplementation(
+      async (_treeIsh, path, _core, _options) => {
+        if (path === swaggerPath) {
+          return swaggerTypeSpecGenerated;
+        } else {
+          throw new Error("does not exist");
+        }
+      },
+    );
 
     vi.spyOn(git, "lsTree").mockImplementation(
       async (_treeIsh, _path, _core, options) => {
