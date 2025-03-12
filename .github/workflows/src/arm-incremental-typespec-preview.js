@@ -2,6 +2,7 @@
 
 import { dirname } from "path";
 import {
+  example,
   getChangedFiles,
   resourceManager,
   swagger,
@@ -62,7 +63,14 @@ export default async function incrementalTypeSpec({ github, context, core }) {
     // readme -> If parent is "resource-manager", return all dirs under "resource-manager".
     //           Else, walk up until you are 1 below "resource-manager", then stop.
     //           TODO: Verify works for all current readme.md in repo
-    changedRmFiles.filter(swagger).map((f) => dirname(dirname(dirname(f)))),
+    [
+      ...changedRmFiles
+        .filter(swagger)
+        .map((f) => dirname(dirname(dirname(f)))),
+      ...changedRmFiles
+        .filter(example)
+        .map((f) => dirname(dirname(dirname(dirname(f))))),
+    ],
   );
 
   if (changedSpecDirs.size === 0) {
@@ -81,14 +89,13 @@ export default async function incrementalTypeSpec({ github, context, core }) {
     );
 
     // Filter files to only include RM *.json files
-    const specRmSwaggerFilesBaseBranch = specFilesBaseBranch
-      .split("\n")
-      .filter(
-        (file) =>
-          file.includes("/resource-manager/") &&
-          !file.includes("/examples/") &&
-          file.endsWith(".json"),
-      );
+    const specRmSwaggerFilesBaseBranch = specFilesBaseBranch.split("\n").filter(
+      // TODO: Replace with shared filters in changed-files.js
+      (file) =>
+        file.includes("/resource-manager/") &&
+        !file.includes("/examples/") &&
+        file.endsWith(".json"),
+    );
 
     if (specRmSwaggerFilesBaseBranch.length === 0) {
       core.info(
