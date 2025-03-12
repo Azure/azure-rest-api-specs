@@ -287,13 +287,23 @@ union ExtraParameters {
 // Define a URI alias for clarity.
 alias Uri = string;
 
-enum PendingUploadType {
-  None,
-  TemporaryBlobReference,
+@doc("The type of pending upload.")
+union PendingUploadType {
+  string,
+
+  @doc("No pending upload.")
+  none: "None",
+
+  @doc("Temporary Blob Reference is the only supported type.")
+  temporaryBlobReference: "TemporaryBlobReference",
 }
 
-enum PendingUploadCredentialType {
-  SAS,
+@doc("The type of credential used to access the storage account.")
+union PendingUploadCredentialType {
+  string,
+
+  @doc("SAS credential type.")
+  sas: "SAS",
 }
 
 model PendingUploadRequest {
@@ -301,7 +311,7 @@ model PendingUploadRequest {
   pendingUploadId?: string;
 
   /// TemporaryBlobReference is the only supported type.
-  pendingUploadType: PendingUploadType.TemporaryBlobReference;
+  pendingUploadType: PendingUploadType.temporaryBlobReference;
 }
 
 model PendingUploadResponse {
@@ -312,7 +322,7 @@ model PendingUploadResponse {
   pendingUploadId: string;
 
   /// TemporaryBlobReference is the only supported type.
-  pendingUploadType: PendingUploadType.TemporaryBlobReference;
+  pendingUploadType: PendingUploadType.temporaryBlobReference;
 }
 
 model BlobReferenceForConsumption {
