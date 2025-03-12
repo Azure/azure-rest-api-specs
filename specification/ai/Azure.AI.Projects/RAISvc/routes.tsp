@@ -46,7 +46,7 @@ interface RAISvc {
       @path
       type: string;
     },
-    string
+    Array<string>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
@@ -74,7 +74,7 @@ interface RAISvc {
   @doc("Get the jailbreak dataset.")
   @route("/simulation/jailbreak/")
   @get
-  getJailBreakDataset is Azure.Core.Foundations.Operation<{}, string>;
+  getJailBreakDataset is Azure.Core.Foundations.Operation<{}, Array<string>>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Get template parameters with type.")
