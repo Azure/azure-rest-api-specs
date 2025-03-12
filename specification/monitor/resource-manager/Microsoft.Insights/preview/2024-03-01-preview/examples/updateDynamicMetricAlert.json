@@ -1,18 +1,19 @@
 {
   "parameters": {
     "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
-    "resourceGroupName": "monitorRG",
-    "ruleName": "dynamicAlertRule",
+    "resourceGroupName": "gigtest",
+    "ruleName": "dynamiccpu",
     "api-version": "2024-03-01-preview",
     "parameters": {
       "tags": {
-        "environment": "staging"
+        "key1": "value1",
+        "key2": "value2"
       },
       "properties": {
         "enabled": false,
         "actions": [
           {
-            "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Insights/actionGroups/newActionGroup"
+            "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/newgroup"
           }
         ]
       }
@@ -20,36 +21,34 @@
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Insights/metricAlerts/dynamicAlertRule",
-        "name": "dynamicAlertRule",
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/microsoft.insights/metricAlerts/dynamiccpu",
         "type": "Microsoft.Insights/metricAlerts",
+        "name": "dynamiccpu",
         "location": "global",
-        "tags": {
-          "environment": "staging"
-        },
         "kind": "Query",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
         "properties": {
-          "description": "This is a dynamic query alert rule",
-          "severity": 2,
+          "description": "This is a dynamic metric alert",
+          "severity": 3,
           "enabled": false,
           "scopes": [
-            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Storage/storageAccounts/storageAccount1"
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
           ],
-          "evaluationFrequency": "PT5M",
-          "criteria": {
-            "query": "Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m)"
-          },
+          "evaluationFrequency": "PT1M",
           "resolveConfiguration": {
             "autoResolved": true,
             "timeToResolve": "PT15M"
           },
-          "targetResourceType": "Microsoft.Storage/storageAccounts",
-          "targetResourceRegion": "eastus",
+          "criteria": {
+            "query": "Perf | where ObjectName == \"Processor\" and CounterName == \"% Processor Time\" | summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 5m)"
+          },
           "actions": [
             {
-              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Insights/actionGroups/newActionGroup"
+              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/newgroup"
             }
           ]
         }

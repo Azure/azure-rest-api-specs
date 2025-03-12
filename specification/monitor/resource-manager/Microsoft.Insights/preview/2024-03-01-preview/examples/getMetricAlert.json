@@ -1,41 +1,37 @@
 {
   "parameters": {
     "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
-    "resourceGroupName": "monitorRG",
-    "ruleName": "metricAlertRule",
+    "resourceGroupName": "gigtest",
+    "ruleName": "highcpu",
     "api-version": "2024-03-01-preview"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Insights/metricAlerts/metricAlertRule",
-        "name": "metricAlertRule",
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/microsoft.insights/metricAlerts/highcpu",
         "type": "Microsoft.Insights/metricAlerts",
+        "name": "highcpu",
         "location": "global",
-        "tags": {
-          "environment": "production"
-        },
         "kind": "Metric",
+        "tags": {
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+        },
         "properties": {
-          "description": "This is a metric alert rule",
-          "severity": 2,
+          "description": "This is the description of the metric alert",
+          "severity": 3,
           "enabled": true,
           "scopes": [
-            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Storage/storageAccounts/storageAccount1"
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
           ],
-          "evaluationFrequency": "PT5M",
+          "evaluationFrequency": "PT1M",
           "windowSize": "PT15M",
           "criteria": {
-            "threshold": 90,
+            "threshold": 80.50,
             "operator": "GreaterThan"
           },
-          "autoMitigate": true,
-          "targetResourceType": "Microsoft.Storage/storageAccounts",
-          "targetResourceRegion": "eastus",
           "actions": [
             {
-              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/monitorRG/providers/Microsoft.Insights/actionGroups/actionGroup1"
+              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2"
             }
           ]
         }
