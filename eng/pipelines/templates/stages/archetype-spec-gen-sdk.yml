@@ -195,26 +195,26 @@ extends:
                 $optional_params
             displayName: 'Generate SDK'
 
-          - ${{ if ne(variables['AddBreakingChangeLabelArtifactName'], '') }}:
-            - task: PowerShell@2
-              displayName: 'Output variables'
-              inputs:
-                targetType: 'inline'
-                script: |
-                  $artifactName = "$(AddBreakingChangeLabelArtifactName)"
-                  $artifactPath = "$(System.DefaultWorkingDirectory)/$(AddBreakingChangeLabelArtifactPath)"
-                  Write-Host "Artifact Name: $artifactName"
-                  Write-Host "Artifact Path: $artifactPath"
-                  if (Test-Path $artifactPath) {
-                    Get-ChildItem $artifactPath -Recurse
-                  } 
-                  $artifactName = "$(RemoveBreakingChangeLabelArtifactName)"
-                  $artifactPath = "$(System.DefaultWorkingDirectory)/$(RemoveBreakingChangeLabelArtifactPath)"
-                  Write-Host "Artifact Name: $artifactName"
-                  Write-Host "Artifact Path: $artifactPath"
-                  if (Test-Path $artifactPath) {
-                    Get-ChildItem $artifactPath -Recurse
-                  }
+          - task: PowerShell@2
+            displayName: 'Output variables'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Get-ChildItem "$(System.DefaultWorkingDirectory)/out/breakingchangelabel/add" -Recurse
+                $artifactName = "$(AddBreakingChangeLabelArtifactName)"
+                $artifactPath = "$(System.DefaultWorkingDirectory)/$(AddBreakingChangeLabelArtifactPath)"
+                Write-Host "Artifact Name: $artifactName"
+                Write-Host "Artifact Path: $artifactPath"
+                if (Test-Path $artifactPath) {
+                  Get-ChildItem $artifactPath -Recurse
+                } 
+                $artifactName = "$(RemoveBreakingChangeLabelArtifactName)"
+                $artifactPath = "$(System.DefaultWorkingDirectory)/$(RemoveBreakingChangeLabelArtifactPath)"
+                Write-Host "Artifact Name: $artifactName"
+                Write-Host "Artifact Path: $artifactPath"
+                if (Test-Path $artifactPath) {
+                  Get-ChildItem $artifactPath -Recurse
+                }
           - ${{ if ne(variables['AddBreakingChangeLabelArtifactName'], '') }}:
             - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
               parameters:

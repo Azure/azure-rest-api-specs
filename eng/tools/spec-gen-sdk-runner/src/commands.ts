@@ -114,7 +114,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       statusCode = 1;
     }
     if (statusCode === 0) {
-      processBreakingChangeLabelArtifacts(commandInput.workingFolder);
+      statusCode = processBreakingChangeLabelArtifacts(commandInput.workingFolder) || 0;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
 
@@ -426,8 +426,9 @@ function logIssuesToPipeline(
  * Process the breaking change label artifacts.
  *
  * @param workingFolder - The working directory for the SDK generation process.
+ * @returns the run status code.
  */
-function processBreakingChangeLabelArtifacts(workingFolder: string): void {
+function processBreakingChangeLabelArtifacts(workingFolder: string): number {
   let addBreakingChangeLabelArtifactName = "";
   let addBreakingChangeLabelAction = "";
   let removeBreakingChangeLabelArtifactName = "";
@@ -440,6 +441,7 @@ function processBreakingChangeLabelArtifacts(workingFolder: string): void {
       workingFolder,
       addBreakingChangeLabelArtifactPath,
     );
+    logMessage("Processing breaking change label artifacts");
     if (fs.existsSync(addBreakingChangeLabelArtifactFolder)) {
       const files = fs.readdirSync(addBreakingChangeLabelArtifactFolder);
       const breakingChangeFiles = files.filter((file) => file.startsWith("spec-gen-sdk_"));
@@ -479,5 +481,7 @@ function processBreakingChangeLabelArtifacts(workingFolder: string): void {
     }
   } catch (error) {
     logMessage(`Error reading breaking change label artifacts:${error}`, LogLevel.Error);
+    return 1;
   }
+  return 0;
 }
