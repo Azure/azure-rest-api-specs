@@ -18,8 +18,15 @@ export async function getInputFiles(markdown, core) {
     .filter((token) => token.lang?.toLowerCase().startsWith("yaml"));
 
   const inputFiles = yamlBlocks.flatMap((block) => {
+    const tag =
+      block.lang?.match(/yaml \$\(tag\) == '([^']*)'/)?.[1] || "default";
+
     const obj = yaml.parse(block.text);
-    return /** @type string[] */ (obj["input-file"] || []);
+    const blockFiles = /** @type string[] */ (obj["input-file"] || []);
+
+    core.info(`Input files for tag '${tag}': ${JSON.stringify(blockFiles)}`);
+
+    return blockFiles;
   });
 
   return new Set(inputFiles);

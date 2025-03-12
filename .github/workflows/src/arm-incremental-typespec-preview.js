@@ -62,6 +62,8 @@ export default async function incrementalTypeSpec({ github, context, core }) {
   const changedReadmeInputFiles = new Set();
 
   for (const readmeFile of changedRmFiles.filter(readme)) {
+    core.info(`Extracting input files from '${readmeFile}'`);
+
     let readmeText;
     try {
       readmeText = await show("HEAD", readmeFile, core);
