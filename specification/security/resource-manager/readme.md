@@ -143,6 +143,7 @@ These settings apply only when `--tag=package-preview-2024-08-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2024-08-01-preview'
 input-file:
   - Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
+  - Microsoft.Security/preview/2024-08-01-preview/defenderForStorageSettings.json
 ```
 
 ### Tag: package-2024-08
