@@ -430,7 +430,12 @@ model Conversations {
   language: string;
 
   /** List of conversation items. */
-  conversationItems: ConversationItemBase[];
+  conversationItems: ConversationalAIItem[];
+}
+
+model ConversationalAIItem is ConversationItemBase {
+  /** The text input */
+  text: string;
 }
 
 /** The input for a conversation language understanding task. */
@@ -458,9 +463,6 @@ model ConversationItemBase {
 
   /** The participant ID of a conversation item. */
   participantId: string;
-
-  /** The text input */
-  text: string;
   
   /** Role of the participant. */
   @added(Versions.v2023_04_01)
@@ -475,6 +477,9 @@ model TextConversationItem is ConversationItemBase {
 
   /** Enumeration of supported conversational modalities. */
   modality?: InputModality;
+  
+  /** The text input */
+  text: string;
 
 }
 
@@ -1001,11 +1006,21 @@ model TranscriptConversation extends Conversation {
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @added(Versions.v2023_04_01)
 model TranscriptConversationItem is ConversationItemBase {
+  
+  /** The override language of a conversation item in BCP 47 language representation. */
+  language?: string;
+
+  /** Enumeration of supported conversational modalities. */
+  modality?: InputModality;
+
   /** Inverse text normalization (ITN) representation of input. The inverse-text-normalized form is the recognized text from Microsoft's speech-to-text API, with phone numbers, numbers, abbreviations, and other transformations applied. */
   itn: string;
 
   /** Inverse-text-normalized format with profanity masking applied. */
   maskedItn: string;
+
+  /** Display form of the recognized text from the speech-to-text API, with punctuation and capitalization added. */
+  text: string;
 
   /** Lexical form of the recognized text from the speech-to-text API, with the actual words recognized. */
   lexical: string;
@@ -1118,6 +1133,7 @@ model ConversationTaskParameters is BaseConversationTaskParameters{
 }
 
 /** The results of a ConversationalAI task. */
+@added(Versions.v2025_05_15)
 model ConversationalAITaskResult extends AnalyzeConversationTaskResult {
   /** The results of a Conversational AI task. */
   kind: AnalyzeConversationTaskResultsKind.ConversationalAIResult;
@@ -1126,6 +1142,7 @@ model ConversationalAITaskResult extends AnalyzeConversationTaskResult {
   result: ConversationalAIResult;
 }
 
+@added(Versions.v2025_05_15)
 model ConversationalAIResult {
   /** Multiple multi-turn conversations analyzed. */
   conversations: ConversationalAIAnalysis[];
@@ -1134,6 +1151,7 @@ model ConversationalAIResult {
   warnings?: string[];
 }
 
+@added(Versions.v2025_05_15)
 model ConversationalAIAnalysis {
   /** The ID of the conversation. */
   id: string;
