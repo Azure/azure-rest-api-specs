@@ -6,7 +6,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
     "fleetName": "fleet1",
-    "updateStrategyName": "strartegy1",
+    "updateStrategyName": "strategy1",
     "resource": {
       "properties": {
         "strategy": {
@@ -15,9 +15,25 @@
               "name": "stage1",
               "groups": [
                 {
-                  "name": "group-a"
+                  "name": "group-a",
+                  "beforeGates": {
+                    "displayName": "gate before group-a",
+                    "type": "Approval"
+                  },
+                  "afterGates": {
+                    "displayName": "gate after group-a",
+                    "type": "Approval"
+                  }
                 }
               ],
+              "beforeGates": {
+                "displayName": "gate before stage1",
+                "type": "Approval"
+              },
+              "afterGates": {
+                "displayName": "gate after stage1",
+                "type": "Approval"
+              },
               "afterStageWaitInSeconds": 3600
             }
           ]
@@ -47,9 +63,25 @@
                 "name": "stage1",
                 "groups": [
                   {
-                    "name": "group-a"
+                    "name": "group-a",
+                    "beforeGates": {
+                      "displayName": "gate before group-a",
+                      "type": "Approval"
+                    },
+                    "afterGates": {
+                      "displayName": "gate after group-a",
+                      "type": "Approval"
+                    }
                   }
                 ],
+                "beforeGates": {
+                  "displayName": "gate before stage1",
+                  "type": "Approval"
+                },
+                "afterGates": {
+                  "displayName": "gate after stage1",
+                  "type": "Approval"
+                },
                 "afterStageWaitInSeconds": 3600
               }
             ]
@@ -79,9 +111,25 @@
                 "name": "stage1",
                 "groups": [
                   {
-                    "name": "group-a"
+                    "name": "group-a",
+                    "beforeGates": {
+                      "displayName": "gate before group-a",
+                      "type": "Approval"
+                    },
+                    "afterGates": {
+                      "displayName": "gate after group-a",
+                      "type": "Approval"
+                    }
                   }
                 ],
+                "beforeGates": {
+                  "displayName": "gate before stage1",
+                  "type": "Approval"
+                },
+                "afterGates": {
+                  "displayName": "gate after stage1",
+                  "type": "Approval"
+                },
                 "afterStageWaitInSeconds": 3600
               }
             ]

@@ -189,6 +189,9 @@ union UpdateState {
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has failed.")
   "Failed",
 
+  @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is pending.")
+  "Pending",
+
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has completed.")
   "Completed",
 }
