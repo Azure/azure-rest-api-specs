@@ -1803,7 +1803,7 @@ alias BlobPathParameter = {
   @maxLength(1024)
   @pattern("^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$")
   @path
-  blob: string;
+  blobName: string;
 };
 
 /** The type of blob deletions. */
