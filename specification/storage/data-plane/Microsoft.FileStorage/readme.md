@@ -25,7 +25,7 @@ These are the global settings for the FileStorage API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2025-05
+tag: package-2025-11
 use-internal-constructors: true
 add-credentials: true
 ```
@@ -163,6 +163,15 @@ These settings apply only when `--tag=package-2025-05` is specified on the comma
 ``` yaml $(tag) == 'package-2025-05'
 input-file:
 - stable/2025-05-05/file.json
+```
+
+### Tag: package-2025-11
+
+These settings apply only when `--tag=package-2025-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-11'
+input-file:
+- stable/2025-11-05/file.json
 ```
 
 ### Suppression
