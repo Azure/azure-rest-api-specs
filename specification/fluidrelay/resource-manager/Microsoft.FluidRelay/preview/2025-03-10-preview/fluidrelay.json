@@ -688,6 +688,15 @@
               "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The location header contains the URL to check the status of the operation."
+              }
+            }
+          },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
@@ -704,7 +713,7 @@
         ],
         "summary": "Deletes the private endpoint connection.",
         "x-ms-examples": {
-          "Put Private Endpoint Connection": {
+          "Delete Private Endpoint Connection": {
             "$ref": "./examples/FluidRelayPrivateEndpoint_DeletePrivateEndpointConnection.json"
           }
         },
@@ -734,7 +743,7 @@
             "headers": {
               "Location": {
                 "type": "string",
-                "description": "The location header contains the URL to check the status of the long-running operation."
+                "description": "The location header contains the URL to check the status of the operation."
               }
             }
           },
