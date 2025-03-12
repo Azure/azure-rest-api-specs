@@ -2399,7 +2399,12 @@
           "format": "int32",
           "description": "Number of segments whose delivery failed"
         }
-      }
+      },
+      "required": [
+        "timestamp",
+        "segmentsSucceeded",
+        "segmentsFailed"
+      ]
     },
     "AcsSmsDeliveryReportReceivedEventData": {
       "type": "object",
@@ -2432,6 +2437,8 @@
         }
       },
       "required": [
+        "deliveryStatus",
+        "deliveryStatusDetails",
         "deliveryAttempts"
       ],
       "allOf": [
@@ -2456,7 +2463,12 @@
           "type": "string",
           "description": "The identity of SMS message receiver"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "from",
+        "to"
+      ]
     },
     "AcsSmsReceivedEventData": {
       "type": "object",
