@@ -1,10 +1,11 @@
 {
-  "title": "Metrics_CreateOrUpdate_UserRate",
-  "operationId": "Metrics_CreateOrUpdate",
+  "title": "ExperimentMetricsClient_CreateOrUpdate_UserRate",
+  "operationId": "ExperimentMetricsClient_CreateOrUpdate",
   "parameters": {
-    "workspaceId": "00000000-0000-0000-0000-000000000000",
-    "metricId": "rate_subscription_ad",
-    "api-version": "2024-11-30-preview",
+    "experimentMetricId": "rate_subscription_ad",
+    "region": "use2",
+    "workspaceId": "workspace-id",
+    "api-version": "2025-05-31-preview",
     "If-Match": "vxexdn",
     "If-None-Match": "ijchzdh",
     "If-Unmodified-Since": "2024-08-22T02:02:11.418Z",
@@ -14,12 +15,12 @@
       "displayName": "Subscription ad conversion rate",
       "description": "The percentage of users who saw an advertisement for a subscription promotion and then later successfully subscribed. This metric is calculated as the number of users who successfully subscribed after seeing the advert divided by the total number of users who saw the advert. Users who saw multiple adverts or subscribed multiple times are counted only once. Users who saw the advert before the analysis period starts are excluded from this metric.",
       "lifecycle": "Active",
-      "tags": [
+      "categories": [
         "Monetization"
       ],
       "desiredDirection": "Increase",
       "definition": {
-        "kind": "UserRate",
+        "type": "UserRate",
         "startEvent": {
           "eventName": "AdView",
           "filter": "Source == 'subscription_promo'"
@@ -42,12 +43,12 @@
         "displayName": "Subscription ad conversion rate",
         "description": "The percentage of users who saw an advertisement for a subscription promotion and then later successfully subscribed. This metric is calculated as the number of users who successfully subscribed after seeing the advert divided by the total number of users who saw the advert. Users who saw multiple adverts or subscribed multiple times are counted only once. Users who saw the advert before the analysis period starts are excluded from this metric.",
         "lifecycle": "Active",
-        "tags": [
+        "categories": [
           "Monetization"
         ],
         "desiredDirection": "Increase",
         "definition": {
-          "kind": "UserRate",
+          "type": "UserRate",
           "startEvent": {
             "eventName": "AdView",
             "filter": "Source == 'subscription_promo'"
@@ -71,12 +72,12 @@
         "displayName": "Subscription ad conversion rate",
         "description": "The percentage of users who saw an advertisement for a subscription promotion and then later successfully subscribed. This metric is calculated as the number of users who successfully subscribed after seeing the advert divided by the total number of users who saw the advert. Users who saw multiple adverts or subscribed multiple times are counted only once. Users who saw the advert before the analysis period starts are excluded from this metric.",
         "lifecycle": "Active",
-        "tags": [
+        "categories": [
           "Monetization"
         ],
         "desiredDirection": "Increase",
         "definition": {
-          "kind": "UserRate",
+          "type": "UserRate",
           "startEvent": {
             "eventName": "AdView",
             "filter": "Source == 'subscription_promo'"

@@ -9,15 +9,28 @@ using Azure.Core;
 using Azure.Core.Traits;
 
 @useAuth(AadOauth2Auth<["https://exp.azure.net/.default"]>)
-@service(#{ title: "Azure.Analytics.OnlineExperimentation service" })
+@service({
+  title: "Azure.Analytics.OnlineExperimentation service",
+})
 @versioned(Azure.Analytics.OnlineExperimentation.Versions)
+@server(
+  "https://{workspaceId}.{region}.exp.azure.net",
+  "Online Experimentation service",
+  {
+    @doc("The Azure region wherein requests for online experimentation will be sent.")
+    region: string,
+
+    @doc("The workspace Id.")
+    workspaceId: string,
+  }
+)
 namespace Azure.Analytics.OnlineExperimentation;
 
 @doc("The Azure.Analytics.OnlineExperimentation service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2024-11-30-preview version of the Azure.Analytics.OnlineExperimentation service.")
-  `2024-11-30-preview`,
+  @doc("The 2025-05-31-preview version of the Azure.Analytics.OnlineExperimentation service.")
+  `2025-05-31-preview`,
 }
 
 @doc("Desired direction of the metric.")
@@ -50,11 +63,11 @@ union DesiredDirection {
 @maxLength(1000)
 scalar EventCondition extends string;
 
-@doc("A tag attached to the metric.")
+@doc("A category attached to the metric.")
 @pattern("^[a-zA-Z0-9 _:()&-]+$")
 @maxLength(30)
 @minLength(1)
-scalar Tag extends string;
+scalar Category extends string;
 
 @doc("An event observed by a metric.")
 model ObservedEvent {
@@ -79,7 +92,7 @@ model AggregatedValue {
 }
 
 @doc("How the metric should be calculated from the event data.")
-union MetricKind {
+union MetricType {
   @doc("Count the observations of an event. Experiment analysis accounts for unequal traffic allocation.")
   EventCount: "EventCount",
 
@@ -104,40 +117,40 @@ union MetricKind {
   string,
 }
 
-@doc("The definition of an EventCount metric. This metric kind counts the observations of an event. Experiment analysis accounts for unequal traffic allocation.")
-model EventCountDefinition extends MetricDefinition {
-  @doc("The kind of metric.")
-  kind: MetricKind.EventCount;
+@doc("The definition of an EventCount metric. This metric type counts the observations of an event. Experiment analysis accounts for unequal traffic allocation.")
+model EventCountDefinition extends ExperimentMetricDefinition {
+  @doc("The type of metric.")
+  type: MetricType.EventCount;
 
   @doc("Event to observe.")
   event: ObservedEvent;
 }
 
-@doc("The definition of a UserCount metric. This metric kind counts the users who encounter an event. Experiment analysis accounts for unequal traffic allocation.")
-model UserCountDefinition extends MetricDefinition {
-  @doc("The kind of metric.")
-  kind: MetricKind.UserCount;
+@doc("The definition of a UserCount metric. This metric type counts the users who encounter an event. Experiment analysis accounts for unequal traffic allocation.")
+model UserCountDefinition extends ExperimentMetricDefinition {
+  @doc("The type of metric.")
+  type: MetricType.UserCount;
 
   @doc("Event to observe.")
   event: ObservedEvent;
 }
 
-@doc("The definition of an EventRate metric. This metric kind counts the percentage of events that satisfy a condition.")
-model EventRateDefinition extends MetricDefinition {
-  @doc("The kind of metric.")
-  kind: MetricKind.EventRate;
+@doc("The definition of an EventRate metric. This metric type counts the percentage of events that satisfy a condition.")
+model EventRateDefinition extends ExperimentMetricDefinition {
+  @doc("The type of metric.")
+  type: MetricType.EventRate;
 
   @doc("Event to observe as the rate denominator.")
   event: ObservedEvent;
 
   @doc("The event contributes to the rate numerator if it satisfies this condition.")
-  condition: EventCondition;
+  rateCondition: EventCondition;
 }
 
-@doc("The definition of a UserRate metric. This metric kind counts the percentage of users with the start event that then encounter the end event. The metric denominator counts the number of users who encounter the start event at least once. The metric numerator counts the number of users who encounter both the start and end events at least once. The computation is ordered, so the start event must occur before the end event.")
-model UserRateDefinition extends MetricDefinition {
-  @doc("The kind of metric.")
-  kind: MetricKind.UserRate;
+@doc("The definition of a UserRate metric. This metric type counts the percentage of users with the start event that then encounter the end event. The metric denominator counts the number of users who encounter the start event at least once. The metric numerator counts the number of users who encounter both the start and end events at least once. The computation is ordered, so the start event must occur before the end event.")
+model UserRateDefinition extends ExperimentMetricDefinition {
+  @doc("The type of metric.")
+  type: MetricType.UserRate;
 
   @doc("The start event to observe as the rate denominator.")
   startEvent: ObservedEvent;
@@ -146,28 +159,28 @@ model UserRateDefinition extends MetricDefinition {
   endEvent: ObservedEvent;
 }
 
-@doc("The definition of a Sum metric. This metric kind measures the sum of an event property. Experiment analysis accounts for unequal traffic allocation.")
-model SumDefinition extends MetricDefinition {
-  @doc("The kind of metric.")
-  kind: MetricKind.Sum;
+@doc("The definition of a Sum metric. This metric type measures the sum of an event property. Experiment analysis accounts for unequal traffic allocation.")
+model SumDefinition extends ExperimentMetricDefinition {
+  @doc("The type of metric.")
+  type: MetricType.Sum;
 
   @doc("The value to aggregate.")
   value: AggregatedValue;
 }
 
-@doc("The definition of an Average metric. This metric kind measures the average of an event property.")
-model AverageDefinition extends MetricDefinition {
-  @doc("The kind of metric.")
-  kind: MetricKind.Average;
+@doc("The definition of an Average metric. This metric type measures the average of an event property.")
+model AverageDefinition extends ExperimentMetricDefinition {
+  @doc("The type of metric.")
+  type: MetricType.Average;
 
   @doc("The value to aggregate.")
   value: AggregatedValue;
 }
 
-@doc("The definition of a Percentile metric. This metric kind measures the percentile of an event property.")
-model PercentileDefinition extends MetricDefinition {
-  @doc("The kind of metric.")
-  kind: MetricKind.Percentile;
+@doc("The definition of a Percentile metric. This metric type measures the percentile of an event property.")
+model PercentileDefinition extends ExperimentMetricDefinition {
+  @doc("The type of metric.")
+  type: MetricType.Percentile;
 
   @doc("The value to aggregate.")
   value: AggregatedValue;
@@ -178,20 +191,10 @@ model PercentileDefinition extends MetricDefinition {
   percentile: int32;
 }
 
-@doc("A workspace object that describes the Online Experimentation workspace.")
-@resource("workspaces")
-model Workspace {
-  @key("workspaceId")
-  @doc("An ID used to uniquely identify and reference the Online Experimentation workspace.")
-  @visibility(Lifecycle.Read)
-  @pattern("^[a-z0-9][a-z0-9-]*$")
-  workspaceId: string;
-}
-
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Union discriminator with different types are not supported in swagger v2"
 @doc("The metric definition, which determines how the metric value is calculated from event data.")
-@discriminator("kind")
-model MetricDefinition {}
+@discriminator("type")
+model ExperimentMetricDefinition {}
 
 @doc("Lifecycle stages of a metric, which determines when the metric is calculated.")
 union LifecycleStage {
@@ -204,13 +207,12 @@ union LifecycleStage {
   string,
 }
 
-@doc("A Metric object that describes the metric.")
-@resource("metrics")
-@parentResource(Workspace)
-model Metric {
-  @key("metricId")
+@doc("A ExperimentMetric object that describes the metric.")
+@resource("experiment-metrics")
+model ExperimentMetric {
+  @key("experimentMetricId")
   @doc("An ID used to uniquely identify and reference the metric.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   @maxLength(50)
   @minLength(1)
   @pattern("^[a-z_][a-z0-9_]*$")
@@ -229,21 +231,21 @@ model Metric {
   @maxLength(1000)
   description: string;
 
-  @doc("The tags of the metric.")
-  tags: Tag[];
+  @doc("The categories of the metric.")
+  categories: Category[];
 
   @doc("Whether an increase or decrease to the metric value is desired.")
   desiredDirection: DesiredDirection;
 
   @doc("The metric definition, which determines how the metric value is calculated from event data.")
-  definition: MetricDefinition;
+  definition: ExperimentMetricDefinition;
 
   @doc("ETag of the metric")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   eTag: eTag;
 
   @doc("The timestamp of resource last modification (UTC)")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   lastModifiedAt: utcDateTime;
 }
 
@@ -275,7 +277,7 @@ union DiagnosticCode {
     but also includes a filter such as Revenue == 'hello', this creates a type mismatch. 
     The system infers conflicting data types—numeric and string—resulting in a validation failure.
     """)
-  InvalidMetricDefinition: "InvalidMetricDefinition",
+  InvalidExperimentMetricDefinition: "InvalidExperimentMetricDefinition",
 
   string,
 }
@@ -283,18 +285,18 @@ union DiagnosticCode {
 @doc("The diagnostic information.")
 model DiagnosticInfo {
   @doc("The error message.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   message: string;
 
   @doc("The error code.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   code: DiagnosticCode;
 }
 
-@doc("The result of validating a Metric.")
-model MetricValidateResult {
+@doc("The result of validating a metric.")
+model ExperimentMetricValidateResult {
   @doc("The validation result.")
-  @visibility(Lifecycle.Read)
+  @visibility("read")
   diagnostics: DiagnosticInfo[];
 
   @doc("Whether the metric is valid.")
@@ -313,27 +315,27 @@ alias BodyParameter<T, TDoc extends valueof string> = {
   body: T;
 };
 
-interface Metrics {
-  @doc("Fetch a Metric by Id.")
-  get is Operations.ResourceRead<Metric>;
+interface ExperimentMetricsClient {
+  @doc("Fetch a ExperimentMetric by Id.")
+  get is Operations.ResourceRead<ExperimentMetric>;
 
-  @doc("Creates or updates a Metric asynchronously.")
-  createOrUpdate is Operations.ResourceCreateOrUpdate<Metric>;
+  @doc("Creates or updates a ExperimentMetric asynchronously.")
+  createOrUpdate is Operations.ResourceCreateOrUpdate<ExperimentMetric>;
 
-  @doc("Validates a Metric.")
+  @doc("Validates a ExperimentMetric.")
   validate is Operations.ResourceAction<
-    Metric,
-    BodyParameter<Metric, "Metric input to validate">,
-    MetricValidateResult,
+    ExperimentMetric,
+    BodyParameter<ExperimentMetric, "Metric input to validate">,
+    ExperimentMetricValidateResult,
     {}
   >;
 
-  @doc("Delete a Metric asynchronously.")
-  delete is Operations.ResourceDelete<Metric>;
+  @doc("Delete a ExperimentMetric asynchronously.")
+  delete is Operations.ResourceDelete<ExperimentMetric>;
 
-  @doc("List Metrics resources")
+  @doc("List ExperimentMetric resources")
   list is Operations.ResourceList<
-    Metric,
+    ExperimentMetric,
     {
       parameters: StandardListQueryParameters;
     }

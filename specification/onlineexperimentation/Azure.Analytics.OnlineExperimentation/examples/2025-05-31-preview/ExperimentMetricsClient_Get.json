@@ -1,10 +1,11 @@
 {
-  "operationId": "Metrics_Get",
+  "operationId": "ExperimentMetricsClient_Get",
   "title": "Get metric by metric name.",
   "parameters": {
-    "api-version": "2024-11-30-preview",
-    "metricId": "events_purchase_creditcard",
-    "workspaceId": "00000000-0000-0000-0000-000000000000",
+    "region": "use2",
+    "workspaceId": "workspace-id",
+    "api-version": "2025-05-31-preview",
+    "experimentMetricId": "events_purchase_creditcard",
     "If-Match": "vxexdn",
     "If-None-Match": "ijchzdh",
     "If-Unmodified-Since": "2024-08-22T02:02:11.418Z",
@@ -22,12 +23,12 @@
         "displayName": "Number of purchases (credit card)",
         "description": "The number of purchase transactions made with credit card. Refund transactions are excluded from this metric.",
         "lifecycle": "Active",
-        "tags": [
+        "categories": [
           "Monetization"
         ],
         "desiredDirection": "Increase",
         "definition": {
-          "kind": "EventCount",
+          "type": "EventCount",
           "event": {
             "eventName": "Transaction",
             "filter": "Revenue > 0 and ['payment.method'] == 'credit_card'"
