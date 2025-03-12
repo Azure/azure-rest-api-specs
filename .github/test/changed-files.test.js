@@ -36,7 +36,7 @@ describe("changedFiles", () => {
     "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
     "specification/contosowidgetmanager/resource-manager/readme.md",
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
-    "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_get.json",
+    "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
   ];
 
   it("filter:json", () => {
@@ -45,7 +45,7 @@ describe("changedFiles", () => {
       "MixedCase.jSoN",
       "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_get.json",
+      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     ];
 
     expect(files.filter(json)).toEqual(expected);
@@ -68,7 +68,7 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
       "specification/contosowidgetmanager/resource-manager/readme.md",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_get.json",
+      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     ];
 
     expect(files.filter(specification)).toEqual(expected);
@@ -86,7 +86,7 @@ describe("changedFiles", () => {
     const expected = [
       "specification/contosowidgetmanager/resource-manager/readme.md",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_get.json",
+      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     ];
 
     expect(files.filter(resourceManager)).toEqual(expected);
@@ -95,7 +95,7 @@ describe("changedFiles", () => {
   it("filter:example", () => {
     const expected = [
       "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_get.json",
+      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     ];
 
     expect(files.filter(example)).toEqual(expected);
