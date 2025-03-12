@@ -234,7 +234,7 @@ export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspConfig
   }
 }
 
-export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
     super("hierarchyClient", "hierarchy-client", false);
   }
@@ -243,7 +243,7 @@ export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends Tspconfig
   }
 }
 
-export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
     super("experimentalExtensibleEnums", "experimental-extensible-enums", true);
   }
@@ -252,7 +252,7 @@ export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extend
   }
 }
 
-export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
     super("enableOperationGroup", "enable-operation-group", true);
   }
@@ -270,7 +270,7 @@ export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmit
   }
 }
 
-export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
     super("packageDetails.name", "package-details.name", new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/));
   }
