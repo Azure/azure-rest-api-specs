@@ -100,7 +100,6 @@ export default async function incrementalTypeSpec({ github, context, core }) {
 
   // Ensure that each changed spec dir contained at least one typespec-generated swagger in the base commitish
   for (const changedSpecDir of changedSpecDirs) {
-    // TODO: Create helper to list RM specs in a given commitish
     const specFilesBaseBranch = await lsTree(
       "HEAD^",
       changedSpecDir,
@@ -108,14 +107,10 @@ export default async function incrementalTypeSpec({ github, context, core }) {
       "-r --name-only",
     );
 
-    // Filter files to only include RM *.json files
-    const specRmSwaggerFilesBaseBranch = specFilesBaseBranch.split("\n").filter(
-      // TODO: Replace with shared filters in changed-files.js
-      (file) =>
-        file.includes("/resource-manager/") &&
-        !file.includes("/examples/") &&
-        file.endsWith(".json"),
-    );
+    // Filter files to only include RM swagger files
+    const specRmSwaggerFilesBaseBranch = specFilesBaseBranch
+      .split("\n")
+      .filter((file) => resourceManager(file) && swagger(file));
 
     if (specRmSwaggerFilesBaseBranch.length === 0) {
       core.info(
