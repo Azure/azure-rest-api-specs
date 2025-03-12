@@ -27,22 +27,21 @@ model Connection {
   @key("connectionName")
   name: string;
 
-  @doc("Credential used to connect to the external resource.")
-  @visibility("read")
-  credentials: BaseCredential;
-
   @doc("Category of the connection")
   @visibility("read")
-  category: ConnectionCategory;
+  type: ConnectionType;
 
   @doc("The connection URL to be used for this service")
   @visibility("read")
   target: string;
+
+  @doc("A collection of properties of the connection")
+  properties: Record<string>;
 }
 
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType
 @doc("The Type (or category) of the connection")
-union ConnectionCategory {
+union ConnectionType {
   string,
 
   @doc("Azure OpenAI Service")
