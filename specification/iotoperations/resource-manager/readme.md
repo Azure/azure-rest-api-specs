@@ -94,6 +94,7 @@ These settings apply only when `--tag=package-2024-09-15-preview` is specified o
 input-file:
   - Microsoft.IoTOperations/preview/2024-09-15-preview/iotoperations.json
 ```
+
 ### Tag: package-2024-11-01
 
 These settings apply only when `--tag=package-2024-11-01` is specified on the command line.
@@ -102,6 +103,7 @@ These settings apply only when `--tag=package-2024-11-01` is specified on the co
 input-file:
   - Microsoft.IoTOperations/stable/2024-11-01/iotoperations.json
 ```
+
 ### Tag: package-2025-04-01
 
 These settings apply only when `--tag=package-2025-04-01` is specified on the command line.
