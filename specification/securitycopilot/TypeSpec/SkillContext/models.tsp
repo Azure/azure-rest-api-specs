@@ -963,10 +963,7 @@ namespace SkillContext
 		@doc("The document Embedding array.")
 		embedding: Array<float32>;
 		@doc("The document GetContent method.")
-		getContent(): string {
-			// Return the primary content; may be enhanced as needed.
-			return this.content;
-		}
+		op getContent(): string;
 	  }
 	
 	  model DynamicPromptsSearchResponse {
