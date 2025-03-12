@@ -294,6 +294,7 @@ async function runLintDiff(
       // TODO: Const
       outputMarkdown += "Only 50 items are listed, please refer to log for more details.\n";
     }
+    outputMarkdown += "\n";
 
     outputMarkdown += "| Rule | Message | Related RPC [For API reviewers] |\n";
     outputMarkdown += "| ---- | ------- | ------------------------------- |\n";
@@ -303,7 +304,7 @@ async function runLintDiff(
       outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} | TODO |\n`;
     }
 
-    outputMarkdown += `\n\n`;
+    outputMarkdown += "\n";
   }
 
   // The following errors/warnings exist before current PR submission
@@ -314,6 +315,7 @@ async function runLintDiff(
       // TODO: Const
       outputMarkdown += "Only 50 items are listed, please refer to log for more details.\n";
     }
+    outputMarkdown += "\n";
 
     // TODO: ensure columns are correct
     outputMarkdown += "| Rule | Message |\n";
@@ -324,7 +326,7 @@ async function runLintDiff(
       outputMarkdown += `| ${iconFor(level)} ${getDocUrl(code)} | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} |\n`;
     }
 
-    outputMarkdown += `\n\n`;
+    outputMarkdown += `\n`;
   }
 
   console.log(`Writing output to ${outFile}`);
