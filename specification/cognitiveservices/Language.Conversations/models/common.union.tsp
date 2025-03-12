@@ -19,7 +19,8 @@ union AnalyzeConversationTaskKind {
 
   /** Conversation task kind */
   Conversation: "Conversation",
-
+  
+  @added(Versions.v2025_05_15)
   /** Conversation task kind */
   ConversationalAI: "ConversationalAI",
 }

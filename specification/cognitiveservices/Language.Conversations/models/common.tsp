@@ -388,7 +388,7 @@ model CustomResult {
 model AnalyzeConversationTask {
   /** The base class of a conversation input task. */
   @key
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Query)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   kind: AnalyzeConversationTaskKind;
 }
 
@@ -399,6 +399,8 @@ model AnalyzeConversationTaskResult {
   kind: AnalyzeConversationTaskResultsKind;
 }
 
+@added(Versions.v2025_05_15)
+/** A conversational AI task. */
 model ConversationalAITask extends AnalyzeConversationTask {
   /** Task kind. */
   kind: AnalyzeConversationTaskKind.ConversationalAI;
@@ -410,11 +412,13 @@ model ConversationalAITask extends AnalyzeConversationTask {
   parameters: BaseConversationTaskParameters;
 }
 
+@added(Versions.v2025_05_15)
 model ConversationalAIAnalysisOptions {
   /** List of multiple conversations */
   conversations: Conversation[];
 }
 
+@added(Versions.v2025_05_15)
 model Conversations {
   /** The ID of the conversation. */
   id: string;
@@ -563,6 +567,8 @@ model ConversationPrediction extends BasePrediction {
 }
 
 /** Represents the prediction section of a Conversation project. */
+@added(Versions.v2025_05_15)
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model ConversationalAIPrediction extends BasePrediction {
   /** Represents the prediction section of a Conversation project. */
   projectKind: projectKind.ConversationalAI;
@@ -878,7 +884,7 @@ model AnalyzeConversationJobsInput {
 
   /** Analysis Input */
   @key
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Query)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   analysisInput: MultiLanguageConversationAnalysisInput;
 
   /** Set of tasks to execute on the input conversation. */
