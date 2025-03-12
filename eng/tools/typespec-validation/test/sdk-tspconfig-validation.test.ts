@@ -228,8 +228,8 @@ const mixTsManagementHierarchyClientTestCases = {
   folder: "aaa.Management",
   tspconfigContent: createEmitterOptionExample(
     "@azure-tools/typespec-ts",
-    { key: "hierarchyClient", value: true },
-    { key: "hierarchy-client", value: false },
+    { key: "hierarchyClient", value: false },
+    { key: "hierarchy-client", value: true },
   ),
   success: false,
   subRules: [new TspConfigTsMgmtModularHierarchyClientFalseSubRule()],
@@ -327,8 +327,8 @@ const mixTsManagementPackageNameTestCases = {
   folder: "aaa.Management",
   tspconfigContent: createEmitterOptionExample(
     "@azure-tools/typespec-ts",
-    { key: "packageDetails", value: new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/) },
-    { key: "package-details", value: new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/) },
+    { key: "packageDetails.name", value: new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/) },
+    { key: "package-details.name", value: new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/) },
   ),
   success: false,
   subRules: [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
