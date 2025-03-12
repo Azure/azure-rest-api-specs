@@ -287,43 +287,55 @@ union ExtraParameters {
 // Define a URI alias for clarity.
 alias Uri = string;
 
-enum PendingUploadType {
-  None,
-  TemporaryBlobReference,
+@doc("The type of pending upload.")
+union PendingUploadType {
+  string,
+
+  @doc("No pending upload.")
+  none: "None",
+
+  @doc("Temporary Blob Reference is the only supported type.")
+  temporaryBlobReference: "TemporaryBlobReference",
 }
 
-enum PendingUploadCredentialType {
-  SAS,
+@doc("The type of credential used to access the storage account.")
+union PendingUploadCredentialType {
+  string,
+
+  @doc("SAS credential type.")
+  sas: "SAS",
 }
 
+@doc("Represents a request for a pending upload.")
 model PendingUploadRequest {
-  /// If PendingUploadId is not provided, a random guid will be used.
+  @doc("If PendingUploadId is not provided, a random GUID will be used.")
   pendingUploadId?: string;
 
-  /// TemporaryBlobReference is the only supported type.
-  pendingUploadType: PendingUploadType.TemporaryBlobReference;
+  @doc("TemporaryBlobReference is the only supported type.")
+  pendingUploadType: PendingUploadType.temporaryBlobReference;
 }
 
+@doc("Represents the response for a pending upload request")
 model PendingUploadResponse {
-  /// Container-level read, write, list SAS.
+  @doc("Container-level read, write, list SAS.")
   blobReferenceForConsumption: BlobReferenceForConsumption;
 
-  /// ID for this upload request.
+  @doc("ID for this upload request.")
   pendingUploadId: string;
 
-  /// TemporaryBlobReference is the only supported type.
-  pendingUploadType: PendingUploadType.TemporaryBlobReference;
+  @doc("TemporaryBlobReference is the only supported type")
+  pendingUploadType: PendingUploadType.temporaryBlobReference;
 }
 
+@doc("Represents a reference to a blob for consumption")
 model BlobReferenceForConsumption {
-  /// Blob URI path for client to upload data.
-  /// Example: https://blob.windows.core.net/Container/Path
+  @doc("Blob URI path for client to upload data. Example: https://blob.windows.core.net/Container/Path")
   blobUri: Uri;
 
-  /// ARM ID of the storage account to use.
+  @doc("ARM ID of the storage account to use.")
   storageAccountArmId: string;
 
-  /// Credential info to access the storage account.
+  @doc("Credential info to access the storage account.")
   credential: SasCredential;
 }
 
