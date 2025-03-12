@@ -279,6 +279,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/getAllAvailabilityGroups": {
+      "post": {
+        "tags": [
+          "SqlServerAvailabilityGroups"
+        ],
+        "description": "Retrieves full properties of all the Availability Groups in a SQL Server instance.",
+        "operationId": "SqlServerInstances_GetAllAvailabilityGroups",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AvailabilityGroupRetrievalFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcSqlServerAvailabilityGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all availability groups associated with an Arc Enabled Sql server.": {
+            "$ref": "./examples/FilteredListBySqlServerInstanceAvailabilityGroup.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/availabilityGroups/{availabilityGroupName}/failover": {
       "post": {
         "tags": [
@@ -1793,6 +1841,43 @@
           "format": "arm-id"
         }
       }
+    },
+    "AvailabilityGroupRetrievalFilters": {
+      "type": "object",
+      "properties": {
+        "availabilityGroupTypeFilter": {
+          "$ref": "#/definitions/AvailabilityGroupTypeFilter"
+        },
+        "replicationPartnerTypeFilter": {
+          "$ref": "#/definitions/ReplicationPartnerType"
+        }
+      }
+    },
+    "AvailabilityGroupTypeFilter": {
+      "description": "Filter retrieval based on availability group type.",
+      "type": "string",
+      "enum": [
+        "CONTAINED",
+        "DISTRIBUTED",
+        "DEFAULT"
+      ],
+      "x-ms-enum": {
+        "name": "arcSqlServerAvailabilityGroupTypeFilter",
+        "modelAsString": true
+      }
+    },
+    "ReplicationPartnerType": {
+      "type": "string",
+      "enum": [
+        "SQLServer",
+        "AzureSQLVM",
+        "AzureSQLManagedInstance",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "replicationPartnerType",
+        "modelAsString": false
+      }
     }
   },
   "parameters": {
@@ -1819,6 +1904,14 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "AvailabilityGroupRetrievalFilters": {
+      "name": "availabilityGroupRetrievalFilters",
+      "in": "body",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/AvailabilityGroupRetrievalFilters"
+      }
     }
   },
   "securityDefinitions": {
