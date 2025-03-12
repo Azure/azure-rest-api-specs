@@ -493,6 +493,26 @@ enum Reason {
 }
 
 /**
+ * The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
+ */
+/*
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum ManagedHsmNameUnavailableReason {
+  AccountNameInvalid,
+  AlreadyExists,
+}
+*/
+/**
+ * The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
+ */
+/*
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum KeyVaultNameUnavailableReason {
+  AccountNameInvalid,
+  AlreadyExists,
+}
+*/
+/**
  * SKU of the managed HSM Pool
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"

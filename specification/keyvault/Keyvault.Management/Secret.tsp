@@ -9,19 +9,25 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.KeyVault;
 /**
  * Resource information with extended details.
  */
 @parentResource(Vault)
-model Secret is Azure.ResourceManager.TrackedResource<SecretProperties, false> {
+model Secret is Azure.ResourceManager.ProxyResource<SecretProperties, false> {
   ...ResourceNameParameter<
     Resource = Secret,
     KeyName = "secretName",
     SegmentName = "secrets",
     NamePattern = ""
   >;
+
+  /**
+   * Azure location of the key vault resource.
+   */
+  Location?: azureLocation;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"

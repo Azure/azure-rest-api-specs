@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.KeyVault;
 /**
@@ -16,13 +17,18 @@ namespace Microsoft.KeyVault;
  */
 @parentResource(Vault)
 model PrivateEndpointConnection
-  is Azure.ResourceManager.TrackedResource<PrivateEndpointConnectionProperties> {
+  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",
     SegmentName = "privateEndpointConnections",
     NamePattern = ""
   >;
+
+  /**
+   * Azure location of the key vault resource.
+   */
+  Location?: string;
 
   /**
    * Modified whenever there is a change in the state of private endpoint connection.
