@@ -1347,6 +1347,215 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Gets a list of network security perimeter configurations for a search service.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_ListByService",
+        "x-ms-examples": {
+          "List NSP configs by search service": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurationsListByService.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of configurations.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/networkSecurityPerimeterConfigurations/{nspConfigName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a network security perimeter configuration.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+        "x-ms-examples": {
+          "Get an NSP config by name": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurationsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "name": "nspConfigName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$",
+            "minLength": 38,
+            "maxLength": 100,
+            "description": "The network security configuration name."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the configuration.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/networkSecurityPerimeterConfigurations/{nspConfigName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Reconcile network security perimeter configuration for the Azure AI Search resource provider. This triggers a manual resync with network security perimeter configurations by ensuring the search service carries the latest configuration.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "name": "nspConfigName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$",
+            "minLength": 38,
+            "maxLength": 100,
+            "description": "The network security configuration name."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Reconcile network security perimeter configuration operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Reconcile NSP Config": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurationsReconcile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/upgrade": {
+      "post": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Service_Upgrade",
+        "x-ms-examples": {
+          "UpgradeSearchServiceToLatestVersion": {
+            "$ref": "./examples/UpgradeSearchServiceToLatestVersion.json"
+          }
+        },
+        "description": "Upgrades the Azure AI Search service to the latest version available.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search service has been upgraded to the latest version.",
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            }
+          },
+          "202": {
+            "description": "The long running operation for upgrading the service to the latest version was queued successfully. You can check the status of the operation through the provisioningState property of a Get Service request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "HTTP 400 (Bad Request): There is not upgrade available for the current service. HTTP 404 (Not Found): The subscription or resource group could not be found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -1659,13 +1868,37 @@
       "properties": {
         "ipRules": {
           "type": "array",
-          "description": "A list of IP restriction rules used for an IP firewall. Any IPs that do not match the rules are blocked by the firewall. These rules are only applied when the 'publicNetworkAccess' of the search service is 'enabled'.",
+          "description": "A list of IP restriction rules that defines the inbound network(s) with allowing access to the search service endpoint. At the meantime, all other public IP networks are blocked by the firewall. These restriction rules are applied only when the 'publicNetworkAccess' of the search service is 'enabled'; otherwise, traffic over public interface is not allowed even with any public IP rules, and private endpoint connections would be the exclusive access method.",
           "items": {
             "$ref": "#/definitions/IpRule"
           }
+        },
+        "bypass": {
+          "type": "string",
+          "enum": [
+            "None",
+            "AzureServices"
+          ],
+          "x-ms-enum": {
+            "name": "SearchBypass",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "name": "None",
+                "description": "Indicates that no origin can bypass the rules defined in the 'ipRules' section. This is the default."
+              },
+              {
+                "value": "AzureServices",
+                "name": "AzureServices",
+                "description": "Indicates that requests originating from Azure trusted services can bypass the rules defined in the 'ipRules' section."
+              }
+            ]
+          },
+          "description": "Possible origins of inbound traffic that can bypass the rules defined in the 'ipRules' section."
         }
       },
-      "description": "Network-specific rules that determine how the search service can be reached."
+      "description": "Network specific rules that determine how the Azure AI Search service may be reached."
     },
     "IpRule": {
       "properties": {
@@ -2580,21 +2813,72 @@
         },
         "type": {
           "type": "string",
-          "description": "The identity type.",
+          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an identity created by the system and a set of user assigned identities. The type 'None' will remove all identities from the service.",
           "enum": [
             "None",
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned"
           ],
           "x-ms-enum": {
             "name": "IdentityType",
-            "modelAsString": false
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "name": "None",
+                "description": "Indicates that any identity associated with the search service needs to be removed."
+              },
+              {
+                "value": "SystemAssigned",
+                "name": "SystemAssigned",
+                "description": "Indicates that system-assigned identity for the search service will be enabled."
+              },
+              {
+                "value": "UserAssigned",
+                "name": "UserAssigned",
+                "description": "Indicates that one or more user assigned identities will be assigned to the search service."
+              },
+              {
+                "value": "SystemAssigned, UserAssigned",
+                "name": "SystemAssigned, UserAssigned",
+                "description": "Indicates that system-assigned identity for the search service will be enabled along with the assignment of one or more user assigned identities."
+              }
+            ]
           }
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedManagedIdentities",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "required": [
         "type"
       ],
-      "description": "Identity for the resource."
+      "description": "Details about the search service identity. A null value indicates that the search service has no identity assigned."
+    },
+    "UserAssignedManagedIdentities": {
+      "type": "object",
+      "description": "The list of user identities associated with the search service. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedManagedIdentity"
+      }
+    },
+    "UserAssignedManagedIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client ID of user assigned identity."
+        }
+      },
+      "type": "object",
+      "description": "The details of the user assigned managed identity assigned to the search service."
     },
     "QuotaUsagesListResult": {
       "type": "object",
@@ -2654,6 +2938,220 @@
         }
       },
       "description": "Describes the quota usage for a particular SKU."
+    },
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "Network security perimeter configuration for a server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationListResult": {
+      "description": "A list of network security perimeter configurations for a server.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "The properties of a network security perimeter configuration.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NSPConfigPerimeter"
+        },
+        "resourceAssociation": {
+          "$ref": "#/definitions/NSPConfigAssociation"
+        },
+        "profile": {
+          "$ref": "#/definitions/NSPConfigProfile"
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPProvisioningIssue"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NSPConfigAccessRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPConfigAccessRuleProperties"
+        }
+      },
+      "description": "An access rule for a network security perimeter configuration."
+    },
+    "NSPConfigAccessRuleProperties": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fullyQualifiedDomainNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPConfigNetworkSecurityPerimeterRule"
+          }
+        }
+      },
+      "description": "The properties for the access rules in a network security perimeter configuration."
+    },
+    "NSPConfigAssociation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "accessMode": {
+          "type": "string"
+        }
+      },
+      "description": "The resource association for the network security perimeter."
+    },
+    "NSPConfigNetworkSecurityPerimeterRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "description": "The network security perimeter properties present in a configuration rule."
+    },
+    "NSPConfigPerimeter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "description": "The perimeter for a network security perimeter configuration."
+    },
+    "NSPConfigProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "accessRulesVersion": {
+          "type": "string"
+        },
+        "accessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPConfigAccessRule"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "The profile for a network security perimeter configuration."
+    },
+    "NSPProvisioningIssue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPProvisioningIssueProperties"
+        }
+      },
+      "description": "An object to describe any issues with provisioning network security perimeters to a search service."
+    },
+    "NSPProvisioningIssueProperties": {
+      "type": "object",
+      "properties": {
+        "issueType": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "suggestedResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggestedAccessRules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
     }
   },
   "parameters": {
