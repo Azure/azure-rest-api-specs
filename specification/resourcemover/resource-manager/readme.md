@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-2025-01-01-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2025-01-01-privatepreview'
 input-file:
-  - Microsoft.Migrate/stable/2025-01-01-privatepreview/resourcemovercollection.json
+  - Microsoft.Migrate/preview/2025-01-01-privatepreview/resourcemovercollection.json
 ```
 
 ---
