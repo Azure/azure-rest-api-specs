@@ -1,0 +1,51 @@
+{
+  "operationId": "Rules_Update",
+  "title": "Rules_Update",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgthrottling",
+    "throttlingAccountName": "contoso",
+    "ruleName": "rule1",
+    "properties": {
+      "tags": {
+        "key1": "value1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Azure operation completed successfully.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgthrottling/providers/Microsoft.Throttling/throttlingAccounts/contoso/rules/rule1",
+        "type": "Microsoft.Throttling/throttlingAccounts/rules",
+        "name": "rule1",
+        "location": "westus3",
+        "properties": {
+          "provisioningState": "Accepted",
+          "windowDuration": "PT5M",
+          "minEnforcementDuration": "PT1M",
+          "threshold": 1000,
+          "depthMultiplier": -1
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "systemData": {
+          "createdBy": "example@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2022-05-05T19:48:34.573Z",
+          "lastModifiedBy": "example@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-05-05T19:48:34.573Z"
+        }
+      }
+    },
+    "202": {
+      "description": "Resource update request accepted.",
+      "headers": {
+        "Location": "https://management.azure.com/locations/westus3/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2025-03-01-preview"
+      }
+    }
+  }
+}
