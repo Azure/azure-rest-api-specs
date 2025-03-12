@@ -20,6 +20,12 @@ export default async function updateLabels({ github, context, core }) {
     run_id = run_id || inputs.run_id;
   }
 
+  if (Number.isNaN(issue_number) || Number.isNaN(run_id)) {
+    core.info(`skipping run because issue_number or run_id is not a valid number. issue_numer: ${issue_number}, run_id: ${run_id}`);
+    return;
+  }
+  const pullRequestUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
+  core.info(`pull request url: ${pullRequestUrl}`);
   await updateLabelsImpl({ owner, repo, issue_number, run_id, github, core });
 }
 

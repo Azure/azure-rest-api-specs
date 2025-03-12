@@ -96,7 +96,7 @@ export async function extractInputs(github, context, core) {
         context.payload
       );
 
-    let issue_number;
+    let issue_number = NaN;
 
     if (
       payload.workflow_run.event === "pull_request" ||
@@ -151,7 +151,8 @@ export async function extractInputs(github, context, core) {
       }
     } else if (
       payload.workflow_run.event === "issue_comment" ||
-      payload.workflow_run.event == "workflow_run"
+      payload.workflow_run.event == "workflow_run" ||
+      payload.workflow_run.event == "check_run"
     ) {
       // Attempt to extract issue number from artifact.  This can be trusted, because it was uploaded from a workflow that is trusted,
       // because "issue_comment" and "workflow_run" only trigger on workflows in the default branch.
@@ -190,12 +191,6 @@ export async function extractInputs(github, context, core) {
             }
           }
         }
-      }
-
-      if (!issue_number) {
-        throw new Error(
-          `Could not find 'issue-number' artifact, which is required to associate the triggering workflow run with a PR`,
-        );
       }
     } else {
       throw new Error(

@@ -182,6 +182,17 @@ extends:
               echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
               echo "Generated SDK Information : $sdk_gen_info"
 
+              # Create the breaking change indicator file and set artifact name
+              mkdir -p "$(System.DefaultWorkingDirectory)/out/test"
+              ARTIFACT_NAME="spec-gen-sdk-go-true"
+              file_path="$(System.DefaultWorkingDirectory)/out/test/$ARTIFACT_NAME"
+              echo "file_path: $file_path"
+              echo "This file indicates potential breaking changes in the Go SDK" > $file_path
+
+              # Set the variable for artifact name at runtime
+              echo "##vso[task.setvariable variable=breakingChangeArtifactName]$ARTIFACT_NAME"
+              echo "Breaking change artifact name set to: $ARTIFACT_NAME"
+
               cd $(SpecRepoDirectory)
               npm ci
               node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
@@ -195,15 +206,10 @@ extends:
                 $optional_params
             displayName: 'Generate SDK'
 
-          - task: Powershell@2
-            inputs:
-              filePath: $(SdkRepoDirectory)/eng/common/scripts/Save-Package-Properties.ps1
-              arguments: >
-                -ServiceDirectory $(GeneratedSDK.ServiceName)
-                -OutDirectory $(GeneratedSDK.StagedArtifactsFolder)/PackageInfo
-              pwsh: true
-              workingDirectory: $(SdkRepoDirectory)
-            displayName: Dump Package properties
+          - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
+            parameters:
+              ArtifactName: $(breakingChangeArtifactName)
+              ArtifactPath: "$(System.DefaultWorkingDirectory)/out/test"
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
@@ -269,10 +275,3 @@ extends:
                       -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
                       -PRBody "$(GeneratedSDKInformation)"
                       -OpenAsDraft $true
-
-            - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-              - template: /eng/common/pipelines/templates/steps/detect-api-changes.yml
-                parameters:
-                  ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
-                  ArtifactName: $(PipelineArtifactsName)
-                  RepoRoot: $(SdkRepoDirectory)
