@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getInputFiles } from "../src/readme";
+import { contosoReadme } from "./examples.js";
 import { createMockCore } from "./mocks.js";
-import { contosoReadme } from "./readme-samples.js";
 
 describe("readme", () => {
   it("getInputFiles", async () => {

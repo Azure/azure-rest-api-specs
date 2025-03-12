@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 import * as changedFiles from "../../src/changed-files.js";
 import * as git from "../../src/git.js";
+import { contosoReadme } from "../../test/examples.js";
 import { createMockCore } from "../../test/mocks.js";
-import { contosoReadme } from "../../test/readme-samples.js";
 import incrementalTypeSpec from "../src/arm-incremental-typespec-preview.js";
 
 // TODO: Verify args to all calls to spyOn to catch bugs like passing wrong paths
