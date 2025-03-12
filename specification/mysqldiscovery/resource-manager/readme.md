@@ -61,6 +61,9 @@ suppressions:
     reason: MySQL is a technical term and cannot follow camel case rule.
     where:
       - $.definitions.MysqlServerProperties.properties.MysqlVersion
+  - code: AvoidAdditionalProperties
+    reason: Existing API.
+    where: $.definitions.MySQLServerProperties.properties.labels
   - code: PostResponseCodes
     reason: Existing API
     where:
