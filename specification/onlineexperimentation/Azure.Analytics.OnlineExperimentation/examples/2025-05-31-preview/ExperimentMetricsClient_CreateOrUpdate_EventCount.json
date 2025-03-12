@@ -1,10 +1,11 @@
 {
-  "title": "Metrics_CreateOrUpdate_EventCount",
-  "operationId": "Metrics_CreateOrUpdate",
+  "title": "ExperimentMetricsClient_CreateOrUpdate_EventCount",
+  "operationId": "ExperimentMetricsClient_CreateOrUpdate",
   "parameters": {
-    "workspaceId": "00000000-0000-0000-0000-000000000000",
-    "metricId": "events_purchase_creditcard",
-    "api-version": "2024-11-30-preview",
+    "experimentMetricId": "events_purchase_creditcard",
+    "region": "use2",
+    "workspaceId": "workspace-id",
+    "api-version": "2025-05-31-preview",
     "If-Match": "vxexdn",
     "If-None-Match": "ijchzdh",
     "If-Unmodified-Since": "2024-08-22T02:02:11.418Z",
@@ -14,12 +15,12 @@
       "displayName": "Number of purchases (credit card)",
       "description": "The number of purchase transactions made with credit card. Refund transactions are excluded from this metric.",
       "lifecycle": "Active",
-      "tags": [
+      "categories": [
         "Monetization"
       ],
       "desiredDirection": "Increase",
       "definition": {
-        "kind": "EventCount",
+        "type": "EventCount",
         "event": {
           "eventName": "Transaction",
           "filter": "Revenue > 0 and ['payment.method'] == 'credit_card'"
@@ -38,12 +39,12 @@
         "displayName": "Number of purchases (credit card)",
         "description": "The number of purchase transactions made with credit card. Refund transactions are excluded from this metric.",
         "lifecycle": "Active",
-        "tags": [
+        "categories": [
           "Monetization"
         ],
         "desiredDirection": "Increase",
         "definition": {
-          "kind": "EventCount",
+          "type": "EventCount",
           "event": {
             "eventName": "Transaction",
             "filter": "Revenue > 0 and ['payment.method'] == 'credit_card'"
@@ -63,12 +64,12 @@
         "displayName": "Number of purchases (credit card)",
         "description": "The number of purchase transactions made with credit card. Refund transactions are excluded from this metric.",
         "lifecycle": "Active",
-        "tags": [
+        "categories": [
           "Monetization"
         ],
         "desiredDirection": "Increase",
         "definition": {
-          "kind": "EventCount",
+          "type": "EventCount",
           "event": {
             "eventName": "Transaction",
             "filter": "Revenue > 0 and ['payment.method'] == 'credit_card'"

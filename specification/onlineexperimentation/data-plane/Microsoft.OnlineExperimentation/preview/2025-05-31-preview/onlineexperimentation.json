@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure.Analytics.OnlineExperimentation service",
-    "version": "2024-11-30-preview",
+    "version": "2025-05-31-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -12,6 +12,26 @@
   "schemes": [
     "https"
   ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://{workspaceId}.{region}.exp.azure.net",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "region",
+        "in": "path",
+        "description": "The Azure region wherein requests for online experimentation will be sent.",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "workspaceId",
+        "in": "path",
+        "description": "The workspace Id.",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],
@@ -39,21 +59,13 @@
   },
   "tags": [],
   "paths": {
-    "/workspaces/{workspaceId}/metrics": {
+    "/experiment-metrics": {
       "get": {
-        "operationId": "Metrics_List",
-        "description": "List Metrics resources",
+        "operationId": "ExperimentMetricsClient_List",
+        "description": "List ExperimentMetric resources",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "workspaceId",
-            "in": "path",
-            "description": "An ID used to uniquely identify and reference the Online Experimentation workspace.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]*$"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -63,7 +75,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedMetric"
+              "$ref": "#/definitions/PagedExperimentMetric"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -87,8 +99,8 @@
           }
         },
         "x-ms-examples": {
-          "Metrics_List": {
-            "$ref": "./examples/Metrics_List.json"
+          "ExperimentMetricsClient_List": {
+            "$ref": "./examples/ExperimentMetricsClient_List.json"
           }
         },
         "x-ms-pageable": {
@@ -96,24 +108,16 @@
         }
       }
     },
-    "/workspaces/{workspaceId}/metrics/{metricId}": {
+    "/experiment-metrics/{experimentMetricId}": {
       "get": {
-        "operationId": "Metrics_Get",
-        "description": "Fetch a Metric by Id.",
+        "operationId": "ExperimentMetricsClient_Get",
+        "description": "Fetch a ExperimentMetric by Id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "workspaceId",
-            "in": "path",
-            "description": "An ID used to uniquely identify and reference the Online Experimentation workspace.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]*$"
-          },
-          {
-            "name": "metricId",
+            "name": "experimentMetricId",
             "in": "path",
             "description": "An ID used to uniquely identify and reference the metric.",
             "required": true,
@@ -142,7 +146,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Metric"
+              "$ref": "#/definitions/ExperimentMetric"
             },
             "headers": {
               "ETag": {
@@ -171,13 +175,13 @@
         },
         "x-ms-examples": {
           "Get metric by metric name.": {
-            "$ref": "./examples/Metrics_Get.json"
+            "$ref": "./examples/ExperimentMetricsClient_Get.json"
           }
         }
       },
       "patch": {
-        "operationId": "Metrics_CreateOrUpdate",
-        "description": "Creates or updates a Metric asynchronously.",
+        "operationId": "ExperimentMetricsClient_CreateOrUpdate",
+        "description": "Creates or updates a ExperimentMetric asynchronously.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -186,15 +190,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "workspaceId",
-            "in": "path",
-            "description": "An ID used to uniquely identify and reference the Online Experimentation workspace.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]*$"
-          },
-          {
-            "name": "metricId",
+            "name": "experimentMetricId",
             "in": "path",
             "description": "An ID used to uniquely identify and reference the metric.",
             "required": true,
@@ -224,7 +220,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MetricCreateOrUpdate"
+              "$ref": "#/definitions/ExperimentMetricCreateOrUpdate"
             }
           }
         ],
@@ -232,7 +228,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Metric"
+              "$ref": "#/definitions/ExperimentMetric"
             },
             "headers": {
               "ETag": {
@@ -249,7 +245,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/Metric"
+              "$ref": "#/definitions/ExperimentMetric"
             },
             "headers": {
               "ETag": {
@@ -277,46 +273,38 @@
           }
         },
         "x-ms-examples": {
-          "Metrics_CreateOrUpdate_Average": {
-            "$ref": "./examples/Metrics_CreateOrUpdate_Average.json"
+          "ExperimentMetricsClient_CreateOrUpdate_Average": {
+            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_Average.json"
           },
-          "Metrics_CreateOrUpdate_EventCount": {
-            "$ref": "./examples/Metrics_CreateOrUpdate_EventCount.json"
+          "ExperimentMetricsClient_CreateOrUpdate_EventCount": {
+            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_EventCount.json"
           },
-          "Metrics_CreateOrUpdate_EventRate": {
-            "$ref": "./examples/Metrics_CreateOrUpdate_EventRate.json"
+          "ExperimentMetricsClient_CreateOrUpdate_EventRate": {
+            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_EventRate.json"
           },
-          "Metrics_CreateOrUpdate_Percentile": {
-            "$ref": "./examples/Metrics_CreateOrUpdate_Percentile.json"
+          "ExperimentMetricsClient_CreateOrUpdate_Percentile": {
+            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_Percentile.json"
           },
-          "Metrics_CreateOrUpdate_Sum": {
-            "$ref": "./examples/Metrics_CreateOrUpdate_Sum.json"
+          "ExperimentMetricsClient_CreateOrUpdate_Sum": {
+            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_Sum.json"
           },
-          "Metrics_CreateOrUpdate_UserCount": {
-            "$ref": "./examples/Metrics_CreateOrUpdate_UserCount.json"
+          "ExperimentMetricsClient_CreateOrUpdate_UserCount": {
+            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_UserCount.json"
           },
-          "Metrics_CreateOrUpdate_UserRate": {
-            "$ref": "./examples/Metrics_CreateOrUpdate_UserRate.json"
+          "ExperimentMetricsClient_CreateOrUpdate_UserRate": {
+            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_UserRate.json"
           }
         }
       },
       "delete": {
-        "operationId": "Metrics_Delete",
-        "description": "Delete a Metric asynchronously.",
+        "operationId": "ExperimentMetricsClient_Delete",
+        "description": "Delete a ExperimentMetric asynchronously.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "workspaceId",
-            "in": "path",
-            "description": "An ID used to uniquely identify and reference the Online Experimentation workspace.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]*$"
-          },
-          {
-            "name": "metricId",
+            "name": "experimentMetricId",
             "in": "path",
             "description": "An ID used to uniquely identify and reference the metric.",
             "required": true,
@@ -367,29 +355,21 @@
         },
         "x-ms-examples": {
           "Delete metric by metric name using long-running operation.": {
-            "$ref": "./examples/Metrics_Delete.json"
+            "$ref": "./examples/ExperimentMetricsClient_Delete.json"
           }
         }
       }
     },
-    "/workspaces/{workspaceId}/metrics/{metricId}:validate": {
+    "/experiment-metrics/{experimentMetricId}:validate": {
       "post": {
-        "operationId": "Metrics_Validate",
-        "description": "Validates a Metric.",
+        "operationId": "ExperimentMetricsClient_Validate",
+        "description": "Validates a ExperimentMetric.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "workspaceId",
-            "in": "path",
-            "description": "An ID used to uniquely identify and reference the Online Experimentation workspace.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]*$"
-          },
-          {
-            "name": "metricId",
+            "name": "experimentMetricId",
             "in": "path",
             "description": "An ID used to uniquely identify and reference the metric.",
             "required": true,
@@ -407,7 +387,7 @@
             "description": "Metric input to validate",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Metric"
+              "$ref": "#/definitions/ExperimentMetric"
             }
           }
         ],
@@ -415,7 +395,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/MetricValidateResult"
+              "$ref": "#/definitions/ExperimentMetricValidateResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -439,8 +419,8 @@
           }
         },
         "x-ms-examples": {
-          "Metrics_Validate": {
-            "$ref": "./examples/Metrics_Validate.json"
+          "ExperimentMetricsClient_Validate": {
+            "$ref": "./examples/ExperimentMetricsClient_Validate.json"
           }
         }
       }
@@ -476,7 +456,7 @@
     },
     "AverageDefinition": {
       "type": "object",
-      "description": "The definition of an Average metric. This metric kind measures the average of an event property.",
+      "description": "The definition of an Average metric. This metric type measures the average of an event property.",
       "properties": {
         "value": {
           "$ref": "#/definitions/AggregatedValue",
@@ -488,7 +468,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MetricDefinition"
+          "$ref": "#/definitions/ExperimentMetricDefinition"
         }
       ],
       "x-ms-discriminator-value": "Average"
@@ -558,6 +538,13 @@
       "type": "string",
       "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
+    "Category": {
+      "type": "string",
+      "description": "A category attached to the metric.",
+      "minLength": 1,
+      "maxLength": 30,
+      "pattern": "^[a-zA-Z0-9 _:()&-]+$"
+    },
     "DesiredDirection": {
       "type": "string",
       "description": "Desired direction of the metric.",
@@ -595,7 +582,7 @@
         "FailedSchemaValidation",
         "InvalidEventCondition",
         "UnsupportedEventCondition",
-        "InvalidMetricDefinition"
+        "InvalidExperimentMetricDefinition"
       ],
       "x-ms-enum": {
         "name": "DiagnosticCode",
@@ -617,8 +604,8 @@
             "description": "The KQL filter condition is valid but not currently supported."
           },
           {
-            "name": "InvalidMetricDefinition",
-            "value": "InvalidMetricDefinition",
+            "name": "InvalidExperimentMetricDefinition",
+            "value": "InvalidExperimentMetricDefinition",
             "description": "The metric definition provided is invalid. \nfor example, if the metric is defined to calculate the average of the Revenue property,\nbut also includes a filter such as Revenue == 'hello', this creates a type mismatch. \nThe system infers conflicting data types—numeric and string—resulting in a validation failure."
           }
         ]
@@ -652,7 +639,7 @@
     },
     "EventCountDefinition": {
       "type": "object",
-      "description": "The definition of an EventCount metric. This metric kind counts the observations of an event. Experiment analysis accounts for unequal traffic allocation.",
+      "description": "The definition of an EventCount metric. This metric type counts the observations of an event. Experiment analysis accounts for unequal traffic allocation.",
       "properties": {
         "event": {
           "$ref": "#/definitions/ObservedEvent",
@@ -664,62 +651,38 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MetricDefinition"
+          "$ref": "#/definitions/ExperimentMetricDefinition"
         }
       ],
       "x-ms-discriminator-value": "EventCount"
     },
     "EventRateDefinition": {
       "type": "object",
-      "description": "The definition of an EventRate metric. This metric kind counts the percentage of events that satisfy a condition.",
+      "description": "The definition of an EventRate metric. This metric type counts the percentage of events that satisfy a condition.",
       "properties": {
         "event": {
           "$ref": "#/definitions/ObservedEvent",
           "description": "Event to observe as the rate denominator."
         },
-        "condition": {
+        "rateCondition": {
           "$ref": "#/definitions/EventCondition",
           "description": "The event contributes to the rate numerator if it satisfies this condition."
         }
       },
       "required": [
         "event",
-        "condition"
+        "rateCondition"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MetricDefinition"
+          "$ref": "#/definitions/ExperimentMetricDefinition"
         }
       ],
       "x-ms-discriminator-value": "EventRate"
     },
-    "LifecycleStage": {
-      "type": "string",
-      "description": "Lifecycle stages of a metric, which determines when the metric is calculated.",
-      "enum": [
-        "Active",
-        "Inactive"
-      ],
-      "x-ms-enum": {
-        "name": "LifecycleStage",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "Metric is included in experiment analysis"
-          },
-          {
-            "name": "Inactive",
-            "value": "Inactive",
-            "description": "Metric is not included in experiment analysis"
-          }
-        ]
-      }
-    },
-    "Metric": {
+    "ExperimentMetric": {
       "type": "object",
-      "description": "A Metric object that describes the metric.",
+      "description": "A ExperimentMetric object that describes the metric.",
       "properties": {
         "id": {
           "type": "string",
@@ -745,11 +708,11 @@
           "minLength": 1,
           "maxLength": 1000
         },
-        "tags": {
+        "categories": {
           "type": "array",
-          "description": "The tags of the metric.",
+          "description": "The categories of the metric.",
           "items": {
-            "$ref": "#/definitions/Tag"
+            "$ref": "#/definitions/Category"
           }
         },
         "desiredDirection": {
@@ -757,7 +720,7 @@
           "description": "Whether an increase or decrease to the metric value is desired."
         },
         "definition": {
-          "$ref": "#/definitions/MetricDefinition",
+          "$ref": "#/definitions/ExperimentMetricDefinition",
           "description": "The metric definition, which determines how the metric value is calculated from event data."
         },
         "eTag": {
@@ -777,16 +740,16 @@
         "lifecycle",
         "displayName",
         "description",
-        "tags",
+        "categories",
         "desiredDirection",
         "definition",
         "eTag",
         "lastModifiedAt"
       ]
     },
-    "MetricCreateOrUpdate": {
+    "ExperimentMetricCreateOrUpdate": {
       "type": "object",
-      "description": "A Metric object that describes the metric.",
+      "description": "A ExperimentMetric object that describes the metric.",
       "properties": {
         "lifecycle": {
           "$ref": "#/definitions/LifecycleStage",
@@ -804,11 +767,11 @@
           "minLength": 1,
           "maxLength": 1000
         },
-        "tags": {
+        "categories": {
           "type": "array",
-          "description": "The tags of the metric.",
+          "description": "The categories of the metric.",
           "items": {
-            "$ref": "#/definitions/Tag"
+            "$ref": "#/definitions/Category"
           }
         },
         "desiredDirection": {
@@ -816,28 +779,28 @@
           "description": "Whether an increase or decrease to the metric value is desired."
         },
         "definition": {
-          "$ref": "#/definitions/MetricDefinition",
+          "$ref": "#/definitions/ExperimentMetricDefinition",
           "description": "The metric definition, which determines how the metric value is calculated from event data."
         }
       }
     },
-    "MetricDefinition": {
+    "ExperimentMetricDefinition": {
       "type": "object",
       "description": "The metric definition, which determines how the metric value is calculated from event data.",
       "properties": {
-        "kind": {
+        "type": {
           "type": "string",
-          "description": "Discriminator property for MetricDefinition."
+          "description": "Discriminator property for ExperimentMetricDefinition."
         }
       },
-      "discriminator": "kind",
+      "discriminator": "type",
       "required": [
-        "kind"
+        "type"
       ]
     },
-    "MetricValidateResult": {
+    "ExperimentMetricValidateResult": {
       "type": "object",
-      "description": "The result of validating a Metric.",
+      "description": "The result of validating a metric.",
       "properties": {
         "diagnostics": {
           "type": "array",
@@ -858,6 +821,30 @@
         "result"
       ]
     },
+    "LifecycleStage": {
+      "type": "string",
+      "description": "Lifecycle stages of a metric, which determines when the metric is calculated.",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "LifecycleStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Metric is included in experiment analysis"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Metric is not included in experiment analysis"
+          }
+        ]
+      }
+    },
     "ObservedEvent": {
       "type": "object",
       "description": "An event observed by a metric.",
@@ -877,15 +864,15 @@
         "eventName"
       ]
     },
-    "PagedMetric": {
+    "PagedExperimentMetric": {
       "type": "object",
-      "description": "Paged collection of Metric items",
+      "description": "Paged collection of ExperimentMetric items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Metric items on this page",
+          "description": "The ExperimentMetric items on this page",
           "items": {
-            "$ref": "#/definitions/Metric"
+            "$ref": "#/definitions/ExperimentMetric"
           }
         },
         "nextLink": {
@@ -900,7 +887,7 @@
     },
     "PercentileDefinition": {
       "type": "object",
-      "description": "The definition of a Percentile metric. This metric kind measures the percentile of an event property.",
+      "description": "The definition of a Percentile metric. This metric type measures the percentile of an event property.",
       "properties": {
         "value": {
           "$ref": "#/definitions/AggregatedValue",
@@ -918,14 +905,14 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MetricDefinition"
+          "$ref": "#/definitions/ExperimentMetricDefinition"
         }
       ],
       "x-ms-discriminator-value": "Percentile"
     },
     "SumDefinition": {
       "type": "object",
-      "description": "The definition of a Sum metric. This metric kind measures the sum of an event property. Experiment analysis accounts for unequal traffic allocation.",
+      "description": "The definition of a Sum metric. This metric type measures the sum of an event property. Experiment analysis accounts for unequal traffic allocation.",
       "properties": {
         "value": {
           "$ref": "#/definitions/AggregatedValue",
@@ -937,21 +924,14 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MetricDefinition"
+          "$ref": "#/definitions/ExperimentMetricDefinition"
         }
       ],
       "x-ms-discriminator-value": "Sum"
     },
-    "Tag": {
-      "type": "string",
-      "description": "A tag attached to the metric.",
-      "minLength": 1,
-      "maxLength": 30,
-      "pattern": "^[a-zA-Z0-9 _:()&-]+$"
-    },
     "UserCountDefinition": {
       "type": "object",
-      "description": "The definition of a UserCount metric. This metric kind counts the users who encounter an event. Experiment analysis accounts for unequal traffic allocation.",
+      "description": "The definition of a UserCount metric. This metric type counts the users who encounter an event. Experiment analysis accounts for unequal traffic allocation.",
       "properties": {
         "event": {
           "$ref": "#/definitions/ObservedEvent",
@@ -963,14 +943,14 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MetricDefinition"
+          "$ref": "#/definitions/ExperimentMetricDefinition"
         }
       ],
       "x-ms-discriminator-value": "UserCount"
     },
     "UserRateDefinition": {
       "type": "object",
-      "description": "The definition of a UserRate metric. This metric kind counts the percentage of users with the start event that then encounter the end event. The metric denominator counts the number of users who encounter the start event at least once. The metric numerator counts the number of users who encounter both the start and end events at least once. The computation is ordered, so the start event must occur before the end event.",
+      "description": "The definition of a UserRate metric. This metric type counts the percentage of users with the start event that then encounter the end event. The metric denominator counts the number of users who encounter the start event at least once. The metric numerator counts the number of users who encounter both the start and end events at least once. The computation is ordered, so the start event must occur before the end event.",
       "properties": {
         "startEvent": {
           "$ref": "#/definitions/ObservedEvent",
@@ -987,7 +967,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MetricDefinition"
+          "$ref": "#/definitions/ExperimentMetricDefinition"
         }
       ],
       "x-ms-discriminator-value": "UserRate"

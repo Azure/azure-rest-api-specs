@@ -1,10 +1,11 @@
 {
-  "title": "Metrics_CreateOrUpdate_Average",
-  "operationId": "Metrics_CreateOrUpdate",
+  "title": "ExperimentMetricsClient_CreateOrUpdate_Average",
+  "operationId": "ExperimentMetricsClient_CreateOrUpdate",
   "parameters": {
-    "workspaceId": "00000000-0000-0000-0000-000000000000",
-    "metricId": "avg_purchase_revenue",
-    "api-version": "2024-11-30-preview",
+    "experimentMetricId": "avg_purchase_revenue",
+    "region": "use2",
+    "workspaceId": "workspace-id",
+    "api-version": "2025-05-31-preview",
     "If-Match": "vxexdn",
     "If-None-Match": "ijchzdh",
     "If-Unmodified-Since": "2024-08-22T02:02:11.418Z",
@@ -14,12 +15,12 @@
       "displayName": "Average revenue per purchase [USD]",
       "description": "The average revenue per purchase transaction in USD. Refund transactions are excluded from this metric. The total revenue might increase while this metric decreases if the number of purchases increases.",
       "lifecycle": "Active",
-      "tags": [
+      "categories": [
         "Monetization"
       ],
       "desiredDirection": "Increase",
       "definition": {
-        "kind": "Average",
+        "type": "Average",
         "value": {
           "eventName": "Transaction",
           "eventProperty": "Revenue",
@@ -39,12 +40,12 @@
         "displayName": "Average revenue per purchase [USD]",
         "description": "The average revenue per purchase transaction in USD. Refund transactions are excluded from this metric. The total revenue might increase while this metric decreases if the number of purchases increases.",
         "lifecycle": "Active",
-        "tags": [
+        "categories": [
           "Monetization"
         ],
         "desiredDirection": "Increase",
         "definition": {
-          "kind": "Average",
+          "type": "Average",
           "value": {
             "eventName": "Transaction",
             "eventProperty": "Revenue",
@@ -65,12 +66,12 @@
         "displayName": "Average revenue per purchase [USD]",
         "description": "The average revenue per purchase transaction in USD. Refund transactions are excluded from this metric. The total revenue might increase while this metric decreases if the number of purchases increases.",
         "lifecycle": "Active",
-        "tags": [
+        "categories": [
           "Monetization"
         ],
         "desiredDirection": "Increase",
         "definition": {
-          "kind": "Average",
+          "type": "Average",
           "value": {
             "eventName": "Transaction",
             "eventProperty": "Revenue",

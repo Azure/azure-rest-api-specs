@@ -1,12 +1,13 @@
 {
-  "title": "Metrics_List",
-  "operationId": "Metrics_List",
+  "title": "ExperimentMetricsClient_List",
+  "operationId": "ExperimentMetricsClient_List",
   "parameters": {
     "top": 8,
     "skip": 15,
     "maxpagesize": 27,
-    "workspaceId": "00000000-0000-0000-0000-000000000000",
-    "api-version": "2024-11-30-preview"
+    "region": "use2",
+    "workspaceId": "workspace-id",
+    "api-version": "2025-05-31-preview"
   },
   "responses": {
     "200": {
@@ -20,12 +21,12 @@
             "displayName": "Number of purchases (credit card)",
             "description": "The number of purchase transactions made with credit card. Refund transactions are excluded from this metric.",
             "lifecycle": "Active",
-            "tags": [
+            "categories": [
               "Monetization"
             ],
             "desiredDirection": "Increase",
             "definition": {
-              "kind": "EventCount",
+              "type": "EventCount",
               "event": {
                 "eventName": "Transaction",
                 "filter": "Revenue > 0 and ['payment.method'] == 'credit_card'"
@@ -39,12 +40,12 @@
             "displayName": "Users with purchase",
             "description": "The number of users who have made at least one purchase transaction. Refund transactions are excluded from this metric. As the analysis period grows, this metric begins to saturate as users making multiple purchases no longer contribute.",
             "lifecycle": "Active",
-            "tags": [
+            "categories": [
               "Monetization"
             ],
             "desiredDirection": "Increase",
             "definition": {
-              "kind": "UserCount",
+              "type": "UserCount",
               "event": {
                 "eventName": "Transaction",
                 "filter": "Revenue > 0"
@@ -58,16 +59,16 @@
             "displayName": "Refund rate",
             "description": "The percentage of transactions that are refunds. This metric is calculated as the number of refund transactions divided by the total number of transactions.",
             "lifecycle": "Active",
-            "tags": [
+            "categories": [
               "Monetization"
             ],
             "desiredDirection": "Neutral",
             "definition": {
-              "kind": "EventRate",
+              "type": "EventRate",
               "event": {
                 "eventName": "Transaction"
               },
-              "condition": "Revenue < 0"
+              "rateCondition": "Revenue < 0"
             },
             "eTag": "ckswkavwgassdlocwuzxz",
             "lastModifiedAt": "2024-08-28T20:27:13.652Z"
@@ -77,12 +78,12 @@
             "displayName": "Subscription ad conversion rate",
             "description": "The percentage of users who saw an advertisement for a subscription promotion and then later successfully subscribed. This metric is calculated as the number of users who successfully subscribed after seeing the advert divided by the total number of users who saw the advert. Users who saw multiple adverts or subscribed multiple times are counted only once. Users who saw the advert before the analysis period starts are excluded from this metric.",
             "lifecycle": "Active",
-            "tags": [
+            "categories": [
               "Monetization"
             ],
             "desiredDirection": "Increase",
             "definition": {
-              "kind": "UserRate",
+              "type": "UserRate",
               "startEvent": {
                 "eventName": "AdView",
                 "filter": "Source == 'subscription_promo'"
@@ -100,12 +101,12 @@
             "displayName": "Average revenue per purchase [USD]",
             "description": "The average revenue per purchase transaction in USD. Refund transactions are excluded from this metric. The total revenue might increase while this metric decreases if the number of purchases increases.",
             "lifecycle": "Active",
-            "tags": [
+            "categories": [
               "Monetization"
             ],
             "desiredDirection": "Increase",
             "definition": {
-              "kind": "Average",
+              "type": "Average",
               "value": {
                 "eventName": "Transaction",
                 "eventProperty": "Revenue",
@@ -120,13 +121,13 @@
             "displayName": "Total revenue [USD]",
             "description": "The total revenue in USD. Refund transactions contribute negatively to this metric.",
             "lifecycle": "Active",
-            "tags": [
+            "categories": [
               "Monetization",
               "Important"
             ],
             "desiredDirection": "Increase",
             "definition": {
-              "kind": "Sum",
+              "type": "Sum",
               "value": {
                 "eventName": "Transaction",
                 "eventProperty": "Revenue"
@@ -140,13 +141,13 @@
             "displayName": "95th percentile of page load time [ms]",
             "description": "The 95th percentile of the page load time for all pages. Measured in milliseconds. Review page-specific metric results to identify pages that need optimization.",
             "lifecycle": "Active",
-            "tags": [
+            "categories": [
               "Performance",
               "Important"
             ],
             "desiredDirection": "Decrease",
             "definition": {
-              "kind": "Percentile",
+              "type": "Percentile",
               "value": {
                 "eventName": "PageLoad",
                 "eventProperty": "LoadTime_ms"
@@ -157,7 +158,7 @@
             "lastModifiedAt": "2024-08-28T20:27:13.652Z"
           }
         ],
-        "nextLink": "https://exp.azure.net/workspaces/00000000-0000-0000-0000-000000000000/metrics?top=8&skip=23&count=true&api-version=2024-11-30-preview"
+        "nextLink": "https://workspace-id.eastus2.exp.azure.net/experiment-metrics?top=8&skip=23&count=true&api-version=2025-05-31-preview"
       }
     }
   }
