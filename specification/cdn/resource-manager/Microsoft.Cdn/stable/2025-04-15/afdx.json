@@ -4545,17 +4545,37 @@
             "modelAsString": true
           }
         },
+        "cipherSuiteSetType": {
+          "description": "cipher suite set type that will be used for Https",
+          "enum": [
+            "Customized",
+            "TLS10_2019",
+            "TLS12_2022",
+            "TLS12_2023"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AfdCipherSuiteSetType",
+            "modelAsString": true
+          }
+        },
         "minimumTlsVersion": {
-          "description": "TLS protocol version that will be used for Https",
+          "description": "TLS protocol version that will be used for Https when cipherSuiteSetType is Customized.",
           "enum": [
             "TLS10",
-            "TLS12"
+            "TLS12",
+            "TLS13"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "AfdMinimumTlsVersion",
             "modelAsString": false
           }
+        },
+        "customizedCipherSuiteSet": {
+          "description": "Customized cipher suites object that will be used for Https when cipherSuiteSetType is Customized.",
+          "type": "object",
+          "$ref": "#/definitions/AFDDomainHttpsCustomizedCipherSuiteSet"
         },
         "secret": {
           "description": "Resource reference to the secret. ie. subs/rg/profile/secret",
@@ -4576,6 +4596,50 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SecurityPolicyProperties"
+        }
+      }
+    },
+    "AFDDomainHttpsCustomizedCipherSuiteSet": {
+      "description": "Customized cipher suite set object that will be used for Https when cipherSuiteSetType is Customized.",
+      "type": "object",
+      "properties": {
+        "cipherSuiteSetForTls12": {
+          "description": "Cipher suites for TLS 1.2. Required at least one in minimumTlsVersion TLS 1.2.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ECDHE_RSA_AES128_GCM_SHA256",
+              "ECDHE_RSA_AES256_GCM_SHA384",
+              "DHE_RSA_AES256_GCM_SHA384",
+              "DHE_RSA_AES128_GCM_SHA256",
+              "ECDHE_RSA_AES128_SHA256",
+              "ECDHE_RSA_AES256_SHA384",
+              "AES256_GCM_SHA384",
+              "AES128_GCM_SHA256",
+              "AES256_SHA256",
+              "AES128_SHA256"
+            ],
+            "x-ms-enum": {
+              "name": "AfdCustomizedCipherSuiteForTls12",
+              "modelAsString": true
+            }
+          }
+        },
+        "cipherSuiteSetForTls13": {
+          "description": "Cipher suites for TLS 1.3. Required at least one in minimumTlsVersion TLS 1.2, TLS 1.3.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TLS_AES_128_GCM_SHA256",
+              "TLS_AES_256_GCM_SHA384"
+            ],
+            "x-ms-enum": {
+              "name": "AfdCustomizedCipherSuiteForTls13",
+              "modelAsString": true
+            }
+          }
         }
       }
     },
