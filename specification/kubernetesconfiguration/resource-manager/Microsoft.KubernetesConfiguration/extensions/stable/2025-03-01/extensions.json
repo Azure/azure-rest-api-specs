@@ -629,6 +629,9 @@
               "description": "Whether the provided identity is a workload identity. If an identity is provided by user, this will be set to true. Otherwise will be false.",
               "type": "boolean",
               "default": false
+            },
+            "managementDetails":{
+              "$ref": "#/definitions/ManagementDetails"
             }
           }
         },
@@ -644,6 +647,15 @@
         "plan": {
           "description": "The plan information.",
           "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Plan"
+        },
+        "managedBy": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
         }
       },
       "allOf": [
@@ -768,6 +780,38 @@
         }
       },
       "description": "Identity for the resource."
+    },
+    "ManagementDetails": {
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "accessDetails": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "entity": {
+                "type": "string"
+              },
+              "allowedActions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "entity",
+              "allowedActions",
+              "description"
+            ]
+          }
+        }
+      }
     }
   },
   "parameters": {
