@@ -6,10 +6,12 @@ describe("readme", () => {
   it("getInputFiles", async () => {
     await expect(
       getInputFiles(contosoMarkdown, createMockCore()),
-    ).resolves.toEqual([
-      "Microsoft.Contoso/stable/2021-11-01/contoso.json",
-      "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
-    ]);
+    ).resolves.toEqual(
+      new Set([
+        "Microsoft.Contoso/stable/2021-11-01/contoso.json",
+        "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
+      ]),
+    );
   });
 });
 
