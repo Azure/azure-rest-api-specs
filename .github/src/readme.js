@@ -6,6 +6,7 @@
  * @returns {Promise<Set<string>>} All input files for all tags
  */
 export async function getInputFiles(markdown, core) {
+  // TODO: Replace with calls to "marked" and "yaml" libraries
   // Hacky implementation to pass test
   const lines = markdown.split("\n");
   const inputFileLines = lines.filter(
