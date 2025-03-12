@@ -11,14 +11,11 @@ using Azure.Core;
 @service(#{ title: "Azure.Analytics.OnlineExperimentation service" })
 @versioned(Azure.Analytics.OnlineExperimentation.Versions)
 @server(
-  "https://{workspaceId}.{region}.exp.azure.net",
+  "{endpoint}",
   "Online Experimentation service",
   {
-    @doc("The Azure region wherein requests for online experimentation will be sent.")
-    region: string,
-
-    @doc("The workspace Id.")
-    workspaceId: string,
+    @doc("Endpoint URL for the Online Experimentation workspace.")
+    endpoint: url,
   }
 )
 namespace Azure.Analytics.OnlineExperimentation;

@@ -13,22 +13,17 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "https://{workspaceId}.{region}.exp.azure.net",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "region",
+        "name": "endpoint",
         "in": "path",
-        "description": "The Azure region wherein requests for online experimentation will be sent.",
+        "description": "Endpoint URL for the Online Experimentation workspace.",
         "required": true,
-        "type": "string"
-      },
-      {
-        "name": "workspaceId",
-        "in": "path",
-        "description": "The workspace Id.",
-        "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
