@@ -338,21 +338,3 @@ model BlobReferenceForConsumption {
   @doc("Credential info to access the storage account.")
   credential: SasCredential;
 }
-
-@doc("""
-  The definition of a caller-specified function that chat completions may invoke in response to matching user input.
-  """)
-model FunctionDefinition {
-  @doc("The name of the function to be called.")
-  name: string;
-
-  @doc("""
-    A description of what the function does. The model will use this description when selecting the function and
-    interpreting its parameters.
-    """)
-  description?: string;
-
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
-  @doc("The parameters the function accepts, described as a JSON Schema object.")
-  parameters?: Record<unknown>;
-}
