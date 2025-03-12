@@ -189,7 +189,6 @@ export class TspConfigJavaAzPackageDirectorySubRule extends TspconfigEmitterOpti
 }
 
 // ----- TS management modular sub rules -----
-// ----- TS management modular sub rules -----
 // NOTE: this is only used when TS emitter is migrating to the new option style
 //       will be deleted when the migration is done
 class TspConfigTsOptionMigrationSubRuleBase extends TspconfigEmitterOptionsSubRuleBase {
