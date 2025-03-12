@@ -894,111 +894,111 @@ namespace SkillContext
 		filter?: string;
 	  }
 	
-	  model DynamicPromptsBaseRequest {
-		@doc("The scenario name for the request.")
-		scenarioName: string;
-		@doc("The index name for the request.")
-		indexName: string;
-		@doc("The version of the index.")
-		version: string;
-	  }
-	
-	  model DynamicPromptsIndexFilterRequest {
-		@doc("The scenario name for the index filter request.")
-		scenarioName: string;
-		@doc("The index name for the index filter request.")
-		indexName: string;
-		@doc("The version of the index.")
-		version: string;
-		@doc("The selected columns for filtering.")
-		selectedColumns?: string[];
-		@doc("The filter string.")
-		filter?: string;
-	  }
-	
-	  model DynamicPromptsSuggestedPromptsRequest {
-		@doc("The skillset name for the suggested prompts request.")
-		skillsetName: string;
-		@doc("The skill name for the suggested prompts request.")
-		skillName: string;
-		@doc("The prompt string.")
-		prompt: string;
-		@doc("The response string.")
-		response: string;
-	  }
+	model DynamicPromptsBaseRequest {
+	@doc("The scenario name for the request.")
+	scenarioName: string;
+	@doc("The index name for the request.")
+	indexName: string;
+	@doc("The version of the index.")
+	version: string;
+	}
 
-	  model DynamicPromptingSemanticIndexDocument {
-		@doc("The document ID.")
-		id: string;
-		@doc("The document RowId.")
-		rowId: int32;
-		@doc("The document UpdatedAt.")
-		updatedAt: utcDateTime;
-		@doc("The document IndexId.")
-		indexId: string;
-		@doc("The document Filter1.")
-		filter1: string;
-		@doc("The document Filter2.")
-		filter2: string;
-		@doc("The document Filter3.")
-		filter3: string;
-		@doc("The document Filter4.")
-		filter4: string;
-		@doc("The document Filter5.")
-		filter5: string;
-		@doc("The document Filter6.")
-		filter6: string;
-		@doc("The document Filter7.")
-		filter7: string;
-		@doc("The document Filter8.")
-		filter8: string;
-		@doc("The document Filter9.")
-		filter9: string;
-		@doc("The document Filter10.")
-		filter10: string;
-		@doc("The document Content.")
-		content: string;
-		@doc("The document Description.")
-		description: string;
-		@doc("The document Embedding array.")
-		embedding: Array<float32>;
+	model DynamicPromptsIndexFilterRequest {
+	@doc("The scenario name for the index filter request.")
+	scenarioName: string;
+	@doc("The index name for the index filter request.")
+	indexName: string;
+	@doc("The version of the index.")
+	version: string;
+	@doc("The selected columns for filtering.")
+	selectedColumns?: string[];
+	@doc("The filter string.")
+	filter?: string;
+	}
 
-	  }
-	
-	  model DynamicPromptsSearchResponse {
-		@doc("The search results.")
-		results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
-	  }
-	
-	  model DynamicPromptsFilterResponse {
-		@doc("The filter results.")
-		results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
-	  }
-	
-	  model DocumentCountResponse {
-		@doc("The document count.")
-		count: int64;
-	  }
-	
-	  model DynamicPromptsIndexFilterResponse {
-		@doc("The index filter results.")
-		results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
-	  }
-	
-	  model PhysicalIndexExistsResponse {
-		@doc("Indicates whether the physical index exists.")
-		exists: boolean;
-	  }
-	
-	  model SuggestedPromptsResponse {
-		@doc("The suggested prompts.")
-		prompts: SuggestedPrompt[];
-	  }
-	
-	  model ScoredDoc<T> {
-		@doc("The score of the document.")
-		score: float32;
-		@doc("The document.")
-		document: T;
-	  }
+	model DynamicPromptsSuggestedPromptsRequest {
+	@doc("The skillset name for the suggested prompts request.")
+	skillsetName: string;
+	@doc("The skill name for the suggested prompts request.")
+	skillName: string;
+	@doc("The prompt string.")
+	prompt: string;
+	@doc("The response string.")
+	response: string;
+	}
+
+	model DynamicPromptingSemanticIndexDocument {
+	@doc("The document ID.")
+	id: string;
+	@doc("The document RowId.")
+	rowId: int32;
+	@doc("The document UpdatedAt.")
+	updatedAt: utcDateTime;
+	@doc("The document IndexId.")
+	indexId: string;
+	@doc("The document Filter1.")
+	filter1: string;
+	@doc("The document Filter2.")
+	filter2: string;
+	@doc("The document Filter3.")
+	filter3: string;
+	@doc("The document Filter4.")
+	filter4: string;
+	@doc("The document Filter5.")
+	filter5: string;
+	@doc("The document Filter6.")
+	filter6: string;
+	@doc("The document Filter7.")
+	filter7: string;
+	@doc("The document Filter8.")
+	filter8: string;
+	@doc("The document Filter9.")
+	filter9: string;
+	@doc("The document Filter10.")
+	filter10: string;
+	@doc("The document Content.")
+	content: string;
+	@doc("The document Description.")
+	description: string;
+	@doc("The document Embedding array.")
+	embedding: Array<float32>;
+
+	}
+
+	model DynamicPromptsSearchResponse {
+	@doc("The search results.")
+	results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
+	}
+
+	model DynamicPromptsFilterResponse {
+	@doc("The filter results.")
+	results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
+	}
+
+	model DocumentCountResponse {
+	@doc("The document count.")
+	count: int64;
+	}
+
+	model DynamicPromptsIndexFilterResponse {
+	@doc("The index filter results.")
+	results: ScoredDoc<DynamicPromptingSemanticIndexDocument>[];
+	}
+
+	model PhysicalIndexExistsResponse {
+	@doc("Indicates whether the physical index exists.")
+	exists: boolean;
+	}
+
+	model SuggestedPromptsResponse {
+	@doc("The suggested prompts.")
+	prompts: SuggestedPrompt[];
+	}
+
+	model ScoredDoc<T> {
+	@doc("The score of the document.")
+	score: float32;
+	@doc("The document.")
+	document: T;
+	}
 }
