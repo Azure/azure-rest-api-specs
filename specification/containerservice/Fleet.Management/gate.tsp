@@ -12,7 +12,7 @@ namespace Microsoft.ContainerService;
 
 @doc("A Gate controls the progression during a staged rollout, e.g. in an Update Run.")
 @added(Versions.v2025_04_01_preview)
-@resource("gate")
+@resource("gates")
 @parentResource(Fleet)
 model Gate is TrackedResource<GateProperties> {
   @doc("The name of the Gate resource, a GUID.")
