@@ -25,7 +25,8 @@ jobs:
 
   steps:
   - checkout: self
-    fetchDepth: 0
+    # Required to compare head commit with base commit
+    fetchDepth: 2
   
   - pwsh: |
       dotnet tool install Azure.Sdk.Tools.SwaggerApiParser `
