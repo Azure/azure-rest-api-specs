@@ -183,6 +183,16 @@ alias EnablePoolAutoscaleRequiredParameters = {
   content: BatchPoolEnableAutoScaleContent;
 };
 
+alias EvaluatePoolAutoScaleRequiredParameters = {
+  @doc("The ID of the Pool on which to evaluate the automatic scaling formula.")
+  @path
+  poolId: string;
+
+  @doc("The options to use for evaluating the automatic scaling formula.")
+  @bodyRoot
+  content: BatchPoolEvaluateAutoScaleContent;
+};
+
 // Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -337,16 +347,10 @@ interface Pools {
     scaling enabled in order to evaluate a formula.
     """)
   @route("/pools/{poolId}/evaluateautoscale")
-  @clientName("evaluatePoolAutoScaleInternal", "java")
-  evaluatePoolAutoScale is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool on which to evaluate the automatic scaling formula.")
-      @path
-      poolId: string;
-
-      @doc("The options to use for evaluating the automatic scaling formula.")
-      @bodyRoot
-      content: BatchPoolEvaluateAutoScaleContent;
+  evaluatePoolAutoScale is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...EvaluatePoolAutoScaleRequiredParameters;
     },
     AutoScaleRun & RequestSuccessResponseHeaders
   >;
