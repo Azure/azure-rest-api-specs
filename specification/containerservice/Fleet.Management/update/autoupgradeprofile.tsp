@@ -133,19 +133,19 @@ interface AutoUpgradeProfiles {
 @added(Versions.v2025_03_01)
 model AutoUpgradeProfileStatus {
   @doc("The UTC time of the last attempt to automatically create and start an UpdateRun as triggered by the release of new versions.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastTriggeredAt?: utcDateTime;
 
   @doc("The status of the last AutoUpgrade trigger.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastTriggerStatus?: AutoUpgradeLastTriggerStatus;
 
   @doc("The error details of the last trigger.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastTriggerError?: Azure.ResourceManager.Foundations.ErrorDetail; // https://github.com/Azure/azure-rest-api-specs/blob/1de0b5315d62e1b40052bad2c9a2f2c89d84ff0f/specification/common-types/resource-management/v5/types.json#L260
 
   @doc("The target Kubernetes version or node image versions of the last trigger.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastTriggerUpgradeVersions?: string[];
 }
 
@@ -180,7 +180,7 @@ interface AutoUpgradeProfileOperations {
 @added(Versions.v2025_03_01)
 @doc("GenerateResponse is the response of a generate request.")
 model GenerateResponse {
-  @visibility("read")
+  @visibility(Lifecycle.Read)  
   @doc("The ARM resource id of the generated UpdateRun. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}'.")
   id: string;
 }

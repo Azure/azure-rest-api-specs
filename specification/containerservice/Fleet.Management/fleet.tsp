@@ -58,7 +58,7 @@ model FleetProperties {
   hubProfile?: FleetHubProfile;
 
   @added(Versions.v2025_03_01)
-  @visibility("read")
+  @visibility(Lifecycle.Read)  
   @doc("Status information for the fleet.")
   status?: FleetStatus;
 }
@@ -188,11 +188,11 @@ model FleetCredentialResults {
 @added(Versions.v2025_03_01)
 @doc("Status information for the fleet.")
 model FleetStatus {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The last operation ID for the fleet.")
   lastOperationId?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The last operation error for the fleet.")
   lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
