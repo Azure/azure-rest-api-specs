@@ -94,6 +94,11 @@ suppressions:
     reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
   - code: RequiredPropertiesMissingInResourceModel
     from: TuningOptions.json
+    where: $.definitions.SessionDetailsResource
+    reason: Suppression for this PR. The existing API contract is like this and not be able to changed.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: TuningOptions.json
+    where: $.definitions.SessionResource
     reason: Suppression for this PR. The existing API contract is like this and not be able to changed.
 ```
 
