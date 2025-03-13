@@ -195,19 +195,6 @@ extends:
                 $optional_params
             displayName: 'Generate SDK'
 
-          - task: PowerShell@2
-            displayName: 'Output variables'
-            inputs:
-              targetType: 'inline'
-              script: |
-                $artifactName = "$(AddBreakingChangeLabelArtifactName)"
-                $artifactPath = "$(System.DefaultWorkingDirectory)/$(AddBreakingChangeLabelArtifactPath)"
-                Write-Host "Artifact Name: $artifactName"
-                Write-Host "Artifact Path: $artifactPath"
-                if (Test-Path $artifactPath) {
-                  Get-ChildItem $artifactPath -Recurse
-                }
-
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
               ArtifactName: $(AddBreakingChangeLabelArtifactName)
