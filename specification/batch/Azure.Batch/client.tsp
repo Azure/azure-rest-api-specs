@@ -117,10 +117,6 @@ interface BatchClient {
 
 // client name overrides
 @@clientName(BatchClient.poolExists, "poolExistsInternal", "java");
-@@clientName(BatchClient.replacePoolProperties,
-  "replacePoolPropertiesInternal",
-  "java"
-);
 @@clientName(BatchClient.removeNodes, "removeNodesInternal", "java");
 @@clientName(BatchClient.deleteJob, "deleteJobInternal", "java");
 @@clientName(BatchClient.getJob, "getJobInternal", "java");

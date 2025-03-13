@@ -315,6 +315,30 @@ op stopPoolResizeCustomization is Azure.Batch.PostOperationNew<
   "java"
 );
 
+// Replace Pool Properties Operation
+@doc("Optional parameters for Replace Pool Properties operation.")
+model ReplaceBatchPoolPropertiesOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Replace Pool Properties operation.")
+@route("/pools/{poolId}/updateproperties")
+op replacePoolPropertiesCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.ReplacePoolPropertiesRequiredParameters;
+
+    @doc("Optional parameters for Replace Pool Properties operation.")
+    options?: ReplaceBatchPoolPropertiesOptions;
+  },
+  Azure.Batch.NoContentSuccessResponseHeaders
+>;
+
+@@override(Azure.Batch.Pools.replacePoolProperties,
+  replacePoolPropertiesCustomization,
+  "java"
+);
+
 // List Supported Images Operation
 @doc("Optional parameters for List Supported Images operation.")
 model ListSupportedBatchImagesOptions {
