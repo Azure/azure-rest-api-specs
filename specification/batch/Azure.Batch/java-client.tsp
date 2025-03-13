@@ -289,6 +289,32 @@ op resizePoolCustomization is Azure.Batch.PostOperationNew<
 
 @@override(Azure.Batch.Pools.resizePool, resizePoolCustomization, "java");
 
+// Stop Pool Resize Operation
+@doc("Optional parameters for Stop Pool Resize operation.")
+model StopBatchPoolResizeOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Stop Pool Resize operation.")
+@route("/pools/{poolId}/stopresize")
+op stopPoolResizeCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.StopPoolResizeRequiredParameters;
+
+    @doc("Optional parameters for Stop Pool Resize operation.")
+    options?: StopBatchPoolResizeOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.AcceptedProcessingResponseHeaders
+>;
+
+@@override(Azure.Batch.Pools.stopPoolResize,
+  stopPoolResizeCustomization,
+  "java"
+);
+
 // List Supported Images Operation
 @doc("Optional parameters for List Supported Images operation.")
 model ListSupportedBatchImagesOptions {
