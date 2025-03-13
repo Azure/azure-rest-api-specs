@@ -102,7 +102,8 @@ model InternalConnectionPropertiesAADAuth extends InternalConnectionProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Connection properties for connections with Custom authentication")
-model InternalConnectionPropertiesCustomAuth extends InternalConnectionProperties {
+model InternalConnectionPropertiesCustomAuth
+  extends InternalConnectionProperties {
   @doc("Authentication type of the connection target")
   authType: AuthenticationType.custom;
 }
