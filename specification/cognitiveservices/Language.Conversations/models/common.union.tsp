@@ -19,6 +19,10 @@ union AnalyzeConversationTaskKind {
 
   /** Conversation task kind */
   Conversation: "Conversation",
+  
+  @added(Versions.v2025_05_15)
+  /** Conversation task kind */
+  ConversationalAI: "ConversationalAI",
 }
 
 /** Enumeration of supported conversational task results. */
@@ -27,6 +31,10 @@ union AnalyzeConversationTaskResultsKind {
 
   /** Conversation result task kind */
   ConversationResult: "ConversationResult",
+
+  @added(Versions.v2025_05_15)
+  /** Conversation result task kind */
+  ConversationalAIResult: "ConversationalAIResult",
 }
 
 /** The area unit of measurement. */
@@ -236,6 +244,10 @@ union projectKind {
 
   /** Orchestration type */
   Orchestration: "Orchestration",
+  
+  @added(Versions.v2025_05_15)
+  /** Conversation type */
+  ConversationalAI: "ConversationalAI",
 }
 
 /** The kind of range that the resolution object represents. */

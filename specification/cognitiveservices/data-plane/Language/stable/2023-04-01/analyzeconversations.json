@@ -1332,14 +1332,6 @@
           "type": "string",
           "description": "The name of the deployment to use."
         },
-        "verbose": {
-          "type": "boolean",
-          "description": "If true, the service will return more detailed information in the response."
-        },
-        "isLoggingEnabled": {
-          "type": "boolean",
-          "description": "If true, the service will keep the query for further review."
-        },
         "stringIndexType": {
           "type": "string",
           "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
@@ -1370,6 +1362,14 @@
               }
             ]
           }
+        },
+        "verbose": {
+          "type": "boolean",
+          "description": "If true, the service will return more detailed information in the response."
+        },
+        "isLoggingEnabled": {
+          "type": "boolean",
+          "description": "If true, the service will keep the query for further review."
         },
         "directTarget": {
           "type": "string",
@@ -3667,6 +3667,10 @@
           "type": "string",
           "description": "The participant ID of a conversation item."
         },
+        "role": {
+          "$ref": "#/definitions/role",
+          "description": "Role of the participant."
+        },
         "language": {
           "type": "string",
           "description": "The override language of a conversation item in BCP 47 language representation."
@@ -3674,10 +3678,6 @@
         "modality": {
           "$ref": "#/definitions/InputModality",
           "description": "Enumeration of supported conversational modalities."
-        },
-        "role": {
-          "$ref": "#/definitions/role",
-          "description": "Role of the participant."
         },
         "text": {
           "type": "string",
@@ -3724,6 +3724,10 @@
           "type": "string",
           "description": "The participant ID of a conversation item."
         },
+        "role": {
+          "$ref": "#/definitions/role",
+          "description": "Role of the participant."
+        },
         "language": {
           "type": "string",
           "description": "The override language of a conversation item in BCP 47 language representation."
@@ -3731,10 +3735,6 @@
         "modality": {
           "$ref": "#/definitions/InputModality",
           "description": "Enumeration of supported conversational modalities."
-        },
-        "role": {
-          "$ref": "#/definitions/role",
-          "description": "Role of the participant."
         },
         "itn": {
           "type": "string",
