@@ -13,43 +13,33 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Unified;
 
+alias ServiceTraits = SupportsClientRequestId &
+  NoRepeatableRequests &
+  NoConditionalRequests;
+
+alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+
+@route("evaluations")
 interface Evaluations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-  @doc("Get an evaluation.")
-  @route("/evaluations/{id}")
-  @get
-  get is Azure.Core.Foundations.Operation<
+  @doc("Get an evaluation run by name.")
+  get is EvaluationsOperations.ResourceRead<Evaluation>;
+
+  @doc("List evaluation runs")
+  list is EvaluationsOperations.ResourceList<
+    Evaluation,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates an evaluation run.")
+  @route("runs:createRun")
+  @post
+  createRun is Azure.Core.Foundations.Operation<
     {
-      @doc("Identifier of the evaluation.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
-      @maxLength(254)
-      @path
-      id: string;
+      @doc("Evalution to be run")
+      @body
+      evaluation: Evaluation;
     },
     Evaluation
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-  @doc("Creates an evaluation.")
-  @route("/evaluations:create")
-  @post
-  create is Azure.Core.Foundations.Operation<
-    {
-      @doc("Properties of Evaluation.")
-      @body
-      body: Evaluation;
-    },
-    ResourceCreatedResponse<Evaluation>
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-  @doc("List evaluations")
-  @route("/evaluations")
-  @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      ...StandardListQueryParameters;
-    },
-    PagedEvaluation
   >;
 }
