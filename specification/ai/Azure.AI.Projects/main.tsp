@@ -16,7 +16,6 @@ import "./agents/vector_stores/file_batches/routes.tsp";
 import "./connections/routes.tsp";
 import "./evaluations/routes.tsp";
 import "./datasets/routes.tsp";
-import "./models/routes.tsp";
 import "./indexes/routes.tsp";
 import "./deployments/routes.tsp";
 
@@ -56,7 +55,7 @@ namespace Azure.AI {
   }
 )
 @versioned(Versions)
-namespace Azure.AI.Unified {
+namespace Azure.AI.Projects {
   @doc("Azure AI API versions")
   enum Versions {
     @doc("Azure AI API version 2025-05-01-preview.")

@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Unified.Agents;
+namespace Azure.AI.Projects.Agents;
 
 /**
  * Gets a single run step from a thread run.

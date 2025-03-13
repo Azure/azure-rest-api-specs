@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Azure.AI.Unified;
+namespace Azure.AI.Projects;
 
 @doc("Evaluator Configuration")
 model EvaluatorConfiguration {
