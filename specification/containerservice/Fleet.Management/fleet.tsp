@@ -58,7 +58,7 @@ model FleetProperties {
   hubProfile?: FleetHubProfile;
 
   @added(Versions.v2025_03_01)
-  @visibility(Lifecycle.Read)  
+  @visibility(Lifecycle.Read)
   @doc("Status information for the fleet.")
   status?: FleetStatus;
 }
