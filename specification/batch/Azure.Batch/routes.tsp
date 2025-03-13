@@ -203,6 +203,12 @@ alias ResizePoolRequiredParameters = {
   content: BatchPoolResizeContent;
 };
 
+alias StopPoolResizeRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+};
+
 // Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -396,9 +402,12 @@ interface Pools {
     be used to halt the initial sizing of the Pool when it is created.
     """)
   @route("/pools/{poolId}/stopresize")
-  @clientName("stopPoolResizeInternal", "java")
-  stopPoolResize is PostOperation<
-    BatchPoolHeaders,
+  stopPoolResize is PostOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...StopPoolResizeRequiredParameters;
+    },
     AcceptedProcessingResponseHeaders
   >;
 
