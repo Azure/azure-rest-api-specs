@@ -2553,6 +2553,24 @@
     }
   },
   "definitions": {
+    "AccessTokenMethod": {
+      "type": "string",
+      "description": "Access Token Method",
+      "enum": [
+        "AccessToken"
+      ],
+      "x-ms-enum": {
+        "name": "AccessTokenMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AccessToken",
+            "value": "AccessToken",
+            "description": "AccessToken Option"
+          }
+        ]
+      }
+    },
     "AdvancedSettings": {
       "type": "object",
       "description": "Broker Advanced Settings",
@@ -2590,6 +2608,24 @@
           "$ref": "#/definitions/CertManagerCertOptions",
           "description": "Certificate rotation and private key configuration."
         }
+      }
+    },
+    "AnonymousMethod": {
+      "type": "string",
+      "description": "x509 Certificate Method",
+      "enum": [
+        "Anonymous"
+      ],
+      "x-ms-enum": {
+        "name": "AnonymousMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Anonymous",
+            "value": "Anonymous",
+            "description": "Anonymous Option"
+          }
+        ]
       }
     },
     "AuthorizationConfig": {
@@ -3130,6 +3166,42 @@
         "value"
       ]
     },
+    "BrokerMemoryProfile": {
+      "type": "string",
+      "description": "The memory profile settings of the Broker",
+      "enum": [
+        "Tiny",
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "BrokerMemoryProfile",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Tiny",
+            "value": "Tiny",
+            "description": "Tiny memory profile."
+          },
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low memory profile."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium memory profile."
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High memory profile."
+          }
+        ]
+      }
+    },
     "BrokerProperties": {
       "type": "object",
       "description": "Broker Resource properties",
@@ -3216,6 +3288,30 @@
           "description": "The status of the last operation.",
           "readOnly": true
         }
+      }
+    },
+    "BrokerProtocolType": {
+      "type": "string",
+      "description": "Broker Protocol types",
+      "enum": [
+        "Mqtt",
+        "WebSockets"
+      ],
+      "x-ms-enum": {
+        "name": "BrokerProtocolType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mqtt",
+            "value": "Mqtt",
+            "description": "protocol broker"
+          },
+          {
+            "name": "WebSockets",
+            "value": "WebSockets",
+            "description": "protocol websocket"
+          }
+        ]
       }
     },
     "BrokerResource": {
@@ -4244,6 +4340,36 @@
         "host"
       ]
     },
+    "DataflowEndpointKafkaAcks": {
+      "type": "string",
+      "description": "DataflowEndpoint Kafka Acks properties",
+      "enum": [
+        "Zero",
+        "One",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowEndpointKafkaAcks",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Zero",
+            "value": "Zero",
+            "description": "ZERO Option"
+          },
+          {
+            "name": "One",
+            "value": "One",
+            "description": "ONE Option"
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "ALL Option"
+          }
+        ]
+      }
+    },
     "DataflowEndpointKafkaAuthentication": {
       "type": "object",
       "description": "Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry",
@@ -4326,6 +4452,78 @@
           "minimum": 0,
           "maximum": 4294967295
         }
+      }
+    },
+    "DataflowEndpointKafkaCompression": {
+      "type": "string",
+      "description": "Kafka endpoint Compression properties",
+      "enum": [
+        "None",
+        "Gzip",
+        "Snappy",
+        "Lz4"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowEndpointKafkaCompression",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "NONE Option"
+          },
+          {
+            "name": "Gzip",
+            "value": "Gzip",
+            "description": "Gzip Option"
+          },
+          {
+            "name": "Snappy",
+            "value": "Snappy",
+            "description": "SNAPPY Option"
+          },
+          {
+            "name": "Lz4",
+            "value": "Lz4",
+            "description": "LZ4 Option"
+          }
+        ]
+      }
+    },
+    "DataflowEndpointKafkaPartitionStrategy": {
+      "type": "string",
+      "description": "DataflowEndpoint Kafka Partition Strategy properties",
+      "enum": [
+        "Default",
+        "Static",
+        "Topic",
+        "Property"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowEndpointKafkaPartitionStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default: Assigns messages to random partitions, using a round-robin algorithm."
+          },
+          {
+            "name": "Static",
+            "value": "Static",
+            "description": "Static: Assigns messages to a fixed partition number that's derived from the instance ID of the dataflow."
+          },
+          {
+            "name": "Topic",
+            "value": "Topic",
+            "description": "TOPIC Option"
+          },
+          {
+            "name": "Property",
+            "value": "Property",
+            "description": "PROPERTY Option"
+          }
+        ]
       }
     },
     "DataflowEndpointLocalStorage": {
@@ -4971,6 +5169,24 @@
       "$ref": "#/definitions/ManagedIdentityMethod",
       "x-nullable": false
     },
+    "FilterType": {
+      "type": "string",
+      "description": "Filter Type properties",
+      "enum": [
+        "Filter"
+      ],
+      "x-ms-enum": {
+        "name": "FilterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Filter",
+            "value": "Filter",
+            "description": "Filter type"
+          }
+        ]
+      }
+    },
     "Frontend": {
       "type": "object",
       "description": "The desired properties of the frontend instances of the Broker",
@@ -5325,6 +5541,20 @@
         "name"
       ]
     },
+    "ManagedIdentity": {
+      "type": "object",
+      "description": "System and Use Assigned Managed Identity properties",
+      "properties": {
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
+        }
+      }
+    },
     "ManagedIdentityMethod": {
       "type": "string",
       "description": "Managed Identity Method",
@@ -5347,6 +5577,20 @@
             "description": "UserAssignedManagedIdentity type"
           }
         ]
+      }
+    },
+    "MetricProperties": {
+      "type": "object",
+      "description": "Metric properties",
+      "properties": {
+        "logs": {
+          "$ref": "#/definitions/DiagnosticsLogs",
+          "description": "Diagnostic log settings for the resource."
+        },
+        "metrics": {
+          "$ref": "#/definitions/Metrics",
+          "description": "The metrics settings for the resource."
+        }
       }
     },
     "Metrics": {
@@ -5401,6 +5645,30 @@
             "name": "Anonymous",
             "value": "Anonymous",
             "description": "Anonymous Option"
+          }
+        ]
+      }
+    },
+    "MqttRetainType": {
+      "type": "string",
+      "description": "Broker Retain types",
+      "enum": [
+        "Keep",
+        "Never"
+      ],
+      "x-ms-enum": {
+        "name": "MqttRetainType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Keep",
+            "value": "Keep",
+            "description": "Retain the messages."
+          },
+          {
+            "name": "Never",
+            "value": "Never",
+            "description": "Never retain messages."
           }
         ]
       }
@@ -5707,6 +5975,24 @@
         "ip"
       ]
     },
+    "SaslMethod": {
+      "type": "string",
+      "description": "Sasl Method",
+      "enum": [
+        "Sasl"
+      ],
+      "x-ms-enum": {
+        "name": "SaslMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sasl",
+            "value": "Sasl",
+            "description": "Sasl Option"
+          }
+        ]
+      }
+    },
     "SchemaRegistryID": {
       "type": "string",
       "format": "arm-id",
@@ -5818,6 +6104,72 @@
         }
       }
     },
+    "ServiceAccountTokenMethod": {
+      "type": "string",
+      "description": "Service Account Token Method",
+      "enum": [
+        "ServiceAccountToken"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceAccountTokenMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceAccountToken",
+            "value": "ServiceAccountToken",
+            "description": "ServiceAccountToken Option"
+          }
+        ]
+      }
+    },
+    "ServiceType": {
+      "type": "string",
+      "description": "Kubernetes Service Types supported by Listener",
+      "enum": [
+        "ClusterIp",
+        "LoadBalancer",
+        "NodePort"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClusterIp",
+            "value": "ClusterIp",
+            "description": "Cluster IP Service."
+          },
+          {
+            "name": "LoadBalancer",
+            "value": "LoadBalancer",
+            "description": "Load Balancer Service."
+          },
+          {
+            "name": "NodePort",
+            "value": "NodePort",
+            "description": "Node Port Service."
+          }
+        ]
+      }
+    },
+    "SourceSerializationFormat": {
+      "type": "string",
+      "description": "Serialization Format properties",
+      "enum": [
+        "Json"
+      ],
+      "x-ms-enum": {
+        "name": "SourceSerializationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Json",
+            "value": "Json",
+            "description": "JSON Format"
+          }
+        ]
+      }
+    },
     "StateStoreResourceDefinitionMethods": {
       "type": "string",
       "description": "StateStoreResourceDefinitionMethods methods allowed",
@@ -5903,6 +6255,30 @@
         "keys",
         "method"
       ]
+    },
+    "SubscriberMessageDropStrategy": {
+      "type": "string",
+      "description": "The enum defining strategies for dropping messages from the subscriber queue.",
+      "enum": [
+        "None",
+        "DropOldest"
+      ],
+      "x-ms-enum": {
+        "name": "SubscriberMessageDropStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Messages are never dropped."
+          },
+          {
+            "name": "DropOldest",
+            "value": "DropOldest",
+            "description": "The oldest message is dropped."
+          }
+        ]
+      }
     },
     "SubscriberQueueLimit": {
       "type": "object",
@@ -6072,6 +6448,36 @@
         }
       }
     },
+    "TransformationSerializationFormat": {
+      "type": "string",
+      "description": "Transformation Format properties",
+      "enum": [
+        "Delta",
+        "Json",
+        "Parquet"
+      ],
+      "x-ms-enum": {
+        "name": "TransformationSerializationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delta",
+            "value": "Delta",
+            "description": "Delta Format"
+          },
+          {
+            "name": "Json",
+            "value": "Json",
+            "description": "JSON Format"
+          },
+          {
+            "name": "Parquet",
+            "value": "Parquet",
+            "description": "Parquet Format"
+          }
+        ]
+      }
+    },
     "VolumeClaimResourceRequirements": {
       "type": "object",
       "description": "VolumeClaimResourceRequirements properties",
@@ -6192,6 +6598,24 @@
       "required": [
         "secretRef"
       ]
+    },
+    "x509CertificateMethod": {
+      "type": "string",
+      "description": "x509 Certificate Method",
+      "enum": [
+        "X509Certificate"
+      ],
+      "x-ms-enum": {
+        "name": "x509CertificateMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "X509Certificate",
+            "value": "X509Certificate",
+            "description": "x509Certificate Option"
+          }
+        ]
+      }
     }
   },
   "parameters": {}
