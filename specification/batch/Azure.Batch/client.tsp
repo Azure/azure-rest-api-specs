@@ -117,10 +117,6 @@ interface BatchClient {
 
 // client name overrides
 @@clientName(BatchClient.poolExists, "poolExistsInternal", "java");
-@@clientName(BatchClient.enablePoolAutoScale,
-  "enablePoolAutoScaleInternal",
-  "java"
-);
 @@clientName(BatchClient.evaluatePoolAutoScale,
   "evaluatePoolAutoScaleInternal",
   "java"
