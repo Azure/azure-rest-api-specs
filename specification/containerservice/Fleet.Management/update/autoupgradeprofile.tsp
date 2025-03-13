@@ -180,7 +180,7 @@ interface AutoUpgradeProfileOperations {
 @added(Versions.v2025_03_01)
 @doc("GenerateResponse is the response of a generate request.")
 model GenerateResponse {
-  @visibility("create", "read")
-  @doc("The ARM resource id of the generated UpdateRun. Must be a valid Azure resource id. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}'.")
+  @visibility("read")
+  @doc("The ARM resource id of the generated UpdateRun. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}'.")
   id: string;
 }
