@@ -49,7 +49,7 @@ model InputDataset extends InputData {
 model Evaluation {
   @doc("Identifier of the evaluation.")
   @key("name")
-  id?: string;
+  id: string;
 
   @doc("Data for evaluation.")
   data: InputData;
@@ -76,17 +76,4 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
-}
-
-@doc("Paged evaluation items")
-@pagedResult
-model PagedEvaluation {
-  @doc("The list of Evaluations.")
-  @extension("x-ms-identifiers", [])
-  @items
-  value: Evaluation[];
-
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: ResourceLocation<Evaluation>;
 }
