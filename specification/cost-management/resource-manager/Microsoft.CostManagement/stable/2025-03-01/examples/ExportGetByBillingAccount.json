@@ -11,6 +11,7 @@
         "id": "providers/Microsoft.Billing/billingAccounts/{billingAccount-Id}/providers/Microsoft.CostManagement/exports/TestExport",
         "name": "TestExport",
         "type": "Microsoft.CostManagement/exports",
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
         "identity": {
           "type": "SystemAssigned",
           "principalId": "00000000-0000-0000-0000-000000000000",
@@ -36,16 +37,14 @@
             "dataSet": {
               "granularity": "Daily",
               "configuration": {
-                "columns": [
-                  "Date",
-                  "MeterId",
-                  "ResourceId",
-                  "ResourceLocation",
-                  "Quantity"
-                ]
+                "dataVersion": "2023-05-01"
               }
             }
-          }
+          },
+          "partitionData": true,
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "compressionMode": "gzip",
+          "exportDescription": "This is a test export."
         }
       }
     }

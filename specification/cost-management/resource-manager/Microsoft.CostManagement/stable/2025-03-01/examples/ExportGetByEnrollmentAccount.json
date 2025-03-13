@@ -12,6 +12,7 @@
         "id": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/Microsoft.CostManagement/exports/TestExport",
         "name": "TestExport",
         "type": "Microsoft.CostManagement/exports",
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
         "identity": {
           "type": "SystemAssigned",
           "principalId": "00000000-0000-0000-0000-000000000000",
@@ -32,21 +33,19 @@
             "timeframe": "Custom",
             "timePeriod": {
               "from": "2019-09-01T00:00:00Z",
-              "to": "2019-10-31T00:00:00Z"
+              "to": "2019-09-30T00:00:00Z"
             },
             "dataSet": {
               "granularity": "Daily",
               "configuration": {
-                "columns": [
-                  "Date",
-                  "MeterId",
-                  "ResourceId",
-                  "ResourceLocation",
-                  "Quantity"
-                ]
+                "dataVersion": "2023-05-01"
               }
             }
-          }
+          },
+          "partitionData": true,
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "compressionMode": "gzip",
+          "exportDescription": "This is a test export."
         }
       }
     }

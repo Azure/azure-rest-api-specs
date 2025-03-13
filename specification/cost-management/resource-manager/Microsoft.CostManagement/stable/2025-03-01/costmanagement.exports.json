@@ -300,6 +300,9 @@
           "ExportRunByBillingAccount": {
             "$ref": "./examples/ExportRunByBillingAccount.json"
           },
+          "ExportRunByBillingAccountWithOptionalRequestBody": {
+            "$ref": "./examples/ExportRunByBillingAccountWithOptionalRequestBody.json"
+          },
           "ExportRunByDepartment": {
             "$ref": "./examples/ExportRunByDepartment.json"
           },
@@ -464,10 +467,12 @@
       "type": "object",
       "properties": {
         "format": {
-          "description": "The format of the export being delivered. Currently only 'Csv' is supported.",
+          "description": "The format of the export being delivered.",
           "type": "string",
           "enum": [
-            "Csv"
+            "Csv",
+            "Parquet",
+            "Delta"
           ],
           "x-ms-enum": {
             "name": "FormatType",
@@ -487,7 +492,7 @@
           "$ref": "#/definitions/ExportExecutionListResult"
         },
         "partitionData": {
-          "description": "If set to true, exported data will be partitioned by size and placed in a blob directory together with a manifest file. Note: this option is currently available only for Microsoft Customer Agreement commerce scopes.",
+          "description": "If set to true, exported data will be partitioned by size and placed in a blob directory together with a manifest file.",
           "type": "boolean"
         },
         "dataOverwriteBehavior": {
@@ -503,10 +508,11 @@
           }
         },
         "compressionMode": {
-          "description": "Allow customers to select compress data(gzip) for exports. This setting will enable destination file compression scheme at runtime. By default set to None.",
+          "description": "Allow customers to select compress data(gzip, snappy) for exports. This setting will enable destination file compression scheme at runtime. By default set to None.",
           "type": "string",
           "enum": [
             "gzip",
+            "snappy",
             "None"
           ],
           "x-ms-enum": {
@@ -525,7 +531,7 @@
           "readOnly": true
         },
         "systemSuspensionContext": {
-          "description": "The export suspension reason if export is in SystemSuspended state.",
+          "description": "The export suspension reason if export is in SystemSuspended state. This is not populated currently.",
           "$ref": "#/definitions/ExportSuspensionContext",
           "readOnly": true
         }
@@ -540,12 +546,11 @@
       "type": "object",
       "properties": {
         "status": {
-          "description": "The status of the export's schedule. If 'Inactive', the export's schedule is paused. 'SystemSuspended' can only be set by export service.",
+          "description": "The status of the export's schedule. If 'Inactive', the export's schedule is paused. To enable export set the status to be Active and then make a PUT request.",
           "type": "string",
           "enum": [
             "Active",
-            "Inactive",
-            "SystemSuspended"
+            "Inactive"
           ],
           "x-ms-enum": {
             "name": "StatusType",
@@ -844,6 +849,11 @@
           "type": "string",
           "format": "date-time"
         },
+        "processingEndTime": {
+          "description": "The time when the export run finished.",
+          "type": "string",
+          "format": "date-time"
+        },
         "startDate": {
           "description": "The start datetime for the export.",
           "type": "string",
@@ -854,17 +864,12 @@
           "type": "string",
           "format": "date-time"
         },
-        "processingEndTime": {
-          "description": "The time when the export run finished.",
-          "type": "string",
-          "format": "date-time"
+        "manifestFile": {
+          "description": "The manifest file location(URI location) for the exported files.",
+          "type": "string"
         },
         "fileName": {
           "description": "The name of the exported file.",
-          "type": "string"
-        },
-        "manifestFile": {
-          "description": "The manifest file location(URI location) for the exported files.",
           "type": "string"
         },
         "runSettings": {
@@ -878,7 +883,7 @@
       }
     },
     "ExportSuspensionContext": {
-      "description": "The properties of the export run.",
+      "description": "The properties of the export suspension context. This is not populated currently.",
       "type": "object",
       "properties": {
         "suspensionCode": {
