@@ -193,6 +193,16 @@ alias EvaluatePoolAutoScaleRequiredParameters = {
   content: BatchPoolEvaluateAutoScaleContent;
 };
 
+alias ResizePoolRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+
+  @doc("The options to use for resizing the pool.")
+  @bodyRoot
+  content: BatchPoolResizeContent;
+};
+
 // Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -366,14 +376,12 @@ interface Pools {
     Nodes, use the Pool remove Compute Nodes API instead.
     """)
   @route("/pools/{poolId}/resize")
-  @clientName("resizePoolInternal", "java")
-  resizePool is PostOperation<
-    BatchPoolHeaders &
-      MinimalMetadata & {
-        @doc("The options to use for resizing the pool.")
-        @bodyRoot
-        content: BatchPoolResizeContent;
-      },
+  resizePool is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...ResizePoolRequiredParameters;
+    },
     AcceptedProcessingResponseHeaders
   >;
 

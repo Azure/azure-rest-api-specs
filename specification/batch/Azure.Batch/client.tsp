@@ -117,7 +117,6 @@ interface BatchClient {
 
 // client name overrides
 @@clientName(BatchClient.poolExists, "poolExistsInternal", "java");
-@@clientName(BatchClient.resizePool, "resizePoolInternal", "java");
 @@clientName(BatchClient.stopPoolResize, "stopPoolResizeInternal", "java");
 @@clientName(BatchClient.replacePoolProperties,
   "replacePoolPropertiesInternal",
