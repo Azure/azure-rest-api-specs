@@ -77,7 +77,7 @@ enum AuthenticationType {
   SAS: "SAS",
 
   @doc("Custom Keys authentication")
-  customKeys: "Custom Keys",
+  customKeys: "CustomKeys",
 
   @doc("No authentication")
   None: "None",
