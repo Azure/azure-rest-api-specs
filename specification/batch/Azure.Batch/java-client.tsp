@@ -122,6 +122,29 @@ op listPoolsCustomization is Azure.Batch.ListOperationNew<
 
 @@override(Azure.Batch.Pools.listPools, listPoolsCustomization, "java");
 
+// Delete Pool Operation
+@doc("Optional parameters for Delete Pool operation.")
+model DeleteBatchPoolOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Delete Pool operation.")
+@route("/pools/{poolId}")
+op deletePoolCustomization is Azure.Batch.DeleteOperationNew<
+  {
+    ...Azure.Batch.DeletePoolRequiredParameters;
+
+    @doc("Optional parameters for Delete Pool operation.")
+    options?: DeleteBatchPoolOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.DeleteResponseHeaders
+>;
+
+@@override(Azure.Batch.Pools.deletePool, deletePoolCustomization, "java");
+
 // Get Pool Operation
 @doc("Optional parameters for Get Pool operation.")
 model GetBatchPoolOptions {

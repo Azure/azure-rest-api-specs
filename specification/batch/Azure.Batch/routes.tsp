@@ -157,6 +157,12 @@ alias GetPoolOptionalParameters = {
   $expand?: string[];
 };
 
+alias DeletePoolRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+};
+
 // Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -228,8 +234,14 @@ interface Pools {
     error code PoolBeingDeleted.
     """)
   @route("/pools/{poolId}")
-  @clientName("deletePoolInternal", "java")
-  deletePool is DeleteOperation<BatchPoolHeaders, DeleteResponseHeaders>;
+  deletePool is DeleteOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...DeletePoolRequiredParameters;
+    },
+    DeleteResponseHeaders
+  >;
 
   @doc("Gets basic properties of a Pool.")
   @route("/pools/{poolId}")
