@@ -375,6 +375,10 @@ union DevBoxOperationKind {
   @added(APIVersions.v2024_10_01_preview)
   CaptureSnapshot: "CaptureSnapshot",
 
+  @doc("The operation represents a Dev Box align to the current network connection.")
+  @added(APIVersions.v2025_03_01_preview)
+  Align: "Align",
+
   string,
 }
 
@@ -461,6 +465,10 @@ model Pool {
   @doc("Display name of the pool.")
   @added(APIVersions.v2024_02_01)
   displayName?: string;
+
+  @doc("The default active hours configuration for Dev Boxes created in this pool.")
+  @added(APIVersions.v2025_03_01_preview)
+  activeHoursConfiguration?: PoolActiveHoursConfiguration;
 }
 
 @doc("Hardware specifications for the Dev Box.")
@@ -542,6 +550,74 @@ model StopOnNoConnectConfiguration {
 
   @doc("The specified time in minutes to wait before stopping a Dev Box if no connection is made. This will only be present if stop on no connect is enabled.")
   gracePeriodMinutes?: int32;
+}
+
+@doc("The default active hours configuration settings.")
+@added(APIVersions.v2025_03_01_preview)
+model PoolActiveHoursConfiguration {
+  @doc("Enables or disables whether the Dev Box should be kept awake during active hours.")
+  keepAwakeEnableStatus: KeepAwakeEnableStatus;
+
+  @doc("Enables or disables whether the Dev Box should be automatically started at commencement of active hours.")
+  autoStartEnableStatus: AutoStartEnableStatus;
+
+  @doc("The default IANA timezone id of the active hours.")
+  defaultTimeZone?: string;
+
+  @doc("The default start time of the active hours.")
+  defaultStartTimeHour?: int32;
+
+  @doc("The default end time of the active hours.")
+  defaultEndTimeHour?: int32;
+}
+
+@doc("The active hours configuration for a Dev Box.")
+@added(APIVersions.v2025_03_01_preview)
+model ActiveHoursConfiguration {
+  @doc("Enables or disables whether the Dev Box should be kept awake during active hours.")
+  keepAwakeEnableStatus: KeepAwakeEnableStatus;
+
+  @doc("Enables or disables whether the Dev Box should be automatically started at commencement of active hours.")
+  autoStartEnableStatus: AutoStartEnableStatus;
+
+  ...UserActiveHoursConfiguration;
+}
+
+@doc("Enables or disables whether the Dev Box should be kept awake during active hours.")
+@added(APIVersions.v2025_03_01_preview)
+union KeepAwakeEnableStatus {
+  @doc("Keep awake is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Keep awake is disabled.")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("Enables or disables whether the Dev Box should be automatically started at commencement of active hours.")
+@added(APIVersions.v2025_03_01_preview)
+union AutoStartEnableStatus {
+  @doc("Auto start is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Auto start is disabled.")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("Manual user set active hours configuration.")
+@added(APIVersions.v2025_03_01_preview)
+model UserActiveHoursConfiguration {
+  @doc("The timezone of the active hours.")
+  timeZone?: string;
+
+  @doc("The start time of the active hours.")
+  startTimeHour?: int32;
+
+  @doc("The end time of the active hours.")
+  endTimeHour?: int32;
 }
 
 alias ScheduleListResult = Azure.Core.Page<Schedule>;
@@ -683,6 +759,11 @@ model DevBox {
   @doc("Indicates whether the owner of the Dev Box is a local administrator.")
   @visibility(Lifecycle.Read)
   localAdministrator?: LocalAdminStatus;
+
+  @doc("The active hours configuration for this Dev Box, if enabled.")
+  @added(APIVersions.v2025_03_01_preview)
+  @visibility("read")
+  activeHoursConfiguration?: ActiveHoursConfiguration;
 }
 
 @doc("Provides remote connection information for a Dev Box.")
@@ -803,6 +884,13 @@ model DevBoxOperation {
 model DevBoxStartOperation extends DevBoxOperation {
   @doc("The kind of operation that occurred.")
   kind: DevBoxOperationKind.Start;
+}
+
+@doc("Information about an align operation on a Dev Box.")
+@added(APIVersions.v2025_03_01_preview)
+model DevBoxAlignOperation extends DevBoxOperation {
+  @doc("The kind of operation that occurred.")
+  kind: DevBoxOperationKind.Align;
 }
 
 @doc("Information about a stop operation on a Dev Box.")
