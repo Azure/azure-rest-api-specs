@@ -145,6 +145,30 @@ op deletePoolCustomization is Azure.Batch.DeleteOperationNew<
 
 @@override(Azure.Batch.Pools.deletePool, deletePoolCustomization, "java");
 
+// Pool Exists Operation
+@doc("Optional parameters for Pool Exists operation.")
+model BatchPoolExistsOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Pool Exists operation.")
+@route("/pools/{poolId}")
+op poolExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditionalResponseNew<
+  {
+    ...Azure.Batch.PoolExistsRequiredParameters;
+
+    @doc("Optional parameters for Pool Exists operation.")
+    options?: BatchPoolExistsOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.PoolDoesNotExistResponseHeaders,
+  Azure.Batch.PoolDoesExistResponseHeaders
+>;
+
+@@override(Azure.Batch.Pools.poolExists, poolExistsCustomization, "java");
+
 // Get Pool Operation
 @doc("Optional parameters for Get Pool operation.")
 model GetBatchPoolOptions {

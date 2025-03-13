@@ -183,6 +183,22 @@ op ResourceInfoOperationWithAdditionalResponse<
   BatchError
 >;
 
+// TODO: Once we migrate all ResourceInfoOperationWithAdditionalResponse methods in routes.tsp to use this, delete original ResourceInfoOperationWithAdditionalResponse (above) and rename this to ResourceInfoOperationWithAdditionalResponse
+#suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Azure REST API guidelines recommend using 'default' error response for all error cases. Avoid defining custom 4xx or 5xx error cases."
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@doc("New rpc operation allowing multiple responses")
+@head
+op ResourceInfoOperationWithAdditionalResponseNew<
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model,
+  TAdditionalResponse extends {} = {}
+> is Foundations.Operation<
+  TParams,
+  TResponse | TAdditionalResponse,
+  NoFilter,
+  BatchError
+>;
+
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @post
 op PostOperation<TResource, TResponse> is RpcOperation<

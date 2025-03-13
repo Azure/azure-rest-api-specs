@@ -219,6 +219,12 @@ alias ReplacePoolPropertiesRequiredParameters = {
   pool: BatchPoolReplaceContent;
 };
 
+alias PoolExistsRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+};
+
 // Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -301,9 +307,12 @@ interface Pools {
 
   @doc("Gets basic properties of a Pool.")
   @route("/pools/{poolId}")
-  @clientName("poolExistsInternal", "java")
-  poolExists is ResourceInfoOperationWithAdditionalResponse<
-    CommonParameters & BatchPoolHeaders,
+  poolExists is ResourceInfoOperationWithAdditionalResponseNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...PoolExistsRequiredParameters;
+    },
     PoolDoesNotExistResponseHeaders,
     PoolDoesExistResponseHeaders
   >;
