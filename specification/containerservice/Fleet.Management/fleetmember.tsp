@@ -56,7 +56,7 @@ model FleetMemberProperties {
   provisioningState?: FleetMemberProvisioningState;
 
   @added(Versions.v2025_03_01)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Status information of the last operation for fleet member.")
   status?: FleetMemberStatus;
 }
@@ -64,11 +64,11 @@ model FleetMemberProperties {
 @added(Versions.v2025_03_01)
 @doc("Status information for the fleet member")
 model FleetMemberStatus {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The last operation ID for the fleet member")
   lastOperationId?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The last operation error of the fleet member")
   lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
