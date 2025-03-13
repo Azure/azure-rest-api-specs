@@ -78,6 +78,34 @@ describe("incrementalTypeSpec", () => {
     expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
   });
 
+  it("returns false if readme deleted", async () => {
+    const readmePath =
+      "specification/contosowidgetmanager/resource-manager/readme.md";
+
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
+
+    const showSpy = vi
+      .spyOn(git, "show")
+      .mockRejectedValue(new Error("path readme.md does not exist in 'HEAD'"));
+
+    await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
+
+    expect(showSpy).toBeCalledWith("HEAD", readmePath, expect.anything());
+  });
+
+  it("returns false if readme contains no input-files", async () => {
+    const readmePath =
+      "specification/contosowidgetmanager/resource-manager/readme.md";
+
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
+
+    const showSpy = vi.spyOn(git, "show").mockResolvedValue("");
+
+    await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
+
+    expect(showSpy).toBeCalledWith("HEAD", readmePath, expect.anything());
+  });
+
   it("returns false if swagger cannot be parsed as JSON", async () => {
     const swaggerPath =
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
@@ -121,7 +149,7 @@ describe("incrementalTypeSpec", () => {
     );
   });
 
-  it("throws if git show returns unknown error", async () => {
+  it("throws if git show for swagger returns unknown error", async () => {
     const swaggerPath =
       "specification/contosowidgetmanager2/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/contoso.json";
 
@@ -132,6 +160,19 @@ describe("incrementalTypeSpec", () => {
     await expect(incrementalTypeSpec({ core })).rejects.toThrowError();
 
     expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
+  });
+
+  it("throws if git show for readme returns unknown error", async () => {
+    const readmePath =
+      "specification/contosowidgetmanager/resource-manager/readme.md";
+
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
+
+    const showSpy = vi.spyOn(git, "show").mockRejectedValue("string error");
+
+    await expect(incrementalTypeSpec({ core })).rejects.toThrowError();
+
+    expect(showSpy).toBeCalledWith("HEAD", readmePath, expect.anything());
   });
 
   it("returns true if changed files are incremental changes to an existing TypeSpec RP swagger", async () => {
