@@ -118,7 +118,6 @@ interface BatchClient {
 // client name overrides
 @@clientName(BatchClient.deletePool, "deletePoolInternal", "java");
 @@clientName(BatchClient.poolExists, "poolExistsInternal", "java");
-@@clientName(BatchClient.getPool, "getPoolInternal", "java");
 @@clientName(BatchClient.updatePool, "updatePoolInternal", "java");
 @@clientName(BatchClient.enablePoolAutoScale,
   "enablePoolAutoScaleInternal",

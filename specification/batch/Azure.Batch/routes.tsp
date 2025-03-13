@@ -138,6 +138,25 @@ alias ListPoolNodeCountsParameters = {
   $filter?: string;
 };
 
+// Pool Parameter Aliases
+alias GetPoolRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+};
+
+alias GetPoolOptionalParameters = {
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
 // Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -223,18 +242,12 @@ interface Pools {
 
   @doc("Gets information about the specified Pool.")
   @route("/pools/{poolId}")
-  @clientName("getPoolInternal", "java")
-  getPool is ReadOperation<
-    BatchPoolHeaders & {
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+  getPool is ReadOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...GetPoolRequiredParameters;
+      ...GetPoolOptionalParameters;
     },
     BatchPool
   >;
