@@ -12,7 +12,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace Azure.AI.Unified;
+namespace Azure.AI.Projects;
 
 interface Datasets {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"

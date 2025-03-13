@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Azure.AI.Unified;
+namespace Azure.AI.Projects;
 
 @doc("Index resource Definition")
 @discriminator("indexType")
@@ -20,7 +20,7 @@ model Index {
   @doc("Type of index")
   indexType: IndexType;
 
-  ...AssetBase
+  ...AssetBase;
 }
 
 @doc("Paged collection of Index items.")

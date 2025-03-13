@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Azure.AI.Unified;
+namespace Azure.AI.Projects;
 
 @doc("The different Credential types")
 union CredentialType {

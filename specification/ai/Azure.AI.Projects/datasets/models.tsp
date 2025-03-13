@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Azure.AI.Unified;
+namespace Azure.AI.Projects;
 
 @doc("Enum to determine the type of data.")
 union DatasetType {
@@ -36,7 +36,7 @@ model DatasetVersion {
   @doc("Data type")
   datasetType: DatasetType;
 
-  ...AssetBase
+  ...AssetBase;
 }
 
 @doc("PagedDataVersionBase Definition")

@@ -9,7 +9,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
-namespace Azure.AI.Unified.Agents;
+namespace Azure.AI.Projects.Agents;
 
 /**
  * Gets a list of previously uploaded files.

@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace Azure.AI.Unified;
+namespace Azure.AI.Projects;
 
 alias DeploymentServiceTraits = SupportsClientRequestId &
   SupportsRepeatableRequests &
