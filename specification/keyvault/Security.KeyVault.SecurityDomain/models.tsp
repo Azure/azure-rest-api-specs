@@ -44,8 +44,7 @@ model SecurityDomainOperationStatus {
 }
 
 /**
- * The Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10)
- * containing a public key in JWK format.
+ * The Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10) containing a public key in JWK format.
  */
 model CertificateInfoObject {
   /**
@@ -73,9 +72,7 @@ model SecurityDomainJsonWebKey {
   kid: string;
 
   /**
-   * JsonWebKey Key Type (kty), as defined in
-   * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For
-   * Security Domain this value must be RSA.
+   * JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For Security Domain this value must be RSA.
    */
   kty: string;
 

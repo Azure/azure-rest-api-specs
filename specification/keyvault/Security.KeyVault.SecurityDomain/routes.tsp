@@ -2,10 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Security.KeyVault.Common/common.tsp";
 
+using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 
 namespace KeyVault;
 
@@ -15,17 +16,14 @@ interface HsmSecurityDomain {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
   @OpenAPI.operationId("HSMSecurityDomain_DownloadPending")
   @route("/securitydomain/download/pending")
   @get
-  downloadPending is Azure.Core.Foundations.Operation<
-    {},
-    SecurityDomainOperationStatus
-  >;
+  downloadPending is KeyVaultOperation<{}, SecurityDomainOperationStatus>;
 
   /**
-   * Retrieves the Security Domain from the managed HSM. Calling this endpoint can
-   * be used to activate a provisioned managed HSM resource.
+   * Retrieves the Security Domain from the managed HSM. Calling this endpoint can be used to activate a provisioned managed HSM resource.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
@@ -34,14 +32,14 @@ interface HsmSecurityDomain {
   @useFinalStateVia("azure-async-operation")
   @route("/securitydomain/download")
   @post
-  download is Azure.Core.Foundations.Operation<
+  download is KeyVaultOperation<
     {
       /**
-       * The Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10)
-       * containing a public key in JWK format.
+       * The Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10) containing a public key in JWK format.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
       @body
-      certificateInfoObject: CertificateInfoObject;
+      CertificateInfoObject: CertificateInfoObject;
     },
     {
       @statusCode _: 202;
@@ -54,8 +52,7 @@ interface HsmSecurityDomain {
       azureAsyncOperation?: string;
 
       /**
-       * The recommended number of seconds to wait before calling the URI specified in
-       * Azure-AsyncOperation.
+       * The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.
        */
       @header("Retry-After") retryAfter?: int32;
 
@@ -71,10 +68,11 @@ interface HsmSecurityDomain {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
   @OpenAPI.operationId("HSMSecurityDomain_TransferKey")
   @route("/securitydomain/upload")
   @get
-  transferKey is Azure.Core.Foundations.Operation<{}, TransferKey>;
+  transferKey is KeyVaultOperation<{}, TransferKey>;
 
   /**
    * Restore the provided Security Domain.
@@ -87,13 +85,14 @@ interface HsmSecurityDomain {
   @useFinalStateVia("azure-async-operation")
   @route("/securitydomain/upload")
   @post
-  upload is Azure.Core.Foundations.Operation<
+  upload is KeyVaultOperation<
     {
       /**
        * The Security Domain to be restored.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
       @body
-      securityDomain: SecurityDomainObject;
+      security_domain: SecurityDomainObject;
     },
     {
       /**
@@ -109,8 +108,7 @@ interface HsmSecurityDomain {
       azureAsyncOperation?: string;
 
       /**
-       * The recommended number of seconds to wait before calling the URI specified in
-       * Azure-AsyncOperation.
+       * The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.
        */
       @header("Retry-After") retryAfter?: int32;
 
@@ -131,11 +129,9 @@ interface HsmSecurityDomain {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "@operationId necessary to preserve original operationId"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
   @OpenAPI.operationId("HSMSecurityDomain_UploadPending")
   @route("/securitydomain/upload/pending")
   @get
-  uploadPending is Azure.Core.Foundations.Operation<
-    {},
-    SecurityDomainOperationStatus
-  >;
+  uploadPending is KeyVaultOperation<{}, SecurityDomainOperationStatus>;
 }
