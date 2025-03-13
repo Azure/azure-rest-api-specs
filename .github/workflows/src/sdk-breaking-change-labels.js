@@ -11,7 +11,7 @@ const wfName = 'sdk-breaking-change-labels';
  */
 export async function getLabelAndAction({ github, context, core }) {
   let issue_number = NaN;
-  let check_run_id = process.env.CHECK_RUN_ID || context.payload.check_run?.id;  
+  let check_run_id = process.env.CHECK_RUN_ID;
   let labelAction;
   let labelName = "";
   let checkRun = context.payload.check_run;
@@ -50,9 +50,7 @@ export async function getLabelAndAction({ github, context, core }) {
       const apiUrl = `${match[1]}/_apis/build/builds/${match[2]}/artifacts/${artifactName}?api-version=7.0`;
       // Call Azure DevOps REST API to list artifacts
       try {
-        // API URL to list artifacts
-        const apiUrl = `https://dev.azure.com/${organization}/${project}/_apis/build/builds/${buildId}/artifacts?api-version=7.0`;
-        core.info(`Calling Azure DevOps API to get the artifacts:${apiUrl}`);
+        core.info(`Calling Azure DevOps API to get the artifacts: ${apiUrl}`);
         
         // Use Node.js fetch to call the API
         const response = await fetch(apiUrl, {
