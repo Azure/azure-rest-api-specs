@@ -86,11 +86,11 @@ suppressions:
     reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
   - code: RequiredPropertiesMissingInResourceModel
     from: TuningOptions.json
-    where: $.definitions.SessionDetailsResource
+    where: $.definitions.SessionsListResult
     reason: Suppression for this PR. The existing API contract is like this and not be able to changed.
   - code: RequiredPropertiesMissingInResourceModel
     from: TuningOptions.json
-    where: $.definitions.SessionResource
+    where: $.definitions.SessionDetailsListResult
     reason: Suppression for this PR. The existing API contract is like this and not be able to changed.
 ```
 
@@ -202,181 +202,6 @@ suppressions:
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
 ```
 
-### Tag: package-flexibleserver-2024-03-preview
-
-These settings apply only when `--tag=package-flexibleserver-2024-03-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2024-03-01-preview'
-input-file:
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/Administrators.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/Backups.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/Capabilities.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/CheckNameAvailability.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/Configuration.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/Databases.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/FlexibleServers.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/LongTermRetentionOperation.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/Migrations.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/Operations.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/PrivateEndpointConnections.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/PrivateLinkResources.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/QuotaUsages.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/Replicas.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/ServerLogs.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/ServerStartStopRestart.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/ThreatProtection.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/VirtualEndpoints.json
-  - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/VirtualNetwork.json
-suppressions:
-  - code: PutResponseCodes
-    from: PrivateEndpointConnections.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ThreatProtection.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: PutResponseCodes
-    from: ThreatProtection.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: VirtualEndpoints.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPatch
-    from: VirtualEndpoints.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: PutResponseCodes
-    from: VirtualEndpoints.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: PutResponseCodes
-    from: Backups.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: Backups.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-```
-
-
-### Tag: package-preview-2023-12
-
-These settings apply only when `--tag=package-flexibleserver-2023-12-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2023-12-01-preview'
-input-file:
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/Administrators.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/Backups.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/Capabilities.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/CheckNameAvailability.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/Configuration.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/Databases.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/FlexibleServers.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/LongTermRetentionOperation.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/Migrations.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/Operations.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/PrivateEndpointConnections.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/PrivateLinkResources.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/QuotaUsages.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/Replicas.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/ServerLogs.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/ServerStartStopRestart.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/ThreatProtection.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/VirtualEndpoints.json
-  - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/VirtualNetwork.json
-suppressions:
-  - code: PutResponseCodes
-    from: PrivateEndpointConnections.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ThreatProtection.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: PutResponseCodes
-    from: ThreatProtection.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: VirtualEndpoints.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPatch
-    from: VirtualEndpoints.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: PutResponseCodes
-    from: VirtualEndpoints.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-```
-
-### Tag: package-preview-2023-06
-
-These settings apply only when `--tag=package-flexibleserver-2023-06-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2023-06-01-preview'
-input-file:
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Administrators.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Backups.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Capabilities.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/CheckNameAvailability.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Configuration.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Databases.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/FlexibleServers.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/LongTermRetentionOperation.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Migrations.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Operations.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/PrivateEndpointConnections.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/PrivateLinkResources.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/QuotaUsages.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Replicas.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/ServerLogs.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/ServerStartStopRestart.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/ThreatProtection.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/VirtualEndpoints.json
-  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/VirtualNetwork.json
-suppressions:
-  - code: PutResponseCodes
-    from: PrivateEndpointConnections.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ThreatProtection.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: PutResponseCodes
-    from: ThreatProtection.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: VirtualEndpoints.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPatch
-    from: VirtualEndpoints.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: PutResponseCodes
-    from: VirtualEndpoints.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-```
-
-### Tag: package-flexibleserver-2023-03-01-preview
-
-These settings apply only when `--tag=package-flexibleserver-2023-03-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2023-03-01-preview'
-input-file:
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Administrators.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Backups.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Capabilities.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/CheckNameAvailability.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Configuration.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Databases.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/FlexibleServers.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Migrations.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Operations.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Replicas.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/ServerLogs.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/ServerStartStopRestart.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/VirtualNetwork.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/LongTermRetentionOperation.json
-```
-
 ### Tag: package-flexibleserver-2022-12-01
 
 These settings apply only when `--tag=package-flexibleserver-2022-12-01` is specified on the command line.
@@ -398,70 +223,6 @@ input-file:
   - Microsoft.DBforPostgreSQL/stable/2022-12-01/VirtualNetwork.json
 ```
 
-### Tag: package-flexibleserver-2022-05-01-preview-only
-
-These settings apply only when `--tag=package-flexibleserver-2022-05-01-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2022-05-01-preview-only'
-input-file:
-  - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Migrations.json
-  - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Operations.json
-```
-
-### Tag: package-flexibleserver-2022-03-preview
-
-These settings apply only when `--tag=package-flexibleserver-2022-03-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2022-03-preview'
-input-file:
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Administrators.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Backups.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Capabilities.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/CheckNameAvailability.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Configuration.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Databases.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/FlexibleServers.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Operations.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Replicas.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/VirtualNetwork.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/ServerStartStopRestart.json
-```
-
-### Tag: package-flexibleserver-2022-03-privatepreview
-
-These settings apply only when `--tag=package-flexibleserver-2022-03-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2022-03-privatepreview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2022-03-08-privatepreview/getCachedServerName.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
-```
-
-### Tag: package-flexibleserver-2022-01-preview
-
-These settings apply only when `--tag=package-flexibleserver-2022-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2022-01-preview'
-input-file:
-  - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
-  - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
-```
-
-### Tag: package-2021-06-15-privatepreview
-
-These settings apply only when `--tag=package-2021-06-15-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-06-15-privatepreview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Migrations.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
-```
-
 ### Tag: package-flexibleserver-2021-06
 
 These settings apply only when `--tag=package-flexibleserver-2021-06` is specified on the command line.
@@ -471,78 +232,6 @@ input-file:
 - Microsoft.DBforPostgreSQL/stable/2021-06-01/postgresql.json
 - Microsoft.DBforPostgreSQL/stable/2021-06-01/Databases.json
 - Microsoft.DBforPostgreSQL/stable/2021-06-01/PrivateDnsZone.json
-```
-
-### Tag: package-flexibleserver-2021-06-preview
-
-These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is specified on the command line.cd ..
-
-``` yaml $(tag) == 'package-flexibleserver-2021-06-preview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
-```
-
-### Tag: package-2021-04-10-privatepreview
-
-These settings apply only when `--tag=package-2021-04-10-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-04-10-privatepreview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
-- Microsoft.DBforPostgreSQL/preview/2021-04-10-privatepreview/postgresql.json
-```
-
-### Tag: package-2021-03-31-privatepreview
-
-These settings apply only when `--tag=package-2021-03-31-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-03-31-privatepreview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
-```
-
-### Tag: package-2020-11-05-preview
-
-These settings apply only when `--tag=package-2020-11-05-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-11-05-preview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
-```
-
-### Tag: package-2020-02-14-preview
-
-These settings apply only when `--tag=package-2020-02-14-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-02-14-preview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
-```
-
-### Tag: package-2020-02-14-privatepreview
-
-These settings apply only when `--tag=package-2020-02-14-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-02-14-privatepreview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
-```
-
-### Tag: package-2020-01-01-privatepreview
-
-These settings apply only when `--tag=package-2020-01-01-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-01-01-privatepreview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 ```
 
 ### Tag: package-2020-01-01
@@ -558,16 +247,6 @@ input-file:
 - Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
 ```
 
-### Tag: package-2018-06-01-privatepreview
-
-These settings apply only when `--tag=package-2018-06-01-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-06-01-privatepreview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
-- Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
-```
-
 ### Tag: package-2018-06-01
 
 These settings apply only when `--tag=package-2018-06-01` is specified on the command line.
@@ -581,15 +260,6 @@ input-file:
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PerformanceRecommendations.json
 
-```
-
-### Tag: package-2017-12-01-preview
-
-These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-12-01-preview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
 ```
 
 ### Tag: package-2017-12-01
