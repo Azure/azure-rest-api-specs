@@ -39,16 +39,22 @@ interface MySQLServers {
   /**
    * Gets the MySQLServers resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  @operationId("MySQLServers_Get")
   get is ArmResourceRead<MySQLServer>;
 
   /**
    * Puts the MySQLServers resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  @operationId("MySQLServers_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<MySQLServer>;
 
   /**
    * Patch the MySQLServers resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  @operationId("MySQLServers_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     MySQLServer,
@@ -58,11 +64,15 @@ interface MySQLServers {
   /**
    * Deletes the MySQLServers resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  @operationId("MySQLServers_Delete")
   delete is ArmResourceDeleteSync<MySQLServer>;
 
   /**
    * Lists the MySQLServers resource in MySQLSites.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  @operationId("MySQLServers_ListBySite")
   listBySite is ArmResourceListByParent<
     MySQLServer,
     Response = ArmResponse<MySQLServerList>

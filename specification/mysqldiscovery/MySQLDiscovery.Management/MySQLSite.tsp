@@ -36,16 +36,22 @@ interface MySQLSites {
   /**
    * Gets the MySQLSites resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  @operationId("MySQLSites_Get")
   get is ArmResourceRead<MySQLSite>;
 
   /**
    * Puts the MySQLSites resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  @operationId("MySQLSites_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MySQLSite>;
 
   /**
    * Patch the MySQLSites resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  @operationId("MySQLSites_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     MySQLSite,
@@ -55,11 +61,15 @@ interface MySQLSites {
   /**
    * Deletes the MySQLSites resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  @operationId("MySQLSites_Delete")
   delete is ArmResourceDeleteSync<MySQLSite>;
 
   /**
    * Lits the MySQLSites resource in a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  @operationId("MySQLSites_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     MySQLSite,
     Response = ArmResponse<MySQLSiteList>
@@ -68,6 +78,8 @@ interface MySQLSites {
   /**
    * Lists the MySQLSites resource in a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  @operationId("MySQLSites_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     MySQLSite,
     Response = ArmResponse<MySQLSiteList>
@@ -77,6 +89,8 @@ interface MySQLSites {
    * Trigger Refresh Refresh action
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
+  @operationId("MySQLSites_TriggerRefresh")
   @action("refresh")
   triggerRefresh is ArmResourceActionAsync<MySQLSite, void, void>;
 }
