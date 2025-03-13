@@ -325,3 +325,41 @@ describe("extractInputs", () => {
     ).rejects.toThrow();
   });
 });
+
+it("workflow_run:completed:check_run", async () => {
+  const github = createMockGithub();
+  github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+    data: { artifacts: [] },
+  });
+
+  const context = {
+    eventName: "workflow_run",
+    payload: {
+      action: "completed",
+      workflow_run: {
+        event: "check_run",
+        head_sha: "abc123",
+        id: 456,
+        repository: {
+          name: "TestRepoName",
+          owner: {
+            login: "TestRepoOwnerLogin",
+          },
+        },
+      },
+    },
+  };
+
+  github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+    data: { artifacts: [] },
+  });
+  await expect(
+    extractInputs(github, context, createMockCore()),
+  ).resolves.toEqual({
+    owner: "TestRepoOwnerLogin",
+    repo: "TestRepoName",
+    head_sha: "abc123",
+    issue_number: NaN,
+    run_id: 456,
+  });
+});
