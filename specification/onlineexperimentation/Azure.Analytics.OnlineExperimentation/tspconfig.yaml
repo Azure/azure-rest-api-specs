@@ -22,32 +22,34 @@ options:
     emitter-output-dir: "{project-root}/../"
     output-file: "{output-folder-base}/data-plane/OpenApi3/Microsoft.OnlineExperimentation/preview/{version}/onlineexperimentation.json"
   "@azure-tools/typespec-go":
+    package-dir: "azonlineexperimentation"
+    service-dir: "sdk/onlineexperimentation"
     generate-fakes: true
     inject-spans: true
-    service-dir: "sdk/onlineexperimentation"
-    package-dir: "azonlineexperimentation"
   "@azure-tools/typespec-python":
+    package-dir: "onlineexperimentation"
+    package-name: "azure-analytics-onlineexperimentation"
     generate-test: true
     generate-sample: true
-    package-dir: "azure-analytics-onlineexperimentation"
-    package-name: "{package-dir}"
     package-mode: dataplane
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Analytics.OnlineExperimentation"
-    namespace: "{package-dir}"
+    package-dir: "onlineexperimentation"
+    namespace: "Azure.Analytics.OnlineExperimentation"
+    generate-convenience-methods: true
+    generate-protocol-methods: true
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "azure-analytics-onlineexperimentation-rest"
-    generateMetadata: true
-    generateTest: true
-    flavor: azure
+    package-dir: "onlineexperimentation"
     packageDetails:
       name: "@azure-rest/azure-analytics-onlineexperimentation-rest"
       description: "Azure.Analytics.OnlineExperimentation Service"
+    generateMetadata: true
+    generateTest: true
+    flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-analytics-onlineexperimentation"
+    package-dir: "onlineexperimentation"
     namespace: com.azure.analytics.onlineexperimentation
     flavor: azure
