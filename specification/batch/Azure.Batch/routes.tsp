@@ -163,6 +163,16 @@ alias DeletePoolRequiredParameters = {
   poolId: string;
 };
 
+alias UpdatePoolRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+
+  @doc("The pool properties to update.")
+  @bodyRoot
+  pool: BatchPoolUpdateContent;
+};
+
 // Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -271,12 +281,11 @@ interface Pools {
     a StartTask element, then the Pool keeps the existing StartTask.
     """)
   @route("/pools/{poolId}")
-  @clientName("updatePoolInternal", "java")
-  updatePool is UpdateOperation<
-    BatchPoolHeaders & {
-      @doc("The pool properties to update.")
-      @bodyRoot
-      pool: BatchPoolUpdateContent;
+  updatePool is UpdateOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...UpdatePoolRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;
