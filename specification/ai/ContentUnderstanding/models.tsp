@@ -14,7 +14,7 @@ namespace ContentUnderstanding;
 model ContentAnalyzer {
   @doc("The unique identifier of the analyzer.")
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9._-]{1,64}$")
   analyzerId: string;
 
@@ -25,35 +25,35 @@ model ContentAnalyzer {
   tags?: Record<string>;
 
   @doc("The status of the analyzer.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status: ResourceStatus;
 
   @doc("The date and time when the analyzer was created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdAt: utcDateTime;
 
   @doc("The date and time when the analyzer was last modified.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedAt: utcDateTime;
 
   @doc("The scenario for which the analyzer is optimized.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   scenario?: string;
 
   @doc("Analyzer configuration settings.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   config?: ContentAnalyzerConfig;
 
   @doc("The schema of fields to extracted.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   fieldSchema?: FieldSchema;
 
   @doc("The data source containing training data for the analyzer.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   trainingData?: DataSource;
 
   @doc("Warnings encountered while creating the analyzer.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   warnings?: Azure.Core.Foundations.Error[];
 }
 
@@ -77,19 +77,19 @@ union ResourceStatus {
 @doc("Schema of fields to be extracted from documents.")
 model FieldSchema {
   @doc("The name of the field schema.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name?: string;
 
   @doc("A description of the field schema.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   description?: string;
 
   @doc("The fields defined in the schema.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   fields: Record<FieldDefinition>;
 
   @doc("Additional definitions referenced by the fields in the schema.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   definitions?: Record<FieldDefinition>;
 }
 

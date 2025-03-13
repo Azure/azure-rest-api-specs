@@ -23,9 +23,7 @@ using Azure.Core;
     }
   ]>
 )
-@service({
-  title: "Content Understanding",
-})
+@service(#{ title: "Content Understanding" })
 @server(
   "{endpoint}/contentunderstanding",
   "The Content Understanding service extracts content and fields from multimodal input.",
