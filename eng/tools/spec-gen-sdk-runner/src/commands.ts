@@ -416,10 +416,7 @@ function logIssuesToPipeline(
       `Errors occurred while generating SDK from ${specConfigDisplayText}`,
       LogLevel.Group,
     );
-    const logIssuesList = logIssues.flatMap((entry) => [
-      `Get log issues from script ${entry.command} `,
-      ...entry.logIssues,
-    ]);
+    const logIssuesList = logIssues.flatMap((entry) => [entry.command, ...entry.logIssues]);
     vsoLogIssue(logIssuesList.join("%0D%0A"));
     logMessage("ending group logging", LogLevel.EndGroup);
   }

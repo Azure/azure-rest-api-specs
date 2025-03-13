@@ -49,10 +49,10 @@ export async function getLabelAndAction({ github, context, core }) {
     if (match) {
       const apiUrl = `${match[1]}/_apis/build/builds/${match[2]}/artifacts/${artifactName}?api-version=7.0`;
       // Call Azure DevOps REST API to list artifacts
-      try {          
+      try {
         // API URL to list artifacts
-        const apiUrl = `https://dev.azure.com/${organization}/${project}/_apis/build/builds/${buildId}/artifacts?api-version=7.0`;              
-        core.info('Calling Azure DevOps API to list artifacts...');
+        const apiUrl = `https://dev.azure.com/${organization}/${project}/_apis/build/builds/${buildId}/artifacts?api-version=7.0`;
+        core.info(`Calling Azure DevOps API to get the artifacts:${apiUrl}`);
         
         // Use Node.js fetch to call the API
         const response = await fetch(apiUrl, {
@@ -61,7 +61,7 @@ export async function getLabelAndAction({ github, context, core }) {
             'Content-Type': 'application/json'
           }
         });
-        
+
         if (response.ok) {
           const artifacts = await response.json();
           core.info(`Artifacts found: ${stringify(artifacts)}`);
@@ -122,7 +122,7 @@ export async function getLabelAndAction({ github, context, core }) {
     labelAction = LabelAction.None;
   }  
   
-  return { labelName, labelAction, issueNumber: issue_number };  
+  return { labelName, labelAction, issueNumber: issue_number };
 }
 
 /**
