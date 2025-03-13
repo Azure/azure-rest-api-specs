@@ -30,7 +30,31 @@
                 "name": "stage1",
                 "groups": [
                   {
-                    "name": "group-a"
+                    "name": "group-a",
+                    "beforeGates": [
+                      {
+                        "displayName": "gate before group-a",
+                        "type": "Approval"
+                      }
+                    ],
+                    "afterGates": [
+                      {
+                        "displayName": "gate after group-a",
+                        "type": "Approval"
+                      }
+                    ]
+                  }
+                ],
+                "beforeGates": [
+                  {
+                    "displayName": "gate before stage1",
+                    "type": "Approval"
+                  }
+                ],
+                "afterGates": [
+                  {
+                    "displayName": "gate after stage1",
+                    "type": "Approval"
                   }
                 ],
                 "afterStageWaitInSeconds": 3600
@@ -48,12 +72,12 @@
           },
           "status": {
             "status": {
-              "state": "NotStarted"
+              "state": "Pending"
             },
             "stages": [
               {
                 "status": {
-                  "state": "NotStarted"
+                  "state": "Pending"
                 },
                 "name": "stage1",
                 "groups": [
@@ -70,7 +94,40 @@
                         "name": "member-one",
                         "clusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myClusters/providers/Microsoft.ContainerService/managedClusters/myCluster"
                       }
+                    ],
+                    "beforeGates": [
+                      {
+                        "displayName": "gate before group-a",
+                        "status": {
+                          "state": "NotStarted"
+                        }
+                      }
+                    ],
+                    "afterGates": [
+                      {
+                        "displayName": "gate after group-a",
+                        "status": {
+                          "state": "NotStarted"
+                        }
+                      }
                     ]
+                  }
+                ],
+                "beforeGates": [
+                  {
+                    "displayName": "gate before stage1",
+                    "gateId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/gates/12345678-910a-bcde-f000-000000000000",
+                    "status": {
+                      "state": "Pending"
+                    }
+                  }
+                ],
+                "afterGates": [
+                  {
+                    "displayName": "gate after stage1",
+                    "status": {
+                      "state": "NotStarted"
+                    }
                   }
                 ],
                 "afterStageWaitStatus": {
