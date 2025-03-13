@@ -77,7 +77,7 @@ interface FileOperations {
   @action("delete")
   delete is Operations.ResourceCollectionAction<
     FileResource,
-    File,
+    FileModel,
     NoContentResponse
   >;
 
@@ -87,7 +87,7 @@ interface FileOperations {
   @action("download")
   download is Operations.ResourceCollectionAction<
     FileResource,
-    File,
+    FileModel,
     FileDownloadResponse,
     RequestHeadersTrait<{
       /**
@@ -102,7 +102,7 @@ interface FileOperations {
    * Uploads a file.
    */
   @action("upload")
-  upload is Operations.ResourceCollectionAction<FileResource, {}, File>;
+  upload is Operations.ResourceCollectionAction<FileResource, {}, FileModel>;
 }
 
 @tag("Items")
