@@ -268,6 +268,9 @@ model CloudCapacity {
 
   /** VMCount gives the max number of VMs that can be deployed in the cloud. */
   @visibility(Lifecycle.Read) vmCount?: int64;
+
+  /** StorageGB gives the storage in GB present in the cloud. */
+  @visibility(Lifecycle.Read) storageGB?: int64;
 }
 
 /** The StorageQoSPolicy definition. */
@@ -621,6 +624,9 @@ model AvailabilitySetListItem {
 
 /** Defines the resource properties. */
 model OsProfileForVmInstance {
+  /** Gets or sets the admin username. */
+  adminUsername?: string;
+
   /** Admin password of the virtual machine. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
@@ -955,6 +961,10 @@ model VirtualMachineInventoryItem extends InventoryItemProperties {
   /** Gets os version. */
   @visibility(Lifecycle.Read)
   osVersion?: string;
+
+  /** Gets vm generation. */
+  @visibility(Lifecycle.Read)
+  generation?: int64;
 
   /** Gets the power state of the virtual machine. */
   @visibility(Lifecycle.Read)
