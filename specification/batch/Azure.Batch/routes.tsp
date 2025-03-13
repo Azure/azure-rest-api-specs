@@ -209,6 +209,16 @@ alias StopPoolResizeRequiredParameters = {
   poolId: string;
 };
 
+alias ReplacePoolPropertiesRequiredParameters = {
+  @doc("The ID of the Pool to update.")
+  @path
+  poolId: string;
+
+  @doc("The options to use for replacing properties on the pool.")
+  @bodyRoot
+  pool: BatchPoolReplaceContent;
+};
+
 // Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -418,16 +428,10 @@ interface Pools {
     with this request, then the Batch service will remove the existing StartTask.
     """)
   @route("/pools/{poolId}/updateproperties")
-  @clientName("replacePoolPropertiesInternal", "java")
-  replacePoolProperties is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool to update.")
-      @path
-      poolId: string;
-
-      @doc("The options to use for replacing properties on the pool.")
-      @bodyRoot
-      pool: BatchPoolReplaceContent;
+  replacePoolProperties is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...ReplacePoolPropertiesRequiredParameters;
     },
     NoContentSuccessResponseHeaders
   >;
