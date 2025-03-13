@@ -79,6 +79,13 @@ model TranslateParameters {
 
   @query
   @doc("""
+    Specifies the type of model which the input text will be submitted to for translation.
+	Possible values are: DNN (default), GPT4, GPT4Mini
+    """)
+  modelType?: string;
+
+  @query
+  @doc("""
     Specifies a fallback language if the language of the input text can't be identified. 
     Language autodetection is applied when the from parameter is omitted. If detection fails, 
     the suggestedFrom language will be assumed.
@@ -109,6 +116,12 @@ model TranslateParameters {
     specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.
     """)
   allowFallback?: boolean = true;
+
+  @query
+  @doc("""
+    Specifies the input string designed to be submitted to a GPT model for translation
+    """)
+  translateQuery?: boolean = false;
 }
 
 @doc("Response for the translation API.")
