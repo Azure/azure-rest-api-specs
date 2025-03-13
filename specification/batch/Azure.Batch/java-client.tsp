@@ -266,6 +266,29 @@ op evaluatePoolAutoScaleCustomization is Azure.Batch.PostOperationNew<
   "java"
 );
 
+// Resize Pool Operation
+@doc("Optional parameters for Resize Pool operation.")
+model ResizeBatchPoolOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Resize Pool operation.")
+@route("/pools/{poolId}/resize")
+op resizePoolCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.ResizePoolRequiredParameters;
+
+    @doc("Optional parameters for Resize Pool operation.")
+    options?: ResizeBatchPoolOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.AcceptedProcessingResponseHeaders
+>;
+
+@@override(Azure.Batch.Pools.resizePool, resizePoolCustomization, "java");
+
 // List Supported Images Operation
 @doc("Optional parameters for List Supported Images operation.")
 model ListSupportedBatchImagesOptions {
