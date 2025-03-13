@@ -3,19 +3,14 @@
     "searchServiceName": "mysearchservice",
     "resourceGroupName": "rg1",
     "api-version": "2025-05-01",
-    "subscriptionId": "subid",
-    "service": {
-      "tags": {
-        "app-name": "My e-commerce app",
-        "new-tag": "Adding a new tag"
-      },
-      "properties": {
-        "replicaCount": 2,
-        "semanticSearch": "standard"
-      }
-    }
+    "subscriptionId": "subid"
   },
   "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/locations/westus/operationResults/11111111-1111-1111-1111-111111111111?api-version=2025-05-01"
+      }
+    },
     "200": {
       "body": {
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
@@ -30,16 +25,17 @@
           "name": "standard"
         },
         "properties": {
-          "replicaCount": 2,
+          "replicaCount": 1,
           "partitionCount": 1,
-          "status": "provisioning",
+          "status": "running",
           "statusDetails": "",
           "hostingMode": "default",
           "computeType": "default",
-          "provisioningState": "provisioning",
+          "provisioningState": "Succeeded",
           "publicNetworkAccess": "enabled",
           "networkRuleSet": {
-            "ipRules": []
+            "ipRules": [],
+            "bypass": "None"
           },
           "privateEndpointConnections": [],
           "sharedPrivateLinkResources": [],
@@ -51,8 +47,9 @@
           "authOptions": {
             "apiKeyOnly": {}
           },
-          "semanticSearch": "standard",
-          "upgradeAvailable": true
+          "disabledDataExfiltrationOptions": [],
+          "upgradeAvailable": false,
+          "serviceUpgradeDate": "2025-05-01T00:00:00Z"
         },
         "systemData": {
           "createdBy": "My e-commerce app",
