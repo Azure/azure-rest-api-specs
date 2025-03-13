@@ -5206,6 +5206,14 @@
         "recoveryPointProperties": {
           "description": "Properties of Recovery Point",
           "$ref": "#/definitions/RecoveryPointProperties"
+        },
+        "recoveryPointTierDetails": {
+          "description": "Recovery point tier information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformation"
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "AzureFileShareRecoveryPoint"
