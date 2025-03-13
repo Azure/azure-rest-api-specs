@@ -133,6 +133,19 @@ op UpdateOperation<TResource, TResponse> is RpcOperation<
   BatchError
 >;
 
+// TODO: Once we migrate all UpdateOperation methods in routes.tsp to use this, delete original UpdateOperation (above) and rename this to UpdateOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@patch
+op UpdateOperationNew<
+  TResource extends TypeSpec.Reflection.Model,
+  TResponse
+> is RpcOperation<
+  TResource,
+  TResponse & BatchResponseHeaders,
+  NoFilter,
+  BatchError
+>;
+
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @put
 op ReplaceOperation<TResource, TResponse> is RpcOperation<
