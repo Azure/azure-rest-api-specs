@@ -629,7 +629,7 @@ model AvailabilitySetListItem {
 model OsProfileForVmInstance {
   /** Gets or sets the admin username. */
   adminUsername?: string;
-  
+
   /** Admin password of the virtual machine. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
