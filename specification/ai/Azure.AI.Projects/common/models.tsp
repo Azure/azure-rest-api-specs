@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Azure.AI.Unified;
+namespace Azure.AI.Projects;
 
 @doc("The possible values for roles attributed to messages in a thread.")
 union MessageRole {

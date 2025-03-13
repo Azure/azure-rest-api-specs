@@ -4,7 +4,7 @@ import "@typespec/versioning";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Unified.Agents;
+namespace Azure.AI.Projects.Agents;
 
 //
 // Tool inputs -- definitions used before model evaluation to configure agents, threads, and messages

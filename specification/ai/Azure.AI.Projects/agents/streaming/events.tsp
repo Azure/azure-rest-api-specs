@@ -2,7 +2,7 @@ import "@typespec/versioning";
 
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Unified.Agents;
+namespace Azure.AI.Projects.Agents;
 
 @doc("""
   Each event in a server-sent events stream has an `event` and `data` property:
