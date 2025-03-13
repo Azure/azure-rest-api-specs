@@ -122,6 +122,30 @@ op listPoolsCustomization is Azure.Batch.ListOperationNew<
 
 @@override(Azure.Batch.Pools.listPools, listPoolsCustomization, "java");
 
+// Get Pool Operation
+@doc("Optional parameters for Get Pool operation.")
+model GetBatchPoolOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.GetPoolOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Get Pool operation.")
+@route("/pools/{poolId}")
+op getPoolCustomization is Azure.Batch.ReadOperationNew<
+  {
+    ...Azure.Batch.GetPoolRequiredParameters;
+
+    @doc("Optional parameters for Get Pool operation.")
+    options?: GetBatchPoolOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.BatchPool
+>;
+
+@@override(Azure.Batch.Pools.getPool, getPoolCustomization, "java");
+
 // Disable Pool Autoscale Operation
 @doc("Optional parameters for Disable Pool AutoScale operation.")
 model DisableBatchPoolAutoScaleOptions {
