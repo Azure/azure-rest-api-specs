@@ -76,8 +76,8 @@ enum AuthenticationType {
   @doc("Shared Access Signature (SAS) authentication")
   SAS: "SAS",
 
-  @doc("Custom Keys authentication")
-  customKeys: "CustomKeys",
+  @doc("Custom authentication")
+  custom: "CustomKeys",
 
   @doc("No authentication")
   None: "None",
@@ -101,10 +101,10 @@ model InternalConnectionPropertiesAADAuth extends InternalConnectionProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("Connection properties for connections with Custom Keys authentication")
-model InternalConnectionPropertiesCustomKeysAuth extends InternalConnectionProperties {
+@doc("Connection properties for connections with Custom authentication")
+model InternalConnectionPropertiesCustomAuth extends InternalConnectionProperties {
   @doc("Authentication type of the connection target")
-  authType: AuthenticationType.customKeys;
+  authType: AuthenticationType.custom;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -159,8 +159,8 @@ enum ConnectionType {
   @doc("Generic connection that uses API Key authentication")
   APIKey: "ApiKey",
 
-  @doc("Generic connection that uses Custom Keys authentication")
-  CustomKeys: "CustomKeys",
+  @doc("Generic connection that uses Custom authentication")
+  custom: "CustomKeys",
 }
 
 /*
