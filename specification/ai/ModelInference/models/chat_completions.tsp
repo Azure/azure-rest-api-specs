@@ -4,6 +4,7 @@ import "@typespec/http";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 using Azure.ClientGenerator.Core;
 
@@ -233,6 +234,10 @@ model CompletionsUsage {
 model CompletionsUsageDetails {
   @doc("The number of tokens corresponding to audio input.")
   audio_tokens: int32;
+
+  @doc("The number of tokens corresponding to reasoning.")
+  @added(ModelInference.Versions.v2025_04_01)
+  reasoning_tokens: int32;
 
   @doc("The total number of tokens processed for the completions request and response.")
   total_tokens: int32;
@@ -468,9 +473,12 @@ model StreamingChatResponseMessageUpdate {
   @doc("The chat role associated with the message. If present, should always be 'assistant'")
   role?: ChatRole;
 
-  //#suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
   content?: string;
+
+  @doc("The reasoning content the model used for generating the response")
+  @added(ModelInference.Versions.v2025_04_01)
+  reasoning_content?: string;
 
   @encodedName("application/json", "tool_calls")
   @doc("""
@@ -487,7 +495,12 @@ model ChatResponseMessage {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
-  content: string | null;
+  content?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
+  @doc("The reasoning content the model used for generating the response")
+  @added(ModelInference.Versions.v2025_04_01)
+  reasoning_content?: string;
 
   @encodedName("application/json", "tool_calls")
   @doc("""

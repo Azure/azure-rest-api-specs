@@ -3,6 +3,7 @@ import "@typespec/http";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace ModelInference;
 
@@ -14,7 +15,7 @@ model ModelInfo {
   @doc("The type of the AI model. A Unique identifier for the profile.")
   model_type: ModelType;
 
-  @doc("The model provider name. For example: `Microsoft Research`")
+  @doc("The model provider name. For example: `Microsoft`")
   model_provider_name: string;
 }
 

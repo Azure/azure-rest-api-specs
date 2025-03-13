@@ -13,6 +13,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+@versioned(ModelInference.Versions)
 namespace ModelInference;
 
 @doc("""
@@ -74,7 +75,14 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
   This method will only work when using Serverless API or Managed Compute endpoint.
   It will not work for GitHub Models endpoint or Azure OpenAI endpoint.
   """)
-@actionSeparator("/")
-@route("info")
 @get
-op getModelInfo is Azure.Core.RpcOperation<{}, ModelInfo>;
+@added(ModelInference.Versions.v2025_04_01)
+@actionSeparator("/")
+@route("/deployments/{model_deployment}/info")
+op getModelInfo is Azure.Core.RpcOperation<
+  {
+    @doc("The deployment ID of the model.")
+    model_deployment: string;
+  },
+  ModelInfo
+>;
