@@ -87,5 +87,5 @@ using Microsoft.IoTOperations;
 @@clientName(Traces, "BrokerDiagnosticTraces", "csharp");
 
 // JS Configuration
-@@clientName(Versions.v2024_11_01, "V20241101", "javascript");
-@@clientName(Versions.v2025_04_01, "V20250401", "javascript");
+@@clientName(Versions.v2024_11_01, "V2024-11-01", "javascript");
+@@clientName(Versions.v2025_04_01, "V2025-04-01", "javascript");
