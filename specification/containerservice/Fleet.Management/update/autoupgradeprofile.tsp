@@ -160,3 +160,27 @@ union AutoUpgradeLastTriggerStatus {
   @doc("The last AutoUpgrade trigger failed.")
   Failed: "Failed",
 }
+
+@added(Versions.v2025_03_01)
+@armResourceOperations
+interface AutoUpgradeProfileOperations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
+  @useFinalStateVia("azure-async-operation")
+  generateUpdateRun is Azure.ResourceManager.ArmResourceActionAsync<
+    AutoUpgradeProfile,
+    void,
+    GenerateResponse,
+    BaseParameters<AutoUpgradeProfile>,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      IfMatchParameters<AutoUpgradeProfile>
+  >;
+}
+
+@added(Versions.v2025_03_01)
+@doc("GenerateResponse is the response of a generate request.")
+model GenerateResponse {
+  @visibility("read")
+  @doc("The ARM resource id of the generated UpdateRun. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}'.")
+  id: string;
+}
