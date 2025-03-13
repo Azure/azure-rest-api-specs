@@ -5,6 +5,8 @@ import { readFile } from "fs/promises";
 import { parseMarkdown } from "@azure-tools/openapi-tools-common";
 // TODO: Can this be eliminated?
 import * as amd from "@azure/openapi-markdown";
+import { kebabCase } from "change-case";
+import axios from "axios";
 
 export type MarkdownType = "arm" | "data-plane" | "default";
 
@@ -92,4 +94,64 @@ export function getAllTags(readMeContent: string): string[] {
 export async function getInputFiles(readMeContent: string, tag: string) {
   const cmd = parseMarkdown(readMeContent);
   return amd.getInputFilesForTag(cmd.markDown, tag);
+}
+
+export function getDocRawUrl(code: string) {
+  if (code == "FATAL") {
+    return `N/A`;
+  }
+
+  return `https://raw.githubusercontent.com/Azure/azure-openapi-validator/main/docs/${kebabCase(
+    code,
+  )}.md`;
+}
+
+const rpcInfoCache = new Map<string, string[]>();
+
+// TODO: Tests
+export async function getRelatedArmRpcFromDoc(ruleName: string) {
+  if (ruleName == "FATAL") {
+    return [];
+  }
+
+  if (rpcInfoCache.has(ruleName)) {
+    return rpcInfoCache.get(ruleName);
+  }
+  const docUrl = getDocRawUrl(ruleName);
+  const rpcRules: string[] = [];
+  let response;
+  try {
+    response = await axios.get(docUrl);
+  } catch (e: any) {
+    // TODO: Retry? Fail ungracefully?
+    console.log(`Get ${docUrl} failed with ${e.message} .`);
+    // TODO: Should an empty entry be entered into the cache?
+    return rpcRules;
+  }
+
+  let walker = new commonmark.Parser().parse(response.data).walker();
+  let event;
+  while ((event = walker.next())) {
+    const node = event.node;
+    if (
+      event.entering &&
+      node.type === "heading" &&
+      node.firstChild?.literal === "Related ARM Guideline Code"
+    ) {
+      const next = node.next;
+      if (next?.type == "list") {
+        let currentItem = next.firstChild;
+        while (currentItem) {
+          const code = currentItem?.firstChild?.firstChild?.literal;
+          if (code) {
+            rpcRules.push(code);
+          }
+          currentItem = currentItem.next;
+        }
+      }
+      break;
+    }
+  }
+  rpcInfoCache.set(ruleName, rpcRules);
+  return rpcRules;
 }

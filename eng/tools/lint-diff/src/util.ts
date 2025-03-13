@@ -3,7 +3,7 @@ import { dirname, join, sep, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 
 // Temporary workaround until there's a common set of entities
-import { getInputFiles, MarkdownType } from "./markdown-utils.js";
+import { getInputFiles, MarkdownType, getRelatedArmRpcFromDoc } from "./markdown-utils.js";
 import { ExecException } from "node:child_process";
 
 import $RefParser from "@apidevtools/json-schema-ref-parser";
@@ -436,10 +436,10 @@ export function arrayIsEqual(a: any[], b: any[]) {
   return true;
 }
 
-export function getNewItems(
+export async function getNewItems(
   before: LintDiffViolation[],
   after: LintDiffViolation[],
-): [LintDiffViolation[], LintDiffViolation[]] {
+): Promise<[LintDiffViolation[], LintDiffViolation[]]> {
   const newItems = [];
   const existingItems = [];
 
@@ -476,6 +476,11 @@ export function getNewItems(
     if (errorIsNew) {
       newItems.push(afterViolation);
     }
+  }
+
+  for (const newItem of newItems) {
+    // TODO: Parallelize
+    newItem.armRpcs = await getRelatedArmRpcFromDoc(newItem.code);
   }
 
   return [newItems, existingItems];

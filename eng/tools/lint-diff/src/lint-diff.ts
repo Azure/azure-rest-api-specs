@@ -275,7 +275,7 @@ async function runLintDiff(
       (v) => isFailure(v.level) || isWarning(v.level),
     );
 
-    const [newitems, existingItems] = getNewItems(beforeViolations, afterViolations);
+    const [newitems, existingItems] = await getNewItems(beforeViolations, afterViolations);
     console.log(`New violations: ${newitems.length}`);
     console.log(`Existing violations: ${existingItems.length}`);
 
@@ -301,7 +301,7 @@ async function runLintDiff(
 
     for (const violation of newViolations.slice(0, 50)) {
       const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} | TODO |\n`;
+      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} | ${violation.armRpcs?.join(", ")} |\n`;
     }
 
     outputMarkdown += "\n";
