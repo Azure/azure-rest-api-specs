@@ -3005,7 +3005,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/prepareMigration": {
       "post": {
         "operationId": "VirtualNetworkGateways_InvokePrepareMigration",
-        "description": "Trigger prepare migration for the basic virtual network gateway.",
+        "description": "Trigger prepare migration for the virtual network gateway.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -3067,7 +3067,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/executeMigration": {
       "post": {
         "operationId": "VirtualNetworkGateways_InvokeExecuteMigration",
-        "description": "Trigger execute migration for the basic virtual network gateway.",
+        "description": "Trigger execute migration for the virtual network gateway.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -3120,7 +3120,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/commitMigration": {
       "post": {
         "operationId": "VirtualNetworkGateways_InvokeCommitMigration",
-        "description": "Trigger commit migration for the basic virtual network gateway.",
+        "description": "Trigger commit migration for the virtual network gateway.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -3173,7 +3173,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/abortMigration": {
       "post": {
         "operationId": "VirtualNetworkGateways_InvokeAbortMigration",
-        "description": "Trigger abort migration for the basic virtual network gateway.",
+        "description": "Trigger abort migration for the virtual network gateway.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -3232,8 +3232,8 @@
           "$ref": "#/definitions/VirtualNetworkGatewayMigrationType"
         },
         "resourceUrl": {
-          "$ref": "./network.json#/definitions/SubResource",
-          "description": "The reference to the public IP resource."
+          "type": "string",
+          "description": "Resource url that needs to be passed in to migration."
         }
       },
       "required": [
