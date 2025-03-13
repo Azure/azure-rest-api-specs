@@ -32,7 +32,7 @@ interface Evaluations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates an evaluation run.")
-  @route("runs:createRun")
+  @route("runs:run")
   @post
   createRun is Azure.Core.Foundations.Operation<
     {
