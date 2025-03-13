@@ -20,13 +20,13 @@ export async function generateSdkForSingleSpec(): Promise<number> {
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
   logMessage(`Generating SDK from ${specConfigPathText}`, LogLevel.Group);
-  logMessage(`Command:${specGenSdkCommand.join(" ")}`);
+  logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
   let statusCode = 0;
   try {
     await runSpecGenSdkCommand(specGenSdkCommand);
-    logMessage("Command executed successfully");
+    logMessage("Runner command executed successfully");
   } catch (error) {
-    logMessage(`Error executing command:${error}`, LogLevel.Error);
+    logMessage(`Runner error executing command:${error}`, LogLevel.Error);
     statusCode = 1;
   }
 
@@ -39,9 +39,12 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const executionResult = executionReport.executionResult;
-    logMessage(`Execution Result:${executionResult}`);
+    logMessage(`Runner command execution Result:${executionResult}`);
   } catch (error) {
-    logMessage(`Error reading execution report at ${executionReportPath}:${error}`, LogLevel.Error);
+    logMessage(
+      `Runner error reading execution report at ${executionReportPath}:${error}`,
+      LogLevel.Error,
+    );
     statusCode = 1;
   }
   logMessage("ending group logging", LogLevel.EndGroup);
@@ -68,7 +71,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let pushedSpecConfigCount;
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
-      logMessage("No spec config file found in the changed files", LogLevel.Warn);
+      logMessage("Runner no spec config file found in the changed files", LogLevel.Warn);
       continue;
     }
     pushedSpecConfigCount = 0;
@@ -82,14 +85,14 @@ export async function generateSdkForSpecPr(): Promise<number> {
     }
     const changedSpecPathText = `${changedSpec.typespecProject} ${changedSpec.readmeMd}`;
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
-    logMessage(`Command:${specGenSdkCommand.join(" ")}`);
+    logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
 
     try {
       await resetGitRepo(commandInput.localSdkRepoPath);
       await runSpecGenSdkCommand(specGenSdkCommand);
-      logMessage("Command executed successfully");
+      logMessage("Runner command executed successfully");
     } catch (error) {
-      logMessage(`Error executing command:${error}`, LogLevel.Error);
+      logMessage(`Runner error executing command:${error}`, LogLevel.Error);
       statusCode = 1;
     }
     // Pop the spec config path from specGenSdkCommand
@@ -105,10 +108,10 @@ export async function generateSdkForSpecPr(): Promise<number> {
       const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       const executionResult = executionReport.executionResult;
-      logMessage(`Execution Result:${executionResult}`);
+      logMessage(`Runner command execution Result:${executionResult}`);
     } catch (error) {
       logMessage(
-        `Error reading execution report at ${executionReportPath}:${error}`,
+        `Runner error reading execution report at ${executionReportPath}:${error}`,
         LogLevel.Error,
       );
       statusCode = 1;
@@ -162,13 +165,13 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       specGenSdkCommand.push("--readme-relative-path", specConfigPath);
       readmePath = specConfigPath;
     }
-    logMessage(`Command:${specGenSdkCommand.join(" ")}`);
+    logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
     try {
       await resetGitRepo(commandInput.localSdkRepoPath);
       await runSpecGenSdkCommand(specGenSdkCommand);
-      logMessage("Command executed successfully");
+      logMessage("Runner command executed successfully");
     } catch (error) {
-      logMessage(`Error executing command:${error}`, LogLevel.Error);
+      logMessage(`Runner error executing command:${error}`, LogLevel.Error);
       statusCode = 1;
     }
 
@@ -184,7 +187,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       const executionResult = executionReport.executionResult;
-      logMessage(`Execution Result:${executionResult}`);
+      logMessage(`Runner command execution result:${executionResult}`);
 
       if (executionResult === "succeeded" || executionResult === "warning") {
         succeededContent += `${specConfigPath},`;
@@ -198,7 +201,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       }
     } catch (error) {
       logMessage(
-        `Error reading execution report at ${executionReportPath}:${error}`,
+        `Runner error reading execution report at ${executionReportPath}:${error}`,
         LogLevel.Error,
       );
       statusCode = 1;
@@ -232,7 +235,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
     logMessage(`Markdown file written to ${markdownFilePath}`);
     vsoAddAttachment("Generation Summary", markdownFilePath);
   } catch (error) {
-    logMessage(`Error writing markdown file ${markdownFilePath}:${error}`, LogLevel.Error);
+    logMessage(`Runner error writing markdown file ${markdownFilePath}:${error}`, LogLevel.Error);
     statusCode = 1;
   }
   return statusCode;
