@@ -319,6 +319,15 @@
           },
           {
             "$ref": "#/parameters/exportNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ExportRunRequest"
+            },
+            "description": "Parameters supplied to the Execute Export operation."
           }
         ],
         "responses": {
@@ -481,10 +490,43 @@
           "description": "If set to true, exported data will be partitioned by size and placed in a blob directory together with a manifest file. Note: this option is currently available only for Microsoft Customer Agreement commerce scopes.",
           "type": "boolean"
         },
+        "dataOverwriteBehavior": {
+          "description": "Allow customers to select overwrite data(OverwritePreviousReport) for exports. This setting will enable overwrite data for the same month in customer storage account. By default set to CreateNewReport.",
+          "type": "string",
+          "enum": [
+            "OverwritePreviousReport",
+            "CreateNewReport"
+          ],
+          "x-ms-enum": {
+            "name": "DataOverwriteBehaviorType",
+            "modelAsString": true
+          }
+        },
+        "compressionMode": {
+          "description": "Allow customers to select compress data(gzip) for exports. This setting will enable destination file compression scheme at runtime. By default set to None.",
+          "type": "string",
+          "enum": [
+            "gzip",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "CompressionModeType",
+            "modelAsString": true
+          }
+        },
+        "exportDescription": {
+          "description": "The export description set by customer at time of export creation/update.",
+          "type": "string"
+        },
         "nextRunTimeEstimate": {
           "description": "If the export has an active schedule, provides an estimate of the next run time.",
           "type": "string",
           "format": "date-time",
+          "readOnly": true
+        },
+        "systemSuspensionContext": {
+          "description": "The export suspension reason if export is in SystemSuspended state.",
+          "$ref": "#/definitions/ExportSuspensionContext",
           "readOnly": true
         }
       },
@@ -498,11 +540,12 @@
       "type": "object",
       "properties": {
         "status": {
-          "description": "The status of the export's schedule. If 'Inactive', the export's schedule is paused.",
+          "description": "The status of the export's schedule. If 'Inactive', the export's schedule is paused. 'SystemSuspended' can only be set by export service.",
           "type": "string",
           "enum": [
             "Active",
-            "Inactive"
+            "Inactive",
+            "SystemSuspended"
           ],
           "x-ms-enum": {
             "name": "StatusType",
@@ -565,6 +608,17 @@
       "description": "This represents the blob storage account location where exports of costs will be delivered. There are two ways to configure the destination. The approach recommended for most customers is to specify the resourceId of the storage account. This requires a one-time registration of the account's subscription with the Microsoft.CostManagementExports resource provider in order to give Cost Management services access to the storage. When creating an export in the Azure portal this registration is performed automatically but API users may need to register the subscription explicitly (for more information see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-supported-services ). Another way to configure the destination is available ONLY to Partners with a Microsoft Partner Agreement plan who are global admins of their billing account. These Partners, instead of specifying the resourceId of a storage account, can specify the storage account name along with a SAS token for the account. This allows exports of costs to a storage account in any tenant. The SAS token should be created for the blob service with Service/Container/Object resource types and with Read/Write/Delete/List/Add/Create permissions (for more information see https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/export-cost-data-storage-account-sas-key ).",
       "type": "object",
       "properties": {
+        "type": {
+          "description": "The export delivery destination type. Currently only 'AzureBlob' is supported.",
+          "type": "string",
+          "enum": [
+            "AzureBlob"
+          ],
+          "x-ms-enum": {
+            "name": "DestinationType",
+            "modelAsString": true
+          }
+        },
         "resourceId": {
           "description": "The resource id of the storage account where exports will be delivered. This is not required if a sasToken and storageAccount are specified.",
           "type": "string"
@@ -601,7 +655,12 @@
           "enum": [
             "Usage",
             "ActualCost",
-            "AmortizedCost"
+            "AmortizedCost",
+            "FocusCost",
+            "PriceSheet",
+            "ReservationTransactions",
+            "ReservationRecommendations",
+            "ReservationDetails"
           ],
           "x-ms-enum": {
             "name": "ExportType",
@@ -617,7 +676,8 @@
             "TheLastMonth",
             "TheLastBillingMonth",
             "WeekToDate",
-            "Custom"
+            "Custom",
+            "TheCurrentMonth"
           ],
           "x-ms-enum": {
             "name": "TimeframeType",
@@ -643,10 +703,11 @@
       "type": "object",
       "properties": {
         "granularity": {
-          "description": "The granularity of rows in the export. Currently only 'Daily' is supported.",
+          "description": "The granularity of rows in the export. Currently 'Daily' is supported for most cases.",
           "type": "string",
           "enum": [
-            "Daily"
+            "Daily",
+            "Monthly"
           ],
           "x-ms-enum": {
             "name": "GranularityType",
@@ -664,16 +725,30 @@
       "type": "object",
       "properties": {
         "columns": {
-          "description": "Array of column names to be included in the export. If not provided then the export will include all available columns. The available columns can vary by customer channel (see examples).",
+          "description": "This is on path to deprecation and will not be supported going forward.",
           "type": "array",
           "items": {
             "type": "string"
           }
+        },
+        "dataVersion": {
+          "description": "The data version for the selected for the export. If not provided then the export will default to latest data version.",
+          "type": "string"
+        },
+        "filters": {
+          "description": "Filters associated with the data sets.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterItems"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
     "ExportTimePeriod": {
-      "description": "The date range for data in the export. This should only be specified with timeFrame set to 'Custom'. The maximum date range is 3 months.",
+      "description": "The date range for data in the export. This should only be specified with timeFrame set to 'Custom'. The maximum date range is 1 month.",
       "type": "object",
       "properties": {
         "from": {
@@ -769,6 +844,16 @@
           "type": "string",
           "format": "date-time"
         },
+        "startDate": {
+          "description": "The start datetime for the export.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "The end datetime for the export.",
+          "type": "string",
+          "format": "date-time"
+        },
         "processingEndTime": {
           "description": "The time when the export run finished.",
           "type": "string",
@@ -778,6 +863,10 @@
           "description": "The name of the exported file.",
           "type": "string"
         },
+        "manifestFile": {
+          "description": "The manifest file location(URI location) for the exported files.",
+          "type": "string"
+        },
         "runSettings": {
           "description": "The export settings that were in effect for this run.",
           "$ref": "#/definitions/CommonExportProperties"
@@ -785,6 +874,58 @@
         "error": {
           "description": "The details of any error.",
           "$ref": "common-types.json#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ExportSuspensionContext": {
+      "description": "The properties of the export run.",
+      "type": "object",
+      "properties": {
+        "suspensionCode": {
+          "description": "The code for export suspension.",
+          "type": "string"
+        },
+        "suspensionReason": {
+          "description": "The detailed reason for export suspension.",
+          "type": "string"
+        },
+        "suspensionTime": {
+          "description": "The time when the export was suspended.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ExportRunRequest": {
+      "description": "The export run request.",
+      "type": "object",
+      "properties": {
+        "timePeriod": {
+          "description": "Has time period for pulling data for the export.",
+          "$ref": "#/definitions/ExportTimePeriod"
+        }
+      }
+    },
+    "FilterItems": {
+      "description": "Will contain the filter name and value to operate on. This is currently only supported for Export Definition type of ReservationRecommendations.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the filter. This is currently only supported for Export Definition type of ReservationRecommendations. Supported names are ['ReservationScope', 'LookBackPeriod', 'ResourceType']",
+          "enum": [
+            "ReservationScope",
+            "ResourceType",
+            "LookBackPeriod"
+          ],
+          "x-ms-enum": {
+            "name": "FilterItemNames",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Value to filter by. Currently values supported per name are, for 'ReservationScope' supported values are ['Single', 'Shared'], for 'LookBackPeriod' supported values are ['Last7Days', 'Last30Days', 'Last60Days'] and for 'ResourceType' supported values are ['VirtualMachines', 'SQLDatabases', 'PostgreSQL', 'ManagedDisk', 'MySQL', 'RedHat', 'MariaDB', 'RedisCache', 'CosmosDB', 'SqlDataWarehouse', 'SUSELinux', 'AppService', 'BlockBlob', 'AzureDataExplorer', 'VMwareCloudSimple']."
         }
       }
     }
@@ -809,4 +950,3 @@
     }
   }
 }
-
