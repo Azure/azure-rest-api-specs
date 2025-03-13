@@ -94,7 +94,7 @@ model UpdateRunProperties {
   @doc("The status of the UpdateRun.")
   status?: UpdateRunStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("AutoUpgradeProfileId is the id of an auto upgrade profile resource.")
   @added(Versions.v2025_03_01)
   autoUpgradeProfileId?: AutoUpgradeProfileId;
