@@ -4,17 +4,18 @@ on:
   check_suite:
     types: [completed]
 
-permissions:
-  statuses: write
-  pull-requests: write
-  checks: read
-
 jobs:
   event-handler:
     name: After APIView
     runs-on: ubuntu-24.04
     if: github.event.check_suite.app.name == 'Azure Pipelines'
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          sparse-checkout: 'eng/common'
+          fetch-depth: 0
+    
       - name: Create APIView Comment on PR
         run: |
           . ../../../eng/common/scripts/helpers/ApiView-Helpers.ps1
