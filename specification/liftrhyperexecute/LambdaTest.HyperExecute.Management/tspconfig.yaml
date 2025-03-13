@@ -1,0 +1,21 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+parameters:
+  "service-dir":
+    default: "sdk/liftrhyperexecute"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.LambdaTestHyperExecute"
+    flavor: azure
+    clear-output-folder: true
+    use-write-core: true
+    namespace: "{package-dir}"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
