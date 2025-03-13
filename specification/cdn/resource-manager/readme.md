@@ -32,6 +32,18 @@ openapi-type: arm
 tag: package-2024-09
 ```
 
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.Cdn/preview/2024-07-22-preview/edgeaction.json
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: Operation APIs for Microsoft.Cdn are to be defined in cdn swagger
+```
+
 ### Tag: package-2024-09
 
 These settings apply only when `--tag=package-2024-09` is specified on the command line.
