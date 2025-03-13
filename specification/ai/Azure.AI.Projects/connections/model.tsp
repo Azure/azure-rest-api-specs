@@ -164,7 +164,7 @@ enum ConnectionType {
   custom: "CustomKeys",
 
   @doc("Cognitive Service")
-  CognitiveService" "CognitiveService",
+  CognitiveService: "CognitiveService",
 }
 
 /*
