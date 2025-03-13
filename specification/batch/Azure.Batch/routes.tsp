@@ -173,6 +173,16 @@ alias UpdatePoolRequiredParameters = {
   pool: BatchPoolUpdateContent;
 };
 
+alias EnablePoolAutoscaleRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+
+  @doc("The options to use for enabling automatic scaling.")
+  @bodyRoot
+  content: BatchPoolEnableAutoScaleContent;
+};
+
 // Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -311,14 +321,12 @@ interface Pools {
     more than once every 30 seconds.
     """)
   @route("/pools/{poolId}/enableautoscale")
-  @clientName("enablePoolAutoScaleInternal", "java")
-  enablePoolAutoScale is PostOperation<
-    BatchPoolHeaders &
-      MinimalMetadata & {
-        @doc("The options to use for enabling automatic scaling.")
-        @bodyRoot
-        content: BatchPoolEnableAutoScaleContent;
-      },
+  enablePoolAutoScale is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...EnablePoolAutoscaleRequiredParameters;
+    },
     RequestSuccessResponseHeaders
   >;
 

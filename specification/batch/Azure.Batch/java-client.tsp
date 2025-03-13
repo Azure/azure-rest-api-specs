@@ -216,6 +216,32 @@ op disablePoolAutoScaleCustomization is Azure.Batch.PostOperationNew<
   "java"
 );
 
+// Enable Pool Autoscale Operation
+@doc("Optional parameters for Enable Pool AutoScale operation.")
+model EnableBatchPoolAutoScaleOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Enable Pool AutoScale operation.")
+@route("/pools/{poolId}/enableautoscale")
+op enablePoolAutoScaleCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.EnablePoolAutoscaleRequiredParameters;
+
+    @doc("Optional parameters for Enable Pool AutoScale operation.")
+    options?: EnableBatchPoolAutoScaleOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.RequestSuccessResponseHeaders
+>;
+
+@@override(Azure.Batch.Pools.enablePoolAutoScale,
+  enablePoolAutoScaleCustomization,
+  "java"
+);
+
 // List Supported Images Operation
 @doc("Optional parameters for List Supported Images operation.")
 model ListSupportedBatchImagesOptions {
