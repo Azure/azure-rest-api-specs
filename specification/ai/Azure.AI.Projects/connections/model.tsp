@@ -162,6 +162,9 @@ enum ConnectionType {
 
   @doc("Generic connection that uses Custom authentication")
   custom: "CustomKeys",
+
+  @doc("Cognitive Service")
+  CognitiveService" "CognitiveService",
 }
 
 /*
