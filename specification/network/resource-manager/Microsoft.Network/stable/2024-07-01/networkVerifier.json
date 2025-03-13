@@ -764,6 +764,13 @@
             "schema": {
               "$ref": "#/definitions/VerifierWorkspace"
             }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally."
           }
         ],
         "responses": {
@@ -832,6 +839,13 @@
             "schema": {
               "$ref": "#/definitions/VerifierWorkspaceUpdate"
             }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally."
           }
         ],
         "responses": {
@@ -883,6 +897,13 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally."
           }
         ],
         "responses": {
