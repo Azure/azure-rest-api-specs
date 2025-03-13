@@ -1,6 +1,7 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.ServiceFabric;
 
@@ -18,6 +19,31 @@ using Microsoft.ServiceFabric;
 @@clientName(PublicIPAddressConfiguration,
   "IPConfigurationPublicIPAddressConfiguration",
   "go, java, javascript, python"
+);
+
+/**
+ * Dotnet Operation and Model Renaming/Retyping
+ */
+@@clientName(ManagedAzResiliencyStatus.get,
+  "GetManagedAzResiliencyStatus",
+  "csharp"
+);
+@@clientName(NodeTypeSkus.list, "GetAvailableSkus", "csharp");
+@@clientName(ManagedUnsupportedVMSizes.get,
+  "GetManagedUnsupportedVmSize",
+  "csharp"
+);
+@@clientName(ManagedUnsupportedVMSizes.list,
+  "GetManagedUnsupportedVmSizes",
+  "csharp"
+);
+@@clientName(ManagedClusterVersion.getByEnvironment,
+  "GetManagedClusterVersionByEnvironment",
+  "csharp"
+);
+@@clientName(ManagedAzResiliencyStatus.get,
+  "GetManagedAzResiliencyStatus",
+  "csharp"
 );
 
 @@clientName(ApplicationResource, "ServiceFabricManagedApplication", "csharp");
@@ -73,7 +99,6 @@ using Microsoft.ServiceFabric;
 @@clientName(OsType, "ServiceFabricManagedClusterOSType", "csharp");
 @@clientName(Subnet, "ManagedClusterSubnet", "csharp");
 @@clientName(Subnet.enableIpv6, "IsIPv6Enabled", "csharp");
-@@clientName(Subnet.networkSecurityGroupId, "-|arm-id", "csharp");
 @@clientName(AzureActiveDirectory,
   "ManagedClusterAzureActiveDirectory",
   "csharp"
@@ -136,6 +161,7 @@ using Microsoft.ServiceFabric;
 @@clientName(VmssDataDisk, "NodeTypeVmssDataDisk", "csharp");
 @@clientName(VmssDataDisk.diskSizeGB, "DiskSizeInGB", "csharp");
 @@clientName(VMSSExtension, "NodeTypeVmssExtension", "csharp");
+@@clientName(VMSSExtensionProperties, "VmssExtensionProperties", "csharp");
 @@clientName(VMSSExtensionProperties.enableAutomaticUpgrade,
   "IsAutomaticUpgradeEnabled",
   "csharp"
@@ -257,3 +283,24 @@ using Microsoft.ServiceFabric;
   "LastWindowEndOn",
   "csharp"
 );
+
+@@alternateType(ManagedClusterProperties.clusterId, uuid, "csharp");
+@@alternateType(ManagedClusterProperties.ipv4Address, ipV4Address, "csharp");
+@@alternateType(ManagedClusterProperties.ipv6Address, ipV6Address, "csharp");
+@@alternateType(Subnet.networkSecurityGroupId, armResourceIdentifier, "csharp");
+@@alternateType(FrontendConfiguration.loadBalancerBackendAddressPoolId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(FrontendConfiguration.loadBalancerInboundNatPoolId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(NodeTypeAvailableSku.resourceType, armResourceType, "csharp");
+@@alternateType(ResourceAzStatus.resourceType, armResourceType, "csharp");
+@@alternateType(ApplicationTypeVersionResourceProperties.appPackageUrl,
+  url,
+  "csharp"
+);
+@@alternateType(AzureActiveDirectory.tenantId, uuid, "csharp");
+@@alternateType(VaultCertificate.certificateUrl, url, "csharp");

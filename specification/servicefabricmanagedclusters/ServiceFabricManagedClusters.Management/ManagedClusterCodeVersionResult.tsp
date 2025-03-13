@@ -12,8 +12,6 @@ namespace Microsoft.ServiceFabric;
 /**
  * The result of the Service Fabric runtime versions
  */
-@subscriptionResource
-@parentResource(SubscriptionLocationResource)
 model ManagedClusterCodeVersionResult {
   /**
    * The identification of the result

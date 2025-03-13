@@ -4,7 +4,6 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -14,8 +13,6 @@ namespace Microsoft.ServiceFabric;
  * Describes a VM Sizes.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well-known abbreviation"
-@subscriptionResource
-@parentResource(SubscriptionLocationResource)
 model ManagedVMSize {
   /**
    * Describes a VM Sizes.
