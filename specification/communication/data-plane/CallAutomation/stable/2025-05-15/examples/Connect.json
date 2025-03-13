@@ -12,7 +12,24 @@
         "cognitiveServicesEndpoint": "https://cognitiveservice.com"
       },
       "streamingTransportOptions": {
-        "kind": "websocket"
+        "kind": "websocket",
+        "mediaStreamingOptions": {
+          "transportUrl": "string",
+          "transportType": "websocket",
+          "contentType": "audio",
+          "audioChannelType": "mixed",
+          "startMediaStreaming": true,
+          "enableBidirectional": true,
+          "audioFormat": "pcm16KMono"
+        },
+        "transcriptionOptions": {
+          "transportUrl": "string",
+          "transportType": "websocket",
+          "locale": "en-US",
+          "speechRecognitionModelEndpointId": "string",
+          "startTranscription": true,
+          "enableIntermediateResults": true
+        }
       }
     }
   },
