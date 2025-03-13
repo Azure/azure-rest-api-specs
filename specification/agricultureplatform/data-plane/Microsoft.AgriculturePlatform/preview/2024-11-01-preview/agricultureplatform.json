@@ -1199,7 +1199,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/File"
+              "$ref": "#/definitions/FileModel"
             }
           }
         ],
@@ -1251,7 +1251,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/File"
+              "$ref": "#/definitions/FileModel"
             }
           }
         ],
@@ -1293,7 +1293,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/File"
+              "$ref": "#/definitions/FileModel"
             }
           },
           "default": {
@@ -2134,20 +2134,6 @@
         }
       }
     },
-    "File": {
-      "type": "object",
-      "description": "File.",
-      "properties": {
-        "filePath": {
-          "type": "string",
-          "description": "FilePath.",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "filePath"
-      ]
-    },
     "FileDownloadResponse": {
       "type": "object",
       "description": "Represents the response for a file download operation.",
@@ -2160,6 +2146,20 @@
       },
       "required": [
         "data"
+      ]
+    },
+    "FileModel": {
+      "type": "object",
+      "description": "File.",
+      "properties": {
+        "filePath": {
+          "type": "string",
+          "description": "FilePath.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "filePath"
       ]
     },
     "FileResource": {

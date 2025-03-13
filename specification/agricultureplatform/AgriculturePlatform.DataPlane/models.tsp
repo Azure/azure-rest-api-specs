@@ -403,7 +403,7 @@ model FileDownloadResponse {
 /**
  * File.
  */
-model File {
+model FileModel {
   /**
    * FilePath.
    */
