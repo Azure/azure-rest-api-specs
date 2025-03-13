@@ -435,7 +435,8 @@
               "AzureBlob",
               "AIServices",
               "CognitiveSearch",
-              "ApiKey"
+              "ApiKey",
+              "CustomKeys"
             ],
             "x-ms-enum": {
               "name": "ConnectionType",
@@ -470,6 +471,11 @@
                   "name": "APIKey",
                   "value": "ApiKey",
                   "description": "Generic connection that uses API Key authentication"
+                },
+                {
+                  "name": "custom",
+                  "value": "CustomKeys",
+                  "description": "Generic connection that uses Custom authentication"
                 }
               ]
             }
@@ -8930,6 +8936,7 @@
         "ApiKey",
         "AAD",
         "SAS",
+        "CustomKeys",
         "None"
       ],
       "x-ms-enum": {
@@ -8950,6 +8957,11 @@
             "name": "SAS",
             "value": "SAS",
             "description": "Shared Access Signature (SAS) authentication"
+          },
+          {
+            "name": "custom",
+            "value": "CustomKeys",
+            "description": "Custom authentication"
           },
           {
             "name": "None",
@@ -9029,7 +9041,8 @@
         "AzureBlob",
         "AIServices",
         "CognitiveSearch",
-        "ApiKey"
+        "ApiKey",
+        "CustomKeys"
       ],
       "x-ms-enum": {
         "name": "ConnectionType",
@@ -9064,6 +9077,11 @@
             "name": "APIKey",
             "value": "ApiKey",
             "description": "Generic connection that uses API Key authentication"
+          },
+          {
+            "name": "custom",
+            "value": "CustomKeys",
+            "description": "Generic connection that uses Custom authentication"
           }
         ]
       }
@@ -9546,6 +9564,16 @@
         }
       ],
       "x-ms-discriminator-value": "ApiKey"
+    },
+    "InternalConnectionPropertiesCustomAuth": {
+      "type": "object",
+      "description": "Connection properties for connections with Custom authentication",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InternalConnectionProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomKeys"
     },
     "InternalConnectionPropertiesNoAuth": {
       "type": "object",
