@@ -158,6 +158,9 @@ enum ConnectionType {
 
   @doc("Generic connection that uses API Key authentication")
   APIKey: "ApiKey",
+
+  @doc("Generic connection that uses Custom Keys authentication")
+  CustomKeys: "CustomKeys",
 }
 
 /*
