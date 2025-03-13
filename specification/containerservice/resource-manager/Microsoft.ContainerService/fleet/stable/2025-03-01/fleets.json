@@ -56,6 +56,9 @@
     },
     {
       "name": "AutoUpgradeProfiles"
+    },
+    {
+      "name": "AutoUpgradeProfileOperations"
     }
   ],
   "paths": {
@@ -795,6 +798,86 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/autoUpgradeProfiles/{autoUpgradeProfileName}/generateUpdateRun": {
+      "post": {
+        "operationId": "AutoUpgradeProfileOperations_GenerateUpdateRun",
+        "tags": [
+          "AutoUpgradeProfileOperations"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "autoUpgradeProfileName",
+            "in": "path",
+            "description": "The name of the AutoUpgradeProfile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenerateResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "If-Match": {
+                "type": "string",
+                "description": "The request should only proceed if an entity matches this string."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AutoUpgradeProfileOperations_GenerateUpdateRun_MaximumSet": {
+            "$ref": "./examples/AutoUpgradeProfileOperations_GenerateUpdateRun_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -2921,6 +3004,20 @@
           }
         ]
       }
+    },
+    "GenerateResponse": {
+      "type": "object",
+      "description": "GenerateResponse is the response of a generate request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM resource id of the generated UpdateRun. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}'.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "KubernetesVersion": {
       "type": "string"
