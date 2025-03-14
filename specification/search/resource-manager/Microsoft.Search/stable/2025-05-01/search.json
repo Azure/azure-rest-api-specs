@@ -477,6 +477,9 @@
           },
           "SearchUpdateServiceWithSemanticSearch": {
             "$ref": "./examples/SearchUpdateServiceWithSemanticSearch.json"
+          },
+          "SearchUpdateServiceWithSku": {
+            "$ref": "./examples/SearchUpdateServiceWithSku.json"
           }
         },
         "description": "Updates an existing search service in the given resource group.",
@@ -621,6 +624,60 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/upgrade": {
+      "post": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Upgrade",
+        "x-ms-examples": {
+          "UpgradeSearchServiceToLatestVersion": {
+            "$ref": "./examples/UpgradeSearchServiceToLatestVersion.json"
+          }
+        },
+        "description": "Upgrades the Azure AI Search service to the latest version available.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search service has been upgraded to the latest version.",
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            }
+          },
+          "202": {
+            "description": "The long running operation for upgrading the service to the latest version was queued successfully. You can check the status of the operation through the provisioningState property of a Get Service request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "HTTP 400 (Bad Request): There is not upgrade available for the current service. HTTP 404 (Not Found): The subscription or resource group could not be found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -2380,6 +2437,30 @@
             ]
           }
         },
+        "computeType": {
+          "type": "string",
+          "description": "Configure this property to support the search service using either the Default Compute or Azure Confidential Compute.",
+          "enum": [
+            "default",
+            "confidential"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "default",
+                "name": "Default",
+                "description": "Create the service with the Default Compute."
+              },
+              {
+                "value": "confidential",
+                "name": "Confidential",
+                "description": "Create the service with Azure Confidential Compute."
+              }
+            ]
+          }
+        },
         "publicNetworkAccess": {
           "type": "string",
           "default": "enabled",
@@ -2515,6 +2596,17 @@
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
           "description": "The list of shared private link resources managed by the search service."
+        },
+        "upgradeAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Indicates whether or not the search service has an upgrade available."
+        },
+        "serviceUpgradeDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the search service was last upgraded. This field will be null until the service gets upgraded for the first time."
         }
       },
       "description": "Properties of the search service."
