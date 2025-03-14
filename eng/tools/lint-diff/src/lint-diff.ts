@@ -300,7 +300,7 @@ async function runLintDiff(
         : before?.readme
       : "";
 
-    outputMarkdown += `| ${afterName} | link: [${afterName}](${getFileLink(compareSha, afterPath)}) | link: [${beforeName}](${getFileLink(baseBranch, beforePath)}) |\n`;
+    outputMarkdown += `| ${afterName} | link: [${afterName}](${getFileLink(compareSha, `/${afterPath}`)}) | link: [${beforeName}](${getFileLink(baseBranch, `/${beforePath}`)}) |\n`;
   }
 
   outputMarkdown += `\n\n`;
