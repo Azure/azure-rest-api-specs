@@ -463,6 +463,9 @@
           "SearchUpdateServiceToAllowAccessFromPublicCustomIPs": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPublicCustomIPs.json"
           },
+          "SearchUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass": {
+            "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass.json"
+          },
           "SearchUpdateServiceToAllowAccessFromPrivateEndpoints": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPrivateEndpoints.json"
           },
@@ -624,60 +627,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/upgrade": {
-      "post": {
-        "tags": [
-          "Services"
-        ],
-        "operationId": "Services_Upgrade",
-        "x-ms-examples": {
-          "UpgradeSearchServiceToLatestVersion": {
-            "$ref": "./examples/UpgradeSearchServiceToLatestVersion.json"
-          }
-        },
-        "description": "Upgrades the Azure AI Search service to the latest version available.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SearchServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Search service has been upgraded to the latest version.",
-            "schema": {
-              "$ref": "#/definitions/SearchService"
-            }
-          },
-          "202": {
-            "description": "The long running operation for upgrading the service to the latest version was queued successfully. You can check the status of the operation through the provisioningState property of a Get Service request.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "HTTP 400 (Bad Request): There is not upgrade available for the current service. HTTP 404 (Not Found): The subscription or resource group could not be found.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -1849,24 +1798,6 @@
       },
       "description": "Indicates that either the API key or an access token from a Microsoft Entra ID tenant can be used for authentication."
     },
-    "DisabledDataExfiltrationOption": {
-      "type": "string",
-      "enum": [
-        "All"
-      ],
-      "x-ms-enum": {
-        "name": "SearchDisabledDataExfiltrationOption",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "All",
-            "name": "All",
-            "description": "Indicates that all data exfiltration scenarios are disabled."
-          }
-        ]
-      },
-      "description": "A specific data exfiltration scenario that is disabled for the service."
-    },
     "EncryptionWithCmk": {
       "type": "object",
       "properties": {
@@ -2585,13 +2516,6 @@
         "networkRuleSet": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network specific rules that determine how the Azure AI Search service may be reached."
-        },
-        "disabledDataExfiltrationOptions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DisabledDataExfiltrationOption"
-          },
-          "description": "A list of data exfiltration scenarios that are explicitly disallowed for the search service. Currently, the only supported value is 'All' to disable all possible data export scenarios with more fine grained controls planned for the future."
         },
         "encryptionWithCmk": {
           "$ref": "#/definitions/EncryptionWithCmk",
