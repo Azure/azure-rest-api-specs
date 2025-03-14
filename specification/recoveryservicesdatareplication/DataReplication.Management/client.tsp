@@ -66,18 +66,12 @@ using Microsoft.DataReplication;
   "csharp"
 );
 @@clientName(RecoveryPointType, "DataReplicationRecoveryPointType", "csharp");
-@@clientName(ReplicationExtensionModel,
-  "DataReplicationReplicationExtension",
-  "csharp"
-);
+@@clientName(ReplicationExtensionModel, "DataReplicationExtension", "csharp");
 @@clientName(ReplicationExtensionModelProperties,
-  "DataReplicationReplicationExtensionProperties",
+  "DataReplicationExtensionProperties",
   "csharp"
 );
-@@clientName(ReplicationVaultType,
-  "DataReplicationReplicationVaultType",
-  "csharp"
-);
+@@clientName(ReplicationVaultType, "DataReplicationVaultType", "csharp");
 @@clientName(ResynchronizationState,
   "DataReplicationResynchronizationState",
   "csharp"
