@@ -139,7 +139,7 @@ model CreateAgentOptions {
 model UpdateAgentOptions {
   @path
   @doc("The ID of the agent to modify.")
-  agentId: string;
+  assistantId: string;
 
   @doc("The ID of the model to use.")
   `model`?: string;
@@ -201,4 +201,18 @@ model AgentDeletionStatus {
 
   @doc("The object type, which is always 'assistant.deleted'.")
   object: "assistant.deleted";
+}
+
+@doc("The request details to use when retrieving an agent.")
+model GetAgentOptions {
+  @doc("Identifier of the agent.")
+  @path
+  assistantId: string;
+}
+
+@doc("The request details to use when deleting an agent.")
+model DeleteAgentOptions {
+  @doc("Identifier of the agent.")
+  @path
+  assistantId: string;
 }

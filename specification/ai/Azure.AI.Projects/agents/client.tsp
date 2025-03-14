@@ -254,6 +254,16 @@ namespace Azure.AI.Projects.Agents {
     "csharp"
   );
   @@clientName(CreateAndRunThreadOptions.tools, "OverrideTools", "csharp");
+
+  // Override until final decision made on assistants vs agents naming
+  @@clientName(ThreadMessage.assistantId, "agentId", "python");
+  @@clientName(GetAgentOptions.assistantId, "agentId", "python");
+  @@clientName(UpdateAgentOptions.assistantId, "agentId", "python");
+  @@clientName(DeleteAgentOptions.assistantId, "agentId", "python");
+  @@clientName(RunStep.assistantId, "agentId", "python");
+  @@clientName(ThreadRun.assistantId, "agentId", "python");
+  @@clientName(CreateRunOptions.assistantId, "agentId", "python");
+  @@clientName(CreateAndRunThreadOptions.assistantId, "agentId", "python");
   // From https://platform.openai.com/docs/agents/how-it-works
   // "Note that deleting an AgentFile doesn’t delete the original File object, it simply deletes the association
   // between that File and the Agent."
