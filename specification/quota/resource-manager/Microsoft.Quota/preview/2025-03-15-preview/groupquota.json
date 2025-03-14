@@ -2078,6 +2078,14 @@
           "description": "Display name of the GroupQuota entity.",
           "type": "string"
         },
+        "groupType": {
+          "description": "Group type.",
+          "$ref": "#/definitions/GroupType"
+        },
+        "location": {
+          "description": "Location of the GroupQuota entity.",
+          "type": "string"
+        },
         "additionalAttributes": {
           "description": "Additional attributes to filter/restrict the subscriptions, which can be added to the subscriptionIds.",
           "$ref": "#/definitions/AdditionalAttributes"
@@ -2164,6 +2172,18 @@
     "Environment": {
       "type": "object",
       "$ref": "#/definitions/EnvironmentType"
+    },
+    "GroupType": {
+      "type": "string",
+      "description": "Group type.",
+      "enum": [
+        "EnforcedGroup",
+        "AllocationGroup"
+      ],
+      "x-ms-enum": {
+        "name": "GroupType",
+        "modelAsString": true
+      }
     },
     "GroupingIdType": {
       "type": "string",
@@ -2281,6 +2301,10 @@
             "enforcementEnabled": {
               "$ref": "#/definitions/EnforcementState",
               "description": "Is the GroupQuota Enforcement enabled for the Azure region."
+            },
+            "enforcedGroupName": {
+              "type": "string",
+              "description": "The EnforcedGroupQuota name, which is enforced for the Azure region."
             },
             "provisioningState": {
               "$ref": "#/definitions/RequestState",
