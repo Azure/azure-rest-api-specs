@@ -2412,6 +2412,11 @@
           "default": 1,
           "description": "The number of partitions in the search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3."
         },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The endpoint of the Azure AI Search service."
+        },
         "hostingMode": {
           "type": "string",
           "default": "default",
@@ -2531,28 +2536,28 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'succeeded' or 'failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.",
+          "description": "The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'Succeeded' or 'Failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'Succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.",
           "enum": [
-            "succeeded",
-            "provisioning",
-            "failed"
+            "Succeeded",
+            "Provisioning",
+            "Failed"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": false,
             "values": [
               {
-                "value": "succeeded",
+                "value": "Succeeded",
                 "name": "Succeeded",
                 "description": "The last provisioning operation has completed successfully."
               },
               {
-                "value": "provisioning",
+                "value": "Provisioning",
                 "name": "Provisioning",
                 "description": "The search service is being provisioned or scaled up or down."
               },
               {
-                "value": "failed",
+                "value": "Failed",
                 "name": "Failed",
                 "description": "The last provisioning operation has failed."
               }
@@ -2561,7 +2566,14 @@
         },
         "networkRuleSet": {
           "$ref": "#/definitions/NetworkRuleSet",
-          "description": "Network-specific rules that determine how the search service may be reached."
+          "description": "Network specific rules that determine how the Azure AI Search service may be reached."
+        },
+        "disabledDataExfiltrationOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DisabledDataExfiltrationOption"
+          },
+          "description": "A list of data exfiltration scenarios that are explicitly disallowed for the search service. Currently, the only supported value is 'All' to disable all possible data export scenarios with more fine grained controls planned for the future."
         },
         "encryptionWithCmk": {
           "$ref": "#/definitions/EncryptionWithCmk",
