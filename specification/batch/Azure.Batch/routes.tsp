@@ -225,6 +225,16 @@ alias PoolExistsRequiredParameters = {
   poolId: string;
 };
 
+alias RemoveNodesRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+
+  @doc("The options to use for removing the node.")
+  @bodyRoot
+  content: BatchNodeRemoveContent;
+};
+
 // Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -452,14 +462,12 @@ interface Pools {
     Each request may remove up to 100 nodes.
     """)
   @route("/pools/{poolId}/removenodes")
-  @clientName("removeNodesInternal", "java")
-  removeNodes is PostOperation<
-    BatchPoolHeaders &
-      MinimalMetadata & {
-        @doc("The options to use for removing the node.")
-        @bodyRoot
-        content: BatchNodeRemoveContent;
-      },
+  removeNodes is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...RemoveNodesRequiredParameters;
+    },
     AcceptedProcessingResponseHeaders
   >;
 

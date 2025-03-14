@@ -363,6 +363,29 @@ op replacePoolPropertiesCustomization is Azure.Batch.PostOperationNew<
   "java"
 );
 
+// Remove Nodes Operation
+@doc("Optional parameters for Remove Nodes operation.")
+model RemoveBatchNodesOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Remove Nodes operation.")
+@route("/pools/{poolId}/removenodes")
+op removeNodesCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.RemoveNodesRequiredParameters;
+
+    @doc("Optional parameters for Remove Nodes operation.")
+    options?: RemoveBatchNodesOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.AcceptedProcessingResponseHeaders
+>;
+
+@@override(Azure.Batch.Pools.removeNodes, removeNodesCustomization, "java");
+
 // List Supported Images Operation
 @doc("Optional parameters for List Supported Images operation.")
 model ListSupportedBatchImagesOptions {
