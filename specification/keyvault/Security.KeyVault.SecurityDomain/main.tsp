@@ -24,7 +24,7 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-@service(#{ title: "KeyVault" })
+@service(#{ title: "KeyVaultClient" })
 @versioned(Versions)
 @server(
   "{vaultBaseUrl}",
