@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-core";
 import "./../models/operations.tsp";
 
 using Azure.Core.Traits;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 using MdsSolution.CopilotService.Operation.Models;
 
@@ -18,18 +17,8 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-@doc("Represents a generic response.")
-model GenericOkResponse<T> {
-  @statusCode
-  statusCode: 200;
-
-  @doc("The response data.")
-  @body
-  data: T;
-}
-
 @doc("Get operation progress")
-interface OperationProgress {
+interface Operations {
   @doc("Get operation progress")
-  getOperationResult is apiOperations.ResourceRead<OperationResultQuery>;
+  getOperationResponse is apiOperations.ResourceRead<OperationResponse>;
 }

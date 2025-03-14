@@ -11,9 +11,8 @@ namespace MdsSolution.CopilotService.Operation.Models;
 
 @doc("Operation Response Model")
 @resource("operations")
-model OperationResultQuery {
+model OperationResponse {
   @doc("The operation status.")
-  @visibility(Lifecycle.Read)
   status: OperationStatusValue;
 
   @doc("The operation id.")
@@ -22,6 +21,5 @@ model OperationResultQuery {
   operationId: string;
 
   @doc("The error message.")
-  @visibility(Lifecycle.Read)
   errorMessage: string[];
 }

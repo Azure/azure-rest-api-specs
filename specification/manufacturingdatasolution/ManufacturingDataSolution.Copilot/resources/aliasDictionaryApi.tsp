@@ -17,7 +17,7 @@ alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
 
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 alias jobLocationResponseHeaders = ResponseHeadersTrait<
   {
@@ -31,17 +31,17 @@ alias jobLocationResponseHeaders = ResponseHeadersTrait<
 
 interface Aliases {
   @doc("Get an alias by Id")
-  get is Operations.ResourceRead<Alias>;
+  get is apiOperations.ResourceRead<Alias>;
 
   @doc("Update an alias")
   @pollingOperation(
-    MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
+    MdsSolution.CopilotService.OperationStatus.Operations.getOperationResponse
   )
-  createOrReplace is Operations.LongRunningResourceCreateOrReplace<Alias>;
+  createOrReplace is apiOperations.LongRunningResourceCreateOrReplace<Alias>;
 
   @doc("Delete an alias")
-  delete is Operations.ResourceDelete<Alias>;
+  delete is apiOperations.ResourceDelete<Alias>;
 
   @doc("List all aliases")
-  list is Operations.ResourceList<Alias>;
+  list is apiOperations.ResourceList<Alias>;
 }
