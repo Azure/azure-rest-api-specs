@@ -1,9 +1,8 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "billingAccountId": "12",
-    "departmentId": "1234",
-    "scope": "providers/Microsoft.Billing/billingAccounts/12/departments/1234",
+    "billingAccountId": "123456",
+    "scope": "providers/Microsoft.Billing/billingAccounts/123456",
     "exportName": "TestExport",
     "parameters": {
       "identity": {
@@ -15,11 +14,11 @@
           "status": "Active",
           "recurrence": "Daily",
           "recurrencePeriod": {
-            "from": "2020-06-01T00:00:00Z",
-            "to": "2020-06-30T00:00:00Z"
+            "from": "2023-06-01T00:00:00Z",
+            "to": "2023-06-30T00:00:00Z"
           }
         },
-        "format": "Parquet",
+        "format": "Csv",
         "deliveryInfo": {
           "destination": {
             "type": "AzureBlob",
@@ -29,18 +28,18 @@
           }
         },
         "definition": {
-          "type": "ActualCost",
-          "timeframe": "MonthToDate",
           "dataSet": {
-            "granularity": "Daily",
             "configuration": {
-              "dataVersion": "2023-05-01"
-            }
-          }
+              "dataVersion": "2023-03-01"
+            },
+            "granularity": "Daily"
+          },
+          "timeframe": "MonthToDate",
+          "type": "ReservationDetails"
         },
         "partitionData": true,
         "dataOverwriteBehavior": "OverwritePreviousReport",
-        "compressionMode": "Snappy",
+        "compressionMode": "gzip",
         "exportDescription": "This is a test export."
       }
     }
@@ -48,7 +47,7 @@
   "responses": {
     "201": {
       "body": {
-        "id": "providers/Microsoft.Billing/billingAccounts/12/departments/1234/providers/Microsoft.CostManagement/exports/TestExport",
+        "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
         "name": "TestExport",
         "type": "Microsoft.CostManagement/exports",
         "eTag": "\"00000000-0000-0000-0000-000000000000\"",
@@ -63,12 +62,12 @@
             "status": "Active",
             "recurrence": "Daily",
             "recurrencePeriod": {
-              "from": "2020-06-01T00:00:00Z",
-              "to": "2020-06-30T00:00:00Z"
+              "from": "2023-06-01T00:00:00Z",
+              "to": "2023-06-30T00:00:00Z"
             }
           },
-          "nextRunTimeEstimate": "2020-06-01T23:00:00Z",
-          "format": "Parquet",
+          "nextRunTimeEstimate": "2023-06-01T23:00:00Z",
+          "format": "Csv",
           "deliveryInfo": {
             "destination": {
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
@@ -77,25 +76,27 @@
             }
           },
           "definition": {
-            "type": "ActualCost",
+            "type": "ReservationDetails",
             "timeframe": "MonthToDate",
             "dataSet": {
-              "granularity": "Daily",
-              "configuration": {
-                "dataVersion": "2023-05-01"
-              }
+                "configuration": {
+                    "columns": [],
+                    "dataVersion": "2023-03-01",
+                    "filters": []
+                },
+                "granularity": "Daily"
             }
-          },
+        },
           "partitionData": true,
           "dataOverwriteBehavior": "OverwritePreviousReport",
-          "compressionMode": "Snappy",
+          "compressionMode": "gzip",
           "exportDescription": "This is a test export."
         }
       }
     },
     "200": {
       "body": {
-        "id": "providers/Microsoft.Billing/billingAccounts/12/departments/1234/providers/Microsoft.CostManagement/exports/TestExport",
+        "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
         "name": "TestExport",
         "type": "Microsoft.CostManagement/exports",
         "eTag": "\"00000000-0000-0000-0000-000000000000\"",
@@ -110,12 +111,12 @@
             "status": "Active",
             "recurrence": "Daily",
             "recurrencePeriod": {
-              "from": "2020-06-01T00:00:00Z",
-              "to": "2020-06-30T00:00:00Z"
+              "from": "2023-06-01T00:00:00Z",
+              "to": "2023-06-30T00:00:00Z"
             }
           },
-          "nextRunTimeEstimate": "2020-06-01T23:00:00Z",
-          "format": "Parquet",
+          "nextRunTimeEstimate": "2023-06-01T23:00:00Z",
+          "format": "Csv",
           "deliveryInfo": {
             "destination": {
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
@@ -124,18 +125,20 @@
             }
           },
           "definition": {
-            "type": "ActualCost",
+            "type": "ReservationDetails",
             "timeframe": "MonthToDate",
             "dataSet": {
-              "granularity": "Daily",
-              "configuration": {
-                "dataVersion": "2023-05-01"
-              }
+                "configuration": {
+                    "columns": [],
+                    "dataVersion": "2023-03-01",
+                    "filters": []
+                },
+                "granularity": "Daily"
             }
-          },
+        },
           "partitionData": true,
           "dataOverwriteBehavior": "OverwritePreviousReport",
-          "compressionMode": "Snappy",
+          "compressionMode": "gzip",
           "exportDescription": "This is a test export."
         }
       }
