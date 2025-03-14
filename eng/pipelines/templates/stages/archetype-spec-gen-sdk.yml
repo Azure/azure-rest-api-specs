@@ -158,7 +158,7 @@ extends:
 
           - script: |
               optional_params=""
-              sdk_gen_info="sdk generation from Config : "
+              sdk_gen_info="Configurations: "
 
               if [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "TypeSpec" ]; then
                 optional_params="$optional_params --tsp-config-relative-path ${{ parameters.ConfigPath }}"
@@ -180,10 +180,12 @@ extends:
               fi
               sdk_gen_info="$sdk_gen_info and CommitSHA: '$(SpecRepoCommit)', in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
               echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
-              echo "Generated SDK Information : $sdk_gen_info"
+              echo "$sdk_gen_info"
 
               cd $(SpecRepoDirectory)
+              echo "##[group]Run npm ci"
               npm ci
+              echo "##[endgroup]"
               node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
                 --scp $(SpecRepoDirectory) \
                 --sdp $(SdkRepoDirectory) \

@@ -17,7 +17,8 @@ export interface SpecGenSdkCmdInput {
   headBranch?: string;
 }
 
-export type CommandLog = {
-  command: string;
-  logIssues: string[];
+export type VsoLogs = {
+  task: string;
+  errors?: string[];
+  warnings?: string[];
 };

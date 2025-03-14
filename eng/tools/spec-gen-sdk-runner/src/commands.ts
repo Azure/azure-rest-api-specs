@@ -9,8 +9,9 @@ import {
   resetGitRepo,
 } from "./utils.js";
 import { LogLevel, logMessage, setVsoVariable, vsoAddAttachment, vsoLogIssue } from "./log.js";
-import { CommandLog, SpecGenSdkCmdInput } from "./types.js";
+import { SpecGenSdkCmdInput, VsoLogs } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
+import { should } from "vitest";
 
 export async function generateSdkForSingleSpec(): Promise<number> {
   // Parse the arguments
@@ -39,7 +40,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const executionResult = executionReport.executionResult;
-    logMessage(`Runner command execution Result:${executionResult}`);
+    logMessage(`Runner command execution result:${executionResult}`);
   } catch (error) {
     logMessage(
       `Runner error reading execution report at ${executionReportPath}:${error}`,
@@ -69,6 +70,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
 
   let statusCode = 0;
   let pushedSpecConfigCount;
+  let shouldLabelBreakingChange = false;
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
       logMessage("Runner no spec config file found in the changed files", LogLevel.Warn);
@@ -106,9 +108,9 @@ export async function generateSdkForSpecPr(): Promise<number> {
     );
     try {
       const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       const executionResult = executionReport.executionResult;
-      logMessage(`Runner command execution Result:${executionResult}`);
+      shouldLabelBreakingChange = getShouldLabelBreakingChange(executionReport);
+      logMessage(`Runner command execution result:${executionResult}`);
     } catch (error) {
       logMessage(
         `Runner error reading execution report at ${executionReportPath}:${error}`,
@@ -116,11 +118,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       );
       statusCode = 1;
     }
-    if (statusCode === 0) {
-      statusCode = processBreakingChangeLabelArtifacts(commandInput.workingFolder) || 0;
-    }
     logMessage("ending group logging", LogLevel.EndGroup);
-
     logIssuesToPipeline(
       commandInput.workingFolder,
       changedSpecPathText,
@@ -128,6 +126,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
       changedSpec.readmeMd,
     );
   }
+  // Process the breaking change label artifacts
+  statusCode = processBreakingChangeLabelArtifacts(commandInput, shouldLabelBreakingChange);
   return statusCode;
 }
 
@@ -402,24 +402,48 @@ function logIssuesToPipeline(
   const fileNamePrefix = extractPathFromSpecConfig(tspConfigPath, readmePath);
   const logFolder = path.join(workingFolder, "out/logs");
   const logPath = path.join(logFolder, `${fileNamePrefix}-filtered.log`);
-  let logIssues: CommandLog[] = [];
+  let vsoLogs: VsoLogs[] = [];
   try {
-    const log = JSON.parse(fs.readFileSync(logPath, "utf8"));
+    const logContent = JSON.parse(fs.readFileSync(logPath, "utf8"));
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    logIssues = log.logIssues;
+    vsoLogs = logContent.vsoLogs;
   } catch (error) {
     logMessage(`Error reading log at ${logPath}:${error}`, LogLevel.Warn);
   }
 
-  if (logIssues.length > 0) {
-    logMessage(
-      `Errors occurred while generating SDK from ${specConfigDisplayText}`,
-      LogLevel.Group,
-    );
-    const logIssuesList = logIssues.flatMap((entry) => [entry.command, ...entry.logIssues]);
-    vsoLogIssue(logIssuesList.join("%0D%0A"));
-    logMessage("ending group logging", LogLevel.EndGroup);
+  if (vsoLogs.length > 0) {
+    const errors = vsoLogs.flatMap((entry) => entry.errors ?? []);
+    const warnings = vsoLogs.flatMap((entry) => entry.warnings ?? []);
+    if (errors.length > 0) {
+      const errorTitle = `Errors occurred while generating SDK from ${specConfigDisplayText}`;
+      logMessage(errorTitle, LogLevel.Group);
+      const errorsWithTitle = [errorTitle, ...errors];
+      vsoLogIssue(errorsWithTitle.join("%0D%0A"));
+      logMessage("ending group logging", LogLevel.EndGroup);
+    }
+    if (warnings.length > 0) {
+      const warningTitle = `Warnings occurred while generating SDK from ${specConfigDisplayText}`;
+      logMessage(warningTitle, LogLevel.Group);
+      const warningsWithTitle = [warningTitle, ...warnings];
+      vsoLogIssue(warningsWithTitle.join("%0D%0A"));
+      logMessage("ending group logging", LogLevel.EndGroup);
+    }
   }
+}
+
+/**
+ * Process the breaking change label artifacts.
+ *
+ * @param executionReport - The spec-gen-sdk execution report.
+ * @returns the run status code.
+ */
+function getShouldLabelBreakingChange(executionReport: any): boolean {
+  for (const packageInfo of executionReport.packages) {
+    if (packageInfo.shouldLabelBreakingChange) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
@@ -428,59 +452,35 @@ function logIssuesToPipeline(
  * @param workingFolder - The working directory for the SDK generation process.
  * @returns the run status code.
  */
-function processBreakingChangeLabelArtifacts(workingFolder: string): number {
-  let addBreakingChangeLabelArtifactName = "";
-  let addBreakingChangeLabelAction = "";
-  let removeBreakingChangeLabelArtifactName = "";
-  let removeBreakingChangeLabelAction = "";
-  const addBreakingChangeLabelArtifactPath = "out/breakingchangelabel/add";
-  const removeBreakingChangeLabelArtifactPath = "out/breakingchangelabel/remove";
+function processBreakingChangeLabelArtifacts(
+  commandInput: SpecGenSdkCmdInput,
+  shouldLabelBreakingChange: boolean,
+): number {
+  const breakingChangeLabelArtifactName = "spec-gen-sdk-breaking-change-artifact.json";
+  const breakingChangeLabelArtifactPath = "out/breaking-change-label-artifact";
   try {
-    // Check for breaking change label artifacts
-    const addBreakingChangeLabelArtifactFolder = path.join(
-      workingFolder,
-      addBreakingChangeLabelArtifactPath,
+    // Write breaking change label artifact
+    fs.writeFileSync(
+      path.join(
+        commandInput.workingFolder,
+        breakingChangeLabelArtifactPath,
+        breakingChangeLabelArtifactName,
+      ),
+      JSON.stringify(
+        {
+          language: commandInput.sdkRepoName,
+          labelAction: shouldLabelBreakingChange,
+        },
+        undefined,
+        2,
+      ),
     );
-    logMessage("Processing breaking change label artifacts");
-    if (fs.existsSync(addBreakingChangeLabelArtifactFolder)) {
-      const files = fs.readdirSync(addBreakingChangeLabelArtifactFolder);
-      const breakingChangeFiles = files.filter((file) => file.startsWith("spec-gen-sdk_"));
-      if (breakingChangeFiles.length > 0) {
-        addBreakingChangeLabelArtifactName = breakingChangeFiles[0];
-        addBreakingChangeLabelAction = "add";
-      }
-    }
-    const removeBreakingChangeLabelArtifactFolder = path.join(
-      workingFolder,
-      removeBreakingChangeLabelArtifactPath,
-    );
-    if (fs.existsSync(removeBreakingChangeLabelArtifactFolder)) {
-      const files = fs.readdirSync(removeBreakingChangeLabelArtifactFolder);
-      const breakingChangeFiles = files.filter((file) => file.startsWith("spec-gen-sdk_"));
-      if (breakingChangeFiles.length > 0) {
-        removeBreakingChangeLabelArtifactName = breakingChangeFiles[0];
-        removeBreakingChangeLabelAction = "remove";
-      }
-    }
-    // if add breaking change label artifact is present, set action to "add"
-    if (addBreakingChangeLabelAction === "add") {
-      setVsoVariable("AddBreakingChangeLabelArtifactName", addBreakingChangeLabelArtifactName);
-      setVsoVariable("AddBreakingChangeLabelArtifactPath", addBreakingChangeLabelArtifactPath);
-      setVsoVariable("BreakingChangeLabelAction", addBreakingChangeLabelAction);
-    } else if (removeBreakingChangeLabelAction === "remove") {
-      // if remove breaking change label artifact is present and add breaking change label artifact is not present, set action to "remove"
-      setVsoVariable(
-        "RemoveBreakingChangeLabelArtifactName",
-        removeBreakingChangeLabelArtifactName,
-      );
-      setVsoVariable(
-        "RemoveBreakingChangeLabelArtifactPath",
-        removeBreakingChangeLabelArtifactPath,
-      );
-      setVsoVariable("BreakingChangeLabelAction", removeBreakingChangeLabelAction);
-    }
+    setVsoVariable("BreakingChangeLabelArtifactName", breakingChangeLabelArtifactName);
+    setVsoVariable("BreakingChangeLabelArtifactPath", breakingChangeLabelArtifactPath);
+    setVsoVariable("BreakingChangeLabelAction", shouldLabelBreakingChange ? "add" : "remove");
   } catch (error) {
-    logMessage(`Error reading breaking change label artifacts:${error}`, LogLevel.Error);
+    logMessage(`Runner errors writing breaking change label artifacts:${error}`, LogLevel.Error);
+
     return 1;
   }
   return 0;
