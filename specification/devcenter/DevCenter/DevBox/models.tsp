@@ -762,7 +762,7 @@ model DevBox {
 
   @doc("The active hours configuration for this Dev Box, if enabled.")
   @added(APIVersions.v2025_03_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   activeHoursConfiguration?: ActiveHoursConfiguration;
 }
 
