@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-08-01-preview",
+    "version": "2023-08-01",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -144,13 +144,18 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 AssociationNotFound - This SQL Server is not associated with any NSP\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 OnlyOneAssociationPerServer - A SQL Server may only be associated with one NSP\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 AssociationNotFound - This SQL Server is not associated with any NSP\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 OnlyOneAssociationPerServer - A SQL Server may only be associated with one NSP\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           },
           "202": {
-            "description": "Reconcile NSP Configuration operation accepted"
+            "description": "Reconcile NSP Configuration operation accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -206,7 +211,8 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "networkSecurityPerimeter": {
           "$ref": "#/definitions/NSPConfigPerimeter"
@@ -265,6 +271,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NSPConfigNetworkSecurityPerimeterRule"
+          }
+        },
+        "serviceTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }

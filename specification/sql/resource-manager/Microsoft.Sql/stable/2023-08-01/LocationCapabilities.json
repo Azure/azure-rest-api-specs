@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-08-01-preview",
+    "version": "2023-08-01",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -1601,7 +1601,11 @@
             "GZRS"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          }
         },
         "status": {
           "description": "The status of the capability.",
@@ -1650,8 +1654,7 @@
         },
         "reason": {
           "description": "The reason for the capability not being available.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     }
