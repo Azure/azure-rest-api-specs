@@ -1695,44 +1695,23 @@
           "$ref": "#/definitions/CallIntelligenceOptions",
           "description": "AI options for the call."
         },
-        "streamingTransportOptions": {
-          "$ref": "#/definitions/StreamingTransportOptions",
-          "description": "Streaming transport options for the call."
+        "mediaStreamingOptions": {
+          "$ref": "#/definitions/MediaStreamingOptions",
+          "description": "Media Streaming Options."
         }
       }
     },
-    "WebSocketTransportOptions": {
-      "description": "Represents the options for WebSocket transport.",
-      "required": [
-        "kind"
+    "MediaStreamingAudioChannelType": {
+      "description": "Gets or sets the audio channel type to stream, e.g., unmixed audio, mixed audio.",
+      "enum": [
+        "mixed",
+        "unmixed"
       ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StreamingTransportOptions"
-        }
-      ],
-      "properties": {
-        "transportUrl": {
-          "description": "Gets or sets the transport URL for media streaming.",
-          "type": "string"
-        },
-        "transportType": {
-          "$ref": "#/definitions/StreamingTransportType"
-        },
-        "test": {
-          "type": "boolean"
-        },
-        "testmediaStreamingOptions": {
-          "$ref": "#/definitions/MediaStreamingOptions",
-          "description": "Media streaming options."
-        },
-        "testtranscriptionOptions": {
-          "$ref": "#/definitions/TranscriptionOptions",
-          "description": "Transcription options."
-        }
-      },
-      "x-ms-discriminator-value": "websocket"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingAudioChannelType",
+        "modelAsString": true
+      }
     },
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
@@ -1764,8 +1743,8 @@
         "modelAsString": true
       }
     },
-    "StreamingTransportOptions": {
-      "description": "Represents the options for streaming transport.",
+    "MediaStreamingOptions": {
+      "description": "Configuration options for media streaming.",
       "required": [
         "kind"
       ],
@@ -1777,15 +1756,15 @@
       },
       "discriminator": "kind"
     },
-    "MediaStreamingAudioChannelType": {
-      "description": "Gets or sets the audio channel type to stream, e.g., unmixed audio, mixed audio.",
+    "AudioFormat": {
+      "description": "Gets or sets the audio format used for encoding, including sample rate and channel type. The default is Pcm16KMono.",
       "enum": [
-        "mixed",
-        "unmixed"
+        "pcm16KMono",
+        "pcm24KMono"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "MediaStreamingAudioChannelType",
+        "name": "AudioFormat",
         "modelAsString": true
       }
     },
@@ -1993,9 +1972,9 @@
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "The identifier of the call automation entity which answers the call"
         },
-        "streamingTransportOptions": {
-          "$ref": "#/definitions/StreamingTransportOptions",
-          "description": "Streaming transport options for the call."
+        "mediaStreamingOptions": {
+          "$ref": "#/definitions/MediaStreamingOptions",
+          "description": "Media Streaming Options."
         }
       }
     },
@@ -2070,9 +2049,9 @@
           "$ref": "#/definitions/CallIntelligenceOptions",
           "description": "AI options for the call."
         },
-        "streamingTransportOptions": {
-          "$ref": "#/definitions/StreamingTransportOptions",
-          "description": "Streaming transport options for the call."
+        "mediaStreamingOptions": {
+          "$ref": "#/definitions/MediaStreamingOptions",
+          "description": "Media Streaming Options."
         }
       }
     },
@@ -4261,42 +4240,34 @@
         }
       }
     },
-    "AudioFormat": {
-      "description": "Gets or sets the audio format used for encoding, including sample rate and channel type. The default is Pcm16KMono.",
-      "enum": [
-        "pcm16KMono",
-        "pcm24KMono"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "AudioFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pcm16KMono",
-            "description": "Pcm16KMono",
-            "value": "Pcm16KMono"
-          },
-          {
-            "name": "Pcm24KMono",
-            "description": "Pcm24KMono",
-            "value": "Pcm24KMono"
-          }
-        ]
-      }
-    },
-    "MediaStreamingOptions": {
-      "description": "Configuration options for media streaming.",
+    "WebSocketMediaStreamingOptions": {
+      "description": "Represents the options for WebSocket transport.",
       "required": [
-        "audioChannelType"
+        "kind"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaStreamingOptions"
+        }
+      ],
       "properties": {
-        "contentType": {
-          "$ref": "#/definitions/MediaStreamingContentType"
-        },
         "audioChannelType": {
           "$ref": "#/definitions/MediaStreamingAudioChannelType"
+        },
+        "transcriptionOptions": {
+          "$ref": "#/definitions/WebSocketTranscriptionOptions",
+          "description": "Transcription Options."
+        },
+        "transportUrl": {
+          "description": "Gets or sets the transport URL for media streaming.",
+          "type": "string"
+        },
+        "transportType": {
+          "$ref": "#/definitions/StreamingTransportType"
+        },
+        "contentType": {
+          "$ref": "#/definitions/MediaStreamingContentType"
         },
         "startMediaStreaming": {
           "description": "Gets or sets a value indicating whether the media streaming should start immediately after the call is answered.",
@@ -4309,18 +4280,19 @@
         "audioFormat": {
           "$ref": "#/definitions/AudioFormat"
         }
-      }
+      },
+      "x-ms-discriminator-value": "websocket"
     },
-    "TranscriptionOptions": {
-      "description": "Configuration options for live transcription.",
-      "required": [
-        "locale"
-      ],
+    "WebSocketTranscriptionOptions": {
+      "description": "Represents the options for WebSocket transport.",
       "type": "object",
       "properties": {
-        "locale": {
-          "description": "The locale for the transcription data, e.g., en-CA, en-AU.",
+        "transportUrl": {
+          "description": "The URL used for live transcription transport.",
           "type": "string"
+        },
+        "transportType": {
+          "$ref": "#/definitions/StreamingTransportType"
         },
         "speechRecognitionModelEndpointId": {
           "description": "The endpoint ID where the custom speech recognition model is deployed.",
