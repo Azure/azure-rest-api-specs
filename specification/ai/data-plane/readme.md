@@ -68,11 +68,9 @@ input-file:
 
 ### Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: assistants_generated.json
     reason: No existing examples.
-  - suppress: UNREFERENCED_JSON_FILE
-    from: 
 ```
