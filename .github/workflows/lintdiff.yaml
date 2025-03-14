@@ -43,11 +43,13 @@ jobs:
           Get-Content ../changed-files.txt
         shell: pwsh
 
+      # TODO: Could be github.sha for merge commit
       - name: Run LintDiff
         run: |
           npm exec --no -- lint-diff \
             --before before \
             --after after \
             --changed-files-path changed-files.txt \
+            --base-branch ${{ github.event.pull_request.base.ref }} \
+            --compare-sha ${{ github.event.pull_request.head.sha }} \
             --out-file $GITHUB_STEP_SUMMARY
-

@@ -125,8 +125,8 @@ export async function getRelatedArmRpcFromDoc(ruleName: string) {
     response = await axios.get(docUrl);
   } catch (e: any) {
     // TODO: Retry? Fail ungracefully?
-    console.log(`Get ${docUrl} failed with ${e.message} .`);
-    // TODO: Should an empty entry be entered into the cache?
+    console.log(`GET ${docUrl} failed with ${e.message} .`);
+    rpcInfoCache.set(ruleName, []);
     return rpcRules;
   }
 

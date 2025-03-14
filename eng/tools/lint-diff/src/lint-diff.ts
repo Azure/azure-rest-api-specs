@@ -52,6 +52,16 @@ export async function main() {
         short: "o",
         default: "lint-diff.md",
       },
+      "base-branch": {
+        type: "string",
+        short: "b",
+        default: "main",
+      },
+      "compare-sha": {
+        type: "string",
+        short: "m",
+        default: "main",
+      },
     },
     strict: true,
   };
@@ -62,6 +72,8 @@ export async function main() {
       after: afterArg,
       "changed-files-path": changedFilesPath,
       "out-file": outFile,
+      "base-branch": baseBranch,
+      "compare-sha": compareSha,
     },
   } = parseArgs(config);
 
@@ -101,6 +113,8 @@ export async function main() {
     afterArg as string,
     changedFilesPath as string,
     outFile as string,
+    baseBranch as string,
+    compareSha as string,
   );
 }
 
@@ -109,6 +123,8 @@ async function runLintDiff(
   afterPath: string,
   changedFilesPath: string,
   outFile: string,
+  baseBranch: string,
+  compareSha: string,
 ) {
   const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
   const dependencyVersion = await getDependencyVersion(dependenciesDir);
@@ -244,11 +260,24 @@ async function runLintDiff(
           `Multiple before candidates found for key ${key} using default tag ${defaultTag}`,
         );
       }
+
+      const beforeReadmeCandidate = reportMap.get("before")!.filter((r) => r.readme === readme);
+      if (beforeReadmeCandidate.length === 1) {
+        runCorrelations.set(key, {
+          before: beforeReadmeCandidate[0],
+          after: results,
+        });
+        continue;
+      } else if (beforeReadmeCandidate.length > 1) {
+        throw new Error(`Multiple before candidates found for key ${key} using readme ${readme}`);
+      }
     }
 
-    throw new Error(
-      `No before candidates found for key ${key} and no default tag found in readme. After state: ${key}`,
-    );
+    console.log(`No before candidates found for key ${key}, using no baseline`);
+    runCorrelations.set(key, {
+      before: null,
+      after: results,
+    });
   }
 
   // See unifiedPipelineHelper.ts:386
@@ -261,13 +290,17 @@ async function runLintDiff(
   // ... | ... | ...
   for (const [_, { before, after }] of runCorrelations.entries()) {
     // TODO: DRY
-    // TODO: Include SHA in the link
     const afterName = after.tag ? after.tag : "default";
     const beforeName = before?.tag ? before?.tag : "default";
     const afterPath = after.tag ? `${after.readme}#tag-${after.tag}` : after.readme;
-    const beforePath = before?.tag ? `${before?.readme}#tag-${before?.tag}` : before?.readme;
+    // TODO: Clean this up
+    const beforePath = before
+      ? before?.tag
+        ? `${before?.readme}#tag-${before?.tag}`
+        : before?.readme
+      : "";
 
-    outputMarkdown += `| ${afterName} | link: [${afterName}](${afterPath}) | link: [${beforeName}](${beforePath}) |\n`;
+    outputMarkdown += `| ${afterName} | link: [${afterName}](${getFileLink(compareSha, `/${afterPath}`)}) | link: [${beforeName}](${getFileLink(baseBranch, `/${beforePath}`)}) |\n`;
   }
 
   outputMarkdown += `\n\n`;
@@ -312,7 +345,7 @@ async function runLintDiff(
 
     for (const violation of newViolations.slice(0, 50)) {
       const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} | ${violation.armRpcs?.join(", ")} |\n`;
+      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(normalizePath(getFile(violation) || ""))}#L${getLine(violation)}](${getFileLink(compareSha, normalizePath(getFile(violation) || ""), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
     }
 
     outputMarkdown += "\n";
@@ -334,7 +367,7 @@ async function runLintDiff(
 
     for (const violation of existingViolations.slice(0, 50)) {
       const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: ${normalizePath(getFile(violation) || "")} ${getLine(violation)} |\n`;
+      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(normalizePath(getFile(violation) || ""))}#L${getLine(violation)}](${getFileLink(compareSha, normalizePath(getFile(violation) || ""), getLine(violation))}) |\n`;
     }
 
     outputMarkdown += `\n`;
@@ -407,6 +440,19 @@ export function normalizePath(path: string, by: string = `${sep}specification${s
   return path.substring(indexOfBy);
 }
 
+export function getPathSegment(path: string): string {
+  return path.split("/").slice(-4).join("/");
+}
+
+export function getFileLink(sha: string, path: string, line: number | null = null) {
+  // TODO: Ensure proper path separator behavior (including, not including leaidng '/')
+  if (line === null) {
+    return `https://github.com/Azure/azure-rest-api-specs/blob/${sha}${path}`;
+  }
+
+  return `https://github.com/Azure/azure-rest-api-specs/blob/${sha}${path}#L${line}`;
+}
+
 export function getDocUrl(id: string) {
   if (id == "FATAL") {
     return `N/A`;
@@ -442,11 +488,6 @@ function iconFor(type: string, num: unknown = undefined) {
     return ":warning:";
   }
 }
-
-// Example: https://github.com/Azure/azure-rest-api-specs/blob/77be1c04ec0374c5e0347e8f9e5a7d4d3028e812/specification/codesigning/resource-manager/Microsoft.CodeSigning/preview/2024-09-30-preview/codeSigningAccount.json#L1036
-// export function getFileLink(path: string, line: number, sha: string) {
-//   return `https://github.com/Azure/azure-rest-api-specs/blob/${sha}/${path}#L${line}`;
-// }
 
 type State = {
   // TODO: Narrow this object to specific properties that are used in later
