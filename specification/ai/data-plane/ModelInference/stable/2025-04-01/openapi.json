@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AI Model Inference",
-    "version": "2024-05-01-preview",
+    "version": "2025-04-01",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -116,16 +116,43 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Audio modality chat completion": {
-            "$ref": "./examples/GetChatCompletions_AudioModality_Gen.json"
+        }
+      }
+    },
+    "/deployments/{model_deployment}/info": {
+      "get": {
+        "operationId": "GetModelInfo",
+        "description": "Returns information about the AI model.\nThe method makes a REST API call to the `/info` route on the given endpoint.\nThis method will only work when using Serverless API or Managed Compute endpoint.\nIt will not work for GitHub Models endpoint or Azure OpenAI endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
-          "maximum set chat completion": {
-            "$ref": "./examples/GetChatCompletions_MaximumSet_Gen.json"
+          {
+            "name": "model_deployment",
+            "in": "path",
+            "description": "The deployment ID of the model.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModelInfo"
+            }
           },
-          "minimum set chat completion": {
-            "$ref": "./examples/GetChatCompletions_MinimumSet_Gen.json"
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
@@ -201,14 +228,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "maximum set embeddings": {
-            "$ref": "./examples/GetEmbeddings_MaximumSet_Gen.json"
-          },
-          "minimum set embeddings": {
-            "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -282,14 +301,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "maximum set image embeddings": {
-            "$ref": "./examples/GetImageEmbeddings_MaximumSet_Gen.json"
-          },
-          "minimum set image embeddings": {
-            "$ref": "./examples/GetImageEmbeddings_MinimumSet_Gen.json"
           }
         }
       }
@@ -1116,6 +1127,10 @@
           "description": "The content of the message.",
           "x-nullable": true
         },
+        "reasoning_content": {
+          "type": "string",
+          "description": "The reasoning content the model used for generating the response"
+        },
         "tool_calls": {
           "type": "array",
           "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
@@ -1255,6 +1270,11 @@
           "format": "int32",
           "description": "The number of tokens corresponding to audio input."
         },
+        "reasoning_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to reasoning."
+        },
         "total_tokens": {
           "type": "integer",
           "format": "int32",
@@ -1263,6 +1283,7 @@
       },
       "required": [
         "audio_tokens",
+        "reasoning_tokens",
         "total_tokens"
       ]
     },
@@ -1749,6 +1770,10 @@
         "content": {
           "type": "string",
           "description": "The content of the message."
+        },
+        "reasoning_content": {
+          "type": "string",
+          "description": "The reasoning content the model used for generating the response"
         },
         "tool_calls": {
           "type": "array",

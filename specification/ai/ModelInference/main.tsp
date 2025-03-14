@@ -14,11 +14,13 @@ using Azure.Core;
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
+      scopes: ["https://ml.azure.com/.default"],
     }
   ]>
 )
-@service(#{ title: "AI Model Inference" })
+@service({
+  title: "AI Model Inference",
+})
 @versioned(ModelInference.Versions)
 namespace ModelInference;
 

@@ -495,7 +495,7 @@ model ChatResponseMessage {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
-  content?: string;
+  content: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The reasoning content the model used for generating the response")

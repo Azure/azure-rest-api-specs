@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: AI Model Inference
-  version: 2024-05-01-preview
+  version: '2025-04-01'
 tags: []
 paths:
   /chat/completions:
@@ -49,6 +49,41 @@ paths:
             schema:
               $ref: '#/components/schemas/ChatCompletionsOptions'
         description: The parameters of the chat completions request.
+  /deployments/{model_deployment}/info:
+    get:
+      operationId: getModelInfo
+      description: |-
+        Returns information about the AI model.
+        The method makes a REST API call to the `/info` route on the given endpoint.
+        This method will only work when using Serverless API or Managed Compute endpoint.
+        It will not work for GitHub Models endpoint or Azure OpenAI endpoint.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: model_deployment
+          in: path
+          required: true
+          description: The deployment ID of the model.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelInfo'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
   /embeddings:
     post:
       operationId: getEmbeddings
@@ -861,6 +896,9 @@ components:
           type: string
           nullable: true
           description: The content of the message.
+        reasoning_content:
+          type: string
+          description: The reasoning content the model used for generating the response
         tool_calls:
           type: array
           items:
@@ -929,12 +967,17 @@ components:
       type: object
       required:
         - audio_tokens
+        - reasoning_tokens
         - total_tokens
       properties:
         audio_tokens:
           type: integer
           format: int32
           description: The number of tokens corresponding to audio input.
+        reasoning_tokens:
+          type: integer
+          format: int32
+          description: The number of tokens corresponding to reasoning.
         total_tokens:
           type: integer
           format: int32
@@ -1290,6 +1333,9 @@ components:
         content:
           type: string
           description: The content of the message.
+        reasoning_content:
+          type: string
+          description: The reasoning content the model used for generating the response
         tool_calls:
           type: array
           items:
