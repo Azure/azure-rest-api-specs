@@ -564,6 +564,22 @@ alias EnableJobRequiredParameters = {
   jobId: string;
 };
 
+alias TerminateJobRequiredParameters = {
+  @doc("The ID of the Job to terminate.")
+  @path
+  jobId: string;
+};
+
+alias TerminateJobOptionalParameters = {
+  @doc("The options to use for terminating the Job.")
+  @bodyRoot
+  parameters?: BatchJobTerminateContent;
+
+  @doc("If true, the server will terminate the Job even if the corresponding nodes have not fully processed the termination. The default value is false.")
+  @query
+  force?: boolean;
+};
+
 alias ListJobsParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
@@ -759,22 +775,13 @@ interface Jobs {
     Tasks cannot be added and any remaining active Tasks will not be scheduled.
     """)
   @route("/jobs/{jobId}/terminate")
-  @clientName("terminateJobInternal", "java")
-  terminateJob is PostOperation<
-    BatchMatchHeaders &
-      MinimalMetadata & {
-        @doc("The ID of the Job to terminate.")
-        @path
-        jobId: string;
-
-        @doc("The options to use for terminating the Job.")
-        @bodyRoot
-        parameters?: BatchJobTerminateContent;
-
-        @doc("If true, the server will terminate the Job even if the corresponding nodes have not fully processed the termination. The default value is false.")
-        @query
-        force?: boolean;
-      },
+  terminateJob is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...TerminateJobRequiredParameters;
+      ...TerminateJobOptionalParameters;
+    },
     AcceptedProcessingResponseHeaders
   >;
 

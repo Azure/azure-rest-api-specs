@@ -573,6 +573,30 @@ op enableJobCustomization is Azure.Batch.PostOperationNew<
 
 @@override(Azure.Batch.Jobs.enableJob, enableJobCustomization, "java");
 
+// Terminate Job Operation
+@doc("Optional parameters for Terminate Job operation.")
+model TerminateBatchJobOptions {
+  ...Azure.Batch.CommonJsonParameters;
+  ...Azure.Batch.TerminateJobOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Terminate Job operation.")
+@route("/jobs/{jobId}/terminate")
+op terminateJobCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.TerminateJobRequiredParameters;
+
+    @doc("Optional parameters for Terminate Job operation.")
+    options?: TerminateBatchJobOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.AcceptedProcessingResponseHeaders
+>;
+
+@@override(Azure.Batch.Jobs.terminateJob, terminateJobCustomization, "java");
+
 // List Jobs Operation
 @doc("Optional parameters for List Jobs operation.")
 model ListBatchJobsOptions {
