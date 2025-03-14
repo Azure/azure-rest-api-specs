@@ -54,7 +54,7 @@ model Instruction {
 @resource("versions")
 @parentResource(Instruction)
 @doc("This is the request model for Instruction Version")
-model InstructionVerion {
+model InstructionVersion {
   @doc("The version of the instruction.")
   @key
   @visibility(Lifecycle.Read)
