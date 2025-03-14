@@ -22,10 +22,14 @@ options:
     emitter-output-dir: "{project-root}/../"
     output-file: "{output-folder-base}/data-plane/OpenApi3/Microsoft.OnlineExperimentation/preview/{version}/onlineexperimentation.json"
   "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/analytics"
     package-dir: "azonlineexperimentation"
-    service-dir: "sdk/onlineexperimentation"
+    module-version: "0.0.1"
     generate-fakes: true
     inject-spans: true
+    single-client: true
+    slice-elements-byval: true
   "@azure-tools/typespec-python":
     package-dir: "onlineexperimentation"
     package-name: "azure-analytics-onlineexperimentation"
