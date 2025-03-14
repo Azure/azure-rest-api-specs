@@ -1762,29 +1762,29 @@
     "MediaStreamingOptions": {
       "description": "Configuration options for media streaming.",
       "required": [
-        "kind",
+        "transportType",
         "audioChannelType"
       ],
       "type": "object",
       "properties": {
-        "kind": {
+        "transportType": {
           "$ref": "#/definitions/StreamingTransportType"
         },
         "audioChannelType": {
           "$ref": "#/definitions/MediaStreamingAudioChannelType"
         }
       },
-      "discriminator": "kind"
+      "discriminator": "transporttype"
     },
     "TranscriptionOptions": {
       "description": "Configuration options for live transcription.",
       "required": [
-        "kind",
+        "transportType",
         "locale"
       ],
       "type": "object",
       "properties": {
-        "kind": {
+        "transportType": {
           "$ref": "#/definitions/StreamingTransportType"
         },
         "locale": {
@@ -1792,12 +1792,12 @@
           "type": "string"
         }
       },
-      "discriminator": "kind"
+      "discriminator": "transporttype"
     },
     "WebSocketMediaStreamingOptions": {
       "description": "Represents the options for WebSocket transport.",
       "required": [
-        "kind",
+        "transportType",
         "audioChannelType"
       ],
       "type": "object",
@@ -1810,9 +1810,6 @@
         "transportUrl": {
           "description": "Gets or sets the transport URL for media streaming.",
           "type": "string"
-        },
-        "transportType": {
-          "$ref": "#/definitions/StreamingTransportType"
         },
         "contentType": {
           "$ref": "#/definitions/MediaStreamingContentType"
@@ -4314,7 +4311,7 @@
     "WebSocketTranscriptionOptions": {
       "description": "Represents the options for WebSocket transport.",
       "required": [
-        "kind",
+        "transportType",
         "locale"
       ],
       "type": "object",
@@ -4327,9 +4324,6 @@
         "transportUrl": {
           "description": "The URL used for live transcription transport.",
           "type": "string"
-        },
-        "transportType": {
-          "$ref": "#/definitions/StreamingTransportType"
         },
         "speechRecognitionModelEndpointId": {
           "description": "The endpoint ID where the custom speech recognition model is deployed.",
