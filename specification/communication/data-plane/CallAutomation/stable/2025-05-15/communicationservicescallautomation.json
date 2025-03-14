@@ -1704,7 +1704,9 @@
     "WebSocketTransportOptions": {
       "description": "Represents the options for WebSocket transport.",
       "required": [
-        "kind"
+        "kind",
+        "mediaStreamingOptions",
+        "transcriptionOptions"
       ],
       "type": "object",
       "allOf": [
@@ -1725,8 +1727,7 @@
         },
         "mediaStreamingOptions": {
           "$ref": "#/definitions/MediaStreamingOptions",
-          "description": "Media streaming options.",
-          "type": "object"
+          "description": "Media streaming options."
         },
         "transcriptionOptions": {
           "$ref": "#/definitions/TranscriptionOptions",
