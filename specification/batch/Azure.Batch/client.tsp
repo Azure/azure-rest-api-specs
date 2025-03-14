@@ -8,6 +8,7 @@ using Azure.ClientGenerator.Core;
 namespace Client;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+#suppress "deprecated" ""
 @client({
   name: "BatchClient",
   service: Azure.Batch,
@@ -45,6 +46,12 @@ interface BatchClient {
   listJobsFromSchedule is Azure.Batch.Jobs.listJobsFromSchedule;
   listJobPreparationAndReleaseTaskStatus is Azure.Batch.Jobs.listJobPreparationAndReleaseTaskStatus;
   getJobTaskCounts is Azure.Batch.Jobs.getJobTaskCounts;
+
+  createCertificate is Azure.Batch.Certificates.createCertificate;
+  listCertificates is Azure.Batch.Certificates.listCertificates;
+  cancelCertificateDeletion is Azure.Batch.Certificates.cancelCertificateDeletion;
+  deleteCertificate is Azure.Batch.Certificates.deleteCertificate;
+  getCertificate is Azure.Batch.Certificates.getCertificate;
 
   jobScheduleExists is Azure.Batch.JobSchedules.jobScheduleExists;
   deleteJobSchedule is Azure.Batch.JobSchedules.deleteJobSchedule;
@@ -168,6 +175,21 @@ interface BatchClient {
   "java"
 );
 @@clientName(BatchClient.getJobTaskCounts, "getJobTaskCountsInternal", "java");
+
+@@clientName(BatchClient.createCertificate,
+  "createCertificateInternal",
+  "java"
+);
+@@clientName(BatchClient.listCertificates, "listCertificatesInternal", "java");
+@@clientName(BatchClient.cancelCertificateDeletion,
+  "cancelCertificateDeletionInternal",
+  "java"
+);
+@@clientName(BatchClient.deleteCertificate,
+  "deleteCertificateInternal",
+  "java"
+);
+@@clientName(BatchClient.getCertificate, "getCertificateInternal", "java");
 
 @@clientName(BatchClient.jobScheduleExists,
   "jobScheduleExistsInternal",
@@ -304,6 +326,8 @@ interface BatchClient {
   "java"
 );
 @@access(Azure.Batch.BatchTaskCountsResult, Access.public, "java");
+@@access(Azure.Batch.BatchCertificate, Access.public, "java");
+@@access(Azure.Batch.BatchCertificateListResult, Access.public, "java");
 @@access(Azure.Batch.BatchJobSchedule, Access.public, "java");
 @@access(Azure.Batch.BatchJobScheduleUpdateContent, Access.public, "java");
 @@access(Azure.Batch.BatchJobScheduleCreateContent, Access.public, "java");
@@ -314,7 +338,6 @@ interface BatchClient {
 @@access(Azure.Batch.BatchTaskAddCollectionResult, Access.public, "java");
 @@access(Azure.Batch.BatchTask, Access.public, "java");
 @@access(Azure.Batch.BatchTaskListSubtasksResult, Access.public, "java");
-@@access(Azure.Batch.BatchTaskFileClientPathContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeFileListResult, Access.public, "java");
 @@access(Azure.Batch.BatchNodeUserCreateContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeUserUpdateContent, Access.public, "java");
@@ -329,6 +352,5 @@ interface BatchClient {
 @@access(Azure.Batch.BatchNodeListResult, Access.public, "java");
 @@access(Azure.Batch.BatchNodeVMExtension, Access.public, "java");
 @@access(Azure.Batch.BatchNodeVMExtensionListResult, Access.public, "java");
-@@access(Azure.Batch.BatchNodeFileClientPathContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeFileListResult, Access.public, "java");
 @@access(Azure.Batch.BatchError, Access.public, "java");
