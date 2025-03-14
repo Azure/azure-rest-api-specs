@@ -63,5 +63,5 @@ union ConnectionType {
   ApplicationInsights: "AppInsights",
 
   @doc("Custom Keys")
-  Custom: "CustomKeys"
+  Custom: "CustomKeys",
 }
