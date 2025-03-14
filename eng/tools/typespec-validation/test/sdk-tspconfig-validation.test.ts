@@ -162,6 +162,7 @@ interface Case {
   subRules: TspconfigSubRuleBase[];
   tspconfigContent: string;
   success: boolean;
+  ignoredKeyPaths?: string[];
 }
 
 const managementTspconfigFolder = "contosowidgetmanager/Contoso.Management/";
@@ -182,6 +183,27 @@ const tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
   false,
   [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
 );
+
+const newTsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  managementTspconfigFolder,
+  "generate-metadata",
+  true,
+  false,
+  [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
+);
+
+const mixTsManagementGenerateMetadataTestCase = {
+  description: `Validate @azure-tools/typespec-ts's mix options: generate-metadata/generateMetadata with different values`,
+  folder: "aaa.Management",
+  tspconfigContent: createEmitterOptionExample(
+    "@azure-tools/typespec-ts",
+    { key: "generateMetadata", value: true },
+    { key: "generate-metadata", value: false },
+  ),
+  success: false,
+  subRules: [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
+};
 
 const tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
@@ -463,17 +485,45 @@ const csharpMgmtPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpMgmtPackageDirectorySubRule()],
 );
 
+const suppressSubRuleTestCases: Case[] = [
+  {
+    description: "Suppress parameter",
+    folder: "",
+    subRules: [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
+    tspconfigContent: `
+parameters:
+  service-dir-x: ""
+`,
+    success: true,
+    ignoredKeyPaths: ["parameters.service-dir.default"],
+  },
+  {
+    description: "Suppress option",
+    folder: managementTspconfigFolder,
+    subRules: [new TspConfigTsMgmtModularPackageDirectorySubRule()],
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    package-dir: "*@#$%(@)*$#@!()#*&"
+`,
+    success: true,
+    ignoredKeyPaths: ["options.@azure-tools/typespec-ts.package-dir"],
+  },
+];
+
 describe("tspconfig", function () {
   it.each([
     // common
     ...commonAzureServiceDirTestCases,
     // ts
+    ...newTsManagementGenerateMetadataTestCases,
     ...tsManagementGenerateMetadataTestCases,
     ...tsManagementHierarchyClientTestCases,
     ...tsManagementExperimentalExtensibleEnumsTestCases,
     ...tsManagementEnableOperationGroupTestCases,
     ...tsManagementPackageDirTestCases,
     ...tsManagementPackageNameTestCases,
+    mixTsManagementGenerateMetadataTestCase,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
@@ -504,12 +554,23 @@ describe("tspconfig", function () {
     ...csharpAzNamespaceTestCases,
     ...csharpAzClearOutputFolderTestCases,
     ...csharpMgmtPackageDirTestCases,
+    // suppression
+    ...suppressSubRuleTestCases,
   ])(`$description`, async (c: Case) => {
     let host = new TsvTestHost();
     host.checkFileExists = async (file: string) => {
       return file === join(c.folder, "tspconfig.yaml");
     };
     host.readTspConfig = async (_folder: string) => c.tspconfigContent;
+    host.getSuppressions = async (_path: string) => [
+      {
+        tool: "TypeSpecValidation",
+        paths: ["tspconfig.yaml"],
+        reason: "Test reason",
+        rules: ["SdkTspConfigValidation"],
+        subRules: c.ignoredKeyPaths,
+      },
+    ];
     const rule = new SdkTspConfigValidationRule(c.subRules);
     const result = await rule.execute(host, c.folder);
     strictEqual(result.success, true);
