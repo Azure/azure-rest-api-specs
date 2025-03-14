@@ -49,6 +49,7 @@ model InputDataset extends InputData {
 model Evaluation {
   @doc("Identifier of the evaluation.")
   @key("name")
+  @visibility("read")
   id: string;
 
   @doc("Data for evaluation.")
