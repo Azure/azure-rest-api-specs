@@ -4,7 +4,11 @@ on:
   issue_comment:
     types:
       - edited
-  pull_request:
+  # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
+  # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
+  # triggers "issue_comment" and "workflow_run" -- they are all privileged# and run in the target
+  # branch and repo -- which simplifies implementation.
+  pull_request_target:
     types:
       # Depends on labels, so must re-evaluate whenever a relevant label is manually added or removed.
       - labeled
@@ -43,13 +47,13 @@ jobs:
   arm-auto-signoff-preview:
     name: ARM Auto SignOff (Preview)
 
-    # pull_request:labeled - filter to only the input and output labels
+    # pull_request_target:labeled - filter to only the input and output labels
     # issue_comment:edited - filter to only PR comments containing "next steps to merge",
     #   a signal that "Swagger LintDiff" status may have changed
     if: |
       github.event_name == 'workflow_dispatch' ||
       github.event_name == 'workflow_run' ||
-      (github.event_name == 'pull_request' &&
+      (github.event_name == 'pull_request_target' &&
        (github.event.action == 'labeled' ||
         github.event.action == 'unlabeled') &&
        (github.event.label.name == 'ARMReview' ||
@@ -64,9 +68,17 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
+      # *** IMPORTANT ***
+      # For workflows that are triggered by the pull_request_target event, the workflow runs in the
+      # context of the base of the pull request.  You should make sure that you do not check out,
+      # build, or run untrusted code from the head of the pull request.
       - uses: actions/checkout@v4
         with:
-          # Only needs .github folder for automation, not the files in the PR (analyzed in a separate workflow)
+          # Only needs .github folder for automation, not the files in the PR (analyzed in a
+          # separate workflow).
+          #
+          # Uses the .github folder from the PR base branch (pull_request_target trigger),
+          # or the repo default branch (other triggers).
           sparse-checkout: |
             .github
 
@@ -99,10 +111,10 @@ jobs:
           # Convert "add/remove" to "true/false"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelAction == 'add' }}"
 
-      # Required for consumers to identify the PR associated with this workflow run
+      # Required for consumers to identify the PR associated with this workflow run.
       # Output can be trusted, because it was uploaded from a workflow that is trusted,
-      # because "issue_comment" and "workflow_run" only trigger on workflows in the default branch.
-      # Consumers should verify the "event_name" before attempting to extract from the artifact name
+      # because "issue_comment", and "workflow_run" only trigger on workflows in the default branch.
+      # Consumers should verify the "event_name" before attempting to extract from the artifact name.
       - if: ${{ github.event_name == 'issue_comment' || github.event_name == 'workflow_run' }}
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
