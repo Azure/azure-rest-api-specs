@@ -20,20 +20,12 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
-    },
-    {
       "OAuth2Auth": [
         "https://ml.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "api-key",
-      "in": "header"
-    },
     "OAuth2Auth": {
       "type": "oauth2",
       "flow": "implicit",
@@ -48,7 +40,7 @@
     "/chat/completions": {
       "post": {
         "operationId": "GetChatCompletions",
-        "description": "Gets chat completions for the provided chat messages.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data. The method makes a REST API call to the `/chat/completions` route \non the given endpoint.",
+        "description": "Gets chat completions for the provided chat messages.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data. The method makes a REST API call to the `/chat/completions` route\non the given endpoint.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -777,13 +769,13 @@
         "function"
       ]
     },
-    "ChatMessageAudioContentItem": {
+    "ChatMessageAudioDataContentItem": {
       "type": "object",
-      "description": "A structured chat content item containing an audio content.",
+      "description": "A structured chat content item for audio content passed as base64 encoded data.",
       "properties": {
         "input_audio": {
           "$ref": "#/definitions/ChatMessageInputAudio",
-          "description": "The details of the input audio.",
+          "description": "The details of the input audio data.",
           "x-ms-client-name": "inputAudio"
         }
       },
@@ -796,6 +788,26 @@
         }
       ],
       "x-ms-discriminator-value": "input_audio"
+    },
+    "ChatMessageAudioUrlContentItem": {
+      "type": "object",
+      "description": "A structured chat content item for audio content passed as a url.",
+      "properties": {
+        "audio_url": {
+          "$ref": "#/definitions/ChatMessageInputAudioUrl",
+          "description": "The details of the audio url.",
+          "x-ms-client-name": "audioUrl"
+        }
+      },
+      "required": [
+        "audio_url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "audio_url"
     },
     "ChatMessageContentItem": {
       "type": "object",
@@ -880,7 +892,7 @@
     },
     "ChatMessageInputAudio": {
       "type": "object",
-      "description": "The details of an audio chat message content part.",
+      "description": "The details of the input audio data.",
       "properties": {
         "data": {
           "type": "string",
@@ -894,6 +906,19 @@
       "required": [
         "data",
         "format"
+      ]
+    },
+    "ChatMessageInputAudioUrl": {
+      "type": "object",
+      "description": "The details of the audio url.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the audio content."
+        }
+      },
+      "required": [
+        "url"
       ]
     },
     "ChatMessageTextContentItem": {
@@ -1407,7 +1432,9 @@
           "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
         },
         "parameters": {
-          "description": "The parameters the function accepts, described as a JSON Schema object."
+          "type": "object",
+          "description": "The parameters the function accepts, described as a JSON Schema object.",
+          "additionalProperties": {}
         }
       },
       "required": [
