@@ -20,5 +20,5 @@ alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 @doc("Get operation progress")
 interface Operations {
   @doc("Get operation progress")
-  getOperationResponse is apiOperations.ResourceRead<OperationResponse>;
+  get is apiOperations.ResourceRead<OperationResponse>;
 }

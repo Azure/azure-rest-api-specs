@@ -35,7 +35,7 @@ interface Aliases {
 
   @doc("Update an alias")
   @pollingOperation(
-    MdsSolution.CopilotService.OperationStatus.Operations.getOperationResponse
+    MdsSolution.CopilotService.OperationStatus.Operations.get
   )
   createOrReplace is apiOperations.LongRunningResourceCreateOrReplace<Alias>;
 
