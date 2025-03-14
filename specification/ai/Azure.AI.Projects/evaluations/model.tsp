@@ -125,8 +125,8 @@ model EvaluationTarget {
   @doc("Model configuration for the evaluation.")
   modelConfig: TargetModelConfig;
 
-  @doc("A dictionary of parameters for the model.")
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Needed since value type is not fixed"
+  @doc("A dictionary of parameters for the model.")
   modelParams?: Record<unknown>;
 }
 
