@@ -1,43 +1,62 @@
 import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
 
-@Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace ServicePatterns {
 
+    @Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
     namespace Private {
-        alias FoundryPaged<TModel> = {
-            continuationToken: string;
-        };
-        
-        alias Ops = Azure.Core.StandardResourceOperations;
-        alias ResourceList<TModel extends Reflection.Model, TParams extends Reflection.Model> = Ops.ResourceList<TModel, Azure.Core.Traits.QueryParametersTrait<TParams>>;
-        alias RetryableOps = Azure.Core.ResourceOperations<
-            Azure.Core.Traits.NoConditionalRequests & 
-            Azure.Core.Traits.SupportsClientRequestId &
-            Azure.Core.Traits.SupportsRepeatableRequests>;
 
-        /**
-         * Empty parent resource for versioned CRUDL. Should not be used directly; only intended to be used
-         * by the `Versioned` model template.
-         */
-        @Rest.resource(collection)
-        model ParentResource<collection extends valueof string> {
-            @key
+        model VersionedShape {
             id: string;
+            version: string;
         }
 
-        @friendlyName("{name}ByVersion", TModel)
-        model _FriendlyNamePaged<TModel extends Reflection.Model> is Azure.Core.Page<TModel> {
+        alias ApiVersionParameter = {
+          @Http.query `api-version`: string;
+        };
+
+        alias ErrorResponse = Azure.Core.Foundations.ErrorResponse;
+
+        model Paged<TModel extends Reflection.Model> {
+          @continuationToken
+          @Http.header("continuationToken") `$skipToken`?: string;
+          @Http.bodyRoot _: TModel[];
         }
+
+        alias ListPaginationParameters = {
+          @continuationToken
+          @Http.query `$skipToken`?: string;
+        };
 
         /**
-         * List the latest version of a versioned model
+         * List the latest version for each versioned {TModel}. Nothing more, nothing less!
          */
-        @Http.route(collectionRoute)
-        op ListLatest<collectionRoute extends valueof string, TModel extends Reflection.Model>(... Azure.Core.Foundations.ApiVersionParameter): _FriendlyNamePaged<TModel> | Azure.Core.Foundations.ErrorResponse;
+        op ListLatest<TModel extends Reflection.Model>(... ListPaginationParameters, ... ApiVersionParameter): Paged<TModel> | ErrorResponse;
+
+        /**
+         * List all versions of a given versioned model.
+         */
+        @Http.route("{id}/versions")
+        op ListVersions<TModel extends Reflection.Model, TQueryParameters extends Reflection.Model>(id: string, ... TQueryParameters, ... ListPaginationParameters, ... ApiVersionParameter): Paged<TModel> | ErrorResponse;
+
+        /**
+         * Get the given given model version
+         */
+        @Http.route("{id}/versions/{version}")
+        op ResourceRead<TModel extends VersionedShape>(... Rest.Resource.KeysOf<TModel>, version: string, ... ApiVersionParameter): TModel | ErrorResponse;
+
+        @Http.route("{id}/versions/{version}")
+        @Http.delete op ResourceDelete(id: string, version: string): void | ErrorResponse;
+
+        @Http.route("{id}/versions")
+        @Http.post op ResourceCreate<TModel extends VersionedShape>(@Http.path id: string, @Http.bodyRoot _: TModel, ... Azure.Core.RepeatabilityRequestHeaders, ... ApiVersionParameter): TModel & Azure.Core.RepeatabilityResponseHeaders| ErrorResponse;
+
+        @Http.route("{id}/versions/{version}")
+        @Http.patch op ResourceUpdate<TModel extends Reflection.Model>(@Http.path id: string, @Http.path version: string, @Http.bodyRoot _:  TModel, ... ApiVersionParameter): TModel | ErrorResponse;
+    
     }
 
+    @Http.route("{id}/versions/{version}:${name}")
+    @Http.post op VersionedModelAction<name extends valueof string, TParams extends Reflection.Model, TResult>(@Http.path id: string, @Http.path version: string, ... TParams): TResult | Private.ErrorResponse;
     /**
      * Defines a versioned subresource without you having to create a dummy parent resource.
      * 
@@ -48,25 +67,34 @@ namespace ServicePatterns {
      * 
      *     interface MyModels extends VersionedOperations<MyModel> {};
      */
-    @Rest.parentResource(Private.ParentResource<collection>)
-    @Rest.resource("versions")
-    model Versioned<collection extends valueof string> {
-        ... Rest.Resource.ParentKeysOf<Private.ParentResource<collection>>;
-
-        @key
+    model Versioned {
+        /**
+         * The version of the object.
+         */
+        @visibility(Lifecycle.Read)
         version: string;
+
+        @visibility(Lifecycle.Read)
+        lastModified: utcDateTime;
+
+        @visibility(Lifecycle.Read)
+        createdTime: utcDateTime;
+    };
+
+
+    interface VersionedItemOperations<TModel extends Private.VersionedShape> {
+        op get is Private.ResourceRead<TModel>;
+        op delete is Private.ResourceDelete;
+        op create is Private.ResourceCreate<TModel>;
+        op update is Private.ResourceUpdate<TModel>;
     }
 
-    interface VersionedOperations<collectionRoute extends valueof string, TModel extends Reflection.Model, ListParameters extends Reflection.Model = {}> {
+    interface VersionedCrudlOperations<TModel extends Private.VersionedShape, ListParameters extends Reflection.Model = {}> extends VersionedItemOperations<TModel> {
         /**
          * List the latest versions 
          */
-        op listLatest is Private.ListLatest<collectionRoute, TModel>;
-        op listVersions is Private.ResourceList<TModel, ListParameters>;
-        
-        op get is Private.Ops.ResourceRead<TModel>;
-        op delete is Private.Ops.ResourceDelete<TModel>;
-        op create is Private.RetryableOps.ResourceCreateWithServiceProvidedName<TModel>;
-        op createOrReplace is Private.Ops.ResourceCreateOrReplace<TModel>;
+        op listLatest is Private.ListLatest<TModel>;
+        op listVersions is Private.ListVersions<TModel, ListParameters>;
     }
 }
+

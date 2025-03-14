@@ -16,10 +16,11 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Unified;
 
-interface Datasets extends ServicePatterns.VersionedOperations<"datasets", DatasetVersion, ListParameters = {
+@Http.route("datasets")
+interface Datasets extends ServicePatterns.VersionedCrudlOperations<DatasetVersion, ListParameters = {
     @doc("Please choose OrderBy value from ['createdtime', 'modifiedtime']")
     @query("$orderBy")
-    $orderBy?: string,
+    $orderBy?: "createdTime" | "modifiedTime",
 
     @doc("Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned")
     @query("$top")
@@ -38,7 +39,7 @@ interface Datasets extends ServicePatterns.VersionedOperations<"datasets", Datas
     listViewType?: ListViewType,
 }> {
 
-  op startPendingUpload is Azure.Core.ResourceAction<DatasetVersion, PendingUploadRequest, PendingUploadResponse>;
+  op startPendingUpload is ServicePatterns.VersionedModelAction<"upload", PendingUploadRequest, PendingUploadResponse>;
 
 };
 

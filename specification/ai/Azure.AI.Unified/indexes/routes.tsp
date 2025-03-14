@@ -13,4 +13,5 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Unified;
 
-interface Indexes extends ServicePatterns.VersionedOperations<"indexes", Index> {};
+@Http.route("indexes")
+interface Indexes extends ServicePatterns.VersionedCrudlOperations<Index> {};

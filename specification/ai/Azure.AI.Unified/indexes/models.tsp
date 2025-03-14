@@ -17,7 +17,9 @@ namespace Azure.AI.Unified;
 
 @doc("Index resource Definition")
 @discriminator("indexType")
-model Index is ServicePatterns.Versioned<"indexes"> {
+model Index is ServicePatterns.Versioned {
+  @key
+  id: string;
   @doc("Type of index")
   indexType: IndexType;
 }

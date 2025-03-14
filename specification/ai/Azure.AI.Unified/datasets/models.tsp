@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
 import "../main.tsp";
+import "../servicepatterns.tsp";
 import "@typespec/openapi";
 import "@typespec/versioning";
 
@@ -30,7 +31,11 @@ union DatasetType {
 
 @doc("DatasetVersion Definition")
 @discriminator("datasetType")
-model DatasetVersion is ServicePatterns.Versioned<"datasets"> {
+model DatasetVersion is ServicePatterns.Versioned {
+  @key
+  @visibility("read")
+  id: string;
+
   datasetUri: string;
 
   @doc("Data type")
