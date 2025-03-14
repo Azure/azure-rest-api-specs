@@ -528,6 +528,16 @@ alias GetJobOptionalParameters = {
   $expand?: string[];
 };
 
+alias UpdateJobRequiredParameters = {
+  @doc("The ID of the Job whose properties you want to update.")
+  @path
+  jobId: string;
+
+  @doc("The options to use for updating the Job.")
+  @bodyRoot
+  job: BatchJobUpdateContent;
+};
+
 alias ListJobsParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
@@ -648,16 +658,11 @@ interface Jobs {
     element, then the Job keeps the existing constraints.
     """)
   @route("/jobs/{jobId}")
-  @clientName("updateJobInternal", "java")
-  updateJob is UpdateOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job whose properties you want to update.")
-      @path
-      jobId: string;
-
-      @doc("The options to use for updating the Job.")
-      @bodyRoot
-      job: BatchJobUpdateContent;
+  updateJob is UpdateOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...UpdateJobRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;
