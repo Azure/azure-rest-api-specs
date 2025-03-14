@@ -550,6 +550,29 @@ op disableJobCustomization is Azure.Batch.PostOperationNew<
 
 @@override(Azure.Batch.Jobs.disableJob, disableJobCustomization, "java");
 
+// Enable Job Operation
+@doc("Optional parameters for Enable Job operation.")
+model EnableBatchJobOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Enable Job operation.")
+@route("/jobs/{jobId}/enable")
+op enableJobCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.EnableJobRequiredParameters;
+
+    @doc("Optional parameters for Enable Job operation.")
+    options?: EnableBatchJobOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.AcceptedProcessingResponseHeaders
+>;
+
+@@override(Azure.Batch.Jobs.enableJob, enableJobCustomization, "java");
+
 // List Jobs Operation
 @doc("Optional parameters for List Jobs operation.")
 model ListBatchJobsOptions {
