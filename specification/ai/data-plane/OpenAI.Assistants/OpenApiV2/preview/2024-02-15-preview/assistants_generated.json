@@ -483,6 +483,9 @@
       "get": {
         "operationId": "GetFileContent",
         "description": "Returns information about a specific file. Does not retrieve file content.",
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "name": "fileId",
@@ -496,8 +499,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             }
           }
         },
