@@ -510,6 +510,24 @@ alias DeleteJobOptionalParameters = {
   force?: boolean;
 };
 
+alias GetJobRequiredParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+};
+
+alias GetJobOptionalParameters = {
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
 alias ListJobsParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
@@ -613,22 +631,12 @@ interface Jobs {
   @summary("Gets information about the specified Job.")
   @doc("Gets information about the specified Job.")
   @route("/jobs/{jobId}")
-  @clientName("getJobInternal", "java")
-  getJob is ReadOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+  getJob is ReadOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...GetJobRequiredParameters;
+      ...GetJobOptionalParameters;
     },
     BatchJob
   >;

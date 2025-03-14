@@ -116,7 +116,6 @@ interface BatchClient {
 );
 
 // client name overrides
-@@clientName(BatchClient.getJob, "getJobInternal", "java");
 @@clientName(BatchClient.updateJob, "updateJobInternal", "java");
 @@clientName(BatchClient.replaceJob, "replaceJobInternal", "java");
 @@clientName(BatchClient.disableJob, "disableJobInternal", "java");

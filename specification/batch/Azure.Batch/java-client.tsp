@@ -152,6 +152,7 @@ model BatchPoolExistsOptions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Custom override for Pool Exists operation.")
 @route("/pools/{poolId}")
 op poolExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditionalResponseNew<
@@ -455,6 +456,30 @@ op deleteJobCustomization is Azure.Batch.DeleteOperationNew<
 >;
 
 @@override(Azure.Batch.Jobs.deleteJob, deleteJobCustomization, "java");
+
+// Get Job Operation
+@doc("Optional parameters for Get Job operation.")
+model GetBatchJobOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.GetJobOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Get Job operation.")
+@route("/jobs/{jobId}")
+op getJobCustomization is Azure.Batch.ReadOperationNew<
+  {
+    ...Azure.Batch.GetJobRequiredParameters;
+
+    @doc("Optional parameters for Get Job operation.")
+    options?: GetBatchJobOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.BatchJob
+>;
+
+@@override(Azure.Batch.Jobs.getJob, getJobCustomization, "java");
 
 // List Jobs Operation
 @doc("Optional parameters for List Jobs operation.")
