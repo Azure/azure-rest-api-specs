@@ -1,6 +1,6 @@
 // @ts-check
 
-import { PER_PAGE_MAX } from "./github.js";
+import { PER_PAGE_MAX } from "../../src/github.js";
 
 /**
  * Extracts inputs from context based on event name and properties.
