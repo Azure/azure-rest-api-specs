@@ -71,7 +71,7 @@ model VirtualMachineProperties {
   @visibility(Lifecycle.Read)
   displayName?: string;
 
-  @doc("Virtual machine managed object reference id")
+  @doc("vCenter managed object reference ID of the virtual machine")
   @visibility(Lifecycle.Read)
   moRefId?: string;
 
