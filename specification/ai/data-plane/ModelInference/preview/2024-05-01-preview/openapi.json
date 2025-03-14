@@ -12,6 +12,21 @@
   "schemes": [
     "https"
   ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{resource_endpoint}/api/models",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "resource_endpoint",
+        "in": "path",
+        "description": "The Azure AI Services resource endpoint, for example https://my-resource.services.ai.azure.com",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],

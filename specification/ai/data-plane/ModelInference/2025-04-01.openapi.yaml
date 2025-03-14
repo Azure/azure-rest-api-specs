@@ -1379,3 +1379,10 @@ components:
           authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
           scopes:
             https://ml.azure.com/.default: ''
+servers:
+  - url: '{resource_endpoint}/api/models'
+    description: AI Model Inference
+    variables:
+      resource_endpoint:
+        default: ''
+        description: The Azure AI Services resource endpoint, for example https://my-resource.services.ai.azure.com

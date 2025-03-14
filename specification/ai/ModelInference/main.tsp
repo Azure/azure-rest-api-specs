@@ -19,6 +19,14 @@ using Azure.Core;
   ]>
 )
 @service(#{ title: "AI Model Inference" })
+@server(
+  "{resource_endpoint}/api/models",
+  "AI Model Inference",
+  {
+    @doc("The Azure AI Services resource endpoint, for example https://my-resource.services.ai.azure.com")
+    resource_endpoint: url,
+  }
+)
 @versioned(ModelInference.Versions)
 namespace ModelInference;
 
