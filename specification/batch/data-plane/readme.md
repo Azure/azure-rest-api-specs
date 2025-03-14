@@ -346,6 +346,7 @@ suppressions:
    where: 
      - $.paths["/pools/{poolId}/nodes/{nodeId}/start"].post
      - $.paths["/pools/{poolId}/nodes/{nodeId}/deallocate"].post
+     - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].delete
    reason: Service does not return 200, nor supply location header.
 
 ```
