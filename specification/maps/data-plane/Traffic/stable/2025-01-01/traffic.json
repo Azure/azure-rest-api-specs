@@ -191,7 +191,12 @@
   "definitions": {
     "GeoJsonGeometry": {
       "description": "A valid `GeoJSON` geometry object. Type as `Point`. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
-      "type": "object"
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/GeoJsonObject"
+        }
+      ]
     },
     "GeoJsonPoint": {
       "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
