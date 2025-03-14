@@ -22,38 +22,38 @@ model DataConnectors is TrackedResource<DataConnectorsProperties> {
 @removed(Versions.v2023_11_15)
 model DataConnectorsProperties {
   @doc("The data connector provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Managed resource group configuration.")
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 
   @doc("The network analytics product to which this connector belongs to")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   productName: string;
 
   @doc("The version of the corresponding product")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   productVersion: string;
 
   @doc("The product connector")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   productConnector: string;
 
   @doc("The product connector dataset")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   productConnectorDataset: string;
 
   @doc("An array of the ARM IDs for the Data Lake House resources")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   dataLakeHouses: string[];
 
   @doc("The data ingestion path")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataIngestionPath?: string;
 
   @doc("The data connector configuration")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   dataConnectorConfiguration: DataConnectorConfiguration;
 }
 

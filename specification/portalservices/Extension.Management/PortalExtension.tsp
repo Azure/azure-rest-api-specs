@@ -28,7 +28,7 @@ model PortalExtension
   @path
   @key("portalExtensionName")
   @segment("extensions")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

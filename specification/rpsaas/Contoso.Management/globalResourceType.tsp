@@ -39,7 +39,7 @@ model GlobalResourceTypeProperties {
   lastName: string;
 
   /** Identification number of ProxyResource assigned at creation */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   identificationNumber?: string;
 
   /** Group of ProxyResource */
@@ -49,7 +49,7 @@ model GlobalResourceTypeProperties {
   likesTea: likesTea;
 
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

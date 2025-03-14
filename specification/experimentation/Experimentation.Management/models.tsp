@@ -63,13 +63,13 @@ model ExperimentWorkspaceProperties {
   /**
    * The id for experiment workspace
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expWorkspaceId?: string;
 
   /**
    * The provisioning state for the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   /**
@@ -141,13 +141,13 @@ model RemoteVariantAssignment {
   /**
    * The endpoint where your service will make a network call to retrieve the variants assigned.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endpoint?: string;
 
   /**
    * The provisioning state of the remote variant assignment service endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: RemoteVariantAssignmentProvisioningState;
 }
 
@@ -170,25 +170,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -217,7 +217,7 @@ model ExperimentWorkspaceSku {
   name: ExperimentWorkspaceSkuName;
 
   /** The name of the SKU tier */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier?: ExperimentWorkspaceSkuTier;
 }
 

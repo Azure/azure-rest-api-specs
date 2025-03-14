@@ -14,11 +14,11 @@ model InstanceMonitor is TrackedResource<InstanceMonitorProperties> {
 /** Instance Monitor properties */
 model InstanceMonitorProperties is ResourceCommonProperties {
   /** The workload instance ID */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   workloadInstanceId?: string;
 
   /** The resource ID of the health model that represent the virtual instance health */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   healthModelId?: armResourceIdentifier<[
     {
       type: "Microsoft.CloudHealth/healthModels";

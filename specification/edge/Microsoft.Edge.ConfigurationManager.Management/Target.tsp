@@ -31,6 +31,15 @@ model SolutionTemplateParameter {
 
   @doc("Solution Template Version Name")
   solutionTemplateVersion: string;
+
+  @doc("Solution Instance Name")
+  @maxLength(24)
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  solutionInstanceName?: string;
+
+  @doc("Solution Dependencies")
+  @Azure.ResourceManager.identifiers(#[])
+  solutionDependencies?: SolutionDependencyParameter[];
 }
 
 @doc("Solution Version Parameter")
@@ -45,10 +54,55 @@ model SolutionVersionParameter {
   reviewId: string;
 }
 
-@doc("Solution Parameter")
-model SolutionParameter {
+@doc("Solution Dependency Context")
+model SolutionDependencyParameter {
+  @doc("Solution Version Id")
+  solutionVersionId?: string;
+
+  @doc("Solution Template Id")
+  solutionTemplateId?: string;
+
+  @doc("Solution Template Version")
+  solutionTemplateVersion?: string;
+
+  @doc("Solution Instance Name")
+  @maxLength(24)
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  solutionInstanceName?: string;
+
+  @doc("Target Id")
+  targetId?: string;
+
+  @doc("Solution dependencies")
+  @Azure.ResourceManager.identifiers(#[])
+  dependencies?: SolutionDependencyParameter[];
+}
+
+@doc("Install Solution Parameter")
+model InstallSolutionParameter {
+  @doc("Solution Name")
+  solution: string;
+
+  @doc("Solution Version Name")
+  solutionVersion: string;
+}
+
+@doc("Uninstall Solution Parameter")
+model UninstallSolutionParameter {
   @doc("Solution Name")
   solutionName: string;
+
+  @doc("Solution Instance Name")
+  solutionInstanceName?: string;
+}
+
+@doc("Install Solution Parameter")
+model RemoveRevisionParameter {
+  @doc("Solution Name")
+  solution: string;
+
+  @doc("Solution Version Name")
+  solutionVersion: string;
 }
 
 @doc("Target Properties")
@@ -71,7 +125,7 @@ model TargetProperties {
   hierarchyLevel: string;
 
   @doc("Status of target")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: DeploymentStatus;
 
   @doc("Scope of the target resource")
@@ -81,7 +135,7 @@ model TargetProperties {
   state?: ResourceState;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -136,19 +190,19 @@ interface Targets {
   @doc("Post request to deploy")
   installSolution is ArmResourceActionNoResponseContentAsync<
     Target,
-    SolutionVersionParameter
+    InstallSolutionParameter
   >;
 
   @doc("Post request to uninstall")
   uninstallSolution is ArmResourceActionNoResponseContentAsync<
     Target,
-    SolutionParameter
+    UninstallSolutionParameter
   >;
 
   @doc("Post request to remove solution version revision")
   removeRevision is ArmResourceActionNoResponseContentAsync<
     Target,
-    SolutionTemplateParameter
+    RemoveRevisionParameter
   >;
 
   @doc("Post request to resolve configuration")

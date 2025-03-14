@@ -18,7 +18,7 @@ model AvailabilityZone is ProxyResource<AvailabilityProperties> {
   @doc("The AvailabilityZone name")
   @segment("availabilityZones")
   @key("zoneName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-z0-9]{2,20}-AZ[0-9]{2}$")
   @path
   name: string;
@@ -41,7 +41,7 @@ model AvailabilityProperties {
   regionResourceId: string;
 
   /** The provisioning state of resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

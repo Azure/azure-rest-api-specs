@@ -18,7 +18,7 @@ model PackageType is ProxyResource<PackageTypeProperties> {
 /** The properties of PackageType resource */
 model PackageTypeProperties {
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -36,7 +36,7 @@ model Package is ExtensionResource<PackageNameProperties> {
 /** The properties of PackageName resource */
 model PackageNameProperties {
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -72,14 +72,14 @@ model PackageVersionProperties {
   subpath: string;
 
   /** Extra qualifying data for a package such as an OS, architecture, a distro, etc */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   qualifiers?: QualifierProperties[];
 
   /** The package url as per the https://github.com/package-url/purl-spec spec */
   purl?: string;
 
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

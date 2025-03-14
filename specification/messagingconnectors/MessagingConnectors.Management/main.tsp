@@ -15,18 +15,16 @@ using Azure.ResourceManager;
 
 @doc("Microsoft.MessagingConnectors Resource Provider management API.")
 @armProviderNamespace
-@service({
-  title: "Microsoft.MessagingConnectors management service",
-})
+@service(#{ title: "Microsoft.MessagingConnectors management service" })
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
 @doc("Microsoft.MessagingConnectors api versions.")
 enum Versions {
-  @doc("2024-12-24-preview version")
+  @doc("2025-01-01-preview version")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2024_12_24_preview: "2024-12-24-preview",
+  v2025_01_01_preview: "2025-01-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

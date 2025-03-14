@@ -1080,6 +1080,24 @@
         }
       ]
     },
+    "AnalysisError": {
+      "type": "object",
+      "description": "The error emitted while running an analysis",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Diagnostic code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Readable error details"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
     "AnalysisKind": {
       "type": "string",
       "description": "Supported types of analysis",
@@ -1520,7 +1538,7 @@
         },
         "paths": {
           "type": "array",
-          "description": "Location of the fastq files",
+          "description": "Path to the data files in the Library container. Supported formats: fa fasta fq fastq fa.gz fasta.gz fq.gz fastq.gz bam",
           "items": {
             "type": "string"
           }
@@ -1545,7 +1563,7 @@
         },
         "paths": {
           "type": "array",
-          "description": "Location of the fastq files",
+          "description": "Path to the data files in the Library container. Supported formats: fa fasta fq fastq fa.gz fasta.gz fq.gz fastq.gz bam",
           "items": {
             "type": "string"
           }

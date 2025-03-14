@@ -13,9 +13,7 @@ using TypeSpec.Versioning;
  * Microsoft BareMetal Azure Resource Provider specification
  */
 @armProviderNamespace
-@service({
-  title: "BootstrapRP",
-})
+@service(#{ title: "BootstrapRP" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.BareMetal;

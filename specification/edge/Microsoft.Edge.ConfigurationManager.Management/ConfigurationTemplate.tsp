@@ -25,11 +25,11 @@ model ConfigurationTemplateProperties {
   description: string;
 
   @doc("Latest config template version")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   latestVersion?: string;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -43,7 +43,7 @@ model ConfigurationTemplate
 @doc("Configuration Template Version With Update Type")
 model ConfigurationTemplateVersionWithUpdateType {
   @doc("Update type")
-  updateType: UpdateType;
+  updateType?: UpdateType;
 
   @doc("Configuration Template Version")
   configurationTemplateVersion: ConfigurationTemplateVersion;

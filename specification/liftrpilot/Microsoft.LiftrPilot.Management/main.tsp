@@ -14,9 +14,7 @@ using LiftrBase;
 
 /* Microsoft.LiftrPilot Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.LiftrPilot management service",
-})
+@service(#{ title: "Microsoft.LiftrPilot management service" })
 @versioned(Microsoft.LiftrPilot.Versions)
 namespace Microsoft.LiftrPilot;
 

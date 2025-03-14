@@ -5,7 +5,7 @@ namespace Microsoft.MobileNetwork;
 @doc("Packet core data plane properties.")
 model PacketCoreDataPlanePropertiesFormat {
   @doc("The provisioning state of the packet core data plane resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The user plane interface on the access network. For 5G networks, this is the N3 interface. For 4G networks, this is the S1-U interface.")

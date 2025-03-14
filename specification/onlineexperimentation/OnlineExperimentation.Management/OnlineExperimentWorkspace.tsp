@@ -49,6 +49,7 @@ model OnlineExperimentWorkspace
   ...ResourceNameParameter<
     Resource = OnlineExperimentWorkspace,
     KeyName = "workspaceName",
+    NamePattern = "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]",
     SegmentName = "workspaces"
   >;
   ...ManagedServiceIdentityProperty;

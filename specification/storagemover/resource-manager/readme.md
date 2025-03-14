@@ -30,6 +30,20 @@ openapi-subtype: providerHub
 tag: package-2024-07
 ```
 
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01'
+input-file:
+  - Microsoft.StorageMover/preview/2025-01-01-preview/storagemover.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: storagemover.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/endpoints/{endpointName}"].patch.parameters[5].schema.properties.identity
+    reason: All the properties defined within PATCH payload are optional. The field getting flagged is within ManagedServiceIdentity and is not added by us.
+```
+
 
 ### Tag: package-2024-07
 

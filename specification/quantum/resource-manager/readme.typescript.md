@@ -10,6 +10,7 @@ typescript:
   package-name: "@azure/arm-quantum"
   output-folder: "$(typescript-sdks-folder)/sdk/quantum/arm-quantum"
   payload-flattening-threshold: 1
+  clear-output-folder: true
   generate-metadata: true
   generate-license-txt: true
   generate-package-json: false

@@ -24,15 +24,15 @@ model DynamicConfigurationProperties {
   currentVersion: string;
 
   @doc("Type of dynamic configuration")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dynamicConfigurationType?: ConfigurationType;
 
   @doc("Type of dynamic configuration model")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dynamicConfigurationModel?: ConfigurationModel;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

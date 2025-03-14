@@ -16,7 +16,7 @@ model NetworkTap extends Azure.ResourceManager.Foundations.TrackedResource {
   @path
   @key("networkTapName")
   @segment("networkTaps")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkTap Properties */
@@ -32,7 +32,7 @@ interface NetworkTaps {
   create is ArmResourceCreateOrReplaceAsync<NetworkTap>;
 
   @doc("API to update certain properties of the Network Tap resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkTap, NetworkTapPatch>;
 
   @doc("Deletes Network Tap.")

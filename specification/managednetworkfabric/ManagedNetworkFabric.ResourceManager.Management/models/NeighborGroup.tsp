@@ -11,7 +11,7 @@ model NeighborGroupProperties {
   destination: NeighborGroupDestination;
 
   @doc("List of NetworkTap IDs where neighbor group is associated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkTapIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkTaps";
@@ -19,7 +19,7 @@ model NeighborGroupProperties {
   ]>[];
 
   @doc("List of Network Tap Rule IDs where neighbor group is associated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkTapRuleIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkTapRules";
@@ -27,12 +27,12 @@ model NeighborGroupProperties {
   ]>[];
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

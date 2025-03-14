@@ -78,7 +78,7 @@ model MarketplaceDetails {
   /**
    * Marketplace subscription status
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
 }
 
@@ -94,14 +94,14 @@ model UserDetails {
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
   @doc("MarketplaceDetails of Qumulo FileSystem resource")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   marketplace: MarketplaceDetails;
 
   @doc("User Details of Qumulo FileSystem resource")
   user: UserDetails;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

@@ -10,6 +10,16 @@ using TypeSpec.OpenAPI;
 
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
+@doc("Type of AzureServiceBusType")
+union AzureServiceBusType {
+  @doc("Topic type")
+  Topic: "Topic",
+
+  @doc("Queue type")
+  Queue: "Queue",
+
+  string,
+}
 
 @doc("Configuration for AzureServiceBusSourceConnector")
 model AzureServiceBusSourceConnectorProperties extends DataSourceProperties {
@@ -28,15 +38,4 @@ model AzureServiceBusSourceConnectorProperties extends DataSourceProperties {
 
   @doc("AzureServiceBusSource type.")
   serviceBusType: AzureServiceBusType;
-}
-
-@doc("Type of AzureServiceBusType")
-union AzureServiceBusType {
-  @doc("Topic type")
-  Topic: "Topic",
-
-  @doc("Queue type")
-  Queue: "Queue",
-
-  string,
 }

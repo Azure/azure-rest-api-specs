@@ -18,16 +18,16 @@ interface Operations {
   @armResourceRead(Azure.ResourceManager.Foundations.OperationListResult)
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `List all operations (maximum).`: {
+    #{
+      `List all operations (maximum).`: #{
         $ref: "./examples/Operations_List_MaximumSet_Gen.json",
       },
     }
   )
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `List all operations (maximum).`: {
+    #{
+      `List all operations (maximum).`: #{
         $ref: "./examples/Operations_List_MinimumSet_Gen.json",
       },
     }
@@ -157,13 +157,13 @@ model ErrorDefinition {
   /**
    * Service specific error code which serves as the substatus for the HTTP error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * Description of the error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
@@ -174,13 +174,13 @@ model ProfileProperties {
   /**
    * The provisioned state of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * The id of the Footprint profile.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   profileId?: string;
 
   /**
@@ -197,7 +197,7 @@ model ProfileProperties {
   /**
    * The URL where the script for the Footprint profile.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scriptUri?: string;
 
   /**
@@ -214,7 +214,7 @@ model ProfileProperties {
   /**
    * The endpoints which to perform measurements to.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   measurementEndpoints?: SubResource[];
 
   /**
@@ -225,7 +225,7 @@ model ProfileProperties {
   /**
    * The experiments currently associated to this Footprint profile.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   experiments?: SubResource[];
 }
 
@@ -236,7 +236,7 @@ model SubResource {
   /**
    * Fully qualified resource Id for the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -249,32 +249,32 @@ model Resource {
   /**
    * Fully qualified resource Id for the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Tags for the resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
   /**
    * Region where the Azure resource is located.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 }
 
@@ -296,7 +296,7 @@ model MeasurementEndpointProperties {
   /**
    * The id of a measurement endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(32)
   @minLength(32)
   @pattern("[a-f0-9]{32}")
@@ -343,7 +343,7 @@ model MeasurementEndpointProperties {
   /**
    * The conditions of a measurement endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   conditions?: SubResource[];
 
   /**
@@ -386,7 +386,7 @@ model MeasurementEndpointProperties {
   /**
    * The provisioned state of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -397,7 +397,7 @@ model MeasurementEndpointConditionProperties {
   /**
    * The id of a Footprint measurement endpoint condition.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(32)
   @minLength(32)
   @pattern("[a-f0-9]{32}")
@@ -427,7 +427,7 @@ model MeasurementEndpointConditionProperties {
   /**
    * The provisioned state of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -438,7 +438,7 @@ model ExperimentProperties {
   /**
    * The id of a Footprint experiment.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(32)
   @minLength(32)
   @pattern("[a-f0-9]{32}")
@@ -452,12 +452,12 @@ model ExperimentProperties {
   /**
    * The status of a Footprint experiment.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * The provisioned state of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

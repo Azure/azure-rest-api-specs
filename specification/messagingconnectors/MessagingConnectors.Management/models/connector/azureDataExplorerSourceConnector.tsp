@@ -25,13 +25,7 @@ model AzureDataExplorerSourceConnectorProperties extends DataSourceProperties {
   @doc("AzureDataExplorer table names use commas to separate multiple tables.")
   tableNames: string;
 
-  @doc("The uniquely identifies your application in the Microsoft identity platform.")
-  applicationClientId: string;
-
-  @doc("A secret string that the application uses to prove its identity when requesting a token.")
+  @doc("A secret token used for OAuth.")
   @secret
-  applicationSecret: string;
-
-  @doc("AAD tenant Id GUID or microsoft.com")
-  aadAuthorityId: string;
+  accessToken: string;
 }

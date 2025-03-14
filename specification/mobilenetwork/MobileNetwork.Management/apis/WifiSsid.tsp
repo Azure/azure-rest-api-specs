@@ -23,7 +23,7 @@ model WifiSsid is TrackedResource<WifiSsidPropertiesFormat> {
   @path
   @key("wifiSsidName")
   @segment("wifiSsids")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -36,7 +36,7 @@ interface WifiSsids {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<WifiSsid>;
 
   @doc("Updates Wi-Fi SSID.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<WifiSsid, TagsObject>;
 
   @doc("Deletes the specified Wi-Fi SSID.")

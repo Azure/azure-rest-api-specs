@@ -35,7 +35,7 @@ interface VirtualInstances {
   /**
    * Updates a Virtual Instance resource
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<VirtualInstance, UpdateVirtualInstanceRequest>;
 
   /**

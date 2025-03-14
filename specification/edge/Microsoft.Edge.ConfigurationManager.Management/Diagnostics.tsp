@@ -15,13 +15,14 @@ namespace Microsoft.Edge;
 @doc("The properties of a Diagnostic resource.")
 model DiagnosticProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
 @doc("A Diagnostic resource.")
 @resource("diagnostics")
-model Diagnostic is Azure.ResourceManager.ProxyResource<DiagnosticProperties> {
+model Diagnostic
+  is Azure.ResourceManager.TrackedResource<DiagnosticProperties> {
   @doc("Name of Diagnostic.")
   @maxLength(90)
   @minLength(1)

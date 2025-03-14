@@ -63,7 +63,7 @@ model LogScrubbing {
   state?: EnabledState = EnabledState.Enabled;
 
   @doc("The rules that are applied to the logs for scrubbing")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @maxItems(MaxScrubbingRulesCount)
   scrubbingRules: ScrubbingRule[];
 }

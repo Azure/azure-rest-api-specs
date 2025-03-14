@@ -23,7 +23,7 @@ model AmfDeploymentResource
   @key("amfDeploymentName")
   @path
   @segment("amfDeployments")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 

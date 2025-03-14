@@ -54,19 +54,19 @@ union EdgeSecurityRuleDirection {
 @doc("Edge Network Security Group properties.")
 model EdgeNetworkSecurityGroupPropertiesFormat {
   @doc("The provisioning state of the Edge Network Security Group resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("An optional description for this Edge Network Security Group.")
   description?: string;
 
   @doc("A collection of security rules of the network security group.")
-  @extension("x-ms-identifiers", ["ruleName"])
+  @extension("x-ms-identifiers", #["ruleName"])
   securityRules?: EdgeSecurityRule[];
 
   @doc("The default security rules of network security group.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["ruleName"])
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #["ruleName"])
   defaultSecurityRules?: EdgeSecurityRule[];
 }
 

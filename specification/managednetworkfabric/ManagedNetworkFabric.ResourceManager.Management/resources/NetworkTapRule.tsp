@@ -16,7 +16,7 @@ model NetworkTapRule extends Azure.ResourceManager.Foundations.TrackedResource {
   @path
   @key("networkTapRuleName")
   @segment("networkTapRules")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkTapRule Properties */
@@ -32,7 +32,7 @@ interface NetworkTapRules {
   create is ArmResourceCreateOrReplaceAsync<NetworkTapRule>;
 
   @doc("Update certain properties of the Network Tap Rule resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkTapRule, NetworkTapRulePatch>;
 
   @doc("Delete Network Tap Rule resource.")

@@ -26,18 +26,18 @@ model ClusterServiceResource
   @key("clusterServiceName")
   @path
   @segment("clusterServices")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 
 @doc("Cluster Service Properties.")
 model ClusterServiceResourceProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Cluster type (Lab or Production)")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   deploymentType: SkuDeploymentType;
 
   @doc("Azure for Operators 5G Core Release Version.  This is applied to all platform as a service (PaaS) components and running workloads in this cluster")
@@ -47,11 +47,11 @@ model ClusterServiceResourceProperties {
   clusterTypeSpecificData: ClusterServiceClusterTypeSpecificData;
 
   @doc("Azure for Operators 5G Core Local PaaS component parameters.  One set per component type")
-  @extension("x-ms-identifiers", ["type"])
+  @extension("x-ms-identifiers", #["type"])
   componentParameters: QualifiedComponentDeploymentParameters[];
 
   @doc("Operational status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operationalStatus?: OperationalStatus;
 }
 

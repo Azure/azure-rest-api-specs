@@ -16,7 +16,7 @@ model ServiceProperties {
   serviceId: string;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -39,7 +39,7 @@ model LinkedSubscriptionProperties {
   isHobo: IsSubscriptionHobo;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -47,7 +47,7 @@ model LinkedSubscriptionProperties {
 @doc("The ARM namespace properties")
 model ArmNamespaceProperties {
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -70,7 +70,7 @@ model ResourceTypeProperties {
   typeSpaceId?: string;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -78,7 +78,7 @@ model ResourceTypeProperties {
 @doc("The IcM tenant Properties")
 model IcmTenantProperties {
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -113,7 +113,7 @@ model IcmTeamProperties {
   tenantPublicId: string;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -127,7 +127,7 @@ model LinkedEntraApplicationProperties {
   application: ComplexArmObject;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -135,7 +135,7 @@ model LinkedEntraApplicationProperties {
 @doc("The Service Hierarchy Properties")
 model ServiceHierarchyProperties {
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -161,7 +161,7 @@ model ServiceInstanceProperties {
   cloud: Cloud;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

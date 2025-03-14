@@ -14,9 +14,7 @@ using Azure.ResourceManager;
 /** Configuration checks template management API. */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
 @armProviderNamespace
-@service({
-  title: "Workloads Client",
-})
+@service(#{ title: "Workloads Client" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Workloads;

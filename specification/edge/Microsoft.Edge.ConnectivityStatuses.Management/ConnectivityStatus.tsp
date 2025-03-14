@@ -22,7 +22,7 @@ model ConnectivityStatus is ExtensionResource<ConnectivityStatusProperties> {
   @path
   @key("connectivityStatusName")
   @segment("connectivityStatuses")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -45,7 +45,7 @@ interface ConnectivityStatuses {
   /**
    * Update a ConnectivityStatus
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<ConnectivityStatus, ConnectivityStatusUpdate>;
 
   /**

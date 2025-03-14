@@ -190,11 +190,11 @@ model DashboardProperties {
   title: string;
 
   @doc("The dashboard pages.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   pages: DashboardPage[];
 
   @doc("The dashboard parameters.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   parameters?: DashboardParameter[];
 }
 
@@ -203,7 +203,7 @@ model DashboardPropertiesWithProvisioningState {
   ...DashboardProperties;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: DashboardProvisioningState;
 }
 
@@ -227,7 +227,7 @@ model DashboardPage {
   title: string;
 
   @doc("The dashboard tiles.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   tiles: DashboardTile[];
 }
 
@@ -274,7 +274,7 @@ model DashboardTileLayout {
 @doc("The dashboard parameter list.")
 model DashboardParameterValuesList {
   @doc("The array of dashboard parameter values.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   parameters?: DashboardParameterValues[];
 }
 
@@ -293,11 +293,11 @@ model Actions {
   onClick?: ActionsOnClick;
 
   @doc("Actions available on the tile on footer.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   footer?: ActionReference[];
 
   @doc("Actions available on the tile on context menu.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   contextMenu?: ActionReference[];
 }
 
@@ -602,7 +602,7 @@ model ArgDataDefinition extends QueryTileData {
 @doc("The data definition of App Insights Query Tile.")
 model AppInsightsDataDefinition extends QueryTileData {
   @doc("Array of metrics object for an app insights query tile data.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   metrics: QueryTileMetricsItem[];
 
   @doc("Dashboard Query tile kind.")

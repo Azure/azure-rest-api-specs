@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 using OpenAPI;
 
 @armProviderNamespace
-@service({
-  title: "Carbon",
-})
+@service(#{ title: "Carbon" })
 @doc("Carbon Report Resource Provider query API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -119,23 +117,18 @@ model QueryFilter {
   dateRange: DateRange;
 
   @doc("List of subscription IDs for which carbon emissions data is requested. Required. Each subscription ID should be in lowercase format. The max length of list is 100.")
-  @extension("x-ms-identifiers", [])
   subscriptionList: string[];
 
   @doc("List of resource group URLs for carbon emissions data. Optional. Each URL must follow the format '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}', and should be in all lowercase.")
-  @extension("x-ms-identifiers", [])
   resourceGroupUrlList?: string[];
 
   @doc("List of resource types for carbon emissions data. Optional. Each resource type should be specified in lowercase, following the format 'microsoft.{service}/{resourceType}', e.g., 'microsoft.storage/storageaccounts'.")
-  @extension("x-ms-identifiers", [])
   resourceTypeList?: string[];
 
   @doc("List of locations(Azure Region Display Name) for carbon emissions data, with each location specified in lowercase (e.g., 'east us'). Optional. You can use the command 'az account list-locations -o table' to find Azure Region Display Names.")
-  @extension("x-ms-identifiers", [])
   locationList?: string[];
 
   @doc("List of carbon emission scopes. Required. Accepts one or more values from EmissionScopeEnum (e.g., Scope1, Scope2, Scope3) in list form. The output will include the total emissions for the specified scopes.")
-  @extension("x-ms-identifiers", [])
   carbonScopeList: EmissionScopeEnum[];
 }
 
@@ -498,7 +491,7 @@ model ResourceGroupCarbonEmissionItemDetailData extends CarbonEmissionData {
 @Azure.Core.pagedResult
 model CarbonEmissionDataListResult {
   @doc("The CarbonEmissionData items on this page")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @items
   value: CarbonEmissionData[];
 
@@ -506,7 +499,7 @@ model CarbonEmissionDataListResult {
   skipToken?: string;
 
   @doc("The access decision list for each input subscription ")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   subscriptionAccessDecisionList?: SubscriptionAccessDecision[];
 }
 

@@ -1436,6 +1436,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Dashboard/dashboards": {
+      "get": {
+        "tags": [
+          "DashboardResource"
+        ],
+        "summary": "List all resources of dashboards under the specified subscription.",
+        "operationId": "Dashboards_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return all resources of dashboards under the given subscription.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDashboardListResponse"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Dashboard_ListByResourceGroup": {
+            "$ref": "./examples/Dashboard_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/dashboards": {
       "get": {
         "tags": [

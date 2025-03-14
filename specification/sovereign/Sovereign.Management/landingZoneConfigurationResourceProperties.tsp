@@ -7,12 +7,12 @@ namespace Microsoft.Sovereign;
 @added(Versions.Preview20241031)
 @doc("The properties of landing zone configuration resource type.")
 model LandingZoneConfigurationResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of a user-initiated, control-plane operation on the landing zone configuration.")
   provisioningState?: provisioningState;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Handled in code."
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status for the landing zone configurations workflow.")
   authoringStatus?: AuthoringStatus;
 
@@ -37,7 +37,7 @@ model LandingZoneConfigurationResourceProperties {
   ]>;
 
   @doc("Array of tag objects in format of {'name':'a tag name', 'value':'a tag value'}.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tags[];
 
   @doc("To deploy firewall, choose the Standard/Premium based on the desired SKU. Choose None for no firewall and UseExisting for a pre existing one.")
@@ -71,7 +71,7 @@ model LandingZoneConfigurationResourceProperties {
   azureBastionSubnetCidrBlock?: string;
 
   @doc("Landing zone children management group properties")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   landingZonesMgChildren?: LandingZoneManagementGroupProperties[];
 
   @doc("This will be applied to the root of the landing zone deployment.")
@@ -149,7 +149,7 @@ model LandingZoneManagementGroupProperties {
 @doc("Details of the policy and initiatives associated with the management group.")
 model ManagementGroupProperties {
   @doc("Array of initiative assignments to be applied to the management group.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   policyInitiativesAssignmentProperties: PolicyInitiativeAssignmentProperties[];
 }
 

@@ -12,7 +12,7 @@ namespace Microsoft.Inventory.CommonTypes;
 @doc("Properties for IpAddress resources")
 model PublicIpAddressPropertiesBase {
   @doc("IPv4 or IPv6 type")
-  ipType: IpType;
+  ipType: IpVersion;
 
   @doc("IPv4 or IPv6 address (CIDR ranges OK)")
   ipAddress: string;
@@ -57,7 +57,7 @@ model PublicIpAddressPropertiesBase {
   dcCode: string;
 
   @doc("The provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -123,29 +123,4 @@ union AssetIdType {
 
   @doc("DeploymentId AssetIdType")
   DeploymentId: "DeploymentId",
-}
-
-@doc("Enum for IP Type")
-union IpType {
-  string,
-
-  @doc("IPv4 type")
-  IPv4: "IPv4",
-
-  @doc("IPv6 type")
-  IPv6: "IPv6",
-}
-
-@doc("Enum for AllocationType")
-union AllocationType {
-  string,
-
-  @doc("Unicast AllocationType")
-  Unicast: "Unicast",
-
-  @doc("Multicast AllocationType")
-  Multicast: "Multicast",
-
-  @doc("Anycast AllocationType")
-  Anycast: "Anycast",
 }

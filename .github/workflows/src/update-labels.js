@@ -56,7 +56,7 @@ export async function updateLabelsImpl({
       },
     );
 
-    artifactNames = artifacts.artifacts.map((a) => a.name);
+    artifactNames = artifacts.map((a) => a.name);
   } else {
     // TODO: List all artifacts of all workflows associated with issue_number
     throw new Error("Required input 'run_id' not found in env or context");

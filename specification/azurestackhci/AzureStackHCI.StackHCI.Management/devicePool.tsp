@@ -20,7 +20,7 @@ model DevicePool
     Resource = DevicePool,
     KeyName = "devicePoolName",
     SegmentName = "devicePools",
-    NamePattern = "^[a-zA-Z0-9-]{3,63}$"
+    NamePattern = "^[a-zA-Z0-9-_]{3,63}$"
   >;
   ...ManagedServiceIdentityProperty;
 }
@@ -43,7 +43,7 @@ interface DevicePools {
   delete is ArmResourceDeleteWithoutOkAsync<DevicePool>;
 
   @doc("Update a devicePool")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<DevicePool, DevicePoolPatch>;
 
   @doc("List all device pools in a resource group.")
@@ -80,32 +80,30 @@ interface DevicePools {
 @doc("Request for Add/Remove Devices to the pool.")
 model AddDeviceRequest {
   @doc("List of resource ids of the devices to be modified")
-  @extension("x-ms-identifiers", [])
   devices: string[];
 }
 
 @doc("Request for claiming/releasing devices of the pool.")
 model ClaimDeviceRequest {
   @doc("List of resource ids of the devices to be modified")
-  @extension("x-ms-identifiers", [])
   devices: string[];
 
   @doc("Resource Id of group device belongs to.")
-  claimedBy?: Azure.Core.armResourceIdentifier;
+  claimedBy?: string;
 }
 
 @doc("Properties for device pool.")
 model DevicePoolProperties {
   @doc("The provisioning state of a resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("List of machines in device pool.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   devices?: DeviceDetail[];
 
   @doc("Custom Location Resource Id for the pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customLocationResourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Custom Location Name for the pool, default: <DevicePoolName>-CL")
@@ -127,6 +125,6 @@ model DeviceDetail {
   deviceResourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Resource Id of group device belongs to.")
-  @visibility("read")
-  claimedBy?: Azure.Core.armResourceIdentifier;
+  @visibility(Lifecycle.Read)
+  claimedBy?: string;
 }

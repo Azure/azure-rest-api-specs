@@ -42,7 +42,7 @@ interface DeviceClasses {
   /**
    * Updates Device Class.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<DeviceClass, TagUpdate>;
 
   /**

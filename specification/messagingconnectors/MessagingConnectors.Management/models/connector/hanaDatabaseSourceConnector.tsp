@@ -11,6 +11,42 @@ using TypeSpec.OpenAPI;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
+@doc("Type of HanaQueryMode")
+union HanaQueryMode {
+  @doc("Table type")
+  Table: "Table",
+
+  @doc("Query type")
+  Query: "Query",
+
+  string,
+}
+
+@doc("Type of HanaNumericMapping")
+union HanaNumericMapping {
+  @doc("Table type.")
+  None: "None",
+
+  @doc("Query type.")
+  BestFit: "BestFit",
+
+  @doc("BestFitEagerDouble type.")
+  BestFitEagerDouble: "BestFitEagerDouble",
+
+  string,
+}
+
+@doc("Type of HanaNumericMapping")
+union HanaMode {
+  @doc("Bulk mode")
+  Bulk: "Bulk",
+
+  @doc("Incrementing mode")
+  Incrementing: "Incrementing",
+
+  string,
+}
+
 @doc("Configuration for HanaDatabaseSourceConnector")
 model HanaDatabaseSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of HanaDatabaseSourceConnector")
@@ -55,40 +91,4 @@ model HanaDatabaseSourceConnectorProperties extends DataSourceProperties {
 
   @doc("In order to fetch data from a SAP DB table when mode is set to incrementing, an incremental (or auto-incremental) column needs to be provided.")
   incrementingColumn?: string;
-}
-
-@doc("Type of HanaQueryMode")
-union HanaQueryMode {
-  @doc("Table type")
-  Table: "Table",
-
-  @doc("Query type")
-  Query: "Query",
-
-  string,
-}
-
-@doc("Type of HanaNumericMapping")
-union HanaNumericMapping {
-  @doc("Table type")
-  None: "None",
-
-  @doc("Query type")
-  BestFit: "BestFit",
-
-  @doc("BestFitEagerDouble type")
-  BestFitEagerDouble: "BestFitEagerDouble",
-
-  string,
-}
-
-@doc("Type of HanaNumericMapping")
-union HanaMode {
-  @doc("Bulk mode")
-  Bulk: "Bulk",
-
-  @doc("Incrementing mode")
-  Incrementing: "Incrementing",
-
-  string,
 }

@@ -31,7 +31,7 @@ model ReportResource extends Foundations.ProxyResource {
   @path
   @key("reportName")
   @segment("reports")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /**

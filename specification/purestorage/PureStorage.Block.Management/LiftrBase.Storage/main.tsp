@@ -33,7 +33,7 @@ model Reservation<TProperties extends Model = ReservationProperties>
   @doc("Name of the reservation.")
   @segment("reservations")
   @key("reservationName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @minLength(1)
   @maxLength(127)
@@ -69,7 +69,7 @@ interface Reservations<
 @doc("Properties of a Reservation resource.")
 model ReservationProperties<TProperties extends Model = BaseResourceProperties> {
   @doc("Pure Storage's internal ID for the reservation")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reservationInternalId?: string;
 
   ...TProperties;

@@ -25,9 +25,7 @@ using TypeSpec.Versioning;
  */
 @armProviderNamespace
 // @useAuth(AadOauth2Auth<["user_impersonation"]>)
-@service({
-  title: "FootprintMonitoringManagementClient",
-})
+@service(#{ title: "FootprintMonitoringManagementClient" })
 @versioned(Versions)
 namespace Microsoft.FootprintMonitoring;
 

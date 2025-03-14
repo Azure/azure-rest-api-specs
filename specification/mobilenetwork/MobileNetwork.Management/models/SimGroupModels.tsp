@@ -5,7 +5,7 @@ namespace Microsoft.MobileNetwork;
 @doc("SIM group properties.")
 model SimGroupPropertiesFormat {
   @doc("The provisioning state of the SIM group resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("A key to encrypt the SIM data that belongs to this SIM group.")

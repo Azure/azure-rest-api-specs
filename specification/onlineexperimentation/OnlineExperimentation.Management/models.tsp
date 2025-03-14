@@ -15,13 +15,13 @@ namespace Microsoft.OnlineExperimentation;
  */
 model OnlineExperimentWorkspaceProperties {
   /** The Id of the workspace. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   workspaceId?: string;
 
   /**
    * The provisioning state for the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   /**
@@ -45,7 +45,7 @@ model OnlineExperimentWorkspaceProperties {
   /**
    * The resource identifier of App Configuration with which this online experiment workspace is tied for experimentation. This is a required field for creating an online experiment workspace.
    */
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   appConfigurationResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.AppConfiguration/configurationStores";
@@ -60,7 +60,7 @@ model OnlineExperimentWorkspaceProperties {
   /**
    * The data plane endpoint for the online experiment workspace resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endpoint?: url;
 }
 

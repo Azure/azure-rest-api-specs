@@ -25,7 +25,7 @@ model ConnectorProperties {
   connectorState?: ConnectorState;
 
   @doc("State of provisioning of the MessagingConnector ARM Resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ConnectorProvisioningState;
 }
 
@@ -157,6 +157,9 @@ union ConnectorType {
 
   @doc("SolacePubsub source connector.")
   SolacePubsubSource: "SolacePubsubSource",
+
+  @doc("ManagedAzureMapsWeatherSource source connector.")
+  ManagedAzureMapsWeatherSource: "ManagedAzureMapsWeatherSource",
 
   string,
 }

@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.ModSimWorkbench")
-@service({
-  title: "ModSimWorkbench Control Plane API",
-})
+@service(#{ title: "ModSimWorkbench Control Plane API" })
 @armProviderNamespace
 @versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
@@ -21,37 +19,37 @@ namespace Microsoft.ModSimWorkbench;
 model FileRequestApproval {
   ...TimestampProperty;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The globally unique identifier for the approval.")
   id: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The description of the approval.")
   description: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The description of the approval.")
   userId: string;
 }
 
 @doc("File request download details")
 model FileRequestDownload {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Download destination location.")
   location: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The timestamp when download started.")
   startTime: utcDateTime;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The timestamp when download completed.")
   completeTime: utcDateTime;
 }
 
 @doc("Internal meta-data associated with file request.")
 model FileRequestInternalMetadata {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("SAS userid")
   sasUriId: string;
   // TODO: Figure out what this is. Likely a URI.
@@ -83,7 +81,7 @@ model FileRequestProperties {
   ...ProvisioningStateProperty;
   ...TimestampProperty;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The unique identifier if the file associated with this request.")
   fileId: Azure.Core.armResourceIdentifier<[
     {
@@ -91,31 +89,31 @@ model FileRequestProperties {
     }
   ]>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Principal ID of Azure Active Directory User who approved to download.")
   requestUserId: string;
 
   @doc("The chamber workload's local login username.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   linuxUsername: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of a chamber data pipeline file request.")
   status: string; // TODO: Make enum so user knows what values and can handle them.
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Description for the operation.")
   description: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Details of file request approval.")
   approve?: FileRequestApproval;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Details of file request download.")
   download?: FileRequestDownload;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Internal meta-data associated with file request download.")
   internalMetadata?: FileRequestInternalMetadata;
 }

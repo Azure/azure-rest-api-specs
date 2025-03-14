@@ -253,7 +253,7 @@ model AnnotationResource {
 @added(Versions.v2024_06_15_preview)
 model LastOperationProperties {
   @doc("Details status of the last operation performed on the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   details?: string;
 }
 
@@ -353,30 +353,30 @@ model IpMatchConditionPatch is IpMatchCondition;
 
 @doc("Dynamic match configuration object.")
 model CommonDynamicMatchConfiguration {
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("List of IP Groups.")
   ipGroups?: IpGroupProperties[];
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("List of vlan groups.")
   vlanGroups?: VlanGroupProperties[];
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("List of the port groups.")
   portGroups?: PortGroupProperties[];
 }
 
 @doc("Dynamic match configuration object.")
 model CommonDynamicMatchConfigurationPatch {
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("List of IP Groups.")
   ipGroups?: IpGroupPatchProperties[];
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("List of vlan groups.")
   vlanGroups?: VlanGroupPatchProperties[];
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("List of the port groups.")
   portGroups?: PortGroupPatchProperties[];
 }
@@ -426,19 +426,19 @@ model PortGroupPatchProperties is PortGroupProperties;
 @doc("Common fields that are returned in the response for all Azure Resource Manager resources")
 model Resource {
   @doc("Fully qualified resource ID for the resource. E.g. '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   @doc("The name of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("The type of the resource. E.g. 'Microsoft.Compute/virtualMachines' or 'Microsoft.Storage/storageAccounts'")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -461,7 +461,7 @@ model CommonPostActionResponseForStateUpdate {
   ...ErrorResponse;
 
   @doc("Gets the configuration state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 }
 
@@ -470,7 +470,7 @@ model ValidateConfigurationResponse {
   ...ErrorResponse;
 
   @doc("Gets the configuration state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("URL for the details of the response.")
@@ -482,7 +482,7 @@ model CommonPostActionResponseForDeviceUpdate {
   ...ErrorResponse;
 
   @doc("Gets the configuration state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("List of ARM Resource IDs for which the given action applied successfully.")
@@ -511,7 +511,7 @@ model CommonPostActionResponseForDeviceROCommands {
   ...ErrorResponse;
 
   @doc("Gets the configuration state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Predefined link containing Device RO Command output.")
@@ -531,7 +531,7 @@ model CommonPostActionResponseForDeviceRWCommands {
   ...ErrorResponse;
 
   @doc("Gets the configuration state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Predefined link containing Device Rw Command output.")
@@ -621,15 +621,15 @@ model ExportRoutePolicyInformationPatch is ExportRoutePolicyInformation;
 @doc("ProxyResourceBase with no property bag")
 model ProxyResourceBase {
   @doc("Fully qualified resource ID for the resource. E.g. '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   @doc("The type of the resource. E.g. 'Microsoft.Compute/virtualMachines' or 'Microsoft.Storage/storageAccounts'")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -671,7 +671,7 @@ model Layer3IpPrefixProperties {
 @doc("BFD configuration properties")
 model BfdConfiguration {
   @doc("Administrative state of the BfdConfiguration. Example: Enabled | Disabled.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: BfdAdministrativeState = BfdAdministrativeState.Disabled;
 
   @doc("Interval in milliseconds. Example: 300.")
@@ -684,7 +684,7 @@ model BfdConfiguration {
 @doc("BFD configuration properties")
 model BfdPatchConfiguration {
   @doc("Administrative state of the BfdConfiguration. Example: Enabled | Disabled.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: BfdAdministrativeState;
 
   @doc("Interval in milliseconds. Example: 300.")
@@ -812,11 +812,11 @@ model StaticRouteConfiguration {
   bfdConfiguration?: BfdConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv4Routes?: StaticRouteProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv6Routes?: StaticRouteProperties[];
 
   @doc("Extension. Example: NoExtension | NPB.")
@@ -829,11 +829,11 @@ model StaticRoutePatchConfiguration {
   bfdConfiguration?: BfdPatchConfiguration;
 
   @doc("List of IPv4 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv4Routes?: StaticRoutePatchProperties[];
 
   @doc("List of IPv6 Routes.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   ipv6Routes?: StaticRoutePatchProperties[];
 }
 
@@ -934,7 +934,7 @@ union BgpAdministrativeState {
 @added(Versions.v2024_06_15_preview)
 model NativeIpv4PrefixLimitProperties {
   @doc("Prefix limits")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
   prefixLimits?: PrefixLimitProperties[];
 }
@@ -943,7 +943,7 @@ model NativeIpv4PrefixLimitProperties {
 @added(Versions.v2024_06_15_preview)
 model NativeIpv4PrefixLimitPatchProperties {
   @doc("Prefix limits")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
   prefixLimits?: PrefixLimitPatchProperties[];
 }
@@ -952,7 +952,7 @@ model NativeIpv4PrefixLimitPatchProperties {
 @added(Versions.v2024_06_15_preview)
 model NativeIpv6PrefixLimitProperties {
   @doc("Prefix limits")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
   prefixLimits?: PrefixLimitProperties[];
 }
@@ -961,7 +961,7 @@ model NativeIpv6PrefixLimitProperties {
 @added(Versions.v2024_06_15_preview)
 model NativeIpv6PrefixLimitPatchProperties {
   @doc("Prefix limits")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
   prefixLimits?: PrefixLimitPatchProperties[];
 }
@@ -986,7 +986,7 @@ model PrefixLimitPatchProperties {
   maximumRoutes?: int32;
 
   @doc("Limit at which route prefixes a warning is generate.")
-  softLimit?: int32;
+  threshold?: int32;
 
   @doc("Idle time expiry in seconds.")
   idleTimeExpiry?: int32;

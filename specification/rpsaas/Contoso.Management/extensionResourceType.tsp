@@ -46,7 +46,7 @@ model ExtensionResourceTypeProperties {
   lastName: string;
 
   /** Identification number of ExtensionResourceType assigned at creation */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   identificationNumber?: string;
 
   /** Group of ExtensionResourceType */
@@ -56,7 +56,7 @@ model ExtensionResourceTypeProperties {
   likesTea: likesTea;
 
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

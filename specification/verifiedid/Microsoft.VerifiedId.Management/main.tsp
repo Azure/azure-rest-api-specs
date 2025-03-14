@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.VerifiedId")
-@service({
-  title: "VerifiedIdMgmtClient",
-})
+@service(#{ title: "VerifiedIdMgmtClient" })
 @doc("VerifiedId Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.VerifiedId;
@@ -58,7 +56,7 @@ union ProvisioningState {
 
 @doc("Details of the VerifiedId Authority.")
 model AuthorityProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

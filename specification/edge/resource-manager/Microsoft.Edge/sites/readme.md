@@ -37,6 +37,9 @@ directive:
   - suppress: XmsPageableForListCalls
     from: sites.json
     reason: false-positive issue reported in Lintdiff. Because GET /providers/Microsoft.Edge/siteAwareResourceTypes/default isn't a list call and supposed to return single resource named default. Reference - [TypeSpec False Positives] EvenSegmentedPathForPutOperation and XmsPageableForListCalls with @singleton · Issue #646 · Azure/azure-openapi-validator (github.com)
+  - suppress: AvoidAdditionalProperties
+    from: sites.json
+    reason: labels describe user defined tags to be used on Sites.
 ```
 
 ## Configuration
@@ -48,7 +51,25 @@ These are the global settings for the edgesites.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-12-01-preview
+tag: package-2025-03-01-preview
+```
+
+### Tag: package-2025-03-01-preview
+
+These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-01-preview'
+input-file:
+  - preview/2025-03-01-preview/sites.json
+```
+
+### Tag: package-2025-02-01-preview
+
+These settings apply only when `--tag=package-2025-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01-preview'
+input-file:
+  - preview/2025-02-01-preview/sites.json
 ```
 
 ### Tag: package-2024-12-01-preview

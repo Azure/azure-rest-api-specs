@@ -18,7 +18,7 @@ using OpenAPI;
 
 // Documentation: https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type
 @armProviderNamespace
-@service({
+@service(#{
   title: "Secret Management Test Service",
   version: "2022-08-01-preview",
 })
@@ -64,10 +64,10 @@ enum ProvisioningState {
 @doc("The properties of WeatherForecastResource")
 model WeatherForecastResourceProperties {
   @doc("Provisioning state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @extension("x-ms-identifiers", ["city"])
+  @extension("x-ms-identifiers", #["city"])
   @doc("Collection of weather forecasts")
   weatherForecastProperties: WeatherForecastProperties[];
 }
@@ -78,7 +78,7 @@ model WeatherForecastResource
   @doc("Weather forecast resource name")
   @key("weatherForecastResourceName")
   @segment("forecasts")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

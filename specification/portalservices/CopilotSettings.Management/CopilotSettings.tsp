@@ -24,7 +24,7 @@ model CopilotSettingsResource
   @doc("The default copilot settings, applying to entire tenant.")
   @segment("copilotSettings")
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;

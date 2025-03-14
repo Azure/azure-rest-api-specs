@@ -48,6 +48,14 @@ input-file:
   - Microsoft.ManufacturingPlatform/preview/2024-02-01-preview/manufacturingplatform.json
 ```
 
+### Tag: package-2025-03-01
+
+These settings apply only when `--tag=package-2025-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-01'
+input-file:
+  - Microsoft.ManufacturingPlatform/stable/2025-03-01/manufacturingplatform.json
+```
 ---
 
 # Code Generation

@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.Impact",
-})
+@service(#{ title: "Microsoft.Impact" })
 @versioned(Versions)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.Impact;
@@ -36,7 +34,7 @@ model UploadTokenResult {
 @added(Versions.v2025_01_01_preview)
 @armResourceOperations
 interface UploadService {
-  /** Customer can use this POST endpoint to trigger an action, where the UserRP/AzImpactRP service creates and returns a user-delegate SAS token for the storage account/container unique to the customer (identified by subscription ID). */
+  @doc("Only for select HPC customers at this time, who can use this POST endpoint to trigger an action, where the UserRP/AzImpactRP service creates and returns a user-delegate SAS token for the storage account/container unique to the customer (identified by subscription ID).")
   getUploadToken is ArmProviderActionSync<
     void,
     ArmResponse<UploadTokenResult>,

@@ -23,7 +23,7 @@ model DiagnosticsPackage is ProxyResource<DiagnosticsPackagePropertiesFormat> {
   @path
   @key("diagnosticsPackageName")
   @segment("diagnosticsPackages")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

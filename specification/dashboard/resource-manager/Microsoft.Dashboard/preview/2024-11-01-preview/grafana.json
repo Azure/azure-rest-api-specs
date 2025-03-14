@@ -1436,6 +1436,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Dashboard/dashboards": {
+      "get": {
+        "tags": [
+          "DashboardResource"
+        ],
+        "summary": "List all resources of dashboards under the specified subscription.",
+        "operationId": "Dashboards_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return all resources of dashboards under the given subscription.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDashboardListResponse"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Dashboard_ListByResourceGroup": {
+            "$ref": "./examples/Dashboard_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/dashboards": {
       "get": {
         "tags": [
@@ -2072,6 +2114,9 @@
         },
         "security": {
           "$ref": "#/definitions/Security"
+        },
+        "unifiedAlertingScreenshots": {
+          "$ref": "#/definitions/UnifiedAlertingScreenshots"
         }
       }
     },
@@ -2131,6 +2176,10 @@
         "viewersCanEdit": {
           "description": "Set to true so viewers can access and use explore and perform temporary edits on panels in dashboards they have access to. They cannot save their changes.",
           "type": "boolean"
+        },
+        "editorsCanAdmin": {
+          "description": "Set to true so editors can administrate dashboards, folders and teams they create.",
+          "type": "boolean"
         }
       }
     },
@@ -2140,6 +2189,16 @@
       "properties": {
         "csrfAlwaysCheck": {
           "description": "Set to true to execute the CSRF check even if the login cookie is not in a request (default false).",
+          "type": "boolean"
+        }
+      }
+    },
+    "UnifiedAlertingScreenshots": {
+      "description": "Grafana Unified Alerting Screenshots settings",
+      "type": "object",
+      "properties": {
+        "captureEnabled": {
+          "description": "Set to false to disable capture screenshot in Unified Alert due to performance issue.",
           "type": "boolean"
         }
       }

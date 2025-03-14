@@ -14,9 +14,7 @@ using LiftrBase;
 
 /* LambdaTest.HyperExecute Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "LambdaTest.HyperExecute management service",
-})
+@service(#{ title: "LambdaTest.HyperExecute management service" })
 @versioned(LambdaTest.HyperExecute.Versions)
 namespace LambdaTest.HyperExecute;
 
@@ -26,12 +24,14 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(LiftrBase.Versions.v1_preview)
+  @useDependency(LiftrBase.Versions.v2_preview)
   v2024_02_01_preview: "2024-02-01-preview",
 }
 
 @doc("Partner's specific Properties")
 model PartnerProperties {
+  @minValue(1)
+  @maxValue(1000)
   @doc("The number of licenses subscribed")
   licensesSubscribed: int32;
 }
@@ -41,7 +41,10 @@ model PartnerProperties {
 @doc("Properties specific to Organization")
 model OrganizationProperties is BaseResourceProperties {
   @doc("partner properties")
-  partnerProperties?: PartnerProperties;
+  partnerProperties: PartnerProperties;
+
+  @doc("Single sign-on properties")
+  singleSignOnProperties?: SingleSignOnPropertiesV2;
 }
 
 model OrganizationResource

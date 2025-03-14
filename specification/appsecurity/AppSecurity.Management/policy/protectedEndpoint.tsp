@@ -16,11 +16,11 @@ model ProtectedEndpoint {
   endpointId: ProtectedEndpointId;
 
   @doc("The status of the last attachment operation between the policy and the endpoint")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   attachmentState?: ProvisioningState;
 
   @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 

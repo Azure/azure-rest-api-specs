@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 @armProviderNamespace
-@service({
-  title: "EdgeMarketplaceClient",
-})
+@service(#{ title: "EdgeMarketplaceClient" })
 @versioned(Versions)
 @doc("Edge marketplace extensions")
 @armCommonTypesVersion(CommonTypes.Versions.v5)

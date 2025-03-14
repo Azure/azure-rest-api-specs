@@ -24,7 +24,7 @@ model HyperspaceWebServerInstance
   @path
   @key("hyperspaceWebInstanceName")
   @segment("hyperspaceWebInstances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -43,7 +43,7 @@ interface HyperspaceWebServerInstances {
   /**
    * Puts the Epic HyperspaceWeb Server Instance resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmTagsPatchSync<HyperspaceWebServerInstance>;
 
   /**

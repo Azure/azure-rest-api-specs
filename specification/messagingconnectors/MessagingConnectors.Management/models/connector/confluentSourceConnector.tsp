@@ -11,37 +11,6 @@ using TypeSpec.OpenAPI;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
-@doc("Configuration for ConfluentSourceConnector")
-model ConfluentSourceConnectorProperties extends DataSourceProperties {
-  @doc("Type of ConfluentSourceConnector")
-  connectorType: ConnectorType.ConfluentSource;
-
-  @doc("bootstrapServers of the Confluent server.")
-  bootstrapServers: string;
-
-  @doc("Topic of the Confluent.")
-  topic: string;
-
-  @doc("ConsumerGroup of the Confluent.")
-  consumerGroup: string;
-
-  @doc("AutoOffsetReset policy of the Confluent consume.")
-  autoOffsetReset: string;
-
-  @doc("User of the Confluent.")
-  user: string;
-
-  @doc("Password of the Confluent.")
-  @secret
-  password: string;
-
-  @doc("Sasl mechanism of the confluent.")
-  saslMechanism: SaslMechanismForConfluent;
-
-  @doc("Security protocol of the confluent.")
-  securityProtocol: SecurityProtocolForConfluent;
-}
-
 @doc("Enum of the SaslMechanism for Confluent connector")
 union SaslMechanismForConfluent {
   @doc("The PLAIN sasl mechanism.")
@@ -71,4 +40,35 @@ union SecurityProtocolForConfluent {
   Ssl: "SSL",
 
   string,
+}
+
+@doc("Configuration for ConfluentSourceConnector")
+model ConfluentSourceConnectorProperties extends DataSourceProperties {
+  @doc("Type of ConfluentSourceConnector")
+  connectorType: ConnectorType.ConfluentSource;
+
+  @doc("bootstrapServers of the Confluent server.")
+  bootstrapServers: string;
+
+  @doc("Topic of the Confluent.")
+  topic: string;
+
+  @doc("ConsumerGroup of the Confluent.")
+  consumerGroup: string;
+
+  @doc("AutoOffsetReset policy of the Confluent consume.")
+  autoOffsetReset: string;
+
+  @doc("User of the Confluent.")
+  user: string;
+
+  @doc("Password of the Confluent.")
+  @secret
+  password: string;
+
+  @doc("Sasl mechanism of the confluent.")
+  saslMechanism: SaslMechanismForConfluent;
+
+  @doc("Security protocol of the confluent.")
+  securityProtocol: SecurityProtocolForConfluent;
 }

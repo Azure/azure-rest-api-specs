@@ -22,7 +22,7 @@ model StageSpec {
   name: string;
 
   @doc("Target ARM id")
-  targetId: string;
+  targetId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
@@ -33,25 +33,33 @@ model StageSpec {
 @doc("Workflow Version Properties")
 model WorkflowVersionProperties {
   @doc("Revision number of resolved config for this workflow version")
-  @visibility("read")
-  revision: int32;
+  @visibility(Lifecycle.Read)
+  revision?: int32;
 
   @doc("Resolved configuration values")
-  @visibility("read")
-  configuration: string;
+  @visibility(Lifecycle.Read)
+  configuration?: string;
 
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("A list of stage specs")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stageSpec: StageSpec[];
+
+  @doc("Review id of resolved config for this workflow version")
+  @visibility(Lifecycle.Read)
+  reviewId?: string;
+
+  @doc("State of workflow version")
+  @visibility(Lifecycle.Read)
+  state?: State;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
   @doc("Execution specification")
-  specification: Record<unknown>;
+  specification?: Record<unknown>;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

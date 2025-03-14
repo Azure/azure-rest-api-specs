@@ -14,9 +14,7 @@ using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is published as part of same RP in edge folder."
 @armProviderNamespace
-@service({
-  title: "disconnected operations service",
-})
+@service(#{ title: "disconnected operations service" })
 @versioned(Versions)
 @doc("Disconnected operations service API.")
 @armCommonTypesVersion(CommonTypes.Versions.v6)

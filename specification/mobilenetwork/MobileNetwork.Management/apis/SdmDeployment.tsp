@@ -26,7 +26,7 @@ model SdmDeploymentResource
   @key("sdmDeploymentName")
   @path
   @segment("sdmDeployment")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 

@@ -23,7 +23,7 @@ model ClusterServiceResource
   @key("clusterServiceName")
   @path
   @segment("clusterServices")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 

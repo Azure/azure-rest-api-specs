@@ -24,5 +24,8 @@ union ProvisioningState {
   @doc("Resource Provisioning is in progress")
   Inprogress: "InProgress",
 
+  @doc("Resource Provisioning is deleting")
+  Deleting: "Deleting",
+
   string,
 }

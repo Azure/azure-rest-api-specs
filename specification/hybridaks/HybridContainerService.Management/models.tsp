@@ -284,7 +284,7 @@ model ProvisionedClusterProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    [
+    #[
       "osType",
       "osSKU",
       "nodeLabels",
@@ -311,13 +311,13 @@ model ProvisionedClusterProperties {
   /**
    * The status of the latest long running operation for the provisioned cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   /**
    * The observed status of the provisioned cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: ProvisionedClusterPropertiesStatus;
 
   /**
@@ -348,7 +348,7 @@ model LinuxProfilePropertiesSsh {
   /**
    * The list of SSH public keys used to authenticate with VMs. A maximum of 1 key may be specified.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["keyData"])
+  @Azure.ResourceManager.identifiers(#["keyData"])
   publicKeys?: LinuxProfilePropertiesSshPublicKeysItem[];
 }
 
@@ -549,7 +549,7 @@ model AgentPoolUpdateProfile {
   /**
    * Version of Kubernetes in use by the agent pool. This is inherited from the kubernetesVersion of the provisioned cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kubernetesVersion?: string;
 
   /**
@@ -604,14 +604,14 @@ model ProvisionedClusterPropertiesStatus {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["name", "phase", "ready", "errorMessage"]
+    #["name", "phase", "ready", "errorMessage"]
   )
   controlPlaneStatus?: AddonStatusProfile[];
 
   /**
    * The current state of the provisioned cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentState?: ResourceProvisioningState;
 
   /**
@@ -783,25 +783,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
@@ -812,7 +812,7 @@ model ProvisionedClusterUpgradeProfileProperties {
   /**
    * Provisioning state of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   /**
@@ -828,19 +828,19 @@ model ProvisionedClusterPoolUpgradeProfile {
   /**
    * The Kubernetes version (major.minor.patch).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kubernetesVersion?: string;
 
   /**
    * The particular KubernetesVersion Image OS Type (Linux, Windows)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: OsType;
 
   /**
    * List of available kubernetes versions for upgrade.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["kubernetesVersion", "isPreview"])
+  @Azure.ResourceManager.identifiers(#["kubernetesVersion", "isPreview"])
   upgrades?: ProvisionedClusterPoolUpgradeProfileProperties[];
 }
 
@@ -851,13 +851,13 @@ model ProvisionedClusterPoolUpgradeProfileProperties {
   /**
    * The Kubernetes version (major.minor.patch).
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kubernetesVersion?: string;
 
   /**
    * Whether the Kubernetes version is currently in preview.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isPreview?: boolean;
 }
 
@@ -878,7 +878,7 @@ model HybridIdentityMetadataProperties {
   /**
    * Provisioning state of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -898,7 +898,7 @@ model AgentPoolProvisioningStatus {
   /**
    * The status of the latest long running operation for the agent pool.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   /**
@@ -914,7 +914,7 @@ model AgentPoolProvisioningStatusStatus {
   /**
    * The current state of the agent pool.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentState?: ResourceProvisioningState;
 
   /**
@@ -927,7 +927,7 @@ model AgentPoolProvisioningStatusStatus {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["count", "vmSize", "kubernetesVersion", "gpuCountPerNode"]
+    #["count", "vmSize", "kubernetesVersion", "gpuCountPerNode"]
   )
   readyReplicas?: AgentPoolUpdateProfile[];
 }
@@ -939,19 +939,19 @@ model ListCredentialResponse {
   /**
    * Operation Id
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Operation Name
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * ARM Resource Id of the provisioned cluster instance
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.HybridContainerService/provisionedClusterInstances";
@@ -961,7 +961,7 @@ model ListCredentialResponse {
   /**
    * Provisioning state of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: ResourceProvisioningState;
 
   /**
@@ -997,8 +997,8 @@ model ListCredentialResponseProperties {
   /**
    * Base64-encoded Kubernetes configuration file.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name", "value"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["name", "value"])
   kubeconfigs?: CredentialResult[];
 }
 
@@ -1009,13 +1009,13 @@ model CredentialResult {
   /**
    * The name of the credential.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Base64-encoded Kubernetes configuration file.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: bytes;
 }
 
@@ -1026,7 +1026,7 @@ model KubernetesVersionProfileProperties {
   /**
    * Provisioning state of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   /**
@@ -1034,7 +1034,7 @@ model KubernetesVersionProfileProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["version", "isPreview", "patchVersions"]
+    #["version", "isPreview", "patchVersions"]
   )
   values?: KubernetesVersionProperties[];
 }
@@ -1046,20 +1046,20 @@ model KubernetesVersionProperties {
   /**
    * major.minor version of Kubernetes release
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   /**
    * Whether this version is in preview mode.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isPreview?: boolean;
 
   /**
    * Patch versions of a Kubernetes release
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Patch Versions needs to be record following AKS behavior"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   patchVersions?: Record<KubernetesPatchVersions>;
 }
 
@@ -1072,7 +1072,7 @@ model KubernetesPatchVersions {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["osType", "osSku", "ready", "errorMessage"]
+    #["osType", "osSku", "ready", "errorMessage"]
   )
   readiness?: KubernetesVersionReadiness[];
 
@@ -1089,7 +1089,7 @@ model KubernetesVersionReadiness {
   /**
    * The particular KubernetesVersion Image OS Type (Linux, Windows)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: OsType;
 
   /**
@@ -1100,13 +1100,13 @@ model KubernetesVersionReadiness {
   /**
    * Whether the kubernetes version image is ready or not
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ready?: boolean;
 
   /**
    * The error message for version not being ready
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorMessage?: string;
 }
 
@@ -1117,7 +1117,7 @@ model VmSkuProfileProperties {
   /**
    * Provisioning state of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   /**
@@ -1125,7 +1125,7 @@ model VmSkuProfileProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["resourceType", "capabilities", "name", "tier", "size"]
+    #["resourceType", "capabilities", "name", "tier", "size"]
   )
   values?: VmSkuProperties[];
 }
@@ -1137,32 +1137,32 @@ model VmSkuProperties {
   /**
    * The type of resource the SKU applies to.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
    * The list of name-value pairs to describe VM SKU capabilities like MemoryGB, vCPUs, etc.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["name", "value"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["name", "value"])
   capabilities?: VmSkuCapabilities[];
 
   /**
    * The name of the VM SKU
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The tier of the VM SKU
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tier?: string;
 
   /**
    * The size of the VM SKU
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   size?: string;
 }
 
@@ -1173,13 +1173,13 @@ model VmSkuCapabilities {
   /**
    * Name of the VM SKU capability
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Value of the VM SKU capability
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 }
 
@@ -1195,13 +1195,13 @@ model VirtualNetworkProperties {
   /**
    * Range of IP Addresses for Kubernetes API Server and services if using HA Proxy load balancer
    */
-  @OpenAPI.extension("x-ms-identifiers", ["startIP", "endIP"])
+  @Azure.ResourceManager.identifiers(#["startIP", "endIP"])
   vipPool?: VirtualNetworkPropertiesVipPoolItem[];
 
   /**
    * Range of IP Addresses for Kubernetes node VMs
    */
-  @OpenAPI.extension("x-ms-identifiers", ["startIP", "endIP"])
+  @Azure.ResourceManager.identifiers(#["startIP", "endIP"])
   vmipPool?: VirtualNetworkPropertiesVmipPoolItem[];
 
   /**
@@ -1228,13 +1228,13 @@ model VirtualNetworkProperties {
   /**
    * The provisioning state of the virtual network resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * Status of the virtual network resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: VirtualNetworkPropertiesStatus;
 }
 

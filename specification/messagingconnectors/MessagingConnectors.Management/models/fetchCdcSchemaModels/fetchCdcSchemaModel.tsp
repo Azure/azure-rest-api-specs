@@ -143,6 +143,6 @@ model Schema {
 @doc("Properties of Schema results")
 model SchemaResult {
   @doc("Content of DataPreview results")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   schemas: Schema[];
 }

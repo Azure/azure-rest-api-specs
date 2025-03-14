@@ -27,11 +27,11 @@ union SourceType {
 
 @doc("The state of the connector")
 union State {
-  @doc("Whether the connector is enabled")
-  Enabled: "Enabled",
+  @doc("Whether the connector is active")
+  Active: "Active",
 
-  @doc("Whether the connector is disabled")
-  Disabled: "Disabled",
+  @doc("Whether the connector is inactive")
+  Inactive: "Inactive",
 
   string,
 }

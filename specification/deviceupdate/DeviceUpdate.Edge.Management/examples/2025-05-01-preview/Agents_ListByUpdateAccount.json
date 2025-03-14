@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "updateAccountName": "contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myagent",
+            "type": "Microsoft.DeviceUpdate/updateaccounts/agent",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/updateaccounts/contoso/agents/myagent",
+            "location": "westus2",
+            "properties": {
+              "activeMqttBrokerEndpoint": "mybroker-egmqtt-namespace.westus2-1.ts.eventgrid.azure.net",
+              "agentId": "myagent",
+              "agentInfo": {
+                "compatibilityProperties": {
+                  "manufacturer": "manufacturer1",
+                  "model": "model1"
+                },
+                "sequenceNumber": 256,
+                "updateProtocol": {
+                  "id": 1
+                }
+              },
+              "deviceClassId": "ee13113a78e5f6029714911c6cbf5427fbcb9d9e",
+              "deviceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Devices/devices/myagent",
+              "deviceUuid": "f329ae0b-dbf0-4ae4-bf96-c8d7e05b320d",
+              "enrollmentStatus": {
+                "state": "Succeeded"
+              },
+              "installedUpdateId": {
+                "name": "updatename",
+                "provider": "myprovider",
+                "version": "1.0"
+              },
+              "latestDeploymentInfo": {
+                "installResult": {
+                  "extendedResultCode": 0,
+                  "resultCode": 200,
+                  "resultDetails": "",
+                  "stepResults": [
+                    {
+                      "extendedResultCode": 0,
+                      "resultCode": 200,
+                      "resultDetails": "",
+                      "updateId": {
+                        "name": "peripheralcamera",
+                        "provider": "microsoft",
+                        "version": "1.0"
+                      }
+                    },
+                    {
+                      "extendedResultCode": 0,
+                      "resultCode": 200,
+                      "resultDetails": "",
+                      "updateId": {
+                        "name": "peripheralspeaker",
+                        "provider": "microsoft",
+                        "version": "1.0"
+                      }
+                    }
+                  ]
+                },
+                "state": "Succeeded",
+                "updateId": {
+                  "name": "updatename",
+                  "provider": "myprovider",
+                  "version": "1.0"
+                },
+                "workflow": {
+                  "action": "ApplyDeployment",
+                  "id": "mydeploymentfoo"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Agents_ListByUpdateAccount",
+  "title": "Gets list of Agents by an Update Account"
+}
