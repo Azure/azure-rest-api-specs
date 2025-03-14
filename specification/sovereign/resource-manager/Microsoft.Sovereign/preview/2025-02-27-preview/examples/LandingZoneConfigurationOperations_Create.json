@@ -3,16 +3,16 @@
   "operationId": "LandingZoneConfigurationOperations_Create",
   "parameters": {
     "api-version": "2025-02-27-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000001",
-    "resourceGroupName": "rg-examplegroup",
-    "landingZoneAccountName": "ExampleLZA",
-    "landingZoneConfigurationName": "ExampleLZC",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-RemApiExample",
+    "landingZoneAccountName": "lza-RemApiExample",
+    "landingZoneConfigurationName": "lzc-RemApiExample",
     "resource": {
       "properties": {
         "ddosProtectionCreationOption": "UseExisting",
-        "existingDdosProtectionId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Network/ddosProtectionPlans/ddos-example",
+        "existingDdosProtectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Network/ddosProtectionPlans/ddos-RemApiExample",
         "logAnalyticsWorkspaceCreationOption": "UseExisting",
-        "existingLogAnalyticsWorkspaceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.OperationalInsights/workspaces/log-example",
+        "existingLogAnalyticsWorkspaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.OperationalInsights/workspaces/log-RemApiExample",
         "tags": [
           {
             "name": "tag1",
@@ -29,7 +29,7 @@
         "logRetentionInDays": 540,
         "hubNetworkCidrBlock": "10.20.0.0/16",
         "azureBastionCreationOption": "UseExisting",
-        "existingAzureBastionId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Network/bastionHosts/bas-example",
+        "existingAzureBastionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Network/bastionHosts/bas-RemApiExample",
         "landingZonesMgChildren": [
           {
             "policyInitiativesAssignmentProperties": [],
@@ -160,7 +160,7 @@
         },
         "managedIdentity": {
           "type": "UserAssigned",
-          "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-example"
+          "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-RemApiExample"
         },
         "platformMgChildren": [
           {
@@ -203,13 +203,22 @@
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Sovereign/landingZoneAccounts/lza-RemApiExample/landingZoneConfigurations/lzc-RemApiExample",
+        "name": "lzc-RemApiExample",
+        "type": "microsoft.sovereign/landingzoneaccounts/landingzoneconfigurations",
+        "systemData": {
+          "createdBy": "ExampleUser@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-03-12T21:19:01.316093Z",
+          "lastModifiedBy": "ExampleUser@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-03-12T21:19:01.316093Z"
+        },
         "properties": {
-          "provisioningState": "Succeeded",
-          "authoringStatus": "Authoring",
           "ddosProtectionCreationOption": "UseExisting",
-          "existingDdosProtectionId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Network/ddosProtectionPlans/ddos-example",
+          "existingDdosProtectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Network/ddosProtectionPlans/ddos-RemApiExample",
           "logAnalyticsWorkspaceCreationOption": "UseExisting",
-          "existingLogAnalyticsWorkspaceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.OperationalInsights/workspaces/log-example",
+          "existingLogAnalyticsWorkspaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.OperationalInsights/workspaces/log-RemApiExample",
           "tags": [
             {
               "name": "tag1",
@@ -226,7 +235,7 @@
           "logRetentionInDays": 540,
           "hubNetworkCidrBlock": "10.20.0.0/16",
           "azureBastionCreationOption": "UseExisting",
-          "existingAzureBastionId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Network/bastionHosts/bas-example",
+          "existingAzureBastionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Network/bastionHosts/bas-RemApiExample",
           "landingZonesMgChildren": [
             {
               "policyInitiativesAssignmentProperties": [],
@@ -357,7 +366,7 @@
           },
           "managedIdentity": {
             "type": "UserAssigned",
-            "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-example"
+            "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-RemApiExample"
           },
           "platformMgChildren": [
             {
@@ -393,33 +402,32 @@
               "resourceType": "ddosProtectionPlans",
               "formula": "{ResourceTypeAbbreviation}-{DeploymentPrefix}-Contoso-{DeploymentSuffix}"
             }
-          ]
-        },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA/landingZoneConfigurations/ExampleLZC",
-        "name": "ExampleLZC",
-        "type": "microsoft.sovereign/landingzoneaccounts/landingzoneconfigurations",
-        "systemData": {
-          "createdBy": "example@example.com",
-          "createdByType": "User",
-          "createdAt": "2024-09-25T20:19:04.5255905Z",
-          "lastModifiedBy": "example@example.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-09-25T20:19:04.5255905Z"
+          ],
+          "provisioningState": "Succeeded"
         }
       }
     },
     "201": {
       "headers": {
-        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+        "Azure-AsyncOperation": "https://example.com/operationstatus"
       },
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Sovereign/landingZoneAccounts/lza-RemApiExample/landingZoneConfigurations/lzc-RemApiExample",
+        "name": "lzc-RemApiExample",
+        "type": "microsoft.sovereign/landingzoneaccounts/landingzoneconfigurations",
+        "systemData": {
+          "createdBy": "ExampleUser@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-03-12T21:19:01.316093Z",
+          "lastModifiedBy": "ExampleUser@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-03-12T21:19:01.316093Z"
+        },
         "properties": {
-          "provisioningState": "Accepted",
-          "authoringStatus": "Authoring",
           "ddosProtectionCreationOption": "UseExisting",
-          "existingDdosProtectionId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Network/ddosProtectionPlans/ddos-example",
+          "existingDdosProtectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Network/ddosProtectionPlans/ddos-RemApiExample",
           "logAnalyticsWorkspaceCreationOption": "UseExisting",
-          "existingLogAnalyticsWorkspaceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.OperationalInsights/workspaces/log-example",
+          "existingLogAnalyticsWorkspaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.OperationalInsights/workspaces/log-RemApiExample",
           "tags": [
             {
               "name": "tag1",
@@ -436,7 +444,7 @@
           "logRetentionInDays": 540,
           "hubNetworkCidrBlock": "10.20.0.0/16",
           "azureBastionCreationOption": "UseExisting",
-          "existingAzureBastionId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Network/bastionHosts/bas-example",
+          "existingAzureBastionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Network/bastionHosts/bas-RemApiExample",
           "landingZonesMgChildren": [
             {
               "policyInitiativesAssignmentProperties": [],
@@ -567,7 +575,7 @@
           },
           "managedIdentity": {
             "type": "UserAssigned",
-            "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-example"
+            "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-RemApiExample"
           },
           "platformMgChildren": [
             {
@@ -603,18 +611,8 @@
               "resourceType": "ddosProtectionPlans",
               "formula": "{ResourceTypeAbbreviation}-{DeploymentPrefix}-Contoso-{DeploymentSuffix}"
             }
-          ]
-        },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-examplegroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA/landingZoneConfigurations/ExampleLZC",
-        "name": "ExampleLZC",
-        "type": "microsoft.sovereign/landingzoneaccounts/landingzoneconfigurations",
-        "systemData": {
-          "createdBy": "example@example.com",
-          "createdByType": "User",
-          "createdAt": "2024-09-25T20:19:04.5255905Z",
-          "lastModifiedBy": "example@example.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-09-25T20:19:04.5255905Z"
+          ],
+          "provisioningState": "Accepted"
         }
       }
     }

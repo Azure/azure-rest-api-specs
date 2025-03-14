@@ -3,32 +3,33 @@
   "operationId": "LandingZoneRegistrationOperations_Get",
   "parameters": {
     "api-version": "2025-02-27-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000001",
-    "resourceGroupName": "ExampleResourceGroup",
-    "landingZoneAccountName": "ExampleLZA",
-    "landingZoneRegistrationName": "ExampleLZR"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-RemApiExample",
+    "landingZoneAccountName": "lza-RemApiExample",
+    "landingZoneRegistrationName": "lzr-RemApiExample"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Sovereign/landingZoneAccounts/lza-RemApiExample/landingZoneRegistrations/lzr-RemApiExample",
+        "name": "lzr-RemApiExample",
+        "type": "microsoft.sovereign/landingzoneaccounts/landingzoneregistrations",
+        "systemData": {
+          "createdBy": "ExampleUser@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-03-13T23:17:01.7650865Z",
+          "lastModifiedBy": "ExampleUser@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-03-13T23:17:01.7650865Z"
+        },
         "properties": {
           "provisioningState": "Succeeded",
-          "existingTopLevelMgId": "/providers/Microsoft.Management/managementGroups/mcfs",
-          "existingLandingZoneConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/TestResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA/landingZoneConfigurations/ExampleLZC",
+          "existingTopLevelMgId": "/providers/Microsoft.Management/managementGroups/mg-example",
+          "existingLandingZoneConfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Sovereign/landingZoneAccounts/lza-RemApiExample/landingZoneConfigurations/lzc-RemApiExample",
           "managedIdentity": {
-            "type": "SystemAssigned"
+            "type": "UserAssigned",
+            "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-RemApiExample"
           }
-        },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/TestResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/LZAtestSI37/landingZoneRegistrations/ExampleLZR",
-        "name": "ExampleLZR",
-        "type": "microsoft.sovereign/landingzoneaccounts/landingzoneconfigurations",
-        "systemData": {
-          "createdBy": "example@example.com",
-          "createdByType": "User",
-          "createdAt": "2025-01-25T20:19:04.5255905Z",
-          "lastModifiedBy": "example@example.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-01-25T20:19:04.5255905Z"
         }
       }
     }
