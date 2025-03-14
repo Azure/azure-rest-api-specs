@@ -504,6 +504,29 @@ op updateJobCustomization is Azure.Batch.UpdateOperationNew<
 
 @@override(Azure.Batch.Jobs.updateJob, updateJobCustomization, "java");
 
+// Replace Job Operation
+@doc("Optional parameters for Replace Job operation.")
+model ReplaceBatchJobOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Replace Job operation.")
+@route("/jobs/{jobId}")
+op replaceJobCustomization is Azure.Batch.ReplaceOperationNew<
+  {
+    ...Azure.Batch.ReplaceJobRequiredParameters;
+
+    @doc("Optional parameters for Replace Job operation.")
+    options?: ReplaceBatchJobOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.RequestSuccessResponseHeaders
+>;
+
+@@override(Azure.Batch.Jobs.replaceJob, replaceJobCustomization, "java");
+
 // List Jobs Operation
 @doc("Optional parameters for List Jobs operation.")
 model ListBatchJobsOptions {

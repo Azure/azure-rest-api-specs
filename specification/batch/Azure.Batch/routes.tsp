@@ -538,6 +538,16 @@ alias UpdateJobRequiredParameters = {
   job: BatchJobUpdateContent;
 };
 
+alias ReplaceJobRequiredParameters = {
+  @doc("The ID of the Job whose properties you want to update.")
+  @path
+  jobId: string;
+
+  @doc("A job with updated properties")
+  @bodyRoot
+  job: BatchJob;
+};
+
 alias ListJobsParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
@@ -674,16 +684,11 @@ interface Jobs {
     with this request, then the Batch service will remove the existing constraints.
     """)
   @route("/jobs/{jobId}")
-  @clientName("replaceJobInternal", "java")
-  replaceJob is ReplaceOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job whose properties you want to update.")
-      @path
-      jobId: string;
-
-      @doc("A job with updated properties")
-      @bodyRoot
-      job: BatchJob;
+  replaceJob is ReplaceOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...ReplaceJobRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;
