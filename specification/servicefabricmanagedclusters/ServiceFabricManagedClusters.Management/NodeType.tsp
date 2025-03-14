@@ -822,6 +822,8 @@ model VaultSecretGroup {
 /**
  * Azure resource identifier.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "backwards compatibility to match existing spec"
+@OpenAPI.extension("x-ms-azure-resource", true)
 model SubResource {
   /**
    * Azure resource identifier.
