@@ -144,4 +144,4 @@ using Microsoft.DataReplication;
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(IdentityModel.tenantId, uuid, "csharp");
+@@alternateType(IdentityModel.tenantId, Azure.Core.uuid, "csharp");
