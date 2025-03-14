@@ -144,6 +144,16 @@ function GeneratePRMatrixForBatch {
       }
     }
 
+    if ($matrixConfig.PSObject.Properties['PRBatching']) {
+      # if we are doing a PR Batch, we need to just add the matrix items directly to the OverallResult
+      # as the users have explicitly disabled PR batching for this matrix.
+      if (!$matrixConfig.PRBatching) {
+        Write-Host "The matrix config $($matrixConfig.Path) with name $($matrixConfig.Name) has PRBatch set to false, the matrix members will be directly added without batching by $PRMatrixSetting."
+        $OverallResult += $matrixResults
+        continue
+      }
+    }
+
     $packageBatches = Split-ArrayIntoBatches -InputArray $matrixBatch -BatchSize $BATCHSIZE
 
     # we only need to modify the generated job name if there is more than one matrix config + batch
@@ -170,7 +180,7 @@ function GeneratePRMatrixForBatch {
           }
 
           if ($batchSuffixNecessary) {
-            $outputItem["name"] = $outputItem["name"] + "$batchNamePrefix$batchCounter"
+            $outputItem["name"] = $outputItem["name"] + "_$batchNamePrefix$batchCounter"
           }
 
           $OverallResult += $outputItem
@@ -195,7 +205,7 @@ function GeneratePRMatrixForBatch {
         }
 
         if ($batchSuffixNecessary) {
-          $outputItem["name"] = $outputItem["name"]  + "_$batchNamePrefix$batchCounter"
+          $outputItem["name"] = $outputItem["name"] + "_$batchNamePrefix$batchCounter"
         }
         # now we need to take an item from the front of the matrix results, clone it, and add it to the back of the matrix results
         # we will add the cloned version to OverallResult

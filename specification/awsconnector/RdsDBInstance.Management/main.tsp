@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -78,7 +76,7 @@ model AwsRdsDBInstanceProperties {
   allowMajorVersionUpgrade?: boolean;
 
   @doc("The IAMlong (IAM) roles associated with the DB instance.   *Amazon Aurora*  Not applicable. The associated roles are managed by the DB cluster.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   associatedRoles?: DBInstanceRole[];
 
   @doc("A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.")
@@ -136,7 +134,6 @@ model AwsRdsDBInstanceProperties {
   dbParameterGroupName?: string;
 
   @doc("A list of the DB security groups to assign to the DB instance. The list can include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup resources created in the template.  If you set DBSecurityGroups, you must not set VPCSecurityGroups, and vice versa. Also, note that the DBSecurityGroups property exists only for backwards compatibility with older regions and is no longer recommended for providing security information to an RDS DB instance. Instead, use VPCSecurityGroups.  If you specify this property, AWS CloudFormation sends only the following properties (if specified) to Amazon RDS during create operations:  +   ``AllocatedStorage``   +   ``AutoMinorVersionUpgrade``   +   ``AvailabilityZone``   +   ``BackupRetentionPeriod``   +   ``CharacterSetName``   +   ``DBInstanceClass``   +   ``DBName``   +   ``DBParameterGroupName``   +   ``DBSecurityGroups``   +   ``DBSubnetGroupName``   +   ``Engine``   +   ``EngineVersion``   +   ``Iops``   +   ``LicenseModel``   +   ``MasterUsername``   +   ``MasterUserPassword``   +   ``MultiAZ``   +   ``OptionGroupName``   +   ``PreferredBackupWindow``   +   ``PreferredMaintenanceWindow``    All other properties are ignored. Specify a virtual private cloud (VPC) security group if you want to submit other properties, such as ``StorageType``, ``StorageEncrypted``, or ``KmsKeyId``. If you're already using the ``DBSecurityGroups`` property, you can't use these other properties by updating your DB instance to use a VPC security group. You must recreate the DB instance.")
-  @extension("x-ms-identifiers", [])
   dbSecurityGroups?: string[];
 
   @doc("The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot. By specifying this property, you can create a DB instance from the specified DB snapshot. If the ``DBSnapshotIdentifier`` property is an empty string or the ``AWS::RDS::DBInstance`` declaration has no ``DBSnapshotIdentifier`` property, AWS CloudFormation creates a new database. If the property contains a value (other than an empty string), AWS CloudFormation creates a database from the specified snapshot. If a snapshot with the specified name doesn't exist, AWS CloudFormation can't create the database and it rolls back the stack. Some DB instance properties aren't valid when you restore from a snapshot, such as the ``MasterUsername`` and ``MasterUserPassword`` properties. For information about the properties that you can specify, see the ``RestoreDBInstanceFromDBSnapshot`` action in the *Amazon RDS API Reference*. After you restore a DB instance with a ``DBSnapshotIdentifier`` property, you must specify the same ``DBSnapshotIdentifier`` property for any future updates to the DB instance. When you specify this property for an update, the DB instance is not restored from the DB snapshot again, and the data in the database is not changed. However, if you don't specify the ``DBSnapshotIdentifier`` property, an empty DB instance is created, and the original DB instance is deleted. If you specify a property that is different from the previous snapshot restore property, a new DB instance is restored from the specified ``DBSnapshotIdentifier`` property, and the original DB instance is deleted. If you specify the ``DBSnapshotIdentifier`` property to restore a DB instance (as opposed to specifying it for DB instance updates), then don't specify the following properties:  +   ``CharacterSetName``   +   ``DBClusterIdentifier``   +   ``DBName``   +   ``DeleteAutomatedBackups``   +   ``EnablePerformanceInsights``   +   ``KmsKeyId``   +   ``MasterUsername``   +   ``MasterUserPassword``   +   ``PerformanceInsightsKMSKeyId``   +   ``PerformanceInsightsRetentionPeriod``   +   ``PromotionTier``   +   ``SourceDBInstanceIdentifier``   +   ``SourceRegion``   +   ``StorageEncrypted`` (for an encrypted snapshot)  +   ``Timezone``     *Amazon Aurora*  Not applicable. Snapshot restore is managed by the DB cluster.")
@@ -167,7 +164,6 @@ model AwsRdsDBInstanceProperties {
   domainAuthSecretArn?: string;
 
   @doc("The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers. Constraints:  +  Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.   Example: ``123.124.125.126,234.235.236.237``")
-  @extension("x-ms-identifiers", [])
   domainDnsIps?: string[];
 
   @doc("The fully qualified domain name (FQDN) of an Active Directory domain. Constraints:  +  Can't be longer than 64 characters.   Example: ``mymanagedADtest.mymanagedAD.mydomain``")
@@ -180,7 +176,6 @@ model AwsRdsDBInstanceProperties {
   domainOu?: string;
 
   @doc("The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see [Publishing Database Logs to Amazon CloudWatch Logs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch) in the *Amazon Relational Database Service User Guide*.  *Amazon Aurora*  Not applicable. CloudWatch Logs exports are managed by the DB cluster.   *Db2*  Valid values: ``diag.log``, ``notify.log``   *MariaDB*  Valid values: ``audit``, ``error``, ``general``, ``slowquery``   *Microsoft SQL Server*  Valid values: ``agent``, ``error``   *MySQL*  Valid values: ``audit``, ``error``, ``general``, ``slowquery``   *Oracle*  Valid values: ``alert``, ``audit``, ``listener``, ``trace``, ``oemagent``   *PostgreSQL*  Valid values: ``postgresql``, ``upgrade``")
-  @extension("x-ms-identifiers", [])
   enableCloudwatchLogsExports?: string[];
 
   @doc("A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled. This property is supported for RDS for MariaDB, RDS for MySQL, and RDS for PostgreSQL. For more information, see [IAM Database Authentication for MariaDB, MySQL, and PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) in the *Amazon RDS User Guide.*   *Amazon Aurora*  Not applicable. Mapping AWS IAM accounts to database accounts is managed by the DB cluster.")
@@ -256,7 +251,7 @@ model AwsRdsDBInstanceProperties {
   preferredMaintenanceWindow?: string;
 
   @doc("The number of CPU cores and the number of threads per core for the DB instance class of the DB instance. This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   processorFeatures?: ProcessorFeature[];
 
   @doc("The order of priority in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see [Fault Tolerance for an Aurora DB Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Aurora.Managing.FaultTolerance) in the *Amazon Aurora User Guide*. This setting doesn't apply to RDS Custom DB instances. Default: ``1``  Valid Values: ``0 - 15``")
@@ -296,7 +291,7 @@ model AwsRdsDBInstanceProperties {
   storageType?: string;
 
   @doc("An optional array of key-value pairs to apply to this DB instance.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("Property tdeCredentialArn")
@@ -315,7 +310,6 @@ model AwsRdsDBInstanceProperties {
   useLatestRestorableTime?: boolean;
 
   @doc("A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to [AWS::EC2::SecurityGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html) resources created in the template. If you plan to update the resource, don't specify VPC security groups in a shared VPC.  If you set ``VPCSecurityGroups``, you must not set [DBSecurityGroups](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups), and vice versa.  You can migrate a DB instance in your stack from an RDS DB security group to a VPC security group, but keep the following in mind:  +  You can't revert to using an RDS security group after you establish a VPC security group membership.  +  When you migrate your DB instance to VPC security groups, if your stack update rolls back because the DB instance update fails or because an update fails in another AWS CloudFormation resource, the rollback fails because it can't revert to an RDS security group.  +  To use the properties that are available when you use a VPC security group, you must recreate the DB instance. If you don't, AWS CloudFormation submits only the property values that are listed in the [DBSecurityGroups](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups) property.    To avoid this situation, migrate your DB instance to using VPC security groups only when that is the only change in your stack template.   *Amazon Aurora*  Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. If specified, the setting must match the DB cluster setting.")
-  @extension("x-ms-identifiers", [])
   vpcSecurityGroups?: string[];
 }
 
