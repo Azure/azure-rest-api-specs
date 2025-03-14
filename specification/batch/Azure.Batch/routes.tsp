@@ -558,6 +558,12 @@ alias DisableJobRequiredParameters = {
   content: BatchJobDisableContent;
 };
 
+alias EnableJobRequiredParameters = {
+  @doc("The ID of the Job to enable.")
+  @path
+  jobId: string;
+};
+
 alias ListJobsParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
@@ -734,12 +740,11 @@ interface Jobs {
     than 180 days ago, those Tasks will not run.
     """)
   @route("/jobs/{jobId}/enable")
-  @clientName("enableJobInternal", "java")
-  enableJob is PostOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job to enable.")
-      @path
-      jobId: string;
+  enableJob is PostOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...EnableJobRequiredParameters;
     },
     AcceptedProcessingResponseHeaders
   >;
