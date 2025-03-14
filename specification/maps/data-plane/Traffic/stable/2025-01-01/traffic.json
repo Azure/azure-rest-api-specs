@@ -189,6 +189,23 @@
     }
   },
   "definitions": {
+    "GeoJsonGeometry": {
+      "description": "A valid `GeoJSON` geometry object. Type as `Point`. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
+      "type": "object"
+    },
+    "GeoJsonPoint": {
+      "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
+      "x-ms-discriminator-value": "Point",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/GeoJsonPointData"
+        }
+      ]
+    },
     "IncidentTypeEnum": {
       "type": "string",
       "description": "Specifies the type of traffic incident. This can be used to request and differentiate between various types of incidents. ",
@@ -358,7 +375,7 @@
               "format": "int64"
             },
             "geometry": {
-              "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/GeoJsonPoint"
+              "$ref": "#/definitions/GeoJsonPoint"
             },
             "properties": {
               "$ref": "#/definitions/TrafficIncidentFeatureProperties"
