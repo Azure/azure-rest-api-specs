@@ -37,11 +37,4 @@ interface ExampleQueryOperations {
 
   @doc("delete the example query")
   deleteExample is apiOperations.ResourceDelete<ExampleQueryRequest>;
-
-  @doc("Update instruction status.")
-  linkInstruction is apiOperations.ResourceAction<
-    ExampleQueryRequest,
-    LinkInstructionRequest,
-    LinkInstructionRequest
-  >;
 }

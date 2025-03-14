@@ -33,15 +33,6 @@ interface Aliases {
   @doc("Get an alias by Id")
   get is Operations.ResourceRead<Alias>;
 
-  @doc("Create an alias")
-  @pollingOperation(
-    MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
-  )
-  create is Operations.LongRunningResourceCreateWithServiceProvidedName<
-    Alias,
-    jobLocationResponseHeaders
-  >;
-
   @doc("Update an alias")
   @pollingOperation(
     MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
@@ -53,7 +44,4 @@ interface Aliases {
 
   @doc("List all aliases")
   list is Operations.ResourceList<Alias>;
-
-  @doc("Deactivate an alias")
-  updateState is Operations.ResourceAction<Alias, ActivateAlias, ActivateAlias>;
 }

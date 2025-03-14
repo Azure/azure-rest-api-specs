@@ -44,16 +44,16 @@ interface Instructions {
     }>
   >;
 
-  @doc("Create an instruction.")
-  @pollingOperation(
-    MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
-  )
-  create is apiOperations.LongRunningResourceCreateWithServiceProvidedName<
-    Instruction,
-    jobLocationResponseHeaders
-  >;
+  // @doc("Create an instruction.")
+  // @pollingOperation(
+  //   MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
+  // )
+  // create is apiOperations.LongRunningResourceCreateWithServiceProvidedName<
+  //   Instruction,
+  //   jobLocationResponseHeaders
+  // >;
 
-  @doc("update instructions.")
+  @doc("create Or Replace instructions.")
   @pollingOperation(
     MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
   )
@@ -64,14 +64,4 @@ interface Instructions {
     MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
   )
   delete is apiOperations.LongRunningResourceDelete<Instruction>;
-
-  @doc("Update instruction status.")
-  @pollingOperation(
-    MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
-  )
-  updateStatus is apiOperations.LongRunningResourceAction<
-    Instruction,
-    UpdateStatusRequest,
-    UpdateStatusRequest
-  >;
 }

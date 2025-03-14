@@ -16,7 +16,7 @@ model SampleQuery {
   query: string;
 }
 
-@resource("exampleQuery")
+@resource("queryExamples")
 @doc("The example query resource.")
 model ExampleQueryRequest {
   @key("exampleId")
@@ -32,10 +32,4 @@ model ExampleQueryRequest {
 
   @doc("The sample query for the example.")
   sampleQuery: SampleQuery;
-}
-
-@doc("The patch request for the example query.")
-model LinkInstructionRequest {
-  @doc("The linked instructions for the example query.")
-  linkedInstructions?: string[];
 }

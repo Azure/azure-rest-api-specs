@@ -23,15 +23,9 @@ model Alias {
 
   @doc("Indicates if the alias is enabled")
   @visibility(Lifecycle.Read)
-  isCustom: boolean = true;
+  isCustom: boolean;
 
   @doc("Indicates if the alias is enabled")
-  @visibility(Lifecycle.Read)
-  enabled: boolean;
-}
-
-@doc("This is the patch request to update the status of Alias")
-model ActivateAlias {
-  @doc("status of the alias")
+  @visibility(Lifecycle.Update)
   enabled: boolean;
 }

@@ -10,33 +10,26 @@ namespace MdsSolution.CopilotService.Instructions.Models;
 @resource("instructions")
 @doc("This is the request model for Instruction")
 model Instruction {
-  @key("id")
-  @visibility(Lifecycle.Read)
-  @doc("Id for the instruction")
-  id: string;
+  // @key("id")
+  // @visibility(Lifecycle.Read)
+  // @doc("Id for the instruction")
+  // id: string;
 
   @doc("intruction Id for the instruction")
-  @visibility(Lifecycle.Update)
+  @key("id")
+  @visibility(Lifecycle.Read)
   instructionId: string;
 
   @doc("Version for the instruction")
-  @visibility(Lifecycle.Update)
   instructionVersion: string;
 
-  @doc("Status for the instruction")
-  @visibility(Lifecycle.Read)
-  status: InstructionStatusEnum;
-
   @doc("Domain for the instruction")
-  @visibility(Lifecycle.Read)
   domain: InstrustionDomainEnum;
 
   @doc("Sub-domain for the instruction")
-  @visibility(Lifecycle.Read)
   subDomain: InstructionSubDomainEnum;
 
   @doc("Category for the instruction")
-  @visibility(Lifecycle.Read)
   category: InstructionCategoryEnum;
 
   @doc("The language of the instruction.")
@@ -53,7 +46,40 @@ model Instruction {
 
   @doc("audit record for the instruction")
   administrativeDetails: AdministrativeDetails;
+
+  @doc("Status for the instruction")
+  status: InstructionStatusEnum;
 }
+
+@resource("versions")
+@parentResource(Instruction)
+@doc("This is the request model for Instruction Version")
+model InstructionVerion {
+  @doc("The version of the instruction.")
+  @key
+  @visibility(Lifecycle.Read)
+  version: string;
+
+  @doc("Status for the instruction")
+  @visibility(Lifecycle.Read)
+  status: InstructionStatusEnum;
+
+  @doc("The language of the instruction.")
+  language: InstructionLanguageEnum;
+
+  @doc("The retrieval properties of the instruction.")
+  retrieval: RetrievalProperties;
+
+  @doc("The content properties of the instruction.")
+  content: ContentProperties;
+
+  @doc("The relationships of the instruction.")
+  relationships: Relationships;
+
+  @doc("audit record for the instruction")
+  administrativeDetails: AdministrativeDetails;
+}
+
 
 @doc("Instruction Patch Request")
 model InstructionPatchRequest {
