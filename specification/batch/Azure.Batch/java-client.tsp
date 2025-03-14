@@ -527,6 +527,29 @@ op replaceJobCustomization is Azure.Batch.ReplaceOperationNew<
 
 @@override(Azure.Batch.Jobs.replaceJob, replaceJobCustomization, "java");
 
+// Disable Job Operation
+@doc("Optional parameters for Disable Job operation.")
+model DisableBatchJobOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Disable Job operation.")
+@route("/jobs/{jobId}/disable")
+op disableJobCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.DisableJobRequiredParameters;
+
+    @doc("Optional parameters for Disable Job operation.")
+    options?: DisableBatchJobOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.AcceptedProcessingResponseHeaders
+>;
+
+@@override(Azure.Batch.Jobs.disableJob, disableJobCustomization, "java");
+
 // List Jobs Operation
 @doc("Optional parameters for List Jobs operation.")
 model ListBatchJobsOptions {

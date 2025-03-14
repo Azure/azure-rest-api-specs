@@ -548,6 +548,16 @@ alias ReplaceJobRequiredParameters = {
   job: BatchJob;
 };
 
+alias DisableJobRequiredParameters = {
+  @doc("The ID of the Job to disable.")
+  @path
+  jobId: string;
+
+  @doc("The options to use for disabling the Job.")
+  @bodyRoot
+  content: BatchJobDisableContent;
+};
+
 alias ListJobsParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
@@ -705,18 +715,12 @@ interface Jobs {
     the request fails with status code 409.
     """)
   @route("/jobs/{jobId}/disable")
-  @clientName("disableJobInternal", "java")
-  disableJob is PostOperation<
-    BatchMatchHeaders &
-      MinimalMetadata & {
-        @doc("The ID of the Job to disable.")
-        @path
-        jobId: string;
-
-        @doc("The options to use for disabling the Job.")
-        @bodyRoot
-        content: BatchJobDisableContent;
-      },
+  disableJob is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...DisableJobRequiredParameters;
+    },
     AcceptedProcessingResponseHeaders
   >;
 
