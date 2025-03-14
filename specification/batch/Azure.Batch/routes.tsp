@@ -498,6 +498,18 @@ interface Pools {
 }
 
 // Job Parameter Aliases
+alias DeleteJobRequiredParameters = {
+  @doc("The ID of the Job to delete.")
+  @path
+  jobId: string;
+};
+
+alias DeleteJobOptionalParameters = {
+  @doc("If true, the server will delete the Job even if the corresponding nodes have not fully processed the deletion. The default value is false.")
+  @query
+  force?: boolean;
+};
+
 alias ListJobsParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
@@ -588,16 +600,12 @@ interface Jobs {
     that the Job is being deleted.
     """)
   @route("/jobs/{jobId}")
-  @clientName("deleteJobInternal", "java")
-  deleteJob is DeleteOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job to delete.")
-      @path
-      jobId: string;
-
-      @doc("If true, the server will delete the Job even if the corresponding nodes have not fully processed the deletion. The default value is false.")
-      @query
-      force?: boolean;
+  deleteJob is DeleteOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...DeleteJobRequiredParameters;
+      ...DeleteJobOptionalParameters;
     },
     DeleteResponseHeaders
   >;

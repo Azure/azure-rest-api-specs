@@ -432,6 +432,30 @@ op listPoolNodeCountsCustomization is Azure.Batch.ListOperationNew<
   "java"
 );
 
+// Delete Job Operation
+@doc("Optional parameters for Delete Job operation.")
+model DeleteBatchJobOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.DeleteJobOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Delete Job operation.")
+@route("/jobs/{jobId}")
+op deleteJobCustomization is Azure.Batch.DeleteOperationNew<
+  {
+    ...Azure.Batch.DeleteJobRequiredParameters;
+
+    @doc("Optional parameters for Delete Job operation.")
+    options?: DeleteBatchJobOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.DeleteResponseHeaders
+>;
+
+@@override(Azure.Batch.Jobs.deleteJob, deleteJobCustomization, "java");
+
 // List Jobs Operation
 @doc("Optional parameters for List Jobs operation.")
 model ListBatchJobsOptions {
