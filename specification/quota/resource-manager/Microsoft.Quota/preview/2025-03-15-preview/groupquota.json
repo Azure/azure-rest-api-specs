@@ -1609,7 +1609,11 @@
       "properties": {
         "properties": {
           "description": "Group Quota properties for the specified resource.",
-          "$ref": "#/definitions/GroupQuotaDetails"
+          "allOf": [
+            {
+              "$ref": "#/definitions/GroupQuotaDetails"
+            }
+          ]
         }
       }
     },
@@ -1724,6 +1728,7 @@
             },
             "provisioningState": {
               "$ref": "#/definitions/RequestState",
+              "readOnly": true,
               "description": "Status of this subscriptionId being associated with the GroupQuotasEntity."
             }
           }
@@ -1768,6 +1773,7 @@
             },
             "provisioningState": {
               "$ref": "#/definitions/RequestState",
+              "readOnly": true,
               "description": "Status of this subscriptionId being associated with the GroupQuotasEntity."
             }
           }
@@ -1832,7 +1838,11 @@
       "properties": {
         "properties": {
           "description": "Quota properties for the specified resource.",
-          "$ref": "#/definitions/SubscriptionQuotaDetails"
+          "allOf": [
+            {
+              "$ref": "#/definitions/SubscriptionQuotaDetails"
+            }
+          ]
         }
       }
     },
@@ -2086,10 +2096,6 @@
           "description": "Location of the GroupQuota entity.",
           "type": "string"
         },
-        "additionalAttributes": {
-          "description": "Additional attributes to filter/restrict the subscriptions, which can be added to the subscriptionIds.",
-          "$ref": "#/definitions/AdditionalAttributes"
-        },
         "provisioningState": {
           "description": "Provisioning state of the operation.",
           "$ref": "#/definitions/RequestState",
@@ -2104,10 +2110,6 @@
         "displayName": {
           "description": "Display name of the GroupQuota entity.",
           "type": "string"
-        },
-        "additionalAttributes": {
-          "description": "Additional attributes to filter/restrict the subscriptions, which can be added to the subscriptionIds.",
-          "$ref": "#/definitions/AdditionalAttributesPatch"
         },
         "provisioningState": {
           "description": "Provisioning state of the operation.",
@@ -2128,7 +2130,11 @@
         "properties": {
           "title": "Properties",
           "type": "object",
-          "$ref": "#/definitions/GroupQuotasEntityBasePatch"
+          "allOf": [
+            {
+              "$ref": "#/definitions/GroupQuotasEntityBasePatch"
+            }
+          ]
         }
       }
     },
@@ -2138,40 +2144,22 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "title": "Properties",
+        },
+        {
           "type": "object",
-          "$ref": "#/definitions/GroupQuotasEntityBase"
+          "properties": {
+            "properties": {
+              "title": "Properties",
+              "type": "object",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/GroupQuotasEntityBase"
+                }
+              ]
+            }
+          }
         }
-      }
-    },
-    "BillingAccountId": {
-      "type": "object",
-      "description": "A Billing Account Id.",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      }
-    },
-    "EnvironmentType": {
-      "type": "string",
-      "description": "Environment name.",
-      "enum": [
-        "NonProduction",
-        "Production"
-      ],
-      "x-ms-enum": {
-        "name": "EnvironmentType",
-        "modelAsString": true
-      }
-    },
-    "Environment": {
-      "type": "object",
-      "$ref": "#/definitions/EnvironmentType"
+      ]
     },
     "GroupType": {
       "type": "string",
@@ -2183,58 +2171,6 @@
       "x-ms-enum": {
         "name": "GroupType",
         "modelAsString": true
-      }
-    },
-    "GroupingIdType": {
-      "type": "string",
-      "description": "GroupingId type. It is a required property. More types of groupIds can be supported in future.",
-      "enum": [
-        "ServiceTreeId",
-        "BillingId"
-      ],
-      "x-ms-enum": {
-        "name": "GroupingIdType",
-        "modelAsString": true
-      }
-    },
-    "GroupingId": {
-      "description": "The grouping Id for the group quota. It can be Billing Id or ServiceTreeId if applicable. ",
-      "type": "object",
-      "properties": {
-        "groupingIdType": {
-          "$ref": "#/definitions/GroupingIdType"
-        },
-        "value": {
-          "description": "GroupId value based on the groupingType selected - Billing Id or ServiceTreeId.",
-          "type": "string"
-        }
-      }
-    },
-    "AdditionalAttributes": {
-      "description": "Additional attribute or filter to allow subscriptions meeting the requirements to be part of the GroupQuota.",
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "$ref": "#/definitions/GroupingId"
-        },
-        "environment": {
-          "$ref": "#/definitions/Environment"
-        }
-      },
-      "required": [
-        "groupId"
-      ]
-    },
-    "AdditionalAttributesPatch": {
-      "description": "Additional attribute or filter to allow subscriptions meeting the requirements to be part of the GroupQuota.",
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "$ref": "#/definitions/GroupingId"
-        },
-        "environment": {
-          "$ref": "#/definitions/Environment"
-        }
       }
     },
     "GroupQuotaList": {
