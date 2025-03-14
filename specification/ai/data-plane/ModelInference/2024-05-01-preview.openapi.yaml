@@ -135,6 +135,35 @@ paths:
             schema:
               $ref: '#/components/schemas/ImageEmbeddingsOptions'
         description: The parameters of the image embeddings request.
+  /info:
+    get:
+      operationId: getModelInfo
+      description: |-
+        Returns information about the AI model.
+        The method makes a REST API call to the `/info` route on the given endpoint.
+        This method will only work when using Serverless API or Managed Compute endpoint.
+        It will not work for GitHub Models endpoint or Azure OpenAI endpoint.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelInfo'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
 security:
   - ApiKeyAuth: []
   - BearerAuth: []

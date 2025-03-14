@@ -293,6 +293,45 @@
           }
         }
       }
+    },
+    "/info": {
+      "get": {
+        "operationId": "GetModelInfo",
+        "description": "Returns information about the AI model.\nThe method makes a REST API call to the `/info` route on the given endpoint.\nThis method will only work when using Serverless API or Managed Compute endpoint.\nIt will not work for GitHub Models endpoint or Azure OpenAI endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModelInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "maximum set model information": {
+            "$ref": "./examples/GetModelInfo_MaximumSet_Gen.json"
+          },
+          "minimum set model information": {
+            "$ref": "./examples/GetModelInfo_MinimumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
