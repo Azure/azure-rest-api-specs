@@ -1443,8 +1443,8 @@
               "format": "date-time"
             },
             "provisioningState": {
-              "$ref": "#/definitions/RequestState",
-              "readOnly": true
+              "readOnly": true,
+              "$ref": "#/definitions/RequestState"
             },
             "faultCode": {
               "type": "string",
@@ -1487,8 +1487,8 @@
           "type": "object",
           "properties": {
             "provisioningState": {
-              "$ref": "#/definitions/RequestState",
-              "readOnly": true
+              "readOnly": true,
+              "$ref": "#/definitions/RequestState"
             }
           }
         }
@@ -1668,8 +1668,8 @@
           "description": "The available Group Quota Limit at the MG level. This Group quota can be allocated to subscription(s)."
         },
         "allocatedToSubscriptions": {
-          "$ref": "#/definitions/AllocatedQuotaToSubscriptionList",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/AllocatedQuotaToSubscriptionList"
         }
       }
     },
@@ -1686,8 +1686,8 @@
           "type": "object",
           "properties": {
             "provisioningState": {
-              "$ref": "#/definitions/RequestState",
-              "readOnly": true
+              "readOnly": true,
+              "$ref": "#/definitions/RequestState"
             },
             "value": {
               "type": "array",
@@ -1727,9 +1727,9 @@
               "format": "date-time"
             },
             "provisioningState": {
-              "$ref": "#/definitions/RequestState",
+              "description": "Status of this subscriptionId being associated with the GroupQuotasEntity.",
               "readOnly": true,
-              "description": "Status of this subscriptionId being associated with the GroupQuotasEntity."
+              "$ref": "#/definitions/RequestState"
             }
           }
         }
@@ -1768,13 +1768,12 @@
           "properties": {
             "subscriptionId": {
               "description": "An Azure subscriptionId.",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "provisioningState": {
-              "$ref": "#/definitions/RequestState",
+              "description": "Status of this subscriptionId being associated with the GroupQuotasEntity.",
               "readOnly": true,
-              "description": "Status of this subscriptionId being associated with the GroupQuotasEntity."
+              "$ref": "#/definitions/RequestState"
             }
           }
         }
@@ -1909,8 +1908,8 @@
               "format": "date-time"
             },
             "provisioningState": {
-              "$ref": "#/definitions/RequestState",
-              "readOnly": true
+              "readOnly": true,
+              "$ref": "#/definitions/RequestState"
             },
             "faultCode": {
               "type": "string",
@@ -1971,8 +1970,8 @@
           "type": "object",
           "properties": {
             "provisioningState": {
-              "$ref": "#/definitions/RequestState",
-              "readOnly": true
+              "readOnly": true,
+              "$ref": "#/definitions/RequestState"
             },
             "value": {
               "type": "array",
@@ -2098,8 +2097,8 @@
         },
         "provisioningState": {
           "description": "Provisioning state of the operation.",
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/RequestState"
         }
       }
     },
@@ -2113,8 +2112,8 @@
         },
         "provisioningState": {
           "description": "Provisioning state of the operation.",
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
+          "readOnly": true,
+          "$ref": "#/definitions/RequestState"
         }
       }
     },
