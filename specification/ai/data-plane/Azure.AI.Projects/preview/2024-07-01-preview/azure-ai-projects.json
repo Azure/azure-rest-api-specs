@@ -301,7 +301,7 @@
         }
       }
     },
-    "/assistants/{agentId}": {
+    "/assistants/{assistantId}": {
       "get": {
         "operationId": "Agents_GetAgent",
         "description": "Retrieves an existing agent.",
@@ -310,11 +310,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "agentId",
-            "in": "path",
-            "description": "Identifier of the agent.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Agents.GetAgentOptions"
           }
         ],
         "responses": {
@@ -346,7 +342,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Agents.UpdateAgentOptions.agentId"
+            "$ref": "#/parameters/Agents.UpdateAgentOptions.assistantId"
           },
           {
             "name": "body",
@@ -386,11 +382,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "agentId",
-            "in": "path",
-            "description": "Identifier of the agent.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Agents.DeleteAgentOptions"
           }
         ],
         "responses": {
@@ -4234,7 +4226,7 @@
         "assistant_id": {
           "type": "string",
           "description": "The ID of the agent for which the thread should be created.",
-          "x-ms-client-name": "agentId"
+          "x-ms-client-name": "assistantId"
         },
         "thread": {
           "$ref": "#/definitions/Agents.AgentThreadCreationOptions",
@@ -4400,7 +4392,7 @@
         "assistant_id": {
           "type": "string",
           "description": "The ID of the agent that should run the thread.",
-          "x-ms-client-name": "agentId"
+          "x-ms-client-name": "assistantId"
         },
         "model": {
           "type": "string",
@@ -6224,7 +6216,7 @@
         "assistant_id": {
           "type": "string",
           "description": "The ID of the agent associated with the run step.",
-          "x-ms-client-name": "agentId"
+          "x-ms-client-name": "assistantId"
         },
         "thread_id": {
           "type": "string",
@@ -7442,7 +7434,7 @@
           "type": "string",
           "description": "If applicable, the ID of the agent that authored this message.",
           "x-nullable": true,
-          "x-ms-client-name": "agentId"
+          "x-ms-client-name": "assistantId"
         },
         "run_id": {
           "type": "string",
@@ -7546,7 +7538,7 @@
         "assistant_id": {
           "type": "string",
           "description": "The ID of the agent associated with the thread this run was performed against.",
-          "x-ms-client-name": "agentId"
+          "x-ms-client-name": "assistantId"
         },
         "status": {
           "$ref": "#/definitions/Agents.RunStatus",
@@ -9887,8 +9879,24 @@
     }
   },
   "parameters": {
-    "Agents.UpdateAgentOptions.agentId": {
-      "name": "agentId",
+    "Agents.DeleteAgentOptions": {
+      "name": "assistantId",
+      "in": "path",
+      "description": "Identifier of the agent.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Agents.GetAgentOptions": {
+      "name": "assistantId",
+      "in": "path",
+      "description": "Identifier of the agent.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Agents.UpdateAgentOptions.assistantId": {
+      "name": "assistantId",
       "in": "path",
       "description": "The ID of the agent to modify.",
       "required": true,
