@@ -1569,6 +1569,50 @@
         }
       }
     },
+    "IngressConfiguration": {
+      "description": "Settings for the ingress component, including workload profile, scaling, and connection handling.",
+      "type": "object",
+      "properties": {
+        "workloadProfileName": {
+          "description": "Name of the workload profile used by the ingress component. Required.",
+          "type": "string"
+        },
+        "scale": {
+          "description": "Scaling configuration for the ingress component. Required.",
+          "type": "object",
+          "properties": {
+            "minReplicas": {
+              "description": "Minimum number of ingress replicas. Must be at least 2. Required.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxReplicas": {
+              "description": "Maximum number of ingress replicas. Must be greater than or equal to minReplicas.",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "terminationGracePeriodSeconds": {
+          "description": "Time (in seconds) to allow active connections to complete on termination. Must be between 0 and 3600. Defaults to 480 seconds.",
+          "type": "integer",
+          "format": "int32",
+          "default": 480
+        },
+        "headerCountLimit": {
+          "description": "Maximum number of headers per request allowed by the ingress. Must be at least 1. Defaults to 100.",
+          "type": "integer",
+          "format": "int32",
+          "default": 100
+        },
+        "requestIdleTimeout": {
+          "description": "Duration (in minutes) before idle requests are timed out. Must be at least 1 minute. Defaults to 4 minutes.",
+          "type": "integer",
+          "format": "int32",
+          "default": 4
+        }
+      }
+    },
     "ManagedEnvironment": {
       "description": "An environment for hosting container apps",
       "type": "object",
@@ -1734,48 +1778,8 @@
               }
             },
             "ingressConfiguration": {
-              "description": "Settings for the ingress component, including workload profile, scaling, and connection handling.",
-              "type": "object",
-              "properties": {
-                "workloadProfileName": {
-                  "description": "Name of the workload profile used by the ingress component. Required.",
-                  "type": "string"
-                },
-                "scale": {
-                  "description": "Scaling configuration for the ingress component. Required.",
-                  "type": "object",
-                  "properties": {
-                    "minReplicas": {
-                      "description": "Minimum number of ingress replicas. Must be at least 2. Required.",
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "maxReplicas": {
-                      "description": "Maximum number of ingress replicas. Must be greater than or equal to minReplicas.",
-                      "type": "integer",
-                      "format": "int32"
-                    }
-                  }
-                },
-                "terminationGracePeriodSeconds": {
-                  "description": "Time (in seconds) to allow active connections to complete on termination. Must be between 0 and 3600. Defaults to 480 seconds.",
-                  "type": "integer",
-                  "format": "int32",
-                  "default": 480
-                },
-                "headerCountLimit": {
-                  "description": "Maximum number of headers per request allowed by the ingress. Must be at least 1. Defaults to 100.",
-                  "type": "integer",
-                  "format": "int32",
-                  "default": 100
-                },
-                "requestIdleTimeout": {
-                  "description": "Duration (in minutes) before idle requests are timed out. Must be at least 1 minute. Defaults to 4 minutes.",
-                  "type": "integer",
-                  "format": "int32",
-                  "default": 4
-                }
-              }
+              "$ref": "#/definitions/IngressConfiguration",
+              "description": "Ingress configuration for the Managed Environment."
             },
             "privateEndpointConnections": {
               "description": "Private endpoint connections to the resource.",
