@@ -346,7 +346,9 @@
               "AzureBlob",
               "CognitiveSearch",
               "CosmosDB",
-              "ApiKey"
+              "ApiKey",
+              "AppInsights",
+              "CustomKeys"
             ],
             "x-ms-enum": {
               "name": "ConnectionType",
@@ -376,6 +378,16 @@
                   "name": "APIKey",
                   "value": "ApiKey",
                   "description": "Generic connection that uses API Key authentication"
+                },
+                {
+                  "name": "ApplicationInsights",
+                  "value": "AppInsights",
+                  "description": "Application Insights"
+                },
+                {
+                  "name": "Custom",
+                  "value": "CustomKeys",
+                  "description": "Custom Keys"
                 }
               ]
             },
@@ -914,10 +926,10 @@
         }
       }
     },
-    "/evaluations": {
+    "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
-        "description": "List evaluations",
+        "description": "List evaluation runs",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -930,6 +942,9 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -937,6 +952,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedEvaluation"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -957,22 +979,23 @@
         }
       }
     },
-    "/evaluations/{id}": {
+    "/evaluations/runs/{name}": {
       "get": {
         "operationId": "Evaluations_Get",
-        "description": "Get an evaluation.",
+        "description": "Get an evaluation run by name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
             "description": "Identifier of the evaluation.",
             "required": true,
-            "type": "string",
-            "maxLength": 254,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -980,6 +1003,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Evaluation"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -997,18 +1027,18 @@
         }
       }
     },
-    "/evaluations:create": {
+    "/evaluations/runs:run": {
       "post": {
-        "operationId": "Evaluations_Create",
-        "description": "Creates an evaluation.",
+        "operationId": "Evaluations_CreateRun",
+        "description": "Creates an evaluation run.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "evaluation",
             "in": "body",
-            "description": "Properties of Evaluation.",
+            "description": "Evalution to be run",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Evaluation"
@@ -1016,8 +1046,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Evaluation"
             }
@@ -9357,7 +9387,9 @@
         "AzureBlob",
         "CognitiveSearch",
         "CosmosDB",
-        "ApiKey"
+        "ApiKey",
+        "AppInsights",
+        "CustomKeys"
       ],
       "x-ms-enum": {
         "name": "ConnectionType",
@@ -9387,6 +9419,16 @@
             "name": "APIKey",
             "value": "ApiKey",
             "description": "Generic connection that uses API Key authentication"
+          },
+          {
+            "name": "ApplicationInsights",
+            "value": "AppInsights",
+            "description": "Application Insights"
+          },
+          {
+            "name": "Custom",
+            "value": "CustomKeys",
+            "description": "Custom Keys"
           }
         ]
       }
@@ -9471,25 +9513,6 @@
         }
       ],
       "x-ms-discriminator-value": "DataPath"
-    },
-    "Dataset": {
-      "type": "object",
-      "description": "Dataset as source for evaluation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Evaluation input data"
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/InputData"
-        }
-      ],
-      "x-ms-discriminator-value": "dataset"
     },
     "DatasetType": {
       "type": "string",
@@ -9665,7 +9688,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Identifier of the evaluation."
+          "description": "Identifier of the evaluation.",
+          "readOnly": true
         },
         "data": {
           "$ref": "#/definitions/InputData",
@@ -9673,7 +9697,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development."
+          "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
         },
         "description": {
           "type": "string",
@@ -9712,6 +9736,7 @@
         }
       },
       "required": [
+        "id",
         "data",
         "evaluators"
       ]
@@ -9888,6 +9913,25 @@
       "required": [
         "type"
       ]
+    },
+    "InputDataset": {
+      "type": "object",
+      "description": "Dataset as source for evaluation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Evaluation input data"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputData"
+        }
+      ],
+      "x-ms-discriminator-value": "dataset"
     },
     "ListSortOrder": {
       "type": "string",
@@ -10072,15 +10116,14 @@
     },
     "PagedEvaluation": {
       "type": "object",
-      "description": "Paged evaluation items",
+      "description": "Paged collection of Evaluation items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of Evaluations.",
+          "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
