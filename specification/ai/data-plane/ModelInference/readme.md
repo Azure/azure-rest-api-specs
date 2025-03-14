@@ -7,11 +7,6 @@ This is the AutoRest configuration file for Model Inference API.
 The current release is `2025-04-01`.
 
 ```yaml
-tag: 2024-05-01-preview
-openapi-type: data-plane
-```
-
-```yaml
 tag: 2025-04-01
 openapi-type: data-plane
 ```
