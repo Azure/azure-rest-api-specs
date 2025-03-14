@@ -1215,7 +1215,7 @@ components:
           description: The type of the AI model. A Unique identifier for the profile.
         model_provider_name:
           type: string
-          description: 'The model provider name. For example: `Microsoft Research`'
+          description: 'The model provider name. For example: `Microsoft`'
       description: Represents some basic information about the AI model.
     ModelType:
       anyOf:
@@ -1345,6 +1345,7 @@ components:
       type: string
       enum:
         - 2024-05-01-preview
+        - '2025-04-01'
       description: The AI.Model service versions.
   securitySchemes:
     ApiKeyAuth:
@@ -1361,3 +1362,10 @@ components:
           authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
           scopes:
             https://ml.azure.com/.default: ''
+servers:
+  - url: '{resource_endpoint}/api/models'
+    description: AI Model Inference
+    variables:
+      resource_endpoint:
+        default: ''
+        description: The Azure AI Services resource endpoint, for example https://my-resource.services.ai.azure.com
