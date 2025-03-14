@@ -80,7 +80,6 @@ model InstructionVerion {
   administrativeDetails: AdministrativeDetails;
 }
 
-
 @doc("Instruction Patch Request")
 model InstructionPatchRequest {
   @doc("The instruction status.")
