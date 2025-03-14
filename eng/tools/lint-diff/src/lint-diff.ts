@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "fs/promises";
 import { exec, ExecException } from "node:child_process";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { getOpenapiType, getAllTags, getInputFiles } from "./markdown-utils.js";
+import { getOpenapiType, getAllTags, getInputFiles, getDefaultTag } from "./markdown-utils.js";
 import { sep, dirname, join } from "path";
 import { kebabCase } from "change-case";
 import {
@@ -208,8 +208,6 @@ async function runLintDiff(
       throw new Error(`Duplicate key found correlating autorest runs: ${key}`);
     }
 
-    // TODO: In some cases there's nothing to run against, net new is OK
-    // make sure that case is handled.
     const beforeCandidates = reportMap
       .get("before")!
       .filter((r) => r.readme === readme && r.tag === tag);
@@ -223,21 +221,34 @@ async function runLintDiff(
       throw new Error(`Multiple before candidates found for key ${key}`);
     }
 
-    // No before candidates found, find the run with matching readme
-    const beforeReadmeCandidates = reportMap.get("before")!.filter((r) => r.readme === readme);
-    if (beforeReadmeCandidates.length === 1) {
-      runCorrelations.set(key, {
-        before: beforeReadmeCandidates[0],
-        after: results,
-      });
-      continue;
-    } else {
-      // TODO: Is this the best way to handle net new work?
-      runCorrelations.set(key, {
-        before: null,
-        after: results,
-      });
+    // Look for candidates with a matching default tag from the baseline
+    const beforeReadmePath = join(beforePath, readme);
+    if (await pathExists(beforeReadmePath)) {
+      const readmeContent = await readFile(beforeReadmePath, { encoding: "utf-8" });
+      const defaultTag = getDefaultTag(readmeContent);
+      if (!defaultTag) {
+        throw new Error(`No default tag found for readme ${readme} in before state`);
+      }
+      const beforeDefaultTagCandidates = reportMap
+        .get("before")!
+        .filter((r) => r.readme === readme && r.tag === defaultTag);
+
+      if (beforeDefaultTagCandidates.length === 1) {
+        runCorrelations.set(key, {
+          before: beforeDefaultTagCandidates[0],
+          after: results,
+        });
+        continue;
+      } else if (beforeDefaultTagCandidates.length > 1) {
+        throw new Error(
+          `Multiple before candidates found for key ${key} using default tag ${defaultTag}`,
+        );
+      }
     }
+
+    throw new Error(
+      `No before candidates found for key ${key} and no default tag found in readme. After state: ${key}`,
+    );
   }
 
   // See unifiedPipelineHelper.ts:386

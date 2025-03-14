@@ -7,6 +7,7 @@ import { parseMarkdown } from "@azure-tools/openapi-tools-common";
 import * as amd from "@azure/openapi-markdown";
 import { kebabCase } from "change-case";
 import axios from "axios";
+import * as YAML from "js-yaml";
 
 export type MarkdownType = "arm" | "data-plane" | "default";
 
@@ -154,4 +155,33 @@ export async function getRelatedArmRpcFromDoc(ruleName: string) {
   }
   rpcInfoCache.set(ruleName, rpcRules);
   return rpcRules;
+}
+
+export function getDefaultTag(markdownContent: string): string {
+  const parsed = parseMarkdown(markdownContent);
+  const startNode = parsed.markDown;
+  const codeBlockMap = amd.getCodeBlocksAndHeadings(startNode);
+
+  const latestHeader = "Basic Information";
+
+  const lh = codeBlockMap[latestHeader];
+  if (lh) {
+    const latestDefinition = YAML.load(lh.literal!) as undefined | { tag: string };
+    if (latestDefinition) {
+      return latestDefinition.tag;
+    }
+  } else {
+    for (let idx of Object.keys(codeBlockMap)) {
+      const lh = codeBlockMap[idx];
+      if (!lh || !lh.info || lh.info.trim().toLocaleLowerCase() !== "yaml") {
+        continue;
+      }
+      const latestDefinition = YAML.load(lh.literal!) as undefined | { tag: string };
+
+      if (latestDefinition) {
+        return latestDefinition.tag;
+      }
+    }
+  }
+  return "";
 }
