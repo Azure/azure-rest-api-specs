@@ -174,14 +174,14 @@ model Attributes {
   /**
    * Creation time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   updated?: utcDateTime;
 }
