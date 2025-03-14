@@ -189,27 +189,24 @@
     }
   },
   "definitions": {
-    "GeoJsonGeometry": {
-      "description": "A valid `GeoJSON` geometry object. Type as `Point`. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/GeoJsonObject"
-        }
-      ]
-    },
     "GeoJsonPoint": {
       "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
       "x-ms-discriminator-value": "Point",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJsonGeometry"
+      "properties": {
+        "type": {
+          "description": "Specifies the GeoJSON type as Point.",
+          "type": "string"
         },
-        {
-          "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/GeoJsonPointData"
+        "coordinates": {
+          "description": "A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
         }
-      ]
+      }
     },
     "IncidentTypeEnum": {
       "type": "string",
