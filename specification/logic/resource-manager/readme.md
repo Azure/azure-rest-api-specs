@@ -36,7 +36,15 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/listExpressionTraces"].post.responses["200"].schema
     suppress:
       - CollectionObjectPropertiesNaming
+```
 
+### Tag: package-2025-06-01-preview
+
+These settings apply only when `--tag=package-2025-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-06-01-preview'
+input-file:
+- Microsoft.Logic/preview/2025-06-01-preview/logic.json
 ```
 
 ### Tag: package-2019-05
