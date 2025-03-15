@@ -233,11 +233,12 @@ alias AssetBase = {
 
   @doc("The name of the resource")
   @visibility("read")
-  name?: string;
+  @key
+  name: string;
 
   @doc("The version of the resource")
   @visibility("read")
-  version?: string;
+  version: string;
 
   @doc("The asset description text.")
   description?: string;

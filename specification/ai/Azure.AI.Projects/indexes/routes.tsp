@@ -27,7 +27,7 @@ interface Indexes {
     @doc("View type for including/excluding (for example) archived entities.")
     @query("listViewType")
     listViewType?: ListViewType,
-  ): PagedDatasetVersion;
+  ): PagedIndex;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Get a specific version of an Index.")

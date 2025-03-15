@@ -492,15 +492,11 @@
     },
     "/datasets": {
       "get": {
-        "operationId": "Datasets_ListLatestDatasets",
-        "description": "List latest version of each dataset in a project.",
+        "operationId": "Datasets_ListLatest",
+        "description": "Operation that lists resources in a paginated way.",
         "parameters": [
           {
-            "name": "$continuationToken",
-            "in": "query",
-            "description": "Continuation token for pagination. This is the nextLink from the previous response.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "name": "listViewType",
@@ -542,6 +538,18 @@
             "schema": {
               "$ref": "#/definitions/PagedDatasetVersion"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-pageable": {
@@ -551,16 +559,18 @@
     },
     "/datasets/{name}/versions": {
       "get": {
-        "operationId": "Datasets_ListDatasetVersions",
-        "description": "List dataset versions of a specific dataset",
+        "operationId": "Datasets_ListVersions",
+        "description": "Resource action operation template.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "path",
-            "description": "Container name.",
+            "description": "The name of the resource",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+            "type": "string"
           },
           {
             "name": "$orderBy",
@@ -631,6 +641,18 @@
             "schema": {
               "$ref": "#/definitions/PagedDatasetVersion"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-pageable": {
@@ -641,20 +663,21 @@
     "/datasets/{name}/versions/{version}": {
       "get": {
         "operationId": "Datasets_GetVersion",
-        "description": "Get dataset version.",
+        "description": "The most basic operation that applies to a resource.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "path",
-            "description": "Container name.",
+            "description": "The name of the resource",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+            "type": "string"
           },
           {
             "name": "version",
             "in": "path",
-            "description": "Version identifier.",
             "required": true,
             "type": "string"
           }
@@ -664,33 +687,45 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DatasetVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         }
       },
       "put": {
-        "operationId": "Datasets_CreateOrUpdate",
-        "description": "Create or update version.",
+        "operationId": "Datasets_CreateVersion",
+        "description": "The most basic operation that applies to a resource.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "path",
-            "description": "Container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "Version identifier.",
+            "description": "The name of the resource",
             "required": true,
             "type": "string"
           },
           {
-            "name": "datasetVersion",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
             "in": "body",
-            "description": "Version entity to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DatasetVersion"
@@ -702,64 +737,95 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DatasetVersion"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DatasetVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         }
       },
       "delete": {
         "operationId": "Datasets_DeleteVersion",
-        "description": "Delete version.",
+        "description": "The most basic operation that applies to a resource.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "path",
-            "description": "Container name.",
+            "description": "The name of the resource",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+            "type": "string"
           },
           {
             "name": "version",
             "in": "path",
-            "description": "Version identifier.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
     },
     "/datasets/{name}/versions/{version}/startPendingUpload": {
       "post": {
-        "operationId": "Datasets_CreateOrGetStartPendingUpload",
-        "description": "Start pending upload.",
+        "operationId": "Datasets_StartPendingUpload",
+        "description": "Create or start a pending upload of a dataset",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "path",
-            "description": "Container name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "Version identifier.",
+            "description": "The name of the resource",
             "required": true,
             "type": "string"
           },
           {
-            "name": "pendingUploadRequest",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
             "in": "body",
-            "description": "Pensing upload request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PendingUploadRequest"
+              "$ref": "#/definitions/DatasetVersion"
             }
           }
         ],
@@ -768,6 +834,18 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PendingUploadResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         }
@@ -1409,7 +1487,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedDatasetVersion"
+              "$ref": "#/definitions/PagedIndex"
             }
           }
         },
@@ -9569,7 +9647,9 @@
       },
       "required": [
         "datasetUri",
-        "datasetType"
+        "datasetType",
+        "name",
+        "version"
       ]
     },
     "Deployment": {
@@ -9844,7 +9924,9 @@
       },
       "discriminator": "indexType",
       "required": [
-        "indexType"
+        "indexType",
+        "name",
+        "version"
       ]
     },
     "IndexType": {
@@ -10049,19 +10131,19 @@
     },
     "PagedDatasetVersion": {
       "type": "object",
-      "description": "PagedDataVersionBase Definition",
+      "description": "Paged collection of DatasetVersion items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of DatasetVersions.",
+          "description": "The DatasetVersion items on this page",
           "items": {
             "$ref": "#/definitions/DatasetVersion"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of results, if any."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
