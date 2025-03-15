@@ -272,8 +272,9 @@ model CloudCapacity {
   /** VMCount gives the max number of VMs that can be deployed in the cloud. */
   @visibility(Lifecycle.Read) vmCount?: int64;
 
-  /** StorageGb gives the storage in GB present in the cloud. */
-  @visibility(Lifecycle.Read) storageGb?: int64;
+  /** StorageGB gives the storage in GB present in the cloud. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is distinct from Gb"
+  @visibility(Lifecycle.Read) storageGB?: int64;
 }
 
 /** The StorageQoSPolicy definition. */
