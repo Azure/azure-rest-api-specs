@@ -18,7 +18,7 @@ alias ServiceTraits = NoRepeatableRequests &
 alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @doc("Get operation progress")
-interface Operations {
+interface OperationApi {
   @doc("Get operation progress")
   get is apiOperations.ResourceRead<OperationResponse>;
 }

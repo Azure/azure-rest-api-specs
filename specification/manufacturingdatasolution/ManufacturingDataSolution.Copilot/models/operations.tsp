@@ -10,7 +10,7 @@ using MdsSolution.CopilotService.Common.Models;
 namespace MdsSolution.CopilotService.Operation.Models;
 
 @doc("Operation Response Model")
-@resource("operations")
+@resource("operation")
 model OperationResponse {
   @doc("The operation status.")
   status: OperationStatusValue;

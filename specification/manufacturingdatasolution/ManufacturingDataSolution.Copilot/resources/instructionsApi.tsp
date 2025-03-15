@@ -54,10 +54,10 @@ interface Instructions {
   // >;
 
   @doc("create Or Replace instructions.")
-  @pollingOperation(MdsSolution.CopilotService.OperationStatus.Operations.get)
+  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationApi.get)
   createOrReplace is apiOperations.LongRunningResourceCreateOrReplace<Instruction>;
 
   @doc("Delete instructions.")
-  @pollingOperation(MdsSolution.CopilotService.OperationStatus.Operations.get)
+  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationApi.get)
   delete is apiOperations.LongRunningResourceDelete<Instruction>;
 }
