@@ -1243,7 +1243,20 @@
               "application/octet-stream"
             ],
             "x-ms-enum": {
-              "modelAsString": true
+              "name": "AcceptHeaderEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Json",
+                  "value": "application/json",
+                  "description": "application/json."
+                },
+                {
+                  "name": "OctetStream",
+                  "value": "application/octet-stream",
+                  "description": "application/octet-stream."
+                }
+              ]
             }
           },
           {
@@ -1509,6 +1522,30 @@
     }
   },
   "definitions": {
+    "AcceptHeaderEnum": {
+      "type": "string",
+      "description": "enum for request \"accept\" header",
+      "enum": [
+        "application/json",
+        "application/octet-stream"
+      ],
+      "x-ms-enum": {
+        "name": "AcceptHeaderEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Json",
+            "value": "application/json",
+            "description": "application/json."
+          },
+          {
+            "name": "OctetStream",
+            "value": "application/octet-stream",
+            "description": "application/octet-stream."
+          }
+        ]
+      }
+    },
     "ApiKeyAuthCredentials": {
       "type": "object",
       "description": "Api Key Auth Credentials class for API Key based Auth.",
