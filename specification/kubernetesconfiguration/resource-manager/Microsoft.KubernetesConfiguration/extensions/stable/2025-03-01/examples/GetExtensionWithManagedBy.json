@@ -48,7 +48,27 @@
           "provisioningState": "Succeeded",
           "currentVersion": "0.1.4",
           "statuses": [],
-          "isSystemExtension": false
+          "isSystemExtension": false,
+          "managementDetails": {
+            "category": "managed",
+            "accessDetails": [
+              {
+                "entity": "Microsoft.ContainerService",
+                "allowedActions": [
+                  "Read",
+                  "Write"
+                ],
+                "description": " Microsoft.ContainerService is only allowed to PUT/PATCH this extension instance."
+              },
+              {
+                "entity": "Users",
+                "allowedActions": [
+                  "Read"
+                ],
+                "description": "Users are allowed to only READ though Extensions RP."
+              }
+            ]
+          }
         }
       }
     }
