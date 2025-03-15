@@ -12,6 +12,12 @@ using MdsSolution.CopilotService.QueryService.QueryModels;
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService.QueryService;
 
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
+
+alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
 @post
 @route("/query")
@@ -41,3 +47,10 @@ op queryExecute(
   @body
   request: QueryRequest,
 ): QueryResponse;
+
+@doc("Share feedback for the copilot's query response")
+op submitFeedback is apiOperations.ResourceCollectionAction<
+  FeedbackRequest,
+  FeedbackRequest,
+  FeedbackRequest
+>;

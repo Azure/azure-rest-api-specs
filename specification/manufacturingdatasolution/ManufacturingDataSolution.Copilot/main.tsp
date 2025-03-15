@@ -8,7 +8,6 @@ import "./resources/exampleQueryApi.tsp";
 import "./resources/aliasDictionaryApi.tsp";
 import "./resources/healthApi.tsp";
 import "./resources/validateQueryApi.tsp";
-import "./resources/feedbackApi.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
