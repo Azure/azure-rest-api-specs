@@ -94,7 +94,7 @@ interface FileOperations {
        * Accept header
        */
       @header
-      accept: "application/json" | "application/octet-stream" | string;
+      accept: AcceptHeaderEnum;
     }>
   >;
 

@@ -130,6 +130,23 @@ union ImageFormat {
 }
 
 /**
+ * enum for request "accept" header
+ */
+union AcceptHeaderEnum {
+  string,
+
+  /**
+   * application/json.
+   */
+  Json: "application/json",
+
+  /**
+   * application/octet-stream.
+   */
+  OctetStream: "application/octet-stream",
+}
+
+/**
  * Additional traits for ListResponse.
  */
 @trait
