@@ -580,6 +580,12 @@ alias TerminateJobOptionalParameters = {
   force?: boolean;
 };
 
+alias CreateJobRequiredParameters = {
+  @doc("The Job to be created.")
+  @bodyRoot
+  job: BatchJobCreateContent;
+};
+
 alias ListJobsParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
@@ -798,12 +804,10 @@ interface Jobs {
     engineers.
     """)
   @route("/jobs")
-  @clientName("createJobInternal", "java")
-  createJob is CreateOperation<
+  createJob is CreateOperationNew<
     {
-      @doc("The Job to be created.")
-      @bodyRoot
-      job: BatchJobCreateContent;
+      ...CommonJsonParameters;
+      ...CreateJobRequiredParameters;
     },
     {}
   >;

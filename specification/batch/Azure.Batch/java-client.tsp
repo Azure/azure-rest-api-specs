@@ -597,6 +597,27 @@ op terminateJobCustomization is Azure.Batch.PostOperationNew<
 
 @@override(Azure.Batch.Jobs.terminateJob, terminateJobCustomization, "java");
 
+// Create Job Operation
+@doc("Optional parameters for Create Job operation.")
+model CreateBatchJobOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Create Job operation.")
+@route("/jobs")
+op createJobCustomization is Azure.Batch.CreateOperationNew<
+  {
+    ...Azure.Batch.CreateJobRequiredParameters;
+
+    @doc("Optional parameters for Create Job operation.")
+    options?: CreateBatchJobOptions;
+  },
+  void
+>;
+
+@@override(Azure.Batch.Jobs.createJob, createJobCustomization, "java");
+
 // List Jobs Operation
 @doc("Optional parameters for List Jobs operation.")
 model ListBatchJobsOptions {
