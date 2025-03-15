@@ -555,6 +555,78 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+      "post": {
+        "operationId": "Datasets_Create",
+        "description": "Resource create with service-provided name operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetVersion"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of DatasetVersion"
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
       }
     },
     "/datasets/{name}/versions": {
@@ -1439,15 +1511,11 @@
     },
     "/indexes": {
       "get": {
-        "operationId": "Indexes_ListLatestIndexes",
-        "description": "List latest version of each dataset in a project.",
+        "operationId": "Indexes_ListLatest",
+        "description": "Operation that lists resources in a paginated way.",
         "parameters": [
           {
-            "name": "$continuationToken",
-            "in": "query",
-            "description": "Continuation token for pagination. This is the nextLink from the previous response.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "name": "listViewType",
@@ -1489,34 +1557,41 @@
             "schema": {
               "$ref": "#/definitions/PagedIndex"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      }
-    },
-    "/indexes/{name}:create": {
+      },
       "post": {
-        "operationId": "Indexes_CreateIndex",
-        "description": "Creates or updates a IndexVersion.",
+        "operationId": "Indexes_Create",
+        "description": "Resource create with service-provided name operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the index.",
-            "required": true,
-            "type": "string",
-            "maxLength": 254,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
           },
           {
-            "name": "body",
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "Properties of an Index Version.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Index"
@@ -1524,16 +1599,38 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Index"
-            }
-          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/Index"
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of Index"
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
             }
           },
           "default": {
@@ -1553,8 +1650,8 @@
     },
     "/indexes/{name}/versions": {
       "get": {
-        "operationId": "Indexes_ListIndexVersions",
-        "description": "List the versions of an Index given the name.",
+        "operationId": "Indexes_ListVersions",
+        "description": "Resource action operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1562,11 +1659,9 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the index.",
+            "description": "The name of the resource",
             "required": true,
-            "type": "string",
-            "maxLength": 254,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+            "type": "string"
           },
           {
             "name": "listViewType",
@@ -1634,8 +1729,8 @@
     },
     "/indexes/{name}/versions/{version}": {
       "get": {
-        "operationId": "Indexes_Get",
-        "description": "Get a specific version of an Index.",
+        "operationId": "Indexes_GetVersion",
+        "description": "The most basic operation that applies to a resource.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1643,16 +1738,13 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the index.",
+            "description": "The name of the resource",
             "required": true,
-            "type": "string",
-            "maxLength": 254,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+            "type": "string"
           },
           {
             "name": "version",
             "in": "path",
-            "description": "Version of the index.",
             "required": true,
             "type": "string"
           }
@@ -1678,29 +1770,98 @@
           }
         }
       },
-      "delete": {
-        "operationId": "Indexes_DeleteVersion",
-        "description": "Delete version.",
+      "put": {
+        "operationId": "Indexes_CreateVersion",
+        "description": "The most basic operation that applies to a resource.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "path",
-            "description": "Container name.",
+            "description": "The name of the resource",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+            "type": "string"
           },
           {
             "name": "version",
             "in": "path",
-            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Indexes_DeleteVersion",
+        "description": "The most basic operation that applies to a resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
@@ -10195,15 +10356,14 @@
     },
     "PagedIndex": {
       "type": "object",
-      "description": "Paged collection of Index items.",
+      "description": "Paged collection of Index items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of Indexes.",
+          "description": "The Index items on this page",
           "items": {
             "$ref": "#/definitions/Index"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -10505,6 +10665,25 @@
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {
+      "name": "Repeatability-First-Sent",
+      "in": "header",
+      "description": "Specifies the date and time at which the request was first created.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityFirstSent"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId": {
+      "name": "Repeatability-Request-ID",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityRequestId"
     },
     "Azure.Core.SkipQueryParameter": {
       "name": "skip",

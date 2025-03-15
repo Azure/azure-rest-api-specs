@@ -3,9 +3,6 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 
 namespace Azure.AI.Projects.ServicePatterns {
-  model VersionedPage<TEntityType extends Reflection.Model>
-    is Azure.Core.Page<TEntityType>;
-
   @Rest.autoRoute
   interface VersionedOperations<
     TEntityType extends Reflection.Model,
@@ -49,6 +46,8 @@ namespace Azure.AI.Projects.ServicePatterns {
       Http.NoContentResponse
     >;
 
+    create is BuildingBlocks.RepeatableCoreOps.ResourceCreateWithServiceProvidedName<TEntityType>;
+
     @Http.put
     createVersion is Azure.Core.Foundations.ResourceOperation<
       TEntityType,
@@ -82,5 +81,6 @@ namespace Azure.AI.Projects.ServicePatterns {
 
   namespace BuildingBlocks {
     alias CoreOps = Azure.Core.StandardResourceOperations;
+    alias RepeatableCoreOps = Azure.Core.ResourceOperations<Azure.Core.Traits.SupportsRepeatableRequests>;
   }
 }
