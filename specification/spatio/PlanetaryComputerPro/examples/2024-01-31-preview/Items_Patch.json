@@ -1,0 +1,52 @@
+{
+  "title": "Items_Patch",
+  "operationId": "Items_Patch",
+  "parameters": {
+    "collectionId": "",
+    "itemId": "",
+    "api-version": "2024-01-31-preview",
+    "resource": {
+      "id": "{{itemId}}",
+      "collection": "{{collectionId}}",
+      "type": "Feature",
+      "assets": {
+        "sample_external": null,
+        "sample_user": {
+          "href": "https://sample.blob.core.windows.net/samples/4MB.jp2",
+          "title": "Sample storage account Image (4MB)",
+          "type": "image/jp2",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "properties": {
+        "datetime": "2021-12-15T00:00:00Z",
+        "naip:year": "2021"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "operationId": "30e6744d-81a3-44e2-8a85-0325365272ae",
+        "status": "Pending",
+        "statusHistory": [
+          {
+            "status": "Pending",
+            "timestamp": "2024-10-09T09:31:24.1968201Z"
+          }
+        ],
+        "creationTime": "2024-10-09T09:31:24.1968185Z",
+        "totalItems": 0,
+        "totalPendingItems": 0,
+        "totalSuccessfulItems": 0,
+        "totalFailedItems": 0
+      }
+    },
+    "404": {
+      "body": "Collection does not exist."
+    },
+    "400": {}
+  }
+}
