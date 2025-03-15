@@ -27,6 +27,7 @@ These are the global settings for the Online Experimentation.
 ```yaml
 title: Online Experimentation Data Plane
 openapi-type: data-plane
+tag: package-2025-05-31-preview
 ```
 
 ### Tag: package-2025-05-31-preview
