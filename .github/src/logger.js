@@ -1,5 +1,8 @@
 // @ts-check
 
+// Ignore code coverage since code is simple but hard to mock
+/* v8 ignore start */
+
 /**
  * @interface
  */
