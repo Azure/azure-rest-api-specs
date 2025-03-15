@@ -1,0 +1,38 @@
+parameters:
+  "service-dir":
+    default: "sdk/agricultureplatform"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-dir: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/agricultureplatform.json"
+  "@azure-tools/typespec-python":
+    package-dir: "microsoft-agricultureplatform"
+    package-name: "{package-dir}"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Microsoft.AgriculturePlatform"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "agricultureplatform"
+    azureSdkForJs: true
+    packageDetails:
+      name: "@azure-rest/agricultureplatform"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "microsoft-agricultureplatform"
+    namespace: com.microsoft.agricultureplatform
+    service-name: "agricultureplatform"
+    flavor: azure
