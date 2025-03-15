@@ -20,7 +20,7 @@ export async function getChangedFiles(options = {}) {
   // filter based on status with a single call to `git diff`.
   const result = await diff(baseCommitish, headCommitish, {
     args: "--name-only",
-    ...options,
+    logger: logger,
   });
 
   const files = result.trim().split("\n");

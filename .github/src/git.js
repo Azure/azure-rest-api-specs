@@ -15,10 +15,11 @@ import { ILogger } from "./logger.js";
  * @returns {Promise<string>}
  */
 export async function diff(baseCommitish, headCommitish, options = {}) {
-  return await execGit(
-    `diff ${options.args} ${baseCommitish} ${headCommitish}`,
-    options,
-  );
+  const { args, logger } = options;
+
+  return await execGit(`diff ${args} ${baseCommitish} ${headCommitish}`, {
+    logger: logger,
+  });
 }
 
 /**
@@ -30,7 +31,11 @@ export async function diff(baseCommitish, headCommitish, options = {}) {
  * @returns {Promise<string>}
  */
 export async function lsTree(treeIsh, path, options = {}) {
-  return await execGit(`ls-tree ${options.args} ${treeIsh} ${path}`, options);
+  const { args, logger } = options;
+
+  return await execGit(`ls-tree ${args} ${treeIsh} ${path}`, {
+    logger: logger,
+  });
 }
 
 /**
@@ -42,7 +47,9 @@ export async function lsTree(treeIsh, path, options = {}) {
  * @returns {Promise<string>}
  */
 export async function show(treeIsh, path, options = {}) {
-  return await execGit(`show ${options.args} ${treeIsh}:${path}`, options);
+  const { args, logger } = options;
+
+  return await execGit(`show ${args} ${treeIsh}:${path}`, { logger: logger });
 }
 
 /**
@@ -53,5 +60,6 @@ export async function show(treeIsh, path, options = {}) {
 async function execGit(args, options) {
   // Ensure that git displays filenames as they are (without escaping)
   const defaultConfig = "-c core.quotepath=off";
+
   return await execRoot(`git ${defaultConfig} ${args}`, options);
 }
