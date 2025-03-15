@@ -1,0 +1,31 @@
+{
+  "title": "Ingestions_Get",
+  "operationId": "Ingestions_Get",
+  "parameters": {
+    "collectionId": "collectionId",
+    "ingestionId": "24a8a15d-61bd-453f-ac67-b9cec532ed78",
+    "api-version": "2024-01-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "ingestionId": "24a8a15d-61bd-453f-ac67-b9cec532ed78",
+        "creationTime": "2024-09-09T16:15:39.5249103Z",
+        "importType": "StaticCatalog",
+        "displayName": "My Connection",
+        "sourceCatalogUrl": "https://sample.blob.core.windows.net/sample2.json",
+        "skipExistingItems": true,
+        "keepOriginalAssets": true,
+        "status": "Ready"
+      }
+    },
+    "404": {
+      "body": {
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+        "title": "Not Found",
+        "status": 404,
+        "traceId": "00-04dd94789a8944e81b28f426b8a7f69b-8b8f61718bc92e13-01"
+      }
+    }
+  }
+}
