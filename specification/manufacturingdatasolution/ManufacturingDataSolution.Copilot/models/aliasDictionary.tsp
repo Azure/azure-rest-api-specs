@@ -13,6 +13,8 @@ model Alias {
   @doc("Id for the alias")
   @key("id")
   @visibility(Lifecycle.Read)
+  @maxLength(50)
+  @pattern("^[a-zA-Z0-9_]*$")
   id: string;
 
   @doc("Key for the alias")

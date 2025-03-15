@@ -113,7 +113,9 @@
             "in": "path",
             "description": "Id for the alias",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {
@@ -157,7 +159,9 @@
             "in": "path",
             "description": "Id for the alias",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9_]*$"
           },
           {
             "name": "resource",
@@ -234,7 +238,9 @@
             "in": "path",
             "description": "Id for the alias",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {
@@ -1076,6 +1082,8 @@
         "id": {
           "type": "string",
           "description": "Id for the alias",
+          "maxLength": 50,
+          "pattern": "^[a-zA-Z0-9_]*$",
           "readOnly": true
         },
         "name": {
