@@ -18,6 +18,8 @@ model Instruction {
   @doc("intruction Id for the instruction")
   @key("id")
   @visibility(Lifecycle.Read)
+  @maxLength(60)
+  @pattern("^[a-zA-Z0-9_]*$")
   instructionId: string;
 
   @doc("Version for the instruction")

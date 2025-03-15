@@ -381,7 +381,9 @@
             "in": "path",
             "description": "intruction Id for the instruction",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {
@@ -425,7 +427,9 @@
             "in": "path",
             "description": "intruction Id for the instruction",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9_]*$"
           },
           {
             "name": "resource",
@@ -502,7 +506,9 @@
             "in": "path",
             "description": "intruction Id for the instruction",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 60,
+            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {
@@ -1468,6 +1474,8 @@
         "instructionId": {
           "type": "string",
           "description": "intruction Id for the instruction",
+          "maxLength": 60,
+          "pattern": "^[a-zA-Z0-9_]*$",
           "readOnly": true
         },
         "instructionVersion": {
