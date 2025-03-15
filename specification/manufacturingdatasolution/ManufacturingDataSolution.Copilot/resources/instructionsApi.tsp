@@ -8,16 +8,16 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Versioning;
-using MdsSolution.CopilotService.Instructions.Models;
+using MdsSolution.CopilotService.Models;
 
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService.Instructions;
 
-alias ServiceTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId;
+// alias ServiceTraits = NoRepeatableRequests &
+//   NoConditionalRequests &
+//   NoClientRequestId;
 
-alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+// alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 alias jobLocationResponseHeaders = ResponseHeadersTrait<
   {
@@ -54,10 +54,10 @@ interface Instructions {
   // >;
 
   @doc("create Or Replace instructions.")
-  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationApi.get)
+  @pollingOperation(MdsSolution.CopilotService.OperationApi.get)
   createOrReplace is apiOperations.LongRunningResourceCreateOrReplace<Instruction>;
 
   @doc("Delete instructions.")
-  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationApi.get)
+  @pollingOperation(MdsSolution.CopilotService.OperationApi.get)
   delete is apiOperations.LongRunningResourceDelete<Instruction>;
 }

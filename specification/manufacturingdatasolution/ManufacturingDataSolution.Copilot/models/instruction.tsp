@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 
-namespace MdsSolution.CopilotService.Instructions.Models;
+namespace MdsSolution.CopilotService.Models;
 
 @resource("instructions")
 @doc("This is the request model for Instruction")

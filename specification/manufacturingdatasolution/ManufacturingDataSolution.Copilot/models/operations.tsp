@@ -5,9 +5,8 @@ import "@azure-tools/typespec-azure-core";
 import "./../models/common.tsp";
 
 using TypeSpec.Rest;
-using MdsSolution.CopilotService.Common.Models;
 
-namespace MdsSolution.CopilotService.Operation.Models;
+namespace MdsSolution.CopilotService.Models;
 
 @doc("Operation Response Model")
 @resource("operation")

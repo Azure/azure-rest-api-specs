@@ -4,9 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./../models/common.tsp";
 
-using MdsSolution.CopilotService.Common.Models;
-
-namespace MdsSolution.CopilotService.Health.Models;
+namespace MdsSolution.CopilotService.Models;
 
 @doc("Copilot Health Response")
 model CopilotHealth {

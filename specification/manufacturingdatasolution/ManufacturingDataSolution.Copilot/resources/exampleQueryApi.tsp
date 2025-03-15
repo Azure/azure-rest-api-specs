@@ -7,16 +7,16 @@ import "./../models/exampleQuery.tsp";
 using TypeSpec.Http;
 using Azure.Core.Traits;
 using TypeSpec.Versioning;
-using MdsSolution.CopilotService.ExampleQuery.Models;
+using MdsSolution.CopilotService.Models;
 
 @versioned(MdsSolution.CopilotService.Versions)
-namespace MdsSolution.CopilotService.ExampleQueryService;
+namespace MdsSolution.CopilotService;
 
-alias ServiceTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId;
+// alias ServiceTraits = NoRepeatableRequests &
+//   NoConditionalRequests &
+//   NoClientRequestId;
 
-alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+// alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface ExampleQueryOperations {
   @doc("get the example query")

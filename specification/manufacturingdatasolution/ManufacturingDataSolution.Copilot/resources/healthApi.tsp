@@ -5,29 +5,29 @@ import "@azure-tools/typespec-azure-core";
 import "./../models/health.tsp";
 
 using TypeSpec.Http;
-using Azure.Core.Traits;
 using TypeSpec.Versioning;
-using MdsSolution.CopilotService.Health.Models;
+using MdsSolution.CopilotService.Models;
 
 @versioned(MdsSolution.CopilotService.Versions)
-namespace MdsSolution.CopilotService.HealthService;
+namespace MdsSolution.CopilotService;
 
-alias DefaultServiceTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId;
+// alias DefaultServiceTraits = NoRepeatableRequests &
+//   NoConditionalRequests &
+//   NoClientRequestId;
 
-alias apiOperations = Azure.Core.ResourceOperations<DefaultServiceTraits>;
+// alias apiOperations = Azure.Core.ResourceOperations<DefaultServiceTraits>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is not a versioned operation"
-@doc("Get the health status of the service.")
-@route("/health")
-@get
-op getHealthStatus(
-  @doc("The API version to use for this operation.")
-  @query("api-version")
-  apiVersion: string,
-): GenericOkResponse<CopilotHealth>;
+interface HeathServiceClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @doc("Get the health status of the service.")
+  @route("/health")
+  @get
+  op getHealthStatus(
+    @doc("The API version to use for this operation.")
+    @query("api-version")
+    apiVersion: string,
+  ): GenericOkResponse<CopilotHealth>;
+}
 
 @doc("Represents a generic response.")
 model GenericOkResponse<T> {

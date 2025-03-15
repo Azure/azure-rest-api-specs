@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 
-namespace MdsSolution.CopilotService.QueryService.QueryModels;
+namespace MdsSolution.CopilotService.Models;
 
 @doc("query request")
 @resource("query")

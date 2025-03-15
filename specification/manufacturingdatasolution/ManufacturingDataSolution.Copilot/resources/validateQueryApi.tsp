@@ -7,16 +7,16 @@ import "./../models/validateQuery.tsp";
 using TypeSpec.Http;
 using Azure.Core.Traits;
 using TypeSpec.Versioning;
-using MdsSolution.CopilotService.ValidateQuery.Models;
+using MdsSolution.CopilotService.Models;
 
 @versioned(MdsSolution.CopilotService.Versions)
-namespace MdsSolution.CopilotService.ValidateQueryService;
+namespace MdsSolution.CopilotService;
 
-alias ServiceTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId;
+// alias ServiceTraits = NoRepeatableRequests &
+//   NoConditionalRequests &
+//   NoClientRequestId;
 
-alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+// alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface ValidateQueryApi {
   @doc("Validate a query")

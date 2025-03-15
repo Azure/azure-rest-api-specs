@@ -8,16 +8,16 @@ using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using MdsSolution.CopilotService.AliasDictionary.Models;
+using MdsSolution.CopilotService.Models;
 
 @versioned(MdsSolution.CopilotService.Versions)
-namespace MdsSolution.CopilotService.AliasDictionary;
+namespace MdsSolution.CopilotService;
 
-alias ServiceTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId;
+// alias ServiceTraits = NoRepeatableRequests &
+//   NoConditionalRequests &
+//   NoClientRequestId;
 
-alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+// alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 alias jobLocationResponseHeaders = ResponseHeadersTrait<
   {
@@ -34,7 +34,7 @@ interface Aliases {
   get is apiOperations.ResourceRead<Alias>;
 
   @doc("Update an alias")
-  @pollingOperation(MdsSolution.CopilotService.OperationStatus.OperationApi.get)
+  @pollingOperation(MdsSolution.CopilotService.OperationApi.get)
   createOrReplace is apiOperations.LongRunningResourceCreateOrReplace<Alias>;
 
   @doc("Delete an alias")

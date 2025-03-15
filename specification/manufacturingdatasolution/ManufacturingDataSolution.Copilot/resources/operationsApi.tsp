@@ -4,18 +4,17 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./../models/operations.tsp";
 
-using Azure.Core.Traits;
 using TypeSpec.Versioning;
-using MdsSolution.CopilotService.Operation.Models;
+using MdsSolution.CopilotService.Models;
 
 @versioned(MdsSolution.CopilotService.Versions)
-namespace MdsSolution.CopilotService.OperationStatus;
+namespace MdsSolution.CopilotService;
 
-alias ServiceTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId;
+// alias ServiceTraits = NoRepeatableRequests &
+//   NoConditionalRequests &
+//   NoClientRequestId;
 
-alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+// alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @doc("Get operation progress")
 interface OperationApi {

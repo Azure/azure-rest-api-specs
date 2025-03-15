@@ -5,18 +5,17 @@ import "@azure-tools/typespec-azure-core";
 import "./../models/querymodels.tsp";
 
 using TypeSpec.Http;
-using Azure.Core.Traits;
 using TypeSpec.Versioning;
-using MdsSolution.CopilotService.QueryService.QueryModels;
+using MdsSolution.CopilotService.Models;
 
 @versioned(MdsSolution.CopilotService.Versions)
-namespace MdsSolution.CopilotService.QueryService;
+namespace MdsSolution.CopilotService;
 
-alias ServiceTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId;
+// alias ServiceTraits = NoRepeatableRequests &
+//   NoConditionalRequests &
+//   NoClientRequestId;
 
-alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+// alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
 @post
@@ -41,7 +40,7 @@ op queryExecute(
 
   @doc("Include summary in the response.")
   @query("includeSummary")
-  includeSummary?: boolean = false,
+  includeSummary?: choice,
 
   @doc("request body")
   @body

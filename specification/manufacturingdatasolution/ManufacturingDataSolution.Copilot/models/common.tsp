@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 
-namespace MdsSolution.CopilotService.Common.Models;
+namespace MdsSolution.CopilotService.Models;
 
 @doc("Operation Status")
 @lroStatus
@@ -33,6 +33,17 @@ union OperationStatusValue {
 
   @doc("The operation is Skipped.")
   Skipped: "Skipped",
+
+  string,
+}
+
+@doc("choice of yes or no. Use this for boolean properties.")
+union choice {
+  @doc("Yes")
+  yes: "Yes",
+
+  @doc("No")
+  no: "No",
 
   string,
 }

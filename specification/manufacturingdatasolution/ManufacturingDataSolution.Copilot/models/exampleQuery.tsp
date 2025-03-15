@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 
-namespace MdsSolution.CopilotService.ExampleQuery.Models;
+namespace MdsSolution.CopilotService.Models;
 
 @doc("The sample query resource.")
 model SampleQuery {

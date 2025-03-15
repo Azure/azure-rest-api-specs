@@ -2,10 +2,11 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "./../models/common.tsp";
 
 using TypeSpec.Rest;
 
-namespace MdsSolution.CopilotService.ValidateQuery.Models;
+namespace MdsSolution.CopilotService.Models;
 
 @doc("Validate job Request")
 @resource("validationJob")
@@ -19,19 +20,19 @@ model QueryValidationJobRequest {
   testCases: QueryValidationTestCase[];
 
   @doc("run in the conversation context")
-  runInConversationContext: boolean = false;
+  runInConversationContext: choice;
 }
 
-@doc("Test Case for Test run")
+@doc("Test Case for validation job")
 model QueryValidationTestCase {
   @doc("The natural language input for the test case.")
   ask?: string;
 
-  @doc("The expected query for the test case.")
+  @doc("The expected kql query for the test case.")
   expectedKqlQuery?: string;
 
-  @doc("The expected entities for the test case.")
-  skipTestRun: boolean = false;
+  @doc("skip the test run")
+  skip: choice;
 }
 
 @doc("Validate Response")

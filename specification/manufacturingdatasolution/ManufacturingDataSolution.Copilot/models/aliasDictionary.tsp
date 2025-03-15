@@ -2,10 +2,11 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "./../models/common.tsp";
 
 using TypeSpec.Rest;
 
-namespace MdsSolution.CopilotService.AliasDictionary.Models;
+namespace MdsSolution.CopilotService.Models;
 
 @resource("aliases")
 @doc("This is the request model for Alias")
@@ -25,9 +26,9 @@ model Alias {
 
   @doc("Indicates if the alias is enabled")
   @visibility(Lifecycle.Read)
-  isCustom: boolean;
+  isCustom: choice;
 
   @doc("Indicates if the alias is enabled")
   @visibility(Lifecycle.Update)
-  enabled: boolean;
+  enabled: choice;
 }

@@ -12,6 +12,7 @@ import "./resources/validateQueryApi.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.Core.Traits;
 
 @route("/copilot")
 @service(#{ title: "Microsoft.Industry.Manufacturing.MDS.Copilot" })
@@ -33,3 +34,9 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_03_01: "2025-03-01",
 }
+
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
+
+alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
