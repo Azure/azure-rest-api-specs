@@ -38,9 +38,9 @@ interface Instructions {
   list is apiOperations.ResourceList<
     Instruction,
     QueryParametersTrait<{
-      @doc("Get all active instructions")
+      @doc("Get all active instructions by status.")
       @query
-      showActive: boolean = false;
+      status: InstructionStatusEnum;
     }>
   >;
 
