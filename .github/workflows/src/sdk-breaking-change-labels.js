@@ -20,14 +20,11 @@ export async function getLabelAndAction({ github, context, core }) {
     core.info(`Fetching check run with ID from input: ${check_run_id}`);
 
     // First fetch the check run with specific ID
-    const checkRunData = await github.rest.checks.get({
+    checkRun = await github.rest.checks.get({
       owner: context.repo.owner,
       repo: context.repo.repo,
       check_run_id: parseInt(check_run_id, 10)
-    });
-
-    // Use the check run data we retrieved instead of from the payload
-    checkRun = checkRunData.data;
+    }).data;
     if (!checkRun) {
       throw new Error('No check run data found in the API response');
     }

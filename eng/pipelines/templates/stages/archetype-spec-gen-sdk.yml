@@ -199,15 +199,9 @@ extends:
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
-              ArtifactName: $(AddBreakingChangeLabelArtifactName)
-              ArtifactPath: "$(System.DefaultWorkingDirectory)/$(AddBreakingChangeLabelArtifactPath)"
-              CustomCondition: and(succeeded(), ne(variables['AddBreakingChangeLabelArtifactName'], ''))
-
-          - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
-            parameters:
-              ArtifactName: $(RemoveBreakingChangeLabelArtifactName)
-              ArtifactPath: "$(System.DefaultWorkingDirectory)/$(RemoveBreakingChangeLabelArtifactPath)"
-              CustomCondition: and(succeeded(), ne(variables['RemoveBreakingChangeLabelArtifactName'], ''))
+              ArtifactName: $(BreakingChangeLabelArtifactName)
+              ArtifactPath: "$(System.DefaultWorkingDirectory)/$(BreakingChangeLabelArtifactPath)"
+              CustomCondition: and(succeeded(), ne(variables['BreakingChangeLabelArtifactName'], ''))
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
