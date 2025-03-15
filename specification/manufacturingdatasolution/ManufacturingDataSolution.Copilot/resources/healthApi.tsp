@@ -23,7 +23,9 @@ alias apiOperations = Azure.Core.ResourceOperations<DefaultServiceTraits>;
 @doc("Get the health status of the service.")
 @route("/health")
 @get
-op getHealthStatus(): GenericOkResponse<CopilotHealth>;
+op getHealthStatus(
+  @doc("The API version to use for this operation.") @query("api-version") apiVersion: string,
+): GenericOkResponse<CopilotHealth>;
 
 @doc("Represents a generic response.")
 model GenericOkResponse<T> {
