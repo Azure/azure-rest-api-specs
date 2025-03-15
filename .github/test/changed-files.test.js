@@ -10,7 +10,6 @@ import {
   swagger,
 } from "../src/changed-files.js";
 import * as git from "../src/git.js";
-import { createMockCore } from "./mocks.js";
 
 describe("changedFiles", () => {
   it("getChangedFiles", async () => {
@@ -23,7 +22,7 @@ describe("changedFiles", () => {
 
     vi.spyOn(git, "diff").mockResolvedValue(files.join("\n"));
 
-    await expect(getChangedFiles(createMockCore())).resolves.toEqual(files);
+    await expect(getChangedFiles()).resolves.toEqual(files);
   });
 
   const files = [
