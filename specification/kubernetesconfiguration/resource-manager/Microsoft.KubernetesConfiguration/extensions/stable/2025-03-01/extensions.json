@@ -785,6 +785,8 @@
       "description": "Identity for the resource."
     },
     "ManagementDetails": {
+      "type": "object",
+      "description": "Metadata about the managing entity and the permitted operations.",
       "properties": {
         "category": {
           "type": "string"
@@ -806,17 +808,14 @@
               "description": {
                 "type": "string"
               }
-            },
-            "required": [
-              "entity",
-              "allowedActions",
-              "description"
-            ]
+            }
           }
         }
       }
     },
     "AdditionalDetails": {
+      "type": "object",
+      "description": "Additional details provided by the publisher of the extension.",
       "properties": {
         "docs": {
           "type": "string"
